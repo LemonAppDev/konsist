@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.snippet
 
-import com.lemonappdev.konsist.core.util.FileExtension
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -19,7 +18,7 @@ class SnippetTest {
             .map { it.path }
 
         val snippetNames = snippets
-            .map { it.name.removeSuffix(FileExtension.KOTLIN_SNIPPET) }
+            .map { it.name.removeSuffix(".kttxt") }
 
         val snippetMap = mutableMapOf<String, String>()
         snippetNames.forEachIndexed { index, s -> snippetMap[s] = snippetPaths[index] }
@@ -54,7 +53,7 @@ class SnippetTest {
             .map { it.substringBefore("\"") }
 
     companion object {
-        private val File.isKotlinSnippetFile: Boolean get() = isFile && name.endsWith(FileExtension.KOTLIN_SNIPPET)
-        private val File.isKotlinNotSnippetFile: Boolean get() = isFile && !name.endsWith(FileExtension.KOTLIN_SNIPPET)
+        private val File.isKotlinSnippetFile: Boolean get() = isFile && name.endsWith(".kttxt")
+        private val File.isKotlinNotSnippetFile: Boolean get() = isFile && !name.endsWith(".kttxt")
     }
 }

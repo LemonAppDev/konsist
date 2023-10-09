@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architecture
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
-import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
+import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
 
@@ -21,7 +21,7 @@ class Architecture5Test {
     )
 
     @Test
-    fun `passes when good dependency is set (scope)`() {
+    fun `passes when good dependency is set`() {
         // then
         scope
             .assertArchitecture {
@@ -33,20 +33,7 @@ class Architecture5Test {
     }
 
     @Test
-    fun `passes when good dependency is set (files)`() {
-        // then
-        scope
-            .files
-            .assertArchitecture {
-                presentation.dependsOn(application)
-                application.dependsOn(domain, infrastructure)
-                domain.dependsOn(infrastructure)
-                infrastructure.dependsOnNothing()
-            }
-    }
-
-    @Test
-    fun `passes when good dependency is set and architecture is passed as parameter (scope)`() {
+    fun `passes when good dependency is set and architecture is passed as parameter`() {
         // given
         val architecture = architecture {
             presentation.dependsOn(application)
@@ -61,23 +48,7 @@ class Architecture5Test {
     }
 
     @Test
-    fun `passes when good dependency is set and architecture is passed as parameter (files)`() {
-        // given
-        val architecture = architecture {
-            presentation.dependsOn(application)
-            application.dependsOn(domain, infrastructure)
-            domain.dependsOn(infrastructure)
-            infrastructure.dependsOnNothing()
-        }
-
-        // then
-        scope
-            .files
-            .assertArchitecture(architecture)
-    }
-
-    @Test
-    fun `fails when bad dependency is set (scope)`() {
+    fun `fails when bad dependency is set`() {
         // given
         val sut = {
             scope
@@ -90,29 +61,11 @@ class Architecture5Test {
         }
 
         // then
-        sut shouldThrow KoAssertionFailedException::class
+        sut shouldThrow KoCheckFailedException::class
     }
 
     @Test
-    fun `fails when bad dependency is set (files)`() {
-        // given
-        val sut = {
-            scope
-                .files
-                .assertArchitecture {
-                    presentation.dependsOn(application, infrastructure)
-                    application.dependsOn(infrastructure)
-                    domain.dependsOn(infrastructure)
-                    infrastructure.dependsOnNothing()
-                }
-        }
-
-        // then
-        sut shouldThrow KoAssertionFailedException::class
-    }
-
-    @Test
-    fun `fails when bad dependency is set and architecture is passed as parameter (scope)`() {
+    fun `fails when bad dependency is set and architecture is passed as parameter`() {
         // given
         val architecture = architecture {
             presentation.dependsOn(application, infrastructure)
@@ -126,26 +79,6 @@ class Architecture5Test {
         }
 
         // then
-        sut shouldThrow KoAssertionFailedException::class
-    }
-
-    @Test
-    fun `fails when bad dependency is set and architecture is passed as parameter (files)`() {
-        // given
-        val architecture = architecture {
-            presentation.dependsOn(application, infrastructure)
-            application.dependsOn(infrastructure)
-            domain.dependsOn(infrastructure)
-            infrastructure.dependsOnNothing()
-        }
-
-        val sut = {
-            scope
-                .files
-                .assertArchitecture(architecture)
-        }
-
-        // then
-        sut shouldThrow KoAssertionFailedException::class
+        sut shouldThrow KoCheckFailedException::class
     }
 }

@@ -88,7 +88,7 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
         assertSoftly(sut) {
             arguments.map { it.value } shouldBeEqualTo listOf("0", "false")
             numArguments shouldBeEqualTo 2
-            countArguments { it.value?.startsWith("fal") ?: false || it.value == "0" } shouldBeEqualTo 2
+            countArguments { it.value.startsWith("fal") || it.value == "0" } shouldBeEqualTo 2
             countArguments { it.value == "0" } shouldBeEqualTo 1
             hasArguments() shouldBeEqualTo true
             hasArgumentWithName("sampleParameter1") shouldBeEqualTo true
@@ -99,8 +99,8 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
             hasArgumentsWithAllNames("sampleParameter1", "otherParameter") shouldBeEqualTo false
             hasArgument { it.value == "0" } shouldBeEqualTo true
             hasArgument { it.value == "1" } shouldBeEqualTo false
-            hasAllArguments { it.value?.startsWith("fal") ?: false || it.value == "0" } shouldBeEqualTo true
-            hasAllArguments { it.value?.startsWith("k") ?: false } shouldBeEqualTo false
+            hasAllArguments { it.value.startsWith("fal") || it.value == "0" } shouldBeEqualTo true
+            hasAllArguments { it.value.startsWith("k") } shouldBeEqualTo false
         }
     }
 

@@ -1,7 +1,0 @@
-class SampleTopLevelClass {
-    private fun sampleFunction1() {
-    }
-
-    fun sampleFunction2() {
-    }
-}

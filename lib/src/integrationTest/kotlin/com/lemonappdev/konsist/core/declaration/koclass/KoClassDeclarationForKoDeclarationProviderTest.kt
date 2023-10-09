@@ -13,36 +13,14 @@ import org.junit.jupiter.api.Test
 
 class KoClassDeclarationForKoDeclarationProviderTest {
     @Test
-    fun `class-has-no-declarations`() {
+    fun `class-contains-no-declarations`() {
         // given
-        val sut = getSnippetFile("class-has-no-declarations")
+        val sut = getSnippetFile("class-contains-no-declarations")
             .classes()
             .first()
 
         // then
-        assertSoftly(sut) {
-            declarations() shouldBeEqualTo emptyList()
-            hasDeclarations() shouldBeEqualTo false
-            hasDeclaration { (it as KoNameProvider).name == "sampleProperty" } shouldBeEqualTo false
-            hasAllDeclarations { (it as KoNameProvider).hasNameStartingWith("sample") } shouldBeEqualTo true
-        }
-    }
-
-    @Test
-    fun `class-has-two-declarations`() {
-        // given
-        val sut = getSnippetFile("class-has-two-declarations")
-            .classes()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasDeclarations() shouldBeEqualTo true
-            hasDeclaration { (it as KoNameProvider).name == "sampleProperty" } shouldBeEqualTo true
-            hasDeclaration { (it as KoNameProvider).hasNameEndingWith("Property") } shouldBeEqualTo true
-            hasAllDeclarations { (it as KoNameProvider).hasNameStartingWith("sample") } shouldBeEqualTo true
-            hasAllDeclarations { (it as KoNameProvider).hasNameEndingWith("Class1") } shouldBeEqualTo false
-        }
+        sut.declarations(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
     }
 
     @Test
@@ -162,10 +140,10 @@ class KoClassDeclarationForKoDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            numDeclarations(includeNested = false, includeLocal = false) shouldBeEqualTo 3
-            numDeclarations(includeLocal = false) shouldBeEqualTo 4
-            numDeclarations(includeNested = false) shouldBeEqualTo 4
-            numDeclarations() shouldBeEqualTo 5
+            numDeclarations(includeNested = false, includeLocal = false) shouldBeEqualTo 2
+            numDeclarations(includeLocal = false) shouldBeEqualTo 3
+            numDeclarations(includeNested = false) shouldBeEqualTo 3
+            numDeclarations() shouldBeEqualTo 4
             countDeclarations(includeNested = false, includeLocal = false) {
                 (it as? KoVisibilityModifierProvider)?.hasPrivateModifier ?: false
             } shouldBeEqualTo 2
@@ -187,9 +165,9 @@ class KoClassDeclarationForKoDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            numDeclarations() shouldBeEqualTo 6
+            numDeclarations() shouldBeEqualTo 5
             numPublicDeclarations() shouldBeEqualTo 1
-            numPublicOrDefaultDeclarations() shouldBeEqualTo 3
+            numPublicOrDefaultDeclarations() shouldBeEqualTo 2
             numPrivateDeclarations() shouldBeEqualTo 1
             numProtectedDeclarations() shouldBeEqualTo 1
             numInternalDeclarations() shouldBeEqualTo 1

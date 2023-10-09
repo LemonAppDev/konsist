@@ -9,5 +9,5 @@ internal interface KoCompanionModifierProviderCore :
     KoBaseProviderCore,
     KoModifierProviderCore {
     override val hasCompanionModifier: Boolean
-        get() = hasModifier(KoModifier.COMPANION)
+        get() = hasModifiers(KoModifier.COMPANION)
 }

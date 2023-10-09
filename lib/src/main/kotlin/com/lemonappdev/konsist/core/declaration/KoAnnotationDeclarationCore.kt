@@ -41,6 +41,13 @@ internal class KoAnnotationDeclarationCore private constructor(
 
     override val name: String by lazy { ktAnnotationEntry.shortName.toString() }
 
+    override val fullyQualifiedName: String by lazy {
+        containingFile
+            .imports
+            .firstOrNull { it.text.endsWith(".$name") }
+            ?.name ?: name
+    }
+
     override val arguments: List<KoArgumentDeclaration> by lazy {
         ktAnnotationEntry
             .children

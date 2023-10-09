@@ -7,7 +7,7 @@ plugins {
 android {
     namespace = "com.sample"
 
-    compileSdk = 34
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 26
@@ -37,5 +37,5 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
 
-    testImplementation("com.lemonappdev:konsist:0.12.2")
+    testImplementation("com.lemonappdev:konsist:0.11.0")
 }

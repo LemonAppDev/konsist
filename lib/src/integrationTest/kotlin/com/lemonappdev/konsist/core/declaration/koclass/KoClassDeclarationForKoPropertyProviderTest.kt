@@ -11,43 +11,14 @@ import org.junit.jupiter.api.Test
 
 class KoClassDeclarationForKoPropertyProviderTest {
     @Test
-    fun `class-has-no-properties`() {
+    fun `class-contains-no-properties`() {
         // given
-        val sut = getSnippetFile("class-has-no-properties")
+        val sut = getSnippetFile("class-contains-no-properties")
             .classes()
             .first()
 
         // then
-        assertSoftly(sut) {
-            properties() shouldBeEqualTo emptyList()
-            hasProperties() shouldBeEqualTo false
-            hasPropertyWithName("sampleProperty") shouldBeEqualTo false
-            hasPropertiesWithAllNames("sampleProperty1", "sampleProperty2") shouldBeEqualTo false
-            hasProperty { it.name == "sampleProperty" } shouldBeEqualTo false
-            hasAllProperties { it.hasNameStartingWith("sample") } shouldBeEqualTo true
-        }
-    }
-
-    @Test
-    fun `class-has-two-properties`() {
-        // given
-        val sut = getSnippetFile("class-has-two-properties")
-            .classes()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasProperties() shouldBeEqualTo true
-            hasPropertyWithName("sampleProperty1") shouldBeEqualTo true
-            hasPropertyWithName("sampleProperty1", "otherProperty") shouldBeEqualTo true
-            hasPropertiesWithAllNames("sampleProperty1") shouldBeEqualTo true
-            hasPropertiesWithAllNames("sampleProperty1", "sampleProperty2") shouldBeEqualTo true
-            hasPropertiesWithAllNames("sampleProperty1", "otherProperty") shouldBeEqualTo false
-            hasProperty { it.name == "sampleProperty1" } shouldBeEqualTo true
-            hasProperty { it.hasNameEndingWith("Property1") } shouldBeEqualTo true
-            hasAllProperties { it.hasNameStartingWith("sample") } shouldBeEqualTo true
-            hasAllProperties { it.hasNameEndingWith("Class1") } shouldBeEqualTo false
-        }
+        sut.properties(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
     }
 
     @Test

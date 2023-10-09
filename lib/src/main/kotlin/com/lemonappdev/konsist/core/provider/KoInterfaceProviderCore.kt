@@ -13,7 +13,6 @@ internal interface KoInterfaceProviderCore : KoInterfaceProvider, KoDeclarationP
             includeNested,
         )
 
-    @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasInterface()"))
     override fun containsInterface(
         includeNested: Boolean,
         predicate: (KoInterfaceDeclaration) -> Boolean,
@@ -26,41 +25,4 @@ internal interface KoInterfaceProviderCore : KoInterfaceProvider, KoDeclarationP
         includeNested: Boolean,
         predicate: (KoInterfaceDeclaration) -> Boolean,
     ): Int = interfaces(includeNested).count { predicate(it) }
-
-    override fun hasInterfaces(includeNested: Boolean): Boolean =
-        interfaces(includeNested).isNotEmpty()
-
-    override fun hasInterfaceWithName(
-        name: String,
-        vararg names: String,
-        includeNested: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
-
-        return givenNames.any {
-            interfaces(includeNested).any { koInterface -> it == koInterface.name }
-        }
-    }
-
-    override fun hasInterfacesWithAllNames(
-        name: String,
-        vararg names: String,
-        includeNested: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
-
-        return givenNames.all {
-            interfaces(includeNested).any { koInterface -> it == koInterface.name }
-        }
-    }
-
-    override fun hasInterface(
-        includeNested: Boolean,
-        predicate: (KoInterfaceDeclaration) -> Boolean,
-    ): Boolean = interfaces(includeNested).any(predicate)
-
-    override fun hasAllInterfaces(
-        includeNested: Boolean,
-        predicate: (KoInterfaceDeclaration) -> Boolean,
-    ): Boolean = interfaces(includeNested).all(predicate)
 }

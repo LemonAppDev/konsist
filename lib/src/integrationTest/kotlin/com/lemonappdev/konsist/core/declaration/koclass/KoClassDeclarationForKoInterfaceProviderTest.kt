@@ -10,43 +10,14 @@ import org.junit.jupiter.api.Test
 
 class KoClassDeclarationForKoInterfaceProviderTest {
     @Test
-    fun `class-has-no-interfaces`() {
+    fun `class-contains-no-interfaces`() {
         // given
-        val sut = getSnippetFile("class-has-no-interfaces")
+        val sut = getSnippetFile("class-contains-no-interfaces")
             .classes()
             .first()
 
         // then
-        assertSoftly(sut) {
-            interfaces() shouldBeEqualTo emptyList()
-            hasInterfaces() shouldBeEqualTo false
-            hasInterfaceWithName("SampleInterface") shouldBeEqualTo false
-            hasInterfacesWithAllNames("SampleInterface1", "SampleInterface2") shouldBeEqualTo false
-            hasInterface { it.name == "SampleInterface" } shouldBeEqualTo false
-            hasAllInterfaces { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
-        }
-    }
-
-    @Test
-    fun `class-has-two-interfaces`() {
-        // given
-        val sut = getSnippetFile("class-has-two-interfaces")
-            .classes()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasInterfaces() shouldBeEqualTo true
-            hasInterfaceWithName("SampleInterface1") shouldBeEqualTo true
-            hasInterfaceWithName("SampleInterface1", "OtherInterface") shouldBeEqualTo true
-            hasInterfacesWithAllNames("SampleInterface1") shouldBeEqualTo true
-            hasInterfacesWithAllNames("SampleInterface1", "SampleInterface2") shouldBeEqualTo true
-            hasInterfacesWithAllNames("SampleInterface1", "OtherInterface") shouldBeEqualTo false
-            hasInterface { it.name == "SampleInterface1" } shouldBeEqualTo true
-            hasInterface { it.hasNameEndingWith("Interface1") } shouldBeEqualTo true
-            hasAllInterfaces { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
-            hasAllInterfaces { it.hasNameEndingWith("Class1") } shouldBeEqualTo false
-        }
+        sut.interfaces(includeNested = true) shouldBeEqualTo emptyList()
     }
 
     @Test

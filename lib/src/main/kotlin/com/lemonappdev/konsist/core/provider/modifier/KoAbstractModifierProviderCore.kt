@@ -9,5 +9,5 @@ internal interface KoAbstractModifierProviderCore :
     KoBaseProviderCore,
     KoModifierProviderCore {
     override val hasAbstractModifier: Boolean
-        get() = hasModifier(KoModifier.ABSTRACT)
+        get() = hasModifiers(KoModifier.ABSTRACT)
 }

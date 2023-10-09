@@ -10,43 +10,14 @@ import org.junit.jupiter.api.Test
 
 class KoInterfaceDeclarationForKoClassProviderTest {
     @Test
-    fun `interface-has-no-classes`() {
+    fun `interface-contains-no-classes`() {
         // given
-        val sut = getSnippetFile("interface-has-no-classes")
+        val sut = getSnippetFile("interface-contains-no-classes")
             .interfaces()
             .first()
 
         // then
-        assertSoftly(sut) {
-            classes() shouldBeEqualTo emptyList()
-            hasClasses() shouldBeEqualTo false
-            hasClassWithName("SampleClass") shouldBeEqualTo false
-            hasClassesWithAllNames("SampleClass1", "SampleClass2") shouldBeEqualTo false
-            hasClass { it.name == "SampleClass" } shouldBeEqualTo false
-            hasAllClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
-        }
-    }
-
-    @Test
-    fun `interface-has-two-classes`() {
-        // given
-        val sut = getSnippetFile("interface-has-two-classes")
-            .interfaces()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasClasses() shouldBeEqualTo true
-            hasClassWithName("SampleClass1") shouldBeEqualTo true
-            hasClassWithName("SampleClass1", "OtherClass") shouldBeEqualTo true
-            hasClassesWithAllNames("SampleClass1") shouldBeEqualTo true
-            hasClassesWithAllNames("SampleClass1", "SampleClass2") shouldBeEqualTo true
-            hasClassesWithAllNames("SampleClass1", "OtherClass") shouldBeEqualTo false
-            hasClass { it.name == "SampleClass1" } shouldBeEqualTo true
-            hasClass { it.hasNameEndingWith("Class1") } shouldBeEqualTo true
-            hasAllClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
-            hasAllClasses { it.hasNameEndingWith("Class1") } shouldBeEqualTo false
-        }
+        sut.classes(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
     }
 
     @Test

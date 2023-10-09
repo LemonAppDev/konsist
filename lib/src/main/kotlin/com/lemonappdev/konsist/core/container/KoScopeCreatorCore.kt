@@ -11,7 +11,6 @@ import com.lemonappdev.konsist.core.ext.toMacOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import java.io.File
 
-@Suppress("detekt.TooManyFunctions")
 internal class KoScopeCreatorCore : KoScopeCreator {
     private val pathProvider: PathProvider by lazy { PathProvider.getInstance() }
 
@@ -117,22 +116,18 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         return KoScopeCore(files)
     }
 
-    override fun scopeFromFile(path: String, vararg paths: String): KoScope = scopeFromFiles(setOf(path) + paths)
+    override fun scopeFromFile(path: String): KoScope {
+        val absolutePath = "$projectRootPath$sep$path"
 
-    override fun scopeFromFiles(paths: Set<String>): KoScope {
-        val koFiles = paths
-            .map { getAbsolutePath(it) }
-            .map { File(it) }
-            .onEach {
-                require(it.exists()) { "File does not exist: ${it.absolutePath}" }
-                require(it.isFile) { "Path is a directory, but should be a file: ${it.absolutePath}" }
-            }
-            .map { it.toKoFile() }
+        val file = File(absolutePath)
 
-        return KoScopeCore(koFiles)
+        require(file.exists()) { "File does not exist: $absolutePath" }
+        require(file.isFile) { "Path is a directory, but should be a file: $absolutePath" }
+
+        val koKoFile = file.toKoFile()
+
+        return KoScopeCore(koKoFile)
     }
-
-    private fun getAbsolutePath(projectPath: String): String = "$projectRootPath$sep$projectPath"
 
     /**
      *

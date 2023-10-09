@@ -11,43 +11,14 @@ import org.junit.jupiter.api.Test
 
 class KoFileDeclarationForKoPropertyProviderTest {
     @Test
-    fun `file-has-no-properties`() {
+    fun `file-contains-no-properties`() {
         // given
-        val sut = getSnippetFile("file-has-no-properties")
+        val sut = getSnippetFile("file-contains-no-properties")
             .files
             .first()
 
         // then
-        assertSoftly(sut) {
-            properties() shouldBeEqualTo emptyList()
-            hasProperties() shouldBeEqualTo false
-            hasPropertyWithName("sampleProperty") shouldBeEqualTo false
-            hasPropertiesWithAllNames("sampleProperty1", "sampleProperty2") shouldBeEqualTo false
-            hasProperty { it.name == "sampleProperty" } shouldBeEqualTo false
-            hasAllProperties { it.hasNameStartingWith("sample") } shouldBeEqualTo true
-        }
-    }
-
-    @Test
-    fun `file-has-two-properties`() {
-        // given
-        val sut = getSnippetFile("file-has-two-properties")
-            .files
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasProperties() shouldBeEqualTo true
-            hasPropertyWithName("sampleProperty1") shouldBeEqualTo true
-            hasPropertyWithName("sampleProperty1", "otherProperty") shouldBeEqualTo true
-            hasPropertiesWithAllNames("sampleProperty1") shouldBeEqualTo true
-            hasPropertiesWithAllNames("sampleProperty1", "sampleProperty2") shouldBeEqualTo true
-            hasPropertiesWithAllNames("sampleProperty1", "otherProperty") shouldBeEqualTo false
-            hasProperty { it.name == "sampleProperty1" } shouldBeEqualTo true
-            hasProperty { it.hasNameEndingWith("Property1") } shouldBeEqualTo true
-            hasAllProperties { it.hasNameStartingWith("sample") } shouldBeEqualTo true
-            hasAllProperties { it.hasNameEndingWith("Class1") } shouldBeEqualTo false
-        }
+        sut.properties(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
     }
 
     @Test

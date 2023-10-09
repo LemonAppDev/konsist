@@ -29,7 +29,6 @@ fun <T : KoKDocProvider> List<T>.withoutKDoc(): List<T> = filterNot { it.hasKDoc
  *
  * @return A list containing declarations with KDoc with any tag.
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withTags()"))
 fun <T : KoKDocProvider> List<T>.withKDocWithTags(): List<T> =
     filter { it.kDoc?.hasTags() ?: false }
 
@@ -40,7 +39,6 @@ fun <T : KoKDocProvider> List<T>.withKDocWithTags(): List<T> =
  * @param tags The KDoc tags to check for in the declarations' KDoc.
  * @return A list containing declarations with specified KDoc tags.
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withAllTags()"))
 fun <T : KoKDocProvider> List<T>.withKDocWithAllTags(tag: KoKDocTag, vararg tags: KoKDocTag): List<T> =
     filter { it.kDoc?.hasTags(tag, *tags) ?: false }
 
@@ -51,7 +49,6 @@ fun <T : KoKDocProvider> List<T>.withKDocWithAllTags(tag: KoKDocTag, vararg tags
  * @param tags The KDoc tags to check for in the declarations' KDoc.
  * @return A list containing declarations with at least one of the specified KDoc tags.
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withTag()"))
 fun <T : KoKDocProvider> List<T>.withKDocWithSomeTags(tag: KoKDocTag, vararg tags: KoKDocTag): List<T> = filter {
     it.kDoc?.hasTags(tag) ?: false || tags.any { tag -> it.kDoc?.hasTags(tag) ?: false }
 }
@@ -61,7 +58,6 @@ fun <T : KoKDocProvider> List<T>.withKDocWithSomeTags(tag: KoKDocTag, vararg tag
  *
  * @return A list containing declarations without KDoc with any tag.
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutTags()"))
 fun <T : KoKDocProvider> List<T>.withoutKDocWithTags(): List<T> =
     filterNot { it.kDoc?.hasTags() ?: false }
 
@@ -73,7 +69,6 @@ fun <T : KoKDocProvider> List<T>.withoutKDocWithTags(): List<T> =
  * @return A list containing declarations without all specified KDoc tags.
  *
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutAllTags()"))
 fun <T : KoKDocProvider> List<T>.withoutKDocWithAllTags(tag: KoKDocTag, vararg tags: KoKDocTag): List<T> =
     filterNot { it.kDoc?.hasTags(tag, *tags) ?: false }
 
@@ -84,7 +79,6 @@ fun <T : KoKDocProvider> List<T>.withoutKDocWithAllTags(tag: KoKDocTag, vararg t
  * @param tags The KDoc tags to check for absence in the declarations' KDoc.
  * @return A list containing declarations without at least one of the specified KDoc tags.
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutTag()"))
 fun <T : KoKDocProvider> List<T>.withoutKDocWithSomeTags(tag: KoKDocTag, vararg tags: KoKDocTag): List<T> = filter {
     it.kDoc?.hasTags(tag) == false && if (tags.isNotEmpty()) {
         tags.any { tag -> it.kDoc?.hasTags(tag) == false }

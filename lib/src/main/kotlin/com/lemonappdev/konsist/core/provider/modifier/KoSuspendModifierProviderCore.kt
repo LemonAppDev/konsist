@@ -9,5 +9,5 @@ internal interface KoSuspendModifierProviderCore :
     KoBaseProviderCore,
     KoModifierProviderCore {
     override val hasSuspendModifier: Boolean
-        get() = hasModifier(KoModifier.SUSPEND)
+        get() = hasModifiers(KoModifier.SUSPEND)
 }

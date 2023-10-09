@@ -1,7 +1,0 @@
-package com.samplepackage
-
-@SampleAnnotation
-fun sampleFunction() {
-}
-
-annotation class SampleAnnotation

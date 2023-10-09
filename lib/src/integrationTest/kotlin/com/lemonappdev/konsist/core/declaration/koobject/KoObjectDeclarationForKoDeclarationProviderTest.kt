@@ -13,36 +13,14 @@ import org.junit.jupiter.api.Test
 
 class KoObjectDeclarationForKoDeclarationProviderTest {
     @Test
-    fun `object-has-no-declarations`() {
+    fun `object-contains-no-declarations`() {
         // given
-        val sut = getSnippetFile("object-has-no-declarations")
+        val sut = getSnippetFile("object-contains-no-declarations")
             .objects()
             .first()
 
         // then
-        assertSoftly(sut) {
-            declarations() shouldBeEqualTo emptyList()
-            hasDeclarations() shouldBeEqualTo false
-            hasDeclaration { (it as KoNameProvider).name == "sampleProperty" } shouldBeEqualTo false
-            hasAllDeclarations { (it as KoNameProvider).hasNameStartingWith("sample") } shouldBeEqualTo true
-        }
-    }
-
-    @Test
-    fun `object-has-two-declarations`() {
-        // given
-        val sut = getSnippetFile("object-has-two-declarations")
-            .objects()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasDeclarations() shouldBeEqualTo true
-            hasDeclaration { (it as KoNameProvider).name == "sampleProperty" } shouldBeEqualTo true
-            hasDeclaration { (it as KoNameProvider).hasNameEndingWith("Property") } shouldBeEqualTo true
-            hasAllDeclarations { (it as KoNameProvider).hasNameStartingWith("sample") } shouldBeEqualTo true
-            hasAllDeclarations { (it as KoNameProvider).hasNameEndingWith("Class1") } shouldBeEqualTo false
-        }
+        sut.declarations(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
     }
 
     @Test

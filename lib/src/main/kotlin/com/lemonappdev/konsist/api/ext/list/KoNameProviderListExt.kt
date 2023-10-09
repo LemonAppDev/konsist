@@ -29,23 +29,6 @@ fun <T : KoNameProvider> List<T>.withoutName(vararg names: String): List<T> = fi
 }
 
 /**
- * List containing declarations that have a name matching the provided predicate.
- *
- * @param predicate A function that defines the condition to be met by a declaration name.
- * @return A list containing declarations with the name matching the provided predicate.
- */
-fun <T : KoNameProvider> List<T>.withName(predicate: (String) -> Boolean): List<T> = filter { predicate(it.name) }
-
-/**
- * List containing declarations that don't have a name matching the provided predicate.
- *
- * @param predicate A function that defines the condition to be met by a declaration name.
- * @return A list containing declarations without the name matching the provided predicate.
- */
-fun <T : KoNameProvider> List<T>.withoutName(predicate: (String) -> Boolean): List<T> =
-    filterNot { predicate(it.name) }
-
-/**
  * List containing declarations with name with any of the specified prefix.
  *
  * @param prefix The prefix to include.

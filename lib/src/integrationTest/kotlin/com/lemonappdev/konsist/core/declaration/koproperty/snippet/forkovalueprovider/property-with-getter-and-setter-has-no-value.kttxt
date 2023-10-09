@@ -1,5 +1,0 @@
-var sampleProperty: Int
-    get() = 1
-    set(value) {
-        2 + value
-    }

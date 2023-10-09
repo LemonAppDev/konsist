@@ -48,7 +48,12 @@ internal class KoTypeDeclarationCore private constructor(
         }
     }
 
-    override val textUsedToFqn: String by lazy { sourceType.substringBefore("<") }
+    override val fullyQualifiedName: String by lazy {
+        containingFile
+            .imports
+            .map { it.name }
+            .firstOrNull { it.contains(sourceType) } ?: name
+    }
 
     override fun toString(): String = name
 
@@ -59,10 +64,6 @@ internal class KoTypeDeclarationCore private constructor(
             ktTypeReference: KtTypeReference,
             containingDeclaration: KoContainingDeclarationProvider,
         ): KoTypeDeclaration =
-            cache.getOrCreateInstance(ktTypeReference, containingDeclaration) {
-                KoTypeDeclarationCore(
-                    ktTypeReference,
-                )
-            }
+            cache.getOrCreateInstance(ktTypeReference, containingDeclaration) { KoTypeDeclarationCore(ktTypeReference) }
     }
 }

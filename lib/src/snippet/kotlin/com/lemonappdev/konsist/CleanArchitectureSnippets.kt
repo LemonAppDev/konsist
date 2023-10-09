@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withParentNamed
-import com.lemonappdev.konsist.api.verify.assertTrue
+import com.lemonappdev.konsist.api.verify.assert
 import org.springframework.stereotype.Repository
 
 class CleanArchitectureSnippets {
@@ -31,7 +31,7 @@ class CleanArchitectureSnippets {
             .scopeFromProject()
             .classes()
             .withNameEndingWith("UseCase")
-            .assertTrue { it.resideInPackage("..domain..usecase..") }
+            .assert { it.resideInPackage("..domain..usecase..") }
     }
 
     fun `classes with 'UseCase' suffix should have single 'public operator' method named 'invoke'`() {
@@ -39,12 +39,12 @@ class CleanArchitectureSnippets {
             .scopeFromProject()
             .classes()
             .withNameEndingWith("UseCase")
-            .assertTrue {
-                val hasSingleInvokeOperatorMethod = it.hasFunction { function ->
+            .assert {
+                val hasSingleInvokeOperatorMethod = it.containsFunction { function ->
                     function.name == "invoke" && function.hasPublicOrDefaultModifier && function.hasOperatorModifier
                 }
 
-                hasSingleInvokeOperatorMethod && it.countFunctions { item -> item.hasPublicOrDefaultModifier } == 1
+                hasSingleInvokeOperatorMethod && it.numPublicOrDefaultDeclarations() == 1
             }
     }
 
@@ -53,7 +53,7 @@ class CleanArchitectureSnippets {
             .scopeFromProject()
             .interfaces()
             .withAnnotationOf(Repository::class)
-            .assertTrue { it.resideInPackage("..data..") }
+            .assert { it.resideInPackage("..data..") }
     }
 
     fun `every UseCase class has test`() {
@@ -61,6 +61,6 @@ class CleanArchitectureSnippets {
             .scopeFromProduction()
             .classes()
             .withParentNamed("UseCase")
-            .assertTrue { it.hasTestClass() }
+            .assert { it.hasTestClass() }
     }
 }

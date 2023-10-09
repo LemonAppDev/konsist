@@ -27,28 +27,6 @@ class KoPropertyDeclarationForKoFullyQualifiedNameProviderTest {
         sut.fullyQualifiedName shouldBeEqualTo "sampleProperty"
     }
 
-    @Test
-    fun `nested-property-fully-qualified-name`() {
-        // given
-        val sut = getSnippetFile("nested-property-fully-qualified-name")
-            .properties()
-            .first()
-
-        // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleClass.sampleProperty"
-    }
-
-    @Test
-    fun `nested-property-fully-qualified-name-without-package`() {
-        // given
-        val sut = getSnippetFile("nested-property-fully-qualified-name-without-package")
-            .properties()
-            .first()
-
-        // then
-        sut.fullyQualifiedName shouldBeEqualTo "SampleClass.sampleProperty"
-    }
-
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koproperty/snippet/forkodeclarationfullyqualifiednameprovider/", fileName)
 }

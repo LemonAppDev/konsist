@@ -16,9 +16,7 @@ class RootClass(val rootParameter: String) : RootInterface {
 
 interface RootInterface
 
-var rootProperty: RootClass = RootClass("")
-    get() = RootClass("root value")
-    private set
+val rootProperty: RootClass = RootClass("root value")
 
 object RootObject
 

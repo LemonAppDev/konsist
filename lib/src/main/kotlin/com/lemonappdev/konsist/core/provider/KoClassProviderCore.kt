@@ -15,7 +15,6 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
             includeLocal,
         )
 
-    @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasClass()"))
     override fun containsClass(
         includeNested: Boolean,
         includeLocal: Boolean,
@@ -31,45 +30,4 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
         includeLocal: Boolean,
         predicate: (KoClassDeclaration) -> Boolean,
     ): Int = classes(includeNested, includeLocal).count { predicate(it) }
-
-    override fun hasClasses(includeNested: Boolean, includeLocal: Boolean): Boolean =
-        classes(includeNested, includeLocal).isNotEmpty()
-
-    override fun hasClassWithName(
-        name: String,
-        vararg names: String,
-        includeNested: Boolean,
-        includeLocal: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
-
-        return givenNames.any {
-            classes(includeNested, includeLocal).any { koClass -> it == koClass.name }
-        }
-    }
-
-    override fun hasClassesWithAllNames(
-        name: String,
-        vararg names: String,
-        includeNested: Boolean,
-        includeLocal: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
-
-        return givenNames.all {
-            classes(includeNested, includeLocal).any { koClass -> it == koClass.name }
-        }
-    }
-
-    override fun hasClass(
-        includeNested: Boolean,
-        includeLocal: Boolean,
-        predicate: (KoClassDeclaration) -> Boolean,
-    ): Boolean = classes(includeNested, includeLocal).any(predicate)
-
-    override fun hasAllClasses(
-        includeNested: Boolean,
-        includeLocal: Boolean,
-        predicate: (KoClassDeclaration) -> Boolean,
-    ): Boolean = classes(includeNested, includeLocal).all(predicate)
 }

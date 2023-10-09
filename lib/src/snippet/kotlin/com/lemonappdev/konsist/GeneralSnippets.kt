@@ -13,8 +13,8 @@ import com.lemonappdev.konsist.api.ext.list.primaryConstructors
 import com.lemonappdev.konsist.api.ext.list.properties
 import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
-import com.lemonappdev.konsist.api.verify.assertFalse
-import com.lemonappdev.konsist.api.verify.assertTrue
+import com.lemonappdev.konsist.api.verify.assert
+import com.lemonappdev.konsist.api.verify.assertNot
 import java.util.*
 import javax.inject.Inject
 
@@ -24,20 +24,20 @@ class GeneralSnippets {
             .scopeFromProject()
             .files
             .withPackage("..ext..")
-            .assertTrue { it.hasNameEndingWith("Ext") }
+            .assert { it.hasNameEndingWith("Ext") }
     }
 
     fun `properties are declared before functions`() {
         Konsist
             .scopeFromProject()
             .classes()
-            .assertTrue {
+            .assert {
                 val lastKoPropertyDeclarationIndex = it
-                    .declarations(includeNested = false, includeLocal = false)
+                    .declarations()
                     .indexOfLastInstance<KoPropertyDeclaration>()
 
                 val firstKoFunctionDeclarationIndex = it
-                    .declarations(includeNested = false, includeLocal = false)
+                    .declarations()
                     .indexOfFirstInstance<KoFunctionDeclaration>()
 
                 if (lastKoPropertyDeclarationIndex != -1 && firstKoFunctionDeclarationIndex != -1) {
@@ -54,7 +54,7 @@ class GeneralSnippets {
             .classes()
             .constructors
             .parameters
-            .assertTrue {
+            .assert {
                 val nameTitleCase = it.name.replaceFirstChar { char -> char.titlecase(Locale.getDefault()) }
                 nameTitleCase == it.type.sourceType
             }
@@ -65,7 +65,7 @@ class GeneralSnippets {
             .scopeFromProject()
             .classes()
             .constructors
-            .assertTrue {
+            .assert {
                 val names = it.parameters.map { parameter -> parameter.name }
                 val sortedNames = names.sorted()
                 names == sortedNames
@@ -76,16 +76,29 @@ class GeneralSnippets {
         Konsist
             .scopeFromProject()
             .classes()
-            .assertTrue {
-                val companionObject = it.objects(includeNested = false).lastOrNull { obj ->
-                    obj.hasModifier(KoModifier.COMPANION)
+            .assert {
+                val companionObject = it.objects().lastOrNull { obj ->
+                    obj.hasModifiers(KoModifier.COMPANION)
                 }
 
-                if (companionObject != null) {
-                    it.declarations(includeNested = false, includeLocal = false).last() == companionObject
-                } else {
-                    true
+                companionObject != null && it.declarations().last() == companionObject
+            }
+    }
+
+    fun `companion objects are last declarations in the class`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .assert {
+                val companionObjects = it.objects().filter { obj ->
+                    obj.hasModifiers(KoModifier.COMPANION)
                 }
+
+                if (companionObjects.isEmpty()) {
+                    return@assert true
+                }
+
+                it.declarations().takeLast(companionObjects.size) == companionObjects
             }
     }
 
@@ -95,14 +108,14 @@ class GeneralSnippets {
             .classes()
             .withValueModifier()
             .primaryConstructors
-            .assertTrue { it.hasParameterWithName("value") }
+            .assert { it.hasParameterNamed("value") }
     }
 
     fun `no empty files allowed`() {
         Konsist
             .scopeFromProject()
             .files
-            .assertFalse { it.text.isEmpty() }
+            .assertNot { it.text.isEmpty() }
     }
 
     fun `no field should have 'm' prefix`() {
@@ -110,7 +123,7 @@ class GeneralSnippets {
             .scopeFromProject()
             .classes()
             .properties()
-            .assertFalse {
+            .assertNot {
                 val secondCharacterIsUppercase = it.name.getOrNull(1)?.isUpperCase() ?: false
                 it.name.startsWith('m') && secondCharacterIsUppercase
             }
@@ -121,34 +134,34 @@ class GeneralSnippets {
             .scopeFromProject()
             .classes()
             .properties()
-            .assertFalse { it.hasAnnotationOf<Inject>() }
+            .assertNot { it.hasAnnotationOf<Inject>() }
     }
 
     fun `no class should use Java util logging`() {
         Konsist
             .scopeFromProject()
             .files
-            .assertFalse { it.hasImport { import -> import.name == "java.util.logging.." } }
+            .assertNot { it.hasImport { import -> import.name == "java.util.logging.." } }
     }
 
     fun `package name must match file path`() {
         Konsist
             .scopeFromProject()
             .packages
-            .assertTrue { it.hasMatchingPath }
+            .assert { it.hasMatchingPath }
     }
 
     fun `no wildcard imports allowed`() {
         Konsist
             .scopeFromProject()
             .imports
-            .assertFalse { it.isWildcard }
+            .assertNot { it.isWildcard }
     }
 
     fun `forbid the usage of 'forbiddenString' in file`() {
         Konsist
             .scopeFromProject()
             .files
-            .assertFalse { it.text.contains("forbiddenString") }
+            .assertNot { it.text.contains("forbiddenString") }
     }
 }

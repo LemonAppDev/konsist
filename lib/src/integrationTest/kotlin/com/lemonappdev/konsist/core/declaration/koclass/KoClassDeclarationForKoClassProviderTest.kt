@@ -11,43 +11,14 @@ import org.junit.jupiter.api.Test
 
 class KoClassDeclarationForKoClassProviderTest {
     @Test
-    fun `class-has-no-classes`() {
+    fun `class-contains-no-classes`() {
         // given
-        val sut = getSnippetFile("class-has-no-classes")
+        val sut = getSnippetFile("class-contains-no-classes")
             .classes()
             .first()
 
         // then
-        assertSoftly(sut) {
-            classes() shouldBeEqualTo emptyList()
-            hasClasses() shouldBeEqualTo false
-            hasClassWithName("SampleClass") shouldBeEqualTo false
-            hasClassesWithAllNames("SampleClass1", "SampleClass2") shouldBeEqualTo false
-            hasClass { it.name == "SampleClass" } shouldBeEqualTo false
-            hasAllClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
-        }
-    }
-
-    @Test
-    fun `class-has-two-classes`() {
-        // given
-        val sut = getSnippetFile("class-has-two-classes")
-            .classes()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasClasses() shouldBeEqualTo true
-            hasClassWithName("SampleClass1") shouldBeEqualTo true
-            hasClassWithName("SampleClass1", "OtherClass") shouldBeEqualTo true
-            hasClassesWithAllNames("SampleClass1") shouldBeEqualTo true
-            hasClassesWithAllNames("SampleClass1", "SampleClass2") shouldBeEqualTo true
-            hasClassesWithAllNames("SampleClass1", "OtherClass") shouldBeEqualTo false
-            hasClass { it.name == "SampleClass1" } shouldBeEqualTo true
-            hasClass { it.hasNameEndingWith("Class1") } shouldBeEqualTo true
-            hasAllClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
-            hasAllClasses { it.hasNameEndingWith("Class1") } shouldBeEqualTo false
-        }
+        sut.classes(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
     }
 
     @Test

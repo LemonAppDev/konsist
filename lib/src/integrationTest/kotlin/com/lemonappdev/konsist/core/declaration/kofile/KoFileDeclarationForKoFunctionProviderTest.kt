@@ -10,43 +10,14 @@ import org.junit.jupiter.api.Test
 
 class KoFileDeclarationForKoFunctionProviderTest {
     @Test
-    fun `file-has-no-functions`() {
+    fun `file-contains-no-functions`() {
         // given
-        val sut = getSnippetFile("file-has-no-functions")
+        val sut = getSnippetFile("file-contains-no-functions")
             .files
             .first()
 
         // then
-        assertSoftly(sut) {
-            functions() shouldBeEqualTo emptyList()
-            hasFunctions() shouldBeEqualTo false
-            hasFunctionWithName("sampleFunction") shouldBeEqualTo false
-            hasFunctionsWithAllNames("sampleFunction1", "sampleFunction2") shouldBeEqualTo false
-            hasFunction { it.name == "sampleFunction" } shouldBeEqualTo false
-            hasAllFunctions { it.hasNameStartingWith("sample") } shouldBeEqualTo true
-        }
-    }
-
-    @Test
-    fun `file-has-two-functions`() {
-        // given
-        val sut = getSnippetFile("file-has-two-functions")
-            .files
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasFunctions() shouldBeEqualTo true
-            hasFunctionWithName("sampleFunction1") shouldBeEqualTo true
-            hasFunctionWithName("sampleFunction1", "otherFunction") shouldBeEqualTo true
-            hasFunctionsWithAllNames("sampleFunction1") shouldBeEqualTo true
-            hasFunctionsWithAllNames("sampleFunction1", "sampleFunction2") shouldBeEqualTo true
-            hasFunctionsWithAllNames("sampleFunction1", "otherFunction") shouldBeEqualTo false
-            hasFunction { it.name == "sampleFunction1" } shouldBeEqualTo true
-            hasFunction { it.hasNameEndingWith("Function1") } shouldBeEqualTo true
-            hasAllFunctions { it.hasNameStartingWith("sample") } shouldBeEqualTo true
-            hasAllFunctions { it.hasNameEndingWith("Class1") } shouldBeEqualTo false
-        }
+        sut.functions(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
     }
 
     @Test

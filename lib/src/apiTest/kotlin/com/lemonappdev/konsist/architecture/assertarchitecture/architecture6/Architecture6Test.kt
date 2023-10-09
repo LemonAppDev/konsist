@@ -14,7 +14,7 @@ class Architecture6Test {
         Konsist.scopeFromPackage("com.lemonappdev.konsist.architecture.assertarchitecture.architecture6.project")
 
     @Test
-    fun `throws exception when layer contains no files (scope)`() {
+    fun `throws exception when layer contains no files`() {
         // when
         val func = {
             scope.assertArchitecture { layer.dependsOnNothing() }
@@ -25,20 +25,7 @@ class Architecture6Test {
     }
 
     @Test
-    fun `throws exception when layer contains no files (files)`() {
-        // when
-        val func = {
-            scope
-                .files
-                .assertArchitecture { layer.dependsOnNothing() }
-        }
-
-        // then
-        func shouldThrow KoPreconditionFailedException::class withMessage "Layer EmptyLayer doesn't contain any files."
-    }
-
-    @Test
-    fun `throws exception when architecture contains no layers (scope)`() {
+    fun `throws exception when architecture contains no layers`() {
         // when
         val func = {
             scope.assertArchitecture { }
@@ -49,36 +36,10 @@ class Architecture6Test {
     }
 
     @Test
-    fun `throws exception when architecture contains no layers (files)`() {
-        // when
-        val func = {
-            scope
-                .files
-                .assertArchitecture { }
-        }
-
-        // then
-        func shouldThrow KoPreconditionFailedException::class withMessage "Architecture doesn't contain layers or dependencies."
-    }
-
-    @Test
-    fun `throws exception when architecture contains no dependencies (scope)`() {
+    fun `throws exception when architecture contains no dependencies`() {
         // when
         val func = {
             scope.assertArchitecture { layer }
-        }
-
-        // then
-        func shouldThrow KoPreconditionFailedException::class withMessage "Architecture doesn't contain layers or dependencies."
-    }
-
-    @Test
-    fun `throws exception when architecture contains no dependencies (files)`() {
-        // when
-        val func = {
-            scope
-                .files
-                .assertArchitecture { layer }
         }
 
         // then
