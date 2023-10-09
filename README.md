@@ -5,36 +5,35 @@
 ![Check Workflow](https://github.com/LemonAppDev/konsist/actions/workflows/check.yml/badge.svg)
 [<img src="https://img.shields.io/maven-central/v/com.lemonappdev/konsist?label=Release"/>](https://central.sonatype.com/artifact/com.lemonappdev/konsist)
 
-[![Slack channel](https://img.shields.io/badge/Chat-Slack-orange.svg?style=flat&logo=slack)](https://kotlinlang.slack.com/messages/konsist/)
-
-Konsist is a linter that guards the consistency of [Kotlin](https://kotlinlang.org/) projects by enforcing a cohesive code structure 
-and unified architecture. Konsist guards are written in the form of unit tests ([JUnit](https://junit.org/) / [Kotest](https://kotest.io/)).
+Konsist is a library that guards the consistency of [Kotlin](https://kotlinlang.org/) projects by promoting the
+standardization of the Kotlin codebase. It enforces coding conventions and project architecture. Konsist
+tests are written in Kotlin and can be easily integrated with popular testing frameworks such as 
+[JUnit4](https://junit.org/junit4/), [JUnit5](https://junit.org/junit5/).
 
 ## Dependencies
 
 ```kotlin
 // Gradle Kotlin:
-testImplementation("com.lemonappdev:konsist:0.14.0")
+testImplementation("com.lemonappdev:konsist:0.13.0")
 
 // Gradle Groovy:
-testImplementation "com.lemonappdev:konsist:0.14.0"
+testImplementation "com.lemonappdev:konsist:0.13.0"
 
 // Maven:
 <dependency>
     <groupId>com.lemonappdev</groupId>
     <artifactId>konsist</artifactId>
-    <version>0.14.0</version>
+    <version>0.13.0</version>
     <scope>test</scope>
 </dependency>
 ```
 
 Check the [Konsist documentation](https://docs.konsist.lemonappdev.com/) to learn more about Konsist and take a 
-look at [getting started guide](https://docs.konsist.lemonappdev.com/getting-started/getting-started).
+look at [getting started guide](https://docs.konsist.lemonappdev.com/getting-started/gettingstarted).
 
 ## Examples
 
-Konsist API reflects the structure of Kotlin code. All declarations such as classes, functions, and properties can be
-queried and verified with the Konsist API. Take a look at a few examples below.
+Konsist API reflects the structure of Kotlin code. Konsist guards are written in form of unit tests.
 
 ### General Kotlin Check
 
@@ -93,18 +92,21 @@ fun `clean architecture layers have correct dependencies`() {
         }
 }
 ```
-    
+
 Check out our [snippet](https://docs.konsist.lemonappdev.com/inspiration/snippets) page for a feast of examples!
-    
-## Articles
 
-Read the [Konsist articles](https://docs.konsist.lemonappdev.com/getting-started/getting-started/articles) to gain valuable insights into best practices and strategies for maintaining consistency in your projects.
+### Articles
 
-## Star History
+- [Introducing Konsist: A Cutting-Edge Kotlin Linter](https://blog.kotlin-academy.com/introducing-konsist-a-cutting-edge-kotlin-linter-d3ab916a5461)
+- [Refactoring Multi-Module Kotlin Project With Konsist](https://proandroiddev.com/refactoring-multi-module-kotlin-project-with-konsist-f0de0de59a3d)
+- [ArchUnit vs. Konsist. Why Did We Need Another Kotlin Linter?](https://proandroiddev.com/archunit-vs-konsist-why-did-we-need-another-linter-972c4ff2622d)
+- [Protect Kotlin Project Architecture Using Konsist](https://proandroiddev.com/protect-kotlin-project-architecture-using-konsist-3bfbe1ad0eea)
+
+### Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=LemonAppDev/konsist&type=Date)](https://star-history.com/#LemonAppDev/konsist&Date)
 
-## Community & Support
+### Community & Support
 
 Write a message on the  [#konsist channel](https://kotlinlang.slack.com/archives/C05QG9FD6KS) at kotlinlang Slack 
 Workspace (preferred) or start a [GitHub discussion](https://github.com/LemonAppDev/konsist/discussions).
