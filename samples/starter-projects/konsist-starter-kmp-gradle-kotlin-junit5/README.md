@@ -23,6 +23,6 @@ in `konsistTest`
 module.
 
 To run tests use IDE UI or run gradle commands:
-- `./gradlew ./gradlew test` - run tests in `test` source set
+- `./gradlew test` - run tests in `test` source set
 
 See [Isolate Konsist tests](https://docs.konsist.lemonappdev.com/advanced/isolate-konsist-tests).
