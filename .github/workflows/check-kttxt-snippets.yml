@@ -17,7 +17,7 @@ jobs:
       - name: List Branches
         run: |
           echo current branch: ${{ steps.branch-name.outputs.current_branch }}
-          echo target branch: ${{ steps.branch-name.outputs.base_ref_branch }}
+          echo base ref branch branch: ${{ steps.branch-name.outputs.base_ref_branch }}
           echo default branch: ${{ steps.branch-name.outputs.default_branch }}
 
       - name: Get Changed Files
@@ -26,8 +26,8 @@ jobs:
 
       - name: Echo Run Condition (any true to run)
         run: |
-          echo Target branch is "main": ${{ steps.branch-name.outputs.target_branch == 'main' }}
-          echo Changed .kttxt files: ${{  contains(needs.get-github-context.outputs.all_changed_files, '.kttxt') }}
+          echo Base ref branch is "main": ${{ steps.branch-name.outputs.base_ref_branch == 'main' }}
+          echo Changed .kttxt files: ${{  contains(steps.branch-name.outputs.all_changed_files, '.kttxt') }}
 
       - name: Echo List Changed Files
         run: |
@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: get-github-context
     if: |
-      needs.get-github-context.outputs.target_branch == 'main' ||
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, '.kttxt')
     steps:
       - name: Checkout
