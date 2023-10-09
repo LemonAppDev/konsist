@@ -24,7 +24,12 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v39.2.1
 
-      - name: List Changed Files
+      - name: Echo Run Condition (any true to run)
+        run: |
+          echo Target branch is "main": ${{ steps.branch-name.outputs.target_branch == 'main' }}
+          echo Changed .kttxt files: ${{  contains(needs.get-github-context.outputs.all_changed_files, '.kttxt') }}
+
+      - name: Echo List Changed Files
         run: |
           echo Changed files: 
           echo ${{ steps.changed-files.outputs.all_changed_files }} | tr ' ' '\n'
