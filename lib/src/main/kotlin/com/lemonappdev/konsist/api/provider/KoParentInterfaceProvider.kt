@@ -1,23 +1,22 @@
 package com.lemonappdev.konsist.api.provider
 
-import com.lemonappdev.konsist.api.declaration.KoParentInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 
 /**
  * An interface representing a Kotlin declaration that provides access to its parent interfaces.
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("KoParentProvider"))
 interface KoParentInterfaceProvider : KoBaseProvider {
     /**
      * The parent interfaces of the declaration.
      */
-    @Deprecated("Will be removed in v1.0.0", ReplaceWith("parents"))
-    val parentInterfaces: List<KoParentInterfaceDeclaration>
+    val parentInterfaces: List<KoInterfaceDeclaration>
 
     /**
      * The number of parent interfaces.
      */
-    @Deprecated("Will be removed in v1.0.0", ReplaceWith("numParents"))
     val numParentInterfaces: Int
+
+    fun countParentInterfaces(predicate: (KoInterfaceDeclaration) -> Boolean): Int
 
     /**
      * Whatever declaration has parent interfaces.
@@ -28,4 +27,14 @@ interface KoParentInterfaceProvider : KoBaseProvider {
      */
     @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasParents()"))
     fun hasParentInterfaces(vararg names: String): Boolean
+
+    fun hasParentInterfaces(): Boolean
+
+    fun hasParentInterfaceWithName(name: String, vararg names: String): Boolean
+
+    fun hasParentInterfacesWithAllNames(name: String, vararg names: String): Boolean
+
+    fun hasParentInterface(predicate: (KoInterfaceDeclaration) -> Boolean): Boolean
+
+    fun hasAllParentInterfaces(predicate: (KoInterfaceDeclaration) -> Boolean): Boolean
 }
