@@ -458,15 +458,11 @@ def main(branch):
 
         copy_content(source_snippets_directory, destination_snippets_directory, summary_path)
 
-        content = read_file(summary_path)
+        os.chdir(temp_dir)
 
-        print(content)
+        push_changes()
 
-        # os.chdir(temp_dir)
-        #
-        # push_changes()
-        #
-        # create_and_merge_pr()
+        create_and_merge_pr()
 
         return temp_dir
     except subprocess.CalledProcessError as e:
