@@ -1,16 +1,9 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
-import com.lemonappdev.konsist.api.ext.list.withDeclaration
-import com.lemonappdev.konsist.api.ext.list.withPath
-import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
-import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.KoParentDeclarationCore
-import com.lemonappdev.konsist.core.ext.toOsSeparator
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 import kotlin.reflect.KClass
@@ -52,13 +45,12 @@ internal interface KoParentProviderCore :
                     val parentClass = Konsist
                         .scopeFromProject()
                         .classes()
-                        .firstOrNull { parent -> ( parent.packagee?.fullyQualifiedName + "." + parent.name) == declarationFromImport.name  }
-
+                        .firstOrNull { parent -> (parent.packagee?.fullyQualifiedName + "." + parent.name) == declarationFromImport.name }
 
                     val parentInterface = Konsist
                         .scopeFromProject()
                         .interfaces()
-                        .firstOrNull { parent -> ( parent.packagee?.fullyQualifiedName + "." + parent.name) == declarationFromImport.name  }
+                        .firstOrNull { parent -> (parent.packagee?.fullyQualifiedName + "." + parent.name) == declarationFromImport.name }
 
                     parentClass ?: parentInterface
                 } else {

@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.api.provider.KoParentInterfaceProvider
 internal interface KoParentInterfaceProviderCore :
     KoParentInterfaceProvider,
     KoBaseProviderCore,
-KoParentProviderCore{
+    KoParentProviderCore {
     override val parentInterfaces: List<KoInterfaceDeclaration>
         get() = parents.filterIsInstance<KoInterfaceDeclaration>()
 

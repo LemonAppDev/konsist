@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.api.ext.provider.koparent
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.provider.hasParentOf
 import com.lemonappdev.konsist.testdata.SampleClass
-import com.lemonappdev.konsist.testdata.SampleInterface
 import com.lemonappdev.konsist.testdata.SampleParentClass
 import com.lemonappdev.konsist.testdata.SampleParentInterface
 import org.amshove.kluent.assertSoftly

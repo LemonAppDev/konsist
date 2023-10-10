@@ -17,7 +17,7 @@ class KoClassDeclarationForKoParentClassProviderTest {
         assertSoftly(sut) {
             parentClass shouldBeEqualTo null
             hasParentClass() shouldBeEqualTo false
-            hasParentClass { it.name == "SampleParentClass"} shouldBeEqualTo false
+            hasParentClass { it.name == "SampleParentClass" } shouldBeEqualTo false
             hasParentClass("SampleParentClass") shouldBeEqualTo false
         }
     }
@@ -33,8 +33,8 @@ class KoClassDeclarationForKoParentClassProviderTest {
         assertSoftly(sut) {
             parentClass?.name shouldBeEqualTo "SampleParentClass"
             hasParentClass() shouldBeEqualTo true
-            hasParentClass { it.name == "SampleParentClass"} shouldBeEqualTo true
-            hasParentClass { it.name == "OtherClass"} shouldBeEqualTo false
+            hasParentClass { it.name == "SampleParentClass" } shouldBeEqualTo true
+            hasParentClass { it.name == "OtherClass" } shouldBeEqualTo false
             hasParentClass("SampleParentClass") shouldBeEqualTo true
             hasParentClass("OtherClass") shouldBeEqualTo false
         }
@@ -51,8 +51,8 @@ class KoClassDeclarationForKoParentClassProviderTest {
         assertSoftly(sut) {
             parentClass?.name shouldBeEqualTo "SampleParentClass"
             hasParentClass() shouldBeEqualTo true
-            hasParentClass { it.name == "SampleParentClass"} shouldBeEqualTo true
-            hasParentClass { it.name == "OtherClass"} shouldBeEqualTo false
+            hasParentClass { it.name == "SampleParentClass" } shouldBeEqualTo true
+            hasParentClass { it.name == "OtherClass" } shouldBeEqualTo false
             hasParentClass("SampleParentClass") shouldBeEqualTo true
             hasParentClass("OtherClass") shouldBeEqualTo false
         }
