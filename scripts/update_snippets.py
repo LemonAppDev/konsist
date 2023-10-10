@@ -286,6 +286,7 @@ def complete_summary_file(root, file_text, summary_dir):
 
     content, snippet_name = snippet_name_to_summary(root, file_text)
 
+
     name_without_tab = snippet_name.strip()
 
     if not name_without_tab in file_content:
@@ -300,11 +301,24 @@ def complete_summary_file(root, file_text, summary_dir):
 
         if insertion_point != -1:
             end_of_line_index = find_end_of_line(found_section, insertion_point)
+            spaces = " " * add_blank_spaces(summary_dir)
+
+            if content != "":
+                # Split the Kotlin string into lines
+                lines = content.split('\n')
+
+                # Add "&&&" prefix to each line
+                prefixed_lines = [spaces + line for line in lines]
+
+                # Join the modified lines back into a single string
+                modified_content = '\n'.join(prefixed_lines)
+            else:
+                modified_content = content
 
             modified_section = (
                     found_section[:end_of_line_index]
                     + "\n"
-                    + content
+                    + modified_content
                     + " " * add_blank_spaces(summary_dir)
                     + snippet_name
                     + found_section[end_of_line_index:]
