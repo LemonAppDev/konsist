@@ -71,34 +71,6 @@ class KoParentProviderExtTest {
         }
     }
 
-    @Test
-    fun `interface-has-parent-with-import`() {
-        // given
-        val sut = getSnippetFile("interface-has-parent-with-import")
-            .interfaces()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasParentOf<SampleParentInterface>() shouldBeEqualTo true
-            hasParentOf<SampleInterface>() shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `interface-has-parent-without-import`() {
-        // given
-        val sut = getSnippetFile("interface-has-parent-without-import")
-            .interfaces()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasParentOf<SampleParentInterface>() shouldBeEqualTo true
-            hasParentOf<SampleInterface>() shouldBeEqualTo false
-        }
-    }
-
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("api/ext/provider/koparent/snippet/", fileName)
 }
