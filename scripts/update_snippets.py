@@ -216,16 +216,20 @@ def snippet_name_to_summary(root, file_text):
         packages = helper_root.split("/")
 
         packages_num = number_of_packages(root)
+
         num = packages_num * 2
         blank_space = " "
 
         if len(packages) > 2:
             for index, text in enumerate(packages):
-                content = blank_space * (num + index - 2) + "* [" + packages[index-1] + "]" + f"({destination_snippets_path}" + "/".join(packages[:index]) + ")" + "\n"
+                if index % 2 == 0:
+                    count = index
+                else:
+                    count = index + 1
 
-            num = num + (len(packages) % 2) + 1
+                content = blank_space * count  + "* [" + packages[index-1] + "]" + f"({destination_snippets_path}" + "/".join(packages[:index]) + ")" + "\n"
 
-        return content + blank_space * num + first_line + f"({destination_snippets_path}" + helper_root + ")"
+        return content, (blank_space * num + first_line + f"({destination_snippets_path}" + helper_root + ")")
 
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -280,7 +284,7 @@ def complete_summary_file(root, file_text, summary_dir):
     with open(summary_dir, "r") as file:
         file_content = file.read()
 
-    snippet_name = snippet_name_to_summary(root, file_text)
+    content, snippet_name = snippet_name_to_summary(root, file_text)
 
     name_without_tab = snippet_name.strip()
 
@@ -300,6 +304,7 @@ def complete_summary_file(root, file_text, summary_dir):
             modified_section = (
                     found_section[:end_of_line_index]
                     + "\n"
+                    + content
                     + " " * add_blank_spaces(summary_dir)
                     + snippet_name
                     + found_section[end_of_line_index:]
