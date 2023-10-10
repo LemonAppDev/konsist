@@ -1,8 +1,16 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
+import com.lemonappdev.konsist.api.ext.list.withDeclaration
+import com.lemonappdev.konsist.api.ext.list.withPath
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.KoParentDeclarationCore
+import com.lemonappdev.konsist.core.ext.toOsSeparator
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 import kotlin.reflect.KClass
@@ -10,6 +18,7 @@ import kotlin.reflect.KClass
 internal interface KoParentProviderCore :
     KoParentProvider,
     KoContainingDeclarationProviderCore,
+    KoContainingFileProviderCore,
     KoBaseProviderCore {
     val ktClassOrObject: KtClassOrObject
 
@@ -18,7 +27,46 @@ internal interface KoParentProviderCore :
             .getSuperTypeList()
             ?.children
             ?.filterIsInstance<KtSuperTypeListEntry>()
-            ?.map { KoParentDeclarationCore.getInstance(it, this) }
+            ?.mapNotNull {
+
+                val name = it
+                    .text
+                    .substringBefore(" ")
+                    .substringBefore("(")
+                    .substringBefore("<")
+
+                val classFromFile = containingFile
+                    .classes()
+                    .firstOrNull { decl -> decl.name == name }
+
+                val interfaceFromFile = containingFile
+                    .interfaces()
+                    .firstOrNull { decl -> decl.name == name }
+
+                val declarationFromImport =
+                    containingFile
+                        .imports
+                        .firstOrNull { import -> import.name.substringAfterLast(".") == name }
+
+                val parentFromProject = if (declarationFromImport != null) {
+                    val parentClass = Konsist
+                        .scopeFromProject()
+                        .classes()
+                        .firstOrNull { parent -> ( parent.packagee?.fullyQualifiedName + "." + parent.name) == declarationFromImport.name  }
+
+
+                    val parentInterface = Konsist
+                        .scopeFromProject()
+                        .interfaces()
+                        .firstOrNull { parent -> ( parent.packagee?.fullyQualifiedName + "." + parent.name) == declarationFromImport.name  }
+
+                    parentClass ?: parentInterface
+                } else {
+                    KoParentDeclarationCore.getInstance(it, this)
+                }
+
+                classFromFile ?: interfaceFromFile ?: parentFromProject
+            }
             ?: emptyList()
 
     override val numParents: Int

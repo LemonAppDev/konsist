@@ -50,6 +50,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvide
  * Represents a Kotlin class declaration.
  */
 interface KoClassDeclaration :
+    KoParentDeclaration,
     KoBaseDeclaration,
     KoBaseProvider,
     KoAnnotationProvider,
