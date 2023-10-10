@@ -102,7 +102,7 @@ Check out our [snippet](https://docs.konsist.lemonappdev.com/inspiration/snippet
 - [Protect Kotlin Project Architecture Using Konsist](https://proandroiddev.com/protect-kotlin-project-architecture-using-konsist-3bfbe1ad0eea)
 - [Konsist: First experience with the new linter for Kotlin](https://proandroiddev.com/konsist-first-experience-with-the-new-linter-for-kotlin-9153b0e7e2c3) (community)
 - [Konsist: Protect Kotlin Multiplatform projects from architecture guidelines violations](https://medium.com/@lahirujay/konsist-protect-kotlin-multiplatform-projects-from-architecture-guidelines-violations-d88db0614cbd) (community)
-
+- [Konsist and Conquer: Embracing the World of Dynamic Testing](https://proandroiddev.com/konsist-and-conquer-embracing-the-world-of-dynamic-testing-07bf2fefcee1)
 ### Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=LemonAppDev/konsist&type=Date)](https://star-history.com/#LemonAppDev/konsist&Date)
