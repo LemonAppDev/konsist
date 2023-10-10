@@ -51,7 +51,6 @@ interface KoInterfaceDeclaration :
     KoNameProvider,
     KoObjectProvider,
     KoPackageProvider,
-    KoParentProvider,
     KoParentInterfaceProvider,
     KoContainingDeclarationProvider,
     KoPathProvider,
