@@ -16,12 +16,12 @@ class SampleDynamicKonsistTest {
         .flatMap { useCase ->
             Stream.of(
                 dynamicTest("${useCase.name} should have test") {
-                    useCase.assertTrue {
+                    useCase.assertTrue(testName = "${useCase.name} should have test") {
                         it.hasTestClass()
                     }
                 },
                 dynamicTest("${useCase.name} should reside in ..domain.usecase.. package") {
-                    useCase.assertTrue {
+                    useCase.assertTrue(testName = "${useCase.name} should reside in ..domain.usecase.. package") {
                         it.resideInPackage("..domain.usecase..")
                     }
                 },
