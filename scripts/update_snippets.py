@@ -3,20 +3,22 @@ import subprocess
 import datetime
 import math
 import re
+import tempfile
+import shutil
 
 # Variables ============================================================================================================
-# Directories
-source_directory = "~/IdeaProjects/konsist/lib/src/snippet/kotlin/com/lemonappdev/konsist"
-destination_directory = "~/IdeaProjects/konsist-documentation/inspiration/snippets"
-summary_path = "~/IdeaProjects/konsist-documentation/SUMMARY.md"
+# Branches
+main_branch = "main"
 
-# Expand user paths
-expanded_source_directory = os.path.expanduser(source_directory)
-expanded_destination_directory = os.path.expanduser(destination_directory)
-expanded_summary_path = os.path.expanduser(summary_path)
+# Repository
+repository_address = "LemonAppDev/konsist-documentation"
+
+# Summary root
+destination_snippets_path = "inspiration/snippets"
 
 
 # Methods ==============================================================================================================
+
 def split_text_to_function_list(file_text):
     text_without_suffix = file_text.removesuffix("}\n") + "\n\t"
     function_list = text_without_suffix.split("fun ")
@@ -135,21 +137,6 @@ def get_current_date():
     return current_date.strftime("%Y-%m-%d")
 
 
-branch_name = get_current_date() + "-update-snippet-code"
-
-
-def create_git_branch():
-    try:
-        subprocess.run(["git", "checkout", branch_name], check=True)
-    except subprocess.CalledProcessError:
-        subprocess.run(["git", "checkout", "-b", branch_name, "main"], check=True)
-
-
-# Construct the paths for destination
-def construct_destination_path(destination_folder, filename_md):
-    return os.path.join(destination_folder, filename_md)
-
-
 # Read content from a file
 def read_file(file_path):
     with open(file_path, "r") as source_file:
@@ -179,10 +166,10 @@ def add_empty_line_to_md_file(md_content):
         return md_content
 
 
-def files_from_destination_directory():
+def files_from_destination_directory(directory_path):
     try:
         # List all files and directories in the current directory
-        for root, dirs, files in os.walk(expanded_destination_directory):
+        for root, dirs, files in os.walk(directory_path):
             for file_name in files:
                 if file_name.lower() != "readme.md":  # Skip "README.md"
                     return file_name, root
@@ -192,7 +179,7 @@ def files_from_destination_directory():
 
 def remove_files_recursively_except_readme(directory_path):
     try:
-        file_name, root = files_from_destination_directory()
+        file_name, root = files_from_destination_directory(directory_path)
         file_path = os.path.join(root, file_name)
         os.remove(file_path)
 
@@ -204,8 +191,8 @@ def remove_files_recursively_except_readme(directory_path):
 # Copy content from source .kt and .md files to a destination file
 def get_helper_root(root):
     try:
-        text = root.split("inspiration/snippets")[1]
-        return "inspiration/snippets" + text
+        text = root.split(destination_snippets_path)[1]
+        return destination_snippets_path + text
 
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -222,23 +209,37 @@ def snippet_name_to_summary(root, file_text):
         first_line = "* [" + first_line.removeprefix("#").strip() + "]"
 
         # get short path to file
-        helper_root = root.split("inspiration/snippets")[1]
+        helper_root = root.split(destination_snippets_path)[1]
 
         # add blank spaces
-        num = number_of_packages(root) * 2
+        content = ""
+        packages = helper_root.split("/")
+
+        packages_num = number_of_packages(root)
+
+        num = packages_num * 2
         blank_space = " "
 
-        return blank_space * num + first_line + "(inspiration/snippets" + helper_root + ")"
+        if len(packages) > 2:
+            for index, text in enumerate(packages):
+                if index % 2 == 0:
+                    count = index
+                else:
+                    count = index + 1
+
+                content = blank_space * count  + "* [" + packages[index-1] + "]" + f"({destination_snippets_path}" + "/".join(packages[:index]) + ")" + "\n"
+
+        return content, (blank_space * num + first_line + f"({destination_snippets_path}" + helper_root + ")")
 
     except Exception as e:
         print(f"An error occurred: {e}")
 
 
-def add_blank_spaces():
-    with open(expanded_summary_path, "r") as file:
+def add_blank_spaces(summary_dir):
+    with open(summary_dir, "r") as file:
         file_content = file.read()
 
-    text = "* [Snippets](inspiration/snippets/README.md)"
+    text = f"* [Snippets]({destination_snippets_path}/README.md)"
 
     # Search for the search term substring
     match = re.search(re.escape(text), file_content)
@@ -262,41 +263,77 @@ def add_blank_spaces():
         return -1  # Search term not found
 
 
-def complete_summary_file(root, file_text):
+def find_section_containing_text(sections, text):
+    for index, section in enumerate(sections):
+        if text in section:
+            return index, section
+    return None, None  # Return None if the text is not found in any section
+
+
+def find_end_of_line(text, index):
+    # Find the end of the line where the index occurs
+    end_of_line = text.find("\n", index)
+    if end_of_line == -1:
+        # If no newline character is found, assume the end of the string
+        end_of_line = len(text)
+    return end_of_line
+
+
+def complete_summary_file(root, file_text, summary_dir):
     # Read the existing content of the file
-    with open(expanded_summary_path, "r") as file:
+    with open(summary_dir, "r") as file:
         file_content = file.read()
 
-    snippet_name = snippet_name_to_summary(root, file_text)
+    content, snippet_name = snippet_name_to_summary(root, file_text)
+
 
     name_without_tab = snippet_name.strip()
 
     if not name_without_tab in file_content:
-        text = "* [Snippets](inspiration/snippets/README.md)"
+        sections = file_content.split("##")
+
+        text = f"* [Snippets]({destination_snippets_path}/README.md)"
+
+        index, found_section = find_section_containing_text(sections, text)
 
         # Find the position where you want to insert the new text
-        insertion_point = file_content.find(text)
+        insertion_point = found_section.rfind(destination_snippets_path)
 
         if insertion_point != -1:
-            # Find the end of the line where insertion_point is found
-            end_of_line = file_content.find('\n', insertion_point)
+            end_of_line_index = find_end_of_line(found_section, insertion_point)
+            spaces = " " * add_blank_spaces(summary_dir)
 
-            # If the end_of_line is found, insert the new text after it
-            if end_of_line != -1:
-                modified_content = (
-                        file_content[:end_of_line + 1]
-                        + " " * add_blank_spaces()
-                        + snippet_name
-                        + "\n"
-                        + file_content[end_of_line + 1:]
-                )
+            if content != "":
+                # Split the Kotlin string into lines
+                lines = content.split('\n')
 
-                # Write the modified content back to the file
-                with open(expanded_summary_path, "w") as file:
-                    file.write(modified_content)
+                # Add "&&&" prefix to each line
+                prefixed_lines = [spaces + line for line in lines]
+
+                # Join the modified lines back into a single string
+                modified_content = '\n'.join(prefixed_lines)
+            else:
+                modified_content = content
+
+            modified_section = (
+                    found_section[:end_of_line_index]
+                    + "\n"
+                    + modified_content
+                    + " " * add_blank_spaces(summary_dir)
+                    + snippet_name
+                    + found_section[end_of_line_index:]
+            )
+
+            sections[index] = modified_section
+
+            modified_content = "##".join(sections)
+
+            # Write the modified content back to the file
+            with open(summary_dir, "w") as file:
+                file.write(modified_content)
 
 
-def copy_content(expanded_source_directory, expanded_destination_directory):
+def copy_content(expanded_source_directory, expanded_destination_directory, summary_dir):
     # Iterate through all .md and .kt files in the source folder and copy them content
     for root, dirs, files in os.walk(expanded_source_directory):
         for filename_md in files:
@@ -315,7 +352,7 @@ def copy_content(expanded_source_directory, expanded_destination_directory):
                             else:
                                 path = expanded_destination_directory + directory + "/"
 
-                            destination_path = construct_destination_path(path, filename_md)
+                            destination_path = os.path.join(path, filename_md)
 
                             md_content = read_file(md_path)
 
@@ -332,7 +369,7 @@ def copy_content(expanded_source_directory, expanded_destination_directory):
 
                             write_file(path, destination_path, content)
 
-                            complete_summary_file(get_helper_root(destination_path), content)
+                            complete_summary_file(get_helper_root(destination_path), content, summary_dir)
                         except Exception as e:
                             print(f"Error copying content: {e}")
 
@@ -349,19 +386,95 @@ def create_and_merge_pr():
     # os.system("gh pr merge --merge --delete-branch")
 
 
+def get_project_root():
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(script_dir)
+    return project_root
+
+
+def create_temp_directory():
+    return tempfile.mkdtemp()
+
+
+def clone_git_repository(repository, temp_dir):
+    subprocess.run(["gh", "repo", "clone", repository, temp_dir])
+
+
+def fetch_remote_branches(temp_dir):
+    subprocess.run(["git", "fetch"], cwd=temp_dir)
+
+
+def create_or_checkout_git_branch(branch, temp_dir):
+    try:
+        result = subprocess.run(["git", "rev-parse", "--verify", branch], cwd=temp_dir, stderr=subprocess.PIPE)
+
+        if result.returncode != 0:
+            create_branch_result = subprocess.run(["git", "checkout", "-b", branch], cwd=temp_dir,
+                                                  stderr=subprocess.PIPE)
+            if create_branch_result.returncode != 0:
+                print(f"Error creating branch '{branch}': {create_branch_result.stderr.decode().strip()}")
+                return False
+        else:
+            checkout_result = subprocess.run(["git", "checkout", branch], cwd=temp_dir, stderr=subprocess.PIPE)
+            if checkout_result.returncode != 0:
+                print(f"Error checking out branch '{branch}': {checkout_result.stderr.decode().strip()}")
+                return False
+        return True
+    except subprocess.CalledProcessError as e:
+        print(f"Error running Git command: {e}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    return False
+
+
+def cleanup_temp_directory(temp_dir):
+    shutil.rmtree(temp_dir, ignore_errors=True)
+
+
+def main(branch):
+    try:
+        # Take a source directory
+        project_root = get_project_root()
+        source_snippets_directory = os.path.expanduser(project_root + "/lib/src/snippet/kotlin/com/lemonappdev/konsist")
+
+        # Create a temporary directory
+        temp_dir = create_temp_directory()
+
+        # Clone the Git repository into the temporary directory
+        clone_git_repository(repository_address, temp_dir)
+
+        # Fetch remote branches
+        fetch_remote_branches(temp_dir)
+
+        if not create_or_checkout_git_branch(branch, temp_dir):
+            return None
+
+        destination_snippets_directory = os.path.expanduser(temp_dir + "/inspiration/snippets")
+        summary_path = temp_dir + "/SUMMARY.md"
+
+        os.chdir(destination_snippets_directory)
+
+        remove_files_recursively_except_readme(destination_snippets_directory)
+
+        copy_content(source_snippets_directory, destination_snippets_directory, summary_path)
+
+        os.chdir(temp_dir)
+
+        push_changes()
+
+        create_and_merge_pr()
+
+        return temp_dir
+    except subprocess.CalledProcessError as e:
+        print(f"Error running Git command: {e}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    finally:
+        # Cleanup: Remove the temporary directory
+        cleanup_temp_directory(temp_dir)
+
+
 # Script ===============================================================================================================
+branch_name = get_current_date() + "-update-snippet-code"
 
-# Change the current working directory
-os.chdir(expanded_destination_directory)
-
-create_git_branch()
-
-remove_files_recursively_except_readme(expanded_destination_directory)
-
-copy_content(expanded_source_directory, expanded_destination_directory)
-
-# Commit and push changes
-push_changes()
-
-# Create and merge a pull request
-create_and_merge_pr()
+main(branch_name)
