@@ -212,10 +212,20 @@ def snippet_name_to_summary(root, file_text):
         helper_root = root.split(destination_snippets_path)[1]
 
         # add blank spaces
-        num = number_of_packages(root) * 2
+        content = ""
+        packages = helper_root.split("/")
+
+        packages_num = number_of_packages(root)
+        num = packages_num * 2
         blank_space = " "
 
-        return blank_space * num + first_line + f"({destination_snippets_path}" + helper_root + ")"
+        if len(packages) > 2:
+            for index, text in enumerate(packages):
+                content = blank_space * (num + index - 2) + "* [" + packages[index-1] + "]" + f"({destination_snippets_path}" + "/".join(packages[:index]) + ")" + "\n"
+
+            num = num + (len(packages) % 2) + 1
+
+        return content + blank_space * num + first_line + f"({destination_snippets_path}" + helper_root + ")"
 
     except Exception as e:
         print(f"An error occurred: {e}")
