@@ -15,7 +15,7 @@ class SampleKonsistTest : FreeSpec({
         useCases.assertTrue(testName = this.testCase.name.testName) { it.hasTestClass() }
     }
 
-    "use case should reside in ..domain.usecase.. packag" {
+    "use case should reside in ..domain.usecase.. package" {
         useCases.assertTrue(testName = this.testCase.name.testName) { it.resideInPackage("..domain.usecase..") }
     }
 })
