@@ -57,7 +57,7 @@ internal interface KoParentProviderCore :
                     null
                 }
 
-                classFromFile ?: interfaceFromFile ?: parentFromProject?: KoParentDeclarationCore.getInstance(it, this)
+                classFromFile ?: interfaceFromFile ?: parentFromProject ?: KoParentDeclarationCore.getInstance(it, this)
             }
             ?: emptyList()
 

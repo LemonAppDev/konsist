@@ -1,9 +1,9 @@
+@file:Suppress("detekt.TooManyFunctions")
+
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
-import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentInterfaceProvider
-import com.lemonappdev.konsist.api.provider.KoParentProvider
 import kotlin.reflect.KClass
 
 /**
@@ -106,7 +106,9 @@ fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfaces(predicate: (
  * @param predicate A function that defines the condition to be met by all parent interface declarations.
  * @return A list containing declarations that have at least one parent interface not satisfying the provided predicate.
  */
-fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfaces(predicate: (KoInterfaceDeclaration) -> Boolean): List<T> = filterNot {
+fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfaces(
+    predicate: (KoInterfaceDeclaration) -> Boolean,
+): List<T> = filterNot {
     it.hasAllParentInterfaces(predicate)
 }
 

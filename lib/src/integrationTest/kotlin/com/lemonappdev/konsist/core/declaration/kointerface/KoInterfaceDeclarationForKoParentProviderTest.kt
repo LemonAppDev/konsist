@@ -47,7 +47,7 @@ class KoInterfaceDeclarationForKoParentProviderTest {
                 "SampleParentInterface1",
                 "SampleParentInterface2",
                 "UnknownParent1",
-                "UnknownParent2"
+                "UnknownParent2",
             )
             numParents shouldBeEqualTo 4
             countParents { it.name == "SampleParentInterface1" } shouldBeEqualTo 1

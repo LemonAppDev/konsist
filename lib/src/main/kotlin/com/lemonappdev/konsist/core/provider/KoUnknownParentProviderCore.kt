@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoUnknownParentProvider
-import kotlin.reflect.KClass
 
 internal interface KoUnknownParentProviderCore :
     KoUnknownParentProvider,

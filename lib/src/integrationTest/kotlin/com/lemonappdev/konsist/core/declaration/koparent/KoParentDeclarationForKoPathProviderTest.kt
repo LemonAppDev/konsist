@@ -35,7 +35,7 @@ class KoParentDeclarationForKoPathProviderTest {
             .projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koparent/snippet/" +
-                        "forkopathprovider/parent-from-file-of-class-project-file-path.kt",
+                    "forkopathprovider/parent-from-file-of-class-project-file-path.kt",
             )
     }
 
@@ -101,7 +101,7 @@ class KoParentDeclarationForKoPathProviderTest {
             .projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koparent/snippet/" +
-                        "forkopathprovider/parent-from-file-of-interface-project-file-path.kt",
+                    "forkopathprovider/parent-from-file-of-interface-project-file-path.kt",
             )
     }
 
@@ -167,7 +167,7 @@ class KoParentDeclarationForKoPathProviderTest {
             .projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koparent/snippet/" +
-                        "forkopathprovider/parent-from-file-of-object-project-file-path.kt",
+                    "forkopathprovider/parent-from-file-of-object-project-file-path.kt",
             )
     }
 
@@ -422,7 +422,7 @@ class KoParentDeclarationForKoPathProviderTest {
             .projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koparent/snippet/" +
-                        "forkopathprovider/external-parent-of-class-project-file-path.kt",
+                    "forkopathprovider/external-parent-of-class-project-file-path.kt",
             )
     }
 
@@ -488,7 +488,7 @@ class KoParentDeclarationForKoPathProviderTest {
             .projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koparent/snippet/" +
-                        "forkopathprovider/external-parent-of-interface-project-file-path.kt",
+                    "forkopathprovider/external-parent-of-interface-project-file-path.kt",
             )
     }
 
@@ -554,7 +554,7 @@ class KoParentDeclarationForKoPathProviderTest {
             .projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koparent/snippet/" +
-                        "forkopathprovider/external-parent-of-object-project-file-path.kt",
+                    "forkopathprovider/external-parent-of-object-project-file-path.kt",
             )
     }
 
