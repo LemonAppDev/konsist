@@ -1,0 +1,3 @@
+import com.externalpackage.SampleExternalParent
+
+class SampleClass(sampleProperty: SampleExternalParent) : SampleExternalParent by sampleProperty
