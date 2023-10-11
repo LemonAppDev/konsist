@@ -10,4 +10,4 @@ konsist = "com.lemonappdev:konsist:+"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
-testLogger = "com.adarshr.test-logger:3.2.0"
+testLogger = "com.adarshr.test-logger:4.0.0"

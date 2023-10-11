@@ -19,5 +19,5 @@ kotlin-plugin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref 
 kotlin-plugin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlinVersion" }
 dokka = "org.jetbrains.dokka:1.9.0"
 spotless = "com.diffplug.spotless:6.21.0"
-testLogger = "com.adarshr.test-logger:3.2.0"
+testLogger = "com.adarshr.test-logger:4.0.0"
 detekt = "io.gitlab.arturbosch.detekt:1.23.1"
