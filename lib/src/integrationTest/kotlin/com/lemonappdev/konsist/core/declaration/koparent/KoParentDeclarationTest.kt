@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test
 
 class KoParentDeclarationTest {
     @Test
-    fun `parent-of-class-to-string`() {
+    fun `parent-from-file-of-class-to-string`() {
         // given
-        val sut = getSnippetFile("parent-of-class-to-string")
+        val sut = getSnippetFile("parent-from-file-of-class-to-string")
             .classes()
             .parents
             .first()
@@ -19,9 +19,9 @@ class KoParentDeclarationTest {
     }
 
     @Test
-    fun `parent-of-interface-to-string`() {
+    fun `parent-from-file-of-interface-to-string`() {
         // given
-        val sut = getSnippetFile("parent-of-interface-to-string")
+        val sut = getSnippetFile("parent-from-file-of-interface-to-string")
             .interfaces()
             .parents
             .first()
@@ -31,15 +31,87 @@ class KoParentDeclarationTest {
     }
 
     @Test
-    fun `parent-of-object-to-string`() {
+    fun `parent-from-file-of-object-to-string`() {
         // given
-        val sut = getSnippetFile("parent-of-object-to-string")
+        val sut = getSnippetFile("parent-from-file-of-object-to-string")
             .objects()
             .parents
             .first()
 
         // then
         sut.toString() shouldBeEqualTo "SampleParentClass"
+    }
+
+    @Test
+    fun `parent-from-import-of-class-to-string`() {
+        // given
+        val sut = getSnippetFile("parent-from-import-of-class-to-string")
+            .classes()
+            .parents
+            .first()
+
+        // then
+        sut.toString() shouldBeEqualTo "SampleParentClass"
+    }
+
+    @Test
+    fun `parent-from-import-of-interface-to-string`() {
+        // given
+        val sut = getSnippetFile("parent-from-import-of-interface-to-string")
+            .interfaces()
+            .parents
+            .first()
+
+        // then
+        sut.toString() shouldBeEqualTo "SampleParentInterface"
+    }
+
+    @Test
+    fun `parent-from-import-of-object-to-string`() {
+        // given
+        val sut = getSnippetFile("parent-from-import-of-object-to-string")
+            .objects()
+            .parents
+            .first()
+
+        // then
+        sut.toString() shouldBeEqualTo "SampleParentClass"
+    }
+
+    @Test
+    fun `external-parent-of-class-to-string`() {
+        // given
+        val sut = getSnippetFile("external-parent-of-class-to-string")
+            .classes()
+            .parents
+            .first()
+
+        // then
+        sut.toString() shouldBeEqualTo "ExternalParent"
+    }
+
+    @Test
+    fun `external-parent-of-interface-to-string`() {
+        // given
+        val sut = getSnippetFile("external-parent-of-interface-to-string")
+            .interfaces()
+            .parents
+            .first()
+
+        // then
+        sut.toString() shouldBeEqualTo "ExternalParent"
+    }
+
+    @Test
+    fun `external-parent-of-object-to-string`() {
+        // given
+        val sut = getSnippetFile("external-parent-of-object-to-string")
+            .objects()
+            .parents
+            .first()
+
+        // then
+        sut.toString() shouldBeEqualTo "ExternalParent"
     }
 
     private fun getSnippetFile(fileName: String) =

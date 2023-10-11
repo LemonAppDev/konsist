@@ -1,0 +1,3 @@
+import com.externalimport.ExternalParent
+
+interface SampleInterface: ExternalParent

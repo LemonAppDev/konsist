@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test
 
 class KoParentDeclarationForKoContainingFileProviderTest {
     @Test
-    fun `parent-of-class-containing-file`() {
+    fun `parent-from-file-of-class-containing-file`() {
         // given
-        val sut = getSnippetFile("parent-of-class-containing-file")
+        val sut = getSnippetFile("parent-from-file-of-class-containing-file")
             .classes()
             .parents
             .first()
@@ -23,9 +23,9 @@ class KoParentDeclarationForKoContainingFileProviderTest {
     }
 
     @Test
-    fun `parent-of-interface-containing-file`() {
+    fun `parent-from-file-of-interface-containing-file`() {
         // given
-        val sut = getSnippetFile("parent-of-interface-containing-file")
+        val sut = getSnippetFile("parent-from-file-of-interface-containing-file")
             .interfaces()
             .parents
             .first()
@@ -39,9 +39,105 @@ class KoParentDeclarationForKoContainingFileProviderTest {
     }
 
     @Test
-    fun `parent-of-object-containing-file`() {
+    fun `parent-from-file-of-object-containing-file`() {
         // given
-        val sut = getSnippetFile("parent-of-object-containing-file")
+        val sut = getSnippetFile("parent-from-file-of-object-containing-file")
+            .objects()
+            .parents
+            .first()
+
+        // then
+        sut
+            .containingFile
+            .nameWithExtension
+            .endsWith("file.kt")
+            .shouldBeEqualTo(true)
+    }
+
+    @Test
+    fun `parent-from-import-of-class-containing-file`() {
+        // given
+        val sut = getSnippetFile("parent-from-import-of-class-containing-file")
+            .classes()
+            .parents
+            .first()
+
+        // then
+        sut
+            .containingFile
+            .nameWithExtension
+            .endsWith("TestData.kt")
+            .shouldBeEqualTo(true)
+    }
+
+    @Test
+    fun `parent-from-import-of-interface-containing-file`() {
+        // given
+        val sut = getSnippetFile("parent-from-import-of-interface-containing-file")
+            .interfaces()
+            .parents
+            .first()
+
+        // then
+        sut
+            .containingFile
+            .nameWithExtension
+            .endsWith("TestData.kt")
+            .shouldBeEqualTo(true)
+    }
+
+    @Test
+    fun `parent-from-import-of-object-containing-file`() {
+        // given
+        val sut = getSnippetFile("parent-from-import-of-object-containing-file")
+            .objects()
+            .parents
+            .first()
+
+        // then
+        sut
+            .containingFile
+            .nameWithExtension
+            .endsWith("TestData.kt")
+            .shouldBeEqualTo(true)
+    }
+
+    @Test
+    fun `external-parent-of-class-containing-file`() {
+        // given
+        val sut = getSnippetFile("external-parent-of-class-containing-file")
+            .classes()
+            .parents
+            .first()
+
+        // then
+        sut
+            .containingFile
+            .nameWithExtension
+            .endsWith("file.kt")
+            .shouldBeEqualTo(true)
+    }
+
+    @Test
+    fun `external-parent-of-interface-containing-file`() {
+        // given
+        val sut = getSnippetFile("external-parent-of-interface-containing-file")
+            .interfaces()
+            .parents
+            .first()
+
+        // then
+        sut
+            .containingFile
+            .nameWithExtension
+            .endsWith("file.kt")
+            .shouldBeEqualTo(true)
+    }
+
+    @Test
+    fun `external-parent-of-object-containing-file`() {
+        // given
+        val sut = getSnippetFile("external-parent-of-object-containing-file")
             .objects()
             .parents
             .first()
