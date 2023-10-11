@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentInterfaceProvider
+import kotlin.reflect.KClass
 
 internal interface KoParentInterfaceProviderCore :
     KoParentInterfaceProvider,
@@ -45,4 +46,14 @@ internal interface KoParentInterfaceProviderCore :
     override fun hasParentInterface(predicate: (KoInterfaceDeclaration) -> Boolean): Boolean = parentInterfaces.any(predicate)
 
     override fun hasAllParentInterfaces(predicate: (KoInterfaceDeclaration) -> Boolean): Boolean = parentInterfaces.all(predicate)
+
+    override fun hasParentInterfaceOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
+        checkIfParentInterfaceOf(name) || names.any { checkIfParentInterfaceOf(it) }
+
+    override fun hasAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
+        checkIfParentInterfaceOf(name) && names.all { checkIfParentInterfaceOf(it) }
+
+    private fun checkIfParentInterfaceOf(kClass: KClass<*>): Boolean = parentInterfaces.any { parent ->
+        parent.name == kClass.simpleName || parent.fullyQualifiedName == kClass.qualifiedName
+    }
 }

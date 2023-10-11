@@ -21,8 +21,8 @@ interface KoParentProvider : KoBaseProvider {
     /**
      * Gets the number of parents that satisfies the specified predicate present in the declaration.
      *
-     * @param predicate The predicate function to determine if an parent satisfies a condition.
-     * @return The number of parents in the declaration.
+     * @param predicate The predicate function to determine if a parent satisfies a condition.
+     * @return The number of parents in the declaration satisfying predicate.
      */
     fun countParents(predicate: (KoParentDeclaration) -> Boolean): Int
 
