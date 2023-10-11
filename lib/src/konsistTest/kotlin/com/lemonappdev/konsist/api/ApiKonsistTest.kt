@@ -126,7 +126,7 @@ class ApiKonsistTest {
 
         val hasKoNameProvider = declarations
             .firstOrNull { declaration -> declaration.name == declarationName }
-            ?.hasParentWithName("KoNameProvider") ?: false
+            ?.hasParentInterfaceWithName("KoNameProvider") ?: false
 
         return if (isExtension) {
             checkForExtensions(declarationName, singularName, pluralName, hasKoNameProvider)
