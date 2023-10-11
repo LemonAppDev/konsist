@@ -10,7 +10,7 @@ class SampleClass2
 
 open class SampleClassWithParameter(val param: String)
 
-open class SampleGenericClassWithParameter<T>(param: String)
+open class SampleGenericClassWithParameter<T>(val param: String)
 
 open class SampleCollection1<out E> : Collection<E> {
     override val size: Int = 1

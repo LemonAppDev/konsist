@@ -519,7 +519,6 @@ class KoParentDeclarationForKoNameProviderTest {
             .shouldBeEqualTo("SampleClassWithParameter")
     }
 
-
     @Test
     fun `object-with-external-parent-class`() {
         // given
@@ -610,4 +609,3 @@ class KoParentDeclarationForKoNameProviderTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/koparent/snippet/forkonameprovider/", fileName)
 }
-

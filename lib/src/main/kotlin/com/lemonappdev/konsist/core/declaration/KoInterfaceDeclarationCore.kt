@@ -12,6 +12,7 @@ import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoExternalParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
@@ -28,7 +29,6 @@ import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
-import com.lemonappdev.konsist.core.provider.KoExternalParentProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoActualModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoExpectModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoFunModifierProviderCore
