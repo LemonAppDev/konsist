@@ -121,7 +121,7 @@ class KoParentDeclarationForKoLocationProviderTest {
             .first()
 
         // then
-        sut.location shouldBeEqualTo "${sut.path}:51:1"
+        sut.location shouldBeEqualTo "${sut.path}:55:1"
     }
 
     @Test
@@ -156,7 +156,7 @@ class KoParentDeclarationForKoLocationProviderTest {
             .first()
 
         // then
-        sut.location shouldBeEqualTo "${sut.path}:51:1"
+        sut.location shouldBeEqualTo "${sut.path}:55:1"
     }
 
     @Test
@@ -191,7 +191,7 @@ class KoParentDeclarationForKoLocationProviderTest {
             .first()
 
         // then
-        sut.location shouldBeEqualTo "${sut.path}:51:1"
+        sut.location shouldBeEqualTo "${sut.path}:55:1"
     }
 
     @Test

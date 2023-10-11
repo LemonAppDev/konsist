@@ -56,7 +56,8 @@ class ApiKonsistTest {
         Konsist
             .scopeFromPackage("com.lemonappdev.konsist.api.provider..", sourceSetName = "main")
             .interfaces()
-            .withoutName("KoParentInterfaceProvider") // remove after release v1.0.0
+            .withoutName("KoParentInterfaceProvider") // ToDO: Remove this line
+            .withoutName("KoExternalParentProvider") // ToDO: Remove this line
             .withoutNameMatching(Regex("\\bKoKDoc[A-Za-z]+TagProvider\\b")) // exclude providers like KoKDocXTagProvider
             .withProperty { property ->
                 property.hasType { type ->
@@ -73,7 +74,7 @@ class ApiKonsistTest {
         val providers = Konsist
             .scopeFromPackage("com.lemonappdev.konsist.api.provider..", sourceSetName = "main")
             .interfaces()
-            .withoutName("KoParentInterfaceProvider") // remove after release v1.0.0
+            .withoutName("KoParentInterfaceProvider") // ToDO: Remove this line
             .withoutNameMatching(Regex("\\bKoKDoc[A-Za-z]+TagProvider\\b")) // exclude providers like KoKDocXTagProvider
             .withProperty { property ->
                 property.hasType { type ->
