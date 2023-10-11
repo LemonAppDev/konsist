@@ -35,9 +35,9 @@ class KoInterfaceDeclarationForKoParentProviderTest {
     }
 
     @Test
-    fun `interface-has-known-and-unknown-parents`() {
+    fun `interface-has-internal-and-external-parents`() {
         // given
-        val sut = getSnippetFile("interface-has-known-and-unknown-parents")
+        val sut = getSnippetFile("interface-has-internal-and-external-parents")
             .interfaces()
             .first()
 
@@ -46,19 +46,19 @@ class KoInterfaceDeclarationForKoParentProviderTest {
             parents.map { it.name } shouldBeEqualTo listOf(
                 "SampleParentInterface1",
                 "SampleParentInterface2",
-                "UnknownParent1",
-                "UnknownParent2",
+                "ExternalParent1",
+                "ExternalParent2",
             )
             numParents shouldBeEqualTo 4
             countParents { it.name == "SampleParentInterface1" } shouldBeEqualTo 1
-            countParents { it.hasNameStartingWith("Unknown") } shouldBeEqualTo 2
+            countParents { it.hasNameStartingWith("External") } shouldBeEqualTo 2
             hasParents() shouldBeEqualTo true
             hasParentWithName("SampleParentInterface1") shouldBeEqualTo true
             hasParentWithName("OtherInterface") shouldBeEqualTo false
             hasParentWithName("SampleParentInterface1", "OtherInterface") shouldBeEqualTo true
             hasParentsWithAllNames("SampleParentInterface1") shouldBeEqualTo true
             hasParentsWithAllNames("OtherInterface") shouldBeEqualTo false
-            hasParentsWithAllNames("SampleParentInterface1", "UnknownParent1") shouldBeEqualTo true
+            hasParentsWithAllNames("SampleParentInterface1", "ExternalParent1") shouldBeEqualTo true
             hasParentsWithAllNames("SampleParentInterface1", "OtherInterface") shouldBeEqualTo false
             hasParent { it.name == "SampleParentInterface1" } shouldBeEqualTo true
             hasParent { it.name == "OtherInterface" } shouldBeEqualTo false

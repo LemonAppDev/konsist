@@ -24,7 +24,7 @@ class KoObjectDeclarationForKoExternalParentProviderTest {
             .first()
 
         // then
-        sut.externalParents.map { it.name } shouldBeEqualTo listOf("UnknownParent1", "UnknownParent2")
+        sut.externalParents.map { it.name } shouldBeEqualTo listOf("ExternalParent1", "ExternalParent2")
     }
 
     @Test
@@ -35,7 +35,7 @@ class KoObjectDeclarationForKoExternalParentProviderTest {
             .first()
 
         // then
-        sut.externalParents.map { it.name } shouldBeEqualTo listOf("UnknownParent1", "UnknownParent2")
+        sut.externalParents.map { it.name } shouldBeEqualTo listOf("ExternalParent1", "ExternalParent2")
     }
 
     private fun getSnippetFile(fileName: String) =

@@ -1,2 +1,2 @@
 import com.externalimport.ExternalParent
-class SampleClass: UnknownParent
+class SampleClass: ExternalParent

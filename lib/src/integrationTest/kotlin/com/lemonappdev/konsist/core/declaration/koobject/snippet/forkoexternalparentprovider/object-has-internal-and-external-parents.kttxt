@@ -1,7 +1,7 @@
-import com.unknownimport.UnknownParent1
-import com.unknownimport.UnknownParent2
+import com.externalimport.ExternalParent1
+import com.externalimport.ExternalParent2
 
-object SampleObject : SampleParentClass(), SampleParentInterface1, UnknownParent1, UnknownParent2
+object SampleObject : SampleParentClass(), SampleParentInterface1, ExternalParent1, ExternalParent2
 
 open class SampleParentClass
 
