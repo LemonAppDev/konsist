@@ -25,8 +25,11 @@ internal interface KoParentClassProviderCore :
     @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasParents()"))
     override fun hasParentClass(name: String): Boolean = parentClass?.name == name
 
-    override fun hasParentClassOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
-        checkIfParentClassOf(name) || names.any { checkIfParentClassOf(it) }
+    override fun hasParentClassOf(name: KClass<*>, vararg names: KClass<*>): Boolean {
+        val givenNames = names.toList() + name
+
+        return givenNames.any { checkIfParentClassOf(it) }
+    }
 
     private fun checkIfParentClassOf(kClass: KClass<*>): Boolean =
         parentClass?.name == kClass.simpleName || parentClass?.fullyQualifiedName == kClass.qualifiedName
