@@ -8,33 +8,33 @@ import org.junit.jupiter.api.Test
 
 class KoParentDeclarationForKoLocationProviderTest {
     @Test
-    fun `parent-of-class-location`() {
+    fun `parent-from-file-of-class-location`() {
         // given
-        val sut = getSnippetFile("parent-of-class-location")
+        val sut = getSnippetFile("parent-from-file-of-class-location")
             .classes()
             .parents
             .first()
 
         // then
-        sut.location shouldBeEqualTo "${sut.path}:3:23"
+        sut.location shouldBeEqualTo "${sut.path}:1:1"
     }
 
     @Test
-    fun `parent-of-class-location-with-text`() {
+    fun `parent-from-file-of-class-location-with-text`() {
         // given
-        val projectPath = getSnippetFile("parent-of-class-location-with-text")
+        val projectPath = getSnippetFile("parent-from-file-of-class-location-with-text")
             .classes()
             .parents
             .first()
             .projectPath
 
-        val sut = getSnippetFile("parent-of-class-location-with-text")
+        val sut = getSnippetFile("parent-from-file-of-class-location-with-text")
             .classes()
             .parents
             .first()
 
         // then
-        val declaration = "Declaration:\nSampleSuperInterface"
+        val declaration = "interface SampleSuperInterface"
         assertSoftly(sut.locationWithText) {
             startsWith("Location: /") shouldBeEqualTo true
             contains(projectPath) shouldBeEqualTo true
@@ -43,33 +43,33 @@ class KoParentDeclarationForKoLocationProviderTest {
     }
 
     @Test
-    fun `parent-of-interface-location`() {
+    fun `parent-from-file-of-interface-location`() {
         // given
-        val sut = getSnippetFile("parent-of-interface-location")
+        val sut = getSnippetFile("parent-from-file-of-interface-location")
             .interfaces()
             .parents
             .first()
 
         // then
-        sut.location shouldBeEqualTo "${sut.path}:1:29"
+        sut.location shouldBeEqualTo "${sut.path}:3:1"
     }
 
     @Test
-    fun `parent-of-interface-location-with-text`() {
+    fun `parent-from-file-of-interface-location-with-text`() {
         // given
-        val projectPath = getSnippetFile("parent-of-interface-location-with-text")
+        val projectPath = getSnippetFile("parent-from-file-of-interface-location-with-text")
             .interfaces()
             .parents
             .first()
             .projectPath
 
-        val sut = getSnippetFile("parent-of-interface-location-with-text")
+        val sut = getSnippetFile("parent-from-file-of-interface-location-with-text")
             .interfaces()
             .parents
             .first()
 
         // then
-        val declaration = "Declaration:\nSampleSuperInterface"
+        val declaration = "interface SampleSuperInterface"
         assertSoftly(sut.locationWithText) {
             startsWith("Location: /") shouldBeEqualTo true
             contains(projectPath) shouldBeEqualTo true
@@ -78,9 +78,219 @@ class KoParentDeclarationForKoLocationProviderTest {
     }
 
     @Test
-    fun `parent-of-object-location`() {
+    fun `parent-from-file-of-object-location`() {
         // given
-        val sut = getSnippetFile("parent-of-object-location")
+        val sut = getSnippetFile("parent-from-file-of-object-location")
+            .objects()
+            .parents
+            .first()
+
+        // then
+        sut.location shouldBeEqualTo "${sut.path}:1:1"
+    }
+
+    @Test
+    fun `parent-from-file-of-object-location-with-text`() {
+        // given
+        val projectPath = getSnippetFile("parent-from-file-of-object-location-with-text")
+            .objects()
+            .parents
+            .first()
+            .projectPath
+
+        val sut = getSnippetFile("parent-from-file-of-object-location-with-text")
+            .objects()
+            .parents
+            .first()
+
+        // then
+        val declaration = "interface SampleSuperInterface"
+        assertSoftly(sut.locationWithText) {
+            startsWith("Location: /") shouldBeEqualTo true
+            contains(projectPath) shouldBeEqualTo true
+            endsWith(declaration) shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `parent-from-import-of-class-location`() {
+        // given
+        val sut = getSnippetFile("parent-from-import-of-class-location")
+            .classes()
+            .parents
+            .first()
+
+        // then
+        sut.location shouldBeEqualTo "${sut.path}:51:1"
+    }
+
+    @Test
+    fun `parent-from-import-of-class-location-with-text`() {
+        // given
+        val projectPath = getSnippetFile("parent-from-import-of-class-location-with-text")
+            .classes()
+            .parents
+            .first()
+            .projectPath
+
+        val sut = getSnippetFile("parent-from-import-of-class-location-with-text")
+            .classes()
+            .parents
+            .first()
+
+        // then
+        val declaration = "interface SampleParentInterface"
+        assertSoftly(sut.locationWithText) {
+            startsWith("Location: /") shouldBeEqualTo true
+            contains(projectPath) shouldBeEqualTo true
+            endsWith(declaration) shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `parent-from-import-of-interface-location`() {
+        // given
+        val sut = getSnippetFile("parent-from-import-of-interface-location")
+            .interfaces()
+            .parents
+            .first()
+
+        // then
+        sut.location shouldBeEqualTo "${sut.path}:51:1"
+    }
+
+    @Test
+    fun `parent-from-import-of-interface-location-with-text`() {
+        // given
+        val projectPath = getSnippetFile("parent-from-import-of-interface-location-with-text")
+            .interfaces()
+            .parents
+            .first()
+            .projectPath
+
+        val sut = getSnippetFile("parent-from-import-of-interface-location-with-text")
+            .interfaces()
+            .parents
+            .first()
+
+        // then
+        val declaration = "interface SampleParentInterface"
+        assertSoftly(sut.locationWithText) {
+            startsWith("Location: /") shouldBeEqualTo true
+            contains(projectPath) shouldBeEqualTo true
+            endsWith(declaration) shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `parent-from-import-of-object-location`() {
+        // given
+        val sut = getSnippetFile("parent-from-import-of-object-location")
+            .objects()
+            .parents
+            .first()
+
+        // then
+        sut.location shouldBeEqualTo "${sut.path}:51:1"
+    }
+
+    @Test
+    fun `parent-from-import-of-object-location-with-text`() {
+        // given
+        val projectPath = getSnippetFile("parent-from-import-of-object-location-with-text")
+            .objects()
+            .parents
+            .first()
+            .projectPath
+
+        val sut = getSnippetFile("parent-from-import-of-object-location-with-text")
+            .objects()
+            .parents
+            .first()
+
+        // then
+        val declaration = "interface SampleParentInterface"
+        assertSoftly(sut.locationWithText) {
+            startsWith("Location: /") shouldBeEqualTo true
+            contains(projectPath) shouldBeEqualTo true
+            endsWith(declaration) shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `external-parent-of-class-location`() {
+        // given
+        val sut = getSnippetFile("external-parent-of-class-location")
+            .classes()
+            .parents
+            .first()
+
+        // then
+        sut.location shouldBeEqualTo "${sut.path}:3:20"
+    }
+
+    @Test
+    fun `external-parent-of-class-location-with-text`() {
+        // given
+        val projectPath = getSnippetFile("external-parent-of-class-location-with-text")
+            .classes()
+            .parents
+            .first()
+            .projectPath
+
+        val sut = getSnippetFile("external-parent-of-class-location-with-text")
+            .classes()
+            .parents
+            .first()
+
+        // then
+        val declaration = "Declaration:\nExternalParent"
+        assertSoftly(sut.locationWithText) {
+            startsWith("Location: /") shouldBeEqualTo true
+            contains(projectPath) shouldBeEqualTo true
+            endsWith(declaration) shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `external-parent-of-interface-location`() {
+        // given
+        val sut = getSnippetFile("external-parent-of-interface-location")
+            .interfaces()
+            .parents
+            .first()
+
+        // then
+        sut.location shouldBeEqualTo "${sut.path}:3:28"
+    }
+
+    @Test
+    fun `external-parent-of-interface-location-with-text`() {
+        // given
+        val projectPath = getSnippetFile("external-parent-of-interface-location-with-text")
+            .interfaces()
+            .parents
+            .first()
+            .projectPath
+
+        val sut = getSnippetFile("external-parent-of-interface-location-with-text")
+            .interfaces()
+            .parents
+            .first()
+
+        // then
+        val declaration = "Declaration:\nExternalParent"
+        assertSoftly(sut.locationWithText) {
+            startsWith("Location: /") shouldBeEqualTo true
+            contains(projectPath) shouldBeEqualTo true
+            endsWith(declaration) shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `external-parent-of-object-location`() {
+        // given
+        val sut = getSnippetFile("external-parent-of-object-location")
             .objects()
             .parents
             .first()
@@ -90,21 +300,21 @@ class KoParentDeclarationForKoLocationProviderTest {
     }
 
     @Test
-    fun `parent-of-object-location-with-text`() {
+    fun `external-parent-of-object-location-with-text`() {
         // given
-        val projectPath = getSnippetFile("parent-of-object-location-with-text")
+        val projectPath = getSnippetFile("external-parent-of-object-location-with-text")
             .objects()
             .parents
             .first()
             .projectPath
 
-        val sut = getSnippetFile("parent-of-object-location-with-text")
+        val sut = getSnippetFile("external-parent-of-object-location-with-text")
             .objects()
             .parents
             .first()
 
         // then
-        val declaration = "Declaration:\nSampleSuperInterface"
+        val declaration = "Declaration:\nExternalParent"
         assertSoftly(sut.locationWithText) {
             startsWith("Location: /") shouldBeEqualTo true
             contains(projectPath) shouldBeEqualTo true
