@@ -20,7 +20,7 @@ internal interface KoParentProviderCore :
             .getSuperTypeList()
             ?.children
             ?.filterIsInstance<KtSuperTypeListEntry>()
-            ?.mapNotNull {
+            ?.map {
 
                 val name = it
                     .text
@@ -54,10 +54,10 @@ internal interface KoParentProviderCore :
 
                     parentClass ?: parentInterface
                 } else {
-                    KoParentDeclarationCore.getInstance(it, this)
+                    null
                 }
 
-                classFromFile ?: interfaceFromFile ?: parentFromProject
+                classFromFile ?: interfaceFromFile ?: parentFromProject?: KoParentDeclarationCore.getInstance(it, this)
             }
             ?: emptyList()
 

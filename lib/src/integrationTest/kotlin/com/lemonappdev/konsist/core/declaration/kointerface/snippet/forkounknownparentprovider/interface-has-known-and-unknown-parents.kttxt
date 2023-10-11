@@ -1,0 +1,6 @@
+import com.unknownimport.UnknownParent1
+import com.unknownimport.UnknownParent2
+
+interface SampleInterface : SampleParentInterface1, UnknownParent1, UnknownParent2
+
+interface SampleParentInterface1

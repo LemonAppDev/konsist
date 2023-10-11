@@ -1,0 +1,4 @@
+import com.unknownimport.UnknownParent1
+import com.unknownimport.UnknownParent2
+
+object SampleObject : UnknownParent1, UnknownParent2

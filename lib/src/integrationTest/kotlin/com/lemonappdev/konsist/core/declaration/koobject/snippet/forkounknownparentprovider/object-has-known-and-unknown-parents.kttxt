@@ -1,0 +1,8 @@
+import com.unknownimport.UnknownParent1
+import com.unknownimport.UnknownParent2
+
+object SampleObject : SampleParentClass(), SampleParentInterface1, UnknownParent1, UnknownParent2
+
+open class SampleParentClass
+
+interface SampleParentInterface1
