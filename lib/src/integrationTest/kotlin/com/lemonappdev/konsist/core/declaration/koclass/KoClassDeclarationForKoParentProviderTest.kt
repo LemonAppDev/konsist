@@ -64,13 +64,11 @@ class KoClassDeclarationForKoParentProviderTest {
             hasAllParents { it.name == "SampleParentClass" } shouldBeEqualTo false
             hasAllParents { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
             hasAllParents { it.hasNameStartingWith("Other") } shouldBeEqualTo false
-
             hasParentOf(SampleParentClass::class) shouldBeEqualTo true
             hasParentOf(SampleParentClass::class, SampleInterface::class) shouldBeEqualTo true
             hasAllParentsOf(SampleParentClass::class) shouldBeEqualTo true
             hasAllParentsOf(SampleParentClass::class, SampleInterface::class) shouldBeEqualTo false
             hasAllParentsOf(SampleParentClass::class, SampleParentInterface1::class) shouldBeEqualTo true
-
             hasParents("SampleParentClass") shouldBeEqualTo true
             hasParents("OtherInterface") shouldBeEqualTo false
             hasParents("SampleParentClass", "SampleParentInterface1") shouldBeEqualTo true
