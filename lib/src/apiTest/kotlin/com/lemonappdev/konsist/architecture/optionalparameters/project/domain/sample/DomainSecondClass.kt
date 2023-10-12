@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain.sample
+package com.lemonappdev.konsist.architecture.optionalparameters.project.domain.sample
 
 import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass
 
