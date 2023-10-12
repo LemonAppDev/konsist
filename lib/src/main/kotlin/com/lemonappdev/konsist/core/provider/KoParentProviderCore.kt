@@ -1,10 +1,9 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.core.model.DataCore
 import com.lemonappdev.konsist.core.declaration.KoExternalParentDeclarationCore
-import com.lemonappdev.konsist.core.declaration.KoParentDeclarationCore
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 import kotlin.reflect.KClass
@@ -22,20 +21,28 @@ internal interface KoParentProviderCore :
             ?.children
             ?.filterIsInstance<KtSuperTypeListEntry>()
             ?.map {
-
                 val name = it
                     .text
                     .substringBefore(" ")
                     .substringBefore("(")
                     .substringBefore("<")
 
+
                 val classFromFile = containingFile
                     .classes()
                     .firstOrNull { decl -> decl.name == name }
 
+                if (classFromFile != null) {
+                    return@map classFromFile
+                }
+
                 val interfaceFromFile = containingFile
                     .interfaces()
                     .firstOrNull { decl -> decl.name == name }
+
+                if (interfaceFromFile != null) {
+                    return@map interfaceFromFile
+                }
 
                 val declarationFromImport =
                     containingFile
@@ -43,22 +50,17 @@ internal interface KoParentProviderCore :
                         .firstOrNull { import -> import.name.substringAfterLast(".") == name }
 
                 val parentFromProject = if (declarationFromImport != null) {
-                    val parentClass = Konsist
-                        .scopeFromProject()
-                        .classes()
+                    DataCore
+                        .classes
                         .firstOrNull { parent -> (parent.packagee?.fullyQualifiedName + "." + parent.name) == declarationFromImport.name }
-
-                    val parentInterface = Konsist
-                        .scopeFromProject()
-                        .interfaces()
-                        .firstOrNull { parent -> (parent.packagee?.fullyQualifiedName + "." + parent.name) == declarationFromImport.name }
-
-                    parentClass ?: parentInterface
+                        ?: DataCore
+                            .interfaces
+                            .firstOrNull { parent -> (parent.packagee?.fullyQualifiedName + "." + parent.name) == declarationFromImport.name }
                 } else {
                     null
                 }
 
-                classFromFile ?: interfaceFromFile ?: parentFromProject ?: KoExternalParentDeclarationCore( name ,it )
+                parentFromProject ?: KoExternalParentDeclarationCore(name, it)
             }
             ?: emptyList()
 
