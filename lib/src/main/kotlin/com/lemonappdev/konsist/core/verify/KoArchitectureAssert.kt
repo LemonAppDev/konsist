@@ -190,7 +190,7 @@ private fun getCheckFailedMessages(
 
             "${layer.name} $message\n$details"
         }
-    val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else ""
+    val customMessage = if (additionalMessage != null) "\n${additionalMessage}" else ""
 
     val name = testName ?: getTestMethodNameFromEightIndex()
 
