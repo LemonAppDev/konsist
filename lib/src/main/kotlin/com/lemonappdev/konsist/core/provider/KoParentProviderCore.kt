@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.provider
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.core.declaration.KoExternalParentDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoParentDeclarationCore
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
@@ -57,7 +58,7 @@ internal interface KoParentProviderCore :
                     null
                 }
 
-                classFromFile ?: interfaceFromFile ?: parentFromProject ?: KoParentDeclarationCore.getInstance(it, this)
+                classFromFile ?: interfaceFromFile ?: parentFromProject ?: KoExternalParentDeclarationCore( name ,it )
             }
             ?: emptyList()
 

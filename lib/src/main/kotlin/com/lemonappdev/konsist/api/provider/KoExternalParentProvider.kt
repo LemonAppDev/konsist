@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
+import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 
 /**
@@ -10,7 +11,7 @@ interface KoExternalParentProvider : KoBaseProvider {
      * The external parents of the declaration.
      * Does not include external parents defined in other files such as parent of the parent.
      */
-    val externalParents: List<KoParentDeclaration>
+    val externalParents: List<KoExternalParentDeclaration>
 
 //    /**
 //     * The number of external parents.
@@ -23,7 +24,7 @@ interface KoExternalParentProvider : KoBaseProvider {
 //     * @param predicate The predicate function to determine if a external parent satisfies a condition.
 //     * @return The number of external parents in the declaration satisfying predicate.
 //     */
-//    fun countExternalParents(predicate: (KoParentDeclaration) -> Boolean): Int
+//    fun countExternalParents(predicate: (KoExternalParentDeclaration) -> Boolean): Int
 //
 //    /**
 //     * Whatever declaration has any external parent defined directly in the Kotlin file.
@@ -63,7 +64,7 @@ interface KoExternalParentProvider : KoBaseProvider {
 //     * @param predicate A function that defines the condition to be met by a external parent.
 //     * @return `true` if there is a matching declaration, `false` otherwise.
 //     */
-//    fun hasExternalParent(predicate: (KoParentDeclaration) -> Boolean): Boolean
+//    fun hasExternalParent(predicate: (KoExternalParentDeclaration) -> Boolean): Boolean
 //
 //    /**
 //     * Determines whether the declaration has all external parents defined directly
@@ -77,7 +78,7 @@ interface KoExternalParentProvider : KoBaseProvider {
 //     * @param predicate A function that defines the condition to be met by external parents.
 //     * @return `true` if all external parents satisfy the predicate, `false` otherwise.
 //     */
-//    fun hasAllExternalParents(predicate: (KoParentDeclaration) -> Boolean): Boolean
+//    fun hasAllExternalParents(predicate: (KoExternalParentDeclaration) -> Boolean): Boolean
 //
 //    /**
 //     * Determines whether the declaration has at least one external parent of the specified `KClass` type.

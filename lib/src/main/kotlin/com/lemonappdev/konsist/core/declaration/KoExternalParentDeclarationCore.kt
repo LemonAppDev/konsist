@@ -1,5 +1,7 @@
-package com.lemonappdev.konsist.api.declaration
+package com.lemonappdev.konsist.core.declaration
 
+import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
+import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoClassProvider
@@ -46,52 +48,29 @@ import com.lemonappdev.konsist.api.provider.modifier.KoOpenModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoSealedModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoValueModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
+import com.lemonappdev.konsist.core.util.EndOfLine
+import org.jetbrains.kotlin.psi.KtClassOrObject
+import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-/**
- * Represents a Kotlin class declaration.
- */
-interface KoClassDeclaration :
-    KoParentDeclaration,
-    KoAnnotationProvider,
-    KoClassProvider,
-    KoEnumConstantProvider,
-    KoConstructorProvider,
-    KoContainingFileProvider,
-    KoDeclarationProvider,
-    KoFunctionProvider,
-    KoHasTestClassProvider,
-    KoHasTestProvider,
-    KoInitBlockProvider,
-    KoInterfaceProvider,
-    KoKDocProvider,
-    KoLocationProvider,
-    KoModifierProvider,
-    KoObjectProvider,
-    KoPackageProvider,
-    KoParentProvider,
-    KoParentClassProvider,
-    KoParentInterfaceProvider,
-    KoExternalParentProvider,
-    KoContainingDeclarationProvider,
-    KoPathProvider,
-    KoModuleProvider,
-    KoSourceSetProvider,
-    KoPrimaryConstructorProvider,
-    KoPropertyProvider,
-    KoRepresentsTypeProvider,
-    KoResideInPackageProvider,
-    KoSecondaryConstructorsProvider,
-    KoTextProvider,
-    KoTopLevelProvider,
-    KoVisibilityModifierProvider,
-    KoEnumModifierProvider,
-    KoSealedModifierProvider,
-    KoInnerModifierProvider,
-    KoValueModifierProvider,
-    KoAnnotationModifierProvider,
-    KoDataModifierProvider,
-    KoActualModifierProvider,
-    KoExpectModifierProvider,
-    KoAbstractModifierProvider,
-    KoOpenModifierProvider,
-    KoFinalModifierProvider
+internal class KoExternalParentDeclarationCore(name: String, private val ktSuperTypeListEntry: KtSuperTypeListEntry): KoExternalParentDeclaration, KoParentDeclarationCore {
+    override val ktElement: KtElement by lazy { ktSuperTypeListEntry }
+
+    override val name: String by lazy {
+        name
+            /**
+             * Replace everything after '<' and '(' characters with empty string e.g.
+             *
+             * Foo(param) -> Foo
+             * Foo<UiState> -> Foo
+             * Foo<UiState, Action> -> Foo
+             * Foo<UiState, Action>(Loading) -> Foo
+             */
+            .replace("\n", "")
+            .replace(Regex("<.*|\\(.*"), "")
+            .replace(EndOfLine.UNIX.value, " ")
+            .substringBefore(" by")
+    }
+
+    override fun toString(): String = name
+}

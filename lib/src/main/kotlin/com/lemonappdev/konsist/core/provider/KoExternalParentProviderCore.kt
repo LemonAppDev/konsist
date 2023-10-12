@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoExternalParentProvider
@@ -9,9 +10,9 @@ internal interface KoExternalParentProviderCore :
     KoExternalParentProvider,
     KoBaseProviderCore,
     KoParentProviderCore {
-    override val externalParents: List<KoParentDeclaration>
+    override val externalParents: List<KoExternalParentDeclaration>
         get() = parents
-            .filterNot { it is KoClassDeclaration || it is KoInterfaceDeclaration }
+            .filterIsInstance<KoExternalParentDeclaration>()
 
 //    override val numExternalParents: Int
 //        get() = externalParents.size
@@ -24,7 +25,7 @@ internal interface KoExternalParentProviderCore :
 //        }
 //    }
 //
-//    override fun countExternalParents(predicate: (KoParentDeclaration) -> Boolean): Int =
+//    override fun countExternalParents(predicate: (KoExternalParentDeclaration) -> Boolean): Int =
 //        externalParents.count { predicate(it) }
 //
 //    override fun hasExternalParents(): Boolean = externalParents.isNotEmpty()
@@ -45,9 +46,9 @@ internal interface KoExternalParentProviderCore :
 //        }
 //    }
 //
-//    override fun hasExternalParent(predicate: (KoParentDeclaration) -> Boolean): Boolean = externalParents.any(predicate)
+//    override fun hasExternalParent(predicate: (KoExternalParentDeclaration) -> Boolean): Boolean = externalParents.any(predicate)
 //
-//    override fun hasAllExternalParents(predicate: (KoParentDeclaration) -> Boolean): Boolean = externalParents.all(predicate)
+//    override fun hasAllExternalParents(predicate: (KoExternalParentDeclaration) -> Boolean): Boolean = externalParents.all(predicate)
 //
 //    override fun hasExternalParentOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
 //        checkIfExternalParentOf(name) || names.any { checkIfExternalParentOf(it) }

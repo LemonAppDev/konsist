@@ -17,12 +17,5 @@ import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 interface KoParentDeclaration :
     KoBaseDeclaration,
     KoBaseProvider,
-    KoContainingFileProvider,
     KoFullyQualifiedNameProvider,
-    KoNameProvider,
-    KoLocationProvider,
-    KoPackageProvider,
-    KoPathProvider,
-    KoModuleProvider,
-    KoSourceSetProvider,
-    KoResideInPackageProvider
+    KoNameProvider
