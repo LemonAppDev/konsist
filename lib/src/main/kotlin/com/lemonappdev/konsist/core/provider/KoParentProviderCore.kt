@@ -2,8 +2,8 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
-import com.lemonappdev.konsist.core.model.DataCore
 import com.lemonappdev.konsist.core.declaration.KoExternalParentDeclarationCore
+import com.lemonappdev.konsist.core.model.DataCore
 import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
@@ -27,7 +27,6 @@ internal interface KoParentProviderCore :
                     .substringBefore(" ")
                     .substringBefore("(")
                     .substringBefore("<")
-
 
                 val classFromFile = containingFile
                     .classes()
@@ -53,10 +52,14 @@ internal interface KoParentProviderCore :
                 val parentFromProject = if (declarationFromImport != null) {
                     DataCore
                         .classes
-                        .firstOrNull { parent -> (parent.packagee?.fullyQualifiedName + "." + parent.name) == declarationFromImport.name }
+                        .firstOrNull { parent ->
+                            (parent.packagee?.fullyQualifiedName + "." + parent.name) == declarationFromImport.name
+                        }
                         ?: DataCore
                             .interfaces
-                            .firstOrNull { parent -> (parent.packagee?.fullyQualifiedName + "." + parent.name) == declarationFromImport.name }
+                            .firstOrNull { parent ->
+                                (parent.packagee?.fullyQualifiedName + "." + parent.name) == declarationFromImport.name
+                            }
                 } else {
                     null
                 }

@@ -1,12 +1,12 @@
-//package com.lemonappdev.konsist.core.declaration.koparent
+// package com.lemonappdev.konsist.core.declaration.koparent
 //
-//import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-//import com.lemonappdev.konsist.api.ext.list.parents
-//import org.amshove.kluent.assertSoftly
-//import org.amshove.kluent.shouldBeEqualTo
-//import org.junit.jupiter.api.Test
+// import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+// import com.lemonappdev.konsist.api.ext.list.parents
+// import org.amshove.kluent.assertSoftly
+// import org.amshove.kluent.shouldBeEqualTo
+// import org.junit.jupiter.api.Test
 //
-//class KoParentDeclarationForKoLocationProviderTest {
+// class KoParentDeclarationForKoLocationProviderTest {
 //    @Test
 //    fun `parent-from-file-of-class-location`() {
 //        // given
@@ -324,4 +324,4 @@
 //
 //    private fun getSnippetFile(fileName: String) =
 //        getSnippetKoScope("core/declaration/koparent/snippet/forkolocationprovider/", fileName)
-//}
+// }

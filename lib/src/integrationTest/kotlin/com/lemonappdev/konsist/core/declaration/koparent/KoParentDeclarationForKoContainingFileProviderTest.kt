@@ -1,11 +1,11 @@
-//package com.lemonappdev.konsist.core.declaration.koparent
+// package com.lemonappdev.konsist.core.declaration.koparent
 //
-//import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-//import com.lemonappdev.konsist.api.ext.list.parents
-//import org.amshove.kluent.shouldBeEqualTo
-//import org.junit.jupiter.api.Test
+// import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+// import com.lemonappdev.konsist.api.ext.list.parents
+// import org.amshove.kluent.shouldBeEqualTo
+// import org.junit.jupiter.api.Test
 //
-//class KoParentDeclarationForKoContainingFileProviderTest {
+// class KoParentDeclarationForKoContainingFileProviderTest {
 //    @Test
 //    fun `parent-from-file-of-class-containing-file`() {
 //        // given
@@ -152,4 +152,4 @@
 //
 //    private fun getSnippetFile(fileName: String) =
 //        getSnippetKoScope("core/declaration/koparent/snippet/forkocontainingfileprovider/", fileName)
-//}
+// }

@@ -1,24 +1,11 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
-import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
-import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
-import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
-import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
-import com.lemonappdev.konsist.core.provider.KoPathProviderCore
-import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
-import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
-import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
-import com.lemonappdev.konsist.core.util.EndOfLine
-import org.jetbrains.kotlin.psi.KtElement
-import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-//internal open class KoParentDeclarationCore private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
+// internal open class KoParentDeclarationCore private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
 //    KoParentDeclaration,
 //    KoBaseProviderCore,
 //    KoFullyQualifiedNameProviderCore,
@@ -56,7 +43,7 @@ import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 //                containingDeclaration,
 //            ) { KoParentDeclarationCore(ktSuperTypeListEntry) }
 //    }
-//}
+// }
 
 internal interface KoParentDeclarationCore :
     KoParentDeclaration,

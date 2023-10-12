@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 
-
 object DataCore {
     val classes: List<KoClassDeclaration> by lazy {
         Konsist

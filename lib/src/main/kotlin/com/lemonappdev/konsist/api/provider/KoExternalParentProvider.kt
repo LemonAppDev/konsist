@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
-import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 
 /**
  * An interface representing a Kotlin declaration that provides access to its external parents.
