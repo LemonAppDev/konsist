@@ -13,7 +13,7 @@ class KoArchitectureAssertionCore : KoArchitectureAssertion {
     override fun KoScope.assertArchitecture(
         additionalMessage: String?,
         testName: String?,
-        dependencies: DependencyRules.() -> Unit
+        dependencies: DependencyRules.() -> Unit,
     ) {
         val dependencyRules = instanceDependencyRules(dependencies = dependencies)
         val architectureScope = KoArchitectureScope(dependencyRules, this)
@@ -26,7 +26,7 @@ class KoArchitectureAssertionCore : KoArchitectureAssertion {
     override fun KoScope.assertArchitecture(
         additionalMessage: String?,
         testName: String?,
-        dependencies: DependencyRules
+        dependencies: DependencyRules,
     ) {
         KoArchitectureScope(dependencies, this).assert(additionalMessage, testName)
     }
@@ -37,7 +37,7 @@ class KoArchitectureAssertionCore : KoArchitectureAssertion {
     override fun List<KoFileDeclaration>.assertArchitecture(
         additionalMessage: String?,
         testName: String?,
-        dependencies: DependencyRules.() -> Unit
+        dependencies: DependencyRules.() -> Unit,
     ) {
         val dependencyRules = instanceDependencyRules(dependencies = dependencies)
         KoArchitectureFiles(dependencyRules, this).assert(additionalMessage, testName)
@@ -49,7 +49,7 @@ class KoArchitectureAssertionCore : KoArchitectureAssertion {
     override fun List<KoFileDeclaration>.assertArchitecture(
         additionalMessage: String?,
         testName: String?,
-        dependencies: DependencyRules
+        dependencies: DependencyRules,
     ) {
         KoArchitectureFiles(dependencies, this).assert(additionalMessage, testName)
     }

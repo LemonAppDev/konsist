@@ -31,7 +31,7 @@ internal fun KoArchitectureFiles.assert(additionalMessage: String?, testName: St
                     dependencyRules.dependencies,
                     dependencyRules.statuses,
                     additionalMessage,
-                    testName
+                    testName,
                 ),
             )
         }
@@ -60,7 +60,7 @@ internal fun KoArchitectureScope.assert(additionalMessage: String?, testName: St
                     dependencyRules.dependencies,
                     dependencyRules.statuses,
                     additionalMessage,
-                    testName
+                    testName,
                 ),
             )
         }
@@ -157,7 +157,7 @@ private fun getCheckFailedMessages(
     dependencies: Map<Layer, Set<Layer>>,
     statuses: Map<Layer, Status>,
     additionalMessage: String?,
-    testName: String?
+    testName: String?,
 ): String {
     val failedDeclarationsMessage = failedFiles
         .map { it.resideInLayer }
@@ -190,7 +190,7 @@ private fun getCheckFailedMessages(
 
             "${layer.name} $message\n$details"
         }
-    val customMessage = if (additionalMessage != null) "\n${additionalMessage}" else ""
+    val customMessage = if (additionalMessage != null) "\n$additionalMessage" else ""
 
     val name = testName ?: getTestMethodNameFromEightIndex()
 

@@ -14,7 +14,7 @@ interface KoArchitectureAssertion {
      * of the architecture.
      */
     fun KoScope.assertArchitecture(
-        dependencies: DependencyRules.() -> Unit
+        dependencies: DependencyRules.() -> Unit,
     ): Unit
 
     /**
@@ -31,7 +31,7 @@ interface KoArchitectureAssertion {
     fun KoScope.assertArchitecture(
         additionalMessage: String? = null,
         testName: String? = null,
-        dependencies: DependencyRules.() -> Unit
+        dependencies: DependencyRules.() -> Unit,
     ): Unit
 
     /**
@@ -40,7 +40,7 @@ interface KoArchitectureAssertion {
      * @param dependencies The [DependencyRules] instance representing the configured dependencies of the architecture.
      */
     fun KoScope.assertArchitecture(
-        dependencies: DependencyRules
+        dependencies: DependencyRules,
     ): Unit
 
     /**
@@ -56,7 +56,7 @@ interface KoArchitectureAssertion {
     fun KoScope.assertArchitecture(
         additionalMessage: String? = null,
         testName: String? = null,
-        dependencies: DependencyRules
+        dependencies: DependencyRules,
     ): Unit
 
     /**
@@ -66,7 +66,7 @@ interface KoArchitectureAssertion {
      * of the architecture.
      */
     fun List<KoFileDeclaration>.assertArchitecture(
-        dependencies: DependencyRules.() -> Unit
+        dependencies: DependencyRules.() -> Unit,
     ): Unit
 
     /**
@@ -83,7 +83,7 @@ interface KoArchitectureAssertion {
     fun List<KoFileDeclaration>.assertArchitecture(
         additionalMessage: String? = null,
         testName: String? = null,
-        dependencies: DependencyRules.() -> Unit
+        dependencies: DependencyRules.() -> Unit,
     ): Unit
 
     /**
@@ -92,7 +92,7 @@ interface KoArchitectureAssertion {
      * @param dependencies The [DependencyRules] instance representing the configured dependencies of the architecture.
      */
     fun List<KoFileDeclaration>.assertArchitecture(
-        dependencies: DependencyRules
+        dependencies: DependencyRules,
     ): Unit
 
     /**
@@ -108,7 +108,7 @@ interface KoArchitectureAssertion {
     fun List<KoFileDeclaration>.assertArchitecture(
         additionalMessage: String? = null,
         testName: String? = null,
-        dependencies: DependencyRules
+        dependencies: DependencyRules,
     ): Unit
 
     /**

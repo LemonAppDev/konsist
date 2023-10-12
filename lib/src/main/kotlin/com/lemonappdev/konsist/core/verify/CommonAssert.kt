@@ -26,7 +26,6 @@ internal fun getTestMethodNameFromSixthIndex() = getTestMethodName(INDEX_SIX)
  */
 internal fun getTestMethodNameFromSeventhIndex() = getTestMethodName(INDEX_SEVEN)
 
-
 /**
  * In this call stack hierarchy test name is at index 8.
  */
