@@ -167,8 +167,7 @@ class ApiKonsistTest {
         checkForExceptions("Tag", "Tags", false)
     } else if (declarationName == "KoFunctionDeclaration" || declarationName == "KoClassDeclaration") {
         checkForFunctionWithName("Local$singularName", pluralName, false)
-    } 
-    else if (declarationName == "KoInterfaceDeclaration") {
+    } else if (declarationName == "KoInterfaceDeclaration") {
         checkForFunctionWithName("Parent$singularName", pluralName, false)
     } else if (declarationName == "KoBaseDeclaration") {
         checkForFunctionWithoutName("Declaration", pluralName, false) ||
