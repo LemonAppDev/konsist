@@ -60,7 +60,7 @@ class CleanArchitectureSnippets {
         Konsist
             .scopeFromProduction()
             .classes()
-            .withParentNamed("UseCase")
+            .withNameEndingWith("UseCase")
             .assertTrue { it.hasTestClass() }
     }
 }
