@@ -1,0 +1,3 @@
+import com.externalimport.SampleExternalParent
+
+class SampleClass : SampleExternalParent
