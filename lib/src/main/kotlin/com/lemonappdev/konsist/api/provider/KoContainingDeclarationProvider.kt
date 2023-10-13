@@ -9,7 +9,7 @@ interface KoContainingDeclarationProvider : KoBaseProvider {
     /**
      * The parent of the declaration.
      *
-     * @return The [KoBaseDeclaration] representing the parent of the declaration, or `null` if there is no parent.
+     * @return The [KoBaseDeclaration] representing the parent of the declaration.
      */
-    val containingDeclaration: KoBaseDeclaration?
+    val containingDeclaration: KoBaseDeclaration
 }

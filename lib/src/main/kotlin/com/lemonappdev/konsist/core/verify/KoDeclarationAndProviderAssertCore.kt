@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
@@ -12,6 +13,7 @@ import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
+import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 
 internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
@@ -133,12 +135,12 @@ fun checkIfLocalListHasOnlyNullElements(localList: List<*>, testMethodName: Stri
     if (hasOnlyNUllElements && (localList.size > 1)) {
         throw KoPreconditionFailedException(
             "Declaration list contains only null elements. Please make sure that list of declarations contain items " +
-                "before calling the '$testMethodName' method.",
+                    "before calling the '$testMethodName' method.",
         )
     } else if (hasOnlyNUllElements && (localList.size == 1)) {
         throw KoPreconditionFailedException(
             "Method '$testMethodName' was called on a null value. Please ensure that the declaration is not null before " +
-                "calling this method.",
+                    "calling this method.",
         )
     }
 }
@@ -147,7 +149,7 @@ fun checkIfLocalListIsEmpty(localList: List<*>, testMethodName: String) {
     if (localList.isEmpty()) {
         throw KoPreconditionFailedException(
             "Declaration list is empty. Please make sure that list of declarations contain items " +
-                "before calling the '$testMethodName' method.",
+                    "before calling the '$testMethodName' method.",
         )
     }
 }
@@ -159,13 +161,13 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(localList: List<E>
     localList
         .filterNot {
             it is KoAnnotationDeclaration &&
-                (
-                    it.name == "Suppress" &&
-                        it.text.contains("\"konsist.$suppressName\"") ||
-                        it.text.contains("\"$suppressName\"")
-                    )
+                    (
+                            it.name == "Suppress" &&
+                                    it.text.contains("\"konsist.$suppressName\"") ||
+                                    it.text.contains("\"$suppressName\"")
+                            )
         }
-        .forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it, suppressName) }
+        .forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it as KoBaseDeclaration, suppressName) }
 
     val withoutSuppress = mutableListOf<E>()
 
@@ -174,20 +176,25 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(localList: List<E>
     return withoutSuppress
 }
 
-private fun checkIfDeclarationIsAnnotatedWithSuppress(declaration: KoBaseProvider, testMethodName: String): Boolean =
-    if (declaration is KoAnnotationProvider) {
-        checkIfSuppressed(declaration, testMethodName) || checkIfParentIsAnnotatedWithSuppress(
-            declaration,
-            testMethodName,
-        )
-    } else {
-        checkIfParentIsAnnotatedWithSuppress(declaration, testMethodName)
+private fun checkIfDeclarationIsAnnotatedWithSuppress(declaration: KoBaseDeclaration, testMethodName: String): Boolean =
+    when (declaration) {
+        is KoFileDeclaration -> {
+            checkIfSuppressed(declaration, testMethodName)
+        }
+
+        is KoAnnotationProvider -> {
+            checkIfSuppressed(declaration, testMethodName) ||
+                    checkIfParentIsAnnotatedWithSuppress(declaration, testMethodName)
+        }
+
+        else -> {
+            checkIfParentIsAnnotatedWithSuppress(declaration, testMethodName)
+        }
     }
 
-private fun checkIfParentIsAnnotatedWithSuppress(declaration: KoBaseProvider, testMethodName: String): Boolean =
+private fun checkIfParentIsAnnotatedWithSuppress(declaration: KoBaseDeclaration, testMethodName: String): Boolean =
     if (declaration is KoContainingDeclarationProvider) {
-        declaration.containingDeclaration?.let { checkIfDeclarationIsAnnotatedWithSuppress(it, testMethodName) }
-            ?: false
+        checkIfDeclarationIsAnnotatedWithSuppress(declaration.containingDeclaration, testMethodName)
     } else {
         false
     }
