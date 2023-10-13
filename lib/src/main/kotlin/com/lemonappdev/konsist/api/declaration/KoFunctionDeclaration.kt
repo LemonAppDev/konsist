@@ -11,7 +11,7 @@ import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoLocalClassProvider
 import com.lemonappdev.konsist.api.provider.KoLocalDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoLocalFunctionProvider
-import com.lemonappdev.konsist.api.provider.KoLocalVariableProvider
+import com.lemonappdev.konsist.api.provider.KoVariableProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
@@ -55,7 +55,7 @@ interface KoFunctionDeclaration :
     KoLocalClassProvider,
     KoLocalDeclarationProvider,
     KoLocalFunctionProvider,
-    KoLocalVariableProvider,
+    KoVariableProvider,
     KoLocationProvider,
     KoModifierProvider,
     KoNameProvider,
