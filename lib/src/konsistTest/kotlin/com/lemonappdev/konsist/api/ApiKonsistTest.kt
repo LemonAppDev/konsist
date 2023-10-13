@@ -56,8 +56,6 @@ class ApiKonsistTest {
         Konsist
             .scopeFromPackage("com.lemonappdev.konsist.api.provider..", sourceSetName = "main")
             .interfaces()
-            .withoutName("KoParentInterfaceProvider") // ToDO: Remove this line
-            .withoutName("KoExternalParentProvider") // ToDO: Remove this line
             .withoutNameMatching(Regex("\\bKoKDoc[A-Za-z]+TagProvider\\b")) // exclude providers like KoKDocXTagProvider
             .withProperty { property ->
                 property.hasType { type ->
@@ -74,7 +72,6 @@ class ApiKonsistTest {
         val providers = Konsist
             .scopeFromPackage("com.lemonappdev.konsist.api.provider..", sourceSetName = "main")
             .interfaces()
-            .withoutName("KoParentInterfaceProvider") // ToDO: Remove this line
             .withoutNameMatching(Regex("\\bKoKDoc[A-Za-z]+TagProvider\\b")) // exclude providers like KoKDocXTagProvider
             .withProperty { property ->
                 property.hasType { type ->
@@ -99,8 +96,8 @@ class ApiKonsistTest {
         .interfaces()
 
     private fun <T> T.hasCorrectMethods(isExtension: Boolean): Boolean
-        where T : KoPropertyProvider,
-              T : KoFunctionProvider {
+            where T : KoPropertyProvider,
+                  T : KoFunctionProvider {
         val property = properties()
             .first { property ->
                 property.hasType { type ->
@@ -148,10 +145,12 @@ class ApiKonsistTest {
         checkForExceptions("Tag", "Tags", true)
     } else if (declarationName == "KoFunctionDeclaration" || declarationName == "KoClassDeclaration") {
         checkForFunctionWithName(singularName, pluralName, true) ||
-            checkForFunctionWithName("Local$singularName", pluralName, true)
+                checkForFunctionWithName("Local$singularName", pluralName, true)
+    } else if (declarationName == "KoInterfaceDeclaration") {
+        checkForFunctionWithName("Parent$singularName", pluralName, true)
     } else if (declarationName == "KoBaseDeclaration") {
         checkForFunctionWithoutName(singularName, pluralName, true) ||
-            checkForFunctionWithoutName("LocalDeclaration", pluralName, true)
+                checkForFunctionWithoutName("LocalDeclaration", pluralName, true)
     } else if (hasKoNameProvider) {
         checkForFunctionWithName(singularName, pluralName, true)
     } else {
@@ -168,11 +167,12 @@ class ApiKonsistTest {
     } else if (declarationName == "KoKDocTagDeclaration") {
         checkForExceptions("Tag", "Tags", false)
     } else if (declarationName == "KoFunctionDeclaration" || declarationName == "KoClassDeclaration") {
-        checkForFunctionWithName(singularName, pluralName, false) ||
-            checkForFunctionWithName("Local$singularName", pluralName, false)
+                checkForFunctionWithName("Local$singularName", pluralName, false)
+    }else if (declarationName == "KoInterfaceDeclaration") {
+                checkForFunctionWithName("Parent$singularName", pluralName, false)
     } else if (declarationName == "KoBaseDeclaration") {
         checkForFunctionWithoutName("Declaration", pluralName, false) ||
-            checkForFunctionWithoutName("LocalDeclaration", pluralName, false)
+                checkForFunctionWithoutName("LocalDeclaration", pluralName, false)
     } else if (hasKoNameProvider) {
         checkForFunctionWithName(singularName, pluralName, false)
     } else {
@@ -185,18 +185,18 @@ class ApiKonsistTest {
         prefix: String,
     ): Boolean =
         hasFunction { function -> function.name == "${prefix}$pluralName" && !function.hasParameters() } &&
-            hasFunction { function ->
-                function.name == "${prefix}$singularName" && function.hasParametersWithAllNames(
-                    singularName.lowercase(),
-                    pluralName.lowercase(),
-                )
-            } &&
-            hasFunction { function ->
-                function.name == "${prefix}All$pluralName" && function.hasParametersWithAllNames(
-                    singularName.lowercase(),
-                    pluralName.lowercase(),
-                )
-            }
+                hasFunction { function ->
+                    function.name == "${prefix}$singularName" && function.hasParametersWithAllNames(
+                        singularName.lowercase(),
+                        pluralName.lowercase(),
+                    )
+                } &&
+                hasFunction { function ->
+                    function.name == "${prefix}All$pluralName" && function.hasParametersWithAllNames(
+                        singularName.lowercase(),
+                        pluralName.lowercase(),
+                    )
+                }
 
     private fun KoFunctionProvider.hasBasicFunctions(
         singularName: String,
@@ -204,16 +204,16 @@ class ApiKonsistTest {
         prefix: String,
     ): Boolean {
         return hasFunction { function -> function.name == "${prefix}$pluralName" && !function.hasParameters() } &&
-            hasFunction { function ->
-                function.name == "${prefix}$singularName" && function.hasParameterWithName(
-                    "predicate",
-                )
-            } &&
-            hasFunction { function ->
-                function.name == "${prefix}All$pluralName" && function.hasParameterWithName(
-                    "predicate",
-                )
-            }
+                hasFunction { function ->
+                    function.name == "${prefix}$singularName" && function.hasParameterWithName(
+                        "predicate",
+                    )
+                } &&
+                hasFunction { function ->
+                    function.name == "${prefix}All$pluralName" && function.hasParameterWithName(
+                        "predicate",
+                    )
+                }
     }
 
     private fun KoFunctionProvider.hasNamedFunctions(singularName: String, pluralName: String): Boolean =
@@ -240,7 +240,7 @@ class ApiKonsistTest {
         isExtension: Boolean,
     ): Boolean = if (isExtension) {
         hasExceptionFunctions(singularName, pluralName, "with") &&
-            hasExceptionFunctions(singularName, pluralName, "without")
+                hasExceptionFunctions(singularName, pluralName, "without")
     } else {
         hasExceptionFunctions(singularName, pluralName, "has")
     }
@@ -251,9 +251,9 @@ class ApiKonsistTest {
         isExtension: Boolean,
     ): Boolean = if (isExtension) {
         hasBasicFunctions(singularName, pluralName, "with") &&
-            hasNamedFunctionsForExt(singularName, pluralName, "with") &&
-            hasBasicFunctions(singularName, pluralName, "without") &&
-            hasNamedFunctionsForExt(singularName, pluralName, "without")
+                hasNamedFunctionsForExt(singularName, pluralName, "with") &&
+                hasBasicFunctions(singularName, pluralName, "without") &&
+                hasNamedFunctionsForExt(singularName, pluralName, "without")
     } else {
         hasBasicFunctions(singularName, pluralName, "has") && hasNamedFunctions(singularName, pluralName)
     }
@@ -264,7 +264,7 @@ class ApiKonsistTest {
         isExtension: Boolean,
     ): Boolean = if (isExtension) {
         hasBasicFunctions(singularName, pluralName, "with") &&
-            hasBasicFunctions(singularName, pluralName, "without")
+                hasBasicFunctions(singularName, pluralName, "without")
     } else {
         hasBasicFunctions(singularName, pluralName, "has")
     }
