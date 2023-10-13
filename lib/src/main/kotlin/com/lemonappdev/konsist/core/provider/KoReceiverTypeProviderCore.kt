@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.core.util.ReceiverUtil
@@ -19,7 +20,7 @@ internal interface KoReceiverTypeProviderCore :
         get() = ReceiverUtil.getReceiverType(
             getTypeReferences(),
             ktCallableDeclaration.isExtensionDeclaration(),
-            this,
+            this as KoBaseDeclaration,
         )
 
     @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasReceiverType { it.name == name }"))

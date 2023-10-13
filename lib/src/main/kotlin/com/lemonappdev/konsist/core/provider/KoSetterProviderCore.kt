@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSetterDeclaration
 import com.lemonappdev.konsist.api.provider.KoSetterProvider
 import com.lemonappdev.konsist.core.declaration.KoSetterDeclarationCore
@@ -17,7 +18,7 @@ internal interface KoSetterProviderCore : KoSetterProvider, KoBaseProviderCore, 
     override val setter: KoSetterDeclaration?
         get() = ktPropertyAccessor
             .firstOrNull { it.isSetter }
-            ?.let { KoSetterDeclarationCore.getInstance(it, this) }
+            ?.let { KoSetterDeclarationCore.getInstance(it, this as KoBaseDeclaration) }
 
     override val hasSetter: Boolean
         get() = setter != null

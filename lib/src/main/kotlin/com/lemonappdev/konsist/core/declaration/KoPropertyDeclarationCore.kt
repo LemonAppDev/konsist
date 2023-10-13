@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
@@ -66,7 +67,7 @@ internal class KoPropertyDeclarationCore private constructor(
     KtCallableDeclaration - common parent for KtProperty and KtParameter
      */
     override val ktCallableDeclaration: KtCallableDeclaration,
-    override val containingDeclaration: KoContainingDeclarationProvider,
+    override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoPropertyDeclaration,
     KoBaseProviderCore,
@@ -169,7 +170,7 @@ internal class KoPropertyDeclarationCore private constructor(
 
         internal fun getInstance(
             ktCallableDeclaration: KtCallableDeclaration,
-            containingDeclaration: KoContainingDeclarationProvider,
+            containingDeclaration: KoBaseDeclaration,
         ): KoPropertyDeclaration =
             cache.getOrCreateInstance(ktCallableDeclaration, containingDeclaration) {
                 KoPropertyDeclarationCore(ktCallableDeclaration, containingDeclaration)

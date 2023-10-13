@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationCore
 import org.jetbrains.kotlin.psi.KtAnnotated
@@ -15,7 +16,7 @@ internal interface KoAnnotationProviderCore :
     override val annotations: List<KoAnnotationDeclaration>
         get() = ktAnnotated
             .annotationEntries
-            .map { KoAnnotationDeclarationCore.getInstance(it, this) }
+            .map { KoAnnotationDeclarationCore.getInstance(it, this as KoBaseDeclaration) }
 
     override val numAnnotations: Int
         get() = annotations.size

@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.provider.KoTypeAliasProvider
 import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationCore
@@ -16,7 +17,7 @@ internal interface KoTypeAliasProviderCore :
         get() = ktFile
             .children
             .filterIsInstance<KtTypeAlias>()
-            .map { KoTypeAliasDeclarationCore.getInstance(it, this) }
+            .map { KoTypeAliasDeclarationCore.getInstance(it, this as KoBaseDeclaration) }
 
     override val numTypeAliases: Int
         get() = typeAliases.size

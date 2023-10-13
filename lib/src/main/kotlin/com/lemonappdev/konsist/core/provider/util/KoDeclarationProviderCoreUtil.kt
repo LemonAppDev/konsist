@@ -41,7 +41,7 @@ internal object KoDeclarationProviderCoreUtil {
         ktElement: KtElement,
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
-        containingDeclaration: KoContainingDeclarationProvider,
+        containingDeclaration: KoBaseDeclaration,
     ): List<T> {
         val declarations: List<KoBaseDeclaration>
 
@@ -167,7 +167,7 @@ internal object KoDeclarationProviderCoreUtil {
 
     private fun getInstanceOfKtDeclaration(
         ktDeclaration: KtDeclaration,
-        containingDeclaration: KoContainingDeclarationProvider,
+        containingDeclaration: KoBaseDeclaration,
     ): KoBaseDeclaration? = when {
         ktDeclaration is KtEnumEntry -> KoEnumConstantDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
         ktDeclaration is KtSecondaryConstructor -> KoSecondaryConstructorDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
@@ -187,7 +187,7 @@ internal object KoDeclarationProviderCoreUtil {
 
     private fun getInstanceOfOtherDeclaration(
         psiElement: PsiElement,
-        containingDeclaration: KoContainingDeclarationProvider,
+        containingDeclaration: KoBaseDeclaration,
     ): KoBaseDeclaration? =
         when (psiElement) {
             is KtImportDirective -> KoImportDeclarationCore.getInstance(psiElement, containingDeclaration)

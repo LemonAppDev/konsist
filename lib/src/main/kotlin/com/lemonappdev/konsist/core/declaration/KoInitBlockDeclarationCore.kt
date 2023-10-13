@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.psi.KtElement
 
 internal class KoInitBlockDeclarationCore private constructor(
     private val ktAnonymousInitializer: KtAnonymousInitializer,
-    override val containingDeclaration: KoContainingDeclarationProvider,
+    override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoInitBlockDeclaration,
     KoBaseProviderCore,
@@ -55,7 +55,7 @@ internal class KoInitBlockDeclarationCore private constructor(
 
         internal fun getInstance(
             ktAnonymousInitializer: KtAnonymousInitializer,
-            containingDeclaration: KoContainingDeclarationProvider,
+            containingDeclaration: KoBaseDeclaration,
         ): KoInitBlockDeclaration =
             cache.getOrCreateInstance(ktAnonymousInitializer, containingDeclaration) {
                 KoInitBlockDeclarationCore(ktAnonymousInitializer, containingDeclaration)

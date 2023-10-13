@@ -46,7 +46,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoObjectDeclarationCore(
     private val ktObjectDeclaration: KtObjectDeclaration,
-    override val containingDeclaration: KoContainingDeclarationProvider,
+    override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoObjectDeclaration,
     KoBaseProviderCore,
@@ -113,7 +113,7 @@ internal class KoObjectDeclarationCore(
 
         internal fun getInstance(
             ktObjectDeclaration: KtObjectDeclaration,
-            containingDeclaration: KoContainingDeclarationProvider,
+            containingDeclaration: KoBaseDeclaration,
         ): KoObjectDeclaration =
             cache.getOrCreateInstance(ktObjectDeclaration, containingDeclaration) {
                 KoObjectDeclarationCore(

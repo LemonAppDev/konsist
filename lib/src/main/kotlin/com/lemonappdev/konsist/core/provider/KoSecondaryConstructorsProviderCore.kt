@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
 import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
 import com.lemonappdev.konsist.core.declaration.KoSecondaryConstructorDeclarationCore
@@ -15,7 +16,7 @@ internal interface KoSecondaryConstructorsProviderCore :
         get() =
             ktClass
                 .secondaryConstructors
-                .map { KoSecondaryConstructorDeclarationCore.getInstance(it, this) }
+                .map { KoSecondaryConstructorDeclarationCore.getInstance(it, this as KoBaseDeclaration) }
 
     override val numSecondaryConstructors: Int
         get() = secondaryConstructors.size

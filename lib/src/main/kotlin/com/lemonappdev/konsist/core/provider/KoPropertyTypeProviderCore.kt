@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoPropertyTypeProvider
 import com.lemonappdev.konsist.core.util.ReceiverUtil
@@ -14,7 +15,7 @@ internal interface KoPropertyTypeProviderCore :
     KoBaseProviderCore {
     val ktCallableDeclaration: KtCallableDeclaration
     override val type: KoTypeDeclaration?
-        get() = ReceiverUtil.getType(getTypeReferences(), ktCallableDeclaration.isExtensionDeclaration(), this)
+        get() = ReceiverUtil.getType(getTypeReferences(), ktCallableDeclaration.isExtensionDeclaration(), this as KoBaseDeclaration)
 
     private fun getTypeReferences(): List<KtTypeReference> = ktCallableDeclaration
         .children

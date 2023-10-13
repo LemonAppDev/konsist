@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoEnumConstantDeclaration
 import com.lemonappdev.konsist.api.provider.KoEnumConstantProvider
 import com.lemonappdev.konsist.core.declaration.KoEnumConstantDeclarationCore
@@ -20,7 +21,7 @@ internal interface KoEnumConstantProviderCore :
             .firstIsInstanceOrNull<KtClassBody>()
             ?.children
             ?.filterIsInstance<KtEnumEntry>()
-            ?.map { KoEnumConstantDeclarationCore.getInstance(it, this) }
+            ?.map { KoEnumConstantDeclarationCore.getInstance(it, this as KoBaseDeclaration) }
             .orEmpty()
 
     override val numEnumConstants: Int

@@ -29,7 +29,7 @@ import org.jetbrains.kotlin.psi.KtPropertyAccessor
 
 internal class KoSetterDeclarationCore private constructor(
     private val ktPropertyAccessor: KtPropertyAccessor,
-    override val containingDeclaration: KoContainingDeclarationProvider,
+    override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoSetterDeclaration,
     KoBaseProviderCore,
@@ -76,7 +76,7 @@ internal class KoSetterDeclarationCore private constructor(
 
         internal fun getInstance(
             ktPropertyAccessor: KtPropertyAccessor,
-            containingDeclaration: KoContainingDeclarationProvider,
+            containingDeclaration: KoBaseDeclaration,
         ): KoSetterDeclaration =
             cache.getOrCreateInstance(ktPropertyAccessor, containingDeclaration) {
                 KoSetterDeclarationCore(ktPropertyAccessor, containingDeclaration)

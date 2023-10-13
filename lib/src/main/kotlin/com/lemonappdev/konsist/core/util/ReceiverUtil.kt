@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.util
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.declaration.KoTypeDeclarationCore
@@ -9,7 +10,7 @@ object ReceiverUtil {
     internal fun getType(
         types: List<KtTypeReference>,
         isExtension: Boolean,
-        parentDeclaration: KoContainingDeclarationProvider,
+        parentDeclaration: KoBaseDeclaration,
     ): KoTypeDeclaration? {
         val type = if (isExtension && types.size > 1) {
             // We choose last because when we have extension the first one is receiver and the second one is (return) type.
@@ -29,7 +30,7 @@ object ReceiverUtil {
     internal fun getReceiverType(
         types: List<KtTypeReference>,
         isExtension: Boolean,
-        parentDeclaration: KoContainingDeclarationProvider,
+        parentDeclaration: KoBaseDeclaration,
     ): KoTypeDeclaration? {
         val type = if (isExtension) {
             types.first()

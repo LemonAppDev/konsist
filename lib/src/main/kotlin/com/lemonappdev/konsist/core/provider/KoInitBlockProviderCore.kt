@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInitBlockDeclaration
 import com.lemonappdev.konsist.api.provider.KoInitBlockProvider
 import com.lemonappdev.konsist.core.declaration.KoInitBlockDeclarationCore
@@ -21,7 +22,7 @@ internal interface KoInitBlockProviderCore :
                 emptyList()
             } else {
                 anonymousInitializers
-                    ?.map { init -> KoInitBlockDeclarationCore.getInstance(init, this) }
+                    ?.map { init -> KoInitBlockDeclarationCore.getInstance(init, this as KoBaseDeclaration) }
                     .orEmpty()
             }
         }

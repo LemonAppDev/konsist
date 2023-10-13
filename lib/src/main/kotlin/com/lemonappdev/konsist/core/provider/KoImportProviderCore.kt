@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.provider.KoImportProvider
 import com.lemonappdev.konsist.core.declaration.KoImportDeclarationCore
@@ -21,7 +22,7 @@ internal interface KoImportProviderCore : KoImportProvider, KoContainingDeclarat
                     .children
                     .filterIsInstance<KtImportDirective>()
 
-            return ktImportDirectives.map { KoImportDeclarationCore.getInstance(it, this) }
+            return ktImportDirectives.map { KoImportDeclarationCore.getInstance(it, this as KoBaseDeclaration) }
         }
 
     override val numImports: Int

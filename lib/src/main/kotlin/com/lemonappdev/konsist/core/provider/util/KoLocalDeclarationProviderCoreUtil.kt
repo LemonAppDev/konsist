@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.psi.KtProperty
 internal object KoLocalDeclarationProviderCoreUtil {
     fun getKoLocalDeclarations(
         psiElements: Array<PsiElement>?,
-        containingDeclaration: KoContainingDeclarationProvider,
+        containingDeclaration: KoBaseDeclaration,
     ): List<KoBaseDeclaration> {
         val declarations = psiElements
             ?.filterIsInstance<KtDeclaration>()
