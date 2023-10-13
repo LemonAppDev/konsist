@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoExternalParentProvider
+import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
 import kotlin.reflect.KClass
 
 internal interface KoExternalParentProviderCore :
@@ -41,12 +42,8 @@ internal interface KoExternalParentProviderCore :
     override fun hasAllExternalParents(predicate: (KoExternalParentDeclaration) -> Boolean): Boolean = externalParents.all(predicate)
 
     override fun hasExternalParentOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
-        checkIfExternalParentOf(name) || names.any { checkIfExternalParentOf(it) }
+        checkIfParentOf(name, externalParents) || names.any { checkIfParentOf(it, externalParents) }
 
     override fun hasAllExternalParentsOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
-        checkIfExternalParentOf(name) && names.all { checkIfExternalParentOf(it) }
-
-    private fun checkIfExternalParentOf(kClass: KClass<*>): Boolean = externalParents.any { parent ->
-        parent.name == kClass.simpleName || parent.fullyQualifiedName == kClass.qualifiedName
-    }
+        checkIfParentOf(name, externalParents) && names.all { checkIfParentOf(it, externalParents) }
 }
