@@ -34,8 +34,13 @@ android {
 dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
 
+    // Add JUnit dependency
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
 
+    // Add junit-jupiter-params dependency (required for dynamic Tests)
+    implementation("org.junit.jupiter:junit-jupiter-params:5.10.0")
+
+    // Add Konsist dependency
     testImplementation("com.lemonappdev:konsist:0.13.0")
 }
