@@ -13,4 +13,4 @@ import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
  * @return `true` if declaration represents the type of [T], `false` otherwise.
  */
 inline fun <reified T> KoRepresentsTypeProvider.representsTypeOf(): Boolean =
-    T::class.simpleName?.let { representsType(it) } ?: false || T::class.qualifiedName?.let { representsType(it) } ?: false
+    representsType(T::class.simpleName) || representsType(T::class.qualifiedName)
