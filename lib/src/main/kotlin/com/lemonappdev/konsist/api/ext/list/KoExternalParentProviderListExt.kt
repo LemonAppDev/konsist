@@ -154,7 +154,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentOf(
  */
 fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsOf(
     kClass: KClass<*>,
-    vararg kClasses: KClass<*>
+    vararg kClasses: KClass<*>,
 ): List<T> =
     filter { it.hasAllExternalParentsOf(kClass, *kClasses) }
 
@@ -167,6 +167,6 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsOf(
  */
 fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsOf(
     kClass: KClass<*>,
-    vararg kClasses: KClass<*>
+    vararg kClasses: KClass<*>,
 ): List<T> =
     filterNot { it.hasAllExternalParentsOf(kClass, *kClasses) }

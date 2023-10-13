@@ -5,7 +5,6 @@ import com.lemonappdev.konsist.api.ext.list.externalParents
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-
 class KoExternalParentDeclarationForKoNameProviderTest {
     @Test
     fun `class-with-external-parent-class`() {
@@ -90,7 +89,6 @@ class KoExternalParentDeclarationForKoNameProviderTest {
         // then
         sut.name shouldBeEqualTo "SampleExternalParent"
     }
-
 
     @Test
     fun `interface-with-external-parent-interface`() {
