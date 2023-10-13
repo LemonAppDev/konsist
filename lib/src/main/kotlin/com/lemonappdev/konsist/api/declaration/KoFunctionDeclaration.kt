@@ -11,7 +11,6 @@ import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoLocalClassProvider
 import com.lemonappdev.konsist.api.provider.KoLocalDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoLocalFunctionProvider
-import com.lemonappdev.konsist.api.provider.KoVariableProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
@@ -24,6 +23,7 @@ import com.lemonappdev.konsist.api.provider.KoReturnProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
+import com.lemonappdev.konsist.api.provider.KoVariableProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoAbstractModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoActualModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoExpectModifierProvider
