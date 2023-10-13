@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoLocalClassProvider
 import com.lemonappdev.konsist.api.provider.KoLocalDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoLocalFunctionProvider
+import com.lemonappdev.konsist.api.provider.KoLocalVariableProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
@@ -21,6 +22,7 @@ interface KoInitBlockDeclaration :
     KoLocalClassProvider,
     KoLocalDeclarationProvider,
     KoLocalFunctionProvider,
+    KoLocalVariableProvider,
     KoContainingFileProvider,
     KoLocationProvider,
     KoContainingDeclarationProvider,
