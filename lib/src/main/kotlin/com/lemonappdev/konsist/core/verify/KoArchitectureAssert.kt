@@ -15,7 +15,7 @@ import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.util.LocationUtil
 
 @Suppress("detekt.ThrowsCount")
-internal fun KoArchitectureFiles.assert(): Unit {
+internal fun KoArchitectureFiles.assert(additionalMessage: String?, testName: String?): Unit {
     try {
         val dependencyRules = this.dependencyRules as DependencyRulesCore
 
@@ -30,6 +30,8 @@ internal fun KoArchitectureFiles.assert(): Unit {
                     failedFiles.distinct(),
                     dependencyRules.dependencies,
                     dependencyRules.statuses,
+                    additionalMessage,
+                    testName,
                 ),
             )
         }
@@ -41,7 +43,7 @@ internal fun KoArchitectureFiles.assert(): Unit {
 }
 
 @Suppress("detekt.ThrowsCount")
-internal fun KoArchitectureScope.assert(): Unit {
+internal fun KoArchitectureScope.assert(additionalMessage: String?, testName: String?): Unit {
     try {
         val files = this.koScope.files
         val dependencyRules = this.dependencyRules as DependencyRulesCore
@@ -57,6 +59,8 @@ internal fun KoArchitectureScope.assert(): Unit {
                     failedFiles.distinct(),
                     dependencyRules.dependencies,
                     dependencyRules.statuses,
+                    additionalMessage,
+                    testName,
                 ),
             )
         }
@@ -152,6 +156,8 @@ private fun getCheckFailedMessages(
     failedFiles: List<FailedFiles>,
     dependencies: Map<Layer, Set<Layer>>,
     statuses: Map<Layer, Status>,
+    additionalMessage: String?,
+    testName: String?,
 ): String {
     val failedDeclarationsMessage = failedFiles
         .map { it.resideInLayer }
@@ -184,6 +190,9 @@ private fun getCheckFailedMessages(
 
             "${layer.name} $message\n$details"
         }
+    val customMessage = if (additionalMessage != null) "\n$additionalMessage" else ""
 
-    return "'${getTestMethodNameFromSeventhIndex()}' test has failed.\n$failedDeclarationsMessage"
+    val name = testName ?: getTestMethodNameFromEightIndex()
+
+    return "'$name' test has failed.${customMessage}\n$failedDeclarationsMessage"
 }
