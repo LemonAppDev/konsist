@@ -1,0 +1,7 @@
+import com.externalimport.ExternalParent
+
+interface SampleInterface : SampleParentInterface1, SampleParentInterface2, ExternalParent
+
+interface SampleParentInterface1
+
+interface SampleParentInterface2

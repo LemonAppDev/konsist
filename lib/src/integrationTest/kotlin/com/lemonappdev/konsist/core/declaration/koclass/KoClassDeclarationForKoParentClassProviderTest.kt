@@ -53,9 +53,9 @@ class KoClassDeclarationForKoParentClassProviderTest {
     }
 
     @Test
-    fun `class-has-parent-class-and-interfaces`() {
+    fun `class-has-parent-class-interfaces-and-external-parent`() {
         // given
-        val sut = getSnippetFile("class-has-parent-class-and-interfaces")
+        val sut = getSnippetFile("class-has-parent-class-interfaces-and-external-parent")
             .classes()
             .first()
 

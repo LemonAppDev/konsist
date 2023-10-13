@@ -34,9 +34,9 @@ class KoObjectDeclarationForKoParentProviderTest {
     }
 
     @Test
-    fun `object-has-parent-class-and-interfaces`() {
+    fun `object-has-parent-class-interfaces-and-external-parent`() {
         // given
-        val sut = getSnippetFile("object-has-parent-class-and-interfaces")
+        val sut = getSnippetFile("object-has-parent-class-interfaces-and-external-parent")
             .objects()
             .first()
 
@@ -46,8 +46,9 @@ class KoObjectDeclarationForKoParentProviderTest {
                 "SampleParentClass",
                 "SampleParentInterface1",
                 "SampleParentInterface2",
+                "SampleExternalParent",
             )
-            numParents shouldBeEqualTo 3
+            numParents shouldBeEqualTo 4
             countParents { it.name == "SampleParentClass" } shouldBeEqualTo 1
             countParents { it.hasNameStartingWith("SampleParentInterface") } shouldBeEqualTo 2
             hasParents() shouldBeEqualTo true

@@ -72,9 +72,9 @@ class KoObjectDeclarationForKoParentInterfaceProviderTest {
     }
 
     @Test
-    fun `object-has-parent-class-and-interfaces`() {
+    fun `object-has-parent-class-interfaces-and-external-parent`() {
         // given
-        val sut = getSnippetFile("object-has-parent-class-and-interfaces")
+        val sut = getSnippetFile("object-has-parent-class-interfaces-and-external-parent")
             .objects()
             .first()
 

@@ -1,0 +1,9 @@
+import com.externalimport.ExternalParent
+
+object SampleObject : SampleParentClass(), SampleParentInterface1, SampleParentInterface2, ExternalParent
+
+open class SampleParentClass
+
+interface SampleParentInterface1
+
+interface SampleParentInterface2

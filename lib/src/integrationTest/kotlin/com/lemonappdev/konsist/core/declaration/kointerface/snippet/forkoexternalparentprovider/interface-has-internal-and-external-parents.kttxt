@@ -1,6 +1,6 @@
-import com.externalimport.ExternalParent1
-import com.externalimport.ExternalParent2
+import com.externalimport.SampleExternalParent1
+import com.externalimport.SampleExternalParent2
 
-interface SampleInterface : SampleParentInterface1, ExternalParent1, ExternalParent2
+interface SampleInterface : SampleParentInterface1, SampleExternalParent1, SampleExternalParent2
 
 interface SampleParentInterface1

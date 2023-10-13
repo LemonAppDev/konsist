@@ -1,4 +1,4 @@
-import com.externalimport.ExternalParent1
-import com.externalimport.ExternalParent2
+import com.externalimport.SampleExternalParent1
+import com.externalimport.SampleExternalParent2
 
-class SampleClass : ExternalParent1, ExternalParent2
+class SampleClass : SampleExternalParent1, SampleExternalParent2
