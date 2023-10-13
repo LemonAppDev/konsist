@@ -1,0 +1,5 @@
+import com.externalpackage.SampleExternalParent
+
+object SampleObject: SampleExternalParent(
+    "some parent constructor param here"
+)

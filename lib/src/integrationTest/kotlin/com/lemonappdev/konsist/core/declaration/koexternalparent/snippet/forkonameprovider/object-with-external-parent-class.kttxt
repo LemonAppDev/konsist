@@ -1,0 +1,3 @@
+import com.externalpackage.SampleExternalParent
+
+object SampleObject: SampleExternalParent()
