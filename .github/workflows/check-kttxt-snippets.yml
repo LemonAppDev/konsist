@@ -32,12 +32,10 @@ jobs:
       - name: Echo Run Condition (any true to run)
         run: |
           echo Current branch starts with "release/": ${{ startsWith(steps.branch-name.outputs.current_branch, 'release/') }}
-          echo Base ref branch is "main": ${{ steps.branch-name.outputs.base_ref_branch == 'main' }}
           echo Changed .kttxt files: ${{  contains(steps.changed-files.outputs.all_changed_files, '.kttxt') }}
 
     outputs:
       current_branch: ${{ steps.branch-name.outputs.current_branch }}
-      base_ref_branch: ${{ steps.branch-name.outputs.base_ref_branch }}
       all_changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
 
   check-kttxt-snippets:
@@ -46,7 +44,6 @@ jobs:
     needs: get-github-context
     if: |
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, '.kttxt')
     steps:
       - name: Checkout
