@@ -34,7 +34,6 @@ interface KoVariableDeclaration :
     KoFullyQualifiedNameProvider,
     KoKDocProvider,
     KoLocationProvider,
-    KoModifierProvider,
     KoModuleProvider,
     KoNameProvider,
     KoPackageProvider,

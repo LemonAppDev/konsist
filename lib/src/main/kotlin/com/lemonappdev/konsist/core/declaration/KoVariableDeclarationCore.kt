@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
+import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
@@ -32,6 +33,7 @@ import org.jetbrains.kotlin.psi.KtExpression
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtPropertyAccessor
+import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoVariableDeclarationCore private constructor(
     private val ktProperty: KtProperty,
@@ -43,10 +45,9 @@ internal class KoVariableDeclarationCore private constructor(
     KoContainingFileProviderCore,
     KoDelegateProviderCore,
     KoPropertyTypeProviderCore,
-    KoFullyQualifiedNameProviderCore,
+    KoDeclarationFullyQualifiedNameProviderCore,
     KoKDocProviderCore,
     KoLocationProviderCore,
-    KoModifierProviderCore,
     KoNameProviderCore,
     KoPackageDeclarationProviderCore,
     KoContainingDeclarationProviderCore,
@@ -60,13 +61,13 @@ internal class KoVariableDeclarationCore private constructor(
     KoVarModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktProperty }
 
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktProperty }
-
     override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktProperty }
 
     override val psiElement: PsiElement by lazy { ktProperty }
 
     override val ktElement: KtElement by lazy { ktProperty }
+
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktProperty }
 
     override val ktExpression: KtExpression? by lazy {
         ktProperty
