@@ -22,7 +22,7 @@ jobs:
           echo Changed files:
           echo ${{ steps.changed-files.outputs.all_changed_files }} | tr ' ' '\n'
 
-# ======================================= Run Tests =========================================================
+  # ======================================= Run Tests =========================================================
   konsist-junit-test:
     name: Konsist JUnit Test
     runs-on: ubuntu-latest
@@ -107,7 +107,7 @@ jobs:
           name: api-test-report
           path: ./lib/build/test-results/apiTest/
 
-# ======================================= Run Linters =========================================================
+  # ======================================= Run Linters =========================================================
 
   konsist-spotless:
     name: Konsist Spotless
@@ -146,7 +146,7 @@ jobs:
           name: detekt-report
           path: ./**/build/reports/detekt/detekt.*
 
-# ======================================= Check Paths =======================================
+  # ======================================= Check Paths =======================================
 
   path-tester-project-ubuntu:
     name: Path Tester Project Ubuntu
@@ -242,30 +242,7 @@ jobs:
       - name: Run App Integration Test
         run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew app:integrationTest
 
-# ======================================= Check Sample External Library =======================================
-
-  sample-external-library:
-    name: Sample External Library
-    needs: get-github-context
-    runs-on: ubuntu-latest
-    if: |
-        contains(steps.changed-files.outputs.all_changed_files, 'projects/helper-projects/sample-external-library')
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: |
-            8
-            19
-          distribution: 'zulu'
-
-      - name: Build
-        run: cd projects/helper-projects/sample-external-library/ && ./gradlew build
-
-# ======================================= Library Artifact =========================================================
+  # ======================================= Library Artifact =========================================================
 
   konsist-artifact-check:
     name: Konsist Artifact Check
@@ -315,7 +292,7 @@ jobs:
       - name: Check Bytecode version
         run: python3 scripts/check_bytecode_version.py
 
-# ======================================= Other =========================================================
+  # ======================================= Other =========================================================
 
   konsist-dokka:
     name: Konsist Dokka
