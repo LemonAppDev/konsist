@@ -228,7 +228,28 @@ jobs:
       - name: Run App Integration Test
         run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew app:integrationTest
 
+# ======================================= Check Sample External Library =======================================
+
+  sample-external-library:
+    name: Sample External Library
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: |
+            8
+            19
+          distribution: 'zulu'
+
+      - name: Build
+        run: cd projects/helper-projects/sample-external-library/ && ./gradlew build
+
 # ======================================= Library Artifact =========================================================
+
   konsist-artifact-check:
     name: Konsist Artifact Check
     runs-on: ubuntu-latest
