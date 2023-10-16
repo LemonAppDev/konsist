@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core.declaration.kointerface
 
+import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.externalsample.SampleExternalGenericInterface
 import com.lemonappdev.konsist.externalsample.SampleExternalInterface
-import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.testdata.SampleParentClass
 import com.lemonappdev.konsist.testdata.SampleParentInterface1
 import com.lemonappdev.konsist.testdata.SampleParentInterface2

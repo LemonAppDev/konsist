@@ -2,8 +2,6 @@ package com.lemonappdev.konsist.api.ext.provider.koparentclass
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.provider.hasParentClassOf
-import com.lemonappdev.konsist.externalsample.SampleExternalClass
-import com.lemonappdev.konsist.externalsample.SampleExternalInterface
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleParentClass
 import com.lemonappdev.konsist.testdata.SampleParentInterface

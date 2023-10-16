@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.psi.KtPackageDirective
 
 internal class KoPackageDeclarationCore internal constructor(
     private val fqn: String,
-    override val ktElement: KtElement
+    override val ktElement: KtElement,
 ) :
     KoPackageDeclaration,
     KoBaseProviderCore,
@@ -37,7 +37,7 @@ internal class KoPackageDeclarationCore internal constructor(
 
     private constructor(ktPackageDirective: KtPackageDirective) : this(
         ktPackageDirective.fqName.toString(),
-        ktPackageDirective
+        ktPackageDirective,
     ) {
         this.ktPackageDirective = ktPackageDirective
     }
@@ -46,7 +46,7 @@ internal class KoPackageDeclarationCore internal constructor(
         get() = ktElement
 
     override val fullyQualifiedName: String by lazy {
-        if(ktPackageDirective == null) {
+        if (ktPackageDirective == null) {
             fqn.substringBeforeLast(".")
         } else if (ktPackageDirective?.fqName != FqName.ROOT) {
             ktPackageDirective?.fqName.toString()
@@ -66,7 +66,7 @@ internal class KoPackageDeclarationCore internal constructor(
         ): KoPackageDeclaration =
             cache.getOrCreateInstance(ktPackageDirective, containingDeclaration) {
                 KoPackageDeclarationCore(
-                    ktPackageDirective
+                    ktPackageDirective,
                 )
             }
     }

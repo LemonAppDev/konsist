@@ -5,8 +5,6 @@ import com.lemonappdev.konsist.api.ext.provider.hasExternalParentOf
 import com.lemonappdev.konsist.externalsample.SampleExternalClass
 import com.lemonappdev.konsist.externalsample.SampleExternalInterface
 import com.lemonappdev.konsist.testdata.SampleParentClass
-import com.lemonappdev.konsist.testdata.SampleParentInterface
-import com.lemonappdev.konsist.testdata.SampleParentInterface1
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
