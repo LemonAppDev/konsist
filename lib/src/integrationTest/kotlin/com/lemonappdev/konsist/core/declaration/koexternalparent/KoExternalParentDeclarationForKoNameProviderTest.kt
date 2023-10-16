@@ -16,7 +16,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalClass"
     }
 
     @Test
@@ -28,7 +28,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalGenericClass"
     }
 
     @Test
@@ -40,7 +40,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalClassWithParameter"
     }
 
     @Test
@@ -52,7 +52,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalGenericClassWithParameter"
     }
 
     @Test
@@ -64,7 +64,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalInterface"
     }
 
     @Test
@@ -76,7 +76,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalGenericInterface"
     }
 
     @Test
@@ -88,7 +88,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalInterface"
     }
 
     @Test
@@ -100,7 +100,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalInterface"
     }
 
     @Test
@@ -112,7 +112,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalGenericInterface"
     }
 
     @Test
@@ -124,7 +124,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalClass"
     }
 
     @Test
@@ -136,7 +136,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalGenericClass"
     }
 
     @Test
@@ -148,7 +148,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalClassWithParameter"
     }
 
     @Test
@@ -160,7 +160,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalGenericClassWithParameter"
     }
 
     @Test
@@ -172,7 +172,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalInterface"
     }
 
     @Test
@@ -184,7 +184,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalGenericInterface"
     }
 
     @Test
@@ -199,7 +199,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
         // then
         sut
             .name
-            .shouldBeEqualTo("SampleExternalParent")
+            .shouldBeEqualTo("SampleExternalClassWithParameter")
     }
 
     private fun getSnippetFile(fileName: String) =

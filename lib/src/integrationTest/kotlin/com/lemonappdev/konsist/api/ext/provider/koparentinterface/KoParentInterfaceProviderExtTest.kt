@@ -2,6 +2,8 @@ package com.lemonappdev.konsist.api.ext.provider.koparentinterface
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.provider.hasParentInterfaceOf
+import com.lemonappdev.konsist.externalsample.SampleExternalClass
+import com.lemonappdev.konsist.externalsample.SampleExternalInterface
 import com.lemonappdev.konsist.testdata.SampleParentClass
 import com.lemonappdev.konsist.testdata.SampleParentInterface
 import com.lemonappdev.konsist.testdata.SampleParentInterface1
@@ -11,9 +13,9 @@ import org.junit.jupiter.api.Test
 
 class KoParentInterfaceProviderExtTest {
     @Test
-    fun `class-has-parent-interface-with-imports`() {
+    fun `class-has-parent-interface-from-import`() {
         // given
-        val sut = getSnippetFile("class-has-parent-interface-with-imports")
+        val sut = getSnippetFile("class-has-parent-interface-from-import")
             .classes()
             .first()
 
@@ -26,9 +28,9 @@ class KoParentInterfaceProviderExtTest {
     }
 
     @Test
-    fun `class-has-parent-interface-without-imports`() {
+    fun `class-has-parent-interface-from-file`() {
         // given
-        val sut = getSnippetFile("class-has-parent-interface-without-imports")
+        val sut = getSnippetFile("class-has-parent-interface-from-file")
             .classes()
             .first()
 
@@ -41,9 +43,9 @@ class KoParentInterfaceProviderExtTest {
     }
 
     @Test
-    fun `object-has-parent-interface-with-imports`() {
+    fun `object-has-parent-interface-from-import`() {
         // given
-        val sut = getSnippetFile("object-has-parent-interface-with-imports")
+        val sut = getSnippetFile("object-has-parent-interface-from-import")
             .objects()
             .first()
 
@@ -56,9 +58,9 @@ class KoParentInterfaceProviderExtTest {
     }
 
     @Test
-    fun `object-has-parent-interface-without-imports`() {
+    fun `object-has-parent-interface-from-file`() {
         // given
-        val sut = getSnippetFile("object-has-parent-interface-without-imports")
+        val sut = getSnippetFile("object-has-parent-interface-from-file")
             .objects()
             .first()
 
@@ -71,9 +73,9 @@ class KoParentInterfaceProviderExtTest {
     }
 
     @Test
-    fun `interface-has-parent-interface-with-imports`() {
+    fun `interface-has-parent-interface-from-import`() {
         // given
-        val sut = getSnippetFile("interface-has-parent-interface-with-imports")
+        val sut = getSnippetFile("interface-has-parent-interface-from-import")
             .interfaces()
             .first()
 
@@ -86,9 +88,9 @@ class KoParentInterfaceProviderExtTest {
     }
 
     @Test
-    fun `interface-has-parent-interface-without-imports`() {
+    fun `interface-has-parent-interface-from-file`() {
         // given
-        val sut = getSnippetFile("interface-has-parent-interface-without-imports")
+        val sut = getSnippetFile("interface-has-parent-interface-from-file")
             .interfaces()
             .first()
 

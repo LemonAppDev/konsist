@@ -15,7 +15,7 @@ class KoExternalDeclarationTest {
             .first()
 
         // then
-        sut.toString() shouldBeEqualTo "ExternalParent"
+        sut.toString() shouldBeEqualTo "SampleExternalClass"
     }
 
     @Test
@@ -27,7 +27,7 @@ class KoExternalDeclarationTest {
             .first()
 
         // then
-        sut.toString() shouldBeEqualTo "ExternalParent"
+        sut.toString() shouldBeEqualTo "SampleExternalInterface"
     }
 
     @Test
@@ -39,10 +39,9 @@ class KoExternalDeclarationTest {
             .first()
 
         // then
-        sut.toString() shouldBeEqualTo "ExternalParent"
+        sut.toString() shouldBeEqualTo "SampleExternalClass"
     }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/koexternalparent/snippet/forgeneral/", fileName)
 }
-

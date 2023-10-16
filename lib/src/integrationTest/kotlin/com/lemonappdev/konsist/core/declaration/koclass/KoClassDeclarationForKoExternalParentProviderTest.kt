@@ -22,8 +22,8 @@ class KoClassDeclarationForKoExternalParentProviderTest {
             numExternalParents shouldBeEqualTo 0
             countExternalParents { it.name == "SampleExternalParent" } shouldBeEqualTo 0
             hasExternalParents() shouldBeEqualTo false
-            hasExternalParentWithName("SampleExternalParent1", "SampleExternalParent2") shouldBeEqualTo false
-            hasExternalParentsWithAllNames("SampleExternalParent1", "SampleExternalParent2") shouldBeEqualTo false
+            hasExternalParentWithName("SampleExternalClass", "SampleExternalInterface") shouldBeEqualTo false
+            hasExternalParentsWithAllNames("SampleExternalClass", "SampleExternalInterface") shouldBeEqualTo false
             hasExternalParent { it.name == "SampleExternalParent" } shouldBeEqualTo false
             hasAllExternalParents { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
             hasExternalParentOf(SampleParentInterface1::class) shouldBeEqualTo false
@@ -40,22 +40,22 @@ class KoClassDeclarationForKoExternalParentProviderTest {
 
         // then
         assertSoftly(sut) {
-            externalParents.map { it.name } shouldBeEqualTo listOf("SampleExternalParent1", "SampleExternalParent2")
+            externalParents.map { it.name } shouldBeEqualTo listOf("SampleExternalInterface", "SampleExternalGenericInterface")
             numExternalParents shouldBeEqualTo 2
-            countExternalParents { it.name == "SampleExternalParent1" } shouldBeEqualTo 1
+            countExternalParents { it.name == "SampleExternalInterface" } shouldBeEqualTo 1
             countExternalParents { it.hasNameStartingWith("SampleExternalParent") } shouldBeEqualTo 2
             hasExternalParents() shouldBeEqualTo true
-            hasExternalParentWithName("SampleExternalParent1") shouldBeEqualTo true
+            hasExternalParentWithName("SampleExternalInterface") shouldBeEqualTo true
             hasExternalParentWithName("OtherInterface") shouldBeEqualTo false
-            hasExternalParentWithName("SampleExternalParent1", "SampleExternalParent2") shouldBeEqualTo true
-            hasExternalParentWithName("SampleExternalParent1", "OtherInterface") shouldBeEqualTo true
-            hasExternalParentsWithAllNames("SampleExternalParent1") shouldBeEqualTo true
+            hasExternalParentWithName("SampleExternalInterface", "SampleExternalGenericInterface") shouldBeEqualTo true
+            hasExternalParentWithName("SampleExternalInterface", "OtherInterface") shouldBeEqualTo true
+            hasExternalParentsWithAllNames("SampleExternalInterface") shouldBeEqualTo true
             hasExternalParentsWithAllNames("OtherInterface") shouldBeEqualTo false
-            hasExternalParentsWithAllNames("SampleExternalParent1", "SampleExternalParent2") shouldBeEqualTo true
-            hasExternalParentsWithAllNames("SampleExternalParent1", "OtherInterface") shouldBeEqualTo false
-            hasExternalParent { it.name == "SampleExternalParent1" } shouldBeEqualTo true
+            hasExternalParentsWithAllNames("SampleExternalInterface", "SampleExternalGenericInterface") shouldBeEqualTo true
+            hasExternalParentsWithAllNames("SampleExternalInterface", "OtherInterface") shouldBeEqualTo false
+            hasExternalParent { it.name == "SampleExternalInterface" } shouldBeEqualTo true
             hasExternalParent { it.name == "OtherInterface" } shouldBeEqualTo false
-            hasAllExternalParents { it.name == "SampleExternalParent1" } shouldBeEqualTo false
+            hasAllExternalParents { it.name == "SampleExternalInterface" } shouldBeEqualTo false
             hasAllExternalParents { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
             hasAllExternalParents { it.hasNameStartingWith("Other") } shouldBeEqualTo false
             hasExternalParentOf(SampleParentInterface1::class) shouldBeEqualTo true
@@ -75,22 +75,22 @@ class KoClassDeclarationForKoExternalParentProviderTest {
 
         // then
         assertSoftly(sut) {
-            externalParents.map { it.name } shouldBeEqualTo listOf("SampleExternalParent1", "SampleExternalParent2")
+            externalParents.map { it.name } shouldBeEqualTo listOf("SampleExternalInterface", "SampleExternalGenericInterface")
             numExternalParents shouldBeEqualTo 2
-            countExternalParents { it.name == "SampleExternalParent1" } shouldBeEqualTo 1
+            countExternalParents { it.name == "SampleExternalInterface" } shouldBeEqualTo 1
             countExternalParents { it.hasNameStartingWith("SampleExternalParent") } shouldBeEqualTo 2
             hasExternalParents() shouldBeEqualTo true
-            hasExternalParentWithName("SampleExternalParent1") shouldBeEqualTo true
+            hasExternalParentWithName("SampleExternalInterface") shouldBeEqualTo true
             hasExternalParentWithName("OtherInterface") shouldBeEqualTo false
-            hasExternalParentWithName("SampleExternalParent1", "SampleExternalParent2") shouldBeEqualTo true
-            hasExternalParentWithName("SampleExternalParent1", "OtherInterface") shouldBeEqualTo true
-            hasExternalParentsWithAllNames("SampleExternalParent1") shouldBeEqualTo true
+            hasExternalParentWithName("SampleExternalInterface", "SampleExternalGenericInterface") shouldBeEqualTo true
+            hasExternalParentWithName("SampleExternalInterface", "OtherInterface") shouldBeEqualTo true
+            hasExternalParentsWithAllNames("SampleExternalInterface") shouldBeEqualTo true
             hasExternalParentsWithAllNames("OtherInterface") shouldBeEqualTo false
-            hasExternalParentsWithAllNames("SampleExternalParent1", "SampleExternalParent2") shouldBeEqualTo true
-            hasExternalParentsWithAllNames("SampleExternalParent1", "OtherInterface") shouldBeEqualTo false
-            hasExternalParent { it.name == "SampleExternalParent1" } shouldBeEqualTo true
+            hasExternalParentsWithAllNames("SampleExternalInterface", "SampleExternalGenericInterface") shouldBeEqualTo true
+            hasExternalParentsWithAllNames("SampleExternalInterface", "OtherInterface") shouldBeEqualTo false
+            hasExternalParent { it.name == "SampleExternalInterface" } shouldBeEqualTo true
             hasExternalParent { it.name == "OtherInterface" } shouldBeEqualTo false
-            hasAllExternalParents { it.name == "SampleExternalParent1" } shouldBeEqualTo false
+            hasAllExternalParents { it.name == "SampleExternalInterface" } shouldBeEqualTo false
             hasAllExternalParents { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
             hasAllExternalParents { it.hasNameStartingWith("Other") } shouldBeEqualTo false
             hasExternalParentOf(SampleParentInterface1::class) shouldBeEqualTo true

@@ -2,6 +2,8 @@ package com.lemonappdev.konsist.api.ext.provider.koparentclass
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.provider.hasParentClassOf
+import com.lemonappdev.konsist.externalsample.SampleExternalClass
+import com.lemonappdev.konsist.externalsample.SampleExternalInterface
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleParentClass
 import com.lemonappdev.konsist.testdata.SampleParentInterface
@@ -11,9 +13,9 @@ import org.junit.jupiter.api.Test
 
 class KoParentClassProviderExtTest {
     @Test
-    fun `class-has-parent-class-with-imports`() {
+    fun `class-has-parent-class-from-import`() {
         // given
-        val sut = getSnippetFile("class-has-parent-class-with-imports")
+        val sut = getSnippetFile("class-has-parent-class-from-import")
             .classes()
             .first()
 
@@ -26,9 +28,9 @@ class KoParentClassProviderExtTest {
     }
 
     @Test
-    fun `class-has-parent-class-without-imports`() {
+    fun `class-has-parent-class-from-file`() {
         // given
-        val sut = getSnippetFile("class-has-parent-class-without-imports")
+        val sut = getSnippetFile("class-has-parent-class-from-file")
             .classes()
             .first()
 
@@ -41,9 +43,9 @@ class KoParentClassProviderExtTest {
     }
 
     @Test
-    fun `object-has-parent-class-with-imports`() {
+    fun `object-has-parent-class-from-import`() {
         // given
-        val sut = getSnippetFile("object-has-parent-class-with-imports")
+        val sut = getSnippetFile("object-has-parent-class-from-import")
             .objects()
             .first()
 
@@ -56,9 +58,9 @@ class KoParentClassProviderExtTest {
     }
 
     @Test
-    fun `object-has-parent-class-without-imports`() {
+    fun `object-has-parent-class-from-file`() {
         // given
-        val sut = getSnippetFile("object-has-parent-class-without-imports")
+        val sut = getSnippetFile("object-has-parent-class-from-file")
             .objects()
             .first()
 

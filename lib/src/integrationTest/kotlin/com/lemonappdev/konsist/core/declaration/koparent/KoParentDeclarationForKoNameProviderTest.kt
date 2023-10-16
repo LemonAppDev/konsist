@@ -198,7 +198,7 @@ class KoParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalClass"
     }
 
     @Test
@@ -210,7 +210,7 @@ class KoParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalGenericClass"
     }
 
     @Test
@@ -222,7 +222,7 @@ class KoParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalClassWithParameter"
     }
 
     @Test
@@ -234,7 +234,7 @@ class KoParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalGenericClassWithParameter"
     }
 
     @Test
@@ -246,7 +246,7 @@ class KoParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalInterface"
     }
 
     @Test
@@ -258,7 +258,7 @@ class KoParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalGenericInterface"
     }
 
     @Test
@@ -270,7 +270,7 @@ class KoParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalInterface"
     }
 
     @Test
@@ -330,7 +330,7 @@ class KoParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalInterface"
     }
 
     @Test
@@ -342,7 +342,7 @@ class KoParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalGenericInterface"
     }
 
     @Test
@@ -528,7 +528,7 @@ class KoParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalClass"
     }
 
     @Test
@@ -540,7 +540,7 @@ class KoParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalGenericClass"
     }
 
     @Test
@@ -552,7 +552,7 @@ class KoParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalClassWithParameter"
     }
 
     @Test
@@ -564,7 +564,7 @@ class KoParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalGenericClassWithParameter"
     }
 
     @Test
@@ -576,7 +576,7 @@ class KoParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalInterface"
     }
 
     @Test
@@ -588,7 +588,7 @@ class KoParentDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalParent"
+        sut.name shouldBeEqualTo "SampleExternalGenericInterface"
     }
 
     @Test
@@ -603,7 +603,7 @@ class KoParentDeclarationForKoNameProviderTest {
         // then
         sut
             .name
-            .shouldBeEqualTo("SampleExternalParent")
+            .shouldBeEqualTo("SampleExternalClassWithParameter")
     }
 
     private fun getSnippetFile(fileName: String) =
