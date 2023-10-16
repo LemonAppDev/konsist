@@ -8,6 +8,20 @@ on:
     types: [ opened, synchronize ]
 
 jobs:
+  get-github-context:
+    name: Get GitHub Context
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get Changed Files
+        id: changed-files
+        uses: tj-actions/changed-files@v39.2.2
+
+      - name: List Changed Files
+        run: |
+          echo Changed files:
+          echo ${{ steps.changed-files.outputs.all_changed_files }} | tr ' ' '\n'
+
 # ======================================= Run Tests =========================================================
   konsist-junit-test:
     name: Konsist JUnit Test
@@ -232,7 +246,10 @@ jobs:
 
   sample-external-library:
     name: Sample External Library
+    needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+        contains(steps.changed-files.outputs.all_changed_files, 'projects/helper-projects/sample-external-library')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
