@@ -51,7 +51,7 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
             .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.externalimport.ExternalParent"
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.externalsample.SampleExternalInterface"
     }
 
     @Test
@@ -123,7 +123,7 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
             .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.externalimport.ExternalParent"
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.externalsample.SampleExternalInterface"
     }
 
     @Test
@@ -195,7 +195,7 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
             .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.externalimport.ExternalParent"
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.externalsample.SampleExternalInterface"
     }
 
     @Test

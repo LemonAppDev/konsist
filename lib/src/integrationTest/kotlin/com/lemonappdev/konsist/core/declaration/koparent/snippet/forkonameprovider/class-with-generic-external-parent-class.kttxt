@@ -1,3 +1,3 @@
-import com.externalpackage.SampleExternalParent
+import com.lemonappdev.konsist.externalsample.SampleExternalGenericClass
 
-class SampleClass() : SampleExternalParent<Int>()
+class SampleClass() : SampleExternalGenericClass<Int>()

@@ -1,5 +1,5 @@
-import com.externalpackage.SampleExternalParent
+import com.lemonappdev.konsist.externalsample.SampleExternalClassWithParameter
 
-object SampleObject: SampleExternalParent(
+object SampleObject: SampleExternalClassWithParameter(
     "some parent constructor param here"
 )

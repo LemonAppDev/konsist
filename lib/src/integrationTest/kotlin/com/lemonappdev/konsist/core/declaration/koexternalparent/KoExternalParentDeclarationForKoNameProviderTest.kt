@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.koexternalparent
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.externalParents
+import com.lemonappdev.konsist.api.ext.list.parents
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -11,7 +12,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
         // given
         val sut = getSnippetFile("class-with-external-parent-class")
             .classes()
-            .externalParents
+            .parents
             .first()
 
         // then

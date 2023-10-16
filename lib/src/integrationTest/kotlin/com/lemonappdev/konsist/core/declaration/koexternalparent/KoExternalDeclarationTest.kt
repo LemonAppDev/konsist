@@ -45,3 +45,4 @@ class KoExternalDeclarationTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/koexternalparent/snippet/forgeneral/", fileName)
 }
+

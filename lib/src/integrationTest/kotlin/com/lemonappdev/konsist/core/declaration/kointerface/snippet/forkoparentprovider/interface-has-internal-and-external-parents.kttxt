@@ -1,7 +1,8 @@
-import com.externalimport.ExternalParent1
-import com.externalimport.ExternalParent2
+import com.lemonappdev.konsist.externalsample.SampleExternalGenericInterface
+import com.lemonappdev.konsist.externalsample.SampleExternalInterface
 
-interface SampleInterface : SampleParentInterface1, SampleParentInterface2, ExternalParent1, ExternalParent2
+interface SampleInterface : SampleParentInterface1, SampleParentInterface2, SampleExternalInterface,
+    SampleExternalGenericInterface<Int>
 
 interface SampleParentInterface1
 

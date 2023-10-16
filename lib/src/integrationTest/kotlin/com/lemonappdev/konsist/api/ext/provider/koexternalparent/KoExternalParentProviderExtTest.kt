@@ -2,6 +2,8 @@ package com.lemonappdev.konsist.api.ext.provider.koexternalparent
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.provider.hasExternalParentOf
+import com.lemonappdev.konsist.externalsample.SampleExternalClass
+import com.lemonappdev.konsist.externalsample.SampleExternalInterface
 import com.lemonappdev.konsist.testdata.SampleParentClass
 import com.lemonappdev.konsist.testdata.SampleParentInterface
 import com.lemonappdev.konsist.testdata.SampleParentInterface1
@@ -19,8 +21,8 @@ class KoExternalParentProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            hasExternalParentOf<SampleParentInterface>() shouldBeEqualTo true
-            hasExternalParentOf<SampleParentInterface1>() shouldBeEqualTo false
+            hasExternalParentOf<SampleExternalInterface>() shouldBeEqualTo true
+            hasExternalParentOf<SampleExternalClass>() shouldBeEqualTo false
             hasExternalParentOf<SampleParentClass>() shouldBeEqualTo false
         }
     }
@@ -34,8 +36,8 @@ class KoExternalParentProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            hasExternalParentOf<SampleParentInterface>() shouldBeEqualTo true
-            hasExternalParentOf<SampleParentInterface1>() shouldBeEqualTo false
+            hasExternalParentOf<SampleExternalInterface>() shouldBeEqualTo true
+            hasExternalParentOf<SampleExternalClass>() shouldBeEqualTo false
             hasExternalParentOf<SampleParentClass>() shouldBeEqualTo false
         }
     }
@@ -49,8 +51,8 @@ class KoExternalParentProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            hasExternalParentOf<SampleParentInterface>() shouldBeEqualTo true
-            hasExternalParentOf<SampleParentInterface1>() shouldBeEqualTo false
+            hasExternalParentOf<SampleExternalInterface>() shouldBeEqualTo true
+            hasExternalParentOf<SampleExternalClass>() shouldBeEqualTo false
             hasExternalParentOf<SampleParentClass>() shouldBeEqualTo false
         }
     }

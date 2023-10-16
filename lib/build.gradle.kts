@@ -29,7 +29,7 @@ testing {
                 implementation(libs.koTest)
 
                 // Include JAR to be able to test external parents (generated from sample-external-library project)
-                implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("sample-external-library-1.0.jar"))))
+                implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("sample-external-library-1.1.jar"))))
             }
         }
 
