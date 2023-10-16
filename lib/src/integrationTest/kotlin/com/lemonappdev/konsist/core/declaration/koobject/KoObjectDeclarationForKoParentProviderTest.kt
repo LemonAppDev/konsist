@@ -46,7 +46,7 @@ class KoObjectDeclarationForKoParentProviderTest {
                 "SampleParentClass",
                 "SampleParentInterface1",
                 "SampleParentInterface2",
-                "SampleExternalParent",
+                "SampleExternalInterface",
             )
             numParents shouldBeEqualTo 4
             countParents { it.name == "SampleParentClass" } shouldBeEqualTo 1

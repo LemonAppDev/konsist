@@ -1,5 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kointerface
 
+import com.lemonappdev.konsist.externalsample.SampleExternalGenericInterface
+import com.lemonappdev.konsist.externalsample.SampleExternalInterface
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.testdata.SampleParentClass
 import com.lemonappdev.konsist.testdata.SampleParentInterface1
@@ -43,7 +45,7 @@ class KoInterfaceDeclarationForKoExternalParentProviderTest {
             externalParents.map { it.name } shouldBeEqualTo listOf("SampleExternalInterface", "SampleExternalGenericInterface")
             numExternalParents shouldBeEqualTo 2
             countExternalParents { it.name == "SampleExternalInterface" } shouldBeEqualTo 1
-            countExternalParents { it.hasNameStartingWith("SampleExternalParent") } shouldBeEqualTo 2
+            countExternalParents { it.hasNameStartingWith("SampleExternal") } shouldBeEqualTo 2
             hasExternalParents() shouldBeEqualTo true
             hasExternalParentWithName("SampleExternalInterface") shouldBeEqualTo true
             hasExternalParentWithName("OtherInterface") shouldBeEqualTo false
@@ -58,11 +60,11 @@ class KoInterfaceDeclarationForKoExternalParentProviderTest {
             hasAllExternalParents { it.name == "SampleExternalInterface" } shouldBeEqualTo false
             hasAllExternalParents { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
             hasAllExternalParents { it.hasNameStartingWith("Other") } shouldBeEqualTo false
-            hasExternalParentOf(SampleParentInterface1::class) shouldBeEqualTo true
-            hasExternalParentOf(SampleParentInterface1::class, SampleParentClass::class) shouldBeEqualTo true
-            hasAllExternalParentsOf(SampleParentInterface1::class) shouldBeEqualTo true
-            hasAllExternalParentsOf(SampleParentInterface1::class, SampleParentClass::class) shouldBeEqualTo false
-            hasAllExternalParentsOf(SampleParentInterface1::class, SampleParentInterface2::class) shouldBeEqualTo true
+            hasExternalParentOf(SampleExternalInterface::class) shouldBeEqualTo true
+            hasExternalParentOf(SampleExternalInterface::class, SampleParentClass::class) shouldBeEqualTo true
+            hasAllExternalParentsOf(SampleExternalInterface::class) shouldBeEqualTo true
+            hasAllExternalParentsOf(SampleExternalInterface::class, SampleParentClass::class) shouldBeEqualTo false
+            hasAllExternalParentsOf(SampleExternalInterface::class, SampleExternalGenericInterface::class) shouldBeEqualTo true
         }
     }
 
@@ -78,7 +80,7 @@ class KoInterfaceDeclarationForKoExternalParentProviderTest {
             externalParents.map { it.name } shouldBeEqualTo listOf("SampleExternalInterface", "SampleExternalGenericInterface")
             numExternalParents shouldBeEqualTo 2
             countExternalParents { it.name == "SampleExternalInterface" } shouldBeEqualTo 1
-            countExternalParents { it.hasNameStartingWith("SampleExternalParent") } shouldBeEqualTo 2
+            countExternalParents { it.hasNameStartingWith("SampleExternal") } shouldBeEqualTo 2
             hasExternalParents() shouldBeEqualTo true
             hasExternalParentWithName("SampleExternalInterface") shouldBeEqualTo true
             hasExternalParentWithName("OtherInterface") shouldBeEqualTo false
@@ -93,11 +95,11 @@ class KoInterfaceDeclarationForKoExternalParentProviderTest {
             hasAllExternalParents { it.name == "SampleExternalInterface" } shouldBeEqualTo false
             hasAllExternalParents { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
             hasAllExternalParents { it.hasNameStartingWith("Other") } shouldBeEqualTo false
-            hasExternalParentOf(SampleParentInterface1::class) shouldBeEqualTo true
-            hasExternalParentOf(SampleParentInterface1::class, SampleParentClass::class) shouldBeEqualTo true
-            hasAllExternalParentsOf(SampleParentInterface1::class) shouldBeEqualTo true
-            hasAllExternalParentsOf(SampleParentInterface1::class, SampleParentClass::class) shouldBeEqualTo false
-            hasAllExternalParentsOf(SampleParentInterface1::class, SampleParentInterface2::class) shouldBeEqualTo true
+            hasExternalParentOf(SampleExternalInterface::class) shouldBeEqualTo true
+            hasExternalParentOf(SampleExternalInterface::class, SampleParentClass::class) shouldBeEqualTo true
+            hasAllExternalParentsOf(SampleExternalInterface::class) shouldBeEqualTo true
+            hasAllExternalParentsOf(SampleExternalInterface::class, SampleParentClass::class) shouldBeEqualTo false
+            hasAllExternalParentsOf(SampleExternalInterface::class, SampleExternalGenericInterface::class) shouldBeEqualTo true
         }
     }
 

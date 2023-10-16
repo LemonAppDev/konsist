@@ -46,24 +46,24 @@ class KoInterfaceDeclarationForKoParentProviderTest {
             parents.map { it.name } shouldBeEqualTo listOf(
                 "SampleParentInterface1",
                 "SampleParentInterface2",
-                "ExternalParent1",
-                "ExternalParent2",
+                "SampleExternalInterface",
+                "SampleExternalGenericInterface",
             )
             numParents shouldBeEqualTo 4
             countParents { it.name == "SampleParentInterface1" } shouldBeEqualTo 1
-            countParents { it.hasNameStartingWith("External") } shouldBeEqualTo 2
+            countParents { it.hasNameStartingWith("SampleExternal") } shouldBeEqualTo 2
             hasParents() shouldBeEqualTo true
             hasParentWithName("SampleParentInterface1") shouldBeEqualTo true
             hasParentWithName("OtherInterface") shouldBeEqualTo false
             hasParentWithName("SampleParentInterface1", "OtherInterface") shouldBeEqualTo true
             hasParentsWithAllNames("SampleParentInterface1") shouldBeEqualTo true
             hasParentsWithAllNames("OtherInterface") shouldBeEqualTo false
-            hasParentsWithAllNames("SampleParentInterface1", "ExternalParent1") shouldBeEqualTo true
+            hasParentsWithAllNames("SampleParentInterface1", "SampleExternalInterface") shouldBeEqualTo true
             hasParentsWithAllNames("SampleParentInterface1", "OtherInterface") shouldBeEqualTo false
             hasParent { it.name == "SampleParentInterface1" } shouldBeEqualTo true
             hasParent { it.name == "OtherInterface" } shouldBeEqualTo false
             hasAllParents { it.name == "SampleParentInterface1" } shouldBeEqualTo false
-            hasAllParents { it.hasNameContaining("Parent") } shouldBeEqualTo true
+            hasAllParents { it.hasNameContaining("Parent") || it.hasNameContaining("External") } shouldBeEqualTo true
             hasAllParents { it.hasNameStartingWith("Other") } shouldBeEqualTo false
             hasParentOf(SampleParentInterface1::class) shouldBeEqualTo true
             hasParentOf(SampleParentInterface1::class, SampleInterface::class) shouldBeEqualTo true
