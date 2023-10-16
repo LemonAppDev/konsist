@@ -12,7 +12,6 @@ object DataCore {
     }
 
     val interfaces: List<KoInterfaceDeclaration> by lazy {
-
         Konsist
             .scopeFromProject()
             .interfaces()
