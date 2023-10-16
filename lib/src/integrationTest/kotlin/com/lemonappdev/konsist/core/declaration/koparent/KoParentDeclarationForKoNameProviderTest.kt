@@ -190,6 +190,20 @@ class KoParentDeclarationForKoNameProviderTest {
     }
 
     @Test
+    fun `class-with-multiline-parent-from-import`() {
+        // given
+        val sut = getSnippetFile("class-with-multiline-parent-from-import")
+            .classes()
+            .parents
+            .first()
+
+        // then
+        sut
+            .name
+            .shouldBeEqualTo("SampleClassWithParameter")
+    }
+
+    @Test
     fun `class-with-external-parent-class`() {
         // given
         val sut = getSnippetFile("class-with-external-parent-class")

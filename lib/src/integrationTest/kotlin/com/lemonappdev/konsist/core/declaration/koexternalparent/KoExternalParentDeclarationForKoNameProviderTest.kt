@@ -92,6 +92,18 @@ class KoExternalParentDeclarationForKoNameProviderTest {
     }
 
     @Test
+    fun `class-with-multiline-external-parent`() {
+        // given
+        val sut = getSnippetFile("class-with-multiline-external-parent")
+            .classes()
+            .externalParents
+            .first()
+
+        // then
+        sut.name shouldBeEqualTo "SampleExternalClassWithParameter"
+    }
+
+    @Test
     fun `interface-with-external-parent-interface`() {
         // given
         val sut = getSnippetFile("interface-with-external-parent-interface")
