@@ -1,6 +1,3 @@
-# Local configuration file
-local.properties
-
 # Build Files #
 bin
 target
