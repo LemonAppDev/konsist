@@ -1,3 +1,3 @@
 package com.lemonappdev.konsist.externalsample
 
-open class SampleExternalClass
+interface SampleExternalInterface
