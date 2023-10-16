@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
@@ -25,6 +26,8 @@ internal class KoExternalParentDeclarationCore(name: String, private val ktSuper
             .replace(EndOfLine.UNIX.value, " ")
             .substringBefore(" by")
     }
+
+    override val packagee: KoPackageDeclaration? by lazy { KoPackageDeclarationCore(fullyQualifiedName, ktSuperTypeListEntry) }
 
     override fun toString(): String = name
 }
