@@ -77,41 +77,22 @@ class KoClassDeclarationForKoParentClassProviderTest {
     }
 
     @Test
-    fun `class-has-parent-class-without-primary-constructor`() {
+    fun `class-has-parent-class-with-duplicated-name`() {
+        /*
+        In Kotlin, we may have a situation that we have two classes with the same name - one defined in current file
+        and second one defined in another file.
+
+        When we use class with this name as a parent, the correct class is the imported one.
+         */
         // given
-        val sut = getSnippetFile("class-has-parent-class-without-primary-constructor")
+        val sut = getSnippetFile("class-has-parent-class-with-duplicated-name")
             .classes()
             .first()
 
         // then
         assertSoftly(sut) {
-            parentClass?.name shouldBeEqualTo "SampleParentClass"
-            hasParentClass() shouldBeEqualTo true
-            hasParentClass { it.name == "SampleParentClass" } shouldBeEqualTo true
-            hasParentClass { it.name == "OtherClass" } shouldBeEqualTo false
-            hasParentClassWithName("SampleParentClass") shouldBeEqualTo true
-            hasParentClassWithName("OtherClass") shouldBeEqualTo false
-            hasParentClassWithName("SampleParentClass", "OtherClass") shouldBeEqualTo true
-            hasParentClassOf(SampleParentClass::class) shouldBeEqualTo true
-            hasParentClassOf(SampleClass::class) shouldBeEqualTo false
-            hasParentClassOf(SampleParentClass::class, SampleClass::class) shouldBeEqualTo true
-            hasParentClass("SampleParentClass") shouldBeEqualTo true
-            hasParentClass("OtherClass") shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `class-has-parent-class-with-one-parameter`() {
-        // given
-        val sut = getSnippetFile("class-has-parent-class-with-one-parameter")
-            .classes()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            parentClass?.name shouldBeEqualTo "SampleClassWithParameter"
-            parentClass?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleClassWithParameter"
-            parentClass?.hasConstructor { it.numParameters == 1 } shouldBeEqualTo true
+            parentClass?.name shouldBeEqualTo "SampleParentClassWithDuplicatedName"
+            parentClass?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleParentClassWithDuplicatedName"
         }
     }
 

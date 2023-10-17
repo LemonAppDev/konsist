@@ -77,7 +77,13 @@ class KoObjectDeclarationForKoParentClassProviderTest {
     }
 
     @Test
-    fun `object-has-parent-class-with-one-parameter`() {
+    fun `object-has-parent-class-with-duplicated-name`() {
+        /*
+        In Kotlin, we may have a situation that we have two classes with the same name - one defined in current file
+        and second one defined in another file.
+
+        When we use class with this name as a parent, the correct class is the imported one.
+         */
         // given
         val sut = getSnippetFile("object-has-parent-class-with-one-parameter")
             .objects()
@@ -85,9 +91,8 @@ class KoObjectDeclarationForKoParentClassProviderTest {
 
         // then
         assertSoftly(sut) {
-            parentClass?.name shouldBeEqualTo "SampleClassWithParameter"
-            parentClass?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleClassWithParameter"
-            parentClass?.hasConstructor { it.numParameters == 1 } shouldBeEqualTo true
+            parentClass?.name shouldBeEqualTo "SampleParentClassWithDuplicatedName"
+            parentClass?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleParentClassWithDuplicatedName"
         }
     }
 

@@ -77,6 +77,20 @@ class KoClassDeclarationForKoParentProviderTest {
         }
     }
 
+    @Test
+    fun `class-has-parent-defined-by-import-alias`() {
+        // given
+        val sut = getSnippetFile("class-has-parent-defined-by-import-alias")
+            .classes()
+            .first()
+
+        // then
+        assertSoftly(sut.parents.first()) {
+            name shouldBeEqualTo "SampleParentInterface"
+            fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleParentInterface"
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koclass/snippet/forkoparentprovider/", fileName)
 }

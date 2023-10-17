@@ -1,5 +1,5 @@
 import com.lemonappdev.konsist.testdata.SampleParentClassWithDuplicatedName
 
-object SampleObject : SampleParentClassWithDuplicatedName()
+class SampleClass : SampleParentClassWithDuplicatedName()
 
 open class SampleParentClassWithDuplicatedName
