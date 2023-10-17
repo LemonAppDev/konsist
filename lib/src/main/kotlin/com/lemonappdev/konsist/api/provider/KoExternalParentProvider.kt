@@ -10,6 +10,8 @@ interface KoExternalParentProvider : KoBaseProvider {
     /**
      * The external parents of the declaration.
      * Does not include external parents defined in other files such as parent of the parent.
+     *
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
      */
     val externalParents: List<KoExternalParentDeclaration>
 
@@ -23,6 +25,7 @@ interface KoExternalParentProvider : KoBaseProvider {
      *
      * @param predicate The predicate function to determine if a external parent satisfies a condition.
      * @return The number of external parents in the declaration satisfying predicate.
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
      */
     fun countExternalParents(predicate: (KoExternalParentDeclaration) -> Boolean): Int
 
@@ -31,6 +34,7 @@ interface KoExternalParentProvider : KoBaseProvider {
      * Does not include external parents defined in other files such as parent of the parent.
      *
      * @return `true` if the declaration has any external parent, `false` otherwise.
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
      */
     fun hasExternalParents(): Boolean
 
@@ -42,6 +46,7 @@ interface KoExternalParentProvider : KoBaseProvider {
      * @param name the name of the external parent to check.
      * @param names the names of the external parents to check.
      * @return `true` if there is a matching declaration, `false` otherwise.
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
      */
     fun hasExternalParentWithName(name: String, vararg names: String): Boolean
 
@@ -53,6 +58,7 @@ interface KoExternalParentProvider : KoBaseProvider {
      * @param name The name of the external parent to check.
      * @param names The names of the external parents to check.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
      */
     fun hasExternalParentsWithAllNames(name: String, vararg names: String): Boolean
 
@@ -63,6 +69,7 @@ interface KoExternalParentProvider : KoBaseProvider {
      *
      * @param predicate A function that defines the condition to be met by a external parent.
      * @return `true` if there is a matching declaration, `false` otherwise.
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
      */
     fun hasExternalParent(predicate: (KoExternalParentDeclaration) -> Boolean): Boolean
 
@@ -77,6 +84,7 @@ interface KoExternalParentProvider : KoBaseProvider {
      *
      * @param predicate A function that defines the condition to be met by external parents.
      * @return `true` if all external parents satisfy the predicate, `false` otherwise.
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
      */
     fun hasAllExternalParents(predicate: (KoExternalParentDeclaration) -> Boolean): Boolean
 
@@ -86,6 +94,7 @@ interface KoExternalParentProvider : KoBaseProvider {
      * @param name the `KClass` type of the external parent to check.
      * @param names the `KClass` types of the external parents to check.
      * @return `true` if there is a matching declaration, `false` otherwise.
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
      */
     fun hasExternalParentOf(name: KClass<*>, vararg names: KClass<*>): Boolean
 
@@ -95,6 +104,7 @@ interface KoExternalParentProvider : KoBaseProvider {
      * @param name the `KClass` type of the external parent to check.
      * @param names the `KClass` types of the external parents to check.
      * @return `true` if the declaration has external parents of all the specified `KClass` types, `false` otherwise.
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
      */
     fun hasAllExternalParentsOf(name: KClass<*>, vararg names: KClass<*>): Boolean
 }
