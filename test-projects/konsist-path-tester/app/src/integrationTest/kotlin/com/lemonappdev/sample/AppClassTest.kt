@@ -27,6 +27,8 @@ enum class AppEnumClassTest {
 }
 
 fun appFunctionTest() {
+    @Suppress("detekt.UnusedPrivateProperty")
+    val appVariableTest = ""
     println("some text")
 }
 

@@ -27,6 +27,8 @@ enum class LibEnumClassTest {
 }
 
 fun libFunctionTest() {
+    @Suppress("detekt.UnusedPrivateProperty")
+    val libVariableTest = ""
     println("some text")
 }
 

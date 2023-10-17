@@ -27,6 +27,8 @@ enum class AppEnumClass {
 }
 
 fun appFunction() {
+    @Suppress("detekt.UnusedPrivateProperty")
+    val appVariable = ""
     println("some text")
 }
 

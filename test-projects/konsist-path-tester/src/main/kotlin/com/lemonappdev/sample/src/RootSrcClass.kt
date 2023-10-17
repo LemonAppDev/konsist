@@ -27,6 +27,8 @@ enum class RootSrcEnumClass {
 }
 
 fun rootSrcFunction() {
+    @Suppress("detekt.UnusedPrivateProperty")
+    val rootSrcVariable = ""
     println("some text")
 }
 
