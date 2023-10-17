@@ -1,24 +1,62 @@
 package com.lemonappdev.konsist.core.declaration.kovariable
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.enumConstants
+import com.lemonappdev.konsist.api.ext.list.getters
+import com.lemonappdev.konsist.api.ext.list.initBlocks
+import com.lemonappdev.konsist.api.ext.list.setters
 import com.lemonappdev.konsist.api.ext.list.variables
 import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
+import com.lemonappdev.konsist.api.provider.KoVariableProvider
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldContain
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class KoVariableDeclarationForKoContainingDeclarationProviderTest {
-    @Test
-    fun `variable-parent-declaration`() {
+    @ParameterizedTest
+    @MethodSource("provideValues")
+    fun `variable-parent-declaration`(declarations: List<KoVariableProvider>, result: String) {
         // given
-        val sut = getSnippetFile("variable-parent-declaration")
-            .functions()
+        val sut = declarations
             .variables
             .first()
 
         // then
-        (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "sampleFunction"
+        (sut.containingDeclaration as KoTextProvider).text shouldContain result
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kovariable/snippet/forkocontainingdeclarationprovider/", fileName)
+    companion object {
+        private fun getSnippetFile(fileName: String) =
+            getSnippetKoScope("core/declaration/kovariable/snippet/forkocontainingdeclarationprovider/", fileName)
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValues() = listOf(
+            arguments(
+                getSnippetFile("variable-in-function-parent-declaration").functions(),
+                "fun sampleFunction()"
+            ),
+            arguments(
+                getSnippetFile("variable-in-init-block-parent-declaration").classes().initBlocks,
+                "init {"
+            ),
+            arguments(
+                getSnippetFile("variable-in-enum-constant-parent-declaration").classes().enumConstants,
+                "SAMPLE_CONSTANT_1"
+            ),
+            arguments(
+                getSnippetFile("variable-in-getter-parent-declaration").properties().getters,
+                "get() {"
+            ),
+            arguments(
+                getSnippetFile("variable-in-setter-parent-declaration").properties().setters,
+                "set(value) {"
+            ),
+        )
+    }
 }

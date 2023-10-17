@@ -1,7 +1,12 @@
 package com.lemonappdev.konsist.core.declaration.kovariable
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.enumConstants
+import com.lemonappdev.konsist.api.ext.list.getters
+import com.lemonappdev.konsist.api.ext.list.initBlocks
+import com.lemonappdev.konsist.api.ext.list.setters
 import com.lemonappdev.konsist.api.ext.list.variables
+import com.lemonappdev.konsist.api.provider.KoVariableProvider
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
@@ -9,13 +14,17 @@ import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class KoVariableDeclarationForKoAnnotationProviderTest {
-    @Test
-    fun `variable-has-no-annotation`() {
+    @ParameterizedTest
+    @MethodSource("provideValuesForNoAnnotation")
+    fun `variable-has-no-annotation`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = getSnippetFile("variable-has-no-annotation")
-            .functions()
+        val sut = declarations
             .variables
             .first()
 
@@ -35,11 +44,11 @@ class KoVariableDeclarationForKoAnnotationProviderTest {
         }
     }
 
-    @Test
-    fun `variable-has-annotation`() {
+    @ParameterizedTest
+    @MethodSource("provideValuesForOneAnnotation")
+    fun `variable-has-annotation`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = getSnippetFile("variable-has-annotation")
-            .functions()
+        val sut = declarations
             .variables
             .first()
 
@@ -83,11 +92,11 @@ class KoVariableDeclarationForKoAnnotationProviderTest {
         }
     }
 
-    @Test
-    fun `variable-has-two-annotations`() {
+    @ParameterizedTest
+    @MethodSource("provideValuesForTwoAnnotations")
+    fun `variable-has-two-annotations`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = getSnippetFile("variable-has-two-annotations")
-            .functions()
+        val sut = declarations
             .variables
             .first()
 
@@ -142,11 +151,11 @@ class KoVariableDeclarationForKoAnnotationProviderTest {
         }
     }
 
-    @Test
-    fun `variable-has-suppress-annotation-without-import`() {
+    @ParameterizedTest
+    @MethodSource("provideValuesForSuppressAnnotation")
+    fun `variable-has-suppress-annotation-without-import`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = getSnippetFile("variable-has-suppress-annotation-without-import")
-            .functions()
+        val sut = declarations
             .variables
             .first()
 
@@ -157,6 +166,58 @@ class KoVariableDeclarationForKoAnnotationProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kovariable/snippet/forkoannotationprovider/", fileName)
+    companion object {
+        private fun getSnippetFile(fileName: String) =
+            getSnippetKoScope("core/declaration/kovariable/snippet/forkoannotationprovider/", fileName)
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForNoAnnotation() = listOf(
+            arguments(getSnippetFile("variable-in-function-has-no-annotation").functions()),
+            arguments(getSnippetFile("variable-in-init-block-has-no-annotation").classes().initBlocks),
+            arguments(getSnippetFile("variable-in-enum-constant-has-no-annotation").classes().enumConstants),
+            arguments(getSnippetFile("variable-in-getter-has-no-annotation").properties().getters),
+            arguments(getSnippetFile("variable-in-setter-has-no-annotation").properties().setters),
+        )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForOneAnnotation() = listOf(
+            arguments(getSnippetFile("variable-in-function-has-annotation").functions()),
+            arguments(getSnippetFile("variable-in-init-block-has-annotation").classes().initBlocks),
+            arguments(getSnippetFile("variable-in-enum-constant-has-annotation").classes().enumConstants),
+            arguments(getSnippetFile("variable-in-getter-has-annotation").properties().getters),
+            arguments(getSnippetFile("variable-in-setter-has-annotation").properties().setters),
+        )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForTwoAnnotations() = listOf(
+            arguments(getSnippetFile("variable-in-function-has-two-annotations").functions()),
+            arguments(getSnippetFile("variable-in-init-block-has-two-annotations").classes().initBlocks),
+            arguments(getSnippetFile("variable-in-enum-constant-has-two-annotations").classes().enumConstants),
+            arguments(getSnippetFile("variable-in-getter-has-two-annotations").properties().getters),
+            arguments(getSnippetFile("variable-in-setter-has-two-annotations").properties().setters),
+        )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForSuppressAnnotation() = listOf(
+            arguments(
+                getSnippetFile("variable-in-function-has-suppress-annotation-without-import").functions()
+            ),
+            arguments(
+                getSnippetFile("variable-in-init-block-has-suppress-annotation-without-import").classes().initBlocks
+            ),
+            arguments(
+                getSnippetFile("variable-in-enum-constant-has-suppress-annotation-without-import").classes().enumConstants
+            ),
+            arguments(
+                getSnippetFile("variable-in-getter-has-suppress-annotation-without-import").properties().getters
+            ),
+            arguments(
+                getSnippetFile("variable-in-setter-has-suppress-annotation-without-import").properties().setters
+            ),
+        )
+    }
 }
