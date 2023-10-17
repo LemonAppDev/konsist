@@ -6,7 +6,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoTypeAliasDeclarationForKoTypeProviderTest {
+class KoTypeAliasDeclarationForKoNonNullableTypeProviderTest {
     @Test
     fun `typealias-has-simple-type`() {
         // given
@@ -64,5 +64,5 @@ class KoTypeAliasDeclarationForKoTypeProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypealias/snippet/forkotypeprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypealias/snippet/forkononnullabletypeprovider/", fileName)
 }

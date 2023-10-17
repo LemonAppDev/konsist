@@ -12,7 +12,7 @@ import com.lemonappdev.konsist.core.provider.KoKotlinTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
-import com.lemonappdev.konsist.core.provider.KoNullableTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoNullableProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceAndAliasTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
@@ -31,7 +31,7 @@ internal class KoTypeDeclarationCore private constructor(
     KoKotlinTypeProviderCore,
     KoLocationProviderCore,
     KoNameProviderCore,
-    KoNullableTypeProviderCore,
+    KoNullableProviderCore,
     KoPathProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore,

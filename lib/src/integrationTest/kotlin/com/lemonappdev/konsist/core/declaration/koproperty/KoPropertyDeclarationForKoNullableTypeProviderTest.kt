@@ -5,7 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoPropertyDeclarationForKoPropertyTypeProviderTest {
+class KoPropertyDeclarationForKoNullableTypeProviderTest {
     @Test
     fun `property-without-type`() {
         // given
@@ -44,5 +44,5 @@ class KoPropertyDeclarationForKoPropertyTypeProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/koproperty/snippet/forkopropertytypeprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koproperty/snippet/forkonullabletypeprovider/", fileName)
 }

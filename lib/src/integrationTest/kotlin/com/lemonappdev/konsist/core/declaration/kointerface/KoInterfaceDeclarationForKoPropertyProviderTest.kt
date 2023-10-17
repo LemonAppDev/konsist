@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.declaration.kointerface
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoModifier.ABSTRACT
 import com.lemonappdev.konsist.api.KoModifier.PRIVATE
-import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -108,10 +107,10 @@ class KoInterfaceDeclarationForKoPropertyProviderTest {
             containsProperty { it.name == "sampleProperty" && it.hasAbstractModifier } shouldBeEqualTo true
             containsProperty { it.name == "sampleProperty" && it.hasPublicModifier } shouldBeEqualTo false
             containsProperty { it.name == "sampleProperty" && it.hasModifiers(ABSTRACT, PRIVATE) } shouldBeEqualTo false
-            containsProperty(includeNested = false,) { it.name == "sampleOtherProperty" } shouldBeEqualTo false
-            containsProperty(includeNested = true,) { it.name == "sampleNestedProperty" && it.hasInternalModifier } shouldBeEqualTo true
-            containsProperty(includeNested = false,) { it.name == "sampleNestedProperty" && it.hasInternalModifier } shouldBeEqualTo false
-            containsProperty(includeNested = true,) { it.name == "sampleNestedProperty" && it.hasOpenModifier } shouldBeEqualTo false
+            containsProperty(includeNested = false) { it.name == "sampleOtherProperty" } shouldBeEqualTo false
+            containsProperty(includeNested = true) { it.name == "sampleNestedProperty" && it.hasInternalModifier } shouldBeEqualTo true
+            containsProperty(includeNested = false) { it.name == "sampleNestedProperty" && it.hasInternalModifier } shouldBeEqualTo false
+            containsProperty(includeNested = true) { it.name == "sampleNestedProperty" && it.hasOpenModifier } shouldBeEqualTo false
         }
     }
 

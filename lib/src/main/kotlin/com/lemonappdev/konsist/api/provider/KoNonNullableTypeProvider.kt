@@ -4,9 +4,9 @@ import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import kotlin.reflect.KClass
 
 /**
- * An interface representing a Kotlin declaration that provides access to its type information.
+ * An interface representing a Kotlin declaration that provides access to its non-nullable type information.
  */
-interface KoTypeProvider : KoBaseProvider {
+interface KoNonNullableTypeProvider : KoBaseProvider {
     /**
      * Type of the declaration.
      */

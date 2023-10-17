@@ -1,13 +1,13 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoPropertyTypeProvider
+import com.lemonappdev.konsist.api.provider.KoNullableTypeProvider
 import kotlin.reflect.KClass
 
 /**
  * List containing type declarations.
  */
-val <T : KoPropertyTypeProvider> List<T>.types: List<KoTypeDeclaration>
+val <T : KoNullableTypeProvider> List<T>.types: List<KoTypeDeclaration>
     get() = mapNotNull { it.type }
 
 /**
@@ -17,7 +17,7 @@ val <T : KoPropertyTypeProvider> List<T>.types: List<KoTypeDeclaration>
  * @return A list containing declarations with the specified type (or any type if [names] is empty).
  */
 @Deprecated("Will be removed in v1.0.0", ReplaceWith("withType { it.name == ... }"))
-fun <T : KoPropertyTypeProvider> List<T>.withType(vararg names: String): List<T> = filter {
+fun <T : KoNullableTypeProvider> List<T>.withType(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> it.hasType()
         else -> names.any { type -> it.hasType(type) }
@@ -31,7 +31,7 @@ fun <T : KoPropertyTypeProvider> List<T>.withType(vararg names: String): List<T>
  * @return A list containing declarations without specified type (or none type if [names] is empty).
  */
 @Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutType { it.name != ... }"))
-fun <T : KoPropertyTypeProvider> List<T>.withoutType(vararg names: String): List<T> = filter {
+fun <T : KoNullableTypeProvider> List<T>.withoutType(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> !it.hasType()
         else -> names.none { type -> it.hasType(type) }
@@ -44,7 +44,7 @@ fun <T : KoPropertyTypeProvider> List<T>.withoutType(vararg names: String): List
  * @param predicate The predicate function to determine if a declaration type satisfies a condition.
  * @return A list containing declarations with the specified type (or any type if [predicate] is null).
  */
-fun <T : KoPropertyTypeProvider> List<T>.withType(predicate: ((KoTypeDeclaration) -> Boolean)? = null): List<T> =
+fun <T : KoNullableTypeProvider> List<T>.withType(predicate: ((KoTypeDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
             null -> it.hasType()
@@ -58,7 +58,7 @@ fun <T : KoPropertyTypeProvider> List<T>.withType(predicate: ((KoTypeDeclaration
  * @param predicate The predicate function to determine if a declaration type satisfies a condition.
  * @return A list containing declarations without the specified type (or none type if [predicate] is null).
  */
-fun <T : KoPropertyTypeProvider> List<T>.withoutType(predicate: ((KoTypeDeclaration) -> Boolean)? = null): List<T> =
+fun <T : KoNullableTypeProvider> List<T>.withoutType(predicate: ((KoTypeDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
         when (predicate) {
             null -> it.hasType()
@@ -73,7 +73,7 @@ fun <T : KoPropertyTypeProvider> List<T>.withoutType(predicate: ((KoTypeDeclarat
  * @param kClasses The Kotlin class(es) representing the type(s) to include.
  * @return A list containing declarations with the type of the specified Kotlin class(es).
  */
-fun <T : KoPropertyTypeProvider> List<T>.withTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
+fun <T : KoNullableTypeProvider> List<T>.withTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
         it.hasTypeOf(kClass) ||
             if (kClasses.isNotEmpty()) {
@@ -90,7 +90,7 @@ fun <T : KoPropertyTypeProvider> List<T>.withTypeOf(kClass: KClass<*>, vararg kC
  * @param kClasses The Kotlin class(es) representing the type(s) to exclude.
  * @return A list containing declarations without type of the specified Kotlin class(es).
  */
-fun <T : KoPropertyTypeProvider> List<T>.withoutTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
+fun <T : KoNullableTypeProvider> List<T>.withoutTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filterNot {
         it.hasTypeOf(kClass) ||
             if (kClasses.isNotEmpty()) {

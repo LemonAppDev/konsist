@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.container
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 

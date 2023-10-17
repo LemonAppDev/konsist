@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoModifier.INTERNAL
 import com.lemonappdev.konsist.api.KoModifier.OPEN
 import com.lemonappdev.konsist.api.KoModifier.PRIVATE
-import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -111,7 +110,7 @@ class KoClassDeclarationForKoPropertyProviderTest {
             containsProperty { it.name == "sampleProperty" && it.hasPublicModifier } shouldBeEqualTo false
             containsProperty { it.name == "sampleProperty" && it.hasModifiers(INTERNAL, PRIVATE) } shouldBeEqualTo false
             containsProperty(includeNested = false) { it.name == "sampleOtherProperty" } shouldBeEqualTo false
-            containsProperty(includeNested = true,) { it.name == "sampleNestedProperty" && it.hasInternalModifier } shouldBeEqualTo true
+            containsProperty(includeNested = true) { it.name == "sampleNestedProperty" && it.hasInternalModifier } shouldBeEqualTo true
             containsProperty(includeNested = false) { it.name == "sampleNestedProperty" && it.hasInternalModifier } shouldBeEqualTo false
         }
     }
@@ -127,10 +126,10 @@ class KoClassDeclarationForKoPropertyProviderTest {
 
         // then
         assertSoftly(sut) {
-            containsProperty(includeNested = false,) { it.name.matches(regex1) } shouldBeEqualTo true
-            containsProperty(includeNested = true,) { it.name.matches(regex1) } shouldBeEqualTo true
-            containsProperty(includeNested = false,) { it.name.matches(regex2) } shouldBeEqualTo false
-            containsProperty(includeNested = true,) { it.name.matches(regex2) } shouldBeEqualTo false
+            containsProperty(includeNested = false) { it.name.matches(regex1) } shouldBeEqualTo true
+            containsProperty(includeNested = true) { it.name.matches(regex1) } shouldBeEqualTo true
+            containsProperty(includeNested = false) { it.name.matches(regex2) } shouldBeEqualTo false
+            containsProperty(includeNested = true) { it.name.matches(regex2) } shouldBeEqualTo false
         }
     }
 

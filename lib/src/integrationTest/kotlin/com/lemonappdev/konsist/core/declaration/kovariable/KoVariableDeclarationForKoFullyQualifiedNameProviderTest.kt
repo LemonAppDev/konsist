@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kovariable
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.ext.list.localDeclarations
-import com.lemonappdev.konsist.api.ext.list.localFunctions
 import com.lemonappdev.konsist.api.ext.list.variables
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
