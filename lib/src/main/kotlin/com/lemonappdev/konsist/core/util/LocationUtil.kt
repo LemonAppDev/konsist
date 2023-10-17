@@ -10,7 +10,7 @@ object LocationUtil {
      *    \w  = Matches any word char (alpha & underscore).
      *    +   = Match 1 or more of the preceding token.
      *    |   = OR
-     *  \.{2}?= allow using '..' as wildcard optionally
+     *  \.{2}?= allow using '..' as wildcard optionally (only one accepted)
      *    \w  = Matches any word char (alpha & underscore).
      *    +   = Match 1 or more of the preceding token.
      *    |   = OR
