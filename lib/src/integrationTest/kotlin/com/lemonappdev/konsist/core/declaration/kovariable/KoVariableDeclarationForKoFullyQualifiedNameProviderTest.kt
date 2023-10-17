@@ -8,9 +8,7 @@ import com.lemonappdev.konsist.api.ext.list.setters
 import com.lemonappdev.konsist.api.ext.list.variables
 import com.lemonappdev.konsist.api.provider.KoVariableProvider
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
@@ -43,7 +41,7 @@ class KoVariableDeclarationForKoFullyQualifiedNameProviderTest {
         private fun getSnippetFile(fileName: String) =
             getSnippetKoScope(
                 "core/declaration/kovariable/snippet/forkodeclarationfullyqualifiednameprovider/",
-                fileName
+                fileName,
             )
 
         @Suppress("unused")
@@ -60,19 +58,19 @@ class KoVariableDeclarationForKoFullyQualifiedNameProviderTest {
         @JvmStatic
         fun provideValuesWithoutPackage() = listOf(
             arguments(
-                getSnippetFile("variable-in-function-fully-qualified-name-without-package").functions()
+                getSnippetFile("variable-in-function-fully-qualified-name-without-package").functions(),
             ),
             arguments(
-                getSnippetFile("variable-in-init-block-fully-qualified-name-without-package").classes().initBlocks
+                getSnippetFile("variable-in-init-block-fully-qualified-name-without-package").classes().initBlocks,
             ),
             arguments(
-                getSnippetFile("variable-in-enum-constant-fully-qualified-name-without-package").classes().enumConstants
+                getSnippetFile("variable-in-enum-constant-fully-qualified-name-without-package").classes().enumConstants,
             ),
             arguments(
-                getSnippetFile("variable-in-getter-fully-qualified-name-without-package").properties().getters
+                getSnippetFile("variable-in-getter-fully-qualified-name-without-package").properties().getters,
             ),
             arguments(
-                getSnippetFile("variable-in-setter-fully-qualified-name-without-package").properties().setters
+                getSnippetFile("variable-in-setter-fully-qualified-name-without-package").properties().setters,
             ),
         )
     }

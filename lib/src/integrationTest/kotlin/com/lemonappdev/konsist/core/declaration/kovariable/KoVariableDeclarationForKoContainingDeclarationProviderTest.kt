@@ -6,14 +6,10 @@ import com.lemonappdev.konsist.api.ext.list.getters
 import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.setters
 import com.lemonappdev.konsist.api.ext.list.variables
-import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoVariableProvider
-import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldContain
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
@@ -39,23 +35,23 @@ class KoVariableDeclarationForKoContainingDeclarationProviderTest {
         fun provideValues() = listOf(
             arguments(
                 getSnippetFile("variable-in-function-parent-declaration").functions(),
-                "fun sampleFunction()"
+                "fun sampleFunction()",
             ),
             arguments(
                 getSnippetFile("variable-in-init-block-parent-declaration").classes().initBlocks,
-                "init {"
+                "init {",
             ),
             arguments(
                 getSnippetFile("variable-in-enum-constant-parent-declaration").classes().enumConstants,
-                "SAMPLE_CONSTANT_1"
+                "SAMPLE_CONSTANT_1",
             ),
             arguments(
                 getSnippetFile("variable-in-getter-parent-declaration").properties().getters,
-                "get() {"
+                "get() {",
             ),
             arguments(
                 getSnippetFile("variable-in-setter-parent-declaration").properties().setters,
-                "set(value) {"
+                "set(value) {",
             ),
         )
     }

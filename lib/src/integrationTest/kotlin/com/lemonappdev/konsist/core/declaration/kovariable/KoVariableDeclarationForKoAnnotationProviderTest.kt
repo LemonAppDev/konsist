@@ -13,9 +13,7 @@ import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
@@ -204,19 +202,19 @@ class KoVariableDeclarationForKoAnnotationProviderTest {
         @JvmStatic
         fun provideValuesForSuppressAnnotation() = listOf(
             arguments(
-                getSnippetFile("variable-in-function-has-suppress-annotation-without-import").functions()
+                getSnippetFile("variable-in-function-has-suppress-annotation-without-import").functions(),
             ),
             arguments(
-                getSnippetFile("variable-in-init-block-has-suppress-annotation-without-import").classes().initBlocks
+                getSnippetFile("variable-in-init-block-has-suppress-annotation-without-import").classes().initBlocks,
             ),
             arguments(
-                getSnippetFile("variable-in-enum-constant-has-suppress-annotation-without-import").classes().enumConstants
+                getSnippetFile("variable-in-enum-constant-has-suppress-annotation-without-import").classes().enumConstants,
             ),
             arguments(
-                getSnippetFile("variable-in-getter-has-suppress-annotation-without-import").properties().getters
+                getSnippetFile("variable-in-getter-has-suppress-annotation-without-import").properties().getters,
             ),
             arguments(
-                getSnippetFile("variable-in-setter-has-suppress-annotation-without-import").properties().setters
+                getSnippetFile("variable-in-setter-has-suppress-annotation-without-import").properties().setters,
             ),
         )
     }
