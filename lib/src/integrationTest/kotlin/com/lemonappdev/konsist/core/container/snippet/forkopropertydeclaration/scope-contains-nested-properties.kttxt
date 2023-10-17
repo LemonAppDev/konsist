@@ -1,3 +1,5 @@
+val sampleProperty = ""
+
 fun sampleFunction() {
     val sampleLocalProperty = 6
 }

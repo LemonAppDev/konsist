@@ -1,5 +1,5 @@
 package com.samplepackage
 
 fun sampleFunction() {
-    val sampleProperty = ""
+    val sampleVariable = ""
 }

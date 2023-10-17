@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.core.declaration.kovariable
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.localDeclarations
+import com.lemonappdev.konsist.api.ext.list.localFunctions
 import com.lemonappdev.konsist.api.ext.list.variables
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -15,7 +17,7 @@ class KoVariableDeclarationForKoFullyQualifiedNameProviderTest {
             .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.sampleFunction.sampleProperty"
+        sut.fullyQualifiedName shouldBeEqualTo "sampleVariable"
     }
 
     @Test
@@ -27,7 +29,7 @@ class KoVariableDeclarationForKoFullyQualifiedNameProviderTest {
             .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "sampleFunction.sampleProperty"
+        sut.fullyQualifiedName shouldBeEqualTo "sampleVariable"
     }
 
     private fun getSnippetFile(fileName: String) =

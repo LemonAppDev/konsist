@@ -1,4 +1,6 @@
 interface SampleInterface {
+    val sampleProperty = 0
+
     fun sampleFunction() {
         val sampleLocalProperty = 6
     }

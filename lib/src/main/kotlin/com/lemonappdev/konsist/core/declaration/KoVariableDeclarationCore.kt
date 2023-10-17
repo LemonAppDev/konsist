@@ -8,8 +8,8 @@ import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
-import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
+import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -24,6 +24,7 @@ import com.lemonappdev.konsist.core.provider.modifier.KoValModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVarModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.util.EndOfLine
+import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtElement
@@ -42,7 +43,7 @@ internal class KoVariableDeclarationCore private constructor(
     KoContainingFileProviderCore,
     KoDelegateProviderCore,
     KoPropertyTypeProviderCore,
-    KoDeclarationFullyQualifiedNameProviderCore,
+    KoFullyQualifiedNameProviderCore,
     KoKDocProviderCore,
     KoLocationProviderCore,
     KoNameProviderCore,
@@ -63,8 +64,6 @@ internal class KoVariableDeclarationCore private constructor(
     override val psiElement: PsiElement by lazy { ktProperty }
 
     override val ktElement: KtElement by lazy { ktProperty }
-
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktProperty }
 
     override val ktExpression: KtExpression? by lazy {
         ktProperty
@@ -87,6 +86,8 @@ internal class KoVariableDeclarationCore private constructor(
     override val hasValModifier: Boolean by lazy { !ktProperty.isVar }
 
     override val hasVarModifier: Boolean by lazy { ktProperty.isVar }
+
+    override val fullyQualifiedName: String by lazy { name }
 
     override fun toString(): String = name
 
