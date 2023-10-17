@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.SampleClassWithParameter
+
+class SampleClass : SampleClassWithParameter("")
+
+open class SampleClassWithParameter(val param1: Int, val param2: String)

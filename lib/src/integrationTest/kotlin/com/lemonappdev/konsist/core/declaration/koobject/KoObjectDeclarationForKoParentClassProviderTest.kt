@@ -76,6 +76,21 @@ class KoObjectDeclarationForKoParentClassProviderTest {
         }
     }
 
+    @Test
+    fun `object-has-parent-class-with-one-parameter`() {
+        // given
+        val sut = getSnippetFile("object-has-parent-class-with-one-parameter")
+            .objects()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            parentClass?.name shouldBeEqualTo "SampleClassWithParameter"
+            parentClass?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleClassWithParameter"
+            parentClass?.hasConstructor { it.numParameters == 1 } shouldBeEqualTo true
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koobject/snippet/forkoparentclassprovider/", fileName)
 }

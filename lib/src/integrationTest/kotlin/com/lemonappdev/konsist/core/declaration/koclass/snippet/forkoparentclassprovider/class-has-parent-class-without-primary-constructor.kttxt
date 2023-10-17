@@ -1,0 +1,5 @@
+class SampleClass : SampleParentClass {
+    constructor(param: Int) : super(param)
+}
+
+open class SampleParentClass(param: Int)

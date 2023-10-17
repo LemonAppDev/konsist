@@ -80,7 +80,7 @@ internal interface KoParentProviderCore :
     private fun getParentClass(
         name: String,
         fqn: String?,
-        ktSuperTypeListEntry: KtSuperTypeListEntry
+        ktSuperTypeListEntry: KtSuperTypeListEntry,
     ): KoClassDeclaration? {
         val numArguments = ktSuperTypeListEntry
             .children
@@ -101,9 +101,11 @@ internal interface KoParentProviderCore :
     }
 
     private fun checkClassCompatibility(koClass: KoClassDeclaration, name: String, fqn: String?, numArguments: Int) =
-        (koClass.name == name || (koClass.packagee?.fullyQualifiedName + "." + koClass.name) == fqn)
-                && (koClass.constructors.any { it.numParameters == numArguments }
-                || (numArguments == 0 && koClass.numConstructors == 0))
+        (koClass.name == name || (koClass.packagee?.fullyQualifiedName + "." + koClass.name) == fqn) &&
+            (
+                koClass.constructors.any { it.numParameters == numArguments } ||
+                    (numArguments == 0 && koClass.numConstructors == 0)
+                )
 
     private fun getParentInterface(name: String, fqn: String?): KoInterfaceDeclaration? = containingFile
         .interfaces()
