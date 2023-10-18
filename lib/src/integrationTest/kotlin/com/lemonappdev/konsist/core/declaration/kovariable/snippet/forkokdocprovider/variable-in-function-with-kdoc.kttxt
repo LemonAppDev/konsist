@@ -2,5 +2,5 @@ fun sampleFunction() {
     /**
      * Sample KDoc
      */
-    val sampleProperty = ""
+     val sampleVariable = ""
 }

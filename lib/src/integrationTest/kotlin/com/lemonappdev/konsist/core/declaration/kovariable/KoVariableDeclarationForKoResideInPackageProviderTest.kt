@@ -1,59 +1,75 @@
 package com.lemonappdev.konsist.core.declaration.kovariable
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.enumConstants
+import com.lemonappdev.konsist.api.ext.list.getters
+import com.lemonappdev.konsist.api.ext.list.initBlocks
+import com.lemonappdev.konsist.api.ext.list.setters
 import com.lemonappdev.konsist.api.ext.list.variables
+import com.lemonappdev.konsist.api.provider.KoVariableProvider
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class KoVariableDeclarationForKoResideInPackageProviderTest {
-    @Test
-    fun `variable-not-reside-in-file-package`() {
+    @ParameterizedTest
+    @MethodSource("provideValuesWithoutPackage")
+    fun `variable-not-reside-in-file-package`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = getSnippetFile("variable-not-reside-in-file-package")
-            .functions()
+        val sut = declarations
             .variables
             .first()
 
         // then
-        sut.resideInPackage("com") shouldBeEqualTo false
+        assertSoftly(sut) {
+            resideInPackage("com") shouldBeEqualTo false
+            resideOutsidePackage("com") shouldBeEqualTo true
+        }
     }
 
-    @Test
-    fun `variable-reside-in-file-package`() {
+    @ParameterizedTest
+    @MethodSource("provideValuesWithPackage")
+    fun `variable-reside-in-file-package`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = getSnippetFile("variable-reside-in-file-package")
-            .functions()
+        val sut = declarations
             .variables
             .first()
 
         // then
-        sut.resideInPackage("com..") shouldBeEqualTo true
+        assertSoftly(sut) {
+            resideInPackage("com..") shouldBeEqualTo true
+            resideInPackage("com") shouldBeEqualTo false
+            resideOutsidePackage("com..") shouldBeEqualTo false
+            resideOutsidePackage("com") shouldBeEqualTo true
+        }
     }
 
-    @Test
-    fun `variable-not-reside-outside-file-package`() {
-        // given
-        val sut = getSnippetFile("variable-not-reside-outside-file-package")
-            .functions()
-            .variables
-            .first()
+    companion object {
+        private fun getSnippetFile(fileName: String) =
+            getSnippetKoScope("core/declaration/kovariable/snippet/forkoresideinpackageprovider/", fileName)
 
-        // then
-        sut.resideOutsidePackage("com..") shouldBeEqualTo false
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesWithoutPackage() = listOf(
+            arguments(getSnippetFile("variable-in-function-not-reside-in-file-package").functions()),
+            arguments(getSnippetFile("variable-in-init-block-not-reside-in-file-package").classes().initBlocks),
+            arguments(getSnippetFile("variable-in-enum-constant-not-reside-in-file-package").classes().enumConstants),
+            arguments(getSnippetFile("variable-in-getter-not-reside-in-file-package").properties().getters),
+            arguments(getSnippetFile("variable-in-setter-not-reside-in-file-package").properties().setters),
+        )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesWithPackage() = listOf(
+            arguments(getSnippetFile("variable-in-function-reside-in-file-package").functions()),
+            arguments(getSnippetFile("variable-in-init-block-reside-in-file-package").classes().initBlocks),
+            arguments(getSnippetFile("variable-in-enum-constant-reside-in-file-package").classes().enumConstants),
+            arguments(getSnippetFile("variable-in-getter-reside-in-file-package").properties().getters),
+            arguments(getSnippetFile("variable-in-setter-reside-in-file-package").properties().setters),
+        )
     }
-
-    @Test
-    fun `variable-reside-outside-file-package`() {
-        // given
-        val sut = getSnippetFile("variable-reside-outside-file-package")
-            .functions()
-            .variables
-            .first()
-
-        // then
-        sut.resideOutsidePackage("com") shouldBeEqualTo true
-    }
-
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kovariable/snippet/forkoresideinpackageprovider/", fileName)
 }

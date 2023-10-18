@@ -3,5 +3,5 @@ import com.lemonappdev.konsist.testdata.SampleAnnotation2
 
 fun sampleFunction() {
     @SampleAnnotation1 @SampleAnnotation2
-    val sampleProperty = ""
+     val sampleVariable = ""
 }

@@ -1,4 +1,4 @@
 fun sampleFunction() {
     @Suppress
-    val sampleProperty = ""
+     val sampleVariable = ""
 }
