@@ -10,6 +10,7 @@ class AppClass(val appParameter: String) : AppInterface {
     constructor(otherParameter: Int) : this(otherParameter.toString())
 
     init {
+        @Suppress("detekt.UnusedPrivateProperty")
         val appVariable = ""
         println("App init block")
     }
@@ -19,10 +20,12 @@ interface AppInterface
 
 var appProperty: AppClass = AppClass("")
     get() {
+        @Suppress("detekt.UnusedPrivateProperty")
         val appVariable = ""
         return AppClass("app value")
     }
     private set(value) {
+        @Suppress("detekt.UnusedPrivateProperty")
         val appVariable = ""
         if (true) field = value
     }

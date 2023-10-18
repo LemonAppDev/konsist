@@ -9,9 +9,7 @@ import com.lemonappdev.konsist.api.ext.list.variables
 import com.lemonappdev.konsist.api.provider.KoVariableProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
@@ -44,7 +42,7 @@ class KoVariableDeclarationForKoPathProviderTest {
             .projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kovariable/snippet/" +
-                        "forkopathprovider/$name.kt",
+                    "forkopathprovider/$name.kt",
             )
     }
 
@@ -91,23 +89,23 @@ class KoVariableDeclarationForKoPathProviderTest {
         fun provideValuesForFilePath() = listOf(
             arguments(
                 getSnippetFile("variable-in-function-file-path").functions(),
-                "variable-in-function-file-path"
+                "variable-in-function-file-path",
             ),
             arguments(
                 getSnippetFile("variable-in-init-block-file-path").classes().initBlocks,
-                "variable-in-init-block-file-path"
+                "variable-in-init-block-file-path",
             ),
             arguments(
                 getSnippetFile("variable-in-enum-constant-file-path").classes().enumConstants,
-                "variable-in-enum-constant-file-path"
+                "variable-in-enum-constant-file-path",
             ),
             arguments(
                 getSnippetFile("variable-in-getter-file-path").properties().getters,
-                "variable-in-getter-file-path"
+                "variable-in-getter-file-path",
             ),
             arguments(
                 getSnippetFile("variable-in-setter-file-path").properties().setters,
-                "variable-in-setter-file-path"
+                "variable-in-setter-file-path",
             ),
         )
 
@@ -116,23 +114,23 @@ class KoVariableDeclarationForKoPathProviderTest {
         fun provideValuesForProjectFilePath() = listOf(
             arguments(
                 getSnippetFile("variable-in-function-project-file-path").functions(),
-                "variable-in-function-project-file-path"
+                "variable-in-function-project-file-path",
             ),
             arguments(
                 getSnippetFile("variable-in-init-block-project-file-path").classes().initBlocks,
-                "variable-in-init-block-project-file-path"
+                "variable-in-init-block-project-file-path",
             ),
             arguments(
                 getSnippetFile("variable-in-enum-constant-project-file-path").classes().enumConstants,
-                "variable-in-enum-constant-project-file-path"
+                "variable-in-enum-constant-project-file-path",
             ),
             arguments(
                 getSnippetFile("variable-in-getter-project-file-path").properties().getters,
-                "variable-in-getter-project-file-path"
+                "variable-in-getter-project-file-path",
             ),
             arguments(
                 getSnippetFile("variable-in-setter-project-file-path").properties().setters,
-                "variable-in-setter-project-file-path"
+                "variable-in-setter-project-file-path",
             ),
         )
 
@@ -141,23 +139,23 @@ class KoVariableDeclarationForKoPathProviderTest {
         fun provideValuesForResideInFilePath() = listOf(
             arguments(
                 getSnippetFile("variable-in-function-reside-in-file-path").functions(),
-                "variable-in-function-reside-in-file-path"
+                "variable-in-function-reside-in-file-path",
             ),
             arguments(
                 getSnippetFile("variable-in-init-block-reside-in-file-path").classes().initBlocks,
-                "variable-in-init-block-reside-in-file-path"
+                "variable-in-init-block-reside-in-file-path",
             ),
             arguments(
                 getSnippetFile("variable-in-enum-constant-reside-in-file-path").classes().enumConstants,
-                "variable-in-enum-constant-reside-in-file-path"
+                "variable-in-enum-constant-reside-in-file-path",
             ),
             arguments(
                 getSnippetFile("variable-in-getter-reside-in-file-path").properties().getters,
-                "variable-in-getter-reside-in-file-path"
+                "variable-in-getter-reside-in-file-path",
             ),
             arguments(
                 getSnippetFile("variable-in-setter-reside-in-file-path").properties().setters,
-                "variable-in-setter-reside-in-file-path"
+                "variable-in-setter-reside-in-file-path",
             ),
         )
 
@@ -166,23 +164,23 @@ class KoVariableDeclarationForKoPathProviderTest {
         fun provideValuesForResideInProjectFilePath() = listOf(
             arguments(
                 getSnippetFile("variable-in-function-reside-in-project-file-path").functions(),
-                "variable-in-function-reside-in-project-file-path"
+                "variable-in-function-reside-in-project-file-path",
             ),
             arguments(
                 getSnippetFile("variable-in-init-block-reside-in-project-file-path").classes().initBlocks,
-                "variable-in-init-block-reside-in-project-file-path"
+                "variable-in-init-block-reside-in-project-file-path",
             ),
             arguments(
                 getSnippetFile("variable-in-enum-constant-reside-in-project-file-path").classes().enumConstants,
-                "variable-in-enum-constant-reside-in-project-file-path"
+                "variable-in-enum-constant-reside-in-project-file-path",
             ),
             arguments(
                 getSnippetFile("variable-in-getter-reside-in-project-file-path").properties().getters,
-                "variable-in-getter-reside-in-project-file-path"
+                "variable-in-getter-reside-in-project-file-path",
             ),
             arguments(
                 getSnippetFile("variable-in-setter-reside-in-project-file-path").properties().setters,
-                "variable-in-setter-reside-in-project-file-path"
+                "variable-in-setter-reside-in-project-file-path",
             ),
         )
     }

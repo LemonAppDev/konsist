@@ -10,6 +10,7 @@ class LibClassTest(val libParameterTest: String) : LibInterfaceTest {
     constructor(otherParameterTest: Int) : this(otherParameterTest.toString())
 
     init {
+        @Suppress("detekt.UnusedPrivateProperty")
         val libVariableTest = ""
         println("Lib test init block")
     }
@@ -19,10 +20,12 @@ interface LibInterfaceTest
 
 var libPropertyTest: LibClassTest = LibClassTest("")
     get() {
+        @Suppress("detekt.UnusedPrivateProperty")
         val libVariableTest = ""
         return LibClassTest("lib value test")
     }
     private set(value) {
+        @Suppress("detekt.UnusedPrivateProperty")
         val libVariableTest = ""
         if (true) field = value
     }

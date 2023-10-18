@@ -10,6 +10,7 @@ class RootClass(val rootParameter: String) : RootInterface {
     constructor(otherParameter: Int) : this(otherParameter.toString())
 
     init {
+        @Suppress("detekt.UnusedPrivateProperty")
         val rootVariable = ""
         println("Root init block")
     }
@@ -19,10 +20,12 @@ interface RootInterface
 
 var rootProperty: RootClass = RootClass("")
     get() {
+        @Suppress("detekt.UnusedPrivateProperty")
         val rootVariable = ""
         return RootClass("root value")
     }
     private set(value) {
+        @Suppress("detekt.UnusedPrivateProperty")
         val rootVariable = ""
         if (true) field = value
     }

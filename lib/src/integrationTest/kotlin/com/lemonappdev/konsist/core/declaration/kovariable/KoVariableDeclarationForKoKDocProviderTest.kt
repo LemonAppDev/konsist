@@ -10,14 +10,12 @@ import com.lemonappdev.konsist.api.provider.KoVariableProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldNotBeEqualTo
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
 class KoVariableDeclarationForKoKDocProviderTest {
-     @ParameterizedTest
+    @ParameterizedTest
     @MethodSource("provideValuesForNoKDoc")
     fun `variable-without-kdoc`(declarations: List<KoVariableProvider>) {
         // given
@@ -32,7 +30,7 @@ class KoVariableDeclarationForKoKDocProviderTest {
         }
     }
 
-     @ParameterizedTest
+    @ParameterizedTest
     @MethodSource("provideValuesForKDoc")
     fun `variable-with-kdoc`(declarations: List<KoVariableProvider>) {
         // given
@@ -47,7 +45,7 @@ class KoVariableDeclarationForKoKDocProviderTest {
         }
     }
 
-     @ParameterizedTest
+    @ParameterizedTest
     @MethodSource("provideValuesForOneLineKDoc")
     fun `variable-with-one-line-kdoc`(declarations: List<KoVariableProvider>) {
         // given
