@@ -257,10 +257,10 @@ fun <T : KoParentProvider> List<T>.withoutAllParentsOf(
 @Deprecated("Will be removed in v1.0.0.", ReplaceWith("withParentOf(*kClasses"))
 fun <T : KoParentProvider> List<T>.withSomeParentsOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
-        it.parents().any { parent -> parent.name == kClass.simpleName } ||
+        it.parents.any { parent -> parent.name == kClass.simpleName } ||
                 kClasses.any { kClass ->
                     it
-                        .parents()
+                        .parents
                         .any { parent -> parent.name == kClass.simpleName }
                 }
     }
