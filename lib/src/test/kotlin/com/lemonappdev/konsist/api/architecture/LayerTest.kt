@@ -19,7 +19,7 @@ class LayerTest {
     }
 
     @Test
-    fun `throws an exception when layer is defined by package without two dots at the end and there are another two dots used as wildcard`() {
+    fun `throws an exception when layer is defined by package without two dots at the end with dots as wildcard`() {
         // given
         val sut = { Layer("Domain", "package..feature") }
 
@@ -54,22 +54,11 @@ class LayerTest {
     @Test
     fun `throws an exception when layer is defined by package containing dots with more than two dots at the end`() {
         // given
-        val sut = { Layer("Domain", "first.second.third_p.package....") }
-
-        // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Layer Domain must be defined by package ending with '..'. Now: first.second.third_p.package.... .
-        """.trimIndent()
-    }
-
-    @Test
-    fun `throws an exception when layer is defined by package containing dots with more than two dots at the end and there are another two dots used as wildcard`() {
-        // given
         val sut = { Layer("Domain", "first.second..third_p.package....") }
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Layer Domain must be defined by package ending with '..'. Now: first.second..third_p.package.... .
+            Layer Domain must be defined by package ending with '..'. Now: first.second.third_p.package.... .
         """.trimIndent()
     }
 
