@@ -58,7 +58,7 @@ class LayerTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Layer Domain must be defined by package ending with '..'. Now: first.second.third_p.package.... .
+            Layer Domain must be defined by package ending with '..'. Now: first.second..third_p.package.... .
         """.trimIndent()
     }
 
