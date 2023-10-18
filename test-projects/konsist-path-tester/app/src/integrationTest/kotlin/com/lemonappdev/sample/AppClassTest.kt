@@ -10,6 +10,7 @@ class AppClassTest(val appParameterTest: String) : AppInterfaceTest {
     constructor(otherParameterTest: Int) : this(otherParameterTest.toString())
 
     init {
+        val appVariableTest = ""
         println("App test init block")
     }
 }
@@ -17,13 +18,21 @@ class AppClassTest(val appParameterTest: String) : AppInterfaceTest {
 interface AppInterfaceTest
 
 var appPropertyTest: AppClassTest = AppClassTest("")
-    get() = AppClassTest("app value test")
-    private set
+    get() {
+        val appVariableTest = ""
+        return AppClassTest("app value test")
+    }
+    private set(value) {
+        val appVariableTest = ""
+        if (true) field = value
+    }
 
 object AppObjectTest
 
 enum class AppEnumClassTest {
-    APP_CONSTANT
+    APP_CONSTANT {
+        val appVariableTest = ""
+    }
 }
 
 fun appFunctionTest() {

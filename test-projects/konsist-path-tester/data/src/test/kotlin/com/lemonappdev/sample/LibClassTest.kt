@@ -10,6 +10,7 @@ class LibClassTest(val libParameterTest: String) : LibInterfaceTest {
     constructor(otherParameterTest: Int) : this(otherParameterTest.toString())
 
     init {
+        val libVariableTest = ""
         println("Lib test init block")
     }
 }
@@ -17,13 +18,21 @@ class LibClassTest(val libParameterTest: String) : LibInterfaceTest {
 interface LibInterfaceTest
 
 var libPropertyTest: LibClassTest = LibClassTest("")
-    get() = LibClassTest("lib value test")
-    private set
+    get() {
+        val libVariableTest = ""
+        return LibClassTest("lib value test")
+    }
+    private set(value) {
+        val libVariableTest = ""
+        if (true) field = value
+    }
 
 object LibObjectTest
 
 enum class LibEnumClassTest {
-    APP_CONSTANT
+    APP_CONSTANT {
+        val libVariableTest = ""
+    }
 }
 
 fun libFunctionTest() {

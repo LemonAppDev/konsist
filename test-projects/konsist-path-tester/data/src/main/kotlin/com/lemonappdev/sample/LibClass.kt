@@ -10,6 +10,7 @@ class LibClass(val libParameter: String) : LibInterface {
     constructor(otherParameter: Int) : this(otherParameter.toString())
 
     init {
+        val libVariable = ""
         println("Lib init block")
     }
 }
@@ -17,13 +18,21 @@ class LibClass(val libParameter: String) : LibInterface {
 interface LibInterface
 
 var libProperty: LibClass = LibClass("")
-    get() = LibClass("lib value")
-    private set
+    get() {
+        val libVariable = ""
+        return LibClass("lib value")
+    }
+    private set(value) {
+        val libVariable = ""
+        if (true) field = value
+    }
 
 object LibObject
 
 enum class LibEnumClass {
-    APP_CONSTANT
+    APP_CONSTANT {
+        val libVariable = ""
+    }
 }
 
 fun libFunction() {

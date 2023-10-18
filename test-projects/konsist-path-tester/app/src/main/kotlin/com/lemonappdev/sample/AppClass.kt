@@ -10,6 +10,7 @@ class AppClass(val appParameter: String) : AppInterface {
     constructor(otherParameter: Int) : this(otherParameter.toString())
 
     init {
+        val appVariable = ""
         println("App init block")
     }
 }
@@ -17,13 +18,21 @@ class AppClass(val appParameter: String) : AppInterface {
 interface AppInterface
 
 var appProperty: AppClass = AppClass("")
-    get() = AppClass("app value")
-    private set
+    get() {
+        val appVariable = ""
+        return AppClass("app value")
+    }
+    private set(value) {
+        val appVariable = ""
+        if (true) field = value
+    }
 
 object AppObject
 
 enum class AppEnumClass {
-    APP_CONSTANT
+    APP_CONSTANT {
+        val appVariable = ""
+    }
 }
 
 fun appFunction() {
