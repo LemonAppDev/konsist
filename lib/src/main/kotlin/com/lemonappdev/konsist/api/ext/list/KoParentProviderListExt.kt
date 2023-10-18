@@ -9,6 +9,7 @@ import kotlin.reflect.KClass
 /**
  * List containing parent declarations.
  */
+@Deprecated("Will be removed in v1.0.0", ReplaceWith("parents()"))
 val <T : KoParentProvider> List<T>.parents: List<KoParentDeclaration>
     get() = flatMap { it.parents }
 

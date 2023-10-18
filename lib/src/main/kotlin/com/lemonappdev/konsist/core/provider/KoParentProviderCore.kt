@@ -48,7 +48,7 @@ internal interface KoParentProviderCore :
 
                 return@map getParentClass(name, fqn)
                     ?: getParentInterface(name, fqn)
-                    ?: KoExternalParentDeclarationCore(name, it)
+                    ?: KoExternalParentDeclarationCore.getInstance(name, it)
             }
             ?.toMutableList()
             ?: emptyList()
