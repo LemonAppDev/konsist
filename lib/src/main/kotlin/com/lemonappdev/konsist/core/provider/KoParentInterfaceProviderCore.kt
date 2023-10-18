@@ -10,7 +10,7 @@ internal interface KoParentInterfaceProviderCore :
     KoBaseProviderCore,
     KoParentProviderCore {
     override val parentInterfaces: List<KoInterfaceDeclaration>
-        get() = parents.filterIsInstance<KoInterfaceDeclaration>()
+        get() = parents().filterIsInstance<KoInterfaceDeclaration>()
 
     override val numParentInterfaces: Int
         get() = parentInterfaces.size

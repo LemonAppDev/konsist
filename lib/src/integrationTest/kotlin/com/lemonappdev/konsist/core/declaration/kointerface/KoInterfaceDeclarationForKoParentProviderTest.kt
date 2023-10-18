@@ -35,9 +35,9 @@ class KoInterfaceDeclarationForKoParentProviderTest {
     }
 
     @Test
-    fun `interface-has-internal-and-external-parents`() {
+    fun `interface-has-direct-internal-and-external-parents`() {
         // given
-        val sut = getSnippetFile("interface-has-internal-and-external-parents")
+        val sut = getSnippetFile("interface-has-direct-internal-and-external-parents")
             .interfaces()
             .first()
 
@@ -74,6 +74,50 @@ class KoInterfaceDeclarationForKoParentProviderTest {
             hasParents("OtherInterface") shouldBeEqualTo false
             hasParents("SampleParentInterface1", "SampleParentInterface2") shouldBeEqualTo true
             hasParents("SampleParentInterface1", "SampleParentInterface2", "OtherInterface") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `interface-has-indirect-parents`() {
+        // given
+        val sut = getSnippetFile("interface-has-indirect-parents")
+            .interfaces()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            parents().map { it.name } shouldBeEqualTo listOf(
+                "SampleParentInterface1",
+                "SampleExternalInterface",
+            )
+            parents(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
+                "SampleParentInterface1",
+                "SampleExternalInterface",
+                "SampleParentInterface2",
+            )
+            numParents(indirectParents = true) shouldBeEqualTo 3
+        }
+    }
+
+    @Test
+    fun `interface-has-repeated-indirect-parents`() {
+        // given
+        val sut = getSnippetFile("interface-has-repeated-indirect-parents")
+            .interfaces()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            parents().map { it.name } shouldBeEqualTo listOf(
+                "SampleParentInterface1",
+                "SampleExternalInterface",
+            )
+            parents(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
+                "SampleParentInterface1",
+                "SampleExternalInterface",
+                "SampleParentInterface2",
+            )
+            numParents(indirectParents = true) shouldBeEqualTo 3
         }
     }
 

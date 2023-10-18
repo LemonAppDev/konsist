@@ -34,9 +34,9 @@ class KoObjectDeclarationForKoParentProviderTest {
     }
 
     @Test
-    fun `object-has-parent-class-interfaces-and-external-parent`() {
+    fun `object-has-direct-parent-class-interfaces-and-external-parent`() {
         // given
-        val sut = getSnippetFile("object-has-parent-class-interfaces-and-external-parent")
+        val sut = getSnippetFile("object-has-direct-parent-class-interfaces-and-external-parent")
             .objects()
             .first()
 
@@ -73,6 +73,54 @@ class KoObjectDeclarationForKoParentProviderTest {
             hasParents("OtherInterface") shouldBeEqualTo false
             hasParents("SampleParentClass", "SampleParentInterface1") shouldBeEqualTo true
             hasParents("SampleParentClass", "SampleParentInterface1", "OtherInterface") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `object-has-indirect-parents`() {
+        // given
+        val sut = getSnippetFile("object-has-indirect-parents")
+            .objects()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            parents().map { it.name } shouldBeEqualTo listOf(
+                "SampleParentClass",
+                "SampleParentInterface1",
+                "SampleExternalInterface",
+            )
+            parents(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
+                "SampleParentClass",
+                "SampleParentInterface1",
+                "SampleExternalInterface",
+                "SampleParentInterface2",
+            )
+            numParents(indirectParents = true) shouldBeEqualTo 4
+        }
+    }
+
+    @Test
+    fun `object-has-repeated-indirect-parents`() {
+        // given
+        val sut = getSnippetFile("object-has-repeated-indirect-parents")
+            .objects()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            parents().map { it.name } shouldBeEqualTo listOf(
+                "SampleParentClass",
+                "SampleParentInterface1",
+                "SampleExternalInterface",
+            )
+            parents(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
+                "SampleParentClass",
+                "SampleParentInterface1",
+                "SampleExternalInterface",
+                "SampleParentInterface2",
+            )
+            numParents(indirectParents = true) shouldBeEqualTo 4
         }
     }
 

@@ -10,7 +10,7 @@ internal interface KoExternalParentProviderCore :
     KoBaseProviderCore,
     KoParentProviderCore {
     override val externalParents: List<KoExternalParentDeclaration>
-        get() = parents
+        get() = parents()
             .filterIsInstance<KoExternalParentDeclaration>()
 
     override val numExternalParents: Int
