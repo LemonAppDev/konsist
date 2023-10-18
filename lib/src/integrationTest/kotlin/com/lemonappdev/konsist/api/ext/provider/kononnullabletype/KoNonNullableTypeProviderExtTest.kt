@@ -1,39 +1,26 @@
-package com.lemonappdev.konsist.api.ext.provider.kopropertytype
+package com.lemonappdev.konsist.api.ext.provider.kononnullabletype
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
-import com.lemonappdev.konsist.api.provider.KoNullableTypeProvider
+import com.lemonappdev.konsist.api.provider.KoNonNullableTypeProvider
 import com.lemonappdev.konsist.testdata.SampleClass
+import com.lemonappdev.konsist.testdata.SampleType
 import hasTypeOf
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoNullableTypeProviderExtTest {
-    @Test
-    fun `declaration-has-no-type`() {
-        // given
-        val sut = getSnippetFile("declaration-has-no-type")
-            .declarationsOf<KoNullableTypeProvider>()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasTypeOf<Int>() shouldBeEqualTo false
-            hasTypeOf<SampleClass>() shouldBeEqualTo false
-        }
-    }
-
+class KoNonNullableTypeProviderExtTest {
     @Test
     fun `declaration-has-simple-type`() {
         // given
         val sut = getSnippetFile("declaration-has-simple-type")
-            .declarationsOf<KoNullableTypeProvider>()
+            .declarationsOf<KoNonNullableTypeProvider>()
             .first()
 
         // then
         assertSoftly(sut) {
-            hasTypeOf<Int>() shouldBeEqualTo true
+            hasTypeOf<String>() shouldBeEqualTo true
             hasTypeOf<SampleClass>() shouldBeEqualTo false
         }
     }
@@ -42,16 +29,16 @@ class KoNullableTypeProviderExtTest {
     fun `declaration-has-complex-type`() {
         // given
         val sut = getSnippetFile("declaration-has-complex-type")
-            .declarationsOf<KoNullableTypeProvider>()
+            .declarationsOf<KoNonNullableTypeProvider>()
             .first()
 
         // then
         assertSoftly(sut) {
-            hasTypeOf<SampleClass>() shouldBeEqualTo true
+            hasTypeOf<SampleType>() shouldBeEqualTo true
             hasTypeOf<Int>() shouldBeEqualTo false
         }
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("api/ext/provider/kopropertytype/snippet/", fileName)
+        TestSnippetProvider.getSnippetKoScope("api/ext/provider/kononnullabletype/snippet/", fileName)
 }
