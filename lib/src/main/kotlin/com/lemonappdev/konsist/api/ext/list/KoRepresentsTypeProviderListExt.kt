@@ -54,7 +54,7 @@ fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedTypeOf(kClass: KClass<
  */
 fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedTypeOf(kClass: KClass<*>?, vararg kClasses: KClass<*>?): List<T> =
     filter {
-        kClass?.qualifiedName?.let { type -> !it.representsType(type) } ?: true &&
+        !it.representsType(kClass?.qualifiedName) &&
             if (kClasses.isNotEmpty()) {
                 kClasses.none { type ->
                     it.representsType(type?.qualifiedName)
