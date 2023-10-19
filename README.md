@@ -92,21 +92,20 @@ fun `clean architecture layers have correct dependencies`() {
         }
 }
 ```
-    
-Check out our [snippet](https://docs.konsist.lemonappdev.com/inspiration/snippets) page for a feast of examples!
 
-### Articles
+## Samples
 
-- [Introducing Konsist: A Cutting-Edge Kotlin Linter](https://blog.kotlin-academy.com/introducing-konsist-a-cutting-edge-kotlin-linter-d3ab916a5461)
-- [Refactoring Multi-Module Kotlin Project With Konsist](https://proandroiddev.com/refactoring-multi-module-kotlin-project-with-konsist-f0de0de59a3d)
-- [ArchUnit vs. Konsist. Why Did We Need Another Kotlin Linter?](https://proandroiddev.com/archunit-vs-konsist-why-did-we-need-another-linter-972c4ff2622d)
-- [Protect Kotlin Project Architecture Using Konsist](https://proandroiddev.com/protect-kotlin-project-architecture-using-konsist-3bfbe1ad0eea)
+Explore the [snippet](https://docs.konsist.lemonappdev.com/inspiration/snippets) pages to discover a wealth of examples.
 
-### Star History
+## Articles
+
+Read the [Konsist articles](https://docs.konsist.lemonappdev.com/getting-started/getting-started/articles) to gain valuable insights into best practices and strategies for maintaining consistency in your projects.
+
+## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=LemonAppDev/konsist&type=Date)](https://star-history.com/#LemonAppDev/konsist&Date)
 
-### Community & Support
+## Community & Support
 
 Write a message on the  [#konsist channel](https://kotlinlang.slack.com/archives/C05QG9FD6KS) at kotlinlang Slack 
 Workspace (preferred) or start a [GitHub discussion](https://github.com/LemonAppDev/konsist/discussions).
