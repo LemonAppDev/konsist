@@ -22,7 +22,7 @@ jobs:
 
       - name: Get Changed Files
         id: changed-files
-        uses: tj-actions/changed-files@v39.2.2
+        uses: tj-actions/changed-files@v39.2.3
 
       - name: List Changed Files
         run: |
