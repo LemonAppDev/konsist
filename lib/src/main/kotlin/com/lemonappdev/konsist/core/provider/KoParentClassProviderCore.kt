@@ -9,7 +9,7 @@ internal interface KoParentClassProviderCore :
     KoBaseProviderCore,
     KoParentProviderCore {
     override val parentClass: KoClassDeclaration?
-        get() = parents.firstOrNull { it is KoClassDeclaration } as? KoClassDeclaration
+        get() = parents().firstOrNull { it is KoClassDeclaration } as? KoClassDeclaration
 
     override fun hasParentClass(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean = when (predicate) {
         null -> parentClass != null
