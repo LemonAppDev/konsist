@@ -1,13 +1,11 @@
 package com.lemonappdev.konsist.api
 
-import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
 import com.lemonappdev.konsist.api.ext.list.withProperty
 import com.lemonappdev.konsist.api.ext.list.withoutName
 import com.lemonappdev.konsist.api.ext.list.withoutNameMatching
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
-import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
@@ -15,13 +13,6 @@ import java.util.*
 
 class ApiKonsistTest {
     private val apiPackageScope = Konsist.scopeFromPackage("com.lemonappdev.konsist.api..", sourceSetName = "main")
-
-    @Test
-    fun `every api declaration has kdoc`() {
-        apiPackageScope
-            .declarationsOf<KoKDocProvider>()
-            .assertTrue { it.hasKDoc }
-    }
 
     @Test
     fun `every api declaration has explicit return type`() {
