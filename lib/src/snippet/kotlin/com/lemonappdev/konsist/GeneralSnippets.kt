@@ -7,7 +7,9 @@ import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.ext.list.constructors
 import com.lemonappdev.konsist.api.ext.list.indexOfFirstInstance
 import com.lemonappdev.konsist.api.ext.list.indexOfLastInstance
+import com.lemonappdev.konsist.api.ext.list.modifierprovider.withModifier
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withValueModifier
+import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifier
 import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.ext.list.primaryConstructors
 import com.lemonappdev.konsist.api.ext.list.properties
@@ -25,6 +27,32 @@ class GeneralSnippets {
             .files
             .withPackage("..ext..")
             .assertTrue { it.hasNameEndingWith("Ext") }
+    }
+
+    fun `all data class properties are defined in constructor`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .withModifier(KoModifier.DATA)
+            .properties()
+            .assertTrue {
+                it.isConstructorDefined
+            }
+    }
+
+    fun `every class has test`() {
+        Konsist
+            .scopeFromProduction()
+            .classes()
+            .assertTrue { it.hasTestClass() }
+    }
+
+    fun `every class - except data and value class - has test`() {
+        Konsist
+            .scopeFromProduction()
+            .classes()
+            .withoutModifier(KoModifier.DATA, KoModifier.VALUE)
+            .assertTrue { it.hasTestClass() }
     }
 
     fun `properties are declared before functions`() {
