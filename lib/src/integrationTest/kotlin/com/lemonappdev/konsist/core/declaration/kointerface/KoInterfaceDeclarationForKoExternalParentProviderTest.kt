@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kointerface
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.externalsample.SampleExternalClass
 import com.lemonappdev.konsist.externalsample.SampleExternalGenericInterface
 import com.lemonappdev.konsist.externalsample.SampleExternalInterface
 import com.lemonappdev.konsist.testdata.SampleParentClass
@@ -110,6 +109,7 @@ class KoInterfaceDeclarationForKoExternalParentProviderTest {
         }
     }
 
+    @Suppress("detekt.LongMethod")
     @Test
     fun `interface-has-indirect-external-parents`() {
         // given
@@ -137,24 +137,24 @@ class KoInterfaceDeclarationForKoExternalParentProviderTest {
             hasExternalParentWithName(
                 "SampleExternalGenericInterface",
                 "SampleExternalInterface",
-                indirectParents = true
+                indirectParents = true,
             ) shouldBeEqualTo true
             hasExternalParentWithName(
                 "SampleExternalGenericInterface",
                 "OtherInterface",
-                indirectParents = true
+                indirectParents = true,
             ) shouldBeEqualTo true
             hasExternalParentsWithAllNames("SampleExternalGenericInterface", indirectParents = true) shouldBeEqualTo true
             hasExternalParentsWithAllNames("OtherInterface", indirectParents = true) shouldBeEqualTo false
             hasExternalParentsWithAllNames(
                 "SampleExternalGenericInterface",
                 "SampleExternalInterface",
-                indirectParents = true
+                indirectParents = true,
             ) shouldBeEqualTo true
             hasExternalParentsWithAllNames(
                 "SampleExternalGenericInterface",
                 "OtherInterface",
-                indirectParents = true
+                indirectParents = true,
             ) shouldBeEqualTo false
             hasExternalParent(indirectParents = true) { it.name == "SampleExternalGenericInterface" } shouldBeEqualTo true
             hasExternalParent(indirectParents = true) { it.name == "OtherInterface" } shouldBeEqualTo false
@@ -165,18 +165,18 @@ class KoInterfaceDeclarationForKoExternalParentProviderTest {
             hasExternalParentOf(
                 SampleExternalGenericInterface::class,
                 SampleParentClass::class,
-                indirectParents = true
+                indirectParents = true,
             ) shouldBeEqualTo true
             hasAllExternalParentsOf(SampleExternalGenericInterface::class, indirectParents = true) shouldBeEqualTo true
             hasAllExternalParentsOf(
                 SampleExternalGenericInterface::class,
                 SampleParentClass::class,
-                indirectParents = true
+                indirectParents = true,
             ) shouldBeEqualTo false
             hasAllExternalParentsOf(
                 SampleExternalGenericInterface::class,
                 SampleExternalInterface::class,
-                indirectParents = true
+                indirectParents = true,
             ) shouldBeEqualTo true
         }
     }

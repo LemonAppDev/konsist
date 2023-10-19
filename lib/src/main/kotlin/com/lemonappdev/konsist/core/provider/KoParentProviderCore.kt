@@ -64,13 +64,13 @@ internal interface KoParentProviderCore :
 
         parents
             .forEach {
-                val nextParents = if(it as? KoParentProvider != null) {
+                val nextParents = if (it as? KoParentProvider != null) {
                     it.parents(indirectParents = true)
                 } else {
                     emptyList()
                 }
 
-                if(nextParents.isNotEmpty()) {
+                if (nextParents.isNotEmpty()) {
                     indirectParents += nextParents + getIndirectParents(nextParents)
                 }
             }

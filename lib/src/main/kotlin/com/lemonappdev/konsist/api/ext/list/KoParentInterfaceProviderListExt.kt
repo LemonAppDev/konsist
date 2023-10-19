@@ -51,7 +51,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaces(indirectPare
 fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaceNamed(
     name: String,
     vararg names: String,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> = filter { it.hasParentInterfaceWithName(name, *names, indirectParents = indirectParents) }
 
 /**
@@ -65,7 +65,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaceNamed(
 fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaceNamed(
     name: String,
     vararg names: String,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> = filterNot { it.hasParentInterfaceWithName(name, *names, indirectParents = indirectParents) }
 
 /**
@@ -79,7 +79,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaceNamed(
 fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesNamed(
     name: String,
     vararg names: String,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> = filter { it.hasParentInterfacesWithAllNames(name, *names, indirectParents = indirectParents) }
 
 /**
@@ -93,7 +93,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesNamed(
 fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesNamed(
     name: String,
     vararg names: String,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> = filterNot { it.hasParentInterfacesWithAllNames(name, *names, indirectParents = indirectParents) }
 
 /**
@@ -105,7 +105,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesNamed(
  */
 fun <T : KoParentInterfaceProvider> List<T>.withParentInterface(
     indirectParents: Boolean = false,
-    predicate: (KoInterfaceDeclaration) -> Boolean
+    predicate: (KoInterfaceDeclaration) -> Boolean,
 ): List<T> = filter { it.hasParentInterface(indirectParents, predicate) }
 
 /**
@@ -117,7 +117,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withParentInterface(
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterface(
     indirectParents: Boolean = false,
-    predicate: (KoInterfaceDeclaration) -> Boolean
+    predicate: (KoInterfaceDeclaration) -> Boolean,
 ): List<T> = filterNot { it.hasParentInterface(indirectParents, predicate) }
 
 /**
@@ -129,8 +129,8 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterface(
  */
 fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfaces(
     indirectParents: Boolean = false,
-    predicate: (KoInterfaceDeclaration) -> Boolean
-): List<T> = filter {it.hasAllParentInterfaces(indirectParents, predicate) }
+    predicate: (KoInterfaceDeclaration) -> Boolean,
+): List<T> = filter { it.hasAllParentInterfaces(indirectParents, predicate) }
 
 /**
  * List containing declarations that have at least one parent interface not satisfying the provided predicate.
@@ -153,7 +153,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfaces(
  */
 fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaces(
     indirectParents: Boolean = false,
-    predicate: (List<KoInterfaceDeclaration>) -> Boolean
+    predicate: (List<KoInterfaceDeclaration>) -> Boolean,
 ): List<T> = filter { predicate(it.parentInterfaces(indirectParents)) }
 
 /**
@@ -165,7 +165,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaces(
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaces(
     indirectParents: Boolean = false,
-    predicate: (List<KoInterfaceDeclaration>) -> Boolean
+    predicate: (List<KoInterfaceDeclaration>) -> Boolean,
 ): List<T> = filterNot { predicate(it.parentInterfaces(indirectParents)) }
 
 /**
@@ -207,7 +207,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaceOf(
 fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> = filter { it.hasAllParentInterfacesOf(kClass, *kClasses, indirectParents = indirectParents) }
 
 /**
@@ -221,7 +221,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesOf(
 fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> = filterNot { it.hasAllParentInterfacesOf(kClass, *kClasses, indirectParents = indirectParents) }
 
 /**
@@ -284,15 +284,15 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutSomeParentInterfaces(name: St
 @Deprecated("Will be removed in v1.0.0", ReplaceWith("withSomeParentsOf()"))
 fun <T : KoParentInterfaceProvider> List<T>.withSomeParentInterfacesOf(
     kClass: KClass<*>,
-    vararg kClasses: KClass<*>
+    vararg kClasses: KClass<*>,
 ): List<T> =
     filter {
         it.parentInterfaces.any { parent -> parent.name == kClass.simpleName } ||
-                kClasses.any { kClass ->
-                    it
-                        .parentInterfaces
-                        .any { parent -> parent.name == kClass.simpleName }
-                }
+            kClasses.any { kClass ->
+                it
+                    .parentInterfaces
+                    .any { parent -> parent.name == kClass.simpleName }
+            }
     }
 
 /**
@@ -305,17 +305,17 @@ fun <T : KoParentInterfaceProvider> List<T>.withSomeParentInterfacesOf(
 @Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutSomeParentsOf()"))
 fun <T : KoParentInterfaceProvider> List<T>.withoutSomeParentInterfacesOf(
     kClass: KClass<*>,
-    vararg kClasses: KClass<*>
+    vararg kClasses: KClass<*>,
 ): List<T> =
     filter {
         it.parentInterfaces.none { parent -> parent.name == kClass.simpleName } &&
-                if (kClasses.isNotEmpty()) {
-                    kClasses.any { kClass ->
-                        it
-                            .parentInterfaces
-                            .none { parent -> parent.name == kClass.simpleName }
-                    }
-                } else {
-                    true
+            if (kClasses.isNotEmpty()) {
+                kClasses.any { kClass ->
+                    it
+                        .parentInterfaces
+                        .none { parent -> parent.name == kClass.simpleName }
                 }
+            } else {
+                true
+            }
     }

@@ -25,7 +25,7 @@ internal class KoDeclarationCache<T : KoBaseProvider> {
     fun getOrCreateInstance(
         ktElement: KtElement,
         containingDeclaration: KoContainingDeclarationProvider,
-        value: (KtElement) -> T
+        value: (KtElement) -> T,
     ): T {
         val cacheKey = ktElement to containingDeclaration
 
@@ -56,7 +56,7 @@ internal object KoExternalParentCache {
     fun getOrCreateInstance(
         key: String,
         ktSuperTypeListEntry: KtSuperTypeListEntry,
-        value: (ktSuperTypeListEntry: KtSuperTypeListEntry) -> KoExternalParentDeclaration
+        value: (ktSuperTypeListEntry: KtSuperTypeListEntry) -> KoExternalParentDeclaration,
     ): KoExternalParentDeclaration {
         return if (hasKey(key)) {
             get(key)

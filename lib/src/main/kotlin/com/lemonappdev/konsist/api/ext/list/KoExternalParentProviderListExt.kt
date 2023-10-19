@@ -1,9 +1,7 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
-import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoExternalParentProvider
-import com.lemonappdev.konsist.api.provider.KoParentProvider
 import kotlin.reflect.KClass
 
 /**
@@ -51,7 +49,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParents(indirectParent
 fun <T : KoExternalParentProvider> List<T>.withExternalParentNamed(
     name: String,
     vararg names: String,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> =
     filter { it.hasExternalParentWithName(name, *names, indirectParents = indirectParents) }
 
@@ -66,7 +64,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParentNamed(
 fun <T : KoExternalParentProvider> List<T>.withoutExternalParentNamed(
     name: String,
     vararg names: String,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> =
     filterNot { it.hasExternalParentWithName(name, *names, indirectParents = indirectParents) }
 
@@ -81,7 +79,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentNamed(
 fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsNamed(
     name: String,
     vararg names: String,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> =
     filter { it.hasExternalParentsWithAllNames(name, *names, indirectParents = indirectParents) }
 
@@ -96,7 +94,7 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsNamed(
 fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsNamed(
     name: String,
     vararg names: String,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> =
     filterNot { it.hasExternalParentsWithAllNames(name, *names, indirectParents = indirectParents) }
 
@@ -109,7 +107,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsNamed(
  */
 fun <T : KoExternalParentProvider> List<T>.withExternalParent(
     indirectParents: Boolean = false,
-    predicate: (KoExternalParentDeclaration) -> Boolean
+    predicate: (KoExternalParentDeclaration) -> Boolean,
 ): List<T> =
     filter { it.hasExternalParent(indirectParents, predicate) }
 
@@ -122,7 +120,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParent(
  */
 fun <T : KoExternalParentProvider> List<T>.withoutExternalParent(
     indirectParents: Boolean = false,
-    predicate: (KoExternalParentDeclaration) -> Boolean
+    predicate: (KoExternalParentDeclaration) -> Boolean,
 ): List<T> =
     filterNot { it.hasExternalParent(indirectParents, predicate) }
 
@@ -135,7 +133,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParent(
  */
 fun <T : KoExternalParentProvider> List<T>.withAllExternalParents(
     indirectParents: Boolean = false,
-    predicate: (KoExternalParentDeclaration) -> Boolean
+    predicate: (KoExternalParentDeclaration) -> Boolean,
 ): List<T> =
     filter { it.hasAllExternalParents(indirectParents, predicate) }
 
@@ -160,7 +158,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParents(
  */
 fun <T : KoExternalParentProvider> List<T>.withExternalParents(
     indirectParents: Boolean = false,
-    predicate: (List<KoExternalParentDeclaration>) -> Boolean
+    predicate: (List<KoExternalParentDeclaration>) -> Boolean,
 ): List<T> =
     filter { predicate(it.externalParents(indirectParents)) }
 
@@ -173,7 +171,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParents(
  */
 fun <T : KoExternalParentProvider> List<T>.withoutExternalParents(
     indirectParents: Boolean = false,
-    predicate: (List<KoExternalParentDeclaration>) -> Boolean
+    predicate: (List<KoExternalParentDeclaration>) -> Boolean,
 ): List<T> =
     filterNot { predicate(it.externalParents(indirectParents)) }
 
@@ -188,7 +186,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParents(
 fun <T : KoExternalParentProvider> List<T>.withExternalParentOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> =
     filter { it.hasExternalParentOf(kClass, *kClasses, indirectParents = indirectParents) }
 
@@ -203,7 +201,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParentOf(
 fun <T : KoExternalParentProvider> List<T>.withoutExternalParentOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> =
     filterNot { it.hasExternalParentOf(kClass, *kClasses, indirectParents = indirectParents) }
 
@@ -218,7 +216,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentOf(
 fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> =
     filter { it.hasAllExternalParentsOf(kClass, *kClasses, indirectParents = indirectParents) }
 
@@ -233,6 +231,6 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsOf(
 fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> =
     filterNot { it.hasAllExternalParentsOf(kClass, *kClasses, indirectParents = indirectParents) }

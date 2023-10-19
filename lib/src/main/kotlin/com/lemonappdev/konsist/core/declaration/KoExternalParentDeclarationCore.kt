@@ -1,13 +1,9 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
-import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.cache.KoExternalParentCache
 import com.lemonappdev.konsist.core.util.EndOfLine
-import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
@@ -35,7 +31,7 @@ internal class KoExternalParentDeclarationCore(name: String, private val ktSuper
     override val packagee: KoPackageDeclaration? by lazy {
         KoPackageDeclarationCore(
             fullyQualifiedName,
-            ktSuperTypeListEntry
+            ktSuperTypeListEntry,
         )
     }
 
@@ -46,12 +42,12 @@ internal class KoExternalParentDeclarationCore(name: String, private val ktSuper
 
         internal fun getInstance(
             name: String,
-            ktSuperTypeListEntry: KtSuperTypeListEntry
+            ktSuperTypeListEntry: KtSuperTypeListEntry,
         ): KoExternalParentDeclaration =
             cache.getOrCreateInstance(name, ktSuperTypeListEntry) {
                 KoExternalParentDeclarationCore(
                     name,
-                    ktSuperTypeListEntry
+                    ktSuperTypeListEntry,
                 )
             }
     }

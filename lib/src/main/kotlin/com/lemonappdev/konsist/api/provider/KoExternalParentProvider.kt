@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
-import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import kotlin.reflect.KClass
 
 /**
@@ -94,7 +93,7 @@ interface KoExternalParentProvider : KoBaseProvider {
      */
     fun hasExternalParent(
         indirectParents: Boolean = false,
-        predicate: (KoExternalParentDeclaration) -> Boolean
+        predicate: (KoExternalParentDeclaration) -> Boolean,
     ): Boolean
 
     /**
@@ -112,7 +111,7 @@ interface KoExternalParentProvider : KoBaseProvider {
      */
     fun hasAllExternalParents(
         indirectParents: Boolean = false,
-        predicate: (KoExternalParentDeclaration) -> Boolean
+        predicate: (KoExternalParentDeclaration) -> Boolean,
     ): Boolean
 
     /**

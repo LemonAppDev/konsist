@@ -117,6 +117,7 @@ class KoClassDeclarationForKoParentInterfaceProviderTest {
         }
     }
 
+    @Suppress("detekt.LongMethod")
     @Test
     fun `class-has-indirect-parent-interfaces`() {
         // given
@@ -129,7 +130,7 @@ class KoClassDeclarationForKoParentInterfaceProviderTest {
             parentInterfaces(indirectParents = false) shouldBeEqualTo emptyList()
             parentInterfaces(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
                 "SampleParentInterface1",
-                "SampleParentInterface2"
+                "SampleParentInterface2",
             )
             numParentInterfaces(indirectParents = false) shouldBeEqualTo 0
             numParentInterfaces(indirectParents = true) shouldBeEqualTo 2
@@ -144,24 +145,24 @@ class KoClassDeclarationForKoParentInterfaceProviderTest {
             hasParentInterfaceWithName(
                 "SampleParentInterface1",
                 "SampleParentInterface2",
-                indirectParents = true
+                indirectParents = true,
             ) shouldBeEqualTo true
             hasParentInterfaceWithName(
                 "SampleParentInterface1",
                 "OtherInterface",
-                indirectParents = true
+                indirectParents = true,
             ) shouldBeEqualTo true
             hasParentInterfacesWithAllNames("SampleParentInterface1", indirectParents = true) shouldBeEqualTo true
             hasParentInterfacesWithAllNames("OtherInterface", indirectParents = true) shouldBeEqualTo false
             hasParentInterfacesWithAllNames(
                 "SampleParentInterface1",
                 "SampleParentInterface2",
-                indirectParents = true
+                indirectParents = true,
             ) shouldBeEqualTo true
             hasParentInterfacesWithAllNames(
                 "SampleParentInterface1",
                 "OtherInterface",
-                indirectParents = true
+                indirectParents = true,
             ) shouldBeEqualTo false
             hasParentInterface(indirectParents = true) { it.name == "SampleParentInterface1" } shouldBeEqualTo true
             hasParentInterface(indirectParents = true) { it.name == "OtherInterface" } shouldBeEqualTo false
@@ -172,18 +173,18 @@ class KoClassDeclarationForKoParentInterfaceProviderTest {
             hasParentInterfaceOf(
                 SampleParentInterface1::class,
                 SampleParentInterface2::class,
-                indirectParents = true
+                indirectParents = true,
             ) shouldBeEqualTo true
             hasAllParentInterfacesOf(SampleParentInterface1::class, indirectParents = true) shouldBeEqualTo true
             hasAllParentInterfacesOf(
                 SampleParentInterface1::class,
                 SampleParentInterface::class,
-                indirectParents = true
+                indirectParents = true,
             ) shouldBeEqualTo false
             hasAllParentInterfacesOf(
                 SampleParentInterface1::class,
                 SampleParentInterface2::class,
-                indirectParents = true
+                indirectParents = true,
             ) shouldBeEqualTo true
         }
     }

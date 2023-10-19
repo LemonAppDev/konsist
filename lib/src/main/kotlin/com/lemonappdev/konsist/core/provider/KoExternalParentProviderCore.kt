@@ -25,7 +25,7 @@ internal interface KoExternalParentProviderCore :
 
     override fun countExternalParents(
         indirectParents: Boolean,
-        predicate: (KoExternalParentDeclaration) -> Boolean
+        predicate: (KoExternalParentDeclaration) -> Boolean,
     ): Int = externalParents(indirectParents).count { predicate(it) }
 
     override fun hasExternalParents(indirectParents: Boolean): Boolean = externalParents(indirectParents).isNotEmpty()
@@ -48,19 +48,19 @@ internal interface KoExternalParentProviderCore :
 
     override fun hasExternalParent(
         indirectParents: Boolean,
-        predicate: (KoExternalParentDeclaration) -> Boolean
+        predicate: (KoExternalParentDeclaration) -> Boolean,
     ): Boolean = externalParents(indirectParents).any(predicate)
 
     override fun hasAllExternalParents(
         indirectParents: Boolean,
-        predicate: (KoExternalParentDeclaration) -> Boolean
+        predicate: (KoExternalParentDeclaration) -> Boolean,
     ): Boolean = externalParents(indirectParents).all(predicate)
 
     override fun hasExternalParentOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean): Boolean =
-        checkIfParentOf(name, externalParents(indirectParents))
-                || names.any { checkIfParentOf(it, externalParents(indirectParents)) }
+        checkIfParentOf(name, externalParents(indirectParents)) ||
+            names.any { checkIfParentOf(it, externalParents(indirectParents)) }
 
     override fun hasAllExternalParentsOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean): Boolean =
-        checkIfParentOf(name, externalParents(indirectParents))
-                && names.all { checkIfParentOf(it, externalParents(indirectParents)) }
+        checkIfParentOf(name, externalParents(indirectParents)) &&
+            names.all { checkIfParentOf(it, externalParents(indirectParents)) }
 }

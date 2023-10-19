@@ -46,7 +46,7 @@ internal interface KoParentInterfaceProviderCore :
     override fun hasParentInterfacesWithAllNames(
         name: String,
         vararg names: String,
-        indirectParents: Boolean
+        indirectParents: Boolean,
     ): Boolean {
         val givenNames = names.toList() + name
 
@@ -60,15 +60,15 @@ internal interface KoParentInterfaceProviderCore :
 
     override fun hasAllParentInterfaces(
         indirectParents: Boolean,
-        predicate: (KoInterfaceDeclaration) -> Boolean
+        predicate: (KoInterfaceDeclaration) -> Boolean,
     ): Boolean =
         parentInterfaces(indirectParents).all(predicate)
 
     override fun hasParentInterfaceOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean): Boolean =
-        checkIfParentOf(name, parentInterfaces(indirectParents))
-                || names.any { checkIfParentOf(it, parentInterfaces(indirectParents)) }
+        checkIfParentOf(name, parentInterfaces(indirectParents)) ||
+            names.any { checkIfParentOf(it, parentInterfaces(indirectParents)) }
 
     override fun hasAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean): Boolean =
-        checkIfParentOf(name, parentInterfaces(indirectParents))
-                && names.all { checkIfParentOf(it, parentInterfaces(indirectParents)) }
+        checkIfParentOf(name, parentInterfaces(indirectParents)) &&
+            names.all { checkIfParentOf(it, parentInterfaces(indirectParents)) }
 }

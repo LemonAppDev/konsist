@@ -52,7 +52,7 @@ fun <T : KoParentProvider> List<T>.withoutParents(indirectParents: Boolean = fal
 fun <T : KoParentProvider> List<T>.withParentNamed(
     name: String,
     vararg names: String,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> = filter {
     it.hasParentWithName(name, *names, indirectParents = indirectParents)
 }
@@ -68,7 +68,7 @@ fun <T : KoParentProvider> List<T>.withParentNamed(
 fun <T : KoParentProvider> List<T>.withoutParentNamed(
     name: String,
     vararg names: String,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> = filterNot {
     it.hasParentWithName(name, *names, indirectParents = indirectParents)
 }
@@ -84,7 +84,7 @@ fun <T : KoParentProvider> List<T>.withoutParentNamed(
 fun <T : KoParentProvider> List<T>.withAllParentsNamed(
     name: String,
     vararg names: String,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> = filter {
     it.hasParentsWithAllNames(name, *names, indirectParents = indirectParents)
 }
@@ -100,7 +100,7 @@ fun <T : KoParentProvider> List<T>.withAllParentsNamed(
 fun <T : KoParentProvider> List<T>.withoutAllParentsNamed(
     name: String,
     vararg names: String,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> = filterNot {
     it.hasParentsWithAllNames(name, *names, indirectParents = indirectParents)
 }
@@ -114,7 +114,7 @@ fun <T : KoParentProvider> List<T>.withoutAllParentsNamed(
  */
 fun <T : KoParentProvider> List<T>.withParent(
     indirectParents: Boolean = false,
-    predicate: (KoParentDeclaration) -> Boolean
+    predicate: (KoParentDeclaration) -> Boolean,
 ): List<T> = filter {
     it.hasParent(indirectParents, predicate)
 }
@@ -128,7 +128,7 @@ fun <T : KoParentProvider> List<T>.withParent(
  */
 fun <T : KoParentProvider> List<T>.withoutParent(
     indirectParents: Boolean = false,
-    predicate: (KoParentDeclaration) -> Boolean
+    predicate: (KoParentDeclaration) -> Boolean,
 ): List<T> = filterNot {
     it.hasParent(indirectParents, predicate)
 }
@@ -142,7 +142,7 @@ fun <T : KoParentProvider> List<T>.withoutParent(
  */
 fun <T : KoParentProvider> List<T>.withAllParents(
     indirectParents: Boolean = false,
-    predicate: (KoParentDeclaration) -> Boolean
+    predicate: (KoParentDeclaration) -> Boolean,
 ): List<T> = filter {
     it.hasAllParents(indirectParents, predicate)
 }
@@ -156,7 +156,7 @@ fun <T : KoParentProvider> List<T>.withAllParents(
  */
 fun <T : KoParentProvider> List<T>.withoutAllParents(
     indirectParents: Boolean = false,
-    predicate: (KoParentDeclaration) -> Boolean
+    predicate: (KoParentDeclaration) -> Boolean,
 ): List<T> = filterNot {
     it.hasAllParents(indirectParents, predicate)
 }
@@ -170,7 +170,7 @@ fun <T : KoParentProvider> List<T>.withoutAllParents(
  */
 fun <T : KoParentProvider> List<T>.withParents(
     indirectParents: Boolean = false,
-    predicate: (List<KoParentDeclaration>) -> Boolean
+    predicate: (List<KoParentDeclaration>) -> Boolean,
 ): List<T> = filter {
     predicate(it.parents(indirectParents))
 }
@@ -184,7 +184,7 @@ fun <T : KoParentProvider> List<T>.withParents(
  */
 fun <T : KoParentProvider> List<T>.withoutParents(
     indirectParents: Boolean = false,
-    predicate: (List<KoParentDeclaration>) -> Boolean
+    predicate: (List<KoParentDeclaration>) -> Boolean,
 ): List<T> =
     filterNot { predicate(it.parents(indirectParents)) }
 
@@ -199,7 +199,7 @@ fun <T : KoParentProvider> List<T>.withoutParents(
 fun <T : KoParentProvider> List<T>.withParentOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> =
     filter { it.hasParentOf(kClass, *kClasses, indirectParents = indirectParents) }
 
@@ -214,7 +214,7 @@ fun <T : KoParentProvider> List<T>.withParentOf(
 fun <T : KoParentProvider> List<T>.withoutParentOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> =
     filterNot { it.hasParentOf(kClass, *kClasses, indirectParents = indirectParents) }
 
@@ -229,7 +229,7 @@ fun <T : KoParentProvider> List<T>.withoutParentOf(
 fun <T : KoParentProvider> List<T>.withAllParentsOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> =
     filter { it.hasAllParentsOf(kClass, *kClasses, indirectParents = indirectParents) }
 
@@ -244,7 +244,7 @@ fun <T : KoParentProvider> List<T>.withAllParentsOf(
 fun <T : KoParentProvider> List<T>.withoutAllParentsOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-    indirectParents: Boolean = false
+    indirectParents: Boolean = false,
 ): List<T> =
     filterNot { it.hasAllParentsOf(kClass, *kClasses, indirectParents = indirectParents) }
 
@@ -259,11 +259,11 @@ fun <T : KoParentProvider> List<T>.withoutAllParentsOf(
 fun <T : KoParentProvider> List<T>.withSomeParentsOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
         it.parents.any { parent -> parent.name == kClass.simpleName } ||
-                kClasses.any { kClass ->
-                    it
-                        .parents
-                        .any { parent -> parent.name == kClass.simpleName }
-                }
+            kClasses.any { kClass ->
+                it
+                    .parents
+                    .any { parent -> parent.name == kClass.simpleName }
+            }
     }
 
 /**
@@ -277,15 +277,15 @@ fun <T : KoParentProvider> List<T>.withSomeParentsOf(kClass: KClass<*>, vararg k
 fun <T : KoParentProvider> List<T>.withoutSomeParentsOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
         it.parents.none { parent -> parent.name == kClass.simpleName } &&
-                if (kClasses.isNotEmpty()) {
-                    kClasses.any { kClass ->
-                        it
-                            .parents
-                            .none { parent -> parent.name == kClass.simpleName }
-                    }
-                } else {
-                    true
+            if (kClasses.isNotEmpty()) {
+                kClasses.any { kClass ->
+                    it
+                        .parents
+                        .none { parent -> parent.name == kClass.simpleName }
                 }
+            } else {
+                true
+            }
     }
 
 /**
