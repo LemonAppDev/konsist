@@ -26,8 +26,7 @@ internal interface KoExternalParentProviderCore :
     override fun countExternalParents(
         indirectParents: Boolean,
         predicate: (KoExternalParentDeclaration) -> Boolean
-    ): Int =
-        externalParents(indirectParents).count { predicate(it) }
+    ): Int = externalParents(indirectParents).count { predicate(it) }
 
     override fun hasExternalParents(indirectParents: Boolean): Boolean = externalParents(indirectParents).isNotEmpty()
 
