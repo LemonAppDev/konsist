@@ -16,7 +16,9 @@ internal interface KoChildProviderCore :
     override fun children(indirectChildren: Boolean): List<KoChildDeclaration> {
         val items: List<KoChildDeclaration> = DataCore.classes + DataCore.interfaces + DataCore.objects
 
-        return items.filter { (it as KoParentProvider).hasParent { parent -> parent == (this as KoParentDeclaration) } }
+        return items.filter {
+            (it as? KoParentProvider)?.hasParent { parent -> parent == (this as? KoParentDeclaration) } ?: false
+        }
     }
 
     override fun numChildren(indirectChildren: Boolean): Int = children(indirectChildren).size
