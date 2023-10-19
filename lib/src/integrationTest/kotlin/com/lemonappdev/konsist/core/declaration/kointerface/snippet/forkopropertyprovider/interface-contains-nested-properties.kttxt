@@ -1,5 +1,5 @@
 interface SampleInterface {
-    val sampleProperty = 0
+    val sampleProperty: Int
 
     fun sampleFunction() {
         val sampleLocalProperty = 6
