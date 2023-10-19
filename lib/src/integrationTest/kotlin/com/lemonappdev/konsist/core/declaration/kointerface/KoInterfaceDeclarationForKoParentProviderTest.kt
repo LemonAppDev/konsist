@@ -90,12 +90,45 @@ class KoInterfaceDeclarationForKoParentProviderTest {
                 "SampleParentInterface1",
                 "SampleExternalInterface",
             )
+            numParents(indirectParents = false) shouldBeEqualTo 2
             parents(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
                 "SampleParentInterface1",
                 "SampleExternalInterface",
                 "SampleParentInterface2",
             )
             numParents(indirectParents = true) shouldBeEqualTo 3
+            countParents(indirectParents = true) { it.name == "SampleParentInterface2" } shouldBeEqualTo 1
+            countParents(indirectParents = true) { it.hasNameStartingWith("SampleParentInterface") } shouldBeEqualTo 2
+            hasParents(indirectParents = true) shouldBeEqualTo true
+            hasParentWithName("SampleParentInterface2", indirectParents = true) shouldBeEqualTo true
+            hasParentWithName("OtherInterface", indirectParents = true) shouldBeEqualTo false
+            hasParentWithName("SampleParentInterface2", "OtherInterface", indirectParents = true) shouldBeEqualTo true
+            hasParentsWithAllNames("SampleParentInterface2", indirectParents = true) shouldBeEqualTo true
+            hasParentsWithAllNames("OtherInterface", indirectParents = true) shouldBeEqualTo false
+            hasParentsWithAllNames(
+                "SampleParentInterface2",
+                "SampleParentInterface1",
+                indirectParents = true,
+            ) shouldBeEqualTo true
+            hasParentsWithAllNames("SampleParentInterface2", "OtherInterface", indirectParents = true) shouldBeEqualTo false
+            hasParent(indirectParents = true) { it.name == "SampleParentInterface2" } shouldBeEqualTo true
+            hasParent(indirectParents = true) { it.name == "OtherClass" } shouldBeEqualTo false
+            hasAllParents(indirectParents = true) { it.name == "SampleParentInterface2" } shouldBeEqualTo false
+            hasAllParents(indirectParents = true) { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAllParents(indirectParents = true) { it.hasNameStartingWith("Other") } shouldBeEqualTo false
+            hasParentOf(SampleParentInterface2::class, indirectParents = true) shouldBeEqualTo true
+            hasParentOf(SampleParentInterface2::class, SampleInterface::class, indirectParents = true) shouldBeEqualTo true
+            hasAllParentsOf(SampleParentInterface2::class, indirectParents = true) shouldBeEqualTo true
+            hasAllParentsOf(
+                SampleParentInterface2::class,
+                SampleInterface::class,
+                indirectParents = true,
+            ) shouldBeEqualTo false
+            hasAllParentsOf(
+                SampleParentInterface2::class,
+                SampleParentInterface1::class,
+                indirectParents = true,
+            ) shouldBeEqualTo true
         }
     }
 
@@ -112,6 +145,7 @@ class KoInterfaceDeclarationForKoParentProviderTest {
                 "SampleParentInterface1",
                 "SampleExternalInterface",
             )
+            numParents(indirectParents = false) shouldBeEqualTo 2
             parents(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
                 "SampleParentInterface1",
                 "SampleExternalInterface",
