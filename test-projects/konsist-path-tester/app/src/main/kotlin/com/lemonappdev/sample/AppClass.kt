@@ -14,7 +14,9 @@ class AppClass(val appParameter: String) : AppInterface {
     }
 }
 
-interface AppInterface
+interface AppInterface : ParentInterface
+
+interface ParentInterface
 
 var appProperty: AppClass = AppClass("")
     get() = AppClass("app value")
