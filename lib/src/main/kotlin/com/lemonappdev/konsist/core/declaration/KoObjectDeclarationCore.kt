@@ -49,6 +49,7 @@ internal class KoObjectDeclarationCore(
     override val containingDeclaration: KoContainingDeclarationProvider,
 ) :
     KoObjectDeclaration,
+    KoChildDeclarationCore,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
     KoClassProviderCore,
