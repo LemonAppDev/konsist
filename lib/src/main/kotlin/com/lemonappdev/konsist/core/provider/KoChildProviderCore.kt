@@ -1,12 +1,11 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoChildDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoChildProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.model.DataCore
+import com.lemonappdev.konsist.core.util.KClassUtil.checkIfKClassOf
 import kotlin.reflect.KClass
 
 internal interface KoChildProviderCore :
@@ -17,41 +16,8 @@ internal interface KoChildProviderCore :
     override fun children(indirectChildren: Boolean): List<KoChildDeclaration> {
         val items: List<KoChildDeclaration> = DataCore.classes + DataCore.interfaces + DataCore.objects
 
-        return items.filter { (it as KoParentProvider).parents.contains(this as KoParentDeclaration) }
+        return items.filter { (it as KoParentProvider).hasParent { parent -> parent == (this as KoParentDeclaration) } }
     }
-
-    private fun getIndirectChildren(children: List<KoChildDeclaration>): List<KoChildDeclaration> {
-        val indirectChildren = mutableListOf<KoChildDeclaration>()
-
-        children
-            .forEach {
-                val nextChildren = if (it as? KoChildProvider != null) {
-                    it.children(indirectChildren = true)
-                } else {
-                    emptyList()
-                }
-
-                if (nextChildren.isNotEmpty()) {
-                    indirectChildren += nextChildren + getIndirectChildren(nextChildren)
-                }
-            }
-
-        return indirectChildren
-    }
-
-    private fun getChildClass(name: String, fqn: String?): KoClassDeclaration? = DataCore
-        .classes
-        .firstOrNull { decl -> (decl.packagee?.fullyQualifiedName + "." + decl.name) == fqn }
-        ?: containingFile
-            .classes()
-            .firstOrNull { decl -> decl.name == name }
-
-    private fun getChildInterface(name: String, fqn: String?): KoInterfaceDeclaration? = DataCore
-        .interfaces
-        .firstOrNull { decl -> (decl.packagee?.fullyQualifiedName + "." + decl.name) == fqn }
-        ?: containingFile
-            .interfaces()
-            .firstOrNull { decl -> decl.name == name }
 
     override fun numChildren(indirectChildren: Boolean): Int = children(indirectChildren).size
 
@@ -82,9 +48,11 @@ internal interface KoChildProviderCore :
     override fun hasAllChildren(indirectChildren: Boolean, predicate: (KoChildDeclaration) -> Boolean): Boolean =
         children(indirectChildren).all(predicate)
 
-    override fun hasChildOf(name: KClass<*>, vararg names: KClass<*>, indirectChildren: Boolean): Boolean = true
-//        checkIfChildOf(name, children(indirectChildren)) || names.any { checkIfChildOf(it, children(indirectChildren)) }
+    override fun hasChildOf(name: KClass<*>, vararg names: KClass<*>, indirectChildren: Boolean): Boolean =
+        checkIfKClassOf(name, children(indirectChildren))
+                || names.any { checkIfKClassOf(it, children(indirectChildren)) }
 
-    override fun hasAllChildrenOf(name: KClass<*>, vararg names: KClass<*>, indirectChildren: Boolean): Boolean = true
-//        checkIfChildOf(name, children(indirectChildren)) && names.all { checkIfChildOf(it, children(indirectChildren)) }
+    override fun hasAllChildrenOf(name: KClass<*>, vararg names: KClass<*>, indirectChildren: Boolean): Boolean =
+        checkIfKClassOf(name, children(indirectChildren))
+                && names.all { checkIfKClassOf(it, children(indirectChildren)) }
 }
