@@ -17,7 +17,8 @@ internal interface KoChildProviderCore :
         val items: List<KoChildDeclaration> = DataCore.classes + DataCore.interfaces + DataCore.objects
 
         return items.filter {
-            (it as? KoParentProvider)?.hasParent { parent -> parent == (this as? KoParentDeclaration) } ?: false
+            (it as? KoParentProvider)?.hasParent(indirectChildren) { parent -> parent == (this as? KoParentDeclaration) }
+                ?: false
         }
     }
 
