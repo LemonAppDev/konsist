@@ -727,4 +727,35 @@ class KoParentProviderListExtTest {
         // then
         sut shouldBeEqualTo listOf(declaration3)
     }
+
+    @Test
+    fun `withoutSomeParentsOf(KClass) does not return declarations without any parents`() {
+        // given
+
+        val parent1: KoParentDeclaration = mockk {
+            every { name } returns "SampleClass"
+        }
+
+        val parent2: KoParentDeclaration = mockk {
+            every { name } returns "SampleClass2"
+        }
+
+        val declaration1: KoParentProvider = mockk {
+            every { parents } returns listOf(parent1)
+        }
+        val declaration2: KoParentProvider = mockk {
+            every { parents } returns listOf(parent2)
+        }
+        val declaration3: KoParentProvider = mockk {
+            every { parents } returns emptyList()
+        }
+
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutSomeParentsOf(SampleClass::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
 }
