@@ -4,9 +4,7 @@ import com.lemonappdev.konsist.api.provider.KoAliasProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import io.mockk.every
 import io.mockk.mockk
-import org.amshove.kluent.should
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
 
 class KoAliasProviderListExtTest {
@@ -108,7 +106,6 @@ class KoAliasProviderListExtTest {
         // then
         sut shouldBeEqualTo listOf(declaration1)
     }
-
 
     @Test
     fun `withoutAlias(name) returns declarations without alias with any of given names`() {
