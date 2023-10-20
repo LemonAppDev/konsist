@@ -4,7 +4,9 @@ import com.lemonappdev.konsist.api.provider.KoAliasProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import io.mockk.every
 import io.mockk.mockk
+import org.amshove.kluent.should
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
 
 class KoAliasProviderListExtTest {
@@ -85,6 +87,28 @@ class KoAliasProviderListExtTest {
         // then
         sut shouldBeEqualTo listOf(declaration2)
     }
+
+    @Test
+    fun `withoutAlias() does not return declaration with null alias`() {
+        // given
+        val declarationName = "name"
+        val declaration1: SampleTestDeclaration = mockk {
+            every { name } returns declarationName
+            every { alias } returns declarationName
+        }
+        val declaration2: SampleTestDeclaration = mockk {
+            every { name } returns declarationName
+            every { alias } returns null
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAlias()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
 
     @Test
     fun `withoutAlias(name) returns declarations without alias with any of given names`() {

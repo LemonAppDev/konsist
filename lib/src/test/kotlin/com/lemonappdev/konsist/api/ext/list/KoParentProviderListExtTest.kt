@@ -624,7 +624,10 @@ class KoParentProviderListExtTest {
         val declaration2: KoParentProvider = mockk {
             every { parents } returns listOf(parent2)
         }
-        val declarations = listOf(declaration1, declaration2)
+        val declaration3: KoParentProvider = mockk {
+            every { parents } returns listOf()
+        }
+        val declarations = listOf(declaration1, declaration2,declaration3)
 
         // when
         val sut = declarations.withSomeParentsOf(SampleClass::class)
