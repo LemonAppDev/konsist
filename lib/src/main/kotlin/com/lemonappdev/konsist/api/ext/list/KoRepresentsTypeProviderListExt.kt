@@ -52,9 +52,9 @@ fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedTypeOf(kClass: KClass<
  * @param kClasses The Kotlin classes representing the types to exclude.
  * @return A list containing declarations without types matching the specified Kotlin classes.
  */
-fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedTypeOf(kClass: KClass<*>?, vararg kClasses: KClass<*>?): List<T> =
+fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>?): List<T> =
     filter {
-        !it.representsType(kClass?.qualifiedName) &&
+        !it.representsType(kClass.qualifiedName) &&
             if (kClasses.isNotEmpty()) {
                 kClasses.none { type ->
                     it.representsType(type?.qualifiedName)
