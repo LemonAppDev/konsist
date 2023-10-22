@@ -7,5 +7,5 @@ internal interface KoRepresentsTypeProviderCore :
     KoNameProviderCore,
     KoFullyQualifiedNameProviderCore,
     KoBaseProviderCore {
-    override fun representsType(name: String): Boolean = name == this.name || name == fullyQualifiedName
+    override fun representsType(name: String?): Boolean = name == this.name || name == fullyQualifiedName
 }

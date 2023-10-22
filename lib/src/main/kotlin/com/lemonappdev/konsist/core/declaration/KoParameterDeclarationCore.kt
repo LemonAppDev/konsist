@@ -80,7 +80,7 @@ internal class KoParameterDeclarationCore private constructor(
         KoTypeDeclarationCore.getInstance(type, this)
     }
 
-    override fun representsType(name: String): Boolean = type.name == name || type.fullyQualifiedName == name
+    override fun representsType(name: String?): Boolean = type.name == name || type.fullyQualifiedName == name
 
     override val hasValModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "val" }
 

@@ -10,7 +10,7 @@ class KoClassDeclarationForKoRepresentsTypeProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
     fun `class-represents-type`(
-        type: String,
+        type: String?,
         value: Boolean,
     ) {
         // given
@@ -22,6 +22,7 @@ class KoClassDeclarationForKoRepresentsTypeProviderTest {
         sut.representsType(type) shouldBeEqualTo value
     }
 
+    @Suppress("SameParameterValue")
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koclass/snippet/forkorepresentstypeprovider/", fileName)
 
@@ -33,6 +34,7 @@ class KoClassDeclarationForKoRepresentsTypeProviderTest {
             arguments("OtherClass", false),
             arguments("com.lemonappdev.konsist.testdata.SampleClass", true),
             arguments("com.lemonappdev.konsist.testdata.OtherClass", false),
+            arguments(null, false),
         )
     }
 }
