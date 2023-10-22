@@ -31,7 +31,7 @@ internal interface KoParentProviderCore :
                     ?: getParentInterface(name, fqn)
                     ?: KoExternalParentDeclarationCore(name, it)
             }
-            ?: emptyList()
+            .orEmpty()
 
     fun getParentFullyQualifiedName(name: String): String? {
         val fqn =

@@ -28,7 +28,7 @@ internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCo
                     .firstOrNull { modifier -> modifier.type == it }
                     ?: throw KoInternalException("Modifier not found: $it")
             }
-            ?: emptyList()
+            .orEmpty()
 
     override val numModifiers: Int
         get() = modifiers.size
