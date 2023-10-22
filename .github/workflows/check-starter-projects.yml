@@ -4,6 +4,10 @@ on:
   pull_request:
     types: [ opened, synchronize ]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   get-github-context:
     name: Get GitHub Context
