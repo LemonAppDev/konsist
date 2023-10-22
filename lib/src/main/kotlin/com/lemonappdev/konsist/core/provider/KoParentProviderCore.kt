@@ -24,25 +24,31 @@ internal interface KoParentProviderCore :
             ?.children
             ?.filterIsInstance<KtSuperTypeListEntry>()
             ?.map {
-                val name = it
-                    .text
-                    .substringBefore(" ")
-                    .substringBefore("(")
-                    .substringBefore("<")
-
-                val fqn =
-                    containingFile
-                        .imports
-                        .firstOrNull { import ->
-                            import.name.substringAfterLast(".") == name || import.alias == name
-                        }
-                        ?.name
+                val name = getParentName(it)
+                val fqn = getParentFullyQualifiedName(name)
 
                 return@map getParentClass(name, fqn)
                     ?: getParentInterface(name, fqn)
                     ?: KoExternalParentDeclarationCore(name, it)
             }
             ?: emptyList()
+
+    fun getParentFullyQualifiedName(name: String): String? {
+        val fqn =
+            containingFile
+                .imports
+                .firstOrNull { import ->
+                    import.name.substringAfterLast(".") == name || import.alias == name
+                }
+                ?.name
+        return fqn
+    }
+
+    fun getParentName(it: KtSuperTypeListEntry): String = it
+        .text
+        .substringBefore(" ")
+        .substringBefore("(")
+        .substringBefore("<")
 
     private fun getParentClass(name: String, fqn: String?): KoClassDeclaration? = DataCore
         .classes
