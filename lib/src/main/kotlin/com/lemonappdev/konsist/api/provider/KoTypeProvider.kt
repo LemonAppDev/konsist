@@ -13,7 +13,7 @@ interface KoTypeProvider : KoBaseProvider {
     val type: KoTypeDeclaration
 
     /**
-     * Whether declaration has a specified type.
+     * Determines whatever declaration has a specified type.
      *
      * @param predicate The predicate function used to determine if a declaration type satisfies a condition.
      * @return `true` if the declaration has the specified type, `false` otherwise.
@@ -21,7 +21,7 @@ interface KoTypeProvider : KoBaseProvider {
     fun hasType(predicate: (KoTypeDeclaration) -> Boolean): Boolean
 
     /**
-     * Whether declaration has a type of the specified Kotlin class.
+     * Determines whatever declaration has a type of the specified Kotlin class.
      *
      * @param kClass The Kotlin class representing the type to check for.
      * @return `true` if the declaration has a type matching the specified KClass, `false` otherwise.

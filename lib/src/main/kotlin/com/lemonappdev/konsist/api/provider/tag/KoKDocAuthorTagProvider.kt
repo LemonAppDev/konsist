@@ -18,7 +18,7 @@ interface KoKDocAuthorTagProvider : KoBaseProvider {
     val numAuthorTags: Int
 
     /**
-     * Whatever the declaration has author tags.
+     * Determines whatever the declaration has author tags.
      */
     val hasAuthorTags: Boolean
 }

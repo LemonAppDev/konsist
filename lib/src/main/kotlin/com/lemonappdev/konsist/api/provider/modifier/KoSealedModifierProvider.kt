@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoSealedModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Whatever declaration has `sealed` modifier.
+     * Determines whatever declaration has `sealed` modifier.
      */
     val hasSealedModifier: Boolean
 }

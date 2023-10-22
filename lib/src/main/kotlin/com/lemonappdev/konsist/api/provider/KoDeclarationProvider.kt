@@ -19,7 +19,7 @@ interface KoDeclarationProvider : KoBaseProvider {
     ): List<KoBaseDeclaration>
 
     /**
-     * Checks whether the declaration contains a declaration that satisfies the specified predicate.
+     * Determines whatever the declaration contains a declaration that satisfies the specified predicate.
      *
      * @param includeNested Specifies whether to include nested declarations in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local declarations in the check (optional, default is `true`).
@@ -34,7 +34,7 @@ interface KoDeclarationProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Gets the number of declarations present in the declaration.
+     * Returns the number of declarations present in the declaration.
      *
      * @param includeNested Specifies whether to include nested declarations in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `true`).
@@ -43,7 +43,7 @@ interface KoDeclarationProvider : KoBaseProvider {
     fun numDeclarations(includeNested: Boolean = true, includeLocal: Boolean = true): Int
 
     /**
-     * Gets the number of declarations that satisfies the specified predicate present in the declaration.
+     * Returns the number of declarations that satisfies the specified predicate present in the declaration.
      *
      * @param includeNested Specifies whether to include nested declarations in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `true`).
@@ -57,7 +57,7 @@ interface KoDeclarationProvider : KoBaseProvider {
     ): Int
 
     /**
-     * Gets the number of declarations with public visibility modifier present in the declaration.
+     * Returns the number of declarations with public visibility modifier present in the declaration.
      *
      * @param includeNested Specifies whether to include nested declarations in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `true`).
@@ -66,7 +66,7 @@ interface KoDeclarationProvider : KoBaseProvider {
     fun numPublicDeclarations(includeNested: Boolean = true, includeLocal: Boolean = true): Int
 
     /**
-     * Gets the number of declarations with public or default visibility modifier present in the declaration.
+     * Returns the number of declarations with public or default visibility modifier present in the declaration.
      *
      * @param includeNested Specifies whether to include nested declarations in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `true`).
@@ -75,7 +75,7 @@ interface KoDeclarationProvider : KoBaseProvider {
     fun numPublicOrDefaultDeclarations(includeNested: Boolean = true, includeLocal: Boolean = true): Int
 
     /**
-     * Gets the number of declarations with private visibility modifier present in the declaration.
+     * Returns the number of declarations with private visibility modifier present in the declaration.
      *
      * @param includeNested Specifies whether to include nested declarations in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `true`).
@@ -84,7 +84,7 @@ interface KoDeclarationProvider : KoBaseProvider {
     fun numPrivateDeclarations(includeNested: Boolean = true, includeLocal: Boolean = true): Int
 
     /**
-     * Gets the number of declarations with protected visibility modifier present in the declaration.
+     * Returns the number of declarations with protected visibility modifier present in the declaration.
      *
      * @param includeNested Specifies whether to include nested declarations in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `true`).
@@ -93,7 +93,7 @@ interface KoDeclarationProvider : KoBaseProvider {
     fun numProtectedDeclarations(includeNested: Boolean = true, includeLocal: Boolean = true): Int
 
     /**
-     * Gets the number of declarations with internal visibility modifier present in the declaration.
+     * Returns the number of declarations with internal visibility modifier present in the declaration.
      *
      * @param includeNested Specifies whether to include nested declarations in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `true`).
@@ -102,7 +102,7 @@ interface KoDeclarationProvider : KoBaseProvider {
     fun numInternalDeclarations(includeNested: Boolean = true, includeLocal: Boolean = true): Int
 
     /**
-     * Whether the declaration has declarations.
+     * Determines whatever the declaration has declarations.
      *
      * @param includeNested Specifies whether to include nested declarations in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local declarations in the check (optional, default is `true`).
@@ -131,8 +131,7 @@ interface KoDeclarationProvider : KoBaseProvider {
      * Determines whether the declaration has all declarations that satisfy the provided predicate.
      *
      * Note that if the declarations contains no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate. See a more detailed explanation of this logic concept in
-     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
+     * that do not match the predicate.
      *
      * @param includeNested Specifies whether to include nested declarations in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local declarations in the check (optional, default is `true`).

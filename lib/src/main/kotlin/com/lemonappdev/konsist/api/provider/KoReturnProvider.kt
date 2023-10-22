@@ -38,13 +38,13 @@ interface KoReturnProvider : KoBaseProvider {
     val hasReturnValue: Boolean
 
     /**
-     * Whether this declaration has a return type.
+     * Determines whatever this declaration has a return type.
      */
     @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasReturnType()"))
     val hasReturnType: Boolean
 
     /**
-     * Whether declaration has a specified return type.
+     * Determines whatever declaration has a specified return type.
      *
      * @param predicate The predicate function used to determine if a declaration return type satisfies a condition.
      * @return `true` if the declaration has the specified return type (or any return type if [predicate] is `null`),
@@ -53,7 +53,7 @@ interface KoReturnProvider : KoBaseProvider {
     fun hasReturnType(predicate: ((KoTypeDeclaration) -> Boolean)? = null): Boolean
 
     /**
-     * Whether declaration has a return type of the specified Kotlin class.
+     * Determines whatever declaration has a return type of the specified Kotlin class.
      *
      * @param kClass The Kotlin class representing the return type to check for.
      * @return `true` if the declaration has a return type matching the specified KClass, `false` otherwise.

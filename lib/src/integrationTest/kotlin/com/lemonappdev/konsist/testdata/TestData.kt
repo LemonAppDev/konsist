@@ -2,13 +2,19 @@ package com.lemonappdev.konsist.testdata
 
 open class SampleParentClass
 
+open class SampleParentClassWithDuplicatedName
+
 class SampleClass
 
 class SampleClass1
 
 class SampleClass2
 
-class SampleCollection1<out E> : Collection<E> {
+open class SampleClassWithParameter(val param: String)
+
+open class SampleGenericClassWithParameter<T>(val param: String)
+
+open class SampleCollection1<out E> : Collection<E> {
     override val size: Int = 1
 
     override fun isEmpty(): Boolean = false
@@ -53,6 +59,8 @@ interface SampleParentInterface
 interface SampleParentInterface1
 
 interface SampleParentInterface2
+
+interface SampleGenericSuperInterface<T>
 
 object SampleObject
 
