@@ -372,7 +372,7 @@ class KoRepresentsTypeProviderListExtTest {
     @Test
     fun `withoutRepresentedTypeOf(null) returns all declarations`() {
         // given
-        val type = null
+        val type = "type"
         val declaration1: KoRepresentsTypeProvider = mockk {
             every { representsType(type) } returns false
         }
@@ -382,7 +382,7 @@ class KoRepresentsTypeProviderListExtTest {
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutRepresentedTypeOf(type)
+        val sut = declarations.withoutRepresentedTypeOf(mockk())
 
         // then
         sut shouldBeEqualTo listOf(declaration1, declaration2)
@@ -426,7 +426,7 @@ class KoRepresentsTypeProviderListExtTest {
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutRepresentedTypeOf(null, SampleClass1::class)
+        val sut = declarations.withoutRepresentedTypeOf(mockk(), SampleClass1::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
