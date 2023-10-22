@@ -10,10 +10,14 @@ object LocationUtil {
      *    \w  = Matches any word char (alpha & underscore).
      *    +   = Match 1 or more of the preceding token.
      *    |   = OR
+     *  \.{2}?= allow using '..' as wildcard optionally (only one accepted)
+     *    \w  = Matches any word char (alpha & underscore).
+     *    +   = Match 1 or more of the preceding token.
+     *    |   = OR
      *  \.{2} = escaped char '.' (dot) appearing 2 times
      *    $   = Matches end of string
      */
-    internal const val REGEX_PACKAGE_NAME_END_TWO_DOTS = "(?:^\\w+|\\w+\\.\\w+)+\\.{2}\$"
+    internal const val REGEX_PACKAGE_NAME_END_TWO_DOTS = "(?:^\\w+|\\w+\\.\\w+\\.{2}?\\w+|\\w+\\.\\w+)+\\.{2}\$"
 
     /**
      * Use '..' as a wildcard for any number of characters.
