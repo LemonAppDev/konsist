@@ -6,7 +6,7 @@ on:
 
 jobs:
   get-github-context:
-    name: Get Branches And Changed Files
+    name: Get GitHub Context
     runs-on: ubuntu-latest
 
     steps:

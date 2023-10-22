@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.SampleGenericClassWithParameter
+
+object SampleObject: SampleGenericClassWithParameter<Int>("param")

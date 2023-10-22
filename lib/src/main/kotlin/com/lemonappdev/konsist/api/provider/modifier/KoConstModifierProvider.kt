@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoConstModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Whether the declaration has `const` modifier.
+     * Determines whatever the declaration has `const` modifier.
      */
     val hasConstModifier: Boolean
 }

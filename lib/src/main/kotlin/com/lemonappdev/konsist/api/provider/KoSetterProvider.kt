@@ -12,7 +12,7 @@ interface KoSetterProvider : KoBaseProvider {
     val setter: KoSetterDeclaration?
 
     /**
-     * Whatever declaration has setter.
+     * Determines whatever declaration has setter.
      */
     val hasSetter: Boolean
 }

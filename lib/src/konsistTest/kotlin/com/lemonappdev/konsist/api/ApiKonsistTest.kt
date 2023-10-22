@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api
 
 import com.lemonappdev.konsist.api.ext.list.withProperty
-import com.lemonappdev.konsist.api.ext.list.withoutName
 import com.lemonappdev.konsist.api.ext.list.withoutNameMatching
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
@@ -47,7 +46,6 @@ class ApiKonsistTest {
         Konsist
             .scopeFromPackage("com.lemonappdev.konsist.api.provider..", sourceSetName = "main")
             .interfaces()
-            .withoutName("KoParentInterfaceProvider") // remove after release v1.0.0
             .withoutNameMatching(Regex("\\bKoKDoc[A-Za-z]+TagProvider\\b")) // exclude providers like KoKDocXTagProvider
             .withProperty { property ->
                 property.hasType { type ->
@@ -64,7 +62,6 @@ class ApiKonsistTest {
         val providers = Konsist
             .scopeFromPackage("com.lemonappdev.konsist.api.provider..", sourceSetName = "main")
             .interfaces()
-            .withoutName("KoParentInterfaceProvider") // remove after release v1.0.0
             .withoutNameMatching(Regex("\\bKoKDoc[A-Za-z]+TagProvider\\b")) // exclude providers like KoKDocXTagProvider
             .withProperty { property ->
                 property.hasType { type ->
@@ -117,7 +114,7 @@ class ApiKonsistTest {
 
         val hasKoNameProvider = declarations
             .firstOrNull { declaration -> declaration.name == declarationName }
-            ?.hasParentWithName("KoNameProvider") ?: false
+            ?.hasParentInterfaceWithName("KoNameProvider") ?: false
 
         return if (isExtension) {
             checkForExtensions(declarationName, singularName, pluralName, hasKoNameProvider)
@@ -139,6 +136,8 @@ class ApiKonsistTest {
     } else if (declarationName == "KoFunctionDeclaration" || declarationName == "KoClassDeclaration") {
         checkForFunctionWithName(singularName, pluralName, true) ||
             checkForFunctionWithName("Local$singularName", pluralName, true)
+    } else if (declarationName == "KoInterfaceDeclaration") {
+        checkForFunctionWithName("Parent$singularName", pluralName, true)
     } else if (declarationName == "KoBaseDeclaration") {
         checkForFunctionWithoutName(singularName, pluralName, true) ||
             checkForFunctionWithoutName("LocalDeclaration", pluralName, true)
@@ -158,8 +157,9 @@ class ApiKonsistTest {
     } else if (declarationName == "KoKDocTagDeclaration") {
         checkForExceptions("Tag", "Tags", false)
     } else if (declarationName == "KoFunctionDeclaration" || declarationName == "KoClassDeclaration") {
-        checkForFunctionWithName(singularName, pluralName, false) ||
-            checkForFunctionWithName("Local$singularName", pluralName, false)
+        checkForFunctionWithName("Local$singularName", pluralName, false)
+    } else if (declarationName == "KoInterfaceDeclaration") {
+        checkForFunctionWithName("Parent$singularName", pluralName, false)
     } else if (declarationName == "KoBaseDeclaration") {
         checkForFunctionWithoutName("Declaration", pluralName, false) ||
             checkForFunctionWithoutName("LocalDeclaration", pluralName, false)

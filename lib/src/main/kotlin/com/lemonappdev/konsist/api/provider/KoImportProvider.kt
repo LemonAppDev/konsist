@@ -17,7 +17,7 @@ interface KoImportProvider : KoBaseProvider {
     val numImports: Int
 
     /**
-     * Gets the number of imports that satisfies the specified predicate present in the declaration.
+     * Returns the number of imports that satisfies the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if an import satisfies a condition.
      * @return The number of imports in the declaration.
@@ -25,7 +25,7 @@ interface KoImportProvider : KoBaseProvider {
     fun countImports(predicate: (KoImportDeclaration) -> Boolean): Int
 
     /**
-     * Whether the declaration has imports.
+     * Determines whatever the declaration has imports.
      *
      * @param names the names of the imports to check.
      * @return `true` if the declaration has imports with the specified names (or any import if [names] is empty), `false` otherwise.
@@ -39,7 +39,7 @@ interface KoImportProvider : KoBaseProvider {
     fun hasImports(vararg names: String): Boolean
 
     /**
-     * Whether the declaration has any import.
+     * Determines whatever the declaration has any import.
      *
      * @return `true` if the declaration has any import, `false` otherwise.
      */
@@ -64,7 +64,7 @@ interface KoImportProvider : KoBaseProvider {
     fun hasImportsWithAllNames(name: String, vararg names: String): Boolean
 
     /**
-     * Whether the declaration has any import with the specified predicate.
+     * Determines whatever the declaration has any import with the specified predicate.
      *
      * @param predicate The predicate function to determine if an import satisfies a condition.
      * @return `true` if the declaration has imports with the specified predicate, `false` otherwise.
@@ -72,11 +72,10 @@ interface KoImportProvider : KoBaseProvider {
     fun hasImport(predicate: (KoImportDeclaration) -> Boolean): Boolean
 
     /**
-     * Whether the declaration has all imports with the specified predicate.
+     * Determines whatever the declaration has all imports with the specified predicate.
      *
      * Note that if the imports contains no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate. See a more detailed explanation of this logic concept in
-     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
+     * that do not match the predicate.
      *
      * @param predicate The predicate function to determine if an import satisfies a condition.
      * @return `true` if the declaration has all imports with the specified predicate, `false` otherwise.

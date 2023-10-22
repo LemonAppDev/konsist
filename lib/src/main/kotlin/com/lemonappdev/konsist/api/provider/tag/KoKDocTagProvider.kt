@@ -20,7 +20,7 @@ interface KoKDocTagProvider : KoBaseProvider {
     val numTags: Int
 
     /**
-     * Whether the declaration has the given tags.
+     * Determines whatever the declaration has the given tags.
      *
      * @param tags the tags to check.
      * @return `true` if the kDoc has all the specified tags (or any tags if [tags] is empty), `false` otherwise.
@@ -34,7 +34,7 @@ interface KoKDocTagProvider : KoBaseProvider {
     fun hasTags(vararg tags: KoKDocTag): Boolean
 
     /**
-     * Whatever the declaration has tags.
+     * Determines whatever the declaration has tags.
      *
      * @return `true` if the declaration has tag, `false` otherwise.
      */

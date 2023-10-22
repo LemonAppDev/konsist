@@ -13,7 +13,7 @@ interface KoKDocSinceTagProvider : KoBaseProvider {
     val sinceTag: KoKDocTagDeclaration?
 
     /**
-     * Whatever the declaration has since tag.
+     * Determines whatever the declaration has since tag.
      */
     val hasSinceTag: Boolean
 }

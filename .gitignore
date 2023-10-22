@@ -2,7 +2,6 @@
 local.properties
 
 # Build Files #
-
 bin
 target
 build/
