@@ -10,7 +10,7 @@ class KoInterfaceDeclarationForKoRepresentsTypeProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
     fun `interface-represents-type`(
-        type: String,
+        type: String?,
         value: Boolean,
     ) {
         // given
@@ -22,6 +22,7 @@ class KoInterfaceDeclarationForKoRepresentsTypeProviderTest {
         sut.representsType(type) shouldBeEqualTo value
     }
 
+    @Suppress("SameParameterValue")
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/kointerface/snippet/forkorepresentstypeprovider/", fileName)
 
@@ -33,6 +34,7 @@ class KoInterfaceDeclarationForKoRepresentsTypeProviderTest {
             arguments("OtherInterface", false),
             arguments("com.lemonappdev.konsist.testdata.SampleInterface", true),
             arguments("com.lemonappdev.konsist.testdata.OtherInterface", false),
+            arguments(null, false),
         )
     }
 }
