@@ -5,7 +5,7 @@ import kotlin.reflect.KClass
 
 /**
  * An interface representing a Kotlin declaration that provides access to the external parents.
- * The external parent is a parent defined outside project codebase (defined inside external library).
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
  */
 interface KoExternalParentProvider : KoBaseProvider {
     /**
