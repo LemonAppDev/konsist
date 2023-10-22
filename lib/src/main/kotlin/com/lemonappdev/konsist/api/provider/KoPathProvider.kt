@@ -15,7 +15,7 @@ interface KoPathProvider : KoBaseProvider {
     val projectPath: String
 
     /**
-     * Whatever declaration reside in file path or file reside in path.
+     * Determines whatever declaration reside in file path or file reside in path.
      *
      * @param path the (file) path to check.
      * @param absolutePath Flag indicating whether the provided path is an absolute path.

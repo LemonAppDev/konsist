@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoCompanionModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Whether the declaration has a `companion` modifier.
+     * Determines whatever the declaration has a `companion` modifier.
      */
     val hasCompanionModifier: Boolean
 }

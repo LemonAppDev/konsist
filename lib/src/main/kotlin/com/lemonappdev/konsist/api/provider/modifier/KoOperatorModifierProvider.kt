@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoOperatorModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Whether the declaration has `operator` modifier.
+     * Determines whatever the declaration has `operator` modifier.
      */
     val hasOperatorModifier: Boolean
 }

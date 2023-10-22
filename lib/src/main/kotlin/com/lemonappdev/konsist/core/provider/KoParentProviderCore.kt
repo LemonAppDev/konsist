@@ -1,8 +1,12 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
-import com.lemonappdev.konsist.core.declaration.KoParentDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoExternalParentDeclarationCore
+import com.lemonappdev.konsist.core.model.DataCore
+import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 import kotlin.reflect.KClass
@@ -10,6 +14,7 @@ import kotlin.reflect.KClass
 internal interface KoParentProviderCore :
     KoParentProvider,
     KoContainingDeclarationProviderCore,
+    KoContainingFileProviderCore,
     KoBaseProviderCore {
     val ktClassOrObject: KtClassOrObject
 
@@ -18,8 +23,46 @@ internal interface KoParentProviderCore :
             .getSuperTypeList()
             ?.children
             ?.filterIsInstance<KtSuperTypeListEntry>()
-            ?.map { KoParentDeclarationCore.getInstance(it, this) }
-            ?: emptyList()
+            ?.map {
+                val name = getParentName(it)
+                val fqn = getParentFullyQualifiedName(name)
+
+                return@map getParentClass(name, fqn)
+                    ?: getParentInterface(name, fqn)
+                    ?: KoExternalParentDeclarationCore(name, it)
+            }
+            .orEmpty()
+
+    fun getParentFullyQualifiedName(name: String): String? {
+        val fqn =
+            containingFile
+                .imports
+                .firstOrNull { import ->
+                    import.name.substringAfterLast(".") == name || import.alias == name
+                }
+                ?.name
+        return fqn
+    }
+
+    fun getParentName(it: KtSuperTypeListEntry): String = it
+        .text
+        .substringBefore(" ")
+        .substringBefore("(")
+        .substringBefore("<")
+
+    private fun getParentClass(name: String, fqn: String?): KoClassDeclaration? = DataCore
+        .classes
+        .firstOrNull { decl -> (decl.packagee?.fullyQualifiedName + "." + decl.name) == fqn }
+        ?: containingFile
+            .classes()
+            .firstOrNull { decl -> decl.name == name }
+
+    private fun getParentInterface(name: String, fqn: String?): KoInterfaceDeclaration? = DataCore
+        .interfaces
+        .firstOrNull { decl -> (decl.packagee?.fullyQualifiedName + "." + decl.name) == fqn }
+        ?: containingFile
+            .interfaces()
+            .firstOrNull { decl -> decl.name == name }
 
     override val numParents: Int
         get() = parents.size
@@ -58,12 +101,8 @@ internal interface KoParentProviderCore :
     override fun hasAllParents(predicate: (KoParentDeclaration) -> Boolean): Boolean = parents.all(predicate)
 
     override fun hasParentOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
-        checkIfParentOf(name) || names.any { checkIfParentOf(it) }
+        checkIfParentOf(name, parents) || names.any { checkIfParentOf(it, parents) }
 
     override fun hasAllParentsOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
-        checkIfParentOf(name) && names.all { checkIfParentOf(it) }
-
-    private fun checkIfParentOf(kClass: KClass<*>): Boolean = parents.any { parent ->
-        parent.name == kClass.simpleName || parent.fullyQualifiedName == kClass.qualifiedName
-    }
+        checkIfParentOf(name, parents) && names.all { checkIfParentOf(it, parents) }
 }

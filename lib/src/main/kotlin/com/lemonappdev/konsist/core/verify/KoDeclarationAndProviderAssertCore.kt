@@ -204,7 +204,7 @@ private fun checkIfSuppressed(item: KoAnnotationProvider, testMethodName: String
         ?.map { it.trim() }
         ?.map { it.removePrefix("\"") }
         ?.map { it.removeSuffix("\"") }
-        ?: emptyList()
+        .orEmpty()
 
     return annotationParameter.any { it == testMethodName } || annotationParameter.any { it == "konsist.$testMethodName" }
 }
@@ -219,7 +219,7 @@ private fun getResult(
     val allChecksPassed = (result[positiveCheck]?.size ?: 0) == items.size
 
     if (!allChecksPassed) {
-        val failedItems = result[!positiveCheck] ?: emptyList()
+        val failedItems = result[!positiveCheck].orEmpty()
         throw KoAssertionFailedException(getCheckFailedMessage(failedItems, testName, additionalMessage))
     }
 }
@@ -235,7 +235,7 @@ private fun deprecatedGetResult(
     val allChecksPassed = (result[positiveCheck]?.size ?: 0) == items.size
 
     if (!allChecksPassed) {
-        val failedItems = result[!positiveCheck] ?: emptyList()
+        val failedItems = result[!positiveCheck].orEmpty()
         throw KoCheckFailedException(getCheckFailedMessage(failedItems, testName, additionalMessage))
     }
 }

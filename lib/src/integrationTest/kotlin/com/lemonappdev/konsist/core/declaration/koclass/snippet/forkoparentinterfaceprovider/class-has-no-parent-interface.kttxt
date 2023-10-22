@@ -1,0 +1,3 @@
+class SampleClass : SampleParentClass()
+
+open class SampleParentClass

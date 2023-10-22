@@ -18,7 +18,7 @@ interface KoEnumConstantProvider : KoBaseProvider {
     val numEnumConstants: Int
 
     /**
-     * Gets the number of enum constants that satisfies the specified predicate present in the declaration.
+     * Returns the number of enum constants that satisfies the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if an enum constant satisfies a condition.
      * @return The number of enum constants in the declaration.
@@ -26,7 +26,7 @@ interface KoEnumConstantProvider : KoBaseProvider {
     fun countEnumConstants(predicate: (KoEnumConstantDeclaration) -> Boolean): Int
 
     /**
-     * Whether the declaration has enum constants.
+     * Determines whatever the declaration has enum constants.
      *
      * @param names the names of the enum constants to check.
      * @return `true` if the declaration has enum constants with the specified names (or any constant if [names] is empty),
@@ -41,7 +41,7 @@ interface KoEnumConstantProvider : KoBaseProvider {
     fun hasEnumConstants(vararg names: String): Boolean
 
     /**
-     * Whether the declaration has any enum constant.
+     * Determines whatever the declaration has any enum constant.
      *
      * @return `true` if the declaration has any enum constant, `false` otherwise.
      */
@@ -74,11 +74,10 @@ interface KoEnumConstantProvider : KoBaseProvider {
     fun hasEnumConstant(predicate: (KoEnumConstantDeclaration) -> Boolean): Boolean
 
     /**
-     * Whether the declaration has all enum constants with the specified predicate.
+     * Determines whatever the declaration has all enum constants with the specified predicate.
      *
      * Note that if the enum constants contains no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate. See a more detailed explanation of this logic concept in
-     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
+     * that do not match the predicate.
      *
      * @param predicate The predicate function to determine if an enum constant satisfies a condition.
      * @return `true` if the declaration has all enum constants with the specified predicate, `false` otherwise.

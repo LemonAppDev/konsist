@@ -18,7 +18,7 @@ interface KoKDocParamTagProvider : KoBaseProvider {
     val numParamTags: Int
 
     /**
-     * Whatever the declaration has param tags.
+     * Determines whatever the declaration has param tags.
      */
     val hasParamTags: Boolean
 }

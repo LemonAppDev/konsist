@@ -19,7 +19,7 @@ interface KoFunctionProvider : KoBaseProvider {
     ): List<KoFunctionDeclaration>
 
     /**
-     * Checks whether the declaration contains a function that satisfies the specified predicate.
+     * Determines whatever the declaration contains a function that satisfies the specified predicate.
      *
      * @param includeNested Specifies whether to include nested functions in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local functions in the check (optional, default is `true`).
@@ -34,7 +34,7 @@ interface KoFunctionProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Gets the number of functions present in the declaration.
+     * Returns the number of functions present in the declaration.
      *
      * @param includeNested Specifies whether to include nested functions in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local functions in the count (optional, default is `true`).
@@ -43,7 +43,7 @@ interface KoFunctionProvider : KoBaseProvider {
     fun numFunctions(includeNested: Boolean = true, includeLocal: Boolean = true): Int
 
     /**
-     * Gets the number of functions that satisfies the specified predicate present in the declaration.
+     * Returns the number of functions that satisfies the specified predicate present in the declaration.
      *
      * @param includeNested Specifies whether to include nested functions in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local functions in the count (optional, default is `true`).
@@ -57,7 +57,7 @@ interface KoFunctionProvider : KoBaseProvider {
     ): Int
 
     /**
-     * Whether the declaration has functions.
+     * Determines whatever the declaration has functions.
      *
      * @param includeNested Specifies whether to include nested functions in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local functions in the check (optional, default is `true`).
@@ -118,8 +118,7 @@ interface KoFunctionProvider : KoBaseProvider {
      * Determines whether the declaration has all functions that satisfy the provided predicate.
      *
      * Note that if the functions contains no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate. See a more detailed explanation of this logic concept in
-     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
+     * that do not match the predicate.
      *
      * @param includeNested Specifies whether to include nested functions in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local functions in the check (optional, default is `true`).

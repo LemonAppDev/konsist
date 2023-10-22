@@ -19,15 +19,15 @@ interface KoParentProvider : KoBaseProvider {
     val numParents: Int
 
     /**
-     * Gets the number of parents that satisfies the specified predicate present in the declaration.
+     * Returns the number of parents that satisfies the specified predicate present in the declaration.
      *
-     * @param predicate The predicate function to determine if an parent satisfies a condition.
-     * @return The number of parents in the declaration.
+     * @param predicate The predicate function to determine if a parent satisfies a condition.
+     * @return The number of parents in the declaration satisfying predicate.
      */
     fun countParents(predicate: (KoParentDeclaration) -> Boolean): Int
 
     /**
-     * Whatever declaration has parents (parent class and parent interfaces) defined directly in the Kotlin file.
+     * Determines whatever declaration has parents (parent class and parent interfaces) defined directly in the Kotlin file.
      * Does not include parents defined in other files such as parent of the parent.
      *
      * @param names the names of the parents to check.
@@ -42,7 +42,7 @@ interface KoParentProvider : KoBaseProvider {
     fun hasParents(vararg names: String): Boolean
 
     /**
-     * Whatever declaration has any parent (parent class and parent interfaces) defined directly in the Kotlin file.
+     * Determines whatever declaration has any parent (parent class and parent interfaces) defined directly in the Kotlin file.
      * Does not include parents defined in other files such as parent of the parent.
      *
      * @return `true` if the declaration has any parent, `false` otherwise.
@@ -87,8 +87,7 @@ interface KoParentProvider : KoBaseProvider {
      * This method does not include parents defined in other files, such as parents of the parent.
      *
      * Note that if the parents contains no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate. See a more detailed explanation of this logic concept in
-     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
+     * that do not match the predicate.
      *
      * @param predicate A function that defines the condition to be met by parent declarations.
      * @return `true` if all parent declarations satisfy the predicate, `false` otherwise.

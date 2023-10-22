@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoAnnotationModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Whatever declaration has `annotation` modifier.
+     * Determines whatever declaration has `annotation` modifier.
      */
     val hasAnnotationModifier: Boolean
 }

@@ -5,7 +5,7 @@ package com.lemonappdev.konsist.api.provider
  */
 interface KoHasTestClassProvider : KoBaseProvider {
     /**
-     * Whatever declaration has a Test class.
+     * Determines whatever declaration has a Test class.
      *
      * @param testFileNameSuffix the suffix of the test file name. By default, "Test".
      * @param moduleName         the name of the module to check (optional).

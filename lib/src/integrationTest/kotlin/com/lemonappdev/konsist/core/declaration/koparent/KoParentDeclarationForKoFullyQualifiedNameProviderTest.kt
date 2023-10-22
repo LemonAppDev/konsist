@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test
 
 class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
-    fun `parent-of-class-fully-qualified-name-with-import`() {
+    fun `parent-from-import-of-class-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("parent-of-class-fully-qualified-name-with-import")
+        val sut = getSnippetFile("parent-from-import-of-class-fully-qualified-name")
             .classes()
             .parents
             .first()
@@ -19,9 +19,9 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     @Test
-    fun `parent-of-class-fully-qualified-name-without-import-and-with-package`() {
+    fun `parent-from-file-with-package-of-class-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("parent-of-class-fully-qualified-name-without-import-and-with-package")
+        val sut = getSnippetFile("parent-from-file-with-package-of-class-fully-qualified-name")
             .classes()
             .parents
             .first()
@@ -31,15 +31,27 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     @Test
-    fun `parent-of-class-fully-qualified-name-without-import-and-package`() {
+    fun `parent-from-file-without-package-of-class-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("parent-of-class-fully-qualified-name-without-import-and-package")
+        val sut = getSnippetFile("parent-from-file-without-package-of-class-fully-qualified-name")
             .classes()
             .parents
             .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "SampleParentClass"
+    }
+
+    @Test
+    fun `external-parent-of-class-fully-qualified-name`() {
+        // given
+        val sut = getSnippetFile("external-parent-of-class-fully-qualified-name")
+            .classes()
+            .parents
+            .first()
+
+        // then
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.externalsample.SampleExternalInterface"
     }
 
     @Test
@@ -67,9 +79,9 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     @Test
-    fun `parent-of-interface-fully-qualified-name-with-import`() {
+    fun `parent-from-import-of-interface-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("parent-of-interface-fully-qualified-name-with-import")
+        val sut = getSnippetFile("parent-from-import-of-interface-fully-qualified-name")
             .interfaces()
             .parents
             .first()
@@ -79,9 +91,9 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     @Test
-    fun `parent-of-interface-fully-qualified-name-without-import-and-with-package`() {
+    fun `parent-from-file-with-package-of-interface-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("parent-of-interface-fully-qualified-name-without-import-and-with-package")
+        val sut = getSnippetFile("parent-from-file-with-package-of-interface-fully-qualified-name")
             .interfaces()
             .parents
             .first()
@@ -91,15 +103,27 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     @Test
-    fun `parent-of-interface-fully-qualified-name-without-import-and-package`() {
+    fun `parent-from-file-without-package-of-interface-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("parent-of-interface-fully-qualified-name-without-import-and-package")
+        val sut = getSnippetFile("parent-from-file-without-package-of-interface-fully-qualified-name")
             .interfaces()
             .parents
             .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "SampleParentInterface"
+    }
+
+    @Test
+    fun `external-parent-of-interface-fully-qualified-name`() {
+        // given
+        val sut = getSnippetFile("external-parent-of-interface-fully-qualified-name")
+            .interfaces()
+            .parents
+            .first()
+
+        // then
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.externalsample.SampleExternalInterface"
     }
 
     @Test
@@ -127,9 +151,9 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     @Test
-    fun `parent-of-object-fully-qualified-name-with-import`() {
+    fun `parent-from-import-of-object-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("parent-of-object-fully-qualified-name-with-import")
+        val sut = getSnippetFile("parent-from-import-of-object-fully-qualified-name")
             .objects()
             .parents
             .first()
@@ -139,9 +163,9 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     @Test
-    fun `parent-of-object-fully-qualified-name-without-import-and-with-package`() {
+    fun `parent-from-file-with-package-of-object-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("parent-of-object-fully-qualified-name-without-import-and-with-package")
+        val sut = getSnippetFile("parent-from-file-with-package-of-object-fully-qualified-name")
             .objects()
             .parents
             .first()
@@ -151,15 +175,27 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     @Test
-    fun `parent-of-object-fully-qualified-name-without-import-and-package`() {
+    fun `parent-from-file-without-package-of-object-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("parent-of-object-fully-qualified-name-without-import-and-package")
+        val sut = getSnippetFile("parent-from-file-without-package-of-object-fully-qualified-name")
             .objects()
             .parents
             .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "SampleParentClass"
+    }
+
+    @Test
+    fun `external-parent-of-object-fully-qualified-name`() {
+        // given
+        val sut = getSnippetFile("external-parent-of-object-fully-qualified-name")
+            .objects()
+            .parents
+            .first()
+
+        // then
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.externalsample.SampleExternalInterface"
     }
 
     @Test

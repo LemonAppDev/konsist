@@ -12,7 +12,7 @@ interface KoGetterProvider : KoBaseProvider {
     val getter: KoGetterDeclaration?
 
     /**
-     * Whatever declaration has getter.
+     * Determines whatever declaration has getter.
      */
     val hasGetter: Boolean
 }

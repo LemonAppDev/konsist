@@ -1,37 +1,17 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.KoParentInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentInterfaceProvider
-import com.lemonappdev.konsist.core.declaration.KoParentInterfaceDeclarationCore
-import org.jetbrains.kotlin.psi.KtClassOrObject
-import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
-import org.jetbrains.kotlin.psi.KtSuperTypeEntry
+import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
+import kotlin.reflect.KClass
 
-@Deprecated("Will be removed in v1.0.0")
 internal interface KoParentInterfaceProviderCore :
-    KoContainingDeclarationProviderCore,
     KoParentInterfaceProvider,
-    KoBaseProviderCore {
-    val ktClassOrObject: KtClassOrObject
+    KoBaseProviderCore,
+    KoParentProviderCore {
+    override val parentInterfaces: List<KoInterfaceDeclaration>
+        get() = parents.filterIsInstance<KoInterfaceDeclaration>()
 
-    @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("parents"))
-    override val parentInterfaces: List<KoParentInterfaceDeclaration>
-        get() {
-            val interfaces = ktClassOrObject
-                .getSuperTypeList()
-                ?.children
-                ?.filterIsInstance<KtSuperTypeEntry>() ?: emptyList()
-
-            val delegations = ktClassOrObject
-                .getSuperTypeList()
-                ?.children
-                ?.filterIsInstance<KtDelegatedSuperTypeEntry>() ?: emptyList()
-
-            val all = interfaces + delegations
-            return all.map { KoParentInterfaceDeclarationCore.getInstance(it, this) }
-        }
-
-    @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("numParents"))
     override val numParentInterfaces: Int
         get() = parentInterfaces.size
 
@@ -42,4 +22,35 @@ internal interface KoParentInterfaceProviderCore :
             parentInterfaces.any { koParent -> it == koParent.name }
         }
     }
+
+    override fun countParentInterfaces(predicate: (KoInterfaceDeclaration) -> Boolean): Int =
+        parentInterfaces.count { predicate(it) }
+
+    override fun hasParentInterfaces(): Boolean = parentInterfaces.isNotEmpty()
+
+    override fun hasParentInterfaceWithName(name: String, vararg names: String): Boolean {
+        val givenNames = names.toList() + name
+
+        return givenNames.any {
+            parentInterfaces.any { parentInterface -> it == parentInterface.name }
+        }
+    }
+
+    override fun hasParentInterfacesWithAllNames(name: String, vararg names: String): Boolean {
+        val givenNames = names.toList() + name
+
+        return givenNames.all {
+            parentInterfaces.any { parentInterface -> it == parentInterface.name }
+        }
+    }
+
+    override fun hasParentInterface(predicate: (KoInterfaceDeclaration) -> Boolean): Boolean = parentInterfaces.any(predicate)
+
+    override fun hasAllParentInterfaces(predicate: (KoInterfaceDeclaration) -> Boolean): Boolean = parentInterfaces.all(predicate)
+
+    override fun hasParentInterfaceOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
+        checkIfParentOf(name, parentInterfaces) || names.any { checkIfParentOf(it, parentInterfaces) }
+
+    override fun hasAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
+        checkIfParentOf(name, parentInterfaces) && names.all { checkIfParentOf(it, parentInterfaces) }
 }

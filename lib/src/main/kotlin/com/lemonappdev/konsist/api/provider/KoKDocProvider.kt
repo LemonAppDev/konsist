@@ -12,7 +12,7 @@ interface KoKDocProvider : KoBaseProvider {
     val kDoc: KoKDocDeclaration?
 
     /**
-     * Whether the declaration has kDoc.
+     * Determines whatever the declaration has kDoc.
      */
     val hasKDoc: Boolean
 }

@@ -18,7 +18,7 @@ interface KoAnnotationProvider : KoBaseProvider {
     val numAnnotations: Int
 
     /**
-     * Gets the number of annotations that satisfies the specified predicate present in the declaration.
+     * Returns the number of annotations that satisfies the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if an annotation satisfies a condition.
      * @return The number of annotations in the declaration.
@@ -26,7 +26,7 @@ interface KoAnnotationProvider : KoBaseProvider {
     fun countAnnotations(predicate: (KoAnnotationDeclaration) -> Boolean): Int
 
     /**
-     * Whether the declaration has annotations.
+     * Determines whatever the declaration has annotations.
      *
      * @param names the annotation names to check. It can be either a simple name or a fully qualified name.
      * @return `true` if the declaration has annotations with the specified names (or any annotation if [names] is empty),
@@ -41,7 +41,7 @@ interface KoAnnotationProvider : KoBaseProvider {
     fun hasAnnotations(vararg names: String): Boolean
 
     /**
-     * Whether the declaration has annotations of `KClass` type.
+     * Determines whatever the declaration has annotations of `KClass` type.
      *
      * @param name the `KClass` type of the annotation to check.
      * @param names the `KClass` types of the annotations to check.
@@ -56,7 +56,7 @@ interface KoAnnotationProvider : KoBaseProvider {
     fun hasAnnotationsOf(name: KClass<*>, vararg names: KClass<*>): Boolean
 
     /**
-     * Whatever declaration has any annotation.
+     * Determines whatever declaration has any annotation.
      *
      * @return `true` if the declaration has any annotation, `false` otherwise.
      */
@@ -92,8 +92,7 @@ interface KoAnnotationProvider : KoBaseProvider {
      * Determines whether the declaration has all annotations that satisfy the provided predicate.
      *
      * Note that if the annotations contains no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate. See a more detailed explanation of this logic concept in
-     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
+     * that do not match the predicate.
      *
      * @param predicate A function that defines the condition to be met by annotation declarations.
      * @return `true` if all annotation declarations satisfy the predicate, `false` otherwise.

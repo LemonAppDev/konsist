@@ -22,7 +22,7 @@ internal interface KoInitBlockProviderCore :
             } else {
                 anonymousInitializers
                     ?.map { init -> KoInitBlockDeclarationCore.getInstance(init, this) }
-                    ?: emptyList()
+                    .orEmpty()
             }
         }
 

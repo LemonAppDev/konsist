@@ -17,7 +17,7 @@ interface KoLocalFunctionProvider : KoBaseProvider {
     val numLocalFunctions: Int
 
     /**
-     * Gets the number of local functions that satisfies the specified predicate present in the declaration.
+     * Returns the number of local functions that satisfies the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if a local function satisfies a condition.
      * @return The number of local functions in the declaration.
@@ -25,7 +25,7 @@ interface KoLocalFunctionProvider : KoBaseProvider {
     fun countLocalFunctions(predicate: (KoFunctionDeclaration) -> Boolean): Int
 
     /**
-     * Checks whether the declaration contains a local function with the specified name.
+     * Determines whatever the declaration contains a local function with the specified name.
      *
      * @param predicate The predicate function to determine if a local function satisfies a condition.
      * @return `true` if the declaration contains a local function with the specified name, `false` otherwise.
@@ -34,7 +34,7 @@ interface KoLocalFunctionProvider : KoBaseProvider {
     fun containsLocalFunction(predicate: (KoFunctionDeclaration) -> Boolean): Boolean
 
     /**
-     * Whether the declaration has local functions.
+     * Determines whatever the declaration has local functions.
      *
      * @return `true` if the declaration has any local function, `false` otherwise.
      */
@@ -70,8 +70,7 @@ interface KoLocalFunctionProvider : KoBaseProvider {
      * Determines whether the declaration has all local functions that satisfy the provided predicate.
      *
      * Note that if the local functions contains no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate. See a more detailed explanation of this logic concept in
-     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
+     * that do not match the predicate.
      *
      * @param predicate A function that defines the condition to be met by local function declarations.
      * @return `true` if all local function declarations satisfy the predicate, `false` otherwise.

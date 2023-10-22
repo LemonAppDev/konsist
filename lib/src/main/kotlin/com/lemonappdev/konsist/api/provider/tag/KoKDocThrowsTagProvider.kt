@@ -18,7 +18,7 @@ interface KoKDocThrowsTagProvider : KoBaseProvider {
     val numThrowsTags: Int
 
     /**
-     * Whatever the declaration has throws tags.
+     * Determines whatever the declaration has throws tags.
      */
     val hasThrowsTags: Boolean
 }

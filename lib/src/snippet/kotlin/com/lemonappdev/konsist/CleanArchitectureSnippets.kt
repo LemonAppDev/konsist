@@ -5,7 +5,6 @@ import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArch
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
-import com.lemonappdev.konsist.api.ext.list.withParentNamed
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.springframework.stereotype.Repository
 
@@ -60,7 +59,7 @@ class CleanArchitectureSnippets {
         Konsist
             .scopeFromProduction()
             .classes()
-            .withParentNamed("UseCase")
+            .withNameEndingWith("UseCase")
             .assertTrue { it.hasTestClass() }
     }
 }

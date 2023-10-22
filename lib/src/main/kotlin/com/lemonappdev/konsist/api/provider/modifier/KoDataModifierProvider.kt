@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoDataModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Whatever declaration has `data` modifier.
+     * Determines whatever declaration has `data` modifier.
      */
     val hasDataModifier: Boolean
 }

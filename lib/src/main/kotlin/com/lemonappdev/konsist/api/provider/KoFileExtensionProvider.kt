@@ -15,7 +15,7 @@ interface KoFileExtensionProvider : KoBaseProvider {
     val nameWithExtension: String
 
     /**
-     * Whether declaration has file extension.
+     * Determines whatever declaration has file extension.
      *
      * @param extension The extension to check against. It is a non-null string representing the desired extension.
      * @return `true` if the declaration's extension matching with the extension, `false` otherwise.

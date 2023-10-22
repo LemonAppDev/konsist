@@ -1,0 +1,5 @@
+object SampleObject : SampleParentInterface1, SampleParentInterface2
+
+interface SampleParentInterface1
+
+interface SampleParentInterface2

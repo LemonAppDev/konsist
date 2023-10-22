@@ -13,7 +13,7 @@ interface KoKDocVersionTagProvider : KoBaseProvider {
     val versionTag: KoKDocTagDeclaration?
 
     /**
-     * Whatever the declaration has version tag.
+     * Determines whatever the declaration has version tag.
      */
     val hasVersionTag: Boolean
 }

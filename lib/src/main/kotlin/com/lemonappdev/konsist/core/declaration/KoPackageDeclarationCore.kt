@@ -18,7 +18,10 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtPackageDirective
 
-internal class KoPackageDeclarationCore private constructor(private val ktPackageDirective: KtPackageDirective) :
+internal class KoPackageDeclarationCore internal constructor(
+    private val fqn: String,
+    override val ktElement: KtElement,
+) :
     KoPackageDeclaration,
     KoBaseProviderCore,
     KoContainingFileProviderCore,
@@ -30,13 +33,23 @@ internal class KoPackageDeclarationCore private constructor(private val ktPackag
     KoModuleProviderCore,
     KoSourceSetProviderCore,
     KoTextProviderCore {
-    override val psiElement: PsiElement by lazy { ktPackageDirective }
+    private var ktPackageDirective: KtPackageDirective? = null
 
-    override val ktElement: KtElement by lazy { ktPackageDirective }
+    private constructor(ktPackageDirective: KtPackageDirective) : this(
+        ktPackageDirective.fqName.toString(),
+        ktPackageDirective,
+    ) {
+        this.ktPackageDirective = ktPackageDirective
+    }
+
+    override val psiElement: PsiElement
+        get() = ktElement
 
     override val fullyQualifiedName: String by lazy {
-        if (ktPackageDirective.fqName != FqName.ROOT) {
-            ktPackageDirective.fqName.toString()
+        if (ktPackageDirective == null) {
+            fqn.substringBeforeLast(".")
+        } else if (ktPackageDirective?.fqName != FqName.ROOT) {
+            ktPackageDirective?.fqName.toString()
         } else {
             name
         }
@@ -51,6 +64,10 @@ internal class KoPackageDeclarationCore private constructor(private val ktPackag
             ktPackageDirective: KtPackageDirective,
             containingDeclaration: KoContainingDeclarationProvider,
         ): KoPackageDeclaration =
-            cache.getOrCreateInstance(ktPackageDirective, containingDeclaration) { KoPackageDeclarationCore(ktPackageDirective) }
+            cache.getOrCreateInstance(ktPackageDirective, containingDeclaration) {
+                KoPackageDeclarationCore(
+                    ktPackageDirective,
+                )
+            }
     }
 }

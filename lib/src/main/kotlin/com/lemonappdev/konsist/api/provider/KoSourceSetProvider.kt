@@ -11,7 +11,7 @@ interface KoSourceSetProvider : KoBaseProvider {
     val sourceSetName: String
 
     /**
-     * Whether declaration reside in source set.
+     * Determines whatever declaration reside in source set.
      *
      * @param sourceSetName The name of the source set to check.
      * @return `true` if a declaration resides in the specified source set, `false` otherwise.

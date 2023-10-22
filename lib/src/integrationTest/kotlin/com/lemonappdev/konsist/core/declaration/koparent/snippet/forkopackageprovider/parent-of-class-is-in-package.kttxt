@@ -1,4 +1,0 @@
-package com.samplepackage
-class SampleBaseClass: SampleParentClass()
-
-open class SampleParentClass
