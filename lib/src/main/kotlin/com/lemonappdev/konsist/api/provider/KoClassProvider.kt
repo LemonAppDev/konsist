@@ -19,7 +19,7 @@ interface KoClassProvider : KoBaseProvider {
     ): List<KoClassDeclaration>
 
     /**
-     * Checks whether the declaration contains a class that satisfies the specified predicate.
+     * Determines whatever the declaration contains a class that satisfies the specified predicate.
      *
      * @param includeNested Specifies whether to include nested classes in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
@@ -34,7 +34,7 @@ interface KoClassProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Gets the number of classes present in the declaration.
+     * Returns the number of classes present in the declaration.
      *
      * @param includeNested Specifies whether to include nested classes in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the count (optional, default is `true`).
@@ -43,7 +43,7 @@ interface KoClassProvider : KoBaseProvider {
     fun numClasses(includeNested: Boolean = true, includeLocal: Boolean = true): Int
 
     /**
-     * Gets the number of classes that satisfies the specified predicate present in the declaration.
+     * Returns the number of classes that satisfies the specified predicate present in the declaration.
      *
      * @param includeNested Specifies whether to include nested classes in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the count (optional, default is `true`).
@@ -57,7 +57,7 @@ interface KoClassProvider : KoBaseProvider {
     ): Int
 
     /**
-     * Whether the declaration has classes.
+     * Determines whatever the declaration has classes.
      *
      * @param includeNested Specifies whether to include nested classes in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
@@ -118,8 +118,7 @@ interface KoClassProvider : KoBaseProvider {
      * Determines whether the declaration has all classes that satisfy the provided predicate.
      *
      * Note that if the classes contains no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate. See a more detailed explanation of this logic concept in
-     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
+     * that do not match the predicate.
      *
      * @param includeNested Specifies whether to include nested classes in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).

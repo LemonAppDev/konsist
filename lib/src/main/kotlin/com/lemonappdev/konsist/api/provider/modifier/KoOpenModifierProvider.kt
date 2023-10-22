@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoOpenModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Whatever declaration has `open` modifier.
+     * Determines whatever declaration has `open` modifier.
      */
     val hasOpenModifier: Boolean
 }

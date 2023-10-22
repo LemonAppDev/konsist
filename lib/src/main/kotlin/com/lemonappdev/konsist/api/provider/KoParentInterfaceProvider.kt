@@ -9,7 +9,6 @@ import kotlin.reflect.KClass
 interface KoParentInterfaceProvider : KoBaseProvider {
     /**
      * The parent interfaces of the declaration.
-     * Does not include parent interfaces defined in other files such as parent of the parent.
      */
     val parentInterfaces: List<KoInterfaceDeclaration>
 
@@ -19,7 +18,7 @@ interface KoParentInterfaceProvider : KoBaseProvider {
     val numParentInterfaces: Int
 
     /**
-     * Gets the number of parent interfaces that satisfies the specified predicate present in the declaration.
+     * Returns the number of parent interfaces that satisfies the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if a parent interface satisfies a condition.
      * @return The number of parent interfaces in the declaration satisfying predicate.
@@ -27,7 +26,7 @@ interface KoParentInterfaceProvider : KoBaseProvider {
     fun countParentInterfaces(predicate: (KoInterfaceDeclaration) -> Boolean): Int
 
     /**
-     * Whatever declaration has parent interfaces.
+     * Determines whatever declaration has parent interfaces.
      *
      * @param names the names of the parent interfaces to check.
      * @return `true` if the declaration has parent interfaces with the specified names (or any parent interface if [names] is empty),
@@ -37,8 +36,7 @@ interface KoParentInterfaceProvider : KoBaseProvider {
     fun hasParentInterfaces(vararg names: String): Boolean
 
     /**
-     * Whatever declaration has any parent interface defined directly in the Kotlin file.
-     * Does not include parent interfaces defined in other files such as parent of the parent.
+     * Determines whatever declaration has any parent interface defined directly in the Kotlin file.
      *
      * @return `true` if the declaration has any parent interface, `false` otherwise.
      */
@@ -82,8 +80,7 @@ interface KoParentInterfaceProvider : KoBaseProvider {
      * This method does not include parent interfaces defined in other files, such as parents of the parent.
      *
      * Note that if the parent interfaces contains no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate. See a more detailed explanation of this logic concept in
-     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
+     * that do not match the predicate.
      *
      * @param predicate A function that defines the condition to be met by parent interfaces.
      * @return `true` if all parent interfaces satisfy the predicate, `false` otherwise.

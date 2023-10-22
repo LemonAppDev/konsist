@@ -4,24 +4,24 @@ import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
 import kotlin.reflect.KClass
 
 /**
- * An interface representing a Kotlin declaration that provides access to its external parents.
+ * An interface representing a Kotlin declaration that provides access to the external parents.
+ * The external parent is a parent defined outside project codebase (defined inside external library).
  */
 interface KoExternalParentProvider : KoBaseProvider {
     /**
-     * The external parents of the declaration.
-     * Does not include external parents defined in other files such as parent of the parent.
+     * List content external parents of the declaration.
      *
      * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
      */
     val externalParents: List<KoExternalParentDeclaration>
 
     /**
-     * The number of external parents.
+     * Returns the number of external parents.
      */
     val numExternalParents: Int
 
     /**
-     * Gets the number of external parents that satisfies the specified predicate present in the declaration.
+     * Returns the number of external parents that satisfies the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if a external parent satisfies a condition.
      * @return The number of external parents in the declaration satisfying predicate.
@@ -30,8 +30,8 @@ interface KoExternalParentProvider : KoBaseProvider {
     fun countExternalParents(predicate: (KoExternalParentDeclaration) -> Boolean): Int
 
     /**
-     * Whatever declaration has any external parent defined directly in the Kotlin file.
-     * Does not include external parents defined in other files such as parent of the parent.
+     * Determines whatever declaration has any external parents. The external parent is a parent defined outside
+     * project codebase (defined inside external library).
      *
      * @return `true` if the declaration has any external parent, `false` otherwise.
      * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
@@ -39,9 +39,7 @@ interface KoExternalParentProvider : KoBaseProvider {
     fun hasExternalParents(): Boolean
 
     /**
-     * Determines whether the declaration has at least one external parent defined directly
-     * in the Kotlin file whose name matches any of the specified names.
-     * This method does not include external parents defined in other files, such as parents of the parent.
+     * Determines whether the declaration has at least one external parent whose name matches any of the specified
      *
      * @param name the name of the external parent to check.
      * @param names the names of the external parents to check.
@@ -51,9 +49,7 @@ interface KoExternalParentProvider : KoBaseProvider {
     fun hasExternalParentWithName(name: String, vararg names: String): Boolean
 
     /**
-     * Determines whether the declaration has parents interface defined directly in the Kotlin
-     * file with all the specified names.
-     * This method does not include external parents defined in other files, such as parents of the parent.
+     * Determines whether the declaration has parents interface defined project codebase (external == false)
      *
      * @param name The name of the external parent to check.
      * @param names The names of the external parents to check.
@@ -63,9 +59,7 @@ interface KoExternalParentProvider : KoBaseProvider {
     fun hasExternalParentsWithAllNames(name: String, vararg names: String): Boolean
 
     /**
-     * Determines whether the declaration has at least one external parent defined directly
-     * in the Kotlin file that satisfies the provided predicate.
-     * This method does not include external parents defined in other files, such as parents of the parent.
+     * Determines whether the declaration has at least one external parent that satisfies the provided predicate.
      *
      * @param predicate A function that defines the condition to be met by a external parent.
      * @return `true` if there is a matching declaration, `false` otherwise.
@@ -74,13 +68,10 @@ interface KoExternalParentProvider : KoBaseProvider {
     fun hasExternalParent(predicate: (KoExternalParentDeclaration) -> Boolean): Boolean
 
     /**
-     * Determines whether the declaration has all external parents defined directly
-     * in the Kotlin file that satisfy the provided predicate.
-     * This method does not include external parents defined in other files, such as parents of the parent.
+     * Determines whether the declaration has all external parents that satisfy the provided predicate.
      *
-     * Note that if the external parents contains no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate. See a more detailed explanation of this logic concept in
-     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
+     * Note that if the external parents contains no elements, the function returns `true` because there are no
+     * elements in it that do not match the predicate.
      *
      * @param predicate A function that defines the condition to be met by external parents.
      * @return `true` if all external parents satisfy the predicate, `false` otherwise.

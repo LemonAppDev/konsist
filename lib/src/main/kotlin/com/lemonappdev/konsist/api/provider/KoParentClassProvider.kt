@@ -13,7 +13,7 @@ interface KoParentClassProvider : KoBaseProvider {
     val parentClass: KoClassDeclaration?
 
     /**
-     * Whether declaration has a specified parent class.
+     * Determines whether declaration has a specified parent class.
      *
      * @param predicate The predicate function used to determine if a declaration parent class satisfies a condition.
      * @return `true` if the declaration has the specified parent class (or any parent class if [predicate] is `null`),
@@ -22,7 +22,7 @@ interface KoParentClassProvider : KoBaseProvider {
     fun hasParentClass(predicate: ((KoClassDeclaration) -> Boolean)? = null): Boolean
 
     /**
-     * Whatever declaration has parent class.
+     * Determines whether declaration has parent class.
      *
      * @param name the name of the parent class to check.
      * @return `true` if the declaration has the specified parent class, `false` otherwise.
@@ -42,7 +42,7 @@ interface KoParentClassProvider : KoBaseProvider {
     fun hasParentClassWithName(name: String, vararg names: String): Boolean
 
     /**
-     * Whether declaration has a parent class of the specified Kotlin class.
+     * Determines whatever declaration has a parent class of the specified Kotlin class.
      *
      * @param name The Kotlin class representing the parent class to check for.
      * @param names The Kotlin class(es) representing the parent class(es) to check for.

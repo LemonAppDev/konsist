@@ -13,7 +13,7 @@ interface KoKDocReturnTagProvider : KoBaseProvider {
     val returnTag: KoKDocTagDeclaration?
 
     /**
-     * Whatever the declaration has return tag.
+     * Determines whatever the declaration has return tag.
      */
     val hasReturnTag: Boolean
 }

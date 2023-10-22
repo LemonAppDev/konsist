@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoEnumModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Whatever declaration has `enum` modifier.
+     * Determines whatever declaration has `enum` modifier.
      */
     val hasEnumModifier: Boolean
 }
