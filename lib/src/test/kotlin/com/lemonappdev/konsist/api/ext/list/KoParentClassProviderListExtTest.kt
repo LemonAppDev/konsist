@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentClassProvider
-import com.lemonappdev.konsist.api.provider.KoParentInterfaceProvider
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleClass1
 import com.lemonappdev.konsist.testdata.SampleClass2
@@ -427,7 +426,6 @@ class KoParentClassProviderListExtTest {
         // then
         sut shouldBeEqualTo listOf(declaration2)
     }
-
 
     @Test
     fun `withParentClass(name) returns declaration with given parent class name`() {

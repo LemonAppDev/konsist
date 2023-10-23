@@ -1,9 +1,7 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentClassProvider
-import com.lemonappdev.konsist.core.util.ParentUtil
 import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
 import kotlin.reflect.KClass
 
@@ -55,9 +53,9 @@ internal interface KoParentClassProviderCore :
 
     override fun hasParentClassOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean): Boolean =
         checkIfParentOf(name, parentClasses(indirectParents)) ||
-                names.any { checkIfParentOf(it, parentClasses(indirectParents)) }
+            names.any { checkIfParentOf(it, parentClasses(indirectParents)) }
 
     override fun hasAllParentClassesOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean): Boolean =
         checkIfParentOf(name, parentClasses(indirectParents)) &&
-                names.all { checkIfParentOf(it, parentClasses(indirectParents)) }
+            names.all { checkIfParentOf(it, parentClasses(indirectParents)) }
 }

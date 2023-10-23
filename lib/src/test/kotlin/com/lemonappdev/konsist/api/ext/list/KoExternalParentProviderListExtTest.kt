@@ -11,30 +11,6 @@ import org.junit.jupiter.api.Test
 
 class KoExternalParentProviderListExtTest {
     @Test
-    fun `externalParents returns external parents from all declarations`() {
-        // given
-        val parent1: KoExternalParentDeclaration = mockk()
-        val parent2: KoExternalParentDeclaration = mockk()
-        val parent3: KoExternalParentDeclaration = mockk()
-        val declaration1: KoExternalParentProvider = mockk {
-            every { externalParents } returns listOf(parent1, parent2)
-        }
-        val declaration2: KoExternalParentProvider = mockk {
-            every { externalParents } returns listOf(parent3)
-        }
-        val declaration3: KoExternalParentProvider = mockk {
-            every { externalParents } returns emptyList()
-        }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.externalParents
-
-        // then
-        sut shouldBeEqualTo listOf(parent1, parent2, parent3)
-    }
-
-    @Test
     fun `externalParents() returns external parents from all declarations`() {
         // given
         val parent1: KoExternalParentDeclaration = mockk()

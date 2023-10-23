@@ -18,7 +18,8 @@ class KoObjectDeclarationForKoParentClassProviderTest {
             .first()
 
         // then
-        assertSoftly(sut) {            parentClass shouldBeEqualTo null
+        assertSoftly(sut) {
+            parentClass shouldBeEqualTo null
             parentClasses() shouldBeEqualTo emptyList()
             numParentClasses() shouldBeEqualTo 0
             countParentClasses { it.hasPrivateModifier } shouldBeEqualTo 0

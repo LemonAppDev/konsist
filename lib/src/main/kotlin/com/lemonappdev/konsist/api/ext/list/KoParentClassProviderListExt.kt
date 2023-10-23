@@ -1,3 +1,4 @@
+@file:Suppress("detekt.TooManyFunctions")
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
@@ -60,7 +61,7 @@ fun <T : KoParentClassProvider> List<T>.withoutParentClasses(indirectParents: Bo
  */
 fun <T : KoParentClassProvider> List<T>.withParentClass(
     indirectParents: Boolean = false,
-    predicate: (KoClassDeclaration) -> Boolean
+    predicate: (KoClassDeclaration) -> Boolean,
 ): List<T> =
     filter { it.hasParentClass(indirectParents, predicate) }
 
@@ -73,7 +74,7 @@ fun <T : KoParentClassProvider> List<T>.withParentClass(
  */
 fun <T : KoParentClassProvider> List<T>.withoutParentClass(
     indirectParents: Boolean = false,
-    predicate: (KoClassDeclaration) -> Boolean
+    predicate: (KoClassDeclaration) -> Boolean,
 ): List<T> =
     filterNot { it.hasParentClass(indirectParents, predicate) }
 
