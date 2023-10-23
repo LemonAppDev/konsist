@@ -1,7 +1,9 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentClassProvider
+import com.lemonappdev.konsist.api.provider.KoParentInterfaceProvider
 import kotlin.reflect.KClass
 
 /**
@@ -9,6 +11,20 @@ import kotlin.reflect.KClass
  */
 val <T : KoParentClassProvider> List<T>.parentClasses: List<KoClassDeclaration>
     get() = mapNotNull { it.parentClass }
+
+/**
+ * List containing parent classes.
+ *
+ * @param indirectParents Whether to include indirect parent classes.
+ * @return A list containing parent class declarations.
+ */
+fun <T : KoParentClassProvider> List<T>.parentClasses(indirectParents: Boolean = false): List<KoClassDeclaration> =
+    flatMap { it.parentClasses(indirectParents) }
+
+
+
+
+
 
 /**
  * List containing declarations with the specified parent class.
