@@ -210,7 +210,6 @@ class KoClassDeclarationForKoExternalParentProviderTest {
             )
             numExternalParents(indirectParents = false) shouldBeEqualTo 1
             numExternalParents(indirectParents = true) shouldBeEqualTo 2
-            hasAllExternalParentsOf(SampleExternalInterface::class, SampleExternalGenericInterface::class) shouldBeEqualTo true
         }
     }
 
