@@ -21,7 +21,7 @@ interface KoParentClassProvider : KoBaseProvider {
     fun parentClasses(indirectParents: Boolean = false): List<KoClassDeclaration>
 
     /**
-     * The number of parent classes.
+     * Returns the number of parent classes.
      *
      * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
      * @return The number of parent classes.
@@ -38,9 +38,9 @@ interface KoParentClassProvider : KoBaseProvider {
     fun countParentClasses(indirectParents: Boolean = false, predicate: (KoClassDeclaration) -> Boolean): Int
 
     /**
-     * Determines whether declaration has a parent class.
+     * Determines whether declaration has a direct parent class.
      *
-     * @return `true` if the declaration has any parent class, `false` otherwise.
+     * @return `true` if the declaration has any direct parent class, `false` otherwise.
      */
     fun hasParentClass(): Boolean
 
@@ -63,12 +63,10 @@ interface KoParentClassProvider : KoBaseProvider {
     fun hasParentClasses(indirectParents: Boolean = false): Boolean
 
     /**
-     * Determines whether the declaration has all parent classes defined directly
-     * in the Kotlin file that satisfy the provided predicate.
+     * Determines whether the declaration has all parent classes that satisfy the provided predicate.
      *
      * Note that if the parent classes contains no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate. See a more detailed explanation of this logic concept in
-     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
+     * that do not match the predicate.
      *
      * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
      * @param predicate A function that defines the condition to be met by parent classes.

@@ -23,19 +23,19 @@ fun <T : KoParentProvider> List<T>.parents(indirectParents: Boolean = false): Li
     flatMap { it.parents(indirectParents) }
 
 /**
- * List containing declarations with class or interface parent.
+ * List containing declarations with any parent.
  *
  * @param indirectParents Whether to include indirect parents.
- * @return A list containing declarations with class or interface parent.
+ * @return A list containing declarations with any parent.
  */
 fun <T : KoParentProvider> List<T>.withParents(indirectParents: Boolean = false): List<T> =
     filter { it.hasParents(indirectParents) }
 
 /**
- * List containing declarations with no parent - class does not extend any class and does not implement any interface.
+ * List containing declarations with none parent - declaration does not extend any class and does not implement any interface.
  *
  * @param indirectParents Whether to include indirect parents.
- * @return A list containing declarations with no parent - class does not extend any class and does not implement any
+ * @return A list containing declarations with no parent - declaration does not extend any class and does not implement any
  * interface.
  */
 fun <T : KoParentProvider> List<T>.withoutParents(indirectParents: Boolean = false): List<T> =

@@ -5,14 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoExternalParentProvider
 import kotlin.reflect.KClass
 
 /**
- * List containing external parents.
- */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("externalParents()"))
-val <T : KoExternalParentProvider> List<T>.externalParents: List<KoExternalParentDeclaration>
-    get() = flatMap { it.externalParents }
-
-/**
  * List containing external parent declarations.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
  *
  * @param indirectParents Whether to include indirect external parents.
  * @return A list containing external parent declarations.
@@ -21,7 +15,8 @@ fun <T : KoExternalParentProvider> List<T>.externalParents(indirectParents: Bool
     flatMap { it.externalParents(indirectParents) }
 
 /**
- * List containing declarations with external parent.
+ * List containing declarations with any external parent.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
  *
  * @param indirectParents Whether to include indirect external parents.
  * @return A list containing declarations with any external parent.
@@ -30,7 +25,8 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParents(indirectParents: 
     filter { it.hasExternalParents(indirectParents) }
 
 /**
- * List containing declarations with no external parent.
+ * List containing declarations with none external parent.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
  *
  * @param indirectParents Whether to include indirect external parents.
  * @return A list containing declarations with no external parent.
@@ -40,6 +36,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParents(indirectParent
 
 /**
  * List containing declarations that have at least one external parent with the specified name(s).
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
  *
  * @param name The name of the external parent to include.
  * @param names The names of additional external parents to include.
@@ -55,6 +52,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParentNamed(
 
 /**
  * List containing declarations without any of specified external parents.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
  *
  * @param name The name of the external parent to exclude.
  * @param names The names of additional external parents to exclude.
@@ -70,6 +68,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentNamed(
 
 /**
  * List containing declarations that have all specified external parents.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
  *
  * @param name The name of the external parent to include.
  * @param names The name(s) of the external parent(s) to include.
@@ -85,6 +84,7 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsNamed(
 
 /**
  * List containing declarations without all specified external parents.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
  *
  * @param name The name of the external parent to exclude.
  * @param names The name(s) of the external parent(s) to exclude.
@@ -100,6 +100,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsNamed(
 
 /**
  * List containing declarations that have at least one external parent satisfying the provided predicate.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
  *
  * @param indirectParents Whether to include indirect external parents.
  * @param predicate A function that defines the condition to be met by an external parent declaration.
@@ -113,6 +114,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParent(
 
 /**
  * List containing declarations that not have external parent satisfying the provided predicate.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
  *
  * @param indirectParents Whether to include indirect external parents.
  * @param predicate A function that defines the condition to be met by an external parent declaration.
@@ -126,6 +128,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParent(
 
 /**
  * List containing declarations that have all external parents satisfying the provided predicate.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
  *
  * @param indirectParents Whether to include indirect external parents.
  * @param predicate A function that defines the condition to be met by all external parent declarations.
@@ -139,6 +142,7 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParents(
 
 /**
  * List containing declarations that have at least one external parent not satisfying the provided predicate.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
  *
  * @param indirectParents Whether to include indirect external parents.
  * @param predicate A function that defines the condition to be met by all external parent declarations.
@@ -151,6 +155,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParents(
 
 /**
  * List containing declarations with external parent declarations satisfying the predicate.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
  *
  * @param indirectParents Whether to include indirect external parents.
  * @param predicate A function that defines the condition to be met by the list of external parent declarations.
@@ -164,6 +169,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParents(
 
 /**
  * List containing declarations without external parent declarations satisfying the predicate.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
  *
  * @param indirectParents Whether to include indirect external parents.
  * @param predicate A function that defines the condition to be met by the list of external parent declarations.
@@ -177,6 +183,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParents(
 
 /**
  * List containing declarations that have at least one external parent of the specified `KClass` type.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
  *
  * @param kClass The Kotlin class representing external parent to include.
  * @param kClasses The Kotlin classes representing external parents to include.
@@ -192,6 +199,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParentOf(
 
 /**
  * List containing declarations without any external parent of the specified `KClass` type.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
  *
  * @param kClass The Kotlin class representing external parent to exclude.
  * @param kClasses The Kotlin classes representing external parents to exclude.
@@ -207,6 +215,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentOf(
 
 /**
  * List containing declarations that have all external parents of the specified `KClass` type.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
  *
  * @param kClass The Kotlin class representing external parent to include.
  * @param kClasses The Kotlin classes representing external parents to include.
@@ -222,6 +231,7 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsOf(
 
 /**
  * List containing declarations without all specified `KClass` type external parents.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
  *
  * @param kClass The Kotlin class representing external parent to exclude.
  * @param kClasses The Kotlin classes representing external parents to exclude.
