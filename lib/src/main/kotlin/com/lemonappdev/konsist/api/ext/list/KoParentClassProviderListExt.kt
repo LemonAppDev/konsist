@@ -1,4 +1,5 @@
 @file:Suppress("detekt.TooManyFunctions")
+
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
