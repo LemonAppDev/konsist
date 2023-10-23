@@ -21,8 +21,6 @@ class KoObjectDeclarationForKoExternalParentProviderTest {
 
         // then
         assertSoftly(sut) {
-            externalParents shouldBeEqualTo emptyList()
-            numExternalParents shouldBeEqualTo 0
             externalParents() shouldBeEqualTo emptyList()
             numExternalParents() shouldBeEqualTo 0
             countExternalParents { it.name == "SampleExternalParent" } shouldBeEqualTo 0
@@ -45,8 +43,6 @@ class KoObjectDeclarationForKoExternalParentProviderTest {
 
         // then
         assertSoftly(sut) {
-            externalParents.map { it.name } shouldBeEqualTo listOf("SampleExternalClass", "SampleExternalInterface")
-            numExternalParents shouldBeEqualTo 2
             externalParents().map { it.name } shouldBeEqualTo listOf("SampleExternalClass", "SampleExternalInterface")
             numExternalParents() shouldBeEqualTo 2
             countExternalParents { it.name == "SampleExternalClass" } shouldBeEqualTo 1
@@ -82,8 +78,6 @@ class KoObjectDeclarationForKoExternalParentProviderTest {
 
         // then
         assertSoftly(sut) {
-            externalParents.map { it.name } shouldBeEqualTo listOf("SampleExternalInterface", "SampleExternalGenericInterface")
-            numExternalParents shouldBeEqualTo 2
             externalParents().map { it.name } shouldBeEqualTo listOf("SampleExternalInterface", "SampleExternalGenericInterface")
             numExternalParents() shouldBeEqualTo 2
             countExternalParents { it.name == "SampleExternalInterface" } shouldBeEqualTo 1
