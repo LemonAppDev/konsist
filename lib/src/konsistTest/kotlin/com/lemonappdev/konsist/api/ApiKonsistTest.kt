@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.api
 
 import com.lemonappdev.konsist.api.ext.list.withProperty
 import com.lemonappdev.konsist.api.ext.list.withoutNameMatching
+import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
@@ -48,7 +49,7 @@ class ApiKonsistTest {
             .interfaces()
             .withoutNameMatching(Regex("\\bKoKDoc[A-Za-z]+TagProvider\\b")) // exclude providers like KoKDocXTagProvider
             .withProperty { property ->
-                property.hasType { type ->
+                !property.hasAnnotationOf<Deprecated>() && property.hasType { type ->
                     type.hasNameStartingWith("List<Ko")
                 }
             }
@@ -64,7 +65,7 @@ class ApiKonsistTest {
             .interfaces()
             .withoutNameMatching(Regex("\\bKoKDoc[A-Za-z]+TagProvider\\b")) // exclude providers like KoKDocXTagProvider
             .withProperty { property ->
-                property.hasType { type ->
+                !property.hasAnnotationOf<Deprecated>() && property.hasType { type ->
                     type.hasNameStartingWith("List<Ko")
                 }
             }
