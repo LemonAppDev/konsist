@@ -17,13 +17,13 @@ interface KoInitBlockProvider : KoBaseProvider {
     val numInitBlocks: Int
 
     /**
-     * Whatever declaration has init blocks.
+     * Determines whatever declaration has init blocks.
      */
     @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasInitBlocks()"))
     val hasInitBlocks: Boolean
 
     /**
-     * Gets the number of init blocks that satisfies the specified predicate present in the declaration.
+     * Returns the number of init blocks that satisfies the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if an init block satisfies a condition.
      * @return The number of init blocks in the declaration.
@@ -31,7 +31,7 @@ interface KoInitBlockProvider : KoBaseProvider {
     fun countInitBlocks(predicate: (KoInitBlockDeclaration) -> Boolean): Int
 
     /**
-     * Whatever declaration has init blocks.
+     * Determines whatever declaration has init blocks.
      *
      * @return `true` if the declaration has init block, `false` otherwise.
      */
@@ -49,8 +49,7 @@ interface KoInitBlockProvider : KoBaseProvider {
      * Determines whether the declaration has all init blocks that satisfy the provided predicate.
      *
      * Note that if the init blocks contains no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate. See a more detailed explanation of this logic concept in
-     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
+     * that do not match the predicate.
      *
      * @param predicate A function that defines the condition to be met by init block declarations.
      * @return `true` if all init block declarations satisfy the predicate, `false` otherwise.

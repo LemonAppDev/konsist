@@ -20,7 +20,8 @@ internal interface KoEnumConstantProviderCore :
             .firstIsInstanceOrNull<KtClassBody>()
             ?.children
             ?.filterIsInstance<KtEnumEntry>()
-            ?.map { KoEnumConstantDeclarationCore.getInstance(it, this) } ?: emptyList()
+            ?.map { KoEnumConstantDeclarationCore.getInstance(it, this) }
+            .orEmpty()
 
     override val numEnumConstants: Int
         get() = enumConstants.size

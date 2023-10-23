@@ -4,7 +4,8 @@ import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
 import kotlin.reflect.KClass
 
 /**
- * An interface representing a Kotlin declaration that provides access to its external parents.
+ * An interface representing a Kotlin declaration that provides access to the external parents.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
  */
 interface KoExternalParentProvider : KoBaseProvider {
     /**
@@ -22,7 +23,7 @@ interface KoExternalParentProvider : KoBaseProvider {
     val numExternalParents: Int
 
     /**
-     * The external parents of the declaration.
+     * List content external parents of the declaration.
      *
      * @param indirectParents specifies whether to include external parents defined in other files such as parent of the parent.
      * @return a list of [KoExternalParentDeclaration] representing the external parents of the declaration.
@@ -50,7 +51,8 @@ interface KoExternalParentProvider : KoBaseProvider {
     fun countExternalParents(indirectParents: Boolean = false, predicate: (KoExternalParentDeclaration) -> Boolean): Int
 
     /**
-     * Whatever declaration has any external parent defined directly in the Kotlin file.
+     * Determines whatever declaration has any external parents. The external parent is a parent defined outside
+     * project codebase (defined inside external library).
      *
      * @param indirectParents specifies whether to include external parents defined in other files such as parent of the parent.
      * @return `true` if the declaration has any external parent, `false` otherwise.
@@ -59,8 +61,7 @@ interface KoExternalParentProvider : KoBaseProvider {
     fun hasExternalParents(indirectParents: Boolean = false): Boolean
 
     /**
-     * Determines whether the declaration has at least one external parent defined directly
-     * in the Kotlin file whose name matches any of the specified names.
+     * Determines whether the declaration has at least one external parent whose name matches any of the specified
      *
      * @param name the name of the external parent to check.
      * @param names the names of the external parents to check.
@@ -71,8 +72,7 @@ interface KoExternalParentProvider : KoBaseProvider {
     fun hasExternalParentWithName(name: String, vararg names: String, indirectParents: Boolean = false): Boolean
 
     /**
-     * Determines whether the declaration has parents interface defined directly in the Kotlin
-     * file with all the specified names.
+     * Determines whether the declaration has parents interface defined project codebase (external == false)
      *
      * @param name The name of the external parent to check.
      * @param names The names of the external parents to check.
@@ -83,8 +83,7 @@ interface KoExternalParentProvider : KoBaseProvider {
     fun hasExternalParentsWithAllNames(name: String, vararg names: String, indirectParents: Boolean = false): Boolean
 
     /**
-     * Determines whether the declaration has at least one external parent defined directly
-     * in the Kotlin file that satisfies the provided predicate.
+     * Determines whether the declaration has at least one external parent that satisfies the provided predicate.
      *
      * @param indirectParents specifies whether to include external parents defined in other files such as parent of the parent.
      * @param predicate A function that defines the condition to be met by a external parent.
@@ -97,12 +96,10 @@ interface KoExternalParentProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has all external parents defined directly
-     * in the Kotlin file that satisfy the provided predicate.
+     * Determines whether the declaration has all external parents that satisfy the provided predicate.
      *
-     * Note that if the external parents contains no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate. See a more detailed explanation of this logic concept in
-     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
+     * Note that if the external parents contains no elements, the function returns `true` because there are no
+     * elements in it that do not match the predicate.
      *
      * @param indirectParents specifies whether to include external parents defined in other files such as parent of the parent.
      * @param predicate A function that defines the condition to be met by external parents.

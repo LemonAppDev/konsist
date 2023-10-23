@@ -4,6 +4,10 @@ on:
   pull_request:
     types: [ opened, synchronize ]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   get-github-context:
     name: Get GitHub Context
@@ -22,7 +26,7 @@ jobs:
 
       - name: Get Changed Files
         id: changed-files
-        uses: tj-actions/changed-files@v39.2.2
+        uses: tj-actions/changed-files@v39.2.3
 
       - name: List Changed Files
         run: |

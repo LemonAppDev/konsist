@@ -18,7 +18,7 @@ internal object KoLocalDeclarationProviderCoreUtil {
     ): List<KoBaseDeclaration> {
         val declarations = psiElements
             ?.filterIsInstance<KtDeclaration>()
-            ?: emptyList()
+            .orEmpty()
 
         return declarations
             .mapNotNull {

@@ -6,7 +6,7 @@ package com.lemonappdev.konsist.api.provider
 @Deprecated("Will be removed in v1.0.0", ReplaceWith("KoHasTestClassProvider"))
 interface KoHasTestProvider : KoBaseProvider {
     /**
-     * Whatever declaration has a Test.
+     * Determines whatever declaration has a Test.
      *
      * @param testFileNameSuffix the suffix of the test file name. By default, "Test".
      * @param moduleName         the name of the module to check (optional).

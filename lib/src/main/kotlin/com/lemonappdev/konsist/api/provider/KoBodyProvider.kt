@@ -5,12 +5,12 @@ package com.lemonappdev.konsist.api.provider
  */
 interface KoBodyProvider : KoBaseProvider {
     /**
-     * Whatever declaration has expression body.
+     * Determines whatever declaration has expression body.
      */
     val hasExpressionBody: Boolean
 
     /**
-     * Whatever declaration has block body.
+     * Determines whatever declaration has block body.
      */
     val hasBlockBody: Boolean
 }

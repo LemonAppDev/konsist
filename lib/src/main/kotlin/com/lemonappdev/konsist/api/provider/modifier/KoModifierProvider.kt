@@ -18,7 +18,7 @@ interface KoModifierProvider : KoBaseProvider {
     val numModifiers: Int
 
     /**
-     * Whether the declaration has modifiers.
+     * Determines whatever the declaration has modifiers.
      *
      * @param koModifiers the modifiers to check.
      * @return `true` if the declaration has all the specified modifiers (or any modifier if [koModifiers] is empty), `false` otherwise.
@@ -32,7 +32,7 @@ interface KoModifierProvider : KoBaseProvider {
     fun hasModifiers(vararg koModifiers: KoModifier): Boolean
 
     /**
-     * Whatever the declaration has modifiers.
+     * Determines whatever the declaration has modifiers.
      *
      * @return `true` if the declaration has modifier, `false` otherwise.
      */

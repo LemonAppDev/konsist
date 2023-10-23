@@ -48,7 +48,8 @@ internal class KoAnnotationDeclarationCore private constructor(
             .firstOrNull()
             ?.children
             ?.filterIsInstance<KtValueArgument>()
-            ?.map { KoArgumentDeclarationCore.getInstance(it, this) } ?: emptyList()
+            ?.map { KoArgumentDeclarationCore.getInstance(it, this) }
+            .orEmpty()
     }
 
     override fun toString(): String = name

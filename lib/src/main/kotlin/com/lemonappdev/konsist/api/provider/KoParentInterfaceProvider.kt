@@ -46,7 +46,7 @@ interface KoParentInterfaceProvider : KoBaseProvider {
     fun countParentInterfaces(indirectParents: Boolean = false, predicate: (KoInterfaceDeclaration) -> Boolean): Int
 
     /**
-     * Whatever declaration has parent interfaces.
+     * Determines whatever declaration has parent interfaces.
      *
      * @param names the names of the parent interfaces to check.
      * @return `true` if the declaration has parent interfaces with the specified names (or any parent interface if [names] is empty),
@@ -56,7 +56,7 @@ interface KoParentInterfaceProvider : KoBaseProvider {
     fun hasParentInterfaces(vararg names: String): Boolean
 
     /**
-     * Whatever declaration has any parent interface defined directly in the Kotlin file.
+     * Determines whatever declaration has any parent interface defined directly in the Kotlin file.
      *
      * @param indirectParents specifies whether to include parent interfaces defined in other files such as parent of the parent.
      * @return `true` if the declaration has any parent interface, `false` otherwise.

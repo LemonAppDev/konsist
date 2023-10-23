@@ -128,7 +128,9 @@ class DependencyRulesCore : DependencyRules {
                 )
             }
 
-            lists.firstOrNull { it.isNotEmpty() && it.last() == null } ?: emptyList()
+            lists
+                .firstOrNull { it.isNotEmpty() && it.last() == null }
+                .orEmpty()
         }
     }
 
