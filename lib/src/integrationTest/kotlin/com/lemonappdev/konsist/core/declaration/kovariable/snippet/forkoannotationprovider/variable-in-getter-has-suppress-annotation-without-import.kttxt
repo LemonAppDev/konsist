@@ -1,0 +1,7 @@
+val sampleProperty: String
+    get() {
+        @Suppress
+        val sampleVariable = ""
+
+        return ""
+    }
