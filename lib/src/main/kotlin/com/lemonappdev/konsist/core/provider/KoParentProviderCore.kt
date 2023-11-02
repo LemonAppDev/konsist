@@ -45,6 +45,7 @@ internal interface KoParentProviderCore :
                             import.name.substringAfterLast(".") == name || import.alias == name
                         }
                         ?.name
+                        ?: (containingFile.packagee?.fullyQualifiedName + "." + name)
 
                 return@map getParentClass(name, fqn)
                     ?: getParentInterface(name, fqn)
