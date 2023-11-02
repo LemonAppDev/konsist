@@ -3,34 +3,28 @@ package com.lemonappdev.konsist.core
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.returnTypes
 import com.lemonappdev.konsist.api.ext.list.types
+import com.lemonappdev.konsist.api.ext.list.withName
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withoutName
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
 
-class DeclarationKonsistTest {
-    private val declarationPackageScope =
-        Konsist.scopeFromPackage("com.lemonappdev.konsist.core.declaration..", sourceSetName = "main")
+class ProviderKonsistTest {
+    private val providerPackageScope =
+        Konsist.scopeFromPackage("com.lemonappdev.konsist.core.provider..", sourceSetName = "main")
 
     @Test
     fun `every function has explicit return type declaration`() {
-        declarationPackageScope
+        providerPackageScope
             .functions()
             .withoutName("print")
             .assertTrue { it.hasReturnType() }
     }
 
     @Test
-    fun `every property has explicit type declaration`() {
-        declarationPackageScope
-            .properties()
-            .assertTrue { it.hasType() }
-    }
-
-    @Test
     fun `none function return type has the 'Impl' suffix`() {
-        declarationPackageScope
+        providerPackageScope
             .functions()
             .returnTypes
             .assertFalse { it.sourceType.endsWith("Impl") }
@@ -38,7 +32,7 @@ class DeclarationKonsistTest {
 
     @Test
     fun `none property type has the 'Impl' suffix`() {
-        declarationPackageScope
+        providerPackageScope
             .properties()
             .types
             .assertFalse { it.sourceType.endsWith("Impl") }
@@ -46,7 +40,7 @@ class DeclarationKonsistTest {
 
     @Test
     fun `includeNested parameter is always before includeLocal parameter`() {
-        declarationPackageScope
+        providerPackageScope
             .functions()
             .assertTrue {
                 val includeNestedParameter =
@@ -59,24 +53,14 @@ class DeclarationKonsistTest {
     }
 
     @Test
-    fun `every declaration overrides toString()`() {
-        declarationPackageScope
-            .classes()
-            .assertTrue {
-                it.hasFunction { function -> function.name == "toString" }
-            }
-    }
-
-    @Test
-    fun `every core declaration implements KoBaseProviderCore and its api equivalent(`() {
-        val classes = declarationPackageScope.classes()
-        val interfaces = declarationPackageScope.interfaces()
-
-        (classes+interfaces)
+    fun `every core provider implements its api equivalent`() {
+        providerPackageScope
+            .interfaces()
+            .withoutName("KoPackageDeclarationProviderCore", "KoDeclarationFullyQualifiedNameProviderCore")
             .assertTrue {
                 val name = it.name.removeSuffix("Core")
 
-                it.hasParentsWithAllNames("KoBaseProviderCore", name, indirectParents = true)
+                it.hasParentWithName(name, indirectParents = true)
             }
     }
 }
