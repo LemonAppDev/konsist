@@ -1,0 +1,7 @@
+var sampleProperty: String = "text"
+    set(value) {
+        /** Sample KDoc */
+        val sampleVariable = ""
+
+        if (true) field = value
+    }

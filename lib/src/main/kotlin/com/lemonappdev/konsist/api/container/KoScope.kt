@@ -102,12 +102,10 @@ interface KoScope {
      * The properties present in the scope.
      *
      * @param includeNested specifies whether to include nested properties, by default `true`.
-     * @param includeLocal specifies whether to include local properties, by default `true`.
      * @return a list of [KoPropertyDeclaration] representing the properties in the scope.
      */
     fun properties(
         includeNested: Boolean = true,
-        includeLocal: Boolean = true,
     ): List<KoPropertyDeclaration>
 
     /**

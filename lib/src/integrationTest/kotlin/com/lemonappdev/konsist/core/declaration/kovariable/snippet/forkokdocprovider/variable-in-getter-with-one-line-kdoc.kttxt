@@ -1,0 +1,7 @@
+val sampleProperty: String
+    get() {
+        /** Sample KDoc */
+        val sampleVariable = ""
+
+        return ""
+    }

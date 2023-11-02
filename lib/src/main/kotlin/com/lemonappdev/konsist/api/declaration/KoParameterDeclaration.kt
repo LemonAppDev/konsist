@@ -9,13 +9,13 @@ import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoNonNullableTypeProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
 import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
-import com.lemonappdev.konsist.api.provider.KoTypeProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoCrossInlineModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoNoInlineModifierProvider
@@ -44,7 +44,7 @@ interface KoParameterDeclaration :
     KoRepresentsTypeProvider,
     KoResideInPackageProvider,
     KoTextProvider,
-    KoTypeProvider,
+    KoNonNullableTypeProvider,
     KoVarModifierProvider,
     KoValModifierProvider,
     KoVarArgModifierProvider,

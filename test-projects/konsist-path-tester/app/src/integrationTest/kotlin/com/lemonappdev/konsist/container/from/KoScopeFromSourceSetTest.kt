@@ -93,6 +93,8 @@ class KoScopeFromSourceSetTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/kotype/KoTypeForKoSourceSetProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/kotypealias/KoTypeAliasForKoModuleProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/kotypealias/KoTypeAliasForKoSourceSetProviderTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/declaration/kovariable/KoVariableForKoModuleProviderTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/declaration/kovariable/KoVariableForKoSourceSetProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",

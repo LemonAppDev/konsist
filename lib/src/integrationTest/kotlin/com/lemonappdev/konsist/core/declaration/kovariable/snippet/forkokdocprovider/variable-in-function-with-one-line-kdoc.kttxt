@@ -1,0 +1,4 @@
+fun sampleFunction() {
+    /** Sample KDoc */
+     val sampleVariable = ""
+}

@@ -1,9 +1,5 @@
 internal const val sampleProperty = ""
 
-fun sampleFunction() {
-    val sampleLocalProperty = 6
-}
-
 class SampleClass {
     internal val sampleNestedProperty = ""
 }

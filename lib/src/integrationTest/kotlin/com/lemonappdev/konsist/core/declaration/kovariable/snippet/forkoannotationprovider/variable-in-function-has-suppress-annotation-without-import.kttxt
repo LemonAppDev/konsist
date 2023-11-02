@@ -1,0 +1,4 @@
+fun sampleFunction() {
+    @Suppress
+     val sampleVariable = ""
+}

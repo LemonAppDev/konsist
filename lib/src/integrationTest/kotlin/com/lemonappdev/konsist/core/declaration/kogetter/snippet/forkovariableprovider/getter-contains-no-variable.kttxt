@@ -1,0 +1,7 @@
+val sampleProperty: String
+    get() {
+        fun sampleLocalFunction() {
+        }
+
+        return ""
+    }

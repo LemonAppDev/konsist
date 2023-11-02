@@ -10,6 +10,8 @@ class RootClass(val rootParameter: String) : RootInterface {
     constructor(otherParameter: Int) : this(otherParameter.toString())
 
     init {
+        @Suppress("detekt.UnusedPrivateProperty")
+        val rootVariable = ""
         println("Root init block")
     }
 }
@@ -17,16 +19,28 @@ class RootClass(val rootParameter: String) : RootInterface {
 interface RootInterface
 
 var rootProperty: RootClass = RootClass("")
-    get() = RootClass("root value")
-    private set
+    get() {
+        @Suppress("detekt.UnusedPrivateProperty")
+        val rootVariable = ""
+        return RootClass("root value")
+    }
+    private set(value) {
+        @Suppress("detekt.UnusedPrivateProperty")
+        val rootVariable = ""
+        if (true) field = value
+    }
 
 object RootObject
 
 enum class RootEnumClass {
-    APP_CONSTANT
+    APP_CONSTANT {
+        val rootVariable = ""
+    }
 }
 
 fun rootFunction() {
+    @Suppress("detekt.UnusedPrivateProperty")
+    val rootVariable = ""
     println("some text")
 }
 
