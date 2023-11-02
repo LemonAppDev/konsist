@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.returnTypes
 import com.lemonappdev.konsist.api.ext.list.types
-import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withoutName
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
@@ -72,7 +71,7 @@ class DeclarationKonsistTest {
         val classes = declarationPackageScope.classes()
         val interfaces = declarationPackageScope.interfaces()
 
-        (classes+interfaces)
+        (classes + interfaces)
             .assertTrue {
                 val name = it.name.removeSuffix("Core")
 
