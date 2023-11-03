@@ -10,6 +10,20 @@ import org.junit.jupiter.api.Test
 
 class KoPropertyDeclarationForKoTacitTypeProviderTest {
     @Test
+    fun `property-has-no-tacit-type`() {
+        // given
+        val sut = getSnippetFile("property-has-no-tacit-type")
+            .properties()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasTacitType("String") shouldBeEqualTo false
+            hasTacitTypeOf(String::class) shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `property-has-explicit-simple-type`() {
         // given
         val sut = getSnippetFile("property-has-explicit-simple-type")

@@ -11,6 +11,21 @@ import org.junit.jupiter.api.Test
 
 class KoVariableDeclarationForKoTacitTypeProviderTest {
     @Test
+    fun `variable-has-no-tacit-type`() {
+        // given
+        val sut = getSnippetFile("variable-has-no-tacit-type")
+            .functions()
+            .variables
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasTacitType("String") shouldBeEqualTo false
+            hasTacitTypeOf(String::class) shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `variable-has-explicit-simple-type`() {
         // given
         val sut = getSnippetFile("variable-has-explicit-simple-type")
