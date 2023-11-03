@@ -183,5 +183,6 @@ fun <T : KoTypeAliasProvider> List<T>.withoutSomeTypeAliases(name: String, varar
     } else {
         true
     }
+
     !it.hasTypeAliases(name) && hasAtLeastOneTypeAlias
 }

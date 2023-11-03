@@ -188,5 +188,6 @@ fun <T : KoParametersProvider> List<T>.withoutSomeParameters(name: String, varar
     } else {
         true
     }
+
     !it.hasParameterNamed(name) && missesAtLeastOneParameter
 }

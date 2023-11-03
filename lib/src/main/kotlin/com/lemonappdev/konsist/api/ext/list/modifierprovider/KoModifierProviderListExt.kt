@@ -91,5 +91,6 @@ fun <T : KoModifierProvider> List<T>.withoutSomeModifiers(modifier: KoModifier, 
         } else {
             true
         }
+
         !it.hasModifiers(modifier) && missesAtLeastOneModifier
     }

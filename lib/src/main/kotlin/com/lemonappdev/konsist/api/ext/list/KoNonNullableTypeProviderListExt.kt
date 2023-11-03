@@ -59,6 +59,6 @@ fun <T : KoNonNullableTypeProvider> List<T>.withoutTypeOf(kClass: KClass<*>, var
         } else {
             false
         }
-        it.hasTypeOf(kClass) ||
-            hasMatchingType
+
+        it.hasTypeOf(kClass) || hasMatchingType
     }

@@ -180,5 +180,6 @@ fun <T : KoEnumConstantProvider> List<T>.withoutSomeEnumConstants(name: String, 
         } else {
             true
         }
+
         !it.hasEnumConstants(name) && missesAtLeastOneEnumConstant
     }

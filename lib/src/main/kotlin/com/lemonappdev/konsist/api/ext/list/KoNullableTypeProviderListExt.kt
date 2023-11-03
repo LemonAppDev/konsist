@@ -80,8 +80,8 @@ fun <T : KoNullableTypeProvider> List<T>.withTypeOf(kClass: KClass<*>, vararg kC
         } else {
             false
         }
-        it.hasTypeOf(kClass) ||
-            hasAllTypes
+
+        it.hasTypeOf(kClass) || hasAllTypes
     }
 
 /**
@@ -98,6 +98,6 @@ fun <T : KoNullableTypeProvider> List<T>.withoutTypeOf(kClass: KClass<*>, vararg
         } else {
             false
         }
-        it.hasTypeOf(kClass) ||
-            hasAllTypes
+
+        it.hasTypeOf(kClass) || hasAllTypes
     }

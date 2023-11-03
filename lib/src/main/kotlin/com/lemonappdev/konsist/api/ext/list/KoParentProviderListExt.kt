@@ -213,8 +213,8 @@ fun <T : KoParentProvider> List<T>.withoutSomeParentsOf(kClass: KClass<*>, varar
         } else {
             true
         }
-        it.parents.none { parent -> parent.name == kClass.simpleName } &&
-            missesAtLeastOneParent
+
+        it.parents.none { parent -> parent.name == kClass.simpleName } && missesAtLeastOneParent
     }
 
 /**
@@ -279,5 +279,6 @@ fun <T : KoParentProvider> List<T>.withoutSomeParents(name: String, vararg names
     } else {
         true
     }
+
     !it.hasParents(name) && hasNoMatchingParents
 }

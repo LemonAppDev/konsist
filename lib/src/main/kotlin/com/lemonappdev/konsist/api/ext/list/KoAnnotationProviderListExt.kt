@@ -249,6 +249,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutSomeAnnotations(
     } else {
         true
     }
+
     !it.hasAnnotations(name) && missesAtLeastOneAnnotation
 }
 
@@ -284,5 +285,6 @@ fun <T : KoAnnotationProvider> List<T>.withoutSomeAnnotationsOf(
     } else {
         true
     }
+
     !it.hasAnnotationsOf(kClass) && missesAtLeastOneAnnotation
 }

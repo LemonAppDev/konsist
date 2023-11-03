@@ -94,8 +94,8 @@ fun <T : KoReturnProvider> List<T>.withReturnTypeOf(kClass: KClass<*>, vararg kC
         } else {
             false
         }
-        it.hasReturnTypeOf(kClass) ||
-            hasAtLeastOneReturnType
+
+        it.hasReturnTypeOf(kClass) || hasAtLeastOneReturnType
     }
 
 /**
@@ -112,6 +112,6 @@ fun <T : KoReturnProvider> List<T>.withoutReturnTypeOf(kClass: KClass<*>, vararg
         } else {
             false
         }
-        it.hasReturnTypeOf(kClass) ||
-            hasAtLeastOneReturnType
+
+        it.hasReturnTypeOf(kClass) || hasAtLeastOneReturnType
     }

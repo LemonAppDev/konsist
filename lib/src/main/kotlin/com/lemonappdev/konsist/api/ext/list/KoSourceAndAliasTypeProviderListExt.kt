@@ -17,8 +17,8 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceTypeOf(kClass: KClass<*
         } else {
             false
         }
-        it.sourceType == kClass.simpleName ||
-            hasMatchingSourceType
+
+        it.sourceType == kClass.simpleName || hasMatchingSourceType
     }
 
 /**
@@ -35,8 +35,8 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceTypeOf(kClass: KClas
         } else {
             true
         }
-        it.sourceType != kClass.simpleName &&
-            hasNoMatchingSourceType
+
+        it.sourceType != kClass.simpleName && hasNoMatchingSourceType
     }
 
 /**
@@ -75,11 +75,8 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withAliasTypeOf(kClass: KClass<*>
         } else {
             false
         }
-        it.isAlias &&
-            (
-                it.sourceType == kClass.simpleName ||
-                    hasMatchingAlias
-                )
+
+        it.isAlias && (it.sourceType == kClass.simpleName || hasMatchingAlias)
     }
 
 /**
@@ -96,11 +93,9 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutAliasTypeOf(kClass: KClass
         } else {
             false
         }
+
         it.isAlias &&
-            (
-                it.sourceType == kClass.simpleName ||
-                    hasMatchingAlias
-                )
+            (it.sourceType == kClass.simpleName || hasMatchingAlias)
     }
 
 /**

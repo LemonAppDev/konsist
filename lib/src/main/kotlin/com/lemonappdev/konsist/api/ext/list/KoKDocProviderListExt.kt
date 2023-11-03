@@ -91,5 +91,6 @@ fun <T : KoKDocProvider> List<T>.withoutKDocWithSomeTags(tag: KoKDocTag, vararg 
     } else {
         true
     }
+
     it.kDoc?.hasTags(tag) == false && missesAtLeastOneTag
 }

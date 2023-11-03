@@ -80,8 +80,8 @@ fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(kClass: KClass<*>, v
         } else {
             false
         }
-        it.hasReceiverTypeOf(kClass) ||
-            hasAtLeastOneReceiver
+
+        it.hasReceiverTypeOf(kClass) || hasAtLeastOneReceiver
     }
 
 /**
@@ -98,6 +98,6 @@ fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverTypeOf(kClass: KClass<*>
         } else {
             false
         }
-        it.hasReceiverTypeOf(kClass) ||
-            hasAtLeastOneReceiver
+
+        it.hasReceiverTypeOf(kClass) || hasAtLeastOneReceiver
     }

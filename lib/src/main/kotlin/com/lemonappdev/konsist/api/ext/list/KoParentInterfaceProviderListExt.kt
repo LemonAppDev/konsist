@@ -226,6 +226,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutSomeParentInterfaces(name: St
     } else {
         true
     }
+
     !it.hasParentInterfaces(name) && missesAtLeastOneInterface
 }
 
