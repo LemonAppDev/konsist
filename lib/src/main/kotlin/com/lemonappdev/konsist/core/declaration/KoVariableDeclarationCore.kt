@@ -18,6 +18,7 @@ import com.lemonappdev.konsist.core.provider.KoNullableTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
+import com.lemonappdev.konsist.core.provider.KoTacitTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoValueProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoValModifierProviderCore
@@ -54,7 +55,8 @@ internal class KoVariableDeclarationCore private constructor(
     KoTextProviderCore,
     KoValueProviderCore,
     KoValModifierProviderCore,
-    KoVarModifierProviderCore {
+    KoVarModifierProviderCore,
+    KoTacitTypeProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktProperty }
 
     override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktProperty }
