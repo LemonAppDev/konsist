@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test
 
 class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
     @Test
-    fun `simple-type`() {
+    fun `type`() {
         // given
-        val sut = getSnippetFile("simple-type")
+        val sut = getSnippetFile("type")
             .classes()
             .first()
             .primaryConstructor
@@ -20,15 +20,16 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         // then
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleType"
+            it?.baseSourceType shouldBeEqualTo "SampleType"
             it?.aliasType shouldBeEqualTo null
             it?.isAlias shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `simple-nullable-type`() {
+    fun `nullable-type`() {
         // given
-        val sut = getSnippetFile("simple-nullable-type")
+        val sut = getSnippetFile("nullable-type")
             .classes()
             .first()
             .primaryConstructor
@@ -39,6 +40,87 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         // then
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleType"
+            it?.baseSourceType shouldBeEqualTo "SampleType"
+            it?.aliasType shouldBeEqualTo null
+            it?.isAlias shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `generic-type`() {
+        // given
+        val sut = getSnippetFile("generic-type")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
+            ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.sourceType shouldBeEqualTo "List<SampleType>"
+            it?.baseSourceType shouldBeEqualTo "List"
+            it?.aliasType shouldBeEqualTo null
+            it?.isAlias shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `generic-with-nullable-type-argument`() {
+        // given
+        val sut = getSnippetFile("generic-with-nullable-type-argument")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
+            ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.sourceType shouldBeEqualTo "List<SampleType?>"
+            it?.baseSourceType shouldBeEqualTo "List"
+            it?.aliasType shouldBeEqualTo null
+            it?.isAlias shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `nullable-generic-with-nullable-type-argument`() {
+        // given
+        val sut = getSnippetFile("nullable-generic-with-nullable-type-argument")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
+            ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.sourceType shouldBeEqualTo "List<SampleType?>"
+            it?.baseSourceType shouldBeEqualTo "List"
+            it?.aliasType shouldBeEqualTo null
+            it?.isAlias shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `nullable-generic-type`() {
+        // given
+        val sut = getSnippetFile("nullable-generic-type")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
+            ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.sourceType shouldBeEqualTo "List<SampleType>"
+            it?.baseSourceType shouldBeEqualTo "List"
             it?.aliasType shouldBeEqualTo null
             it?.isAlias shouldBeEqualTo false
         }
@@ -58,6 +140,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         // then
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleType"
+            it?.baseSourceType shouldBeEqualTo "SampleType"
             it?.aliasType shouldBeEqualTo "ImportAlias"
             it?.isAlias shouldBeEqualTo true
         }
@@ -77,11 +160,15 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         // then
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleType"
+            it?.baseSourceType shouldBeEqualTo "SampleType"
             it?.aliasType shouldBeEqualTo "ImportAlias"
             it?.isAlias shouldBeEqualTo true
         }
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kotype/snippet/forkosourceandaliastypeprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope(
+            "core/declaration/kotype/snippet/forkosourceandaliastypeprovider/",
+            fileName,
+        )
 }
