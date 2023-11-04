@@ -7,9 +7,8 @@ internal interface KoKotlinTypeProviderCore : KoKotlinTypeProvider, KoSourceAndA
         get() = if (isAlias) {
             false
         } else {
-            val parts = sourceType.split("<", ">", " ", ",")
-            parts.any { basicTypes.any { basicType -> basicType == it } } ||
-                parts.any { collections.any { collection -> collection == it } }
+            val types = basicTypes + collections
+            types.any { it == sourceType.substringBefore('<') }
         }
 
     // Basic types in Kotlin are described here: https://kotlinlang.org/docs/basic-types.html
