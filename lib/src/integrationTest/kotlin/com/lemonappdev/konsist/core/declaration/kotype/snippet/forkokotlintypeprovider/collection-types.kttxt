@@ -1,0 +1,59 @@
+import java.util.*
+import kotlin.collections.AbstractCollection
+import kotlin.collections.AbstractList
+import kotlin.collections.AbstractMap
+import kotlin.collections.AbstractSet
+import kotlin.collections.ArrayDeque
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+import kotlin.collections.HashSet
+import kotlin.collections.LinkedHashMap
+import kotlin.collections.LinkedHashSet
+
+val abstractList: AbstractList<Any> = ArrayList()
+val abstractMap: AbstractMap<Any, Any> = HashMap()
+val abstractMutableCollection: AbstractMutableCollection<Any> = ArrayList()
+val abstractMutableList: AbstractMutableList<Any> = ArrayList()
+val abstractMutableMap: AbstractMutableMap<Any, Any> = HashMap()
+val abstractMutableSet: AbstractMutableSet<Any> = HashSet()
+val abstractSet: AbstractSet<Any> = HashSet()
+val arrayDeque: ArrayDeque<Any> = ArrayDeque()
+val arrayList: ArrayList<Any> = ArrayList()
+val collection: Collection<Any> = ArrayList()
+val hashMap: HashMap<Any, Any> = HashMap()
+val hashSet: HashSet<Any> = HashSet()
+val linkedHashMap: LinkedHashMap<Any, Any> = LinkedHashMap()
+val linkedHashSet: LinkedHashSet<Any> = LinkedHashSet()
+val linkedList: LinkedList<Any> = LinkedList()
+val list: List<Any> = ArrayList()
+val map: Map<Any, Any> = HashMap()
+val mutableCollection: MutableCollection<Any> = ArrayList()
+val mutableList: MutableList<Any> = ArrayList()
+val mutableMap: MutableMap<Any, Any> = HashMap()
+val mutableSet: MutableSet<Any> = HashSet()
+val set: Set<Any> = HashSet()
+
+val nullableAbstractCollection: AbstractCollection? = null
+val nullableAbstractIterator: AbstractIterator? = null
+val nullableAbstractList: AbstractList? = null
+val nullableAbstractMap: AbstractMap? = null
+val nullableAbstractMutableCollection: AbstractMutableCollection? = null
+val nullableAbstractMutableList: AbstractMutableList? = null
+val nullableAbstractMutableMap: AbstractMutableMap? = null
+val nullableAbstractMutableSet: AbstractMutableSet? = null
+val nullableAbstractSet: AbstractSet? = null
+val nullableArrayDeque: ArrayDeque? = null
+val nullableArrayList: ArrayList? = null
+val nullableCollection: Collection? = null
+val nullableHashMap: HashMap? = null
+val nullableHashSet: HashSet? = null
+val nullableLinkedHashMap: LinkedHashMap? = null
+val nullableLinkedHashSet: LinkedHashSet? = null
+val nullableLinkedList: LinkedList? = null
+val nullableList: List? = null
+val nullableMap: Map? = null
+val nullableMutableCollection: MutableCollection? = null
+val nullableMutableList: MutableList? = null
+val nullableMutableMap: MutableMap? = null
+val nullableMutableSet: MutableSet? = null
+val nullableSet: Set? = null

@@ -1,0 +1,4 @@
+import com.lemonappdev.konsist.testdata.SampleClass
+
+val sampleClass1: SampleClass = SampleClass()
+val sampleClass2: SampleClass? = null
