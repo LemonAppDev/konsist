@@ -32,6 +32,6 @@ internal interface KoFullyQualifiedNameProviderCore :
                     .firstOrNull { it.contains(textUsedToFqn) }
             }
 
-            return fqn ?: textUsedToFqn
+            return fqn ?: textUsedToFqn.replace("?", "")
         }
 }

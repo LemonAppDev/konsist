@@ -33,8 +33,8 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "SampleType"
-            it?.baseSourceType shouldBeEqualTo "SampleType"
+            it?.sourceType shouldBeEqualTo "SampleType?"
+            it?.baseSourceType shouldBeEqualTo "SampleType?"
             it?.aliasType shouldBeEqualTo null
             it?.isAlias shouldBeEqualTo false
         }
@@ -84,7 +84,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "List<SampleType?>"
+            it?.sourceType shouldBeEqualTo "List<SampleType?>?"
             it?.baseSourceType shouldBeEqualTo "List"
             it?.aliasType shouldBeEqualTo null
             it?.isAlias shouldBeEqualTo false
@@ -101,7 +101,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "List<SampleType>"
+            it?.sourceType shouldBeEqualTo "List<SampleType>?"
             it?.baseSourceType shouldBeEqualTo "List"
             it?.aliasType shouldBeEqualTo null
             it?.isAlias shouldBeEqualTo false
