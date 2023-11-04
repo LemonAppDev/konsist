@@ -1,12 +1,21 @@
 pluginManagement {
     repositories {
-        mavenCentral()
+        google()
         gradlePluginPortal()
+        mavenCentral()
     }
 }
 
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.7.0"
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+    }
 }
 
 rootProject.name = "konsist-starter-kmp-gradle-kotlin-junit5"
+
+include(":androidApp")
+include(":shared")
+include(":konsistTest")
+

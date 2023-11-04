@@ -16,4 +16,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "konsist-starter-android-gradle-groovy-junit-5"
-include(":app", ':konsist_test')
+include(":app", ':konsistTest')

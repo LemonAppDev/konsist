@@ -17,4 +17,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "konsist-starter-android-gradle-kotlin-kotest"
-include(":app", ":konsist_test")
+include(":app", ":konsistTest")

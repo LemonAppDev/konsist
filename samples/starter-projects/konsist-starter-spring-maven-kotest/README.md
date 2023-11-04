@@ -1,4 +1,4 @@
-# Konsist Sample
+# Konsist Starter Project - Spring + Maven + Kotest
 
 This a [Konsist](https://github.com/LemonAppDev/konsist) sample is configured using [Maven](https://maven.apache.org),
 [Spring](https://spring.io/),
