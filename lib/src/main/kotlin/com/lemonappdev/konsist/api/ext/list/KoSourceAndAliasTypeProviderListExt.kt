@@ -92,8 +92,7 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withAliasTypeOf(kClass: KClass<*>
  * @param kClasses The Kotlin classes representing the base source types to include.
  * @return A list containing declarations with the base source type matching any of the specified types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withBaseSourceTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>):
-    List<T> =
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withBaseSourceTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
         it.baseSourceType == kClass.simpleName ||
             if (kClasses.isNotEmpty()) {
@@ -110,8 +109,7 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withBaseSourceTypeOf(kClass: KCla
  * @param kClasses The Kotlin classes representing the base source types to exclude.
  * @return A list containing declarations without base source type matching any of the specified types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBaseSourceTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>):
-    List<T> =
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBaseSourceTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
         it.baseSourceType != kClass.simpleName &&
             if (kClasses.isNotEmpty()) {
