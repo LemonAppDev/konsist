@@ -1,1 +1,0 @@
-class SampleClass1(val sampleProperty1: List<String>)
