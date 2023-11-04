@@ -86,9 +86,11 @@ fun <T : KoKDocProvider> List<T>.withoutKDocWithAllTags(tag: KoKDocTag, vararg t
  */
 @Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutTag()"))
 fun <T : KoKDocProvider> List<T>.withoutKDocWithSomeTags(tag: KoKDocTag, vararg tags: KoKDocTag): List<T> = filter {
-    it.kDoc?.hasTags(tag) == false && if (tags.isNotEmpty()) {
+    val missesAtLeastOneTag = if (tags.isNotEmpty()) {
         tags.any { tag -> it.kDoc?.hasTags(tag) == false }
     } else {
         true
     }
+
+    it.kDoc?.hasTags(tag) == false && missesAtLeastOneTag
 }

@@ -175,9 +175,11 @@ fun <T : KoEnumConstantProvider> List<T>.withoutAllEnumConstants(name: String, v
 @Deprecated("Will be removed in v1.0.0.", ReplaceWith("withoutEnumConstantNamed(*names"))
 fun <T : KoEnumConstantProvider> List<T>.withoutSomeEnumConstants(name: String, vararg names: String): List<T> =
     filter {
-        !it.hasEnumConstants(name) && if (names.isNotEmpty()) {
+        val missesAtLeastOneEnumConstant = if (names.isNotEmpty()) {
             names.any { constant -> !it.hasEnumConstants(constant) }
         } else {
             true
         }
+
+        !it.hasEnumConstants(name) && missesAtLeastOneEnumConstant
     }

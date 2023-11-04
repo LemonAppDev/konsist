@@ -221,11 +221,13 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfaces(name: Str
  */
 @Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutSomeParents()"))
 fun <T : KoParentInterfaceProvider> List<T>.withoutSomeParentInterfaces(name: String, vararg names: String): List<T> = filter {
-    !it.hasParentInterfaces(name) && if (names.isNotEmpty()) {
+    val missesAtLeastOneInterface = if (names.isNotEmpty()) {
         names.any { name -> !it.hasParentInterfaces(name) }
     } else {
         true
     }
+
+    !it.hasParentInterfaces(name) && missesAtLeastOneInterface
 }
 
 /**
@@ -256,14 +258,15 @@ fun <T : KoParentInterfaceProvider> List<T>.withSomeParentInterfacesOf(kClass: K
 @Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutSomeParentsOf()"))
 fun <T : KoParentInterfaceProvider> List<T>.withoutSomeParentInterfacesOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
-        it.parentInterfaces.none { parent -> parent.name == kClass.simpleName } &&
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass ->
-                    it
-                        .parentInterfaces
-                        .none { parent -> parent.name == kClass.simpleName }
-                }
-            } else {
-                true
+        val hasNoMatchingParentInterfaces = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass ->
+                it
+                    .parentInterfaces
+                    .none { parent -> parent.name == kClass.simpleName }
             }
+        } else {
+            true
+        }
+        it.parentInterfaces.none { parent -> parent.name == kClass.simpleName } &&
+            hasNoMatchingParentInterfaces
     }

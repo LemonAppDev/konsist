@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
-import com.lemonappdev.konsist.api.ext.provider.hasReceiverTypeOf
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import kotlin.reflect.KClass
 
@@ -76,12 +75,13 @@ fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverType(predicate: ((KoType
  */
 fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
-        it.hasReceiverTypeOf(kClass) ||
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.hasReceiverTypeOf(kClass) }
-            } else {
-                false
-            }
+        val hasAtLeastOneReceiver = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass -> it.hasReceiverTypeOf(kClass) }
+        } else {
+            false
+        }
+
+        it.hasReceiverTypeOf(kClass) || hasAtLeastOneReceiver
     }
 
 /**
@@ -93,10 +93,11 @@ fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(kClass: KClass<*>, v
  */
 fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filterNot {
-        it.hasReceiverTypeOf(kClass) ||
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.hasReceiverTypeOf(kClass) }
-            } else {
-                false
-            }
+        val hasAtLeastOneReceiver = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass -> it.hasReceiverTypeOf(kClass) }
+        } else {
+            false
+        }
+
+        it.hasReceiverTypeOf(kClass) || hasAtLeastOneReceiver
     }

@@ -178,9 +178,11 @@ fun <T : KoTypeAliasProvider> List<T>.withoutAllTypeAliases(name: String, vararg
  */
 @Deprecated("Will be removed in v1.0.0.", ReplaceWith("withoutTypeAliasNamed(*names"))
 fun <T : KoTypeAliasProvider> List<T>.withoutSomeTypeAliases(name: String, vararg names: String): List<T> = filter {
-    !it.hasTypeAliases(name) && if (names.isNotEmpty()) {
+    val hasAtLeastOneTypeAlias = if (names.isNotEmpty()) {
         names.any { typeAlias -> !it.hasTypeAliases(typeAlias) }
     } else {
         true
     }
+
+    !it.hasTypeAliases(name) && hasAtLeastOneTypeAlias
 }

@@ -244,11 +244,13 @@ fun <T : KoAnnotationProvider> List<T>.withoutSomeAnnotations(
     name: String,
     vararg names: String,
 ): List<T> = filter {
-    !it.hasAnnotations(name) && if (names.isNotEmpty()) {
+    val missesAtLeastOneAnnotation = if (names.isNotEmpty()) {
         names.any { annotation -> !it.hasAnnotations(annotation) }
     } else {
         true
     }
+
+    !it.hasAnnotations(name) && missesAtLeastOneAnnotation
 }
 
 /**
@@ -278,9 +280,11 @@ fun <T : KoAnnotationProvider> List<T>.withoutSomeAnnotationsOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
 ): List<T> = filter {
-    !it.hasAnnotationsOf(kClass) && if (kClasses.isNotEmpty()) {
+    val missesAtLeastOneAnnotation = if (kClasses.isNotEmpty()) {
         kClasses.any { annotation -> !it.hasAnnotationsOf(annotation) }
     } else {
         true
     }
+
+    !it.hasAnnotationsOf(kClass) && missesAtLeastOneAnnotation
 }

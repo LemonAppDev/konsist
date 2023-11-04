@@ -54,10 +54,11 @@ fun <T : KoNonNullableTypeProvider> List<T>.withTypeOf(kClass: KClass<*>, vararg
  */
 fun <T : KoNonNullableTypeProvider> List<T>.withoutTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filterNot {
-        it.hasTypeOf(kClass) ||
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.hasTypeOf(kClass) }
-            } else {
-                false
-            }
+        val hasMatchingType = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass -> it.hasTypeOf(kClass) }
+        } else {
+            false
+        }
+
+        it.hasTypeOf(kClass) || hasMatchingType
     }
