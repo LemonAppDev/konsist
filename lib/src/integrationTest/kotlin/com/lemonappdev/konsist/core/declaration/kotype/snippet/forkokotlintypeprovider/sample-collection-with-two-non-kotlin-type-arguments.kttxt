@@ -1,5 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleCollection2
-import com.lemonappdev.konsist.testdata.SampleType1
-import com.lemonappdev.konsist.testdata.SampleType2
-
-class SampleClass1(val sampleProperty1: SampleCollection2<SampleType1, SampleType2>)
