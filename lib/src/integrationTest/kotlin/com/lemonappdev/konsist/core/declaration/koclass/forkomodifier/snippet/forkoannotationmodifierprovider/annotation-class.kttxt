@@ -1,2 +1,4 @@
 annotation class SampleClass {
 }
+
+annotation class SampleClass2
