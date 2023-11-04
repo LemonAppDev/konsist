@@ -86,34 +86,40 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withAliasTypeOf(kClass: KClass<*>
     }
 
 /**
- * List containing declarations with base source type of.
+ * List containing declarations with bare source type of.
  *
- * @param kClass The Kotlin class representing the base source type to include.
- * @param kClasses The Kotlin classes representing the base source types to include.
- * @return A list containing declarations with the base source type matching any of the specified types.
+ * @param kClass The Kotlin class representing the bare source type to include.
+ * @param kClasses The Kotlin classes representing the bare source types to include.
+ * @return A list containing declarations with the bare source type matching any of the specified types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withBaseSourceTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withBareSourceTypeOf(
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
+): List<T> =
     filter {
-        it.baseSourceType == kClass.simpleName ||
+        it.bareSourceType == kClass.simpleName ||
             if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.baseSourceType == kClass.simpleName }
+                kClasses.any { kClass -> it.bareSourceType == kClass.simpleName }
             } else {
                 false
             }
     }
 
 /**
- * List containing declarations without base source type of.
+ * List containing declarations without bare source type of.
  *
- * @param kClass The Kotlin class representing the base source type to exclude.
- * @param kClasses The Kotlin classes representing the base source types to exclude.
- * @return A list containing declarations without base source type matching any of the specified types.
+ * @param kClass The Kotlin class representing the bare source type to exclude.
+ * @param kClasses The Kotlin classes representing the bare source types to exclude.
+ * @return A list containing declarations without bare source type matching any of the specified types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBaseSourceTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBareSourceTypeOf(
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
+): List<T> =
     filter {
-        it.baseSourceType != kClass.simpleName &&
+        it.bareSourceType != kClass.simpleName &&
             if (kClasses.isNotEmpty()) {
-                kClasses.none { kClass -> it.baseSourceType == kClass.simpleName }
+                kClasses.none { kClass -> it.bareSourceType == kClass.simpleName }
             } else {
                 true
             }
@@ -122,25 +128,25 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBaseSourceTypeOf(kClass: K
 /**
  * List containing declarations with base source type.
  *
- * @param name The base source type name to include.
- * @param names The base source type name(s) to include.
- * @return A list containing declarations with the specified base source types.
+ * @param name The bare source type name to include.
+ * @param names The bare source type name(s) to include.
+ * @return A list containing declarations with the specified bare source types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withBaseSourceType(name: String, vararg names: String): List<T> =
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withBareSourceType(name: String, vararg names: String): List<T> =
     filter {
-        it.baseSourceType == name || names.any { type -> it.baseSourceType == type }
+        it.bareSourceType == name || names.any { type -> it.bareSourceType == type }
     }
 
 /**
- * List containing declarations without base source type.
+ * List containing declarations without bare source type.
  *
- * @param name The base source type name to exclude.
- * @param names The base source type name(s) to exclude.
+ * @param name The bare source type name to exclude.
+ * @param names The bare source type name(s) to exclude.
  * @return A list containing declarations without specified base source types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBaseSourceType(name: String, vararg names: String): List<T> =
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBareSourceType(name: String, vararg names: String): List<T> =
     filter {
-        it.baseSourceType != name && names.none { type -> it.baseSourceType == type }
+        it.bareSourceType != name && names.none { type -> it.bareSourceType == type }
     }
 
 /**
