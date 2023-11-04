@@ -1,0 +1,2 @@
+val sampleType1: Int = 1
+val sampleType3: Int? = 1

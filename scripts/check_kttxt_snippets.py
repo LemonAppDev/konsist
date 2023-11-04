@@ -46,8 +46,10 @@ def compile_test_data():
     print()
 
 def create_build_dir():
-    if not os.path.exists(build_dir):
-        os.makedirs(build_dir)
+    if os.path.exists(build_dir):
+        shutil.rmtree(build_dir)
+
+    os.makedirs(build_dir)
 
 def copy_and_kttxt_files_and_change_extension_to_kt():
     source_dir = project_root + "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core"

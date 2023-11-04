@@ -23,6 +23,8 @@ interface KoSourceAndAliasTypeProvider : KoBaseProvider {
      * The source type.
      * For `val car:MyClass` it will be "MyClass".
      * For `val car:MyClass<String>` it will be "MyClass<String>".
+     *
+     * @see baseSourceType
      */
     val sourceType: String
 
@@ -31,6 +33,8 @@ interface KoSourceAndAliasTypeProvider : KoBaseProvider {
      *
      * For `val car:MyClass` baseSourceType will be "MyClass".
      * For `val car:MyClass<String>` baseSourceType will be "MyClass"
+     *
+     * @see sourceType
      */
     val baseSourceType: String
 }
