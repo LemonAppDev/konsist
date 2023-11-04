@@ -17,6 +17,9 @@ internal interface KoSourceAndAliasTypeProviderCore : KoSourceAndAliasTypeProvid
             .firstOrNull { it.alias == ktTypeReference.text.removeSuffix("?") }
             ?.alias
 
+    override val isAlias: Boolean
+        get() = aliasType != null
+
     override val sourceType: String
         get() = if (isAlias) {
             file
@@ -31,6 +34,8 @@ internal interface KoSourceAndAliasTypeProviderCore : KoSourceAndAliasTypeProvid
                 .removeSuffix("?")
         }
 
-    override val isAlias: Boolean
-        get() = aliasType != null
+    override val baseSourceType: String
+        get() = sourceType
+            .split("<")
+            .first()
 }
