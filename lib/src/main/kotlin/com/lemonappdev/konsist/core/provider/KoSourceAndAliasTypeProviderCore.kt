@@ -31,7 +31,6 @@ internal interface KoSourceAndAliasTypeProviderCore : KoSourceAndAliasTypeProvid
                 .last { it.isNotBlank() }
         } else {
             name
-                .removeSuffix("?")
         }
 
     override val baseSourceType: String
