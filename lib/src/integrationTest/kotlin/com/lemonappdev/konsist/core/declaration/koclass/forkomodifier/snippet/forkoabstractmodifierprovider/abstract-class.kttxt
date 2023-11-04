@@ -1,2 +1,5 @@
 abstract class SampleClass {
 }
+
+class SampleClass2 {
+}
