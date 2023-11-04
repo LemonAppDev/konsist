@@ -21,25 +21,18 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
     kotlin {
         jvmToolchain(8)
     }
 }
 
 dependencies {
+    // Add Appcompat dependency (to be able to access Android specific classes in Konsit tests)
     implementation("androidx.appcompat:appcompat:1.6.1")
 
     // Add JUnit dependency
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
-
-    // Add junit-jupiter-params dependency (required for dynamic Tests)
-    implementation("org.junit.jupiter:junit-jupiter-params:5.10.0")
 
     // Add Konsist dependency
     testImplementation("com.lemonappdev:konsist:0.13.0")
