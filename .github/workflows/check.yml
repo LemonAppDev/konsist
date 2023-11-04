@@ -96,7 +96,7 @@ jobs:
 # ======================================= Run Linters =========================================================
 
   konsist-spotless:
-    name: Konsist Spotless
+    name: Konsist Ktlint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

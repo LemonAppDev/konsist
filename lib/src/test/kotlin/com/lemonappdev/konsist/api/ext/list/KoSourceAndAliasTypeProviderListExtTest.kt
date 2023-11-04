@@ -189,6 +189,182 @@ class KoSourceAndAliasTypeProviderListExtTest {
     }
 
     @Test
+    fun `withBaseSourceTypeOf(KClass) returns declaration with given source declaration`() {
+        // given
+        val baseSourceType1 = "SampleClass1"
+        val baseSourceType2 = "SampleClass2"
+        val declaration1: KoSourceAndAliasTypeProvider = mockk {
+            every { baseSourceType } returns baseSourceType1
+        }
+        val declaration2: KoSourceAndAliasTypeProvider = mockk {
+            every { baseSourceType } returns baseSourceType2
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withBaseSourceTypeOf(SampleClass1::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withBaseSourceTypeOf(KClass) returns declarations with one of given source declarations`() {
+        // given
+        val baseSourceType1 = "SampleClass1"
+        val baseSourceType2 = "SampleClass2"
+        val baseSourceType3 = "SampleClass3"
+        val declaration1: KoSourceAndAliasTypeProvider = mockk {
+            every { baseSourceType } returns baseSourceType1
+        }
+        val declaration2: KoSourceAndAliasTypeProvider = mockk {
+            every { baseSourceType } returns baseSourceType2
+        }
+        val declaration3: KoSourceAndAliasTypeProvider = mockk {
+            every { baseSourceType } returns baseSourceType3
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withBaseSourceTypeOf(SampleClass1::class, SampleClass2::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withoutBaseSourceTypeOf(KClass) returns declaration without given source declaration`() {
+        // given
+        val baseSourceType1 = "SampleClass1"
+        val baseSourceType2 = "SampleClass2"
+        val declaration1: KoSourceAndAliasTypeProvider = mockk {
+            every { baseSourceType } returns baseSourceType1
+        }
+        val declaration2: KoSourceAndAliasTypeProvider = mockk {
+            every { baseSourceType } returns baseSourceType2
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutBaseSourceTypeOf(SampleClass1::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutBaseSourceTypeOf(KClass) returns declaration without any of given source declarations`() {
+        // given
+        val baseSourceType1 = "SampleClass1"
+        val baseSourceType2 = "SampleClass2"
+        val baseSourceType3 = "SampleClass3"
+        val declaration1: KoSourceAndAliasTypeProvider = mockk {
+            every { baseSourceType } returns baseSourceType1
+        }
+        val declaration2: KoSourceAndAliasTypeProvider = mockk {
+            every { baseSourceType } returns baseSourceType2
+        }
+        val declaration3: KoSourceAndAliasTypeProvider = mockk {
+            every { baseSourceType } returns baseSourceType3
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutBaseSourceTypeOf(SampleClass1::class, SampleClass2::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration3)
+    }
+
+    @Test
+    fun `withBaseSourceType(type) returns declaration with given source type`() {
+        // given
+        val baseSourceType1 = "SampleClass1"
+        val baseSourceType2 = "SampleClass2"
+        val declaration1: KoSourceAndAliasTypeProvider = mockk {
+            every { baseSourceType } returns baseSourceType1
+        }
+        val declaration2: KoSourceAndAliasTypeProvider = mockk {
+            every { baseSourceType } returns baseSourceType2
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withBaseSourceType(baseSourceType1)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withBaseSourceType(type) returns declarations with one of given source declarations`() {
+        // given
+        val baseSourceType1 = "SampleClass1"
+        val baseSourceType2 = "SampleClass2"
+        val baseSourceType3 = "SampleClass3"
+        val declaration1: KoSourceAndAliasTypeProvider = mockk {
+            every { baseSourceType } returns baseSourceType1
+        }
+        val declaration2: KoSourceAndAliasTypeProvider = mockk {
+            every { baseSourceType } returns baseSourceType2
+        }
+        val declaration3: KoSourceAndAliasTypeProvider = mockk {
+            every { baseSourceType } returns baseSourceType3
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withBaseSourceType(baseSourceType1, baseSourceType2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withoutBaseSourceType(type) returns declaration without given source type`() {
+        // given
+        val baseSourceType1 = "SampleClass1"
+        val baseSourceType2 = "SampleClass2"
+        val declaration1: KoSourceAndAliasTypeProvider = mockk {
+            every { baseSourceType } returns baseSourceType1
+        }
+        val declaration2: KoSourceAndAliasTypeProvider = mockk {
+            every { baseSourceType } returns baseSourceType2
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutBaseSourceType(baseSourceType1)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutBaseSourceType(type) returns declaration without any of given source type`() {
+        // given
+        val baseSourceType1 = "SampleClass1"
+        val baseSourceType2 = "SampleClass2"
+        val baseSourceType3 = "SampleClass3"
+        val declaration1: KoSourceAndAliasTypeProvider = mockk {
+            every { baseSourceType } returns baseSourceType1
+        }
+        val declaration2: KoSourceAndAliasTypeProvider = mockk {
+            every { baseSourceType } returns baseSourceType2
+        }
+        val declaration3: KoSourceAndAliasTypeProvider = mockk {
+            every { baseSourceType } returns baseSourceType3
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutBaseSourceType(baseSourceType1, baseSourceType2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration3)
+    }
+
+    @Test
     fun `withAliasType() returns declaration with any alias type`() {
         // given
         val declaration1: KoTypeDeclarationCore = mockk {

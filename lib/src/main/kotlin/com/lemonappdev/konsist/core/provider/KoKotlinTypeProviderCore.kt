@@ -3,16 +3,8 @@ package com.lemonappdev.konsist.core.provider
 import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
 
 internal interface KoKotlinTypeProviderCore : KoKotlinTypeProvider, KoSourceAndAliasTypeProviderCore, KoBaseProviderCore {
-    override val isKotlinType: Boolean
-        get() = if (isAlias) {
-            false
-        } else {
-            val types = basicTypes + collections
-            types.any { it == sourceType.substringBefore('<') }
-        }
-
     // Basic types in Kotlin are described here: https://kotlinlang.org/docs/basic-types.html
-    private val basicTypes: List<String>
+    private val kotlinBasicTypes: List<String>
         get() = listOf(
             "Byte",
             "Short",
@@ -35,7 +27,7 @@ internal interface KoKotlinTypeProviderCore : KoKotlinTypeProvider, KoSourceAndA
         )
 
     // Collections in Kotlin are described here: https://kotlinlang.org/docs/collections-overview.html#collection
-    private val collections: List<String>
+    private val kotlinCollectionTypes: List<String>
         get() = listOf(
             "Iterable",
             "MutableIterable",
@@ -48,4 +40,12 @@ internal interface KoKotlinTypeProviderCore : KoKotlinTypeProvider, KoSourceAndA
             "Set",
             "MutableSet",
         )
+
+    override val isKotlinType: Boolean
+        get() = if (isAlias) {
+            false
+        } else {
+            val kotlinTypes = kotlinBasicTypes + kotlinCollectionTypes
+            kotlinTypes.any { it == baseSourceType }
+        }
 }

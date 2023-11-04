@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
 class KoTypeDeclarationForKoKotlinTypeProviderTest {
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0} is-kotlin-type {1}")
     @MethodSource("provideValues")
     fun `is-kotlin-type`(
         fileName: String,
@@ -38,7 +38,7 @@ class KoTypeDeclarationForKoKotlinTypeProviderTest {
             arguments("list-of-sample-type", true),
             arguments("sample-collection-of-string", false),
             arguments("sample-collection-of-sample-type", false),
-            arguments("sample-collection-with-two-arguments-and-one-is-kotlin-type", false),
+            arguments("sample-collection-with-two-type-arguments-and-one-is-kotlin-type", false),
             arguments("sample-collection-with-two-non-kotlin-type-arguments", false),
             arguments("sample-collection-with-in-keyword-and-kotlin-type", false),
             arguments("sample-collection-with-in-keyword-and-non-kotlin-type", false),
