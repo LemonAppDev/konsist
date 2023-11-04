@@ -24,17 +24,19 @@ interface KoSourceAndAliasTypeProvider : KoBaseProvider {
      * For `val car:MyClass` it will be "MyClass".
      * For `val car:MyClass<String>` it will be "MyClass<String>".
      *
-     * @see baseSourceType
+     *  @see bareSourceType
      */
     val sourceType: String
 
     /**
-     * The source type without generic type argument.
+     * The source type without generic type arguments and nullability ("?").
      *
-     * For `val car:MyClass` baseSourceType will be "MyClass".
-     * For `val car:MyClass<String>` baseSourceType will be "MyClass"
+     * For `val car:MyClass` bareSourceType will be "MyClass".
+     * For `val car:MyClass?` bareSourceType will be "MyClass".
+     * For `val car:MyClass<String>` bareSourceType will be "MyClass"
+     * For `val car:MyClass<String?>?` bareSourceType will be "MyClass"
      *
      * @see sourceType
      */
-    val baseSourceType: String
+    val bareSourceType: String
 }

@@ -48,7 +48,7 @@ internal class KoTypeDeclarationCore private constructor(
         }
     }
 
-    override val textUsedToFqn: String by lazy { baseSourceType.replace("?", "") }
+    override val textUsedToFqn: String by lazy { bareSourceType }
 
     override fun toString(): String = name
 
