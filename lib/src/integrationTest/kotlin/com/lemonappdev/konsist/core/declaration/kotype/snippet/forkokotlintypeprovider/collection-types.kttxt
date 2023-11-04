@@ -1,59 +1,47 @@
-import java.util.*
-import kotlin.collections.AbstractCollection
-import kotlin.collections.AbstractList
-import kotlin.collections.AbstractMap
-import kotlin.collections.AbstractSet
-import kotlin.collections.ArrayDeque
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
-import kotlin.collections.HashSet
-import kotlin.collections.LinkedHashMap
-import kotlin.collections.LinkedHashSet
+interface CollectionsInterface {
+    val abstractList: AbstractList<Int>
+    val abstractMap: AbstractMap<Int, Int>
+    val abstractMutableCollection: AbstractMutableCollection<Int>
+    val abstractMutableList: AbstractMutableList<Int>
+    val abstractMutableMap: AbstractMutableMap<Int, Int>
+    val abstractMutableSet: AbstractMutableSet<Int>
+    val abstractSet: AbstractSet<Int>
+    val arrayDeque: ArrayDeque<Int>
+    val arrayList: ArrayList<Int>
+    val collection: Collection<Int>
+    val hashMap: HashMap<Int, Int>
+    val hashSet: HashSet<Int>
+    val linkedHashMap: LinkedHashMap<Int, Int>
+    val linkedHashSet: LinkedHashSet<Int>
+    val list: List<Int>
+    val map: Map<Int, Int>
+    val mutableCollection: MutableCollection<Int>
+    val mutableList: MutableList<Int>
+    val mutableMap: MutableMap<Int, Int>
+    val mutableSet: MutableSet<Int>
+    val set: Set<Int>
 
-val abstractList: AbstractList<Int> = ArrayList()
-val abstractMap: AbstractMap<Int, Int> = HashMap()
-val abstractMutableCollection: AbstractMutableCollection<Int> = ArrayList()
-val abstractMutableList: AbstractMutableList<Int> = ArrayList()
-val abstractMutableMap: AbstractMutableMap<Int, Int> = HashMap()
-val abstractMutableSet: AbstractMutableSet<Int> = HashSet()
-val abstractSet: AbstractSet<Int> = HashSet()
-val arrayDeque: ArrayDeque<Int> = ArrayDeque()
-val arrayList: ArrayList<Int> = ArrayList()
-val collection: Collection<Int> = ArrayList()
-val hashMap: HashMap<Int, Int> = HashMap()
-val hashSet: HashSet<Int> = HashSet()
-val linkedHashMap: LinkedHashMap<Int, Int> = LinkedHashMap()
-val linkedHashSet: LinkedHashSet<Int> = LinkedHashSet()
-val linkedList: LinkedList<Int> = LinkedList()
-val list: List<Int> = ArrayList()
-val map: Map<Int, Int> = HashMap()
-val mutableCollection: MutableCollection<Int> = ArrayList()
-val mutableList: MutableList<Int> = ArrayList()
-val mutableMap: MutableMap<Int, Int> = HashMap()
-val mutableSet: MutableSet<Int> = HashSet()
-val set: Set<Int> = HashSet()
-
-val nullableAbstractCollection: AbstractCollection<Int>? = null
-val nullableAbstractIterator: AbstractIterator<Int>? = null
-val nullableAbstractList: AbstractList<Int>? = null
-val nullableAbstractMap: AbstractMap<Int, Int>? = null
-val nullableAbstractMutableCollection: AbstractMutableCollection<Int>? = null
-val nullableAbstractMutableList: AbstractMutableList<Int>? = null
-val nullableAbstractMutableMap: AbstractMutableMap<Int, Int>? = null
-val nullableAbstractMutableSet: AbstractMutableSet<Int>? = null
-val nullableAbstractSet: AbstractSet<Int>? = null
-val nullableArrayDeque: ArrayDeque<Int>? = null
-val nullableArrayList: ArrayList<Int>? = null
-val nullableCollection: Collection<Int>? = null
-val nullableHashMap: HashMap<Int, Int>? = null
-val nullableHashSet: HashSet<Int>? = null
-val nullableLinkedHashMap: LinkedHashMap<Int, Int>? = null
-val nullableLinkedHashSet: LinkedHashSet<Int>? = null
-val nullableLinkedList: LinkedList<Int>? = null
-val nullableList: List<Int>? = null
-val nullableMap: Map<Int, Int>? = null
-val nullableMutableCollection: MutableCollection<Int>? = null
-val nullableMutableList: MutableList<Int>? = null
-val nullableMutableMap: MutableMap<Int, Int>? = null
-val nullableMutableSet: MutableSet<Int>? = null
-val nullableSet: Set<Int>? = null
+    val nullableAbstractCollection: AbstractCollection<Int>?
+    val nullableAbstractIterator: AbstractIterator<Int>?
+    val nullableAbstractList: AbstractList<Int>?
+    val nullableAbstractMap: AbstractMap<Int, Int>?
+    val nullableAbstractMutableCollection: AbstractMutableCollection<Int>?
+    val nullableAbstractMutableList: AbstractMutableList<Int>?
+    val nullableAbstractMutableMap: AbstractMutableMap<Int, Int>?
+    val nullableAbstractMutableSet: AbstractMutableSet<Int>?
+    val nullableAbstractSet: AbstractSet<Int>?
+    val nullableArrayDeque: ArrayDeque<Int>?
+    val nullableArrayList: ArrayList<Int>?
+    val nullableCollection: Collection<Int>?
+    val nullableHashMap: HashMap<Int, Int>?
+    val nullableHashSet: HashSet<Int>?
+    val nullableLinkedHashMap: LinkedHashMap<Int, Int>?
+    val nullableLinkedHashSet: LinkedHashSet<Int>?
+    val nullableList: List<Int>?
+    val nullableMap: Map<Int, Int>?
+    val nullableMutableCollection: MutableCollection<Int>?
+    val nullableMutableList: MutableList<Int>?
+    val nullableMutableMap: MutableMap<Int, Int>?
+    val nullableMutableSet: MutableSet<Int>?
+    val nullableSet: Set<Int>?
+}

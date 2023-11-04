@@ -49,7 +49,6 @@ internal interface KoKotlinTypeProviderCore :
             "HashSet",
             "LinkedHashMap",
             "LinkedHashSet",
-            "LinkedList",
             "List",
             "Map",
             "MutableCollection",

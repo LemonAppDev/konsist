@@ -1,38 +1,39 @@
-val byte: Byte = 0
-val short: Short = 0
-val int: Int = 0
-val long: Long = 0L
-val float: Float = 0.0f
-val double: Double = 0.0
-val uByte: UByte = 0u
-val uShort: UShort = 0u
-val uInt: UInt = 0u
-val uLong: ULong = 0uL
-val uByteArray: UByteArray = UByteArray(0)
-val uShortArray: UShortArray = UShortArray(0)
-val uIntArray: UIntArray = UIntArray(0)
-val uLongArray: ULongArray = ULongArray(0)
-val boolean: Boolean = false
-val char: Char = '\u0000'
-val string: String = ""
-val array: Array<Any> = arrayOf()
+interface CollectionsInterface {
+    val byte: Byte
+    val short: Short
+    val int: Int
+    val long: Long
+    val float: Float
+    val double: Double
+    val uByte: UByte
+    val uShort: UShort
+    val uInt: UInt
+    val uLong: ULong
+    val uByteArray: UByteArray
+    val uShortArray: UShortArray
+    val uIntArray: UIntArray
+    val uLongArray: ULongArray
+    val boolean: Boolean
+    val char: Char
+    val string: String
+    val array: Array<Any>
 
-
-val nullableByte: Byte? = null
-val nullableShort: Short? = null
-val nullableInt: Int? = null
-val nullableLong: Long? = null
-val nullableFloat: Float? = null
-val nullableDouble: Double? = null
-val nullableUByte: UByte? = null
-val nullableUShort: UShort? = null
-val nullableUInt: UInt? = null
-val nullableULong: ULong? = null
-val nullableUByteArray: UByteArray? = null
-val nullableUShortArray: UShortArray? = null
-val nullableUIntArray: UIntArray? = null
-val nullableULongArray: ULongArray? = null
-val nullableBoolean: Boolean? = null
-val nullableChar: Char? = null
-val nullableString: String? = null
-val nullableArray: Array? = null
+    val nullableByte: Byte?
+    val nullableShort: Short?
+    val nullableInt: Int?
+    val nullableLong: Long?
+    val nullableFloat: Float?
+    val nullableDouble: Double?
+    val nullableUByte: UByte?
+    val nullableUShort: UShort?
+    val nullableUInt: UInt?
+    val nullableULong: ULong?
+    val nullableUByteArray: UByteArray?
+    val nullableUShortArray: UShortArray?
+    val nullableUIntArray: UIntArray?
+    val nullableULongArray: ULongArray?
+    val nullableBoolean: Boolean?
+    val nullableChar: Char?
+    val nullableString: String?
+    val nullableArray: Array?
+}
