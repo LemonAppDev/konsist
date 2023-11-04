@@ -1,4 +1,4 @@
-import com.lemonappdev.konsist.testdata.SampleClass
+import com.lemonappdev.konsist.testdata.SampleType
 
-val sampleClass1: SampleClass = SampleClass()
-val sampleClass2: SampleClass? = null
+val sampleType1: SampleType = SampleType()
+val sampleType2: SampleType? = null

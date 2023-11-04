@@ -8,6 +8,7 @@ interface CollectionsInterface {
     val abstractSet: AbstractSet<Int>
     val arrayDeque: ArrayDeque<Int>
     val arrayList: ArrayList<Int>
+    val array: Array<Int>
     val collection: Collection<Int>
     val hashMap: HashMap<Int, Int>
     val hashSet: HashSet<Int>
@@ -32,6 +33,7 @@ interface CollectionsInterface {
     val nullableAbstractSet: AbstractSet<Int>?
     val nullableArrayDeque: ArrayDeque<Int>?
     val nullableArrayList: ArrayList<Int>?
+    val nullableArray: Array<Int>?
     val nullableCollection: Collection<Int>?
     val nullableHashMap: HashMap<Int, Int>?
     val nullableHashSet: HashSet<Int>?

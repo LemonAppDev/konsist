@@ -16,7 +16,6 @@ interface CollectionsInterface {
     val boolean: Boolean
     val char: Char
     val string: String
-    val array: Array<Any>
 
     val nullableByte: Byte?
     val nullableShort: Short?
@@ -35,5 +34,4 @@ interface CollectionsInterface {
     val nullableBoolean: Boolean?
     val nullableChar: Char?
     val nullableString: String?
-    val nullableArray: Array?
 }
