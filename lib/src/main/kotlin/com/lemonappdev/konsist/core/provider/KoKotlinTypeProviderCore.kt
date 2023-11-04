@@ -69,7 +69,7 @@ internal interface KoKotlinTypeProviderCore :
         get() = if (isAlias) {
             false
         } else {
-            val rawSourceType = baseSourceType.replace("?", "")
+            val rawSourceType = bareSourceType.replace("?", "")
             kotlinBasicTypes.any { it == rawSourceType }
         }
 
@@ -77,7 +77,7 @@ internal interface KoKotlinTypeProviderCore :
         get() = if (isAlias) {
             false
         } else {
-            val rawSourceType = baseSourceType.replace("?", "")
+            val rawSourceType = bareSourceType.replace("?", "")
             kotlinCollectionTypes.any { it == rawSourceType }
         }
 }

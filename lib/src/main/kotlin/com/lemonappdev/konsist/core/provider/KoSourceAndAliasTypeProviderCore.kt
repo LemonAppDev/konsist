@@ -33,7 +33,7 @@ internal interface KoSourceAndAliasTypeProviderCore : KoSourceAndAliasTypeProvid
             name
         }
 
-    override val baseSourceType: String
+    override val bareSourceType: String
         get() = sourceType
             .split("<")
             .first()
