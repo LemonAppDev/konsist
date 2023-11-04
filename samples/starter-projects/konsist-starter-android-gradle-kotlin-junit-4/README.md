@@ -8,7 +8,7 @@ and [Junit 4](https://junit.org/junit4/).
 Other samples are located [here](..).
 
 Konsist tests are located in inside `konsistTest` module:
-- [SampleKonsistTest.kt](konsistTest/src/test/java/com/sample/SampleKonsistTest.kt) - single test for each Konsist check
+- [SampleKonsistTest.kt](konsistTest/src/test/kotlin/com/sample/SampleKonsistTest.kt) - single test for each Konsist check
 
 To run tests use IDE UI or run gradle commands:
 - `./gradlew konsistTest:test --rerun-tasks` - run tests in `konsistTest` module
