@@ -204,16 +204,17 @@ fun <T : KoParentProvider> List<T>.withSomeParentsOf(kClass: KClass<*>, vararg k
 @Deprecated("Will be removed in v1.0.0.", ReplaceWith("withoutParentOf(*kClasses"))
 fun <T : KoParentProvider> List<T>.withoutSomeParentsOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
-        it.parents.none { parent -> parent.name == kClass.simpleName } &&
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass ->
-                    it
-                        .parents
-                        .none { parent -> parent.name == kClass.simpleName }
-                }
-            } else {
-                true
+        val missesAtLeastOneParent = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass ->
+                it
+                    .parents
+                    .none { parent -> parent.name == kClass.simpleName }
             }
+        } else {
+            true
+        }
+
+        it.parents.none { parent -> parent.name == kClass.simpleName } && missesAtLeastOneParent
     }
 
 /**
@@ -273,9 +274,11 @@ fun <T : KoParentProvider> List<T>.withoutAllParents(name: String, vararg names:
  */
 @Deprecated("Will be removed in v1.0.0.", ReplaceWith("withoutParentNamed(*names"))
 fun <T : KoParentProvider> List<T>.withoutSomeParents(name: String, vararg names: String): List<T> = filter {
-    !it.hasParents(name) && if (names.isNotEmpty()) {
+    val hasNoMatchingParents = if (names.isNotEmpty()) {
         names.any { name -> !it.hasParents(name) }
     } else {
         true
     }
+
+    !it.hasParents(name) && hasNoMatchingParents
 }

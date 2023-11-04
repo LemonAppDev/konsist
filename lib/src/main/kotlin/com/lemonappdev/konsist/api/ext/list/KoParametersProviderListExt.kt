@@ -183,9 +183,11 @@ fun <T : KoParametersProvider> List<T>.withoutAllParameters(name: String, vararg
  */
 @Deprecated("Will be removed in v1.0.0.", ReplaceWith("withoutParameterNamed(*names"))
 fun <T : KoParametersProvider> List<T>.withoutSomeParameters(name: String, vararg names: String): List<T> = filter {
-    !it.hasParameterNamed(name) && if (names.isNotEmpty()) {
+    val missesAtLeastOneParameter = if (names.isNotEmpty()) {
         names.any { name -> !it.hasParameterNamed(name) }
     } else {
         true
     }
+
+    !it.hasParameterNamed(name) && missesAtLeastOneParameter
 }
