@@ -16,11 +16,12 @@ internal interface KoReceiverTypeProviderCore :
     val ktCallableDeclaration: KtCallableDeclaration
 
     override val receiverType: KoTypeDeclaration?
-        get() = ReceiverUtil.getReceiverType(
-            getTypeReferences(),
-            ktCallableDeclaration.isExtensionDeclaration(),
-            this,
-        )
+        get() =
+            ReceiverUtil.getReceiverType(
+                getTypeReferences(),
+                ktCallableDeclaration.isExtensionDeclaration(),
+                this,
+            )
 
     @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasReceiverType { it.name == name }"))
     override fun hasReceiverType(name: String): Boolean = ReceiverUtil.hasReceiverType(receiverType, name)
@@ -33,7 +34,8 @@ internal interface KoReceiverTypeProviderCore :
 
     override fun hasReceiverTypeOf(kClass: KClass<*>): Boolean = kClass.simpleName == receiverType?.name
 
-    private fun getTypeReferences(): List<KtTypeReference> = ktCallableDeclaration
-        .children
-        .filterIsInstance<KtTypeReference>()
+    private fun getTypeReferences(): List<KtTypeReference> =
+        ktCallableDeclaration
+            .children
+            .filterIsInstance<KtTypeReference>()
 }

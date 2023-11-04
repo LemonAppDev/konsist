@@ -4,9 +4,11 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.verify.assertTrue
+import org.junit.jupiter.api.Test
 
 class ArchitectureSnippets {
-    fun `2 layer architecture has correct dependencies`() {
+    @Test
+    fun `two layer architecture has correct dependencies`() {
         Konsist
             .scopeFromProject()
             .assertArchitecture {
@@ -24,6 +26,7 @@ class ArchitectureSnippets {
             }
     }
 
+    @Test
     fun `every file in module reside in module specific package`() {
         Konsist
             .scopeFromProject()
@@ -31,6 +34,7 @@ class ArchitectureSnippets {
             .assertTrue { it.packagee?.fullyQualifiedName?.startsWith(it.moduleName) }
     }
 
+    @Test
     fun `files reside in package that is derived from module name`() {
         Konsist.scopeFromProduction()
             .files
@@ -40,10 +44,11 @@ class ArchitectureSnippets {
                 feature_meal_planner -> mealplanner
                 feature_caloric_calculator -> caloriccalculator
                  */
-                val featurePackageName = it
-                    .moduleName
-                    .removePrefix("feature_")
-                    .replace("_", "")
+                val featurePackageName =
+                    it
+                        .moduleName
+                        .removePrefix("feature_")
+                        .replace("_", "")
 
                 it.hasPackage("com.myapp.$featurePackageName..")
             }

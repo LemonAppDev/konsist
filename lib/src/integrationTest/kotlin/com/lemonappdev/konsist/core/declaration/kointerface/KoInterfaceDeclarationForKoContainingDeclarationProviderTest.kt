@@ -11,9 +11,10 @@ class KoInterfaceDeclarationForKoContainingDeclarationProviderTest {
     @Test
     fun `interface-with-file-parent-declaration`() {
         // given
-        val sut = getSnippetFile("interface-with-file-parent-declaration")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-with-file-parent-declaration")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -25,9 +26,10 @@ class KoInterfaceDeclarationForKoContainingDeclarationProviderTest {
     @Test
     fun `interface-with-parent-declaration`() {
         // given
-        val sut = getSnippetFile("interface-with-parent-declaration")
-            .interfaces(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("interface-with-parent-declaration")
+                .interfaces(includeNested = true)
+                .first()
 
         // then
         assertSoftly(sut) {

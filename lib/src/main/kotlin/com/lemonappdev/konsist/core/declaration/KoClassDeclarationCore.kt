@@ -109,7 +109,6 @@ internal class KoClassDeclarationCore private constructor(
     KoAbstractModifierProviderCore,
     KoOpenModifierProviderCore,
     KoFinalModifierProviderCore {
-
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktClass }
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktClass }
@@ -125,8 +124,9 @@ internal class KoClassDeclarationCore private constructor(
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
-        .getKoDeclarations(ktClass, includeNested, includeLocal, this)
+    ): List<KoBaseDeclaration> =
+        KoDeclarationProviderCoreUtil
+            .getKoDeclarations(ktClass, includeNested, includeLocal, this)
 
     override fun toString(): String = name
 

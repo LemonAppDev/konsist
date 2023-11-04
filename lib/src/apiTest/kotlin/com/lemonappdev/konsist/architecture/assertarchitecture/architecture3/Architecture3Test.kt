@@ -14,9 +14,10 @@ class Architecture3Test {
             "Presentation",
             "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.presentation..",
         )
-    private val scope = Konsist.scopeFromDirectory(
-        "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture3/project",
-    )
+    private val scope =
+        Konsist.scopeFromDirectory(
+            "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture3/project",
+        )
 
     @Test
     fun `passes when dependency is set that presentation and domain layers are dependent on each other (scope)`() {
@@ -42,10 +43,11 @@ class Architecture3Test {
     @Test
     fun `passes when dependency is set that two layers are dependent on each other and architecture is passed as parameter (scope)`() {
         // given
-        val architecture = architecture {
-            domain.dependsOn(presentation)
-            presentation.dependsOn(domain)
-        }
+        val architecture =
+            architecture {
+                domain.dependsOn(presentation)
+                presentation.dependsOn(domain)
+            }
 
         // then
         scope.assertArchitecture(architecture)
@@ -54,10 +56,11 @@ class Architecture3Test {
     @Test
     fun `passes when dependency is set that two layers are dependent on each other and architecture is passed as parameter (files)`() {
         // given
-        val architecture = architecture {
-            domain.dependsOn(presentation)
-            presentation.dependsOn(domain)
-        }
+        val architecture =
+            architecture {
+                domain.dependsOn(presentation)
+                presentation.dependsOn(domain)
+            }
 
         // then
         scope

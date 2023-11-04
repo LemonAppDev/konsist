@@ -15,15 +15,18 @@ class KoNullableTypeProviderListExtTest {
         // given
         val type1: KoTypeDeclaration = mockk()
         val type2: KoTypeDeclaration = mockk()
-        val declaration1: KoNullableTypeProvider = mockk {
-            every { type } returns type1
-        }
-        val declaration2: KoNullableTypeProvider = mockk {
-            every { type } returns type2
-        }
-        val declaration3: KoNullableTypeProvider = mockk {
-            every { type } returns null
-        }
+        val declaration1: KoNullableTypeProvider =
+            mockk {
+                every { type } returns type1
+            }
+        val declaration2: KoNullableTypeProvider =
+            mockk {
+                every { type } returns type2
+            }
+        val declaration3: KoNullableTypeProvider =
+            mockk {
+                every { type } returns null
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -36,12 +39,14 @@ class KoNullableTypeProviderListExtTest {
     @Test
     fun `withType() returns declaration with any type`() {
         // given
-        val declaration1: KoNullableTypeProvider = mockk {
-            every { hasType() } returns true
-        }
-        val declaration2: KoNullableTypeProvider = mockk {
-            every { hasType() } returns false
-        }
+        val declaration1: KoNullableTypeProvider =
+            mockk {
+                every { hasType() } returns true
+            }
+        val declaration2: KoNullableTypeProvider =
+            mockk {
+                every { hasType() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -56,21 +61,26 @@ class KoNullableTypeProviderListExtTest {
         // given
         val name1 = "name1"
         val name2 = "name2"
-        val type1: KoTypeDeclaration = mockk {
-            every { name } returns name1
-        }
-        val type2: KoTypeDeclaration = mockk {
-            every { name } returns name2
-        }
-        val declaration1: KoNullableTypeProvider = mockk {
-            every { type } returns type1
-        }
-        val declaration2: KoNullableTypeProvider = mockk {
-            every { type } returns type2
-        }
-        val declaration3: KoNullableTypeProvider = mockk {
-            every { type } returns null
-        }
+        val type1: KoTypeDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val type2: KoTypeDeclaration =
+            mockk {
+                every { name } returns name2
+            }
+        val declaration1: KoNullableTypeProvider =
+            mockk {
+                every { type } returns type1
+            }
+        val declaration2: KoNullableTypeProvider =
+            mockk {
+                every { type } returns type2
+            }
+        val declaration3: KoNullableTypeProvider =
+            mockk {
+                every { type } returns null
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -85,18 +95,21 @@ class KoNullableTypeProviderListExtTest {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
-        val declaration1: KoNullableTypeProvider = mockk {
-            every { hasType(typeName1) } returns true
-            every { hasType(typeName2) } returns false
-        }
-        val declaration2: KoNullableTypeProvider = mockk {
-            every { hasType(typeName1) } returns false
-            every { hasType(typeName2) } returns true
-        }
-        val declaration3: KoNullableTypeProvider = mockk {
-            every { hasType(typeName1) } returns false
-            every { hasType(typeName2) } returns false
-        }
+        val declaration1: KoNullableTypeProvider =
+            mockk {
+                every { hasType(typeName1) } returns true
+                every { hasType(typeName2) } returns false
+            }
+        val declaration2: KoNullableTypeProvider =
+            mockk {
+                every { hasType(typeName1) } returns false
+                every { hasType(typeName2) } returns true
+            }
+        val declaration3: KoNullableTypeProvider =
+            mockk {
+                every { hasType(typeName1) } returns false
+                every { hasType(typeName2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -109,12 +122,14 @@ class KoNullableTypeProviderListExtTest {
     @Test
     fun `withoutType() returns declaration without any type`() {
         // given
-        val declaration1: KoNullableTypeProvider = mockk {
-            every { hasType() } returns true
-        }
-        val declaration2: KoNullableTypeProvider = mockk {
-            every { hasType() } returns false
-        }
+        val declaration1: KoNullableTypeProvider =
+            mockk {
+                every { hasType() } returns true
+            }
+        val declaration2: KoNullableTypeProvider =
+            mockk {
+                every { hasType() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -129,21 +144,26 @@ class KoNullableTypeProviderListExtTest {
         // given
         val name1 = "name1"
         val name2 = "name2"
-        val type1: KoTypeDeclaration = mockk {
-            every { name } returns name1
-        }
-        val type2: KoTypeDeclaration = mockk {
-            every { name } returns name2
-        }
-        val declaration1: KoNullableTypeProvider = mockk {
-            every { type } returns type1
-        }
-        val declaration2: KoNullableTypeProvider = mockk {
-            every { type } returns type2
-        }
-        val declaration3: KoNullableTypeProvider = mockk {
-            every { type } returns null
-        }
+        val type1: KoTypeDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val type2: KoTypeDeclaration =
+            mockk {
+                every { name } returns name2
+            }
+        val declaration1: KoNullableTypeProvider =
+            mockk {
+                every { type } returns type1
+            }
+        val declaration2: KoNullableTypeProvider =
+            mockk {
+                every { type } returns type2
+            }
+        val declaration3: KoNullableTypeProvider =
+            mockk {
+                every { type } returns null
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -158,18 +178,21 @@ class KoNullableTypeProviderListExtTest {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
-        val declaration1: KoNullableTypeProvider = mockk {
-            every { hasType(typeName1) } returns true
-            every { hasType(typeName2) } returns false
-        }
-        val declaration2: KoNullableTypeProvider = mockk {
-            every { hasType(typeName1) } returns false
-            every { hasType(typeName2) } returns true
-        }
-        val declaration3: KoNullableTypeProvider = mockk {
-            every { hasType(typeName1) } returns false
-            every { hasType(typeName2) } returns false
-        }
+        val declaration1: KoNullableTypeProvider =
+            mockk {
+                every { hasType(typeName1) } returns true
+                every { hasType(typeName2) } returns false
+            }
+        val declaration2: KoNullableTypeProvider =
+            mockk {
+                every { hasType(typeName1) } returns false
+                every { hasType(typeName2) } returns true
+            }
+        val declaration3: KoNullableTypeProvider =
+            mockk {
+                every { hasType(typeName1) } returns false
+                every { hasType(typeName2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -182,12 +205,14 @@ class KoNullableTypeProviderListExtTest {
     @Test
     fun `withTypeOf(KClass) returns declaration with given return type`() {
         // given
-        val declaration1: KoNullableTypeProvider = mockk {
-            every { hasTypeOf(SampleType1::class) } returns true
-        }
-        val declaration2: KoNullableTypeProvider = mockk {
-            every { hasTypeOf(SampleType1::class) } returns false
-        }
+        val declaration1: KoNullableTypeProvider =
+            mockk {
+                every { hasTypeOf(SampleType1::class) } returns true
+            }
+        val declaration2: KoNullableTypeProvider =
+            mockk {
+                every { hasTypeOf(SampleType1::class) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -200,18 +225,21 @@ class KoNullableTypeProviderListExtTest {
     @Test
     fun `withTypeOf(KClass) returns declarations with one of given return types`() {
         // given
-        val declaration1: KoNullableTypeProvider = mockk {
-            every { hasTypeOf(SampleType1::class) } returns true
-            every { hasTypeOf(SampleType2::class) } returns false
-        }
-        val declaration2: KoNullableTypeProvider = mockk {
-            every { hasTypeOf(SampleType1::class) } returns false
-            every { hasTypeOf(SampleType2::class) } returns true
-        }
-        val declaration3: KoNullableTypeProvider = mockk {
-            every { hasTypeOf(SampleType1::class) } returns false
-            every { hasTypeOf(SampleType2::class) } returns false
-        }
+        val declaration1: KoNullableTypeProvider =
+            mockk {
+                every { hasTypeOf(SampleType1::class) } returns true
+                every { hasTypeOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoNullableTypeProvider =
+            mockk {
+                every { hasTypeOf(SampleType1::class) } returns false
+                every { hasTypeOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoNullableTypeProvider =
+            mockk {
+                every { hasTypeOf(SampleType1::class) } returns false
+                every { hasTypeOf(SampleType2::class) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -224,12 +252,14 @@ class KoNullableTypeProviderListExtTest {
     @Test
     fun `withoutTypeOf(KClass) returns declaration without given return type`() {
         // given
-        val declaration1: KoNullableTypeProvider = mockk {
-            every { hasTypeOf(SampleType1::class) } returns true
-        }
-        val declaration2: KoNullableTypeProvider = mockk {
-            every { hasTypeOf(SampleType1::class) } returns false
-        }
+        val declaration1: KoNullableTypeProvider =
+            mockk {
+                every { hasTypeOf(SampleType1::class) } returns true
+            }
+        val declaration2: KoNullableTypeProvider =
+            mockk {
+                every { hasTypeOf(SampleType1::class) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -242,18 +272,21 @@ class KoNullableTypeProviderListExtTest {
     @Test
     fun `withoutTypeOf(KClass) returns declaration without any of given return types`() {
         // given
-        val declaration1: KoNullableTypeProvider = mockk {
-            every { hasTypeOf(SampleType1::class) } returns true
-            every { hasTypeOf(SampleType2::class) } returns false
-        }
-        val declaration2: KoNullableTypeProvider = mockk {
-            every { hasTypeOf(SampleType1::class) } returns false
-            every { hasTypeOf(SampleType2::class) } returns true
-        }
-        val declaration3: KoNullableTypeProvider = mockk {
-            every { hasTypeOf(SampleType1::class) } returns false
-            every { hasTypeOf(SampleType2::class) } returns false
-        }
+        val declaration1: KoNullableTypeProvider =
+            mockk {
+                every { hasTypeOf(SampleType1::class) } returns true
+                every { hasTypeOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoNullableTypeProvider =
+            mockk {
+                every { hasTypeOf(SampleType1::class) } returns false
+                every { hasTypeOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoNullableTypeProvider =
+            mockk {
+                every { hasTypeOf(SampleType1::class) } returns false
+                every { hasTypeOf(SampleType2::class) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when

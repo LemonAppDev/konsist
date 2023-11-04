@@ -11,14 +11,15 @@ object ReceiverUtil {
         isExtension: Boolean,
         parentDeclaration: KoContainingDeclarationProvider,
     ): KoTypeDeclaration? {
-        val type = if (isExtension && types.size > 1) {
-            // We choose last because when we have extension the first one is receiver and the second one is (return) type.
-            types.last()
-        } else if (!isExtension) {
-            types.firstOrNull()
-        } else {
-            null
-        }
+        val type =
+            if (isExtension && types.size > 1) {
+                // We choose last because when we have extension the first one is receiver and the second one is (return) type.
+                types.last()
+            } else if (!isExtension) {
+                types.firstOrNull()
+            } else {
+                null
+            }
 
         return type?.let { KoTypeDeclarationCore.getInstance(it, parentDeclaration) }
     }
@@ -31,11 +32,12 @@ object ReceiverUtil {
         isExtension: Boolean,
         parentDeclaration: KoContainingDeclarationProvider,
     ): KoTypeDeclaration? {
-        val type = if (isExtension) {
-            types.first()
-        } else {
-            null
-        }
+        val type =
+            if (isExtension) {
+                types.first()
+            } else {
+                null
+            }
 
         return type?.let { KoTypeDeclarationCore.getInstance(type, parentDeclaration) }
     }
@@ -43,8 +45,12 @@ object ReceiverUtil {
     /*
     1.0.0 CleanUp - When we remove KoReceiverTypeProviderCore.hasReceiverType it will be unused.
      */
-    internal fun hasReceiverType(receiverType: KoTypeDeclaration?, name: String?): Boolean = when (name) {
-        null -> receiverType != null
-        else -> receiverType?.name == name
-    }
+    internal fun hasReceiverType(
+        receiverType: KoTypeDeclaration?,
+        name: String?,
+    ): Boolean =
+        when (name) {
+            null -> receiverType != null
+            else -> receiverType?.name == name
+        }
 }

@@ -30,9 +30,13 @@ fun <T : KoArgumentProvider> List<T>.withoutArguments(): List<T> = filterNot { i
  * @param names The names of additional arguments to include.
  * @return A list containing declarations with at least one of the specified argument(s).
  */
-fun <T : KoArgumentProvider> List<T>.withArgumentNamed(name: String, vararg names: String): List<T> = filter {
-    it.hasArgumentWithName(name, *names)
-}
+fun <T : KoArgumentProvider> List<T>.withArgumentNamed(
+    name: String,
+    vararg names: String,
+): List<T> =
+    filter {
+        it.hasArgumentWithName(name, *names)
+    }
 
 /**
  * List containing declarations without any of specified arguments.
@@ -41,9 +45,13 @@ fun <T : KoArgumentProvider> List<T>.withArgumentNamed(name: String, vararg name
  * @param names The names of additional arguments to exclude.
  * @return A list containing declarations without any of specified arguments.
  */
-fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(name: String, vararg names: String): List<T> = filterNot {
-    it.hasArgumentWithName(name, *names)
-}
+fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(
+    name: String,
+    vararg names: String,
+): List<T> =
+    filterNot {
+        it.hasArgumentWithName(name, *names)
+    }
 
 /**
  * List containing declarations that have all specified arguments.
@@ -52,9 +60,13 @@ fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(name: String, vararg n
  * @param names The name(s) of the argument(s) to include.
  * @return A list containing declarations with all specified argument(s).
  */
-fun <T : KoArgumentProvider> List<T>.withAllArgumentsNamed(name: String, vararg names: String): List<T> = filter {
-    it.hasArgumentsWithAllNames(name, *names)
-}
+fun <T : KoArgumentProvider> List<T>.withAllArgumentsNamed(
+    name: String,
+    vararg names: String,
+): List<T> =
+    filter {
+        it.hasArgumentsWithAllNames(name, *names)
+    }
 
 /**
  * List containing declarations without all specified arguments.
@@ -63,9 +75,13 @@ fun <T : KoArgumentProvider> List<T>.withAllArgumentsNamed(name: String, vararg 
  * @param names The name(s) of the argument(s) to exclude.
  * @return A list containing declarations without all specified argument(s).
  */
-fun <T : KoArgumentProvider> List<T>.withoutAllArgumentsNamed(name: String, vararg names: String): List<T> = filterNot {
-    it.hasArgumentsWithAllNames(name, *names)
-}
+fun <T : KoArgumentProvider> List<T>.withoutAllArgumentsNamed(
+    name: String,
+    vararg names: String,
+): List<T> =
+    filterNot {
+        it.hasArgumentsWithAllNames(name, *names)
+    }
 
 /**
  * List containing declarations that have at least one argument satisfying the provided predicate.
@@ -73,9 +89,10 @@ fun <T : KoArgumentProvider> List<T>.withoutAllArgumentsNamed(name: String, vara
  * @param predicate A function that defines the condition to be met by an argument declaration.
  * @return A list containing declarations with at least one argument satisfying the predicate.
  */
-fun <T : KoArgumentProvider> List<T>.withArgument(predicate: (KoArgumentDeclaration) -> Boolean): List<T> = filter {
-    it.hasArgument(predicate)
-}
+fun <T : KoArgumentProvider> List<T>.withArgument(predicate: (KoArgumentDeclaration) -> Boolean): List<T> =
+    filter {
+        it.hasArgument(predicate)
+    }
 
 /**
  * List containing declarations that not have argument satisfying the provided predicate.
@@ -92,9 +109,10 @@ fun <T : KoArgumentProvider> List<T>.withoutArgument(predicate: (KoArgumentDecla
  * @param predicate A function that defines the condition to be met by all argument declarations.
  * @return A filtered list containing declarations with all arguments satisfying the predicate.
  */
-fun <T : KoArgumentProvider> List<T>.withAllArguments(predicate: (KoArgumentDeclaration) -> Boolean): List<T> = filter {
-    it.hasAllArguments(predicate)
-}
+fun <T : KoArgumentProvider> List<T>.withAllArguments(predicate: (KoArgumentDeclaration) -> Boolean): List<T> =
+    filter {
+        it.hasAllArguments(predicate)
+    }
 
 /**
  * List containing declarations that have at least one argument not satisfying the provided predicate.

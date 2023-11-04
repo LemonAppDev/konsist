@@ -39,7 +39,10 @@ interface KoParentClassProvider : KoBaseProvider {
      * @param names the names of the parent classes to check.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasParentClassWithName(name: String, vararg names: String): Boolean
+    fun hasParentClassWithName(
+        name: String,
+        vararg names: String,
+    ): Boolean
 
     /**
      * Determines whatever declaration has a parent class of the specified Kotlin class.
@@ -48,5 +51,8 @@ interface KoParentClassProvider : KoBaseProvider {
      * @param names The Kotlin class(es) representing the parent class(es) to check for.
      * @return `true` if the declaration has a parent class matching the specified KClass, `false` otherwise.
      */
-    fun hasParentClassOf(name: KClass<*>, vararg names: KClass<*>): Boolean
+    fun hasParentClassOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+    ): Boolean
 }

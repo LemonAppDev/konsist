@@ -8,9 +8,10 @@ class KoFunctionDeclarationForKoTailrecModifierProviderTest {
     @Test
     fun `function-without-tailrec-modifier`() {
         // given
-        val sut = getSnippetFile("function-without-tailrec-modifier")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-without-tailrec-modifier")
+                .functions()
+                .first()
 
         // then
         sut.hasTailrecModifier shouldBeEqualTo false
@@ -19,9 +20,10 @@ class KoFunctionDeclarationForKoTailrecModifierProviderTest {
     @Test
     fun `function-with-tailrec-modifier`() {
         // given
-        val sut = getSnippetFile("function-with-tailrec-modifier")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-with-tailrec-modifier")
+                .functions()
+                .first()
 
         // then
         sut.hasTailrecModifier shouldBeEqualTo true

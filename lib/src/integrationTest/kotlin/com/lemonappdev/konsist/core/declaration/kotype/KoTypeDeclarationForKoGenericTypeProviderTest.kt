@@ -14,10 +14,11 @@ class KoTypeDeclarationForKoGenericTypeProviderTest {
         value: Boolean,
     ) {
         // given
-        val sut = getSnippetFile(fileName)
-            .properties()
-            .first()
-            .type
+        val sut =
+            getSnippetFile(fileName)
+                .properties()
+                .first()
+                .type
 
         // then
         sut?.isGenericType shouldBeEqualTo value
@@ -29,9 +30,10 @@ class KoTypeDeclarationForKoGenericTypeProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("generic-type", true),
-            arguments("not-generic-type", false),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("generic-type", true),
+                arguments("not-generic-type", false),
+            )
     }
 }

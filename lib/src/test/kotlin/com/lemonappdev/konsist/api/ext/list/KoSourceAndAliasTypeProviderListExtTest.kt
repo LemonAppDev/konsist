@@ -17,12 +17,14 @@ class KoSourceAndAliasTypeProviderListExtTest {
         // given
         val sourceType1 = "SampleClass1"
         val sourceType2 = "SampleClass2"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { sourceType } returns sourceType1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { sourceType } returns sourceType2
-        }
+        val declaration1: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { sourceType } returns sourceType1
+            }
+        val declaration2: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { sourceType } returns sourceType2
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -38,15 +40,18 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sourceType1 = "SampleClass1"
         val sourceType2 = "SampleClass2"
         val sourceType3 = "SampleClass3"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { sourceType } returns sourceType1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { sourceType } returns sourceType2
-        }
-        val declaration3: KoSourceAndAliasTypeProvider = mockk {
-            every { sourceType } returns sourceType3
-        }
+        val declaration1: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { sourceType } returns sourceType1
+            }
+        val declaration2: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { sourceType } returns sourceType2
+            }
+        val declaration3: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { sourceType } returns sourceType3
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -61,12 +66,14 @@ class KoSourceAndAliasTypeProviderListExtTest {
         // given
         val sourceType1 = "SampleClass1"
         val sourceType2 = "SampleClass2"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { sourceType } returns sourceType1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { sourceType } returns sourceType2
-        }
+        val declaration1: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { sourceType } returns sourceType1
+            }
+        val declaration2: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { sourceType } returns sourceType2
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -82,15 +89,18 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sourceType1 = "SampleClass1"
         val sourceType2 = "SampleClass2"
         val sourceType3 = "SampleClass3"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { sourceType } returns sourceType1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { sourceType } returns sourceType2
-        }
-        val declaration3: KoSourceAndAliasTypeProvider = mockk {
-            every { sourceType } returns sourceType3
-        }
+        val declaration1: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { sourceType } returns sourceType1
+            }
+        val declaration2: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { sourceType } returns sourceType2
+            }
+        val declaration3: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { sourceType } returns sourceType3
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -105,12 +115,14 @@ class KoSourceAndAliasTypeProviderListExtTest {
         // given
         val sourceType1 = "SampleClass1"
         val sourceType2 = "SampleClass2"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { sourceType } returns sourceType1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { sourceType } returns sourceType2
-        }
+        val declaration1: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { sourceType } returns sourceType1
+            }
+        val declaration2: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { sourceType } returns sourceType2
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -126,15 +138,18 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sourceType1 = "SampleClass1"
         val sourceType2 = "SampleClass2"
         val sourceType3 = "SampleClass3"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { sourceType } returns sourceType1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { sourceType } returns sourceType2
-        }
-        val declaration3: KoSourceAndAliasTypeProvider = mockk {
-            every { sourceType } returns sourceType3
-        }
+        val declaration1: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { sourceType } returns sourceType1
+            }
+        val declaration2: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { sourceType } returns sourceType2
+            }
+        val declaration3: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { sourceType } returns sourceType3
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -149,12 +164,14 @@ class KoSourceAndAliasTypeProviderListExtTest {
         // given
         val sourceType1 = "SampleClass1"
         val sourceType2 = "SampleClass2"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { sourceType } returns sourceType1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { sourceType } returns sourceType2
-        }
+        val declaration1: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { sourceType } returns sourceType1
+            }
+        val declaration2: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { sourceType } returns sourceType2
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -170,15 +187,18 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sourceType1 = "SampleClass1"
         val sourceType2 = "SampleClass2"
         val sourceType3 = "SampleClass3"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { sourceType } returns sourceType1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { sourceType } returns sourceType2
-        }
-        val declaration3: KoSourceAndAliasTypeProvider = mockk {
-            every { sourceType } returns sourceType3
-        }
+        val declaration1: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { sourceType } returns sourceType1
+            }
+        val declaration2: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { sourceType } returns sourceType2
+            }
+        val declaration3: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { sourceType } returns sourceType3
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -193,12 +213,14 @@ class KoSourceAndAliasTypeProviderListExtTest {
         // given
         val baseSourceType1 = "SampleClass1"
         val baseSourceType2 = "SampleClass2"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { baseSourceType } returns baseSourceType1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { baseSourceType } returns baseSourceType2
-        }
+        val declaration1: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { baseSourceType } returns baseSourceType1
+            }
+        val declaration2: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { baseSourceType } returns baseSourceType2
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -214,15 +236,18 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val baseSourceType1 = "SampleClass1"
         val baseSourceType2 = "SampleClass2"
         val baseSourceType3 = "SampleClass3"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { baseSourceType } returns baseSourceType1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { baseSourceType } returns baseSourceType2
-        }
-        val declaration3: KoSourceAndAliasTypeProvider = mockk {
-            every { baseSourceType } returns baseSourceType3
-        }
+        val declaration1: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { baseSourceType } returns baseSourceType1
+            }
+        val declaration2: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { baseSourceType } returns baseSourceType2
+            }
+        val declaration3: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { baseSourceType } returns baseSourceType3
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -237,12 +262,14 @@ class KoSourceAndAliasTypeProviderListExtTest {
         // given
         val baseSourceType1 = "SampleClass1"
         val baseSourceType2 = "SampleClass2"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { baseSourceType } returns baseSourceType1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { baseSourceType } returns baseSourceType2
-        }
+        val declaration1: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { baseSourceType } returns baseSourceType1
+            }
+        val declaration2: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { baseSourceType } returns baseSourceType2
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -258,15 +285,18 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val baseSourceType1 = "SampleClass1"
         val baseSourceType2 = "SampleClass2"
         val baseSourceType3 = "SampleClass3"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { baseSourceType } returns baseSourceType1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { baseSourceType } returns baseSourceType2
-        }
-        val declaration3: KoSourceAndAliasTypeProvider = mockk {
-            every { baseSourceType } returns baseSourceType3
-        }
+        val declaration1: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { baseSourceType } returns baseSourceType1
+            }
+        val declaration2: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { baseSourceType } returns baseSourceType2
+            }
+        val declaration3: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { baseSourceType } returns baseSourceType3
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -281,12 +311,14 @@ class KoSourceAndAliasTypeProviderListExtTest {
         // given
         val baseSourceType1 = "SampleClass1"
         val baseSourceType2 = "SampleClass2"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { baseSourceType } returns baseSourceType1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { baseSourceType } returns baseSourceType2
-        }
+        val declaration1: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { baseSourceType } returns baseSourceType1
+            }
+        val declaration2: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { baseSourceType } returns baseSourceType2
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -302,15 +334,18 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val baseSourceType1 = "SampleClass1"
         val baseSourceType2 = "SampleClass2"
         val baseSourceType3 = "SampleClass3"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { baseSourceType } returns baseSourceType1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { baseSourceType } returns baseSourceType2
-        }
-        val declaration3: KoSourceAndAliasTypeProvider = mockk {
-            every { baseSourceType } returns baseSourceType3
-        }
+        val declaration1: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { baseSourceType } returns baseSourceType1
+            }
+        val declaration2: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { baseSourceType } returns baseSourceType2
+            }
+        val declaration3: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { baseSourceType } returns baseSourceType3
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -325,12 +360,14 @@ class KoSourceAndAliasTypeProviderListExtTest {
         // given
         val baseSourceType1 = "SampleClass1"
         val baseSourceType2 = "SampleClass2"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { baseSourceType } returns baseSourceType1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { baseSourceType } returns baseSourceType2
-        }
+        val declaration1: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { baseSourceType } returns baseSourceType1
+            }
+        val declaration2: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { baseSourceType } returns baseSourceType2
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -346,15 +383,18 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val baseSourceType1 = "SampleClass1"
         val baseSourceType2 = "SampleClass2"
         val baseSourceType3 = "SampleClass3"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { baseSourceType } returns baseSourceType1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { baseSourceType } returns baseSourceType2
-        }
-        val declaration3: KoSourceAndAliasTypeProvider = mockk {
-            every { baseSourceType } returns baseSourceType3
-        }
+        val declaration1: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { baseSourceType } returns baseSourceType1
+            }
+        val declaration2: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { baseSourceType } returns baseSourceType2
+            }
+        val declaration3: KoSourceAndAliasTypeProvider =
+            mockk {
+                every { baseSourceType } returns baseSourceType3
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -367,12 +407,14 @@ class KoSourceAndAliasTypeProviderListExtTest {
     @Test
     fun `withAliasType() returns declaration with any alias type`() {
         // given
-        val declaration1: KoTypeDeclarationCore = mockk {
-            every { isAlias } returns true
-        }
-        val declaration2: KoTypeDeclarationCore = mockk {
-            every { isAlias } returns false
-        }
+        val declaration1: KoTypeDeclarationCore =
+            mockk {
+                every { isAlias } returns true
+            }
+        val declaration2: KoTypeDeclarationCore =
+            mockk {
+                every { isAlias } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -385,12 +427,14 @@ class KoSourceAndAliasTypeProviderListExtTest {
     @Test
     fun `withoutAliasType() returns declaration without any alias type`() {
         // given
-        val declaration1: KoTypeDeclarationCore = mockk {
-            every { isAlias } returns true
-        }
-        val declaration2: KoTypeDeclarationCore = mockk {
-            every { isAlias } returns false
-        }
+        val declaration1: KoTypeDeclarationCore =
+            mockk {
+                every { isAlias } returns true
+            }
+        val declaration2: KoTypeDeclarationCore =
+            mockk {
+                every { isAlias } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -406,15 +450,18 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val importAliasName1 = "SampleAliasType1"
         val importAliasName2 = "SampleAliasType2"
         val importAliasName3 = "SampleAliasType3"
-        val declaration1: KoTypeDeclarationCore = mockk {
-            every { aliasType } returns importAliasName1
-        }
-        val declaration2: KoTypeDeclarationCore = mockk {
-            every { aliasType } returns importAliasName2
-        }
-        val declaration3: KoTypeDeclarationCore = mockk {
-            every { aliasType } returns importAliasName3
-        }
+        val declaration1: KoTypeDeclarationCore =
+            mockk {
+                every { aliasType } returns importAliasName1
+            }
+        val declaration2: KoTypeDeclarationCore =
+            mockk {
+                every { aliasType } returns importAliasName2
+            }
+        val declaration3: KoTypeDeclarationCore =
+            mockk {
+                every { aliasType } returns importAliasName3
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -430,15 +477,18 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val importAliasName1 = "SampleAliasType1"
         val importAliasName2 = "SampleAliasType2"
         val importAliasName3 = "SampleAliasType3"
-        val declaration1: KoTypeDeclarationCore = mockk {
-            every { aliasType } returns importAliasName1
-        }
-        val declaration2: KoTypeDeclarationCore = mockk {
-            every { aliasType } returns importAliasName2
-        }
-        val declaration3: KoTypeDeclarationCore = mockk {
-            every { aliasType } returns importAliasName3
-        }
+        val declaration1: KoTypeDeclarationCore =
+            mockk {
+                every { aliasType } returns importAliasName1
+            }
+        val declaration2: KoTypeDeclarationCore =
+            mockk {
+                every { aliasType } returns importAliasName2
+            }
+        val declaration3: KoTypeDeclarationCore =
+            mockk {
+                every { aliasType } returns importAliasName3
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -453,18 +503,21 @@ class KoSourceAndAliasTypeProviderListExtTest {
         // given
         val sourceType1 = "SampleType1"
         val sourceType2 = "SampleType2"
-        val declaration1: KoTypeDeclarationCore = mockk {
-            every { isAlias } returns true
-            every { sourceType } returns sourceType1
-        }
-        val declaration2: KoTypeDeclarationCore = mockk {
-            every { isAlias } returns true
-            every { sourceType } returns sourceType2
-        }
-        val declaration3: KoTypeDeclarationCore = mockk {
-            every { isAlias } returns false
-            every { sourceType } returns sourceType1
-        }
+        val declaration1: KoTypeDeclarationCore =
+            mockk {
+                every { isAlias } returns true
+                every { sourceType } returns sourceType1
+            }
+        val declaration2: KoTypeDeclarationCore =
+            mockk {
+                every { isAlias } returns true
+                every { sourceType } returns sourceType2
+            }
+        val declaration3: KoTypeDeclarationCore =
+            mockk {
+                every { isAlias } returns false
+                every { sourceType } returns sourceType1
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -480,22 +533,26 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sourceType1 = "SampleType1"
         val sourceType2 = "SampleType2"
         val sourceType3 = "SampleType3"
-        val declaration1: KoTypeDeclarationCore = mockk {
-            every { isAlias } returns true
-            every { sourceType } returns sourceType1
-        }
-        val declaration2: KoTypeDeclarationCore = mockk {
-            every { isAlias } returns true
-            every { sourceType } returns sourceType2
-        }
-        val declaration3: KoTypeDeclarationCore = mockk {
-            every { isAlias } returns false
-            every { sourceType } returns sourceType1
-        }
-        val type4: KoTypeDeclarationCore = mockk {
-            every { isAlias } returns false
-            every { sourceType } returns sourceType3
-        }
+        val declaration1: KoTypeDeclarationCore =
+            mockk {
+                every { isAlias } returns true
+                every { sourceType } returns sourceType1
+            }
+        val declaration2: KoTypeDeclarationCore =
+            mockk {
+                every { isAlias } returns true
+                every { sourceType } returns sourceType2
+            }
+        val declaration3: KoTypeDeclarationCore =
+            mockk {
+                every { isAlias } returns false
+                every { sourceType } returns sourceType1
+            }
+        val type4: KoTypeDeclarationCore =
+            mockk {
+                every { isAlias } returns false
+                every { sourceType } returns sourceType3
+            }
         val declarations = listOf(declaration1, declaration2, declaration3, type4)
 
         // when
@@ -510,18 +567,21 @@ class KoSourceAndAliasTypeProviderListExtTest {
         // given
         val sourceType1 = "SampleType1"
         val sourceType2 = "SampleType2"
-        val declaration1: KoTypeDeclarationCore = mockk {
-            every { isAlias } returns true
-            every { sourceType } returns sourceType1
-        }
-        val declaration2: KoTypeDeclarationCore = mockk {
-            every { isAlias } returns true
-            every { sourceType } returns sourceType2
-        }
-        val declaration3: KoTypeDeclarationCore = mockk {
-            every { isAlias } returns false
-            every { sourceType } returns sourceType1
-        }
+        val declaration1: KoTypeDeclarationCore =
+            mockk {
+                every { isAlias } returns true
+                every { sourceType } returns sourceType1
+            }
+        val declaration2: KoTypeDeclarationCore =
+            mockk {
+                every { isAlias } returns true
+                every { sourceType } returns sourceType2
+            }
+        val declaration3: KoTypeDeclarationCore =
+            mockk {
+                every { isAlias } returns false
+                every { sourceType } returns sourceType1
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -537,22 +597,26 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sourceType1 = "SampleType1"
         val sourceType2 = "SampleType2"
         val sourceType3 = "SampleType3"
-        val declaration1: KoTypeDeclarationCore = mockk {
-            every { isAlias } returns true
-            every { sourceType } returns sourceType1
-        }
-        val declaration2: KoTypeDeclarationCore = mockk {
-            every { isAlias } returns true
-            every { sourceType } returns sourceType2
-        }
-        val declaration3: KoTypeDeclarationCore = mockk {
-            every { isAlias } returns false
-            every { sourceType } returns sourceType1
-        }
-        val type4: KoTypeDeclarationCore = mockk {
-            every { isAlias } returns false
-            every { sourceType } returns sourceType3
-        }
+        val declaration1: KoTypeDeclarationCore =
+            mockk {
+                every { isAlias } returns true
+                every { sourceType } returns sourceType1
+            }
+        val declaration2: KoTypeDeclarationCore =
+            mockk {
+                every { isAlias } returns true
+                every { sourceType } returns sourceType2
+            }
+        val declaration3: KoTypeDeclarationCore =
+            mockk {
+                every { isAlias } returns false
+                every { sourceType } returns sourceType1
+            }
+        val type4: KoTypeDeclarationCore =
+            mockk {
+                every { isAlias } returns false
+                every { sourceType } returns sourceType3
+            }
         val declarations = listOf(declaration1, declaration2, declaration3, type4)
 
         // when

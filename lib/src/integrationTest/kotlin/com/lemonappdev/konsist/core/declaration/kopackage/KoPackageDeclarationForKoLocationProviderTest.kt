@@ -9,9 +9,10 @@ class KoPackageDeclarationForKoLocationProviderTest {
     @Test
     fun `package-location-with-single-digit`() {
         // given
-        val sut = getSnippetFile("package-location-with-single-digit")
-            .packages
-            .first()
+        val sut =
+            getSnippetFile("package-location-with-single-digit")
+                .packages
+                .first()
 
         // then
         sut.location shouldBeEqualTo "${sut.path}:1:1"
@@ -20,14 +21,16 @@ class KoPackageDeclarationForKoLocationProviderTest {
     @Test
     fun `package-location-with-text`() {
         // given
-        val projectPath = getSnippetFile("package-location-with-text")
-            .packages
-            .first()
-            .projectPath
+        val projectPath =
+            getSnippetFile("package-location-with-text")
+                .packages
+                .first()
+                .projectPath
 
-        val sut = getSnippetFile("package-location-with-text")
-            .packages
-            .first()
+        val sut =
+            getSnippetFile("package-location-with-text")
+                .packages
+                .first()
 
         // then
         val declaration = "Declaration:\npackage com.samplepackage"
@@ -38,6 +41,5 @@ class KoPackageDeclarationForKoLocationProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kopackage/snippet/forkolocationprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kopackage/snippet/forkolocationprovider/", fileName)
 }

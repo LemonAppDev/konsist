@@ -9,8 +9,10 @@ import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withParentClassOf
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
+import org.junit.jupiter.api.Test
 
 class AndroidSnippets {
+    @Test
     fun `classes extending 'ViewModel' should have 'ViewModel' suffix`() {
         Konsist
             .scopeFromProject()
@@ -19,6 +21,7 @@ class AndroidSnippets {
             .assertTrue { it.name.endsWith("ViewModel") }
     }
 
+    @Test
     fun `Every 'ViewModel' public property has 'Flow' type`() {
         Konsist
             .scopeFromProject()
@@ -30,6 +33,7 @@ class AndroidSnippets {
             }
     }
 
+    @Test
     fun `'Repository' classes should reside in 'repository' package`() {
         Konsist
             .scopeFromProject()
@@ -38,6 +42,7 @@ class AndroidSnippets {
             .assertTrue { it.resideInPackage("..repository..") }
     }
 
+    @Test
     fun `no class should use Android util logging`() {
         Konsist
             .scopeFromProject()
@@ -45,6 +50,7 @@ class AndroidSnippets {
             .assertFalse { it.hasImport { import -> import.name == "android.util.Log" } }
     }
 
+    @Test
     fun `All JetPack Compose previews contain 'Preview' in method name`() {
         Konsist
             .scopeFromProject()

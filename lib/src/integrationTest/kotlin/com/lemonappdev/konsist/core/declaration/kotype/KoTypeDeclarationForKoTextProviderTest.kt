@@ -8,10 +8,11 @@ class KoTypeDeclarationForKoTextProviderTest {
     @Test
     fun `type-text`() {
         // given
-        val sut = getSnippetFile("type-text")
-            .properties()
-            .first()
-            .type
+        val sut =
+            getSnippetFile("type-text")
+                .properties()
+                .first()
+                .type
 
         // then
         sut
@@ -19,6 +20,5 @@ class KoTypeDeclarationForKoTextProviderTest {
             .shouldBeEqualTo("String")
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kotype/snippet/forkotextprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kotype/snippet/forkotextprovider/", fileName)
 }

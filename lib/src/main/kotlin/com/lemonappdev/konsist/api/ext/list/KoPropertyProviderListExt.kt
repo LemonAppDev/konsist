@@ -18,8 +18,7 @@ fun <T : KoPropertyProvider> List<T>.properties(includeNested: Boolean = true): 
  * @param includeNested Whether to include nested properties.
  * @return A list containing declarations with any property.
  */
-fun <T : KoPropertyProvider> List<T>.withProperties(includeNested: Boolean = true): List<T> =
-    filter { it.hasProperties(includeNested) }
+fun <T : KoPropertyProvider> List<T>.withProperties(includeNested: Boolean = true): List<T> = filter { it.hasProperties(includeNested) }
 
 /**
  * List containing declarations with no properties.
@@ -84,8 +83,7 @@ fun <T : KoPropertyProvider> List<T>.withoutAllPropertiesNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> =
-    filterNot { it.hasPropertiesWithAllNames(name, *names, includeNested = includeNested) }
+): List<T> = filterNot { it.hasPropertiesWithAllNames(name, *names, includeNested = includeNested) }
 
 /**
  * List containing declarations that have at least one property satisfying the provided predicate.
@@ -109,8 +107,7 @@ fun <T : KoPropertyProvider> List<T>.withProperty(
 fun <T : KoPropertyProvider> List<T>.withoutProperty(
     includeNested: Boolean = true,
     predicate: (KoPropertyDeclaration) -> Boolean,
-): List<T> =
-    filterNot { it.hasProperty(includeNested, predicate) }
+): List<T> = filterNot { it.hasProperty(includeNested, predicate) }
 
 /**
  * List containing declarations that have all properties satisfying the provided predicate.
@@ -122,8 +119,7 @@ fun <T : KoPropertyProvider> List<T>.withoutProperty(
 fun <T : KoPropertyProvider> List<T>.withAllProperties(
     includeNested: Boolean = true,
     predicate: (KoPropertyDeclaration) -> Boolean,
-): List<T> =
-    filter { it.hasAllProperties(includeNested, predicate) }
+): List<T> = filter { it.hasAllProperties(includeNested, predicate) }
 
 /**
  * List containing declarations that have at least one property not satisfying the provided predicate.
@@ -135,8 +131,7 @@ fun <T : KoPropertyProvider> List<T>.withAllProperties(
 fun <T : KoPropertyProvider> List<T>.withoutAllProperties(
     includeNested: Boolean = true,
     predicate: (KoPropertyDeclaration) -> Boolean,
-): List<T> =
-    filterNot { it.hasAllProperties(includeNested, predicate) }
+): List<T> = filterNot { it.hasAllProperties(includeNested, predicate) }
 
 /**
  * List containing declarations with property declarations satisfying the predicate.
@@ -148,8 +143,7 @@ fun <T : KoPropertyProvider> List<T>.withoutAllProperties(
 fun <T : KoPropertyProvider> List<T>.withProperties(
     includeNested: Boolean = true,
     predicate: (List<KoPropertyDeclaration>) -> Boolean,
-): List<T> =
-    filter { predicate(it.properties(includeNested)) }
+): List<T> = filter { predicate(it.properties(includeNested)) }
 
 /**
  * List containing declarations without property declarations satisfying the predicate.
@@ -161,5 +155,4 @@ fun <T : KoPropertyProvider> List<T>.withProperties(
 fun <T : KoPropertyProvider> List<T>.withoutProperties(
     includeNested: Boolean = true,
     predicate: (List<KoPropertyDeclaration>) -> Boolean,
-): List<T> =
-    filterNot { predicate(it.properties(includeNested)) }
+): List<T> = filterNot { predicate(it.properties(includeNested)) }

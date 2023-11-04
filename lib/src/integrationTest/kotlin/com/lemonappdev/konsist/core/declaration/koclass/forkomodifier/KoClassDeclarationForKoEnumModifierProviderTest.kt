@@ -8,9 +8,10 @@ class KoClassDeclarationForKoEnumModifierProviderTest {
     @Test
     fun `class-without-enum-modifier`() {
         // given
-        val sut = getSnippetFile("class-without-enum-modifier")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-without-enum-modifier")
+                .classes()
+                .first()
 
         // then
         sut.hasEnumModifier shouldBeEqualTo false
@@ -19,9 +20,10 @@ class KoClassDeclarationForKoEnumModifierProviderTest {
     @Test
     fun `enum-class`() {
         // given
-        val sut = getSnippetFile("enum-class")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("enum-class")
+                .classes()
+                .first()
 
         // then
         sut.hasEnumModifier shouldBeEqualTo true

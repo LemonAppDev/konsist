@@ -45,9 +45,13 @@ fun <T : KoParentClassProvider> List<T>.withoutParentClass(predicate: ((KoClassD
  * @param names The names of additional parent classes to include.
  * @return A list containing declarations with the specified parent class(es).
  */
-fun <T : KoParentClassProvider> List<T>.withParentClassNamed(name: String, vararg names: String): List<T> = filter {
-    it.hasParentClassWithName(name, *names)
-}
+fun <T : KoParentClassProvider> List<T>.withParentClassNamed(
+    name: String,
+    vararg names: String,
+): List<T> =
+    filter {
+        it.hasParentClassWithName(name, *names)
+    }
 
 /**
  * List containing declarations without any of specified parent classes.
@@ -56,7 +60,10 @@ fun <T : KoParentClassProvider> List<T>.withParentClassNamed(name: String, varar
  * @param names The names of additional parent classes to exclude.
  * @return A list containing declarations without any of specified parent classes.
  */
-fun <T : KoParentClassProvider> List<T>.withoutParentClassNamed(name: String, vararg names: String): List<T> =
+fun <T : KoParentClassProvider> List<T>.withoutParentClassNamed(
+    name: String,
+    vararg names: String,
+): List<T> =
     filterNot {
         it.hasParentClassWithName(name, *names)
     }
@@ -68,8 +75,10 @@ fun <T : KoParentClassProvider> List<T>.withoutParentClassNamed(name: String, va
  * @param kClasses The Kotlin declarations representing the parent class to include.
  * @return A list containing declarations that have the parent class of the specified type(s).
  */
-fun <T : KoParentClassProvider> List<T>.withParentClassOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
-    filter { it.hasParentClassOf(kClass, *kClasses) }
+fun <T : KoParentClassProvider> List<T>.withParentClassOf(
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
+): List<T> = filter { it.hasParentClassOf(kClass, *kClasses) }
 
 /**
  * List containing declarations without parent class.
@@ -78,8 +87,10 @@ fun <T : KoParentClassProvider> List<T>.withParentClassOf(kClass: KClass<*>, var
  * @param kClasses The Kotlin class(es) representing the parent class(s) to exclude.
  * @return A list containing declarations without parent class of the specified Kotlin class(es).
  */
-fun <T : KoParentClassProvider> List<T>.withoutParentClassOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
-    filterNot { it.hasParentClassOf(kClass, *kClasses) }
+fun <T : KoParentClassProvider> List<T>.withoutParentClassOf(
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
+): List<T> = filterNot { it.hasParentClassOf(kClass, *kClasses) }
 
 /**
  * List containing declarations that have parent class.
@@ -88,12 +99,13 @@ fun <T : KoParentClassProvider> List<T>.withoutParentClassOf(kClass: KClass<*>, 
  * @return A list containing declarations that have the specified parent class (or any parent class if [names] is empty).
  */
 @Deprecated("Will be removed in v1.0.0. Replace with `withAllParents` if you pass any parameter, `withParents` otherwise.")
-fun <T : KoParentClassProvider> List<T>.withParentClass(vararg names: String): List<T> = filter {
-    when {
-        names.isEmpty() -> it.hasParentClass()
-        else -> names.any { name -> it.hasParentClass(name) }
+fun <T : KoParentClassProvider> List<T>.withParentClass(vararg names: String): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> it.hasParentClass()
+            else -> names.any { name -> it.hasParentClass(name) }
+        }
     }
-}
 
 /**
  * List containing declarations that have some parent class.
@@ -102,9 +114,10 @@ fun <T : KoParentClassProvider> List<T>.withParentClass(vararg names: String): L
  * @return A list containing declarations that don't have the specified parent class (or none parent class if [names] is empty).
  */
 @Deprecated("Will be removed in v1.0.0. Replace with `withoutSomeParents` if you pass any parameter, `withoutParents` otherwise.")
-fun <T : KoParentClassProvider> List<T>.withoutParentClass(vararg names: String): List<T> = filter {
-    when {
-        names.isEmpty() -> !it.hasParentClass()
-        else -> names.none { name -> it.hasParentClass(name) }
+fun <T : KoParentClassProvider> List<T>.withoutParentClass(vararg names: String): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> !it.hasParentClass()
+            else -> names.none { name -> it.hasParentClass(name) }
+        }
     }
-}

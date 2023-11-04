@@ -13,9 +13,7 @@ interface KoArchitectureAssertion {
      * @param dependencies The function literal with receiver [DependencyRules] that allows configuring the dependencies
      * of the architecture.
      */
-    fun KoScope.assertArchitecture(
-        dependencies: DependencyRules.() -> Unit,
-    ): Unit
+    fun KoScope.assertArchitecture(dependencies: DependencyRules.() -> Unit): Unit
 
     /**
      * Asserts the architecture with the specified [dependencies] defined as a function literal with receiver [DependencyRules].
@@ -39,9 +37,7 @@ interface KoArchitectureAssertion {
      *
      * @param dependencies The [DependencyRules] instance representing the configured dependencies of the architecture.
      */
-    fun KoScope.assertArchitecture(
-        dependencies: DependencyRules,
-    ): Unit
+    fun KoScope.assertArchitecture(dependencies: DependencyRules): Unit
 
     /**
      * Asserts the architecture with the specified [dependencies].
@@ -65,9 +61,7 @@ interface KoArchitectureAssertion {
      * @param dependencies The function literal with receiver [DependencyRules] that allows configuring the dependencies
      * of the architecture.
      */
-    fun List<KoFileDeclaration>.assertArchitecture(
-        dependencies: DependencyRules.() -> Unit,
-    ): Unit
+    fun List<KoFileDeclaration>.assertArchitecture(dependencies: DependencyRules.() -> Unit): Unit
 
     /**
      * Asserts the architecture with the specified [dependencies] defined as a function literal with receiver [DependencyRules].
@@ -91,9 +85,7 @@ interface KoArchitectureAssertion {
      *
      * @param dependencies The [DependencyRules] instance representing the configured dependencies of the architecture.
      */
-    fun List<KoFileDeclaration>.assertArchitecture(
-        dependencies: DependencyRules,
-    ): Unit
+    fun List<KoFileDeclaration>.assertArchitecture(dependencies: DependencyRules): Unit
 
     /**
      * Asserts the architecture with the specified [dependencies].

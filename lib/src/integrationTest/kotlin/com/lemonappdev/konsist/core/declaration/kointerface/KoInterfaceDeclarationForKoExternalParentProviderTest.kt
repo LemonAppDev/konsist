@@ -14,9 +14,10 @@ class KoInterfaceDeclarationForKoExternalParentProviderTest {
     @Test
     fun `interface-has-no-external-parent`() {
         // given
-        val sut = getSnippetFile("interface-has-no-external-parent")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-no-external-parent")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -36,9 +37,10 @@ class KoInterfaceDeclarationForKoExternalParentProviderTest {
     @Test
     fun `interface-has-only-external-parents`() {
         // given
-        val sut = getSnippetFile("interface-has-only-external-parents")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-only-external-parents")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -71,9 +73,10 @@ class KoInterfaceDeclarationForKoExternalParentProviderTest {
     @Test
     fun `interface-has-internal-and-external-parents`() {
         // given
-        val sut = getSnippetFile("interface-has-internal-and-external-parents")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-internal-and-external-parents")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {

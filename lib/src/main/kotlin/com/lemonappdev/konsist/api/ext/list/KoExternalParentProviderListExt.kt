@@ -31,8 +31,10 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParents(): List<T> = f
  * @param names The names of additional external parents to include.
  * @return A list containing declarations with at least one of the specified external parent(s).
  */
-fun <T : KoExternalParentProvider> List<T>.withExternalParentNamed(name: String, vararg names: String): List<T> =
-    filter { it.hasExternalParentWithName(name, *names) }
+fun <T : KoExternalParentProvider> List<T>.withExternalParentNamed(
+    name: String,
+    vararg names: String,
+): List<T> = filter { it.hasExternalParentWithName(name, *names) }
 
 /**
  * List containing declarations without any of specified external parents.
@@ -41,8 +43,10 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParentNamed(name: String,
  * @param names The names of additional external parents to exclude.
  * @return A list containing declarations without any of specified external parents.
  */
-fun <T : KoExternalParentProvider> List<T>.withoutExternalParentNamed(name: String, vararg names: String): List<T> =
-    filterNot { it.hasExternalParentWithName(name, *names) }
+fun <T : KoExternalParentProvider> List<T>.withoutExternalParentNamed(
+    name: String,
+    vararg names: String,
+): List<T> = filterNot { it.hasExternalParentWithName(name, *names) }
 
 /**
  * List containing declarations that have all specified external parents.
@@ -51,8 +55,10 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentNamed(name: Stri
  * @param names The name(s) of the external parent(s) to include.
  * @return A list containing declarations with all specified external parent(s).
  */
-fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsNamed(name: String, vararg names: String): List<T> =
-    filter { it.hasExternalParentsWithAllNames(name, *names) }
+fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsNamed(
+    name: String,
+    vararg names: String,
+): List<T> = filter { it.hasExternalParentsWithAllNames(name, *names) }
 
 /**
  * List containing declarations without all specified external parents.
@@ -61,8 +67,10 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsNamed(name: Str
  * @param names The name(s) of the external parent(s) to exclude.
  * @return A list containing declarations without all specified external parent(s).
  */
-fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsNamed(name: String, vararg names: String): List<T> =
-    filterNot { it.hasExternalParentsWithAllNames(name, *names) }
+fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsNamed(
+    name: String,
+    vararg names: String,
+): List<T> = filterNot { it.hasExternalParentsWithAllNames(name, *names) }
 
 /**
  * List containing declarations that have at least one external parent satisfying the provided predicate.
@@ -97,9 +105,8 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParents(predicate: (Ko
  * @param predicate A function that defines the condition to be met by all external parent declarations.
  * @return A list containing declarations that have at least one external parent not satisfying the provided predicate.
  */
-fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParents(
-    predicate: (KoExternalParentDeclaration) -> Boolean,
-): List<T> = filterNot { it.hasAllExternalParents(predicate) }
+fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParents(predicate: (KoExternalParentDeclaration) -> Boolean): List<T> =
+    filterNot { it.hasAllExternalParents(predicate) }
 
 /**
  * List containing declarations with external parent declarations satisfying the predicate.
@@ -129,8 +136,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParents(predicate: (Li
 fun <T : KoExternalParentProvider> List<T>.withExternalParentOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> =
-    filter { it.hasExternalParentOf(kClass, *kClasses) }
+): List<T> = filter { it.hasExternalParentOf(kClass, *kClasses) }
 
 /**
  * List containing declarations without any external parent of the specified `KClass` type.
@@ -142,8 +148,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParentOf(
 fun <T : KoExternalParentProvider> List<T>.withoutExternalParentOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> =
-    filterNot { it.hasExternalParentOf(kClass, *kClasses) }
+): List<T> = filterNot { it.hasExternalParentOf(kClass, *kClasses) }
 
 /**
  * List containing declarations that have all external parents of the specified `KClass` type.
@@ -155,8 +160,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentOf(
 fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> =
-    filter { it.hasAllExternalParentsOf(kClass, *kClasses) }
+): List<T> = filter { it.hasAllExternalParentsOf(kClass, *kClasses) }
 
 /**
  * List containing declarations without all specified `KClass` type external parents.
@@ -168,5 +172,4 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsOf(
 fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> =
-    filterNot { it.hasAllExternalParentsOf(kClass, *kClasses) }
+): List<T> = filterNot { it.hasAllExternalParentsOf(kClass, *kClasses) }

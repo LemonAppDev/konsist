@@ -14,9 +14,10 @@ class KoInterfaceDeclarationForKoParentProviderTest {
     @Test
     fun `interface-has-no-parents`() {
         // given
-        val sut = getSnippetFile("interface-has-no-parents")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-no-parents")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -37,18 +38,20 @@ class KoInterfaceDeclarationForKoParentProviderTest {
     @Test
     fun `interface-has-internal-and-external-parents`() {
         // given
-        val sut = getSnippetFile("interface-has-internal-and-external-parents")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-internal-and-external-parents")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
-            parents.map { it.name } shouldBeEqualTo listOf(
-                "SampleParentInterface1",
-                "SampleParentInterface2",
-                "SampleExternalInterface",
-                "SampleExternalGenericInterface",
-            )
+            parents.map { it.name } shouldBeEqualTo
+                listOf(
+                    "SampleParentInterface1",
+                    "SampleParentInterface2",
+                    "SampleExternalInterface",
+                    "SampleExternalGenericInterface",
+                )
             numParents shouldBeEqualTo 4
             countParents { it.name == "SampleParentInterface1" } shouldBeEqualTo 1
             countParents { it.hasNameStartingWith("SampleExternal") } shouldBeEqualTo 2
@@ -80,9 +83,10 @@ class KoInterfaceDeclarationForKoParentProviderTest {
     @Test
     fun `interface-has-parent-defined-by-import-alias`() {
         // given
-        val sut = getSnippetFile("interface-has-parent-defined-by-import-alias")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-parent-defined-by-import-alias")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut.parents.first()) {
@@ -91,6 +95,5 @@ class KoInterfaceDeclarationForKoParentProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kointerface/snippet/forkoparentprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kointerface/snippet/forkoparentprovider/", fileName)
 }

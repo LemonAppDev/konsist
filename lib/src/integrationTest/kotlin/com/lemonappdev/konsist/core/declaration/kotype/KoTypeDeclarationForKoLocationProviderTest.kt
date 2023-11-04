@@ -9,10 +9,11 @@ class KoTypeDeclarationForKoLocationProviderTest {
     @Test
     fun `type-location-with-single-digit`() {
         // given
-        val sut = getSnippetFile("type-location-with-single-digit")
-            .properties()
-            .first()
-            .type
+        val sut =
+            getSnippetFile("type-location-with-single-digit")
+                .properties()
+                .first()
+                .type
 
         // then
         sut?.location shouldBeEqualTo "${sut?.path}:1:21"
@@ -21,10 +22,11 @@ class KoTypeDeclarationForKoLocationProviderTest {
     @Test
     fun `type-location-with-double-digit`() {
         // given
-        val sut = getSnippetFile("type-location-with-double-digit")
-            .properties(includeNested = true)
-            .first()
-            .type
+        val sut =
+            getSnippetFile("type-location-with-double-digit")
+                .properties(includeNested = true)
+                .first()
+                .type
 
         // then
         sut?.location shouldBeEqualTo "${sut?.path}:10:57"
@@ -33,16 +35,18 @@ class KoTypeDeclarationForKoLocationProviderTest {
     @Test
     fun `type-location-with-text`() {
         // given
-        val projectPath = getSnippetFile("type-location-with-text")
-            .properties()
-            .first()
-            .type
-            ?.projectPath
+        val projectPath =
+            getSnippetFile("type-location-with-text")
+                .properties()
+                .first()
+                .type
+                ?.projectPath
 
-        val sut = getSnippetFile("type-location-with-text")
-            .properties()
-            .first()
-            .type
+        val sut =
+            getSnippetFile("type-location-with-text")
+                .properties()
+                .first()
+                .type
 
         // then
         val declaration = "Declaration:\nString"
@@ -53,6 +57,5 @@ class KoTypeDeclarationForKoLocationProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kotype/snippet/forkolocationprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kotype/snippet/forkolocationprovider/", fileName)
 }

@@ -8,9 +8,10 @@ class KoTypeAliasDeclarationForKoContainingFileProviderTest {
     @Test
     fun `typealias-containing-file`() {
         // given
-        val sut = getSnippetFile("typealias-containing-file")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-containing-file")
+                .typeAliases
+                .first()
 
         // then
         sut

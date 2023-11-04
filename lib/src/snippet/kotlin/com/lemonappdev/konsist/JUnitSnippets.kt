@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 
 class JUnitSnippets {
+    @Test
     fun `classes with 'Test' Annotation should have 'Test' suffix`() {
         Konsist
             .scopeFromSourceSet("test")
@@ -23,20 +24,23 @@ class JUnitSnippets {
             .assertTrue { it.hasNameEndingWith("Tests") }
     }
 
+    @Test
     fun `test classes should have test subject named sut`() {
         Konsist
             .scopeFromTest()
             .classes()
             .assertTrue {
                 val type = it.name.removeSuffix("Test")
-                val sut = it
-                    .properties()
-                    .firstOrNull { property -> property.name == "sut" }
+                val sut =
+                    it
+                        .properties()
+                        .firstOrNull { property -> property.name == "sut" }
 
                 sut != null && (sut.type?.name == type || sut.text.contains("$type("))
             }
     }
 
+    @Test
     fun `test classes should have all members private besides tests`() {
         Konsist
             .scopeFromTest()
@@ -48,6 +52,7 @@ class JUnitSnippets {
             .assertTrue { it.hasPrivateModifier }
     }
 
+    @Test
     fun `no class should use JUnit4 Test annotation`() {
         Konsist
             .scopeFromProject()

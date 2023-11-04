@@ -11,9 +11,10 @@ class KoObjectDeclarationForKoParentClassProviderTest {
     @Test
     fun `object-has-no-parent-class`() {
         // given
-        val sut = getSnippetFile("object-has-no-parent-class")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-no-parent-class")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -31,9 +32,10 @@ class KoObjectDeclarationForKoParentClassProviderTest {
     @Test
     fun `object-has-only-parent-class`() {
         // given
-        val sut = getSnippetFile("object-has-only-parent-class")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-only-parent-class")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -55,9 +57,10 @@ class KoObjectDeclarationForKoParentClassProviderTest {
     @Test
     fun `object-has-parent-class-interfaces-and-external-parent`() {
         // given
-        val sut = getSnippetFile("object-has-parent-class-interfaces-and-external-parent")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-parent-class-interfaces-and-external-parent")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -79,15 +82,17 @@ class KoObjectDeclarationForKoParentClassProviderTest {
     @Test
     fun `object-has-parent-class-with-duplicated-name`() {
         /*
-        In Kotlin, we may have a situation that we have two classes with the same name - one defined in current file
-        and second one defined in another file.
-
-        When we use class with this name as a parent, the correct class is the imported one.
+         * In Kotlin, we may have a situation that we have two classes with the same name - one defined in the current file
+         * and the second one defined in another file.
+         *
+         * When we use a class with this name as a parent, the correct class is the imported one.
          */
+
         // given
-        val sut = getSnippetFile("object-has-parent-class-with-one-parameter")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-parent-class-with-one-parameter")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {

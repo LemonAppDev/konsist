@@ -8,10 +8,11 @@ class KoTypeDeclarationTest {
     @Test
     fun `type-to-string`() {
         // given
-        val sut = getSnippetFile("type-to-string")
-            .properties()
-            .first()
-            .type
+        val sut =
+            getSnippetFile("type-to-string")
+                .properties()
+                .first()
+                .type
 
         // then
         sut.toString() shouldBeEqualTo "String"

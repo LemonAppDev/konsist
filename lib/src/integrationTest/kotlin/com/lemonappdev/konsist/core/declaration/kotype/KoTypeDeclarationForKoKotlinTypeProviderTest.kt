@@ -14,13 +14,14 @@ class KoTypeDeclarationForKoKotlinTypeProviderTest {
         value: Boolean,
     ) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         sut?.isKotlinType shouldBeEqualTo value
@@ -32,16 +33,17 @@ class KoTypeDeclarationForKoKotlinTypeProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("string", true),
-            arguments("list-of-string", true),
-            arguments("list-of-sample-type", true),
-            arguments("sample-collection-of-string", false),
-            arguments("sample-collection-of-sample-type", false),
-            arguments("sample-collection-with-two-type-arguments-and-one-is-kotlin-type", false),
-            arguments("sample-collection-with-two-non-kotlin-type-arguments", false),
-            arguments("sample-collection-with-in-keyword-and-kotlin-type", false),
-            arguments("sample-collection-with-in-keyword-and-non-kotlin-type", false),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("string", true),
+                arguments("list-of-string", true),
+                arguments("list-of-sample-type", true),
+                arguments("sample-collection-of-string", false),
+                arguments("sample-collection-of-sample-type", false),
+                arguments("sample-collection-with-two-type-arguments-and-one-is-kotlin-type", false),
+                arguments("sample-collection-with-two-non-kotlin-type-arguments", false),
+                arguments("sample-collection-with-in-keyword-and-kotlin-type", false),
+                arguments("sample-collection-with-in-keyword-and-non-kotlin-type", false),
+            )
     }
 }

@@ -29,9 +29,10 @@ fun <T : KoInitBlockProvider> List<T>.withoutInitBlocks(): List<T> = filterNot {
  * @param predicate A function that defines the condition to be met by an init block declaration.
  * @return A list containing declarations with at least one init block satisfying the predicate.
  */
-fun <T : KoInitBlockProvider> List<T>.withInitBlock(predicate: (KoInitBlockDeclaration) -> Boolean): List<T> = filter {
-    it.hasInitBlock(predicate)
-}
+fun <T : KoInitBlockProvider> List<T>.withInitBlock(predicate: (KoInitBlockDeclaration) -> Boolean): List<T> =
+    filter {
+        it.hasInitBlock(predicate)
+    }
 
 /**
  * List containing declarations that not have init block satisfying the provided predicate.
@@ -39,9 +40,10 @@ fun <T : KoInitBlockProvider> List<T>.withInitBlock(predicate: (KoInitBlockDecla
  * @param predicate A function that defines the condition to be met by an init block declaration.
  * @return A list containing declarations without init block satisfying the provided predicate.
  */
-fun <T : KoInitBlockProvider> List<T>.withoutInitBlock(predicate: (KoInitBlockDeclaration) -> Boolean): List<T> = filterNot {
-    it.hasInitBlock(predicate)
-}
+fun <T : KoInitBlockProvider> List<T>.withoutInitBlock(predicate: (KoInitBlockDeclaration) -> Boolean): List<T> =
+    filterNot {
+        it.hasInitBlock(predicate)
+    }
 
 /**
  * List containing declarations that have all init blocks satisfying the provided predicate.
@@ -49,9 +51,10 @@ fun <T : KoInitBlockProvider> List<T>.withoutInitBlock(predicate: (KoInitBlockDe
  * @param predicate A function that defines the condition to be met by all init block declarations.
  * @return A filtered list containing declarations with all init blocks satisfying the predicate.
  */
-fun <T : KoInitBlockProvider> List<T>.withAllInitBlocks(predicate: (KoInitBlockDeclaration) -> Boolean): List<T> = filter {
-    it.hasAllInitBlocks(predicate)
-}
+fun <T : KoInitBlockProvider> List<T>.withAllInitBlocks(predicate: (KoInitBlockDeclaration) -> Boolean): List<T> =
+    filter {
+        it.hasAllInitBlocks(predicate)
+    }
 
 /**
  * List containing declarations that have at least one init block not satisfying the provided predicate.
@@ -59,9 +62,10 @@ fun <T : KoInitBlockProvider> List<T>.withAllInitBlocks(predicate: (KoInitBlockD
  * @param predicate A function that defines the condition to be met by all init block declarations.
  * @return A list containing declarations that have at least one init block not satisfying the provided predicate.
  */
-fun <T : KoInitBlockProvider> List<T>.withoutAllInitBlocks(predicate: (KoInitBlockDeclaration) -> Boolean): List<T> = filterNot {
-    it.hasAllInitBlocks(predicate)
-}
+fun <T : KoInitBlockProvider> List<T>.withoutAllInitBlocks(predicate: (KoInitBlockDeclaration) -> Boolean): List<T> =
+    filterNot {
+        it.hasAllInitBlocks(predicate)
+    }
 
 /**
  * List containing declarations with init block declarations satisfying the predicate.
@@ -69,9 +73,10 @@ fun <T : KoInitBlockProvider> List<T>.withoutAllInitBlocks(predicate: (KoInitBlo
  * @param predicate A function that defines the condition to be met by the list of init block declarations.
  * @return A list containing declarations with init block declarations satisfying the predicate.
  */
-fun <T : KoInitBlockProvider> List<T>.withInitBlocks(predicate: (List<KoInitBlockDeclaration>) -> Boolean): List<T> = filter {
-    predicate(it.initBlocks)
-}
+fun <T : KoInitBlockProvider> List<T>.withInitBlocks(predicate: (List<KoInitBlockDeclaration>) -> Boolean): List<T> =
+    filter {
+        predicate(it.initBlocks)
+    }
 
 /**
  * List containing declarations without init block declarations satisfying the predicate.

@@ -15,10 +15,11 @@ class KoKDocDeclarationForKoKDocParamTagProviderTest {
     @Test
     fun `kdoc-without-param-tag`() {
         // given
-        val sut = getSnippetFile("kdoc-without-param-tag")
-            .classes()
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("kdoc-without-param-tag")
+                .classes()
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -40,13 +41,14 @@ class KoKDocDeclarationForKoKDocParamTagProviderTest {
         description2: String,
     ) {
         // given
-        val sut = (
-            getSnippetFile(fileName)
-                .declarations(includeNested = true)
-                .filterIsInstance<KoNameProvider>()
-                .first { it.name == declarationName } as KoKDocProvider
+        val sut =
+            (
+                getSnippetFile(fileName)
+                    .declarations(includeNested = true)
+                    .filterIsInstance<KoNameProvider>()
+                    .first { it.name == declarationName } as KoKDocProvider
             )
-            .kDoc
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -61,29 +63,29 @@ class KoKDocDeclarationForKoKDocParamTagProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kokdoc/snippet/forkokdocparamtagprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kokdoc/snippet/forkokdocparamtagprovider/", fileName)
 
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments(
-                "class-with-param-tag",
-                "SampleClass",
-                "SampleType1",
-                "The first type parameter for this class.",
-                "SampleType2",
-                "The second type parameter for this class.",
-            ),
-            arguments(
-                "function-with-param-tag",
-                "sampleMethod",
-                "sampleArgument1",
-                "The first argument.",
-                "sampleArgument2",
-                "The second argument.",
-            ),
-        )
+        fun provideValues() =
+            listOf(
+                arguments(
+                    "class-with-param-tag",
+                    "SampleClass",
+                    "SampleType1",
+                    "The first type parameter for this class.",
+                    "SampleType2",
+                    "The second type parameter for this class.",
+                ),
+                arguments(
+                    "function-with-param-tag",
+                    "sampleMethod",
+                    "sampleArgument1",
+                    "The first argument.",
+                    "sampleArgument2",
+                    "The second argument.",
+                ),
+            )
     }
 }

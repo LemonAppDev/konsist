@@ -10,14 +10,16 @@ internal interface KoGetterProviderCore : KoGetterProvider, KoBaseProviderCore, 
     val ktCallableDeclaration: KtCallableDeclaration
 
     private val ktPropertyAccessor: List<KtPropertyAccessor>
-        get() = ktCallableDeclaration
-            .children
-            .filterIsInstance<KtPropertyAccessor>()
+        get() =
+            ktCallableDeclaration
+                .children
+                .filterIsInstance<KtPropertyAccessor>()
 
     override val getter: KoGetterDeclaration?
-        get() = ktPropertyAccessor
-            .firstOrNull { it.isGetter }
-            ?.let { KoGetterDeclarationCore.getInstance(it, this) }
+        get() =
+            ktPropertyAccessor
+                .firstOrNull { it.isGetter }
+                ?.let { KoGetterDeclarationCore.getInstance(it, this) }
 
     override val hasGetter: Boolean
         get() = getter != null

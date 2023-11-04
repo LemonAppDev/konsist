@@ -14,13 +14,20 @@ internal class KoDeclarationCache<T : KoBaseProvider> {
         return value
     }
 
-    private fun set(key: Pair<KtElement, KoBaseProvider?>, value: T) {
+    private fun set(
+        key: Pair<KtElement, KoBaseProvider?>,
+        value: T,
+    ) {
         elements[key] = value
     }
 
     private fun hasKey(key: Pair<KtElement, KoBaseProvider?>) = elements.containsKey(key)
 
-    fun getOrCreateInstance(ktElement: KtElement, containingDeclaration: KoContainingDeclarationProvider, value: (KtElement) -> T): T {
+    fun getOrCreateInstance(
+        ktElement: KtElement,
+        containingDeclaration: KoContainingDeclarationProvider,
+        value: (KtElement) -> T,
+    ): T {
         val cacheKey = ktElement to containingDeclaration
 
         return if (hasKey(cacheKey)) {

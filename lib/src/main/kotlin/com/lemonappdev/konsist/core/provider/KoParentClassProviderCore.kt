@@ -11,12 +11,16 @@ internal interface KoParentClassProviderCore :
     override val parentClass: KoClassDeclaration?
         get() = parents.firstOrNull { it is KoClassDeclaration } as? KoClassDeclaration
 
-    override fun hasParentClass(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean = when (predicate) {
-        null -> parentClass != null
-        else -> parentClass?.let { predicate(it) } ?: false
-    }
+    override fun hasParentClass(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =
+        when (predicate) {
+            null -> parentClass != null
+            else -> parentClass?.let { predicate(it) } ?: false
+        }
 
-    override fun hasParentClassWithName(name: String, vararg names: String): Boolean {
+    override fun hasParentClassWithName(
+        name: String,
+        vararg names: String,
+    ): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.any { parentClass?.name == it }
@@ -25,7 +29,10 @@ internal interface KoParentClassProviderCore :
     @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasParents()"))
     override fun hasParentClass(name: String): Boolean = parentClass?.name == name
 
-    override fun hasParentClassOf(name: KClass<*>, vararg names: KClass<*>): Boolean {
+    override fun hasParentClassOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+    ): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.any { checkIfParentClassOf(it) }

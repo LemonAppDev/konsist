@@ -11,9 +11,10 @@ class KoClassDeclarationForKoContainingDeclarationProviderTest {
     @Test
     fun `class-with-file-parent-declaration`() {
         // given
-        val sut = getSnippetFile("class-with-file-parent-declaration")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-with-file-parent-declaration")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -25,9 +26,10 @@ class KoClassDeclarationForKoContainingDeclarationProviderTest {
     @Test
     fun `class-with-parent-declaration`() {
         // given
-        val sut = getSnippetFile("class-with-parent-declaration")
-            .classes(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("class-with-parent-declaration")
+                .classes(includeNested = true)
+                .first()
 
         // then
         assertSoftly(sut) {

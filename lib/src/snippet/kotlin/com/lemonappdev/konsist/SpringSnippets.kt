@@ -5,10 +5,12 @@ import com.lemonappdev.konsist.api.ext.list.functions
 import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
+import org.junit.jupiter.api.Test
 import org.springframework.stereotype.Repository
 import org.springframework.web.bind.annotation.RestController
 
 class SpringSnippets {
+    @Test
     fun `interfaces with 'Repository' annotation should have 'Repository' suffix`() {
         Konsist
             .scopeFromProject()
@@ -17,6 +19,7 @@ class SpringSnippets {
             .assertTrue { it.hasNameEndingWith("Repository") }
     }
 
+    @Test
     fun `classes with 'RestController' annotation should have 'Controller' suffix`() {
         Konsist
             .scopeFromProject()
@@ -25,6 +28,7 @@ class SpringSnippets {
             .assertTrue { it.hasNameEndingWith("Controller") }
     }
 
+    @Test
     fun `classes with 'RestController' annotation should reside in 'controller' package`() {
         Konsist
             .scopeFromProject()
@@ -33,6 +37,7 @@ class SpringSnippets {
             .assertTrue { it.resideInPackage("..controller..") }
     }
 
+    @Test
     fun `classes with 'RestController' annotation should never return collection`() {
         Konsist
             .scopeFromPackage("story.controller..")

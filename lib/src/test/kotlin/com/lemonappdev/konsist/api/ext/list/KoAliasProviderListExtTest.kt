@@ -15,14 +15,16 @@ class KoAliasProviderListExtTest {
         // given
         val declarationName = "name"
         val alias1 = "AliasName"
-        val declaration1: SampleTestDeclaration = mockk {
-            every { name } returns declarationName
-            every { alias } returns alias1
-        }
-        val declaration2: SampleTestDeclaration = mockk {
-            every { name } returns declarationName
-            every { alias } returns declarationName
-        }
+        val declaration1: SampleTestDeclaration =
+            mockk {
+                every { name } returns declarationName
+                every { alias } returns alias1
+            }
+        val declaration2: SampleTestDeclaration =
+            mockk {
+                every { name } returns declarationName
+                every { alias } returns declarationName
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -39,22 +41,26 @@ class KoAliasProviderListExtTest {
         val aliasName1 = "AliasName1"
         val aliasName2 = "AliasName2"
         val aliasName3 = "AliasName3"
-        val declaration1: SampleTestDeclaration = mockk {
-            every { name } returns declarationName
-            every { alias } returns aliasName1
-        }
-        val declaration2: SampleTestDeclaration = mockk {
-            every { name } returns declarationName
-            every { alias } returns aliasName2
-        }
-        val declaration3: SampleTestDeclaration = mockk {
-            every { name } returns declarationName
-            every { alias } returns aliasName3
-        }
-        val declaration4: SampleTestDeclaration = mockk {
-            every { name } returns declarationName
-            every { alias } returns declarationName
-        }
+        val declaration1: SampleTestDeclaration =
+            mockk {
+                every { name } returns declarationName
+                every { alias } returns aliasName1
+            }
+        val declaration2: SampleTestDeclaration =
+            mockk {
+                every { name } returns declarationName
+                every { alias } returns aliasName2
+            }
+        val declaration3: SampleTestDeclaration =
+            mockk {
+                every { name } returns declarationName
+                every { alias } returns aliasName3
+            }
+        val declaration4: SampleTestDeclaration =
+            mockk {
+                every { name } returns declarationName
+                every { alias } returns declarationName
+            }
         val declarations = listOf(declaration1, declaration2, declaration3, declaration4)
 
         // when
@@ -69,14 +75,16 @@ class KoAliasProviderListExtTest {
         // given
         val declarationName = "name"
         val alias1 = "AliasName"
-        val declaration1: SampleTestDeclaration = mockk {
-            every { name } returns declarationName
-            every { alias } returns alias1
-        }
-        val declaration2: SampleTestDeclaration = mockk {
-            every { name } returns declarationName
-            every { alias } returns declarationName
-        }
+        val declaration1: SampleTestDeclaration =
+            mockk {
+                every { name } returns declarationName
+                every { alias } returns alias1
+            }
+        val declaration2: SampleTestDeclaration =
+            mockk {
+                every { name } returns declarationName
+                every { alias } returns declarationName
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -93,22 +101,26 @@ class KoAliasProviderListExtTest {
         val aliasName1 = "AliasName1"
         val aliasName2 = "AliasName2"
         val aliasName3 = "AliasName3"
-        val declaration1: SampleTestDeclaration = mockk {
-            every { name } returns declarationName
-            every { alias } returns aliasName1
-        }
-        val declaration2: SampleTestDeclaration = mockk {
-            every { name } returns declarationName
-            every { alias } returns aliasName2
-        }
-        val declaration3: SampleTestDeclaration = mockk {
-            every { name } returns declarationName
-            every { alias } returns aliasName3
-        }
-        val declaration4: SampleTestDeclaration = mockk {
-            every { name } returns declarationName
-            every { alias } returns declarationName
-        }
+        val declaration1: SampleTestDeclaration =
+            mockk {
+                every { name } returns declarationName
+                every { alias } returns aliasName1
+            }
+        val declaration2: SampleTestDeclaration =
+            mockk {
+                every { name } returns declarationName
+                every { alias } returns aliasName2
+            }
+        val declaration3: SampleTestDeclaration =
+            mockk {
+                every { name } returns declarationName
+                every { alias } returns aliasName3
+            }
+        val declaration4: SampleTestDeclaration =
+            mockk {
+                every { name } returns declarationName
+                every { alias } returns declarationName
+            }
         val declarations = listOf(declaration1, declaration2, declaration3, declaration4)
 
         // when

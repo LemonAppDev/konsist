@@ -8,10 +8,11 @@ class KoGetterDeclarationForKoInitializerProviderTest {
     @Test
     fun `getter-is-initialized-in-block-body`() {
         // given
-        val sut = getSnippetFile("getter-is-initialized-in-block-body")
-            .properties()
-            .first()
-            .getter
+        val sut =
+            getSnippetFile("getter-is-initialized-in-block-body")
+                .properties()
+                .first()
+                .getter
 
         // then
         sut?.isInitialized shouldBeEqualTo true
@@ -20,10 +21,11 @@ class KoGetterDeclarationForKoInitializerProviderTest {
     @Test
     fun `getter-is-initialized-in-expression-body`() {
         // given
-        val sut = getSnippetFile("getter-is-initialized-in-expression-body")
-            .properties()
-            .first()
-            .getter
+        val sut =
+            getSnippetFile("getter-is-initialized-in-expression-body")
+                .properties()
+                .first()
+                .getter
 
         // then
         sut?.isInitialized shouldBeEqualTo true
@@ -32,10 +34,11 @@ class KoGetterDeclarationForKoInitializerProviderTest {
     @Test
     fun `getter-is-not-initialized`() {
         // given
-        val sut = getSnippetFile("getter-is-not-initialized")
-            .properties()
-            .first()
-            .getter
+        val sut =
+            getSnippetFile("getter-is-not-initialized")
+                .properties()
+                .first()
+                .getter
 
         // then
         sut?.isInitialized shouldBeEqualTo false

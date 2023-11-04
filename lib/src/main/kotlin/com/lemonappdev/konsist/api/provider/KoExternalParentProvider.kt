@@ -46,7 +46,10 @@ interface KoExternalParentProvider : KoBaseProvider {
      * @return `true` if there is a matching declaration, `false` otherwise.
      * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
      */
-    fun hasExternalParentWithName(name: String, vararg names: String): Boolean
+    fun hasExternalParentWithName(
+        name: String,
+        vararg names: String,
+    ): Boolean
 
     /**
      * Determines whether the declaration has parents interface defined project codebase (external == false)
@@ -56,7 +59,10 @@ interface KoExternalParentProvider : KoBaseProvider {
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
      */
-    fun hasExternalParentsWithAllNames(name: String, vararg names: String): Boolean
+    fun hasExternalParentsWithAllNames(
+        name: String,
+        vararg names: String,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one external parent that satisfies the provided predicate.
@@ -87,7 +93,10 @@ interface KoExternalParentProvider : KoBaseProvider {
      * @return `true` if there is a matching declaration, `false` otherwise.
      * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
      */
-    fun hasExternalParentOf(name: KClass<*>, vararg names: KClass<*>): Boolean
+    fun hasExternalParentOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+    ): Boolean
 
     /**
      * Determines whether the declaration has external parents with all the specified `KClass` type.
@@ -97,5 +106,8 @@ interface KoExternalParentProvider : KoBaseProvider {
      * @return `true` if the declaration has external parents of all the specified `KClass` types, `false` otherwise.
      * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
      */
-    fun hasAllExternalParentsOf(name: KClass<*>, vararg names: KClass<*>): Boolean
+    fun hasAllExternalParentsOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+    ): Boolean
 }

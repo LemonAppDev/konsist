@@ -18,9 +18,10 @@ class KoFunctionDeclarationForKoModifierProviderTest {
     @Test
     fun `function-has-no-modifiers`() {
         // given
-        val sut = getSnippetFile("function-has-no-modifiers")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-has-no-modifiers")
+                .functions()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -39,9 +40,10 @@ class KoFunctionDeclarationForKoModifierProviderTest {
     @Test
     fun `function-has-protected-and-suspend-modifiers`() {
         // given
-        val sut = getSnippetFile("function-has-protected-and-suspend-modifiers")
-            .functions(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("function-has-protected-and-suspend-modifiers")
+                .functions(includeNested = true)
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -71,9 +73,10 @@ class KoFunctionDeclarationForKoModifierProviderTest {
         modifiers: List<KoModifier>,
     ) {
         // given
-        val sut = getSnippetFile(fileName)
-            .functions(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile(fileName)
+                .functions(includeNested = true)
+                .first()
 
         // then
         sut.modifiers shouldBeEqualTo modifiers
@@ -85,18 +88,19 @@ class KoFunctionDeclarationForKoModifierProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("function-has-modifiers", listOf(PROTECTED, OPEN, SUSPEND, KoModifier.INLINE, KoModifier.OPERATOR)),
-            arguments("function-has-modifiers-and-annotation-with-parameter", listOf(PROTECTED, OPEN)),
-            arguments("function-has-modifiers-and-annotation-without-parameter", listOf(PROTECTED, OPEN)),
-            arguments("function-has-modifiers-annotation-and-comment", listOf(PROTECTED, OPEN)),
-            arguments("function-has-modifiers-and-annotations", listOf(PROTECTED, OPEN)),
-            arguments("function-has-modifiers-and-annotation-with-angle-brackets", listOf(PROTECTED, OPEN)),
-            arguments("function-has-modifiers-and-kdoc", listOf(PROTECTED, OPEN)),
-            arguments("function-has-modifiers-kdoc-and-annotation-before-them", listOf(PROTECTED, OPEN)),
-            arguments("function-has-modifiers-multiline-comment-and-annotation-before-them", listOf(PROTECTED, OPEN)),
-            arguments("function-has-modifiers-and-comment-before-them", listOf(PROTECTED, OPEN)),
-            arguments("function-has-modifiers-and-comment-after-them", listOf(PROTECTED, OPEN)),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("function-has-modifiers", listOf(PROTECTED, OPEN, SUSPEND, KoModifier.INLINE, KoModifier.OPERATOR)),
+                arguments("function-has-modifiers-and-annotation-with-parameter", listOf(PROTECTED, OPEN)),
+                arguments("function-has-modifiers-and-annotation-without-parameter", listOf(PROTECTED, OPEN)),
+                arguments("function-has-modifiers-annotation-and-comment", listOf(PROTECTED, OPEN)),
+                arguments("function-has-modifiers-and-annotations", listOf(PROTECTED, OPEN)),
+                arguments("function-has-modifiers-and-annotation-with-angle-brackets", listOf(PROTECTED, OPEN)),
+                arguments("function-has-modifiers-and-kdoc", listOf(PROTECTED, OPEN)),
+                arguments("function-has-modifiers-kdoc-and-annotation-before-them", listOf(PROTECTED, OPEN)),
+                arguments("function-has-modifiers-multiline-comment-and-annotation-before-them", listOf(PROTECTED, OPEN)),
+                arguments("function-has-modifiers-and-comment-before-them", listOf(PROTECTED, OPEN)),
+                arguments("function-has-modifiers-and-comment-after-them", listOf(PROTECTED, OPEN)),
+            )
     }
 }

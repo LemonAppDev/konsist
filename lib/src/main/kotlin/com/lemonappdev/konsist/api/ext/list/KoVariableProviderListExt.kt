@@ -30,9 +30,13 @@ fun <T : KoVariableProvider> List<T>.withoutVariables(): List<T> = filterNot { i
  * @param names The names of additional variables to include.
  * @return A list containing declarations with at least one of the specified variables.
  */
-fun <T : KoVariableProvider> List<T>.withVariableNamed(name: String, vararg names: String): List<T> = filter {
-    it.hasVariableWithName(name, *names)
-}
+fun <T : KoVariableProvider> List<T>.withVariableNamed(
+    name: String,
+    vararg names: String,
+): List<T> =
+    filter {
+        it.hasVariableWithName(name, *names)
+    }
 
 /**
  * List containing declarations without any of specified variables.
@@ -41,9 +45,13 @@ fun <T : KoVariableProvider> List<T>.withVariableNamed(name: String, vararg name
  * @param names The names of additional variables to exclude.
  * @return A list containing declarations without any of specified variables.
  */
-fun <T : KoVariableProvider> List<T>.withoutVariableNamed(name: String, vararg names: String): List<T> = filterNot {
-    it.hasVariableWithName(name, *names)
-}
+fun <T : KoVariableProvider> List<T>.withoutVariableNamed(
+    name: String,
+    vararg names: String,
+): List<T> =
+    filterNot {
+        it.hasVariableWithName(name, *names)
+    }
 
 /**
  * List containing declarations that have all specified variables.
@@ -52,9 +60,13 @@ fun <T : KoVariableProvider> List<T>.withoutVariableNamed(name: String, vararg n
  * @param names The name(s) of the variables to include.
  * @return A list containing declarations with all specified variables.
  */
-fun <T : KoVariableProvider> List<T>.withAllVariablesNamed(name: String, vararg names: String): List<T> = filter {
-    it.hasVariablesWithAllNames(name, *names)
-}
+fun <T : KoVariableProvider> List<T>.withAllVariablesNamed(
+    name: String,
+    vararg names: String,
+): List<T> =
+    filter {
+        it.hasVariablesWithAllNames(name, *names)
+    }
 
 /**
  * List containing declarations without all specified variables.
@@ -63,8 +75,10 @@ fun <T : KoVariableProvider> List<T>.withAllVariablesNamed(name: String, vararg 
  * @param names The name(s) of the variables to exclude.
  * @return A list containing declarations without all specified variables.
  */
-fun <T : KoVariableProvider> List<T>.withoutAllVariablesNamed(name: String, vararg names: String): List<T> =
-    filterNot { it.hasVariablesWithAllNames(name, *names) }
+fun <T : KoVariableProvider> List<T>.withoutAllVariablesNamed(
+    name: String,
+    vararg names: String,
+): List<T> = filterNot { it.hasVariablesWithAllNames(name, *names) }
 
 /**
  * List containing declarations that have at least one variable satisfying the provided predicate.
@@ -72,9 +86,10 @@ fun <T : KoVariableProvider> List<T>.withoutAllVariablesNamed(name: String, vara
  * @param predicate A function that defines the condition to be met by a variable declaration.
  * @return A list containing declarations with at least one variable satisfying the predicate.
  */
-fun <T : KoVariableProvider> List<T>.withVariable(predicate: (KoVariableDeclaration) -> Boolean): List<T> = filter {
-    it.hasVariable(predicate)
-}
+fun <T : KoVariableProvider> List<T>.withVariable(predicate: (KoVariableDeclaration) -> Boolean): List<T> =
+    filter {
+        it.hasVariable(predicate)
+    }
 
 /**
  * List containing declarations that not have variable satisfying the provided predicate.

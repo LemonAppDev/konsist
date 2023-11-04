@@ -10,12 +10,13 @@ class KoParameterDeclarationForKoPackageProviderTest {
     @Test
     fun `parameter-is-not-in-package`() {
         // given
-        val sut = getSnippetFile("parameter-is-not-in-package")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
+        val sut =
+            getSnippetFile("parameter-is-not-in-package")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
         sut?.packagee shouldBeEqualTo null
@@ -24,12 +25,13 @@ class KoParameterDeclarationForKoPackageProviderTest {
     @Test
     fun `parameter-is-in-package`() {
         // given
-        val sut = getSnippetFile("parameter-is-in-package")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
+        val sut =
+            getSnippetFile("parameter-is-in-package")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
         assertSoftly(sut) {
@@ -38,6 +40,5 @@ class KoParameterDeclarationForKoPackageProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koparameter/snippet/forkopackageprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koparameter/snippet/forkopackageprovider/", fileName)
 }

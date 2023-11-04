@@ -47,7 +47,10 @@ interface KoLocalClassProvider : KoBaseProvider {
      * @param names the names of the local classes to check.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasLocalClassWithName(name: String, vararg names: String): Boolean
+    fun hasLocalClassWithName(
+        name: String,
+        vararg names: String,
+    ): Boolean
 
     /**
      * Determines whether the declaration has local classes with all the specified names.
@@ -56,7 +59,10 @@ interface KoLocalClassProvider : KoBaseProvider {
      * @param names The names of the local classes to check.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasLocalClassesWithAllNames(name: String, vararg names: String): Boolean
+    fun hasLocalClassesWithAllNames(
+        name: String,
+        vararg names: String,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one local class that satisfies the provided predicate.

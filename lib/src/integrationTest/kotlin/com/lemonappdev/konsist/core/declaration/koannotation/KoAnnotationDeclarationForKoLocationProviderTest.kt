@@ -9,11 +9,12 @@ class KoAnnotationDeclarationForKoLocationProviderTest {
     @Test
     fun `annotation-location-with-single-digit`() {
         // given
-        val sut = getSnippetFile("annotation-location-with-single-digit")
-            .functions()
-            .first()
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-location-with-single-digit")
+                .functions()
+                .first()
+                .annotations
+                .first()
 
         // then
         sut.location shouldBeEqualTo "${sut.path}:3:1"
@@ -22,11 +23,12 @@ class KoAnnotationDeclarationForKoLocationProviderTest {
     @Test
     fun `annotation-location-with-double-digit`() {
         // given
-        val sut = getSnippetFile("annotation-location-with-double-digit")
-            .functions(includeNested = true)
-            .first()
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-location-with-double-digit")
+                .functions(includeNested = true)
+                .first()
+                .annotations
+                .first()
 
         // then
         sut.location shouldBeEqualTo "${sut.path}:10:29"
@@ -35,18 +37,20 @@ class KoAnnotationDeclarationForKoLocationProviderTest {
     @Test
     fun `annotation-location-with-text`() {
         // given
-        val projectPath = getSnippetFile("annotation-location-with-text")
-            .functions()
-            .first()
-            .annotations
-            .first()
-            .projectPath
+        val projectPath =
+            getSnippetFile("annotation-location-with-text")
+                .functions()
+                .first()
+                .annotations
+                .first()
+                .projectPath
 
-        val sut = getSnippetFile("annotation-location-with-text")
-            .functions()
-            .first()
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-location-with-text")
+                .functions()
+                .first()
+                .annotations
+                .first()
 
         // then
         val declaration = "Declaration:\n@SampleAnnotation"

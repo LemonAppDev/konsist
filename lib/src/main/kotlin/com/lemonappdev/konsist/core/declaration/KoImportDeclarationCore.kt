@@ -31,21 +31,21 @@ internal class KoImportDeclarationCore private constructor(override val ktImport
     KoSourceSetProviderCore,
     KoTextProviderCore,
     KoWildcardProviderCore {
-    override val psiElement: PsiElement by lazy { ktImportDirective }
+        override val psiElement: PsiElement by lazy { ktImportDirective }
 
-    override val ktElement: KtElement by lazy { ktImportDirective }
+        override val ktElement: KtElement by lazy { ktImportDirective }
 
-    override val name: String by lazy { ktImportDirective.importPath?.fqName.toString() }
+        override val name: String by lazy { ktImportDirective.importPath?.fqName.toString() }
 
-    override fun toString(): String = name
+        override fun toString(): String = name
 
-    internal companion object {
-        private val cache: KoDeclarationCache<KoImportDeclaration> = KoDeclarationCache()
+        internal companion object {
+            private val cache: KoDeclarationCache<KoImportDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(
-            ktImportDirective: KtImportDirective,
-            containingDeclaration: KoContainingDeclarationProvider,
-        ): KoImportDeclaration =
-            cache.getOrCreateInstance(ktImportDirective, containingDeclaration) { KoImportDeclarationCore(ktImportDirective) }
+            internal fun getInstance(
+                ktImportDirective: KtImportDirective,
+                containingDeclaration: KoContainingDeclarationProvider,
+            ): KoImportDeclaration =
+                cache.getOrCreateInstance(ktImportDirective, containingDeclaration) { KoImportDeclarationCore(ktImportDirective) }
+        }
     }
-}

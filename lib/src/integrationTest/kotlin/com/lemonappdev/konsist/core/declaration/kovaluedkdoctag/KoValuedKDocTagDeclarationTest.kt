@@ -9,12 +9,13 @@ class KoValuedKDocTagDeclarationTest {
     @Test
     fun `kdoc-valued-tag-to-string`() {
         // given
-        val sut = getSnippetFile("kdoc-valued-tag-to-string")
-            .functions()
-            .kDocs
-            .first()
-            .paramTags
-            .first()
+        val sut =
+            getSnippetFile("kdoc-valued-tag-to-string")
+                .functions()
+                .kDocs
+                .first()
+                .paramTags
+                .first()
 
         // then
         sut.toString() shouldBeEqualTo "@param sampleParameter sample text"

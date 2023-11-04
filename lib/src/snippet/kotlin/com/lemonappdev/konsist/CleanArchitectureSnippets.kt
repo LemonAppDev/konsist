@@ -6,9 +6,11 @@ import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.verify.assertTrue
+import org.junit.jupiter.api.Test
 import org.springframework.stereotype.Repository
 
 class CleanArchitectureSnippets {
+    @Test
     fun `clean architecture layers have correct dependencies`() {
         Konsist
             .scopeFromProduction()
@@ -25,6 +27,7 @@ class CleanArchitectureSnippets {
             }
     }
 
+    @Test
     fun `classes with 'UseCase' suffix should reside in 'domain' and 'usecase' package`() {
         Konsist
             .scopeFromProject()
@@ -33,20 +36,23 @@ class CleanArchitectureSnippets {
             .assertTrue { it.resideInPackage("..domain..usecase..") }
     }
 
+    @Test
     fun `classes with 'UseCase' suffix should have single 'public operator' method named 'invoke'`() {
         Konsist
             .scopeFromProject()
             .classes()
             .withNameEndingWith("UseCase")
             .assertTrue {
-                val hasSingleInvokeOperatorMethod = it.hasFunction { function ->
-                    function.name == "invoke" && function.hasPublicOrDefaultModifier && function.hasOperatorModifier
-                }
+                val hasSingleInvokeOperatorMethod =
+                    it.hasFunction { function ->
+                        function.name == "invoke" && function.hasPublicOrDefaultModifier && function.hasOperatorModifier
+                    }
 
                 hasSingleInvokeOperatorMethod && it.countFunctions { item -> item.hasPublicOrDefaultModifier } == 1
             }
     }
 
+    @Test
     fun `interfaces with 'Repository' annotation should reside in 'data' package`() {
         Konsist
             .scopeFromProject()
@@ -55,6 +61,7 @@ class CleanArchitectureSnippets {
             .assertTrue { it.resideInPackage("..data..") }
     }
 
+    @Test
     fun `every UseCase class has test`() {
         Konsist
             .scopeFromProduction()

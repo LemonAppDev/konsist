@@ -9,10 +9,11 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
     @Test
     fun `type`() {
         // given
-        val sut = getSnippetFile("type")
-            .properties()
-            .first()
-            .type
+        val sut =
+            getSnippetFile("type")
+                .properties()
+                .first()
+                .type
 
         // then
         assertSoftly(sut) {
@@ -26,10 +27,11 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
     @Test
     fun `nullable-type`() {
         // given
-        val sut = getSnippetFile("nullable-type")
-            .properties()
-            .first()
-            .type
+        val sut =
+            getSnippetFile("nullable-type")
+                .properties()
+                .first()
+                .type
 
         // then
         assertSoftly(sut) {
@@ -43,10 +45,11 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
     @Test
     fun `generic-type`() {
         // given
-        val sut = getSnippetFile("generic-type")
-            .properties()
-            .first()
-            .type
+        val sut =
+            getSnippetFile("generic-type")
+                .properties()
+                .first()
+                .type
 
         // then
         assertSoftly(sut) {
@@ -60,10 +63,11 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
     @Test
     fun `generic-with-nullable-type-argument`() {
         // given
-        val sut = getSnippetFile("generic-with-nullable-type-argument")
-            .properties()
-            .first()
-            .type
+        val sut =
+            getSnippetFile("generic-with-nullable-type-argument")
+                .properties()
+                .first()
+                .type
 
         // then
         assertSoftly(sut) {
@@ -77,10 +81,11 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
     @Test
     fun `nullable-generic-with-nullable-type-argument`() {
         // given
-        val sut = getSnippetFile("nullable-generic-with-nullable-type-argument")
-            .properties()
-            .first()
-            .type
+        val sut =
+            getSnippetFile("nullable-generic-with-nullable-type-argument")
+                .properties()
+                .first()
+                .type
 
         // then
         assertSoftly(sut) {
@@ -94,10 +99,11 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
     @Test
     fun `nullable-generic-type`() {
         // given
-        val sut = getSnippetFile("nullable-generic-type")
-            .properties()
-            .first()
-            .type
+        val sut =
+            getSnippetFile("nullable-generic-type")
+                .properties()
+                .first()
+                .type
 
         // then
         assertSoftly(sut) {
@@ -111,10 +117,11 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
     @Test
     fun `import-alias`() {
         // given
-        val sut = getSnippetFile("import-alias")
-            .properties()
-            .first()
-            .type
+        val sut =
+            getSnippetFile("import-alias")
+                .properties()
+                .first()
+                .type
 
         // then
         assertSoftly(sut) {
@@ -128,10 +135,11 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
     @Test
     fun `nullable-import-alias`() {
         // given
-        val sut = getSnippetFile("nullable-import-alias")
-            .properties()
-            .first()
-            .type
+        val sut =
+            getSnippetFile("nullable-import-alias")
+                .properties()
+                .first()
+                .type
 
         // then
         assertSoftly(sut) {

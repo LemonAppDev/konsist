@@ -17,9 +17,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     @Test
     fun `declaration-assert-test-method-name`() {
         // given
-        val sut = getSnippetFile("declaration-assert-test-method-name")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("declaration-assert-test-method-name")
+                .classes()
+                .asSequence()
 
         // then
         try {
@@ -32,9 +33,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     @Test
     fun `file-declaration-assert-test-method-name`() {
         // given
-        val sut = getSnippetFile("file-declaration-assert-test-method-name")
-            .files
-            .asSequence()
+        val sut =
+            getSnippetFile("file-declaration-assert-test-method-name")
+                .files
+                .asSequence()
 
         // then
         try {
@@ -48,9 +50,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     fun `declaration-assert-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("declaration-assert-error-with-custom-message")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("declaration-assert-error-with-custom-message")
+                .classes()
+                .asSequence()
 
         // then
         try {
@@ -68,9 +71,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     fun `file-declaration-assert-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("file-declaration-assert-error-with-custom-message")
-            .files
-            .asSequence()
+        val sut =
+            getSnippetFile("file-declaration-assert-error-with-custom-message")
+                .files
+                .asSequence()
 
         // then
         try {
@@ -87,9 +91,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     @Test
     fun `declaration-assert-displaying-correct-failed-declaration-type`() {
         // given
-        val sut = getSnippetFile("declaration-assert-displaying-correct-failed-declaration-type")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("declaration-assert-displaying-correct-failed-declaration-type")
+                .classes()
+                .asSequence()
 
         // then
         try {
@@ -103,9 +108,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     @Test
     fun `file-declaration-assert-displaying-correct-failed-declaration-type`() {
         // given
-        val sut = getSnippetFile("file-declaration-assert-displaying-correct-failed-declaration-type")
-            .files
-            .asSequence()
+        val sut =
+            getSnippetFile("file-declaration-assert-displaying-correct-failed-declaration-type")
+                .files
+                .asSequence()
 
         // then
         try {
@@ -119,9 +125,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     @Test
     fun `declaration-assert-fails-when-declaration-list-is-empty`() {
         // given
-        val sut = getSnippetFile("declaration-assert-fails-when-declaration-list-is-empty")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("declaration-assert-fails-when-declaration-list-is-empty")
+                .classes()
+                .asSequence()
 
         // when
         val func = {
@@ -136,9 +143,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     @Test
     fun `declaration-assert-not-fails-when-declaration-list-is-empty`() {
         // given
-        val sut = getSnippetFile("declaration-assert-not-fails-when-declaration-list-is-empty")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("declaration-assert-not-fails-when-declaration-list-is-empty")
+                .classes()
+                .asSequence()
 
         // when
         val func = {
@@ -153,9 +161,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     @Test
     fun `assert-passes`() {
         // given
-        val sut = getSnippetFile("assert-passes")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-passes")
+                .classes()
+                .asSequence()
 
         // then
         sut.assert { it.name == "SampleClass" }
@@ -164,9 +173,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     @Test
     fun `assert-fails`() {
         // given
-        val sut = getSnippetFile("assert-fails")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-fails")
+                .classes()
+                .asSequence()
 
         // when
         val func = {
@@ -180,9 +190,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     @Test
     fun `assert-not-passes`() {
         // given
-        val sut = getSnippetFile("assert-not-passes")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-not-passes")
+                .classes()
+                .asSequence()
 
         // then
         sut.assertNot {
@@ -193,9 +204,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     @Test
     fun `assert-not-fails`() {
         // given
-        val sut = getSnippetFile("assert-not-fails")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-not-fails")
+                .classes()
+                .asSequence()
 
         // when
         val func = {
@@ -211,9 +223,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     @Test
     fun `assert-passes-on-declarations-which-items-have-null-parent`() {
         // given
-        val sut = getSnippetFile("assert-passes-on-declarations-which-items-have-null-parent")
-            .files
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-passes-on-declarations-which-items-have-null-parent")
+                .files
+                .asSequence()
 
         // then
         sut.assert { it.name == "assert-passes-on-declarations-which-items-have-null-parent" }
@@ -222,9 +235,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     @Test
     fun `assert-fails-on-declarations-which-items-have-null-parent`() {
         // given
-        val sut = getSnippetFile("assert-fails-on-declarations-which-items-have-null-parent")
-            .files
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-fails-on-declarations-which-items-have-null-parent")
+                .files
+                .asSequence()
 
         // when
         val func = {
@@ -238,9 +252,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     @Test
     fun `assert-not-passes-on-declarations-which-items-have-null-parent`() {
         // given
-        val sut = getSnippetFile("assert-not-passes-on-declarations-which-items-have-null-parent")
-            .files
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-not-passes-on-declarations-which-items-have-null-parent")
+                .files
+                .asSequence()
 
         // then
         sut.assertNot {
@@ -251,9 +266,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     @Test
     fun `assert-not-fails-on-declarations-which-items-have-null-parent`() {
         // given
-        val sut = getSnippetFile("assert-not-fails-on-declarations-which-items-have-null-parent")
-            .files
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-not-fails-on-declarations-which-items-have-null-parent")
+                .files
+                .asSequence()
 
         // when
         val func = {
@@ -269,9 +285,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     @Test
     fun `assert-passes-when-expression-is-nullable`() {
         // given
-        val sut = getSnippetFile("assert-passes-when-expression-is-nullable")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-passes-when-expression-is-nullable")
+                .classes()
+                .asSequence()
 
         // then
         sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
@@ -280,9 +297,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     @Test
     fun `assert-fails-when-expression-is-nullable`() {
         // given
-        val sut = getSnippetFile("assert-fails-when-expression-is-nullable")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-fails-when-expression-is-nullable")
+                .classes()
+                .asSequence()
 
         // when
         val func = {
@@ -296,9 +314,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     @Test
     fun `assert-not-passes-when-expression-is-nullable`() {
         // given
-        val sut = getSnippetFile("assert-not-passes-when-expression-is-nullable")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-not-passes-when-expression-is-nullable")
+                .classes()
+                .asSequence()
 
         // then
         sut.assertNot { it.primaryConstructor?.hasParameterNamed("otherParameter") }
@@ -307,9 +326,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     @Test
     fun `assert-not-fails-when-expression-is-nullable`() {
         // given
-        val sut = getSnippetFile("assert-not-fails-when-expression-is-nullable")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-not-fails-when-expression-is-nullable")
+                .classes()
+                .asSequence()
 
         // when
         val func = {
@@ -548,9 +568,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
         val scope1 = getSnippetFile("assert-suppress-by-konsist-and-name-on-declarations-which-items-have-null-parent")
         val scope2 = getSnippetFile("file-without-suppress")
 
-        val sut = (scope1 + scope2)
-            .files
-            .asSequence()
+        val sut =
+            (scope1 + scope2)
+                .files
+                .asSequence()
 
         // then
         sut.assert { it.name.endsWith("suppress") }
@@ -562,9 +583,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
         val scope1 = getSnippetFile("assert-suppress-by-name-on-declarations-which-items-have-null-parent")
         val scope2 = getSnippetFile("file-without-suppress")
 
-        val sut = (scope1 + scope2)
-            .files
-            .asSequence()
+        val sut =
+            (scope1 + scope2)
+                .files
+                .asSequence()
 
         // then
         sut.assert { it.name.endsWith("suppress") }
@@ -576,9 +598,10 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
         val scope1 = getSnippetFile("assert-suppress-with-few-parameters-on-declarations-which-items-have-null-parent")
         val scope2 = getSnippetFile("file-without-suppress")
 
-        val sut = (scope1 + scope2)
-            .files
-            .asSequence()
+        val sut =
+            (scope1 + scope2)
+                .files
+                .asSequence()
 
         // then
         sut.assert { it.name.endsWith("suppress") }

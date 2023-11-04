@@ -10,12 +10,14 @@ class KoHasTestClassProviderListExtTest {
     @Test
     fun `withTestClass() returns declaration with test`() {
         // given
-        val declaration1: KoHasTestClassProvider = mockk {
-            every { hasTestClass() } returns true
-        }
-        val declaration2: KoHasTestClassProvider = mockk {
-            every { hasTestClass() } returns false
-        }
+        val declaration1: KoHasTestClassProvider =
+            mockk {
+                every { hasTestClass() } returns true
+            }
+        val declaration2: KoHasTestClassProvider =
+            mockk {
+                every { hasTestClass() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -28,12 +30,14 @@ class KoHasTestClassProviderListExtTest {
     @Test
     fun `withoutTestClass() returns declaration without test`() {
         // given
-        val declaration1: KoHasTestClassProvider = mockk {
-            every { hasTestClass() } returns true
-        }
-        val declaration2: KoHasTestClassProvider = mockk {
-            every { hasTestClass() } returns false
-        }
+        val declaration1: KoHasTestClassProvider =
+            mockk {
+                every { hasTestClass() } returns true
+            }
+        val declaration2: KoHasTestClassProvider =
+            mockk {
+                every { hasTestClass() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

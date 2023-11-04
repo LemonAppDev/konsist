@@ -16,9 +16,10 @@ internal interface KoNullableTypeProviderCore :
     override val type: KoTypeDeclaration?
         get() = ReceiverUtil.getType(getTypeReferences(), ktCallableDeclaration.isExtensionDeclaration(), this)
 
-    private fun getTypeReferences(): List<KtTypeReference> = ktCallableDeclaration
-        .children
-        .filterIsInstance<KtTypeReference>()
+    private fun getTypeReferences(): List<KtTypeReference> =
+        ktCallableDeclaration
+            .children
+            .filterIsInstance<KtTypeReference>()
 
     @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasType { it.name == name }"))
     override fun hasType(name: String): Boolean = this.type?.name == name

@@ -9,10 +9,11 @@ class KoTypeDeclarationForKoPathProviderTest {
     @Test
     fun `type-file-path`() {
         // given
-        val sut = getSnippetFile("type-file-path")
-            .properties()
-            .first()
-            .type
+        val sut =
+            getSnippetFile("type-file-path")
+                .properties()
+                .first()
+                .type
 
         // then
         assertSoftly(sut?.path) {
@@ -24,10 +25,11 @@ class KoTypeDeclarationForKoPathProviderTest {
     @Test
     fun `type-project-file-path`() {
         // given
-        val sut = getSnippetFile("type-project-file-path")
-            .properties()
-            .first()
-            .type
+        val sut =
+            getSnippetFile("type-project-file-path")
+                .properties()
+                .first()
+                .type
 
         // then
         sut
@@ -41,10 +43,11 @@ class KoTypeDeclarationForKoPathProviderTest {
     @Test
     fun `type-reside-in-file-path`() {
         // given
-        val sut = getSnippetFile("type-reside-in-file-path")
-            .properties()
-            .first()
-            .type
+        val sut =
+            getSnippetFile("type-reside-in-file-path")
+                .properties()
+                .first()
+                .type
 
         // then
         assertSoftly(sut) {
@@ -58,10 +61,11 @@ class KoTypeDeclarationForKoPathProviderTest {
     @Test
     fun `type-reside-in-project-file-path`() {
         // given
-        val sut = getSnippetFile("type-reside-in-project-file-path")
-            .properties()
-            .first()
-            .type
+        val sut =
+            getSnippetFile("type-reside-in-project-file-path")
+                .properties()
+                .first()
+                .type
 
         // then
         assertSoftly(sut) {
@@ -72,6 +76,5 @@ class KoTypeDeclarationForKoPathProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kotype/snippet/forkopathprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kotype/snippet/forkopathprovider/", fileName)
 }

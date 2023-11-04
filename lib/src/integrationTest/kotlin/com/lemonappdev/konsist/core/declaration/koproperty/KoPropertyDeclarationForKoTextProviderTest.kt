@@ -8,9 +8,10 @@ class KoPropertyDeclarationForKoTextProviderTest {
     @Test
     fun `property-text`() {
         // given
-        val sut = getSnippetFile("property-text")
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-text")
+                .properties()
+                .first()
 
         // then
         sut
@@ -18,6 +19,5 @@ class KoPropertyDeclarationForKoTextProviderTest {
             .shouldBeEqualTo("val sampleProperty = \"\"")
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koproperty/snippet/forkotextprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koproperty/snippet/forkotextprovider/", fileName)
 }

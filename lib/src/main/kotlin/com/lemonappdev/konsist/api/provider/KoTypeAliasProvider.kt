@@ -54,7 +54,10 @@ interface KoTypeAliasProvider : KoBaseProvider {
      * @param names the names of the type aliases to check.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasTypeAliasWithName(name: String, vararg names: String): Boolean
+    fun hasTypeAliasWithName(
+        name: String,
+        vararg names: String,
+    ): Boolean
 
     /**
      * Determines whether the declaration has type aliases with all the specified names.
@@ -63,7 +66,10 @@ interface KoTypeAliasProvider : KoBaseProvider {
      * @param names The names of the type aliases to check.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasTypeAliasesWithAllNames(name: String, vararg names: String): Boolean
+    fun hasTypeAliasesWithAllNames(
+        name: String,
+        vararg names: String,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one type alias that satisfies the provided predicate.

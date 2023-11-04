@@ -12,30 +12,33 @@ internal interface KoSourceAndAliasTypeProviderCore : KoSourceAndAliasTypeProvid
         get() = KoFileDeclarationCore(ktTypeReference.containingKtFile)
 
     override val aliasType: String?
-        get() = file
-            .imports
-            .firstOrNull { it.alias == ktTypeReference.text.removeSuffix("?") }
-            ?.alias
+        get() =
+            file
+                .imports
+                .firstOrNull { it.alias == ktTypeReference.text.removeSuffix("?") }
+                ?.alias
 
     override val isAlias: Boolean
         get() = aliasType != null
 
     override val sourceType: String
-        get() = if (isAlias) {
-            file
-                .imports
-                .first { it.alias == ktTypeReference.text.removeSuffix("?") }
-                .name
-                .split(".")
-                .toMutableList()
-                .last { it.isNotBlank() }
-        } else {
-            name
-                .removeSuffix("?")
-        }
+        get() =
+            if (isAlias) {
+                file
+                    .imports
+                    .first { it.alias == ktTypeReference.text.removeSuffix("?") }
+                    .name
+                    .split(".")
+                    .toMutableList()
+                    .last { it.isNotBlank() }
+            } else {
+                name
+                    .removeSuffix("?")
+            }
 
     override val baseSourceType: String
-        get() = sourceType
-            .split("<")
-            .first()
+        get() =
+            sourceType
+                .split("<")
+                .first()
 }

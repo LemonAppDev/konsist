@@ -8,11 +8,12 @@ class KoConstructorDeclarationForKoPackageProviderTest {
     @Test
     fun `constructor-is-not-in-package`() {
         // given
-        val sut = getSnippetFile("constructor-is-not-in-package")
-            .classes()
-            .first()
-            .constructors
-            .first()
+        val sut =
+            getSnippetFile("constructor-is-not-in-package")
+                .classes()
+                .first()
+                .constructors
+                .first()
 
         // then
         sut.packagee shouldBeEqualTo null
@@ -21,11 +22,12 @@ class KoConstructorDeclarationForKoPackageProviderTest {
     @Test
     fun `constructor-is-in-package`() {
         // given
-        val sut = getSnippetFile("constructor-is-in-package")
-            .classes()
-            .first()
-            .constructors
-            .first()
+        val sut =
+            getSnippetFile("constructor-is-in-package")
+                .classes()
+                .first()
+                .constructors
+                .first()
 
         // then
         sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"

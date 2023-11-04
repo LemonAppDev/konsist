@@ -17,9 +17,10 @@ class KoVariableDeclarationTest {
     @MethodSource("provideValues")
     fun `variable-to-string`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         sut.toString() shouldBeEqualTo "sampleVariable"
@@ -31,12 +32,13 @@ class KoVariableDeclarationTest {
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments(getSnippetFile("variable-in-function-to-string").functions()),
-            arguments(getSnippetFile("variable-in-init-block-to-string").classes().initBlocks),
-            arguments(getSnippetFile("variable-in-enum-constant-to-string").classes().enumConstants),
-            arguments(getSnippetFile("variable-in-getter-to-string").properties().getters),
-            arguments(getSnippetFile("variable-in-setter-to-string").properties().setters),
-        )
+        fun provideValues() =
+            listOf(
+                arguments(getSnippetFile("variable-in-function-to-string").functions()),
+                arguments(getSnippetFile("variable-in-init-block-to-string").classes().initBlocks),
+                arguments(getSnippetFile("variable-in-enum-constant-to-string").classes().enumConstants),
+                arguments(getSnippetFile("variable-in-getter-to-string").properties().getters),
+                arguments(getSnippetFile("variable-in-setter-to-string").properties().setters),
+            )
     }
 }

@@ -10,12 +10,14 @@ class KoConstModifierProviderListExtTest {
     @Test
     fun `withConstModifier() returns declaration with const modifier`() {
         // given
-        val declaration1: KoConstModifierProvider = mockk {
-            every { hasConstModifier } returns true
-        }
-        val declaration2: KoConstModifierProvider = mockk {
-            every { hasConstModifier } returns false
-        }
+        val declaration1: KoConstModifierProvider =
+            mockk {
+                every { hasConstModifier } returns true
+            }
+        val declaration2: KoConstModifierProvider =
+            mockk {
+                every { hasConstModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -28,12 +30,14 @@ class KoConstModifierProviderListExtTest {
     @Test
     fun `withoutConstModifier() returns declaration without const modifier`() {
         // given
-        val declaration1: KoConstModifierProvider = mockk {
-            every { hasConstModifier } returns true
-        }
-        val declaration2: KoConstModifierProvider = mockk {
-            every { hasConstModifier } returns false
-        }
+        val declaration1: KoConstModifierProvider =
+            mockk {
+                every { hasConstModifier } returns true
+            }
+        val declaration2: KoConstModifierProvider =
+            mockk {
+                every { hasConstModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

@@ -13,9 +13,10 @@ class KoObjectDeclarationForKoParentProviderTest {
     @Test
     fun `object-has-no-parents`() {
         // given
-        val sut = getSnippetFile("object-has-no-parents")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-no-parents")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -36,18 +37,20 @@ class KoObjectDeclarationForKoParentProviderTest {
     @Test
     fun `object-has-parent-class-interfaces-and-external-parent`() {
         // given
-        val sut = getSnippetFile("object-has-parent-class-interfaces-and-external-parent")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-parent-class-interfaces-and-external-parent")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
-            parents.map { it.name } shouldBeEqualTo listOf(
-                "SampleParentClass",
-                "SampleParentInterface1",
-                "SampleParentInterface2",
-                "SampleExternalInterface",
-            )
+            parents.map { it.name } shouldBeEqualTo
+                listOf(
+                    "SampleParentClass",
+                    "SampleParentInterface1",
+                    "SampleParentInterface2",
+                    "SampleExternalInterface",
+                )
             numParents shouldBeEqualTo 4
             countParents { it.name == "SampleParentClass" } shouldBeEqualTo 1
             countParents { it.hasNameStartingWith("SampleParentInterface") } shouldBeEqualTo 2
@@ -79,9 +82,10 @@ class KoObjectDeclarationForKoParentProviderTest {
     @Test
     fun `object-has-parent-defined-by-import-alias`() {
         // given
-        val sut = getSnippetFile("object-has-parent-defined-by-import-alias")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-parent-defined-by-import-alias")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut.parents.first()) {
@@ -90,6 +94,5 @@ class KoObjectDeclarationForKoParentProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koobject/snippet/forkoparentprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/forkoparentprovider/", fileName)
 }

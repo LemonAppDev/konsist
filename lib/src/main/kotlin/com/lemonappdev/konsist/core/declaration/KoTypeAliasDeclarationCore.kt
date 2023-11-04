@@ -35,55 +35,55 @@ internal class KoTypeAliasDeclarationCore private constructor(
     override val containingDeclaration: KoContainingDeclarationProvider,
 ) :
     KoTypeAliasDeclaration,
-    KoBaseProviderCore,
-    KoAnnotationProviderCore,
-    KoContainingFileProviderCore,
-    KoDeclarationFullyQualifiedNameProviderCore,
-    KoKDocProviderCore,
-    KoLocationProviderCore,
-    KoModifierProviderCore,
-    KoNameProviderCore,
-    KoPackageDeclarationProviderCore,
-    KoContainingDeclarationProviderCore,
-    KoPathProviderCore,
-    KoModuleProviderCore,
-    KoSourceSetProviderCore,
-    KoResideInPackageProviderCore,
-    KoTextProviderCore,
-    KoNonNullableTypeProviderCore,
-    KoVisibilityModifierProviderCore,
-    KoActualModifierProviderCore {
-    override val ktAnnotated: KtAnnotated by lazy { ktTypeAlias }
+        KoBaseProviderCore,
+        KoAnnotationProviderCore,
+        KoContainingFileProviderCore,
+        KoDeclarationFullyQualifiedNameProviderCore,
+        KoKDocProviderCore,
+        KoLocationProviderCore,
+        KoModifierProviderCore,
+        KoNameProviderCore,
+        KoPackageDeclarationProviderCore,
+        KoContainingDeclarationProviderCore,
+        KoPathProviderCore,
+        KoModuleProviderCore,
+        KoSourceSetProviderCore,
+        KoResideInPackageProviderCore,
+        KoTextProviderCore,
+        KoNonNullableTypeProviderCore,
+        KoVisibilityModifierProviderCore,
+        KoActualModifierProviderCore {
+        override val ktAnnotated: KtAnnotated by lazy { ktTypeAlias }
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktTypeAlias }
+        override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktTypeAlias }
 
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktTypeAlias }
+        override val ktModifierListOwner: KtModifierListOwner by lazy { ktTypeAlias }
 
-    override val psiElement: PsiElement by lazy { ktTypeAlias }
+        override val psiElement: PsiElement by lazy { ktTypeAlias }
 
-    override val ktElement: KtElement by lazy { ktTypeAlias }
+        override val ktElement: KtElement by lazy { ktTypeAlias }
 
-    override val type: KoTypeDeclaration by lazy {
-        ktTypeAlias
-            .getTypeReference()
-            ?.let { KoTypeDeclarationCore.getInstance(it, this) }
-            ?: throw KoInternalException("Type alias has no type", koBaseProvider = this)
+        override val type: KoTypeDeclaration by lazy {
+            ktTypeAlias
+                .getTypeReference()
+                ?.let { KoTypeDeclarationCore.getInstance(it, this) }
+                ?: throw KoInternalException("Type alias has no type", koBaseProvider = this)
+        }
+
+        override fun toString(): String = name
+
+        internal companion object {
+            private val cache: KoDeclarationCache<KoTypeAliasDeclaration> = KoDeclarationCache()
+
+            internal fun getInstance(
+                ktTypeAlias: KtTypeAlias,
+                containingDeclaration: KoContainingDeclarationProvider,
+            ): KoTypeAliasDeclaration =
+                cache.getOrCreateInstance(ktTypeAlias, containingDeclaration) {
+                    KoTypeAliasDeclarationCore(
+                        ktTypeAlias,
+                        containingDeclaration,
+                    )
+                }
+        }
     }
-
-    override fun toString(): String = name
-
-    internal companion object {
-        private val cache: KoDeclarationCache<KoTypeAliasDeclaration> = KoDeclarationCache()
-
-        internal fun getInstance(
-            ktTypeAlias: KtTypeAlias,
-            containingDeclaration: KoContainingDeclarationProvider,
-        ): KoTypeAliasDeclaration =
-            cache.getOrCreateInstance(ktTypeAlias, containingDeclaration) {
-                KoTypeAliasDeclarationCore(
-                    ktTypeAlias,
-                    containingDeclaration,
-                )
-            }
-    }
-}

@@ -10,12 +10,14 @@ class KoAbstractModifierProviderListExtTest {
     @Test
     fun `withAbstractModifier() returns declaration with abstract modifier`() {
         // given
-        val declaration1: KoAbstractModifierProvider = mockk {
-            every { hasAbstractModifier } returns true
-        }
-        val declaration2: KoAbstractModifierProvider = mockk {
-            every { hasAbstractModifier } returns false
-        }
+        val declaration1: KoAbstractModifierProvider =
+            mockk {
+                every { hasAbstractModifier } returns true
+            }
+        val declaration2: KoAbstractModifierProvider =
+            mockk {
+                every { hasAbstractModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -28,12 +30,14 @@ class KoAbstractModifierProviderListExtTest {
     @Test
     fun `withoutAbstractModifier() returns declaration without abstract modifier`() {
         // given
-        val declaration1: KoAbstractModifierProvider = mockk {
-            every { hasAbstractModifier } returns true
-        }
-        val declaration2: KoAbstractModifierProvider = mockk {
-            every { hasAbstractModifier } returns false
-        }
+        val declaration1: KoAbstractModifierProvider =
+            mockk {
+                every { hasAbstractModifier } returns true
+            }
+        val declaration2: KoAbstractModifierProvider =
+            mockk {
+                every { hasAbstractModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

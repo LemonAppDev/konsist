@@ -49,37 +49,37 @@ internal class KoObjectDeclarationCore(
     override val containingDeclaration: KoContainingDeclarationProvider,
 ) :
     KoObjectDeclaration,
-    KoBaseProviderCore,
-    KoAnnotationProviderCore,
-    KoClassProviderCore,
-    KoContainingFileProviderCore,
-    KoDeclarationFullyQualifiedNameProviderCore,
-    KoDeclarationProviderCore,
-    KoFunctionProviderCore,
-    KoInitBlockProviderCore,
-    KoInterfaceProviderCore,
-    KoKDocProviderCore,
-    KoLocationProviderCore,
-    KoModifierProviderCore,
-    KoNameProviderCore,
-    KoObjectProviderCore,
-    KoPackageDeclarationProviderCore,
-    KoContainingDeclarationProviderCore,
-    KoParentProviderCore,
-    KoParentClassProviderCore,
-    KoParentInterfaceProviderCore,
-    KoExternalParentProviderCore,
-    KoPathProviderCore,
-    KoModuleProviderCore,
-    KoSourceSetProviderCore,
-    KoPropertyProviderCore,
-    KoRepresentsTypeProviderCore,
-    KoResideInPackageProviderCore,
-    KoTextProviderCore,
-    KoTopLevelProviderCore,
-    KoVisibilityModifierProviderCore,
-    KoDataModifierProviderCore,
-    KoCompanionModifierProviderCore {
+        KoBaseProviderCore,
+        KoAnnotationProviderCore,
+        KoClassProviderCore,
+        KoContainingFileProviderCore,
+        KoDeclarationFullyQualifiedNameProviderCore,
+        KoDeclarationProviderCore,
+        KoFunctionProviderCore,
+        KoInitBlockProviderCore,
+        KoInterfaceProviderCore,
+        KoKDocProviderCore,
+        KoLocationProviderCore,
+        KoModifierProviderCore,
+        KoNameProviderCore,
+        KoObjectProviderCore,
+        KoPackageDeclarationProviderCore,
+        KoContainingDeclarationProviderCore,
+        KoParentProviderCore,
+        KoParentClassProviderCore,
+        KoParentInterfaceProviderCore,
+        KoExternalParentProviderCore,
+        KoPathProviderCore,
+        KoModuleProviderCore,
+        KoSourceSetProviderCore,
+        KoPropertyProviderCore,
+        KoRepresentsTypeProviderCore,
+        KoResideInPackageProviderCore,
+        KoTextProviderCore,
+        KoTopLevelProviderCore,
+        KoVisibilityModifierProviderCore,
+        KoDataModifierProviderCore,
+        KoCompanionModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktObjectDeclaration }
 
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktObjectDeclaration }
@@ -103,8 +103,9 @@ internal class KoObjectDeclarationCore(
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
-        .getKoDeclarations(ktObjectDeclaration, includeNested, includeLocal, this)
+    ): List<KoBaseDeclaration> =
+        KoDeclarationProviderCoreUtil
+            .getKoDeclarations(ktObjectDeclaration, includeNested, includeLocal, this)
 
     override fun toString(): String = name
 

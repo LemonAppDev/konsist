@@ -24,45 +24,45 @@ internal class KoTypeDeclarationCore private constructor(
     override val ktTypeReference: KtTypeReference,
 ) :
     KoTypeDeclaration,
-    KoBaseProviderCore,
-    KoContainingFileProviderCore,
-    KoFullyQualifiedNameProviderCore,
-    KoGenericTypeProviderCore,
-    KoKotlinTypeProviderCore,
-    KoLocationProviderCore,
-    KoNameProviderCore,
-    KoNullableProviderCore,
-    KoPathProviderCore,
-    KoModuleProviderCore,
-    KoSourceSetProviderCore,
-    KoSourceAndAliasTypeProviderCore,
-    KoTextProviderCore {
-    override val psiElement: PsiElement by lazy { ktTypeReference }
+        KoBaseProviderCore,
+        KoContainingFileProviderCore,
+        KoFullyQualifiedNameProviderCore,
+        KoGenericTypeProviderCore,
+        KoKotlinTypeProviderCore,
+        KoLocationProviderCore,
+        KoNameProviderCore,
+        KoNullableProviderCore,
+        KoPathProviderCore,
+        KoModuleProviderCore,
+        KoSourceSetProviderCore,
+        KoSourceAndAliasTypeProviderCore,
+        KoTextProviderCore {
+        override val psiElement: PsiElement by lazy { ktTypeReference }
 
-    override val ktElement: KtElement by lazy { ktTypeReference }
+        override val ktElement: KtElement by lazy { ktTypeReference }
 
-    override val name: String by lazy {
-        when {
-            isAlias -> aliasType + if (isNullable) "?" else ""
-            else -> ktTypeReference.text
+        override val name: String by lazy {
+            when {
+                isAlias -> aliasType + if (isNullable) "?" else ""
+                else -> ktTypeReference.text
+            }
+        }
+
+        override val textUsedToFqn: String by lazy { sourceType.substringBefore("<") }
+
+        override fun toString(): String = name
+
+        internal companion object {
+            private val cache: KoDeclarationCache<KoTypeDeclaration> = KoDeclarationCache()
+
+            internal fun getInstance(
+                ktTypeReference: KtTypeReference,
+                containingDeclaration: KoContainingDeclarationProvider,
+            ): KoTypeDeclaration =
+                cache.getOrCreateInstance(ktTypeReference, containingDeclaration) {
+                    KoTypeDeclarationCore(
+                        ktTypeReference,
+                    )
+                }
         }
     }
-
-    override val textUsedToFqn: String by lazy { sourceType.substringBefore("<") }
-
-    override fun toString(): String = name
-
-    internal companion object {
-        private val cache: KoDeclarationCache<KoTypeDeclaration> = KoDeclarationCache()
-
-        internal fun getInstance(
-            ktTypeReference: KtTypeReference,
-            containingDeclaration: KoContainingDeclarationProvider,
-        ): KoTypeDeclaration =
-            cache.getOrCreateInstance(ktTypeReference, containingDeclaration) {
-                KoTypeDeclarationCore(
-                    ktTypeReference,
-                )
-            }
-    }
-}

@@ -11,11 +11,12 @@ class KoArgumentDeclarationForKoTextProviderTest {
     @Test
     fun `argument-in-enum-const-text`() {
         // given
-        val sut = getSnippetFile("argument-in-enum-const-text")
-            .classes()
-            .enumConstants
-            .arguments
-            .first()
+        val sut =
+            getSnippetFile("argument-in-enum-const-text")
+                .classes()
+                .enumConstants
+                .arguments
+                .first()
 
         // then
         sut.text shouldBeEqualTo "sampleArgument = 0"
@@ -24,16 +25,16 @@ class KoArgumentDeclarationForKoTextProviderTest {
     @Test
     fun `argument-in-annotation-text`() {
         // given
-        val sut = getSnippetFile("argument-in-annotation-text")
-            .functions()
-            .annotations
-            .arguments
-            .first()
+        val sut =
+            getSnippetFile("argument-in-annotation-text")
+                .functions()
+                .annotations
+                .arguments
+                .first()
 
         // then
         sut.text shouldBeEqualTo "sampleParameter = \"text\""
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koargument/snippet/forkotextprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koargument/snippet/forkotextprovider/", fileName)
 }

@@ -11,9 +11,10 @@ class KoTypeAliasDeclarationForKoContainingDeclarationProviderTest {
     @Test
     fun `typealias-with-file-parent-declaration`() {
         // given
-        val sut = getSnippetFile("typealias-with-file-parent-declaration")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-with-file-parent-declaration")
+                .typeAliases
+                .first()
 
         // then
         assertSoftly(sut) {

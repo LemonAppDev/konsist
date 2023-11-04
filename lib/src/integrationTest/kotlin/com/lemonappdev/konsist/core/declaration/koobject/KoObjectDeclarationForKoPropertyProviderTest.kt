@@ -11,9 +11,10 @@ class KoObjectDeclarationForKoPropertyProviderTest {
     @Test
     fun `object-has-no-properties`() {
         // given
-        val sut = getSnippetFile("object-has-no-properties")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-no-properties")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -29,9 +30,10 @@ class KoObjectDeclarationForKoPropertyProviderTest {
     @Test
     fun `object-has-two-properties`() {
         // given
-        val sut = getSnippetFile("object-has-two-properties")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-two-properties")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -51,9 +53,10 @@ class KoObjectDeclarationForKoPropertyProviderTest {
     @Test
     fun `object-contains-nested-properties includeNested true`() {
         // given
-        val sut = getSnippetFile("object-contains-nested-properties")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-contains-nested-properties")
+                .objects()
+                .first()
 
         // then
         val expected = listOf("sampleProperty", "sampleNestedProperty")
@@ -66,9 +69,10 @@ class KoObjectDeclarationForKoPropertyProviderTest {
     @Test
     fun `object-contains-nested-properties includeNested false`() {
         // given
-        val sut = getSnippetFile("object-contains-nested-properties")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-contains-nested-properties")
+                .objects()
+                .first()
 
         // then
         val expected = listOf("sampleProperty")
@@ -81,9 +85,10 @@ class KoObjectDeclarationForKoPropertyProviderTest {
     @Test
     fun `count-properties`() {
         // given
-        val sut = getSnippetFile("count-properties")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("count-properties")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -98,9 +103,10 @@ class KoObjectDeclarationForKoPropertyProviderTest {
     @Test
     fun `contains-properties-with-specified-conditions`() {
         // given
-        val sut = getSnippetFile("contains-properties-with-specified-conditions")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("contains-properties-with-specified-conditions")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -119,9 +125,10 @@ class KoObjectDeclarationForKoPropertyProviderTest {
         // given
         val regex1 = Regex("[a-zA-Z]+")
         val regex2 = Regex("[0-9]+")
-        val sut = getSnippetFile("contains-properties-with-specified-regex")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("contains-properties-with-specified-regex")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -132,6 +139,5 @@ class KoObjectDeclarationForKoPropertyProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koobject/snippet/forkopropertyprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/forkopropertyprovider/", fileName)
 }

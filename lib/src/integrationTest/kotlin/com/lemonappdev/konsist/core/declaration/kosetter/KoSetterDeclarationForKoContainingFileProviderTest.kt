@@ -8,10 +8,11 @@ class KoSetterDeclarationForKoContainingFileProviderTest {
     @Test
     fun `setter-containing-file`() {
         // given
-        val sut = getSnippetFile("setter-containing-file")
-            .properties()
-            .first()
-            .setter
+        val sut =
+            getSnippetFile("setter-containing-file")
+                .properties()
+                .first()
+                .setter
 
         // then
         sut

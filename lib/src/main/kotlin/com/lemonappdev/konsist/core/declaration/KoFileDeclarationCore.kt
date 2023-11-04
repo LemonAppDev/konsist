@@ -48,7 +48,6 @@ internal class KoFileDeclarationCore(override val ktFile: KtFile) :
     KoSourceSetProviderCore,
     KoTextProviderCore,
     KoTypeAliasProviderCore {
-
     override val ktElement: KtElement by lazy { ktFile }
 
     override val psiElement: PsiElement by lazy { ktFile }
@@ -74,8 +73,7 @@ internal class KoFileDeclarationCore(override val ktFile: KtFile) :
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): List<KoBaseDeclaration> =
-        KoDeclarationProviderCoreUtil.getKoDeclarations(ktFile, includeNested, includeLocal, this)
+    ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil.getKoDeclarations(ktFile, includeNested, includeLocal, this)
 
     override fun toString(): String = path
 

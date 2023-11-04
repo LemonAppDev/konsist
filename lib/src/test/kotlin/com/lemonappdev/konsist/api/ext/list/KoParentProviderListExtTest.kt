@@ -9,6 +9,7 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+@Suppress("detekt.LargeClass")
 class KoParentProviderListExtTest {
     @Test
     fun `parents returns parents from all declarations`() {
@@ -16,15 +17,18 @@ class KoParentProviderListExtTest {
         val parent1: KoParentDeclaration = mockk()
         val parent2: KoParentDeclaration = mockk()
         val parent3: KoParentDeclaration = mockk()
-        val declaration1: KoParentProvider = mockk {
-            every { parents } returns listOf(parent1, parent2)
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { parents } returns listOf(parent3)
-        }
-        val declaration3: KoParentProvider = mockk {
-            every { parents } returns emptyList()
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { parents } returns listOf(parent1, parent2)
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { parents } returns listOf(parent3)
+            }
+        val declaration3: KoParentProvider =
+            mockk {
+                every { parents } returns emptyList()
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -37,12 +41,14 @@ class KoParentProviderListExtTest {
     @Test
     fun `withParents() returns declaration with any parent`() {
         // given
-        val declaration1: KoParentProvider = mockk {
-            every { hasParents() } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParents() } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParents() } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParents() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -55,12 +61,14 @@ class KoParentProviderListExtTest {
     @Test
     fun `withoutParents() returns declaration without any parent`() {
         // given
-        val declaration1: KoParentProvider = mockk {
-            every { hasParents() } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParents() } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParents() } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParents() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -74,12 +82,14 @@ class KoParentProviderListExtTest {
     fun `withParentNamed(name) returns declaration with given parent`() {
         // given
         val name = "SampleName"
-        val declaration1: KoParentProvider = mockk {
-            every { hasParentWithName(name) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParentWithName(name) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParentWithName(name) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParentWithName(name) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -94,12 +104,14 @@ class KoParentProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoParentProvider = mockk {
-            every { hasParentWithName(name1, name2) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParentWithName(name1, name2) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParentWithName(name1, name2) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParentWithName(name1, name2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -113,12 +125,14 @@ class KoParentProviderListExtTest {
     fun `withoutParentNamed(name) returns declaration without given parent`() {
         // given
         val name = "SampleName"
-        val declaration1: KoParentProvider = mockk {
-            every { hasParentWithName(name) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParentWithName(name) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParentWithName(name) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParentWithName(name) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -133,12 +147,14 @@ class KoParentProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoParentProvider = mockk {
-            every { hasParentWithName(name1, name2) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParentWithName(name1, name2) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParentWithName(name1, name2) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParentWithName(name1, name2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -152,12 +168,14 @@ class KoParentProviderListExtTest {
     fun `withAllParentsNamed(name) returns declaration with given parent`() {
         // given
         val name = "SampleName"
-        val declaration1: KoParentProvider = mockk {
-            every { hasParentsWithAllNames(name) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParentsWithAllNames(name) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParentsWithAllNames(name) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParentsWithAllNames(name) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -172,12 +190,14 @@ class KoParentProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoParentProvider = mockk {
-            every { hasParentsWithAllNames(name1, name2) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParentsWithAllNames(name1, name2) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParentsWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParentsWithAllNames(name1, name2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -191,12 +211,14 @@ class KoParentProviderListExtTest {
     fun `withoutAllParentsNamed(name) returns declaration without given parent`() {
         // given
         val name = "SampleName"
-        val declaration1: KoParentProvider = mockk {
-            every { hasParentsWithAllNames(name) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParentsWithAllNames(name) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParentsWithAllNames(name) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParentsWithAllNames(name) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -211,12 +233,14 @@ class KoParentProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoParentProvider = mockk {
-            every { hasParentsWithAllNames(name1, name2) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParentsWithAllNames(name1, name2) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParentsWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParentsWithAllNames(name1, name2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -231,12 +255,14 @@ class KoParentProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoParentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
-        val declaration1: KoParentProvider = mockk {
-            every { hasParent(predicate) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParent(predicate) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParent(predicate) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParent(predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -251,12 +277,14 @@ class KoParentProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoParentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
-        val declaration1: KoParentProvider = mockk {
-            every { hasParent(predicate) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParent(predicate) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParent(predicate) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParent(predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -271,12 +299,14 @@ class KoParentProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoParentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
-        val declaration1: KoParentProvider = mockk {
-            every { hasAllParents(predicate) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasAllParents(predicate) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasAllParents(predicate) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasAllParents(predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -291,12 +321,14 @@ class KoParentProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoParentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
-        val declaration1: KoParentProvider = mockk {
-            every { hasAllParents(predicate) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasAllParents(predicate) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasAllParents(predicate) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasAllParents(predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -312,21 +344,26 @@ class KoParentProviderListExtTest {
         val suffix = "Name"
         val predicate: (List<KoParentDeclaration>) -> Boolean =
             { it.all { parent -> parent.hasNameEndingWith(suffix) } }
-        val parent1: KoParentDeclaration = mockk {
-            every { hasNameEndingWith(suffix) } returns true
-        }
-        val parent2: KoParentDeclaration = mockk {
-            every { hasNameEndingWith(suffix) } returns false
-        }
-        val declaration1: KoParentProvider = mockk {
-            every { parents } returns listOf(parent1)
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { parents } returns listOf(parent2)
-        }
-        val declaration3: KoParentProvider = mockk {
-            every { parents } returns emptyList()
-        }
+        val parent1: KoParentDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns true
+            }
+        val parent2: KoParentDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns false
+            }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { parents } returns listOf(parent1)
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { parents } returns listOf(parent2)
+            }
+        val declaration3: KoParentProvider =
+            mockk {
+                every { parents } returns emptyList()
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -342,21 +379,26 @@ class KoParentProviderListExtTest {
         val suffix = "Name"
         val predicate: (List<KoParentDeclaration>) -> Boolean =
             { it.all { parent -> parent.hasNameEndingWith(suffix) } }
-        val parent1: KoParentDeclaration = mockk {
-            every { hasNameEndingWith(suffix) } returns true
-        }
-        val parent2: KoParentDeclaration = mockk {
-            every { hasNameEndingWith(suffix) } returns false
-        }
-        val declaration1: KoParentProvider = mockk {
-            every { parents } returns listOf(parent1)
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { parents } returns listOf(parent2)
-        }
-        val declaration3: KoParentProvider = mockk {
-            every { parents } returns emptyList()
-        }
+        val parent1: KoParentDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns true
+            }
+        val parent2: KoParentDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns false
+            }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { parents } returns listOf(parent1)
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { parents } returns listOf(parent2)
+            }
+        val declaration3: KoParentProvider =
+            mockk {
+                every { parents } returns emptyList()
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -370,12 +412,14 @@ class KoParentProviderListExtTest {
     fun `withAllParents(name) returns declaration with given parent`() {
         // given
         val name = "SampleName"
-        val declaration1: KoParentProvider = mockk {
-            every { hasParents(name) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParents(name) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParents(name) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParents(name) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -389,12 +433,14 @@ class KoParentProviderListExtTest {
     fun `withoutAllParents(name) returns declaration without given parent`() {
         // given
         val name = "SampleName"
-        val declaration1: KoParentProvider = mockk {
-            every { hasParents(name) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParents(name) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParents(name) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParents(name) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -409,12 +455,14 @@ class KoParentProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoParentProvider = mockk {
-            every { hasParents(name1, name2) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParents(name1, name2) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParents(name1, name2) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParents(name1, name2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -429,12 +477,14 @@ class KoParentProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoParentProvider = mockk {
-            every { hasParents(name1, name2) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParents(name1, name2) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParents(name1, name2) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParents(name1, name2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -448,12 +498,14 @@ class KoParentProviderListExtTest {
     fun `withSomeParents(String) returns declaration with given parent`() {
         // given
         val name = "SampleName"
-        val declaration1: KoParentProvider = mockk {
-            every { hasParents(name) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParents(name) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParents(name) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParents(name) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -468,18 +520,21 @@ class KoParentProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoParentProvider = mockk {
-            every { hasParents(name1) } returns true
-            every { hasParents(name2) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParents(name1) } returns false
-            every { hasParents(name2) } returns true
-        }
-        val declaration3: KoParentProvider = mockk {
-            every { hasParents(name1) } returns false
-            every { hasParents(name2) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParents(name1) } returns true
+                every { hasParents(name2) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParents(name1) } returns false
+                every { hasParents(name2) } returns true
+            }
+        val declaration3: KoParentProvider =
+            mockk {
+                every { hasParents(name1) } returns false
+                every { hasParents(name2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -493,12 +548,14 @@ class KoParentProviderListExtTest {
     fun `withoutSomeParents(String) returns declaration without given parent`() {
         // given
         val name = "SampleName"
-        val declaration1: KoParentProvider = mockk {
-            every { hasParents(name) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParents(name) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParents(name) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParents(name) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -513,18 +570,21 @@ class KoParentProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoParentProvider = mockk {
-            every { hasParents(name1) } returns true
-            every { hasParents(name2) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParents(name1) } returns false
-            every { hasParents(name2) } returns true
-        }
-        val declaration3: KoParentProvider = mockk {
-            every { hasParents(name1) } returns false
-            every { hasParents(name2) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParents(name1) } returns true
+                every { hasParents(name2) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParents(name1) } returns false
+                every { hasParents(name2) } returns true
+            }
+        val declaration3: KoParentProvider =
+            mockk {
+                every { hasParents(name1) } returns false
+                every { hasParents(name2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -537,12 +597,14 @@ class KoParentProviderListExtTest {
     @Test
     fun `withParentOf(KClass) returns declaration with any of given parents`() {
         // given
-        val declaration1: KoParentProvider = mockk {
-            every { hasParentOf(SampleClass::class, SampleInterface::class) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParentOf(SampleClass::class, SampleInterface::class) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParentOf(SampleClass::class, SampleInterface::class) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParentOf(SampleClass::class, SampleInterface::class) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -555,12 +617,14 @@ class KoParentProviderListExtTest {
     @Test
     fun `withoutParentOf(KClass) returns declaration without all of given parents`() {
         // given
-        val declaration1: KoParentProvider = mockk {
-            every { hasParentOf(SampleClass::class, SampleInterface::class) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasParentOf(SampleClass::class, SampleInterface::class) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParentOf(SampleClass::class, SampleInterface::class) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParentOf(SampleClass::class, SampleInterface::class) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -573,12 +637,14 @@ class KoParentProviderListExtTest {
     @Test
     fun `withAllParentsOf(KClass) returns declaration with all of given parents`() {
         // given
-        val declaration1: KoParentProvider = mockk {
-            every { hasAllParentsOf(SampleClass::class, SampleInterface::class) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasAllParentsOf(SampleClass::class, SampleInterface::class) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasAllParentsOf(SampleClass::class, SampleInterface::class) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasAllParentsOf(SampleClass::class, SampleInterface::class) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -591,12 +657,14 @@ class KoParentProviderListExtTest {
     @Test
     fun `withoutAllParentsOf(KClass) returns declaration without any of given parents`() {
         // given
-        val declaration1: KoParentProvider = mockk {
-            every { hasAllParentsOf(SampleClass::class, SampleInterface::class) } returns true
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { hasAllParentsOf(SampleClass::class, SampleInterface::class) } returns false
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasAllParentsOf(SampleClass::class, SampleInterface::class) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasAllParentsOf(SampleClass::class, SampleInterface::class) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -611,19 +679,23 @@ class KoParentProviderListExtTest {
         // given
         val name1 = "SampleClass"
         val name2 = "SampleInterface"
-        val parent1: KoParentDeclaration = mockk {
-            every { name } returns name1
-        }
-        val parent2: KoParentDeclaration = mockk {
-            every { name } returns name2
-        }
+        val parent1: KoParentDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val parent2: KoParentDeclaration =
+            mockk {
+                every { name } returns name2
+            }
 
-        val declaration1: KoParentProvider = mockk {
-            every { parents } returns listOf(parent1, parent2)
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { parents } returns listOf(parent2)
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { parents } returns listOf(parent1, parent2)
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { parents } returns listOf(parent2)
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -639,25 +711,31 @@ class KoParentProviderListExtTest {
         val name1 = "SampleClass"
         val name2 = "SampleInterface"
         val name3 = "OtherParent"
-        val parent1: KoParentDeclaration = mockk {
-            every { name } returns name1
-        }
-        val parent2: KoParentDeclaration = mockk {
-            every { name } returns name2
-        }
-        val parent3: KoParentDeclaration = mockk {
-            every { name } returns name3
-        }
+        val parent1: KoParentDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val parent2: KoParentDeclaration =
+            mockk {
+                every { name } returns name2
+            }
+        val parent3: KoParentDeclaration =
+            mockk {
+                every { name } returns name3
+            }
 
-        val declaration1: KoParentProvider = mockk {
-            every { parents } returns listOf(parent1, parent2)
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { parents } returns listOf(parent1, parent3)
-        }
-        val declaration3: KoParentProvider = mockk {
-            every { parents } returns listOf(parent3)
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { parents } returns listOf(parent1, parent2)
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { parents } returns listOf(parent1, parent3)
+            }
+        val declaration3: KoParentProvider =
+            mockk {
+                every { parents } returns listOf(parent3)
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -672,19 +750,23 @@ class KoParentProviderListExtTest {
         // given
         val name1 = "SampleClass"
         val name2 = "SampleInterface"
-        val parent1: KoParentDeclaration = mockk {
-            every { name } returns name1
-        }
-        val parent2: KoParentDeclaration = mockk {
-            every { name } returns name2
-        }
+        val parent1: KoParentDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val parent2: KoParentDeclaration =
+            mockk {
+                every { name } returns name2
+            }
 
-        val declaration1: KoParentProvider = mockk {
-            every { parents } returns listOf(parent1, parent2)
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { parents } returns listOf(parent2)
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { parents } returns listOf(parent1, parent2)
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { parents } returns listOf(parent2)
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -700,25 +782,31 @@ class KoParentProviderListExtTest {
         val name1 = "SampleClass"
         val name2 = "SampleInterface"
         val name3 = "OtherParent"
-        val parent1: KoParentDeclaration = mockk {
-            every { name } returns name1
-        }
-        val parent2: KoParentDeclaration = mockk {
-            every { name } returns name2
-        }
-        val parent3: KoParentDeclaration = mockk {
-            every { name } returns name3
-        }
+        val parent1: KoParentDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val parent2: KoParentDeclaration =
+            mockk {
+                every { name } returns name2
+            }
+        val parent3: KoParentDeclaration =
+            mockk {
+                every { name } returns name3
+            }
 
-        val declaration1: KoParentProvider = mockk {
-            every { parents } returns listOf(parent1, parent2)
-        }
-        val declaration2: KoParentProvider = mockk {
-            every { parents } returns listOf(parent1, parent3)
-        }
-        val declaration3: KoParentProvider = mockk {
-            every { parents } returns listOf(parent3)
-        }
+        val declaration1: KoParentProvider =
+            mockk {
+                every { parents } returns listOf(parent1, parent2)
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { parents } returns listOf(parent1, parent3)
+            }
+        val declaration3: KoParentProvider =
+            mockk {
+                every { parents } returns listOf(parent3)
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when

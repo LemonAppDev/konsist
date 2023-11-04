@@ -16,15 +16,18 @@ class KoModifierProviderListExtTest {
         val modifier1: KoModifier = mockk()
         val modifier2: KoModifier = mockk()
         val modifier3: KoModifier = mockk()
-        val declaration1: KoModifierProvider = mockk {
-            every { modifiers } returns listOf(modifier1, modifier2)
-        }
-        val declaration2: KoModifierProvider = mockk {
-            every { modifiers } returns listOf(modifier3)
-        }
-        val declaration3: KoModifierProvider = mockk {
-            every { modifiers } returns emptyList()
-        }
+        val declaration1: KoModifierProvider =
+            mockk {
+                every { modifiers } returns listOf(modifier1, modifier2)
+            }
+        val declaration2: KoModifierProvider =
+            mockk {
+                every { modifiers } returns listOf(modifier3)
+            }
+        val declaration3: KoModifierProvider =
+            mockk {
+                every { modifiers } returns emptyList()
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -37,12 +40,14 @@ class KoModifierProviderListExtTest {
     @Test
     fun `withModifiers() returns declaration with modifier`() {
         // given
-        val declaration1: KoModifierProvider = mockk {
-            every { hasModifiers() } returns true
-        }
-        val declaration2: KoModifierProvider = mockk {
-            every { hasModifiers() } returns false
-        }
+        val declaration1: KoModifierProvider =
+            mockk {
+                every { hasModifiers() } returns true
+            }
+        val declaration2: KoModifierProvider =
+            mockk {
+                every { hasModifiers() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -55,12 +60,14 @@ class KoModifierProviderListExtTest {
     @Test
     fun `withoutModifiers() returns declaration without modifier`() {
         // given
-        val declaration1: KoModifierProvider = mockk {
-            every { hasModifiers() } returns true
-        }
-        val declaration2: KoModifierProvider = mockk {
-            every { hasModifiers() } returns false
-        }
+        val declaration1: KoModifierProvider =
+            mockk {
+                every { hasModifiers() } returns true
+            }
+        val declaration2: KoModifierProvider =
+            mockk {
+                every { hasModifiers() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -75,12 +82,14 @@ class KoModifierProviderListExtTest {
         // given
         val modifier1 = PROTECTED
         val modifier2 = OPEN
-        val declaration1: KoModifierProvider = mockk {
-            every { hasModifier(modifier1, modifier2) } returns true
-        }
-        val declaration2: KoModifierProvider = mockk {
-            every { hasModifier(modifier1, modifier2) } returns false
-        }
+        val declaration1: KoModifierProvider =
+            mockk {
+                every { hasModifier(modifier1, modifier2) } returns true
+            }
+        val declaration2: KoModifierProvider =
+            mockk {
+                every { hasModifier(modifier1, modifier2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -95,12 +104,14 @@ class KoModifierProviderListExtTest {
         // given
         val modifier1 = PROTECTED
         val modifier2 = OPEN
-        val declaration1: KoModifierProvider = mockk {
-            every { hasModifier(modifier1, modifier2) } returns true
-        }
-        val declaration2: KoModifierProvider = mockk {
-            every { hasModifier(modifier1, modifier2) } returns false
-        }
+        val declaration1: KoModifierProvider =
+            mockk {
+                every { hasModifier(modifier1, modifier2) } returns true
+            }
+        val declaration2: KoModifierProvider =
+            mockk {
+                every { hasModifier(modifier1, modifier2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -115,12 +126,14 @@ class KoModifierProviderListExtTest {
         // given
         val modifier1 = PROTECTED
         val modifier2 = OPEN
-        val declaration1: KoModifierProvider = mockk {
-            every { hasAllModifiers(modifier1, modifier2) } returns true
-        }
-        val declaration2: KoModifierProvider = mockk {
-            every { hasAllModifiers(modifier1, modifier2) } returns false
-        }
+        val declaration1: KoModifierProvider =
+            mockk {
+                every { hasAllModifiers(modifier1, modifier2) } returns true
+            }
+        val declaration2: KoModifierProvider =
+            mockk {
+                every { hasAllModifiers(modifier1, modifier2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -135,12 +148,14 @@ class KoModifierProviderListExtTest {
         // given
         val modifier1 = PROTECTED
         val modifier2 = OPEN
-        val declaration1: KoModifierProvider = mockk {
-            every { hasAllModifiers(modifier1, modifier2) } returns true
-        }
-        val declaration2: KoModifierProvider = mockk {
-            every { hasAllModifiers(modifier1, modifier2) } returns false
-        }
+        val declaration1: KoModifierProvider =
+            mockk {
+                every { hasAllModifiers(modifier1, modifier2) } returns true
+            }
+        val declaration2: KoModifierProvider =
+            mockk {
+                every { hasAllModifiers(modifier1, modifier2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -154,12 +169,14 @@ class KoModifierProviderListExtTest {
     fun `withSomeModifiers(String) returns declaration with given modifier`() {
         // given
         val modifier = PROTECTED
-        val declaration1: KoModifierProvider = mockk {
-            every { hasModifiers(modifier) } returns true
-        }
-        val declaration2: KoModifierProvider = mockk {
-            every { hasModifiers(modifier) } returns false
-        }
+        val declaration1: KoModifierProvider =
+            mockk {
+                every { hasModifiers(modifier) } returns true
+            }
+        val declaration2: KoModifierProvider =
+            mockk {
+                every { hasModifiers(modifier) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -174,18 +191,21 @@ class KoModifierProviderListExtTest {
         // given
         val modifier1 = PROTECTED
         val modifier2 = OPEN
-        val declaration1: KoModifierProvider = mockk {
-            every { hasModifiers(modifier1) } returns true
-            every { hasModifiers(modifier2) } returns true
-        }
-        val declaration2: KoModifierProvider = mockk {
-            every { hasModifiers(modifier1) } returns false
-            every { hasModifiers(modifier2) } returns true
-        }
-        val declaration3: KoModifierProvider = mockk {
-            every { hasModifiers(modifier1) } returns false
-            every { hasModifiers(modifier2) } returns false
-        }
+        val declaration1: KoModifierProvider =
+            mockk {
+                every { hasModifiers(modifier1) } returns true
+                every { hasModifiers(modifier2) } returns true
+            }
+        val declaration2: KoModifierProvider =
+            mockk {
+                every { hasModifiers(modifier1) } returns false
+                every { hasModifiers(modifier2) } returns true
+            }
+        val declaration3: KoModifierProvider =
+            mockk {
+                every { hasModifiers(modifier1) } returns false
+                every { hasModifiers(modifier2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -199,12 +219,14 @@ class KoModifierProviderListExtTest {
     fun `withoutSomeModifiers(String) returns declaration with given modifier`() {
         // given
         val modifier = PROTECTED
-        val declaration1: KoModifierProvider = mockk {
-            every { hasModifiers(modifier) } returns true
-        }
-        val declaration2: KoModifierProvider = mockk {
-            every { hasModifiers(modifier) } returns false
-        }
+        val declaration1: KoModifierProvider =
+            mockk {
+                every { hasModifiers(modifier) } returns true
+            }
+        val declaration2: KoModifierProvider =
+            mockk {
+                every { hasModifiers(modifier) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -219,18 +241,21 @@ class KoModifierProviderListExtTest {
         // given
         val modifier1 = PROTECTED
         val modifier2 = OPEN
-        val declaration1: KoModifierProvider = mockk {
-            every { hasModifiers(modifier1) } returns true
-            every { hasModifiers(modifier2) } returns true
-        }
-        val declaration2: KoModifierProvider = mockk {
-            every { hasModifiers(modifier1) } returns false
-            every { hasModifiers(modifier2) } returns true
-        }
-        val declaration3: KoModifierProvider = mockk {
-            every { hasModifiers(modifier1) } returns false
-            every { hasModifiers(modifier2) } returns false
-        }
+        val declaration1: KoModifierProvider =
+            mockk {
+                every { hasModifiers(modifier1) } returns true
+                every { hasModifiers(modifier2) } returns true
+            }
+        val declaration2: KoModifierProvider =
+            mockk {
+                every { hasModifiers(modifier1) } returns false
+                every { hasModifiers(modifier2) } returns true
+            }
+        val declaration3: KoModifierProvider =
+            mockk {
+                every { hasModifiers(modifier1) } returns false
+                every { hasModifiers(modifier2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when

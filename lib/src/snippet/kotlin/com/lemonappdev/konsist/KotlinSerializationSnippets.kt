@@ -8,8 +8,10 @@ import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
 import com.lemonappdev.konsist.api.verify.assertTrue
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.junit.jupiter.api.Test
 
 class KotlinSerializationSnippets {
+    @Test
     fun `classes annotated with 'Serializable' have all properties annotated with 'SerialName'`() {
         Konsist
             .scopeFromProject()
@@ -21,6 +23,7 @@ class KotlinSerializationSnippets {
             }
     }
 
+    @Test
     fun `enum classes annotated with 'Serializable' have all enum constants annotated with 'SerialName'`() {
         Konsist.scopeFromProject()
             .classes()
@@ -30,6 +33,7 @@ class KotlinSerializationSnippets {
             .assertTrue { it.hasAnnotationOf(SerialName::class) }
     }
 
+    @Test
     fun `all models are serializable`() {
         Konsist
             .scopeFromPackage("story.model")

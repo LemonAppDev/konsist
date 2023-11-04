@@ -58,7 +58,10 @@ interface KoParentProvider : KoBaseProvider {
      * @param names the names of the parents to check.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasParentWithName(name: String, vararg names: String): Boolean
+    fun hasParentWithName(
+        name: String,
+        vararg names: String,
+    ): Boolean
 
     /**
      * Determines whether the declaration has parents (parent classes and parent interfaces) defined directly in the Kotlin
@@ -69,7 +72,10 @@ interface KoParentProvider : KoBaseProvider {
      * @param names The names of the parents to check.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasParentsWithAllNames(name: String, vararg names: String): Boolean
+    fun hasParentsWithAllNames(
+        name: String,
+        vararg names: String,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one parent (parent class or parent interface) defined directly
@@ -101,7 +107,10 @@ interface KoParentProvider : KoBaseProvider {
      * @param names the `KClass` types of the parents to check.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasParentOf(name: KClass<*>, vararg names: KClass<*>): Boolean
+    fun hasParentOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+    ): Boolean
 
     /**
      * Determines whether the declaration has parents with all the specified `KClass` type.
@@ -110,5 +119,8 @@ interface KoParentProvider : KoBaseProvider {
      * @param names the `KClass` types of the parents to check.
      * @return `true` if the declaration has parents of all the specified `KClass` types, `false` otherwise.
      */
-    fun hasAllParentsOf(name: KClass<*>, vararg names: KClass<*>): Boolean
+    fun hasAllParentsOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+    ): Boolean
 }

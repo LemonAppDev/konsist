@@ -9,11 +9,12 @@ class KoConstructorDeclarationForKoParametersProviderTest {
     @Test
     fun `constructor-contains-no-parameters`() {
         // given
-        val sut = getSnippetFile("constructor-contains-no-parameters")
-            .classes()
-            .first()
-            .constructors
-            .first()
+        val sut =
+            getSnippetFile("constructor-contains-no-parameters")
+                .classes()
+                .first()
+                .constructors
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -31,11 +32,12 @@ class KoConstructorDeclarationForKoParametersProviderTest {
     @Test
     fun `constructor-contains-one-parameter`() {
         // given
-        val sut = getSnippetFile("constructor-contains-one-parameter")
-            .classes()
-            .first()
-            .constructors
-            .first()
+        val sut =
+            getSnippetFile("constructor-contains-one-parameter")
+                .classes()
+                .first()
+                .constructors
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -57,11 +59,12 @@ class KoConstructorDeclarationForKoParametersProviderTest {
     @Test
     fun `constructor-contains-two-parameters`() {
         // given
-        val sut = getSnippetFile("constructor-contains-two-parameters")
-            .classes()
-            .first()
-            .constructors
-            .first()
+        val sut =
+            getSnippetFile("constructor-contains-two-parameters")
+                .classes()
+                .first()
+                .constructors
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -86,11 +89,12 @@ class KoConstructorDeclarationForKoParametersProviderTest {
     @Test
     fun `constructor-has-parameter`() {
         // given
-        val sut = getSnippetFile("constructor-has-parameter")
-            .classes()
-            .first()
-            .constructors
-            .first()
+        val sut =
+            getSnippetFile("constructor-has-parameter")
+                .classes()
+                .first()
+                .constructors
+                .first()
 
         // then
         assertSoftly(sut) {

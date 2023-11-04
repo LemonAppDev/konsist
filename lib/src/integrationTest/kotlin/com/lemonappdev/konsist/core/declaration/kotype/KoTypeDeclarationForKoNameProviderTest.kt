@@ -14,13 +14,14 @@ class KoTypeDeclarationForKoNameProviderTest {
         value: String,
     ) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         sut?.name shouldBeEqualTo value
@@ -32,13 +33,14 @@ class KoTypeDeclarationForKoNameProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("simple-type", "SampleType"),
-            arguments("simple-nullable-type", "SampleType?"),
-            arguments("simple-list-type", "List<SampleType?>"),
-            arguments("simple-nullable-list-type", "List<SampleType?>?"),
-            arguments("import-alias", "ImportAlias"),
-            arguments("nullable-import-alias", "ImportAlias?"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("simple-type", "SampleType"),
+                arguments("simple-nullable-type", "SampleType?"),
+                arguments("simple-list-type", "List<SampleType?>"),
+                arguments("simple-nullable-list-type", "List<SampleType?>?"),
+                arguments("import-alias", "ImportAlias"),
+                arguments("nullable-import-alias", "ImportAlias?"),
+            )
     }
 }

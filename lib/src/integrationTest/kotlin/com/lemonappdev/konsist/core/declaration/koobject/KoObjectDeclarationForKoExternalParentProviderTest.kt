@@ -15,9 +15,10 @@ class KoObjectDeclarationForKoExternalParentProviderTest {
     @Test
     fun `object-has-no-external-parent`() {
         // given
-        val sut = getSnippetFile("object-has-no-external-parent")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-no-external-parent")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -37,9 +38,10 @@ class KoObjectDeclarationForKoExternalParentProviderTest {
     @Test
     fun `object-has-only-external-parents`() {
         // given
-        val sut = getSnippetFile("object-has-only-external-parents")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-only-external-parents")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -72,9 +74,10 @@ class KoObjectDeclarationForKoExternalParentProviderTest {
     @Test
     fun `object-has-internal-and-external-parents`() {
         // given
-        val sut = getSnippetFile("object-has-internal-and-external-parents")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-internal-and-external-parents")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {

@@ -11,10 +11,11 @@ class KoSetterDeclarationForKoContainingDeclarationProviderTest {
     @Test
     fun `setter-parent-declaration`() {
         // given
-        val sut = getSnippetFile("setter-parent-declaration")
-            .properties()
-            .first()
-            .setter
+        val sut =
+            getSnippetFile("setter-parent-declaration")
+                .properties()
+                .first()
+                .setter
 
         // then
         assertSoftly(sut) {

@@ -17,10 +17,12 @@ import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
-import java.util.*
+import org.junit.jupiter.api.Test
+import java.util.Locale
 import javax.inject.Inject
 
 class GeneralSnippets {
+    @Test
     fun `files in 'ext' package must have name ending with 'Ext'`() {
         Konsist
             .scopeFromProject()
@@ -29,6 +31,7 @@ class GeneralSnippets {
             .assertTrue { it.hasNameEndingWith("Ext") }
     }
 
+    @Test
     fun `all data class properties are defined in constructor`() {
         Konsist
             .scopeFromProject()
@@ -40,6 +43,7 @@ class GeneralSnippets {
             }
     }
 
+    @Test
     fun `every class has test`() {
         Konsist
             .scopeFromProduction()
@@ -47,6 +51,7 @@ class GeneralSnippets {
             .assertTrue { it.hasTestClass() }
     }
 
+    @Test
     fun `every class - except data and value class - has test`() {
         Konsist
             .scopeFromProduction()
@@ -55,18 +60,21 @@ class GeneralSnippets {
             .assertTrue { it.hasTestClass() }
     }
 
+    @Test
     fun `properties are declared before functions`() {
         Konsist
             .scopeFromProject()
             .classes()
             .assertTrue {
-                val lastKoPropertyDeclarationIndex = it
-                    .declarations(includeNested = false, includeLocal = false)
-                    .indexOfLastInstance<KoPropertyDeclaration>()
+                val lastKoPropertyDeclarationIndex =
+                    it
+                        .declarations(includeNested = false, includeLocal = false)
+                        .indexOfLastInstance<KoPropertyDeclaration>()
 
-                val firstKoFunctionDeclarationIndex = it
-                    .declarations(includeNested = false, includeLocal = false)
-                    .indexOfFirstInstance<KoFunctionDeclaration>()
+                val firstKoFunctionDeclarationIndex =
+                    it
+                        .declarations(includeNested = false, includeLocal = false)
+                        .indexOfFirstInstance<KoFunctionDeclaration>()
 
                 if (lastKoPropertyDeclarationIndex != -1 && firstKoFunctionDeclarationIndex != -1) {
                     lastKoPropertyDeclarationIndex < firstKoFunctionDeclarationIndex
@@ -76,6 +84,7 @@ class GeneralSnippets {
             }
     }
 
+    @Test
     fun `every constructor parameter has name derived from parameter type`() {
         Konsist
             .scopeFromProject()
@@ -88,6 +97,7 @@ class GeneralSnippets {
             }
     }
 
+    @Test
     fun `every class constructor has alphabetically ordered parameters`() {
         Konsist
             .scopeFromProject()
@@ -100,14 +110,16 @@ class GeneralSnippets {
             }
     }
 
+    @Test
     fun `companion object is last declaration in the class`() {
         Konsist
             .scopeFromProject()
             .classes()
             .assertTrue {
-                val companionObject = it.objects(includeNested = false).lastOrNull { obj ->
-                    obj.hasModifier(KoModifier.COMPANION)
-                }
+                val companionObject =
+                    it.objects(includeNested = false).lastOrNull { obj ->
+                        obj.hasModifier(KoModifier.COMPANION)
+                    }
 
                 if (companionObject != null) {
                     it.declarations(includeNested = false, includeLocal = false).last() == companionObject
@@ -117,6 +129,7 @@ class GeneralSnippets {
             }
     }
 
+    @Test
     fun `every value class has parameter named 'value'`() {
         Konsist
             .scopeFromProject()
@@ -126,6 +139,7 @@ class GeneralSnippets {
             .assertTrue { it.hasParameterWithName("value") }
     }
 
+    @Test
     fun `no empty files allowed`() {
         Konsist
             .scopeFromProject()
@@ -133,6 +147,7 @@ class GeneralSnippets {
             .assertFalse { it.text.isEmpty() }
     }
 
+    @Test
     fun `no field should have 'm' prefix`() {
         Konsist
             .scopeFromProject()
@@ -144,6 +159,7 @@ class GeneralSnippets {
             }
     }
 
+    @Test
     fun `no class should use field injection`() {
         Konsist
             .scopeFromProject()
@@ -152,6 +168,7 @@ class GeneralSnippets {
             .assertFalse { it.hasAnnotationOf<Inject>() }
     }
 
+    @Test
     fun `no class should use Java util logging`() {
         Konsist
             .scopeFromProject()
@@ -159,6 +176,7 @@ class GeneralSnippets {
             .assertFalse { it.hasImport { import -> import.name == "java.util.logging.." } }
     }
 
+    @Test
     fun `package name must match file path`() {
         Konsist
             .scopeFromProject()
@@ -166,6 +184,7 @@ class GeneralSnippets {
             .assertTrue { it.hasMatchingPath }
     }
 
+    @Test
     fun `no wildcard imports allowed`() {
         Konsist
             .scopeFromProject()
@@ -173,6 +192,7 @@ class GeneralSnippets {
             .assertFalse { it.isWildcard }
     }
 
+    @Test
     fun `forbid the usage of 'forbiddenString' in file`() {
         Konsist
             .scopeFromProject()

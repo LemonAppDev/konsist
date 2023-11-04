@@ -8,10 +8,11 @@ class KoTypeDeclarationForKoContainingFileProviderTest {
     @Test
     fun `type-containing-file`() {
         // given
-        val sut = getSnippetFile("type-containing-file")
-            .properties()
-            .first()
-            .type
+        val sut =
+            getSnippetFile("type-containing-file")
+                .properties()
+                .first()
+                .type
 
         // then
         sut

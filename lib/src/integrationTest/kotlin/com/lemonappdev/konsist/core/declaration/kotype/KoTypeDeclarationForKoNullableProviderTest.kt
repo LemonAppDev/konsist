@@ -14,13 +14,14 @@ class KoTypeDeclarationForKoNullableProviderTest {
         value: Boolean,
     ) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         sut?.isNullable shouldBeEqualTo value
@@ -32,13 +33,14 @@ class KoTypeDeclarationForKoNullableProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("simple-type-is-nullable", true),
-            arguments("simple-type-is-not-nullable", false),
-            arguments("simple-list-type-is-nullable", true),
-            arguments("simple-list-type-is-not-nullable", false),
-            arguments("import-alias-is-nullable", true),
-            arguments("import-alias-is-not-nullable", false),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("simple-type-is-nullable", true),
+                arguments("simple-type-is-not-nullable", false),
+                arguments("simple-list-type-is-nullable", true),
+                arguments("simple-list-type-is-not-nullable", false),
+                arguments("import-alias-is-nullable", true),
+                arguments("import-alias-is-not-nullable", false),
+            )
     }
 }

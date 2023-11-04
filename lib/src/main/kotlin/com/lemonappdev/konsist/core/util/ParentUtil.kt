@@ -4,7 +4,10 @@ import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import kotlin.reflect.KClass
 
 object ParentUtil {
-    internal fun <T : KoParentDeclaration> checkIfParentOf(kClass: KClass<*>, list: List<T>): Boolean =
+    internal fun <T : KoParentDeclaration> checkIfParentOf(
+        kClass: KClass<*>,
+        list: List<T>,
+    ): Boolean =
         list.any { parent ->
             parent.name == kClass.simpleName || parent.fullyQualifiedName == kClass.qualifiedName
         }
