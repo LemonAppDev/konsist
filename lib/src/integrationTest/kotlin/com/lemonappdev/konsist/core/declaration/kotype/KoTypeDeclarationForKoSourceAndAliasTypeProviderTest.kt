@@ -34,7 +34,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         // then
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleType?"
-            it?.bareSourceType shouldBeEqualTo "SampleType?"
+            it?.bareSourceType shouldBeEqualTo "SampleType"
             it?.aliasType shouldBeEqualTo null
             it?.isAlias shouldBeEqualTo false
         }

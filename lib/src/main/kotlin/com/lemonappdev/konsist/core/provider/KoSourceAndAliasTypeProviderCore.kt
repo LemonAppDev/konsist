@@ -35,6 +35,6 @@ internal interface KoSourceAndAliasTypeProviderCore : KoSourceAndAliasTypeProvid
 
     override val bareSourceType: String
         get() = sourceType
-            .split("<")
-            .first()
+            .substringBefore("<")
+            .replace("?", "")
 }
