@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
 class KoTypeDeclarationForKoFullyQualifiedNameProviderTest {
-    @ParameterizedTest
+    @ParameterizedTest(name = "fully-qualified-name {0} equals {1}")
     @MethodSource("provideValues")
     fun `fully-qualified-name`(
         fileName: String,
@@ -35,10 +35,10 @@ class KoTypeDeclarationForKoFullyQualifiedNameProviderTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValues() = listOf(
-            arguments("simple-type", "com.lemonappdev.konsist.testdata.SampleType"),
-            arguments("simple-nullable-type", "com.lemonappdev.konsist.testdata.SampleType"),
-            arguments("simple-list-type", "List"),
-            arguments("simple-nullable-list-type", "List"),
+            arguments("type", "com.lemonappdev.konsist.testdata.SampleType"),
+            arguments("nullable-type", "com.lemonappdev.konsist.testdata.SampleType"),
+            arguments("list-type", "List"),
+            arguments("nullable-list-type", "List"),
             arguments("import-alias", "com.lemonappdev.konsist.testdata.SampleType"),
             arguments("nullable-import-alias", "com.lemonappdev.konsist.testdata.SampleType"),
             arguments("non-nullable-type-without-import-and-with-package", "com.samplepackage.SampleTypeClass"),
