@@ -1,16 +1,18 @@
-# Konsist Starter Project - KMP Gradle Kotlin Kotest
+# Konsist Starter Project - KMP + Gradle Kotlin + Kotest
 
 This a [Konsist](https://github.com/LemonAppDev/konsist) sample is configured using 
-[Gradle](https://docs.gradle. org/current/userguide/userguide.html) [Kotlin](https://kotlinlang.org/) (build script language),
+[Gradle](https://docs.gradle. org/current/userguide/userguide.html),
+[Kotlin](https://kotlinlang.org/) (build script language),
 [Kotlin Multiplatform (KMP)](https://kotlinlang.org/docs/multiplatform.html),
 and [Kotest](https://kotest.io/).
 
+This sample is derived from [kmm-basic-sample](https://github.com/Kotlin/kmm-basic-sample) project (orginal sample + Konsist tests).
+
 Other samples are located [here](..).
 
-Konsist tests are located in two classes inside `konsistTest` module:
+Konsist tests are located in inside `konsistTest` module:
 - [SampleKonsistTest.kt](src/jvmTest/kotlin/com/sample/SampleKonsistTest.kt) - single test for each Konsist check
-- [SampleDynamicKonsistTest.kt](src/jvmTest/kotlin/com/sample/SampleDynamicKonsistTest.kt) - multiple tests for 
-  each Konsist check
+- [SampleDynamicKonsistTest.kt](src/jvmTest/kotlin/com/sample/SampleDynamicKonsistTest.kt) - multiple tests for each Konsist check
 
 To run tests use IDE UI or run gradle commands:
 - `./gradlew konsistTest:test  --rerun-tasks` - run tests in `konsistTest` module
