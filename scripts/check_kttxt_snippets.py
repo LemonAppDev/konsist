@@ -214,7 +214,7 @@ if __name__ == '__main__':
     kotlin_kttxt_temp_files = []
 
     if sys.argv[1:] > 1:
-        if '-all' in sys.argv[1:]:
+        if len(sys.argv) > 1:
             print_and_flush("kttxt_snippet_file_paths not provided - checking all kttxt files")
             kotlin_kttxt_temp_files = get_all_kttxt_files()
         else:
