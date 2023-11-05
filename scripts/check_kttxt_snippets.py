@@ -170,10 +170,12 @@ duration = end_time - start_time
 
 print()
 
+minutes, seconds = divmod(duration, 60)
+
 if error_occurred:
-    print_and_flush(f"{failed}: Executed {num_tests} tests in {duration:.2f}s")
+    print_and_flush(f"{failed}: Executed {num_tests} tests in {int(minutes)}m {seconds:.2f}s")
     sys.exit(1)
 else:
-
-    print_and_flush(f"{success}: Executed {num_tests} tests in {duration:.2f}s")
+    print_and_flush(f"{success}: Executed {num_tests} tests in {int(minutes)}m {seconds:.2f}s")
     sys.exit(0)
+
