@@ -23,6 +23,23 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         }
     }
 
+//    @Test
+//    fun `fully-qualified-type`() {
+//        // given
+//        val sut = getSnippetFile("fully-qualified-type")
+//            .properties()
+//            .first()
+//            .type
+//
+//        // then
+//        assertSoftly(sut) {
+//            it?.sourceType shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType?"
+//            it?.bareSourceType shouldBeEqualTo "SampleType"
+//            it?.aliasType shouldBeEqualTo null
+//            it?.isAlias shouldBeEqualTo false
+//        }
+//    }
+
     @Test
     fun `nullable-type`() {
         // given
