@@ -2,24 +2,21 @@
 local.properties
 
 # Build Files #
-bin
-target
+bin/
+target/
 build/
-.gradle
+.gradle/
 
 # IntelliJ IDEA Files
 .idea
-*.iws
-*.iml
-*.ipr
 
 # VS Code #
-.vscode/
+.vscode
 
 # Python cache
-__pycache__/
+__pycache__
 *.pyc
 
 # Operating System Files
 **/.DS_Store
-Thumbs.db
+**/Thumbs.db
