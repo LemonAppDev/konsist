@@ -1,0 +1,7 @@
+class SampleClass : SampleParentClass()
+
+open class SampleParentClass: SampleParentClass1()
+
+open class SampleParentClass1: SampleParentClass2()
+
+open class SampleParentClass2

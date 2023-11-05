@@ -35,6 +35,30 @@ class KoParentInterfaceProviderListExtTest {
     }
 
     @Test
+    fun `parentInterfaces() returns parent interfaces from all declarations`() {
+        // given
+        val parent1: KoInterfaceDeclaration = mockk()
+        val parent2: KoInterfaceDeclaration = mockk()
+        val parent3: KoInterfaceDeclaration = mockk()
+        val declaration1: KoParentInterfaceProvider = mockk {
+            every { parentInterfaces() } returns listOf(parent1, parent2)
+        }
+        val declaration2: KoParentInterfaceProvider = mockk {
+            every { parentInterfaces() } returns listOf(parent3)
+        }
+        val declaration3: KoParentInterfaceProvider = mockk {
+            every { parentInterfaces() } returns emptyList()
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.parentInterfaces()
+
+        // then
+        sut shouldBeEqualTo listOf(parent1, parent2, parent3)
+    }
+
+    @Test
     fun `withParentInterfaces() returns declaration with any parent interface`() {
         // given
         val declaration1: KoParentInterfaceProvider = mockk {
@@ -232,15 +256,15 @@ class KoParentInterfaceProviderListExtTest {
         val suffix = "Name"
         val predicate: (KoInterfaceDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoParentInterfaceProvider = mockk {
-            every { hasParentInterface(predicate) } returns true
+            every { hasParentInterface(predicate = predicate) } returns true
         }
         val declaration2: KoParentInterfaceProvider = mockk {
-            every { hasParentInterface(predicate) } returns false
+            every { hasParentInterface(predicate = predicate) } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withParentInterface(predicate)
+        val sut = declarations.withParentInterface(predicate = predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration1)
@@ -252,15 +276,15 @@ class KoParentInterfaceProviderListExtTest {
         val suffix = "Name"
         val predicate: (KoInterfaceDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoParentInterfaceProvider = mockk {
-            every { hasParentInterface(predicate) } returns true
+            every { hasParentInterface(predicate = predicate) } returns true
         }
         val declaration2: KoParentInterfaceProvider = mockk {
-            every { hasParentInterface(predicate) } returns false
+            every { hasParentInterface(predicate = predicate) } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutParentInterface(predicate)
+        val sut = declarations.withoutParentInterface(predicate = predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -272,15 +296,15 @@ class KoParentInterfaceProviderListExtTest {
         val suffix = "Name"
         val predicate: (KoInterfaceDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoParentInterfaceProvider = mockk {
-            every { hasAllParentInterfaces(predicate) } returns true
+            every { hasAllParentInterfaces(predicate = predicate) } returns true
         }
         val declaration2: KoParentInterfaceProvider = mockk {
-            every { hasAllParentInterfaces(predicate) } returns false
+            every { hasAllParentInterfaces(predicate = predicate) } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withAllParentInterfaces(predicate)
+        val sut = declarations.withAllParentInterfaces(predicate = predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration1)
@@ -292,15 +316,15 @@ class KoParentInterfaceProviderListExtTest {
         val suffix = "Name"
         val predicate: (KoInterfaceDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoParentInterfaceProvider = mockk {
-            every { hasAllParentInterfaces(predicate) } returns true
+            every { hasAllParentInterfaces(predicate = predicate) } returns true
         }
         val declaration2: KoParentInterfaceProvider = mockk {
-            every { hasAllParentInterfaces(predicate) } returns false
+            every { hasAllParentInterfaces(predicate = predicate) } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutAllParentInterfaces(predicate)
+        val sut = declarations.withoutAllParentInterfaces(predicate = predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -319,18 +343,18 @@ class KoParentInterfaceProviderListExtTest {
             every { hasNameEndingWith(suffix) } returns false
         }
         val declaration1: KoParentInterfaceProvider = mockk {
-            every { parentInterfaces } returns listOf(parent1)
+            every { parentInterfaces() } returns listOf(parent1)
         }
         val declaration2: KoParentInterfaceProvider = mockk {
-            every { parentInterfaces } returns listOf(parent2)
+            every { parentInterfaces() } returns listOf(parent2)
         }
         val declaration3: KoParentInterfaceProvider = mockk {
-            every { parentInterfaces } returns emptyList()
+            every { parentInterfaces() } returns emptyList()
         }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withParentInterfaces(predicate)
+        val sut = declarations.withParentInterfaces(predicate = predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration1, declaration3)
@@ -349,18 +373,18 @@ class KoParentInterfaceProviderListExtTest {
             every { hasNameEndingWith(suffix) } returns false
         }
         val declaration1: KoParentInterfaceProvider = mockk {
-            every { parentInterfaces } returns listOf(parent1)
+            every { parentInterfaces() } returns listOf(parent1)
         }
         val declaration2: KoParentInterfaceProvider = mockk {
-            every { parentInterfaces } returns listOf(parent2)
+            every { parentInterfaces() } returns listOf(parent2)
         }
         val declaration3: KoParentInterfaceProvider = mockk {
-            every { parentInterfaces } returns emptyList()
+            every { parentInterfaces() } returns emptyList()
         }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withoutParentInterfaces(predicate)
+        val sut = declarations.withoutParentInterfaces(predicate = predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
