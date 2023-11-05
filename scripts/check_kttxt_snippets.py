@@ -13,8 +13,8 @@ multiprocessing.set_start_method('fork')
 error_occurred = False
 script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(script_dir)
-kt_snippet_dir = os.path.join(project_root, "build", "kt-snippet")
-test_data_jar_file_path = kt_snippet_dir + "/test-data.jar"
+kt_temp_files_dir = tempfile.mkdtemp()
+test_data_jar_file_path = kt_temp_files_dir + "/test-data.jar"
 sample_external_library_path = project_root + "/lib/libs/sample-external-library-1.2.jar"
 success = "SUCCESS"
 failed = "FAILED"
@@ -27,7 +27,7 @@ def print_and_flush(message):
     sys.stdout.flush()
 
 
-def compile_test_data():
+def compile_test_data_jar():
     global error_occurred
     command_converting_testdata_to_jar = [
         "kotlinc",
@@ -50,24 +50,32 @@ def compile_test_data():
 
 
 def create_snippet_test_dir():
-    if os.path.exists(kt_snippet_dir):
-        shutil.rmtree(kt_snippet_dir)
+    if os.path.exists(kt_temp_files_dir):
+        shutil.rmtree(kt_temp_files_dir)
 
-    os.makedirs(kt_snippet_dir)
+    os.makedirs(kt_temp_files_dir)
 
 
-def copy_and_kttxt_files_and_change_extension_to_kt():
-    source_dir = project_root + "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core"
+def copy_kttxt_files_and_change_extension_to_kt(source_dir, target_dir):
+    # The additional path to be added to the target directory
+    additional_path = "kotlin/com/lemonappdev/konsist/core/"
 
+    # Walk through the source directory
     for root, dirs, files in os.walk(source_dir):
         for file in files:
-            if file.endswith(".kttxt"):
+            # Check if the current file has a '.kttxt' extension
+            if file.endswith('.kttxt'):
+                # Construct the full path to the source file
                 source_file_path = os.path.join(root, file)
-                relative_dir = os.path.relpath(root, source_dir)
-                destination_subdir = os.path.join(kt_snippet_dir, relative_dir)
-                os.makedirs(destination_subdir, exist_ok=True)
-                destination_file_path = os.path.join(destination_subdir, file[:-6] + ".kt")
-                shutil.copy2(source_file_path, destination_file_path)
+                # Replace the source_dir with target_dir, add additional path, and change the file extension to .kt
+                relative_path = os.path.relpath(root, source_dir)
+                target_file_path = os.path.join(target_dir, additional_path, relative_path,
+                                                os.path.splitext(file)[0] + '.kt')
+
+                # Create the target directory if it doesn't exist
+                os.makedirs(os.path.dirname(target_file_path), exist_ok=True)
+                # Copy the file from source to target with new extension
+                shutil.copy2(source_file_path, target_file_path)
 
 
 def compile_kotlin_file(file_path):
@@ -89,8 +97,6 @@ def compile_kotlin_file(file_path):
         file_path
     ]
 
-    print_and_flush(" ".join(snippet_command))
-
     try:
         subprocess.run(snippet_command, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
@@ -107,19 +113,8 @@ def compile_kotlin_file(file_path):
         return message, success
 
 
-def compile_snippets(snippets):
+def compile_kotlin_files(kotlin_files):
     global error_occurred
-    kotlin_files = []
-
-    snippets_without_ext = [name.split('.kt')[0] for name in snippets]
-
-    for root, dirs, files in os.walk(kt_snippet_dir):
-        for file_name in files:
-            if file_name.endswith('.kt'):
-                file_name_without_ext = file_name[:-3]
-                if not snippets or file_name_without_ext in snippets_without_ext:
-                    kotlin_files.append(os.path.join(root, file_name))
-
     total_files = len(kotlin_files)
     processed_files = 0
 
@@ -141,41 +136,76 @@ def compile_snippets(snippets):
             if result == "FAILED":
                 error_occurred = True
 
-    return total_files
-
 
 def clean():
-    shutil.rmtree(kt_snippet_dir)
+    shutil.rmtree(kt_temp_files_dir)
     subprocess.run(["git", "clean", "-f"])
+
+
+def get_kt_temp_file_from_kttxt_file(kttxt_snippet_file_path):
+    # Ensure the snippet_file_path starts with the project_root
+    if not kttxt_snippet_file_path.startswith(project_root):
+        raise ValueError("The snippet file path must start with the project root directory.")
+
+    # Verify that the .kttxt file exists
+    if not os.path.isfile(kttxt_snippet_file_path):
+        raise FileNotFoundError(f"The file {kttxt_snippet_file_path} does not exist.")
+
+    return kttxt_snippet_file_path
+
+
+def get_kt_temp_files_from_kttxt_files(kttxt_snippet_file_paths):
+    kt_temp_file_paths = []
+
+    if not kttxt_snippet_file_paths:  # This is equivalent to if len(my_list) == 0:
+        print_and_flush("kttxt_snippet_file_paths is empty - compile all kttxt files")
+
+        for root, dirs, files in os.walk(kt_temp_files_dir):
+            for file in files:
+                if file.endswith('.kt'):
+                    kt_temp_file_paths.append(os.path.join(root, file))
+    else:
+        print_and_flush("kttxt_snippet_file_paths is provided")
+
+        for item in kttxt_snippet_file_paths:
+            print(os.path.relpath(item, project_root))
+
+        kt_temp_file_paths = [get_kt_temp_file_from_kttxt_file(path) for path in kttxt_snippet_file_paths]
+
+    return kt_temp_file_paths
 
 
 # Script ===============================================================================================================
 
-start_time = time.time()  # Capture the start time
-
-create_snippet_test_dir()
-compile_test_data()
-copy_and_kttxt_files_and_change_extension_to_kt()
-
-num_tests = 0
-
 if __name__ == '__main__':
-    changed_snippets = sys.argv[1:]
-    num_tests = compile_snippets(changed_snippets)
+    copy_kttxt_files_and_change_extension_to_kt(
+        project_root + "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core",
+        kt_temp_files_dir
+    )
 
-clean()
+    kotlin_kt_temp_files = get_kt_temp_files_from_kttxt_files(sys.argv[1:])
 
-end_time = time.time()  # Capture the end time to calculate the duration
-duration = end_time - start_time
+    print()
+    print("Total: " + str(len(kotlin_kt_temp_files)))
 
-print()
+    start_time = time.time()
 
-minutes, seconds = divmod(duration, 60)
+    compile_test_data_jar()
+    compile_kotlin_files(kotlin_kt_temp_files)
+    clean()
 
-if error_occurred:
-    print_and_flush(f"{failed}: Executed {num_tests} tests in {int(minutes)}m {seconds:.2f}s")
-    sys.exit(1)
-else:
-    print_and_flush(f"{success}: Executed {num_tests} tests in {int(minutes)}m {seconds:.2f}s")
-    sys.exit(0)
+    end_time = time.time()  # Capture the end time to calculate the duration
+    duration = end_time - start_time
+
+    print()
+
+    minutes, seconds = divmod(duration, 60)
+    num_tests = len(kotlin_kt_temp_files)
+
+    if error_occurred:
+        print_and_flush(f"{failed}: Executed {num_tests} tests in {int(minutes)}m {seconds:.2f}s")
+        sys.exit(1)
+    else:
+        print_and_flush(f"{success}: Executed {num_tests} tests in {int(minutes)}m {seconds:.2f}s")
+        sys.exit(0)
 
