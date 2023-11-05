@@ -46,8 +46,6 @@ def compile_test_data_jar():
     else:
         print_and_flush("Compile test-data.jar " + success)
 
-    print()
-
 
 def create_snippet_test_dir():
     if os.path.exists(kt_temp_files_dir):
@@ -56,26 +54,30 @@ def create_snippet_test_dir():
     os.makedirs(kt_temp_files_dir)
 
 
-def copy_kttxt_files_and_change_extension_to_kt(source_dir, target_dir):
-    # The additional path to be added to the target directory
-    additional_path = "kotlin/com/lemonappdev/konsist/core/"
+def copy_kttxt_files_and_change_extension_to_kt(source_files, target_dir):
+    # Iterate over the source files
+    for source_file_path in source_files:
+        # Check if the current file has a '.kttxt' extension
+        if source_file_path.endswith('.kttxt'):
+            # Extract the part of the path after project_root if it is a substring of the path
+            if project_root in source_file_path:
+                relative_path_part = source_file_path.split(project_root, 1)[1]
+            else:
+                relative_path_part = source_file_path
 
-    # Walk through the source directory
-    for root, dirs, files in os.walk(source_dir):
-        for file in files:
-            # Check if the current file has a '.kttxt' extension
-            if file.endswith('.kttxt'):
-                # Construct the full path to the source file
-                source_file_path = os.path.join(root, file)
-                # Replace the source_dir with target_dir, add additional path, and change the file extension to .kt
-                relative_path = os.path.relpath(root, source_dir)
-                target_file_path = os.path.join(target_dir, additional_path, relative_path,
-                                                os.path.splitext(file)[0] + '.kt')
+            # Remove leading slashes
+            relative_path_part = relative_path_part.lstrip("/\\")
 
-                # Create the target directory if it doesn't exist
-                os.makedirs(os.path.dirname(target_file_path), exist_ok=True)
-                # Copy the file from source to target with new extension
-                shutil.copy2(source_file_path, target_file_path)
+            # Concatenate the target directory with the relative path part
+            target_file_path_with_extension = os.path.join(target_dir, relative_path_part)
+
+            # Replace the .kttxt extension with .kt
+            target_file_path = os.path.splitext(target_file_path_with_extension)[0] + '.kt'
+
+            # Create the target directory if it doesn't exist
+            os.makedirs(os.path.dirname(target_file_path), exist_ok=True)
+            # Copy the file from source to target with new extension
+            shutil.copy2(source_file_path, target_file_path)
 
 
 def compile_kotlin_file(file_path):
@@ -143,7 +145,6 @@ def clean():
 
 
 def get_kt_temp_file_from_kttxt_file(kttxt_snippet_file_path):
-    print("kttxt_snippet_file_path:" + kttxt_snippet_file_path)
     # Ensure the snippet_file_path starts with the project_root
     if not kttxt_snippet_file_path.startswith(project_root):
         kttxt_snippet_file_path = project_root + "/" + kttxt_snippet_file_path
@@ -155,40 +156,83 @@ def get_kt_temp_file_from_kttxt_file(kttxt_snippet_file_path):
     return kttxt_snippet_file_path
 
 
-def get_kt_temp_files_from_kttxt_files(kttxt_snippet_file_paths):
+def get_all_kttxt_files():
     kttxt_temp_file_paths = []
 
-    if not kttxt_snippet_file_paths:
-        print_and_flush("kttxt_snippet_file_paths is empty - compile all kttxt files")
-
-        for root, dirs, files in os.walk(kt_temp_files_dir):
-            for file in files:
-                if file.endswith('.kt'):
-                    kttxt_temp_file_paths.append(os.path.join(root, file))
-    else:
-        print_and_flush("kttxt_snippet_file_paths is provided")
-
-        kttxt_temp_file_paths = kttxt_snippet_file_paths
-
-        for item in kttxt_temp_file_paths:
-            print(os.path.relpath(item, project_root))
+    for root, dirs, files in os.walk(project_root):
+        for file in files:
+            if file.endswith('.kttxt'):
+                kttxt_temp_file_paths.append(os.path.join(root, file))
 
     kt_temp_file_paths = [get_kt_temp_file_from_kttxt_file(path) for path in kttxt_temp_file_paths]
     return kt_temp_file_paths
 
 
+def ensure_files_exist(file_paths):
+    for file_path in file_paths:
+        if not os.path.exists(file_path):
+            # File does not exist, raise an exception
+            raise FileNotFoundError(f"The file {file_path} does not exist.")
+
+
+def count_files_in_directory(directory):
+    total_files = 0
+    for root, dirs, files in os.walk(directory):
+        total_files += len(files)
+    return total_files
+
+
+def list_files(directory):
+    file_list = []
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            file_list.append(os.path.join(root, file))
+    return file_list
+
+
+def print_relative_file_paths(file_list):
+    for file in file_list:
+        print(os.path.relpath(file, project_root))
+
+
+def get_all_file_paths(directory):
+    file_paths = []  # List to store file paths
+
+    # Walking top-down from the root
+    for root, _, files in os.walk(directory):
+        for file in files:
+            # Concatenate the root directory and the filename to get full file path
+            file_path = os.path.join(root, file)
+            file_paths.append(file_path)
+
+    return file_paths
+
+
 # Script ===============================================================================================================
 
 if __name__ == '__main__':
+    kotlin_kttxt_temp_files = []
+
+    if sys.argv[1:]:
+        print_and_flush("kttxt_snippet_file_paths are provided - checking provided kttxt files")
+        kotlin_kttxt_temp_files = sys.argv[1:]
+    else:
+        print_and_flush("kttxt_snippet_file_paths not provided - checking all kttxt files")
+        kotlin_kttxt_temp_files = get_all_kttxt_files()
+
+    ensure_files_exist(kotlin_kttxt_temp_files)
+
+    print_relative_file_paths(kotlin_kttxt_temp_files)
+
     copy_kttxt_files_and_change_extension_to_kt(
-        project_root + "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core",
+        kotlin_kttxt_temp_files,
         kt_temp_files_dir
     )
 
-    kotlin_kt_temp_files = get_kt_temp_files_from_kttxt_files(sys.argv[1:])
+    kotlin_kt_temp_files = get_all_file_paths(kt_temp_files_dir)
 
-    print()
-    print("Total: " + str(len(kotlin_kt_temp_files)))
+    print(list_files(kt_temp_files_dir))
+    print("Total: " + str(count_files_in_directory(kt_temp_files_dir)))
 
     start_time = time.time()
 
@@ -210,4 +254,3 @@ if __name__ == '__main__':
     else:
         print_and_flush(f"{success}: Executed {num_tests} tests in {int(minutes)}m {seconds:.2f}s")
         sys.exit(0)
-

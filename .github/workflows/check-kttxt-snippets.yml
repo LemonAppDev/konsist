@@ -68,6 +68,6 @@ jobs:
           echo "$kttxt_files"
           echo "CHANGED_FILES_NAMES=$(echo "$kttxt_files" | tr '\n' ' ')" >> $GITHUB_ENV
 
-      - name: Run Python script with changed .kttxt files
+      - name: Run Python Script With Changed .kttxt Files
         run: |
           python3 scripts/check_kttxt_snippets.py ${{ env.CHANGED_FILES_NAMES }}
