@@ -213,12 +213,19 @@ def get_all_file_paths(directory):
 if __name__ == '__main__':
     kotlin_kttxt_temp_files = []
 
-    if sys.argv[1:]:
-        print_and_flush("kttxt_snippet_file_paths are provided - checking provided kttxt files")
-        kotlin_kttxt_temp_files = sys.argv[1:]
+    if sys.argv[1:] > 1:
+        if '-all' in sys.argv[1:]:
+            print_and_flush("kttxt_snippet_file_paths not provided - checking all kttxt files")
+            kotlin_kttxt_temp_files = get_all_kttxt_files()
+        else:
+            print_and_flush("kttxt_snippet_file_paths are provided - checking provided kttxt files")
+            kotlin_kttxt_temp_files = sys.argv[1:]
+
     else:
-        print_and_flush("kttxt_snippet_file_paths not provided - checking all kttxt files")
-        kotlin_kttxt_temp_files = get_all_kttxt_files()
+        print("No files provided")
+        print("To check all files, use the -all parameter")
+        print("To check files use script.py file1 file2 ...")
+        sys.exit(1)
 
     ensure_files_exist(kotlin_kttxt_temp_files)
 
