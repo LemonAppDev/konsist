@@ -5,7 +5,10 @@ import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
 import com.lemonappdev.konsist.core.declaration.KoFileDeclarationCore
 import org.jetbrains.kotlin.psi.KtTypeReference
 
-internal interface KoSourceAndAliasTypeProviderCore : KoSourceAndAliasTypeProvider, KoNameProviderCore, KoBaseProviderCore {
+internal interface KoSourceAndAliasTypeProviderCore :
+    KoSourceAndAliasTypeProvider,
+    KoNameProviderCore,
+    KoBaseProviderCore {
     val ktTypeReference: KtTypeReference
 
     private val file: KoFileDeclaration
@@ -35,6 +38,31 @@ internal interface KoSourceAndAliasTypeProviderCore : KoSourceAndAliasTypeProvid
 
     override val bareSourceType: String
         get() = sourceType
-            .substringBefore("<")
-            .replace("?", "")
+            .removeGenericTypeArguments()
+            .removeNullability()
+            .removePackage()
+
+    /*
+     * Removes generic type arguments from the type.
+     * For `MyClass<String>` value will be "MyClass"
+     */
+    private fun String.removeGenericTypeArguments(): String {
+        return substringBefore("<")
+    }
+
+    /*
+     * Removes nullability from the type.
+     * For `MyClass?` value will be "MyClass"
+     */
+    private fun String.removeNullability(): String {
+        return replace("?", "")
+    }
+
+    /*
+     * Removes package from the type.
+     * For `com.app.MyClass` value will be "MyClass"
+     */
+    private fun String.removePackage(): String {
+        return substringAfterLast(".")
+    }
 }

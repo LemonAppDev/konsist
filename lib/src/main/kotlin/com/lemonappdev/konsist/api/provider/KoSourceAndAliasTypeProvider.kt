@@ -31,10 +31,11 @@ interface KoSourceAndAliasTypeProvider : KoBaseProvider {
     /**
      * The source type without generic type arguments and nullability ("?").
      *
-     * For `val car:MyClass` bareSourceType will be "MyClass".
-     * For `val car:MyClass?` bareSourceType will be "MyClass".
-     * For `val car:MyClass<String>` bareSourceType will be "MyClass"
-     * For `val car:MyClass<String?>?` bareSourceType will be "MyClass"
+     * For `val car:MyClass` value will be "MyClass".
+     * For `val car:MyClass?` value will be "MyClass".
+     * For `val car:MyClass<String>` value will be "MyClass"
+     * For `val car:MyClass<String?>?` value will be "MyClass"
+     * For `val car:com.app.MyClass` value will be "MyClass"
      *
      * @see sourceType
      */
