@@ -62,23 +62,22 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
-      - name: Get Changed Snippets
+      - name: Get Changed Snippet Files
         id: changed-snippets-names
         env:
           CHANGED_FILES: ${{ needs.get-github-context.outputs.all_changed_files }}
         run: |
-          read -r -a files_array <<< "${{ env.CHANGED_FILES }}"
-          
-          changed_file_names=""
+          changed_files=""
           
           for path in "${files_array[@]}"; do
-            filename="${path##*/}"
-            if [[ "$filename" == *.kttxt ]]; then
-              changed_file_names="$changed_file_names $filename"
+            changedFile="${path##*/}"
+            if [[ "$changedFile" == *.kttxt ]]; then
+              echo $changedFile
+              changed_files="$changed_files $changedFile"
             fi
           done
           
-          echo "names=$changed_file_names" >> "$GITHUB_OUTPUT"
+          echo "names=$changed_files" >> "$GITHUB_OUTPUT"
 
 
       - name: Check kttxt Snippets
