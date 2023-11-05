@@ -51,7 +51,7 @@ internal interface KoParentProviderCore :
                     ?: KoExternalParentDeclarationCore.getInstance(name, it)
             }
             ?.toMutableList()
-            ?: emptyList()
+            .orEmpty()
 
         val indirectParentDeclarations =
             if (indirectParents) getIndirectParents(directParentDeclarations) else emptyList()

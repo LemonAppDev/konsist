@@ -317,6 +317,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutSomeParentInterfacesOf(
         } else {
             true
         }
+
         it.parentInterfaces.none { parent -> parent.name == kClass.simpleName } &&
             hasNoMatchingParentInterfaces
     }

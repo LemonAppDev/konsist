@@ -14,7 +14,8 @@ error_occurred = False
 script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(script_dir)
 build_dir = os.path.join(project_root, "build", "snippet-test")
-test_data_jar_file_path = build_dir + "/testData.jar"
+test_data_jar_file_file = build_dir + "/testData.jar"
+sample_external_library_dir = build_dir + "/lib/libs/*.jar"
 success = "SUCCESS"
 failed = "FAILED"
 
@@ -31,7 +32,7 @@ def compile_test_data():
         project_root + "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/testdata/TestData.kt",
         "-include-runtime",
         "-d",
-        test_data_jar_file_path
+        test_data_jar_file_file
     ]
 
     try:
@@ -77,7 +78,7 @@ def compile_kotlin_file(file_path):
     snippet_command = [
         "kotlinc",
         "-cp",
-        test_data_jar_file_path,
+        test_data_jar_file_file + " " + sample_external_library_dir,
         "-nowarn",
         "-d", temp_dir,
         file_path
