@@ -1,0 +1,6 @@
+import com.lemonappdev.konsist.externalsample.SampleExternalInterface
+
+interface SampleInterface : SampleParentInterface1, SampleExternalInterface
+interface SampleParentInterface1: SampleParentInterface2
+
+interface SampleParentInterface2

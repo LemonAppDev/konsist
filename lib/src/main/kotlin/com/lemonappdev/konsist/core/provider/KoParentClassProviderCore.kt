@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentClassProvider
+import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
 import kotlin.reflect.KClass
 
 internal interface KoParentClassProviderCore :
@@ -9,28 +10,52 @@ internal interface KoParentClassProviderCore :
     KoBaseProviderCore,
     KoParentProviderCore {
     override val parentClass: KoClassDeclaration?
-        get() = parents.firstOrNull { it is KoClassDeclaration } as? KoClassDeclaration
+        get() = parentClasses(false).firstOrNull()
 
-    override fun hasParentClass(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean = when (predicate) {
-        null -> parentClass != null
-        else -> parentClass?.let { predicate(it) } ?: false
-    }
+    override fun parentClasses(indirectParents: Boolean): List<KoClassDeclaration> =
+        parents(indirectParents).filterIsInstance<KoClassDeclaration>()
 
-    override fun hasParentClassWithName(name: String, vararg names: String): Boolean {
-        val givenNames = names.toList() + name
+    override fun numParentClasses(indirectParents: Boolean): Int = parentClasses(indirectParents).size
 
-        return givenNames.any { parentClass?.name == it }
-    }
+    override fun countParentClasses(indirectParents: Boolean, predicate: (KoClassDeclaration) -> Boolean): Int =
+        parentClasses(indirectParents).count { predicate(it) }
+
+    override fun hasParentClass(): Boolean = parentClass != null
+
+    override fun hasParentClass(indirectParents: Boolean, predicate: (KoClassDeclaration) -> Boolean): Boolean =
+        parentClasses(indirectParents).any(predicate)
+
+    override fun hasParentClasses(indirectParents: Boolean): Boolean = parentClasses(indirectParents).isNotEmpty()
+
+    override fun hasAllParentClasses(indirectParents: Boolean, predicate: (KoClassDeclaration) -> Boolean): Boolean =
+        parentClasses(indirectParents).all(predicate)
 
     @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasParents()"))
     override fun hasParentClass(name: String): Boolean = parentClass?.name == name
 
-    override fun hasParentClassOf(name: KClass<*>, vararg names: KClass<*>): Boolean {
+    override fun hasParentClassWithName(name: String, vararg names: String, indirectParents: Boolean): Boolean {
         val givenNames = names.toList() + name
 
-        return givenNames.any { checkIfParentClassOf(it) }
+        return givenNames.any { parentClasses(indirectParents).any { parentClass -> it == parentClass.name } }
     }
 
-    private fun checkIfParentClassOf(kClass: KClass<*>): Boolean =
-        parentClass?.name == kClass.simpleName || parentClass?.fullyQualifiedName == kClass.qualifiedName
+    override fun hasParentClassesWithAllNames(
+        name: String,
+        vararg names: String,
+        indirectParents: Boolean,
+    ): Boolean {
+        val givenNames = names.toList() + name
+
+        return givenNames.all {
+            parentClasses(indirectParents).any { parentClass -> it == parentClass.name }
+        }
+    }
+
+    override fun hasParentClassOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean): Boolean =
+        checkIfParentOf(name, parentClasses(indirectParents)) ||
+            names.any { checkIfParentOf(it, parentClasses(indirectParents)) }
+
+    override fun hasAllParentClassesOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean): Boolean =
+        checkIfParentOf(name, parentClasses(indirectParents)) &&
+            names.all { checkIfParentOf(it, parentClasses(indirectParents)) }
 }

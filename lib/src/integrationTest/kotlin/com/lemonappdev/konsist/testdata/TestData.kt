@@ -2,6 +2,10 @@ package com.lemonappdev.konsist.testdata
 
 open class SampleParentClass
 
+open class SampleParentClass1
+
+open class SampleParentClass2
+
 open class SampleParentClassWithDuplicatedName
 
 class SampleClass

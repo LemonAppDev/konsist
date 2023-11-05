@@ -1,0 +1,5 @@
+interface SampleInterface : SampleParentInterface1
+
+interface SampleParentInterface1: SampleParentInterface2
+
+interface SampleParentInterface2

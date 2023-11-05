@@ -51,7 +51,7 @@ class AndroidSnippets {
             .functions()
             .withAnnotationOf(Preview::class)
             .assertTrue {
-                it.name.contains("Preview")
+                it.hasNameContaining("Preview")
             }
     }
 }
