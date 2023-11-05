@@ -239,13 +239,12 @@ if __name__ == '__main__':
     kotlin_kt_temp_files = get_all_file_paths(kt_temp_files_dir)
 
     print("Total: " + str(count_files_in_directory(kt_temp_files_dir)))
+    print()
 
     start_time = time.time()
-
     compile_test_data_jar()
     compile_kotlin_files(kotlin_kt_temp_files)
     clean()
-
     end_time = time.time()  # Capture the end time to calculate the duration
     duration = end_time - start_time
 
