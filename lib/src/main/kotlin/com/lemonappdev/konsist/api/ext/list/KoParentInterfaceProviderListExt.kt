@@ -308,14 +308,15 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutSomeParentInterfacesOf(
     vararg kClasses: KClass<*>,
 ): List<T> =
     filter {
-        it.parentInterfaces.none { parent -> parent.name == kClass.simpleName } &&
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass ->
-                    it
-                        .parentInterfaces
-                        .none { parent -> parent.name == kClass.simpleName }
-                }
-            } else {
-                true
+        val hasNoMatchingParentInterfaces = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass ->
+                it
+                    .parentInterfaces
+                    .none { parent -> parent.name == kClass.simpleName }
             }
+        } else {
+            true
+        }
+        it.parentInterfaces.none { parent -> parent.name == kClass.simpleName } &&
+            hasNoMatchingParentInterfaces
     }

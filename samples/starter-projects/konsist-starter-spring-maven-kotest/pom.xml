@@ -26,7 +26,7 @@
 	<description>konsist-starter-spring-maven-kotest</description>
 	<properties>
 		<java.version>19</java.version>
-		<kotlin.version>1.9.10</kotlin.version>
+		<kotlin.version>1.9.20</kotlin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -56,7 +56,7 @@
 		<dependency>
 			<groupId>io.kotest</groupId>
 			<artifactId>kotest-runner-junit5-jvm</artifactId>
-			<version>5.7.2</version>
+			<version>5.8.0</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

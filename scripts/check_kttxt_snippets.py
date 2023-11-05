@@ -46,8 +46,10 @@ def compile_test_data():
     print()
 
 def create_build_dir():
-    if not os.path.exists(build_dir):
-        os.makedirs(build_dir)
+    if os.path.exists(build_dir):
+        shutil.rmtree(build_dir)
+
+    os.makedirs(build_dir)
 
 def copy_and_kttxt_files_and_change_extension_to_kt():
     source_dir = project_root + "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core"
@@ -96,14 +98,18 @@ def compile_kotlin_file(file_path):
     else:
         return (message, success)
 
-def compile_snippets():
+def compile_snippets(snippets_changed):
     global error_occurred
     kotlin_files = []
+
+    snippets_without_ext = [name.split('.kt')[0] for name in snippets_changed]
 
     for root, dirs, files in os.walk(build_dir):
         for file_name in files:
             if file_name.endswith('.kt'):
-                kotlin_files.append(os.path.join(root, file_name))
+                file_name_without_ext = file_name[:-3]
+                if not snippets_changed or file_name_without_ext in snippets_without_ext:
+                    kotlin_files.append(os.path.join(root, file_name))
 
     total_files = len(kotlin_files)
     processed_files = 0
@@ -134,7 +140,8 @@ copy_and_kttxt_files_and_change_extension_to_kt()
 
 num_tests = 0
 if __name__ == '__main__':
-    num_tests = compile_snippets()
+    snippets_changed = sys.argv[1:]
+    num_tests = compile_snippets(snippets_changed)
 
 clean()
 
