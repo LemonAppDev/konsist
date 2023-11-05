@@ -62,7 +62,7 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
-      - name: Filter changed .kttxt files
+      - name: Filter Changed .kttxt Files
         run: |
           kttxt_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttxt$')
           echo "$kttxt_files"
