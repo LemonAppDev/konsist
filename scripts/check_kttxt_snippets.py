@@ -44,7 +44,7 @@ def compile_test_data_jar():
         print_and_flush("Compile " + test_data_jar_file_path + " " + failed)
         error_occurred = True
     else:
-        print_and_flush("Compile " + test_data_jar_file_path + " " + success)
+        print_and_flush("Compile test-data.jar " + success)
 
     print()
 
@@ -156,7 +156,7 @@ def get_kt_temp_file_from_kttxt_file(kttxt_snippet_file_path):
 
 
 def get_kt_temp_files_from_kttxt_files(kttxt_snippet_file_paths):
-    kt_temp_file_paths = []
+    kttxt_temp_file_paths = []
 
     if not kttxt_snippet_file_paths:  # This is equivalent to if len(my_list) == 0:
         print_and_flush("kttxt_snippet_file_paths is empty - compile all kttxt files")
@@ -164,14 +164,16 @@ def get_kt_temp_files_from_kttxt_files(kttxt_snippet_file_paths):
         for root, dirs, files in os.walk(kt_temp_files_dir):
             for file in files:
                 if file.endswith('.kt'):
-                    kt_temp_file_paths.append(os.path.join(root, file))
+                    kttxt_temp_file_paths.append(os.path.join(root, file))
     else:
         print_and_flush("kttxt_snippet_file_paths is provided")
 
-        for item in kttxt_snippet_file_paths:
+        kttxt_temp_file_paths =  kttxt_snippet_file_paths
+
+        for item in kttxt_temp_file_paths:
             print(os.path.relpath(item, project_root))
 
-        kt_temp_file_paths = [get_kt_temp_file_from_kttxt_file(path) for path in kttxt_snippet_file_paths]
+    kt_temp_file_paths = [get_kt_temp_file_from_kttxt_file(path) for path in kttxt_snippet_file_paths]
 
     return kt_temp_file_paths
 
