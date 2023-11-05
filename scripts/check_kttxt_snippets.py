@@ -13,8 +13,8 @@ multiprocessing.set_start_method('fork')
 error_occurred = False
 script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(script_dir)
-snippet_test_dir = os.path.join(project_root, "build", "snippet-test")
-test_data_jar_file_path = snippet_test_dir + "/test-data.jar"
+kt_snippet_dir = os.path.join(project_root, "build", "kt-snippet")
+test_data_jar_file_path = kt_snippet_dir + "/test-data.jar"
 sample_external_library_path = project_root + "/lib/libs/sample-external-library-1.2.jar"
 success = "SUCCESS"
 failed = "FAILED"
@@ -50,10 +50,10 @@ def compile_test_data():
 
 
 def create_snippet_test_dir():
-    if os.path.exists(snippet_test_dir):
-        shutil.rmtree(snippet_test_dir)
+    if os.path.exists(kt_snippet_dir):
+        shutil.rmtree(kt_snippet_dir)
 
-    os.makedirs(snippet_test_dir)
+    os.makedirs(kt_snippet_dir)
 
 
 def copy_and_kttxt_files_and_change_extension_to_kt():
@@ -64,7 +64,7 @@ def copy_and_kttxt_files_and_change_extension_to_kt():
             if file.endswith(".kttxt"):
                 source_file_path = os.path.join(root, file)
                 relative_dir = os.path.relpath(root, source_dir)
-                destination_subdir = os.path.join(snippet_test_dir, relative_dir)
+                destination_subdir = os.path.join(kt_snippet_dir, relative_dir)
                 os.makedirs(destination_subdir, exist_ok=True)
                 destination_file_path = os.path.join(destination_subdir, file[:-6] + ".kt")
                 shutil.copy2(source_file_path, destination_file_path)
@@ -107,17 +107,17 @@ def compile_kotlin_file(file_path):
         return message, success
 
 
-def compile_snippets(snippets_changed):
+def compile_snippets(snippets):
     global error_occurred
     kotlin_files = []
 
-    snippets_without_ext = [name.split('.kt')[0] for name in snippets_changed]
+    snippets_without_ext = [name.split('.kt')[0] for name in snippets]
 
-    for root, dirs, files in os.walk(snippet_test_dir):
+    for root, dirs, files in os.walk(kt_snippet_dir):
         for file_name in files:
             if file_name.endswith('.kt'):
                 file_name_without_ext = file_name[:-3]
-                if not snippets_changed or file_name_without_ext in snippets_without_ext:
+                if not snippets or file_name_without_ext in snippets_without_ext:
                     kotlin_files.append(os.path.join(root, file_name))
 
     total_files = len(kotlin_files)
@@ -145,7 +145,7 @@ def compile_snippets(snippets_changed):
 
 
 def clean():
-    shutil.rmtree(snippet_test_dir)
+    shutil.rmtree(kt_snippet_dir)
     subprocess.run(["git", "clean", "-f"])
 
 
@@ -160,8 +160,8 @@ copy_and_kttxt_files_and_change_extension_to_kt()
 num_tests = 0
 
 if __name__ == '__main__':
-    snippets_changed_argument = sys.argv[1:]
-    num_tests = compile_snippets(snippets_changed_argument)
+    changed_snippets = sys.argv[1:]
+    num_tests = compile_snippets(changed_snippets)
 
 clean()
 
