@@ -65,7 +65,7 @@ jobs:
       - name: Filter changed .kttxt files
         run: |
           kttxt_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttxt$')
-          Echo kttxt_files
+          echo kttxt_files
           echo "CHANGED_FILES_NAMES=$kttxt_files" >> GITHUB_ENV
 
       - name: Run Python script with changed .kttxt files
