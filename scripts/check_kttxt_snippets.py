@@ -143,6 +143,7 @@ def clean():
 
 
 def get_kt_temp_file_from_kttxt_file(kttxt_snippet_file_path):
+    print("kttxt_snippet_file_path:" + kttxt_snippet_file_path)
     # Ensure the snippet_file_path starts with the project_root
     if not kttxt_snippet_file_path.startswith(project_root):
         raise ValueError("The snippet file path must start with the project root directory. project_root: " + project_root)
