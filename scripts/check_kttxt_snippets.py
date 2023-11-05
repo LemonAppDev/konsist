@@ -89,7 +89,7 @@ def compile_kotlin_file(file_path):
         file_path
     ]
 
-#     print_and_flush(" ".join(snippet_command))
+    print_and_flush(" ".join(snippet_command))
 
     try:
         subprocess.run(snippet_command, check=True, text=True, capture_output=True)
@@ -102,9 +102,9 @@ def compile_kotlin_file(file_path):
     message = "compile " + os.path.basename(file_path)
 
     if error_occurred_local:
-        return (message, failed)
+        return message, failed
     else:
-        return (message, success)
+        return message, success
 
 
 def compile_snippets(snippets_changed):
@@ -158,9 +158,10 @@ compile_test_data()
 copy_and_kttxt_files_and_change_extension_to_kt()
 
 num_tests = 0
+
 if __name__ == '__main__':
-    snippets_changed = sys.argv[1:]
-    num_tests = compile_snippets(snippets_changed)
+    snippets_changed_argument = sys.argv[1:]
+    num_tests = compile_snippets(snippets_changed_argument)
 
 clean()
 

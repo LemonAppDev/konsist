@@ -67,7 +67,7 @@ jobs:
           kttxt_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttxt$')
           
           for kttxt_file in $kttxt_files; do
-            echo "kttxt_file"
+            echo kttxt_file
           done
           
           echo "CHANGED_FILES_NAMES=$kttxt_files" >> GITHUB_ENV
