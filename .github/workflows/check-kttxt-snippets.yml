@@ -62,8 +62,7 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
-      - name: Echo List Changed kttxt Files
-        id: changed-files2
+      - name: Run Python script with changed .kttxt files
         run: |
           kttxt_files=$(echo '${{ steps.changed-files.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttxt$')
           echo "CHANGED_FILES_NAMES=$kttxt_files" >> $GITHUB_ENV
