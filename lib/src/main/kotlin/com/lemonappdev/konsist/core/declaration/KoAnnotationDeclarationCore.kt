@@ -58,9 +58,9 @@ internal class KoAnnotationDeclarationCore private constructor(
         private val cache: KoDeclarationCache<KoAnnotationDeclaration> = KoDeclarationCache()
 
         internal fun getInstance(
-            ktObjectDeclaration: KtAnnotationEntry,
+            ktAnnotationEntry: KtAnnotationEntry,
             containingDeclaration: KoContainingDeclarationProvider,
         ): KoAnnotationDeclaration =
-            cache.getOrCreateInstance(ktObjectDeclaration, containingDeclaration) { KoAnnotationDeclarationCore(ktObjectDeclaration) }
+            cache.getOrCreateInstance(ktAnnotationEntry, containingDeclaration) { KoAnnotationDeclarationCore(ktAnnotationEntry) }
     }
 }

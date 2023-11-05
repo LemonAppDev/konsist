@@ -9,41 +9,49 @@ internal interface KoExternalParentProviderCore :
     KoExternalParentProvider,
     KoBaseProviderCore,
     KoParentProviderCore {
-    override val externalParents: List<KoExternalParentDeclaration>
-        get() = parents
-            .filterIsInstance<KoExternalParentDeclaration>()
+    override fun externalParents(indirectParents: Boolean): List<KoExternalParentDeclaration> = parents(indirectParents)
+        .filterIsInstance<KoExternalParentDeclaration>()
 
-    override val numExternalParents: Int
-        get() = externalParents.size
+    override fun numExternalParents(indirectParents: Boolean): Int = externalParents(indirectParents).size
 
-    override fun countExternalParents(predicate: (KoExternalParentDeclaration) -> Boolean): Int =
-        externalParents.count { predicate(it) }
+    override fun countExternalParents(
+        indirectParents: Boolean,
+        predicate: (KoExternalParentDeclaration) -> Boolean,
+    ): Int = externalParents(indirectParents).count { predicate(it) }
 
-    override fun hasExternalParents(): Boolean = externalParents.isNotEmpty()
+    override fun hasExternalParents(indirectParents: Boolean): Boolean = externalParents(indirectParents).isNotEmpty()
 
-    override fun hasExternalParentWithName(name: String, vararg names: String): Boolean {
+    override fun hasExternalParentWithName(name: String, vararg names: String, indirectParents: Boolean): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.any {
-            externalParents.any { parentInterface -> it == parentInterface.name }
+            externalParents(indirectParents).any { parentInterface -> it == parentInterface.name }
         }
     }
 
-    override fun hasExternalParentsWithAllNames(name: String, vararg names: String): Boolean {
+    override fun hasExternalParentsWithAllNames(name: String, vararg names: String, indirectParents: Boolean): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.all {
-            externalParents.any { parentInterface -> it == parentInterface.name }
+            externalParents(indirectParents).any { parentInterface -> it == parentInterface.name }
         }
     }
 
-    override fun hasExternalParent(predicate: (KoExternalParentDeclaration) -> Boolean): Boolean = externalParents.any(predicate)
+    override fun hasExternalParent(
+        indirectParents: Boolean,
+        predicate: (KoExternalParentDeclaration) -> Boolean,
+    ): Boolean = externalParents(indirectParents).any(predicate)
 
-    override fun hasAllExternalParents(predicate: (KoExternalParentDeclaration) -> Boolean): Boolean = externalParents.all(predicate)
+    override fun hasAllExternalParents(
+        indirectParents: Boolean,
+        predicate: (KoExternalParentDeclaration) -> Boolean,
+    ): Boolean = externalParents(indirectParents).all(predicate)
 
-    override fun hasExternalParentOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
-        checkIfParentOf(name, externalParents) || names.any { checkIfParentOf(it, externalParents) }
+    override fun hasExternalParentOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean): Boolean =
+        checkIfParentOf(name, externalParents(indirectParents)) ||
+            names.any { checkIfParentOf(it, externalParents(indirectParents)) }
 
-    override fun hasAllExternalParentsOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
-        checkIfParentOf(name, externalParents) && names.all { checkIfParentOf(it, externalParents) }
+    override fun hasAllExternalParentsOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean): Boolean =
+        checkIfParentOf(name, externalParents(indirectParents)) &&
+            names.all { checkIfParentOf(it, externalParents(indirectParents)) }
 }

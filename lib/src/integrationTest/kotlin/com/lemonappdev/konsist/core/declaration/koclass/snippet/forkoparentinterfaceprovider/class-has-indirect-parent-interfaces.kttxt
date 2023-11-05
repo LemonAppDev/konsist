@@ -1,0 +1,7 @@
+class SampleClass : SampleParentClass()
+
+open class SampleParentClass: SampleParentInterface1
+
+interface SampleParentInterface1: SampleParentInterface2
+
+interface SampleParentInterface2
