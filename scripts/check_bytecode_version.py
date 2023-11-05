@@ -13,11 +13,13 @@ os.makedirs(build_dir, exist_ok=True)
 
 print("build_dir", build_dir)
 
+
 def get_bytecode_version(class_file):
     result = subprocess.run(["javap", "-verbose", class_file], capture_output=True, text=True)
     for line in result.stdout.splitlines():
         if "major version" in line:
             return line.split(":")[-1].strip()
+
 
 def main():
     jar_path = get_artifact_path("jar")
@@ -26,7 +28,8 @@ def main():
     desired_java_version = "8"
     desired_bytecode_version = "52"
 
-    print(f"Verify if the first class in {jar_path} is compiled to bytecode {desired_bytecode_version} (Java {desired_java_version})")
+    print(
+        f"Verify if the first class in {jar_path} is compiled to bytecode {desired_bytecode_version} (Java {desired_java_version})")
 
     checked = False  # Variable to track if we've already checked a .class file
 
@@ -57,6 +60,7 @@ def main():
     finally:
         # Clean up the temporary directory
         shutil.rmtree(build_dir)
+
 
 if __name__ == "__main__":
     main()

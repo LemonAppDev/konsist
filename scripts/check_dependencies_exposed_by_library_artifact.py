@@ -5,6 +5,7 @@ import xml.etree.ElementTree as ET
 from get_artifact_path import get_artifact_path
 from get_konsist_snapshot_version import get_konsist_snapshot_version
 
+
 def check_dependencies(file_path):
     try:
         tree = ET.parse(file_path)
@@ -26,6 +27,7 @@ def check_dependencies(file_path):
     except Exception as e:
         print(f'Error: {e}')
         return 1
+
 
 if __name__ == "__main__":
     konsist_version = get_konsist_snapshot_version()

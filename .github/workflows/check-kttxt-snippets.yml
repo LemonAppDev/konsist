@@ -2,7 +2,7 @@ name: Check Snippet kttxt Snippets
 
 on:
   pull_request:
-      types: [ opened, synchronize ]
+    types: [ opened, synchronize ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -62,27 +62,12 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
-      - name: Get Changed Snippets
-        id: changed-snippets-names
-        env:
-          CHANGED_FILES: ${{ needs.get-github-context.outputs.all_changed_files }}
+      - name: Filter Changed .kttxt Files
         run: |
-          read -r -a files_array <<< "${{ env.CHANGED_FILES }}"
-          
-          changed_file_names=""
-          
-          for path in "${files_array[@]}"; do
-            filename="${path##*/}"
-            if [[ "$filename" == *.kttxt ]]; then
-              changed_file_names="$changed_file_names $filename"
-            fi
-          done
-          
-          echo "names=$changed_file_names" >> "$GITHUB_OUTPUT"
+          kttxt_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttxt$')
+          echo "$kttxt_files"
+          echo "CHANGED_FILES_NAMES=$(echo "$kttxt_files" | tr '\n' ' ')" >> $GITHUB_ENV
 
-
-      - name: Check kttxt Snippets
-        env:
-          CHANGED_FILES_NAMES: ${{ steps.changed-snippets-names.outputs.names }}
-        run:
+      - name: Run Python Script With Changed .kttxt Files
+        run: |
           python3 scripts/check_kttxt_snippets.py ${{ env.CHANGED_FILES_NAMES }}
