@@ -13,17 +13,19 @@ multiprocessing.set_start_method('fork')
 error_occurred = False
 script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(script_dir)
-build_dir = os.path.join(project_root, "build", "snippet-test")
-test_data_jar_file_file = build_dir + "/testData.jar"
-sample_external_library_dir = build_dir + "/lib/libs/*.jar"
+snippet_test_dir = os.path.join(project_root, "build", "snippet-test")
+test_data_jar_file_path = snippet_test_dir + "/test-data.jar"
+sample_external_library_path = project_root + "/lib/libs/sample-external-library-1.2.jar"
 success = "SUCCESS"
 failed = "FAILED"
+
 
 # Methods =============================================================================================================
 
 def print_and_flush(message):
     print(message)
     sys.stdout.flush()
+
 
 def compile_test_data():
     global error_occurred
@@ -32,25 +34,27 @@ def compile_test_data():
         project_root + "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/testdata/TestData.kt",
         "-include-runtime",
         "-d",
-        test_data_jar_file_file
+        test_data_jar_file_path
     ]
 
     try:
         subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-        print_and_flush("compile TestData.jar " + failed)
+        print_and_flush("Compile " + test_data_jar_file_path + " " + failed)
         error_occurred = True
     else:
-        print_and_flush("compile TestData.jar " + success)
+        print_and_flush("Compile " + test_data_jar_file_path + " " + success)
 
     print()
 
-def create_build_dir():
-    if os.path.exists(build_dir):
-        shutil.rmtree(build_dir)
 
-    os.makedirs(build_dir)
+def create_snippet_test_dir():
+    if os.path.exists(snippet_test_dir):
+        shutil.rmtree(snippet_test_dir)
+
+    os.makedirs(snippet_test_dir)
+
 
 def copy_and_kttxt_files_and_change_extension_to_kt():
     source_dir = project_root + "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core"
@@ -60,10 +64,11 @@ def copy_and_kttxt_files_and_change_extension_to_kt():
             if file.endswith(".kttxt"):
                 source_file_path = os.path.join(root, file)
                 relative_dir = os.path.relpath(root, source_dir)
-                destination_subdir = os.path.join(build_dir, relative_dir)
+                destination_subdir = os.path.join(snippet_test_dir, relative_dir)
                 os.makedirs(destination_subdir, exist_ok=True)
                 destination_file_path = os.path.join(destination_subdir, file[:-6] + ".kt")
                 shutil.copy2(source_file_path, destination_file_path)
+
 
 def compile_kotlin_file(file_path):
     error_occurred_local = False
@@ -71,18 +76,20 @@ def compile_kotlin_file(file_path):
         file_content = file.read()
 
     if "actual" in file_content or "expect" in file_content:
-        return (os.path.basename(file_path), "SKIPPED")
+        return os.path.basename(file_path), "SKIPPED"
 
     temp_dir = tempfile.mkdtemp()
 
     snippet_command = [
         "kotlinc",
         "-cp",
-        test_data_jar_file_file + " " + sample_external_library_dir,
+        test_data_jar_file_path + ":" + sample_external_library_path,
         "-nowarn",
         "-d", temp_dir,
         file_path
     ]
+
+#     print_and_flush(" ".join(snippet_command))
 
     try:
         subprocess.run(snippet_command, check=True, text=True, capture_output=True)
@@ -99,13 +106,14 @@ def compile_kotlin_file(file_path):
     else:
         return (message, success)
 
+
 def compile_snippets(snippets_changed):
     global error_occurred
     kotlin_files = []
 
     snippets_without_ext = [name.split('.kt')[0] for name in snippets_changed]
 
-    for root, dirs, files in os.walk(build_dir):
+    for root, dirs, files in os.walk(snippet_test_dir):
         for file_name in files:
             if file_name.endswith('.kt'):
                 file_name_without_ext = file_name[:-3]
@@ -114,6 +122,14 @@ def compile_snippets(snippets_changed):
 
     total_files = len(kotlin_files)
     processed_files = 0
+
+    if not os.path.exists(test_data_jar_file_path):
+        print_and_flush(f"Error: The file {test_data_jar_file_path} does not exist.")
+        sys.exit(1)  # Exit the script with an error code
+
+    if not os.path.exists(sample_external_library_path):
+        print_and_flush(f"Error: The file {sample_external_library_path} does not exist.")
+        sys.exit(1)  # Exit the script with an error code
 
     with ProcessPoolExecutor() as executor:
         futures = {executor.submit(compile_kotlin_file, file_path): file_path for file_path in kotlin_files}
@@ -127,16 +143,18 @@ def compile_snippets(snippets_changed):
 
     return total_files
 
+
 def clean():
-    shutil.rmtree(build_dir)
+    shutil.rmtree(snippet_test_dir)
     subprocess.run(["git", "clean", "-f"])
+
 
 # Script ===============================================================================================================
 
 start_time = time.time()  # Capture the start time
 
+create_snippet_test_dir()
 compile_test_data()
-create_build_dir()
 copy_and_kttxt_files_and_change_extension_to_kt()
 
 num_tests = 0
