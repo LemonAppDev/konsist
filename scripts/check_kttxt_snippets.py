@@ -238,7 +238,6 @@ if __name__ == '__main__':
 
     kotlin_kt_temp_files = get_all_file_paths(kt_temp_files_dir)
 
-    print(list_files(kt_temp_files_dir))
     print("Total: " + str(count_files_in_directory(kt_temp_files_dir)))
 
     start_time = time.time()
