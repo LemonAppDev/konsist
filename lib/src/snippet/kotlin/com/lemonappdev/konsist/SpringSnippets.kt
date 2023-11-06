@@ -57,7 +57,7 @@ class SpringSnippets {
             .classes()
             .withAnnotationOf(RestController::class)
             .functions()
-            .assertFalse(additionalMessage = "Don't use Kotlin Collection Types") { function ->
+            .assertFalse { function ->
                 function.hasReturnType { it.hasNameStartingWith("List") }
             }
     }
