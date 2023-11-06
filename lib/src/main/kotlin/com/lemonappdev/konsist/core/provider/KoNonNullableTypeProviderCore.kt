@@ -7,5 +7,5 @@ import kotlin.reflect.KClass
 internal interface KoNonNullableTypeProviderCore : KoNonNullableTypeProvider, KoBaseProviderCore {
     override fun hasType(predicate: (KoTypeDeclaration) -> Boolean): Boolean = predicate(type)
 
-    override fun hasTypeOf(kClass: KClass<*>): Boolean = kClass.simpleName == type.name
+    override fun hasTypeOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == type.fullyQualifiedName
 }

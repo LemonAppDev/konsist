@@ -5,7 +5,5 @@ import kotlin.reflect.KClass
 
 object ParentUtil {
     internal fun <T : KoParentDeclaration> checkIfParentOf(kClass: KClass<*>, list: List<T>): Boolean =
-        list.any { parent ->
-            parent.name == kClass.simpleName || parent.fullyQualifiedName == kClass.qualifiedName
-        }
+        list.any { parent ->  parent.fullyQualifiedName == kClass.qualifiedName }
 }

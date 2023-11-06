@@ -29,5 +29,5 @@ internal interface KoNullableTypeProviderCore :
             else -> type?.let { predicate(it) } ?: false
         }
 
-    override fun hasTypeOf(kClass: KClass<*>): Boolean = kClass.simpleName == type?.name
+    override fun hasTypeOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == type?.fullyQualifiedName
 }

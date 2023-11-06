@@ -32,5 +32,5 @@ internal interface KoParentClassProviderCore :
     }
 
     private fun checkIfParentClassOf(kClass: KClass<*>): Boolean =
-        parentClass?.name == kClass.simpleName || parentClass?.fullyQualifiedName == kClass.qualifiedName
+        parentClass?.fullyQualifiedName == kClass.qualifiedName
 }

@@ -48,5 +48,5 @@ internal interface KoReturnProviderCore :
             else -> returnType?.let { predicate(it) } ?: false
         }
 
-    override fun hasReturnTypeOf(kClass: KClass<*>): Boolean = kClass.simpleName == returnType?.name
+    override fun hasReturnTypeOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == returnType?.fullyQualifiedName
 }
