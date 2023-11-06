@@ -32,7 +32,7 @@ class SpringSnippets {
         allows for future expansion (e.g., adding more properties like "totalPages")
         without disrupting the existing API contract, which would happen if a JSON
         array were returned directly.
-        */
+         */
         Konsist
             .scopeFromPackage("story.controller..")
             .classes()
