@@ -6,7 +6,7 @@
 [<img src="https://img.shields.io/maven-central/v/com.lemonappdev/konsist?label=Release"/>](https://central.sonatype.com/artifact/com.lemonappdev/konsist)
 
 Konsist is a linter that guards the consistency of [Kotlin](https://kotlinlang.org/) projects by enforcing a cohesive code structure 
-and unified architecture. Konsist tests are written in the form of unit tests (JUnit(https://junit.org/) / KoTest(https://kotest.io/)).
+and unified architecture. Konsist guards are written in the form of unit tests (JUnit(https://junit.org/) / KoTest(https://kotest.io/)).
 
 ## Dependencies
 
