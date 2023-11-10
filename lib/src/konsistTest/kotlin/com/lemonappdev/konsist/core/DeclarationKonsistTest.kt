@@ -62,7 +62,7 @@ class DeclarationKonsistTest {
         declarationPackageScope
             .classes()
             .assertTrue {
-                it.containsFunction { function -> function.name == "toString" }
+                it.hasFunction { function -> function.hasOverrideModifier && function.name == "toString" }
             }
     }
 }

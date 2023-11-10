@@ -1,0 +1,6 @@
+import com.lemonappdev.konsist.externalsample.SampleExternalClass
+import com.lemonappdev.konsist.externalsample.SampleExternalInterface
+
+open class SampleParentClass: SampleExternalClass(), SampleExternalInterface
+
+object SampleObject : SampleParentClass()
