@@ -1,9 +1,9 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
@@ -15,11 +15,11 @@ import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoNonNullableTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
-import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoActualModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
@@ -32,7 +32,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoTypeAliasDeclarationCore private constructor(
     private val ktTypeAlias: KtTypeAlias,
-    override val containingDeclaration: KoContainingDeclarationProvider,
+    override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoTypeAliasDeclaration,
     KoBaseProviderCore,
@@ -50,7 +50,7 @@ internal class KoTypeAliasDeclarationCore private constructor(
     KoSourceSetProviderCore,
     KoResideInPackageProviderCore,
     KoTextProviderCore,
-    KoTypeProviderCore,
+    KoNonNullableTypeProviderCore,
     KoVisibilityModifierProviderCore,
     KoActualModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktTypeAlias }
@@ -77,7 +77,7 @@ internal class KoTypeAliasDeclarationCore private constructor(
 
         internal fun getInstance(
             ktTypeAlias: KtTypeAlias,
-            containingDeclaration: KoContainingDeclarationProvider,
+            containingDeclaration: KoBaseDeclaration,
         ): KoTypeAliasDeclaration =
             cache.getOrCreateInstance(ktTypeAlias, containingDeclaration) {
                 KoTypeAliasDeclarationCore(

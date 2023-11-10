@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInitBlockDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -16,19 +15,21 @@ import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
+import com.lemonappdev.konsist.core.provider.KoVariableProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoLocalDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnonymousInitializer
 import org.jetbrains.kotlin.psi.KtElement
 
 internal class KoInitBlockDeclarationCore private constructor(
     private val ktAnonymousInitializer: KtAnonymousInitializer,
-    override val containingDeclaration: KoContainingDeclarationProvider,
+    override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoInitBlockDeclaration,
     KoBaseProviderCore,
     KoLocalClassProviderCore,
     KoLocalDeclarationProviderCore,
     KoLocalFunctionProviderCore,
+    KoVariableProviderCore,
     KoContainingFileProviderCore,
     KoLocationProviderCore,
     KoContainingDeclarationProviderCore,
@@ -55,7 +56,7 @@ internal class KoInitBlockDeclarationCore private constructor(
 
         internal fun getInstance(
             ktAnonymousInitializer: KtAnonymousInitializer,
-            containingDeclaration: KoContainingDeclarationProvider,
+            containingDeclaration: KoBaseDeclaration,
         ): KoInitBlockDeclaration =
             cache.getOrCreateInstance(ktAnonymousInitializer, containingDeclaration) {
                 KoInitBlockDeclarationCore(ktAnonymousInitializer, containingDeclaration)

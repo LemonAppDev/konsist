@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSetterDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoBodyProviderCore
@@ -18,6 +17,7 @@ import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
+import com.lemonappdev.konsist.core.provider.KoVariableProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoLocalDeclarationProviderCoreUtil
@@ -29,7 +29,7 @@ import org.jetbrains.kotlin.psi.KtPropertyAccessor
 
 internal class KoSetterDeclarationCore private constructor(
     private val ktPropertyAccessor: KtPropertyAccessor,
-    override val containingDeclaration: KoContainingDeclarationProvider,
+    override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoSetterDeclaration,
     KoBaseProviderCore,
@@ -40,6 +40,7 @@ internal class KoSetterDeclarationCore private constructor(
     KoLocalClassProviderCore,
     KoLocalDeclarationProviderCore,
     KoLocalFunctionProviderCore,
+    KoVariableProviderCore,
     KoLocationProviderCore,
     KoPathProviderCore,
     KoModuleProviderCore,
@@ -76,7 +77,7 @@ internal class KoSetterDeclarationCore private constructor(
 
         internal fun getInstance(
             ktPropertyAccessor: KtPropertyAccessor,
-            containingDeclaration: KoContainingDeclarationProvider,
+            containingDeclaration: KoBaseDeclaration,
         ): KoSetterDeclaration =
             cache.getOrCreateInstance(ktPropertyAccessor, containingDeclaration) {
                 KoSetterDeclarationCore(ktPropertyAccessor, containingDeclaration)

@@ -16,18 +16,18 @@ class KoPropertyProviderListExtTest {
         val property2: KoPropertyDeclarationCore = mockk()
         val property3: KoPropertyDeclarationCore = mockk()
         val declaration1: KoPropertyProvider = mockk {
-            every { properties(includeNested = true, includeLocal = false) } returns listOf(property1, property2)
+            every { properties(includeNested = true) } returns listOf(property1, property2)
         }
         val declaration2: KoPropertyProvider = mockk {
-            every { properties(includeNested = true, includeLocal = false) } returns listOf(property3)
+            every { properties(includeNested = true) } returns listOf(property3)
         }
         val declaration3: KoPropertyProvider = mockk {
-            every { properties(includeNested = true, includeLocal = false) } returns emptyList()
+            every { properties(includeNested = true) } returns emptyList()
         }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.properties(includeNested = true, includeLocal = false)
+        val sut = declarations.properties(includeNested = true)
 
         // then
         sut shouldBeEqualTo listOf(property1, property2, property3)
@@ -231,15 +231,15 @@ class KoPropertyProviderListExtTest {
         val suffix = "Name"
         val predicate: (KoPropertyDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoPropertyProvider = mockk {
-            every { hasProperty(true, true, predicate) } returns true
+            every { hasProperty(true, predicate) } returns true
         }
         val declaration2: KoPropertyProvider = mockk {
-            every { hasProperty(true, true, predicate) } returns false
+            every { hasProperty(true, predicate) } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withProperty(true, true, predicate)
+        val sut = declarations.withProperty(true, predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration1)
@@ -251,15 +251,15 @@ class KoPropertyProviderListExtTest {
         val suffix = "Name"
         val predicate: (KoPropertyDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoPropertyProvider = mockk {
-            every { hasProperty(true, true, predicate) } returns true
+            every { hasProperty(true, predicate) } returns true
         }
         val declaration2: KoPropertyProvider = mockk {
-            every { hasProperty(true, true, predicate) } returns false
+            every { hasProperty(true, predicate) } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutProperty(true, true, predicate)
+        val sut = declarations.withoutProperty(true, predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -271,15 +271,15 @@ class KoPropertyProviderListExtTest {
         val suffix = "Name"
         val predicate: (KoPropertyDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoPropertyProvider = mockk {
-            every { hasAllProperties(true, true, predicate) } returns true
+            every { hasAllProperties(true, predicate) } returns true
         }
         val declaration2: KoPropertyProvider = mockk {
-            every { hasAllProperties(true, true, predicate) } returns false
+            every { hasAllProperties(true, predicate) } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withAllProperties(true, true, predicate)
+        val sut = declarations.withAllProperties(true, predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration1)
@@ -291,15 +291,15 @@ class KoPropertyProviderListExtTest {
         val suffix = "Name"
         val predicate: (KoPropertyDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoPropertyProvider = mockk {
-            every { hasAllProperties(true, true, predicate) } returns true
+            every { hasAllProperties(true, predicate) } returns true
         }
         val declaration2: KoPropertyProvider = mockk {
-            every { hasAllProperties(true, true, predicate) } returns false
+            every { hasAllProperties(true, predicate) } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutAllProperties(true, true, predicate)
+        val sut = declarations.withoutAllProperties(true, predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -329,7 +329,7 @@ class KoPropertyProviderListExtTest {
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withProperties(true, true, predicate)
+        val sut = declarations.withProperties(true, predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration1, declaration3)
@@ -359,7 +359,7 @@ class KoPropertyProviderListExtTest {
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withoutProperties(true, true, predicate)
+        val sut = declarations.withoutProperties(true, predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

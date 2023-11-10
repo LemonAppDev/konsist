@@ -10,6 +10,8 @@ class LibClassTest(val libParameterTest: String) : LibInterfaceTest {
     constructor(otherParameterTest: Int) : this(otherParameterTest.toString())
 
     init {
+        @Suppress("detekt.UnusedPrivateProperty")
+        val libVariableTest = ""
         println("Lib test init block")
     }
 }
@@ -17,16 +19,28 @@ class LibClassTest(val libParameterTest: String) : LibInterfaceTest {
 interface LibInterfaceTest
 
 var libPropertyTest: LibClassTest = LibClassTest("")
-    get() = LibClassTest("lib value test")
-    private set
+    get() {
+        @Suppress("detekt.UnusedPrivateProperty")
+        val libVariableTest = ""
+        return LibClassTest("lib value test")
+    }
+    private set(value) {
+        @Suppress("detekt.UnusedPrivateProperty")
+        val libVariableTest = ""
+        if (true) field = value
+    }
 
 object LibObjectTest
 
 enum class LibEnumClassTest {
-    APP_CONSTANT
+    APP_CONSTANT {
+        val libVariableTest = ""
+    }
 }
 
 fun libFunctionTest() {
+    @Suppress("detekt.UnusedPrivateProperty")
+    val libVariableTest = ""
     println("some text")
 }
 

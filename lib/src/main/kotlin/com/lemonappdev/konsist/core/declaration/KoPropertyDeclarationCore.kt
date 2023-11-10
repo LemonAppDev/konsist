@@ -1,9 +1,9 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
@@ -19,8 +19,8 @@ import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoNullableTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
-import com.lemonappdev.konsist.core.provider.KoPropertyTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSetterProviderCore
@@ -66,7 +66,7 @@ internal class KoPropertyDeclarationCore private constructor(
     KtCallableDeclaration - common parent for KtProperty and KtParameter
      */
     override val ktCallableDeclaration: KtCallableDeclaration,
-    override val containingDeclaration: KoContainingDeclarationProvider,
+    override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoPropertyDeclaration,
     KoBaseProviderCore,
@@ -75,7 +75,7 @@ internal class KoPropertyDeclarationCore private constructor(
     KoContainingFileProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
     KoDelegateProviderCore,
-    KoPropertyTypeProviderCore,
+    KoNullableTypeProviderCore,
     KoInitializerProviderCore,
     KoKDocProviderCore,
     KoLocationProviderCore,
@@ -169,7 +169,7 @@ internal class KoPropertyDeclarationCore private constructor(
 
         internal fun getInstance(
             ktCallableDeclaration: KtCallableDeclaration,
-            containingDeclaration: KoContainingDeclarationProvider,
+            containingDeclaration: KoBaseDeclaration,
         ): KoPropertyDeclaration =
             cache.getOrCreateInstance(ktCallableDeclaration, containingDeclaration) {
                 KoPropertyDeclarationCore(ktCallableDeclaration, containingDeclaration)

@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -27,6 +26,7 @@ import com.lemonappdev.konsist.core.provider.KoReturnProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
+import com.lemonappdev.konsist.core.provider.KoVariableProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoAbstractModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoActualModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoExpectModifierProviderCore
@@ -54,7 +54,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoFunctionDeclarationCore private constructor(
     override val ktFunction: KtFunction,
-    override val containingDeclaration: KoContainingDeclarationProvider,
+    override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoFunctionDeclaration,
     KoBaseProviderCore,
@@ -68,6 +68,7 @@ internal class KoFunctionDeclarationCore private constructor(
     KoLocalClassProviderCore,
     KoLocalDeclarationProviderCore,
     KoLocalFunctionProviderCore,
+    KoVariableProviderCore,
     KoLocationProviderCore,
     KoModifierProviderCore,
     KoNameProviderCore,
@@ -123,7 +124,7 @@ internal class KoFunctionDeclarationCore private constructor(
     internal companion object {
 
         private val cache: KoDeclarationCache<KoFunctionDeclaration> = KoDeclarationCache()
-        internal fun getInstance(ktFunction: KtFunction, containingDeclaration: KoContainingDeclarationProvider): KoFunctionDeclaration =
+        internal fun getInstance(ktFunction: KtFunction, containingDeclaration: KoBaseDeclaration): KoFunctionDeclaration =
             cache.getOrCreateInstance(ktFunction, containingDeclaration) {
                 KoFunctionDeclarationCore(ktFunction, containingDeclaration)
             }

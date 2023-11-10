@@ -59,9 +59,8 @@ class KoScopeCore(
 
     override fun properties(
         includeNested: Boolean,
-        includeLocal: Boolean,
     ): List<KoPropertyDeclaration> =
-        koFiles.flatMap { it.properties(includeNested, includeLocal) }
+        koFiles.flatMap { it.properties(includeNested) }
 
     override fun slice(predicate: (KoFileDeclaration) -> Boolean): KoScope =
         KoScopeCore(koFiles.filter { predicate(it) })

@@ -1,0 +1,7 @@
+enum class SampleClass {
+    SAMPLE_CONSTANT_1 {
+        val sampleVariable1 = ""
+
+        var sampleVariable2 = 0
+    };
+}

@@ -1,0 +1,11 @@
+interface SampleInterface {
+    val sampleProperty: Int
+
+    fun sampleFunction() {
+        val sampleLocalProperty = 6
+    }
+
+    class SampleClass {
+        val sampleNestedProperty = ""
+    }
+}
