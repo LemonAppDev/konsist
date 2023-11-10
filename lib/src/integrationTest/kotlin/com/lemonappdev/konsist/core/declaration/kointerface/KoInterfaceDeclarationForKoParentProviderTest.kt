@@ -50,6 +50,13 @@ class KoInterfaceDeclarationForKoParentProviderTest {
                 "SampleExternalGenericInterface",
             )
             numParents shouldBeEqualTo 4
+            parents().map { it.name } shouldBeEqualTo listOf(
+                "SampleParentInterface1",
+                "SampleParentInterface2",
+                "SampleExternalInterface",
+                "SampleExternalGenericInterface",
+            )
+            numParents() shouldBeEqualTo 4
             countParents { it.name == "SampleParentInterface1" } shouldBeEqualTo 1
             countParents { it.hasNameStartingWith("SampleExternal") } shouldBeEqualTo 2
             hasParents() shouldBeEqualTo true
@@ -87,18 +94,19 @@ class KoInterfaceDeclarationForKoParentProviderTest {
         // then
         assertSoftly(sut) {
             parents().map { it.name } shouldBeEqualTo listOf(
-                "SampleParentInterface1",
+                "SampleParentInterface",
                 "SampleExternalInterface",
             )
             numParents(indirectParents = false) shouldBeEqualTo 2
             parents(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
-                "SampleParentInterface1",
+                "SampleParentInterface",
                 "SampleExternalInterface",
+                "SampleParentInterface1",
                 "SampleParentInterface2",
             )
-            numParents(indirectParents = true) shouldBeEqualTo 3
+            numParents(indirectParents = true) shouldBeEqualTo 4
             countParents(indirectParents = true) { it.name == "SampleParentInterface2" } shouldBeEqualTo 1
-            countParents(indirectParents = true) { it.hasNameStartingWith("SampleParentInterface") } shouldBeEqualTo 2
+            countParents(indirectParents = true) { it.hasNameStartingWith("SampleParentInterface") } shouldBeEqualTo 3
             hasParents(indirectParents = true) shouldBeEqualTo true
             hasParentWithName("SampleParentInterface2", indirectParents = true) shouldBeEqualTo true
             hasParentWithName("OtherInterface", indirectParents = true) shouldBeEqualTo false

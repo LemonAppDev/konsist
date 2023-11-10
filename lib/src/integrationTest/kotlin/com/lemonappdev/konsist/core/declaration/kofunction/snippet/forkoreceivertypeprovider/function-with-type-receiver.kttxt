@@ -1,2 +1,4 @@
-fun Int.sampleFunction() {
+import com.lemonappdev.konsist.testdata.SampleClass
+
+fun SampleClass.sampleFunction() {
 }

@@ -1,5 +1,7 @@
-interface SampleInterface : SampleParentInterface1
+import com.lemonappdev.konsist.testdata.SampleParentInterface2
+
+interface SampleInterface : SampleParentInterface
+
+interface SampleParentInterface: SampleParentInterface1
 
 interface SampleParentInterface1: SampleParentInterface2
-
-interface SampleParentInterface2
