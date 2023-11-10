@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
@@ -165,7 +166,7 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(localList: List<E>
                         it.text.contains("\"$suppressName\"")
                     )
         }
-        .forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it, suppressName) }
+        .forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it as KoBaseDeclaration, suppressName) }
 
     val withoutSuppress = mutableListOf<E>()
 
@@ -174,20 +175,25 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(localList: List<E>
     return withoutSuppress
 }
 
-private fun checkIfDeclarationIsAnnotatedWithSuppress(declaration: KoBaseProvider, testMethodName: String): Boolean =
-    if (declaration is KoAnnotationProvider) {
-        checkIfSuppressed(declaration, testMethodName) || checkIfParentIsAnnotatedWithSuppress(
-            declaration,
-            testMethodName,
-        )
-    } else {
-        checkIfParentIsAnnotatedWithSuppress(declaration, testMethodName)
+private fun checkIfDeclarationIsAnnotatedWithSuppress(declaration: KoBaseDeclaration, testMethodName: String): Boolean =
+    when (declaration) {
+        is KoFileDeclaration -> {
+            checkIfSuppressed(declaration, testMethodName)
+        }
+
+        is KoAnnotationProvider -> {
+            checkIfSuppressed(declaration, testMethodName) ||
+                checkIfParentIsAnnotatedWithSuppress(declaration, testMethodName)
+        }
+
+        else -> {
+            checkIfParentIsAnnotatedWithSuppress(declaration, testMethodName)
+        }
     }
 
-private fun checkIfParentIsAnnotatedWithSuppress(declaration: KoBaseProvider, testMethodName: String): Boolean =
+private fun checkIfParentIsAnnotatedWithSuppress(declaration: KoBaseDeclaration, testMethodName: String): Boolean =
     if (declaration is KoContainingDeclarationProvider) {
-        declaration.containingDeclaration?.let { checkIfDeclarationIsAnnotatedWithSuppress(it, testMethodName) }
-            ?: false
+        checkIfDeclarationIsAnnotatedWithSuppress(declaration.containingDeclaration, testMethodName)
     } else {
         false
     }

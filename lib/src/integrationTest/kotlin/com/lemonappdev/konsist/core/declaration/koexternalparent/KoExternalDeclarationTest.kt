@@ -11,7 +11,7 @@ class KoExternalDeclarationTest {
         // given
         val sut = getSnippetFile("external-parent-of-class-to-string")
             .classes()
-            .externalParents
+            .externalParents()
             .first()
 
         // then
@@ -23,7 +23,7 @@ class KoExternalDeclarationTest {
         // given
         val sut = getSnippetFile("external-parent-of-interface-to-string")
             .interfaces()
-            .externalParents
+            .externalParents()
             .first()
 
         // then
@@ -35,7 +35,7 @@ class KoExternalDeclarationTest {
         // given
         val sut = getSnippetFile("external-parent-of-object-to-string")
             .objects()
-            .externalParents
+            .externalParents()
             .first()
 
         // then

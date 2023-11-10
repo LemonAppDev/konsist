@@ -35,9 +35,9 @@ class KoInterfaceDeclarationForKoParentProviderTest {
     }
 
     @Test
-    fun `interface-has-internal-and-external-parents`() {
+    fun `interface-has-direct-internal-and-external-parents`() {
         // given
-        val sut = getSnippetFile("interface-has-internal-and-external-parents")
+        val sut = getSnippetFile("interface-has-direct-internal-and-external-parents")
             .interfaces()
             .first()
 
@@ -74,6 +74,84 @@ class KoInterfaceDeclarationForKoParentProviderTest {
             hasParents("OtherInterface") shouldBeEqualTo false
             hasParents("SampleParentInterface1", "SampleParentInterface2") shouldBeEqualTo true
             hasParents("SampleParentInterface1", "SampleParentInterface2", "OtherInterface") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `interface-has-indirect-parents`() {
+        // given
+        val sut = getSnippetFile("interface-has-indirect-parents")
+            .interfaces()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            parents().map { it.name } shouldBeEqualTo listOf(
+                "SampleParentInterface1",
+                "SampleExternalInterface",
+            )
+            numParents(indirectParents = false) shouldBeEqualTo 2
+            parents(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
+                "SampleParentInterface1",
+                "SampleExternalInterface",
+                "SampleParentInterface2",
+            )
+            numParents(indirectParents = true) shouldBeEqualTo 3
+            countParents(indirectParents = true) { it.name == "SampleParentInterface2" } shouldBeEqualTo 1
+            countParents(indirectParents = true) { it.hasNameStartingWith("SampleParentInterface") } shouldBeEqualTo 2
+            hasParents(indirectParents = true) shouldBeEqualTo true
+            hasParentWithName("SampleParentInterface2", indirectParents = true) shouldBeEqualTo true
+            hasParentWithName("OtherInterface", indirectParents = true) shouldBeEqualTo false
+            hasParentWithName("SampleParentInterface2", "OtherInterface", indirectParents = true) shouldBeEqualTo true
+            hasParentsWithAllNames("SampleParentInterface2", indirectParents = true) shouldBeEqualTo true
+            hasParentsWithAllNames("OtherInterface", indirectParents = true) shouldBeEqualTo false
+            hasParentsWithAllNames(
+                "SampleParentInterface2",
+                "SampleParentInterface1",
+                indirectParents = true,
+            ) shouldBeEqualTo true
+            hasParentsWithAllNames("SampleParentInterface2", "OtherInterface", indirectParents = true) shouldBeEqualTo false
+            hasParent(indirectParents = true) { it.name == "SampleParentInterface2" } shouldBeEqualTo true
+            hasParent(indirectParents = true) { it.name == "OtherClass" } shouldBeEqualTo false
+            hasAllParents(indirectParents = true) { it.name == "SampleParentInterface2" } shouldBeEqualTo false
+            hasAllParents(indirectParents = true) { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAllParents(indirectParents = true) { it.hasNameStartingWith("Other") } shouldBeEqualTo false
+            hasParentOf(SampleParentInterface2::class, indirectParents = true) shouldBeEqualTo true
+            hasParentOf(SampleParentInterface2::class, SampleInterface::class, indirectParents = true) shouldBeEqualTo true
+            hasAllParentsOf(SampleParentInterface2::class, indirectParents = true) shouldBeEqualTo true
+            hasAllParentsOf(
+                SampleParentInterface2::class,
+                SampleInterface::class,
+                indirectParents = true,
+            ) shouldBeEqualTo false
+            hasAllParentsOf(
+                SampleParentInterface2::class,
+                SampleParentInterface1::class,
+                indirectParents = true,
+            ) shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `interface-has-repeated-indirect-parents`() {
+        // given
+        val sut = getSnippetFile("interface-has-repeated-indirect-parents")
+            .interfaces()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            parents().map { it.name } shouldBeEqualTo listOf(
+                "SampleParentInterface1",
+                "SampleExternalInterface",
+            )
+            numParents(indirectParents = false) shouldBeEqualTo 2
+            parents(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
+                "SampleParentInterface1",
+                "SampleExternalInterface",
+                "SampleParentInterface2",
+            )
+            numParents(indirectParents = true) shouldBeEqualTo 3
         }
     }
 

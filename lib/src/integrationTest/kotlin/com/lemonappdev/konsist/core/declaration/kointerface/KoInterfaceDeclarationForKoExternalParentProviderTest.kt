@@ -20,8 +20,8 @@ class KoInterfaceDeclarationForKoExternalParentProviderTest {
 
         // then
         assertSoftly(sut) {
-            externalParents shouldBeEqualTo emptyList()
-            numExternalParents shouldBeEqualTo 0
+            externalParents() shouldBeEqualTo emptyList()
+            numExternalParents() shouldBeEqualTo 0
             countExternalParents { it.name == "SampleExternalParent" } shouldBeEqualTo 0
             hasExternalParents() shouldBeEqualTo false
             hasExternalParentWithName("SampleExternalParent1", "SampleExternalParent2") shouldBeEqualTo false
@@ -34,16 +34,16 @@ class KoInterfaceDeclarationForKoExternalParentProviderTest {
     }
 
     @Test
-    fun `interface-has-only-external-parents`() {
+    fun `interface-has-only-direct-external-parents`() {
         // given
-        val sut = getSnippetFile("interface-has-only-external-parents")
+        val sut = getSnippetFile("interface-has-only-direct-external-parents")
             .interfaces()
             .first()
 
         // then
         assertSoftly(sut) {
-            externalParents.map { it.name } shouldBeEqualTo listOf("SampleExternalInterface", "SampleExternalGenericInterface")
-            numExternalParents shouldBeEqualTo 2
+            externalParents().map { it.name } shouldBeEqualTo listOf("SampleExternalInterface", "SampleExternalGenericInterface")
+            numExternalParents() shouldBeEqualTo 2
             countExternalParents { it.name == "SampleExternalInterface" } shouldBeEqualTo 1
             countExternalParents { it.hasNameStartingWith("SampleExternal") } shouldBeEqualTo 2
             hasExternalParents() shouldBeEqualTo true
@@ -77,8 +77,8 @@ class KoInterfaceDeclarationForKoExternalParentProviderTest {
 
         // then
         assertSoftly(sut) {
-            externalParents.map { it.name } shouldBeEqualTo listOf("SampleExternalInterface", "SampleExternalGenericInterface")
-            numExternalParents shouldBeEqualTo 2
+            externalParents().map { it.name } shouldBeEqualTo listOf("SampleExternalInterface", "SampleExternalGenericInterface")
+            numExternalParents() shouldBeEqualTo 2
             countExternalParents { it.name == "SampleExternalInterface" } shouldBeEqualTo 1
             countExternalParents { it.hasNameStartingWith("SampleExternal") } shouldBeEqualTo 2
             hasExternalParents() shouldBeEqualTo true
@@ -100,6 +100,97 @@ class KoInterfaceDeclarationForKoExternalParentProviderTest {
             hasAllExternalParentsOf(SampleExternalInterface::class) shouldBeEqualTo true
             hasAllExternalParentsOf(SampleExternalInterface::class, SampleParentClass::class) shouldBeEqualTo false
             hasAllExternalParentsOf(SampleExternalInterface::class, SampleExternalGenericInterface::class) shouldBeEqualTo true
+        }
+    }
+
+    @Suppress("detekt.LongMethod")
+    @Test
+    fun `interface-has-indirect-external-parents`() {
+        // given
+        val sut = getSnippetFile("interface-has-indirect-external-parents")
+            .interfaces()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            externalParents(indirectParents = false) shouldBeEqualTo emptyList()
+            externalParents(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
+                "SampleExternalInterface",
+                "SampleExternalGenericInterface",
+            )
+            numExternalParents(indirectParents = false) shouldBeEqualTo 0
+            numExternalParents(indirectParents = true) shouldBeEqualTo 2
+            countExternalParents(indirectParents = false) { it.name == "SampleExternalGenericInterface" } shouldBeEqualTo 0
+            countExternalParents(indirectParents = true) { it.name == "SampleExternalGenericInterface" } shouldBeEqualTo 1
+            countExternalParents(indirectParents = false) { it.hasNameStartingWith("SampleExternal") } shouldBeEqualTo 0
+            countExternalParents(indirectParents = true) { it.hasNameStartingWith("SampleExternal") } shouldBeEqualTo 2
+            hasExternalParents(indirectParents = false) shouldBeEqualTo false
+            hasExternalParents(indirectParents = true) shouldBeEqualTo true
+            hasExternalParentWithName("SampleExternalGenericInterface", indirectParents = true) shouldBeEqualTo true
+            hasExternalParentWithName("OtherInterface", indirectParents = true) shouldBeEqualTo false
+            hasExternalParentWithName(
+                "SampleExternalGenericInterface",
+                "SampleExternalInterface",
+                indirectParents = true,
+            ) shouldBeEqualTo true
+            hasExternalParentWithName(
+                "SampleExternalGenericInterface",
+                "OtherInterface",
+                indirectParents = true,
+            ) shouldBeEqualTo true
+            hasExternalParentsWithAllNames("SampleExternalGenericInterface", indirectParents = true) shouldBeEqualTo true
+            hasExternalParentsWithAllNames("OtherInterface", indirectParents = true) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(
+                "SampleExternalGenericInterface",
+                "SampleExternalInterface",
+                indirectParents = true,
+            ) shouldBeEqualTo true
+            hasExternalParentsWithAllNames(
+                "SampleExternalGenericInterface",
+                "OtherInterface",
+                indirectParents = true,
+            ) shouldBeEqualTo false
+            hasExternalParent(indirectParents = true) { it.name == "SampleExternalGenericInterface" } shouldBeEqualTo true
+            hasExternalParent(indirectParents = true) { it.name == "OtherInterface" } shouldBeEqualTo false
+            hasAllExternalParents(indirectParents = true) { it.name == "SampleExternalGenericInterface" } shouldBeEqualTo false
+            hasAllExternalParents(indirectParents = true) { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAllExternalParents(indirectParents = true) { it.hasNameStartingWith("Other") } shouldBeEqualTo false
+            hasExternalParentOf(SampleExternalGenericInterface::class, indirectParents = true) shouldBeEqualTo true
+            hasExternalParentOf(
+                SampleExternalGenericInterface::class,
+                SampleParentClass::class,
+                indirectParents = true,
+            ) shouldBeEqualTo true
+            hasAllExternalParentsOf(SampleExternalGenericInterface::class, indirectParents = true) shouldBeEqualTo true
+            hasAllExternalParentsOf(
+                SampleExternalGenericInterface::class,
+                SampleParentClass::class,
+                indirectParents = true,
+            ) shouldBeEqualTo false
+            hasAllExternalParentsOf(
+                SampleExternalGenericInterface::class,
+                SampleExternalInterface::class,
+                indirectParents = true,
+            ) shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `interface-has-indirect-repeated-external-parents`() {
+        // given
+        val sut = getSnippetFile("interface-has-indirect-repeated-external-parents")
+            .interfaces()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            externalParents(indirectParents = false).map { it.name } shouldBeEqualTo listOf("SampleExternalInterface")
+            externalParents(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
+                "SampleExternalInterface",
+                "SampleExternalGenericInterface",
+            )
+            numExternalParents(indirectParents = false) shouldBeEqualTo 1
+            numExternalParents(indirectParents = true) shouldBeEqualTo 2
         }
     }
 

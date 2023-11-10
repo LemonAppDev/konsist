@@ -11,24 +11,24 @@ import org.junit.jupiter.api.Test
 
 class KoExternalParentProviderListExtTest {
     @Test
-    fun `externalParents returns external parents from all declarations`() {
+    fun `externalParents() returns external parents from all declarations`() {
         // given
         val parent1: KoExternalParentDeclaration = mockk()
         val parent2: KoExternalParentDeclaration = mockk()
         val parent3: KoExternalParentDeclaration = mockk()
         val declaration1: KoExternalParentProvider = mockk {
-            every { externalParents } returns listOf(parent1, parent2)
+            every { externalParents() } returns listOf(parent1, parent2)
         }
         val declaration2: KoExternalParentProvider = mockk {
-            every { externalParents } returns listOf(parent3)
+            every { externalParents() } returns listOf(parent3)
         }
         val declaration3: KoExternalParentProvider = mockk {
-            every { externalParents } returns emptyList()
+            every { externalParents() } returns emptyList()
         }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.externalParents
+        val sut = declarations.externalParents()
 
         // then
         sut shouldBeEqualTo listOf(parent1, parent2, parent3)
@@ -232,15 +232,15 @@ class KoExternalParentProviderListExtTest {
         val suffix = "Name"
         val predicate: (KoExternalParentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoExternalParentProvider = mockk {
-            every { hasExternalParent(predicate) } returns true
+            every { hasExternalParent(predicate = predicate) } returns true
         }
         val declaration2: KoExternalParentProvider = mockk {
-            every { hasExternalParent(predicate) } returns false
+            every { hasExternalParent(predicate = predicate) } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withExternalParent(predicate)
+        val sut = declarations.withExternalParent(predicate = predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration1)
@@ -252,15 +252,15 @@ class KoExternalParentProviderListExtTest {
         val suffix = "Name"
         val predicate: (KoExternalParentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoExternalParentProvider = mockk {
-            every { hasExternalParent(predicate) } returns true
+            every { hasExternalParent(predicate = predicate) } returns true
         }
         val declaration2: KoExternalParentProvider = mockk {
-            every { hasExternalParent(predicate) } returns false
+            every { hasExternalParent(predicate = predicate) } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutExternalParent(predicate)
+        val sut = declarations.withoutExternalParent(predicate = predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -272,15 +272,15 @@ class KoExternalParentProviderListExtTest {
         val suffix = "Name"
         val predicate: (KoExternalParentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoExternalParentProvider = mockk {
-            every { hasAllExternalParents(predicate) } returns true
+            every { hasAllExternalParents(predicate = predicate) } returns true
         }
         val declaration2: KoExternalParentProvider = mockk {
-            every { hasAllExternalParents(predicate) } returns false
+            every { hasAllExternalParents(predicate = predicate) } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withAllExternalParents(predicate)
+        val sut = declarations.withAllExternalParents(predicate = predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration1)
@@ -292,15 +292,15 @@ class KoExternalParentProviderListExtTest {
         val suffix = "Name"
         val predicate: (KoExternalParentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoExternalParentProvider = mockk {
-            every { hasAllExternalParents(predicate) } returns true
+            every { hasAllExternalParents(predicate = predicate) } returns true
         }
         val declaration2: KoExternalParentProvider = mockk {
-            every { hasAllExternalParents(predicate) } returns false
+            every { hasAllExternalParents(predicate = predicate) } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutAllExternalParents(predicate)
+        val sut = declarations.withoutAllExternalParents(predicate = predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -319,18 +319,18 @@ class KoExternalParentProviderListExtTest {
             every { hasNameEndingWith(suffix) } returns false
         }
         val declaration1: KoExternalParentProvider = mockk {
-            every { externalParents } returns listOf(parent1)
+            every { externalParents() } returns listOf(parent1)
         }
         val declaration2: KoExternalParentProvider = mockk {
-            every { externalParents } returns listOf(parent2)
+            every { externalParents() } returns listOf(parent2)
         }
         val declaration3: KoExternalParentProvider = mockk {
-            every { externalParents } returns emptyList()
+            every { externalParents() } returns emptyList()
         }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withExternalParents(predicate)
+        val sut = declarations.withExternalParents(predicate = predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration1, declaration3)
@@ -349,18 +349,18 @@ class KoExternalParentProviderListExtTest {
             every { hasNameEndingWith(suffix) } returns false
         }
         val declaration1: KoExternalParentProvider = mockk {
-            every { externalParents } returns listOf(parent1)
+            every { externalParents() } returns listOf(parent1)
         }
         val declaration2: KoExternalParentProvider = mockk {
-            every { externalParents } returns listOf(parent2)
+            every { externalParents() } returns listOf(parent2)
         }
         val declaration3: KoExternalParentProvider = mockk {
-            every { externalParents } returns emptyList()
+            every { externalParents() } returns emptyList()
         }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withoutExternalParents(predicate)
+        val sut = declarations.withoutExternalParents(predicate = predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

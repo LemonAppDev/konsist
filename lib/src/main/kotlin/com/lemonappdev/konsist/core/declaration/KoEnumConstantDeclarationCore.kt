@@ -4,7 +4,6 @@ import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoEnumConstantDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoArgumentProviderCore
@@ -36,7 +35,7 @@ import org.jetbrains.kotlin.psi.KtValueArgumentList
 
 internal class KoEnumConstantDeclarationCore private constructor(
     override val ktEnumEntry: KtEnumEntry,
-    override val containingDeclaration: KoContainingDeclarationProvider,
+    override val containingDeclaration: KoBaseDeclaration,
 ) : KoEnumConstantDeclaration,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
@@ -94,7 +93,7 @@ internal class KoEnumConstantDeclarationCore private constructor(
 
         internal fun getInstance(
             ktEnumEntry: KtEnumEntry,
-            containingDeclaration: KoContainingDeclarationProvider,
+            containingDeclaration: KoBaseDeclaration,
         ): KoEnumConstantDeclaration =
             cache.getOrCreateInstance(ktEnumEntry, containingDeclaration) {
                 KoEnumConstantDeclarationCore(ktEnumEntry, containingDeclaration)
