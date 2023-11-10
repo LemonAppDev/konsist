@@ -1,5 +1,7 @@
 package com.lemonappdev.konsist.api.provider
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+
 /**
  * An interface representing a Kotlin declaration which may have a parent.
  */
@@ -7,7 +9,7 @@ interface KoContainingDeclarationProvider : KoBaseProvider {
     /**
      * The parent of the declaration.
      *
-     * @return The [KoContainingDeclarationProvider] representing the parent of the declaration, or `null` if there is no parent.
+     * @return The [KoBaseDeclaration] representing the parent of the declaration.
      */
-    val containingDeclaration: KoContainingDeclarationProvider?
+    val containingDeclaration: KoBaseDeclaration
 }

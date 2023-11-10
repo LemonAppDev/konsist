@@ -4,7 +4,6 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiWhiteSpace
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationCore
@@ -41,7 +40,7 @@ internal object KoDeclarationProviderCoreUtil {
         ktElement: KtElement,
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
-        containingDeclaration: KoContainingDeclarationProvider,
+        containingDeclaration: KoBaseDeclaration,
     ): List<T> {
         val declarations: List<KoBaseDeclaration>
 
@@ -167,7 +166,7 @@ internal object KoDeclarationProviderCoreUtil {
 
     private fun getInstanceOfKtDeclaration(
         ktDeclaration: KtDeclaration,
-        containingDeclaration: KoContainingDeclarationProvider,
+        containingDeclaration: KoBaseDeclaration,
     ): KoBaseDeclaration? = when {
         ktDeclaration is KtEnumEntry -> KoEnumConstantDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
         ktDeclaration is KtSecondaryConstructor -> KoSecondaryConstructorDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
@@ -187,7 +186,7 @@ internal object KoDeclarationProviderCoreUtil {
 
     private fun getInstanceOfOtherDeclaration(
         psiElement: PsiElement,
-        containingDeclaration: KoContainingDeclarationProvider,
+        containingDeclaration: KoBaseDeclaration,
     ): KoBaseDeclaration? =
         when (psiElement) {
             is KtImportDirective -> KoImportDeclarationCore.getInstance(psiElement, containingDeclaration)

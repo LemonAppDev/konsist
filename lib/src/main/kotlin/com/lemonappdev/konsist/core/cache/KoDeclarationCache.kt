@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core.cache
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 import java.util.concurrent.ConcurrentHashMap
@@ -24,7 +24,7 @@ internal class KoDeclarationCache<T : KoBaseProvider> {
 
     fun getOrCreateInstance(
         ktElement: KtElement,
-        containingDeclaration: KoContainingDeclarationProvider,
+        containingDeclaration: KoBaseDeclaration,
         value: (KtElement) -> T,
     ): T {
         val cacheKey = ktElement to containingDeclaration

@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSetterDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoBodyProviderCore
@@ -30,7 +29,7 @@ import org.jetbrains.kotlin.psi.KtPropertyAccessor
 
 internal class KoSetterDeclarationCore private constructor(
     private val ktPropertyAccessor: KtPropertyAccessor,
-    override val containingDeclaration: KoContainingDeclarationProvider,
+    override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoSetterDeclaration,
     KoBaseProviderCore,
@@ -78,7 +77,7 @@ internal class KoSetterDeclarationCore private constructor(
 
         internal fun getInstance(
             ktPropertyAccessor: KtPropertyAccessor,
-            containingDeclaration: KoContainingDeclarationProvider,
+            containingDeclaration: KoBaseDeclaration,
         ): KoSetterDeclaration =
             cache.getOrCreateInstance(ktPropertyAccessor, containingDeclaration) {
                 KoSetterDeclarationCore(ktPropertyAccessor, containingDeclaration)

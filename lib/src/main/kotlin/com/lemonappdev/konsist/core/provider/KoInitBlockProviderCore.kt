@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.provider
 import com.lemonappdev.konsist.api.declaration.KoInitBlockDeclaration
 import com.lemonappdev.konsist.api.provider.KoInitBlockProvider
 import com.lemonappdev.konsist.core.declaration.KoInitBlockDeclarationCore
+import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import org.jetbrains.kotlin.psi.KtClassOrObject
 
 internal interface KoInitBlockProviderCore :
@@ -21,7 +22,7 @@ internal interface KoInitBlockProviderCore :
                 emptyList()
             } else {
                 anonymousInitializers
-                    ?.map { init -> KoInitBlockDeclarationCore.getInstance(init, this) }
+                    ?.map { init -> KoInitBlockDeclarationCore.getInstance(init, this.castToKoBaseDeclaration()) }
                     .orEmpty()
             }
         }

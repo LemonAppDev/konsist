@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -61,7 +60,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoClassDeclarationCore private constructor(
     override val ktClass: KtClass,
-    override val containingDeclaration: KoContainingDeclarationProvider,
+    override val containingDeclaration: KoBaseDeclaration,
 ) : KoClassDeclaration,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
@@ -135,7 +134,7 @@ internal class KoClassDeclarationCore private constructor(
 
         internal fun getInstance(
             ktClass: KtClass,
-            containingDeclaration: KoContainingDeclarationProvider,
+            containingDeclaration: KoBaseDeclaration,
         ): KoClassDeclaration =
             cache.getOrCreateInstance(ktClass, containingDeclaration) {
                 KoClassDeclarationCore(ktClass, containingDeclaration)

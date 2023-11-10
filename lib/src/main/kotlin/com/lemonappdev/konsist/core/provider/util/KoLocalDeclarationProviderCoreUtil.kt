@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.provider.util
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoVariableDeclarationCore
@@ -14,7 +13,7 @@ import org.jetbrains.kotlin.psi.KtProperty
 internal object KoLocalDeclarationProviderCoreUtil {
     fun getKoLocalDeclarations(
         psiElements: Array<PsiElement>?,
-        containingDeclaration: KoContainingDeclarationProvider,
+        containingDeclaration: KoBaseDeclaration,
     ): List<KoBaseDeclaration> {
         val declarations = psiElements
             ?.filterIsInstance<KtDeclaration>()

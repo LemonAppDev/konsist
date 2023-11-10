@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoReturnProvider
+import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.util.ReceiverUtil
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtTypeReference
@@ -20,7 +21,7 @@ internal interface KoReturnProviderCore :
         .filterIsInstance<KtTypeReference>()
 
     override val returnType: KoTypeDeclaration?
-        get() = ReceiverUtil.getType(getTypeReferences(), ktFunction.isExtensionDeclaration(), this)
+        get() = ReceiverUtil.getType(getTypeReferences(), ktFunction.isExtensionDeclaration(), this.castToKoBaseDeclaration())
 
     override val hasReturnValue: Boolean
         get() = if (returnType != null) {

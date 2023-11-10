@@ -2,9 +2,7 @@ package com.lemonappdev.konsist.core.declaration.koclass
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.provider.KoNameProvider
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoClassDeclarationForKoContainingDeclarationProviderTest {
@@ -16,10 +14,7 @@ class KoClassDeclarationForKoContainingDeclarationProviderTest {
             .first()
 
         // then
-        assertSoftly(sut) {
-            containingDeclaration shouldNotBeEqualTo null
-            (containingDeclaration as KoNameProvider).name shouldBeEqualTo "class-with-file-parent-declaration"
-        }
+        (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "class-with-file-parent-declaration"
     }
 
     @Test
@@ -30,10 +25,7 @@ class KoClassDeclarationForKoContainingDeclarationProviderTest {
             .first()
 
         // then
-        assertSoftly(sut) {
-            containingDeclaration shouldNotBeEqualTo null
-            (containingDeclaration as KoNameProvider).name shouldBeEqualTo "SampleInterface"
-        }
+        (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "SampleInterface"
     }
 
     private fun getSnippetFile(fileName: String) =
