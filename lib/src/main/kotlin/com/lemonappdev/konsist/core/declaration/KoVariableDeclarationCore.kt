@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoVariableDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -33,7 +33,7 @@ import org.jetbrains.kotlin.psi.KtPropertyAccessor
 
 internal class KoVariableDeclarationCore private constructor(
     private val ktProperty: KtProperty,
-    override val containingDeclaration: KoContainingDeclarationProvider,
+    override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoVariableDeclaration,
     KoBaseProviderCore,
@@ -94,7 +94,7 @@ internal class KoVariableDeclarationCore private constructor(
 
         internal fun getInstance(
             ktProperty: KtProperty,
-            containingDeclaration: KoContainingDeclarationProvider,
+            containingDeclaration: KoBaseDeclaration,
         ): KoVariableDeclaration =
             cache.getOrCreateInstance(ktProperty, containingDeclaration) {
                 KoVariableDeclarationCore(ktProperty, containingDeclaration)
