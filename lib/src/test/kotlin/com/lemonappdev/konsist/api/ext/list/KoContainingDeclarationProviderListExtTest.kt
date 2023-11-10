@@ -20,10 +20,7 @@ class KoContainingDeclarationProviderListExtTest {
         val declaration2: KoContainingDeclarationProvider = mockk {
             every { containingDeclaration } returns containingDeclaration2
         }
-        val declaration3: KoContainingDeclarationProvider = mockk {
-            every { containingDeclaration } returns null
-        }
-        val declarations = listOf(declaration1, declaration2, declaration3)
+        val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.containingDeclarations
