@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.api.ext.provider.kononnullabletype
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
-import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoNonNullableTypeProvider
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleType

@@ -68,7 +68,7 @@ class KoConstructorDeclarationForKoParametersProviderTest {
             parameters.size shouldBeEqualTo 2
             numParameters shouldBeEqualTo 2
             countParameters { it.hasNameStartingWith("sample") } shouldBeEqualTo 2
-            countParameters { param -> param.hasType {it.name == "Int"} } shouldBeEqualTo 1
+            countParameters { param -> param.hasType { it.name == "Int" } } shouldBeEqualTo 1
             hasParameters() shouldBeEqualTo true
             hasParameterWithName("sampleParameter1") shouldBeEqualTo true
             hasParameterWithName("otherParameter") shouldBeEqualTo false
@@ -77,9 +77,9 @@ class KoConstructorDeclarationForKoParametersProviderTest {
             hasParametersWithAllNames("sampleParameter1", "sampleParameter2") shouldBeEqualTo true
             hasParametersWithAllNames("sampleParameter1", "otherParameter") shouldBeEqualTo false
             hasParameter { it.hasNameStartingWith("sample") } shouldBeEqualTo true
-            hasParameter { param -> param.hasType {it.name == "Int"} } shouldBeEqualTo true
+            hasParameter { param -> param.hasType { it.name == "Int" } } shouldBeEqualTo true
             hasAllParameters { it.hasNameStartingWith("sample") } shouldBeEqualTo true
-            hasAllParameters { param -> param.hasType {it.name == "Int"} } shouldBeEqualTo false
+            hasAllParameters { param -> param.hasType { it.name == "Int" } } shouldBeEqualTo false
         }
     }
 

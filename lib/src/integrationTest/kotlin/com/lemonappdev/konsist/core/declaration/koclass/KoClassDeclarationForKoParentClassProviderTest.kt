@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.declaration.koclass
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleParentClass
-import com.lemonappdev.konsist.testdata.SampleParentClass1
 import com.lemonappdev.konsist.testdata.SampleParentClass2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
