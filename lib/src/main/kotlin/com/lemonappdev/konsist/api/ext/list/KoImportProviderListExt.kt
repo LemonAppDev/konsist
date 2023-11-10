@@ -180,9 +180,11 @@ fun <T : KoImportProvider> List<T>.withoutAllImports(name: String, vararg names:
  */
 @Deprecated("Will be removed in v1.0.0.", ReplaceWith("withoutImportNamed(*names"))
 fun <T : KoImportProvider> List<T>.withoutSomeImports(name: String, vararg names: String): List<T> = filter {
-    !it.hasImports(name) && if (names.isNotEmpty()) {
+    val missesAtLeastOneImport = if (names.isNotEmpty()) {
         names.any { import -> !it.hasImports(import) }
     } else {
         true
     }
+
+    !it.hasImports(name) && missesAtLeastOneImport
 }

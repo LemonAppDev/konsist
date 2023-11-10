@@ -1,0 +1,6 @@
+var sampleProperty: String = "text"
+    set(value) {
+        val sampleProperty: kotlin.String by lazy { "" }
+
+        if (true) field = value
+    }

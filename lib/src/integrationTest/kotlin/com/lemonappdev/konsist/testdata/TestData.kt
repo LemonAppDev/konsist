@@ -2,6 +2,10 @@ package com.lemonappdev.konsist.testdata
 
 open class SampleParentClass
 
+open class SampleParentClass1
+
+open class SampleParentClass2
+
 open class SampleParentClassWithDuplicatedName
 
 class SampleClass
@@ -73,6 +77,7 @@ annotation class NonExistingAnnotation
     AnnotationTarget.FUNCTION,
     AnnotationTarget.FILE,
     AnnotationTarget.TYPEALIAS,
+    AnnotationTarget.LOCAL_VARIABLE,
 )
 annotation class SampleAnnotation
 
@@ -83,6 +88,7 @@ annotation class SampleAnnotation
     AnnotationTarget.FILE,
     AnnotationTarget.CONSTRUCTOR,
     AnnotationTarget.TYPEALIAS,
+    AnnotationTarget.LOCAL_VARIABLE,
 )
 annotation class SampleAnnotation1
 
@@ -93,6 +99,7 @@ annotation class SampleAnnotation1
     AnnotationTarget.FILE,
     AnnotationTarget.CONSTRUCTOR,
     AnnotationTarget.TYPEALIAS,
+    AnnotationTarget.LOCAL_VARIABLE,
 )
 annotation class SampleAnnotation2
 

@@ -1,0 +1,6 @@
+var sampleProperty: String = "text"
+    set(value) {
+        val sampleVariable: String = ""
+
+        if (true) field = value
+    }

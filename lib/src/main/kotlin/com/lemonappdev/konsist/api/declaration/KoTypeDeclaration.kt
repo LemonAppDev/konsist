@@ -8,7 +8,7 @@ import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
-import com.lemonappdev.konsist.api.provider.KoNullableTypeProvider
+import com.lemonappdev.konsist.api.provider.KoNullableProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
@@ -58,7 +58,7 @@ interface KoTypeDeclaration :
     KoKotlinTypeProvider,
     KoLocationProvider,
     KoNameProvider,
-    KoNullableTypeProvider,
+    KoNullableProvider,
     KoPathProvider,
     KoModuleProvider,
     KoSourceSetProvider,

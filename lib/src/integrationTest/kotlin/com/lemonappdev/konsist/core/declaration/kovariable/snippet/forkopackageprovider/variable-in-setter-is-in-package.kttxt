@@ -1,0 +1,8 @@
+package com.samplepackage
+
+var sampleProperty: String = "text"
+    set(value) {
+        val sampleVariable = ""
+
+        if (true) field = value
+    }

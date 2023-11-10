@@ -1,0 +1,7 @@
+class SampleClass {
+    init {
+        val sampleVariable1 = ""
+
+        var sampleVariable2 = 0
+    }
+}

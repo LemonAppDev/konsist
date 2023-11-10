@@ -18,37 +18,65 @@ internal interface KoParentProviderCore :
     KoBaseProviderCore {
     val ktClassOrObject: KtClassOrObject
 
+    @Deprecated("Will be removed in v1.0.0.", replaceWith = ReplaceWith("parents()"))
     override val parents: List<KoParentDeclaration>
-        get() = ktClassOrObject
+        get() = parents()
+
+    @Deprecated("Will be removed in v1.0.0.", replaceWith = ReplaceWith("numParents()"))
+    override val numParents: Int
+        get() = parents.size
+
+    override fun parents(indirectParents: Boolean): List<KoParentDeclaration> {
+        val directParentDeclarations = ktClassOrObject
             .getSuperTypeList()
             ?.children
             ?.filterIsInstance<KtSuperTypeListEntry>()
             ?.map {
-                val name = getParentName(it)
-                val fqn = getParentFullyQualifiedName(name)
+                val name = it
+                    .text
+                    .substringBefore(" ")
+                    .substringBefore("(")
+                    .substringBefore("<")
+
+                val fqn =
+                    containingFile
+                        .imports
+                        .firstOrNull { import ->
+                            import.name.substringAfterLast(".") == name || import.alias == name
+                        }
+                        ?.name
 
                 return@map getParentClass(name, fqn)
                     ?: getParentInterface(name, fqn)
-                    ?: KoExternalParentDeclarationCore(name, it)
+                    ?: KoExternalParentDeclarationCore.getInstance(name, it)
             }
+            ?.toMutableList()
             .orEmpty()
 
-    fun getParentFullyQualifiedName(name: String): String? {
-        val fqn =
-            containingFile
-                .imports
-                .firstOrNull { import ->
-                    import.name.substringAfterLast(".") == name || import.alias == name
-                }
-                ?.name
-        return fqn
+        val indirectParentDeclarations =
+            if (indirectParents) getIndirectParents(directParentDeclarations) else emptyList()
+
+        return (directParentDeclarations + indirectParentDeclarations).distinct()
     }
 
-    fun getParentName(it: KtSuperTypeListEntry): String = it
-        .text
-        .substringBefore(" ")
-        .substringBefore("(")
-        .substringBefore("<")
+    private fun getIndirectParents(parents: List<KoParentDeclaration>): List<KoParentDeclaration> {
+        val indirectParents = mutableListOf<KoParentDeclaration>()
+
+        parents
+            .forEach {
+                val nextParents = if (it as? KoParentProvider != null) {
+                    it.parents(indirectParents = true)
+                } else {
+                    emptyList()
+                }
+
+                if (nextParents.isNotEmpty()) {
+                    indirectParents += nextParents + getIndirectParents(nextParents)
+                }
+            }
+
+        return indirectParents
+    }
 
     private fun getParentClass(name: String, fqn: String?): KoClassDeclaration? = DataCore
         .classes
@@ -64,45 +92,46 @@ internal interface KoParentProviderCore :
             .interfaces()
             .firstOrNull { decl -> decl.name == name }
 
-    override val numParents: Int
-        get() = parents.size
+    override fun numParents(indirectParents: Boolean): Int = parents(indirectParents).size
 
-    override fun countParents(predicate: (KoParentDeclaration) -> Boolean): Int =
-        parents.count { predicate(it) }
+    override fun countParents(indirectParents: Boolean, predicate: (KoParentDeclaration) -> Boolean): Int =
+        parents(indirectParents).count { predicate(it) }
 
     @Deprecated("Will be removed in v1.0.0.", ReplaceWith("hasParentsWithAllNames(*names)"))
     override fun hasParents(vararg names: String): Boolean = when {
-        names.isEmpty() -> parents.isNotEmpty()
+        names.isEmpty() -> parents().isNotEmpty()
         else -> names.all {
-            parents.any { parent -> it == parent.name }
+            parents().any { parent -> it == parent.name }
         }
     }
 
-    override fun hasParents(): Boolean = parents.isNotEmpty()
+    override fun hasParents(indirectParents: Boolean): Boolean = parents(indirectParents).isNotEmpty()
 
-    override fun hasParentWithName(name: String, vararg names: String): Boolean {
+    override fun hasParentWithName(name: String, vararg names: String, indirectParents: Boolean): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.any {
-            parents.any { parent -> it == parent.name }
+            parents(indirectParents).any { parent -> it == parent.name }
         }
     }
 
-    override fun hasParentsWithAllNames(name: String, vararg names: String): Boolean {
+    override fun hasParentsWithAllNames(name: String, vararg names: String, indirectParents: Boolean): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.all {
-            parents.any { parent -> it == parent.name }
+            parents(indirectParents).any { parent -> it == parent.name }
         }
     }
 
-    override fun hasParent(predicate: (KoParentDeclaration) -> Boolean): Boolean = parents.any(predicate)
+    override fun hasParent(indirectParents: Boolean, predicate: (KoParentDeclaration) -> Boolean): Boolean =
+        parents(indirectParents).any(predicate)
 
-    override fun hasAllParents(predicate: (KoParentDeclaration) -> Boolean): Boolean = parents.all(predicate)
+    override fun hasAllParents(indirectParents: Boolean, predicate: (KoParentDeclaration) -> Boolean): Boolean =
+        parents(indirectParents).all(predicate)
 
-    override fun hasParentOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
-        checkIfParentOf(name, parents) || names.any { checkIfParentOf(it, parents) }
+    override fun hasParentOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean): Boolean =
+        checkIfParentOf(name, parents(indirectParents)) || names.any { checkIfParentOf(it, parents(indirectParents)) }
 
-    override fun hasAllParentsOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
-        checkIfParentOf(name, parents) && names.all { checkIfParentOf(it, parents) }
+    override fun hasAllParentsOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean): Boolean =
+        checkIfParentOf(name, parents(indirectParents)) && names.all { checkIfParentOf(it, parents(indirectParents)) }
 }

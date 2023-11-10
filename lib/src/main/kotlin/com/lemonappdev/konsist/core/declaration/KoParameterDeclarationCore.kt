@@ -14,12 +14,12 @@ import com.lemonappdev.konsist.core.provider.KoDefaultValueProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoNonNullableTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
-import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoCrossInlineModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoNoInlineModifierProviderCore
@@ -56,7 +56,7 @@ internal class KoParameterDeclarationCore private constructor(
     KoRepresentsTypeProviderCore,
     KoResideInPackageProviderCore,
     KoTextProviderCore,
-    KoTypeProviderCore,
+    KoNonNullableTypeProviderCore,
     KoVarModifierProviderCore,
     KoValModifierProviderCore,
     KoVarArgModifierProviderCore,
