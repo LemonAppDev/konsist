@@ -10,7 +10,7 @@ internal interface KoTacitTypeProviderCore :
     KoNullableTypeProvider,
     KoValueProviderCore {
     override fun hasTacitType(type: String): Boolean =
-        hasType { it.name == type } || value?.contains("${type}(") == true
+        hasType { it.name == type } || value?.contains("$type(") == true
 
     override fun hasTacitTypeOf(kClass: KClass<*>): Boolean = kClass.simpleName?.let { hasTacitType(it) } ?: false
 }

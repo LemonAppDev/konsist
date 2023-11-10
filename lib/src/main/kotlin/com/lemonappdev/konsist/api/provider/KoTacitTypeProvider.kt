@@ -8,7 +8,7 @@ import kotlin.reflect.KClass
  * This interface extends the `KoBaseProvider` and allows you to check whether a declaration or value
  * has an explicitly declared type or if the value contains a given type with parentheses '('.
  */
-interface KoTacitTypeProvider: KoBaseProvider {
+interface KoTacitTypeProvider : KoBaseProvider {
     /**
      * Determines whether declaration has an explicitly declared type or if its value contains the
      * given type with parentheses '('.

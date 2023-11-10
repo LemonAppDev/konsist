@@ -44,7 +44,7 @@ class KoPropertyDeclarationForKoTacitTypeProviderTest {
         // given
         val sut = getSnippetFile("property-has-explicit-complex-type")
             .properties()
-            .first { it.name == "sampleProperty"}
+            .first { it.name == "sampleProperty" }
 
         // then
         assertSoftly(sut) {
