@@ -3,11 +3,28 @@ package com.lemonappdev.konsist.core.declaration.kotype
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.withPrimaryConstructor
 import org.amshove.kluent.shouldBeEqualTo
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
 class KoTypeDeclarationForKoFullyQualifiedNameProviderTest {
+    @Test
+    fun `type-fully-qualified-name-when-other-import-contains-its-name`() {
+        // given
+        val sut = getSnippetFile("type-fully-qualified-name-when-other-import-contains-its-name")
+            .classes()
+            .withPrimaryConstructor()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
+            ?.type
+
+        // then
+        sut?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.testpackage.Type"
+    }
+
     @ParameterizedTest(name = "fully-qualified-name {0} equals {1}")
     @MethodSource("provideValues")
     fun `fully-qualified-name`(

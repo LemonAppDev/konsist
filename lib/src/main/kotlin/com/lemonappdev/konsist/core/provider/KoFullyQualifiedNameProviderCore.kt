@@ -16,7 +16,7 @@ internal interface KoFullyQualifiedNameProviderCore :
             var fqn = containingFile
                 .imports
                 .map { it.name }
-                .firstOrNull { it.contains(textUsedToFqn) }
+                .firstOrNull { it.endsWith(".$textUsedToFqn") }
 
             if (fqn == null) {
                 fqn = containingFile
