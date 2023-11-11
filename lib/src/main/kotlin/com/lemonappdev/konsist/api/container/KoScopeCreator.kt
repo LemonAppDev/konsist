@@ -87,7 +87,15 @@ interface KoScopeCreator {
      * @param path The path relative to the project root directory.
      * @return a [KoScope] containing all of Kotlin files in the given directory.
      */
-    fun scopeFromDirectory(path: String): KoScope
+    fun scopeFromDirectory(path: String, vararg paths: String): KoScope
+
+    /**
+     * Creates a [KoScope] containing all of Kotlin files in the given directories.
+     *
+     * @param paths
+     * @return a [KoScope] containing all of Kotlin files in the given directories.
+     */
+    fun scopeFromDirectories(paths: Set<String>): KoScope
 
     /**
      * Creates a [KoScope] containing all of Kotlin files in the given directory.
@@ -96,7 +104,16 @@ interface KoScopeCreator {
      * @param absolutePath The absolute path to the directory from outside the project.
      * @return a [KoScope] containing all of Kotlin files in the given directory.
      */
-    fun scopeFromExternalDirectory(absolutePath: String): KoScope
+    fun scopeFromExternalDirectory(absolutePath: String, vararg paths: String): KoScope
+
+    /**
+     * Creates a [KoScope] containing all of Kotlin files in the given directories.
+     * Some features (as `KoFile.projectPath`, `KoFile.moduleName`) do not work with this method.
+     *
+     * @param absolutePaths Set of the absolute paths to the directory from outside the project.
+     * @return a [KoScope] containing all of Kotlin files in the given directory.
+     */
+    fun scopeFromExternalDirectories(absolutePaths: Set<String>): KoScope
 
     /**
      * Creates a [KoScope] of a given file.
