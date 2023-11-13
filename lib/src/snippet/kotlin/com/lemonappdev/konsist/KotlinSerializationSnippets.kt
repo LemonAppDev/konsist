@@ -32,7 +32,7 @@ class KotlinSerializationSnippets {
 
     fun `all models are serializable`() {
         Konsist
-            .scopeFromPackage("story.model")
+            .scopeFromPackage("com.myapp.model..")
             .classes()
             .assertTrue {
                 it.hasAnnotationOf(Serializable::class)
