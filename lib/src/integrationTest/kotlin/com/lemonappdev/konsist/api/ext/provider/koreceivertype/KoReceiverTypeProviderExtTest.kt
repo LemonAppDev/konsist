@@ -8,7 +8,6 @@ import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.testdata.SampleClass
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class KoReceiverTypeProviderExtTest {
@@ -26,7 +25,6 @@ class KoReceiverTypeProviderExtTest {
         }
     }
 
-    @Disabled("Disabled until kotlin build-in types fqn will be improved")
     @Test
     fun `declaration-has-receiver-with-simple-type`() {
         // given

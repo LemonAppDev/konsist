@@ -8,7 +8,6 @@ import com.lemonappdev.konsist.api.provider.KoReturnProvider
 import com.lemonappdev.konsist.testdata.SampleClass
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class KoReturnProviderExtTest {
@@ -26,7 +25,6 @@ class KoReturnProviderExtTest {
         }
     }
 
-    @Disabled("Disabled until kotlin build-in types fqn will be improved")
     @Test
     fun `declaration-has-return-type-with-simple-type`() {
         // given
