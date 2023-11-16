@@ -10,19 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource
 
 class KoClassDeclarationForKoHasTestClassProviderTest {
     @Test
-    fun `class-with-test-with-default-parameters`() {
-        // given
-        val sut = Konsist
-            .scopeFromProduction("app")
-            .classes()
-            .first()
-
-        // then
-        sut.hasTestClass() shouldBeEqualTo true
-    }
-
-    @Test
-    fun `class-without-test-with-default-parameters`() {
+    fun `class-has-not-test`() {
         // given
         val sut = Konsist
             .scopeFromDirectory("buildSrc/".toOsSeparator())
@@ -34,7 +22,55 @@ class KoClassDeclarationForKoHasTestClassProviderTest {
     }
 
     @Test
-    fun `class-with-test-with-declared-test-file-name-suffix`() {
+    fun `class-has-test-with-sut-property`() {
+        // given
+        val sut = Konsist
+            .scopeFromProduction("app")
+            .classes()
+            .first { it.name == "AppClass"}
+
+        // then
+        sut.hasTestClass() shouldBeEqualTo true
+    }
+
+    @Test
+    fun `class-has-not-test-with-cut-property`() {
+        // given
+        val sut = Konsist
+            .scopeFromProduction("app")
+            .classes()
+            .first { it.name == "AppClass"}
+
+        // then
+        sut.hasTestClass("cut") shouldBeEqualTo false
+    }
+
+    @Test
+    fun `class-has-test-with-sut-variable`() {
+        // given
+        val sut = Konsist
+            .scopeFromProduction("app")
+            .classes()
+            .first { it.name == "AppDataClass"}
+
+        // then
+        sut.hasTestClass() shouldBeEqualTo true
+    }
+
+    @Test
+    fun `class-has-not-test-with-cut-variable`() {
+        // given
+        val sut = Konsist
+            .scopeFromProduction("app")
+            .classes()
+            .first { it.name == "AppDataClass"}
+
+        // then
+        sut.hasTestClass("cut") shouldBeEqualTo false
+    }
+
+    @Test
+    fun `class-has-test-with-cut-property`() {
         // given
         val sut = Konsist
             .scopeFromProduction("data")
@@ -42,19 +78,43 @@ class KoClassDeclarationForKoHasTestClassProviderTest {
             .first { it.name == "LibClass" }
 
         // then
-        sut.hasTestClass("Spec") shouldBeEqualTo true
+        sut.hasTestClass("cut") shouldBeEqualTo true
     }
 
     @Test
-    fun `class-without-test-with-declared-test-file-name-suffix`() {
+    fun `class-has-not-test-with-sut-property`() {
         // given
         val sut = Konsist
-            .scopeFromProduction("app")
+            .scopeFromProduction("data")
             .classes()
-            .first()
+            .first { it.name == "LibClass" }
 
         // then
-        sut.hasTestClass("Spec") shouldBeEqualTo false
+        sut.hasTestClass() shouldBeEqualTo false
+    }
+
+    @Test
+    fun `class-has-test-with-cut-variable`() {
+        // given
+        val sut = Konsist
+            .scopeFromProduction("data")
+            .classes()
+            .first { it.name == "LibDataClass" }
+
+        // then
+        sut.hasTestClass("cut") shouldBeEqualTo true
+    }
+
+    @Test
+    fun `class-has-not-test-with-sut-variable`() {
+        // given
+        val sut = Konsist
+            .scopeFromProduction("data")
+            .classes()
+            .first { it.name == "LibDataClass" }
+
+        // then
+        sut.hasTestClass() shouldBeEqualTo false
     }
 
     @ParameterizedTest

@@ -25,7 +25,6 @@ class KoScopeFromPackageTest {
                 "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
                 "$appMainSourceSetDirectory/sample/AppClass.kt",
                 "$dataMainSourceSetDirectory/sample/LibClass.kt",
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
             ).toOsSeparator(),
@@ -74,7 +73,6 @@ class KoScopeFromPackageTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
             ).toOsSeparator(),
         )
@@ -148,7 +146,6 @@ class KoScopeFromPackageTest {
         sut.shouldBeEqualTo(
             listOf(
                 "$dataMainSourceSetDirectory/sample/LibClass.kt",
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
             ).toOsSeparator(),
         )
@@ -190,7 +187,6 @@ class KoScopeFromPackageTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
             ).toOsSeparator(),
         )
@@ -242,7 +238,6 @@ class KoScopeFromPackageTest {
                 "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
                 "$dataMainSourceSetDirectory/sample/LibClass.kt",
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
@@ -299,7 +294,6 @@ class KoScopeFromPackageTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ).toOsSeparator(),
@@ -379,7 +373,6 @@ class KoScopeFromPackageTest {
             listOf(
                 "$dataMainSourceSetDirectory/sample/LibClass.kt",
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ).toOsSeparator(),
@@ -423,7 +416,6 @@ class KoScopeFromPackageTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ).toOsSeparator(),
