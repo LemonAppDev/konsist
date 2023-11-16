@@ -25,7 +25,7 @@ object TypeUtil {
     }
 
     internal fun hasTypeOf(type: KoTypeDeclaration?, kClass: KClass<*>): Boolean =
-        if(type?.isKotlinType == true) {
+        if (type?.isKotlinType == true) {
             kClass.simpleName == type.name
         } else {
             kClass.qualifiedName == type?.fullyQualifiedName
