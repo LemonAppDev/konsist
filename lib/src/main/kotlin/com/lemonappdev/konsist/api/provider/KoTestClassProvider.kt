@@ -31,7 +31,7 @@ interface KoTestClassProvider : KoBaseProvider {
     fun testClasses(
         moduleName: String? = null,
         sourceSetName: String? = null,
-        predicate: (KoClassDeclaration) -> Boolean
+        predicate: (KoClassDeclaration) -> Boolean,
     ): List<KoClassDeclaration>
 
     /**
@@ -59,7 +59,7 @@ interface KoTestClassProvider : KoBaseProvider {
     fun countTestClasses(
         moduleName: String? = null,
         sourceSetName: String? = null,
-        predicate: (KoClassDeclaration) -> Boolean
+        predicate: (KoClassDeclaration) -> Boolean,
     ): Int
 
     /**
@@ -87,6 +87,6 @@ interface KoTestClassProvider : KoBaseProvider {
     fun hasTestClass(
         moduleName: String? = null,
         sourceSetName: String? = null,
-        predicate: (KoClassDeclaration) -> Boolean
+        predicate: (KoClassDeclaration) -> Boolean,
     ): Boolean
 }

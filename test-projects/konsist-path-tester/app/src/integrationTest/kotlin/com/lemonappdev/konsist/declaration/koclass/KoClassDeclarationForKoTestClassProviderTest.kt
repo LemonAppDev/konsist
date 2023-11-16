@@ -41,7 +41,8 @@ class KoClassDeclarationForKoTestClassProviderTest {
         assertSoftly(sut) {
             testClasses().map { it.name } shouldBeEqualTo listOf("AppClassTest")
             testClasses("cut") shouldBeEqualTo emptyList()
-            testClasses { it.name == "AppClassTest" && it.hasPropertyWithName("sut") }.map { it.name } shouldBeEqualTo listOf("AppClassTest")
+            testClasses { it.name == "AppClassTest" && it.hasPropertyWithName("sut") }.map { it.name }
+                .shouldBeEqualTo(listOf("AppClassTest"))
             testClasses { it.name == "AppClassTest" && it.hasPropertyWithName("cut") } shouldBeEqualTo emptyList()
             numTestClasses() shouldBeEqualTo 1
             numTestClasses("cut") shouldBeEqualTo 0
@@ -99,7 +100,8 @@ class KoClassDeclarationForKoTestClassProviderTest {
             testClasses() shouldBeEqualTo emptyList()
             testClasses("cut").map { it.name } shouldBeEqualTo listOf("LibClassTest")
             testClasses { it.name == "LibClassTest" && it.hasPropertyWithName("sut") }shouldBeEqualTo emptyList()
-            testClasses { it.name == "LibClassTest" && it.hasPropertyWithName("cut") }.map { it.name }  shouldBeEqualTo listOf("LibClassTest")
+            testClasses { it.name == "LibClassTest" && it.hasPropertyWithName("cut") }.map { it.name }
+                .shouldBeEqualTo(listOf("LibClassTest"))
             numTestClasses() shouldBeEqualTo 0
             numTestClasses("cut") shouldBeEqualTo 1
             countTestClasses { it.name == "LibClassTest" && it.hasPropertyWithName("sut") } shouldBeEqualTo 0
