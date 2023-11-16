@@ -10,6 +10,7 @@ import com.lemonappdev.konsist.api.provider.KoHasTestClassProvider
  * @param sourceSetName      the name of the source set to check (optional).
  * @return A list containing declarations with a test.
  */
+@Deprecated("Will be removed in v1.0.0", ReplaceWith("withTestClass"))
 fun <T : KoHasTestClassProvider> List<T>.withTestClass(
     testFileNameSuffix: String = "Test",
     moduleName: String? = null,
@@ -24,6 +25,7 @@ fun <T : KoHasTestClassProvider> List<T>.withTestClass(
  * @param sourceSetName      the name of the source set to check (optional).
  * @return A list containing declarations without a test.
  */
+@Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutTestClass"))
 fun <T : KoHasTestClassProvider> List<T>.withoutTestClass(
     testFileNameSuffix: String = "Test",
     moduleName: String? = null,

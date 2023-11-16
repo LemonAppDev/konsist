@@ -6,6 +6,7 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+@Deprecated("Will be removed in v1.0.0")
 class KoHasTestClassProviderListExtTest {
     @Test
     fun `withTestClass() returns declaration with test`() {
