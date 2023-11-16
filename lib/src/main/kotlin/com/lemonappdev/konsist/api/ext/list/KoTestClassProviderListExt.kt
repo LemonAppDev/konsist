@@ -2,8 +2,6 @@ package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoHasTestClassProvider
 import com.lemonappdev.konsist.api.provider.KoTestClassProvider
 
 /**
@@ -32,7 +30,7 @@ fun <T : KoTestClassProvider> List<T>.testClasses(
     moduleName: String? = null,
     sourceSetName: String? = null,
     predicate: (KoClassDeclaration) -> Boolean,
-    ): List<KoBaseDeclaration> = flatMap { it.testClasses(moduleName, sourceSetName, predicate) }
+): List<KoBaseDeclaration> = flatMap { it.testClasses(moduleName, sourceSetName, predicate) }
 
 /**
  * List containing declarations with a test.
@@ -62,7 +60,6 @@ fun <T : KoTestClassProvider> List<T>.withoutTestClass(
     sourceSetName: String? = null,
 ): List<T> = filterNot { it.hasTestClasses(testPropertyName, moduleName, sourceSetName) }
 
-
 /**
  * List containing declarations with a test matching the predicate.
  *
@@ -74,7 +71,7 @@ fun <T : KoTestClassProvider> List<T>.withoutTestClass(
 fun <T : KoTestClassProvider> List<T>.withTestClass(
     moduleName: String? = null,
     sourceSetName: String? = null,
-       predicate: (KoClassDeclaration) -> Boolean,
+    predicate: (KoClassDeclaration) -> Boolean,
 ): List<T> = filter { it.hasTestClass(moduleName, sourceSetName, predicate) }
 
 /**
@@ -88,5 +85,5 @@ fun <T : KoTestClassProvider> List<T>.withTestClass(
 fun <T : KoTestClassProvider> List<T>.withoutTestClass(
     moduleName: String? = null,
     sourceSetName: String? = null,
-       predicate: (KoClassDeclaration) -> Boolean,
+    predicate: (KoClassDeclaration) -> Boolean,
 ): List<T> = filterNot { it.hasTestClass(moduleName, sourceSetName, predicate) }
