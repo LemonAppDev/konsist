@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.declaration.koclass
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.toOsSeparator
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -18,7 +19,14 @@ class KoClassDeclarationForKoTestClassProviderTest {
             .first()
 
         // then
-        sut.hasTestClasses() shouldBeEqualTo false
+        assertSoftly(sut) {
+            testClasses() shouldBeEqualTo emptyList()
+            testClasses { it.name == "AppClassTest" && it.hasPropertyWithName("cut") } shouldBeEqualTo emptyList()
+            numTestClasses() shouldBeEqualTo 0
+            countTestClasses { it.name == "AppClassTest" && it.hasPropertyWithName("cut") } shouldBeEqualTo 0
+            hasTestClasses() shouldBeEqualTo false
+            hasTestClass { it.name == "AppClassTest" && it.hasPropertyWithName("cut") } shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -27,22 +35,23 @@ class KoClassDeclarationForKoTestClassProviderTest {
         val sut = Konsist
             .scopeFromProduction("app")
             .classes()
-            .first { it.name == "AppClass"}
+            .first { it.name == "AppClass" }
 
         // then
-        sut.hasTestClasses() shouldBeEqualTo true
-    }
-
-    @Test
-    fun `class-has-not-test-with-cut-property`() {
-        // given
-        val sut = Konsist
-            .scopeFromProduction("app")
-            .classes()
-            .first { it.name == "AppClass"}
-
-        // then
-        sut.hasTestClasses("cut") shouldBeEqualTo false
+        assertSoftly(sut) {
+            testClasses().map { it.name } shouldBeEqualTo listOf("AppClassTest")
+            testClasses("cut") shouldBeEqualTo emptyList()
+            testClasses { it.name == "AppClassTest" && it.hasPropertyWithName("sut") }.map { it.name } shouldBeEqualTo listOf("AppClassTest")
+            testClasses { it.name == "AppClassTest" && it.hasPropertyWithName("cut") } shouldBeEqualTo emptyList()
+            numTestClasses() shouldBeEqualTo 1
+            numTestClasses("cut") shouldBeEqualTo 0
+            countTestClasses { it.name == "AppClassTest" && it.hasPropertyWithName("sut") } shouldBeEqualTo 1
+            countTestClasses { it.name == "AppClassTest" && it.hasPropertyWithName("cut") } shouldBeEqualTo 0
+            hasTestClasses() shouldBeEqualTo true
+            hasTestClasses("cut") shouldBeEqualTo false
+            hasTestClass { it.name == "AppClassTest" && it.hasPropertyWithName("sut") } shouldBeEqualTo true
+            hasTestClass { it.name == "AppClassTest" && it.hasPropertyWithName("cut") } shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -51,22 +60,30 @@ class KoClassDeclarationForKoTestClassProviderTest {
         val sut = Konsist
             .scopeFromProduction("app")
             .classes()
-            .first { it.name == "AppDataClass"}
+            .first { it.name == "AppDataClass" }
 
         // then
-        sut.hasTestClasses() shouldBeEqualTo true
-    }
-
-    @Test
-    fun `class-has-not-test-with-cut-variable`() {
-        // given
-        val sut = Konsist
-            .scopeFromProduction("app")
-            .classes()
-            .first { it.name == "AppDataClass"}
-
-        // then
-        sut.hasTestClasses("cut") shouldBeEqualTo false
+        assertSoftly(sut) {
+            testClasses().map { it.name } shouldBeEqualTo listOf("AppDataClassTest")
+            testClasses("cut") shouldBeEqualTo emptyList()
+            testClasses { it.name == "AppDataClassTest" && it.hasFunction { func -> func.hasVariableWithName("sut") } }
+                .map { it.name }
+                .shouldBeEqualTo(listOf("AppDataClassTest"))
+            testClasses { it.name == "AppDataClassTest" && it.hasFunction { func -> func.hasVariableWithName("cut") } }
+                .shouldBeEqualTo(emptyList())
+            numTestClasses() shouldBeEqualTo 1
+            numTestClasses("cut") shouldBeEqualTo 0
+            countTestClasses { it.name == "AppDataClassTest" && it.hasFunction { func -> func.hasVariableWithName("sut") } }
+                .shouldBeEqualTo(1)
+            countTestClasses { it.name == "AppDataClassTest" && it.hasFunction { func -> func.hasVariableWithName("cut") } }
+                .shouldBeEqualTo(0)
+            hasTestClasses() shouldBeEqualTo true
+            hasTestClasses("cut") shouldBeEqualTo false
+            hasTestClass { it.name == "AppDataClassTest" && it.hasFunction { func -> func.hasVariableWithName("sut") } }
+                .shouldBeEqualTo(true)
+            hasTestClass { it.name == "AppDataClassTest" && it.hasFunction { func -> func.hasVariableWithName("cut") } }
+                .shouldBeEqualTo(false)
+        }
     }
 
     @Test
@@ -78,19 +95,20 @@ class KoClassDeclarationForKoTestClassProviderTest {
             .first { it.name == "LibClass" }
 
         // then
-        sut.hasTestClasses("cut") shouldBeEqualTo true
-    }
-
-    @Test
-    fun `class-has-not-test-with-sut-property`() {
-        // given
-        val sut = Konsist
-            .scopeFromProduction("data")
-            .classes()
-            .first { it.name == "LibClass" }
-
-        // then
-        sut.hasTestClasses() shouldBeEqualTo false
+        assertSoftly(sut) {
+            testClasses() shouldBeEqualTo emptyList()
+            testClasses("cut").map { it.name } shouldBeEqualTo listOf("LibClassTest")
+            testClasses { it.name == "LibClassTest" && it.hasPropertyWithName("sut") }shouldBeEqualTo emptyList()
+            testClasses { it.name == "LibClassTest" && it.hasPropertyWithName("cut") }.map { it.name }  shouldBeEqualTo listOf("LibClassTest")
+            numTestClasses() shouldBeEqualTo 0
+            numTestClasses("cut") shouldBeEqualTo 1
+            countTestClasses { it.name == "LibClassTest" && it.hasPropertyWithName("sut") } shouldBeEqualTo 0
+            countTestClasses { it.name == "LibClassTest" && it.hasPropertyWithName("cut") } shouldBeEqualTo 1
+            hasTestClasses() shouldBeEqualTo false
+            hasTestClasses("cut") shouldBeEqualTo true
+            hasTestClass { it.name == "LibClassTest" && it.hasPropertyWithName("sut") } shouldBeEqualTo false
+            hasTestClass { it.name == "LibClassTest" && it.hasPropertyWithName("cut") } shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -102,19 +120,27 @@ class KoClassDeclarationForKoTestClassProviderTest {
             .first { it.name == "LibDataClass" }
 
         // then
-        sut.hasTestClasses("cut") shouldBeEqualTo true
-    }
-
-    @Test
-    fun `class-has-not-test-with-sut-variable`() {
-        // given
-        val sut = Konsist
-            .scopeFromProduction("data")
-            .classes()
-            .first { it.name == "LibDataClass" }
-
-        // then
-        sut.hasTestClasses() shouldBeEqualTo false
+        assertSoftly(sut) {
+            testClasses() shouldBeEqualTo emptyList()
+            testClasses("cut").map { it.name } shouldBeEqualTo listOf("LibDataClassTest")
+            testClasses { it.name == "LibDataClassTest" && it.hasFunction { func -> func.hasVariableWithName("sut") } }
+                .shouldBeEqualTo(emptyList())
+            testClasses { it.name == "LibDataClassTest" && it.hasFunction { func -> func.hasVariableWithName("cut") } }
+                .map { it.name }
+                .shouldBeEqualTo(listOf("LibDataClassTest"))
+            numTestClasses() shouldBeEqualTo 0
+            numTestClasses("cut") shouldBeEqualTo 1
+            countTestClasses { it.name == "LibDataClassTest" && it.hasFunction { func -> func.hasVariableWithName("sut") } }
+                .shouldBeEqualTo(0)
+            countTestClasses { it.name == "LibDataClassTest" && it.hasFunction { func -> func.hasVariableWithName("cut") } }
+                .shouldBeEqualTo(1)
+            hasTestClasses() shouldBeEqualTo false
+            hasTestClasses("cut") shouldBeEqualTo true
+            hasTestClass { it.name == "LibDataClassTest" && it.hasFunction { func -> func.hasVariableWithName("sut") } }
+                .shouldBeEqualTo(false)
+            hasTestClass { it.name == "LibDataClassTest" && it.hasFunction { func -> func.hasVariableWithName("cut") } }
+                .shouldBeEqualTo(true)
+        }
     }
 
     @ParameterizedTest
@@ -131,7 +157,9 @@ class KoClassDeclarationForKoTestClassProviderTest {
             .first()
 
         // then
-        sut.hasTestClasses(moduleName = moduleName, sourceSetName = sourceSetName) shouldBeEqualTo value
+        assertSoftly(sut) {
+            hasTestClasses(moduleName = moduleName, sourceSetName = sourceSetName) shouldBeEqualTo value
+        }
     }
 
     companion object {
