@@ -31,6 +31,7 @@ import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
 import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
+import com.lemonappdev.konsist.api.provider.KoTestClassProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoAbstractModifierProvider
@@ -98,4 +99,5 @@ interface KoClassDeclaration :
     KoExpectModifierProvider,
     KoAbstractModifierProvider,
     KoOpenModifierProvider,
-    KoFinalModifierProvider
+    KoFinalModifierProvider,
+    KoTestClassProvider
