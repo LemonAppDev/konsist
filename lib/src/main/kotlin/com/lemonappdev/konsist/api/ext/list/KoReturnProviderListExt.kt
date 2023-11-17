@@ -89,12 +89,13 @@ fun <T : KoReturnProvider> List<T>.withoutReturnType(predicate: ((KoTypeDeclarat
  */
 fun <T : KoReturnProvider> List<T>.withReturnTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
-        it.hasReturnTypeOf(kClass) ||
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.hasReturnTypeOf(kClass) }
-            } else {
-                false
-            }
+        val hasAtLeastOneReturnType = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass -> it.hasReturnTypeOf(kClass) }
+        } else {
+            false
+        }
+
+        it.hasReturnTypeOf(kClass) || hasAtLeastOneReturnType
     }
 
 /**
@@ -106,10 +107,11 @@ fun <T : KoReturnProvider> List<T>.withReturnTypeOf(kClass: KClass<*>, vararg kC
  */
 fun <T : KoReturnProvider> List<T>.withoutReturnTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filterNot {
-        it.hasReturnTypeOf(kClass) ||
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.hasReturnTypeOf(kClass) }
-            } else {
-                false
-            }
+        val hasAtLeastOneReturnType = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass -> it.hasReturnTypeOf(kClass) }
+        } else {
+            false
+        }
+
+        it.hasReturnTypeOf(kClass) || hasAtLeastOneReturnType
     }

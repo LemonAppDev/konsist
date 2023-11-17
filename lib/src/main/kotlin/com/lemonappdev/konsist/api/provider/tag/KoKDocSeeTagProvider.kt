@@ -18,7 +18,7 @@ interface KoKDocSeeTagProvider : KoBaseProvider {
     val numSeeTags: Int
 
     /**
-     * Whatever the declaration has see tags.
+     * Determines whatever the declaration has see tags.
      */
     val hasSeeTags: Boolean
 }

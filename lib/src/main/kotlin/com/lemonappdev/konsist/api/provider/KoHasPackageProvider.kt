@@ -5,12 +5,12 @@ package com.lemonappdev.konsist.api.provider
  */
 interface KoHasPackageProvider : KoBaseProvider {
     /**
-     * Whatever the package matches the directory structure (file path).
+     * Determines whatever the package matches the directory structure (file path).
      */
     val hasMatchingPackage: Boolean
 
     /**
-     * Whether the declaration has package.
+     * Determines whatever the declaration has package.
      *
      * @param name the name of the package to check.
      * @return `true` if the declaration has a package with the specified name, `false` otherwise.

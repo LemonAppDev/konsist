@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test
 
 class KoParentClassProviderExtTest {
     @Test
-    fun `class-has-parent-class-from-import`() {
+    fun `class-has-parent-class-imported-from-external-file`() {
         // given
-        val sut = getSnippetFile("class-has-parent-class-from-import")
+        val sut = getSnippetFile("class-has-parent-class-imported-from-external-file")
             .classes()
             .first()
 
@@ -26,9 +26,9 @@ class KoParentClassProviderExtTest {
     }
 
     @Test
-    fun `class-has-parent-class-from-file`() {
+    fun `class-has-parent-class-defined-in-the-same-file`() {
         // given
-        val sut = getSnippetFile("class-has-parent-class-from-file")
+        val sut = getSnippetFile("class-has-parent-class-defined-in-the-same-file")
             .classes()
             .first()
 
@@ -41,9 +41,9 @@ class KoParentClassProviderExtTest {
     }
 
     @Test
-    fun `object-has-parent-class-from-import`() {
+    fun `object-has-parent-class-defined-in-the-same-file`() {
         // given
-        val sut = getSnippetFile("object-has-parent-class-from-import")
+        val sut = getSnippetFile("object-has-parent-class-defined-in-the-same-file")
             .objects()
             .first()
 
@@ -56,9 +56,9 @@ class KoParentClassProviderExtTest {
     }
 
     @Test
-    fun `object-has-parent-class-from-file`() {
+    fun `object-has-parent-class-imported-from-external-file`() {
         // given
-        val sut = getSnippetFile("object-has-parent-class-from-file")
+        val sut = getSnippetFile("object-has-parent-class-imported-from-external-file")
             .objects()
             .first()
 

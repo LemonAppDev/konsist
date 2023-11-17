@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.properties
 import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
-import com.lemonappdev.konsist.api.ext.list.withParentOf
+import com.lemonappdev.konsist.api.ext.list.withParentClassOf
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 
@@ -15,7 +15,7 @@ class AndroidSnippets {
         Konsist
             .scopeFromProject()
             .classes()
-            .withParentOf(ViewModel::class)
+            .withParentClassOf(ViewModel::class)
             .assertTrue { it.name.endsWith("ViewModel") }
     }
 
@@ -23,7 +23,7 @@ class AndroidSnippets {
         Konsist
             .scopeFromProject()
             .classes()
-            .withParentOf(ViewModel::class)
+            .withParentClassOf(ViewModel::class)
             .properties()
             .assertTrue {
                 it.hasPublicOrDefaultModifier && it.hasType { type -> type.name == "kotlinx.coroutines.flow.Flow" }

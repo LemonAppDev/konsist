@@ -29,4 +29,13 @@ class KotlinSerializationSnippets {
             .enumConstants
             .assertTrue { it.hasAnnotationOf(SerialName::class) }
     }
+
+    fun `all models are serializable`() {
+        Konsist
+            .scopeFromPackage("com.myapp.model..")
+            .classes()
+            .assertTrue {
+                it.hasAnnotationOf(Serializable::class)
+            }
+    }
 }

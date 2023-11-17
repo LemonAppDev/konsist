@@ -10,6 +10,8 @@ class AppClass(val appParameter: String) : AppInterface {
     constructor(otherParameter: Int) : this(otherParameter.toString())
 
     init {
+        @Suppress("detekt.UnusedPrivateProperty")
+        val appVariable = ""
         println("App init block")
     }
 }
@@ -19,16 +21,28 @@ interface AppInterface : ParentInterface
 interface ParentInterface
 
 var appProperty: AppClass = AppClass("")
-    get() = AppClass("app value")
-    private set
+    get() {
+        @Suppress("detekt.UnusedPrivateProperty")
+        val appVariable = ""
+        return AppClass("app value")
+    }
+    private set(value) {
+        @Suppress("detekt.UnusedPrivateProperty")
+        val appVariable = ""
+        if (true) field = value
+    }
 
 object AppObject
 
 enum class AppEnumClass {
-    APP_CONSTANT
+    APP_CONSTANT {
+        val appVariable = ""
+    }
 }
 
 fun appFunction() {
+    @Suppress("detekt.UnusedPrivateProperty")
+    val appVariable = ""
     println("some text")
 }
 

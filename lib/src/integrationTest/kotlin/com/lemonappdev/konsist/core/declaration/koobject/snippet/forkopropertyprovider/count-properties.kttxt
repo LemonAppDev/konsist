@@ -1,11 +1,5 @@
-import kotlin.String
-
 object SampleObject {
     internal val sampleProperty: String = ""
-
-    fun sampleFunction() {
-        val sampleLocalProperty = 6
-    }
 
     class SampleClass {
         internal val sampleNestedProperty = ""

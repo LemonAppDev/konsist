@@ -23,7 +23,7 @@ fun <T : KoParentInterfaceProvider> List<T>.parentInterfaces(indirectParents: Bo
     flatMap { it.parentInterfaces(indirectParents) }
 
 /**
- * List containing declarations with parent interface.
+ * List containing declarations with any parent interface.
  *
  * @param indirectParents Whether to include indirect parent interfaces.
  * @return A list containing declarations with any parent interface.
@@ -32,7 +32,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaces(indirectParents
     filter { it.hasParentInterfaces(indirectParents) }
 
 /**
- * List containing declarations with no parent interface.
+ * List containing declarations with none parent interface.
  *
  * @param indirectParents Whether to include indirect parent interfaces.
  * @return A list containing declarations with no parent interface.
@@ -308,14 +308,16 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutSomeParentInterfacesOf(
     vararg kClasses: KClass<*>,
 ): List<T> =
     filter {
-        it.parentInterfaces.none { parent -> parent.name == kClass.simpleName } &&
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass ->
-                    it
-                        .parentInterfaces
-                        .none { parent -> parent.name == kClass.simpleName }
-                }
-            } else {
-                true
+        val hasNoMatchingParentInterfaces = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass ->
+                it
+                    .parentInterfaces
+                    .none { parent -> parent.name == kClass.simpleName }
             }
+        } else {
+            true
+        }
+
+        it.parentInterfaces.none { parent -> parent.name == kClass.simpleName } &&
+            hasNoMatchingParentInterfaces
     }

@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -12,7 +12,7 @@ import com.lemonappdev.konsist.core.provider.KoKotlinTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
-import com.lemonappdev.konsist.core.provider.KoNullableTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoNullableProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceAndAliasTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
@@ -31,7 +31,7 @@ internal class KoTypeDeclarationCore private constructor(
     KoKotlinTypeProviderCore,
     KoLocationProviderCore,
     KoNameProviderCore,
-    KoNullableTypeProviderCore,
+    KoNullableProviderCore,
     KoPathProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore,
@@ -48,7 +48,7 @@ internal class KoTypeDeclarationCore private constructor(
         }
     }
 
-    override val textUsedToFqn: String by lazy { sourceType.substringBefore("<") }
+    override val textUsedToFqn: String by lazy { bareSourceType }
 
     override fun toString(): String = name
 
@@ -57,7 +57,7 @@ internal class KoTypeDeclarationCore private constructor(
 
         internal fun getInstance(
             ktTypeReference: KtTypeReference,
-            containingDeclaration: KoContainingDeclarationProvider,
+            containingDeclaration: KoBaseDeclaration,
         ): KoTypeDeclaration =
             cache.getOrCreateInstance(ktTypeReference, containingDeclaration) {
                 KoTypeDeclarationCore(

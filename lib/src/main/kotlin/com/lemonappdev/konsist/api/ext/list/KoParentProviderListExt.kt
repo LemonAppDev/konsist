@@ -23,19 +23,28 @@ fun <T : KoParentProvider> List<T>.parents(indirectParents: Boolean = false): Li
     flatMap { it.parents(indirectParents) }
 
 /**
- * List containing declarations with class or interface parent.
+ * List containing parent declarations.
  *
  * @param indirectParents Whether to include indirect parents.
- * @return A list containing declarations with class or interface parent.
+ * @return A list containing parent declarations.
+ */
+fun <T : KoParentProvider> List<T>.parents(indirectParents: Boolean = false): List<KoParentDeclaration> =
+    flatMap { it.parents(indirectParents) }
+
+/**
+ * List containing declarations with any parent.
+ *
+ * @param indirectParents Whether to include indirect parents.
+ * @return A list containing declarations with any parent.
  */
 fun <T : KoParentProvider> List<T>.withParents(indirectParents: Boolean = false): List<T> =
     filter { it.hasParents(indirectParents) }
 
 /**
- * List containing declarations with no parent - class does not extend any class and does not implement any interface.
+ * List containing declarations with none parent - declaration does not extend any class and does not implement any interface.
  *
  * @param indirectParents Whether to include indirect parents.
- * @return A list containing declarations with no parent - class does not extend any class and does not implement any
+ * @return A list containing declarations with no parent - declaration does not extend any class and does not implement any
  * interface.
  */
 fun <T : KoParentProvider> List<T>.withoutParents(indirectParents: Boolean = false): List<T> =
@@ -276,16 +285,17 @@ fun <T : KoParentProvider> List<T>.withSomeParentsOf(kClass: KClass<*>, vararg k
 @Deprecated("Will be removed in v1.0.0.", ReplaceWith("withoutParentOf(*kClasses"))
 fun <T : KoParentProvider> List<T>.withoutSomeParentsOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
-        it.parents.none { parent -> parent.name == kClass.simpleName } &&
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass ->
-                    it
-                        .parents
-                        .none { parent -> parent.name == kClass.simpleName }
-                }
-            } else {
-                true
+        val missesAtLeastOneParent = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass ->
+                it
+                    .parents
+                    .none { parent -> parent.name == kClass.simpleName }
             }
+        } else {
+            true
+        }
+
+        it.parents.none { parent -> parent.name == kClass.simpleName } && missesAtLeastOneParent
     }
 
 /**
@@ -345,9 +355,11 @@ fun <T : KoParentProvider> List<T>.withoutAllParents(name: String, vararg names:
  */
 @Deprecated("Will be removed in v1.0.0.", ReplaceWith("withoutParentNamed(*names"))
 fun <T : KoParentProvider> List<T>.withoutSomeParents(name: String, vararg names: String): List<T> = filter {
-    !it.hasParents(name) && if (names.isNotEmpty()) {
+    val hasNoMatchingParents = if (names.isNotEmpty()) {
         names.any { name -> !it.hasParents(name) }
     } else {
         true
     }
+
+    !it.hasParents(name) && hasNoMatchingParents
 }

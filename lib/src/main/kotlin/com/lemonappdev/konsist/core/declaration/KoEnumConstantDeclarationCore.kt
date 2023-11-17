@@ -4,7 +4,6 @@ import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoEnumConstantDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoArgumentProviderCore
@@ -24,6 +23,7 @@ import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
+import com.lemonappdev.konsist.core.provider.KoVariableProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoLocalDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
@@ -35,7 +35,7 @@ import org.jetbrains.kotlin.psi.KtValueArgumentList
 
 internal class KoEnumConstantDeclarationCore private constructor(
     override val ktEnumEntry: KtEnumEntry,
-    override val containingDeclaration: KoContainingDeclarationProvider,
+    override val containingDeclaration: KoBaseDeclaration,
 ) : KoEnumConstantDeclaration,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
@@ -46,6 +46,7 @@ internal class KoEnumConstantDeclarationCore private constructor(
     KoLocalClassProviderCore,
     KoLocalDeclarationProviderCore,
     KoLocalFunctionProviderCore,
+    KoVariableProviderCore,
     KoLocationProviderCore,
     KoNameProviderCore,
     KoContainingDeclarationProviderCore,
@@ -82,7 +83,8 @@ internal class KoEnumConstantDeclarationCore private constructor(
             ?.firstOrNull()
             ?.children
             ?.filterIsInstance<KtValueArgument>()
-            ?.map { KoArgumentDeclarationCore.getInstance(it, this) } ?: emptyList()
+            ?.map { KoArgumentDeclarationCore.getInstance(it, this) }
+            .orEmpty()
 
     override fun toString(): String = name
 
@@ -91,7 +93,7 @@ internal class KoEnumConstantDeclarationCore private constructor(
 
         internal fun getInstance(
             ktEnumEntry: KtEnumEntry,
-            containingDeclaration: KoContainingDeclarationProvider,
+            containingDeclaration: KoBaseDeclaration,
         ): KoEnumConstantDeclaration =
             cache.getOrCreateInstance(ktEnumEntry, containingDeclaration) {
                 KoEnumConstantDeclarationCore(ktEnumEntry, containingDeclaration)

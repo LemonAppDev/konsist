@@ -13,7 +13,7 @@ interface KoKDocPropertySetterTagProvider : KoBaseProvider {
     val propertySetterTag: KoKDocTagDeclaration?
 
     /**
-     * Whatever the declaration has property setter tag.
+     * Determines whatever the declaration has property setter tag.
      */
     val hasPropertySetterTag: Boolean
 }

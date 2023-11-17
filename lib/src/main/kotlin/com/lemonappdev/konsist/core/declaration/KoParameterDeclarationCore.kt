@@ -1,9 +1,9 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -14,12 +14,12 @@ import com.lemonappdev.konsist.core.provider.KoDefaultValueProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoNonNullableTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
-import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoCrossInlineModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoNoInlineModifierProviderCore
@@ -37,7 +37,7 @@ import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 
 internal class KoParameterDeclarationCore private constructor(
     override val ktParameter: KtParameter,
-    override val containingDeclaration: KoContainingDeclarationProvider,
+    override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoParameterDeclaration,
     KoBaseProviderCore,
@@ -56,7 +56,7 @@ internal class KoParameterDeclarationCore private constructor(
     KoRepresentsTypeProviderCore,
     KoResideInPackageProviderCore,
     KoTextProviderCore,
-    KoTypeProviderCore,
+    KoNonNullableTypeProviderCore,
     KoVarModifierProviderCore,
     KoValModifierProviderCore,
     KoVarArgModifierProviderCore,
@@ -80,7 +80,7 @@ internal class KoParameterDeclarationCore private constructor(
         KoTypeDeclarationCore.getInstance(type, this)
     }
 
-    override fun representsType(name: String): Boolean = type.name == name || type.fullyQualifiedName == name
+    override fun representsType(name: String?): Boolean = type.name == name || type.fullyQualifiedName == name
 
     override val hasValModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "val" }
 
@@ -91,7 +91,7 @@ internal class KoParameterDeclarationCore private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoParameterDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktParameter: KtParameter, containingDeclaration: KoContainingDeclarationProvider): KoParameterDeclaration =
+        internal fun getInstance(ktParameter: KtParameter, containingDeclaration: KoBaseDeclaration): KoParameterDeclaration =
             cache.getOrCreateInstance(ktParameter, containingDeclaration) { KoParameterDeclarationCore(ktParameter, containingDeclaration) }
     }
 }
