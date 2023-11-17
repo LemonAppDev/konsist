@@ -171,9 +171,9 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$mavenBuildDirectoryName/.*".toMacOsSeparator())
 
         return path.matches(gradleRootBuildDirectoryRegex) ||
-                path.matches(gradleModuleBuildDirectoryRegex) ||
-                path.matches(mavenRootBuildDirectoryRegex) ||
-                path.matches(mavenModuleBuildDirectoryRegex)
+            path.matches(gradleModuleBuildDirectoryRegex) ||
+            path.matches(mavenRootBuildDirectoryRegex) ||
+            path.matches(mavenModuleBuildDirectoryRegex)
     }
 
     /**
