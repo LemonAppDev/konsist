@@ -25,8 +25,12 @@ class KoClassDeclarationForKoParentClassProviderTest {
             countParentClasses { it.hasPrivateModifier } shouldBeEqualTo 0
             hasParentClass() shouldBeEqualTo false
             hasParentClass { it.name == "SampleParentClass" } shouldBeEqualTo false
+            hasParentClasses() shouldBeEqualTo false
+            hasAllParentClasses { it.hasPrivateModifier } shouldBeEqualTo true
             hasParentClassWithName("SampleParentClass") shouldBeEqualTo false
             hasParentClassWithName("SampleParentClass", "OtherClass") shouldBeEqualTo false
+            hasParentClassesWithAllNames("SampleParentClass") shouldBeEqualTo false
+            hasParentClassesWithAllNames("SampleParentClass", "OtherClass") shouldBeEqualTo false
             hasParentClassOf(SampleParentClass::class) shouldBeEqualTo false
             hasParentClassOf(SampleParentClass::class, SampleClass::class) shouldBeEqualTo false
             hasAllParentClassesOf(SampleParentClass::class) shouldBeEqualTo false
@@ -52,9 +56,15 @@ class KoClassDeclarationForKoParentClassProviderTest {
             hasParentClass() shouldBeEqualTo true
             hasParentClass { it.name == "SampleParentClass" } shouldBeEqualTo true
             hasParentClass { it.name == "OtherClass" } shouldBeEqualTo false
+            hasParentClasses() shouldBeEqualTo true
+            hasAllParentClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAllParentClasses { it.hasPrivateModifier } shouldBeEqualTo false
             hasParentClassWithName("SampleParentClass") shouldBeEqualTo true
             hasParentClassWithName("OtherClass") shouldBeEqualTo false
             hasParentClassWithName("SampleParentClass", "OtherClass") shouldBeEqualTo true
+            hasParentClassesWithAllNames("SampleParentClass") shouldBeEqualTo true
+            hasParentClassesWithAllNames("OtherClass") shouldBeEqualTo false
+            hasParentClassesWithAllNames("SampleParentClass", "OtherClass") shouldBeEqualTo false
             hasParentClassOf(SampleParentClass::class) shouldBeEqualTo true
             hasParentClassOf(SampleClass::class) shouldBeEqualTo false
             hasParentClassOf(SampleParentClass::class, SampleClass::class) shouldBeEqualTo true
@@ -83,9 +93,15 @@ class KoClassDeclarationForKoParentClassProviderTest {
             hasParentClass() shouldBeEqualTo true
             hasParentClass { it.name == "SampleParentClass" } shouldBeEqualTo true
             hasParentClass { it.name == "OtherClass" } shouldBeEqualTo false
+            hasParentClasses() shouldBeEqualTo true
+            hasAllParentClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAllParentClasses { it.hasPrivateModifier } shouldBeEqualTo false
             hasParentClassWithName("SampleParentClass") shouldBeEqualTo true
             hasParentClassWithName("OtherClass") shouldBeEqualTo false
             hasParentClassWithName("SampleParentClass", "OtherClass") shouldBeEqualTo true
+            hasParentClassesWithAllNames("SampleParentClass") shouldBeEqualTo true
+            hasParentClassesWithAllNames("OtherClass") shouldBeEqualTo false
+            hasParentClassesWithAllNames("SampleParentClass", "OtherClass") shouldBeEqualTo false
             hasParentClassOf(SampleParentClass::class) shouldBeEqualTo true
             hasParentClassOf(SampleClass::class) shouldBeEqualTo false
             hasParentClassOf(SampleParentClass::class, SampleClass::class) shouldBeEqualTo true
