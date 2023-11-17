@@ -112,9 +112,14 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         require(directory.exists()) { "Directory does not exist: $absolutePath" }
         require(!directory.isFile) { "Path is a file, but should be a directory: $absolutePath" }
 
-        val files = directory.toKoFiles()
+        val files = directory
+            .walk()
+            .filter { it.isKotlinFile }
+            .toList()
 
-        return KoScopeCore(files)
+        val koFiles = getKoFiles(files)
+
+        return KoScopeCore(koFiles)
     }
 
     override fun scopeFromFile(path: String, vararg paths: String): KoScope = scopeFromFiles(setOf(path) + paths)
@@ -129,14 +134,10 @@ internal class KoScopeCreatorCore : KoScopeCreator {
             }
 
         val notKotlinFiles = files
-            .filterNot { it.path.endsWith(".kt") }
+            .filterNot { it.isKotlinFile }
             .map { it.toKoFile() }
 
-        val koFiles = projectKotlinFiles.filter {
-            files.any { file ->
-                file.path == it.path
-            }
-        }
+        val koFiles = getKoFiles(files)
 
         return KoScopeCore(koFiles + notKotlinFiles)
     }
@@ -206,6 +207,12 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         .filter { it.isKotlinFile }
         .map { it.toKoFile() }
         .toList()
+
+    private fun getKoFiles(files: List<File>) = projectKotlinFiles.filter {
+        files.any { file ->
+            file.path == it.path
+        }
+    }
 
     companion object {
         private const val TEST_NAME_IN_PATH = "test"
