@@ -120,16 +120,25 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     override fun scopeFromFile(path: String, vararg paths: String): KoScope = scopeFromFiles(setOf(path) + paths)
 
     override fun scopeFromFiles(paths: Set<String>): KoScope {
-        val koFiles = paths
+        val files = paths
             .map { getAbsolutePath(it) }
             .map { File(it) }
             .onEach {
                 require(it.exists()) { "File does not exist: ${it.absolutePath}" }
                 require(it.isFile) { "Path is a directory, but should be a file: ${it.absolutePath}" }
             }
+
+        val notKotlinFiles = files
+            .filterNot { it.path.endsWith(".kt") }
             .map { it.toKoFile() }
 
-        return KoScopeCore(koFiles)
+        val koFiles = projectKotlinFiles.filter {
+            files.any { file ->
+                file.path == it.path
+            }
+        }
+
+        return KoScopeCore(koFiles + notKotlinFiles)
     }
 
     private fun getAbsolutePath(projectPath: String): String = "$projectRootPath$sep$projectPath"
@@ -153,16 +162,17 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     private fun isBuildOrTargetPath(path: String): Boolean {
         val gradleBuildDirectoryName = "build"
         val gradleRootBuildDirectoryRegex = Regex("$projectRootPath/$gradleBuildDirectoryName/.*".toMacOsSeparator())
-        val gradleModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*".toMacOsSeparator())
+        val gradleModuleBuildDirectoryRegex =
+            Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*".toMacOsSeparator())
 
         val mavenBuildDirectoryName = "target"
         val mavenRootBuildDirectoryRegex = Regex("$projectRootPath/$mavenBuildDirectoryName/.*".toMacOsSeparator())
         val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$mavenBuildDirectoryName/.*".toMacOsSeparator())
 
         return path.matches(gradleRootBuildDirectoryRegex) ||
-            path.matches(gradleModuleBuildDirectoryRegex) ||
-            path.matches(mavenRootBuildDirectoryRegex) ||
-            path.matches(mavenModuleBuildDirectoryRegex)
+                path.matches(gradleModuleBuildDirectoryRegex) ||
+                path.matches(mavenRootBuildDirectoryRegex) ||
+                path.matches(mavenModuleBuildDirectoryRegex)
     }
 
     /**

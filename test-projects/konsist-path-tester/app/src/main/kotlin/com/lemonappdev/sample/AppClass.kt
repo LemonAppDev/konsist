@@ -1,5 +1,7 @@
 package com.lemonappdev.sample
 
+import com.lemonappdev.sample.AppClass
+
 /**
  * App KDoc
  */
