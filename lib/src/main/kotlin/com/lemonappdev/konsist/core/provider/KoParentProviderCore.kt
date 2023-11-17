@@ -6,7 +6,6 @@ import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalParentDeclarationCore
 import com.lemonappdev.konsist.core.model.DataCore
-import com.lemonappdev.konsist.core.util.KClassUtil.checkIfKClassOf
 import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry

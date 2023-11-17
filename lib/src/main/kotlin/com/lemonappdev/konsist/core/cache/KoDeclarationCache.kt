@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.cache
 
-import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry

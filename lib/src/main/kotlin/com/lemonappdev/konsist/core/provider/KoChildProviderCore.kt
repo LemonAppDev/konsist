@@ -52,10 +52,10 @@ internal interface KoChildProviderCore :
         children(indirectChildren).all(predicate)
 
     override fun hasChildOf(name: KClass<*>, vararg names: KClass<*>, indirectChildren: Boolean): Boolean =
-        checkIfKClassOf(name, children(indirectChildren))
-                || names.any { checkIfKClassOf(it, children(indirectChildren)) }
+        checkIfKClassOf(name, children(indirectChildren)) ||
+            names.any { checkIfKClassOf(it, children(indirectChildren)) }
 
     override fun hasAllChildrenOf(name: KClass<*>, vararg names: KClass<*>, indirectChildren: Boolean): Boolean =
-        checkIfKClassOf(name, children(indirectChildren))
-                && names.all { checkIfKClassOf(it, children(indirectChildren)) }
+        checkIfKClassOf(name, children(indirectChildren)) &&
+            names.all { checkIfKClassOf(it, children(indirectChildren)) }
 }

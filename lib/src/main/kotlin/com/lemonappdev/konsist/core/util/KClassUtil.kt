@@ -6,8 +6,8 @@ import kotlin.reflect.KClass
 
 object KClassUtil {
     internal fun <T> checkIfKClassOf(kClass: KClass<*>, list: List<T>): Boolean
-            where T : KoNameProvider,
-                  T : KoFullyQualifiedNameProvider =
+        where T : KoNameProvider,
+              T : KoFullyQualifiedNameProvider =
         list.any { item ->
             item.name == kClass.simpleName || item.fullyQualifiedName == kClass.qualifiedName
         }
