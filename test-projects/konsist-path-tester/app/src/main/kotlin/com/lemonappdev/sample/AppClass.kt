@@ -1,12 +1,10 @@
 package com.lemonappdev.sample
 
-import com.lemonappdev.sample.AppClass
-
 /**
  * App KDoc
  */
 @Suppress("app_argument")
-class AppClass(val appParameter: String) : AppInterface {
+class AppClass(val appParameter: String) : ParentClass(), ParentInterface {
     constructor(otherParameter: Int) : this(otherParameter.toString())
 
     init {
@@ -16,9 +14,15 @@ class AppClass(val appParameter: String) : AppInterface {
     }
 }
 
-interface AppInterface : ParentInterface
+interface ParentInterface : ParentSuperInterface
 
-interface ParentInterface
+interface ParentSuperInterface
+
+interface InterfaceWithoutChildren
+
+open class ParentClass: ParentSuperClass()
+
+open class ParentSuperClass
 
 var appProperty: AppClass = AppClass("")
     get() {

@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.declaration.kointerface
+package com.lemonappdev.konsist.declaration.koclass
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.print
@@ -9,14 +9,14 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoInterfaceForKoChildProviderTest {
+class KoClassForKoChildProviderTest {
     @Test
-    fun `interface without children`() {
+    fun `class without children`() {
         // given
         val sut = Konsist
             .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
-            .interfaces()
-            .withName("InterfaceWithoutChildren")
+            .classes()
+            .withName("AppClass")
             .first()
 
         // then
@@ -25,33 +25,33 @@ class KoInterfaceForKoChildProviderTest {
             numChildren() shouldBeEqualTo 0
             countChildren { it.hasNameStartingWith("Parent") } shouldBeEqualTo 0
             hasChildren() shouldBeEqualTo false
-            hasChildWithName("ParentInterface") shouldBeEqualTo false
-            hasChildrenWithAllNames("ParentInterface") shouldBeEqualTo false
+            hasChildWithName("ParentClass") shouldBeEqualTo false
+            hasChildrenWithAllNames("ParentClass") shouldBeEqualTo false
             hasChild { it.hasNameStartingWith("Parent") } shouldBeEqualTo false
             hasAllChildren { it.hasNameStartingWith("Parent") } shouldBeEqualTo true
         }
     }
 
     @Test
-    fun `interface with direct child`() {
+    fun `class with direct child`() {
         // given
         val sut = Konsist
             .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
-            .interfaces()
-            .withName("ParentSuperInterface")
+            .classes()
+            .withName("ParentSuperClass")
             .first()
 
         // then
         assertSoftly(sut) {
-            children().map { it.name } shouldBeEqualTo listOf("ParentInterface")
+            children().map { it.name } shouldBeEqualTo listOf("ParentClass")
             numChildren() shouldBeEqualTo 1
             countChildren { it.hasNameStartingWith("Parent") } shouldBeEqualTo 1
             countChildren { it.hasNameStartingWith("Other") } shouldBeEqualTo 0
             hasChildren() shouldBeEqualTo true
-            hasChildWithName("ParentInterface") shouldBeEqualTo true
-            hasChildWithName("ParentInterface", "OtherInterface") shouldBeEqualTo true
-            hasChildrenWithAllNames("ParentInterface") shouldBeEqualTo true
-            hasChildrenWithAllNames("ParentInterface", "OtherInterface") shouldBeEqualTo false
+            hasChildWithName("ParentClass") shouldBeEqualTo true
+            hasChildWithName("ParentClass", "OtherClass") shouldBeEqualTo true
+            hasChildrenWithAllNames("ParentClass") shouldBeEqualTo true
+            hasChildrenWithAllNames("ParentClass", "OtherClass") shouldBeEqualTo false
             hasChild { it.hasNameStartingWith("Parent") } shouldBeEqualTo true
             hasChild { it.hasNameStartingWith("Other") } shouldBeEqualTo false
             hasAllChildren { it.hasNameStartingWith("Parent") } shouldBeEqualTo true
@@ -60,26 +60,26 @@ class KoInterfaceForKoChildProviderTest {
     }
 
     @Test
-    fun `interface with indirect children`() {
+    fun `class with indirect children`() {
         // given
         val sut = Konsist
             .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
-            .interfaces()
-            .withName("ParentSuperInterface")
+            .classes()
+            .withName("ParentSuperClass")
             .first()
 
         // then
         assertSoftly(sut) {
-            children(indirectChildren = true).map { it.name } shouldBeEqualTo listOf("AppClass", "ParentInterface")
+            children(indirectChildren = true).map { it.name } shouldBeEqualTo listOf("AppClass", "ParentClass")
             numChildren(indirectChildren = true) shouldBeEqualTo 2
             countChildren(indirectChildren = true) { it.hasNameStartingWith("Parent") } shouldBeEqualTo 1
             countChildren(indirectChildren = true) { it.hasNameStartingWith("App") } shouldBeEqualTo 1
             hasChildren(indirectChildren = true) shouldBeEqualTo true
-            hasChildWithName("ParentInterface", indirectChildren = true) shouldBeEqualTo true
-            hasChildWithName("ParentInterface", "OtherInterface", indirectChildren = true) shouldBeEqualTo true
-            hasChildrenWithAllNames("ParentInterface", indirectChildren = true) shouldBeEqualTo true
-            hasChildrenWithAllNames("ParentInterface", "AppClass", indirectChildren = true) shouldBeEqualTo true
-            hasChildrenWithAllNames("ParentInterface", "OtherInterface", indirectChildren = true) shouldBeEqualTo false
+            hasChildWithName("ParentClass", indirectChildren = true) shouldBeEqualTo true
+            hasChildWithName("ParentClass", "OtherClass", indirectChildren = true) shouldBeEqualTo true
+            hasChildrenWithAllNames("ParentClass", indirectChildren = true) shouldBeEqualTo true
+            hasChildrenWithAllNames("ParentClass", "AppClass", indirectChildren = true) shouldBeEqualTo true
+            hasChildrenWithAllNames("ParentClass", "OtherClass", indirectChildren = true) shouldBeEqualTo false
             hasChild(indirectChildren = true) { it.hasNameStartingWith("Parent") } shouldBeEqualTo true
             hasChild(indirectChildren = true) { it.hasNameStartingWith("Other") } shouldBeEqualTo false
             hasAllChildren(indirectChildren = true) { it.hasNameStartingWith("Parent") || it.hasNameStartingWith("App") }
