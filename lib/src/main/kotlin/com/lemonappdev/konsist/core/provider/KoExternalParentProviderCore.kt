@@ -10,15 +10,6 @@ internal interface KoExternalParentProviderCore :
     KoExternalParentProvider,
     KoBaseProviderCore,
     KoParentProviderCore {
-    @Deprecated("Will be removed in v1.0.0.", replaceWith = ReplaceWith("externalParents()"))
-    override val externalParents: List<KoExternalParentDeclaration>
-        get() = parents()
-            .filterIsInstance<KoExternalParentDeclaration>()
-
-    @Deprecated("Will be removed in v1.0.0.", replaceWith = ReplaceWith("numExternalParents()"))
-    override val numExternalParents: Int
-        get() = externalParents.size
-
     override fun externalParents(indirectParents: Boolean): List<KoExternalParentDeclaration> = parents(indirectParents)
         .filterIsInstance<KoExternalParentDeclaration>()
 

@@ -20,22 +20,6 @@ interface KoParentProvider : KoBaseProvider {
     val numParents: Int
 
     /**
-     * The parents (parent class and parent interfaces) defined directly in the Kotlin file.
-     *
-     * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
-     * @return a list of [KoParentDeclaration] representing the parents of the declaration.
-     */
-    fun parents(indirectParents: Boolean = false): List<KoParentDeclaration>
-
-    /**
-     * The number of parents.
-     *
-     * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
-     * @return The number of parents.
-     */
-    fun numParents(indirectParents: Boolean = false): Int
-
-    /**
      * The parents (parent class and parent interfaces) of the declaration.
      *
      * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.

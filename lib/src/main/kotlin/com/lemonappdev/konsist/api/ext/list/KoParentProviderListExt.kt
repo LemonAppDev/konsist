@@ -23,15 +23,6 @@ fun <T : KoParentProvider> List<T>.parents(indirectParents: Boolean = false): Li
     flatMap { it.parents(indirectParents) }
 
 /**
- * List containing parent declarations.
- *
- * @param indirectParents Whether to include indirect parents.
- * @return A list containing parent declarations.
- */
-fun <T : KoParentProvider> List<T>.parents(indirectParents: Boolean = false): List<KoParentDeclaration> =
-    flatMap { it.parents(indirectParents) }
-
-/**
  * List containing declarations with any parent.
  *
  * @param indirectParents Whether to include indirect parents.

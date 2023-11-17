@@ -59,7 +59,6 @@ interface KoClassDeclaration :
     KoChildProvider,
     KoFullyQualifiedNameProvider,
     KoNameProvider,
-    KoParentDeclaration,
     KoAnnotationProvider,
     KoClassProvider,
     KoEnumConstantProvider,
