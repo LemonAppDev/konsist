@@ -37,7 +37,8 @@ class KoScopeFromModuleTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koannotation/KoAnnotationForKoSourceSetProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koargument/KoArgumentForKoModuleProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koargument/KoArgumentForKoSourceSetProviderTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/declaration/kochild/KoChildDeclarationForKoFullyQualifiedNameProviderTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/declaration/kochild/KoChildDeclarationForKoFullyQualifiedName"+
+"ProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/kochild/KoChildDeclarationForKoNameProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/kochild/KoChildDeclarationForKoPackageProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/kochild/KoChildDeclarationForKoResideInPackageProviderTest.kt",
@@ -152,7 +153,8 @@ class KoScopeFromModuleTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koannotation/KoAnnotationForKoSourceSetProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koargument/KoArgumentForKoModuleProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koargument/KoArgumentForKoSourceSetProviderTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/declaration/kochild/KoChildDeclarationForKoFullyQualifiedNameProviderTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/declaration/kochild/KoChildDeclarationForKoFullyQualifiedName"+
+"ProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/kochild/KoChildDeclarationForKoNameProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/kochild/KoChildDeclarationForKoPackageProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/kochild/KoChildDeclarationForKoResideInPackageProviderTest.kt",
