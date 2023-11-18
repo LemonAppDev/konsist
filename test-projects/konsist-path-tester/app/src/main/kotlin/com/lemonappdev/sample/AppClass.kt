@@ -6,7 +6,7 @@ import com.lemonappdev.sample.AppClass
  * App KDoc
  */
 @Suppress("app_argument")
-class AppClass(val appParameter: String) : ParentClass(), ParentInterface {
+open class AppClass(val appParameter: String) : ParentClass(), ParentInterface {
     constructor(otherParameter: Int) : this(otherParameter.toString())
 
     init {
@@ -21,6 +21,8 @@ interface ParentInterface : ParentSuperInterface
 interface ParentSuperInterface
 
 interface InterfaceWithoutChildren
+
+object SampleObject: AppClass("")
 
 open class ParentClass: ParentSuperClass()
 
