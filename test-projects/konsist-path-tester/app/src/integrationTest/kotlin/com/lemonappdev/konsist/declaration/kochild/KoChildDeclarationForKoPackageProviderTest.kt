@@ -34,7 +34,7 @@ class KoChildDeclarationForKoPackageProviderTest {
         val sut = Konsist
             .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
             .classes()
-            .withName("AppClass")
+            .withName("ParentClassForObject")
             .children()
             .first()
 
