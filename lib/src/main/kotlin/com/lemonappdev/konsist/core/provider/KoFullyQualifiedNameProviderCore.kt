@@ -21,13 +21,7 @@ internal interface KoFullyQualifiedNameProviderCore :
             if (fqn == null) {
                 fqn = containingFile
                     .declarations()
-                    .filterNot {
-                        if (this is KoAnnotationDeclaration) {
-                            it is KoAnnotationDeclaration
-                        } else {
-                            false
-                        }
-                    }
+                    .filterNot { this is KoAnnotationDeclaration && it is KoAnnotationDeclaration }
                     .mapNotNull { (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName }
                     .firstOrNull { it.contains(textUsedToFqn) }
             }
