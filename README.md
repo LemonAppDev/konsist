@@ -27,7 +27,7 @@ testImplementation "com.lemonappdev:konsist:0.13.0"
 ```
 
 Check the [Konsist documentation](https://docs.konsist.lemonappdev.com/) to learn more about Konsist and take a 
-look at [getting started guide](https://docs.konsist.lemonappdev.com/getting-started/gettingstarted).
+look at [getting started guide](https://docs.konsist.lemonappdev.com/getting-started/getting-started).
 
 ## Examples
 
