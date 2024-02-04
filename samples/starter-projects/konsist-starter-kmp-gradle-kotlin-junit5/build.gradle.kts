@@ -43,7 +43,7 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-server-netty:2.3.5")
-                implementation("io.ktor:ktor-server-html-builder-jvm:2.3.5")
+                implementation("io.ktor:ktor-server-html-builder-jvm:2.3.8")
                 implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.10.0")
             }
         }
