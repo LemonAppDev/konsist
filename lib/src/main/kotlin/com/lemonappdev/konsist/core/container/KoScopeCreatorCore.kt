@@ -112,24 +112,34 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         require(directory.exists()) { "Directory does not exist: $absolutePath" }
         require(!directory.isFile) { "Path is a file, but should be a directory: $absolutePath" }
 
-        val files = directory.toKoFiles()
+        val files = directory
+            .walk()
+            .filter { it.isKotlinFile }
+            .toList()
 
-        return KoScopeCore(files)
+        val koFiles = getKoFiles(files)
+
+        return KoScopeCore(koFiles)
     }
 
     override fun scopeFromFile(path: String, vararg paths: String): KoScope = scopeFromFiles(setOf(path) + paths)
 
     override fun scopeFromFiles(paths: Set<String>): KoScope {
-        val koFiles = paths
+        val files = paths
             .map { getAbsolutePath(it) }
             .map { File(it) }
             .onEach {
                 require(it.exists()) { "File does not exist: ${it.absolutePath}" }
                 require(it.isFile) { "Path is a directory, but should be a file: ${it.absolutePath}" }
             }
+
+        val notKotlinFiles = files
+            .filterNot { it.isKotlinFile }
             .map { it.toKoFile() }
 
-        return KoScopeCore(koFiles)
+        val koFiles = getKoFiles(files)
+
+        return KoScopeCore(koFiles + notKotlinFiles)
     }
 
     private fun getAbsolutePath(projectPath: String): String = "$projectRootPath$sep$projectPath"
@@ -153,7 +163,8 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     private fun isBuildOrTargetPath(path: String): Boolean {
         val gradleBuildDirectoryName = "build"
         val gradleRootBuildDirectoryRegex = Regex("$projectRootPath/$gradleBuildDirectoryName/.*".toMacOsSeparator())
-        val gradleModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*".toMacOsSeparator())
+        val gradleModuleBuildDirectoryRegex =
+            Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*".toMacOsSeparator())
 
         val mavenBuildDirectoryName = "target"
         val mavenRootBuildDirectoryRegex = Regex("$projectRootPath/$mavenBuildDirectoryName/.*".toMacOsSeparator())
@@ -196,6 +207,12 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         .filter { it.isKotlinFile }
         .map { it.toKoFile() }
         .toList()
+
+    private fun getKoFiles(files: List<File>) = projectKotlinFiles.filter {
+        files.any { file ->
+            file.path == it.path
+        }
+    }
 
     companion object {
         private const val TEST_NAME_IN_PATH = "test"

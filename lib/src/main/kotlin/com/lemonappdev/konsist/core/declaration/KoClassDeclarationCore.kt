@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoChildProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoConstructorProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -62,8 +63,11 @@ internal class KoClassDeclarationCore private constructor(
     override val ktClass: KtClass,
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoClassDeclaration,
+    KoParentDeclarationCore,
+    KoChildDeclarationCore,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
+    KoChildProviderCore,
     KoClassProviderCore,
     KoEnumConstantProviderCore,
     KoConstructorProviderCore,

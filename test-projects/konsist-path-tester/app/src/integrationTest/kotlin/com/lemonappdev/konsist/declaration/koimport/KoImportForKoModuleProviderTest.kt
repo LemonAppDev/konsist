@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.declaration.koimport
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.ext.list.print
 import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetProjectDirectory
@@ -20,6 +21,7 @@ class KoImportForKoModuleProviderTest {
         val sut = Konsist
             .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
             .imports
+            .print("&&&&&&&&&&&&&&&") { it.name}
             .first()
 
         // then

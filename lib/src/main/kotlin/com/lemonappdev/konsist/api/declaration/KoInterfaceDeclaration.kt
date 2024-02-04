@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoChildProvider
 import com.lemonappdev.konsist.api.provider.KoClassProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
@@ -38,7 +39,9 @@ import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvide
 interface KoInterfaceDeclaration :
     KoParentDeclaration,
     KoBaseDeclaration,
+    KoChildDeclaration,
     KoBaseProvider,
+    KoChildProvider,
     KoFullyQualifiedNameProvider,
     KoNameProvider,
     KoAnnotationProvider,

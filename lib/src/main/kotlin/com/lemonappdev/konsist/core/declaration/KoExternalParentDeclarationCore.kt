@@ -3,13 +3,15 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.core.cache.KoExternalParentCache
+import com.lemonappdev.konsist.core.provider.KoChildProviderCore
 import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
 internal class KoExternalParentDeclarationCore(name: String, private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
     KoExternalParentDeclaration,
-    KoParentDeclarationCore {
+    KoParentDeclarationCore,
+    KoChildProviderCore {
     override val ktElement: KtElement by lazy { ktSuperTypeListEntry }
 
     override val name: String by lazy {
