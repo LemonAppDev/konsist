@@ -13,9 +13,9 @@ class GitProjectRootDirResolverTest {
         // given
         val file = mockk<File>()
         val pathVerifier = mockk<PathVerifier>()
-        every { pathVerifier.verifyPathIfExists(file, "./.git/config") } returns true
-        every { pathVerifier.verifyPathIfExists(file, "./.git/HEAD") } returns true
-        every { pathVerifier.verifyPathIfExists(file, "./.git/refs") } returns true
+        every { pathVerifier.verifyPathIfExists(file, ".git/config") } returns true
+        every { pathVerifier.verifyPathIfExists(file, ".git/HEAD") } returns true
+        every { pathVerifier.verifyPathIfExists(file, ".git/refs") } returns true
         val sut = GitProjectRootDirResolver(pathVerifier)
 
         // when
