@@ -16,7 +16,7 @@ internal interface KoFullyQualifiedNameProviderCore :
             var fqn = containingFile
                 .imports
                 .map { it.name }
-                .firstOrNull { it.contains(textUsedToFqn) }
+                .firstOrNull { it.isFullyQualifiedName() }
 
             if (fqn == null) {
                 fqn = containingFile
@@ -29,9 +29,11 @@ internal interface KoFullyQualifiedNameProviderCore :
                         }
                     }
                     .mapNotNull { (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName }
-                    .firstOrNull { it.contains(textUsedToFqn) }
+                    .firstOrNull { it.isFullyQualifiedName() }
             }
 
             return fqn ?: textUsedToFqn
         }
+
+    fun String.isFullyQualifiedName() = split(".").last() == textUsedToFqn
 }
