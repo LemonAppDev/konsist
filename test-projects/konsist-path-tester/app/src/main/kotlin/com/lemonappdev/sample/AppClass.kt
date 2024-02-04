@@ -1,12 +1,13 @@
 package com.lemonappdev.sample
 
 import com.lemonappdev.sample.AppClass
+import sun.jvm.hotspot.oops.CellTypeState.value
 
 /**
  * App KDoc
  */
 @Suppress("app_argument")
-class AppClass(val appParameter: String) : AppInterface {
+ class AppClass(val appParameter: String) : ParentClass(), ParentInterface {
     constructor(otherParameter: Int) : this(otherParameter.toString())
 
     init {
@@ -16,7 +17,19 @@ class AppClass(val appParameter: String) : AppInterface {
     }
 }
 
-interface AppInterface
+interface ParentInterface : ParentSuperInterface
+
+interface ParentSuperInterface
+
+interface InterfaceWithoutChildren
+
+object SampleObject: ParentClassForObject()
+
+open class ParentClass: ParentSuperClass()
+
+open class ParentSuperClass
+
+open class ParentClassForObject
 
 var appProperty: AppClass = AppClass("")
     get() {

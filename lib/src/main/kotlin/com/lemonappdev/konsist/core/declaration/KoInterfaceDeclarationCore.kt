@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoChildProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -48,8 +49,11 @@ internal class KoInterfaceDeclarationCore private constructor(
     override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoInterfaceDeclaration,
+    KoParentDeclarationCore,
+    KoChildDeclarationCore,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
+    KoChildProviderCore,
     KoClassProviderCore,
     KoContainingFileProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
