@@ -1,3 +1,4 @@
+import com.lemonappdev.konsist.testdata.AnotherList
 import com.lemonappdev.konsist.testdata.SampleType
 
 class SampleClass1(val sampleProperty1: List<SampleType?>)
