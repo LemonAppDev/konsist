@@ -4,7 +4,7 @@ This a [Konsist](https://github.com/LemonAppDev/konsist) sample is configured us
 [Gradle](https://docs.gradle.org/current/userguide/userguide.html),
 [Kotlin](https://kotlinlang.org/) (build script language), 
 [Spring](https://spring.io/),
-and [KoTest](https://kotest.io).
+and [Kotest](https://kotest.io).
 
 Other samples are located [here](..).
 

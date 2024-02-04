@@ -3,7 +3,7 @@
 This a [Konsist](https://github.com/LemonAppDev/konsist) sample is configured using 
 [Gradle](https://docs.gradle.org/current/userguide/userguide.html),
 [Groovy](https://groovy-lang.org/) (build script language),
-and [KoTest](https://kotest.io/).
+and [Kotest](https://kotest.io/).
 
 Other samples are located [here](..).
 Konsist tests are located in inside `konsistTest` module:

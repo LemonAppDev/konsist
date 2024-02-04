@@ -2,7 +2,7 @@
 
 This a [Konsist](https://github.com/LemonAppDev/konsist) sample is configured using [Maven](https://maven.apache.org),
 [Spring](https://spring.io/),
-and [KoTest](https://kotest.io).
+and [Kotest](https://kotest.io).
 
 Other samples are located [here](..).
 
