@@ -25,7 +25,7 @@ jobs:
       - name: JUnit Test
         run: ./gradlew :lib:test
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: junit-test-report
           path: ./lib/build/test-results/test/
@@ -46,7 +46,7 @@ jobs:
       - name: Konsist Test
         run: ./gradlew lib:konsistTest
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: konsist-test-report
           path: ./lib/build/test-results/konsistTest/
@@ -67,7 +67,7 @@ jobs:
       - name: Integration Test
         run: ./gradlew lib:integrationTest
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: integration-test-report
           path: ./lib/build/test-results/integrationTest/
@@ -88,7 +88,7 @@ jobs:
       - name: Api Test
         run: ./gradlew lib:apiTest
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: api-test-report
           path: ./lib/build/test-results/apiTest/
@@ -127,7 +127,7 @@ jobs:
       - name: Detekt
         run: ./gradlew detektCheck
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: detekt-report
           path: ./**/build/reports/detekt/detekt.*
@@ -261,12 +261,12 @@ jobs:
       - name: List artifacts
         run: ls -R ~/.m2/repository/
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: konsist.jar
           path: lib/build/libs/lib.jar
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: konsist-XXX-SNAPSHOT.jar
           path: /home/runner/.m2/repository/com/lemonappdev/konsist/*
@@ -295,7 +295,7 @@ jobs:
       - name: Dokka Generate Html Doc
         run: ./gradlew lib:dokkaHtml
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: dokka-html-doc.jar
           path: ./lib/build/dokka/*
