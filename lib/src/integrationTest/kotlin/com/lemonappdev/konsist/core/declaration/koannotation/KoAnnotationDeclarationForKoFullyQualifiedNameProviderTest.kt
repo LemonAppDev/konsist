@@ -6,6 +6,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoAnnotationDeclarationForKoFullyQualifiedNameProviderTest {
+
     @Test
     fun `annotation-fully-qualified-name`() {
         // given
@@ -17,6 +18,19 @@ class KoAnnotationDeclarationForKoFullyQualifiedNameProviderTest {
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleAnnotation"
+    }
+
+    @Test
+    fun `annotation-fully-qualified-name-when-other-import-contains-its-name`() {
+        // given
+        val sut = getSnippetFile("annotation-fully-qualified-name-when-other-import-contains-its-name")
+            .functions()
+            .first()
+            .annotations
+            .first()
+
+        // then
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.testpackage.Annotation"
     }
 
     @Test
