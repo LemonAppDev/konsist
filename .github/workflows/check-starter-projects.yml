@@ -48,8 +48,8 @@ jobs:
       all_changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
       head_commit_message: ${{ github.event.head_commit.message }}
 
-  konsist-starter-android-gradle-groovy-junit-4:
-    name: Konsist Starter Android Gradle Groovy Junit 4
+  android-gradle-groovy-junit-4:
+    name: Android Gradle Groovy Junit 4
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
@@ -86,8 +86,8 @@ jobs:
       - name: Run Konsist Test
         run: cd samples/starter-projects/android-gradle-groovy-junit-4/ && ./gradlew konsistTest:test
 
-  konsist-starter-android-gradle-groovy-junit-5:
-    name: Konsist Starter Android Gradle Groovy Junit 5
+  android-gradle-groovy-junit-5:
+    name: Android Gradle Groovy Junit 5
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
@@ -124,8 +124,8 @@ jobs:
       - name: Run Konsist Test
         run: cd samples/starter-projects/android-gradle-groovy-junit-5/ && ./gradlew konsistTest:test
 
-  konsist-starter-android-gradle-groovy-kotest:
-    name: Konsist Starter Android Gradle Groovy Kotest
+  android-gradle-groovy-kotest:
+    name: Android Gradle Groovy Kotest
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
@@ -162,8 +162,8 @@ jobs:
       - name: Run Konsist Test
         run: cd samples/starter-projects/android-gradle-groovy-kotest/ && ./gradlew konsistTest:test
 
-  konsist-starter-android-gradle-kotlin-junit-4:
-    name: Konsist Starter Android Gradle Kotlin Junit 4
+  android-gradle-kotlin-junit-4:
+    name: Android Gradle Kotlin Junit 4
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
@@ -200,8 +200,8 @@ jobs:
       - name: Run Konsist Test
         run: cd samples/starter-projects/android-gradle-kotlin-junit-4/ && ./gradlew konsistTest:test
 
-  konsist-starter-android-gradle-kotlin-junit-5:
-    name: Konsist Starter Android Gradle Kotlin Junit 5
+  android-gradle-kotlin-junit-5:
+    name: Android Gradle Kotlin Junit 5
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
@@ -238,8 +238,8 @@ jobs:
       - name: Run Konsist Test
         run: cd samples/starter-projects/android-gradle-kotlin-junit-5/ && ./gradlew konsistTest:test
 
-  konsist-starter-android-gradle-kotlin-kotest:
-    name: Konsist Starter Android Gradle Kotlin Kotest
+  android-gradle-kotlin-kotest:
+    name: Android Gradle Kotlin Kotest
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
@@ -276,8 +276,8 @@ jobs:
       - name: Run Konsist Test
         run: cd samples/starter-projects/android-gradle-kotlin-kotest/ && ./gradlew konsistTest:test
 
-  konsist-starter-spring-gradle-kotlin-junit-5:
-    name: Konsist Starter Spring Gradle Kotlin Junit 5
+  spring-gradle-kotlin-junit-5:
+    name: Spring Gradle Kotlin Junit 5
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
@@ -314,8 +314,8 @@ jobs:
       - name: Run Konsist Test
         run: cd samples/starter-projects/spring-gradle-kotlin-junit-5/ && ./gradlew konsistTest
 
-  konsist-starter-spring-gradle-kotlin-kotest:
-    name: Konsist Starter Spring Gradle Groovy Kotest
+  spring-gradle-kotlin-kotest:
+    name: Spring Gradle Groovy Kotest
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
@@ -352,8 +352,8 @@ jobs:
       - name: Run Konsist Test
         run: cd samples/starter-projects/spring-gradle-kotlin-kotest/ && ./gradlew konsistTest
 
-  konsist-starter-spring-gradle-groovy-junit-5:
-    name: Konsist Starter Spring Gradle Groovy Junit 5
+  spring-gradle-groovy-junit-5:
+    name: Spring Gradle Groovy Junit 5
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
@@ -391,8 +391,8 @@ jobs:
         run: cd samples/starter-projects/spring-gradle-groovy-junit-5/ && ./gradlew konsistTest
 
 
-  konsist-starter-spring-gradle-groovy-kotest:
-    name: Konsist Starter Spring Gradle Groovy Kotest
+  spring-gradle-groovy-kotest:
+    name: Spring Gradle Groovy Kotest
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
@@ -429,8 +429,8 @@ jobs:
       - name: Run Konsist Test
         run: cd samples/starter-projects/spring-gradle-groovy-kotest/ && ./gradlew konsistTest
 
-  konsist-starter-spring-maven-junit5:
-    name: Konsist Starter Spring Maven Junit 5
+  spring-maven-junit5:
+    name: Spring Maven Junit 5
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
@@ -468,8 +468,8 @@ jobs:
         run: cd samples/starter-projects/spring-maven-junit5/ && mvn test
 
 
-  konsist-starter-spring-maven-kotest:
-    name: Konsist Starter Spring Maven Kotest
+  spring-maven-kotest:
+    name: Spring Maven Kotest
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
@@ -506,8 +506,8 @@ jobs:
       - name: Run Konsist Test
         run: cd samples/starter-projects/spring-maven-kotest/ && mvn test
 
-#  konsist-starter-kmp-gradle-kotlin-junit5:
-#    name: Konsist Starter KMP Gradle Kotlin Junit 5
+#  kmp-gradle-kotlin-junit5:
+#    name: KMP Gradle Kotlin Junit 5
 #    needs: get-github-context
 #    runs-on: ubuntu-latest
 #    if: |
@@ -545,8 +545,8 @@ jobs:
 #        run: cd samples/starter-projects/kmp-gradle-kotlin-junit5/ && ./gradlew test
 
 
-#  konsist-starter-kmp-gradle-kotlin-kotest:
-#    name: Konsist Starter KMP Gradle Kotlin Kotest
+#  kmp-gradle-kotlin-kotest:
+#    name: KMP Gradle Kotlin Kotest
 #    needs: get-github-context
 #    runs-on: ubuntu-latest
 #    if: |
