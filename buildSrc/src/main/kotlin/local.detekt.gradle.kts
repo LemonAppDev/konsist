@@ -41,7 +41,7 @@ configure(listOf(detektCheck, detektApply)) {
             "**/build/**",
             "**/target/**",
             "**/generated/**",
-            "**/samples/starter-projects/**",
+            "**/samples/starter-projects/konsist-starter-kmp-**",
         )
 
         reports {
