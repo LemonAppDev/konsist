@@ -13,8 +13,8 @@ class GitProjectRootDirResolver(
     Description of the '.git' directory https://githowto.com/git_internals_git_directory
      */
     override val paths = setOf(
-        "./.git/config".toOsSeparator(),
-        "./.git/HEAD".toOsSeparator(),
-        "./.git/refs".toOsSeparator(),
+        ".git/config".toOsSeparator(),
+        ".git/HEAD".toOsSeparator(),
+        ".git/refs".toOsSeparator(),
     )
 }

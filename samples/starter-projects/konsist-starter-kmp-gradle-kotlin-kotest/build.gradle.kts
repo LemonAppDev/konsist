@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform") version "1.9.10"
     id("io.kotest.multiplatform") version "5.7.2"
     application
+    id("com.android.application")
 }
 
 group = "org.example"
@@ -10,6 +11,7 @@ version = "1.0-SNAPSHOT"
 repositories {
     mavenCentral()
     mavenLocal()
+    google()
     maven("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven")
 }
 
