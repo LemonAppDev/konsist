@@ -43,7 +43,7 @@ testing {
                 implementation("com.lemonappdev:konsist:0.13.0")
 
                 // Add junit-jupiter-params dependency (required for dynamic Tests)
-                implementation("org.junit.jupiter:junit-jupiter-params:5.10.1")
+                implementation("org.junit.jupiter:junit-jupiter-params:5.10.2")
             }
         }
     }
