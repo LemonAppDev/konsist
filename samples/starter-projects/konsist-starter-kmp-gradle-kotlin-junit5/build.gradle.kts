@@ -1,6 +1,7 @@
 plugins {
-    kotlin("multiplatform") version "1.9.10"
+    kotlin("multiplatform") version "1.9.20"
     application
+    id("com.android.application")
 }
 
 group = "org.example"
