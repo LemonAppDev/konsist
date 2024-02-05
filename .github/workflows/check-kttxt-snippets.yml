@@ -59,7 +59,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: 21
-          distribution: 'zulu'
+          distribution: 'corretto'
 
       - name: Filter Changed .kttxt Files
         run: |
