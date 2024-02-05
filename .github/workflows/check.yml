@@ -167,7 +167,7 @@ jobs:
         with:
           java-version: |
             8
-            19
+            21
           distribution: 'zulu'
 
       - name: Publish
