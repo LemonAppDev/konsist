@@ -19,7 +19,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
+          java-version: 21
           distribution: 'zulu'
 
       - name: JUnit Test
@@ -40,7 +40,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
+          java-version: 21
           distribution: 'zulu'
 
       - name: Konsist Test
@@ -61,7 +61,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
+          java-version: 21
           distribution: 'zulu'
 
       - name: Integration Test
@@ -82,7 +82,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
+          java-version: 21
           distribution: 'zulu'
 
       - name: Api Test
@@ -105,7 +105,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
+          java-version: 21
           distribution: 'zulu'
 
       - name: Spotless
@@ -121,7 +121,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
+          java-version: 21
           distribution: 'zulu'
 
       - name: Detekt
@@ -144,7 +144,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
+          java-version: 21
           distribution: 'zulu'
 
       - name: Publish
@@ -188,7 +188,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
+          java-version: 21
           distribution: 'zulu'
 
       - name: Publish
@@ -239,7 +239,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
+          java-version: 21
           distribution: 'zulu'
 
       - name: Set up Python
@@ -289,7 +289,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
+          java-version: 21
           distribution: 'zulu'
 
       - name: Dokka Generate Html Doc
