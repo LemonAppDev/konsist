@@ -11,7 +11,7 @@ dependencies {
 }
 
 kotlin {
-    jvmToolchain(19)
+    jvmToolchain(21)
 }
 
 fun DependencyHandlerScope.plugin(plugin: Provider<PluginDependency>) =

@@ -19,8 +19,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: JUnit Test
         run: ./gradlew :lib:test
@@ -40,8 +40,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Konsist Test
         run: ./gradlew lib:konsistTest
@@ -61,8 +61,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Integration Test
         run: ./gradlew lib:integrationTest
@@ -82,8 +82,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Api Test
         run: ./gradlew lib:apiTest
@@ -105,8 +105,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Spotless
         run: ./gradlew spotlessCheck
@@ -121,8 +121,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Detekt
         run: ./gradlew detektCheck
@@ -144,8 +144,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Publish
         run: >
@@ -167,8 +167,8 @@ jobs:
         with:
           java-version: |
             8
-            19
-          distribution: 'zulu'
+            21
+          distribution: 'corretto'
 
       - name: Publish
         run: >
@@ -188,8 +188,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Publish
         run: >
@@ -214,8 +214,8 @@ jobs:
         with:
           java-version: |
             8
-            19
-          distribution: 'zulu'
+            21
+          distribution: 'corretto'
 
       - name: Publish
         run: >
@@ -239,8 +239,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -289,8 +289,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Dokka Generate Html Doc
         run: ./gradlew lib:dokkaHtml
