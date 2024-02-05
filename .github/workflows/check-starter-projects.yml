@@ -65,8 +65,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -103,8 +103,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -141,8 +141,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -179,8 +179,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -217,8 +217,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -255,8 +255,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -293,8 +293,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -331,8 +331,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -369,8 +369,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -408,8 +408,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -446,8 +446,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -485,8 +485,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -523,8 +523,8 @@ jobs:
 #      - name: Set up JDK
 #        uses: actions/setup-java@v3
 #        with:
-#          java-version: 19
-#          distribution: 'zulu'
+#          java-version: 21
+#          distribution: 'corretto'
 #
 #      - name: Set up Python
 #        uses: actions/setup-python@v4
@@ -562,8 +562,8 @@ jobs:
 #      - name: Set up JDK
 #        uses: actions/setup-java@v3
 #        with:
-#          java-version: 19
-#          distribution: 'zulu'
+#          java-version: 21
+#          distribution: 'corretto'
 #
 #      - name: Set up Python
 #        uses: actions/setup-python@v4

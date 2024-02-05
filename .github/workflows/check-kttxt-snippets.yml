@@ -58,8 +58,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Filter Changed .kttxt Files
         run: |
