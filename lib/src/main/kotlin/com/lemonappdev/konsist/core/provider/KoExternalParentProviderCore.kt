@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoExternalParentProvider
-import com.lemonappdev.konsist.core.util.KClassUtil.checkIfKClassOf
 import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
 import kotlin.reflect.KClass
 
