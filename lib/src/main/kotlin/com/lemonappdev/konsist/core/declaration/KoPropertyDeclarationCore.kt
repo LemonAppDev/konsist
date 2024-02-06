@@ -25,7 +25,6 @@ import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSetterProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
-import com.lemonappdev.konsist.core.provider.KoTacitTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.KoValueProviderCore
@@ -104,8 +103,7 @@ internal class KoPropertyDeclarationCore private constructor(
     KoExpectModifierProviderCore,
     KoConstModifierProviderCore,
     KoGetterProviderCore,
-    KoSetterProviderCore,
-    KoTacitTypeProviderCore {
+    KoSetterProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }
 
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktCallableDeclaration }

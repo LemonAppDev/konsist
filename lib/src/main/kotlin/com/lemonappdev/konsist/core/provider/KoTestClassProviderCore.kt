@@ -3,8 +3,10 @@ package com.lemonappdev.konsist.core.provider
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.provider.KoNameProvider
-import com.lemonappdev.konsist.api.provider.KoTacitTypeProvider
+import com.lemonappdev.konsist.api.provider.KoNullableTypeProvider
 import com.lemonappdev.konsist.api.provider.KoTestClassProvider
+import com.lemonappdev.konsist.api.provider.KoValueProvider
+import com.lemonappdev.konsist.core.ext.hasTacitType
 
 internal interface KoTestClassProviderCore : KoTestClassProvider, KoNameProviderCore, KoBaseProviderCore {
     override fun testClasses(
@@ -53,4 +55,5 @@ internal interface KoTestClassProviderCore : KoTestClassProvider, KoNameProvider
 
 private fun <T> T.hasTestProperty(name: String, type: String) where
       T : KoNameProvider,
-      T : KoTacitTypeProvider = this.name == name && hasTacitType(type)
+      T : KoNullableTypeProvider,
+      T: KoValueProvider = this.name == name && hasTacitType(type)
