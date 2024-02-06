@@ -1,14 +1,14 @@
 [versions]
-kotlinVersion = "1.9.20"
-jUnitVersion = "5.10.1"
+kotlinVersion = "1.9.22"
+jUnitVersion = "5.10.2"
 
 [libraries]
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlinVersion" }
 junitJupiterEngine =  { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "jUnitVersion" }
 junitJupiterParams =  { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "jUnitVersion" }
-koTest =  "io.kotest:kotest-runner-junit5:5.8.0"
+kotest =  "io.kotest:kotest-runner-junit5:5.8.0"
 kluent = "org.amshove.kluent:kluent:1.73"
-mockk = "io.mockk:mockk:1.13.7"
+mockk = "io.mockk:mockk:1.13.9"
 kotlin-compiler = { module = "org.jetbrains.kotlin:kotlin-compiler", version.ref = "kotlinVersion" }
 
 [bundles]
@@ -20,4 +20,4 @@ kotlin-plugin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kot
 dokka = "org.jetbrains.dokka:1.9.10"
 spotless = "com.diffplug.spotless:6.21.0"
 testLogger = "com.adarshr.test-logger:4.0.0"
-detekt = "io.gitlab.arturbosch.detekt:1.23.3"
+detekt = "io.gitlab.arturbosch.detekt:1.23.5"

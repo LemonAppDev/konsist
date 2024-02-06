@@ -1,8 +1,8 @@
 plugins {
-    id("org.springframework.boot") version "3.1.5"
-    id("io.spring.dependency-management") version "1.1.3"
-    kotlin("jvm") version "1.9.20"
-    kotlin("plugin.spring") version "1.9.20"
+    id("org.springframework.boot") version "3.2.2"
+    id("io.spring.dependency-management") version "1.1.4"
+    kotlin("jvm") version "1.9.22"
+    kotlin("plugin.spring") version "1.9.22"
     `jvm-test-suite`
 }
 
@@ -43,7 +43,7 @@ testing {
                 implementation("com.lemonappdev:konsist:0.13.0")
 
                 // Add junit-jupiter-params dependency (required for dynamic Tests)
-                implementation("org.junit.jupiter:junit-jupiter-params:5.10.1")
+                implementation("org.junit.jupiter:junit-jupiter-params:5.10.2")
             }
         }
     }
