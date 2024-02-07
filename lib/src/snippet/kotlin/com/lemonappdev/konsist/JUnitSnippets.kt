@@ -33,7 +33,7 @@ class JUnitSnippets {
                     .properties()
                     .firstOrNull { property -> property.name == "sut" }
 
-                sut != null && (sut.type?.name == type || sut.text.contains("$type("))
+                sut != null && sut.hasTacitType(type)
             }
     }
 

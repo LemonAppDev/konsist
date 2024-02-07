@@ -37,12 +37,13 @@ class KoScopeFromModuleTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koannotation/KoAnnotationForKoSourceSetProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koargument/KoArgumentForKoModuleProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koargument/KoArgumentForKoSourceSetProviderTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/declaration/kochild/KoChildDeclarationForKoFullyQualifiedName"+
-"ProviderTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/declaration/kochild/KoChildDeclarationForKoFullyQualifiedName" +
+                        "ProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/kochild/KoChildDeclarationForKoNameProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/kochild/KoChildDeclarationForKoPackageProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/kochild/KoChildDeclarationForKoResideInPackageProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koclass/KoClassDeclarationForKoHasTestClassProviderTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/declaration/koclass/KoClassDeclarationForKoTestClassProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koclass/KoClassForKoChildProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koclass/KoClassForKoModuleProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koclass/KoClassForKoSourceSetProviderTest.kt",
@@ -85,6 +86,7 @@ class KoScopeFromModuleTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/sample/AppTestClasses.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
                 "$appMainSourceSetDirectory/sample/AppClass.kt",
                 "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
@@ -106,6 +108,7 @@ class KoScopeFromModuleTest {
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$dataTestSourceSetDirectory/sample/LibTestClasses.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )
@@ -153,12 +156,13 @@ class KoScopeFromModuleTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koannotation/KoAnnotationForKoSourceSetProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koargument/KoArgumentForKoModuleProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koargument/KoArgumentForKoSourceSetProviderTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/declaration/kochild/KoChildDeclarationForKoFullyQualifiedName"+
-"ProviderTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/declaration/kochild/KoChildDeclarationForKoFullyQualifiedName" +
+                        "ProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/kochild/KoChildDeclarationForKoNameProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/kochild/KoChildDeclarationForKoPackageProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/kochild/KoChildDeclarationForKoResideInPackageProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koclass/KoClassDeclarationForKoHasTestClassProviderTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/declaration/koclass/KoClassDeclarationForKoTestClassProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koclass/KoClassForKoChildProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koclass/KoClassForKoModuleProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koclass/KoClassForKoSourceSetProviderTest.kt",
@@ -201,6 +205,7 @@ class KoScopeFromModuleTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/sample/AppTestClasses.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
                 "$appMainSourceSetDirectory/sample/AppClass.kt",
                 "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
@@ -208,6 +213,7 @@ class KoScopeFromModuleTest {
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$dataTestSourceSetDirectory/sample/LibTestClasses.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )
