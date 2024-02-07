@@ -30,4 +30,10 @@ class LibTestClass6 {
     }
 }
 
+class LibTestClass7 {
+    fun sampleTest() {
+        val sut = getInstance()
+    }
+}
+
 private fun getInstance() = LibClass("")

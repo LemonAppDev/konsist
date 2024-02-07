@@ -30,4 +30,10 @@ class AppTestClass6 {
     }
 }
 
+class AppTestClass7 {
+    fun sampleTest() {
+        val sut = getInstance()
+    }
+}
+
 private fun getInstance() = AppClass("")
