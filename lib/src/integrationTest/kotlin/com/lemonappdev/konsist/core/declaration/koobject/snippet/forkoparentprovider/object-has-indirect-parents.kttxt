@@ -1,10 +1,9 @@
 
 import com.lemonappdev.konsist.externalsample.SampleExternalInterface
+import com.lemonappdev.konsist.testdata.SampleParentInterface2
 
 object SampleObject : SampleParentClass(), SampleParentInterface1, SampleExternalInterface
 
 open class SampleParentClass
 
 interface SampleParentInterface1 : SampleParentInterface2, SampleExternalInterface
-
-interface SampleParentInterface2

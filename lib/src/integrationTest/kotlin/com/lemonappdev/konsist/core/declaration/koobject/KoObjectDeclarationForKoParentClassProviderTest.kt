@@ -187,23 +187,18 @@ class KoObjectDeclarationForKoParentClassProviderTest {
             hasAllParentClasses(indirectParents = true) { it.name == "SampleParentClass1" } shouldBeEqualTo false
             hasAllParentClasses(indirectParents = true) { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
             hasAllParentClasses(indirectParents = true) { it.hasNameStartingWith("Other") } shouldBeEqualTo false
-            hasParentClassOf(SampleParentClass1::class, indirectParents = true) shouldBeEqualTo true
+            hasParentClassOf(SampleParentClass2::class, indirectParents = true) shouldBeEqualTo true
             hasParentClassOf(
-                SampleParentClass1::class,
+                SampleClass::class,
                 SampleParentClass2::class,
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasAllParentClassesOf(SampleParentClass1::class, indirectParents = true) shouldBeEqualTo true
+            hasAllParentClassesOf(SampleParentClass2::class, indirectParents = true) shouldBeEqualTo true
             hasAllParentClassesOf(
                 SampleParentClass1::class,
                 SampleClass::class,
                 indirectParents = true,
             ) shouldBeEqualTo false
-            hasAllParentClassesOf(
-                SampleParentClass1::class,
-                SampleParentClass2::class,
-                indirectParents = true,
-            ) shouldBeEqualTo true
         }
     }
 

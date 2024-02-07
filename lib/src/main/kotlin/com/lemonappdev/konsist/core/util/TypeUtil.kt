@@ -4,8 +4,9 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.core.declaration.KoTypeDeclarationCore
 import org.jetbrains.kotlin.psi.KtTypeReference
+import kotlin.reflect.KClass
 
-object ReceiverUtil {
+object TypeUtil {
     internal fun getType(
         types: List<KtTypeReference>,
         isExtension: Boolean,
@@ -22,6 +23,13 @@ object ReceiverUtil {
 
         return type?.let { KoTypeDeclarationCore.getInstance(it, parentDeclaration) }
     }
+
+    internal fun hasTypeOf(type: KoTypeDeclaration?, kClass: KClass<*>): Boolean =
+        if (type?.isKotlinType == true) {
+            kClass.simpleName == type.name
+        } else {
+            kClass.qualifiedName == type?.fullyQualifiedName
+        }
 
     /*
     1.0.0 CleanUp - When we remove KoReceiverTypeProviderCore.hasReceiverType it will be unused.

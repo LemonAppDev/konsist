@@ -1,5 +1,7 @@
 import com.lemonappdev.konsist.externalsample.SampleExternalGenericInterface
 import com.lemonappdev.konsist.externalsample.SampleExternalInterface
+import com.lemonappdev.konsist.testdata.SampleParentInterface1
+import com.lemonappdev.konsist.testdata.SampleParentInterface2
 
 interface SampleInterface :
     SampleParentInterface1,
@@ -7,6 +9,3 @@ interface SampleInterface :
     SampleExternalInterface,
     SampleExternalGenericInterface<Int>
 
-interface SampleParentInterface1
-
-interface SampleParentInterface2

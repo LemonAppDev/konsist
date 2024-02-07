@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalParentDeclarationCore
 import com.lemonappdev.konsist.core.model.DataCore
-import com.lemonappdev.konsist.core.util.KClassUtil.checkIfKClassOf
+import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 import kotlin.reflect.KClass
@@ -131,8 +131,8 @@ internal interface KoParentProviderCore :
         parents(indirectParents).all(predicate)
 
     override fun hasParentOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean): Boolean =
-        checkIfKClassOf(name, parents(indirectParents)) || names.any { checkIfKClassOf(it, parents(indirectParents)) }
+        checkIfParentOf(name, parents(indirectParents)) || names.any { checkIfParentOf(it, parents(indirectParents)) }
 
     override fun hasAllParentsOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean): Boolean =
-        checkIfKClassOf(name, parents(indirectParents)) && names.all { checkIfKClassOf(it, parents(indirectParents)) }
+        checkIfParentOf(name, parents(indirectParents)) && names.all { checkIfParentOf(it, parents(indirectParents)) }
 }

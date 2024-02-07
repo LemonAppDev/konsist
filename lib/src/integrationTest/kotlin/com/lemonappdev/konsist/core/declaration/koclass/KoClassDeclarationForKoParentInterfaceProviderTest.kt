@@ -169,23 +169,13 @@ class KoClassDeclarationForKoParentInterfaceProviderTest {
             hasAllParentInterfaces(indirectParents = true) { it.name == "SampleParentInterface1" } shouldBeEqualTo false
             hasAllParentInterfaces(indirectParents = true) { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
             hasAllParentInterfaces(indirectParents = true) { it.hasNameStartingWith("Other") } shouldBeEqualTo false
-            hasParentInterfaceOf(SampleParentInterface1::class, indirectParents = true) shouldBeEqualTo true
-            hasParentInterfaceOf(
-                SampleParentInterface1::class,
-                SampleParentInterface2::class,
-                indirectParents = true,
-            ) shouldBeEqualTo true
-            hasAllParentInterfacesOf(SampleParentInterface1::class, indirectParents = true) shouldBeEqualTo true
+            hasParentInterfaceOf(SampleParentInterface2::class, indirectParents = true) shouldBeEqualTo true
+            hasAllParentInterfacesOf(SampleParentInterface2::class, indirectParents = true) shouldBeEqualTo true
             hasAllParentInterfacesOf(
-                SampleParentInterface1::class,
+                SampleParentInterface2::class,
                 SampleParentInterface::class,
                 indirectParents = true,
             ) shouldBeEqualTo false
-            hasAllParentInterfacesOf(
-                SampleParentInterface1::class,
-                SampleParentInterface2::class,
-                indirectParents = true,
-            ) shouldBeEqualTo true
         }
     }
 

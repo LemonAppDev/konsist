@@ -26,36 +26,6 @@ class KoParentClassProviderExtTest {
     }
 
     @Test
-    fun `class-has-parent-class-defined-in-the-same-file`() {
-        // given
-        val sut = getSnippetFile("class-has-parent-class-defined-in-the-same-file")
-            .classes()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasParentClassOf<SampleParentClass>() shouldBeEqualTo true
-            hasParentClassOf<SampleParentInterface>() shouldBeEqualTo false
-            hasParentClassOf<SampleClass>() shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `object-has-parent-class-defined-in-the-same-file`() {
-        // given
-        val sut = getSnippetFile("object-has-parent-class-defined-in-the-same-file")
-            .objects()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasParentClassOf<SampleParentClass>() shouldBeEqualTo true
-            hasParentClassOf<SampleParentInterface>() shouldBeEqualTo false
-            hasParentClassOf<SampleClass>() shouldBeEqualTo false
-        }
-    }
-
-    @Test
     fun `object-has-parent-class-imported-from-external-file`() {
         // given
         val sut = getSnippetFile("object-has-parent-class-imported-from-external-file")

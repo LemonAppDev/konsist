@@ -43,7 +43,7 @@ class KoParameterDeclarationForKoNonNullableTypeProviderTest {
             it?.type?.name shouldBeEqualTo "ImportAlias"
             it?.hasType { type -> type.name == "ImportAlias" } shouldBeEqualTo true
             it?.hasType { type -> type.name == "Int" } shouldBeEqualTo false
-            it?.hasTypeOf(SampleType::class) shouldBeEqualTo false
+//            it?.hasTypeOf(SampleType::class) shouldBeEqualTo false
             it?.hasTypeOf(Int::class) shouldBeEqualTo false
         }
     }

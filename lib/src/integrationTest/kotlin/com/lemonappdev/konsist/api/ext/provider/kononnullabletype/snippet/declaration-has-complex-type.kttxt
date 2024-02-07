@@ -2,4 +2,4 @@ import com.lemonappdev.konsist.testdata.SampleType
 
 typealias SampleTypeAlias = SampleType
 
-class SampleClass1(val sampleProperty1: SampleTypeAlias)
+class SampleClass1(val sampleProperty1: SampleType)

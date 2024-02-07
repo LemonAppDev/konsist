@@ -3,7 +3,8 @@ package com.lemonappdev.konsist.core.provider
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoReturnProvider
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
-import com.lemonappdev.konsist.core.util.ReceiverUtil
+import com.lemonappdev.konsist.core.util.TypeUtil
+import com.lemonappdev.konsist.core.util.TypeUtil.hasTypeOf
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
@@ -21,7 +22,7 @@ internal interface KoReturnProviderCore :
         .filterIsInstance<KtTypeReference>()
 
     override val returnType: KoTypeDeclaration?
-        get() = ReceiverUtil.getType(getTypeReferences(), ktFunction.isExtensionDeclaration(), this.castToKoBaseDeclaration())
+        get() = TypeUtil.getType(getTypeReferences(), ktFunction.isExtensionDeclaration(), this.castToKoBaseDeclaration())
 
     override val hasReturnValue: Boolean
         get() = if (returnType != null) {
@@ -49,5 +50,5 @@ internal interface KoReturnProviderCore :
             else -> returnType?.let { predicate(it) } ?: false
         }
 
-    override fun hasReturnTypeOf(kClass: KClass<*>): Boolean = kClass.simpleName == returnType?.name
+    override fun hasReturnTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(returnType, kClass)
 }
