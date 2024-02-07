@@ -2,7 +2,8 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoNullableTypeProvider
-import com.lemonappdev.konsist.core.util.ReceiverUtil
+import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
+import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
@@ -14,7 +15,11 @@ internal interface KoNullableTypeProviderCore :
     KoBaseProviderCore {
     val ktCallableDeclaration: KtCallableDeclaration
     override val type: KoTypeDeclaration?
-        get() = ReceiverUtil.getType(getTypeReferences(), ktCallableDeclaration.isExtensionDeclaration(), this)
+        get() = TypeUtil.getType(
+            getTypeReferences(),
+            ktCallableDeclaration.isExtensionDeclaration(),
+            this.castToKoBaseDeclaration(),
+        )
 
     private fun getTypeReferences(): List<KtTypeReference> = ktCallableDeclaration
         .children

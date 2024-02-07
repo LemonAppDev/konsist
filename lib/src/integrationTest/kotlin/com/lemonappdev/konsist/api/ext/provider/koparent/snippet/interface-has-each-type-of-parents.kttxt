@@ -3,6 +3,4 @@ package com.lemonappdev.konsist.api.ext.provider.koparent.snippet
 import com.lemonappdev.konsist.externalsample.SampleExternalInterface
 import com.lemonappdev.konsist.testdata.SampleParentInterface
 
-interface SampleInterface : SampleInterfaceFromFile, SampleParentInterface, SampleExternalInterface
-
-interface SampleInterfaceFromFile
+interface SampleInterface :  SampleParentInterface, SampleExternalInterface

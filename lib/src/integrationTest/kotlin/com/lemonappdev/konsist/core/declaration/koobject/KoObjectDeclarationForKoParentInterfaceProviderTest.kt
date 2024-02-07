@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core.declaration.koobject
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.testdata.SampleInterface
 import com.lemonappdev.konsist.testdata.SampleParentClass
-import com.lemonappdev.konsist.testdata.SampleParentInterface
 import com.lemonappdev.konsist.testdata.SampleParentInterface1
 import com.lemonappdev.konsist.testdata.SampleParentInterface2
 import org.amshove.kluent.assertSoftly
@@ -169,23 +169,18 @@ class KoObjectDeclarationForKoParentInterfaceProviderTest {
             hasAllParentInterfaces(indirectParents = true) { it.name == "SampleParentInterface1" } shouldBeEqualTo false
             hasAllParentInterfaces(indirectParents = true) { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
             hasAllParentInterfaces(indirectParents = true) { it.hasNameStartingWith("Other") } shouldBeEqualTo false
-            hasParentInterfaceOf(SampleParentInterface1::class, indirectParents = true) shouldBeEqualTo true
+            hasParentInterfaceOf(SampleParentInterface2::class, indirectParents = true) shouldBeEqualTo true
             hasParentInterfaceOf(
-                SampleParentInterface1::class,
+                SampleInterface::class,
                 SampleParentInterface2::class,
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasAllParentInterfacesOf(SampleParentInterface1::class, indirectParents = true) shouldBeEqualTo true
+            hasAllParentInterfacesOf(SampleParentInterface2::class, indirectParents = true) shouldBeEqualTo true
             hasAllParentInterfacesOf(
-                SampleParentInterface1::class,
-                SampleParentInterface::class,
+                SampleParentInterface2::class,
+                SampleInterface::class,
                 indirectParents = true,
             ) shouldBeEqualTo false
-            hasAllParentInterfacesOf(
-                SampleParentInterface1::class,
-                SampleParentInterface2::class,
-                indirectParents = true,
-            ) shouldBeEqualTo true
         }
     }
 

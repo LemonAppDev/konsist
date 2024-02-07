@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.KoKDocTag
 /**
  * An interface representing a Kotlin declaration that provides access to KDoc name and description.
  */
-interface KoKDocTagNameAndDescriptionProvider {
+interface KoKDocTagNameAndDescriptionProvider : KoBaseProvider {
     /**
      * Name of the tag.
      */

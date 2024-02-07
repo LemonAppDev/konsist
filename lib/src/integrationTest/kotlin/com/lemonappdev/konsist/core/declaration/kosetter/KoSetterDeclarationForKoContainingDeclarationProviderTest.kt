@@ -2,9 +2,7 @@ package com.lemonappdev.konsist.core.declaration.kosetter
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.provider.KoNameProvider
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoSetterDeclarationForKoContainingDeclarationProviderTest {
@@ -17,10 +15,7 @@ class KoSetterDeclarationForKoContainingDeclarationProviderTest {
             .setter
 
         // then
-        assertSoftly(sut) {
-            it?.containingDeclaration?.shouldNotBeEqualTo(null)
-            (it?.containingDeclaration as KoNameProvider).name shouldBeEqualTo "sampleProperty"
-        }
+        (sut?.containingDeclaration as KoNameProvider).name shouldBeEqualTo "sampleProperty"
     }
 
     private fun getSnippetFile(fileName: String) =

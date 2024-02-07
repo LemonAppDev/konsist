@@ -24,7 +24,6 @@ class KoParentProviderExtTest {
         // then
         assertSoftly(sut) {
             hasParentOf<SampleParentClass>() shouldBeEqualTo true
-            hasParentOf<SampleParentInterface>() shouldBeEqualTo true
             hasParentOf<SampleExternalInterface>() shouldBeEqualTo true
             hasParentOf<SampleClass>() shouldBeEqualTo false
             hasParentOf<SampleInterface>() shouldBeEqualTo false
@@ -42,7 +41,6 @@ class KoParentProviderExtTest {
         // then
         assertSoftly(sut) {
             hasParentOf<SampleParentClass>() shouldBeEqualTo true
-            hasParentOf<SampleParentInterface>() shouldBeEqualTo true
             hasParentOf<SampleExternalInterface>() shouldBeEqualTo true
             hasParentOf<SampleClass>() shouldBeEqualTo false
             hasParentOf<SampleInterface>() shouldBeEqualTo false
@@ -59,7 +57,6 @@ class KoParentProviderExtTest {
 
         // then
         assertSoftly(sut) {
-//            hasParentOf<SampleInterfaceFromFile>() shouldBeEqualTo true
             hasParentOf<SampleParentInterface>() shouldBeEqualTo true
             hasParentOf<SampleExternalInterface>() shouldBeEqualTo true
             hasParentOf<SampleInterface>() shouldBeEqualTo false

@@ -25,6 +25,24 @@ class SpringSnippets {
             .assertTrue { it.hasNameEndingWith("Controller") }
     }
 
+    fun `controllers never returns collection types`() {
+        /*
+        Avoid returning collection types directly. Structuring the response as
+        an object that contains a collection field is preferred. This approach
+        allows for future expansion (e.g., adding more properties like "totalPages")
+        without disrupting the existing API contract, which would happen if a JSON
+        array were returned directly.
+         */
+        Konsist
+            .scopeFromPackage("story.controller..")
+            .classes()
+            .withAnnotationOf(RestController::class)
+            .functions()
+            .assertFalse { function ->
+                function.hasReturnType { it.isKotlinCollectionType }
+            }
+    }
+
     fun `classes with 'RestController' annotation should reside in 'controller' package`() {
         Konsist
             .scopeFromProject()
@@ -39,7 +57,7 @@ class SpringSnippets {
             .classes()
             .withAnnotationOf(RestController::class)
             .functions()
-            .assertFalse(additionalMessage = "Don't use Kotlin Collection Types") { function ->
+            .assertFalse { function ->
                 function.hasReturnType { it.hasNameStartingWith("List") }
             }
     }
