@@ -58,7 +58,7 @@ internal interface KoTestClassProviderCore : KoTestClassProvider, KoNameProvider
  but
  val x3 = getInstance()                 // hasTacitType returns false
  */
-private fun <T> T.hasTacitType(type: String) where
+private fun <T> T.hasTacitType(type: String): Boolean where
       T : KoNullableTypeProvider,
       T : KoNameProvider,
       T : KoValueProvider = hasType { it.name == type } || value?.startsWith("$type(") == true
@@ -73,7 +73,7 @@ private fun <T> T.hasTacitType(type: String) where
  but
  val x4 = getInstance()                 // isInstanceCreatedInProperty = false
  */
-private fun KoPropertyDeclaration.isInstanceCreatedInProperty(name: String, type: String) =
+private fun KoPropertyDeclaration.isInstanceCreatedInProperty(name: String, type: String): Boolean =
     this.name == name && (hasTacitType(type) || getter?.text?.contains(" $type(") == true)
 
 /*
@@ -91,5 +91,5 @@ private fun KoPropertyDeclaration.isInstanceCreatedInProperty(name: String, type
     val x3 = getInstance()
  }                                     // isInstanceCreatedInMethodBody = false
  */
-private fun KoFunctionDeclaration.isInstanceCreatedInMethodBody(name: String, type: String) =
+private fun KoFunctionDeclaration.isInstanceCreatedInMethodBody(name: String, type: String): Boolean =
     hasReturnType { it.name == type } || hasVariable { it.name == name && it.hasTacitType(type) }
