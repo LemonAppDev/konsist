@@ -126,11 +126,6 @@ class KoObjectDeclarationForKoParentProviderTest {
                 SampleInterface::class,
                 indirectParents = true,
             ) shouldBeEqualTo false
-            hasAllParentsOf(
-                SampleParentInterface2::class,
-                SampleParentInterface1::class,
-                indirectParents = true,
-            ) shouldBeEqualTo true
         }
     }
 

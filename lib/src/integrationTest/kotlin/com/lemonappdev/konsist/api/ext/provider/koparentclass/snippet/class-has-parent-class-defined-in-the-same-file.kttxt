@@ -1,5 +1,0 @@
-class SampleClass : SampleParentClass(), SampleParentInterface
-
-open class SampleParentClass
-
-interface SampleParentInterface
