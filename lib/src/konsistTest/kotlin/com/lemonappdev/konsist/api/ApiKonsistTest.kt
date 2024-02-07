@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.api
 
+import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withProperty
+import com.lemonappdev.konsist.api.ext.list.withoutName
 import com.lemonappdev.konsist.api.ext.list.withoutNameMatching
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
@@ -40,6 +42,24 @@ class ApiKonsistTest {
 
                 includeNestedParameter <= includeLocalParameter || (includeNestedParameter != -1 && includeLocalParameter == -1)
             }
+    }
+
+    @Test
+    fun `every api declaration implements KoBaseDeclaration and KoBaseProvider`() {
+        apiPackageScope
+            .interfaces()
+            .withNameEndingWith("Declaration")
+            .withoutName("KoBaseDeclaration")
+            .assertTrue { it.hasParentsWithAllNames("KoBaseDeclaration", "KoBaseProvider", indirectParents = true) }
+    }
+
+    @Test
+    fun `every api provider implements KoBaseProvider`() {
+        apiPackageScope
+            .interfaces()
+            .withNameEndingWith("Provider")
+            .withoutName("KoBaseProvider")
+            .assertTrue { it.hasParentWithName("KoBaseProvider", indirectParents = true) }
     }
 
     @Test
