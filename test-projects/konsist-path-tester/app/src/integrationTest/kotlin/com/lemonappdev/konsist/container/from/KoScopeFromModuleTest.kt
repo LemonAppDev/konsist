@@ -86,6 +86,7 @@ class KoScopeFromModuleTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/sample/AppTestClasses.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
                 "$appMainSourceSetDirectory/sample/AppClass.kt",
                 "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
@@ -107,6 +108,7 @@ class KoScopeFromModuleTest {
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$dataTestSourceSetDirectory/sample/LibTestClasses.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )
@@ -203,6 +205,7 @@ class KoScopeFromModuleTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/sample/AppTestClasses.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
                 "$appMainSourceSetDirectory/sample/AppClass.kt",
                 "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
@@ -210,6 +213,7 @@ class KoScopeFromModuleTest {
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$dataTestSourceSetDirectory/sample/LibTestClasses.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )

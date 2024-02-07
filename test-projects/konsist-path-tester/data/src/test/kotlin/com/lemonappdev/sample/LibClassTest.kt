@@ -7,8 +7,6 @@ import com.lemonappdev.sample.LibClassTest
  */
 @Suppress("lib_argument_test")
 class LibClassTest(val libParameterTest: String) : LibInterfaceTest {
-    val cut = LibClass("sample parameter")
-
     constructor(otherParameterTest: Int) : this(otherParameterTest.toString())
 
     init {

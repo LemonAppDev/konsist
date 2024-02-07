@@ -85,9 +85,11 @@ class KoScopeFromTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/sample/AppTestClasses.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$dataTestSourceSetDirectory/sample/LibTestClasses.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )
@@ -177,6 +179,7 @@ class KoScopeFromTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/sample/AppTestClasses.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
             ).toOsSeparator(),
         )
@@ -194,6 +197,7 @@ class KoScopeFromTest {
             listOf(
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$dataTestSourceSetDirectory/sample/LibTestClasses.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )
@@ -273,6 +277,7 @@ class KoScopeFromTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/sample/AppTestClasses.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
             ).toOsSeparator(),
         )
@@ -362,6 +367,7 @@ class KoScopeFromTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/sample/AppTestClasses.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
             ).toOsSeparator(),
         )
@@ -390,6 +396,7 @@ class KoScopeFromTest {
             listOf(
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$dataTestSourceSetDirectory/sample/LibTestClasses.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )
@@ -428,6 +435,7 @@ class KoScopeFromTest {
             listOf(
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$dataTestSourceSetDirectory/sample/LibTestClasses.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )

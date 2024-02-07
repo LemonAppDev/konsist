@@ -7,8 +7,6 @@ import com.lemonappdev.sample.AppClassTest
  */
 @Suppress("app_argument_test")
 class AppClassTest(val appParameterTest: String) : AppInterfaceTest {
-    val sut = AppClass("some parameter")
-
     constructor(otherParameterTest: Int) : this(otherParameterTest.toString())
 
     init {
