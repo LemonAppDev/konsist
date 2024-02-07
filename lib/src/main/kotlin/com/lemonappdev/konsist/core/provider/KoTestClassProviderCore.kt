@@ -64,7 +64,7 @@ private fun <T> T.hasTacitType(type: String) where
         T : KoValueProvider = hasType { it.name == type } || value?.startsWith("$type(") == true
 
 /*
- Checks whether a test property is created in property (as tacit type or in getter body), e.g.
+ Checks whether a test item is created in a property (property has item tacit type or is created in getter body), e.g.
  val x1 = SampleClass()                 // isInstanceCreatedInProperty = true
  val x2: SampleClass = getInstance()    // isInstanceCreatedInProperty = true
  val x3
@@ -77,7 +77,7 @@ private fun KoPropertyDeclaration.isInstanceCreatedInProperty(name: String, type
     this.name == name && (hasTacitType(type) || getter?.text?.contains(" $type(") == true)
 
 /*
- Checks whether a test property is created in method body (as variable or function return type matches), e.g.
+ Checks whether a test item is created in a method body (function return type matches to item type or item is created as variable), e.g.
  fun sampleFunction1() {
     val x1 = SampleClass()
  }                                     // isInstanceCreatedInMethodBody = true
@@ -88,7 +88,7 @@ private fun KoPropertyDeclaration.isInstanceCreatedInProperty(name: String, type
 
  but
  fun sampleFunction3() {
-    val x3 = "text"
+    val x3 = getInstance()
  }                                     // isInstanceCreatedInMethodBody = false
  */
 private fun KoFunctionDeclaration.isInstanceCreatedInMethodBody(name: String, type: String) =
