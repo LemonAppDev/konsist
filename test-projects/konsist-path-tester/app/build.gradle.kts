@@ -37,6 +37,7 @@ testing {
     suites {
         register("integrationTest", JvmTestSuite::class) {
             dependencies {
+                implementation(project(":app"))
                 implementation(libs.junitJupiterEngine)
                 implementation(libs.kluent)
                 implementation(libs.konsist)

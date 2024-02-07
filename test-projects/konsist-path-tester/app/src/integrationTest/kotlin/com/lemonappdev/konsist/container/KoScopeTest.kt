@@ -58,6 +58,8 @@ class KoScopeTest {
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$dataTestSourceSetDirectory/sample/LibTestClasses.kt",
+                "$dataTestSourceSetDirectory/sample/LibTestClasses.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )
@@ -114,6 +116,8 @@ class KoScopeTest {
                     "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                     "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                     "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
+                    "$dataTestSourceSetDirectory/sample/LibTestClasses.kt",
+                    "$dataTestSourceSetDirectory/sample/LibTestClasses.kt",
                     "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
                 ).toOsSeparator(),
             )
