@@ -35,5 +35,5 @@ internal interface KoFullyQualifiedNameProviderCore :
             return fqn ?: textUsedToFqn
         }
 
-    fun String.isFullyQualifiedName() = split(".").last() == textUsedToFqn
+    fun String.isFullyQualifiedName(): Boolean = split(".").last() == textUsedToFqn
 }

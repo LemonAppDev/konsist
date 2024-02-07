@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
+@Deprecated("Will be removed in v1.0.0")
 class KoClassDeclarationForKoHasTestClassProviderTest {
     @Test
     fun `class-with-test-with-default-parameters`() {

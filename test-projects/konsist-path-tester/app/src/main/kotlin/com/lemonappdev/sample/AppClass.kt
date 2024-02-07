@@ -1,7 +1,6 @@
 package com.lemonappdev.sample
 
 import com.lemonappdev.sample.AppClass
-import sun.jvm.hotspot.oops.CellTypeState.value
 
 /**
  * App KDoc
