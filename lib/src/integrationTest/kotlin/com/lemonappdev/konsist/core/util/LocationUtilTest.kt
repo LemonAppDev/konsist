@@ -109,9 +109,9 @@ class LocationUtilTest {
         // then
         assertSoftly(sut) {
             resideInLocation("com.domain..", currentPackage) shouldBeEqualTo true
-//            resideInLocation("com.domain.update..", currentPackage) shouldBeEqualTo true
-//            resideInLocation("com.domain.update.usecase..", currentPackage) shouldBeEqualTo true
-//            resideInLocation("com.domain.usecase..", currentPackage) shouldBeEqualTo false
+            resideInLocation("com.domain.update..", currentPackage) shouldBeEqualTo true
+            resideInLocation("com.domain.update.usecase..", currentPackage) shouldBeEqualTo true
+            resideInLocation("com.domain.usecase..", currentPackage) shouldBeEqualTo false
         }
     }
 

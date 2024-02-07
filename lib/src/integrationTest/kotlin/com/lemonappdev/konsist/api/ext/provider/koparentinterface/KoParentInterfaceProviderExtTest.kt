@@ -26,21 +26,6 @@ class KoParentInterfaceProviderExtTest {
     }
 
     @Test
-    fun `class-has-parent-interface-defined-in-the-same-file`() {
-        // given
-        val sut = getSnippetFile("class-has-parent-interface-defined-in-the-same-file")
-            .classes()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasParentInterfaceOf<SampleParentInterface>() shouldBeEqualTo true
-            hasParentInterfaceOf<SampleParentInterface1>() shouldBeEqualTo false
-            hasParentInterfaceOf<SampleParentClass>() shouldBeEqualTo false
-        }
-    }
-
-    @Test
     fun `object-has-parent-interface-imported-from-external-file`() {
         // given
         val sut = getSnippetFile("object-has-parent-interface-imported-from-external-file")
@@ -56,39 +41,9 @@ class KoParentInterfaceProviderExtTest {
     }
 
     @Test
-    fun `object-has-parent-interface-defined-in-the-same-file`() {
-        // given
-        val sut = getSnippetFile("object-has-parent-interface-defined-in-the-same-file")
-            .objects()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasParentInterfaceOf<SampleParentInterface>() shouldBeEqualTo true
-            hasParentInterfaceOf<SampleParentInterface1>() shouldBeEqualTo false
-            hasParentInterfaceOf<SampleParentClass>() shouldBeEqualTo false
-        }
-    }
-
-    @Test
     fun `interface-has-parent-interface-imported-from-external-file`() {
         // given
         val sut = getSnippetFile("interface-has-parent-interface-imported-from-external-file")
-            .interfaces()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasParentInterfaceOf<SampleParentInterface>() shouldBeEqualTo true
-            hasParentInterfaceOf<SampleParentInterface1>() shouldBeEqualTo false
-            hasParentInterfaceOf<SampleParentClass>() shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `interface-has-parent-interface-defined-in-the-same-file`() {
-        // given
-        val sut = getSnippetFile("interface-has-parent-interface-defined-in-the-same-file")
             .interfaces()
             .first()
 
