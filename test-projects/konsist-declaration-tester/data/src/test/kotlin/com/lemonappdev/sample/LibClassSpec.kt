@@ -1,3 +1,3 @@
 package com.lemonappdev.sample
 
- class AppClass
+class LibClassSpec
