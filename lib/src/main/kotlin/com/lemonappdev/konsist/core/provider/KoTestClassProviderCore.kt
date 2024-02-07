@@ -2,11 +2,12 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoNullableTypeProvider
 import com.lemonappdev.konsist.api.provider.KoTestClassProvider
 import com.lemonappdev.konsist.api.provider.KoValueProvider
-import com.lemonappdev.konsist.core.ext.hasTacitType
 
 internal interface KoTestClassProviderCore : KoTestClassProvider, KoNameProviderCore, KoBaseProviderCore {
     override fun testClasses(
@@ -17,12 +18,8 @@ internal interface KoTestClassProviderCore : KoTestClassProvider, KoNameProvider
         .scopeFromTest(moduleName, sourceSetName)
         .classes()
         .filter {
-            it.hasProperty { property -> property.hasTestProperty(testPropertyName, name) } ||
-                it.hasFunction { function ->
-                    function.hasVariable { variable ->
-                        variable.hasTestProperty(testPropertyName, name)
-                    }
-                }
+            it.hasProperty { property -> property.isInstanceCreatedInProperty(testPropertyName, name) } ||
+                    it.hasFunction { function -> function.isInstanceCreatedInMethodBody(testPropertyName, name) }
         }
 
     override fun testClasses(
@@ -53,7 +50,46 @@ internal interface KoTestClassProviderCore : KoTestClassProvider, KoNameProvider
     ): Boolean = testClasses(moduleName, sourceSetName, predicate).isNotEmpty()
 }
 
-private fun <T> T.hasTestProperty(name: String, type: String) where
-      T : KoNameProvider,
-      T : KoNullableTypeProvider,
-      T: KoValueProvider = this.name == name && hasTacitType(type)
+/*
+ Checks whether a type is defined explicitly or implicitly, e.g.
+ val x1 = SampleClass()                 // hasTacitType returns true
+ val x2: SampleClass = getInstance()    // hasTacitType returns true
+
+ but
+ val x3 = getInstance()                 // hasTacitType returns false
+ */
+private fun <T> T.hasTacitType(type: String) where
+        T : KoNullableTypeProvider,
+        T : KoNameProvider,
+        T : KoValueProvider = hasType { it.name == type } || value?.startsWith("$type(") == true
+
+/*
+ Checks whether a test property is created in property (as tacit type or in getter body), e.g.
+ val x1 = SampleClass()                 // isInstanceCreatedInProperty = true
+ val x2: SampleClass = getInstance()    // isInstanceCreatedInProperty = true
+ val x3
+    get() = SampleClass()               // isInstanceCreatedInProperty = true
+
+ but
+ val x4 = getInstance()                 // isInstanceCreatedInProperty = false
+ */
+private fun KoPropertyDeclaration.isInstanceCreatedInProperty(name: String, type: String) =
+    this.name == name && (hasTacitType(type) || getter?.text?.contains(" $type(") == true)
+
+/*
+ Checks whether a test property is created in method body (as variable or function return type matches), e.g.
+ fun sampleFunction1() {
+    val x1 = SampleClass()
+ }                                     // isInstanceCreatedInMethodBody = true
+
+ fun sampleFunction2(): SampleClass {
+    ...
+ }                                     // isInstanceCreatedInMethodBody = true
+
+ but
+ fun sampleFunction3() {
+    val x3 = "text"
+ }                                     // isInstanceCreatedInMethodBody = false
+ */
+private fun KoFunctionDeclaration.isInstanceCreatedInMethodBody(name: String, type: String) =
+    hasReturnType { it.name == type } || hasVariable { it.name == name && it.hasTacitType(type) }
