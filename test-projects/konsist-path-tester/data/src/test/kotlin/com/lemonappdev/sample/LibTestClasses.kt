@@ -31,6 +31,10 @@ class LibTestClass6 {
 }
 
 class LibTestClass7 {
+    val sut = getInstance()
+}
+
+class LibTestClass8 {
     fun sampleTest() {
         val sut = getInstance()
     }
