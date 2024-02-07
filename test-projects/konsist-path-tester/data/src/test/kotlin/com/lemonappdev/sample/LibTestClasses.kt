@@ -20,12 +20,14 @@ class LibTestClass4 {
 
 class LibTestClass5 {
     fun sampleTest() {
+        @Suppress("detekt.UnusedPrivateProperty")
         val cut = LibClass("")
     }
 }
 
 class LibTestClass6 {
     fun sampleTest() {
+        @Suppress("detekt.UnusedPrivateProperty")
         val cut: LibClass = getInstance()
     }
 }
@@ -36,6 +38,7 @@ class LibTestClass7 {
 
 class LibTestClass8 {
     fun sampleTest() {
+        @Suppress("detekt.UnusedPrivateProperty")
         val sut = getInstance()
     }
 }

@@ -19,7 +19,7 @@ internal interface KoTestClassProviderCore : KoTestClassProvider, KoNameProvider
         .classes()
         .filter {
             it.hasProperty { property -> property.isInstanceCreatedInProperty(testPropertyName, name) } ||
-                    it.hasFunction { function -> function.isInstanceCreatedInMethodBody(testPropertyName, name) }
+                it.hasFunction { function -> function.isInstanceCreatedInMethodBody(testPropertyName, name) }
         }
 
     override fun testClasses(
@@ -59,9 +59,9 @@ internal interface KoTestClassProviderCore : KoTestClassProvider, KoNameProvider
  val x3 = getInstance()                 // hasTacitType returns false
  */
 private fun <T> T.hasTacitType(type: String) where
-        T : KoNullableTypeProvider,
-        T : KoNameProvider,
-        T : KoValueProvider = hasType { it.name == type } || value?.startsWith("$type(") == true
+      T : KoNullableTypeProvider,
+      T : KoNameProvider,
+      T : KoValueProvider = hasType { it.name == type } || value?.startsWith("$type(") == true
 
 /*
  Checks whether a test item is created in a property (property has item tacit type or is created in getter body), e.g.
