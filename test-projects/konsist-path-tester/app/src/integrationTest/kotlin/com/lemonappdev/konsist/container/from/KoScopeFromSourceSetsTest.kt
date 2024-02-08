@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.container.from
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.Konsist.scopeFromSourceSets
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
 import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appIntegrationTestSourceSetDirectory
@@ -11,12 +12,14 @@ import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetDirecto
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoScopeFromSourceSetTest {
+class KoScopeFromSourceSetsTest {
     @Test
-    fun `scopeFromSourceSet for main source set`() {
+    fun `scopeFromSourceSets for main source set`() {
         // given
+        val sourceSetNames = setOf("main")
+
         val sut = Konsist
-            .scopeFromSourceSet("main")
+            .scopeFromSourceSets(sourceSetNames)
             .mapToFilePaths()
 
         // then
@@ -35,10 +38,12 @@ class KoScopeFromSourceSetTest {
 
     @Suppress("detekt.LongMethod")
     @Test
-    fun `scopeFromSourceSet for integrationTest source set`() {
+    fun `scopeFromSourceSets for integrationTest source set`() {
         // given
+        val sourceSetNames = setOf("integrationTest")
+
         val sut = Konsist
-            .scopeFromSourceSet("integrationTest")
+            .scopeFromSourceSets(sourceSetNames)
             .mapToFilePaths()
 
         // then
@@ -67,10 +72,12 @@ class KoScopeFromSourceSetTest {
     }
 
     @Test
-    fun `scopeFromSourceSet for test source set`() {
+    fun `scopeFromSourceSets for test source set`() {
         // given
+        val sourceSetNames = setOf("test")
+
         val sut = Konsist
-            .scopeFromSourceSet("test")
+            .scopeFromSourceSets(sourceSetNames)
             .mapToFilePaths()
 
         // then
@@ -83,10 +90,12 @@ class KoScopeFromSourceSetTest {
     }
 
     @Test
-    fun `scopeFromSourceSet for main and test source sets`() {
+    fun `scopeFromSourceSets for main and test source sets`() {
         // given
+        val sourceSetNames = setOf("main", "test")
+
         val sut = Konsist
-            .scopeFromSourceSet("main", "test")
+            .scopeFromSourceSets(sourceSetNames)
             .mapToFilePaths()
 
         // then

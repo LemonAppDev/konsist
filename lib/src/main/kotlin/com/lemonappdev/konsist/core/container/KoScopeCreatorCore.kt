@@ -40,7 +40,10 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     }
 
     override fun scopeFromSourceSet(sourceSetName: String, vararg sourceSetNames: String): KoScope =
-        (listOf(sourceSetName) + sourceSetNames)
+        scopeFromSourceSets(setOf(sourceSetName) + sourceSetNames)
+
+    override fun scopeFromSourceSets(sourceSetNames: Set<String>): KoScope =
+        sourceSetNames
             .flatMap { getFiles(sourceSetName = it) }
             .let { KoScopeCore(it) }
 
