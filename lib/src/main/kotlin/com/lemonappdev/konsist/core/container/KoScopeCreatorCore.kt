@@ -25,7 +25,10 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     }
 
     override fun scopeFromModule(moduleName: String, vararg moduleNames: String): KoScope =
-        (listOf(moduleName) + moduleNames)
+        scopeFromModules(setOf(moduleName) + moduleNames)
+
+    override fun scopeFromModules(moduleNames: Set<String>): KoScope =
+        moduleNames
             .flatMap { getFiles(it) }
             .let { KoScopeCore(it) }
 
@@ -37,7 +40,10 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     }
 
     override fun scopeFromSourceSet(sourceSetName: String, vararg sourceSetNames: String): KoScope =
-        (listOf(sourceSetName) + sourceSetNames)
+        scopeFromSourceSets(setOf(sourceSetName) + sourceSetNames)
+
+    override fun scopeFromSourceSets(sourceSetNames: Set<String>): KoScope =
+        sourceSetNames
             .flatMap { getFiles(sourceSetName = it) }
             .let { KoScopeCore(it) }
 
@@ -149,16 +155,21 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     override fun scopeFromFile(path: String, vararg paths: String): KoScope = scopeFromFiles(setOf(path) + paths)
 
     override fun scopeFromFiles(paths: Set<String>): KoScope {
-        val koFiles = paths
+        val files = paths
             .map { getAbsolutePath(it) }
             .map { File(it) }
             .onEach {
                 require(it.exists()) { "File does not exist: ${it.absolutePath}" }
                 require(it.isFile) { "Path is a directory, but should be a file: ${it.absolutePath}" }
             }
+
+        val notKotlinFiles = files
+            .filterNot { it.isKotlinFile }
             .map { it.toKoFile() }
 
-        return KoScopeCore(koFiles)
+        val koFiles = getKoFiles(files)
+
+        return KoScopeCore(koFiles + notKotlinFiles)
     }
 
     private fun getAbsolutePath(projectPath: String): String = "$projectRootPath$sep$projectPath"
@@ -224,6 +235,12 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         .filter { it.isKotlinFile }
         .map { it.toKoFile() }
         .toList()
+
+    private fun getKoFiles(files: List<File>) = projectKotlinFiles.filter {
+        files.any { file ->
+            file.path == it.path
+        }
+    }
 
     companion object {
         private const val TEST_NAME_IN_PATH = "test"
