@@ -100,52 +100,70 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         return KoScopeCore(koFiles)
     }
 
-    override fun scopeFromDirectory(path: String): KoScope {
-        val absolutePath = "$projectRootPath$sep$path"
-        return createScopeFromDirectory(absolutePath)
+    /**
+     * Get the scope of the paths obtaining the absolute path of it and, getting the files from that directory
+     */
+    private fun getScopeFromPaths(paths: Set<String>): KoScope {
+        val filesFromPaths = paths
+            .map { getAbsolutePath(projectPath = it) }
+            .flatMap { getFilesFromDirectory(absolutePath = it) }
+
+        return KoScopeCore(koFiles = filesFromPaths)
     }
 
-    override fun scopeFromExternalDirectory(absolutePath: String): KoScope = createScopeFromDirectory(absolutePath)
-
-    private fun createScopeFromDirectory(absolutePath: String): KoScope {
+    /**
+     * Obtain all the files belonging to [absolutePath].
+     * The function will throw an [IllegalArgumentException] when:
+     *  - the directory does not exist.
+     *  - the path is a file.
+     */
+    private fun getFilesFromDirectory(absolutePath: String): List<KoFileDeclaration> {
         val directory = File(absolutePath)
         require(directory.exists()) { "Directory does not exist: $absolutePath" }
         require(!directory.isFile) { "Path is a file, but should be a directory: $absolutePath" }
 
-        val files = directory
-            .walk()
-            .filter { it.isKotlinFile }
-            .toList()
+        return directory.toKoFiles()
+    }
 
-        val koFiles = getKoFiles(files)
+    override fun scopeFromDirectory(path: String, vararg paths: String): KoScope {
+        return getScopeFromPaths(paths = setOf(path) + paths)
+    }
 
-        return KoScopeCore(koFiles)
+    override fun scopeFromDirectories(paths: Set<String>): KoScope {
+        return getScopeFromPaths(paths = paths)
+    }
+
+    override fun scopeFromExternalDirectory(absolutePath: String, vararg paths: String): KoScope {
+        val totalPaths = setOf(absolutePath) + paths
+        val filesFromPaths = totalPaths.flatMap { getFilesFromDirectory(absolutePath = it) }
+
+        return KoScopeCore(koFiles = filesFromPaths)
+    }
+
+    override fun scopeFromExternalDirectories(absolutePaths: Set<String>): KoScope {
+        val filesFromPaths = absolutePaths.flatMap { getFilesFromDirectory(absolutePath = it) }
+
+        return KoScopeCore(koFiles = filesFromPaths)
     }
 
     override fun scopeFromFile(path: String, vararg paths: String): KoScope = scopeFromFiles(setOf(path) + paths)
 
     override fun scopeFromFiles(paths: Set<String>): KoScope {
-        val files = paths
+        val koFiles = paths
             .map { getAbsolutePath(it) }
             .map { File(it) }
             .onEach {
                 require(it.exists()) { "File does not exist: ${it.absolutePath}" }
                 require(it.isFile) { "Path is a directory, but should be a file: ${it.absolutePath}" }
             }
-
-        val notKotlinFiles = files
-            .filterNot { it.isKotlinFile }
             .map { it.toKoFile() }
 
-        val koFiles = getKoFiles(files)
-
-        return KoScopeCore(koFiles + notKotlinFiles)
+        return KoScopeCore(koFiles)
     }
 
     private fun getAbsolutePath(projectPath: String): String = "$projectRootPath$sep$projectPath"
 
     /**
-     *
      * Determines whether the provided path corresponds to a directory created by a build tool (Gradle, Maven)
      */
     private fun isBuildToolPath(path: String): Boolean {
@@ -163,8 +181,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     private fun isBuildOrTargetPath(path: String): Boolean {
         val gradleBuildDirectoryName = "build"
         val gradleRootBuildDirectoryRegex = Regex("$projectRootPath/$gradleBuildDirectoryName/.*".toMacOsSeparator())
-        val gradleModuleBuildDirectoryRegex =
-            Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*".toMacOsSeparator())
+        val gradleModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*".toMacOsSeparator())
 
         val mavenBuildDirectoryName = "target"
         val mavenRootBuildDirectoryRegex = Regex("$projectRootPath/$mavenBuildDirectoryName/.*".toMacOsSeparator())
@@ -207,12 +224,6 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         .filter { it.isKotlinFile }
         .map { it.toKoFile() }
         .toList()
-
-    private fun getKoFiles(files: List<File>) = projectKotlinFiles.filter {
-        files.any { file ->
-            file.path == it.path
-        }
-    }
 
     companion object {
         private const val TEST_NAME_IN_PATH = "test"
