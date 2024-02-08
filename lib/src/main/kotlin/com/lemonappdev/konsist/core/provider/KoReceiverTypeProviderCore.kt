@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
@@ -33,7 +34,7 @@ internal interface KoReceiverTypeProviderCore :
             else -> receiverType?.let { predicate(it) } ?: false
         }
 
-    override fun hasReceiverTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(receiverType, kClass)
+    override fun hasReceiverTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(receiverType as KoKotlinTypeDeclaration, kClass)
 
     private fun getTypeReferences(): List<KtTypeReference> = ktCallableDeclaration
         .children

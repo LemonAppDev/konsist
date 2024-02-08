@@ -24,13 +24,9 @@ internal interface KoTypeDeclarationCore  :
     KoTypeDeclaration,
     KoBaseProviderCore,
     KoFullyQualifiedNameProviderCore,
-//    KoGenericTypeProviderCore,
-//    KoKotlinTypeProviderCore,
     KoLocationProviderCore,
     KoNameProviderCore,
-//    KoNullableProviderCore,
     KoPathProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore,
-//    KoSourceAndAliasTypeProviderCore,
     KoTextProviderCore

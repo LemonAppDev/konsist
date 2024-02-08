@@ -66,7 +66,7 @@ internal class KoTypeAliasDeclarationCore private constructor(
     override val type: KoTypeDeclaration by lazy {
         ktTypeAlias
             .getTypeReference()
-            ?.let { KoTypeDeclarationCore.getInstance(it, this) }
+            ?.let { KoKotlinTypeDeclarationCore.getInstance(it, this) }
             ?: throw KoInternalException("Type alias has no type", koBaseProvider = this)
     }
 

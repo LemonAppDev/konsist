@@ -19,6 +19,7 @@ internal interface KoNullableTypeProviderCore :
             getTypeReferences(),
             ktCallableDeclaration.isExtensionDeclaration(),
             this.castToKoBaseDeclaration(),
+            containingFile,
         )
 
     private fun getTypeReferences(): List<KtTypeReference> = ktCallableDeclaration

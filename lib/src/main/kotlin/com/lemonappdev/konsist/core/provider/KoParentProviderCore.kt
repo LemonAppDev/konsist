@@ -6,6 +6,8 @@ import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalParentDeclarationCore
 import com.lemonappdev.konsist.core.model.DataCore
+import com.lemonappdev.konsist.core.model.getParentClass
+import com.lemonappdev.konsist.core.model.getParentInterface
 import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
@@ -47,8 +49,8 @@ internal interface KoParentProviderCore :
                         ?.name
                         ?: (containingFile.packagee?.fullyQualifiedName + "." + name)
 
-                return@map getParentClass(name, fqn)
-                    ?: getParentInterface(name, fqn)
+                return@map getParentClass(name, fqn, containingFile)
+                    ?: getParentInterface(name, fqn, containingFile)
                     ?: KoExternalParentDeclarationCore.getInstance(name, it)
             }
             ?.toMutableList()
@@ -78,20 +80,6 @@ internal interface KoParentProviderCore :
 
         return indirectParents
     }
-
-    private fun getParentClass(name: String, fqn: String?): KoClassDeclaration? = DataCore
-        .classes
-        .firstOrNull { decl -> (decl.packagee?.fullyQualifiedName + "." + decl.name) == fqn }
-        ?: containingFile
-            .classes()
-            .firstOrNull { decl -> decl.name == name }
-
-    private fun getParentInterface(name: String, fqn: String?): KoInterfaceDeclaration? = DataCore
-        .interfaces
-        .firstOrNull { decl -> (decl.packagee?.fullyQualifiedName + "." + decl.name) == fqn }
-        ?: containingFile
-            .interfaces()
-            .firstOrNull { decl -> decl.name == name }
 
     override fun numParents(indirectParents: Boolean): Int = parents(indirectParents).size
 

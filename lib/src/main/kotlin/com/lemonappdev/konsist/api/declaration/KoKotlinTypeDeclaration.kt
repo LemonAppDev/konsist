@@ -14,4 +14,9 @@ import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 
-interface KoKotlinTypeDeclaration : KoTypeDeclaration
+interface KoKotlinTypeDeclaration :
+    KoTypeDeclaration,
+    KoGenericTypeProvider,
+    KoKotlinTypeProvider,
+    KoNullableProvider,
+    KoSourceAndAliasTypeProvider

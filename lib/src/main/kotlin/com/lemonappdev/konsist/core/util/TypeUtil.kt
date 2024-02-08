@@ -1,9 +1,16 @@
 package com.lemonappdev.konsist.core.util
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.declaration.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
+import com.lemonappdev.konsist.core.declaration.KoExternalParentDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoKotlinTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoTypeDeclarationCore
+import com.lemonappdev.konsist.core.model.getParentClass
+import com.lemonappdev.konsist.core.model.getParentInterface
 import org.jetbrains.kotlin.psi.KtTypeReference
+import java.lang.IllegalArgumentException
 import kotlin.reflect.KClass
 
 object TypeUtil {
@@ -11,7 +18,8 @@ object TypeUtil {
         types: List<KtTypeReference>,
         isExtension: Boolean,
         parentDeclaration: KoBaseDeclaration,
-    ): KoTypeDeclaration? {
+        containingFile: KoFileDeclaration,
+    ): KoTypeDeclaration {
         val type = if (isExtension && types.size > 1) {
             // We choose last because when we have extension the first one is receiver and the second one is (return) type.
             types.last()
@@ -21,10 +29,23 @@ object TypeUtil {
             null
         }
 
-        return type?.let { KoTypeDeclarationCore.getInstance(it, parentDeclaration) }
+            val name = type?.name ?: throw IllegalArgumentException("") // Todo: change this
+
+            val fqn =
+                containingFile
+                    .imports
+                    .firstOrNull { import ->
+                        import.name.substringAfterLast(".") == name || import.alias == name
+                    }
+                    ?.name
+                    ?: (containingFile.packagee?.fullyQualifiedName + "." + name)
+
+        return getParentClass(name, fqn, containingFile)
+            ?: getParentInterface(name, fqn, containingFile)
+            ?: KoKotlinTypeDeclarationCore.getInstance(type, containingFile)
     }
 
-    internal fun hasTypeOf(type: KoTypeDeclaration?, kClass: KClass<*>): Boolean =
+    internal fun hasTypeOf(type: KoKotlinTypeDeclaration?, kClass: KClass<*>): Boolean =
         if (type?.isKotlinType == true) {
             kClass.simpleName == type.name
         } else {
@@ -45,7 +66,7 @@ object TypeUtil {
             null
         }
 
-        return type?.let { KoTypeDeclarationCore.getInstance(type, parentDeclaration) }
+        return type?.let { KoKotlinTypeDeclarationCore.getInstance(type, parentDeclaration) }
     }
 
     /*

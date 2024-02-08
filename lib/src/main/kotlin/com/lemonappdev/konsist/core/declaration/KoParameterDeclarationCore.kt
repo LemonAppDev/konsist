@@ -77,7 +77,7 @@ internal class KoParameterDeclarationCore private constructor(
             .children
             .firstIsInstance<KtTypeReference>()
 
-        KoTypeDeclarationCore.getInstance(type, this)
+        KoKotlinTypeDeclarationCore.getInstance(type, this)
     }
 
     override fun representsType(name: String?): Boolean = type.name == name || type.fullyQualifiedName == name

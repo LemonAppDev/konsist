@@ -53,13 +53,9 @@ interface KoTypeDeclaration :
     KoBaseDeclaration,
     KoBaseProvider,
     KoFullyQualifiedNameProvider,
-//    KoGenericTypeProvider,
-//    KoKotlinTypeProvider,
     KoLocationProvider,
     KoNameProvider,
-//    KoNullableProvider,
     KoPathProvider,
     KoModuleProvider,
     KoSourceSetProvider,
-//    KoSourceAndAliasTypeProvider,
     KoTextProvider
