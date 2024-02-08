@@ -25,7 +25,10 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     }
 
     override fun scopeFromModule(moduleName: String, vararg moduleNames: String): KoScope =
-        (listOf(moduleName) + moduleNames)
+        scopeFromModules(setOf(moduleName) + moduleNames)
+
+    override fun scopeFromModules(moduleNames: Set<String>): KoScope =
+        moduleNames
             .flatMap { getFiles(it) }
             .let { KoScopeCore(it) }
 
