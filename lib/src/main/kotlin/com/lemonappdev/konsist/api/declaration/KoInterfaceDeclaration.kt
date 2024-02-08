@@ -40,6 +40,7 @@ interface KoInterfaceDeclaration :
     KoParentDeclaration,
     KoBaseDeclaration,
     KoChildDeclaration,
+    KoTypeDeclaration,
     KoBaseProvider,
     KoChildProvider,
     KoFullyQualifiedNameProvider,

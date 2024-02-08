@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -20,17 +21,26 @@ import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtTypeReference
 
-internal interface KoTypeDeclarationCore  :
-    KoTypeDeclaration,
-    KoBaseProviderCore,
-    KoFullyQualifiedNameProviderCore,
-//    KoGenericTypeProviderCore,
-//    KoKotlinTypeProviderCore,
-    KoLocationProviderCore,
-    KoNameProviderCore,
-//    KoNullableProviderCore,
-    KoPathProviderCore,
-    KoModuleProviderCore,
-    KoSourceSetProviderCore,
-//    KoSourceAndAliasTypeProviderCore,
-    KoTextProviderCore
+internal sealed class KoKotlinTypeDeclarationCore private constructor(
+    private val ktTypeReference: KtTypeReference,
+) :
+    KoKotlinTypeDeclaration,
+    KoTypeDeclarationCore,
+    KoBaseProviderCore {
+    override val psiElement: PsiElement by lazy { ktTypeReference }
+
+    override val ktElement: KtElement by lazy { ktTypeReference }
+
+    override val name: String by lazy { ktTypeReference.text }
+
+//    override val name: String by lazy {
+//        when {
+//            isAlias -> aliasType + if (isNullable) "?" else ""
+//            else -> ktTypeReference.text
+//        }
+//    }
+
+//    override val textUsedToFqn: String by lazy { bareSourceType }
+
+    override fun toString(): String = name
+}

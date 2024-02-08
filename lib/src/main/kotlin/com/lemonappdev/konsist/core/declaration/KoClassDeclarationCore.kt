@@ -59,6 +59,7 @@ import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
+import org.jetbrains.kotlin.psi.KtTypeReference
 
 internal class KoClassDeclarationCore private constructor(
     override val ktClass: KtClass,
@@ -66,6 +67,7 @@ internal class KoClassDeclarationCore private constructor(
 ) : KoClassDeclaration,
     KoParentDeclarationCore,
     KoChildDeclarationCore,
+    KoTypeDeclarationCore,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
     KoChildProviderCore,

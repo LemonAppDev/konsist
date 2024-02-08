@@ -49,6 +49,7 @@ internal class KoObjectDeclarationCore(
 ) :
     KoObjectDeclaration,
     KoChildDeclarationCore,
+    KoTypeDeclarationCore,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
     KoClassProviderCore,

@@ -51,6 +51,7 @@ internal class KoInterfaceDeclarationCore private constructor(
     KoInterfaceDeclaration,
     KoParentDeclarationCore,
     KoChildDeclarationCore,
+    KoTypeDeclarationCore,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
     KoChildProviderCore,

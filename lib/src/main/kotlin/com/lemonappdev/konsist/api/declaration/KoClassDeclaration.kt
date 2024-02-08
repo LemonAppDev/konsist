@@ -56,6 +56,7 @@ interface KoClassDeclaration :
     KoBaseDeclaration,
     KoParentDeclaration,
     KoChildDeclaration,
+    KoTypeDeclaration,
     KoBaseProvider,
     KoChildProvider,
     KoFullyQualifiedNameProvider,
