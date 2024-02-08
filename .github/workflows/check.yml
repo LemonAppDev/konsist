@@ -228,6 +228,52 @@ jobs:
       - name: Run App Integration Test
         run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew app:integrationTest
 
+  # ======================================= Check Declarations =======================================
+
+  declaration-tester-project-ubuntu:
+    name: Declaration Tester Project Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'corretto'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+
+      - name: Run Integration Test
+        run: cd test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
+
+  declaration-tester-project-windows:
+    name: Declaration Tester Project Windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: |
+            8
+            21
+          distribution: 'corretto'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+
+      - name: Run Integration Test
+        run: cd test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
+
 # ======================================= Library Artifact =========================================================
   konsist-artifact-check:
     name: Konsist Artifact Check
