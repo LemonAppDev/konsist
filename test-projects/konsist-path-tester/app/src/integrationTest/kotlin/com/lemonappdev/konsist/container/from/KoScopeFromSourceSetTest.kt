@@ -45,6 +45,7 @@ class KoScopeFromSourceSetTest {
         sut.shouldBeEqualTo(
             listOf(
                 "$appIntegrationTestSourceSetDirectory/konsist/container/KoScopeTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromDirectoriesTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromDirectoryTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromFileTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromFilesTest.kt",
