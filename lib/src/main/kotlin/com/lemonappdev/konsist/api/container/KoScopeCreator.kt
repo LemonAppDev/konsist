@@ -37,7 +37,7 @@ interface KoScopeCreator {
      * Creates a [KoScope] containing all of Kotlin files in the module.
      * Method does return Kotlin files present in build directories such as "build" and "target".
      *
-     * @param moduleNames Set of the names of the module.
+     * @param moduleNames Set of the module names.
      * @return a [KoScope] containing all of Kotlin files in the module.
      */
     fun scopeFromModules(moduleNames: Set<String>): KoScope
@@ -69,7 +69,7 @@ interface KoScopeCreator {
      * then all of them will be included.
      * Method does return Kotlin files present in build directories such as "build" and "target".
      *
-     * @param sourceSetNames Set of the names of the source set.
+     * @param sourceSetNames Set of the source set names.
      * @return a [KoScope] containing all of Kotlin files in source set.
      */
     fun scopeFromSourceSets(sourceSetNames: Set<String>): KoScope
