@@ -4,13 +4,12 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
-import com.lemonappdev.konsist.core.declaration.KoExternalParentDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoExternalTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoKotlinTypeDeclarationCore
-import com.lemonappdev.konsist.core.declaration.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.model.getParentClass
 import com.lemonappdev.konsist.core.model.getParentInterface
+import com.lemonappdev.konsist.core.model.getParentObject
 import org.jetbrains.kotlin.psi.KtTypeReference
-import java.lang.IllegalArgumentException
 import kotlin.reflect.KClass
 
 object TypeUtil {
@@ -19,7 +18,7 @@ object TypeUtil {
         isExtension: Boolean,
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
-    ): KoTypeDeclaration {
+    ): KoTypeDeclaration? {
         val type = if (isExtension && types.size > 1) {
             // We choose last because when we have extension the first one is receiver and the second one is (return) type.
             types.last()
@@ -29,20 +28,37 @@ object TypeUtil {
             null
         }
 
-            val name = type?.name ?: throw IllegalArgumentException("") // Todo: change this
+        val typeText = type?.text
 
-            val fqn =
+        val fqn =
+            containingFile
+                .imports
+                .firstOrNull { import ->
+                    import.name.substringAfterLast(".") == typeText || import.alias == typeText
+                }
+                ?.name
+                ?: (containingFile.packagee?.fullyQualifiedName + "." + typeText)
+
+        return when {
+            typeText != null && isKotlinBasicType(typeText) -> KoKotlinTypeDeclarationCore.getInstance(
+                type,
                 containingFile
-                    .imports
-                    .firstOrNull { import ->
-                        import.name.substringAfterLast(".") == name || import.alias == name
-                    }
-                    ?.name
-                    ?: (containingFile.packagee?.fullyQualifiedName + "." + name)
+            )
 
-        return getParentClass(name, fqn, containingFile)
-            ?: getParentInterface(name, fqn, containingFile)
-            ?: KoKotlinTypeDeclarationCore.getInstance(type, containingFile)
+            typeText != null && isKotlinCollectionTypes(typeText) -> KoKotlinTypeDeclarationCore.getInstance(
+                type,
+                containingFile
+            )
+
+            typeText != null -> {
+                getParentClass(typeText, fqn, containingFile)
+                    ?: getParentInterface(typeText, fqn, containingFile
+                    ) ?: getParentObject(typeText, fqn, containingFile)
+                    ?: KoExternalTypeDeclarationCore.getInstance(typeText, type)
+            }
+
+            else -> null
+        }
     }
 
     internal fun hasTypeOf(type: KoKotlinTypeDeclaration?, kClass: KClass<*>): Boolean =
@@ -76,4 +92,60 @@ object TypeUtil {
         null -> receiverType != null
         else -> receiverType?.name == name
     }
+
+    private fun isKotlinBasicType(name: String): Boolean = kotlinBasicTypes.any { it == name }
+
+    private fun isKotlinCollectionTypes(name: String): Boolean = kotlinCollectionTypes.any { name.startsWith(it) }
+
+    // Basic types in Kotlin are described here: https://kotlinlang.org/docs/basic-types.html
+    private val kotlinBasicTypes: Set<String>
+        get() = setOf(
+            "Byte",
+            "Short",
+            "Int",
+            "Long",
+            "Float",
+            "Double",
+            "UByte",
+            "UShort",
+            "UInt",
+            "ULong",
+            "UByteArray",
+            "UShortArray",
+            "UIntArray",
+            "ULongArray",
+            "Boolean",
+            "Char",
+            "String",
+        )
+
+    // Collections in Kotlin are described here: https://kotlinlang.org/docs/collections-overview.html#collection
+    // and here https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections
+    private val kotlinCollectionTypes: Set<String>
+        get() = setOf(
+            "AbstractCollection",
+            "AbstractIterator",
+            "AbstractList",
+            "AbstractMap",
+            "AbstractMutableCollection",
+            "AbstractMutableList",
+            "AbstractMutableMap",
+            "AbstractMutableSet",
+            "AbstractSet",
+            "ArrayDeque",
+            "ArrayList",
+            "Array",
+            "Collection",
+            "HashMap",
+            "HashSet",
+            "LinkedHashMap",
+            "LinkedHashSet",
+            "List",
+            "Map",
+            "MutableCollection",
+            "MutableList",
+            "MutableMap",
+            "MutableSet",
+            "Set",
+        )
 }

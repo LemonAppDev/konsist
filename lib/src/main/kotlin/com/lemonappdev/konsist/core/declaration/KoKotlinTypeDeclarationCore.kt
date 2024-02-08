@@ -21,6 +21,7 @@ import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtTypeReference
+import java.lang.IllegalArgumentException
 
 internal class KoKotlinTypeDeclarationCore private constructor(
     override val ktTypeReference: KtTypeReference,
@@ -40,6 +41,14 @@ internal class KoKotlinTypeDeclarationCore private constructor(
         when {
             isAlias -> aliasType + if (isNullable) "?" else ""
             else -> ktTypeReference.text
+        }
+    }
+
+    override val fullyQualifiedName: String by lazy {
+        when {
+            isKotlinBasicType -> "kotlin.$name"
+            isKotlinCollectionType -> "kotlin.collection.$bareSourceType"
+            else -> throw IllegalArgumentException("Type doesn't belong to bukotlin types.")
         }
     }
 

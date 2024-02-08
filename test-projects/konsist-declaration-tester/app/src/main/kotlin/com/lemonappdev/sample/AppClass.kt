@@ -42,6 +42,8 @@ var appProperty: AppClass = AppClass("")
         if (true) field = value
     }
 
+val x: List<String> = listOf()
+
 object AppObject
 
 enum class AppEnumClass {
