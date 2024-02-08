@@ -2,5 +2,5 @@ package com.lemonappdev.konsist.core.declaration.kogetter
 
 class KoGetterDeclarationForKoModuleProviderTest {
     // Konsist koGetter.moduleName and koGetter.resideInModule() tests
-    // are implemented in the test\konsist-path-tester project.
+    // are implemented in the test\konsist-declaration-tester project.
 }
