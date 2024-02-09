@@ -34,7 +34,7 @@ internal interface KoReceiverTypeProviderCore :
             else -> receiverType?.let { predicate(it) } ?: false
         }
 
-    override fun hasReceiverTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(receiverType as? KoKotlinTypeDeclaration, kClass)
+    override fun hasReceiverTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(receiverType, kClass)
 
     private fun getTypeReferences(): List<KtTypeReference> = ktCallableDeclaration
         .children

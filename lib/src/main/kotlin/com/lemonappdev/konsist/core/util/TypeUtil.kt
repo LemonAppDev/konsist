@@ -14,6 +14,7 @@ import com.lemonappdev.konsist.core.model.getInterface
 import com.lemonappdev.konsist.core.model.getObject
 import org.jetbrains.kotlin.psi.KtFunctionType
 import org.jetbrains.kotlin.psi.KtTypeReference
+import org.jetbrains.kotlin.psi.KtUserType
 import kotlin.reflect.KClass
 
 object TypeUtil {
@@ -31,51 +32,42 @@ object TypeUtil {
         } else {
             null
         }
+            ?.children
+            ?.firstOrNull()
 
-        if (type?.children?.firstOrNull() is KtFunctionType) {
-            return KoFunctionTypeDeclarationCore.getInstance(type, parentDeclaration)
-        }
+        return if (type is KtFunctionType) {
+            KoFunctionTypeDeclarationCore.getInstance(type, parentDeclaration)
+        } else if (type is KtUserType) {
+            val typeText = type.text
 
-        val typeText = type?.text
+            val fqn =
+                containingFile
+                    .imports
+                    .firstOrNull { import ->
+                        import.name.substringAfterLast(".") == typeText || import.alias == typeText
+                    }
+                    ?.name
+                    ?: (containingFile.packagee?.fullyQualifiedName + "." + typeText)
 
-        val fqn =
-            containingFile
-                .imports
-                .firstOrNull { import ->
-                    import.name.substringAfterLast(".") == typeText || import.alias == typeText
-                }
-                ?.name
-                ?: (containingFile.packagee?.fullyQualifiedName + "." + typeText)
-
-        return when {
-            typeText != null && isKotlinBasicType(typeText) -> KoKotlinTypeDeclarationCore.getInstance(
+            if (typeText != null && isKotlinBasicType(typeText)) KoKotlinTypeDeclarationCore.getInstance(
                 type,
                 parentDeclaration
             )
-
-            typeText != null && isKotlinCollectionTypes(typeText) -> KoKotlinTypeDeclarationCore.getInstance(
+            else if (typeText != null && isKotlinCollectionTypes(typeText)) KoKotlinTypeDeclarationCore.getInstance(
                 type,
                 parentDeclaration
             )
-
-            typeText != null -> {
-                getClass(typeText, fqn, containingFile)
-                    ?: getInterface(
-                        typeText, fqn, containingFile
-                    ) ?: getObject(typeText, fqn, containingFile)
-                    ?: KoExternalTypeDeclarationCore.getInstance(typeText, type)
-            }
-
-            else -> null
-        }
+            else if (typeText != null) getClass(typeText, fqn, containingFile)
+                ?: getInterface(
+                    typeText, fqn, containingFile
+                ) ?: getObject(typeText, fqn, containingFile)
+                ?: KoExternalTypeDeclarationCore.getInstance(typeText, type)
+            else null
+        } else null
     }
 
     internal fun hasTypeOf(type: KoTypeDeclaration?, kClass: KClass<*>): Boolean =
-        if ((type as? KoKotlinTypeProvider)?.isKotlinType == true) {
-            kClass.simpleName == type.name
-        } else {
-            kClass.qualifiedName == type?.fullyQualifiedName
-        }
+        kClass.qualifiedName == type?.fullyQualifiedName
 
     /*
     1.0.0 CleanUp - When we remove KoReceiverTypeProviderCore.hasReceiverType it will be unused.
@@ -91,7 +83,12 @@ object TypeUtil {
             null
         }
 
-        return type?.let { KoKotlinTypeDeclarationCore.getInstance(type, parentDeclaration) }
+        return type?.let {
+            KoKotlinTypeDeclarationCore.getInstance(
+                type.children.first() as KtUserType,
+                parentDeclaration
+            )
+        }
     }
 
     /*

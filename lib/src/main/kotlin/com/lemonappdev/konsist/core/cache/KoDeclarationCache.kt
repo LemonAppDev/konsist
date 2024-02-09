@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 import org.jetbrains.kotlin.psi.KtTypeReference
+import org.jetbrains.kotlin.psi.KtUserType
 import java.util.concurrent.ConcurrentHashMap
 
 internal class KoDeclarationCache<T : KoBaseProvider> {
@@ -86,13 +87,13 @@ internal object KoExternalTypeCache {
 
     fun getOrCreateInstance(
         key: String,
-        ktTypeReference: KtTypeReference,
-        value: (ktTypeReference: KtTypeReference) -> KoExternalTypeDeclaration,
+        ktUserType: KtUserType,
+        value: (ktUserType: KtUserType) -> KoExternalTypeDeclaration,
     ): KoExternalTypeDeclaration {
         return if (hasKey(key)) {
             get(key)
         } else {
-            set(key, value.invoke(ktTypeReference))
+            set(key, value.invoke(ktUserType))
             get(key)
         }
     }

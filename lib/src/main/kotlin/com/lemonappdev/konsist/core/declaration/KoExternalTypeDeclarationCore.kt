@@ -10,17 +10,17 @@ import com.lemonappdev.konsist.core.cache.KoExternalTypeCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
-import org.jetbrains.kotlin.psi.KtTypeReference
+import org.jetbrains.kotlin.psi.KtUserType
 
-internal class KoExternalTypeDeclarationCore(name: String, private val ktTypeReference: KtTypeReference) :
+internal class KoExternalTypeDeclarationCore(name: String, private val ktUserType: KtUserType) :
     KoExternalTypeDeclaration,
     KoTypeDeclarationCore,
     KoBaseProviderCore {
-    override val psiElement: PsiElement by lazy { ktTypeReference }
+    override val psiElement: PsiElement by lazy { ktUserType }
 
-    override val ktElement: KtElement by lazy { ktTypeReference }
+    override val ktElement: KtElement by lazy { ktUserType }
 
-    override val name: String by lazy { ktTypeReference.text }
+    override val name: String by lazy { ktUserType.text }
 
     override fun toString(): String = name
 
@@ -29,12 +29,12 @@ internal class KoExternalTypeDeclarationCore(name: String, private val ktTypeRef
 
         internal fun getInstance(
             name: String,
-            ktTypeReference: KtTypeReference,
+            ktUserType: KtUserType,
         ): KoExternalTypeDeclaration =
-            cache.getOrCreateInstance(name, ktTypeReference) {
+            cache.getOrCreateInstance(name, ktUserType) {
                 KoExternalTypeDeclarationCore(
                     name,
-                    ktTypeReference,
+                    ktUserType,
                 )
             }
     }

@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -27,12 +28,15 @@ import com.lemonappdev.konsist.core.provider.modifier.KoValModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVarArgModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVarModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
+import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.KtTypeReference
+import org.jetbrains.kotlin.psi.KtUserType
+import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 
 internal class KoParameterDeclarationCore private constructor(
@@ -73,11 +77,16 @@ internal class KoParameterDeclarationCore private constructor(
     override val ktElement: KtElement by lazy { ktParameter }
 
     override val type: KoTypeDeclaration by lazy {
-        val type = ktParameter
+        val types = ktParameter
             .children
-            .firstIsInstance<KtTypeReference>()
+            .filterIsInstance<KtTypeReference>()
 
-        KoKotlinTypeDeclarationCore.getInstance(type, this)
+        TypeUtil.getType(
+            types,
+            ktParameter.isExtensionDeclaration(),
+            this.castToKoBaseDeclaration(),
+            containingFile,
+        ) ?: throw IllegalArgumentException("Parameter has no specified type.")
     }
 
     override fun representsType(name: String?): Boolean = type.name == name || type.fullyQualifiedName == name

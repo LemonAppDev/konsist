@@ -3,21 +3,21 @@ package com.lemonappdev.konsist.core.provider
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
 import com.lemonappdev.konsist.core.declaration.KoFileDeclarationCore
-import org.jetbrains.kotlin.psi.KtTypeReference
+import org.jetbrains.kotlin.psi.KtUserType
 
 internal interface KoSourceAndAliasTypeProviderCore :
     KoSourceAndAliasTypeProvider,
     KoNameProviderCore,
     KoBaseProviderCore {
-    val ktTypeReference: KtTypeReference
+    val ktUserType: KtUserType
 
     private val file: KoFileDeclaration
-        get() = KoFileDeclarationCore(ktTypeReference.containingKtFile)
+        get() = KoFileDeclarationCore(ktUserType.containingKtFile)
 
     override val aliasType: String?
         get() = file
             .imports
-            .firstOrNull { it.alias == ktTypeReference.text.removeSuffix("?") }
+            .firstOrNull { it.alias == ktUserType.text.removeSuffix("?") }
             ?.alias
 
     override val isAlias: Boolean
@@ -27,7 +27,7 @@ internal interface KoSourceAndAliasTypeProviderCore :
         get() = if (isAlias) {
             file
                 .imports
-                .first { it.alias == ktTypeReference.text.removeSuffix("?") }
+                .first { it.alias == ktUserType.text.removeSuffix("?") }
                 .name
                 .split(".")
                 .toMutableList()

@@ -20,11 +20,11 @@ import com.lemonappdev.konsist.core.provider.KoSourceAndAliasTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import org.jetbrains.kotlin.psi.KtElement
-import org.jetbrains.kotlin.psi.KtTypeReference
+import org.jetbrains.kotlin.psi.KtUserType
 import java.lang.IllegalArgumentException
 
 internal class KoKotlinTypeDeclarationCore private constructor(
-    override val ktTypeReference: KtTypeReference,
+    override val ktUserType: KtUserType,
 ) :
     KoKotlinTypeDeclaration,
     KoTypeDeclarationCore,
@@ -33,14 +33,14 @@ internal class KoKotlinTypeDeclarationCore private constructor(
     KoKotlinTypeProviderCore,
     KoNullableProviderCore,
     KoSourceAndAliasTypeProviderCore {
-    override val psiElement: PsiElement by lazy { ktTypeReference }
+    override val psiElement: PsiElement by lazy { ktUserType }
 
-    override val ktElement: KtElement by lazy { ktTypeReference }
+    override val ktElement: KtElement by lazy { ktUserType }
 
     override val name: String by lazy {
         when {
             isAlias -> aliasType + if (isNullable) "?" else ""
-            else -> ktTypeReference.text
+            else -> ktUserType.text
         }
     }
 
@@ -48,7 +48,7 @@ internal class KoKotlinTypeDeclarationCore private constructor(
         when {
             isKotlinBasicType -> "kotlin.$name"
             isKotlinCollectionType -> "kotlin.collection.$bareSourceType"
-            else -> throw IllegalArgumentException("Type doesn't belong to bukotlin types.")
+            else -> bareSourceType
         }
     }
 
@@ -60,12 +60,12 @@ internal class KoKotlinTypeDeclarationCore private constructor(
         private val cache: KoDeclarationCache<KoKotlinTypeDeclaration> = KoDeclarationCache()
 
         internal fun getInstance(
-            ktTypeReference: KtTypeReference,
+            ktUserType: KtUserType,
             containingDeclaration: KoBaseDeclaration,
         ): KoKotlinTypeDeclaration =
-            cache.getOrCreateInstance(ktTypeReference, containingDeclaration) {
+            cache.getOrCreateInstance(ktUserType, containingDeclaration) {
                 KoKotlinTypeDeclarationCore(
-                    ktTypeReference,
+                    ktUserType,
                 )
             }
     }
