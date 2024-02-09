@@ -56,5 +56,5 @@ internal interface KoReturnProviderCore :
             else -> returnType?.let { predicate(it) } ?: false
         }
 
-    override fun hasReturnTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(returnType as? KoKotlinTypeDeclaration, kClass)
+    override fun hasReturnTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(returnType as? KoTypeDeclaration, kClass)
 }

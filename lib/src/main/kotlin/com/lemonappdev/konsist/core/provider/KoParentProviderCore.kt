@@ -1,13 +1,10 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalParentDeclarationCore
-import com.lemonappdev.konsist.core.model.DataCore
-import com.lemonappdev.konsist.core.model.getParentClass
-import com.lemonappdev.konsist.core.model.getParentInterface
+import com.lemonappdev.konsist.core.model.getClass
+import com.lemonappdev.konsist.core.model.getInterface
 import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
@@ -49,8 +46,8 @@ internal interface KoParentProviderCore :
                         ?.name
                         ?: (containingFile.packagee?.fullyQualifiedName + "." + name)
 
-                return@map getParentClass(name, fqn, containingFile)
-                    ?: getParentInterface(name, fqn, containingFile)
+                return@map getClass(name, fqn, containingFile)
+                    ?: getInterface(name, fqn, containingFile)
                     ?: KoExternalParentDeclarationCore.getInstance(name, it)
             }
             ?.toMutableList()

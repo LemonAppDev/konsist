@@ -26,21 +26,21 @@ object DataCore {
     }
 }
 
-fun getParentClass(name: String, fqn: String?, containingFile: KoFileDeclaration): KoClassDeclaration? = DataCore
+fun getClass(name: String, fqn: String?, containingFile: KoFileDeclaration): KoClassDeclaration? = DataCore
     .classes
     .firstOrNull { decl -> (decl.packagee?.fullyQualifiedName + "." + decl.name) == fqn }
     ?: containingFile
         .classes()
         .firstOrNull { decl -> decl.name == name }
 
-fun getParentInterface(name: String, fqn: String?, containingFile: KoFileDeclaration): KoInterfaceDeclaration? = DataCore
+fun getInterface(name: String, fqn: String?, containingFile: KoFileDeclaration): KoInterfaceDeclaration? = DataCore
     .interfaces
     .firstOrNull { decl -> (decl.packagee?.fullyQualifiedName + "." + decl.name) == fqn }
     ?: containingFile
         .interfaces()
         .firstOrNull { decl -> decl.name == name }
 
-fun getParentObject(name: String, fqn: String?, containingFile: KoFileDeclaration): KoObjectDeclaration? = DataCore
+fun getObject(name: String, fqn: String?, containingFile: KoFileDeclaration): KoObjectDeclaration? = DataCore
     .objects
     .firstOrNull { decl -> (decl.packagee?.fullyQualifiedName + "." + decl.name) == fqn }
     ?: containingFile

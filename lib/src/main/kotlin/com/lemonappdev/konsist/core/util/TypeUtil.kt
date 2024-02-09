@@ -2,13 +2,17 @@ package com.lemonappdev.konsist.core.util
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalTypeDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoFunctionTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoKotlinTypeDeclarationCore
-import com.lemonappdev.konsist.core.model.getParentClass
-import com.lemonappdev.konsist.core.model.getParentInterface
-import com.lemonappdev.konsist.core.model.getParentObject
+import com.lemonappdev.konsist.core.model.getClass
+import com.lemonappdev.konsist.core.model.getInterface
+import com.lemonappdev.konsist.core.model.getObject
+import org.jetbrains.kotlin.psi.KtFunctionType
 import org.jetbrains.kotlin.psi.KtTypeReference
 import kotlin.reflect.KClass
 
@@ -28,6 +32,10 @@ object TypeUtil {
             null
         }
 
+        if (type?.children?.firstOrNull() is KtFunctionType) {
+            return KoFunctionTypeDeclarationCore.getInstance(type, parentDeclaration)
+        }
+
         val typeText = type?.text
 
         val fqn =
@@ -42,18 +50,19 @@ object TypeUtil {
         return when {
             typeText != null && isKotlinBasicType(typeText) -> KoKotlinTypeDeclarationCore.getInstance(
                 type,
-                containingFile
+                parentDeclaration
             )
 
             typeText != null && isKotlinCollectionTypes(typeText) -> KoKotlinTypeDeclarationCore.getInstance(
                 type,
-                containingFile
+                parentDeclaration
             )
 
             typeText != null -> {
-                getParentClass(typeText, fqn, containingFile)
-                    ?: getParentInterface(typeText, fqn, containingFile
-                    ) ?: getParentObject(typeText, fqn, containingFile)
+                getClass(typeText, fqn, containingFile)
+                    ?: getInterface(
+                        typeText, fqn, containingFile
+                    ) ?: getObject(typeText, fqn, containingFile)
                     ?: KoExternalTypeDeclarationCore.getInstance(typeText, type)
             }
 
@@ -61,8 +70,8 @@ object TypeUtil {
         }
     }
 
-    internal fun hasTypeOf(type: KoKotlinTypeDeclaration?, kClass: KClass<*>): Boolean =
-        if (type?.isKotlinType == true) {
+    internal fun hasTypeOf(type: KoTypeDeclaration?, kClass: KClass<*>): Boolean =
+        if ((type as? KoKotlinTypeProvider)?.isKotlinType == true) {
             kClass.simpleName == type.name
         } else {
             kClass.qualifiedName == type?.fullyQualifiedName
@@ -95,7 +104,7 @@ object TypeUtil {
 
     private fun isKotlinBasicType(name: String): Boolean = kotlinBasicTypes.any { it == name }
 
-    private fun isKotlinCollectionTypes(name: String): Boolean = kotlinCollectionTypes.any { name.startsWith(it) }
+    private fun isKotlinCollectionTypes(name: String): Boolean = kotlinCollectionTypes.any { name.startsWith("$it<") }
 
     // Basic types in Kotlin are described here: https://kotlinlang.org/docs/basic-types.html
     private val kotlinBasicTypes: Set<String>
