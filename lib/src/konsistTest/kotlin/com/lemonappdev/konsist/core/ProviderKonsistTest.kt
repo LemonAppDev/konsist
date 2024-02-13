@@ -25,7 +25,8 @@ class ProviderKonsistTest {
         providerPackageScope
             .functions()
             .returnTypes
-            .assertFalse { it.sourceType.endsWith("Impl") }
+//            .assertFalse { it.sourceType.endsWith("Impl") } // Todo: chamge this
+            .assertFalse { it.name.endsWith("Impl") }
     }
 
     @Test
@@ -33,7 +34,8 @@ class ProviderKonsistTest {
         providerPackageScope
             .properties()
             .types
-            .assertFalse { it.sourceType.endsWith("Impl") }
+//            .assertFalse { it.sourceType.endsWith("Impl") } // Todo: chamge this
+            .assertFalse { it.name.endsWith("Impl") }
     }
 
     @Test

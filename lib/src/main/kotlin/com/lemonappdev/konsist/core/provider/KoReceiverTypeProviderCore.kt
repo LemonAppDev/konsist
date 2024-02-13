@@ -23,6 +23,7 @@ internal interface KoReceiverTypeProviderCore :
             getTypeReferences(),
             ktCallableDeclaration.isExtensionDeclaration(),
             this.castToKoBaseDeclaration(),
+            containingFile
         )
 
     @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasReceiverType { it.name == name }"))
