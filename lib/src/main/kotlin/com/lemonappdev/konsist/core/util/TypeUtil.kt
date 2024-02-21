@@ -3,14 +3,10 @@ package com.lemonappdev.konsist.core.util
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
-import com.lemonappdev.konsist.api.declaration.KoFunctionTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.KoKotlinTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.core.declaration.KoExternalTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoFunctionTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoKotlinTypeDeclarationCore
-import com.lemonappdev.konsist.core.declaration.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
 import com.lemonappdev.konsist.core.model.getObject

@@ -2,11 +2,10 @@ package com.lemonappdev.konsist.core.cache
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
-import com.lemonappdev.konsist.api.declaration.KoExternalTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoExternalTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
-import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
 import java.util.concurrent.ConcurrentHashMap
 

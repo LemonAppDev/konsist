@@ -2,15 +2,10 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
-import com.lemonappdev.konsist.api.declaration.KoExternalTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.KoFunctionTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
-import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.cache.KoExternalParentCache
-import com.lemonappdev.konsist.core.cache.KoExternalTypeCache
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.util.TypeUtil
@@ -18,9 +13,7 @@ import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunctionType
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtParameterList
-import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 import org.jetbrains.kotlin.psi.KtTypeReference
-import org.jetbrains.kotlin.psi.KtUserType
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 
 internal class KoFunctionTypeDeclarationCore private constructor(
