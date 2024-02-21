@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.kotype
+package com.lemonappdev.konsist.core.declaration.type.kotype
 
 class KoTypeDeclarationForKoModuleProviderTest {
     // Konsist koType.moduleName and koType.resideInModule() tests

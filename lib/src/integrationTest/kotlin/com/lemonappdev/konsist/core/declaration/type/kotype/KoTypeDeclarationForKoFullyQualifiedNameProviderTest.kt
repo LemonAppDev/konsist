@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.kotype
+package com.lemonappdev.konsist.core.declaration.type.kotype
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.withPrimaryConstructor

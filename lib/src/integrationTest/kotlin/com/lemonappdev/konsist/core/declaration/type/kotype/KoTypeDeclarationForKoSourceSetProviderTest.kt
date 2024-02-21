@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.kotype
+package com.lemonappdev.konsist.core.declaration.type.kotype
 
 class KoTypeDeclarationForKoSourceSetProviderTest {
     // Konsist koType.sourceSetName and koType.resideInSourceSet() tests
