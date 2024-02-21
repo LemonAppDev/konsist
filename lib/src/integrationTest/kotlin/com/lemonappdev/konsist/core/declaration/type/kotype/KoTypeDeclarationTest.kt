@@ -18,5 +18,5 @@ class KoTypeDeclarationTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kotype/snippet/forgeneral/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/type/kotype/snippet/forgeneral/", fileName)
 }

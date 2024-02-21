@@ -22,5 +22,5 @@
 //    }
 //
 //    private fun getSnippetFile(fileName: String) =
-//        getSnippetKoScope("core/declaration/kotype/snippet/forkocontainingfileprovider/", fileName)
+//        getSnippetKoScope("core/declaration/type/kotype/snippet/forkocontainingfileprovider/", fileName)
 //}

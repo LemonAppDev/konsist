@@ -33,7 +33,7 @@ class KoTypeDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotype/snippet/" +
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/type/kotype/snippet/" +
                     "forkopathprovider/type-project-file-path.kt",
             )
     }
@@ -73,5 +73,5 @@ class KoTypeDeclarationForKoPathProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kotype/snippet/forkopathprovider/", fileName)
+        getSnippetKoScope("core/declaration/type/kotype/snippet/forkopathprovider/", fileName)
 }

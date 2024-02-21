@@ -24,7 +24,7 @@
 //    }
 //
 //    private fun getSnippetFile(fileName: String) =
-//        TestSnippetProvider.getSnippetKoScope("core/declaration/kotype/snippet/forkogenerictypeprovider/", fileName)
+//        TestSnippetProvider.getSnippetKoScope("core/declaration/type/kotype/snippet/forkogenerictypeprovider/", fileName)
 //
 //    companion object {
 //        @Suppress("unused")

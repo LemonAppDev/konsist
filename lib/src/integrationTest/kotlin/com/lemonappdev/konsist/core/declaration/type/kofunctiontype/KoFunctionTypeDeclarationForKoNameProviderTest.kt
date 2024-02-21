@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.type.kotype
+package com.lemonappdev.konsist.core.declaration.type.kofunctiontype
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
@@ -6,7 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoTypeDeclarationForKoNameProviderTest {
+class KoFunctionTypeDeclarationForKoNameProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
     fun `type-name`(
@@ -27,18 +27,14 @@ class KoTypeDeclarationForKoNameProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/type/kotype/snippet/forkonameprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/type/kofunctiontype/snippet/forkonameprovider/", fileName)
 
     companion object {
         @Suppress("unused")
         @JvmStatic
         fun provideValues() = listOf(
-//            arguments("simple-type", "SampleType"),
-            arguments("simple-nullable-type", "SampleType?"),
-//            arguments("simple-list-type", "List<SampleType?>"),
-//            arguments("simple-nullable-list-type", "List<SampleType?>?"),
-//            arguments("import-alias", "ImportAlias"),
-//            arguments("nullable-import-alias", "ImportAlias?"),
+            arguments("function-type", "() -> SampleType"),
+            arguments("nullable-function-type", "(() -> SampleType)?"),
         )
     }
 }

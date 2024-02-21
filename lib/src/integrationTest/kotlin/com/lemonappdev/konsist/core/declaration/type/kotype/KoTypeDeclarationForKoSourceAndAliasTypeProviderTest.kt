@@ -161,7 +161,7 @@
 //
 //    private fun getSnippetFile(fileName: String) =
 //        TestSnippetProvider.getSnippetKoScope(
-//            "core/declaration/kotype/snippet/forkosourceandaliastypeprovider/",
+//            "core/declaration/type/kotype/snippet/forkosourceandaliastypeprovider/",
 //            fileName,
 //        )
 //}
