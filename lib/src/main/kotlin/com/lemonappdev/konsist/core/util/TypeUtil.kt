@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.core.declaration.type.KoExternalTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoFunctionTypeDeclarationCore
+import com.lemonappdev.konsist.core.declaration.type.KoImportAliasDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
@@ -34,7 +35,17 @@ object TypeUtil {
             ?.children
             ?.firstOrNull()
 
-        return transformPsiElementToKoTypeDeclaration(type, parentDeclaration, containingFile)
+        val isAlias = containingFile
+            .imports
+            .firstOrNull {
+                it.alias == type?.text
+            }
+
+        return if (isAlias != null) {
+            KoImportAliasDeclarationCore.getInstance(type as KtUserType, containingFile)
+        } else {
+            transformPsiElementToKoTypeDeclaration(type, parentDeclaration, containingFile)
+        }
     }
 
     internal fun hasTypeOf(type: KoTypeDeclaration?, kClass: KClass<*>): Boolean =

@@ -14,32 +14,30 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoNonNullableTypeProviderCore
 import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.psi.KtElement
-import org.jetbrains.kotlin.psi.KtFunctionType
-import org.jetbrains.kotlin.psi.KtImportAlias
-import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
+import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 
 internal class KoImportAliasDeclarationCore private constructor(
-    private val ktImportAlias: KtImportAlias,
+    private val ktUserType: KtUserType,
 ) :
     KoImportAliasDeclaration,
     KoTypeDeclarationCore,
     KoBaseProviderCore,
     KoNonNullableTypeProviderCore {
-    override val psiElement: PsiElement by lazy { ktImportAlias }
+    override val psiElement: PsiElement by lazy { ktUserType }
 
-    override val ktElement: KtElement by lazy { ktImportAlias }
+    override val ktElement: KtElement by lazy { ktUserType }
 
-    override val name: String by lazy { ktImportAlias.text }
+    override val name: String by lazy { ktUserType.text }
     override val type: KoTypeDeclaration by lazy {
-        val types = ktImportAlias
+        val types = ktUserType
             .children
             .filterIsInstance<KtTypeReference>()
 
         TypeUtil.getType(
             types,
-            ktImportAlias.isExtensionDeclaration(),
+            ktUserType.isExtensionDeclaration(),
             this.castToKoBaseDeclaration(),
             containingFile,
         ) ?: throw IllegalArgumentException("Import alias has no specified type.")
@@ -51,12 +49,12 @@ internal class KoImportAliasDeclarationCore private constructor(
         private val cache: KoDeclarationCache<KoImportAliasDeclaration> = KoDeclarationCache() // Todo: change this?
 
         internal fun getInstance(
-            ktImportAlias: KtImportAlias,
+            ktUserType: KtUserType,
             containingDeclaration: KoBaseDeclaration,
         ): KoImportAliasDeclaration =
-            cache.getOrCreateInstance(ktImportAlias, containingDeclaration) {
+            cache.getOrCreateInstance(ktUserType, containingDeclaration) {
                 KoImportAliasDeclarationCore(
-                    ktImportAlias,
+                    ktUserType,
                 )
             }
     }
