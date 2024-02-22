@@ -10,7 +10,7 @@ import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 
-internal interface KoTypeDeclarationCore  :
+internal interface KoTypeDeclarationCore :
     KoTypeDeclaration,
     KoBaseProviderCore,
     KoFullyQualifiedNameProviderCore,

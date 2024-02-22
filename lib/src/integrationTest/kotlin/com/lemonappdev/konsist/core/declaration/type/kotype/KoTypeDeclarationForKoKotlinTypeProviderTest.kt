@@ -1,11 +1,11 @@
-//package com.lemonappdev.konsist.core.declaration.kotype
+// package com.lemonappdev.konsist.core.declaration.kotype
 //
-//import com.lemonappdev.konsist.TestSnippetProvider
-//import org.amshove.kluent.assertSoftly
-//import org.amshove.kluent.shouldBeEqualTo
-//import org.junit.jupiter.api.Test
+// import com.lemonappdev.konsist.TestSnippetProvider
+// import org.amshove.kluent.assertSoftly
+// import org.amshove.kluent.shouldBeEqualTo
+// import org.junit.jupiter.api.Test
 //
-//class KoTypeDeclarationForKoKotlinTypeProviderTest {
+// class KoTypeDeclarationForKoKotlinTypeProviderTest {
 //    @Test
 //    fun `basic-types`() {
 //        // given
@@ -65,4 +65,4 @@
 //
 //    private fun getSnippetFile(fileName: String) =
 //        TestSnippetProvider.getSnippetKoScope("core/declaration/type/kotype/snippet/forkokotlintypeprovider/", fileName)
-//}
+// }

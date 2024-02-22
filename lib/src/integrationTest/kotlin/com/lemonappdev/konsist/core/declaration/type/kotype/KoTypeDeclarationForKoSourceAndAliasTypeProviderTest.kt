@@ -1,11 +1,11 @@
-//package com.lemonappdev.konsist.core.declaration.kotype
+// package com.lemonappdev.konsist.core.declaration.kotype
 //
-//import com.lemonappdev.konsist.TestSnippetProvider
-//import org.amshove.kluent.assertSoftly
-//import org.amshove.kluent.shouldBeEqualTo
-//import org.junit.jupiter.api.Test
+// import com.lemonappdev.konsist.TestSnippetProvider
+// import org.amshove.kluent.assertSoftly
+// import org.amshove.kluent.shouldBeEqualTo
+// import org.junit.jupiter.api.Test
 //
-//class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
+// class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
 //    @Test
 //    fun `type`() {
 //        // given
@@ -23,22 +23,22 @@
 //        }
 //    }
 //
-////    @Test
-////    fun `fully-qualified-type`() {
-////        // given
-////        val sut = getSnippetFile("fully-qualified-type")
-////            .properties()
-////            .first()
-////            .type
-////
-////        // then
-////        assertSoftly(sut) {
-////            it?.sourceType shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType?"
-////            it?.bareSourceType shouldBeEqualTo "SampleType"
-////            it?.aliasType shouldBeEqualTo null
-////            it?.isAlias shouldBeEqualTo false
-////        }
-////    }
+// //    @Test
+// //    fun `fully-qualified-type`() {
+// //        // given
+// //        val sut = getSnippetFile("fully-qualified-type")
+// //            .properties()
+// //            .first()
+// //            .type
+// //
+// //        // then
+// //        assertSoftly(sut) {
+// //            it?.sourceType shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType?"
+// //            it?.bareSourceType shouldBeEqualTo "SampleType"
+// //            it?.aliasType shouldBeEqualTo null
+// //            it?.isAlias shouldBeEqualTo false
+// //        }
+// //    }
 //
 //    @Test
 //    fun `nullable-type`() {
@@ -164,4 +164,4 @@
 //            "core/declaration/type/kotype/snippet/forkosourceandaliastypeprovider/",
 //            fileName,
 //        )
-//}
+// }

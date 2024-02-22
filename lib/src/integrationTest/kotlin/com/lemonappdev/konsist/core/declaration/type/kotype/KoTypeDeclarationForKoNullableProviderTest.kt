@@ -1,12 +1,12 @@
-//package com.lemonappdev.konsist.core.declaration.kotype
+// package com.lemonappdev.konsist.core.declaration.kotype
 //
-//import com.lemonappdev.konsist.TestSnippetProvider
-//import org.amshove.kluent.shouldBeEqualTo
-//import org.junit.jupiter.params.ParameterizedTest
-//import org.junit.jupiter.params.provider.Arguments.arguments
-//import org.junit.jupiter.params.provider.MethodSource
+// import com.lemonappdev.konsist.TestSnippetProvider
+// import org.amshove.kluent.shouldBeEqualTo
+// import org.junit.jupiter.params.ParameterizedTest
+// import org.junit.jupiter.params.provider.Arguments.arguments
+// import org.junit.jupiter.params.provider.MethodSource
 //
-//class KoTypeDeclarationForKoNullableProviderTest {
+// class KoTypeDeclarationForKoNullableProviderTest {
 //    @ParameterizedTest
 //    @MethodSource("provideValues")
 //    fun `is-nullable`(
@@ -41,4 +41,4 @@
 //            arguments("import-alias-is-not-nullable", false),
 //        )
 //    }
-//}
+// }

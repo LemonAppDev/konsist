@@ -1,10 +1,10 @@
-//package com.lemonappdev.konsist.core.declaration.kotype
+// package com.lemonappdev.konsist.core.declaration.kotype
 //
-//import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-//import org.amshove.kluent.shouldBeEqualTo
-//import org.junit.jupiter.api.Test
+// import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+// import org.amshove.kluent.shouldBeEqualTo
+// import org.junit.jupiter.api.Test
 //
-//class KoTypeDeclarationForKoContainingFileProviderTest {
+// class KoTypeDeclarationForKoContainingFileProviderTest {
 //    @Test
 //    fun `type-containing-file`() {
 //        // given
@@ -23,4 +23,4 @@
 //
 //    private fun getSnippetFile(fileName: String) =
 //        getSnippetKoScope("core/declaration/type/kotype/snippet/forkocontainingfileprovider/", fileName)
-//}
+// }

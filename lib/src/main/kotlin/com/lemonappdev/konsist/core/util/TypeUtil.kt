@@ -27,13 +27,15 @@ object TypeUtil {
         val type = if (isExtension && types.size > 1) {
             // We choose last because when we have extension the first one is receiver and the second one is (return) type.
             types.last()
-        } else if (!isExtension) {
-            types.firstOrNull()
         } else {
-            null
+            if (!isExtension) {
+                types.firstOrNull()
+            } else {
+                null
+            }
+                ?.children
+                ?.firstOrNull()
         }
-            ?.children
-            ?.firstOrNull()
 
         val isAlias = containingFile
             .imports
@@ -76,7 +78,7 @@ object TypeUtil {
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
     ): KoTypeDeclaration? {
-        val nestedType = if(type is KtNullableType) {
+        val nestedType = if (type is KtNullableType) {
             type
                 .children
                 .firstOrNull()
@@ -98,22 +100,27 @@ object TypeUtil {
                     ?.name
                     ?: (containingFile.packagee?.fullyQualifiedName + "." + typeText)
 
-            if (typeText != null && isKotlinBasicType(typeText)) KoKotlinTypeDeclarationCore.getInstance(
-                nestedType,
-                parentDeclaration
-            )
-            else if (typeText != null && isKotlinCollectionTypes(typeText)) KoKotlinTypeDeclarationCore.getInstance(
-                nestedType,
-                parentDeclaration
-            )
-            else if (typeText != null) {
+            if (typeText != null && isKotlinBasicType(typeText)) {
+                KoKotlinTypeDeclarationCore.getInstance(
+                    nestedType,
+                    parentDeclaration,
+                )
+            } else if (typeText != null && isKotlinCollectionTypes(typeText)) {
+                KoKotlinTypeDeclarationCore.getInstance(
+                    nestedType,
+                    parentDeclaration,
+                )
+            } else if (typeText != null) {
                 getClass(typeText, fqn, containingFile)
                     ?: getInterface(typeText, fqn, containingFile)
                     ?: getObject(typeText, fqn, containingFile)
                     ?: KoExternalTypeDeclarationCore.getInstance(typeText, nestedType)
+            } else {
+                null
             }
-            else null
-        } else null
+        } else {
+            null
+        }
     }
 
     /*
