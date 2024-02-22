@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
+import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -17,6 +18,7 @@ import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoNonNullableTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoNullableTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
@@ -33,13 +35,13 @@ import org.jetbrains.kotlin.psi.KtTypeAlias
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
+import kotlin.reflect.KClass
 
 internal class KoTypeAliasDeclarationCore private constructor(
     private val ktTypeAlias: KtTypeAlias,
     override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoTypeAliasDeclaration,
-    KoTypeDeclarationCore,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
     KoContainingFileProviderCore,
@@ -69,16 +71,16 @@ internal class KoTypeAliasDeclarationCore private constructor(
     override val ktElement: KtElement by lazy { ktTypeAlias }
 
     override val type: KoTypeDeclaration by lazy {
-        val types = ktTypeAlias
-            .children
-            .filterIsInstance<KtTypeReference>()
+        val type = ktTypeAlias.getTypeReference()
 
-        TypeUtil.getType(
-            types,
-            ktTypeAlias.isExtensionDeclaration(),
-            this.castToKoBaseDeclaration(),
-            containingFile,
-        ) ?: throw IllegalArgumentException("Type alias has no specified type.")
+        type?.let {
+            TypeUtil.getType(
+                listOf(type),
+                ktTypeAlias.isExtensionDeclaration(),
+                this.castToKoBaseDeclaration(),
+                containingFile
+            )
+        }?: throw IllegalArgumentException("Typealias has no specified type.")
     }
 
     override fun toString(): String = name
