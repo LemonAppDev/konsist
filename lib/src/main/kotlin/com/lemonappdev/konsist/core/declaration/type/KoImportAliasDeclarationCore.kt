@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.type
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
@@ -38,6 +39,12 @@ internal class KoImportAliasDeclarationCore private constructor(
             this.castToKoBaseDeclaration(),
             containingFile,
         ) ?: throw IllegalArgumentException("Import alias has no specified type.")
+    }
+
+    override val importDirective: KoImportDeclaration by lazy {
+        containingFile.imports.first {
+            it.alias == name
+        }
     }
 
     override fun toString(): String = name
