@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
-import com.lemonappdev.konsist.core.declaration.KoExternalParentDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
 import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
@@ -48,7 +48,7 @@ internal interface KoParentProviderCore :
 
                 return@map getClass(name, fqn, containingFile)
                     ?: getInterface(name, fqn, containingFile)
-                    ?: KoExternalParentDeclarationCore.getInstance(name, it)
+                    ?: KoExternalDeclarationCore.getInstance(name, it)
             }
             ?.toMutableList()
             .orEmpty()

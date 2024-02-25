@@ -1,18 +1,20 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
+import com.intellij.psi.PsiElement
+import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
-import com.lemonappdev.konsist.core.cache.KoExternalParentCache
+import com.lemonappdev.konsist.core.cache.KoExternalDeclarationCache
+import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoChildProviderCore
 import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.psi.KtElement
-import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-internal class KoExternalParentDeclarationCore(name: String, private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
-    KoExternalParentDeclaration,
+internal class KoExternalDeclarationCore(name: String, override val ktElement: KtElement) :
+    KoExternalDeclaration,
     KoParentDeclarationCore,
-    KoChildProviderCore {
-    override val ktElement: KtElement by lazy { ktSuperTypeListEntry }
+    KoChildProviderCore,
+    KoTypeDeclarationCore {
+    override val psiElement: PsiElement by lazy { ktElement }
 
     override val name: String by lazy {
         name
@@ -33,23 +35,23 @@ internal class KoExternalParentDeclarationCore(name: String, private val ktSuper
     override val packagee: KoPackageDeclaration? by lazy {
         KoPackageDeclarationCore(
             fullyQualifiedName,
-            ktSuperTypeListEntry,
+            ktElement,
         )
     }
 
     override fun toString(): String = name
 
     internal companion object {
-        private val cache: KoExternalParentCache = KoExternalParentCache
+        private val cache: KoExternalDeclarationCache = KoExternalDeclarationCache
 
         internal fun getInstance(
             name: String,
-            ktSuperTypeListEntry: KtSuperTypeListEntry,
-        ): KoExternalParentDeclaration =
-            cache.getOrCreateInstance(name, ktSuperTypeListEntry) {
-                KoExternalParentDeclarationCore(
+            ktElement: KtElement,
+        ): KoExternalDeclaration =
+            cache.getOrCreateInstance(name, ktElement) {
+                KoExternalDeclarationCore(
                     name,
-                    ktSuperTypeListEntry,
+                    ktElement,
                 )
             }
     }

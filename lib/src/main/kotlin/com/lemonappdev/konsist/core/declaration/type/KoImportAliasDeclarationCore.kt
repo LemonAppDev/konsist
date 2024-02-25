@@ -26,6 +26,7 @@ internal class KoImportAliasDeclarationCore private constructor(
     override val ktElement: KtElement by lazy { ktUserType }
 
     override val name: String by lazy { ktUserType.text }
+
     override val type: KoTypeDeclaration by lazy {
         val types = ktUserType
             .children

@@ -4,7 +4,7 @@ import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
-import com.lemonappdev.konsist.core.declaration.type.KoExternalTypeDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoFunctionTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoImportAliasDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
@@ -114,7 +114,7 @@ object TypeUtil {
                 getClass(typeText, fqn, containingFile)
                     ?: getInterface(typeText, fqn, containingFile)
                     ?: getObject(typeText, fqn, containingFile)
-                    ?: KoExternalTypeDeclarationCore.getInstance(typeText, nestedType)
+                    ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
             } else {
                 null
             }
