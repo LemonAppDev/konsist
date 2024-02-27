@@ -52,10 +52,11 @@ object TypeUtil {
                 it.alias == nestedType?.text
             }
 
+
         return if (isAlias != null) {
-            KoImportAliasDeclarationCore.getInstance(nestedType as KtUserType, containingFile)
+            KoImportAliasDeclarationCore.getInstance(type as KtUserType, containingFile)
         } else {
-            transformPsiElementToKoTypeDeclaration(nestedType, parentDeclaration, containingFile)
+            transformPsiElementToKoTypeDeclaration(type, parentDeclaration, containingFile)
         }
     }
 
@@ -82,13 +83,19 @@ object TypeUtil {
         return transformPsiElementToKoTypeDeclaration(type, parentDeclaration, containingFile)
     }
 
-    @Suppress("detekt.CyclomaticComplexMethod")
     private fun transformPsiElementToKoTypeDeclaration(
         type: PsiElement?,
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
     ): KoTypeDeclaration? {
-        val typeText = type?.text
+        val nestedType = if (type is KtNullableType) {
+            type
+                .children
+                .firstOrNull()
+        } else {
+            type
+        }
+        val typeText = nestedType?.text
 
         val fqn =
             containingFile
@@ -100,24 +107,24 @@ object TypeUtil {
                 ?: (containingFile.packagee?.fullyQualifiedName + "." + typeText)
 
         return when {
-            type is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(type, parentDeclaration)
-            type is KtUserType && typeText != null -> {
+            nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
+            nestedType is KtUserType && typeText != null -> {
                 if (isKotlinBasicType(typeText) || isKotlinCollectionTypes(typeText)) {
-                    KoKotlinTypeDeclarationCore.getInstance(type, parentDeclaration)
+                    KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
                 } else {
                     getClass(typeText, fqn, containingFile)
                         ?: getInterface(typeText, fqn, containingFile)
                         ?: getObject(typeText, fqn, containingFile)
                         ?: getTypeAlias(typeText, fqn, containingFile)
-                        ?: KoExternalDeclarationCore.getInstance(typeText, type)
+                        ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
                 }
             }
-            type is KtTypeReference && typeText != null -> {
+            nestedType is KtTypeReference && typeText != null -> {
                 getClass(typeText, fqn, containingFile)
                     ?: getInterface(typeText, fqn, containingFile)
                     ?: getObject(typeText, fqn, containingFile)
                     ?: getTypeAlias(typeText, fqn, containingFile)
-                    ?: KoExternalDeclarationCore.getInstance(typeText, type)
+                    ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
             }
             else -> null
         }

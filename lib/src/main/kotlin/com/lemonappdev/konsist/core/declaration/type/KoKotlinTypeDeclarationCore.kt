@@ -27,6 +27,8 @@ internal class KoKotlinTypeDeclarationCore private constructor(
         )
     }
 
+    override val text: String by lazy { ktUserType.parent.text }
+
     override val name: String by lazy { ktUserType.name ?: ktUserType.text }
 
     override val fullyQualifiedName: String by lazy {
