@@ -1,11 +1,11 @@
-//package com.lemonappdev.konsist.core.declaration.type.kotype
+// package com.lemonappdev.konsist.core.declaration.type.kotype
 //
-//import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-//import org.amshove.kluent.assertSoftly
-//import org.amshove.kluent.shouldBeEqualTo
-//import org.junit.jupiter.api.Test
+// import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+// import org.amshove.kluent.assertSoftly
+// import org.amshove.kluent.shouldBeEqualTo
+// import org.junit.jupiter.api.Test
 //
-//class KoTypeDeclarationForKoPathProviderTest {
+// class KoTypeDeclarationForKoPathProviderTest {
 //    @Test
 //    fun `type-file-path`() {
 //        // given
@@ -74,4 +74,4 @@
 //
 //    private fun getSnippetFile(fileName: String) =
 //        getSnippetKoScope("core/declaration/type/kotype/snippet/forkopathprovider/", fileName)
-//}
+// }

@@ -7,10 +7,6 @@ import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
-import com.lemonappdev.konsist.core.provider.KoGenericTypeProviderCore
-import com.lemonappdev.konsist.core.provider.KoKotlinTypeProviderCore
-import com.lemonappdev.konsist.core.provider.KoNullableProviderCore
-import com.lemonappdev.konsist.core.provider.KoSourceAndAliasTypeProviderCore
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtUserType
 

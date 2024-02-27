@@ -52,7 +52,6 @@ object TypeUtil {
                 it.alias == nestedType?.text
             }
 
-
         return if (isAlias != null) {
             KoImportAliasDeclarationCore.getInstance(nestedType as KtUserType, containingFile)
         } else {
@@ -83,6 +82,7 @@ object TypeUtil {
         return transformPsiElementToKoTypeDeclaration(type, parentDeclaration, containingFile)
     }
 
+    @Suppress("detekt.CyclomaticComplexMethod")
     private fun transformPsiElementToKoTypeDeclaration(
         type: PsiElement?,
         parentDeclaration: KoBaseDeclaration,
