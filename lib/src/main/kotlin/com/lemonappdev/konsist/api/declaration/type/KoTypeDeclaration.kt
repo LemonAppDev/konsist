@@ -59,5 +59,5 @@ interface KoTypeDeclaration :
     KoPackageProvider,
     KoResideInPackageProvider,
     KoKotlinTypeProvider,
-    KoGenericTypeProvider,
+//    KoGenericTypeProvider,
     KoNullableProvider

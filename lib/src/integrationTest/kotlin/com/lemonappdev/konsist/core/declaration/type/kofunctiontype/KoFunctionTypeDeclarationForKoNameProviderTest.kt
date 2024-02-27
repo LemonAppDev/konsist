@@ -34,7 +34,7 @@ class KoFunctionTypeDeclarationForKoNameProviderTest {
         @JvmStatic
         fun provideValues() = listOf(
             arguments("function-type", "() -> SampleType"),
-            arguments("nullable-function-type", "(() -> SampleType)?"),
+            arguments("nullable-function-type", "() -> SampleType"),
         )
     }
 }

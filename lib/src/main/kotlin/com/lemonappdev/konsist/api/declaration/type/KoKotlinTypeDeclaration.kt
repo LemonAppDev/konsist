@@ -7,7 +7,4 @@ import com.lemonappdev.konsist.api.provider.KoNullableProvider
 import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
 
 interface KoKotlinTypeDeclaration :
-    KoTypeDeclaration,
-    KoGenericTypeProvider,
-    KoNullableProvider,
-    KoSourceAndAliasTypeProvider
+    KoTypeDeclaration

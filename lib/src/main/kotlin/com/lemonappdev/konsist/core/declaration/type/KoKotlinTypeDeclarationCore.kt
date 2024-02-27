@@ -2,8 +2,10 @@ package com.lemonappdev.konsist.core.declaration.type
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoGenericTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoKotlinTypeProviderCore
@@ -13,35 +15,33 @@ import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtUserType
 
 internal class KoKotlinTypeDeclarationCore private constructor(
-    override val ktUserType: KtUserType,
+    private val ktUserType: KtUserType,
 ) :
     KoKotlinTypeDeclaration,
     KoTypeDeclarationCore,
-    KoBaseProviderCore,
-    KoGenericTypeProviderCore,
-    KoKotlinTypeProviderCore,
-    KoNullableProviderCore,
-    KoSourceAndAliasTypeProviderCore {
+    KoBaseProviderCore {
     override val psiElement: PsiElement by lazy { ktUserType }
 
     override val ktElement: KtElement by lazy { ktUserType }
 
-    override val name: String by lazy {
-        when {
-            isAlias -> aliasType + if (isNullable) "?" else ""
-            else -> ktUserType.text
-        }
+    override val packagee: KoPackageDeclaration? by lazy {
+        KoPackageDeclarationCore(
+            fullyQualifiedName,
+            ktUserType,
+        )
     }
+
+    override val name: String by lazy { ktUserType.name ?: ktUserType.text }
 
     override val fullyQualifiedName: String by lazy {
         when {
             isKotlinBasicType -> "kotlin.$name"
-            isKotlinCollectionType -> "kotlin.collection.$bareSourceType"
-            else -> bareSourceType
+            isKotlinCollectionType -> "kotlin.collection.$name"
+            else -> throw IllegalArgumentException("Kotlin type has incorrect fullyQualified name")
         }
     }
 
-    override val textUsedToFqn: String by lazy { bareSourceType }
+    override val textUsedToFqn: String by lazy { name }
 
     override fun toString(): String = name
 

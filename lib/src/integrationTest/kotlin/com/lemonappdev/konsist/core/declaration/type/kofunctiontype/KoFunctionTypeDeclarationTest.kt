@@ -43,7 +43,7 @@ class KoFunctionTypeDeclarationTest {
         val sut = (type as? KoFunctionTypeDeclaration)?.parameterTypes
 
         // then
-        sut?.map { it.name } shouldBeEqualTo listOf("String")
+        sut?.map { it.type.name } shouldBeEqualTo listOf("String")
     }
 
     @Test
@@ -57,7 +57,7 @@ class KoFunctionTypeDeclarationTest {
         val sut = (type as? KoFunctionTypeDeclaration)?.parameterTypes
 
         // then
-        sut?.map { it.name } shouldBeEqualTo listOf("String", "List<Int>")
+        sut?.map { it.type.name } shouldBeEqualTo listOf("String", "List<Int>")
     }
 
     @Test

@@ -38,16 +38,25 @@ object TypeUtil {
                 ?.firstOrNull()
         }
 
+        val nestedType = if (type is KtNullableType) {
+            type
+                .children
+                .firstOrNull()
+        } else {
+            type
+        }
+
         val isAlias = containingFile
             .imports
             .firstOrNull {
-                it.alias == type?.text
+                it.alias == nestedType?.text
             }
 
+
         return if (isAlias != null) {
-            KoImportAliasDeclarationCore.getInstance(type as KtUserType, containingFile)
+            KoImportAliasDeclarationCore.getInstance(nestedType as KtUserType, containingFile)
         } else {
-            transformPsiElementToKoTypeDeclaration(type, parentDeclaration, containingFile)
+            transformPsiElementToKoTypeDeclaration(nestedType, parentDeclaration, containingFile)
         }
     }
 
@@ -79,14 +88,7 @@ object TypeUtil {
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
     ): KoTypeDeclaration? {
-        val nestedType = if (type is KtNullableType) {
-            type
-                .children
-                .firstOrNull()
-        } else {
-            type
-        }
-        val typeText = nestedType?.text
+        val typeText = type?.text
 
         val fqn =
             containingFile
@@ -98,24 +100,24 @@ object TypeUtil {
                 ?: (containingFile.packagee?.fullyQualifiedName + "." + typeText)
 
         return when {
-            nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
-            nestedType is KtUserType && typeText != null -> {
+            type is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(type, parentDeclaration)
+            type is KtUserType && typeText != null -> {
                 if (isKotlinBasicType(typeText) || isKotlinCollectionTypes(typeText)) {
-                    KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
+                    KoKotlinTypeDeclarationCore.getInstance(type, parentDeclaration)
                 } else {
                     getClass(typeText, fqn, containingFile)
                         ?: getInterface(typeText, fqn, containingFile)
                         ?: getObject(typeText, fqn, containingFile)
                         ?: getTypeAlias(typeText, fqn, containingFile)
-                        ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
+                        ?: KoExternalDeclarationCore.getInstance(typeText, type)
                 }
             }
-            nestedType is KtTypeReference && typeText != null -> {
+            type is KtTypeReference && typeText != null -> {
                 getClass(typeText, fqn, containingFile)
                     ?: getInterface(typeText, fqn, containingFile)
                     ?: getObject(typeText, fqn, containingFile)
                     ?: getTypeAlias(typeText, fqn, containingFile)
-                    ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
+                    ?: KoExternalDeclarationCore.getInstance(typeText, type)
             }
             else -> null
         }
@@ -129,9 +131,9 @@ object TypeUtil {
         else -> receiverType?.name == name
     }
 
-    private fun isKotlinBasicType(name: String): Boolean = kotlinBasicTypes.any { it == name }
+    internal fun isKotlinBasicType(name: String): Boolean = kotlinBasicTypes.any { it == name }
 
-    private fun isKotlinCollectionTypes(name: String): Boolean = kotlinCollectionTypes.any { name.startsWith("$it<") }
+    internal fun isKotlinCollectionTypes(name: String): Boolean = kotlinCollectionTypes.any { name.startsWith("$it<") }
 
     // Basic types in Kotlin are described here: https://kotlinlang.org/docs/basic-types.html
     private val kotlinBasicTypes: Set<String>

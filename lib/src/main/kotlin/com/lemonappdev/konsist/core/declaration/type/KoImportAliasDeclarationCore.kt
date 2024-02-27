@@ -3,12 +3,24 @@ package com.lemonappdev.konsist.core.declaration.type
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoModuleProvider
+import com.lemonappdev.konsist.api.provider.KoNonNullableTypeProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
+import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
+import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNonNullableTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtTypeReference
@@ -21,12 +33,19 @@ internal class KoImportAliasDeclarationCore private constructor(
     KoImportAliasDeclaration,
     KoTypeDeclarationCore,
     KoBaseProviderCore,
-    KoNonNullableTypeProviderCore {
+    KoNonNullableTypeProviderCore,
+    KoContainingFileProviderCore,
+    KoLocationProviderCore,
+    KoPathProviderCore,
+    KoModuleProviderCore,
+    KoSourceSetProviderCore {
     override val psiElement: PsiElement by lazy { ktUserType }
 
     override val ktElement: KtElement by lazy { ktUserType }
 
     override val name: String by lazy { ktUserType.text }
+
+    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
     override val type: KoTypeDeclaration by lazy {
         val types = ktUserType
