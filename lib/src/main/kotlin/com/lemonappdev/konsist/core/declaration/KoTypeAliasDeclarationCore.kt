@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -37,6 +38,7 @@ internal class KoTypeAliasDeclarationCore private constructor(
     override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoTypeAliasDeclaration,
+    KoTypeDeclarationCore,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
     KoContainingFileProviderCore,

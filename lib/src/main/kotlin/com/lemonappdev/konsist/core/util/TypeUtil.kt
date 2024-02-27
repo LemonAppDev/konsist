@@ -11,6 +11,7 @@ import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
 import com.lemonappdev.konsist.core.model.getObject
+import com.lemonappdev.konsist.core.model.getTypeAlias
 import org.jetbrains.kotlin.psi.KtFunctionType
 import org.jetbrains.kotlin.psi.KtNullableType
 import org.jetbrains.kotlin.psi.KtTypeReference
@@ -85,41 +86,38 @@ object TypeUtil {
         } else {
             type
         }
+        val typeText = nestedType?.text
 
-        return if (nestedType is KtFunctionType) {
-            KoFunctionTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
-        } else if (nestedType is KtUserType) {
-            val typeText = nestedType.text
+        val fqn =
+            containingFile
+                .imports
+                .firstOrNull { import ->
+                    import.name.substringAfterLast(".") == typeText || import.alias == typeText
+                }
+                ?.name
+                ?: (containingFile.packagee?.fullyQualifiedName + "." + typeText)
 
-            val fqn =
-                containingFile
-                    .imports
-                    .firstOrNull { import ->
-                        import.name.substringAfterLast(".") == typeText || import.alias == typeText
-                    }
-                    ?.name
-                    ?: (containingFile.packagee?.fullyQualifiedName + "." + typeText)
-
-            if (typeText != null && isKotlinBasicType(typeText)) {
-                KoKotlinTypeDeclarationCore.getInstance(
-                    nestedType,
-                    parentDeclaration,
-                )
-            } else if (typeText != null && isKotlinCollectionTypes(typeText)) {
-                KoKotlinTypeDeclarationCore.getInstance(
-                    nestedType,
-                    parentDeclaration,
-                )
-            } else if (typeText != null) {
+        return when {
+            nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
+            nestedType is KtUserType && typeText != null -> {
+                if (isKotlinBasicType(typeText) || isKotlinCollectionTypes(typeText)) {
+                    KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
+                } else {
+                    getClass(typeText, fqn, containingFile)
+                        ?: getInterface(typeText, fqn, containingFile)
+                        ?: getObject(typeText, fqn, containingFile)
+                        ?: getTypeAlias(typeText, fqn, containingFile)
+                        ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
+                }
+            }
+            nestedType is KtTypeReference && typeText != null -> {
                 getClass(typeText, fqn, containingFile)
                     ?: getInterface(typeText, fqn, containingFile)
                     ?: getObject(typeText, fqn, containingFile)
+                    ?: getTypeAlias(typeText, fqn, containingFile)
                     ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
-            } else {
-                null
             }
-        } else {
-            null
+            else -> null
         }
     }
 

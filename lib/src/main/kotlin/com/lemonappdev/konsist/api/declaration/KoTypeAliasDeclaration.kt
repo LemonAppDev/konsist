@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
@@ -18,11 +19,13 @@ import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoActualModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
+import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 
 /**
  * Represents a Kotlin type alias declaration.
  */
 interface KoTypeAliasDeclaration :
+    KoTypeDeclaration,
     KoBaseDeclaration,
     KoBaseProvider,
     KoAnnotationProvider,

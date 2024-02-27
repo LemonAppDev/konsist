@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 
 object DataCore {
     val classes: List<KoClassDeclaration> by lazy {
@@ -23,6 +24,12 @@ object DataCore {
         Konsist
             .scopeFromProject()
             .objects()
+    }
+
+    val typeAliases: List<KoTypeAliasDeclaration> by lazy {
+        Konsist
+            .scopeFromProject()
+            .typeAliases
     }
 }
 
@@ -45,4 +52,11 @@ fun getObject(name: String, fqn: String?, containingFile: KoFileDeclaration): Ko
     .firstOrNull { decl -> (decl.packagee?.fullyQualifiedName + "." + decl.name) == fqn }
     ?: containingFile
         .objects()
+        .firstOrNull { decl -> decl.name == name }
+
+fun getTypeAlias(name: String, fqn: String?, containingFile: KoFileDeclaration): KoTypeAliasDeclaration? = DataCore
+    .typeAliases
+    .firstOrNull { decl -> (decl.packagee?.fullyQualifiedName + "." + decl.name) == fqn }
+    ?: containingFile
+        .typeAliases
         .firstOrNull { decl -> decl.name == name }
