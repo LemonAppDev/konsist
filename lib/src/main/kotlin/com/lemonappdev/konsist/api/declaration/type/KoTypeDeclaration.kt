@@ -46,10 +46,10 @@ import com.lemonappdev.konsist.api.provider.KoTextProvider
  * ```
  */
 interface KoTypeDeclaration :
-    KoBaseDeclaration, // Todo: add tests
-    KoBaseProvider, // Todo: add tests
+    KoBaseDeclaration,
+    KoBaseProvider,
     KoFullyQualifiedNameProvider, // Todo: add tests
-    KoNameProvider, // Todo: add tests
+    KoNameProvider,
     KoTextProvider,
     KoPackageProvider, // Todo: add tests
     KoResideInPackageProvider, // Todo: add tests
