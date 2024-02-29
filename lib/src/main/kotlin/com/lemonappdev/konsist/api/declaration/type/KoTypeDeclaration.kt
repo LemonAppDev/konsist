@@ -50,7 +50,7 @@ interface KoTypeDeclaration :
     KoBaseProvider, // Todo: add tests
     KoFullyQualifiedNameProvider, // Todo: add tests
     KoNameProvider, // Todo: add tests
-    KoTextProvider, // Todo: add tests
+    KoTextProvider,
     KoPackageProvider, // Todo: add tests
     KoResideInPackageProvider, // Todo: add tests
     KoKotlinTypeProvider,

@@ -56,6 +56,8 @@
              arguments("not-nullable-import-alias-type-is-not-kotlin-type", false, false, false),
              arguments("nullable-typealias-type-is-not-kotlin-type", false, false, false),
              arguments("not-nullable-typealias-type-is-not-kotlin-type", false, false, false),
+             arguments("nullable-external-type-is-not-kotlin-type", false, false, false),
+             arguments("not-nullable-external-type-is-not-kotlin-type", false, false, false),
          )
      }
  }

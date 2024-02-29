@@ -49,6 +49,8 @@ class KoTypeDeclarationForKoNullableProviderTest {
             arguments("import-alias-type-is-not-nullable", false),
             arguments("typealias-type-is-nullable", true), //
             arguments("typealias-type-is-not-nullable", false),
+            arguments("external-type-is-nullable", true), //
+            arguments("external-type-is-not-nullable", false),
         )
     }
 }
