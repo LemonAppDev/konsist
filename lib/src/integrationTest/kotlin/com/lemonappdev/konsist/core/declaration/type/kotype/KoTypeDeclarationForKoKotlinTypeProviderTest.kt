@@ -1,68 +1,61 @@
-// package com.lemonappdev.konsist.core.declaration.kotype
-//
-// import com.lemonappdev.konsist.TestSnippetProvider
-// import org.amshove.kluent.assertSoftly
-// import org.amshove.kluent.shouldBeEqualTo
-// import org.junit.jupiter.api.Test
-//
-// class KoTypeDeclarationForKoKotlinTypeProviderTest {
-//    @Test
-//    fun `basic-types`() {
-//        // given
-//        val sut = getSnippetFile("basic-types")
-//            .properties()
-//
-//        // then
-//        assertSoftly {
-//            sut.forEach { property ->
-//                property.type?.isKotlinBasicType shouldBeEqualTo true
-//            }
-//        }
-//    }
-//
-//    @Test
-//    fun `non-basic-types`() {
-//        // given
-//        val sut = getSnippetFile("non-basic-types")
-//            .properties()
-//
-//        // then
-//        assertSoftly {
-//            sut.forEach { property ->
-//                property.type?.isKotlinBasicType shouldBeEqualTo false
-//            }
-//        }
-//    }
-//
-//    @Test
-//    fun `collection-types`() {
-//        // given
-//        val sut = getSnippetFile("collection-types")
-//            .properties()
-//
-//        // then
-//        assertSoftly {
-//            sut.forEach { property ->
-//                println("${property.type} ${property.type?.isKotlinCollectionType}")
-//                property.type?.isKotlinCollectionType shouldBeEqualTo true
-//            }
-//        }
-//    }
-//
-//    @Test
-//    fun `non-collection-types`() {
-//        // given
-//        val sut = getSnippetFile("non-collection-types")
-//            .properties()
-//
-//        // then
-//        assertSoftly {
-//            sut.forEach { property ->
-//                property.type?.isKotlinCollectionType shouldBeEqualTo false
-//            }
-//        }
-//    }
-//
-//    private fun getSnippetFile(fileName: String) =
-//        TestSnippetProvider.getSnippetKoScope("core/declaration/type/kotype/snippet/forkokotlintypeprovider/", fileName)
-// }
+ package com.lemonappdev.konsist.core.declaration.type.kotype
+
+ import com.lemonappdev.konsist.TestSnippetProvider
+ import org.amshove.kluent.assertSoftly
+ import org.amshove.kluent.shouldBeEqualTo
+ import org.junit.jupiter.params.ParameterizedTest
+ import org.junit.jupiter.params.provider.Arguments.arguments
+ import org.junit.jupiter.params.provider.MethodSource
+
+ class KoTypeDeclarationForKoKotlinTypeProviderTest {
+     @ParameterizedTest
+     @MethodSource("provideValues")
+     fun `kotlin-type`(
+         fileName: String,
+         isKotlinType: Boolean,
+         isKotlinBasicType: Boolean,
+         isKotlinCollectionType: Boolean,
+     ) {
+         // given
+         val sut = getSnippetFile(fileName)
+             .classes()
+             .first()
+             .primaryConstructor
+             ?.parameters
+             ?.first()
+             ?.type
+
+         // then
+         assertSoftly(sut) {
+             it?.isKotlinType shouldBeEqualTo isKotlinType
+             it?.isKotlinBasicType shouldBeEqualTo isKotlinBasicType
+             it?.isKotlinCollectionType shouldBeEqualTo isKotlinCollectionType
+         }
+     }
+
+     private fun getSnippetFile(fileName: String) =
+         TestSnippetProvider.getSnippetKoScope("core/declaration/type/kotype/snippet/forkokotlintypeprovider/", fileName)
+
+     companion object {
+         @Suppress("unused")
+         @JvmStatic
+         fun provideValues() = listOf(
+             arguments("nullable-kotlin-basic-type-is-kotlin-type", true, true, false),
+             arguments("not-nullable-kotlin-basic-type-is-kotlin-type", true, true, false),
+             arguments("nullable-kotlin-collection-type-is-kotlin-type", true, false, true),
+             arguments("not-nullable-kotlin-collection-type-is-kotlin-type", true, false, true),
+             arguments("nullable-class-type-is-not-kotlin-type", false, false, false),
+             arguments("not-nullable-class-type-is-not-kotlin-type", false, false, false),
+             arguments("nullable-interface-type-is-not-kotlin-type", false, false, false),
+             arguments("not-nullable-interface-type-is-not-kotlin-type", false, false, false),
+             arguments("nullable-object-type-is-not-kotlin-type", false, false, false),
+             arguments("not-nullable-object-type-is-not-kotlin-type", false, false, false),
+             arguments("nullable-function-type-type-is-not-kotlin-type", false, false, false),
+             arguments("not-nullable-function-type-type-is-not-kotlin-type", false, false, false),
+             arguments("nullable-import-alias-type-is-not-kotlin-type", false, false, false),
+             arguments("not-nullable-import-alias-type-is-not-kotlin-type", false, false, false),
+             arguments("nullable-typealias-type-is-not-kotlin-type", false, false, false),
+             arguments("not-nullable-typealias-type-is-not-kotlin-type", false, false, false),
+         )
+     }
+ }

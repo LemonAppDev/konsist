@@ -54,7 +54,7 @@ object TypeUtil {
 
 
         return if (isAlias != null) {
-            KoImportAliasDeclarationCore.getInstance(type as KtUserType, containingFile)
+            KoImportAliasDeclarationCore.getInstance(nestedType as KtUserType, containingFile)
         } else {
             transformPsiElementToKoTypeDeclaration(type, parentDeclaration, containingFile)
         }
