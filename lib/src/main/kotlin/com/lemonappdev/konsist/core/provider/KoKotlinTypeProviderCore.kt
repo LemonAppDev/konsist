@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
 import com.lemonappdev.konsist.core.util.TypeUtil
 
@@ -9,7 +10,7 @@ internal interface KoKotlinTypeProviderCore :
     KoNameProviderCore,
     KoBaseProviderCore {
     override val isKotlinType: Boolean
-        get() = this is KoKotlinTypeDeclaration
+        get() = (this as? KoTypeDeclaration)?.declaration is KoKotlinTypeDeclaration
 
     override val isKotlinBasicType: Boolean
         get() = isKotlinType && TypeUtil.isKotlinBasicType(name)
