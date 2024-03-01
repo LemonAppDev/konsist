@@ -55,7 +55,7 @@ interface KoTypeDeclaration :
     KoBaseProvider,
     KoNameProvider,
     KoTextProvider,
-    KoPathProvider, // Todo: add tests
+    KoPathProvider,
     KoLocationProvider,
     KoNullableProvider,
     KoContainingFileProvider,
@@ -64,7 +64,7 @@ interface KoTypeDeclaration :
     KoSourceSetProvider,
     KoKotlinTypeProvider,
 //    KoGenericTypeProvider, // Todo: add tests
-    KoPackageProvider, // Todo: add tests
+    KoPackageProvider,
     KoResideInPackageProvider { // Todo: add tests
     val declaration: KoBaseTypeDeclaration
 }
