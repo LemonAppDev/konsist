@@ -56,7 +56,7 @@ internal class KoFunctionTypeDeclarationCore private constructor(
     override val returnType: KoTypeDeclaration by lazy {
         val type = ktFunctionType.returnTypeReference
 
-        type?.let { KoTypeDeclarationCore.getInstance(it, containingDeclaration as KoContainingDeclarationProvider) }
+        type?.let { KoTypeDeclarationCore.getInstance(it, this) }
             ?: throw IllegalArgumentException("Lambda function has no specified type.")
     }
 

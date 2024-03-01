@@ -21,10 +21,7 @@ internal interface KoNullableTypeProviderCore :
             val type = getTypeReferences().firstOrNull()
 
             return type?.let {
-                KoTypeDeclarationCore.getInstance(
-                    it,
-                    containingDeclaration as KoContainingDeclarationProvider
-                )
+                KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration())
             }
         }
 

@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.type
 
 import com.intellij.psi.PsiElement
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
@@ -8,6 +9,7 @@ import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoKotlinTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
@@ -24,6 +26,7 @@ import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 
 internal class KoTypeDeclarationCore private constructor(
     private val ktTypeReference: KtTypeReference,
+    override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoTypeDeclaration,
     KoBaseProviderCore,
@@ -32,6 +35,7 @@ internal class KoTypeDeclarationCore private constructor(
     KoLocationProviderCore,
     KoNullableProviderCore,
     KoContainingFileProviderCore,
+    KoContainingDeclarationProviderCore,
     KoKotlinTypeProviderCore,
 //    KoGenericTypeProviderCore,
     KoPackageProviderCore,
@@ -73,12 +77,10 @@ internal class KoTypeDeclarationCore private constructor(
 
         internal fun getInstance(
             ktTypeReference: KtTypeReference,
-            containingDeclaration: KoContainingDeclarationProvider,
+            containingDeclaration: KoBaseDeclaration,
         ): KoTypeDeclaration =
-            cache.getOrCreateInstance(ktTypeReference, containingDeclaration.castToKoBaseDeclaration()) {
-                KoTypeDeclarationCore(
-                    ktTypeReference,
-                )
+            cache.getOrCreateInstance(ktTypeReference, containingDeclaration) {
+                KoTypeDeclarationCore(ktTypeReference,containingDeclaration)
             }
     }
 }

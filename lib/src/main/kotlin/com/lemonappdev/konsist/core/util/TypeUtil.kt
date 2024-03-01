@@ -74,7 +74,7 @@ object TypeUtil {
     internal fun getReceiverType(
         types: List<KtTypeReference>,
         isExtension: Boolean,
-        containingDeclaration: KoContainingDeclarationProvider,
+        containingDeclaration: KoBaseDeclaration,
     ): KoTypeDeclaration? {
         val type = if (isExtension) {
             types.first()

@@ -80,7 +80,7 @@ internal class KoParameterDeclarationCore private constructor(
             .filterIsInstance<KtTypeReference>()
             .firstOrNull()
 
-        type?.let { KoTypeDeclarationCore.getInstance(it, containingDeclaration as KoContainingDeclarationProvider) }
+        type?.let { KoTypeDeclarationCore.getInstance(it, this) }
             ?: throw IllegalArgumentException("Parameter type cannot be null")
 
     }
