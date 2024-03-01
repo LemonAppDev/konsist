@@ -3,11 +3,16 @@ package com.lemonappdev.konsist.core.util
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoFunctionTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoImportAliasDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
+import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
+import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
 import com.lemonappdev.konsist.core.model.getObject
@@ -19,12 +24,12 @@ import org.jetbrains.kotlin.psi.KtUserType
 import kotlin.reflect.KClass
 
 object TypeUtil {
-    internal fun getType(
+    internal fun getBasicType(
         types: List<KtTypeReference>,
         isExtension: Boolean,
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
-    ): KoTypeDeclaration? {
+    ): KoBaseTypeDeclaration? {
         val type = if (isExtension && types.size > 1) {
             // We choose last because when we have extension the first one is receiver and the second one is (return) type.
             types.last()
@@ -61,7 +66,7 @@ object TypeUtil {
     }
 
     internal fun hasTypeOf(type: KoTypeDeclaration?, kClass: KClass<*>): Boolean =
-        kClass.qualifiedName == type?.fullyQualifiedName
+        kClass.qualifiedName == (type as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
 
     /*
     1.0.0 CleanUp - When we remove KoReceiverTypeProviderCore.hasReceiverType it will be unused.
@@ -69,8 +74,7 @@ object TypeUtil {
     internal fun getReceiverType(
         types: List<KtTypeReference>,
         isExtension: Boolean,
-        parentDeclaration: KoBaseDeclaration,
-        containingFile: KoFileDeclaration,
+        containingDeclaration: KoContainingDeclarationProvider,
     ): KoTypeDeclaration? {
         val type = if (isExtension) {
             types.first()
@@ -80,14 +84,16 @@ object TypeUtil {
             ?.children
             ?.firstOrNull()
 
-        return transformPsiElementToKoTypeDeclaration(type, parentDeclaration, containingFile)
+        return if(type is KtTypeReference) {
+            KoTypeDeclarationCore.getInstance(type, containingDeclaration)
+        } else null
     }
 
     private fun transformPsiElementToKoTypeDeclaration(
         type: PsiElement?,
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
-    ): KoTypeDeclaration? {
+    ): KoBaseTypeDeclaration? {
         val nestedType = if (type is KtNullableType) {
             type
                 .children

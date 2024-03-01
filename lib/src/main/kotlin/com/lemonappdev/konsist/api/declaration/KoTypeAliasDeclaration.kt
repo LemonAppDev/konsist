@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
@@ -24,8 +25,8 @@ import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvide
  * Represents a Kotlin type alias declaration.
  */
 interface KoTypeAliasDeclaration :
-    KoTypeDeclaration,
     KoBaseDeclaration,
+    KoBaseTypeDeclaration,
     KoBaseProvider,
     KoAnnotationProvider,
     KoContainingFileProvider,

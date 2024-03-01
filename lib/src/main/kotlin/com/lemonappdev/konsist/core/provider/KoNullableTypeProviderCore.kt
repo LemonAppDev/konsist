@@ -1,7 +1,9 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoNullableTypeProvider
+import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
@@ -15,12 +17,16 @@ internal interface KoNullableTypeProviderCore :
     KoBaseProviderCore {
     val ktCallableDeclaration: KtCallableDeclaration
     override val type: KoTypeDeclaration?
-        get() = TypeUtil.getType(
-            getTypeReferences(),
-            ktCallableDeclaration.isExtensionDeclaration(),
-            this.castToKoBaseDeclaration(),
-            containingFile,
-        )
+        get() {
+            val type = getTypeReferences().firstOrNull()
+
+            return type?.let {
+                KoTypeDeclarationCore.getInstance(
+                    it,
+                    containingDeclaration as KoContainingDeclarationProvider
+                )
+            }
+        }
 
     private fun getTypeReferences(): List<KtTypeReference> = ktCallableDeclaration
         .children

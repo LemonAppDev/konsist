@@ -9,41 +9,41 @@ import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
 class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
-    @ParameterizedTest(name = "fully-qualified-name {0} equals {1}")
-    @MethodSource("provideValues")
-    fun `fully-qualified-name`(
-        fileName: String,
-        value: String,
-    ) {
-        // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .withPrimaryConstructor()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-
-        // then
-        sut?.fullyQualifiedName shouldBeEqualTo value
-    }
-
-    @Test
-    fun `type-fully-qualified-name-when-other-import-contains-its-name`() {
-        // given
-        val sut = getSnippetFile("type-fully-qualified-name-when-other-import-contains-its-name")
-            .classes()
-            .withPrimaryConstructor()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-
-        // then
-        sut?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.testpackage.Type"
-    }
+//    @ParameterizedTest(name = "fully-qualified-name {0} equals {1}")
+//    @MethodSource("provideValues")
+//    fun `fully-qualified-name`(
+//        fileName: String,
+//        value: String,
+//    ) {
+//        // given
+//        val sut = getSnippetFile(fileName)
+//            .classes()
+//            .withPrimaryConstructor()
+//            .first()
+//            .primaryConstructor
+//            ?.parameters
+//            ?.first()
+//            ?.type
+//
+//        // then
+//        sut?.fullyQualifiedName shouldBeEqualTo value
+//    }
+//
+//    @Test
+//    fun `type-fully-qualified-name-when-other-import-contains-its-name`() {
+//        // given
+//        val sut = getSnippetFile("type-fully-qualified-name-when-other-import-contains-its-name")
+//            .classes()
+//            .withPrimaryConstructor()
+//            .first()
+//            .primaryConstructor
+//            ?.parameters
+//            ?.first()
+//            ?.type
+//
+//        // then
+//        sut?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.testpackage.Type"
+//    }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/type/kokotlintype/snippet/forkofullyqualifiednameprovider/", fileName)

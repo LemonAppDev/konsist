@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoChildProvider
 
@@ -10,4 +11,4 @@ import com.lemonappdev.konsist.api.provider.KoChildProvider
 interface KoExternalDeclaration :
     KoParentDeclaration,
     KoChildProvider,
-    KoTypeDeclaration
+    KoBaseTypeDeclaration

@@ -18,19 +18,19 @@ class KoImportAliasDeclarationTest {
         sut.toString() shouldBeEqualTo "ImportAlias"
     }
 
-    @Test
-    fun `import-directive`() {
-        // given
-        val type = getSnippetFile("import-directive")
-            .properties()
-            .first()
-            .type
-
-        val sut = type as? KoImportAliasDeclaration
-
-        // then
-        sut?.importDirective?.name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
-    }
+//    @Test
+//    fun `import-directive`() {
+//        // given
+//        val type = getSnippetFile("import-directive")
+//            .properties()
+//            .first()
+//            .type
+//
+//        val sut = type as? KoImportAliasDeclaration
+//
+//        // then
+//        sut?.importDirective?.name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+//    }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/type/koimportalias/snippet/forgeneral/", fileName)

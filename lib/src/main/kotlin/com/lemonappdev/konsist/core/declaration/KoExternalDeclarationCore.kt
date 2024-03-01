@@ -4,6 +4,7 @@ import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.core.cache.KoExternalDeclarationCache
+import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoChildProviderCore
 import com.lemonappdev.konsist.core.util.EndOfLine
@@ -13,8 +14,8 @@ internal class KoExternalDeclarationCore(name: String, override val ktElement: K
     KoExternalDeclaration,
     KoParentDeclarationCore,
     KoChildProviderCore,
-    KoTypeDeclarationCore {
-    override val psiElement: PsiElement by lazy { ktElement }
+    KoBaseTypeDeclarationCore {
+//    override val psiElement: PsiElement by lazy { ktElement }
 
     override val name: String by lazy {
         name

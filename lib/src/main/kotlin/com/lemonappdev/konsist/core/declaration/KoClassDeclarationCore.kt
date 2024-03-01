@@ -4,6 +4,7 @@ import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -67,7 +68,7 @@ internal class KoClassDeclarationCore private constructor(
 ) : KoClassDeclaration,
     KoParentDeclarationCore,
     KoChildDeclarationCore,
-    KoTypeDeclarationCore,
+    KoBaseTypeDeclarationCore,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
     KoChildProviderCore,

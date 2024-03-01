@@ -2,8 +2,10 @@ package com.lemonappdev.konsist.api.declaration.type
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoNullableProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
@@ -47,12 +49,15 @@ import com.lemonappdev.konsist.api.provider.KoTextProvider
  */
 interface KoTypeDeclaration :
     KoBaseDeclaration,
-    KoBaseProvider,
-    KoFullyQualifiedNameProvider, // Todo: add tests
+    KoBaseProvider, // Todo: add tests (general)
     KoNameProvider,
     KoTextProvider,
-    KoPackageProvider, // Todo: add tests
-    KoResideInPackageProvider, // Todo: add tests
+    KoLocationProvider,
+    KoNullableProvider,
+    KoContainingFileProvider, // Todo: add tests
     KoKotlinTypeProvider,
 //    KoGenericTypeProvider, // Todo: add tests
-    KoNullableProvider
+    KoPackageProvider, // Todo: add tests
+    KoResideInPackageProvider { // Todo: add tests
+    val sourceDeclaration: KoBaseTypeDeclaration
+}

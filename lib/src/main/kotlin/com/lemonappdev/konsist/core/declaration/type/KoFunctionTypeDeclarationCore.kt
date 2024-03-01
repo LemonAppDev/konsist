@@ -2,14 +2,15 @@ package com.lemonappdev.konsist.core.declaration.type
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.KoParameterDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -27,9 +28,10 @@ internal class KoFunctionTypeDeclarationCore private constructor(
     private val ktFunctionType: KtFunctionType,
 ) :
     KoFunctionTypeDeclaration,
-    KoTypeDeclarationCore,
+    KoBaseTypeDeclarationCore,
     KoBaseProviderCore,
     KoContainingFileProviderCore,
+    KoContainingDeclarationProviderCore,
     KoLocationProviderCore,
     KoPathProviderCore,
     KoModuleProviderCore,
@@ -38,9 +40,9 @@ internal class KoFunctionTypeDeclarationCore private constructor(
 
     override val ktElement: KtElement by lazy { ktFunctionType }
 
-    override val name: String by lazy { ktFunctionType.text }
-
-    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
+//    override val name: String by lazy { ktFunctionType.text }
+//
+//    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
     override val parameterTypes: List<KoParameterDeclaration> by lazy {
         ktFunctionType
@@ -52,19 +54,13 @@ internal class KoFunctionTypeDeclarationCore private constructor(
     }
 
     override val returnType: KoTypeDeclaration by lazy {
-        val types = ktFunctionType
-            .children
-            .filterIsInstance<KtTypeReference>()
+        val type = ktFunctionType.returnTypeReference
 
-        TypeUtil.getType(
-            types,
-            ktFunctionType.isExtensionDeclaration(),
-            this.castToKoBaseDeclaration(),
-            containingFile,
-        ) ?: throw IllegalArgumentException("Lambda function has no specified type.")
+        type?.let { KoTypeDeclarationCore.getInstance(it, containingDeclaration as KoContainingDeclarationProvider) }
+            ?: throw IllegalArgumentException("Lambda function has no specified type.")
     }
 
-    override fun toString(): String = name
+    override fun toString(): String = text // Todo: change to name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoFunctionTypeDeclaration> = KoDeclarationCache() // Todo: change this?

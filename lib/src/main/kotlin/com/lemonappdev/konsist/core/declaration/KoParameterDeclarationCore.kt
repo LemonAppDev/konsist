@@ -4,7 +4,9 @@ import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -28,14 +30,12 @@ import com.lemonappdev.konsist.core.provider.modifier.KoValModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVarArgModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVarModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
-import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.KtTypeReference
-import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 
 internal class KoParameterDeclarationCore private constructor(
     override val ktParameter: KtParameter,
@@ -75,19 +75,17 @@ internal class KoParameterDeclarationCore private constructor(
     override val ktElement: KtElement by lazy { ktParameter }
 
     override val type: KoTypeDeclaration by lazy {
-        val types = ktParameter
+        val type = ktParameter
             .children
             .filterIsInstance<KtTypeReference>()
+            .firstOrNull()
 
-        TypeUtil.getType(
-            types,
-            ktParameter.isExtensionDeclaration(),
-            this.castToKoBaseDeclaration(),
-            containingFile,
-        ) ?: throw IllegalArgumentException("Parameter has no specified type.")
+        type?.let { KoTypeDeclarationCore.getInstance(it, containingDeclaration as KoContainingDeclarationProvider) }
+            ?: throw IllegalArgumentException("Parameter type cannot be null")
+
     }
 
-    override fun representsType(name: String?): Boolean = type.name == name || type.fullyQualifiedName == name
+    override fun representsType(name: String?): Boolean = type.name == name // todo: add this?: || type.fullyQualifiedName == name
 
     override val hasValModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "val" }
 
@@ -98,7 +96,15 @@ internal class KoParameterDeclarationCore private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoParameterDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktParameter: KtParameter, containingDeclaration: KoBaseDeclaration): KoParameterDeclaration =
-            cache.getOrCreateInstance(ktParameter, containingDeclaration) { KoParameterDeclarationCore(ktParameter, containingDeclaration) }
+        internal fun getInstance(
+            ktParameter: KtParameter,
+            containingDeclaration: KoBaseDeclaration
+        ): KoParameterDeclaration =
+            cache.getOrCreateInstance(ktParameter, containingDeclaration) {
+                KoParameterDeclarationCore(
+                    ktParameter,
+                    containingDeclaration
+                )
+            }
     }
 }

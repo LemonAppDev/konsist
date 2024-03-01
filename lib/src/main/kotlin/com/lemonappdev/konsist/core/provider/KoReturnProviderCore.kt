@@ -1,7 +1,9 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoReturnProvider
+import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.util.TypeUtil
 import com.lemonappdev.konsist.core.util.TypeUtil.hasTypeOf
@@ -22,12 +24,25 @@ internal interface KoReturnProviderCore :
         .filterIsInstance<KtTypeReference>()
 
     override val returnType: KoTypeDeclaration?
-        get() = TypeUtil.getType(
-            getTypeReferences(),
-            ktFunction.isExtensionDeclaration(),
-            this.castToKoBaseDeclaration(),
-            containingFile,
-        )
+        get() {
+            val references = getTypeReferences()
+
+            val type = if (ktFunction.isExtensionDeclaration()) {
+                when {
+                    references.size > 1 -> references.lastOrNull()
+                    else -> null
+                }
+            } else {
+                references.firstOrNull()
+            }
+
+            return type?.let {
+                KoTypeDeclarationCore.getInstance(
+                    it,
+                    containingDeclaration as KoContainingDeclarationProvider
+                )
+            }
+        }
 
     override val hasReturnValue: Boolean
         get() = if (returnType != null) {
