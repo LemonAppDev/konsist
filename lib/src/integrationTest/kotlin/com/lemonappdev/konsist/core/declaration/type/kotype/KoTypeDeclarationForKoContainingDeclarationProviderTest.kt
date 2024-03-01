@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource
 class KoTypeDeclarationForKoContainingDeclarationProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `parent-declaration`(fileName: String, ) {
+    fun `parent-declaration`(fileName: String) {
         // given
         val sut = getSnippetFile(fileName)
             .classes()

@@ -1,11 +1,9 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoReturnProvider
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
-import com.lemonappdev.konsist.core.util.TypeUtil
 import com.lemonappdev.konsist.core.util.TypeUtil.hasTypeOf
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtTypeReference

@@ -1,14 +1,11 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoNullableTypeProvider
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
-import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtTypeReference
-import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import kotlin.reflect.KClass
 
 internal interface KoNullableTypeProviderCore :

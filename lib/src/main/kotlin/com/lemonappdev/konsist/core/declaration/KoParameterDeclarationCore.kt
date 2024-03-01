@@ -4,10 +4,8 @@ import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
-import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -82,7 +80,6 @@ internal class KoParameterDeclarationCore private constructor(
 
         type?.let { KoTypeDeclarationCore.getInstance(it, this) }
             ?: throw IllegalArgumentException("Parameter type cannot be null")
-
     }
 
     override fun representsType(name: String?): Boolean = type.name == name // todo: add this?: || type.fullyQualifiedName == name
@@ -98,12 +95,12 @@ internal class KoParameterDeclarationCore private constructor(
 
         internal fun getInstance(
             ktParameter: KtParameter,
-            containingDeclaration: KoBaseDeclaration
+            containingDeclaration: KoBaseDeclaration,
         ): KoParameterDeclaration =
             cache.getOrCreateInstance(ktParameter, containingDeclaration) {
                 KoParameterDeclarationCore(
                     ktParameter,
-                    containingDeclaration
+                    containingDeclaration,
                 )
             }
     }

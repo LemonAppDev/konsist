@@ -29,7 +29,7 @@ class KoImportAliasDeclarationForKoContainingDeclarationProviderTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/type/koimportalias/snippet/forkocontainingdeclarationprovider/",
-            fileName
+            fileName,
         )
 
     companion object {

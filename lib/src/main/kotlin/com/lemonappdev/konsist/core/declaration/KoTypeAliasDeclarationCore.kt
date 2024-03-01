@@ -4,11 +4,9 @@ import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
-import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -27,13 +25,11 @@ import com.lemonappdev.konsist.core.provider.modifier.KoActualModifierProviderCo
 import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
-import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtTypeAlias
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
-import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 
 internal class KoTypeAliasDeclarationCore private constructor(
     private val ktTypeAlias: KtTypeAlias,

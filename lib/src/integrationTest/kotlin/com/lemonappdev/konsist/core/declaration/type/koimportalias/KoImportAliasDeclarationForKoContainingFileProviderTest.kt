@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource
 class KoImportAliasDeclarationForKoContainingFileProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `type-containing-file`(fileName: String, ) {
+    fun `type-containing-file`(fileName: String) {
         // given
         val sut = getSnippetFile(fileName)
             .classes()

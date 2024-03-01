@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource
 class KoImportAliasDeclarationForKoLocationProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `type-location`(fileName: String, ) {
+    fun `type-location`(fileName: String) {
         // given
         val sut = getSnippetFile(fileName)
             .classes()

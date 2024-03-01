@@ -47,7 +47,7 @@ class KoFunctionTypeDeclarationForKoPathProviderTest {
             ?.projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/type/kofunctiontype/snippet/" +
-                        "forkopathprovider/$fileName.kt",
+                    "forkopathprovider/$fileName.kt",
             )
     }
 
@@ -98,7 +98,7 @@ class KoFunctionTypeDeclarationForKoPathProviderTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/type/kofunctiontype/snippet/forkopathprovider/",
-            fileName
+            fileName,
         )
 
     companion object {

@@ -5,11 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoModuleProvider
-import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -88,7 +84,7 @@ internal class KoTypeDeclarationCore private constructor(
             containingDeclaration: KoBaseDeclaration,
         ): KoTypeDeclaration =
             cache.getOrCreateInstance(ktTypeReference, containingDeclaration) {
-                KoTypeDeclarationCore(ktTypeReference,containingDeclaration)
+                KoTypeDeclarationCore(ktTypeReference, containingDeclaration)
             }
     }
 }

@@ -2,12 +2,8 @@ package com.lemonappdev.konsist.core.declaration.type.kokotlintype
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
-import com.lemonappdev.konsist.api.ext.list.withPrimaryConstructor
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments.arguments
-import org.junit.jupiter.params.provider.MethodSource
 
 class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
     @Test

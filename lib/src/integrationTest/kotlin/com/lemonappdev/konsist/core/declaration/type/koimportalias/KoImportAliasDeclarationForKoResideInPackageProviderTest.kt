@@ -5,9 +5,6 @@ import com.lemonappdev.konsist.api.declaration.type.KoImportAliasDeclaration
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments.arguments
-import org.junit.jupiter.params.provider.MethodSource
 
 class KoImportAliasDeclarationForKoResideInPackageProviderTest {
     @Test
@@ -23,7 +20,7 @@ class KoImportAliasDeclarationForKoResideInPackageProviderTest {
             ?.declaration as? KoImportAliasDeclaration
 
         // then
-        assertSoftly(sut){
+        assertSoftly(sut) {
             it?.resideInPackage("com..") shouldBeEqualTo true
             it?.resideInPackage("com") shouldBeEqualTo false
             it?.resideOutsidePackage("com..") shouldBeEqualTo false

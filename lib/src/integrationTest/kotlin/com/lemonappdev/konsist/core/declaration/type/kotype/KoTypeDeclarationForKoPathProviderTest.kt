@@ -44,7 +44,7 @@ class KoTypeDeclarationForKoPathProviderTest {
             ?.projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/type/kotype/snippet/" +
-                        "forkopathprovider/$fileName.kt",
+                    "forkopathprovider/$fileName.kt",
             )
     }
 
