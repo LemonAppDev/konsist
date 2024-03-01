@@ -10,12 +10,12 @@ import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 
 interface KoFunctionTypeDeclaration :
     KoBaseTypeDeclaration,
-    KoContainingFileProvider, // todo: add
-    KoContainingDeclarationProvider, // todo: add
-    KoLocationProvider, // todo: add
-    KoPathProvider, // todo: add
-    KoModuleProvider, // todo: add
-    KoSourceSetProvider { // todo: add
+    KoContainingFileProvider,
+    KoContainingDeclarationProvider,
+    KoLocationProvider,
+    KoPathProvider,
+    KoModuleProvider,
+    KoSourceSetProvider {
     val parameterTypes: List<KoParameterDeclaration>
 
     val returnType: KoTypeDeclaration
