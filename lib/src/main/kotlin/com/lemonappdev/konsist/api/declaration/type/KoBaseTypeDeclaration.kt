@@ -13,5 +13,5 @@ interface KoBaseTypeDeclaration :
     KoBaseProvider,
     KoNameProvider,
     KoTextProvider,
-    KoPackageProvider,
-    KoResideInPackageProvider
+    KoPackageProvider, // todo: add
+    KoResideInPackageProvider // todo: add

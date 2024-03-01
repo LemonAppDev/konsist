@@ -8,10 +8,10 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoFunctionTypeDeclarationForKoNameProviderTest {
+class KoFunctionTypeDeclarationForKoTextProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `type-name`(
+    fun `type-text`(
         fileName: String,
         value: String,
     ) {
@@ -26,18 +26,18 @@ class KoFunctionTypeDeclarationForKoNameProviderTest {
             ?.declaration as? KoFunctionTypeDeclaration
 
         // then
-        sut?.name shouldBeEqualTo value
+        sut?.text shouldBeEqualTo value
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/type/kofunctiontype/snippet/forkonameprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/type/kofunctiontype/snippet/forkotextprovider/", fileName)
 
     companion object {
         @Suppress("unused")
         @JvmStatic
         fun provideValues() = listOf(
-            arguments("function-type-name", "() -> SampleType"),
-            arguments("nullable-function-type-name", "() -> SampleType"),
+            arguments("function-type-text", "() -> SampleType"),
+            arguments("nullable-function-type-text", "() -> SampleType"),
         )
     }
 }
