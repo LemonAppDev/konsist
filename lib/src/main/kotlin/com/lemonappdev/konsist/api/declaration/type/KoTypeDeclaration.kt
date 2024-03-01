@@ -60,11 +60,12 @@ interface KoTypeDeclaration :
     KoNullableProvider,
     KoContainingFileProvider,
     KoContainingDeclarationProvider,
-    KoModuleProvider,
-    KoSourceSetProvider,
+    KoModuleProvider, // Todo: upd tests
+    KoSourceSetProvider, // Todo: upd tests
     KoKotlinTypeProvider,
 //    KoGenericTypeProvider, // Todo: add tests
     KoPackageProvider,
-    KoResideInPackageProvider { // Todo: add tests
+    KoResideInPackageProvider {
     val declaration: KoBaseTypeDeclaration
 }
+// todo: what with rKoSourceAndAliasTypeProvider?
