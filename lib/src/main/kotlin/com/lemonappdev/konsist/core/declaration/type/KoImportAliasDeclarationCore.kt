@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.type
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
@@ -20,6 +21,7 @@ import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
+import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 
 internal class KoImportAliasDeclarationCore private constructor(
@@ -28,7 +30,6 @@ internal class KoImportAliasDeclarationCore private constructor(
     KoImportAliasDeclaration,
     KoBaseTypeDeclarationCore,
     KoBaseProviderCore,
-    KoNonNullableTypeProviderCore,
     KoContainingFileProviderCore,
     KoContainingDeclarationProviderCore,
     KoLocationProviderCore,
@@ -39,27 +40,17 @@ internal class KoImportAliasDeclarationCore private constructor(
 
     override val ktElement: KtElement by lazy { ktUserType }
 
-//    override val name: String by lazy { ktUserType.text }
-//
+    override val name: String by lazy { ktUserType.text }
+
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
-    override val type: KoTypeDeclaration by lazy {
-        val type = ktUserType
-            .children
-            .filterIsInstance<KtTypeReference>()
-            .firstOrNull()
-
-        type?.let { KoTypeDeclarationCore.getInstance(it, this) }
-            ?: throw IllegalArgumentException("Import alias has no specified type.")
+    override val importDirective: KoImportDeclaration by lazy {
+        containingFile.imports.first {
+            it.alias == name
+        }
     }
 
-//    override val importDirective: KoImportDeclaration by lazy {
-//        containingFile.imports.first {
-//            it.alias == name
-//        }
-//    }
-
-    override fun toString(): String = text // Todo: change to name
+    override fun toString(): String = text
 
     internal companion object {
         private val cache: KoDeclarationCache<KoImportAliasDeclaration> = KoDeclarationCache() // Todo: change this?

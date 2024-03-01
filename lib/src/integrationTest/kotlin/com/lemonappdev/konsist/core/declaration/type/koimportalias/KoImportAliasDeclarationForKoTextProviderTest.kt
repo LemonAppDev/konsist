@@ -7,10 +7,10 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoImportAliasDeclarationForKoNameProviderTest {
+class KoImportAliasDeclarationForKoTextProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `type-name`(
+    fun `type-text`(
         fileName: String,
         value: String,
     ) {
@@ -25,18 +25,18 @@ class KoImportAliasDeclarationForKoNameProviderTest {
             ?.declaration as? KoImportAliasDeclaration
 
         // then
-        sut?.name shouldBeEqualTo value
+        sut?.text shouldBeEqualTo value
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/type/koimportalias/snippet/forkonameprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/type/koimportalias/snippet/forkotextprovider/", fileName)
 
     companion object {
         @Suppress("unused")
         @JvmStatic
         fun provideValues() = listOf(
-            arguments("import-alias-type-name", "ImportAlias"),
-            arguments("nullable-import-alias-type-name", "ImportAlias"),
+            arguments("import-alias-type-text", "ImportAlias"),
+            arguments("nullable-import-alias-type-text", "ImportAlias"),
         )
     }
 }

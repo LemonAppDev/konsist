@@ -6,4 +6,4 @@ import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
 interface KoKotlinTypeDeclaration :
     KoBaseTypeDeclaration,
     KoFullyQualifiedNameProvider,
-    KoSourceAndAliasTypeProvider
+    KoSourceAndAliasTypeProvider // Todo: add tests

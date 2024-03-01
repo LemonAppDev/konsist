@@ -11,12 +11,11 @@ import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 
 interface KoImportAliasDeclaration :
     KoBaseTypeDeclaration,
-    KoNonNullableTypeProvider,
     KoContainingFileProvider,
     KoContainingDeclarationProvider,
     KoLocationProvider,
     KoPathProvider,
-    KoModuleProvider,
-    KoSourceSetProvider {
-//    val importDirective: KoImportDeclaration
+    KoModuleProvider, // todo
+    KoSourceSetProvider { // todo
+    val importDirective: KoImportDeclaration
 }

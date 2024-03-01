@@ -2,20 +2,18 @@ package com.lemonappdev.konsist.core.declaration.type.koimportalias
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.type.KoImportAliasDeclaration
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoImportAliasDeclarationForKoNameProviderTest {
-    @ParameterizedTest
-    @MethodSource("provideValues")
-    fun `type-name`(
-        fileName: String,
-        value: String,
-    ) {
+class KoImportAliasDeclarationForKoResideInPackageProviderTest {
+    @Test
+    fun `import-alias-type-reside-in-package`() {
         // given
-        val sut = getSnippetFile(fileName)
+        val sut = getSnippetFile("import-alias-type-reside-in-package")
             .classes()
             .first()
             .primaryConstructor
@@ -25,18 +23,14 @@ class KoImportAliasDeclarationForKoNameProviderTest {
             ?.declaration as? KoImportAliasDeclaration
 
         // then
-        sut?.name shouldBeEqualTo value
+        assertSoftly(sut){
+            it?.resideInPackage("com..") shouldBeEqualTo true
+            it?.resideInPackage("com") shouldBeEqualTo false
+            it?.resideOutsidePackage("com..") shouldBeEqualTo false
+            it?.resideOutsidePackage("com") shouldBeEqualTo true
+        }
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/type/koimportalias/snippet/forkonameprovider/", fileName)
-
-    companion object {
-        @Suppress("unused")
-        @JvmStatic
-        fun provideValues() = listOf(
-            arguments("import-alias-type-name", "ImportAlias"),
-            arguments("nullable-import-alias-type-name", "ImportAlias"),
-        )
-    }
+        TestSnippetProvider.getSnippetKoScope("core/declaration/type/koimportalias/snippet/forkoresideinpackageprovider/", fileName)
 }
