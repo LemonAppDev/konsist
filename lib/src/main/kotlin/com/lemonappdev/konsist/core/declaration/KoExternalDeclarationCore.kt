@@ -15,7 +15,7 @@ internal class KoExternalDeclarationCore(name: String, override val ktElement: K
     KoParentDeclarationCore,
     KoChildProviderCore,
     KoBaseTypeDeclarationCore {
-//    override val psiElement: PsiElement by lazy { ktElement }
+    override val psiElement: PsiElement by lazy { ktElement }
 
     override val name: String by lazy {
         name

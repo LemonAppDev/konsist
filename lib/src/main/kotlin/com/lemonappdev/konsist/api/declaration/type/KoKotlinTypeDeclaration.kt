@@ -1,3 +1,5 @@
 package com.lemonappdev.konsist.api.declaration.type
 
-interface KoKotlinTypeDeclaration : KoBaseTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+
+interface KoKotlinTypeDeclaration : KoBaseTypeDeclaration, KoFullyQualifiedNameProvider

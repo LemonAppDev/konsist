@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.type
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
@@ -40,7 +41,7 @@ internal class KoImportAliasDeclarationCore private constructor(
 
 //    override val name: String by lazy { ktUserType.text }
 //
-//    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
+    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
     override val type: KoTypeDeclaration by lazy {
         val type = ktUserType

@@ -13,6 +13,7 @@ class KoFunctionTypeDeclarationTest {
             .properties()
             .first()
             .type
+            ?.declaration
 
         // then
         sut.toString() shouldBeEqualTo "() -> Unit"
@@ -25,6 +26,8 @@ class KoFunctionTypeDeclarationTest {
             .properties()
             .first()
             .type
+            ?.declaration
+
 
         val sut = (type as? KoFunctionTypeDeclaration)?.parameterTypes
 
@@ -39,6 +42,7 @@ class KoFunctionTypeDeclarationTest {
             .properties()
             .first()
             .type
+            ?.declaration
 
         val sut = (type as? KoFunctionTypeDeclaration)?.parameterTypes
 
@@ -53,6 +57,7 @@ class KoFunctionTypeDeclarationTest {
             .properties()
             .first()
             .type
+            ?.declaration
 
         val sut = (type as? KoFunctionTypeDeclaration)?.parameterTypes
 
@@ -67,6 +72,7 @@ class KoFunctionTypeDeclarationTest {
             .properties()
             .first()
             .type
+            ?.declaration
 
         val sut = (type as? KoFunctionTypeDeclaration)?.returnType
 
@@ -81,6 +87,7 @@ class KoFunctionTypeDeclarationTest {
             .properties()
             .first()
             .type
+            ?.declaration
 
         val sut = (type as? KoFunctionTypeDeclaration)?.returnType
 
@@ -95,6 +102,7 @@ class KoFunctionTypeDeclarationTest {
             .properties()
             .first()
             .type
+            ?.declaration
 
         val sut = (type as? KoFunctionTypeDeclaration)?.returnType
 

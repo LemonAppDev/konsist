@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.type
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
@@ -40,9 +41,9 @@ internal class KoFunctionTypeDeclarationCore private constructor(
 
     override val ktElement: KtElement by lazy { ktFunctionType }
 
-//    override val name: String by lazy { ktFunctionType.text }
-//
-//    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
+    override val name: String by lazy { ktFunctionType.text }
+
+    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
     override val parameterTypes: List<KoParameterDeclaration> by lazy {
         ktFunctionType

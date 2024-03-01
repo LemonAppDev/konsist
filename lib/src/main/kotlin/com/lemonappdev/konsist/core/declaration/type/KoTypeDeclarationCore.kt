@@ -73,9 +73,9 @@ internal class KoTypeDeclarationCore private constructor(
         TypeUtil.getBasicType(
             listOf(ktTypeReference),
             ktTypeReference.isExtensionDeclaration(),
-            this.castToKoBaseDeclaration(),
+            this,
             containingFile,
-        ) ?: throw IllegalArgumentException("Source declaration cannot be a null")
+        ) ?: throw IllegalArgumentException("Declaration cannot be a null")
     }
 
     override fun toString(): String = text
