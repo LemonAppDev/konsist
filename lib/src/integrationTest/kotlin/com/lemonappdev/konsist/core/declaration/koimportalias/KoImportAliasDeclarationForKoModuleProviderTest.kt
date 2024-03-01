@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.type.koimportalias
+package com.lemonappdev.konsist.core.declaration.koimportalias
 
 class KoImportAliasDeclarationForKoModuleProviderTest {
     // Konsist koImportAlias.moduleName and koImportAlias.resideInModule() tests

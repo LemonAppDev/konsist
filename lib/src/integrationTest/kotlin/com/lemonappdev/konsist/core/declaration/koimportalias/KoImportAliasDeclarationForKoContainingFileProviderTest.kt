@@ -1,7 +1,7 @@
-package com.lemonappdev.konsist.core.declaration.type.koimportalias
+package com.lemonappdev.konsist.core.declaration.koimportalias
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.declaration.type.KoImportAliasDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
@@ -26,7 +26,7 @@ class KoImportAliasDeclarationForKoContainingFileProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/type/koimportalias/snippet/forkocontainingfileprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koimportalias/snippet/forkocontainingfileprovider/", fileName)
 
     companion object {
         @Suppress("unused")

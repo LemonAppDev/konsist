@@ -8,7 +8,7 @@ import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoFunctionTypeDeclarationCore
-import com.lemonappdev.konsist.core.declaration.type.KoImportAliasDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoImportAliasDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.model.getClass

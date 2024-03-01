@@ -1,7 +1,7 @@
-package com.lemonappdev.konsist.core.declaration.type.koimportalias
+package com.lemonappdev.konsist.core.declaration.koimportalias
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.declaration.type.KoImportAliasDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
@@ -25,7 +25,7 @@ class KoImportAliasDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("type/koimportalias/snippet/forkopathprovider/$fileName.kt") shouldBeEqualTo true
+            it?.endsWith("koimportalias/snippet/forkopathprovider/$fileName.kt") shouldBeEqualTo true
         }
     }
 
@@ -46,7 +46,7 @@ class KoImportAliasDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/type/koimportalias/snippet/" +
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koimportalias/snippet/" +
                     "forkopathprovider/$fileName.kt",
             )
     }
@@ -67,9 +67,9 @@ class KoImportAliasDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..type/koimportalias/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..type/koimportalias..$fileName.kt", true) shouldBeEqualTo true
-            it?.resideInPath("type/koimportalias/snippet/", true) shouldBeEqualTo false
+            it?.resideInPath("..koimportalias/snippet..", true) shouldBeEqualTo true
+            it?.resideInPath("..koimportalias..$fileName.kt", true) shouldBeEqualTo true
+            it?.resideInPath("koimportalias/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -89,15 +89,15 @@ class KoImportAliasDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             it?.resideInPath("..snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..type/koimportalias/snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..type/koimportalias..$fileName.kt", false) shouldBeEqualTo true
-            it?.resideInPath("type/koimportalias/snippet/", false) shouldBeEqualTo false
+            it?.resideInPath("..koimportalias/snippet..", false) shouldBeEqualTo true
+            it?.resideInPath("..koimportalias..$fileName.kt", false) shouldBeEqualTo true
+            it?.resideInPath("koimportalias/snippet/", false) shouldBeEqualTo false
         }
     }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
-            "core/declaration/type/koimportalias/snippet/forkopathprovider/",
+            "core/declaration/koimportalias/snippet/forkopathprovider/",
             fileName,
         )
 

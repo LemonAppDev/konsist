@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.type.koimportalias
+package com.lemonappdev.konsist.core.declaration.koimportalias
 
 class KoImportAliasDeclarationForKoSourceSetProviderTest {
     // Konsist koImportAlias.sourceSetName and koImportAlias.resideInSourceSet() tests

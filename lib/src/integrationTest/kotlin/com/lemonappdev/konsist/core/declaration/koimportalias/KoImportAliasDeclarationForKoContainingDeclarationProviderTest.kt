@@ -1,19 +1,17 @@
-package com.lemonappdev.konsist.core.declaration.type.koimportalias
+package com.lemonappdev.konsist.core.declaration.koimportalias
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.declaration.type.KoImportAliasDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoImportAliasDeclarationForKoTextProviderTest {
+class KoImportAliasDeclarationForKoContainingDeclarationProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `type-text`(
-        fileName: String,
-        value: String,
-    ) {
+    fun `type-containing-declaration`(fileName: String) {
         // given
         val sut = getSnippetFile(fileName)
             .classes()
@@ -25,18 +23,21 @@ class KoImportAliasDeclarationForKoTextProviderTest {
             ?.declaration as? KoImportAliasDeclaration
 
         // then
-        sut?.text shouldBeEqualTo value
+        (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo fileName
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/type/koimportalias/snippet/forkotextprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope(
+            "core/declaration/koimportalias/snippet/forkocontainingdeclarationprovider/",
+            fileName,
+        )
 
     companion object {
         @Suppress("unused")
         @JvmStatic
         fun provideValues() = listOf(
-            arguments("import-alias-type-text", "ImportAlias"),
-            arguments("nullable-import-alias-type-text", "ImportAlias"),
+            arguments("import-alias-type-containing-declaration"),
+            arguments("nullable-import-alias-type-containing-declaration"),
         )
     }
 }
