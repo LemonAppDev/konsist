@@ -14,12 +14,14 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
 import org.amshove.kluent.shouldNotBeInstanceOf
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 import kotlin.reflect.KClass
 
 class KoTypeDeclarationTest {
+
     @ParameterizedTest
     @MethodSource("provideValuesForToString")
     fun `to-string`(
@@ -30,8 +32,7 @@ class KoTypeDeclarationTest {
         val sut = getSnippetFile(fileName)
             .classes()
             .first()
-            .primaryConstructor
-            ?.parameters
+            .primaryConstructor?.parameters
             ?.first()
             ?.type
 

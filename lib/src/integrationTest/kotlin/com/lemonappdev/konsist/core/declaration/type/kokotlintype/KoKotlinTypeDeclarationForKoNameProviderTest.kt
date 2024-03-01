@@ -1,56 +1,63 @@
 package com.lemonappdev.konsist.core.declaration.type.kokotlintype
 
-import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments.arguments
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.api.Test
 
 class KoKotlinTypeDeclarationForKoNameProviderTest {
-    @ParameterizedTest
-    @MethodSource("provideValues")
-    fun `name`(
-        fileName: String,
-        value: String,
-    ) {
+    @Test
+    fun `nullable-kotlin-basic-type-name`() {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
+        val sut = getSnippetFile("nullable-kotlin-basic-type-name")
+            .properties()
             .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+            .type
+            ?.declaration as? KoKotlinTypeDeclaration
 
         // then
-        sut?.name shouldBeEqualTo value
+        sut?.name shouldBeEqualTo "String"
+    }
+
+    @Test
+    fun `not-nullable-kotlin-basic-type-name`() {
+        // given
+        val sut = getSnippetFile("not-nullable-kotlin-basic-type-name")
+            .properties()
+            .first()
+            .type
+            ?.declaration as? KoKotlinTypeDeclaration
+
+        // then
+        sut?.name shouldBeEqualTo "String"
+    }
+
+    @Test
+    fun `nullable-kotlin-collection-type-name`() {
+        // given
+        val sut = getSnippetFile("nullable-kotlin-collection-type-name")
+            .properties()
+            .first()
+            .type
+            ?.declaration as? KoKotlinTypeDeclaration
+
+        // then
+        sut?.name shouldBeEqualTo "List<String>"
+    }
+
+    @Test
+    fun `not-nullable-kotlin-collection-type-name`() {
+        // given
+        val sut = getSnippetFile("not-nullable-kotlin-collection-type-name")
+            .properties()
+            .first()
+            .type
+            ?.declaration as? KoKotlinTypeDeclaration
+
+        // then
+        sut?.name shouldBeEqualTo "List<String>"
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/type/kokotlintype/snippet/forkonameprovider/", fileName)
-
-    companion object {
-        @Suppress("unused")
-        @JvmStatic
-        fun provideValues() = listOf(
-            arguments("nullable-kotlin-basic-type-name", "String"),
-            arguments("not-nullable-kotlin-basic-type-name", "String"),
-            arguments("nullable-kotlin-collection-type-name", "List<String>"),
-            arguments("not-nullable-kotlin-collection-type-name", "List<String>"),
-            arguments("nullable-class-type-name", "SampleType"),
-            arguments("not-nullable-class-type-name", "SampleType"),
-            arguments("nullable-interface-type-name", "SampleInterface"),
-            arguments("not-nullable-interface-type-name", "SampleInterface"),
-            arguments("nullable-object-type-name", "SampleObject"),
-            arguments("not-nullable-object-type-name", "SampleObject"),
-            arguments("nullable-function-type-name", "(SampleObject) -> Unit"),
-            arguments("not-nullable-function-type-name", "(SampleObject) -> Unit"),
-            arguments("nullable-import-alias-type-name", "ImportAlias"),
-            arguments("not-nullable-import-alias-type-name", "ImportAlias"),
-            arguments("nullable-typealias-type-name", "SampleTypeAlias"),
-            arguments("not-nullable-typealias-type-name", "SampleTypeAlias"),
-            arguments("nullable-external-type-name", "SampleExternalClass"),
-            arguments("not-nullable-external-type-name", "SampleExternalClass"),
-        )
-    }
+        TestSnippetProvider.getSnippetKoScope("core/declaration/type/kokotlintype/snippet/forkonameprovider/", fileName)
 }

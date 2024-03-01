@@ -5,59 +5,59 @@ import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoKotlinTypeDeclarationTest {
+class KoKotlinTypeDeclarationForKoPackageProviderTest {
     @Test
-    fun `nullable-basic-type-to-string`() {
+    fun `nullable-kotlin-basic-type-package`() {
         // given
-        val sut = getSnippetFile("nullable-basic-type-to-string")
+        val sut = getSnippetFile("nullable-kotlin-basic-type-package")
             .properties()
             .first()
             .type
             ?.declaration as? KoKotlinTypeDeclaration
 
         // then
-        sut?.toString() shouldBeEqualTo "String"
+        sut?.packagee?.fullyQualifiedName shouldBeEqualTo "kotlin"
     }
 
     @Test
-    fun `not-nullable-basic-type-to-string`() {
+    fun `not-nullable-kotlin-basic-type-package`() {
         // given
-        val sut = getSnippetFile("not-nullable-basic-type-to-string")
+        val sut = getSnippetFile("not-nullable-kotlin-basic-type-package")
             .properties()
             .first()
             .type
             ?.declaration as? KoKotlinTypeDeclaration
 
         // then
-        sut?.toString() shouldBeEqualTo "String"
+        sut?.packagee?.fullyQualifiedName shouldBeEqualTo "kotlin"
     }
 
     @Test
-    fun `nullable-collection-type-to-string`() {
+    fun `nullable-kotlin-collection-type-package`() {
         // given
-        val sut = getSnippetFile("nullable-collection-type-to-string")
+        val sut = getSnippetFile("nullable-kotlin-collection-type-package")
             .properties()
             .first()
             .type
             ?.declaration as? KoKotlinTypeDeclaration
 
         // then
-        sut?.toString() shouldBeEqualTo "List<String>"
+        sut?.packagee?.fullyQualifiedName shouldBeEqualTo "kotlin.collections"
     }
 
     @Test
-    fun `not-nullable-collection-type-to-string`() {
+    fun `not-nullable-kotlin-collection-type-package`() {
         // given
-        val sut = getSnippetFile("not-nullable-collection-type-to-string")
+        val sut = getSnippetFile("not-nullable-kotlin-collection-type-package")
             .properties()
             .first()
             .type
             ?.declaration as? KoKotlinTypeDeclaration
 
         // then
-        sut?.toString() shouldBeEqualTo "List<String>"
+        sut?.packagee?.fullyQualifiedName shouldBeEqualTo "kotlin.collections"
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/type/kokotlintype/snippet/forgeneral/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/type/kokotlintype/snippet/forkopackageprovider/", fileName)
 }
