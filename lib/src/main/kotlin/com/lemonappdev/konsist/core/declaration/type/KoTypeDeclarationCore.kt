@@ -6,6 +6,8 @@ import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoModuleProvider
+import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -13,9 +15,12 @@ import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoKotlinTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
+import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoNullableProviderCore
+import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
 import com.lemonappdev.konsist.core.util.TypeUtil
@@ -32,10 +37,13 @@ internal class KoTypeDeclarationCore private constructor(
     KoBaseProviderCore,
     KoNameProviderCore,
     KoTextProviderCore,
+    KoPathProviderCore,
     KoLocationProviderCore,
     KoNullableProviderCore,
     KoContainingFileProviderCore,
     KoContainingDeclarationProviderCore,
+    KoModuleProviderCore,
+    KoSourceSetProviderCore,
     KoKotlinTypeProviderCore,
 //    KoGenericTypeProviderCore,
     KoPackageProviderCore,
