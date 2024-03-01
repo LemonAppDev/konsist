@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.declaration.kotype
+package com.lemonappdev.konsist.declaration.type.kotype
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.types

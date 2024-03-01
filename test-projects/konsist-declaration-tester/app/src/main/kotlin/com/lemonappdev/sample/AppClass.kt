@@ -1,6 +1,8 @@
 package com.lemonappdev.sample
 
 import com.lemonappdev.sample.AppClass
+import com.lemonappdev.sample.SampleObject
+import com.lemonappdev.sample.SampleObject as ImportAlias
 
 /**
  * App KDoc
@@ -42,7 +44,9 @@ var appProperty: AppClass = AppClass("")
         if (true) field = value
     }
 
-val x: List<String> = listOf()
+val appPropertyWithFunctionType: () -> Unit = {}
+
+val appPropertyWithImportAliasType: ImportAlias = SampleObject
 
 object AppObject
 
