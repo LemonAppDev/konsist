@@ -15,7 +15,7 @@ interface KoImportAliasDeclaration :
     KoContainingDeclarationProvider,
     KoLocationProvider,
     KoPathProvider,
-    KoModuleProvider, // todo
-    KoSourceSetProvider { // todo
+    KoModuleProvider,
+    KoSourceSetProvider {
     val importDirective: KoImportDeclaration
 }
