@@ -23,6 +23,7 @@ import org.jetbrains.kotlin.psi.KtParameterList
 
 internal class KoFunctionTypeDeclarationCore private constructor(
     private val ktFunctionType: KtFunctionType,
+    override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoFunctionTypeDeclaration,
     KoBaseTypeDeclarationCore,
@@ -67,9 +68,7 @@ internal class KoFunctionTypeDeclarationCore private constructor(
             containingDeclaration: KoBaseDeclaration,
         ): KoFunctionTypeDeclaration =
             cache.getOrCreateInstance(ktFunctionType, containingDeclaration) {
-                KoFunctionTypeDeclarationCore(
-                    ktFunctionType,
-                )
+                KoFunctionTypeDeclarationCore(ktFunctionType, containingDeclaration)
             }
     }
 }

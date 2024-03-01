@@ -53,9 +53,7 @@ internal class KoKotlinTypeDeclarationCore private constructor(
             containingDeclaration: KoBaseDeclaration,
         ): KoKotlinTypeDeclaration =
             cache.getOrCreateInstance(ktUserType, containingDeclaration) {
-                KoKotlinTypeDeclarationCore(
-                    ktUserType,
-                )
+                KoKotlinTypeDeclarationCore(ktUserType,)
             }
     }
 }
