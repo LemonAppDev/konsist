@@ -2,13 +2,13 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
-import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
+import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil2
 
 internal interface KoInterfaceProviderCore : KoInterfaceProvider, KoDeclarationProviderCore, KoBaseProviderCore {
     override fun interfaces(
         includeNested: Boolean,
     ): List<KoInterfaceDeclaration> =
-        KoDeclarationProviderCoreUtil.getKoDeclarations(
+        KoDeclarationProviderCoreUtil2.getKoDeclarations(
             declarations(includeNested = false, includeLocal = false),
             includeNested,
         )

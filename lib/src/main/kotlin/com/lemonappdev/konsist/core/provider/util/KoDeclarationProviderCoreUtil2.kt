@@ -35,7 +35,7 @@ import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtSecondaryConstructor
 import org.jetbrains.kotlin.psi.KtTypeAlias
 
-internal object KoDeclarationProviderCoreUtil {
+internal object KoDeclarationProviderCoreUtil2 {
     inline fun <reified T : KoBaseDeclaration> getKoDeclarations(
         ktElement: KtElement,
         includeNested: Boolean = true,
@@ -171,11 +171,7 @@ internal object KoDeclarationProviderCoreUtil {
         ktDeclaration is KtEnumEntry -> KoEnumConstantDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
         ktDeclaration is KtSecondaryConstructor -> KoSecondaryConstructorDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
         ktDeclaration is KtClass && !ktDeclaration.isInterface() -> KoClassDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
-        ktDeclaration is KtClass && ktDeclaration.isInterface() -> KoInterfaceDeclarationCore.getInstance(
-            ktDeclaration,
-            containingDeclaration,
-        )
-
+        ktDeclaration is KtClass && ktDeclaration.isInterface() -> KoInterfaceDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
         ktDeclaration is KtObjectDeclaration -> KoObjectDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
         ktDeclaration is KtProperty -> KoPropertyDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
         ktDeclaration is KtFunction -> KoFunctionDeclarationCore.getInstance(ktDeclaration, containingDeclaration)

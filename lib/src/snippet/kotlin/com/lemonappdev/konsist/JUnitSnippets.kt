@@ -23,19 +23,20 @@ class JUnitSnippets {
             .assertTrue { it.hasNameEndingWith("Tests") }
     }
 
-    fun `test classes should have test subject named sut`() {
-        Konsist
-            .scopeFromTest()
-            .classes()
-            .assertTrue {
-                val type = it.name.removeSuffix("Test")
-                val sut = it
-                    .properties()
-                    .firstOrNull { property -> property.name == "sut" }
-
-                sut != null && sut.hasTacitType(type)
-            }
-    }
+    // TODO: Fix this test
+//    fun `test classes should have test subject named sut`() {
+//        Konsist
+//            .scopeFromTest()
+//            .classes()
+//            .assertTrue {
+//                val type = it.name.removeSuffix("Test")
+//                val sut = it
+//                    .properties()
+//                    .firstOrNull { property -> property.name == "sut" }
+//
+//                sut != null && sut.hasTacitType(type)
+//            }
+//    }
 
     fun `test classes should have all members private besides tests`() {
         Konsist

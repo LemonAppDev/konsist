@@ -9,15 +9,19 @@ import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.ext.toKoFile
 import com.lemonappdev.konsist.core.ext.toMacOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
+import com.lemonappdev.konsist.core.provider.util.KoDeclarationProvider
 import java.io.File
 
 @Suppress("detekt.TooManyFunctions")
 internal class KoScopeCreatorCore : KoScopeCreator {
-    private val pathProvider: PathProvider by lazy { PathProvider.getInstance() }
+    private val koDeclarationProvider =  KoDeclarationProvider()
 
-    private val projectKotlinFiles: List<KoFileDeclaration> by lazy { File(pathProvider.rootProjectPath).toKoFiles() }
+    // TODO: Remove
+    private val projectKotlinFiles2: List<KoFileDeclaration> by lazy { File(PathProvider.rootProjectPath).toKoFiles() }
 
-    override val projectRootPath: String by lazy { pathProvider.rootProjectPath }
+    private val declarations = mutableListOf<KoFileDeclaration>()
+
+    override val projectRootPath: String by lazy { PathProvider.rootProjectPath }
 
     override fun scopeFromProject(moduleName: String?, sourceSetName: String?, ignoreBuildConfig: Boolean): KoScope {
         val koFiles = getFiles(moduleName, sourceSetName, ignoreBuildConfig)
@@ -52,7 +56,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         sourceSetName: String? = null,
         ignoreBuildConfig: Boolean = true,
     ): List<KoFileDeclaration> {
-        val localProjectKotlinFiles = projectKotlinFiles
+        val localProjectKotlinFiles = projectKotlinFiles2
             .filterNot { isBuildToolPath(it.path.toMacOsSeparator()) }
             .let {
                 if (ignoreBuildConfig) {
@@ -231,12 +235,13 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         return lowercasePath.matches(Regex(".*/$gradleBuildConfigDirectoryName.*"))
     }
 
+    // TODO: Remove
     private fun File.toKoFiles(): List<KoFileDeclaration> = walk()
         .filter { it.isKotlinFile }
         .map { it.toKoFile() }
         .toList()
 
-    private fun getKoFiles(files: List<File>) = projectKotlinFiles.filter {
+    private fun getKoFiles(files: List<File>) = projectKotlinFiles2.filter {
         files.any { file ->
             file.path == it.path
         }

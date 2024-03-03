@@ -2,14 +2,14 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
-import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
+import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil2
 
 internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationProviderCore, KoBaseProviderCore {
     override fun functions(
         includeNested: Boolean,
         includeLocal: Boolean,
     ): List<KoFunctionDeclaration> =
-        KoDeclarationProviderCoreUtil.getKoDeclarations(
+        KoDeclarationProviderCoreUtil2.getKoDeclarations(
             declarations(includeNested = false, includeLocal = false),
             includeNested,
             includeLocal,
