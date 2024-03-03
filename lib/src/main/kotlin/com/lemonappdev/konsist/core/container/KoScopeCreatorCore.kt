@@ -17,9 +17,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     private val koDeclarationProvider =  KoDeclarationProvider()
 
     // TODO: Remove
-    private val projectKotlinFiles2: List<KoFileDeclaration> by lazy { File(PathProvider.rootProjectPath).toKoFiles() }
-
-    private val declarations = mutableListOf<KoFileDeclaration>()
+    private val projectKotlinFiles: List<KoFileDeclaration> by lazy { File(PathProvider.rootProjectPath).toKoFiles() }
 
     override val projectRootPath: String by lazy { PathProvider.rootProjectPath }
 
@@ -56,7 +54,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         sourceSetName: String? = null,
         ignoreBuildConfig: Boolean = true,
     ): List<KoFileDeclaration> {
-        val localProjectKotlinFiles = projectKotlinFiles2
+        val localProjectKotlinFiles = projectKotlinFiles
             .filterNot { isBuildToolPath(it.path.toMacOsSeparator()) }
             .let {
                 if (ignoreBuildConfig) {
@@ -241,7 +239,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         .map { it.toKoFile() }
         .toList()
 
-    private fun getKoFiles(files: List<File>) = projectKotlinFiles2.filter {
+    private fun getKoFiles(files: List<File>) = projectKotlinFiles.filter {
         files.any { file ->
             file.path == it.path
         }

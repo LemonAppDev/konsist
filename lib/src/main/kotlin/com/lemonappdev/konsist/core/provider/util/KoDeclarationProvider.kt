@@ -68,7 +68,7 @@ internal class KoDeclarationProvider {
     }
 
     private suspend fun parseKotlinFile(it: File): KoFileDeclaration = coroutineScope {
-        return@coroutineScope async {
+        async {
             // TODO: Remove this print
             println("AAAA Parsing file at ${Thread.currentThread()}")
             it.toKoFile()
