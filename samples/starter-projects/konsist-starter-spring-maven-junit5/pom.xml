@@ -16,7 +16,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.5</version>
+		<version>3.2.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.sample</groupId>
@@ -26,7 +26,7 @@
 	<description>konsist-starter-spring-maven-junit5</description>
 	<properties>
 		<java.version>19</java.version>
-		<kotlin.version>1.9.20</kotlin.version>
+		<kotlin.version>1.9.22</kotlin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -85,7 +85,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>3.4.0</version>
+				<version>3.5.0</version>
 			</plugin>
 		</plugins>
 	</build>

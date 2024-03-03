@@ -17,15 +17,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: JUnit Test
         run: ./gradlew :lib:test
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: junit-test-report
           path: ./lib/build/test-results/test/
@@ -38,15 +38,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Konsist Test
         run: ./gradlew lib:konsistTest
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: konsist-test-report
           path: ./lib/build/test-results/konsistTest/
@@ -59,15 +59,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Integration Test
         run: ./gradlew lib:integrationTest
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: integration-test-report
           path: ./lib/build/test-results/integrationTest/
@@ -80,15 +80,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Api Test
         run: ./gradlew lib:apiTest
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: api-test-report
           path: ./lib/build/test-results/apiTest/
@@ -103,10 +103,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Spotless
         run: ./gradlew spotlessCheck
@@ -119,15 +119,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Detekt
         run: ./gradlew detektCheck
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: detekt-report
           path: ./**/build/reports/detekt/detekt.*
@@ -142,10 +142,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Publish
         run: >
@@ -163,12 +163,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: |
             8
-            19
-          distribution: 'zulu'
+            21
+          distribution: 'corretto'
 
       - name: Publish
         run: >
@@ -186,10 +186,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Publish
         run: >
@@ -210,12 +210,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: |
             8
-            19
-          distribution: 'zulu'
+            21
+          distribution: 'corretto'
 
       - name: Publish
         run: >
@@ -228,6 +228,52 @@ jobs:
       - name: Run App Integration Test
         run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew app:integrationTest
 
+  # ======================================= Check Declarations =======================================
+
+  declaration-tester-project-ubuntu:
+    name: Declaration Tester Project Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'corretto'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+
+      - name: Run Integration Test
+        run: cd test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
+
+  declaration-tester-project-windows:
+    name: Declaration Tester Project Windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: |
+            8
+            21
+          distribution: 'corretto'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+
+      - name: Run Integration Test
+        run: cd test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
+
 # ======================================= Library Artifact =========================================================
   konsist-artifact-check:
     name: Konsist Artifact Check
@@ -237,13 +283,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11.3'
 
@@ -261,12 +307,12 @@ jobs:
       - name: List artifacts
         run: ls -R ~/.m2/repository/
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: konsist.jar
           path: lib/build/libs/lib.jar
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: konsist-XXX-SNAPSHOT.jar
           path: /home/runner/.m2/repository/com/lemonappdev/konsist/*
@@ -287,15 +333,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: 'zulu'
+          java-version: 21
+          distribution: 'corretto'
 
       - name: Dokka Generate Html Doc
         run: ./gradlew lib:dokkaHtml
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: dokka-html-doc.jar
           path: ./lib/build/dokka/*

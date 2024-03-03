@@ -105,7 +105,9 @@ internal class KoPropertyDeclarationCore private constructor(
     KoConstModifierProviderCore,
     KoGetterProviderCore,
     KoSetterProviderCore,
-    KoTacitTypeProviderCore {
+    KoTacitTypeProviderCore,
+    KoSetterProviderCore,
+    KoReadOnlyProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }
 
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktCallableDeclaration }

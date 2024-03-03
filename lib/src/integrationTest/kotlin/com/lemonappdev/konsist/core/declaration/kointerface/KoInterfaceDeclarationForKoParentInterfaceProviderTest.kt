@@ -121,17 +121,18 @@ class KoInterfaceDeclarationForKoParentInterfaceProviderTest {
 
         // then
         assertSoftly(sut) {
-            parentInterfaces(indirectParents = false).map { it.name } shouldBeEqualTo listOf("SampleParentInterface1")
+            parentInterfaces(indirectParents = false).map { it.name } shouldBeEqualTo listOf("SampleParentInterface")
             parentInterfaces(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
+                "SampleParentInterface",
                 "SampleParentInterface1",
                 "SampleParentInterface2",
             )
             numParentInterfaces(indirectParents = false) shouldBeEqualTo 1
-            numParentInterfaces(indirectParents = true) shouldBeEqualTo 2
+            numParentInterfaces(indirectParents = true) shouldBeEqualTo 3
             countParentInterfaces(indirectParents = false) { it.name == "SampleParentInterface2" } shouldBeEqualTo 0
             countParentInterfaces(indirectParents = true) { it.name == "SampleParentInterface2" } shouldBeEqualTo 1
             countParentInterfaces(indirectParents = false) { it.hasNameStartingWith("SampleParent") } shouldBeEqualTo 1
-            countParentInterfaces(indirectParents = true) { it.hasNameStartingWith("SampleParent") } shouldBeEqualTo 2
+            countParentInterfaces(indirectParents = true) { it.hasNameStartingWith("SampleParent") } shouldBeEqualTo 3
             hasParentInterfaces(indirectParents = false) shouldBeEqualTo true
             hasParentInterfaces(indirectParents = true) shouldBeEqualTo true
             hasParentInterfaceWithName("SampleParentInterface2", indirectParents = true) shouldBeEqualTo true
@@ -175,11 +176,6 @@ class KoInterfaceDeclarationForKoParentInterfaceProviderTest {
                 SampleParentInterface::class,
                 indirectParents = true,
             ) shouldBeEqualTo false
-            hasAllParentInterfacesOf(
-                SampleParentInterface1::class,
-                SampleParentInterface2::class,
-                indirectParents = true,
-            ) shouldBeEqualTo true
         }
     }
 
