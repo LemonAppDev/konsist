@@ -35,7 +35,7 @@ import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtSecondaryConstructor
 import org.jetbrains.kotlin.psi.KtTypeAlias
 
-internal object KoDeclarationProviderCoreUtil2 {
+internal object KoDeclarationProviderCoreUtil {
     inline fun <reified T : KoBaseDeclaration> getKoDeclarations(
         ktElement: KtElement,
         includeNested: Boolean = true,

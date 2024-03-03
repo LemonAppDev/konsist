@@ -23,7 +23,7 @@ import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeAliasProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
-import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil2
+import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
@@ -75,7 +75,7 @@ internal class KoFileDeclarationCore(override val ktFile: KtFile) :
         includeNested: Boolean,
         includeLocal: Boolean,
     ): List<KoBaseDeclaration> =
-        KoDeclarationProviderCoreUtil2.getKoDeclarations(ktFile, includeNested, includeLocal, this)
+        KoDeclarationProviderCoreUtil.getKoDeclarations(ktFile, includeNested, includeLocal, this)
 
     override fun toString(): String = path
 

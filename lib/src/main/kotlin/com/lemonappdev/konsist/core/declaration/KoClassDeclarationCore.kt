@@ -52,7 +52,7 @@ import com.lemonappdev.konsist.core.provider.modifier.KoSealedModifierProviderCo
 import com.lemonappdev.konsist.core.provider.modifier.KoValueModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
-import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil2
+import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtClassOrObject
@@ -130,7 +130,7 @@ internal class KoClassDeclarationCore private constructor(
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil2
+    ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
         .getKoDeclarations(ktClass, includeNested, includeLocal, this)
 
     override fun toString(): String = name
