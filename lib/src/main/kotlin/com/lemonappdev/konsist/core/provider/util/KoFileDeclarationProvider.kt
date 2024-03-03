@@ -41,6 +41,28 @@ internal object KoFileDeclarationProvider {
         }
     }
 
+    /**
+     * Retrieves a list of [KoFileDeclaration]s asynchronously from the project's root directory.
+     * This function scans the directory for Kotlin files and parses them to obtain list of KoFileDeclaration.
+     *
+     * The parsing operations are performed concurrently.
+     *
+     * Threading Strategy:
+     * Ensures thread-safe initialization of a single deferred operation to parse all Kotlin files, using a mutex to
+     * guard against concurrent initializations.
+     * File walking and parsing operations, optimizing for I/O operations are performed concurrently across
+     * multiple threads.
+     *
+     * e.g.
+     * 1. getKoFileDeclarations started at Thread 1 - start file parsing
+     * 2. getKoFileDeclarations started at Thread 2 - file parsing in progress, wait for it to complete
+     * 3. Parse Kotlin files in parallel
+     * 4. getKoFileDeclarations  started at Thread 1 completes
+     * 5. getKoFileDeclarations  started at Thread 2 completes
+     *
+     * @return A list of [KoFileDeclaration]s representing the parsed Kotlin files.
+     * @throws Exception if there's an issue accessing the file system or parsing the files.
+     */
     suspend fun getKoFileDeclarations(): List<KoFileDeclaration> = coroutineScope {
         // TODO: Remove this print
         println("AAAA ${getCurrentTimeFormatted()} getKoFileDeclarations start at ${Thread.currentThread()}")
