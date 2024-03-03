@@ -16,8 +16,6 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import java.io.File
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 internal object KoFileDeclarationProvider {
     private val projectRootDir: File = File(PathProvider.rootProjectPath)
@@ -28,10 +26,8 @@ internal object KoFileDeclarationProvider {
     private var createKoFilesDeclarationDeferred: Deferred<List<KoFileDeclaration>>? = null
 
     init {
-        // TODO: Remove this print
-        println("AAAA ${getCurrentTimeFormatted()} KoDeclarationProvider created at ${Thread.currentThread()}")
-
-        check(projectRootDir.isDirectory) { "Project root directory is a File" }
+        check(projectRootDir.exists()) { "Directory does not exist: ${projectRootDir.absolutePath}" }
+        check(projectRootDir.isDirectory) { "Project root directory is a File ${projectRootDir.absolutePath}" }
 
         @OptIn(DelicateCoroutinesApi::class)
         GlobalScope.launch {
@@ -64,45 +60,20 @@ internal object KoFileDeclarationProvider {
      * @throws Exception if there's an issue accessing the file system or parsing the files.
      */
     suspend fun getKoFileDeclarations(): List<KoFileDeclaration> = coroutineScope {
-        // TODO: Remove this print
-        println("AAAA ${getCurrentTimeFormatted()} getKoFileDeclarations start at ${Thread.currentThread()}")
-
-        val currentDeferred: Deferred<List<KoFileDeclaration>>
-
-        mutex.withLock {
-            if (createKoFilesDeclarationDeferred == null) {
-                createKoFilesDeclarationDeferred = async(Dispatchers.IO) {
-                    projectRootDir.walk()
-                        .filter { it.isKotlinFile }
-                        .map {
-                            async { parseKotlinFile(it) }
-                        }
-                        .toList() // Convert the sequence to a list to start all coroutines
-                        .awaitAll() // Wait for all parsing operations to complete
-                }
-            }
-
-            currentDeferred = createKoFilesDeclarationDeferred!!
+        val currentDeferred: Deferred<List<KoFileDeclaration>> = mutex.withLock {
+            createKoFilesDeclarationDeferred ?: async(Dispatchers.IO) {
+                projectRootDir.walk()
+                    .filter { it.isKotlinFile }
+                    .map { async { parseKotlinFile(it) } }
+                    .toList()
+                    .awaitAll()
+            }.also { createKoFilesDeclarationDeferred = it }
         }
 
-        val await = currentDeferred.await()
-        // TODO: Remove this print
-        println("AAAA ${getCurrentTimeFormatted()} getKoFileDeclarations end at ${Thread.currentThread()}")
-        return@coroutineScope await
+        currentDeferred.await()
     }
 
     private suspend fun parseKotlinFile(it: File): KoFileDeclaration = coroutineScope {
-        async {
-            // TODO: Remove this print
-            println("AAAA ${getCurrentTimeFormatted()} Parsing file at ${Thread.currentThread()}")
-            it.toKoFile()
-        }.await()
+        async { it.toKoFile() }.await()
     }
-}
-
-// TODO: Remove
-fun getCurrentTimeFormatted(): String {
-    val now = LocalDateTime.now()
-    val formatter = DateTimeFormatter.ofPattern("HH:mm:ss:SSS")
-    return now.format(formatter)
 }
