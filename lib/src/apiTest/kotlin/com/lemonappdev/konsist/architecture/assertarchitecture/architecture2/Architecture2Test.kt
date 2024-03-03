@@ -15,7 +15,7 @@ class Architecture2Test {
     private val domain =
         Layer(
             "Domain",
-            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain.."
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain..",
         )
     private val presentation =
         Layer(

@@ -208,9 +208,9 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$mavenBuildDirectoryName/.*".toMacOsSeparator())
 
         return path.matches(gradleRootBuildDirectoryRegex) ||
-                path.matches(gradleModuleBuildDirectoryRegex) ||
-                path.matches(mavenRootBuildDirectoryRegex) ||
-                path.matches(mavenModuleBuildDirectoryRegex)
+            path.matches(gradleModuleBuildDirectoryRegex) ||
+            path.matches(mavenRootBuildDirectoryRegex) ||
+            path.matches(mavenModuleBuildDirectoryRegex)
     }
 
     /**
@@ -240,7 +240,6 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         return lowercasePath.matches(Regex(".*/$gradleBuildConfigDirectoryName.*"))
     }
 
-    // TODO: Remove
     private fun File.toKoFiles(): List<KoFileDeclaration> = walk()
         .filter { it.isKotlinFile }
         .map { it.toKoFile() }
