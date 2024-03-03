@@ -16,8 +16,10 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
-internal class KoDeclarationProvider {
+internal object KoFileDeclarationProvider {
     private val projectRootDir: File = File(PathProvider.rootProjectPath)
 
     private val mutex: Mutex = Mutex()
@@ -27,7 +29,7 @@ internal class KoDeclarationProvider {
 
     init {
         // TODO: Remove this print
-        println("KoDeclarationProvider created at ${Thread.currentThread()}")
+        println("AAAA ${getCurrentTimeFormatted()} KoDeclarationProvider created at ${Thread.currentThread()}")
 
         check(projectRootDir.isDirectory) { "Project root directory is a File" }
 
@@ -39,9 +41,9 @@ internal class KoDeclarationProvider {
         }
     }
 
-    private suspend fun getKoFileDeclarations(): List<KoFileDeclaration> = coroutineScope {
+    suspend fun getKoFileDeclarations(): List<KoFileDeclaration> = coroutineScope {
         // TODO: Remove this print
-        println("AAAA getKoFileDeclarations start at ${Thread.currentThread()}")
+        println("AAAA ${getCurrentTimeFormatted()} getKoFileDeclarations start at ${Thread.currentThread()}")
 
         val currentDeferred: Deferred<List<KoFileDeclaration>>
 
@@ -61,17 +63,24 @@ internal class KoDeclarationProvider {
             currentDeferred = createKoFilesDeclarationDeferred!!
         }
 
+        val await = currentDeferred.await()
         // TODO: Remove this print
-        println("AAAA getKoFileDeclarations end at ${Thread.currentThread()}")
-
-        return@coroutineScope currentDeferred.await()
+        println("AAAA ${getCurrentTimeFormatted()} getKoFileDeclarations end at ${Thread.currentThread()}")
+        return@coroutineScope await
     }
 
     private suspend fun parseKotlinFile(it: File): KoFileDeclaration = coroutineScope {
         async {
             // TODO: Remove this print
-            println("AAAA Parsing file at ${Thread.currentThread()}")
+            println("AAAA ${getCurrentTimeFormatted()} Parsing file at ${Thread.currentThread()}")
             it.toKoFile()
         }.await()
     }
+}
+
+// TODO: Remove
+fun getCurrentTimeFormatted(): String {
+    val now = LocalDateTime.now()
+    val formatter = DateTimeFormatter.ofPattern("HH:mm:ss:SSS")
+    return now.format(formatter)
 }
