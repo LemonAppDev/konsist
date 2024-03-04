@@ -1,12 +1,17 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.intellij.icons.AllIcons.Nodes.Alias
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoAliasProvider
-import com.lemonappdev.konsist.core.declaration.KoImportAliasDeclarationCore
-import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
-import org.jetbrains.kotlin.psi.KtImportDirective
 
 internal interface KoAliasProviderCore :
     KoAliasProvider,
     KoBaseProviderCore,
-    KoContainingFileProviderCore
+    KoContainingFileProviderCore {
+    override fun hasAlias(predicate: ((KoImportAliasDeclaration) -> Boolean)?): Boolean =
+        when (predicate) {
+            null -> alias != null
+            else -> alias?.let { predicate(it) } ?: false
+        }
+    }
