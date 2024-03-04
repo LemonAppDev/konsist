@@ -1,6 +1,0 @@
-package com.samplepackage
-
-class SampleClass1(val sampleProperty1: SampleTypeClass)
-
-class AnotherSampleTypeClass
-class SampleTypeClass
