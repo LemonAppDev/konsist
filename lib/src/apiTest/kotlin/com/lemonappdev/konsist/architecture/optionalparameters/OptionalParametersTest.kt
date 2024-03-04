@@ -11,7 +11,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class OptionalParametersTest {
-    private val rootPath = PathProvider.getInstance().rootProjectPath
+    private val rootPath = PathProvider.rootProjectPath
     private val domain =
         Layer("Domain", "com.lemonappdev.konsist.architecture.optionalparameters.project.domain..")
     private val presentation =

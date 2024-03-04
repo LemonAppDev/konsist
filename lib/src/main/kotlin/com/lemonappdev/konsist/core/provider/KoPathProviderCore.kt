@@ -18,7 +18,6 @@ internal interface KoPathProviderCore : KoPathProvider, KoBaseProviderCore {
     override val projectPath: String
         get() {
             val rootPathProvider = PathProvider
-                .getInstance()
                 .rootProjectPath
                 .toOsSeparator()
 

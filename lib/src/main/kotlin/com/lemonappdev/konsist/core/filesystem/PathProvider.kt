@@ -3,10 +3,11 @@ package com.lemonappdev.konsist.core.filesystem
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import java.io.File
 
-class PathProvider(
-    private val koFileFactory: KoFileFactory,
-    private val projectRootDirProviderFactory: ProjectRootDirProviderFactory,
-) {
+object PathProvider {
+    private val koFileFactory = KoFileFactory()
+    private val pathVerifier = PathVerifier()
+    private val projectRootDirProviderFactory = ProjectRootDirProviderFactory(pathVerifier)
+
     val rootProjectPath: String by lazy {
         val file = koFileFactory.create("")
 
@@ -29,11 +30,5 @@ class PathProvider(
             .map { it.getProjectRootDir(file) }
             .firstOrNull { it != null }
             ?: getProjectRootDirectory(file.absoluteFile.parentFile)
-    }
-
-    companion object {
-        private val pathVerifier = PathVerifier()
-
-        fun getInstance() = PathProvider(KoFileFactory(), ProjectRootDirProviderFactory(pathVerifier))
     }
 }

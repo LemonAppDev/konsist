@@ -11,9 +11,12 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class Architecture2Test {
-    private val rootPath = PathProvider.getInstance().rootProjectPath
+    private val rootPath = PathProvider.rootProjectPath
     private val domain =
-        Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain..")
+        Layer(
+            "Domain",
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain..",
+        )
     private val presentation =
         Layer(
             "Presentation",
