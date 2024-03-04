@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.declaration.koimportalias
+package com.lemonappdev.konsist.sourceDeclaration.koimportalias
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
@@ -21,7 +21,7 @@ class KoImportAliasForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "appPropertyWithImportAliasType" }
             .type
-            ?.declaration as KoImportAliasDeclaration
+            ?.sourceDeclaration as KoImportAliasDeclaration
 
         // then
         assertSoftly(sut) {
@@ -39,7 +39,7 @@ class KoImportAliasForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "appPropertyWithImportAliasTypeTest" }
             .type
-            ?.declaration as KoImportAliasDeclaration
+            ?.sourceDeclaration as KoImportAliasDeclaration
 
         // then
         assertSoftly(sut) {
@@ -57,7 +57,7 @@ class KoImportAliasForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "libPropertyWithImportAliasType" }
             .type
-            ?.declaration as KoImportAliasDeclaration
+            ?.sourceDeclaration as KoImportAliasDeclaration
 
         // then
         assertSoftly(sut) {
@@ -75,7 +75,7 @@ class KoImportAliasForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "libPropertyWithImportAliasTypeTest" }
             .type
-            ?.declaration as KoImportAliasDeclaration
+            ?.sourceDeclaration as KoImportAliasDeclaration
 
         // then
         assertSoftly(sut) {
@@ -93,7 +93,7 @@ class KoImportAliasForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "rootPropertyWithImportAliasType" }
             .type
-            ?.declaration as KoImportAliasDeclaration
+            ?.sourceDeclaration as KoImportAliasDeclaration
 
         // then
         assertSoftly(sut) {
@@ -111,7 +111,7 @@ class KoImportAliasForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "rootSrcPropertyWithImportAliasType" }
             .type
-            ?.declaration as KoImportAliasDeclaration
+            ?.sourceDeclaration as KoImportAliasDeclaration
 
         // then
         assertSoftly(sut) {
