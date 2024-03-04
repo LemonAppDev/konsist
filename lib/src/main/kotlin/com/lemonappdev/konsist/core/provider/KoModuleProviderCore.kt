@@ -8,7 +8,6 @@ internal interface KoModuleProviderCore : KoModuleProvider, KoPathProviderCore, 
     override val moduleName: String
         get() {
             val projectName = PathProvider
-                .getInstance()
                 .rootProjectPath
                 .substringAfterLast(sep)
 

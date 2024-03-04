@@ -169,18 +169,34 @@ internal object KoDeclarationProviderCoreUtil {
         containingDeclaration: KoBaseDeclaration,
     ): KoBaseDeclaration? = when {
         ktDeclaration is KtEnumEntry -> KoEnumConstantDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
-        ktDeclaration is KtSecondaryConstructor -> KoSecondaryConstructorDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
-        ktDeclaration is KtClass && !ktDeclaration.isInterface() -> KoClassDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
+        ktDeclaration is KtSecondaryConstructor -> KoSecondaryConstructorDeclarationCore.getInstance(
+            ktDeclaration,
+            containingDeclaration,
+        )
+
+        ktDeclaration is KtClass && !ktDeclaration.isInterface() -> KoClassDeclarationCore.getInstance(
+            ktDeclaration,
+            containingDeclaration,
+        )
+
         ktDeclaration is KtClass && ktDeclaration.isInterface() -> KoInterfaceDeclarationCore.getInstance(
             ktDeclaration,
             containingDeclaration,
         )
 
-        ktDeclaration is KtObjectDeclaration -> KoObjectDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
+        ktDeclaration is KtObjectDeclaration -> KoObjectDeclarationCore.getInstance(
+            ktDeclaration,
+            containingDeclaration,
+        )
+
         ktDeclaration is KtProperty -> KoPropertyDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
         ktDeclaration is KtFunction -> KoFunctionDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
         ktDeclaration is KtTypeAlias -> KoTypeAliasDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
-        ktDeclaration is KtAnonymousInitializer -> KoInitBlockDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
+        ktDeclaration is KtAnonymousInitializer -> KoInitBlockDeclarationCore.getInstance(
+            ktDeclaration,
+            containingDeclaration,
+        )
+
         else -> null
     }
 
