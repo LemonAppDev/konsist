@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtUserType
 
 internal class KoKotlinTypeDeclarationCore private constructor(
-    override val ktUserType: KtUserType,
+    private val ktUserType: KtUserType,
 ) :
     KoKotlinTypeDeclaration,
     KoBaseTypeDeclarationCore,

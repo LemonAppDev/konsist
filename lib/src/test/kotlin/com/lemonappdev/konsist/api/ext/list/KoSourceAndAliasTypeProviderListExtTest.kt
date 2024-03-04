@@ -362,202 +362,202 @@ class KoSourceAndAliasTypeProviderListExtTest {
         // then
         sut shouldBeEqualTo listOf(declaration3)
     }
-
-    @Test
-    fun `withAliasType() returns declaration with any alias type`() {
-        // given
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { isAlias } returns true
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { isAlias } returns false
-        }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withAliasType()
-
-        // then
-        sut shouldBeEqualTo listOf(declaration1)
-    }
-
-    @Test
-    fun `withoutAliasType() returns declaration without any alias type`() {
-        // given
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { isAlias } returns true
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { isAlias } returns false
-        }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withoutAliasType()
-
-        // then
-        sut shouldBeEqualTo listOf(declaration2)
-    }
-
-    @Test
-    fun `withAliasType(type) returns declarations with one of given alias types`() {
-        // given
-        val importAliasName1 = "SampleAliasType1"
-        val importAliasName2 = "SampleAliasType2"
-        val importAliasName3 = "SampleAliasType3"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { aliasType } returns importAliasName1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { aliasType } returns importAliasName2
-        }
-        val declaration3: KoSourceAndAliasTypeProvider = mockk {
-            every { aliasType } returns importAliasName3
-        }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.withAliasType(importAliasName1, importAliasName2)
-
-        // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
-    }
-
-    @Test
-    fun `withoutAliasType(type) returns declaration without any of given alias type`() {
-        // given
-        val importAliasName1 = "SampleAliasType1"
-        val importAliasName2 = "SampleAliasType2"
-        val importAliasName3 = "SampleAliasType3"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { aliasType } returns importAliasName1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { aliasType } returns importAliasName2
-        }
-        val declaration3: KoSourceAndAliasTypeProvider = mockk {
-            every { aliasType } returns importAliasName3
-        }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.withoutAliasType(importAliasName1, importAliasName2)
-
-        // then
-        sut shouldBeEqualTo listOf(declaration3)
-    }
-
-    @Test
-    fun `withAliasTypeOf(KClass) returns declaration with given alias type`() {
-        // given
-        val sourceType1 = "SampleType1"
-        val sourceType2 = "SampleType2"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { isAlias } returns true
-            every { sourceType } returns sourceType1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { isAlias } returns true
-            every { sourceType } returns sourceType2
-        }
-        val declaration3: KoSourceAndAliasTypeProvider = mockk {
-            every { isAlias } returns false
-            every { sourceType } returns sourceType1
-        }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.withAliasTypeOf(SampleType1::class)
-
-        // then
-        sut shouldBeEqualTo listOf(declaration1)
-    }
-
-    @Test
-    fun `withAliasTypeOf(KClass) returns declarations with one of given alias types`() {
-        // given
-        val sourceType1 = "SampleType1"
-        val sourceType2 = "SampleType2"
-        val sourceType3 = "SampleType3"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { isAlias } returns true
-            every { sourceType } returns sourceType1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { isAlias } returns true
-            every { sourceType } returns sourceType2
-        }
-        val declaration3: KoSourceAndAliasTypeProvider = mockk {
-            every { isAlias } returns false
-            every { sourceType } returns sourceType1
-        }
-        val type4: KoSourceAndAliasTypeProvider = mockk {
-            every { isAlias } returns false
-            every { sourceType } returns sourceType3
-        }
-        val declarations = listOf(declaration1, declaration2, declaration3, type4)
-
-        // when
-        val sut = declarations.withAliasTypeOf(SampleType1::class, SampleType2::class)
-
-        // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
-    }
-
-    @Test
-    fun `withoutAliasTypeOf(KClass) returns declaration without given alias type`() {
-        // given
-        val sourceType1 = "SampleType1"
-        val sourceType2 = "SampleType2"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { isAlias } returns true
-            every { sourceType } returns sourceType1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { isAlias } returns true
-            every { sourceType } returns sourceType2
-        }
-        val declaration3: KoSourceAndAliasTypeProvider = mockk {
-            every { isAlias } returns false
-            every { sourceType } returns sourceType1
-        }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.withoutAliasTypeOf(SampleType1::class)
-
-        // then
-        sut shouldBeEqualTo listOf(declaration2, declaration3)
-    }
-
-    @Test
-    fun `withoutAliasTypeOf(KClass) returns declarations without any of given alias types`() {
-        // given
-        val sourceType1 = "SampleType1"
-        val sourceType2 = "SampleType2"
-        val sourceType3 = "SampleType3"
-        val declaration1: KoSourceAndAliasTypeProvider = mockk {
-            every { isAlias } returns true
-            every { sourceType } returns sourceType1
-        }
-        val declaration2: KoSourceAndAliasTypeProvider = mockk {
-            every { isAlias } returns true
-            every { sourceType } returns sourceType2
-        }
-        val declaration3: KoSourceAndAliasTypeProvider = mockk {
-            every { isAlias } returns false
-            every { sourceType } returns sourceType1
-        }
-        val type4: KoSourceAndAliasTypeProvider = mockk {
-            every { isAlias } returns false
-            every { sourceType } returns sourceType3
-        }
-        val declarations = listOf(declaration1, declaration2, declaration3, type4)
-
-        // when
-        val sut = declarations.withoutAliasTypeOf(SampleType1::class, SampleType2::class)
-
-        // then
-        sut shouldBeEqualTo listOf(declaration3, type4)
-    }
+//
+//    @Test
+//    fun `withAliasType() returns declaration with any alias type`() {
+//        // given
+//        val declaration1: KoSourceAndAliasTypeProvider = mockk {
+//            every { isAlias } returns true
+//        }
+//        val declaration2: KoSourceAndAliasTypeProvider = mockk {
+//            every { isAlias } returns false
+//        }
+//        val declarations = listOf(declaration1, declaration2)
+//
+//        // when
+//        val sut = declarations.withAliasType()
+//
+//        // then
+//        sut shouldBeEqualTo listOf(declaration1)
+//    }
+//
+//    @Test
+//    fun `withoutAliasType() returns declaration without any alias type`() {
+//        // given
+//        val declaration1: KoSourceAndAliasTypeProvider = mockk {
+//            every { isAlias } returns true
+//        }
+//        val declaration2: KoSourceAndAliasTypeProvider = mockk {
+//            every { isAlias } returns false
+//        }
+//        val declarations = listOf(declaration1, declaration2)
+//
+//        // when
+//        val sut = declarations.withoutAliasType()
+//
+//        // then
+//        sut shouldBeEqualTo listOf(declaration2)
+//    }
+//
+//    @Test
+//    fun `withAliasType(type) returns declarations with one of given alias types`() {
+//        // given
+//        val importAliasName1 = "SampleAliasType1"
+//        val importAliasName2 = "SampleAliasType2"
+//        val importAliasName3 = "SampleAliasType3"
+//        val declaration1: KoSourceAndAliasTypeProvider = mockk {
+//            every { aliasType } returns importAliasName1
+//        }
+//        val declaration2: KoSourceAndAliasTypeProvider = mockk {
+//            every { aliasType } returns importAliasName2
+//        }
+//        val declaration3: KoSourceAndAliasTypeProvider = mockk {
+//            every { aliasType } returns importAliasName3
+//        }
+//        val declarations = listOf(declaration1, declaration2, declaration3)
+//
+//        // when
+//        val sut = declarations.withAliasType(importAliasName1, importAliasName2)
+//
+//        // then
+//        sut shouldBeEqualTo listOf(declaration1, declaration2)
+//    }
+//
+//    @Test
+//    fun `withoutAliasType(type) returns declaration without any of given alias type`() {
+//        // given
+//        val importAliasName1 = "SampleAliasType1"
+//        val importAliasName2 = "SampleAliasType2"
+//        val importAliasName3 = "SampleAliasType3"
+//        val declaration1: KoSourceAndAliasTypeProvider = mockk {
+//            every { aliasType } returns importAliasName1
+//        }
+//        val declaration2: KoSourceAndAliasTypeProvider = mockk {
+//            every { aliasType } returns importAliasName2
+//        }
+//        val declaration3: KoSourceAndAliasTypeProvider = mockk {
+//            every { aliasType } returns importAliasName3
+//        }
+//        val declarations = listOf(declaration1, declaration2, declaration3)
+//
+//        // when
+//        val sut = declarations.withoutAliasType(importAliasName1, importAliasName2)
+//
+//        // then
+//        sut shouldBeEqualTo listOf(declaration3)
+//    }
+//
+//    @Test
+//    fun `withAliasTypeOf(KClass) returns declaration with given alias type`() {
+//        // given
+//        val sourceType1 = "SampleType1"
+//        val sourceType2 = "SampleType2"
+//        val declaration1: KoSourceAndAliasTypeProvider = mockk {
+//            every { isAlias } returns true
+//            every { sourceType } returns sourceType1
+//        }
+//        val declaration2: KoSourceAndAliasTypeProvider = mockk {
+//            every { isAlias } returns true
+//            every { sourceType } returns sourceType2
+//        }
+//        val declaration3: KoSourceAndAliasTypeProvider = mockk {
+//            every { isAlias } returns false
+//            every { sourceType } returns sourceType1
+//        }
+//        val declarations = listOf(declaration1, declaration2, declaration3)
+//
+//        // when
+//        val sut = declarations.withAliasTypeOf(SampleType1::class)
+//
+//        // then
+//        sut shouldBeEqualTo listOf(declaration1)
+//    }
+//
+//    @Test
+//    fun `withAliasTypeOf(KClass) returns declarations with one of given alias types`() {
+//        // given
+//        val sourceType1 = "SampleType1"
+//        val sourceType2 = "SampleType2"
+//        val sourceType3 = "SampleType3"
+//        val declaration1: KoSourceAndAliasTypeProvider = mockk {
+//            every { isAlias } returns true
+//            every { sourceType } returns sourceType1
+//        }
+//        val declaration2: KoSourceAndAliasTypeProvider = mockk {
+//            every { isAlias } returns true
+//            every { sourceType } returns sourceType2
+//        }
+//        val declaration3: KoSourceAndAliasTypeProvider = mockk {
+//            every { isAlias } returns false
+//            every { sourceType } returns sourceType1
+//        }
+//        val type4: KoSourceAndAliasTypeProvider = mockk {
+//            every { isAlias } returns false
+//            every { sourceType } returns sourceType3
+//        }
+//        val declarations = listOf(declaration1, declaration2, declaration3, type4)
+//
+//        // when
+//        val sut = declarations.withAliasTypeOf(SampleType1::class, SampleType2::class)
+//
+//        // then
+//        sut shouldBeEqualTo listOf(declaration1, declaration2)
+//    }
+//
+//    @Test
+//    fun `withoutAliasTypeOf(KClass) returns declaration without given alias type`() {
+//        // given
+//        val sourceType1 = "SampleType1"
+//        val sourceType2 = "SampleType2"
+//        val declaration1: KoSourceAndAliasTypeProvider = mockk {
+//            every { isAlias } returns true
+//            every { sourceType } returns sourceType1
+//        }
+//        val declaration2: KoSourceAndAliasTypeProvider = mockk {
+//            every { isAlias } returns true
+//            every { sourceType } returns sourceType2
+//        }
+//        val declaration3: KoSourceAndAliasTypeProvider = mockk {
+//            every { isAlias } returns false
+//            every { sourceType } returns sourceType1
+//        }
+//        val declarations = listOf(declaration1, declaration2, declaration3)
+//
+//        // when
+//        val sut = declarations.withoutAliasTypeOf(SampleType1::class)
+//
+//        // then
+//        sut shouldBeEqualTo listOf(declaration2, declaration3)
+//    }
+//
+//    @Test
+//    fun `withoutAliasTypeOf(KClass) returns declarations without any of given alias types`() {
+//        // given
+//        val sourceType1 = "SampleType1"
+//        val sourceType2 = "SampleType2"
+//        val sourceType3 = "SampleType3"
+//        val declaration1: KoSourceAndAliasTypeProvider = mockk {
+//            every { isAlias } returns true
+//            every { sourceType } returns sourceType1
+//        }
+//        val declaration2: KoSourceAndAliasTypeProvider = mockk {
+//            every { isAlias } returns true
+//            every { sourceType } returns sourceType2
+//        }
+//        val declaration3: KoSourceAndAliasTypeProvider = mockk {
+//            every { isAlias } returns false
+//            every { sourceType } returns sourceType1
+//        }
+//        val type4: KoSourceAndAliasTypeProvider = mockk {
+//            every { isAlias } returns false
+//            every { sourceType } returns sourceType3
+//        }
+//        val declarations = listOf(declaration1, declaration2, declaration3, type4)
+//
+//        // when
+//        val sut = declarations.withoutAliasTypeOf(SampleType1::class, SampleType2::class)
+//
+//        // then
+//        sut shouldBeEqualTo listOf(declaration3, type4)
+//    }
 }

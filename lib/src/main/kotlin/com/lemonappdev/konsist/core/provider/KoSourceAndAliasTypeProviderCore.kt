@@ -2,19 +2,20 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
+import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
 import com.lemonappdev.konsist.core.declaration.KoFileDeclarationCore
-import org.jetbrains.kotlin.psi.KtUserType
+import org.jetbrains.kotlin.psi.KtElement
 
 internal interface KoSourceAndAliasTypeProviderCore :
     KoSourceAndAliasTypeProvider,
-    KoNameProviderCore,
+    KoTextProviderCore,
     KoBaseProviderCore {
-    val ktUserType: KtUserType
+    val ktElement: KtElement
 
     private val file: KoFileDeclaration
-        get() = KoFileDeclarationCore(ktUserType.containingKtFile)
+        get() = KoFileDeclarationCore(ktElement.containingKtFile)
 
     override val isAlias: Boolean
         get() = (this as? KoTypeDeclaration)?.declaration is KoImportAliasDeclaration
@@ -23,20 +24,26 @@ internal interface KoSourceAndAliasTypeProviderCore :
         get() = if (isAlias) {
             file
                 .imports
-                .first { it.alias?.name == ktUserType.text.removeSuffix("?") }
+                .first { it.alias?.name == ktElement.text.removeSuffix("?") }
                 .name
                 .split(".")
                 .toMutableList()
                 .last { it.isNotBlank() }
         } else {
-            name
+            text
         }
 
     override val bareSourceType: String
-        get() = sourceType
-            .removeGenericTypeArguments()
-            .removeNullability()
-            .removePackage()
+        get() = if ((this as? KoTypeDeclaration)?.declaration is KoTypeAliasDeclaration) {
+            ((this as? KoTypeDeclaration)?.declaration as? KoTypeAliasDeclaration)?.type?.text ?: text
+        } else {
+            sourceType
+                .removeGenericTypeArguments()
+                .removeNullability()
+                .removePackage()
+                .removeBrackets()
+        }
+
 
     /*
      * Removes generic type arguments from the type.
@@ -60,5 +67,16 @@ internal interface KoSourceAndAliasTypeProviderCore :
      */
     private fun String.removePackage(): String {
         return substringAfterLast(".")
+    }
+
+    /*
+     * Removes brackets from the type.
+    * For `((Int) -> Unit)` value will be "(Int) -> Unit)"
+     */
+    private fun String.removeBrackets(): String {
+        return if (startsWith("(") and endsWith(")")) {
+            removePrefix("(")
+                .removeSuffix(")")
+        } else this
     }
 }
