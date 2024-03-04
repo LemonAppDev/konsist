@@ -27,7 +27,7 @@ class KoScopeForKoTypeAliasDeclarationTest {
                 .first(),
         ) {
             name shouldBeEqualTo "SampleTypeAlias"
-//            type.sourceType shouldBeEqualTo "() -> Int"
+            type.sourceType shouldBeEqualTo "() -> Int"
         }
     }
 
