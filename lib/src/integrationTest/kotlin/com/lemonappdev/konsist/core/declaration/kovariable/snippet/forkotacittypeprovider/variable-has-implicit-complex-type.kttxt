@@ -1,0 +1,6 @@
+import com.lemonappdev.konsist.testdata.SampleClassWithParameter
+
+fun sampleFunction() {
+
+    val sampleVariable = SampleClassWithParameter("some text")
+}

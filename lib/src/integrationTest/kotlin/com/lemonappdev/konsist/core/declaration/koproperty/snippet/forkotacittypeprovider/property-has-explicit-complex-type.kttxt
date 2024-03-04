@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.SampleClassWithParameter
+
+val list = listOf(SampleClassWithParameter("some text"))
+
+val sampleProperty: SampleClassWithParameter = list[0]
