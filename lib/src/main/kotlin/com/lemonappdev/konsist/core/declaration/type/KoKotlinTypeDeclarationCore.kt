@@ -12,7 +12,6 @@ import com.lemonappdev.konsist.core.provider.KoSourceAndAliasTypeProviderCore
 import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtUserType
-import java.awt.SystemColor.text
 
 internal class KoKotlinTypeDeclarationCore private constructor(
     override val ktUserType: KtUserType,
@@ -53,7 +52,7 @@ internal class KoKotlinTypeDeclarationCore private constructor(
             containingDeclaration: KoBaseDeclaration,
         ): KoKotlinTypeDeclaration =
             cache.getOrCreateInstance(ktUserType, containingDeclaration) {
-                KoKotlinTypeDeclarationCore(ktUserType,)
+                KoKotlinTypeDeclarationCore(ktUserType)
             }
     }
 }
