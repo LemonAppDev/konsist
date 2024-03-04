@@ -9,50 +9,56 @@ import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.ext.toKoFile
 import com.lemonappdev.konsist.core.ext.toMacOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
+import com.lemonappdev.konsist.core.provider.util.KoFileDeclarationProvider
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.runBlocking
 import java.io.File
 
 @Suppress("detekt.TooManyFunctions")
 internal class KoScopeCreatorCore : KoScopeCreator {
-    private val pathProvider: PathProvider by lazy { PathProvider.getInstance() }
+    override val projectRootPath: String by lazy { PathProvider.rootProjectPath }
 
-    private val projectKotlinFiles: List<KoFileDeclaration> by lazy { File(pathProvider.rootProjectPath).toKoFiles() }
-
-    override val projectRootPath: String by lazy { pathProvider.rootProjectPath }
-
-    override fun scopeFromProject(moduleName: String?, sourceSetName: String?, ignoreBuildConfig: Boolean): KoScope {
-        val koFiles = getFiles(moduleName, sourceSetName, ignoreBuildConfig)
-        return KoScopeCore(koFiles)
-    }
+    override fun scopeFromProject(moduleName: String?, sourceSetName: String?, ignoreBuildConfig: Boolean): KoScope =
+        runBlocking {
+            val koFiles = getFiles(moduleName, sourceSetName, ignoreBuildConfig)
+            KoScopeCore(koFiles)
+        }
 
     override fun scopeFromModule(moduleName: String, vararg moduleNames: String): KoScope =
         scopeFromModules(setOf(moduleName) + moduleNames)
 
-    override fun scopeFromModules(moduleNames: Set<String>): KoScope =
-        moduleNames
-            .flatMap { getFiles(it) }
-            .let { KoScopeCore(it) }
+    override fun scopeFromModules(moduleNames: Set<String>): KoScopeCore =
+        runBlocking {
+            moduleNames
+                .flatMap { getFiles(it) }
+                .let { KoScopeCore(it) }
+        }
 
-    override fun scopeFromPackage(packagee: String, moduleName: String?, sourceSetName: String?): KoScope {
-        val koFiles = getFiles(moduleName, sourceSetName)
-            .withPackage(packagee)
+    override fun scopeFromPackage(packagee: String, moduleName: String?, sourceSetName: String?): KoScope =
+        runBlocking {
+            val koFiles = getFiles(moduleName, sourceSetName)
+                .withPackage(packagee)
 
-        return KoScopeCore(koFiles)
-    }
+            KoScopeCore(koFiles)
+        }
 
     override fun scopeFromSourceSet(sourceSetName: String, vararg sourceSetNames: String): KoScope =
         scopeFromSourceSets(setOf(sourceSetName) + sourceSetNames)
 
     override fun scopeFromSourceSets(sourceSetNames: Set<String>): KoScope =
-        sourceSetNames
-            .flatMap { getFiles(sourceSetName = it) }
-            .let { KoScopeCore(it) }
+        runBlocking {
+            sourceSetNames
+                .flatMap { getFiles(sourceSetName = it) }
+                .let { KoScopeCore(it) }
+        }
 
-    private fun getFiles(
+    private suspend fun getFiles(
         moduleName: String? = null,
         sourceSetName: String? = null,
         ignoreBuildConfig: Boolean = true,
-    ): List<KoFileDeclaration> {
-        val localProjectKotlinFiles = projectKotlinFiles
+    ): List<KoFileDeclaration> = coroutineScope {
+        val localProjectKotlinFiles = KoFileDeclarationProvider
+            .getKoFileDeclarations()
             .filterNot { isBuildToolPath(it.path.toMacOsSeparator()) }
             .let {
                 if (ignoreBuildConfig) {
@@ -63,7 +69,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
             }
 
         if (moduleName == null && sourceSetName == null) {
-            return localProjectKotlinFiles
+            return@coroutineScope localProjectKotlinFiles
         }
 
         var pathPrefix = if (moduleName == ROOT_MODULE_NAME) {
@@ -80,31 +86,33 @@ internal class KoScopeCreatorCore : KoScopeCreator {
             "$pathPrefix/src/.*"
         }.toMacOsSeparator()
 
-        return localProjectKotlinFiles
+        return@coroutineScope localProjectKotlinFiles
             .filter { it.path.toMacOsSeparator().matches(Regex(pathPrefix)) }
     }
 
-    override fun scopeFromProduction(moduleName: String?, sourceSetName: String?): KoScope {
-        sourceSetName?.let {
-            require(!isTestSourceSet(it)) { "Source set '$it' is a test source set, but it should be production source set." }
+    override fun scopeFromProduction(moduleName: String?, sourceSetName: String?): KoScope =
+        runBlocking {
+            sourceSetName?.let {
+                require(!isTestSourceSet(it)) { "Source set '$it' is a test source set, but it should be production source set." }
+            }
+
+            val koFiles = getFiles(moduleName, sourceSetName)
+                .filterNot { isTestSourceSet(it.sourceSetName) }
+
+            KoScopeCore(koFiles)
         }
 
-        val koFiles = getFiles(moduleName, sourceSetName)
-            .filterNot { isTestSourceSet(it.sourceSetName) }
+    override fun scopeFromTest(moduleName: String?, sourceSetName: String?): KoScope =
+        runBlocking {
+            sourceSetName?.let {
+                require(isTestSourceSet(it)) { "Source set '$it' is a production source set, but it should be test source set." }
+            }
 
-        return KoScopeCore(koFiles)
-    }
+            val koFiles = getFiles(moduleName, sourceSetName)
+                .filter { isTestSourceSet(it.sourceSetName) }
 
-    override fun scopeFromTest(moduleName: String?, sourceSetName: String?): KoScope {
-        sourceSetName?.let {
-            require(isTestSourceSet(it)) { "Source set '$it' is a production source set, but it should be test source set." }
+            KoScopeCore(koFiles)
         }
-
-        val koFiles = getFiles(moduleName, sourceSetName)
-            .filter { isTestSourceSet(it.sourceSetName) }
-
-        return KoScopeCore(koFiles)
-    }
 
     /**
      * Get the scope of the paths obtaining the absolute path of it and, getting the files from that directory
@@ -192,7 +200,8 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     private fun isBuildOrTargetPath(path: String): Boolean {
         val gradleBuildDirectoryName = "build"
         val gradleRootBuildDirectoryRegex = Regex("$projectRootPath/$gradleBuildDirectoryName/.*".toMacOsSeparator())
-        val gradleModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*".toMacOsSeparator())
+        val gradleModuleBuildDirectoryRegex =
+            Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*".toMacOsSeparator())
 
         val mavenBuildDirectoryName = "target"
         val mavenRootBuildDirectoryRegex = Regex("$projectRootPath/$mavenBuildDirectoryName/.*".toMacOsSeparator())
@@ -236,10 +245,14 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         .map { it.toKoFile() }
         .toList()
 
-    private fun getKoFiles(files: List<File>) = projectKotlinFiles.filter {
-        files.any { file ->
-            file.path == it.path
-        }
+    private fun getKoFiles(files: List<File>) = runBlocking {
+        KoFileDeclarationProvider
+            .getKoFileDeclarations()
+            .filter {
+                files.any { file ->
+                    file.path == it.path
+                }
+            }
     }
 
     companion object {

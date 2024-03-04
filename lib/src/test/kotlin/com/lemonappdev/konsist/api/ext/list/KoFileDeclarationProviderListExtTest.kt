@@ -13,7 +13,7 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoDeclarationProviderListExtTest {
+class KoFileDeclarationProviderListExtTest {
     @Test
     fun `declarations() returns declarations from all declarations`() {
         // given
