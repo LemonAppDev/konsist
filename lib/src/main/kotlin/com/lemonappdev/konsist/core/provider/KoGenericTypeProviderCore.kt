@@ -4,7 +4,9 @@ import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoGenericTypeProvider
 
-internal interface KoGenericTypeProviderCore : KoGenericTypeProvider, KoSourceAndAliasTypeProviderCore,
+internal interface KoGenericTypeProviderCore :
+    KoGenericTypeProvider,
+    KoSourceAndAliasTypeProviderCore,
     KoBaseProviderCore {
     override val isGenericType: Boolean
         get() {

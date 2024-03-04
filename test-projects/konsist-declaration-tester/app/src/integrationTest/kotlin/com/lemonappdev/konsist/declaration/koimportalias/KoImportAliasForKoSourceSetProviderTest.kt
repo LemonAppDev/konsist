@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.sourceDeclaration.koimportalias
+package com.lemonappdev.konsist.declaration.koimportalias
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration

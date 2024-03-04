@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
-import kotlin.reflect.KClass
 
 /**
  * An interface representing a Kotlin declaration that provides an alias.

@@ -44,7 +44,6 @@ internal interface KoSourceAndAliasTypeProviderCore :
                 .removeBrackets()
         }
 
-
     /*
      * Removes generic type arguments from the type.
      * For `MyClass<String>` value will be "MyClass"
@@ -71,12 +70,14 @@ internal interface KoSourceAndAliasTypeProviderCore :
 
     /*
      * Removes brackets from the type.
-    * For `((Int) -> Unit)` value will be "(Int) -> Unit)"
+     * For `((Int) -> Unit)` value will be "(Int) -> Unit)"
      */
     private fun String.removeBrackets(): String {
         return if (startsWith("(") and endsWith(")")) {
             removePrefix("(")
                 .removeSuffix(")")
-        } else this
+        } else {
+            this
+        }
     }
 }

@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
@@ -16,7 +15,6 @@ import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtImportAlias
-import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 
 internal class KoImportAliasDeclarationCore private constructor(
     private val ktImportAlias: KtImportAlias,
