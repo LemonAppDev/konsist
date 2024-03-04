@@ -49,14 +49,14 @@ object TypeUtil {
             type
         }
 
-        val isAlias = containingFile
+        val importDirective = containingFile
             .imports
             .firstOrNull {
                 it.alias == nestedType?.text
             }
 
-        return if (isAlias != null) {
-            KoImportAliasDeclarationCore.getInstance(nestedType as KtUserType, parentDeclaration)
+        return if (importDirective != null) {
+            KoImportAliasDeclarationCore.getInstance(nestedType as KtUserType, importDirective)
         } else {
             transformPsiElementToKoTypeDeclaration(type, parentDeclaration, containingFile)
         }

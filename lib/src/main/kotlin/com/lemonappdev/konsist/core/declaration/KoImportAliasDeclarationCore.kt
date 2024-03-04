@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.psi.KtUserType
 
 internal class KoImportAliasDeclarationCore private constructor(
     private val ktUserType: KtUserType,
-    override val containingDeclaration: KoBaseDeclaration,
+    override val containingDeclaration: KoImportDeclaration,
 ) :
     KoImportAliasDeclaration,
     KoBaseTypeDeclarationCore,
@@ -38,11 +38,7 @@ internal class KoImportAliasDeclarationCore private constructor(
 
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
-    override val importDirective: KoImportDeclaration by lazy {
-        containingFile.imports.first {
-            it.alias == name
-        }
-    }
+    override val importDirective: KoImportDeclaration by lazy { containingDeclaration }
 
     override fun toString(): String = text
 
@@ -51,7 +47,7 @@ internal class KoImportAliasDeclarationCore private constructor(
 
         internal fun getInstance(
             ktUserType: KtUserType,
-            containingDeclaration: KoBaseDeclaration,
+            containingDeclaration: KoImportDeclaration,
         ): KoImportAliasDeclaration =
             cache.getOrCreateInstance(ktUserType, containingDeclaration) {
                 KoImportAliasDeclarationCore(ktUserType, containingDeclaration)
