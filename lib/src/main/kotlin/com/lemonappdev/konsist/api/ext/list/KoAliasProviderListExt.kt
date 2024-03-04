@@ -11,8 +11,8 @@ import com.lemonappdev.konsist.api.provider.KoNameProvider
  */
 fun <T : KoAliasProvider> List<T>.withAlias(vararg names: String): List<T> = filter {
     when {
-        names.isEmpty() -> it.alias != (it as? KoNameProvider)?.name
-        else -> names.any { name -> it.alias == name }
+        names.isEmpty() -> it.alias?.name != (it as? KoNameProvider)?.name
+        else -> names.any { name -> it.alias?.name == name }
     }
 }
 
@@ -24,7 +24,7 @@ fun <T : KoAliasProvider> List<T>.withAlias(vararg names: String): List<T> = fil
  */
 fun <T : KoAliasProvider> List<T>.withoutAlias(vararg names: String): List<T> = filter {
     when {
-        names.isEmpty() -> it.alias == (it as? KoNameProvider)?.name
-        else -> names.none { name -> it.alias == name }
+        names.isEmpty() -> it.alias?.name == (it as? KoNameProvider)?.name
+        else -> names.none { name -> it.alias?.name == name }
     }
 }

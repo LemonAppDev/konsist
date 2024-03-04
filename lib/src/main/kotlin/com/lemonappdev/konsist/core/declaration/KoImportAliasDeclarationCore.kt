@@ -15,10 +15,11 @@ import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import org.jetbrains.kotlin.psi.KtElement
-import org.jetbrains.kotlin.psi.KtUserType
+import org.jetbrains.kotlin.psi.KtImportAlias
+import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 
 internal class KoImportAliasDeclarationCore private constructor(
-    private val ktUserType: KtUserType,
+    private val ktImportAlias: KtImportAlias,
     override val containingDeclaration: KoImportDeclaration,
 ) :
     KoImportAliasDeclaration,
@@ -30,11 +31,13 @@ internal class KoImportAliasDeclarationCore private constructor(
     KoPathProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore {
-    override val psiElement: PsiElement by lazy { ktUserType }
+    override val psiElement: PsiElement by lazy { ktImportAlias }
 
-    override val ktElement: KtElement by lazy { ktUserType }
+    override val ktElement: KtElement by lazy { ktImportAlias }
 
-    override val name: String by lazy { ktUserType.text }
+    override val text: String by lazy { ktImportAlias.name ?: ktImportAlias.text }
+
+    override val name: String by lazy { text }
 
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
@@ -46,11 +49,11 @@ internal class KoImportAliasDeclarationCore private constructor(
         private val cache: KoDeclarationCache<KoImportAliasDeclaration> = KoDeclarationCache()
 
         internal fun getInstance(
-            ktUserType: KtUserType,
+            ktImportAlias: KtImportAlias,
             containingDeclaration: KoImportDeclaration,
         ): KoImportAliasDeclaration =
-            cache.getOrCreateInstance(ktUserType, containingDeclaration) {
-                KoImportAliasDeclarationCore(ktUserType, containingDeclaration)
+            cache.getOrCreateInstance(ktImportAlias, containingDeclaration) {
+                KoImportAliasDeclarationCore(ktImportAlias, containingDeclaration)
             }
     }
 }

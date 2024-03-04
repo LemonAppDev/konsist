@@ -51,12 +51,10 @@ object TypeUtil {
 
         val importDirective = containingFile
             .imports
-            .firstOrNull {
-                it.alias == nestedType?.text
-            }
+            .firstOrNull { it.alias?.name == nestedType?.text }
 
         return if (importDirective != null) {
-            KoImportAliasDeclarationCore.getInstance(nestedType as KtUserType, importDirective)
+            importDirective.alias
         } else {
             transformPsiElementToKoTypeDeclaration(type, parentDeclaration, containingFile)
         }
@@ -106,14 +104,12 @@ object TypeUtil {
         val fqn =
             containingFile
                 .imports
-                .firstOrNull { import ->
-                    import.name.substringAfterLast(".") == typeText || import.alias == typeText
-                }
+                .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
                 ?.name
                 ?: (containingFile.packagee?.fullyQualifiedName + "." + typeText)
 
         return when {
-            nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
+            nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
             nestedType is KtUserType && typeText != null -> {
                 if (isKotlinBasicType(typeText) || isKotlinCollectionTypes(typeText)) {
                     KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)

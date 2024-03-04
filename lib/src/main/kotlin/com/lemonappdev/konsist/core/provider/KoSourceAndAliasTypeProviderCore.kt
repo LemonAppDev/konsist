@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
 import com.lemonappdev.konsist.core.declaration.KoFileDeclarationCore
 import org.jetbrains.kotlin.psi.KtUserType
@@ -14,20 +16,14 @@ internal interface KoSourceAndAliasTypeProviderCore :
     private val file: KoFileDeclaration
         get() = KoFileDeclarationCore(ktUserType.containingKtFile)
 
-    override val aliasType: String?
-        get() = file
-            .imports
-            .firstOrNull { it.alias == ktUserType.text.removeSuffix("?") }
-            ?.alias
-
     override val isAlias: Boolean
-        get() = aliasType != null
+        get() = (this as? KoTypeDeclaration)?.declaration is KoImportAliasDeclaration
 
     override val sourceType: String
         get() = if (isAlias) {
             file
                 .imports
-                .first { it.alias == ktUserType.text.removeSuffix("?") }
+                .first { it.alias?.name == ktUserType.text.removeSuffix("?") }
                 .name
                 .split(".")
                 .toMutableList()

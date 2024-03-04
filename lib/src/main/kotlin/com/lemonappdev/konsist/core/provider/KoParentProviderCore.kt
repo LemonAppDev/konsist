@@ -41,7 +41,7 @@ internal interface KoParentProviderCore :
                     containingFile
                         .imports
                         .firstOrNull { import ->
-                            import.name.substringAfterLast(".") == name || import.alias == name
+                            import.name.substringAfterLast(".") == name || import.alias?.name == name
                         }
                         ?.name
                         ?: (containingFile.packagee?.fullyQualifiedName + "." + name)
