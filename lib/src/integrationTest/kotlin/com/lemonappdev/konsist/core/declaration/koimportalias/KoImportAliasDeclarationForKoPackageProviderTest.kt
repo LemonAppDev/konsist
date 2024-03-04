@@ -16,7 +16,7 @@ class KoImportAliasDeclarationForKoPackageProviderTest {
             ?.parameters
             ?.first()
             ?.type
-            ?.declaration as? KoImportAliasDeclaration
+            ?.sourceDeclaration as? KoImportAliasDeclaration
 
         // then
         sut?.packagee shouldBeEqualTo null
@@ -32,7 +32,7 @@ class KoImportAliasDeclarationForKoPackageProviderTest {
             ?.parameters
             ?.first()
             ?.type
-            ?.declaration as? KoImportAliasDeclaration
+            ?.sourceDeclaration as? KoImportAliasDeclaration
 
         // then
         sut?.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"

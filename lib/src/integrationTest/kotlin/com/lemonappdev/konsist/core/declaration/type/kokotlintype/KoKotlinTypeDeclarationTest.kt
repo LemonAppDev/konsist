@@ -13,7 +13,7 @@ class KoKotlinTypeDeclarationTest {
             .properties()
             .first()
             .type
-            ?.declaration as? KoKotlinTypeDeclaration
+            ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         sut?.toString() shouldBeEqualTo "String"
@@ -26,7 +26,7 @@ class KoKotlinTypeDeclarationTest {
             .properties()
             .first()
             .type
-            ?.declaration as? KoKotlinTypeDeclaration
+            ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         sut?.toString() shouldBeEqualTo "String"
@@ -39,7 +39,7 @@ class KoKotlinTypeDeclarationTest {
             .properties()
             .first()
             .type
-            ?.declaration as? KoKotlinTypeDeclaration
+            ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         sut?.toString() shouldBeEqualTo "List<String>"
@@ -52,7 +52,7 @@ class KoKotlinTypeDeclarationTest {
             .properties()
             .first()
             .type
-            ?.declaration as? KoKotlinTypeDeclaration
+            ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         sut?.toString() shouldBeEqualTo "List<String>"

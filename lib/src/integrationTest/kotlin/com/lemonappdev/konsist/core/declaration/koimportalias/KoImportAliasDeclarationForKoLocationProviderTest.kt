@@ -19,7 +19,7 @@ class KoImportAliasDeclarationForKoLocationProviderTest {
             ?.parameters
             ?.first()
             ?.type
-            ?.declaration as? KoImportAliasDeclaration
+            ?.sourceDeclaration as? KoImportAliasDeclaration
 
         // then
         sut?.location shouldBeEqualTo "${sut?.path}:1:52"

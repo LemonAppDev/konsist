@@ -69,5 +69,5 @@ interface KoTypeDeclaration :
     KoSourceAndAliasTypeProvider,
     KoPackageProvider,
     KoResideInPackageProvider {
-    val declaration: KoBaseTypeDeclaration
+    val sourceDeclaration: KoBaseTypeDeclaration
 }

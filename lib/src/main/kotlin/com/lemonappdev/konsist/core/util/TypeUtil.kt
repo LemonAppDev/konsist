@@ -61,7 +61,7 @@ object TypeUtil {
     }
 
     internal fun hasTypeOf(type: KoTypeDeclaration?, kClass: KClass<*>): Boolean =
-        kClass.qualifiedName == (type?.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+        kClass.qualifiedName == (type?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
 
     /*
     1.0.0 CleanUp - When we remove KoReceiverTypeProviderCore.hasReceiverType it will be unused.

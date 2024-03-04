@@ -20,7 +20,7 @@ class KoImportAliasDeclarationForKoContainingDeclarationProviderTest {
             ?.parameters
             ?.first()
             ?.type
-            ?.declaration as? KoImportAliasDeclaration
+            ?.sourceDeclaration as? KoImportAliasDeclaration
 
         // then
         (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"

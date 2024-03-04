@@ -69,7 +69,7 @@ internal class KoTypeDeclarationCore private constructor(
 
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
-    override val declaration: KoBaseTypeDeclaration by lazy {
+    override val sourceDeclaration: KoBaseTypeDeclaration by lazy {
         TypeUtil.getBasicType(
             listOf(ktTypeReference),
             ktTypeReference.isExtensionDeclaration(),

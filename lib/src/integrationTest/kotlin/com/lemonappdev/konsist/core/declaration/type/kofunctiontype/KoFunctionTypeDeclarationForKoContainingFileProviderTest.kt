@@ -19,7 +19,7 @@ class KoFunctionTypeDeclarationForKoContainingFileProviderTest {
             ?.parameters
             ?.first()
             ?.type
-            ?.declaration as? KoFunctionTypeDeclaration
+            ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         sut?.containingFile?.nameWithExtension shouldBeEqualTo "$fileName.kt"

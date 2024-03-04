@@ -22,7 +22,7 @@ class KoImportAliasDeclarationForKoTextProviderTest {
             ?.parameters
             ?.first()
             ?.type
-            ?.declaration as? KoImportAliasDeclaration
+            ?.sourceDeclaration as? KoImportAliasDeclaration
 
         // then
         sut?.text shouldBeEqualTo value

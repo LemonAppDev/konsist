@@ -17,7 +17,7 @@ class KoFunctionTypeDeclarationForKoResideInPackageProviderTest {
             ?.parameters
             ?.first()
             ?.type
-            ?.declaration as? KoFunctionTypeDeclaration
+            ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         assertSoftly(sut) {

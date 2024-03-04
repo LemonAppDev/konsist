@@ -10,7 +10,7 @@ internal interface KoGenericTypeProviderCore : KoGenericTypeProvider, KoSourceAn
         get() {
             val regex = "\\w+<[^<>]+>".toRegex()
 
-            val type = if ((this as? KoTypeDeclaration)?.declaration is KoTypeAliasDeclaration) {
+            val type = if ((this as? KoTypeDeclaration)?.sourceDeclaration is KoTypeAliasDeclaration) {
                 bareSourceType
             } else {
                 sourceType

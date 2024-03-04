@@ -56,8 +56,8 @@ class KoTypeDeclarationTest {
 
         // then
         assertSoftly(sut) {
-            it?.declaration shouldBeInstanceOf instanceOf
-            it?.declaration shouldNotBeInstanceOf notInstanceOf
+            it?.sourceDeclaration shouldBeInstanceOf instanceOf
+            it?.sourceDeclaration shouldNotBeInstanceOf notInstanceOf
         }
     }
 

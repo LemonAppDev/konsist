@@ -17,7 +17,7 @@ class KoImportAliasDeclarationForKoResideInPackageProviderTest {
             ?.parameters
             ?.first()
             ?.type
-            ?.declaration as? KoImportAliasDeclaration
+            ?.sourceDeclaration as? KoImportAliasDeclaration
 
         // then
         assertSoftly(sut) {

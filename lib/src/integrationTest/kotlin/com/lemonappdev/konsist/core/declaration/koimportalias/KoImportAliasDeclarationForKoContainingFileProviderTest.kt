@@ -19,7 +19,7 @@ class KoImportAliasDeclarationForKoContainingFileProviderTest {
             ?.parameters
             ?.first()
             ?.type
-            ?.declaration as? KoImportAliasDeclaration
+            ?.sourceDeclaration as? KoImportAliasDeclaration
 
         // then
         sut?.containingFile?.nameWithExtension shouldBeEqualTo "$fileName.kt"

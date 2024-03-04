@@ -13,7 +13,7 @@ class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
             .properties()
             .first()
             .type
-            ?.declaration as? KoKotlinTypeDeclaration
+            ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         sut?.fullyQualifiedName shouldBeEqualTo "kotlin.String"
@@ -26,7 +26,7 @@ class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
             .properties()
             .first()
             .type
-            ?.declaration as? KoKotlinTypeDeclaration
+            ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         sut?.fullyQualifiedName shouldBeEqualTo "kotlin.String"
@@ -39,7 +39,7 @@ class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
             .properties()
             .first()
             .type
-            ?.declaration as? KoKotlinTypeDeclaration
+            ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         sut?.fullyQualifiedName shouldBeEqualTo "kotlin.collections.List"
@@ -52,7 +52,7 @@ class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
             .properties()
             .first()
             .type
-            ?.declaration as? KoKotlinTypeDeclaration
+            ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         sut?.fullyQualifiedName shouldBeEqualTo "kotlin.collections.List"

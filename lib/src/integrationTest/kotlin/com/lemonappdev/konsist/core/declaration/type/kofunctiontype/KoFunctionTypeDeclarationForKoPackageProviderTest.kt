@@ -16,7 +16,7 @@ class KoFunctionTypeDeclarationForKoPackageProviderTest {
             ?.parameters
             ?.first()
             ?.type
-            ?.declaration as? KoFunctionTypeDeclaration
+            ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         sut?.packagee shouldBeEqualTo null
@@ -32,7 +32,7 @@ class KoFunctionTypeDeclarationForKoPackageProviderTest {
             ?.parameters
             ?.first()
             ?.type
-            ?.declaration as? KoFunctionTypeDeclaration
+            ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         sut?.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"

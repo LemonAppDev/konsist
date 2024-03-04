@@ -18,7 +18,7 @@ internal interface KoSourceAndAliasTypeProviderCore :
         get() = KoFileDeclarationCore(ktElement.containingKtFile)
 
     override val isAlias: Boolean
-        get() = (this as? KoTypeDeclaration)?.declaration is KoImportAliasDeclaration
+        get() = (this as? KoTypeDeclaration)?.sourceDeclaration is KoImportAliasDeclaration
 
     override val sourceType: String
         get() = if (isAlias) {
@@ -34,8 +34,8 @@ internal interface KoSourceAndAliasTypeProviderCore :
         }
 
     override val bareSourceType: String
-        get() = if ((this as? KoTypeDeclaration)?.declaration is KoTypeAliasDeclaration) {
-            ((this as? KoTypeDeclaration)?.declaration as? KoTypeAliasDeclaration)?.type?.text ?: text
+        get() = if ((this as? KoTypeDeclaration)?.sourceDeclaration is KoTypeAliasDeclaration) {
+            ((this as? KoTypeDeclaration)?.sourceDeclaration as? KoTypeAliasDeclaration)?.type?.text ?: text
         } else {
             sourceType
                 .removeGenericTypeArguments()
