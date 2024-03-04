@@ -32,8 +32,7 @@ class DeclarationKonsistTest {
         declarationPackageScope
             .functions()
             .returnTypes
-//            .assertFalse { it.sourceType.endsWith("Impl") } // Todo: chamge this
-            .assertFalse { it.name.endsWith("Impl") }
+            .assertFalse { it.sourceType.endsWith("Impl") }
     }
 
     @Test
@@ -41,8 +40,7 @@ class DeclarationKonsistTest {
         declarationPackageScope
             .properties()
             .types
-//            .assertFalse { it.sourceType.endsWith("Impl") } // Todo: chamge this
-            .assertFalse { it.name.endsWith("Impl") }
+            .assertFalse { it.sourceType.endsWith("Impl") }
     }
 
     @Test
