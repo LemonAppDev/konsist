@@ -1,0 +1,7 @@
+package com.lemonappdev.konsist.core.declaration.type.kotype.snippet.forgeneral
+
+import com.lemonappdev.konsist.testdata.SampleObject
+
+class SampleClass1(val sampleProperty1: SampleTypeAlias)
+
+typealias SampleTypeAlias = (SampleObject) -> Unit

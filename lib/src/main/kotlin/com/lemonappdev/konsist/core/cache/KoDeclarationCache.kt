@@ -1,10 +1,9 @@
 package com.lemonappdev.konsist.core.cache
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
+import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import org.jetbrains.kotlin.psi.KtElement
-import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 import java.util.concurrent.ConcurrentHashMap
 
 internal class KoDeclarationCache<T : KoBaseProvider> {
@@ -38,16 +37,16 @@ internal class KoDeclarationCache<T : KoBaseProvider> {
     }
 }
 
-internal object KoExternalParentCache {
-    private val elements = ConcurrentHashMap<String, KoExternalParentDeclaration>()
+internal object KoExternalDeclarationCache {
+    private val elements = ConcurrentHashMap<String, KoExternalDeclaration>()
 
-    private fun get(key: String): KoExternalParentDeclaration {
+    private fun get(key: String): KoExternalDeclaration {
         var value = elements[key]
         value = requireNotNull(value) { "Cache doesn't allow to null value of key: $key" }
         return value
     }
 
-    private fun set(key: String, value: KoExternalParentDeclaration) {
+    private fun set(key: String, value: KoExternalDeclaration) {
         elements[key] = value
     }
 
@@ -55,13 +54,13 @@ internal object KoExternalParentCache {
 
     fun getOrCreateInstance(
         key: String,
-        ktSuperTypeListEntry: KtSuperTypeListEntry,
-        value: (ktSuperTypeListEntry: KtSuperTypeListEntry) -> KoExternalParentDeclaration,
-    ): KoExternalParentDeclaration {
+        ktElement: KtElement,
+        value: (ktElement: KtElement) -> KoExternalDeclaration,
+    ): KoExternalDeclaration {
         return if (hasKey(key)) {
             get(key)
         } else {
-            set(key, value.invoke(ktSuperTypeListEntry))
+            set(key, value.invoke(ktElement))
             get(key)
         }
     }

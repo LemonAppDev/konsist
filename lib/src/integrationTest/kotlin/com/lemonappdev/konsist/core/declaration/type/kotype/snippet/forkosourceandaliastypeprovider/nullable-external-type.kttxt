@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.externalsample.SampleExternalClass
+
+val sampleProperty1: SampleExternalClass? = null

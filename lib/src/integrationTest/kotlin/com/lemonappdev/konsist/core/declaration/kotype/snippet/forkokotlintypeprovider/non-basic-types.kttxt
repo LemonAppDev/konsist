@@ -1,2 +1,0 @@
-val sampleType1: List<Int> = listOf()
-val sampleType3: List<Int>? = null

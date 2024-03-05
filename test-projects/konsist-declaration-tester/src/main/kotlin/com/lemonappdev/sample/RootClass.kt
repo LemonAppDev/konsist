@@ -1,6 +1,7 @@
 package com.lemonappdev.sample
 
 import com.lemonappdev.sample.RootClass
+import com.lemonappdev.sample.RootObject as ImportAlias
 
 /**
  * Root KDoc
@@ -29,6 +30,10 @@ var rootProperty: RootClass = RootClass("")
         val rootVariable = ""
         if (true) field = value
     }
+
+val rootPropertyWithFunctionType: () -> Unit = {}
+
+val rootPropertyWithImportAliasType: ImportAlias = ImportAlias
 
 object RootObject
 

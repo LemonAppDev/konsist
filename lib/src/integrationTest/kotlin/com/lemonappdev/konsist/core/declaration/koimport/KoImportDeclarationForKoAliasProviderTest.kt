@@ -14,7 +14,11 @@ class KoImportDeclarationForKoAliasProviderTest {
             .first()
 
         // then
-        sut.alias shouldBeEqualTo null
+        assertSoftly(sut) {
+            alias shouldBeEqualTo null
+            hasAlias() shouldBeEqualTo false
+            hasAlias { it.name == "Alias" } shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -26,7 +30,11 @@ class KoImportDeclarationForKoAliasProviderTest {
         // then
         assertSoftly(sut) {
             get(0).alias shouldBeEqualTo null
-            get(1).alias shouldBeEqualTo "ImportAlias"
+            get(0).hasAlias() shouldBeEqualTo false
+            get(0).hasAlias { it.name == "ImportAlias" } shouldBeEqualTo false
+            get(1).alias?.name shouldBeEqualTo "ImportAlias"
+            get(1).hasAlias() shouldBeEqualTo true
+            get(1).hasAlias { it.name == "ImportAlias" } shouldBeEqualTo true
         }
     }
 

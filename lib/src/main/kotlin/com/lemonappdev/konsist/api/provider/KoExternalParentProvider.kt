@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
+import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import kotlin.reflect.KClass
 
 /**
@@ -23,10 +23,10 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        // Project
      *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
      *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
-     * @return a list of [KoExternalParentDeclaration] representing the external parents of the declaration.
-     * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
+     * @return a list of [KoExternalDeclaration] representing the external parents of the declaration.
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
      */
-    fun externalParents(indirectParents: Boolean = false): List<KoExternalParentDeclaration>
+    fun externalParents(indirectParents: Boolean = false): List<KoExternalDeclaration>
 
     /**
      * Returns the number of external parents.
@@ -44,7 +44,7 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
      *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
      * @return The number of external parents.
-     * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
      */
     fun numExternalParents(indirectParents: Boolean = false): Int
 
@@ -65,9 +65,9 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
      * @param predicate The predicate function to determine if an external parent satisfies a condition.
      * @return The number of external parents in the declaration satisfying predicate.
-     * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
      */
-    fun countExternalParents(indirectParents: Boolean = false, predicate: (KoExternalParentDeclaration) -> Boolean): Int
+    fun countExternalParents(indirectParents: Boolean = false, predicate: (KoExternalDeclaration) -> Boolean): Int
 
     /**
      * Determines whatever declaration has any external parents. The external parent is a parent defined outside
@@ -86,7 +86,7 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
      *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
      * @return `true` if the declaration has any external parent, `false` otherwise.
-     * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
      */
     fun hasExternalParents(indirectParents: Boolean = false): Boolean
 
@@ -108,7 +108,7 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
      *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
      * @return `true` if there is a matching declaration, `false` otherwise.
-     * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
      */
     fun hasExternalParentWithName(name: String, vararg names: String, indirectParents: Boolean = false): Boolean
 
@@ -130,7 +130,7 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
      *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
-     * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
      */
     fun hasExternalParentsWithAllNames(name: String, vararg names: String, indirectParents: Boolean = false): Boolean
 
@@ -151,11 +151,11 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
      * @param predicate A function that defines the condition to be met by an external parent.
      * @return `true` if there is a matching declaration, `false` otherwise.
-     * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
      */
     fun hasExternalParent(
         indirectParents: Boolean = false,
-        predicate: (KoExternalParentDeclaration) -> Boolean,
+        predicate: (KoExternalDeclaration) -> Boolean,
     ): Boolean
 
     /**
@@ -178,11 +178,11 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
      * @param predicate A function that defines the condition to be met by external parents.
      * @return `true` if all external parents satisfy the predicate, `false` otherwise.
-     * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
      */
     fun hasAllExternalParents(
         indirectParents: Boolean = false,
-        predicate: (KoExternalParentDeclaration) -> Boolean,
+        predicate: (KoExternalDeclaration) -> Boolean,
     ): Boolean
 
     /**
@@ -203,7 +203,7 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
      *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
      * @return `true` if there is a matching declaration, `false` otherwise.
-     * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
      */
     fun hasExternalParentOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean = false): Boolean
 
@@ -225,7 +225,7 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
      *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
      * @return `true` if the declaration has external parents of all the specified `KClass` types, `false` otherwise.
-     * @see com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
      */
     fun hasAllExternalParentsOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean = false): Boolean
 }

@@ -3,9 +3,10 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
-import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.exception.KoInternalException
+import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
+import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -35,6 +36,7 @@ internal class KoTypeAliasDeclarationCore private constructor(
     override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoTypeAliasDeclaration,
+    KoBaseTypeDeclarationCore,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
     KoContainingFileProviderCore,
@@ -64,10 +66,10 @@ internal class KoTypeAliasDeclarationCore private constructor(
     override val ktElement: KtElement by lazy { ktTypeAlias }
 
     override val type: KoTypeDeclaration by lazy {
-        ktTypeAlias
-            .getTypeReference()
-            ?.let { KoTypeDeclarationCore.getInstance(it, this) }
-            ?: throw KoInternalException("Type alias has no type", koBaseProvider = this)
+        val type = ktTypeAlias.getTypeReference()
+
+        type?.let { KoTypeDeclarationCore.getInstance(it, this) }
+            ?: throw IllegalArgumentException("Typealias has no specified type.")
     }
 
     override fun toString(): String = name
