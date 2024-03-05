@@ -251,10 +251,6 @@ jobs:
 
       - name: Run Integration Test
         run: cd test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
-        continue-on-error: true
-
-      - name: List all files
-        run: find . -type f
 
       - uses: actions/upload-artifact@v4
         with:
@@ -283,10 +279,6 @@ jobs:
 
       - name: Run Integration Test
         run: cd test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
-        continue-on-error: true
-
-      - name: List all files
-        run: dir /s /b
 
       - uses: actions/upload-artifact@v4
         with:
