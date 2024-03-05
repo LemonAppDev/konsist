@@ -252,7 +252,9 @@ jobs:
       - name: Run Integration Test
         run: cd test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload Test Reports
+        if: always() # This ensures the step runs regardless of the outcome of previous steps
+        uses: actions/upload-artifact@v4
         with:
           name: declaration-tester-project-ubuntu-api-test-report
           path: test-projects/konsist-declaration-tester/app/build/reports/tests/integrationTest
