@@ -19,38 +19,6 @@ import com.lemonappdev.konsist.api.provider.KoTextProvider
 
 /**
  * Represents a Kotlin type declaration.
- *
- *  Example 1
- *
- *  This code snippet...
- *  ```kotlin
- *  val sampleProperty: String
- *  ```
- *
- *  ...will be represented as:
- *
- *  ```kotlin
- *  importAliasName // null
- *  sourceType // "String"
- *  name // "String"
- *  isNullable // false
- *  ```
- *
- * Example 2
- * This code snippet...
- * ```kotlin
- * import com.SampleType as ImportAlias
- * val sampleProperty: ImportAlias?
- * ```
- *
- * ...will be represented as:
- *
- * ```kotlin
- * importAliasName // "ImportAlias"
- * sourceType // "SampleType"
- * name // "ImportAlias?"
- * isNullable // true
- * ```
  */
 interface KoTypeDeclaration :
     KoBaseDeclaration,
@@ -69,5 +37,12 @@ interface KoTypeDeclaration :
     KoSourceAndAliasTypeProvider,
     KoPackageProvider,
     KoResideInPackageProvider {
+    /**
+     * Represents the source declaration associated with this type.
+     *
+     * The `sourceDeclaration` property provides access to the declaration of the type within the Kotlin codebase.
+     * It points to an instance of [KoBaseTypeDeclaration], which serves as the base interface for various types of declarations in Kotlin.
+     * This allows retrieving additional information about the declaration, such as its properties, functions, annotations, and other relevant metadata.
+     */
     val sourceDeclaration: KoBaseTypeDeclaration
 }

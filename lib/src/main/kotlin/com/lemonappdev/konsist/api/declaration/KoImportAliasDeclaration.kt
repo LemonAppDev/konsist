@@ -8,6 +8,9 @@ import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 
+/**
+ * Represents an import alias declaration in Kotlin.
+ */
 interface KoImportAliasDeclaration :
     KoBaseTypeDeclaration,
     KoContainingFileProvider,
@@ -16,5 +19,8 @@ interface KoImportAliasDeclaration :
     KoPathProvider,
     KoModuleProvider,
     KoSourceSetProvider {
+    /**
+     * Represents the import directive associated with the alias declaration.
+     */
     val importDirective: KoImportDeclaration
 }
