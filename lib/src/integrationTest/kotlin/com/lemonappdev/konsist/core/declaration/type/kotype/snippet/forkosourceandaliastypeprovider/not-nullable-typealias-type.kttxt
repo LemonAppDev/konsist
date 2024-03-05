@@ -1,0 +1,3 @@
+val sampleProperty1: SampleTypeAlias = {}
+
+typealias SampleTypeAlias = () -> Unit

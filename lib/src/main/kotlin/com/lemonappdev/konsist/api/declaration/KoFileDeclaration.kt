@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFileExtensionProvider
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoHasPackageProvider
+import com.lemonappdev.konsist.api.provider.KoImportAliasProvider
 import com.lemonappdev.konsist.api.provider.KoImportProvider
 import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
@@ -32,6 +33,7 @@ interface KoFileDeclaration :
     KoFunctionProvider,
     KoHasPackageProvider,
     KoImportProvider,
+    KoImportAliasProvider,
     KoInterfaceProvider,
     KoModuleProvider,
     KoNameProvider,

@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoNonNullableTypeProvider
 import com.lemonappdev.konsist.core.util.TypeUtil
 import kotlin.reflect.KClass

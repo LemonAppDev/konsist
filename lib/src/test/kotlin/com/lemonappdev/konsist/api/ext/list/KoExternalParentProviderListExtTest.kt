@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
+import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import com.lemonappdev.konsist.api.provider.KoExternalParentProvider
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleInterface
@@ -13,9 +13,9 @@ class KoExternalParentProviderListExtTest {
     @Test
     fun `externalParents() returns external parents from all declarations`() {
         // given
-        val parent1: KoExternalParentDeclaration = mockk()
-        val parent2: KoExternalParentDeclaration = mockk()
-        val parent3: KoExternalParentDeclaration = mockk()
+        val parent1: KoExternalDeclaration = mockk()
+        val parent2: KoExternalDeclaration = mockk()
+        val parent3: KoExternalDeclaration = mockk()
         val declaration1: KoExternalParentProvider = mockk {
             every { externalParents() } returns listOf(parent1, parent2)
         }
@@ -230,7 +230,7 @@ class KoExternalParentProviderListExtTest {
     fun `withExternalParent{} returns declaration with external parent which satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (KoExternalParentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val predicate: (KoExternalDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoExternalParentProvider = mockk {
             every { hasExternalParent(predicate = predicate) } returns true
         }
@@ -250,7 +250,7 @@ class KoExternalParentProviderListExtTest {
     fun `withoutExternalParent{} returns declaration without external parent which satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (KoExternalParentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val predicate: (KoExternalDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoExternalParentProvider = mockk {
             every { hasExternalParent(predicate = predicate) } returns true
         }
@@ -270,7 +270,7 @@ class KoExternalParentProviderListExtTest {
     fun `withAllExternalParents{} returns declaration with all external parents satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (KoExternalParentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val predicate: (KoExternalDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoExternalParentProvider = mockk {
             every { hasAllExternalParents(predicate = predicate) } returns true
         }
@@ -290,7 +290,7 @@ class KoExternalParentProviderListExtTest {
     fun `withoutAllExternalParents{} returns declaration with all external parents which not satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (KoExternalParentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val predicate: (KoExternalDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoExternalParentProvider = mockk {
             every { hasAllExternalParents(predicate = predicate) } returns true
         }
@@ -310,12 +310,12 @@ class KoExternalParentProviderListExtTest {
     fun `withExternalParents{} returns declaration with external parents which satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (List<KoExternalParentDeclaration>) -> Boolean =
+        val predicate: (List<KoExternalDeclaration>) -> Boolean =
             { it.all { parent -> parent.hasNameEndingWith(suffix) } }
-        val parent1: KoExternalParentDeclaration = mockk {
+        val parent1: KoExternalDeclaration = mockk {
             every { hasNameEndingWith(suffix) } returns true
         }
-        val parent2: KoExternalParentDeclaration = mockk {
+        val parent2: KoExternalDeclaration = mockk {
             every { hasNameEndingWith(suffix) } returns false
         }
         val declaration1: KoExternalParentProvider = mockk {
@@ -340,12 +340,12 @@ class KoExternalParentProviderListExtTest {
     fun `withoutExternalParents{} returns declaration without external parents which satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (List<KoExternalParentDeclaration>) -> Boolean =
+        val predicate: (List<KoExternalDeclaration>) -> Boolean =
             { it.all { parent -> parent.hasNameEndingWith(suffix) } }
-        val parent1: KoExternalParentDeclaration = mockk {
+        val parent1: KoExternalDeclaration = mockk {
             every { hasNameEndingWith(suffix) } returns true
         }
-        val parent2: KoExternalParentDeclaration = mockk {
+        val parent2: KoExternalDeclaration = mockk {
             every { hasNameEndingWith(suffix) } returns false
         }
         val declaration1: KoExternalParentProvider = mockk {

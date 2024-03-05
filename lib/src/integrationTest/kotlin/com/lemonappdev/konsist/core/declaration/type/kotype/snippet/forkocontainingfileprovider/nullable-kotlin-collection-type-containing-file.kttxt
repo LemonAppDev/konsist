@@ -1,0 +1,3 @@
+package com.lemonappdev.konsist.core.declaration.type.kotype.snippet.forkocontainingfileprovider
+
+class SampleClass1(val sampleProperty1: List<String>?)

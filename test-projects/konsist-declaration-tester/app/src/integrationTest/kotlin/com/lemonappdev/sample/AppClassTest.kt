@@ -1,6 +1,8 @@
 package com.lemonappdev.sample
 
 import com.lemonappdev.sample.AppClassTest
+import com.lemonappdev.sample.AppTestClass1
+import com.lemonappdev.sample.AppTestClass1 as ImportAlias
 
 /**
  * App KDoc Test
@@ -29,6 +31,10 @@ var appPropertyTest: AppClassTest = AppClassTest("")
         val appVariableTest = ""
         if (true) field = value
     }
+
+val appPropertyWithFunctionTypeTest: () -> Unit = {}
+
+val appPropertyWithImportAliasTypeTest: ImportAlias = AppTestClass1()
 
 object AppObjectTest
 

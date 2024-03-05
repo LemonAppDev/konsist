@@ -1,7 +1,8 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
+import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.util.TypeUtil
 import com.lemonappdev.konsist.core.util.TypeUtil.hasTypeOf
@@ -18,11 +19,19 @@ internal interface KoReceiverTypeProviderCore :
     val ktCallableDeclaration: KtCallableDeclaration
 
     override val receiverType: KoTypeDeclaration?
-        get() = TypeUtil.getReceiverType(
-            getTypeReferences(),
-            ktCallableDeclaration.isExtensionDeclaration(),
-            this.castToKoBaseDeclaration(),
-        )
+        get() {
+            val references = getTypeReferences()
+
+            val type = if (ktCallableDeclaration.isExtensionDeclaration()) {
+                references.firstOrNull()
+            } else {
+                null
+            }
+
+            return type?.let {
+                KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration())
+            }
+        }
 
     @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasReceiverType { it.name == name }"))
     override fun hasReceiverType(name: String): Boolean = TypeUtil.hasReceiverType(receiverType, name)

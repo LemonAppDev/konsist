@@ -1,13 +1,15 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.provider.KoAliasProvider
-import org.jetbrains.kotlin.psi.KtImportDirective
 
 internal interface KoAliasProviderCore :
     KoAliasProvider,
-    KoNameProviderCore,
-    KoBaseProviderCore {
-    val ktImportDirective: KtImportDirective
-    override val alias: String?
-        get() = ktImportDirective.alias?.name
+    KoBaseProviderCore,
+    KoContainingFileProviderCore {
+    override fun hasAlias(predicate: ((KoImportAliasDeclaration) -> Boolean)?): Boolean =
+        when (predicate) {
+            null -> alias != null
+            else -> alias?.let { predicate(it) } ?: false
+        }
 }

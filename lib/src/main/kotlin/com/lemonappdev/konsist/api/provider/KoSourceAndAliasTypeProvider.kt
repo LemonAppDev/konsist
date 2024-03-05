@@ -5,13 +5,6 @@ package com.lemonappdev.konsist.api.provider
  */
 interface KoSourceAndAliasTypeProvider : KoBaseProvider {
     /**
-     * The import alias name.
-     *
-     * For `import com.app.MyClass as MyAlias` it will be "MyAlias".
-     */
-    val aliasType: String?
-
-    /**
      * Returns `true` if this type is defined by the import alias.
      *
      * For the type import `import com.app.MyClass as MyAlias` the `isAlias` will be `true`.

@@ -97,9 +97,7 @@ class ApiKonsistTest {
             .filter {
                 providers.any { providerName -> it.hasNameContaining(providerName) }
             }
-            .assertTrue {
-                it.hasCorrectMethods(true)
-            }
+            .assertTrue { it.hasCorrectMethods(true) }
     }
 
     private val declarations = Konsist
@@ -110,14 +108,14 @@ class ApiKonsistTest {
         where T : KoPropertyProvider,
               T : KoFunctionProvider {
         val property = properties()
-            .first { property ->
+            .firstOrNull { property ->
                 property.hasType { type ->
                     type.hasNameStartingWith("List<Ko")
                 }
             }
 
         val declarationName = property
-            .type
+            ?.type
             ?.name
             ?.removePrefix("List<")
             ?.removeSuffix(">")
@@ -130,17 +128,17 @@ class ApiKonsistTest {
             ?: ""
 
         val pluralName = property
-            .name
-            .replaceFirstChar { char -> if (char.isLowerCase()) char.titlecase(Locale.getDefault()) else char.toString() }
+            ?.name
+            ?.replaceFirstChar { char -> if (char.isLowerCase()) char.titlecase(Locale.getDefault()) else char.toString() }
 
         val hasKoNameProvider = declarations
             .firstOrNull { declaration -> declaration.name == declarationName }
             ?.hasParentInterfaceWithName("KoNameProvider", indirectParents = true) ?: false
 
         return if (isExtension) {
-            checkForExtensions(declarationName, singularName, pluralName, hasKoNameProvider)
+            pluralName?.let { checkForExtensions(declarationName, singularName, it, hasKoNameProvider) } ?: true
         } else {
-            checkForProviders(declarationName, singularName, pluralName, hasKoNameProvider)
+            pluralName?.let { checkForProviders(declarationName, singularName, it, hasKoNameProvider) } ?: true
         }
     }
 

@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.SampleClass as SampleImportAlias
+import com.lemonappdev.konsist.testdata.SampleInterface
+
+class SampleClass(sampleParameter: SampleImportAlias) {
+}
