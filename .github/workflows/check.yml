@@ -30,7 +30,7 @@ jobs:
         if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
         with:
           name: konsist-junit-test-report
-          path: ./lib/build/test-results/test/
+          path: ./lib/build/reports/tests/test
 
   konsist-konsist-test:
     name: Konsist Konsist Test
@@ -53,7 +53,7 @@ jobs:
         if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
         with:
           name: konsist-konsist-test-report
-          path: ./lib/build/test-results/konsistTest/
+          path: ./lib/build/reports/tests/konsistTest/
 
   konsist-integration-test:
     name: Konsist Integration Test
@@ -76,7 +76,7 @@ jobs:
         if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
         with:
           name: konsist-integration-test-report
-          path: ./lib/build/test-results/integrationTest/
+          path: ./lib/build/reports/tests/integrationTest/
 
   api-test:
     name: Konsist Api Test
@@ -99,7 +99,7 @@ jobs:
         if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
         with:
           name: konsist-api-test-report
-          path: ./lib/build/test-results/apiTest/
+          path: ./lib/build/reports/tests/apiTest/
 
 # ======================================= Run Linters =========================================================
 
