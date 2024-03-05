@@ -228,6 +228,11 @@ jobs:
       - name: Run App Integration Test
         run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew app:integrationTest
 
+      - uses: actions/upload-artifact@v4
+        with:
+          name: declaration-tester-project-windows-api-test-report
+          path: test-projects/konsist-declaration-tester/app/build/reports/tests/integrationTest
+
   # ======================================= Check Declarations =======================================
 
   declaration-tester-project-ubuntu:
@@ -250,6 +255,11 @@ jobs:
 
       - name: Run Integration Test
         run: cd test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: declaration-tester-project-ubuntu-api-test-report
+          path: test-projects/konsist-declaration-tester/app/build/reports/tests/integrationTest
 
   declaration-tester-project-windows:
     name: Declaration Tester Project Windows
