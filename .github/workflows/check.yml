@@ -25,10 +25,12 @@ jobs:
       - name: JUnit Test
         run: ./gradlew :lib:test
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload Report
+        uses: actions/upload-artifact@v4
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
         with:
-          name: junit-test-report
-          path: ./lib/build/test-results/test/
+          name: konsist-junit-test-report
+          path: ./lib/build/reports/tests/test
 
   konsist-konsist-test:
     name: Konsist Konsist Test
@@ -46,10 +48,12 @@ jobs:
       - name: Konsist Test
         run: ./gradlew lib:konsistTest
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload Report
+        uses: actions/upload-artifact@v4
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
         with:
-          name: konsist-test-report
-          path: ./lib/build/test-results/konsistTest/
+          name: konsist-konsist-test-report
+          path: ./lib/build/reports/tests/konsistTest/
 
   konsist-integration-test:
     name: Konsist Integration Test
@@ -67,10 +71,12 @@ jobs:
       - name: Integration Test
         run: ./gradlew lib:integrationTest
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload Report
+        uses: actions/upload-artifact@v4
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
         with:
-          name: integration-test-report
-          path: ./lib/build/test-results/integrationTest/
+          name: konsist-integration-test-report
+          path: ./lib/build/reports/tests/integrationTest/
 
   api-test:
     name: Konsist Api Test
@@ -88,10 +94,12 @@ jobs:
       - name: Api Test
         run: ./gradlew lib:apiTest
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload Report
+        uses: actions/upload-artifact@v4
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
         with:
-          name: api-test-report
-          path: ./lib/build/test-results/apiTest/
+          name: konsist-api-test-report
+          path: ./lib/build/reports/tests/apiTest/
 
 # ======================================= Run Linters =========================================================
 
@@ -127,9 +135,11 @@ jobs:
       - name: Detekt
         run: ./gradlew detektCheck
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload Report
+        uses: actions/upload-artifact@v4
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
         with:
-          name: detekt-report
+          name: konsist-detekt-report
           path: ./**/build/reports/detekt/detekt.*
 
 # ======================================= Check Paths =======================================
@@ -155,6 +165,13 @@ jobs:
       - name: Run Integration Test
         run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
 
+      - name: Upload Report
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+        uses: actions/upload-artifact@v4
+        with:
+          name: path-tester-project-ubuntu-test-report
+          path: test-projects/konsist-path-tester/app/build/reports/tests/integrationTest
+
   path-tester-project-windows:
     name: Path Tester Project Windows
     runs-on: windows-latest
@@ -177,6 +194,13 @@ jobs:
 
       - name: Run Integration Test
         run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
+
+      - name: Upload Report
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+        uses: actions/upload-artifact@v4
+        with:
+          name: path-tester-project-windows-test-report
+          path: test-projects/konsist-path-tester/app/build/reports/tests/integrationTest
 
   root-path-gradle-tester-ubuntu:
     name: Root Path Tester Gradle Ubuntu
@@ -201,6 +225,13 @@ jobs:
 
       - name: Run App Integration Test
         run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew app:integrationTest
+
+      - name: Upload Report
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+        uses: actions/upload-artifact@v4
+        with:
+          name: root-path-gradle-tester-ubuntu-test-report
+          path: test-projects/konsist-root-path-gradle-tester/**/build/reports
 
   root-path-gradle-tester-windows:
     name: Root Path Tester Gradle Windows
@@ -228,6 +259,13 @@ jobs:
       - name: Run App Integration Test
         run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew app:integrationTest
 
+      - name: Upload Report
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+        uses: actions/upload-artifact@v4
+        with:
+          name: root-path-gradle-tester-windows-test-report
+          path: test-projects/konsist-root-path-gradle-tester/**/build/reports
+
   # ======================================= Check Declarations =======================================
 
   declaration-tester-project-ubuntu:
@@ -251,6 +289,13 @@ jobs:
       - name: Run Integration Test
         run: cd test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
 
+      - name: Upload Report
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+        uses: actions/upload-artifact@v4
+        with:
+          name: declaration-tester-project-ubuntu-test-report
+          path: test-projects/konsist-declaration-tester/app/build/reports/integrationTest
+
   declaration-tester-project-windows:
     name: Declaration Tester Project Windows
     runs-on: windows-latest
@@ -273,6 +318,13 @@ jobs:
 
       - name: Run Integration Test
         run: cd test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
+
+      - name: Upload Report
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+        uses: actions/upload-artifact@v4
+        with:
+          name: declaration-tester-project-windows-test-report
+          path: test-projects/konsist-declaration-tester/app/build/reports/integrationTest
 
 # ======================================= Library Artifact =========================================================
   konsist-artifact-check:
@@ -314,7 +366,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: konsist-XXX-SNAPSHOT.jar
+          name: konsist-SNAPSHOT-${{ github.run_number }}.jar
           path: /home/runner/.m2/repository/com/lemonappdev/konsist/*
 
       - name: Check dependencies exposed by the library artifact
