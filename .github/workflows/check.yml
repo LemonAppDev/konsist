@@ -366,7 +366,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: konsist-$GITHUB_RUN_NUMBER-SNAPSHOT.jar
+          name: konsist-SNAPSHOT-${{ github.run_number }}.jar
           path: /home/runner/.m2/repository/com/lemonappdev/konsist/*
 
       - name: Check dependencies exposed by the library artifact
