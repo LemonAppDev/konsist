@@ -1,5 +1,0 @@
-class SampleTopLevelClass {
-    private companion object SampleObject {
-        private object SampleNestedObject
-    }
-}
