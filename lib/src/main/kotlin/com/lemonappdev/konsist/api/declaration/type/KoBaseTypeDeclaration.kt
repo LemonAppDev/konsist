@@ -10,7 +10,8 @@ import com.lemonappdev.konsist.api.provider.KoTextProvider
 /**
  * Represents a Kotlin base type declaration.
  *
- * This interface serves as the base for various types of declarations in Kotlin, providing essential functionalities and information about a declaration.
+ * This interface serves as the base for various types of declarations in Kotlin, providing essential functionalities
+ * and information about a declaration.
  */
 interface KoBaseTypeDeclaration :
     KoBaseDeclaration,
