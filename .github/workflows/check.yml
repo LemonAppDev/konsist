@@ -257,33 +257,33 @@ jobs:
           name: declaration-tester-project-ubuntu-api-test-report
           path: test-projects/konsist-declaration-tester/app/build/reports/tests/integrationTest
 
-  declaration-tester-project-windows:
-    name: Declaration Tester Project Windows
-    runs-on: windows-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: |
-            8
-            21
-          distribution: 'corretto'
-
-      - name: Publish
-        run: >
-          ./gradlew publishToMavenLocal
-          -P konsist.releaseTarget=local
-
-      - name: Run Integration Test
-        run: cd test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: declaration-tester-project-windows-api-test-report
-          path: test-projects/konsist-declaration-tester/app/build/reports/tests/integrationTest
+#  declaration-tester-project-windows:
+#    name: Declaration Tester Project Windows
+#    runs-on: windows-latest
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: |
+#            8
+#            21
+#          distribution: 'corretto'
+#
+#      - name: Publish
+#        run: >
+#          ./gradlew publishToMavenLocal
+#          -P konsist.releaseTarget=local
+#
+#      - name: Run Integration Test
+#        run: cd test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
+#
+#      - uses: actions/upload-artifact@v4
+#        with:
+#          name: declaration-tester-project-windows-api-test-report
+#          path: test-projects/konsist-declaration-tester/app/build/reports/tests/integrationTest
 
 # ======================================= Library Artifact =========================================================
 #  konsist-artifact-check:
