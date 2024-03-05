@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAliasProviderCore
@@ -36,6 +37,12 @@ internal class KoImportDeclarationCore private constructor(override val ktImport
     override val ktElement: KtElement by lazy { ktImportDirective }
 
     override val name: String by lazy { ktImportDirective.importPath?.fqName.toString() }
+
+    override val alias: KoImportAliasDeclaration? by lazy {
+        val ktAlias = ktImportDirective.alias
+
+        ktAlias?.let { KoImportAliasDeclarationCore.getInstance(it, this) }
+    }
 
     override fun toString(): String = name
 

@@ -3,8 +3,9 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
-import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -33,7 +34,6 @@ import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.KtTypeReference
-import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 
 internal class KoParameterDeclarationCore private constructor(
     override val ktParameter: KtParameter,
@@ -75,12 +75,14 @@ internal class KoParameterDeclarationCore private constructor(
     override val type: KoTypeDeclaration by lazy {
         val type = ktParameter
             .children
-            .firstIsInstance<KtTypeReference>()
+            .filterIsInstance<KtTypeReference>()
+            .firstOrNull()
 
-        KoTypeDeclarationCore.getInstance(type, this)
+        type?.let { KoTypeDeclarationCore.getInstance(it, this) }
+            ?: throw IllegalArgumentException("Parameter type cannot be null")
     }
 
-    override fun representsType(name: String?): Boolean = type.name == name || type.fullyQualifiedName == name
+    override fun representsType(name: String?): Boolean = type.name == name // todo: add this?: || type.fullyQualifiedName == name
 
     override val hasValModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "val" }
 
@@ -91,7 +93,15 @@ internal class KoParameterDeclarationCore private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoParameterDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktParameter: KtParameter, containingDeclaration: KoBaseDeclaration): KoParameterDeclaration =
-            cache.getOrCreateInstance(ktParameter, containingDeclaration) { KoParameterDeclarationCore(ktParameter, containingDeclaration) }
+        internal fun getInstance(
+            ktParameter: KtParameter,
+            containingDeclaration: KoBaseDeclaration,
+        ): KoParameterDeclaration =
+            cache.getOrCreateInstance(ktParameter, containingDeclaration) {
+                KoParameterDeclarationCore(
+                    ktParameter,
+                    containingDeclaration,
+                )
+            }
     }
 }

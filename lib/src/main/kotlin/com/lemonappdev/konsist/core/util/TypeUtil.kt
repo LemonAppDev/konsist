@@ -1,35 +1,66 @@
 package com.lemonappdev.konsist.core.util
 
+import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
-import com.lemonappdev.konsist.core.declaration.KoTypeDeclarationCore
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
+import com.lemonappdev.konsist.core.declaration.type.KoFunctionTypeDeclarationCore
+import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
+import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
+import com.lemonappdev.konsist.core.model.getClass
+import com.lemonappdev.konsist.core.model.getInterface
+import com.lemonappdev.konsist.core.model.getObject
+import com.lemonappdev.konsist.core.model.getTypeAlias
+import org.jetbrains.kotlin.psi.KtFunctionType
+import org.jetbrains.kotlin.psi.KtNullableType
 import org.jetbrains.kotlin.psi.KtTypeReference
+import org.jetbrains.kotlin.psi.KtUserType
 import kotlin.reflect.KClass
 
 object TypeUtil {
-    internal fun getType(
+    internal fun getBasicType(
         types: List<KtTypeReference>,
         isExtension: Boolean,
         parentDeclaration: KoBaseDeclaration,
-    ): KoTypeDeclaration? {
+        containingFile: KoFileDeclaration,
+    ): KoBaseTypeDeclaration? {
         val type = if (isExtension && types.size > 1) {
             // We choose last because when we have extension the first one is receiver and the second one is (return) type.
             types.last()
-        } else if (!isExtension) {
-            types.firstOrNull()
         } else {
-            null
+            if (!isExtension) {
+                types.firstOrNull()
+            } else {
+                null
+            }
+                ?.children
+                ?.firstOrNull()
         }
 
-        return type?.let { KoTypeDeclarationCore.getInstance(it, parentDeclaration) }
+        val nestedType = if (type is KtNullableType) {
+            type
+                .children
+                .firstOrNull()
+        } else {
+            type
+        }
+
+        val importDirective = containingFile
+            .imports
+            .firstOrNull { it.alias?.name == nestedType?.text }
+
+        return if (importDirective != null) {
+            importDirective.alias
+        } else {
+            transformPsiElementToKoTypeDeclaration(type, parentDeclaration, containingFile)
+        }
     }
 
     internal fun hasTypeOf(type: KoTypeDeclaration?, kClass: KClass<*>): Boolean =
-        if (type?.isKotlinType == true) {
-            kClass.simpleName == type.name
-        } else {
-            kClass.qualifiedName == type?.fullyQualifiedName
-        }
+        kClass.qualifiedName == (type?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
 
     /*
     1.0.0 CleanUp - When we remove KoReceiverTypeProviderCore.hasReceiverType it will be unused.
@@ -37,15 +68,67 @@ object TypeUtil {
     internal fun getReceiverType(
         types: List<KtTypeReference>,
         isExtension: Boolean,
-        parentDeclaration: KoBaseDeclaration,
+        containingDeclaration: KoBaseDeclaration,
     ): KoTypeDeclaration? {
         val type = if (isExtension) {
             types.first()
         } else {
             null
         }
+            ?.children
+            ?.firstOrNull()
 
-        return type?.let { KoTypeDeclarationCore.getInstance(type, parentDeclaration) }
+        return if (type is KtTypeReference) {
+            KoTypeDeclarationCore.getInstance(type, containingDeclaration)
+        } else {
+            null
+        }
+    }
+
+    @Suppress("detekt.CyclomaticComplexMethod")
+    private fun transformPsiElementToKoTypeDeclaration(
+        type: PsiElement?,
+        parentDeclaration: KoBaseDeclaration,
+        containingFile: KoFileDeclaration,
+    ): KoBaseTypeDeclaration? {
+        val nestedType = if (type is KtNullableType) {
+            type
+                .children
+                .firstOrNull()
+        } else {
+            type
+        }
+        val typeText = nestedType?.text
+
+        val fqn =
+            containingFile
+                .imports
+                .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
+                ?.name
+                ?: (containingFile.packagee?.fullyQualifiedName + "." + typeText)
+
+        return when {
+            nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
+            nestedType is KtUserType && typeText != null -> {
+                if (isKotlinBasicType(typeText) || isKotlinCollectionTypes(typeText)) {
+                    KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
+                } else {
+                    getClass(typeText, fqn, containingFile)
+                        ?: getInterface(typeText, fqn, containingFile)
+                        ?: getObject(typeText, fqn, containingFile)
+                        ?: getTypeAlias(typeText, fqn, containingFile)
+                        ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
+                }
+            }
+            nestedType is KtTypeReference && typeText != null -> {
+                getClass(typeText, fqn, containingFile)
+                    ?: getInterface(typeText, fqn, containingFile)
+                    ?: getObject(typeText, fqn, containingFile)
+                    ?: getTypeAlias(typeText, fqn, containingFile)
+                    ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
+            }
+            else -> null
+        }
     }
 
     /*
@@ -55,4 +138,60 @@ object TypeUtil {
         null -> receiverType != null
         else -> receiverType?.name == name
     }
+
+    internal fun isKotlinBasicType(name: String): Boolean = kotlinBasicTypes.any { it == name }
+
+    internal fun isKotlinCollectionTypes(name: String): Boolean = kotlinCollectionTypes.any { name.startsWith("$it<") }
+
+    // Basic types in Kotlin are described here: https://kotlinlang.org/docs/basic-types.html
+    private val kotlinBasicTypes: Set<String>
+        get() = setOf(
+            "Byte",
+            "Short",
+            "Int",
+            "Long",
+            "Float",
+            "Double",
+            "UByte",
+            "UShort",
+            "UInt",
+            "ULong",
+            "UByteArray",
+            "UShortArray",
+            "UIntArray",
+            "ULongArray",
+            "Boolean",
+            "Char",
+            "String",
+        )
+
+    // Collections in Kotlin are described here: https://kotlinlang.org/docs/collections-overview.html#collection
+    // and here https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections
+    private val kotlinCollectionTypes: Set<String>
+        get() = setOf(
+            "AbstractCollection",
+            "AbstractIterator",
+            "AbstractList",
+            "AbstractMap",
+            "AbstractMutableCollection",
+            "AbstractMutableList",
+            "AbstractMutableMap",
+            "AbstractMutableSet",
+            "AbstractSet",
+            "ArrayDeque",
+            "ArrayList",
+            "Array",
+            "Collection",
+            "HashMap",
+            "HashSet",
+            "LinkedHashMap",
+            "LinkedHashSet",
+            "List",
+            "Map",
+            "MutableCollection",
+            "MutableList",
+            "MutableMap",
+            "MutableSet",
+            "Set",
+        )
 }

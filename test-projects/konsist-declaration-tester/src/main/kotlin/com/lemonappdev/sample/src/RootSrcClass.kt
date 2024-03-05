@@ -1,7 +1,8 @@
 package com.lemonappdev.sample.src
 
 import com.lemonappdev.sample.src.RootSrcClass
-import sun.jvm.hotspot.oops.CellTypeState.value
+import com.lemonappdev.sample.src.RootSrcObject
+import com.lemonappdev.sample.src.RootSrcObject as ImportAlias
 
 /**
  * Root Src KDoc
@@ -30,6 +31,10 @@ var rootSrcProperty: RootSrcClass = RootSrcClass("")
         val rootSrcVariable = ""
         if (true) field = value
     }
+
+val rootSrcPropertyWithFunctionType: () -> Unit = {}
+
+val rootSrcPropertyWithImportAliasType: ImportAlias = RootSrcObject
 
 object RootSrcObject
 

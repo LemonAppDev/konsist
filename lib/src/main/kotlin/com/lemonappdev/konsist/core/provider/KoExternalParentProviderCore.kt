@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.KoExternalParentDeclaration
+import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import com.lemonappdev.konsist.api.provider.KoExternalParentProvider
 import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
 import kotlin.reflect.KClass
@@ -9,14 +9,14 @@ internal interface KoExternalParentProviderCore :
     KoExternalParentProvider,
     KoBaseProviderCore,
     KoParentProviderCore {
-    override fun externalParents(indirectParents: Boolean): List<KoExternalParentDeclaration> = parents(indirectParents)
-        .filterIsInstance<KoExternalParentDeclaration>()
+    override fun externalParents(indirectParents: Boolean): List<KoExternalDeclaration> = parents(indirectParents)
+        .filterIsInstance<KoExternalDeclaration>()
 
     override fun numExternalParents(indirectParents: Boolean): Int = externalParents(indirectParents).size
 
     override fun countExternalParents(
         indirectParents: Boolean,
-        predicate: (KoExternalParentDeclaration) -> Boolean,
+        predicate: (KoExternalDeclaration) -> Boolean,
     ): Int = externalParents(indirectParents).count { predicate(it) }
 
     override fun hasExternalParents(indirectParents: Boolean): Boolean = externalParents(indirectParents).isNotEmpty()
@@ -39,12 +39,12 @@ internal interface KoExternalParentProviderCore :
 
     override fun hasExternalParent(
         indirectParents: Boolean,
-        predicate: (KoExternalParentDeclaration) -> Boolean,
+        predicate: (KoExternalDeclaration) -> Boolean,
     ): Boolean = externalParents(indirectParents).any(predicate)
 
     override fun hasAllExternalParents(
         indirectParents: Boolean,
-        predicate: (KoExternalParentDeclaration) -> Boolean,
+        predicate: (KoExternalDeclaration) -> Boolean,
     ): Boolean = externalParents(indirectParents).all(predicate)
 
     override fun hasExternalParentOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean): Boolean =

@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.SampleClass
+import com.lemonappdev.konsist.testdata.SampleInterface
+
+class SampleClass {
+}

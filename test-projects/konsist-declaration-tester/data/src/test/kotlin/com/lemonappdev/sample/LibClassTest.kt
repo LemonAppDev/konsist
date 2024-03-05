@@ -1,6 +1,8 @@
 package com.lemonappdev.sample
 
 import com.lemonappdev.sample.LibClassTest
+import com.lemonappdev.sample.LibObject
+import com.lemonappdev.sample.LibObject as ImportAlias
 
 /**
  * Lib KDoc Test
@@ -29,6 +31,10 @@ var libPropertyTest: LibClassTest = LibClassTest("")
         val libVariableTest = ""
         if (true) field = value
     }
+
+val libPropertyWithFunctionTypeTest: () -> Unit = {}
+
+val libPropertyWithImportAliasTypeTest: ImportAlias = LibObject
 
 object LibObjectTest
 

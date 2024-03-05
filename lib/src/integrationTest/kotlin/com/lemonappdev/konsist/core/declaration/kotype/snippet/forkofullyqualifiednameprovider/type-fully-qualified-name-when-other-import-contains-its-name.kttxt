@@ -1,4 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleType
-import com.lemonappdev.konsist.testdata.testpackage.Type
-
-class SampleClass1(val sampleProperty1: Type)

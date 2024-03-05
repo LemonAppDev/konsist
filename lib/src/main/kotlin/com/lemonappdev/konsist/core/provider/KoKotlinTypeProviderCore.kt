@@ -1,83 +1,20 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
+import com.lemonappdev.konsist.core.util.TypeUtil
 
 internal interface KoKotlinTypeProviderCore :
     KoKotlinTypeProvider,
-    KoSourceAndAliasTypeProviderCore,
+    KoNameProviderCore,
     KoBaseProviderCore {
-    // Basic types in Kotlin are described here: https://kotlinlang.org/docs/basic-types.html
-    private val kotlinBasicTypes: Set<String>
-        get() = setOf(
-            "Byte",
-            "Short",
-            "Int",
-            "Long",
-            "Float",
-            "Double",
-            "UByte",
-            "UShort",
-            "UInt",
-            "ULong",
-            "UByteArray",
-            "UShortArray",
-            "UIntArray",
-            "ULongArray",
-            "Boolean",
-            "Char",
-            "String",
-        )
-
-    // Collections in Kotlin are described here: https://kotlinlang.org/docs/collections-overview.html#collection
-    // and here https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections
-    private val kotlinCollectionTypes: Set<String>
-        get() = setOf(
-            "AbstractCollection",
-            "AbstractIterator",
-            "AbstractList",
-            "AbstractMap",
-            "AbstractMutableCollection",
-            "AbstractMutableList",
-            "AbstractMutableMap",
-            "AbstractMutableSet",
-            "AbstractSet",
-            "ArrayDeque",
-            "ArrayList",
-            "Array",
-            "Collection",
-            "HashMap",
-            "HashSet",
-            "LinkedHashMap",
-            "LinkedHashSet",
-            "List",
-            "Map",
-            "MutableCollection",
-            "MutableList",
-            "MutableMap",
-            "MutableSet",
-            "Set",
-        )
-
     override val isKotlinType: Boolean
-        get() = if (isAlias) {
-            false
-        } else {
-            isKotlinBasicType || isKotlinCollectionType
-        }
+        get() = (this as? KoTypeDeclaration)?.sourceDeclaration is KoKotlinTypeDeclaration
 
     override val isKotlinBasicType: Boolean
-        get() = if (isAlias) {
-            false
-        } else {
-            val rawSourceType = bareSourceType
-            kotlinBasicTypes.any { it == rawSourceType }
-        }
+        get() = isKotlinType && TypeUtil.isKotlinBasicType(name)
 
     override val isKotlinCollectionType: Boolean
-        get() = if (isAlias) {
-            false
-        } else {
-            val rawSourceType = bareSourceType
-            kotlinCollectionTypes.any { it == rawSourceType }
-        }
+        get() = isKotlinType && TypeUtil.isKotlinCollectionTypes(name)
 }

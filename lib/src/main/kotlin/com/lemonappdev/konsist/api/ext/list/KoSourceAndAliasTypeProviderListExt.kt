@@ -68,24 +68,6 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceType(name: String, v
 }
 
 /**
- * List containing declarations with alias type of.
- *
- * @param kClass The Kotlin class representing the alias type to include
- * @param kClasses The Kotlin classes representing the alias type to include.
- * @return A list containing declarations with the alias type matching any of the specified types.
- */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withAliasTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
-    filter {
-        val hasMatchingAlias = if (kClasses.isNotEmpty()) {
-            kClasses.any { kClass -> it.sourceType == kClass.simpleName }
-        } else {
-            false
-        }
-
-        it.isAlias && (it.sourceType == kClass.simpleName || hasMatchingAlias)
-    }
-
-/**
  * List containing declarations with bare source type of.
  *
  * @param kClass The Kotlin class representing the bare source type to include.
@@ -148,53 +130,3 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBareSourceType(name: Strin
     filter {
         it.bareSourceType != name && names.none { type -> it.bareSourceType == type }
     }
-
-/**
- * List containing declarations without alias type of.
- *
- * @param kClass The Kotlin class representing the alias type to exclude.
- * @param kClasses The Kotlin classes representing the alias type to exclude.
- * @return A list containing declarations without alias type matching any of the specified types.
- */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutAliasTypeOf(
-    kClass: KClass<*>,
-    vararg kClasses: KClass<*>,
-): List<T> =
-    filterNot {
-        val hasMatchingAlias = if (kClasses.isNotEmpty()) {
-            kClasses.any { kClass -> it.sourceType == kClass.simpleName }
-        } else {
-            false
-        }
-
-        it.isAlias &&
-            (it.sourceType == kClass.simpleName || hasMatchingAlias)
-    }
-
-/**
- * List containing declarations with alias type.
- *
- * @param names The alias type names to include.
- * @return A list containing declarations with an alias type matching any of the specified names
- * (or any alias type if [names] is empty).
- */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withAliasType(vararg names: String): List<T> = filter {
-    when {
-        names.isEmpty() -> it.isAlias
-        else -> names.any { name -> it.aliasType == name }
-    }
-}
-
-/**
- * List containing declarations without alias type.
- *
- * @param names The alias type names to exclude.
- * @return A list containing declarations without an alias type matching any of the specified names
- * (or none alias type if [names] is empty).
- */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutAliasType(vararg names: String): List<T> = filter {
-    when {
-        names.isEmpty() -> !it.isAlias
-        else -> names.none { name -> it.aliasType == name }
-    }
-}
