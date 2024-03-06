@@ -23,7 +23,7 @@ class KoPackageDeclarationForKoPackageMatchingPathProviderTest {
     fun `package-without-matching-file-path`() {
         // given
         val sut =  Konsist
-            .scopeFromFile("${PathProvider.appMainSourceSetProjectDirectory}/sample/AppClassWithPackageNotMatchingPath.kt".toOsSeparator())
+            .scopeFromFile("${PathProvider.appMainSourceSetProjectDirectory}/sample/AppClassWithPackageNotMatchingToPath.kt".toOsSeparator())
             .packages
             .first()
 
