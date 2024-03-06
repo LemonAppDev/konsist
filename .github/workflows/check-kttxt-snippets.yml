@@ -30,7 +30,7 @@ jobs:
 
       - name: Echo List Changed Files
         run: |
-          echo Changed files: 
+          echo Changed files:
           echo ${{ steps.changed-files.outputs.all_changed_files }} | tr ' ' '\n'
 
       - name: Echo Run Condition (any true to run)

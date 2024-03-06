@@ -1,0 +1,191 @@
+name: Check Path
+
+on:
+  push:
+    branches: [ main ]
+
+  pull_request:
+    types: [ opened, synchronize ]
+
+jobs:
+  path-tester-project-ubuntu:
+    name: Path Tester Project Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'corretto'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+
+      - name: Run Integration Test
+        run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
+
+      - name: Upload Report
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+        uses: actions/upload-artifact@v4
+        with:
+          name: path-tester-project-ubuntu-test-report
+          path: test-projects/konsist-path-tester/app/build/reports/tests/integrationTest
+
+  path-tester-project-macos:
+    name: Path Tester Project MacOS
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'corretto'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+
+      - name: Run Integration Test
+        run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
+
+      - name: Upload Report
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+        uses: actions/upload-artifact@v4
+        with:
+          name: path-tester-project-macos-test-report
+          path: test-projects/konsist-path-tester/app/build/reports/tests/integrationTest
+
+  path-tester-project-windows:
+    name: Path Tester Project Windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: |
+            8
+            21
+          distribution: 'corretto'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+
+      - name: Run Integration Test
+        run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
+
+      - name: Upload Report
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+        uses: actions/upload-artifact@v4
+        with:
+          name: path-tester-project-windows-test-report
+          path: test-projects/konsist-path-tester/app/build/reports/tests/integrationTest
+
+  root-path-gradle-tester-ubuntu:
+    name: Root Path Tester Gradle Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'corretto'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+
+      - name: Run Root Integration Test
+        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew integrationTest
+
+      - name: Run App Integration Test
+        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew app:integrationTest
+
+      - name: Upload Report
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+        uses: actions/upload-artifact@v4
+        with:
+          name: root-path-gradle-tester-ubuntu-test-report
+          path: test-projects/konsist-root-path-gradle-tester/**/build/reports
+
+
+  root-path-gradle-tester-macos:
+    name: Root Path Tester Gradle MacOS
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'corretto'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+
+      - name: Run Root Integration Test
+        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew integrationTest
+
+      - name: Run App Integration Test
+        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew app:integrationTest
+
+      - name: Upload Report
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+        uses: actions/upload-artifact@v4
+        with:
+          name: root-path-gradle-tester-macos-test-report
+          path: test-projects/konsist-root-path-gradle-tester/**/build/reports
+
+  root-path-gradle-tester-windows:
+    name: Root Path Tester Gradle Windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: |
+            8
+            21
+          distribution: 'corretto'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+
+      - name: Run Root Integration Test
+        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew integrationTest
+
+      - name: Run App Integration Test
+        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew app:integrationTest
+
+      - name: Upload Report
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+        uses: actions/upload-artifact@v4
+        with:
+          name: root-path-gradle-tester-windows-test-report
+          path: test-projects/konsist-root-path-gradle-tester/**/build/reports
