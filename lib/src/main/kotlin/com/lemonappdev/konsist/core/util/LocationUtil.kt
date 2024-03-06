@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.util
 
 object LocationUtil {
 
+    // Todo: update comment
     /**
      *  Regex to match packages names ending with 2 (two) dots '.' at the end.
      *
