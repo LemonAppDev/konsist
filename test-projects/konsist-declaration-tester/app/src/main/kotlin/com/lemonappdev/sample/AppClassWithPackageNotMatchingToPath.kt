@@ -1,4 +1,4 @@
-@file:Suppress(detekt.InvalidPackageDeclaration)
+@file:Suppress("detekt.InvalidPackageDeclaration")
 package com.lemonappdev.sample.src
 
 class AppClassWithPackageNotMatchingToPath
