@@ -111,7 +111,7 @@ class LayerTest {
         sut shouldNotThrow KoPreconditionFailedException::class
     }
 
-    //Todo: which test is correct? This above or below?
+    // Todo: which test is correct? This above or below?
     /*
     @Test
     fun `throws an exception when the package ends with two dots and there more than two dots used as wildcard`() {
