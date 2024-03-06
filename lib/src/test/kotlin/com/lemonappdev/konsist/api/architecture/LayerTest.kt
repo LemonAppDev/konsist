@@ -112,11 +112,12 @@ class LayerTest {
     }
 
     // Todo: which test is correct? This above or below?
+
     /*
     @Test
     fun `throws an exception when the package ends with two dots and there more than two dots used as wildcard`() {
         // given
-        val sut = { Layer("Domain", "first..second.package..feature1..") }
+        val sut = { Layer("Domain", "first.second..package..feature1..") }
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage """
