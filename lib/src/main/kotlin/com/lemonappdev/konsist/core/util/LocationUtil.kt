@@ -2,21 +2,14 @@ package com.lemonappdev.konsist.core.util
 
 object LocationUtil {
 
-    // Todo: update comment
     /**
      *  Regex to match packages names ending with 2 (two) dots '.' at the end.
      *
-     *   (?:) = non-capturing group.
-     *    ^   = Matches the beginning of the string.
-     *    \w  = Matches any word char (alpha & underscore).
-     *    +   = Match 1 or more of the preceding token.
-     *    |   = OR
-     *  \.{2}?= allow using '..' as wildcard optionally (only one accepted)
-     *    \w  = Matches any word char (alpha & underscore).
-     *    +   = Match 1 or more of the preceding token.
-     *    |   = OR
-     *  \.{2} = escaped char '.' (dot) appearing 2 times
-     *    $   = Matches end of string
+     *   (?:)   = non-capturing group.
+     *  \.{0,2} = Matches zero, one, or two dots optionally.
+     *    \w+   = Matches one or more word characters (alphanumeric characters or underscore).
+     *   \.{2}  = escaped char '.' (dot) appearing 2 times
+     *     $    = Matches end of string
      */
     internal const val REGEX_PACKAGE_NAME_END_TWO_DOTS = "(?:\\.{0,2}\\w+)+\\.{2}\$"
 
