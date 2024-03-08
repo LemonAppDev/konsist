@@ -48,7 +48,7 @@ jobs:
       all_changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
       head_commit_message: ${{ github.event.head_commit.message }}
 
-  publish-konsist-to-mavel-local:
+  publish-konsist-to-maven-local:
     name: Publish Konsist To Maven Local
     runs-on: ubuntu-latest
 
@@ -70,6 +70,9 @@ jobs:
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/konsist-starter-android-gradle-groovy-junit-4/settings.gradle
 
+      - name: Publish Konsist Artifact To Local Maven Repository
+        run: ./gradlew publishToMavenLocal
+
       - name: List Konsist Files .
         run: find . -type f -iname "*konsist*"
 
@@ -78,7 +81,7 @@ jobs:
 
   konsist-starter-android-gradle-groovy-junit-4:
     name: Konsist Starter Android Gradle Groovy Junit 4
-    needs: get-github-context
+    needs: [ get-github-context, publish-konsist-to-maven-local]
     runs-on: ubuntu-latest
     if: |
       needs.get-github-context.outputs.base_ref_branch == 'main' ||
@@ -108,8 +111,7 @@ jobs:
         run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/konsist-starter-android-gradle-groovy-junit-4/konsistTest/build.gradle
 
       - name: Publish Konsist Artifact To Local Maven Repository
-        run: >
-          ./gradlew publishToMavenLocal
+        run: ./gradlew publishToMavenLocal
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-android-gradle-groovy-junit-4/ && ./gradlew konsistTest:test
