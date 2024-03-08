@@ -76,7 +76,7 @@ jobs:
       - name: Cache Konsist Artifact
         uses: actions/cache@v4
         with:
-          path: ~/.m2/com/lemonappdev/konsist
+          path: ~/.m2/repository/com/lemonappdev/konsist
           key: konsist-artifact-${{github.sha}}
 
   konsist-starter-android-gradle-groovy-junit-4:
@@ -113,7 +113,7 @@ jobs:
       - name: Restore Konsist Artifact
         uses: actions/cache/restore@v4
         with:
-          path: ~/.m2/repository
+          path: ~/.m2/repository/com/lemonappdev/konsist
           key: konsist-artifact-${{github.sha}}
 
 #      - name: Publish Konsist Artifact To Local Maven Repository
