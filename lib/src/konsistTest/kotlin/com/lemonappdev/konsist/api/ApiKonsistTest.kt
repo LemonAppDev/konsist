@@ -1,8 +1,5 @@
 package com.lemonappdev.konsist.api
 
-import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
-import com.lemonappdev.konsist.api.ext.list.sourceDeclarations
-import com.lemonappdev.konsist.api.ext.list.types
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withProperty
 import com.lemonappdev.konsist.api.ext.list.withoutName
@@ -22,10 +19,8 @@ class ApiKonsistTest {
     @Test
     fun `every api declaration has explicit return type`() {
         apiPackageScope
-            .properties()
-            .types
-            .sourceDeclarations
-            .assertTrue { it is KoInterfaceDeclaration }
+            .functions()
+            .assertTrue { it.hasReturnType() }
     }
 
     @Test
