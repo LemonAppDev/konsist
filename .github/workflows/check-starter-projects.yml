@@ -52,12 +52,7 @@ jobs:
     name: Konsist Starter Android Gradle Groovy Junit 4
     needs: get-github-context
     runs-on: ubuntu-latest
-    if: |
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -80,8 +75,7 @@ jobs:
         run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/konsist-starter-android-gradle-groovy-junit-4/konsistTest/build.gradle
 
       - name: Publish Konsist Artifact To Local Maven Repository
-        run: >
-          ./gradlew publishToMavenLocal
+        run: ./gradlew publishToMavenLocal
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-android-gradle-groovy-junit-4/ && ./gradlew konsistTest:test
@@ -91,11 +85,12 @@ jobs:
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -118,8 +113,7 @@ jobs:
         run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/konsist-starter-android-gradle-groovy-junit-5/konsistTest/build.gradle
 
       - name: Publish Konsist Artifact To Local Maven Repository
-        run: >
-          ./gradlew publishToMavenLocal
+        run: ./gradlew publishToMavenLocal
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-android-gradle-groovy-junit-5/ && ./gradlew konsistTest:test
@@ -129,11 +123,12 @@ jobs:
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -156,8 +151,7 @@ jobs:
         run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/konsist-starter-android-gradle-groovy-kotest/konsistTest/build.gradle
 
       - name: Publish Konsist Artifact To Local Maven Repository
-        run: >
-          ./gradlew publishToMavenLocal
+        run: ./gradlew publishToMavenLocal
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-android-gradle-groovy-kotest/ && ./gradlew konsistTest:test
@@ -167,11 +161,12 @@ jobs:
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -194,8 +189,7 @@ jobs:
         run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/konsist-starter-android-gradle-kotlin-junit-4/konsistTest/build.gradle.kts
 
       - name: Publish Konsist Artifact To Local Maven Repository
-        run: >
-          ./gradlew publishToMavenLocal
+        run: ./gradlew publishToMavenLocal
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-android-gradle-kotlin-junit-4/ && ./gradlew konsistTest:test
@@ -205,10 +199,10 @@ jobs:
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -232,8 +226,7 @@ jobs:
         run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/konsist-starter-android-gradle-kotlin-junit-5/konsistTest/build.gradle.kts
 
       - name: Publish Konsist Artifact To Local Maven Repository
-        run: >
-          ./gradlew publishToMavenLocal
+        run: ./gradlew publishToMavenLocal
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-android-gradle-kotlin-junit-5/ && ./gradlew konsistTest:test
@@ -243,10 +236,10 @@ jobs:
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -270,8 +263,7 @@ jobs:
         run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/konsist-starter-android-gradle-kotlin-kotest/konsistTest/build.gradle.kts
 
       - name: Publish Konsist Artifact To Local Maven Repository
-        run: >
-          ./gradlew publishToMavenLocal
+        run: ./gradlew publishToMavenLocal
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-android-gradle-kotlin-kotest/ && ./gradlew konsistTest:test
@@ -281,10 +273,10 @@ jobs:
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -308,8 +300,7 @@ jobs:
         run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/konsist-starter-spring-gradle-kotlin-junit-5/build.gradle.kts
 
       - name: Publish Konsist Artifact To Local Maven Repository
-        run: >
-          ./gradlew publishToMavenLocal
+        run: ./gradlew publishToMavenLocal
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-spring-gradle-kotlin-junit-5/ && ./gradlew konsistTest
@@ -319,10 +310,10 @@ jobs:
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -346,8 +337,7 @@ jobs:
         run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/konsist-starter-spring-gradle-kotlin-kotest/build.gradle.kts
 
       - name: Publish Konsist Artifact To Local Maven Repository
-        run: >
-          ./gradlew publishToMavenLocal
+        run: ./gradlew publishToMavenLocal
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-spring-gradle-kotlin-kotest/ && ./gradlew konsistTest
@@ -357,10 +347,10 @@ jobs:
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -384,8 +374,7 @@ jobs:
         run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/konsist-starter-spring-gradle-groovy-junit-5/build.gradle
 
       - name: Publish Konsist Artifact To Local Maven Repository
-        run: >
-          ./gradlew publishToMavenLocal
+        run: ./gradlew publishToMavenLocal
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-spring-gradle-groovy-junit-5/ && ./gradlew konsistTest
@@ -396,10 +385,10 @@ jobs:
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -423,8 +412,7 @@ jobs:
         run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/konsist-starter-spring-gradle-groovy-kotest/build.gradle
 
       - name: Publish Konsist Artifact To Local Maven Repository
-        run: >
-          ./gradlew publishToMavenLocal
+        run: ./gradlew publishToMavenLocal
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-spring-gradle-groovy-kotest/ && ./gradlew konsistTest
@@ -434,10 +422,10 @@ jobs:
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -461,22 +449,20 @@ jobs:
         run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/konsist-starter-spring-maven-junit5/pom.xml
 
       - name: Publish Konsist Artifact To Local Maven Repository
-        run: >
-          ./gradlew publishToMavenLocal
+        run: ./gradlew publishToMavenLocal
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-spring-maven-junit5/ && mvn test
-
 
   konsist-starter-spring-maven-kotest:
     name: Konsist Starter Spring Maven Kotest
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -500,8 +486,7 @@ jobs:
         run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/konsist-starter-spring-maven-kotest/pom.xml
 
       - name: Publish Konsist Artifact To Local Maven Repository
-        run: >
-          ./gradlew publishToMavenLocal
+        run: ./gradlew publishToMavenLocal
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-spring-maven-kotest/ && mvn test
@@ -511,11 +496,12 @@ jobs:
 #    needs: get-github-context
 #    runs-on: ubuntu-latest
 #    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
 #      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
 #      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
 #      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
 #      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#
 #    steps:
 #      - name: Checkout
 #        uses: actions/checkout@v4
@@ -538,8 +524,7 @@ jobs:
 #        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/konsist-starter-kmp-gradle-kotlin-junit5/build.gradle.kts
 #
 #      - name: Publish Konsist Artifact To Local Maven Repository
-#        run: >
-#          ./gradlew publishToMavenLocal
+#        run: ./gradlew publishToMavenLocal
 #
 #      - name: Run Konsist Test
 #        run: cd samples/starter-projects/konsist-starter-kmp-gradle-kotlin-junit5/ && ./gradlew test
@@ -550,11 +535,12 @@ jobs:
 #    needs: get-github-context
 #    runs-on: ubuntu-latest
 #    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
 #      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
 #      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
 #      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
 #      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#
 #    steps:
 #      - name: Checkout
 #        uses: actions/checkout@v4
@@ -577,8 +563,7 @@ jobs:
 #        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/konsist-starter-kmp-gradle-kotlin-kotest/build.gradle.kts
 #
 #      - name: Publish Konsist Artifact To Local Maven Repository
-#        run: >
-#          ./gradlew publishToMavenLocal
+#        run: ./gradlew publishToMavenLocal
 #
 #      - name: Run Konsist Test
 #        run: cd samples/starter-projects/konsist-starter-kmp-gradle-kotlin-kotest/ && ./gradlew test
