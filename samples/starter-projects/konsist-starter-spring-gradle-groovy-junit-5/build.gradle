@@ -26,6 +26,7 @@ dependencies {
 
 kotlin {
 	jvmToolchain(21)
+	languageVersion.set(JavaLanguageVersion.of(21))
 }
 
 tasks.named('test') {
