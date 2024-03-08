@@ -19,10 +19,28 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
      * Represents the source declaration associated with this type.
      *
      * The `sourceDeclaration` property provides access to the declaration of the type within the Kotlin codebase.
-     * It points to an instance of [KoBaseTypeDeclaration], which serves as the base interface for various types of
-     * declarations in Kotlin.
-     * This allows retrieving additional information about the declaration, such as its properties, functions,
+     * It allows to retrie additional information about the source declaration, such as its properties, functions,
      * annotations, and other relevant metadata.
+     *
+     * It points to an instance of [KoBaseTypeDeclaration], which serves as the base interface for various types:
+     *  - `KoClassDeclaration` represents class
+     *  - `KoInterfaceDeclaration` represents interface
+     *  - `KoObjectDeclaration` represents object
+     *  - `KoTypeAliasDeclaration` represents type alias
+     *  - `KoImportAliasDeclaration` represents import alias
+     *  - `KoKotlinTypeDeclaration` represents kotlin basic types and collections
+     *  - `KoFunctionDeclaration` represents function type
+     *  - `KoExternalDeclaration` represents declaration which is not defined in the project
+     *
+     *  e.g.
+     *
+     *  ```kotlin
+     *  scope
+     *      .properties()
+     *      .types
+     *      .sourceDeclarations
+     *      .assertTrue { it is KoInterfaceDeclaration }
+     *  ```
      */
     val sourceDeclaration: KoBaseTypeDeclaration
 
