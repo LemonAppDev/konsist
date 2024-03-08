@@ -68,6 +68,8 @@ interface SampleGenericSuperInterface<T>
 
 object SampleObject
 
+typealias SampleTypeAlias = (SampleClass) -> Unit
+
 annotation class NonExistingAnnotation
 
 @Target(
