@@ -12,12 +12,6 @@ jobs:
   get-github-context:
     name: Get GitHub Context
     runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
 
     steps:
       - name: Get branch name
@@ -58,6 +52,7 @@ jobs:
     name: Konsist Starter Android Gradle Groovy Junit 4
     needs: get-github-context
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -89,6 +84,13 @@ jobs:
     name: Konsist Starter Android Gradle Groovy Junit 5
     needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -120,6 +122,13 @@ jobs:
     name: Konsist Starter Android Gradle Groovy Kotest
     needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -151,6 +160,13 @@ jobs:
     name: Konsist Starter Android Gradle Kotlin Junit 4
     needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -182,6 +198,12 @@ jobs:
     name: Konsist Starter Android Gradle Kotlin Junit 5
     needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -213,6 +235,12 @@ jobs:
     name: Konsist Starter Android Gradle Kotlin Kotest
     needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -244,6 +272,12 @@ jobs:
     name: Konsist Starter Spring Gradle Kotlin Junit 5
     needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -275,6 +309,12 @@ jobs:
     name: Konsist Starter Spring Gradle Groovy Kotest
     needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -306,6 +346,12 @@ jobs:
     name: Konsist Starter Spring Gradle Groovy Junit 5
     needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -338,6 +384,12 @@ jobs:
     name: Konsist Starter Spring Gradle Groovy Kotest
     needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -369,6 +421,12 @@ jobs:
     name: Konsist Starter Spring Maven Junit 5
     needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -396,11 +454,16 @@ jobs:
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-spring-maven-junit5/ && mvn test
 
-
   konsist-starter-spring-maven-kotest:
     name: Konsist Starter Spring Maven Kotest
     needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -432,6 +495,13 @@ jobs:
 #    name: Konsist Starter KMP Gradle Kotlin Junit 5
 #    needs: get-github-context
 #    runs-on: ubuntu-latest
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#
 #    steps:
 #      - name: Checkout
 #        uses: actions/checkout@v4
@@ -464,6 +534,13 @@ jobs:
 #    name: Konsist Starter KMP Gradle Kotlin Kotest
 #    needs: get-github-context
 #    runs-on: ubuntu-latest
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#
 #    steps:
 #      - name: Checkout
 #        uses: actions/checkout@v4
