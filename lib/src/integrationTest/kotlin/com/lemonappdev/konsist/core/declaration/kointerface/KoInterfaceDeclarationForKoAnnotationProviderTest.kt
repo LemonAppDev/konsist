@@ -13,9 +13,10 @@ class KoInterfaceDeclarationForKoAnnotationProviderTest {
     @Test
     fun `interface-has-no-annotation`() {
         // given
-        val sut = getSnippetFile("interface-has-no-annotation")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-no-annotation")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -36,9 +37,10 @@ class KoInterfaceDeclarationForKoAnnotationProviderTest {
     @Test
     fun `interface-has-annotation`() {
         // given
-        val sut = getSnippetFile("interface-has-annotation")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-annotation")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -83,9 +85,10 @@ class KoInterfaceDeclarationForKoAnnotationProviderTest {
     @Test
     fun `interface-has-two-annotations`() {
         // given
-        val sut = getSnippetFile("interface-has-two-annotations")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-two-annotations")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -141,9 +144,10 @@ class KoInterfaceDeclarationForKoAnnotationProviderTest {
     @Test
     fun `interface-has-suppress-annotation-without-import`() {
         // given
-        val sut = getSnippetFile("interface-has-suppress-annotation-without-import")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-suppress-annotation-without-import")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {

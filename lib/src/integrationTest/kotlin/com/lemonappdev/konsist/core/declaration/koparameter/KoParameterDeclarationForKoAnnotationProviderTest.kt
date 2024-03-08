@@ -13,12 +13,13 @@ class KoParameterDeclarationForKoAnnotationProviderTest {
     @Test
     fun `parameter-has-no-annotation`() {
         // given
-        val sut = getSnippetFile("parameter-has-no-annotation")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
+        val sut =
+            getSnippetFile("parameter-has-no-annotation")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
         assertSoftly(sut) {
@@ -39,12 +40,13 @@ class KoParameterDeclarationForKoAnnotationProviderTest {
     @Test
     fun `parameter-has-annotation`() {
         // given
-        val sut = getSnippetFile("parameter-has-annotation")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
+        val sut =
+            getSnippetFile("parameter-has-annotation")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
         assertSoftly(sut) {
@@ -89,12 +91,13 @@ class KoParameterDeclarationForKoAnnotationProviderTest {
     @Test
     fun `parameter-has-two-annotations`() {
         // given
-        val sut = getSnippetFile("parameter-has-two-annotations")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
+        val sut =
+            getSnippetFile("parameter-has-two-annotations")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
         assertSoftly(sut) {
@@ -150,12 +153,13 @@ class KoParameterDeclarationForKoAnnotationProviderTest {
     @Test
     fun `parameter-has-suppress-annotation-without-import`() {
         // given
-        val sut = getSnippetFile("parameter-has-suppress-annotation-without-import")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
+        val sut =
+            getSnippetFile("parameter-has-suppress-annotation-without-import")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
         assertSoftly(sut) {

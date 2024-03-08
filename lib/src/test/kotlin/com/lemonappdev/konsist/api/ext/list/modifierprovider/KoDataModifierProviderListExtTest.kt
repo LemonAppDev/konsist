@@ -10,12 +10,14 @@ class KoDataModifierProviderListExtTest {
     @Test
     fun `withDataModifier() returns declaration with data modifier`() {
         // given
-        val declaration1: KoDataModifierProvider = mockk {
-            every { hasDataModifier } returns true
-        }
-        val declaration2: KoDataModifierProvider = mockk {
-            every { hasDataModifier } returns false
-        }
+        val declaration1: KoDataModifierProvider =
+            mockk {
+                every { hasDataModifier } returns true
+            }
+        val declaration2: KoDataModifierProvider =
+            mockk {
+                every { hasDataModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -28,12 +30,14 @@ class KoDataModifierProviderListExtTest {
     @Test
     fun `withoutDataModifier() returns declaration without data modifier`() {
         // given
-        val declaration1: KoDataModifierProvider = mockk {
-            every { hasDataModifier } returns true
-        }
-        val declaration2: KoDataModifierProvider = mockk {
-            every { hasDataModifier } returns false
-        }
+        val declaration1: KoDataModifierProvider =
+            mockk {
+                every { hasDataModifier } returns true
+            }
+        val declaration2: KoDataModifierProvider =
+            mockk {
+                every { hasDataModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

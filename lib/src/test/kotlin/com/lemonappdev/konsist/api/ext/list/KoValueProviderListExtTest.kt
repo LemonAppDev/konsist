@@ -10,12 +10,14 @@ class KoValueProviderListExtTest {
     @Test
     fun `withValue() returns declaration with any value`() {
         // given
-        val declaration1: KoValueProvider = mockk {
-            every { hasValue() } returns true
-        }
-        val declaration2: KoValueProvider = mockk {
-            every { hasValue() } returns false
-        }
+        val declaration1: KoValueProvider =
+            mockk {
+                every { hasValue() } returns true
+            }
+        val declaration2: KoValueProvider =
+            mockk {
+                every { hasValue() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -28,12 +30,14 @@ class KoValueProviderListExtTest {
     @Test
     fun `withoutValue() returns declaration without value`() {
         // given
-        val declaration1: KoValueProvider = mockk {
-            every { hasValue() } returns true
-        }
-        val declaration2: KoValueProvider = mockk {
-            every { hasValue() } returns false
-        }
+        val declaration1: KoValueProvider =
+            mockk {
+                every { hasValue() } returns true
+            }
+        val declaration2: KoValueProvider =
+            mockk {
+                every { hasValue() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -48,18 +52,21 @@ class KoValueProviderListExtTest {
         // given
         val value1 = "value1"
         val value2 = "value2"
-        val declaration1: KoValueProvider = mockk {
-            every { hasValue(value1) } returns true
-            every { hasValue(value2) } returns false
-        }
-        val declaration2: KoValueProvider = mockk {
-            every { hasValue(value1) } returns false
-            every { hasValue(value2) } returns true
-        }
-        val declaration3: KoValueProvider = mockk {
-            every { hasValue(value1) } returns false
-            every { hasValue(value2) } returns false
-        }
+        val declaration1: KoValueProvider =
+            mockk {
+                every { hasValue(value1) } returns true
+                every { hasValue(value2) } returns false
+            }
+        val declaration2: KoValueProvider =
+            mockk {
+                every { hasValue(value1) } returns false
+                every { hasValue(value2) } returns true
+            }
+        val declaration3: KoValueProvider =
+            mockk {
+                every { hasValue(value1) } returns false
+                every { hasValue(value2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -74,18 +81,21 @@ class KoValueProviderListExtTest {
         // given
         val value1 = "value1"
         val value2 = "value2"
-        val declaration1: KoValueProvider = mockk {
-            every { hasValue(value1) } returns true
-            every { hasValue(value2) } returns false
-        }
-        val declaration2: KoValueProvider = mockk {
-            every { hasValue(value1) } returns false
-            every { hasValue(value2) } returns true
-        }
-        val declaration3: KoValueProvider = mockk {
-            every { hasValue(value1) } returns false
-            every { hasValue(value2) } returns false
-        }
+        val declaration1: KoValueProvider =
+            mockk {
+                every { hasValue(value1) } returns true
+                every { hasValue(value2) } returns false
+            }
+        val declaration2: KoValueProvider =
+            mockk {
+                every { hasValue(value1) } returns false
+                every { hasValue(value2) } returns true
+            }
+        val declaration3: KoValueProvider =
+            mockk {
+                every { hasValue(value1) } returns false
+                every { hasValue(value2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -101,15 +111,18 @@ class KoValueProviderListExtTest {
         val value1 = "value1"
         val value2 = "value2"
         val predicate: (String) -> Boolean = { it == value1 }
-        val declaration1: KoValueProvider = mockk {
-            every { value } returns value1
-        }
-        val declaration2: KoValueProvider = mockk {
-            every { value } returns value2
-        }
-        val declaration3: KoValueProvider = mockk {
-            every { value } returns null
-        }
+        val declaration1: KoValueProvider =
+            mockk {
+                every { value } returns value1
+            }
+        val declaration2: KoValueProvider =
+            mockk {
+                every { value } returns value2
+            }
+        val declaration3: KoValueProvider =
+            mockk {
+                every { value } returns null
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -125,15 +138,18 @@ class KoValueProviderListExtTest {
         val value1 = "value1"
         val value2 = "value2"
         val predicate: (String) -> Boolean = { it == value1 }
-        val declaration1: KoValueProvider = mockk {
-            every { value } returns value1
-        }
-        val declaration2: KoValueProvider = mockk {
-            every { value } returns value2
-        }
-        val declaration3: KoValueProvider = mockk {
-            every { value } returns null
-        }
+        val declaration1: KoValueProvider =
+            mockk {
+                every { value } returns value1
+            }
+        val declaration2: KoValueProvider =
+            mockk {
+                every { value } returns value2
+            }
+        val declaration3: KoValueProvider =
+            mockk {
+                every { value } returns null
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when

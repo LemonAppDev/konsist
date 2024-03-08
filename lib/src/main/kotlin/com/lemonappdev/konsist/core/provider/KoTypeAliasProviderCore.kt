@@ -14,16 +14,16 @@ internal interface KoTypeAliasProviderCore :
     val ktFile: KtFile
 
     override val typeAliases: List<KoTypeAliasDeclaration>
-        get() = ktFile
-            .children
-            .filterIsInstance<KtTypeAlias>()
-            .map { KoTypeAliasDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
+        get() =
+            ktFile
+                .children
+                .filterIsInstance<KtTypeAlias>()
+                .map { KoTypeAliasDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
 
     override val numTypeAliases: Int
         get() = typeAliases.size
 
-    override fun countTypeAliases(predicate: (KoTypeAliasDeclaration) -> Boolean): Int =
-        typeAliases.count { predicate(it) }
+    override fun countTypeAliases(predicate: (KoTypeAliasDeclaration) -> Boolean): Int = typeAliases.count { predicate(it) }
 
     @Deprecated(
         """
@@ -31,16 +31,21 @@ internal interface KoTypeAliasProviderCore :
             If you passed one argument - replace with `hasTypeAliasWithName`, otherwise with `hasTypeAliasesWithAllNames`.
             """,
     )
-    override fun hasTypeAliases(vararg names: String): Boolean = when {
-        names.isEmpty() -> typeAliases.isNotEmpty()
-        else -> names.all {
-            typeAliases.any { typeAlias -> typeAlias.name == it }
+    override fun hasTypeAliases(vararg names: String): Boolean =
+        when {
+            names.isEmpty() -> typeAliases.isNotEmpty()
+            else ->
+                names.all {
+                    typeAliases.any { typeAlias -> typeAlias.name == it }
+                }
         }
-    }
 
     override fun hasTypeAliases(): Boolean = typeAliases.isNotEmpty()
 
-    override fun hasTypeAliasWithName(name: String, vararg names: String): Boolean {
+    override fun hasTypeAliasWithName(
+        name: String,
+        vararg names: String,
+    ): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.any {
@@ -48,7 +53,10 @@ internal interface KoTypeAliasProviderCore :
         }
     }
 
-    override fun hasTypeAliasesWithAllNames(name: String, vararg names: String): Boolean {
+    override fun hasTypeAliasesWithAllNames(
+        name: String,
+        vararg names: String,
+    ): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.all {

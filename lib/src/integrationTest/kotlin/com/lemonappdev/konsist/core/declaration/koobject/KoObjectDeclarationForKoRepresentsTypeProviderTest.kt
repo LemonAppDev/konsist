@@ -14,9 +14,10 @@ class KoObjectDeclarationForKoRepresentsTypeProviderTest {
         value: Boolean,
     ) {
         // given
-        val sut = getSnippetFile("object-represents-type")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-represents-type")
+                .objects()
+                .first()
 
         // then
         sut.representsType(type) shouldBeEqualTo value
@@ -29,12 +30,13 @@ class KoObjectDeclarationForKoRepresentsTypeProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("SampleObject", true),
-            arguments("OtherObject", false),
-            arguments("com.lemonappdev.konsist.testdata.SampleObject", true),
-            arguments("com.lemonappdev.konsist.testdata.OtherObject", false),
-            arguments(null, false),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("SampleObject", true),
+                arguments("OtherObject", false),
+                arguments("com.lemonappdev.konsist.testdata.SampleObject", true),
+                arguments("com.lemonappdev.konsist.testdata.OtherObject", false),
+                arguments(null, false),
+            )
     }
 }

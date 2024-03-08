@@ -8,9 +8,10 @@ class KoFunctionDeclarationForKoExpectModifierProviderTest {
     @Test
     fun `function-without-expect-modifier`() {
         // given
-        val sut = getSnippetFile("function-without-expect-modifier")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-without-expect-modifier")
+                .functions()
+                .first()
 
         // then
         sut.hasExpectModifier shouldBeEqualTo false
@@ -19,9 +20,10 @@ class KoFunctionDeclarationForKoExpectModifierProviderTest {
     @Test
     fun `function-with-expect-modifier`() {
         // given
-        val sut = getSnippetFile("function-with-expect-modifier")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-with-expect-modifier")
+                .functions()
+                .first()
 
         // then
         sut.hasExpectModifier shouldBeEqualTo true

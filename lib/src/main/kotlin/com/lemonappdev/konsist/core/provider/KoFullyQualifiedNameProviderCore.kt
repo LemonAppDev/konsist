@@ -13,23 +13,25 @@ internal interface KoFullyQualifiedNameProviderCore :
 
     override val fullyQualifiedName: String
         get() {
-            var fqn = containingFile
-                .imports
-                .map { it.name }
-                .firstOrNull { it.isFullyQualifiedName() }
+            var fqn =
+                containingFile
+                    .imports
+                    .map { it.name }
+                    .firstOrNull { it.isFullyQualifiedName() }
 
             if (fqn == null) {
-                fqn = containingFile
-                    .declarations()
-                    .filterNot {
-                        if (this is KoAnnotationDeclaration) {
-                            it is KoAnnotationDeclaration
-                        } else {
-                            false
+                fqn =
+                    containingFile
+                        .declarations()
+                        .filterNot {
+                            if (this is KoAnnotationDeclaration) {
+                                it is KoAnnotationDeclaration
+                            } else {
+                                false
+                            }
                         }
-                    }
-                    .mapNotNull { (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName }
-                    .firstOrNull { it.isFullyQualifiedName() }
+                        .mapNotNull { (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName }
+                        .firstOrNull { it.isFullyQualifiedName() }
             }
 
             return fqn ?: textUsedToFqn

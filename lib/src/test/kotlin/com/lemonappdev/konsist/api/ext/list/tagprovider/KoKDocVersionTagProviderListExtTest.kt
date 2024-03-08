@@ -10,12 +10,14 @@ class KoKDocVersionTagProviderListExtTest {
     @Test
     fun `withVersionTag() returns declaration with any tag`() {
         // given
-        val declaration1: KoKDocVersionTagProvider = mockk {
-            every { hasVersionTag } returns true
-        }
-        val declaration2: KoKDocVersionTagProvider = mockk {
-            every { hasVersionTag } returns false
-        }
+        val declaration1: KoKDocVersionTagProvider =
+            mockk {
+                every { hasVersionTag } returns true
+            }
+        val declaration2: KoKDocVersionTagProvider =
+            mockk {
+                every { hasVersionTag } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -28,12 +30,14 @@ class KoKDocVersionTagProviderListExtTest {
     @Test
     fun `withoutVersionTag() returns declaration with any tag`() {
         // given
-        val declaration1: KoKDocVersionTagProvider = mockk {
-            every { hasVersionTag } returns true
-        }
-        val declaration2: KoKDocVersionTagProvider = mockk {
-            every { hasVersionTag } returns false
-        }
+        val declaration1: KoKDocVersionTagProvider =
+            mockk {
+                every { hasVersionTag } returns true
+            }
+        val declaration2: KoKDocVersionTagProvider =
+            mockk {
+                every { hasVersionTag } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

@@ -35,7 +35,10 @@ interface KoParentClassProvider : KoBaseProvider {
      * @param predicate The predicate function to determine if a parent class satisfies a condition.
      * @return The number of parent classes in the declaration satisfying predicate.
      */
-    fun countParentClasses(indirectParents: Boolean = false, predicate: (KoClassDeclaration) -> Boolean): Int
+    fun countParentClasses(
+        indirectParents: Boolean = false,
+        predicate: (KoClassDeclaration) -> Boolean,
+    ): Int
 
     /**
      * Determines whether declaration has a direct parent class.
@@ -52,7 +55,10 @@ interface KoParentClassProvider : KoBaseProvider {
      * @param predicate A function that defines the condition to be met by a parent class.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasParentClass(indirectParents: Boolean = false, predicate: (KoClassDeclaration) -> Boolean): Boolean
+    fun hasParentClass(
+        indirectParents: Boolean = false,
+        predicate: (KoClassDeclaration) -> Boolean,
+    ): Boolean
 
     /**
      * Determines whatever declaration has any parent class.
@@ -72,7 +78,10 @@ interface KoParentClassProvider : KoBaseProvider {
      * @param predicate A function that defines the condition to be met by parent classes.
      * @return `true` if all parent classes satisfy the predicate, `false` otherwise.
      */
-    fun hasAllParentClasses(indirectParents: Boolean = false, predicate: (KoClassDeclaration) -> Boolean): Boolean
+    fun hasAllParentClasses(
+        indirectParents: Boolean = false,
+        predicate: (KoClassDeclaration) -> Boolean,
+    ): Boolean
 
     /**
      * Determines whether declaration has a specified parent class.
@@ -92,7 +101,11 @@ interface KoParentClassProvider : KoBaseProvider {
      * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasParentClassWithName(name: String, vararg names: String, indirectParents: Boolean = false): Boolean
+    fun hasParentClassWithName(
+        name: String,
+        vararg names: String,
+        indirectParents: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has parent classes with all the specified names.
@@ -102,7 +115,11 @@ interface KoParentClassProvider : KoBaseProvider {
      * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasParentClassesWithAllNames(name: String, vararg names: String, indirectParents: Boolean = false): Boolean
+    fun hasParentClassesWithAllNames(
+        name: String,
+        vararg names: String,
+        indirectParents: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has a parent class of the specified Kotlin class.
@@ -113,7 +130,11 @@ interface KoParentClassProvider : KoBaseProvider {
      * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasParentClassOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean = false): Boolean
+    fun hasParentClassOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+        indirectParents: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has parent classes with all the specified `KClass` type.
@@ -123,5 +144,9 @@ interface KoParentClassProvider : KoBaseProvider {
      * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
      * @return `true` if the declaration has parent classes of all the specified `KClass` types, `false` otherwise.
      */
-    fun hasAllParentClassesOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean = false): Boolean
+    fun hasAllParentClassesOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+        indirectParents: Boolean = false,
+    ): Boolean
 }

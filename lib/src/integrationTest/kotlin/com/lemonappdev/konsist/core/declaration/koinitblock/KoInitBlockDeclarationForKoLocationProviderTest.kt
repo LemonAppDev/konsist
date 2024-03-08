@@ -10,10 +10,11 @@ class KoInitBlockDeclarationForKoLocationProviderTest {
     @Test
     fun `init-block-location-with-single-digit`() {
         // given
-        val sut = getSnippetFile("init-block-location-with-single-digit")
-            .classes()
-            .initBlocks
-            .first()
+        val sut =
+            getSnippetFile("init-block-location-with-single-digit")
+                .classes()
+                .initBlocks
+                .first()
 
         // then
         sut.location shouldBeEqualTo "${sut.path}:2:5"
@@ -22,16 +23,18 @@ class KoInitBlockDeclarationForKoLocationProviderTest {
     @Test
     fun `init-block-location-with-text`() {
         // given
-        val projectPath = getSnippetFile("init-block-location-with-text")
-            .classes()
-            .initBlocks
-            .first()
-            .projectPath
+        val projectPath =
+            getSnippetFile("init-block-location-with-text")
+                .classes()
+                .initBlocks
+                .first()
+                .projectPath
 
-        val sut = getSnippetFile("init-block-location-with-text")
-            .classes()
-            .initBlocks
-            .first()
+        val sut =
+            getSnippetFile("init-block-location-with-text")
+                .classes()
+                .initBlocks
+                .first()
 
         // then
         assertSoftly(sut.locationWithText) {

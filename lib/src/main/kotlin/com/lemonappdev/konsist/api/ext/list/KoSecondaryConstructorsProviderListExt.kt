@@ -14,16 +14,14 @@ val <T : KoSecondaryConstructorsProvider> List<T>.secondaryConstructors: List<Ko
  *
  * @return A list containing declarations with secondary constructor(s).
  */
-fun <T : KoSecondaryConstructorsProvider> List<T>.withSecondaryConstructors(): List<T> =
-    filter { it.hasSecondaryConstructors() }
+fun <T : KoSecondaryConstructorsProvider> List<T>.withSecondaryConstructors(): List<T> = filter { it.hasSecondaryConstructors() }
 
 /**
  * List containing declarations that don't have secondary constructors.
  *
  * @return A list containing declarations without secondary constructor(s).
  */
-fun <T : KoSecondaryConstructorsProvider> List<T>.withoutSecondaryConstructors(): List<T> =
-    filterNot { it.hasSecondaryConstructors() }
+fun <T : KoSecondaryConstructorsProvider> List<T>.withoutSecondaryConstructors(): List<T> = filterNot { it.hasSecondaryConstructors() }
 
 /**
  * List containing declarations that have at least one secondary constructor satisfying the provided predicate.
@@ -33,8 +31,7 @@ fun <T : KoSecondaryConstructorsProvider> List<T>.withoutSecondaryConstructors()
  */
 fun <T : KoSecondaryConstructorsProvider> List<T>.withSecondaryConstructor(
     predicate: (KoSecondaryConstructorDeclaration) -> Boolean,
-): List<T> =
-    filter { it.hasSecondaryConstructor(predicate) }
+): List<T> = filter { it.hasSecondaryConstructor(predicate) }
 
 /**
  * List containing declarations that not have secondary constructor satisfying the provided predicate.
@@ -44,8 +41,7 @@ fun <T : KoSecondaryConstructorsProvider> List<T>.withSecondaryConstructor(
  */
 fun <T : KoSecondaryConstructorsProvider> List<T>.withoutSecondaryConstructor(
     predicate: (KoSecondaryConstructorDeclaration) -> Boolean,
-): List<T> =
-    filterNot { it.hasSecondaryConstructor(predicate) }
+): List<T> = filterNot { it.hasSecondaryConstructor(predicate) }
 
 /**
  * List containing declarations that have all secondary constructors satisfying the provided predicate.
@@ -55,8 +51,7 @@ fun <T : KoSecondaryConstructorsProvider> List<T>.withoutSecondaryConstructor(
  */
 fun <T : KoSecondaryConstructorsProvider> List<T>.withAllSecondaryConstructors(
     predicate: (KoSecondaryConstructorDeclaration) -> Boolean,
-): List<T> =
-    filter { it.hasAllSecondaryConstructors(predicate) }
+): List<T> = filter { it.hasAllSecondaryConstructors(predicate) }
 
 /**
  * List containing declarations that have at least one secondary constructor not satisfying the provided predicate.
@@ -66,8 +61,7 @@ fun <T : KoSecondaryConstructorsProvider> List<T>.withAllSecondaryConstructors(
  */
 fun <T : KoSecondaryConstructorsProvider> List<T>.withoutAllSecondaryConstructors(
     predicate: (KoSecondaryConstructorDeclaration) -> Boolean,
-): List<T> =
-    filterNot { it.hasAllSecondaryConstructors(predicate) }
+): List<T> = filterNot { it.hasAllSecondaryConstructors(predicate) }
 
 /**
  * List containing declarations with secondary constructor declarations satisfying the predicate.
@@ -77,8 +71,7 @@ fun <T : KoSecondaryConstructorsProvider> List<T>.withoutAllSecondaryConstructor
  */
 fun <T : KoSecondaryConstructorsProvider> List<T>.withSecondaryConstructors(
     predicate: (List<KoSecondaryConstructorDeclaration>) -> Boolean,
-): List<T> =
-    filter { predicate(it.secondaryConstructors) }
+): List<T> = filter { predicate(it.secondaryConstructors) }
 
 /**
  * List containing declarations without secondary constructor declarations satisfying the predicate.
@@ -88,5 +81,4 @@ fun <T : KoSecondaryConstructorsProvider> List<T>.withSecondaryConstructors(
  */
 fun <T : KoSecondaryConstructorsProvider> List<T>.withoutSecondaryConstructors(
     predicate: (List<KoSecondaryConstructorDeclaration>) -> Boolean,
-): List<T> =
-    filterNot { predicate(it.secondaryConstructors) }
+): List<T> = filterNot { predicate(it.secondaryConstructors) }

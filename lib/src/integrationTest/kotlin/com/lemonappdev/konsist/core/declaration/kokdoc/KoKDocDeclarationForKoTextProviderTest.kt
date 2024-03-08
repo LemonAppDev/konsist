@@ -17,10 +17,11 @@ class KoKDocDeclarationForKoTextProviderTest {
         isBlank: Boolean,
     ) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut?.text) {
@@ -37,10 +38,11 @@ class KoKDocDeclarationForKoTextProviderTest {
         isBlank: Boolean,
     ) {
         // given
-        val sut = getSnippetFile(fileName)
-            .functions(includeNested = true)
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile(fileName)
+                .functions(includeNested = true)
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut?.text) {
@@ -57,10 +59,11 @@ class KoKDocDeclarationForKoTextProviderTest {
         isBlank: Boolean,
     ) {
         // given
-        val sut = getSnippetFile(fileName)
-            .properties(includeNested = true)
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile(fileName)
+                .properties(includeNested = true)
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut?.text) {
@@ -69,51 +72,53 @@ class KoKDocDeclarationForKoTextProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kokdoc/snippet/forkotextprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kokdoc/snippet/forkotextprovider/", fileName)
 
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForClass() = listOf(
-            arguments("class-with-description-and-tags", "This is a sample class that demonstrates the usage of KDoc tags.", false),
-            arguments(
-                "class-with-description-and-without-tags",
-                "This is a sample class that demonstrates the usage of KDoc tags.",
-                false,
-            ),
-            arguments("class-without-description-and-with-tags", "", false),
-            arguments("class-with-empty-kdoc", "", true),
-        )
+        fun provideValuesForClass() =
+            listOf(
+                arguments("class-with-description-and-tags", "This is a sample class that demonstrates the usage of KDoc tags.", false),
+                arguments(
+                    "class-with-description-and-without-tags",
+                    "This is a sample class that demonstrates the usage of KDoc tags.",
+                    false,
+                ),
+                arguments("class-without-description-and-with-tags", "", false),
+                arguments("class-with-empty-kdoc", "", true),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForFunction() = listOf(
-            arguments("function-with-description-and-tags", "This is a sample method that demonstrates the usage of KDoc tags.", false),
-            arguments(
-                "function-with-description-and-without-tags",
-                "This is a sample method that demonstrates the usage of KDoc tags.",
-                false,
-            ),
-            arguments("function-without-description-and-with-tags", "", false),
-            arguments("function-with-empty-kdoc", "", true),
-        )
+        fun provideValuesForFunction() =
+            listOf(
+                arguments("function-with-description-and-tags", "This is a sample method that demonstrates the usage of KDoc tags.", false),
+                arguments(
+                    "function-with-description-and-without-tags",
+                    "This is a sample method that demonstrates the usage of KDoc tags.",
+                    false,
+                ),
+                arguments("function-without-description-and-with-tags", "", false),
+                arguments("function-with-empty-kdoc", "", true),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForProperty() = listOf(
-            arguments(
-                "property-with-description-and-tags",
-                "This is a sample property that demonstrates the usage of KDoc tags.",
-                false,
-            ),
-            arguments(
-                "property-with-description-and-without-tags",
-                "This is a sample property that demonstrates the usage of KDoc tags.",
-                false,
-            ),
-            arguments("property-without-description-and-with-tags", "", false),
-            arguments("property-with-empty-kdoc", "", true),
-        )
+        fun provideValuesForProperty() =
+            listOf(
+                arguments(
+                    "property-with-description-and-tags",
+                    "This is a sample property that demonstrates the usage of KDoc tags.",
+                    false,
+                ),
+                arguments(
+                    "property-with-description-and-without-tags",
+                    "This is a sample property that demonstrates the usage of KDoc tags.",
+                    false,
+                ),
+                arguments("property-without-description-and-with-tags", "", false),
+                arguments("property-with-empty-kdoc", "", true),
+            )
     }
 }

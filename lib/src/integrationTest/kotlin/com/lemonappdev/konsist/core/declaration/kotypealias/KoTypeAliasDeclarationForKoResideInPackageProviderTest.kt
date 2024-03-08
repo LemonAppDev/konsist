@@ -8,9 +8,10 @@ class KoTypeAliasDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `typealias-not-reside-in-file-package`() {
         // given
-        val sut = getSnippetFile("typealias-not-reside-in-file-package")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-not-reside-in-file-package")
+                .typeAliases
+                .first()
 
         // then
         sut.resideInPackage("com") shouldBeEqualTo false
@@ -19,9 +20,10 @@ class KoTypeAliasDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `typealias-reside-in-file-package`() {
         // given
-        val sut = getSnippetFile("typealias-reside-in-file-package")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-reside-in-file-package")
+                .typeAliases
+                .first()
 
         // then
         sut.resideInPackage("com..") shouldBeEqualTo true
@@ -30,9 +32,10 @@ class KoTypeAliasDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `typealias-not-reside-outside-file-package`() {
         // given
-        val sut = getSnippetFile("typealias-not-reside-outside-file-package")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-not-reside-outside-file-package")
+                .typeAliases
+                .first()
 
         // then
         sut.resideOutsidePackage("com..") shouldBeEqualTo false
@@ -41,9 +44,10 @@ class KoTypeAliasDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `typealias-reside-outside-file-package`() {
         // given
-        val sut = getSnippetFile("typealias-reside-outside-file-package")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-reside-outside-file-package")
+                .typeAliases
+                .first()
 
         // then
         sut.resideOutsidePackage("com") shouldBeEqualTo true

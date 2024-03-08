@@ -8,9 +8,10 @@ class KoInterfaceDeclarationForKoExpectModifierProviderTest {
     @Test
     fun `interface-without-expect-modifier`() {
         // given
-        val sut = getSnippetFile("interface-without-expect-modifier")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-without-expect-modifier")
+                .interfaces()
+                .first()
 
         // then
         sut.hasExpectModifier shouldBeEqualTo false
@@ -19,9 +20,10 @@ class KoInterfaceDeclarationForKoExpectModifierProviderTest {
     @Test
     fun `interface-with-expect-modifier`() {
         // given
-        val sut = getSnippetFile("interface-with-expect-modifier")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-with-expect-modifier")
+                .interfaces()
+                .first()
 
         // then
         sut.hasExpectModifier shouldBeEqualTo true

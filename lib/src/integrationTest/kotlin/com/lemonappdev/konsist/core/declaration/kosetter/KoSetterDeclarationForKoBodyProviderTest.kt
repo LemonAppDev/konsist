@@ -9,10 +9,11 @@ class KoSetterDeclarationForKoBodyProviderTest {
     @Test
     fun `setter-has-no-body`() {
         // given
-        val sut = getSnippetFile("setter-has-no-body")
-            .properties()
-            .first()
-            .setter
+        val sut =
+            getSnippetFile("setter-has-no-body")
+                .properties()
+                .first()
+                .setter
 
         // then
         assertSoftly(sut) {
@@ -24,10 +25,11 @@ class KoSetterDeclarationForKoBodyProviderTest {
     @Test
     fun `setter-has-expression-body`() {
         // given
-        val sut = getSnippetFile("setter-has-expression-body")
-            .properties()
-            .first()
-            .setter
+        val sut =
+            getSnippetFile("setter-has-expression-body")
+                .properties()
+                .first()
+                .setter
 
         // then
         assertSoftly(sut) {
@@ -39,10 +41,11 @@ class KoSetterDeclarationForKoBodyProviderTest {
     @Test
     fun `setter-has-block-body`() {
         // given
-        val sut = getSnippetFile("setter-has-block-body")
-            .properties()
-            .first()
-            .setter
+        val sut =
+            getSnippetFile("setter-has-block-body")
+                .properties()
+                .first()
+                .setter
 
         // then
         assertSoftly(sut) {
@@ -51,6 +54,5 @@ class KoSetterDeclarationForKoBodyProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kosetter/snippet/forkobodyprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kosetter/snippet/forkobodyprovider/", fileName)
 }

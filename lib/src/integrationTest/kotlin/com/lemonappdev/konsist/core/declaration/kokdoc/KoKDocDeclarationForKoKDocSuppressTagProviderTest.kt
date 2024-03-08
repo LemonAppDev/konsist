@@ -15,10 +15,11 @@ class KoKDocDeclarationForKoKDocSuppressTagProviderTest {
     @Test
     fun `kdoc-without-suppress-tag`() {
         // given
-        val sut = getSnippetFile("kdoc-without-suppress-tag")
-            .classes()
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("kdoc-without-suppress-tag")
+                .classes()
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -34,13 +35,14 @@ class KoKDocDeclarationForKoKDocSuppressTagProviderTest {
         declarationName: String,
     ) {
         // given
-        val sut = (
-            getSnippetFile(fileName)
-                .declarations(includeNested = true)
-                .filterIsInstance<KoNameProvider>()
-                .first { it.name == declarationName } as KoKDocProvider
+        val sut =
+            (
+                getSnippetFile(fileName)
+                    .declarations(includeNested = true)
+                    .filterIsInstance<KoNameProvider>()
+                    .first { it.name == declarationName } as KoKDocProvider
             )
-            .kDoc
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -56,9 +58,10 @@ class KoKDocDeclarationForKoKDocSuppressTagProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("class-with-suppress-tag", "SampleClass"),
-            arguments("function-with-suppress-tag", "sampleMethod"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("class-with-suppress-tag", "SampleClass"),
+                arguments("function-with-suppress-tag", "sampleMethod"),
+            )
     }
 }

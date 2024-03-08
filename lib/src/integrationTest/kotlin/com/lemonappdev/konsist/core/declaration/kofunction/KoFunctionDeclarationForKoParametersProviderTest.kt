@@ -9,9 +9,10 @@ class KoFunctionDeclarationForKoParametersProviderTest {
     @Test
     fun `function-contains-no-parameters`() {
         // given
-        val sut = getSnippetFile("function-contains-no-parameters")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-contains-no-parameters")
+                .functions()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -29,9 +30,10 @@ class KoFunctionDeclarationForKoParametersProviderTest {
     @Test
     fun `function-contains-one-parameter`() {
         // given
-        val sut = getSnippetFile("function-contains-one-parameter")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-contains-one-parameter")
+                .functions()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -53,9 +55,10 @@ class KoFunctionDeclarationForKoParametersProviderTest {
     @Test
     fun `function-contains-two-parameters`() {
         // given
-        val sut = getSnippetFile("function-contains-two-parameters")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-contains-two-parameters")
+                .functions()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -80,9 +83,10 @@ class KoFunctionDeclarationForKoParametersProviderTest {
     @Test
     fun `function-has-parameter`() {
         // given
-        val sut = getSnippetFile("function-has-parameter")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-has-parameter")
+                .functions()
+                .first()
 
         // then
         assertSoftly(sut) {

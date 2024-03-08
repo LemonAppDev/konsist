@@ -12,10 +12,11 @@ class KoVariableDeclarationForKoTacitTypeProviderTest {
     @Test
     fun `variable-has-no-tacit-type`() {
         // given
-        val sut = getSnippetFile("variable-has-no-tacit-type")
-            .functions()
-            .variables
-            .first()
+        val sut =
+            getSnippetFile("variable-has-no-tacit-type")
+                .functions()
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -27,10 +28,11 @@ class KoVariableDeclarationForKoTacitTypeProviderTest {
     @Test
     fun `variable-has-explicit-simple-type`() {
         // given
-        val sut = getSnippetFile("variable-has-explicit-simple-type")
-            .functions()
-            .variables
-            .first()
+        val sut =
+            getSnippetFile("variable-has-explicit-simple-type")
+                .functions()
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -44,10 +46,11 @@ class KoVariableDeclarationForKoTacitTypeProviderTest {
     @Test
     fun `variable-has-explicit-complex-type`() {
         // given
-        val sut = getSnippetFile("variable-has-explicit-complex-type")
-            .functions()
-            .variables
-            .first()
+        val sut =
+            getSnippetFile("variable-has-explicit-complex-type")
+                .functions()
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -61,10 +64,11 @@ class KoVariableDeclarationForKoTacitTypeProviderTest {
     @Test
     fun `variable-has-implicit-complex-type`() {
         // given
-        val sut = getSnippetFile("variable-has-implicit-complex-type")
-            .functions()
-            .variables
-            .first()
+        val sut =
+            getSnippetFile("variable-has-implicit-complex-type")
+                .functions()
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {

@@ -10,10 +10,11 @@ class KoParameterDeclarationForKoRepresentsTypeProviderTest {
     @Test
     fun `parameter-represents-type`() {
         // given
-        val sut = getSnippetFile("parameter-represents-type")
-            .functions()
-            .parameters
-            .first()
+        val sut =
+            getSnippetFile("parameter-represents-type")
+                .functions()
+                .parameters
+                .first()
 
         // then
         assertSoftly(sut) {

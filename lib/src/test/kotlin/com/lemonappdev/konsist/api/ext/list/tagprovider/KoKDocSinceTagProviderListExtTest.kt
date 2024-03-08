@@ -10,12 +10,14 @@ class KoKDocSinceTagProviderListExtTest {
     @Test
     fun `withSinceTag() returns declaration with any tag`() {
         // given
-        val declaration1: KoKDocSinceTagProvider = mockk {
-            every { hasSinceTag } returns true
-        }
-        val declaration2: KoKDocSinceTagProvider = mockk {
-            every { hasSinceTag } returns false
-        }
+        val declaration1: KoKDocSinceTagProvider =
+            mockk {
+                every { hasSinceTag } returns true
+            }
+        val declaration2: KoKDocSinceTagProvider =
+            mockk {
+                every { hasSinceTag } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -28,12 +30,14 @@ class KoKDocSinceTagProviderListExtTest {
     @Test
     fun `withoutSinceTag() returns declaration with any tag`() {
         // given
-        val declaration1: KoKDocSinceTagProvider = mockk {
-            every { hasSinceTag } returns true
-        }
-        val declaration2: KoKDocSinceTagProvider = mockk {
-            every { hasSinceTag } returns false
-        }
+        val declaration1: KoKDocSinceTagProvider =
+            mockk {
+                every { hasSinceTag } returns true
+            }
+        val declaration2: KoKDocSinceTagProvider =
+            mockk {
+                every { hasSinceTag } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

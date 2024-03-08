@@ -15,9 +15,10 @@ class KoClassDeclarationForKoExternalParentProviderTest {
     @Test
     fun `class-has-no-external-parent`() {
         // given
-        val sut = getSnippetFile("class-has-no-external-parent")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-no-external-parent")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -37,9 +38,10 @@ class KoClassDeclarationForKoExternalParentProviderTest {
     @Test
     fun `class-has-only-direct-external-parents`() {
         // given
-        val sut = getSnippetFile("class-has-only-direct-external-parents")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-only-direct-external-parents")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -72,16 +74,18 @@ class KoClassDeclarationForKoExternalParentProviderTest {
     @Test
     fun `class-has-internal-and-external-parents`() {
         // given
-        val sut = getSnippetFile("class-has-internal-and-external-parents")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-internal-and-external-parents")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
-            externalParents().map { it.name } shouldBeEqualTo listOf(
-                "SampleExternalInterface",
-                "SampleExternalGenericInterface",
-            )
+            externalParents().map { it.name } shouldBeEqualTo
+                listOf(
+                    "SampleExternalInterface",
+                    "SampleExternalGenericInterface",
+                )
             numExternalParents() shouldBeEqualTo 2
             countExternalParents { it.name == "SampleExternalInterface" } shouldBeEqualTo 1
             countExternalParents { it.hasNameStartingWith("SampleExternal") } shouldBeEqualTo 2
@@ -117,17 +121,19 @@ class KoClassDeclarationForKoExternalParentProviderTest {
     @Test
     fun `class-has-indirect-external-parents`() {
         // given
-        val sut = getSnippetFile("class-has-indirect-external-parents")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-indirect-external-parents")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
             externalParents(indirectParents = false) shouldBeEqualTo emptyList()
-            externalParents(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
-                "SampleExternalClass",
-                "SampleExternalInterface",
-            )
+            externalParents(indirectParents = true).map { it.name } shouldBeEqualTo
+                listOf(
+                    "SampleExternalClass",
+                    "SampleExternalInterface",
+                )
             numExternalParents(indirectParents = false) shouldBeEqualTo 0
             numExternalParents(indirectParents = true) shouldBeEqualTo 2
             countExternalParents(indirectParents = false) { it.name == "SampleExternalClass" } shouldBeEqualTo 0
@@ -188,17 +194,19 @@ class KoClassDeclarationForKoExternalParentProviderTest {
     @Test
     fun `class-has-indirect-repeated-external-parents`() {
         // given
-        val sut = getSnippetFile("class-has-indirect-repeated-external-parents")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-indirect-repeated-external-parents")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
             externalParents(indirectParents = false).map { it.name } shouldBeEqualTo listOf("SampleExternalInterface")
-            externalParents(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
-                "SampleExternalInterface",
-                "SampleExternalClass",
-            )
+            externalParents(indirectParents = true).map { it.name } shouldBeEqualTo
+                listOf(
+                    "SampleExternalInterface",
+                    "SampleExternalClass",
+                )
             numExternalParents(indirectParents = false) shouldBeEqualTo 1
             numExternalParents(indirectParents = true) shouldBeEqualTo 2
         }

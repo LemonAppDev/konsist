@@ -8,9 +8,10 @@ class KoInterfaceDeclarationTest {
     @Test
     fun `interface-to-string`() {
         // given
-        val sut = getSnippetFile("interface-to-string")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-to-string")
+                .interfaces()
+                .first()
 
         // then
         sut.toString() shouldBeEqualTo "SampleInterface"

@@ -12,9 +12,7 @@ interface KoObjectProvider : KoBaseProvider {
      * @param includeNested specifies whether to include nested objects.
      * @return a list of [KoObjectDeclaration] representing the objects in the declaration.
      */
-    fun objects(
-        includeNested: Boolean = true,
-    ): List<KoObjectDeclaration>
+    fun objects(includeNested: Boolean = true): List<KoObjectDeclaration>
 
     /**
      * Determines whatever the declaration contains an object that satisfies the specified predicate.
@@ -55,9 +53,7 @@ interface KoObjectProvider : KoBaseProvider {
      * @param includeNested Specifies whether to include nested objects in the check (optional, default is `true`).
      * @return `true` if the declaration has any object, `false` otherwise.
      */
-    fun hasObjects(
-        includeNested: Boolean = true,
-    ): Boolean
+    fun hasObjects(includeNested: Boolean = true): Boolean
 
     /**
      * Determines whether the declaration has at least one object whose name matches any of the specified names.

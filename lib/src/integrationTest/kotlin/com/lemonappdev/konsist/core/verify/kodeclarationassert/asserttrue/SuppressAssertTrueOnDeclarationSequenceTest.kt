@@ -493,9 +493,10 @@ class SuppressAssertTrueOnDeclarationSequenceTest {
         val scope1 = getSnippetFile("assert-suppress-by-konsist-and-name-on-declarations-which-items-have-null-parent")
         val scope2 = getSnippetFile("file-without-suppress")
 
-        val sut = (scope1 + scope2)
-            .files
-            .asSequence()
+        val sut =
+            (scope1 + scope2)
+                .files
+                .asSequence()
 
         // then
         sut.assertTrue { it.name.endsWith("suppress") }
@@ -507,9 +508,10 @@ class SuppressAssertTrueOnDeclarationSequenceTest {
         val scope1 = getSnippetFile("assert-suppress-by-name-on-declarations-which-items-have-null-parent")
         val scope2 = getSnippetFile("file-without-suppress")
 
-        val sut = (scope1 + scope2)
-            .files
-            .asSequence()
+        val sut =
+            (scope1 + scope2)
+                .files
+                .asSequence()
 
         // then
         sut.assertTrue { it.name.endsWith("suppress") }
@@ -522,9 +524,10 @@ class SuppressAssertTrueOnDeclarationSequenceTest {
             getSnippetFile("assert-suppress-by-konsist-and-parameter-on-declarations-which-items-have-null-parent")
         val scope2 = getSnippetFile("file-without-suppress")
 
-        val sut = (scope1 + scope2)
-            .files
-            .asSequence()
+        val sut =
+            (scope1 + scope2)
+                .files
+                .asSequence()
 
         // then
         sut.assertTrue(testName = "suppress-text") { it.name.endsWith("suppress") }
@@ -537,9 +540,10 @@ class SuppressAssertTrueOnDeclarationSequenceTest {
             getSnippetFile("assert-suppress-by-parameter-on-declarations-which-items-have-null-parent")
         val scope2 = getSnippetFile("file-without-suppress")
 
-        val sut = (scope1 + scope2)
-            .files
-            .asSequence()
+        val sut =
+            (scope1 + scope2)
+                .files
+                .asSequence()
 
         // then
         sut.assertTrue(testName = "suppress-text") { it.name.endsWith("suppress") }
@@ -551,9 +555,10 @@ class SuppressAssertTrueOnDeclarationSequenceTest {
         val scope1 = getSnippetFile("assert-suppress-with-few-parameters-on-declarations-which-items-have-null-parent")
         val scope2 = getSnippetFile("file-without-suppress")
 
-        val sut = (scope1 + scope2)
-            .files
-            .asSequence()
+        val sut =
+            (scope1 + scope2)
+                .files
+                .asSequence()
 
         // then
         sut.assertTrue { it.name.endsWith("suppress") }
@@ -566,9 +571,10 @@ class SuppressAssertTrueOnDeclarationSequenceTest {
             getSnippetFile("assert-suppress-by-parameter-with-few-parameters-on-declarations-which-items-have-null-parent")
         val scope2 = getSnippetFile("file-without-suppress")
 
-        val sut = (scope1 + scope2)
-            .files
-            .asSequence()
+        val sut =
+            (scope1 + scope2)
+                .files
+                .asSequence()
 
         // then
         sut.assertTrue(testName = "suppress-text") { it.name.endsWith("suppress") }

@@ -8,11 +8,12 @@ class KoEnumConstantDeclarationForKoContainingFileProviderTest {
     @Test
     fun `enum-const-containing-file`() {
         // given
-        val sut = getSnippetFile("enum-const-containing-file")
-            .classes()
-            .first()
-            .enumConstants
-            .first()
+        val sut =
+            getSnippetFile("enum-const-containing-file")
+                .classes()
+                .first()
+                .enumConstants
+                .first()
 
         // then
         sut

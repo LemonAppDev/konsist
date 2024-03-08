@@ -32,38 +32,25 @@ class KoScopeCore(
     override fun classes(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): List<KoClassDeclaration> =
-        koFiles.flatMap { it.classes(includeNested, includeLocal) }
+    ): List<KoClassDeclaration> = koFiles.flatMap { it.classes(includeNested, includeLocal) }
 
-    override fun interfaces(
-        includeNested: Boolean,
-    ): List<KoInterfaceDeclaration> =
-        koFiles.flatMap { it.interfaces(includeNested) }
+    override fun interfaces(includeNested: Boolean): List<KoInterfaceDeclaration> = koFiles.flatMap { it.interfaces(includeNested) }
 
-    override fun objects(
-        includeNested: Boolean,
-    ): List<KoObjectDeclaration> =
-        koFiles.flatMap { it.objects(includeNested) }
+    override fun objects(includeNested: Boolean): List<KoObjectDeclaration> = koFiles.flatMap { it.objects(includeNested) }
 
     override fun functions(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): List<KoFunctionDeclaration> =
-        koFiles.flatMap { it.functions(includeNested, includeLocal) }
+    ): List<KoFunctionDeclaration> = koFiles.flatMap { it.functions(includeNested, includeLocal) }
 
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): List<KoBaseDeclaration> =
-        koFiles.flatMap { listOf(it) + it.declarations(includeNested, includeLocal) }
+    ): List<KoBaseDeclaration> = koFiles.flatMap { listOf(it) + it.declarations(includeNested, includeLocal) }
 
-    override fun properties(
-        includeNested: Boolean,
-    ): List<KoPropertyDeclaration> =
-        koFiles.flatMap { it.properties(includeNested) }
+    override fun properties(includeNested: Boolean): List<KoPropertyDeclaration> = koFiles.flatMap { it.properties(includeNested) }
 
-    override fun slice(predicate: (KoFileDeclaration) -> Boolean): KoScope =
-        KoScopeCore(koFiles.filter { predicate(it) })
+    override fun slice(predicate: (KoFileDeclaration) -> Boolean): KoScope = KoScopeCore(koFiles.filter { predicate(it) })
 
     override operator fun plus(scope: KoScope): KoScope = KoScopeCore(files + scope.files)
 
@@ -77,11 +64,15 @@ class KoScopeCore(
         koFiles -= scope.files
     }
 
-    override fun toString(): String = files
-        .toList()
-        .joinToString("\n") { it.path }
+    override fun toString(): String =
+        files
+            .toList()
+            .joinToString("\n") { it.path }
 
-    override fun print(prefix: String?, predicate: ((KoScope) -> String)?): KoScope {
+    override fun print(
+        prefix: String?,
+        predicate: ((KoScope) -> String)?,
+    ): KoScope {
         prefix?.let { println(it) }
 
         if (predicate != null) {

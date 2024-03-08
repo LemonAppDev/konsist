@@ -8,9 +8,10 @@ class KoFunctionDeclarationForKoExternalModifierProviderTest {
     @Test
     fun `function-without-external-modifier`() {
         // given
-        val sut = getSnippetFile("function-without-external-modifier")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-without-external-modifier")
+                .functions()
+                .first()
 
         // then
         sut.hasExternalModifier shouldBeEqualTo false
@@ -19,9 +20,10 @@ class KoFunctionDeclarationForKoExternalModifierProviderTest {
     @Test
     fun `function-with-external-modifier`() {
         // given
-        val sut = getSnippetFile("function-with-external-modifier")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-with-external-modifier")
+                .functions()
+                .first()
 
         // then
         sut.hasExternalModifier shouldBeEqualTo true

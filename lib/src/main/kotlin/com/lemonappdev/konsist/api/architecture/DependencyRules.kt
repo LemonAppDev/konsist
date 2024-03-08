@@ -13,7 +13,10 @@ interface DependencyRules {
      * @param layer The layer that the current layer depends on.
      * @param layers The layers that the current layer depends on.
      */
-    fun Layer.dependsOn(layer: Layer, vararg layers: Layer): Unit
+    fun Layer.dependsOn(
+        layer: Layer,
+        vararg layers: Layer,
+    ): Unit
 
     /**
      * Specifies that the current layer does not depend on any other layer.

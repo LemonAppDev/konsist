@@ -10,12 +10,14 @@ class KoGenericTypeProviderListExtTest {
     @Test
     fun `withGenericType() returns type with generic type`() {
         // given
-        val type1: KoGenericTypeProvider = mockk {
-            every { isGenericType } returns true
-        }
-        val type2: KoGenericTypeProvider = mockk {
-            every { isGenericType } returns false
-        }
+        val type1: KoGenericTypeProvider =
+            mockk {
+                every { isGenericType } returns true
+            }
+        val type2: KoGenericTypeProvider =
+            mockk {
+                every { isGenericType } returns false
+            }
         val types = listOf(type1, type2)
 
         // when
@@ -28,12 +30,14 @@ class KoGenericTypeProviderListExtTest {
     @Test
     fun `withoutGenericType() returns type without generic type`() {
         // given
-        val type1: KoGenericTypeProvider = mockk {
-            every { isGenericType } returns true
-        }
-        val type2: KoGenericTypeProvider = mockk {
-            every { isGenericType } returns false
-        }
+        val type1: KoGenericTypeProvider =
+            mockk {
+                every { isGenericType } returns true
+            }
+        val type2: KoGenericTypeProvider =
+            mockk {
+                every { isGenericType } returns false
+            }
         val types = listOf(type1, type2)
 
         // when

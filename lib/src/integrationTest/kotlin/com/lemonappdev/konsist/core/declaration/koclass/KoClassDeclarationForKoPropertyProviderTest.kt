@@ -12,9 +12,10 @@ class KoClassDeclarationForKoPropertyProviderTest {
     @Test
     fun `class-has-no-properties`() {
         // given
-        val sut = getSnippetFile("class-has-no-properties")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-no-properties")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -30,9 +31,10 @@ class KoClassDeclarationForKoPropertyProviderTest {
     @Test
     fun `class-has-two-properties`() {
         // given
-        val sut = getSnippetFile("class-has-two-properties")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-two-properties")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -52,9 +54,10 @@ class KoClassDeclarationForKoPropertyProviderTest {
     @Test
     fun `class-contains-nested-properties includeNested true`() {
         // given
-        val sut = getSnippetFile("class-contains-nested-properties")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-contains-nested-properties")
+                .classes()
+                .first()
 
         // then
         val expected = listOf("sampleProperty", "sampleNestedProperty")
@@ -67,9 +70,10 @@ class KoClassDeclarationForKoPropertyProviderTest {
     @Test
     fun `class-contains-nested-properties includeNested false`() {
         // given
-        val sut = getSnippetFile("class-contains-nested-properties")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-contains-nested-properties")
+                .classes()
+                .first()
 
         // then
         val expected = listOf("sampleProperty")
@@ -82,9 +86,10 @@ class KoClassDeclarationForKoPropertyProviderTest {
     @Test
     fun `count-properties`() {
         // given
-        val sut = getSnippetFile("count-properties")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("count-properties")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -99,9 +104,10 @@ class KoClassDeclarationForKoPropertyProviderTest {
     @Test
     fun `contains-properties-with-specified-conditions`() {
         // given
-        val sut = getSnippetFile("contains-properties-with-specified-conditions")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("contains-properties-with-specified-conditions")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -120,9 +126,10 @@ class KoClassDeclarationForKoPropertyProviderTest {
         // given
         val regex1 = Regex("[a-zA-Z]+")
         val regex2 = Regex("[0-9]+")
-        val sut = getSnippetFile("contains-properties-with-specified-regex")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("contains-properties-with-specified-regex")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -136,9 +143,10 @@ class KoClassDeclarationForKoPropertyProviderTest {
     @Test
     fun `class-contains-property-defined-at-constructor`() {
         // given
-        val sut = getSnippetFile("class-contains-property-defined-at-constructor")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-contains-property-defined-at-constructor")
+                .classes()
+                .first()
 
         // then
         sut.properties()
@@ -149,9 +157,10 @@ class KoClassDeclarationForKoPropertyProviderTest {
     @Test
     fun `class-contains-property-defined-at-constructor-and-in-body`() {
         // given
-        val sut = getSnippetFile("class-contains-property-defined-at-constructor-and-in-body")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-contains-property-defined-at-constructor-and-in-body")
+                .classes()
+                .first()
 
         // then
         sut.properties()
@@ -159,6 +168,5 @@ class KoClassDeclarationForKoPropertyProviderTest {
             .shouldBeEqualTo(listOf("sampleProperty1", "sampleProperty2"))
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koclass/snippet/forkopropertyprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koclass/snippet/forkopropertyprovider/", fileName)
 }

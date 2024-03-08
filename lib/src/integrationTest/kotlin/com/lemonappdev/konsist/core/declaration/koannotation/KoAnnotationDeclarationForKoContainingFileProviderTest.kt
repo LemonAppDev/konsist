@@ -9,11 +9,12 @@ class KoAnnotationDeclarationForKoContainingFileProviderTest {
     @Test
     fun `annotation-containing-file`() {
         // given
-        val sut = getSnippetFile("annotation-containing-file")
-            .functions()
-            .first()
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-containing-file")
+                .functions()
+                .first()
+                .annotations
+                .first()
 
         // then
         sut
@@ -26,10 +27,11 @@ class KoAnnotationDeclarationForKoContainingFileProviderTest {
     @Test
     fun `annotation-in-file-containing-file`() {
         // given
-        val sut = getSnippetFile("annotation-in-file-containing-file")
-            .files
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-in-file-containing-file")
+                .files
+                .annotations
+                .first()
 
         // then
         sut

@@ -11,11 +11,12 @@ class KoArgumentDeclarationForKoContainingFileProviderTest {
     @Test
     fun `argument-in-enum-const-containing-file`() {
         // given
-        val sut = getSnippetFile("argument-in-enum-const-containing-file")
-            .classes()
-            .enumConstants
-            .arguments
-            .first()
+        val sut =
+            getSnippetFile("argument-in-enum-const-containing-file")
+                .classes()
+                .enumConstants
+                .arguments
+                .first()
 
         // then
         sut
@@ -28,11 +29,12 @@ class KoArgumentDeclarationForKoContainingFileProviderTest {
     @Test
     fun `argument-in-annotation-containing-file`() {
         // given
-        val sut = getSnippetFile("argument-in-annotation-containing-file")
-            .functions()
-            .annotations
-            .arguments
-            .first()
+        val sut =
+            getSnippetFile("argument-in-annotation-containing-file")
+                .functions()
+                .annotations
+                .arguments
+                .first()
 
         // then
         sut

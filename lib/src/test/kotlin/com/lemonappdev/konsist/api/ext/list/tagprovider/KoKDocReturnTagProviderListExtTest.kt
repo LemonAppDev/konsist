@@ -10,12 +10,14 @@ class KoKDocReturnTagProviderListExtTest {
     @Test
     fun `withReturnTag() returns declaration with any tag`() {
         // given
-        val declaration1: KoKDocReturnTagProvider = mockk {
-            every { hasReturnTag } returns true
-        }
-        val declaration2: KoKDocReturnTagProvider = mockk {
-            every { hasReturnTag } returns false
-        }
+        val declaration1: KoKDocReturnTagProvider =
+            mockk {
+                every { hasReturnTag } returns true
+            }
+        val declaration2: KoKDocReturnTagProvider =
+            mockk {
+                every { hasReturnTag } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -28,12 +30,14 @@ class KoKDocReturnTagProviderListExtTest {
     @Test
     fun `withoutReturnTag() returns declaration with any tag`() {
         // given
-        val declaration1: KoKDocReturnTagProvider = mockk {
-            every { hasReturnTag } returns true
-        }
-        val declaration2: KoKDocReturnTagProvider = mockk {
-            every { hasReturnTag } returns false
-        }
+        val declaration1: KoKDocReturnTagProvider =
+            mockk {
+                every { hasReturnTag } returns true
+            }
+        val declaration2: KoKDocReturnTagProvider =
+            mockk {
+                every { hasReturnTag } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

@@ -9,9 +9,10 @@ class KoClassDeclarationForKoContainingDeclarationProviderTest {
     @Test
     fun `class-with-file-parent-declaration`() {
         // given
-        val sut = getSnippetFile("class-with-file-parent-declaration")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-with-file-parent-declaration")
+                .classes()
+                .first()
 
         // then
         (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "class-with-file-parent-declaration"
@@ -20,9 +21,10 @@ class KoClassDeclarationForKoContainingDeclarationProviderTest {
     @Test
     fun `class-with-parent-declaration`() {
         // given
-        val sut = getSnippetFile("class-with-parent-declaration")
-            .classes(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("class-with-parent-declaration")
+                .classes(includeNested = true)
+                .first()
 
         // then
         (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "SampleInterface"

@@ -15,10 +15,11 @@ class KoKDocDeclarationForKoKDocVersionTagProviderTest {
     @Test
     fun `kdoc-without-version-tag`() {
         // given
-        val sut = getSnippetFile("kdoc-without-version-tag")
-            .classes()
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("kdoc-without-version-tag")
+                .classes()
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -34,13 +35,14 @@ class KoKDocDeclarationForKoKDocVersionTagProviderTest {
         declarationName: String,
     ) {
         // given
-        val sut = (
-            getSnippetFile(fileName)
-                .declarations(includeNested = true)
-                .filterIsInstance<KoNameProvider>()
-                .first { it.name == declarationName } as KoKDocProvider
+        val sut =
+            (
+                getSnippetFile(fileName)
+                    .declarations(includeNested = true)
+                    .filterIsInstance<KoNameProvider>()
+                    .first { it.name == declarationName } as KoKDocProvider
             )
-            .kDoc
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -56,9 +58,10 @@ class KoKDocDeclarationForKoKDocVersionTagProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("class-with-version-tag", "SampleClass"),
-            arguments("function-with-version-tag", "sampleMethod"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("class-with-version-tag", "SampleClass"),
+                arguments("function-with-version-tag", "sampleMethod"),
+            )
     }
 }

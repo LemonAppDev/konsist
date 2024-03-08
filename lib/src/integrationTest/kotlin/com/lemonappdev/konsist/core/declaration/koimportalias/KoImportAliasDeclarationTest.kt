@@ -9,11 +9,12 @@ class KoImportAliasDeclarationTest {
     @Test
     fun `type-to-string`() {
         // given
-        val sut = getSnippetFile("type-to-string")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoImportAliasDeclaration
+        val sut =
+            getSnippetFile("type-to-string")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoImportAliasDeclaration
 
         // then
         sut.toString() shouldBeEqualTo "ImportAlias"
@@ -22,11 +23,12 @@ class KoImportAliasDeclarationTest {
     @Test
     fun `import-directive`() {
         // given
-        val sut = getSnippetFile("import-directive")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoImportAliasDeclaration
+        val sut =
+            getSnippetFile("import-directive")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoImportAliasDeclaration
 
         // then
         sut?.importDirective?.name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"

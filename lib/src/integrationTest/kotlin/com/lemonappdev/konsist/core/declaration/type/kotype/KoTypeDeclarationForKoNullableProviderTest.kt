@@ -14,13 +14,14 @@ class KoTypeDeclarationForKoNullableProviderTest {
         value: Boolean,
     ) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         sut?.isNullable shouldBeEqualTo value
@@ -32,25 +33,26 @@ class KoTypeDeclarationForKoNullableProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("kotlin-basic-type-is-nullable", true),
-            arguments("kotlin-basic-type-is-not-nullable", false),
-            arguments("kotlin-collection-type-is-nullable", true),
-            arguments("kotlin-collection-type-is-not-nullable", false),
-            arguments("class-type-is-nullable", true),
-            arguments("class-type-is-not-nullable", false),
-            arguments("interface-type-is-nullable", true),
-            arguments("interface-type-is-not-nullable", false),
-            arguments("object-type-is-nullable", true),
-            arguments("object-type-is-not-nullable", false),
-            arguments("function-type-type-is-nullable", true),
-            arguments("function-type-type-is-not-nullable", false),
-            arguments("import-alias-type-is-nullable", true),
-            arguments("import-alias-type-is-not-nullable", false),
-            arguments("typealias-type-is-nullable", true),
-            arguments("typealias-type-is-not-nullable", false),
-            arguments("external-type-is-nullable", true),
-            arguments("external-type-is-not-nullable", false),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("kotlin-basic-type-is-nullable", true),
+                arguments("kotlin-basic-type-is-not-nullable", false),
+                arguments("kotlin-collection-type-is-nullable", true),
+                arguments("kotlin-collection-type-is-not-nullable", false),
+                arguments("class-type-is-nullable", true),
+                arguments("class-type-is-not-nullable", false),
+                arguments("interface-type-is-nullable", true),
+                arguments("interface-type-is-not-nullable", false),
+                arguments("object-type-is-nullable", true),
+                arguments("object-type-is-not-nullable", false),
+                arguments("function-type-type-is-nullable", true),
+                arguments("function-type-type-is-not-nullable", false),
+                arguments("import-alias-type-is-nullable", true),
+                arguments("import-alias-type-is-not-nullable", false),
+                arguments("typealias-type-is-nullable", true),
+                arguments("typealias-type-is-not-nullable", false),
+                arguments("external-type-is-nullable", true),
+                arguments("external-type-is-not-nullable", false),
+            )
     }
 }

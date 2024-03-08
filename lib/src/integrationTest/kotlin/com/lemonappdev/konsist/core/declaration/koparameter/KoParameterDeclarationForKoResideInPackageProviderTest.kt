@@ -8,12 +8,13 @@ class KoParameterDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `parameter-not-reside-in-file-package`() {
         // given
-        val sut = getSnippetFile("parameter-not-reside-in-file-package")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
+        val sut =
+            getSnippetFile("parameter-not-reside-in-file-package")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
         sut?.resideInPackage("com") shouldBeEqualTo false
@@ -22,12 +23,13 @@ class KoParameterDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `parameter-reside-in-file-package`() {
         // given
-        val sut = getSnippetFile("parameter-reside-in-file-package")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
+        val sut =
+            getSnippetFile("parameter-reside-in-file-package")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
         sut?.resideInPackage("com..") shouldBeEqualTo true
@@ -36,12 +38,13 @@ class KoParameterDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `parameter-not-reside-outside-file-package`() {
         // given
-        val sut = getSnippetFile("parameter-not-reside-outside-file-package")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
+        val sut =
+            getSnippetFile("parameter-not-reside-outside-file-package")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
         sut?.resideOutsidePackage("com..") shouldBeEqualTo false
@@ -50,12 +53,13 @@ class KoParameterDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `parameter-reside-outside-file-package`() {
         // given
-        val sut = getSnippetFile("parameter-reside-outside-file-package")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
+        val sut =
+            getSnippetFile("parameter-reside-outside-file-package")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
         sut?.resideOutsidePackage("com") shouldBeEqualTo true

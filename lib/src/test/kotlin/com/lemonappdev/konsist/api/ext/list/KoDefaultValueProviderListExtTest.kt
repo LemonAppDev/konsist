@@ -10,12 +10,14 @@ class KoDefaultValueProviderListExtTest {
     @Test
     fun `withDefaultValue() returns declaration with default value`() {
         // given
-        val declaration1: KoDefaultValueProvider = mockk {
-            every { hasDefaultValue() } returns true
-        }
-        val declaration2: KoDefaultValueProvider = mockk {
-            every { hasDefaultValue() } returns false
-        }
+        val declaration1: KoDefaultValueProvider =
+            mockk {
+                every { hasDefaultValue() } returns true
+            }
+        val declaration2: KoDefaultValueProvider =
+            mockk {
+                every { hasDefaultValue() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -28,12 +30,14 @@ class KoDefaultValueProviderListExtTest {
     @Test
     fun `withoutDefaultValue() returns declaration without default value`() {
         // given
-        val declaration1: KoDefaultValueProvider = mockk {
-            every { hasDefaultValue() } returns true
-        }
-        val declaration2: KoDefaultValueProvider = mockk {
-            every { hasDefaultValue() } returns false
-        }
+        val declaration1: KoDefaultValueProvider =
+            mockk {
+                every { hasDefaultValue() } returns true
+            }
+        val declaration2: KoDefaultValueProvider =
+            mockk {
+                every { hasDefaultValue() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -48,18 +52,21 @@ class KoDefaultValueProviderListExtTest {
         // given
         val value1 = "SampleDefaultValue1"
         val value2 = "SampleDefaultValue2"
-        val declaration1: KoDefaultValueProvider = mockk {
-            every { hasDefaultValue(value1) } returns true
-            every { hasDefaultValue(value2) } returns false
-        }
-        val declaration2: KoDefaultValueProvider = mockk {
-            every { hasDefaultValue(value1) } returns false
-            every { hasDefaultValue(value2) } returns true
-        }
-        val declaration3: KoDefaultValueProvider = mockk {
-            every { hasDefaultValue(value1) } returns false
-            every { hasDefaultValue(value2) } returns false
-        }
+        val declaration1: KoDefaultValueProvider =
+            mockk {
+                every { hasDefaultValue(value1) } returns true
+                every { hasDefaultValue(value2) } returns false
+            }
+        val declaration2: KoDefaultValueProvider =
+            mockk {
+                every { hasDefaultValue(value1) } returns false
+                every { hasDefaultValue(value2) } returns true
+            }
+        val declaration3: KoDefaultValueProvider =
+            mockk {
+                every { hasDefaultValue(value1) } returns false
+                every { hasDefaultValue(value2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -74,18 +81,21 @@ class KoDefaultValueProviderListExtTest {
         // given
         val value1 = "SampleDefaultValue1"
         val value2 = "SampleDefaultValue2"
-        val declaration1: KoDefaultValueProvider = mockk {
-            every { hasDefaultValue(value1) } returns true
-            every { hasDefaultValue(value2) } returns false
-        }
-        val declaration2: KoDefaultValueProvider = mockk {
-            every { hasDefaultValue(value1) } returns false
-            every { hasDefaultValue(value2) } returns true
-        }
-        val declaration3: KoDefaultValueProvider = mockk {
-            every { hasDefaultValue(value1) } returns false
-            every { hasDefaultValue(value2) } returns false
-        }
+        val declaration1: KoDefaultValueProvider =
+            mockk {
+                every { hasDefaultValue(value1) } returns true
+                every { hasDefaultValue(value2) } returns false
+            }
+        val declaration2: KoDefaultValueProvider =
+            mockk {
+                every { hasDefaultValue(value1) } returns false
+                every { hasDefaultValue(value2) } returns true
+            }
+        val declaration3: KoDefaultValueProvider =
+            mockk {
+                every { hasDefaultValue(value1) } returns false
+                every { hasDefaultValue(value2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when

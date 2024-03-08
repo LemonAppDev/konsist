@@ -17,12 +17,13 @@ val <T : KoAliasProvider> List<T>.importAliases: List<KoImportAliasDeclaration>
  * @return A list containing declarations with the specified aliases (or any alias if [names] is empty).
  */
 @Deprecated("Will be removed in v0.16.0", ReplaceWith("withAlias { it.name == ... }"))
-fun <T : KoAliasProvider> List<T>.withAlias(vararg names: String): List<T> = filter {
-    when {
-        names.isEmpty() -> it.alias?.name != (it as? KoNameProvider)?.name
-        else -> names.any { name -> it.alias?.name == name }
+fun <T : KoAliasProvider> List<T>.withAlias(vararg names: String): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> it.alias?.name != (it as? KoNameProvider)?.name
+            else -> names.any { name -> it.alias?.name == name }
+        }
     }
-}
 
 /**
  * List containing declarations without an alias.
@@ -31,12 +32,13 @@ fun <T : KoAliasProvider> List<T>.withAlias(vararg names: String): List<T> = fil
  * @return A list containing declarations without specified aliases (or none alias if [names] is empty).
  */
 @Deprecated("Will be removed in v0.16.0", ReplaceWith("withoutAlias { it.name == ... }"))
-fun <T : KoAliasProvider> List<T>.withoutAlias(vararg names: String): List<T> = filter {
-    when {
-        names.isEmpty() -> it.alias?.name == (it as? KoNameProvider)?.name
-        else -> names.none { name -> it.alias?.name == name }
+fun <T : KoAliasProvider> List<T>.withoutAlias(vararg names: String): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> it.alias?.name == (it as? KoNameProvider)?.name
+            else -> names.none { name -> it.alias?.name == name }
+        }
     }
-}
 
 /**
  * List containing declarations with the specified import alias.

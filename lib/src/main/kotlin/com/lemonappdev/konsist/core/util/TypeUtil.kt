@@ -27,30 +27,33 @@ object TypeUtil {
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
     ): KoBaseTypeDeclaration? {
-        val type = if (isExtension && types.size > 1) {
-            // We choose last because when we have extension the first one is receiver and the second one is (return) type.
-            types.last()
-        } else {
-            if (!isExtension) {
-                types.firstOrNull()
+        val type =
+            if (isExtension && types.size > 1) {
+                // We choose last because when we have extension the first one is receiver and the second one is (return) type.
+                types.last()
             } else {
-                null
+                if (!isExtension) {
+                    types.firstOrNull()
+                } else {
+                    null
+                }
+                    ?.children
+                    ?.firstOrNull()
             }
-                ?.children
-                ?.firstOrNull()
-        }
 
-        val nestedType = if (type is KtNullableType) {
-            type
-                .children
-                .firstOrNull()
-        } else {
-            type
-        }
+        val nestedType =
+            if (type is KtNullableType) {
+                type
+                    .children
+                    .firstOrNull()
+            } else {
+                type
+            }
 
-        val importDirective = containingFile
-            .imports
-            .firstOrNull { it.alias?.name == nestedType?.text }
+        val importDirective =
+            containingFile
+                .imports
+                .firstOrNull { it.alias?.name == nestedType?.text }
 
         return if (importDirective != null) {
             importDirective.alias
@@ -59,8 +62,10 @@ object TypeUtil {
         }
     }
 
-    internal fun hasTypeOf(type: KoTypeDeclaration?, kClass: KClass<*>): Boolean =
-        kClass.qualifiedName == (type?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+    internal fun hasTypeOf(
+        type: KoTypeDeclaration?,
+        kClass: KClass<*>,
+    ): Boolean = kClass.qualifiedName == (type?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
 
     /*
     1.0.0 CleanUp - When we remove KoReceiverTypeProviderCore.hasReceiverType it will be unused.
@@ -70,13 +75,14 @@ object TypeUtil {
         isExtension: Boolean,
         containingDeclaration: KoBaseDeclaration,
     ): KoTypeDeclaration? {
-        val type = if (isExtension) {
-            types.first()
-        } else {
-            null
-        }
-            ?.children
-            ?.firstOrNull()
+        val type =
+            if (isExtension) {
+                types.first()
+            } else {
+                null
+            }
+                ?.children
+                ?.firstOrNull()
 
         return if (type is KtTypeReference) {
             KoTypeDeclarationCore.getInstance(type, containingDeclaration)
@@ -91,13 +97,14 @@ object TypeUtil {
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
     ): KoBaseTypeDeclaration? {
-        val nestedType = if (type is KtNullableType) {
-            type
-                .children
-                .firstOrNull()
-        } else {
-            type
-        }
+        val nestedType =
+            if (type is KtNullableType) {
+                type
+                    .children
+                    .firstOrNull()
+            } else {
+                type
+            }
         val typeText = nestedType?.text
 
         val fqn =
@@ -134,10 +141,14 @@ object TypeUtil {
     /*
     1.0.0 CleanUp - When we remove KoReceiverTypeProviderCore.hasReceiverType it will be unused.
      */
-    internal fun hasReceiverType(receiverType: KoTypeDeclaration?, name: String?): Boolean = when (name) {
-        null -> receiverType != null
-        else -> receiverType?.name == name
-    }
+    internal fun hasReceiverType(
+        receiverType: KoTypeDeclaration?,
+        name: String?,
+    ): Boolean =
+        when (name) {
+            null -> receiverType != null
+            else -> receiverType?.name == name
+        }
 
     internal fun isKotlinBasicType(name: String): Boolean = kotlinBasicTypes.any { it == name }
 
@@ -145,53 +156,55 @@ object TypeUtil {
 
     // Basic types in Kotlin are described here: https://kotlinlang.org/docs/basic-types.html
     private val kotlinBasicTypes: Set<String>
-        get() = setOf(
-            "Byte",
-            "Short",
-            "Int",
-            "Long",
-            "Float",
-            "Double",
-            "UByte",
-            "UShort",
-            "UInt",
-            "ULong",
-            "UByteArray",
-            "UShortArray",
-            "UIntArray",
-            "ULongArray",
-            "Boolean",
-            "Char",
-            "String",
-        )
+        get() =
+            setOf(
+                "Byte",
+                "Short",
+                "Int",
+                "Long",
+                "Float",
+                "Double",
+                "UByte",
+                "UShort",
+                "UInt",
+                "ULong",
+                "UByteArray",
+                "UShortArray",
+                "UIntArray",
+                "ULongArray",
+                "Boolean",
+                "Char",
+                "String",
+            )
 
     // Collections in Kotlin are described here: https://kotlinlang.org/docs/collections-overview.html#collection
     // and here https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections
     private val kotlinCollectionTypes: Set<String>
-        get() = setOf(
-            "AbstractCollection",
-            "AbstractIterator",
-            "AbstractList",
-            "AbstractMap",
-            "AbstractMutableCollection",
-            "AbstractMutableList",
-            "AbstractMutableMap",
-            "AbstractMutableSet",
-            "AbstractSet",
-            "ArrayDeque",
-            "ArrayList",
-            "Array",
-            "Collection",
-            "HashMap",
-            "HashSet",
-            "LinkedHashMap",
-            "LinkedHashSet",
-            "List",
-            "Map",
-            "MutableCollection",
-            "MutableList",
-            "MutableMap",
-            "MutableSet",
-            "Set",
-        )
+        get() =
+            setOf(
+                "AbstractCollection",
+                "AbstractIterator",
+                "AbstractList",
+                "AbstractMap",
+                "AbstractMutableCollection",
+                "AbstractMutableList",
+                "AbstractMutableMap",
+                "AbstractMutableSet",
+                "AbstractSet",
+                "ArrayDeque",
+                "ArrayList",
+                "Array",
+                "Collection",
+                "HashMap",
+                "HashSet",
+                "LinkedHashMap",
+                "LinkedHashSet",
+                "List",
+                "Map",
+                "MutableCollection",
+                "MutableList",
+                "MutableMap",
+                "MutableSet",
+                "Set",
+            )
 }

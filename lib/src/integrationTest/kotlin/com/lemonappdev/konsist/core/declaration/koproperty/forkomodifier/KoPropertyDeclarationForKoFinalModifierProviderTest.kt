@@ -8,9 +8,10 @@ class KoPropertyDeclarationForKoFinalModifierProviderTest {
     @Test
     fun `property-has-no-final-modifier`() {
         // given
-        val sut = getSnippetFile("property-has-no-final-modifier")
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-has-no-final-modifier")
+                .properties()
+                .first()
 
         // then
         sut.hasFinalModifier shouldBeEqualTo false
@@ -19,9 +20,10 @@ class KoPropertyDeclarationForKoFinalModifierProviderTest {
     @Test
     fun `property-has-final-modifier`() {
         // given
-        val sut = getSnippetFile("property-has-final-modifier")
-            .properties(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("property-has-final-modifier")
+                .properties(includeNested = true)
+                .first()
 
         // then
         sut.hasFinalModifier shouldBeEqualTo true

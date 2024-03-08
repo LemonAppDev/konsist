@@ -6,15 +6,15 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoAnnotationDeclarationForKoFullyQualifiedNameProviderTest {
-
     @Test
     fun `annotation-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("annotation-fully-qualified-name")
-            .functions()
-            .first()
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-fully-qualified-name")
+                .functions()
+                .first()
+                .annotations
+                .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleAnnotation"
@@ -23,11 +23,12 @@ class KoAnnotationDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `annotation-fully-qualified-name-when-other-import-contains-its-name`() {
         // given
-        val sut = getSnippetFile("annotation-fully-qualified-name-when-other-import-contains-its-name")
-            .functions()
-            .first()
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-fully-qualified-name-when-other-import-contains-its-name")
+                .functions()
+                .first()
+                .annotations
+                .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.testpackage.Annotation"
@@ -64,10 +65,11 @@ class KoAnnotationDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `annotation-in-file-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("annotation-in-file-fully-qualified-name")
-            .files
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-in-file-fully-qualified-name")
+                .files
+                .annotations
+                .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleAnnotation"

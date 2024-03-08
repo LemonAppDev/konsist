@@ -40,7 +40,10 @@ interface KoFunctionProvider : KoBaseProvider {
      * @param includeLocal Specifies whether to include local functions in the count (optional, default is `true`).
      * @return The number of functions in the declaration.
      */
-    fun numFunctions(includeNested: Boolean = true, includeLocal: Boolean = true): Int
+    fun numFunctions(
+        includeNested: Boolean = true,
+        includeLocal: Boolean = true,
+    ): Int
 
     /**
      * Returns the number of functions that satisfies the specified predicate present in the declaration.

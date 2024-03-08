@@ -17,9 +17,10 @@ class KoVariableDeclarationForKoContainingFileProviderTest {
     @MethodSource("provideValues")
     fun `variable-containing-file`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         sut
@@ -35,12 +36,13 @@ class KoVariableDeclarationForKoContainingFileProviderTest {
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments(getSnippetFile("variable-in-function-containing-file").functions()),
-            arguments(getSnippetFile("variable-in-init-block-containing-file").classes().initBlocks),
-            arguments(getSnippetFile("variable-in-enum-constant-containing-file").classes().enumConstants),
-            arguments(getSnippetFile("variable-in-getter-containing-file").properties().getters),
-            arguments(getSnippetFile("variable-in-setter-containing-file").properties().setters),
-        )
+        fun provideValues() =
+            listOf(
+                arguments(getSnippetFile("variable-in-function-containing-file").functions()),
+                arguments(getSnippetFile("variable-in-init-block-containing-file").classes().initBlocks),
+                arguments(getSnippetFile("variable-in-enum-constant-containing-file").classes().enumConstants),
+                arguments(getSnippetFile("variable-in-getter-containing-file").properties().getters),
+                arguments(getSnippetFile("variable-in-setter-containing-file").properties().setters),
+            )
     }
 }

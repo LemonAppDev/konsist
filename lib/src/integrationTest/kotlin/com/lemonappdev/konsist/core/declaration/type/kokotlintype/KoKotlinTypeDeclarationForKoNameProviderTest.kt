@@ -9,11 +9,12 @@ class KoKotlinTypeDeclarationForKoNameProviderTest {
     @Test
     fun `nullable-kotlin-basic-type-name`() {
         // given
-        val sut = getSnippetFile("nullable-kotlin-basic-type-name")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoKotlinTypeDeclaration
+        val sut =
+            getSnippetFile("nullable-kotlin-basic-type-name")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         sut?.name shouldBeEqualTo "String"
@@ -22,11 +23,12 @@ class KoKotlinTypeDeclarationForKoNameProviderTest {
     @Test
     fun `not-nullable-kotlin-basic-type-name`() {
         // given
-        val sut = getSnippetFile("not-nullable-kotlin-basic-type-name")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoKotlinTypeDeclaration
+        val sut =
+            getSnippetFile("not-nullable-kotlin-basic-type-name")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         sut?.name shouldBeEqualTo "String"
@@ -35,11 +37,12 @@ class KoKotlinTypeDeclarationForKoNameProviderTest {
     @Test
     fun `nullable-kotlin-collection-type-name`() {
         // given
-        val sut = getSnippetFile("nullable-kotlin-collection-type-name")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoKotlinTypeDeclaration
+        val sut =
+            getSnippetFile("nullable-kotlin-collection-type-name")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         sut?.name shouldBeEqualTo "List<String>"
@@ -48,11 +51,12 @@ class KoKotlinTypeDeclarationForKoNameProviderTest {
     @Test
     fun `not-nullable-kotlin-collection-type-name`() {
         // given
-        val sut = getSnippetFile("not-nullable-kotlin-collection-type-name")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoKotlinTypeDeclaration
+        val sut =
+            getSnippetFile("not-nullable-kotlin-collection-type-name")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         sut?.name shouldBeEqualTo "List<String>"

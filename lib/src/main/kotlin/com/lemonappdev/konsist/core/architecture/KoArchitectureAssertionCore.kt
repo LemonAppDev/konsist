@@ -7,8 +7,7 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.core.verify.assert
 
 class KoArchitectureAssertionCore : KoArchitectureAssertion {
-    override fun KoScope.assertArchitecture(dependencies: DependencyRules.() -> Unit) =
-        assertArchitecture(null, null, dependencies)
+    override fun KoScope.assertArchitecture(dependencies: DependencyRules.() -> Unit) = assertArchitecture(null, null, dependencies)
 
     override fun KoScope.assertArchitecture(
         additionalMessage: String?,
@@ -20,8 +19,7 @@ class KoArchitectureAssertionCore : KoArchitectureAssertion {
         architectureScope.assert(additionalMessage, testName)
     }
 
-    override fun KoScope.assertArchitecture(dependencies: DependencyRules) =
-        assertArchitecture(null, null, dependencies)
+    override fun KoScope.assertArchitecture(dependencies: DependencyRules) = assertArchitecture(null, null, dependencies)
 
     override fun KoScope.assertArchitecture(
         additionalMessage: String?,
@@ -43,8 +41,7 @@ class KoArchitectureAssertionCore : KoArchitectureAssertion {
         KoArchitectureFiles(dependencyRules, this).assert(additionalMessage, testName)
     }
 
-    override fun List<KoFileDeclaration>.assertArchitecture(dependencies: DependencyRules) =
-        assertArchitecture(null, null, dependencies)
+    override fun List<KoFileDeclaration>.assertArchitecture(dependencies: DependencyRules) = assertArchitecture(null, null, dependencies)
 
     override fun List<KoFileDeclaration>.assertArchitecture(
         additionalMessage: String?,

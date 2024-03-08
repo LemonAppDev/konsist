@@ -19,9 +19,10 @@ class KoAnnotationProviderExtTest {
     @Test
     fun `file-has-two-annotations-of-type`() {
         // given
-        val sut = getSnippetFile("file-has-two-annotations-of-type")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-has-two-annotations-of-type")
+                .files
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -34,9 +35,10 @@ class KoAnnotationProviderExtTest {
     @Test
     fun `file-has-suppress-annotation-without-import`() {
         // given
-        val sut = getSnippetFile("file-has-suppress-annotation-without-import")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-has-suppress-annotation-without-import")
+                .files
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -47,15 +49,14 @@ class KoAnnotationProviderExtTest {
 
     @ParameterizedTest
     @MethodSource("provideValuesForAnnotationWithImport")
-    fun `declaration-has-two-annotations-of-type`(
-        fileName: String,
-    ) {
+    fun `declaration-has-two-annotations-of-type`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .declarations(includeNested = true)
-            .filterNot { it is KoFileDeclaration }
-            .filterIsInstance<KoAnnotationProvider>()
-            .first()
+        val sut =
+            getSnippetFile(fileName)
+                .declarations(includeNested = true)
+                .filterNot { it is KoFileDeclaration }
+                .filterIsInstance<KoAnnotationProvider>()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -67,15 +68,14 @@ class KoAnnotationProviderExtTest {
 
     @ParameterizedTest
     @MethodSource("provideValuesForAnnotationWithoutImport")
-    fun `declaration-has-suppress-annotation-without-import`(
-        fileName: String,
-    ) {
+    fun `declaration-has-suppress-annotation-without-import`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .declarations(includeNested = true)
-            .filterNot { it is KoFileDeclaration }
-            .filterIsInstance<KoAnnotationProvider>()
-            .first()
+        val sut =
+            getSnippetFile(fileName)
+                .declarations(includeNested = true)
+                .filterNot { it is KoFileDeclaration }
+                .filterIsInstance<KoAnnotationProvider>()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -87,10 +87,11 @@ class KoAnnotationProviderExtTest {
     @Test
     fun `primary-constructor-has-two-annotations-of-type`() {
         // given
-        val sut = getSnippetFile("primary-constructor-has-two-annotations-of-type")
-            .classes()
-            .first()
-            .primaryConstructor
+        val sut =
+            getSnippetFile("primary-constructor-has-two-annotations-of-type")
+                .classes()
+                .first()
+                .primaryConstructor
 
         // then
         assertSoftly(sut) {
@@ -103,10 +104,11 @@ class KoAnnotationProviderExtTest {
     @Test
     fun `primary-constructor-has-suppress-annotation-without-import`() {
         // given
-        val sut = getSnippetFile("primary-constructor-has-suppress-annotation-without-import")
-            .classes()
-            .first()
-            .primaryConstructor
+        val sut =
+            getSnippetFile("primary-constructor-has-suppress-annotation-without-import")
+                .classes()
+                .first()
+                .primaryConstructor
 
         // then
         assertSoftly(sut) {
@@ -118,10 +120,11 @@ class KoAnnotationProviderExtTest {
     @Test
     fun `secondary-constructor-has-two-annotations-of-type`() {
         // given
-        val sut = getSnippetFile("secondary-constructor-has-two-annotations-of-type")
-            .classes()
-            .secondaryConstructors
-            .first()
+        val sut =
+            getSnippetFile("secondary-constructor-has-two-annotations-of-type")
+                .classes()
+                .secondaryConstructors
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -134,10 +137,11 @@ class KoAnnotationProviderExtTest {
     @Test
     fun `secondary-constructor-has-suppress-annotation-without-import`() {
         // given
-        val sut = getSnippetFile("secondary-constructor-has-suppress-annotation-without-import")
-            .classes()
-            .secondaryConstructors
-            .first()
+        val sut =
+            getSnippetFile("secondary-constructor-has-suppress-annotation-without-import")
+                .classes()
+                .secondaryConstructors
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -146,28 +150,29 @@ class KoAnnotationProviderExtTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("api/ext/provider/koannotation/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("api/ext/provider/koannotation/snippet/", fileName)
 
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForAnnotationWithImport() = listOf(
-            arguments("class-has-two-annotations-of-type"),
-            arguments("function-has-two-annotations-of-type"),
-            arguments("interface-has-two-annotations-of-type"),
-            arguments("object-has-two-annotations-of-type"),
-            arguments("property-has-two-annotations-of-type"),
-        )
+        fun provideValuesForAnnotationWithImport() =
+            listOf(
+                arguments("class-has-two-annotations-of-type"),
+                arguments("function-has-two-annotations-of-type"),
+                arguments("interface-has-two-annotations-of-type"),
+                arguments("object-has-two-annotations-of-type"),
+                arguments("property-has-two-annotations-of-type"),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForAnnotationWithoutImport() = listOf(
-            arguments("class-has-suppress-annotation-without-import"),
-            arguments("function-has-suppress-annotation-without-import"),
-            arguments("interface-has-suppress-annotation-without-import"),
-            arguments("object-has-suppress-annotation-without-import"),
-            arguments("property-has-suppress-annotation-without-import"),
-        )
+        fun provideValuesForAnnotationWithoutImport() =
+            listOf(
+                arguments("class-has-suppress-annotation-without-import"),
+                arguments("function-has-suppress-annotation-without-import"),
+                arguments("interface-has-suppress-annotation-without-import"),
+                arguments("object-has-suppress-annotation-without-import"),
+                arguments("property-has-suppress-annotation-without-import"),
+            )
     }
 }

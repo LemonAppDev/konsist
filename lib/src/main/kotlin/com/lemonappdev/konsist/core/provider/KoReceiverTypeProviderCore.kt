@@ -22,11 +22,12 @@ internal interface KoReceiverTypeProviderCore :
         get() {
             val references = getTypeReferences()
 
-            val type = if (ktCallableDeclaration.isExtensionDeclaration()) {
-                references.firstOrNull()
-            } else {
-                null
-            }
+            val type =
+                if (ktCallableDeclaration.isExtensionDeclaration()) {
+                    references.firstOrNull()
+                } else {
+                    null
+                }
 
             return type?.let {
                 KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration())
@@ -44,7 +45,8 @@ internal interface KoReceiverTypeProviderCore :
 
     override fun hasReceiverTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(receiverType, kClass)
 
-    private fun getTypeReferences(): List<KtTypeReference> = ktCallableDeclaration
-        .children
-        .filterIsInstance<KtTypeReference>()
+    private fun getTypeReferences(): List<KtTypeReference> =
+        ktCallableDeclaration
+            .children
+            .filterIsInstance<KtTypeReference>()
 }

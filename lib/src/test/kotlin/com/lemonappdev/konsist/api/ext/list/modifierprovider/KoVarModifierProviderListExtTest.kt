@@ -10,12 +10,14 @@ class KoVarModifierProviderListExtTest {
     @Test
     fun `withVarModifier() returns declaration with var modifier`() {
         // given
-        val declaration1: KoVarModifierProvider = mockk {
-            every { hasVarModifier } returns true
-        }
-        val declaration2: KoVarModifierProvider = mockk {
-            every { hasVarModifier } returns false
-        }
+        val declaration1: KoVarModifierProvider =
+            mockk {
+                every { hasVarModifier } returns true
+            }
+        val declaration2: KoVarModifierProvider =
+            mockk {
+                every { hasVarModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -28,12 +30,14 @@ class KoVarModifierProviderListExtTest {
     @Test
     fun `withoutVarModifier() returns declaration without var modifier`() {
         // given
-        val declaration1: KoVarModifierProvider = mockk {
-            every { hasVarModifier } returns true
-        }
-        val declaration2: KoVarModifierProvider = mockk {
-            every { hasVarModifier } returns false
-        }
+        val declaration1: KoVarModifierProvider =
+            mockk {
+                every { hasVarModifier } returns true
+            }
+        val declaration2: KoVarModifierProvider =
+            mockk {
+                every { hasVarModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

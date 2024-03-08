@@ -14,9 +14,10 @@ class AssertTrueOnSingleDeclarationTest {
     @Test
     fun `declaration-assert-test-method-name-derived-from-junit-method-name`() {
         // given
-        val sut = getSnippetFile("declaration-assert-test-method-name-derived-from-junit-method-name")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("declaration-assert-test-method-name-derived-from-junit-method-name")
+                .classes()
+                .first()
 
         // then
         try {
@@ -32,9 +33,10 @@ class AssertTrueOnSingleDeclarationTest {
     @Test
     fun `declaration-assert-test-method-name-derived-from-test-name-parameter`() {
         // given
-        val sut = getSnippetFile("declaration-assert-test-method-name-derived-from-test-name-parameter")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("declaration-assert-test-method-name-derived-from-test-name-parameter")
+                .classes()
+                .first()
 
         // then
         try {
@@ -48,9 +50,10 @@ class AssertTrueOnSingleDeclarationTest {
     @Test
     fun `file-declaration-assert-test-method-name-derived-from-junit-method-name`() {
         // given
-        val sut = getSnippetFile("file-declaration-assert-test-method-name-derived-from-junit-method-name")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-declaration-assert-test-method-name-derived-from-junit-method-name")
+                .files
+                .first()
 
         // then
         try {
@@ -66,9 +69,10 @@ class AssertTrueOnSingleDeclarationTest {
     @Test
     fun `file-declaration-assert-test-method-name-derived-from-test-name-parameter`() {
         // given
-        val sut = getSnippetFile("file-declaration-assert-test-method-name-derived-from-test-name-parameter")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-declaration-assert-test-method-name-derived-from-test-name-parameter")
+                .files
+                .first()
 
         // then
         try {
@@ -83,9 +87,10 @@ class AssertTrueOnSingleDeclarationTest {
     fun `declaration-assert-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("declaration-assert-error-with-custom-message")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("declaration-assert-error-with-custom-message")
+                .classes()
+                .first()
 
         // then
         try {
@@ -103,9 +108,10 @@ class AssertTrueOnSingleDeclarationTest {
     fun `declaration-assert-error-with-custom-message-and-strict-set-to-true`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("declaration-assert-error-with-custom-message-and-strict-set-to-true")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("declaration-assert-error-with-custom-message-and-strict-set-to-true")
+                .classes()
+                .first()
 
         // then
         try {
@@ -123,9 +129,10 @@ class AssertTrueOnSingleDeclarationTest {
     fun `file-declaration-assert-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("file-declaration-assert-error-with-custom-message")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-declaration-assert-error-with-custom-message")
+                .files
+                .first()
 
         // then
         try {
@@ -143,9 +150,10 @@ class AssertTrueOnSingleDeclarationTest {
     fun `file-declaration-assert-error-with-custom-message-and-strict-set-to-true`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("file-declaration-assert-error-with-custom-message-and-strict-set-to-true")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-declaration-assert-error-with-custom-message-and-strict-set-to-true")
+                .files
+                .first()
 
         // then
         try {
@@ -162,9 +170,10 @@ class AssertTrueOnSingleDeclarationTest {
     @Test
     fun `declaration-assert-displaying-correct-failed-declaration-type`() {
         // given
-        val sut = getSnippetFile("declaration-assert-displaying-correct-failed-declaration-type")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("declaration-assert-displaying-correct-failed-declaration-type")
+                .classes()
+                .first()
 
         // then
         try {
@@ -178,9 +187,10 @@ class AssertTrueOnSingleDeclarationTest {
     @Test
     fun `file-declaration-assert-displaying-correct-failed-declaration-type`() {
         // given
-        val sut = getSnippetFile("file-declaration-assert-displaying-correct-failed-declaration-type")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-declaration-assert-displaying-correct-failed-declaration-type")
+                .files
+                .first()
 
         // then
         try {
@@ -194,10 +204,11 @@ class AssertTrueOnSingleDeclarationTest {
     @Test
     fun `declaration-assert-passes-when-declaration-list-has-only-nulls`() {
         // given
-        val sut = getSnippetFile("declaration-assert-passes-when-declaration-list-has-only-nulls")
-            .classes()
-            .map { it.primaryConstructor }
-            .first()
+        val sut =
+            getSnippetFile("declaration-assert-passes-when-declaration-list-has-only-nulls")
+                .classes()
+                .map { it.primaryConstructor }
+                .first()
 
         // when
         sut.assertTrue { true }
@@ -206,10 +217,11 @@ class AssertTrueOnSingleDeclarationTest {
     @Test
     fun `declaration-assert-false-passes-when-declaration-list-has-only-nulls`() {
         // given
-        val sut = getSnippetFile("declaration-assert-false-passes-when-declaration-list-has-only-nulls")
-            .classes()
-            .map { it.primaryConstructor }
-            .first()
+        val sut =
+            getSnippetFile("declaration-assert-false-passes-when-declaration-list-has-only-nulls")
+                .classes()
+                .map { it.primaryConstructor }
+                .first()
 
         // when
         sut.assertFalse { false }
@@ -218,10 +230,11 @@ class AssertTrueOnSingleDeclarationTest {
     @Test
     fun `declaration-assert-strict-fails-when-declaration-list-has-only-nulls`() {
         // given
-        val sut = getSnippetFile("declaration-assert-strict-fails-when-declaration-list-has-only-nulls")
-            .classes()
-            .map { it.primaryConstructor }
-            .first()
+        val sut =
+            getSnippetFile("declaration-assert-strict-fails-when-declaration-list-has-only-nulls")
+                .classes()
+                .map { it.primaryConstructor }
+                .first()
 
         // when
         val func = {
@@ -237,10 +250,11 @@ class AssertTrueOnSingleDeclarationTest {
     @Test
     fun `declaration-assert-false-strict-fails-when-declaration-list-has-only-nulls`() {
         // given
-        val sut = getSnippetFile("declaration-assert-false-strict-fails-when-declaration-list-has-only-nulls")
-            .classes()
-            .map { it.primaryConstructor }
-            .first()
+        val sut =
+            getSnippetFile("declaration-assert-false-strict-fails-when-declaration-list-has-only-nulls")
+                .classes()
+                .map { it.primaryConstructor }
+                .first()
 
         // when
         val func = {
@@ -256,9 +270,10 @@ class AssertTrueOnSingleDeclarationTest {
     @Test
     fun `assert-passes`() {
         // given
-        val sut = getSnippetFile("assert-passes")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("assert-passes")
+                .classes()
+                .first()
 
         // then
         sut.assertTrue { it.name == "SampleClass" }
@@ -267,9 +282,10 @@ class AssertTrueOnSingleDeclarationTest {
     @Test
     fun `assert-fails`() {
         // given
-        val sut = getSnippetFile("assert-fails")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("assert-fails")
+                .classes()
+                .first()
 
         // when
         val func = {
@@ -283,9 +299,10 @@ class AssertTrueOnSingleDeclarationTest {
     @Test
     fun `assert-false-passes`() {
         // given
-        val sut = getSnippetFile("assert-false-passes")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("assert-false-passes")
+                .classes()
+                .first()
 
         // then
         sut.assertFalse {
@@ -296,9 +313,10 @@ class AssertTrueOnSingleDeclarationTest {
     @Test
     fun `assert-false-fails`() {
         // given
-        val sut = getSnippetFile("assert-false-fails")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("assert-false-fails")
+                .classes()
+                .first()
 
         // when
         val func = {
@@ -314,9 +332,10 @@ class AssertTrueOnSingleDeclarationTest {
     @Test
     fun `assert-passes-on-declarations-which-items-have-null-parent`() {
         // given
-        val sut = getSnippetFile("assert-passes-on-declarations-which-items-have-null-parent")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("assert-passes-on-declarations-which-items-have-null-parent")
+                .files
+                .first()
 
         // then
         sut.assertTrue { it.name == "assert-passes-on-declarations-which-items-have-null-parent" }
@@ -325,9 +344,10 @@ class AssertTrueOnSingleDeclarationTest {
     @Test
     fun `assert-fails-on-declarations-which-items-have-null-parent`() {
         // given
-        val sut = getSnippetFile("assert-fails-on-declarations-which-items-have-null-parent")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("assert-fails-on-declarations-which-items-have-null-parent")
+                .files
+                .first()
 
         // when
         val func = {
@@ -341,9 +361,10 @@ class AssertTrueOnSingleDeclarationTest {
     @Test
     fun `assert-false-passes-on-declarations-which-items-have-null-parent`() {
         // given
-        val sut = getSnippetFile("assert-false-passes-on-declarations-which-items-have-null-parent")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("assert-false-passes-on-declarations-which-items-have-null-parent")
+                .files
+                .first()
 
         // then
         sut.assertFalse {
@@ -354,9 +375,10 @@ class AssertTrueOnSingleDeclarationTest {
     @Test
     fun `assert-false-fails-on-declarations-which-items-have-null-parent`() {
         // given
-        val sut = getSnippetFile("assert-false-fails-on-declarations-which-items-have-null-parent")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("assert-false-fails-on-declarations-which-items-have-null-parent")
+                .files
+                .first()
 
         // when
         val func = {

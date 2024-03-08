@@ -13,14 +13,15 @@ class KoImportAliasDeclarationForKoContainingDeclarationProviderTest {
     @MethodSource("provideValues")
     fun `type-containing-declaration`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoImportAliasDeclaration
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoImportAliasDeclaration
 
         // then
         (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
@@ -35,9 +36,10 @@ class KoImportAliasDeclarationForKoContainingDeclarationProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("import-alias-type-containing-declaration"),
-            arguments("nullable-import-alias-type-containing-declaration"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("import-alias-type-containing-declaration"),
+                arguments("nullable-import-alias-type-containing-declaration"),
+            )
     }
 }

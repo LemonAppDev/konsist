@@ -8,9 +8,10 @@ class KoPropertyDeclarationForKoActualModifierProviderTest {
     @Test
     fun `property-has-no-actual-modifier`() {
         // given
-        val sut = getSnippetFile("property-has-no-actual-modifier")
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-has-no-actual-modifier")
+                .properties()
+                .first()
 
         // then
         sut.hasActualModifier shouldBeEqualTo false
@@ -19,9 +20,10 @@ class KoPropertyDeclarationForKoActualModifierProviderTest {
     @Test
     fun `property-has-actual-modifier`() {
         // given
-        val sut = getSnippetFile("property-has-actual-modifier")
-            .properties(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("property-has-actual-modifier")
+                .properties(includeNested = true)
+                .first()
 
         // then
         sut.hasActualModifier shouldBeEqualTo true

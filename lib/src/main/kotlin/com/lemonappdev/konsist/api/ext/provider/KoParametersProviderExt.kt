@@ -11,11 +11,12 @@ import com.lemonappdev.konsist.api.provider.KoParametersProvider
  */
 fun <T : KoParametersProvider> T.hasValidKDocParamTags(): Boolean =
     if (parameters.isNotEmpty()) {
-        val kDoc = when (this) {
-            is KoPrimaryConstructorDeclaration -> (containingDeclaration as? KoKDocProvider)?.kDoc
-            is KoKDocProvider -> kDoc
-            else -> null
-        }
+        val kDoc =
+            when (this) {
+                is KoPrimaryConstructorDeclaration -> (containingDeclaration as? KoKDocProvider)?.kDoc
+                is KoKDocProvider -> kDoc
+                else -> null
+            }
 
         parameters.map { it.name }.sorted() == kDoc?.paramTags?.map { it.value }?.sorted()
     } else {

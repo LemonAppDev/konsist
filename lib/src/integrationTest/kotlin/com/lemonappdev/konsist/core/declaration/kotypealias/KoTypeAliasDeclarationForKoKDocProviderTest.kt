@@ -10,9 +10,10 @@ class KoTypeAliasDeclarationForKoKDocProviderTest {
     @Test
     fun `typealias-without-kdoc`() {
         // given
-        val sut = getSnippetFile("typealias-without-kdoc")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-without-kdoc")
+                .typeAliases
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -24,9 +25,10 @@ class KoTypeAliasDeclarationForKoKDocProviderTest {
     @Test
     fun `typealias-with-kdoc`() {
         // given
-        val sut = getSnippetFile("typealias-with-kdoc")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-with-kdoc")
+                .typeAliases
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -38,9 +40,10 @@ class KoTypeAliasDeclarationForKoKDocProviderTest {
     @Test
     fun `typealias-with-one-line-kdoc`() {
         // given
-        val sut = getSnippetFile("typealias-with-one-line-kdoc")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-with-one-line-kdoc")
+                .typeAliases
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -49,6 +52,5 @@ class KoTypeAliasDeclarationForKoKDocProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kotypealias/snippet/forkokdocprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kotypealias/snippet/forkokdocprovider/", fileName)
 }

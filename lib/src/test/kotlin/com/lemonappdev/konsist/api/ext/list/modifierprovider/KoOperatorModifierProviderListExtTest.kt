@@ -10,12 +10,14 @@ class KoOperatorModifierProviderListExtTest {
     @Test
     fun `withOperatorModifier() returns declaration with operator modifier`() {
         // given
-        val declaration1: KoOperatorModifierProvider = mockk {
-            every { hasOperatorModifier } returns true
-        }
-        val declaration2: KoOperatorModifierProvider = mockk {
-            every { hasOperatorModifier } returns false
-        }
+        val declaration1: KoOperatorModifierProvider =
+            mockk {
+                every { hasOperatorModifier } returns true
+            }
+        val declaration2: KoOperatorModifierProvider =
+            mockk {
+                every { hasOperatorModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -28,12 +30,14 @@ class KoOperatorModifierProviderListExtTest {
     @Test
     fun `withoutOperatorModifier() returns declaration without operator modifier`() {
         // given
-        val declaration1: KoOperatorModifierProvider = mockk {
-            every { hasOperatorModifier } returns true
-        }
-        val declaration2: KoOperatorModifierProvider = mockk {
-            every { hasOperatorModifier } returns false
-        }
+        val declaration1: KoOperatorModifierProvider =
+            mockk {
+                every { hasOperatorModifier } returns true
+            }
+        val declaration2: KoOperatorModifierProvider =
+            mockk {
+                every { hasOperatorModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

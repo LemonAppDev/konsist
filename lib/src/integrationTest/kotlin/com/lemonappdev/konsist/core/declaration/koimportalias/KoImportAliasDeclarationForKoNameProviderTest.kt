@@ -15,14 +15,15 @@ class KoImportAliasDeclarationForKoNameProviderTest {
         value: String,
     ) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoImportAliasDeclaration
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoImportAliasDeclaration
 
         // then
         sut?.name shouldBeEqualTo value
@@ -34,9 +35,10 @@ class KoImportAliasDeclarationForKoNameProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("import-alias-type-name", "ImportAlias"),
-            arguments("nullable-import-alias-type-name", "ImportAlias"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("import-alias-type-name", "ImportAlias"),
+                arguments("nullable-import-alias-type-name", "ImportAlias"),
+            )
     }
 }

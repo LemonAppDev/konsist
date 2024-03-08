@@ -13,9 +13,10 @@ class KoExternalParentProviderExtTest {
     @Test
     fun `class-has-external-parent`() {
         // given
-        val sut = getSnippetFile("class-has-external-parent")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-external-parent")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -28,9 +29,10 @@ class KoExternalParentProviderExtTest {
     @Test
     fun `object-has-external-parent`() {
         // given
-        val sut = getSnippetFile("object-has-external-parent")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-external-parent")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -43,9 +45,10 @@ class KoExternalParentProviderExtTest {
     @Test
     fun `interface-has-external-parent`() {
         // given
-        val sut = getSnippetFile("interface-has-external-parent")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-external-parent")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {

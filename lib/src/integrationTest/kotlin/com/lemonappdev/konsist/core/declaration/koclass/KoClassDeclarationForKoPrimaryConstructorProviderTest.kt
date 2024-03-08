@@ -10,9 +10,10 @@ class KoClassDeclarationForKoPrimaryConstructorProviderTest {
     @Test
     fun `class-has-no-primary-constructor`() {
         // given
-        val sut = getSnippetFile("class-has-no-primary-constructor")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-no-primary-constructor")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -24,9 +25,10 @@ class KoClassDeclarationForKoPrimaryConstructorProviderTest {
     @Test
     fun `class-has-primary-constructor`() {
         // given
-        val sut = getSnippetFile("class-has-primary-constructor")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-primary-constructor")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {

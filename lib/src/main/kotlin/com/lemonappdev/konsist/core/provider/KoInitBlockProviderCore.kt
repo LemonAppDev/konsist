@@ -14,9 +14,10 @@ internal interface KoInitBlockProviderCore :
 
     override val initBlocks: List<KoInitBlockDeclaration>
         get() {
-            val anonymousInitializers = ktClassOrObject
-                .body
-                ?.anonymousInitializers
+            val anonymousInitializers =
+                ktClassOrObject
+                    .body
+                    ?.anonymousInitializers
 
             return if (anonymousInitializers?.isEmpty() == true) {
                 emptyList()
@@ -34,8 +35,7 @@ internal interface KoInitBlockProviderCore :
     override val hasInitBlocks: Boolean
         get() = initBlocks.isNotEmpty()
 
-    override fun countInitBlocks(predicate: (KoInitBlockDeclaration) -> Boolean): Int =
-        initBlocks.count { predicate(it) }
+    override fun countInitBlocks(predicate: (KoInitBlockDeclaration) -> Boolean): Int = initBlocks.count { predicate(it) }
 
     override fun hasInitBlocks(): Boolean = initBlocks.isNotEmpty()
 

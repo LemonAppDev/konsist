@@ -57,76 +57,80 @@ internal class KoFunctionDeclarationCore private constructor(
     override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoFunctionDeclaration,
-    KoBaseProviderCore,
-    KoAnnotationProviderCore,
-    KoBodyProviderCore,
-    KoContainingFileProviderCore,
-    KoDeclarationFullyQualifiedNameProviderCore,
-    KoReturnProviderCore,
-    KoInitializerProviderCore,
-    KoKDocProviderCore,
-    KoLocalClassProviderCore,
-    KoLocalDeclarationProviderCore,
-    KoLocalFunctionProviderCore,
-    KoVariableProviderCore,
-    KoLocationProviderCore,
-    KoModifierProviderCore,
-    KoNameProviderCore,
-    KoPackageDeclarationProviderCore,
-    KoParametersProviderCore,
-    KoContainingDeclarationProviderCore,
-    KoPathProviderCore,
-    KoModuleProviderCore,
-    KoSourceSetProviderCore,
-    KoReceiverTypeProviderCore,
-    KoResideInPackageProviderCore,
-    KoTextProviderCore,
-    KoTopLevelProviderCore,
-    KoVisibilityModifierProviderCore,
-    KoOperatorModifierProviderCore,
-    KoInlineModifierProviderCore,
-    KoTailrecModifierProviderCore,
-    KoInfixModifierProviderCore,
-    KoExternalModifierProviderCore,
-    KoSuspendModifierProviderCore,
-    KoOpenModifierProviderCore,
-    KoOverrideModifierProviderCore,
-    KoFinalModifierProviderCore,
-    KoAbstractModifierProviderCore,
-    KoActualModifierProviderCore,
-    KoExpectModifierProviderCore {
-    override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }
+        KoBaseProviderCore,
+        KoAnnotationProviderCore,
+        KoBodyProviderCore,
+        KoContainingFileProviderCore,
+        KoDeclarationFullyQualifiedNameProviderCore,
+        KoReturnProviderCore,
+        KoInitializerProviderCore,
+        KoKDocProviderCore,
+        KoLocalClassProviderCore,
+        KoLocalDeclarationProviderCore,
+        KoLocalFunctionProviderCore,
+        KoVariableProviderCore,
+        KoLocationProviderCore,
+        KoModifierProviderCore,
+        KoNameProviderCore,
+        KoPackageDeclarationProviderCore,
+        KoParametersProviderCore,
+        KoContainingDeclarationProviderCore,
+        KoPathProviderCore,
+        KoModuleProviderCore,
+        KoSourceSetProviderCore,
+        KoReceiverTypeProviderCore,
+        KoResideInPackageProviderCore,
+        KoTextProviderCore,
+        KoTopLevelProviderCore,
+        KoVisibilityModifierProviderCore,
+        KoOperatorModifierProviderCore,
+        KoInlineModifierProviderCore,
+        KoTailrecModifierProviderCore,
+        KoInfixModifierProviderCore,
+        KoExternalModifierProviderCore,
+        KoSuspendModifierProviderCore,
+        KoOpenModifierProviderCore,
+        KoOverrideModifierProviderCore,
+        KoFinalModifierProviderCore,
+        KoAbstractModifierProviderCore,
+        KoActualModifierProviderCore,
+        KoExpectModifierProviderCore {
+        override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }
 
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktCallableDeclaration }
+        override val ktModifierListOwner: KtModifierListOwner by lazy { ktCallableDeclaration }
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktCallableDeclaration }
+        override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktCallableDeclaration }
 
-    override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktFunction }
+        override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktFunction }
 
-    override val psiElement: PsiElement by lazy { ktFunction }
+        override val psiElement: PsiElement by lazy { ktFunction }
 
-    override val ktElement: KtElement by lazy { ktFunction }
+        override val ktElement: KtElement by lazy { ktFunction }
 
-    override val ktDeclarationWithBody: KtDeclarationWithBody by lazy { ktFunction }
+        override val ktDeclarationWithBody: KtDeclarationWithBody by lazy { ktFunction }
 
-    override val ktDeclaration: KtDeclaration by lazy { ktFunction }
+        override val ktDeclaration: KtDeclaration by lazy { ktFunction }
 
-    override val localDeclarations: List<KoBaseDeclaration> by lazy {
-        val psiElements = ktFunction
-            .bodyBlockExpression
-            ?.children
+        override val localDeclarations: List<KoBaseDeclaration> by lazy {
+            val psiElements =
+                ktFunction
+                    .bodyBlockExpression
+                    ?.children
 
-        KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
+            KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
+        }
+
+        override fun toString(): String = name
+
+        internal companion object {
+            private val cache: KoDeclarationCache<KoFunctionDeclaration> = KoDeclarationCache()
+
+            internal fun getInstance(
+                ktFunction: KtFunction,
+                containingDeclaration: KoBaseDeclaration,
+            ): KoFunctionDeclaration =
+                cache.getOrCreateInstance(ktFunction, containingDeclaration) {
+                    KoFunctionDeclarationCore(ktFunction, containingDeclaration)
+                }
+        }
     }
-
-    override fun toString(): String = name
-
-    internal companion object {
-
-        private val cache: KoDeclarationCache<KoFunctionDeclaration> = KoDeclarationCache()
-        internal fun getInstance(ktFunction: KtFunction, containingDeclaration: KoBaseDeclaration): KoFunctionDeclaration =
-            cache.getOrCreateInstance(ktFunction, containingDeclaration) {
-                KoFunctionDeclarationCore(ktFunction, containingDeclaration)
-            }
-    }
-}

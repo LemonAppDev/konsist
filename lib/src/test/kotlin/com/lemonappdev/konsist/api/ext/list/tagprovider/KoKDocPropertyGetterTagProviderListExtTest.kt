@@ -10,12 +10,14 @@ class KoKDocPropertyGetterTagProviderListExtTest {
     @Test
     fun `withPropertyGetterTag() returns declaration with any tag`() {
         // given
-        val declaration1: KoKDocPropertyGetterTagProvider = mockk {
-            every { hasPropertyGetterTag } returns true
-        }
-        val declaration2: KoKDocPropertyGetterTagProvider = mockk {
-            every { hasPropertyGetterTag } returns false
-        }
+        val declaration1: KoKDocPropertyGetterTagProvider =
+            mockk {
+                every { hasPropertyGetterTag } returns true
+            }
+        val declaration2: KoKDocPropertyGetterTagProvider =
+            mockk {
+                every { hasPropertyGetterTag } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -28,12 +30,14 @@ class KoKDocPropertyGetterTagProviderListExtTest {
     @Test
     fun `withoutPropertyGetterTag() returns declaration with any tag`() {
         // given
-        val declaration1: KoKDocPropertyGetterTagProvider = mockk {
-            every { hasPropertyGetterTag } returns true
-        }
-        val declaration2: KoKDocPropertyGetterTagProvider = mockk {
-            every { hasPropertyGetterTag } returns false
-        }
+        val declaration1: KoKDocPropertyGetterTagProvider =
+            mockk {
+                every { hasPropertyGetterTag } returns true
+            }
+        val declaration2: KoKDocPropertyGetterTagProvider =
+            mockk {
+                every { hasPropertyGetterTag } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

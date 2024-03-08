@@ -17,9 +17,10 @@ class KoVariableDeclarationForKoTextProviderTest {
     @MethodSource("provideValues")
     fun `variable-text`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         sut
@@ -28,17 +29,17 @@ class KoVariableDeclarationForKoTextProviderTest {
     }
 
     companion object {
-        private fun getSnippetFile(fileName: String) =
-            getSnippetKoScope("core/declaration/kovariable/snippet/forkotextprovider/", fileName)
+        private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kovariable/snippet/forkotextprovider/", fileName)
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments(getSnippetFile("variable-in-function-text").functions()),
-            arguments(getSnippetFile("variable-in-init-block-text").classes().initBlocks),
-            arguments(getSnippetFile("variable-in-enum-constant-text").classes().enumConstants),
-            arguments(getSnippetFile("variable-in-getter-text").properties().getters),
-            arguments(getSnippetFile("variable-in-setter-text").properties().setters),
-        )
+        fun provideValues() =
+            listOf(
+                arguments(getSnippetFile("variable-in-function-text").functions()),
+                arguments(getSnippetFile("variable-in-init-block-text").classes().initBlocks),
+                arguments(getSnippetFile("variable-in-enum-constant-text").classes().enumConstants),
+                arguments(getSnippetFile("variable-in-getter-text").properties().getters),
+                arguments(getSnippetFile("variable-in-setter-text").properties().setters),
+            )
     }
 }

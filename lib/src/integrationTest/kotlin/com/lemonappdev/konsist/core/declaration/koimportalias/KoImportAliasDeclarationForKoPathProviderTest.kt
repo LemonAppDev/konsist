@@ -13,14 +13,15 @@ class KoImportAliasDeclarationForKoPathProviderTest {
     @MethodSource("provideValues")
     fun `declaration-file-path`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoImportAliasDeclaration
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoImportAliasDeclaration
 
         // then
         assertSoftly(sut?.path) {
@@ -33,14 +34,15 @@ class KoImportAliasDeclarationForKoPathProviderTest {
     @MethodSource("provideValues")
     fun `declaration-project-file-path`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoImportAliasDeclaration
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoImportAliasDeclaration
 
         // then
         sut
@@ -55,14 +57,15 @@ class KoImportAliasDeclarationForKoPathProviderTest {
     @MethodSource("provideValues")
     fun `declaration-reside-in-file-path`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoImportAliasDeclaration
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoImportAliasDeclaration
 
         // then
         assertSoftly(sut) {
@@ -77,14 +80,15 @@ class KoImportAliasDeclarationForKoPathProviderTest {
     @MethodSource("provideValues")
     fun `declaration-reside-in-project-file-path`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoImportAliasDeclaration
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoImportAliasDeclaration
 
         // then
         assertSoftly(sut) {
@@ -104,9 +108,10 @@ class KoImportAliasDeclarationForKoPathProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("nullable-import-alias-type-path"),
-            arguments("not-nullable-import-alias-type-path"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("nullable-import-alias-type-path"),
+                arguments("not-nullable-import-alias-type-path"),
+            )
     }
 }

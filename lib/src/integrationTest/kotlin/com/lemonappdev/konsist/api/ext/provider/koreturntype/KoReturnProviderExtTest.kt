@@ -14,9 +14,10 @@ class KoReturnProviderExtTest {
     @Test
     fun `declaration-has-no-return-type`() {
         // given
-        val sut = getSnippetFile("declaration-has-no-return-type")
-            .declarationsOf<KoReturnProvider>()
-            .first()
+        val sut =
+            getSnippetFile("declaration-has-no-return-type")
+                .declarationsOf<KoReturnProvider>()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -28,9 +29,10 @@ class KoReturnProviderExtTest {
     @Test
     fun `declaration-has-return-type-with-simple-type`() {
         // given
-        val sut = getSnippetFile("declaration-has-return-type-with-simple-type")
-            .declarationsOf<KoReturnProvider>()
-            .first()
+        val sut =
+            getSnippetFile("declaration-has-return-type-with-simple-type")
+                .declarationsOf<KoReturnProvider>()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -42,9 +44,10 @@ class KoReturnProviderExtTest {
     @Test
     fun `declaration-has-return-type-with-complex-type`() {
         // given
-        val sut = getSnippetFile("declaration-has-return-type-with-complex-type")
-            .declarationsOf<KoReturnProvider>()
-            .first()
+        val sut =
+            getSnippetFile("declaration-has-return-type-with-complex-type")
+                .declarationsOf<KoReturnProvider>()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -56,9 +59,10 @@ class KoReturnProviderExtTest {
     @Test
     fun `declaration-with-return-type-has-valid-kdoc-return-tag`() {
         // given
-        val sut = getSnippetFile("declaration-with-return-type-has-valid-kdoc-return-tag")
-            .declarationsOf<KoReturnProvider>()
-            .first()
+        val sut =
+            getSnippetFile("declaration-with-return-type-has-valid-kdoc-return-tag")
+                .declarationsOf<KoReturnProvider>()
+                .first()
 
         // then
         sut.hasValidKDocReturnTag() shouldBeEqualTo true
@@ -67,9 +71,10 @@ class KoReturnProviderExtTest {
     @Test
     fun `declaration-with-return-type-has-not-valid-kdoc-return-tag`() {
         // given
-        val sut = getSnippetFile("declaration-with-return-type-has-not-valid-kdoc-return-tag")
-            .declarationsOf<KoReturnProvider>()
-            .first()
+        val sut =
+            getSnippetFile("declaration-with-return-type-has-not-valid-kdoc-return-tag")
+                .declarationsOf<KoReturnProvider>()
+                .first()
 
         // then
         sut.hasValidKDocReturnTag() shouldBeEqualTo false
@@ -78,9 +83,10 @@ class KoReturnProviderExtTest {
     @Test
     fun `declaration-with-return-type-has-no-kdoc`() {
         // given
-        val sut = getSnippetFile("declaration-with-return-type-has-no-kdoc")
-            .declarationsOf<KoReturnProvider>()
-            .first()
+        val sut =
+            getSnippetFile("declaration-with-return-type-has-no-kdoc")
+                .declarationsOf<KoReturnProvider>()
+                .first()
 
         // then
         sut.hasValidKDocReturnTag() shouldBeEqualTo false
@@ -89,9 +95,10 @@ class KoReturnProviderExtTest {
     @Test
     fun `declaration-with-unit-return-type-has-valid-kdoc-return-tag`() {
         // given
-        val sut = getSnippetFile("declaration-with-unit-return-type-has-valid-kdoc-return-tag")
-            .declarationsOf<KoReturnProvider>()
-            .first()
+        val sut =
+            getSnippetFile("declaration-with-unit-return-type-has-valid-kdoc-return-tag")
+                .declarationsOf<KoReturnProvider>()
+                .first()
 
         // then
         sut.hasValidKDocReturnTag() shouldBeEqualTo true
@@ -100,9 +107,10 @@ class KoReturnProviderExtTest {
     @Test
     fun `declaration-with-unit-return-type-has-not-valid-kdoc-return-tag`() {
         // given
-        val sut = getSnippetFile("declaration-with-unit-return-type-has-not-valid-kdoc-return-tag")
-            .declarationsOf<KoReturnProvider>()
-            .first()
+        val sut =
+            getSnippetFile("declaration-with-unit-return-type-has-not-valid-kdoc-return-tag")
+                .declarationsOf<KoReturnProvider>()
+                .first()
 
         // then
         sut.hasValidKDocReturnTag() shouldBeEqualTo false
@@ -111,9 +119,10 @@ class KoReturnProviderExtTest {
     @Test
     fun `declaration-with-unit-return-type-has-no-kdoc`() {
         // given
-        val sut = getSnippetFile("declaration-with-unit-return-type-has-no-kdoc")
-            .declarationsOf<KoReturnProvider>()
-            .first()
+        val sut =
+            getSnippetFile("declaration-with-unit-return-type-has-no-kdoc")
+                .declarationsOf<KoReturnProvider>()
+                .first()
 
         // then
         sut.hasValidKDocReturnTag() shouldBeEqualTo true
@@ -122,9 +131,10 @@ class KoReturnProviderExtTest {
     @Test
     fun `declaration-without-return-type-has-valid-kdoc-return-tag`() {
         // given
-        val sut = getSnippetFile("declaration-without-return-type-has-valid-kdoc-return-tag")
-            .declarationsOf<KoReturnProvider>()
-            .first()
+        val sut =
+            getSnippetFile("declaration-without-return-type-has-valid-kdoc-return-tag")
+                .declarationsOf<KoReturnProvider>()
+                .first()
 
         // then
         sut.hasValidKDocReturnTag() shouldBeEqualTo true
@@ -133,9 +143,10 @@ class KoReturnProviderExtTest {
     @Test
     fun `declaration-without-return-type-has-not-valid-kdoc-return-tag`() {
         // given
-        val sut = getSnippetFile("declaration-without-return-type-has-not-valid-kdoc-return-tag")
-            .declarationsOf<KoReturnProvider>()
-            .first()
+        val sut =
+            getSnippetFile("declaration-without-return-type-has-not-valid-kdoc-return-tag")
+                .declarationsOf<KoReturnProvider>()
+                .first()
 
         // then
         sut.hasValidKDocReturnTag() shouldBeEqualTo false
@@ -144,14 +155,14 @@ class KoReturnProviderExtTest {
     @Test
     fun `declaration-without-return-type-has-no-kdoc`() {
         // given
-        val sut = getSnippetFile("declaration-without-return-type-has-no-kdoc")
-            .declarationsOf<KoReturnProvider>()
-            .first()
+        val sut =
+            getSnippetFile("declaration-without-return-type-has-no-kdoc")
+                .declarationsOf<KoReturnProvider>()
+                .first()
 
         // then
         sut.hasValidKDocReturnTag() shouldBeEqualTo true
     }
 
-    private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("api/ext/provider/koreturntype/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("api/ext/provider/koreturntype/snippet/", fileName)
 }

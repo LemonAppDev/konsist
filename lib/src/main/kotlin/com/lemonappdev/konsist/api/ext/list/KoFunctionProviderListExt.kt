@@ -22,8 +22,10 @@ fun <T : KoFunctionProvider> List<T>.functions(
  * @param includeLocal Whether to include local functions.
  * @return A list containing declarations with any function.
  */
-fun <T : KoFunctionProvider> List<T>.withFunctions(includeNested: Boolean = true, includeLocal: Boolean = true): List<T> =
-    filter { it.hasFunctions(includeNested, includeLocal) }
+fun <T : KoFunctionProvider> List<T>.withFunctions(
+    includeNested: Boolean = true,
+    includeLocal: Boolean = true,
+): List<T> = filter { it.hasFunctions(includeNested, includeLocal) }
 
 /**
  * List containing declarations with no functions.
@@ -32,8 +34,10 @@ fun <T : KoFunctionProvider> List<T>.withFunctions(includeNested: Boolean = true
  * @param includeLocal Whether to include local functions.
  * @return A list containing declarations with no functions.
  */
-fun <T : KoFunctionProvider> List<T>.withoutFunctions(includeNested: Boolean = true, includeLocal: Boolean = true): List<T> =
-    filterNot { it.hasFunctions(includeNested, includeLocal) }
+fun <T : KoFunctionProvider> List<T>.withoutFunctions(
+    includeNested: Boolean = true,
+    includeLocal: Boolean = true,
+): List<T> = filterNot { it.hasFunctions(includeNested, includeLocal) }
 
 /**
  * List containing declarations that have at least one function with the specified name(s).
@@ -49,9 +53,10 @@ fun <T : KoFunctionProvider> List<T>.withFunctionNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> = filter {
-    it.hasFunctionWithName(name, *names, includeNested = includeNested, includeLocal = includeLocal)
-}
+): List<T> =
+    filter {
+        it.hasFunctionWithName(name, *names, includeNested = includeNested, includeLocal = includeLocal)
+    }
 
 /**
  * List containing declarations without any of specified functions.
@@ -67,9 +72,10 @@ fun <T : KoFunctionProvider> List<T>.withoutFunctionNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> = filterNot {
-    it.hasFunctionWithName(name, *names, includeNested = includeNested, includeLocal = includeLocal)
-}
+): List<T> =
+    filterNot {
+        it.hasFunctionWithName(name, *names, includeNested = includeNested, includeLocal = includeLocal)
+    }
 
 /**
  * List containing declarations that have all specified functions.
@@ -85,9 +91,10 @@ fun <T : KoFunctionProvider> List<T>.withAllFunctionsNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> = filter {
-    it.hasFunctionsWithAllNames(name, *names, includeNested = includeNested, includeLocal = includeLocal)
-}
+): List<T> =
+    filter {
+        it.hasFunctionsWithAllNames(name, *names, includeNested = includeNested, includeLocal = includeLocal)
+    }
 
 /**
  * List containing declarations without all specified functions.
@@ -120,9 +127,10 @@ fun <T : KoFunctionProvider> List<T>.withFunction(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
     predicate: (KoFunctionDeclaration) -> Boolean,
-): List<T> = filter {
-    it.hasFunction(includeNested, includeLocal, predicate)
-}
+): List<T> =
+    filter {
+        it.hasFunction(includeNested, includeLocal, predicate)
+    }
 
 /**
  * List containing declarations that not have function satisfying the provided predicate.
@@ -136,8 +144,7 @@ fun <T : KoFunctionProvider> List<T>.withoutFunction(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
     predicate: (KoFunctionDeclaration) -> Boolean,
-): List<T> =
-    filterNot { it.hasFunction(includeNested, includeLocal, predicate) }
+): List<T> = filterNot { it.hasFunction(includeNested, includeLocal, predicate) }
 
 /**
  * List containing declarations that have all functions satisfying the provided predicate.
@@ -168,8 +175,7 @@ fun <T : KoFunctionProvider> List<T>.withoutAllFunctions(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
     predicate: (KoFunctionDeclaration) -> Boolean,
-): List<T> =
-    filterNot { it.hasAllFunctions(includeNested, includeLocal, predicate) }
+): List<T> = filterNot { it.hasAllFunctions(includeNested, includeLocal, predicate) }
 
 /**
  * List containing declarations with function declarations satisfying the predicate.
@@ -183,8 +189,7 @@ fun <T : KoFunctionProvider> List<T>.withFunctions(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
     predicate: (List<KoFunctionDeclaration>) -> Boolean,
-): List<T> =
-    filter { predicate(it.functions(includeNested, includeLocal)) }
+): List<T> = filter { predicate(it.functions(includeNested, includeLocal)) }
 
 /**
  * List containing declarations without function declarations satisfying the predicate.
@@ -198,5 +203,4 @@ fun <T : KoFunctionProvider> List<T>.withoutFunctions(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
     predicate: (List<KoFunctionDeclaration>) -> Boolean,
-): List<T> =
-    filterNot { predicate(it.functions(includeNested, includeLocal)) }
+): List<T> = filterNot { predicate(it.functions(includeNested, includeLocal)) }

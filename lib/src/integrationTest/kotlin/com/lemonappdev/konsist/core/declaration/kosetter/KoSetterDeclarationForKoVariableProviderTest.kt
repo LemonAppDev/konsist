@@ -10,10 +10,11 @@ class KoSetterDeclarationForKoVariableProviderTest {
     @Test
     fun `setter-contains-no-variable`() {
         // given
-        val sut = getSnippetFile("setter-contains-no-variable")
-            .properties()
-            .setters
-            .first()
+        val sut =
+            getSnippetFile("setter-contains-no-variable")
+                .properties()
+                .setters
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -31,10 +32,11 @@ class KoSetterDeclarationForKoVariableProviderTest {
     @Test
     fun `setter-contains-variable`() {
         // given
-        val sut = getSnippetFile("setter-contains-variable")
-            .properties()
-            .setters
-            .first()
+        val sut =
+            getSnippetFile("setter-contains-variable")
+                .properties()
+                .setters
+                .first()
 
         // then
         assertSoftly(sut) {

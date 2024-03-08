@@ -8,11 +8,12 @@ class KoConstructorDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `constructor-not-reside-in-file-package`() {
         // given
-        val sut = getSnippetFile("constructor-not-reside-in-file-package")
-            .classes()
-            .first()
-            .constructors
-            .first()
+        val sut =
+            getSnippetFile("constructor-not-reside-in-file-package")
+                .classes()
+                .first()
+                .constructors
+                .first()
 
         // then
         sut.resideInPackage("com") shouldBeEqualTo false
@@ -21,11 +22,12 @@ class KoConstructorDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `constructor-reside-in-file-package`() {
         // given
-        val sut = getSnippetFile("constructor-reside-in-file-package")
-            .classes()
-            .first()
-            .constructors
-            .first()
+        val sut =
+            getSnippetFile("constructor-reside-in-file-package")
+                .classes()
+                .first()
+                .constructors
+                .first()
 
         // then
         sut.resideInPackage("com..") shouldBeEqualTo true
@@ -34,11 +36,12 @@ class KoConstructorDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `constructor-not-reside-outside-file-package`() {
         // given
-        val sut = getSnippetFile("constructor-not-reside-outside-file-package")
-            .classes()
-            .first()
-            .constructors
-            .first()
+        val sut =
+            getSnippetFile("constructor-not-reside-outside-file-package")
+                .classes()
+                .first()
+                .constructors
+                .first()
 
         // then
         sut.resideOutsidePackage("com..") shouldBeEqualTo false
@@ -47,11 +50,12 @@ class KoConstructorDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `constructor-reside-outside-file-package`() {
         // given
-        val sut = getSnippetFile("constructor-reside-outside-file-package")
-            .classes()
-            .first()
-            .constructors
-            .first()
+        val sut =
+            getSnippetFile("constructor-reside-outside-file-package")
+                .classes()
+                .first()
+                .constructors
+                .first()
 
         // then
         sut.resideOutsidePackage("com") shouldBeEqualTo true

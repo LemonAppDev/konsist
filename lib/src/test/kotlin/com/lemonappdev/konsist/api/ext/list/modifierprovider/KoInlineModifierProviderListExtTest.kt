@@ -10,12 +10,14 @@ class KoInlineModifierProviderListExtTest {
     @Test
     fun `withInlineModifier() returns declaration with inline modifier`() {
         // given
-        val declaration1: KoInlineModifierProvider = mockk {
-            every { hasInlineModifier } returns true
-        }
-        val declaration2: KoInlineModifierProvider = mockk {
-            every { hasInlineModifier } returns false
-        }
+        val declaration1: KoInlineModifierProvider =
+            mockk {
+                every { hasInlineModifier } returns true
+            }
+        val declaration2: KoInlineModifierProvider =
+            mockk {
+                every { hasInlineModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -28,12 +30,14 @@ class KoInlineModifierProviderListExtTest {
     @Test
     fun `withoutInlineModifier() returns declaration without inline modifier`() {
         // given
-        val declaration1: KoInlineModifierProvider = mockk {
-            every { hasInlineModifier } returns true
-        }
-        val declaration2: KoInlineModifierProvider = mockk {
-            every { hasInlineModifier } returns false
-        }
+        val declaration1: KoInlineModifierProvider =
+            mockk {
+                every { hasInlineModifier } returns true
+            }
+        val declaration2: KoInlineModifierProvider =
+            mockk {
+                every { hasInlineModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

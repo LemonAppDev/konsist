@@ -8,9 +8,10 @@ class KoClassDeclarationForKoAnnotationModifierProviderTest {
     @Test
     fun `class-without-annotation-modifier`() {
         // given
-        val sut = getSnippetFile("class-without-annotation-modifier")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-without-annotation-modifier")
+                .classes()
+                .first()
 
         // then
         sut.hasAnnotationModifier shouldBeEqualTo false
@@ -19,9 +20,10 @@ class KoClassDeclarationForKoAnnotationModifierProviderTest {
     @Test
     fun `annotation-class`() {
         // given
-        val sut = getSnippetFile("annotation-class")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("annotation-class")
+                .classes()
+                .first()
 
         // then
         sut.hasAnnotationModifier shouldBeEqualTo true

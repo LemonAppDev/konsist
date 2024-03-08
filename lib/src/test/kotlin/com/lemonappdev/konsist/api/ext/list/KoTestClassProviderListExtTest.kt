@@ -14,15 +14,18 @@ class KoTestClassProviderListExtTest {
         val testClass1: KoClassDeclaration = mockk()
         val testClass2: KoClassDeclaration = mockk()
         val testClass3: KoClassDeclaration = mockk()
-        val declaration1: KoTestClassProvider = mockk {
-            every { testClasses() } returns listOf(testClass1, testClass2)
-        }
-        val declaration2: KoTestClassProvider = mockk {
-            every { testClasses() } returns listOf(testClass3)
-        }
-        val declaration3: KoTestClassProvider = mockk {
-            every { testClasses() } returns emptyList()
-        }
+        val declaration1: KoTestClassProvider =
+            mockk {
+                every { testClasses() } returns listOf(testClass1, testClass2)
+            }
+        val declaration2: KoTestClassProvider =
+            mockk {
+                every { testClasses() } returns listOf(testClass3)
+            }
+        val declaration3: KoTestClassProvider =
+            mockk {
+                every { testClasses() } returns emptyList()
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -39,15 +42,18 @@ class KoTestClassProviderListExtTest {
         val testClass1: KoClassDeclaration = mockk()
         val testClass2: KoClassDeclaration = mockk()
         val testClass3: KoClassDeclaration = mockk()
-        val declaration1: KoTestClassProvider = mockk {
-            every { testClasses(predicate = predicate) } returns listOf(testClass1, testClass2)
-        }
-        val declaration2: KoTestClassProvider = mockk {
-            every { testClasses(predicate = predicate) } returns listOf(testClass3)
-        }
-        val declaration3: KoTestClassProvider = mockk {
-            every { testClasses(predicate = predicate) } returns emptyList()
-        }
+        val declaration1: KoTestClassProvider =
+            mockk {
+                every { testClasses(predicate = predicate) } returns listOf(testClass1, testClass2)
+            }
+        val declaration2: KoTestClassProvider =
+            mockk {
+                every { testClasses(predicate = predicate) } returns listOf(testClass3)
+            }
+        val declaration3: KoTestClassProvider =
+            mockk {
+                every { testClasses(predicate = predicate) } returns emptyList()
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -60,12 +66,14 @@ class KoTestClassProviderListExtTest {
     @Test
     fun `withTestClass() returns declaration with test`() {
         // given
-        val declaration1: KoTestClassProvider = mockk {
-            every { hasTestClasses() } returns true
-        }
-        val declaration2: KoTestClassProvider = mockk {
-            every { hasTestClasses() } returns false
-        }
+        val declaration1: KoTestClassProvider =
+            mockk {
+                every { hasTestClasses() } returns true
+            }
+        val declaration2: KoTestClassProvider =
+            mockk {
+                every { hasTestClasses() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -78,12 +86,14 @@ class KoTestClassProviderListExtTest {
     @Test
     fun `withoutTestClass() returns declaration without test`() {
         // given
-        val declaration1: KoTestClassProvider = mockk {
-            every { hasTestClasses() } returns true
-        }
-        val declaration2: KoTestClassProvider = mockk {
-            every { hasTestClasses() } returns false
-        }
+        val declaration1: KoTestClassProvider =
+            mockk {
+                every { hasTestClasses() } returns true
+            }
+        val declaration2: KoTestClassProvider =
+            mockk {
+                every { hasTestClasses() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -97,12 +107,14 @@ class KoTestClassProviderListExtTest {
     fun `withTestClass() returns declaration with test matching the predicate`() {
         // given
         val predicate: (KoClassDeclaration) -> Boolean = { it.numFunctions() == 2 }
-        val declaration1: KoTestClassProvider = mockk {
-            every { hasTestClass(predicate = predicate) } returns true
-        }
-        val declaration2: KoTestClassProvider = mockk {
-            every { hasTestClass(predicate = predicate) } returns false
-        }
+        val declaration1: KoTestClassProvider =
+            mockk {
+                every { hasTestClass(predicate = predicate) } returns true
+            }
+        val declaration2: KoTestClassProvider =
+            mockk {
+                every { hasTestClass(predicate = predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -116,12 +128,14 @@ class KoTestClassProviderListExtTest {
     fun `withoutTestClass() returns declaration without test matching the predicate`() {
         // given
         val predicate: (KoClassDeclaration) -> Boolean = { it.numFunctions() == 2 }
-        val declaration1: KoTestClassProvider = mockk {
-            every { hasTestClass(predicate = predicate) } returns true
-        }
-        val declaration2: KoTestClassProvider = mockk {
-            every { hasTestClass(predicate = predicate) } returns false
-        }
+        val declaration1: KoTestClassProvider =
+            mockk {
+                every { hasTestClass(predicate = predicate) } returns true
+            }
+        val declaration2: KoTestClassProvider =
+            mockk {
+                every { hasTestClass(predicate = predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

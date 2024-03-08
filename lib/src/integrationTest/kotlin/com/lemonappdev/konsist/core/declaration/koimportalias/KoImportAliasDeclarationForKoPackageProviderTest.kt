@@ -9,14 +9,15 @@ class KoImportAliasDeclarationForKoPackageProviderTest {
     @Test
     fun `import-alias-type-is-not-in-package`() {
         // given
-        val sut = getSnippetFile("import-alias-type-is-not-in-package")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoImportAliasDeclaration
+        val sut =
+            getSnippetFile("import-alias-type-is-not-in-package")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoImportAliasDeclaration
 
         // then
         sut?.packagee shouldBeEqualTo null
@@ -25,14 +26,15 @@ class KoImportAliasDeclarationForKoPackageProviderTest {
     @Test
     fun `import-alias-type-is-in-package`() {
         // given
-        val sut = getSnippetFile("import-alias-type-is-in-package")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoImportAliasDeclaration
+        val sut =
+            getSnippetFile("import-alias-type-is-in-package")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoImportAliasDeclaration
 
         // then
         sut?.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"

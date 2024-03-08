@@ -10,14 +10,15 @@ class KoFunctionTypeDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `function-type-reside-in-package`() {
         // given
-        val sut = getSnippetFile("function-type-reside-in-package")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoFunctionTypeDeclaration
+        val sut =
+            getSnippetFile("function-type-reside-in-package")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         assertSoftly(sut) {

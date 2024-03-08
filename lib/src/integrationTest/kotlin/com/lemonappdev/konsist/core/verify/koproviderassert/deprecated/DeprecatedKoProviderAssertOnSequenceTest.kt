@@ -21,10 +21,11 @@ class DeprecatedKoProviderAssertOnSequenceTest {
     @Test
     fun `provider-assert-test-method-name`() {
         // given
-        val sut = getSnippetFile("provider-assert-test-method-name")
-            .declarations()
-            .filterIsInstance<KoNameProvider>()
-            .asSequence()
+        val sut =
+            getSnippetFile("provider-assert-test-method-name")
+                .declarations()
+                .filterIsInstance<KoNameProvider>()
+                .asSequence()
 
         // then
         try {
@@ -39,10 +40,11 @@ class DeprecatedKoProviderAssertOnSequenceTest {
     fun `provider-assert-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("provider-assert-error-with-custom-message")
-            .declarations()
-            .filterIsInstance<KoNameProvider>()
-            .asSequence()
+        val sut =
+            getSnippetFile("provider-assert-error-with-custom-message")
+                .declarations()
+                .filterIsInstance<KoNameProvider>()
+                .asSequence()
 
         // then
         try {
@@ -59,11 +61,12 @@ class DeprecatedKoProviderAssertOnSequenceTest {
     @Test
     fun `provider-assert-fails-when-declaration-list-is-empty`() {
         // given
-        val sut = getSnippetFile("provider-assert-fails-when-declaration-list-is-empty")
-            .declarations()
-            .filterNot { it is KoFileDeclaration }
-            .filterIsInstance<KoNameProvider>()
-            .asSequence()
+        val sut =
+            getSnippetFile("provider-assert-fails-when-declaration-list-is-empty")
+                .declarations()
+                .filterNot { it is KoFileDeclaration }
+                .filterIsInstance<KoNameProvider>()
+                .asSequence()
 
         // when
         val func = {
@@ -78,11 +81,12 @@ class DeprecatedKoProviderAssertOnSequenceTest {
     @Test
     fun `provider-assert-not-fails-when-declaration-list-is-empty`() {
         // given
-        val sut = getSnippetFile("provider-assert-not-fails-when-declaration-list-is-empty")
-            .declarations()
-            .filterNot { it is KoFileDeclaration }
-            .filterIsInstance<KoNameProvider>()
-            .asSequence()
+        val sut =
+            getSnippetFile("provider-assert-not-fails-when-declaration-list-is-empty")
+                .declarations()
+                .filterNot { it is KoFileDeclaration }
+                .filterIsInstance<KoNameProvider>()
+                .asSequence()
 
         // when
         val func = {
@@ -97,10 +101,11 @@ class DeprecatedKoProviderAssertOnSequenceTest {
     @Test
     fun `assert-passes`() {
         // given
-        val sut = getSnippetFile("assert-passes")
-            .declarations()
-            .filterIsInstance<KoAnnotationProvider>()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-passes")
+                .declarations()
+                .filterIsInstance<KoAnnotationProvider>()
+                .asSequence()
 
         // then
         sut.assert { it.hasAnnotations() }
@@ -109,10 +114,11 @@ class DeprecatedKoProviderAssertOnSequenceTest {
     @Test
     fun `assert-fails`() {
         // given
-        val sut = getSnippetFile("assert-fails")
-            .declarations()
-            .filterIsInstance<KoAnnotationProvider>()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-fails")
+                .declarations()
+                .filterIsInstance<KoAnnotationProvider>()
+                .asSequence()
 
         // when
         val func = {
@@ -126,10 +132,11 @@ class DeprecatedKoProviderAssertOnSequenceTest {
     @Test
     fun `assert-not-passes`() {
         // given
-        val sut = getSnippetFile("assert-not-passes")
-            .declarations()
-            .filterIsInstance<KoAnnotationProvider>()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-not-passes")
+                .declarations()
+                .filterIsInstance<KoAnnotationProvider>()
+                .asSequence()
 
         // then
         sut.assertNot { it.hasAnnotations() }
@@ -138,10 +145,11 @@ class DeprecatedKoProviderAssertOnSequenceTest {
     @Test
     fun `assert-not-fails`() {
         // given
-        val sut = getSnippetFile("assert-not-fails")
-            .declarations()
-            .filterIsInstance<KoAnnotationProvider>()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-not-fails")
+                .declarations()
+                .filterIsInstance<KoAnnotationProvider>()
+                .asSequence()
 
         // when
         val func = {
@@ -155,10 +163,11 @@ class DeprecatedKoProviderAssertOnSequenceTest {
     @Test
     fun `assert-passes-when-expression-is-nullable`() {
         // given
-        val sut = getSnippetFile("assert-passes-when-expression-is-nullable")
-            .declarations()
-            .filterIsInstance<KoPrimaryConstructorProvider>()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-passes-when-expression-is-nullable")
+                .declarations()
+                .filterIsInstance<KoPrimaryConstructorProvider>()
+                .asSequence()
 
         // then
         sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
@@ -167,10 +176,11 @@ class DeprecatedKoProviderAssertOnSequenceTest {
     @Test
     fun `assert-fails-when-expression-is-nullable`() {
         // given
-        val sut = getSnippetFile("assert-fails-when-expression-is-nullable")
-            .declarations()
-            .filterIsInstance<KoPrimaryConstructorProvider>()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-fails-when-expression-is-nullable")
+                .declarations()
+                .filterIsInstance<KoPrimaryConstructorProvider>()
+                .asSequence()
 
         // when
         val func = {
@@ -184,10 +194,11 @@ class DeprecatedKoProviderAssertOnSequenceTest {
     @Test
     fun `assert-not-passes-when-expression-is-nullable`() {
         // given
-        val sut = getSnippetFile("assert-not-passes-when-expression-is-nullable")
-            .declarations()
-            .filterIsInstance<KoPrimaryConstructorProvider>()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-not-passes-when-expression-is-nullable")
+                .declarations()
+                .filterIsInstance<KoPrimaryConstructorProvider>()
+                .asSequence()
 
         // then
         sut.assertNot { it.primaryConstructor?.hasParameterNamed("otherParameter") }
@@ -196,10 +207,11 @@ class DeprecatedKoProviderAssertOnSequenceTest {
     @Test
     fun `assert-not-fails-when-expression-is-nullable`() {
         // given
-        val sut = getSnippetFile("assert-not-fails-when-expression-is-nullable")
-            .declarations()
-            .filterIsInstance<KoPrimaryConstructorProvider>()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-not-fails-when-expression-is-nullable")
+                .declarations()
+                .filterIsInstance<KoPrimaryConstructorProvider>()
+                .asSequence()
 
         // when
         val func = {

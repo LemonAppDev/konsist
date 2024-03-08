@@ -8,9 +8,10 @@ class KoFunctionDeclarationForKoContainingFileProviderTest {
     @Test
     fun `function-containing-file`() {
         // given
-        val sut = getSnippetFile("function-containing-file")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-containing-file")
+                .functions()
+                .first()
 
         // then
         sut

@@ -10,9 +10,10 @@ class KoInterfaceDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `interface-has-no-visibility-modifier`() {
         // given
-        val sut = getSnippetFile("interface-has-no-visibility-modifier")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-no-visibility-modifier")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -27,9 +28,10 @@ class KoInterfaceDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `interface-has-public-modifier`() {
         // given
-        val sut = getSnippetFile("interface-has-public-modifier")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-public-modifier")
+                .interfaces()
+                .first()
 
         // then
         sut.hasPublicModifier shouldBeEqualTo true
@@ -38,9 +40,10 @@ class KoInterfaceDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `interface-is-public-by-default`() {
         // given
-        val sut = getSnippetFile("interface-is-public-by-default")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-is-public-by-default")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -52,9 +55,10 @@ class KoInterfaceDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `interface-has-private-modifier`() {
         // given
-        val sut = getSnippetFile("interface-has-private-modifier")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-private-modifier")
+                .interfaces()
+                .first()
 
         // then
         sut.hasPrivateModifier shouldBeEqualTo true
@@ -63,10 +67,11 @@ class KoInterfaceDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `interface-has-protected-modifier`() {
         // given
-        val sut = getSnippetFile("interface-has-protected-modifier")
-            .classes()
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-protected-modifier")
+                .classes()
+                .interfaces()
+                .first()
 
         // then
         sut.hasProtectedModifier shouldBeEqualTo true
@@ -75,9 +80,10 @@ class KoInterfaceDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `interface-has-internal-modifier`() {
         // given
-        val sut = getSnippetFile("interface-has-internal-modifier")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-internal-modifier")
+                .interfaces()
+                .first()
 
         // then
         sut.hasInternalModifier shouldBeEqualTo true

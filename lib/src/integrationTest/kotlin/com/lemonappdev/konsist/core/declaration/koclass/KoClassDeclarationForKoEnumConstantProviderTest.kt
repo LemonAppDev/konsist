@@ -9,9 +9,10 @@ class KoClassDeclarationForKoEnumConstantProviderTest {
     @Test
     fun `class-has-no-constant`() {
         // given
-        val sut = getSnippetFile("class-has-no-constant")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-no-constant")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -30,9 +31,10 @@ class KoClassDeclarationForKoEnumConstantProviderTest {
     @Test
     fun `class-has-one-constant`() {
         // given
-        val sut = getSnippetFile("class-has-one-constant")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-one-constant")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -54,9 +56,10 @@ class KoClassDeclarationForKoEnumConstantProviderTest {
     @Test
     fun `class-has-two-constants`() {
         // given
-        val sut = getSnippetFile("class-has-two-constants")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-two-constants")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {

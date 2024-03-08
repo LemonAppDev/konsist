@@ -4,7 +4,6 @@ package com.lemonappdev.konsist.api.provider
  * An interface representing a Kotlin declaration that provides information about its source set.
  */
 interface KoSourceSetProvider : KoBaseProvider {
-
     /**
      * The declaration's source set name.
      */

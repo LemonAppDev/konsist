@@ -13,15 +13,18 @@ class KoSetterProviderListExtTest {
         // given
         val setter1: KoSetterDeclaration = mockk()
         val setter2: KoSetterDeclaration = mockk()
-        val declaration1: KoSetterProvider = mockk {
-            every { setter } returns setter1
-        }
-        val declaration2: KoSetterProvider = mockk {
-            every { setter } returns setter2
-        }
-        val declaration3: KoSetterProvider = mockk {
-            every { setter } returns null
-        }
+        val declaration1: KoSetterProvider =
+            mockk {
+                every { setter } returns setter1
+            }
+        val declaration2: KoSetterProvider =
+            mockk {
+                every { setter } returns setter2
+            }
+        val declaration3: KoSetterProvider =
+            mockk {
+                every { setter } returns null
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -34,12 +37,14 @@ class KoSetterProviderListExtTest {
     @Test
     fun `withSetter() returns declaration with setter`() {
         // given
-        val declaration1: KoSetterProvider = mockk {
-            every { hasSetter } returns true
-        }
-        val declaration2: KoSetterProvider = mockk {
-            every { hasSetter } returns false
-        }
+        val declaration1: KoSetterProvider =
+            mockk {
+                every { hasSetter } returns true
+            }
+        val declaration2: KoSetterProvider =
+            mockk {
+                every { hasSetter } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -52,12 +57,14 @@ class KoSetterProviderListExtTest {
     @Test
     fun `withoutSetter() returns declaration without setter`() {
         // given
-        val declaration1: KoSetterProvider = mockk {
-            every { hasSetter } returns true
-        }
-        val declaration2: KoSetterProvider = mockk {
-            every { hasSetter } returns false
-        }
+        val declaration1: KoSetterProvider =
+            mockk {
+                every { hasSetter } returns true
+            }
+        val declaration2: KoSetterProvider =
+            mockk {
+                every { hasSetter } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

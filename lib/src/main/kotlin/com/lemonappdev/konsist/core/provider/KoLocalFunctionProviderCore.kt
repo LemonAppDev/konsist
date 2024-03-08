@@ -13,16 +13,17 @@ internal interface KoLocalFunctionProviderCore :
     override val numLocalFunctions: Int
         get() = localFunctions.size
 
-    override fun countLocalFunctions(predicate: (KoFunctionDeclaration) -> Boolean): Int =
-        localFunctions.count { predicate(it) }
+    override fun countLocalFunctions(predicate: (KoFunctionDeclaration) -> Boolean): Int = localFunctions.count { predicate(it) }
 
     @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasLocalFunction()"))
-    override fun containsLocalFunction(predicate: (KoFunctionDeclaration) -> Boolean): Boolean =
-        localFunctions.any { predicate(it) }
+    override fun containsLocalFunction(predicate: (KoFunctionDeclaration) -> Boolean): Boolean = localFunctions.any { predicate(it) }
 
     override fun hasLocalFunctions(): Boolean = localFunctions.isNotEmpty()
 
-    override fun hasLocalFunctionWithName(name: String, vararg names: String): Boolean {
+    override fun hasLocalFunctionWithName(
+        name: String,
+        vararg names: String,
+    ): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.any {
@@ -30,7 +31,10 @@ internal interface KoLocalFunctionProviderCore :
         }
     }
 
-    override fun hasLocalFunctionsWithAllNames(name: String, vararg names: String): Boolean {
+    override fun hasLocalFunctionsWithAllNames(
+        name: String,
+        vararg names: String,
+    ): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.all {

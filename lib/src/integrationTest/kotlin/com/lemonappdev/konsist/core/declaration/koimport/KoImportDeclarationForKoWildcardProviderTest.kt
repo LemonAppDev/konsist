@@ -8,9 +8,10 @@ class KoImportDeclarationForKoWildcardProviderTest {
     @Test
     fun `import-without-wildcard`() {
         // given
-        val sut = getSnippetFile("import-without-wildcard")
-            .imports
-            .first()
+        val sut =
+            getSnippetFile("import-without-wildcard")
+                .imports
+                .first()
 
         // then
         sut.isWildcard shouldBeEqualTo false
@@ -19,16 +20,18 @@ class KoImportDeclarationForKoWildcardProviderTest {
     @Test
     fun `import-with-wildcard`() {
         // given
-        val sut = getSnippetFile("import-with-wildcard")
-            .imports
-            .first()
+        val sut =
+            getSnippetFile("import-with-wildcard")
+                .imports
+                .first()
 
         // then
         sut.isWildcard shouldBeEqualTo true
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope(
-        "core/declaration/koimport/snippet/forkowildcardprovider/",
-        fileName,
-    )
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope(
+            "core/declaration/koimport/snippet/forkowildcardprovider/",
+            fileName,
+        )
 }

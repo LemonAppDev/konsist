@@ -8,9 +8,10 @@ class KoObjectDeclarationForKoContainingFileProviderTest {
     @Test
     fun `object-containing-file`() {
         // given
-        val sut = getSnippetFile("object-containing-file")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-containing-file")
+                .objects()
+                .first()
 
         // then
         sut

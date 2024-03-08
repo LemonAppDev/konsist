@@ -10,10 +10,11 @@ class KoKDocDeclarationForKoKDocPropertySetterTagProviderTest {
     @Test
     fun `kdoc-without-property-setter-tag`() {
         // given
-        val sut = getSnippetFile("kdoc-without-property-setter-tag")
-            .classes()
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("kdoc-without-property-setter-tag")
+                .classes()
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -25,10 +26,11 @@ class KoKDocDeclarationForKoKDocPropertySetterTagProviderTest {
     @Test
     fun `property-with-property-setter-tag`() {
         // given
-        val sut = getSnippetFile("property-with-property-setter-tag")
-            .properties(includeNested = true)
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("property-with-property-setter-tag")
+                .properties(includeNested = true)
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut) {

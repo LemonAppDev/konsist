@@ -5,7 +5,6 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoScopeForKoAnnotationDeclarationTest {
-
     @Test
     fun `scope-contains-no-annotation`() {
         // given

@@ -12,12 +12,14 @@ class KoNameProviderListExtTest {
         // given
         val name1 = "sampleName"
         val name2 = ""
-        val declaration1: KoNameProvider = mockk {
-            every { name } returns name1
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { name } returns name2
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { name } returns name1
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { name } returns name2
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -32,12 +34,14 @@ class KoNameProviderListExtTest {
         // given
         val name1 = "sampleName"
         val name2 = ""
-        val declaration1: KoNameProvider = mockk {
-            every { name } returns name1
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { name } returns name2
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { name } returns name1
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { name } returns name2
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -52,12 +56,14 @@ class KoNameProviderListExtTest {
         // given
         val name1 = "sampleName1"
         val name2 = "sampleName2"
-        val declaration1: KoNameProvider = mockk {
-            every { name } returns name1
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { name } returns name2
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { name } returns name1
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { name } returns name2
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -73,15 +79,18 @@ class KoNameProviderListExtTest {
         val name1 = "sampleName1"
         val name2 = "sampleName2"
         val name3 = "sampleName3"
-        val declaration1: KoNameProvider = mockk {
-            every { name } returns name1
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { name } returns name2
-        }
-        val declaration3: KoNameProvider = mockk {
-            every { name } returns name3
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { name } returns name1
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { name } returns name2
+            }
+        val declaration3: KoNameProvider =
+            mockk {
+                every { name } returns name3
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -96,12 +105,14 @@ class KoNameProviderListExtTest {
         // given
         val name1 = "sampleName1"
         val name2 = "sampleName2"
-        val declaration1: KoNameProvider = mockk {
-            every { name } returns name1
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { name } returns name2
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { name } returns name1
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { name } returns name2
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -117,15 +128,18 @@ class KoNameProviderListExtTest {
         val name1 = "sampleName1"
         val name2 = "sampleName2"
         val name3 = "sampleName3"
-        val declaration1: KoNameProvider = mockk {
-            every { name } returns name1
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { name } returns name2
-        }
-        val declaration3: KoNameProvider = mockk {
-            every { name } returns name3
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { name } returns name1
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { name } returns name2
+            }
+        val declaration3: KoNameProvider =
+            mockk {
+                every { name } returns name3
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -143,12 +157,14 @@ class KoNameProviderListExtTest {
         val prefix = "sample"
         val suffix = "1"
         val predicate: (String) -> Boolean = { it.startsWith(prefix) && it.endsWith(suffix) }
-        val declaration1: KoNameProvider = mockk {
-            every { name } returns name1
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { name } returns name2
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { name } returns name1
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { name } returns name2
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -166,12 +182,14 @@ class KoNameProviderListExtTest {
         val prefix = "sample"
         val suffix = "1"
         val predicate: (String) -> Boolean = { it.startsWith(prefix) && it.endsWith(suffix) }
-        val declaration1: KoNameProvider = mockk {
-            every { name } returns name1
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { name } returns name2
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { name } returns name1
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { name } returns name2
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -185,12 +203,14 @@ class KoNameProviderListExtTest {
     fun `withNameStartingWith() returns declaration which names starts with given prefix`() {
         // given
         val prefix = "prefix"
-        val declaration1: KoNameProvider = mockk {
-            every { hasNameStartingWith(prefix) } returns true
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { hasNameStartingWith(prefix) } returns false
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { hasNameStartingWith(prefix) } returns true
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { hasNameStartingWith(prefix) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -205,18 +225,21 @@ class KoNameProviderListExtTest {
         // given
         val prefix1 = "prefix1"
         val prefix2 = "prefix2"
-        val declaration1: KoNameProvider = mockk {
-            every { hasNameStartingWith(prefix1) } returns true
-            every { hasNameStartingWith(prefix2) } returns true
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { hasNameStartingWith(prefix1) } returns true
-            every { hasNameStartingWith(prefix2) } returns false
-        }
-        val declaration3: KoNameProvider = mockk {
-            every { hasNameStartingWith(prefix1) } returns false
-            every { hasNameStartingWith(prefix2) } returns false
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { hasNameStartingWith(prefix1) } returns true
+                every { hasNameStartingWith(prefix2) } returns true
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { hasNameStartingWith(prefix1) } returns true
+                every { hasNameStartingWith(prefix2) } returns false
+            }
+        val declaration3: KoNameProvider =
+            mockk {
+                every { hasNameStartingWith(prefix1) } returns false
+                every { hasNameStartingWith(prefix2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -230,12 +253,14 @@ class KoNameProviderListExtTest {
     fun `withoutNameStartingWith() returns declaration which name not starts with given prefix`() {
         // given
         val prefix = "prefix"
-        val declaration1: KoNameProvider = mockk {
-            every { hasNameStartingWith(prefix) } returns true
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { hasNameStartingWith(prefix) } returns false
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { hasNameStartingWith(prefix) } returns true
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { hasNameStartingWith(prefix) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -250,18 +275,21 @@ class KoNameProviderListExtTest {
         // given
         val prefix1 = "prefix1"
         val prefix2 = "prefix2"
-        val declaration1: KoNameProvider = mockk {
-            every { hasNameStartingWith(prefix1) } returns true
-            every { hasNameStartingWith(prefix2) } returns true
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { hasNameStartingWith(prefix1) } returns true
-            every { hasNameStartingWith(prefix2) } returns false
-        }
-        val declaration3: KoNameProvider = mockk {
-            every { hasNameStartingWith(prefix1) } returns false
-            every { hasNameStartingWith(prefix2) } returns false
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { hasNameStartingWith(prefix1) } returns true
+                every { hasNameStartingWith(prefix2) } returns true
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { hasNameStartingWith(prefix1) } returns true
+                every { hasNameStartingWith(prefix2) } returns false
+            }
+        val declaration3: KoNameProvider =
+            mockk {
+                every { hasNameStartingWith(prefix1) } returns false
+                every { hasNameStartingWith(prefix2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -275,12 +303,14 @@ class KoNameProviderListExtTest {
     fun `withNameEndingWith() returns declaration which names ends with given suffix`() {
         // given
         val suffix = "suffix"
-        val declaration1: KoNameProvider = mockk {
-            every { hasNameEndingWith(suffix) } returns true
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { hasNameEndingWith(suffix) } returns false
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns true
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -295,18 +325,21 @@ class KoNameProviderListExtTest {
         // given
         val suffix1 = "suffix1"
         val suffix2 = "suffix2"
-        val declaration1: KoNameProvider = mockk {
-            every { hasNameEndingWith(suffix1) } returns true
-            every { hasNameEndingWith(suffix2) } returns true
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { hasNameEndingWith(suffix1) } returns true
-            every { hasNameEndingWith(suffix2) } returns false
-        }
-        val declaration3: KoNameProvider = mockk {
-            every { hasNameEndingWith(suffix1) } returns false
-            every { hasNameEndingWith(suffix2) } returns false
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { hasNameEndingWith(suffix1) } returns true
+                every { hasNameEndingWith(suffix2) } returns true
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { hasNameEndingWith(suffix1) } returns true
+                every { hasNameEndingWith(suffix2) } returns false
+            }
+        val declaration3: KoNameProvider =
+            mockk {
+                every { hasNameEndingWith(suffix1) } returns false
+                every { hasNameEndingWith(suffix2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -320,12 +353,14 @@ class KoNameProviderListExtTest {
     fun `withoutNameEndingWith() returns declaration which name not ends with given suffix`() {
         // given
         val suffix = "suffix"
-        val declaration1: KoNameProvider = mockk {
-            every { hasNameEndingWith(suffix) } returns true
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { hasNameEndingWith(suffix) } returns false
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns true
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -340,18 +375,21 @@ class KoNameProviderListExtTest {
         // given
         val suffix1 = "suffix1"
         val suffix2 = "suffix2"
-        val declaration1: KoNameProvider = mockk {
-            every { hasNameEndingWith(suffix1) } returns true
-            every { hasNameEndingWith(suffix2) } returns true
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { hasNameEndingWith(suffix1) } returns true
-            every { hasNameEndingWith(suffix2) } returns false
-        }
-        val declaration3: KoNameProvider = mockk {
-            every { hasNameEndingWith(suffix1) } returns false
-            every { hasNameEndingWith(suffix2) } returns false
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { hasNameEndingWith(suffix1) } returns true
+                every { hasNameEndingWith(suffix2) } returns true
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { hasNameEndingWith(suffix1) } returns true
+                every { hasNameEndingWith(suffix2) } returns false
+            }
+        val declaration3: KoNameProvider =
+            mockk {
+                every { hasNameEndingWith(suffix1) } returns false
+                every { hasNameEndingWith(suffix2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -365,12 +403,14 @@ class KoNameProviderListExtTest {
     fun `withNameContaining() returns declaration which names contains given text`() {
         // given
         val text = "text"
-        val declaration1: KoNameProvider = mockk {
-            every { hasNameContaining(text) } returns true
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { hasNameContaining(text) } returns false
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { hasNameContaining(text) } returns true
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { hasNameContaining(text) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -385,18 +425,21 @@ class KoNameProviderListExtTest {
         // given
         val text1 = "text1"
         val text2 = "text2"
-        val declaration1: KoNameProvider = mockk {
-            every { hasNameContaining(text1) } returns true
-            every { hasNameContaining(text2) } returns true
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { hasNameContaining(text1) } returns true
-            every { hasNameContaining(text2) } returns false
-        }
-        val declaration3: KoNameProvider = mockk {
-            every { hasNameContaining(text1) } returns false
-            every { hasNameContaining(text2) } returns false
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { hasNameContaining(text1) } returns true
+                every { hasNameContaining(text2) } returns true
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { hasNameContaining(text1) } returns true
+                every { hasNameContaining(text2) } returns false
+            }
+        val declaration3: KoNameProvider =
+            mockk {
+                every { hasNameContaining(text1) } returns false
+                every { hasNameContaining(text2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -410,12 +453,14 @@ class KoNameProviderListExtTest {
     fun `withoutNameContaining() returns declaration which name not contains given text`() {
         // given
         val text = "text"
-        val declaration1: KoNameProvider = mockk {
-            every { hasNameContaining(text) } returns true
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { hasNameContaining(text) } returns false
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { hasNameContaining(text) } returns true
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { hasNameContaining(text) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -430,18 +475,21 @@ class KoNameProviderListExtTest {
         // given
         val text1 = "text1"
         val text2 = "text2"
-        val declaration1: KoNameProvider = mockk {
-            every { hasNameContaining(text1) } returns true
-            every { hasNameContaining(text2) } returns true
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { hasNameContaining(text1) } returns true
-            every { hasNameContaining(text2) } returns false
-        }
-        val declaration3: KoNameProvider = mockk {
-            every { hasNameContaining(text1) } returns false
-            every { hasNameContaining(text2) } returns false
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { hasNameContaining(text1) } returns true
+                every { hasNameContaining(text2) } returns true
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { hasNameContaining(text1) } returns true
+                every { hasNameContaining(text2) } returns false
+            }
+        val declaration3: KoNameProvider =
+            mockk {
+                every { hasNameContaining(text1) } returns false
+                every { hasNameContaining(text2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -455,12 +503,14 @@ class KoNameProviderListExtTest {
     fun `withNameMatching() returns declaration which name contains given regex`() {
         // given
         val regex = Regex("[1-9]")
-        val declaration1: KoNameProvider = mockk {
-            every { hasNameMatching(regex) } returns true
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { hasNameMatching(regex) } returns false
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { hasNameMatching(regex) } returns true
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { hasNameMatching(regex) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -475,18 +525,21 @@ class KoNameProviderListExtTest {
         // given
         val regex1 = Regex("[1-9]")
         val regex2 = Regex("[a-z]")
-        val declaration1: KoNameProvider = mockk {
-            every { hasNameMatching(regex1) } returns true
-            every { hasNameMatching(regex2) } returns true
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { hasNameMatching(regex1) } returns true
-            every { hasNameMatching(regex2) } returns false
-        }
-        val declaration3: KoNameProvider = mockk {
-            every { hasNameMatching(regex1) } returns false
-            every { hasNameMatching(regex2) } returns false
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { hasNameMatching(regex1) } returns true
+                every { hasNameMatching(regex2) } returns true
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { hasNameMatching(regex1) } returns true
+                every { hasNameMatching(regex2) } returns false
+            }
+        val declaration3: KoNameProvider =
+            mockk {
+                every { hasNameMatching(regex1) } returns false
+                every { hasNameMatching(regex2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -500,12 +553,14 @@ class KoNameProviderListExtTest {
     fun `withoutNameMatching() returns declaration which name not contains given regex`() {
         // given
         val regex = Regex("[1-9]")
-        val declaration1: KoNameProvider = mockk {
-            every { hasNameMatching(regex) } returns true
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { hasNameMatching(regex) } returns false
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { hasNameMatching(regex) } returns true
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { hasNameMatching(regex) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -520,18 +575,21 @@ class KoNameProviderListExtTest {
         // given
         val regex1 = Regex("[1-9]")
         val regex2 = Regex("[a-z]")
-        val declaration1: KoNameProvider = mockk {
-            every { hasNameMatching(regex1) } returns true
-            every { hasNameMatching(regex2) } returns true
-        }
-        val declaration2: KoNameProvider = mockk {
-            every { hasNameMatching(regex1) } returns true
-            every { hasNameMatching(regex2) } returns false
-        }
-        val declaration3: KoNameProvider = mockk {
-            every { hasNameMatching(regex1) } returns false
-            every { hasNameMatching(regex2) } returns false
-        }
+        val declaration1: KoNameProvider =
+            mockk {
+                every { hasNameMatching(regex1) } returns true
+                every { hasNameMatching(regex2) } returns true
+            }
+        val declaration2: KoNameProvider =
+            mockk {
+                every { hasNameMatching(regex1) } returns true
+                every { hasNameMatching(regex2) } returns false
+            }
+        val declaration3: KoNameProvider =
+            mockk {
+                every { hasNameMatching(regex1) } returns false
+                every { hasNameMatching(regex2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when

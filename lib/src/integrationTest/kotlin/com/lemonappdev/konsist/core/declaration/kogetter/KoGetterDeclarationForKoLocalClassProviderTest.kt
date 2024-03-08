@@ -9,10 +9,11 @@ class KoGetterDeclarationForKoLocalClassProviderTest {
     @Test
     fun `getter-contains-no-local-classes`() {
         // given
-        val sut = getSnippetFile("getter-contains-no-local-classes")
-            .properties()
-            .first()
-            .getter
+        val sut =
+            getSnippetFile("getter-contains-no-local-classes")
+                .properties()
+                .first()
+                .getter
 
         // then
         assertSoftly(sut) {
@@ -30,17 +31,19 @@ class KoGetterDeclarationForKoLocalClassProviderTest {
     @Test
     fun `getter-contains-local-class`() {
         // given
-        val sut = getSnippetFile("getter-contains-local-class")
-            .properties()
-            .first()
-            .getter
+        val sut =
+            getSnippetFile("getter-contains-local-class")
+                .properties()
+                .first()
+                .getter
 
         // then
         assertSoftly(sut) {
-            it?.localClasses?.map { localClass -> localClass.name } shouldBeEqualTo listOf(
-                "SampleClass1",
-                "SampleClass2",
-            )
+            it?.localClasses?.map { localClass -> localClass.name } shouldBeEqualTo
+                listOf(
+                    "SampleClass1",
+                    "SampleClass2",
+                )
             it?.numLocalClasses shouldBeEqualTo 2
             it?.countLocalClasses { localClass -> localClass.name == "SampleClass1" } shouldBeEqualTo 1
             it?.hasLocalClasses() shouldBeEqualTo true
@@ -59,6 +62,5 @@ class KoGetterDeclarationForKoLocalClassProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kogetter/snippet/forkolocalclassprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kogetter/snippet/forkolocalclassprovider/", fileName)
 }

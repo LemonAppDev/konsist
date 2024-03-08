@@ -44,7 +44,6 @@ interface KoFileDeclaration :
     KoSourceSetProvider,
     KoTextProvider,
     KoTypeAliasProvider {
-
     /**
      * Indicates whether some other element is "equal to" this one.
      *

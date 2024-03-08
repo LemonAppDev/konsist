@@ -10,16 +10,20 @@ import org.junit.jupiter.params.provider.MethodSource
 class KoFunctionTypeDeclarationForKoLocationProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `type-location`(fileName: String, value: String) {
+    fun `type-location`(
+        fileName: String,
+        value: String,
+    ) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoFunctionTypeDeclaration
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         sut?.location shouldBeEqualTo "${sut?.path}:$value"
@@ -31,9 +35,10 @@ class KoFunctionTypeDeclarationForKoLocationProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("function-type-location", "3:41"),
-            arguments("nullable-function-type-location", "3:42"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("function-type-location", "3:41"),
+                arguments("nullable-function-type-location", "3:42"),
+            )
     }
 }

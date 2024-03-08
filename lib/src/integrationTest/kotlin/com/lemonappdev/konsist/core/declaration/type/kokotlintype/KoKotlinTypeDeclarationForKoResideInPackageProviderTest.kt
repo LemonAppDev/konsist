@@ -10,11 +10,12 @@ class KoKotlinTypeDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `nullable-kotlin-basic-type-reside-in-file-package`() {
         // given
-        val sut = getSnippetFile("nullable-kotlin-basic-type-reside-in-file-package")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoKotlinTypeDeclaration
+        val sut =
+            getSnippetFile("nullable-kotlin-basic-type-reside-in-file-package")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         assertSoftly(sut) {
@@ -28,11 +29,12 @@ class KoKotlinTypeDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `not-nullable-kotlin-basic-type-reside-in-file-package`() {
         // given
-        val sut = getSnippetFile("not-nullable-kotlin-basic-type-reside-in-file-package")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoKotlinTypeDeclaration
+        val sut =
+            getSnippetFile("not-nullable-kotlin-basic-type-reside-in-file-package")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         assertSoftly(sut) {
@@ -46,11 +48,12 @@ class KoKotlinTypeDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `nullable-kotlin-collection-type-reside-in-file-package`() {
         // given
-        val sut = getSnippetFile("nullable-kotlin-collection-type-reside-in-file-package")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoKotlinTypeDeclaration
+        val sut =
+            getSnippetFile("nullable-kotlin-collection-type-reside-in-file-package")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         assertSoftly(sut) {
@@ -64,11 +67,12 @@ class KoKotlinTypeDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `not-nullable-kotlin-collection-type-reside-in-file-package`() {
         // given
-        val sut = getSnippetFile("not-nullable-kotlin-collection-type-reside-in-file-package")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoKotlinTypeDeclaration
+        val sut =
+            getSnippetFile("not-nullable-kotlin-collection-type-reside-in-file-package")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         assertSoftly(sut) {

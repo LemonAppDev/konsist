@@ -9,9 +9,10 @@ class KoPropertyDeclarationTest {
     @Test
     fun `property-to-string`() {
         // given
-        val sut = getSnippetFile("property-to-string")
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-to-string")
+                .properties()
+                .first()
 
         // then
         sut.toString() shouldBeEqualTo "sampleProperty"

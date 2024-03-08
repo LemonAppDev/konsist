@@ -22,9 +22,10 @@ class Architecture2Test {
             "Presentation",
             "com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.presentation..",
         )
-    private val scope = Konsist.scopeFromDirectory(
-        "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture2/project",
-    )
+    private val scope =
+        Konsist.scopeFromDirectory(
+            "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture2/project",
+        )
 
     @Test
     fun `passes when dependency is set that presentation layer is depend on domain layer (scope)`() {
@@ -50,10 +51,11 @@ class Architecture2Test {
     @Test
     fun `passes when dependency is set to presentation layer depends on domain layer and arch is passed as parameter (scope)`() {
         // given
-        val architecture = architecture {
-            domain.dependsOnNothing()
-            presentation.dependsOn(domain)
-        }
+        val architecture =
+            architecture {
+                domain.dependsOnNothing()
+                presentation.dependsOn(domain)
+            }
 
         // then
         scope.assertArchitecture(architecture)
@@ -62,10 +64,11 @@ class Architecture2Test {
     @Test
     fun `passes when dependency is set to presentation layer depends on domain layer and arch is passed as parameter (files)`() {
         // given
-        val architecture = architecture {
-            domain.dependsOnNothing()
-            presentation.dependsOn(domain)
-        }
+        val architecture =
+            architecture {
+                domain.dependsOnNothing()
+                presentation.dependsOn(domain)
+            }
 
         // then
         scope
@@ -76,12 +79,13 @@ class Architecture2Test {
     @Test
     fun `fails when dependency is set that domain layer is depend on presentation layer (scope)`() {
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope.assertArchitecture {
-                presentation.dependsOnNothing()
-                domain.dependsOn(presentation)
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope.assertArchitecture {
+                    presentation.dependsOnNothing()
+                    domain.dependsOn(presentation)
+                }
             }
-        }
 
         // then
         sut
@@ -102,14 +106,15 @@ class Architecture2Test {
     @Test
     fun `fails when dependency is set that domain layer is depend on presentation layer (files)`() {
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope
-                .files
-                .assertArchitecture {
-                    presentation.dependsOnNothing()
-                    domain.dependsOn(presentation)
-                }
-        }
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope
+                    .files
+                    .assertArchitecture {
+                        presentation.dependsOnNothing()
+                        domain.dependsOn(presentation)
+                    }
+            }
 
         // then
         sut
@@ -131,15 +136,17 @@ class Architecture2Test {
     @Test
     fun `fails when dependency is set that domain layer is depend on presentation layer and architecture is passed as parameter (scope)`() {
         // given
-        val architecture = architecture {
-            presentation.dependsOnNothing()
-            domain.dependsOn(presentation)
-        }
+        val architecture =
+            architecture {
+                presentation.dependsOnNothing()
+                domain.dependsOn(presentation)
+            }
 
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope.assertArchitecture(architecture)
-        }
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope.assertArchitecture(architecture)
+            }
 
         // then
         sut
@@ -161,17 +168,19 @@ class Architecture2Test {
     @Test
     fun `fails when dependency is set that domain layer is depend on presentation layer and architecture is passed as parameter (files)`() {
         // given
-        val architecture = architecture {
-            presentation.dependsOnNothing()
-            domain.dependsOn(presentation)
-        }
+        val architecture =
+            architecture {
+                presentation.dependsOnNothing()
+                domain.dependsOn(presentation)
+            }
 
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope
-                .files
-                .assertArchitecture(architecture)
-        }
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope
+                    .files
+                    .assertArchitecture(architecture)
+            }
 
         // then
         sut

@@ -20,9 +20,10 @@ class Architecture4Test {
         )
     private val data =
         Layer("Data", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.data..")
-    private val scope = Konsist.scopeFromDirectory(
-        "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture4/project",
-    )
+    private val scope =
+        Konsist.scopeFromDirectory(
+            "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture4/project",
+        )
 
     @Test
     fun `passes when dependency is set that presentation and data layers are depend on domain layer (scope)`() {
@@ -50,11 +51,12 @@ class Architecture4Test {
     @Test
     fun `passes when dependency is set correctly and architecture is passed as parameter (scope)`() {
         // given
-        val architecture = architecture {
-            domain.dependsOnNothing()
-            presentation.dependsOn(domain)
-            data.dependsOn(domain)
-        }
+        val architecture =
+            architecture {
+                domain.dependsOnNothing()
+                presentation.dependsOn(domain)
+                data.dependsOn(domain)
+            }
 
         // then
         scope.assertArchitecture(architecture)
@@ -63,11 +65,12 @@ class Architecture4Test {
     @Test
     fun `passes when dependency is set correctly and architecture is passed as parameter (files)`() {
         // given
-        val architecture = architecture {
-            domain.dependsOnNothing()
-            presentation.dependsOn(domain)
-            data.dependsOn(domain)
-        }
+        val architecture =
+            architecture {
+                domain.dependsOnNothing()
+                presentation.dependsOn(domain)
+                data.dependsOn(domain)
+            }
 
         // then
         scope
@@ -78,14 +81,15 @@ class Architecture4Test {
     @Test
     fun `fails when bad dependency is set (scope)`() {
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope
-                .assertArchitecture {
-                    data.dependsOnNothing()
-                    presentation.dependsOn(data)
-                    domain.dependsOn(data)
-                }
-        }
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope
+                    .assertArchitecture {
+                        data.dependsOnNothing()
+                        presentation.dependsOn(data)
+                        domain.dependsOn(data)
+                    }
+            }
 
         // then
         assertSoftly(sut) {
@@ -97,15 +101,16 @@ class Architecture4Test {
     @Test
     fun `fails when bad dependency is set (files)`() {
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope
-                .files
-                .assertArchitecture {
-                    data.dependsOnNothing()
-                    presentation.dependsOn(data)
-                    domain.dependsOn(data)
-                }
-        }
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope
+                    .files
+                    .assertArchitecture {
+                        data.dependsOnNothing()
+                        presentation.dependsOn(data)
+                        domain.dependsOn(data)
+                    }
+            }
 
         // then
         assertSoftly(sut) {
@@ -117,17 +122,19 @@ class Architecture4Test {
     @Test
     fun `fails when bad dependency is set and architecture is passed as parameter (scope)`() {
         // given
-        val architecture = architecture {
-            data.dependsOnNothing()
-            presentation.dependsOn(data)
-            domain.dependsOn(data)
-        }
+        val architecture =
+            architecture {
+                data.dependsOnNothing()
+                presentation.dependsOn(data)
+                domain.dependsOn(data)
+            }
 
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope
-                .assertArchitecture(architecture)
-        }
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope
+                    .assertArchitecture(architecture)
+            }
 
         // then
         assertSoftly(sut) {
@@ -141,18 +148,20 @@ class Architecture4Test {
     @Test
     fun `fails when bad dependency is set and architecture is passed as parameter (files)`() {
         // given
-        val architecture = architecture {
-            data.dependsOnNothing()
-            presentation.dependsOn(data)
-            domain.dependsOn(data)
-        }
+        val architecture =
+            architecture {
+                data.dependsOnNothing()
+                presentation.dependsOn(data)
+                domain.dependsOn(data)
+            }
 
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope
-                .files
-                .assertArchitecture(architecture)
-        }
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope
+                    .files
+                    .assertArchitecture(architecture)
+            }
 
         // then
         assertSoftly(sut) {

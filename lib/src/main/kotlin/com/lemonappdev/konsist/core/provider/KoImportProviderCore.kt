@@ -28,8 +28,7 @@ internal interface KoImportProviderCore : KoImportProvider, KoContainingDeclarat
     override val numImports: Int
         get() = imports.size
 
-    override fun countImports(predicate: (KoImportDeclaration) -> Boolean): Int =
-        imports.count { predicate(it) }
+    override fun countImports(predicate: (KoImportDeclaration) -> Boolean): Int = imports.count { predicate(it) }
 
     @Deprecated(
         """
@@ -37,16 +36,21 @@ internal interface KoImportProviderCore : KoImportProvider, KoContainingDeclarat
             If you passed one argument - replace with `hasImportWithName`, otherwise with `hasImportsWithAllNames`.
             """,
     )
-    override fun hasImports(vararg names: String): Boolean = when {
-        names.isEmpty() -> imports.isNotEmpty()
-        else -> names.all {
-            imports.any { import -> LocationUtil.resideInLocation(it, import.name) }
+    override fun hasImports(vararg names: String): Boolean =
+        when {
+            names.isEmpty() -> imports.isNotEmpty()
+            else ->
+                names.all {
+                    imports.any { import -> LocationUtil.resideInLocation(it, import.name) }
+                }
         }
-    }
 
     override fun hasImports(): Boolean = imports.isNotEmpty()
 
-    override fun hasImportWithName(name: String, vararg names: String): Boolean {
+    override fun hasImportWithName(
+        name: String,
+        vararg names: String,
+    ): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.any {
@@ -54,7 +58,10 @@ internal interface KoImportProviderCore : KoImportProvider, KoContainingDeclarat
         }
     }
 
-    override fun hasImportsWithAllNames(name: String, vararg names: String): Boolean {
+    override fun hasImportsWithAllNames(
+        name: String,
+        vararg names: String,
+    ): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.all {

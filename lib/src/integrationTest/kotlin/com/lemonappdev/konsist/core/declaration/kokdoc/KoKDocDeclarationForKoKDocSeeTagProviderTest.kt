@@ -15,10 +15,11 @@ class KoKDocDeclarationForKoKDocSeeTagProviderTest {
     @Test
     fun `kdoc-without-see-tag`() {
         // given
-        val sut = getSnippetFile("kdoc-without-see-tag")
-            .classes()
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("kdoc-without-see-tag")
+                .classes()
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -35,13 +36,14 @@ class KoKDocDeclarationForKoKDocSeeTagProviderTest {
         declarationName: String,
     ) {
         // given
-        val sut = (
-            getSnippetFile(fileName)
-                .declarations(includeNested = true)
-                .filterIsInstance<KoNameProvider>()
-                .first { it.name == declarationName } as KoKDocProvider
+        val sut =
+            (
+                getSnippetFile(fileName)
+                    .declarations(includeNested = true)
+                    .filterIsInstance<KoNameProvider>()
+                    .first { it.name == declarationName } as KoKDocProvider
             )
-            .kDoc
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -56,15 +58,15 @@ class KoKDocDeclarationForKoKDocSeeTagProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kokdoc/snippet/forkokdocseetagprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kokdoc/snippet/forkokdocseetagprovider/", fileName)
 
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("class-with-see-tag", "SampleClass"),
-            arguments("function-with-see-tag", "sampleMethod"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("class-with-see-tag", "SampleClass"),
+                arguments("function-with-see-tag", "sampleMethod"),
+            )
     }
 }

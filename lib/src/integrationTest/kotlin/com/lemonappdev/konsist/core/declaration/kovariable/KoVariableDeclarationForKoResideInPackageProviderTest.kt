@@ -18,9 +18,10 @@ class KoVariableDeclarationForKoResideInPackageProviderTest {
     @MethodSource("provideValuesWithoutPackage")
     fun `variable-not-reside-in-file-package`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -33,9 +34,10 @@ class KoVariableDeclarationForKoResideInPackageProviderTest {
     @MethodSource("provideValuesWithPackage")
     fun `variable-reside-in-file-package`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -52,22 +54,24 @@ class KoVariableDeclarationForKoResideInPackageProviderTest {
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesWithoutPackage() = listOf(
-            arguments(getSnippetFile("variable-in-function-not-reside-in-file-package").functions()),
-            arguments(getSnippetFile("variable-in-init-block-not-reside-in-file-package").classes().initBlocks),
-            arguments(getSnippetFile("variable-in-enum-constant-not-reside-in-file-package").classes().enumConstants),
-            arguments(getSnippetFile("variable-in-getter-not-reside-in-file-package").properties().getters),
-            arguments(getSnippetFile("variable-in-setter-not-reside-in-file-package").properties().setters),
-        )
+        fun provideValuesWithoutPackage() =
+            listOf(
+                arguments(getSnippetFile("variable-in-function-not-reside-in-file-package").functions()),
+                arguments(getSnippetFile("variable-in-init-block-not-reside-in-file-package").classes().initBlocks),
+                arguments(getSnippetFile("variable-in-enum-constant-not-reside-in-file-package").classes().enumConstants),
+                arguments(getSnippetFile("variable-in-getter-not-reside-in-file-package").properties().getters),
+                arguments(getSnippetFile("variable-in-setter-not-reside-in-file-package").properties().setters),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesWithPackage() = listOf(
-            arguments(getSnippetFile("variable-in-function-reside-in-file-package").functions()),
-            arguments(getSnippetFile("variable-in-init-block-reside-in-file-package").classes().initBlocks),
-            arguments(getSnippetFile("variable-in-enum-constant-reside-in-file-package").classes().enumConstants),
-            arguments(getSnippetFile("variable-in-getter-reside-in-file-package").properties().getters),
-            arguments(getSnippetFile("variable-in-setter-reside-in-file-package").properties().setters),
-        )
+        fun provideValuesWithPackage() =
+            listOf(
+                arguments(getSnippetFile("variable-in-function-reside-in-file-package").functions()),
+                arguments(getSnippetFile("variable-in-init-block-reside-in-file-package").classes().initBlocks),
+                arguments(getSnippetFile("variable-in-enum-constant-reside-in-file-package").classes().enumConstants),
+                arguments(getSnippetFile("variable-in-getter-reside-in-file-package").properties().getters),
+                arguments(getSnippetFile("variable-in-setter-reside-in-file-package").properties().setters),
+            )
     }
 }

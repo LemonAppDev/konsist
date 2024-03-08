@@ -9,9 +9,10 @@ class KoObjectDeclarationForKoPathProviderTest {
     @Test
     fun `object-file-path`() {
         // given
-        val sut = getSnippetFile("object-file-path")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-file-path")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut.path) {
@@ -23,9 +24,10 @@ class KoObjectDeclarationForKoPathProviderTest {
     @Test
     fun `object-project-file-path`() {
         // given
-        val sut = getSnippetFile("object-project-file-path")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-project-file-path")
+                .objects()
+                .first()
 
         // then
         sut
@@ -39,9 +41,10 @@ class KoObjectDeclarationForKoPathProviderTest {
     @Test
     fun `object-reside-in-file-path`() {
         // given
-        val sut = getSnippetFile("object-reside-in-file-path")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-reside-in-file-path")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -55,9 +58,10 @@ class KoObjectDeclarationForKoPathProviderTest {
     @Test
     fun `object-reside-in-project-file-path`() {
         // given
-        val sut = getSnippetFile("object-reside-in-project-file-path")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-reside-in-project-file-path")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -68,6 +72,5 @@ class KoObjectDeclarationForKoPathProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koobject/snippet/forkopathprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/forkopathprovider/", fileName)
 }

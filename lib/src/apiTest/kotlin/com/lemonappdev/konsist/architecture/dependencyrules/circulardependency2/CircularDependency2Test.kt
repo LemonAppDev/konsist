@@ -28,12 +28,13 @@ class CircularDependency2Test {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage """
+        sut shouldThrow KoPreconditionFailedException::class withMessage
+            """
             Illegal circular dependencies:
             Layer layer4 -->
             Layer layer1 -->
             Layer layer2 -->
             Layer layer4.
-        """.trimIndent()
+            """.trimIndent()
     }
 }

@@ -8,12 +8,13 @@ class KoParameterDeclarationForKoVarArgModifierProviderTest {
     @Test
     fun `parameter-without-vararg-modifier`() {
         // given
-        val sut = getSnippetFile("parameter-without-vararg-modifier")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
+        val sut =
+            getSnippetFile("parameter-without-vararg-modifier")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
         sut?.hasVarArgModifier shouldBeEqualTo false
@@ -22,16 +23,18 @@ class KoParameterDeclarationForKoVarArgModifierProviderTest {
     @Test
     fun `parameter-with-vararg-modifier`() {
         // given
-        val sut = getSnippetFile("parameter-with-vararg-modifier")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
+        val sut =
+            getSnippetFile("parameter-with-vararg-modifier")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
         sut?.hasVarArgModifier shouldBeEqualTo true
     }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koparameter/forkomodifier/snippet/forkovarargmodifierprovider/", fileName)
 }

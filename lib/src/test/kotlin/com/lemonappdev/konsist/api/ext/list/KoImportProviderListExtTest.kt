@@ -14,15 +14,18 @@ class KoImportProviderListExtTest {
         val import1: KoImportDeclaration = mockk()
         val import2: KoImportDeclaration = mockk()
         val import3: KoImportDeclaration = mockk()
-        val declaration1: KoImportProvider = mockk {
-            every { imports } returns listOf(import1, import2)
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { imports } returns listOf(import3)
-        }
-        val declaration3: KoImportProvider = mockk {
-            every { imports } returns emptyList()
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { imports } returns listOf(import1, import2)
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { imports } returns listOf(import3)
+            }
+        val declaration3: KoImportProvider =
+            mockk {
+                every { imports } returns emptyList()
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -35,12 +38,14 @@ class KoImportProviderListExtTest {
     @Test
     fun `withImports() returns declaration with any import`() {
         // given
-        val declaration1: KoImportProvider = mockk {
-            every { hasImports() } returns true
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { hasImports() } returns false
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { hasImports() } returns true
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { hasImports() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -53,12 +58,14 @@ class KoImportProviderListExtTest {
     @Test
     fun `withoutImports() returns declaration without any import`() {
         // given
-        val declaration1: KoImportProvider = mockk {
-            every { hasImports() } returns true
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { hasImports() } returns false
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { hasImports() } returns true
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { hasImports() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -72,12 +79,14 @@ class KoImportProviderListExtTest {
     fun `withImportNamed(name) returns declaration with given import`() {
         // given
         val name = "SampleName"
-        val declaration1: KoImportProvider = mockk {
-            every { hasImportWithName(name) } returns true
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { hasImportWithName(name) } returns false
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { hasImportWithName(name) } returns true
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { hasImportWithName(name) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -92,12 +101,14 @@ class KoImportProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoImportProvider = mockk {
-            every { hasImportWithName(name1, name2) } returns true
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { hasImportWithName(name1, name2) } returns false
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { hasImportWithName(name1, name2) } returns true
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { hasImportWithName(name1, name2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -111,12 +122,14 @@ class KoImportProviderListExtTest {
     fun `withoutImportNamed(name) returns declaration without given import`() {
         // given
         val name = "SampleName"
-        val declaration1: KoImportProvider = mockk {
-            every { hasImportWithName(name) } returns true
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { hasImportWithName(name) } returns false
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { hasImportWithName(name) } returns true
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { hasImportWithName(name) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -131,12 +144,14 @@ class KoImportProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoImportProvider = mockk {
-            every { hasImportWithName(name1, name2) } returns true
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { hasImportWithName(name1, name2) } returns false
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { hasImportWithName(name1, name2) } returns true
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { hasImportWithName(name1, name2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -150,12 +165,14 @@ class KoImportProviderListExtTest {
     fun `withAllImportsNamed(name) returns declaration with given import`() {
         // given
         val name = "SampleName"
-        val declaration1: KoImportProvider = mockk {
-            every { hasImportsWithAllNames(name) } returns true
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { hasImportsWithAllNames(name) } returns false
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { hasImportsWithAllNames(name) } returns true
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { hasImportsWithAllNames(name) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -170,12 +187,14 @@ class KoImportProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoImportProvider = mockk {
-            every { hasImportsWithAllNames(name1, name2) } returns true
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { hasImportsWithAllNames(name1, name2) } returns false
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { hasImportsWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { hasImportsWithAllNames(name1, name2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -189,12 +208,14 @@ class KoImportProviderListExtTest {
     fun `withoutAllImportsNamed(name) returns declaration without given import`() {
         // given
         val name = "SampleName"
-        val declaration1: KoImportProvider = mockk {
-            every { hasImportsWithAllNames(name) } returns true
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { hasImportsWithAllNames(name) } returns false
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { hasImportsWithAllNames(name) } returns true
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { hasImportsWithAllNames(name) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -209,12 +230,14 @@ class KoImportProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoImportProvider = mockk {
-            every { hasImportsWithAllNames(name1, name2) } returns true
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { hasImportsWithAllNames(name1, name2) } returns false
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { hasImportsWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { hasImportsWithAllNames(name1, name2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -229,12 +252,14 @@ class KoImportProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoImportDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
-        val declaration1: KoImportProvider = mockk {
-            every { hasImport(predicate) } returns true
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { hasImport(predicate) } returns false
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { hasImport(predicate) } returns true
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { hasImport(predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -249,12 +274,14 @@ class KoImportProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoImportDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
-        val declaration1: KoImportProvider = mockk {
-            every { hasImport(predicate) } returns true
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { hasImport(predicate) } returns false
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { hasImport(predicate) } returns true
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { hasImport(predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -269,12 +296,14 @@ class KoImportProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoImportDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
-        val declaration1: KoImportProvider = mockk {
-            every { hasAllImports(predicate) } returns true
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { hasAllImports(predicate) } returns false
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { hasAllImports(predicate) } returns true
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { hasAllImports(predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -289,12 +318,14 @@ class KoImportProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoImportDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
-        val declaration1: KoImportProvider = mockk {
-            every { hasAllImports(predicate) } returns true
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { hasAllImports(predicate) } returns false
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { hasAllImports(predicate) } returns true
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { hasAllImports(predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -310,21 +341,26 @@ class KoImportProviderListExtTest {
         val suffix = "Name"
         val predicate: (List<KoImportDeclaration>) -> Boolean =
             { it.all { import -> import.hasNameEndingWith(suffix) } }
-        val import1: KoImportDeclaration = mockk {
-            every { hasNameEndingWith(suffix) } returns true
-        }
-        val import2: KoImportDeclaration = mockk {
-            every { hasNameEndingWith(suffix) } returns false
-        }
-        val declaration1: KoImportProvider = mockk {
-            every { imports } returns listOf(import1)
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { imports } returns listOf(import2)
-        }
-        val declaration3: KoImportProvider = mockk {
-            every { imports } returns emptyList()
-        }
+        val import1: KoImportDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns true
+            }
+        val import2: KoImportDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns false
+            }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { imports } returns listOf(import1)
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { imports } returns listOf(import2)
+            }
+        val declaration3: KoImportProvider =
+            mockk {
+                every { imports } returns emptyList()
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -340,21 +376,26 @@ class KoImportProviderListExtTest {
         val suffix = "Name"
         val predicate: (List<KoImportDeclaration>) -> Boolean =
             { it.all { import -> import.hasNameEndingWith(suffix) } }
-        val import1: KoImportDeclaration = mockk {
-            every { hasNameEndingWith(suffix) } returns true
-        }
-        val import2: KoImportDeclaration = mockk {
-            every { hasNameEndingWith(suffix) } returns false
-        }
-        val declaration1: KoImportProvider = mockk {
-            every { imports } returns listOf(import1)
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { imports } returns listOf(import2)
-        }
-        val declaration3: KoImportProvider = mockk {
-            every { imports } returns emptyList()
-        }
+        val import1: KoImportDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns true
+            }
+        val import2: KoImportDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns false
+            }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { imports } returns listOf(import1)
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { imports } returns listOf(import2)
+            }
+        val declaration3: KoImportProvider =
+            mockk {
+                every { imports } returns emptyList()
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -369,12 +410,14 @@ class KoImportProviderListExtTest {
         // given
         val import1 = "SampleImport1"
         val import2 = "SampleImport2"
-        val declaration1: KoImportProvider = mockk {
-            every { hasImports(import1, import2) } returns true
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { hasImports(import1, import2) } returns false
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { hasImports(import1, import2) } returns true
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { hasImports(import1, import2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -389,12 +432,14 @@ class KoImportProviderListExtTest {
         // given
         val import1 = "SampleImport1"
         val import2 = "SampleImport2"
-        val declaration1: KoImportProvider = mockk {
-            every { hasImports(import1, import2) } returns true
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { hasImports(import1, import2) } returns false
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { hasImports(import1, import2) } returns true
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { hasImports(import1, import2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -408,12 +453,14 @@ class KoImportProviderListExtTest {
     fun `withSomeImports(String) returns declaration with given import`() {
         // given
         val import = "SampleImport"
-        val declaration1: KoImportProvider = mockk {
-            every { hasImports(import) } returns true
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { hasImports(import) } returns false
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { hasImports(import) } returns true
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { hasImports(import) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -428,18 +475,21 @@ class KoImportProviderListExtTest {
         // given
         val import1 = "SampleImport1"
         val import2 = "SampleImport2"
-        val declaration1: KoImportProvider = mockk {
-            every { hasImports(import1) } returns true
-            every { hasImports(import2) } returns true
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { hasImports(import1) } returns false
-            every { hasImports(import2) } returns true
-        }
-        val declaration3: KoImportProvider = mockk {
-            every { hasImports(import1) } returns false
-            every { hasImports(import2) } returns false
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { hasImports(import1) } returns true
+                every { hasImports(import2) } returns true
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { hasImports(import1) } returns false
+                every { hasImports(import2) } returns true
+            }
+        val declaration3: KoImportProvider =
+            mockk {
+                every { hasImports(import1) } returns false
+                every { hasImports(import2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -453,12 +503,14 @@ class KoImportProviderListExtTest {
     fun `withoutSomeImports(String) returns declaration with given import`() {
         // given
         val import = "SampleImport"
-        val declaration1: KoImportProvider = mockk {
-            every { hasImports(import) } returns true
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { hasImports(import) } returns false
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { hasImports(import) } returns true
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { hasImports(import) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -473,18 +525,21 @@ class KoImportProviderListExtTest {
         // given
         val import1 = "SampleImport1"
         val import2 = "SampleImport2"
-        val declaration1: KoImportProvider = mockk {
-            every { hasImports(import1) } returns true
-            every { hasImports(import2) } returns true
-        }
-        val declaration2: KoImportProvider = mockk {
-            every { hasImports(import1) } returns false
-            every { hasImports(import2) } returns true
-        }
-        val declaration3: KoImportProvider = mockk {
-            every { hasImports(import1) } returns false
-            every { hasImports(import2) } returns false
-        }
+        val declaration1: KoImportProvider =
+            mockk {
+                every { hasImports(import1) } returns true
+                every { hasImports(import2) } returns true
+            }
+        val declaration2: KoImportProvider =
+            mockk {
+                every { hasImports(import1) } returns false
+                every { hasImports(import2) } returns true
+            }
+        val declaration3: KoImportProvider =
+            mockk {
+                every { hasImports(import1) } returns false
+                every { hasImports(import2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when

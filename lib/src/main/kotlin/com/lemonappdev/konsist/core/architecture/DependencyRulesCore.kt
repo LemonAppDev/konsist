@@ -10,15 +10,19 @@ class DependencyRulesCore : DependencyRules {
 
     internal var allLayers = mutableListOf<Layer>()
 
-    override fun Layer.dependsOn(layer: Layer, vararg layers: Layer) {
+    override fun Layer.dependsOn(
+        layer: Layer,
+        vararg layers: Layer,
+    ) {
         checkIfLayerHasTheSameValuesAsOtherLayer(this, layer, *layers)
         checkIfLayerIsDependentOnItself(this, layer, *layers)
         checkStatusOfLayer(false, this, layer, *layers)
         checkCircularDependencies(this, layer, *layers)
 
-        allLayers = (allLayers + this + layer + layers)
-            .distinct()
-            .toMutableList()
+        allLayers =
+            (allLayers + this + layer + layers)
+                .distinct()
+                .toMutableList()
 
         dependencies[this] = (dependencies.getOrDefault(this, setOf(this))) + layer + layers
         statuses[this] = Status.DEPEND_ON_LAYER
@@ -37,21 +41,29 @@ class DependencyRulesCore : DependencyRules {
         checkIfLayerHasTheSameValuesAsOtherLayer(this)
         checkStatusOfLayer(true, this)
 
-        allLayers = (allLayers + this)
-            .distinct()
-            .toMutableList()
+        allLayers =
+            (allLayers + this)
+                .distinct()
+                .toMutableList()
         dependencies[this] = setOf(this)
         statuses[this] = Status.DEPENDENT_ON_NOTHING
     }
 
-    private fun checkIfLayerIsDependentOnItself(layer: Layer, vararg layers: Layer) {
+    private fun checkIfLayerIsDependentOnItself(
+        layer: Layer,
+        vararg layers: Layer,
+    ) {
         if (layers.any { it == layer }) {
             throw KoPreconditionFailedException("Layer ${layer.name} cannot be dependent on itself.")
         }
     }
 
     @Suppress("detekt.ThrowsCount")
-    private fun checkStatusOfLayer(toBeIndependent: Boolean, layer: Layer, vararg layers: Layer) {
+    private fun checkStatusOfLayer(
+        toBeIndependent: Boolean,
+        layer: Layer,
+        vararg layers: Layer,
+    ) {
         val layerName = layer.name
         if (statuses[layer] == Status.DEPENDENT_ON_NOTHING) {
             if (toBeIndependent) {
@@ -78,11 +90,15 @@ class DependencyRulesCore : DependencyRules {
         }
     }
 
-    private fun checkCircularDependencies(layer: Layer, vararg layers: Layer) {
-        val allLayers = layers
-            .map { checkCircularDependenciesHelper(layer, it, emptyList(), emptyList()) }
-            .distinct()
-            .toMutableList()
+    private fun checkCircularDependencies(
+        layer: Layer,
+        vararg layers: Layer,
+    ) {
+        val allLayers =
+            layers
+                .map { checkCircularDependenciesHelper(layer, it, emptyList(), emptyList()) }
+                .distinct()
+                .toMutableList()
 
         val notEmpty = allLayers.firstOrNull { it.size > 2 }
 
@@ -119,14 +135,15 @@ class DependencyRulesCore : DependencyRules {
         return if (circularLayer != null) {
             potentialCircular + layerToCheck + null
         } else {
-            val lists = layersToCheck.map {
-                checkCircularDependenciesHelper(
-                    nodeLayer,
-                    it,
-                    alreadyChecked + layerToCheck,
-                    potentialCircular + layerToCheck,
-                )
-            }
+            val lists =
+                layersToCheck.map {
+                    checkCircularDependenciesHelper(
+                        nodeLayer,
+                        it,
+                        alreadyChecked + layerToCheck,
+                        potentialCircular + layerToCheck,
+                    )
+                }
 
             lists
                 .firstOrNull { it.isNotEmpty() && it.last() == null }
@@ -135,14 +152,16 @@ class DependencyRulesCore : DependencyRules {
     }
 
     private fun checkIfLayerHasTheSameValuesAsOtherLayer(vararg layers: Layer) {
-        val list: MutableList<Layer> = allLayers
-            .distinct()
-            .toMutableList()
+        val list: MutableList<Layer> =
+            allLayers
+                .distinct()
+                .toMutableList()
 
         layers.forEach {
-            val similarLayer = list.firstOrNull { layerAlreadyDefined ->
-                it != layerAlreadyDefined && (layerAlreadyDefined.name == it.name || layerAlreadyDefined.definedBy == it.definedBy)
-            }
+            val similarLayer =
+                list.firstOrNull { layerAlreadyDefined ->
+                    it != layerAlreadyDefined && (layerAlreadyDefined.name == it.name || layerAlreadyDefined.definedBy == it.definedBy)
+                }
 
             if (similarLayer != null) {
                 val value = if (similarLayer.name == it.name) "name: ${it.name}" else "definedBy: ${it.definedBy} "

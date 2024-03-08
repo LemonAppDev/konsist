@@ -18,6 +18,7 @@ import org.junit.jupiter.params.provider.MethodSource
 class KoFileDeclarationProviderExtTest {
     // We add these interfaces to simulate declarations that different providers implement.
     private interface TestDeclarationWithModifierProvider : KoBaseDeclaration, KoModifierProvider
+
     private interface TestDeclarationWithoutModifierProvider : KoBaseDeclaration, KoAnnotationProvider
 
     @ParameterizedTest
@@ -28,9 +29,10 @@ class KoFileDeclarationProviderExtTest {
     ) {
         // given
         val declarations: List<KoBaseDeclaration> = emptyList()
-        val provider: KoDeclarationProvider = mockk {
-            every { declarations(includeNested = includeNested, includeLocal = includeLocal) } returns declarations
-        }
+        val provider: KoDeclarationProvider =
+            mockk {
+                every { declarations(includeNested = includeNested, includeLocal = includeLocal) } returns declarations
+            }
 
         // when
         provider.declarationsOf<KoBaseDeclaration>(includeNested = includeNested, includeLocal = includeLocal)
@@ -49,9 +51,10 @@ class KoFileDeclarationProviderExtTest {
         val classDeclaration: KoClassDeclaration = mockk()
         val interfaceDeclaration: KoInterfaceDeclaration = mockk()
         val declarations: List<KoBaseDeclaration> = listOf(classDeclaration, interfaceDeclaration)
-        val provider: KoDeclarationProvider = mockk {
-            every { declarations(includeNested = includeNested, includeLocal = includeLocal) } returns declarations
-        }
+        val provider: KoDeclarationProvider =
+            mockk {
+                every { declarations(includeNested = includeNested, includeLocal = includeLocal) } returns declarations
+            }
 
         // when
         val sut = provider.declarationsOf<KoClassDeclaration>(includeNested = includeNested, includeLocal = includeLocal)
@@ -70,9 +73,10 @@ class KoFileDeclarationProviderExtTest {
         val declaration1: TestDeclarationWithModifierProvider = mockk()
         val declaration2: TestDeclarationWithoutModifierProvider = mockk()
         val declarations = listOf(declaration1, declaration2)
-        val provider: KoDeclarationProvider = mockk {
-            every { declarations(includeNested = includeNested, includeLocal = includeLocal) } returns declarations
-        }
+        val provider: KoDeclarationProvider =
+            mockk {
+                every { declarations(includeNested = includeNested, includeLocal = includeLocal) } returns declarations
+            }
 
         // when
         val sut = provider.declarationsOf<KoModifierProvider>(includeNested = includeNested, includeLocal = includeLocal)
@@ -84,11 +88,12 @@ class KoFileDeclarationProviderExtTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments(false, false),
-            arguments(true, false),
-            arguments(false, true),
-            arguments(true, true),
-        )
+        fun provideValues() =
+            listOf(
+                arguments(false, false),
+                arguments(true, false),
+                arguments(false, true),
+                arguments(true, true),
+            )
     }
 }

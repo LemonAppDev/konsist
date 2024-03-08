@@ -39,7 +39,10 @@ interface KoImportAliasProvider : KoBaseProvider {
      * @param names the names of the import aliases to check.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasImportAliasWithName(name: String, vararg names: String): Boolean
+    fun hasImportAliasWithName(
+        name: String,
+        vararg names: String,
+    ): Boolean
 
     /**
      * Determines whether the declaration has import aliases with all the specified names.
@@ -48,7 +51,10 @@ interface KoImportAliasProvider : KoBaseProvider {
      * @param names The names of the import aliases to check.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasImportAliasesWithAllNames(name: String, vararg names: String): Boolean
+    fun hasImportAliasesWithAllNames(
+        name: String,
+        vararg names: String,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one import alias that satisfies the provided predicate.

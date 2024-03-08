@@ -8,7 +8,6 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  * An interface representing a Kotlin declaration that provides access to KDoc tags.
  */
 interface KoKDocTagProvider : KoBaseProvider {
-
     /**
      * List of tags.
      */
@@ -47,7 +46,10 @@ interface KoKDocTagProvider : KoBaseProvider {
      * @param tags the tags to check.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasTag(tag: KoKDocTag, vararg tags: KoKDocTag): Boolean
+    fun hasTag(
+        tag: KoKDocTag,
+        vararg tags: KoKDocTag,
+    ): Boolean
 
     /**
      * Determines whether the declaration has all specified tags.
@@ -56,5 +58,8 @@ interface KoKDocTagProvider : KoBaseProvider {
      * @param tags the tags to check.
      * @return `true` if there are declarations with all the specified tags, `false` otherwise.
      */
-    fun hasAllTags(tag: KoKDocTag, vararg tags: KoKDocTag): Boolean
+    fun hasAllTags(
+        tag: KoKDocTag,
+        vararg tags: KoKDocTag,
+    ): Boolean
 }

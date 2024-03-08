@@ -10,12 +10,14 @@ internal interface KoArgumentProviderCore :
     override val numArguments: Int
         get() = arguments.size
 
-    override fun countArguments(predicate: (KoArgumentDeclaration) -> Boolean): Int =
-        arguments.count { predicate(it) }
+    override fun countArguments(predicate: (KoArgumentDeclaration) -> Boolean): Int = arguments.count { predicate(it) }
 
     override fun hasArguments(): Boolean = arguments.isNotEmpty()
 
-    override fun hasArgumentWithName(name: String, vararg names: String): Boolean {
+    override fun hasArgumentWithName(
+        name: String,
+        vararg names: String,
+    ): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.any {
@@ -23,7 +25,10 @@ internal interface KoArgumentProviderCore :
         }
     }
 
-    override fun hasArgumentsWithAllNames(name: String, vararg names: String): Boolean {
+    override fun hasArgumentsWithAllNames(
+        name: String,
+        vararg names: String,
+    ): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.all {

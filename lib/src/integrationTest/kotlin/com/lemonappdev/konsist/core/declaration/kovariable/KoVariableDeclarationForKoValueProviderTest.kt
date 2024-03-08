@@ -18,9 +18,10 @@ class KoVariableDeclarationForKoValueProviderTest {
     @MethodSource("provideValues")
     fun `variable-has-value`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -35,9 +36,10 @@ class KoVariableDeclarationForKoValueProviderTest {
     @MethodSource("provideValuesForDelegation")
     fun `variable-with-delegation-has-no-value`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -53,22 +55,24 @@ class KoVariableDeclarationForKoValueProviderTest {
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments(getSnippetFile("variable-in-function-has-value").functions()),
-            arguments(getSnippetFile("variable-in-init-block-has-value").classes().initBlocks),
-            arguments(getSnippetFile("variable-in-enum-constant-has-value").classes().enumConstants),
-            arguments(getSnippetFile("variable-in-getter-has-value").properties().getters),
-            arguments(getSnippetFile("variable-in-setter-has-value").properties().setters),
-        )
+        fun provideValues() =
+            listOf(
+                arguments(getSnippetFile("variable-in-function-has-value").functions()),
+                arguments(getSnippetFile("variable-in-init-block-has-value").classes().initBlocks),
+                arguments(getSnippetFile("variable-in-enum-constant-has-value").classes().enumConstants),
+                arguments(getSnippetFile("variable-in-getter-has-value").properties().getters),
+                arguments(getSnippetFile("variable-in-setter-has-value").properties().setters),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForDelegation() = listOf(
-            arguments(getSnippetFile("variable-with-delegation-in-function-has-no-value").functions()),
-            arguments(getSnippetFile("variable-with-delegation-in-init-block-has-no-value").classes().initBlocks),
-            arguments(getSnippetFile("variable-with-delegation-in-enum-constant-has-no-value").classes().enumConstants),
-            arguments(getSnippetFile("variable-with-delegation-in-getter-has-no-value").properties().getters),
-            arguments(getSnippetFile("variable-with-delegation-in-setter-has-no-value").properties().setters),
-        )
+        fun provideValuesForDelegation() =
+            listOf(
+                arguments(getSnippetFile("variable-with-delegation-in-function-has-no-value").functions()),
+                arguments(getSnippetFile("variable-with-delegation-in-init-block-has-no-value").classes().initBlocks),
+                arguments(getSnippetFile("variable-with-delegation-in-enum-constant-has-no-value").classes().enumConstants),
+                arguments(getSnippetFile("variable-with-delegation-in-getter-has-no-value").properties().getters),
+                arguments(getSnippetFile("variable-with-delegation-in-setter-has-no-value").properties().setters),
+            )
     }
 }

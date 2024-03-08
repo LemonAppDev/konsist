@@ -18,9 +18,10 @@ class KoVariableDeclarationForKoNullableTypeProviderTest {
     @MethodSource("provideValuesWithoutType")
     fun `variable-without-type`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -36,9 +37,10 @@ class KoVariableDeclarationForKoNullableTypeProviderTest {
     @MethodSource("provideValuesWithType")
     fun `variable-with-type`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -59,22 +61,24 @@ class KoVariableDeclarationForKoNullableTypeProviderTest {
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesWithoutType() = listOf(
-            arguments(getSnippetFile("variable-in-function-without-type").functions()),
-            arguments(getSnippetFile("variable-in-init-block-without-type").classes().initBlocks),
-            arguments(getSnippetFile("variable-in-enum-constant-without-type").classes().enumConstants),
-            arguments(getSnippetFile("variable-in-getter-without-type").properties().getters),
-            arguments(getSnippetFile("variable-in-setter-without-type").properties().setters),
-        )
+        fun provideValuesWithoutType() =
+            listOf(
+                arguments(getSnippetFile("variable-in-function-without-type").functions()),
+                arguments(getSnippetFile("variable-in-init-block-without-type").classes().initBlocks),
+                arguments(getSnippetFile("variable-in-enum-constant-without-type").classes().enumConstants),
+                arguments(getSnippetFile("variable-in-getter-without-type").properties().getters),
+                arguments(getSnippetFile("variable-in-setter-without-type").properties().setters),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesWithType() = listOf(
-            arguments(getSnippetFile("variable-in-function-with-type").functions()),
-            arguments(getSnippetFile("variable-in-init-block-with-type").classes().initBlocks),
-            arguments(getSnippetFile("variable-in-enum-constant-with-type").classes().enumConstants),
-            arguments(getSnippetFile("variable-in-getter-with-type").properties().getters),
-            arguments(getSnippetFile("variable-in-setter-with-type").properties().setters),
-        )
+        fun provideValuesWithType() =
+            listOf(
+                arguments(getSnippetFile("variable-in-function-with-type").functions()),
+                arguments(getSnippetFile("variable-in-init-block-with-type").classes().initBlocks),
+                arguments(getSnippetFile("variable-in-enum-constant-with-type").classes().enumConstants),
+                arguments(getSnippetFile("variable-in-getter-with-type").properties().getters),
+                arguments(getSnippetFile("variable-in-setter-with-type").properties().setters),
+            )
     }
 }

@@ -20,13 +20,14 @@ class KoKDocDeclarationForKoKDocTagProviderTest {
         size: Int,
     ) {
         // given
-        val sut = (
-            getSnippetFile("tags")
-                .declarations(includeNested = true)
-                .filterIsInstance<KoNameProvider>()
-                .first { it.name == declarationName } as KoKDocProvider
+        val sut =
+            (
+                getSnippetFile("tags")
+                    .declarations(includeNested = true)
+                    .filterIsInstance<KoNameProvider>()
+                    .first { it.name == declarationName } as KoKDocProvider
             )
-            .kDoc
+                .kDoc
 
         // then
         sut
@@ -37,10 +38,11 @@ class KoKDocDeclarationForKoKDocTagProviderTest {
     @Test
     fun `class-with-unknown-tag`() {
         // given
-        val sut = getSnippetFile("class-with-unknown-tag")
-            .classes()
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("class-with-unknown-tag")
+                .classes()
+                .first()
+                .kDoc
 
         // then
         sut?.tags shouldBeEqualTo listOf()
@@ -49,10 +51,11 @@ class KoKDocDeclarationForKoKDocTagProviderTest {
     @Test
     fun `tags with multiline param tag`() {
         // given
-        val sut = getSnippetFile("tags")
-            .classes()
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("tags")
+                .classes()
+                .first()
+                .kDoc
 
         // then
         sut
@@ -65,10 +68,11 @@ class KoKDocDeclarationForKoKDocTagProviderTest {
     @Test
     fun `tags with '@' into description`() {
         // given
-        val sut = getSnippetFile("tags")
-            .classes()
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("tags")
+                .classes()
+                .first()
+                .kDoc
 
         // then
         sut
@@ -81,10 +85,11 @@ class KoKDocDeclarationForKoKDocTagProviderTest {
     @Test
     fun `kdoc-without-tags`() {
         // given
-        val sut = getSnippetFile("kdoc-without-tags")
-            .classes()
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("kdoc-without-tags")
+                .classes()
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -101,10 +106,11 @@ class KoKDocDeclarationForKoKDocTagProviderTest {
     @Test
     fun `kdoc-has-tags`() {
         // given
-        val sut = getSnippetFile("kdoc-has-tags")
-            .classes()
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("kdoc-has-tags")
+                .classes()
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -127,10 +133,11 @@ class KoKDocDeclarationForKoKDocTagProviderTest {
     @Test
     fun `class-has-one-line-kdoc`() {
         // given
-        val sut = getSnippetFile("class-has-one-line-kdoc")
-            .classes()
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("class-has-one-line-kdoc")
+                .classes()
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -144,10 +151,11 @@ class KoKDocDeclarationForKoKDocTagProviderTest {
     @Test
     fun `kdoc-has-tags-without-description`() {
         // given
-        val sut = getSnippetFile("kdoc-has-tags-without-description")
-            .classes()
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("kdoc-has-tags-without-description")
+                .classes()
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -161,17 +169,17 @@ class KoKDocDeclarationForKoKDocTagProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kokdoc/snippet/forkokdoctagprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kokdoc/snippet/forkokdoctagprovider/", fileName)
 
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("SampleClass", 10),
-            arguments("sampleMethod", 2),
-            arguments("sampleProperty", 2),
-            arguments("SampleClassWithoutTags", 0),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("SampleClass", 10),
+                arguments("sampleMethod", 2),
+                arguments("sampleProperty", 2),
+                arguments("SampleClassWithoutTags", 0),
+            )
     }
 }

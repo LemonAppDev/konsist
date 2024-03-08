@@ -9,9 +9,10 @@ class KoImportDeclarationForKoPathProviderTest {
     @Test
     fun `import-file-path`() {
         // given
-        val sut = getSnippetFile("import-file-path")
-            .imports
-            .first()
+        val sut =
+            getSnippetFile("import-file-path")
+                .imports
+                .first()
 
         // then
         assertSoftly(sut.path) {
@@ -23,9 +24,10 @@ class KoImportDeclarationForKoPathProviderTest {
     @Test
     fun `import-project-file-path`() {
         // given
-        val sut = getSnippetFile("import-project-file-path")
-            .imports
-            .first()
+        val sut =
+            getSnippetFile("import-project-file-path")
+                .imports
+                .first()
 
         // then
         sut
@@ -39,9 +41,10 @@ class KoImportDeclarationForKoPathProviderTest {
     @Test
     fun `import-reside-in-file-path`() {
         // given
-        val sut = getSnippetFile("import-reside-in-file-path")
-            .imports
-            .first()
+        val sut =
+            getSnippetFile("import-reside-in-file-path")
+                .imports
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -55,9 +58,10 @@ class KoImportDeclarationForKoPathProviderTest {
     @Test
     fun `import-reside-in-project-file-path`() {
         // given
-        val sut = getSnippetFile("import-reside-in-project-file-path")
-            .imports
-            .first()
+        val sut =
+            getSnippetFile("import-reside-in-project-file-path")
+                .imports
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -68,6 +72,5 @@ class KoImportDeclarationForKoPathProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koimport/snippet/forkopathprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koimport/snippet/forkopathprovider/", fileName)
 }

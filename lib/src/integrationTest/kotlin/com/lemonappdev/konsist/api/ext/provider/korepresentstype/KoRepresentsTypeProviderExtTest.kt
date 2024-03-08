@@ -22,10 +22,11 @@ class KoRepresentsTypeProviderExtTest {
     @Test
     fun `parameter-represents-type-of-type`() {
         // given
-        val sut = getSnippetFile("parameter-represents-type-of-type")
-            .functions()
-            .parameters
-            .first()
+        val sut =
+            getSnippetFile("parameter-represents-type-of-type")
+                .functions()
+                .parameters
+                .first()
 
         // then
         sut.representsTypeOf<SampleType>() shouldBeEqualTo true
@@ -34,10 +35,11 @@ class KoRepresentsTypeProviderExtTest {
     @Test
     fun `annotation-represents-type`() {
         // given
-        val sut = getSnippetFile("annotation-represents-type")
-            .functions()
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-represents-type")
+                .functions()
+                .annotations
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -49,10 +51,11 @@ class KoRepresentsTypeProviderExtTest {
     @Test
     fun `annotation-represents-type-without-import`() {
         // given
-        val sut = getSnippetFile("annotation-represents-type-without-import")
-            .functions()
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-represents-type-without-import")
+                .functions()
+                .annotations
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -70,10 +73,11 @@ class KoRepresentsTypeProviderExtTest {
         valueForSampleObject: Boolean,
     ) {
         // given
-        val sut = getSnippetFile(fileName)
-            .declarations(includeNested = true)
-            .filterIsInstance<KoRepresentsTypeProvider>()
-            .first()
+        val sut =
+            getSnippetFile(fileName)
+                .declarations(includeNested = true)
+                .filterIsInstance<KoRepresentsTypeProvider>()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -83,16 +87,16 @@ class KoRepresentsTypeProviderExtTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("api/ext/provider/korepresentstype/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("api/ext/provider/korepresentstype/snippet/", fileName)
 
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("class-represents-type", true, false, false),
-            arguments("interface-represents-type", false, true, false),
-            arguments("object-represents-type", false, false, true),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("class-represents-type", true, false, false),
+                arguments("interface-represents-type", false, true, false),
+                arguments("object-represents-type", false, false, true),
+            )
     }
 }

@@ -1,10 +1,17 @@
+import ext.getTomlVersion
+
 plugins {
     id("com.diffplug.spotless")
 }
 
 spotless {
     kotlin {
-        ktlint()
+        project.fileTree(project.rootDir) {
+            exclude(".gradle/**")
+        }
+
+        val ktlintCliVersion = project.getTomlVersion("ktlintCliVersion")
+        ktlint(ktlintCliVersion)
 
         indentWithSpaces()
         endWithNewline()

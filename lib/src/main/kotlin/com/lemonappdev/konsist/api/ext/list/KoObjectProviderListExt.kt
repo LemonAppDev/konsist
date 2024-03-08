@@ -9,9 +9,7 @@ import com.lemonappdev.konsist.api.provider.KoObjectProvider
  * @param includeNested Whether to include nested objects.
  * @return A list containing object declarations.
  */
-fun <T : KoObjectProvider> List<T>.objects(
-    includeNested: Boolean = true,
-): List<KoObjectDeclaration> = flatMap { it.objects(includeNested) }
+fun <T : KoObjectProvider> List<T>.objects(includeNested: Boolean = true): List<KoObjectDeclaration> = flatMap { it.objects(includeNested) }
 
 /**
  * List containing declarations with any object.
@@ -19,8 +17,7 @@ fun <T : KoObjectProvider> List<T>.objects(
  * @param includeNested Whether to include nested objects.
  * @return A list containing declarations with any object.
  */
-fun <T : KoObjectProvider> List<T>.withObjects(includeNested: Boolean = true): List<T> =
-    filter { it.hasObjects(includeNested) }
+fun <T : KoObjectProvider> List<T>.withObjects(includeNested: Boolean = true): List<T> = filter { it.hasObjects(includeNested) }
 
 /**
  * List containing declarations with no objects.
@@ -28,8 +25,7 @@ fun <T : KoObjectProvider> List<T>.withObjects(includeNested: Boolean = true): L
  * @param includeNested Whether to include nested objects.
  * @return A list containing declarations with no objects.
  */
-fun <T : KoObjectProvider> List<T>.withoutObjects(includeNested: Boolean = true): List<T> =
-    filterNot { it.hasObjects(includeNested) }
+fun <T : KoObjectProvider> List<T>.withoutObjects(includeNested: Boolean = true): List<T> = filterNot { it.hasObjects(includeNested) }
 
 /**
  * List containing declarations that have at least one object with the specified name(s).
@@ -43,9 +39,10 @@ fun <T : KoObjectProvider> List<T>.withObjectNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = filter {
-    it.hasObjectWithName(name, *names, includeNested = includeNested)
-}
+): List<T> =
+    filter {
+        it.hasObjectWithName(name, *names, includeNested = includeNested)
+    }
 
 /**
  * List containing declarations without any of specified objects.
@@ -59,9 +56,10 @@ fun <T : KoObjectProvider> List<T>.withoutObjectNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = filterNot {
-    it.hasObjectWithName(name, *names, includeNested = includeNested)
-}
+): List<T> =
+    filterNot {
+        it.hasObjectWithName(name, *names, includeNested = includeNested)
+    }
 
 /**
  * List containing declarations that have all specified objects.
@@ -75,9 +73,10 @@ fun <T : KoObjectProvider> List<T>.withAllObjectsNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = filter {
-    it.hasObjectsWithAllNames(name, *names, includeNested = includeNested)
-}
+): List<T> =
+    filter {
+        it.hasObjectsWithAllNames(name, *names, includeNested = includeNested)
+    }
 
 /**
  * List containing declarations without all specified objects.
@@ -106,9 +105,10 @@ fun <T : KoObjectProvider> List<T>.withoutAllObjectsNamed(
 fun <T : KoObjectProvider> List<T>.withObject(
     includeNested: Boolean = true,
     predicate: (KoObjectDeclaration) -> Boolean,
-): List<T> = filter {
-    it.hasObject(includeNested, predicate)
-}
+): List<T> =
+    filter {
+        it.hasObject(includeNested, predicate)
+    }
 
 /**
  * List containing declarations that not have object satisfying the provided predicate.
@@ -120,8 +120,7 @@ fun <T : KoObjectProvider> List<T>.withObject(
 fun <T : KoObjectProvider> List<T>.withoutObject(
     includeNested: Boolean = true,
     predicate: (KoObjectDeclaration) -> Boolean,
-): List<T> =
-    filterNot { it.hasObject(includeNested, predicate) }
+): List<T> = filterNot { it.hasObject(includeNested, predicate) }
 
 /**
  * List containing declarations that have all objects satisfying the provided predicate.
@@ -148,8 +147,7 @@ fun <T : KoObjectProvider> List<T>.withAllObjects(
 fun <T : KoObjectProvider> List<T>.withoutAllObjects(
     includeNested: Boolean = true,
     predicate: (KoObjectDeclaration) -> Boolean,
-): List<T> =
-    filterNot { it.hasAllObjects(includeNested, predicate) }
+): List<T> = filterNot { it.hasAllObjects(includeNested, predicate) }
 
 /**
  * List containing declarations with object declarations satisfying the predicate.
@@ -161,8 +159,7 @@ fun <T : KoObjectProvider> List<T>.withoutAllObjects(
 fun <T : KoObjectProvider> List<T>.withObjects(
     includeNested: Boolean = true,
     predicate: (List<KoObjectDeclaration>) -> Boolean,
-): List<T> =
-    filter { predicate(it.objects(includeNested)) }
+): List<T> = filter { predicate(it.objects(includeNested)) }
 
 /**
  * List containing declarations without object declarations satisfying the predicate.
@@ -174,5 +171,4 @@ fun <T : KoObjectProvider> List<T>.withObjects(
 fun <T : KoObjectProvider> List<T>.withoutObjects(
     includeNested: Boolean = true,
     predicate: (List<KoObjectDeclaration>) -> Boolean,
-): List<T> =
-    filterNot { predicate(it.objects(includeNested)) }
+): List<T> = filterNot { predicate(it.objects(includeNested)) }

@@ -9,10 +9,11 @@ class KoSetterDeclarationForKoLocalFunctionProviderTest {
     @Test
     fun `setter-contains-no-local-function`() {
         // given
-        val sut = getSnippetFile("setter-contains-no-local-function")
-            .properties()
-            .first()
-            .setter
+        val sut =
+            getSnippetFile("setter-contains-no-local-function")
+                .properties()
+                .first()
+                .setter
 
         // then
         assertSoftly(sut) {
@@ -30,10 +31,11 @@ class KoSetterDeclarationForKoLocalFunctionProviderTest {
     @Test
     fun `setter-contains-local-function`() {
         // given
-        val sut = getSnippetFile("setter-contains-local-function")
-            .properties()
-            .first()
-            .setter
+        val sut =
+            getSnippetFile("setter-contains-local-function")
+                .properties()
+                .first()
+                .setter
 
         // then
         assertSoftly(sut) {

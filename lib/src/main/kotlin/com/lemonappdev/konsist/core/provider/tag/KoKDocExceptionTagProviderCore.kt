@@ -10,8 +10,9 @@ internal interface KoKDocExceptionTagProviderCore :
     KoKDocExceptionTagProvider,
     KoKDocTagProviderCore {
     override val exceptionTags: List<KoValuedKDocTagDeclaration>
-        get() = tags.filter { it.name == KoKDocTag.EXCEPTION }
-            .map { it as KoValuedKDocTagDeclaration }
+        get() =
+            tags.filter { it.name == KoKDocTag.EXCEPTION }
+                .map { it as KoValuedKDocTagDeclaration }
 
     override val numExceptionTags: Int
         get() = exceptionTags.size

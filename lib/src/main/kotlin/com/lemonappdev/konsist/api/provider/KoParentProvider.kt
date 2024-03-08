@@ -75,7 +75,10 @@ interface KoParentProvider : KoBaseProvider {
      * @param predicate The predicate function to determine if a parent satisfies a condition.
      * @return The number of parents in the declaration satisfying predicate.
      */
-    fun countParents(indirectParents: Boolean = false, predicate: (KoParentDeclaration) -> Boolean): Int
+    fun countParents(
+        indirectParents: Boolean = false,
+        predicate: (KoParentDeclaration) -> Boolean,
+    ): Int
 
     /**
      * Determines whatever declaration has parents (parent class and parent interfaces) defined directly in the Kotlin file.
@@ -131,7 +134,11 @@ interface KoParentProvider : KoBaseProvider {
      *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasParentWithName(name: String, vararg names: String, indirectParents: Boolean = false): Boolean
+    fun hasParentWithName(
+        name: String,
+        vararg names: String,
+        indirectParents: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has parents (parent classes and parent interfaces) with all the specified names.
@@ -152,7 +159,11 @@ interface KoParentProvider : KoBaseProvider {
      *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasParentsWithAllNames(name: String, vararg names: String, indirectParents: Boolean = false): Boolean
+    fun hasParentsWithAllNames(
+        name: String,
+        vararg names: String,
+        indirectParents: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one parent (parent class or parent interface) that satisfies the
@@ -173,7 +184,10 @@ interface KoParentProvider : KoBaseProvider {
      * @param predicate A function that defines the condition to be met by a parent declaration.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasParent(indirectParents: Boolean = false, predicate: (KoParentDeclaration) -> Boolean): Boolean
+    fun hasParent(
+        indirectParents: Boolean = false,
+        predicate: (KoParentDeclaration) -> Boolean,
+    ): Boolean
 
     /**
      * Determines whether the declaration has all parents (parent classes and parent interfaces) that satisfy the
@@ -197,7 +211,10 @@ interface KoParentProvider : KoBaseProvider {
      * @param predicate A function that defines the condition to be met by parent declarations.
      * @return `true` if all parent declarations satisfy the predicate, `false` otherwise.
      */
-    fun hasAllParents(indirectParents: Boolean = false, predicate: (KoParentDeclaration) -> Boolean): Boolean
+    fun hasAllParents(
+        indirectParents: Boolean = false,
+        predicate: (KoParentDeclaration) -> Boolean,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one parent of the specified `KClass` type.
@@ -218,7 +235,11 @@ interface KoParentProvider : KoBaseProvider {
      *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasParentOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean = false): Boolean
+    fun hasParentOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+        indirectParents: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has parents with all the specified `KClass` type.
@@ -239,5 +260,9 @@ interface KoParentProvider : KoBaseProvider {
      *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
      * @return `true` if the declaration has parents of all the specified `KClass` types, `false` otherwise.
      */
-    fun hasAllParentsOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean = false): Boolean
+    fun hasAllParentsOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+        indirectParents: Boolean = false,
+    ): Boolean
 }

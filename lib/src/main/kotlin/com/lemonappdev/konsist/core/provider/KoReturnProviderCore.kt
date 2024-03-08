@@ -17,22 +17,24 @@ internal interface KoReturnProviderCore :
     KoBaseProviderCore {
     val ktFunction: KtFunction
 
-    private fun getTypeReferences(): List<KtTypeReference> = ktFunction
-        .children
-        .filterIsInstance<KtTypeReference>()
+    private fun getTypeReferences(): List<KtTypeReference> =
+        ktFunction
+            .children
+            .filterIsInstance<KtTypeReference>()
 
     override val returnType: KoTypeDeclaration?
         get() {
             val references = getTypeReferences()
 
-            val type = if (ktFunction.isExtensionDeclaration()) {
-                when {
-                    references.size > 1 -> references.lastOrNull()
-                    else -> null
+            val type =
+                if (ktFunction.isExtensionDeclaration()) {
+                    when {
+                        references.size > 1 -> references.lastOrNull()
+                        else -> null
+                    }
+                } else {
+                    references.firstOrNull()
                 }
-            } else {
-                references.firstOrNull()
-            }
 
             return type?.let {
                 KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration())
@@ -40,20 +42,21 @@ internal interface KoReturnProviderCore :
         }
 
     override val hasReturnValue: Boolean
-        get() = if (returnType != null) {
-            returnType?.name != "Unit"
-        } else if (ktFunction.hasBlockBody()) {
-            // Every function with block body and without declared type returns Unit
-            false
-        } else {
+        get() =
+            if (returnType != null) {
+                returnType?.name != "Unit"
+            } else if (ktFunction.hasBlockBody()) {
+                // Every function with block body and without declared type returns Unit
+                false
+            } else {
             /*
             We have no way of distinguishing between:
             1) fun sampleFunction1() = println("some text") // returns Unit
             2) fun sampleFunction2() = SampleClass() // returns SampleClass,
             so we always return true.
              */
-            true
-        }
+                true
+            }
 
     @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasReturnType()"))
     override val hasReturnType: Boolean

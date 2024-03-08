@@ -10,10 +10,11 @@ class KoKDocDeclarationForKoKDocReturnTagProviderTest {
     @Test
     fun `kdoc-without-return-tag`() {
         // given
-        val sut = getSnippetFile("kdoc-without-return-tag")
-            .classes()
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("kdoc-without-return-tag")
+                .classes()
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -25,10 +26,11 @@ class KoKDocDeclarationForKoKDocReturnTagProviderTest {
     @Test
     fun `function-with-return-tag`() {
         // given
-        val sut = getSnippetFile("function-with-return-tag")
-            .functions(includeNested = true)
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("function-with-return-tag")
+                .functions(includeNested = true)
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut) {

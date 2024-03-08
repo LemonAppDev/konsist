@@ -10,12 +10,14 @@ class KoTailrecModifierProviderListExtTest {
     @Test
     fun `withTailrecModifier() returns declaration with tailrec modifier`() {
         // given
-        val declaration1: KoTailrecModifierProvider = mockk {
-            every { hasTailrecModifier } returns true
-        }
-        val declaration2: KoTailrecModifierProvider = mockk {
-            every { hasTailrecModifier } returns false
-        }
+        val declaration1: KoTailrecModifierProvider =
+            mockk {
+                every { hasTailrecModifier } returns true
+            }
+        val declaration2: KoTailrecModifierProvider =
+            mockk {
+                every { hasTailrecModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -28,12 +30,14 @@ class KoTailrecModifierProviderListExtTest {
     @Test
     fun `withoutTailrecModifier() returns declaration without tailrec modifier`() {
         // given
-        val declaration1: KoTailrecModifierProvider = mockk {
-            every { hasTailrecModifier } returns true
-        }
-        val declaration2: KoTailrecModifierProvider = mockk {
-            every { hasTailrecModifier } returns false
-        }
+        val declaration1: KoTailrecModifierProvider =
+            mockk {
+                every { hasTailrecModifier } returns true
+            }
+        val declaration2: KoTailrecModifierProvider =
+            mockk {
+                every { hasTailrecModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

@@ -47,8 +47,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParentNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> =
-    filter { it.hasExternalParentWithName(name, *names, indirectParents = indirectParents) }
+): List<T> = filter { it.hasExternalParentWithName(name, *names, indirectParents = indirectParents) }
 
 /**
  * List containing declarations without any of specified external parents.
@@ -63,8 +62,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> =
-    filterNot { it.hasExternalParentWithName(name, *names, indirectParents = indirectParents) }
+): List<T> = filterNot { it.hasExternalParentWithName(name, *names, indirectParents = indirectParents) }
 
 /**
  * List containing declarations that have all specified external parents.
@@ -79,8 +77,7 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> =
-    filter { it.hasExternalParentsWithAllNames(name, *names, indirectParents = indirectParents) }
+): List<T> = filter { it.hasExternalParentsWithAllNames(name, *names, indirectParents = indirectParents) }
 
 /**
  * List containing declarations without all specified external parents.
@@ -95,8 +92,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> =
-    filterNot { it.hasExternalParentsWithAllNames(name, *names, indirectParents = indirectParents) }
+): List<T> = filterNot { it.hasExternalParentsWithAllNames(name, *names, indirectParents = indirectParents) }
 
 /**
  * List containing declarations that have at least one external parent satisfying the provided predicate.
@@ -109,8 +105,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsNamed(
 fun <T : KoExternalParentProvider> List<T>.withExternalParent(
     indirectParents: Boolean = false,
     predicate: (KoExternalDeclaration) -> Boolean,
-): List<T> =
-    filter { it.hasExternalParent(indirectParents, predicate) }
+): List<T> = filter { it.hasExternalParent(indirectParents, predicate) }
 
 /**
  * List containing declarations that not have external parent satisfying the provided predicate.
@@ -123,8 +118,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParent(
 fun <T : KoExternalParentProvider> List<T>.withoutExternalParent(
     indirectParents: Boolean = false,
     predicate: (KoExternalDeclaration) -> Boolean,
-): List<T> =
-    filterNot { it.hasExternalParent(indirectParents, predicate) }
+): List<T> = filterNot { it.hasExternalParent(indirectParents, predicate) }
 
 /**
  * List containing declarations that have all external parents satisfying the provided predicate.
@@ -137,8 +131,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParent(
 fun <T : KoExternalParentProvider> List<T>.withAllExternalParents(
     indirectParents: Boolean = false,
     predicate: (KoExternalDeclaration) -> Boolean,
-): List<T> =
-    filter { it.hasAllExternalParents(indirectParents, predicate) }
+): List<T> = filter { it.hasAllExternalParents(indirectParents, predicate) }
 
 /**
  * List containing declarations that have at least one external parent not satisfying the provided predicate.
@@ -164,8 +157,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParents(
 fun <T : KoExternalParentProvider> List<T>.withExternalParents(
     indirectParents: Boolean = false,
     predicate: (List<KoExternalDeclaration>) -> Boolean,
-): List<T> =
-    filter { predicate(it.externalParents(indirectParents)) }
+): List<T> = filter { predicate(it.externalParents(indirectParents)) }
 
 /**
  * List containing declarations without external parent declarations satisfying the predicate.
@@ -178,8 +170,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParents(
 fun <T : KoExternalParentProvider> List<T>.withoutExternalParents(
     indirectParents: Boolean = false,
     predicate: (List<KoExternalDeclaration>) -> Boolean,
-): List<T> =
-    filterNot { predicate(it.externalParents(indirectParents)) }
+): List<T> = filterNot { predicate(it.externalParents(indirectParents)) }
 
 /**
  * List containing declarations that have at least one external parent of the specified `KClass` type.
@@ -194,8 +185,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParentOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectParents: Boolean = false,
-): List<T> =
-    filter { it.hasExternalParentOf(kClass, *kClasses, indirectParents = indirectParents) }
+): List<T> = filter { it.hasExternalParentOf(kClass, *kClasses, indirectParents = indirectParents) }
 
 /**
  * List containing declarations without any external parent of the specified `KClass` type.
@@ -210,8 +200,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectParents: Boolean = false,
-): List<T> =
-    filterNot { it.hasExternalParentOf(kClass, *kClasses, indirectParents = indirectParents) }
+): List<T> = filterNot { it.hasExternalParentOf(kClass, *kClasses, indirectParents = indirectParents) }
 
 /**
  * List containing declarations that have all external parents of the specified `KClass` type.
@@ -226,8 +215,7 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectParents: Boolean = false,
-): List<T> =
-    filter { it.hasAllExternalParentsOf(kClass, *kClasses, indirectParents = indirectParents) }
+): List<T> = filter { it.hasAllExternalParentsOf(kClass, *kClasses, indirectParents = indirectParents) }
 
 /**
  * List containing declarations without all specified `KClass` type external parents.
@@ -242,5 +230,4 @@ fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectParents: Boolean = false,
-): List<T> =
-    filterNot { it.hasAllExternalParentsOf(kClass, *kClasses, indirectParents = indirectParents) }
+): List<T> = filterNot { it.hasAllExternalParentsOf(kClass, *kClasses, indirectParents = indirectParents) }

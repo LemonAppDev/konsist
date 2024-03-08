@@ -40,6 +40,5 @@ class KoScopeForKoObjectDeclarationTest {
             .shouldBeEqualTo(expected)
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/container/snippet/forkoobjectdeclaration/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/container/snippet/forkoobjectdeclaration/", fileName)
 }

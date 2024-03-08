@@ -9,9 +9,10 @@ class KoFileDeclarationForKoImportProviderTest {
     @Test
     fun `file-has-no-import`() {
         // given
-        val sut = getSnippetFile("file-has-no-import")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-has-no-import")
+                .files
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -33,9 +34,10 @@ class KoFileDeclarationForKoImportProviderTest {
     @Test
     fun `file-has-one-import`() {
         // given
-        val sut = getSnippetFile("file-has-one-import")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-has-one-import")
+                .files
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -63,9 +65,10 @@ class KoFileDeclarationForKoImportProviderTest {
     @Test
     fun `file-has-two-imports`() {
         // given
-        val sut = getSnippetFile("file-has-two-imports")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-has-two-imports")
+                .files
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -98,8 +101,9 @@ class KoFileDeclarationForKoImportProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope(
-        "core/declaration/kofile/snippet/forkoimportprovider/",
-        fileName,
-    )
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope(
+            "core/declaration/kofile/snippet/forkoimportprovider/",
+            fileName,
+        )
 }

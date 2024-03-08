@@ -14,9 +14,10 @@ class KoTacitTypeProviderExtTest {
     @Test
     fun `declaration-has-no-tacit-type`() {
         // given
-        val sut = getSnippetFile("declaration-has-no-tacit-type")
-            .declarationsOf<KoTacitTypeProvider>()
-            .first()
+        val sut =
+            getSnippetFile("declaration-has-no-tacit-type")
+                .declarationsOf<KoTacitTypeProvider>()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -28,9 +29,10 @@ class KoTacitTypeProviderExtTest {
     @Test
     fun `declaration-has-explicit-simple-type`() {
         // given
-        val sut = getSnippetFile("declaration-has-explicit-simple-type")
-            .declarationsOf<KoTacitTypeProvider>()
-            .first()
+        val sut =
+            getSnippetFile("declaration-has-explicit-simple-type")
+                .declarationsOf<KoTacitTypeProvider>()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -42,9 +44,10 @@ class KoTacitTypeProviderExtTest {
     @Test
     fun `declaration-has-explicit-complex-type`() {
         // given
-        val sut = getSnippetFile("declaration-has-explicit-complex-type")
-            .declarationsOf<KoTacitTypeProvider>()
-            .first()
+        val sut =
+            getSnippetFile("declaration-has-explicit-complex-type")
+                .declarationsOf<KoTacitTypeProvider>()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -56,9 +59,10 @@ class KoTacitTypeProviderExtTest {
     @Test
     fun `declaration-has-implicit-complex-type`() {
         // given
-        val sut = getSnippetFile("declaration-has-implicit-complex-type")
-            .declarationsOf<KoTacitTypeProvider>()
-            .first()
+        val sut =
+            getSnippetFile("declaration-has-implicit-complex-type")
+                .declarationsOf<KoTacitTypeProvider>()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -67,6 +71,5 @@ class KoTacitTypeProviderExtTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("api/ext/provider/kotacittype/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("api/ext/provider/kotacittype/snippet/", fileName)
 }

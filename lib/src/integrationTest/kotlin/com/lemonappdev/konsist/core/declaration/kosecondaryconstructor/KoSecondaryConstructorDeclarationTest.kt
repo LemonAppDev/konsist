@@ -9,11 +9,12 @@ class KoSecondaryConstructorDeclarationTest {
     @Test
     fun `secondary-constructor-to-string`() {
         // given
-        val sut = getSnippetFile("secondary-constructor-to-string")
-            .classes()
-            .first()
-            .secondaryConstructors
-            .first()
+        val sut =
+            getSnippetFile("secondary-constructor-to-string")
+                .classes()
+                .first()
+                .secondaryConstructors
+                .first()
 
         // then
         val declaration = "Declaration:\nconstructor(): this(6)"

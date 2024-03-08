@@ -15,14 +15,15 @@ class KoFunctionTypeDeclarationForKoTextProviderTest {
         value: String,
     ) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoFunctionTypeDeclaration
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         sut?.text shouldBeEqualTo value
@@ -34,9 +35,10 @@ class KoFunctionTypeDeclarationForKoTextProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("function-type-text", "() -> SampleType"),
-            arguments("nullable-function-type-text", "() -> SampleType"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("function-type-text", "() -> SampleType"),
+                arguments("nullable-function-type-text", "() -> SampleType"),
+            )
     }
 }

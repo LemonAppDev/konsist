@@ -66,25 +66,27 @@ internal class KoEnumConstantDeclarationCore private constructor(
     override val ktElement: KtElement by lazy { ktEnumEntry }
 
     override val localDeclarations: List<KoBaseDeclaration> by lazy {
-        val psiElements = ktEnumEntry
-            .body
-            ?.children
+        val psiElements =
+            ktEnumEntry
+                .body
+                ?.children
 
         KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
     }
 
     override val arguments: List<KoArgumentDeclaration>
-        get() = ktEnumEntry
-            .initializerList
-            ?.initializers
-            ?.firstOrNull()
-            ?.children
-            ?.filterIsInstance<KtValueArgumentList>()
-            ?.firstOrNull()
-            ?.children
-            ?.filterIsInstance<KtValueArgument>()
-            ?.map { KoArgumentDeclarationCore.getInstance(it, this) }
-            .orEmpty()
+        get() =
+            ktEnumEntry
+                .initializerList
+                ?.initializers
+                ?.firstOrNull()
+                ?.children
+                ?.filterIsInstance<KtValueArgumentList>()
+                ?.firstOrNull()
+                ?.children
+                ?.filterIsInstance<KtValueArgument>()
+                ?.map { KoArgumentDeclarationCore.getInstance(it, this) }
+                .orEmpty()
 
     override fun toString(): String = name
 

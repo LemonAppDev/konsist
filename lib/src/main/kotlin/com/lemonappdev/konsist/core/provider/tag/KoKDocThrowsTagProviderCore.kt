@@ -7,8 +7,9 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 
 internal interface KoKDocThrowsTagProviderCore : KoBaseProviderCore, KoKDocThrowsTagProvider, KoKDocTagProviderCore {
     override val throwsTags: List<KoValuedKDocTagDeclaration>
-        get() = tags.filter { it.name == KoKDocTag.THROWS }
-            .map { it as KoValuedKDocTagDeclaration }
+        get() =
+            tags.filter { it.name == KoKDocTag.THROWS }
+                .map { it as KoValuedKDocTagDeclaration }
 
     override val numThrowsTags: Int
         get() = throwsTags.size

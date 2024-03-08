@@ -10,12 +10,14 @@ class KoActualModifierProviderListExtTest {
     @Test
     fun `withActualModifier() returns declaration with actual modifier`() {
         // given
-        val declaration1: KoActualModifierProvider = mockk {
-            every { hasActualModifier } returns true
-        }
-        val declaration2: KoActualModifierProvider = mockk {
-            every { hasActualModifier } returns false
-        }
+        val declaration1: KoActualModifierProvider =
+            mockk {
+                every { hasActualModifier } returns true
+            }
+        val declaration2: KoActualModifierProvider =
+            mockk {
+                every { hasActualModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -28,12 +30,14 @@ class KoActualModifierProviderListExtTest {
     @Test
     fun `withoutActualModifier() returns declaration without actual modifier`() {
         // given
-        val declaration1: KoActualModifierProvider = mockk {
-            every { hasActualModifier } returns true
-        }
-        val declaration2: KoActualModifierProvider = mockk {
-            every { hasActualModifier } returns false
-        }
+        val declaration1: KoActualModifierProvider =
+            mockk {
+                every { hasActualModifier } returns true
+            }
+        val declaration2: KoActualModifierProvider =
+            mockk {
+                every { hasActualModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

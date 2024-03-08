@@ -14,12 +14,14 @@ class KoContainingDeclarationProviderListExtTest {
         // given
         val containingDeclaration1: KoClassDeclaration = mockk()
         val containingDeclaration2: KoInterfaceDeclaration = mockk()
-        val declaration1: KoContainingDeclarationProvider = mockk {
-            every { containingDeclaration } returns containingDeclaration1
-        }
-        val declaration2: KoContainingDeclarationProvider = mockk {
-            every { containingDeclaration } returns containingDeclaration2
-        }
+        val declaration1: KoContainingDeclarationProvider =
+            mockk {
+                every { containingDeclaration } returns containingDeclaration1
+            }
+        val declaration2: KoContainingDeclarationProvider =
+            mockk {
+                every { containingDeclaration } returns containingDeclaration2
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

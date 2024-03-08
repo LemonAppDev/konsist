@@ -16,11 +16,15 @@ import org.junit.jupiter.params.provider.MethodSource
 class KoVariableDeclarationForKoContainingDeclarationProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `variable-parent-declaration`(declarations: List<KoVariableProvider>, result: String) {
+    fun `variable-parent-declaration`(
+        declarations: List<KoVariableProvider>,
+        result: String,
+    ) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         (sut.containingDeclaration as KoTextProvider).text shouldContain result
@@ -32,27 +36,28 @@ class KoVariableDeclarationForKoContainingDeclarationProviderTest {
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments(
-                getSnippetFile("variable-in-function-parent-declaration").functions(),
-                "fun sampleFunction()",
-            ),
-            arguments(
-                getSnippetFile("variable-in-init-block-parent-declaration").classes().initBlocks,
-                "init {",
-            ),
-            arguments(
-                getSnippetFile("variable-in-enum-constant-parent-declaration").classes().enumConstants,
-                "SAMPLE_CONSTANT_1",
-            ),
-            arguments(
-                getSnippetFile("variable-in-getter-parent-declaration").properties().getters,
-                "get() {",
-            ),
-            arguments(
-                getSnippetFile("variable-in-setter-parent-declaration").properties().setters,
-                "set(value) {",
-            ),
-        )
+        fun provideValues() =
+            listOf(
+                arguments(
+                    getSnippetFile("variable-in-function-parent-declaration").functions(),
+                    "fun sampleFunction()",
+                ),
+                arguments(
+                    getSnippetFile("variable-in-init-block-parent-declaration").classes().initBlocks,
+                    "init {",
+                ),
+                arguments(
+                    getSnippetFile("variable-in-enum-constant-parent-declaration").classes().enumConstants,
+                    "SAMPLE_CONSTANT_1",
+                ),
+                arguments(
+                    getSnippetFile("variable-in-getter-parent-declaration").properties().getters,
+                    "get() {",
+                ),
+                arguments(
+                    getSnippetFile("variable-in-setter-parent-declaration").properties().setters,
+                    "set(value) {",
+                ),
+            )
     }
 }

@@ -16,9 +16,10 @@ class Architecture5Test {
     private val domain = Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.domain..")
     private val infrastructure =
         Layer("Infrastructure", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.infrastructure..")
-    private val scope = Konsist.scopeFromDirectory(
-        "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture5/project",
-    )
+    private val scope =
+        Konsist.scopeFromDirectory(
+            "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture5/project",
+        )
 
     @Test
     fun `passes when good dependency is set (scope)`() {
@@ -48,12 +49,13 @@ class Architecture5Test {
     @Test
     fun `passes when good dependency is set and architecture is passed as parameter (scope)`() {
         // given
-        val architecture = architecture {
-            presentation.dependsOn(application)
-            application.dependsOn(domain, infrastructure)
-            domain.dependsOn(infrastructure)
-            infrastructure.dependsOnNothing()
-        }
+        val architecture =
+            architecture {
+                presentation.dependsOn(application)
+                application.dependsOn(domain, infrastructure)
+                domain.dependsOn(infrastructure)
+                infrastructure.dependsOnNothing()
+            }
 
         // then
         scope
@@ -63,12 +65,13 @@ class Architecture5Test {
     @Test
     fun `passes when good dependency is set and architecture is passed as parameter (files)`() {
         // given
-        val architecture = architecture {
-            presentation.dependsOn(application)
-            application.dependsOn(domain, infrastructure)
-            domain.dependsOn(infrastructure)
-            infrastructure.dependsOnNothing()
-        }
+        val architecture =
+            architecture {
+                presentation.dependsOn(application)
+                application.dependsOn(domain, infrastructure)
+                domain.dependsOn(infrastructure)
+                infrastructure.dependsOnNothing()
+            }
 
         // then
         scope
@@ -114,12 +117,13 @@ class Architecture5Test {
     @Test
     fun `fails when bad dependency is set and architecture is passed as parameter (scope)`() {
         // given
-        val architecture = architecture {
-            presentation.dependsOn(application, infrastructure)
-            application.dependsOn(infrastructure)
-            domain.dependsOn(infrastructure)
-            infrastructure.dependsOnNothing()
-        }
+        val architecture =
+            architecture {
+                presentation.dependsOn(application, infrastructure)
+                application.dependsOn(infrastructure)
+                domain.dependsOn(infrastructure)
+                infrastructure.dependsOnNothing()
+            }
 
         val sut = {
             scope.assertArchitecture(architecture)
@@ -132,12 +136,13 @@ class Architecture5Test {
     @Test
     fun `fails when bad dependency is set and architecture is passed as parameter (files)`() {
         // given
-        val architecture = architecture {
-            presentation.dependsOn(application, infrastructure)
-            application.dependsOn(infrastructure)
-            domain.dependsOn(infrastructure)
-            infrastructure.dependsOnNothing()
-        }
+        val architecture =
+            architecture {
+                presentation.dependsOn(application, infrastructure)
+                application.dependsOn(infrastructure)
+                domain.dependsOn(infrastructure)
+                infrastructure.dependsOnNothing()
+            }
 
         val sut = {
             scope

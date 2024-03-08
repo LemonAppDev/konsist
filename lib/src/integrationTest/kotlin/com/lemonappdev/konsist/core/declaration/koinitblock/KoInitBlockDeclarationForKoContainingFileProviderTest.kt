@@ -9,10 +9,11 @@ class KoInitBlockDeclarationForKoContainingFileProviderTest {
     @Test
     fun `init-block-containing-file`() {
         // given
-        val sut = getSnippetFile("init-block-containing-file")
-            .classes()
-            .initBlocks
-            .first()
+        val sut =
+            getSnippetFile("init-block-containing-file")
+                .classes()
+                .initBlocks
+                .first()
 
         // then
         sut

@@ -9,19 +9,28 @@ class KoInternalException(
     cause: Throwable? = null,
     koBaseProvider: KoBaseProvider? = null,
 ) : KoException(getMessage(message, koBaseProvider), cause) {
-
     constructor(
         message: String,
         cause: Throwable? = null,
         koFileDeclaration: KoFileDeclaration?,
     ) : this(getMessage(message, koFileDeclaration), cause)
 }
-private fun getMessage(message: String, koFileDeclaration: KoFileDeclaration?) = getMessage(message, koFileDeclaration?.text, "file")
 
-private fun getMessage(message: String, koBaseProvider: KoBaseProvider?) =
-    getMessage(message, (koBaseProvider as? KoTextProvider?)?.text, "declaration")
+private fun getMessage(
+    message: String,
+    koFileDeclaration: KoFileDeclaration?,
+) = getMessage(message, koFileDeclaration?.text, "file")
 
-private fun getMessage(message: String, suffix: String?, type: String) = if (suffix == null) {
+private fun getMessage(
+    message: String,
+    koBaseProvider: KoBaseProvider?,
+) = getMessage(message, (koBaseProvider as? KoTextProvider?)?.text, "declaration")
+
+private fun getMessage(
+    message: String,
+    suffix: String?,
+    type: String,
+) = if (suffix == null) {
     message
 } else {
     "$message, $type:\n$suffix"

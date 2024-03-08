@@ -13,14 +13,15 @@ class KoFunctionTypeDeclarationForKoContainingDeclarationProviderTest {
     @MethodSource("provideValues")
     fun `type-containing-declaration`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoFunctionTypeDeclaration
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo fileName
@@ -35,9 +36,10 @@ class KoFunctionTypeDeclarationForKoContainingDeclarationProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("function-type-containing-declaration"),
-            arguments("nullable-function-type-containing-declaration"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("function-type-containing-declaration"),
+                arguments("nullable-function-type-containing-declaration"),
+            )
     }
 }

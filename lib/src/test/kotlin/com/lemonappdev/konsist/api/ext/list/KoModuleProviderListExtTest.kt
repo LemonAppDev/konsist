@@ -11,12 +11,14 @@ class KoModuleProviderListExtTest {
     fun `withModule(String) returns declaration with given module`() {
         // given
         val module = "module"
-        val declaration1: KoModuleProvider = mockk {
-            every { resideInModule(module) } returns true
-        }
-        val declaration2: KoModuleProvider = mockk {
-            every { resideInModule(module) } returns false
-        }
+        val declaration1: KoModuleProvider =
+            mockk {
+                every { resideInModule(module) } returns true
+            }
+        val declaration2: KoModuleProvider =
+            mockk {
+                every { resideInModule(module) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -31,18 +33,21 @@ class KoModuleProviderListExtTest {
         // given
         val module1 = "module1"
         val module2 = "module2"
-        val declaration1: KoModuleProvider = mockk {
-            every { resideInModule(module1) } returns true
-            every { resideInModule(module2) } returns false
-        }
-        val declaration2: KoModuleProvider = mockk {
-            every { resideInModule(module1) } returns false
-            every { resideInModule(module2) } returns true
-        }
-        val declaration3: KoModuleProvider = mockk {
-            every { resideInModule(module1) } returns false
-            every { resideInModule(module2) } returns false
-        }
+        val declaration1: KoModuleProvider =
+            mockk {
+                every { resideInModule(module1) } returns true
+                every { resideInModule(module2) } returns false
+            }
+        val declaration2: KoModuleProvider =
+            mockk {
+                every { resideInModule(module1) } returns false
+                every { resideInModule(module2) } returns true
+            }
+        val declaration3: KoModuleProvider =
+            mockk {
+                every { resideInModule(module1) } returns false
+                every { resideInModule(module2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -56,12 +61,14 @@ class KoModuleProviderListExtTest {
     fun `withoutModule(String) returns declaration without given module`() {
         // given
         val module = "module"
-        val declaration1: KoModuleProvider = mockk {
-            every { resideInModule(module) } returns true
-        }
-        val declaration2: KoModuleProvider = mockk {
-            every { resideInModule(module) } returns false
-        }
+        val declaration1: KoModuleProvider =
+            mockk {
+                every { resideInModule(module) } returns true
+            }
+        val declaration2: KoModuleProvider =
+            mockk {
+                every { resideInModule(module) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -76,18 +83,21 @@ class KoModuleProviderListExtTest {
         // given
         val module1 = "module1"
         val module2 = "module2"
-        val declaration1: KoModuleProvider = mockk {
-            every { resideInModule(module1) } returns true
-            every { resideInModule(module2) } returns false
-        }
-        val declaration2: KoModuleProvider = mockk {
-            every { resideInModule(module1) } returns false
-            every { resideInModule(module2) } returns true
-        }
-        val declaration3: KoModuleProvider = mockk {
-            every { resideInModule(module1) } returns false
-            every { resideInModule(module2) } returns false
-        }
+        val declaration1: KoModuleProvider =
+            mockk {
+                every { resideInModule(module1) } returns true
+                every { resideInModule(module2) } returns false
+            }
+        val declaration2: KoModuleProvider =
+            mockk {
+                every { resideInModule(module1) } returns false
+                every { resideInModule(module2) } returns true
+            }
+        val declaration3: KoModuleProvider =
+            mockk {
+                every { resideInModule(module1) } returns false
+                every { resideInModule(module2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when

@@ -9,9 +9,10 @@ class KoPropertyDeclarationForKoContainingDeclarationProviderTest {
     @Test
     fun `property-with-file-parent-declaration`() {
         // given
-        val sut = getSnippetFile("property-with-file-parent-declaration")
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-with-file-parent-declaration")
+                .properties()
+                .first()
 
         // then
         (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "property-with-file-parent-declaration"
@@ -20,9 +21,10 @@ class KoPropertyDeclarationForKoContainingDeclarationProviderTest {
     @Test
     fun `property-with-parent-declaration`() {
         // given
-        val sut = getSnippetFile("property-with-parent-declaration")
-            .properties(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("property-with-parent-declaration")
+                .properties(includeNested = true)
+                .first()
 
         // then
         (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "SampleClass"

@@ -13,9 +13,10 @@ class KoFileDeclarationForKoAnnotationProviderTest {
     @Test
     fun `file-contains-no-annotation`() {
         // given
-        val sut = getSnippetFile("file-contains-no-annotation")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-contains-no-annotation")
+                .files
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -37,9 +38,10 @@ class KoFileDeclarationForKoAnnotationProviderTest {
     @Test
     fun `file-contains-two-annotations`() {
         // given
-        val sut = getSnippetFile("file-contains-two-annotations")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-contains-two-annotations")
+                .files
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -85,9 +87,10 @@ class KoFileDeclarationForKoAnnotationProviderTest {
     @Test
     fun `file-contains-two-annotations-of-kclass`() {
         // given
-        val sut = getSnippetFile("file-contains-two-annotations-of-kclass")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-contains-two-annotations-of-kclass")
+                .files
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -108,9 +111,10 @@ class KoFileDeclarationForKoAnnotationProviderTest {
     @Test
     fun `file-contains-suppress-annotation-without-import`() {
         // given
-        val sut = getSnippetFile("file-contains-suppress-annotation-without-import")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-contains-suppress-annotation-without-import")
+                .files
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -120,8 +124,9 @@ class KoFileDeclarationForKoAnnotationProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope(
-        "core/declaration/kofile/snippet/forkoannotationprovider/",
-        fileName,
-    )
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope(
+            "core/declaration/kofile/snippet/forkoannotationprovider/",
+            fileName,
+        )
 }

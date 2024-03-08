@@ -12,7 +12,10 @@ import com.lemonappdev.konsist.api.provider.KoNameProvider
  *                  name (if available) or`toString` method otherwise.
  * @return The original declaration.
  */
-fun <T : KoBaseProvider> T.print(prefix: String? = null, predicate: ((T) -> String)? = null): T {
+fun <T : KoBaseProvider> T.print(
+    prefix: String? = null,
+    predicate: ((T) -> String)? = null,
+): T {
     prefix?.let { println(it) }
 
     if (predicate != null) {

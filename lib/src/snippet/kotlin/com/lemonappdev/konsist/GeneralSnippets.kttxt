@@ -17,7 +17,7 @@ import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
-import java.util.*
+import java.util.Locale
 import javax.inject.Inject
 
 class GeneralSnippets {

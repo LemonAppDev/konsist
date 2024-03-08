@@ -13,15 +13,18 @@ class KoParametersProviderExtTest {
         // given
         val name1 = "name1"
         val name2 = "name2"
-        val parameter1: KoParameterDeclaration = mockk {
-            every { name } returns name1
-        }
-        val parameter2: KoParameterDeclaration = mockk {
-            every { name } returns name2
-        }
-        val declaration: KoParametersProvider = mockk {
-            every { parameters } returns listOf(parameter1, parameter2)
-        }
+        val parameter1: KoParameterDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val parameter2: KoParameterDeclaration =
+            mockk {
+                every { name } returns name2
+            }
+        val declaration: KoParametersProvider =
+            mockk {
+                every { parameters } returns listOf(parameter1, parameter2)
+            }
 
         // when
         val sut = declaration.hasValidKDocParamTags()

@@ -10,11 +10,12 @@ class KoTypeAliasDeclarationForKoNonNullableTypeProviderTest {
     @Test
     fun `typealias-has-simple-type`() {
         // given
-        val sut = getSnippetFile("typealias-has-simple-type")
-            .files
-            .first()
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-has-simple-type")
+                .files
+                .first()
+                .typeAliases
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -29,11 +30,12 @@ class KoTypeAliasDeclarationForKoNonNullableTypeProviderTest {
     @Test
     fun `typealias-has-complex-type`() {
         // given
-        val sut = getSnippetFile("typealias-has-complex-type")
-            .files
-            .first()
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-has-complex-type")
+                .files
+                .first()
+                .typeAliases
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -48,11 +50,12 @@ class KoTypeAliasDeclarationForKoNonNullableTypeProviderTest {
     @Test
     fun `typealias-has-lambda-type`() {
         // given
-        val sut = getSnippetFile("typealias-has-lambda-type")
-            .files
-            .first()
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-has-lambda-type")
+                .files
+                .first()
+                .typeAliases
+                .first()
 
         // then
         assertSoftly(sut) {

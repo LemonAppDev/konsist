@@ -11,9 +11,10 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
     @Test
     fun `interface-has-no-functions`() {
         // given
-        val sut = getSnippetFile("interface-has-no-functions")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-no-functions")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -29,9 +30,10 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
     @Test
     fun `interface-has-two-functions`() {
         // given
-        val sut = getSnippetFile("interface-has-two-functions")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-two-functions")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -51,9 +53,10 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
     @Test
     fun `interface-contains-nested-and-local-functions includeNested true includeLocal true`() {
         // given
-        val sut = getSnippetFile("interface-contains-nested-and-local-functions")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-contains-nested-and-local-functions")
+                .interfaces()
+                .first()
 
         // then
         val expected = listOf("sampleFunction", "sampleLocalFunction", "sampleNestedFunction")
@@ -66,9 +69,10 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
     @Test
     fun `interface-contains-nested-and-local-functions includeNested true includeLocal false`() {
         // given
-        val sut = getSnippetFile("interface-contains-nested-and-local-functions")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-contains-nested-and-local-functions")
+                .interfaces()
+                .first()
 
         // then
         val expected = listOf("sampleFunction", "sampleNestedFunction")
@@ -81,9 +85,10 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
     @Test
     fun `interface-contains-nested-and-local-functions includeNested false includeLocal true`() {
         // given
-        val sut = getSnippetFile("interface-contains-nested-and-local-functions")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-contains-nested-and-local-functions")
+                .interfaces()
+                .first()
 
         // then
         val expected = listOf("sampleFunction", "sampleLocalFunction")
@@ -96,9 +101,10 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
     @Test
     fun `interface-contains-nested-and-local-functions includeNested false includeLocal false`() {
         // given
-        val sut = getSnippetFile("interface-contains-nested-and-local-functions")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-contains-nested-and-local-functions")
+                .interfaces()
+                .first()
 
         // then
         val expected = listOf("sampleFunction")
@@ -111,9 +117,10 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
     @Test
     fun `count-functions`() {
         // given
-        val sut = getSnippetFile("count-functions")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("count-functions")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -130,9 +137,10 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
     @Test
     fun `contains-functions-with-specified-name-and-modifiers`() {
         // given
-        val sut = getSnippetFile("contains-functions-with-specified-name-and-modifiers")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("contains-functions-with-specified-name-and-modifiers")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -170,9 +178,10 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
         // given
         val regex1 = Regex("[a-zA-Z]+")
         val regex2 = Regex("[0-9]+")
-        val sut = getSnippetFile("contains-functions-with-specified-regex")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("contains-functions-with-specified-regex")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {

@@ -10,9 +10,10 @@ class KoClassDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `class-without-visibility-modifiers`() {
         // given
-        val sut = getSnippetFile("class-without-visibility-modifiers")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-without-visibility-modifiers")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -27,9 +28,10 @@ class KoClassDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `public-class`() {
         // given
-        val sut = getSnippetFile("public-class")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("public-class")
+                .classes()
+                .first()
 
         // then
         sut.hasPublicModifier shouldBeEqualTo true
@@ -38,9 +40,10 @@ class KoClassDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `public-by-default-class`() {
         // given
-        val sut = getSnippetFile("public-by-default-class")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("public-by-default-class")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -52,9 +55,10 @@ class KoClassDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `private-class`() {
         // given
-        val sut = getSnippetFile("private-class")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("private-class")
+                .classes()
+                .first()
 
         // then
         sut.hasPrivateModifier shouldBeEqualTo true
@@ -63,9 +67,10 @@ class KoClassDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `protected-class`() {
         // given
-        val sut = getSnippetFile("protected-class")
-            .classes(includeNested = true)
-            .first { it.name == "SampleClass" }
+        val sut =
+            getSnippetFile("protected-class")
+                .classes(includeNested = true)
+                .first { it.name == "SampleClass" }
 
         // then
         sut.hasProtectedModifier shouldBeEqualTo true
@@ -74,9 +79,10 @@ class KoClassDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `internal-class`() {
         // given
-        val sut = getSnippetFile("internal-class")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("internal-class")
+                .classes()
+                .first()
 
         // then
         sut.hasInternalModifier shouldBeEqualTo true

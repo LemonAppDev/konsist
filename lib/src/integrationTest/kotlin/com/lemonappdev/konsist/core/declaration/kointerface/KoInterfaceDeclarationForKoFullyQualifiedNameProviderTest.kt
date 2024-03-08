@@ -8,9 +8,10 @@ class KoInterfaceDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `interface-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("interface-fully-qualified-name")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-fully-qualified-name")
+                .interfaces()
+                .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleInterface"
@@ -19,9 +20,10 @@ class KoInterfaceDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `interface-fully-qualified-name-without-package`() {
         // given
-        val sut = getSnippetFile("interface-fully-qualified-name-without-package")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-fully-qualified-name-without-package")
+                .interfaces()
+                .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "SampleInterface"
@@ -30,9 +32,10 @@ class KoInterfaceDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `nested-interface-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("nested-interface-fully-qualified-name")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("nested-interface-fully-qualified-name")
+                .interfaces()
+                .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleClass.SampleInterface"
@@ -41,9 +44,10 @@ class KoInterfaceDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `nested-interface-fully-qualified-name-without-package`() {
         // given
-        val sut = getSnippetFile("nested-interface-fully-qualified-name-without-package")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("nested-interface-fully-qualified-name-without-package")
+                .interfaces()
+                .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "SampleClass.SampleInterface"

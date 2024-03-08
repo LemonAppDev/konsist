@@ -31,46 +31,47 @@ internal class KoParentClassDeclarationCore private constructor(private val ktSu
     KoModuleProviderCore,
     KoSourceSetProviderCore,
     KoResideInPackageProviderCore {
-    override val psiElement: PsiElement
-        get() = ktSuperTypeListEntry
-    override val ktElement: KtElement
-        get() = ktSuperTypeListEntry
+        override val psiElement: PsiElement
+            get() = ktSuperTypeListEntry
+        override val ktElement: KtElement
+            get() = ktSuperTypeListEntry
 
-    override val fullyQualifiedName: String by lazy {
-        containingFile
-            .imports
-            .firstOrNull { it.text.endsWith(".$name") }
-            ?.name ?: ""
+        override val fullyQualifiedName: String by lazy {
+            containingFile
+                .imports
+                .firstOrNull { it.text.endsWith(".$name") }
+                ?.name ?: ""
+        }
+
+        override val name: String
+            get() =
+                ktSuperTypeListEntry
+                    .text
+                    /**
+                     * Replace everything after '<' and '(' characters with empty string e.g.
+                     *
+                     * Foo(param) -> Foo
+                     * Foo<UiState> -> Foo
+                     * Foo<UiState, Action> -> Foo
+                     * Foo<UiState, Action>(Loading) -> Foo
+                     */
+                    .replace(Regex("<.*|\\(.*"), "")
+                    .replace(EndOfLine.UNIX.value, " ")
+                    .substringBefore(" by")
+
+        override fun toString(): String = name
+
+        internal companion object {
+            private val cache: KoDeclarationCache<KoParentClassDeclaration> = KoDeclarationCache()
+
+            internal fun getInstance(
+                ktSuperTypeListEntry: KtSuperTypeListEntry,
+                containingDeclaration: KoBaseDeclaration,
+            ): KoParentClassDeclaration =
+                cache.getOrCreateInstance(ktSuperTypeListEntry, containingDeclaration) {
+                    KoParentClassDeclarationCore(
+                        ktSuperTypeListEntry,
+                    )
+                }
+        }
     }
-
-    override val name: String
-        get() = ktSuperTypeListEntry
-            .text
-            /**
-             * Replace everything after '<' and '(' characters with empty string e.g.
-             *
-             * Foo(param) -> Foo
-             * Foo<UiState> -> Foo
-             * Foo<UiState, Action> -> Foo
-             * Foo<UiState, Action>(Loading) -> Foo
-             */
-            .replace(Regex("<.*|\\(.*"), "")
-            .replace(EndOfLine.UNIX.value, " ")
-            .substringBefore(" by")
-
-    override fun toString(): String = name
-
-    internal companion object {
-        private val cache: KoDeclarationCache<KoParentClassDeclaration> = KoDeclarationCache()
-
-        internal fun getInstance(
-            ktSuperTypeListEntry: KtSuperTypeListEntry,
-            containingDeclaration: KoBaseDeclaration,
-        ): KoParentClassDeclaration =
-            cache.getOrCreateInstance(ktSuperTypeListEntry, containingDeclaration) {
-                KoParentClassDeclarationCore(
-                    ktSuperTypeListEntry,
-                )
-            }
-    }
-}

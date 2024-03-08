@@ -34,13 +34,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         notInstanceOf: KClass<*>,
     ) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -52,13 +53,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     @Test
     fun `nullable-kotlin-basic-type`() {
         // given
-        val sut = getSnippetFile("nullable-kotlin-basic-type")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile("nullable-kotlin-basic-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -97,13 +99,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     @Test
     fun `not-nullable-kotlin-basic-type`() {
         // given
-        val sut = getSnippetFile("not-nullable-kotlin-basic-type")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile("not-nullable-kotlin-basic-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -142,13 +145,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     @Test
     fun `nullable-kotlin-collection-type`() {
         // given
-        val sut = getSnippetFile("nullable-kotlin-collection-type")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile("nullable-kotlin-collection-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -187,13 +191,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     @Test
     fun `not-nullable-kotlin-collection-type`() {
         // given
-        val sut = getSnippetFile("not-nullable-kotlin-collection-type")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile("not-nullable-kotlin-collection-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -232,13 +237,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     @Test
     fun `nullable-class-type`() {
         // given
-        val sut = getSnippetFile("nullable-class-type")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile("nullable-class-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -276,13 +282,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     @Test
     fun `not-nullable-class-type`() {
         // given
-        val sut = getSnippetFile("not-nullable-class-type")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile("not-nullable-class-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -320,13 +327,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     @Test
     fun `nullable-interface-type`() {
         // given
-        val sut = getSnippetFile("nullable-interface-type")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile("nullable-interface-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -364,13 +372,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     @Test
     fun `not-nullable-interface-type`() {
         // given
-        val sut = getSnippetFile("not-nullable-interface-type")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile("not-nullable-interface-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -408,13 +417,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     @Test
     fun `nullable-object-type`() {
         // given
-        val sut = getSnippetFile("nullable-object-type")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile("nullable-object-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -452,13 +462,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     @Test
     fun `not-nullable-object-type`() {
         // given
-        val sut = getSnippetFile("not-nullable-object-type")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile("not-nullable-object-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -496,13 +507,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     @Test
     fun `nullable-function-type`() {
         // given
-        val sut = getSnippetFile("nullable-function-type")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile("nullable-function-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -534,13 +546,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     @Test
     fun `not-nullable-function-type`() {
         // given
-        val sut = getSnippetFile("not-nullable-function-type")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile("not-nullable-function-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -572,13 +585,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     @Test
     fun `nullable-import-alias-type`() {
         // given
-        val sut = getSnippetFile("nullable-import-alias-type")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile("nullable-import-alias-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -610,13 +624,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     @Test
     fun `not-nullable-import-alias-type`() {
         // given
-        val sut = getSnippetFile("not-nullable-import-alias-type")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile("not-nullable-import-alias-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -648,13 +663,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     @Test
     fun `nullable-typealias-type`() {
         // given
-        val sut = getSnippetFile("nullable-typealias-type")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile("nullable-typealias-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -686,13 +702,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     @Test
     fun `not-nullable-typealias-type`() {
         // given
-        val sut = getSnippetFile("not-nullable-typealias-type")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile("not-nullable-typealias-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -724,13 +741,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     @Test
     fun `nullable-external-type`() {
         // given
-        val sut = getSnippetFile("nullable-external-type")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile("nullable-external-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -769,13 +787,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     @Test
     fun `not-nullable-external-type`() {
         // given
-        val sut = getSnippetFile("not-nullable-external-type")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile("not-nullable-external-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -820,25 +839,26 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("nullable-kotlin-basic-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
-            arguments("not-nullable-kotlin-basic-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
-            arguments("nullable-kotlin-collection-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
-            arguments("not-nullable-kotlin-collection-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
-            arguments("nullable-class-type", KoClassDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("not-nullable-class-type", KoClassDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("nullable-interface-type", KoInterfaceDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("not-nullable-interface-type", KoInterfaceDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("nullable-object-type", KoObjectDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("not-nullable-object-type", KoObjectDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("nullable-function-type", KoFunctionTypeDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("not-nullable-function-type", KoFunctionTypeDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("nullable-import-alias-type", KoImportAliasDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("not-nullable-import-alias-type", KoImportAliasDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("nullable-typealias-type", KoTypeAliasDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("not-nullable-typealias-type", KoTypeAliasDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("nullable-external-type", KoExternalDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("not-nullable-external-type", KoExternalDeclaration::class, KoKotlinTypeDeclaration::class),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("nullable-kotlin-basic-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
+                arguments("not-nullable-kotlin-basic-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
+                arguments("nullable-kotlin-collection-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
+                arguments("not-nullable-kotlin-collection-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
+                arguments("nullable-class-type", KoClassDeclaration::class, KoKotlinTypeDeclaration::class),
+                arguments("not-nullable-class-type", KoClassDeclaration::class, KoKotlinTypeDeclaration::class),
+                arguments("nullable-interface-type", KoInterfaceDeclaration::class, KoKotlinTypeDeclaration::class),
+                arguments("not-nullable-interface-type", KoInterfaceDeclaration::class, KoKotlinTypeDeclaration::class),
+                arguments("nullable-object-type", KoObjectDeclaration::class, KoKotlinTypeDeclaration::class),
+                arguments("not-nullable-object-type", KoObjectDeclaration::class, KoKotlinTypeDeclaration::class),
+                arguments("nullable-function-type", KoFunctionTypeDeclaration::class, KoKotlinTypeDeclaration::class),
+                arguments("not-nullable-function-type", KoFunctionTypeDeclaration::class, KoKotlinTypeDeclaration::class),
+                arguments("nullable-import-alias-type", KoImportAliasDeclaration::class, KoKotlinTypeDeclaration::class),
+                arguments("not-nullable-import-alias-type", KoImportAliasDeclaration::class, KoKotlinTypeDeclaration::class),
+                arguments("nullable-typealias-type", KoTypeAliasDeclaration::class, KoKotlinTypeDeclaration::class),
+                arguments("not-nullable-typealias-type", KoTypeAliasDeclaration::class, KoKotlinTypeDeclaration::class),
+                arguments("nullable-external-type", KoExternalDeclaration::class, KoKotlinTypeDeclaration::class),
+                arguments("not-nullable-external-type", KoExternalDeclaration::class, KoKotlinTypeDeclaration::class),
+            )
     }
 }

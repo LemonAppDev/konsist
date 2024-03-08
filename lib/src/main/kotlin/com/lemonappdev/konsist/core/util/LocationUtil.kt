@@ -44,22 +44,27 @@ object LocationUtil {
      *
      * This class can be used with both file paths and packages.
      */
-    fun resideInLocation(desiredLocation: String, currentLocation: String): Boolean {
+    fun resideInLocation(
+        desiredLocation: String,
+        currentLocation: String,
+    ): Boolean {
         require(desiredLocation.isNotEmpty()) { "Location name is empty" }
         require(desiredLocation != ".") { "Incorrect location format: $desiredLocation" }
 
         if (desiredLocation == "..") return true
 
-        val desiredPackageRegexString = desiredLocation
-            .lowercase()
-            .toDotSeparatedLocation()
-            .toPackageRegex()
+        val desiredPackageRegexString =
+            desiredLocation
+                .lowercase()
+                .toDotSeparatedLocation()
+                .toPackageRegex()
 
-        val currentLocationCanonical = currentLocation
-            .toDotSeparatedLocation()
-            .removePrefix(".")
-            .removeSuffix(".")
-            .lowercase()
+        val currentLocationCanonical =
+            currentLocation
+                .toDotSeparatedLocation()
+                .removePrefix(".")
+                .removeSuffix(".")
+                .lowercase()
 
         return currentLocationCanonical.matches(desiredPackageRegexString.toRegex())
     }
@@ -70,8 +75,9 @@ private fun String.toDotSeparatedLocation() =
         .replace("/", ".")
 
 private fun String.toPackageRegex(): String {
-    val segments = split("..")
-        .filter { it.isNotEmpty() }
+    val segments =
+        split("..")
+            .filter { it.isNotEmpty() }
 
     val prefixOptional = startsWith("..")
     val suffixOptional = endsWith("..")

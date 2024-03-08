@@ -10,10 +10,11 @@ class KoKDocDeclarationTest {
     @Test
     fun `kdoc-to-string`() {
         // given
-        val sut = getSnippetFile("kdoc-to-string")
-            .interfaces()
-            .kDocs
-            .first()
+        val sut =
+            getSnippetFile("kdoc-to-string")
+                .interfaces()
+                .kDocs
+                .first()
 
         // then
         val declaration = "Declaration:\nThis is a sample kdoc."

@@ -8,9 +8,10 @@ class KoPropertyDeclarationForKoExpectModifierProviderTest {
     @Test
     fun `property-has-no-expect-modifier`() {
         // given
-        val sut = getSnippetFile("property-has-no-expect-modifier")
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-has-no-expect-modifier")
+                .properties()
+                .first()
 
         // then
         sut.hasExpectModifier shouldBeEqualTo false
@@ -19,9 +20,10 @@ class KoPropertyDeclarationForKoExpectModifierProviderTest {
     @Test
     fun `property-has-expect-modifier`() {
         // given
-        val sut = getSnippetFile("property-has-expect-modifier")
-            .properties(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("property-has-expect-modifier")
+                .properties(includeNested = true)
+                .first()
 
         // then
         sut.hasExpectModifier shouldBeEqualTo true

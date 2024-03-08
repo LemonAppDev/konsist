@@ -10,10 +10,11 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
     @Test
     fun `enum-const-without-arguments`() {
         // given
-        val sut = getSnippetFile("enum-const-without-arguments")
-            .classes()
-            .enumConstants
-            .first()
+        val sut =
+            getSnippetFile("enum-const-without-arguments")
+                .classes()
+                .enumConstants
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -31,10 +32,11 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
     @Test
     fun `enum-const-with-constructor-invocation-without-arguments`() {
         // given
-        val sut = getSnippetFile("enum-const-with-constructor-invocation-without-arguments")
-            .classes()
-            .enumConstants
-            .first()
+        val sut =
+            getSnippetFile("enum-const-with-constructor-invocation-without-arguments")
+                .classes()
+                .enumConstants
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -52,10 +54,11 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
     @Test
     fun `enum-const-with-one-argument`() {
         // given
-        val sut = getSnippetFile("enum-const-with-one-argument")
-            .classes()
-            .enumConstants
-            .first()
+        val sut =
+            getSnippetFile("enum-const-with-one-argument")
+                .classes()
+                .enumConstants
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -79,10 +82,11 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
     @Test
     fun `enum-const-with-two-arguments`() {
         // given
-        val sut = getSnippetFile("enum-const-with-two-arguments")
-            .classes()
-            .enumConstants
-            .first()
+        val sut =
+            getSnippetFile("enum-const-with-two-arguments")
+                .classes()
+                .enumConstants
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -107,21 +111,22 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
     @Test
     fun `enum-const-with-multiline-string-argument`() {
         // given
-        val sut = getSnippetFile("enum-const-with-multiline-string-argument")
-            .classes()
-            .enumConstants
-            .first()
+        val sut =
+            getSnippetFile("enum-const-with-multiline-string-argument")
+                .classes()
+                .enumConstants
+                .first()
 
         // then
         assertSoftly(sut) {
-            arguments.map { it.value } shouldBeEqualTo listOf(
-                "first line\n    second line",
-            )
+            arguments.map { it.value } shouldBeEqualTo
+                listOf(
+                    "first line\n    second line",
+                )
             numArguments shouldBeEqualTo 1
             hasArguments() shouldBeEqualTo true
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koenumconstant/snippet/forkoargument/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koenumconstant/snippet/forkoargument/", fileName)
 }

@@ -14,13 +14,11 @@ internal interface KoConstructorProviderCore :
     override val numConstructors: Int
         get() = constructors.size
 
-    override fun countConstructors(predicate: (KoConstructorDeclaration) -> Boolean): Int =
-        constructors.count { predicate(it) }
+    override fun countConstructors(predicate: (KoConstructorDeclaration) -> Boolean): Int = constructors.count { predicate(it) }
 
     override fun hasConstructors(): Boolean = constructors.isNotEmpty()
 
     override fun hasConstructor(predicate: (KoConstructorDeclaration) -> Boolean): Boolean = constructors.any(predicate)
 
-    override fun hasAllConstructors(predicate: (KoConstructorDeclaration) -> Boolean): Boolean =
-        constructors.all(predicate)
+    override fun hasAllConstructors(predicate: (KoConstructorDeclaration) -> Boolean): Boolean = constructors.all(predicate)
 }

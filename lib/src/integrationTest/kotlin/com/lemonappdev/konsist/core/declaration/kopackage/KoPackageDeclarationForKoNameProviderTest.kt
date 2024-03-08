@@ -8,9 +8,10 @@ class KoPackageDeclarationForKoNameProviderTest {
     @Test
     fun `package-does-not-exists`() {
         // given
-        val sut = getSnippetFile("package-does-not-exists")
-            .packages
-            .firstOrNull()
+        val sut =
+            getSnippetFile("package-does-not-exists")
+                .packages
+                .firstOrNull()
 
         // then
         sut?.name shouldBeEqualTo null
@@ -19,9 +20,10 @@ class KoPackageDeclarationForKoNameProviderTest {
     @Test
     fun `package-has-name`() {
         // given
-        val sut = getSnippetFile("package-has-name")
-            .packages
-            .first()
+        val sut =
+            getSnippetFile("package-has-name")
+                .packages
+                .first()
 
         // then
         sut.name shouldBeEqualTo "samplepackage"

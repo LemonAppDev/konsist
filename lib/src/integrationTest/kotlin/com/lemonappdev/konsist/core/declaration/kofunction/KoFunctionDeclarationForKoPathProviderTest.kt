@@ -9,9 +9,10 @@ class KoFunctionDeclarationForKoPathProviderTest {
     @Test
     fun `function-file-path`() {
         // given
-        val sut = getSnippetFile("function-file-path")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-file-path")
+                .functions()
+                .first()
 
         // then
         assertSoftly(sut.path) {
@@ -23,9 +24,10 @@ class KoFunctionDeclarationForKoPathProviderTest {
     @Test
     fun `function-project-file-path`() {
         // given
-        val sut = getSnippetFile("function-project-file-path")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-project-file-path")
+                .functions()
+                .first()
 
         // then
         sut
@@ -39,9 +41,10 @@ class KoFunctionDeclarationForKoPathProviderTest {
     @Test
     fun `function-reside-in-file-path`() {
         // given
-        val sut = getSnippetFile("function-reside-in-file-path")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-reside-in-file-path")
+                .functions()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -55,9 +58,10 @@ class KoFunctionDeclarationForKoPathProviderTest {
     @Test
     fun `function-reside-in-project-file-path`() {
         // given
-        val sut = getSnippetFile("function-reside-in-project-file-path")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-reside-in-project-file-path")
+                .functions()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -68,6 +72,5 @@ class KoFunctionDeclarationForKoPathProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kofunction/snippet/forkopathprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofunction/snippet/forkopathprovider/", fileName)
 }

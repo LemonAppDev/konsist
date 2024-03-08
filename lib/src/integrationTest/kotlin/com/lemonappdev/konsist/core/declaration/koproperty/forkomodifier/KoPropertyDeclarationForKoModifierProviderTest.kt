@@ -17,9 +17,10 @@ class KoPropertyDeclarationForKoModifierProviderTest {
     @Test
     fun `property-has-no-modifiers`() {
         // given
-        val sut = getSnippetFile("property-has-no-modifiers")
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-has-no-modifiers")
+                .properties()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -38,9 +39,10 @@ class KoPropertyDeclarationForKoModifierProviderTest {
     @Test
     fun `property-has-protected-and-open-modifiers`() {
         // given
-        val sut = getSnippetFile("property-has-protected-and-open-modifiers")
-            .properties(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("property-has-protected-and-open-modifiers")
+                .properties(includeNested = true)
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -70,9 +72,10 @@ class KoPropertyDeclarationForKoModifierProviderTest {
         modifiers: List<KoModifier>,
     ) {
         // given
-        val sut = getSnippetFile(fileName)
-            .properties(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile(fileName)
+                .properties(includeNested = true)
+                .first()
 
         // then
         sut.modifiers shouldBeEqualTo modifiers
@@ -87,17 +90,18 @@ class KoPropertyDeclarationForKoModifierProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("property-has-modifiers-and-annotation-with-parameter", listOf(PROTECTED, OPEN)),
-            arguments("property-has-modifiers-and-annotation-without-parameter", listOf(PROTECTED, OPEN)),
-            arguments("property-has-modifiers-annotation-and-comment", listOf(PROTECTED, OPEN)),
-            arguments("property-has-modifiers-and-annotations", listOf(PROTECTED, OPEN)),
-            arguments("property-has-modifiers-and-annotation-with-angle-brackets", listOf(PROTECTED, OPEN)),
-            arguments("property-has-modifiers-and-kdoc", listOf(PROTECTED, OPEN)),
-            arguments("property-has-modifiers-kdoc-and-annotation-before-them", listOf(PROTECTED, OPEN)),
-            arguments("property-has-modifiers-multiline-comment-and-annotation-before-them", listOf(PROTECTED, OPEN)),
-            arguments("property-has-modifiers-and-comment-before-them", listOf(PROTECTED, OPEN)),
-            arguments("property-has-modifiers-and-comment-after-them", listOf(PROTECTED, OPEN)),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("property-has-modifiers-and-annotation-with-parameter", listOf(PROTECTED, OPEN)),
+                arguments("property-has-modifiers-and-annotation-without-parameter", listOf(PROTECTED, OPEN)),
+                arguments("property-has-modifiers-annotation-and-comment", listOf(PROTECTED, OPEN)),
+                arguments("property-has-modifiers-and-annotations", listOf(PROTECTED, OPEN)),
+                arguments("property-has-modifiers-and-annotation-with-angle-brackets", listOf(PROTECTED, OPEN)),
+                arguments("property-has-modifiers-and-kdoc", listOf(PROTECTED, OPEN)),
+                arguments("property-has-modifiers-kdoc-and-annotation-before-them", listOf(PROTECTED, OPEN)),
+                arguments("property-has-modifiers-multiline-comment-and-annotation-before-them", listOf(PROTECTED, OPEN)),
+                arguments("property-has-modifiers-and-comment-before-them", listOf(PROTECTED, OPEN)),
+                arguments("property-has-modifiers-and-comment-after-them", listOf(PROTECTED, OPEN)),
+            )
     }
 }

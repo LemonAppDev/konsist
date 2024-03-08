@@ -16,11 +16,15 @@ import org.junit.jupiter.params.provider.MethodSource
 class KoVariableDeclarationForKoPathProviderTest {
     @ParameterizedTest
     @MethodSource("provideValuesForFilePath")
-    fun `variable-file-path`(declarations: List<KoVariableProvider>, name: String) {
+    fun `variable-file-path`(
+        declarations: List<KoVariableProvider>,
+        name: String,
+    ) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut.path) {
@@ -31,11 +35,15 @@ class KoVariableDeclarationForKoPathProviderTest {
 
     @ParameterizedTest
     @MethodSource("provideValuesForProjectFilePath")
-    fun `variable-project-file-path`(declarations: List<KoVariableProvider>, name: String) {
+    fun `variable-project-file-path`(
+        declarations: List<KoVariableProvider>,
+        name: String,
+    ) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         sut
@@ -48,11 +56,15 @@ class KoVariableDeclarationForKoPathProviderTest {
 
     @ParameterizedTest
     @MethodSource("provideValuesForResideInFilePath")
-    fun `variable-reside-in-file-path`(declarations: List<KoVariableProvider>, name: String) {
+    fun `variable-reside-in-file-path`(
+        declarations: List<KoVariableProvider>,
+        name: String,
+    ) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -65,11 +77,15 @@ class KoVariableDeclarationForKoPathProviderTest {
 
     @ParameterizedTest
     @MethodSource("provideValuesForResideInProjectFilePath")
-    fun `variable-reside-in-project-file-path`(declarations: List<KoVariableProvider>, name: String) {
+    fun `variable-reside-in-project-file-path`(
+        declarations: List<KoVariableProvider>,
+        name: String,
+    ) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -81,107 +97,110 @@ class KoVariableDeclarationForKoPathProviderTest {
     }
 
     companion object {
-        private fun getSnippetFile(fileName: String) =
-            getSnippetKoScope("core/declaration/kovariable/snippet/forkopathprovider/", fileName)
+        private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kovariable/snippet/forkopathprovider/", fileName)
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForFilePath() = listOf(
-            arguments(
-                getSnippetFile("variable-in-function-file-path").functions(),
-                "variable-in-function-file-path",
-            ),
-            arguments(
-                getSnippetFile("variable-in-init-block-file-path").classes().initBlocks,
-                "variable-in-init-block-file-path",
-            ),
-            arguments(
-                getSnippetFile("variable-in-enum-constant-file-path").classes().enumConstants,
-                "variable-in-enum-constant-file-path",
-            ),
-            arguments(
-                getSnippetFile("variable-in-getter-file-path").properties().getters,
-                "variable-in-getter-file-path",
-            ),
-            arguments(
-                getSnippetFile("variable-in-setter-file-path").properties().setters,
-                "variable-in-setter-file-path",
-            ),
-        )
+        fun provideValuesForFilePath() =
+            listOf(
+                arguments(
+                    getSnippetFile("variable-in-function-file-path").functions(),
+                    "variable-in-function-file-path",
+                ),
+                arguments(
+                    getSnippetFile("variable-in-init-block-file-path").classes().initBlocks,
+                    "variable-in-init-block-file-path",
+                ),
+                arguments(
+                    getSnippetFile("variable-in-enum-constant-file-path").classes().enumConstants,
+                    "variable-in-enum-constant-file-path",
+                ),
+                arguments(
+                    getSnippetFile("variable-in-getter-file-path").properties().getters,
+                    "variable-in-getter-file-path",
+                ),
+                arguments(
+                    getSnippetFile("variable-in-setter-file-path").properties().setters,
+                    "variable-in-setter-file-path",
+                ),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForProjectFilePath() = listOf(
-            arguments(
-                getSnippetFile("variable-in-function-project-file-path").functions(),
-                "variable-in-function-project-file-path",
-            ),
-            arguments(
-                getSnippetFile("variable-in-init-block-project-file-path").classes().initBlocks,
-                "variable-in-init-block-project-file-path",
-            ),
-            arguments(
-                getSnippetFile("variable-in-enum-constant-project-file-path").classes().enumConstants,
-                "variable-in-enum-constant-project-file-path",
-            ),
-            arguments(
-                getSnippetFile("variable-in-getter-project-file-path").properties().getters,
-                "variable-in-getter-project-file-path",
-            ),
-            arguments(
-                getSnippetFile("variable-in-setter-project-file-path").properties().setters,
-                "variable-in-setter-project-file-path",
-            ),
-        )
+        fun provideValuesForProjectFilePath() =
+            listOf(
+                arguments(
+                    getSnippetFile("variable-in-function-project-file-path").functions(),
+                    "variable-in-function-project-file-path",
+                ),
+                arguments(
+                    getSnippetFile("variable-in-init-block-project-file-path").classes().initBlocks,
+                    "variable-in-init-block-project-file-path",
+                ),
+                arguments(
+                    getSnippetFile("variable-in-enum-constant-project-file-path").classes().enumConstants,
+                    "variable-in-enum-constant-project-file-path",
+                ),
+                arguments(
+                    getSnippetFile("variable-in-getter-project-file-path").properties().getters,
+                    "variable-in-getter-project-file-path",
+                ),
+                arguments(
+                    getSnippetFile("variable-in-setter-project-file-path").properties().setters,
+                    "variable-in-setter-project-file-path",
+                ),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForResideInFilePath() = listOf(
-            arguments(
-                getSnippetFile("variable-in-function-reside-in-file-path").functions(),
-                "variable-in-function-reside-in-file-path",
-            ),
-            arguments(
-                getSnippetFile("variable-in-init-block-reside-in-file-path").classes().initBlocks,
-                "variable-in-init-block-reside-in-file-path",
-            ),
-            arguments(
-                getSnippetFile("variable-in-enum-constant-reside-in-file-path").classes().enumConstants,
-                "variable-in-enum-constant-reside-in-file-path",
-            ),
-            arguments(
-                getSnippetFile("variable-in-getter-reside-in-file-path").properties().getters,
-                "variable-in-getter-reside-in-file-path",
-            ),
-            arguments(
-                getSnippetFile("variable-in-setter-reside-in-file-path").properties().setters,
-                "variable-in-setter-reside-in-file-path",
-            ),
-        )
+        fun provideValuesForResideInFilePath() =
+            listOf(
+                arguments(
+                    getSnippetFile("variable-in-function-reside-in-file-path").functions(),
+                    "variable-in-function-reside-in-file-path",
+                ),
+                arguments(
+                    getSnippetFile("variable-in-init-block-reside-in-file-path").classes().initBlocks,
+                    "variable-in-init-block-reside-in-file-path",
+                ),
+                arguments(
+                    getSnippetFile("variable-in-enum-constant-reside-in-file-path").classes().enumConstants,
+                    "variable-in-enum-constant-reside-in-file-path",
+                ),
+                arguments(
+                    getSnippetFile("variable-in-getter-reside-in-file-path").properties().getters,
+                    "variable-in-getter-reside-in-file-path",
+                ),
+                arguments(
+                    getSnippetFile("variable-in-setter-reside-in-file-path").properties().setters,
+                    "variable-in-setter-reside-in-file-path",
+                ),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForResideInProjectFilePath() = listOf(
-            arguments(
-                getSnippetFile("variable-in-function-reside-in-project-file-path").functions(),
-                "variable-in-function-reside-in-project-file-path",
-            ),
-            arguments(
-                getSnippetFile("variable-in-init-block-reside-in-project-file-path").classes().initBlocks,
-                "variable-in-init-block-reside-in-project-file-path",
-            ),
-            arguments(
-                getSnippetFile("variable-in-enum-constant-reside-in-project-file-path").classes().enumConstants,
-                "variable-in-enum-constant-reside-in-project-file-path",
-            ),
-            arguments(
-                getSnippetFile("variable-in-getter-reside-in-project-file-path").properties().getters,
-                "variable-in-getter-reside-in-project-file-path",
-            ),
-            arguments(
-                getSnippetFile("variable-in-setter-reside-in-project-file-path").properties().setters,
-                "variable-in-setter-reside-in-project-file-path",
-            ),
-        )
+        fun provideValuesForResideInProjectFilePath() =
+            listOf(
+                arguments(
+                    getSnippetFile("variable-in-function-reside-in-project-file-path").functions(),
+                    "variable-in-function-reside-in-project-file-path",
+                ),
+                arguments(
+                    getSnippetFile("variable-in-init-block-reside-in-project-file-path").classes().initBlocks,
+                    "variable-in-init-block-reside-in-project-file-path",
+                ),
+                arguments(
+                    getSnippetFile("variable-in-enum-constant-reside-in-project-file-path").classes().enumConstants,
+                    "variable-in-enum-constant-reside-in-project-file-path",
+                ),
+                arguments(
+                    getSnippetFile("variable-in-getter-reside-in-project-file-path").properties().getters,
+                    "variable-in-getter-reside-in-project-file-path",
+                ),
+                arguments(
+                    getSnippetFile("variable-in-setter-reside-in-project-file-path").properties().setters,
+                    "variable-in-setter-reside-in-project-file-path",
+                ),
+            )
     }
 }

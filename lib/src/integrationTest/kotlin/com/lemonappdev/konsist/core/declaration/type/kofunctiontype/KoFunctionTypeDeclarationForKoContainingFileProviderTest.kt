@@ -12,14 +12,15 @@ class KoFunctionTypeDeclarationForKoContainingFileProviderTest {
     @MethodSource("provideValues")
     fun `type-containing-file`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoFunctionTypeDeclaration
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         sut?.containingFile?.nameWithExtension shouldBeEqualTo "$fileName.kt"
@@ -31,9 +32,10 @@ class KoFunctionTypeDeclarationForKoContainingFileProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("function-type-containing-file"),
-            arguments("nullable-function-type-containing-file"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("function-type-containing-file"),
+                arguments("nullable-function-type-containing-file"),
+            )
     }
 }

@@ -9,9 +9,10 @@ class KoInterfaceDeclarationForKoPathProviderTest {
     @Test
     fun `interface-file-path`() {
         // given
-        val sut = getSnippetFile("interface-file-path")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-file-path")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut.path) {
@@ -23,9 +24,10 @@ class KoInterfaceDeclarationForKoPathProviderTest {
     @Test
     fun `interface-project-file-path`() {
         // given
-        val sut = getSnippetFile("interface-project-file-path")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-project-file-path")
+                .interfaces()
+                .first()
 
         // then
         sut
@@ -39,9 +41,10 @@ class KoInterfaceDeclarationForKoPathProviderTest {
     @Test
     fun `interface-reside-in-file-path`() {
         // given
-        val sut = getSnippetFile("interface-reside-in-file-path")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-reside-in-file-path")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -55,9 +58,10 @@ class KoInterfaceDeclarationForKoPathProviderTest {
     @Test
     fun `interface-reside-in-project-file-path`() {
         // given
-        val sut = getSnippetFile("interface-reside-in-project-file-path")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-reside-in-project-file-path")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -68,6 +72,5 @@ class KoInterfaceDeclarationForKoPathProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kointerface/snippet/forkopathprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kointerface/snippet/forkopathprovider/", fileName)
 }

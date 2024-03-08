@@ -12,9 +12,7 @@ interface KoInterfaceProvider : KoBaseProvider {
      * @param includeNested specifies whether to include nested interfaces.
      * @return a list of [KoInterfaceDeclaration] representing the interfaces in the declaration.
      */
-    fun interfaces(
-        includeNested: Boolean = true,
-    ): List<KoInterfaceDeclaration>
+    fun interfaces(includeNested: Boolean = true): List<KoInterfaceDeclaration>
 
     /**
      * Determines whatever the declaration contains an interface that satisfies the specified predicate.
@@ -55,9 +53,7 @@ interface KoInterfaceProvider : KoBaseProvider {
      * @param includeNested Specifies whether to include nested interfaces in the check (optional, default is `true`).
      * @return `true` if the declaration has any interface, `false` otherwise.
      */
-    fun hasInterfaces(
-        includeNested: Boolean = true,
-    ): Boolean
+    fun hasInterfaces(includeNested: Boolean = true): Boolean
 
     /**
      * Determines whether the declaration has at least one interface whose name matches any of the specified names.

@@ -8,9 +8,10 @@ class KoClassDeclarationForKoOpenModifierProviderTest {
     @Test
     fun `class-without-open-modifier`() {
         // given
-        val sut = getSnippetFile("class-without-open-modifier")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-without-open-modifier")
+                .classes()
+                .first()
 
         // then
         sut.hasOpenModifier shouldBeEqualTo false
@@ -19,9 +20,10 @@ class KoClassDeclarationForKoOpenModifierProviderTest {
     @Test
     fun `open-class`() {
         // given
-        val sut = getSnippetFile("open-class")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("open-class")
+                .classes()
+                .first()
 
         // then
         sut.hasOpenModifier shouldBeEqualTo true

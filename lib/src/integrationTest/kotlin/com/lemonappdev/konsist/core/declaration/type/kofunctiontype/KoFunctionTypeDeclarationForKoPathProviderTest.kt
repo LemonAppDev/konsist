@@ -13,14 +13,15 @@ class KoFunctionTypeDeclarationForKoPathProviderTest {
     @MethodSource("provideValues")
     fun `declaration-file-path`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoFunctionTypeDeclaration
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         assertSoftly(sut?.path) {
@@ -33,14 +34,15 @@ class KoFunctionTypeDeclarationForKoPathProviderTest {
     @MethodSource("provideValues")
     fun `declaration-project-file-path`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoFunctionTypeDeclaration
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         sut
@@ -55,14 +57,15 @@ class KoFunctionTypeDeclarationForKoPathProviderTest {
     @MethodSource("provideValues")
     fun `declaration-reside-in-file-path`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoFunctionTypeDeclaration
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         assertSoftly(sut) {
@@ -77,14 +80,15 @@ class KoFunctionTypeDeclarationForKoPathProviderTest {
     @MethodSource("provideValues")
     fun `declaration-reside-in-project-file-path`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoFunctionTypeDeclaration
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         assertSoftly(sut) {
@@ -104,9 +108,10 @@ class KoFunctionTypeDeclarationForKoPathProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("nullable-function-type-path"),
-            arguments("not-nullable-function-type-path"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("nullable-function-type-path"),
+                arguments("not-nullable-function-type-path"),
+            )
     }
 }

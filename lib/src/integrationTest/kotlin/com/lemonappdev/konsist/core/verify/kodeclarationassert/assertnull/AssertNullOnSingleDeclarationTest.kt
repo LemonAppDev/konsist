@@ -12,9 +12,10 @@ class AssertNullOnSingleDeclarationTest {
     @Test
     fun `declaration-assert-test-method-name-derived-from-junit-method-name`() {
         // given
-        val sut = getSnippetFile("declaration-assert-test-method-name-derived-from-junit-method-name")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("declaration-assert-test-method-name-derived-from-junit-method-name")
+                .classes()
+                .first()
 
         // then
         try {
@@ -30,9 +31,10 @@ class AssertNullOnSingleDeclarationTest {
     @Test
     fun `declaration-assert-test-method-name-derived-from-test-name-parameter`() {
         // given
-        val sut = getSnippetFile("declaration-assert-test-method-name-derived-from-test-name-parameter")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("declaration-assert-test-method-name-derived-from-test-name-parameter")
+                .classes()
+                .first()
 
         // then
         try {
@@ -47,9 +49,10 @@ class AssertNullOnSingleDeclarationTest {
     fun `declaration-assert-null-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("declaration-assert-null-error-with-custom-message")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("declaration-assert-null-error-with-custom-message")
+                .classes()
+                .first()
 
         // then
         try {
@@ -67,10 +70,11 @@ class AssertNullOnSingleDeclarationTest {
     fun `declaration-assert-not-null-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("declaration-assert-not-null-error-with-custom-message")
-            .classes()
-            .map { it.primaryConstructor }
-            .first()
+        val sut =
+            getSnippetFile("declaration-assert-not-null-error-with-custom-message")
+                .classes()
+                .map { it.primaryConstructor }
+                .first()
 
         // then
         try {
@@ -87,10 +91,11 @@ class AssertNullOnSingleDeclarationTest {
     @Test
     fun `assert-null-passes-when-declaration-has-null-value`() {
         // given
-        val sut = getSnippetFile("assert-null-passes-when-declaration-has-null-value")
-            .classes()
-            .map { it.primaryConstructor }
-            .first()
+        val sut =
+            getSnippetFile("assert-null-passes-when-declaration-has-null-value")
+                .classes()
+                .map { it.primaryConstructor }
+                .first()
 
         // then
         sut.assertNull()
@@ -99,10 +104,11 @@ class AssertNullOnSingleDeclarationTest {
     @Test
     fun `assert-null-fails-when-declaration-has-not-null-value`() {
         // given
-        val sut = getSnippetFile("assert-null-fails-when-declaration-has-not-null-value")
-            .classes()
-            .map { it.primaryConstructor }
-            .first()
+        val sut =
+            getSnippetFile("assert-null-fails-when-declaration-has-not-null-value")
+                .classes()
+                .map { it.primaryConstructor }
+                .first()
 
         // when
         val func = { sut.assertNull() }
@@ -114,10 +120,11 @@ class AssertNullOnSingleDeclarationTest {
     @Test
     fun `assert-not-null-fails-when-declaration-has-null-value`() {
         // given
-        val sut = getSnippetFile("assert-not-null-fails-when-declaration-has-null-value")
-            .classes()
-            .map { it.primaryConstructor }
-            .first()
+        val sut =
+            getSnippetFile("assert-not-null-fails-when-declaration-has-null-value")
+                .classes()
+                .map { it.primaryConstructor }
+                .first()
 
         // when
         val func = { sut.assertNotNull() }
@@ -129,10 +136,11 @@ class AssertNullOnSingleDeclarationTest {
     @Test
     fun `assert-not-null-passes-when-declaration-has-not-null-value`() {
         // given
-        val sut = getSnippetFile("assert-not-null-passes-when-declaration-has-not-null-value")
-            .classes()
-            .map { it.primaryConstructor }
-            .first()
+        val sut =
+            getSnippetFile("assert-not-null-passes-when-declaration-has-not-null-value")
+                .classes()
+                .map { it.primaryConstructor }
+                .first()
 
         // then
         sut.assertNotNull()

@@ -24,12 +24,18 @@ internal interface KoChildProviderCore :
 
     override fun numChildren(indirectChildren: Boolean): Int = children(indirectChildren).size
 
-    override fun countChildren(indirectChildren: Boolean, predicate: (KoChildDeclaration) -> Boolean): Int =
-        children(indirectChildren).count { predicate(it) }
+    override fun countChildren(
+        indirectChildren: Boolean,
+        predicate: (KoChildDeclaration) -> Boolean,
+    ): Int = children(indirectChildren).count { predicate(it) }
 
     override fun hasChildren(indirectChildren: Boolean): Boolean = children(indirectChildren).isNotEmpty()
 
-    override fun hasChildWithName(name: String, vararg names: String, indirectChildren: Boolean): Boolean {
+    override fun hasChildWithName(
+        name: String,
+        vararg names: String,
+        indirectChildren: Boolean,
+    ): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.any {
@@ -37,7 +43,11 @@ internal interface KoChildProviderCore :
         }
     }
 
-    override fun hasChildrenWithAllNames(name: String, vararg names: String, indirectChildren: Boolean): Boolean {
+    override fun hasChildrenWithAllNames(
+        name: String,
+        vararg names: String,
+        indirectChildren: Boolean,
+    ): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.all {
@@ -45,17 +55,29 @@ internal interface KoChildProviderCore :
         }
     }
 
-    override fun hasChild(indirectChildren: Boolean, predicate: (KoChildDeclaration) -> Boolean): Boolean =
-        children(indirectChildren).any(predicate)
+    override fun hasChild(
+        indirectChildren: Boolean,
+        predicate: (KoChildDeclaration) -> Boolean,
+    ): Boolean = children(indirectChildren).any(predicate)
 
-    override fun hasAllChildren(indirectChildren: Boolean, predicate: (KoChildDeclaration) -> Boolean): Boolean =
-        children(indirectChildren).all(predicate)
+    override fun hasAllChildren(
+        indirectChildren: Boolean,
+        predicate: (KoChildDeclaration) -> Boolean,
+    ): Boolean = children(indirectChildren).all(predicate)
 
-    override fun hasChildOf(name: KClass<*>, vararg names: KClass<*>, indirectChildren: Boolean): Boolean =
+    override fun hasChildOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+        indirectChildren: Boolean,
+    ): Boolean =
         checkIfKClassOf(name, children(indirectChildren)) ||
             names.any { checkIfKClassOf(it, children(indirectChildren)) }
 
-    override fun hasAllChildrenOf(name: KClass<*>, vararg names: KClass<*>, indirectChildren: Boolean): Boolean =
+    override fun hasAllChildrenOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+        indirectChildren: Boolean,
+    ): Boolean =
         checkIfKClassOf(name, children(indirectChildren)) &&
             names.all { checkIfKClassOf(it, children(indirectChildren)) }
 }

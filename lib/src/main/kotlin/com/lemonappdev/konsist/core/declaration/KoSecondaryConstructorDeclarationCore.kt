@@ -12,24 +12,24 @@ internal class KoSecondaryConstructorDeclarationCore private constructor(
     override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoSecondaryConstructorDeclaration,
-    KoConstructorDeclarationCore,
-    KoKDocProviderCore {
-    override val ktConstructor: KtConstructor<*> by lazy { ktSecondaryConstructor }
+        KoConstructorDeclarationCore,
+        KoKDocProviderCore {
+        override val ktConstructor: KtConstructor<*> by lazy { ktSecondaryConstructor }
 
-    override fun toString(): String = locationWithText
+        override fun toString(): String = locationWithText
 
-    internal companion object {
-        private val cache: KoDeclarationCache<KoSecondaryConstructorDeclaration> = KoDeclarationCache()
+        internal companion object {
+            private val cache: KoDeclarationCache<KoSecondaryConstructorDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(
-            ktSecondaryConstructor: KtSecondaryConstructor,
-            containingDeclaration: KoBaseDeclaration,
-        ): KoSecondaryConstructorDeclaration =
-            cache.getOrCreateInstance(ktSecondaryConstructor, containingDeclaration) {
-                KoSecondaryConstructorDeclarationCore(
-                    ktSecondaryConstructor,
-                    containingDeclaration,
-                )
-            }
+            internal fun getInstance(
+                ktSecondaryConstructor: KtSecondaryConstructor,
+                containingDeclaration: KoBaseDeclaration,
+            ): KoSecondaryConstructorDeclaration =
+                cache.getOrCreateInstance(ktSecondaryConstructor, containingDeclaration) {
+                    KoSecondaryConstructorDeclarationCore(
+                        ktSecondaryConstructor,
+                        containingDeclaration,
+                    )
+                }
+        }
     }
-}

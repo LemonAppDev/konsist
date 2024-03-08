@@ -10,9 +10,10 @@ class KoPropertyDeclarationForKoReceiverTypeProviderTest {
     @Test
     fun `property-without-receiver-type`() {
         // given
-        val sut = getSnippetFile("property-without-receiver-type")
-            .properties(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("property-without-receiver-type")
+                .properties(includeNested = true)
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -27,9 +28,10 @@ class KoPropertyDeclarationForKoReceiverTypeProviderTest {
     @Test
     fun `property-with-receiver-type`() {
         // given
-        val sut = getSnippetFile("property-with-receiver-type")
-            .properties(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("property-with-receiver-type")
+                .properties(includeNested = true)
+                .first()
 
         // then
         assertSoftly(sut) {

@@ -13,9 +13,10 @@ class AssertEmptyOnDeclarationSequenceTest {
     @Test
     fun `declaration-assert-test-method-name-derived-from-junit-method-name`() {
         // given
-        val sut = getSnippetFile("declaration-assert-test-method-name-derived-from-junit-method-name")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("declaration-assert-test-method-name-derived-from-junit-method-name")
+                .classes()
+                .asSequence()
 
         // then
         try {
@@ -31,9 +32,10 @@ class AssertEmptyOnDeclarationSequenceTest {
     @Test
     fun `declaration-assert-test-method-name-derived-from-test-name-parameter`() {
         // given
-        val sut = getSnippetFile("declaration-assert-test-method-name-derived-from-test-name-parameter")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("declaration-assert-test-method-name-derived-from-test-name-parameter")
+                .classes()
+                .asSequence()
 
         // then
         try {
@@ -47,10 +49,11 @@ class AssertEmptyOnDeclarationSequenceTest {
     @Test
     fun `declaration-assert-empty-error-on-list-containing-one-null-value`() {
         // given
-        val sut = getSnippetFile("declaration-assert-empty-error-on-list-containing-one-null-value")
-            .classes()
-            .map { it.primaryConstructor }
-            .asSequence()
+        val sut =
+            getSnippetFile("declaration-assert-empty-error-on-list-containing-one-null-value")
+                .classes()
+                .map { it.primaryConstructor }
+                .asSequence()
 
         // then
         try {
@@ -67,10 +70,11 @@ class AssertEmptyOnDeclarationSequenceTest {
     @Test
     fun `declaration-assert-empty-error-on-list-containing-two-null-values`() {
         // given
-        val sut = getSnippetFile("declaration-assert-empty-error-on-list-containing-two-null-values")
-            .classes()
-            .map { it.primaryConstructor }
-            .asSequence()
+        val sut =
+            getSnippetFile("declaration-assert-empty-error-on-list-containing-two-null-values")
+                .classes()
+                .map { it.primaryConstructor }
+                .asSequence()
 
         // then
         try {
@@ -87,9 +91,10 @@ class AssertEmptyOnDeclarationSequenceTest {
     @Test
     fun `declaration-assert-empty-error-on-list-containing-non-null-values`() {
         // given
-        val sut = getSnippetFile("declaration-assert-empty-error-on-list-containing-non-null-values")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("declaration-assert-empty-error-on-list-containing-non-null-values")
+                .classes()
+                .asSequence()
 
         // then
         try {
@@ -106,10 +111,11 @@ class AssertEmptyOnDeclarationSequenceTest {
     @Test
     fun `declaration-assert-empty-error-on-list-containing-null-and-non-null-values`() {
         // given
-        val sut = getSnippetFile("declaration-assert-empty-error-on-list-containing-null-and-non-null-values")
-            .functions()
-            .map { it.returnType }
-            .asSequence()
+        val sut =
+            getSnippetFile("declaration-assert-empty-error-on-list-containing-null-and-non-null-values")
+                .functions()
+                .map { it.returnType }
+                .asSequence()
 
         // then
         try {
@@ -127,9 +133,10 @@ class AssertEmptyOnDeclarationSequenceTest {
     fun `declaration-assert-empty-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("declaration-assert-empty-error-with-custom-message")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("declaration-assert-empty-error-with-custom-message")
+                .classes()
+                .asSequence()
 
         // then
         try {
@@ -147,9 +154,10 @@ class AssertEmptyOnDeclarationSequenceTest {
     fun `declaration-assert-empty-error-with-custom-message-and-strict-set-to-true`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("declaration-assert-empty-error-with-custom-message-and-strict-set-to-true")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("declaration-assert-empty-error-with-custom-message-and-strict-set-to-true")
+                .classes()
+                .asSequence()
 
         // then
         try {
@@ -167,9 +175,10 @@ class AssertEmptyOnDeclarationSequenceTest {
     fun `declaration-assert-not-empty-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("declaration-assert-not-empty-error-with-custom-message")
-            .interfaces()
-            .asSequence()
+        val sut =
+            getSnippetFile("declaration-assert-not-empty-error-with-custom-message")
+                .interfaces()
+                .asSequence()
 
         // then
         try {
@@ -187,9 +196,10 @@ class AssertEmptyOnDeclarationSequenceTest {
     fun `declaration-assert-not-empty-error-with-custom-message-and-strict-set-to-true`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("declaration-assert-not-empty-error-with-custom-message-and-strict-set-to-true")
-            .interfaces()
-            .asSequence()
+        val sut =
+            getSnippetFile("declaration-assert-not-empty-error-with-custom-message-and-strict-set-to-true")
+                .interfaces()
+                .asSequence()
 
         // then
         try {
@@ -206,9 +216,10 @@ class AssertEmptyOnDeclarationSequenceTest {
     @Test
     fun `assert-empty-passes-when-declaration-list-is-empty`() {
         // given
-        val sut = getSnippetFile("assert-empty-passes-when-declaration-list-is-empty")
-            .interfaces()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-empty-passes-when-declaration-list-is-empty")
+                .interfaces()
+                .asSequence()
 
         // then
         sut.assertEmpty()
@@ -217,9 +228,10 @@ class AssertEmptyOnDeclarationSequenceTest {
     @Test
     fun `assert-empty-fails-when-declaration-list-has-item`() {
         // given
-        val sut = getSnippetFile("assert-empty-fails-when-declaration-list-has-item")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-empty-fails-when-declaration-list-has-item")
+                .classes()
+                .asSequence()
 
         // when
         val func = {
@@ -233,10 +245,11 @@ class AssertEmptyOnDeclarationSequenceTest {
     @Test
     fun `assert-empty-fails-when-declaration-list-has-only-nulls`() {
         // given
-        val sut = getSnippetFile("assert-empty-fails-when-declaration-list-has-only-nulls")
-            .classes()
-            .map { it.primaryConstructor }
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-empty-fails-when-declaration-list-has-only-nulls")
+                .classes()
+                .map { it.primaryConstructor }
+                .asSequence()
 
         // when
         val func = { sut.assertEmpty() }
@@ -248,9 +261,10 @@ class AssertEmptyOnDeclarationSequenceTest {
     @Test
     fun `assert-empty-passes-when-declaration-list-is-empty-and-strict-set-to-true`() {
         // given
-        val sut = getSnippetFile("assert-empty-passes-when-declaration-list-is-empty-and-strict-set-to-true")
-            .interfaces()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-empty-passes-when-declaration-list-is-empty-and-strict-set-to-true")
+                .interfaces()
+                .asSequence()
 
         // then
         sut.assertEmpty(strict = true)
@@ -259,9 +273,10 @@ class AssertEmptyOnDeclarationSequenceTest {
     @Test
     fun `assert-empty-fails-when-declaration-list-has-item-and-strict-set-to-true`() {
         // given
-        val sut = getSnippetFile("assert-empty-fails-when-declaration-list-has-item-and-strict-set-to-true")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-empty-fails-when-declaration-list-has-item-and-strict-set-to-true")
+                .classes()
+                .asSequence()
 
         // when
         val func = { sut.assertEmpty(strict = true) }
@@ -273,10 +288,11 @@ class AssertEmptyOnDeclarationSequenceTest {
     @Test
     fun `assert-empty-passes-when-declaration-list-has-only-nulls-and-strict-set-to-true`() {
         // given
-        val sut = getSnippetFile("assert-empty-passes-when-declaration-list-has-only-nulls-and-strict-set-to-true")
-            .classes()
-            .map { it.primaryConstructor }
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-empty-passes-when-declaration-list-has-only-nulls-and-strict-set-to-true")
+                .classes()
+                .map { it.primaryConstructor }
+                .asSequence()
 
         // then
         sut.assertEmpty(strict = true)
@@ -285,9 +301,10 @@ class AssertEmptyOnDeclarationSequenceTest {
     @Test
     fun `assert-not-empty-passes-when-declaration-list-has-item`() {
         // given
-        val sut = getSnippetFile("assert-not-empty-passes-when-declaration-list-has-item")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-not-empty-passes-when-declaration-list-has-item")
+                .classes()
+                .asSequence()
 
         // then
         sut.assertNotEmpty()
@@ -296,9 +313,10 @@ class AssertEmptyOnDeclarationSequenceTest {
     @Test
     fun `assert-not-empty-fails-when-declaration-list-is-empty`() {
         // given
-        val sut = getSnippetFile("assert-not-empty-fails-when-declaration-list-is-empty")
-            .interfaces()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-not-empty-fails-when-declaration-list-is-empty")
+                .interfaces()
+                .asSequence()
 
         // when
         val func = {
@@ -312,10 +330,11 @@ class AssertEmptyOnDeclarationSequenceTest {
     @Test
     fun `assert-not-empty-passes-when-declaration-list-has-only-nulls`() {
         // given
-        val sut = getSnippetFile("assert-not-empty-passes-when-declaration-list-has-only-nulls")
-            .classes()
-            .map { it.primaryConstructor }
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-not-empty-passes-when-declaration-list-has-only-nulls")
+                .classes()
+                .map { it.primaryConstructor }
+                .asSequence()
 
         // then
         sut.assertNotEmpty()
@@ -324,9 +343,10 @@ class AssertEmptyOnDeclarationSequenceTest {
     @Test
     fun `assert-not-empty-passes-when-declaration-list-has-item-and-strict-set-to-true`() {
         // given
-        val sut = getSnippetFile("assert-not-empty-passes-when-declaration-list-has-item-and-strict-set-to-true")
-            .classes()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-not-empty-passes-when-declaration-list-has-item-and-strict-set-to-true")
+                .classes()
+                .asSequence()
 
         // then
         sut.assertNotEmpty(strict = true)
@@ -335,9 +355,10 @@ class AssertEmptyOnDeclarationSequenceTest {
     @Test
     fun `assert-not-empty-fails-when-declaration-list-is-empty-and-strict-set-to-true`() {
         // given
-        val sut = getSnippetFile("assert-not-empty-fails-when-declaration-list-is-empty-and-strict-set-to-true")
-            .interfaces()
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-not-empty-fails-when-declaration-list-is-empty-and-strict-set-to-true")
+                .interfaces()
+                .asSequence()
 
         // when
         val func = {
@@ -351,10 +372,11 @@ class AssertEmptyOnDeclarationSequenceTest {
     @Test
     fun `assert-not-empty-fails-when-declaration-list-has-only-nulls-and-strict-set-to-true`() {
         // given
-        val sut = getSnippetFile("assert-not-empty-fails-when-declaration-list-has-only-nulls-and-strict-set-to-true")
-            .classes()
-            .map { it.primaryConstructor }
-            .asSequence()
+        val sut =
+            getSnippetFile("assert-not-empty-fails-when-declaration-list-has-only-nulls-and-strict-set-to-true")
+                .classes()
+                .map { it.primaryConstructor }
+                .asSequence()
 
         // when
         val func = {

@@ -12,12 +12,14 @@ class KoCompanionModifierProviderListExtTest {
     @Test
     fun `withCompanionModifier() returns declaration with companion modifier`() {
         // given
-        val declaration1: KoCompanionModifierProvider = mockk {
-            every { hasCompanionModifier } returns true
-        }
-        val declaration2: KoCompanionModifierProvider = mockk {
-            every { hasCompanionModifier } returns false
-        }
+        val declaration1: KoCompanionModifierProvider =
+            mockk {
+                every { hasCompanionModifier } returns true
+            }
+        val declaration2: KoCompanionModifierProvider =
+            mockk {
+                every { hasCompanionModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -30,12 +32,14 @@ class KoCompanionModifierProviderListExtTest {
     @Test
     fun `withoutCompanionModifier() returns declaration without companion modifier`() {
         // given
-        val declaration1: KoCompanionModifierProvider = mockk {
-            every { hasCompanionModifier } returns true
-        }
-        val declaration2: KoCompanionModifierProvider = mockk {
-            every { hasCompanionModifier } returns false
-        }
+        val declaration1: KoCompanionModifierProvider =
+            mockk {
+                every { hasCompanionModifier } returns true
+            }
+        val declaration2: KoCompanionModifierProvider =
+            mockk {
+                every { hasCompanionModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

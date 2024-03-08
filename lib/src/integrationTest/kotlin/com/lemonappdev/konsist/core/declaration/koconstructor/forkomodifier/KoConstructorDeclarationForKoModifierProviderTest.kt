@@ -16,11 +16,12 @@ class KoConstructorDeclarationForKoModifierProviderTest {
     @Test
     fun `constructor-has-no-modifiers`() {
         // given
-        val sut = getSnippetFile("constructor-has-no-modifiers")
-            .classes()
-            .first()
-            .constructors
-            .first()
+        val sut =
+            getSnippetFile("constructor-has-no-modifiers")
+                .classes()
+                .first()
+                .constructors
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -40,11 +41,12 @@ class KoConstructorDeclarationForKoModifierProviderTest {
     @MethodSource("provideValues")
     fun `constructor-modifiers`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .constructors
-            .first()
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .constructors
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -65,11 +67,12 @@ class KoConstructorDeclarationForKoModifierProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("constructor-has-modifier"),
-            arguments("constructor-has-modifiers-and-annotation-with-parameter"),
-            arguments("constructor-has-modifiers-and-annotation-without-parameter"),
-            arguments("constructor-has-modifiers-and-annotations"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("constructor-has-modifier"),
+                arguments("constructor-has-modifiers-and-annotation-with-parameter"),
+                arguments("constructor-has-modifiers-and-annotation-without-parameter"),
+                arguments("constructor-has-modifiers-and-annotations"),
+            )
     }
 }

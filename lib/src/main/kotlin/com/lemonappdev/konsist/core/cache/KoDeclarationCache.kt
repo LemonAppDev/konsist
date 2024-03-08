@@ -15,7 +15,10 @@ internal class KoDeclarationCache<T : KoBaseProvider> {
         return value
     }
 
-    private fun set(key: Pair<KtElement, KoBaseProvider?>, value: T) {
+    private fun set(
+        key: Pair<KtElement, KoBaseProvider?>,
+        value: T,
+    ) {
         elements[key] = value
     }
 
@@ -46,7 +49,10 @@ internal object KoExternalDeclarationCache {
         return value
     }
 
-    private fun set(key: String, value: KoExternalDeclaration) {
+    private fun set(
+        key: String,
+        value: KoExternalDeclaration,
+    ) {
         elements[key] = value
     }
 

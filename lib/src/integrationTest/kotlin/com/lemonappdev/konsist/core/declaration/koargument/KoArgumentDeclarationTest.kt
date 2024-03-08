@@ -11,11 +11,12 @@ class KoArgumentDeclarationTest {
     @Test
     fun `argument-in-enum-const-to-string`() {
         // given
-        val sut = getSnippetFile("argument-in-enum-const-to-string")
-            .classes()
-            .enumConstants
-            .arguments
-            .first()
+        val sut =
+            getSnippetFile("argument-in-enum-const-to-string")
+                .classes()
+                .enumConstants
+                .arguments
+                .first()
 
         // then
         sut.toString() shouldBeEqualTo sut.locationWithText
@@ -24,11 +25,12 @@ class KoArgumentDeclarationTest {
     @Test
     fun `argument-in-annotation-to-string`() {
         // given
-        val sut = getSnippetFile("argument-in-annotation-to-string")
-            .functions()
-            .annotations
-            .arguments
-            .first()
+        val sut =
+            getSnippetFile("argument-in-annotation-to-string")
+                .functions()
+                .annotations
+                .arguments
+                .first()
 
         // then
         sut.toString() shouldBeEqualTo sut.locationWithText

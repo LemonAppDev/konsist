@@ -8,9 +8,10 @@ class KoPropertyDeclarationForKoReadOnlyProviderTest {
     @Test
     fun `property-is-val`() {
         // given
-        val sut = getSnippetFile("property-is-val")
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-is-val")
+                .properties()
+                .first()
 
         // then
         sut.isReadOnly shouldBeEqualTo true
@@ -19,9 +20,10 @@ class KoPropertyDeclarationForKoReadOnlyProviderTest {
     @Test
     fun `property-is-var`() {
         // given
-        val sut = getSnippetFile("property-is-var")
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-is-var")
+                .properties()
+                .first()
 
         // then
         sut.isReadOnly shouldBeEqualTo false
@@ -30,9 +32,10 @@ class KoPropertyDeclarationForKoReadOnlyProviderTest {
     @Test
     fun `property-is-lateinit-var`() {
         // given
-        val sut = getSnippetFile("property-is-lateinit-var")
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-is-lateinit-var")
+                .properties()
+                .first()
 
         // then
         sut.isReadOnly shouldBeEqualTo false
@@ -41,14 +44,14 @@ class KoPropertyDeclarationForKoReadOnlyProviderTest {
     @Test
     fun `property-is-const-val`() {
         // given
-        val sut = getSnippetFile("property-is-const-val")
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-is-const-val")
+                .properties()
+                .first()
 
         // then
         sut.isReadOnly shouldBeEqualTo true
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koproperty/snippet/forkoreadonlyprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koproperty/snippet/forkoreadonlyprovider/", fileName)
 }

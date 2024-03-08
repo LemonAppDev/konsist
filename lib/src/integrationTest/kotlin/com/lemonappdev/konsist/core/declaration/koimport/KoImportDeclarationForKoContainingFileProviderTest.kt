@@ -8,9 +8,10 @@ class KoImportDeclarationForKoContainingFileProviderTest {
     @Test
     fun `import-containing-file`() {
         // given
-        val sut = getSnippetFile("import-containing-file")
-            .imports
-            .first()
+        val sut =
+            getSnippetFile("import-containing-file")
+                .imports
+                .first()
 
         // then
         sut

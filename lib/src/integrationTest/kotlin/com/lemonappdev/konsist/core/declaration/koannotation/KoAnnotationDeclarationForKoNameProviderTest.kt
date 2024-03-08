@@ -9,11 +9,12 @@ class KoAnnotationDeclarationForKoNameProviderTest {
     @Test
     fun `annotation-name`() {
         // given
-        val sut = getSnippetFile("annotation-name")
-            .functions()
-            .first()
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-name")
+                .functions()
+                .first()
+                .annotations
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -29,6 +30,5 @@ class KoAnnotationDeclarationForKoNameProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koannotation/snippet/forkonameprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koannotation/snippet/forkonameprovider/", fileName)
 }

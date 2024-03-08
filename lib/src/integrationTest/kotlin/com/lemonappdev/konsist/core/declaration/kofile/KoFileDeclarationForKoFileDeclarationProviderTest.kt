@@ -18,9 +18,10 @@ class KoFileDeclarationForKoFileDeclarationProviderTest {
     @Test
     fun `file-has-two-declarations`() {
         // given
-        val sut = getSnippetFile("file-has-two-declarations")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-has-two-declarations")
+                .files
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -35,9 +36,10 @@ class KoFileDeclarationForKoFileDeclarationProviderTest {
     @Test
     fun `count-declarations`() {
         // given
-        val sut = getSnippetFile("count-declarations")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("count-declarations")
+                .files
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -60,9 +62,10 @@ class KoFileDeclarationForKoFileDeclarationProviderTest {
     @Test
     fun `count-declarations-with-visibility-modifiers`() {
         // given
-        val sut = getSnippetFile("count-declarations-with-visibility-modifiers")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("count-declarations-with-visibility-modifiers")
+                .files
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -78,9 +81,10 @@ class KoFileDeclarationForKoFileDeclarationProviderTest {
     @Test
     fun `contains-declarations-with-specified-conditions`() {
         // given
-        val sut = getSnippetFile("contains-declarations-with-specified-conditions")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("contains-declarations-with-specified-conditions")
+                .files
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -126,9 +130,10 @@ class KoFileDeclarationForKoFileDeclarationProviderTest {
     @Test
     fun `file-contains-all-type-of-declarations`() {
         // given
-        val sut = getSnippetFile("file-contains-all-type-of-declarations")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-contains-all-type-of-declarations")
+                .files
+                .first()
 
         // then
         sut
@@ -160,9 +165,10 @@ class KoFileDeclarationForKoFileDeclarationProviderTest {
         expected: List<String>,
     ) {
         // given
-        val sut = getSnippetFile("file-contains-all-type-of-declarations-with-nested-and-local-declarations")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-contains-all-type-of-declarations-with-nested-and-local-declarations")
+                .files
+                .first()
 
         // then
         sut
@@ -172,94 +178,96 @@ class KoFileDeclarationForKoFileDeclarationProviderTest {
             .shouldBeEqualTo(expected)
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope(
-        "core/declaration/kofile/snippet/forkodeclarationprovider/",
-        fileName,
-    )
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope(
+            "core/declaration/kofile/snippet/forkodeclarationprovider/",
+            fileName,
+        )
 
     companion object {
         @Suppress("unused", "detekt.LongMethod")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments(
-                false,
-                false,
-                listOf(
-                    "sampleProperty",
-                    "sampleFunction",
-                    "SampleClass",
-                    "SampleInterface",
-                    "SampleObject",
-                    "SampleTypeAlias",
+        fun provideValues() =
+            listOf(
+                arguments(
+                    false,
+                    false,
+                    listOf(
+                        "sampleProperty",
+                        "sampleFunction",
+                        "SampleClass",
+                        "SampleInterface",
+                        "SampleObject",
+                        "SampleTypeAlias",
+                    ),
                 ),
-            ),
-            arguments(
-                true,
-                false,
-                listOf(
-                    "sampleProperty",
-                    "sampleFunction",
-                    "SampleClass",
-                    "sampleNestedPropertyInsideClass",
-                    "sampleNestedFunctionInsideClass",
-                    "sampleNestedClassInsideClass",
-                    "SampleInterface",
-                    "sampleNestedPropertyInsideInterface",
-                    "sampleNestedFunctionInsideInterface",
-                    "sampleNestedClassInsideInterface",
-                    "SampleObject",
-                    "sampleNestedPropertyInsideObject",
-                    "sampleNestedFunctionInsideObject",
-                    "sampleNestedClassInsideObject",
-                    "SampleTypeAlias",
+                arguments(
+                    true,
+                    false,
+                    listOf(
+                        "sampleProperty",
+                        "sampleFunction",
+                        "SampleClass",
+                        "sampleNestedPropertyInsideClass",
+                        "sampleNestedFunctionInsideClass",
+                        "sampleNestedClassInsideClass",
+                        "SampleInterface",
+                        "sampleNestedPropertyInsideInterface",
+                        "sampleNestedFunctionInsideInterface",
+                        "sampleNestedClassInsideInterface",
+                        "SampleObject",
+                        "sampleNestedPropertyInsideObject",
+                        "sampleNestedFunctionInsideObject",
+                        "sampleNestedClassInsideObject",
+                        "SampleTypeAlias",
+                    ),
                 ),
-            ),
-            arguments(
-                false,
-                true,
-                listOf(
-                    "sampleProperty",
-                    "sampleFunction",
-                    "sampleLocalProperty1",
-                    "sampleLocalFunction",
-                    "sampleLocalClass2",
-                    "sampleLocalProperty2",
-                    "sampleLocalClass1",
-                    "SampleClass",
-                    "SampleInterface",
-                    "SampleObject",
-                    "SampleTypeAlias",
+                arguments(
+                    false,
+                    true,
+                    listOf(
+                        "sampleProperty",
+                        "sampleFunction",
+                        "sampleLocalProperty1",
+                        "sampleLocalFunction",
+                        "sampleLocalClass2",
+                        "sampleLocalProperty2",
+                        "sampleLocalClass1",
+                        "SampleClass",
+                        "SampleInterface",
+                        "SampleObject",
+                        "SampleTypeAlias",
+                    ),
                 ),
-            ),
-            arguments(
-                true,
-                true,
-                listOf(
-                    "sampleProperty",
-                    "sampleFunction",
-                    "sampleLocalProperty1",
-                    "sampleLocalFunction",
-                    "sampleLocalClass2",
-                    "sampleLocalProperty2",
-                    "sampleLocalClass1",
-                    "sampleNestedFunction",
-                    "SampleClass",
-                    "sampleNestedPropertyInsideClass",
-                    "sampleNestedFunctionInsideClass",
-                    "sampleLocalProperty3",
-                    "sampleLocalClass3",
-                    "sampleNestedClassInsideClass",
-                    "SampleInterface",
-                    "sampleNestedPropertyInsideInterface",
-                    "sampleNestedFunctionInsideInterface",
-                    "sampleNestedClassInsideInterface",
-                    "SampleObject",
-                    "sampleNestedPropertyInsideObject",
-                    "sampleNestedFunctionInsideObject",
-                    "sampleNestedClassInsideObject",
-                    "SampleTypeAlias",
+                arguments(
+                    true,
+                    true,
+                    listOf(
+                        "sampleProperty",
+                        "sampleFunction",
+                        "sampleLocalProperty1",
+                        "sampleLocalFunction",
+                        "sampleLocalClass2",
+                        "sampleLocalProperty2",
+                        "sampleLocalClass1",
+                        "sampleNestedFunction",
+                        "SampleClass",
+                        "sampleNestedPropertyInsideClass",
+                        "sampleNestedFunctionInsideClass",
+                        "sampleLocalProperty3",
+                        "sampleLocalClass3",
+                        "sampleNestedClassInsideClass",
+                        "SampleInterface",
+                        "sampleNestedPropertyInsideInterface",
+                        "sampleNestedFunctionInsideInterface",
+                        "sampleNestedClassInsideInterface",
+                        "SampleObject",
+                        "sampleNestedPropertyInsideObject",
+                        "sampleNestedFunctionInsideObject",
+                        "sampleNestedClassInsideObject",
+                        "SampleTypeAlias",
+                    ),
                 ),
-            ),
-        )
+            )
     }
 }

@@ -9,14 +9,15 @@ class KoFunctionTypeDeclarationForKoPackageProviderTest {
     @Test
     fun `function-type-is-not-in-package`() {
         // given
-        val sut = getSnippetFile("function-type-is-not-in-package")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoFunctionTypeDeclaration
+        val sut =
+            getSnippetFile("function-type-is-not-in-package")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         sut?.packagee shouldBeEqualTo null
@@ -25,14 +26,15 @@ class KoFunctionTypeDeclarationForKoPackageProviderTest {
     @Test
     fun `function-type-is-in-package`() {
         // given
-        val sut = getSnippetFile("function-type-is-in-package")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoFunctionTypeDeclaration
+        val sut =
+            getSnippetFile("function-type-is-in-package")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         sut?.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"

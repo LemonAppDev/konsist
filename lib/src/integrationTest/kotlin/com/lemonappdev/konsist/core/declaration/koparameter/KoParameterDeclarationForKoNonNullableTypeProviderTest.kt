@@ -11,12 +11,13 @@ class KoParameterDeclarationForKoNonNullableTypeProviderTest {
     @Test
     fun `class-has-complex-default-parameter-value`() {
         // given
-        val sut = getSnippetFile("class-has-complex-default-parameter-value")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
+        val sut =
+            getSnippetFile("class-has-complex-default-parameter-value")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
         assertSoftly(sut) {
@@ -31,12 +32,13 @@ class KoParameterDeclarationForKoNonNullableTypeProviderTest {
     @Test
     fun `class-has-one-parameter-with-import-alias`() {
         // given
-        val sut = getSnippetFile("class-has-one-parameter-with-import-alias")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
+        val sut =
+            getSnippetFile("class-has-one-parameter-with-import-alias")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
         assertSoftly(sut) {

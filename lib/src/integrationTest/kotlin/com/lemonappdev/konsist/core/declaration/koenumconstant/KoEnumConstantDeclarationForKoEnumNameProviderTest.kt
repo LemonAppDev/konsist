@@ -8,11 +8,12 @@ class KoEnumConstantDeclarationForKoEnumNameProviderTest {
     @Test
     fun `enum-name`() {
         // given
-        val sut = getSnippetFile("enum-name")
-            .classes()
-            .first()
-            .enumConstants
-            .first()
+        val sut =
+            getSnippetFile("enum-name")
+                .classes()
+                .first()
+                .enumConstants
+                .first()
 
         // then
         sut.enumName shouldBeEqualTo "SampleClass"
@@ -21,11 +22,12 @@ class KoEnumConstantDeclarationForKoEnumNameProviderTest {
     @Test
     fun `full-enum-name`() {
         // given
-        val sut = getSnippetFile("full-enum-name")
-            .classes()
-            .first()
-            .enumConstants
-            .first()
+        val sut =
+            getSnippetFile("full-enum-name")
+                .classes()
+                .first()
+                .enumConstants
+                .first()
 
         // then
         sut.fullEnumName shouldBeEqualTo "SampleClass.SAMPLE_CONSTANT_1"

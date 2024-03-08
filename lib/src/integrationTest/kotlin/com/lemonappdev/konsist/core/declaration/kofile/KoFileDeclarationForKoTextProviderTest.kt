@@ -8,25 +8,27 @@ class KoFileDeclarationForKoTextProviderTest {
     @Test
     fun `file-text`() {
         // given
-        val sut = getSnippetFile("file-text")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-text")
+                .files
+                .first()
 
         // then
         sut
             .text
             .shouldBeEqualTo(
                 """
-            fun sampleFunction() {
-                "SampleText"
-            }
-            
+                fun sampleFunction() {
+                    "SampleText"
+                }
+                
                 """.trimIndent(),
             )
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope(
-        "core/declaration/kofile/snippet/forkotextprovider/",
-        fileName,
-    )
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope(
+            "core/declaration/kofile/snippet/forkotextprovider/",
+            fileName,
+        )
 }

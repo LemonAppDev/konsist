@@ -22,9 +22,10 @@ internal interface KoNullableTypeProviderCore :
             }
         }
 
-    private fun getTypeReferences(): List<KtTypeReference> = ktCallableDeclaration
-        .children
-        .filterIsInstance<KtTypeReference>()
+    private fun getTypeReferences(): List<KtTypeReference> =
+        ktCallableDeclaration
+            .children
+            .filterIsInstance<KtTypeReference>()
 
     @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasType { it.name == name }"))
     override fun hasType(name: String): Boolean = this.type?.name == name

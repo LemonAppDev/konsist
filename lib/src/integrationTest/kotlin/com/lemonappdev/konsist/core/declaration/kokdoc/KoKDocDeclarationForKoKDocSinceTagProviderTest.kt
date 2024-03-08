@@ -15,10 +15,11 @@ class KoKDocDeclarationForKoKDocSinceTagProviderTest {
     @Test
     fun `kdoc-without-since-tag`() {
         // given
-        val sut = getSnippetFile("kdoc-without-since-tag")
-            .classes()
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("kdoc-without-since-tag")
+                .classes()
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -34,13 +35,14 @@ class KoKDocDeclarationForKoKDocSinceTagProviderTest {
         declarationName: String,
     ) {
         // given
-        val sut = (
-            getSnippetFile(fileName)
-                .declarations(includeNested = true)
-                .filterIsInstance<KoNameProvider>()
-                .first { it.name == declarationName } as KoKDocProvider
+        val sut =
+            (
+                getSnippetFile(fileName)
+                    .declarations(includeNested = true)
+                    .filterIsInstance<KoNameProvider>()
+                    .first { it.name == declarationName } as KoKDocProvider
             )
-            .kDoc
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -50,15 +52,15 @@ class KoKDocDeclarationForKoKDocSinceTagProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kokdoc/snippet/forkokdocsincetagprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kokdoc/snippet/forkokdocsincetagprovider/", fileName)
 
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("class-with-since-tag", "SampleClass"),
-            arguments("function-with-since-tag", "sampleMethod"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("class-with-since-tag", "SampleClass"),
+                arguments("function-with-since-tag", "sampleMethod"),
+            )
     }
 }

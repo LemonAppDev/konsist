@@ -22,9 +22,10 @@ class KoVariableDeclarationForKoAnnotationProviderTest {
     @MethodSource("provideValuesForNoAnnotation")
     fun `variable-has-no-annotation`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -46,9 +47,10 @@ class KoVariableDeclarationForKoAnnotationProviderTest {
     @MethodSource("provideValuesForOneAnnotation")
     fun `variable-has-annotation`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -94,9 +96,10 @@ class KoVariableDeclarationForKoAnnotationProviderTest {
     @MethodSource("provideValuesForTwoAnnotations")
     fun `variable-has-two-annotations`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -153,9 +156,10 @@ class KoVariableDeclarationForKoAnnotationProviderTest {
     @MethodSource("provideValuesForSuppressAnnotation")
     fun `variable-has-suppress-annotation-without-import`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -170,52 +174,56 @@ class KoVariableDeclarationForKoAnnotationProviderTest {
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForNoAnnotation() = listOf(
-            arguments(getSnippetFile("variable-in-function-has-no-annotation").functions()),
-            arguments(getSnippetFile("variable-in-init-block-has-no-annotation").classes().initBlocks),
-            arguments(getSnippetFile("variable-in-enum-constant-has-no-annotation").classes().enumConstants),
-            arguments(getSnippetFile("variable-in-getter-has-no-annotation").properties().getters),
-            arguments(getSnippetFile("variable-in-setter-has-no-annotation").properties().setters),
-        )
+        fun provideValuesForNoAnnotation() =
+            listOf(
+                arguments(getSnippetFile("variable-in-function-has-no-annotation").functions()),
+                arguments(getSnippetFile("variable-in-init-block-has-no-annotation").classes().initBlocks),
+                arguments(getSnippetFile("variable-in-enum-constant-has-no-annotation").classes().enumConstants),
+                arguments(getSnippetFile("variable-in-getter-has-no-annotation").properties().getters),
+                arguments(getSnippetFile("variable-in-setter-has-no-annotation").properties().setters),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForOneAnnotation() = listOf(
-            arguments(getSnippetFile("variable-in-function-has-annotation").functions()),
-            arguments(getSnippetFile("variable-in-init-block-has-annotation").classes().initBlocks),
-            arguments(getSnippetFile("variable-in-enum-constant-has-annotation").classes().enumConstants),
-            arguments(getSnippetFile("variable-in-getter-has-annotation").properties().getters),
-            arguments(getSnippetFile("variable-in-setter-has-annotation").properties().setters),
-        )
+        fun provideValuesForOneAnnotation() =
+            listOf(
+                arguments(getSnippetFile("variable-in-function-has-annotation").functions()),
+                arguments(getSnippetFile("variable-in-init-block-has-annotation").classes().initBlocks),
+                arguments(getSnippetFile("variable-in-enum-constant-has-annotation").classes().enumConstants),
+                arguments(getSnippetFile("variable-in-getter-has-annotation").properties().getters),
+                arguments(getSnippetFile("variable-in-setter-has-annotation").properties().setters),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForTwoAnnotations() = listOf(
-            arguments(getSnippetFile("variable-in-function-has-two-annotations").functions()),
-            arguments(getSnippetFile("variable-in-init-block-has-two-annotations").classes().initBlocks),
-            arguments(getSnippetFile("variable-in-enum-constant-has-two-annotations").classes().enumConstants),
-            arguments(getSnippetFile("variable-in-getter-has-two-annotations").properties().getters),
-            arguments(getSnippetFile("variable-in-setter-has-two-annotations").properties().setters),
-        )
+        fun provideValuesForTwoAnnotations() =
+            listOf(
+                arguments(getSnippetFile("variable-in-function-has-two-annotations").functions()),
+                arguments(getSnippetFile("variable-in-init-block-has-two-annotations").classes().initBlocks),
+                arguments(getSnippetFile("variable-in-enum-constant-has-two-annotations").classes().enumConstants),
+                arguments(getSnippetFile("variable-in-getter-has-two-annotations").properties().getters),
+                arguments(getSnippetFile("variable-in-setter-has-two-annotations").properties().setters),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForSuppressAnnotation() = listOf(
-            arguments(
-                getSnippetFile("variable-in-function-has-suppress-annotation-without-import").functions(),
-            ),
-            arguments(
-                getSnippetFile("variable-in-init-block-has-suppress-annotation-without-import").classes().initBlocks,
-            ),
-            arguments(
-                getSnippetFile("variable-in-enum-constant-has-suppress-annotation-without-import").classes().enumConstants,
-            ),
-            arguments(
-                getSnippetFile("variable-in-getter-has-suppress-annotation-without-import").properties().getters,
-            ),
-            arguments(
-                getSnippetFile("variable-in-setter-has-suppress-annotation-without-import").properties().setters,
-            ),
-        )
+        fun provideValuesForSuppressAnnotation() =
+            listOf(
+                arguments(
+                    getSnippetFile("variable-in-function-has-suppress-annotation-without-import").functions(),
+                ),
+                arguments(
+                    getSnippetFile("variable-in-init-block-has-suppress-annotation-without-import").classes().initBlocks,
+                ),
+                arguments(
+                    getSnippetFile("variable-in-enum-constant-has-suppress-annotation-without-import").classes().enumConstants,
+                ),
+                arguments(
+                    getSnippetFile("variable-in-getter-has-suppress-annotation-without-import").properties().getters,
+                ),
+                arguments(
+                    getSnippetFile("variable-in-setter-has-suppress-annotation-without-import").properties().setters,
+                ),
+            )
     }
 }

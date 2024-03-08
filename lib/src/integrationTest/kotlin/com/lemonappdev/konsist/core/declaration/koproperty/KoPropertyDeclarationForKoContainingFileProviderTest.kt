@@ -8,9 +8,10 @@ class KoPropertyDeclarationForKoContainingFileProviderTest {
     @Test
     fun `property-containing-file`() {
         // given
-        val sut = getSnippetFile("property-containing-file")
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-containing-file")
+                .properties()
+                .first()
 
         // then
         sut

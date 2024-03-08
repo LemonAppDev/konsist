@@ -8,9 +8,10 @@ class KoClassDeclarationForKoInnerModifierProviderTest {
     @Test
     fun `class-without-inner-modifier`() {
         // given
-        val sut = getSnippetFile("class-without-inner-modifier")
-            .classes(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("class-without-inner-modifier")
+                .classes(includeNested = true)
+                .first()
 
         // then
         sut.hasInnerModifier shouldBeEqualTo false
@@ -19,9 +20,10 @@ class KoClassDeclarationForKoInnerModifierProviderTest {
     @Test
     fun `nested-inner-class`() {
         // given
-        val sut = getSnippetFile("nested-inner-class")
-            .classes(includeNested = true)
-            .first { it.name == "InnerClass" }
+        val sut =
+            getSnippetFile("nested-inner-class")
+                .classes(includeNested = true)
+                .first { it.name == "InnerClass" }
 
         // then
         sut.hasInnerModifier shouldBeEqualTo true

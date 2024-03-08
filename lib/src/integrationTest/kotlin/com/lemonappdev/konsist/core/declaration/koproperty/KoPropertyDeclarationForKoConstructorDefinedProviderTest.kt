@@ -9,10 +9,11 @@ class KoPropertyDeclarationForKoConstructorDefinedProviderTest {
     @Test
     fun `property-is-defined-in-constructor`() {
         // given
-        val sut = getSnippetFile("property-is-defined-in-constructor")
-            .classes()
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-is-defined-in-constructor")
+                .classes()
+                .properties()
+                .first()
 
         // then
         sut.isConstructorDefined shouldBeEqualTo true
@@ -21,10 +22,11 @@ class KoPropertyDeclarationForKoConstructorDefinedProviderTest {
     @Test
     fun `property-is-defined-in-body`() {
         // given
-        val sut = getSnippetFile("property-is-defined-in-body")
-            .classes()
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-is-defined-in-body")
+                .classes()
+                .properties()
+                .first()
 
         // then
         sut.isConstructorDefined shouldBeEqualTo false

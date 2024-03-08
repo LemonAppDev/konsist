@@ -49,6 +49,5 @@ class KoScopeTest {
         scope1.hashCode() shouldNotBeEqualTo scope2.hashCode()
     }
 
-    private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/container/snippet/forgeneral/", fileName)
+    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/container/snippet/forgeneral/", fileName)
 }

@@ -11,13 +11,14 @@ class KoTypeDeclarationForKoContainingFileProviderTest {
     @MethodSource("provideValues")
     fun `containing-file`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         sut?.containingFile?.nameWithExtension shouldBeEqualTo "$fileName.kt"
@@ -29,25 +30,26 @@ class KoTypeDeclarationForKoContainingFileProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("nullable-kotlin-basic-type-containing-file"),
-            arguments("not-nullable-kotlin-basic-type-containing-file"),
-            arguments("nullable-kotlin-collection-type-containing-file"),
-            arguments("not-nullable-kotlin-collection-type-containing-file"),
-            arguments("nullable-class-type-containing-file"),
-            arguments("not-nullable-class-type-containing-file"),
-            arguments("nullable-interface-type-containing-file"),
-            arguments("not-nullable-interface-type-containing-file"),
-            arguments("nullable-object-type-containing-file"),
-            arguments("not-nullable-object-type-containing-file"),
-            arguments("nullable-function-type-containing-file"),
-            arguments("not-nullable-function-type-containing-file"),
-            arguments("nullable-import-alias-type-containing-file"),
-            arguments("not-nullable-import-alias-type-containing-file"),
-            arguments("nullable-typealias-type-containing-file"),
-            arguments("not-nullable-typealias-type-containing-file"),
-            arguments("nullable-external-type-containing-file"),
-            arguments("not-nullable-external-type-containing-file"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("nullable-kotlin-basic-type-containing-file"),
+                arguments("not-nullable-kotlin-basic-type-containing-file"),
+                arguments("nullable-kotlin-collection-type-containing-file"),
+                arguments("not-nullable-kotlin-collection-type-containing-file"),
+                arguments("nullable-class-type-containing-file"),
+                arguments("not-nullable-class-type-containing-file"),
+                arguments("nullable-interface-type-containing-file"),
+                arguments("not-nullable-interface-type-containing-file"),
+                arguments("nullable-object-type-containing-file"),
+                arguments("not-nullable-object-type-containing-file"),
+                arguments("nullable-function-type-containing-file"),
+                arguments("not-nullable-function-type-containing-file"),
+                arguments("nullable-import-alias-type-containing-file"),
+                arguments("not-nullable-import-alias-type-containing-file"),
+                arguments("nullable-typealias-type-containing-file"),
+                arguments("not-nullable-typealias-type-containing-file"),
+                arguments("nullable-external-type-containing-file"),
+                arguments("not-nullable-external-type-containing-file"),
+            )
     }
 }

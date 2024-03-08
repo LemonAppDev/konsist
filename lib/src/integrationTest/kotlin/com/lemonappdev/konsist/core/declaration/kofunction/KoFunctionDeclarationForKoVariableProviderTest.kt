@@ -9,9 +9,10 @@ class KoFunctionDeclarationForKoVariableProviderTest {
     @Test
     fun `function-contains-no-variable`() {
         // given
-        val sut = getSnippetFile("function-contains-no-variable")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-contains-no-variable")
+                .functions()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -29,9 +30,10 @@ class KoFunctionDeclarationForKoVariableProviderTest {
     @Test
     fun `function-contains-variable`() {
         // given
-        val sut = getSnippetFile("function-contains-variable")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-contains-variable")
+                .functions()
+                .first()
 
         // then
         assertSoftly(sut) {

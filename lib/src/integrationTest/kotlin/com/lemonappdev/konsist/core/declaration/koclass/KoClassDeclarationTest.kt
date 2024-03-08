@@ -8,9 +8,10 @@ class KoClassDeclarationTest {
     @Test
     fun `class-to-string`() {
         // given
-        val sut = getSnippetFile("class-to-string")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-to-string")
+                .classes()
+                .first()
 
         // then
         sut.toString() shouldBeEqualTo "SampleClass"

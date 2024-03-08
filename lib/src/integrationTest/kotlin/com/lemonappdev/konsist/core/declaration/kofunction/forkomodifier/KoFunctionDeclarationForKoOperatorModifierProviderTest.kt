@@ -8,9 +8,10 @@ class KoFunctionDeclarationForKoOperatorModifierProviderTest {
     @Test
     fun `function-without-operator-modifier`() {
         // given
-        val sut = getSnippetFile("function-without-operator-modifier")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-without-operator-modifier")
+                .functions()
+                .first()
 
         // then
         sut.hasOperatorModifier shouldBeEqualTo false
@@ -19,9 +20,10 @@ class KoFunctionDeclarationForKoOperatorModifierProviderTest {
     @Test
     fun `function-with-operator-modifier`() {
         // given
-        val sut = getSnippetFile("function-with-operator-modifier")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-with-operator-modifier")
+                .functions()
+                .first()
 
         // then
         sut.hasOperatorModifier shouldBeEqualTo true

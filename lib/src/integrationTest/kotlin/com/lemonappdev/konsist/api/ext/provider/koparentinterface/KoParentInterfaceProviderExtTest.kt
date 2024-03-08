@@ -13,9 +13,10 @@ class KoParentInterfaceProviderExtTest {
     @Test
     fun `class-has-parent-interface-imported-from-external-file`() {
         // given
-        val sut = getSnippetFile("class-has-parent-interface-imported-from-external-file")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-parent-interface-imported-from-external-file")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -28,9 +29,10 @@ class KoParentInterfaceProviderExtTest {
     @Test
     fun `object-has-parent-interface-imported-from-external-file`() {
         // given
-        val sut = getSnippetFile("object-has-parent-interface-imported-from-external-file")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-parent-interface-imported-from-external-file")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -43,9 +45,10 @@ class KoParentInterfaceProviderExtTest {
     @Test
     fun `interface-has-parent-interface-imported-from-external-file`() {
         // given
-        val sut = getSnippetFile("interface-has-parent-interface-imported-from-external-file")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-parent-interface-imported-from-external-file")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {

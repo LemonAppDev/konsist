@@ -8,9 +8,10 @@ class KoTypeAliasDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `typealias-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("typealias-fully-qualified-name")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-fully-qualified-name")
+                .typeAliases
+                .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleTypeAlias"
@@ -19,9 +20,10 @@ class KoTypeAliasDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `typealias-fully-qualified-name-without-package`() {
         // given
-        val sut = getSnippetFile("typealias-fully-qualified-name-without-package")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-fully-qualified-name-without-package")
+                .typeAliases
+                .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "SampleTypeAlias"

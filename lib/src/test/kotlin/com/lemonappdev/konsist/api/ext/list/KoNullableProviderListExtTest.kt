@@ -10,12 +10,14 @@ class KoNullableProviderListExtTest {
     @Test
     fun `withNullableType() returns type with Nullable basic type`() {
         // given
-        val type1: KoNullableProvider = mockk {
-            every { isNullable } returns true
-        }
-        val type2: KoNullableProvider = mockk {
-            every { isNullable } returns false
-        }
+        val type1: KoNullableProvider =
+            mockk {
+                every { isNullable } returns true
+            }
+        val type2: KoNullableProvider =
+            mockk {
+                every { isNullable } returns false
+            }
         val types = listOf(type1, type2)
 
         // when
@@ -28,12 +30,14 @@ class KoNullableProviderListExtTest {
     @Test
     fun `withoutNullableType() returns type without Nullable basic type`() {
         // given
-        val type1: KoNullableProvider = mockk {
-            every { isNullable } returns true
-        }
-        val type2: KoNullableProvider = mockk {
-            every { isNullable } returns false
-        }
+        val type1: KoNullableProvider =
+            mockk {
+                every { isNullable } returns true
+            }
+        val type2: KoNullableProvider =
+            mockk {
+                every { isNullable } returns false
+            }
         val types = listOf(type1, type2)
 
         // when

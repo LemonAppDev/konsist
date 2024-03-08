@@ -12,9 +12,10 @@ class KoPropertyDeclarationForKoTacitTypeProviderTest {
     @Test
     fun `property-has-no-tacit-type`() {
         // given
-        val sut = getSnippetFile("property-has-no-tacit-type")
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-has-no-tacit-type")
+                .properties()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -26,9 +27,10 @@ class KoPropertyDeclarationForKoTacitTypeProviderTest {
     @Test
     fun `property-has-explicit-simple-type`() {
         // given
-        val sut = getSnippetFile("property-has-explicit-simple-type")
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-has-explicit-simple-type")
+                .properties()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -42,9 +44,10 @@ class KoPropertyDeclarationForKoTacitTypeProviderTest {
     @Test
     fun `property-has-explicit-complex-type`() {
         // given
-        val sut = getSnippetFile("property-has-explicit-complex-type")
-            .properties()
-            .first { it.name == "sampleProperty" }
+        val sut =
+            getSnippetFile("property-has-explicit-complex-type")
+                .properties()
+                .first { it.name == "sampleProperty" }
 
         // then
         assertSoftly(sut) {
@@ -58,9 +61,10 @@ class KoPropertyDeclarationForKoTacitTypeProviderTest {
     @Test
     fun `property-has-implicit-complex-type`() {
         // given
-        val sut = getSnippetFile("property-has-implicit-complex-type")
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-has-implicit-complex-type")
+                .properties()
+                .first()
 
         // then
         assertSoftly(sut) {

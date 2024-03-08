@@ -8,22 +8,22 @@ class KoFunctionDeclarationForKoTextProviderTest {
     @Test
     fun `function-text`() {
         // given
-        val sut = getSnippetFile("function-text")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-text")
+                .functions()
+                .first()
 
         // then
         sut
             .text
             .shouldBeEqualTo(
                 """
-                    fun sampleFunction() {
-                        val sampleProperty = "SampleText"
-                    }
+                fun sampleFunction() {
+                    val sampleProperty = "SampleText"
+                }
                 """.trimIndent(),
             )
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kofunction/snippet/forkotextprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofunction/snippet/forkotextprovider/", fileName)
 }

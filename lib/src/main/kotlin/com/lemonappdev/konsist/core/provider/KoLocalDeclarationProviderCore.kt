@@ -7,12 +7,10 @@ internal interface KoLocalDeclarationProviderCore : KoLocalDeclarationProvider, 
     override val numLocalDeclarations: Int
         get() = localDeclarations.size
 
-    override fun countLocalDeclarations(predicate: (KoBaseDeclaration) -> Boolean): Int =
-        localDeclarations.count { predicate(it) }
+    override fun countLocalDeclarations(predicate: (KoBaseDeclaration) -> Boolean): Int = localDeclarations.count { predicate(it) }
 
     @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasLocalDeclaration()"))
-    override fun containsLocalDeclaration(predicate: (KoBaseDeclaration) -> Boolean): Boolean =
-        localDeclarations.any { predicate(it) }
+    override fun containsLocalDeclaration(predicate: (KoBaseDeclaration) -> Boolean): Boolean = localDeclarations.any { predicate(it) }
 
     override fun hasLocalDeclarations(): Boolean = localDeclarations.isNotEmpty()
 
