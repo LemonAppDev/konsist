@@ -15,7 +15,7 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
             includeLocal,
         )
 
-    @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasClass()"))
+    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasClass()"))
     override fun containsClass(
         includeNested: Boolean,
         includeLocal: Boolean,
