@@ -13,6 +13,7 @@ import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoNonNullableTypeProvider
 import com.lemonappdev.konsist.api.provider.KoNullableTypeProvider
 import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
+import kotlin.reflect.KClass
 
 /**
  * List containing source declarations associated with types.
@@ -87,6 +88,41 @@ fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclaration(predicate
     filterNot { predicate(it.sourceDeclaration) }
 
 /**
+ * List containing declarations with source declaration of.
+ *
+ * @param kClass The Kotlin class representing the source declaration to include.
+ * @param kClasses The Kotlin class(es) representing the source declaration(s) to include.
+ * @return A list containing declarations with the source declaration of the specified Kotlin class(es).
+ */
+fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclarationOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
+    filter {
+        it.hasSourceDeclarationOf(kClass) ||
+                if (kClasses.isNotEmpty()) {
+                    kClasses.any { kClass -> it.hasSourceDeclarationOf(kClass) }
+                } else {
+                    false
+                }
+    }
+
+/**
+ * List containing declarations without source declaration of.
+ *
+ * @param kClass The Kotlin class representing the source declaration to exclude.
+ * @param kClasses The Kotlin class(es) representing the source declaration(s) to exclude.
+ * @return A list containing declarations without source declaration of the specified Kotlin class(es).
+ */
+fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclarationOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
+    filterNot {
+        val hasMatchingSourceDeclaration = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass -> it.hasSourceDeclarationOf(kClass) }
+        } else {
+            false
+        }
+
+        it.hasSourceDeclarationOf(kClass) || hasMatchingSourceDeclaration
+    }
+
+/**
  * List containing declarations with the specified source class.
  *
  * @param predicate The predicate function to determine if a source class satisfies a condition.
@@ -95,7 +131,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclaration(predicate
 fun <T : KoSourceDeclarationProvider> List<T>.withSourceClass(predicate: ((KoClassDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
-            null -> it.sourceClass != null
+            null -> it.hasSourceClass()
             else -> it.sourceClass?.let { sourceClass -> predicate(sourceClass) } ?: false
         }
     }
@@ -109,9 +145,45 @@ fun <T : KoSourceDeclarationProvider> List<T>.withSourceClass(predicate: ((KoCla
 fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceClass(predicate: ((KoClassDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.sourceClass != null
+            null -> it.hasSourceClass()
             else -> it.sourceClass?.let { sourceClass -> predicate(sourceClass) } ?: false
         }
+    }
+
+/**
+ * List containing declarations with source class of.
+ *
+ * @param kClass The Kotlin class representing the source class to include.
+ * @param kClasses The Kotlin class(es) representing the source class(es) to include.
+ * @return A list containing declarations with the source class of the specified Kotlin class(es).
+ */
+fun <T : KoSourceDeclarationProvider> List<T>.withSourceClassOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
+    filter {
+        val hasAllSourceClasses = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass -> it.hasSourceClassOf(kClass) }
+        } else {
+            false
+        }
+
+        it.hasSourceClassOf(kClass) || hasAllSourceClasses
+    }
+
+/**
+ * List containing declarations without source class of.
+ *
+ * @param kClass The Kotlin class representing the source class to exclude.
+ * @param kClasses The Kotlin class(es) representing the source class(s) to exclude.
+ * @return A list containing declarations without source class of the specified Kotlin class(es).
+ */
+fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceClassOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
+    filterNot {
+        val hasAllSourceClasses = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass -> it.hasSourceClassOf(kClass) }
+        } else {
+            false
+        }
+
+        it.hasSourceClassOf(kClass) || hasAllSourceClasses
     }
 
 /**
@@ -123,7 +195,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceClass(predicate: ((Ko
 fun <T : KoSourceDeclarationProvider> List<T>.withSourceObject(predicate: ((KoObjectDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
-            null -> it.sourceObject != null
+            null -> it.hasSourceObject()
             else -> it.sourceObject?.let { sourceObject -> predicate(sourceObject) } ?: false
         }
     }
@@ -137,9 +209,45 @@ fun <T : KoSourceDeclarationProvider> List<T>.withSourceObject(predicate: ((KoOb
 fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceObject(predicate: ((KoObjectDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.sourceObject != null
+            null -> it.hasSourceObject()
             else -> it.sourceObject?.let { sourceObject -> predicate(sourceObject) } ?: false
         }
+    }
+
+/**
+ * List containing declarations with source object of.
+ *
+ * @param kClass The Kotlin class representing the source object to include.
+ * @param kClasses The Kotlin class(es) representing the source object(s) to include.
+ * @return A list containing declarations with the source object of the specified Kotlin class(es).
+ */
+fun <T : KoSourceDeclarationProvider> List<T>.withSourceObjectOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
+    filter {
+        val hasAllSourceObjects = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass -> it.hasSourceObjectOf(kClass) }
+        } else {
+            false
+        }
+
+        it.hasSourceObjectOf(kClass) || hasAllSourceObjects
+    }
+
+/**
+ * List containing declarations without source object of.
+ *
+ * @param kClass The Kotlin class representing the source object to exclude.
+ * @param kClasses The Kotlin class(es) representing the source object(s) to exclude.
+ * @return A list containing declarations without source object of the specified Kotlin class(es).
+ */
+fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceObjectOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
+    filterNot {
+        val hasAllSourceObjects = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass -> it.hasSourceObjectOf(kClass) }
+        } else {
+            false
+        }
+
+        it.hasSourceObjectOf(kClass) || hasAllSourceObjects
     }
 
 /**
@@ -151,7 +259,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceObject(predicate: ((K
 fun <T : KoSourceDeclarationProvider> List<T>.withSourceInterface(predicate: ((KoInterfaceDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
-            null -> it.sourceInterface != null
+            null -> it.hasSourceInterface()
             else -> it.sourceInterface?.let { sourceInterface -> predicate(sourceInterface) } ?: false
         }
     }
@@ -165,9 +273,45 @@ fun <T : KoSourceDeclarationProvider> List<T>.withSourceInterface(predicate: ((K
 fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceInterface(predicate: ((KoInterfaceDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.sourceInterface != null
+            null -> it.hasSourceInterface()
             else -> it.sourceInterface?.let { sourceInterface -> predicate(sourceInterface) } ?: false
         }
+    }
+
+/**
+ * List containing declarations with source interface of.
+ *
+ * @param kClass The Kotlin class representing the source interface to include.
+ * @param kClasses The Kotlin class(es) representing the source interface(s) to include.
+ * @return A list containing declarations with the source interface of the specified Kotlin class(es).
+ */
+fun <T : KoSourceDeclarationProvider> List<T>.withSourceInterfaceOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
+    filter {
+        val hasAllSourceInterfaces = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass -> it.hasSourceInterfaceOf(kClass) }
+        } else {
+            false
+        }
+
+        it.hasSourceInterfaceOf(kClass) || hasAllSourceInterfaces
+    }
+
+/**
+ * List containing declarations without source interface of.
+ *
+ * @param kClass The Kotlin class representing the source interface to exclude.
+ * @param kClasses The Kotlin class(es) representing the source interface(s) to exclude.
+ * @return A list containing declarations without source interface of the specified Kotlin class(es).
+ */
+fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceInterfaceOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
+    filterNot {
+        val hasAllSourceInterfaces = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass -> it.hasSourceInterfaceOf(kClass) }
+        } else {
+            false
+        }
+
+        it.hasSourceInterfaceOf(kClass) || hasAllSourceInterfaces
     }
 
 /**
@@ -179,7 +323,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceInterface(predicate: 
 fun <T : KoSourceDeclarationProvider> List<T>.withSourceTypeAlias(predicate: ((KoTypeAliasDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
-            null -> it.sourceTypeAlias != null
+            null -> it.hasSourceTypeAlias()
             else -> it.sourceTypeAlias?.let { sourceTypeAlias -> predicate(sourceTypeAlias) } ?: false
         }
     }
@@ -193,7 +337,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withSourceTypeAlias(predicate: ((K
 fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceTypeAlias(predicate: ((KoTypeAliasDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.sourceTypeAlias != null
+            null -> it.hasSourceTypeAlias()
             else -> it.sourceTypeAlias?.let { sourceTypeAlias -> predicate(sourceTypeAlias) } ?: false
         }
     }
@@ -207,7 +351,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceTypeAlias(predicate: 
 fun <T : KoSourceDeclarationProvider> List<T>.withSourceImportAlias(predicate: ((KoImportAliasDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
-            null -> it.sourceImportAlias != null
+            null -> it.hasSourceImportAlias()
             else -> it.sourceImportAlias?.let { sourceImportAlias -> predicate(sourceImportAlias) } ?: false
         }
     }
@@ -221,7 +365,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withSourceImportAlias(predicate: (
 fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceImportAlias(predicate: ((KoImportAliasDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.sourceImportAlias != null
+            null -> it.hasSourceImportAlias()
             else -> it.sourceImportAlias?.let { sourceImportAlias -> predicate(sourceImportAlias) } ?: false
         }
     }
@@ -235,7 +379,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceImportAlias(predicate
 fun <T : KoSourceDeclarationProvider> List<T>.withSourceKotlinType(predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
-            null -> it.sourceKotlinType != null
+            null -> it.hasSourceKotlinType()
             else -> it.sourceKotlinType?.let { sourceKotlinType -> predicate(sourceKotlinType) } ?: false
         }
     }
@@ -249,9 +393,45 @@ fun <T : KoSourceDeclarationProvider> List<T>.withSourceKotlinType(predicate: ((
 fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceKotlinType(predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.sourceKotlinType != null
+            null -> it.hasSourceKotlinType()
             else -> it.sourceKotlinType?.let { sourceKotlinType -> predicate(sourceKotlinType) } ?: false
         }
+    }
+
+/**
+ * List containing declarations with source kotlin type of.
+ *
+ * @param kClass The Kotlin class representing the source kotlin type to include.
+ * @param kClasses The Kotlin class(es) representing the source kotlin type(s) to include.
+ * @return A list containing declarations with the source kotlin type of the specified Kotlin class(es).
+ */
+fun <T : KoSourceDeclarationProvider> List<T>.withSourceKotlinTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
+    filter {
+        val hasAllSourceKotlinTypes = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass -> it.hasSourceKotlinTypeOf(kClass) }
+        } else {
+            false
+        }
+
+        it.hasSourceKotlinTypeOf(kClass) || hasAllSourceKotlinTypes
+    }
+
+/**
+ * List containing declarations without source kotlin type of.
+ *
+ * @param kClass The Kotlin class representing the source kotlin type to exclude.
+ * @param kClasses The Kotlin class(es) representing the source kotlin type(s) to exclude.
+ * @return A list containing declarations without source kotlin type of the specified Kotlin class(es).
+ */
+fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceKotlinTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
+    filterNot {
+        val hasAllSourceKotlinTypes = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass -> it.hasSourceKotlinTypeOf(kClass) }
+        } else {
+            false
+        }
+
+        it.hasSourceKotlinTypeOf(kClass) || hasAllSourceKotlinTypes
     }
 
 /**
@@ -263,7 +443,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceKotlinType(predicate:
 fun <T : KoSourceDeclarationProvider> List<T>.withSourceFunctionType(predicate: ((KoFunctionTypeDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
-            null -> it.sourceFunctionType != null
+            null -> it.hasSourceFunctionType()
             else -> it.sourceFunctionType?.let { sourceFunctionType -> predicate(sourceFunctionType) } ?: false
         }
     }
@@ -277,7 +457,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withSourceFunctionType(predicate: 
 fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceFunctionType(predicate: ((KoFunctionTypeDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.sourceFunctionType != null
+            null -> it.hasSourceFunctionType()
             else -> it.sourceFunctionType?.let { sourceFunctionType -> predicate(sourceFunctionType) } ?: false
         }
     }
@@ -291,7 +471,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceFunctionType(predicat
 fun <T : KoSourceDeclarationProvider> List<T>.withSourceExternalType(predicate: ((KoExternalDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
-            null -> it.sourceExternalType != null
+            null -> it.hasSourceExternalType()
             else -> it.sourceExternalType?.let { sourceExternalType -> predicate(sourceExternalType) } ?: false
         }
     }
@@ -305,7 +485,43 @@ fun <T : KoSourceDeclarationProvider> List<T>.withSourceExternalType(predicate: 
 fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceExternalType(predicate: ((KoExternalDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.sourceExternalType != null
+            null -> it.hasSourceExternalType()
             else -> it.sourceExternalType?.let { sourceExternalType -> predicate(sourceExternalType) } ?: false
         }
+    }
+
+/**
+ * List containing declarations with source external type of.
+ *
+ * @param kClass The Kotlin class representing the source external type to include.
+ * @param kClasses The Kotlin class(es) representing the source external type(s) to include.
+ * @return A list containing declarations with the source external type of the specified Kotlin class(es).
+ */
+fun <T : KoSourceDeclarationProvider> List<T>.withSourceExternalTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
+    filter {
+        val hasAllSourceExternalTypes = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass -> it.hasSourceExternalTypeOf(kClass) }
+        } else {
+            false
+        }
+
+        it.hasSourceExternalTypeOf(kClass) || hasAllSourceExternalTypes
+    }
+
+/**
+ * List containing declarations without source external type of.
+ *
+ * @param kClass The Kotlin class representing the source external type to exclude.
+ * @param kClasses The Kotlin class(es) representing the source external type(s) to exclude.
+ * @return A list containing declarations without source external type of the specified Kotlin class(es).
+ */
+fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceExternalTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
+    filterNot {
+        val hasAllSourceExternalTypes = if (kClasses.isNotEmpty()) {
+            kClasses.any { kClass -> it.hasSourceExternalTypeOf(kClass) }
+        } else {
+            false
+        }
+
+        it.hasSourceExternalTypeOf(kClass) || hasAllSourceExternalTypes
     }
