@@ -249,7 +249,7 @@ jobs:
         run: python3 scripts/check_dependencies_exposed_by_library_artifact.py
 
       - name: Check Bytecode version
-        run: python3 scripts/check_bytecode_version.py
+        run: python3 scripts/check_konsist_artifact_bytecode_version.py
 
 # ======================================= Other =========================================================
 
