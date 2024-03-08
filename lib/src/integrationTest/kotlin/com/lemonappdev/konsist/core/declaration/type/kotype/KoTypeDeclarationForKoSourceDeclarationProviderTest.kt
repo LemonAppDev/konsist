@@ -496,7 +496,7 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/type/kotype/snippet/forkosourcedeclarationprovider/",
-            fileName
+            fileName,
         )
 
     companion object {
