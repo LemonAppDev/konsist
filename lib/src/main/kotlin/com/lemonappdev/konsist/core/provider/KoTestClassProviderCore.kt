@@ -14,25 +14,30 @@ internal interface KoTestClassProviderCore : KoTestClassProvider, KoNameProvider
         testPropertyName: String,
         moduleName: String?,
         sourceSetName: String?,
-    ): List<KoClassDeclaration> = Konsist
-        .scopeFromTest(moduleName, sourceSetName)
-        .classes()
-        .filter {
-            it.hasProperty { property -> property.isInstanceCreatedInProperty(testPropertyName, name) } ||
-                it.hasFunction { function -> function.isInstanceCreatedInMethodBody(testPropertyName, name) }
-        }
+    ): List<KoClassDeclaration> =
+        Konsist
+            .scopeFromTest(moduleName, sourceSetName)
+            .classes()
+            .filter {
+                it.hasProperty { property -> property.isInstanceCreatedInProperty(testPropertyName, name) } ||
+                    it.hasFunction { function -> function.isInstanceCreatedInMethodBody(testPropertyName, name) }
+            }
 
     override fun testClasses(
         moduleName: String?,
         sourceSetName: String?,
         predicate: (KoClassDeclaration) -> Boolean,
-    ): List<KoClassDeclaration> = Konsist
-        .scopeFromTest(moduleName, sourceSetName)
-        .classes()
-        .filter { predicate(it) }
+    ): List<KoClassDeclaration> =
+        Konsist
+            .scopeFromTest(moduleName, sourceSetName)
+            .classes()
+            .filter { predicate(it) }
 
-    override fun numTestClasses(testPropertyName: String, moduleName: String?, sourceSetName: String?): Int =
-        testClasses(testPropertyName, moduleName, sourceSetName).size
+    override fun numTestClasses(
+        testPropertyName: String,
+        moduleName: String?,
+        sourceSetName: String?,
+    ): Int = testClasses(testPropertyName, moduleName, sourceSetName).size
 
     override fun countTestClasses(
         moduleName: String?,
@@ -40,8 +45,11 @@ internal interface KoTestClassProviderCore : KoTestClassProvider, KoNameProvider
         predicate: (KoClassDeclaration) -> Boolean,
     ): Int = testClasses(moduleName, sourceSetName, predicate).size
 
-    override fun hasTestClasses(testPropertyName: String, moduleName: String?, sourceSetName: String?): Boolean =
-        testClasses(testPropertyName, moduleName, sourceSetName).isNotEmpty()
+    override fun hasTestClasses(
+        testPropertyName: String,
+        moduleName: String?,
+        sourceSetName: String?,
+    ): Boolean = testClasses(testPropertyName, moduleName, sourceSetName).isNotEmpty()
 
     override fun hasTestClass(
         moduleName: String?,
@@ -58,10 +66,13 @@ internal interface KoTestClassProviderCore : KoTestClassProvider, KoNameProvider
  but
  val x3 = getInstance()                 // hasTacitType returns false
  */
-private fun <T> T.hasTacitType(type: String): Boolean where
-      T : KoNullableTypeProvider,
-      T : KoNameProvider,
-      T : KoValueProvider = hasType { it.name == type } || value?.startsWith("$type(") == true
+private fun <T> T.hasTacitType(
+    type: String,
+): Boolean where
+                 T : KoNullableTypeProvider,
+                 T : KoNameProvider,
+                 T : KoValueProvider =
+    hasType { it.name == type } || value?.startsWith("$type(") == true
 
 /*
  Checks whether a test item is created in a property (property has item tacit type or is created in getter body), e.g.
@@ -73,8 +84,10 @@ private fun <T> T.hasTacitType(type: String): Boolean where
  but
  val x4 = getInstance()                 // isInstanceCreatedInProperty = false
  */
-private fun KoPropertyDeclaration.isInstanceCreatedInProperty(name: String, type: String): Boolean =
-    this.name == name && (hasTacitType(type) || getter?.text?.contains(" $type(") == true)
+private fun KoPropertyDeclaration.isInstanceCreatedInProperty(
+    name: String,
+    type: String,
+): Boolean = this.name == name && (hasTacitType(type) || getter?.text?.contains(" $type(") == true)
 
 /*
  Checks whether a test item is created in a method body (function return type matches to item type or item is created as variable), e.g.
@@ -91,5 +104,7 @@ private fun KoPropertyDeclaration.isInstanceCreatedInProperty(name: String, type
     val x3 = getInstance()
  }                                     // isInstanceCreatedInMethodBody = false
  */
-private fun KoFunctionDeclaration.isInstanceCreatedInMethodBody(name: String, type: String): Boolean =
-    hasReturnType { it.name == type } || hasVariable { it.name == name && it.hasTacitType(type) }
+private fun KoFunctionDeclaration.isInstanceCreatedInMethodBody(
+    name: String,
+    type: String,
+): Boolean = hasReturnType { it.name == type } || hasVariable { it.name == name && it.hasTacitType(type) }

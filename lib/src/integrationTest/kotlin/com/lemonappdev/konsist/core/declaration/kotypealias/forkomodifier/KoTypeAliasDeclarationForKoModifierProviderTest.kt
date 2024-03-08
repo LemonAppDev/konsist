@@ -16,9 +16,10 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
     @Test
     fun `typealias-without-modifiers`() {
         // given
-        val sut = getSnippetFile("typealias-without-modifiers")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-without-modifiers")
+                .typeAliases
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -36,13 +37,12 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
 
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `typealias-modifiers`(
-        fileName: String,
-    ) {
+    fun `typealias-modifiers`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile(fileName)
+                .typeAliases
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -66,17 +66,18 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("typealias-has-modifiers-and-annotation-with-parameter"),
-            arguments("typealias-has-modifiers-and-annotation-without-parameter"),
-            arguments("typealias-has-modifiers-annotation-and-comment"),
-            arguments("typealias-has-modifiers-and-annotations"),
-            arguments("typealias-has-modifiers-and-annotation-with-angle-brackets"),
-            arguments("typealias-has-modifiers-and-kdoc"),
-            arguments("typealias-has-modifiers-kdoc-and-annotation-before-them"),
-            arguments("typealias-has-modifiers-multiline-comment-and-annotation-before-them"),
-            arguments("typealias-has-modifiers-and-comment-before-them"),
-            arguments("typealias-has-modifiers-and-comment-after-them"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("typealias-has-modifiers-and-annotation-with-parameter"),
+                arguments("typealias-has-modifiers-and-annotation-without-parameter"),
+                arguments("typealias-has-modifiers-annotation-and-comment"),
+                arguments("typealias-has-modifiers-and-annotations"),
+                arguments("typealias-has-modifiers-and-annotation-with-angle-brackets"),
+                arguments("typealias-has-modifiers-and-kdoc"),
+                arguments("typealias-has-modifiers-kdoc-and-annotation-before-them"),
+                arguments("typealias-has-modifiers-multiline-comment-and-annotation-before-them"),
+                arguments("typealias-has-modifiers-and-comment-before-them"),
+                arguments("typealias-has-modifiers-and-comment-after-them"),
+            )
     }
 }

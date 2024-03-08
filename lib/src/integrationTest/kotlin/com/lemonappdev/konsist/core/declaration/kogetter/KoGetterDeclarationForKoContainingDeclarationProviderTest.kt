@@ -9,10 +9,11 @@ class KoGetterDeclarationForKoContainingDeclarationProviderTest {
     @Test
     fun `getter-parent-declaration`() {
         // given
-        val sut = getSnippetFile("getter-parent-declaration")
-            .properties()
-            .first()
-            .getter
+        val sut =
+            getSnippetFile("getter-parent-declaration")
+                .properties()
+                .first()
+                .getter
 
         // then
         (sut?.containingDeclaration as KoNameProvider).name shouldBeEqualTo "sampleProperty"

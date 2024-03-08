@@ -10,10 +10,11 @@ class KoEnumConstantDeclarationForKoLocalClassProviderTest {
     @Test
     fun `enum-constant-contains-no-local-classes`() {
         // given
-        val sut = getSnippetFile("enum-constant-contains-no-local-classes")
-            .classes()
-            .enumConstants
-            .first()
+        val sut =
+            getSnippetFile("enum-constant-contains-no-local-classes")
+                .classes()
+                .enumConstants
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -32,10 +33,11 @@ class KoEnumConstantDeclarationForKoLocalClassProviderTest {
     @Test
     fun `enum-constant-contains-local-class`() {
         // given
-        val sut = getSnippetFile("enum-constant-contains-local-class")
-            .classes()
-            .enumConstants
-            .first()
+        val sut =
+            getSnippetFile("enum-constant-contains-local-class")
+                .classes()
+                .enumConstants
+                .first()
 
         // then
         assertSoftly(sut) {

@@ -8,14 +8,14 @@ class KoPackageDeclarationForKoTextProviderTest {
     @Test
     fun `package-text`() {
         // given
-        val sut = getSnippetFile("package-text")
-            .packages
-            .first()
+        val sut =
+            getSnippetFile("package-text")
+                .packages
+                .first()
 
         // then
         sut.text shouldBeEqualTo "package com.samplepackage"
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kopackage/snippet/forkotextprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kopackage/snippet/forkotextprovider/", fileName)
 }

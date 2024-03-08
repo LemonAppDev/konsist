@@ -9,9 +9,10 @@ class KoFileDeclarationForKoImportAliasProviderTest {
     @Test
     fun `file-has-no-import-alias`() {
         // given
-        val sut = getSnippetFile("file-has-no-import-alias")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-has-no-import-alias")
+                .files
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -32,9 +33,10 @@ class KoFileDeclarationForKoImportAliasProviderTest {
     @Test
     fun `file-has-one-import-alias`() {
         // given
-        val sut = getSnippetFile("file-has-one-import-alias")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-has-one-import-alias")
+                .files
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -62,9 +64,10 @@ class KoFileDeclarationForKoImportAliasProviderTest {
     @Test
     fun `file-has-two-import-aliases`() {
         // given
-        val sut = getSnippetFile("file-has-two-import-aliases")
-            .files
-            .first()
+        val sut =
+            getSnippetFile("file-has-two-import-aliases")
+                .files
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -91,8 +94,9 @@ class KoFileDeclarationForKoImportAliasProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope(
-        "core/declaration/kofile/snippet/forkoimportaliasprovider/",
-        fileName,
-    )
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope(
+            "core/declaration/kofile/snippet/forkoimportaliasprovider/",
+            fileName,
+        )
 }

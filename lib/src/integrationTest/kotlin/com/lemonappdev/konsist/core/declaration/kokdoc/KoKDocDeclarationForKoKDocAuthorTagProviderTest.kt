@@ -15,10 +15,11 @@ class KoKDocDeclarationForKoKDocAuthorTagProviderTest {
     @Test
     fun `kdoc-without-author-tag`() {
         // given
-        val sut = getSnippetFile("kdoc-without-author-tag")
-            .classes()
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("kdoc-without-author-tag")
+                .classes()
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -35,13 +36,14 @@ class KoKDocDeclarationForKoKDocAuthorTagProviderTest {
         declarationName: String,
     ) {
         // given
-        val sut = (
-            getSnippetFile(fileName)
-                .declarations(includeNested = true)
-                .filterIsInstance<KoNameProvider>()
-                .first { it.name == declarationName } as KoKDocProvider
+        val sut =
+            (
+                getSnippetFile(fileName)
+                    .declarations(includeNested = true)
+                    .filterIsInstance<KoNameProvider>()
+                    .first { it.name == declarationName } as KoKDocProvider
             )
-            .kDoc
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -60,9 +62,10 @@ class KoKDocDeclarationForKoKDocAuthorTagProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("class-with-author-tag", "SampleClass"),
-            arguments("function-with-author-tag", "sampleMethod"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("class-with-author-tag", "SampleClass"),
+                arguments("function-with-author-tag", "sampleMethod"),
+            )
     }
 }

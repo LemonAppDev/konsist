@@ -8,10 +8,11 @@ class KoSetterDeclarationForKoInitializerProviderTest {
     @Test
     fun `setter-is-initialized-in-block-body`() {
         // given
-        val sut = getSnippetFile("setter-is-initialized-in-block-body")
-            .properties()
-            .first()
-            .setter
+        val sut =
+            getSnippetFile("setter-is-initialized-in-block-body")
+                .properties()
+                .first()
+                .setter
 
         // then
         sut?.isInitialized shouldBeEqualTo true
@@ -20,10 +21,11 @@ class KoSetterDeclarationForKoInitializerProviderTest {
     @Test
     fun `setter-is-initialized-in-expression-body`() {
         // given
-        val sut = getSnippetFile("setter-is-initialized-in-expression-body")
-            .properties()
-            .first()
-            .setter
+        val sut =
+            getSnippetFile("setter-is-initialized-in-expression-body")
+                .properties()
+                .first()
+                .setter
 
         // then
         sut?.isInitialized shouldBeEqualTo true
@@ -32,10 +34,11 @@ class KoSetterDeclarationForKoInitializerProviderTest {
     @Test
     fun `setter-is-not-initialized`() {
         // given
-        val sut = getSnippetFile("setter-is-not-initialized")
-            .properties()
-            .first()
-            .setter
+        val sut =
+            getSnippetFile("setter-is-not-initialized")
+                .properties()
+                .first()
+                .setter
 
         // then
         sut?.isInitialized shouldBeEqualTo false

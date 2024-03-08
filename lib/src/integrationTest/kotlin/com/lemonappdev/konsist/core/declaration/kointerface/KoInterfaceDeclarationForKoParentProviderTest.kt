@@ -14,9 +14,10 @@ class KoInterfaceDeclarationForKoParentProviderTest {
     @Test
     fun `interface-has-no-parents`() {
         // given
-        val sut = getSnippetFile("interface-has-no-parents")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-no-parents")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -37,25 +38,28 @@ class KoInterfaceDeclarationForKoParentProviderTest {
     @Test
     fun `interface-has-direct-internal-and-external-parents`() {
         // given
-        val sut = getSnippetFile("interface-has-direct-internal-and-external-parents")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-direct-internal-and-external-parents")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
-            parents.map { it.name } shouldBeEqualTo listOf(
-                "SampleParentInterface1",
-                "SampleParentInterface2",
-                "SampleExternalInterface",
-                "SampleExternalGenericInterface",
-            )
+            parents.map { it.name } shouldBeEqualTo
+                listOf(
+                    "SampleParentInterface1",
+                    "SampleParentInterface2",
+                    "SampleExternalInterface",
+                    "SampleExternalGenericInterface",
+                )
             numParents shouldBeEqualTo 4
-            parents().map { it.name } shouldBeEqualTo listOf(
-                "SampleParentInterface1",
-                "SampleParentInterface2",
-                "SampleExternalInterface",
-                "SampleExternalGenericInterface",
-            )
+            parents().map { it.name } shouldBeEqualTo
+                listOf(
+                    "SampleParentInterface1",
+                    "SampleParentInterface2",
+                    "SampleExternalInterface",
+                    "SampleExternalGenericInterface",
+                )
             numParents() shouldBeEqualTo 4
             countParents { it.name == "SampleParentInterface1" } shouldBeEqualTo 1
             countParents { it.hasNameStartingWith("SampleExternal") } shouldBeEqualTo 2
@@ -87,23 +91,26 @@ class KoInterfaceDeclarationForKoParentProviderTest {
     @Test
     fun `interface-has-indirect-parents`() {
         // given
-        val sut = getSnippetFile("interface-has-indirect-parents")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-indirect-parents")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
-            parents().map { it.name } shouldBeEqualTo listOf(
-                "SampleParentInterface",
-                "SampleExternalInterface",
-            )
+            parents().map { it.name } shouldBeEqualTo
+                listOf(
+                    "SampleParentInterface",
+                    "SampleExternalInterface",
+                )
             numParents(indirectParents = false) shouldBeEqualTo 2
-            parents(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
-                "SampleParentInterface",
-                "SampleExternalInterface",
-                "SampleParentInterface1",
-                "SampleParentInterface2",
-            )
+            parents(indirectParents = true).map { it.name } shouldBeEqualTo
+                listOf(
+                    "SampleParentInterface",
+                    "SampleExternalInterface",
+                    "SampleParentInterface1",
+                    "SampleParentInterface2",
+                )
             numParents(indirectParents = true) shouldBeEqualTo 4
             countParents(indirectParents = true) { it.name == "SampleParentInterface2" } shouldBeEqualTo 1
             countParents(indirectParents = true) { it.hasNameStartingWith("SampleParentInterface") } shouldBeEqualTo 3
@@ -143,22 +150,25 @@ class KoInterfaceDeclarationForKoParentProviderTest {
     @Test
     fun `interface-has-repeated-indirect-parents`() {
         // given
-        val sut = getSnippetFile("interface-has-repeated-indirect-parents")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-repeated-indirect-parents")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
-            parents().map { it.name } shouldBeEqualTo listOf(
-                "SampleParentInterface1",
-                "SampleExternalInterface",
-            )
+            parents().map { it.name } shouldBeEqualTo
+                listOf(
+                    "SampleParentInterface1",
+                    "SampleExternalInterface",
+                )
             numParents(indirectParents = false) shouldBeEqualTo 2
-            parents(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
-                "SampleParentInterface1",
-                "SampleExternalInterface",
-                "SampleParentInterface2",
-            )
+            parents(indirectParents = true).map { it.name } shouldBeEqualTo
+                listOf(
+                    "SampleParentInterface1",
+                    "SampleExternalInterface",
+                    "SampleParentInterface2",
+                )
             numParents(indirectParents = true) shouldBeEqualTo 3
         }
     }
@@ -166,9 +176,10 @@ class KoInterfaceDeclarationForKoParentProviderTest {
     @Test
     fun `interface-has-parent-defined-by-import-alias`() {
         // given
-        val sut = getSnippetFile("interface-has-parent-defined-by-import-alias")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-parent-defined-by-import-alias")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut.parents.first()) {
@@ -177,6 +188,5 @@ class KoInterfaceDeclarationForKoParentProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kointerface/snippet/forkoparentprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kointerface/snippet/forkoparentprovider/", fileName)
 }

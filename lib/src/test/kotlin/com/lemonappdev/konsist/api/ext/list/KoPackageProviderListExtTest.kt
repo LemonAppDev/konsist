@@ -13,15 +13,18 @@ class KoPackageProviderListExtTest {
         // given
         val packagee1: KoPackageDeclaration = mockk()
         val packagee2: KoPackageDeclaration = mockk()
-        val declaration1: KoPackageProvider = mockk {
-            every { packagee } returns packagee1
-        }
-        val declaration2: KoPackageProvider = mockk {
-            every { packagee } returns packagee2
-        }
-        val declaration3: KoPackageProvider = mockk {
-            every { packagee } returns null
-        }
+        val declaration1: KoPackageProvider =
+            mockk {
+                every { packagee } returns packagee1
+            }
+        val declaration2: KoPackageProvider =
+            mockk {
+                every { packagee } returns packagee2
+            }
+        val declaration3: KoPackageProvider =
+            mockk {
+                every { packagee } returns null
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when

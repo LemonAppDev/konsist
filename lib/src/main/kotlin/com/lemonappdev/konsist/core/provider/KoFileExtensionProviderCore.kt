@@ -11,10 +11,11 @@ internal interface KoFileExtensionProviderCore : KoFileExtensionProvider, KoBase
         get() = nameWithExtension.substringAfterLast('.')
 
     override val nameWithExtension: String
-        get() = ktFile
-            .name
-            .split(sep)
-            .last()
+        get() =
+            ktFile
+                .name
+                .split(sep)
+                .last()
 
     override fun hasExtension(extension: String): Boolean = extension == this.extension
 }

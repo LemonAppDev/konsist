@@ -8,10 +8,11 @@ class KoSetterDeclarationForKoTextProviderTest {
     @Test
     fun `setter-text`() {
         // given
-        val sut = getSnippetFile("setter-text")
-            .properties()
-            .first()
-            .setter
+        val sut =
+            getSnippetFile("setter-text")
+                .properties()
+                .first()
+                .setter
 
         // then
         sut
@@ -19,6 +20,5 @@ class KoSetterDeclarationForKoTextProviderTest {
             .shouldBeEqualTo("set(value) = println(value)")
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kosetter/snippet/forkotextprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kosetter/snippet/forkotextprovider/", fileName)
 }

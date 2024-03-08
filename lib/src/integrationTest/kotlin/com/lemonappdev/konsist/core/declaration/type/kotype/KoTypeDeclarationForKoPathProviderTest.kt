@@ -12,13 +12,14 @@ class KoTypeDeclarationForKoPathProviderTest {
     @MethodSource("provideValues")
     fun `declaration-file-path`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut?.path) {
@@ -31,13 +32,14 @@ class KoTypeDeclarationForKoPathProviderTest {
     @MethodSource("provideValues")
     fun `declaration-project-file-path`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         sut
@@ -52,13 +54,14 @@ class KoTypeDeclarationForKoPathProviderTest {
     @MethodSource("provideValues")
     fun `declaration-reside-in-file-path`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -73,13 +76,14 @@ class KoTypeDeclarationForKoPathProviderTest {
     @MethodSource("provideValues")
     fun `declaration-reside-in-project-file-path`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -90,31 +94,31 @@ class KoTypeDeclarationForKoPathProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/type/kotype/snippet/forkopathprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/type/kotype/snippet/forkopathprovider/", fileName)
 
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("nullable-kotlin-basic-type-path"),
-            arguments("not-nullable-kotlin-basic-type-path"),
-            arguments("nullable-kotlin-collection-type-path"),
-            arguments("not-nullable-kotlin-collection-type-path"),
-            arguments("nullable-class-type-path"),
-            arguments("not-nullable-class-type-path"),
-            arguments("nullable-interface-type-path"),
-            arguments("not-nullable-interface-type-path"),
-            arguments("nullable-object-type-path"),
-            arguments("not-nullable-object-type-path"),
-            arguments("nullable-function-type-path"),
-            arguments("not-nullable-function-type-path"),
-            arguments("nullable-import-alias-type-path"),
-            arguments("not-nullable-import-alias-type-path"),
-            arguments("nullable-typealias-type-path"),
-            arguments("not-nullable-typealias-type-path"),
-            arguments("nullable-external-type-path"),
-            arguments("not-nullable-external-type-path"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("nullable-kotlin-basic-type-path"),
+                arguments("not-nullable-kotlin-basic-type-path"),
+                arguments("nullable-kotlin-collection-type-path"),
+                arguments("not-nullable-kotlin-collection-type-path"),
+                arguments("nullable-class-type-path"),
+                arguments("not-nullable-class-type-path"),
+                arguments("nullable-interface-type-path"),
+                arguments("not-nullable-interface-type-path"),
+                arguments("nullable-object-type-path"),
+                arguments("not-nullable-object-type-path"),
+                arguments("nullable-function-type-path"),
+                arguments("not-nullable-function-type-path"),
+                arguments("nullable-import-alias-type-path"),
+                arguments("not-nullable-import-alias-type-path"),
+                arguments("nullable-typealias-type-path"),
+                arguments("not-nullable-typealias-type-path"),
+                arguments("nullable-external-type-path"),
+                arguments("not-nullable-external-type-path"),
+            )
     }
 }

@@ -15,9 +15,10 @@ class KoInterfaceDeclarationForKoFileDeclarationProviderTest {
     @Test
     fun `interface-has-no-declarations`() {
         // given
-        val sut = getSnippetFile("interface-has-no-declarations")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-no-declarations")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -31,9 +32,10 @@ class KoInterfaceDeclarationForKoFileDeclarationProviderTest {
     @Test
     fun `interface-has-two-declarations`() {
         // given
-        val sut = getSnippetFile("interface-has-two-declarations")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-two-declarations")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -48,29 +50,31 @@ class KoInterfaceDeclarationForKoFileDeclarationProviderTest {
     @Test
     fun `interface-contains-nested-and-local-declarations includeNested true includeLocal true`() {
         // given
-        val sut = getSnippetFile("interface-contains-nested-and-local-declarations")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-contains-nested-and-local-declarations")
+                .interfaces()
+                .first()
 
         // then
-        val expected = listOf(
-            "sampleFunction",
-            "sampleLocalProperty",
-            "SampleLocalClass",
-            "sampleLocalFunction",
-            "SampleClass",
-            "SampleClassNestedInsideClass",
-            "SampleObjectNestedInsideClass",
-            "SampleInterfaceNestedInsideClass",
-            "SampleObject",
-            "SampleClassNestedInsideObject",
-            "SampleObjectNestedInsideObject",
-            "SampleInterfaceNestedInsideObject",
-            "SampleInterface",
-            "SampleClassNestedInsideInterface",
-            "SampleObjectNestedInsideInterface",
-            "SampleInterfaceNestedInsideInterface",
-        )
+        val expected =
+            listOf(
+                "sampleFunction",
+                "sampleLocalProperty",
+                "SampleLocalClass",
+                "sampleLocalFunction",
+                "SampleClass",
+                "SampleClassNestedInsideClass",
+                "SampleObjectNestedInsideClass",
+                "SampleInterfaceNestedInsideClass",
+                "SampleObject",
+                "SampleClassNestedInsideObject",
+                "SampleObjectNestedInsideObject",
+                "SampleInterfaceNestedInsideObject",
+                "SampleInterface",
+                "SampleClassNestedInsideInterface",
+                "SampleObjectNestedInsideInterface",
+                "SampleInterfaceNestedInsideInterface",
+            )
 
         sut.declarations(includeNested = true, includeLocal = true)
             .filterIsInstance<KoNameProvider>()
@@ -81,26 +85,28 @@ class KoInterfaceDeclarationForKoFileDeclarationProviderTest {
     @Test
     fun `interface-contains-nested-and-local-declarations includeNested true includeLocal false`() {
         // given
-        val sut = getSnippetFile("interface-contains-nested-and-local-declarations")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-contains-nested-and-local-declarations")
+                .interfaces()
+                .first()
 
         // then
-        val expected = listOf(
-            "sampleFunction",
-            "SampleClass",
-            "SampleClassNestedInsideClass",
-            "SampleObjectNestedInsideClass",
-            "SampleInterfaceNestedInsideClass",
-            "SampleObject",
-            "SampleClassNestedInsideObject",
-            "SampleObjectNestedInsideObject",
-            "SampleInterfaceNestedInsideObject",
-            "SampleInterface",
-            "SampleClassNestedInsideInterface",
-            "SampleObjectNestedInsideInterface",
-            "SampleInterfaceNestedInsideInterface",
-        )
+        val expected =
+            listOf(
+                "sampleFunction",
+                "SampleClass",
+                "SampleClassNestedInsideClass",
+                "SampleObjectNestedInsideClass",
+                "SampleInterfaceNestedInsideClass",
+                "SampleObject",
+                "SampleClassNestedInsideObject",
+                "SampleObjectNestedInsideObject",
+                "SampleInterfaceNestedInsideObject",
+                "SampleInterface",
+                "SampleClassNestedInsideInterface",
+                "SampleObjectNestedInsideInterface",
+                "SampleInterfaceNestedInsideInterface",
+            )
 
         sut.declarations(includeNested = true, includeLocal = false)
             .filterIsInstance<KoNameProvider>()
@@ -111,20 +117,22 @@ class KoInterfaceDeclarationForKoFileDeclarationProviderTest {
     @Test
     fun `interface-contains-nested-and-local-declarations includeNested false includeLocal true`() {
         // given
-        val sut = getSnippetFile("interface-contains-nested-and-local-declarations")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-contains-nested-and-local-declarations")
+                .interfaces()
+                .first()
 
         // then
-        val expected = listOf(
-            "sampleFunction",
-            "sampleLocalProperty",
-            "SampleLocalClass",
-            "sampleLocalFunction",
-            "SampleClass",
-            "SampleObject",
-            "SampleInterface",
-        )
+        val expected =
+            listOf(
+                "sampleFunction",
+                "sampleLocalProperty",
+                "SampleLocalClass",
+                "sampleLocalFunction",
+                "SampleClass",
+                "SampleObject",
+                "SampleInterface",
+            )
 
         sut.declarations(includeNested = false, includeLocal = true)
             .filterIsInstance<KoNameProvider>()
@@ -135,17 +143,19 @@ class KoInterfaceDeclarationForKoFileDeclarationProviderTest {
     @Test
     fun `interface-contains-nested-and-local-declarations includeNested false includeLocal false`() {
         // given
-        val sut = getSnippetFile("interface-contains-nested-and-local-declarations")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-contains-nested-and-local-declarations")
+                .interfaces()
+                .first()
 
         // then
-        val expected = listOf(
-            "sampleFunction",
-            "SampleClass",
-            "SampleObject",
-            "SampleInterface",
-        )
+        val expected =
+            listOf(
+                "sampleFunction",
+                "SampleClass",
+                "SampleObject",
+                "SampleInterface",
+            )
 
         sut.declarations(includeNested = false, includeLocal = false)
             .filterIsInstance<KoNameProvider>()
@@ -156,9 +166,10 @@ class KoInterfaceDeclarationForKoFileDeclarationProviderTest {
     @Test
     fun `count-declarations`() {
         // given
-        val sut = getSnippetFile("count-declarations")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("count-declarations")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -181,9 +192,10 @@ class KoInterfaceDeclarationForKoFileDeclarationProviderTest {
     @Test
     fun `count-declarations-with-visibility-modifiers`() {
         // given
-        val sut = getSnippetFile("count-declarations-with-visibility-modifiers")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("count-declarations-with-visibility-modifiers")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -199,9 +211,10 @@ class KoInterfaceDeclarationForKoFileDeclarationProviderTest {
     @Test
     fun `contains-declarations-with-specified-conditions`() {
         // given
-        val sut = getSnippetFile("contains-declarations-with-specified-conditions")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("contains-declarations-with-specified-conditions")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {

@@ -8,13 +8,13 @@ class KotlinFileParserTest {
     @Test
     fun `assert-suppress-with-few-parameters-on-declarations-which-items-have-null-parent`() {
         // given
-        val sut = getSnippetFile("file-with-clrf-line-ending")
-            .classes()
+        val sut =
+            getSnippetFile("file-with-clrf-line-ending")
+                .classes()
 
         // then
         sut.assertTrue { it.resideInPackage("..mapper") }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/util/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/util/snippet/", fileName)
 }

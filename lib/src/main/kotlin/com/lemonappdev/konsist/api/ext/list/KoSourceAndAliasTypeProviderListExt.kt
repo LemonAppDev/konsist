@@ -15,11 +15,12 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceTypeOf(
     vararg kClasses: KClass<*>,
 ): List<T> =
     filter {
-        val hasMatchingSourceType = if (kClasses.isNotEmpty()) {
-            kClasses.any { kClass -> it.sourceType == kClass.simpleName }
-        } else {
-            false
-        }
+        val hasMatchingSourceType =
+            if (kClasses.isNotEmpty()) {
+                kClasses.any { kClass -> it.sourceType == kClass.simpleName }
+            } else {
+                false
+            }
 
         it.sourceType == kClass.simpleName || hasMatchingSourceType
     }
@@ -36,11 +37,12 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceTypeOf(
     vararg kClasses: KClass<*>,
 ): List<T> =
     filter {
-        val hasNoMatchingSourceType = if (kClasses.isNotEmpty()) {
-            kClasses.none { kClass -> it.sourceType == kClass.simpleName }
-        } else {
-            true
-        }
+        val hasNoMatchingSourceType =
+            if (kClasses.isNotEmpty()) {
+                kClasses.none { kClass -> it.sourceType == kClass.simpleName }
+            } else {
+                true
+            }
 
         it.sourceType != kClass.simpleName && hasNoMatchingSourceType
     }
@@ -52,9 +54,13 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceTypeOf(
  * @param names The source type name(s) to include.
  * @return A list containing declarations with the specified source types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceType(name: String, vararg names: String): List<T> = filter {
-    it.sourceType == name || names.any { type -> it.sourceType == type }
-}
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceType(
+    name: String,
+    vararg names: String,
+): List<T> =
+    filter {
+        it.sourceType == name || names.any { type -> it.sourceType == type }
+    }
 
 /**
  * List containing declarations without source type.
@@ -63,9 +69,13 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceType(name: String, vara
  * @param names The source type name(s) to exclude.
  * @return A list containing declarations without specified source types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceType(name: String, vararg names: String): List<T> = filter {
-    it.sourceType != name && names.none { type -> it.sourceType == type }
-}
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceType(
+    name: String,
+    vararg names: String,
+): List<T> =
+    filter {
+        it.sourceType != name && names.none { type -> it.sourceType == type }
+    }
 
 /**
  * List containing declarations with bare source type of.
@@ -114,7 +124,10 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBareSourceTypeOf(
  * @param names The bare source type name(s) to include.
  * @return A list containing declarations with the specified bare source types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withBareSourceType(name: String, vararg names: String): List<T> =
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withBareSourceType(
+    name: String,
+    vararg names: String,
+): List<T> =
     filter {
         it.bareSourceType == name || names.any { type -> it.bareSourceType == type }
     }
@@ -126,7 +139,10 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withBareSourceType(name: String, 
  * @param names The bare source type name(s) to exclude.
  * @return A list containing declarations without specified base source types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBareSourceType(name: String, vararg names: String): List<T> =
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBareSourceType(
+    name: String,
+    vararg names: String,
+): List<T> =
     filter {
         it.bareSourceType != name && names.none { type -> it.bareSourceType == type }
     }

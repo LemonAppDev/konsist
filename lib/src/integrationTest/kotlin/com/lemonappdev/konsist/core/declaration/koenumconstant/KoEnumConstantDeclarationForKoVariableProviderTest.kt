@@ -10,10 +10,11 @@ class KoEnumConstantDeclarationForKoVariableProviderTest {
     @Test
     fun `enum-constant-contains-no-variable`() {
         // given
-        val sut = getSnippetFile("enum-constant-contains-no-variable")
-            .classes()
-            .enumConstants
-            .first()
+        val sut =
+            getSnippetFile("enum-constant-contains-no-variable")
+                .classes()
+                .enumConstants
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -31,10 +32,11 @@ class KoEnumConstantDeclarationForKoVariableProviderTest {
     @Test
     fun `enum-constant-contains-variable`() {
         // given
-        val sut = getSnippetFile("enum-constant-contains-variable")
-            .classes()
-            .enumConstants
-            .first()
+        val sut =
+            getSnippetFile("enum-constant-contains-variable")
+                .classes()
+                .enumConstants
+                .first()
 
         // then
         assertSoftly(sut) {

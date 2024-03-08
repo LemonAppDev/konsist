@@ -9,10 +9,11 @@ class KoVariableDeclarationForKoVarModifierProviderTest {
     @Test
     fun `variable-has-no-var-modifier`() {
         // given
-        val sut = getSnippetFile("variable-has-no-var-modifier")
-            .functions()
-            .variables
-            .first()
+        val sut =
+            getSnippetFile("variable-has-no-var-modifier")
+                .functions()
+                .variables
+                .first()
 
         // then
         sut.hasVarModifier shouldBeEqualTo false
@@ -21,10 +22,11 @@ class KoVariableDeclarationForKoVarModifierProviderTest {
     @Test
     fun `variable-has-var-modifier`() {
         // given
-        val sut = getSnippetFile("variable-has-var-modifier")
-            .functions()
-            .variables
-            .first()
+        val sut =
+            getSnippetFile("variable-has-var-modifier")
+                .functions()
+                .variables
+                .first()
 
         // then
         sut.hasVarModifier shouldBeEqualTo true

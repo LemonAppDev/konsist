@@ -21,28 +21,30 @@ internal interface KoSourceAndAliasTypeProviderCore :
         get() = (this as? KoTypeDeclaration)?.sourceDeclaration is KoImportAliasDeclaration
 
     override val sourceType: String
-        get() = if (isAlias) {
-            file
-                .imports
-                .first { it.alias?.name == ktElement.text.removeSuffix("?") }
-                .name
-                .split(".")
-                .toMutableList()
-                .last { it.isNotBlank() }
-        } else {
-            text
-        }
+        get() =
+            if (isAlias) {
+                file
+                    .imports
+                    .first { it.alias?.name == ktElement.text.removeSuffix("?") }
+                    .name
+                    .split(".")
+                    .toMutableList()
+                    .last { it.isNotBlank() }
+            } else {
+                text
+            }
 
     override val bareSourceType: String
-        get() = if ((this as? KoTypeDeclaration)?.sourceDeclaration is KoTypeAliasDeclaration) {
-            ((this as? KoTypeDeclaration)?.sourceDeclaration as? KoTypeAliasDeclaration)?.type?.text ?: text
-        } else {
-            sourceType
-                .removeGenericTypeArguments()
-                .removeNullability()
-                .removePackage()
-                .removeBrackets()
-        }
+        get() =
+            if ((this as? KoTypeDeclaration)?.sourceDeclaration is KoTypeAliasDeclaration) {
+                ((this as? KoTypeDeclaration)?.sourceDeclaration as? KoTypeAliasDeclaration)?.type?.text ?: text
+            } else {
+                sourceType
+                    .removeGenericTypeArguments()
+                    .removeNullability()
+                    .removePackage()
+                    .removeBrackets()
+            }
 
     /*
      * Removes generic type arguments from the type.

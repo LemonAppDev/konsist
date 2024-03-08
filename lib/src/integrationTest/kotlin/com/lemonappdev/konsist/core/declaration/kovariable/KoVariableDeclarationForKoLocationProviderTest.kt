@@ -16,11 +16,15 @@ import org.junit.jupiter.params.provider.MethodSource
 class KoVariableDeclarationForKoLocationProviderTest {
     @ParameterizedTest
     @MethodSource("provideValuesForLocation")
-    fun `variable-location`(declarations: List<KoVariableProvider>, location: String) {
+    fun `variable-location`(
+        declarations: List<KoVariableProvider>,
+        location: String,
+    ) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         sut.location shouldBeEqualTo "${sut.path}:$location"
@@ -30,14 +34,16 @@ class KoVariableDeclarationForKoLocationProviderTest {
     @MethodSource("provideValuesForLocationWithText")
     fun `variable-location-with-text`(declarations: List<KoVariableProvider>) {
         // given
-        val projectPath = declarations
-            .variables
-            .first()
-            .projectPath
+        val projectPath =
+            declarations
+                .variables
+                .first()
+                .projectPath
 
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         val declaration = "Declaration:\nval sampleVariable = \"\""
@@ -54,22 +60,24 @@ class KoVariableDeclarationForKoLocationProviderTest {
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForLocation() = listOf(
-            arguments(getSnippetFile("variable-in-function-location").functions(), "2:5"),
-            arguments(getSnippetFile("variable-in-init-block-location").classes().initBlocks, "3:9"),
-            arguments(getSnippetFile("variable-in-enum-constant-location").classes().enumConstants, "3:9"),
-            arguments(getSnippetFile("variable-in-getter-location").properties().getters, "3:9"),
-            arguments(getSnippetFile("variable-in-setter-location").properties().setters, "3:9"),
-        )
+        fun provideValuesForLocation() =
+            listOf(
+                arguments(getSnippetFile("variable-in-function-location").functions(), "2:5"),
+                arguments(getSnippetFile("variable-in-init-block-location").classes().initBlocks, "3:9"),
+                arguments(getSnippetFile("variable-in-enum-constant-location").classes().enumConstants, "3:9"),
+                arguments(getSnippetFile("variable-in-getter-location").properties().getters, "3:9"),
+                arguments(getSnippetFile("variable-in-setter-location").properties().setters, "3:9"),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForLocationWithText() = listOf(
-            arguments(getSnippetFile("variable-in-function-location-with-text").functions()),
-            arguments(getSnippetFile("variable-in-init-block-location-with-text").classes().initBlocks),
-            arguments(getSnippetFile("variable-in-enum-constant-location-with-text").classes().enumConstants),
-            arguments(getSnippetFile("variable-in-getter-location-with-text").properties().getters),
-            arguments(getSnippetFile("variable-in-setter-location-with-text").properties().setters),
-        )
+        fun provideValuesForLocationWithText() =
+            listOf(
+                arguments(getSnippetFile("variable-in-function-location-with-text").functions()),
+                arguments(getSnippetFile("variable-in-init-block-location-with-text").classes().initBlocks),
+                arguments(getSnippetFile("variable-in-enum-constant-location-with-text").classes().enumConstants),
+                arguments(getSnippetFile("variable-in-getter-location-with-text").properties().getters),
+                arguments(getSnippetFile("variable-in-setter-location-with-text").properties().setters),
+            )
     }
 }

@@ -8,11 +8,12 @@ class KoConstructorDeclarationForKoContainingFileProviderTest {
     @Test
     fun `constructor-containing-file`() {
         // given
-        val sut = getSnippetFile("constructor-containing-file")
-            .classes()
-            .first()
-            .constructors
-            .first()
+        val sut =
+            getSnippetFile("constructor-containing-file")
+                .classes()
+                .first()
+                .constructors
+                .first()
 
         // then
         sut

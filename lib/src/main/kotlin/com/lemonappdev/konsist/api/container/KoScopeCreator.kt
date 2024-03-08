@@ -21,7 +21,11 @@ interface KoScopeCreator {
      * @param ignoreBuildConfig If true, build config files and directories such as Gradle buildSrc directory will be ignored.
      * @return a [KoScope] containing all of Kotlin files in the project.
      */
-    fun scopeFromProject(moduleName: String? = null, sourceSetName: String? = null, ignoreBuildConfig: Boolean = true): KoScope
+    fun scopeFromProject(
+        moduleName: String? = null,
+        sourceSetName: String? = null,
+        ignoreBuildConfig: Boolean = true,
+    ): KoScope
 
     /**
      * Creates a [KoScope] containing all of Kotlin files in the module.
@@ -31,7 +35,10 @@ interface KoScopeCreator {
      * @param moduleNames The name(s) of the module(s).
      * @return a [KoScope] containing all of Kotlin files in the module.
      */
-    fun scopeFromModule(moduleName: String, vararg moduleNames: String): KoScope
+    fun scopeFromModule(
+        moduleName: String,
+        vararg moduleNames: String,
+    ): KoScope
 
     /**
      * Creates a [KoScope] containing all of Kotlin files in the module.
@@ -51,7 +58,11 @@ interface KoScopeCreator {
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all of Kotlin files in the given package.
      */
-    fun scopeFromPackage(packagee: String, moduleName: String? = null, sourceSetName: String? = null): KoScope
+    fun scopeFromPackage(
+        packagee: String,
+        moduleName: String? = null,
+        sourceSetName: String? = null,
+    ): KoScope
 
     /**
      * Creates a [KoScope] containing all of Kotlin files in source set. If the source set is present in multiple modules
@@ -62,7 +73,10 @@ interface KoScopeCreator {
      * @param sourceSetNames The name(s) of the source set(s).
      * @return a [KoScope] containing all of Kotlin files in source set.
      */
-    fun scopeFromSourceSet(sourceSetName: String, vararg sourceSetNames: String): KoScope
+    fun scopeFromSourceSet(
+        sourceSetName: String,
+        vararg sourceSetNames: String,
+    ): KoScope
 
     /**
      * Creates a [KoScope] containing all of Kotlin files in source set. If the source set is present in multiple modules
@@ -85,7 +99,10 @@ interface KoScopeCreator {
      *
      * @See [scopeFromProduction]
      */
-    fun scopeFromProduction(moduleName: String? = null, sourceSetName: String? = null): KoScope
+    fun scopeFromProduction(
+        moduleName: String? = null,
+        sourceSetName: String? = null,
+    ): KoScope
 
     /**
      * Creates a [KoScope] containing all of Kotlin files in the test source sets.
@@ -98,7 +115,10 @@ interface KoScopeCreator {
      *
      * @See [scopeFromTest]
      */
-    fun scopeFromTest(moduleName: String? = null, sourceSetName: String? = null): KoScope
+    fun scopeFromTest(
+        moduleName: String? = null,
+        sourceSetName: String? = null,
+    ): KoScope
 
     /**
      * Creates a [KoScope] containing all of Kotlin files in the given directory.
@@ -107,7 +127,10 @@ interface KoScopeCreator {
      * @param paths The path(s) relative to the project root directory
      * @return a [KoScope] containing all of Kotlin files in the given directory.
      */
-    fun scopeFromDirectory(path: String, vararg paths: String): KoScope
+    fun scopeFromDirectory(
+        path: String,
+        vararg paths: String,
+    ): KoScope
 
     /**
      * Creates a [KoScope] containing all of Kotlin files in the given directories.
@@ -125,7 +148,10 @@ interface KoScopeCreator {
      * @param paths The absolute path(s) to the project root directory
      * @return a [KoScope] containing all of Kotlin files in the given directory.
      */
-    fun scopeFromExternalDirectory(absolutePath: String, vararg paths: String): KoScope
+    fun scopeFromExternalDirectory(
+        absolutePath: String,
+        vararg paths: String,
+    ): KoScope
 
     /**
      * Creates a [KoScope] containing all of Kotlin files in the given directories.
@@ -143,7 +169,10 @@ interface KoScopeCreator {
      * @param paths The path(s) relative to the project root directory
      * @return a [KoScope] of a given file.
      */
-    fun scopeFromFile(path: String, vararg paths: String): KoScope
+    fun scopeFromFile(
+        path: String,
+        vararg paths: String,
+    ): KoScope
 
     /**
      * Creates a [KoScope] of a given files.

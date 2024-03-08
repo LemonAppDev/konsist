@@ -10,12 +10,14 @@ class KoKotlinTypeProviderListExtTest {
     @Test
     fun `withKotlinType() returns type with Kotlin basic type`() {
         // given
-        val type1: KoKotlinTypeProvider = mockk {
-            every { isKotlinType } returns true
-        }
-        val type2: KoKotlinTypeProvider = mockk {
-            every { isKotlinType } returns false
-        }
+        val type1: KoKotlinTypeProvider =
+            mockk {
+                every { isKotlinType } returns true
+            }
+        val type2: KoKotlinTypeProvider =
+            mockk {
+                every { isKotlinType } returns false
+            }
         val types = listOf(type1, type2)
 
         // when
@@ -28,12 +30,14 @@ class KoKotlinTypeProviderListExtTest {
     @Test
     fun `withoutKotlinType() returns type without Kotlin basic type`() {
         // given
-        val type1: KoKotlinTypeProvider = mockk {
-            every { isKotlinType } returns true
-        }
-        val type2: KoKotlinTypeProvider = mockk {
-            every { isKotlinType } returns false
-        }
+        val type1: KoKotlinTypeProvider =
+            mockk {
+                every { isKotlinType } returns true
+            }
+        val type2: KoKotlinTypeProvider =
+            mockk {
+                every { isKotlinType } returns false
+            }
         val types = listOf(type1, type2)
 
         // when
@@ -46,12 +50,14 @@ class KoKotlinTypeProviderListExtTest {
     @Test
     fun `withKotlinBasicType() returns type with Kotlin basic type`() {
         // given
-        val type1: KoKotlinTypeProvider = mockk {
-            every { isKotlinBasicType } returns true
-        }
-        val type2: KoKotlinTypeProvider = mockk {
-            every { isKotlinBasicType } returns false
-        }
+        val type1: KoKotlinTypeProvider =
+            mockk {
+                every { isKotlinBasicType } returns true
+            }
+        val type2: KoKotlinTypeProvider =
+            mockk {
+                every { isKotlinBasicType } returns false
+            }
         val types = listOf(type1, type2)
 
         // when
@@ -64,12 +70,14 @@ class KoKotlinTypeProviderListExtTest {
     @Test
     fun `withoutKotlinBasicType() returns type without Kotlin basic type`() {
         // given
-        val type1: KoKotlinTypeProvider = mockk {
-            every { isKotlinBasicType } returns true
-        }
-        val type2: KoKotlinTypeProvider = mockk {
-            every { isKotlinBasicType } returns false
-        }
+        val type1: KoKotlinTypeProvider =
+            mockk {
+                every { isKotlinBasicType } returns true
+            }
+        val type2: KoKotlinTypeProvider =
+            mockk {
+                every { isKotlinBasicType } returns false
+            }
         val types = listOf(type1, type2)
 
         // when
@@ -82,12 +90,14 @@ class KoKotlinTypeProviderListExtTest {
     @Test
     fun `withKotlinCollectionType() returns type with Kotlin basic type`() {
         // given
-        val type1: KoKotlinTypeProvider = mockk {
-            every { isKotlinCollectionType } returns true
-        }
-        val type2: KoKotlinTypeProvider = mockk {
-            every { isKotlinCollectionType } returns false
-        }
+        val type1: KoKotlinTypeProvider =
+            mockk {
+                every { isKotlinCollectionType } returns true
+            }
+        val type2: KoKotlinTypeProvider =
+            mockk {
+                every { isKotlinCollectionType } returns false
+            }
         val types = listOf(type1, type2)
 
         // when
@@ -100,12 +110,14 @@ class KoKotlinTypeProviderListExtTest {
     @Test
     fun `withoutKotlinCollectionType() returns type without Kotlin basic type`() {
         // given
-        val type1: KoKotlinTypeProvider = mockk {
-            every { isKotlinCollectionType } returns true
-        }
-        val type2: KoKotlinTypeProvider = mockk {
-            every { isKotlinCollectionType } returns false
-        }
+        val type1: KoKotlinTypeProvider =
+            mockk {
+                every { isKotlinCollectionType } returns true
+            }
+        val type2: KoKotlinTypeProvider =
+            mockk {
+                every { isKotlinCollectionType } returns false
+            }
         val types = listOf(type1, type2)
 
         // when

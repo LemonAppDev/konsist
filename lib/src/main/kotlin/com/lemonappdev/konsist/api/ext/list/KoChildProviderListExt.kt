@@ -21,8 +21,7 @@ fun <T : KoChildProvider> List<T>.children(indirectChildren: Boolean = false): L
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations with class or interface child.
  */
-fun <T : KoChildProvider> List<T>.withChildren(indirectChildren: Boolean = false): List<T> =
-    filter { it.hasChildren(indirectChildren) }
+fun <T : KoChildProvider> List<T>.withChildren(indirectChildren: Boolean = false): List<T> = filter { it.hasChildren(indirectChildren) }
 
 /**
  * List containing declarations with no child - class does not extend any class and does not implement any interface.
@@ -46,9 +45,10 @@ fun <T : KoChildProvider> List<T>.withChildNamed(
     name: String,
     vararg names: String,
     indirectChildren: Boolean = false,
-): List<T> = filter {
-    it.hasChildWithName(name, *names, indirectChildren = indirectChildren)
-}
+): List<T> =
+    filter {
+        it.hasChildWithName(name, *names, indirectChildren = indirectChildren)
+    }
 
 /**
  * List containing declarations without any of specified children.
@@ -62,9 +62,10 @@ fun <T : KoChildProvider> List<T>.withoutChildNamed(
     name: String,
     vararg names: String,
     indirectChildren: Boolean = false,
-): List<T> = filterNot {
-    it.hasChildWithName(name, *names, indirectChildren = indirectChildren)
-}
+): List<T> =
+    filterNot {
+        it.hasChildWithName(name, *names, indirectChildren = indirectChildren)
+    }
 
 /**
  * List containing declarations that have all specified children.
@@ -78,9 +79,10 @@ fun <T : KoChildProvider> List<T>.withAllChildrenNamed(
     name: String,
     vararg names: String,
     indirectChildren: Boolean = false,
-): List<T> = filter {
-    it.hasChildrenWithAllNames(name, *names, indirectChildren = indirectChildren)
-}
+): List<T> =
+    filter {
+        it.hasChildrenWithAllNames(name, *names, indirectChildren = indirectChildren)
+    }
 
 /**
  * List containing declarations without all specified children.
@@ -94,9 +96,10 @@ fun <T : KoChildProvider> List<T>.withoutAllChildrenNamed(
     name: String,
     vararg names: String,
     indirectChildren: Boolean = false,
-): List<T> = filterNot {
-    it.hasChildrenWithAllNames(name, *names, indirectChildren = indirectChildren)
-}
+): List<T> =
+    filterNot {
+        it.hasChildrenWithAllNames(name, *names, indirectChildren = indirectChildren)
+    }
 
 /**
  * List containing declarations that have at least one child satisfying the provided predicate.
@@ -108,9 +111,10 @@ fun <T : KoChildProvider> List<T>.withoutAllChildrenNamed(
 fun <T : KoChildProvider> List<T>.withChild(
     indirectChildren: Boolean = false,
     predicate: (KoChildDeclaration) -> Boolean,
-): List<T> = filter {
-    it.hasChild(indirectChildren, predicate)
-}
+): List<T> =
+    filter {
+        it.hasChild(indirectChildren, predicate)
+    }
 
 /**
  * List containing declarations that not have child satisfying the provided predicate.
@@ -122,9 +126,10 @@ fun <T : KoChildProvider> List<T>.withChild(
 fun <T : KoChildProvider> List<T>.withoutChild(
     indirectChildren: Boolean = false,
     predicate: (KoChildDeclaration) -> Boolean,
-): List<T> = filterNot {
-    it.hasChild(indirectChildren, predicate)
-}
+): List<T> =
+    filterNot {
+        it.hasChild(indirectChildren, predicate)
+    }
 
 /**
  * List containing declarations that have all children satisfying the provided predicate.
@@ -136,9 +141,10 @@ fun <T : KoChildProvider> List<T>.withoutChild(
 fun <T : KoChildProvider> List<T>.withAllChildren(
     indirectChildren: Boolean = false,
     predicate: (KoChildDeclaration) -> Boolean,
-): List<T> = filter {
-    it.hasAllChildren(indirectChildren, predicate)
-}
+): List<T> =
+    filter {
+        it.hasAllChildren(indirectChildren, predicate)
+    }
 
 /**
  * List containing declarations that have at least one child not satisfying the provided predicate.
@@ -150,9 +156,10 @@ fun <T : KoChildProvider> List<T>.withAllChildren(
 fun <T : KoChildProvider> List<T>.withoutAllChildren(
     indirectChildren: Boolean = false,
     predicate: (KoChildDeclaration) -> Boolean,
-): List<T> = filterNot {
-    it.hasAllChildren(indirectChildren, predicate)
-}
+): List<T> =
+    filterNot {
+        it.hasAllChildren(indirectChildren, predicate)
+    }
 
 /**
  * List containing declarations with child declarations satisfying the predicate.
@@ -164,9 +171,10 @@ fun <T : KoChildProvider> List<T>.withoutAllChildren(
 fun <T : KoChildProvider> List<T>.withChildren(
     indirectChildren: Boolean = false,
     predicate: (List<KoChildDeclaration>) -> Boolean,
-): List<T> = filter {
-    predicate(it.children(indirectChildren))
-}
+): List<T> =
+    filter {
+        predicate(it.children(indirectChildren))
+    }
 
 /**
  * List containing declarations without child declarations satisfying the predicate.
@@ -178,8 +186,7 @@ fun <T : KoChildProvider> List<T>.withChildren(
 fun <T : KoChildProvider> List<T>.withoutChildren(
     indirectChildren: Boolean = false,
     predicate: (List<KoChildDeclaration>) -> Boolean,
-): List<T> =
-    filterNot { predicate(it.children(indirectChildren)) }
+): List<T> = filterNot { predicate(it.children(indirectChildren)) }
 
 /**
  * List containing declarations that have at least one child of the specified `KClass` type.
@@ -193,8 +200,7 @@ fun <T : KoChildProvider> List<T>.withChildOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectChildren: Boolean = false,
-): List<T> =
-    filter { it.hasChildOf(kClass, *kClasses, indirectChildren = indirectChildren) }
+): List<T> = filter { it.hasChildOf(kClass, *kClasses, indirectChildren = indirectChildren) }
 
 /**
  * List containing declarations without any child of the specified `KClass` type.
@@ -208,8 +214,7 @@ fun <T : KoChildProvider> List<T>.withoutChildOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectChildren: Boolean = false,
-): List<T> =
-    filterNot { it.hasChildOf(kClass, *kClasses, indirectChildren = indirectChildren) }
+): List<T> = filterNot { it.hasChildOf(kClass, *kClasses, indirectChildren = indirectChildren) }
 
 /**
  * List containing declarations that have all children of the specified `KClass` type.
@@ -223,8 +228,7 @@ fun <T : KoChildProvider> List<T>.withAllChildrenOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectChildren: Boolean = false,
-): List<T> =
-    filter { it.hasAllChildrenOf(kClass, *kClasses, indirectChildren = indirectChildren) }
+): List<T> = filter { it.hasAllChildrenOf(kClass, *kClasses, indirectChildren = indirectChildren) }
 
 /**
  * List containing declarations without all specified `KClass` type children.
@@ -238,5 +242,4 @@ fun <T : KoChildProvider> List<T>.withoutAllChildrenOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectChildren: Boolean = false,
-): List<T> =
-    filterNot { it.hasAllChildrenOf(kClass, *kClasses, indirectChildren = indirectChildren) }
+): List<T> = filterNot { it.hasAllChildrenOf(kClass, *kClasses, indirectChildren = indirectChildren) }

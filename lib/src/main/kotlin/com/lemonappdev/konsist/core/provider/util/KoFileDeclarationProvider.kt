@@ -59,21 +59,24 @@ internal object KoFileDeclarationProvider {
      * @return A list of [KoFileDeclaration]s representing the parsed Kotlin files.
      * @throws Exception if there's an issue accessing the file system or parsing the files.
      */
-    suspend fun getKoFileDeclarations(): List<KoFileDeclaration> = coroutineScope {
-        val currentDeferred: Deferred<List<KoFileDeclaration>> = mutex.withLock {
-            createKoFilesDeclarationDeferred ?: async(Dispatchers.IO) {
-                projectRootDir.walk()
-                    .filter { it.isKotlinFile }
-                    .map { async { parseKotlinFile(it) } }
-                    .toList()
-                    .awaitAll()
-            }.also { createKoFilesDeclarationDeferred = it }
+    suspend fun getKoFileDeclarations(): List<KoFileDeclaration> =
+        coroutineScope {
+            val currentDeferred: Deferred<List<KoFileDeclaration>> =
+                mutex.withLock {
+                    createKoFilesDeclarationDeferred ?: async(Dispatchers.IO) {
+                        projectRootDir.walk()
+                            .filter { it.isKotlinFile }
+                            .map { async { parseKotlinFile(it) } }
+                            .toList()
+                            .awaitAll()
+                    }.also { createKoFilesDeclarationDeferred = it }
+                }
+
+            currentDeferred.await()
         }
 
-        currentDeferred.await()
-    }
-
-    private suspend fun parseKotlinFile(it: File): KoFileDeclaration = coroutineScope {
-        async { it.toKoFile() }.await()
-    }
+    private suspend fun parseKotlinFile(it: File): KoFileDeclaration =
+        coroutineScope {
+            async { it.toKoFile() }.await()
+        }
 }

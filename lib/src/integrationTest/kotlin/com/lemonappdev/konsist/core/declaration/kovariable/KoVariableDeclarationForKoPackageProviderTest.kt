@@ -17,9 +17,10 @@ class KoVariableDeclarationForKoPackageProviderTest {
     @MethodSource("provideValuesWithoutPackage")
     fun `variable-is-not-in-package`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         sut.packagee shouldBeEqualTo null
@@ -29,9 +30,10 @@ class KoVariableDeclarationForKoPackageProviderTest {
     @MethodSource("provideValuesWithPackage")
     fun `variable-is-in-package`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
@@ -43,22 +45,24 @@ class KoVariableDeclarationForKoPackageProviderTest {
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesWithoutPackage() = listOf(
-            arguments(getSnippetFile("variable-in-function-is-not-in-package").functions()),
-            arguments(getSnippetFile("variable-in-init-block-is-not-in-package").classes().initBlocks),
-            arguments(getSnippetFile("variable-in-enum-constant-is-not-in-package").classes().enumConstants),
-            arguments(getSnippetFile("variable-in-getter-is-not-in-package").properties().getters),
-            arguments(getSnippetFile("variable-in-setter-is-not-in-package").properties().setters),
-        )
+        fun provideValuesWithoutPackage() =
+            listOf(
+                arguments(getSnippetFile("variable-in-function-is-not-in-package").functions()),
+                arguments(getSnippetFile("variable-in-init-block-is-not-in-package").classes().initBlocks),
+                arguments(getSnippetFile("variable-in-enum-constant-is-not-in-package").classes().enumConstants),
+                arguments(getSnippetFile("variable-in-getter-is-not-in-package").properties().getters),
+                arguments(getSnippetFile("variable-in-setter-is-not-in-package").properties().setters),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesWithPackage() = listOf(
-            arguments(getSnippetFile("variable-in-function-is-in-package").functions()),
-            arguments(getSnippetFile("variable-in-init-block-is-in-package").classes().initBlocks),
-            arguments(getSnippetFile("variable-in-enum-constant-is-in-package").classes().enumConstants),
-            arguments(getSnippetFile("variable-in-getter-is-in-package").properties().getters),
-            arguments(getSnippetFile("variable-in-setter-is-in-package").properties().setters),
-        )
+        fun provideValuesWithPackage() =
+            listOf(
+                arguments(getSnippetFile("variable-in-function-is-in-package").functions()),
+                arguments(getSnippetFile("variable-in-init-block-is-in-package").classes().initBlocks),
+                arguments(getSnippetFile("variable-in-enum-constant-is-in-package").classes().enumConstants),
+                arguments(getSnippetFile("variable-in-getter-is-in-package").properties().getters),
+                arguments(getSnippetFile("variable-in-setter-is-in-package").properties().setters),
+            )
     }
 }

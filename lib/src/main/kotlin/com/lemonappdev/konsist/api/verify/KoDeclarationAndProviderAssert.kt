@@ -282,7 +282,10 @@ fun <E : KoBaseProvider> Sequence<E?>.assertNotEmpty(
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
 @Deprecated("Will be removed in v0.16.0", ReplaceWith("assertTrue"))
-fun <E : KoBaseProvider> E.assert(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
+fun <E : KoBaseProvider> E.assert(
+    additionalMessage: String? = null,
+    function: (E) -> Boolean?,
+): Unit {
     listOf(this).assert(additionalMessage, function, positiveCheck = true)
 }
 
@@ -295,7 +298,10 @@ fun <E : KoBaseProvider> E.assert(additionalMessage: String? = null, function: (
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
 @Deprecated("Will be removed in v0.16.0", ReplaceWith("assertFalse"))
-fun <E : KoBaseProvider> E.assertNot(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
+fun <E : KoBaseProvider> E.assertNot(
+    additionalMessage: String? = null,
+    function: (E) -> Boolean?,
+): Unit {
     listOf(this).assert(additionalMessage, function, positiveCheck = false)
 }
 
@@ -308,7 +314,10 @@ fun <E : KoBaseProvider> E.assertNot(additionalMessage: String? = null, function
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
 @Deprecated("Will be removed in v0.16.0", ReplaceWith("assertTrue"))
-fun <E : KoBaseProvider> List<E>.assert(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
+fun <E : KoBaseProvider> List<E>.assert(
+    additionalMessage: String? = null,
+    function: (E) -> Boolean?,
+): Unit {
     assert(additionalMessage, function, positiveCheck = true)
 }
 
@@ -321,7 +330,10 @@ fun <E : KoBaseProvider> List<E>.assert(additionalMessage: String? = null, funct
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
 @Deprecated("Will be removed in v0.16.0", ReplaceWith("assertFalse"))
-fun <E : KoBaseProvider> List<E>.assertNot(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
+fun <E : KoBaseProvider> List<E>.assertNot(
+    additionalMessage: String? = null,
+    function: (E) -> Boolean?,
+): Unit {
     assert(additionalMessage, function, positiveCheck = false)
 }
 
@@ -334,7 +346,10 @@ fun <E : KoBaseProvider> List<E>.assertNot(additionalMessage: String? = null, fu
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
 @Deprecated("Will be removed in v0.16.0", ReplaceWith("assertTrue"))
-fun <E : KoBaseProvider> Sequence<E>.assert(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
+fun <E : KoBaseProvider> Sequence<E>.assert(
+    additionalMessage: String? = null,
+    function: (E) -> Boolean?,
+): Unit {
     this.toList().assert(additionalMessage, function, true)
 }
 
@@ -347,6 +362,9 @@ fun <E : KoBaseProvider> Sequence<E>.assert(additionalMessage: String? = null, f
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
 @Deprecated("Will be removed in v0.16.0", ReplaceWith("assertFalse"))
-fun <E : KoBaseProvider> Sequence<E>.assertNot(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
+fun <E : KoBaseProvider> Sequence<E>.assertNot(
+    additionalMessage: String? = null,
+    function: (E) -> Boolean?,
+): Unit {
     this.toList().assert(additionalMessage, function, false)
 }

@@ -15,10 +15,11 @@ class KoKDocDeclarationForKoKDocExceptionTagProviderTest {
     @Test
     fun `kdoc-without-exception-tag`() {
         // given
-        val sut = getSnippetFile("kdoc-without-exception-tag")
-            .classes()
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("kdoc-without-exception-tag")
+                .classes()
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -35,13 +36,14 @@ class KoKDocDeclarationForKoKDocExceptionTagProviderTest {
         declarationName: String,
     ) {
         // given
-        val sut = (
-            getSnippetFile(fileName)
-                .declarations(includeNested = true)
-                .filterIsInstance<KoNameProvider>()
-                .first { it.name == declarationName } as KoKDocProvider
+        val sut =
+            (
+                getSnippetFile(fileName)
+                    .declarations(includeNested = true)
+                    .filterIsInstance<KoNameProvider>()
+                    .first { it.name == declarationName } as KoKDocProvider
             )
-            .kDoc
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -59,9 +61,10 @@ class KoKDocDeclarationForKoKDocExceptionTagProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("class-with-exception-tag", "SampleClass"),
-            arguments("function-with-exception-tag", "sampleMethod"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("class-with-exception-tag", "SampleClass"),
+                arguments("function-with-exception-tag", "sampleMethod"),
+            )
     }
 }

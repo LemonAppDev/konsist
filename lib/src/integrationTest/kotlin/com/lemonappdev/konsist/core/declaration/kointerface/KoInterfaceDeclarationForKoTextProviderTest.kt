@@ -8,22 +8,22 @@ class KoInterfaceDeclarationForKoTextProviderTest {
     @Test
     fun `interface-text`() {
         // given
-        val sut = getSnippetFile("interface-text")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-text")
+                .interfaces()
+                .first()
 
         // then
         sut
             .text
             .shouldBeEqualTo(
                 """
-                    interface SampleInterface {
-                        val sampleProperty: Int
-                    }
+                interface SampleInterface {
+                    val sampleProperty: Int
+                }
                 """.trimIndent(),
             )
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kointerface/snippet/forkotextprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kointerface/snippet/forkotextprovider/", fileName)
 }

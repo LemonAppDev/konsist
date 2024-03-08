@@ -12,13 +12,14 @@ class KoTypeDeclarationForKoContainingDeclarationProviderTest {
     @MethodSource("provideValues")
     fun `parent-declaration`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo "sampleProperty1"
@@ -30,25 +31,26 @@ class KoTypeDeclarationForKoContainingDeclarationProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("nullable-kotlin-basic-type-containing-declaration"),
-            arguments("not-nullable-kotlin-basic-type-containing-declaration"),
-            arguments("nullable-kotlin-collection-type-containing-declaration"),
-            arguments("not-nullable-kotlin-collection-type-containing-declaration"),
-            arguments("nullable-class-type-containing-declaration"),
-            arguments("not-nullable-class-type-containing-declaration"),
-            arguments("nullable-interface-type-containing-declaration"),
-            arguments("not-nullable-interface-type-containing-declaration"),
-            arguments("nullable-object-type-containing-declaration"),
-            arguments("not-nullable-object-type-containing-declaration"),
-            arguments("nullable-function-type-containing-declaration"),
-            arguments("not-nullable-function-type-containing-declaration"),
-            arguments("nullable-import-alias-type-containing-declaration"),
-            arguments("not-nullable-import-alias-type-containing-declaration"),
-            arguments("nullable-typealias-type-containing-declaration"),
-            arguments("not-nullable-typealias-type-containing-declaration"),
-            arguments("nullable-external-type-containing-declaration"),
-            arguments("not-nullable-external-type-containing-declaration"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("nullable-kotlin-basic-type-containing-declaration"),
+                arguments("not-nullable-kotlin-basic-type-containing-declaration"),
+                arguments("nullable-kotlin-collection-type-containing-declaration"),
+                arguments("not-nullable-kotlin-collection-type-containing-declaration"),
+                arguments("nullable-class-type-containing-declaration"),
+                arguments("not-nullable-class-type-containing-declaration"),
+                arguments("nullable-interface-type-containing-declaration"),
+                arguments("not-nullable-interface-type-containing-declaration"),
+                arguments("nullable-object-type-containing-declaration"),
+                arguments("not-nullable-object-type-containing-declaration"),
+                arguments("nullable-function-type-containing-declaration"),
+                arguments("not-nullable-function-type-containing-declaration"),
+                arguments("nullable-import-alias-type-containing-declaration"),
+                arguments("not-nullable-import-alias-type-containing-declaration"),
+                arguments("nullable-typealias-type-containing-declaration"),
+                arguments("not-nullable-typealias-type-containing-declaration"),
+                arguments("nullable-external-type-containing-declaration"),
+                arguments("not-nullable-external-type-containing-declaration"),
+            )
     }
 }

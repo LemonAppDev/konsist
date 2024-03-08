@@ -9,9 +9,10 @@ class KoPropertyDeclarationForKoNullableTypeProviderTest {
     @Test
     fun `property-without-type`() {
         // given
-        val sut = getSnippetFile("property-without-type")
-            .properties(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("property-without-type")
+                .properties(includeNested = true)
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -26,9 +27,10 @@ class KoPropertyDeclarationForKoNullableTypeProviderTest {
     @Test
     fun `property-with-type`() {
         // given
-        val sut = getSnippetFile("property-with-type")
-            .properties(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("property-with-type")
+                .properties(includeNested = true)
+                .first()
 
         // then
         assertSoftly(sut) {

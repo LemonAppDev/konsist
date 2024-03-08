@@ -9,11 +9,12 @@ class KoKotlinTypeDeclarationForKoPackageProviderTest {
     @Test
     fun `nullable-kotlin-basic-type-package`() {
         // given
-        val sut = getSnippetFile("nullable-kotlin-basic-type-package")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoKotlinTypeDeclaration
+        val sut =
+            getSnippetFile("nullable-kotlin-basic-type-package")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         sut?.packagee?.fullyQualifiedName shouldBeEqualTo "kotlin"
@@ -22,11 +23,12 @@ class KoKotlinTypeDeclarationForKoPackageProviderTest {
     @Test
     fun `not-nullable-kotlin-basic-type-package`() {
         // given
-        val sut = getSnippetFile("not-nullable-kotlin-basic-type-package")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoKotlinTypeDeclaration
+        val sut =
+            getSnippetFile("not-nullable-kotlin-basic-type-package")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         sut?.packagee?.fullyQualifiedName shouldBeEqualTo "kotlin"
@@ -35,11 +37,12 @@ class KoKotlinTypeDeclarationForKoPackageProviderTest {
     @Test
     fun `nullable-kotlin-collection-type-package`() {
         // given
-        val sut = getSnippetFile("nullable-kotlin-collection-type-package")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoKotlinTypeDeclaration
+        val sut =
+            getSnippetFile("nullable-kotlin-collection-type-package")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         sut?.packagee?.fullyQualifiedName shouldBeEqualTo "kotlin.collections"
@@ -48,11 +51,12 @@ class KoKotlinTypeDeclarationForKoPackageProviderTest {
     @Test
     fun `not-nullable-kotlin-collection-type-package`() {
         // given
-        val sut = getSnippetFile("not-nullable-kotlin-collection-type-package")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoKotlinTypeDeclaration
+        val sut =
+            getSnippetFile("not-nullable-kotlin-collection-type-package")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         sut?.packagee?.fullyQualifiedName shouldBeEqualTo "kotlin.collections"

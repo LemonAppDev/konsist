@@ -43,7 +43,10 @@ interface KoParentInterfaceProvider : KoBaseProvider {
      * @param predicate The predicate function to determine if a parent interface satisfies a condition.
      * @return The number of parent interfaces in the declaration satisfying predicate.
      */
-    fun countParentInterfaces(indirectParents: Boolean = false, predicate: (KoInterfaceDeclaration) -> Boolean): Int
+    fun countParentInterfaces(
+        indirectParents: Boolean = false,
+        predicate: (KoInterfaceDeclaration) -> Boolean,
+    ): Int
 
     /**
      * Determines whatever declaration has parent interfaces.
@@ -71,7 +74,11 @@ interface KoParentInterfaceProvider : KoBaseProvider {
      * @param indirectParents specifies whether to include parent interfaces defined in other files such as parent of the parent.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasParentInterfaceWithName(name: String, vararg names: String, indirectParents: Boolean = false): Boolean
+    fun hasParentInterfaceWithName(
+        name: String,
+        vararg names: String,
+        indirectParents: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has parent interfaces defined with all the specified names.
@@ -81,7 +88,11 @@ interface KoParentInterfaceProvider : KoBaseProvider {
      * @param indirectParents specifies whether to include parent interfaces defined in other files such as parent of the parent.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasParentInterfacesWithAllNames(name: String, vararg names: String, indirectParents: Boolean = false): Boolean
+    fun hasParentInterfacesWithAllNames(
+        name: String,
+        vararg names: String,
+        indirectParents: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one parent interface that satisfies the provided predicate.
@@ -90,7 +101,10 @@ interface KoParentInterfaceProvider : KoBaseProvider {
      * @param predicate A function that defines the condition to be met by a parent interface.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasParentInterface(indirectParents: Boolean = false, predicate: (KoInterfaceDeclaration) -> Boolean): Boolean
+    fun hasParentInterface(
+        indirectParents: Boolean = false,
+        predicate: (KoInterfaceDeclaration) -> Boolean,
+    ): Boolean
 
     /**
      * Determines whether the declaration has all parent interfaces that satisfy the provided predicate.
@@ -102,7 +116,10 @@ interface KoParentInterfaceProvider : KoBaseProvider {
      * @param predicate A function that defines the condition to be met by parent interfaces.
      * @return `true` if all parent interfaces satisfy the predicate, `false` otherwise.
      */
-    fun hasAllParentInterfaces(indirectParents: Boolean = false, predicate: (KoInterfaceDeclaration) -> Boolean): Boolean
+    fun hasAllParentInterfaces(
+        indirectParents: Boolean = false,
+        predicate: (KoInterfaceDeclaration) -> Boolean,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one parent interface of the specified `KClass` type.
@@ -112,7 +129,11 @@ interface KoParentInterfaceProvider : KoBaseProvider {
      * @param indirectParents specifies whether to include parent interfaces defined in other files such as parent of the parent.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasParentInterfaceOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean = false): Boolean
+    fun hasParentInterfaceOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+        indirectParents: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has parent interfaces with all the specified `KClass` type.
@@ -122,5 +143,9 @@ interface KoParentInterfaceProvider : KoBaseProvider {
      * @param indirectParents specifies whether to include parent interfaces defined in other files such as parent of the parent.
      * @return `true` if the declaration has parent interfaces of all the specified `KClass` types, `false` otherwise.
      */
-    fun hasAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean = false): Boolean
+    fun hasAllParentInterfacesOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+        indirectParents: Boolean = false,
+    ): Boolean
 }

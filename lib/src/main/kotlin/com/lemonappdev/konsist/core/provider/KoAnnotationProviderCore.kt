@@ -14,15 +14,15 @@ internal interface KoAnnotationProviderCore :
     val ktAnnotated: KtAnnotated
 
     override val annotations: List<KoAnnotationDeclaration>
-        get() = ktAnnotated
-            .annotationEntries
-            .map { KoAnnotationDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
+        get() =
+            ktAnnotated
+                .annotationEntries
+                .map { KoAnnotationDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
 
     override val numAnnotations: Int
         get() = annotations.size
 
-    override fun countAnnotations(predicate: (KoAnnotationDeclaration) -> Boolean): Int =
-        annotations.count { predicate(it) }
+    override fun countAnnotations(predicate: (KoAnnotationDeclaration) -> Boolean): Int = annotations.count { predicate(it) }
 
     @Deprecated(
         """
@@ -30,12 +30,14 @@ internal interface KoAnnotationProviderCore :
             If you passed one argument - replace with `hasAnnotationWithName`, otherwise with `hasAnnotationsWithAllNames`.
             """,
     )
-    override fun hasAnnotations(vararg names: String): Boolean = when {
-        names.isEmpty() -> annotations.isNotEmpty()
-        else -> names.all {
-            annotations.any { annotation -> annotation.representsType(it) }
+    override fun hasAnnotations(vararg names: String): Boolean =
+        when {
+            names.isEmpty() -> annotations.isNotEmpty()
+            else ->
+                names.all {
+                    annotations.any { annotation -> annotation.representsType(it) }
+                }
         }
-    }
 
     @Deprecated(
         """
@@ -43,8 +45,10 @@ internal interface KoAnnotationProviderCore :
             If you passed one argument - replace with `hasAnnotationOf`, otherwise with `hasAllAnnotationsOf`.
             """,
     )
-    override fun hasAnnotationsOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
-        checkIfAnnotated(name) && names.all { checkIfAnnotated(it) }
+    override fun hasAnnotationsOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+    ): Boolean = checkIfAnnotated(name) && names.all { checkIfAnnotated(it) }
 
     private fun checkIfAnnotated(kClass: KClass<*>): Boolean =
         annotations.any { annotation ->
@@ -57,7 +61,10 @@ internal interface KoAnnotationProviderCore :
 
     override fun hasAnnotations(): Boolean = annotations.isNotEmpty()
 
-    override fun hasAnnotationWithName(name: String, vararg names: String): Boolean {
+    override fun hasAnnotationWithName(
+        name: String,
+        vararg names: String,
+    ): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.any {
@@ -65,7 +72,10 @@ internal interface KoAnnotationProviderCore :
         }
     }
 
-    override fun hasAnnotationsWithAllNames(name: String, vararg names: String): Boolean {
+    override fun hasAnnotationsWithAllNames(
+        name: String,
+        vararg names: String,
+    ): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.all {
@@ -75,12 +85,15 @@ internal interface KoAnnotationProviderCore :
 
     override fun hasAnnotation(predicate: (KoAnnotationDeclaration) -> Boolean): Boolean = annotations.any(predicate)
 
-    override fun hasAllAnnotations(predicate: (KoAnnotationDeclaration) -> Boolean): Boolean =
-        annotations.all(predicate)
+    override fun hasAllAnnotations(predicate: (KoAnnotationDeclaration) -> Boolean): Boolean = annotations.all(predicate)
 
-    override fun hasAnnotationOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
-        checkIfAnnotated(name) || names.any { checkIfAnnotated(it) }
+    override fun hasAnnotationOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+    ): Boolean = checkIfAnnotated(name) || names.any { checkIfAnnotated(it) }
 
-    override fun hasAllAnnotationsOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
-        checkIfAnnotated(name) && names.all { checkIfAnnotated(it) }
+    override fun hasAllAnnotationsOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+    ): Boolean = checkIfAnnotated(name) && names.all { checkIfAnnotated(it) }
 }

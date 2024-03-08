@@ -14,15 +14,18 @@ class KoImportAliasProviderListExtTest {
         val import1: KoImportAliasDeclaration = mockk()
         val import2: KoImportAliasDeclaration = mockk()
         val import3: KoImportAliasDeclaration = mockk()
-        val declaration1: KoImportAliasProvider = mockk {
-            every { importAliases } returns listOf(import1, import2)
-        }
-        val declaration2: KoImportAliasProvider = mockk {
-            every { importAliases } returns listOf(import3)
-        }
-        val declaration3: KoImportAliasProvider = mockk {
-            every { importAliases } returns emptyList()
-        }
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { importAliases } returns listOf(import1, import2)
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { importAliases } returns listOf(import3)
+            }
+        val declaration3: KoImportAliasProvider =
+            mockk {
+                every { importAliases } returns emptyList()
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -35,12 +38,14 @@ class KoImportAliasProviderListExtTest {
     @Test
     fun `withImportAliases() returns declaration with any import`() {
         // given
-        val declaration1: KoImportAliasProvider = mockk {
-            every { hasImportAliases() } returns true
-        }
-        val declaration2: KoImportAliasProvider = mockk {
-            every { hasImportAliases() } returns false
-        }
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliases() } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliases() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -53,12 +58,14 @@ class KoImportAliasProviderListExtTest {
     @Test
     fun `withoutImportAliases() returns declaration without any import`() {
         // given
-        val declaration1: KoImportAliasProvider = mockk {
-            every { hasImportAliases() } returns true
-        }
-        val declaration2: KoImportAliasProvider = mockk {
-            every { hasImportAliases() } returns false
-        }
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliases() } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliases() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -72,12 +79,14 @@ class KoImportAliasProviderListExtTest {
     fun `withImportAliasNamed(name) returns declaration with given import`() {
         // given
         val name = "SampleName"
-        val declaration1: KoImportAliasProvider = mockk {
-            every { hasImportAliasWithName(name) } returns true
-        }
-        val declaration2: KoImportAliasProvider = mockk {
-            every { hasImportAliasWithName(name) } returns false
-        }
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasWithName(name) } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasWithName(name) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -92,12 +101,14 @@ class KoImportAliasProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoImportAliasProvider = mockk {
-            every { hasImportAliasWithName(name1, name2) } returns true
-        }
-        val declaration2: KoImportAliasProvider = mockk {
-            every { hasImportAliasWithName(name1, name2) } returns false
-        }
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasWithName(name1, name2) } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasWithName(name1, name2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -111,12 +122,14 @@ class KoImportAliasProviderListExtTest {
     fun `withoutImportAliasNamed(name) returns declaration without given import`() {
         // given
         val name = "SampleName"
-        val declaration1: KoImportAliasProvider = mockk {
-            every { hasImportAliasWithName(name) } returns true
-        }
-        val declaration2: KoImportAliasProvider = mockk {
-            every { hasImportAliasWithName(name) } returns false
-        }
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasWithName(name) } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasWithName(name) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -131,12 +144,14 @@ class KoImportAliasProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoImportAliasProvider = mockk {
-            every { hasImportAliasWithName(name1, name2) } returns true
-        }
-        val declaration2: KoImportAliasProvider = mockk {
-            every { hasImportAliasWithName(name1, name2) } returns false
-        }
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasWithName(name1, name2) } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasWithName(name1, name2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -150,12 +165,14 @@ class KoImportAliasProviderListExtTest {
     fun `withAllImportAliasesNamed(name) returns declaration with given import`() {
         // given
         val name = "SampleName"
-        val declaration1: KoImportAliasProvider = mockk {
-            every { hasImportAliasesWithAllNames(name) } returns true
-        }
-        val declaration2: KoImportAliasProvider = mockk {
-            every { hasImportAliasesWithAllNames(name) } returns false
-        }
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasesWithAllNames(name) } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasesWithAllNames(name) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -170,12 +187,14 @@ class KoImportAliasProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoImportAliasProvider = mockk {
-            every { hasImportAliasesWithAllNames(name1, name2) } returns true
-        }
-        val declaration2: KoImportAliasProvider = mockk {
-            every { hasImportAliasesWithAllNames(name1, name2) } returns false
-        }
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasesWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasesWithAllNames(name1, name2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -189,12 +208,14 @@ class KoImportAliasProviderListExtTest {
     fun `withoutAllImportAliasesNamed(name) returns declaration without given import`() {
         // given
         val name = "SampleName"
-        val declaration1: KoImportAliasProvider = mockk {
-            every { hasImportAliasesWithAllNames(name) } returns true
-        }
-        val declaration2: KoImportAliasProvider = mockk {
-            every { hasImportAliasesWithAllNames(name) } returns false
-        }
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasesWithAllNames(name) } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasesWithAllNames(name) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -209,12 +230,14 @@ class KoImportAliasProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoImportAliasProvider = mockk {
-            every { hasImportAliasesWithAllNames(name1, name2) } returns true
-        }
-        val declaration2: KoImportAliasProvider = mockk {
-            every { hasImportAliasesWithAllNames(name1, name2) } returns false
-        }
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasesWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasesWithAllNames(name1, name2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -229,12 +252,14 @@ class KoImportAliasProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoImportAliasDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
-        val declaration1: KoImportAliasProvider = mockk {
-            every { hasImportAlias(predicate) } returns true
-        }
-        val declaration2: KoImportAliasProvider = mockk {
-            every { hasImportAlias(predicate) } returns false
-        }
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasImportAlias(predicate) } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasImportAlias(predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -249,12 +274,14 @@ class KoImportAliasProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoImportAliasDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
-        val declaration1: KoImportAliasProvider = mockk {
-            every { hasImportAlias(predicate) } returns true
-        }
-        val declaration2: KoImportAliasProvider = mockk {
-            every { hasImportAlias(predicate) } returns false
-        }
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasImportAlias(predicate) } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasImportAlias(predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -269,12 +296,14 @@ class KoImportAliasProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoImportAliasDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
-        val declaration1: KoImportAliasProvider = mockk {
-            every { hasAllImportAliases(predicate) } returns true
-        }
-        val declaration2: KoImportAliasProvider = mockk {
-            every { hasAllImportAliases(predicate) } returns false
-        }
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasAllImportAliases(predicate) } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasAllImportAliases(predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -289,12 +318,14 @@ class KoImportAliasProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoImportAliasDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
-        val declaration1: KoImportAliasProvider = mockk {
-            every { hasAllImportAliases(predicate) } returns true
-        }
-        val declaration2: KoImportAliasProvider = mockk {
-            every { hasAllImportAliases(predicate) } returns false
-        }
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasAllImportAliases(predicate) } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasAllImportAliases(predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -310,21 +341,26 @@ class KoImportAliasProviderListExtTest {
         val suffix = "Name"
         val predicate: (List<KoImportAliasDeclaration>) -> Boolean =
             { it.all { import -> import.hasNameEndingWith(suffix) } }
-        val import1: KoImportAliasDeclaration = mockk {
-            every { hasNameEndingWith(suffix) } returns true
-        }
-        val import2: KoImportAliasDeclaration = mockk {
-            every { hasNameEndingWith(suffix) } returns false
-        }
-        val declaration1: KoImportAliasProvider = mockk {
-            every { importAliases } returns listOf(import1)
-        }
-        val declaration2: KoImportAliasProvider = mockk {
-            every { importAliases } returns listOf(import2)
-        }
-        val declaration3: KoImportAliasProvider = mockk {
-            every { importAliases } returns emptyList()
-        }
+        val import1: KoImportAliasDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns true
+            }
+        val import2: KoImportAliasDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns false
+            }
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { importAliases } returns listOf(import1)
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { importAliases } returns listOf(import2)
+            }
+        val declaration3: KoImportAliasProvider =
+            mockk {
+                every { importAliases } returns emptyList()
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -340,21 +376,26 @@ class KoImportAliasProviderListExtTest {
         val suffix = "Name"
         val predicate: (List<KoImportAliasDeclaration>) -> Boolean =
             { it.all { import -> import.hasNameEndingWith(suffix) } }
-        val import1: KoImportAliasDeclaration = mockk {
-            every { hasNameEndingWith(suffix) } returns true
-        }
-        val import2: KoImportAliasDeclaration = mockk {
-            every { hasNameEndingWith(suffix) } returns false
-        }
-        val declaration1: KoImportAliasProvider = mockk {
-            every { importAliases } returns listOf(import1)
-        }
-        val declaration2: KoImportAliasProvider = mockk {
-            every { importAliases } returns listOf(import2)
-        }
-        val declaration3: KoImportAliasProvider = mockk {
-            every { importAliases } returns emptyList()
-        }
+        val import1: KoImportAliasDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns true
+            }
+        val import2: KoImportAliasDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns false
+            }
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { importAliases } returns listOf(import1)
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { importAliases } returns listOf(import2)
+            }
+        val declaration3: KoImportAliasProvider =
+            mockk {
+                every { importAliases } returns emptyList()
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when

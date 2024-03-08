@@ -10,10 +10,11 @@ class KoInitBlockDeclarationForKoVariableProviderTest {
     @Test
     fun `init-block-contains-no-variable`() {
         // given
-        val sut = getSnippetFile("init-block-contains-no-variable")
-            .classes()
-            .initBlocks
-            .first()
+        val sut =
+            getSnippetFile("init-block-contains-no-variable")
+                .classes()
+                .initBlocks
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -31,10 +32,11 @@ class KoInitBlockDeclarationForKoVariableProviderTest {
     @Test
     fun `init-block-contains-variable`() {
         // given
-        val sut = getSnippetFile("init-block-contains-variable")
-            .classes()
-            .initBlocks
-            .first()
+        val sut =
+            getSnippetFile("init-block-contains-variable")
+                .classes()
+                .initBlocks
+                .first()
 
         // then
         assertSoftly(sut) {

@@ -13,9 +13,10 @@ class KoObjectDeclarationForKoParentClassProviderTest {
     @Test
     fun `object-has-no-parent-class`() {
         // given
-        val sut = getSnippetFile("object-has-no-parent-class")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-no-parent-class")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -42,9 +43,10 @@ class KoObjectDeclarationForKoParentClassProviderTest {
     @Test
     fun `object-has-only-direct-parent-class`() {
         // given
-        val sut = getSnippetFile("object-has-only-direct-parent-class")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-only-direct-parent-class")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -79,9 +81,10 @@ class KoObjectDeclarationForKoParentClassProviderTest {
     @Test
     fun `object-has-parent-class-interfaces-and-external-parent`() {
         // given
-        val sut = getSnippetFile("object-has-parent-class-interfaces-and-external-parent")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-parent-class-interfaces-and-external-parent")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -116,15 +119,17 @@ class KoObjectDeclarationForKoParentClassProviderTest {
     @Test
     fun `object-has-parent-class-with-duplicated-name`() {
         /*
-        In Kotlin, we may have a situation that we have two classes with the same name - one defined in current file
-        and second one defined in another file.
-
-        When we use class with this name as a parent, the correct class is the imported one.
+        In Kotlin, it is possible to have two classes sharing the same name under two conditions: one class is defined
+        within the current file, and the other is defined externally, in a separate file. When both classes are referenced
+        within the current context, Kotlin's scoping rules prioritize the external (imported) class over the internally
+        defined one.
          */
+
         // given
-        val sut = getSnippetFile("object-has-parent-class-with-one-parameter")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-parent-class-with-one-parameter")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -137,18 +142,20 @@ class KoObjectDeclarationForKoParentClassProviderTest {
     @Test
     fun `object-has-indirect-parent-classes`() {
         // given
-        val sut = getSnippetFile("object-has-indirect-parent-classes")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-indirect-parent-classes")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
             parentClasses(indirectParents = false).map { it.name } shouldBeEqualTo listOf("SampleParentClass")
-            parentClasses(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
-                "SampleParentClass",
-                "SampleParentClass1",
-                "SampleParentClass2",
-            )
+            parentClasses(indirectParents = true).map { it.name } shouldBeEqualTo
+                listOf(
+                    "SampleParentClass",
+                    "SampleParentClass1",
+                    "SampleParentClass2",
+                )
             numParentClasses(indirectParents = false) shouldBeEqualTo 1
             numParentClasses(indirectParents = true) shouldBeEqualTo 3
             countParentClasses(indirectParents = false) { it.name == "SampleParentClass1" } shouldBeEqualTo 0

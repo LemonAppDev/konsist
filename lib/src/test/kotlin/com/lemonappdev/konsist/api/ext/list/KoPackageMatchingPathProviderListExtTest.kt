@@ -10,12 +10,14 @@ class KoPackageMatchingPathProviderListExtTest {
     @Test
     fun `withMatchingPath() returns declaration which has matching declaration path`() {
         // given
-        val declaration1: KoPackageMatchingPathProvider = mockk {
-            every { hasMatchingPath } returns true
-        }
-        val declaration2: KoPackageMatchingPathProvider = mockk {
-            every { hasMatchingPath } returns false
-        }
+        val declaration1: KoPackageMatchingPathProvider =
+            mockk {
+                every { hasMatchingPath } returns true
+            }
+        val declaration2: KoPackageMatchingPathProvider =
+            mockk {
+                every { hasMatchingPath } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -28,12 +30,14 @@ class KoPackageMatchingPathProviderListExtTest {
     @Test
     fun `withoutMatchingPath() returns declaration which has not matching declaration path`() {
         // given
-        val declaration1: KoPackageMatchingPathProvider = mockk {
-            every { hasMatchingPath } returns true
-        }
-        val declaration2: KoPackageMatchingPathProvider = mockk {
-            every { hasMatchingPath } returns false
-        }
+        val declaration1: KoPackageMatchingPathProvider =
+            mockk {
+                every { hasMatchingPath } returns true
+            }
+        val declaration2: KoPackageMatchingPathProvider =
+            mockk {
+                every { hasMatchingPath } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

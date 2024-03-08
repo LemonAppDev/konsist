@@ -13,9 +13,10 @@ class KoTypeAliasDeclarationForKoAnnotationProviderTest {
     @Test
     fun `typealias-has-no-annotation`() {
         // given
-        val sut = getSnippetFile("typealias-has-no-annotation")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-has-no-annotation")
+                .typeAliases
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -36,9 +37,10 @@ class KoTypeAliasDeclarationForKoAnnotationProviderTest {
     @Test
     fun `typealias-has-annotation`() {
         // given
-        val sut = getSnippetFile("typealias-has-annotation")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-has-annotation")
+                .typeAliases
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -83,9 +85,10 @@ class KoTypeAliasDeclarationForKoAnnotationProviderTest {
     @Test
     fun `typealias-has-two-annotations`() {
         // given
-        val sut = getSnippetFile("typealias-has-two-annotations")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-has-two-annotations")
+                .typeAliases
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -141,9 +144,10 @@ class KoTypeAliasDeclarationForKoAnnotationProviderTest {
     @Test
     fun `typealias-has-suppress-annotation-without-import`() {
         // given
-        val sut = getSnippetFile("typealias-has-suppress-annotation-without-import")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-has-suppress-annotation-without-import")
+                .typeAliases
+                .first()
 
         // then
         assertSoftly(sut) {

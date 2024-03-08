@@ -13,9 +13,10 @@ class KoClassDeclarationForKoParentInterfaceProviderTest {
     @Test
     fun `class-has-no-parent-interface`() {
         // given
-        val sut = getSnippetFile("class-has-no-parent-interface")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-no-parent-interface")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -38,9 +39,10 @@ class KoClassDeclarationForKoParentInterfaceProviderTest {
     @Test
     fun `class-has-only-direct-parent-interfaces`() {
         // given
-        val sut = getSnippetFile("class-has-only-direct-parent-interfaces")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-only-direct-parent-interfaces")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -79,9 +81,10 @@ class KoClassDeclarationForKoParentInterfaceProviderTest {
     @Test
     fun `class-has-parent-class-interfaces-and-external-parent`() {
         // given
-        val sut = getSnippetFile("class-has-parent-class-interfaces-and-external-parent")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-parent-class-interfaces-and-external-parent")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -121,17 +124,19 @@ class KoClassDeclarationForKoParentInterfaceProviderTest {
     @Test
     fun `class-has-indirect-parent-interfaces`() {
         // given
-        val sut = getSnippetFile("class-has-indirect-parent-interfaces")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-indirect-parent-interfaces")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
             parentInterfaces(indirectParents = false) shouldBeEqualTo emptyList()
-            parentInterfaces(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
-                "SampleParentInterface1",
-                "SampleParentInterface2",
-            )
+            parentInterfaces(indirectParents = true).map { it.name } shouldBeEqualTo
+                listOf(
+                    "SampleParentInterface1",
+                    "SampleParentInterface2",
+                )
             numParentInterfaces(indirectParents = false) shouldBeEqualTo 0
             numParentInterfaces(indirectParents = true) shouldBeEqualTo 2
             countParentInterfaces(indirectParents = false) { it.name == "SampleParentInterface1" } shouldBeEqualTo 0
@@ -182,17 +187,19 @@ class KoClassDeclarationForKoParentInterfaceProviderTest {
     @Test
     fun `class-has-indirect-repeated-parent-interfaces`() {
         // given
-        val sut = getSnippetFile("class-has-indirect-repeated-parent-interfaces")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-indirect-repeated-parent-interfaces")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
             parentInterfaces(indirectParents = false).map { it.name } shouldBeEqualTo listOf("SampleParentInterface2")
-            parentInterfaces(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
-                "SampleParentInterface2",
-                "SampleParentInterface1",
-            )
+            parentInterfaces(indirectParents = true).map { it.name } shouldBeEqualTo
+                listOf(
+                    "SampleParentInterface2",
+                    "SampleParentInterface1",
+                )
             numParentInterfaces(indirectParents = false) shouldBeEqualTo 1
             numParentInterfaces(indirectParents = true) shouldBeEqualTo 2
         }
