@@ -1,3 +1,5 @@
+import ext.getTomlVersion
+
 plugins {
     id("com.diffplug.spotless")
 }
@@ -8,9 +10,7 @@ spotless {
             exclude(".gradle/**")
         }
 
-        val catalogs = extensions.getByType<VersionCatalogsExtension>()
-        val libs = catalogs.named("libs")
-        val ktlintCliVersion = libs.findVersion("ktlintCliVersion").get().toString()
+        val ktlintCliVersion = project.getTomlVersion("ktlintCliVersion")
         ktlint(ktlintCliVersion)
 
         indentWithSpaces()
