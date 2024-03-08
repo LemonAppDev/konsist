@@ -132,7 +132,7 @@ fun <T : KoImportProvider> List<T>.withoutImports(predicate: (List<KoImportDecla
  */
 @Deprecated(
     """
-            Will be removed in v1.0.0. 
+            Will be removed in v0.16.0. 
             If you passed one argument - replace with `withImportNamed`, otherwise with `withAllImportsNamed`.
             """,
     ReplaceWith("withImportNamed/withAllImportsNamed"),
@@ -148,7 +148,7 @@ fun <T : KoImportProvider> List<T>.withAllImports(name: String, vararg names: St
  * @param names The import name(s) to include.
  * @return A list containing declarations with at least one of the specified import(s).
  */
-@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withImportNamed(*names"))
+@Deprecated("Will be removed in v0.16.0.", ReplaceWith("withImportNamed(*names"))
 fun <T : KoImportProvider> List<T>.withSomeImports(name: String, vararg names: String): List<T> = filter {
     it.hasImports(name) || names.any { import -> it.hasImports(import) }
 }
@@ -162,7 +162,7 @@ fun <T : KoImportProvider> List<T>.withSomeImports(name: String, vararg names: S
  */
 @Deprecated(
     """
-            Will be removed in v1.0.0. 
+            Will be removed in v0.16.0. 
             If you passed one argument - replace with `withoutImportNamed`, otherwise with `withoutAllImportsNamed`.
             """,
     ReplaceWith("withoutImportNamed/withoutAllImportsNamed"),
@@ -178,7 +178,7 @@ fun <T : KoImportProvider> List<T>.withoutAllImports(name: String, vararg names:
  * @param names The import name(s) to exclude.
  * @return A list containing declarations without at least one of the specified import(s).
  */
-@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withoutImportNamed(*names"))
+@Deprecated("Will be removed in v0.16.0.", ReplaceWith("withoutImportNamed(*names"))
 fun <T : KoImportProvider> List<T>.withoutSomeImports(name: String, vararg names: String): List<T> = filter {
     val missesAtLeastOneImport = if (names.isNotEmpty()) {
         names.any { import -> !it.hasImports(import) }

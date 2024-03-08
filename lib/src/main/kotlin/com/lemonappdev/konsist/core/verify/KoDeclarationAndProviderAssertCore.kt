@@ -97,7 +97,7 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
     }
 }
 
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("assert"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("assert"))
 internal fun <E : KoBaseProvider> List<E>.assert(
     additionalMessage: String? = null,
     function: (E) -> Boolean?,
@@ -230,7 +230,7 @@ private fun getResult(
     }
 }
 
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("getResult()"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("getResult()"))
 private fun deprecatedGetResult(
     items: List<*>,
     result: Map<Boolean, List<Any>>,

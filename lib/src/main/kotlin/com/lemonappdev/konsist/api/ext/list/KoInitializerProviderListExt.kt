@@ -21,7 +21,7 @@ fun <T : KoInitializerProvider> List<T>.withoutInitialized(): List<T> = filterNo
  *
  * @return A list containing declarations with the implementation.
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withInitialized()"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("withInitialized()"))
 fun <T : KoInitializerProvider> List<T>.withImplementation(): List<T> = filter { it.hasImplementation }
 
 /**
@@ -29,5 +29,5 @@ fun <T : KoInitializerProvider> List<T>.withImplementation(): List<T> = filter {
  *
  * @return A list containing declarations without the implementation.
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutInitialized()"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("withoutInitialized()"))
 fun <T : KoInitializerProvider> List<T>.withoutImplementation(): List<T> = filterNot { it.hasImplementation }

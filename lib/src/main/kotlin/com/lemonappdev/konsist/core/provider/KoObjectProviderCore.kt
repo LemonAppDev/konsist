@@ -12,7 +12,7 @@ internal interface KoObjectProviderCore : KoObjectProvider, KoDeclarationProvide
         includeNested,
     )
 
-    @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasObject()"))
+    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasObject()"))
     override fun containsObject(
         includeNested: Boolean,
         predicate: (KoObjectDeclaration) -> Boolean,

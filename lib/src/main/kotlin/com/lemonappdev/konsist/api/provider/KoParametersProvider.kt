@@ -30,7 +30,7 @@ interface KoParametersProvider : KoBaseProvider {
      * @param name the name of the parameter to check.
      * @return `true` if the declaration has a parameter with the specified name, `false` otherwise.
      */
-    @Deprecated("Will be removed in v1.0.0.", ReplaceWith("hasParameterWithName(name)"))
+    @Deprecated("Will be removed in v0.16.0.", ReplaceWith("hasParameterWithName(name)"))
     fun hasParameterNamed(name: String): Boolean
 
     /**

@@ -15,7 +15,7 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
             includeLocal,
         )
 
-    @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasFunction()"))
+    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasFunction()"))
     override fun containsFunction(
         includeNested: Boolean,
         includeLocal: Boolean,

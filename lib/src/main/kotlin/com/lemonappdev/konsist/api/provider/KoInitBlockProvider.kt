@@ -19,7 +19,7 @@ interface KoInitBlockProvider : KoBaseProvider {
     /**
      * Determines whatever declaration has init blocks.
      */
-    @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasInitBlocks()"))
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasInitBlocks()"))
     val hasInitBlocks: Boolean
 
     /**

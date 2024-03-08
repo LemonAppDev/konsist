@@ -10,7 +10,7 @@ internal interface KoLocalDeclarationProviderCore : KoLocalDeclarationProvider, 
     override fun countLocalDeclarations(predicate: (KoBaseDeclaration) -> Boolean): Int =
         localDeclarations.count { predicate(it) }
 
-    @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasLocalDeclaration()"))
+    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasLocalDeclaration()"))
     override fun containsLocalDeclaration(predicate: (KoBaseDeclaration) -> Boolean): Boolean =
         localDeclarations.any { predicate(it) }
 

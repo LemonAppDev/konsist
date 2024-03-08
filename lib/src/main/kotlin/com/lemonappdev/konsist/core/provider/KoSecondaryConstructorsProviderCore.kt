@@ -21,7 +21,7 @@ internal interface KoSecondaryConstructorsProviderCore :
     override val numSecondaryConstructors: Int
         get() = secondaryConstructors.size
 
-    @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasSecondaryConstructors()"))
+    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasSecondaryConstructors()"))
     override val hasSecondaryConstructors: Boolean
         get() = ktClass.hasSecondaryConstructors()
 

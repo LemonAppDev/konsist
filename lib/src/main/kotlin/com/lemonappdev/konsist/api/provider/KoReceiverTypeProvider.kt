@@ -18,7 +18,7 @@ interface KoReceiverTypeProvider : KoBaseProvider {
      * @param name the receiver type to check.
      * @return `true` if the declaration has receiver type with the specified name, `false` otherwise.
      */
-    @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasReceiverType { it.name == name }"))
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasReceiverType { it.name == name }"))
     fun hasReceiverType(name: String): Boolean
 
     /**

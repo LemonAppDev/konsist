@@ -30,7 +30,7 @@ interface KoLocalDeclarationProvider : KoBaseProvider {
      * @param predicate The predicate function to determine if a local declaration satisfies a condition.
      * @return `true` if the declaration contains a local declaration with the specified name, `false` otherwise.
      */
-    @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasLocalDeclaration()"))
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasLocalDeclaration()"))
     fun containsLocalDeclaration(predicate: (KoBaseDeclaration) -> Boolean): Boolean
 
     /**

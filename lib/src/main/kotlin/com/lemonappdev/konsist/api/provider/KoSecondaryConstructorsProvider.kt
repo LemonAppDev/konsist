@@ -19,7 +19,7 @@ interface KoSecondaryConstructorsProvider : KoBaseProvider {
     /**
      * Determines whatever declaration has secondary constructors.
      */
-    @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasSecondaryConstructors()"))
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasSecondaryConstructors()"))
     val hasSecondaryConstructors: Boolean
 
     /**

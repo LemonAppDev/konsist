@@ -135,7 +135,7 @@ fun <T : KoParametersProvider> List<T>.withoutParameters(predicate: (List<KoPara
  */
 @Deprecated(
     """
-            Will be removed in v1.0.0. 
+            Will be removed in v0.16.0. 
             If you passed one argument - replace with `withParameterNamed`, otherwise with `withAllParametersNamed`.
             """,
     ReplaceWith("withParameterNamed/withAllParametersNamed"),
@@ -151,7 +151,7 @@ fun <T : KoParametersProvider> List<T>.withAllParameters(name: String, vararg na
  * @param names The names of the parameters to include.
  * @return A list containing declarations with at least one of the specified parameters.
  */
-@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withParameterNamed(*names"))
+@Deprecated("Will be removed in v0.16.0.", ReplaceWith("withParameterNamed(*names"))
 fun <T : KoParametersProvider> List<T>.withSomeParameters(name: String, vararg names: String): List<T> = filter {
     it.hasParameterNamed(name) || names.any { name -> it.hasParameterNamed(name) }
 }
@@ -165,7 +165,7 @@ fun <T : KoParametersProvider> List<T>.withSomeParameters(name: String, vararg n
  */
 @Deprecated(
     """
-            Will be removed in v1.0.0. 
+            Will be removed in v0.16.0. 
             If you passed one argument - replace with `withoutParameterNamed`, otherwise with `withoutAllParametersNamed`.
             """,
     ReplaceWith("withoutParameterNamed/withoutAllParametersNamed"),
@@ -181,7 +181,7 @@ fun <T : KoParametersProvider> List<T>.withoutAllParameters(name: String, vararg
  * @param names The names of the parameters to exclude.
  * @return A list containing declarations without at least one of the specified parameters.
  */
-@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withoutParameterNamed(*names"))
+@Deprecated("Will be removed in v0.16.0.", ReplaceWith("withoutParameterNamed(*names"))
 fun <T : KoParametersProvider> List<T>.withoutSomeParameters(name: String, vararg names: String): List<T> = filter {
     val missesAtLeastOneParameter = if (names.isNotEmpty()) {
         names.any { name -> !it.hasParameterNamed(name) }

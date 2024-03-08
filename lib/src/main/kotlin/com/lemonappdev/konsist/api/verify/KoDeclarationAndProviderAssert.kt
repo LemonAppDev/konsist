@@ -281,7 +281,7 @@ fun <E : KoBaseProvider> Sequence<E?>.assertNotEmpty(
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("assertTrue"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("assertTrue"))
 fun <E : KoBaseProvider> E.assert(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
     listOf(this).assert(additionalMessage, function, positiveCheck = true)
 }
@@ -294,7 +294,7 @@ fun <E : KoBaseProvider> E.assert(additionalMessage: String? = null, function: (
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("assertFalse"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("assertFalse"))
 fun <E : KoBaseProvider> E.assertNot(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
     listOf(this).assert(additionalMessage, function, positiveCheck = false)
 }
@@ -307,7 +307,7 @@ fun <E : KoBaseProvider> E.assertNot(additionalMessage: String? = null, function
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("assertTrue"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("assertTrue"))
 fun <E : KoBaseProvider> List<E>.assert(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
     assert(additionalMessage, function, positiveCheck = true)
 }
@@ -320,7 +320,7 @@ fun <E : KoBaseProvider> List<E>.assert(additionalMessage: String? = null, funct
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("assertFalse"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("assertFalse"))
 fun <E : KoBaseProvider> List<E>.assertNot(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
     assert(additionalMessage, function, positiveCheck = false)
 }
@@ -333,7 +333,7 @@ fun <E : KoBaseProvider> List<E>.assertNot(additionalMessage: String? = null, fu
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("assertTrue"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("assertTrue"))
 fun <E : KoBaseProvider> Sequence<E>.assert(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
     this.toList().assert(additionalMessage, function, true)
 }
@@ -346,7 +346,7 @@ fun <E : KoBaseProvider> Sequence<E>.assert(additionalMessage: String? = null, f
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("assertFalse"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("assertFalse"))
 fun <E : KoBaseProvider> Sequence<E>.assertNot(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
     this.toList().assert(additionalMessage, function, false)
 }

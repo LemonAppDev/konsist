@@ -26,7 +26,7 @@ interface KoClassProvider : KoBaseProvider {
      * @param predicate The predicate function to determine if a class satisfies a condition.
      * @return `true` if the declaration contains a class with the specified predicate, `true` otherwise.
      */
-    @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasClass()"))
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasClass()"))
     fun containsClass(
         includeNested: Boolean = true,
         includeLocal: Boolean = true,

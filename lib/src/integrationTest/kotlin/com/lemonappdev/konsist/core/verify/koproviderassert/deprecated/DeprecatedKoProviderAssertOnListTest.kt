@@ -16,7 +16,7 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-@Deprecated("Will be removed in v1.0.0")
+@Deprecated("Will be removed in v0.16.0")
 class DeprecatedKoProviderAssertOnListTest {
     @Test
     fun `provider-assert-test-method-name`() {

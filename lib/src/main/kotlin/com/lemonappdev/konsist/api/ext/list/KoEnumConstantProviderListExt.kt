@@ -127,7 +127,7 @@ fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstants(predicate: (List<K
  */
 @Deprecated(
     """
-            Will be removed in v1.0.0. 
+            Will be removed in v0.16.0. 
             If you passed one argument - replace with `withEnumConstantNamed`, otherwise with `withAllEnumConstantsNamed`.
             """,
     ReplaceWith("withEnumConstantNamed/withAllEnumConstantsNamed"),
@@ -143,7 +143,7 @@ fun <T : KoEnumConstantProvider> List<T>.withAllEnumConstants(name: String, vara
  * @param names The enum constant name(s) to include.
  * @return A list containing declarations with at least one of the specified enum constant(s).
  */
-@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withEnumConstantNamed(*names"))
+@Deprecated("Will be removed in v0.16.0.", ReplaceWith("withEnumConstantNamed(*names"))
 fun <T : KoEnumConstantProvider> List<T>.withSomeEnumConstants(name: String, vararg names: String): List<T> = filter {
     it.hasEnumConstants(name) || names.any { constant -> it.hasEnumConstants(constant) }
 }
@@ -157,7 +157,7 @@ fun <T : KoEnumConstantProvider> List<T>.withSomeEnumConstants(name: String, var
  */
 @Deprecated(
     """
-            Will be removed in v1.0.0. 
+            Will be removed in v0.16.0. 
             If you passed one argument - replace with `withoutEnumConstantNamed`, otherwise with `withoutAllEnumConstantsNamed`.
             """,
     ReplaceWith("withoutEnumConstantNamed/withoutAllEnumConstantsNamed"),
@@ -172,7 +172,7 @@ fun <T : KoEnumConstantProvider> List<T>.withoutAllEnumConstants(name: String, v
  * @param names The enum constant name(s) to exclude.
  * @return A list containing declarations without at least one of the specified enum constant(s).
  */
-@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withoutEnumConstantNamed(*names"))
+@Deprecated("Will be removed in v0.16.0.", ReplaceWith("withoutEnumConstantNamed(*names"))
 fun <T : KoEnumConstantProvider> List<T>.withoutSomeEnumConstants(name: String, vararg names: String): List<T> =
     filter {
         val missesAtLeastOneEnumConstant = if (names.isNotEmpty()) {

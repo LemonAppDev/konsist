@@ -16,7 +16,7 @@ val <T : KoReturnProvider> List<T>.returnTypes: List<KoTypeDeclaration>
  * @param names The return type name(s) to include.
  * @return A list containing declarations with the specified return type(s) (or any return type if [names] is empty).
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withReturnType { it.name == ... }"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("withReturnType { it.name == ... }"))
 fun <T : KoReturnProvider> List<T>.withReturnType(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> it.hasReturnType
@@ -30,7 +30,7 @@ fun <T : KoReturnProvider> List<T>.withReturnType(vararg names: String): List<T>
  * @param names The return type name(s) to exclude.
  * @return A list containing declarations without specified return type(s) (or none return type if [names] is empty).
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutReturnType { it.name != ... }"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("withoutReturnType { it.name != ... }"))
 fun <T : KoReturnProvider> List<T>.withoutReturnType(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> !it.hasReturnType

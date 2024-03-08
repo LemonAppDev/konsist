@@ -30,7 +30,7 @@ interface KoLocalFunctionProvider : KoBaseProvider {
      * @param predicate The predicate function to determine if a local function satisfies a condition.
      * @return `true` if the declaration contains a local function with the specified name, `false` otherwise.
      */
-    @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasLocalFunction()"))
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasLocalFunction()"))
     fun containsLocalFunction(predicate: (KoFunctionDeclaration) -> Boolean): Boolean
 
     /**

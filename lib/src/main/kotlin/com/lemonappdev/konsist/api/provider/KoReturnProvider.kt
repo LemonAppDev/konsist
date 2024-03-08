@@ -40,7 +40,7 @@ interface KoReturnProvider : KoBaseProvider {
     /**
      * Determines whatever this declaration has a return type.
      */
-    @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasReturnType()"))
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasReturnType()"))
     val hasReturnType: Boolean
 
     /**
