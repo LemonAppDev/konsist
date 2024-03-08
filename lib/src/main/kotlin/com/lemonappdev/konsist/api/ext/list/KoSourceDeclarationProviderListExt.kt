@@ -1,3 +1,5 @@
+@file:Suppress("detekt.TooManyFunctions")
+
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
@@ -9,9 +11,6 @@ import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoNonNullableTypeProvider
-import com.lemonappdev.konsist.api.provider.KoNullableTypeProvider
 import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
 import kotlin.reflect.KClass
 
@@ -97,11 +96,11 @@ fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclaration(predicate
 fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclarationOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
         it.hasSourceDeclarationOf(kClass) ||
-                if (kClasses.isNotEmpty()) {
-                    kClasses.any { kClass -> it.hasSourceDeclarationOf(kClass) }
-                } else {
-                    false
-                }
+            if (kClasses.isNotEmpty()) {
+                kClasses.any { kClass -> it.hasSourceDeclarationOf(kClass) }
+            } else {
+                false
+            }
     }
 
 /**
@@ -362,7 +361,9 @@ fun <T : KoSourceDeclarationProvider> List<T>.withSourceImportAlias(predicate: (
  * @param predicate The predicate function to determine if a source import alias satisfies a condition.
  * @return A list containing declarations without the specified source import alias.
  */
-fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceImportAlias(predicate: ((KoImportAliasDeclaration) -> Boolean)? = null): List<T> =
+fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceImportAlias(
+    predicate: ((KoImportAliasDeclaration) -> Boolean)? = null,
+): List<T> =
     filterNot {
         when (predicate) {
             null -> it.hasSourceImportAlias()
@@ -454,7 +455,9 @@ fun <T : KoSourceDeclarationProvider> List<T>.withSourceFunctionType(predicate: 
  * @param predicate The predicate function to determine if a source function type satisfies a condition.
  * @return A list containing declarations without the specified source function type.
  */
-fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceFunctionType(predicate: ((KoFunctionTypeDeclaration) -> Boolean)? = null): List<T> =
+fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceFunctionType(
+    predicate: ((KoFunctionTypeDeclaration) -> Boolean)? = null,
+): List<T> =
     filterNot {
         when (predicate) {
             null -> it.hasSourceFunctionType()

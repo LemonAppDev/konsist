@@ -9,7 +9,6 @@ import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.util.TypeUtil
@@ -59,7 +58,7 @@ internal interface KoSourceDeclarationProviderCore :
 
     override fun hasSourceDeclarationOf(kClass: KClass<*>): Boolean =
         hasSourceClassOf(kClass) || hasSourceObjectOf(kClass) || hasSourceInterfaceOf(kClass) || hasSourceKotlinTypeOf(
-            kClass
+            kClass,
         ) || hasSourceExternalTypeOf(kClass)
 
     override fun hasSourceClass(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =

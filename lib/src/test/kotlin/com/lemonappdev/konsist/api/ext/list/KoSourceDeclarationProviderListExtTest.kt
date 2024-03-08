@@ -8,10 +8,7 @@ import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoNonNullableTypeProvider
-import com.lemonappdev.konsist.api.provider.KoNullableTypeProvider
 import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
-import com.lemonappdev.konsist.core.util.TypeUtil.hasTypeOf
 import com.lemonappdev.konsist.testdata.SampleType1
 import com.lemonappdev.konsist.testdata.SampleType2
 import io.mockk.every
@@ -19,6 +16,7 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+@Suppress("detekt.LargeClass")
 class KoSourceDeclarationProviderListExtTest {
     @Test
     fun `sourceDeclarations returns declarations from all declarations`() {

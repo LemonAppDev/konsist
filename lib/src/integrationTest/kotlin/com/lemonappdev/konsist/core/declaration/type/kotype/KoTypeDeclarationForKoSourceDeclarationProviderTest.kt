@@ -24,6 +24,7 @@ import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 import kotlin.reflect.KClass
 
+@Suppress("detekt.LargeClass")
 class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")

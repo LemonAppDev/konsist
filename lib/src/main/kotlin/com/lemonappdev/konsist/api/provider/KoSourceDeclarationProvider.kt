@@ -3,14 +3,12 @@ package com.lemonappdev.konsist.api.provider
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
-import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import kotlin.reflect.KClass
 
 /**
@@ -88,7 +86,8 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
      * Whether type has a specified source class.
      *
      * @param predicate The predicate function used to determine if a source class satisfies a condition.
-     * @return `true` if the type has the specified source class (or any source class if [predicate] is `null`), `false` otherwise.
+     * @return `true` if the type has the specified source class (or any source class if [predicate] is `null`),
+     * `false` otherwise.
      */
     fun hasSourceClass(predicate: ((KoClassDeclaration) -> Boolean)? = null): Boolean
 
@@ -104,7 +103,8 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
      * Whether type has a specified source object.
      *
      * @param predicate The predicate function used to determine if a source object satisfies a condition.
-     * @return `true` if the type has the specified source object (or any source object if [predicate] is `null`), `false` otherwise.
+     * @return `true` if the type has the specified source object (or any source object if [predicate] is `null`),
+     * `false` otherwise.
      */
     fun hasSourceObject(predicate: ((KoObjectDeclaration) -> Boolean)? = null): Boolean
 
@@ -120,7 +120,8 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
      * Whether type has a specified source interface.
      *
      * @param predicate The predicate function used to determine if a source interface satisfies a condition.
-     * @return `true` if the type has the specified source interface (or any source interface if [predicate] is `null`), `false` otherwise.
+     * @return `true` if the type has the specified source interface (or any source interface if [predicate] is `null`),
+     * `false` otherwise.
      */
     fun hasSourceInterface(predicate: ((KoInterfaceDeclaration) -> Boolean)? = null): Boolean
 
@@ -136,7 +137,8 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
      * Whether type has a specified source type alias.
      *
      * @param predicate The predicate function used to determine if a source type alias satisfies a condition.
-     * @return `true` if the type has the specified source type alias (or any source type alias if [predicate] is `null`), `false` otherwise.
+     * @return `true` if the type has the specified source type alias (or any source type alias if [predicate] is
+     * `null`), `false` otherwise.
      */
     fun hasSourceTypeAlias(predicate: ((KoTypeAliasDeclaration) -> Boolean)? = null): Boolean
 
@@ -144,7 +146,8 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
      * Whether type has a specified source import alias.
      *
      * @param predicate The predicate function used to determine if a source import alias satisfies a condition.
-     * @return `true` if the type has the specified source import alias (or any source import alias if [predicate] is `null`), `false` otherwise.
+     * @return `true` if the type has the specified source import alias (or any source import alias if [predicate] is
+     * `null`), `false` otherwise.
      */
     fun hasSourceImportAlias(predicate: ((KoImportAliasDeclaration) -> Boolean)? = null): Boolean
 
@@ -152,7 +155,8 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
      * Whether type has a specified source kotlin type.
      *
      * @param predicate The predicate function used to determine if a source kotlin type satisfies a condition.
-     * @return `true` if the type has the specified source kotlin type (or any source kotlin type if [predicate] is `null`), `false` otherwise.
+     * @return `true` if the type has the specified source kotlin type (or any source kotlin type if [predicate] is
+     * `null`), `false` otherwise.
      */
     fun hasSourceKotlinType(predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null): Boolean
 
@@ -168,7 +172,8 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
      * Whether type has a specified source function type.
      *
      * @param predicate The predicate function used to determine if a source function type satisfies a condition.
-     * @return `true` if the type has the specified source function type (or any source function type if [predicate] is `null`), `false` otherwise.
+     * @return `true` if the type has the specified source function type (or any source function type if [predicate] is
+     * `null`), `false` otherwise.
      */
     fun hasSourceFunctionType(predicate: ((KoFunctionTypeDeclaration) -> Boolean)? = null): Boolean
 
@@ -176,7 +181,8 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
      * Whether type has a specified source external type.
      *
      * @param predicate The predicate external used to determine if a source external type satisfies a condition.
-     * @return `true` if the type has the specified source external type (or any source external type if [predicate] is `null`), `false` otherwise.
+     * @return `true` if the type has the specified source external type (or any source external type if [predicate] is
+     * `null`), `false` otherwise.
      */
     fun hasSourceExternalType(predicate: ((KoExternalDeclaration) -> Boolean)? = null): Boolean
 
