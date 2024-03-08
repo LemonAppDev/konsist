@@ -14,6 +14,8 @@ class SnippetTest {
             File("../")
                 .walk()
                 .filter { it.isKotlinSnippetFile }
+                // Filter out snippets used to generate documentation
+                .filterNot { it.path.contains("lib/src/snippet/kotlin/com/lemonappdev/konsist/") }
                 .toList()
 
         val snippetPaths =
@@ -28,7 +30,7 @@ class SnippetTest {
         snippetNames.forEachIndexed { index, s -> snippetMap[s] = snippetPaths[index] }
 
         val r1 = Regex("""getSnippetFile\(\s*"(.+)"""")
-        val r2 = Regex("""arguments\("([^"]+)"""")
+        val r2 = Regex("""arguments\(\s*"([^"]+)"""")
         val r3 = Regex("""arguments\(\s*"([^"]+)"""")
         val withGetSnippetMethod = snippetNamesFromFiles(r1, "getSnippetFile(")
         val withArgument = snippetNamesFromFiles(r2, "arguments(") + snippetNamesFromFiles(r3, "arguments(\n")
