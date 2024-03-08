@@ -73,11 +73,11 @@ jobs:
       - name: Publish Konsist Artifact To Local Maven Repository
         run: ./gradlew publishToMavenLocal
 
-      - name: List Konsist Files .
-        run: find . -type f -iname "*konsist*"
-
-      - name: List Konsist Files ~/.m2/repository
-        run: find ~/.m2/repository -type f -iname "*konsist*"
+      - name: Cache Konsist Artifact
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: konsist-artifact-${{github.sha}}
 
   konsist-starter-android-gradle-groovy-junit-4:
     name: Konsist Starter Android Gradle Groovy Junit 4
@@ -110,8 +110,14 @@ jobs:
       - name: Replace Konsist Version
         run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/konsist-starter-android-gradle-groovy-junit-4/konsistTest/build.gradle
 
-      - name: Publish Konsist Artifact To Local Maven Repository
-        run: ./gradlew publishToMavenLocal
+      - name: Restore Konsist Artifact
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.m2/repository
+          key: konsist-artifact-${{github.sha}}
+
+#      - name: Publish Konsist Artifact To Local Maven Repository
+#        run: ./gradlew publishToMavenLocal
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-android-gradle-groovy-junit-4/ && ./gradlew konsistTest:test
