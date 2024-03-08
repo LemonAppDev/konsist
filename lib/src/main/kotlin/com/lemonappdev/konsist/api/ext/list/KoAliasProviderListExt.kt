@@ -16,7 +16,7 @@ val <T : KoAliasProvider> List<T>.importAliases: List<KoImportAliasDeclaration>
  * @param names The names of aliases to include.
  * @return A list containing declarations with the specified aliases (or any alias if [names] is empty).
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withAlias { it.name == ... }"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("withAlias { it.name == ... }"))
 fun <T : KoAliasProvider> List<T>.withAlias(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> it.alias?.name != (it as? KoNameProvider)?.name
@@ -30,7 +30,7 @@ fun <T : KoAliasProvider> List<T>.withAlias(vararg names: String): List<T> = fil
  * @param names The names of aliases to exclude.
  * @return A list containing declarations without specified aliases (or none alias if [names] is empty).
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutAlias { it.name == ... }"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("withoutAlias { it.name == ... }"))
 fun <T : KoAliasProvider> List<T>.withoutAlias(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> it.alias?.name == (it as? KoNameProvider)?.name

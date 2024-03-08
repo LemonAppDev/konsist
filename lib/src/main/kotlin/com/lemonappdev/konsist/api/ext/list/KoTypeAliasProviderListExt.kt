@@ -130,7 +130,7 @@ fun <T : KoTypeAliasProvider> List<T>.withoutTypeAliases(predicate: (List<KoType
  */
 @Deprecated(
     """
-            Will be removed in v1.0.0. 
+            Will be removed in v0.16.0. 
             If you passed one argument - replace with `withTypeAliasNamed`, otherwise with `withAllTypeAliasesNamed`.
             """,
     ReplaceWith("withTypeAliasNamed/withAllTypeAliasesNamed"),
@@ -146,7 +146,7 @@ fun <T : KoTypeAliasProvider> List<T>.withAllTypeAliases(name: String, vararg na
  * @param names The type alias name(s) to include.
  * @return A list containing declarations with at least one of the specified type alias(es).
  */
-@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withTypeAliasNamed(*names"))
+@Deprecated("Will be removed in v0.16.0.", ReplaceWith("withTypeAliasNamed(*names"))
 fun <T : KoTypeAliasProvider> List<T>.withSomeTypeAliases(name: String, vararg names: String): List<T> = filter {
     it.hasTypeAliases(name) || names.any { typeAlias -> it.hasTypeAliases(typeAlias) }
 }
@@ -160,7 +160,7 @@ fun <T : KoTypeAliasProvider> List<T>.withSomeTypeAliases(name: String, vararg n
  */
 @Deprecated(
     """
-            Will be removed in v1.0.0. 
+            Will be removed in v0.16.0. 
             If you passed one argument - replace with `withoutTypeAliasNamed`, otherwise with `withoutAllTypeAliasesNamed`.
             """,
     ReplaceWith("withoutTypeAliasNamed/withoutAllTypeAliasesNamed"),
@@ -176,7 +176,7 @@ fun <T : KoTypeAliasProvider> List<T>.withoutAllTypeAliases(name: String, vararg
  * @param names The type alias name(s) to exclude.
  * @return A list containing declarations without at least one of the specified type alias(es).
  */
-@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withoutTypeAliasNamed(*names"))
+@Deprecated("Will be removed in v0.16.0.", ReplaceWith("withoutTypeAliasNamed(*names"))
 fun <T : KoTypeAliasProvider> List<T>.withoutSomeTypeAliases(name: String, vararg names: String): List<T> = filter {
     val hasAtLeastOneTypeAlias = if (names.isNotEmpty()) {
         names.any { typeAlias -> !it.hasTypeAliases(typeAlias) }

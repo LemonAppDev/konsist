@@ -16,7 +16,7 @@ internal interface KoLocalFunctionProviderCore :
     override fun countLocalFunctions(predicate: (KoFunctionDeclaration) -> Boolean): Int =
         localFunctions.count { predicate(it) }
 
-    @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasLocalFunction()"))
+    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasLocalFunction()"))
     override fun containsLocalFunction(predicate: (KoFunctionDeclaration) -> Boolean): Boolean =
         localFunctions.any { predicate(it) }
 

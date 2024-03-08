@@ -80,7 +80,7 @@ interface KoParentClassProvider : KoBaseProvider {
      * @param name the name of the parent class to check.
      * @return `true` if the declaration has the specified parent class, `false` otherwise.
      */
-    @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasParents()"))
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasParents()"))
     fun hasParentClass(name: String): Boolean
 
     /**
