@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.util
 import java.io.File
 
 object PathUtil {
-    val sep: String = File.separator
+    val separator: String = File.separator
 
     fun toOsSeparator(path: String): String = path
         .replace("/", File.separator)
