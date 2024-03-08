@@ -76,7 +76,7 @@ jobs:
       - name: Cache Konsist Artifact
         uses: actions/cache@v4
         with:
-          path: ~/.m2/repository
+          path: home/runner/.m2
           key: konsist-artifact-${{github.sha}}
 
   konsist-starter-android-gradle-groovy-junit-4:
