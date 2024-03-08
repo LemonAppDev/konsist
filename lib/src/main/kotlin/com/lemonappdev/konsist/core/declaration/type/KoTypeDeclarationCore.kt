@@ -18,6 +18,7 @@ import com.lemonappdev.konsist.core.provider.KoNullableProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceAndAliasTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
@@ -28,7 +29,7 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 
 internal class KoTypeDeclarationCore private constructor(
-    private val ktTypeReference: KtTypeReference,
+    override val ktTypeReference: KtTypeReference,
     override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoTypeDeclaration,
@@ -46,7 +47,8 @@ internal class KoTypeDeclarationCore private constructor(
     KoSourceAndAliasTypeProviderCore,
     KoGenericTypeProviderCore,
     KoPackageProviderCore,
-    KoResideInPackageProviderCore {
+    KoResideInPackageProviderCore,
+    KoSourceDeclarationProviderCore {
     override val psiElement: PsiElement by lazy { ktTypeReference }
 
     override val ktElement: KtElement by lazy { ktTypeReference }
@@ -67,15 +69,6 @@ internal class KoTypeDeclarationCore private constructor(
     }
 
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
-
-    override val sourceDeclaration: KoBaseTypeDeclaration by lazy {
-        TypeUtil.getBasicType(
-            listOf(ktTypeReference),
-            ktTypeReference.isExtensionDeclaration(),
-            this,
-            containingFile,
-        ) ?: throw IllegalArgumentException("Declaration cannot be a null")
-    }
 
     override fun toString(): String = text
 

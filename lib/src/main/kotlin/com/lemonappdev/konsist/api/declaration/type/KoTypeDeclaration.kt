@@ -14,6 +14,7 @@ import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
+import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 
@@ -36,15 +37,5 @@ interface KoTypeDeclaration :
     KoGenericTypeProvider,
     KoSourceAndAliasTypeProvider,
     KoPackageProvider,
-    KoResideInPackageProvider {
-    /**
-     * Represents the source declaration associated with this type.
-     *
-     * The `sourceDeclaration` property provides access to the declaration of the type within the Kotlin codebase.
-     * It points to an instance of [KoBaseTypeDeclaration], which serves as the base interface for various types of
-     * declarations in Kotlin.
-     * This allows retrieving additional information about the declaration, such as its properties, functions,
-     * annotations, and other relevant metadata.
-     */
-    val sourceDeclaration: KoBaseTypeDeclaration
-}
+    KoResideInPackageProvider,
+    KoSourceDeclarationProvider

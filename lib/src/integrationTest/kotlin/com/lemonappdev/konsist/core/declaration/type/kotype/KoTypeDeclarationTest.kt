@@ -21,7 +21,7 @@ import kotlin.reflect.KClass
 class KoTypeDeclarationTest {
 
     @ParameterizedTest
-    @MethodSource("provideValuesForToString")
+    @MethodSource("provideValues")
     fun `to-string`(
         fileName: String,
         value: String,
@@ -38,36 +38,13 @@ class KoTypeDeclarationTest {
         sut?.toString() shouldBeEqualTo value
     }
 
-    @ParameterizedTest
-    @MethodSource("provideValuesForDeclaration")
-    fun `declaration`(
-        fileName: String,
-        instanceOf: KClass<*>,
-        notInstanceOf: KClass<*>,
-    ) {
-        // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-
-        // then
-        assertSoftly(sut) {
-            it?.sourceDeclaration shouldBeInstanceOf instanceOf
-            it?.sourceDeclaration shouldNotBeInstanceOf notInstanceOf
-        }
-    }
-
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/type/kotype/snippet/forgeneral/", fileName)
 
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForToString() = listOf(
+        fun provideValues() = listOf(
             arguments("nullable-kotlin-basic-type", "String?"),
             arguments("not-nullable-kotlin-basic-type", "String"),
             arguments("nullable-kotlin-collection-type", "List<String>?"),
@@ -86,29 +63,6 @@ class KoTypeDeclarationTest {
             arguments("not-nullable-typealias-type", "SampleTypeAlias"),
             arguments("nullable-external-type", "SampleExternalClass?"),
             arguments("not-nullable-external-type", "SampleExternalClass"),
-        )
-
-        @Suppress("unused")
-        @JvmStatic
-        fun provideValuesForDeclaration() = listOf(
-            arguments("nullable-kotlin-basic-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
-            arguments("not-nullable-kotlin-basic-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
-            arguments("nullable-kotlin-collection-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
-            arguments("not-nullable-kotlin-collection-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
-            arguments("nullable-class-type", KoClassDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("not-nullable-class-type", KoClassDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("nullable-interface-type", KoInterfaceDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("not-nullable-interface-type", KoInterfaceDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("nullable-object-type", KoObjectDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("not-nullable-object-type", KoObjectDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("nullable-function-type", KoFunctionTypeDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("not-nullable-function-type", KoFunctionTypeDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("nullable-import-alias-type", KoImportAliasDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("not-nullable-import-alias-type", KoImportAliasDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("nullable-typealias-type", KoTypeAliasDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("not-nullable-typealias-type", KoTypeAliasDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("nullable-external-type", KoExternalDeclaration::class, KoKotlinTypeDeclaration::class),
-            arguments("not-nullable-external-type", KoExternalDeclaration::class, KoKotlinTypeDeclaration::class),
         )
     }
 }
