@@ -77,6 +77,14 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
     fun hasSourceDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean
 
     /**
+     * Whether type has a source declaration of the specified Kotlin class.
+     *
+     * @param kClass The Kotlin class representing the source declaration to check for.
+     * @return `true` if the type has a source declaration matching the specified KClass, `false` otherwise.
+     */
+    fun hasSourceDeclarationOf(kClass: KClass<*>): Boolean
+
+    /**
      * Whether type has a specified source class.
      *
      * @param predicate The predicate function used to determine if a source class satisfies a condition.

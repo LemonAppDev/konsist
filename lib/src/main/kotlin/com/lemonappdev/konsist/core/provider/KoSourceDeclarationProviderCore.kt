@@ -57,6 +57,11 @@ internal interface KoSourceDeclarationProviderCore :
     override fun hasSourceDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean =
         predicate(sourceDeclaration)
 
+    override fun hasSourceDeclarationOf(kClass: KClass<*>): Boolean =
+        hasSourceClassOf(kClass) || hasSourceObjectOf(kClass) || hasSourceInterfaceOf(kClass) || hasSourceKotlinTypeOf(
+            kClass
+        ) || hasSourceExternalTypeOf(kClass)
+
     override fun hasSourceClass(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
             null -> sourceClass != null
