@@ -11,7 +11,7 @@ fun Project.getLocalPropertyOrGradleProperty(propertyName: String) =
     gradleLocalProperty(propertyName) ?: getProjectProperty(propertyName)
 
 /**
- * Returns versions from gradle.properties or local.properties for given release target eg.
+ * Returns versions from gradle.properties or local.properties for given release target e.g.
  * "x.y.x"
  * or
  * "x.y.x-SNAPSHOT"
@@ -27,7 +27,7 @@ fun Project.getFullKonsistVersion(releaseTarget: ReleaseTarget): String {
 }
 
 /**
- * Returns versions from gradle.properties or local.properties eg.
+ * Returns versions from gradle.properties or local.properties e.g.
  * "x.y.x"
  */
 fun Project.getKonsistVersion() = getLocalPropertyOrGradleProperty("konsist.version") ?: error("konsist.version is not provided.")

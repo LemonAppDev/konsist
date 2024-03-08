@@ -11,7 +11,7 @@ internal interface KoDefaultValueProviderCore : KoDefaultValueProvider, KoBasePr
 
     override val defaultValue: String?
         get() {
-            // eg. primitive value as default parameter value
+            // e.g. primitive value as default parameter value
             val constantExpressionText =
                 ktParameter
                     .children
@@ -22,7 +22,7 @@ internal interface KoDefaultValueProviderCore : KoDefaultValueProvider, KoBasePr
                 return constantExpressionText
             }
 
-            // eg. function call as default parameter value
+            // e.g. function call as default parameter value
 
             return ktParameter
                 .children
