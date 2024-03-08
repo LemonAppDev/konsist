@@ -48,6 +48,34 @@ jobs:
       all_changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
       head_commit_message: ${{ github.event.head_commit.message }}
 
+  publish-konsist-to-mavel-local:
+    name: Publish Konsist To Maven Local
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'corretto'
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.3'
+
+      - name: Add Maven Local Repository
+        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/konsist-starter-android-gradle-groovy-junit-4/settings.gradle
+
+      - name: List Konsist Files .
+        run: find . -type f -iname "*konsist*"
+
+      - name: List Konsist Files ~/.m2/repository
+        run: find ~/.m2/repository -type f -iname "*konsist*"
+
   konsist-starter-android-gradle-groovy-junit-4:
     name: Konsist Starter Android Gradle Groovy Junit 4
     needs: get-github-context
