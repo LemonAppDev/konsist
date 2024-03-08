@@ -1,6 +1,6 @@
 package ext
 
-import enu.ReleaseTarget
+import config.ReleaseTarget
 import org.gradle.api.Project
 import java.io.File
 import java.io.FileInputStream

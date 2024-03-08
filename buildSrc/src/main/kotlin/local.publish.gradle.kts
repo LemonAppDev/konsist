@@ -1,5 +1,4 @@
-
-import enu.ReleaseTarget
+import config.ReleaseTarget
 import ext.getFullKonsistVersion
 import ext.getLocalPropertyOrGradleProperty
 import ext.getReleaseTarget

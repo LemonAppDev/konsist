@@ -8,7 +8,10 @@ spotless {
             exclude(".gradle/**")
         }
 
-        ktlint("1.2.1")
+        val catalogs = extensions.getByType<VersionCatalogsExtension>()
+        val libs = catalogs.named("libs")
+        val ktlintCliVersion = libs.findVersion("ktlintCliVersion").get().toString()
+        ktlint(ktlintCliVersion)
 
         indentWithSpaces()
         endWithNewline()
