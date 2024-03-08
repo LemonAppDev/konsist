@@ -48,27 +48,27 @@ fix starter link
 
 1. Merge `main` to `develop`
 2. Create `release/vx.y.z` branch from `develop`
-3. Open PR targeting `main`
-4. Update Konsist version
+3. Update Konsist version
     1. [gradle.properties](gradle.properties) file
     2. [README.md](README.md) file
-5. Open the release PR and wait for all checks to pass
+4. Remove deprecated API 
+5. Open PR targeting `main` and wait for all checks to pass
 6. Release local artifact and test 3rd party projects using local artifact
    1. [Android-showcase](https://github.com/igorwojda/android-showcase)
    2. Mango (internal)
    3. [CleanArchitectureForAndroid](https://github.com/EranBoudjnah/CleanArchitectureForAndroid)
-7. Merge PR
+7. Merge PR to `main`
 8. Run `./gradlew publish -Pkonsist.releaseTarget=release` on the `main` branch to release a new version
 9. Create a new [GitHub release](https://github.com/LemonAppDev/konsist/releases/new)
-    1. set `vx.y.z` as tag version
-    2. set `vx.y.z` as release title
+    1. set `vX.Y.Z` as tag version
+    2. set `vX.Y.Z` as release title
 10. Update Konsist version in the
     Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/gettingstarted)
     docs page
 11. Run `/scripts/update-snippets.py` snippet to generate PR with updated snippets for Konsist Documentation
-12. Merge `main` to develop (`release` will have version changed)
+12. Merge `main` to `develop` (`release` branch will have changes e.g. version, deprecated APi removed...)
 13. Notify the community about the release
-14. Notify devs who have reported the issue or asked for the ne feature (community link in original ticket)
+14. Notify devs who have reported the issue or asked for the new feature (community links in original ticket)
 
 ## Sonatype
 
