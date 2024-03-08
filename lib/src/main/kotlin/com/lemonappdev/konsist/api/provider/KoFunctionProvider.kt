@@ -26,7 +26,7 @@ interface KoFunctionProvider : KoBaseProvider {
      * @param predicate The predicate function to determine if a function satisfies a condition.
      * @return `true` if the declaration contains a function with the specified predicate, `true` otherwise.
      */
-    @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasFunction()"))
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasFunction()"))
     fun containsFunction(
         includeNested: Boolean = true,
         includeLocal: Boolean = true,

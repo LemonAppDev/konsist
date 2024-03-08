@@ -23,7 +23,7 @@ interface KoObjectProvider : KoBaseProvider {
      * @param predicate The predicate function to determine if an object satisfies a condition.
      * @return `true` if the declaration contains an object with the specified predicate, `true` otherwise.
      */
-    @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasObject()"))
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasObject()"))
     fun containsObject(
         includeNested: Boolean = true,
         predicate: (KoObjectDeclaration) -> Boolean,

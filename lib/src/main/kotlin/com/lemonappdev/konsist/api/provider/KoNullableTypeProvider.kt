@@ -18,7 +18,7 @@ interface KoNullableTypeProvider : KoBaseProvider {
      * @param name the type name to check for.
      * @return `true` if the declaration has the specified type, `false` otherwise.
      */
-    @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasType { it.name == name }"))
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasType { it.name == name }"))
     fun hasType(name: String): Boolean
 
     /**

@@ -23,7 +23,7 @@ interface KoInterfaceProvider : KoBaseProvider {
      * @param predicate The predicate function to determine if an interface satisfies a condition.
      * @return `true` if the declaration contains an interface with the specified predicate, `true` otherwise.
      */
-    @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasInterface()"))
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasInterface()"))
     fun containsInterface(
         includeNested: Boolean = true,
         predicate: (KoInterfaceDeclaration) -> Boolean,

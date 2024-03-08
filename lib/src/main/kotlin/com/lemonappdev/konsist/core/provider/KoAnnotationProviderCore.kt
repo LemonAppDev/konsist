@@ -26,7 +26,7 @@ internal interface KoAnnotationProviderCore :
 
     @Deprecated(
         """
-            Will be removed in v1.0.0. 
+            Will be removed in v0.16.0. 
             If you passed one argument - replace with `hasAnnotationWithName`, otherwise with `hasAnnotationsWithAllNames`.
             """,
     )
@@ -39,7 +39,7 @@ internal interface KoAnnotationProviderCore :
 
     @Deprecated(
         """
-            Will be removed in v1.0.0. 
+            Will be removed in v0.16.0. 
             If you passed one argument - replace with `hasAnnotationOf`, otherwise with `hasAllAnnotationsOf`.
             """,
     )

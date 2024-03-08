@@ -70,7 +70,7 @@ fun <T : KoModifierProvider> List<T>.withoutAllModifiers(modifier: KoModifier, v
  * @param modifiers The modifiers to include.
  * @return A list containing declarations with at least one of the specified modifiers.
  */
-@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withModifier(modifier, modifiers)"))
+@Deprecated("Will be removed in v0.16.0.", ReplaceWith("withModifier(modifier, modifiers)"))
 fun <T : KoModifierProvider> List<T>.withSomeModifiers(modifier: KoModifier, vararg modifiers: KoModifier): List<T> =
     filter {
         it.hasModifiers(modifier) || modifiers.any { modifier -> it.hasModifiers(modifier) }
@@ -83,7 +83,7 @@ fun <T : KoModifierProvider> List<T>.withSomeModifiers(modifier: KoModifier, var
  * @param modifiers The modifiers to exclude.
  * @return A list containing declarations without at least one of the specified modifiers.
  */
-@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withoutModifier(modifier, modifiers)"))
+@Deprecated("Will be removed in v0.16.0.", ReplaceWith("withoutModifier(modifier, modifiers)"))
 fun <T : KoModifierProvider> List<T>.withoutSomeModifiers(modifier: KoModifier, vararg modifiers: KoModifier): List<T> =
     filter {
         val missesAtLeastOneModifier = if (modifiers.isNotEmpty()) {
