@@ -11,7 +11,7 @@ import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
-import java.util.*
+import java.util.Locale
 
 class ApiKonsistTest {
     private val apiPackageScope = Konsist.scopeFromPackage("com.lemonappdev.konsist.api..", sourceSetName = "main")

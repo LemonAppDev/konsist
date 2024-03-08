@@ -62,8 +62,14 @@ class KoKDocDeclarationForKoKDocDescriptionProviderTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForClass() = listOf(
-            arguments("class-with-description-and-tags", "This is a sample class that demonstrates the usage of KDoc tags."),
-            arguments("class-with-description-and-without-tags", "This is a sample class that demonstrates the usage of KDoc tags."),
+            arguments(
+                "class-with-description-and-tags",
+                "This is a sample class that demonstrates the usage of KDoc tags."
+            ),
+            arguments(
+                "class-with-description-and-without-tags",
+                "This is a sample class that demonstrates the usage of KDoc tags."
+            ),
             arguments("class-without-description-and-with-tags", ""),
             arguments("class-with-empty-kdoc", ""),
         )
@@ -71,8 +77,14 @@ class KoKDocDeclarationForKoKDocDescriptionProviderTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForFunction() = listOf(
-            arguments("function-with-description-and-tags", "This is a sample method that demonstrates the usage of KDoc tags."),
-            arguments("function-with-description-and-without-tags", "This is a sample method that demonstrates the usage of KDoc tags."),
+            arguments(
+                "function-with-description-and-tags",
+                "This is a sample method that demonstrates the usage of KDoc tags."
+            ),
+            arguments(
+                "function-with-description-and-without-tags",
+                "This is a sample method that demonstrates the usage of KDoc tags."
+            ),
             arguments("function-without-description-and-with-tags", ""),
             arguments("function-with-empty-kdoc", ""),
         )
@@ -80,8 +92,14 @@ class KoKDocDeclarationForKoKDocDescriptionProviderTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForProperty() = listOf(
-            arguments("property-with-description-and-tags", "This is a sample property that demonstrates the usage of KDoc tags."),
-            arguments("property-with-description-and-without-tags", "This is a sample property that demonstrates the usage of KDoc tags."),
+            arguments(
+                "property-with-description-and-tags",
+                "This is a sample property that demonstrates the usage of KDoc tags."
+            ),
+            arguments(
+                "property-with-description-and-without-tags",
+                "This is a sample property that demonstrates the usage of KDoc tags."
+            ),
             arguments("property-without-description-and-with-tags", ""),
             arguments("property-with-empty-kdoc", ""),
         )

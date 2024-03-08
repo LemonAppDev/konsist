@@ -3,7 +3,7 @@ import enu.ReleaseTarget
 import ext.getFullKonsistVersion
 import ext.getLocalPropertyOrGradleProperty
 import ext.getReleaseTarget
-import java.util.*
+import java.util.Base64
 
 plugins {
     `maven-publish`

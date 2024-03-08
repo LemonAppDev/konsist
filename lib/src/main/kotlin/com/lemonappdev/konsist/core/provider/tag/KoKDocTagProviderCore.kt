@@ -9,7 +9,7 @@ import com.lemonappdev.konsist.core.declaration.KoValuedKDocTagDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.util.EndOfLine
-import java.util.*
+import java.util.Locale
 
 internal interface KoKDocTagProviderCore : KoKDocTagProvider, KoTextProviderCore, KoBaseProviderCore {
     override val tags: List<KoKDocTagDeclaration>

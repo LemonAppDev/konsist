@@ -5,7 +5,7 @@ import org.gradle.api.Project
 import java.io.File
 import java.io.FileInputStream
 import java.io.InputStreamReader
-import java.util.*
+import java.util.Properties
 
 fun Project.getLocalPropertyOrGradleProperty(propertyName: String) =
     gradleLocalProperty(propertyName) ?: getProjectProperty(propertyName)

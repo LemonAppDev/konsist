@@ -4,7 +4,11 @@ plugins {
 
 spotless {
     kotlin {
-        ktlint()
+        project.fileTree(project.rootDir) {
+            exclude(".gradle/**")
+        }
+
+        ktlint("1.2.1")
 
         indentWithSpaces()
         endWithNewline()
