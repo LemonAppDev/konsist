@@ -18,10 +18,24 @@ import com.lemonappdev.konsist.core.util.LocationUtil
  */
 data class Layer(internal val name: String, internal val definedBy: String) {
     init {
-        val pattern = Regex(pattern = LocationUtil.REGEX_PACKAGE_NAME_END_TWO_DOTS)
+        val twoDotsAtTheEndPattern = Regex(pattern = LocationUtil.REGEX_PACKAGE_NAME_END_TWO_DOTS)
+        val withoutSingleDotAtTheBeginningPattern =
+            Regex(pattern = LocationUtil.REGEX_PACKAGE_NAME_WITHOUT_SINGLE_DOT_AT_THE_BEGINNING)
+        val withoutFewDotsInOnePlacePattern =
+            Regex(pattern = LocationUtil.REGEX_PACKAGE_NAME_WITHOUT_FEW_DOTS_IN_ONE_PLACE)
 
-        if (!definedBy.matches(pattern)) {
+        if (!definedBy.matches(withoutSingleDotAtTheBeginningPattern)) {
+            throw KoPreconditionFailedException("Layer $name cannot be defined by a package starting with a single dot. Now: $definedBy .")
+        }
+
+        if (!definedBy.matches(twoDotsAtTheEndPattern)) {
             throw KoPreconditionFailedException("Layer $name must be defined by package ending with '..'. Now: $definedBy .")
+        }
+
+        if (!definedBy.matches(withoutFewDotsInOnePlacePattern)) {
+            throw KoPreconditionFailedException(
+                "Layer $name cannot be defined by a package containing more than two dots in one place. Now: $definedBy .",
+            )
         }
     }
 }

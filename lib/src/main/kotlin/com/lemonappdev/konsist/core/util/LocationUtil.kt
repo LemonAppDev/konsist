@@ -1,9 +1,31 @@
 package com.lemonappdev.konsist.core.util
 
 object LocationUtil {
+    /**
+     * Regex to match packages names ending with 2 (two) dots '.' at the end.
+     *
+     *    .*   = Matches zero or more of any character
+     *    \w+  = Matches one or more word characters (alphanumeric characters or underscore).
+     *   \.{2} = escaped char '.' (dot) appearing 2 times
+     *     $   = Matches end of string
+     */
+    internal const val REGEX_PACKAGE_NAME_END_TWO_DOTS = ".*\\w+\\.{2}\$"
 
     /**
-     *  Regex to match packages names ending with 2 (two) dots '.' at the end.
+     * Regex to match packages names without single dot at the beginning.
+     *
+     *    ^   = Matches beginning of string
+     *  (?:)  = non-capturing group.
+     *   \w   = Matches one word character (alphanumeric character or underscore).
+     *    |   = OR
+     *  \.{2} = escaped char '.' (dot) appearing 2 times
+     *   \w   = Matches one word character (alphanumeric character or underscore).
+     *   .*   = Matches zero or more of any character
+     */
+    internal const val REGEX_PACKAGE_NAME_WITHOUT_SINGLE_DOT_AT_THE_BEGINNING = "^(?:\\w|\\.{2}\\w).*"
+
+    /**
+     *  Regex to match packages names not containing more than two dots in on place.
      *
      *   (?:)    = non-capturing group.
      *    \w+    = Matches one or more word characters (alphanumeric characters or underscore).
@@ -15,7 +37,7 @@ object LocationUtil {
      *   \.{2}   = escaped char '.' (dot) appearing 2 times
      *     $     = Matches end of string
      */
-    internal const val REGEX_PACKAGE_NAME_END_TWO_DOTS = "(?:\\w+|\\.{2}\\w+)(?:\\.{0,2}\\w+)+\\.{2}\$"
+    internal const val REGEX_PACKAGE_NAME_WITHOUT_FEW_DOTS_IN_ONE_PLACE = "(?:\\w+|\\.{2}\\w+)(?:\\.{0,2}\\w+)+\\.{2}\$"
 
     /**
      * Use '..' as a wildcard for any number of characters.
