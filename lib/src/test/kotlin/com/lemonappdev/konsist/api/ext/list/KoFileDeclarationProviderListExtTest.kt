@@ -22,24 +22,29 @@ class KoFileDeclarationProviderListExtTest {
         val class2: KoClassDeclarationCore = mockk()
         val interface1: KoInterfaceDeclarationCore = mockk()
         val property1: KoPropertyDeclarationCore = mockk()
-        val declaration1: KoDeclarationProvider = mockk {
-            every { declarations(includeNested = true, includeLocal = false) } returns listOf(class1, function1)
-        }
-        val declaration2: KoDeclarationProvider = mockk {
-            every { declarations(includeNested = true, includeLocal = false) } returns listOf(class2, interface1)
-        }
-        val declaration3: KoDeclarationProvider = mockk {
-            every { declarations(includeNested = true, includeLocal = false) } returns listOf(property1)
-        }
-        val declaration4: KoDeclarationProvider = mockk {
-            every { declarations(includeNested = true, includeLocal = false) } returns emptyList()
-        }
-        val declarations = listOf(
-            declaration1,
-            declaration2,
-            declaration3,
-            declaration4,
-        )
+        val declaration1: KoDeclarationProvider =
+            mockk {
+                every { declarations(includeNested = true, includeLocal = false) } returns listOf(class1, function1)
+            }
+        val declaration2: KoDeclarationProvider =
+            mockk {
+                every { declarations(includeNested = true, includeLocal = false) } returns listOf(class2, interface1)
+            }
+        val declaration3: KoDeclarationProvider =
+            mockk {
+                every { declarations(includeNested = true, includeLocal = false) } returns listOf(property1)
+            }
+        val declaration4: KoDeclarationProvider =
+            mockk {
+                every { declarations(includeNested = true, includeLocal = false) } returns emptyList()
+            }
+        val declarations =
+            listOf(
+                declaration1,
+                declaration2,
+                declaration3,
+                declaration4,
+            )
 
         // when
         val sut = declarations.declarations(includeNested = true, includeLocal = false)
@@ -51,12 +56,14 @@ class KoFileDeclarationProviderListExtTest {
     @Test
     fun `withDeclarations() returns declaration with any declaration`() {
         // given
-        val declaration1: KoDeclarationProvider = mockk {
-            every { hasDeclarations() } returns true
-        }
-        val declaration2: KoDeclarationProvider = mockk {
-            every { hasDeclarations() } returns false
-        }
+        val declaration1: KoDeclarationProvider =
+            mockk {
+                every { hasDeclarations() } returns true
+            }
+        val declaration2: KoDeclarationProvider =
+            mockk {
+                every { hasDeclarations() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -69,12 +76,14 @@ class KoFileDeclarationProviderListExtTest {
     @Test
     fun `withoutDeclarations() returns declaration without any declaration`() {
         // given
-        val declaration1: KoDeclarationProvider = mockk {
-            every { hasDeclarations() } returns true
-        }
-        val declaration2: KoDeclarationProvider = mockk {
-            every { hasDeclarations() } returns false
-        }
+        val declaration1: KoDeclarationProvider =
+            mockk {
+                every { hasDeclarations() } returns true
+            }
+        val declaration2: KoDeclarationProvider =
+            mockk {
+                every { hasDeclarations() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -89,12 +98,14 @@ class KoFileDeclarationProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoBaseDeclaration) -> Boolean = { (it as KoNameProvider).hasNameEndingWith(suffix) }
-        val declaration1: KoDeclarationProvider = mockk {
-            every { hasDeclaration(true, true, predicate) } returns true
-        }
-        val declaration2: KoDeclarationProvider = mockk {
-            every { hasDeclaration(true, true, predicate) } returns false
-        }
+        val declaration1: KoDeclarationProvider =
+            mockk {
+                every { hasDeclaration(true, true, predicate) } returns true
+            }
+        val declaration2: KoDeclarationProvider =
+            mockk {
+                every { hasDeclaration(true, true, predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -109,12 +120,14 @@ class KoFileDeclarationProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoBaseDeclaration) -> Boolean = { (it as KoNameProvider).hasNameEndingWith(suffix) }
-        val declaration1: KoDeclarationProvider = mockk {
-            every { hasDeclaration(true, true, predicate) } returns true
-        }
-        val declaration2: KoDeclarationProvider = mockk {
-            every { hasDeclaration(true, true, predicate) } returns false
-        }
+        val declaration1: KoDeclarationProvider =
+            mockk {
+                every { hasDeclaration(true, true, predicate) } returns true
+            }
+        val declaration2: KoDeclarationProvider =
+            mockk {
+                every { hasDeclaration(true, true, predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -129,12 +142,14 @@ class KoFileDeclarationProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoBaseDeclaration) -> Boolean = { (it as KoNameProvider).hasNameEndingWith(suffix) }
-        val declaration1: KoDeclarationProvider = mockk {
-            every { hasAllDeclarations(true, true, predicate) } returns true
-        }
-        val declaration2: KoDeclarationProvider = mockk {
-            every { hasAllDeclarations(true, true, predicate) } returns false
-        }
+        val declaration1: KoDeclarationProvider =
+            mockk {
+                every { hasAllDeclarations(true, true, predicate) } returns true
+            }
+        val declaration2: KoDeclarationProvider =
+            mockk {
+                every { hasAllDeclarations(true, true, predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -149,12 +164,14 @@ class KoFileDeclarationProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoBaseDeclaration) -> Boolean = { (it as KoNameProvider).hasNameEndingWith(suffix) }
-        val declaration1: KoDeclarationProvider = mockk {
-            every { hasAllDeclarations(true, true, predicate) } returns true
-        }
-        val declaration2: KoDeclarationProvider = mockk {
-            every { hasAllDeclarations(true, true, predicate) } returns false
-        }
+        val declaration1: KoDeclarationProvider =
+            mockk {
+                every { hasAllDeclarations(true, true, predicate) } returns true
+            }
+        val declaration2: KoDeclarationProvider =
+            mockk {
+                every { hasAllDeclarations(true, true, predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -170,21 +187,26 @@ class KoFileDeclarationProviderListExtTest {
         val suffix = "Name"
         val predicate: (List<KoBaseDeclaration>) -> Boolean =
             { it.all { koDeclaration -> (koDeclaration as KoNameProvider).hasNameEndingWith(suffix) } }
-        val class1: KoClassDeclaration = mockk {
-            every { hasNameEndingWith(suffix) } returns true
-        }
-        val class2: KoClassDeclaration = mockk {
-            every { hasNameEndingWith(suffix) } returns false
-        }
-        val declaration1: KoDeclarationProvider = mockk {
-            every { declarations() } returns listOf(class1)
-        }
-        val declaration2: KoDeclarationProvider = mockk {
-            every { declarations() } returns listOf(class2)
-        }
-        val declaration3: KoDeclarationProvider = mockk {
-            every { declarations() } returns emptyList()
-        }
+        val class1: KoClassDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns true
+            }
+        val class2: KoClassDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns false
+            }
+        val declaration1: KoDeclarationProvider =
+            mockk {
+                every { declarations() } returns listOf(class1)
+            }
+        val declaration2: KoDeclarationProvider =
+            mockk {
+                every { declarations() } returns listOf(class2)
+            }
+        val declaration3: KoDeclarationProvider =
+            mockk {
+                every { declarations() } returns emptyList()
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -200,21 +222,26 @@ class KoFileDeclarationProviderListExtTest {
         val suffix = "Name"
         val predicate: (List<KoBaseDeclaration>) -> Boolean =
             { it.all { koDeclaration -> (koDeclaration as KoNameProvider).hasNameEndingWith(suffix) } }
-        val class1: KoClassDeclaration = mockk {
-            every { hasNameEndingWith(suffix) } returns true
-        }
-        val class2: KoClassDeclaration = mockk {
-            every { hasNameEndingWith(suffix) } returns false
-        }
-        val declaration1: KoDeclarationProvider = mockk {
-            every { declarations() } returns listOf(class1)
-        }
-        val declaration2: KoDeclarationProvider = mockk {
-            every { declarations() } returns listOf(class2)
-        }
-        val declaration3: KoDeclarationProvider = mockk {
-            every { declarations() } returns emptyList()
-        }
+        val class1: KoClassDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns true
+            }
+        val class2: KoClassDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns false
+            }
+        val declaration1: KoDeclarationProvider =
+            mockk {
+                every { declarations() } returns listOf(class1)
+            }
+        val declaration2: KoDeclarationProvider =
+            mockk {
+                every { declarations() } returns listOf(class2)
+            }
+        val declaration3: KoDeclarationProvider =
+            mockk {
+                every { declarations() } returns emptyList()
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when

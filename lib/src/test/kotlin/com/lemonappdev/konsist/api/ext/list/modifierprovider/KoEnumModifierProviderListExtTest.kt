@@ -10,12 +10,14 @@ class KoEnumModifierProviderListExtTest {
     @Test
     fun `withEnumModifier() returns declaration with enum modifier`() {
         // given
-        val declaration1: KoEnumModifierProvider = mockk {
-            every { hasEnumModifier } returns true
-        }
-        val declaration2: KoEnumModifierProvider = mockk {
-            every { hasEnumModifier } returns false
-        }
+        val declaration1: KoEnumModifierProvider =
+            mockk {
+                every { hasEnumModifier } returns true
+            }
+        val declaration2: KoEnumModifierProvider =
+            mockk {
+                every { hasEnumModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -28,12 +30,14 @@ class KoEnumModifierProviderListExtTest {
     @Test
     fun `withoutEnumModifier() returns declaration without enum modifier`() {
         // given
-        val declaration1: KoEnumModifierProvider = mockk {
-            every { hasEnumModifier } returns true
-        }
-        val declaration2: KoEnumModifierProvider = mockk {
-            every { hasEnumModifier } returns false
-        }
+        val declaration1: KoEnumModifierProvider =
+            mockk {
+                every { hasEnumModifier } returns true
+            }
+        val declaration2: KoEnumModifierProvider =
+            mockk {
+                every { hasEnumModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

@@ -8,9 +8,10 @@ class KoTypeAliasDeclarationForKoActualModifierProviderTest {
     @Test
     fun `typealias-without-actual-modifier`() {
         // given
-        val sut = getSnippetFile("typealias-without-actual-modifier")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-without-actual-modifier")
+                .typeAliases
+                .first()
 
         // then
         sut.hasActualModifier shouldBeEqualTo false
@@ -19,9 +20,10 @@ class KoTypeAliasDeclarationForKoActualModifierProviderTest {
     @Test
     fun `typealias-has-actual-modifier`() {
         // given
-        val sut = getSnippetFile("typealias-has-actual-modifier")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-has-actual-modifier")
+                .typeAliases
+                .first()
 
         // then
         sut.hasActualModifier shouldBeEqualTo true

@@ -232,8 +232,10 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesOf(
  * @return A list containing declarations with all the specified parent interface(s).
  */
 @Deprecated("Will be removed in v0.16.0", ReplaceWith("withAllParents()"))
-fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfaces(name: String, vararg names: String): List<T> =
-    filter { it.hasParentInterfaces(name, *names) }
+fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfaces(
+    name: String,
+    vararg names: String,
+): List<T> = filter { it.hasParentInterfaces(name, *names) }
 
 /**
  * List containing declarations with some named parent interface.
@@ -243,8 +245,10 @@ fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfaces(name: String
  * @return A list containing declarations with at least one of the specified parent interface(s).
  */
 @Deprecated("Will be removed in v0.16.0", ReplaceWith("withSomeParents()"))
-fun <T : KoParentInterfaceProvider> List<T>.withSomeParentInterfaces(name: String, vararg names: String): List<T> =
-    filter { it.hasParentInterfaces(name) || names.any { name -> it.hasParentInterfaces(name) } }
+fun <T : KoParentInterfaceProvider> List<T>.withSomeParentInterfaces(
+    name: String,
+    vararg names: String,
+): List<T> = filter { it.hasParentInterfaces(name) || names.any { name -> it.hasParentInterfaces(name) } }
 
 /**
  * List containing declarations without all specified parent interfaces of type.
@@ -254,8 +258,10 @@ fun <T : KoParentInterfaceProvider> List<T>.withSomeParentInterfaces(name: Strin
  * @return A list containing declarations without all specified parent interface(s).
  */
 @Deprecated("Will be removed in v0.16.0", ReplaceWith("withoutAllParents()"))
-fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfaces(name: String, vararg names: String): List<T> =
-    filterNot { it.hasParentInterfaces(name, *names) }
+fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfaces(
+    name: String,
+    vararg names: String,
+): List<T> = filterNot { it.hasParentInterfaces(name, *names) }
 
 /**
  * List containing declarations without some named parent interface.
@@ -265,13 +271,17 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfaces(name: Str
  * @return A list containing declarations without at least one of the specified parent interface(s).
  */
 @Deprecated("Will be removed in v0.16.0", ReplaceWith("withoutSomeParents()"))
-fun <T : KoParentInterfaceProvider> List<T>.withoutSomeParentInterfaces(name: String, vararg names: String): List<T> =
+fun <T : KoParentInterfaceProvider> List<T>.withoutSomeParentInterfaces(
+    name: String,
+    vararg names: String,
+): List<T> =
     filter {
-        !it.hasParentInterfaces(name) && if (names.isNotEmpty()) {
-            names.any { name -> !it.hasParentInterfaces(name) }
-        } else {
-            true
-        }
+        !it.hasParentInterfaces(name) &&
+            if (names.isNotEmpty()) {
+                names.any { name -> !it.hasParentInterfaces(name) }
+            } else {
+                true
+            }
     }
 
 /**
@@ -308,15 +318,16 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutSomeParentInterfacesOf(
     vararg kClasses: KClass<*>,
 ): List<T> =
     filter {
-        val hasNoMatchingParentInterfaces = if (kClasses.isNotEmpty()) {
-            kClasses.any { kClass ->
-                it
-                    .parentInterfaces
-                    .none { parent -> parent.name == kClass.simpleName }
+        val hasNoMatchingParentInterfaces =
+            if (kClasses.isNotEmpty()) {
+                kClasses.any { kClass ->
+                    it
+                        .parentInterfaces
+                        .none { parent -> parent.name == kClass.simpleName }
+                }
+            } else {
+                true
             }
-        } else {
-            true
-        }
 
         it.parentInterfaces.none { parent -> parent.name == kClass.simpleName } &&
             hasNoMatchingParentInterfaces

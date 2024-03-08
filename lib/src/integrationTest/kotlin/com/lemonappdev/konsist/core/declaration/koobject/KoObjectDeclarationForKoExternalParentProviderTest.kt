@@ -15,9 +15,10 @@ class KoObjectDeclarationForKoExternalParentProviderTest {
     @Test
     fun `object-has-no-external-parent`() {
         // given
-        val sut = getSnippetFile("object-has-no-external-parent")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-no-external-parent")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -37,9 +38,10 @@ class KoObjectDeclarationForKoExternalParentProviderTest {
     @Test
     fun `object-has-only-direct-external-parents`() {
         // given
-        val sut = getSnippetFile("object-has-only-direct-external-parents")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-only-direct-external-parents")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -72,9 +74,10 @@ class KoObjectDeclarationForKoExternalParentProviderTest {
     @Test
     fun `object-has-internal-and-external-parents`() {
         // given
-        val sut = getSnippetFile("object-has-internal-and-external-parents")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-internal-and-external-parents")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -108,17 +111,19 @@ class KoObjectDeclarationForKoExternalParentProviderTest {
     @Test
     fun `object-has-indirect-external-parents`() {
         // given
-        val sut = getSnippetFile("object-has-indirect-external-parents")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-indirect-external-parents")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
             externalParents(indirectParents = false) shouldBeEqualTo emptyList()
-            externalParents(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
-                "SampleExternalClass",
-                "SampleExternalInterface",
-            )
+            externalParents(indirectParents = true).map { it.name } shouldBeEqualTo
+                listOf(
+                    "SampleExternalClass",
+                    "SampleExternalInterface",
+                )
             numExternalParents(indirectParents = false) shouldBeEqualTo 0
             numExternalParents(indirectParents = true) shouldBeEqualTo 2
             countExternalParents(indirectParents = false) { it.name == "SampleExternalClass" } shouldBeEqualTo 0
@@ -179,17 +184,19 @@ class KoObjectDeclarationForKoExternalParentProviderTest {
     @Test
     fun `object-has-indirect-repeated-external-parents`() {
         // given
-        val sut = getSnippetFile("object-has-indirect-repeated-external-parents")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-indirect-repeated-external-parents")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
             externalParents(indirectParents = false).map { it.name } shouldBeEqualTo listOf("SampleExternalInterface")
-            externalParents(indirectParents = true).map { it.name } shouldBeEqualTo listOf(
-                "SampleExternalInterface",
-                "SampleExternalClass",
-            )
+            externalParents(indirectParents = true).map { it.name } shouldBeEqualTo
+                listOf(
+                    "SampleExternalInterface",
+                    "SampleExternalClass",
+                )
             numExternalParents(indirectParents = false) shouldBeEqualTo 1
             numExternalParents(indirectParents = true) shouldBeEqualTo 2
         }

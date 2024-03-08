@@ -9,9 +9,10 @@ class KoFunctionDeclarationForKoContainingDeclarationProviderTest {
     @Test
     fun `function-with-file-parent-declaration`() {
         // given
-        val sut = getSnippetFile("function-with-file-parent-declaration")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-with-file-parent-declaration")
+                .functions()
+                .first()
 
         // then
         (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "function-with-file-parent-declaration"
@@ -20,9 +21,10 @@ class KoFunctionDeclarationForKoContainingDeclarationProviderTest {
     @Test
     fun `function-with-parent-declaration`() {
         // given
-        val sut = getSnippetFile("function-with-parent-declaration")
-            .functions(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("function-with-parent-declaration")
+                .functions(includeNested = true)
+                .first()
 
         // then
         (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "SampleClass"

@@ -10,14 +10,15 @@ class KoImportAliasDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `import-alias-type-reside-in-package`() {
         // given
-        val sut = getSnippetFile("import-alias-type-reside-in-package")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoImportAliasDeclaration
+        val sut =
+            getSnippetFile("import-alias-type-reside-in-package")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoImportAliasDeclaration
 
         // then
         assertSoftly(sut) {

@@ -9,9 +9,10 @@ class KoPropertyDeclarationForKoGetterProviderTest {
     @Test
     fun `property-has-no-getter`() {
         // given
-        val sut = getSnippetFile("property-has-no-getter")
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-has-no-getter")
+                .properties()
+                .first()
 
         // then
         sut.hasGetter shouldBeEqualTo false
@@ -20,9 +21,10 @@ class KoPropertyDeclarationForKoGetterProviderTest {
     @Test
     fun `property-has-getter`() {
         // given
-        val sut = getSnippetFile("property-has-getter")
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-has-getter")
+                .properties()
+                .first()
 
         // then
         sut.hasGetter shouldBeEqualTo true
@@ -31,14 +33,14 @@ class KoPropertyDeclarationForKoGetterProviderTest {
     @Test
     fun `property-has-getter-and-setter`() {
         // given
-        val sut = getSnippetFile("property-has-getter-and-setter")
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-has-getter-and-setter")
+                .properties()
+                .first()
 
         // then
         sut.hasGetter shouldBeEqualTo true
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koproperty/snippet/forkogetterprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koproperty/snippet/forkogetterprovider/", fileName)
 }

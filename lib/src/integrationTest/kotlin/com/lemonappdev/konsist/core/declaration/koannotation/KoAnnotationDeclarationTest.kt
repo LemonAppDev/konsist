@@ -8,11 +8,12 @@ class KoAnnotationDeclarationTest {
     @Test
     fun `annotation-to-string`() {
         // given
-        val sut = getSnippetFile("annotation-to-string")
-            .functions()
-            .first()
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-to-string")
+                .functions()
+                .first()
+                .annotations
+                .first()
 
         // then
         sut.toString() shouldBeEqualTo "SampleAnnotation"

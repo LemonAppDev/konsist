@@ -14,13 +14,14 @@ class KoTypeDeclarationForKoLocationProviderTest {
         value: String,
     ) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         sut?.location shouldBeEqualTo "${sut?.path}:$value"
@@ -32,25 +33,26 @@ class KoTypeDeclarationForKoLocationProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("nullable-kotlin-basic-type-location", "1:41"),
-            arguments("not-nullable-kotlin-basic-type-location", "1:41"),
-            arguments("nullable-kotlin-collection-type-location", "1:41"),
-            arguments("not-nullable-kotlin-collection-type-location", "1:41"),
-            arguments("nullable-class-type-location", "3:41"),
-            arguments("not-nullable-class-type-location", "3:41"),
-            arguments("nullable-interface-type-location", "3:41"),
-            arguments("not-nullable-interface-type-location", "3:41"),
-            arguments("nullable-object-type-location", "3:41"),
-            arguments("not-nullable-object-type-location", "3:41"),
-            arguments("nullable-function-type-location", "3:41"),
-            arguments("not-nullable-function-type-location", "3:41"),
-            arguments("nullable-import-alias-type-location", "3:41"),
-            arguments("not-nullable-import-alias-type-location", "3:41"),
-            arguments("nullable-typealias-type-location", "3:41"),
-            arguments("not-nullable-typealias-type-location", "3:41"),
-            arguments("nullable-external-type-location", "3:41"),
-            arguments("not-nullable-external-type-location", "3:41"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("nullable-kotlin-basic-type-location", "1:41"),
+                arguments("not-nullable-kotlin-basic-type-location", "1:41"),
+                arguments("nullable-kotlin-collection-type-location", "1:41"),
+                arguments("not-nullable-kotlin-collection-type-location", "1:41"),
+                arguments("nullable-class-type-location", "3:41"),
+                arguments("not-nullable-class-type-location", "3:41"),
+                arguments("nullable-interface-type-location", "3:41"),
+                arguments("not-nullable-interface-type-location", "3:41"),
+                arguments("nullable-object-type-location", "3:41"),
+                arguments("not-nullable-object-type-location", "3:41"),
+                arguments("nullable-function-type-location", "3:41"),
+                arguments("not-nullable-function-type-location", "3:41"),
+                arguments("nullable-import-alias-type-location", "3:41"),
+                arguments("not-nullable-import-alias-type-location", "3:41"),
+                arguments("nullable-typealias-type-location", "3:41"),
+                arguments("not-nullable-typealias-type-location", "3:41"),
+                arguments("nullable-external-type-location", "3:41"),
+                arguments("not-nullable-external-type-location", "3:41"),
+            )
     }
 }

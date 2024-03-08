@@ -60,9 +60,7 @@ interface KoScope {
      * @param includeNested specifies whether to include nested interfaces, by default `true`.
      * @return a list of [KoInterfaceDeclaration] representing the interfaces in the scope.
      */
-    fun interfaces(
-        includeNested: Boolean = true,
-    ): List<KoInterfaceDeclaration>
+    fun interfaces(includeNested: Boolean = true): List<KoInterfaceDeclaration>
 
     /**
      * The objects present in the scope.
@@ -70,9 +68,7 @@ interface KoScope {
      * @param includeNested specifies whether to include nested objects, by default `true`.
      * @return a list of [KoObjectDeclaration] representing the objects in the scope.
      */
-    fun objects(
-        includeNested: Boolean = true,
-    ): List<KoObjectDeclaration>
+    fun objects(includeNested: Boolean = true): List<KoObjectDeclaration>
 
     /**
      * The functions present in the scope.
@@ -104,9 +100,7 @@ interface KoScope {
      * @param includeNested specifies whether to include nested properties, by default `true`.
      * @return a list of [KoPropertyDeclaration] representing the properties in the scope.
      */
-    fun properties(
-        includeNested: Boolean = true,
-    ): List<KoPropertyDeclaration>
+    fun properties(includeNested: Boolean = true): List<KoPropertyDeclaration>
 
     /**
      * The scope with given predicate.
@@ -161,7 +155,10 @@ interface KoScope {
      *                  If predicate is not provided (default is `null`), the function uses `toString` method.
      * @return The original scope.
      */
-    fun print(prefix: String? = null, predicate: ((KoScope) -> String)? = null): KoScope
+    fun print(
+        prefix: String? = null,
+        predicate: ((KoScope) -> String)? = null,
+    ): KoScope
 
     /**
      * Indicates whether some other object is "equal to" this one.

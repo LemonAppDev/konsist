@@ -9,9 +9,10 @@ class KoTypeAliasDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `typealias-without-visibility-modifiers`() {
         // given
-        val sut = getSnippetFile("typealias-without-visibility-modifiers")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-without-visibility-modifiers")
+                .typeAliases
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -27,9 +28,10 @@ class KoTypeAliasDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `typealias-has-public-modifier`() {
         // given
-        val sut = getSnippetFile("typealias-has-public-modifier")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-has-public-modifier")
+                .typeAliases
+                .first()
 
         // then
         sut.hasPublicModifier shouldBeEqualTo true
@@ -38,9 +40,10 @@ class KoTypeAliasDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `typealias-is-public-by-default`() {
         // given
-        val sut = getSnippetFile("typealias-is-public-by-default")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-is-public-by-default")
+                .typeAliases
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -52,9 +55,10 @@ class KoTypeAliasDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `typealias-has-private-modifier`() {
         // given
-        val sut = getSnippetFile("typealias-has-private-modifier")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-has-private-modifier")
+                .typeAliases
+                .first()
 
         // then
         sut.hasPrivateModifier shouldBeEqualTo true
@@ -63,9 +67,10 @@ class KoTypeAliasDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `typealias-has-internal-modifier`() {
         // given
-        val sut = getSnippetFile("typealias-has-internal-modifier")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-has-internal-modifier")
+                .typeAliases
+                .first()
 
         // then
         sut.hasInternalModifier shouldBeEqualTo true

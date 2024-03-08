@@ -15,14 +15,15 @@ class KoFunctionTypeDeclarationForKoNameProviderTest {
         value: String,
     ) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoFunctionTypeDeclaration
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         sut?.name shouldBeEqualTo value
@@ -34,9 +35,10 @@ class KoFunctionTypeDeclarationForKoNameProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("function-type-name", "() -> SampleType"),
-            arguments("nullable-function-type-name", "() -> SampleType"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("function-type-name", "() -> SampleType"),
+                arguments("nullable-function-type-name", "() -> SampleType"),
+            )
     }
 }

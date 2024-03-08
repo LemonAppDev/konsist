@@ -39,7 +39,10 @@ interface KoArgumentProvider : KoBaseProvider {
      * @param names the names of the arguments to check.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasArgumentWithName(name: String, vararg names: String): Boolean
+    fun hasArgumentWithName(
+        name: String,
+        vararg names: String,
+    ): Boolean
 
     /**
      * Determines whether the declaration has arguments with all the specified names.
@@ -48,7 +51,10 @@ interface KoArgumentProvider : KoBaseProvider {
      * @param names The names of the arguments to check.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasArgumentsWithAllNames(name: String, vararg names: String): Boolean
+    fun hasArgumentsWithAllNames(
+        name: String,
+        vararg names: String,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one argument that satisfies the provided predicate.

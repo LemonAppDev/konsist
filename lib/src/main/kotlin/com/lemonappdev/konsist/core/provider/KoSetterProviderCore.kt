@@ -11,14 +11,16 @@ internal interface KoSetterProviderCore : KoSetterProvider, KoBaseProviderCore, 
     val ktCallableDeclaration: KtCallableDeclaration
 
     private val ktPropertyAccessor: List<KtPropertyAccessor>
-        get() = ktCallableDeclaration
-            .children
-            .filterIsInstance<KtPropertyAccessor>()
+        get() =
+            ktCallableDeclaration
+                .children
+                .filterIsInstance<KtPropertyAccessor>()
 
     override val setter: KoSetterDeclaration?
-        get() = ktPropertyAccessor
-            .firstOrNull { it.isSetter }
-            ?.let { KoSetterDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
+        get() =
+            ktPropertyAccessor
+                .firstOrNull { it.isSetter }
+                ?.let { KoSetterDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
 
     override val hasSetter: Boolean
         get() = setter != null

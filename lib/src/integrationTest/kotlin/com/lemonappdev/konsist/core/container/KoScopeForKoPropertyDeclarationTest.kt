@@ -40,6 +40,5 @@ class KoScopeForKoPropertyDeclarationTest {
             .shouldBeEqualTo(expected)
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/container/snippet/forkopropertydeclaration/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/container/snippet/forkopropertydeclaration/", fileName)
 }

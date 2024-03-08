@@ -8,10 +8,11 @@ class KoGetterDeclarationForKoContainingFileProviderTest {
     @Test
     fun `getter-containing-file`() {
         // given
-        val sut = getSnippetFile("getter-containing-file")
-            .properties()
-            .first()
-            .getter
+        val sut =
+            getSnippetFile("getter-containing-file")
+                .properties()
+                .first()
+                .getter
 
         // then
         sut

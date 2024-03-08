@@ -17,9 +17,10 @@ class KoParentProviderExtTest {
     @Test
     fun `class-has-each-type-of-parents`() {
         // given
-        val sut = getSnippetFile("class-has-each-type-of-parents")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-each-type-of-parents")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -34,9 +35,10 @@ class KoParentProviderExtTest {
     @Test
     fun `object-has-each-type-of-parents`() {
         // given
-        val sut = getSnippetFile("object-has-each-type-of-parents")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-each-type-of-parents")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -51,9 +53,10 @@ class KoParentProviderExtTest {
     @Test
     fun `interface-has-each-type-of-parents`() {
         // given
-        val sut = getSnippetFile("interface-has-each-type-of-parents")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-has-each-type-of-parents")
+                .interfaces()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -64,6 +67,5 @@ class KoParentProviderExtTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("api/ext/provider/koparent/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("api/ext/provider/koparent/snippet/", fileName)
 }

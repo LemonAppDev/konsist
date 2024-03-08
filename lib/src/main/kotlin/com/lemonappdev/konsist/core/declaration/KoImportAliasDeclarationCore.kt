@@ -21,37 +21,37 @@ internal class KoImportAliasDeclarationCore private constructor(
     override val containingDeclaration: KoImportDeclaration,
 ) :
     KoImportAliasDeclaration,
-    KoBaseTypeDeclarationCore,
-    KoBaseProviderCore,
-    KoContainingFileProviderCore,
-    KoContainingDeclarationProviderCore,
-    KoLocationProviderCore,
-    KoPathProviderCore,
-    KoModuleProviderCore,
-    KoSourceSetProviderCore {
-    override val psiElement: PsiElement by lazy { ktImportAlias }
+        KoBaseTypeDeclarationCore,
+        KoBaseProviderCore,
+        KoContainingFileProviderCore,
+        KoContainingDeclarationProviderCore,
+        KoLocationProviderCore,
+        KoPathProviderCore,
+        KoModuleProviderCore,
+        KoSourceSetProviderCore {
+        override val psiElement: PsiElement by lazy { ktImportAlias }
 
-    override val ktElement: KtElement by lazy { ktImportAlias }
+        override val ktElement: KtElement by lazy { ktImportAlias }
 
-    override val text: String by lazy { ktImportAlias.name ?: ktImportAlias.text }
+        override val text: String by lazy { ktImportAlias.name ?: ktImportAlias.text }
 
-    override val name: String by lazy { text }
+        override val name: String by lazy { text }
 
-    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
+        override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
-    override val importDirective: KoImportDeclaration by lazy { containingDeclaration }
+        override val importDirective: KoImportDeclaration by lazy { containingDeclaration }
 
-    override fun toString(): String = text
+        override fun toString(): String = text
 
-    internal companion object {
-        private val cache: KoDeclarationCache<KoImportAliasDeclaration> = KoDeclarationCache()
+        internal companion object {
+            private val cache: KoDeclarationCache<KoImportAliasDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(
-            ktImportAlias: KtImportAlias,
-            containingDeclaration: KoImportDeclaration,
-        ): KoImportAliasDeclaration =
-            cache.getOrCreateInstance(ktImportAlias, containingDeclaration) {
-                KoImportAliasDeclarationCore(ktImportAlias, containingDeclaration)
-            }
+            internal fun getInstance(
+                ktImportAlias: KtImportAlias,
+                containingDeclaration: KoImportDeclaration,
+            ): KoImportAliasDeclaration =
+                cache.getOrCreateInstance(ktImportAlias, containingDeclaration) {
+                    KoImportAliasDeclarationCore(ktImportAlias, containingDeclaration)
+                }
+        }
     }
-}

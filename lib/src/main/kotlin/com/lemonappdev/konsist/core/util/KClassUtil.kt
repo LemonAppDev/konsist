@@ -5,7 +5,10 @@ import com.lemonappdev.konsist.api.provider.KoNameProvider
 import kotlin.reflect.KClass
 
 object KClassUtil {
-    internal fun <T> checkIfKClassOf(kClass: KClass<*>, list: List<T>): Boolean
+    internal fun <T> checkIfKClassOf(
+        kClass: KClass<*>,
+        list: List<T>,
+    ): Boolean
         where T : KoNameProvider,
               T : KoFullyQualifiedNameProvider =
         list.any { item ->

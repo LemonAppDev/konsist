@@ -21,8 +21,7 @@ fun <T : KoLocalDeclarationProvider> List<T>.withLocalDeclarations(): List<T> = 
  *
  * @return A list containing declarations with no local declarations.
  */
-fun <T : KoLocalDeclarationProvider> List<T>.withoutLocalDeclarations(): List<T> =
-    filterNot { it.hasLocalDeclarations() }
+fun <T : KoLocalDeclarationProvider> List<T>.withoutLocalDeclarations(): List<T> = filterNot { it.hasLocalDeclarations() }
 
 /**
  * List containing declarations that have at least one local declaration satisfying the provided predicate.

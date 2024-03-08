@@ -10,9 +10,10 @@ class KoFunctionDeclarationForKoReceiverTypeProviderTest {
     @Test
     fun `function-without-receiver`() {
         // given
-        val sut = getSnippetFile("function-without-receiver")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-without-receiver")
+                .functions()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -27,9 +28,10 @@ class KoFunctionDeclarationForKoReceiverTypeProviderTest {
     @Test
     fun `function-with-type-receiver`() {
         // given
-        val sut = getSnippetFile("function-with-type-receiver")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-with-type-receiver")
+                .functions()
+                .first()
 
         // then
         assertSoftly(sut) {

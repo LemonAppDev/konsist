@@ -1,4 +1,4 @@
-package enu
+package config
 
 enum class ReleaseTarget(val value: String) {
     LOCAL("local"),

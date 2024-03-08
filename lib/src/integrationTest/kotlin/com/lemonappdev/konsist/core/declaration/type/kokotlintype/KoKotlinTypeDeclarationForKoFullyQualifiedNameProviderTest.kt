@@ -9,11 +9,12 @@ class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `nullable-kotlin-basic-type-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("nullable-kotlin-basic-type-fully-qualified-name")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoKotlinTypeDeclaration
+        val sut =
+            getSnippetFile("nullable-kotlin-basic-type-fully-qualified-name")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         sut?.fullyQualifiedName shouldBeEqualTo "kotlin.String"
@@ -22,11 +23,12 @@ class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `not-nullable-kotlin-basic-type-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("not-nullable-kotlin-basic-type-fully-qualified-name")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoKotlinTypeDeclaration
+        val sut =
+            getSnippetFile("not-nullable-kotlin-basic-type-fully-qualified-name")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         sut?.fullyQualifiedName shouldBeEqualTo "kotlin.String"
@@ -35,11 +37,12 @@ class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `nullable-kotlin-collection-type-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("nullable-kotlin-collection-type-fully-qualified-name")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoKotlinTypeDeclaration
+        val sut =
+            getSnippetFile("nullable-kotlin-collection-type-fully-qualified-name")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         sut?.fullyQualifiedName shouldBeEqualTo "kotlin.collections.List"
@@ -48,11 +51,12 @@ class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `not-nullable-kotlin-collection-type-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("not-nullable-kotlin-collection-type-fully-qualified-name")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoKotlinTypeDeclaration
+        val sut =
+            getSnippetFile("not-nullable-kotlin-collection-type-fully-qualified-name")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoKotlinTypeDeclaration
 
         // then
         sut?.fullyQualifiedName shouldBeEqualTo "kotlin.collections.List"

@@ -76,36 +76,37 @@ class KoScopeForKoClassDeclarationTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments(
-                false,
-                false,
-                listOf("SampleClass"),
-            ),
-            arguments(
-                true,
-                false,
-                listOf(
-                    "SampleClass",
-                    "SampleNestedClass1",
-                    "SampleNestedClass2",
+        fun provideValues() =
+            listOf(
+                arguments(
+                    false,
+                    false,
+                    listOf("SampleClass"),
                 ),
-            ),
-            arguments(
-                false,
-                true,
-                listOf("SampleClass"),
-            ),
-            arguments(
-                true,
-                true,
-                listOf(
-                    "SampleClass",
-                    "SampleLocalClass",
-                    "SampleNestedClass1",
-                    "SampleNestedClass2",
+                arguments(
+                    true,
+                    false,
+                    listOf(
+                        "SampleClass",
+                        "SampleNestedClass1",
+                        "SampleNestedClass2",
+                    ),
                 ),
-            ),
-        )
+                arguments(
+                    false,
+                    true,
+                    listOf("SampleClass"),
+                ),
+                arguments(
+                    true,
+                    true,
+                    listOf(
+                        "SampleClass",
+                        "SampleLocalClass",
+                        "SampleNestedClass1",
+                        "SampleNestedClass2",
+                    ),
+                ),
+            )
     }
 }

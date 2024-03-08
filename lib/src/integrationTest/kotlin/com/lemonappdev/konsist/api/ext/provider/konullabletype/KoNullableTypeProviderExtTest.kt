@@ -13,9 +13,10 @@ class KoNullableTypeProviderExtTest {
     @Test
     fun `declaration-has-no-type`() {
         // given
-        val sut = getSnippetFile("declaration-has-no-type")
-            .declarationsOf<KoNullableTypeProvider>()
-            .first()
+        val sut =
+            getSnippetFile("declaration-has-no-type")
+                .declarationsOf<KoNullableTypeProvider>()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -27,9 +28,10 @@ class KoNullableTypeProviderExtTest {
     @Test
     fun `declaration-has-simple-type`() {
         // given
-        val sut = getSnippetFile("declaration-has-simple-type")
-            .declarationsOf<KoNullableTypeProvider>()
-            .first()
+        val sut =
+            getSnippetFile("declaration-has-simple-type")
+                .declarationsOf<KoNullableTypeProvider>()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -41,9 +43,10 @@ class KoNullableTypeProviderExtTest {
     @Test
     fun `declaration-has-complex-type`() {
         // given
-        val sut = getSnippetFile("declaration-has-complex-type")
-            .declarationsOf<KoNullableTypeProvider>()
-            .first()
+        val sut =
+            getSnippetFile("declaration-has-complex-type")
+                .declarationsOf<KoNullableTypeProvider>()
+                .first()
 
         // then
         assertSoftly(sut) {

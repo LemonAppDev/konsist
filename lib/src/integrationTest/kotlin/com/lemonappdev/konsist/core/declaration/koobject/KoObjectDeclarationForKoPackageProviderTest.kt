@@ -8,9 +8,10 @@ class KoObjectDeclarationForKoPackageProviderTest {
     @Test
     fun `object-is-not-in-package`() {
         // given
-        val sut = getSnippetFile("object-is-not-in-package")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-is-not-in-package")
+                .objects()
+                .first()
 
         // then
         sut.packagee shouldBeEqualTo null
@@ -19,14 +20,14 @@ class KoObjectDeclarationForKoPackageProviderTest {
     @Test
     fun `object-is-in-package`() {
         // given
-        val sut = getSnippetFile("object-is-in-package")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-is-in-package")
+                .objects()
+                .first()
 
         // then
         sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koobject/snippet/forkopackageprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/forkopackageprovider/", fileName)
 }

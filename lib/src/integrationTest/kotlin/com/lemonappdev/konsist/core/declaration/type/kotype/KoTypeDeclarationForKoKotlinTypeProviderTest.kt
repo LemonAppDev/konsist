@@ -17,13 +17,14 @@ class KoTypeDeclarationForKoKotlinTypeProviderTest {
         isKotlinCollectionType: Boolean,
     ) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
 
         // then
         assertSoftly(sut) {
@@ -39,25 +40,26 @@ class KoTypeDeclarationForKoKotlinTypeProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("nullable-kotlin-basic-type-is-kotlin-type", true, true, false),
-            arguments("not-nullable-kotlin-basic-type-is-kotlin-type", true, true, false),
-            arguments("nullable-kotlin-collection-type-is-kotlin-type", true, false, true),
-            arguments("not-nullable-kotlin-collection-type-is-kotlin-type", true, false, true),
-            arguments("nullable-class-type-is-not-kotlin-type", false, false, false),
-            arguments("not-nullable-class-type-is-not-kotlin-type", false, false, false),
-            arguments("nullable-interface-type-is-not-kotlin-type", false, false, false),
-            arguments("not-nullable-interface-type-is-not-kotlin-type", false, false, false),
-            arguments("nullable-object-type-is-not-kotlin-type", false, false, false),
-            arguments("not-nullable-object-type-is-not-kotlin-type", false, false, false),
-            arguments("nullable-function-type-type-is-not-kotlin-type", false, false, false),
-            arguments("not-nullable-function-type-type-is-not-kotlin-type", false, false, false),
-            arguments("nullable-import-alias-type-is-not-kotlin-type", false, false, false),
-            arguments("not-nullable-import-alias-type-is-not-kotlin-type", false, false, false),
-            arguments("nullable-typealias-type-is-not-kotlin-type", false, false, false),
-            arguments("not-nullable-typealias-type-is-not-kotlin-type", false, false, false),
-            arguments("nullable-external-type-is-not-kotlin-type", false, false, false),
-            arguments("not-nullable-external-type-is-not-kotlin-type", false, false, false),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("nullable-kotlin-basic-type-is-kotlin-type", true, true, false),
+                arguments("not-nullable-kotlin-basic-type-is-kotlin-type", true, true, false),
+                arguments("nullable-kotlin-collection-type-is-kotlin-type", true, false, true),
+                arguments("not-nullable-kotlin-collection-type-is-kotlin-type", true, false, true),
+                arguments("nullable-class-type-is-not-kotlin-type", false, false, false),
+                arguments("not-nullable-class-type-is-not-kotlin-type", false, false, false),
+                arguments("nullable-interface-type-is-not-kotlin-type", false, false, false),
+                arguments("not-nullable-interface-type-is-not-kotlin-type", false, false, false),
+                arguments("nullable-object-type-is-not-kotlin-type", false, false, false),
+                arguments("not-nullable-object-type-is-not-kotlin-type", false, false, false),
+                arguments("nullable-function-type-type-is-not-kotlin-type", false, false, false),
+                arguments("not-nullable-function-type-type-is-not-kotlin-type", false, false, false),
+                arguments("nullable-import-alias-type-is-not-kotlin-type", false, false, false),
+                arguments("not-nullable-import-alias-type-is-not-kotlin-type", false, false, false),
+                arguments("nullable-typealias-type-is-not-kotlin-type", false, false, false),
+                arguments("not-nullable-typealias-type-is-not-kotlin-type", false, false, false),
+                arguments("nullable-external-type-is-not-kotlin-type", false, false, false),
+                arguments("not-nullable-external-type-is-not-kotlin-type", false, false, false),
+            )
     }
 }

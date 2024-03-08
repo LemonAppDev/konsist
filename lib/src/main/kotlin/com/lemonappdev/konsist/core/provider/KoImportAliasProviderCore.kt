@@ -9,19 +9,22 @@ internal interface KoImportAliasProviderCore :
     KoContainingDeclarationProviderCore,
     KoContainingFileProviderCore {
     override val importAliases: List<KoImportAliasDeclaration>
-        get() = containingFile
-            .imports
-            .mapNotNull { it.alias }
+        get() =
+            containingFile
+                .imports
+                .mapNotNull { it.alias }
 
     override val numImportAliases: Int
         get() = importAliases.size
 
-    override fun countImportAliases(predicate: (KoImportAliasDeclaration) -> Boolean): Int =
-        importAliases.count { predicate(it) }
+    override fun countImportAliases(predicate: (KoImportAliasDeclaration) -> Boolean): Int = importAliases.count { predicate(it) }
 
     override fun hasImportAliases(): Boolean = importAliases.isNotEmpty()
 
-    override fun hasImportAliasWithName(name: String, vararg names: String): Boolean {
+    override fun hasImportAliasWithName(
+        name: String,
+        vararg names: String,
+    ): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.any {
@@ -29,7 +32,10 @@ internal interface KoImportAliasProviderCore :
         }
     }
 
-    override fun hasImportAliasesWithAllNames(name: String, vararg names: String): Boolean {
+    override fun hasImportAliasesWithAllNames(
+        name: String,
+        vararg names: String,
+    ): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.all {
@@ -37,9 +43,7 @@ internal interface KoImportAliasProviderCore :
         }
     }
 
-    override fun hasImportAlias(predicate: (KoImportAliasDeclaration) -> Boolean): Boolean =
-        importAliases.any(predicate)
+    override fun hasImportAlias(predicate: (KoImportAliasDeclaration) -> Boolean): Boolean = importAliases.any(predicate)
 
-    override fun hasAllImportAliases(predicate: (KoImportAliasDeclaration) -> Boolean): Boolean =
-        importAliases.all(predicate)
+    override fun hasAllImportAliases(predicate: (KoImportAliasDeclaration) -> Boolean): Boolean = importAliases.all(predicate)
 }

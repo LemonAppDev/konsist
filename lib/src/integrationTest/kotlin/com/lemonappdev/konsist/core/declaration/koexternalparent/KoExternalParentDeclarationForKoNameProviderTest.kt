@@ -10,10 +10,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
     @Test
     fun `class-with-external-parent-class`() {
         // given
-        val sut = getSnippetFile("class-with-external-parent-class")
-            .classes()
-            .parents
-            .first()
+        val sut =
+            getSnippetFile("class-with-external-parent-class")
+                .classes()
+                .parents
+                .first()
 
         // then
         sut.name shouldBeEqualTo "SampleExternalClass"
@@ -22,10 +23,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
     @Test
     fun `class-with-generic-external-parent-class`() {
         // given
-        val sut = getSnippetFile("class-with-generic-external-parent-class")
-            .classes()
-            .externalParents()
-            .first()
+        val sut =
+            getSnippetFile("class-with-generic-external-parent-class")
+                .classes()
+                .externalParents()
+                .first()
 
         // then
         sut.name shouldBeEqualTo "SampleExternalGenericClass"
@@ -34,10 +36,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
     @Test
     fun `class-with-parametrized-external-parent-class`() {
         // given
-        val sut = getSnippetFile("class-with-parametrized-external-parent-class")
-            .classes()
-            .externalParents()
-            .first()
+        val sut =
+            getSnippetFile("class-with-parametrized-external-parent-class")
+                .classes()
+                .externalParents()
+                .first()
 
         // then
         sut.name shouldBeEqualTo "SampleExternalClassWithParameter"
@@ -46,10 +49,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
     @Test
     fun `class-with-parametrized-and-generic-external-parent-class`() {
         // given
-        val sut = getSnippetFile("class-with-parametrized-and-generic-external-parent-class")
-            .classes()
-            .externalParents()
-            .first()
+        val sut =
+            getSnippetFile("class-with-parametrized-and-generic-external-parent-class")
+                .classes()
+                .externalParents()
+                .first()
 
         // then
         sut.name shouldBeEqualTo "SampleExternalGenericClassWithParameter"
@@ -58,10 +62,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
     @Test
     fun `class-with-external-parent-interface`() {
         // given
-        val sut = getSnippetFile("class-with-external-parent-interface")
-            .classes()
-            .externalParents()
-            .first()
+        val sut =
+            getSnippetFile("class-with-external-parent-interface")
+                .classes()
+                .externalParents()
+                .first()
 
         // then
         sut.name shouldBeEqualTo "SampleExternalInterface"
@@ -70,10 +75,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
     @Test
     fun `class-with-generic-external-parent-interface`() {
         // given
-        val sut = getSnippetFile("class-with-generic-external-parent-interface")
-            .classes()
-            .externalParents()
-            .first()
+        val sut =
+            getSnippetFile("class-with-generic-external-parent-interface")
+                .classes()
+                .externalParents()
+                .first()
 
         // then
         sut.name shouldBeEqualTo "SampleExternalGenericInterface"
@@ -82,10 +88,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
     @Test
     fun `class-with-external-parent-by-delegation`() {
         // given
-        val sut = getSnippetFile("class-with-external-parent-by-delegation")
-            .classes()
-            .externalParents()
-            .first()
+        val sut =
+            getSnippetFile("class-with-external-parent-by-delegation")
+                .classes()
+                .externalParents()
+                .first()
 
         // then
         sut.name shouldBeEqualTo "SampleExternalInterface"
@@ -94,10 +101,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
     @Test
     fun `class-with-multiline-external-parent`() {
         // given
-        val sut = getSnippetFile("class-with-multiline-external-parent")
-            .classes()
-            .externalParents()
-            .first()
+        val sut =
+            getSnippetFile("class-with-multiline-external-parent")
+                .classes()
+                .externalParents()
+                .first()
 
         // then
         sut.name shouldBeEqualTo "SampleExternalClassWithParameter"
@@ -106,10 +114,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
     @Test
     fun `interface-with-external-parent-interface`() {
         // given
-        val sut = getSnippetFile("interface-with-external-parent-interface")
-            .interfaces()
-            .externalParents()
-            .first()
+        val sut =
+            getSnippetFile("interface-with-external-parent-interface")
+                .interfaces()
+                .externalParents()
+                .first()
 
         // then
         sut.name shouldBeEqualTo "SampleExternalInterface"
@@ -118,10 +127,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
     @Test
     fun `interface-with-generic-external-parent-interface`() {
         // given
-        val sut = getSnippetFile("interface-with-generic-external-parent-interface")
-            .interfaces()
-            .externalParents()
-            .first()
+        val sut =
+            getSnippetFile("interface-with-generic-external-parent-interface")
+                .interfaces()
+                .externalParents()
+                .first()
 
         // then
         sut.name shouldBeEqualTo "SampleExternalGenericInterface"
@@ -130,10 +140,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
     @Test
     fun `object-with-external-parent-class`() {
         // given
-        val sut = getSnippetFile("object-with-external-parent-class")
-            .objects()
-            .externalParents()
-            .first()
+        val sut =
+            getSnippetFile("object-with-external-parent-class")
+                .objects()
+                .externalParents()
+                .first()
 
         // then
         sut.name shouldBeEqualTo "SampleExternalClass"
@@ -142,10 +153,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
     @Test
     fun `object-with-generic-external-parent-class`() {
         // given
-        val sut = getSnippetFile("object-with-generic-external-parent-class")
-            .objects()
-            .externalParents()
-            .first()
+        val sut =
+            getSnippetFile("object-with-generic-external-parent-class")
+                .objects()
+                .externalParents()
+                .first()
 
         // then
         sut.name shouldBeEqualTo "SampleExternalGenericClass"
@@ -154,10 +166,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
     @Test
     fun `object-with-parametrized-external-parent-class`() {
         // given
-        val sut = getSnippetFile("object-with-parametrized-external-parent-class")
-            .objects()
-            .externalParents()
-            .first()
+        val sut =
+            getSnippetFile("object-with-parametrized-external-parent-class")
+                .objects()
+                .externalParents()
+                .first()
 
         // then
         sut.name shouldBeEqualTo "SampleExternalClassWithParameter"
@@ -166,10 +179,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
     @Test
     fun `object-with-parametrized-and-generic-external-parent-class`() {
         // given
-        val sut = getSnippetFile("object-with-parametrized-and-generic-external-parent-class")
-            .objects()
-            .externalParents()
-            .first()
+        val sut =
+            getSnippetFile("object-with-parametrized-and-generic-external-parent-class")
+                .objects()
+                .externalParents()
+                .first()
 
         // then
         sut.name shouldBeEqualTo "SampleExternalGenericClassWithParameter"
@@ -178,10 +192,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
     @Test
     fun `object-with-external-parent-interface`() {
         // given
-        val sut = getSnippetFile("object-with-external-parent-interface")
-            .objects()
-            .externalParents()
-            .first()
+        val sut =
+            getSnippetFile("object-with-external-parent-interface")
+                .objects()
+                .externalParents()
+                .first()
 
         // then
         sut.name shouldBeEqualTo "SampleExternalInterface"
@@ -190,10 +205,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
     @Test
     fun `object-with-generic-external-parent-interface`() {
         // given
-        val sut = getSnippetFile("object-with-generic-external-parent-interface")
-            .objects()
-            .externalParents()
-            .first()
+        val sut =
+            getSnippetFile("object-with-generic-external-parent-interface")
+                .objects()
+                .externalParents()
+                .first()
 
         // then
         sut.name shouldBeEqualTo "SampleExternalGenericInterface"
@@ -202,11 +218,12 @@ class KoExternalParentDeclarationForKoNameProviderTest {
     @Test
     fun `object-with-multiline-external-parent`() {
         // given
-        val sut = getSnippetFile("object-with-multiline-external-parent")
-            .objects()
-            .first()
-            .externalParents()
-            .first()
+        val sut =
+            getSnippetFile("object-with-multiline-external-parent")
+                .objects()
+                .first()
+                .externalParents()
+                .first()
 
         // then
         sut

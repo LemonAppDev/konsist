@@ -11,7 +11,10 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  *                  If predicate is not provided (default is `null`), the function uses `toString` method.
  * @return The original list of declarations.
  */
-fun <T : KoBaseProvider> List<T>.print(prefix: String? = null, predicate: ((T) -> String)? = null): List<T> {
+fun <T : KoBaseProvider> List<T>.print(
+    prefix: String? = null,
+    predicate: ((T) -> String)? = null,
+): List<T> {
     prefix?.let { println(it) }
 
     forEach { it.print(predicate = predicate) }

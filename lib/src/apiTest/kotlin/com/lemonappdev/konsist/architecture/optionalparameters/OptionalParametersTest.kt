@@ -19,19 +19,21 @@ class OptionalParametersTest {
             "Presentation",
             "com.lemonappdev.konsist.architecture.optionalparameters.project.presentation..",
         )
-    private val scope = Konsist.scopeFromDirectory(
-        "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters/project",
-    )
+    private val scope =
+        Konsist.scopeFromDirectory(
+            "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters/project",
+        )
 
     @Test
     fun `error message when additionalMessage and testName parameters are not provided (scope)`() {
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope.assertArchitecture {
-                presentation.dependsOnNothing()
-                domain.dependsOn(presentation)
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope.assertArchitecture {
+                    presentation.dependsOnNothing()
+                    domain.dependsOn(presentation)
+                }
             }
-        }
 
         // then
         sut
@@ -52,12 +54,13 @@ class OptionalParametersTest {
     @Test
     fun `error message when additionalMessage is provided and testName is not provided (scope)`() {
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope.assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE") {
-                presentation.dependsOnNothing()
-                domain.dependsOn(presentation)
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope.assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE") {
+                    presentation.dependsOnNothing()
+                    domain.dependsOn(presentation)
+                }
             }
-        }
 
         // then
         sut
@@ -79,12 +82,13 @@ class OptionalParametersTest {
     @Test
     fun `error message when testName is provided and additionalMessage is not provided (scope)`() {
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope.assertArchitecture(testName = "SOME CUSTOM TEST NAME") {
-                presentation.dependsOnNothing()
-                domain.dependsOn(presentation)
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope.assertArchitecture(testName = "SOME CUSTOM TEST NAME") {
+                    presentation.dependsOnNothing()
+                    domain.dependsOn(presentation)
+                }
             }
-        }
 
         // then
         sut
@@ -104,15 +108,16 @@ class OptionalParametersTest {
     @Test
     fun `error message when testName and additionalMessage are provided (scope)`() {
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope.assertArchitecture(
-                additionalMessage = "SOME ADDITIONAL MESSAGE",
-                testName = "SOME CUSTOM TEST NAME",
-            ) {
-                presentation.dependsOnNothing()
-                domain.dependsOn(presentation)
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope.assertArchitecture(
+                    additionalMessage = "SOME ADDITIONAL MESSAGE",
+                    testName = "SOME CUSTOM TEST NAME",
+                ) {
+                    presentation.dependsOnNothing()
+                    domain.dependsOn(presentation)
+                }
             }
-        }
 
         // then
         sut
@@ -133,14 +138,15 @@ class OptionalParametersTest {
     @Test
     fun `error message when additionalMessage and testName parameters are not provided (files)`() {
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope
-                .files
-                .assertArchitecture {
-                    presentation.dependsOnNothing()
-                    domain.dependsOn(presentation)
-                }
-        }
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope
+                    .files
+                    .assertArchitecture {
+                        presentation.dependsOnNothing()
+                        domain.dependsOn(presentation)
+                    }
+            }
 
         // then
         sut
@@ -161,14 +167,15 @@ class OptionalParametersTest {
     @Test
     fun `error message when additionalMessage is provided and testName is not provided (files)`() {
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope
-                .files
-                .assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE") {
-                    presentation.dependsOnNothing()
-                    domain.dependsOn(presentation)
-                }
-        }
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope
+                    .files
+                    .assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE") {
+                        presentation.dependsOnNothing()
+                        domain.dependsOn(presentation)
+                    }
+            }
 
         // then
         sut
@@ -190,14 +197,15 @@ class OptionalParametersTest {
     @Test
     fun `error message when testName is provided and additionalMessage is not provided (files)`() {
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope
-                .files
-                .assertArchitecture(testName = "SOME CUSTOM TEST NAME") {
-                    presentation.dependsOnNothing()
-                    domain.dependsOn(presentation)
-                }
-        }
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope
+                    .files
+                    .assertArchitecture(testName = "SOME CUSTOM TEST NAME") {
+                        presentation.dependsOnNothing()
+                        domain.dependsOn(presentation)
+                    }
+            }
 
         // then
         sut
@@ -217,17 +225,18 @@ class OptionalParametersTest {
     @Test
     fun `error message when testName and additionalMessage are provided (files)`() {
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope
-                .files
-                .assertArchitecture(
-                    additionalMessage = "SOME ADDITIONAL MESSAGE",
-                    testName = "SOME CUSTOM TEST NAME",
-                ) {
-                    presentation.dependsOnNothing()
-                    domain.dependsOn(presentation)
-                }
-        }
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope
+                    .files
+                    .assertArchitecture(
+                        additionalMessage = "SOME ADDITIONAL MESSAGE",
+                        testName = "SOME CUSTOM TEST NAME",
+                    ) {
+                        presentation.dependsOnNothing()
+                        domain.dependsOn(presentation)
+                    }
+            }
 
         // then
         sut
@@ -248,15 +257,17 @@ class OptionalParametersTest {
     @Test
     fun `error message when additionalMessage and testName parameters are not provided and architecture is passed as parameter (scope)`() {
         // given
-        val architecture = KoArchitectureCreator.architecture {
-            presentation.dependsOnNothing()
-            domain.dependsOn(presentation)
-        }
+        val architecture =
+            KoArchitectureCreator.architecture {
+                presentation.dependsOnNothing()
+                domain.dependsOn(presentation)
+            }
 
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope.assertArchitecture(architecture)
-        }
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope.assertArchitecture(architecture)
+            }
 
         // then
         sut
@@ -277,15 +288,17 @@ class OptionalParametersTest {
     @Test
     fun `error message when additionalMessage is provided, testName is not provided and architecture is passed as parameter (scope)`() {
         // given
-        val architecture = KoArchitectureCreator.architecture {
-            presentation.dependsOnNothing()
-            domain.dependsOn(presentation)
-        }
+        val architecture =
+            KoArchitectureCreator.architecture {
+                presentation.dependsOnNothing()
+                domain.dependsOn(presentation)
+            }
 
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope.assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE", dependencies = architecture)
-        }
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope.assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE", dependencies = architecture)
+            }
 
         // then
         sut
@@ -307,15 +320,17 @@ class OptionalParametersTest {
     @Test
     fun `error message when testName is provided, additionalMessage is not provided and architecture is passed as parameter (scope)`() {
         // given
-        val architecture = KoArchitectureCreator.architecture {
-            presentation.dependsOnNothing()
-            domain.dependsOn(presentation)
-        }
+        val architecture =
+            KoArchitectureCreator.architecture {
+                presentation.dependsOnNothing()
+                domain.dependsOn(presentation)
+            }
 
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope.assertArchitecture(testName = "SOME CUSTOM TEST NAME", dependencies = architecture)
-        }
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope.assertArchitecture(testName = "SOME CUSTOM TEST NAME", dependencies = architecture)
+            }
 
         // then
         sut
@@ -335,19 +350,21 @@ class OptionalParametersTest {
     @Test
     fun `error message when testName and additionalMessage are provided and architecture is passed as parameter (scope)`() {
         // given
-        val architecture = KoArchitectureCreator.architecture {
-            presentation.dependsOnNothing()
-            domain.dependsOn(presentation)
-        }
+        val architecture =
+            KoArchitectureCreator.architecture {
+                presentation.dependsOnNothing()
+                domain.dependsOn(presentation)
+            }
 
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope.assertArchitecture(
-                additionalMessage = "SOME ADDITIONAL MESSAGE",
-                testName = "SOME CUSTOM TEST NAME",
-                dependencies = architecture,
-            )
-        }
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope.assertArchitecture(
+                    additionalMessage = "SOME ADDITIONAL MESSAGE",
+                    testName = "SOME CUSTOM TEST NAME",
+                    dependencies = architecture,
+                )
+            }
 
         // then
         sut
@@ -368,17 +385,19 @@ class OptionalParametersTest {
     @Test
     fun `error message when additionalMessage and testName parameters are not provided and architecture is passed as parameter (files)`() {
         // given
-        val architecture = KoArchitectureCreator.architecture {
-            presentation.dependsOnNothing()
-            domain.dependsOn(presentation)
-        }
+        val architecture =
+            KoArchitectureCreator.architecture {
+                presentation.dependsOnNothing()
+                domain.dependsOn(presentation)
+            }
 
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope
-                .files
-                .assertArchitecture(architecture)
-        }
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope
+                    .files
+                    .assertArchitecture(architecture)
+            }
 
         // then
         sut
@@ -399,17 +418,19 @@ class OptionalParametersTest {
     @Test
     fun `error message when additionalMessage is provided, testName is not provided and architecture is passed as parameter (files)`() {
         // given
-        val architecture = KoArchitectureCreator.architecture {
-            presentation.dependsOnNothing()
-            domain.dependsOn(presentation)
-        }
+        val architecture =
+            KoArchitectureCreator.architecture {
+                presentation.dependsOnNothing()
+                domain.dependsOn(presentation)
+            }
 
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope
-                .files
-                .assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE", dependencies = architecture)
-        }
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope
+                    .files
+                    .assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE", dependencies = architecture)
+            }
 
         // then
         sut
@@ -431,17 +452,19 @@ class OptionalParametersTest {
     @Test
     fun `error message when testName is provided, additionalMessage is not provided and architecture is passed as parameter (files)`() {
         // given
-        val architecture = KoArchitectureCreator.architecture {
-            presentation.dependsOnNothing()
-            domain.dependsOn(presentation)
-        }
+        val architecture =
+            KoArchitectureCreator.architecture {
+                presentation.dependsOnNothing()
+                domain.dependsOn(presentation)
+            }
 
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope
-                .files
-                .assertArchitecture(testName = "SOME CUSTOM TEST NAME", dependencies = architecture)
-        }
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope
+                    .files
+                    .assertArchitecture(testName = "SOME CUSTOM TEST NAME", dependencies = architecture)
+            }
 
         // then
         sut
@@ -461,21 +484,23 @@ class OptionalParametersTest {
     @Test
     fun `error message when testName and additionalMessage are provided and architecture is passed as parameter (files)`() {
         // given
-        val architecture = KoArchitectureCreator.architecture {
-            presentation.dependsOnNothing()
-            domain.dependsOn(presentation)
-        }
+        val architecture =
+            KoArchitectureCreator.architecture {
+                presentation.dependsOnNothing()
+                domain.dependsOn(presentation)
+            }
 
         // when
-        val sut = shouldThrow<KoAssertionFailedException> {
-            scope
-                .files
-                .assertArchitecture(
-                    additionalMessage = "SOME ADDITIONAL MESSAGE",
-                    testName = "SOME CUSTOM TEST NAME",
-                    dependencies = architecture,
-                )
-        }
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope
+                    .files
+                    .assertArchitecture(
+                        additionalMessage = "SOME ADDITIONAL MESSAGE",
+                        testName = "SOME CUSTOM TEST NAME",
+                        dependencies = architecture,
+                    )
+            }
 
         // then
         sut

@@ -10,12 +10,14 @@ class KoLateinitModifierProviderListExtTest {
     @Test
     fun `withLateinitModifier() returns declaration with lateinit modifier`() {
         // given
-        val declaration1: KoLateinitModifierProvider = mockk {
-            every { hasLateinitModifier } returns true
-        }
-        val declaration2: KoLateinitModifierProvider = mockk {
-            every { hasLateinitModifier } returns false
-        }
+        val declaration1: KoLateinitModifierProvider =
+            mockk {
+                every { hasLateinitModifier } returns true
+            }
+        val declaration2: KoLateinitModifierProvider =
+            mockk {
+                every { hasLateinitModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -28,12 +30,14 @@ class KoLateinitModifierProviderListExtTest {
     @Test
     fun `withoutLateinitModifier() returns declaration without lateinit modifier`() {
         // given
-        val declaration1: KoLateinitModifierProvider = mockk {
-            every { hasLateinitModifier } returns true
-        }
-        val declaration2: KoLateinitModifierProvider = mockk {
-            every { hasLateinitModifier } returns false
-        }
+        val declaration1: KoLateinitModifierProvider =
+            mockk {
+                every { hasLateinitModifier } returns true
+            }
+        val declaration2: KoLateinitModifierProvider =
+            mockk {
+                every { hasLateinitModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

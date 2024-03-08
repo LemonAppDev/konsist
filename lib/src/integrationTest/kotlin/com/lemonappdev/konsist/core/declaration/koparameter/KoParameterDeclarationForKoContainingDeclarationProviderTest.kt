@@ -8,12 +8,13 @@ class KoParameterDeclarationForKoContainingDeclarationProviderTest {
     @Test
     fun `parameter-parent-declaration`() {
         // given
-        val sut = getSnippetFile("parameter-parent-declaration")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
+        val sut =
+            getSnippetFile("parameter-parent-declaration")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
         sut?.containingDeclaration shouldNotBeEqualTo null

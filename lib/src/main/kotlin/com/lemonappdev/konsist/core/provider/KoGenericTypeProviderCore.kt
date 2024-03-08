@@ -12,11 +12,12 @@ internal interface KoGenericTypeProviderCore :
         get() {
             val regex = "\\w+<[^<>]+>".toRegex()
 
-            val type = if ((this as? KoTypeDeclaration)?.sourceDeclaration is KoTypeAliasDeclaration) {
-                bareSourceType
-            } else {
-                sourceType
-            }
+            val type =
+                if ((this as? KoTypeDeclaration)?.sourceDeclaration is KoTypeAliasDeclaration) {
+                    bareSourceType
+                } else {
+                    sourceType
+                }
 
             return regex.matches(type)
         }
