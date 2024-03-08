@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.provider.KoPackageMatchingPathProvider
-import com.lemonappdev.konsist.core.util.PathUtil.sep
+import com.lemonappdev.konsist.core.util.PathUtil.separator
 
 internal interface KoPackageMatchingPathProviderCore :
     KoPackageMatchingPathProvider,
@@ -12,6 +12,6 @@ internal interface KoPackageMatchingPathProviderCore :
     override val hasMatchingPath: Boolean
         get() =
             path
-                .replace(sep, ".")
+                .replace(separator, ".")
                 .endsWith(fullyQualifiedName + "." + containingFile.nameWithExtension)
 }
