@@ -9,6 +9,11 @@ import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.externalsample.SampleExternalClass
+import com.lemonappdev.konsist.testdata.SampleClass
+import com.lemonappdev.konsist.testdata.SampleInterface
+import com.lemonappdev.konsist.testdata.SampleObject
+import com.lemonappdev.konsist.testdata.SampleType
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -58,13 +63,29 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.sourceKotlinType shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.sourceKotlinType?.name shouldBeEqualTo "String"
+            it?.hasSourceKotlinType() shouldBeEqualTo true
+            it?.hasSourceKotlinType { declaration -> declaration.name == "String" } shouldBeEqualTo true
+            it?.hasSourceKotlinType { declaration -> declaration.name == "List<String>" } shouldBeEqualTo false
+            it?.hasSourceKotlinTypeOf(String::class) shouldBeEqualTo true
+            it?.hasSourceKotlinTypeOf(Int::class) shouldBeEqualTo false
             it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
+            it?.hasSourceClassOf(String::class) shouldBeEqualTo false
             it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
+            it?.hasSourceObjectOf(String::class) shouldBeEqualTo false
             it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
+            it?.hasSourceInterfaceOf(String::class) shouldBeEqualTo false
             it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
             it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
             it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.hasSourceExternalTypeOf(String::class) shouldBeEqualTo false
         }
     }
 
@@ -83,13 +104,29 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.sourceKotlinType shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.sourceKotlinType?.name shouldBeEqualTo "String"
+            it?.hasSourceKotlinType() shouldBeEqualTo true
+            it?.hasSourceKotlinType { declaration -> declaration.name == "String" } shouldBeEqualTo true
+            it?.hasSourceKotlinType { declaration -> declaration.name == "List<String>" } shouldBeEqualTo false
+            it?.hasSourceKotlinTypeOf(String::class) shouldBeEqualTo true
+            it?.hasSourceKotlinTypeOf(Int::class) shouldBeEqualTo false
             it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
+            it?.hasSourceClassOf(String::class) shouldBeEqualTo false
             it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
+            it?.hasSourceObjectOf(String::class) shouldBeEqualTo false
             it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
+            it?.hasSourceInterfaceOf(String::class) shouldBeEqualTo false
             it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
             it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
             it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.hasSourceExternalTypeOf(String::class) shouldBeEqualTo false
         }
     }
 
@@ -108,13 +145,29 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.sourceKotlinType shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.sourceKotlinType?.name shouldBeEqualTo "List<String>"
+            it?.hasSourceKotlinType() shouldBeEqualTo true
+            it?.hasSourceKotlinType { declaration -> declaration.name == "List<String>" } shouldBeEqualTo true
+            it?.hasSourceKotlinType { declaration -> declaration.name == "String" } shouldBeEqualTo false
+            it?.hasSourceKotlinTypeOf(List::class) shouldBeEqualTo true
+            it?.hasSourceKotlinTypeOf(String::class) shouldBeEqualTo false
             it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
+            it?.hasSourceClassOf(List::class) shouldBeEqualTo false
             it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
+            it?.hasSourceObjectOf(List::class) shouldBeEqualTo false
             it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
+            it?.hasSourceInterfaceOf(List::class) shouldBeEqualTo false
             it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
             it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
             it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.hasSourceExternalTypeOf(List::class) shouldBeEqualTo false
         }
     }
 
@@ -133,13 +186,29 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.sourceKotlinType shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.sourceKotlinType?.name shouldBeEqualTo "List<String>"
+            it?.hasSourceKotlinType() shouldBeEqualTo true
+            it?.hasSourceKotlinType { declaration -> declaration.name == "List<String>" } shouldBeEqualTo true
+            it?.hasSourceKotlinType { declaration -> declaration.name == "String" } shouldBeEqualTo false
+            it?.hasSourceKotlinTypeOf(List::class) shouldBeEqualTo true
+            it?.hasSourceKotlinTypeOf(String::class) shouldBeEqualTo false
             it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
+            it?.hasSourceClassOf(List::class) shouldBeEqualTo false
             it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
+            it?.hasSourceObjectOf(List::class) shouldBeEqualTo false
             it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
+            it?.hasSourceInterfaceOf(List::class) shouldBeEqualTo false
             it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
             it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
             it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.hasSourceExternalTypeOf(List::class) shouldBeEqualTo false
         }
     }
 
@@ -158,13 +227,28 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.sourceClass shouldBeInstanceOf KoClassDeclaration::class
             it?.sourceClass?.name shouldBeEqualTo "SampleType"
+            it?.hasSourceClass() shouldBeEqualTo true
+            it?.hasSourceClass { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
+            it?.hasSourceClass { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceClassOf(SampleType::class) shouldBeEqualTo true
+            it?.hasSourceClassOf(SampleClass::class) shouldBeEqualTo false
             it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
+            it?.hasSourceObjectOf(SampleType::class) shouldBeEqualTo false
             it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
+            it?.hasSourceInterfaceOf(SampleType::class) shouldBeEqualTo false
             it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
             it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
             it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
+            it?.hasSourceKotlinTypeOf(SampleType::class) shouldBeEqualTo false
             it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
         }
     }
 
@@ -183,13 +267,28 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.sourceClass shouldBeInstanceOf KoClassDeclaration::class
             it?.sourceClass?.name shouldBeEqualTo "SampleType"
+            it?.hasSourceClass() shouldBeEqualTo true
+            it?.hasSourceClass { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
+            it?.hasSourceClass { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceClassOf(SampleType::class) shouldBeEqualTo true
+            it?.hasSourceClassOf(SampleClass::class) shouldBeEqualTo false
             it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
+            it?.hasSourceObjectOf(SampleType::class) shouldBeEqualTo false
             it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
+            it?.hasSourceInterfaceOf(SampleType::class) shouldBeEqualTo false
             it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
             it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
             it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
+            it?.hasSourceKotlinTypeOf(SampleType::class) shouldBeEqualTo false
             it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
         }
     }
 
@@ -208,13 +307,28 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.sourceInterface shouldBeInstanceOf KoInterfaceDeclaration::class
             it?.sourceInterface?.name shouldBeEqualTo "SampleInterface"
+            it?.hasSourceInterface() shouldBeEqualTo true
+            it?.hasSourceInterface { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
+            it?.hasSourceInterface { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceInterfaceOf(SampleInterface::class) shouldBeEqualTo true
+            it?.hasSourceInterfaceOf(SampleClass::class) shouldBeEqualTo false
             it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
+            it?.hasSourceClassOf(SampleInterface::class) shouldBeEqualTo false
             it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
+            it?.hasSourceObjectOf(SampleInterface::class) shouldBeEqualTo false
             it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
             it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
             it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
+            it?.hasSourceKotlinTypeOf(SampleInterface::class) shouldBeEqualTo false
             it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
         }
     }
 
@@ -233,13 +347,28 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.sourceInterface shouldBeInstanceOf KoInterfaceDeclaration::class
             it?.sourceInterface?.name shouldBeEqualTo "SampleInterface"
+            it?.hasSourceInterface() shouldBeEqualTo true
+            it?.hasSourceInterface { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
+            it?.hasSourceInterface { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceInterfaceOf(SampleInterface::class) shouldBeEqualTo true
+            it?.hasSourceInterfaceOf(SampleClass::class) shouldBeEqualTo false
             it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
+            it?.hasSourceClassOf(SampleInterface::class) shouldBeEqualTo false
             it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
+            it?.hasSourceObjectOf(SampleInterface::class) shouldBeEqualTo false
             it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
             it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
             it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
+            it?.hasSourceKotlinTypeOf(SampleInterface::class) shouldBeEqualTo false
             it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
         }
     }
 
@@ -258,13 +387,28 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.sourceObject shouldBeInstanceOf KoObjectDeclaration::class
             it?.sourceObject?.name shouldBeEqualTo "SampleObject"
+            it?.hasSourceObject() shouldBeEqualTo true
+            it?.hasSourceObject { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
+            it?.hasSourceObject { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceObjectOf(SampleObject::class) shouldBeEqualTo true
+            it?.hasSourceObjectOf(SampleClass::class) shouldBeEqualTo false
             it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
+            it?.hasSourceClassOf(SampleObject::class) shouldBeEqualTo false
             it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
+            it?.hasSourceInterfaceOf(SampleObject::class) shouldBeEqualTo false
             it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
             it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
             it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
+            it?.hasSourceKotlinTypeOf(SampleObject::class) shouldBeEqualTo false
             it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
         }
     }
 
@@ -283,13 +427,28 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.sourceObject shouldBeInstanceOf KoObjectDeclaration::class
             it?.sourceObject?.name shouldBeEqualTo "SampleObject"
+            it?.hasSourceObject() shouldBeEqualTo true
+            it?.hasSourceObject { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
+            it?.hasSourceObject { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceObjectOf(SampleObject::class) shouldBeEqualTo true
+            it?.hasSourceObjectOf(SampleClass::class) shouldBeEqualTo false
             it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
+            it?.hasSourceClassOf(SampleObject::class) shouldBeEqualTo false
             it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
+            it?.hasSourceInterfaceOf(SampleObject::class) shouldBeEqualTo false
             it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
             it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
             it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
+            it?.hasSourceKotlinTypeOf(SampleObject::class) shouldBeEqualTo false
             it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
         }
     }
 
@@ -308,13 +467,23 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.sourceFunctionType shouldBeInstanceOf KoFunctionTypeDeclaration::class
             it?.sourceFunctionType?.name shouldBeEqualTo "(SampleObject) -> Unit"
+            it?.hasSourceFunctionType() shouldBeEqualTo true
+            it?.hasSourceFunctionType { declaration -> declaration.name == "(SampleObject) -> Unit" } shouldBeEqualTo true
+            it?.hasSourceFunctionType { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo false
             it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
             it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
             it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
             it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
             it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
             it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
         }
     }
 
@@ -333,13 +502,23 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.sourceFunctionType shouldBeInstanceOf KoFunctionTypeDeclaration::class
             it?.sourceFunctionType?.name shouldBeEqualTo "(SampleObject) -> Unit"
+            it?.hasSourceFunctionType() shouldBeEqualTo true
+            it?.hasSourceFunctionType { declaration -> declaration.name == "(SampleObject) -> Unit" } shouldBeEqualTo true
+            it?.hasSourceFunctionType { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo false
             it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
             it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
             it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
             it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
             it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
             it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
         }
     }
 
@@ -358,13 +537,23 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.sourceImportAlias shouldBeInstanceOf KoImportAliasDeclaration::class
             it?.sourceImportAlias?.name shouldBeEqualTo "ImportAlias"
+            it?.hasSourceImportAlias() shouldBeEqualTo true
+            it?.hasSourceImportAlias { declaration -> declaration.name == "ImportAlias" } shouldBeEqualTo true
+            it?.hasSourceImportAlias { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
             it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
             it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
             it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
             it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
             it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
         }
     }
 
@@ -383,13 +572,23 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.sourceImportAlias shouldBeInstanceOf KoImportAliasDeclaration::class
             it?.sourceImportAlias?.name shouldBeEqualTo "ImportAlias"
+            it?.hasSourceImportAlias() shouldBeEqualTo true
+            it?.hasSourceImportAlias { declaration -> declaration.name == "ImportAlias" } shouldBeEqualTo true
+            it?.hasSourceImportAlias { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
             it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
             it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
             it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
             it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
             it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
         }
     }
 
@@ -408,13 +607,23 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.sourceTypeAlias shouldBeInstanceOf KoTypeAliasDeclaration::class
             it?.sourceTypeAlias?.name shouldBeEqualTo "SampleTypeAlias"
+            it?.hasSourceTypeAlias() shouldBeEqualTo true
+            it?.hasSourceTypeAlias { declaration -> declaration.name == "SampleTypeAlias" } shouldBeEqualTo true
+            it?.hasSourceTypeAlias { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
             it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
             it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
             it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
             it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
             it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
         }
     }
 
@@ -433,13 +642,23 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.sourceTypeAlias shouldBeInstanceOf KoTypeAliasDeclaration::class
             it?.sourceTypeAlias?.name shouldBeEqualTo "SampleTypeAlias"
+            it?.hasSourceTypeAlias() shouldBeEqualTo true
+            it?.hasSourceTypeAlias { declaration -> declaration.name == "SampleTypeAlias" } shouldBeEqualTo true
+            it?.hasSourceTypeAlias { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
             it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
             it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
             it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
             it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
             it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
         }
     }
 
@@ -458,13 +677,29 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.sourceExternalType shouldBeInstanceOf KoExternalDeclaration::class
             it?.sourceExternalType?.name shouldBeEqualTo "SampleExternalClass"
+            it?.hasSourceExternalType() shouldBeEqualTo true
+            it?.hasSourceExternalType { declaration -> declaration.name == "SampleExternalClass" } shouldBeEqualTo true
+            it?.hasSourceExternalType { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceExternalTypeOf(SampleExternalClass::class) shouldBeEqualTo true
+            it?.hasSourceExternalTypeOf(SampleClass::class) shouldBeEqualTo false
             it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
+            it?.hasSourceClassOf(SampleExternalClass::class) shouldBeEqualTo false
             it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
+            it?.hasSourceObjectOf(SampleExternalClass::class) shouldBeEqualTo false
             it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
+            it?.hasSourceInterfaceOf(SampleExternalClass::class) shouldBeEqualTo false
             it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
             it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
             it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
+            it?.hasSourceKotlinTypeOf(SampleExternalClass::class) shouldBeEqualTo false
             it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
         }
     }
 
@@ -483,13 +718,29 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.sourceExternalType shouldBeInstanceOf KoExternalDeclaration::class
             it?.sourceExternalType?.name shouldBeEqualTo "SampleExternalClass"
+            it?.hasSourceExternalType() shouldBeEqualTo true
+            it?.hasSourceExternalType { declaration -> declaration.name == "SampleExternalClass" } shouldBeEqualTo true
+            it?.hasSourceExternalType { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceExternalTypeOf(SampleExternalClass::class) shouldBeEqualTo true
+            it?.hasSourceExternalTypeOf(SampleClass::class) shouldBeEqualTo false
             it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
+            it?.hasSourceClassOf(SampleExternalClass::class) shouldBeEqualTo false
             it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
+            it?.hasSourceObjectOf(SampleExternalClass::class) shouldBeEqualTo false
             it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
+            it?.hasSourceInterfaceOf(SampleExternalClass::class) shouldBeEqualTo false
             it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
             it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
             it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
+            it?.hasSourceKotlinTypeOf(SampleExternalClass::class) shouldBeEqualTo false
             it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
         }
     }
 
