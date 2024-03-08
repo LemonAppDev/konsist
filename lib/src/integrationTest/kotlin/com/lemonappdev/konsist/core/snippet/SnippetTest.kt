@@ -15,7 +15,7 @@ class SnippetTest {
                 .walk()
                 .filter { it.isKotlinSnippetFile }
                 // Filter out snippets used to generate documentation
-                .filterNot { it.path.contains("lib/src/snippet/kotlin/com/lemonappdev/konsist/") }
+                .filterNot { it.path.contains("lib/src/snippet/") }
                 .toList()
 
         val snippetPaths =
