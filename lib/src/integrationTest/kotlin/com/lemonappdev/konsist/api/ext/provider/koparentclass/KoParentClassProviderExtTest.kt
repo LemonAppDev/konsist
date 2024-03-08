@@ -13,9 +13,10 @@ class KoParentClassProviderExtTest {
     @Test
     fun `class-has-parent-class-imported-from-external-file`() {
         // given
-        val sut = getSnippetFile("class-has-parent-class-imported-from-external-file")
-            .classes()
-            .first()
+        val sut =
+            getSnippetFile("class-has-parent-class-imported-from-external-file")
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -28,9 +29,10 @@ class KoParentClassProviderExtTest {
     @Test
     fun `object-has-parent-class-imported-from-external-file`() {
         // given
-        val sut = getSnippetFile("object-has-parent-class-imported-from-external-file")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-has-parent-class-imported-from-external-file")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {

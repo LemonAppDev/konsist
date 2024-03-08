@@ -17,9 +17,10 @@ class KoVariableDeclarationForKoFullyQualifiedNameProviderTest {
     @MethodSource("provideValuesWithPackage")
     fun `variable-fully-qualified-name`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "sampleVariable"
@@ -29,9 +30,10 @@ class KoVariableDeclarationForKoFullyQualifiedNameProviderTest {
     @MethodSource("provideValuesWithoutPackage")
     fun `variable-fully-qualified-name-without-package`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "sampleVariable"
@@ -46,32 +48,34 @@ class KoVariableDeclarationForKoFullyQualifiedNameProviderTest {
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesWithPackage() = listOf(
-            arguments(getSnippetFile("variable-in-function-fully-qualified-name").functions()),
-            arguments(getSnippetFile("variable-in-init-block-fully-qualified-name").classes().initBlocks),
-            arguments(getSnippetFile("variable-in-enum-constant-fully-qualified-name").classes().enumConstants),
-            arguments(getSnippetFile("variable-in-getter-fully-qualified-name").properties().getters),
-            arguments(getSnippetFile("variable-in-setter-fully-qualified-name").properties().setters),
-        )
+        fun provideValuesWithPackage() =
+            listOf(
+                arguments(getSnippetFile("variable-in-function-fully-qualified-name").functions()),
+                arguments(getSnippetFile("variable-in-init-block-fully-qualified-name").classes().initBlocks),
+                arguments(getSnippetFile("variable-in-enum-constant-fully-qualified-name").classes().enumConstants),
+                arguments(getSnippetFile("variable-in-getter-fully-qualified-name").properties().getters),
+                arguments(getSnippetFile("variable-in-setter-fully-qualified-name").properties().setters),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesWithoutPackage() = listOf(
-            arguments(
-                getSnippetFile("variable-in-function-fully-qualified-name-without-package").functions(),
-            ),
-            arguments(
-                getSnippetFile("variable-in-init-block-fully-qualified-name-without-package").classes().initBlocks,
-            ),
-            arguments(
-                getSnippetFile("variable-in-enum-constant-fully-qualified-name-without-package").classes().enumConstants,
-            ),
-            arguments(
-                getSnippetFile("variable-in-getter-fully-qualified-name-without-package").properties().getters,
-            ),
-            arguments(
-                getSnippetFile("variable-in-setter-fully-qualified-name-without-package").properties().setters,
-            ),
-        )
+        fun provideValuesWithoutPackage() =
+            listOf(
+                arguments(
+                    getSnippetFile("variable-in-function-fully-qualified-name-without-package").functions(),
+                ),
+                arguments(
+                    getSnippetFile("variable-in-init-block-fully-qualified-name-without-package").classes().initBlocks,
+                ),
+                arguments(
+                    getSnippetFile("variable-in-enum-constant-fully-qualified-name-without-package").classes().enumConstants,
+                ),
+                arguments(
+                    getSnippetFile("variable-in-getter-fully-qualified-name-without-package").properties().getters,
+                ),
+                arguments(
+                    getSnippetFile("variable-in-setter-fully-qualified-name-without-package").properties().setters,
+                ),
+            )
     }
 }

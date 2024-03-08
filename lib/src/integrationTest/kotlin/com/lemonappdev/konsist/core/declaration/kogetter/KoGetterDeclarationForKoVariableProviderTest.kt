@@ -10,10 +10,11 @@ class KoGetterDeclarationForKoVariableProviderTest {
     @Test
     fun `getter-contains-no-variable`() {
         // given
-        val sut = getSnippetFile("getter-contains-no-variable")
-            .properties()
-            .getters
-            .first()
+        val sut =
+            getSnippetFile("getter-contains-no-variable")
+                .properties()
+                .getters
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -31,10 +32,11 @@ class KoGetterDeclarationForKoVariableProviderTest {
     @Test
     fun `getter-contains-variable`() {
         // given
-        val sut = getSnippetFile("getter-contains-variable")
-            .properties()
-            .getters
-            .first()
+        val sut =
+            getSnippetFile("getter-contains-variable")
+                .properties()
+                .getters
+                .first()
 
         // then
         assertSoftly(sut) {

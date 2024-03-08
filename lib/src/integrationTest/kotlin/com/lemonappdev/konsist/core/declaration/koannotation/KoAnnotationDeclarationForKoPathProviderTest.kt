@@ -9,11 +9,12 @@ class KoAnnotationDeclarationForKoPathProviderTest {
     @Test
     fun `annotation-file-path`() {
         // given
-        val sut = getSnippetFile("annotation-file-path")
-            .functions()
-            .first()
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-file-path")
+                .functions()
+                .first()
+                .annotations
+                .first()
 
         // then
         assertSoftly(sut.path) {
@@ -25,11 +26,12 @@ class KoAnnotationDeclarationForKoPathProviderTest {
     @Test
     fun `annotation-project-file-path`() {
         // given
-        val sut = getSnippetFile("annotation-project-file-path")
-            .functions()
-            .first()
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-project-file-path")
+                .functions()
+                .first()
+                .annotations
+                .first()
 
         // then
         sut
@@ -43,11 +45,12 @@ class KoAnnotationDeclarationForKoPathProviderTest {
     @Test
     fun `annotation-reside-in-file-path`() {
         // given
-        val sut = getSnippetFile("annotation-reside-in-file-path")
-            .functions()
-            .first()
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-reside-in-file-path")
+                .functions()
+                .first()
+                .annotations
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -61,11 +64,12 @@ class KoAnnotationDeclarationForKoPathProviderTest {
     @Test
     fun `annotation-reside-in-project-file-path`() {
         // given
-        val sut = getSnippetFile("annotation-reside-in-project-file-path")
-            .functions()
-            .first()
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-reside-in-project-file-path")
+                .functions()
+                .first()
+                .annotations
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -76,6 +80,5 @@ class KoAnnotationDeclarationForKoPathProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koannotation/snippet/forkopathprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koannotation/snippet/forkopathprovider/", fileName)
 }

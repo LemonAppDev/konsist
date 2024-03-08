@@ -10,13 +10,14 @@ internal interface KoLocationProviderCore :
     KoBaseProviderCore {
     override val location: String
         get() {
-            val lineAndColumn = psiElement
-                .getTextWithLocation()
-                .substringAfterLast("' at (")
-                .substringBefore(") in")
-                .split(",")
-                .toMutableList()
-                .filterNot { it.isBlank() }
+            val lineAndColumn =
+                psiElement
+                    .getTextWithLocation()
+                    .substringAfterLast("' at (")
+                    .substringBefore(") in")
+                    .split(",")
+                    .toMutableList()
+                    .filterNot { it.isBlank() }
 
             val line = lineAndColumn[0]
             val column = lineAndColumn[1]

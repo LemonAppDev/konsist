@@ -9,9 +9,10 @@ class KoObjectDeclarationForKoNameProviderTest {
     @Test
     fun `object`() {
         // given
-        val sut = getSnippetFile("object")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -30,9 +31,10 @@ class KoObjectDeclarationForKoNameProviderTest {
     @Test
     fun `companion-object-with-name`() {
         // given
-        val sut = getSnippetFile("companion-object-with-name")
-            .objects(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("companion-object-with-name")
+                .objects(includeNested = true)
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -51,14 +53,14 @@ class KoObjectDeclarationForKoNameProviderTest {
     @Test
     fun `companion-object-without-name`() {
         // given
-        val sut = getSnippetFile("companion-object-without-name")
-            .objects(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("companion-object-without-name")
+                .objects(includeNested = true)
+                .first()
 
         // then
         sut.name shouldBeEqualTo "Companion"
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koobject/snippet/forkonameprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/forkonameprovider/", fileName)
 }

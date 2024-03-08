@@ -25,41 +25,42 @@ internal class KoInitBlockDeclarationCore private constructor(
     override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoInitBlockDeclaration,
-    KoBaseProviderCore,
-    KoLocalClassProviderCore,
-    KoLocalDeclarationProviderCore,
-    KoLocalFunctionProviderCore,
-    KoVariableProviderCore,
-    KoContainingFileProviderCore,
-    KoLocationProviderCore,
-    KoContainingDeclarationProviderCore,
-    KoPathProviderCore,
-    KoModuleProviderCore,
-    KoSourceSetProviderCore,
-    KoTextProviderCore {
-    override val psiElement: PsiElement by lazy { ktAnonymousInitializer }
+        KoBaseProviderCore,
+        KoLocalClassProviderCore,
+        KoLocalDeclarationProviderCore,
+        KoLocalFunctionProviderCore,
+        KoVariableProviderCore,
+        KoContainingFileProviderCore,
+        KoLocationProviderCore,
+        KoContainingDeclarationProviderCore,
+        KoPathProviderCore,
+        KoModuleProviderCore,
+        KoSourceSetProviderCore,
+        KoTextProviderCore {
+        override val psiElement: PsiElement by lazy { ktAnonymousInitializer }
 
-    override val ktElement: KtElement by lazy { ktAnonymousInitializer }
+        override val ktElement: KtElement by lazy { ktAnonymousInitializer }
 
-    override val localDeclarations: List<KoBaseDeclaration> by lazy {
-        val psiElements = ktAnonymousInitializer
-            .body
-            ?.children
+        override val localDeclarations: List<KoBaseDeclaration> by lazy {
+            val psiElements =
+                ktAnonymousInitializer
+                    .body
+                    ?.children
 
-        KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
+            KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
+        }
+
+        override fun toString(): String = locationWithText
+
+        internal companion object {
+            private val cache: KoDeclarationCache<KoInitBlockDeclaration> = KoDeclarationCache()
+
+            internal fun getInstance(
+                ktAnonymousInitializer: KtAnonymousInitializer,
+                containingDeclaration: KoBaseDeclaration,
+            ): KoInitBlockDeclaration =
+                cache.getOrCreateInstance(ktAnonymousInitializer, containingDeclaration) {
+                    KoInitBlockDeclarationCore(ktAnonymousInitializer, containingDeclaration)
+                }
+        }
     }
-
-    override fun toString(): String = locationWithText
-
-    internal companion object {
-        private val cache: KoDeclarationCache<KoInitBlockDeclaration> = KoDeclarationCache()
-
-        internal fun getInstance(
-            ktAnonymousInitializer: KtAnonymousInitializer,
-            containingDeclaration: KoBaseDeclaration,
-        ): KoInitBlockDeclaration =
-            cache.getOrCreateInstance(ktAnonymousInitializer, containingDeclaration) {
-                KoInitBlockDeclarationCore(ktAnonymousInitializer, containingDeclaration)
-            }
-    }
-}

@@ -9,9 +9,10 @@ class KoTypeAliasDeclarationForKoNameProviderTest {
     @Test
     fun `typealias-name`() {
         // given
-        val sut = getSnippetFile("typealias-name")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-name")
+                .typeAliases
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -27,6 +28,5 @@ class KoTypeAliasDeclarationForKoNameProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kotypealias/snippet/forkonameprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kotypealias/snippet/forkonameprovider/", fileName)
 }

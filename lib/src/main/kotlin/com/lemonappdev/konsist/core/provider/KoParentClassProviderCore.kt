@@ -17,23 +17,33 @@ internal interface KoParentClassProviderCore :
 
     override fun numParentClasses(indirectParents: Boolean): Int = parentClasses(indirectParents).size
 
-    override fun countParentClasses(indirectParents: Boolean, predicate: (KoClassDeclaration) -> Boolean): Int =
-        parentClasses(indirectParents).count { predicate(it) }
+    override fun countParentClasses(
+        indirectParents: Boolean,
+        predicate: (KoClassDeclaration) -> Boolean,
+    ): Int = parentClasses(indirectParents).count { predicate(it) }
 
     override fun hasParentClass(): Boolean = parentClass != null
 
-    override fun hasParentClass(indirectParents: Boolean, predicate: (KoClassDeclaration) -> Boolean): Boolean =
-        parentClasses(indirectParents).any(predicate)
+    override fun hasParentClass(
+        indirectParents: Boolean,
+        predicate: (KoClassDeclaration) -> Boolean,
+    ): Boolean = parentClasses(indirectParents).any(predicate)
 
     override fun hasParentClasses(indirectParents: Boolean): Boolean = parentClasses(indirectParents).isNotEmpty()
 
-    override fun hasAllParentClasses(indirectParents: Boolean, predicate: (KoClassDeclaration) -> Boolean): Boolean =
-        parentClasses(indirectParents).all(predicate)
+    override fun hasAllParentClasses(
+        indirectParents: Boolean,
+        predicate: (KoClassDeclaration) -> Boolean,
+    ): Boolean = parentClasses(indirectParents).all(predicate)
 
     @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasParents()"))
     override fun hasParentClass(name: String): Boolean = parentClass?.name == name
 
-    override fun hasParentClassWithName(name: String, vararg names: String, indirectParents: Boolean): Boolean {
+    override fun hasParentClassWithName(
+        name: String,
+        vararg names: String,
+        indirectParents: Boolean,
+    ): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.any { parentClasses(indirectParents).any { parentClass -> it == parentClass.name } }
@@ -51,11 +61,19 @@ internal interface KoParentClassProviderCore :
         }
     }
 
-    override fun hasParentClassOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean): Boolean =
+    override fun hasParentClassOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+        indirectParents: Boolean,
+    ): Boolean =
         checkIfParentOf(name, parentClasses(indirectParents)) ||
             names.any { checkIfParentOf(it, parentClasses(indirectParents)) }
 
-    override fun hasAllParentClassesOf(name: KClass<*>, vararg names: KClass<*>, indirectParents: Boolean): Boolean =
+    override fun hasAllParentClassesOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+        indirectParents: Boolean,
+    ): Boolean =
         checkIfParentOf(name, parentClasses(indirectParents)) &&
             names.all { checkIfParentOf(it, parentClasses(indirectParents)) }
 }

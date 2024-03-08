@@ -9,11 +9,12 @@ class KoFunctionTypeDeclarationTest {
     @Test
     fun `type-to-string`() {
         // given
-        val sut = getSnippetFile("type-to-string")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoFunctionTypeDeclaration
+        val sut =
+            getSnippetFile("type-to-string")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         sut.toString() shouldBeEqualTo "() -> Unit"
@@ -22,11 +23,12 @@ class KoFunctionTypeDeclarationTest {
     @Test
     fun `parameters-list-is-empty`() {
         // given
-        val sut = getSnippetFile("parameters-list-is-empty")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoFunctionTypeDeclaration
+        val sut =
+            getSnippetFile("parameters-list-is-empty")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         sut?.parameterTypes shouldBeEqualTo emptyList()
@@ -35,11 +37,12 @@ class KoFunctionTypeDeclarationTest {
     @Test
     fun `parameters-list-has-one-element`() {
         // given
-        val sut = getSnippetFile("parameters-list-has-one-element")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoFunctionTypeDeclaration
+        val sut =
+            getSnippetFile("parameters-list-has-one-element")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         sut?.parameterTypes?.map { it.type.name } shouldBeEqualTo listOf("String")
@@ -48,11 +51,12 @@ class KoFunctionTypeDeclarationTest {
     @Test
     fun `parameters-list-has-two-elements`() {
         // given
-        val sut = getSnippetFile("parameters-list-has-two-elements")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoFunctionTypeDeclaration
+        val sut =
+            getSnippetFile("parameters-list-has-two-elements")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         sut?.parameterTypes?.map { it.type.name } shouldBeEqualTo listOf("String", "List<Int>")
@@ -61,11 +65,12 @@ class KoFunctionTypeDeclarationTest {
     @Test
     fun `return-type-is-kotlin-type`() {
         // given
-        val sut = getSnippetFile("return-type-is-kotlin-type")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoFunctionTypeDeclaration
+        val sut =
+            getSnippetFile("return-type-is-kotlin-type")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         sut?.returnType?.name shouldBeEqualTo "Unit"
@@ -74,11 +79,12 @@ class KoFunctionTypeDeclarationTest {
     @Test
     fun `return-type-is-collection-type`() {
         // given
-        val sut = getSnippetFile("return-type-is-collection-type")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoFunctionTypeDeclaration
+        val sut =
+            getSnippetFile("return-type-is-collection-type")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         sut?.returnType?.name shouldBeEqualTo "List<String>"
@@ -87,11 +93,12 @@ class KoFunctionTypeDeclarationTest {
     @Test
     fun `return-type-is-complex-type`() {
         // given
-        val sut = getSnippetFile("return-type-is-complex-type")
-            .properties()
-            .first()
-            .type
-            ?.sourceDeclaration as? KoFunctionTypeDeclaration
+        val sut =
+            getSnippetFile("return-type-is-complex-type")
+                .properties()
+                .first()
+                .type
+                ?.sourceDeclaration as? KoFunctionTypeDeclaration
 
         // then
         sut?.returnType?.name shouldBeEqualTo "SampleClass"

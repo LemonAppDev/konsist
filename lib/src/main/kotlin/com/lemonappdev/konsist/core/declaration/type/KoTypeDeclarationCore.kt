@@ -30,54 +30,55 @@ internal class KoTypeDeclarationCore private constructor(
     override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoTypeDeclaration,
-    KoBaseProviderCore,
-    KoNameProviderCore,
-    KoTextProviderCore,
-    KoPathProviderCore,
-    KoLocationProviderCore,
-    KoNullableProviderCore,
-    KoContainingFileProviderCore,
-    KoContainingDeclarationProviderCore,
-    KoModuleProviderCore,
-    KoSourceSetProviderCore,
-    KoKotlinTypeProviderCore,
-    KoSourceAndAliasTypeProviderCore,
-    KoGenericTypeProviderCore,
-    KoPackageProviderCore,
-    KoResideInPackageProviderCore,
-    KoSourceDeclarationProviderCore {
-    override val psiElement: PsiElement by lazy { ktTypeReference }
+        KoBaseProviderCore,
+        KoNameProviderCore,
+        KoTextProviderCore,
+        KoPathProviderCore,
+        KoLocationProviderCore,
+        KoNullableProviderCore,
+        KoContainingFileProviderCore,
+        KoContainingDeclarationProviderCore,
+        KoModuleProviderCore,
+        KoSourceSetProviderCore,
+        KoKotlinTypeProviderCore,
+        KoSourceAndAliasTypeProviderCore,
+        KoGenericTypeProviderCore,
+        KoPackageProviderCore,
+        KoResideInPackageProviderCore,
+        KoSourceDeclarationProviderCore {
+        override val psiElement: PsiElement by lazy { ktTypeReference }
 
-    override val ktElement: KtElement by lazy { ktTypeReference }
+        override val ktElement: KtElement by lazy { ktTypeReference }
 
-    override val name: String by lazy {
-        val typeReference = ktTypeReference
-            .children
-            .firstOrNull()
+        override val name: String by lazy {
+            val typeReference =
+                ktTypeReference
+                    .children
+                    .firstOrNull()
 
-        if (typeReference is KtNullableType) {
-            typeReference
-                .children
-                .firstOrNull()
-                ?.text ?: ""
-        } else {
-            typeReference?.text ?: ""
+            if (typeReference is KtNullableType) {
+                typeReference
+                    .children
+                    .firstOrNull()
+                    ?.text ?: ""
+            } else {
+                typeReference?.text ?: ""
+            }
+        }
+
+        override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
+
+        override fun toString(): String = text
+
+        internal companion object {
+            private val cache: KoDeclarationCache<KoTypeDeclaration> = KoDeclarationCache()
+
+            internal fun getInstance(
+                ktTypeReference: KtTypeReference,
+                containingDeclaration: KoBaseDeclaration,
+            ): KoTypeDeclaration =
+                cache.getOrCreateInstance(ktTypeReference, containingDeclaration) {
+                    KoTypeDeclarationCore(ktTypeReference, containingDeclaration)
+                }
         }
     }
-
-    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
-
-    override fun toString(): String = text
-
-    internal companion object {
-        private val cache: KoDeclarationCache<KoTypeDeclaration> = KoDeclarationCache()
-
-        internal fun getInstance(
-            ktTypeReference: KtTypeReference,
-            containingDeclaration: KoBaseDeclaration,
-        ): KoTypeDeclaration =
-            cache.getOrCreateInstance(ktTypeReference, containingDeclaration) {
-                KoTypeDeclarationCore(ktTypeReference, containingDeclaration)
-            }
-    }
-}

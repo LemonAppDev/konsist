@@ -13,12 +13,14 @@ internal interface KoVariableProviderCore :
     override val numVariables: Int
         get() = variables.size
 
-    override fun countVariables(predicate: (KoVariableDeclaration) -> Boolean): Int =
-        variables.count { predicate(it) }
+    override fun countVariables(predicate: (KoVariableDeclaration) -> Boolean): Int = variables.count { predicate(it) }
 
     override fun hasVariables(): Boolean = variables.isNotEmpty()
 
-    override fun hasVariableWithName(name: String, vararg names: String): Boolean {
+    override fun hasVariableWithName(
+        name: String,
+        vararg names: String,
+    ): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.any {
@@ -26,7 +28,10 @@ internal interface KoVariableProviderCore :
         }
     }
 
-    override fun hasVariablesWithAllNames(name: String, vararg names: String): Boolean {
+    override fun hasVariablesWithAllNames(
+        name: String,
+        vararg names: String,
+    ): Boolean {
         val givenNames = names.toList() + name
 
         return givenNames.all {

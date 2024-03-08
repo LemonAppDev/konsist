@@ -9,11 +9,12 @@ class KoConstructorDeclarationForKoContainingDeclarationProviderTest {
     @Test
     fun `constructor-parent`() {
         // given
-        val sut = getSnippetFile("constructor-parent")
-            .classes()
-            .first()
-            .constructors
-            .first()
+        val sut =
+            getSnippetFile("constructor-parent")
+                .classes()
+                .first()
+                .constructors
+                .first()
 
         // then
         (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "SampleClass"

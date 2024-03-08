@@ -12,14 +12,15 @@ class KoImportAliasDeclarationForKoLocationProviderTest {
     @MethodSource("provideValues")
     fun `type-location`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
-            ?.sourceDeclaration as? KoImportAliasDeclaration
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration as? KoImportAliasDeclaration
 
         // then
         sut?.location shouldBeEqualTo "${sut?.path}:1:52"
@@ -31,9 +32,10 @@ class KoImportAliasDeclarationForKoLocationProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("import-alias-type-location"),
-            arguments("nullable-import-alias-type-location"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("import-alias-type-location"),
+                arguments("nullable-import-alias-type-location"),
+            )
     }
 }

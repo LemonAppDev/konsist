@@ -8,9 +8,10 @@ class KoFunctionDeclarationForKoInfixModifierProviderTest {
     @Test
     fun `function-without-infix-modifier`() {
         // given
-        val sut = getSnippetFile("function-without-infix-modifier")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-without-infix-modifier")
+                .functions()
+                .first()
 
         // then
         sut.hasInfixModifier shouldBeEqualTo false
@@ -19,9 +20,10 @@ class KoFunctionDeclarationForKoInfixModifierProviderTest {
     @Test
     fun `function-with-infix-modifier`() {
         // given
-        val sut = getSnippetFile("function-with-infix-modifier")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-with-infix-modifier")
+                .functions()
+                .first()
 
         // then
         sut.hasInfixModifier shouldBeEqualTo true

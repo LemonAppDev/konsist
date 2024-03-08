@@ -8,9 +8,10 @@ class KoClassDeclarationForKoActualModifierProviderTest {
     @Test
     fun `class-without-actual-modifier`() {
         // given
-        val sut = getSnippetFile("class-without-actual-modifier")
-            .classes(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("class-without-actual-modifier")
+                .classes(includeNested = true)
+                .first()
 
         // then
         sut.hasActualModifier shouldBeEqualTo false
@@ -19,9 +20,10 @@ class KoClassDeclarationForKoActualModifierProviderTest {
     @Test
     fun `actual-class`() {
         // given
-        val sut = getSnippetFile("actual-class")
-            .classes(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("actual-class")
+                .classes(includeNested = true)
+                .first()
 
         // then
         sut.hasActualModifier shouldBeEqualTo true

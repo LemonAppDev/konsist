@@ -12,12 +12,14 @@ class KoFileExtensionProviderListExtTest {
     fun `withExtension() returns declaration with given extension`() {
         // given
         val extension = "sampleExtension"
-        val declaration1: KoFileExtensionProvider = mockk {
-            every { hasExtension(extension) } returns true
-        }
-        val declaration2: KoFileExtensionProvider = mockk {
-            every { hasExtension(extension) } returns false
-        }
+        val declaration1: KoFileExtensionProvider =
+            mockk {
+                every { hasExtension(extension) } returns true
+            }
+        val declaration2: KoFileExtensionProvider =
+            mockk {
+                every { hasExtension(extension) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -33,21 +35,24 @@ class KoFileExtensionProviderListExtTest {
         val extension1 = "sampleExtension1"
         val extension2 = "sampleExtension2"
         val extension3 = "sampleExtension3"
-        val declaration1: KoFileExtensionProvider = mockk {
-            every { hasExtension(extension1) } returns true
-            every { hasExtension(extension2) } returns false
-            every { hasExtension(extension3) } returns false
-        }
-        val declaration2: KoFileExtensionProvider = mockk {
-            every { hasExtension(extension1) } returns false
-            every { hasExtension(extension2) } returns true
-            every { hasExtension(extension3) } returns false
-        }
-        val declaration3: KoFileExtensionProvider = mockk {
-            every { hasExtension(extension1) } returns false
-            every { hasExtension(extension2) } returns false
-            every { hasExtension(extension3) } returns true
-        }
+        val declaration1: KoFileExtensionProvider =
+            mockk {
+                every { hasExtension(extension1) } returns true
+                every { hasExtension(extension2) } returns false
+                every { hasExtension(extension3) } returns false
+            }
+        val declaration2: KoFileExtensionProvider =
+            mockk {
+                every { hasExtension(extension1) } returns false
+                every { hasExtension(extension2) } returns true
+                every { hasExtension(extension3) } returns false
+            }
+        val declaration3: KoFileExtensionProvider =
+            mockk {
+                every { hasExtension(extension1) } returns false
+                every { hasExtension(extension2) } returns false
+                every { hasExtension(extension3) } returns true
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -61,12 +66,14 @@ class KoFileExtensionProviderListExtTest {
     fun `withoutExtension() returns declaration without given extension`() {
         // given
         val extension = "sampleExtension"
-        val declaration1: KoFileExtensionProvider = mockk {
-            every { hasExtension(extension) } returns true
-        }
-        val declaration2: KoFileExtensionProvider = mockk {
-            every { hasExtension(extension) } returns false
-        }
+        val declaration1: KoFileExtensionProvider =
+            mockk {
+                every { hasExtension(extension) } returns true
+            }
+        val declaration2: KoFileExtensionProvider =
+            mockk {
+                every { hasExtension(extension) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -82,21 +89,24 @@ class KoFileExtensionProviderListExtTest {
         val extension1 = "sampleExtension1"
         val extension2 = "sampleExtension2"
         val extension3 = "sampleExtension3"
-        val declaration1: KoFileExtensionProvider = mockk {
-            every { hasExtension(extension1) } returns true
-            every { hasExtension(extension2) } returns false
-            every { hasExtension(extension3) } returns false
-        }
-        val declaration2: KoFileExtensionProvider = mockk {
-            every { hasExtension(extension1) } returns false
-            every { hasExtension(extension2) } returns true
-            every { hasExtension(extension3) } returns false
-        }
-        val declaration3: KoFileExtensionProvider = mockk {
-            every { hasExtension(extension1) } returns false
-            every { hasExtension(extension2) } returns false
-            every { hasExtension(extension3) } returns true
-        }
+        val declaration1: KoFileExtensionProvider =
+            mockk {
+                every { hasExtension(extension1) } returns true
+                every { hasExtension(extension2) } returns false
+                every { hasExtension(extension3) } returns false
+            }
+        val declaration2: KoFileExtensionProvider =
+            mockk {
+                every { hasExtension(extension1) } returns false
+                every { hasExtension(extension2) } returns true
+                every { hasExtension(extension3) } returns false
+            }
+        val declaration3: KoFileExtensionProvider =
+            mockk {
+                every { hasExtension(extension1) } returns false
+                every { hasExtension(extension2) } returns false
+                every { hasExtension(extension3) } returns true
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when

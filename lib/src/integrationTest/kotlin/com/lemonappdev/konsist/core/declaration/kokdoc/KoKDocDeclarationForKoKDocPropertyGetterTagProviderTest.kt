@@ -10,10 +10,11 @@ class KoKDocDeclarationForKoKDocPropertyGetterTagProviderTest {
     @Test
     fun `kdoc-without-property-getter-tag`() {
         // given
-        val sut = getSnippetFile("kdoc-without-property-getter-tag")
-            .classes()
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("kdoc-without-property-getter-tag")
+                .classes()
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -25,10 +26,11 @@ class KoKDocDeclarationForKoKDocPropertyGetterTagProviderTest {
     @Test
     fun `property-with-property-getter-tag`() {
         // given
-        val sut = getSnippetFile("property-with-property-getter-tag")
-            .properties(includeNested = true)
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("property-with-property-getter-tag")
+                .properties(includeNested = true)
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut) {

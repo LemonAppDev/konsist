@@ -18,9 +18,10 @@ class KoVariableDeclarationForKoNameProviderTest {
     @MethodSource("provideValues")
     fun `variable-name`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -37,17 +38,17 @@ class KoVariableDeclarationForKoNameProviderTest {
     }
 
     companion object {
-        private fun getSnippetFile(fileName: String) =
-            getSnippetKoScope("core/declaration/kovariable/snippet/forkonameprovider/", fileName)
+        private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kovariable/snippet/forkonameprovider/", fileName)
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments(getSnippetFile("variable-in-function-name").functions()),
-            arguments(getSnippetFile("variable-in-init-block-name").classes().initBlocks),
-            arguments(getSnippetFile("variable-in-enum-constant-name").classes().enumConstants),
-            arguments(getSnippetFile("variable-in-getter-name").properties().getters),
-            arguments(getSnippetFile("variable-in-setter-name").properties().setters),
-        )
+        fun provideValues() =
+            listOf(
+                arguments(getSnippetFile("variable-in-function-name").functions()),
+                arguments(getSnippetFile("variable-in-init-block-name").classes().initBlocks),
+                arguments(getSnippetFile("variable-in-enum-constant-name").classes().enumConstants),
+                arguments(getSnippetFile("variable-in-getter-name").properties().getters),
+                arguments(getSnippetFile("variable-in-setter-name").properties().setters),
+            )
     }
 }

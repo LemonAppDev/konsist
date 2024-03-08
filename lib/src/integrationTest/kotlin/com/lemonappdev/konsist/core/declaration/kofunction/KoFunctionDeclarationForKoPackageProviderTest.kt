@@ -8,9 +8,10 @@ class KoFunctionDeclarationForKoPackageProviderTest {
     @Test
     fun `function-is-not-in-package`() {
         // given
-        val sut = getSnippetFile("function-is-not-in-package")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-is-not-in-package")
+                .functions()
+                .first()
 
         // then
         sut.packagee shouldBeEqualTo null
@@ -19,14 +20,14 @@ class KoFunctionDeclarationForKoPackageProviderTest {
     @Test
     fun `function-is-in-package`() {
         // given
-        val sut = getSnippetFile("function-is-in-package")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-is-in-package")
+                .functions()
+                .first()
 
         // then
         sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kofunction/snippet/forkopackageprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofunction/snippet/forkopackageprovider/", fileName)
 }

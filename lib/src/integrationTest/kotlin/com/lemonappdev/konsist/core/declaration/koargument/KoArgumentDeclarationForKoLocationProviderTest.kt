@@ -12,11 +12,12 @@ class KoArgumentDeclarationForKoLocationProviderTest {
     @Test
     fun `argument-in-enum-const-location-with-single-digit`() {
         // given
-        val sut = getSnippetFile("argument-in-enum-const-location-with-single-digit")
-            .classes()
-            .enumConstants
-            .arguments
-            .first()
+        val sut =
+            getSnippetFile("argument-in-enum-const-location-with-single-digit")
+                .classes()
+                .enumConstants
+                .arguments
+                .first()
 
         // then
         sut.location shouldBeEqualTo "${sut.path}:2:21"
@@ -25,18 +26,20 @@ class KoArgumentDeclarationForKoLocationProviderTest {
     @Test
     fun `argument-in-enum-const-location-with-text`() {
         // given
-        val projectPath = getSnippetFile("argument-in-enum-const-location-with-text")
-            .classes()
-            .enumConstants
-            .arguments
-            .first()
-            .projectPath
+        val projectPath =
+            getSnippetFile("argument-in-enum-const-location-with-text")
+                .classes()
+                .enumConstants
+                .arguments
+                .first()
+                .projectPath
 
-        val sut = getSnippetFile("argument-in-enum-const-location-with-text")
-            .classes()
-            .enumConstants
-            .arguments
-            .first()
+        val sut =
+            getSnippetFile("argument-in-enum-const-location-with-text")
+                .classes()
+                .enumConstants
+                .arguments
+                .first()
 
         // then
         val declaration = "Declaration:\nsampleParameter = 0"
@@ -50,11 +53,12 @@ class KoArgumentDeclarationForKoLocationProviderTest {
     @Test
     fun `argument-in-annotation-location-with-single-digit`() {
         // given
-        val sut = getSnippetFile("argument-in-annotation-location-with-single-digit")
-            .functions()
-            .annotations
-            .arguments
-            .first()
+        val sut =
+            getSnippetFile("argument-in-annotation-location-with-single-digit")
+                .functions()
+                .annotations
+                .arguments
+                .first()
 
         // then
         sut.location shouldBeEqualTo "${sut.path}:3:32"
@@ -63,18 +67,20 @@ class KoArgumentDeclarationForKoLocationProviderTest {
     @Test
     fun `argument-in-annotation-location-with-text`() {
         // given
-        val projectPath = getSnippetFile("argument-in-annotation-location-with-text")
-            .functions()
-            .annotations
-            .arguments
-            .first()
-            .projectPath
+        val projectPath =
+            getSnippetFile("argument-in-annotation-location-with-text")
+                .functions()
+                .annotations
+                .arguments
+                .first()
+                .projectPath
 
-        val sut = getSnippetFile("argument-in-annotation-location-with-text")
-            .functions()
-            .annotations
-            .arguments
-            .first()
+        val sut =
+            getSnippetFile("argument-in-annotation-location-with-text")
+                .functions()
+                .annotations
+                .arguments
+                .first()
 
         // then
         val declaration = "Declaration:\nsampleParameter = \"text\""
@@ -85,6 +91,5 @@ class KoArgumentDeclarationForKoLocationProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koargument/snippet/forkolocationprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koargument/snippet/forkolocationprovider/", fileName)
 }

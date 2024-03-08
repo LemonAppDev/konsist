@@ -9,10 +9,11 @@ class KoExternalDeclarationTest {
     @Test
     fun `external-parent-of-class-to-string`() {
         // given
-        val sut = getSnippetFile("external-parent-of-class-to-string")
-            .classes()
-            .externalParents()
-            .first()
+        val sut =
+            getSnippetFile("external-parent-of-class-to-string")
+                .classes()
+                .externalParents()
+                .first()
 
         // then
         sut.toString() shouldBeEqualTo "SampleExternalClass"
@@ -21,10 +22,11 @@ class KoExternalDeclarationTest {
     @Test
     fun `external-parent-of-interface-to-string`() {
         // given
-        val sut = getSnippetFile("external-parent-of-interface-to-string")
-            .interfaces()
-            .externalParents()
-            .first()
+        val sut =
+            getSnippetFile("external-parent-of-interface-to-string")
+                .interfaces()
+                .externalParents()
+                .first()
 
         // then
         sut.toString() shouldBeEqualTo "SampleExternalInterface"
@@ -33,10 +35,11 @@ class KoExternalDeclarationTest {
     @Test
     fun `external-parent-of-object-to-string`() {
         // given
-        val sut = getSnippetFile("external-parent-of-object-to-string")
-            .objects()
-            .externalParents()
-            .first()
+        val sut =
+            getSnippetFile("external-parent-of-object-to-string")
+                .objects()
+                .externalParents()
+                .first()
 
         // then
         sut.toString() shouldBeEqualTo "SampleExternalClass"

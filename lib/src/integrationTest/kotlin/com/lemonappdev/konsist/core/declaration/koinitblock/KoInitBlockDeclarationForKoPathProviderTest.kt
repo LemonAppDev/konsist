@@ -10,10 +10,11 @@ class KoInitBlockDeclarationForKoPathProviderTest {
     @Test
     fun `init-block-file-path`() {
         // given
-        val sut = getSnippetFile("init-block-file-path")
-            .classes()
-            .initBlocks
-            .first()
+        val sut =
+            getSnippetFile("init-block-file-path")
+                .classes()
+                .initBlocks
+                .first()
 
         // then
         assertSoftly {
@@ -25,10 +26,11 @@ class KoInitBlockDeclarationForKoPathProviderTest {
     @Test
     fun `init-block-project-file-path`() {
         // given
-        val sut = getSnippetFile("init-block-project-file-path")
-            .classes()
-            .initBlocks
-            .first()
+        val sut =
+            getSnippetFile("init-block-project-file-path")
+                .classes()
+                .initBlocks
+                .first()
 
         // then
         sut
@@ -42,10 +44,11 @@ class KoInitBlockDeclarationForKoPathProviderTest {
     @Test
     fun `init-block-reside-in-file-path`() {
         // given
-        val sut = getSnippetFile("init-block-reside-in-file-path")
-            .classes()
-            .initBlocks
-            .first()
+        val sut =
+            getSnippetFile("init-block-reside-in-file-path")
+                .classes()
+                .initBlocks
+                .first()
 
         // then
         assertSoftly {
@@ -59,10 +62,11 @@ class KoInitBlockDeclarationForKoPathProviderTest {
     @Test
     fun `init-block-reside-in-project-file-path`() {
         // given
-        val sut = getSnippetFile("init-block-reside-in-project-file-path")
-            .classes()
-            .initBlocks
-            .first()
+        val sut =
+            getSnippetFile("init-block-reside-in-project-file-path")
+                .classes()
+                .initBlocks
+                .first()
 
         // then
         assertSoftly {
@@ -73,6 +77,5 @@ class KoInitBlockDeclarationForKoPathProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koinitblock/snippet/forkopathprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koinitblock/snippet/forkopathprovider/", fileName)
 }

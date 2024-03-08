@@ -9,9 +9,8 @@ import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
  * @param includeNested Whether to include nested interfaces.
  * @return A list containing interface declarations.
  */
-fun <T : KoInterfaceProvider> List<T>.interfaces(
-    includeNested: Boolean = true,
-): List<KoInterfaceDeclaration> = flatMap { it.interfaces(includeNested) }
+fun <T : KoInterfaceProvider> List<T>.interfaces(includeNested: Boolean = true): List<KoInterfaceDeclaration> =
+    flatMap { it.interfaces(includeNested) }
 
 /**
  * List containing declarations with any interface.
@@ -19,8 +18,7 @@ fun <T : KoInterfaceProvider> List<T>.interfaces(
  * @param includeNested Whether to include nested interfaces.
  * @return A list containing declarations with any interface.
  */
-fun <T : KoInterfaceProvider> List<T>.withInterfaces(includeNested: Boolean = true): List<T> =
-    filter { it.hasInterfaces(includeNested) }
+fun <T : KoInterfaceProvider> List<T>.withInterfaces(includeNested: Boolean = true): List<T> = filter { it.hasInterfaces(includeNested) }
 
 /**
  * List containing declarations with no interfaces.
@@ -43,9 +41,10 @@ fun <T : KoInterfaceProvider> List<T>.withInterfaceNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = filter {
-    it.hasInterfaceWithName(name, *names, includeNested = includeNested)
-}
+): List<T> =
+    filter {
+        it.hasInterfaceWithName(name, *names, includeNested = includeNested)
+    }
 
 /**
  * List containing declarations without any of specified interfaces.
@@ -59,9 +58,10 @@ fun <T : KoInterfaceProvider> List<T>.withoutInterfaceNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = filterNot {
-    it.hasInterfaceWithName(name, *names, includeNested = includeNested)
-}
+): List<T> =
+    filterNot {
+        it.hasInterfaceWithName(name, *names, includeNested = includeNested)
+    }
 
 /**
  * List containing declarations that have all specified interfaces.
@@ -75,9 +75,10 @@ fun <T : KoInterfaceProvider> List<T>.withAllInterfacesNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = filter {
-    it.hasInterfacesWithAllNames(name, *names, includeNested = includeNested)
-}
+): List<T> =
+    filter {
+        it.hasInterfacesWithAllNames(name, *names, includeNested = includeNested)
+    }
 
 /**
  * List containing declarations without all specified interfaces.
@@ -106,9 +107,10 @@ fun <T : KoInterfaceProvider> List<T>.withoutAllInterfacesNamed(
 fun <T : KoInterfaceProvider> List<T>.withInterface(
     includeNested: Boolean = true,
     predicate: (KoInterfaceDeclaration) -> Boolean,
-): List<T> = filter {
-    it.hasInterface(includeNested, predicate)
-}
+): List<T> =
+    filter {
+        it.hasInterface(includeNested, predicate)
+    }
 
 /**
  * List containing declarations that not have interface satisfying the provided predicate.
@@ -120,8 +122,7 @@ fun <T : KoInterfaceProvider> List<T>.withInterface(
 fun <T : KoInterfaceProvider> List<T>.withoutInterface(
     includeNested: Boolean = true,
     predicate: (KoInterfaceDeclaration) -> Boolean,
-): List<T> =
-    filterNot { it.hasInterface(includeNested, predicate) }
+): List<T> = filterNot { it.hasInterface(includeNested, predicate) }
 
 /**
  * List containing declarations that have all interfaces satisfying the provided predicate.
@@ -148,8 +149,7 @@ fun <T : KoInterfaceProvider> List<T>.withAllInterfaces(
 fun <T : KoInterfaceProvider> List<T>.withoutAllInterfaces(
     includeNested: Boolean = true,
     predicate: (KoInterfaceDeclaration) -> Boolean,
-): List<T> =
-    filterNot { it.hasAllInterfaces(includeNested, predicate) }
+): List<T> = filterNot { it.hasAllInterfaces(includeNested, predicate) }
 
 /**
  * List containing declarations with interface declarations satisfying the predicate.
@@ -161,8 +161,7 @@ fun <T : KoInterfaceProvider> List<T>.withoutAllInterfaces(
 fun <T : KoInterfaceProvider> List<T>.withInterfaces(
     includeNested: Boolean = true,
     predicate: (List<KoInterfaceDeclaration>) -> Boolean,
-): List<T> =
-    filter { predicate(it.interfaces(includeNested)) }
+): List<T> = filter { predicate(it.interfaces(includeNested)) }
 
 /**
  * List containing declarations without interface declarations satisfying the predicate.
@@ -174,5 +173,4 @@ fun <T : KoInterfaceProvider> List<T>.withInterfaces(
 fun <T : KoInterfaceProvider> List<T>.withoutInterfaces(
     includeNested: Boolean = true,
     predicate: (List<KoInterfaceDeclaration>) -> Boolean,
-): List<T> =
-    filterNot { predicate(it.interfaces(includeNested)) }
+): List<T> = filterNot { predicate(it.interfaces(includeNested)) }

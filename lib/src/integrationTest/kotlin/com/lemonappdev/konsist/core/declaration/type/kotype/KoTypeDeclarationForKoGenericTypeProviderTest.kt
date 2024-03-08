@@ -14,10 +14,11 @@ class KoTypeDeclarationForKoGenericTypeProviderTest {
         value: Boolean,
     ) {
         // given
-        val sut = getSnippetFile(fileName)
-            .properties()
-            .first()
-            .type
+        val sut =
+            getSnippetFile(fileName)
+                .properties()
+                .first()
+                .type
 
         // then
         sut?.isGenericType shouldBeEqualTo value
@@ -29,19 +30,20 @@ class KoTypeDeclarationForKoGenericTypeProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("kotlin-basic-type", false),
-            arguments("kotlin-collection-type", true),
-            arguments("generic-class-type", true),
-            arguments("not-generic-class-type", false),
-            arguments("interface-type", false),
-            arguments("object-type", false),
-            arguments("function-type", false),
-            arguments("generic-import-alias-type", true),
-            arguments("not-generic-import-alias-type", false),
-            arguments("generic-typealias-type", true),
-            arguments("not-generic-typealias-type", false),
-            arguments("external-type", false),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("kotlin-basic-type", false),
+                arguments("kotlin-collection-type", true),
+                arguments("generic-class-type", true),
+                arguments("not-generic-class-type", false),
+                arguments("interface-type", false),
+                arguments("object-type", false),
+                arguments("function-type", false),
+                arguments("generic-import-alias-type", true),
+                arguments("not-generic-import-alias-type", false),
+                arguments("generic-typealias-type", true),
+                arguments("not-generic-typealias-type", false),
+                arguments("external-type", false),
+            )
     }
 }

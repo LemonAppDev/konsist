@@ -10,23 +10,29 @@ internal interface KoPathProviderCore : KoPathProvider, KoBaseProviderCore {
     val psiElement: PsiElement
 
     override val path: String
-        get() = psiElement
-            .containingFile
-            .name
-            .toOsSeparator()
+        get() =
+            psiElement
+                .containingFile
+                .name
+                .toOsSeparator()
 
     override val projectPath: String
         get() {
-            val rootPathProvider = PathProvider
-                .rootProjectPath
-                .toOsSeparator()
+            val rootPathProvider =
+                PathProvider
+                    .rootProjectPath
+                    .toOsSeparator()
 
             return path.removePrefix(rootPathProvider)
         }
 
-    override fun resideInPath(path: String, absolutePath: Boolean): Boolean = if (absolutePath) {
-        LocationUtil.resideInLocation(path, this.path)
-    } else {
-        LocationUtil.resideInLocation(path, projectPath)
-    }
+    override fun resideInPath(
+        path: String,
+        absolutePath: Boolean,
+    ): Boolean =
+        if (absolutePath) {
+            LocationUtil.resideInLocation(path, this.path)
+        } else {
+            LocationUtil.resideInLocation(path, projectPath)
+        }
 }

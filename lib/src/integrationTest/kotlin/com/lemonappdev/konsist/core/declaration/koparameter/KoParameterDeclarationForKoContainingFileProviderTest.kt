@@ -8,12 +8,13 @@ class KoParameterDeclarationForKoContainingFileProviderTest {
     @Test
     fun `parameter-containing-file`() {
         // given
-        val sut = getSnippetFile("parameter-containing-file")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
+        val sut =
+            getSnippetFile("parameter-containing-file")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
         sut

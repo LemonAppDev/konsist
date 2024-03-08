@@ -10,12 +10,14 @@ class KoExpectModifierProviderListExtTest {
     @Test
     fun `withExpectModifier() returns declaration with expect modifier`() {
         // given
-        val declaration1: KoExpectModifierProvider = mockk {
-            every { hasExpectModifier } returns true
-        }
-        val declaration2: KoExpectModifierProvider = mockk {
-            every { hasExpectModifier } returns false
-        }
+        val declaration1: KoExpectModifierProvider =
+            mockk {
+                every { hasExpectModifier } returns true
+            }
+        val declaration2: KoExpectModifierProvider =
+            mockk {
+                every { hasExpectModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -28,12 +30,14 @@ class KoExpectModifierProviderListExtTest {
     @Test
     fun `withoutExpectModifier() returns declaration without expect modifier`() {
         // given
-        val declaration1: KoExpectModifierProvider = mockk {
-            every { hasExpectModifier } returns true
-        }
-        val declaration2: KoExpectModifierProvider = mockk {
-            every { hasExpectModifier } returns false
-        }
+        val declaration1: KoExpectModifierProvider =
+            mockk {
+                every { hasExpectModifier } returns true
+            }
+        val declaration2: KoExpectModifierProvider =
+            mockk {
+                every { hasExpectModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

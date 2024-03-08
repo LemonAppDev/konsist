@@ -30,7 +30,10 @@ interface KoChildProvider : KoBaseProvider {
      * @param predicate The predicate function to determine if a child satisfies a condition.
      * @return The number of children in the declaration satisfying predicate.
      */
-    fun countChildren(indirectChildren: Boolean = false, predicate: (KoChildDeclaration) -> Boolean): Int
+    fun countChildren(
+        indirectChildren: Boolean = false,
+        predicate: (KoChildDeclaration) -> Boolean,
+    ): Int
 
     /**
      * Whatever declaration has any child defined directly in the Kotlin file.
@@ -49,7 +52,11 @@ interface KoChildProvider : KoBaseProvider {
      * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasChildWithName(name: String, vararg names: String, indirectChildren: Boolean = false): Boolean
+    fun hasChildWithName(
+        name: String,
+        vararg names: String,
+        indirectChildren: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has children defined directly in the Kotlin
@@ -60,7 +67,11 @@ interface KoChildProvider : KoBaseProvider {
      * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasChildrenWithAllNames(name: String, vararg names: String, indirectChildren: Boolean = false): Boolean
+    fun hasChildrenWithAllNames(
+        name: String,
+        vararg names: String,
+        indirectChildren: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one child defined directly
@@ -70,7 +81,10 @@ interface KoChildProvider : KoBaseProvider {
      * @param predicate A function that defines the condition to be met by a child declaration.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasChild(indirectChildren: Boolean = false, predicate: (KoChildDeclaration) -> Boolean): Boolean
+    fun hasChild(
+        indirectChildren: Boolean = false,
+        predicate: (KoChildDeclaration) -> Boolean,
+    ): Boolean
 
     /**
      * Determines whether the declaration has all children defined directly
@@ -84,7 +98,10 @@ interface KoChildProvider : KoBaseProvider {
      * @param predicate A function that defines the condition to be met by child declarations.
      * @return `true` if all child declarations satisfy the predicate, `false` otherwise.
      */
-    fun hasAllChildren(indirectChildren: Boolean = false, predicate: (KoChildDeclaration) -> Boolean): Boolean
+    fun hasAllChildren(
+        indirectChildren: Boolean = false,
+        predicate: (KoChildDeclaration) -> Boolean,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one child of the specified `KClass` type.
@@ -94,7 +111,11 @@ interface KoChildProvider : KoBaseProvider {
      * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasChildOf(name: KClass<*>, vararg names: KClass<*>, indirectChildren: Boolean = false): Boolean
+    fun hasChildOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+        indirectChildren: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has children with all the specified `KClass` type.
@@ -104,5 +125,9 @@ interface KoChildProvider : KoBaseProvider {
      * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
      * @return `true` if the declaration has children of all the specified `KClass` types, `false` otherwise.
      */
-    fun hasAllChildrenOf(name: KClass<*>, vararg names: KClass<*>, indirectChildren: Boolean = false): Boolean
+    fun hasAllChildrenOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+        indirectChildren: Boolean = false,
+    ): Boolean
 }

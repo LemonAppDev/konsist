@@ -14,12 +14,13 @@ class KoParameterDeclarationForKoModifierProviderTest {
     @Test
     fun `parameter-has-no-modifiers`() {
         // given
-        val sut = getSnippetFile("parameter-has-no-modifiers")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
+        val sut =
+            getSnippetFile("parameter-has-no-modifiers")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
         assertSoftly(sut) {
@@ -38,12 +39,13 @@ class KoParameterDeclarationForKoModifierProviderTest {
     @Test
     fun `parameter-has-public-modifier`() {
         // given
-        val sut = getSnippetFile("parameter-has-public-modifier")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
+        val sut =
+            getSnippetFile("parameter-has-public-modifier")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
         assertSoftly(sut) {

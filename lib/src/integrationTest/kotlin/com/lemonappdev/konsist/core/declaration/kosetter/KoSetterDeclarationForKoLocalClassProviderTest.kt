@@ -9,10 +9,11 @@ class KoSetterDeclarationForKoLocalClassProviderTest {
     @Test
     fun `setter-contains-no-local-classes`() {
         // given
-        val sut = getSnippetFile("setter-contains-no-local-classes")
-            .properties()
-            .first()
-            .setter
+        val sut =
+            getSnippetFile("setter-contains-no-local-classes")
+                .properties()
+                .first()
+                .setter
 
         // then
         assertSoftly(sut) {
@@ -30,17 +31,19 @@ class KoSetterDeclarationForKoLocalClassProviderTest {
     @Test
     fun `setter-contains-local-class`() {
         // given
-        val sut = getSnippetFile("setter-contains-local-class")
-            .properties()
-            .first()
-            .setter
+        val sut =
+            getSnippetFile("setter-contains-local-class")
+                .properties()
+                .first()
+                .setter
 
         // then
         assertSoftly(sut) {
-            it?.localClasses?.map { localClass -> localClass.name } shouldBeEqualTo listOf(
-                "SampleClass1",
-                "SampleClass2",
-            )
+            it?.localClasses?.map { localClass -> localClass.name } shouldBeEqualTo
+                listOf(
+                    "SampleClass1",
+                    "SampleClass2",
+                )
             it?.numLocalClasses shouldBeEqualTo 2
             it?.countLocalClasses { localClass -> localClass.name == "SampleClass1" } shouldBeEqualTo 1
             it?.hasLocalClasses() shouldBeEqualTo true
@@ -59,6 +62,5 @@ class KoSetterDeclarationForKoLocalClassProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kosetter/snippet/forkolocalclassprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kosetter/snippet/forkolocalclassprovider/", fileName)
 }

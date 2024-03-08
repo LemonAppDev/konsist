@@ -8,11 +8,12 @@ class KoEnumConstantDeclarationTest {
     @Test
     fun `enum-const-to-string`() {
         // given
-        val sut = getSnippetFile("enum-const-to-string")
-            .classes()
-            .first()
-            .enumConstants
-            .first()
+        val sut =
+            getSnippetFile("enum-const-to-string")
+                .classes()
+                .first()
+                .enumConstants
+                .first()
 
         // then
         sut.toString() shouldBeEqualTo "SAMPLE_CONSTANT_1"

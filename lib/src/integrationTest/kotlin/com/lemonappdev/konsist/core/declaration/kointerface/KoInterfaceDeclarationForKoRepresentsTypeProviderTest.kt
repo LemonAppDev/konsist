@@ -14,9 +14,10 @@ class KoInterfaceDeclarationForKoRepresentsTypeProviderTest {
         value: Boolean,
     ) {
         // given
-        val sut = getSnippetFile("interface-represents-type")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-represents-type")
+                .interfaces()
+                .first()
 
         // then
         sut.representsType(type) shouldBeEqualTo value
@@ -29,12 +30,13 @@ class KoInterfaceDeclarationForKoRepresentsTypeProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("SampleInterface", true),
-            arguments("OtherInterface", false),
-            arguments("com.lemonappdev.konsist.testdata.SampleInterface", true),
-            arguments("com.lemonappdev.konsist.testdata.OtherInterface", false),
-            arguments(null, false),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("SampleInterface", true),
+                arguments("OtherInterface", false),
+                arguments("com.lemonappdev.konsist.testdata.SampleInterface", true),
+                arguments("com.lemonappdev.konsist.testdata.OtherInterface", false),
+                arguments(null, false),
+            )
     }
 }

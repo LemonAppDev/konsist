@@ -8,9 +8,10 @@ class KoClassDeclarationForKoExpectModifierProviderTest {
     @Test
     fun `class-without-expect-modifier`() {
         // given
-        val sut = getSnippetFile("class-without-expect-modifier")
-            .classes(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("class-without-expect-modifier")
+                .classes(includeNested = true)
+                .first()
 
         // then
         sut.hasExpectModifier shouldBeEqualTo false
@@ -19,9 +20,10 @@ class KoClassDeclarationForKoExpectModifierProviderTest {
     @Test
     fun `expect-class`() {
         // given
-        val sut = getSnippetFile("expect-class")
-            .classes(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("expect-class")
+                .classes(includeNested = true)
+                .first()
 
         // then
         sut.hasExpectModifier shouldBeEqualTo true

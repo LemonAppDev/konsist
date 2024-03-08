@@ -14,11 +14,12 @@ class KoAnnotationDeclarationForKoRepresentsTypeProviderTest {
         value: Boolean,
     ) {
         // given
-        val sut = getSnippetFile("annotation-represents-type")
-            .functions()
-            .first()
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-represents-type")
+                .functions()
+                .first()
+                .annotations
+                .first()
 
         // then
         sut.representsType(type) shouldBeEqualTo value
@@ -31,12 +32,13 @@ class KoAnnotationDeclarationForKoRepresentsTypeProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("SampleAnnotation", true),
-            arguments("OtherAnnotation", false),
-            arguments("com.lemonappdev.konsist.testdata.SampleAnnotation", true),
-            arguments("com.lemonappdev.konsist.testdata.OtherAnnotation", false),
-            arguments(null, false),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("SampleAnnotation", true),
+                arguments("OtherAnnotation", false),
+                arguments("com.lemonappdev.konsist.testdata.SampleAnnotation", true),
+                arguments("com.lemonappdev.konsist.testdata.OtherAnnotation", false),
+                arguments(null, false),
+            )
     }
 }

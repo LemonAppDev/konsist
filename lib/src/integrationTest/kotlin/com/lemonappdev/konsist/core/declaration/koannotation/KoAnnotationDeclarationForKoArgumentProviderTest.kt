@@ -10,10 +10,11 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
     @Test
     fun `annotation-without-arguments`() {
         // given
-        val sut = getSnippetFile("annotation-without-arguments")
-            .functions()
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-without-arguments")
+                .functions()
+                .annotations
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -31,10 +32,11 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
     @Test
     fun `annotation-with-constructor-invocation-without-arguments`() {
         // given
-        val sut = getSnippetFile("annotation-with-constructor-invocation-without-arguments")
-            .functions()
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-with-constructor-invocation-without-arguments")
+                .functions()
+                .annotations
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -52,10 +54,11 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
     @Test
     fun `annotation-with-one-argument`() {
         // given
-        val sut = getSnippetFile("annotation-with-one-argument")
-            .functions()
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-with-one-argument")
+                .functions()
+                .annotations
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -79,10 +82,11 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
     @Test
     fun `annotation-with-two-arguments`() {
         // given
-        val sut = getSnippetFile("annotation-with-two-arguments")
-            .functions()
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-with-two-arguments")
+                .functions()
+                .annotations
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -107,21 +111,22 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
     @Test
     fun `annotation-with-multiline-string-argument`() {
         // given
-        val sut = getSnippetFile("annotation-with-multiline-string-argument")
-            .functions()
-            .annotations
-            .first()
+        val sut =
+            getSnippetFile("annotation-with-multiline-string-argument")
+                .functions()
+                .annotations
+                .first()
 
         // then
         assertSoftly(sut) {
-            arguments.map { it.value } shouldBeEqualTo listOf(
-                "first line\n    second line",
-            )
+            arguments.map { it.value } shouldBeEqualTo
+                listOf(
+                    "first line\n    second line",
+                )
             numArguments shouldBeEqualTo 1
             hasArguments() shouldBeEqualTo true
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koannotation/snippet/forkoargument/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koannotation/snippet/forkoargument/", fileName)
 }

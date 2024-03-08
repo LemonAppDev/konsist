@@ -9,9 +9,10 @@ class KoTypeAliasDeclarationForKoPathProviderTest {
     @Test
     fun `typealias-file-path`() {
         // given
-        val sut = getSnippetFile("typealias-file-path")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-file-path")
+                .typeAliases
+                .first()
 
         // then
         assertSoftly(sut.path) {
@@ -23,9 +24,10 @@ class KoTypeAliasDeclarationForKoPathProviderTest {
     @Test
     fun `typealias-project-file-path`() {
         // given
-        val sut = getSnippetFile("typealias-project-file-path")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-project-file-path")
+                .typeAliases
+                .first()
 
         // then
         sut
@@ -39,9 +41,10 @@ class KoTypeAliasDeclarationForKoPathProviderTest {
     @Test
     fun `typealias-reside-in-file-path`() {
         // given
-        val sut = getSnippetFile("typealias-reside-in-file-path")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-reside-in-file-path")
+                .typeAliases
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -55,9 +58,10 @@ class KoTypeAliasDeclarationForKoPathProviderTest {
     @Test
     fun `typealias-reside-in-project-file-path`() {
         // given
-        val sut = getSnippetFile("typealias-reside-in-project-file-path")
-            .typeAliases
-            .first()
+        val sut =
+            getSnippetFile("typealias-reside-in-project-file-path")
+                .typeAliases
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -68,6 +72,5 @@ class KoTypeAliasDeclarationForKoPathProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kotypealias/snippet/forkopathprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kotypealias/snippet/forkopathprovider/", fileName)
 }

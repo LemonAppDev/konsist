@@ -9,10 +9,11 @@ class KoObjectDeclarationForKoTopLevelProviderTest {
     @Test
     fun `object-is-not-top-level`() {
         // given
-        val sut = getSnippetFile("object-is-not-top-level")
-            .classes()
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-is-not-top-level")
+                .classes()
+                .objects()
+                .first()
 
         // then
         sut.isTopLevel shouldBeEqualTo false
@@ -21,14 +22,14 @@ class KoObjectDeclarationForKoTopLevelProviderTest {
     @Test
     fun `object-is-top-level`() {
         // given
-        val sut = getSnippetFile("object-is-top-level")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-is-top-level")
+                .objects()
+                .first()
 
         // then
         sut.isTopLevel shouldBeEqualTo true
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koobject/snippet/forkotoplevelprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/forkotoplevelprovider/", fileName)
 }
