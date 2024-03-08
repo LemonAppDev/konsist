@@ -1,5 +1,5 @@
 [versions]
-kotlinVersion = "2.0.0-Beta3"
+kotlinVersion = "1.9.22"
 jUnitVersion = "5.10.2"
 
 [libraries]
@@ -15,8 +15,6 @@ kotlin-compiler = { module = "org.jetbrains.kotlin:kotlin-compiler", version.ref
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
-kotlin-plugin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlinVersion" }
-kotlin-plugin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlinVersion" }
 dokka = "org.jetbrains.dokka:1.9.10"
 spotless = "com.diffplug.spotless:6.21.0"
 testLogger = "com.adarshr.test-logger:4.0.0"
