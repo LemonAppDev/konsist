@@ -39,6 +39,28 @@ class KoPropertyDeclarationForKoInitializerProviderTest {
     }
 
     @Test
+    fun `property-with-delegate-is-initialized-in-block-body`() {
+        // given
+        val sut = getSnippetFile("property-with-delegate-is-initialized-in-block-body")
+            .properties()
+            .first()
+
+        // then
+        sut.isInitialized shouldBeEqualTo true
+    }
+
+    @Test
+    fun `property-with-lateinit-modifier-is-not-initialized`() {
+        // given
+        val sut = getSnippetFile("property-with-lateinit-modifier-is-not-initialized")
+            .properties()
+            .first()
+
+        // then
+        sut.isInitialized shouldBeEqualTo false
+    }
+
+    @Test
     fun `property-inside-interface-is-not-initialized`() {
         // given
         val sut = getSnippetFile("property-inside-interface-is-not-initialized")
