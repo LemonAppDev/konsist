@@ -15,7 +15,7 @@ kotlin-compiler = { module = "org.jetbrains.kotlin:kotlin-compiler", version.ref
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
-dokka = "org.jetbrains.dokka:1.9.10"
+dokka = "org.jetbrains.dokka:1.9.20"
 spotless = "com.diffplug.spotless:6.21.0"
 testLogger = "com.adarshr.test-logger:4.0.0"
 detekt = "io.gitlab.arturbosch.detekt:1.23.5"
