@@ -33,7 +33,9 @@ data class Layer(internal val name: String, internal val definedBy: String) {
         }
 
         if (!definedBy.matches(withoutFewDotsInOnePlacePattern)) {
-            throw KoPreconditionFailedException("Layer $name cannot be defined by a package containing more than two dots in one place. Now: $definedBy .")
+            throw KoPreconditionFailedException(
+                "Layer $name cannot be defined by a package containing more than two dots in one place. Now: $definedBy .",
+            )
         }
     }
 }
