@@ -16,17 +16,14 @@ print("build_dir", build_dir)
 
 def get_bytecode_version(class_file):
     result = subprocess.run(["javap", "-verbose", class_file], capture_output=True, text=True)
+
     for line in result.stdout.splitlines():
         if "major version" in line:
             return line.split(":")[-1].strip()
 
 
-def main():
+def check_artifact_bytecode(desired_java_version, desired_bytecode_version):
     jar_path = get_artifact_path("jar")
-    # Java 8 == bytecode version 52.0 (defined in the local.javalibrary.gradle.kts)
-    # https://javaalmanac.io/bytecode/versions/
-    desired_java_version = "8"
-    desired_bytecode_version = "52"
 
     print( f"Verify if the first class in {jar_path} is compiled to bytecode {desired_bytecode_version} (Java {desired_java_version})" )
 
@@ -62,5 +59,6 @@ def main():
         shutil.rmtree(build_dir)
 
 
-if __name__ == "__main__":
-    main()
+# Java 8 == bytecode version 52.0 (defined in the local.javalibrary.gradle.kts)
+# https://javaalmanac.io/bytecode/versions/
+check_artifact_bytecode("8", "52")
