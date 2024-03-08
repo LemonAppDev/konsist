@@ -16,7 +16,7 @@ val <T : KoReceiverTypeProvider> List<T>.receiverTypes: List<KoTypeDeclaration>
  * @param names The receiver type name(s) to include.
  * @return A list containing declarations with the specified receiver type(s) (or any receiver type if [names] is empty).
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withReceiverType { it.name == ... }"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("withReceiverType { it.name == ... }"))
 fun <T : KoReceiverTypeProvider> List<T>.withReceiverType(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> it.hasReceiverType()
@@ -30,7 +30,7 @@ fun <T : KoReceiverTypeProvider> List<T>.withReceiverType(vararg names: String):
  * @param names The receiver type name(s) to exclude.
  * @return A list containing declarations without specified receiver type(s) (or none receiver type if [names] is empty).
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutReceiverType { it.name != ... }"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("withoutReceiverType { it.name != ... }"))
 fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverType(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> !it.hasReceiverType()

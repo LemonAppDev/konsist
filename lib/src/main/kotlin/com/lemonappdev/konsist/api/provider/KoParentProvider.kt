@@ -10,13 +10,13 @@ interface KoParentProvider : KoBaseProvider {
     /**
      * The parents (parent class and parent interfaces) defined directly in the Kotlin file.
      */
-    @Deprecated("Will be removed in v1.0.0.", ReplaceWith("parents()"))
+    @Deprecated("Will be removed in v0.16.0.", ReplaceWith("parents()"))
     val parents: List<KoParentDeclaration>
 
     /**
      * Gets the number of parents.
      */
-    @Deprecated("Will be removed in v1.0.0.", ReplaceWith("numParents()"))
+    @Deprecated("Will be removed in v0.16.0.", ReplaceWith("numParents()"))
     val numParents: Int
 
     /**
@@ -86,7 +86,7 @@ interface KoParentProvider : KoBaseProvider {
      */
     @Deprecated(
         """
-            Will be removed in v1.0.0. 
+            Will be removed in v0.16.0. 
             If you passed one argument - replace with `hasParentWithName`, otherwise with `hasParentsWithAllNames`.
             """,
     )

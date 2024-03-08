@@ -19,6 +19,9 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
      * Represents the source declaration associated with this type.
      *
      * The `sourceDeclaration` property provides access to the declaration of the type within the Kotlin codebase.
+     * It allows to retrie additional information about the source declaration, such as its properties, functions,
+     * annotations, and other relevant metadata.
+
      * It points to an instance of [KoBaseTypeDeclaration], which serves as the base interface for various types:
      *  - `KoClassDeclaration` represents class
      *  - `KoInterfaceDeclaration` represents interface
@@ -28,6 +31,7 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
      *  - `KoKotlinTypeDeclaration` represents kotlin basic types and collections
      *  - `KoFunctionDeclaration` represents function type
      *  - `KoExternalDeclaration` represents declaration which is not defined in the project
+     *
      *
      *  E.g.
      *  ```kotlin

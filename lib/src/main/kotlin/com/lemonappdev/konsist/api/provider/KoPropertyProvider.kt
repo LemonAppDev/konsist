@@ -21,7 +21,7 @@ interface KoPropertyProvider : KoBaseProvider {
      * @param predicate The predicate function to determine if a property satisfies a condition.
      * @return `true` if the declaration contains a property with the specified predicate, `true` otherwise.
      */
-    @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasProperty()"))
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasProperty()"))
     fun containsProperty(
         includeNested: Boolean = true,
         predicate: (KoPropertyDeclaration) -> Boolean,

@@ -13,7 +13,7 @@ internal interface KoInterfaceProviderCore : KoInterfaceProvider, KoDeclarationP
             includeNested,
         )
 
-    @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasInterface()"))
+    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasInterface()"))
     override fun containsInterface(
         includeNested: Boolean,
         predicate: (KoInterfaceDeclaration) -> Boolean,

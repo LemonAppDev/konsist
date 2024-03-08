@@ -17,11 +17,11 @@ internal interface KoParentProviderCore :
     KoBaseProviderCore {
     val ktClassOrObject: KtClassOrObject
 
-    @Deprecated("Will be removed in v1.0.0.", replaceWith = ReplaceWith("parents()"))
+    @Deprecated("Will be removed in v0.16.0.", replaceWith = ReplaceWith("parents()"))
     override val parents: List<KoParentDeclaration>
         get() = parents()
 
-    @Deprecated("Will be removed in v1.0.0.", replaceWith = ReplaceWith("numParents()"))
+    @Deprecated("Will be removed in v0.16.0.", replaceWith = ReplaceWith("numParents()"))
     override val numParents: Int
         get() = parents.size
 
@@ -83,7 +83,7 @@ internal interface KoParentProviderCore :
     override fun countParents(indirectParents: Boolean, predicate: (KoParentDeclaration) -> Boolean): Int =
         parents(indirectParents).count { predicate(it) }
 
-    @Deprecated("Will be removed in v1.0.0.", ReplaceWith("hasParentsWithAllNames(*names)"))
+    @Deprecated("Will be removed in v0.16.0.", ReplaceWith("hasParentsWithAllNames(*names)"))
     override fun hasParents(vararg names: String): Boolean = when {
         names.isEmpty() -> parents().isNotEmpty()
         else -> names.all {

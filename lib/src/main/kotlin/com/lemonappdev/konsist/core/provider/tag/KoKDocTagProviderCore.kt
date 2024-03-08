@@ -42,7 +42,7 @@ internal interface KoKDocTagProviderCore : KoKDocTagProvider, KoTextProviderCore
 
     @Deprecated(
         """
-        Will be removed in v1.0.0. 
+        Will be removed in v0.16.0. 
         If you passed one argument - replace with `hasTag`, otherwise with `hasAllTags`.
        """,
     )

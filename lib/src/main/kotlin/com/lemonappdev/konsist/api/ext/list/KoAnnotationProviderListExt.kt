@@ -186,7 +186,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotationsOf(
  */
 @Deprecated(
     """
-            Will be removed in v1.0.0. 
+            Will be removed in v0.16.0. 
             If you passed one argument - replace with `withAnnotationNamed`, otherwise with `withAllAnnotationsNamed`.
             """,
     ReplaceWith("withAnnotationNamed/withAllAnnotationsNamed"),
@@ -205,7 +205,7 @@ fun <T : KoAnnotationProvider> List<T>.withAllAnnotations(
  * @param names The annotation name(s) to include.
  * @return A list containing declarations with at least one of the specified annotations.
  */
-@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withAnnotationNamed(*names"))
+@Deprecated("Will be removed in v0.16.0.", ReplaceWith("withAnnotationNamed(*names"))
 fun <T : KoAnnotationProvider> List<T>.withSomeAnnotations(name: String, vararg names: String): List<T> =
     filter {
         it.hasAnnotations(name) || names.any { annotation -> it.hasAnnotations(annotation) }
@@ -220,7 +220,7 @@ fun <T : KoAnnotationProvider> List<T>.withSomeAnnotations(name: String, vararg 
  */
 @Deprecated(
     """
-            Will be removed in v1.0.0. 
+            Will be removed in v0.16.0. 
             If you passed one argument - replace with `withoutAnnotationNamed`, otherwise with `withoutAllAnnotationsNamed`.
             """,
     ReplaceWith("withoutAnnotationNamed/withoutAllAnnotationsNamed"),
@@ -239,7 +239,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotations(
  * @param names The annotation name(s) to exclude.
  * @return A list containing declarations without at least one of the specified annotations.
  */
-@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withoutAnnotationNamed(*names"))
+@Deprecated("Will be removed in v0.16.0.", ReplaceWith("withoutAnnotationNamed(*names"))
 fun <T : KoAnnotationProvider> List<T>.withoutSomeAnnotations(
     name: String,
     vararg names: String,
@@ -260,7 +260,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutSomeAnnotations(
  * @param kClasses The Kotlin classes representing annotations to include.
  * @return A list containing declarations with at least one of the specified the annotations.
  */
-@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withAnnotationOf(*kClasses"))
+@Deprecated("Will be removed in v0.16.0.", ReplaceWith("withAnnotationOf(*kClasses"))
 fun <T : KoAnnotationProvider> List<T>.withSomeAnnotationsOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
@@ -275,7 +275,7 @@ fun <T : KoAnnotationProvider> List<T>.withSomeAnnotationsOf(
  * @param kClasses The Kotlin classes representing annotations to exclude.
  * @return A list containing declarations without at least one of the specified annotations.
  */
-@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withoutAnnotationOf(*kClasses"))
+@Deprecated("Will be removed in v0.16.0.", ReplaceWith("withoutAnnotationOf(*kClasses"))
 fun <T : KoAnnotationProvider> List<T>.withoutSomeAnnotationsOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,

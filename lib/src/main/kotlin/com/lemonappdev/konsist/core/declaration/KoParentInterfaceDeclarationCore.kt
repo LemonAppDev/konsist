@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-@Deprecated("Will be removed in v1.0.0")
+@Deprecated("Will be removed in v0.16.0")
 internal class KoParentInterfaceDeclarationCore private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
     KoParentInterfaceDeclaration,
     KoDelegateProviderCore,

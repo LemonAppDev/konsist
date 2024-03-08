@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
 /**
  * List containing parent interfaces.
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("parentInterfaces()"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("parentInterfaces()"))
 val <T : KoParentInterfaceProvider> List<T>.parentInterfaces: List<KoInterfaceDeclaration>
     get() = flatMap { it.parentInterfaces }
 
@@ -231,7 +231,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesOf(
  * @param names The name(s) of the parent interface(s) to include.
  * @return A list containing declarations with all the specified parent interface(s).
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withAllParents()"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("withAllParents()"))
 fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfaces(name: String, vararg names: String): List<T> =
     filter { it.hasParentInterfaces(name, *names) }
 
@@ -242,7 +242,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfaces(name: String
  * @param names The names of the parent interfaces to include.
  * @return A list containing declarations with at least one of the specified parent interface(s).
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withSomeParents()"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("withSomeParents()"))
 fun <T : KoParentInterfaceProvider> List<T>.withSomeParentInterfaces(name: String, vararg names: String): List<T> =
     filter { it.hasParentInterfaces(name) || names.any { name -> it.hasParentInterfaces(name) } }
 
@@ -253,7 +253,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withSomeParentInterfaces(name: Strin
  * @param names The name(s) of the parent interface(s) to exclude.
  * @return A list containing declarations without all specified parent interface(s).
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutAllParents()"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("withoutAllParents()"))
 fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfaces(name: String, vararg names: String): List<T> =
     filterNot { it.hasParentInterfaces(name, *names) }
 
@@ -264,7 +264,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfaces(name: Str
  * @param names The names of the parent interfaces to exclude.
  * @return A list containing declarations without at least one of the specified parent interface(s).
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutSomeParents()"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("withoutSomeParents()"))
 fun <T : KoParentInterfaceProvider> List<T>.withoutSomeParentInterfaces(name: String, vararg names: String): List<T> =
     filter {
         !it.hasParentInterfaces(name) && if (names.isNotEmpty()) {
@@ -281,7 +281,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutSomeParentInterfaces(name: St
  * @param kClasses The Kotlin declarations representing the parent interfaces to include.
  * @return A list containing declarations with at least one of the specified parent interface(s).
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withSomeParentsOf()"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("withSomeParentsOf()"))
 fun <T : KoParentInterfaceProvider> List<T>.withSomeParentInterfacesOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
@@ -302,7 +302,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withSomeParentInterfacesOf(
  * @param kClasses The Kotlin declarations representing the parent interfaces to exclude.
  * @return A list containing declarations without at least one of the specified parent interface(s).
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutSomeParentsOf()"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("withoutSomeParentsOf()"))
 fun <T : KoParentInterfaceProvider> List<T>.withoutSomeParentInterfacesOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,

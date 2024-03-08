@@ -30,7 +30,7 @@ internal interface KoInitBlockProviderCore :
     override val numInitBlocks: Int
         get() = initBlocks.size
 
-    @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasInitBlocks()"))
+    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasInitBlocks()"))
     override val hasInitBlocks: Boolean
         get() = initBlocks.isNotEmpty()
 

@@ -16,7 +16,7 @@ val <T : KoNullableTypeProvider> List<T>.types: List<KoTypeDeclaration>
  * @param names The type name(s) to include.
  * @return A list containing declarations with the specified type (or any type if [names] is empty).
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withType { it.name == ... }"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("withType { it.name == ... }"))
 fun <T : KoNullableTypeProvider> List<T>.withType(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> it.hasType()
@@ -30,7 +30,7 @@ fun <T : KoNullableTypeProvider> List<T>.withType(vararg names: String): List<T>
  * @param names The type name(s) to exclude.
  * @return A list containing declarations without specified type (or none type if [names] is empty).
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutType { it.name != ... }"))
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("withoutType { it.name != ... }"))
 fun <T : KoNullableTypeProvider> List<T>.withoutType(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> !it.hasType()
