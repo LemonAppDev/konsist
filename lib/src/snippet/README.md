@@ -1,10 +1,12 @@
 # Snippet Source Set
 
-Contains the source code for the snippets used in the documentation. 
+The source set includes code snippets (`.kttxt` files) for the documentation under the `com.lemonappdev.konsist`
+package, as well as classes and interfaces that simulate commonly used Kotlin classes and interfaces (`androidx`, 
+`kotlinx`, `javax`, etc. ) to enhance the realism of the snippets without requiring additional dependencies to be 
+added to the project.
 
-To update GitBook documentation run 
-[deploy_snippets_to_kotlin_documentation_repo.py](../../../scripts/deploy_snippets_to_kotlin_documentation_repo) 
-script.
+The snippets are placed here to ensure that the documentation always reflects the most current and
+functional code.
 
-These snippets are placed here to make sure that documentation contains the latest, working code. 
-
+To update GitBook documentation run
+[deploy_snippets_to_kotlin_documentation_repo.py](../../../scripts/deploy_snippets_to_kotlin_documentation_repo) script.
