@@ -21,7 +21,7 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
-      - name: Publish
+      - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
           -P konsist.releaseTarget=local
@@ -49,7 +49,7 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
-      - name: Publish
+      - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
           -P konsist.releaseTarget=local
@@ -79,7 +79,7 @@ jobs:
             21
           distribution: 'corretto'
 
-      - name: Publish
+      - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
           -P konsist.releaseTarget=local
@@ -107,7 +107,7 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
-      - name: Publish
+      - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
           -P konsist.releaseTarget=local
@@ -139,7 +139,7 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
-      - name: Publish
+      - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
           -P konsist.releaseTarget=local
@@ -172,7 +172,7 @@ jobs:
             21
           distribution: 'corretto'
 
-      - name: Publish
+      - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
           -P konsist.releaseTarget=local
