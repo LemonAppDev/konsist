@@ -22,7 +22,7 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
-      - name: JUnit Test
+      - name: Run JUnit Test
         run: ./gradlew :lib:test
 
       - name: Upload Report
@@ -45,7 +45,7 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
-      - name: Konsist Test
+      - name: Run Konsist Test
         run: ./gradlew lib:konsistTest
 
       - name: Upload Report
@@ -68,7 +68,7 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
-      - name: Integration Test
+      - name: Run Integration Test
         run: ./gradlew lib:integrationTest
 
       - name: Upload Report
@@ -91,7 +91,7 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
-      - name: Api Test
+      - name: Run Api Test
         run: ./gradlew lib:apiTest
 
       - name: Upload Report
@@ -116,7 +116,7 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
-      - name: Spotless
+      - name: Run Spotless
         run: ./gradlew spotlessCheck
 
   konsist-detekt:
@@ -132,7 +132,7 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
-      - name: Detekt
+      - name: Run Detekt
         run: ./gradlew detektCheck
 
       - name: Upload Report
@@ -157,7 +157,7 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
-      - name: Publish
+      - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
           -P konsist.releaseTarget=local
@@ -187,7 +187,7 @@ jobs:
             21
           distribution: 'corretto'
 
-      - name: Publish
+      - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
           -P konsist.releaseTarget=local
@@ -227,7 +227,7 @@ jobs:
       - name: List "lib.jar" content
         run: jar tf lib/build/libs/lib.jar
 
-      - name: Publish
+      - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
           -P konsist.releaseTarget=local

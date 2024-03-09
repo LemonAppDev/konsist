@@ -7,7 +7,7 @@
 | [Konsist](https://github.com/LemonAppDev/konsist)                                 | ![Check Workflow](https://github.com/LemonAppDev/konsist/actions/workflows/check.yml/badge.svg)                 |
 | [Konsist Documentation](https://github.com/LemonAppDev/konsist-documentation)     | -                                                                                                               |
 
-## Publish To Maven Repository
+## Publish Konsist Artifact To Maven Repository
 
 - Publish Local Snapshot: `./gradlew publishToMavenLocal -Pkonsist.releaseTarget=local` publish to local
 - `~/.m2/repository`
