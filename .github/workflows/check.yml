@@ -245,7 +245,7 @@ jobs:
           name: konsist-SNAPSHOT-${{ github.run_number }}.jar
           path: /home/runner/.m2/repository/com/lemonappdev/konsist/*
 
-      - name: Check dependencies exposed by the library artifact
+      - name: Check dependencies exposed by the Konsist artifact
         run: python3 scripts/check_dependencies_exposed_by_library_artifact.py
 
       - name: Check Bytecode version
