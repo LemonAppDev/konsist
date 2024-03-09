@@ -29,17 +29,29 @@ class SnippetTest {
         val snippetMap = mutableMapOf<String, String>()
         snippetNames.forEachIndexed { index, s -> snippetMap[s] = snippetPaths[index] }
 
-        val r1 = Regex("""getSnippetFile\(\s*"(.+)"""")
-        val r2 = Regex("""arguments\(\s*"([^"]+)"""")
-        val r3 = Regex("""arguments\(\s*"([^"]+)"""")
-        val withGetSnippetMethod = snippetNamesFromFiles(r1, "getSnippetFile(")
-        val withArgument = snippetNamesFromFiles(r2, "arguments(") + snippetNamesFromFiles(r3, "arguments(\n")
+        /*
+        Matches calls to the `getSnippetFile` function, capturing the argument passed to it.
+        It accounts for any spaces between the function name and the opening parenthesis,
+        and captures the entire argument as a string enclosed in quotes e.g. `getSnippetFile("snippetName")`
+         */
+        val getSnippetFileRegex = Regex("""getSnippetFile\(\s*"(.+)"""")
+
+        /*
+        This regex matches calls to the `arguments` function, capturing the argument passed to it.
+        It allows for spaces between the function name and the opening parenthesis,
+        and captures the argument as a string within quotes e.g. `arguments("snippetName")`
+         */
+        val argumentsRegex = Regex("""arguments\(\s*"([^"]+)"""")
+
+        val withGetSnippetMethod = snippetNamesFromFiles(getSnippetFileRegex, "getSnippetFile(")
+        val withArgument = snippetNamesFromFiles(argumentsRegex, "arguments(")
 
         val snippetNamesUsedInTests = (withGetSnippetMethod + withArgument).toSet()
 
-        // then
+        // when
         val sut = snippetMap.keys.toSet() - snippetNamesUsedInTests
 
+        // then
         assertSoftly {
             sut shouldBeEqualTo emptySet()
             require(sut.isEmpty()) { "Unused snippets: ${sut.map { snippetMap[it] }}" }
