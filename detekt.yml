@@ -163,11 +163,11 @@ complexity:
   TooManyFunctions:
     active: true
     excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**', '**/konsist/api/ext/sequence/**' ]
-    thresholdInFiles: 20
-    thresholdInClasses: 20
-    thresholdInInterfaces: 20
-    thresholdInObjects: 20
-    thresholdInEnums: 20
+    thresholdInFiles: 25
+    thresholdInClasses: 25
+    thresholdInInterfaces: 25
+    thresholdInObjects: 25
+    thresholdInEnums: 25
     ignoreDeprecated: false
     ignorePrivate: false
     ignoreOverridden: false

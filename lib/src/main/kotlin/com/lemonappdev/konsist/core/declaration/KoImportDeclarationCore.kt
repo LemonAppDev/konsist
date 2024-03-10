@@ -39,9 +39,9 @@ internal class KoImportDeclarationCore private constructor(override val ktImport
         override val name: String by lazy { ktImportDirective.importPath?.fqName.toString() }
 
         override val alias: KoImportAliasDeclaration? by lazy {
-            val ktAlias = ktImportDirective.alias
-
-            ktAlias?.let { KoImportAliasDeclarationCore.getInstance(it, this) }
+            ktImportDirective
+                .alias
+                ?.let { KoImportAliasDeclarationCore.getInstance(it, this) }
         }
 
         override fun toString(): String = name

@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
+import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -69,7 +70,7 @@ internal class KoTypeAliasDeclarationCore private constructor(
             val type = ktTypeAlias.getTypeReference()
 
             type?.let { KoTypeDeclarationCore.getInstance(it, this) }
-                ?: throw IllegalArgumentException("Typealias has no specified type.")
+                ?: throw KoInternalException("Type alias has no specified type.")
         }
 
         override fun toString(): String = name

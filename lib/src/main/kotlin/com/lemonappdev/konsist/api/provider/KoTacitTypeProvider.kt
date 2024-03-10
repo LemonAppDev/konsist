@@ -13,6 +13,14 @@ interface KoTacitTypeProvider : KoBaseProvider {
      * Determines whether declaration has an explicitly declared type or if its value contains the
      * given type with parentheses '('.
      *
+     * e.g.
+     *
+     * ```kotlin
+     * val sampleProperty: Foo = someCollection.first() // hasTacitTypeOf(SampleClass::class) == true
+     * val sampleProperty  = Foo("some text") // hasTacitTypeOf(SampleClass::class) == true
+     * val sampleProperty = someCollection.first() // hasTacitTypeOf(SampleClass::class) == false
+     * ```
+     *
      * @param type The type to check.
      * @return `true` if the type is explicitly declared or found with parentheses; `false` otherwise.
      */
