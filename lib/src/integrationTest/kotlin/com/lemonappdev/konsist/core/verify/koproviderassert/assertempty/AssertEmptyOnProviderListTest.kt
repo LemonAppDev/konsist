@@ -2,9 +2,9 @@ package com.lemonappdev.konsist.core.verify.koproviderassert.assertempty
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
-import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoReturnProvider
+import com.lemonappdev.konsist.api.provider.KoTypeProvider
 import com.lemonappdev.konsist.api.verify.assertEmpty
 import com.lemonappdev.konsist.api.verify.assertNotEmpty
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
@@ -54,7 +54,7 @@ class AssertEmptyOnProviderListTest {
             getSnippetFile("provider-assert-empty-error-on-list-containing-one-null-value")
                 .declarations()
                 .filterNot { it is KoFileDeclaration }
-                .map { it as? KoKotlinTypeProvider }
+                .map { it as? KoTypeProvider }
 
         // then
         try {
@@ -74,7 +74,7 @@ class AssertEmptyOnProviderListTest {
         val sut =
             getSnippetFile("provider-assert-empty-error-on-list-containing-two-null-values")
                 .declarations()
-                .map { it as? KoKotlinTypeProvider }
+                .map { it as? KoTypeProvider }
 
         // then
         try {
@@ -181,7 +181,7 @@ class AssertEmptyOnProviderListTest {
         val sut =
             getSnippetFile("provider-assert-not-empty-error-with-custom-message")
                 .declarations()
-                .filterIsInstance<KoKotlinTypeProvider>()
+                .filterIsInstance<KoTypeProvider>()
 
         // then
         try {
@@ -202,7 +202,7 @@ class AssertEmptyOnProviderListTest {
         val sut =
             getSnippetFile("provider-assert-not-empty-error-with-custom-message-and-strict-set-to-true")
                 .declarations()
-                .filterIsInstance<KoKotlinTypeProvider>()
+                .filterIsInstance<KoTypeProvider>()
 
         // then
         try {
@@ -222,7 +222,7 @@ class AssertEmptyOnProviderListTest {
         val sut =
             getSnippetFile("assert-empty-passes-when-item-list-is-empty")
                 .declarations()
-                .filterIsInstance<KoKotlinTypeProvider>()
+                .filterIsInstance<KoTypeProvider>()
 
         // then
         sut.assertEmpty()
@@ -251,7 +251,7 @@ class AssertEmptyOnProviderListTest {
         val sut =
             getSnippetFile("assert-empty-fails-when-item-list-has-only-nulls")
                 .declarations()
-                .map { it as? KoKotlinTypeProvider }
+                .map { it as? KoTypeProvider }
 
         // when
         val func = {
@@ -268,7 +268,7 @@ class AssertEmptyOnProviderListTest {
         val sut =
             getSnippetFile("assert-empty-passes-when-item-list-is-empty-and-strict-set-to-true")
                 .declarations()
-                .filterIsInstance<KoKotlinTypeProvider>()
+                .filterIsInstance<KoTypeProvider>()
 
         // then
         sut.assertEmpty(strict = true)
@@ -295,7 +295,7 @@ class AssertEmptyOnProviderListTest {
         val sut =
             getSnippetFile("assert-empty-passes-when-item-list-has-only-nulls-and-strict-set-to-true")
                 .declarations()
-                .map { it as? KoKotlinTypeProvider }
+                .map { it as? KoTypeProvider }
 
         // then
         sut.assertEmpty(strict = true)
@@ -319,7 +319,7 @@ class AssertEmptyOnProviderListTest {
         val sut =
             getSnippetFile("assert-not-empty-fails-when-item-list-is-empty")
                 .declarations()
-                .filterIsInstance<KoKotlinTypeProvider>()
+                .filterIsInstance<KoTypeProvider>()
 
         // when
         val func = {
@@ -336,7 +336,7 @@ class AssertEmptyOnProviderListTest {
         val sut =
             getSnippetFile("assert-not-empty-passes-when-item-list-has-only-nulls")
                 .declarations()
-                .map { it as? KoKotlinTypeProvider }
+                .map { it as? KoTypeProvider }
 
         // then
         sut.assertNotEmpty()
@@ -360,7 +360,7 @@ class AssertEmptyOnProviderListTest {
         val sut =
             getSnippetFile("assert-not-empty-fails-when-item-list-is-empty-and-strict-set-to-true")
                 .declarations()
-                .filterIsInstance<KoKotlinTypeProvider>()
+                .filterIsInstance<KoTypeProvider>()
 
         // when
         val func = {
@@ -377,7 +377,7 @@ class AssertEmptyOnProviderListTest {
         val sut =
             getSnippetFile("assert-not-empty-fails-when-item-list-has-only-nulls-and-strict-set-to-true")
                 .declarations()
-                .map { it as? KoKotlinTypeProvider }
+                .map { it as? KoTypeProvider }
 
         // when
         val func = {

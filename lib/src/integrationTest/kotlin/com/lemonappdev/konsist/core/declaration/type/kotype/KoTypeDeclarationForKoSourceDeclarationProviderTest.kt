@@ -51,6 +51,512 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     }
 
     @Test
+    fun `nullable-class-type`() {
+        // given
+        val sut =
+            getSnippetFile("nullable-class-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
+            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(SampleType::class) shouldBeEqualTo true
+            it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.sourceClass shouldBeInstanceOf KoClassDeclaration::class
+            it?.sourceClass?.name shouldBeEqualTo "SampleType"
+            it?.hasSourceClass() shouldBeEqualTo true
+            it?.hasSourceClass { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
+            it?.hasSourceClass { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceClassOf(SampleType::class) shouldBeEqualTo true
+            it?.hasSourceClassOf(SampleClass::class) shouldBeEqualTo false
+            it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
+            it?.hasSourceObjectOf(SampleType::class) shouldBeEqualTo false
+            it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
+            it?.hasSourceInterfaceOf(SampleType::class) shouldBeEqualTo false
+            it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
+            it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
+            it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
+            it?.hasSourceKotlinTypeOf(SampleType::class) shouldBeEqualTo false
+            it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
+            it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo true
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `not-nullable-class-type`() {
+        // given
+        val sut =
+            getSnippetFile("not-nullable-class-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
+            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(SampleType::class) shouldBeEqualTo true
+            it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.sourceClass shouldBeInstanceOf KoClassDeclaration::class
+            it?.sourceClass?.name shouldBeEqualTo "SampleType"
+            it?.hasSourceClass() shouldBeEqualTo true
+            it?.hasSourceClass { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
+            it?.hasSourceClass { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceClassOf(SampleType::class) shouldBeEqualTo true
+            it?.hasSourceClassOf(SampleClass::class) shouldBeEqualTo false
+            it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
+            it?.hasSourceObjectOf(SampleType::class) shouldBeEqualTo false
+            it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
+            it?.hasSourceInterfaceOf(SampleType::class) shouldBeEqualTo false
+            it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
+            it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
+            it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
+            it?.hasSourceKotlinTypeOf(SampleType::class) shouldBeEqualTo false
+            it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
+            it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo true
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `nullable-object-type`() {
+        // given
+        val sut =
+            getSnippetFile("nullable-object-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
+            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo true
+            it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.sourceObject shouldBeInstanceOf KoObjectDeclaration::class
+            it?.sourceObject?.name shouldBeEqualTo "SampleObject"
+            it?.hasSourceObject() shouldBeEqualTo true
+            it?.hasSourceObject { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
+            it?.hasSourceObject { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceObjectOf(SampleObject::class) shouldBeEqualTo true
+            it?.hasSourceObjectOf(SampleClass::class) shouldBeEqualTo false
+            it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
+            it?.hasSourceClassOf(SampleObject::class) shouldBeEqualTo false
+            it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
+            it?.hasSourceInterfaceOf(SampleObject::class) shouldBeEqualTo false
+            it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
+            it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
+            it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
+            it?.hasSourceKotlinTypeOf(SampleObject::class) shouldBeEqualTo false
+            it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
+            it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo true
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `not-nullable-object-type`() {
+        // given
+        val sut =
+            getSnippetFile("not-nullable-object-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
+            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo true
+            it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.sourceObject shouldBeInstanceOf KoObjectDeclaration::class
+            it?.sourceObject?.name shouldBeEqualTo "SampleObject"
+            it?.hasSourceObject() shouldBeEqualTo true
+            it?.hasSourceObject { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
+            it?.hasSourceObject { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceObjectOf(SampleObject::class) shouldBeEqualTo true
+            it?.hasSourceObjectOf(SampleClass::class) shouldBeEqualTo false
+            it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
+            it?.hasSourceClassOf(SampleObject::class) shouldBeEqualTo false
+            it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
+            it?.hasSourceInterfaceOf(SampleObject::class) shouldBeEqualTo false
+            it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
+            it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
+            it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
+            it?.hasSourceKotlinTypeOf(SampleObject::class) shouldBeEqualTo false
+            it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
+            it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo true
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `nullable-interface-type`() {
+        // given
+        val sut =
+            getSnippetFile("nullable-interface-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
+            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(SampleInterface::class) shouldBeEqualTo true
+            it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.sourceInterface shouldBeInstanceOf KoInterfaceDeclaration::class
+            it?.sourceInterface?.name shouldBeEqualTo "SampleInterface"
+            it?.hasSourceInterface() shouldBeEqualTo true
+            it?.hasSourceInterface { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
+            it?.hasSourceInterface { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceInterfaceOf(SampleInterface::class) shouldBeEqualTo true
+            it?.hasSourceInterfaceOf(SampleClass::class) shouldBeEqualTo false
+            it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
+            it?.hasSourceClassOf(SampleInterface::class) shouldBeEqualTo false
+            it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
+            it?.hasSourceObjectOf(SampleInterface::class) shouldBeEqualTo false
+            it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
+            it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
+            it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
+            it?.hasSourceKotlinTypeOf(SampleInterface::class) shouldBeEqualTo false
+            it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
+            it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo true
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `not-nullable-interface-type`() {
+        // given
+        val sut =
+            getSnippetFile("not-nullable-interface-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
+            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(SampleInterface::class) shouldBeEqualTo true
+            it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.sourceInterface shouldBeInstanceOf KoInterfaceDeclaration::class
+            it?.sourceInterface?.name shouldBeEqualTo "SampleInterface"
+            it?.hasSourceInterface() shouldBeEqualTo true
+            it?.hasSourceInterface { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
+            it?.hasSourceInterface { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceInterfaceOf(SampleInterface::class) shouldBeEqualTo true
+            it?.hasSourceInterfaceOf(SampleClass::class) shouldBeEqualTo false
+            it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
+            it?.hasSourceClassOf(SampleInterface::class) shouldBeEqualTo false
+            it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
+            it?.hasSourceObjectOf(SampleInterface::class) shouldBeEqualTo false
+            it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
+            it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
+            it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
+            it?.hasSourceKotlinTypeOf(SampleInterface::class) shouldBeEqualTo false
+            it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
+            it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo true
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `not-nullable-import-alias-type`() {
+        // given
+        val sut =
+            getSnippetFile("not-nullable-import-alias-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.hasSourceDeclaration { declaration -> declaration.name == "ImportAlias" } shouldBeEqualTo true
+            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.sourceImportAlias shouldBeInstanceOf KoImportAliasDeclaration::class
+            it?.sourceImportAlias?.name shouldBeEqualTo "ImportAlias"
+            it?.hasSourceImportAlias() shouldBeEqualTo true
+            it?.hasSourceImportAlias { declaration -> declaration.name == "ImportAlias" } shouldBeEqualTo true
+            it?.hasSourceImportAlias { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
+            it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
+            it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
+            it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
+            it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
+            it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
+            it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo true
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `nullable-typealias-type`() {
+        // given
+        val sut =
+            getSnippetFile("nullable-typealias-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleTypeAlias" } shouldBeEqualTo true
+            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.sourceTypeAlias shouldBeInstanceOf KoTypeAliasDeclaration::class
+            it?.sourceTypeAlias?.name shouldBeEqualTo "SampleTypeAlias"
+            it?.hasSourceTypeAlias() shouldBeEqualTo true
+            it?.hasSourceTypeAlias { declaration -> declaration.name == "SampleTypeAlias" } shouldBeEqualTo true
+            it?.hasSourceTypeAlias { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
+            it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
+            it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
+            it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
+            it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
+            it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
+            it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo true
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `nullable-import-alias-type`() {
+        // given
+        val sut =
+            getSnippetFile("nullable-import-alias-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.hasSourceDeclaration { declaration -> declaration.name == "ImportAlias" } shouldBeEqualTo true
+            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.sourceImportAlias shouldBeInstanceOf KoImportAliasDeclaration::class
+            it?.sourceImportAlias?.name shouldBeEqualTo "ImportAlias"
+            it?.hasSourceImportAlias() shouldBeEqualTo true
+            it?.hasSourceImportAlias { declaration -> declaration.name == "ImportAlias" } shouldBeEqualTo true
+            it?.hasSourceImportAlias { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
+            it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
+            it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
+            it?.sourceTypeAlias shouldBeEqualTo null
+            it?.hasSourceTypeAlias() shouldBeEqualTo false
+            it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
+            it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
+            it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo true
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `not-nullable-typealias-type`() {
+        // given
+        val sut =
+            getSnippetFile("not-nullable-typealias-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleTypeAlias" } shouldBeEqualTo true
+            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.sourceTypeAlias shouldBeInstanceOf KoTypeAliasDeclaration::class
+            it?.sourceTypeAlias?.name shouldBeEqualTo "SampleTypeAlias"
+            it?.hasSourceTypeAlias() shouldBeEqualTo true
+            it?.hasSourceTypeAlias { declaration -> declaration.name == "SampleTypeAlias" } shouldBeEqualTo true
+            it?.hasSourceTypeAlias { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.sourceClass shouldBeEqualTo null
+            it?.hasSourceClass() shouldBeEqualTo false
+            it?.sourceObject shouldBeEqualTo null
+            it?.hasSourceObject() shouldBeEqualTo false
+            it?.sourceInterface shouldBeEqualTo null
+            it?.hasSourceInterface() shouldBeEqualTo false
+            it?.sourceImportAlias shouldBeEqualTo null
+            it?.hasSourceImportAlias() shouldBeEqualTo false
+            it?.sourceKotlinType shouldBeEqualTo null
+            it?.hasSourceKotlinType() shouldBeEqualTo false
+            it?.sourceFunctionType shouldBeEqualTo null
+            it?.hasSourceFunctionType() shouldBeEqualTo false
+            it?.sourceExternalType shouldBeEqualTo null
+            it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo true
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `nullable-kotlin-basic-type`() {
         // given
         val sut =
@@ -93,6 +599,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
             it?.hasSourceExternalTypeOf(String::class) shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo true
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -139,6 +653,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
             it?.hasSourceExternalTypeOf(String::class) shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo true
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -185,6 +707,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
             it?.hasSourceExternalTypeOf(List::class) shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo true
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -231,276 +761,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
             it?.hasSourceExternalTypeOf(List::class) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `nullable-class-type`() {
-        // given
-        val sut =
-            getSnippetFile("nullable-class-type")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
-                ?.type
-
-        // then
-        assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasSourceDeclarationOf(SampleType::class) shouldBeEqualTo true
-            it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
-            it?.sourceClass shouldBeInstanceOf KoClassDeclaration::class
-            it?.sourceClass?.name shouldBeEqualTo "SampleType"
-            it?.hasSourceClass() shouldBeEqualTo true
-            it?.hasSourceClass { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
-            it?.hasSourceClass { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasSourceClassOf(SampleType::class) shouldBeEqualTo true
-            it?.hasSourceClassOf(SampleClass::class) shouldBeEqualTo false
-            it?.sourceObject shouldBeEqualTo null
-            it?.hasSourceObject() shouldBeEqualTo false
-            it?.hasSourceObjectOf(SampleType::class) shouldBeEqualTo false
-            it?.sourceInterface shouldBeEqualTo null
-            it?.hasSourceInterface() shouldBeEqualTo false
-            it?.hasSourceInterfaceOf(SampleType::class) shouldBeEqualTo false
-            it?.sourceTypeAlias shouldBeEqualTo null
-            it?.hasSourceTypeAlias() shouldBeEqualTo false
-            it?.sourceImportAlias shouldBeEqualTo null
-            it?.hasSourceImportAlias() shouldBeEqualTo false
-            it?.sourceKotlinType shouldBeEqualTo null
-            it?.hasSourceKotlinType() shouldBeEqualTo false
-            it?.hasSourceKotlinTypeOf(SampleType::class) shouldBeEqualTo false
-            it?.sourceFunctionType shouldBeEqualTo null
-            it?.hasSourceFunctionType() shouldBeEqualTo false
-            it?.sourceExternalType shouldBeEqualTo null
-            it?.hasSourceExternalType() shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `not-nullable-class-type`() {
-        // given
-        val sut =
-            getSnippetFile("not-nullable-class-type")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
-                ?.type
-
-        // then
-        assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasSourceDeclarationOf(SampleType::class) shouldBeEqualTo true
-            it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
-            it?.sourceClass shouldBeInstanceOf KoClassDeclaration::class
-            it?.sourceClass?.name shouldBeEqualTo "SampleType"
-            it?.hasSourceClass() shouldBeEqualTo true
-            it?.hasSourceClass { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
-            it?.hasSourceClass { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasSourceClassOf(SampleType::class) shouldBeEqualTo true
-            it?.hasSourceClassOf(SampleClass::class) shouldBeEqualTo false
-            it?.sourceObject shouldBeEqualTo null
-            it?.hasSourceObject() shouldBeEqualTo false
-            it?.hasSourceObjectOf(SampleType::class) shouldBeEqualTo false
-            it?.sourceInterface shouldBeEqualTo null
-            it?.hasSourceInterface() shouldBeEqualTo false
-            it?.hasSourceInterfaceOf(SampleType::class) shouldBeEqualTo false
-            it?.sourceTypeAlias shouldBeEqualTo null
-            it?.hasSourceTypeAlias() shouldBeEqualTo false
-            it?.sourceImportAlias shouldBeEqualTo null
-            it?.hasSourceImportAlias() shouldBeEqualTo false
-            it?.sourceKotlinType shouldBeEqualTo null
-            it?.hasSourceKotlinType() shouldBeEqualTo false
-            it?.hasSourceKotlinTypeOf(SampleType::class) shouldBeEqualTo false
-            it?.sourceFunctionType shouldBeEqualTo null
-            it?.hasSourceFunctionType() shouldBeEqualTo false
-            it?.sourceExternalType shouldBeEqualTo null
-            it?.hasSourceExternalType() shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `nullable-interface-type`() {
-        // given
-        val sut =
-            getSnippetFile("nullable-interface-type")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
-                ?.type
-
-        // then
-        assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasSourceDeclarationOf(SampleInterface::class) shouldBeEqualTo true
-            it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
-            it?.sourceInterface shouldBeInstanceOf KoInterfaceDeclaration::class
-            it?.sourceInterface?.name shouldBeEqualTo "SampleInterface"
-            it?.hasSourceInterface() shouldBeEqualTo true
-            it?.hasSourceInterface { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
-            it?.hasSourceInterface { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasSourceInterfaceOf(SampleInterface::class) shouldBeEqualTo true
-            it?.hasSourceInterfaceOf(SampleClass::class) shouldBeEqualTo false
-            it?.sourceClass shouldBeEqualTo null
-            it?.hasSourceClass() shouldBeEqualTo false
-            it?.hasSourceClassOf(SampleInterface::class) shouldBeEqualTo false
-            it?.sourceObject shouldBeEqualTo null
-            it?.hasSourceObject() shouldBeEqualTo false
-            it?.hasSourceObjectOf(SampleInterface::class) shouldBeEqualTo false
-            it?.sourceTypeAlias shouldBeEqualTo null
-            it?.hasSourceTypeAlias() shouldBeEqualTo false
-            it?.sourceImportAlias shouldBeEqualTo null
-            it?.hasSourceImportAlias() shouldBeEqualTo false
-            it?.sourceKotlinType shouldBeEqualTo null
-            it?.hasSourceKotlinType() shouldBeEqualTo false
-            it?.hasSourceKotlinTypeOf(SampleInterface::class) shouldBeEqualTo false
-            it?.sourceFunctionType shouldBeEqualTo null
-            it?.hasSourceFunctionType() shouldBeEqualTo false
-            it?.sourceExternalType shouldBeEqualTo null
-            it?.hasSourceExternalType() shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `not-nullable-interface-type`() {
-        // given
-        val sut =
-            getSnippetFile("not-nullable-interface-type")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
-                ?.type
-
-        // then
-        assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasSourceDeclarationOf(SampleInterface::class) shouldBeEqualTo true
-            it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
-            it?.sourceInterface shouldBeInstanceOf KoInterfaceDeclaration::class
-            it?.sourceInterface?.name shouldBeEqualTo "SampleInterface"
-            it?.hasSourceInterface() shouldBeEqualTo true
-            it?.hasSourceInterface { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
-            it?.hasSourceInterface { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasSourceInterfaceOf(SampleInterface::class) shouldBeEqualTo true
-            it?.hasSourceInterfaceOf(SampleClass::class) shouldBeEqualTo false
-            it?.sourceClass shouldBeEqualTo null
-            it?.hasSourceClass() shouldBeEqualTo false
-            it?.hasSourceClassOf(SampleInterface::class) shouldBeEqualTo false
-            it?.sourceObject shouldBeEqualTo null
-            it?.hasSourceObject() shouldBeEqualTo false
-            it?.hasSourceObjectOf(SampleInterface::class) shouldBeEqualTo false
-            it?.sourceTypeAlias shouldBeEqualTo null
-            it?.hasSourceTypeAlias() shouldBeEqualTo false
-            it?.sourceImportAlias shouldBeEqualTo null
-            it?.hasSourceImportAlias() shouldBeEqualTo false
-            it?.sourceKotlinType shouldBeEqualTo null
-            it?.hasSourceKotlinType() shouldBeEqualTo false
-            it?.hasSourceKotlinTypeOf(SampleInterface::class) shouldBeEqualTo false
-            it?.sourceFunctionType shouldBeEqualTo null
-            it?.hasSourceFunctionType() shouldBeEqualTo false
-            it?.sourceExternalType shouldBeEqualTo null
-            it?.hasSourceExternalType() shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `nullable-object-type`() {
-        // given
-        val sut =
-            getSnippetFile("nullable-object-type")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
-                ?.type
-
-        // then
-        assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo true
-            it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
-            it?.sourceObject shouldBeInstanceOf KoObjectDeclaration::class
-            it?.sourceObject?.name shouldBeEqualTo "SampleObject"
-            it?.hasSourceObject() shouldBeEqualTo true
-            it?.hasSourceObject { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
-            it?.hasSourceObject { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasSourceObjectOf(SampleObject::class) shouldBeEqualTo true
-            it?.hasSourceObjectOf(SampleClass::class) shouldBeEqualTo false
-            it?.sourceClass shouldBeEqualTo null
-            it?.hasSourceClass() shouldBeEqualTo false
-            it?.hasSourceClassOf(SampleObject::class) shouldBeEqualTo false
-            it?.sourceInterface shouldBeEqualTo null
-            it?.hasSourceInterface() shouldBeEqualTo false
-            it?.hasSourceInterfaceOf(SampleObject::class) shouldBeEqualTo false
-            it?.sourceTypeAlias shouldBeEqualTo null
-            it?.hasSourceTypeAlias() shouldBeEqualTo false
-            it?.sourceImportAlias shouldBeEqualTo null
-            it?.hasSourceImportAlias() shouldBeEqualTo false
-            it?.sourceKotlinType shouldBeEqualTo null
-            it?.hasSourceKotlinType() shouldBeEqualTo false
-            it?.hasSourceKotlinTypeOf(SampleObject::class) shouldBeEqualTo false
-            it?.sourceFunctionType shouldBeEqualTo null
-            it?.hasSourceFunctionType() shouldBeEqualTo false
-            it?.sourceExternalType shouldBeEqualTo null
-            it?.hasSourceExternalType() shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `not-nullable-object-type`() {
-        // given
-        val sut =
-            getSnippetFile("not-nullable-object-type")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
-                ?.type
-
-        // then
-        assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo true
-            it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
-            it?.sourceObject shouldBeInstanceOf KoObjectDeclaration::class
-            it?.sourceObject?.name shouldBeEqualTo "SampleObject"
-            it?.hasSourceObject() shouldBeEqualTo true
-            it?.hasSourceObject { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
-            it?.hasSourceObject { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasSourceObjectOf(SampleObject::class) shouldBeEqualTo true
-            it?.hasSourceObjectOf(SampleClass::class) shouldBeEqualTo false
-            it?.sourceClass shouldBeEqualTo null
-            it?.hasSourceClass() shouldBeEqualTo false
-            it?.hasSourceClassOf(SampleObject::class) shouldBeEqualTo false
-            it?.sourceInterface shouldBeEqualTo null
-            it?.hasSourceInterface() shouldBeEqualTo false
-            it?.hasSourceInterfaceOf(SampleObject::class) shouldBeEqualTo false
-            it?.sourceTypeAlias shouldBeEqualTo null
-            it?.hasSourceTypeAlias() shouldBeEqualTo false
-            it?.sourceImportAlias shouldBeEqualTo null
-            it?.hasSourceImportAlias() shouldBeEqualTo false
-            it?.sourceKotlinType shouldBeEqualTo null
-            it?.hasSourceKotlinType() shouldBeEqualTo false
-            it?.hasSourceKotlinTypeOf(SampleObject::class) shouldBeEqualTo false
-            it?.sourceFunctionType shouldBeEqualTo null
-            it?.hasSourceFunctionType() shouldBeEqualTo false
-            it?.sourceExternalType shouldBeEqualTo null
-            it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo true
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -540,6 +808,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.hasSourceKotlinType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo true
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -579,162 +855,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.hasSourceKotlinType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `nullable-import-alias-type`() {
-        // given
-        val sut =
-            getSnippetFile("nullable-import-alias-type")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
-                ?.type
-
-        // then
-        assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "ImportAlias" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
-            it?.sourceImportAlias shouldBeInstanceOf KoImportAliasDeclaration::class
-            it?.sourceImportAlias?.name shouldBeEqualTo "ImportAlias"
-            it?.hasSourceImportAlias() shouldBeEqualTo true
-            it?.hasSourceImportAlias { declaration -> declaration.name == "ImportAlias" } shouldBeEqualTo true
-            it?.hasSourceImportAlias { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.sourceClass shouldBeEqualTo null
-            it?.hasSourceClass() shouldBeEqualTo false
-            it?.sourceObject shouldBeEqualTo null
-            it?.hasSourceObject() shouldBeEqualTo false
-            it?.sourceInterface shouldBeEqualTo null
-            it?.hasSourceInterface() shouldBeEqualTo false
-            it?.sourceTypeAlias shouldBeEqualTo null
-            it?.hasSourceTypeAlias() shouldBeEqualTo false
-            it?.sourceKotlinType shouldBeEqualTo null
-            it?.hasSourceKotlinType() shouldBeEqualTo false
-            it?.sourceFunctionType shouldBeEqualTo null
-            it?.hasSourceFunctionType() shouldBeEqualTo false
-            it?.sourceExternalType shouldBeEqualTo null
-            it?.hasSourceExternalType() shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `not-nullable-import-alias-type`() {
-        // given
-        val sut =
-            getSnippetFile("not-nullable-import-alias-type")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
-                ?.type
-
-        // then
-        assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "ImportAlias" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
-            it?.sourceImportAlias shouldBeInstanceOf KoImportAliasDeclaration::class
-            it?.sourceImportAlias?.name shouldBeEqualTo "ImportAlias"
-            it?.hasSourceImportAlias() shouldBeEqualTo true
-            it?.hasSourceImportAlias { declaration -> declaration.name == "ImportAlias" } shouldBeEqualTo true
-            it?.hasSourceImportAlias { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.sourceClass shouldBeEqualTo null
-            it?.hasSourceClass() shouldBeEqualTo false
-            it?.sourceObject shouldBeEqualTo null
-            it?.hasSourceObject() shouldBeEqualTo false
-            it?.sourceInterface shouldBeEqualTo null
-            it?.hasSourceInterface() shouldBeEqualTo false
-            it?.sourceTypeAlias shouldBeEqualTo null
-            it?.hasSourceTypeAlias() shouldBeEqualTo false
-            it?.sourceKotlinType shouldBeEqualTo null
-            it?.hasSourceKotlinType() shouldBeEqualTo false
-            it?.sourceFunctionType shouldBeEqualTo null
-            it?.hasSourceFunctionType() shouldBeEqualTo false
-            it?.sourceExternalType shouldBeEqualTo null
-            it?.hasSourceExternalType() shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `nullable-typealias-type`() {
-        // given
-        val sut =
-            getSnippetFile("nullable-typealias-type")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
-                ?.type
-
-        // then
-        assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleTypeAlias" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
-            it?.sourceTypeAlias shouldBeInstanceOf KoTypeAliasDeclaration::class
-            it?.sourceTypeAlias?.name shouldBeEqualTo "SampleTypeAlias"
-            it?.hasSourceTypeAlias() shouldBeEqualTo true
-            it?.hasSourceTypeAlias { declaration -> declaration.name == "SampleTypeAlias" } shouldBeEqualTo true
-            it?.hasSourceTypeAlias { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.sourceClass shouldBeEqualTo null
-            it?.hasSourceClass() shouldBeEqualTo false
-            it?.sourceObject shouldBeEqualTo null
-            it?.hasSourceObject() shouldBeEqualTo false
-            it?.sourceInterface shouldBeEqualTo null
-            it?.hasSourceInterface() shouldBeEqualTo false
-            it?.sourceImportAlias shouldBeEqualTo null
-            it?.hasSourceImportAlias() shouldBeEqualTo false
-            it?.sourceKotlinType shouldBeEqualTo null
-            it?.hasSourceKotlinType() shouldBeEqualTo false
-            it?.sourceFunctionType shouldBeEqualTo null
-            it?.hasSourceFunctionType() shouldBeEqualTo false
-            it?.sourceExternalType shouldBeEqualTo null
-            it?.hasSourceExternalType() shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `not-nullable-typealias-type`() {
-        // given
-        val sut =
-            getSnippetFile("not-nullable-typealias-type")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
-                ?.type
-
-        // then
-        assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleTypeAlias" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
-            it?.sourceTypeAlias shouldBeInstanceOf KoTypeAliasDeclaration::class
-            it?.sourceTypeAlias?.name shouldBeEqualTo "SampleTypeAlias"
-            it?.hasSourceTypeAlias() shouldBeEqualTo true
-            it?.hasSourceTypeAlias { declaration -> declaration.name == "SampleTypeAlias" } shouldBeEqualTo true
-            it?.hasSourceTypeAlias { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.sourceClass shouldBeEqualTo null
-            it?.hasSourceClass() shouldBeEqualTo false
-            it?.sourceObject shouldBeEqualTo null
-            it?.hasSourceObject() shouldBeEqualTo false
-            it?.sourceInterface shouldBeEqualTo null
-            it?.hasSourceInterface() shouldBeEqualTo false
-            it?.sourceImportAlias shouldBeEqualTo null
-            it?.hasSourceImportAlias() shouldBeEqualTo false
-            it?.sourceKotlinType shouldBeEqualTo null
-            it?.hasSourceKotlinType() shouldBeEqualTo false
-            it?.sourceFunctionType shouldBeEqualTo null
-            it?.hasSourceFunctionType() shouldBeEqualTo false
-            it?.sourceExternalType shouldBeEqualTo null
-            it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo true
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -781,6 +909,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.hasSourceKotlinTypeOf(SampleExternalClass::class) shouldBeEqualTo false
             it?.sourceFunctionType shouldBeEqualTo null
             it?.hasSourceFunctionType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo true
         }
     }
 
@@ -827,6 +963,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.hasSourceKotlinTypeOf(SampleExternalClass::class) shouldBeEqualTo false
             it?.sourceFunctionType shouldBeEqualTo null
             it?.hasSourceFunctionType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo true
         }
     }
 
@@ -844,7 +988,11 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                 arguments("nullable-kotlin-basic-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
                 arguments("not-nullable-kotlin-basic-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
                 arguments("nullable-kotlin-collection-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
-                arguments("not-nullable-kotlin-collection-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
+                arguments(
+                    "not-nullable-kotlin-collection-type",
+                    KoKotlinTypeDeclaration::class,
+                    KoClassDeclaration::class,
+                ),
                 arguments("nullable-class-type", KoClassDeclaration::class, KoKotlinTypeDeclaration::class),
                 arguments("not-nullable-class-type", KoClassDeclaration::class, KoKotlinTypeDeclaration::class),
                 arguments("nullable-interface-type", KoInterfaceDeclaration::class, KoKotlinTypeDeclaration::class),
@@ -852,9 +1000,21 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                 arguments("nullable-object-type", KoObjectDeclaration::class, KoKotlinTypeDeclaration::class),
                 arguments("not-nullable-object-type", KoObjectDeclaration::class, KoKotlinTypeDeclaration::class),
                 arguments("nullable-function-type", KoFunctionTypeDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("not-nullable-function-type", KoFunctionTypeDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("nullable-import-alias-type", KoImportAliasDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("not-nullable-import-alias-type", KoImportAliasDeclaration::class, KoKotlinTypeDeclaration::class),
+                arguments(
+                    "not-nullable-function-type",
+                    KoFunctionTypeDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                ),
+                arguments(
+                    "nullable-import-alias-type",
+                    KoImportAliasDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                ),
+                arguments(
+                    "not-nullable-import-alias-type",
+                    KoImportAliasDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                ),
                 arguments("nullable-typealias-type", KoTypeAliasDeclaration::class, KoKotlinTypeDeclaration::class),
                 arguments("not-nullable-typealias-type", KoTypeAliasDeclaration::class, KoKotlinTypeDeclaration::class),
                 arguments("nullable-external-type", KoExternalDeclaration::class, KoKotlinTypeDeclaration::class),
