@@ -38,8 +38,6 @@ class DeclarationKonsistTest {
 
     @Test
     fun `none property type has the 'Impl' suffix`() {
-        val a = 2
-
         declarationPackageScope
             .properties()
             .types
