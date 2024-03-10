@@ -86,47 +86,6 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
     val sourceExternalType: KoExternalDeclaration?
 
     /**
-     * Determines whatever source declaration is a class.
-     */
-    val isClass: Boolean
-
-    /**
-     * Determines whatever source declaration is an object.
-     */
-    val isObject: Boolean
-
-    /**
-     * Determines whatever source declaration is a interface.
-     */
-    val isInterface: Boolean
-
-    /**
-     * Determines whatever source declaration is a type alias.
-     */
-    val isTypeAlias: Boolean
-
-    /**
-     * Determines whatever source declaration is import alias.
-     */
-    val isImportAlias: Boolean
-
-    /**
-     * Determines whatever source declaration is a Kotlin build in type.
-     */
-    val isKotlinType: Boolean
-
-    /**
-     * Determines whatever source declaration is a function.
-     */
-    val isFunctionType: Boolean
-
-    /**
-     * Determines whatever source declaration is an external type.
-     * An external type refers to a type that is defined outside the project's codebase. for e.g. in external library.
-     */
-    val isExternalType: Boolean
-
-    /**
      * Determines whatever type has a specified source declaration.
      *
      * @param predicate The predicate function used to determine if a source declaration satisfies a condition.

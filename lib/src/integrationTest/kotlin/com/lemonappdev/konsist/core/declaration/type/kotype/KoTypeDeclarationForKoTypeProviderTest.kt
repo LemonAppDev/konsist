@@ -7,7 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoTypeDeclarationForKoKotlinTypeProviderTest {
+class KoTypeDeclarationForKoTypeProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
     fun `kotlin-type`(

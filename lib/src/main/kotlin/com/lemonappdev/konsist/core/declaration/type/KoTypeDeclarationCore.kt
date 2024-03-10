@@ -3,14 +3,12 @@ package com.lemonappdev.konsist.core.declaration.type
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoGenericTypeProviderCore
-import com.lemonappdev.konsist.core.provider.KoKotlinTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
@@ -21,6 +19,7 @@ import com.lemonappdev.konsist.core.provider.KoSourceAndAliasTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
+import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtNullableType
@@ -41,7 +40,7 @@ internal class KoTypeDeclarationCore private constructor(
         KoContainingDeclarationProviderCore,
         KoModuleProviderCore,
         KoSourceSetProviderCore,
-        KoKotlinTypeProviderCore,
+        KoTypeProviderCore,
         KoSourceAndAliasTypeProviderCore,
         KoGenericTypeProviderCore,
         KoPackageProviderCore,
@@ -68,8 +67,8 @@ internal class KoTypeDeclarationCore private constructor(
         }
 
     // TODO: Why we need this
-    override val isKotlinType: Boolean
-        get() = sourceDeclaration is KoKotlinTypeDeclaration
+//    override val isKotlinType: Boolean
+//        get() = sourceDeclaration is KoKotlinTypeDeclaration
 
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
