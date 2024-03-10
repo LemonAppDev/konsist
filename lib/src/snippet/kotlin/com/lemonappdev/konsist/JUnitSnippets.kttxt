@@ -28,6 +28,7 @@ class JUnitSnippets {
             .scopeFromTest()
             .classes()
             .assertTrue {
+                // Get type name from test class e.g. FooTest -> Foo
                 val type = it.name.removeSuffix("Test")
                 val sut = it
                     .properties()

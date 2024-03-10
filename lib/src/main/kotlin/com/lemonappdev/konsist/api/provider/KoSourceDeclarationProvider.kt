@@ -81,6 +81,7 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
 
     /**
      * Represents the source external declaration associated with this type.
+     * An external type refers to a type that is defined outside the project's codebase. for e.g. in external library.
      */
     val sourceExternalType: KoExternalDeclaration?
 
@@ -197,6 +198,7 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
 
     /**
      * Whether type has a specified source external type.
+     * An external type refers to a type that is defined outside the project's codebase. for e.g. in external library.
      *
      * @param predicate The predicate external used to determine if a source external type satisfies a condition.
      * @return `true` if the type has the specified source external type (or any source external type if [predicate] is
@@ -206,9 +208,11 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
 
     /**
      * Whether type has a source external type of the specified Kotlin class.
+     * An external type refers to a type that is defined outside the project's codebase. for e.g. in external library.
      *
      * @param kClass The Kotlin class representing the source external type to check for.
-     * @return `true` if the type has a source external type matching the specified KClass, `false` otherwise.
+     * @return `true` if the type has a source external type (type defined outside the project codebase for e.g.
+     * in external library) matching the specified KClass, `false` otherwise.
      */
     fun hasSourceExternalTypeOf(kClass: KClass<*>): Boolean
 }

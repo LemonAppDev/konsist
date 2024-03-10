@@ -11,8 +11,10 @@ import com.lemonappdev.konsist.api.ext.list.modifierprovider.withModifier
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withValueModifier
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifier
 import com.lemonappdev.konsist.api.ext.list.parameters
+import com.lemonappdev.konsist.api.ext.list.parentInterfaces
 import com.lemonappdev.konsist.api.ext.list.primaryConstructors
 import com.lemonappdev.konsist.api.ext.list.properties
+import com.lemonappdev.konsist.api.ext.list.types
 import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
 import com.lemonappdev.konsist.api.verify.assertFalse
@@ -178,5 +180,26 @@ class GeneralSnippets {
             .scopeFromProject()
             .files
             .assertFalse { it.text.contains("forbiddenString") }
+    }
+
+    fun `all function parameters are interfaces`() {
+        Konsist
+            .scopeFromProject()
+            .functions()
+            .parameters
+            .types
+            .assertTrue {
+                it.isInterface
+            }
+    }
+
+    fun `all parrent interfaces are public`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .parentInterfaces()
+            .assertTrue {
+                it.hasPublicModifier()
+            }
     }
 }
