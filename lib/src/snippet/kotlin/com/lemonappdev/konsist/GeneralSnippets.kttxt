@@ -13,10 +13,12 @@ import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifier
 import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.ext.list.primaryConstructors
 import com.lemonappdev.konsist.api.ext.list.properties
+import com.lemonappdev.konsist.api.ext.list.types
 import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
+import org.junit.jupiter.api.Test
 import java.util.Locale
 import javax.inject.Inject
 
@@ -179,4 +181,16 @@ class GeneralSnippets {
             .files
             .assertFalse { it.text.contains("forbiddenString") }
     }
+
+    @Test
+    fun `all function parameters are interfaces`() {
+        Konsist
+            .scopeFromPackage("com.app.worker..")
+            .functions()
+            .parameters
+            .types
+            .assertTrue {
+                it.isInterface
+            }
+        }
 }
