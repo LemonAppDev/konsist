@@ -80,14 +80,13 @@ internal interface KoSourceDeclarationProviderCore :
     override val isExternalType: Boolean
         get() = sourceDeclaration is KoExternalDeclaration
 
-    override fun hasSourceDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean =
-        predicate(sourceDeclaration)
+    override fun hasSourceDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean = predicate(sourceDeclaration)
 
     override fun hasSourceDeclarationOf(kClass: KClass<*>): Boolean =
         hasSourceClassOf(kClass) || hasSourceObjectOf(kClass) || hasSourceInterfaceOf(kClass) ||
-                hasSourceKotlinTypeOf(
-                    kClass,
-                ) || hasSourceExternalTypeOf(kClass)
+            hasSourceKotlinTypeOf(
+                kClass,
+            ) || hasSourceExternalTypeOf(kClass)
 
     override fun hasSourceClass(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -103,8 +102,7 @@ internal interface KoSourceDeclarationProviderCore :
             else -> sourceObject?.let { predicate(it) } ?: false
         }
 
-    override fun hasSourceObjectOf(kClass: KClass<*>): Boolean =
-        kClass.qualifiedName == sourceObject?.fullyQualifiedName
+    override fun hasSourceObjectOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == sourceObject?.fullyQualifiedName
 
     override fun hasSourceInterface(predicate: ((KoInterfaceDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -112,8 +110,7 @@ internal interface KoSourceDeclarationProviderCore :
             else -> sourceInterface?.let { predicate(it) } ?: false
         }
 
-    override fun hasSourceInterfaceOf(kClass: KClass<*>): Boolean =
-        kClass.qualifiedName == sourceInterface?.fullyQualifiedName
+    override fun hasSourceInterfaceOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == sourceInterface?.fullyQualifiedName
 
     override fun hasSourceTypeAlias(predicate: ((KoTypeAliasDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -133,8 +130,7 @@ internal interface KoSourceDeclarationProviderCore :
             else -> sourceKotlinType?.let { predicate(it) } ?: false
         }
 
-    override fun hasSourceKotlinTypeOf(kClass: KClass<*>): Boolean =
-        kClass.qualifiedName == sourceKotlinType?.fullyQualifiedName
+    override fun hasSourceKotlinTypeOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == sourceKotlinType?.fullyQualifiedName
 
     override fun hasSourceFunctionType(predicate: ((KoFunctionTypeDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -148,6 +144,5 @@ internal interface KoSourceDeclarationProviderCore :
             else -> sourceExternalType?.let { predicate(it) } ?: false
         }
 
-    override fun hasSourceExternalTypeOf(kClass: KClass<*>): Boolean =
-        kClass.qualifiedName == sourceExternalType?.fullyQualifiedName
+    override fun hasSourceExternalTypeOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == sourceExternalType?.fullyQualifiedName
 }

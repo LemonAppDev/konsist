@@ -66,9 +66,9 @@ internal class KoTypeDeclarationCore private constructor(
             }
         }
 
-    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
+        override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
-    override fun toString(): String = text
+        override fun toString(): String = text
 
         internal companion object {
             private val cache: KoDeclarationCache<KoTypeDeclaration> = KoDeclarationCache()

@@ -991,7 +991,7 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                 arguments(
                     "not-nullable-kotlin-collection-type",
                     KoKotlinTypeDeclaration::class,
-                    KoClassDeclaration::class
+                    KoClassDeclaration::class,
                 ),
                 arguments("nullable-class-type", KoClassDeclaration::class, KoKotlinTypeDeclaration::class),
                 arguments("not-nullable-class-type", KoClassDeclaration::class, KoKotlinTypeDeclaration::class),
@@ -1003,17 +1003,17 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                 arguments(
                     "not-nullable-function-type",
                     KoFunctionTypeDeclaration::class,
-                    KoKotlinTypeDeclaration::class
+                    KoKotlinTypeDeclaration::class,
                 ),
                 arguments(
                     "nullable-import-alias-type",
                     KoImportAliasDeclaration::class,
-                    KoKotlinTypeDeclaration::class
+                    KoKotlinTypeDeclaration::class,
                 ),
                 arguments(
                     "not-nullable-import-alias-type",
                     KoImportAliasDeclaration::class,
-                    KoKotlinTypeDeclaration::class
+                    KoKotlinTypeDeclaration::class,
                 ),
                 arguments("nullable-typealias-type", KoTypeAliasDeclaration::class, KoKotlinTypeDeclaration::class),
                 arguments("not-nullable-typealias-type", KoTypeAliasDeclaration::class, KoKotlinTypeDeclaration::class),
