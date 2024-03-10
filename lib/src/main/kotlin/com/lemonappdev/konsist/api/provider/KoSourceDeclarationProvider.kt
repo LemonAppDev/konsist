@@ -38,8 +38,7 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
      *  scope
      *      .properties()
      *      .types
-     *      .sourceDeclarations
-     *      .assertTrue { it is KoInterfaceDeclaration }
+     *      .assertTrue { it.isInterface }
      *  ```
      */
     val sourceDeclaration: KoBaseTypeDeclaration
