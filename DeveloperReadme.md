@@ -23,7 +23,7 @@
 1. Create `hotfix/KON-XXX-...` branch from `main`
 2. Fix the bug and open PR targeting `mian`
 3. Merge the PR
-4. Create `release/vx.y.z` branch from `main`
+4. Create `release/vX.Y.Z` branch from `main`
 5. Update Konsist version
     1. [gradle.properties](gradle.properties) file
     2. [README.md](README.md) file
@@ -32,8 +32,8 @@
 8. Switch to the `main` branch and pull changes
 9. Run `./gradlew publish -Pkonsist.releaseTarget=release` on the `main` branch to release a new version
 10. Create a new [GitHub release](https://github.com/LemonAppDev/konsist/releases/new)
-    1. set `vx.y.z` as tag version
-    2. set `vx.y.z` as release title
+     1. set `vX.Y.Z` as tag version
+     2. set `vX.Y.Z` as release title
 11. Update Konsist version in the
     Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/getting-started)
     docs page
@@ -47,7 +47,7 @@ fix starter link
 ## Production Release
 
 1. Merge `main` to `develop`
-2. Create `release/vx.y.z` branch from `develop`
+2. Create `release/vX.Y.Z` branch from `develop`
 3. Update Konsist version
     1. [gradle.properties](gradle.properties) file
     2. [README.md](README.md) file
