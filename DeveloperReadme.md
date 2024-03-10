@@ -32,8 +32,8 @@
 8. Switch to the `main` branch and pull changes
 9. Run `./gradlew publish -Pkonsist.releaseTarget=release` on the `main` branch to release a new version
 10. Create a new [GitHub release](https://github.com/LemonAppDev/konsist/releases/new)
-    1. set `vx.y.z` as tag version
-    2. set `vx.y.z` as release title
+     1. set `vx.y.z` as tag version
+     2. set `vx.y.z` as release title
 11. Update Konsist version in the
     Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/getting-started)
     docs page
