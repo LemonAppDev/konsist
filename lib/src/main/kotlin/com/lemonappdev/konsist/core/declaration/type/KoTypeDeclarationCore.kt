@@ -66,10 +66,6 @@ internal class KoTypeDeclarationCore private constructor(
             }
         }
 
-    // TODO: Why we need this
-//    override val isKotlinType: Boolean
-//        get() = sourceDeclaration is KoKotlinTypeDeclaration
-
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
     override fun toString(): String = text
