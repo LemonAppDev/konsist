@@ -54,6 +54,30 @@ internal interface KoSourceDeclarationProviderCore :
     override val sourceExternalType: KoExternalDeclaration?
         get() = sourceDeclaration as? KoExternalDeclaration
 
+    override val isClass: Boolean
+        get() = sourceDeclaration is KoClassDeclaration
+
+    override val isObject: Boolean
+        get() = sourceDeclaration is KoObjectDeclaration
+
+    override val isInterface: Boolean
+        get() = sourceDeclaration is KoInterfaceDeclaration
+
+    override val isTypeAlias: Boolean
+        get() = sourceDeclaration is KoTypeAliasDeclaration
+
+    override val isImportAlias: Boolean
+        get() = sourceDeclaration is KoImportAliasDeclaration
+
+    override val isKotlinType: Boolean
+        get() = sourceDeclaration is KoKotlinTypeDeclaration
+
+    override val isFunctionType: Boolean
+        get() = sourceDeclaration is KoFunctionTypeDeclaration
+
+    override val isExternalType: Boolean
+        get() = sourceDeclaration is KoExternalDeclaration
+
     override fun hasSourceDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean = predicate(sourceDeclaration)
 
     override fun hasSourceDeclarationOf(kClass: KClass<*>): Boolean =

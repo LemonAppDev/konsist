@@ -1,7 +1,10 @@
 package com.lemonappdev.konsist.api.ext.provider.koparent
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.ext.list.parameters
+import com.lemonappdev.konsist.api.ext.list.types
 import com.lemonappdev.konsist.api.ext.provider.hasParentOf
+import com.lemonappdev.konsist.api.verify.assertTrue
 import com.lemonappdev.konsist.externalsample.SampleExternalClass
 import com.lemonappdev.konsist.externalsample.SampleExternalGenericInterface
 import com.lemonappdev.konsist.externalsample.SampleExternalInterface
@@ -14,6 +17,24 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoParentProviderExtTest {
+    @Test
+    fun `parent class is annotated with XXX annotation`() {
+        // given
+        val sut = getSnippetFile("test")
+
+        sut
+            .functions()
+            .parameters
+            .types
+            .assertTrue {
+                it.isInterface
+            }
+
+
+        // then
+        val a = 2
+    }
+
     @Test
     fun `class-has-each-type-of-parents`() {
         // given

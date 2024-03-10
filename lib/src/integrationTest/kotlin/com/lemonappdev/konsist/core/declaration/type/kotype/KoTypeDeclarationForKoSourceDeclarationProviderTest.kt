@@ -93,6 +93,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
             it?.hasSourceExternalTypeOf(String::class) shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo true
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -139,6 +147,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
             it?.hasSourceExternalTypeOf(String::class) shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo true
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -185,6 +201,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
             it?.hasSourceExternalTypeOf(List::class) shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo true
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -231,6 +255,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
             it?.hasSourceExternalTypeOf(List::class) shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo true
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -276,6 +308,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo true
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -321,6 +361,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo true
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -366,6 +414,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo true
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -411,6 +467,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo true
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -456,6 +520,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo true
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -501,6 +573,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo true
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -540,6 +620,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.hasSourceKotlinType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo true
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -579,6 +667,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.hasSourceKotlinType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo true
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -618,6 +714,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo true
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -657,6 +761,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo true
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -696,6 +808,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo true
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -735,6 +855,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.hasSourceFunctionType() shouldBeEqualTo false
             it?.sourceExternalType shouldBeEqualTo null
             it?.hasSourceExternalType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo true
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
         }
     }
 
@@ -781,6 +909,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.hasSourceKotlinTypeOf(SampleExternalClass::class) shouldBeEqualTo false
             it?.sourceFunctionType shouldBeEqualTo null
             it?.hasSourceFunctionType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo true
         }
     }
 
@@ -827,6 +963,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.hasSourceKotlinTypeOf(SampleExternalClass::class) shouldBeEqualTo false
             it?.sourceFunctionType shouldBeEqualTo null
             it?.hasSourceFunctionType() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo true
         }
     }
 

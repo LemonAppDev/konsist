@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration.type
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -66,9 +67,13 @@ internal class KoTypeDeclarationCore private constructor(
             }
         }
 
-        override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
+    // TODO: Why we need this
+    override val isKotlinType: Boolean
+        get() = sourceDeclaration is KoKotlinTypeDeclaration
 
-        override fun toString(): String = text
+    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
+
+    override fun toString(): String = text
 
         internal companion object {
             private val cache: KoDeclarationCache<KoTypeDeclaration> = KoDeclarationCache()
