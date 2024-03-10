@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
+import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -80,7 +81,7 @@ internal class KoParameterDeclarationCore private constructor(
                     .firstOrNull()
 
             type?.let { KoTypeDeclarationCore.getInstance(it, this) }
-                ?: throw IllegalArgumentException("Parameter type cannot be null")
+                ?: throw KoInternalException("Class type cannot be null")
         }
 
         override fun representsType(name: String?): Boolean = type.name == name // todo: add this?: || type.fullyQualifiedName == name

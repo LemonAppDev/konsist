@@ -10,6 +10,7 @@ import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
+import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.psi.KtTypeReference
@@ -27,9 +28,9 @@ internal interface KoSourceDeclarationProviderCore :
             TypeUtil.getBasicType(
                 listOf(ktTypeReference),
                 ktTypeReference.isExtensionDeclaration(),
-                this.castToKoBaseDeclaration(),
+                castToKoBaseDeclaration(),
                 containingFile,
-            ) ?: throw IllegalArgumentException("Declaration cannot be a null")
+            ) ?: throw KoInternalException("Source declaration cannot be a null")
 
     override val sourceClass: KoClassDeclaration?
         get() = sourceDeclaration as? KoClassDeclaration
