@@ -10,5 +10,3 @@ package com.lemonappdev.konsist.testdata.testpackage
     AnnotationTarget.LOCAL_VARIABLE,
 )
 annotation class Annotation
-
-class Type

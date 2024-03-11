@@ -2,4 +2,4 @@ package com.lemonappdev.konsist.core.declaration.type.kotype.snippet.forkokotlin
 
 import com.lemonappdev.konsist.testdata.SampleObject
 
-class SampleClass1(val sampleProperty1: (SampleObject)) -> Unit)
+class SampleClass1(val sampleProperty1: (SampleObject) -> Unit)
