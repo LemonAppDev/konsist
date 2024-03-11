@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "1.9.20"
+    kotlin("multiplatform") version "1.9.23"
     application
     id("com.android.application")
 }
@@ -42,9 +42,9 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-server-netty:2.3.5")
-                implementation("io.ktor:ktor-server-html-builder-jvm:2.3.5")
-                implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.10.0")
+                implementation("io.ktor:ktor-server-netty:2.3.9")
+                implementation("io.ktor:ktor-server-html-builder-jvm:2.3.9")
+                implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.11.0")
             }
         }
         val jvmTest by getting {
@@ -55,9 +55,9 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.2.0-pre.346")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.2.0-pre.346")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.9.3-pre.346")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.2.0-pre.713")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.2.0-pre.712")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.11.4-pre.712")
             }
         }
         val jsTest by getting
