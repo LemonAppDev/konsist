@@ -24,7 +24,7 @@ class KoFunctionTypeForKoModuleProviderTest {
             .properties()
             .first { it.name == "appPropertyWithFunctionType" }
             .type
-            ?.sourceDeclaration as KoFunctionTypeDeclaration
+            ?.sourceFunctionType
 
         // then
         assertSoftly(sut) {
@@ -42,7 +42,7 @@ class KoFunctionTypeForKoModuleProviderTest {
             .properties()
             .first { it.name == "libPropertyWithFunctionType" }
             .type
-            ?.sourceDeclaration as KoFunctionTypeDeclaration
+            ?.sourceFunctionType
 
         // then
         assertSoftly(sut) {
@@ -60,7 +60,7 @@ class KoFunctionTypeForKoModuleProviderTest {
             .properties()
             .first { it.name == "rootPropertyWithFunctionType" }
             .type
-            ?.sourceDeclaration as KoFunctionTypeDeclaration
+            ?.sourceFunctionType
 
         // then
         assertSoftly(sut) {
