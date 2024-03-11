@@ -46,6 +46,7 @@ jobs:
 
   check-kttxt-snippets:
     name: Check kttxt Snippets
+    needs: get-github-context
     runs-on: ubuntu-latest
 #    if: |
 #      needs.get-github-context.outputs.base_ref_branch == 'main' ||
