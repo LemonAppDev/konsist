@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.type.kofunctiontype
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
@@ -21,7 +20,7 @@ class KoFunctionTypeDeclarationForKoPathProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceDeclaration as? KoFunctionTypeDeclaration
+                ?.sourceFunctionType
 
         // then
         assertSoftly(sut?.path) {
@@ -42,7 +41,7 @@ class KoFunctionTypeDeclarationForKoPathProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceDeclaration as? KoFunctionTypeDeclaration
+                ?.sourceFunctionType
 
         // then
         sut
@@ -65,7 +64,7 @@ class KoFunctionTypeDeclarationForKoPathProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceDeclaration as? KoFunctionTypeDeclaration
+                ?.sourceFunctionType
 
         // then
         assertSoftly(sut) {
@@ -88,7 +87,7 @@ class KoFunctionTypeDeclarationForKoPathProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceDeclaration as? KoFunctionTypeDeclaration
+                ?.sourceFunctionType
 
         // then
         assertSoftly(sut) {

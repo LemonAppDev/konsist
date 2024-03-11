@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.type.kofunctiontype
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -17,7 +16,7 @@ class KoFunctionTypeDeclarationForKoPackageProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceDeclaration as? KoFunctionTypeDeclaration
+                ?.sourceFunctionType
 
         // then
         sut?.packagee shouldBeEqualTo null
@@ -34,7 +33,7 @@ class KoFunctionTypeDeclarationForKoPackageProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceDeclaration as? KoFunctionTypeDeclaration
+                ?.sourceFunctionType
 
         // then
         sut?.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"

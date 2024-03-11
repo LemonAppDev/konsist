@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.type.kofunctiontype
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -14,7 +13,7 @@ class KoFunctionTypeDeclarationTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceDeclaration as? KoFunctionTypeDeclaration
+                ?.sourceFunctionType
 
         // then
         sut.toString() shouldBeEqualTo "() -> Unit"
@@ -28,7 +27,7 @@ class KoFunctionTypeDeclarationTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceDeclaration as? KoFunctionTypeDeclaration
+                ?.sourceFunctionType
 
         // then
         sut?.parameterTypes shouldBeEqualTo emptyList()
@@ -42,7 +41,7 @@ class KoFunctionTypeDeclarationTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceDeclaration as? KoFunctionTypeDeclaration
+                ?.sourceFunctionType
 
         // then
         sut?.parameterTypes?.map { it.type.name } shouldBeEqualTo listOf("String")
@@ -56,7 +55,7 @@ class KoFunctionTypeDeclarationTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceDeclaration as? KoFunctionTypeDeclaration
+                ?.sourceFunctionType
 
         // then
         sut?.parameterTypes?.map { it.type.name } shouldBeEqualTo listOf("String", "List<Int>")
@@ -70,7 +69,7 @@ class KoFunctionTypeDeclarationTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceDeclaration as? KoFunctionTypeDeclaration
+                ?.sourceFunctionType
 
         // then
         sut?.returnType?.name shouldBeEqualTo "Unit"
@@ -84,7 +83,7 @@ class KoFunctionTypeDeclarationTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceDeclaration as? KoFunctionTypeDeclaration
+                ?.sourceFunctionType
 
         // then
         sut?.returnType?.name shouldBeEqualTo "List<String>"
@@ -98,7 +97,7 @@ class KoFunctionTypeDeclarationTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceDeclaration as? KoFunctionTypeDeclaration
+                ?.sourceFunctionType
 
         // then
         sut?.returnType?.name shouldBeEqualTo "SampleClass"

@@ -21,13 +21,13 @@ class KoImportAliasForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "appPropertyWithImportAliasType" }
             .type
-            ?.sourceDeclaration as KoImportAliasDeclaration
+            ?.sourceImportAlias
 
         // then
         assertSoftly(sut) {
-            sourceSetName shouldBeEqualTo MAIN
-            resideInSourceSet(MAIN) shouldBeEqualTo true
-            resideInSourceSet(TEST) shouldBeEqualTo false
+            it?.sourceSetName shouldBeEqualTo MAIN
+            it?.resideInSourceSet(MAIN) shouldBeEqualTo true
+            it?.resideInSourceSet(TEST) shouldBeEqualTo false
         }
     }
 
@@ -39,13 +39,13 @@ class KoImportAliasForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "appPropertyWithImportAliasTypeTest" }
             .type
-            ?.sourceDeclaration as KoImportAliasDeclaration
+            ?.sourceImportAlias
 
         // then
         assertSoftly(sut) {
-            sourceSetName shouldBeEqualTo INTEGRATION_TEST
-            resideInSourceSet(INTEGRATION_TEST) shouldBeEqualTo true
-            resideInSourceSet(TEST) shouldBeEqualTo false
+            it?.sourceSetName shouldBeEqualTo INTEGRATION_TEST
+            it?.resideInSourceSet(INTEGRATION_TEST) shouldBeEqualTo true
+            it?.resideInSourceSet(TEST) shouldBeEqualTo false
         }
     }
 
@@ -57,13 +57,13 @@ class KoImportAliasForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "libPropertyWithImportAliasType" }
             .type
-            ?.sourceDeclaration as KoImportAliasDeclaration
+            ?.sourceImportAlias
 
         // then
         assertSoftly(sut) {
-            sourceSetName shouldBeEqualTo MAIN
-            resideInSourceSet(MAIN) shouldBeEqualTo true
-            resideInSourceSet(TEST) shouldBeEqualTo false
+            it?.sourceSetName shouldBeEqualTo MAIN
+            it?.resideInSourceSet(MAIN) shouldBeEqualTo true
+            it?.resideInSourceSet(TEST) shouldBeEqualTo false
         }
     }
 
@@ -75,13 +75,13 @@ class KoImportAliasForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "libPropertyWithImportAliasTypeTest" }
             .type
-            ?.sourceDeclaration as KoImportAliasDeclaration
+            ?.sourceImportAlias
 
         // then
         assertSoftly(sut) {
-            sourceSetName shouldBeEqualTo TEST
-            resideInSourceSet(TEST) shouldBeEqualTo true
-            resideInSourceSet(INTEGRATION_TEST) shouldBeEqualTo false
+            it?.sourceSetName shouldBeEqualTo TEST
+            it?.resideInSourceSet(TEST) shouldBeEqualTo true
+            it?.resideInSourceSet(INTEGRATION_TEST) shouldBeEqualTo false
         }
     }
 
@@ -93,13 +93,13 @@ class KoImportAliasForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "rootPropertyWithImportAliasType" }
             .type
-            ?.sourceDeclaration as KoImportAliasDeclaration
+            ?.sourceImportAlias
 
         // then
         assertSoftly(sut) {
-            sourceSetName shouldBeEqualTo MAIN
-            resideInSourceSet(MAIN) shouldBeEqualTo true
-            resideInSourceSet(TEST) shouldBeEqualTo false
+            it?.sourceSetName shouldBeEqualTo MAIN
+            it?.resideInSourceSet(MAIN) shouldBeEqualTo true
+            it?.resideInSourceSet(TEST) shouldBeEqualTo false
         }
     }
 
@@ -111,13 +111,13 @@ class KoImportAliasForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "rootSrcPropertyWithImportAliasType" }
             .type
-            ?.sourceDeclaration as KoImportAliasDeclaration
+            ?.sourceImportAlias
 
         // then
         assertSoftly(sut) {
-            sourceSetName shouldBeEqualTo MAIN
-            resideInSourceSet(MAIN) shouldBeEqualTo true
-            resideInSourceSet(TEST) shouldBeEqualTo false
+            it?.sourceSetName shouldBeEqualTo MAIN
+            it?.resideInSourceSet(MAIN) shouldBeEqualTo true
+            it?.resideInSourceSet(TEST) shouldBeEqualTo false
         }
     }
 

@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.type.kokotlintype
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -14,7 +13,7 @@ class KoKotlinTypeDeclarationForKoNameProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceDeclaration as? KoKotlinTypeDeclaration
+                ?.sourceKotlinType
 
         // then
         sut?.name shouldBeEqualTo "String"
@@ -28,7 +27,7 @@ class KoKotlinTypeDeclarationForKoNameProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceDeclaration as? KoKotlinTypeDeclaration
+                ?.sourceKotlinType
 
         // then
         sut?.name shouldBeEqualTo "String"
@@ -42,7 +41,7 @@ class KoKotlinTypeDeclarationForKoNameProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceDeclaration as? KoKotlinTypeDeclaration
+                ?.sourceKotlinType
 
         // then
         sut?.name shouldBeEqualTo "List<String>"
@@ -56,7 +55,7 @@ class KoKotlinTypeDeclarationForKoNameProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceDeclaration as? KoKotlinTypeDeclaration
+                ?.sourceKotlinType
 
         // then
         sut?.name shouldBeEqualTo "List<String>"

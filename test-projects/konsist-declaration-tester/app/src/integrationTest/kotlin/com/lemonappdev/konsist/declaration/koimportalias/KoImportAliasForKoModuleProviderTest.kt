@@ -23,13 +23,13 @@ class KoImportAliasForKoModuleProviderTest {
             .properties()
             .first { it.name == "appPropertyWithImportAliasType" }
             .type
-            ?.sourceDeclaration as KoImportAliasDeclaration
+            ?.sourceImportAlias
 
         // then
         assertSoftly(sut) {
-            moduleName shouldBeEqualTo app
-            resideInModule(app) shouldBeEqualTo true
-            resideInModule(data) shouldBeEqualTo false
+            it?.moduleName shouldBeEqualTo app
+            it?.resideInModule(app) shouldBeEqualTo true
+            it?.resideInModule(data) shouldBeEqualTo false
         }
     }
 
@@ -41,13 +41,13 @@ class KoImportAliasForKoModuleProviderTest {
             .properties()
             .first { it.name == "libPropertyWithImportAliasType" }
             .type
-            ?.sourceDeclaration as KoImportAliasDeclaration
+            ?.sourceImportAlias
 
         // then
         assertSoftly(sut) {
-            moduleName shouldBeEqualTo data
-            resideInModule(data) shouldBeEqualTo true
-            resideInModule(app) shouldBeEqualTo false
+            it?.moduleName shouldBeEqualTo data
+            it?.resideInModule(data) shouldBeEqualTo true
+            it?.resideInModule(app) shouldBeEqualTo false
         }
     }
 
@@ -59,13 +59,13 @@ class KoImportAliasForKoModuleProviderTest {
             .properties()
             .first { it.name == "rootPropertyWithImportAliasType" }
             .type
-            ?.sourceDeclaration as KoImportAliasDeclaration
+            ?.sourceImportAlias
 
         // then
         assertSoftly(sut) {
-            moduleName shouldBeEqualTo root
-            resideInModule(root) shouldBeEqualTo true
-            resideInModule(app) shouldBeEqualTo false
+            it?.moduleName shouldBeEqualTo root
+            it?.resideInModule(root) shouldBeEqualTo true
+            it?.resideInModule(app) shouldBeEqualTo false
         }
     }
 }

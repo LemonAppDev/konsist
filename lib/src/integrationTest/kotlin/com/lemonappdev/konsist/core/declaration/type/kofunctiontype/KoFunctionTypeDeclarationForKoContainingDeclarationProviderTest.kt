@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.type.kofunctiontype
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
@@ -21,7 +20,7 @@ class KoFunctionTypeDeclarationForKoContainingDeclarationProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceDeclaration as? KoFunctionTypeDeclaration
+                ?.sourceFunctionType
 
         // then
         (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo fileName
