@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.koimportalias
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
@@ -21,7 +20,7 @@ class KoImportAliasDeclarationForKoContainingDeclarationProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceDeclaration as? KoImportAliasDeclaration
+                ?.sourceImportAlias
 
         // then
         (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"

@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
-import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
-import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
 import com.lemonappdev.konsist.core.declaration.KoFileDeclarationCore
@@ -18,7 +16,7 @@ internal interface KoSourceAndAliasTypeProviderCore :
         get() = KoFileDeclarationCore(ktElement.containingKtFile)
 
     override val isAlias: Boolean
-        get() = (this as? KoTypeDeclaration)?.sourceDeclaration is KoImportAliasDeclaration
+        get() = (this as? KoTypeDeclaration)?.isImportAlias == true
 
     override val sourceType: String
         get() =
@@ -36,8 +34,8 @@ internal interface KoSourceAndAliasTypeProviderCore :
 
     override val bareSourceType: String
         get() =
-            if ((this as? KoTypeDeclaration)?.sourceDeclaration is KoTypeAliasDeclaration) {
-                ((this as? KoTypeDeclaration)?.sourceDeclaration as? KoTypeAliasDeclaration)?.type?.text ?: text
+            if ((this as? KoTypeDeclaration)?.isTypeAlias == true) {
+                ((this as? KoTypeDeclaration)?.sourceTypeAlias)?.type?.text ?: text
             } else {
                 sourceType
                     .removeGenericTypeArguments()

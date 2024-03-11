@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.koimportalias
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -17,7 +16,7 @@ class KoImportAliasDeclarationForKoPackageProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceDeclaration as? KoImportAliasDeclaration
+                ?.sourceImportAlias
 
         // then
         sut?.packagee shouldBeEqualTo null
@@ -34,7 +33,7 @@ class KoImportAliasDeclarationForKoPackageProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceDeclaration as? KoImportAliasDeclaration
+                ?.sourceImportAlias
 
         // then
         sut?.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
