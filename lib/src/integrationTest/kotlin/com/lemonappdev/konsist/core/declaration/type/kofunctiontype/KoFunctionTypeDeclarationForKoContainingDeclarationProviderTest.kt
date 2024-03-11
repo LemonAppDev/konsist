@@ -20,7 +20,7 @@ class KoFunctionTypeDeclarationForKoContainingDeclarationProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceFunctionType
+                ?.asFunctionTypeDeclaration()
 
         // then
         (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo fileName

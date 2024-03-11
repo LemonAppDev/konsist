@@ -21,7 +21,7 @@ class KoImportAliasForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "appPropertyWithImportAliasType" }
             .type
-            ?.sourceImportAlias
+            ?.asImportAliasDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -39,7 +39,7 @@ class KoImportAliasForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "appPropertyWithImportAliasTypeTest" }
             .type
-            ?.sourceImportAlias
+            ?.asImportAliasDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -57,7 +57,7 @@ class KoImportAliasForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "libPropertyWithImportAliasType" }
             .type
-            ?.sourceImportAlias
+            ?.asImportAliasDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -75,7 +75,7 @@ class KoImportAliasForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "libPropertyWithImportAliasTypeTest" }
             .type
-            ?.sourceImportAlias
+            ?.asImportAliasDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -93,7 +93,7 @@ class KoImportAliasForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "rootPropertyWithImportAliasType" }
             .type
-            ?.sourceImportAlias
+            ?.asImportAliasDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -111,7 +111,7 @@ class KoImportAliasForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "rootSrcPropertyWithImportAliasType" }
             .type
-            ?.sourceImportAlias
+            ?.asImportAliasDeclaration()
 
         // then
         assertSoftly(sut) {

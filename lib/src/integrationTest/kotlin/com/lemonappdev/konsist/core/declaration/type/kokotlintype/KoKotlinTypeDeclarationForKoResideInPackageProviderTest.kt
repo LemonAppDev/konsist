@@ -14,7 +14,7 @@ class KoKotlinTypeDeclarationForKoResideInPackageProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceKotlinType
+                ?.asKotlinTypeDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -33,7 +33,7 @@ class KoKotlinTypeDeclarationForKoResideInPackageProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceKotlinType
+                ?.asKotlinTypeDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -52,7 +52,7 @@ class KoKotlinTypeDeclarationForKoResideInPackageProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceKotlinType
+                ?.asKotlinTypeDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -71,7 +71,7 @@ class KoKotlinTypeDeclarationForKoResideInPackageProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceKotlinType
+                ?.asKotlinTypeDeclaration()
 
         // then
         assertSoftly(sut) {

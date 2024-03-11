@@ -13,7 +13,7 @@ class KoFunctionTypeDeclarationTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceFunctionType
+                ?.asFunctionTypeDeclaration()
 
         // then
         sut.toString() shouldBeEqualTo "() -> Unit"
@@ -27,7 +27,7 @@ class KoFunctionTypeDeclarationTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceFunctionType
+                ?.asFunctionTypeDeclaration()
 
         // then
         sut?.parameterTypes shouldBeEqualTo emptyList()
@@ -41,7 +41,7 @@ class KoFunctionTypeDeclarationTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceFunctionType
+                ?.asFunctionTypeDeclaration()
 
         // then
         sut?.parameterTypes?.map { it.type.name } shouldBeEqualTo listOf("String")
@@ -55,7 +55,7 @@ class KoFunctionTypeDeclarationTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceFunctionType
+                ?.asFunctionTypeDeclaration()
 
         // then
         sut?.parameterTypes?.map { it.type.name } shouldBeEqualTo listOf("String", "List<Int>")
@@ -69,7 +69,7 @@ class KoFunctionTypeDeclarationTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceFunctionType
+                ?.asFunctionTypeDeclaration()
 
         // then
         sut?.returnType?.name shouldBeEqualTo "Unit"
@@ -83,7 +83,7 @@ class KoFunctionTypeDeclarationTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceFunctionType
+                ?.asFunctionTypeDeclaration()
 
         // then
         sut?.returnType?.name shouldBeEqualTo "List<String>"
@@ -97,7 +97,7 @@ class KoFunctionTypeDeclarationTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceFunctionType
+                ?.asFunctionTypeDeclaration()
 
         // then
         sut?.returnType?.name shouldBeEqualTo "SampleClass"

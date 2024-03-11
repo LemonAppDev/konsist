@@ -20,7 +20,7 @@ class KoFunctionTypeDeclarationForKoPathProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceFunctionType
+                ?.asFunctionTypeDeclaration()
 
         // then
         assertSoftly(sut?.path) {
@@ -41,7 +41,7 @@ class KoFunctionTypeDeclarationForKoPathProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceFunctionType
+                ?.asFunctionTypeDeclaration()
 
         // then
         sut
@@ -64,7 +64,7 @@ class KoFunctionTypeDeclarationForKoPathProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceFunctionType
+                ?.asFunctionTypeDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -87,7 +87,7 @@ class KoFunctionTypeDeclarationForKoPathProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceFunctionType
+                ?.asFunctionTypeDeclaration()
 
         // then
         assertSoftly(sut) {

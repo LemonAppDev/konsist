@@ -13,7 +13,7 @@ class KoKotlinTypeDeclarationForKoPackageProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceKotlinType
+                ?.asKotlinTypeDeclaration()
 
         // then
         sut?.packagee?.fullyQualifiedName shouldBeEqualTo "kotlin"
@@ -27,7 +27,7 @@ class KoKotlinTypeDeclarationForKoPackageProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceKotlinType
+                ?.asKotlinTypeDeclaration()
 
         // then
         sut?.packagee?.fullyQualifiedName shouldBeEqualTo "kotlin"
@@ -41,7 +41,7 @@ class KoKotlinTypeDeclarationForKoPackageProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceKotlinType
+                ?.asKotlinTypeDeclaration()
 
         // then
         sut?.packagee?.fullyQualifiedName shouldBeEqualTo "kotlin.collections"
@@ -55,7 +55,7 @@ class KoKotlinTypeDeclarationForKoPackageProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceKotlinType
+                ?.asKotlinTypeDeclaration()
 
         // then
         sut?.packagee?.fullyQualifiedName shouldBeEqualTo "kotlin.collections"
