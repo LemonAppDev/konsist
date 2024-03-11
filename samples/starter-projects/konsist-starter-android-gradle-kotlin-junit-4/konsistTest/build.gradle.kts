@@ -20,19 +20,18 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        sourceCompatibility = JavaVersion.VERSION_1_8
-    }
-
     kotlin {
         jvmToolchain(8)
     }
 }
 
 dependencies {
+    // Add Appcompat dependency (to be able to access Android specific classes in Konsit tests)
     implementation("androidx.appcompat:appcompat:1.6.1")
 
+    // Add JUnit dependency
     testImplementation("junit:junit:4.13.2")
-    testImplementation("com.lemonappdev:konsist:0.13.0")
+
+    // Add Konsist dependency
+    testImplementation("com.lemonappdev:konsist:0.14.0")
 }
