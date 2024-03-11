@@ -9,11 +9,12 @@ class KoEnumConstantDeclarationForKoContainingDeclarationProviderTest {
     @Test
     fun `enum-const-containing-declaration`() {
         // given
-        val sut = getSnippetFile("enum-const-containing-declaration")
-            .classes()
-            .first()
-            .enumConstants
-            .first()
+        val sut =
+            getSnippetFile("enum-const-containing-declaration")
+                .classes()
+                .first()
+                .enumConstants
+                .first()
 
         // then
         (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "SampleClass"

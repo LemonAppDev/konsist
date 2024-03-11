@@ -1,5 +1,4 @@
-
-import enu.ReleaseTarget
+import config.ReleaseTarget
 import ext.getFullKonsistVersion
 import ext.getLocalPropertyOrGradleProperty
 import ext.getReleaseTarget
@@ -17,7 +16,9 @@ publishing {
 
     publications {
         create<MavenPublication>(konsistPublicationName) {
-            val konsistDescription = "A Kotlin architecture test library. Define and guard code base consistency using Kotlin."
+            val konsistDescription =
+                "Konsist is a powerful static code analyzer tailored for Kotlin, " +
+                    "focused on ensuring codebase consistency and adherence to coding conventions."
 
             groupId = "com.lemonappdev"
             artifactId = "konsist"

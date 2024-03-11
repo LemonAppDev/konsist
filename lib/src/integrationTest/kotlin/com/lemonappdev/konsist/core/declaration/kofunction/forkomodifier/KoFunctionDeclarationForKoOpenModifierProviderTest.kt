@@ -8,9 +8,10 @@ class KoFunctionDeclarationForKoOpenModifierProviderTest {
     @Test
     fun `function-without-open-modifier`() {
         // given
-        val sut = getSnippetFile("function-without-open-modifier")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-without-open-modifier")
+                .functions()
+                .first()
 
         // then
         sut.hasOpenModifier shouldBeEqualTo false
@@ -19,9 +20,10 @@ class KoFunctionDeclarationForKoOpenModifierProviderTest {
     @Test
     fun `function-with-open-modifier`() {
         // given
-        val sut = getSnippetFile("function-with-open-modifier")
-            .functions(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("function-with-open-modifier")
+                .functions(includeNested = true)
+                .first()
 
         // then
         sut.hasOpenModifier shouldBeEqualTo true

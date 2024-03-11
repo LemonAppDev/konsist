@@ -1,0 +1,7 @@
+package com.samplepackage
+
+class SampleClass {
+    init {
+        val sampleVariable = ""
+    }
+}

@@ -1,11 +1,13 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoClassProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoExternalParentProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoInitBlockProvider
@@ -36,6 +38,8 @@ import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvide
  */
 interface KoObjectDeclaration :
     KoBaseDeclaration,
+    KoChildDeclaration,
+    KoBaseTypeDeclaration,
     KoBaseProvider,
     KoAnnotationProvider,
     KoClassProvider,
@@ -55,6 +59,7 @@ interface KoObjectDeclaration :
     KoParentProvider,
     KoParentClassProvider,
     KoParentInterfaceProvider,
+    KoExternalParentProvider,
     KoPathProvider,
     KoModuleProvider,
     KoSourceSetProvider,

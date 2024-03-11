@@ -3,8 +3,8 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
@@ -12,6 +12,7 @@ import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoExternalParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoInitBlockProviderCore
 import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
@@ -45,39 +46,42 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoObjectDeclarationCore(
     private val ktObjectDeclaration: KtObjectDeclaration,
-    override val containingDeclaration: KoContainingDeclarationProvider,
+    override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoObjectDeclaration,
-    KoBaseProviderCore,
-    KoAnnotationProviderCore,
-    KoClassProviderCore,
-    KoContainingFileProviderCore,
-    KoDeclarationFullyQualifiedNameProviderCore,
-    KoDeclarationProviderCore,
-    KoFunctionProviderCore,
-    KoInitBlockProviderCore,
-    KoInterfaceProviderCore,
-    KoKDocProviderCore,
-    KoLocationProviderCore,
-    KoModifierProviderCore,
-    KoNameProviderCore,
-    KoObjectProviderCore,
-    KoPackageDeclarationProviderCore,
-    KoContainingDeclarationProviderCore,
-    KoParentProviderCore,
-    KoParentClassProviderCore,
-    KoParentInterfaceProviderCore,
-    KoPathProviderCore,
-    KoModuleProviderCore,
-    KoSourceSetProviderCore,
-    KoPropertyProviderCore,
-    KoRepresentsTypeProviderCore,
-    KoResideInPackageProviderCore,
-    KoTextProviderCore,
-    KoTopLevelProviderCore,
-    KoVisibilityModifierProviderCore,
-    KoDataModifierProviderCore,
-    KoCompanionModifierProviderCore {
+        KoChildDeclarationCore,
+        KoBaseTypeDeclarationCore,
+        KoBaseProviderCore,
+        KoAnnotationProviderCore,
+        KoClassProviderCore,
+        KoContainingFileProviderCore,
+        KoDeclarationFullyQualifiedNameProviderCore,
+        KoDeclarationProviderCore,
+        KoFunctionProviderCore,
+        KoInitBlockProviderCore,
+        KoInterfaceProviderCore,
+        KoKDocProviderCore,
+        KoLocationProviderCore,
+        KoModifierProviderCore,
+        KoNameProviderCore,
+        KoObjectProviderCore,
+        KoPackageDeclarationProviderCore,
+        KoContainingDeclarationProviderCore,
+        KoParentProviderCore,
+        KoParentClassProviderCore,
+        KoParentInterfaceProviderCore,
+        KoExternalParentProviderCore,
+        KoPathProviderCore,
+        KoModuleProviderCore,
+        KoSourceSetProviderCore,
+        KoPropertyProviderCore,
+        KoRepresentsTypeProviderCore,
+        KoResideInPackageProviderCore,
+        KoTextProviderCore,
+        KoTopLevelProviderCore,
+        KoVisibilityModifierProviderCore,
+        KoDataModifierProviderCore,
+        KoCompanionModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktObjectDeclaration }
 
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktObjectDeclaration }
@@ -101,8 +105,9 @@ internal class KoObjectDeclarationCore(
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
-        .getKoDeclarations(ktObjectDeclaration, includeNested, includeLocal, this)
+    ): List<KoBaseDeclaration> =
+        KoDeclarationProviderCoreUtil
+            .getKoDeclarations(ktObjectDeclaration, includeNested, includeLocal, this)
 
     override fun toString(): String = name
 
@@ -111,7 +116,7 @@ internal class KoObjectDeclarationCore(
 
         internal fun getInstance(
             ktObjectDeclaration: KtObjectDeclaration,
-            containingDeclaration: KoContainingDeclarationProvider,
+            containingDeclaration: KoBaseDeclaration,
         ): KoObjectDeclaration =
             cache.getOrCreateInstance(ktObjectDeclaration, containingDeclaration) {
                 KoObjectDeclarationCore(

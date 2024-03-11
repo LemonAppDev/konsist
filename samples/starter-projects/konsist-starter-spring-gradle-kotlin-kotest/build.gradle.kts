@@ -1,8 +1,8 @@
 plugins {
-    id("org.springframework.boot") version "3.1.4"
-    id("io.spring.dependency-management") version "1.1.3"
-    kotlin("jvm") version "1.9.10"
-    kotlin("plugin.spring") version "1.9.10"
+    id("org.springframework.boot") version "3.2.2"
+    id("io.spring.dependency-management") version "1.1.4"
+    kotlin("jvm") version "1.9.23"
+    kotlin("plugin.spring") version "1.9.23"
     `jvm-test-suite`
 }
 
@@ -25,7 +25,12 @@ dependencies {
 }
 
 kotlin {
-    jvmToolchain(19)
+    jvmToolchain(21)
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 tasks.withType<Test> {
@@ -42,8 +47,8 @@ testing {
                 // Add Konsist dependency
                 implementation("com.lemonappdev:konsist:0.13.0")
 
-                // Add KoTest dependency
-                implementation("io.kotest:kotest-runner-junit5-jvm:5.7.2")
+                // Add Kotest dependency
+                implementation("io.kotest:kotest-runner-junit5-jvm:5.8.1")
             }
         }
     }

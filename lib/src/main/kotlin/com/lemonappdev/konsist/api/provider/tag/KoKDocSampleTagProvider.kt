@@ -18,7 +18,7 @@ interface KoKDocSampleTagProvider : KoBaseProvider {
     val numSampleTags: Int
 
     /**
-     * Whatever the declaration has sample tags.
+     * Determines whatever the declaration has sample tags.
      */
     val hasSampleTags: Boolean
 }

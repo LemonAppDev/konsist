@@ -12,11 +12,12 @@ class KoArgumentDeclarationForKoPathProviderTest {
     @Test
     fun `argument-in-enum-const-file-path`() {
         // given
-        val sut = getSnippetFile("argument-in-enum-const-file-path")
-            .classes()
-            .enumConstants
-            .arguments
-            .first()
+        val sut =
+            getSnippetFile("argument-in-enum-const-file-path")
+                .classes()
+                .enumConstants
+                .arguments
+                .first()
 
         // then
         assertSoftly(sut.path) {
@@ -28,11 +29,12 @@ class KoArgumentDeclarationForKoPathProviderTest {
     @Test
     fun `argument-in-enum-const-project-file-path`() {
         // given
-        val sut = getSnippetFile("argument-in-enum-const-project-file-path")
-            .classes()
-            .enumConstants
-            .arguments
-            .first()
+        val sut =
+            getSnippetFile("argument-in-enum-const-project-file-path")
+                .classes()
+                .enumConstants
+                .arguments
+                .first()
 
         // then
         sut
@@ -46,11 +48,12 @@ class KoArgumentDeclarationForKoPathProviderTest {
     @Test
     fun `argument-in-enum-const-reside-in-file-path`() {
         // given
-        val sut = getSnippetFile("argument-in-enum-const-reside-in-file-path")
-            .classes()
-            .enumConstants
-            .arguments
-            .first()
+        val sut =
+            getSnippetFile("argument-in-enum-const-reside-in-file-path")
+                .classes()
+                .enumConstants
+                .arguments
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -64,11 +67,12 @@ class KoArgumentDeclarationForKoPathProviderTest {
     @Test
     fun `argument-in-enum-const-reside-in-project-file-path`() {
         // given
-        val sut = getSnippetFile("argument-in-enum-const-reside-in-project-file-path")
-            .classes()
-            .enumConstants
-            .arguments
-            .first()
+        val sut =
+            getSnippetFile("argument-in-enum-const-reside-in-project-file-path")
+                .classes()
+                .enumConstants
+                .arguments
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -82,11 +86,12 @@ class KoArgumentDeclarationForKoPathProviderTest {
     @Test
     fun `argument-in-annotation-file-path`() {
         // given
-        val sut = getSnippetFile("argument-in-annotation-file-path")
-            .functions()
-            .annotations
-            .arguments
-            .first()
+        val sut =
+            getSnippetFile("argument-in-annotation-file-path")
+                .functions()
+                .annotations
+                .arguments
+                .first()
 
         // then
         assertSoftly(sut.path) {
@@ -98,11 +103,12 @@ class KoArgumentDeclarationForKoPathProviderTest {
     @Test
     fun `argument-in-annotation-project-file-path`() {
         // given
-        val sut = getSnippetFile("argument-in-annotation-project-file-path")
-            .functions()
-            .annotations
-            .arguments
-            .first()
+        val sut =
+            getSnippetFile("argument-in-annotation-project-file-path")
+                .functions()
+                .annotations
+                .arguments
+                .first()
 
         // then
         sut
@@ -116,11 +122,12 @@ class KoArgumentDeclarationForKoPathProviderTest {
     @Test
     fun `argument-in-annotation-reside-in-file-path`() {
         // given
-        val sut = getSnippetFile("argument-in-annotation-reside-in-file-path")
-            .functions()
-            .annotations
-            .arguments
-            .first()
+        val sut =
+            getSnippetFile("argument-in-annotation-reside-in-file-path")
+                .functions()
+                .annotations
+                .arguments
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -134,11 +141,12 @@ class KoArgumentDeclarationForKoPathProviderTest {
     @Test
     fun `argument-in-annotation-reside-in-project-file-path`() {
         // given
-        val sut = getSnippetFile("argument-in-annotation-reside-in-project-file-path")
-            .functions()
-            .annotations
-            .arguments
-            .first()
+        val sut =
+            getSnippetFile("argument-in-annotation-reside-in-project-file-path")
+                .functions()
+                .annotations
+                .arguments
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -149,6 +157,5 @@ class KoArgumentDeclarationForKoPathProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koargument/snippet/forkopathprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koargument/snippet/forkopathprovider/", fileName)
 }

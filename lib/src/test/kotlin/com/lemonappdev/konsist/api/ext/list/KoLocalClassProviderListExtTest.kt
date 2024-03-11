@@ -14,15 +14,18 @@ class KoLocalClassProviderListExtTest {
         val localClass1: KoClassDeclaration = mockk()
         val localClass2: KoClassDeclaration = mockk()
         val localClass3: KoClassDeclaration = mockk()
-        val declaration1: KoLocalClassProvider = mockk {
-            every { localClasses } returns listOf(localClass1, localClass2)
-        }
-        val declaration2: KoLocalClassProvider = mockk {
-            every { localClasses } returns listOf(localClass3)
-        }
-        val declaration3: KoLocalClassProvider = mockk {
-            every { localClasses } returns emptyList()
-        }
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { localClasses } returns listOf(localClass1, localClass2)
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { localClasses } returns listOf(localClass3)
+            }
+        val declaration3: KoLocalClassProvider =
+            mockk {
+                every { localClasses } returns emptyList()
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -35,12 +38,14 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withLocalClasses() returns declaration with any class`() {
         // given
-        val declaration1: KoLocalClassProvider = mockk {
-            every { hasLocalClasses() } returns true
-        }
-        val declaration2: KoLocalClassProvider = mockk {
-            every { hasLocalClasses() } returns false
-        }
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClasses() } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClasses() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -53,12 +58,14 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withoutLocalClasses() returns declaration without any class`() {
         // given
-        val declaration1: KoLocalClassProvider = mockk {
-            every { hasLocalClasses() } returns true
-        }
-        val declaration2: KoLocalClassProvider = mockk {
-            every { hasLocalClasses() } returns false
-        }
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClasses() } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClasses() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -72,12 +79,14 @@ class KoLocalClassProviderListExtTest {
     fun `withLocalClassNamed(name) returns declaration with given class`() {
         // given
         val name = "SampleName"
-        val declaration1: KoLocalClassProvider = mockk {
-            every { hasLocalClassWithName(name) } returns true
-        }
-        val declaration2: KoLocalClassProvider = mockk {
-            every { hasLocalClassWithName(name) } returns false
-        }
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassWithName(name) } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassWithName(name) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -92,12 +101,14 @@ class KoLocalClassProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoLocalClassProvider = mockk {
-            every { hasLocalClassWithName(name1, name2) } returns true
-        }
-        val declaration2: KoLocalClassProvider = mockk {
-            every { hasLocalClassWithName(name1, name2) } returns false
-        }
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassWithName(name1, name2) } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassWithName(name1, name2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -111,12 +122,14 @@ class KoLocalClassProviderListExtTest {
     fun `withoutLocalClassNamed(name) returns declaration without given class`() {
         // given
         val name = "SampleName"
-        val declaration1: KoLocalClassProvider = mockk {
-            every { hasLocalClassWithName(name) } returns true
-        }
-        val declaration2: KoLocalClassProvider = mockk {
-            every { hasLocalClassWithName(name) } returns false
-        }
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassWithName(name) } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassWithName(name) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -131,12 +144,14 @@ class KoLocalClassProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoLocalClassProvider = mockk {
-            every { hasLocalClassWithName(name1, name2) } returns true
-        }
-        val declaration2: KoLocalClassProvider = mockk {
-            every { hasLocalClassWithName(name1, name2) } returns false
-        }
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassWithName(name1, name2) } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassWithName(name1, name2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -150,12 +165,14 @@ class KoLocalClassProviderListExtTest {
     fun `withAllLocalClassesNamed(name) returns declaration with given class`() {
         // given
         val name = "SampleName"
-        val declaration1: KoLocalClassProvider = mockk {
-            every { hasLocalClassesWithAllNames(name) } returns true
-        }
-        val declaration2: KoLocalClassProvider = mockk {
-            every { hasLocalClassesWithAllNames(name) } returns false
-        }
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassesWithAllNames(name) } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassesWithAllNames(name) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -170,12 +187,14 @@ class KoLocalClassProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoLocalClassProvider = mockk {
-            every { hasLocalClassesWithAllNames(name1, name2) } returns true
-        }
-        val declaration2: KoLocalClassProvider = mockk {
-            every { hasLocalClassesWithAllNames(name1, name2) } returns false
-        }
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassesWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassesWithAllNames(name1, name2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -189,12 +208,14 @@ class KoLocalClassProviderListExtTest {
     fun `withoutAllLocalClassesNamed(name) returns declaration without given class`() {
         // given
         val name = "SampleName"
-        val declaration1: KoLocalClassProvider = mockk {
-            every { hasLocalClassesWithAllNames(name) } returns true
-        }
-        val declaration2: KoLocalClassProvider = mockk {
-            every { hasLocalClassesWithAllNames(name) } returns false
-        }
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassesWithAllNames(name) } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassesWithAllNames(name) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -209,12 +230,14 @@ class KoLocalClassProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoLocalClassProvider = mockk {
-            every { hasLocalClassesWithAllNames(name1, name2) } returns true
-        }
-        val declaration2: KoLocalClassProvider = mockk {
-            every { hasLocalClassesWithAllNames(name1, name2) } returns false
-        }
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassesWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassesWithAllNames(name1, name2) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -229,12 +252,14 @@ class KoLocalClassProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoClassDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
-        val declaration1: KoLocalClassProvider = mockk {
-            every { hasLocalClass(predicate) } returns true
-        }
-        val declaration2: KoLocalClassProvider = mockk {
-            every { hasLocalClass(predicate) } returns false
-        }
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClass(predicate) } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClass(predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -249,12 +274,14 @@ class KoLocalClassProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoClassDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
-        val declaration1: KoLocalClassProvider = mockk {
-            every { hasLocalClass(predicate) } returns true
-        }
-        val declaration2: KoLocalClassProvider = mockk {
-            every { hasLocalClass(predicate) } returns false
-        }
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClass(predicate) } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClass(predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -269,12 +296,14 @@ class KoLocalClassProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoClassDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
-        val declaration1: KoLocalClassProvider = mockk {
-            every { hasAllLocalClasses(predicate) } returns true
-        }
-        val declaration2: KoLocalClassProvider = mockk {
-            every { hasAllLocalClasses(predicate) } returns false
-        }
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasAllLocalClasses(predicate) } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasAllLocalClasses(predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -289,12 +318,14 @@ class KoLocalClassProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoClassDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
-        val declaration1: KoLocalClassProvider = mockk {
-            every { hasAllLocalClasses(predicate) } returns true
-        }
-        val declaration2: KoLocalClassProvider = mockk {
-            every { hasAllLocalClasses(predicate) } returns false
-        }
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasAllLocalClasses(predicate) } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasAllLocalClasses(predicate) } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -310,21 +341,26 @@ class KoLocalClassProviderListExtTest {
         val suffix = "Name"
         val predicate: (List<KoClassDeclaration>) -> Boolean =
             { it.all { koClass -> koClass.hasNameEndingWith(suffix) } }
-        val class1: KoClassDeclaration = mockk {
-            every { hasNameEndingWith(suffix) } returns true
-        }
-        val class2: KoClassDeclaration = mockk {
-            every { hasNameEndingWith(suffix) } returns false
-        }
-        val declaration1: KoLocalClassProvider = mockk {
-            every { localClasses } returns listOf(class1)
-        }
-        val declaration2: KoLocalClassProvider = mockk {
-            every { localClasses } returns listOf(class2)
-        }
-        val declaration3: KoLocalClassProvider = mockk {
-            every { localClasses } returns emptyList()
-        }
+        val class1: KoClassDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns true
+            }
+        val class2: KoClassDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns false
+            }
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { localClasses } returns listOf(class1)
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { localClasses } returns listOf(class2)
+            }
+        val declaration3: KoLocalClassProvider =
+            mockk {
+                every { localClasses } returns emptyList()
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -340,21 +376,26 @@ class KoLocalClassProviderListExtTest {
         val suffix = "Name"
         val predicate: (List<KoClassDeclaration>) -> Boolean =
             { it.all { koClass -> koClass.hasNameEndingWith(suffix) } }
-        val class1: KoClassDeclaration = mockk {
-            every { hasNameEndingWith(suffix) } returns true
-        }
-        val class2: KoClassDeclaration = mockk {
-            every { hasNameEndingWith(suffix) } returns false
-        }
-        val declaration1: KoLocalClassProvider = mockk {
-            every { localClasses } returns listOf(class1)
-        }
-        val declaration2: KoLocalClassProvider = mockk {
-            every { localClasses } returns listOf(class2)
-        }
-        val declaration3: KoLocalClassProvider = mockk {
-            every { localClasses } returns emptyList()
-        }
+        val class1: KoClassDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns true
+            }
+        val class2: KoClassDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns false
+            }
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { localClasses } returns listOf(class1)
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { localClasses } returns listOf(class2)
+            }
+        val declaration3: KoLocalClassProvider =
+            mockk {
+                every { localClasses } returns emptyList()
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when

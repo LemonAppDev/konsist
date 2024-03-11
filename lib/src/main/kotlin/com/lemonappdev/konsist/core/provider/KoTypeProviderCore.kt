@@ -1,11 +1,15 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoTypeProvider
-import kotlin.reflect.KClass
+import com.lemonappdev.konsist.core.util.TypeUtil
 
-internal interface KoTypeProviderCore : KoTypeProvider, KoBaseProviderCore {
-    override fun hasType(predicate: (KoTypeDeclaration) -> Boolean): Boolean = predicate(type)
+internal interface KoTypeProviderCore :
+    KoTypeProvider,
+    KoNameProviderCore,
+    KoBaseProviderCore {
+    override val isKotlinBasicType: Boolean
+        get() = isKotlinType && TypeUtil.isKotlinBasicType(name)
 
-    override fun hasTypeOf(kClass: KClass<*>): Boolean = kClass.simpleName == type.name
+    override val isKotlinCollectionType: Boolean
+        get() = isKotlinType && TypeUtil.isKotlinCollectionTypes(name)
 }

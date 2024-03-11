@@ -13,13 +13,15 @@ import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoNullableTypeProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
-import com.lemonappdev.konsist.api.provider.KoPropertyTypeProvider
+import com.lemonappdev.konsist.api.provider.KoReadOnlyProvider
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import com.lemonappdev.konsist.api.provider.KoSetterProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
+import com.lemonappdev.konsist.api.provider.KoTacitTypeProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.api.provider.KoValueProvider
@@ -46,7 +48,7 @@ interface KoPropertyDeclaration :
     KoConstructorDefinedProvider,
     KoContainingFileProvider,
     KoDelegateProvider,
-    KoPropertyTypeProvider,
+    KoNullableTypeProvider,
     KoFullyQualifiedNameProvider,
     KoInitializerProvider,
     KoKDocProvider,
@@ -75,4 +77,6 @@ interface KoPropertyDeclaration :
     KoExpectModifierProvider,
     KoConstModifierProvider,
     KoGetterProvider,
-    KoSetterProvider
+    KoSetterProvider,
+    KoReadOnlyProvider,
+    KoTacitTypeProvider

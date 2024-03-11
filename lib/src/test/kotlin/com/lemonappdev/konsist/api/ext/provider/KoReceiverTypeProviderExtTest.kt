@@ -17,9 +17,10 @@ class KoReceiverTypeProviderExtTest {
     @Test
     fun `hasValidKDocReceiverTag() returns false when declaration not implement KoKDocProvider`() {
         // given
-        val declaration: KoReceiverTypeProvider = mockk {
-            every { receiverType } returns mockk()
-        }
+        val declaration: KoReceiverTypeProvider =
+            mockk {
+                every { receiverType } returns mockk()
+            }
 
         // when
         val sut = declaration.hasValidKDocReceiverTag()
@@ -31,10 +32,11 @@ class KoReceiverTypeProviderExtTest {
     @Test
     fun `hasValidKDocReceiverTag() calls hasTags method`() {
         // given
-        val declaration: SampleTestReceiverTypeDeclaration = mockk {
-            every { receiverType } returns mockk()
-            every { kDoc?.hasTags(KoKDocTag.RECEIVER) } returns true
-        }
+        val declaration: SampleTestReceiverTypeDeclaration =
+            mockk {
+                every { receiverType } returns mockk()
+                every { kDoc?.hasTags(KoKDocTag.RECEIVER) } returns true
+            }
 
         // when
         declaration.hasValidKDocReceiverTag()

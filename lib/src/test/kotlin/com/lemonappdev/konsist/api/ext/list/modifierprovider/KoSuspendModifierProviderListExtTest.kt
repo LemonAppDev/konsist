@@ -12,12 +12,14 @@ class KoSuspendModifierProviderListExtTest {
     @Test
     fun `withSuspendModifier() returns declaration with suspend modifier`() {
         // given
-        val declaration1: KoSuspendModifierProvider = mockk {
-            every { hasSuspendModifier } returns true
-        }
-        val declaration2: KoSuspendModifierProvider = mockk {
-            every { hasSuspendModifier } returns false
-        }
+        val declaration1: KoSuspendModifierProvider =
+            mockk {
+                every { hasSuspendModifier } returns true
+            }
+        val declaration2: KoSuspendModifierProvider =
+            mockk {
+                every { hasSuspendModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -30,12 +32,14 @@ class KoSuspendModifierProviderListExtTest {
     @Test
     fun `withoutSuspendModifier() returns declaration without suspend modifier`() {
         // given
-        val declaration1: KoSuspendModifierProvider = mockk {
-            every { hasSuspendModifier } returns true
-        }
-        val declaration2: KoSuspendModifierProvider = mockk {
-            every { hasSuspendModifier } returns false
-        }
+        val declaration1: KoSuspendModifierProvider =
+            mockk {
+                every { hasSuspendModifier } returns true
+            }
+        val declaration2: KoSuspendModifierProvider =
+            mockk {
+                every { hasSuspendModifier } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

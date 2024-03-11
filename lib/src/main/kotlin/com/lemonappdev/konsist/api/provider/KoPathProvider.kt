@@ -15,7 +15,7 @@ interface KoPathProvider : KoBaseProvider {
     val projectPath: String
 
     /**
-     * Whatever declaration reside in file path or file reside in path.
+     * Determines whatever declaration reside in file path or file reside in path.
      *
      * @param path the (file) path to check.
      * @param absolutePath Flag indicating whether the provided path is an absolute path.
@@ -23,5 +23,8 @@ interface KoPathProvider : KoBaseProvider {
      *                    If set to `false` (default), the `path` parameter represents a relative path.
      * @return `true` if the declaration resides in the specified (file) path, `false` otherwise.
      */
-    fun resideInPath(path: String, absolutePath: Boolean = false): Boolean
+    fun resideInPath(
+        path: String,
+        absolutePath: Boolean = false,
+    ): Boolean
 }

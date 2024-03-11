@@ -14,15 +14,18 @@ class KoKDocAuthorTagProviderListExtTest {
         val tag1: KoKDocTagDeclaration = mockk()
         val tag2: KoKDocTagDeclaration = mockk()
         val tag3: KoKDocTagDeclaration = mockk()
-        val declaration1: KoKDocAuthorTagProvider = mockk {
-            every { authorTags } returns listOf(tag1, tag2)
-        }
-        val declaration2: KoKDocAuthorTagProvider = mockk {
-            every { authorTags } returns listOf(tag3)
-        }
-        val declaration3: KoKDocAuthorTagProvider = mockk {
-            every { authorTags } returns emptyList()
-        }
+        val declaration1: KoKDocAuthorTagProvider =
+            mockk {
+                every { authorTags } returns listOf(tag1, tag2)
+            }
+        val declaration2: KoKDocAuthorTagProvider =
+            mockk {
+                every { authorTags } returns listOf(tag3)
+            }
+        val declaration3: KoKDocAuthorTagProvider =
+            mockk {
+                every { authorTags } returns emptyList()
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -35,12 +38,14 @@ class KoKDocAuthorTagProviderListExtTest {
     @Test
     fun `withAuthorTags() returns declaration with any tag`() {
         // given
-        val declaration1: KoKDocAuthorTagProvider = mockk {
-            every { hasAuthorTags } returns true
-        }
-        val declaration2: KoKDocAuthorTagProvider = mockk {
-            every { hasAuthorTags } returns false
-        }
+        val declaration1: KoKDocAuthorTagProvider =
+            mockk {
+                every { hasAuthorTags } returns true
+            }
+        val declaration2: KoKDocAuthorTagProvider =
+            mockk {
+                every { hasAuthorTags } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -53,12 +58,14 @@ class KoKDocAuthorTagProviderListExtTest {
     @Test
     fun `withoutAuthorTags() returns declaration with any tag`() {
         // given
-        val declaration1: KoKDocAuthorTagProvider = mockk {
-            every { hasAuthorTags } returns true
-        }
-        val declaration2: KoKDocAuthorTagProvider = mockk {
-            every { hasAuthorTags } returns false
-        }
+        val declaration1: KoKDocAuthorTagProvider =
+            mockk {
+                every { hasAuthorTags } returns true
+            }
+        val declaration2: KoKDocAuthorTagProvider =
+            mockk {
+                every { hasAuthorTags } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.SampleClassWithParameter
+
+val sampleProperty  = SampleClassWithParameter("some text")

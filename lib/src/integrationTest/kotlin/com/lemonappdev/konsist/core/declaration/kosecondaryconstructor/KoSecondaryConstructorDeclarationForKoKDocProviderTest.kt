@@ -10,11 +10,12 @@ class KoSecondaryConstructorDeclarationForKoKDocProviderTest {
     @Test
     fun `secondary-constructor-without-kdoc`() {
         // given
-        val sut = getSnippetFile("secondary-constructor-without-kdoc")
-            .classes()
-            .first()
-            .secondaryConstructors
-            .first()
+        val sut =
+            getSnippetFile("secondary-constructor-without-kdoc")
+                .classes()
+                .first()
+                .secondaryConstructors
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -26,11 +27,12 @@ class KoSecondaryConstructorDeclarationForKoKDocProviderTest {
     @Test
     fun `secondary-constructor-with-kdoc`() {
         // given
-        val sut = getSnippetFile("secondary-constructor-with-kdoc")
-            .classes()
-            .first()
-            .secondaryConstructors
-            .first()
+        val sut =
+            getSnippetFile("secondary-constructor-with-kdoc")
+                .classes()
+                .first()
+                .secondaryConstructors
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -42,11 +44,12 @@ class KoSecondaryConstructorDeclarationForKoKDocProviderTest {
     @Test
     fun `secondary-constructor-with-one-line-kdoc`() {
         // given
-        val sut = getSnippetFile("secondary-constructor-with-one-line-kdoc")
-            .classes()
-            .first()
-            .secondaryConstructors
-            .first()
+        val sut =
+            getSnippetFile("secondary-constructor-with-one-line-kdoc")
+                .classes()
+                .first()
+                .secondaryConstructors
+                .first()
 
         // then
         assertSoftly(sut) {

@@ -13,9 +13,10 @@ class LayerTest {
         val sut = { Layer("Domain", "package") }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage """
+        sut shouldThrow KoPreconditionFailedException::class withMessage
+            """
             Layer Domain must be defined by package ending with '..'. Now: package .
-        """.trimIndent()
+            """.trimIndent()
     }
 
     @Test
@@ -24,9 +25,10 @@ class LayerTest {
         val sut = { Layer("Domain", "package..feature") }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage """
+        sut shouldThrow KoPreconditionFailedException::class withMessage
+            """
             Layer Domain must be defined by package ending with '..'. Now: package..feature .
-        """.trimIndent()
+            """.trimIndent()
     }
 
     @Test
@@ -35,9 +37,10 @@ class LayerTest {
         val sut = { Layer("Domain", "package...") }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage """
+        sut shouldThrow KoPreconditionFailedException::class withMessage
+            """
             Layer Domain must be defined by package ending with '..'. Now: package... .
-        """.trimIndent()
+            """.trimIndent()
     }
 
     @Test
@@ -46,9 +49,10 @@ class LayerTest {
         val sut = { Layer("Domain", "first.package") }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage """
+        sut shouldThrow KoPreconditionFailedException::class withMessage
+            """
             Layer Domain must be defined by package ending with '..'. Now: first.package .
-        """.trimIndent()
+            """.trimIndent()
     }
 
     @Test
@@ -57,9 +61,46 @@ class LayerTest {
         val sut = { Layer("Domain", "first.second..third_p.package....") }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage """
+        sut shouldThrow KoPreconditionFailedException::class withMessage
+            """
             Layer Domain must be defined by package ending with '..'. Now: first.second..third_p.package.... .
-        """.trimIndent()
+            """.trimIndent()
+    }
+
+    @Test
+    fun `throws an exception when layer is defined by package starting with one dot`() {
+        // given
+        val sut = { Layer("Domain", ".first.second.package..") }
+
+        // then
+        sut shouldThrow KoPreconditionFailedException::class withMessage
+            """
+            Layer Domain cannot be defined by a package starting with a single dot. Now: .first.second.package.. .
+            """.trimIndent()
+    }
+
+    @Test
+    fun `throws an exception when layer is defined by package containing three dots`() {
+        // given
+        val sut = { Layer("Domain", "first...second.package..") }
+
+        // then
+        sut shouldThrow KoPreconditionFailedException::class withMessage
+            """
+            Layer Domain cannot be defined by a package containing more than two dots in one place. Now: first...second.package.. .
+            """.trimIndent()
+    }
+
+    @Test
+    fun `throws an exception when layer is defined by package containing four dots`() {
+        // given
+        val sut = { Layer("Domain", "first....package..") }
+
+        // then
+        sut shouldThrow KoPreconditionFailedException::class withMessage
+            """
+            Layer Domain cannot be defined by a package containing more than two dots in one place. Now: first....package.. .
+            """.trimIndent()
     }
 
     @Test
@@ -68,9 +109,7 @@ class LayerTest {
         val sut = { Layer("Domain", "first.second.package..") }
 
         // then
-        sut shouldNotThrow KoPreconditionFailedException::class withMessage """
-            Layer Domain must be defined by package ending with '..'. Now: first.second.third_p.package.... .
-        """.trimIndent()
+        sut shouldNotThrow KoPreconditionFailedException::class
     }
 
     @Test
@@ -79,19 +118,33 @@ class LayerTest {
         val sut = { Layer("Domain", "first.second..package..") }
 
         // then
-        sut shouldNotThrow KoPreconditionFailedException::class withMessage """
-            Layer Domain must be defined by package ending with '..'. Now: first.second.third_p.package.... .
-        """.trimIndent()
+        sut shouldNotThrow KoPreconditionFailedException::class
     }
 
     @Test
-    fun `throws an exception when the package ends with two dots and there more than two dots used as wildcard`() {
+    fun `do not throw an exception when the package starts and ends with two dots`() {
+        // given
+        val sut = { Layer("Domain", "..package..") }
+
+        // then
+        sut shouldNotThrow KoPreconditionFailedException::class
+    }
+
+    @Test
+    fun `do not throw an exception when the package contains at the center and at the end two dots`() {
         // given
         val sut = { Layer("Domain", "first.second..package..feature1..") }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Layer Domain must be defined by package ending with '..'. Now: first.second..package..feature1.. .
-        """.trimIndent()
+        sut shouldNotThrow KoPreconditionFailedException::class
+    }
+
+    @Test
+    fun `do not throw an exception when the package contains at the center, at the start and at the end two dots`() {
+        // given
+        val sut = { Layer("Domain", "..package..feature..") }
+
+        // then
+        sut shouldNotThrow KoPreconditionFailedException::class
     }
 }

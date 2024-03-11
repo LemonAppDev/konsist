@@ -9,11 +9,12 @@ class KoConstructorDeclarationForKoParametersProviderTest {
     @Test
     fun `constructor-contains-no-parameters`() {
         // given
-        val sut = getSnippetFile("constructor-contains-no-parameters")
-            .classes()
-            .first()
-            .constructors
-            .first()
+        val sut =
+            getSnippetFile("constructor-contains-no-parameters")
+                .classes()
+                .first()
+                .constructors
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -31,11 +32,12 @@ class KoConstructorDeclarationForKoParametersProviderTest {
     @Test
     fun `constructor-contains-one-parameter`() {
         // given
-        val sut = getSnippetFile("constructor-contains-one-parameter")
-            .classes()
-            .first()
-            .constructors
-            .first()
+        val sut =
+            getSnippetFile("constructor-contains-one-parameter")
+                .classes()
+                .first()
+                .constructors
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -57,18 +59,19 @@ class KoConstructorDeclarationForKoParametersProviderTest {
     @Test
     fun `constructor-contains-two-parameters`() {
         // given
-        val sut = getSnippetFile("constructor-contains-two-parameters")
-            .classes()
-            .first()
-            .constructors
-            .first()
+        val sut =
+            getSnippetFile("constructor-contains-two-parameters")
+                .classes()
+                .first()
+                .constructors
+                .first()
 
         // then
         assertSoftly(sut) {
             parameters.size shouldBeEqualTo 2
             numParameters shouldBeEqualTo 2
             countParameters { it.hasNameStartingWith("sample") } shouldBeEqualTo 2
-            countParameters { it.hasTypeOf(Int::class) } shouldBeEqualTo 1
+            countParameters { param -> param.hasType { it.name == "Int" } } shouldBeEqualTo 1
             hasParameters() shouldBeEqualTo true
             hasParameterWithName("sampleParameter1") shouldBeEqualTo true
             hasParameterWithName("otherParameter") shouldBeEqualTo false
@@ -77,20 +80,21 @@ class KoConstructorDeclarationForKoParametersProviderTest {
             hasParametersWithAllNames("sampleParameter1", "sampleParameter2") shouldBeEqualTo true
             hasParametersWithAllNames("sampleParameter1", "otherParameter") shouldBeEqualTo false
             hasParameter { it.hasNameStartingWith("sample") } shouldBeEqualTo true
-            hasParameter { it.hasTypeOf(Int::class) } shouldBeEqualTo true
+            hasParameter { param -> param.hasType { it.name == "Int" } } shouldBeEqualTo true
             hasAllParameters { it.hasNameStartingWith("sample") } shouldBeEqualTo true
-            hasAllParameters { it.hasTypeOf(Int::class) } shouldBeEqualTo false
+            hasAllParameters { param -> param.hasType { it.name == "Int" } } shouldBeEqualTo false
         }
     }
 
     @Test
     fun `constructor-has-parameter`() {
         // given
-        val sut = getSnippetFile("constructor-has-parameter")
-            .classes()
-            .first()
-            .constructors
-            .first()
+        val sut =
+            getSnippetFile("constructor-has-parameter")
+                .classes()
+                .first()
+                .constructors
+                .first()
 
         // then
         assertSoftly(sut) {

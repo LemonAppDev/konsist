@@ -8,9 +8,10 @@ class KoPropertyDeclarationForKoLateinitModifierProviderTest {
     @Test
     fun `property-has-no-lateinit-modifier`() {
         // given
-        val sut = getSnippetFile("property-has-no-lateinit-modifier")
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-has-no-lateinit-modifier")
+                .properties()
+                .first()
 
         // then
         sut.hasLateinitModifier shouldBeEqualTo false
@@ -19,9 +20,10 @@ class KoPropertyDeclarationForKoLateinitModifierProviderTest {
     @Test
     fun `property-has-lateinit-modifier`() {
         // given
-        val sut = getSnippetFile("property-has-lateinit-modifier")
-            .properties()
-            .first()
+        val sut =
+            getSnippetFile("property-has-lateinit-modifier")
+                .properties()
+                .first()
 
         // then
         sut.hasLateinitModifier shouldBeEqualTo true

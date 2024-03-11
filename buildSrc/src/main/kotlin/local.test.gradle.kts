@@ -1,4 +1,5 @@
 import com.adarshr.gradle.testlogger.theme.ThemeType
+import gradle.kotlin.dsl.accessors._3ffb5dd0950846471e2c972470f8fb4d.testlogger
 
 plugins {
     id("org.gradle.jvm-test-suite")

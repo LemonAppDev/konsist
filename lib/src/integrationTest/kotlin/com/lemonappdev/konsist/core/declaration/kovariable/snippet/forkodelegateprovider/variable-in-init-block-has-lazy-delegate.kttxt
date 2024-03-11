@@ -1,0 +1,5 @@
+class SampleClass {
+    init {
+        val sampleProperty: String by lazy { "" }
+    }
+}

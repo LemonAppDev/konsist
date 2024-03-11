@@ -10,10 +10,11 @@ class KoKDocDeclarationForKoLocationProviderTest {
     @Test
     fun `kdoc-location-with-single-digit`() {
         // given
-        val sut = getSnippetFile("kdoc-location-with-single-digit")
-            .classes()
-            .kDocs
-            .first()
+        val sut =
+            getSnippetFile("kdoc-location-with-single-digit")
+                .classes()
+                .kDocs
+                .first()
 
         // then
         sut.location shouldBeEqualTo "${sut.path}:3:1"
@@ -22,16 +23,18 @@ class KoKDocDeclarationForKoLocationProviderTest {
     @Test
     fun `kdoc-location-with-text`() {
         // given
-        val projectPath = getSnippetFile("kdoc-location-with-text")
-            .classes()
-            .kDocs
-            .first()
-            .projectPath
+        val projectPath =
+            getSnippetFile("kdoc-location-with-text")
+                .classes()
+                .kDocs
+                .first()
+                .projectPath
 
-        val sut = getSnippetFile("kdoc-location-with-text")
-            .classes()
-            .kDocs
-            .first()
+        val sut =
+            getSnippetFile("kdoc-location-with-text")
+                .classes()
+                .kDocs
+                .first()
 
         // then
         val declaration = "Declaration:\nThis is a sample class that demonstrates the usage of KDoc."
@@ -42,6 +45,5 @@ class KoKDocDeclarationForKoLocationProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kokdoc/snippet/forkolocationprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kokdoc/snippet/forkolocationprovider/", fileName)
 }

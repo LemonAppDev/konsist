@@ -10,9 +10,10 @@ class KoObjectDeclarationForKoInitBlockProviderTest {
     @Test
     fun `object-without-init-blocks`() {
         // given
-        val sut = getSnippetFile("object-without-init-blocks")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-without-init-blocks")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -29,9 +30,10 @@ class KoObjectDeclarationForKoInitBlockProviderTest {
     @Test
     fun `object-with-one-init-block`() {
         // given
-        val sut = getSnippetFile("object-with-one-init-block")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-with-one-init-block")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -50,9 +52,10 @@ class KoObjectDeclarationForKoInitBlockProviderTest {
     @Test
     fun `object-with-two-init-blocks`() {
         // given
-        val sut = getSnippetFile("object-with-two-init-blocks")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-with-two-init-blocks")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -69,6 +72,5 @@ class KoObjectDeclarationForKoInitBlockProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koobject/snippet/forkoinitblockprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/forkoinitblockprovider/", fileName)
 }

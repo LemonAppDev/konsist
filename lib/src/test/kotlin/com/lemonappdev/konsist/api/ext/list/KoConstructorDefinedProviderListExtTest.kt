@@ -10,12 +10,14 @@ class KoConstructorDefinedProviderListExtTest {
     @Test
     fun `withConstructorDefined() returns declaration defined within constructor`() {
         // given
-        val declaration1: KoConstructorDefinedProvider = mockk {
-            every { isConstructorDefined } returns true
-        }
-        val declaration2: KoConstructorDefinedProvider = mockk {
-            every { isConstructorDefined } returns false
-        }
+        val declaration1: KoConstructorDefinedProvider =
+            mockk {
+                every { isConstructorDefined } returns true
+            }
+        val declaration2: KoConstructorDefinedProvider =
+            mockk {
+                every { isConstructorDefined } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -28,12 +30,14 @@ class KoConstructorDefinedProviderListExtTest {
     @Test
     fun `withoutConstructorDefined() returns declaration defined outside constructor`() {
         // given
-        val declaration1: KoConstructorDefinedProvider = mockk {
-            every { isConstructorDefined } returns true
-        }
-        val declaration2: KoConstructorDefinedProvider = mockk {
-            every { isConstructorDefined } returns false
-        }
+        val declaration1: KoConstructorDefinedProvider =
+            mockk {
+                every { isConstructorDefined } returns true
+            }
+        val declaration2: KoConstructorDefinedProvider =
+            mockk {
+                every { isConstructorDefined } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

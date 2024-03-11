@@ -1,0 +1,8 @@
+import com.lemonappdev.konsist.testdata.SampleAnnotation
+
+enum class SampleClass {
+    SAMPLE_CONSTANT_1 {
+        @SampleAnnotation
+        val sampleVariable = ""
+    };
+}

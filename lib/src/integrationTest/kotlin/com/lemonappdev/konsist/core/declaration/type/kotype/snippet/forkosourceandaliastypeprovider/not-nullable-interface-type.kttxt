@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.SampleInterface
+
+val sampleProperty1: SampleInterface = SampleClass()
+
+class SampleClass: SampleInterface

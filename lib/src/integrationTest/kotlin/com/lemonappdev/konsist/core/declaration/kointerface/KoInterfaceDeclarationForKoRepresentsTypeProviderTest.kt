@@ -10,29 +10,33 @@ class KoInterfaceDeclarationForKoRepresentsTypeProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
     fun `interface-represents-type`(
-        type: String,
+        type: String?,
         value: Boolean,
     ) {
         // given
-        val sut = getSnippetFile("interface-represents-type")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-represents-type")
+                .interfaces()
+                .first()
 
         // then
         sut.representsType(type) shouldBeEqualTo value
     }
 
+    @Suppress("SameParameterValue")
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/kointerface/snippet/forkorepresentstypeprovider/", fileName)
 
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("SampleInterface", true),
-            arguments("OtherInterface", false),
-            arguments("com.lemonappdev.konsist.testdata.SampleInterface", true),
-            arguments("com.lemonappdev.konsist.testdata.OtherInterface", false),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("SampleInterface", true),
+                arguments("OtherInterface", false),
+                arguments("com.lemonappdev.konsist.testdata.SampleInterface", true),
+                arguments("com.lemonappdev.konsist.testdata.OtherInterface", false),
+                arguments(null, false),
+            )
     }
 }

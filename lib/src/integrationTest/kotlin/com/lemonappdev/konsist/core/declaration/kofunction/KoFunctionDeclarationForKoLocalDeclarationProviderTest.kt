@@ -10,9 +10,10 @@ class KoFunctionDeclarationForKoLocalDeclarationProviderTest {
     @Test
     fun `function-contains-no-local-declarations`() {
         // given
-        val sut = getSnippetFile("function-contains-no-local-declarations")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-contains-no-local-declarations")
+                .functions()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -29,9 +30,10 @@ class KoFunctionDeclarationForKoLocalDeclarationProviderTest {
     @Test
     fun `function-contains-local-declarations`() {
         // given
-        val sut = getSnippetFile("function-contains-local-declarations")
-            .functions()
-            .first()
+        val sut =
+            getSnippetFile("function-contains-local-declarations")
+                .functions()
+                .first()
 
         // then
         assertSoftly(sut) {

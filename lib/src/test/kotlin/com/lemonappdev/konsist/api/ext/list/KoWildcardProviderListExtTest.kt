@@ -10,12 +10,14 @@ class KoWildcardProviderListExtTest {
     @Test
     fun `withWildcard() returns import with wildcard`() {
         // given
-        val import1: KoWildcardProvider = mockk {
-            every { isWildcard } returns true
-        }
-        val import2: KoWildcardProvider = mockk {
-            every { isWildcard } returns false
-        }
+        val import1: KoWildcardProvider =
+            mockk {
+                every { isWildcard } returns true
+            }
+        val import2: KoWildcardProvider =
+            mockk {
+                every { isWildcard } returns false
+            }
         val imports = listOf(import1, import2)
 
         // when
@@ -28,12 +30,14 @@ class KoWildcardProviderListExtTest {
     @Test
     fun `withoutWildcard() returns import without wildcard`() {
         // given
-        val import1: KoWildcardProvider = mockk {
-            every { isWildcard } returns true
-        }
-        val import2: KoWildcardProvider = mockk {
-            every { isWildcard } returns false
-        }
+        val import1: KoWildcardProvider =
+            mockk {
+                every { isWildcard } returns true
+            }
+        val import2: KoWildcardProvider =
+            mockk {
+                every { isWildcard } returns false
+            }
         val imports = listOf(import1, import2)
 
         // when

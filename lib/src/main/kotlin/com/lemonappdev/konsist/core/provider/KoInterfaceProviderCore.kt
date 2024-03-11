@@ -5,20 +5,17 @@ import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 
 internal interface KoInterfaceProviderCore : KoInterfaceProvider, KoDeclarationProviderCore, KoBaseProviderCore {
-    override fun interfaces(
-        includeNested: Boolean,
-    ): List<KoInterfaceDeclaration> =
+    override fun interfaces(includeNested: Boolean): List<KoInterfaceDeclaration> =
         KoDeclarationProviderCoreUtil.getKoDeclarations(
             declarations(includeNested = false, includeLocal = false),
             includeNested,
         )
 
-    @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasInterface()"))
+    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasInterface()"))
     override fun containsInterface(
         includeNested: Boolean,
         predicate: (KoInterfaceDeclaration) -> Boolean,
-    ): Boolean =
-        interfaces(includeNested).any { predicate(it) }
+    ): Boolean = interfaces(includeNested).any { predicate(it) }
 
     override fun numInterfaces(includeNested: Boolean): Int = interfaces(includeNested).size
 
@@ -27,8 +24,7 @@ internal interface KoInterfaceProviderCore : KoInterfaceProvider, KoDeclarationP
         predicate: (KoInterfaceDeclaration) -> Boolean,
     ): Int = interfaces(includeNested).count { predicate(it) }
 
-    override fun hasInterfaces(includeNested: Boolean): Boolean =
-        interfaces(includeNested).isNotEmpty()
+    override fun hasInterfaces(includeNested: Boolean): Boolean = interfaces(includeNested).isNotEmpty()
 
     override fun hasInterfaceWithName(
         name: String,

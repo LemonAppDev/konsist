@@ -10,10 +10,11 @@ class KoInitBlockDeclarationTest {
     @Test
     fun `init-block-to-string`() {
         // given
-        val sut = getSnippetFile("init-block-to-string")
-            .classes()
-            .initBlocks
-            .first()
+        val sut =
+            getSnippetFile("init-block-to-string")
+                .classes()
+                .initBlocks
+                .first()
 
         // then
         assertSoftly(sut.toString()) {

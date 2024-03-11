@@ -8,12 +8,13 @@ class KoParameterDeclarationTest {
     @Test
     fun `parameter-to-string`() {
         // given
-        val sut = getSnippetFile("parameter-to-string")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
+        val sut =
+            getSnippetFile("parameter-to-string")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
         sut.toString() shouldBeEqualTo "sampleParameter"

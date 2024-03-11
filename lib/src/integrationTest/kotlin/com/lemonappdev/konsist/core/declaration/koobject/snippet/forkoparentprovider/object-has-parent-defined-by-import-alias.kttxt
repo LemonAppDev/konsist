@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.SampleParentInterface as AliasParent
+
+object SampleObject : AliasParent
+
+interface SampleParentInterface

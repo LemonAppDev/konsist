@@ -15,10 +15,11 @@ class KoKDocDeclarationForKoKDocThrowsTagProviderTest {
     @Test
     fun `kdoc-without-throws-tag`() {
         // given
-        val sut = getSnippetFile("kdoc-without-throws-tag")
-            .classes()
-            .first()
-            .kDoc
+        val sut =
+            getSnippetFile("kdoc-without-throws-tag")
+                .classes()
+                .first()
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -35,13 +36,14 @@ class KoKDocDeclarationForKoKDocThrowsTagProviderTest {
         declarationName: String,
     ) {
         // given
-        val sut = (
-            getSnippetFile(fileName)
-                .declarations(includeNested = true)
-                .filterIsInstance<KoNameProvider>()
-                .first { it.name == declarationName } as KoKDocProvider
+        val sut =
+            (
+                getSnippetFile(fileName)
+                    .declarations(includeNested = true)
+                    .filterIsInstance<KoNameProvider>()
+                    .first { it.name == declarationName } as KoKDocProvider
             )
-            .kDoc
+                .kDoc
 
         // then
         assertSoftly(sut) {
@@ -59,9 +61,10 @@ class KoKDocDeclarationForKoKDocThrowsTagProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("class-with-throws-tag", "SampleClass"),
-            arguments("function-with-throws-tag", "sampleMethod"),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("class-with-throws-tag", "SampleClass"),
+                arguments("function-with-throws-tag", "sampleMethod"),
+            )
     }
 }

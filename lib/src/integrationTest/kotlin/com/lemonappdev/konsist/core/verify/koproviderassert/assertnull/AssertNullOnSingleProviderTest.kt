@@ -2,9 +2,8 @@ package com.lemonappdev.konsist.core.verify.koproviderassert.assertnull
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
-import com.lemonappdev.konsist.api.ext.list.declarations
-import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoTypeProvider
 import com.lemonappdev.konsist.api.verify.assertNotNull
 import com.lemonappdev.konsist.api.verify.assertNull
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
@@ -16,10 +15,11 @@ class AssertNullOnSingleProviderTest {
     @Test
     fun `provider-assert-test-method-name-derived-from-junit-method-name`() {
         // given
-        val sut = getSnippetFile("provider-assert-test-method-name-derived-from-junit-method-name")
-            .declarations()
-            .filterIsInstance<KoNameProvider>()
-            .firstOrNull()
+        val sut =
+            getSnippetFile("provider-assert-test-method-name-derived-from-junit-method-name")
+                .declarations()
+                .filterIsInstance<KoNameProvider>()
+                .firstOrNull()
 
         // then
         try {
@@ -33,10 +33,11 @@ class AssertNullOnSingleProviderTest {
     @Test
     fun `provider-assert-test-method-name-derived-from-test-name-parameter`() {
         // given
-        val sut = getSnippetFile("provider-assert-test-method-name-derived-from-test-name-parameter")
-            .declarations()
-            .filterIsInstance<KoNameProvider>()
-            .firstOrNull()
+        val sut =
+            getSnippetFile("provider-assert-test-method-name-derived-from-test-name-parameter")
+                .declarations()
+                .filterIsInstance<KoNameProvider>()
+                .firstOrNull()
 
         // then
         try {
@@ -51,11 +52,12 @@ class AssertNullOnSingleProviderTest {
     fun `provider-assert-null-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("provider-assert-null-error-with-custom-message")
-            .declarations()
-            .filterNot { it is KoFileDeclaration }
-            .filterIsInstance<KoNameProvider>()
-            .firstOrNull()
+        val sut =
+            getSnippetFile("provider-assert-null-error-with-custom-message")
+                .declarations()
+                .filterNot { it is KoFileDeclaration }
+                .filterIsInstance<KoNameProvider>()
+                .firstOrNull()
 
         // then
         try {
@@ -73,11 +75,12 @@ class AssertNullOnSingleProviderTest {
     fun `provider-assert-not-null-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("provider-assert-not-null-error-with-custom-message")
-            .declarations()
-            .filterNot { it is KoFileDeclaration }
-            .filterIsInstance<KoKotlinTypeProvider>()
-            .firstOrNull()
+        val sut =
+            getSnippetFile("provider-assert-not-null-error-with-custom-message")
+                .declarations()
+                .filterNot { it is KoFileDeclaration }
+                .filterIsInstance<KoTypeProvider>()
+                .firstOrNull()
 
         // then
         try {
@@ -94,10 +97,11 @@ class AssertNullOnSingleProviderTest {
     @Test
     fun `assert-null-passes-when-item-has-null-value`() {
         // given
-        val sut = getSnippetFile("assert-null-passes-when-item-has-null-value")
-            .declarations()
-            .filterIsInstance<KoKotlinTypeProvider>()
-            .firstOrNull()
+        val sut =
+            getSnippetFile("assert-null-passes-when-item-has-null-value")
+                .declarations()
+                .filterIsInstance<KoTypeProvider>()
+                .firstOrNull()
 
         // then
         sut.assertNull()
@@ -106,10 +110,11 @@ class AssertNullOnSingleProviderTest {
     @Test
     fun `assert-null-fails-when-item-has-not-null-value`() {
         // given
-        val sut = getSnippetFile("assert-null-fails-when-item-has-not-null-value")
-            .declarations()
-            .filterIsInstance<KoNameProvider>()
-            .firstOrNull()
+        val sut =
+            getSnippetFile("assert-null-fails-when-item-has-not-null-value")
+                .declarations()
+                .filterIsInstance<KoNameProvider>()
+                .firstOrNull()
 
         // when
         val func = { sut.assertNull() }
@@ -121,10 +126,11 @@ class AssertNullOnSingleProviderTest {
     @Test
     fun `assert-not-null-fails-when-item-has-null-value`() {
         // given
-        val sut = getSnippetFile("assert-not-null-fails-when-item-has-null-value")
-            .declarations()
-            .filterIsInstance<KoKotlinTypeProvider>()
-            .firstOrNull()
+        val sut =
+            getSnippetFile("assert-not-null-fails-when-item-has-null-value")
+                .declarations()
+                .filterIsInstance<KoTypeProvider>()
+                .firstOrNull()
 
         // when
         val func = { sut.assertNotNull() }
@@ -136,10 +142,11 @@ class AssertNullOnSingleProviderTest {
     @Test
     fun `assert-not-null-passes-when-item-has-not-null-value`() {
         // given
-        val sut = getSnippetFile("assert-not-null-passes-when-item-has-not-null-value")
-            .declarations()
-            .filterIsInstance<KoNameProvider>()
-            .firstOrNull()
+        val sut =
+            getSnippetFile("assert-not-null-passes-when-item-has-not-null-value")
+                .declarations()
+                .filterIsInstance<KoNameProvider>()
+                .firstOrNull()
 
         // then
         sut.assertNotNull()

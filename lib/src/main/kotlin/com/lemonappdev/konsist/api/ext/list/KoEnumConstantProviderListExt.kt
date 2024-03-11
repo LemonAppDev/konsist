@@ -30,9 +30,13 @@ fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstants(): List<T> = filte
  * @param names The names of additional enum constants to include.
  * @return A list containing declarations with at least one of the specified enum constant(s).
  */
-fun <T : KoEnumConstantProvider> List<T>.withEnumConstantNamed(name: String, vararg names: String): List<T> = filter {
-    it.hasEnumConstantWithName(name, *names)
-}
+fun <T : KoEnumConstantProvider> List<T>.withEnumConstantNamed(
+    name: String,
+    vararg names: String,
+): List<T> =
+    filter {
+        it.hasEnumConstantWithName(name, *names)
+    }
 
 /**
  * List containing declarations without any of specified enum constants.
@@ -41,8 +45,10 @@ fun <T : KoEnumConstantProvider> List<T>.withEnumConstantNamed(name: String, var
  * @param names The names of additional enum constants to exclude.
  * @return A list containing declarations without any of specified enum constants.
  */
-fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstantNamed(name: String, vararg names: String): List<T> =
-    filterNot { it.hasEnumConstantWithName(name, *names) }
+fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstantNamed(
+    name: String,
+    vararg names: String,
+): List<T> = filterNot { it.hasEnumConstantWithName(name, *names) }
 
 /**
  * List containing declarations that have all specified enum constants.
@@ -51,8 +57,10 @@ fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstantNamed(name: String, 
  * @param names The name(s) of the enum constant(s) to include.
  * @return A list containing declarations with all specified enum constant(s).
  */
-fun <T : KoEnumConstantProvider> List<T>.withAllEnumConstantsNamed(name: String, vararg names: String): List<T> =
-    filter { it.hasEnumConstantsWithAllNames(name, *names) }
+fun <T : KoEnumConstantProvider> List<T>.withAllEnumConstantsNamed(
+    name: String,
+    vararg names: String,
+): List<T> = filter { it.hasEnumConstantsWithAllNames(name, *names) }
 
 /**
  * List containing declarations without all specified enum constants.
@@ -61,8 +69,10 @@ fun <T : KoEnumConstantProvider> List<T>.withAllEnumConstantsNamed(name: String,
  * @param names The name(s) of the enum constant(s) to exclude.
  * @return A list containing declarations without all specified enum constant(s).
  */
-fun <T : KoEnumConstantProvider> List<T>.withoutAllEnumConstantsNamed(name: String, vararg names: String): List<T> =
-    filterNot { it.hasEnumConstantsWithAllNames(name, *names) }
+fun <T : KoEnumConstantProvider> List<T>.withoutAllEnumConstantsNamed(
+    name: String,
+    vararg names: String,
+): List<T> = filterNot { it.hasEnumConstantsWithAllNames(name, *names) }
 
 /**
  * List containing declarations that have at least one enum constant satisfying the provided predicate.
@@ -127,14 +137,18 @@ fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstants(predicate: (List<K
  */
 @Deprecated(
     """
-            Will be removed in v1.0.0. 
+            Will be removed in v0.16.0. 
             If you passed one argument - replace with `withEnumConstantNamed`, otherwise with `withAllEnumConstantsNamed`.
             """,
     ReplaceWith("withEnumConstantNamed/withAllEnumConstantsNamed"),
 )
-fun <T : KoEnumConstantProvider> List<T>.withAllEnumConstants(name: String, vararg names: String): List<T> = filter {
-    it.hasEnumConstants(name, *names)
-}
+fun <T : KoEnumConstantProvider> List<T>.withAllEnumConstants(
+    name: String,
+    vararg names: String,
+): List<T> =
+    filter {
+        it.hasEnumConstants(name, *names)
+    }
 
 /**
  * List containing declarations with some enum constants.
@@ -143,10 +157,14 @@ fun <T : KoEnumConstantProvider> List<T>.withAllEnumConstants(name: String, vara
  * @param names The enum constant name(s) to include.
  * @return A list containing declarations with at least one of the specified enum constant(s).
  */
-@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withEnumConstantNamed(*names"))
-fun <T : KoEnumConstantProvider> List<T>.withSomeEnumConstants(name: String, vararg names: String): List<T> = filter {
-    it.hasEnumConstants(name) || names.any { constant -> it.hasEnumConstants(constant) }
-}
+@Deprecated("Will be removed in v0.16.0.", ReplaceWith("withEnumConstantNamed(*names"))
+fun <T : KoEnumConstantProvider> List<T>.withSomeEnumConstants(
+    name: String,
+    vararg names: String,
+): List<T> =
+    filter {
+        it.hasEnumConstants(name) || names.any { constant -> it.hasEnumConstants(constant) }
+    }
 
 /**
  * List containing declarations without all specified enum constants.
@@ -157,13 +175,15 @@ fun <T : KoEnumConstantProvider> List<T>.withSomeEnumConstants(name: String, var
  */
 @Deprecated(
     """
-            Will be removed in v1.0.0. 
+            Will be removed in v0.16.0. 
             If you passed one argument - replace with `withoutEnumConstantNamed`, otherwise with `withoutAllEnumConstantsNamed`.
             """,
     ReplaceWith("withoutEnumConstantNamed/withoutAllEnumConstantsNamed"),
 )
-fun <T : KoEnumConstantProvider> List<T>.withoutAllEnumConstants(name: String, vararg names: String): List<T> =
-    filterNot { it.hasEnumConstants(name, *names) }
+fun <T : KoEnumConstantProvider> List<T>.withoutAllEnumConstants(
+    name: String,
+    vararg names: String,
+): List<T> = filterNot { it.hasEnumConstants(name, *names) }
 
 /**
  * List containing declarations without some enum constants.
@@ -172,12 +192,18 @@ fun <T : KoEnumConstantProvider> List<T>.withoutAllEnumConstants(name: String, v
  * @param names The enum constant name(s) to exclude.
  * @return A list containing declarations without at least one of the specified enum constant(s).
  */
-@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withoutEnumConstantNamed(*names"))
-fun <T : KoEnumConstantProvider> List<T>.withoutSomeEnumConstants(name: String, vararg names: String): List<T> =
+@Deprecated("Will be removed in v0.16.0.", ReplaceWith("withoutEnumConstantNamed(*names"))
+fun <T : KoEnumConstantProvider> List<T>.withoutSomeEnumConstants(
+    name: String,
+    vararg names: String,
+): List<T> =
     filter {
-        !it.hasEnumConstants(name) && if (names.isNotEmpty()) {
-            names.any { constant -> !it.hasEnumConstants(constant) }
-        } else {
-            true
-        }
+        val missesAtLeastOneEnumConstant =
+            if (names.isNotEmpty()) {
+                names.any { constant -> !it.hasEnumConstants(constant) }
+            } else {
+                true
+            }
+
+        !it.hasEnumConstants(name) && missesAtLeastOneEnumConstant
     }

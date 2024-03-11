@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoInfixModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Whether the declaration has `infix` modifier.
+     * Determines whatever the declaration has `infix` modifier.
      */
     val hasInfixModifier: Boolean
 }

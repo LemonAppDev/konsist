@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.container
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -12,61 +11,34 @@ class KoScopeForKoPropertyDeclarationTest {
         val sut = getSnippetFile("scope-contains-no-properties")
 
         // then
-        sut.properties(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
+        sut.properties(includeNested = true) shouldBeEqualTo emptyList()
     }
 
     @Test
-    fun `scope-contains-nested-and-local-properties includeNested true includeLocal true`() {
+    fun `scope-contains-nested-properties includeNested true`() {
         // given
-        val sut = getSnippetFile("scope-contains-nested-and-local-properties")
+        val sut = getSnippetFile("scope-contains-nested-properties")
 
         // then
-        val expected = listOf("sampleLocalProperty", "sampleNestedProperty")
+        val expected = listOf("sampleProperty", "sampleNestedProperty")
 
-        sut.properties(includeNested = true, includeLocal = true)
+        sut.properties(includeNested = true)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
 
     @Test
-    fun `scope-contains-nested-and-local-properties includeNested true includeLocal false`() {
+    fun `scope-contains-nested-properties includeNested false`() {
         // given
-        val sut = getSnippetFile("scope-contains-nested-and-local-properties")
+        val sut = getSnippetFile("scope-contains-nested-properties")
 
         // then
-        val expected = listOf("sampleNestedProperty")
+        val expected = listOf("sampleProperty")
 
-        sut.properties(includeNested = true, includeLocal = false)
+        sut.properties(includeNested = false)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
 
-    @Test
-    fun `scope-contains-nested-and-local-properties includeNested false includeLocal true`() {
-        // given
-        val sut = getSnippetFile("scope-contains-nested-and-local-properties")
-
-        // then
-        val expected = listOf("sampleLocalProperty")
-
-        sut.properties(includeNested = false, includeLocal = true)
-            .map { it.name }
-            .shouldBeEqualTo(expected)
-    }
-
-    @Test
-    fun `scope-contains-nested-and-local-properties includeNested false includeLocal false`() {
-        // given
-        val sut = getSnippetFile("scope-contains-nested-and-local-properties")
-
-        // then
-        val expected = emptyList<KoPropertyDeclaration>()
-
-        sut.properties(includeNested = false, includeLocal = false)
-            .map { it.name }
-            .shouldBeEqualTo(expected)
-    }
-
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/container/snippet/forkopropertydeclaration/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/container/snippet/forkopropertydeclaration/", fileName)
 }

@@ -3,10 +3,11 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoChildProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoConstructorProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -14,6 +15,7 @@ import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoEnumConstantProviderCore
+import com.lemonappdev.konsist.core.provider.KoExternalParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoHasTestClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoHasTestProviderCore
@@ -34,6 +36,7 @@ import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSecondaryConstructorsProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
+import com.lemonappdev.konsist.core.provider.KoTestClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoAbstractModifierProviderCore
@@ -60,10 +63,14 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoClassDeclarationCore private constructor(
     override val ktClass: KtClass,
-    override val containingDeclaration: KoContainingDeclarationProvider,
+    override val containingDeclaration: KoBaseDeclaration,
 ) : KoClassDeclaration,
+    KoParentDeclarationCore,
+    KoChildDeclarationCore,
+    KoBaseTypeDeclarationCore,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
+    KoChildProviderCore,
     KoClassProviderCore,
     KoEnumConstantProviderCore,
     KoConstructorProviderCore,
@@ -84,6 +91,7 @@ internal class KoClassDeclarationCore private constructor(
     KoParentProviderCore,
     KoParentClassProviderCore,
     KoParentInterfaceProviderCore,
+    KoExternalParentProviderCore,
     KoContainingDeclarationProviderCore,
     KoPathProviderCore,
     KoModuleProviderCore,
@@ -106,8 +114,8 @@ internal class KoClassDeclarationCore private constructor(
     KoExpectModifierProviderCore,
     KoAbstractModifierProviderCore,
     KoOpenModifierProviderCore,
-    KoFinalModifierProviderCore {
-
+    KoFinalModifierProviderCore,
+    KoTestClassProviderCore {
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktClass }
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktClass }
@@ -123,8 +131,9 @@ internal class KoClassDeclarationCore private constructor(
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
-        .getKoDeclarations(ktClass, includeNested, includeLocal, this)
+    ): List<KoBaseDeclaration> =
+        KoDeclarationProviderCoreUtil
+            .getKoDeclarations(ktClass, includeNested, includeLocal, this)
 
     override fun toString(): String = name
 
@@ -133,7 +142,7 @@ internal class KoClassDeclarationCore private constructor(
 
         internal fun getInstance(
             ktClass: KtClass,
-            containingDeclaration: KoContainingDeclarationProvider,
+            containingDeclaration: KoBaseDeclaration,
         ): KoClassDeclaration =
             cache.getOrCreateInstance(ktClass, containingDeclaration) {
                 KoClassDeclarationCore(ktClass, containingDeclaration)

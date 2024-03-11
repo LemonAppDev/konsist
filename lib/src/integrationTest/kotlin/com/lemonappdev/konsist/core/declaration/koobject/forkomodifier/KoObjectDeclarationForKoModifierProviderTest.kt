@@ -17,9 +17,10 @@ class KoObjectDeclarationForKoModifierProviderTest {
     @Test
     fun `object-without-modifiers`() {
         // given
-        val sut = getSnippetFile("object-without-modifiers")
-            .objects()
-            .first()
+        val sut =
+            getSnippetFile("object-without-modifiers")
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -40,9 +41,10 @@ class KoObjectDeclarationForKoModifierProviderTest {
     @Test
     fun `object-has-private-and-data-modifiers`() {
         // given
-        val sut = getSnippetFile("object-has-private-and-data-modifiers")
-            .objects(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile("object-has-private-and-data-modifiers")
+                .objects(includeNested = true)
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -72,9 +74,10 @@ class KoObjectDeclarationForKoModifierProviderTest {
         modifiers: List<KoModifier>,
     ) {
         // given
-        val sut = getSnippetFile(fileName)
-            .objects(includeNested = true)
-            .first()
+        val sut =
+            getSnippetFile(fileName)
+                .objects(includeNested = true)
+                .first()
 
         // then
         sut.modifiers shouldBeEqualTo modifiers
@@ -86,17 +89,18 @@ class KoObjectDeclarationForKoModifierProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("object-has-modifiers-and-annotation-with-parameter", listOf(PRIVATE, DATA)),
-            arguments("object-has-modifiers-and-annotation-without-parameter", listOf(PRIVATE, DATA)),
-            arguments("object-has-modifiers-annotation-and-comment", listOf(PRIVATE, DATA)),
-            arguments("object-has-modifiers-and-annotations", listOf(PRIVATE, DATA)),
-            arguments("object-has-modifiers-and-annotation-with-angle-brackets", listOf(PRIVATE, DATA)),
-            arguments("object-has-modifiers-and-kdoc", listOf(PRIVATE, DATA)),
-            arguments("object-has-modifiers-kdoc-and-annotation-before-them", listOf(PRIVATE, DATA)),
-            arguments("object-has-modifiers-multiline-comment-and-annotation-before-them", listOf(PRIVATE, DATA)),
-            arguments("object-has-modifiers-and-comment-before-them", listOf(PRIVATE, DATA)),
-            arguments("object-has-modifiers-and-comment-after-them", listOf(PRIVATE, DATA)),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("object-has-modifiers-and-annotation-with-parameter", listOf(PRIVATE, DATA)),
+                arguments("object-has-modifiers-and-annotation-without-parameter", listOf(PRIVATE, DATA)),
+                arguments("object-has-modifiers-annotation-and-comment", listOf(PRIVATE, DATA)),
+                arguments("object-has-modifiers-and-annotations", listOf(PRIVATE, DATA)),
+                arguments("object-has-modifiers-and-annotation-with-angle-brackets", listOf(PRIVATE, DATA)),
+                arguments("object-has-modifiers-and-kdoc", listOf(PRIVATE, DATA)),
+                arguments("object-has-modifiers-kdoc-and-annotation-before-them", listOf(PRIVATE, DATA)),
+                arguments("object-has-modifiers-multiline-comment-and-annotation-before-them", listOf(PRIVATE, DATA)),
+                arguments("object-has-modifiers-and-comment-before-them", listOf(PRIVATE, DATA)),
+                arguments("object-has-modifiers-and-comment-after-them", listOf(PRIVATE, DATA)),
+            )
     }
 }

@@ -1,0 +1,8 @@
+package com.samplepackage
+
+val sampleProperty: String
+    get() {
+        val sampleVariable = ""
+
+        return ""
+    }

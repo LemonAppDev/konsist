@@ -8,10 +8,11 @@ import org.jetbrains.kotlin.kdoc.psi.api.KDoc
 internal interface KoKDocProviderCore : KoKDocProvider, KoTextProviderCore, KoBaseProviderCore {
     override val kDoc: KoKDocDeclaration?
         get() {
-            val kDocElement = psiElement
-                .children
-                .filterIsInstance<KDoc>()
-                .firstOrNull()
+            val kDocElement =
+                psiElement
+                    .children
+                    .filterIsInstance<KDoc>()
+                    .firstOrNull()
 
             return kDocElement?.let { KoKDocDeclarationCore(kDocElement) }
         }

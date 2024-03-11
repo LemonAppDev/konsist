@@ -17,7 +17,7 @@ interface KoParametersProvider : KoBaseProvider {
     val numParameters: Int
 
     /**
-     * Gets the number of parameters that satisfies the specified predicate present in the declaration.
+     * Returns the number of parameters that satisfies the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if a parameter satisfies a condition.
      * @return The number of parameters in the declaration.
@@ -25,16 +25,16 @@ interface KoParametersProvider : KoBaseProvider {
     fun countParameters(predicate: (KoParameterDeclaration) -> Boolean): Int
 
     /**
-     * Whatever declaration has a parameter with given name.
+     * Determines whatever declaration has a parameter with given name.
      *
      * @param name the name of the parameter to check.
      * @return `true` if the declaration has a parameter with the specified name, `false` otherwise.
      */
-    @Deprecated("Will be removed in v1.0.0.", ReplaceWith("hasParameterWithName(name)"))
+    @Deprecated("Will be removed in v0.16.0.", ReplaceWith("hasParameterWithName(name)"))
     fun hasParameterNamed(name: String): Boolean
 
     /**
-     * Whatever declaration has any parameter.
+     * Determines whatever declaration has any parameter.
      *
      * @return `true` if the declaration has any parameter, `false` otherwise.
      */
@@ -47,7 +47,10 @@ interface KoParametersProvider : KoBaseProvider {
      * @param names the names of the parameters to check.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasParameterWithName(name: String, vararg names: String): Boolean
+    fun hasParameterWithName(
+        name: String,
+        vararg names: String,
+    ): Boolean
 
     /**
      * Determines whether the declaration has parameters with all the specified names.
@@ -56,7 +59,10 @@ interface KoParametersProvider : KoBaseProvider {
      * @param names The names of the parameters to check.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasParametersWithAllNames(name: String, vararg names: String): Boolean
+    fun hasParametersWithAllNames(
+        name: String,
+        vararg names: String,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one parameter that satisfies the provided predicate.
@@ -70,8 +76,7 @@ interface KoParametersProvider : KoBaseProvider {
      * Determines whether the declaration has all parameters that satisfy the provided predicate.
      *
      * Note that if the parameters contains no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate. See a more detailed explanation of this logic concept in
-     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
+     * that do not match the predicate.
      *
      * @param predicate A function that defines the condition to be met by parameter declarations.
      * @return `true` if all parameter declarations satisfy the predicate, `false` otherwise.

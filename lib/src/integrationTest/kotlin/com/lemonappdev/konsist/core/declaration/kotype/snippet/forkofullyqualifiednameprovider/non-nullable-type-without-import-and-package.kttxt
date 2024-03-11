@@ -1,3 +1,0 @@
-class SampleClass1(val sampleProperty1: SampleTypeClass)
-
-class SampleTypeClass

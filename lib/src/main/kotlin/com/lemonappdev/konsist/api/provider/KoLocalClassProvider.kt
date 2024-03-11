@@ -17,7 +17,7 @@ interface KoLocalClassProvider : KoBaseProvider {
     val numLocalClasses: Int
 
     /**
-     * Gets the number of local classes that satisfies the specified predicate present in the declaration.
+     * Returns the number of local classes that satisfies the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if a local class satisfies a condition.
      * @return The number of local classes in the declaration.
@@ -25,16 +25,16 @@ interface KoLocalClassProvider : KoBaseProvider {
     fun countLocalClasses(predicate: (KoClassDeclaration) -> Boolean): Int
 
     /**
-     * Checks whether the declaration contains a local class with the specified name.
+     * Determines whatever the declaration contains a local class with the specified name.
      *
      * @param predicate The predicate function to determine if a local class satisfies a condition.
      * @return `true` if the declaration contains a local class with the specified predicate, `false` otherwise.
      */
-    @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasLocalClass()"))
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasLocalClass()"))
     fun containsLocalClass(predicate: (KoClassDeclaration) -> Boolean): Boolean
 
     /**
-     * Whether the declaration has local classes.
+     * Determines whatever the declaration has local classes.
      *
      * @return `true` if the declaration has any local class, `false` otherwise.
      */
@@ -47,7 +47,10 @@ interface KoLocalClassProvider : KoBaseProvider {
      * @param names the names of the local classes to check.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasLocalClassWithName(name: String, vararg names: String): Boolean
+    fun hasLocalClassWithName(
+        name: String,
+        vararg names: String,
+    ): Boolean
 
     /**
      * Determines whether the declaration has local classes with all the specified names.
@@ -56,7 +59,10 @@ interface KoLocalClassProvider : KoBaseProvider {
      * @param names The names of the local classes to check.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasLocalClassesWithAllNames(name: String, vararg names: String): Boolean
+    fun hasLocalClassesWithAllNames(
+        name: String,
+        vararg names: String,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one local class that satisfies the provided predicate.
@@ -70,8 +76,7 @@ interface KoLocalClassProvider : KoBaseProvider {
      * Determines whether the declaration has all local classes that satisfy the provided predicate.
      *
      * Note that if the local classes contains no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate. See a more detailed explanation of this logic concept in
-     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
+     * that do not match the predicate.
      *
      * @param predicate A function that defines the condition to be met by local class declarations.
      * @return `true` if all local class declarations satisfy the predicate, `false` otherwise.

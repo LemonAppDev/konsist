@@ -9,10 +9,11 @@ class KoInterfaceDeclarationForKoTopLevelProviderTest {
     @Test
     fun `interface-is-not-top-level`() {
         // given
-        val sut = getSnippetFile("interface-is-not-top-level")
-            .classes()
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-is-not-top-level")
+                .classes()
+                .interfaces()
+                .first()
 
         // then
         sut.isTopLevel shouldBeEqualTo false
@@ -21,9 +22,10 @@ class KoInterfaceDeclarationForKoTopLevelProviderTest {
     @Test
     fun `interface-is-top-level`() {
         // given
-        val sut = getSnippetFile("interface-is-top-level")
-            .interfaces()
-            .first()
+        val sut =
+            getSnippetFile("interface-is-top-level")
+                .interfaces()
+                .first()
 
         // then
         sut.isTopLevel shouldBeEqualTo true

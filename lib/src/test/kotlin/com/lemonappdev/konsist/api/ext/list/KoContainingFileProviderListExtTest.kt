@@ -13,12 +13,14 @@ class KoContainingFileProviderListExtTest {
         // given
         val containingFile1: KoFileDeclaration = mockk()
         val containingFile2: KoFileDeclaration = mockk()
-        val declaration1: KoContainingFileProvider = mockk {
-            every { containingFile } returns containingFile1
-        }
-        val declaration2: KoContainingFileProvider = mockk {
-            every { containingFile } returns containingFile2
-        }
+        val declaration1: KoContainingFileProvider =
+            mockk {
+                every { containingFile } returns containingFile1
+            }
+        val declaration2: KoContainingFileProvider =
+            mockk {
+                every { containingFile } returns containingFile2
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when

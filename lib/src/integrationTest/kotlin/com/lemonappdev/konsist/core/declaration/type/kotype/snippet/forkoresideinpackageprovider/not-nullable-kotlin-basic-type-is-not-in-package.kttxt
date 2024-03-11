@@ -1,0 +1,2 @@
+package com.lemonappdev.konsist.core.declaration.type.kotype.snippet.forkoresideinpackageprovider
+class SampleClass1(val sampleProperty1: String)

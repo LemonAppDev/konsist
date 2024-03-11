@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.SampleClass
+
+lateinit var sampleProperty: SampleClass
