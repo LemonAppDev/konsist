@@ -11,4 +11,5 @@ package com.lemonappdev.konsist.testdata.testpackage
 )
 annotation class Annotation
 
+// Added to have a better file name (ktlint complains)
 class Type
