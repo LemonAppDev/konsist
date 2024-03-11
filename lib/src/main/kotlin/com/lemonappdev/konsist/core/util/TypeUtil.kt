@@ -175,6 +175,9 @@ object TypeUtil {
                 "Boolean",
                 "Char",
                 "String",
+                "Unit",
+                "Any",
+                "Nothing",
             )
 
     // Collections in Kotlin are described here: https://kotlinlang.org/docs/collections-overview.html#collection
