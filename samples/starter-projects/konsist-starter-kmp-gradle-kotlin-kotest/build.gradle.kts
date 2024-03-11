@@ -1,6 +1,6 @@
 plugins {
     kotlin("multiplatform") version "1.9.23"
-    id("io.kotest.multiplatform") version "5.8.0"
+    id("io.kotest.multiplatform") version "5.8.1"
     application
     id("com.android.application")
 }
