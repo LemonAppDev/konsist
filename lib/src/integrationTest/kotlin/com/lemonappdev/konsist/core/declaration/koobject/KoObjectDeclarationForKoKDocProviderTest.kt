@@ -10,10 +10,9 @@ class KoObjectDeclarationForKoKDocProviderTest {
     @Test
     fun `object-without-kdoc`() {
         // given
-        val sut =
-            getSnippetFile("object-without-kdoc")
-                .objects()
-                .first()
+        val sut = getSnippetFile("object-without-kdoc")
+            .objects()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -25,10 +24,9 @@ class KoObjectDeclarationForKoKDocProviderTest {
     @Test
     fun `object-with-kdoc`() {
         // given
-        val sut =
-            getSnippetFile("object-with-kdoc")
-                .objects()
-                .first()
+        val sut = getSnippetFile("object-with-kdoc")
+            .objects()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -40,10 +38,9 @@ class KoObjectDeclarationForKoKDocProviderTest {
     @Test
     fun `object-with-one-line-kdoc`() {
         // given
-        val sut =
-            getSnippetFile("object-with-one-line-kdoc")
-                .objects()
-                .first()
+        val sut = getSnippetFile("object-with-one-line-kdoc")
+            .objects()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -52,5 +49,6 @@ class KoObjectDeclarationForKoKDocProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/forkokdocprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koobject/snippet/forkokdocprovider/", fileName)
 }

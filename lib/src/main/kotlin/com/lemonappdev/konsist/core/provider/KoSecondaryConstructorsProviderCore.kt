@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.provider
 import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
 import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
 import com.lemonappdev.konsist.core.declaration.KoSecondaryConstructorDeclarationCore
-import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import org.jetbrains.kotlin.psi.KtClass
 
 internal interface KoSecondaryConstructorsProviderCore :
@@ -16,12 +15,12 @@ internal interface KoSecondaryConstructorsProviderCore :
         get() =
             ktClass
                 .secondaryConstructors
-                .map { KoSecondaryConstructorDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
+                .map { KoSecondaryConstructorDeclarationCore.getInstance(it, this) }
 
     override val numSecondaryConstructors: Int
         get() = secondaryConstructors.size
 
-    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasSecondaryConstructors()"))
+    @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasSecondaryConstructors()"))
     override val hasSecondaryConstructors: Boolean
         get() = ktClass.hasSecondaryConstructors()
 

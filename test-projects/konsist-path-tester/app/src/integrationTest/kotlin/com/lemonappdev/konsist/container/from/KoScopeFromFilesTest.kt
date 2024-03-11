@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test
 class KoScopeFromFilesTest {
 
     @Test
-    fun `scopeFromFiles`() {
+    fun `scopeFromFile`() {
         // given
         val files = setOf(
             "/app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt".toOsSeparator(),
@@ -32,14 +32,10 @@ class KoScopeFromFilesTest {
     }
 
     @Test
-    fun `scopeFromFiles throws exception if path does not exist`() {
+    fun `scopeFromFile throws exception if path does not exist`() {
         // given
-        val files = setOf(
-            "app/src/main/kotlin/com/lemonappdev/NonExistingTest.kt".toOsSeparator()
-        )
-
         val func =
-            { Konsist.scopeFromFiles(files) }
+            { Konsist.scopeFromFile("app/src/main/kotlin/com/lemonappdev/NonExistingTest.kt".toOsSeparator()) }
 
         // then
         val message = "File does not exist: $appMainSourceSetDirectory${fileSeparator}NonExistingTest.kt"
@@ -47,13 +43,9 @@ class KoScopeFromFilesTest {
     }
 
     @Test
-    fun `scopeFromFiles throws exception if path points to directory`() {
+    fun `scopeFromFile throws exception if path points to directory`() {
         // given
-        val files = setOf(
-            "app/src/main/kotlin/com/lemonappdev/sample".toOsSeparator()
-        )
-
-        val func = { Konsist.scopeFromFiles(files) }
+        val func = { Konsist.scopeFromFile("app/src/main/kotlin/com/lemonappdev/sample".toOsSeparator()) }
 
         // then
         val message = "Path is a directory, but should be a file: $appMainSourceSetDirectory${fileSeparator}sample"

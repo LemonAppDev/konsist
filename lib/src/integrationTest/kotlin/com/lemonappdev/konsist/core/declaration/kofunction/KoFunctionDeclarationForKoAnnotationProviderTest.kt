@@ -13,10 +13,9 @@ class KoFunctionDeclarationForKoAnnotationProviderTest {
     @Test
     fun `function-has-no-annotation`() {
         // given
-        val sut =
-            getSnippetFile("function-has-no-annotation")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-has-no-annotation")
+            .functions()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -37,10 +36,9 @@ class KoFunctionDeclarationForKoAnnotationProviderTest {
     @Test
     fun `function-has-annotation`() {
         // given
-        val sut =
-            getSnippetFile("function-has-annotation")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-has-annotation")
+            .functions()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -85,10 +83,9 @@ class KoFunctionDeclarationForKoAnnotationProviderTest {
     @Test
     fun `function-has-two-annotations`() {
         // given
-        val sut =
-            getSnippetFile("function-has-two-annotations")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-has-two-annotations")
+            .functions()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -144,10 +141,9 @@ class KoFunctionDeclarationForKoAnnotationProviderTest {
     @Test
     fun `function-has-suppress-annotation-without-import`() {
         // given
-        val sut =
-            getSnippetFile("function-has-suppress-annotation-without-import")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-has-suppress-annotation-without-import")
+            .functions()
+            .first()
 
         // then
         assertSoftly(sut) {

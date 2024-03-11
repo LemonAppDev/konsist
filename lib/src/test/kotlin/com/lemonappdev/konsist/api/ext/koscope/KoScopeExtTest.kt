@@ -17,7 +17,6 @@ import org.junit.jupiter.params.provider.MethodSource
 class KoScopeExtTest {
     // We add these interfaces to simulate declarations that different providers implement.
     private interface TestDeclarationWithModifierProvider : KoBaseDeclaration, KoModifierProvider
-
     private interface TestDeclarationWithoutModifierProvider : KoBaseDeclaration, KoAnnotationProvider
 
     @ParameterizedTest
@@ -28,10 +27,9 @@ class KoScopeExtTest {
     ) {
         // given
         val declarations: List<KoBaseDeclaration> = emptyList()
-        val scope: KoScope =
-            mockk {
-                every { declarations(includeNested = includeNested, includeLocal = includeLocal) } returns declarations
-            }
+        val scope: KoScope = mockk {
+            every { declarations(includeNested = includeNested, includeLocal = includeLocal) } returns declarations
+        }
 
         // when
         scope.declarationsOf<KoBaseDeclaration>(includeNested = includeNested, includeLocal = includeLocal)
@@ -50,10 +48,9 @@ class KoScopeExtTest {
         val classDeclaration: KoClassDeclaration = mockk()
         val interfaceDeclaration: KoInterfaceDeclaration = mockk()
         val declarations: List<KoBaseDeclaration> = listOf(classDeclaration, interfaceDeclaration)
-        val scope: KoScope =
-            mockk {
-                every { declarations(includeNested = includeNested, includeLocal = includeLocal) } returns declarations
-            }
+        val scope: KoScope = mockk {
+            every { declarations(includeNested = includeNested, includeLocal = includeLocal) } returns declarations
+        }
 
         // when
         val sut = scope.declarationsOf<KoClassDeclaration>(includeNested = includeNested, includeLocal = includeLocal)
@@ -72,10 +69,9 @@ class KoScopeExtTest {
         val declaration1: TestDeclarationWithModifierProvider = mockk()
         val declaration2: TestDeclarationWithoutModifierProvider = mockk()
         val declarations = listOf(declaration1, declaration2)
-        val scope: KoScope =
-            mockk {
-                every { declarations(includeNested = includeNested, includeLocal = includeLocal) } returns declarations
-            }
+        val scope: KoScope = mockk {
+            every { declarations(includeNested = includeNested, includeLocal = includeLocal) } returns declarations
+        }
 
         // when
         val sut = scope.declarationsOf<KoModifierProvider>(includeNested = includeNested, includeLocal = includeLocal)
@@ -87,12 +83,11 @@ class KoScopeExtTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() =
-            listOf(
-                arguments(false, false),
-                arguments(true, false),
-                arguments(false, true),
-                arguments(true, true),
-            )
+        fun provideValues() = listOf(
+            arguments(false, false),
+            arguments(true, false),
+            arguments(false, true),
+            arguments(true, true),
+        )
     }
 }

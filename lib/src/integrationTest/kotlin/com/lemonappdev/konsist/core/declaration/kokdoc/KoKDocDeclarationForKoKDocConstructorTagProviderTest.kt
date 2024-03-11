@@ -10,11 +10,10 @@ class KoKDocDeclarationForKoKDocConstructorTagProviderTest {
     @Test
     fun `kdoc-without-constructor-tag`() {
         // given
-        val sut =
-            getSnippetFile("kdoc-without-constructor-tag")
-                .classes()
-                .first()
-                .kDoc
+        val sut = getSnippetFile("kdoc-without-constructor-tag")
+            .classes()
+            .first()
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -26,11 +25,10 @@ class KoKDocDeclarationForKoKDocConstructorTagProviderTest {
     @Test
     fun `class-with-constructor-tag`() {
         // given
-        val sut =
-            getSnippetFile("class-with-constructor-tag")
-                .classes()
-                .first()
-                .kDoc
+        val sut = getSnippetFile("class-with-constructor-tag")
+            .classes()
+            .first()
+            .kDoc
 
         // then
         assertSoftly(sut) {

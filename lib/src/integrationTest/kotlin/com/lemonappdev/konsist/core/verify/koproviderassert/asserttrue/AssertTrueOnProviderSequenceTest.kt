@@ -18,11 +18,10 @@ class AssertTrueOnProviderSequenceTest {
     @Test
     fun `provider-assert-test-method-name-derived-from-junit-method-name`() {
         // given
-        val sut =
-            getSnippetFile("provider-assert-test-method-name-derived-from-junit-method-name")
-                .declarations()
-                .filterIsInstance<KoNameProvider>()
-                .asSequence()
+        val sut = getSnippetFile("provider-assert-test-method-name-derived-from-junit-method-name")
+            .declarations()
+            .filterIsInstance<KoNameProvider>()
+            .asSequence()
 
         // then
         try {
@@ -36,11 +35,10 @@ class AssertTrueOnProviderSequenceTest {
     @Test
     fun `provider-assert-test-method-name-derived-from-test-name-parameter`() {
         // given
-        val sut =
-            getSnippetFile("provider-assert-test-method-name-derived-from-test-name-parameter")
-                .declarations()
-                .filterIsInstance<KoNameProvider>()
-                .asSequence()
+        val sut = getSnippetFile("provider-assert-test-method-name-derived-from-test-name-parameter")
+            .declarations()
+            .filterIsInstance<KoNameProvider>()
+            .asSequence()
 
         // then
         try {
@@ -55,11 +53,10 @@ class AssertTrueOnProviderSequenceTest {
     fun `provider-assert-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut =
-            getSnippetFile("provider-assert-error-with-custom-message")
-                .declarations()
-                .filterIsInstance<KoNameProvider>()
-                .asSequence()
+        val sut = getSnippetFile("provider-assert-error-with-custom-message")
+            .declarations()
+            .filterIsInstance<KoNameProvider>()
+            .asSequence()
 
         // then
         try {
@@ -77,11 +74,10 @@ class AssertTrueOnProviderSequenceTest {
     fun `provider-assert-error-with-custom-message-and-strict-set-to-true`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut =
-            getSnippetFile("provider-assert-error-with-custom-message-and-strict-set-to-true")
-                .declarations()
-                .filterIsInstance<KoNameProvider>()
-                .asSequence()
+        val sut = getSnippetFile("provider-assert-error-with-custom-message-and-strict-set-to-true")
+            .declarations()
+            .filterIsInstance<KoNameProvider>()
+            .asSequence()
 
         // then
         try {
@@ -98,12 +94,11 @@ class AssertTrueOnProviderSequenceTest {
     @Test
     fun `provider-assert-passes-when-declaration-list-is-empty`() {
         // given
-        val sut =
-            getSnippetFile("provider-assert-passes-when-declaration-list-is-empty")
-                .declarations()
-                .filterNot { it is KoFileDeclaration }
-                .filterIsInstance<KoNameProvider>()
-                .asSequence()
+        val sut = getSnippetFile("provider-assert-passes-when-declaration-list-is-empty")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoNameProvider>()
+            .asSequence()
 
         // when
         sut.assertTrue { true }
@@ -112,12 +107,11 @@ class AssertTrueOnProviderSequenceTest {
     @Test
     fun `provider-assert-false-passes-when-declaration-list-is-empty`() {
         // given
-        val sut =
-            getSnippetFile("provider-assert-false-passes-when-declaration-list-is-empty")
-                .declarations()
-                .filterNot { it is KoFileDeclaration }
-                .filterIsInstance<KoNameProvider>()
-                .asSequence()
+        val sut = getSnippetFile("provider-assert-false-passes-when-declaration-list-is-empty")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoNameProvider>()
+            .asSequence()
 
         // when
         sut.assertFalse { false }
@@ -126,12 +120,11 @@ class AssertTrueOnProviderSequenceTest {
     @Test
     fun `provider-assert-strict-fails-when-declaration-list-is-empty`() {
         // given
-        val sut =
-            getSnippetFile("provider-assert-strict-fails-when-declaration-list-is-empty")
-                .declarations()
-                .filterNot { it is KoFileDeclaration }
-                .filterIsInstance<KoNameProvider>()
-                .asSequence()
+        val sut = getSnippetFile("provider-assert-strict-fails-when-declaration-list-is-empty")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoNameProvider>()
+            .asSequence()
 
         // when
         val func = {
@@ -146,12 +139,11 @@ class AssertTrueOnProviderSequenceTest {
     @Test
     fun `provider-assert-false-strict-fails-when-declaration-list-is-empty`() {
         // given
-        val sut =
-            getSnippetFile("provider-assert-false-strict-fails-when-declaration-list-is-empty")
-                .declarations()
-                .filterNot { it is KoFileDeclaration }
-                .filterIsInstance<KoNameProvider>()
-                .asSequence()
+        val sut = getSnippetFile("provider-assert-false-strict-fails-when-declaration-list-is-empty")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoNameProvider>()
+            .asSequence()
 
         // when
         val func = {
@@ -166,11 +158,10 @@ class AssertTrueOnProviderSequenceTest {
     @Test
     fun `assert-passes`() {
         // given
-        val sut =
-            getSnippetFile("assert-passes")
-                .declarations()
-                .filterIsInstance<KoAnnotationProvider>()
-                .asSequence()
+        val sut = getSnippetFile("assert-passes")
+            .declarations()
+            .filterIsInstance<KoAnnotationProvider>()
+            .asSequence()
 
         // then
         sut.assertTrue { it.hasAnnotations() }
@@ -179,11 +170,10 @@ class AssertTrueOnProviderSequenceTest {
     @Test
     fun `assert-fails`() {
         // given
-        val sut =
-            getSnippetFile("assert-fails")
-                .declarations()
-                .filterIsInstance<KoAnnotationProvider>()
-                .asSequence()
+        val sut = getSnippetFile("assert-fails")
+            .declarations()
+            .filterIsInstance<KoAnnotationProvider>()
+            .asSequence()
 
         // when
         val func = {
@@ -197,11 +187,10 @@ class AssertTrueOnProviderSequenceTest {
     @Test
     fun `assert-false-passes`() {
         // given
-        val sut =
-            getSnippetFile("assert-false-passes")
-                .declarations()
-                .filterIsInstance<KoAnnotationProvider>()
-                .asSequence()
+        val sut = getSnippetFile("assert-false-passes")
+            .declarations()
+            .filterIsInstance<KoAnnotationProvider>()
+            .asSequence()
 
         // then
         sut.assertFalse { it.hasAnnotations() }
@@ -210,11 +199,10 @@ class AssertTrueOnProviderSequenceTest {
     @Test
     fun `assert-false-fails`() {
         // given
-        val sut =
-            getSnippetFile("assert-false-fails")
-                .declarations()
-                .filterIsInstance<KoAnnotationProvider>()
-                .asSequence()
+        val sut = getSnippetFile("assert-false-fails")
+            .declarations()
+            .filterIsInstance<KoAnnotationProvider>()
+            .asSequence()
 
         // when
         val func = {
@@ -228,11 +216,10 @@ class AssertTrueOnProviderSequenceTest {
     @Test
     fun `assert-passes-when-expression-is-nullable`() {
         // given
-        val sut =
-            getSnippetFile("assert-passes-when-expression-is-nullable")
-                .declarations()
-                .filterIsInstance<KoPrimaryConstructorProvider>()
-                .asSequence()
+        val sut = getSnippetFile("assert-passes-when-expression-is-nullable")
+            .declarations()
+            .filterIsInstance<KoPrimaryConstructorProvider>()
+            .asSequence()
 
         // then
         sut.assertTrue { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
@@ -241,11 +228,10 @@ class AssertTrueOnProviderSequenceTest {
     @Test
     fun `assert-fails-when-expression-is-nullable`() {
         // given
-        val sut =
-            getSnippetFile("assert-fails-when-expression-is-nullable")
-                .declarations()
-                .filterIsInstance<KoPrimaryConstructorProvider>()
-                .asSequence()
+        val sut = getSnippetFile("assert-fails-when-expression-is-nullable")
+            .declarations()
+            .filterIsInstance<KoPrimaryConstructorProvider>()
+            .asSequence()
 
         // when
         val func = {
@@ -259,11 +245,10 @@ class AssertTrueOnProviderSequenceTest {
     @Test
     fun `assert-false-passes-when-expression-is-nullable`() {
         // given
-        val sut =
-            getSnippetFile("assert-false-passes-when-expression-is-nullable")
-                .declarations()
-                .filterIsInstance<KoPrimaryConstructorProvider>()
-                .asSequence()
+        val sut = getSnippetFile("assert-false-passes-when-expression-is-nullable")
+            .declarations()
+            .filterIsInstance<KoPrimaryConstructorProvider>()
+            .asSequence()
 
         // then
         sut.assertFalse { it.primaryConstructor?.hasParameterNamed("otherParameter") }
@@ -272,11 +257,10 @@ class AssertTrueOnProviderSequenceTest {
     @Test
     fun `assert-false-fails-when-expression-is-nullable`() {
         // given
-        val sut =
-            getSnippetFile("assert-false-fails-when-expression-is-nullable")
-                .declarations()
-                .filterIsInstance<KoPrimaryConstructorProvider>()
-                .asSequence()
+        val sut = getSnippetFile("assert-false-fails-when-expression-is-nullable")
+            .declarations()
+            .filterIsInstance<KoPrimaryConstructorProvider>()
+            .asSequence()
 
         // when
         val func = {

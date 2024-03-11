@@ -9,12 +9,11 @@ class KoConstructorDeclarationForKoLocationProviderTest {
     @Test
     fun `constructor-location-with-single-digit`() {
         // given
-        val sut =
-            getSnippetFile("constructor-location-with-single-digit")
-                .classes()
-                .first()
-                .constructors
-                .first()
+        val sut = getSnippetFile("constructor-location-with-single-digit")
+            .classes()
+            .first()
+            .constructors
+            .first()
 
         // then
         sut.location shouldBeEqualTo "${sut.path}:3:18"
@@ -23,20 +22,18 @@ class KoConstructorDeclarationForKoLocationProviderTest {
     @Test
     fun `constructor-location-with-text`() {
         // given
-        val projectPath =
-            getSnippetFile("constructor-location-with-text")
-                .classes()
-                .first()
-                .constructors
-                .first()
-                .projectPath
+        val projectPath = getSnippetFile("constructor-location-with-text")
+            .classes()
+            .first()
+            .constructors
+            .first()
+            .projectPath
 
-        val sut =
-            getSnippetFile("constructor-location-with-text")
-                .classes()
-                .first()
-                .constructors
-                .first()
+        val sut = getSnippetFile("constructor-location-with-text")
+            .classes()
+            .first()
+            .constructors
+            .first()
 
         // then
         val declaration = "Declaration:\n(val sampleParameter: SampleType)"

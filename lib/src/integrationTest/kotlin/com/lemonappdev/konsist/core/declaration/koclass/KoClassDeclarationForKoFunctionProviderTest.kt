@@ -12,10 +12,9 @@ class KoClassDeclarationForKoFunctionProviderTest {
     @Test
     fun `class-has-no-functions`() {
         // given
-        val sut =
-            getSnippetFile("class-has-no-functions")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-has-no-functions")
+            .classes()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -31,10 +30,9 @@ class KoClassDeclarationForKoFunctionProviderTest {
     @Test
     fun `class-has-two-functions`() {
         // given
-        val sut =
-            getSnippetFile("class-has-two-functions")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-has-two-functions")
+            .classes()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -54,10 +52,9 @@ class KoClassDeclarationForKoFunctionProviderTest {
     @Test
     fun `class-contains-nested-and-local-functions includeNested true includeLocal true`() {
         // given
-        val sut =
-            getSnippetFile("class-contains-nested-and-local-functions")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-contains-nested-and-local-functions")
+            .classes()
+            .first()
 
         // then
         val expected = listOf("sampleFunction", "sampleLocalFunction", "sampleNestedFunction")
@@ -70,10 +67,9 @@ class KoClassDeclarationForKoFunctionProviderTest {
     @Test
     fun `class-contains-nested-and-local-functions includeNested true includeLocal false`() {
         // given
-        val sut =
-            getSnippetFile("class-contains-nested-and-local-functions")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-contains-nested-and-local-functions")
+            .classes()
+            .first()
 
         // then
         val expected = listOf("sampleFunction", "sampleNestedFunction")
@@ -86,10 +82,9 @@ class KoClassDeclarationForKoFunctionProviderTest {
     @Test
     fun `class-contains-nested-and-local-functions includeNested false includeLocal true`() {
         // given
-        val sut =
-            getSnippetFile("class-contains-nested-and-local-functions")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-contains-nested-and-local-functions")
+            .classes()
+            .first()
 
         // then
         val expected = listOf("sampleFunction", "sampleLocalFunction")
@@ -102,10 +97,9 @@ class KoClassDeclarationForKoFunctionProviderTest {
     @Test
     fun `class-contains-nested-and-local-functions includeNested false includeLocal false`() {
         // given
-        val sut =
-            getSnippetFile("class-contains-nested-and-local-functions")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-contains-nested-and-local-functions")
+            .classes()
+            .first()
 
         // then
         val expected = listOf("sampleFunction")
@@ -118,10 +112,9 @@ class KoClassDeclarationForKoFunctionProviderTest {
     @Test
     fun `count-functions`() {
         // given
-        val sut =
-            getSnippetFile("count-functions")
-                .classes()
-                .first()
+        val sut = getSnippetFile("count-functions")
+            .classes()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -138,10 +131,9 @@ class KoClassDeclarationForKoFunctionProviderTest {
     @Test
     fun `contains-functions-with-specified-name-and-modifiers`() {
         // given
-        val sut =
-            getSnippetFile("contains-functions-with-specified-name-and-modifiers")
-                .classes()
-                .first()
+        val sut = getSnippetFile("contains-functions-with-specified-name-and-modifiers")
+            .classes()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -181,10 +173,9 @@ class KoClassDeclarationForKoFunctionProviderTest {
         // given
         val regex1 = Regex("[a-zA-Z]+")
         val regex2 = Regex("[0-9]+")
-        val sut =
-            getSnippetFile("contains-functions-with-specified-regex")
-                .classes()
-                .first()
+        val sut = getSnippetFile("contains-functions-with-specified-regex")
+            .classes()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -215,5 +206,6 @@ class KoClassDeclarationForKoFunctionProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koclass/snippet/forkofunctionprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koclass/snippet/forkofunctionprovider/", fileName)
 }

@@ -30,13 +30,9 @@ fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunctions(): List<T> = fil
  * @param names The names of additional local functions to include.
  * @return A list containing declarations with at least one of the specified local function(s).
  */
-fun <T : KoLocalFunctionProvider> List<T>.withLocalFunctionNamed(
-    name: String,
-    vararg names: String,
-): List<T> =
-    filter {
-        it.hasLocalFunctionWithName(name, *names)
-    }
+fun <T : KoLocalFunctionProvider> List<T>.withLocalFunctionNamed(name: String, vararg names: String): List<T> = filter {
+    it.hasLocalFunctionWithName(name, *names)
+}
 
 /**
  * List containing declarations without any of specified local functions.
@@ -45,13 +41,9 @@ fun <T : KoLocalFunctionProvider> List<T>.withLocalFunctionNamed(
  * @param names The names of additional local functions to exclude.
  * @return A list containing declarations without any of specified local functions.
  */
-fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunctionNamed(
-    name: String,
-    vararg names: String,
-): List<T> =
-    filterNot {
-        it.hasLocalFunctionWithName(name, *names)
-    }
+fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunctionNamed(name: String, vararg names: String): List<T> = filterNot {
+    it.hasLocalFunctionWithName(name, *names)
+}
 
 /**
  * List containing declarations that have all specified local functions.
@@ -60,13 +52,9 @@ fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunctionNamed(
  * @param names The name(s) of the local function(s) to include.
  * @return A list containing declarations with all specified local function(s).
  */
-fun <T : KoLocalFunctionProvider> List<T>.withAllLocalFunctionsNamed(
-    name: String,
-    vararg names: String,
-): List<T> =
-    filter {
-        it.hasLocalFunctionsWithAllNames(name, *names)
-    }
+fun <T : KoLocalFunctionProvider> List<T>.withAllLocalFunctionsNamed(name: String, vararg names: String): List<T> = filter {
+    it.hasLocalFunctionsWithAllNames(name, *names)
+}
 
 /**
  * List containing declarations without all specified local functions.
@@ -75,10 +63,7 @@ fun <T : KoLocalFunctionProvider> List<T>.withAllLocalFunctionsNamed(
  * @param names The name(s) of the local function(s) to exclude.
  * @return A list containing declarations without all specified local function(s).
  */
-fun <T : KoLocalFunctionProvider> List<T>.withoutAllLocalFunctionsNamed(
-    name: String,
-    vararg names: String,
-): List<T> =
+fun <T : KoLocalFunctionProvider> List<T>.withoutAllLocalFunctionsNamed(name: String, vararg names: String): List<T> =
     filterNot {
         it.hasLocalFunctionsWithAllNames(name, *names)
     }
@@ -89,10 +74,9 @@ fun <T : KoLocalFunctionProvider> List<T>.withoutAllLocalFunctionsNamed(
  * @param predicate A function that defines the condition to be met by a local function declaration.
  * @return A list containing declarations with at least one local function satisfying the predicate.
  */
-fun <T : KoLocalFunctionProvider> List<T>.withLocalFunction(predicate: (KoFunctionDeclaration) -> Boolean): List<T> =
-    filter {
-        it.hasLocalFunction(predicate)
-    }
+fun <T : KoLocalFunctionProvider> List<T>.withLocalFunction(predicate: (KoFunctionDeclaration) -> Boolean): List<T> = filter {
+    it.hasLocalFunction(predicate)
+}
 
 /**
  * List containing declarations that not have local function satisfying the provided predicate.

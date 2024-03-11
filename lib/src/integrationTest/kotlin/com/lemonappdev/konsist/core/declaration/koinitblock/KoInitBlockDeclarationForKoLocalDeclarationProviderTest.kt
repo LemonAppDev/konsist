@@ -11,11 +11,10 @@ class KoInitBlockDeclarationForKoLocalDeclarationProviderTest {
     @Test
     fun `init-block-contains-no-local-declarations`() {
         // given
-        val sut =
-            getSnippetFile("init-block-contains-no-local-declarations")
-                .classes()
-                .initBlocks
-                .first()
+        val sut = getSnippetFile("init-block-contains-no-local-declarations")
+            .classes()
+            .initBlocks
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -32,11 +31,10 @@ class KoInitBlockDeclarationForKoLocalDeclarationProviderTest {
     @Test
     fun `init-block-contains-local-declarations`() {
         // given
-        val sut =
-            getSnippetFile("init-block-contains-local-declarations")
-                .classes()
-                .initBlocks
-                .first()
+        val sut = getSnippetFile("init-block-contains-local-declarations")
+            .classes()
+            .initBlocks
+            .first()
 
         // then
         assertSoftly(sut) {

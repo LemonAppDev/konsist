@@ -1,0 +1,5 @@
+import kotlin.String
+
+class SampleClass() : SampleParametrizedSuperClass<Int>("param")
+
+open class SampleParametrizedSuperClass<T>(param: String)

@@ -9,12 +9,11 @@ class KoEnumConstantDeclarationForKoPathProviderTest {
     @Test
     fun `enum-const-file-path`() {
         // given
-        val sut =
-            getSnippetFile("enum-const-file-path")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
+        val sut = getSnippetFile("enum-const-file-path")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
 
         // then
         assertSoftly(sut.path) {
@@ -26,12 +25,11 @@ class KoEnumConstantDeclarationForKoPathProviderTest {
     @Test
     fun `enum-const-project-file-path`() {
         // given
-        val sut =
-            getSnippetFile("enum-const-project-file-path")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
+        val sut = getSnippetFile("enum-const-project-file-path")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
 
         // then
         sut
@@ -45,12 +43,11 @@ class KoEnumConstantDeclarationForKoPathProviderTest {
     @Test
     fun `enum-const-reside-in-file-path`() {
         // given
-        val sut =
-            getSnippetFile("enum-const-reside-in-file-path")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
+        val sut = getSnippetFile("enum-const-reside-in-file-path")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -64,12 +61,11 @@ class KoEnumConstantDeclarationForKoPathProviderTest {
     @Test
     fun `enum-const-reside-in-project-file-path`() {
         // given
-        val sut =
-            getSnippetFile("enum-const-reside-in-project-file-path")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
+        val sut = getSnippetFile("enum-const-reside-in-project-file-path")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -80,5 +76,6 @@ class KoEnumConstantDeclarationForKoPathProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koenumconstant/snippet/forkopathprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koenumconstant/snippet/forkopathprovider/", fileName)
 }

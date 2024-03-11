@@ -10,10 +10,9 @@ class KoFunctionDeclarationForKoReturnProviderTest {
     @Test
     fun `function-not-return-type`() {
         // given
-        val sut =
-            getSnippetFile("function-not-return-type")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-not-return-type")
+            .functions()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -28,10 +27,9 @@ class KoFunctionDeclarationForKoReturnProviderTest {
     @Test
     fun `extension-function-not-return-type`() {
         // given
-        val sut =
-            getSnippetFile("extension-function-not-return-type")
-                .functions()
-                .first()
+        val sut = getSnippetFile("extension-function-not-return-type")
+            .functions()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -46,10 +44,9 @@ class KoFunctionDeclarationForKoReturnProviderTest {
     @Test
     fun `function-return-type`() {
         // given
-        val sut =
-            getSnippetFile("function-return-type")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-return-type")
+            .functions()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -66,10 +63,9 @@ class KoFunctionDeclarationForKoReturnProviderTest {
     @Test
     fun `function-return-import-alias`() {
         // given
-        val sut =
-            getSnippetFile("function-return-import-alias")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-return-import-alias")
+            .functions()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -86,10 +82,9 @@ class KoFunctionDeclarationForKoReturnProviderTest {
     @Test
     fun `extension-function-return-type`() {
         // given
-        val sut =
-            getSnippetFile("extension-function-return-type")
-                .functions()
-                .first()
+        val sut = getSnippetFile("extension-function-return-type")
+            .functions()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -106,10 +101,9 @@ class KoFunctionDeclarationForKoReturnProviderTest {
     @Test
     fun `function-with-block-body-and-declared-type-has-string-return-value`() {
         // given
-        val sut =
-            getSnippetFile("function-with-block-body-and-declared-type-has-string-return-value")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-with-block-body-and-declared-type-has-string-return-value")
+            .functions()
+            .first()
 
         // then
         sut.hasReturnValue shouldBeEqualTo true
@@ -118,10 +112,9 @@ class KoFunctionDeclarationForKoReturnProviderTest {
     @Test
     fun `function-with-block-body-and-declared-type-has-unit-return-value`() {
         // given
-        val sut =
-            getSnippetFile("function-with-block-body-and-declared-type-has-unit-return-value")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-with-block-body-and-declared-type-has-unit-return-value")
+            .functions()
+            .first()
 
         // then
         sut.hasReturnValue shouldBeEqualTo false
@@ -130,10 +123,9 @@ class KoFunctionDeclarationForKoReturnProviderTest {
     @Test
     fun `function-with-block-body-and-without-declared-type-has-unit-return-value`() {
         // given
-        val sut =
-            getSnippetFile("function-with-block-body-and-without-declared-type-has-unit-return-value")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-with-block-body-and-without-declared-type-has-unit-return-value")
+            .functions()
+            .first()
 
         // then
         sut.hasReturnValue shouldBeEqualTo false
@@ -142,10 +134,9 @@ class KoFunctionDeclarationForKoReturnProviderTest {
     @Test
     fun `function-with-expression-body-and-declared-type-has-string-return-value`() {
         // given
-        val sut =
-            getSnippetFile("function-with-expression-body-and-declared-type-has-string-return-value")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-with-expression-body-and-declared-type-has-string-return-value")
+            .functions()
+            .first()
 
         // then
         sut.hasReturnValue shouldBeEqualTo true
@@ -154,10 +145,9 @@ class KoFunctionDeclarationForKoReturnProviderTest {
     @Test
     fun `function-with-expression-body-and-declared-type-has-unit-return-value`() {
         // given
-        val sut =
-            getSnippetFile("function-with-expression-body-and-declared-type-has-unit-return-value")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-with-expression-body-and-declared-type-has-unit-return-value")
+            .functions()
+            .first()
 
         // then
         sut.hasReturnValue shouldBeEqualTo false
@@ -166,10 +156,9 @@ class KoFunctionDeclarationForKoReturnProviderTest {
     @Test
     fun `function-with-expression-body-and-without-declared-type-has-string-return-value`() {
         // given
-        val sut =
-            getSnippetFile("function-with-expression-body-and-without-declared-type-has-string-return-value")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-with-expression-body-and-without-declared-type-has-string-return-value")
+            .functions()
+            .first()
 
         // then
         sut.hasReturnValue shouldBeEqualTo true
@@ -178,14 +167,14 @@ class KoFunctionDeclarationForKoReturnProviderTest {
     @Test
     fun `function-with-expression-body-and-without-declared-type-has-unit-return-value`() {
         // given
-        val sut =
-            getSnippetFile("function-with-expression-body-and-without-declared-type-has-unit-return-value")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-with-expression-body-and-without-declared-type-has-unit-return-value")
+            .functions()
+            .first()
 
         // then
         sut.hasReturnValue shouldBeEqualTo true
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofunction/snippet/forkoreturnprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kofunction/snippet/forkoreturnprovider/", fileName)
 }

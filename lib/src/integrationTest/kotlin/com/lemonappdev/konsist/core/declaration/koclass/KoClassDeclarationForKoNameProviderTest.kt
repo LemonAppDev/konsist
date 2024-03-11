@@ -9,10 +9,9 @@ class KoClassDeclarationForKoNameProviderTest {
     @Test
     fun `class`() {
         // given
-        val sut =
-            getSnippetFile("class")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class")
+            .classes()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -28,5 +27,6 @@ class KoClassDeclarationForKoNameProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koclass/snippet/forkonameprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koclass/snippet/forkonameprovider/", fileName)
 }

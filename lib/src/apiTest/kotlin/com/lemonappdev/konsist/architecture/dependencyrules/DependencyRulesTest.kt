@@ -21,10 +21,9 @@ class DependencyRulesTest {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage
-            """
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
             Layers have the same name name: Name.
-            """.trimIndent()
+        """.trimIndent()
     }
 
     @Test
@@ -40,10 +39,9 @@ class DependencyRulesTest {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage
-            """
-            Layers have the same name definedBy: package.. .
-            """.trimIndent()
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
+        Layers have the same name definedBy: package.. .
+        """.trimIndent()
     }
 
     @Test
@@ -73,10 +71,9 @@ class DependencyRulesTest {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage
-            """
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
             Layer Name1 was previously set as depend on nothing, so it cannot depend on Name2 layer.
-            """.trimIndent()
+        """.trimIndent()
     }
 
     @Test
@@ -95,10 +92,9 @@ class DependencyRulesTest {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage
-            """
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
             Layer Name1 was previously set as depend on nothing, so it cannot depend on Name2 layer.
-            """.trimIndent()
+        """.trimIndent()
     }
 
     @Test
@@ -114,10 +110,9 @@ class DependencyRulesTest {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage
-            """
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
             Duplicated the dependency that Name layer should be depend on nothing.
-            """.trimIndent()
+        """.trimIndent()
     }
 
     @Test
@@ -135,10 +130,9 @@ class DependencyRulesTest {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage
-            """
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
             Layer Name1 had a dependency previously set with Name2 layer, so it cannot be depend on nothing.
-            """.trimIndent()
+        """.trimIndent()
     }
 
     @Test

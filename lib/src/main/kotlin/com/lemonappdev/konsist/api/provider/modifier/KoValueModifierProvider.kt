@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoValueModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Determines whatever declaration has `value` modifier.
+     * Whatever declaration has `value` modifier.
      */
     val hasValueModifier: Boolean
 }

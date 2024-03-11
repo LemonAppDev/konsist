@@ -10,10 +10,9 @@ class KoFunctionDeclarationForKoBodyProviderTest {
     @Test
     fun `function-has-no-body`() {
         // given
-        val sut =
-            getSnippetFile("function-has-no-body")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-has-no-body")
+            .functions()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -25,10 +24,9 @@ class KoFunctionDeclarationForKoBodyProviderTest {
     @Test
     fun `function-has-expression-body`() {
         // given
-        val sut =
-            getSnippetFile("function-has-expression-body")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-has-expression-body")
+            .functions()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -40,10 +38,9 @@ class KoFunctionDeclarationForKoBodyProviderTest {
     @Test
     fun `function-has-block-body`() {
         // given
-        val sut =
-            getSnippetFile("function-has-block-body")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-has-block-body")
+            .functions()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -52,5 +49,6 @@ class KoFunctionDeclarationForKoBodyProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofunction/snippet/forkobodyprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kofunction/snippet/forkobodyprovider/", fileName)
 }

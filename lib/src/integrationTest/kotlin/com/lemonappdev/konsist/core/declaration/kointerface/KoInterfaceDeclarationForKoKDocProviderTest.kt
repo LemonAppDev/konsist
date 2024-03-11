@@ -10,10 +10,9 @@ class KoInterfaceDeclarationForKoKDocProviderTest {
     @Test
     fun `interface-without-kdoc`() {
         // given
-        val sut =
-            getSnippetFile("interface-without-kdoc")
-                .interfaces()
-                .first()
+        val sut = getSnippetFile("interface-without-kdoc")
+            .interfaces()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -25,10 +24,9 @@ class KoInterfaceDeclarationForKoKDocProviderTest {
     @Test
     fun `interface-with-kdoc`() {
         // given
-        val sut =
-            getSnippetFile("interface-with-kdoc")
-                .interfaces()
-                .first()
+        val sut = getSnippetFile("interface-with-kdoc")
+            .interfaces()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -40,10 +38,9 @@ class KoInterfaceDeclarationForKoKDocProviderTest {
     @Test
     fun `interface-with-one-line-kdoc`() {
         // given
-        val sut =
-            getSnippetFile("interface-with-one-line-kdoc")
-                .interfaces()
-                .first()
+        val sut = getSnippetFile("interface-with-one-line-kdoc")
+            .interfaces()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -52,5 +49,6 @@ class KoInterfaceDeclarationForKoKDocProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kointerface/snippet/forkokdocprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kointerface/snippet/forkokdocprovider/", fileName)
 }

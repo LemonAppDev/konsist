@@ -9,13 +9,12 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
     @Test
     fun `class-has-primitive-default-parameter-value`() {
         // given
-        val sut =
-            getSnippetFile("class-has-primitive-default-parameter-value")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
+        val sut = getSnippetFile("class-has-primitive-default-parameter-value")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
 
         // then
         assertSoftly(sut) {
@@ -28,12 +27,11 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
     @Test
     fun `function-has-primitive-default-parameter-value`() {
         // given
-        val sut =
-            getSnippetFile("function-has-primitive-default-parameter-value")
-                .functions()
-                .first()
-                .parameters
-                .first()
+        val sut = getSnippetFile("function-has-primitive-default-parameter-value")
+            .functions()
+            .first()
+            .parameters
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -47,12 +45,11 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
     @Test
     fun `function-has-complex-default-parameter-value`() {
         // given
-        val sut =
-            getSnippetFile("function-has-complex-default-parameter-value")
-                .functions()
-                .first()
-                .parameters
-                .first()
+        val sut = getSnippetFile("function-has-complex-default-parameter-value")
+            .functions()
+            .first()
+            .parameters
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -66,12 +63,11 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
     @Test
     fun `function-has-null-default-parameter-value`() {
         // given
-        val sut =
-            getSnippetFile("function-has-null-default-parameter-value")
-                .functions()
-                .first()
-                .parameters
-                .first()
+        val sut = getSnippetFile("function-has-null-default-parameter-value")
+            .functions()
+            .first()
+            .parameters
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -84,12 +80,11 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
     @Test
     fun `function-has-no-default-parameter-value`() {
         // given
-        val sut =
-            getSnippetFile("function-has-no-default-parameter-value")
-                .functions()
-                .first()
-                .parameters
-                .first()
+        val sut = getSnippetFile("function-has-no-default-parameter-value")
+            .functions()
+            .first()
+            .parameters
+            .first()
 
         // then
         assertSoftly(sut) {

@@ -10,14 +10,12 @@ class KoKDocReceiverTagProviderListExtTest {
     @Test
     fun `withReceiverTag() returns declaration with any tag`() {
         // given
-        val declaration1: KoKDocReceiverTagProvider =
-            mockk {
-                every { hasReceiverTag } returns true
-            }
-        val declaration2: KoKDocReceiverTagProvider =
-            mockk {
-                every { hasReceiverTag } returns false
-            }
+        val declaration1: KoKDocReceiverTagProvider = mockk {
+            every { hasReceiverTag } returns true
+        }
+        val declaration2: KoKDocReceiverTagProvider = mockk {
+            every { hasReceiverTag } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -30,14 +28,12 @@ class KoKDocReceiverTagProviderListExtTest {
     @Test
     fun `withoutReceiverTag() returns declaration with any tag`() {
         // given
-        val declaration1: KoKDocReceiverTagProvider =
-            mockk {
-                every { hasReceiverTag } returns true
-            }
-        val declaration2: KoKDocReceiverTagProvider =
-            mockk {
-                every { hasReceiverTag } returns false
-            }
+        val declaration1: KoKDocReceiverTagProvider = mockk {
+            every { hasReceiverTag } returns true
+        }
+        val declaration2: KoKDocReceiverTagProvider = mockk {
+            every { hasReceiverTag } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when

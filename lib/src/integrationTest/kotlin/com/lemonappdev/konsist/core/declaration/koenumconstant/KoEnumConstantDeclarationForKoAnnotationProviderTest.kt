@@ -13,12 +13,11 @@ class KoEnumConstantDeclarationForKoAnnotationProviderTest {
     @Test
     fun `enum-const-has-no-annotation`() {
         // given
-        val sut =
-            getSnippetFile("enum-const-has-no-annotation")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
+        val sut = getSnippetFile("enum-const-has-no-annotation")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -39,12 +38,11 @@ class KoEnumConstantDeclarationForKoAnnotationProviderTest {
     @Test
     fun `enum-const-has-annotation`() {
         // given
-        val sut =
-            getSnippetFile("enum-const-has-annotation")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
+        val sut = getSnippetFile("enum-const-has-annotation")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -89,12 +87,11 @@ class KoEnumConstantDeclarationForKoAnnotationProviderTest {
     @Test
     fun `enum-const-has-two-annotations`() {
         // given
-        val sut =
-            getSnippetFile("enum-const-has-two-annotations")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
+        val sut = getSnippetFile("enum-const-has-two-annotations")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -150,12 +147,11 @@ class KoEnumConstantDeclarationForKoAnnotationProviderTest {
     @Test
     fun `enum-const-has-suppress-annotation-without-import`() {
         // given
-        val sut =
-            getSnippetFile("enum-const-has-suppress-annotation-without-import")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
+        val sut = getSnippetFile("enum-const-has-suppress-annotation-without-import")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
 
         // then
         assertSoftly(sut) {

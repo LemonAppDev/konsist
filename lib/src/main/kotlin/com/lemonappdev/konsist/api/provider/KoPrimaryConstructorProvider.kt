@@ -12,7 +12,7 @@ interface KoPrimaryConstructorProvider : KoBaseProvider {
     val primaryConstructor: KoPrimaryConstructorDeclaration?
 
     /**
-     * Determines whatever declaration has primary constructor.
+     * Whatever declaration has primary constructor.
      */
     val hasPrimaryConstructor: Boolean
 }

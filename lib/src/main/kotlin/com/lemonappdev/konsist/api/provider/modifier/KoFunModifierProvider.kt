@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoFunModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Determines whatever declaration has a `fun` modifier.
+     * Whatever declaration has a `fun` modifier.
      */
     val hasFunModifier: Boolean
 }

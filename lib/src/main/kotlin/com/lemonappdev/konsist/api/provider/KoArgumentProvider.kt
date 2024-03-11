@@ -18,7 +18,7 @@ interface KoArgumentProvider : KoBaseProvider {
     val numArguments: Int
 
     /**
-     * Returns the number of arguments that satisfies the specified predicate present in the declaration.
+     * Gets the number of arguments that satisfies the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if an argument satisfies a condition.
      * @return The number of arguments in the declaration.
@@ -26,7 +26,7 @@ interface KoArgumentProvider : KoBaseProvider {
     fun countArguments(predicate: (KoArgumentDeclaration) -> Boolean): Int
 
     /**
-     * Determines whatever the declaration has arguments.
+     * Whether the declaration has arguments.
      *
      * @return `true` if the declaration has any argument, `false` otherwise.
      */
@@ -39,10 +39,7 @@ interface KoArgumentProvider : KoBaseProvider {
      * @param names the names of the arguments to check.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasArgumentWithName(
-        name: String,
-        vararg names: String,
-    ): Boolean
+    fun hasArgumentWithName(name: String, vararg names: String): Boolean
 
     /**
      * Determines whether the declaration has arguments with all the specified names.
@@ -51,10 +48,7 @@ interface KoArgumentProvider : KoBaseProvider {
      * @param names The names of the arguments to check.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasArgumentsWithAllNames(
-        name: String,
-        vararg names: String,
-    ): Boolean
+    fun hasArgumentsWithAllNames(name: String, vararg names: String): Boolean
 
     /**
      * Determines whether the declaration has at least one argument that satisfies the provided predicate.
@@ -68,7 +62,8 @@ interface KoArgumentProvider : KoBaseProvider {
      * Determines whether the declaration has all arguments that satisfy the provided predicate.
      *
      * Note that if the arguments contains no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate.
+     * that do not match the predicate. See a more detailed explanation of this logic concept in
+     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
      *
      * @param predicate A function that defines the condition to be met by argument declarations.
      * @return `true` if all argument declarations satisfy the predicate, `false` otherwise.

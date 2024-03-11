@@ -8,10 +8,9 @@ class KoPackageDeclarationForKoPackageMatchingPathProviderTest {
     @Test
     fun `package-with-matching-file-path`() {
         // given
-        val sut =
-            getSnippetFile("package-with-matching-file-path")
-                .packages
-                .first()
+        val sut = getSnippetFile("package-with-matching-file-path")
+            .packages
+            .first()
 
         // then
         sut.hasMatchingPath shouldBeEqualTo true
@@ -20,10 +19,9 @@ class KoPackageDeclarationForKoPackageMatchingPathProviderTest {
     @Test
     fun `package-without-matching-file-path`() {
         // given
-        val sut =
-            getSnippetFile("package-without-matching-file-path")
-                .packages
-                .first()
+        val sut = getSnippetFile("package-without-matching-file-path")
+            .packages
+            .first()
 
         // then
         sut.hasMatchingPath shouldBeEqualTo false

@@ -9,13 +9,12 @@ class KoKDocTagDeclarationTest {
     @Test
     fun `kdoc-tag-to-string`() {
         // given
-        val sut =
-            getSnippetFile("kdoc-tag-to-string")
-                .functions()
-                .kDocs
-                .first()
-                .tags
-                .first()
+        val sut = getSnippetFile("kdoc-tag-to-string")
+            .functions()
+            .kDocs
+            .first()
+            .tags
+            .first()
 
         // then
         sut.toString() shouldBeEqualTo "@return sample text"

@@ -10,14 +10,12 @@ class KoAnnotationModifierProviderListExtTest {
     @Test
     fun `withAnnotationModifier() returns declaration with annotation modifier`() {
         // given
-        val declaration1: KoAnnotationModifierProvider =
-            mockk {
-                every { hasAnnotationModifier } returns true
-            }
-        val declaration2: KoAnnotationModifierProvider =
-            mockk {
-                every { hasAnnotationModifier } returns false
-            }
+        val declaration1: KoAnnotationModifierProvider = mockk {
+            every { hasAnnotationModifier } returns true
+        }
+        val declaration2: KoAnnotationModifierProvider = mockk {
+            every { hasAnnotationModifier } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -30,14 +28,12 @@ class KoAnnotationModifierProviderListExtTest {
     @Test
     fun `withoutAnnotationModifier() returns declaration without annotation modifier`() {
         // given
-        val declaration1: KoAnnotationModifierProvider =
-            mockk {
-                every { hasAnnotationModifier } returns true
-            }
-        val declaration2: KoAnnotationModifierProvider =
-            mockk {
-                every { hasAnnotationModifier } returns false
-            }
+        val declaration1: KoAnnotationModifierProvider = mockk {
+            every { hasAnnotationModifier } returns true
+        }
+        val declaration2: KoAnnotationModifierProvider = mockk {
+            every { hasAnnotationModifier } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when

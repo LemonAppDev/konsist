@@ -8,10 +8,9 @@ class KoFunctionDeclarationTest {
     @Test
     fun `function-to-string`() {
         // given
-        val sut =
-            getSnippetFile("function-to-string")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-to-string")
+            .functions()
+            .first()
 
         // then
         sut.toString() shouldBeEqualTo "sampleFunction"

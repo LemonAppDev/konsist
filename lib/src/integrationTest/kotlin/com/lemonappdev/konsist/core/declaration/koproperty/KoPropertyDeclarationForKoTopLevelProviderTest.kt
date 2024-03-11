@@ -8,10 +8,9 @@ class KoPropertyDeclarationForKoTopLevelProviderTest {
     @Test
     fun `property-is-not-top-level`() {
         // given
-        val sut =
-            getSnippetFile("property-is-not-top-level")
-                .properties(includeNested = true)
-                .first()
+        val sut = getSnippetFile("property-is-not-top-level")
+            .properties(includeNested = true)
+            .first()
 
         // then
         sut.isTopLevel shouldBeEqualTo false
@@ -20,14 +19,14 @@ class KoPropertyDeclarationForKoTopLevelProviderTest {
     @Test
     fun `property-is-top-level`() {
         // given
-        val sut =
-            getSnippetFile("property-is-top-level")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-is-top-level")
+            .properties()
+            .first()
 
         // then
         sut.isTopLevel shouldBeEqualTo true
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koproperty/snippet/forkotoplevelprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koproperty/snippet/forkotoplevelprovider/", fileName)
 }

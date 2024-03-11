@@ -8,10 +8,9 @@ class KoInterfaceDeclarationForKoActualModifierProviderTest {
     @Test
     fun `interface-without-actual-modifier`() {
         // given
-        val sut =
-            getSnippetFile("interface-without-actual-modifier")
-                .interfaces()
-                .first()
+        val sut = getSnippetFile("interface-without-actual-modifier")
+            .interfaces()
+            .first()
 
         // then
         sut.hasActualModifier shouldBeEqualTo false
@@ -20,10 +19,9 @@ class KoInterfaceDeclarationForKoActualModifierProviderTest {
     @Test
     fun `interface-with-actual-modifier`() {
         // given
-        val sut =
-            getSnippetFile("interface-with-actual-modifier")
-                .interfaces()
-                .first()
+        val sut = getSnippetFile("interface-with-actual-modifier")
+            .interfaces()
+            .first()
 
         // then
         sut.hasActualModifier shouldBeEqualTo true

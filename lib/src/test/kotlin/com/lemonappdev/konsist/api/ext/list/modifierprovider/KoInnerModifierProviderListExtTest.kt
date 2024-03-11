@@ -10,14 +10,12 @@ class KoInnerModifierProviderListExtTest {
     @Test
     fun `withInnerModifier() returns declaration with inner modifier`() {
         // given
-        val declaration1: KoInnerModifierProvider =
-            mockk {
-                every { hasInnerModifier } returns true
-            }
-        val declaration2: KoInnerModifierProvider =
-            mockk {
-                every { hasInnerModifier } returns false
-            }
+        val declaration1: KoInnerModifierProvider = mockk {
+            every { hasInnerModifier } returns true
+        }
+        val declaration2: KoInnerModifierProvider = mockk {
+            every { hasInnerModifier } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -30,14 +28,12 @@ class KoInnerModifierProviderListExtTest {
     @Test
     fun `withoutInnerModifier() returns declaration without inner modifier`() {
         // given
-        val declaration1: KoInnerModifierProvider =
-            mockk {
-                every { hasInnerModifier } returns true
-            }
-        val declaration2: KoInnerModifierProvider =
-            mockk {
-                every { hasInnerModifier } returns false
-            }
+        val declaration1: KoInnerModifierProvider = mockk {
+            every { hasInnerModifier } returns true
+        }
+        val declaration2: KoInnerModifierProvider = mockk {
+            every { hasInnerModifier } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when

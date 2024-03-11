@@ -22,10 +22,8 @@ fun <T : KoClassProvider> List<T>.classes(
  * @param includeLocal Whether to include local classes.
  * @return A list containing declarations with any class.
  */
-fun <T : KoClassProvider> List<T>.withClasses(
-    includeNested: Boolean = true,
-    includeLocal: Boolean = true,
-): List<T> = filter { it.hasClasses(includeNested, includeLocal) }
+fun <T : KoClassProvider> List<T>.withClasses(includeNested: Boolean = true, includeLocal: Boolean = true): List<T> =
+    filter { it.hasClasses(includeNested, includeLocal) }
 
 /**
  * List containing declarations with no classes.
@@ -34,10 +32,8 @@ fun <T : KoClassProvider> List<T>.withClasses(
  * @param includeLocal Whether to include local classes.
  * @return A list containing declarations with no classes.
  */
-fun <T : KoClassProvider> List<T>.withoutClasses(
-    includeNested: Boolean = true,
-    includeLocal: Boolean = true,
-): List<T> = filterNot { it.hasClasses(includeNested, includeLocal) }
+fun <T : KoClassProvider> List<T>.withoutClasses(includeNested: Boolean = true, includeLocal: Boolean = true): List<T> =
+    filterNot { it.hasClasses(includeNested, includeLocal) }
 
 /**
  * List containing declarations that have at least one class with the specified name(s).
@@ -53,10 +49,9 @@ fun <T : KoClassProvider> List<T>.withClassNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> =
-    filter {
-        it.hasClassWithName(name, *names, includeNested = includeNested, includeLocal = includeLocal)
-    }
+): List<T> = filter {
+    it.hasClassWithName(name, *names, includeNested = includeNested, includeLocal = includeLocal)
+}
 
 /**
  * List containing declarations without any of specified classes.
@@ -72,10 +67,9 @@ fun <T : KoClassProvider> List<T>.withoutClassNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> =
-    filterNot {
-        it.hasClassWithName(name, *names, includeNested = includeNested, includeLocal = includeLocal)
-    }
+): List<T> = filterNot {
+    it.hasClassWithName(name, *names, includeNested = includeNested, includeLocal = includeLocal)
+}
 
 /**
  * List containing declarations that have all specified classes.
@@ -91,10 +85,9 @@ fun <T : KoClassProvider> List<T>.withAllClassesNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> =
-    filter {
-        it.hasClassesWithAllNames(name, *names, includeNested = includeNested, includeLocal = includeLocal)
-    }
+): List<T> = filter {
+    it.hasClassesWithAllNames(name, *names, includeNested = includeNested, includeLocal = includeLocal)
+}
 
 /**
  * List containing declarations without all specified classes.
@@ -127,10 +120,9 @@ fun <T : KoClassProvider> List<T>.withClass(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
     predicate: (KoClassDeclaration) -> Boolean,
-): List<T> =
-    filter {
-        it.hasClass(includeNested, includeLocal, predicate)
-    }
+): List<T> = filter {
+    it.hasClass(includeNested, includeLocal, predicate)
+}
 
 /**
  * List containing declarations that not have class satisfying the provided predicate.
@@ -144,7 +136,8 @@ fun <T : KoClassProvider> List<T>.withoutClass(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
     predicate: (KoClassDeclaration) -> Boolean,
-): List<T> = filterNot { it.hasClass(includeNested, includeLocal, predicate) }
+): List<T> =
+    filterNot { it.hasClass(includeNested, includeLocal, predicate) }
 
 /**
  * List containing declarations that have all classes satisfying the provided predicate.
@@ -175,7 +168,8 @@ fun <T : KoClassProvider> List<T>.withoutAllClasses(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
     predicate: (KoClassDeclaration) -> Boolean,
-): List<T> = filterNot { it.hasAllClasses(includeNested, includeLocal, predicate) }
+): List<T> =
+    filterNot { it.hasAllClasses(includeNested, includeLocal, predicate) }
 
 /**
  * List containing declarations with class declarations satisfying the predicate.
@@ -189,7 +183,8 @@ fun <T : KoClassProvider> List<T>.withClasses(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
     predicate: (List<KoClassDeclaration>) -> Boolean,
-): List<T> = filter { predicate(it.classes(includeNested, includeLocal)) }
+): List<T> =
+    filter { predicate(it.classes(includeNested, includeLocal)) }
 
 /**
  * List containing declarations without class declarations satisfying the predicate.
@@ -203,4 +198,5 @@ fun <T : KoClassProvider> List<T>.withoutClasses(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
     predicate: (List<KoClassDeclaration>) -> Boolean,
-): List<T> = filterNot { predicate(it.classes(includeNested, includeLocal)) }
+): List<T> =
+    filterNot { predicate(it.classes(includeNested, includeLocal)) }

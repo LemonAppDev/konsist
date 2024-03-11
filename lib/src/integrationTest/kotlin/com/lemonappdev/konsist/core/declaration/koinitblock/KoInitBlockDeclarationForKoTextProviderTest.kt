@@ -9,11 +9,10 @@ class KoInitBlockDeclarationForKoTextProviderTest {
     @Test
     fun `init-block-text`() {
         // given
-        val sut =
-            getSnippetFile("init-block-text")
-                .classes()
-                .initBlocks
-                .first()
+        val sut = getSnippetFile("init-block-text")
+            .classes()
+            .initBlocks
+            .first()
 
         // then
         sut
@@ -27,5 +26,6 @@ class KoInitBlockDeclarationForKoTextProviderTest {
             )
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koinitblock/snippet/forkotextprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koinitblock/snippet/forkotextprovider/", fileName)
 }

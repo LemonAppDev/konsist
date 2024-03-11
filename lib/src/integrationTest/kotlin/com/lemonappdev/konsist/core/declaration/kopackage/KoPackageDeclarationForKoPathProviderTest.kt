@@ -9,10 +9,9 @@ class KoPackageDeclarationForKoPathProviderTest {
     @Test
     fun `package-file-path`() {
         // given
-        val sut =
-            getSnippetFile("package-file-path")
-                .packages
-                .first()
+        val sut = getSnippetFile("package-file-path")
+            .packages
+            .first()
 
         // then
         assertSoftly(sut.path) {
@@ -24,10 +23,9 @@ class KoPackageDeclarationForKoPathProviderTest {
     @Test
     fun `package-project-file-path`() {
         // given
-        val sut =
-            getSnippetFile("package-project-file-path")
-                .packages
-                .first()
+        val sut = getSnippetFile("package-project-file-path")
+            .packages
+            .first()
 
         // then
         sut
@@ -41,10 +39,9 @@ class KoPackageDeclarationForKoPathProviderTest {
     @Test
     fun `package-reside-in-file-path`() {
         // given
-        val sut =
-            getSnippetFile("package-reside-in-file-path")
-                .packages
-                .first()
+        val sut = getSnippetFile("package-reside-in-file-path")
+            .packages
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -58,10 +55,9 @@ class KoPackageDeclarationForKoPathProviderTest {
     @Test
     fun `package-reside-in-project-file-path`() {
         // given
-        val sut =
-            getSnippetFile("package-reside-in-project-file-path")
-                .packages
-                .first()
+        val sut = getSnippetFile("package-reside-in-project-file-path")
+            .packages
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -72,5 +68,6 @@ class KoPackageDeclarationForKoPathProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kopackage/snippet/forkopathprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kopackage/snippet/forkopathprovider/", fileName)
 }

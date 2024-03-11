@@ -9,13 +9,9 @@ import com.lemonappdev.konsist.api.provider.KoFileExtensionProvider
  * @param extensions The extensions to include.
  * @return A list containing files with extensions matching the specified extensions.
  */
-fun <T : KoFileExtensionProvider> List<T>.withExtension(
-    extension: String,
-    vararg extensions: String,
-): List<T> =
-    filter {
-        it.hasExtension(extension) || extensions.any { extension -> it.hasExtension(extension) }
-    }
+fun <T : KoFileExtensionProvider> List<T>.withExtension(extension: String, vararg extensions: String): List<T> = filter {
+    it.hasExtension(extension) || extensions.any { extension -> it.hasExtension(extension) }
+}
 
 /**
  * List containing files without extension.
@@ -24,10 +20,6 @@ fun <T : KoFileExtensionProvider> List<T>.withExtension(
  * @param extensions The extensions to exclude.
  * @return A list containing files without extensions matching the specified extensions.
  */
-fun <T : KoFileExtensionProvider> List<T>.withoutExtension(
-    extension: String,
-    vararg extensions: String,
-): List<T> =
-    filter {
-        !it.hasExtension(extension) && extensions.none { extension -> it.hasExtension(extension) }
-    }
+fun <T : KoFileExtensionProvider> List<T>.withoutExtension(extension: String, vararg extensions: String): List<T> = filter {
+    !it.hasExtension(extension) && extensions.none { extension -> it.hasExtension(extension) }
+}

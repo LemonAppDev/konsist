@@ -8,10 +8,9 @@ class KoObjectDeclarationForKoCompanionModifierProviderTest {
     @Test
     fun `object-without-companion-modifier`() {
         // given
-        val sut =
-            getSnippetFile("object-without-companion-modifier")
-                .objects()
-                .first()
+        val sut = getSnippetFile("object-without-companion-modifier")
+            .objects()
+            .first()
 
         // then
         sut.hasCompanionModifier shouldBeEqualTo false
@@ -20,10 +19,9 @@ class KoObjectDeclarationForKoCompanionModifierProviderTest {
     @Test
     fun `companion-object`() {
         // given
-        val sut =
-            getSnippetFile("companion-object")
-                .objects(includeNested = true)
-                .first()
+        val sut = getSnippetFile("companion-object")
+            .objects(includeNested = true)
+            .first()
 
         // then
         sut.hasCompanionModifier shouldBeEqualTo true

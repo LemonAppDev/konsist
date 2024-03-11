@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoActualModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Determines whatever class has `actual` modifier.
+     * Whatever class has `actual` modifier.
      */
     val hasActualModifier: Boolean
 }

@@ -11,18 +11,17 @@ internal interface KoDefaultValueProviderCore : KoDefaultValueProvider, KoBasePr
 
     override val defaultValue: String?
         get() {
-            // e.g. primitive value as default parameter value
-            val constantExpressionText =
-                ktParameter
-                    .children
-                    .firstIsInstanceOrNull<KtConstantExpression>()
-                    ?.text
+            // eg. primitive value as default parameter value
+            val constantExpressionText = ktParameter
+                .children
+                .firstIsInstanceOrNull<KtConstantExpression>()
+                ?.text
 
             if (constantExpressionText != null) {
                 return constantExpressionText
             }
 
-            // e.g. function call as default parameter value
+            // eg. function call as default parameter value
 
             return ktParameter
                 .children
@@ -30,9 +29,8 @@ internal interface KoDefaultValueProviderCore : KoDefaultValueProvider, KoBasePr
                 ?.text
         }
 
-    override fun hasDefaultValue(value: String?): Boolean =
-        when (value) {
-            null -> ktParameter.hasDefaultValue()
-            else -> defaultValue == value
-        }
+    override fun hasDefaultValue(value: String?): Boolean = when (value) {
+        null -> ktParameter.hasDefaultValue()
+        else -> defaultValue == value
+    }
 }

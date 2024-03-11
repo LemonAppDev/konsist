@@ -13,7 +13,7 @@ interface KoKDocSuppressTagProvider : KoBaseProvider {
     val suppressTag: KoKDocTagDeclaration?
 
     /**
-     * Determines whatever the declaration has suppress tag.
+     * Whatever the declaration has suppress tag.
      */
     val hasSuppressTag: Boolean
 }

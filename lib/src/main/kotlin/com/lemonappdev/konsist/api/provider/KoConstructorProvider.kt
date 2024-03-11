@@ -17,7 +17,7 @@ interface KoConstructorProvider : KoBaseProvider {
     val numConstructors: Int
 
     /**
-     * Returns the number of constructors that satisfies the specified predicate present in the declaration.
+     * Gets the number of constructors that satisfies the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if a constructor satisfies a condition.
      * @return The number of constructors in the declaration.
@@ -25,14 +25,14 @@ interface KoConstructorProvider : KoBaseProvider {
     fun countConstructors(predicate: (KoConstructorDeclaration) -> Boolean): Int
 
     /**
-     * Determines whatever the declaration has any constructor.
+     * Whether the declaration has any constructor.
      *
      * @return `true` if the declaration has any constructor, `false` otherwise.
      */
     fun hasConstructors(): Boolean
 
     /**
-     * Determines whatever the declaration has any constructor with the specified predicate.
+     * Whether the declaration has any constructor with the specified predicate.
      *
      * @param predicate The predicate function to determine if a constructor satisfies a condition.
      * @return `true` if the declaration has constructors with the specified predicate, `false` otherwise.
@@ -40,10 +40,11 @@ interface KoConstructorProvider : KoBaseProvider {
     fun hasConstructor(predicate: (KoConstructorDeclaration) -> Boolean): Boolean
 
     /**
-     * Determines whatever the declaration has all constructors with the specified predicate.
+     * Whether the declaration has all constructors with the specified predicate.
      *
      * Note that if the constructors contains no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate (["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth)).
+     * that do not match the predicate. See a more detailed explanation of this logic concept in
+     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
      *
      * @param predicate The predicate function to determine if a constructor satisfies a condition.
      * @return `true` if the declaration has all constructors with the specified predicate, `false` otherwise.

@@ -8,10 +8,9 @@ class KoInterfaceDeclarationForKoContainingFileProviderTest {
     @Test
     fun `interface-containing-file`() {
         // given
-        val sut =
-            getSnippetFile("interface-containing-file")
-                .interfaces()
-                .first()
+        val sut = getSnippetFile("interface-containing-file")
+            .interfaces()
+            .first()
 
         // then
         sut

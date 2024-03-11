@@ -9,10 +9,9 @@ class KoPropertyDeclarationForKoPathProviderTest {
     @Test
     fun `property-file-path`() {
         // given
-        val sut =
-            getSnippetFile("property-file-path")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-file-path")
+            .properties()
+            .first()
 
         // then
         assertSoftly(sut.path) {
@@ -24,10 +23,9 @@ class KoPropertyDeclarationForKoPathProviderTest {
     @Test
     fun `property-project-file-path`() {
         // given
-        val sut =
-            getSnippetFile("property-project-file-path")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-project-file-path")
+            .properties()
+            .first()
 
         // then
         sut
@@ -41,10 +39,9 @@ class KoPropertyDeclarationForKoPathProviderTest {
     @Test
     fun `property-reside-in-file-path`() {
         // given
-        val sut =
-            getSnippetFile("property-reside-in-file-path")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-reside-in-file-path")
+            .properties()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -58,10 +55,9 @@ class KoPropertyDeclarationForKoPathProviderTest {
     @Test
     fun `property-reside-in-project-file-path`() {
         // given
-        val sut =
-            getSnippetFile("property-reside-in-project-file-path")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-reside-in-project-file-path")
+            .properties()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -72,5 +68,6 @@ class KoPropertyDeclarationForKoPathProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koproperty/snippet/forkopathprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koproperty/snippet/forkopathprovider/", fileName)
 }

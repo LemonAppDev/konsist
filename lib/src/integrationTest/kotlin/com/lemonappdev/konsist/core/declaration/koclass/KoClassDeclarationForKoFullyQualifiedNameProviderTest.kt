@@ -8,10 +8,9 @@ class KoClassDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `class-fully-qualified-name`() {
         // given
-        val sut =
-            getSnippetFile("class-fully-qualified-name")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-fully-qualified-name")
+            .classes()
+            .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleClass"
@@ -20,10 +19,9 @@ class KoClassDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `class-fully-qualified-name-without-package`() {
         // given
-        val sut =
-            getSnippetFile("class-fully-qualified-name-without-package")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-fully-qualified-name-without-package")
+            .classes()
+            .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "SampleClass"
@@ -32,10 +30,9 @@ class KoClassDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `nested-class-fully-qualified-name`() {
         // given
-        val sut =
-            getSnippetFile("nested-class-fully-qualified-name")
-                .classes()
-                .first()
+        val sut = getSnippetFile("nested-class-fully-qualified-name")
+            .classes()
+            .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleInterface.SampleClass"
@@ -44,10 +41,9 @@ class KoClassDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `nested-class-fully-qualified-name-without-package`() {
         // given
-        val sut =
-            getSnippetFile("nested-class-fully-qualified-name-without-package")
-                .classes()
-                .first()
+        val sut = getSnippetFile("nested-class-fully-qualified-name-without-package")
+            .classes()
+            .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "SampleInterface.SampleClass"

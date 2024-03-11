@@ -8,13 +8,12 @@ class KoParameterDeclarationForKoTextProviderTest {
     @Test
     fun `parameter-text`() {
         // given
-        val sut =
-            getSnippetFile("parameter-text")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
+        val sut = getSnippetFile("parameter-text")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
 
         // then
         sut
@@ -22,5 +21,6 @@ class KoParameterDeclarationForKoTextProviderTest {
             .shouldBeEqualTo("val sampleParameter: Int")
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koparameter/snippet/forkotextprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koparameter/snippet/forkotextprovider/", fileName)
 }

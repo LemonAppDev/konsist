@@ -18,10 +18,9 @@ class KoInterfaceDeclarationForKoModifierProviderTest {
     @Test
     fun `interface-has-no-modifier`() {
         // given
-        val sut =
-            getSnippetFile("interface-has-no-modifier")
-                .interfaces()
-                .first()
+        val sut = getSnippetFile("interface-has-no-modifier")
+            .interfaces()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -43,10 +42,9 @@ class KoInterfaceDeclarationForKoModifierProviderTest {
     @Test
     fun `interface-has-public-and-abstract-modifiers`() {
         // given
-        val sut =
-            getSnippetFile("interface-has-public-and-abstract-modifiers")
-                .interfaces()
-                .first()
+        val sut = getSnippetFile("interface-has-public-and-abstract-modifiers")
+            .interfaces()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -76,10 +74,9 @@ class KoInterfaceDeclarationForKoModifierProviderTest {
         modifiers: List<KoModifier>,
     ) {
         // given
-        val sut =
-            getSnippetFile(fileName)
-                .interfaces()
-                .first()
+        val sut = getSnippetFile(fileName)
+            .interfaces()
+            .first()
 
         // then
         sut.modifiers shouldBeEqualTo modifiers
@@ -91,18 +88,17 @@ class KoInterfaceDeclarationForKoModifierProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() =
-            listOf(
-                arguments("interface-has-modifiers-and-annotation-with-parameter", listOf(PUBLIC, ABSTRACT)),
-                arguments("interface-has-modifiers-and-annotation-without-parameter", listOf(PUBLIC, ABSTRACT)),
-                arguments("interface-has-modifiers-annotation-and-comment", listOf(PUBLIC, ABSTRACT)),
-                arguments("interface-has-modifiers-and-annotations", listOf(PUBLIC, ABSTRACT)),
-                arguments("interface-has-modifiers-and-annotation-with-angle-brackets", listOf(PUBLIC, ABSTRACT)),
-                arguments("interface-has-modifiers-and-kdoc", listOf(PUBLIC, ABSTRACT)),
-                arguments("interface-has-modifiers-kdoc-and-annotation-before-them", listOf(PUBLIC, ABSTRACT)),
-                arguments("interface-has-modifiers-multiline-comment-and-annotation-before-them", listOf(PUBLIC, ABSTRACT)),
-                arguments("interface-has-modifiers-and-comment-before-them", listOf(PUBLIC, ABSTRACT)),
-                arguments("interface-has-modifiers-and-comment-after-them", listOf(PUBLIC, ABSTRACT)),
-            )
+        fun provideValues() = listOf(
+            arguments("interface-has-modifiers-and-annotation-with-parameter", listOf(PUBLIC, ABSTRACT)),
+            arguments("interface-has-modifiers-and-annotation-without-parameter", listOf(PUBLIC, ABSTRACT)),
+            arguments("interface-has-modifiers-annotation-and-comment", listOf(PUBLIC, ABSTRACT)),
+            arguments("interface-has-modifiers-and-annotations", listOf(PUBLIC, ABSTRACT)),
+            arguments("interface-has-modifiers-and-annotation-with-angle-brackets", listOf(PUBLIC, ABSTRACT)),
+            arguments("interface-has-modifiers-and-kdoc", listOf(PUBLIC, ABSTRACT)),
+            arguments("interface-has-modifiers-kdoc-and-annotation-before-them", listOf(PUBLIC, ABSTRACT)),
+            arguments("interface-has-modifiers-multiline-comment-and-annotation-before-them", listOf(PUBLIC, ABSTRACT)),
+            arguments("interface-has-modifiers-and-comment-before-them", listOf(PUBLIC, ABSTRACT)),
+            arguments("interface-has-modifiers-and-comment-after-them", listOf(PUBLIC, ABSTRACT)),
+        )
     }
 }

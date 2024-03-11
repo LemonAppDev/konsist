@@ -11,12 +11,11 @@ class KoArgumentDeclarationForKoNameProviderTest {
     @Test
     fun `argument-in-enum-const-without-name`() {
         // given
-        val sut =
-            getSnippetFile("argument-in-enum-const-without-name")
-                .classes()
-                .enumConstants
-                .arguments
-                .first()
+        val sut = getSnippetFile("argument-in-enum-const-without-name")
+            .classes()
+            .enumConstants
+            .arguments
+            .first()
 
         // then
         sut.name shouldBeEqualTo ""
@@ -25,12 +24,11 @@ class KoArgumentDeclarationForKoNameProviderTest {
     @Test
     fun `argument-in-enum-const-with-name`() {
         // given
-        val sut =
-            getSnippetFile("argument-in-enum-const-with-name")
-                .classes()
-                .enumConstants
-                .arguments
-                .first()
+        val sut = getSnippetFile("argument-in-enum-const-with-name")
+            .classes()
+            .enumConstants
+            .arguments
+            .first()
 
         // then
         sut.name shouldBeEqualTo "sampleArgument"
@@ -39,12 +37,11 @@ class KoArgumentDeclarationForKoNameProviderTest {
     @Test
     fun `argument-in-annotation-without-name`() {
         // given
-        val sut =
-            getSnippetFile("argument-in-annotation-without-name")
-                .functions()
-                .annotations
-                .arguments
-                .first()
+        val sut = getSnippetFile("argument-in-annotation-without-name")
+            .functions()
+            .annotations
+            .arguments
+            .first()
 
         // then
         sut.name shouldBeEqualTo ""
@@ -53,16 +50,16 @@ class KoArgumentDeclarationForKoNameProviderTest {
     @Test
     fun `argument-in-annotation-with-name`() {
         // given
-        val sut =
-            getSnippetFile("argument-in-annotation-with-name")
-                .functions()
-                .annotations
-                .arguments
-                .first()
+        val sut = getSnippetFile("argument-in-annotation-with-name")
+            .functions()
+            .annotations
+            .arguments
+            .first()
 
         // then
         sut.name shouldBeEqualTo "sampleParameter"
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koargument/snippet/forkonameprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koargument/snippet/forkonameprovider/", fileName)
 }

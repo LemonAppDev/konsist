@@ -2,23 +2,13 @@ package com.lemonappdev.konsist.testdata
 
 open class SampleParentClass
 
-open class SampleParentClass1
-
-open class SampleParentClass2
-
-open class SampleParentClassWithDuplicatedName
-
 class SampleClass
 
 class SampleClass1
 
 class SampleClass2
 
-open class SampleClassWithParameter(val param: String)
-
-open class SampleGenericClassWithParameter<T>(val param: String)
-
-open class SampleCollection1<out E> : Collection<E> {
+class SampleCollection1<out E> : Collection<E> {
     override val size: Int = 1
 
     override fun isEmpty(): Boolean = false
@@ -64,11 +54,7 @@ interface SampleParentInterface1
 
 interface SampleParentInterface2
 
-interface SampleGenericSuperInterface<T>
-
 object SampleObject
-
-typealias SampleTypeAlias = (SampleClass) -> Unit
 
 annotation class NonExistingAnnotation
 
@@ -79,7 +65,6 @@ annotation class NonExistingAnnotation
     AnnotationTarget.FUNCTION,
     AnnotationTarget.FILE,
     AnnotationTarget.TYPEALIAS,
-    AnnotationTarget.LOCAL_VARIABLE,
 )
 annotation class SampleAnnotation
 
@@ -90,7 +75,6 @@ annotation class SampleAnnotation
     AnnotationTarget.FILE,
     AnnotationTarget.CONSTRUCTOR,
     AnnotationTarget.TYPEALIAS,
-    AnnotationTarget.LOCAL_VARIABLE,
 )
 annotation class SampleAnnotation1
 
@@ -101,7 +85,6 @@ annotation class SampleAnnotation1
     AnnotationTarget.FILE,
     AnnotationTarget.CONSTRUCTOR,
     AnnotationTarget.TYPEALIAS,
-    AnnotationTarget.LOCAL_VARIABLE,
 )
 annotation class SampleAnnotation2
 

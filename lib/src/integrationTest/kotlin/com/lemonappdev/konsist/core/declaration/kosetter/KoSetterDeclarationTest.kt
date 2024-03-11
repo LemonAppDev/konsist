@@ -9,11 +9,10 @@ class KoSetterDeclarationTest {
     @Test
     fun `setter-to-string`() {
         // given
-        val sut =
-            getSnippetFile("setter-to-string")
-                .properties()
-                .first()
-                .setter
+        val sut = getSnippetFile("setter-to-string")
+            .properties()
+            .first()
+            .setter
 
         // then
         assertSoftly(sut.toString()) {

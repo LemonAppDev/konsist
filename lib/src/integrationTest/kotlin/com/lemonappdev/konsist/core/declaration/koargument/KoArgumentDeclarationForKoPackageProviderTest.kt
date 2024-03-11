@@ -11,12 +11,11 @@ class KoArgumentDeclarationForKoPackageProviderTest {
     @Test
     fun `argument-in-enum-const-is-not-in-package`() {
         // given
-        val sut =
-            getSnippetFile("argument-in-enum-const-is-not-in-package")
-                .classes()
-                .enumConstants
-                .arguments
-                .first()
+        val sut = getSnippetFile("argument-in-enum-const-is-not-in-package")
+            .classes()
+            .enumConstants
+            .arguments
+            .first()
 
         // then
         sut.packagee shouldBeEqualTo null
@@ -25,12 +24,11 @@ class KoArgumentDeclarationForKoPackageProviderTest {
     @Test
     fun `argument-in-enum-const-is-in-package`() {
         // given
-        val sut =
-            getSnippetFile("argument-in-enum-const-is-in-package")
-                .classes()
-                .enumConstants
-                .arguments
-                .first()
+        val sut = getSnippetFile("argument-in-enum-const-is-in-package")
+            .classes()
+            .enumConstants
+            .arguments
+            .first()
 
         // then
         sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
@@ -39,12 +37,11 @@ class KoArgumentDeclarationForKoPackageProviderTest {
     @Test
     fun `argument-in-annotation-is-not-in-package`() {
         // given
-        val sut =
-            getSnippetFile("argument-in-annotation-is-not-in-package")
-                .functions()
-                .annotations
-                .arguments
-                .first()
+        val sut = getSnippetFile("argument-in-annotation-is-not-in-package")
+            .functions()
+            .annotations
+            .arguments
+            .first()
 
         // then
         sut.packagee shouldBeEqualTo null
@@ -53,16 +50,16 @@ class KoArgumentDeclarationForKoPackageProviderTest {
     @Test
     fun `argument-in-annotation-is-in-package`() {
         // given
-        val sut =
-            getSnippetFile("argument-in-annotation-is-in-package")
-                .functions()
-                .annotations
-                .arguments
-                .first()
+        val sut = getSnippetFile("argument-in-annotation-is-in-package")
+            .functions()
+            .annotations
+            .arguments
+            .first()
 
         // then
         sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koargument/snippet/forkopackageprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koargument/snippet/forkopackageprovider/", fileName)
 }

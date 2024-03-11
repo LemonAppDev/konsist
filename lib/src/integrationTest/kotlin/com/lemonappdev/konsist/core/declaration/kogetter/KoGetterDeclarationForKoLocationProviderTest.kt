@@ -9,11 +9,10 @@ class KoGetterDeclarationForKoLocationProviderTest {
     @Test
     fun `getter-location-with-single-digit`() {
         // given
-        val sut =
-            getSnippetFile("getter-location-with-single-digit")
-                .properties()
-                .first()
-                .getter
+        val sut = getSnippetFile("getter-location-with-single-digit")
+            .properties()
+            .first()
+            .getter
 
         // then
         sut?.location shouldBeEqualTo "${sut?.path}:2:5"
@@ -22,18 +21,16 @@ class KoGetterDeclarationForKoLocationProviderTest {
     @Test
     fun `getter-location-with-text`() {
         // given
-        val projectPath =
-            getSnippetFile("getter-location-with-text")
-                .properties()
-                .first()
-                .getter
-                ?.projectPath
+        val projectPath = getSnippetFile("getter-location-with-text")
+            .properties()
+            .first()
+            .getter
+            ?.projectPath
 
-        val sut =
-            getSnippetFile("getter-location-with-text")
-                .properties()
-                .first()
-                .getter
+        val sut = getSnippetFile("getter-location-with-text")
+            .properties()
+            .first()
+            .getter
 
         // then
         assertSoftly(sut?.locationWithText) {
@@ -43,5 +40,6 @@ class KoGetterDeclarationForKoLocationProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kogetter/snippet/forkolocationprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kogetter/snippet/forkolocationprovider/", fileName)
 }

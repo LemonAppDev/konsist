@@ -7,12 +7,11 @@ import com.lemonappdev.konsist.core.filesystem.rootprovider.MavenProjectRootDirR
 class ProjectRootDirProviderFactory(
     pathVerifier: PathVerifier,
 ) {
-    private val providers =
-        listOf(
-            GradleProjectRootDirResolver(pathVerifier),
-            MavenProjectRootDirResolver(pathVerifier),
-            GitProjectRootDirResolver(pathVerifier),
-        )
+    private val providers = listOf(
+        GradleProjectRootDirResolver(pathVerifier),
+        MavenProjectRootDirResolver(pathVerifier),
+        GitProjectRootDirResolver(pathVerifier),
+    )
 
     fun create() = providers
 }

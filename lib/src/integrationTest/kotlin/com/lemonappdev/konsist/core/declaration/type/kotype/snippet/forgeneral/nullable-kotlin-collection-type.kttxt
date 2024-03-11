@@ -1,3 +1,0 @@
-package com.lemonappdev.konsist.core.declaration.type.kotype.snippet.forgeneral
-
-class SampleClass1(val sampleProperty1: List<String>?)

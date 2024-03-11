@@ -13,7 +13,6 @@ import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
-import com.lemonappdev.konsist.api.provider.KoVariableProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 
@@ -30,7 +29,6 @@ interface KoGetterDeclaration :
     KoLocalClassProvider,
     KoLocalDeclarationProvider,
     KoLocalFunctionProvider,
-    KoVariableProvider,
     KoLocationProvider,
     KoPathProvider,
     KoModuleProvider,

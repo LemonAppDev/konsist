@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoAbstractModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Determines whatever declaration has `abstract` modifier.
+     * Whatever declaration has `abstract` modifier.
      */
     val hasAbstractModifier: Boolean
 }

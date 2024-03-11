@@ -1,4 +1,2 @@
-import com.lemonappdev.konsist.testdata.SampleClass
-
-val SampleClass.sampleProperty: String
+val Int.sampleProperty: String
     get() = this.toString()

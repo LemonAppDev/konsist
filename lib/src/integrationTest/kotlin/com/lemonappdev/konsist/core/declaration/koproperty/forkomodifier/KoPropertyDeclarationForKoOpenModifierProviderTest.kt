@@ -8,10 +8,9 @@ class KoPropertyDeclarationForKoOpenModifierProviderTest {
     @Test
     fun `property-has-no-open-modifier`() {
         // given
-        val sut =
-            getSnippetFile("property-has-no-open-modifier")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-has-no-open-modifier")
+            .properties()
+            .first()
 
         // then
         sut.hasOpenModifier shouldBeEqualTo false
@@ -20,10 +19,9 @@ class KoPropertyDeclarationForKoOpenModifierProviderTest {
     @Test
     fun `property-has-open-modifier`() {
         // given
-        val sut =
-            getSnippetFile("property-has-open-modifier")
-                .properties(includeNested = true)
-                .first()
+        val sut = getSnippetFile("property-has-open-modifier")
+            .properties(includeNested = true)
+            .first()
 
         // then
         sut.hasOpenModifier shouldBeEqualTo true

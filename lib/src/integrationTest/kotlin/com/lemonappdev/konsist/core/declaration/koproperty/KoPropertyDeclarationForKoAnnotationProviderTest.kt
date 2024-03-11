@@ -13,10 +13,9 @@ class KoPropertyDeclarationForKoAnnotationProviderTest {
     @Test
     fun `property-has-no-annotation`() {
         // given
-        val sut =
-            getSnippetFile("property-has-no-annotation")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-has-no-annotation")
+            .properties()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -37,10 +36,9 @@ class KoPropertyDeclarationForKoAnnotationProviderTest {
     @Test
     fun `property-has-annotation`() {
         // given
-        val sut =
-            getSnippetFile("property-has-annotation")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-has-annotation")
+            .properties()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -85,10 +83,9 @@ class KoPropertyDeclarationForKoAnnotationProviderTest {
     @Test
     fun `property-has-two-annotations`() {
         // given
-        val sut =
-            getSnippetFile("property-has-two-annotations")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-has-two-annotations")
+            .properties()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -144,10 +141,9 @@ class KoPropertyDeclarationForKoAnnotationProviderTest {
     @Test
     fun `property-has-suppress-annotation-without-import`() {
         // given
-        val sut =
-            getSnippetFile("property-has-suppress-annotation-without-import")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-has-suppress-annotation-without-import")
+            .properties()
+            .first()
 
         // then
         assertSoftly(sut) {

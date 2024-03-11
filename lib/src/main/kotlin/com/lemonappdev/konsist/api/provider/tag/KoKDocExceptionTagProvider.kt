@@ -18,7 +18,7 @@ interface KoKDocExceptionTagProvider : KoBaseProvider {
     val numExceptionTags: Int
 
     /**
-     * Determines whatever the declaration has exception tags.
+     * Whatever the declaration has exception tags.
      */
     val hasExceptionTags: Boolean
 }

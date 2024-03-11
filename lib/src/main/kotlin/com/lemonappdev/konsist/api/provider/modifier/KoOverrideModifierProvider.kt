@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoOverrideModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Determines whatever the declaration has `override` modifier.
+     * Whether the declaration has `override` modifier.
      */
     val hasOverrideModifier: Boolean
 }

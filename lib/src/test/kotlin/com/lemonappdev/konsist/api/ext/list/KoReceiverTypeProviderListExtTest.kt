@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.testdata.SampleType1
 import com.lemonappdev.konsist.testdata.SampleType2
@@ -15,18 +15,15 @@ class KoReceiverTypeProviderListExtTest {
         // given
         val receiverType1: KoTypeDeclaration = mockk()
         val receiverType2: KoTypeDeclaration = mockk()
-        val declaration1: KoReceiverTypeProvider =
-            mockk {
-                every { receiverType } returns receiverType1
-            }
-        val declaration2: KoReceiverTypeProvider =
-            mockk {
-                every { receiverType } returns receiverType2
-            }
-        val declaration3: KoReceiverTypeProvider =
-            mockk {
-                every { receiverType } returns null
-            }
+        val declaration1: KoReceiverTypeProvider = mockk {
+            every { receiverType } returns receiverType1
+        }
+        val declaration2: KoReceiverTypeProvider = mockk {
+            every { receiverType } returns receiverType2
+        }
+        val declaration3: KoReceiverTypeProvider = mockk {
+            every { receiverType } returns null
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -39,14 +36,12 @@ class KoReceiverTypeProviderListExtTest {
     @Test
     fun `withReceiverType() returns declaration with any receiver`() {
         // given
-        val declaration1: KoReceiverTypeProvider =
-            mockk {
-                every { hasReceiverType() } returns true
-            }
-        val declaration2: KoReceiverTypeProvider =
-            mockk {
-                every { hasReceiverType() } returns false
-            }
+        val declaration1: KoReceiverTypeProvider = mockk {
+            every { hasReceiverType() } returns true
+        }
+        val declaration2: KoReceiverTypeProvider = mockk {
+            every { hasReceiverType() } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -61,26 +56,21 @@ class KoReceiverTypeProviderListExtTest {
         // given
         val name1 = "name1"
         val name2 = "name2"
-        val type1: KoTypeDeclaration =
-            mockk {
-                every { name } returns name1
-            }
-        val type2: KoTypeDeclaration =
-            mockk {
-                every { name } returns name2
-            }
-        val declaration1: KoReceiverTypeProvider =
-            mockk {
-                every { receiverType } returns type1
-            }
-        val declaration2: KoReceiverTypeProvider =
-            mockk {
-                every { receiverType } returns type2
-            }
-        val declaration3: KoReceiverTypeProvider =
-            mockk {
-                every { receiverType } returns null
-            }
+        val type1: KoTypeDeclaration = mockk {
+            every { name } returns name1
+        }
+        val type2: KoTypeDeclaration = mockk {
+            every { name } returns name2
+        }
+        val declaration1: KoReceiverTypeProvider = mockk {
+            every { receiverType } returns type1
+        }
+        val declaration2: KoReceiverTypeProvider = mockk {
+            every { receiverType } returns type2
+        }
+        val declaration3: KoReceiverTypeProvider = mockk {
+            every { receiverType } returns null
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -95,21 +85,18 @@ class KoReceiverTypeProviderListExtTest {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
-        val declaration1: KoReceiverTypeProvider =
-            mockk {
-                every { hasReceiverType(typeName1) } returns true
-                every { hasReceiverType(typeName2) } returns false
-            }
-        val declaration2: KoReceiverTypeProvider =
-            mockk {
-                every { hasReceiverType(typeName1) } returns false
-                every { hasReceiverType(typeName2) } returns true
-            }
-        val declaration3: KoReceiverTypeProvider =
-            mockk {
-                every { hasReceiverType(typeName1) } returns false
-                every { hasReceiverType(typeName2) } returns false
-            }
+        val declaration1: KoReceiverTypeProvider = mockk {
+            every { hasReceiverType(typeName1) } returns true
+            every { hasReceiverType(typeName2) } returns false
+        }
+        val declaration2: KoReceiverTypeProvider = mockk {
+            every { hasReceiverType(typeName1) } returns false
+            every { hasReceiverType(typeName2) } returns true
+        }
+        val declaration3: KoReceiverTypeProvider = mockk {
+            every { hasReceiverType(typeName1) } returns false
+            every { hasReceiverType(typeName2) } returns false
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -122,14 +109,12 @@ class KoReceiverTypeProviderListExtTest {
     @Test
     fun `withoutReceiverType() returns declaration without any receiver`() {
         // given
-        val declaration1: KoReceiverTypeProvider =
-            mockk {
-                every { hasReceiverType() } returns true
-            }
-        val declaration2: KoReceiverTypeProvider =
-            mockk {
-                every { hasReceiverType() } returns false
-            }
+        val declaration1: KoReceiverTypeProvider = mockk {
+            every { hasReceiverType() } returns true
+        }
+        val declaration2: KoReceiverTypeProvider = mockk {
+            every { hasReceiverType() } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -144,26 +129,21 @@ class KoReceiverTypeProviderListExtTest {
         // given
         val name1 = "name1"
         val name2 = "name2"
-        val type1: KoTypeDeclaration =
-            mockk {
-                every { name } returns name1
-            }
-        val type2: KoTypeDeclaration =
-            mockk {
-                every { name } returns name2
-            }
-        val declaration1: KoReceiverTypeProvider =
-            mockk {
-                every { receiverType } returns type1
-            }
-        val declaration2: KoReceiverTypeProvider =
-            mockk {
-                every { receiverType } returns type2
-            }
-        val declaration3: KoReceiverTypeProvider =
-            mockk {
-                every { receiverType } returns null
-            }
+        val type1: KoTypeDeclaration = mockk {
+            every { name } returns name1
+        }
+        val type2: KoTypeDeclaration = mockk {
+            every { name } returns name2
+        }
+        val declaration1: KoReceiverTypeProvider = mockk {
+            every { receiverType } returns type1
+        }
+        val declaration2: KoReceiverTypeProvider = mockk {
+            every { receiverType } returns type2
+        }
+        val declaration3: KoReceiverTypeProvider = mockk {
+            every { receiverType } returns null
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -178,21 +158,18 @@ class KoReceiverTypeProviderListExtTest {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
-        val declaration1: KoReceiverTypeProvider =
-            mockk {
-                every { hasReceiverType(typeName1) } returns true
-                every { hasReceiverType(typeName2) } returns false
-            }
-        val declaration2: KoReceiverTypeProvider =
-            mockk {
-                every { hasReceiverType(typeName1) } returns false
-                every { hasReceiverType(typeName2) } returns true
-            }
-        val declaration3: KoReceiverTypeProvider =
-            mockk {
-                every { hasReceiverType(typeName1) } returns false
-                every { hasReceiverType(typeName2) } returns false
-            }
+        val declaration1: KoReceiverTypeProvider = mockk {
+            every { hasReceiverType(typeName1) } returns true
+            every { hasReceiverType(typeName2) } returns false
+        }
+        val declaration2: KoReceiverTypeProvider = mockk {
+            every { hasReceiverType(typeName1) } returns false
+            every { hasReceiverType(typeName2) } returns true
+        }
+        val declaration3: KoReceiverTypeProvider = mockk {
+            every { hasReceiverType(typeName1) } returns false
+            every { hasReceiverType(typeName2) } returns false
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -205,14 +182,12 @@ class KoReceiverTypeProviderListExtTest {
     @Test
     fun `withReceiverTypeOf(KClass) returns declaration with one of given receiver`() {
         // given
-        val declaration1: KoReceiverTypeProvider =
-            mockk {
-                every { hasReceiverTypeOf(SampleType1::class) } returns true
-            }
-        val declaration2: KoReceiverTypeProvider =
-            mockk {
-                every { hasReceiverTypeOf(SampleType1::class) } returns false
-            }
+        val declaration1: KoReceiverTypeProvider = mockk {
+            every { hasReceiverTypeOf(SampleType1::class) } returns true
+        }
+        val declaration2: KoReceiverTypeProvider = mockk {
+            every { hasReceiverTypeOf(SampleType1::class) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -225,21 +200,18 @@ class KoReceiverTypeProviderListExtTest {
     @Test
     fun `withReceiverTypeOf(KClass) returns declarations with one of given receivers`() {
         // given
-        val declaration1: KoReceiverTypeProvider =
-            mockk {
-                every { hasReceiverTypeOf(SampleType1::class) } returns true
-                every { hasReceiverTypeOf(SampleType2::class) } returns false
-            }
-        val declaration2: KoReceiverTypeProvider =
-            mockk {
-                every { hasReceiverTypeOf(SampleType1::class) } returns false
-                every { hasReceiverTypeOf(SampleType2::class) } returns true
-            }
-        val declaration3: KoReceiverTypeProvider =
-            mockk {
-                every { hasReceiverTypeOf(SampleType1::class) } returns false
-                every { hasReceiverTypeOf(SampleType2::class) } returns false
-            }
+        val declaration1: KoReceiverTypeProvider = mockk {
+            every { hasReceiverTypeOf(SampleType1::class) } returns true
+            every { hasReceiverTypeOf(SampleType2::class) } returns false
+        }
+        val declaration2: KoReceiverTypeProvider = mockk {
+            every { hasReceiverTypeOf(SampleType1::class) } returns false
+            every { hasReceiverTypeOf(SampleType2::class) } returns true
+        }
+        val declaration3: KoReceiverTypeProvider = mockk {
+            every { hasReceiverTypeOf(SampleType1::class) } returns false
+            every { hasReceiverTypeOf(SampleType2::class) } returns false
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -252,14 +224,12 @@ class KoReceiverTypeProviderListExtTest {
     @Test
     fun `withoutReceiverTypeOf(KClass) returns declaration without one of given receiver`() {
         // given
-        val declaration1: KoReceiverTypeProvider =
-            mockk {
-                every { hasReceiverTypeOf(SampleType1::class) } returns true
-            }
-        val declaration2: KoReceiverTypeProvider =
-            mockk {
-                every { hasReceiverTypeOf(SampleType1::class) } returns false
-            }
+        val declaration1: KoReceiverTypeProvider = mockk {
+            every { hasReceiverTypeOf(SampleType1::class) } returns true
+        }
+        val declaration2: KoReceiverTypeProvider = mockk {
+            every { hasReceiverTypeOf(SampleType1::class) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -272,21 +242,18 @@ class KoReceiverTypeProviderListExtTest {
     @Test
     fun `withoutReceiverTypeOf(KClass) returns declaration without any of given receivers`() {
         // given
-        val declaration1: KoReceiverTypeProvider =
-            mockk {
-                every { hasReceiverTypeOf(SampleType1::class) } returns true
-                every { hasReceiverTypeOf(SampleType2::class) } returns false
-            }
-        val declaration2: KoReceiverTypeProvider =
-            mockk {
-                every { hasReceiverTypeOf(SampleType1::class) } returns false
-                every { hasReceiverTypeOf(SampleType2::class) } returns true
-            }
-        val declaration3: KoReceiverTypeProvider =
-            mockk {
-                every { hasReceiverTypeOf(SampleType1::class) } returns false
-                every { hasReceiverTypeOf(SampleType2::class) } returns false
-            }
+        val declaration1: KoReceiverTypeProvider = mockk {
+            every { hasReceiverTypeOf(SampleType1::class) } returns true
+            every { hasReceiverTypeOf(SampleType2::class) } returns false
+        }
+        val declaration2: KoReceiverTypeProvider = mockk {
+            every { hasReceiverTypeOf(SampleType1::class) } returns false
+            every { hasReceiverTypeOf(SampleType2::class) } returns true
+        }
+        val declaration3: KoReceiverTypeProvider = mockk {
+            every { hasReceiverTypeOf(SampleType1::class) } returns false
+            every { hasReceiverTypeOf(SampleType2::class) } returns false
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when

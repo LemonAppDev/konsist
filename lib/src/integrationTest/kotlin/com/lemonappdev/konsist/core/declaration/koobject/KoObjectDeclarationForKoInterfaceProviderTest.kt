@@ -12,10 +12,9 @@ class KoObjectDeclarationForKoInterfaceProviderTest {
     @Test
     fun `object-has-no-interfaces`() {
         // given
-        val sut =
-            getSnippetFile("object-has-no-interfaces")
-                .objects()
-                .first()
+        val sut = getSnippetFile("object-has-no-interfaces")
+            .objects()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -31,10 +30,9 @@ class KoObjectDeclarationForKoInterfaceProviderTest {
     @Test
     fun `object-has-two-interfaces`() {
         // given
-        val sut =
-            getSnippetFile("object-has-two-interfaces")
-                .objects()
-                .first()
+        val sut = getSnippetFile("object-has-two-interfaces")
+            .objects()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -54,10 +52,9 @@ class KoObjectDeclarationForKoInterfaceProviderTest {
     @Test
     fun `object-contains-interfaces includeNested true`() {
         // given
-        val sut =
-            getSnippetFile("object-contains-interfaces")
-                .objects()
-                .first()
+        val sut = getSnippetFile("object-contains-interfaces")
+            .objects()
+            .first()
 
         // then
         val expected = listOf("SampleInterface", "SampleNestedInterface")
@@ -70,10 +67,9 @@ class KoObjectDeclarationForKoInterfaceProviderTest {
     @Test
     fun `object-contains-interfaces includeNested false`() {
         // given
-        val sut =
-            getSnippetFile("object-contains-interfaces")
-                .objects()
-                .first()
+        val sut = getSnippetFile("object-contains-interfaces")
+            .objects()
+            .first()
 
         // then
         val expected = listOf("SampleInterface")
@@ -86,10 +82,9 @@ class KoObjectDeclarationForKoInterfaceProviderTest {
     @Test
     fun `count-interfaces`() {
         // given
-        val sut =
-            getSnippetFile("count-interfaces")
-                .objects()
-                .first()
+        val sut = getSnippetFile("count-interfaces")
+            .objects()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -104,10 +99,9 @@ class KoObjectDeclarationForKoInterfaceProviderTest {
     @Test
     fun `contains-interfaces-with-specified-conditions`() {
         // given
-        val sut =
-            getSnippetFile("contains-interfaces-with-specified-conditions")
-                .objects()
-                .first()
+        val sut = getSnippetFile("contains-interfaces-with-specified-conditions")
+            .objects()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -134,10 +128,9 @@ class KoObjectDeclarationForKoInterfaceProviderTest {
         // given
         val regex1 = Regex("[a-zA-Z]+")
         val regex2 = Regex("[0-9]+")
-        val sut =
-            getSnippetFile("contains-interfaces-with-specified-regex")
-                .objects()
-                .first()
+        val sut = getSnippetFile("contains-interfaces-with-specified-regex")
+            .objects()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -148,5 +141,6 @@ class KoObjectDeclarationForKoInterfaceProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/forkointerfaceprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koobject/snippet/forkointerfaceprovider/", fileName)
 }

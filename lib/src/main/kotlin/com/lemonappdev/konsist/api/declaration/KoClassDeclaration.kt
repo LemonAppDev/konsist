@@ -1,16 +1,13 @@
 package com.lemonappdev.konsist.api.declaration
 
-import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
-import com.lemonappdev.konsist.api.provider.KoChildProvider
 import com.lemonappdev.konsist.api.provider.KoClassProvider
 import com.lemonappdev.konsist.api.provider.KoConstructorProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoEnumConstantProvider
-import com.lemonappdev.konsist.api.provider.KoExternalParentProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoHasTestClassProvider
@@ -33,7 +30,6 @@ import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
 import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
-import com.lemonappdev.konsist.api.provider.KoTestClassProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoAbstractModifierProvider
@@ -55,19 +51,14 @@ import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvide
  */
 interface KoClassDeclaration :
     KoBaseDeclaration,
-    KoParentDeclaration,
-    KoChildDeclaration,
-    KoBaseTypeDeclaration,
     KoBaseProvider,
-    KoChildProvider,
-    KoFullyQualifiedNameProvider,
-    KoNameProvider,
     KoAnnotationProvider,
     KoClassProvider,
     KoEnumConstantProvider,
     KoConstructorProvider,
     KoContainingFileProvider,
     KoDeclarationProvider,
+    KoFullyQualifiedNameProvider,
     KoFunctionProvider,
     KoHasTestClassProvider,
     KoHasTestProvider,
@@ -76,12 +67,12 @@ interface KoClassDeclaration :
     KoKDocProvider,
     KoLocationProvider,
     KoModifierProvider,
+    KoNameProvider,
     KoObjectProvider,
     KoPackageProvider,
     KoParentProvider,
     KoParentClassProvider,
     KoParentInterfaceProvider,
-    KoExternalParentProvider,
     KoContainingDeclarationProvider,
     KoPathProvider,
     KoModuleProvider,
@@ -104,5 +95,4 @@ interface KoClassDeclaration :
     KoExpectModifierProvider,
     KoAbstractModifierProvider,
     KoOpenModifierProvider,
-    KoFinalModifierProvider,
-    KoTestClassProvider
+    KoFinalModifierProvider

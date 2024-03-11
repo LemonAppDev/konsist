@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoVarArgModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Determines whatever the declaration has `vararg` modifier.
+     * Whether the declaration has `vararg` modifier.
      */
     val hasVarArgModifier: Boolean
 }

@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoFinalModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Determines whatever declaration has `final` modifier.
+     * Whatever declaration has `final` modifier.
      */
     val hasFinalModifier: Boolean
 }

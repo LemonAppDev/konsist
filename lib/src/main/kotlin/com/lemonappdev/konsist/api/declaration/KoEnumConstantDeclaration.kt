@@ -19,7 +19,6 @@ import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
-import com.lemonappdev.konsist.api.provider.KoVariableProvider
 
 /**
  * Represents a Kotlin enum constant declaration.
@@ -36,7 +35,6 @@ interface KoEnumConstantDeclaration :
     KoLocalClassProvider,
     KoLocalDeclarationProvider,
     KoLocalFunctionProvider,
-    KoVariableProvider,
     KoLocationProvider,
     KoNameProvider,
     KoPackageProvider,

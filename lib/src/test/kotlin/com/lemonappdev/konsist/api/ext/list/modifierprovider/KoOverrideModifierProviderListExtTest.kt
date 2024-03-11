@@ -10,14 +10,12 @@ class KoOverrideModifierProviderListExtTest {
     @Test
     fun `withOverrideModifier() returns declaration with override modifier`() {
         // given
-        val declaration1: KoOverrideModifierProvider =
-            mockk {
-                every { hasOverrideModifier } returns true
-            }
-        val declaration2: KoOverrideModifierProvider =
-            mockk {
-                every { hasOverrideModifier } returns false
-            }
+        val declaration1: KoOverrideModifierProvider = mockk {
+            every { hasOverrideModifier } returns true
+        }
+        val declaration2: KoOverrideModifierProvider = mockk {
+            every { hasOverrideModifier } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -30,14 +28,12 @@ class KoOverrideModifierProviderListExtTest {
     @Test
     fun `withoutOverrideModifier() returns declaration without override modifier`() {
         // given
-        val declaration1: KoOverrideModifierProvider =
-            mockk {
-                every { hasOverrideModifier } returns true
-            }
-        val declaration2: KoOverrideModifierProvider =
-            mockk {
-                every { hasOverrideModifier } returns false
-            }
+        val declaration1: KoOverrideModifierProvider = mockk {
+            every { hasOverrideModifier } returns true
+        }
+        val declaration2: KoOverrideModifierProvider = mockk {
+            every { hasOverrideModifier } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when

@@ -8,10 +8,9 @@ class KoImportDeclarationTest {
     @Test
     fun `import-to-string`() {
         // given
-        val sut =
-            getSnippetFile("import-to-string")
-                .imports
-                .first()
+        val sut = getSnippetFile("import-to-string")
+            .imports
+            .first()
 
         // then
         sut.toString() shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleAnnotation"

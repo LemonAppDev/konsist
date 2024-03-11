@@ -7,10 +7,6 @@ on:
   pull_request:
     types: [ opened, synchronize ]
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
 # ======================================= Run Tests =========================================================
   konsist-junit-test:
@@ -21,20 +17,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
-          java-version: 21
-          distribution: 'corretto'
+          java-version: 19
+          distribution: 'zulu'
 
-      - name: Run JUnit Test
+      - name: JUnit Test
         run: ./gradlew :lib:test
 
-      - name: Upload Report
-        uses: actions/upload-artifact@v4
-        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+      - uses: actions/upload-artifact@v3
         with:
-          name: konsist-junit-test-report
-          path: ./lib/build/reports/tests/test
+          name: junit-test-report
+          path: ./lib/build/test-results/test/
 
   konsist-konsist-test:
     name: Konsist Konsist Test
@@ -44,20 +38,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
-          java-version: 21
-          distribution: 'corretto'
+          java-version: 19
+          distribution: 'zulu'
 
-      - name: Run Konsist Test
+      - name: Konsist Test
         run: ./gradlew lib:konsistTest
 
-      - name: Upload Report
-        uses: actions/upload-artifact@v4
-        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+      - uses: actions/upload-artifact@v3
         with:
-          name: konsist-konsist-test-report
-          path: ./lib/build/reports/tests/konsistTest/
+          name: konsist-test-report
+          path: ./lib/build/test-results/konsistTest/
 
   konsist-integration-test:
     name: Konsist Integration Test
@@ -67,20 +59,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
-          java-version: 21
-          distribution: 'corretto'
+          java-version: 19
+          distribution: 'zulu'
 
-      - name: Run Integration Test
+      - name: Integration Test
         run: ./gradlew lib:integrationTest
 
-      - name: Upload Report
-        uses: actions/upload-artifact@v4
-        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+      - uses: actions/upload-artifact@v3
         with:
-          name: konsist-integration-test-report
-          path: ./lib/build/reports/tests/integrationTest/
+          name: integration-test-report
+          path: ./lib/build/test-results/integrationTest/
 
   api-test:
     name: Konsist Api Test
@@ -90,37 +80,35 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
-          java-version: 21
-          distribution: 'corretto'
+          java-version: 19
+          distribution: 'zulu'
 
-      - name: Run Api Test
+      - name: Api Test
         run: ./gradlew lib:apiTest
 
-      - name: Upload Report
-        uses: actions/upload-artifact@v4
-        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+      - uses: actions/upload-artifact@v3
         with:
-          name: konsist-api-test-report
-          path: ./lib/build/reports/tests/apiTest/
+          name: api-test-report
+          path: ./lib/build/test-results/apiTest/
 
 # ======================================= Run Linters =========================================================
 
   konsist-spotless:
-    name: Konsist Ktlint
+    name: Konsist Spotless
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
-          java-version: 21
-          distribution: 'corretto'
+          java-version: 19
+          distribution: 'zulu'
 
-      - name: Run Spotless
+      - name: Spotless
         run: ./gradlew spotlessCheck
 
   konsist-detekt:
@@ -131,80 +119,114 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
-          java-version: 21
-          distribution: 'corretto'
+          java-version: 19
+          distribution: 'zulu'
 
-      - name: Run Detekt
+      - name: Detekt
         run: ./gradlew detektCheck
 
-      - name: Upload Report
-        uses: actions/upload-artifact@v4
-        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+      - uses: actions/upload-artifact@v3
         with:
-          name: konsist-detekt-report
+          name: detekt-report
           path: ./**/build/reports/detekt/detekt.*
 
-  # ======================================= Check Declarations =======================================
+# ======================================= Check Paths =======================================
 
-  declaration-tester-project-macos:
-    name: Declaration Tester Project MacOS
-    runs-on: macos-latest
+  path-tester-project-ubuntu:
+    name: Path Tester Project Ubuntu
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
-          java-version: 21
-          distribution: 'corretto'
+          java-version: 19
+          distribution: 'zulu'
 
-      - name: Publish Konsist Artifact To Local Maven Repository
+      - name: Publish
         run: >
           ./gradlew publishToMavenLocal
           -P konsist.releaseTarget=local
 
       - name: Run Integration Test
-        run: cd test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
+        run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
 
-      - name: Upload Report
-        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
-        uses: actions/upload-artifact@v4
-        with:
-          name: declaration-tester-project-macos-test-report
-          path: test-projects/konsist-declaration-tester/app/build/reports/integrationTest
-
-  declaration-tester-project-windows:
-    name: Declaration Tester Project Windows
+  path-tester-project-windows:
+    name: Path Tester Project Windows
     runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
           java-version: |
             8
-            21
-          distribution: 'corretto'
+            19
+          distribution: 'zulu'
 
-      - name: Publish Konsist Artifact To Local Maven Repository
+      - name: Publish
         run: >
           ./gradlew publishToMavenLocal
           -P konsist.releaseTarget=local
 
       - name: Run Integration Test
-        run: cd test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
+        run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
 
-      - name: Upload Report
-        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
-        uses: actions/upload-artifact@v4
+  root-path-gradle-tester-ubuntu:
+    name: Root Path Tester Gradle Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
         with:
-          name: declaration-tester-project-windows-test-report
-          path: test-projects/konsist-declaration-tester/app/build/reports/integrationTest
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+
+      - name: Run Root Integration Test
+        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew integrationTest
+
+      - name: Run App Integration Test
+        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew app:integrationTest
+
+  root-path-gradle-tester-windows:
+    name: Root Path Tester Gradle Windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: |
+            8
+            19
+          distribution: 'zulu'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+
+      - name: Run Root Integration Test
+        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew integrationTest
+
+      - name: Run App Integration Test
+        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew app:integrationTest
 
 # ======================================= Library Artifact =========================================================
   konsist-artifact-check:
@@ -215,13 +237,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
-          java-version: 21
-          distribution: 'corretto'
+          java-version: 19
+          distribution: 'zulu'
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
           python-version: '3.11.3'
 
@@ -231,7 +253,7 @@ jobs:
       - name: List "lib.jar" content
         run: jar tf lib/build/libs/lib.jar
 
-      - name: Publish Konsist Artifact To Local Maven Repository
+      - name: Publish
         run: >
           ./gradlew publishToMavenLocal
           -P konsist.releaseTarget=local
@@ -239,21 +261,21 @@ jobs:
       - name: List artifacts
         run: ls -R ~/.m2/repository/
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v3
         with:
           name: konsist.jar
           path: lib/build/libs/lib.jar
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v3
         with:
-          name: konsist-SNAPSHOT-${{ github.run_number }}.jar
-          path: /home/runner/.m2/repository/com/lemonappdev/konsist/*
+          name: konsist-0.12.2-SNAPSHOT.jar
+          path: /home/runner/.m2/repository/com/lemonappdev/konsist/0.12.2-SNAPSHOT/konsist-0.12.2-SNAPSHOT.jar
 
-      - name: Check dependencies exposed by the Konsist artifact
+      - name: Check dependencies exposed by the library artifact
         run: python3 scripts/check_dependencies_exposed_by_library_artifact.py
 
       - name: Check Bytecode version
-        run: python3 scripts/check_konsist_artifact_bytecode_version.py
+        run: python3 scripts/check_bytecode_version.py
 
 # ======================================= Other =========================================================
 
@@ -265,15 +287,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
-          java-version: 21
-          distribution: 'corretto'
+          java-version: 19
+          distribution: 'zulu'
 
       - name: Dokka Generate Html Doc
         run: ./gradlew lib:dokkaHtml
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v3
         with:
           name: dokka-html-doc.jar
           path: ./lib/build/dokka/*

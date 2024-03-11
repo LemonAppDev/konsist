@@ -14,9 +14,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `declaration-assert-test-method-name-derived-from-junit-method-name`() {
         // given
-        val sut =
-            getSnippetFile("declaration-assert-test-method-name-derived-from-junit-method-name")
-                .classes()
+        val sut = getSnippetFile("declaration-assert-test-method-name-derived-from-junit-method-name")
+            .classes()
 
         // then
         try {
@@ -32,9 +31,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `declaration-assert-test-method-name-derived-from-test-name-parameter`() {
         // given
-        val sut =
-            getSnippetFile("declaration-assert-test-method-name-derived-from-test-name-parameter")
-                .classes()
+        val sut = getSnippetFile("declaration-assert-test-method-name-derived-from-test-name-parameter")
+            .classes()
 
         // then
         try {
@@ -48,9 +46,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `file-declaration-assert-test-method-name-derived-from-junit-method-name`() {
         // given
-        val sut =
-            getSnippetFile("file-declaration-assert-test-method-name-derived-from-junit-method-name")
-                .files
+        val sut = getSnippetFile("file-declaration-assert-test-method-name-derived-from-junit-method-name")
+            .files
 
         // then
         try {
@@ -66,9 +63,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `file-declaration-assert-test-method-name-derived-from-test-name-parameter`() {
         // given
-        val sut =
-            getSnippetFile("file-declaration-assert-test-method-name-derived-from-test-name-parameter")
-                .files
+        val sut = getSnippetFile("file-declaration-assert-test-method-name-derived-from-test-name-parameter")
+            .files
 
         // then
         try {
@@ -83,9 +79,8 @@ class AssertTrueOnDeclarationListTest {
     fun `declaration-assert-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut =
-            getSnippetFile("declaration-assert-error-with-custom-message")
-                .classes()
+        val sut = getSnippetFile("declaration-assert-error-with-custom-message")
+            .classes()
 
         // then
         try {
@@ -103,9 +98,8 @@ class AssertTrueOnDeclarationListTest {
     fun `declaration-assert-error-with-custom-message-and-strict-set-to-true`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut =
-            getSnippetFile("declaration-assert-error-with-custom-message-and-strict-set-to-true")
-                .classes()
+        val sut = getSnippetFile("declaration-assert-error-with-custom-message-and-strict-set-to-true")
+            .classes()
 
         // then
         try {
@@ -123,9 +117,8 @@ class AssertTrueOnDeclarationListTest {
     fun `file-declaration-assert-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut =
-            getSnippetFile("file-declaration-assert-error-with-custom-message")
-                .files
+        val sut = getSnippetFile("file-declaration-assert-error-with-custom-message")
+            .files
 
         // then
         try {
@@ -143,9 +136,8 @@ class AssertTrueOnDeclarationListTest {
     fun `file-declaration-assert-error-with-custom-message-and-strict-set-to-true`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut =
-            getSnippetFile("file-declaration-assert-error-with-custom-message-and-strict-set-to-true")
-                .files
+        val sut = getSnippetFile("file-declaration-assert-error-with-custom-message-and-strict-set-to-true")
+            .files
 
         // then
         try {
@@ -162,9 +154,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `declaration-assert-displaying-correct-failed-declaration-type`() {
         // given
-        val sut =
-            getSnippetFile("declaration-assert-displaying-correct-failed-declaration-type")
-                .classes()
+        val sut = getSnippetFile("declaration-assert-displaying-correct-failed-declaration-type")
+            .classes()
 
         // then
         try {
@@ -178,9 +169,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `file-declaration-assert-displaying-correct-failed-declaration-type`() {
         // given
-        val sut =
-            getSnippetFile("file-declaration-assert-displaying-correct-failed-declaration-type")
-                .files
+        val sut = getSnippetFile("file-declaration-assert-displaying-correct-failed-declaration-type")
+            .files
 
         // then
         try {
@@ -194,9 +184,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `declaration-assert-passes-when-declaration-list-is-empty`() {
         // given
-        val sut =
-            getSnippetFile("declaration-assert-passes-when-declaration-list-is-empty")
-                .classes()
+        val sut = getSnippetFile("declaration-assert-passes-when-declaration-list-is-empty")
+            .classes()
 
         // when
         sut.assertTrue { true }
@@ -205,9 +194,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `declaration-assert-false-passes-when-declaration-list-is-empty`() {
         // given
-        val sut =
-            getSnippetFile("declaration-assert-false-passes-when-declaration-list-is-empty")
-                .classes()
+        val sut = getSnippetFile("declaration-assert-false-passes-when-declaration-list-is-empty")
+            .classes()
 
         // when
         sut.assertFalse { false }
@@ -216,9 +204,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `declaration-assert-strict-fails-when-declaration-list-is-empty`() {
         // given
-        val sut =
-            getSnippetFile("declaration-assert-strict-fails-when-declaration-list-is-empty")
-                .classes()
+        val sut = getSnippetFile("declaration-assert-strict-fails-when-declaration-list-is-empty")
+            .classes()
 
         // when
         val func = {
@@ -233,9 +220,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `declaration-assert-false-strict-fails-when-declaration-list-is-empty`() {
         // given
-        val sut =
-            getSnippetFile("declaration-assert-false-strict-fails-when-declaration-list-is-empty")
-                .classes()
+        val sut = getSnippetFile("declaration-assert-false-strict-fails-when-declaration-list-is-empty")
+            .classes()
 
         // when
         val func = {
@@ -250,10 +236,9 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `declaration-assert-passes-when-declaration-list-has-only-nulls`() {
         // given
-        val sut =
-            getSnippetFile("declaration-assert-passes-when-declaration-list-has-only-nulls")
-                .classes()
-                .map { it.primaryConstructor }
+        val sut = getSnippetFile("declaration-assert-passes-when-declaration-list-has-only-nulls")
+            .classes()
+            .map { it.primaryConstructor }
 
         // when
         sut.assertTrue { true }
@@ -262,10 +247,9 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `declaration-assert-false-passes-when-declaration-list-has-only-nulls`() {
         // given
-        val sut =
-            getSnippetFile("declaration-assert-false-passes-when-declaration-list-has-only-nulls")
-                .classes()
-                .map { it.primaryConstructor }
+        val sut = getSnippetFile("declaration-assert-false-passes-when-declaration-list-has-only-nulls")
+            .classes()
+            .map { it.primaryConstructor }
 
         // when
         sut.assertFalse { false }
@@ -274,10 +258,9 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `declaration-assert-strict-fails-when-declaration-list-has-only-nulls`() {
         // given
-        val sut =
-            getSnippetFile("declaration-assert-strict-fails-when-declaration-list-has-only-nulls")
-                .classes()
-                .map { it.primaryConstructor }
+        val sut = getSnippetFile("declaration-assert-strict-fails-when-declaration-list-has-only-nulls")
+            .classes()
+            .map { it.primaryConstructor }
 
         // when
         val func = {
@@ -293,10 +276,9 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `declaration-assert-false-strict-fails-when-declaration-list-has-only-nulls`() {
         // given
-        val sut =
-            getSnippetFile("declaration-assert-false-strict-fails-when-declaration-list-has-only-nulls")
-                .classes()
-                .map { it.primaryConstructor }
+        val sut = getSnippetFile("declaration-assert-false-strict-fails-when-declaration-list-has-only-nulls")
+            .classes()
+            .map { it.primaryConstructor }
 
         // when
         val func = {
@@ -312,9 +294,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `assert-passes`() {
         // given
-        val sut =
-            getSnippetFile("assert-passes")
-                .classes()
+        val sut = getSnippetFile("assert-passes")
+            .classes()
 
         // then
         sut.assertTrue { it.name == "SampleClass" }
@@ -323,9 +304,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `assert-fails`() {
         // given
-        val sut =
-            getSnippetFile("assert-fails")
-                .classes()
+        val sut = getSnippetFile("assert-fails")
+            .classes()
 
         // when
         val func = {
@@ -339,9 +319,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `assert-false-passes`() {
         // given
-        val sut =
-            getSnippetFile("assert-false-passes")
-                .classes()
+        val sut = getSnippetFile("assert-false-passes")
+            .classes()
 
         // then
         sut.assertFalse {
@@ -352,9 +331,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `assert-false-fails`() {
         // given
-        val sut =
-            getSnippetFile("assert-false-fails")
-                .classes()
+        val sut = getSnippetFile("assert-false-fails")
+            .classes()
 
         // when
         val func = {
@@ -370,9 +348,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `assert-passes-on-declarations-which-items-have-null-parent`() {
         // given
-        val sut =
-            getSnippetFile("assert-passes-on-declarations-which-items-have-null-parent")
-                .files
+        val sut = getSnippetFile("assert-passes-on-declarations-which-items-have-null-parent")
+            .files
 
         // then
         sut.assertTrue { it.name == "assert-passes-on-declarations-which-items-have-null-parent" }
@@ -381,9 +358,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `assert-fails-on-declarations-which-items-have-null-parent`() {
         // given
-        val sut =
-            getSnippetFile("assert-fails-on-declarations-which-items-have-null-parent")
-                .files
+        val sut = getSnippetFile("assert-fails-on-declarations-which-items-have-null-parent")
+            .files
 
         // when
         val func = {
@@ -397,9 +373,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `assert-false-passes-on-declarations-which-items-have-null-parent`() {
         // given
-        val sut =
-            getSnippetFile("assert-false-passes-on-declarations-which-items-have-null-parent")
-                .files
+        val sut = getSnippetFile("assert-false-passes-on-declarations-which-items-have-null-parent")
+            .files
 
         // then
         sut.assertFalse {
@@ -410,9 +385,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `assert-false-fails-on-declarations-which-items-have-null-parent`() {
         // given
-        val sut =
-            getSnippetFile("assert-false-fails-on-declarations-which-items-have-null-parent")
-                .files
+        val sut = getSnippetFile("assert-false-fails-on-declarations-which-items-have-null-parent")
+            .files
 
         // when
         val func = {
@@ -428,9 +402,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `assert-passes-when-expression-is-nullable`() {
         // given
-        val sut =
-            getSnippetFile("assert-passes-when-expression-is-nullable")
-                .classes()
+        val sut = getSnippetFile("assert-passes-when-expression-is-nullable")
+            .classes()
 
         // then
         sut.assertTrue { it.primaryConstructor?.hasParameterWithName("sampleParameter") }
@@ -439,9 +412,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `assert-fails-when-expression-is-nullable`() {
         // given
-        val sut =
-            getSnippetFile("assert-fails-when-expression-is-nullable")
-                .classes()
+        val sut = getSnippetFile("assert-fails-when-expression-is-nullable")
+            .classes()
 
         // when
         val func = {
@@ -455,9 +427,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `assert-false-passes-when-expression-is-nullable`() {
         // given
-        val sut =
-            getSnippetFile("assert-false-passes-when-expression-is-nullable")
-                .classes()
+        val sut = getSnippetFile("assert-false-passes-when-expression-is-nullable")
+            .classes()
 
         // then
         sut.assertFalse { it.primaryConstructor?.hasParameterWithName("otherParameter") }
@@ -466,9 +437,8 @@ class AssertTrueOnDeclarationListTest {
     @Test
     fun `assert-false-fails-when-expression-is-nullable`() {
         // given
-        val sut =
-            getSnippetFile("assert-false-fails-when-expression-is-nullable")
-                .classes()
+        val sut = getSnippetFile("assert-false-fails-when-expression-is-nullable")
+            .classes()
 
         // when
         val func = {

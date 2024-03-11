@@ -9,10 +9,9 @@ class KoPropertyDeclarationForKoValueProviderTest {
     @Test
     fun `property-has-value`() {
         // given
-        val sut =
-            getSnippetFile("property-has-value")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-has-value")
+            .properties()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -26,10 +25,9 @@ class KoPropertyDeclarationForKoValueProviderTest {
     @Test
     fun `property-inside-interface-has-no-value`() {
         // given
-        val sut =
-            getSnippetFile("property-inside-interface-has-no-value")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-inside-interface-has-no-value")
+            .properties()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -42,10 +40,9 @@ class KoPropertyDeclarationForKoValueProviderTest {
     @Test
     fun `property-with-getter-and-setter-has-value`() {
         // given
-        val sut =
-            getSnippetFile("property-with-getter-and-setter-has-value")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-with-getter-and-setter-has-value")
+            .properties()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -59,10 +56,9 @@ class KoPropertyDeclarationForKoValueProviderTest {
     @Test
     fun `property-with-getter-and-setter-has-no-value`() {
         // given
-        val sut =
-            getSnippetFile("property-with-getter-and-setter-has-no-value")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-with-getter-and-setter-has-no-value")
+            .properties()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -75,10 +71,9 @@ class KoPropertyDeclarationForKoValueProviderTest {
     @Test
     fun `property-with-delegation-has-no-value`() {
         // given
-        val sut =
-            getSnippetFile("property-with-delegation-has-no-value")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-with-delegation-has-no-value")
+            .properties()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -88,5 +83,6 @@ class KoPropertyDeclarationForKoValueProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koproperty/snippet/forkovalueprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koproperty/snippet/forkovalueprovider/", fileName)
 }

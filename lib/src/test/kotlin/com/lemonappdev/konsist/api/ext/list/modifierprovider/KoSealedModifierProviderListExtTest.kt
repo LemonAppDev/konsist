@@ -10,14 +10,12 @@ class KoSealedModifierProviderListExtTest {
     @Test
     fun `withSealedModifier() returns declaration with sealed modifier`() {
         // given
-        val declaration1: KoSealedModifierProvider =
-            mockk {
-                every { hasSealedModifier } returns true
-            }
-        val declaration2: KoSealedModifierProvider =
-            mockk {
-                every { hasSealedModifier } returns false
-            }
+        val declaration1: KoSealedModifierProvider = mockk {
+            every { hasSealedModifier } returns true
+        }
+        val declaration2: KoSealedModifierProvider = mockk {
+            every { hasSealedModifier } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -30,14 +28,12 @@ class KoSealedModifierProviderListExtTest {
     @Test
     fun `withoutSealedModifier() returns declaration without sealed modifier`() {
         // given
-        val declaration1: KoSealedModifierProvider =
-            mockk {
-                every { hasSealedModifier } returns true
-            }
-        val declaration2: KoSealedModifierProvider =
-            mockk {
-                every { hasSealedModifier } returns false
-            }
+        val declaration1: KoSealedModifierProvider = mockk {
+            every { hasSealedModifier } returns true
+        }
+        val declaration2: KoSealedModifierProvider = mockk {
+            every { hasSealedModifier } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when

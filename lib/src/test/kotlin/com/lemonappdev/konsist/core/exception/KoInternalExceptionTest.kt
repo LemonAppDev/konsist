@@ -15,10 +15,9 @@ class KoInternalExceptionTest {
         // given
         val message = "message"
         val declarationText = "declaration text"
-        val declaration: KoTextProvider =
-            mockk {
-                every { text } returns declarationText
-            }
+        val declaration: KoTextProvider = mockk {
+            every { text } returns declarationText
+        }
         val func = { throw KoInternalException(message, koBaseProvider = declaration) }
 
         // when
@@ -51,10 +50,9 @@ class KoInternalExceptionTest {
         // given
         val message = "message"
         val fileText = "file text"
-        val file: KoFileDeclaration =
-            mockk {
-                every { text } returns fileText
-            }
+        val file: KoFileDeclaration = mockk {
+            every { text } returns fileText
+        }
         val func = { throw KoInternalException(message, koFileDeclaration = file) }
 
         // when

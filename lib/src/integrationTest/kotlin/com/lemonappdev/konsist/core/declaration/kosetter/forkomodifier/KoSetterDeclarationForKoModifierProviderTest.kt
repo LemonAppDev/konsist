@@ -12,11 +12,10 @@ class KoSetterDeclarationForKoModifierProviderTest {
     @Test
     fun `setter-has-no-modifiers`() {
         // given
-        val sut =
-            getSnippetFile("setter-has-no-modifiers")
-                .properties()
-                .first()
-                .setter
+        val sut = getSnippetFile("setter-has-no-modifiers")
+            .properties()
+            .first()
+            .setter
 
         // then
         assertSoftly(sut) {
@@ -32,11 +31,10 @@ class KoSetterDeclarationForKoModifierProviderTest {
     @Test
     fun `setter-has-private-modifier`() {
         // given
-        val sut =
-            getSnippetFile("setter-has-private-modifier")
-                .properties()
-                .first()
-                .setter
+        val sut = getSnippetFile("setter-has-private-modifier")
+            .properties()
+            .first()
+            .setter
 
         // then
         assertSoftly(sut) {

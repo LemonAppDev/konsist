@@ -5,7 +5,6 @@ import com.lemonappdev.konsist.testdata.SampleInterface
 import com.lemonappdev.konsist.testdata.SampleParentClass
 import com.lemonappdev.konsist.testdata.SampleParentInterface
 import com.lemonappdev.konsist.testdata.SampleParentInterface1
-import com.lemonappdev.konsist.testdata.SampleParentInterface2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -14,10 +13,9 @@ class KoObjectDeclarationForKoParentProviderTest {
     @Test
     fun `object-has-no-parents`() {
         // given
-        val sut =
-            getSnippetFile("object-has-no-parents")
-                .objects()
-                .first()
+        val sut = getSnippetFile("object-has-no-parents")
+            .objects()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -36,23 +34,20 @@ class KoObjectDeclarationForKoParentProviderTest {
     }
 
     @Test
-    fun `object-has-direct-parent-class-interfaces-and-external-parent`() {
+    fun `object-has-parent-class-and-interfaces`() {
         // given
-        val sut =
-            getSnippetFile("object-has-direct-parent-class-interfaces-and-external-parent")
-                .objects()
-                .first()
+        val sut = getSnippetFile("object-has-parent-class-and-interfaces")
+            .objects()
+            .first()
 
         // then
         assertSoftly(sut) {
-            parents.map { it.name } shouldBeEqualTo
-                listOf(
-                    "SampleParentClass",
-                    "SampleParentInterface1",
-                    "SampleParentInterface2",
-                    "SampleExternalInterface",
-                )
-            numParents shouldBeEqualTo 4
+            parents.map { it.name } shouldBeEqualTo listOf(
+                "SampleParentClass",
+                "SampleParentInterface1",
+                "SampleParentInterface2",
+            )
+            numParents shouldBeEqualTo 3
             countParents { it.name == "SampleParentClass" } shouldBeEqualTo 1
             countParents { it.hasNameStartingWith("SampleParentInterface") } shouldBeEqualTo 2
             hasParents() shouldBeEqualTo true
@@ -80,103 +75,6 @@ class KoObjectDeclarationForKoParentProviderTest {
         }
     }
 
-    @Test
-    fun `object-has-indirect-parents`() {
-        // given
-        val sut =
-            getSnippetFile("object-has-indirect-parents")
-                .objects()
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            parents().map { it.name } shouldBeEqualTo
-                listOf(
-                    "SampleParentClass",
-                    "SampleParentInterface1",
-                    "SampleExternalInterface",
-                )
-            numParents(indirectParents = false) shouldBeEqualTo 3
-            parents(indirectParents = true).map { it.name } shouldBeEqualTo
-                listOf(
-                    "SampleParentClass",
-                    "SampleParentInterface1",
-                    "SampleExternalInterface",
-                    "SampleParentInterface2",
-                )
-            numParents(indirectParents = true) shouldBeEqualTo 4
-            countParents(indirectParents = true) { it.name == "SampleParentInterface2" } shouldBeEqualTo 1
-            countParents(indirectParents = true) { it.hasNameStartingWith("SampleParentInterface") } shouldBeEqualTo 2
-            hasParents(indirectParents = true) shouldBeEqualTo true
-            hasParentWithName("SampleParentInterface2", indirectParents = true) shouldBeEqualTo true
-            hasParentWithName("OtherInterface", indirectParents = true) shouldBeEqualTo false
-            hasParentWithName("SampleParentInterface2", "OtherInterface", indirectParents = true) shouldBeEqualTo true
-            hasParentsWithAllNames("SampleParentInterface2", indirectParents = true) shouldBeEqualTo true
-            hasParentsWithAllNames("OtherInterface", indirectParents = true) shouldBeEqualTo false
-            hasParentsWithAllNames(
-                "SampleParentInterface2",
-                "SampleParentInterface1",
-                indirectParents = true,
-            ) shouldBeEqualTo true
-            hasParentsWithAllNames("SampleParentInterface2", "OtherInterface", indirectParents = true) shouldBeEqualTo false
-            hasParent(indirectParents = true) { it.name == "SampleParentInterface2" } shouldBeEqualTo true
-            hasParent(indirectParents = true) { it.name == "OtherClass" } shouldBeEqualTo false
-            hasAllParents(indirectParents = true) { it.name == "SampleParentInterface2" } shouldBeEqualTo false
-            hasAllParents(indirectParents = true) { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
-            hasAllParents(indirectParents = true) { it.hasNameStartingWith("Other") } shouldBeEqualTo false
-            hasParentOf(SampleParentInterface2::class, indirectParents = true) shouldBeEqualTo true
-            hasParentOf(SampleParentInterface2::class, SampleInterface::class, indirectParents = true) shouldBeEqualTo true
-            hasAllParentsOf(SampleParentInterface2::class, indirectParents = true) shouldBeEqualTo true
-            hasAllParentsOf(
-                SampleParentInterface2::class,
-                SampleInterface::class,
-                indirectParents = true,
-            ) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `object-has-repeated-indirect-parents`() {
-        // given
-        val sut =
-            getSnippetFile("object-has-repeated-indirect-parents")
-                .objects()
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            parents().map { it.name } shouldBeEqualTo
-                listOf(
-                    "SampleParentClass",
-                    "SampleParentInterface1",
-                    "SampleExternalInterface",
-                )
-            parents(indirectParents = true).map { it.name } shouldBeEqualTo
-                listOf(
-                    "SampleParentClass",
-                    "SampleParentInterface1",
-                    "SampleExternalInterface",
-                    "SampleParentInterface2",
-                )
-            numParents(indirectParents = false) shouldBeEqualTo 3
-            numParents(indirectParents = true) shouldBeEqualTo 4
-        }
-    }
-
-    @Test
-    fun `object-has-parent-defined-by-import-alias`() {
-        // given
-        val sut =
-            getSnippetFile("object-has-parent-defined-by-import-alias")
-                .objects()
-                .first()
-
-        // then
-        assertSoftly(sut.parents.first()) {
-            name shouldBeEqualTo "SampleParentInterface"
-            fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleParentInterface"
-        }
-    }
-
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/forkoparentprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koobject/snippet/forkoparentprovider/", fileName)
 }

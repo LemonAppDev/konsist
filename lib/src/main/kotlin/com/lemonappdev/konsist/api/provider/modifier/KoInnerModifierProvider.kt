@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoInnerModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Determines whatever declaration has `inner` modifier.
+     * Whatever declaration has `inner` modifier.
      */
     val hasInnerModifier: Boolean
 }

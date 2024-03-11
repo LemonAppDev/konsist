@@ -9,10 +9,9 @@ class KoPropertyDeclarationForKoNameProviderTest {
     @Test
     fun `property-name`() {
         // given
-        val sut =
-            getSnippetFile("property-name")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-name")
+            .properties()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -28,5 +27,6 @@ class KoPropertyDeclarationForKoNameProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koproperty/snippet/forkonameprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koproperty/snippet/forkonameprovider/", fileName)
 }

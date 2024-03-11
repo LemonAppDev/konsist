@@ -1,11 +1,8 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
-import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
-import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
-import com.lemonappdev.konsist.core.util.TypeUtil
-import com.lemonappdev.konsist.core.util.TypeUtil.hasTypeOf
+import com.lemonappdev.konsist.core.util.ReceiverUtil
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
@@ -19,23 +16,14 @@ internal interface KoReceiverTypeProviderCore :
     val ktCallableDeclaration: KtCallableDeclaration
 
     override val receiverType: KoTypeDeclaration?
-        get() {
-            val references = getTypeReferences()
+        get() = ReceiverUtil.getReceiverType(
+            getTypeReferences(),
+            ktCallableDeclaration.isExtensionDeclaration(),
+            this,
+        )
 
-            val type =
-                if (ktCallableDeclaration.isExtensionDeclaration()) {
-                    references.firstOrNull()
-                } else {
-                    null
-                }
-
-            return type?.let {
-                KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration())
-            }
-        }
-
-    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasReceiverType { it.name == name }"))
-    override fun hasReceiverType(name: String): Boolean = TypeUtil.hasReceiverType(receiverType, name)
+    @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasReceiverType { it.name == name }"))
+    override fun hasReceiverType(name: String): Boolean = ReceiverUtil.hasReceiverType(receiverType, name)
 
     override fun hasReceiverType(predicate: ((KoTypeDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -43,10 +31,9 @@ internal interface KoReceiverTypeProviderCore :
             else -> receiverType?.let { predicate(it) } ?: false
         }
 
-    override fun hasReceiverTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(receiverType, kClass)
+    override fun hasReceiverTypeOf(kClass: KClass<*>): Boolean = kClass.simpleName == receiverType?.name
 
-    private fun getTypeReferences(): List<KtTypeReference> =
-        ktCallableDeclaration
-            .children
-            .filterIsInstance<KtTypeReference>()
+    private fun getTypeReferences(): List<KtTypeReference> = ktCallableDeclaration
+        .children
+        .filterIsInstance<KtTypeReference>()
 }

@@ -8,10 +8,9 @@ class KoFunctionDeclarationForKoFinalModifierProviderTest {
     @Test
     fun `function-without-final-modifier`() {
         // given
-        val sut =
-            getSnippetFile("function-without-final-modifier")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-without-final-modifier")
+            .functions()
+            .first()
 
         // then
         sut.hasFinalModifier shouldBeEqualTo false
@@ -20,10 +19,9 @@ class KoFunctionDeclarationForKoFinalModifierProviderTest {
     @Test
     fun `function-with-final-modifier`() {
         // given
-        val sut =
-            getSnippetFile("function-with-final-modifier")
-                .functions(includeNested = true)
-                .first()
+        val sut = getSnippetFile("function-with-final-modifier")
+            .functions(includeNested = true)
+            .first()
 
         // then
         sut.hasFinalModifier shouldBeEqualTo true

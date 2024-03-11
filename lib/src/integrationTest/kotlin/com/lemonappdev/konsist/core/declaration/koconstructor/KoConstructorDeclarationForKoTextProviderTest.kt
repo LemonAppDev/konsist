@@ -8,12 +8,11 @@ class KoConstructorDeclarationForKoTextProviderTest {
     @Test
     fun `constructor-text`() {
         // given
-        val sut =
-            getSnippetFile("constructor-text")
-                .classes()
-                .first()
-                .constructors
-                .first()
+        val sut = getSnippetFile("constructor-text")
+            .classes()
+            .first()
+            .constructors
+            .first()
 
         // then
         sut
@@ -21,5 +20,6 @@ class KoConstructorDeclarationForKoTextProviderTest {
             .shouldBeEqualTo("(val sampleParameter: Int)")
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koconstructor/snippet/forkotextprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koconstructor/snippet/forkotextprovider/", fileName)
 }

@@ -9,13 +9,12 @@ class KoParameterDeclarationForKoNameProviderTest {
     @Test
     fun `parameter-name`() {
         // given
-        val sut =
-            getSnippetFile("parameter-name")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
+        val sut = getSnippetFile("parameter-name")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
 
         // then
         assertSoftly(sut) {
@@ -31,5 +30,6 @@ class KoParameterDeclarationForKoNameProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koparameter/snippet/forkonameprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koparameter/snippet/forkonameprovider/", fileName)
 }

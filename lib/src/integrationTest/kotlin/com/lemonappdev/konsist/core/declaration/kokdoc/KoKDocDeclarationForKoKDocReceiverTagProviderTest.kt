@@ -10,11 +10,10 @@ class KoKDocDeclarationForKoKDocReceiverTagProviderTest {
     @Test
     fun `kdoc-without-receiver-tag`() {
         // given
-        val sut =
-            getSnippetFile("kdoc-without-receiver-tag")
-                .classes()
-                .first()
-                .kDoc
+        val sut = getSnippetFile("kdoc-without-receiver-tag")
+            .classes()
+            .first()
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -26,11 +25,10 @@ class KoKDocDeclarationForKoKDocReceiverTagProviderTest {
     @Test
     fun `function-with-receiver-tag`() {
         // given
-        val sut =
-            getSnippetFile("function-with-receiver-tag")
-                .functions(includeNested = true)
-                .first()
-                .kDoc
+        val sut = getSnippetFile("function-with-receiver-tag")
+            .functions(includeNested = true)
+            .first()
+            .kDoc
 
         // then
         assertSoftly(sut) {

@@ -8,12 +8,11 @@ class KoParameterDeclarationForKoNoInlineModifierProviderTest {
     @Test
     fun `parameter-without-noinline-modifier`() {
         // given
-        val sut =
-            getSnippetFile("parameter-without-noinline-modifier")
-                .functions()
-                .first()
-                .parameters
-                .first()
+        val sut = getSnippetFile("parameter-without-noinline-modifier")
+            .functions()
+            .first()
+            .parameters
+            .first()
 
         // then
         sut.hasNoInlineModifier shouldBeEqualTo false
@@ -22,17 +21,15 @@ class KoParameterDeclarationForKoNoInlineModifierProviderTest {
     @Test
     fun `parameter-with-noinline-modifier`() {
         // given
-        val sut =
-            getSnippetFile("parameter-with-noinline-modifier")
-                .functions()
-                .first()
-                .parameters
-                .first()
+        val sut = getSnippetFile("parameter-with-noinline-modifier")
+            .functions()
+            .first()
+            .parameters
+            .first()
 
         // then
         sut.hasNoInlineModifier shouldBeEqualTo true
     }
-
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koparameter/forkomodifier/snippet/forkonoinlinemodifierprovider/", fileName)
 }

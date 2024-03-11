@@ -8,10 +8,9 @@ class KoClassDeclarationForKoSealedModifierProviderTest {
     @Test
     fun `class-without-sealed-modifier`() {
         // given
-        val sut =
-            getSnippetFile("class-without-sealed-modifier")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-without-sealed-modifier")
+            .classes()
+            .first()
 
         // then
         sut.hasSealedModifier shouldBeEqualTo false
@@ -20,10 +19,9 @@ class KoClassDeclarationForKoSealedModifierProviderTest {
     @Test
     fun `sealed-class`() {
         // given
-        val sut =
-            getSnippetFile("sealed-class")
-                .classes()
-                .first()
+        val sut = getSnippetFile("sealed-class")
+            .classes()
+            .first()
 
         // then
         sut.hasSealedModifier shouldBeEqualTo true

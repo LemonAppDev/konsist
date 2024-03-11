@@ -8,10 +8,9 @@ class KoObjectDeclarationTest {
     @Test
     fun `object-to-string`() {
         // given
-        val sut =
-            getSnippetFile("object-to-string")
-                .objects()
-                .first()
+        val sut = getSnippetFile("object-to-string")
+            .objects()
+            .first()
 
         // then
         sut.toString() shouldBeEqualTo "SampleObject"

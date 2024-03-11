@@ -15,10 +15,7 @@ import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.util.LocationUtil
 
 @Suppress("detekt.ThrowsCount")
-internal fun KoArchitectureFiles.assert(
-    additionalMessage: String?,
-    testName: String?,
-): Unit {
+internal fun KoArchitectureFiles.assert(): Unit {
     try {
         val dependencyRules = this.dependencyRules as DependencyRulesCore
 
@@ -33,25 +30,18 @@ internal fun KoArchitectureFiles.assert(
                     failedFiles.distinct(),
                     dependencyRules.dependencies,
                     dependencyRules.statuses,
-                    additionalMessage,
-                    testName,
                 ),
             )
         }
     } catch (e: KoException) {
         throw e
-    } catch (
-        @Suppress("detekt.TooGenericExceptionCaught") e: Exception,
-    ) {
+    } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
         throw KoInternalException(e.message.orEmpty(), e)
     }
 }
 
 @Suppress("detekt.ThrowsCount")
-internal fun KoArchitectureScope.assert(
-    additionalMessage: String?,
-    testName: String?,
-): Unit {
+internal fun KoArchitectureScope.assert(): Unit {
     try {
         val files = this.koScope.files
         val dependencyRules = this.dependencyRules as DependencyRulesCore
@@ -67,16 +57,12 @@ internal fun KoArchitectureScope.assert(
                     failedFiles.distinct(),
                     dependencyRules.dependencies,
                     dependencyRules.statuses,
-                    additionalMessage,
-                    testName,
                 ),
             )
         }
     } catch (e: KoException) {
         throw e
-    } catch (
-        @Suppress("detekt.TooGenericExceptionCaught") e: Exception,
-    ) {
+    } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
         throw KoInternalException(e.message.orEmpty(), e)
     }
 }
@@ -89,27 +75,22 @@ internal fun KoArchitectureScope.assert(
  *
  * @throws KoPreconditionFailedException Layers do not contain files
  */
-private fun validateAllLayersAreValid(
-    files: List<KoFileDeclaration>,
-    dependencyRules: DependencyRulesCore,
-): Unit {
-    val isAllLayersValid =
-        dependencyRules.allLayers
-            .all {
-                files
-                    .withPackage(it.definedBy)
-                    .isNotEmpty()
-            }
+private fun validateAllLayersAreValid(files: List<KoFileDeclaration>, dependencyRules: DependencyRulesCore): Unit {
+    val isAllLayersValid = dependencyRules.allLayers
+        .all {
+            files
+                .withPackage(it.definedBy)
+                .isNotEmpty()
+        }
 
     if (!isAllLayersValid) {
-        val layer =
-            dependencyRules
-                .allLayers
-                .first {
-                    files
-                        .withPackage(it.definedBy)
-                        .isEmpty()
-                }
+        val layer = dependencyRules
+            .allLayers
+            .first {
+                files
+                    .withPackage(it.definedBy)
+                    .isEmpty()
+            }
         throw KoPreconditionFailedException("Layer ${layer.name} doesn't contain any files.")
     }
 }
@@ -135,10 +116,7 @@ private fun validateLayersOnDependencyRules(dependencyRules: DependencyRulesCore
  *
  * @return List<FailedFiles>
  */
-private fun validateLayersContainingFailedFiles(
-    files: List<KoFileDeclaration>,
-    dependencyRules: DependencyRulesCore,
-): List<FailedFiles> {
+private fun validateLayersContainingFailedFiles(files: List<KoFileDeclaration>, dependencyRules: DependencyRulesCore): List<FailedFiles> {
     val failedFiles = mutableListOf<FailedFiles>()
 
     dependencyRules
@@ -150,10 +128,9 @@ private fun validateLayersContainingFailedFiles(
                 .withPackage(layer.definedBy)
                 .onEach {
                     otherLayers.forEach { otherLayer ->
-                        val imports =
-                            it.imports.filter { import ->
-                                LocationUtil.resideInLocation(otherLayer.definedBy, import.name)
-                            }
+                        val imports = it.imports.filter { import ->
+                            LocationUtil.resideInLocation(otherLayer.definedBy, import.name)
+                        }
 
                         if (imports.isNotEmpty()) {
                             failedFiles += FailedFiles(it.path, layer, otherLayer.name, imports)
@@ -175,46 +152,38 @@ private fun getCheckFailedMessages(
     failedFiles: List<FailedFiles>,
     dependencies: Map<Layer, Set<Layer>>,
     statuses: Map<Layer, Status>,
-    additionalMessage: String?,
-    testName: String?,
 ): String {
-    val failedDeclarationsMessage =
-        failedFiles
-            .map { it.resideInLayer }
-            .joinToString("\n") { layer ->
-                val details =
-                    failedFiles
-                        .filter { it.resideInLayer == layer }
-                        .joinToString(separator = "\n") {
-                            "A file ${it.path} in a ${it.resideInLayer.name} layer depends on ${it.failedLayer} layer, imports:\n${
-                                it.imports.joinToString(
-                                    separator = "\n",
-                                ) { import -> "\t${import.name} (${import.location})" }
-                            }"
-                        }
+    val failedDeclarationsMessage = failedFiles
+        .map { it.resideInLayer }
+        .joinToString("\n") { layer ->
+            val details = failedFiles
+                .filter { it.resideInLayer == layer }
+                .joinToString(separator = "\n") {
+                    "A file ${it.path} in a ${it.resideInLayer.name} layer depends on ${it.failedLayer} layer, imports:\n${
+                        it.imports.joinToString(
+                            separator = "\n",
+                        ) { import -> "\t${import.name} (${import.location})" }
+                    }"
+                }
 
-                val layerDependencies = (dependencies.getOrDefault(layer, emptySet()) - layer).map { it.name }
+            val layerDependencies = (dependencies.getOrDefault(layer, emptySet()) - layer).map { it.name }
 
-                val message =
-                    when (statuses.getOrDefault(layer, Status.NONE)) {
-                        Status.DEPEND_ON_LAYER -> {
-                            "depends on ${layerDependencies.joinToString(", ")} assertion failure:"
-                        }
+            val message = when (statuses.getOrDefault(layer, Status.NONE)) {
+                Status.DEPEND_ON_LAYER -> {
+                    "depends on ${layerDependencies.joinToString(", ")} assertion failure:"
+                }
 
-                        Status.DEPENDENT_ON_NOTHING -> {
-                            "depends on nothing assertion failure:"
-                        }
+                Status.DEPENDENT_ON_NOTHING -> {
+                    "depends on nothing assertion failure:"
+                }
 
-                        else -> {
-                            ""
-                        }
-                    }
-
-                "${layer.name} $message\n$details"
+                else -> {
+                    ""
+                }
             }
-    val customMessage = if (additionalMessage != null) "\n$additionalMessage" else ""
 
-    val name = testName ?: getTestMethodNameFromEightIndex()
+            "${layer.name} $message\n$details"
+        }
 
-    return "'$name' test has failed.${customMessage}\n$failedDeclarationsMessage"
+    return "'${getTestMethodNameFromSeventhIndex()}' test has failed.\n$failedDeclarationsMessage"
 }

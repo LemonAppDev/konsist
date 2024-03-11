@@ -1,6 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-
-fun sampleFunction() {
-    @SampleAnnotation
-    val sampleVariable = ""
-}

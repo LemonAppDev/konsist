@@ -9,10 +9,9 @@ class KoPropertyDeclarationForKoValModifierProviderTest {
     @Test
     fun `property-has-no-val-modifier`() {
         // given
-        val sut =
-            getSnippetFile("property-has-no-val-modifier")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-has-no-val-modifier")
+            .properties()
+            .first()
 
         // then
         sut.hasValModifier shouldBeEqualTo false
@@ -21,10 +20,9 @@ class KoPropertyDeclarationForKoValModifierProviderTest {
     @Test
     fun `property-has-val-modifier`() {
         // given
-        val sut =
-            getSnippetFile("property-has-val-modifier")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-has-val-modifier")
+            .properties()
+            .first()
 
         // then
         sut.hasValModifier shouldBeEqualTo true
@@ -33,11 +31,10 @@ class KoPropertyDeclarationForKoValModifierProviderTest {
     @Test
     fun `property-defined-in-constructor-has-no-val-modifier`() {
         // given
-        val sut =
-            getSnippetFile("property-defined-in-constructor-has-no-val-modifier")
-                .classes()
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-defined-in-constructor-has-no-val-modifier")
+            .classes()
+            .properties()
+            .first()
 
         // then
         sut.hasValModifier shouldBeEqualTo false
@@ -46,11 +43,10 @@ class KoPropertyDeclarationForKoValModifierProviderTest {
     @Test
     fun `property-defined-in-constructor-has-val-modifier`() {
         // given
-        val sut =
-            getSnippetFile("property-defined-in-constructor-has-val-modifier")
-                .classes()
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-defined-in-constructor-has-val-modifier")
+            .classes()
+            .properties()
+            .first()
 
         // then
         sut.hasValModifier shouldBeEqualTo true

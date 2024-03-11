@@ -9,10 +9,9 @@ class KoFileDeclarationForKoHasPackageProviderTest {
     @Test
     fun `file-has-matching-package`() {
         // given
-        val sut =
-            getSnippetFile("file-has-matching-package")
-                .files
-                .first()
+        val sut = getSnippetFile("file-has-matching-package")
+            .files
+            .first()
 
         // then
         sut.hasMatchingPackage shouldBeEqualTo true
@@ -21,10 +20,9 @@ class KoFileDeclarationForKoHasPackageProviderTest {
     @Test
     fun `file-has-not-matching-package`() {
         // given
-        val sut =
-            getSnippetFile("file-has-not-matching-package")
-                .files
-                .first()
+        val sut = getSnippetFile("file-has-not-matching-package")
+            .files
+            .first()
 
         // then
         sut.hasMatchingPackage shouldBeEqualTo false
@@ -33,10 +31,9 @@ class KoFileDeclarationForKoHasPackageProviderTest {
     @Test
     fun `file-has-no-package`() {
         // given
-        val sut =
-            getSnippetFile("file-has-no-package")
-                .files
-                .first()
+        val sut = getSnippetFile("file-has-no-package")
+            .files
+            .first()
 
         // then
         sut.hasPackage("com..") shouldBeEqualTo false
@@ -45,10 +42,9 @@ class KoFileDeclarationForKoHasPackageProviderTest {
     @Test
     fun `file-has-package`() {
         // given
-        val sut =
-            getSnippetFile("file-has-package")
-                .files
-                .first()
+        val sut = getSnippetFile("file-has-package")
+            .files
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -58,9 +54,8 @@ class KoFileDeclarationForKoHasPackageProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope(
-            "core/declaration/kofile/snippet/forkohaspackageprovider/",
-            fileName,
-        )
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope(
+        "core/declaration/kofile/snippet/forkohaspackageprovider/",
+        fileName,
+    )
 }

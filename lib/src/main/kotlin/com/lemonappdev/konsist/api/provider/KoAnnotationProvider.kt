@@ -18,7 +18,7 @@ interface KoAnnotationProvider : KoBaseProvider {
     val numAnnotations: Int
 
     /**
-     * Returns the number of annotations that satisfies the specified predicate present in the declaration.
+     * Gets the number of annotations that satisfies the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if an annotation satisfies a condition.
      * @return The number of annotations in the declaration.
@@ -26,7 +26,7 @@ interface KoAnnotationProvider : KoBaseProvider {
     fun countAnnotations(predicate: (KoAnnotationDeclaration) -> Boolean): Int
 
     /**
-     * Determines whatever the declaration has annotations.
+     * Whether the declaration has annotations.
      *
      * @param names the annotation names to check. It can be either a simple name or a fully qualified name.
      * @return `true` if the declaration has annotations with the specified names (or any annotation if [names] is empty),
@@ -34,14 +34,14 @@ interface KoAnnotationProvider : KoBaseProvider {
      */
     @Deprecated(
         """
-            Will be removed in v0.16.0. 
+            Will be removed in v1.0.0. 
             If you passed one argument - replace with `hasAnnotationWithName`, otherwise with `hasAnnotationsWithAllNames`.
             """,
     )
     fun hasAnnotations(vararg names: String): Boolean
 
     /**
-     * Determines whatever the declaration has annotations of `KClass` type.
+     * Whether the declaration has annotations of `KClass` type.
      *
      * @param name the `KClass` type of the annotation to check.
      * @param names the `KClass` types of the annotations to check.
@@ -49,17 +49,14 @@ interface KoAnnotationProvider : KoBaseProvider {
      */
     @Deprecated(
         """
-            Will be removed in v0.16.0. 
+            Will be removed in v1.0.0. 
             If you passed one argument - replace with `hasAnnotationOf`, otherwise with `hasAllAnnotationsOf`.
             """,
     )
-    fun hasAnnotationsOf(
-        name: KClass<*>,
-        vararg names: KClass<*>,
-    ): Boolean
+    fun hasAnnotationsOf(name: KClass<*>, vararg names: KClass<*>): Boolean
 
     /**
-     * Determines whatever declaration has any annotation.
+     * Whatever declaration has any annotation.
      *
      * @return `true` if the declaration has any annotation, `false` otherwise.
      */
@@ -72,10 +69,7 @@ interface KoAnnotationProvider : KoBaseProvider {
      * @param names the names of the annotations to check. It can be either a simple name or a fully qualified name.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasAnnotationWithName(
-        name: String,
-        vararg names: String,
-    ): Boolean
+    fun hasAnnotationWithName(name: String, vararg names: String): Boolean
 
     /**
      * Determines whether the declaration has annotations with all the specified names.
@@ -84,10 +78,7 @@ interface KoAnnotationProvider : KoBaseProvider {
      * @param names The names of the annotations to check. It can be either a simple name or a fully qualified name.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasAnnotationsWithAllNames(
-        name: String,
-        vararg names: String,
-    ): Boolean
+    fun hasAnnotationsWithAllNames(name: String, vararg names: String): Boolean
 
     /**
      * Determines whether the declaration has at least one annotation that satisfies the provided predicate.
@@ -101,7 +92,8 @@ interface KoAnnotationProvider : KoBaseProvider {
      * Determines whether the declaration has all annotations that satisfy the provided predicate.
      *
      * Note that if the annotations contains no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate.
+     * that do not match the predicate. See a more detailed explanation of this logic concept in
+     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
      *
      * @param predicate A function that defines the condition to be met by annotation declarations.
      * @return `true` if all annotation declarations satisfy the predicate, `false` otherwise.
@@ -115,10 +107,7 @@ interface KoAnnotationProvider : KoBaseProvider {
      * @param names the `KClass` types of the annotations to check.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasAnnotationOf(
-        name: KClass<*>,
-        vararg names: KClass<*>,
-    ): Boolean
+    fun hasAnnotationOf(name: KClass<*>, vararg names: KClass<*>): Boolean
 
     /**
      * Determines whether the declaration has annotations with all the specified `KClass` type.
@@ -127,8 +116,5 @@ interface KoAnnotationProvider : KoBaseProvider {
      * @param names the `KClass` types of the annotations to check.
      * @return `true` if the declaration has annotations of all the specified `KClass` types, `false` otherwise.
      */
-    fun hasAllAnnotationsOf(
-        name: KClass<*>,
-        vararg names: KClass<*>,
-    ): Boolean
+    fun hasAllAnnotationsOf(name: KClass<*>, vararg names: KClass<*>): Boolean
 }

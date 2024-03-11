@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoTailrecModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Determines whatever the declaration has `tailrec` modifier.
+     * Whether the declaration has `tailrec` modifier.
      */
     val hasTailrecModifier: Boolean
 }

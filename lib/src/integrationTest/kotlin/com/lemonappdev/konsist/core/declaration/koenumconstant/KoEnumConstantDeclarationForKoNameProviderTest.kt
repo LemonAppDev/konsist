@@ -9,12 +9,11 @@ class KoEnumConstantDeclarationForKoNameProviderTest {
     @Test
     fun `enum-const`() {
         // given
-        val sut =
-            getSnippetFile("enum-const")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
+        val sut = getSnippetFile("enum-const")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -30,5 +29,6 @@ class KoEnumConstantDeclarationForKoNameProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koenumconstant/snippet/forkonameprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koenumconstant/snippet/forkonameprovider/", fileName)
 }

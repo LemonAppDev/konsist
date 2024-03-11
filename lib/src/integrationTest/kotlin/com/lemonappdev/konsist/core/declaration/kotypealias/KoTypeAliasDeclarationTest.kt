@@ -8,10 +8,9 @@ class KoTypeAliasDeclarationTest {
     @Test
     fun `typealias-to-string`() {
         // given
-        val sut =
-            getSnippetFile("typealias-to-string")
-                .typeAliases
-                .first()
+        val sut = getSnippetFile("typealias-to-string")
+            .typeAliases
+            .first()
 
         // then
         sut.toString() shouldBeEqualTo "SampleTypeAlias"
