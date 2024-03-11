@@ -13,7 +13,7 @@ class KoImportAliasDeclarationTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceImportAlias
+                ?.asImportAliasDeclaration()
 
         // then
         sut.toString() shouldBeEqualTo "ImportAlias"
@@ -27,7 +27,7 @@ class KoImportAliasDeclarationTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceImportAlias
+                ?.asImportAliasDeclaration()
 
         // then
         sut?.importDirective?.name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"

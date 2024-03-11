@@ -21,7 +21,7 @@ class KoFunctionTypeForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "appPropertyWithFunctionType" }
             .type
-            ?.sourceFunctionType
+            ?.asFunctionTypeDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -39,7 +39,7 @@ class KoFunctionTypeForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "appPropertyWithFunctionTypeTest" }
             .type
-            ?.sourceFunctionType
+            ?.asFunctionTypeDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -57,7 +57,7 @@ class KoFunctionTypeForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "libPropertyWithFunctionType" }
             .type
-            ?.sourceFunctionType
+            ?.asFunctionTypeDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -75,7 +75,7 @@ class KoFunctionTypeForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "libPropertyWithFunctionTypeTest" }
             .type
-            ?.sourceFunctionType
+            ?.asFunctionTypeDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -93,7 +93,7 @@ class KoFunctionTypeForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "rootPropertyWithFunctionType" }
             .type
-            ?.sourceFunctionType
+            ?.asFunctionTypeDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -111,7 +111,7 @@ class KoFunctionTypeForKoSourceSetProviderTest {
             .properties()
             .first { it.name == "rootSrcPropertyWithFunctionType" }
             .type
-            ?.sourceFunctionType
+            ?.asFunctionTypeDeclaration()
 
         // then
         assertSoftly(sut) {

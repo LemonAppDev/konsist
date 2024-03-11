@@ -22,7 +22,7 @@ class KoImportAliasDeclarationForKoNameProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceImportAlias
+                ?.asImportAliasDeclaration()
 
         // then
         sut?.name shouldBeEqualTo value

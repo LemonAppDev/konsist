@@ -22,7 +22,7 @@ class KoFunctionTypeDeclarationForKoNameProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceFunctionType
+                ?.asFunctionTypeDeclaration()
 
         // then
         sut?.name shouldBeEqualTo value

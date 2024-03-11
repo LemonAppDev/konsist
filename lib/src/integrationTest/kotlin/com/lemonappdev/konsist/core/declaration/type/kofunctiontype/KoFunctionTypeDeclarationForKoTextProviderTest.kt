@@ -22,7 +22,7 @@ class KoFunctionTypeDeclarationForKoTextProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceFunctionType
+                ?.asFunctionTypeDeclaration()
 
         // then
         sut?.text shouldBeEqualTo value

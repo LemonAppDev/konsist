@@ -13,7 +13,7 @@ class KoKotlinTypeDeclarationForKoTextProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceKotlinType
+                ?.asKotlinTypeDeclaration()
 
         // then
         sut?.text shouldBeEqualTo "String"
@@ -27,7 +27,7 @@ class KoKotlinTypeDeclarationForKoTextProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceKotlinType
+                ?.asKotlinTypeDeclaration()
 
         // then
         sut?.text shouldBeEqualTo "String"
@@ -41,7 +41,7 @@ class KoKotlinTypeDeclarationForKoTextProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceKotlinType
+                ?.asKotlinTypeDeclaration()
 
         // then
         sut?.text shouldBeEqualTo "List<String>"
@@ -55,7 +55,7 @@ class KoKotlinTypeDeclarationForKoTextProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.sourceKotlinType
+                ?.asKotlinTypeDeclaration()
 
         // then
         sut?.text shouldBeEqualTo "List<String>"
