@@ -48,10 +48,10 @@ jobs:
     name: Check kttxt Snippets
     needs: get-github-context
     runs-on: ubuntu-latest
-#    if: |
-#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-#      contains(needs.get-github-context.outputs.all_changed_files, '.kttxt')
+    if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      contains(needs.get-github-context.outputs.all_changed_files, '.kttxt')
     steps:
       - name: Echo Run Condition (any true to run)
         run: |
