@@ -37,7 +37,7 @@
 11. Update Konsist version in the
     Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/getting-started)
     docs page
-12. (If needed) Run `/scripts/update-snippets.py` snippet to generate PR with updated snippets for Konsist Documentation
+12. Run `/scripts/update-snippets.py` snippet to generate PR with updated snippets for Konsist Documentation
 13. Merge `main` to `develop`
 14. Notify devs who have reported the issue (community link in original ticket)
 
