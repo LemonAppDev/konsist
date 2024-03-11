@@ -22,7 +22,7 @@ class KoFunctionTypeDeclarationForKoLocationProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceFunctionType
+                ?.asFunctionTypeDeclaration()
 
         // then
         sut?.location shouldBeEqualTo "${sut?.path}:$value"

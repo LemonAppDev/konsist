@@ -20,7 +20,7 @@ class KoImportAliasDeclarationForKoPathProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceImportAlias
+                ?.asImportAliasDeclaration()
 
         // then
         assertSoftly(sut?.path) {
@@ -41,7 +41,7 @@ class KoImportAliasDeclarationForKoPathProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceImportAlias
+                ?.asImportAliasDeclaration()
 
         // then
         sut
@@ -64,7 +64,7 @@ class KoImportAliasDeclarationForKoPathProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceImportAlias
+                ?.asImportAliasDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -87,7 +87,7 @@ class KoImportAliasDeclarationForKoPathProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.sourceImportAlias
+                ?.asImportAliasDeclaration()
 
         // then
         assertSoftly(sut) {
