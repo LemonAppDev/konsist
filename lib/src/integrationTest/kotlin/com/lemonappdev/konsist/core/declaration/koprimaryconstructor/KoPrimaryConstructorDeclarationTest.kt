@@ -9,11 +9,10 @@ class KoPrimaryConstructorDeclarationTest {
     @Test
     fun `primary-constructor-to-string`() {
         // given
-        val sut =
-            getSnippetFile("primary-constructor-to-string")
-                .classes()
-                .first()
-                .primaryConstructor
+        val sut = getSnippetFile("primary-constructor-to-string")
+            .classes()
+            .first()
+            .primaryConstructor
 
         // then
         val declaration = "Declaration:\n(val sampleParameter: Int)"

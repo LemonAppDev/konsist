@@ -14,18 +14,15 @@ class KoTypeAliasProviderListExtTest {
         val typeAlias1: KoTypeAliasDeclaration = mockk()
         val typeAlias2: KoTypeAliasDeclaration = mockk()
         val typeAlias3: KoTypeAliasDeclaration = mockk()
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { typeAliases } returns listOf(typeAlias1, typeAlias2)
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { typeAliases } returns listOf(typeAlias3)
-            }
-        val declaration3: KoTypeAliasProvider =
-            mockk {
-                every { typeAliases } returns emptyList()
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { typeAliases } returns listOf(typeAlias1, typeAlias2)
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { typeAliases } returns listOf(typeAlias3)
+        }
+        val declaration3: KoTypeAliasProvider = mockk {
+            every { typeAliases } returns emptyList()
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -38,14 +35,12 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withTypeAlias() returns declaration with typealias`() {
         // given
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliases() } returns true
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliases() } returns false
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { hasTypeAliases() } returns true
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { hasTypeAliases() } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -58,14 +53,12 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withoutTypeAlias() returns declaration without typealias`() {
         // given
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliases() } returns true
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliases() } returns false
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { hasTypeAliases() } returns true
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { hasTypeAliases() } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -79,14 +72,12 @@ class KoTypeAliasProviderListExtTest {
     fun `withTypeAliasNamed(name) returns declaration with given type alias`() {
         // given
         val name = "SampleName"
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliasWithName(name) } returns true
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliasWithName(name) } returns false
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { hasTypeAliasWithName(name) } returns true
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { hasTypeAliasWithName(name) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -101,14 +92,12 @@ class KoTypeAliasProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliasWithName(name1, name2) } returns true
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliasWithName(name1, name2) } returns false
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { hasTypeAliasWithName(name1, name2) } returns true
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { hasTypeAliasWithName(name1, name2) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -122,14 +111,12 @@ class KoTypeAliasProviderListExtTest {
     fun `withoutTypeAliasNamed(name) returns declaration without given type alias`() {
         // given
         val name = "SampleName"
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliasWithName(name) } returns true
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliasWithName(name) } returns false
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { hasTypeAliasWithName(name) } returns true
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { hasTypeAliasWithName(name) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -144,14 +131,12 @@ class KoTypeAliasProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliasWithName(name1, name2) } returns true
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliasWithName(name1, name2) } returns false
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { hasTypeAliasWithName(name1, name2) } returns true
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { hasTypeAliasWithName(name1, name2) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -165,14 +150,12 @@ class KoTypeAliasProviderListExtTest {
     fun `withAllTypeAliasesNamed(name) returns declaration with given type alias`() {
         // given
         val name = "SampleName"
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliasesWithAllNames(name) } returns true
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliasesWithAllNames(name) } returns false
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { hasTypeAliasesWithAllNames(name) } returns true
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { hasTypeAliasesWithAllNames(name) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -187,14 +170,12 @@ class KoTypeAliasProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliasesWithAllNames(name1, name2) } returns true
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliasesWithAllNames(name1, name2) } returns false
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { hasTypeAliasesWithAllNames(name1, name2) } returns true
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { hasTypeAliasesWithAllNames(name1, name2) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -208,14 +189,12 @@ class KoTypeAliasProviderListExtTest {
     fun `withoutAllTypeAliasesNamed(name) returns declaration without given type alias`() {
         // given
         val name = "SampleName"
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliasesWithAllNames(name) } returns true
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliasesWithAllNames(name) } returns false
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { hasTypeAliasesWithAllNames(name) } returns true
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { hasTypeAliasesWithAllNames(name) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -230,14 +209,12 @@ class KoTypeAliasProviderListExtTest {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliasesWithAllNames(name1, name2) } returns true
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliasesWithAllNames(name1, name2) } returns false
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { hasTypeAliasesWithAllNames(name1, name2) } returns true
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { hasTypeAliasesWithAllNames(name1, name2) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -252,14 +229,12 @@ class KoTypeAliasProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoTypeAliasDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAlias(predicate) } returns true
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAlias(predicate) } returns false
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { hasTypeAlias(predicate) } returns true
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { hasTypeAlias(predicate) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -274,14 +249,12 @@ class KoTypeAliasProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoTypeAliasDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAlias(predicate) } returns true
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAlias(predicate) } returns false
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { hasTypeAlias(predicate) } returns true
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { hasTypeAlias(predicate) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -296,14 +269,12 @@ class KoTypeAliasProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoTypeAliasDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { hasAllTypeAliases(predicate) } returns true
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { hasAllTypeAliases(predicate) } returns false
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { hasAllTypeAliases(predicate) } returns true
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { hasAllTypeAliases(predicate) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -318,14 +289,12 @@ class KoTypeAliasProviderListExtTest {
         // given
         val suffix = "Name"
         val predicate: (KoTypeAliasDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { hasAllTypeAliases(predicate) } returns true
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { hasAllTypeAliases(predicate) } returns false
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { hasAllTypeAliases(predicate) } returns true
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { hasAllTypeAliases(predicate) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -341,26 +310,21 @@ class KoTypeAliasProviderListExtTest {
         val suffix = "Name"
         val predicate: (List<KoTypeAliasDeclaration>) -> Boolean =
             { it.all { typeAlias -> typeAlias.hasNameEndingWith(suffix) } }
-        val typeAlias1: KoTypeAliasDeclaration =
-            mockk {
-                every { hasNameEndingWith(suffix) } returns true
-            }
-        val typeAlias2: KoTypeAliasDeclaration =
-            mockk {
-                every { hasNameEndingWith(suffix) } returns false
-            }
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { typeAliases } returns listOf(typeAlias1)
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { typeAliases } returns listOf(typeAlias2)
-            }
-        val declaration3: KoTypeAliasProvider =
-            mockk {
-                every { typeAliases } returns emptyList()
-            }
+        val typeAlias1: KoTypeAliasDeclaration = mockk {
+            every { hasNameEndingWith(suffix) } returns true
+        }
+        val typeAlias2: KoTypeAliasDeclaration = mockk {
+            every { hasNameEndingWith(suffix) } returns false
+        }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { typeAliases } returns listOf(typeAlias1)
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { typeAliases } returns listOf(typeAlias2)
+        }
+        val declaration3: KoTypeAliasProvider = mockk {
+            every { typeAliases } returns emptyList()
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -376,26 +340,21 @@ class KoTypeAliasProviderListExtTest {
         val suffix = "Name"
         val predicate: (List<KoTypeAliasDeclaration>) -> Boolean =
             { it.all { typeAlias -> typeAlias.hasNameEndingWith(suffix) } }
-        val typeAlias1: KoTypeAliasDeclaration =
-            mockk {
-                every { hasNameEndingWith(suffix) } returns true
-            }
-        val typeAlias2: KoTypeAliasDeclaration =
-            mockk {
-                every { hasNameEndingWith(suffix) } returns false
-            }
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { typeAliases } returns listOf(typeAlias1)
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { typeAliases } returns listOf(typeAlias2)
-            }
-        val declaration3: KoTypeAliasProvider =
-            mockk {
-                every { typeAliases } returns emptyList()
-            }
+        val typeAlias1: KoTypeAliasDeclaration = mockk {
+            every { hasNameEndingWith(suffix) } returns true
+        }
+        val typeAlias2: KoTypeAliasDeclaration = mockk {
+            every { hasNameEndingWith(suffix) } returns false
+        }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { typeAliases } returns listOf(typeAlias1)
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { typeAliases } returns listOf(typeAlias2)
+        }
+        val declaration3: KoTypeAliasProvider = mockk {
+            every { typeAliases } returns emptyList()
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -410,14 +369,12 @@ class KoTypeAliasProviderListExtTest {
         // given
         val typeAlias1 = "SampleTypeAlias1"
         val typeAlias2 = "SampleTypeAlias2"
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliases(typeAlias1, typeAlias2) } returns true
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliases(typeAlias1, typeAlias2) } returns false
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { hasTypeAliases(typeAlias1, typeAlias2) } returns true
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { hasTypeAliases(typeAlias1, typeAlias2) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -432,14 +389,12 @@ class KoTypeAliasProviderListExtTest {
         // given
         val typeAlias1 = "SampleTypeAlias1"
         val typeAlias2 = "SampleTypeAlias2"
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliases(typeAlias1, typeAlias2) } returns true
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliases(typeAlias1, typeAlias2) } returns false
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { hasTypeAliases(typeAlias1, typeAlias2) } returns true
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { hasTypeAliases(typeAlias1, typeAlias2) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -453,14 +408,12 @@ class KoTypeAliasProviderListExtTest {
     fun `withSomeTypeAliases(String) returns declaration with given typeAlias`() {
         // given
         val typeAlias = "SampleTypeAlias"
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliases(typeAlias) } returns true
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliases(typeAlias) } returns false
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { hasTypeAliases(typeAlias) } returns true
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { hasTypeAliases(typeAlias) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -475,21 +428,18 @@ class KoTypeAliasProviderListExtTest {
         // given
         val typeAlias1 = "SampleTypeAlias1"
         val typeAlias2 = "SampleTypeAlias2"
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliases(typeAlias1) } returns true
-                every { hasTypeAliases(typeAlias2) } returns true
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliases(typeAlias1) } returns false
-                every { hasTypeAliases(typeAlias2) } returns true
-            }
-        val declaration3: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliases(typeAlias1) } returns false
-                every { hasTypeAliases(typeAlias2) } returns false
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { hasTypeAliases(typeAlias1) } returns true
+            every { hasTypeAliases(typeAlias2) } returns true
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { hasTypeAliases(typeAlias1) } returns false
+            every { hasTypeAliases(typeAlias2) } returns true
+        }
+        val declaration3: KoTypeAliasProvider = mockk {
+            every { hasTypeAliases(typeAlias1) } returns false
+            every { hasTypeAliases(typeAlias2) } returns false
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -503,14 +453,12 @@ class KoTypeAliasProviderListExtTest {
     fun `withoutSomeTypeAliases(String) returns declaration without given typeAlias`() {
         // given
         val typeAlias = "SampleTypeAlias"
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliases(typeAlias) } returns true
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliases(typeAlias) } returns false
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { hasTypeAliases(typeAlias) } returns true
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { hasTypeAliases(typeAlias) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -525,21 +473,18 @@ class KoTypeAliasProviderListExtTest {
         // given
         val typeAlias1 = "SampleTypeAlias1"
         val typeAlias2 = "SampleTypeAlias2"
-        val declaration1: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliases(typeAlias1) } returns true
-                every { hasTypeAliases(typeAlias2) } returns true
-            }
-        val declaration2: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliases(typeAlias1) } returns false
-                every { hasTypeAliases(typeAlias2) } returns true
-            }
-        val declaration3: KoTypeAliasProvider =
-            mockk {
-                every { hasTypeAliases(typeAlias1) } returns false
-                every { hasTypeAliases(typeAlias2) } returns false
-            }
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { hasTypeAliases(typeAlias1) } returns true
+            every { hasTypeAliases(typeAlias2) } returns true
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { hasTypeAliases(typeAlias1) } returns false
+            every { hasTypeAliases(typeAlias2) } returns true
+        }
+        val declaration3: KoTypeAliasProvider = mockk {
+            every { hasTypeAliases(typeAlias1) } returns false
+            every { hasTypeAliases(typeAlias2) } returns false
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when

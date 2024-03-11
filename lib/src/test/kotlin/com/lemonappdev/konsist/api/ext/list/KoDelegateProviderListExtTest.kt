@@ -10,14 +10,12 @@ class KoDelegateProviderListExtTest {
     @Test
     fun `withDelegate() returns declaration with any delegate`() {
         // given
-        val declaration1: KoDelegateProvider =
-            mockk {
-                every { hasDelegate() } returns true
-            }
-        val declaration2: KoDelegateProvider =
-            mockk {
-                every { hasDelegate() } returns false
-            }
+        val declaration1: KoDelegateProvider = mockk {
+            every { hasDelegate() } returns true
+        }
+        val declaration2: KoDelegateProvider = mockk {
+            every { hasDelegate() } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -32,21 +30,18 @@ class KoDelegateProviderListExtTest {
         // given
         val delegateName1 = "DelegateName1"
         val delegateName2 = "DelegateName2"
-        val declaration1: KoDelegateProvider =
-            mockk {
-                every { hasDelegate(delegateName1) } returns true
-                every { hasDelegate(delegateName2) } returns false
-            }
-        val declaration2: KoDelegateProvider =
-            mockk {
-                every { hasDelegate(delegateName1) } returns false
-                every { hasDelegate(delegateName2) } returns true
-            }
-        val declaration3: KoDelegateProvider =
-            mockk {
-                every { hasDelegate(delegateName1) } returns false
-                every { hasDelegate(delegateName2) } returns false
-            }
+        val declaration1: KoDelegateProvider = mockk {
+            every { hasDelegate(delegateName1) } returns true
+            every { hasDelegate(delegateName2) } returns false
+        }
+        val declaration2: KoDelegateProvider = mockk {
+            every { hasDelegate(delegateName1) } returns false
+            every { hasDelegate(delegateName2) } returns true
+        }
+        val declaration3: KoDelegateProvider = mockk {
+            every { hasDelegate(delegateName1) } returns false
+            every { hasDelegate(delegateName2) } returns false
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -59,14 +54,12 @@ class KoDelegateProviderListExtTest {
     @Test
     fun `withoutDelegate() returns declaration without any delegate`() {
         // given
-        val declaration1: KoDelegateProvider =
-            mockk {
-                every { hasDelegate() } returns true
-            }
-        val declaration2: KoDelegateProvider =
-            mockk {
-                every { hasDelegate() } returns false
-            }
+        val declaration1: KoDelegateProvider = mockk {
+            every { hasDelegate() } returns true
+        }
+        val declaration2: KoDelegateProvider = mockk {
+            every { hasDelegate() } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -81,21 +74,18 @@ class KoDelegateProviderListExtTest {
         // given
         val delegateName1 = "DelegateName1"
         val delegateName2 = "DelegateName2"
-        val declaration1: KoDelegateProvider =
-            mockk {
-                every { hasDelegate(delegateName1) } returns true
-                every { hasDelegate(delegateName2) } returns false
-            }
-        val declaration2: KoDelegateProvider =
-            mockk {
-                every { hasDelegate(delegateName1) } returns false
-                every { hasDelegate(delegateName2) } returns true
-            }
-        val declaration3: KoDelegateProvider =
-            mockk {
-                every { hasDelegate(delegateName1) } returns false
-                every { hasDelegate(delegateName2) } returns false
-            }
+        val declaration1: KoDelegateProvider = mockk {
+            every { hasDelegate(delegateName1) } returns true
+            every { hasDelegate(delegateName2) } returns false
+        }
+        val declaration2: KoDelegateProvider = mockk {
+            every { hasDelegate(delegateName1) } returns false
+            every { hasDelegate(delegateName2) } returns true
+        }
+        val declaration3: KoDelegateProvider = mockk {
+            every { hasDelegate(delegateName1) } returns false
+            every { hasDelegate(delegateName2) } returns false
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when

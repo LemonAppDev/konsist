@@ -14,18 +14,15 @@ class KoSecondaryConstructorsProviderListExtTest {
         val secondaryConstructor1: KoSecondaryConstructorDeclaration = mockk()
         val secondaryConstructor2: KoSecondaryConstructorDeclaration = mockk()
         val secondaryConstructor3: KoSecondaryConstructorDeclaration = mockk()
-        val declaration1: KoSecondaryConstructorsProvider =
-            mockk {
-                every { secondaryConstructors } returns listOf(secondaryConstructor1, secondaryConstructor2)
-            }
-        val declaration2: KoSecondaryConstructorsProvider =
-            mockk {
-                every { secondaryConstructors } returns listOf(secondaryConstructor3)
-            }
-        val declaration3: KoSecondaryConstructorsProvider =
-            mockk {
-                every { secondaryConstructors } returns emptyList()
-            }
+        val declaration1: KoSecondaryConstructorsProvider = mockk {
+            every { secondaryConstructors } returns listOf(secondaryConstructor1, secondaryConstructor2)
+        }
+        val declaration2: KoSecondaryConstructorsProvider = mockk {
+            every { secondaryConstructors } returns listOf(secondaryConstructor3)
+        }
+        val declaration3: KoSecondaryConstructorsProvider = mockk {
+            every { secondaryConstructors } returns emptyList()
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -38,14 +35,12 @@ class KoSecondaryConstructorsProviderListExtTest {
     @Test
     fun `withSecondaryConstructors() returns declaration with secondary constructor`() {
         // given
-        val declaration1: KoSecondaryConstructorsProvider =
-            mockk {
-                every { hasSecondaryConstructors() } returns true
-            }
-        val declaration2: KoSecondaryConstructorsProvider =
-            mockk {
-                every { hasSecondaryConstructors() } returns false
-            }
+        val declaration1: KoSecondaryConstructorsProvider = mockk {
+            every { hasSecondaryConstructors() } returns true
+        }
+        val declaration2: KoSecondaryConstructorsProvider = mockk {
+            every { hasSecondaryConstructors() } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -58,14 +53,12 @@ class KoSecondaryConstructorsProviderListExtTest {
     @Test
     fun `withoutSecondaryConstructors() returns declaration without secondary constructor`() {
         // given
-        val declaration1: KoSecondaryConstructorsProvider =
-            mockk {
-                every { hasSecondaryConstructors() } returns true
-            }
-        val declaration2: KoSecondaryConstructorsProvider =
-            mockk {
-                every { hasSecondaryConstructors() } returns false
-            }
+        val declaration1: KoSecondaryConstructorsProvider = mockk {
+            every { hasSecondaryConstructors() } returns true
+        }
+        val declaration2: KoSecondaryConstructorsProvider = mockk {
+            every { hasSecondaryConstructors() } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -79,14 +72,12 @@ class KoSecondaryConstructorsProviderListExtTest {
     fun `withSecondaryConstructor{} returns declaration with secondary constructor which satisfy predicate`() {
         // given
         val predicate: (KoSecondaryConstructorDeclaration) -> Boolean = { it.hasPrivateModifier }
-        val declaration1: KoSecondaryConstructorsProvider =
-            mockk {
-                every { hasSecondaryConstructor(predicate) } returns true
-            }
-        val declaration2: KoSecondaryConstructorsProvider =
-            mockk {
-                every { hasSecondaryConstructor(predicate) } returns false
-            }
+        val declaration1: KoSecondaryConstructorsProvider = mockk {
+            every { hasSecondaryConstructor(predicate) } returns true
+        }
+        val declaration2: KoSecondaryConstructorsProvider = mockk {
+            every { hasSecondaryConstructor(predicate) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -100,14 +91,12 @@ class KoSecondaryConstructorsProviderListExtTest {
     fun `withoutSecondaryConstructor{} returns declaration without secondary constructor which satisfy predicate`() {
         // given
         val predicate: (KoSecondaryConstructorDeclaration) -> Boolean = { it.hasPrivateModifier }
-        val declaration1: KoSecondaryConstructorsProvider =
-            mockk {
-                every { hasSecondaryConstructor(predicate) } returns true
-            }
-        val declaration2: KoSecondaryConstructorsProvider =
-            mockk {
-                every { hasSecondaryConstructor(predicate) } returns false
-            }
+        val declaration1: KoSecondaryConstructorsProvider = mockk {
+            every { hasSecondaryConstructor(predicate) } returns true
+        }
+        val declaration2: KoSecondaryConstructorsProvider = mockk {
+            every { hasSecondaryConstructor(predicate) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -121,14 +110,12 @@ class KoSecondaryConstructorsProviderListExtTest {
     fun `withAllSecondaryConstructors{} returns declaration with all secondary constructors satisfy predicate`() {
         // given
         val predicate: (KoSecondaryConstructorDeclaration) -> Boolean = { it.hasPrivateModifier }
-        val declaration1: KoSecondaryConstructorsProvider =
-            mockk {
-                every { hasAllSecondaryConstructors(predicate) } returns true
-            }
-        val declaration2: KoSecondaryConstructorsProvider =
-            mockk {
-                every { hasAllSecondaryConstructors(predicate) } returns false
-            }
+        val declaration1: KoSecondaryConstructorsProvider = mockk {
+            every { hasAllSecondaryConstructors(predicate) } returns true
+        }
+        val declaration2: KoSecondaryConstructorsProvider = mockk {
+            every { hasAllSecondaryConstructors(predicate) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -142,14 +129,12 @@ class KoSecondaryConstructorsProviderListExtTest {
     fun `withoutAllSecondaryConstructors{} returns declaration with all secondary constructors which not satisfy predicate`() {
         // given
         val predicate: (KoSecondaryConstructorDeclaration) -> Boolean = { it.hasPrivateModifier }
-        val declaration1: KoSecondaryConstructorsProvider =
-            mockk {
-                every { hasAllSecondaryConstructors(predicate) } returns true
-            }
-        val declaration2: KoSecondaryConstructorsProvider =
-            mockk {
-                every { hasAllSecondaryConstructors(predicate) } returns false
-            }
+        val declaration1: KoSecondaryConstructorsProvider = mockk {
+            every { hasAllSecondaryConstructors(predicate) } returns true
+        }
+        val declaration2: KoSecondaryConstructorsProvider = mockk {
+            every { hasAllSecondaryConstructors(predicate) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -164,26 +149,21 @@ class KoSecondaryConstructorsProviderListExtTest {
         // given
         val predicate: (List<KoSecondaryConstructorDeclaration>) -> Boolean =
             { it.all { secondaryConstructor -> secondaryConstructor.hasPrivateModifier } }
-        val secondaryConstructor1: KoSecondaryConstructorDeclaration =
-            mockk {
-                every { hasPrivateModifier } returns true
-            }
-        val secondaryConstructor2: KoSecondaryConstructorDeclaration =
-            mockk {
-                every { hasPrivateModifier } returns false
-            }
-        val declaration1: KoSecondaryConstructorsProvider =
-            mockk {
-                every { secondaryConstructors } returns listOf(secondaryConstructor1)
-            }
-        val declaration2: KoSecondaryConstructorsProvider =
-            mockk {
-                every { secondaryConstructors } returns listOf(secondaryConstructor2)
-            }
-        val declaration3: KoSecondaryConstructorsProvider =
-            mockk {
-                every { secondaryConstructors } returns emptyList()
-            }
+        val secondaryConstructor1: KoSecondaryConstructorDeclaration = mockk {
+            every { hasPrivateModifier } returns true
+        }
+        val secondaryConstructor2: KoSecondaryConstructorDeclaration = mockk {
+            every { hasPrivateModifier } returns false
+        }
+        val declaration1: KoSecondaryConstructorsProvider = mockk {
+            every { secondaryConstructors } returns listOf(secondaryConstructor1)
+        }
+        val declaration2: KoSecondaryConstructorsProvider = mockk {
+            every { secondaryConstructors } returns listOf(secondaryConstructor2)
+        }
+        val declaration3: KoSecondaryConstructorsProvider = mockk {
+            every { secondaryConstructors } returns emptyList()
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -198,26 +178,21 @@ class KoSecondaryConstructorsProviderListExtTest {
         // given
         val predicate: (List<KoSecondaryConstructorDeclaration>) -> Boolean =
             { it.all { secondaryConstructor -> secondaryConstructor.hasPrivateModifier } }
-        val secondaryConstructor1: KoSecondaryConstructorDeclaration =
-            mockk {
-                every { hasPrivateModifier } returns true
-            }
-        val secondaryConstructor2: KoSecondaryConstructorDeclaration =
-            mockk {
-                every { hasPrivateModifier } returns false
-            }
-        val declaration1: KoSecondaryConstructorsProvider =
-            mockk {
-                every { secondaryConstructors } returns listOf(secondaryConstructor1)
-            }
-        val declaration2: KoSecondaryConstructorsProvider =
-            mockk {
-                every { secondaryConstructors } returns listOf(secondaryConstructor2)
-            }
-        val declaration3: KoSecondaryConstructorsProvider =
-            mockk {
-                every { secondaryConstructors } returns emptyList()
-            }
+        val secondaryConstructor1: KoSecondaryConstructorDeclaration = mockk {
+            every { hasPrivateModifier } returns true
+        }
+        val secondaryConstructor2: KoSecondaryConstructorDeclaration = mockk {
+            every { hasPrivateModifier } returns false
+        }
+        val declaration1: KoSecondaryConstructorsProvider = mockk {
+            every { secondaryConstructors } returns listOf(secondaryConstructor1)
+        }
+        val declaration2: KoSecondaryConstructorsProvider = mockk {
+            every { secondaryConstructors } returns listOf(secondaryConstructor2)
+        }
+        val declaration3: KoSecondaryConstructorsProvider = mockk {
+            every { secondaryConstructors } returns emptyList()
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when

@@ -10,14 +10,12 @@ class KoFinalModifierProviderListExtTest {
     @Test
     fun `withFinalModifier() returns declaration with final modifier`() {
         // given
-        val declaration1: KoFinalModifierProvider =
-            mockk {
-                every { hasFinalModifier } returns true
-            }
-        val declaration2: KoFinalModifierProvider =
-            mockk {
-                every { hasFinalModifier } returns false
-            }
+        val declaration1: KoFinalModifierProvider = mockk {
+            every { hasFinalModifier } returns true
+        }
+        val declaration2: KoFinalModifierProvider = mockk {
+            every { hasFinalModifier } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -30,14 +28,12 @@ class KoFinalModifierProviderListExtTest {
     @Test
     fun `withoutFinalModifier() returns declaration without final modifier`() {
         // given
-        val declaration1: KoFinalModifierProvider =
-            mockk {
-                every { hasFinalModifier } returns true
-            }
-        val declaration2: KoFinalModifierProvider =
-            mockk {
-                every { hasFinalModifier } returns false
-            }
+        val declaration1: KoFinalModifierProvider = mockk {
+            every { hasFinalModifier } returns true
+        }
+        val declaration2: KoFinalModifierProvider = mockk {
+            every { hasFinalModifier } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when

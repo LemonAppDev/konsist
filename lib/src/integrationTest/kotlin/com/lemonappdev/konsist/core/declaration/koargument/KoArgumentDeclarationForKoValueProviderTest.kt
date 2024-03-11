@@ -12,12 +12,11 @@ class KoArgumentDeclarationForKoValueProviderTest {
     @Test
     fun `argument-in-enum-const-with-value-and-without-argument-name`() {
         // given
-        val sut =
-            getSnippetFile("argument-in-enum-const-with-value-and-without-argument-name")
-                .classes()
-                .enumConstants
-                .arguments
-                .first()
+        val sut = getSnippetFile("argument-in-enum-const-with-value-and-without-argument-name")
+            .classes()
+            .enumConstants
+            .arguments
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -31,12 +30,11 @@ class KoArgumentDeclarationForKoValueProviderTest {
     @Test
     fun `argument-in-enum-const-with-value-and-argument-name`() {
         // given
-        val sut =
-            getSnippetFile("argument-in-enum-const-with-value-and-argument-name")
-                .classes()
-                .enumConstants
-                .arguments
-                .first()
+        val sut = getSnippetFile("argument-in-enum-const-with-value-and-argument-name")
+            .classes()
+            .enumConstants
+            .arguments
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -50,12 +48,11 @@ class KoArgumentDeclarationForKoValueProviderTest {
     @Test
     fun `argument-in-enum-const-with-multiline-string-argument`() {
         // given
-        val sut =
-            getSnippetFile("argument-in-enum-const-with-multiline-string-argument")
-                .classes()
-                .enumConstants
-                .arguments
-                .first()
+        val sut = getSnippetFile("argument-in-enum-const-with-multiline-string-argument")
+            .classes()
+            .enumConstants
+            .arguments
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -69,12 +66,11 @@ class KoArgumentDeclarationForKoValueProviderTest {
     @Test
     fun `argument-in-annotation-with-value-and-without-argument-name`() {
         // given
-        val sut =
-            getSnippetFile("argument-in-annotation-with-value-and-without-argument-name")
-                .functions()
-                .annotations
-                .arguments
-                .first()
+        val sut = getSnippetFile("argument-in-annotation-with-value-and-without-argument-name")
+            .functions()
+            .annotations
+            .arguments
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -88,12 +84,11 @@ class KoArgumentDeclarationForKoValueProviderTest {
     @Test
     fun `argument-in-annotation-with-value-and-argument-name`() {
         // given
-        val sut =
-            getSnippetFile("argument-in-annotation-with-value-and-argument-name")
-                .functions()
-                .annotations
-                .arguments
-                .first()
+        val sut = getSnippetFile("argument-in-annotation-with-value-and-argument-name")
+            .functions()
+            .annotations
+            .arguments
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -107,12 +102,11 @@ class KoArgumentDeclarationForKoValueProviderTest {
     @Test
     fun `argument-in-annotation-with-multiline-string-argument`() {
         // given
-        val sut =
-            getSnippetFile("argument-in-annotation-with-multiline-string-argument")
-                .functions()
-                .annotations
-                .arguments
-                .first()
+        val sut = getSnippetFile("argument-in-annotation-with-multiline-string-argument")
+            .functions()
+            .annotations
+            .arguments
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -123,5 +117,6 @@ class KoArgumentDeclarationForKoValueProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koargument/snippet/forkovalueprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koargument/snippet/forkovalueprovider/", fileName)
 }

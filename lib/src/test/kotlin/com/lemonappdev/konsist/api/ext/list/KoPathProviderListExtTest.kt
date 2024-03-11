@@ -11,14 +11,12 @@ class KoPathProviderListExtTest {
     fun `withPath() returns declaration with given path`() {
         // given
         val path = "com/sample/samplepath.."
-        val declaration1: KoPathProvider =
-            mockk {
-                every { resideInPath(path) } returns true
-            }
-        val declaration2: KoPathProvider =
-            mockk {
-                every { resideInPath(path) } returns false
-            }
+        val declaration1: KoPathProvider = mockk {
+            every { resideInPath(path) } returns true
+        }
+        val declaration2: KoPathProvider = mockk {
+            every { resideInPath(path) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -32,14 +30,12 @@ class KoPathProviderListExtTest {
     fun `withoutPath() returns declaration without given path`() {
         // given
         val path = "com/sample/samplepath.."
-        val declaration1: KoPathProvider =
-            mockk {
-                every { resideInPath(path) } returns true
-            }
-        val declaration2: KoPathProvider =
-            mockk {
-                every { resideInPath(path) } returns false
-            }
+        val declaration1: KoPathProvider = mockk {
+            every { resideInPath(path) } returns true
+        }
+        val declaration2: KoPathProvider = mockk {
+            every { resideInPath(path) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -54,21 +50,18 @@ class KoPathProviderListExtTest {
         // given
         val path1 = "com/sample/samplepath1.."
         val path2 = "..samplepath2"
-        val declaration1: KoPathProvider =
-            mockk {
-                every { resideInPath(path1, true) } returns true
-                every { resideInPath(path2, true) } returns true
-            }
-        val declaration2: KoPathProvider =
-            mockk {
-                every { resideInPath(path1, true) } returns false
-                every { resideInPath(path2, true) } returns true
-            }
-        val declaration3: KoPathProvider =
-            mockk {
-                every { resideInPath(path1, true) } returns false
-                every { resideInPath(path2, true) } returns false
-            }
+        val declaration1: KoPathProvider = mockk {
+            every { resideInPath(path1, true) } returns true
+            every { resideInPath(path2, true) } returns true
+        }
+        val declaration2: KoPathProvider = mockk {
+            every { resideInPath(path1, true) } returns false
+            every { resideInPath(path2, true) } returns true
+        }
+        val declaration3: KoPathProvider = mockk {
+            every { resideInPath(path1, true) } returns false
+            every { resideInPath(path2, true) } returns false
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -83,21 +76,18 @@ class KoPathProviderListExtTest {
         // given
         val path1 = "com/sample/samplepath1.."
         val path2 = "..samplepath2"
-        val declaration1: KoPathProvider =
-            mockk {
-                every { resideInPath(path1, true) } returns true
-                every { resideInPath(path2, true) } returns true
-            }
-        val declaration2: KoPathProvider =
-            mockk {
-                every { resideInPath(path1, true) } returns false
-                every { resideInPath(path2, true) } returns true
-            }
-        val declaration3: KoPathProvider =
-            mockk {
-                every { resideInPath(path1, true) } returns false
-                every { resideInPath(path2, true) } returns false
-            }
+        val declaration1: KoPathProvider = mockk {
+            every { resideInPath(path1, true) } returns true
+            every { resideInPath(path2, true) } returns true
+        }
+        val declaration2: KoPathProvider = mockk {
+            every { resideInPath(path1, true) } returns false
+            every { resideInPath(path2, true) } returns true
+        }
+        val declaration3: KoPathProvider = mockk {
+            every { resideInPath(path1, true) } returns false
+            every { resideInPath(path2, true) } returns false
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -112,21 +102,18 @@ class KoPathProviderListExtTest {
         // given
         val projectPath1 = "com/sample/sampleProjectPath1.."
         val projectPath2 = "..sampleProjectPath2"
-        val declaration1: KoPathProvider =
-            mockk {
-                every { resideInPath(projectPath1, false) } returns true
-                every { resideInPath(projectPath2, false) } returns true
-            }
-        val declaration2: KoPathProvider =
-            mockk {
-                every { resideInPath(projectPath1, false) } returns false
-                every { resideInPath(projectPath2, false) } returns true
-            }
-        val declaration3: KoPathProvider =
-            mockk {
-                every { resideInPath(projectPath1, false) } returns false
-                every { resideInPath(projectPath2, false) } returns false
-            }
+        val declaration1: KoPathProvider = mockk {
+            every { resideInPath(projectPath1, false) } returns true
+            every { resideInPath(projectPath2, false) } returns true
+        }
+        val declaration2: KoPathProvider = mockk {
+            every { resideInPath(projectPath1, false) } returns false
+            every { resideInPath(projectPath2, false) } returns true
+        }
+        val declaration3: KoPathProvider = mockk {
+            every { resideInPath(projectPath1, false) } returns false
+            every { resideInPath(projectPath2, false) } returns false
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -141,21 +128,18 @@ class KoPathProviderListExtTest {
         // given
         val projectPath1 = "com/sample/sampleProjectPath1.."
         val projectPath2 = "..sampleProjectPath2"
-        val declaration1: KoPathProvider =
-            mockk {
-                every { resideInPath(projectPath1, false) } returns true
-                every { resideInPath(projectPath2, false) } returns true
-            }
-        val declaration2: KoPathProvider =
-            mockk {
-                every { resideInPath(projectPath1, false) } returns false
-                every { resideInPath(projectPath2, false) } returns true
-            }
-        val declaration3: KoPathProvider =
-            mockk {
-                every { resideInPath(projectPath1, false) } returns false
-                every { resideInPath(projectPath2, false) } returns false
-            }
+        val declaration1: KoPathProvider = mockk {
+            every { resideInPath(projectPath1, false) } returns true
+            every { resideInPath(projectPath2, false) } returns true
+        }
+        val declaration2: KoPathProvider = mockk {
+            every { resideInPath(projectPath1, false) } returns false
+            every { resideInPath(projectPath2, false) } returns true
+        }
+        val declaration3: KoPathProvider = mockk {
+            every { resideInPath(projectPath1, false) } returns false
+            every { resideInPath(projectPath2, false) } returns false
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -169,14 +153,12 @@ class KoPathProviderListExtTest {
     fun `withAbsolutePath(String) returns declaration with given path`() {
         // given
         val path = "com/sample/samplepath.."
-        val declaration1: KoPathProvider =
-            mockk {
-                every { resideInPath(path, true) } returns true
-            }
-        val declaration2: KoPathProvider =
-            mockk {
-                every { resideInPath(path, true) } returns false
-            }
+        val declaration1: KoPathProvider = mockk {
+            every { resideInPath(path, true) } returns true
+        }
+        val declaration2: KoPathProvider = mockk {
+            every { resideInPath(path, true) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -190,14 +172,12 @@ class KoPathProviderListExtTest {
     fun `withoutAbsolutePath(String) returns declaration without given path`() {
         // given
         val path = "com/sample/samplepath.."
-        val declaration1: KoPathProvider =
-            mockk {
-                every { resideInPath(path, true) } returns true
-            }
-        val declaration2: KoPathProvider =
-            mockk {
-                every { resideInPath(path, true) } returns false
-            }
+        val declaration1: KoPathProvider = mockk {
+            every { resideInPath(path, true) } returns true
+        }
+        val declaration2: KoPathProvider = mockk {
+            every { resideInPath(path, true) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -212,21 +192,18 @@ class KoPathProviderListExtTest {
         // given
         val path1 = "com/sample/samplepath1.."
         val path2 = "..samplepath2"
-        val declaration1: KoPathProvider =
-            mockk {
-                every { resideInPath(path1, true) } returns true
-                every { resideInPath(path2, true) } returns true
-            }
-        val declaration2: KoPathProvider =
-            mockk {
-                every { resideInPath(path1, true) } returns false
-                every { resideInPath(path2, true) } returns true
-            }
-        val declaration3: KoPathProvider =
-            mockk {
-                every { resideInPath(path1, true) } returns false
-                every { resideInPath(path2, true) } returns false
-            }
+        val declaration1: KoPathProvider = mockk {
+            every { resideInPath(path1, true) } returns true
+            every { resideInPath(path2, true) } returns true
+        }
+        val declaration2: KoPathProvider = mockk {
+            every { resideInPath(path1, true) } returns false
+            every { resideInPath(path2, true) } returns true
+        }
+        val declaration3: KoPathProvider = mockk {
+            every { resideInPath(path1, true) } returns false
+            every { resideInPath(path2, true) } returns false
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -241,21 +218,18 @@ class KoPathProviderListExtTest {
         // given
         val path1 = "com/sample/samplepath1.."
         val path2 = "..samplepath2"
-        val declaration1: KoPathProvider =
-            mockk {
-                every { resideInPath(path1, true) } returns true
-                every { resideInPath(path2, true) } returns true
-            }
-        val declaration2: KoPathProvider =
-            mockk {
-                every { resideInPath(path1, true) } returns false
-                every { resideInPath(path2, true) } returns true
-            }
-        val declaration3: KoPathProvider =
-            mockk {
-                every { resideInPath(path1, true) } returns false
-                every { resideInPath(path2, true) } returns false
-            }
+        val declaration1: KoPathProvider = mockk {
+            every { resideInPath(path1, true) } returns true
+            every { resideInPath(path2, true) } returns true
+        }
+        val declaration2: KoPathProvider = mockk {
+            every { resideInPath(path1, true) } returns false
+            every { resideInPath(path2, true) } returns true
+        }
+        val declaration3: KoPathProvider = mockk {
+            every { resideInPath(path1, true) } returns false
+            every { resideInPath(path2, true) } returns false
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -269,14 +243,12 @@ class KoPathProviderListExtTest {
     fun `withProjectPath(String) returns declaration with given project path`() {
         // given
         val projectPath = "com/sample/sampleProjectPath.."
-        val declaration1: KoPathProvider =
-            mockk {
-                every { resideInPath(projectPath, false) } returns true
-            }
-        val declaration2: KoPathProvider =
-            mockk {
-                every { resideInPath(projectPath, false) } returns false
-            }
+        val declaration1: KoPathProvider = mockk {
+            every { resideInPath(projectPath, false) } returns true
+        }
+        val declaration2: KoPathProvider = mockk {
+            every { resideInPath(projectPath, false) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -290,14 +262,12 @@ class KoPathProviderListExtTest {
     fun `withoutProjectPath(String) returns declaration without given project path`() {
         // given
         val projectPath = "com/sample/sampleProjectPath.."
-        val declaration1: KoPathProvider =
-            mockk {
-                every { resideInPath(projectPath, false) } returns true
-            }
-        val declaration2: KoPathProvider =
-            mockk {
-                every { resideInPath(projectPath, false) } returns false
-            }
+        val declaration1: KoPathProvider = mockk {
+            every { resideInPath(projectPath, false) } returns true
+        }
+        val declaration2: KoPathProvider = mockk {
+            every { resideInPath(projectPath, false) } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -312,21 +282,18 @@ class KoPathProviderListExtTest {
         // given
         val projectPath1 = "com/sample/sampleProjectPath1.."
         val projectPath2 = "..sampleProjectPath2"
-        val declaration1: KoPathProvider =
-            mockk {
-                every { resideInPath(projectPath1, false) } returns true
-                every { resideInPath(projectPath2, false) } returns true
-            }
-        val declaration2: KoPathProvider =
-            mockk {
-                every { resideInPath(projectPath1, false) } returns false
-                every { resideInPath(projectPath2, false) } returns true
-            }
-        val declaration3: KoPathProvider =
-            mockk {
-                every { resideInPath(projectPath1, false) } returns false
-                every { resideInPath(projectPath2, false) } returns false
-            }
+        val declaration1: KoPathProvider = mockk {
+            every { resideInPath(projectPath1, false) } returns true
+            every { resideInPath(projectPath2, false) } returns true
+        }
+        val declaration2: KoPathProvider = mockk {
+            every { resideInPath(projectPath1, false) } returns false
+            every { resideInPath(projectPath2, false) } returns true
+        }
+        val declaration3: KoPathProvider = mockk {
+            every { resideInPath(projectPath1, false) } returns false
+            every { resideInPath(projectPath2, false) } returns false
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -341,21 +308,18 @@ class KoPathProviderListExtTest {
         // given
         val projectPath1 = "com/sample/sampleProjectPath1.."
         val projectPath2 = "..sampleProjectPath2"
-        val declaration1: KoPathProvider =
-            mockk {
-                every { resideInPath(projectPath1, false) } returns true
-                every { resideInPath(projectPath2, false) } returns true
-            }
-        val declaration2: KoPathProvider =
-            mockk {
-                every { resideInPath(projectPath1, false) } returns false
-                every { resideInPath(projectPath2, false) } returns true
-            }
-        val declaration3: KoPathProvider =
-            mockk {
-                every { resideInPath(projectPath1, false) } returns false
-                every { resideInPath(projectPath2, false) } returns false
-            }
+        val declaration1: KoPathProvider = mockk {
+            every { resideInPath(projectPath1, false) } returns true
+            every { resideInPath(projectPath2, false) } returns true
+        }
+        val declaration2: KoPathProvider = mockk {
+            every { resideInPath(projectPath1, false) } returns false
+            every { resideInPath(projectPath2, false) } returns true
+        }
+        val declaration3: KoPathProvider = mockk {
+            every { resideInPath(projectPath1, false) } returns false
+            every { resideInPath(projectPath2, false) } returns false
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when

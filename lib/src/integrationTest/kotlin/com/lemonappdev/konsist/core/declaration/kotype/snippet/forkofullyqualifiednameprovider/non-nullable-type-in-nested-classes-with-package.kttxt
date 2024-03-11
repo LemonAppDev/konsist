@@ -1,0 +1,6 @@
+package com.samplepackage
+
+class SampleClass {
+    class SampleNestedClass(val sampleProperty1: SampleNestedType)
+    class SampleNestedType
+}

@@ -10,14 +10,12 @@ class KoInfixModifierProviderListExtTest {
     @Test
     fun `withInfixModifier() returns declaration with infix modifier`() {
         // given
-        val declaration1: KoInfixModifierProvider =
-            mockk {
-                every { hasInfixModifier } returns true
-            }
-        val declaration2: KoInfixModifierProvider =
-            mockk {
-                every { hasInfixModifier } returns false
-            }
+        val declaration1: KoInfixModifierProvider = mockk {
+            every { hasInfixModifier } returns true
+        }
+        val declaration2: KoInfixModifierProvider = mockk {
+            every { hasInfixModifier } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -30,14 +28,12 @@ class KoInfixModifierProviderListExtTest {
     @Test
     fun `withoutInfixModifier() returns declaration without infix modifier`() {
         // given
-        val declaration1: KoInfixModifierProvider =
-            mockk {
-                every { hasInfixModifier } returns true
-            }
-        val declaration2: KoInfixModifierProvider =
-            mockk {
-                every { hasInfixModifier } returns false
-            }
+        val declaration1: KoInfixModifierProvider = mockk {
+            every { hasInfixModifier } returns true
+        }
+        val declaration2: KoInfixModifierProvider = mockk {
+            every { hasInfixModifier } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when

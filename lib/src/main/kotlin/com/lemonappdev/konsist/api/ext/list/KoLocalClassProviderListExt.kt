@@ -30,13 +30,9 @@ fun <T : KoLocalClassProvider> List<T>.withoutLocalClasses(): List<T> = filterNo
  * @param names The names of additional local classes to include.
  * @return A list containing declarations with at least one of the specified local class(es).
  */
-fun <T : KoLocalClassProvider> List<T>.withLocalClassNamed(
-    name: String,
-    vararg names: String,
-): List<T> =
-    filter {
-        it.hasLocalClassWithName(name, *names)
-    }
+fun <T : KoLocalClassProvider> List<T>.withLocalClassNamed(name: String, vararg names: String): List<T> = filter {
+    it.hasLocalClassWithName(name, *names)
+}
 
 /**
  * List containing declarations without any of specified local classes.
@@ -45,13 +41,9 @@ fun <T : KoLocalClassProvider> List<T>.withLocalClassNamed(
  * @param names The names of additional local classes to exclude.
  * @return A list containing declarations without any of specified local classes.
  */
-fun <T : KoLocalClassProvider> List<T>.withoutLocalClassNamed(
-    name: String,
-    vararg names: String,
-): List<T> =
-    filterNot {
-        it.hasLocalClassWithName(name, *names)
-    }
+fun <T : KoLocalClassProvider> List<T>.withoutLocalClassNamed(name: String, vararg names: String): List<T> = filterNot {
+    it.hasLocalClassWithName(name, *names)
+}
 
 /**
  * List containing declarations that have all specified local classes.
@@ -60,13 +52,9 @@ fun <T : KoLocalClassProvider> List<T>.withoutLocalClassNamed(
  * @param names The name(s) of the local class(es) to include.
  * @return A list containing declarations with all specified local class(es).
  */
-fun <T : KoLocalClassProvider> List<T>.withAllLocalClassesNamed(
-    name: String,
-    vararg names: String,
-): List<T> =
-    filter {
-        it.hasLocalClassesWithAllNames(name, *names)
-    }
+fun <T : KoLocalClassProvider> List<T>.withAllLocalClassesNamed(name: String, vararg names: String): List<T> = filter {
+    it.hasLocalClassesWithAllNames(name, *names)
+}
 
 /**
  * List containing declarations without all specified local classes.
@@ -75,10 +63,7 @@ fun <T : KoLocalClassProvider> List<T>.withAllLocalClassesNamed(
  * @param names The name(s) of the local class(es) to exclude.
  * @return A list containing declarations without all specified local class(es).
  */
-fun <T : KoLocalClassProvider> List<T>.withoutAllLocalClassesNamed(
-    name: String,
-    vararg names: String,
-): List<T> =
+fun <T : KoLocalClassProvider> List<T>.withoutAllLocalClassesNamed(name: String, vararg names: String): List<T> =
     filterNot {
         it.hasLocalClassesWithAllNames(name, *names)
     }
@@ -89,10 +74,9 @@ fun <T : KoLocalClassProvider> List<T>.withoutAllLocalClassesNamed(
  * @param predicate A function that defines the condition to be met by a local class declaration.
  * @return A list containing declarations with at least one local class satisfying the predicate.
  */
-fun <T : KoLocalClassProvider> List<T>.withLocalClass(predicate: (KoClassDeclaration) -> Boolean): List<T> =
-    filter {
-        it.hasLocalClass(predicate)
-    }
+fun <T : KoLocalClassProvider> List<T>.withLocalClass(predicate: (KoClassDeclaration) -> Boolean): List<T> = filter {
+    it.hasLocalClass(predicate)
+}
 
 /**
  * List containing declarations that not have local class satisfying the provided predicate.

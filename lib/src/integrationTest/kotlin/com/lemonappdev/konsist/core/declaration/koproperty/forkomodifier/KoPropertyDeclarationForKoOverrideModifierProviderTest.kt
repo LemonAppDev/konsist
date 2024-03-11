@@ -8,10 +8,9 @@ class KoPropertyDeclarationForKoOverrideModifierProviderTest {
     @Test
     fun `property-has-no-override-modifier`() {
         // given
-        val sut =
-            getSnippetFile("property-has-no-override-modifier")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-has-no-override-modifier")
+            .properties()
+            .first()
 
         // then
         sut.hasOverrideModifier shouldBeEqualTo false
@@ -20,10 +19,9 @@ class KoPropertyDeclarationForKoOverrideModifierProviderTest {
     @Test
     fun `property-has-override-modifier`() {
         // given
-        val sut =
-            getSnippetFile("property-has-override-modifier")
-                .properties(includeNested = true)
-                .first()
+        val sut = getSnippetFile("property-has-override-modifier")
+            .properties(includeNested = true)
+            .first()
 
         // then
         sut.hasOverrideModifier shouldBeEqualTo true

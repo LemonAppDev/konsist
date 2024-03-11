@@ -8,10 +8,9 @@ class KoPackageDeclarationTest {
     @Test
     fun `package-to-string`() {
         // given
-        val sut =
-            getSnippetFile("package-to-string")
-                .packages
-                .first()
+        val sut = getSnippetFile("package-to-string")
+            .packages
+            .first()
 
         // then
         sut.toString() shouldBeEqualTo "samplepackage"

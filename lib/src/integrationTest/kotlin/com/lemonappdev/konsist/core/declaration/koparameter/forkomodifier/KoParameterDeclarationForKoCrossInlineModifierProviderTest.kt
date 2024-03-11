@@ -8,12 +8,11 @@ class KoParameterDeclarationForKoCrossInlineModifierProviderTest {
     @Test
     fun `parameter-without-crossinline-modifier`() {
         // given
-        val sut =
-            getSnippetFile("parameter-without-crossinline-modifier")
-                .functions()
-                .first()
-                .parameters
-                .first()
+        val sut = getSnippetFile("parameter-without-crossinline-modifier")
+            .functions()
+            .first()
+            .parameters
+            .first()
 
         // then
         sut.hasCrossInlineModifier shouldBeEqualTo false
@@ -22,12 +21,11 @@ class KoParameterDeclarationForKoCrossInlineModifierProviderTest {
     @Test
     fun `parameter-with-crossinline-modifier`() {
         // given
-        val sut =
-            getSnippetFile("parameter-with-crossinline-modifier")
-                .functions()
-                .first()
-                .parameters
-                .first()
+        val sut = getSnippetFile("parameter-with-crossinline-modifier")
+            .functions()
+            .first()
+            .parameters
+            .first()
 
         // then
         sut.hasCrossInlineModifier shouldBeEqualTo true

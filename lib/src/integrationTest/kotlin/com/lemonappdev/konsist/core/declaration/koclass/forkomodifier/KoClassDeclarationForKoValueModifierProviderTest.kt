@@ -8,10 +8,9 @@ class KoClassDeclarationForKoValueModifierProviderTest {
     @Test
     fun `class-without-value-modifier`() {
         // given
-        val sut =
-            getSnippetFile("class-without-value-modifier")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-without-value-modifier")
+            .classes()
+            .first()
 
         // then
         sut.hasValueModifier shouldBeEqualTo false
@@ -20,10 +19,9 @@ class KoClassDeclarationForKoValueModifierProviderTest {
     @Test
     fun `value-class`() {
         // given
-        val sut =
-            getSnippetFile("value-class")
-                .classes()
-                .first()
+        val sut = getSnippetFile("value-class")
+            .classes()
+            .first()
 
         // then
         sut.hasValueModifier shouldBeEqualTo true

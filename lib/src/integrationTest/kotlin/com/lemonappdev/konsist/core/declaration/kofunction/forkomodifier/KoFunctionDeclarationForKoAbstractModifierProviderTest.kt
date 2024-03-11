@@ -8,10 +8,9 @@ class KoFunctionDeclarationForKoAbstractModifierProviderTest {
     @Test
     fun `function-without-abstract-modifier`() {
         // given
-        val sut =
-            getSnippetFile("function-without-abstract-modifier")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-without-abstract-modifier")
+            .functions()
+            .first()
 
         // then
         sut.hasAbstractModifier shouldBeEqualTo false
@@ -20,10 +19,9 @@ class KoFunctionDeclarationForKoAbstractModifierProviderTest {
     @Test
     fun `function-with-abstract-modifier`() {
         // given
-        val sut =
-            getSnippetFile("function-with-abstract-modifier")
-                .functions(includeNested = true)
-                .first()
+        val sut = getSnippetFile("function-with-abstract-modifier")
+            .functions(includeNested = true)
+            .first()
 
         // then
         sut.hasAbstractModifier shouldBeEqualTo true

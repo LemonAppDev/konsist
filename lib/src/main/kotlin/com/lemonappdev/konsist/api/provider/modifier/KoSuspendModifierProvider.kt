@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoSuspendModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Determines whatever the declaration has `suspend` modifier.
+     * Whether the declaration has `suspend` modifier.
      */
     val hasSuspendModifier: Boolean
 }

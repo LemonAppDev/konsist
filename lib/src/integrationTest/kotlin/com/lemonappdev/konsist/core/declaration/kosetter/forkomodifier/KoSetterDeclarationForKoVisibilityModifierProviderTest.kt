@@ -9,11 +9,10 @@ class KoSetterDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `setter-without-visibility-modifiers`() {
         // given
-        val sut =
-            getSnippetFile("setter-without-visibility-modifiers")
-                .properties()
-                .first()
-                .setter
+        val sut = getSnippetFile("setter-without-visibility-modifiers")
+            .properties()
+            .first()
+            .setter
 
         // then
         assertSoftly(sut) {
@@ -28,11 +27,10 @@ class KoSetterDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `setter-has-public-modifier`() {
         // given
-        val sut =
-            getSnippetFile("setter-has-public-modifier")
-                .properties()
-                .first()
-                .setter
+        val sut = getSnippetFile("setter-has-public-modifier")
+            .properties()
+            .first()
+            .setter
 
         // then
         sut?.hasPublicModifier shouldBeEqualTo true
@@ -41,11 +39,10 @@ class KoSetterDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `setter-is-public-by-default`() {
         // given
-        val sut =
-            getSnippetFile("setter-is-public-by-default")
-                .properties()
-                .first()
-                .setter
+        val sut = getSnippetFile("setter-is-public-by-default")
+            .properties()
+            .first()
+            .setter
 
         // then
         assertSoftly(sut) {
@@ -57,11 +54,10 @@ class KoSetterDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `setter-has-private-modifier`() {
         // given
-        val sut =
-            getSnippetFile("setter-has-private-modifier")
-                .properties()
-                .first()
-                .setter
+        val sut = getSnippetFile("setter-has-private-modifier")
+            .properties()
+            .first()
+            .setter
 
         // then
         sut?.hasPrivateModifier shouldBeEqualTo true
@@ -70,11 +66,10 @@ class KoSetterDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `setter-has-internal-modifier`() {
         // given
-        val sut =
-            getSnippetFile("setter-has-internal-modifier")
-                .properties()
-                .first()
-                .setter
+        val sut = getSnippetFile("setter-has-internal-modifier")
+            .properties()
+            .first()
+            .setter
 
         // then
         sut?.hasInternalModifier shouldBeEqualTo true
@@ -83,11 +78,10 @@ class KoSetterDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `setter-has-protected-modifier`() {
         // given
-        val sut =
-            getSnippetFile("setter-has-protected-modifier")
-                .properties()
-                .first()
-                .setter
+        val sut = getSnippetFile("setter-has-protected-modifier")
+            .properties()
+            .first()
+            .setter
 
         // then
         sut?.hasProtectedModifier shouldBeEqualTo true

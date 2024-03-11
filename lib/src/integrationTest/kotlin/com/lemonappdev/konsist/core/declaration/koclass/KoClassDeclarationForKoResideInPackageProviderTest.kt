@@ -8,10 +8,9 @@ class KoClassDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `class-not-reside-in-file-package`() {
         // given
-        val sut =
-            getSnippetFile("class-not-reside-in-file-package")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-not-reside-in-file-package")
+            .classes()
+            .first()
 
         // then
         sut.resideInPackage("com") shouldBeEqualTo false
@@ -20,10 +19,9 @@ class KoClassDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `class-reside-in-file-package`() {
         // given
-        val sut =
-            getSnippetFile("class-reside-in-file-package")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-reside-in-file-package")
+            .classes()
+            .first()
 
         // then
         sut.resideInPackage("com..") shouldBeEqualTo true
@@ -32,10 +30,9 @@ class KoClassDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `class-not-reside-outside-file-package`() {
         // given
-        val sut =
-            getSnippetFile("class-not-reside-outside-file-package")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-not-reside-outside-file-package")
+            .classes()
+            .first()
 
         // then
         sut.resideOutsidePackage("com..") shouldBeEqualTo false
@@ -44,10 +41,9 @@ class KoClassDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `class-reside-outside-file-package`() {
         // given
-        val sut =
-            getSnippetFile("class-reside-outside-file-package")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-reside-outside-file-package")
+            .classes()
+            .first()
 
         // then
         sut.resideOutsidePackage("com") shouldBeEqualTo true

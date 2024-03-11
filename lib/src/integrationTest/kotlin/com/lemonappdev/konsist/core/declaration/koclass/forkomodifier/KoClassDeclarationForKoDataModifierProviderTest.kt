@@ -8,10 +8,9 @@ class KoClassDeclarationForKoDataModifierProviderTest {
     @Test
     fun `class-without-data-modifier`() {
         // given
-        val sut =
-            getSnippetFile("class-without-data-modifier")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-without-data-modifier")
+            .classes()
+            .first()
 
         // then
         sut.hasDataModifier shouldBeEqualTo false
@@ -20,10 +19,9 @@ class KoClassDeclarationForKoDataModifierProviderTest {
     @Test
     fun `data-class`() {
         // given
-        val sut =
-            getSnippetFile("data-class")
-                .classes()
-                .first()
+        val sut = getSnippetFile("data-class")
+            .classes()
+            .first()
 
         // then
         sut.hasDataModifier shouldBeEqualTo true

@@ -11,7 +11,6 @@ import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
-import com.lemonappdev.konsist.api.provider.KoVariableProvider
 
 /**
  * Represents a Kotlin init block declaration.
@@ -22,7 +21,6 @@ interface KoInitBlockDeclaration :
     KoLocalClassProvider,
     KoLocalDeclarationProvider,
     KoLocalFunctionProvider,
-    KoVariableProvider,
     KoContainingFileProvider,
     KoLocationProvider,
     KoContainingDeclarationProvider,

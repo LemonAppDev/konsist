@@ -15,17 +15,16 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
             includeLocal,
         )
 
-    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasClass()"))
+    @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasClass()"))
     override fun containsClass(
         includeNested: Boolean,
         includeLocal: Boolean,
         predicate: (KoClassDeclaration) -> Boolean,
-    ): Boolean = classes(includeNested, includeLocal).any { predicate(it) }
+    ): Boolean =
+        classes(includeNested, includeLocal).any { predicate(it) }
 
-    override fun numClasses(
-        includeNested: Boolean,
-        includeLocal: Boolean,
-    ): Int = classes(includeNested, includeLocal).size
+    override fun numClasses(includeNested: Boolean, includeLocal: Boolean): Int =
+        classes(includeNested, includeLocal).size
 
     override fun countClasses(
         includeNested: Boolean,
@@ -33,10 +32,8 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
         predicate: (KoClassDeclaration) -> Boolean,
     ): Int = classes(includeNested, includeLocal).count { predicate(it) }
 
-    override fun hasClasses(
-        includeNested: Boolean,
-        includeLocal: Boolean,
-    ): Boolean = classes(includeNested, includeLocal).isNotEmpty()
+    override fun hasClasses(includeNested: Boolean, includeLocal: Boolean): Boolean =
+        classes(includeNested, includeLocal).isNotEmpty()
 
     override fun hasClassWithName(
         name: String,

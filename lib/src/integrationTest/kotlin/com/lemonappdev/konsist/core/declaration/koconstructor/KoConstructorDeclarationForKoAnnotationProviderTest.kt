@@ -13,12 +13,11 @@ class KoConstructorDeclarationForKoAnnotationProviderTest {
     @Test
     fun `constructor-has-no-annotation`() {
         // given
-        val sut =
-            getSnippetFile("constructor-has-no-annotation")
-                .classes()
-                .first()
-                .constructors
-                .first()
+        val sut = getSnippetFile("constructor-has-no-annotation")
+            .classes()
+            .first()
+            .constructors
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -39,12 +38,11 @@ class KoConstructorDeclarationForKoAnnotationProviderTest {
     @Test
     fun `constructor-has-annotation`() {
         // given
-        val sut =
-            getSnippetFile("constructor-has-annotation")
-                .classes()
-                .first()
-                .constructors
-                .first()
+        val sut = getSnippetFile("constructor-has-annotation")
+            .classes()
+            .first()
+            .constructors
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -89,12 +87,11 @@ class KoConstructorDeclarationForKoAnnotationProviderTest {
     @Test
     fun `constructor-has-two-annotations`() {
         // given
-        val sut =
-            getSnippetFile("constructor-has-two-annotations")
-                .classes()
-                .first()
-                .constructors
-                .first()
+        val sut = getSnippetFile("constructor-has-two-annotations")
+            .classes()
+            .first()
+            .constructors
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -150,12 +147,11 @@ class KoConstructorDeclarationForKoAnnotationProviderTest {
     @Test
     fun `constructor-has-suppress-annotation-without-import`() {
         // given
-        val sut =
-            getSnippetFile("constructor-has-suppress-annotation-without-import")
-                .classes()
-                .first()
-                .constructors
-                .first()
+        val sut = getSnippetFile("constructor-has-suppress-annotation-without-import")
+            .classes()
+            .first()
+            .constructors
+            .first()
 
         // then
         assertSoftly(sut) {

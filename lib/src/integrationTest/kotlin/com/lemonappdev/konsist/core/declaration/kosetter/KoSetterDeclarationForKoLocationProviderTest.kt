@@ -9,11 +9,10 @@ class KoSetterDeclarationForKoLocationProviderTest {
     @Test
     fun `setter-location-with-single-digit`() {
         // given
-        val sut =
-            getSnippetFile("setter-location-with-single-digit")
-                .properties()
-                .first()
-                .setter
+        val sut = getSnippetFile("setter-location-with-single-digit")
+            .properties()
+            .first()
+            .setter
 
         // then
         sut?.location shouldBeEqualTo "${sut?.path}:2:5"
@@ -22,18 +21,16 @@ class KoSetterDeclarationForKoLocationProviderTest {
     @Test
     fun `setter-location-with-text`() {
         // given
-        val projectPath =
-            getSnippetFile("setter-location-with-text")
-                .properties()
-                .first()
-                .setter
-                ?.projectPath
+        val projectPath = getSnippetFile("setter-location-with-text")
+            .properties()
+            .first()
+            .setter
+            ?.projectPath
 
-        val sut =
-            getSnippetFile("setter-location-with-text")
-                .properties()
-                .first()
-                .setter
+        val sut = getSnippetFile("setter-location-with-text")
+            .properties()
+            .first()
+            .setter
 
         // then
         assertSoftly(sut?.locationWithText) {
@@ -43,5 +40,6 @@ class KoSetterDeclarationForKoLocationProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kosetter/snippet/forkolocationprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kosetter/snippet/forkolocationprovider/", fileName)
 }

@@ -8,10 +8,9 @@ class KoFunctionDeclarationForKoOverrideModifierProviderTest {
     @Test
     fun `function-without-override-modifier`() {
         // given
-        val sut =
-            getSnippetFile("function-without-override-modifier")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-without-override-modifier")
+            .functions()
+            .first()
 
         // then
         sut.hasOverrideModifier shouldBeEqualTo false
@@ -20,10 +19,9 @@ class KoFunctionDeclarationForKoOverrideModifierProviderTest {
     @Test
     fun `function-with-override-modifier`() {
         // given
-        val sut =
-            getSnippetFile("function-with-override-modifier")
-                .functions(includeNested = true)
-                .first()
+        val sut = getSnippetFile("function-with-override-modifier")
+            .functions(includeNested = true)
+            .first()
 
         // then
         sut.hasOverrideModifier shouldBeEqualTo true

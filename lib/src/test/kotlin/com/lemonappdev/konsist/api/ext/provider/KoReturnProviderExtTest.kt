@@ -17,11 +17,10 @@ class KoReturnProviderExtTest {
     @Test
     fun `hasValidKDocReturnTag() returns false when declaration not implement KoKDocProvider`() {
         // given
-        val declaration: KoReturnProvider =
-            mockk {
-                every { returnType } returns mockk()
-                every { returnType?.name } returns "Boolean"
-            }
+        val declaration: KoReturnProvider = mockk {
+            every { returnType } returns mockk()
+            every { returnType?.name } returns "Boolean"
+        }
 
         // when
         val sut = declaration.hasValidKDocReturnTag()
@@ -33,12 +32,11 @@ class KoReturnProviderExtTest {
     @Test
     fun `hasValidKDocReturnTag() calls hasTags method`() {
         // given
-        val declaration: SampleTestReturnDeclaration =
-            mockk {
-                every { returnType } returns mockk()
-                every { returnType?.name } returns "Boolean"
-                every { kDoc?.hasTags(KoKDocTag.RETURN) } returns true
-            }
+        val declaration: SampleTestReturnDeclaration = mockk {
+            every { returnType } returns mockk()
+            every { returnType?.name } returns "Boolean"
+            every { kDoc?.hasTags(KoKDocTag.RETURN) } returns true
+        }
 
         // when
         declaration.hasValidKDocReturnTag()

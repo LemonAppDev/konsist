@@ -1,3 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleClassWithParameter
-
-class SampleClass() : SampleClassWithParameter("param")

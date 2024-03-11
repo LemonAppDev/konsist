@@ -9,10 +9,9 @@ class KoFunctionDeclarationForKoNameProviderTest {
     @Test
     fun `function-name`() {
         // given
-        val sut =
-            getSnippetFile("function-name")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-name")
+            .functions()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -28,5 +27,6 @@ class KoFunctionDeclarationForKoNameProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofunction/snippet/forkonameprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kofunction/snippet/forkonameprovider/", fileName)
 }

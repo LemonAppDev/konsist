@@ -10,12 +10,11 @@ class KoEnumConstantDeclarationForKoKDocProviderTest {
     @Test
     fun `enum-const-without-kdoc`() {
         // given
-        val sut =
-            getSnippetFile("enum-const-without-kdoc")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
+        val sut = getSnippetFile("enum-const-without-kdoc")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -27,12 +26,11 @@ class KoEnumConstantDeclarationForKoKDocProviderTest {
     @Test
     fun `enum-const-with-kdoc`() {
         // given
-        val sut =
-            getSnippetFile("enum-const-with-kdoc")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
+        val sut = getSnippetFile("enum-const-with-kdoc")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -44,12 +42,11 @@ class KoEnumConstantDeclarationForKoKDocProviderTest {
     @Test
     fun `enum-const-with-one-line-kdoc`() {
         // given
-        val sut =
-            getSnippetFile("enum-const-with-one-line-kdoc")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
+        val sut = getSnippetFile("enum-const-with-one-line-kdoc")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -58,5 +55,6 @@ class KoEnumConstantDeclarationForKoKDocProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koenumconstant/snippet/forkokdocprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koenumconstant/snippet/forkokdocprovider/", fileName)
 }

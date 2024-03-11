@@ -13,10 +13,9 @@ class KoFileDeclarationForKoClassProviderTest {
     @Test
     fun `file-has-no-classes`() {
         // given
-        val sut =
-            getSnippetFile("file-has-no-classes")
-                .files
-                .first()
+        val sut = getSnippetFile("file-has-no-classes")
+            .files
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -32,10 +31,9 @@ class KoFileDeclarationForKoClassProviderTest {
     @Test
     fun `file-has-two-classes`() {
         // given
-        val sut =
-            getSnippetFile("file-has-two-classes")
-                .files
-                .first()
+        val sut = getSnippetFile("file-has-two-classes")
+            .files
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -55,10 +53,9 @@ class KoFileDeclarationForKoClassProviderTest {
     @Test
     fun `file-contains-nested-and-local-classes includeNested true includeLocal true`() {
         // given
-        val sut =
-            getSnippetFile("file-contains-nested-and-local-classes")
-                .files
-                .first()
+        val sut = getSnippetFile("file-contains-nested-and-local-classes")
+            .files
+            .first()
 
         // then
         val expected = listOf("SampleLocalClass", "SampleClassNestedInsideObject")
@@ -71,10 +68,9 @@ class KoFileDeclarationForKoClassProviderTest {
     @Test
     fun `file-contains-nested-and-local-classes includeNested true includeLocal false`() {
         // given
-        val sut =
-            getSnippetFile("file-contains-nested-and-local-classes")
-                .files
-                .first()
+        val sut = getSnippetFile("file-contains-nested-and-local-classes")
+            .files
+            .first()
 
         // then
         val expected = listOf("SampleClassNestedInsideObject")
@@ -87,10 +83,9 @@ class KoFileDeclarationForKoClassProviderTest {
     @Test
     fun `file-contains-nested-and-local-classes includeNested false includeLocal true`() {
         // given
-        val sut =
-            getSnippetFile("file-contains-nested-and-local-classes")
-                .files
-                .first()
+        val sut = getSnippetFile("file-contains-nested-and-local-classes")
+            .files
+            .first()
 
         // then
         val expected = listOf("SampleLocalClass")
@@ -103,10 +98,9 @@ class KoFileDeclarationForKoClassProviderTest {
     @Test
     fun `file-contains-nested-and-local-classes includeNested false includeLocal false`() {
         // given
-        val sut =
-            getSnippetFile("file-contains-nested-and-local-classes")
-                .files
-                .first()
+        val sut = getSnippetFile("file-contains-nested-and-local-classes")
+            .files
+            .first()
 
         // then
         val expected = emptyList<KoClassDeclaration>()
@@ -119,10 +113,9 @@ class KoFileDeclarationForKoClassProviderTest {
     @Test
     fun `count-classes`() {
         // given
-        val sut =
-            getSnippetFile("count-classes")
-                .files
-                .first()
+        val sut = getSnippetFile("count-classes")
+            .files
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -139,10 +132,9 @@ class KoFileDeclarationForKoClassProviderTest {
     @Test
     fun `contains-classes-with-specified-conditions`() {
         // given
-        val sut =
-            getSnippetFile("contains-classes-with-specified-conditions")
-                .files
-                .first()
+        val sut = getSnippetFile("contains-classes-with-specified-conditions")
+            .files
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -182,10 +174,9 @@ class KoFileDeclarationForKoClassProviderTest {
         // given
         val regex1 = Regex("[a-zA-Z]+")
         val regex2 = Regex("[0-9]+")
-        val sut =
-            getSnippetFile("contains-classes-with-specified-regex")
-                .files
-                .first()
+        val sut = getSnippetFile("contains-classes-with-specified-regex")
+            .files
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -216,5 +207,6 @@ class KoFileDeclarationForKoClassProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofile/snippet/forkoclassprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kofile/snippet/forkoclassprovider/", fileName)
 }

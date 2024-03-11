@@ -1,6 +1,5 @@
 import os
 
-
 def get_konsist_snapshot_version():
     current_script_path = os.path.abspath(__file__)
     current_script_directory = os.path.dirname(current_script_path)
@@ -15,7 +14,6 @@ def get_konsist_snapshot_version():
                 print(f"Konsist version: {konsist_version}")
                 return konsist_version
     return None
-
 
 if __name__ == "__main__":
     print(f'Konsist snapshot version: {get_konsist_snapshot_version()}')

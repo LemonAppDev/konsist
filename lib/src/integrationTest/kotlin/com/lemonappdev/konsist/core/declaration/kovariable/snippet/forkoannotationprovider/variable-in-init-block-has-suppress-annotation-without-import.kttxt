@@ -1,6 +1,0 @@
-class SampleClass {
-    init {
-        @Suppress
-        val sampleVariable = ""
-    }
-}

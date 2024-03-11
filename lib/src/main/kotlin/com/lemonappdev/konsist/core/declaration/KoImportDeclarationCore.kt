@@ -1,9 +1,8 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAliasProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -32,27 +31,21 @@ internal class KoImportDeclarationCore private constructor(override val ktImport
     KoSourceSetProviderCore,
     KoTextProviderCore,
     KoWildcardProviderCore {
-        override val psiElement: PsiElement by lazy { ktImportDirective }
+    override val psiElement: PsiElement by lazy { ktImportDirective }
 
-        override val ktElement: KtElement by lazy { ktImportDirective }
+    override val ktElement: KtElement by lazy { ktImportDirective }
 
-        override val name: String by lazy { ktImportDirective.importPath?.fqName.toString() }
+    override val name: String by lazy { ktImportDirective.importPath?.fqName.toString() }
 
-        override val alias: KoImportAliasDeclaration? by lazy {
-            ktImportDirective
-                .alias
-                ?.let { KoImportAliasDeclarationCore.getInstance(it, this) }
-        }
+    override fun toString(): String = name
 
-        override fun toString(): String = name
+    internal companion object {
+        private val cache: KoDeclarationCache<KoImportDeclaration> = KoDeclarationCache()
 
-        internal companion object {
-            private val cache: KoDeclarationCache<KoImportDeclaration> = KoDeclarationCache()
-
-            internal fun getInstance(
-                ktImportDirective: KtImportDirective,
-                containingDeclaration: KoBaseDeclaration,
-            ): KoImportDeclaration =
-                cache.getOrCreateInstance(ktImportDirective, containingDeclaration) { KoImportDeclarationCore(ktImportDirective) }
-        }
+        internal fun getInstance(
+            ktImportDirective: KtImportDirective,
+            containingDeclaration: KoContainingDeclarationProvider,
+        ): KoImportDeclaration =
+            cache.getOrCreateInstance(ktImportDirective, containingDeclaration) { KoImportDeclarationCore(ktImportDirective) }
     }
+}

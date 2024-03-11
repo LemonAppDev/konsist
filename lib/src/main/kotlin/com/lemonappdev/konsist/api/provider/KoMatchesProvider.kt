@@ -5,7 +5,7 @@ package com.lemonappdev.konsist.api.provider
  */
 interface KoMatchesProvider : KoBaseProvider {
     /**
-     *  Determines whether the given [element] matches to declaration.
+     *  Whether the given [element] matches to declaration.
      *
      * @param element The element to be matched, typically represented as a `String`.
      * @return `true` if the [element] matches the declaration, `false` otherwise.

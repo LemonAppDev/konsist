@@ -19,12 +19,11 @@ class AssertTrueOnSingleProviderTest {
     @Test
     fun `provider-assert-test-method-name-derived-from-junit-method-name`() {
         // given
-        val sut =
-            getSnippetFile("provider-assert-test-method-name-derived-from-junit-method-name")
-                .declarations()
-                .filterNot { it is KoFileDeclaration }
-                .filterIsInstance<KoNameProvider>()
-                .first()
+        val sut = getSnippetFile("provider-assert-test-method-name-derived-from-junit-method-name")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoNameProvider>()
+            .first()
 
         // then
         try {
@@ -38,12 +37,11 @@ class AssertTrueOnSingleProviderTest {
     @Test
     fun `provider-assert-test-method-name-derived-from-test-name-parameter`() {
         // given
-        val sut =
-            getSnippetFile("provider-assert-test-method-name-derived-from-test-name-parameter")
-                .declarations()
-                .filterNot { it is KoFileDeclaration }
-                .filterIsInstance<KoNameProvider>()
-                .first()
+        val sut = getSnippetFile("provider-assert-test-method-name-derived-from-test-name-parameter")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoNameProvider>()
+            .first()
 
         // then
         try {
@@ -58,12 +56,11 @@ class AssertTrueOnSingleProviderTest {
     fun `provider-assert-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut =
-            getSnippetFile("provider-assert-error-with-custom-message")
-                .declarations()
-                .filterNot { it is KoFileDeclaration }
-                .filterIsInstance<KoNameProvider>()
-                .first()
+        val sut = getSnippetFile("provider-assert-error-with-custom-message")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoNameProvider>()
+            .first()
 
         // then
         try {
@@ -81,12 +78,11 @@ class AssertTrueOnSingleProviderTest {
     fun `provider-assert-error-with-custom-message-and-strict-set-to-true`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut =
-            getSnippetFile("provider-assert-error-with-custom-message-and-strict-set-to-true")
-                .declarations()
-                .filterNot { it is KoFileDeclaration }
-                .filterIsInstance<KoNameProvider>()
-                .first()
+        val sut = getSnippetFile("provider-assert-error-with-custom-message-and-strict-set-to-true")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoNameProvider>()
+            .first()
 
         // then
         try {
@@ -103,12 +99,11 @@ class AssertTrueOnSingleProviderTest {
     @Test
     fun `provider-assert-displaying-correct-failed-declaration-type`() {
         // given
-        val sut =
-            getSnippetFile("provider-assert-displaying-correct-failed-declaration-type")
-                .declarations()
-                .filterNot { it is KoFileDeclaration }
-                .filterIsInstance<KoNameProvider>()
-                .first()
+        val sut = getSnippetFile("provider-assert-displaying-correct-failed-declaration-type")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoNameProvider>()
+            .first()
 
         // then
         try {
@@ -122,11 +117,10 @@ class AssertTrueOnSingleProviderTest {
     @Test
     fun `provider-assert-passes-when-declaration-list-has-only-nulls`() {
         // given
-        val sut =
-            getSnippetFile("provider-assert-passes-when-declaration-list-has-only-nulls")
-                .declarations()
-                .filterNot { it is KoFileDeclaration }
-                .firstOrNull { it is KoTypeAliasProvider }
+        val sut = getSnippetFile("provider-assert-passes-when-declaration-list-has-only-nulls")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .firstOrNull { it is KoTypeAliasProvider }
 
         // when
         sut.assertTrue { true }
@@ -135,11 +129,10 @@ class AssertTrueOnSingleProviderTest {
     @Test
     fun `provider-assert-false-passes-when-declaration-list-has-only-nulls`() {
         // given
-        val sut =
-            getSnippetFile("provider-assert-false-passes-when-declaration-list-has-only-nulls")
-                .declarations()
-                .filterNot { it is KoFileDeclaration }
-                .firstOrNull { it is KoTypeAliasProvider }
+        val sut = getSnippetFile("provider-assert-false-passes-when-declaration-list-has-only-nulls")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .firstOrNull { it is KoTypeAliasProvider }
 
         // when
         sut.assertFalse { false }
@@ -148,11 +141,10 @@ class AssertTrueOnSingleProviderTest {
     @Test
     fun `provider-assert-strict-fails-when-declaration-list-has-only-nulls`() {
         // given
-        val sut =
-            getSnippetFile("provider-assert-strict-fails-when-declaration-list-has-only-nulls")
-                .declarations()
-                .filterNot { it is KoFileDeclaration }
-                .firstOrNull { it is KoTypeAliasProvider }
+        val sut = getSnippetFile("provider-assert-strict-fails-when-declaration-list-has-only-nulls")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .firstOrNull { it is KoTypeAliasProvider }
 
         // when
         val func = {
@@ -168,11 +160,10 @@ class AssertTrueOnSingleProviderTest {
     @Test
     fun `provider-assert-false-strict-fails-when-declaration-list-has-only-nulls`() {
         // given
-        val sut =
-            getSnippetFile("provider-assert-false-strict-fails-when-declaration-list-has-only-nulls")
-                .declarations()
-                .filterNot { it is KoFileDeclaration }
-                .firstOrNull { it is KoTypeAliasProvider }
+        val sut = getSnippetFile("provider-assert-false-strict-fails-when-declaration-list-has-only-nulls")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .firstOrNull { it is KoTypeAliasProvider }
 
         // when
         val func = {
@@ -188,12 +179,11 @@ class AssertTrueOnSingleProviderTest {
     @Test
     fun `assert-passes`() {
         // given
-        val sut =
-            getSnippetFile("assert-passes")
-                .declarations()
-                .filterNot { it is KoFileDeclaration }
-                .filterIsInstance<KoAnnotationProvider>()
-                .first()
+        val sut = getSnippetFile("assert-passes")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoAnnotationProvider>()
+            .first()
 
         // then
         sut.assertTrue { it.hasAnnotations() }
@@ -202,12 +192,11 @@ class AssertTrueOnSingleProviderTest {
     @Test
     fun `assert-fails`() {
         // given
-        val sut =
-            getSnippetFile("assert-fails")
-                .declarations()
-                .filterNot { it is KoFileDeclaration }
-                .filterIsInstance<KoAnnotationProvider>()
-                .first()
+        val sut = getSnippetFile("assert-fails")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoAnnotationProvider>()
+            .first()
 
         // when
         val func = {
@@ -221,12 +210,11 @@ class AssertTrueOnSingleProviderTest {
     @Test
     fun `assert-false-passes`() {
         // given
-        val sut =
-            getSnippetFile("assert-false-passes")
-                .declarations()
-                .filterNot { it is KoFileDeclaration }
-                .filterIsInstance<KoAnnotationProvider>()
-                .first()
+        val sut = getSnippetFile("assert-false-passes")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoAnnotationProvider>()
+            .first()
 
         // then
         sut.assertFalse { it.hasAnnotations() }
@@ -235,12 +223,11 @@ class AssertTrueOnSingleProviderTest {
     @Test
     fun `assert-false-fails`() {
         // given
-        val sut =
-            getSnippetFile("assert-false-fails")
-                .declarations()
-                .filterNot { it is KoFileDeclaration }
-                .filterIsInstance<KoAnnotationProvider>()
-                .first()
+        val sut = getSnippetFile("assert-false-fails")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoAnnotationProvider>()
+            .first()
 
         // when
         val func = {
@@ -254,11 +241,10 @@ class AssertTrueOnSingleProviderTest {
     @Test
     fun `assert-passes-when-expression-is-nullable`() {
         // given
-        val sut =
-            getSnippetFile("assert-passes-when-expression-is-nullable")
-                .declarations()
-                .filterIsInstance<KoPrimaryConstructorProvider>()
-                .first()
+        val sut = getSnippetFile("assert-passes-when-expression-is-nullable")
+            .declarations()
+            .filterIsInstance<KoPrimaryConstructorProvider>()
+            .first()
 
         // then
         sut.assertTrue { it.primaryConstructor?.hasParameterNamed("sampleParameter") ?: true }
@@ -267,11 +253,10 @@ class AssertTrueOnSingleProviderTest {
     @Test
     fun `assert-fails-when-expression-is-nullable`() {
         // given
-        val sut =
-            getSnippetFile("assert-fails-when-expression-is-nullable")
-                .declarations()
-                .filterIsInstance<KoPrimaryConstructorProvider>()
-                .first()
+        val sut = getSnippetFile("assert-fails-when-expression-is-nullable")
+            .declarations()
+            .filterIsInstance<KoPrimaryConstructorProvider>()
+            .first()
 
         // when
         val func = {
@@ -285,11 +270,10 @@ class AssertTrueOnSingleProviderTest {
     @Test
     fun `assert-false-passes-when-expression-is-nullable`() {
         // given
-        val sut =
-            getSnippetFile("assert-false-passes-when-expression-is-nullable")
-                .declarations()
-                .filterIsInstance<KoPrimaryConstructorProvider>()
-                .first()
+        val sut = getSnippetFile("assert-false-passes-when-expression-is-nullable")
+            .declarations()
+            .filterIsInstance<KoPrimaryConstructorProvider>()
+            .first()
 
         // then
         sut.assertFalse { it.primaryConstructor?.hasParameterNamed("otherParameter") ?: false }
@@ -298,11 +282,10 @@ class AssertTrueOnSingleProviderTest {
     @Test
     fun `assert-false-fails-when-expression-is-nullable`() {
         // given
-        val sut =
-            getSnippetFile("assert-false-fails-when-expression-is-nullable")
-                .declarations()
-                .filterIsInstance<KoPrimaryConstructorProvider>()
-                .first()
+        val sut = getSnippetFile("assert-false-fails-when-expression-is-nullable")
+            .declarations()
+            .filterIsInstance<KoPrimaryConstructorProvider>()
+            .first()
 
         // when
         val func = {

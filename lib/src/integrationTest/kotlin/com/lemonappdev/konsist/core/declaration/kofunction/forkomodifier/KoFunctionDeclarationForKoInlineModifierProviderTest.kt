@@ -8,10 +8,9 @@ class KoFunctionDeclarationForKoInlineModifierProviderTest {
     @Test
     fun `function-without-inline-modifier`() {
         // given
-        val sut =
-            getSnippetFile("function-without-inline-modifier")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-without-inline-modifier")
+            .functions()
+            .first()
 
         // then
         sut.hasInlineModifier shouldBeEqualTo false
@@ -20,10 +19,9 @@ class KoFunctionDeclarationForKoInlineModifierProviderTest {
     @Test
     fun `function-with-inline-modifier`() {
         // given
-        val sut =
-            getSnippetFile("function-with-inline-modifier")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-with-inline-modifier")
+            .functions()
+            .first()
 
         // then
         sut.hasInlineModifier shouldBeEqualTo true

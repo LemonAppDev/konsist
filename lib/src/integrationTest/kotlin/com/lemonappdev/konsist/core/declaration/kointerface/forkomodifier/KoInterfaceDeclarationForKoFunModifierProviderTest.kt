@@ -8,10 +8,9 @@ class KoInterfaceDeclarationForKoFunModifierProviderTest {
     @Test
     fun `interface-without-fun-modifier`() {
         // given
-        val sut =
-            getSnippetFile("interface-without-fun-modifier")
-                .interfaces()
-                .first()
+        val sut = getSnippetFile("interface-without-fun-modifier")
+            .interfaces()
+            .first()
 
         // then
         sut.hasFunModifier shouldBeEqualTo false
@@ -20,10 +19,9 @@ class KoInterfaceDeclarationForKoFunModifierProviderTest {
     @Test
     fun `interface-with-fun-modifier`() {
         // given
-        val sut =
-            getSnippetFile("interface-with-fun-modifier")
-                .interfaces()
-                .first()
+        val sut = getSnippetFile("interface-with-fun-modifier")
+            .interfaces()
+            .first()
 
         // then
         sut.hasFunModifier shouldBeEqualTo true

@@ -9,11 +9,10 @@ class KoGetterDeclarationTest {
     @Test
     fun `getter-to-string`() {
         // given
-        val sut =
-            getSnippetFile("getter-to-string")
-                .properties()
-                .first()
-                .getter
+        val sut = getSnippetFile("getter-to-string")
+            .properties()
+            .first()
+            .getter
 
         // then
         assertSoftly(sut.toString()) {

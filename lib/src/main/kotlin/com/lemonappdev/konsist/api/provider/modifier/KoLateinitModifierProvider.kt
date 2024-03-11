@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoLateinitModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Determines whatever the declaration has `lateinit` modifier.
+     * Whether the declaration has `lateinit` modifier.
      */
     val hasLateinitModifier: Boolean
 }

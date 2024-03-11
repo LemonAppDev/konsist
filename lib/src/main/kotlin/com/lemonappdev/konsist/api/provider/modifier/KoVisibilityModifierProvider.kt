@@ -7,27 +7,27 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoVisibilityModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Determines whatever the declaration has public modifier.
+     * Whether the declaration has public modifier.
      */
     val hasPublicModifier: Boolean
 
     /**
-     * Determines whatever the declaration has public or no visibility modifier.
+     * Whether the declaration has public or no visibility modifier.
      */
     val hasPublicOrDefaultModifier: Boolean
 
     /**
-     * Determines whatever the declaration has private modifier.
+     * Whether the declaration has private modifier.
      */
     val hasPrivateModifier: Boolean
 
     /**
-     * Determines whatever the declaration has protected modifier.
+     * Whether the declaration has protected modifier.
      */
     val hasProtectedModifier: Boolean
 
     /**
-     * Determines whatever the declaration has internal modifier.
+     * Whether the declaration has internal modifier.
      */
     val hasInternalModifier: Boolean
 }

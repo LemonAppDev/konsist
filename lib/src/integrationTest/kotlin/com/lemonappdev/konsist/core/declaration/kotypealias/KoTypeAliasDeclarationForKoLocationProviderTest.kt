@@ -9,10 +9,9 @@ class KoTypeAliasDeclarationForKoLocationProviderTest {
     @Test
     fun `typealias-location-with-single-digit`() {
         // given
-        val sut =
-            getSnippetFile("typealias-location-with-single-digit")
-                .typeAliases
-                .first()
+        val sut = getSnippetFile("typealias-location-with-single-digit")
+            .typeAliases
+            .first()
 
         // then
         sut.location shouldBeEqualTo "${sut.path}:1:1"
@@ -21,16 +20,14 @@ class KoTypeAliasDeclarationForKoLocationProviderTest {
     @Test
     fun `typealias-location-with-text`() {
         // given
-        val projectPath =
-            getSnippetFile("typealias-location-with-text")
-                .typeAliases
-                .first()
-                .projectPath
+        val projectPath = getSnippetFile("typealias-location-with-text")
+            .typeAliases
+            .first()
+            .projectPath
 
-        val sut =
-            getSnippetFile("typealias-location-with-text")
-                .typeAliases
-                .first()
+        val sut = getSnippetFile("typealias-location-with-text")
+            .typeAliases
+            .first()
 
         // then
         val declaration = "Declaration:\ntypealias SampleTypeAlias = () -> Int"

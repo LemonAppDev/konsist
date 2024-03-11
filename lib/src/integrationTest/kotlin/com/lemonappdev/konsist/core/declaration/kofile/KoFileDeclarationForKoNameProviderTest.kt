@@ -9,10 +9,9 @@ class KoFileDeclarationForKoNameProviderTest {
     @Test
     fun `file-name`() {
         // given
-        val sut =
-            getSnippetFile("file-name")
-                .files
-                .first()
+        val sut = getSnippetFile("file-name")
+            .files
+            .first()
 
         // then
         sut.name shouldBeEqualTo "file-name"
@@ -21,10 +20,9 @@ class KoFileDeclarationForKoNameProviderTest {
     @Test
     fun `file-has-name-with-prefix`() {
         // given
-        val sut =
-            getSnippetFile("file-has-name-with-prefix")
-                .files
-                .first()
+        val sut = getSnippetFile("file-has-name-with-prefix")
+            .files
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -36,10 +34,9 @@ class KoFileDeclarationForKoNameProviderTest {
     @Test
     fun `file-has-name-with-suffix`() {
         // given
-        val sut =
-            getSnippetFile("file-has-name-with-suffix")
-                .files
-                .first()
+        val sut = getSnippetFile("file-has-name-with-suffix")
+            .files
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -51,10 +48,9 @@ class KoFileDeclarationForKoNameProviderTest {
     @Test
     fun `file-has-name-containing-text`() {
         // given
-        val sut =
-            getSnippetFile("file-has-name-containing-text")
-                .files
-                .first()
+        val sut = getSnippetFile("file-has-name-containing-text")
+            .files
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -66,10 +62,9 @@ class KoFileDeclarationForKoNameProviderTest {
     @Test
     fun `file-has-name-matching-regex`() {
         // given
-        val sut =
-            getSnippetFile("file-has-name-matching-regex")
-                .files
-                .first()
+        val sut = getSnippetFile("file-has-name-matching-regex")
+            .files
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -78,9 +73,8 @@ class KoFileDeclarationForKoNameProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope(
-            "core/declaration/kofile/snippet/forkonameprovider/",
-            fileName,
-        )
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope(
+        "core/declaration/kofile/snippet/forkonameprovider/",
+        fileName,
+    )
 }

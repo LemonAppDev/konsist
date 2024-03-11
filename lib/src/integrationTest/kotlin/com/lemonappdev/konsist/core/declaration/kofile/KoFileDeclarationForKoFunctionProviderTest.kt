@@ -12,10 +12,9 @@ class KoFileDeclarationForKoFunctionProviderTest {
     @Test
     fun `file-has-no-functions`() {
         // given
-        val sut =
-            getSnippetFile("file-has-no-functions")
-                .files
-                .first()
+        val sut = getSnippetFile("file-has-no-functions")
+            .files
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -31,10 +30,9 @@ class KoFileDeclarationForKoFunctionProviderTest {
     @Test
     fun `file-has-two-functions`() {
         // given
-        val sut =
-            getSnippetFile("file-has-two-functions")
-                .files
-                .first()
+        val sut = getSnippetFile("file-has-two-functions")
+            .files
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -54,10 +52,9 @@ class KoFileDeclarationForKoFunctionProviderTest {
     @Test
     fun `file-contains-nested-and-local-functions includeNested true includeLocal true`() {
         // given
-        val sut =
-            getSnippetFile("file-contains-nested-and-local-functions")
-                .files
-                .first()
+        val sut = getSnippetFile("file-contains-nested-and-local-functions")
+            .files
+            .first()
 
         // then
         val expected = listOf("sampleFunction", "sampleLocalFunction", "sampleNestedFunction")
@@ -70,10 +67,9 @@ class KoFileDeclarationForKoFunctionProviderTest {
     @Test
     fun `file-contains-nested-and-local-functions includeNested true includeLocal false`() {
         // given
-        val sut =
-            getSnippetFile("file-contains-nested-and-local-functions")
-                .files
-                .first()
+        val sut = getSnippetFile("file-contains-nested-and-local-functions")
+            .files
+            .first()
 
         // then
         val expected = listOf("sampleFunction", "sampleNestedFunction")
@@ -86,10 +82,9 @@ class KoFileDeclarationForKoFunctionProviderTest {
     @Test
     fun `file-contains-nested-and-local-functions includeNested false includeLocal true`() {
         // given
-        val sut =
-            getSnippetFile("file-contains-nested-and-local-functions")
-                .files
-                .first()
+        val sut = getSnippetFile("file-contains-nested-and-local-functions")
+            .files
+            .first()
 
         // then
         val expected = listOf("sampleFunction", "sampleLocalFunction")
@@ -102,10 +97,9 @@ class KoFileDeclarationForKoFunctionProviderTest {
     @Test
     fun `file-contains-nested-and-local-functions includeNested false includeLocal false`() {
         // given
-        val sut =
-            getSnippetFile("file-contains-nested-and-local-functions")
-                .files
-                .first()
+        val sut = getSnippetFile("file-contains-nested-and-local-functions")
+            .files
+            .first()
 
         // then
         val expected = listOf("sampleFunction")
@@ -118,10 +112,9 @@ class KoFileDeclarationForKoFunctionProviderTest {
     @Test
     fun `count-functions`() {
         // given
-        val sut =
-            getSnippetFile("count-functions")
-                .files
-                .first()
+        val sut = getSnippetFile("count-functions")
+            .files
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -138,10 +131,9 @@ class KoFileDeclarationForKoFunctionProviderTest {
     @Test
     fun `contains-functions-with-specified-name-and-modifiers`() {
         // given
-        val sut =
-            getSnippetFile("contains-functions-with-specified-name-and-modifiers")
-                .files
-                .first()
+        val sut = getSnippetFile("contains-functions-with-specified-name-and-modifiers")
+            .files
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -181,10 +173,9 @@ class KoFileDeclarationForKoFunctionProviderTest {
         // given
         val regex1 = Regex("[a-zA-Z]+")
         val regex2 = Regex("[0-9]+")
-        val sut =
-            getSnippetFile("contains-functions-with-specified-regex")
-                .files
-                .first()
+        val sut = getSnippetFile("contains-functions-with-specified-regex")
+            .files
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -211,5 +202,6 @@ class KoFileDeclarationForKoFunctionProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofile/snippet/forkofunctionprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kofile/snippet/forkofunctionprovider/", fileName)
 }

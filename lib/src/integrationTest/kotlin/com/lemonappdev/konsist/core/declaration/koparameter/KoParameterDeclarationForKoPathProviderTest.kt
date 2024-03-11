@@ -9,13 +9,12 @@ class KoParameterDeclarationForKoPathProviderTest {
     @Test
     fun `parameter-file-path`() {
         // given
-        val sut =
-            getSnippetFile("parameter-file-path")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
+        val sut = getSnippetFile("parameter-file-path")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
 
         // then
         assertSoftly(sut?.path) {
@@ -27,13 +26,12 @@ class KoParameterDeclarationForKoPathProviderTest {
     @Test
     fun `parameter-project-file-path`() {
         // given
-        val sut =
-            getSnippetFile("parameter-project-file-path")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
+        val sut = getSnippetFile("parameter-project-file-path")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
 
         // then
         sut
@@ -47,13 +45,12 @@ class KoParameterDeclarationForKoPathProviderTest {
     @Test
     fun `parameter-reside-in-file-path`() {
         // given
-        val sut =
-            getSnippetFile("parameter-reside-in-file-path")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
+        val sut = getSnippetFile("parameter-reside-in-file-path")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
 
         // then
         assertSoftly(sut) {
@@ -67,13 +64,12 @@ class KoParameterDeclarationForKoPathProviderTest {
     @Test
     fun `parameter-reside-in-project-file-path`() {
         // given
-        val sut =
-            getSnippetFile("parameter-reside-in-project-file-path")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
+        val sut = getSnippetFile("parameter-reside-in-project-file-path")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
 
         // then
         assertSoftly(sut) {
@@ -84,5 +80,6 @@ class KoParameterDeclarationForKoPathProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koparameter/snippet/forkopathprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koparameter/snippet/forkopathprovider/", fileName)
 }

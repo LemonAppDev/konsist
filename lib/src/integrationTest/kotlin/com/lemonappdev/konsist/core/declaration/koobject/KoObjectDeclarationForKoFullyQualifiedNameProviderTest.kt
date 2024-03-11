@@ -8,10 +8,9 @@ class KoObjectDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `object-fully-qualified-name`() {
         // given
-        val sut =
-            getSnippetFile("object-fully-qualified-name")
-                .objects()
-                .first()
+        val sut = getSnippetFile("object-fully-qualified-name")
+            .objects()
+            .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleObject"
@@ -20,10 +19,9 @@ class KoObjectDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `object-fully-qualified-name-without-package`() {
         // given
-        val sut =
-            getSnippetFile("object-fully-qualified-name-without-package")
-                .objects()
-                .first()
+        val sut = getSnippetFile("object-fully-qualified-name-without-package")
+            .objects()
+            .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "SampleObject"
@@ -32,10 +30,9 @@ class KoObjectDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `nested-object-fully-qualified-name`() {
         // given
-        val sut =
-            getSnippetFile("nested-object-fully-qualified-name")
-                .objects()
-                .first()
+        val sut = getSnippetFile("nested-object-fully-qualified-name")
+            .objects()
+            .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleClass.SampleObject"
@@ -44,10 +41,9 @@ class KoObjectDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `nested-object-fully-qualified-name-without-package`() {
         // given
-        val sut =
-            getSnippetFile("nested-object-fully-qualified-name-without-package")
-                .objects()
-                .first()
+        val sut = getSnippetFile("nested-object-fully-qualified-name-without-package")
+            .objects()
+            .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "SampleClass.SampleObject"

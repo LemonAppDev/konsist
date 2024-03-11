@@ -8,10 +8,9 @@ class KoFunctionDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `function-fully-qualified-name`() {
         // given
-        val sut =
-            getSnippetFile("function-fully-qualified-name")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-fully-qualified-name")
+            .functions()
+            .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.sampleFunction"
@@ -20,10 +19,9 @@ class KoFunctionDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `function-fully-qualified-name-without-package`() {
         // given
-        val sut =
-            getSnippetFile("function-fully-qualified-name-without-package")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-fully-qualified-name-without-package")
+            .functions()
+            .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "sampleFunction"
@@ -32,10 +30,9 @@ class KoFunctionDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `nested-function-fully-qualified-name`() {
         // given
-        val sut =
-            getSnippetFile("nested-function-fully-qualified-name")
-                .functions()
-                .first()
+        val sut = getSnippetFile("nested-function-fully-qualified-name")
+            .functions()
+            .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleClass.sampleFunction"
@@ -44,10 +41,9 @@ class KoFunctionDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `nested-function-fully-qualified-name-without-package`() {
         // given
-        val sut =
-            getSnippetFile("nested-function-fully-qualified-name-without-package")
-                .functions()
-                .first()
+        val sut = getSnippetFile("nested-function-fully-qualified-name-without-package")
+            .functions()
+            .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "SampleClass.sampleFunction"

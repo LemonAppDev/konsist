@@ -13,10 +13,9 @@ class KoObjectDeclarationForKoAnnotationProviderTest {
     @Test
     fun `object-has-no-annotation`() {
         // given
-        val sut =
-            getSnippetFile("object-has-no-annotation")
-                .objects()
-                .first()
+        val sut = getSnippetFile("object-has-no-annotation")
+            .objects()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -37,10 +36,9 @@ class KoObjectDeclarationForKoAnnotationProviderTest {
     @Test
     fun `object-has-annotation`() {
         // given
-        val sut =
-            getSnippetFile("object-has-annotation")
-                .objects()
-                .first()
+        val sut = getSnippetFile("object-has-annotation")
+            .objects()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -85,10 +83,9 @@ class KoObjectDeclarationForKoAnnotationProviderTest {
     @Test
     fun `object-has-two-annotations`() {
         // given
-        val sut =
-            getSnippetFile("object-has-two-annotations")
-                .objects()
-                .first()
+        val sut = getSnippetFile("object-has-two-annotations")
+            .objects()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -144,10 +141,9 @@ class KoObjectDeclarationForKoAnnotationProviderTest {
     @Test
     fun `object-has-suppress-annotation-without-import`() {
         // given
-        val sut =
-            getSnippetFile("object-has-suppress-annotation-without-import")
-                .objects()
-                .first()
+        val sut = getSnippetFile("object-has-suppress-annotation-without-import")
+            .objects()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -156,5 +152,6 @@ class KoObjectDeclarationForKoAnnotationProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/forkoannotationprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koobject/snippet/forkoannotationprovider/", fileName)
 }

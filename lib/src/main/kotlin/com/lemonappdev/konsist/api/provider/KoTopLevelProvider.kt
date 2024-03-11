@@ -5,7 +5,7 @@ package com.lemonappdev.konsist.api.provider
  */
 interface KoTopLevelProvider : KoBaseProvider {
     /**
-     * Determines whatever the declaration is defined at top level.
+     * Whether the declaration is defined at top level.
      */
     val isTopLevel: Boolean
 }

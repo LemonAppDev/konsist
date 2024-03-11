@@ -21,7 +21,7 @@ repositories {
 }
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(19)
 }
 
 tasks.withType<Test> {
@@ -37,7 +37,6 @@ testing {
     suites {
         register("integrationTest", JvmTestSuite::class) {
             dependencies {
-                implementation(project(":app"))
                 implementation(libs.junitJupiterEngine)
                 implementation(libs.kluent)
                 implementation(libs.konsist)

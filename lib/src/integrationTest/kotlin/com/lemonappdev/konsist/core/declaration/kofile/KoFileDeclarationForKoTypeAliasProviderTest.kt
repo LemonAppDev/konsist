@@ -9,10 +9,9 @@ class KoFileDeclarationForKoTypeAliasProviderTest {
     @Test
     fun `file-has-no-typealias`() {
         // given
-        val sut =
-            getSnippetFile("file-has-no-typealias")
-                .files
-                .first()
+        val sut = getSnippetFile("file-has-no-typealias")
+            .files
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -31,10 +30,9 @@ class KoFileDeclarationForKoTypeAliasProviderTest {
     @Test
     fun `file-has-one-typealias`() {
         // given
-        val sut =
-            getSnippetFile("file-has-one-typealias")
-                .files
-                .first()
+        val sut = getSnippetFile("file-has-one-typealias")
+            .files
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -56,10 +54,9 @@ class KoFileDeclarationForKoTypeAliasProviderTest {
     @Test
     fun `file-has-two-typealiases`() {
         // given
-        val sut =
-            getSnippetFile("file-has-two-typealiases")
-                .files
-                .first()
+        val sut = getSnippetFile("file-has-two-typealiases")
+            .files
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -83,9 +80,8 @@ class KoFileDeclarationForKoTypeAliasProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope(
-            "core/declaration/kofile/snippet/forkotypealiasprovider/",
-            fileName,
-        )
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope(
+        "core/declaration/kofile/snippet/forkotypealiasprovider/",
+        fileName,
+    )
 }

@@ -10,10 +10,9 @@ class KoPropertyDeclarationForKoDelegateProviderTest {
     @Test
     fun `property-has-lazy-delegate`() {
         // given
-        val sut =
-            getSnippetFile("property-has-lazy-delegate")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-has-lazy-delegate")
+            .properties()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -27,10 +26,9 @@ class KoPropertyDeclarationForKoDelegateProviderTest {
     @Test
     fun `property-has-no-delegate`() {
         // given
-        val sut =
-            getSnippetFile("property-has-no-delegate")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-has-no-delegate")
+            .properties()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -43,11 +41,10 @@ class KoPropertyDeclarationForKoDelegateProviderTest {
     @Test
     fun `property-defined-in-constructor-has-no-delegate`() {
         // given
-        val sut =
-            getSnippetFile("property-defined-in-constructor-has-no-delegate")
-                .classes()
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-defined-in-constructor-has-no-delegate")
+            .classes()
+            .properties()
+            .first()
 
         // then
         assertSoftly(sut) {

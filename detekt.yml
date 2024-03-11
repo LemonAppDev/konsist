@@ -121,7 +121,7 @@ complexity:
     ignoredLabels: [ ]
   LargeClass:
     active: true
-    threshold: 800
+    threshold: 600
   LongMethod:
     active: true
     threshold: 60
@@ -163,11 +163,11 @@ complexity:
   TooManyFunctions:
     active: true
     excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**', '**/konsist/api/ext/sequence/**' ]
-    thresholdInFiles: 25
-    thresholdInClasses: 25
-    thresholdInInterfaces: 25
-    thresholdInObjects: 25
-    thresholdInEnums: 25
+    thresholdInFiles: 20
+    thresholdInClasses: 20
+    thresholdInInterfaces: 20
+    thresholdInObjects: 20
+    thresholdInEnums: 20
     ignoreDeprecated: false
     ignorePrivate: false
     ignoreOverridden: false

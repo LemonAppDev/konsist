@@ -8,12 +8,11 @@ class KoEnumConstantDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `enum-const-not-reside-in-file-package`() {
         // given
-        val sut =
-            getSnippetFile("enum-const-not-reside-in-file-package")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
+        val sut = getSnippetFile("enum-const-not-reside-in-file-package")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
 
         // then
         sut.resideInPackage("com") shouldBeEqualTo false
@@ -22,12 +21,11 @@ class KoEnumConstantDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `enum-const-reside-in-file-package`() {
         // given
-        val sut =
-            getSnippetFile("enum-const-reside-in-file-package")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
+        val sut = getSnippetFile("enum-const-reside-in-file-package")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
 
         // then
         sut.resideInPackage("com..") shouldBeEqualTo true
@@ -36,12 +34,11 @@ class KoEnumConstantDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `enum-const-not-reside-outside-file-package`() {
         // given
-        val sut =
-            getSnippetFile("enum-const-not-reside-outside-file-package")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
+        val sut = getSnippetFile("enum-const-not-reside-outside-file-package")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
 
         // then
         sut.resideOutsidePackage("com..") shouldBeEqualTo false
@@ -50,12 +47,11 @@ class KoEnumConstantDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `enum-const-reside-outside-file-package`() {
         // given
-        val sut =
-            getSnippetFile("enum-const-reside-outside-file-package")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
+        val sut = getSnippetFile("enum-const-reside-outside-file-package")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
 
         // then
         sut.resideOutsidePackage("com") shouldBeEqualTo true

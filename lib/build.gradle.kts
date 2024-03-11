@@ -11,7 +11,6 @@ dependencies {
     testImplementation(libs.junitJupiterParams)
     testImplementation(libs.mockk)
     testImplementation(libs.kluent)
-    testImplementation(kotlin("script-runtime"))
 }
 
 @Suppress("UnstableApiUsage")
@@ -27,10 +26,7 @@ testing {
                 implementation(project(":lib")) // Konsist
                 implementation(libs.mockk)
                 implementation(libs.kluent)
-                implementation(libs.kotest)
-
-                // Include JAR to be able to test external parents (generated from sample-external-library project)
-                implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("sample-external-library-1.2.jar"))))
+                implementation(libs.koTest)
             }
         }
 
@@ -44,14 +40,14 @@ testing {
             dependencies {
                 implementation(project(":lib")) // Konsist
                 implementation(libs.kluent)
-                implementation(libs.kotest)
+                implementation(libs.koTest)
             }
         }
 
         register("snippet", JvmTestSuite::class) {
             dependencies {
                 implementation(project(":lib")) // Konsist
-                implementation(libs.kotest)
+                implementation(libs.koTest)
             }
         }
     }

@@ -7,15 +7,14 @@ import com.lemonappdev.konsist.core.filesystem.PathProvider
 internal interface KoModuleProviderCore : KoModuleProvider, KoPathProviderCore, KoBaseProviderCore {
     override val moduleName: String
         get() {
-            val projectName =
-                PathProvider
-                    .rootProjectPath
-                    .substringAfterLast(sep)
+            val projectName = PathProvider
+                .getInstance()
+                .rootProjectPath
+                .substringAfterLast(sep)
 
-            val moduleName =
-                projectPath
-                    .substringBefore("${sep}src$sep")
-                    .substringAfter(sep)
+            val moduleName = projectPath
+                .substringBefore("${sep}src$sep")
+                .substringAfter(sep)
 
             return if (moduleName == projectName || moduleName == "") {
                 "root"

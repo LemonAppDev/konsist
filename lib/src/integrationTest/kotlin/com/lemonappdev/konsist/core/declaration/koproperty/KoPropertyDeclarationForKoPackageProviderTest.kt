@@ -8,10 +8,9 @@ class KoPropertyDeclarationForKoPackageProviderTest {
     @Test
     fun `property-is-not-in-package`() {
         // given
-        val sut =
-            getSnippetFile("property-is-not-in-package")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-is-not-in-package")
+            .properties()
+            .first()
 
         // then
         sut.packagee shouldBeEqualTo null
@@ -20,14 +19,14 @@ class KoPropertyDeclarationForKoPackageProviderTest {
     @Test
     fun `property-is-in-package`() {
         // given
-        val sut =
-            getSnippetFile("property-is-in-package")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-is-in-package")
+            .properties()
+            .first()
 
         // then
         sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koproperty/snippet/forkopackageprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koproperty/snippet/forkopackageprovider/", fileName)
 }

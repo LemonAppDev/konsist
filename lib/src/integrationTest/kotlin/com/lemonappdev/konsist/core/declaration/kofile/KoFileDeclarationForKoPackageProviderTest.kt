@@ -8,10 +8,9 @@ class KoFileDeclarationForKoPackageProviderTest {
     @Test
     fun `file-contains-no-package`() {
         // given
-        val sut =
-            getSnippetFile("file-contains-no-package")
-                .files
-                .first()
+        val sut = getSnippetFile("file-contains-no-package")
+            .files
+            .first()
 
         // then
         sut.packagee shouldBeEqualTo null
@@ -20,18 +19,16 @@ class KoFileDeclarationForKoPackageProviderTest {
     @Test
     fun `file-contains-package`() {
         // given
-        val sut =
-            getSnippetFile("file-contains-package")
-                .files
-                .first()
+        val sut = getSnippetFile("file-contains-package")
+            .files
+            .first()
 
         // then
         sut.packagee?.name shouldBeEqualTo "samplepackage"
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope(
-            "core/declaration/kofile/snippet/forkopackageprovider/",
-            fileName,
-        )
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope(
+        "core/declaration/kofile/snippet/forkopackageprovider/",
+        fileName,
+    )
 }

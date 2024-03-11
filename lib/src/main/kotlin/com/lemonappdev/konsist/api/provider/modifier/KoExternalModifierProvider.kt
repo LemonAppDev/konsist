@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoExternalModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Determines whatever the declaration has `external` modifier.
+     * Whether the declaration has `external` modifier.
      */
     val hasExternalModifier: Boolean
 }

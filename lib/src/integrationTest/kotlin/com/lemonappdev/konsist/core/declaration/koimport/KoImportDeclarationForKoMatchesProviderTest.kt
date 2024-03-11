@@ -9,10 +9,9 @@ class KoImportDeclarationForKoMatchesProviderTest {
     @Test
     fun `import-matches`() {
         // given
-        val sut =
-            getSnippetFile("import-matches")
-                .imports
-                .first()
+        val sut = getSnippetFile("import-matches")
+            .imports
+            .first()
 
         // then
         assertSoftly(sut) {

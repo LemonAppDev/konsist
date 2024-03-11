@@ -10,14 +10,12 @@ class KoOpenModifierProviderListExtTest {
     @Test
     fun `withOpenModifier() returns declaration with open modifier`() {
         // given
-        val declaration1: KoOpenModifierProvider =
-            mockk {
-                every { hasOpenModifier } returns true
-            }
-        val declaration2: KoOpenModifierProvider =
-            mockk {
-                every { hasOpenModifier } returns false
-            }
+        val declaration1: KoOpenModifierProvider = mockk {
+            every { hasOpenModifier } returns true
+        }
+        val declaration2: KoOpenModifierProvider = mockk {
+            every { hasOpenModifier } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -30,14 +28,12 @@ class KoOpenModifierProviderListExtTest {
     @Test
     fun `withoutOpenModifier() returns declaration without open modifier`() {
         // given
-        val declaration1: KoOpenModifierProvider =
-            mockk {
-                every { hasOpenModifier } returns true
-            }
-        val declaration2: KoOpenModifierProvider =
-            mockk {
-                every { hasOpenModifier } returns false
-            }
+        val declaration1: KoOpenModifierProvider = mockk {
+            every { hasOpenModifier } returns true
+        }
+        val declaration2: KoOpenModifierProvider = mockk {
+            every { hasOpenModifier } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when

@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoInlineModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Determines whatever the declaration has `inline` modifier.
+     * Whether the declaration has `inline` modifier.
      */
     val hasInlineModifier: Boolean
 }

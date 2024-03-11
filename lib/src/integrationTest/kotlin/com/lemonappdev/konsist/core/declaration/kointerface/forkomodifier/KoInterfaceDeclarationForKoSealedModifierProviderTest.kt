@@ -8,10 +8,9 @@ class KoInterfaceDeclarationForKoSealedModifierProviderTest {
     @Test
     fun `interface-without-sealed-modifier`() {
         // given
-        val sut =
-            getSnippetFile("interface-without-sealed-modifier")
-                .interfaces()
-                .first()
+        val sut = getSnippetFile("interface-without-sealed-modifier")
+            .interfaces()
+            .first()
 
         // then
         sut.hasSealedModifier shouldBeEqualTo false
@@ -20,10 +19,9 @@ class KoInterfaceDeclarationForKoSealedModifierProviderTest {
     @Test
     fun `interface-with-sealed-modifier`() {
         // given
-        val sut =
-            getSnippetFile("interface-with-sealed-modifier")
-                .interfaces()
-                .first()
+        val sut = getSnippetFile("interface-with-sealed-modifier")
+            .interfaces()
+            .first()
 
         // then
         sut.hasSealedModifier shouldBeEqualTo true

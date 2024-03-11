@@ -9,10 +9,9 @@ class KoKDocDeclarationForKoPathProviderTest {
     @Test
     fun `kdoc-file-path`() {
         // given
-        val sut =
-            getSnippetFile("kdoc-file-path")
-                .classes()
-                .first()
+        val sut = getSnippetFile("kdoc-file-path")
+            .classes()
+            .first()
 
         // then
         assertSoftly(sut.path) {
@@ -24,10 +23,9 @@ class KoKDocDeclarationForKoPathProviderTest {
     @Test
     fun `kdoc-project-file-path`() {
         // given
-        val sut =
-            getSnippetFile("kdoc-project-file-path")
-                .classes()
-                .first()
+        val sut = getSnippetFile("kdoc-project-file-path")
+            .classes()
+            .first()
 
         // then
         sut
@@ -41,10 +39,9 @@ class KoKDocDeclarationForKoPathProviderTest {
     @Test
     fun `kdoc-reside-in-file-path`() {
         // given
-        val sut =
-            getSnippetFile("kdoc-reside-in-file-path")
-                .classes()
-                .first()
+        val sut = getSnippetFile("kdoc-reside-in-file-path")
+            .classes()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -58,10 +55,9 @@ class KoKDocDeclarationForKoPathProviderTest {
     @Test
     fun `kdoc-reside-in-project-file-path`() {
         // given
-        val sut =
-            getSnippetFile("kdoc-reside-in-project-file-path")
-                .classes()
-                .first()
+        val sut = getSnippetFile("kdoc-reside-in-project-file-path")
+            .classes()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -72,5 +68,6 @@ class KoKDocDeclarationForKoPathProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kokdoc/snippet/forkopathprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kokdoc/snippet/forkopathprovider/", fileName)
 }

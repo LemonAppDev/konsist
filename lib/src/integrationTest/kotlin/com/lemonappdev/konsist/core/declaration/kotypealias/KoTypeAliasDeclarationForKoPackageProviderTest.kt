@@ -8,10 +8,9 @@ class KoTypeAliasDeclarationForKoPackageProviderTest {
     @Test
     fun `typealias-is-not-in-package`() {
         // given
-        val sut =
-            getSnippetFile("typealias-is-not-in-package")
-                .typeAliases
-                .first()
+        val sut = getSnippetFile("typealias-is-not-in-package")
+            .typeAliases
+            .first()
 
         // then
         sut.packagee shouldBeEqualTo null
@@ -20,14 +19,14 @@ class KoTypeAliasDeclarationForKoPackageProviderTest {
     @Test
     fun `typealias-is-in-package`() {
         // given
-        val sut =
-            getSnippetFile("typealias-is-in-package")
-                .typeAliases
-                .first()
+        val sut = getSnippetFile("typealias-is-in-package")
+            .typeAliases
+            .first()
 
         // then
         sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kotypealias/snippet/forkopackageprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kotypealias/snippet/forkopackageprovider/", fileName)
 }

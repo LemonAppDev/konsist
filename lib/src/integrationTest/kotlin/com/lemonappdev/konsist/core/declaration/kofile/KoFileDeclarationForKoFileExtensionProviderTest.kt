@@ -9,10 +9,9 @@ class KoFileDeclarationForKoFileExtensionProviderTest {
     @Test
     fun `file-extension`() {
         // given
-        val sut =
-            getSnippetFile("file-extension")
-                .files
-                .first()
+        val sut = getSnippetFile("file-extension")
+            .files
+            .first()
 
         // then
         // The snippet file has '.kttxt' extension, but in name we have '.kt'
@@ -23,10 +22,9 @@ class KoFileDeclarationForKoFileExtensionProviderTest {
     @Test
     fun `file-name-with-extension`() {
         // given
-        val sut =
-            getSnippetFile("file-name-with-extension")
-                .files
-                .first()
+        val sut = getSnippetFile("file-name-with-extension")
+            .files
+            .first()
 
         // then
         // The snippet file has '.kttxt' extension, but in name we have '.kt'
@@ -37,10 +35,9 @@ class KoFileDeclarationForKoFileExtensionProviderTest {
     @Test
     fun `file-has-extension`() {
         // given
-        val sut =
-            getSnippetFile("file-has-extension")
-                .files
-                .first()
+        val sut = getSnippetFile("file-has-extension")
+            .files
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -49,9 +46,8 @@ class KoFileDeclarationForKoFileExtensionProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope(
-            "core/declaration/kofile/snippet/forkofileextensionprovider/",
-            fileName,
-        )
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope(
+        "core/declaration/kofile/snippet/forkofileextensionprovider/",
+        fileName,
+    )
 }

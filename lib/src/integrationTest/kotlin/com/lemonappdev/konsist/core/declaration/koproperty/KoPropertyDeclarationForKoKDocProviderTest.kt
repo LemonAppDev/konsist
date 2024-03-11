@@ -10,10 +10,9 @@ class KoPropertyDeclarationForKoKDocProviderTest {
     @Test
     fun `property-without-kdoc`() {
         // given
-        val sut =
-            getSnippetFile("property-without-kdoc")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-without-kdoc")
+            .properties()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -25,10 +24,9 @@ class KoPropertyDeclarationForKoKDocProviderTest {
     @Test
     fun `property-with-kdoc`() {
         // given
-        val sut =
-            getSnippetFile("property-with-kdoc")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-with-kdoc")
+            .properties()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -40,10 +38,9 @@ class KoPropertyDeclarationForKoKDocProviderTest {
     @Test
     fun `property-with-one-line-kdoc`() {
         // given
-        val sut =
-            getSnippetFile("property-with-one-line-kdoc")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-with-one-line-kdoc")
+            .properties()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -52,5 +49,6 @@ class KoPropertyDeclarationForKoKDocProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koproperty/snippet/forkokdocprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koproperty/snippet/forkokdocprovider/", fileName)
 }

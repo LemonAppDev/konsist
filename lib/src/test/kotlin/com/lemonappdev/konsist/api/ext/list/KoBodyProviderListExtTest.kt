@@ -10,14 +10,12 @@ class KoBodyProviderListExtTest {
     @Test
     fun `withExpressionBody() returns declaration with expression body`() {
         // given
-        val declaration1: KoBodyProvider =
-            mockk {
-                every { hasExpressionBody } returns true
-            }
-        val declaration2: KoBodyProvider =
-            mockk {
-                every { hasExpressionBody } returns false
-            }
+        val declaration1: KoBodyProvider = mockk {
+            every { hasExpressionBody } returns true
+        }
+        val declaration2: KoBodyProvider = mockk {
+            every { hasExpressionBody } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -30,14 +28,12 @@ class KoBodyProviderListExtTest {
     @Test
     fun `withoutExpressionBody() returns declaration without expression body`() {
         // given
-        val declaration1: KoBodyProvider =
-            mockk {
-                every { hasExpressionBody } returns true
-            }
-        val declaration2: KoBodyProvider =
-            mockk {
-                every { hasExpressionBody } returns false
-            }
+        val declaration1: KoBodyProvider = mockk {
+            every { hasExpressionBody } returns true
+        }
+        val declaration2: KoBodyProvider = mockk {
+            every { hasExpressionBody } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -50,14 +46,12 @@ class KoBodyProviderListExtTest {
     @Test
     fun `withBlockBody() returns declaration with block body`() {
         // given
-        val declaration1: KoBodyProvider =
-            mockk {
-                every { hasBlockBody } returns true
-            }
-        val declaration2: KoBodyProvider =
-            mockk {
-                every { hasBlockBody } returns false
-            }
+        val declaration1: KoBodyProvider = mockk {
+            every { hasBlockBody } returns true
+        }
+        val declaration2: KoBodyProvider = mockk {
+            every { hasBlockBody } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -70,14 +64,12 @@ class KoBodyProviderListExtTest {
     @Test
     fun `withoutBlockBody() returns declaration without block body`() {
         // given
-        val declaration1: KoBodyProvider =
-            mockk {
-                every { hasBlockBody } returns true
-            }
-        val declaration2: KoBodyProvider =
-            mockk {
-                every { hasBlockBody } returns false
-            }
+        val declaration1: KoBodyProvider = mockk {
+            every { hasBlockBody } returns true
+        }
+        val declaration2: KoBodyProvider = mockk {
+            every { hasBlockBody } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when

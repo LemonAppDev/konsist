@@ -8,10 +8,9 @@ class KoPropertyDeclarationForKoConstModifierProviderTest {
     @Test
     fun `property-has-no-const-modifier`() {
         // given
-        val sut =
-            getSnippetFile("property-has-no-const-modifier")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-has-no-const-modifier")
+            .properties()
+            .first()
 
         // then
         sut.hasConstModifier shouldBeEqualTo false
@@ -20,10 +19,9 @@ class KoPropertyDeclarationForKoConstModifierProviderTest {
     @Test
     fun `property-has-const-modifier`() {
         // given
-        val sut =
-            getSnippetFile("property-has-const-modifier")
-                .properties(includeNested = true)
-                .first()
+        val sut = getSnippetFile("property-has-const-modifier")
+            .properties(includeNested = true)
+            .first()
 
         // then
         sut.hasConstModifier shouldBeEqualTo true

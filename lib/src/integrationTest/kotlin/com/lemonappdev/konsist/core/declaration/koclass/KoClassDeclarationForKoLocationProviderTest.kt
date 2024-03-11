@@ -9,10 +9,9 @@ class KoClassDeclarationForKoLocationProviderTest {
     @Test
     fun `class-location-with-single-digit`() {
         // given
-        val sut =
-            getSnippetFile("class-location-with-single-digit")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-location-with-single-digit")
+            .classes()
+            .first()
 
         // then
         sut.location shouldBeEqualTo "${sut.path}:3:1"
@@ -21,10 +20,9 @@ class KoClassDeclarationForKoLocationProviderTest {
     @Test
     fun `class-location-with-double-digit`() {
         // given
-        val sut =
-            getSnippetFile("class-location-with-double-digit")
-                .classes(includeNested = true)
-                .first()
+        val sut = getSnippetFile("class-location-with-double-digit")
+            .classes(includeNested = true)
+            .first()
 
         // then
         sut.location shouldBeEqualTo "${sut.path}:10:37"
@@ -33,16 +31,14 @@ class KoClassDeclarationForKoLocationProviderTest {
     @Test
     fun `class-location-with-text`() {
         // given
-        val projectPath =
-            getSnippetFile("class-location-with-text")
-                .classes()
-                .first()
-                .projectPath
+        val projectPath = getSnippetFile("class-location-with-text")
+            .classes()
+            .first()
+            .projectPath
 
-        val sut =
-            getSnippetFile("class-location-with-text")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-location-with-text")
+            .classes()
+            .first()
 
         // then
         val declaration = "Declaration:\nclass SampleClass {\n}"
@@ -53,5 +49,6 @@ class KoClassDeclarationForKoLocationProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koclass/snippet/forkolocationprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koclass/snippet/forkolocationprovider/", fileName)
 }

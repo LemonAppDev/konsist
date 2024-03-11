@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  */
 interface KoExpectModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
-     * Determines whatever declaration has `expect` modifier.
+     * Whatever declaration has `expect` modifier.
      */
     val hasExpectModifier: Boolean
 }

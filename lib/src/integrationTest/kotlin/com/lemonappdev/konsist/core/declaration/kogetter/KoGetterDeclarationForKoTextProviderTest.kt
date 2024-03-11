@@ -8,11 +8,10 @@ class KoGetterDeclarationForKoTextProviderTest {
     @Test
     fun `getter-text`() {
         // given
-        val sut =
-            getSnippetFile("getter-text")
-                .properties()
-                .first()
-                .getter
+        val sut = getSnippetFile("getter-text")
+            .properties()
+            .first()
+            .getter
 
         // then
         sut
@@ -20,5 +19,6 @@ class KoGetterDeclarationForKoTextProviderTest {
             .shouldBeEqualTo("get() = \"some text\"")
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kogetter/snippet/forkotextprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kogetter/snippet/forkotextprovider/", fileName)
 }

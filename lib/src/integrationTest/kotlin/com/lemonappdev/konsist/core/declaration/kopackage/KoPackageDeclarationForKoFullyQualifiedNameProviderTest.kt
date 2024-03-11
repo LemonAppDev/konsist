@@ -8,9 +8,8 @@ class KoPackageDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `package-has-qualified-name`() {
         // given
-        val sut =
-            getSnippetFile("package-has-qualified-name")
-                .packages
+        val sut = getSnippetFile("package-has-qualified-name")
+            .packages
 
         // then
         sut

@@ -10,10 +10,9 @@ class KoClassDeclarationForKoSecondaryConstructorsProviderTest {
     @Test
     fun `class-has-no-secondary-constructor`() {
         // given
-        val sut =
-            getSnippetFile("class-has-no-secondary-constructor")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-has-no-secondary-constructor")
+            .classes()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -30,10 +29,9 @@ class KoClassDeclarationForKoSecondaryConstructorsProviderTest {
     @Test
     fun `class-has-one-secondary-constructor`() {
         // given
-        val sut =
-            getSnippetFile("class-has-one-secondary-constructor")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-has-one-secondary-constructor")
+            .classes()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -53,10 +51,9 @@ class KoClassDeclarationForKoSecondaryConstructorsProviderTest {
     @Test
     fun `class-has-two-secondary-constructors`() {
         // given
-        val sut =
-            getSnippetFile("class-has-two-secondary-constructors")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-has-two-secondary-constructors")
+            .classes()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -75,10 +72,9 @@ class KoClassDeclarationForKoSecondaryConstructorsProviderTest {
     @Test
     fun `class-has-primary-and-secondary-constructor`() {
         // given
-        val sut =
-            getSnippetFile("class-has-primary-and-secondary-constructor")
-                .classes()
-                .first()
+        val sut = getSnippetFile("class-has-primary-and-secondary-constructor")
+            .classes()
+            .first()
 
         // then
         assertSoftly(sut) {

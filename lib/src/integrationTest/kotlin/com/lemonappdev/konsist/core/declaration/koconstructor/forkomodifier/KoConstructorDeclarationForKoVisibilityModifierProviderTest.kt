@@ -9,12 +9,11 @@ class KoConstructorDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `constructor-has-no-visibility-modifiers`() {
         // given
-        val sut =
-            getSnippetFile("constructor-has-no-visibility-modifiers")
-                .classes()
-                .first()
-                .constructors
-                .first()
+        val sut = getSnippetFile("constructor-has-no-visibility-modifiers")
+            .classes()
+            .first()
+            .constructors
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -29,12 +28,11 @@ class KoConstructorDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `constructor-has-public-modifier`() {
         // given
-        val sut =
-            getSnippetFile("constructor-has-public-modifier")
-                .classes()
-                .first()
-                .constructors
-                .first()
+        val sut = getSnippetFile("constructor-has-public-modifier")
+            .classes()
+            .first()
+            .constructors
+            .first()
 
         // then
         sut.hasPublicModifier shouldBeEqualTo true
@@ -43,12 +41,11 @@ class KoConstructorDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `constructor-is-public-by-default`() {
         // given
-        val sut =
-            getSnippetFile("constructor-is-public-by-default")
-                .classes()
-                .first()
-                .constructors
-                .first()
+        val sut = getSnippetFile("constructor-is-public-by-default")
+            .classes()
+            .first()
+            .constructors
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -60,12 +57,11 @@ class KoConstructorDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `constructor-has-private-modifier`() {
         // given
-        val sut =
-            getSnippetFile("constructor-has-private-modifier")
-                .classes()
-                .first()
-                .constructors
-                .first()
+        val sut = getSnippetFile("constructor-has-private-modifier")
+            .classes()
+            .first()
+            .constructors
+            .first()
 
         // then
         sut.hasPrivateModifier shouldBeEqualTo true
@@ -74,12 +70,11 @@ class KoConstructorDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `constructor-has-protected-modifier`() {
         // given
-        val sut =
-            getSnippetFile("constructor-has-protected-modifier")
-                .classes()
-                .first()
-                .constructors
-                .first()
+        val sut = getSnippetFile("constructor-has-protected-modifier")
+            .classes()
+            .first()
+            .constructors
+            .first()
 
         // then
         sut.hasProtectedModifier shouldBeEqualTo true
@@ -88,12 +83,11 @@ class KoConstructorDeclarationForKoVisibilityModifierProviderTest {
     @Test
     fun `constructor-has-internal-modifier`() {
         // given
-        val sut =
-            getSnippetFile("constructor-has-internal-modifier")
-                .classes()
-                .first()
-                .constructors
-                .first()
+        val sut = getSnippetFile("constructor-has-internal-modifier")
+            .classes()
+            .first()
+            .constructors
+            .first()
 
         // then
         sut.hasInternalModifier shouldBeEqualTo true

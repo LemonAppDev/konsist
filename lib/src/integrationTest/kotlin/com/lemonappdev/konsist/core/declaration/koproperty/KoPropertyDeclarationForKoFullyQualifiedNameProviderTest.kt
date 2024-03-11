@@ -8,10 +8,9 @@ class KoPropertyDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `property-fully-qualified-name`() {
         // given
-        val sut =
-            getSnippetFile("property-fully-qualified-name")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-fully-qualified-name")
+            .properties()
+            .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.sampleProperty"
@@ -20,10 +19,9 @@ class KoPropertyDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `property-fully-qualified-name-without-package`() {
         // given
-        val sut =
-            getSnippetFile("property-fully-qualified-name-without-package")
-                .properties()
-                .first()
+        val sut = getSnippetFile("property-fully-qualified-name-without-package")
+            .properties()
+            .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "sampleProperty"
@@ -32,10 +30,9 @@ class KoPropertyDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `nested-property-fully-qualified-name`() {
         // given
-        val sut =
-            getSnippetFile("nested-property-fully-qualified-name")
-                .properties()
-                .first()
+        val sut = getSnippetFile("nested-property-fully-qualified-name")
+            .properties()
+            .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleClass.sampleProperty"
@@ -44,10 +41,9 @@ class KoPropertyDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `nested-property-fully-qualified-name-without-package`() {
         // given
-        val sut =
-            getSnippetFile("nested-property-fully-qualified-name-without-package")
-                .properties()
-                .first()
+        val sut = getSnippetFile("nested-property-fully-qualified-name-without-package")
+            .properties()
+            .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "SampleClass.sampleProperty"

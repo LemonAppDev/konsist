@@ -2,11 +2,7 @@ name: Check Snippet kttxt Snippets
 
 on:
   pull_request:
-    types: [ opened, synchronize ]
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+      types: [ opened, synchronize ]
 
 jobs:
   get-github-context:
@@ -26,11 +22,11 @@ jobs:
 
       - name: Get Changed Files
         id: changed-files
-        uses: tj-actions/changed-files@v42.1.0
+        uses: tj-actions/changed-files@v39.2.1
 
       - name: Echo List Changed Files
         run: |
-          echo Changed files:
+          echo Changed files: 
           echo ${{ steps.changed-files.outputs.all_changed_files }} | tr ' ' '\n'
 
       - name: Echo Run Condition (any true to run)
@@ -46,34 +42,21 @@ jobs:
 
   check-kttxt-snippets:
     name: Check kttxt Snippets
-    needs: get-github-context
     runs-on: ubuntu-latest
+    needs: get-github-context
     if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, '.kttxt')
     steps:
-      - name: Echo Run Condition (any true to run)
-        run: |
-          echo Current branch starts with "release/": ${{ startsWith(steps.branch-name.outputs.current_branch, 'release/') }}
-          echo Base ref branch is "main": ${{ steps.branch-name.outputs.base_ref_branch == 'main' }}
-          echo Changed .kttxt files: ${{  contains(steps.changed-files.outputs.all_changed_files, '.kttxt') }}
-
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
-          java-version: 21
-          distribution: 'corretto'
+          java-version: 19
+          distribution: 'zulu'
 
-      - name: Filter Changed .kttxt Files
-        run: |
-          kttxt_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttxt$')
-          echo "$kttxt_files"
-          echo "CHANGED_FILES_NAMES=$(echo "$kttxt_files" | tr '\n' ' ')" >> $GITHUB_ENV
-
-      - name: Run Python Script With Changed .kttxt Files
-        run: |
-          python3 scripts/check_kttxt_snippets.py ${{ env.CHANGED_FILES_NAMES }}
+      - name: Check kttxt Snippets
+        run: python3 scripts/check_kttxt_snippets.py

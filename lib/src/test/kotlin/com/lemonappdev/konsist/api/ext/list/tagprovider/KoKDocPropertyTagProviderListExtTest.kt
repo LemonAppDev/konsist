@@ -14,18 +14,15 @@ class KoKDocPropertyTagProviderListExtTest {
         val tag1: KoValuedKDocTagDeclaration = mockk()
         val tag2: KoValuedKDocTagDeclaration = mockk()
         val tag3: KoValuedKDocTagDeclaration = mockk()
-        val declaration1: KoKDocPropertyTagProvider =
-            mockk {
-                every { propertyTags } returns listOf(tag1, tag2)
-            }
-        val declaration2: KoKDocPropertyTagProvider =
-            mockk {
-                every { propertyTags } returns listOf(tag3)
-            }
-        val declaration3: KoKDocPropertyTagProvider =
-            mockk {
-                every { propertyTags } returns emptyList()
-            }
+        val declaration1: KoKDocPropertyTagProvider = mockk {
+            every { propertyTags } returns listOf(tag1, tag2)
+        }
+        val declaration2: KoKDocPropertyTagProvider = mockk {
+            every { propertyTags } returns listOf(tag3)
+        }
+        val declaration3: KoKDocPropertyTagProvider = mockk {
+            every { propertyTags } returns emptyList()
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -38,14 +35,12 @@ class KoKDocPropertyTagProviderListExtTest {
     @Test
     fun `withPropertyTags() returns declaration with any tag`() {
         // given
-        val declaration1: KoKDocPropertyTagProvider =
-            mockk {
-                every { hasPropertyTags } returns true
-            }
-        val declaration2: KoKDocPropertyTagProvider =
-            mockk {
-                every { hasPropertyTags } returns false
-            }
+        val declaration1: KoKDocPropertyTagProvider = mockk {
+            every { hasPropertyTags } returns true
+        }
+        val declaration2: KoKDocPropertyTagProvider = mockk {
+            every { hasPropertyTags } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -58,14 +53,12 @@ class KoKDocPropertyTagProviderListExtTest {
     @Test
     fun `withoutPropertyTags() returns declaration with any tag`() {
         // given
-        val declaration1: KoKDocPropertyTagProvider =
-            mockk {
-                every { hasPropertyTags } returns true
-            }
-        val declaration2: KoKDocPropertyTagProvider =
-            mockk {
-                every { hasPropertyTags } returns false
-            }
+        val declaration1: KoKDocPropertyTagProvider = mockk {
+            every { hasPropertyTags } returns true
+        }
+        val declaration2: KoKDocPropertyTagProvider = mockk {
+            every { hasPropertyTags } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when

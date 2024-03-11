@@ -10,14 +10,12 @@ class KoCrossInlineModifierProviderListExtTest {
     @Test
     fun `withCrossInlineModifier() returns declaration with crossInline modifier`() {
         // given
-        val declaration1: KoCrossInlineModifierProvider =
-            mockk {
-                every { hasCrossInlineModifier } returns true
-            }
-        val declaration2: KoCrossInlineModifierProvider =
-            mockk {
-                every { hasCrossInlineModifier } returns false
-            }
+        val declaration1: KoCrossInlineModifierProvider = mockk {
+            every { hasCrossInlineModifier } returns true
+        }
+        val declaration2: KoCrossInlineModifierProvider = mockk {
+            every { hasCrossInlineModifier } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -30,14 +28,12 @@ class KoCrossInlineModifierProviderListExtTest {
     @Test
     fun `withoutCrossInlineModifier() returns declaration without crossInline modifier`() {
         // given
-        val declaration1: KoCrossInlineModifierProvider =
-            mockk {
-                every { hasCrossInlineModifier } returns true
-            }
-        val declaration2: KoCrossInlineModifierProvider =
-            mockk {
-                every { hasCrossInlineModifier } returns false
-            }
+        val declaration1: KoCrossInlineModifierProvider = mockk {
+            every { hasCrossInlineModifier } returns true
+        }
+        val declaration2: KoCrossInlineModifierProvider = mockk {
+            every { hasCrossInlineModifier } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when

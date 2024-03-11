@@ -12,14 +12,13 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-@Deprecated("Will be removed in v0.16.0")
+@Deprecated("Will be removed in v1.0.0")
 class DeprecatedKoDeclarationAssertOnListTest {
     @Test
     fun `declaration-assert-test-method-name`() {
         // given
-        val sut =
-            getSnippetFile("declaration-assert-test-method-name")
-                .classes()
+        val sut = getSnippetFile("declaration-assert-test-method-name")
+            .classes()
 
         // then
         try {
@@ -33,9 +32,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
     @Test
     fun `file-declaration-assert-test-method-name`() {
         // given
-        val sut =
-            getSnippetFile("file-declaration-assert-test-method-name")
-                .files
+        val sut = getSnippetFile("file-declaration-assert-test-method-name")
+            .files
 
         // then
         try {
@@ -50,9 +48,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
     fun `declaration-assert-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut =
-            getSnippetFile("declaration-assert-error-with-custom-message")
-                .classes()
+        val sut = getSnippetFile("declaration-assert-error-with-custom-message")
+            .classes()
 
         // then
         try {
@@ -70,9 +67,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
     fun `file-declaration-assert-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut =
-            getSnippetFile("file-declaration-assert-error-with-custom-message")
-                .files
+        val sut = getSnippetFile("file-declaration-assert-error-with-custom-message")
+            .files
 
         // then
         try {
@@ -89,9 +85,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
     @Test
     fun `declaration-assert-displaying-correct-failed-declaration-type`() {
         // given
-        val sut =
-            getSnippetFile("declaration-assert-displaying-correct-failed-declaration-type")
-                .classes()
+        val sut = getSnippetFile("declaration-assert-displaying-correct-failed-declaration-type")
+            .classes()
 
         // then
         try {
@@ -105,9 +100,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
     @Test
     fun `file-declaration-assert-displaying-correct-failed-declaration-type`() {
         // given
-        val sut =
-            getSnippetFile("file-declaration-assert-displaying-correct-failed-declaration-type")
-                .files
+        val sut = getSnippetFile("file-declaration-assert-displaying-correct-failed-declaration-type")
+            .files
 
         // then
         try {
@@ -121,9 +115,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
     @Test
     fun `declaration-assert-fails-when-declaration-list-is-empty`() {
         // given
-        val sut =
-            getSnippetFile("declaration-assert-fails-when-declaration-list-is-empty")
-                .classes()
+        val sut = getSnippetFile("declaration-assert-fails-when-declaration-list-is-empty")
+            .classes()
 
         // when
         val func = {
@@ -138,9 +131,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
     @Test
     fun `declaration-assert-not-fails-when-declaration-list-is-empty`() {
         // given
-        val sut =
-            getSnippetFile("declaration-assert-not-fails-when-declaration-list-is-empty")
-                .classes()
+        val sut = getSnippetFile("declaration-assert-not-fails-when-declaration-list-is-empty")
+            .classes()
 
         // when
         val func = {
@@ -155,9 +147,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
     @Test
     fun `assert-passes`() {
         // given
-        val sut =
-            getSnippetFile("assert-passes")
-                .classes()
+        val sut = getSnippetFile("assert-passes")
+            .classes()
 
         // then
         sut.assert { it.name == "SampleClass" }
@@ -166,9 +157,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
     @Test
     fun `assert-fails`() {
         // given
-        val sut =
-            getSnippetFile("assert-fails")
-                .classes()
+        val sut = getSnippetFile("assert-fails")
+            .classes()
 
         // when
         val func = {
@@ -182,9 +172,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
     @Test
     fun `assert-not-passes`() {
         // given
-        val sut =
-            getSnippetFile("assert-not-passes")
-                .classes()
+        val sut = getSnippetFile("assert-not-passes")
+            .classes()
 
         // then
         sut.assertNot {
@@ -195,9 +184,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
     @Test
     fun `assert-not-fails`() {
         // given
-        val sut =
-            getSnippetFile("assert-not-fails")
-                .classes()
+        val sut = getSnippetFile("assert-not-fails")
+            .classes()
 
         // when
         val func = {
@@ -213,9 +201,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
     @Test
     fun `assert-passes-on-declarations-which-items-have-null-parent`() {
         // given
-        val sut =
-            getSnippetFile("assert-passes-on-declarations-which-items-have-null-parent")
-                .files
+        val sut = getSnippetFile("assert-passes-on-declarations-which-items-have-null-parent")
+            .files
 
         // then
         sut.assert { it.name == "assert-passes-on-declarations-which-items-have-null-parent" }
@@ -224,9 +211,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
     @Test
     fun `assert-fails-on-declarations-which-items-have-null-parent`() {
         // given
-        val sut =
-            getSnippetFile("assert-fails-on-declarations-which-items-have-null-parent")
-                .files
+        val sut = getSnippetFile("assert-fails-on-declarations-which-items-have-null-parent")
+            .files
 
         // when
         val func = {
@@ -240,9 +226,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
     @Test
     fun `assert-not-passes-on-declarations-which-items-have-null-parent`() {
         // given
-        val sut =
-            getSnippetFile("assert-not-passes-on-declarations-which-items-have-null-parent")
-                .files
+        val sut = getSnippetFile("assert-not-passes-on-declarations-which-items-have-null-parent")
+            .files
 
         // then
         sut.assertNot {
@@ -253,9 +238,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
     @Test
     fun `assert-not-fails-on-declarations-which-items-have-null-parent`() {
         // given
-        val sut =
-            getSnippetFile("assert-not-fails-on-declarations-which-items-have-null-parent")
-                .files
+        val sut = getSnippetFile("assert-not-fails-on-declarations-which-items-have-null-parent")
+            .files
 
         // when
         val func = {
@@ -271,9 +255,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
     @Test
     fun `assert-passes-when-expression-is-nullable`() {
         // given
-        val sut =
-            getSnippetFile("assert-passes-when-expression-is-nullable")
-                .classes()
+        val sut = getSnippetFile("assert-passes-when-expression-is-nullable")
+            .classes()
 
         // then
         sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
@@ -282,9 +265,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
     @Test
     fun `assert-fails-when-expression-is-nullable`() {
         // given
-        val sut =
-            getSnippetFile("assert-fails-when-expression-is-nullable")
-                .classes()
+        val sut = getSnippetFile("assert-fails-when-expression-is-nullable")
+            .classes()
 
         // when
         val func = {
@@ -298,9 +280,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
     @Test
     fun `assert-not-passes-when-expression-is-nullable`() {
         // given
-        val sut =
-            getSnippetFile("assert-not-passes-when-expression-is-nullable")
-                .classes()
+        val sut = getSnippetFile("assert-not-passes-when-expression-is-nullable")
+            .classes()
 
         // then
         sut.assertNot { it.primaryConstructor?.hasParameterNamed("otherParameter") }
@@ -309,9 +290,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
     @Test
     fun `assert-not-fails-when-expression-is-nullable`() {
         // given
-        val sut =
-            getSnippetFile("assert-not-fails-when-expression-is-nullable")
-                .classes()
+        val sut = getSnippetFile("assert-not-fails-when-expression-is-nullable")
+            .classes()
 
         // when
         val func = {
@@ -533,9 +513,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
         val scope1 = getSnippetFile("assert-suppress-by-konsist-and-name-on-declarations-which-items-have-null-parent")
         val scope2 = getSnippetFile("file-without-suppress")
 
-        val sut =
-            (scope1 + scope2)
-                .files
+        val sut = (scope1 + scope2)
+            .files
 
         // then
         sut.assert { it.name.endsWith("suppress") }
@@ -547,9 +526,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
         val scope1 = getSnippetFile("assert-suppress-by-name-on-declarations-which-items-have-null-parent")
         val scope2 = getSnippetFile("file-without-suppress")
 
-        val sut =
-            (scope1 + scope2)
-                .files
+        val sut = (scope1 + scope2)
+            .files
 
         // then
         sut.assert { it.name.endsWith("suppress") }
@@ -561,9 +539,8 @@ class DeprecatedKoDeclarationAssertOnListTest {
         val scope1 = getSnippetFile("assert-suppress-with-few-parameters-on-declarations-which-items-have-null-parent")
         val scope2 = getSnippetFile("file-without-suppress")
 
-        val sut =
-            (scope1 + scope2)
-                .files
+        val sut = (scope1 + scope2)
+            .files
 
         // then
         sut.assert { it.name.endsWith("suppress") }

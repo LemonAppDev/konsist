@@ -1,6 +1,9 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoTypeProvider
+import com.lemonappdev.konsist.testdata.SampleType1
+import com.lemonappdev.konsist.testdata.SampleType2
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -8,318 +11,158 @@ import org.junit.jupiter.api.Test
 
 class KoTypeProviderListExtTest {
     @Test
-    fun `withClassType() returns types that are classes`() {
+    fun `types returns types from all declarations`() {
         // given
-        val classType: KoTypeProvider = mockk { every { isClass } returns true }
-        val nonClassType: KoTypeProvider = mockk { every { isClass } returns false }
-        val types = listOf(classType, nonClassType)
+        val type1: KoTypeDeclaration = mockk()
+        val type2: KoTypeDeclaration = mockk()
+        val declaration1: KoTypeProvider = mockk {
+            every { type } returns type1
+        }
+        val declaration2: KoTypeProvider = mockk {
+            every { type } returns type2
+        }
+        val declarations = listOf(declaration1, declaration2)
 
         // when
-        val result = types.withClassType()
+        val sut = declarations.types
 
         // then
-        result shouldBeEqualTo listOf(classType)
+        sut shouldBeEqualTo listOf(type1, type2)
     }
 
     @Test
-    fun `withoutClassType() returns types that are not classes`() {
+    fun `withType{} returns declaration which satisfy predicate`() {
         // given
-        val classType: KoTypeProvider = mockk { every { isClass } returns true }
-        val notClassType: KoTypeProvider = mockk { every { isClass } returns false }
-        val types = listOf(classType, notClassType)
+        val name1 = "name1"
+        val name2 = "name2"
+        val type1: KoTypeDeclaration = mockk {
+            every { name } returns name1
+        }
+        val type2: KoTypeDeclaration = mockk {
+            every { name } returns name2
+        }
+        val declaration1: KoTypeProvider = mockk {
+            every { type } returns type1
+        }
+        val declaration2: KoTypeProvider = mockk {
+            every { type } returns type2
+        }
+        val declarations = listOf(declaration1, declaration2)
 
         // when
-        val result = types.withoutClassType()
+        val sut = declarations.withType { it.name == name1 }
 
         // then
-        result shouldBeEqualTo listOf(notClassType)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withObjectType() returns types that are objects`() {
+    fun `withoutType{} returns declarations which not satisfy predicate`() {
         // given
-        val objectType: KoTypeProvider = mockk { every { isObject } returns true }
-        val nonObjectType: KoTypeProvider = mockk { every { isObject } returns false }
-        val types = listOf(objectType, nonObjectType)
+        val name1 = "name1"
+        val name2 = "name2"
+        val type1: KoTypeDeclaration = mockk {
+            every { name } returns name1
+        }
+        val type2: KoTypeDeclaration = mockk {
+            every { name } returns name2
+        }
+        val declaration1: KoTypeProvider = mockk {
+            every { type } returns type1
+        }
+        val declaration2: KoTypeProvider = mockk {
+            every { type } returns type2
+        }
+        val declarations = listOf(declaration1, declaration2)
 
         // when
-        val result = types.withObjectType()
+        val sut = declarations.withoutType { it.name == name1 }
 
         // then
-        result shouldBeEqualTo listOf(objectType)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withoutObjectType() returns types that are not objects`() {
+    fun `withTypeOf(KClass) returns declaration with given return type`() {
         // given
-        val objectType: KoTypeProvider = mockk { every { isObject } returns true }
-        val notObjectType: KoTypeProvider = mockk { every { isObject } returns false }
-        val types = listOf(objectType, notObjectType)
+        val declaration1: KoTypeProvider = mockk {
+            every { hasTypeOf(SampleType1::class) } returns true
+        }
+        val declaration2: KoTypeProvider = mockk {
+            every { hasTypeOf(SampleType1::class) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
 
         // when
-        val result = types.withoutObjectType()
+        val sut = declarations.withTypeOf(SampleType1::class)
 
         // then
-        result shouldBeEqualTo listOf(notObjectType)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withInterfaceType() returns types that are interfaces`() {
+    fun `withTypeOf(KClass) returns declarations with one of given return types`() {
         // given
-        val interfaceType: KoTypeProvider = mockk { every { isInterface } returns true }
-        val nonInterfaceType: KoTypeProvider = mockk { every { isInterface } returns false }
-        val types = listOf(interfaceType, nonInterfaceType)
+        val declaration1: KoTypeProvider = mockk {
+            every { hasTypeOf(SampleType1::class) } returns true
+            every { hasTypeOf(SampleType2::class) } returns false
+        }
+        val declaration2: KoTypeProvider = mockk {
+            every { hasTypeOf(SampleType1::class) } returns false
+            every { hasTypeOf(SampleType2::class) } returns true
+        }
+        val declaration3: KoTypeProvider = mockk {
+            every { hasTypeOf(SampleType1::class) } returns false
+            every { hasTypeOf(SampleType2::class) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val result = types.withInterfaceType()
+        val sut = declarations.withTypeOf(SampleType1::class, SampleType2::class)
 
         // then
-        result shouldBeEqualTo listOf(interfaceType)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
-    fun `withoutInterfaceType() returns types that are not interfaces`() {
+    fun `withoutTypeOf(KClass) returns declaration without given return type`() {
         // given
-        val interfaceType: KoTypeProvider = mockk { every { isInterface } returns true }
-        val notInterfaceType: KoTypeProvider = mockk { every { isInterface } returns false }
-        val types = listOf(interfaceType, notInterfaceType)
+        val declaration1: KoTypeProvider = mockk {
+            every { hasTypeOf(SampleType1::class) } returns true
+        }
+        val declaration2: KoTypeProvider = mockk {
+            every { hasTypeOf(SampleType1::class) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
 
         // when
-        val result = types.withoutInterfaceType()
+        val sut = declarations.withoutTypeOf(SampleType1::class)
 
         // then
-        result shouldBeEqualTo listOf(notInterfaceType)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withTypeAlias() returns types that are type aliases`() {
+    fun `withoutTypeOf(KClass) returns declaration without any of given return types`() {
         // given
-        val typeAlias: KoTypeProvider = mockk { every { isTypeAlias } returns true }
-        val nonTypeAlias: KoTypeProvider = mockk { every { isTypeAlias } returns false }
-        val types = listOf(typeAlias, nonTypeAlias)
+        val declaration1: KoTypeProvider = mockk {
+            every { hasTypeOf(SampleType1::class) } returns true
+            every { hasTypeOf(SampleType2::class) } returns false
+        }
+        val declaration2: KoTypeProvider = mockk {
+            every { hasTypeOf(SampleType1::class) } returns false
+            every { hasTypeOf(SampleType2::class) } returns true
+        }
+        val declaration3: KoTypeProvider = mockk {
+            every { hasTypeOf(SampleType1::class) } returns false
+            every { hasTypeOf(SampleType2::class) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val result = types.withTypeAlias()
+        val sut = declarations.withoutTypeOf(SampleType1::class, SampleType2::class)
 
         // then
-        result shouldBeEqualTo listOf(typeAlias)
-    }
-
-    @Test
-    fun `withoutTypeAlias() returns types that are not type aliases`() {
-        // given
-        val typeAlias: KoTypeProvider = mockk { every { isTypeAlias } returns true }
-        val notTypeAlias: KoTypeProvider = mockk { every { isTypeAlias } returns false }
-        val types = listOf(typeAlias, notTypeAlias)
-
-        // when
-        val result = types.withoutTypeAlias()
-
-        // then
-        result shouldBeEqualTo listOf(notTypeAlias)
-    }
-
-    @Test
-    fun `withImportAlias() returns types that are import aliases`() {
-        // given
-        val importAlias: KoTypeProvider = mockk { every { isImportAlias } returns true }
-        val nonImportAlias: KoTypeProvider = mockk { every { isImportAlias } returns false }
-        val types = listOf(importAlias, nonImportAlias)
-
-        // when
-        val result = types.withImportAlias()
-
-        // then
-        result shouldBeEqualTo listOf(importAlias)
-    }
-
-    @Test
-    fun `withoutImportAlias() returns types that are not import aliases`() {
-        // given
-        val importAlias: KoTypeProvider = mockk { every { isImportAlias } returns true }
-        val notImportAlias: KoTypeProvider = mockk { every { isImportAlias } returns false }
-        val types = listOf(importAlias, notImportAlias)
-
-        // when
-        val result = types.withoutImportAlias()
-
-        // then
-        result shouldBeEqualTo listOf(notImportAlias)
-    }
-
-    @Test
-    fun `withoutKotlinType() returns type without Kotlin basic type`() {
-        // given
-        val type1: KoTypeProvider =
-            mockk {
-                every { isKotlinType } returns true
-            }
-        val type2: KoTypeProvider =
-            mockk {
-                every { isKotlinType } returns false
-            }
-        val types = listOf(type1, type2)
-
-        // when
-        val sut = types.withoutKotlinType()
-
-        // then
-        sut shouldBeEqualTo listOf(type2)
-    }
-
-    @Test
-    fun `withKotlinType() returns type with Kotlin basic type`() {
-        // given
-        val type1: KoTypeProvider =
-            mockk {
-                every { isKotlinType } returns true
-            }
-        val type2: KoTypeProvider =
-            mockk {
-                every { isKotlinType } returns false
-            }
-        val types = listOf(type1, type2)
-
-        // when
-        val sut = types.withKotlinType()
-
-        // then
-        sut shouldBeEqualTo listOf(type1)
-    }
-
-    @Test
-    fun `withKotlinBasicType() returns type with Kotlin basic type`() {
-        // given
-        val type1: KoTypeProvider =
-            mockk {
-                every { isKotlinBasicType } returns true
-            }
-        val type2: KoTypeProvider =
-            mockk {
-                every { isKotlinBasicType } returns false
-            }
-        val types = listOf(type1, type2)
-
-        // when
-        val sut = types.withKotlinBasicType()
-
-        // then
-        sut shouldBeEqualTo listOf(type1)
-    }
-
-    @Test
-    fun `withoutKotlinBasicType() returns type without Kotlin basic type`() {
-        // given
-        val type1: KoTypeProvider =
-            mockk {
-                every { isKotlinBasicType } returns true
-            }
-        val type2: KoTypeProvider =
-            mockk {
-                every { isKotlinBasicType } returns false
-            }
-        val types = listOf(type1, type2)
-
-        // when
-        val sut = types.withoutKotlinBasicType()
-
-        // then
-        sut shouldBeEqualTo listOf(type2)
-    }
-
-    @Test
-    fun `withKotlinCollectionType() returns type with Kotlin basic type`() {
-        // given
-        val type1: KoTypeProvider =
-            mockk {
-                every { isKotlinCollectionType } returns true
-            }
-        val type2: KoTypeProvider =
-            mockk {
-                every { isKotlinCollectionType } returns false
-            }
-        val types = listOf(type1, type2)
-
-        // when
-        val sut = types.withKotlinCollectionType()
-
-        // then
-        sut shouldBeEqualTo listOf(type1)
-    }
-
-    @Test
-    fun `withoutKotlinCollectionType() returns type without Kotlin basic type`() {
-        // given
-        val type1: KoTypeProvider =
-            mockk {
-                every { isKotlinCollectionType } returns true
-            }
-        val type2: KoTypeProvider =
-            mockk {
-                every { isKotlinCollectionType } returns false
-            }
-        val types = listOf(type1, type2)
-
-        // when
-        val sut = types.withoutKotlinCollectionType()
-
-        // then
-        sut shouldBeEqualTo listOf(type2)
-    }
-
-    @Test
-    fun `withFunctionType() returns types that are functions`() {
-        // given
-        val functionType: KoTypeProvider = mockk { every { isFunctionType } returns true }
-        val nonFunctionType: KoTypeProvider = mockk { every { isFunctionType } returns false }
-        val types = listOf(functionType, nonFunctionType)
-
-        // when
-        val result = types.withFunctionType()
-
-        // then
-        result shouldBeEqualTo listOf(functionType)
-    }
-
-    @Test
-    fun `withoutFunctionType() returns types that are not function types`() {
-        // given
-        val functionType: KoTypeProvider = mockk { every { isFunctionType } returns true }
-        val notFunctionType: KoTypeProvider = mockk { every { isFunctionType } returns false }
-        val types = listOf(functionType, notFunctionType)
-
-        // when
-        val result = types.withoutFunctionType()
-
-        // then
-        result shouldBeEqualTo listOf(notFunctionType)
-    }
-
-    @Test
-    fun `withExternalType() returns types that are external`() {
-        // given
-        val externalType: KoTypeProvider = mockk { every { isExternalType } returns true }
-        val nonExternalType: KoTypeProvider = mockk { every { isExternalType } returns false }
-        val types = listOf(externalType, nonExternalType)
-
-        // when
-        val result = types.withExternalType()
-
-        // then
-        result shouldBeEqualTo listOf(externalType)
-    }
-
-    @Test
-    fun `withoutExternalType() returns types that are not external types`() {
-        // given
-        val externalType: KoTypeProvider = mockk { every { isExternalType } returns true }
-        val notExternalType: KoTypeProvider = mockk { every { isExternalType } returns false }
-        val types = listOf(externalType, notExternalType)
-
-        // when
-        val result = types.withoutExternalType()
-
-        // then
-        result shouldBeEqualTo listOf(notExternalType)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 }

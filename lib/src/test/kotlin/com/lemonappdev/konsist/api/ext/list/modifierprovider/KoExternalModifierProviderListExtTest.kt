@@ -10,14 +10,12 @@ class KoExternalModifierProviderListExtTest {
     @Test
     fun `withExternalModifier() returns declaration with external modifier`() {
         // given
-        val declaration1: KoExternalModifierProvider =
-            mockk {
-                every { hasExternalModifier } returns true
-            }
-        val declaration2: KoExternalModifierProvider =
-            mockk {
-                every { hasExternalModifier } returns false
-            }
+        val declaration1: KoExternalModifierProvider = mockk {
+            every { hasExternalModifier } returns true
+        }
+        val declaration2: KoExternalModifierProvider = mockk {
+            every { hasExternalModifier } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -30,14 +28,12 @@ class KoExternalModifierProviderListExtTest {
     @Test
     fun `withoutExternalModifier() returns declaration without external modifier`() {
         // given
-        val declaration1: KoExternalModifierProvider =
-            mockk {
-                every { hasExternalModifier } returns true
-            }
-        val declaration2: KoExternalModifierProvider =
-            mockk {
-                every { hasExternalModifier } returns false
-            }
+        val declaration1: KoExternalModifierProvider = mockk {
+            every { hasExternalModifier } returns true
+        }
+        val declaration2: KoExternalModifierProvider = mockk {
+            every { hasExternalModifier } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when

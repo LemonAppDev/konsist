@@ -9,10 +9,9 @@ class KoInterfaceDeclarationForKoNameProviderTest {
     @Test
     fun `interface-name`() {
         // given
-        val sut =
-            getSnippetFile("interface-name")
-                .interfaces()
-                .first()
+        val sut = getSnippetFile("interface-name")
+            .interfaces()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -28,5 +27,6 @@ class KoInterfaceDeclarationForKoNameProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kointerface/snippet/forkonameprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kointerface/snippet/forkonameprovider/", fileName)
 }

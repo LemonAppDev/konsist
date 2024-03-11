@@ -17,13 +17,13 @@ interface KoSecondaryConstructorsProvider : KoBaseProvider {
     val numSecondaryConstructors: Int
 
     /**
-     * Determines whatever declaration has secondary constructors.
+     * Whatever declaration has secondary constructors.
      */
-    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasSecondaryConstructors()"))
+    @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasSecondaryConstructors()"))
     val hasSecondaryConstructors: Boolean
 
     /**
-     * Returns the number of secondary constructors that satisfies the specified predicate present in the declaration.
+     * Gets the number of secondary constructors that satisfies the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if a secondary constructor satisfies a condition.
      * @return The number of secondary constructors in the declaration.
@@ -31,7 +31,7 @@ interface KoSecondaryConstructorsProvider : KoBaseProvider {
     fun countSecondaryConstructors(predicate: (KoSecondaryConstructorDeclaration) -> Boolean): Int
 
     /**
-     * Determines whatever declaration has secondary constructors.
+     * Whatever declaration has secondary constructors.
      *
      * @return `true` if the declaration has secondary constructor, `false` otherwise.
      */
@@ -49,7 +49,8 @@ interface KoSecondaryConstructorsProvider : KoBaseProvider {
      * Determines whether the declaration has all secondary constructors that satisfy the provided predicate.
      *
      * Note that if the secondary constructors contains no elements, the function returns `true` because there are no
-     * elements in it that do not match the predicate.
+     * elements in it that do not match the predicate. See a more detailed explanation of this logic concept in
+     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
      *
      * @param predicate A function that defines the condition to be met by secondary constructor declarations.
      * @return `true` if all secondary constructor declarations satisfy the predicate, `false` otherwise.

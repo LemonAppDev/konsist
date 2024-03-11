@@ -10,14 +10,12 @@ class KoKDocConstructorTagProviderListExtTest {
     @Test
     fun `withConstructorTag() returns declaration with any tag`() {
         // given
-        val declaration1: KoKDocConstructorTagProvider =
-            mockk {
-                every { hasConstructorTag } returns true
-            }
-        val declaration2: KoKDocConstructorTagProvider =
-            mockk {
-                every { hasConstructorTag } returns false
-            }
+        val declaration1: KoKDocConstructorTagProvider = mockk {
+            every { hasConstructorTag } returns true
+        }
+        val declaration2: KoKDocConstructorTagProvider = mockk {
+            every { hasConstructorTag } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -30,14 +28,12 @@ class KoKDocConstructorTagProviderListExtTest {
     @Test
     fun `withoutConstructorTag() returns declaration with any tag`() {
         // given
-        val declaration1: KoKDocConstructorTagProvider =
-            mockk {
-                every { hasConstructorTag } returns true
-            }
-        val declaration2: KoKDocConstructorTagProvider =
-            mockk {
-                every { hasConstructorTag } returns false
-            }
+        val declaration1: KoKDocConstructorTagProvider = mockk {
+            every { hasConstructorTag } returns true
+        }
+        val declaration2: KoKDocConstructorTagProvider = mockk {
+            every { hasConstructorTag } returns false
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when

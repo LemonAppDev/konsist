@@ -1,3 +1,0 @@
-import com.lemonappdev.konsist.externalsample.SampleExternalGenericClassWithParameter
-
-class SampleClass() : SampleExternalGenericClassWithParameter<Int>("param")

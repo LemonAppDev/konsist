@@ -9,12 +9,11 @@ class KoEnumConstantDeclarationForKoLocationProviderTest {
     @Test
     fun `enum-const-location-with-single-digit`() {
         // given
-        val sut =
-            getSnippetFile("enum-const-location-with-single-digit")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
+        val sut = getSnippetFile("enum-const-location-with-single-digit")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
 
         // then
         sut.location shouldBeEqualTo "${sut.path}:2:5"
@@ -23,20 +22,18 @@ class KoEnumConstantDeclarationForKoLocationProviderTest {
     @Test
     fun `enum-const-location-with-text`() {
         // given
-        val projectPath =
-            getSnippetFile("enum-const-location-with-text")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
-                .projectPath
+        val projectPath = getSnippetFile("enum-const-location-with-text")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
+            .projectPath
 
-        val sut =
-            getSnippetFile("enum-const-location-with-text")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
+        val sut = getSnippetFile("enum-const-location-with-text")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
 
         // then
         val declaration = "Declaration:\nSAMPLE_CONSTANT_1"

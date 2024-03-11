@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.ext.list.declarations
 import com.lemonappdev.konsist.api.ext.list.returnTypes
 import com.lemonappdev.konsist.api.ext.list.types
 import com.lemonappdev.konsist.api.ext.list.withoutName
@@ -41,7 +40,7 @@ class DeclarationKonsistTest {
         declarationPackageScope
             .properties()
             .types
-            .declarations
+            .assertFalse { it.sourceType.endsWith("Impl") }
     }
 
     @Test
@@ -63,20 +62,7 @@ class DeclarationKonsistTest {
         declarationPackageScope
             .classes()
             .assertTrue {
-                it.hasFunction { function -> function.hasOverrideModifier && function.name == "toString" }
-            }
-    }
-
-    @Test
-    fun `every core declaration implements KoBaseProviderCore and its api equivalent(`() {
-        val classes = declarationPackageScope.classes()
-        val interfaces = declarationPackageScope.interfaces()
-
-        (classes + interfaces)
-            .assertTrue {
-                val name = it.name.removeSuffix("Core")
-
-                it.hasParentsWithAllNames("KoBaseProviderCore", name, indirectParents = true)
+                it.containsFunction { function -> function.name == "toString" }
             }
     }
 }

@@ -15,11 +15,10 @@ class KoKDocDeclarationForKoKDocSampleTagProviderTest {
     @Test
     fun `kdoc-without-sample-tag`() {
         // given
-        val sut =
-            getSnippetFile("kdoc-without-sample-tag")
-                .classes()
-                .first()
-                .kDoc
+        val sut = getSnippetFile("kdoc-without-sample-tag")
+            .classes()
+            .first()
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -36,14 +35,13 @@ class KoKDocDeclarationForKoKDocSampleTagProviderTest {
         declarationName: String,
     ) {
         // given
-        val sut =
-            (
-                getSnippetFile(fileName)
-                    .declarations(includeNested = true)
-                    .filterIsInstance<KoNameProvider>()
-                    .first { it.name == declarationName } as KoKDocProvider
+        val sut = (
+            getSnippetFile(fileName)
+                .declarations(includeNested = true)
+                .filterIsInstance<KoNameProvider>()
+                .first { it.name == declarationName } as KoKDocProvider
             )
-                .kDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -64,10 +62,9 @@ class KoKDocDeclarationForKoKDocSampleTagProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() =
-            listOf(
-                arguments("class-with-sample-tag", "SampleClass"),
-                arguments("function-with-sample-tag", "sampleMethod"),
-            )
+        fun provideValues() = listOf(
+            arguments("class-with-sample-tag", "SampleClass"),
+            arguments("function-with-sample-tag", "sampleMethod"),
+        )
     }
 }

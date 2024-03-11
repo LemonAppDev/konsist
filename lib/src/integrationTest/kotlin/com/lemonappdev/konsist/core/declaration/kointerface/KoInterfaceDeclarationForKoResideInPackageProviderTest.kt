@@ -8,10 +8,9 @@ class KoInterfaceDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `interface-not-reside-in-file-package`() {
         // given
-        val sut =
-            getSnippetFile("interface-not-reside-in-file-package")
-                .interfaces()
-                .first()
+        val sut = getSnippetFile("interface-not-reside-in-file-package")
+            .interfaces()
+            .first()
 
         // then
         sut.resideInPackage("com") shouldBeEqualTo false
@@ -20,10 +19,9 @@ class KoInterfaceDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `interface-reside-in-file-package`() {
         // given
-        val sut =
-            getSnippetFile("interface-reside-in-file-package")
-                .interfaces()
-                .first()
+        val sut = getSnippetFile("interface-reside-in-file-package")
+            .interfaces()
+            .first()
 
         // then
         sut.resideInPackage("com..") shouldBeEqualTo true
@@ -32,10 +30,9 @@ class KoInterfaceDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `interface-not-reside-outside-file-package`() {
         // given
-        val sut =
-            getSnippetFile("interface-not-reside-outside-file-package")
-                .interfaces()
-                .first()
+        val sut = getSnippetFile("interface-not-reside-outside-file-package")
+            .interfaces()
+            .first()
 
         // then
         sut.resideOutsidePackage("com..") shouldBeEqualTo false
@@ -44,10 +41,9 @@ class KoInterfaceDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `interface-reside-outside-file-package`() {
         // given
-        val sut =
-            getSnippetFile("interface-reside-outside-file-package")
-                .interfaces()
-                .first()
+        val sut = getSnippetFile("interface-reside-outside-file-package")
+            .interfaces()
+            .first()
 
         // then
         sut.resideOutsidePackage("com") shouldBeEqualTo true

@@ -1,10 +1,8 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoReturnProvider
-import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
-import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
-import com.lemonappdev.konsist.core.util.TypeUtil.hasTypeOf
+import com.lemonappdev.konsist.core.util.ReceiverUtil
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
@@ -17,48 +15,30 @@ internal interface KoReturnProviderCore :
     KoBaseProviderCore {
     val ktFunction: KtFunction
 
-    private fun getTypeReferences(): List<KtTypeReference> =
-        ktFunction
-            .children
-            .filterIsInstance<KtTypeReference>()
+    private fun getTypeReferences(): List<KtTypeReference> = ktFunction
+        .children
+        .filterIsInstance<KtTypeReference>()
 
     override val returnType: KoTypeDeclaration?
-        get() {
-            val references = getTypeReferences()
-
-            val type =
-                if (ktFunction.isExtensionDeclaration()) {
-                    when {
-                        references.size > 1 -> references.lastOrNull()
-                        else -> null
-                    }
-                } else {
-                    references.firstOrNull()
-                }
-
-            return type?.let {
-                KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration())
-            }
-        }
+        get() = ReceiverUtil.getType(getTypeReferences(), ktFunction.isExtensionDeclaration(), this)
 
     override val hasReturnValue: Boolean
-        get() =
-            if (returnType != null) {
-                returnType?.name != "Unit"
-            } else if (ktFunction.hasBlockBody()) {
-                // Every function with block body and without declared type returns Unit
-                false
-            } else {
+        get() = if (returnType != null) {
+            returnType?.name != "Unit"
+        } else if (ktFunction.hasBlockBody()) {
+            // Every function with block body and without declared type returns Unit
+            false
+        } else {
             /*
             We have no way of distinguishing between:
             1) fun sampleFunction1() = println("some text") // returns Unit
             2) fun sampleFunction2() = SampleClass() // returns SampleClass,
             so we always return true.
              */
-                true
-            }
+            true
+        }
 
-    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasReturnType()"))
+    @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasReturnType()"))
     override val hasReturnType: Boolean
         get() = ktFunction.hasDeclaredReturnType()
 
@@ -68,5 +48,5 @@ internal interface KoReturnProviderCore :
             else -> returnType?.let { predicate(it) } ?: false
         }
 
-    override fun hasReturnTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(returnType, kClass)
+    override fun hasReturnTypeOf(kClass: KClass<*>): Boolean = kClass.simpleName == returnType?.name
 }

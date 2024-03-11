@@ -9,79 +9,25 @@ import kotlin.reflect.KClass
 interface KoParentProvider : KoBaseProvider {
     /**
      * The parents (parent class and parent interfaces) defined directly in the Kotlin file.
+     * Does not include parents defined in other files such as parent of the parent.
      */
-    @Deprecated("Will be removed in v0.16.0.", ReplaceWith("parents()"))
     val parents: List<KoParentDeclaration>
 
     /**
-     * Gets the number of parents.
+     * The number of parents.
      */
-    @Deprecated("Will be removed in v0.16.0.", ReplaceWith("numParents()"))
     val numParents: Int
 
     /**
-     * The parents (parent class and parent interfaces) of the declaration.
+     * Gets the number of parents that satisfies the specified predicate present in the declaration.
      *
-     * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
-     *                        If `true`, it includes only those parents defined within our scope and those used
-     *                        by our declarations.
-     *                        For example:
-     *
-     *                        // Android
-     *                        class AppCompactActivity: Activity
-     *                        interface Activity
-     *
-     *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
-     * @return a list of [KoParentDeclaration] representing the parents of the declaration.
+     * @param predicate The predicate function to determine if an parent satisfies a condition.
+     * @return The number of parents in the declaration.
      */
-    fun parents(indirectParents: Boolean = false): List<KoParentDeclaration>
+    fun countParents(predicate: (KoParentDeclaration) -> Boolean): Int
 
     /**
-     * Returns the number of parents.
-     *
-     * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
-     *                        If `true`, it includes only those parents defined within our scope and those used
-     *                        by our declarations.
-     *                        For example:
-     *
-     *                        // Android
-     *                        class AppCompactActivity: Activity
-     *                        interface Activity
-     *
-     *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
-     * @return The number of parents.
-     */
-    fun numParents(indirectParents: Boolean = false): Int
-
-    /**
-     * Returns the number of parents that satisfies the specified predicate present in the declaration.
-     *
-     * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
-     *                        If `true`, it includes only those parents defined within our scope and those used
-     *                        by our declarations.
-     *                        For example:
-     *
-     *                        // Android
-     *                        class AppCompactActivity: Activity
-     *                        interface Activity
-     *
-     *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
-     * @param predicate The predicate function to determine if a parent satisfies a condition.
-     * @return The number of parents in the declaration satisfying predicate.
-     */
-    fun countParents(
-        indirectParents: Boolean = false,
-        predicate: (KoParentDeclaration) -> Boolean,
-    ): Int
-
-    /**
-     * Determines whatever declaration has parents (parent class and parent interfaces) defined directly in the Kotlin file.
+     * Whatever declaration has parents (parent class and parent interfaces) defined directly in the Kotlin file.
      * Does not include parents defined in other files such as parent of the parent.
      *
      * @param names the names of the parents to check.
@@ -89,180 +35,81 @@ interface KoParentProvider : KoBaseProvider {
      */
     @Deprecated(
         """
-            Will be removed in v0.16.0. 
+            Will be removed in v1.0.0. 
             If you passed one argument - replace with `hasParentWithName`, otherwise with `hasParentsWithAllNames`.
             """,
     )
     fun hasParents(vararg names: String): Boolean
 
     /**
-     * Determines whatever declaration has any parent (parent class and parent interfaces).
+     * Whatever declaration has any parent (parent class and parent interfaces) defined directly in the Kotlin file.
+     * Does not include parents defined in other files such as parent of the parent.
      *
-     * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
-     *                        If `true`, it includes only those parents defined within our scope and those used
-     *                        by our declarations.
-     *                        For example:
-     *
-     *                        // Android
-     *                        class AppCompactActivity: Activity
-     *                        interface Activity
-     *
-     *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
      * @return `true` if the declaration has any parent, `false` otherwise.
      */
-    fun hasParents(indirectParents: Boolean = false): Boolean
+    fun hasParents(): Boolean
 
     /**
-     * Determines whether the declaration has at least one parent (parent class and parent interfaces) whose name
-     * matches any of the specified names.
+     * Determines whether the declaration has at least one parent (parent class and parent interfaces) defined directly
+     * in the Kotlin file whose name matches any of the specified names.
+     * This method does not include parents defined in other files, such as parents of the parent.
      *
      * @param name the name of the parent to check.
      * @param names the names of the parents to check.
-     * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
-     *                        If `true`, it includes only those parents defined within our scope and those used
-     *                        by our declarations.
-     *                        For example:
-     *
-     *                        // Android
-     *                        class AppCompactActivity: Activity
-     *                        interface Activity
-     *
-     *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasParentWithName(
-        name: String,
-        vararg names: String,
-        indirectParents: Boolean = false,
-    ): Boolean
+    fun hasParentWithName(name: String, vararg names: String): Boolean
 
     /**
-     * Determines whether the declaration has parents (parent classes and parent interfaces) with all the specified names.
+     * Determines whether the declaration has parents (parent classes and parent interfaces) defined directly in the Kotlin
+     * file with all the specified names.
+     * This method does not include parents defined in other files, such as parents of the parent.
      *
      * @param name The name of the parent to check.
      * @param names The names of the parents to check.
-     * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
-     *                        If `true`, it includes only those parents defined within our scope and those used
-     *                        by our declarations.
-     *                        For example:
-     *
-     *                        // Android
-     *                        class AppCompactActivity: Activity
-     *                        interface Activity
-     *
-     *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasParentsWithAllNames(
-        name: String,
-        vararg names: String,
-        indirectParents: Boolean = false,
-    ): Boolean
+    fun hasParentsWithAllNames(name: String, vararg names: String): Boolean
 
     /**
-     * Determines whether the declaration has at least one parent (parent class or parent interface) that satisfies the
-     * provided predicate.
+     * Determines whether the declaration has at least one parent (parent class or parent interface) defined directly
+     * in the Kotlin file that satisfies the provided predicate.
+     * This method does not include parents defined in other files, such as parents of the parent.
      *
-     * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
-     *                        If `true`, it includes only those parents defined within our scope and those used
-     *                        by our declarations.
-     *                        For example:
-     *
-     *                        // Android
-     *                        class AppCompactActivity: Activity
-     *                        interface Activity
-     *
-     *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
      * @param predicate A function that defines the condition to be met by a parent declaration.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasParent(
-        indirectParents: Boolean = false,
-        predicate: (KoParentDeclaration) -> Boolean,
-    ): Boolean
+    fun hasParent(predicate: (KoParentDeclaration) -> Boolean): Boolean
 
     /**
-     * Determines whether the declaration has all parents (parent classes and parent interfaces) that satisfy the
-     * provided predicate.
+     * Determines whether the declaration has all parents (parent classes and parent interfaces) defined directly
+     * in the Kotlin file that satisfy the provided predicate.
+     * This method does not include parents defined in other files, such as parents of the parent.
      *
      * Note that if the parents contains no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate.
+     * that do not match the predicate. See a more detailed explanation of this logic concept in
+     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
      *
-     * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
-     *                        If `true`, it includes only those parents defined within our scope and those used
-     *                        by our declarations.
-     *                        For example:
-     *
-     *                        // Android
-     *                        class AppCompactActivity: Activity
-     *                        interface Activity
-     *
-     *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
      * @param predicate A function that defines the condition to be met by parent declarations.
      * @return `true` if all parent declarations satisfy the predicate, `false` otherwise.
      */
-    fun hasAllParents(
-        indirectParents: Boolean = false,
-        predicate: (KoParentDeclaration) -> Boolean,
-    ): Boolean
+    fun hasAllParents(predicate: (KoParentDeclaration) -> Boolean): Boolean
 
     /**
      * Determines whether the declaration has at least one parent of the specified `KClass` type.
      *
      * @param name the `KClass` type of the parent to check.
      * @param names the `KClass` types of the parents to check.
-     * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
-     *                        If `true`, it includes only those parents defined within our scope and those used
-     *                        by our declarations.
-     *                        For example:
-     *
-     *                        // Android
-     *                        class AppCompactActivity: Activity
-     *                        interface Activity
-     *
-     *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasParentOf(
-        name: KClass<*>,
-        vararg names: KClass<*>,
-        indirectParents: Boolean = false,
-    ): Boolean
+    fun hasParentOf(name: KClass<*>, vararg names: KClass<*>): Boolean
 
     /**
      * Determines whether the declaration has parents with all the specified `KClass` type.
      *
      * @param name the `KClass` type of the parent to check.
      * @param names the `KClass` types of the parents to check.
-     * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
-     *                        If `true`, it includes only those parents defined within our scope and those used
-     *                        by our declarations.
-     *                        For example:
-     *
-     *                        // Android
-     *                        class AppCompactActivity: Activity
-     *                        interface Activity
-     *
-     *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
      * @return `true` if the declaration has parents of all the specified `KClass` types, `false` otherwise.
      */
-    fun hasAllParentsOf(
-        name: KClass<*>,
-        vararg names: KClass<*>,
-        indirectParents: Boolean = false,
-    ): Boolean
+    fun hasAllParentsOf(name: KClass<*>, vararg names: KClass<*>): Boolean
 }

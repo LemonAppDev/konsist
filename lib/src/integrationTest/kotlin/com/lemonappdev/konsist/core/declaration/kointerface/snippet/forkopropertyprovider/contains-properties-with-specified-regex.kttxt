@@ -1,5 +1,8 @@
 interface SampleInterface {
     abstract var sampleProperty: String
+    fun sampleFunction() {
+        val sampleLocalProperty = 6
+    }
 
     class SampleClass {
         internal val sampleNestedProperty = ""

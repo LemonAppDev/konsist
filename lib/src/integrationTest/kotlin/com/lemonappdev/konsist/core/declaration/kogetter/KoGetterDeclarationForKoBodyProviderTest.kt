@@ -9,11 +9,10 @@ class KoGetterDeclarationForKoBodyProviderTest {
     @Test
     fun `getter-has-no-body`() {
         // given
-        val sut =
-            getSnippetFile("getter-has-no-body")
-                .properties()
-                .first()
-                .getter
+        val sut = getSnippetFile("getter-has-no-body")
+            .properties()
+            .first()
+            .getter
 
         // then
         assertSoftly(sut) {
@@ -25,11 +24,10 @@ class KoGetterDeclarationForKoBodyProviderTest {
     @Test
     fun `getter-has-expression-body`() {
         // given
-        val sut =
-            getSnippetFile("getter-has-expression-body")
-                .properties()
-                .first()
-                .getter
+        val sut = getSnippetFile("getter-has-expression-body")
+            .properties()
+            .first()
+            .getter
 
         // then
         assertSoftly(sut) {
@@ -41,11 +39,10 @@ class KoGetterDeclarationForKoBodyProviderTest {
     @Test
     fun `getter-has-block-body`() {
         // given
-        val sut =
-            getSnippetFile("getter-has-block-body")
-                .properties()
-                .first()
-                .getter
+        val sut = getSnippetFile("getter-has-block-body")
+            .properties()
+            .first()
+            .getter
 
         // then
         assertSoftly(sut) {
@@ -54,5 +51,6 @@ class KoGetterDeclarationForKoBodyProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kogetter/snippet/forkobodyprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kogetter/snippet/forkobodyprovider/", fileName)
 }

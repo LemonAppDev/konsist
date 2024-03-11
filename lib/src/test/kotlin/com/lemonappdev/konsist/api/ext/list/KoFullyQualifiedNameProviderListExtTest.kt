@@ -6,19 +6,18 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoFullyQualifiedNameProviderListExtTest {
+
     @Test
     fun `withFullyQualifiedName() returns declaration with given fullyQualifiedName`() {
         // given
         val fullyQualifiedName1 = "fullyQualifiedName1"
         val fullyQualifiedName2 = "fullyQualifiedName2"
-        val declaration1: KoFullyQualifiedNameProvider =
-            mockk {
-                every { fullyQualifiedName } returns fullyQualifiedName1
-            }
-        val declaration2: KoFullyQualifiedNameProvider =
-            mockk {
-                every { fullyQualifiedName } returns fullyQualifiedName2
-            }
+        val declaration1: KoFullyQualifiedNameProvider = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName1
+        }
+        val declaration2: KoFullyQualifiedNameProvider = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName2
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -34,18 +33,15 @@ class KoFullyQualifiedNameProviderListExtTest {
         val fullyQualifiedName1 = "fullyQualifiedName1"
         val fullyQualifiedName2 = "fullyQualifiedName2"
         val fullyQualifiedName3 = "fullyQualifiedName3"
-        val declaration1: KoFullyQualifiedNameProvider =
-            mockk {
-                every { fullyQualifiedName } returns fullyQualifiedName1
-            }
-        val declaration2: KoFullyQualifiedNameProvider =
-            mockk {
-                every { fullyQualifiedName } returns fullyQualifiedName2
-            }
-        val declaration3: KoFullyQualifiedNameProvider =
-            mockk {
-                every { fullyQualifiedName } returns fullyQualifiedName3
-            }
+        val declaration1: KoFullyQualifiedNameProvider = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName1
+        }
+        val declaration2: KoFullyQualifiedNameProvider = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName2
+        }
+        val declaration3: KoFullyQualifiedNameProvider = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName3
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -60,14 +56,12 @@ class KoFullyQualifiedNameProviderListExtTest {
         // given
         val fullyQualifiedName1 = "fullyQualifiedName1"
         val fullyQualifiedName2 = "fullyQualifiedName2"
-        val declaration1: KoFullyQualifiedNameProvider =
-            mockk {
-                every { fullyQualifiedName } returns fullyQualifiedName1
-            }
-        val declaration2: KoFullyQualifiedNameProvider =
-            mockk {
-                every { fullyQualifiedName } returns fullyQualifiedName2
-            }
+        val declaration1: KoFullyQualifiedNameProvider = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName1
+        }
+        val declaration2: KoFullyQualifiedNameProvider = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName2
+        }
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -83,18 +77,15 @@ class KoFullyQualifiedNameProviderListExtTest {
         val fullyQualifiedName1 = "fullyQualifiedName1"
         val fullyQualifiedName2 = "fullyQualifiedName2"
         val fullyQualifiedName3 = "fullyQualifiedName3"
-        val declaration1: KoFullyQualifiedNameProvider =
-            mockk {
-                every { fullyQualifiedName } returns fullyQualifiedName1
-            }
-        val declaration2: KoFullyQualifiedNameProvider =
-            mockk {
-                every { fullyQualifiedName } returns fullyQualifiedName2
-            }
-        val declaration3: KoFullyQualifiedNameProvider =
-            mockk {
-                every { fullyQualifiedName } returns fullyQualifiedName3
-            }
+        val declaration1: KoFullyQualifiedNameProvider = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName1
+        }
+        val declaration2: KoFullyQualifiedNameProvider = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName2
+        }
+        val declaration3: KoFullyQualifiedNameProvider = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName3
+        }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when

@@ -9,12 +9,11 @@ class KoConstructorDeclarationForKoPathProviderTest {
     @Test
     fun `constructor-file-path`() {
         // given
-        val sut =
-            getSnippetFile("constructor-file-path")
-                .classes()
-                .first()
-                .constructors
-                .first()
+        val sut = getSnippetFile("constructor-file-path")
+            .classes()
+            .first()
+            .constructors
+            .first()
 
         // then
         assertSoftly(sut.path) {
@@ -26,12 +25,11 @@ class KoConstructorDeclarationForKoPathProviderTest {
     @Test
     fun `constructor-project-file-path`() {
         // given
-        val sut =
-            getSnippetFile("constructor-project-file-path")
-                .classes()
-                .first()
-                .constructors
-                .first()
+        val sut = getSnippetFile("constructor-project-file-path")
+            .classes()
+            .first()
+            .constructors
+            .first()
 
         // then
         sut
@@ -45,12 +43,11 @@ class KoConstructorDeclarationForKoPathProviderTest {
     @Test
     fun `constructor-reside-in-file-path`() {
         // given
-        val sut =
-            getSnippetFile("constructor-reside-in-file-path")
-                .classes()
-                .first()
-                .constructors
-                .first()
+        val sut = getSnippetFile("constructor-reside-in-file-path")
+            .classes()
+            .first()
+            .constructors
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -64,12 +61,11 @@ class KoConstructorDeclarationForKoPathProviderTest {
     @Test
     fun `constructor-reside-in-project-file-path`() {
         // given
-        val sut =
-            getSnippetFile("constructor-reside-in-project-file-path")
-                .classes()
-                .first()
-                .constructors
-                .first()
+        val sut = getSnippetFile("constructor-reside-in-project-file-path")
+            .classes()
+            .first()
+            .constructors
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -83,5 +79,6 @@ class KoConstructorDeclarationForKoPathProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koconstructor/snippet/forkopathprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koconstructor/snippet/forkopathprovider/", fileName)
 }

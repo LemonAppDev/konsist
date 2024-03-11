@@ -1,5 +1,0 @@
-import com.lemonappdev.konsist.externalsample.SampleExternalClassWithParameter
-
-object SampleObject: SampleExternalClassWithParameter(
-    "some parent constructor param here"
-)

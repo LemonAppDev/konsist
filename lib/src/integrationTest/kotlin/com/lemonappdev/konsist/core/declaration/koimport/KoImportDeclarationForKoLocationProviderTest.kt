@@ -9,10 +9,9 @@ class KoImportDeclarationForKoLocationProviderTest {
     @Test
     fun `import-location`() {
         // given
-        val sut =
-            getSnippetFile("import-location")
-                .imports
-                .first()
+        val sut = getSnippetFile("import-location")
+            .imports
+            .first()
 
         // then
         sut.location shouldBeEqualTo "${sut.path}:1:1"
@@ -21,16 +20,14 @@ class KoImportDeclarationForKoLocationProviderTest {
     @Test
     fun `import-location-with-text`() {
         // given
-        val projectPath =
-            getSnippetFile("import-location-with-text")
-                .imports
-                .first()
-                .projectPath
+        val projectPath = getSnippetFile("import-location-with-text")
+            .imports
+            .first()
+            .projectPath
 
-        val sut =
-            getSnippetFile("import-location-with-text")
-                .imports
-                .first()
+        val sut = getSnippetFile("import-location-with-text")
+            .imports
+            .first()
 
         // then
         val declaration = "Declaration:\nimport com.lemonappdev.konsist.testdata.SampleType"
@@ -41,5 +38,6 @@ class KoImportDeclarationForKoLocationProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koimport/snippet/forkolocationprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koimport/snippet/forkolocationprovider/", fileName)
 }

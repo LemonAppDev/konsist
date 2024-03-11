@@ -8,10 +8,9 @@ class KoInterfaceDeclarationForKoPackageProviderTest {
     @Test
     fun `interface-is-not-in-package`() {
         // given
-        val sut =
-            getSnippetFile("interface-is-not-in-package")
-                .interfaces()
-                .first()
+        val sut = getSnippetFile("interface-is-not-in-package")
+            .interfaces()
+            .first()
 
         // then
         sut.packagee shouldBeEqualTo null
@@ -20,14 +19,14 @@ class KoInterfaceDeclarationForKoPackageProviderTest {
     @Test
     fun `interface-is-in-package`() {
         // given
-        val sut =
-            getSnippetFile("interface-is-in-package")
-                .interfaces()
-                .first()
+        val sut = getSnippetFile("interface-is-in-package")
+            .interfaces()
+            .first()
 
         // then
         sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kointerface/snippet/forkopackageprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kointerface/snippet/forkopackageprovider/", fileName)
 }

@@ -9,10 +9,9 @@ class KoFunctionDeclarationForKoLocalClassProviderTest {
     @Test
     fun `function-contains-no-local-classes`() {
         // given
-        val sut =
-            getSnippetFile("function-contains-no-local-classes")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-contains-no-local-classes")
+            .functions()
+            .first()
 
         // then
         assertSoftly(sut) {
@@ -31,10 +30,9 @@ class KoFunctionDeclarationForKoLocalClassProviderTest {
     @Test
     fun `function-contains-local-class`() {
         // given
-        val sut =
-            getSnippetFile("function-contains-local-class")
-                .functions()
-                .first()
+        val sut = getSnippetFile("function-contains-local-class")
+            .functions()
+            .first()
 
         // then
         assertSoftly(sut) {

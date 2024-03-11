@@ -8,12 +8,11 @@ class KoEnumConstantDeclarationForKoPackageProviderTest {
     @Test
     fun `enum-const-is-not-in-package`() {
         // given
-        val sut =
-            getSnippetFile("enum-const-is-not-in-package")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
+        val sut = getSnippetFile("enum-const-is-not-in-package")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
 
         // then
         sut.packagee shouldBeEqualTo null
@@ -22,12 +21,11 @@ class KoEnumConstantDeclarationForKoPackageProviderTest {
     @Test
     fun `enum-const-is-in-package`() {
         // given
-        val sut =
-            getSnippetFile("enum-const-is-in-package")
-                .classes()
-                .first()
-                .enumConstants
-                .first()
+        val sut = getSnippetFile("enum-const-is-in-package")
+            .classes()
+            .first()
+            .enumConstants
+            .first()
 
         // then
         sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"

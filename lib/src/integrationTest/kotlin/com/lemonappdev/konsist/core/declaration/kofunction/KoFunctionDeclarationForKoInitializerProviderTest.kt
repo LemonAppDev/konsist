@@ -8,10 +8,9 @@ class KoFunctionDeclarationForKoInitializerProviderTest {
     @Test
     fun `function-is-initialized-in-block-body`() {
         // given
-        val sut =
-            getSnippetFile("function-is-initialized-in-block-body")
-                .functions(includeNested = true)
-                .first()
+        val sut = getSnippetFile("function-is-initialized-in-block-body")
+            .functions(includeNested = true)
+            .first()
 
         // then
         sut.isInitialized shouldBeEqualTo true
@@ -20,10 +19,9 @@ class KoFunctionDeclarationForKoInitializerProviderTest {
     @Test
     fun `function-is-initialized-in-expression-body`() {
         // given
-        val sut =
-            getSnippetFile("function-is-initialized-in-expression-body")
-                .functions(includeNested = true)
-                .first()
+        val sut = getSnippetFile("function-is-initialized-in-expression-body")
+            .functions(includeNested = true)
+            .first()
 
         // then
         sut.isInitialized shouldBeEqualTo true
@@ -32,10 +30,9 @@ class KoFunctionDeclarationForKoInitializerProviderTest {
     @Test
     fun `function-inside-interface-is-not-initialized`() {
         // given
-        val sut =
-            getSnippetFile("function-inside-interface-is-not-initialized")
-                .functions(includeNested = true)
-                .first()
+        val sut = getSnippetFile("function-inside-interface-is-not-initialized")
+            .functions(includeNested = true)
+            .first()
 
         // then
         sut.isInitialized shouldBeEqualTo false
@@ -44,10 +41,9 @@ class KoFunctionDeclarationForKoInitializerProviderTest {
     @Test
     fun `function-has-implementation-in-block-body`() {
         // given
-        val sut =
-            getSnippetFile("function-has-implementation-in-block-body")
-                .functions(includeNested = true)
-                .first()
+        val sut = getSnippetFile("function-has-implementation-in-block-body")
+            .functions(includeNested = true)
+            .first()
 
         // then
         sut.hasImplementation shouldBeEqualTo true
@@ -56,10 +52,9 @@ class KoFunctionDeclarationForKoInitializerProviderTest {
     @Test
     fun `function-has-implementation-in-expression-body`() {
         // given
-        val sut =
-            getSnippetFile("function-has-implementation-in-expression-body")
-                .functions(includeNested = true)
-                .first()
+        val sut = getSnippetFile("function-has-implementation-in-expression-body")
+            .functions(includeNested = true)
+            .first()
 
         // then
         sut.hasImplementation shouldBeEqualTo true
@@ -68,10 +63,9 @@ class KoFunctionDeclarationForKoInitializerProviderTest {
     @Test
     fun `function-inside-interface-has-no-implementation`() {
         // given
-        val sut =
-            getSnippetFile("function-inside-interface-has-no-implementation")
-                .functions(includeNested = true)
-                .first()
+        val sut = getSnippetFile("function-inside-interface-has-no-implementation")
+            .functions(includeNested = true)
+            .first()
 
         // then
         sut.hasImplementation shouldBeEqualTo false
