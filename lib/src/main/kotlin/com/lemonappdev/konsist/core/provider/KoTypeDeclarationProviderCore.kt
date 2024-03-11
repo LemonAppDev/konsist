@@ -72,14 +72,13 @@ internal interface KoTypeDeclarationProviderCore :
     override val isExternalType: Boolean
         get() = declaration is KoExternalDeclaration
 
-    override fun hasDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean =
-        predicate(declaration)
+    override fun hasDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean = predicate(declaration)
 
     override fun hasDeclarationOf(kClass: KClass<*>): Boolean =
         hasClassDeclarationOf(kClass) || hasObjectDeclarationOf(kClass) || hasInterfaceDeclarationOf(kClass) ||
-                hasKotlinTypeDeclarationOf(
-                    kClass,
-                ) || hasExternalTypeDeclarationOf(kClass)
+            hasKotlinTypeDeclarationOf(
+                kClass,
+            ) || hasExternalTypeDeclarationOf(kClass)
 
     override fun hasClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -87,8 +86,7 @@ internal interface KoTypeDeclarationProviderCore :
             else -> asClassDeclaration()?.let { predicate(it) } ?: false
         }
 
-    override fun hasClassDeclarationOf(kClass: KClass<*>): Boolean =
-        kClass.qualifiedName == asClassDeclaration()?.fullyQualifiedName
+    override fun hasClassDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asClassDeclaration()?.fullyQualifiedName
 
     override fun haObjectDeclaration(predicate: ((KoObjectDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -96,8 +94,7 @@ internal interface KoTypeDeclarationProviderCore :
             else -> asObjectDeclaration()?.let { predicate(it) } ?: false
         }
 
-    override fun hasObjectDeclarationOf(kClass: KClass<*>): Boolean =
-        kClass.qualifiedName == asObjectDeclaration()?.fullyQualifiedName
+    override fun hasObjectDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asObjectDeclaration()?.fullyQualifiedName
 
     override fun hasInterfaceDeclaration(predicate: ((KoInterfaceDeclaration) -> Boolean)?): Boolean =
         when (predicate) {

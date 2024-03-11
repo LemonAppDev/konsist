@@ -99,11 +99,11 @@ fun <T : KoTypeDeclarationProvider> List<T>.withDeclarationOf(
 ): List<T> =
     filter {
         it.hasDeclarationOf(kClass) ||
-                if (kClasses.isNotEmpty()) {
-                    kClasses.any { kClass -> it.hasDeclarationOf(kClass) }
-                } else {
-                    false
-                }
+            if (kClasses.isNotEmpty()) {
+                kClasses.any { kClass -> it.hasDeclarationOf(kClass) }
+            } else {
+                false
+            }
     }
 
 /**
@@ -282,8 +282,9 @@ fun <T : KoTypeDeclarationProvider> List<T>.withInterfaceDeclaration(predicate: 
     filter {
         when (predicate) {
             null -> it.hasInterfaceDeclaration()
-            else -> it.asInterfaceDeclaration()?.let { interfaceDeclaration -> predicate(interfaceDeclaration) }
-                ?: false
+            else ->
+                it.asInterfaceDeclaration()?.let { interfaceDeclaration -> predicate(interfaceDeclaration) }
+                    ?: false
         }
     }
 
@@ -297,8 +298,9 @@ fun <T : KoTypeDeclarationProvider> List<T>.withoutInterfaceDeclaration(predicat
     filterNot {
         when (predicate) {
             null -> it.hasInterfaceDeclaration()
-            else -> it.asInterfaceDeclaration()?.let { interfaceDeclaration -> predicate(interfaceDeclaration) }
-                ?: false
+            else ->
+                it.asInterfaceDeclaration()?.let { interfaceDeclaration -> predicate(interfaceDeclaration) }
+                    ?: false
         }
     }
 
@@ -356,8 +358,9 @@ fun <T : KoTypeDeclarationProvider> List<T>.withTypeAliasDeclaration(predicate: 
     filter {
         when (predicate) {
             null -> it.hasTypeAliasDeclaration()
-            else -> it.asTypeAliasDeclaration()?.let { typeAliasDeclaration -> predicate(typeAliasDeclaration) }
-                ?: false
+            else ->
+                it.asTypeAliasDeclaration()?.let { typeAliasDeclaration -> predicate(typeAliasDeclaration) }
+                    ?: false
         }
     }
 
@@ -371,8 +374,9 @@ fun <T : KoTypeDeclarationProvider> List<T>.withoutTypeAliasDeclaration(predicat
     filterNot {
         when (predicate) {
             null -> it.hasTypeAliasDeclaration()
-            else -> it.asTypeAliasDeclaration()?.let { typeAliasDeclaration -> predicate(typeAliasDeclaration) }
-                ?: false
+            else ->
+                it.asTypeAliasDeclaration()?.let { typeAliasDeclaration -> predicate(typeAliasDeclaration) }
+                    ?: false
         }
     }
 
@@ -382,12 +386,15 @@ fun <T : KoTypeDeclarationProvider> List<T>.withoutTypeAliasDeclaration(predicat
  * @param predicate The predicate function to determine if a import alias declaration satisfies a condition.
  * @return A list containing declarations with the specified import alias declaration.
  */
-fun <T : KoTypeDeclarationProvider> List<T>.withImportAliasDeclaration(predicate: ((KoImportAliasDeclaration) -> Boolean)? = null): List<T> =
+fun <T : KoTypeDeclarationProvider> List<T>.withImportAliasDeclaration(
+    predicate: ((KoImportAliasDeclaration) -> Boolean)? = null,
+): List<T> =
     filter {
         when (predicate) {
             null -> it.hasImportAliasDeclaration()
-            else -> it.asImportAliasDeclaration()?.let { importAliasDeclaration -> predicate(importAliasDeclaration) }
-                ?: false
+            else ->
+                it.asImportAliasDeclaration()?.let { importAliasDeclaration -> predicate(importAliasDeclaration) }
+                    ?: false
         }
     }
 
@@ -403,8 +410,9 @@ fun <T : KoTypeDeclarationProvider> List<T>.withoutImportAliasDeclaration(
     filterNot {
         when (predicate) {
             null -> it.hasImportAliasDeclaration()
-            else -> it.asImportAliasDeclaration()?.let { importAliasDeclaration -> predicate(importAliasDeclaration) }
-                ?: false
+            else ->
+                it.asImportAliasDeclaration()?.let { importAliasDeclaration -> predicate(importAliasDeclaration) }
+                    ?: false
         }
     }
 
@@ -418,8 +426,9 @@ fun <T : KoTypeDeclarationProvider> List<T>.withKotlinTypeDeclaration(predicate:
     filter {
         when (predicate) {
             null -> it.hasKotlinTypeDeclaration()
-            else -> it.asKotlinTypeDeclaration()?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) }
-                ?: false
+            else ->
+                it.asKotlinTypeDeclaration()?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) }
+                    ?: false
         }
     }
 
@@ -429,12 +438,15 @@ fun <T : KoTypeDeclarationProvider> List<T>.withKotlinTypeDeclaration(predicate:
  * @param predicate The predicate function to determine if a kotlin type declaration satisfies a condition.
  * @return A list containing declarations without the specified kotlin type declaration.
  */
-fun <T : KoTypeDeclarationProvider> List<T>.withoutKotlinTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null): List<T> =
+fun <T : KoTypeDeclarationProvider> List<T>.withoutKotlinTypeDeclaration(
+    predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null,
+): List<T> =
     filterNot {
         when (predicate) {
             null -> it.hasKotlinTypeDeclaration()
-            else -> it.asKotlinTypeDeclaration()?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) }
-                ?: false
+            else ->
+                it.asKotlinTypeDeclaration()?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) }
+                    ?: false
         }
     }
 
@@ -488,12 +500,15 @@ fun <T : KoTypeDeclarationProvider> List<T>.withoutKotlinTypeDeclarationOf(
  * @param predicate The predicate function to determine if a function type declaration satisfies a condition.
  * @return A list containing declarations with the specified function type declaration.
  */
-fun <T : KoTypeDeclarationProvider> List<T>.withFunctionTypeDeclaration(predicate: ((KoFunctionTypeDeclaration) -> Boolean)? = null): List<T> =
+fun <T : KoTypeDeclarationProvider> List<T>.withFunctionTypeDeclaration(
+    predicate: ((KoFunctionTypeDeclaration) -> Boolean)? = null,
+): List<T> =
     filter {
         when (predicate) {
             null -> it.hasFunctionTypeDeclaration()
-            else -> it.asFunctionTypeDeclaration()
-                ?.let { functionTypeDeclaration -> predicate(functionTypeDeclaration) } ?: false
+            else ->
+                it.asFunctionTypeDeclaration()
+                    ?.let { functionTypeDeclaration -> predicate(functionTypeDeclaration) } ?: false
         }
     }
 
@@ -509,8 +524,9 @@ fun <T : KoTypeDeclarationProvider> List<T>.withoutFunctionTypeDeclaration(
     filterNot {
         when (predicate) {
             null -> it.hasFunctionTypeDeclaration()
-            else -> it.asFunctionTypeDeclaration()
-                ?.let { functionTypeDeclaration -> predicate(functionTypeDeclaration) } ?: false
+            else ->
+                it.asFunctionTypeDeclaration()
+                    ?.let { functionTypeDeclaration -> predicate(functionTypeDeclaration) } ?: false
         }
     }
 
@@ -524,8 +540,9 @@ fun <T : KoTypeDeclarationProvider> List<T>.withExternalTypeDeclaration(predicat
     filter {
         when (predicate) {
             null -> it.hasExternalTypeDeclaration()
-            else -> it.asExternalTypeDeclaration()
-                ?.let { externalTypeDeclaration -> predicate(externalTypeDeclaration) } ?: false
+            else ->
+                it.asExternalTypeDeclaration()
+                    ?.let { externalTypeDeclaration -> predicate(externalTypeDeclaration) } ?: false
         }
     }
 
@@ -535,12 +552,15 @@ fun <T : KoTypeDeclarationProvider> List<T>.withExternalTypeDeclaration(predicat
  * @param predicate The predicate function to determine if a external type declaration satisfies a condition.
  * @return A list containing declarations without the specified external type declaration.
  */
-fun <T : KoTypeDeclarationProvider> List<T>.withoutExternalTypeDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)? = null): List<T> =
+fun <T : KoTypeDeclarationProvider> List<T>.withoutExternalTypeDeclaration(
+    predicate: ((KoExternalDeclaration) -> Boolean)? = null,
+): List<T> =
     filterNot {
         when (predicate) {
             null -> it.hasExternalTypeDeclaration()
-            else -> it.asExternalTypeDeclaration()
-                ?.let { externalTypeDeclaration -> predicate(externalTypeDeclaration) } ?: false
+            else ->
+                it.asExternalTypeDeclaration()
+                    ?.let { externalTypeDeclaration -> predicate(externalTypeDeclaration) } ?: false
         }
     }
 

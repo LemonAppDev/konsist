@@ -71,8 +71,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             it?.asClassDeclaration()?.name shouldBeEqualTo "SampleType"
             it?.hasClassDeclaration() shouldBeEqualTo true
-            it?.hasClassDeclaration() { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
-            it?.hasClassDeclaration() { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasClassDeclaration { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
+            it?.hasClassDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasClassDeclarationOf(SampleType::class) shouldBeEqualTo true
             it?.hasClassDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
@@ -124,8 +124,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             it?.asClassDeclaration()?.name shouldBeEqualTo "SampleType"
             it?.hasClassDeclaration() shouldBeEqualTo true
-            it?.hasClassDeclaration() { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
-            it?.hasClassDeclaration() { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasClassDeclaration { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
+            it?.hasClassDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasClassDeclarationOf(SampleType::class) shouldBeEqualTo true
             it?.hasClassDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
@@ -177,8 +177,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
             it?.asObjectDeclaration()?.name shouldBeEqualTo "SampleObject"
             it?.haObjectDeclaration() shouldBeEqualTo true
-            it?.haObjectDeclaration() { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
-            it?.haObjectDeclaration() { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.haObjectDeclaration { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
+            it?.haObjectDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasObjectDeclarationOf(SampleObject::class) shouldBeEqualTo true
             it?.hasObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -230,8 +230,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
             it?.asObjectDeclaration()?.name shouldBeEqualTo "SampleObject"
             it?.haObjectDeclaration() shouldBeEqualTo true
-            it?.haObjectDeclaration() { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
-            it?.haObjectDeclaration() { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.haObjectDeclaration { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
+            it?.haObjectDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasObjectDeclarationOf(SampleObject::class) shouldBeEqualTo true
             it?.hasObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -283,8 +283,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asInterfaceDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
             it?.asInterfaceDeclaration()?.name shouldBeEqualTo "SampleInterface"
             it?.hasInterfaceDeclaration() shouldBeEqualTo true
-            it?.hasInterfaceDeclaration() { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
-            it?.hasInterfaceDeclaration() { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasInterfaceDeclaration { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
+            it?.hasInterfaceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasInterfaceDeclarationOf(SampleInterface::class) shouldBeEqualTo true
             it?.hasInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -336,8 +336,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asInterfaceDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
             it?.asInterfaceDeclaration()?.name shouldBeEqualTo "SampleInterface"
             it?.hasInterfaceDeclaration() shouldBeEqualTo true
-            it?.hasInterfaceDeclaration() { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
-            it?.hasInterfaceDeclaration() { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasInterfaceDeclaration { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
+            it?.hasInterfaceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasInterfaceDeclarationOf(SampleInterface::class) shouldBeEqualTo true
             it?.hasInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -388,8 +388,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asImportAliasDeclaration() shouldBeInstanceOf KoImportAliasDeclaration::class
             it?.asImportAliasDeclaration()?.name shouldBeEqualTo "ImportAlias"
             it?.hasImportAliasDeclaration() shouldBeEqualTo true
-            it?.hasImportAliasDeclaration() { declaration -> declaration.name == "ImportAlias" } shouldBeEqualTo true
-            it?.hasImportAliasDeclaration() { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasImportAliasDeclaration { declaration -> declaration.name == "ImportAlias" } shouldBeEqualTo true
+            it?.hasImportAliasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
@@ -435,8 +435,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeAliasDeclaration() shouldBeInstanceOf KoTypeAliasDeclaration::class
             it?.asTypeAliasDeclaration()?.name shouldBeEqualTo "SampleTypeAlias"
             it?.hasTypeAliasDeclaration() shouldBeEqualTo true
-            it?.hasTypeAliasDeclaration() { declaration -> declaration.name == "SampleTypeAlias" } shouldBeEqualTo true
-            it?.hasTypeAliasDeclaration() { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasTypeAliasDeclaration { declaration -> declaration.name == "SampleTypeAlias" } shouldBeEqualTo true
+            it?.hasTypeAliasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
@@ -482,8 +482,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asImportAliasDeclaration() shouldBeInstanceOf KoImportAliasDeclaration::class
             it?.asImportAliasDeclaration()?.name shouldBeEqualTo "ImportAlias"
             it?.hasImportAliasDeclaration() shouldBeEqualTo true
-            it?.hasImportAliasDeclaration() { declaration -> declaration.name == "ImportAlias" } shouldBeEqualTo true
-            it?.hasImportAliasDeclaration() { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasImportAliasDeclaration { declaration -> declaration.name == "ImportAlias" } shouldBeEqualTo true
+            it?.hasImportAliasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
@@ -529,8 +529,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeAliasDeclaration() shouldBeInstanceOf KoTypeAliasDeclaration::class
             it?.asTypeAliasDeclaration()?.name shouldBeEqualTo "SampleTypeAlias"
             it?.hasTypeAliasDeclaration() shouldBeEqualTo true
-            it?.hasTypeAliasDeclaration() { declaration -> declaration.name == "SampleTypeAlias" } shouldBeEqualTo true
-            it?.hasTypeAliasDeclaration() { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasTypeAliasDeclaration { declaration -> declaration.name == "SampleTypeAlias" } shouldBeEqualTo true
+            it?.hasTypeAliasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
@@ -577,8 +577,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asKotlinTypeDeclaration() shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "String"
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo true
-            it?.hasKotlinTypeDeclaration() { declaration -> declaration.name == "String" } shouldBeEqualTo true
-            it?.hasKotlinTypeDeclaration() { declaration -> declaration.name == "List<String>" } shouldBeEqualTo false
+            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo true
+            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "List<String>" } shouldBeEqualTo false
             it?.hasKotlinTypeDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasKotlinTypeDeclarationOf(Int::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -631,8 +631,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asKotlinTypeDeclaration() shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "String"
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo true
-            it?.hasKotlinTypeDeclaration() { declaration -> declaration.name == "String" } shouldBeEqualTo true
-            it?.hasKotlinTypeDeclaration() { declaration -> declaration.name == "List<String>" } shouldBeEqualTo false
+            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo true
+            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "List<String>" } shouldBeEqualTo false
             it?.hasKotlinTypeDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasKotlinTypeDeclarationOf(Int::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -685,8 +685,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asKotlinTypeDeclaration() shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "List<String>"
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo true
-            it?.hasKotlinTypeDeclaration() { declaration -> declaration.name == "List<String>" } shouldBeEqualTo true
-            it?.hasKotlinTypeDeclaration() { declaration -> declaration.name == "String" } shouldBeEqualTo false
+            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "List<String>" } shouldBeEqualTo true
+            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo false
             it?.hasKotlinTypeDeclarationOf(List::class) shouldBeEqualTo true
             it?.hasKotlinTypeDeclarationOf(String::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -739,8 +739,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asKotlinTypeDeclaration() shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "List<String>"
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo true
-            it?.hasKotlinTypeDeclaration() { declaration -> declaration.name == "List<String>" } shouldBeEqualTo true
-            it?.hasKotlinTypeDeclaration() { declaration -> declaration.name == "String" } shouldBeEqualTo false
+            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "List<String>" } shouldBeEqualTo true
+            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo false
             it?.hasKotlinTypeDeclarationOf(List::class) shouldBeEqualTo true
             it?.hasKotlinTypeDeclarationOf(String::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -792,8 +792,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asFunctionTypeDeclaration() shouldBeInstanceOf KoFunctionTypeDeclaration::class
             it?.asFunctionTypeDeclaration()?.name shouldBeEqualTo "(SampleObject) -> Unit"
             it?.hasFunctionTypeDeclaration() shouldBeEqualTo true
-            it?.hasFunctionTypeDeclaration() { declaration -> declaration.name == "(SampleObject) -> Unit" } shouldBeEqualTo true
-            it?.hasFunctionTypeDeclaration() { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo false
+            it?.hasFunctionTypeDeclaration { declaration -> declaration.name == "(SampleObject) -> Unit" } shouldBeEqualTo true
+            it?.hasFunctionTypeDeclaration { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
@@ -839,8 +839,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asFunctionTypeDeclaration() shouldBeInstanceOf KoFunctionTypeDeclaration::class
             it?.asFunctionTypeDeclaration()?.name shouldBeEqualTo "(SampleObject) -> Unit"
             it?.hasFunctionTypeDeclaration() shouldBeEqualTo true
-            it?.hasFunctionTypeDeclaration() { declaration -> declaration.name == "(SampleObject) -> Unit" } shouldBeEqualTo true
-            it?.hasFunctionTypeDeclaration() { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo false
+            it?.hasFunctionTypeDeclaration { declaration -> declaration.name == "(SampleObject) -> Unit" } shouldBeEqualTo true
+            it?.hasFunctionTypeDeclaration { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
@@ -887,8 +887,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asExternalTypeDeclaration() shouldBeInstanceOf KoExternalDeclaration::class
             it?.asExternalTypeDeclaration()?.name shouldBeEqualTo "SampleExternalClass"
             it?.hasExternalTypeDeclaration() shouldBeEqualTo true
-            it?.hasExternalTypeDeclaration() { declaration -> declaration.name == "SampleExternalClass" } shouldBeEqualTo true
-            it?.hasExternalTypeDeclaration() { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasExternalTypeDeclaration { declaration -> declaration.name == "SampleExternalClass" } shouldBeEqualTo true
+            it?.hasExternalTypeDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasExternalTypeDeclarationOf(SampleExternalClass::class) shouldBeEqualTo true
             it?.hasExternalTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -941,8 +941,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asExternalTypeDeclaration() shouldBeInstanceOf KoExternalDeclaration::class
             it?.asExternalTypeDeclaration()?.name shouldBeEqualTo "SampleExternalClass"
             it?.hasExternalTypeDeclaration() shouldBeEqualTo true
-            it?.hasExternalTypeDeclaration() { declaration -> declaration.name == "SampleExternalClass" } shouldBeEqualTo true
-            it?.hasExternalTypeDeclaration() { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasExternalTypeDeclaration { declaration -> declaration.name == "SampleExternalClass" } shouldBeEqualTo true
+            it?.hasExternalTypeDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasExternalTypeDeclarationOf(SampleExternalClass::class) shouldBeEqualTo true
             it?.hasExternalTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
