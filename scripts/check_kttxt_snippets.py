@@ -159,9 +159,12 @@ def get_kt_temp_file_from_kttxt_file(kttxt_snippet_file_path):
 def get_all_kttxt_files():
     kttxt_temp_file_paths = []
 
+    documentation_snippets_path = "lib/src/snippet/kotlin/com/lemonappdev/konsist"
+
     for root, dirs, files in os.walk(project_root):
         for file in files:
-            if file.endswith('.kttxt'):
+            file_abs_path = os.path.abspath(os.path.join(root, file))
+            if file.endswith('.kttxt') and documentation_snippets_path not in file_abs_path:
                 kttxt_temp_file_paths.append(os.path.join(root, file))
 
     kt_temp_file_paths = [get_kt_temp_file_from_kttxt_file(path) for path in kttxt_temp_file_paths]
