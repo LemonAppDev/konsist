@@ -16,7 +16,7 @@ import com.lemonappdev.konsist.core.provider.KoNullableProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceAndAliasTypeProviderCore
-import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoTypeDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
@@ -45,7 +45,7 @@ internal class KoTypeDeclarationCore private constructor(
         KoGenericTypeProviderCore,
         KoPackageProviderCore,
         KoResideInPackageProviderCore,
-        KoSourceDeclarationProviderCore {
+        KoTypeDeclarationProviderCore {
         override val psiElement: PsiElement by lazy { ktTypeReference }
 
         override val ktElement: KtElement by lazy { ktTypeReference }
