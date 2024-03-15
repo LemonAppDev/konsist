@@ -237,7 +237,6 @@ class KoModifierProviderListExtTest {
         sut shouldBeEqualTo listOf(declaration2)
     }
 
-
     @Test
     fun `withModifier(String) returns declaration with all of given modifiers`() {
         // given

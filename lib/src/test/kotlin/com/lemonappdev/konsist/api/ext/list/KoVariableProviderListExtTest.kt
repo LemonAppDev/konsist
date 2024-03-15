@@ -317,7 +317,6 @@ class KoVariableProviderListExtTest {
         val declarations = listOf(declaration1, declaration2)
         val names = listOf(name1, name2)
 
-
         // when
         val sut = declarations.withVariableNamed(names)
 

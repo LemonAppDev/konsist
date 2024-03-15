@@ -41,12 +41,13 @@ fun <T : KoModifierProvider> List<T>.withModifier(
  * @param modifiers The modifiers to include.
  * @return A list containing declarations with all the specified modifiers.
  */
-fun <T : KoModifierProvider> List<T>.withModifier(modifiers: Set<KoModifier>): List<T> = filter {
-    when {
-        modifiers.isEmpty() -> it.hasModifiers()
-        else -> it.hasModifier(modifiers.first(), *modifiers.drop(1).toTypedArray())
+fun <T : KoModifierProvider> List<T>.withModifier(modifiers: Set<KoModifier>): List<T> =
+    filter {
+        when {
+            modifiers.isEmpty() -> it.hasModifiers()
+            else -> it.hasModifier(modifiers.first(), *modifiers.drop(1).toTypedArray())
+        }
     }
-}
 
 /**
  * List containing declarations with all the specified modifiers.
@@ -74,12 +75,13 @@ fun <T : KoModifierProvider> List<T>.withoutModifier(
  * @param modifiers The modifiers to include.
  * @return A list containing declarations with all the specified modifiers.
  */
-fun <T : KoModifierProvider> List<T>.withoutModifier(modifiers: Set<KoModifier>): List<T> = filterNot {
-    when {
-        modifiers.isEmpty() -> it.hasModifiers()
-        else -> it.hasModifier(modifiers.first(), *modifiers.drop(1).toTypedArray())
+fun <T : KoModifierProvider> List<T>.withoutModifier(modifiers: Set<KoModifier>): List<T> =
+    filterNot {
+        when {
+            modifiers.isEmpty() -> it.hasModifiers()
+            else -> it.hasModifier(modifiers.first(), *modifiers.drop(1).toTypedArray())
+        }
     }
-}
 
 /**
  * List containing declarations with all the specified modifiers.
@@ -107,12 +109,13 @@ fun <T : KoModifierProvider> List<T>.withAllModifiers(
  * @param modifiers The modifiers to include.
  * @return A list containing declarations with all the specified modifiers.
  */
-fun <T : KoModifierProvider> List<T>.withAllModifiers(modifiers: Set<KoModifier>): List<T> = filter {
-    when {
-        modifiers.isEmpty() -> it.hasModifiers()
-        else -> it.hasAllModifiers(modifiers.first(), *modifiers.drop(1).toTypedArray())
+fun <T : KoModifierProvider> List<T>.withAllModifiers(modifiers: Set<KoModifier>): List<T> =
+    filter {
+        when {
+            modifiers.isEmpty() -> it.hasModifiers()
+            else -> it.hasAllModifiers(modifiers.first(), *modifiers.drop(1).toTypedArray())
+        }
     }
-}
 
 /**
  * List containing declarations with all the specified modifiers.
@@ -140,12 +143,13 @@ fun <T : KoModifierProvider> List<T>.withoutAllModifiers(
  * @param modifiers The modifiers to exclude.
  * @return A list containing declarations without all the specified modifiers.
  */
-fun <T : KoModifierProvider> List<T>.withoutAllModifiers(modifiers: Set<KoModifier>): List<T> = filterNot {
-    when {
-        modifiers.isEmpty() -> it.hasModifiers()
-        else -> it.hasAllModifiers(modifiers.first(), *modifiers.drop(1).toTypedArray())
+fun <T : KoModifierProvider> List<T>.withoutAllModifiers(modifiers: Set<KoModifier>): List<T> =
+    filterNot {
+        when {
+            modifiers.isEmpty() -> it.hasModifiers()
+            else -> it.hasAllModifiers(modifiers.first(), *modifiers.drop(1).toTypedArray())
+        }
     }
-}
 
 /**
  * List containing declarations without all specified modifiers.

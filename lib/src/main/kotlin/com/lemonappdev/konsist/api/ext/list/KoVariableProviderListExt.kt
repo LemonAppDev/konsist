@@ -58,8 +58,7 @@ fun <T : KoVariableProvider> List<T>.withVariableNamed(names: Set<String>): List
  * @param names The names of additional variables to include.
  * @return A list containing declarations with at least one of the specified variable(s).
  */
-fun <T : KoVariableProvider> List<T>.withVariableNamed(names: List<String>): List<T> =
-    withVariableNamed(names.toSet())
+fun <T : KoVariableProvider> List<T>.withVariableNamed(names: List<String>): List<T> = withVariableNamed(names.toSet())
 
 /**
  * List containing declarations without any of specified variables.
@@ -96,8 +95,7 @@ fun <T : KoVariableProvider> List<T>.withoutVariableNamed(names: Set<String>): L
  * @param names The names of additional variables to exclude.
  * @return A list containing declarations without any of specified variables.
  */
-fun <T : KoVariableProvider> List<T>.withoutVariableNamed(names: List<String>): List<T> =
-    withoutVariableNamed(names.toSet())
+fun <T : KoVariableProvider> List<T>.withoutVariableNamed(names: List<String>): List<T> = withoutVariableNamed(names.toSet())
 
 /**
  * List containing declarations that have all specified variables.

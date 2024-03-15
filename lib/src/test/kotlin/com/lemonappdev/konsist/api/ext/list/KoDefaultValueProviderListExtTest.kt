@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.provider.KoDefaultValueProvider
-import com.lemonappdev.konsist.api.provider.KoValueProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo

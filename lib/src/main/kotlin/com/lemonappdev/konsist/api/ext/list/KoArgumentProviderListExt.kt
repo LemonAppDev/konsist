@@ -58,8 +58,7 @@ fun <T : KoArgumentProvider> List<T>.withArgumentNamed(names: Set<String>): List
  * @param names The names of additional arguments to include.
  * @return A list containing declarations with at least one of the specified argument(s).
  */
-fun <T : KoArgumentProvider> List<T>.withArgumentNamed(names: List<String>): List<T> =
-    withArgumentNamed(names.toSet())
+fun <T : KoArgumentProvider> List<T>.withArgumentNamed(names: List<String>): List<T> = withArgumentNamed(names.toSet())
 
 /**
  * List containing declarations without any of specified arguments.
@@ -96,8 +95,7 @@ fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(names: Set<String>): L
  * @param names The names of additional arguments to exclude.
  * @return A list containing declarations without any of specified arguments.
  */
-fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(names: List<String>): List<T> =
-    withoutArgumentNamed(names.toSet())
+fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(names: List<String>): List<T> = withoutArgumentNamed(names.toSet())
 
 /**
  * List containing declarations that have all specified arguments.
@@ -172,7 +170,6 @@ fun <T : KoArgumentProvider> List<T>.withoutAllArgumentsNamed(names: Set<String>
  * @return A list containing declarations without all specified argument(s).
  */
 fun <T : KoArgumentProvider> List<T>.withoutAllArgumentsNamed(names: List<String>): List<T> = withoutAllArgumentsNamed(names.toSet())
-
 
 /**
  * List containing declarations that have at least one argument satisfying the provided predicate.

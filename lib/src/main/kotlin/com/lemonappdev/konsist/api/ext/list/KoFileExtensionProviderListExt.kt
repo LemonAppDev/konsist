@@ -37,8 +37,7 @@ fun <T : KoFileExtensionProvider> List<T>.withExtension(extensions: Set<String>)
  * @param extensions The extensions to include.
  * @return A list containing files with extensions matching the specified extensions.
  */
-fun <T : KoFileExtensionProvider> List<T>.withExtension(extensions: List<String>): List<T> =
-    withExtension(extensions.toSet())
+fun <T : KoFileExtensionProvider> List<T>.withExtension(extensions: List<String>): List<T> = withExtension(extensions.toSet())
 
 /**
  * List containing files without extension.
@@ -75,5 +74,4 @@ fun <T : KoFileExtensionProvider> List<T>.withoutExtension(extensions: Set<Strin
  * @param extensions The extensions to exclude.
  * @return A list containing files without extensions matching the specified extensions.
  */
-fun <T : KoFileExtensionProvider> List<T>.withoutExtension(extensions: List<String>): List<T> =
-    withoutExtension(extensions.toSet())
+fun <T : KoFileExtensionProvider> List<T>.withoutExtension(extensions: List<String>): List<T> = withoutExtension(extensions.toSet())
