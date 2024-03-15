@@ -58,7 +58,7 @@ def copy_kttxt_files_and_change_extension_to_kt(source_files, target_dir):
     # Iterate over the source files
     for source_file_path in source_files:
         # Check if the current file has a '.kttxt' extension
-        if source_file_path.endswith('.kttxt'):
+        if source_file_path.endswith('.kttxt') and not source_file_path.endswith('Snippet.kttxt'):
             # Extract the part of the path after project_root if it is a substring of the path
             if project_root in source_file_path:
                 relative_path_part = source_file_path.split(project_root, 1)[1]
@@ -164,7 +164,7 @@ def get_all_kttxt_files():
     for root, dirs, files in os.walk(project_root):
         for file in files:
             file_abs_path = os.path.abspath(os.path.join(root, file))
-            if file.endswith('.kttxt') and not file.endswith('Snippets.kt') and documentation_snippets_path not in file_abs_path:
+            if file.endswith('.kttxt') and documentation_snippets_path not in file_abs_path:
                 kttxt_temp_file_paths.append(os.path.join(root, file))
 
     kt_temp_file_paths = [get_kt_temp_file_from_kttxt_file(path) for path in kttxt_temp_file_paths]
