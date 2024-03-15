@@ -164,7 +164,7 @@ def get_all_kttxt_files():
     for root, dirs, files in os.walk(project_root):
         for file in files:
             file_abs_path = os.path.abspath(os.path.join(root, file))
-            if file.endswith('.kttxt') and "/tmp/" in file and documentation_snippets_path not in file_abs_path:
+            if file.endswith('.kttxt') and not file.endswith('Snippets.kt') and documentation_snippets_path not in file_abs_path:
                 kttxt_temp_file_paths.append(os.path.join(root, file))
 
     kt_temp_file_paths = [get_kt_temp_file_from_kttxt_file(path) for path in kttxt_temp_file_paths]
