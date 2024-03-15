@@ -157,7 +157,7 @@ class KoValueProviderListExtTest {
     }
 
     @Test
-    fun `withValue(empty list) returns declarations with one of given value`() {
+    fun `withValue(List) returns declarations with one of given value`() {
         // given
         val value1 = "value1"
         val value2 = "value2"
@@ -187,7 +187,7 @@ class KoValueProviderListExtTest {
     }
 
     @Test
-    fun `withValue(empty set) returns declarations with one of given value`() {
+    fun `withValue(Set) returns declarations with one of given value`() {
         // given
         val value1 = "value1"
         val value2 = "value2"
@@ -246,7 +246,7 @@ class KoValueProviderListExtTest {
     }
 
     @Test
-    fun `withoutValue(empty list) returns declaration without any of given value`() {
+    fun `withoutValue(List) returns declaration without any of given value`() {
         // given
         val value1 = "value1"
         val value2 = "value2"
@@ -276,7 +276,7 @@ class KoValueProviderListExtTest {
     }
 
     @Test
-    fun `withoutValue(empty set) returns declaration without any of given value`() {
+    fun `withoutValue(Set) returns declaration without any of given value`() {
         // given
         val value1 = "value1"
         val value2 = "value2"

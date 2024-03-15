@@ -17,6 +17,22 @@ fun <T : KoDelegateProvider> List<T>.withDelegate(vararg names: String): List<T>
     }
 
 /**
+ * List containing declarations with delegate with given name.
+ *
+ * @param names The delegate names to include.
+ * @return A list containing declarations with the specified delegate name(s) (or any delegate if [names] is empty).
+ */
+fun <T : KoDelegateProvider> List<T>.withDelegate(names: Set<String>): List<T> = withDelegate(*names.toTypedArray())
+
+/**
+ * List containing declarations with delegate with given name.
+ *
+ * @param names The delegate names to include.
+ * @return A list containing declarations with the specified delegate name(s) (or any delegate if [names] is empty).
+ */
+fun <T : KoDelegateProvider> List<T>.withDelegate(names: List<String>): List<T> = withDelegate(names.toSet())
+
+/**
  * List containing declarations without delegate with given name.
  *
  * @param names The delegate names to exclude.
@@ -29,3 +45,19 @@ fun <T : KoDelegateProvider> List<T>.withoutDelegate(vararg names: String): List
             else -> names.none { name -> it.hasDelegate(name) }
         }
     }
+
+/**
+ * List containing declarations without delegate with given name.
+ *
+ * @param names The delegate names to exclude.
+ * @return A list containing declarations without the specified delegate name(s) (or none delegate if [names] is empty).
+ */
+fun <T : KoDelegateProvider> List<T>.withoutDelegate(names: Set<String>): List<T> = withoutDelegate(*names.toTypedArray())
+
+/**
+ * List containing declarations without delegate with given name.
+ *
+ * @param names The delegate names to exclude.
+ * @return A list containing declarations without the specified delegate name(s) (or none delegate if [names] is empty).
+ */
+fun <T : KoDelegateProvider> List<T>.withoutDelegate(names: List<String>): List<T> = withoutDelegate(names.toSet())
