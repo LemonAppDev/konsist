@@ -192,7 +192,12 @@ def remove_files_recursively_except_readme(directory_path):
 def get_helper_root(root):
     try:
         text = root.split(destination_snippets_path)[1]
-        return destination_snippets_path + text
+
+        list = [w.lower() for w in re.findall('[A-Z/][^A-Z/]*', text)]
+        prefix = list[0]
+        suffix = "-".join(list[1:])
+
+        return destination_snippets_path + prefix + suffix
 
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -286,7 +291,6 @@ def complete_summary_file(root, file_text, summary_dir):
 
     content, snippet_name = snippet_name_to_summary(root, file_text)
 
-
     name_without_tab = snippet_name.strip()
 
     if not name_without_tab in file_content:
@@ -337,10 +341,10 @@ def copy_content(expanded_source_directory, expanded_destination_directory, summ
     # Iterate through all .md and .kttxt files in the source folder and copy them content
     for root, dirs, files in os.walk(expanded_source_directory):
         for filename_md in files:
-            if filename_md.endswith("snippets.md"):
-                prefix = filename_md.split("-")[0]
+            if filename_md.endswith(".md"):
+                prefix = filename_md.split(".")[0]
                 for filename_kttxt in files:
-                    if filename_kttxt.lower().startswith(prefix) and filename_kttxt.lower().endswith("kttxt"):
+                    if filename_kttxt.startswith(prefix) and filename_kttxt.endswith("kttxt"):
                         kt_path = os.path.join(root, filename_kttxt)
                         md_path = os.path.join(root, filename_md)
 
@@ -352,7 +356,10 @@ def copy_content(expanded_source_directory, expanded_destination_directory, summ
                             else:
                                 path = expanded_destination_directory + directory + "/"
 
-                            destination_path = os.path.join(path, filename_md)
+                            list = [w.lower() for w in re.findall('[A-Z/][^A-Z/]*', filename_md)]
+                            suffix = "-".join(list[0:])
+
+                            destination_path = os.path.join(path, suffix)
 
                             md_content = read_file(md_path)
 
