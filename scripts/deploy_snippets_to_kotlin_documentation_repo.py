@@ -192,12 +192,7 @@ def remove_files_recursively_except_readme(directory_path):
 def get_helper_root(root):
     try:
         text = root.split(destination_snippets_path)[1]
-
-        list = [w.lower() for w in re.findall('[A-Z/][^A-Z/]*', text)]
-        prefix = list[0]
-        suffix = "-".join(list[1:])
-
-        return destination_snippets_path + prefix + suffix
+        return destination_snippets_path + text
 
     except Exception as e:
         print(f"An error occurred: {e}")
