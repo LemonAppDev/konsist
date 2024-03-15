@@ -21,8 +21,7 @@ fun <T : KoChildProvider> List<T>.children(indirectChildren: Boolean = false): L
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations with class or interface child.
  */
-fun <T : KoChildProvider> List<T>.withChildren(indirectChildren: Boolean = false): List<T> =
-    filter { it.hasChildren(indirectChildren) }
+fun <T : KoChildProvider> List<T>.withChildren(indirectChildren: Boolean = false): List<T> = filter { it.hasChildren(indirectChildren) }
 
 /**
  * List containing declarations with no child - class does not extend any class and does not implement any interface.
@@ -58,15 +57,19 @@ fun <T : KoChildProvider> List<T>.withChildNamed(
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations with at least one of the specified child(s).
  */
-fun <T : KoChildProvider> List<T>.withChildNamed(names: Set<String>, indirectChildren: Boolean = false): List<T> =
+fun <T : KoChildProvider> List<T>.withChildNamed(
+    names: Set<String>,
+    indirectChildren: Boolean = false,
+): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasChildren(indirectChildren = indirectChildren)
-            else -> it.hasChildWithName(
-                names.first(),
-                *names.drop(1).toTypedArray(),
-                indirectChildren = indirectChildren
-            )
+            else ->
+                it.hasChildWithName(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    indirectChildren = indirectChildren,
+                )
         }
     }
 
@@ -77,8 +80,10 @@ fun <T : KoChildProvider> List<T>.withChildNamed(names: Set<String>, indirectChi
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations with at least one of the specified child(s).
  */
-fun <T : KoChildProvider> List<T>.withChildNamed(names: List<String>, indirectChildren: Boolean = false): List<T> =
-    withChildNamed(names.toSet(), indirectChildren)
+fun <T : KoChildProvider> List<T>.withChildNamed(
+    names: List<String>,
+    indirectChildren: Boolean = false,
+): List<T> = withChildNamed(names.toSet(), indirectChildren)
 
 /**
  * List containing declarations without any of specified children.
@@ -104,15 +109,19 @@ fun <T : KoChildProvider> List<T>.withoutChildNamed(
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations without any of specified children.
  */
-fun <T : KoChildProvider> List<T>.withoutChildNamed(names: Set<String>, indirectChildren: Boolean = false): List<T> =
+fun <T : KoChildProvider> List<T>.withoutChildNamed(
+    names: Set<String>,
+    indirectChildren: Boolean = false,
+): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasChildren(indirectChildren = indirectChildren)
-            else -> it.hasChildWithName(
-                names.first(),
-                *names.drop(1).toTypedArray(),
-                indirectChildren = indirectChildren
-            )
+            else ->
+                it.hasChildWithName(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    indirectChildren = indirectChildren,
+                )
         }
     }
 
@@ -123,8 +132,10 @@ fun <T : KoChildProvider> List<T>.withoutChildNamed(names: Set<String>, indirect
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations without any of specified children.
  */
-fun <T : KoChildProvider> List<T>.withoutChildNamed(names: List<String>, indirectChildren: Boolean = false): List<T> =
-    withoutChildNamed(names.toSet(), indirectChildren)
+fun <T : KoChildProvider> List<T>.withoutChildNamed(
+    names: List<String>,
+    indirectChildren: Boolean = false,
+): List<T> = withoutChildNamed(names.toSet(), indirectChildren)
 
 /**
  * List containing declarations that have all specified children.
@@ -150,15 +161,19 @@ fun <T : KoChildProvider> List<T>.withAllChildrenNamed(
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations with all specified child(s).
  */
-fun <T : KoChildProvider> List<T>.withAllChildrenNamed(names: Set<String>, indirectChildren: Boolean = false): List<T> =
+fun <T : KoChildProvider> List<T>.withAllChildrenNamed(
+    names: Set<String>,
+    indirectChildren: Boolean = false,
+): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasChildren(indirectChildren = indirectChildren)
-            else -> it.hasChildrenWithAllNames(
-                names.first(),
-                *names.drop(1).toTypedArray(),
-                indirectChildren = indirectChildren
-            )
+            else ->
+                it.hasChildrenWithAllNames(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    indirectChildren = indirectChildren,
+                )
         }
     }
 
@@ -171,9 +186,8 @@ fun <T : KoChildProvider> List<T>.withAllChildrenNamed(names: Set<String>, indir
  */
 fun <T : KoChildProvider> List<T>.withAllChildrenNamed(
     names: List<String>,
-    indirectChildren: Boolean = false
-): List<T> =
-    withAllChildrenNamed(names.toSet(), indirectChildren)
+    indirectChildren: Boolean = false,
+): List<T> = withAllChildrenNamed(names.toSet(), indirectChildren)
 
 /**
  * List containing declarations without all specified children.
@@ -201,16 +215,17 @@ fun <T : KoChildProvider> List<T>.withoutAllChildrenNamed(
  */
 fun <T : KoChildProvider> List<T>.withoutAllChildrenNamed(
     names: Set<String>,
-    indirectChildren: Boolean = false
+    indirectChildren: Boolean = false,
 ): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasChildren(indirectChildren = indirectChildren)
-            else -> it.hasChildrenWithAllNames(
-                names.first(),
-                *names.drop(1).toTypedArray(),
-                indirectChildren = indirectChildren
-            )
+            else ->
+                it.hasChildrenWithAllNames(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    indirectChildren = indirectChildren,
+                )
         }
     }
 
@@ -223,9 +238,8 @@ fun <T : KoChildProvider> List<T>.withoutAllChildrenNamed(
  */
 fun <T : KoChildProvider> List<T>.withoutAllChildrenNamed(
     names: List<String>,
-    indirectChildren: Boolean = false
-): List<T> =
-    withoutAllChildrenNamed(names.toSet(), indirectChildren)
+    indirectChildren: Boolean = false,
+): List<T> = withoutAllChildrenNamed(names.toSet(), indirectChildren)
 
 /**
  * List containing declarations that have at least one child satisfying the provided predicate.
@@ -335,15 +349,19 @@ fun <T : KoChildProvider> List<T>.withChildOf(
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations with at least one child of the specified `KClass` type.
  */
-fun <T : KoChildProvider> List<T>.withChildOf(kClasses: Set<KClass<*>>, indirectChildren: Boolean = false): List<T> =
+fun <T : KoChildProvider> List<T>.withChildOf(
+    kClasses: Set<KClass<*>>,
+    indirectChildren: Boolean = false,
+): List<T> =
     filter {
         when {
             kClasses.isEmpty() -> it.hasChildren(indirectChildren)
-            else -> it.hasChildOf(
-                kClasses.first(),
-                *kClasses.drop(1).toTypedArray(),
-                indirectChildren = indirectChildren
-            )
+            else ->
+                it.hasChildOf(
+                    kClasses.first(),
+                    *kClasses.drop(1).toTypedArray(),
+                    indirectChildren = indirectChildren,
+                )
         }
     }
 
@@ -354,8 +372,10 @@ fun <T : KoChildProvider> List<T>.withChildOf(kClasses: Set<KClass<*>>, indirect
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations with at least one child of the specified `KClass` type.
  */
-fun <T : KoChildProvider> List<T>.withChildOf(kClasses: List<KClass<*>>, indirectChildren: Boolean = false): List<T> =
-    withChildOf(kClasses.toSet(), indirectChildren)
+fun <T : KoChildProvider> List<T>.withChildOf(
+    kClasses: List<KClass<*>>,
+    indirectChildren: Boolean = false,
+): List<T> = withChildOf(kClasses.toSet(), indirectChildren)
 
 /**
  * List containing declarations without any child of the specified `KClass` type.
@@ -378,15 +398,19 @@ fun <T : KoChildProvider> List<T>.withoutChildOf(
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations without any of the specified children.
  */
-fun <T : KoChildProvider> List<T>.withoutChildOf(kClasses: Set<KClass<*>>, indirectChildren: Boolean = false): List<T> =
+fun <T : KoChildProvider> List<T>.withoutChildOf(
+    kClasses: Set<KClass<*>>,
+    indirectChildren: Boolean = false,
+): List<T> =
     filterNot {
         when {
             kClasses.isEmpty() -> it.hasChildren(indirectChildren)
-            else -> it.hasChildOf(
-                kClasses.first(),
-                *kClasses.drop(1).toTypedArray(),
-                indirectChildren = indirectChildren
-            )
+            else ->
+                it.hasChildOf(
+                    kClasses.first(),
+                    *kClasses.drop(1).toTypedArray(),
+                    indirectChildren = indirectChildren,
+                )
         }
     }
 
@@ -397,8 +421,10 @@ fun <T : KoChildProvider> List<T>.withoutChildOf(kClasses: Set<KClass<*>>, indir
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations without any of the specified children.
  */
-fun <T : KoChildProvider> List<T>.withoutChildOf(kClasses: List<KClass<*>>, indirectChildren: Boolean = false): List<T> =
-    withoutChildOf(kClasses.toSet(), indirectChildren)
+fun <T : KoChildProvider> List<T>.withoutChildOf(
+    kClasses: List<KClass<*>>,
+    indirectChildren: Boolean = false,
+): List<T> = withoutChildOf(kClasses.toSet(), indirectChildren)
 
 /**
  * List containing declarations that have all children of the specified `KClass` type.
@@ -421,15 +447,19 @@ fun <T : KoChildProvider> List<T>.withAllChildrenOf(
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations that have all children of the specified `KClass` type.
  */
-fun <T : KoChildProvider> List<T>.withAllChildrenOf(kClasses: Set<KClass<*>>, indirectChildren: Boolean = false): List<T> =
+fun <T : KoChildProvider> List<T>.withAllChildrenOf(
+    kClasses: Set<KClass<*>>,
+    indirectChildren: Boolean = false,
+): List<T> =
     filter {
         when {
             kClasses.isEmpty() -> it.hasChildren(indirectChildren)
-            else -> it.hasAllChildrenOf(
-                kClasses.first(),
-                *kClasses.drop(1).toTypedArray(),
-                indirectChildren = indirectChildren
-            )
+            else ->
+                it.hasAllChildrenOf(
+                    kClasses.first(),
+                    *kClasses.drop(1).toTypedArray(),
+                    indirectChildren = indirectChildren,
+                )
         }
     }
 
@@ -440,8 +470,10 @@ fun <T : KoChildProvider> List<T>.withAllChildrenOf(kClasses: Set<KClass<*>>, in
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations that have all children of the specified `KClass` type.
  */
-fun <T : KoChildProvider> List<T>.withAllChildrenOf(kClasses: List<KClass<*>>, indirectChildren: Boolean = false): List<T> =
-    withAllChildrenOf(kClasses.toSet(), indirectChildren)
+fun <T : KoChildProvider> List<T>.withAllChildrenOf(
+    kClasses: List<KClass<*>>,
+    indirectChildren: Boolean = false,
+): List<T> = withAllChildrenOf(kClasses.toSet(), indirectChildren)
 
 /**
  * List containing declarations without all specified `KClass` type children.
@@ -464,15 +496,19 @@ fun <T : KoChildProvider> List<T>.withoutAllChildrenOf(
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations without all specified `KClass` type children.
  */
-fun <T : KoChildProvider> List<T>.withoutAllChildrenOf(kClasses: Set<KClass<*>>, indirectChildren: Boolean = false): List<T> =
+fun <T : KoChildProvider> List<T>.withoutAllChildrenOf(
+    kClasses: Set<KClass<*>>,
+    indirectChildren: Boolean = false,
+): List<T> =
     filterNot {
         when {
             kClasses.isEmpty() -> it.hasChildren(indirectChildren)
-            else -> it.hasAllChildrenOf(
-                kClasses.first(),
-                *kClasses.drop(1).toTypedArray(),
-                indirectChildren = indirectChildren
-            )
+            else ->
+                it.hasAllChildrenOf(
+                    kClasses.first(),
+                    *kClasses.drop(1).toTypedArray(),
+                    indirectChildren = indirectChildren,
+                )
         }
     }
 
@@ -483,6 +519,7 @@ fun <T : KoChildProvider> List<T>.withoutAllChildrenOf(kClasses: Set<KClass<*>>,
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations without all specified `KClass` type children.
  */
-fun <T : KoChildProvider> List<T>.withoutAllChildrenOf(kClasses: List<KClass<*>>, indirectChildren: Boolean = false): List<T> =
-    withoutAllChildrenOf(kClasses.toSet(), indirectChildren)
-
+fun <T : KoChildProvider> List<T>.withoutAllChildrenOf(
+    kClasses: List<KClass<*>>,
+    indirectChildren: Boolean = false,
+): List<T> = withoutAllChildrenOf(kClasses.toSet(), indirectChildren)

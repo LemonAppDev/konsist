@@ -61,8 +61,7 @@ fun <T : KoAnnotationProvider> List<T>.withAnnotationNamed(names: Set<String>): 
  * @param names The names of additional annotations to include.
  * @return A list containing declarations with at least one of the specified annotation(s).
  */
-fun <T : KoAnnotationProvider> List<T>.withAnnotationNamed(names: List<String>): List<T> =
-    withAnnotationNamed(names.toSet())
+fun <T : KoAnnotationProvider> List<T>.withAnnotationNamed(names: List<String>): List<T> = withAnnotationNamed(names.toSet())
 
 /**
  * List containing declarations without any of specified annotations.
@@ -99,8 +98,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAnnotationNamed(names: Set<String>
  * @param names The names of additional annotations to exclude.
  * @return A list containing declarations without any of specified annotations.
  */
-fun <T : KoAnnotationProvider> List<T>.withoutAnnotationNamed(names: List<String>): List<T> =
-    withoutAnnotationNamed(names.toSet())
+fun <T : KoAnnotationProvider> List<T>.withoutAnnotationNamed(names: List<String>): List<T> = withoutAnnotationNamed(names.toSet())
 
 /**
  * List containing declarations that have all specified annotations.
@@ -137,8 +135,7 @@ fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsNamed(names: Set<String
  * @param names The name(s) of the annotation(s) to include.
  * @return A list containing declarations with all specified annotation(s).
  */
-fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsNamed(names: List<String>): List<T> =
-    withAllAnnotationsNamed(names.toSet())
+fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsNamed(names: List<String>): List<T> = withAllAnnotationsNamed(names.toSet())
 
 /**
  * List containing declarations without all specified annotations.
@@ -172,8 +169,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotationsNamed(names: Set<Str
  * @param names The name(s) of the annotation(s) to exclude.
  * @return A list containing declarations without all specified annotation(s).
  */
-fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotationsNamed(names: List<String>): List<T> =
-    withoutAllAnnotationsNamed(names.toSet())
+fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotationsNamed(names: List<String>): List<T> = withoutAllAnnotationsNamed(names.toSet())
 
 /**
  * List containing declarations that have at least one annotation satisfying the provided predicate.
@@ -249,12 +245,13 @@ fun <T : KoAnnotationProvider> List<T>.withAnnotationOf(
  * @param kClasses The Kotlin classes representing annotations to include.
  * @return A list containing declarations with at least one annotation of the specified `KClass` type.
  */
-fun <T : KoAnnotationProvider> List<T>.withAnnotationOf(kClasses: Set<KClass<*>>): List<T> = filter {
-    when {
-        kClasses.isEmpty() -> it.hasAnnotations()
-        else -> it.hasAnnotationOf(kClasses.first(), *kClasses.drop(1).toTypedArray())
+fun <T : KoAnnotationProvider> List<T>.withAnnotationOf(kClasses: Set<KClass<*>>): List<T> =
+    filter {
+        when {
+            kClasses.isEmpty() -> it.hasAnnotations()
+            else -> it.hasAnnotationOf(kClasses.first(), *kClasses.drop(1).toTypedArray())
+        }
     }
-}
 
 /**
  * List containing declarations that have at least one annotation of the specified `KClass` type.
@@ -262,8 +259,7 @@ fun <T : KoAnnotationProvider> List<T>.withAnnotationOf(kClasses: Set<KClass<*>>
  * @param kClasses The Kotlin classes representing annotations to include.
  * @return A list containing declarations with at least one annotation of the specified `KClass` type.
  */
-fun <T : KoAnnotationProvider> List<T>.withAnnotationOf(kClasses: List<KClass<*>>): List<T> =
-    withAnnotationOf(kClasses.toSet())
+fun <T : KoAnnotationProvider> List<T>.withAnnotationOf(kClasses: List<KClass<*>>): List<T> = withAnnotationOf(kClasses.toSet())
 
 /**
  * List containing declarations without any annotation of the specified `KClass` type.
@@ -283,12 +279,13 @@ fun <T : KoAnnotationProvider> List<T>.withoutAnnotationOf(
  * @param kClasses The Kotlin classes representing annotations to exclude.
  * @return A list containing declarations without any of the specified annotations.
  */
-fun <T : KoAnnotationProvider> List<T>.withoutAnnotationOf(kClasses: Set<KClass<*>>): List<T> = filterNot {
-    when {
-        kClasses.isEmpty() -> it.hasAnnotations()
-        else -> it.hasAnnotationOf(kClasses.first(), *kClasses.drop(1).toTypedArray())
+fun <T : KoAnnotationProvider> List<T>.withoutAnnotationOf(kClasses: Set<KClass<*>>): List<T> =
+    filterNot {
+        when {
+            kClasses.isEmpty() -> it.hasAnnotations()
+            else -> it.hasAnnotationOf(kClasses.first(), *kClasses.drop(1).toTypedArray())
+        }
     }
-}
 
 /**
  * List containing declarations without any annotation of the specified `KClass` type.
@@ -296,8 +293,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAnnotationOf(kClasses: Set<KClass<
  * @param kClasses The Kotlin classes representing annotations to exclude.
  * @return A list containing declarations without any of the specified annotations.
  */
-fun <T : KoAnnotationProvider> List<T>.withoutAnnotationOf(kClasses: List<KClass<*>>): List<T> =
-    withoutAnnotationOf(kClasses.toSet())
+fun <T : KoAnnotationProvider> List<T>.withoutAnnotationOf(kClasses: List<KClass<*>>): List<T> = withoutAnnotationOf(kClasses.toSet())
 
 /**
  * List containing declarations that have all annotations of the specified `KClass` type.
@@ -317,12 +313,13 @@ fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsOf(
  * @param kClasses The Kotlin classes representing annotations to include.
  * @return A list containing declarations that have all annotations of the specified `KClass` type.
  */
-fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsOf(kClasses: Set<KClass<*>>): List<T> = filter {
-    when {
-        kClasses.isEmpty() -> it.hasAnnotations()
-        else -> it.hasAllAnnotationsOf(kClasses.first(), *kClasses.drop(1).toTypedArray())
+fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsOf(kClasses: Set<KClass<*>>): List<T> =
+    filter {
+        when {
+            kClasses.isEmpty() -> it.hasAnnotations()
+            else -> it.hasAllAnnotationsOf(kClasses.first(), *kClasses.drop(1).toTypedArray())
+        }
     }
-}
 
 /**
  * List containing declarations that have all annotations of the specified `KClass` type.
@@ -330,8 +327,7 @@ fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsOf(kClasses: Set<KClass
  * @param kClasses The Kotlin classes representing annotations to include.
  * @return A list containing declarations that have all annotations of the specified `KClass` type.
  */
-fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsOf(kClasses: List<KClass<*>>): List<T> =
-    withAllAnnotationsOf(kClasses.toSet())
+fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsOf(kClasses: List<KClass<*>>): List<T> = withAllAnnotationsOf(kClasses.toSet())
 
 /**
  * List containing declarations without all specified `KClass` type annotations.
@@ -351,12 +347,13 @@ fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotationsOf(
  * @param kClasses The Kotlin classes representing annotations to exclude.
  * @return A list containing declarations without all specified `KClass` type annotations.
  */
-fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotationsOf(kClasses: Set<KClass<*>>): List<T> = filterNot {
-    when {
-        kClasses.isEmpty() -> it.hasAnnotations()
-        else -> it.hasAllAnnotationsOf(kClasses.first(), *kClasses.drop(1).toTypedArray())
+fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotationsOf(kClasses: Set<KClass<*>>): List<T> =
+    filterNot {
+        when {
+            kClasses.isEmpty() -> it.hasAnnotations()
+            else -> it.hasAllAnnotationsOf(kClasses.first(), *kClasses.drop(1).toTypedArray())
+        }
     }
-}
 
 /**
  * List containing declarations without all specified `KClass` type annotations.
