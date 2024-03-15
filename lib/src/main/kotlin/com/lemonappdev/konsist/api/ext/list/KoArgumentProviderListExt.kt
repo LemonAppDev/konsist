@@ -39,6 +39,29 @@ fun <T : KoArgumentProvider> List<T>.withArgumentNamed(
     }
 
 /**
+ * List containing declarations that have at least one argument with the specified name(s).
+ *
+ * @param names The names of additional arguments to include.
+ * @return A list containing declarations with at least one of the specified argument(s).
+ */
+fun <T : KoArgumentProvider> List<T>.withArgumentNamed(names: Set<String>): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> it.hasArguments()
+            else -> it.hasArgumentWithName(names.first(), *names.drop(1).toTypedArray())
+        }
+    }
+
+/**
+ * List containing declarations that have at least one argument with the specified name(s).
+ *
+ * @param names The names of additional arguments to include.
+ * @return A list containing declarations with at least one of the specified argument(s).
+ */
+fun <T : KoArgumentProvider> List<T>.withArgumentNamed(names: List<String>): List<T> =
+    withArgumentNamed(names.toSet())
+
+/**
  * List containing declarations without any of specified arguments.
  *
  * @param name The name of the argument to exclude.
@@ -52,6 +75,29 @@ fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(
     filterNot {
         it.hasArgumentWithName(name, *names)
     }
+
+/**
+ * List containing declarations without any of specified arguments.
+ *
+ * @param names The names of additional arguments to exclude.
+ * @return A list containing declarations without any of specified arguments.
+ */
+fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(names: Set<String>): List<T> =
+    filterNot {
+        when {
+            names.isEmpty() -> it.hasArguments()
+            else -> it.hasArgumentWithName(names.first(), *names.drop(1).toTypedArray())
+        }
+    }
+
+/**
+ * List containing declarations without any of specified arguments.
+ *
+ * @param names The names of additional arguments to exclude.
+ * @return A list containing declarations without any of specified arguments.
+ */
+fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(names: List<String>): List<T> =
+    withoutArgumentNamed(names.toSet())
 
 /**
  * List containing declarations that have all specified arguments.
@@ -69,6 +115,28 @@ fun <T : KoArgumentProvider> List<T>.withAllArgumentsNamed(
     }
 
 /**
+ * List containing declarations that have all specified arguments.
+ *
+ * @param names The name(s) of the argument(s) to include.
+ * @return A list containing declarations with all specified argument(s).
+ */
+fun <T : KoArgumentProvider> List<T>.withAllArgumentsNamed(names: Set<String>): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> it.hasArguments()
+            else -> it.hasArgumentsWithAllNames(names.first(), *names.drop(1).toTypedArray())
+        }
+    }
+
+/**
+ * List containing declarations that have all specified arguments.
+ *
+ * @param names The name(s) of the argument(s) to include.
+ * @return A list containing declarations with all specified argument(s).
+ */
+fun <T : KoArgumentProvider> List<T>.withAllArgumentsNamed(names: List<String>): List<T> = withAllArgumentsNamed(names.toSet())
+
+/**
  * List containing declarations without all specified arguments.
  *
  * @param name The name of the argument to exclude.
@@ -82,6 +150,29 @@ fun <T : KoArgumentProvider> List<T>.withoutAllArgumentsNamed(
     filterNot {
         it.hasArgumentsWithAllNames(name, *names)
     }
+
+/**
+ * List containing declarations without all specified arguments.
+ *
+ * @param names The name(s) of the argument(s) to exclude.
+ * @return A list containing declarations without all specified argument(s).
+ */
+fun <T : KoArgumentProvider> List<T>.withoutAllArgumentsNamed(names: Set<String>): List<T> =
+    filterNot {
+        when {
+            names.isEmpty() -> it.hasArguments()
+            else -> it.hasArgumentsWithAllNames(names.first(), *names.drop(1).toTypedArray())
+        }
+    }
+
+/**
+ * List containing declarations without all specified arguments.
+ *
+ * @param names The name(s) of the argument(s) to exclude.
+ * @return A list containing declarations without all specified argument(s).
+ */
+fun <T : KoArgumentProvider> List<T>.withoutAllArgumentsNamed(names: List<String>): List<T> = withoutAllArgumentsNamed(names.toSet())
+
 
 /**
  * List containing declarations that have at least one argument satisfying the provided predicate.
