@@ -1,7 +1,5 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
-import com.lemonappdev.konsist.api.provider.KoFileExtensionProvider
 import com.lemonappdev.konsist.api.provider.KoTacitTypeProvider
 import kotlin.reflect.KClass
 
@@ -40,8 +38,7 @@ fun <T : KoTacitTypeProvider> List<T>.withTacitType(types: Set<String>): List<T>
  * @param types The tacit type(s) to include.
  * @return A list containing declarations with the specified tacit types.
  */
-fun <T : KoTacitTypeProvider> List<T>.withTacitType(types: List<String>): List<T> =
-    withTacitType(types.toSet())
+fun <T : KoTacitTypeProvider> List<T>.withTacitType(types: List<String>): List<T> = withTacitType(types.toSet())
 
 /**
  * List containing declarations without tacit type.
@@ -122,8 +119,7 @@ fun <T : KoTacitTypeProvider> List<T>.withTacitTypeOf(kClasses: Set<KClass<*>>):
  * @param kClasses The Kotlin class(es) representing the tacit type(s) to include.
  * @return A list containing declarations with the tacit type of the specified Kotlin class(es).
  */
-fun <T : KoTacitTypeProvider> List<T>.withTacitTypeOf(kClasses: List<KClass<*>>): List<T> =
-    withTacitTypeOf(kClasses.toSet())
+fun <T : KoTacitTypeProvider> List<T>.withTacitTypeOf(kClasses: List<KClass<*>>): List<T> = withTacitTypeOf(kClasses.toSet())
 
 /**
  * List containing declarations without tacit type.
@@ -167,5 +163,4 @@ fun <T : KoTacitTypeProvider> List<T>.withoutTacitTypeOf(kClasses: Set<KClass<*>
  * @param kClasses The Kotlin class(es) representing the tacit type(s) to exclude.
  * @return A list containing declarations without tacit type of the specified Kotlin class(es).
  */
-fun <T : KoTacitTypeProvider> List<T>.withoutTacitTypeOf(kClasses: List<KClass<*>>): List<T> =
-    withoutTacitTypeOf(kClasses.toSet())
+fun <T : KoTacitTypeProvider> List<T>.withoutTacitTypeOf(kClasses: List<KClass<*>>): List<T> = withoutTacitTypeOf(kClasses.toSet())

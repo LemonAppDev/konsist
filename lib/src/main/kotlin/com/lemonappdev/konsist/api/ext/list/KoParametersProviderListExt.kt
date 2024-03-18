@@ -58,8 +58,7 @@ fun <T : KoParametersProvider> List<T>.withParameterNamed(names: Set<String>): L
  * @param names The names of additional parameters to include.
  * @return A list containing declarations with at least one of the specified parameter(s).
  */
-fun <T : KoParametersProvider> List<T>.withParameterNamed(names: List<String>): List<T> =
-    withParameterNamed(names.toSet())
+fun <T : KoParametersProvider> List<T>.withParameterNamed(names: List<String>): List<T> = withParameterNamed(names.toSet())
 
 /**
  * List containing declarations without any of specified parameters.
@@ -96,8 +95,7 @@ fun <T : KoParametersProvider> List<T>.withoutParameterNamed(names: Set<String>)
  * @param names The names of additional parameters to exclude.
  * @return A list containing declarations without any of specified parameters.
  */
-fun <T : KoParametersProvider> List<T>.withoutParameterNamed(names: List<String>): List<T> =
-    withoutParameterNamed(names.toSet())
+fun <T : KoParametersProvider> List<T>.withoutParameterNamed(names: List<String>): List<T> = withoutParameterNamed(names.toSet())
 
 /**
  * List containing declarations that have all specified parameters.
@@ -134,8 +132,7 @@ fun <T : KoParametersProvider> List<T>.withAllParametersNamed(names: Set<String>
  * @param names The name(s) of the parameter(s) to include.
  * @return A list containing declarations with all specified parameter(s).
  */
-fun <T : KoParametersProvider> List<T>.withAllParametersNamed(names: List<String>): List<T> =
-    withAllParametersNamed(names.toSet())
+fun <T : KoParametersProvider> List<T>.withAllParametersNamed(names: List<String>): List<T> = withAllParametersNamed(names.toSet())
 
 /**
  * List containing declarations without all specified parameters.
@@ -172,8 +169,7 @@ fun <T : KoParametersProvider> List<T>.withoutAllParametersNamed(names: Set<Stri
  * @param names The name(s) of the parameter(s) to exclude.
  * @return A list containing declarations without all specified parameter(s).
  */
-fun <T : KoParametersProvider> List<T>.withoutAllParametersNamed(names: List<String>): List<T> =
-    withoutAllParametersNamed(names.toSet())
+fun <T : KoParametersProvider> List<T>.withoutAllParametersNamed(names: List<String>): List<T> = withoutAllParametersNamed(names.toSet())
 
 /**
  * List containing declarations that have at least one parameter satisfying the provided predicate.
