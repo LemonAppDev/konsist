@@ -12,7 +12,7 @@ def check_dependencies(file_path):
         root = tree.getroot()
 
         ns = {'mvn': 'http://maven.apache.org/POM/4.0.0'}
-        valid_groups = {'org.jetbrains.kotlin'}
+        valid_groups = {'org.jetbrains.kotlin', 'org.jetbrains.kotlinx'}
         has_errors = False
 
         for dependency in root.findall(".//mvn:dependency", ns):
