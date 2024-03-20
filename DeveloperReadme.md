@@ -40,7 +40,8 @@
     docs page
 12. Run `/scripts/update-snippets.py` snippet to generate PR with updated snippets for Konsist Documentation
 13. Merge `main` to `develop`
-14. Notify devs who have reported the issue (community link in original ticket)
+14. Upgrade `konist` version on `develop` branch
+15. Notify devs who have reported the issue (community link in original ticket)
 
 Respond
 fix starter link
