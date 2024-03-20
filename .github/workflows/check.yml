@@ -250,7 +250,7 @@ jobs:
           path: /home/runner/.m2/repository/com/lemonappdev/konsist/*
 
       - name: Check dependencies exposed by the Konsist artifact
-        run: python3 scripts/check_dependencies_exposed_by_library_artifact.py
+        run: python3 scripts/check_dependencies_exposed_by_konsist_artifact.py
 
       - name: Check Bytecode version
         run: python3 scripts/check_konsist_artifact_bytecode_version.py
