@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.provider.util
 
-import com.intellij.psi.PsiElement
+import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationCore
