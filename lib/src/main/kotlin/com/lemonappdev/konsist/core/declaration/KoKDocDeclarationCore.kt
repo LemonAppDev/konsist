@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.declaration
 
-import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.core.provider.KoKDocDescriptionProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
@@ -25,6 +24,7 @@ import com.lemonappdev.konsist.core.provider.tag.KoKDocTagProviderCore
 import com.lemonappdev.konsist.core.provider.tag.KoKDocThrowsTagProviderCore
 import com.lemonappdev.konsist.core.provider.tag.KoKDocVersionTagProviderCore
 import com.lemonappdev.konsist.core.util.EndOfLine
+import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 
 internal class KoKDocDeclarationCore(private val kDocElement: KDocElement) :

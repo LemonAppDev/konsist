@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.provider
 
-import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.provider.KoTextProvider
+import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 
 internal interface KoTextProviderCore : KoTextProvider, KoBaseProviderCore {
     val psiElement: PsiElement
