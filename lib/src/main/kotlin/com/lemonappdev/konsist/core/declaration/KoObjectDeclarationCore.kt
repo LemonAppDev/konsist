@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
@@ -37,6 +36,7 @@ import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
+import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtElement

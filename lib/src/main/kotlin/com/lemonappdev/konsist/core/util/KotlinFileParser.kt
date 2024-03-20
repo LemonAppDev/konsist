@@ -1,8 +1,5 @@
 package com.lemonappdev.konsist.core.util
 
-import com.intellij.openapi.util.Disposer
-import com.intellij.psi.PsiManager
-import com.intellij.testFramework.LightVirtualFile
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.core.declaration.KoFileDeclarationCore
 import com.lemonappdev.konsist.core.exception.KoInternalException
@@ -12,6 +9,9 @@ import com.lemonappdev.konsist.core.util.FileExtension.KOTLIN
 import com.lemonappdev.konsist.core.util.FileExtension.KOTLIN_SNIPPET
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
+import org.jetbrains.kotlin.com.intellij.openapi.util.Disposer
+import org.jetbrains.kotlin.com.intellij.psi.PsiManager
+import org.jetbrains.kotlin.com.intellij.testFramework.LightVirtualFile
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.idea.KotlinFileType
 import org.jetbrains.kotlin.psi.KtFile

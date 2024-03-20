@@ -1,12 +1,12 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.core.cache.KoExternalDeclarationCache
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoChildProviderCore
 import com.lemonappdev.konsist.core.util.EndOfLine
+import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
 
 internal class KoExternalDeclarationCore(name: String, override val ktElement: KtElement) :
