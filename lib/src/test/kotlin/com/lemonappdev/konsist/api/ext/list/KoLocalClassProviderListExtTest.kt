@@ -56,6 +56,86 @@ class KoLocalClassProviderListExtTest {
     }
 
     @Test
+    fun `withLocalClassNamed(empty list) returns declaration with any class`() {
+        // given
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClasses() } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClasses() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withLocalClassNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withLocalClassNamed(empty set) returns declaration with any class`() {
+        // given
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClasses() } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClasses() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withLocalClassNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllLocalClassesNamed(empty list) returns declaration with any class`() {
+        // given
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClasses() } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClasses() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllLocalClassesNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllLocalClassesNamed(empty set) returns declaration with any class`() {
+        // given
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClasses() } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClasses() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllLocalClassesNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutLocalClasses() returns declaration without any class`() {
         // given
         val declaration1: KoLocalClassProvider =
@@ -70,6 +150,86 @@ class KoLocalClassProviderListExtTest {
 
         // when
         val sut = declarations.withoutLocalClasses()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutLocalClassNamed(empty list) returns declaration without any class`() {
+        // given
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClasses() } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClasses() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutLocalClassNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutLocalClassNamed(empty set) returns declaration without any class`() {
+        // given
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClasses() } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClasses() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutLocalClassNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllLocalClassesNamed(empty list) returns declaration without any class`() {
+        // given
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClasses() } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClasses() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllLocalClassesNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllLocalClassesNamed(empty set) returns declaration without any class`() {
+        // given
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClasses() } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClasses() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllLocalClassesNamed(emptySet())
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -119,6 +279,52 @@ class KoLocalClassProviderListExtTest {
     }
 
     @Test
+    fun `withLocalClassNamed(list of String) returns declaration with any of given classes`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassWithName(name1, name2) } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassWithName(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withLocalClassNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withLocalClassNamed(set of String) returns declaration with any of given classes`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassWithName(name1, name2) } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassWithName(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withLocalClassNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutLocalClassNamed(name) returns declaration without given class`() {
         // given
         val name = "SampleName"
@@ -156,6 +362,52 @@ class KoLocalClassProviderListExtTest {
 
         // when
         val sut = declarations.withoutLocalClassNamed(name1, name2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutLocalClassNamed(list of String) returns declaration without any of given classes`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassWithName(name1, name2) } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassWithName(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutLocalClassNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutLocalClassNamed(set of String) returns declaration without any of given classes`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassWithName(name1, name2) } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassWithName(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutLocalClassNamed(names)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -205,6 +457,52 @@ class KoLocalClassProviderListExtTest {
     }
 
     @Test
+    fun `withAllLocalClassesNamed(list of String) returns declaration with all given classes`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassesWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassesWithAllNames(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllLocalClassesNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllLocalClassesNamed(set of String) returns declaration with all given classes`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassesWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassesWithAllNames(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllLocalClassesNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllLocalClassesNamed(name) returns declaration without given class`() {
         // given
         val name = "SampleName"
@@ -242,6 +540,52 @@ class KoLocalClassProviderListExtTest {
 
         // when
         val sut = declarations.withoutAllLocalClassesNamed(name1, name2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllLocalClassesNamed(list of String) returns declaration without all of given classes`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassesWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassesWithAllNames(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllLocalClassesNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllLocalClassesNamed(set of String) returns declaration without all of given classes`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassesWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoLocalClassProvider =
+            mockk {
+                every { hasLocalClassesWithAllNames(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllLocalClassesNamed(names)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
