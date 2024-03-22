@@ -56,6 +56,86 @@ class KoLocalFunctionProviderListExtTest {
     }
 
     @Test
+    fun `withLocalFunctionNamed(empty list) returns declaration with any function`() {
+        // given
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctions() } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctions() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withLocalFunctionNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withLocalFunctionNamed(empty set) returns declaration with any function`() {
+        // given
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctions() } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctions() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withLocalFunctionNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllLocalFunctionsNamed(empty list) returns declaration with any function`() {
+        // given
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctions() } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctions() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllLocalFunctionsNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllLocalFunctionsNamed(empty set) returns declaration with any function`() {
+        // given
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctions() } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctions() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllLocalFunctionsNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutLocalFunctions() returns declaration without any function`() {
         // given
         val declaration1: KoLocalFunctionProvider =
@@ -70,6 +150,86 @@ class KoLocalFunctionProviderListExtTest {
 
         // when
         val sut = declarations.withoutLocalFunctions()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutLocalFunctionNamed(empty list) returns declaration without any function`() {
+        // given
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctions() } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctions() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutLocalFunctionNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutLocalFunctionNamed(empty set) returns declaration without any function`() {
+        // given
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctions() } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctions() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutLocalFunctionNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllLocalFunctionsNamed(empty list) returns declaration without any function`() {
+        // given
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctions() } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctions() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllLocalFunctionsNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllLocalFunctionsNamed(empty set) returns declaration without any function`() {
+        // given
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctions() } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctions() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllLocalFunctionsNamed(emptySet())
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -119,6 +279,52 @@ class KoLocalFunctionProviderListExtTest {
     }
 
     @Test
+    fun `withLocalFunctionNamed(list of String) returns declaration with any of given functions`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionWithName(name1, name2) } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionWithName(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withLocalFunctionNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withLocalFunctionNamed(set of String) returns declaration with any of given functions`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionWithName(name1, name2) } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionWithName(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withLocalFunctionNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutLocalFunctionNamed(name) returns declaration without given function`() {
         // given
         val name = "SampleName"
@@ -156,6 +362,52 @@ class KoLocalFunctionProviderListExtTest {
 
         // when
         val sut = declarations.withoutLocalFunctionNamed(name1, name2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutLocalFunctionNamed(list of String) returns declaration without any of given functions`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionWithName(name1, name2) } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionWithName(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutLocalFunctionNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutLocalFunctionNamed(set of String) returns declaration without any of given functions`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionWithName(name1, name2) } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionWithName(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutLocalFunctionNamed(names)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -205,6 +457,52 @@ class KoLocalFunctionProviderListExtTest {
     }
 
     @Test
+    fun `withAllLocalFunctionsNamed(list of String) returns declaration with all given functions`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionsWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionsWithAllNames(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllLocalFunctionsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllLocalFunctionsNamed(set of String) returns declaration with all given functions`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionsWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionsWithAllNames(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllLocalFunctionsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllLocalFunctionsNamed(name) returns declaration without given function`() {
         // given
         val name = "SampleName"
@@ -242,6 +540,52 @@ class KoLocalFunctionProviderListExtTest {
 
         // when
         val sut = declarations.withoutAllLocalFunctionsNamed(name1, name2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllLocalFunctionsNamed(list of String) returns declaration without all of given functions`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionsWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionsWithAllNames(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllLocalFunctionsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllLocalFunctionsNamed(set of String) returns declaration without all of given functions`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionsWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionsWithAllNames(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllLocalFunctionsNamed(names)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
