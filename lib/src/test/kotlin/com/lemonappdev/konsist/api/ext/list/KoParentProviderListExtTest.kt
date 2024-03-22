@@ -9,6 +9,7 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+@Suppress("detekt.LargeClass")
 class KoParentProviderListExtTest {
     @Test
     fun `parents returns parents from all declarations`() {

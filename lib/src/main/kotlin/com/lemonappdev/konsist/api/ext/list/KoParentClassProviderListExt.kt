@@ -153,11 +153,12 @@ fun <T : KoParentClassProvider> List<T>.withParentClassNamed(
     filter {
         when {
             names.isEmpty() -> it.hasParentClasses(indirectParents)
-            else -> it.hasParentClassWithName(
-                names.first(),
-                *names.drop(1).toTypedArray(),
-                indirectParents = indirectParents
-            )
+            else ->
+                it.hasParentClassWithName(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
         }
     }
 
@@ -201,11 +202,12 @@ fun <T : KoParentClassProvider> List<T>.withoutParentClassNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasParentClasses(indirectParents)
-            else -> it.hasParentClassWithName(
-                names.first(),
-                *names.drop(1).toTypedArray(),
-                indirectParents = indirectParents
-            )
+            else ->
+                it.hasParentClassWithName(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
         }
     }
 
@@ -249,11 +251,12 @@ fun <T : KoParentClassProvider> List<T>.withAllParentClassesNamed(
     filter {
         when {
             names.isEmpty() -> it.hasParentClasses(indirectParents)
-            else -> it.hasParentClassesWithAllNames(
-                names.first(),
-                *names.drop(1).toTypedArray(),
-                indirectParents = indirectParents
-            )
+            else ->
+                it.hasParentClassesWithAllNames(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
         }
     }
 
@@ -297,11 +300,12 @@ fun <T : KoParentClassProvider> List<T>.withoutAllParentClassesNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasParentClasses(indirectParents)
-            else -> it.hasParentClassesWithAllNames(
-                names.first(),
-                *names.drop(1).toTypedArray(),
-                indirectParents = indirectParents
-            )
+            else ->
+                it.hasParentClassesWithAllNames(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
         }
     }
 
@@ -341,16 +345,18 @@ fun <T : KoParentClassProvider> List<T>.withParentClassOf(
 fun <T : KoParentClassProvider> List<T>.withParentClassOf(
     kClasses: Set<KClass<*>>,
     indirectParents: Boolean = false,
-): List<T> = filter {
-    when {
-        kClasses.isEmpty() -> it.hasParentClasses(indirectParents)
-        else -> it.hasParentClassOf(
-            kClasses.first(),
-            *kClasses.drop(1).toTypedArray(),
-            indirectParents = indirectParents
-        )
+): List<T> =
+    filter {
+        when {
+            kClasses.isEmpty() -> it.hasParentClasses(indirectParents)
+            else ->
+                it.hasParentClassOf(
+                    kClasses.first(),
+                    *kClasses.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
+        }
     }
-}
 
 /**
  * List containing declarations that have parent class of type.
@@ -388,16 +394,18 @@ fun <T : KoParentClassProvider> List<T>.withoutParentClassOf(
 fun <T : KoParentClassProvider> List<T>.withoutParentClassOf(
     kClasses: Set<KClass<*>>,
     indirectParents: Boolean = false,
-): List<T> = filterNot {
-    when {
-        kClasses.isEmpty() -> it.hasParentClasses(indirectParents)
-        else -> it.hasParentClassOf(
-            kClasses.first(),
-            *kClasses.drop(1).toTypedArray(),
-            indirectParents = indirectParents
-        )
+): List<T> =
+    filterNot {
+        when {
+            kClasses.isEmpty() -> it.hasParentClasses(indirectParents)
+            else ->
+                it.hasParentClassOf(
+                    kClasses.first(),
+                    *kClasses.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
+        }
     }
-}
 
 /**
  * List containing declarations without parent class.
@@ -435,16 +443,18 @@ fun <T : KoParentClassProvider> List<T>.withAllParentClassesOf(
 fun <T : KoParentClassProvider> List<T>.withAllParentClassesOf(
     kClasses: Set<KClass<*>>,
     indirectParents: Boolean = false,
-): List<T> = filter {
-    when {
-        kClasses.isEmpty() -> it.hasParentClasses(indirectParents)
-        else -> it.hasAllParentClassesOf(
-            kClasses.first(),
-            *kClasses.drop(1).toTypedArray(),
-            indirectParents = indirectParents
-        )
+): List<T> =
+    filter {
+        when {
+            kClasses.isEmpty() -> it.hasParentClasses(indirectParents)
+            else ->
+                it.hasAllParentClassesOf(
+                    kClasses.first(),
+                    *kClasses.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
+        }
     }
-}
 
 /**
  * List containing declarations that have all parent classes of the specified `KClass` type.
@@ -482,16 +492,18 @@ fun <T : KoParentClassProvider> List<T>.withoutAllParentClassesOf(
 fun <T : KoParentClassProvider> List<T>.withoutAllParentClassesOf(
     kClasses: Set<KClass<*>>,
     indirectParents: Boolean = false,
-): List<T> = filterNot {
-    when {
-        kClasses.isEmpty() -> it.hasParentClasses(indirectParents)
-        else -> it.hasAllParentClassesOf(
-            kClasses.first(),
-            *kClasses.drop(1).toTypedArray(),
-            indirectParents = indirectParents
-        )
+): List<T> =
+    filterNot {
+        when {
+            kClasses.isEmpty() -> it.hasParentClasses(indirectParents)
+            else ->
+                it.hasAllParentClassesOf(
+                    kClasses.first(),
+                    *kClasses.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
+        }
     }
-}
 
 /**
  * List containing declarations without all specified `KClass` type parent classes.

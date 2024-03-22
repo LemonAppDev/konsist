@@ -9,6 +9,7 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+@Suppress("detekt.LargeClass")
 class KoParentInterfaceProviderListExtTest {
     @Test
     fun `parentInterfaces returns parent interfaces from all declarations`() {
