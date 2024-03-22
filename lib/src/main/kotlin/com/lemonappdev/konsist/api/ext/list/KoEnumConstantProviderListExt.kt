@@ -30,13 +30,31 @@ fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstants(): List<T> = filte
  * @param names The names of additional enum constants to include.
  * @return A list containing declarations with at least one of the specified enum constant(s).
  */
-fun <T : KoEnumConstantProvider> List<T>.withEnumConstantNamed(
-    name: String,
-    vararg names: String,
-): List<T> =
+fun <T : KoEnumConstantProvider> List<T>.withEnumConstantNamed(name: String, vararg names: String): List<T> =
+    filter { it.hasEnumConstantWithName(name, *names) }
+
+/**
+ * List containing declarations that have at least one enum constant with the specified name(s).
+ *
+ * @param names The names of additional enum constants to include.
+ * @return A list containing declarations with at least one of the specified enum constant(s).
+ */
+fun <T : KoEnumConstantProvider> List<T>.withEnumConstantNamed(names: Set<String>): List<T> =
     filter {
-        it.hasEnumConstantWithName(name, *names)
+        when {
+            names.isEmpty() -> it.hasEnumConstants()
+            else -> it.hasEnumConstantWithName(names.first(), *names.drop(1).toTypedArray())
+        }
     }
+
+/**
+ * List containing declarations that have at least one enum constant with the specified name(s).
+ *
+ * @param names The names of additional enum constants to include.
+ * @return A list containing declarations with at least one of the specified enum constant(s).
+ */
+fun <T : KoEnumConstantProvider> List<T>.withEnumConstantNamed(names: List<String>): List<T> =
+    withEnumConstantNamed(names.toSet())
 
 /**
  * List containing declarations without any of specified enum constants.
@@ -45,10 +63,31 @@ fun <T : KoEnumConstantProvider> List<T>.withEnumConstantNamed(
  * @param names The names of additional enum constants to exclude.
  * @return A list containing declarations without any of specified enum constants.
  */
-fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstantNamed(
-    name: String,
-    vararg names: String,
-): List<T> = filterNot { it.hasEnumConstantWithName(name, *names) }
+fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstantNamed(name: String, vararg names: String): List<T> =
+    filterNot { it.hasEnumConstantWithName(name, *names) }
+
+/**
+ * List containing declarations without any of specified enum constants.
+ *
+ * @param names The names of additional enum constants to exclude.
+ * @return A list containing declarations without any of specified enum constants.
+ */
+fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstantNamed(names: Set<String>): List<T> =
+    filterNot {
+        when {
+            names.isEmpty() -> it.hasEnumConstants()
+            else ->  it.hasEnumConstantWithName(names.first(), *names.drop(1).toTypedArray())
+        }
+    }
+
+/**
+ * List containing declarations without any of specified enum constants.
+ *
+ * @param names The names of additional enum constants to exclude.
+ * @return A list containing declarations without any of specified enum constants.
+ */
+fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstantNamed(names: List<String>): List<T> =
+    withoutEnumConstantNamed(names.toSet())
 
 /**
  * List containing declarations that have all specified enum constants.
@@ -63,6 +102,29 @@ fun <T : KoEnumConstantProvider> List<T>.withAllEnumConstantsNamed(
 ): List<T> = filter { it.hasEnumConstantsWithAllNames(name, *names) }
 
 /**
+ * List containing declarations that have all specified enum constants.
+ *
+ * @param names The name(s) of the enum constant(s) to include.
+ * @return A list containing declarations with all specified enum constant(s).
+ */
+fun <T : KoEnumConstantProvider> List<T>.withAllEnumConstantsNamed(names: Set<String>): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> it.hasEnumConstants()
+            else -> it.hasEnumConstantsWithAllNames(names.first(), *names.drop(1).toTypedArray())
+        }
+    }
+
+/**
+ * List containing declarations that have all specified enum constants.
+ *
+ * @param names The name(s) of the enum constant(s) to include.
+ * @return A list containing declarations with all specified enum constant(s).
+ */
+fun <T : KoEnumConstantProvider> List<T>.withAllEnumConstantsNamed(names: List<String>): List<T> =
+    withAllEnumConstantsNamed(names.toSet())
+
+/**
  * List containing declarations without all specified enum constants.
  *
  * @param name The name of the enum constant to exclude.
@@ -73,6 +135,29 @@ fun <T : KoEnumConstantProvider> List<T>.withoutAllEnumConstantsNamed(
     name: String,
     vararg names: String,
 ): List<T> = filterNot { it.hasEnumConstantsWithAllNames(name, *names) }
+
+/**
+ * List containing declarations without all specified enum constants.
+ *
+ * @param names The name(s) of the enum constant(s) to exclude.
+ * @return A list containing declarations without all specified enum constant(s).
+ */
+fun <T : KoEnumConstantProvider> List<T>.withoutAllEnumConstantsNamed(names: Set<String>): List<T> =
+    filterNot {
+        when {
+            names.isEmpty() -> it.hasEnumConstants()
+            else -> it.hasEnumConstantsWithAllNames(names.first(), *names.drop(1).toTypedArray())
+        }
+    }
+
+/**
+ * List containing declarations without all specified enum constants.
+ *
+ * @param names The name(s) of the enum constant(s) to exclude.
+ * @return A list containing declarations without all specified enum constant(s).
+ */
+fun <T : KoEnumConstantProvider> List<T>.withoutAllEnumConstantsNamed(names: List<String>): List<T> =
+    withoutAllEnumConstantsNamed(names.toSet())
 
 /**
  * List containing declarations that have at least one enum constant satisfying the provided predicate.
