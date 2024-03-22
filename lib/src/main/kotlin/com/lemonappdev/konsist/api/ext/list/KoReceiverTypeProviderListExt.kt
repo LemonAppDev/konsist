@@ -75,10 +75,7 @@ fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverType(predicate: ((KoType
  * @param kClasses The Kotlin class(es) representing the receiver type(s) to include.
  * @return A list containing declarations with the receiver type of the specified Kotlin class(es).
  */
-fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(
-    kClass: KClass<*>,
-    vararg kClasses: KClass<*>,
-): List<T> =
+fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
         val hasAtLeastOneReceiver =
             if (kClasses.isNotEmpty()) {
@@ -89,6 +86,29 @@ fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(
 
         it.hasReceiverTypeOf(kClass) || hasAtLeastOneReceiver
     }
+
+/**
+ * List containing declarations with receiver type.
+ *
+ * @param kClasses The Kotlin class(es) representing the receiver type(s) to include.
+ * @return A list containing declarations with the receiver type of the specified Kotlin class(es).
+ */
+fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(kClasses: Set<KClass<*>>): List<T> =
+    filter {
+        when {
+            kClasses.isEmpty() -> it.hasReceiverType()
+            else -> kClasses.any { kClass -> it.hasReceiverTypeOf(kClass) }
+        }
+    }
+
+/**
+ * List containing declarations with receiver type.
+ *
+ * @param kClasses The Kotlin class(es) representing the receiver type(s) to include.
+ * @return A list containing declarations with the receiver type of the specified Kotlin class(es).
+ */
+fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(kClasses: List<KClass<*>>): List<T> =
+    withReceiverTypeOf(kClasses.toSet())
 
 /**
  * List containing declarations without receiver type.
@@ -111,3 +131,26 @@ fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverTypeOf(
 
         it.hasReceiverTypeOf(kClass) || hasAtLeastOneReceiver
     }
+
+/**
+ * List containing declarations without receiver type.
+ *
+ * @param kClasses The Kotlin class(es) representing the receiver type(s) to exclude.
+ * @return A list containing declarations without receiver type of the specified Kotlin class(es).
+ */
+fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverTypeOf(kClasses: Set<KClass<*>>): List<T> =
+    filterNot {
+        when {
+            kClasses.isEmpty() -> it.hasReceiverType()
+            else -> kClasses.any { kClass -> it.hasReceiverTypeOf(kClass) }
+        }
+    }
+
+/**
+ * List containing declarations without receiver type.
+ *
+ * @param kClasses The Kotlin class(es) representing the receiver type(s) to exclude.
+ * @return A list containing declarations without receiver type of the specified Kotlin class(es).
+ */
+fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverTypeOf(kClasses: List<KClass<*>>): List<T> =
+    withoutReceiverTypeOf(kClasses.toSet())
