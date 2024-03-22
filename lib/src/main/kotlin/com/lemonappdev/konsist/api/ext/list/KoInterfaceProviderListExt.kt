@@ -18,8 +18,7 @@ fun <T : KoInterfaceProvider> List<T>.interfaces(includeNested: Boolean = true):
  * @param includeNested Whether to include nested interfaces.
  * @return A list containing declarations with any interface.
  */
-fun <T : KoInterfaceProvider> List<T>.withInterfaces(includeNested: Boolean = true): List<T> =
-    filter { it.hasInterfaces(includeNested) }
+fun <T : KoInterfaceProvider> List<T>.withInterfaces(includeNested: Boolean = true): List<T> = filter { it.hasInterfaces(includeNested) }
 
 /**
  * List containing declarations with no interfaces.
@@ -155,11 +154,12 @@ fun <T : KoInterfaceProvider> List<T>.withAllInterfacesNamed(
     filter {
         when {
             names.isEmpty() -> it.hasInterfaces(includeNested)
-            else -> it.hasInterfacesWithAllNames(
-                names.first(),
-                *names.drop(1).toTypedArray(),
-                includeNested = includeNested
-            )
+            else ->
+                it.hasInterfacesWithAllNames(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    includeNested = includeNested,
+                )
         }
     }
 
@@ -206,11 +206,12 @@ fun <T : KoInterfaceProvider> List<T>.withoutAllInterfacesNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasInterfaces(includeNested)
-            else -> it.hasInterfacesWithAllNames(
-                names.first(),
-                *names.drop(1).toTypedArray(),
-                includeNested = includeNested
-            )
+            else ->
+                it.hasInterfacesWithAllNames(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    includeNested = includeNested,
+                )
         }
     }
 
