@@ -89,7 +89,10 @@ fun <T : KoReturnProvider> List<T>.withoutReturnType(predicate: ((KoTypeDeclarat
  * @param kClasses The Kotlin class(es) representing the return type(s) to include.
  * @return A list containing declarations with the return type of the specified Kotlin class(es).
  */
-fun <T : KoReturnProvider> List<T>.withReturnTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
+fun <T : KoReturnProvider> List<T>.withReturnTypeOf(
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
+): List<T> =
     filter {
         val hasAtLeastOneReturnType =
             if (kClasses.isNotEmpty()) {
@@ -121,8 +124,7 @@ fun <T : KoReturnProvider> List<T>.withReturnTypeOf(kClasses: Set<KClass<*>>): L
  * @param kClasses The Kotlin class(es) representing the return type(s) to include.
  * @return A list containing declarations with the return type of the specified Kotlin class(es).
  */
-fun <T : KoReturnProvider> List<T>.withReturnTypeOf(kClasses: List<KClass<*>>): List<T> =
-    withReturnTypeOf(kClasses.toSet())
+fun <T : KoReturnProvider> List<T>.withReturnTypeOf(kClasses: List<KClass<*>>): List<T> = withReturnTypeOf(kClasses.toSet())
 
 /**
  * List containing declarations without return type.
@@ -131,7 +133,10 @@ fun <T : KoReturnProvider> List<T>.withReturnTypeOf(kClasses: List<KClass<*>>): 
  * @param kClasses The Kotlin class(es) representing the return type(s) to exclude.
  * @return A list containing declarations without return type of the specified Kotlin class(es).
  */
-fun <T : KoReturnProvider> List<T>.withoutReturnTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
+fun <T : KoReturnProvider> List<T>.withoutReturnTypeOf(
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
+): List<T> =
     filterNot {
         val hasAtLeastOneReturnType =
             if (kClasses.isNotEmpty()) {
@@ -163,5 +168,4 @@ fun <T : KoReturnProvider> List<T>.withoutReturnTypeOf(kClasses: Set<KClass<*>>)
  * @param kClasses The Kotlin class(es) representing the return type(s) to exclude.
  * @return A list containing declarations without return type of the specified Kotlin class(es).
  */
-fun <T : KoReturnProvider> List<T>.withoutReturnTypeOf(kClasses: List<KClass<*>>): List<T> =
-    withoutReturnTypeOf(kClasses.toSet())
+fun <T : KoReturnProvider> List<T>.withoutReturnTypeOf(kClasses: List<KClass<*>>): List<T> = withoutReturnTypeOf(kClasses.toSet())

@@ -903,7 +903,7 @@ class KoSourceAndAliasTypeProviderListExtTest {
                 every { bareSourceType } returns bareSourceType3
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
-        val bareSourceTypes= listOf(bareSourceType1, bareSourceType2)
+        val bareSourceTypes = listOf(bareSourceType1, bareSourceType2)
 
         // when
         val sut = declarations.withBareSourceType(bareSourceTypes)
@@ -931,7 +931,7 @@ class KoSourceAndAliasTypeProviderListExtTest {
                 every { bareSourceType } returns bareSourceType3
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
-        val bareSourceTypes= setOf(bareSourceType1, bareSourceType2)
+        val bareSourceTypes = setOf(bareSourceType1, bareSourceType2)
 
         // when
         val sut = declarations.withBareSourceType(bareSourceTypes)
@@ -1036,7 +1036,7 @@ class KoSourceAndAliasTypeProviderListExtTest {
                 every { bareSourceType } returns bareSourceType3
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
-        val bareSourceTypes= listOf(bareSourceType1, bareSourceType2)
+        val bareSourceTypes = listOf(bareSourceType1, bareSourceType2)
 
         // when
         val sut = declarations.withoutBareSourceType(bareSourceTypes)
@@ -1064,7 +1064,7 @@ class KoSourceAndAliasTypeProviderListExtTest {
                 every { bareSourceType } returns bareSourceType3
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
-        val bareSourceTypes= setOf(bareSourceType1, bareSourceType2)
+        val bareSourceTypes = setOf(bareSourceType1, bareSourceType2)
 
         // when
         val sut = declarations.withoutBareSourceType(bareSourceTypes)

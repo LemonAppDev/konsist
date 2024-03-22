@@ -10,8 +10,10 @@ import kotlin.reflect.KClass
  * @param names The type name(s) to include.
  * @return A list containing declarations with the specified types.
  */
-fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedType(name: String?, vararg names: String?): List<T> =
-    filter { it.representsType(name) || names.any { type -> it.representsType(type) } }
+fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedType(
+    name: String?,
+    vararg names: String?,
+): List<T> = filter { it.representsType(name) || names.any { type -> it.representsType(type) } }
 
 /**
  * List containing declarations that represents the type.
@@ -33,8 +35,7 @@ fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedType(names: Set<String
  * @param names The type name(s) to include.
  * @return A list containing declarations with the specified types.
  */
-fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedType(names: List<String?>): List<T> =
-    withRepresentedType(names.toSet())
+fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedType(names: List<String?>): List<T> = withRepresentedType(names.toSet())
 
 /**
  * List containing declarations that do not represent the type.
@@ -43,8 +44,10 @@ fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedType(names: List<Strin
  * @param names The type name(s) to exclude.
  * @return A list containing declarations without the specified types.
  */
-fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedType(name: String?, vararg names: String?): List<T> =
-    filter { !it.representsType(name) && names.none { type -> it.representsType(type) } }
+fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedType(
+    name: String?,
+    vararg names: String?,
+): List<T> = filter { !it.representsType(name) && names.none { type -> it.representsType(type) } }
 
 /**
  * List containing declarations that do not represent the type.
@@ -66,8 +69,7 @@ fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedType(names: Set<Str
  * @param names The type name(s) to exclude.
  * @return A list containing declarations without the specified types.
  */
-fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedType(names: List<String?>): List<T> =
-    withoutRepresentedType(names.toSet())
+fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedType(names: List<String?>): List<T> = withoutRepresentedType(names.toSet())
 
 /**
  * List containing declarations that represents the type.

@@ -324,7 +324,7 @@ class KoNullableTypeProviderListExtTest {
                 every { hasTypeOf(SampleType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
-        val kClasses= listOf(SampleType1::class, SampleType2::class)
+        val kClasses = listOf(SampleType1::class, SampleType2::class)
 
         // when
         val sut = declarations.withTypeOf(kClasses)
@@ -352,7 +352,7 @@ class KoNullableTypeProviderListExtTest {
                 every { hasTypeOf(SampleType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
-        val kClasses= setOf(SampleType1::class, SampleType2::class)
+        val kClasses = setOf(SampleType1::class, SampleType2::class)
 
         // when
         val sut = declarations.withTypeOf(kClasses)
@@ -427,7 +427,7 @@ class KoNullableTypeProviderListExtTest {
                 every { hasTypeOf(SampleType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
-        val kClasses= listOf(SampleType1::class, SampleType2::class)
+        val kClasses = listOf(SampleType1::class, SampleType2::class)
 
         // when
         val sut = declarations.withoutTypeOf(kClasses)
@@ -455,7 +455,7 @@ class KoNullableTypeProviderListExtTest {
                 every { hasTypeOf(SampleType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
-        val kClasses= setOf(SampleType1::class, SampleType2::class)
+        val kClasses = setOf(SampleType1::class, SampleType2::class)
 
         // when
         val sut = declarations.withoutTypeOf(kClasses)

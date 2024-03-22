@@ -195,7 +195,6 @@ class KoTypeAliasProviderListExtTest {
         sut shouldBeEqualTo listOf(declaration2)
     }
 
-
     @Test
     fun `withoutAllTypeAliasesNamed(empty list) returns declaration without typealias`() {
         // given
