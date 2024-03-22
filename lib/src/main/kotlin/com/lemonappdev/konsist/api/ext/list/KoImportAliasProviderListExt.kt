@@ -31,8 +31,10 @@ fun <T : KoImportAliasProvider> List<T>.withoutImportAliases(): List<T> = filter
  * @param names The names of additional import aliases to include.
  * @return A list containing declarations with at least one of the specified import alias(es).
  */
-fun <T : KoImportAliasProvider> List<T>.withImportAliasNamed(name: String, vararg names: String): List<T> =
-    filter { it.hasImportAliasWithName(name, *names) }
+fun <T : KoImportAliasProvider> List<T>.withImportAliasNamed(
+    name: String,
+    vararg names: String,
+): List<T> = filter { it.hasImportAliasWithName(name, *names) }
 
 /**
  * List containing declarations that have at least one import alias with the specified name(s).
@@ -54,8 +56,7 @@ fun <T : KoImportAliasProvider> List<T>.withImportAliasNamed(names: Set<String>)
  * @param names The names of additional import aliases to include.
  * @return A list containing declarations with at least one of the specified import alias(es).
  */
-fun <T : KoImportAliasProvider> List<T>.withImportAliasNamed(names: List<String>): List<T> =
-    withImportAliasNamed(names.toSet())
+fun <T : KoImportAliasProvider> List<T>.withImportAliasNamed(names: List<String>): List<T> = withImportAliasNamed(names.toSet())
 
 /**
  * List containing declarations without any of specified import aliases.
@@ -64,8 +65,10 @@ fun <T : KoImportAliasProvider> List<T>.withImportAliasNamed(names: List<String>
  * @param names The names of additional import aliases to exclude.
  * @return A list containing declarations without any of specified import aliases.
  */
-fun <T : KoImportAliasProvider> List<T>.withoutImportAliasNamed(name: String, vararg names: String): List<T> =
-    filterNot { it.hasImportAliasWithName(name, *names) }
+fun <T : KoImportAliasProvider> List<T>.withoutImportAliasNamed(
+    name: String,
+    vararg names: String,
+): List<T> = filterNot { it.hasImportAliasWithName(name, *names) }
 
 /**
  * List containing declarations without any of specified import aliases.
@@ -87,8 +90,7 @@ fun <T : KoImportAliasProvider> List<T>.withoutImportAliasNamed(names: Set<Strin
  * @param names The names of additional import aliases to exclude.
  * @return A list containing declarations without any of specified import aliases.
  */
-fun <T : KoImportAliasProvider> List<T>.withoutImportAliasNamed(names: List<String>): List<T> =
-    withoutImportAliasNamed(names.toSet())
+fun <T : KoImportAliasProvider> List<T>.withoutImportAliasNamed(names: List<String>): List<T> = withoutImportAliasNamed(names.toSet())
 
 /**
  * List containing declarations that have all specified import aliases.
@@ -97,8 +99,10 @@ fun <T : KoImportAliasProvider> List<T>.withoutImportAliasNamed(names: List<Stri
  * @param names The name(s) of the import alias(es) to include.
  * @return A list containing declarations with all specified import alias(es).
  */
-fun <T : KoImportAliasProvider> List<T>.withAllImportAliasesNamed(name: String, vararg names: String): List<T> =
-    filter { it.hasImportAliasesWithAllNames(name, *names) }
+fun <T : KoImportAliasProvider> List<T>.withAllImportAliasesNamed(
+    name: String,
+    vararg names: String,
+): List<T> = filter { it.hasImportAliasesWithAllNames(name, *names) }
 
 /**
  * List containing declarations that have all specified import aliases.
@@ -120,8 +124,7 @@ fun <T : KoImportAliasProvider> List<T>.withAllImportAliasesNamed(names: Set<Str
  * @param names The name(s) of the import alias(es) to include.
  * @return A list containing declarations with all specified import alias(es).
  */
-fun <T : KoImportAliasProvider> List<T>.withAllImportAliasesNamed(names: List<String>): List<T> =
-    withAllImportAliasesNamed(names.toSet())
+fun <T : KoImportAliasProvider> List<T>.withAllImportAliasesNamed(names: List<String>): List<T> = withAllImportAliasesNamed(names.toSet())
 
 /**
  * List containing declarations without all specified import aliases.
@@ -130,8 +133,10 @@ fun <T : KoImportAliasProvider> List<T>.withAllImportAliasesNamed(names: List<St
  * @param names The name(s) of the import alias(es) to exclude.
  * @return A list containing declarations without all specified import alias(es).
  */
-fun <T : KoImportAliasProvider> List<T>.withoutAllImportAliasesNamed(name: String, vararg names: String): List<T> =
-    filterNot { it.hasImportAliasesWithAllNames(name, *names) }
+fun <T : KoImportAliasProvider> List<T>.withoutAllImportAliasesNamed(
+    name: String,
+    vararg names: String,
+): List<T> = filterNot { it.hasImportAliasesWithAllNames(name, *names) }
 
 /**
  * List containing declarations without all specified import aliases.

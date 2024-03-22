@@ -30,8 +30,10 @@ fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunctions(): List<T> = fil
  * @param names The names of additional local functions to include.
  * @return A list containing declarations with at least one of the specified local function(s).
  */
-fun <T : KoLocalFunctionProvider> List<T>.withLocalFunctionNamed(name: String, vararg names: String): List<T> =
-    filter { it.hasLocalFunctionWithName(name, *names) }
+fun <T : KoLocalFunctionProvider> List<T>.withLocalFunctionNamed(
+    name: String,
+    vararg names: String,
+): List<T> = filter { it.hasLocalFunctionWithName(name, *names) }
 
 /**
  * List containing declarations that have at least one local function with the specified name(s).
@@ -53,8 +55,7 @@ fun <T : KoLocalFunctionProvider> List<T>.withLocalFunctionNamed(names: Set<Stri
  * @param names The names of additional local functions to include.
  * @return A list containing declarations with at least one of the specified local function(s).
  */
-fun <T : KoLocalFunctionProvider> List<T>.withLocalFunctionNamed(names: List<String>): List<T> =
-    withLocalFunctionNamed(names.toSet())
+fun <T : KoLocalFunctionProvider> List<T>.withLocalFunctionNamed(names: List<String>): List<T> = withLocalFunctionNamed(names.toSet())
 
 /**
  * List containing declarations without any of specified local functions.
@@ -63,8 +64,10 @@ fun <T : KoLocalFunctionProvider> List<T>.withLocalFunctionNamed(names: List<Str
  * @param names The names of additional local functions to exclude.
  * @return A list containing declarations without any of specified local functions.
  */
-fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunctionNamed(name: String, vararg names: String): List<T> =
-    filterNot { it.hasLocalFunctionWithName(name, *names) }
+fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunctionNamed(
+    name: String,
+    vararg names: String,
+): List<T> = filterNot { it.hasLocalFunctionWithName(name, *names) }
 
 /**
  * List containing declarations without any of specified local functions.
@@ -86,8 +89,7 @@ fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunctionNamed(names: Set<S
  * @param names The names of additional local functions to exclude.
  * @return A list containing declarations without any of specified local functions.
  */
-fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunctionNamed(names: List<String>): List<T> =
-    withoutLocalFunctionNamed(names.toSet())
+fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunctionNamed(names: List<String>): List<T> = withoutLocalFunctionNamed(names.toSet())
 
 /**
  * List containing declarations that have all specified local functions.
@@ -96,8 +98,10 @@ fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunctionNamed(names: List<
  * @param names The name(s) of the local function(s) to include.
  * @return A list containing declarations with all specified local function(s).
  */
-fun <T : KoLocalFunctionProvider> List<T>.withAllLocalFunctionsNamed(name: String, vararg names: String): List<T> =
-    filter { it.hasLocalFunctionsWithAllNames(name, *names) }
+fun <T : KoLocalFunctionProvider> List<T>.withAllLocalFunctionsNamed(
+    name: String,
+    vararg names: String,
+): List<T> = filter { it.hasLocalFunctionsWithAllNames(name, *names) }
 
 /**
  * List containing declarations that have all specified local functions.
@@ -129,8 +133,10 @@ fun <T : KoLocalFunctionProvider> List<T>.withAllLocalFunctionsNamed(names: List
  * @param names The name(s) of the local function(s) to exclude.
  * @return A list containing declarations without all specified local function(s).
  */
-fun <T : KoLocalFunctionProvider> List<T>.withoutAllLocalFunctionsNamed(name: String, vararg names: String): List<T> =
-    filterNot { it.hasLocalFunctionsWithAllNames(name, *names) }
+fun <T : KoLocalFunctionProvider> List<T>.withoutAllLocalFunctionsNamed(
+    name: String,
+    vararg names: String,
+): List<T> = filterNot { it.hasLocalFunctionsWithAllNames(name, *names) }
 
 /**
  * List containing declarations without all specified local functions.

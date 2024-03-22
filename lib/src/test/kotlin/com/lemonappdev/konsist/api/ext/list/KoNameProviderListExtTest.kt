@@ -6,6 +6,7 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+@Suppress("detekt.LargeClass")
 class KoNameProviderListExtTest {
     @Test
     fun `withName() returns declaration with any name`() {
@@ -446,7 +447,7 @@ class KoNameProviderListExtTest {
     @Test
     fun `withoutNameStartingWith(empty list) returns declaration with none name`() {
         // given
-       val name1 = "sampleName"
+        val name1 = "sampleName"
         val name2 = ""
         val declaration1: KoNameProvider =
             mockk {
@@ -468,7 +469,7 @@ class KoNameProviderListExtTest {
     @Test
     fun `withoutNameStartingWith(empty set) returns declaration with none name`() {
         // given
-       val name1 = "sampleName"
+        val name1 = "sampleName"
         val name2 = ""
         val declaration1: KoNameProvider =
             mockk {
@@ -1018,7 +1019,7 @@ class KoNameProviderListExtTest {
     @Test
     fun `withNameContaining(empty list) returns declaration with any name`() {
         // given
-       val name1 = "sampleName"
+        val name1 = "sampleName"
         val name2 = ""
         val declaration1: KoNameProvider =
             mockk {
@@ -1040,7 +1041,7 @@ class KoNameProviderListExtTest {
     @Test
     fun `withNameContaining(empty set) returns declaration with any name`() {
         // given
-       val name1 = "sampleName"
+        val name1 = "sampleName"
         val name2 = ""
         val declaration1: KoNameProvider =
             mockk {
@@ -1062,7 +1063,7 @@ class KoNameProviderListExtTest {
     @Test
     fun `withoutNameContaining(empty list) returns declaration with none name`() {
         // given
-       val name1 = "sampleName"
+        val name1 = "sampleName"
         val name2 = ""
         val declaration1: KoNameProvider =
             mockk {
@@ -1084,7 +1085,7 @@ class KoNameProviderListExtTest {
     @Test
     fun `withoutNameContaining(empty set) returns declaration with none name`() {
         // given
-       val name1 = "sampleName"
+        val name1 = "sampleName"
         val name2 = ""
         val declaration1: KoNameProvider =
             mockk {

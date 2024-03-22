@@ -1,3 +1,5 @@
+@file:Suppress("detekt.TooManyFunctions")
+
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
@@ -64,11 +66,12 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParentNamed(
     filter {
         when {
             names.isEmpty() -> it.hasExternalParents(indirectParents)
-            else -> it.hasExternalParentWithName(
-                names.first(),
-                *names.drop(1).toTypedArray(),
-                indirectParents = indirectParents
-            )
+            else ->
+                it.hasExternalParentWithName(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
         }
     }
 
@@ -115,11 +118,12 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasExternalParents(indirectParents)
-            else -> it.hasExternalParentWithName(
-                names.first(),
-                *names.drop(1).toTypedArray(),
-                indirectParents = indirectParents
-            )
+            else ->
+                it.hasExternalParentWithName(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
         }
     }
 
@@ -166,11 +170,12 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsNamed(
     filter {
         when {
             names.isEmpty() -> it.hasExternalParents(indirectParents)
-            else -> it.hasExternalParentsWithAllNames(
-                names.first(),
-                *names.drop(1).toTypedArray(),
-                indirectParents = indirectParents
-            )
+            else ->
+                it.hasExternalParentsWithAllNames(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
         }
     }
 
@@ -217,11 +222,12 @@ fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasExternalParents(indirectParents)
-            else -> it.hasExternalParentsWithAllNames(
-                names.first(),
-                *names.drop(1).toTypedArray(),
-                indirectParents = indirectParents
-            )
+            else ->
+                it.hasExternalParentsWithAllNames(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
         }
     }
 
@@ -346,11 +352,12 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParentOf(
     filter {
         when {
             kClasses.isEmpty() -> it.hasExternalParents(indirectParents)
-            else -> it.hasExternalParentOf(
-                kClasses.first(),
-                *kClasses.drop(1).toTypedArray(),
-                indirectParents = indirectParents
-            )
+            else ->
+                it.hasExternalParentOf(
+                    kClasses.first(),
+                    *kClasses.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
         }
     }
 
@@ -380,9 +387,10 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectParents: Boolean = false,
-): List<T> = filterNot {
-    it.hasExternalParentOf(kClass, *kClasses, indirectParents = indirectParents)
-}
+): List<T> =
+    filterNot {
+        it.hasExternalParentOf(kClass, *kClasses, indirectParents = indirectParents)
+    }
 
 /**
  * List containing declarations without any external parent of the specified `KClass` type.
@@ -399,11 +407,12 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentOf(
     filterNot {
         when {
             kClasses.isEmpty() -> it.hasExternalParents(indirectParents)
-            else -> it.hasExternalParentOf(
-                kClasses.first(),
-                *kClasses.drop(1).toTypedArray(),
-                indirectParents = indirectParents
-            )
+            else ->
+                it.hasExternalParentOf(
+                    kClasses.first(),
+                    *kClasses.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
         }
     }
 
@@ -450,11 +459,12 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsOf(
     filter {
         when {
             kClasses.isEmpty() -> it.hasExternalParents(indirectParents)
-            else -> it.hasAllExternalParentsOf(
-                kClasses.first(),
-                *kClasses.drop(1).toTypedArray(),
-                indirectParents = indirectParents
-            )
+            else ->
+                it.hasAllExternalParentsOf(
+                    kClasses.first(),
+                    *kClasses.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
         }
     }
 
@@ -501,11 +511,12 @@ fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsOf(
     filterNot {
         when {
             kClasses.isEmpty() -> it.hasExternalParents(indirectParents)
-            else -> it.hasAllExternalParentsOf(
-                kClasses.first(),
-                *kClasses.drop(1).toTypedArray(),
-                indirectParents = indirectParents
-            )
+            else ->
+                it.hasAllExternalParentsOf(
+                    kClasses.first(),
+                    *kClasses.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
         }
     }
 

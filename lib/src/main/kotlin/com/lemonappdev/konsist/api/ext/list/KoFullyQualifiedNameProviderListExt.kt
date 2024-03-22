@@ -37,8 +37,7 @@ fun <T : KoFullyQualifiedNameProvider> List<T>.withFullyQualifiedName(names: Set
  * @param names The names to include.
  * @return A list containing declarations with the specified fully qualified names.
  */
-fun <T : KoFullyQualifiedNameProvider> List<T>.withFullyQualifiedName(names: List<String>): List<T> =
-    withFullyQualifiedName(names.toSet())
+fun <T : KoFullyQualifiedNameProvider> List<T>.withFullyQualifiedName(names: List<String>): List<T> = withFullyQualifiedName(names.toSet())
 
 /**
  * List containing declarations without fully qualified name.
