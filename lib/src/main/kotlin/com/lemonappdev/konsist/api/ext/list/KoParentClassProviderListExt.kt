@@ -140,6 +140,40 @@ fun <T : KoParentClassProvider> List<T>.withParentClassNamed(
 ): List<T> = filter { it.hasParentClassWithName(name, *names, indirectParents = indirectParents) }
 
 /**
+ * List containing declarations that have parent class with the specified name(s).
+ *
+ * @param names The names of additional parent classes to include.
+ * @param indirectParents Whether to include indirect parent classes.
+ * @return A list containing declarations with the specified parent class(es).
+ */
+fun <T : KoParentClassProvider> List<T>.withParentClassNamed(
+    names: Set<String>,
+    indirectParents: Boolean = false,
+): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> it.hasParentClasses(indirectParents)
+            else -> it.hasParentClassWithName(
+                names.first(),
+                *names.drop(1).toTypedArray(),
+                indirectParents = indirectParents
+            )
+        }
+    }
+
+/**
+ * List containing declarations that have parent class with the specified name(s).
+ *
+ * @param names The names of additional parent classes to include.
+ * @param indirectParents Whether to include indirect parent classes.
+ * @return A list containing declarations with the specified parent class(es).
+ */
+fun <T : KoParentClassProvider> List<T>.withParentClassNamed(
+    names: List<String>,
+    indirectParents: Boolean = false,
+): List<T> = withParentClassNamed(names.toSet(), indirectParents)
+
+/**
  * List containing declarations without any of specified parent classes.
  *
  * @param name The name of the parent class to exclude.
@@ -152,6 +186,40 @@ fun <T : KoParentClassProvider> List<T>.withoutParentClassNamed(
     vararg names: String,
     indirectParents: Boolean = false,
 ): List<T> = filterNot { it.hasParentClassWithName(name, *names, indirectParents = indirectParents) }
+
+/**
+ * List containing declarations without any of specified parent classes.
+ *
+ * @param names The names of additional parent classes to exclude.
+ * @param indirectParents Whether to include indirect parent classes.
+ * @return A list containing declarations without any of specified parent classes.
+ */
+fun <T : KoParentClassProvider> List<T>.withoutParentClassNamed(
+    names: Set<String>,
+    indirectParents: Boolean = false,
+): List<T> =
+    filterNot {
+        when {
+            names.isEmpty() -> it.hasParentClasses(indirectParents)
+            else -> it.hasParentClassWithName(
+                names.first(),
+                *names.drop(1).toTypedArray(),
+                indirectParents = indirectParents
+            )
+        }
+    }
+
+/**
+ * List containing declarations without any of specified parent classes.
+ *
+ * @param names The names of additional parent classes to exclude.
+ * @param indirectParents Whether to include indirect parent classes.
+ * @return A list containing declarations without any of specified parent classes.
+ */
+fun <T : KoParentClassProvider> List<T>.withoutParentClassNamed(
+    names: List<String>,
+    indirectParents: Boolean = false,
+): List<T> = withoutParentClassNamed(names.toSet(), indirectParents)
 
 /**
  * List containing declarations that have all specified parent classes.
@@ -168,6 +236,40 @@ fun <T : KoParentClassProvider> List<T>.withAllParentClassesNamed(
 ): List<T> = filter { it.hasParentClassesWithAllNames(name, *names, indirectParents = indirectParents) }
 
 /**
+ * List containing declarations that have all specified parent classes.
+ *
+ * @param names The name(s) of the parent class(es) to include.
+ * @param indirectParents Whether to include indirect parent classes.
+ * @return A list containing declarations with all specified parent class(es).
+ */
+fun <T : KoParentClassProvider> List<T>.withAllParentClassesNamed(
+    names: Set<String>,
+    indirectParents: Boolean = false,
+): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> it.hasParentClasses(indirectParents)
+            else -> it.hasParentClassesWithAllNames(
+                names.first(),
+                *names.drop(1).toTypedArray(),
+                indirectParents = indirectParents
+            )
+        }
+    }
+
+/**
+ * List containing declarations that have all specified parent classes.
+ *
+ * @param names The name(s) of the parent class(es) to include.
+ * @param indirectParents Whether to include indirect parent classes.
+ * @return A list containing declarations with all specified parent class(es).
+ */
+fun <T : KoParentClassProvider> List<T>.withAllParentClassesNamed(
+    names: List<String>,
+    indirectParents: Boolean = false,
+): List<T> = withAllParentClassesNamed(names.toSet(), indirectParents)
+
+/**
  * List containing declarations without all specified parent classes.
  *
  * @param name The name of the parent class to exclude.
@@ -180,6 +282,40 @@ fun <T : KoParentClassProvider> List<T>.withoutAllParentClassesNamed(
     vararg names: String,
     indirectParents: Boolean = false,
 ): List<T> = filterNot { it.hasParentClassesWithAllNames(name, *names, indirectParents = indirectParents) }
+
+/**
+ * List containing declarations without all specified parent classes.
+ *
+ * @param names The name(s) of the parent class(es) to exclude.
+ * @param indirectParents Whether to include indirect parent classes.
+ * @return A list containing declarations without all specified parent class(es).
+ */
+fun <T : KoParentClassProvider> List<T>.withoutAllParentClassesNamed(
+    names: Set<String>,
+    indirectParents: Boolean = false,
+): List<T> =
+    filterNot {
+        when {
+            names.isEmpty() -> it.hasParentClasses(indirectParents)
+            else -> it.hasParentClassesWithAllNames(
+                names.first(),
+                *names.drop(1).toTypedArray(),
+                indirectParents = indirectParents
+            )
+        }
+    }
+
+/**
+ * List containing declarations without all specified parent classes.
+ *
+ * @param names The name(s) of the parent class(es) to exclude.
+ * @param indirectParents Whether to include indirect parent classes.
+ * @return A list containing declarations without all specified parent class(es).
+ */
+fun <T : KoParentClassProvider> List<T>.withoutAllParentClassesNamed(
+    names: List<String>,
+    indirectParents: Boolean = false,
+): List<T> = withoutAllParentClassesNamed(names.toSet(), indirectParents)
 
 /**
  * List containing declarations that have parent class of type.
@@ -196,6 +332,39 @@ fun <T : KoParentClassProvider> List<T>.withParentClassOf(
 ): List<T> = filter { it.hasParentClassOf(kClass, *kClasses, indirectParents = indirectParents) }
 
 /**
+ * List containing declarations that have parent class of type.
+ *
+ * @param kClasses The Kotlin declarations representing the parent class to include.
+ * @param indirectParents Whether to include indirect parent classes.
+ * @return A list containing declarations that have the parent class of the specified type(s).
+ */
+fun <T : KoParentClassProvider> List<T>.withParentClassOf(
+    kClasses: Set<KClass<*>>,
+    indirectParents: Boolean = false,
+): List<T> = filter {
+    when {
+        kClasses.isEmpty() -> it.hasParentClasses(indirectParents)
+        else -> it.hasParentClassOf(
+            kClasses.first(),
+            *kClasses.drop(1).toTypedArray(),
+            indirectParents = indirectParents
+        )
+    }
+}
+
+/**
+ * List containing declarations that have parent class of type.
+ *
+ * @param kClasses The Kotlin declarations representing the parent class to include.
+ * @param indirectParents Whether to include indirect parent classes.
+ * @return A list containing declarations that have the parent class of the specified type(s).
+ */
+fun <T : KoParentClassProvider> List<T>.withParentClassOf(
+    kClasses: List<KClass<*>>,
+    indirectParents: Boolean = false,
+): List<T> = withParentClassOf(kClasses.toSet(), indirectParents)
+
+/**
  * List containing declarations without parent class.
  *
  * @param kClass The Kotlin class representing the parent class to exclude.
@@ -208,6 +377,39 @@ fun <T : KoParentClassProvider> List<T>.withoutParentClassOf(
     vararg kClasses: KClass<*>,
     indirectParents: Boolean = false,
 ): List<T> = filterNot { it.hasParentClassOf(kClass, *kClasses, indirectParents = indirectParents) }
+
+/**
+ * List containing declarations without parent class.
+ *
+ * @param kClasses The Kotlin class(es) representing the parent class(es) to exclude.
+ * @param indirectParents Whether to include indirect parent classes.
+ * @return A list containing declarations without parent class of the specified Kotlin class(es).
+ */
+fun <T : KoParentClassProvider> List<T>.withoutParentClassOf(
+    kClasses: Set<KClass<*>>,
+    indirectParents: Boolean = false,
+): List<T> = filterNot {
+    when {
+        kClasses.isEmpty() -> it.hasParentClasses(indirectParents)
+        else -> it.hasParentClassOf(
+            kClasses.first(),
+            *kClasses.drop(1).toTypedArray(),
+            indirectParents = indirectParents
+        )
+    }
+}
+
+/**
+ * List containing declarations without parent class.
+ *
+ * @param kClasses The Kotlin class(es) representing the parent class(es) to exclude.
+ * @param indirectParents Whether to include indirect parent classes.
+ * @return A list containing declarations without parent class of the specified Kotlin class(es).
+ */
+fun <T : KoParentClassProvider> List<T>.withoutParentClassOf(
+    kClasses: List<KClass<*>>,
+    indirectParents: Boolean = false,
+): List<T> = withoutParentClassOf(kClasses.toSet(), indirectParents)
 
 /**
  * List containing declarations that have all parent classes of the specified `KClass` type.
@@ -224,6 +426,39 @@ fun <T : KoParentClassProvider> List<T>.withAllParentClassesOf(
 ): List<T> = filter { it.hasAllParentClassesOf(kClass, *kClasses, indirectParents = indirectParents) }
 
 /**
+ * List containing declarations that have all parent classes of the specified `KClass` type.
+ *
+ * @param kClasses The Kotlin classes representing parent classes to include.
+ * @param indirectParents Whether to include indirect parent classes.
+ * @return A list containing declarations that have all parent classes of the specified `KClass` type.
+ */
+fun <T : KoParentClassProvider> List<T>.withAllParentClassesOf(
+    kClasses: Set<KClass<*>>,
+    indirectParents: Boolean = false,
+): List<T> = filter {
+    when {
+        kClasses.isEmpty() -> it.hasParentClasses(indirectParents)
+        else -> it.hasAllParentClassesOf(
+            kClasses.first(),
+            *kClasses.drop(1).toTypedArray(),
+            indirectParents = indirectParents
+        )
+    }
+}
+
+/**
+ * List containing declarations that have all parent classes of the specified `KClass` type.
+ *
+ * @param kClasses The Kotlin classes representing parent classes to include.
+ * @param indirectParents Whether to include indirect parent classes.
+ * @return A list containing declarations that have all parent classes of the specified `KClass` type.
+ */
+fun <T : KoParentClassProvider> List<T>.withAllParentClassesOf(
+    kClasses: List<KClass<*>>,
+    indirectParents: Boolean = false,
+): List<T> = withAllParentClassesOf(kClasses.toSet(), indirectParents)
+
+/**
  * List containing declarations without all specified `KClass` type parent classes.
  *
  * @param kClass The Kotlin class representing parent class to exclude.
@@ -236,6 +471,39 @@ fun <T : KoParentClassProvider> List<T>.withoutAllParentClassesOf(
     vararg kClasses: KClass<*>,
     indirectParents: Boolean = false,
 ): List<T> = filterNot { it.hasAllParentClassesOf(kClass, *kClasses, indirectParents = indirectParents) }
+
+/**
+ * List containing declarations without all specified `KClass` type parent classes.
+ *
+ * @param kClasses The Kotlin classes representing parent classes to exclude.
+ * @param indirectParents Whether to include indirect parent classes.
+ * @return A list containing declarations without all specified `KClass` type parent classes.
+ */
+fun <T : KoParentClassProvider> List<T>.withoutAllParentClassesOf(
+    kClasses: Set<KClass<*>>,
+    indirectParents: Boolean = false,
+): List<T> = filterNot {
+    when {
+        kClasses.isEmpty() -> it.hasParentClasses(indirectParents)
+        else -> it.hasAllParentClassesOf(
+            kClasses.first(),
+            *kClasses.drop(1).toTypedArray(),
+            indirectParents = indirectParents
+        )
+    }
+}
+
+/**
+ * List containing declarations without all specified `KClass` type parent classes.
+ *
+ * @param kClasses The Kotlin classes representing parent classes to exclude.
+ * @param indirectParents Whether to include indirect parent classes.
+ * @return A list containing declarations without all specified `KClass` type parent classes.
+ */
+fun <T : KoParentClassProvider> List<T>.withoutAllParentClassesOf(
+    kClasses: List<KClass<*>>,
+    indirectParents: Boolean = false,
+): List<T> = withoutAllParentClassesOf(kClasses.toSet(), indirectParents)
 
 /**
  * List containing declarations that have parent class.
