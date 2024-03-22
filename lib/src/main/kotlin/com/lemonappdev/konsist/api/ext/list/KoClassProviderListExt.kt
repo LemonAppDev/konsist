@@ -59,6 +59,45 @@ fun <T : KoClassProvider> List<T>.withClassNamed(
     }
 
 /**
+ * List containing declarations that have at least one class with the specified name(s).
+ *
+ * @param names The names of additional classes to include.
+ * @param includeNested Whether to include nested classes.
+ * @param includeLocal Whether to include local classes.
+ * @return A list containing declarations with at least one of the specified class(s).
+ */
+fun <T : KoClassProvider> List<T>.withClassNamed(
+    names: Set<String>,
+    includeNested: Boolean = true,
+    includeLocal: Boolean = true,
+): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> it.hasClasses(includeNested, includeLocal)
+            else -> it.hasClassWithName(
+                names.first(),
+                *names.drop(1).toTypedArray(),
+                includeNested = includeNested,
+                includeLocal = includeLocal
+            )
+        }
+    }
+
+/**
+ * List containing declarations that have at least one class with the specified name(s).
+ *
+ * @param names The names of additional classes to include.
+ * @param includeNested Whether to include nested classes.
+ * @param includeLocal Whether to include local classes.
+ * @return A list containing declarations with at least one of the specified class(s).
+ */
+fun <T : KoClassProvider> List<T>.withClassNamed(
+    names: List<String>,
+    includeNested: Boolean = true,
+    includeLocal: Boolean = true,
+): List<T> = withClassNamed(names.toSet(), includeNested, includeLocal)
+
+/**
  * List containing declarations without any of specified classes.
  *
  * @param name The name of the class to exclude.
@@ -76,6 +115,45 @@ fun <T : KoClassProvider> List<T>.withoutClassNamed(
     filterNot {
         it.hasClassWithName(name, *names, includeNested = includeNested, includeLocal = includeLocal)
     }
+
+/**
+ * List containing declarations without any of specified classes.
+ *
+ * @param names The names of additional classes to exclude.
+ * @param includeNested Whether to include nested classes.
+ * @param includeLocal Whether to include local classes.
+ * @return A list containing declarations without any of specified classes.
+ */
+fun <T : KoClassProvider> List<T>.withoutClassNamed(
+    names: Set<String>,
+    includeNested: Boolean = true,
+    includeLocal: Boolean = true,
+): List<T> =
+    filterNot {
+        when {
+            names.isEmpty() -> it.hasClasses(includeNested, includeLocal)
+            else -> it.hasClassWithName(
+                names.first(),
+                *names.drop(1).toTypedArray(),
+                includeNested = includeNested,
+                includeLocal = includeLocal
+            )
+        }
+    }
+
+/**
+ * List containing declarations without any of specified classes.
+ *
+ * @param names The names of additional classes to exclude.
+ * @param includeNested Whether to include nested classes.
+ * @param includeLocal Whether to include local classes.
+ * @return A list containing declarations without any of specified classes.
+ */
+fun <T : KoClassProvider> List<T>.withoutClassNamed(
+    names: List<String>,
+    includeNested: Boolean = true,
+    includeLocal: Boolean = true,
+): List<T> = withoutClassNamed(names.toSet(), includeNested, includeLocal)
 
 /**
  * List containing declarations that have all specified classes.
@@ -97,6 +175,45 @@ fun <T : KoClassProvider> List<T>.withAllClassesNamed(
     }
 
 /**
+ * List containing declarations that have all specified classes.
+ *
+ * @param names The name(s) of the class(s) to include.
+ * @param includeNested Whether to include nested classes.
+ * @param includeLocal Whether to include local classes.
+ * @return A list containing declarations with all specified class(s).
+ */
+fun <T : KoClassProvider> List<T>.withAllClassesNamed(
+    names: Set<String>,
+    includeNested: Boolean = true,
+    includeLocal: Boolean = true,
+): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> it.hasClasses(includeNested, includeLocal)
+            else -> it.hasClassesWithAllNames(
+                names.first(),
+                *names.drop(1).toTypedArray(),
+                includeNested = includeNested,
+                includeLocal = includeLocal
+            )
+        }
+    }
+
+/**
+ * List containing declarations that have all specified classes.
+ *
+ * @param names The name(s) of the class(s) to include.
+ * @param includeNested Whether to include nested classes.
+ * @param includeLocal Whether to include local classes.
+ * @return A list containing declarations with all specified class(s).
+ */
+fun <T : KoClassProvider> List<T>.withAllClassesNamed(
+    names: List<String>,
+    includeNested: Boolean = true,
+    includeLocal: Boolean = true,
+): List<T> = withAllClassesNamed(names.toSet(), includeNested, includeLocal)
+
+/**
  * List containing declarations without all specified classes.
  *
  * @param name The name of the class to exclude.
@@ -114,6 +231,45 @@ fun <T : KoClassProvider> List<T>.withoutAllClassesNamed(
     filterNot {
         it.hasClassesWithAllNames(name, *names, includeNested = includeNested, includeLocal = includeLocal)
     }
+
+/**
+ * List containing declarations without all specified classes.
+ *
+ * @param names The name(s) of the class(s) to exclude.
+ * @param includeNested Whether to include nested classes.
+ * @param includeLocal Whether to include local classes.
+ * @return A list containing declarations without all specified class(s).
+ */
+fun <T : KoClassProvider> List<T>.withoutAllClassesNamed(
+    names: Set<String>,
+    includeNested: Boolean = true,
+    includeLocal: Boolean = true,
+): List<T> =
+    filterNot {
+        when {
+            names.isEmpty() -> it.hasClasses(includeNested, includeLocal)
+            else -> it.hasClassesWithAllNames(
+                names.first(),
+                *names.drop(1).toTypedArray(),
+                includeNested = includeNested,
+                includeLocal = includeLocal
+            )
+        }
+    }
+
+/**
+ * List containing declarations without all specified classes.
+ *
+ * @param names The name(s) of the class(s) to exclude.
+ * @param includeNested Whether to include nested classes.
+ * @param includeLocal Whether to include local classes.
+ * @return A list containing declarations without all specified class(s).
+ */
+fun <T : KoClassProvider> List<T>.withoutAllClassesNamed(
+    names: List<String>,
+    includeNested: Boolean = true,
+    includeLocal: Boolean = true,
+): List<T> = withoutAllClassesNamed(names.toSet(), includeNested, includeLocal)
 
 /**
  * List containing declarations that have at least one class satisfying the provided predicate.
