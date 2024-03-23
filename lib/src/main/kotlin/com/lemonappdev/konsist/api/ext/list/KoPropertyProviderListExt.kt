@@ -18,7 +18,8 @@ fun <T : KoPropertyProvider> List<T>.properties(includeNested: Boolean = true): 
  * @param includeNested Whether to include nested properties.
  * @return A list containing declarations with any property.
  */
-fun <T : KoPropertyProvider> List<T>.withProperties(includeNested: Boolean = true): List<T> = filter { it.hasProperties(includeNested) }
+fun <T : KoPropertyProvider> List<T>.withProperties(includeNested: Boolean = true): List<T> =
+    filter { it.hasProperties(includeNested) }
 
 /**
  * List containing declarations with no properties.
@@ -44,6 +45,31 @@ fun <T : KoPropertyProvider> List<T>.withPropertyNamed(
 ): List<T> = filter { it.hasPropertyWithName(name, *names, includeNested = includeNested) }
 
 /**
+ * List containing declarations that have at least one property with the specified name(s).
+ *
+ * @param names The names of additional properties to include.
+ * @param includeNested Whether to include nested properties.
+ * @return A list containing declarations with at least one of the specified properties.
+ */
+fun <T : KoPropertyProvider> List<T>.withPropertyNamed(names: Set<String>, includeNested: Boolean = true): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> it.hasProperties(includeNested)
+            else -> it.hasPropertyWithName(names.first(), *names.drop(1).toTypedArray(), includeNested = includeNested)
+        }
+    }
+
+/**
+ * List containing declarations that have at least one property with the specified name(s).
+ *
+ * @param names The names of additional properties to include.
+ * @param includeNested Whether to include nested properties.
+ * @return A list containing declarations with at least one of the specified properties.
+ */
+fun <T : KoPropertyProvider> List<T>.withPropertyNamed(names: List<String>, includeNested: Boolean = true): List<T> =
+    withPropertyNamed(names.toSet(), includeNested)
+
+/**
  * List containing declarations without any of specified properties.
  *
  * @param name The name of the property to exclude.
@@ -56,6 +82,36 @@ fun <T : KoPropertyProvider> List<T>.withoutPropertyNamed(
     vararg names: String,
     includeNested: Boolean = true,
 ): List<T> = filterNot { it.hasPropertyWithName(name, *names, includeNested = includeNested) }
+
+/**
+ * List containing declarations without any of specified properties.
+ *
+ * @param names The names of additional properties to exclude.
+ * @param includeNested Whether to include nested properties.
+ * @return A list containing declarations without any of specified properties.
+ */
+fun <T : KoPropertyProvider> List<T>.withoutPropertyNamed(
+    names: Set<String>,
+    includeNested: Boolean = true,
+): List<T> =
+    filterNot {
+        when {
+            names.isEmpty() -> it.hasProperties(includeNested)
+            else -> it.hasPropertyWithName(names.first(), *names.drop(1).toTypedArray(), includeNested = includeNested)
+        }
+    }
+
+/**
+ * List containing declarations without any of specified properties.
+ *
+ * @param names The names of additional properties to exclude.
+ * @param includeNested Whether to include nested properties.
+ * @return A list containing declarations without any of specified properties.
+ */
+fun <T : KoPropertyProvider> List<T>.withoutPropertyNamed(
+    names: List<String>,
+    includeNested: Boolean = true,
+): List<T> = withoutPropertyNamed(names.toSet(), includeNested)
 
 /**
  * List containing declarations that have all specified properties.
@@ -72,6 +128,31 @@ fun <T : KoPropertyProvider> List<T>.withAllPropertiesNamed(
 ): List<T> = filter { it.hasPropertiesWithAllNames(name, *names, includeNested = includeNested) }
 
 /**
+ * List containing declarations that have all specified properties.
+ *
+ * @param names The name(s) of the properties to include.
+ * @param includeNested Whether to include nested properties.
+ * @return A list containing declarations with all specified properties.
+ */
+fun <T : KoPropertyProvider> List<T>.withAllPropertiesNamed(names: Set<String>, includeNested: Boolean = true): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> it.hasProperties(includeNested)
+            else -> it.hasPropertiesWithAllNames(names.first(), *names.drop(1).toTypedArray(), includeNested = includeNested)
+        }
+    }
+
+/**
+ * List containing declarations that have all specified properties.
+ *
+ * @param names The name(s) of the properties to include.
+ * @param includeNested Whether to include nested properties.
+ * @return A list containing declarations with all specified properties.
+ */
+fun <T : KoPropertyProvider> List<T>.withAllPropertiesNamed(names: List<String>, includeNested: Boolean = true): List<T> =
+    withAllPropertiesNamed(names.toSet(), includeNested)
+
+/**
  * List containing declarations without all specified properties.
  *
  * @param name The name of the property to exclude.
@@ -84,6 +165,36 @@ fun <T : KoPropertyProvider> List<T>.withoutAllPropertiesNamed(
     vararg names: String,
     includeNested: Boolean = true,
 ): List<T> = filterNot { it.hasPropertiesWithAllNames(name, *names, includeNested = includeNested) }
+
+/**
+ * List containing declarations without all specified properties.
+ *
+ * @param names The name(s) of the properties to exclude.
+ * @param includeNested Whether to include nested properties.
+ * @return A list containing declarations without all specified properties.
+ */
+fun <T : KoPropertyProvider> List<T>.withoutAllPropertiesNamed(
+    names: Set<String>,
+    includeNested: Boolean = true,
+): List<T> =
+    filterNot {
+        when {
+            names.isEmpty() -> it.hasProperties(includeNested)
+            else -> it.hasPropertiesWithAllNames(names.first(), *names.drop(1).toTypedArray(), includeNested = includeNested)
+        }
+    }
+
+/**
+ * List containing declarations without all specified properties.
+ *
+ * @param names The name(s) of the properties to exclude.
+ * @param includeNested Whether to include nested properties.
+ * @return A list containing declarations without all specified properties.
+ */
+fun <T : KoPropertyProvider> List<T>.withoutAllPropertiesNamed(
+    names: List<String>,
+    includeNested: Boolean = true,
+): List<T> = withoutAllPropertiesNamed(names.toSet(), includeNested)
 
 /**
  * List containing declarations that have at least one property satisfying the provided predicate.
