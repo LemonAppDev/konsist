@@ -99,11 +99,11 @@ fun <T : KoTypeDeclarationProvider> List<T>.withDeclarationOf(
 ): List<T> =
     filter {
         it.hasDeclarationOf(kClass) ||
-                if (kClasses.isNotEmpty()) {
-                    kClasses.any { kClass -> it.hasDeclarationOf(kClass) }
-                } else {
-                    false
-                }
+            if (kClasses.isNotEmpty()) {
+                kClasses.any { kClass -> it.hasDeclarationOf(kClass) }
+            } else {
+                false
+            }
     }
 
 /**
@@ -126,8 +126,7 @@ fun <T : KoTypeDeclarationProvider> List<T>.withDeclarationOf(kClasses: Set<KCla
  * @param kClasses The Kotlin class(es) representing the declaration(s) to include.
  * @return A list containing declarations with the declaration of the specified Kotlin class(es).
  */
-fun <T : KoTypeDeclarationProvider> List<T>.withDeclarationOf(kClasses: List<KClass<*>>): List<T> =
-    withDeclarationOf(kClasses.toSet())
+fun <T : KoTypeDeclarationProvider> List<T>.withDeclarationOf(kClasses: List<KClass<*>>): List<T> = withDeclarationOf(kClasses.toSet())
 
 /**
  * List containing declarations without declaration of.

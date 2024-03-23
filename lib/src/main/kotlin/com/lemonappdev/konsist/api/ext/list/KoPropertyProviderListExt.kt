@@ -18,8 +18,7 @@ fun <T : KoPropertyProvider> List<T>.properties(includeNested: Boolean = true): 
  * @param includeNested Whether to include nested properties.
  * @return A list containing declarations with any property.
  */
-fun <T : KoPropertyProvider> List<T>.withProperties(includeNested: Boolean = true): List<T> =
-    filter { it.hasProperties(includeNested) }
+fun <T : KoPropertyProvider> List<T>.withProperties(includeNested: Boolean = true): List<T> = filter { it.hasProperties(includeNested) }
 
 /**
  * List containing declarations with no properties.
@@ -51,7 +50,10 @@ fun <T : KoPropertyProvider> List<T>.withPropertyNamed(
  * @param includeNested Whether to include nested properties.
  * @return A list containing declarations with at least one of the specified properties.
  */
-fun <T : KoPropertyProvider> List<T>.withPropertyNamed(names: Set<String>, includeNested: Boolean = true): List<T> =
+fun <T : KoPropertyProvider> List<T>.withPropertyNamed(
+    names: Set<String>,
+    includeNested: Boolean = true,
+): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasProperties(includeNested)
@@ -66,8 +68,10 @@ fun <T : KoPropertyProvider> List<T>.withPropertyNamed(names: Set<String>, inclu
  * @param includeNested Whether to include nested properties.
  * @return A list containing declarations with at least one of the specified properties.
  */
-fun <T : KoPropertyProvider> List<T>.withPropertyNamed(names: List<String>, includeNested: Boolean = true): List<T> =
-    withPropertyNamed(names.toSet(), includeNested)
+fun <T : KoPropertyProvider> List<T>.withPropertyNamed(
+    names: List<String>,
+    includeNested: Boolean = true,
+): List<T> = withPropertyNamed(names.toSet(), includeNested)
 
 /**
  * List containing declarations without any of specified properties.
@@ -134,7 +138,10 @@ fun <T : KoPropertyProvider> List<T>.withAllPropertiesNamed(
  * @param includeNested Whether to include nested properties.
  * @return A list containing declarations with all specified properties.
  */
-fun <T : KoPropertyProvider> List<T>.withAllPropertiesNamed(names: Set<String>, includeNested: Boolean = true): List<T> =
+fun <T : KoPropertyProvider> List<T>.withAllPropertiesNamed(
+    names: Set<String>,
+    includeNested: Boolean = true,
+): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasProperties(includeNested)
@@ -149,8 +156,10 @@ fun <T : KoPropertyProvider> List<T>.withAllPropertiesNamed(names: Set<String>, 
  * @param includeNested Whether to include nested properties.
  * @return A list containing declarations with all specified properties.
  */
-fun <T : KoPropertyProvider> List<T>.withAllPropertiesNamed(names: List<String>, includeNested: Boolean = true): List<T> =
-    withAllPropertiesNamed(names.toSet(), includeNested)
+fun <T : KoPropertyProvider> List<T>.withAllPropertiesNamed(
+    names: List<String>,
+    includeNested: Boolean = true,
+): List<T> = withAllPropertiesNamed(names.toSet(), includeNested)
 
 /**
  * List containing declarations without all specified properties.

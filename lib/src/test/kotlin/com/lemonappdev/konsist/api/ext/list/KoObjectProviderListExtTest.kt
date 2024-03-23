@@ -96,7 +96,6 @@ class KoObjectProviderListExtTest {
         sut shouldBeEqualTo listOf(declaration1)
     }
 
-
     @Test
     fun `withAllObjectsNamed(empty list) returns declaration with any object`() {
         // given
