@@ -54,7 +54,7 @@ fun <T : KoInterfaceProvider> List<T>.withInterfaceNamed(
  * @return A list containing declarations with at least one of the specified interface(s).
  */
 fun <T : KoInterfaceProvider> List<T>.withInterfaceNamed(
-    names: Set<String>,
+    names: Collection<String>,
     includeNested: Boolean = true,
 ): List<T> =
     filter {
@@ -63,18 +63,6 @@ fun <T : KoInterfaceProvider> List<T>.withInterfaceNamed(
             else -> it.hasInterfaceWithName(names.first(), *names.drop(1).toTypedArray(), includeNested = includeNested)
         }
     }
-
-/**
- * List containing declarations that have at least one interface with the specified name(s).
- *
- * @param names The names of additional interfaces to include.
- * @param includeNested Whether to include nested interfaces.
- * @return A list containing declarations with at least one of the specified interface(s).
- */
-fun <T : KoInterfaceProvider> List<T>.withInterfaceNamed(
-    names: List<String>,
-    includeNested: Boolean = true,
-): List<T> = withInterfaceNamed(names.toSet(), includeNested)
 
 /**
  * List containing declarations without any of specified interfaces.
@@ -101,7 +89,7 @@ fun <T : KoInterfaceProvider> List<T>.withoutInterfaceNamed(
  * @return A list containing declarations without any of specified interfaces.
  */
 fun <T : KoInterfaceProvider> List<T>.withoutInterfaceNamed(
-    names: Set<String>,
+    names: Collection<String>,
     includeNested: Boolean = true,
 ): List<T> =
     filterNot {
@@ -110,18 +98,6 @@ fun <T : KoInterfaceProvider> List<T>.withoutInterfaceNamed(
             else -> it.hasInterfaceWithName(names.first(), *names.drop(1).toTypedArray(), includeNested = includeNested)
         }
     }
-
-/**
- * List containing declarations without any of specified interfaces.
- *
- * @param names The names of additional interfaces to exclude.
- * @param includeNested Whether to include nested interfaces.
- * @return A list containing declarations without any of specified interfaces.
- */
-fun <T : KoInterfaceProvider> List<T>.withoutInterfaceNamed(
-    names: List<String>,
-    includeNested: Boolean = true,
-): List<T> = withoutInterfaceNamed(names.toSet(), includeNested)
 
 /**
  * List containing declarations that have all specified interfaces.
@@ -148,7 +124,7 @@ fun <T : KoInterfaceProvider> List<T>.withAllInterfacesNamed(
  * @return A list containing declarations with all specified interface(s).
  */
 fun <T : KoInterfaceProvider> List<T>.withAllInterfacesNamed(
-    names: Set<String>,
+    names: Collection<String>,
     includeNested: Boolean = true,
 ): List<T> =
     filter {
@@ -162,18 +138,6 @@ fun <T : KoInterfaceProvider> List<T>.withAllInterfacesNamed(
                 )
         }
     }
-
-/**
- * List containing declarations that have all specified interfaces.
- *
- * @param names The name(s) of the interface(s) to include.
- * @param includeNested Whether to include nested interfaces.
- * @return A list containing declarations with all specified interface(s).
- */
-fun <T : KoInterfaceProvider> List<T>.withAllInterfacesNamed(
-    names: List<String>,
-    includeNested: Boolean = true,
-): List<T> = withAllInterfacesNamed(names.toSet(), includeNested)
 
 /**
  * List containing declarations without all specified interfaces.
@@ -200,7 +164,7 @@ fun <T : KoInterfaceProvider> List<T>.withoutAllInterfacesNamed(
  * @return A list containing declarations without all specified interface(s).
  */
 fun <T : KoInterfaceProvider> List<T>.withoutAllInterfacesNamed(
-    names: Set<String>,
+    names: Collection<String>,
     includeNested: Boolean = true,
 ): List<T> =
     filterNot {
@@ -214,18 +178,6 @@ fun <T : KoInterfaceProvider> List<T>.withoutAllInterfacesNamed(
                 )
         }
     }
-
-/**
- * List containing declarations without all specified interfaces.
- *
- * @param names The name(s) of the interface(s) to exclude.
- * @param includeNested Whether to include nested interfaces.
- * @return A list containing declarations without all specified interface(s).
- */
-fun <T : KoInterfaceProvider> List<T>.withoutAllInterfacesNamed(
-    names: List<String>,
-    includeNested: Boolean = true,
-): List<T> = withoutAllInterfacesNamed(names.toSet(), includeNested)
 
 /**
  * List containing declarations that have at least one interface satisfying the provided predicate.

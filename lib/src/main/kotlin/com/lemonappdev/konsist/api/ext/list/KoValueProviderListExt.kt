@@ -22,15 +22,7 @@ fun <T : KoValueProvider> List<T>.withValue(vararg values: String): List<T> =
  * @param values The value(s) to include.
  * @return A list containing elements with the specified values (or any value if [values] is empty).
  */
-fun <T : KoValueProvider> List<T>.withValue(values: Set<String>): List<T> = withValue(*values.toTypedArray())
-
-/**
- * List containing elements with value.
- *
- * @param values The value(s) to include.
- * @return A list containing elements with the specified values (or any value if [values] is empty).
- */
-fun <T : KoValueProvider> List<T>.withValue(values: List<String>): List<T> = withValue(values.toSet())
+fun <T : KoValueProvider> List<T>.withValue(values: Collection<String>): List<T> = withValue(*values.toTypedArray())
 
 /**
  * List containing elements without value.
@@ -52,15 +44,7 @@ fun <T : KoValueProvider> List<T>.withoutValue(vararg values: String): List<T> =
  * @param values The value(s) to exclude.
  * @return A list containing elements without the specified values (or none value if [values] is empty).
  */
-fun <T : KoValueProvider> List<T>.withoutValue(values: Set<String>): List<T> = withoutValue(*values.toTypedArray())
-
-/**
- * List containing elements without value.
- *
- * @param values The value(s) to exclude.
- * @return A list containing elements without the specified values (or none value if [values] is empty).
- */
-fun <T : KoValueProvider> List<T>.withoutValue(values: List<String>): List<T> = withoutValue(values.toSet())
+fun <T : KoValueProvider> List<T>.withoutValue(values: Collection<String>): List<T> = withoutValue(*values.toTypedArray())
 
 /**
  * List containing declarations that have a value matching the provided predicate.

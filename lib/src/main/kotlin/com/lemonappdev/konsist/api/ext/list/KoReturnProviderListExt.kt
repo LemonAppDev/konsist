@@ -110,21 +110,13 @@ fun <T : KoReturnProvider> List<T>.withReturnTypeOf(
  * @param kClasses The Kotlin class(es) representing the return type(s) to include.
  * @return A list containing declarations with the return type of the specified Kotlin class(es).
  */
-fun <T : KoReturnProvider> List<T>.withReturnTypeOf(kClasses: Set<KClass<*>>): List<T> =
+fun <T : KoReturnProvider> List<T>.withReturnTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
         when {
             kClasses.isEmpty() -> it.hasReturnType()
             else -> kClasses.any { kClass -> it.hasReturnTypeOf(kClass) }
         }
     }
-
-/**
- * List containing declarations with return type.
- *
- * @param kClasses The Kotlin class(es) representing the return type(s) to include.
- * @return A list containing declarations with the return type of the specified Kotlin class(es).
- */
-fun <T : KoReturnProvider> List<T>.withReturnTypeOf(kClasses: List<KClass<*>>): List<T> = withReturnTypeOf(kClasses.toSet())
 
 /**
  * List containing declarations without return type.
@@ -154,18 +146,10 @@ fun <T : KoReturnProvider> List<T>.withoutReturnTypeOf(
  * @param kClasses The Kotlin class(es) representing the return type(s) to exclude.
  * @return A list containing declarations without return type of the specified Kotlin class(es).
  */
-fun <T : KoReturnProvider> List<T>.withoutReturnTypeOf(kClasses: Set<KClass<*>>): List<T> =
+fun <T : KoReturnProvider> List<T>.withoutReturnTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
         when {
             kClasses.isEmpty() -> it.hasReturnType()
             else -> kClasses.any { kClass -> it.hasReturnTypeOf(kClass) }
         }
     }
-
-/**
- * List containing declarations without return type.
- *
- * @param kClasses The Kotlin class(es) representing the return type(s) to exclude.
- * @return A list containing declarations without return type of the specified Kotlin class(es).
- */
-fun <T : KoReturnProvider> List<T>.withoutReturnTypeOf(kClasses: List<KClass<*>>): List<T> = withoutReturnTypeOf(kClasses.toSet())

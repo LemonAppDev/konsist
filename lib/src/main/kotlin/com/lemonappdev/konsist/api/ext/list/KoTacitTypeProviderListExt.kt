@@ -24,21 +24,13 @@ fun <T : KoTacitTypeProvider> List<T>.withTacitType(
  * @param types The tacit type(s) to include.
  * @return A list containing declarations with the specified tacit types.
  */
-fun <T : KoTacitTypeProvider> List<T>.withTacitType(types: Set<String>): List<T> =
+fun <T : KoTacitTypeProvider> List<T>.withTacitType(types: Collection<String>): List<T> =
     filter {
         when {
             types.isEmpty() -> true
             else -> types.any { type -> it.hasTacitType(type) }
         }
     }
-
-/**
- * List containing declarations with tacit type.
- *
- * @param types The tacit type(s) to include.
- * @return A list containing declarations with the specified tacit types.
- */
-fun <T : KoTacitTypeProvider> List<T>.withTacitType(types: List<String>): List<T> = withTacitType(types.toSet())
 
 /**
  * List containing declarations without tacit type.
@@ -61,21 +53,13 @@ fun <T : KoTacitTypeProvider> List<T>.withoutTacitType(
  * @param types The tacit type(s) to exclude.
  * @return A list containing declarations without specified tacit types.
  */
-fun <T : KoTacitTypeProvider> List<T>.withoutTacitType(types: Set<String>): List<T> =
+fun <T : KoTacitTypeProvider> List<T>.withoutTacitType(types: Collection<String>): List<T> =
     filterNot {
         when {
             types.isEmpty() -> true
             else -> types.any { type -> it.hasTacitType(type) }
         }
     }
-
-/**
- * List containing declarations without tacit type.
- *
- * @param types The tacit type(s) to exclude.
- * @return A list containing declarations without specified tacit types.
- */
-fun <T : KoTacitTypeProvider> List<T>.withoutTacitType(types: List<String>): List<T> = withoutTacitType(types.toSet())
 
 /**
  * List containing declarations with tacit type.
@@ -105,21 +89,13 @@ fun <T : KoTacitTypeProvider> List<T>.withTacitTypeOf(
  * @param kClasses The Kotlin class(es) representing the tacit type(s) to include.
  * @return A list containing declarations with the tacit type of the specified Kotlin class(es).
  */
-fun <T : KoTacitTypeProvider> List<T>.withTacitTypeOf(kClasses: Set<KClass<*>>): List<T> =
+fun <T : KoTacitTypeProvider> List<T>.withTacitTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
         when {
             kClasses.isEmpty() -> true
             else -> kClasses.any { kClass -> it.hasTacitTypeOf(kClass) }
         }
     }
-
-/**
- * List containing declarations with tacit type.
- *
- * @param kClasses The Kotlin class(es) representing the tacit type(s) to include.
- * @return A list containing declarations with the tacit type of the specified Kotlin class(es).
- */
-fun <T : KoTacitTypeProvider> List<T>.withTacitTypeOf(kClasses: List<KClass<*>>): List<T> = withTacitTypeOf(kClasses.toSet())
 
 /**
  * List containing declarations without tacit type.
@@ -149,18 +125,10 @@ fun <T : KoTacitTypeProvider> List<T>.withoutTacitTypeOf(
  * @param kClasses The Kotlin class(es) representing the tacit type(s) to exclude.
  * @return A list containing declarations without tacit type of the specified Kotlin class(es).
  */
-fun <T : KoTacitTypeProvider> List<T>.withoutTacitTypeOf(kClasses: Set<KClass<*>>): List<T> =
+fun <T : KoTacitTypeProvider> List<T>.withoutTacitTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
         when {
             kClasses.isEmpty() -> true
             else -> kClasses.any { kClass -> it.hasTacitTypeOf(kClass) }
         }
     }
-
-/**
- * List containing declarations without tacit type.
- *
- * @param kClasses The Kotlin class(es) representing the tacit type(s) to exclude.
- * @return A list containing declarations without tacit type of the specified Kotlin class(es).
- */
-fun <T : KoTacitTypeProvider> List<T>.withoutTacitTypeOf(kClasses: List<KClass<*>>): List<T> = withoutTacitTypeOf(kClasses.toSet())

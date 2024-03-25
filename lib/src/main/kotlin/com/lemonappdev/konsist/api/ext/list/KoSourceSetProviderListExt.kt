@@ -23,21 +23,13 @@ fun <T : KoSourceSetProvider> List<T>.withSourceSet(
  * @param names The source set name(s) to include.
  * @return A list containing declarations that reside in any of the specified source sets.
  */
-fun <T : KoSourceSetProvider> List<T>.withSourceSet(names: Set<String>): List<T> =
+fun <T : KoSourceSetProvider> List<T>.withSourceSet(names: Collection<String>): List<T> =
     filter {
         when {
             names.isEmpty() -> true
             else -> names.any { sourceSet -> it.resideInSourceSet(sourceSet) }
         }
     }
-
-/**
- * List containing declarations with source set.
- *
- * @param names The source set name(s) to include.
- * @return A list containing declarations that reside in any of the specified source sets.
- */
-fun <T : KoSourceSetProvider> List<T>.withSourceSet(names: List<String>): List<T> = withSourceSet(names.toSet())
 
 /**
  * List containing declarations without source set.
@@ -60,18 +52,10 @@ fun <T : KoSourceSetProvider> List<T>.withoutSourceSet(
  * @param names The source set name(s) to exclude.
  * @return A list containing declarations that don't reside in any of the specified source sets.
  */
-fun <T : KoSourceSetProvider> List<T>.withoutSourceSet(names: Set<String>): List<T> =
+fun <T : KoSourceSetProvider> List<T>.withoutSourceSet(names: Collection<String>): List<T> =
     filterNot {
         when {
             names.isEmpty() -> true
             else -> names.any { sourceSet -> it.resideInSourceSet(sourceSet) }
         }
     }
-
-/**
- * List containing declarations without source set.
- *
- * @param names The source set name(s) to exclude.
- * @return A list containing declarations that don't reside in any of the specified source sets.
- */
-fun <T : KoSourceSetProvider> List<T>.withoutSourceSet(names: List<String>): List<T> = withoutSourceSet(names.toSet())

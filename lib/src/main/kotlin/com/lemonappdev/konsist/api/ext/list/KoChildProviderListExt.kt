@@ -58,7 +58,7 @@ fun <T : KoChildProvider> List<T>.withChildNamed(
  * @return A list containing declarations with at least one of the specified child(s).
  */
 fun <T : KoChildProvider> List<T>.withChildNamed(
-    names: Set<String>,
+    names: Collection<String>,
     indirectChildren: Boolean = false,
 ): List<T> =
     filter {
@@ -72,18 +72,6 @@ fun <T : KoChildProvider> List<T>.withChildNamed(
                 )
         }
     }
-
-/**
- * List containing declarations that have at least one child with the specified name(s).
- *
- * @param names The names of additional children to include.
- * @param indirectChildren Whether to include indirect children.
- * @return A list containing declarations with at least one of the specified child(s).
- */
-fun <T : KoChildProvider> List<T>.withChildNamed(
-    names: List<String>,
-    indirectChildren: Boolean = false,
-): List<T> = withChildNamed(names.toSet(), indirectChildren)
 
 /**
  * List containing declarations without any of specified children.
@@ -110,7 +98,7 @@ fun <T : KoChildProvider> List<T>.withoutChildNamed(
  * @return A list containing declarations without any of specified children.
  */
 fun <T : KoChildProvider> List<T>.withoutChildNamed(
-    names: Set<String>,
+    names: Collection<String>,
     indirectChildren: Boolean = false,
 ): List<T> =
     filterNot {
@@ -124,18 +112,6 @@ fun <T : KoChildProvider> List<T>.withoutChildNamed(
                 )
         }
     }
-
-/**
- * List containing declarations without any of specified children.
- *
- * @param names The names of additional children to exclude.
- * @param indirectChildren Whether to include indirect children.
- * @return A list containing declarations without any of specified children.
- */
-fun <T : KoChildProvider> List<T>.withoutChildNamed(
-    names: List<String>,
-    indirectChildren: Boolean = false,
-): List<T> = withoutChildNamed(names.toSet(), indirectChildren)
 
 /**
  * List containing declarations that have all specified children.
@@ -162,7 +138,7 @@ fun <T : KoChildProvider> List<T>.withAllChildrenNamed(
  * @return A list containing declarations with all specified child(s).
  */
 fun <T : KoChildProvider> List<T>.withAllChildrenNamed(
-    names: Set<String>,
+    names: Collection<String>,
     indirectChildren: Boolean = false,
 ): List<T> =
     filter {
@@ -176,18 +152,6 @@ fun <T : KoChildProvider> List<T>.withAllChildrenNamed(
                 )
         }
     }
-
-/**
- * List containing declarations that have all specified children.
- *
- * @param names The name(s) of the child(s) to include.
- * @param indirectChildren Whether to include indirect children.
- * @return A list containing declarations with all specified child(s).
- */
-fun <T : KoChildProvider> List<T>.withAllChildrenNamed(
-    names: List<String>,
-    indirectChildren: Boolean = false,
-): List<T> = withAllChildrenNamed(names.toSet(), indirectChildren)
 
 /**
  * List containing declarations without all specified children.
@@ -214,7 +178,7 @@ fun <T : KoChildProvider> List<T>.withoutAllChildrenNamed(
  * @return A list containing declarations without all specified child(s).
  */
 fun <T : KoChildProvider> List<T>.withoutAllChildrenNamed(
-    names: Set<String>,
+    names: Collection<String>,
     indirectChildren: Boolean = false,
 ): List<T> =
     filterNot {
@@ -228,18 +192,6 @@ fun <T : KoChildProvider> List<T>.withoutAllChildrenNamed(
                 )
         }
     }
-
-/**
- * List containing declarations without all specified children.
- *
- * @param names The name(s) of the child(s) to exclude.
- * @param indirectChildren Whether to include indirect children.
- * @return A list containing declarations without all specified child(s).
- */
-fun <T : KoChildProvider> List<T>.withoutAllChildrenNamed(
-    names: List<String>,
-    indirectChildren: Boolean = false,
-): List<T> = withoutAllChildrenNamed(names.toSet(), indirectChildren)
 
 /**
  * List containing declarations that have at least one child satisfying the provided predicate.
@@ -350,7 +302,7 @@ fun <T : KoChildProvider> List<T>.withChildOf(
  * @return A list containing declarations with at least one child of the specified `KClass` type.
  */
 fun <T : KoChildProvider> List<T>.withChildOf(
-    kClasses: Set<KClass<*>>,
+    kClasses: Collection<KClass<*>>,
     indirectChildren: Boolean = false,
 ): List<T> =
     filter {
@@ -364,18 +316,6 @@ fun <T : KoChildProvider> List<T>.withChildOf(
                 )
         }
     }
-
-/**
- * List containing declarations that have at least one child of the specified `KClass` type.
- *
- * @param kClasses The Kotlin classes representing children to include.
- * @param indirectChildren Whether to include indirect children.
- * @return A list containing declarations with at least one child of the specified `KClass` type.
- */
-fun <T : KoChildProvider> List<T>.withChildOf(
-    kClasses: List<KClass<*>>,
-    indirectChildren: Boolean = false,
-): List<T> = withChildOf(kClasses.toSet(), indirectChildren)
 
 /**
  * List containing declarations without any child of the specified `KClass` type.
@@ -399,7 +339,7 @@ fun <T : KoChildProvider> List<T>.withoutChildOf(
  * @return A list containing declarations without any of the specified children.
  */
 fun <T : KoChildProvider> List<T>.withoutChildOf(
-    kClasses: Set<KClass<*>>,
+    kClasses: Collection<KClass<*>>,
     indirectChildren: Boolean = false,
 ): List<T> =
     filterNot {
@@ -413,18 +353,6 @@ fun <T : KoChildProvider> List<T>.withoutChildOf(
                 )
         }
     }
-
-/**
- * List containing declarations without any child of the specified `KClass` type.
- *
- * @param kClasses The Kotlin classes representing children to exclude.
- * @param indirectChildren Whether to include indirect children.
- * @return A list containing declarations without any of the specified children.
- */
-fun <T : KoChildProvider> List<T>.withoutChildOf(
-    kClasses: List<KClass<*>>,
-    indirectChildren: Boolean = false,
-): List<T> = withoutChildOf(kClasses.toSet(), indirectChildren)
 
 /**
  * List containing declarations that have all children of the specified `KClass` type.
@@ -448,7 +376,7 @@ fun <T : KoChildProvider> List<T>.withAllChildrenOf(
  * @return A list containing declarations that have all children of the specified `KClass` type.
  */
 fun <T : KoChildProvider> List<T>.withAllChildrenOf(
-    kClasses: Set<KClass<*>>,
+    kClasses: Collection<KClass<*>>,
     indirectChildren: Boolean = false,
 ): List<T> =
     filter {
@@ -462,18 +390,6 @@ fun <T : KoChildProvider> List<T>.withAllChildrenOf(
                 )
         }
     }
-
-/**
- * List containing declarations that have all children of the specified `KClass` type.
- *
- * @param kClasses The Kotlin classes representing children to include.
- * @param indirectChildren Whether to include indirect children.
- * @return A list containing declarations that have all children of the specified `KClass` type.
- */
-fun <T : KoChildProvider> List<T>.withAllChildrenOf(
-    kClasses: List<KClass<*>>,
-    indirectChildren: Boolean = false,
-): List<T> = withAllChildrenOf(kClasses.toSet(), indirectChildren)
 
 /**
  * List containing declarations without all specified `KClass` type children.
@@ -497,7 +413,7 @@ fun <T : KoChildProvider> List<T>.withoutAllChildrenOf(
  * @return A list containing declarations without all specified `KClass` type children.
  */
 fun <T : KoChildProvider> List<T>.withoutAllChildrenOf(
-    kClasses: Set<KClass<*>>,
+    kClasses: Collection<KClass<*>>,
     indirectChildren: Boolean = false,
 ): List<T> =
     filterNot {
@@ -511,15 +427,3 @@ fun <T : KoChildProvider> List<T>.withoutAllChildrenOf(
                 )
         }
     }
-
-/**
- * List containing declarations without all specified `KClass` type children.
- *
- * @param kClasses The Kotlin classes representing children to exclude.
- * @param indirectChildren Whether to include indirect children.
- * @return A list containing declarations without all specified `KClass` type children.
- */
-fun <T : KoChildProvider> List<T>.withoutAllChildrenOf(
-    kClasses: List<KClass<*>>,
-    indirectChildren: Boolean = false,
-): List<T> = withoutAllChildrenOf(kClasses.toSet(), indirectChildren)

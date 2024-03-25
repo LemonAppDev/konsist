@@ -39,16 +39,7 @@ fun <T : KoHasPackageProvider> List<T>.withPackage(vararg names: String): List<T
  * @return A list containing declarations with a package matching any of the specified package names
  * (or any package if [names] is empty).
  */
-fun <T : KoHasPackageProvider> List<T>.withPackage(names: Set<String>): List<T> = withPackage(*names.toTypedArray())
-
-/**
- * List containing declarations with package.
- *
- * @param names The package names to include.
- * @return A list containing declarations with a package matching any of the specified package names
- * (or any package if [names] is empty).
- */
-fun <T : KoHasPackageProvider> List<T>.withPackage(names: List<String>): List<T> = withPackage(names.toSet())
+fun <T : KoHasPackageProvider> List<T>.withPackage(names: Collection<String>): List<T> = withPackage(*names.toTypedArray())
 
 /**
  * List containing declarations with some package.
@@ -72,13 +63,4 @@ fun <T : KoHasPackageProvider> List<T>.withoutPackage(vararg names: String): Lis
  * @return A list containing declarations without a package matching any of the specified package names
  * (or none package if [names] is empty).
  */
-fun <T : KoHasPackageProvider> List<T>.withoutPackage(names: Set<String>): List<T> = withoutPackage(*names.toTypedArray())
-
-/**
- * List containing declarations with some package.
- *
- * @param names The package names to exclude.
- * @return A list containing declarations without a package matching any of the specified package names
- * (or none package if [names] is empty).
- */
-fun <T : KoHasPackageProvider> List<T>.withoutPackage(names: List<String>): List<T> = withoutPackage(names.toSet())
+fun <T : KoHasPackageProvider> List<T>.withoutPackage(names: Collection<String>): List<T> = withoutPackage(*names.toTypedArray())

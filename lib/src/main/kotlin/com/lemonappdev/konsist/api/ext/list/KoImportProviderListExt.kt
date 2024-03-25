@@ -42,21 +42,13 @@ fun <T : KoImportProvider> List<T>.withImportNamed(
  * @param names The names of additional imports to include.
  * @return A list containing declarations with at least one of the specified import(s).
  */
-fun <T : KoImportProvider> List<T>.withImportNamed(names: Set<String>): List<T> =
+fun <T : KoImportProvider> List<T>.withImportNamed(names: Collection<String>): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasImports()
             else -> it.hasImportWithName(names.first(), *names.drop(1).toTypedArray())
         }
     }
-
-/**
- * List containing declarations that have at least one import with the specified name(s).
- *
- * @param names The names of additional imports to include.
- * @return A list containing declarations with at least one of the specified import(s).
- */
-fun <T : KoImportProvider> List<T>.withImportNamed(names: List<String>): List<T> = withImportNamed(names.toSet())
 
 /**
  * List containing declarations without any of specified imports.
@@ -76,21 +68,13 @@ fun <T : KoImportProvider> List<T>.withoutImportNamed(
  * @param names The names of additional imports to exclude.
  * @return A list containing declarations without any of specified imports.
  */
-fun <T : KoImportProvider> List<T>.withoutImportNamed(names: Set<String>): List<T> =
+fun <T : KoImportProvider> List<T>.withoutImportNamed(names: Collection<String>): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasImports()
             else -> it.hasImportWithName(names.first(), *names.drop(1).toTypedArray())
         }
     }
-
-/**
- * List containing declarations without any of specified imports.
- *
- * @param names The names of additional imports to exclude.
- * @return A list containing declarations without any of specified imports.
- */
-fun <T : KoImportProvider> List<T>.withoutImportNamed(names: List<String>): List<T> = withoutImportNamed(names.toSet())
 
 /**
  * List containing declarations that have all specified imports.
@@ -110,21 +94,13 @@ fun <T : KoImportProvider> List<T>.withAllImportsNamed(
  * @param names The name(s) of the import(s) to include.
  * @return A list containing declarations with all specified import(s).
  */
-fun <T : KoImportProvider> List<T>.withAllImportsNamed(names: Set<String>): List<T> =
+fun <T : KoImportProvider> List<T>.withAllImportsNamed(names: Collection<String>): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasImports()
             else -> it.hasImportsWithAllNames(names.first(), *names.drop(1).toTypedArray())
         }
     }
-
-/**
- * List containing declarations that have all specified imports.
- *
- * @param names The name(s) of the import(s) to include.
- * @return A list containing declarations with all specified import(s).
- */
-fun <T : KoImportProvider> List<T>.withAllImportsNamed(names: List<String>): List<T> = withAllImportsNamed(names.toSet())
 
 /**
  * List containing declarations without all specified imports.
@@ -144,21 +120,13 @@ fun <T : KoImportProvider> List<T>.withoutAllImportsNamed(
  * @param names The name(s) of the import(s) to exclude.
  * @return A list containing declarations without all specified import(s).
  */
-fun <T : KoImportProvider> List<T>.withoutAllImportsNamed(names: Set<String>): List<T> =
+fun <T : KoImportProvider> List<T>.withoutAllImportsNamed(names: Collection<String>): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasImports()
             else -> it.hasImportsWithAllNames(names.first(), *names.drop(1).toTypedArray())
         }
     }
-
-/**
- * List containing declarations without all specified imports.
- *
- * @param names The name(s) of the import(s) to exclude.
- * @return A list containing declarations without all specified import(s).
- */
-fun <T : KoImportProvider> List<T>.withoutAllImportsNamed(names: List<String>): List<T> = withoutAllImportsNamed(names.toSet())
 
 /**
  * List containing declarations that have at least one import satisfying the provided predicate.

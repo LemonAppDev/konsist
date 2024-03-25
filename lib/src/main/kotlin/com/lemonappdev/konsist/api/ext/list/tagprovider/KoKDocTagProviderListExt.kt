@@ -42,21 +42,13 @@ fun <T : KoKDocTagProvider> List<T>.withTag(
  * @param tags The tags to include.
  * @return A list containing declarations with all the specified tags.
  */
-fun <T : KoKDocTagProvider> List<T>.withTag(tags: Set<KoKDocTag>): List<T> =
+fun <T : KoKDocTagProvider> List<T>.withTag(tags: Collection<KoKDocTag>): List<T> =
     filter {
         when {
             tags.isEmpty() -> it.hasTags()
             else -> it.hasTag(tags.first(), *tags.drop(1).toTypedArray())
         }
     }
-
-/**
- * List containing declarations with all the specified tags.
- *
- * @param tags The tags to include.
- * @return A list containing declarations with all the specified tags.
- */
-fun <T : KoKDocTagProvider> List<T>.withTag(tags: List<KoKDocTag>): List<T> = withTag(tags.toSet())
 
 /**
  * List containing declarations without all specified tags.
@@ -76,21 +68,13 @@ fun <T : KoKDocTagProvider> List<T>.withoutTag(
  * @param tags The tags to exclude.
  * @return A list containing declarations without all the specified tags.
  */
-fun <T : KoKDocTagProvider> List<T>.withoutTag(tags: Set<KoKDocTag>): List<T> =
+fun <T : KoKDocTagProvider> List<T>.withoutTag(tags: Collection<KoKDocTag>): List<T> =
     filterNot {
         when {
             tags.isEmpty() -> it.hasTags()
             else -> it.hasTag(tags.first(), *tags.drop(1).toTypedArray())
         }
     }
-
-/**
- * List containing declarations without all specified tags.
- *
- * @param tags The tags to exclude.
- * @return A list containing declarations without all the specified tags.
- */
-fun <T : KoKDocTagProvider> List<T>.withoutTag(tags: List<KoKDocTag>): List<T> = withoutTag(tags.toSet())
 
 /**
  * List containing declarations with all the specified tags.
@@ -110,21 +94,13 @@ fun <T : KoKDocTagProvider> List<T>.withAllTags(
  * @param tags The tags to include.
  * @return A list containing declarations with all the specified tags.
  */
-fun <T : KoKDocTagProvider> List<T>.withAllTags(tags: Set<KoKDocTag>): List<T> =
+fun <T : KoKDocTagProvider> List<T>.withAllTags(tags: Collection<KoKDocTag>): List<T> =
     filter {
         when {
             tags.isEmpty() -> it.hasTags()
             else -> it.hasAllTags(tags.first(), *tags.drop(1).toTypedArray())
         }
     }
-
-/**
- * List containing declarations with all the specified tags.
- *
- * @param tags The tags to include.
- * @return A list containing declarations with all the specified tags.
- */
-fun <T : KoKDocTagProvider> List<T>.withAllTags(tags: List<KoKDocTag>): List<T> = withAllTags(tags.toSet())
 
 /**
  * List containing declarations without all specified tags.
@@ -144,18 +120,10 @@ fun <T : KoKDocTagProvider> List<T>.withoutAllTags(
  * @param tags The tags to exclude.
  * @return A list containing declarations without all the specified tags.
  */
-fun <T : KoKDocTagProvider> List<T>.withoutAllTags(tags: Set<KoKDocTag>): List<T> =
+fun <T : KoKDocTagProvider> List<T>.withoutAllTags(tags: Collection<KoKDocTag>): List<T> =
     filterNot {
         when {
             tags.isEmpty() -> it.hasTags()
             else -> it.hasAllTags(tags.first(), *tags.drop(1).toTypedArray())
         }
     }
-
-/**
- * List containing declarations without all specified tags.
- *
- * @param tags The tags to exclude.
- * @return A list containing declarations without all the specified tags.
- */
-fun <T : KoKDocTagProvider> List<T>.withoutAllTags(tags: List<KoKDocTag>): List<T> = withoutAllTags(tags.toSet())

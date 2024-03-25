@@ -21,21 +21,13 @@ fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedType(
  * @param names The type name(s) to include.
  * @return A list containing declarations with the specified types.
  */
-fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedType(names: Set<String?>): List<T> =
+fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedType(names: Collection<String?>): List<T> =
     filter {
         when {
             names.isEmpty() -> true
             else -> names.any { type -> it.representsType(type) }
         }
     }
-
-/**
- * List containing declarations that represents the type.
- *
- * @param names The type name(s) to include.
- * @return A list containing declarations with the specified types.
- */
-fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedType(names: List<String?>): List<T> = withRepresentedType(names.toSet())
 
 /**
  * List containing declarations that do not represent the type.
@@ -55,21 +47,13 @@ fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedType(
  * @param names The type name(s) to exclude.
  * @return A list containing declarations without the specified types.
  */
-fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedType(names: Set<String?>): List<T> =
+fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedType(names: Collection<String?>): List<T> =
     filter {
         when {
             names.isEmpty() -> false
             else -> names.none { type -> it.representsType(type) }
         }
     }
-
-/**
- * List containing declarations that do not represent the type.
- *
- * @param names The type name(s) to exclude.
- * @return A list containing declarations without the specified types.
- */
-fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedType(names: List<String?>): List<T> = withoutRepresentedType(names.toSet())
 
 /**
  * List containing declarations that represents the type.
@@ -101,22 +85,13 @@ fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedTypeOf(
  * @param kClasses The Kotlin classes representing the types to include.
  * @return A list containing declarations with types matching the specified Kotlin classes.
  */
-fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedTypeOf(kClasses: Set<KClass<*>?>): List<T> =
+fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedTypeOf(kClasses: Collection<KClass<*>?>): List<T> =
     filter {
         when {
             kClasses.isEmpty() -> true
             else -> kClasses.any { type -> it.representsType(type?.qualifiedName) }
         }
     }
-
-/**
- * List containing declarations that represents the type.
- *
- * @param kClasses The Kotlin classes representing the types to include.
- * @return A list containing declarations with types matching the specified Kotlin classes.
- */
-fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedTypeOf(kClasses: List<KClass<*>?>): List<T> =
-    withRepresentedTypeOf(kClasses.toSet())
 
 /**
  * List containing declarations that do not represent the type.
@@ -148,19 +123,10 @@ fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedTypeOf(
  * @param kClasses The Kotlin classes representing the types to exclude.
  * @return A list containing declarations without types matching the specified Kotlin classes.
  */
-fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedTypeOf(kClasses: Set<KClass<*>?>): List<T> =
+fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedTypeOf(kClasses: Collection<KClass<*>?>): List<T> =
     filter {
         when {
             kClasses.isEmpty() -> false
             else -> kClasses.none { type -> it.representsType(type?.qualifiedName) }
         }
     }
-
-/**
- * List containing declarations that do not represent the type.
- *
- * @param kClasses The Kotlin classes representing the types to exclude.
- * @return A list containing declarations without types matching the specified Kotlin classes.
- */
-fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedTypeOf(kClasses: List<KClass<*>?>): List<T> =
-    withoutRepresentedTypeOf(kClasses.toSet())

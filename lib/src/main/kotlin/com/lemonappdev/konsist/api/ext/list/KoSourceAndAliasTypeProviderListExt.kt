@@ -31,21 +31,13 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceTypeOf(
  * @param kClasses The Kotlin classes representing the source types to include.
  * @return A list containing declarations with the source type matching any of the specified types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceTypeOf(kClasses: Set<KClass<*>>): List<T> =
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
         when {
             kClasses.isEmpty() -> true
             else -> kClasses.any { kClass -> it.sourceType == kClass.simpleName }
         }
     }
-
-/**
- * List containing declarations with source type of.
- *
- * @param kClasses The Kotlin classes representing the source types to include.
- * @return A list containing declarations with the source type matching any of the specified types.
- */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceTypeOf(kClasses: List<KClass<*>>): List<T> = withSourceTypeOf(kClasses.toSet())
 
 /**
  * List containing declarations without source type of.
@@ -75,22 +67,13 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceTypeOf(
  * @param kClasses The Kotlin classes representing the source types to exclude.
  * @return A list containing declarations without source type matching any of the specified types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceTypeOf(kClasses: Set<KClass<*>>): List<T> =
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
         when {
             kClasses.isEmpty() -> true
             else -> kClasses.any { kClass -> it.sourceType == kClass.simpleName }
         }
     }
-
-/**
- * List containing declarations without source type of.
- *
- * @param kClasses The Kotlin classes representing the source types to exclude.
- * @return A list containing declarations without source type matching any of the specified types.
- */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceTypeOf(kClasses: List<KClass<*>>): List<T> =
-    withoutSourceTypeOf(kClasses.toSet())
 
 /**
  * List containing declarations with source type.
@@ -110,21 +93,13 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceType(
  * @param names The source type name(s) to include.
  * @return A list containing declarations with the specified source types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceType(names: Set<String>): List<T> =
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceType(names: Collection<String>): List<T> =
     filter {
         when {
             names.isEmpty() -> true
             else -> names.any { type -> it.sourceType == type }
         }
     }
-
-/**
- * List containing declarations with source type.
- *
- * @param names The source type name(s) to include.
- * @return A list containing declarations with the specified source types.
- */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceType(names: List<String>): List<T> = withSourceType(names.toSet())
 
 /**
  * List containing declarations without source type.
@@ -144,21 +119,13 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceType(
  * @param names The source type name(s) to exclude.
  * @return A list containing declarations without specified source types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceType(names: Set<String>): List<T> =
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceType(names: Collection<String>): List<T> =
     filterNot {
         when {
             names.isEmpty() -> true
             else -> names.any { type -> it.sourceType == type }
         }
     }
-
-/**
- * List containing declarations without source type.
- *
- * @param names The source type name(s) to exclude.
- * @return A list containing declarations without specified source types.
- */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceType(names: List<String>): List<T> = withoutSourceType(names.toSet())
 
 /**
  * List containing declarations with bare source type of.
@@ -186,22 +153,13 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withBareSourceTypeOf(
  * @param kClasses The Kotlin classes representing the bare source types to include.
  * @return A list containing declarations with the bare source type matching any of the specified types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withBareSourceTypeOf(kClasses: Set<KClass<*>>): List<T> =
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withBareSourceTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
         when {
             kClasses.isEmpty() -> true
             else -> kClasses.any { kClass -> it.bareSourceType == kClass.simpleName }
         }
     }
-
-/**
- * List containing declarations with bare source type of.
- *
- * @param kClasses The Kotlin classes representing the bare source types to include.
- * @return A list containing declarations with the bare source type matching any of the specified types.
- */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withBareSourceTypeOf(kClasses: List<KClass<*>>): List<T> =
-    withBareSourceTypeOf(kClasses.toSet())
 
 /**
  * List containing declarations without bare source type of.
@@ -229,22 +187,13 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBareSourceTypeOf(
  * @param kClasses The Kotlin classes representing the bare source types to exclude.
  * @return A list containing declarations without bare source type matching any of the specified types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBareSourceTypeOf(kClasses: Set<KClass<*>>): List<T> =
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBareSourceTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
         when {
             kClasses.isEmpty() -> true
             else -> kClasses.any { kClass -> it.bareSourceType == kClass.simpleName }
         }
     }
-
-/**
- * List containing declarations without bare source type of.
- *
- * @param kClasses The Kotlin classes representing the bare source types to exclude.
- * @return A list containing declarations without bare source type matching any of the specified types.
- */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBareSourceTypeOf(kClasses: List<KClass<*>>): List<T> =
-    withoutBareSourceTypeOf(kClasses.toSet())
 
 /**
  * List containing declarations with base source type.
@@ -264,21 +213,13 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withBareSourceType(
  * @param names The bare source type name(s) to include.
  * @return A list containing declarations with the specified bare source types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withBareSourceType(names: Set<String>): List<T> =
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withBareSourceType(names: Collection<String>): List<T> =
     filter {
         when {
             names.isEmpty() -> true
             else -> names.any { type -> it.bareSourceType == type }
         }
     }
-
-/**
- * List containing declarations with base source type.
- *
- * @param names The bare source type name(s) to include.
- * @return A list containing declarations with the specified bare source types.
- */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withBareSourceType(names: List<String>): List<T> = withBareSourceType(names.toSet())
 
 /**
  * List containing declarations without bare source type.
@@ -298,18 +239,10 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBareSourceType(
  * @param names The bare source type name(s) to exclude.
  * @return A list containing declarations without specified base source types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBareSourceType(names: Set<String>): List<T> =
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBareSourceType(names: Collection<String>): List<T> =
     filterNot {
         when {
             names.isEmpty() -> true
             else -> names.any { type -> it.bareSourceType == type }
         }
     }
-
-/**
- * List containing declarations without bare source type.
- *
- * @param names The bare source type name(s) to exclude.
- * @return A list containing declarations without specified base source types.
- */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBareSourceType(names: List<String>): List<T> = withoutBareSourceType(names.toSet())
