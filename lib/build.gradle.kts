@@ -5,13 +5,13 @@ plugins {
 
 dependencies {
     implementation(libs.kotlin.stdlib.jdk8)
-    implementation(libs.kotlin.compiler)
+    implementation(libs.kotlin.compiler.embeddable)
+    implementation(libs.kotlinx.coroutines.core)
 
     testImplementation(libs.junitJupiterEngine)
     testImplementation(libs.junitJupiterParams)
     testImplementation(libs.mockk)
     testImplementation(libs.kluent)
-    testImplementation(kotlin("script-runtime"))
 }
 
 @Suppress("UnstableApiUsage")

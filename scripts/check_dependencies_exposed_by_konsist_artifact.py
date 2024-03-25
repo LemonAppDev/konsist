@@ -12,14 +12,25 @@ def check_dependencies(file_path):
         root = tree.getroot()
 
         ns = {'mvn': 'http://maven.apache.org/POM/4.0.0'}
+        valid_groups = {'org.jetbrains.kotlin', 'org.jetbrains.kotlinx'}
+        has_errors = False
+
         for dependency in root.findall(".//mvn:dependency", ns):
             group_id = dependency.find('mvn:groupId', ns)
-            if group_id is not None and group_id.text != 'org.jetbrains.kotlin':
-                print(f'ERROR Invalid dependency: {group_id.text}')
-                return 1
+            artifact_id = dependency.find('mvn:artifactId', ns)
+            if group_id is not None:
+                dependency_status = "OK" if group_id.text in valid_groups else "ERROR Invalid dependency"
+                print(f'{dependency_status}: {group_id.text}:{artifact_id.text if artifact_id is not None else "N/A"}')
 
-        print('OK - All dependencies are from org.jetbrains.kotlin')
-        return 0
+                if group_id.text not in valid_groups:
+                    has_errors = True
+
+        if not has_errors:
+            print('OK - All dependencies are valid.')
+            return 0
+        else:
+            print('ERROR - Invalid dependencies found.')
+            return 1
 
     except ET.ParseError as e:
         print(f'Failed to parse XML: {e}')

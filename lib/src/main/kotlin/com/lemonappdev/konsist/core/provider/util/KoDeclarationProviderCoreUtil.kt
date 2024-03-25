@@ -1,7 +1,5 @@
 package com.lemonappdev.konsist.core.provider.util
 
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiWhiteSpace
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
@@ -17,6 +15,8 @@ import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoPropertyDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoSecondaryConstructorDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationCore
+import org.jetbrains.kotlin.com.intellij.psi.PsiElement
+import org.jetbrains.kotlin.com.intellij.psi.PsiWhiteSpace
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtAnonymousInitializer
 import org.jetbrains.kotlin.psi.KtClass

@@ -1,10 +1,10 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.util.LocationUtil
+import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 
 internal interface KoPathProviderCore : KoPathProvider, KoBaseProviderCore {
     val psiElement: PsiElement
