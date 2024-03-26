@@ -9,7 +9,8 @@ import com.lemonappdev.konsist.api.provider.KoObjectProvider
  * @param includeNested Whether to include nested objects.
  * @return A list containing object declarations.
  */
-fun <T : KoObjectProvider> List<T>.objects(includeNested: Boolean = true): List<KoObjectDeclaration> = flatMap { it.objects(includeNested) }
+fun <T : KoObjectProvider> List<T>.objects(includeNested: Boolean = true): List<KoObjectDeclaration> =
+    flatMap { it.objects(includeNested) }
 
 /**
  * List containing declarations with any object.
@@ -17,7 +18,8 @@ fun <T : KoObjectProvider> List<T>.objects(includeNested: Boolean = true): List<
  * @param includeNested Whether to include nested objects.
  * @return A list containing declarations with any object.
  */
-fun <T : KoObjectProvider> List<T>.withObjects(includeNested: Boolean = true): List<T> = filter { it.hasObjects(includeNested) }
+fun <T : KoObjectProvider> List<T>.withObjects(includeNested: Boolean = true): List<T> =
+    filter { it.hasObjects(includeNested) }
 
 /**
  * List containing declarations with no objects.
@@ -25,7 +27,8 @@ fun <T : KoObjectProvider> List<T>.withObjects(includeNested: Boolean = true): L
  * @param includeNested Whether to include nested objects.
  * @return A list containing declarations with no objects.
  */
-fun <T : KoObjectProvider> List<T>.withoutObjects(includeNested: Boolean = true): List<T> = filterNot { it.hasObjects(includeNested) }
+fun <T : KoObjectProvider> List<T>.withoutObjects(includeNested: Boolean = true): List<T> =
+    filterNot { it.hasObjects(includeNested) }
 
 /**
  * List containing declarations that have at least one object with the specified name(s).
@@ -39,10 +42,7 @@ fun <T : KoObjectProvider> List<T>.withObjectNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> =
-    filter {
-        it.hasObjectWithName(name, *names, includeNested = includeNested)
-    }
+): List<T> = withObjectNamed(listOf(name, *names), includeNested)
 
 /**
  * List containing declarations that have at least one object with the specified name(s).
@@ -74,10 +74,7 @@ fun <T : KoObjectProvider> List<T>.withoutObjectNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> =
-    filterNot {
-        it.hasObjectWithName(name, *names, includeNested = includeNested)
-    }
+): List<T> = withoutObjectNamed(listOf(name, *names), includeNested)
 
 /**
  * List containing declarations without any of specified objects.
@@ -109,10 +106,7 @@ fun <T : KoObjectProvider> List<T>.withAllObjectsNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> =
-    filter {
-        it.hasObjectsWithAllNames(name, *names, includeNested = includeNested)
-    }
+): List<T> = withAllObjectsNamed(listOf(name, *names), includeNested)
 
 /**
  * List containing declarations that have all specified objects.
@@ -128,7 +122,11 @@ fun <T : KoObjectProvider> List<T>.withAllObjectsNamed(
     filter {
         when {
             names.isEmpty() -> it.hasObjects(includeNested)
-            else -> it.hasObjectsWithAllNames(names.first(), *names.drop(1).toTypedArray(), includeNested = includeNested)
+            else -> it.hasObjectsWithAllNames(
+                names.first(),
+                *names.drop(1).toTypedArray(),
+                includeNested = includeNested
+            )
         }
     }
 
@@ -144,10 +142,7 @@ fun <T : KoObjectProvider> List<T>.withoutAllObjectsNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> =
-    filterNot {
-        it.hasObjectsWithAllNames(name, *names, includeNested = includeNested)
-    }
+): List<T> = withoutAllObjectsNamed(listOf(name, *names), includeNested)
 
 /**
  * List containing declarations without any of specified objects.
@@ -163,7 +158,11 @@ fun <T : KoObjectProvider> List<T>.withoutAllObjectsNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasObjects(includeNested)
-            else -> it.hasObjectsWithAllNames(names.first(), *names.drop(1).toTypedArray(), includeNested = includeNested)
+            else -> it.hasObjectsWithAllNames(
+                names.first(),
+                *names.drop(1).toTypedArray(),
+                includeNested = includeNested
+            )
         }
     }
 

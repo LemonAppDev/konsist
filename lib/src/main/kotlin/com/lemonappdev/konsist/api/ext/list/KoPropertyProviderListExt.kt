@@ -41,7 +41,7 @@ fun <T : KoPropertyProvider> List<T>.withPropertyNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = filter { it.hasPropertyWithName(name, *names, includeNested = includeNested) }
+): List<T> = withPropertyNamed(listOf(name, *names), includeNested)
 
 /**
  * List containing declarations that have at least one property with the specified name(s).
@@ -73,7 +73,7 @@ fun <T : KoPropertyProvider> List<T>.withoutPropertyNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = filterNot { it.hasPropertyWithName(name, *names, includeNested = includeNested) }
+): List<T> = withoutPropertyNamed(listOf(name, *names), includeNested)
 
 /**
  * List containing declarations without any of specified properties.
@@ -105,7 +105,7 @@ fun <T : KoPropertyProvider> List<T>.withAllPropertiesNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = filter { it.hasPropertiesWithAllNames(name, *names, includeNested = includeNested) }
+): List<T> = withAllPropertiesNamed(listOf(name, *names), includeNested)
 
 /**
  * List containing declarations that have all specified properties.
@@ -137,7 +137,7 @@ fun <T : KoPropertyProvider> List<T>.withoutAllPropertiesNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = filterNot { it.hasPropertiesWithAllNames(name, *names, includeNested = includeNested) }
+): List<T> = withoutAllPropertiesNamed(listOf(name, *names), includeNested)
 
 /**
  * List containing declarations without all specified properties.

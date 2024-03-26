@@ -12,10 +12,7 @@ import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 fun <T : KoSourceSetProvider> List<T>.withSourceSet(
     name: String,
     vararg names: String,
-): List<T> =
-    filter {
-        it.resideInSourceSet(name) || names.any { sourceSet -> it.resideInSourceSet(sourceSet) }
-    }
+): List<T> = withSourceSet(listOf(name, *names))
 
 /**
  * List containing declarations with source set.
@@ -41,10 +38,7 @@ fun <T : KoSourceSetProvider> List<T>.withSourceSet(names: Collection<String>): 
 fun <T : KoSourceSetProvider> List<T>.withoutSourceSet(
     name: String,
     vararg names: String,
-): List<T> =
-    filter {
-        !it.resideInSourceSet(name) && names.none { sourceSet -> it.resideInSourceSet(sourceSet) }
-    }
+): List<T> = withoutSourceSet(listOf(name, *names))
 
 /**
  * List containing declarations without source set.

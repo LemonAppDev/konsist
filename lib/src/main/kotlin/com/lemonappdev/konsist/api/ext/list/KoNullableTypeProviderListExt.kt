@@ -78,17 +78,7 @@ fun <T : KoNullableTypeProvider> List<T>.withoutType(predicate: ((KoTypeDeclarat
 fun <T : KoNullableTypeProvider> List<T>.withTypeOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> =
-    filter {
-        val hasAllTypes =
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.hasTypeOf(kClass) }
-            } else {
-                false
-            }
-
-        it.hasTypeOf(kClass) || hasAllTypes
-    }
+): List<T> = withTypeOf(listOf(kClass, *kClasses))
 
 /**
  * List containing declarations with type of.
@@ -114,17 +104,7 @@ fun <T : KoNullableTypeProvider> List<T>.withTypeOf(kClasses: Collection<KClass<
 fun <T : KoNullableTypeProvider> List<T>.withoutTypeOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> =
-    filterNot {
-        val hasAllTypes =
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.hasTypeOf(kClass) }
-            } else {
-                false
-            }
-
-        it.hasTypeOf(kClass) || hasAllTypes
-    }
+): List<T> = withoutTypeOf(listOf(kClass, *kClasses))
 
 /**
  * List containing declarations without type of.

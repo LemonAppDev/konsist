@@ -13,17 +13,7 @@ import kotlin.reflect.KClass
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceTypeOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> =
-    filter {
-        val hasMatchingSourceType =
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.sourceType == kClass.simpleName }
-            } else {
-                false
-            }
-
-        it.sourceType == kClass.simpleName || hasMatchingSourceType
-    }
+): List<T> = withSourceTypeOf(listOf(kClass, *kClasses))
 
 /**
  * List containing declarations with source type of.
@@ -49,17 +39,7 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceTypeOf(kClasses: Collec
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceTypeOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> =
-    filter {
-        val hasNoMatchingSourceType =
-            if (kClasses.isNotEmpty()) {
-                kClasses.none { kClass -> it.sourceType == kClass.simpleName }
-            } else {
-                true
-            }
-
-        it.sourceType != kClass.simpleName && hasNoMatchingSourceType
-    }
+): List<T> = withoutSourceTypeOf(listOf(kClass, *kClasses))
 
 /**
  * List containing declarations without source type of.
@@ -85,7 +65,7 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceTypeOf(kClasses: Col
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceType(
     name: String,
     vararg names: String,
-): List<T> = filter { it.sourceType == name || names.any { type -> it.sourceType == type } }
+): List<T> = withSourceType(listOf(name, *names))
 
 /**
  * List containing declarations with source type.
@@ -111,7 +91,7 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceType(names: Collection<
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceType(
     name: String,
     vararg names: String,
-): List<T> = filter { it.sourceType != name && names.none { type -> it.sourceType == type } }
+): List<T> = withoutSourceType(listOf(name, *names))
 
 /**
  * List containing declarations without source type.
@@ -137,15 +117,7 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceType(names: Collecti
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withBareSourceTypeOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> =
-    filter {
-        it.bareSourceType == kClass.simpleName ||
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.bareSourceType == kClass.simpleName }
-            } else {
-                false
-            }
-    }
+): List<T> = withBareSourceTypeOf(listOf(kClass, *kClasses))
 
 /**
  * List containing declarations with bare source type of.
@@ -171,15 +143,7 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withBareSourceTypeOf(kClasses: Co
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBareSourceTypeOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> =
-    filter {
-        it.bareSourceType != kClass.simpleName &&
-            if (kClasses.isNotEmpty()) {
-                kClasses.none { kClass -> it.bareSourceType == kClass.simpleName }
-            } else {
-                true
-            }
-    }
+): List<T> = withoutBareSourceTypeOf(listOf(kClass, *kClasses))
 
 /**
  * List containing declarations without bare source type of.
@@ -205,7 +169,7 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBareSourceTypeOf(kClasses:
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withBareSourceType(
     name: String,
     vararg names: String,
-): List<T> = filter { it.bareSourceType == name || names.any { type -> it.bareSourceType == type } }
+): List<T> = withBareSourceType(listOf(name, *names))
 
 /**
  * List containing declarations with base source type.
@@ -231,7 +195,7 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withBareSourceType(names: Collect
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutBareSourceType(
     name: String,
     vararg names: String,
-): List<T> = filter { it.bareSourceType != name && names.none { type -> it.bareSourceType == type } }
+): List<T> = withoutBareSourceType(listOf(name, *names))
 
 /**
  * List containing declarations without bare source type.

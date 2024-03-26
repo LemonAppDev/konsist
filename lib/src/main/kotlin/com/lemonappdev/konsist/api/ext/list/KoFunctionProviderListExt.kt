@@ -53,10 +53,7 @@ fun <T : KoFunctionProvider> List<T>.withFunctionNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> =
-    filter {
-        it.hasFunctionWithName(name, *names, includeNested = includeNested, includeLocal = includeLocal)
-    }
+): List<T> = withFunctionNamed(listOf(name, *names), includeNested, includeLocal)
 
 /**
  * List containing declarations that have at least one function with the specified name(s).
@@ -98,10 +95,7 @@ fun <T : KoFunctionProvider> List<T>.withoutFunctionNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> =
-    filterNot {
-        it.hasFunctionWithName(name, *names, includeNested = includeNested, includeLocal = includeLocal)
-    }
+): List<T> = withoutFunctionNamed(listOf(name, *names), includeNested, includeLocal)
 
 /**
  * List containing declarations without any of specified functions.
@@ -143,10 +137,7 @@ fun <T : KoFunctionProvider> List<T>.withAllFunctionsNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> =
-    filter {
-        it.hasFunctionsWithAllNames(name, *names, includeNested = includeNested, includeLocal = includeLocal)
-    }
+): List<T> = withAllFunctionsNamed(listOf(name, *names), includeNested, includeLocal)
 
 /**
  * List containing declarations that have all specified functions.
@@ -188,10 +179,7 @@ fun <T : KoFunctionProvider> List<T>.withoutAllFunctionsNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> =
-    filterNot {
-        it.hasFunctionsWithAllNames(name, *names, includeNested = includeNested, includeLocal = includeLocal)
-    }
+): List<T> = withoutAllFunctionsNamed(listOf(name, *names), includeNested, includeLocal)
 
 /**
  * List containing declarations without all specified functions.

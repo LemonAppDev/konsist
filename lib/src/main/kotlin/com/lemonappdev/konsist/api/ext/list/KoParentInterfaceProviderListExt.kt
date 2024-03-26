@@ -52,7 +52,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaceNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> = filter { it.hasParentInterfaceWithName(name, *names, indirectParents = indirectParents) }
+): List<T> = withParentInterfaceNamed(listOf(name, *names), indirectParents)
 
 /**
  * List containing declarations that have at least one parent interface with the specified name(s).
@@ -89,7 +89,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaceNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> = filterNot { it.hasParentInterfaceWithName(name, *names, indirectParents = indirectParents) }
+): List<T> = withoutParentInterfaceNamed(listOf(name, *names), indirectParents)
 
 /**
  * List containing declarations without any of specified parent interfaces.
@@ -126,7 +126,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> = filter { it.hasParentInterfacesWithAllNames(name, *names, indirectParents = indirectParents) }
+): List<T> = withAllParentInterfacesNamed(listOf(name, *names), indirectParents)
 
 /**
  * List containing declarations that have all specified parent interfaces.
@@ -163,7 +163,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> = filterNot { it.hasParentInterfacesWithAllNames(name, *names, indirectParents = indirectParents) }
+): List<T> = withoutAllParentInterfacesNamed(listOf(name, *names), indirectParents)
 
 /**
  * List containing declarations without all specified parent interfaces.
@@ -272,7 +272,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaceOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectParents: Boolean = false,
-): List<T> = filter { it.hasParentInterfaceOf(kClass, *kClasses, indirectParents = indirectParents) }
+): List<T> = withParentInterfaceOf(listOf(kClass, *kClasses), indirectParents)
 
 /**
  * List containing declarations that have at least one parent interface of the specified `KClass` type.
@@ -309,7 +309,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaceOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectParents: Boolean = false,
-): List<T> = filterNot { it.hasParentInterfaceOf(kClass, *kClasses, indirectParents = indirectParents) }
+): List<T> = withoutParentInterfaceOf(listOf(kClass, *kClasses), indirectParents)
 
 /**
  * List containing declarations without any parent interface of the specified `KClass` type.
@@ -346,7 +346,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectParents: Boolean = false,
-): List<T> = filter { it.hasAllParentInterfacesOf(kClass, *kClasses, indirectParents = indirectParents) }
+): List<T> = withAllParentInterfacesOf(listOf(kClass, *kClasses), indirectParents)
 
 /**
  * List containing declarations that have all parent interfaces of the specified `KClass` type.
@@ -383,7 +383,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectParents: Boolean = false,
-): List<T> = filterNot { it.hasAllParentInterfacesOf(kClass, *kClasses, indirectParents = indirectParents) }
+): List<T> = withoutAllParentInterfacesOf(listOf(kClass, *kClasses), indirectParents)
 
 /**
  * List containing declarations without all specified `KClass` type parent interfaces.

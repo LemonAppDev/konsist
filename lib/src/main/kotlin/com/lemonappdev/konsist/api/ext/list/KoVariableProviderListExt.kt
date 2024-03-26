@@ -33,10 +33,7 @@ fun <T : KoVariableProvider> List<T>.withoutVariables(): List<T> = filterNot { i
 fun <T : KoVariableProvider> List<T>.withVariableNamed(
     name: String,
     vararg names: String,
-): List<T> =
-    filter {
-        it.hasVariableWithName(name, *names)
-    }
+): List<T> = withVariableNamed(listOf(name, *names))
 
 /**
  * List containing declarations that have at least one variable with the specified name(s).
@@ -62,10 +59,7 @@ fun <T : KoVariableProvider> List<T>.withVariableNamed(names: Collection<String>
 fun <T : KoVariableProvider> List<T>.withoutVariableNamed(
     name: String,
     vararg names: String,
-): List<T> =
-    filterNot {
-        it.hasVariableWithName(name, *names)
-    }
+): List<T> = withoutVariableNamed(listOf(name, *names))
 
 /**
  * List containing declarations without any of specified variables.
@@ -91,10 +85,7 @@ fun <T : KoVariableProvider> List<T>.withoutVariableNamed(names: Collection<Stri
 fun <T : KoVariableProvider> List<T>.withAllVariablesNamed(
     name: String,
     vararg names: String,
-): List<T> =
-    filter {
-        it.hasVariablesWithAllNames(name, *names)
-    }
+): List<T> = withAllVariablesNamed(listOf(name, *names))
 
 /**
  * List containing declarations that have all specified variables.
@@ -120,7 +111,7 @@ fun <T : KoVariableProvider> List<T>.withAllVariablesNamed(names: Collection<Str
 fun <T : KoVariableProvider> List<T>.withoutAllVariablesNamed(
     name: String,
     vararg names: String,
-): List<T> = filterNot { it.hasVariablesWithAllNames(name, *names) }
+): List<T> = withoutAllVariablesNamed(listOf(name, *names))
 
 /**
  * List containing declarations without all specified variables.
@@ -143,9 +134,7 @@ fun <T : KoVariableProvider> List<T>.withoutAllVariablesNamed(names: Collection<
  * @return A list containing declarations with at least one variable satisfying the predicate.
  */
 fun <T : KoVariableProvider> List<T>.withVariable(predicate: (KoVariableDeclaration) -> Boolean): List<T> =
-    filter {
-        it.hasVariable(predicate)
-    }
+    filter { it.hasVariable(predicate) }
 
 /**
  * List containing declarations that not have variable satisfying the provided predicate.

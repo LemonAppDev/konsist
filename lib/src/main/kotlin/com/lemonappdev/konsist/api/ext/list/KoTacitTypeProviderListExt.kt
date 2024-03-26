@@ -13,10 +13,7 @@ import kotlin.reflect.KClass
 fun <T : KoTacitTypeProvider> List<T>.withTacitType(
     type: String,
     vararg types: String,
-): List<T> =
-    filter {
-        it.hasTacitType(type) || types.any { type -> it.hasTacitType(type) }
-    }
+): List<T> = withTacitType(listOf(type, *types))
 
 /**
  * List containing declarations with tacit type.
@@ -42,10 +39,7 @@ fun <T : KoTacitTypeProvider> List<T>.withTacitType(types: Collection<String>): 
 fun <T : KoTacitTypeProvider> List<T>.withoutTacitType(
     type: String,
     vararg types: String,
-): List<T> =
-    filter {
-        !it.hasTacitType(type) && types.none { type -> it.hasTacitType(type) }
-    }
+): List<T> = withoutTacitType(listOf(type, *types))
 
 /**
  * List containing declarations without tacit type.
@@ -71,17 +65,7 @@ fun <T : KoTacitTypeProvider> List<T>.withoutTacitType(types: Collection<String>
 fun <T : KoTacitTypeProvider> List<T>.withTacitTypeOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> =
-    filter {
-        val missesAtLeastOneTacitType =
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.hasTacitTypeOf(kClass) }
-            } else {
-                false
-            }
-
-        it.hasTacitTypeOf(kClass) || missesAtLeastOneTacitType
-    }
+): List<T> = withTacitTypeOf(listOf(kClass, *kClasses))
 
 /**
  * List containing declarations with tacit type.
@@ -107,17 +91,7 @@ fun <T : KoTacitTypeProvider> List<T>.withTacitTypeOf(kClasses: Collection<KClas
 fun <T : KoTacitTypeProvider> List<T>.withoutTacitTypeOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> =
-    filterNot {
-        val missesAtLeastOneTacitType =
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.hasTacitTypeOf(kClass) }
-            } else {
-                false
-            }
-
-        it.hasTacitTypeOf(kClass) || missesAtLeastOneTacitType
-    }
+): List<T> = withoutTacitTypeOf(listOf(kClass, *kClasses))
 
 /**
  * List containing declarations without tacit type.

@@ -34,7 +34,7 @@ fun <T : KoImportProvider> List<T>.withoutImports(): List<T> = filterNot { it.ha
 fun <T : KoImportProvider> List<T>.withImportNamed(
     name: String,
     vararg names: String,
-): List<T> = filter { it.hasImportWithName(name, *names) }
+): List<T> = withImportNamed(listOf(name, *names))
 
 /**
  * List containing declarations that have at least one import with the specified name(s).
@@ -60,7 +60,7 @@ fun <T : KoImportProvider> List<T>.withImportNamed(names: Collection<String>): L
 fun <T : KoImportProvider> List<T>.withoutImportNamed(
     name: String,
     vararg names: String,
-): List<T> = filterNot { it.hasImportWithName(name, *names) }
+): List<T> = withoutImportNamed(listOf(name, *names))
 
 /**
  * List containing declarations without any of specified imports.
@@ -86,7 +86,7 @@ fun <T : KoImportProvider> List<T>.withoutImportNamed(names: Collection<String>)
 fun <T : KoImportProvider> List<T>.withAllImportsNamed(
     name: String,
     vararg names: String,
-): List<T> = filter { it.hasImportsWithAllNames(name, *names) }
+): List<T> = withAllImportsNamed(listOf(name, *names))
 
 /**
  * List containing declarations that have all specified imports.
@@ -112,7 +112,7 @@ fun <T : KoImportProvider> List<T>.withAllImportsNamed(names: Collection<String>
 fun <T : KoImportProvider> List<T>.withoutAllImportsNamed(
     name: String,
     vararg names: String,
-): List<T> = filterNot { it.hasImportsWithAllNames(name, *names) }
+): List<T> = withoutAllImportsNamed(listOf(name, *names))
 
 /**
  * List containing declarations without all specified imports.

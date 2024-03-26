@@ -12,10 +12,7 @@ import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 fun <T : KoFullyQualifiedNameProvider> List<T>.withFullyQualifiedName(
     name: String,
     vararg names: String,
-): List<T> =
-    filter {
-        it.fullyQualifiedName == name || names.any { fullyQualifiedName -> it.fullyQualifiedName == fullyQualifiedName }
-    }
+): List<T> = withFullyQualifiedName(listOf(name, *names))
 
 /**
  * List containing declarations with the fully qualified name.
@@ -41,10 +38,7 @@ fun <T : KoFullyQualifiedNameProvider> List<T>.withFullyQualifiedName(names: Col
 fun <T : KoFullyQualifiedNameProvider> List<T>.withoutFullyQualifiedName(
     name: String,
     vararg names: String,
-): List<T> =
-    filter {
-        it.fullyQualifiedName != name && names.none { fullyQualifiedName -> it.fullyQualifiedName == fullyQualifiedName }
-    }
+): List<T> = withoutFullyQualifiedName(listOf(name, *names))
 
 /**
  * List containing declarations without fully qualified name.

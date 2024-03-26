@@ -33,10 +33,7 @@ fun <T : KoArgumentProvider> List<T>.withoutArguments(): List<T> = filterNot { i
 fun <T : KoArgumentProvider> List<T>.withArgumentNamed(
     name: String,
     vararg names: String,
-): List<T> =
-    filter {
-        it.hasArgumentWithName(name, *names)
-    }
+): List<T> = withArgumentNamed(listOf(name, *names))
 
 /**
  * List containing declarations that have at least one argument with the specified name(s).
@@ -62,10 +59,7 @@ fun <T : KoArgumentProvider> List<T>.withArgumentNamed(names: Collection<String>
 fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(
     name: String,
     vararg names: String,
-): List<T> =
-    filterNot {
-        it.hasArgumentWithName(name, *names)
-    }
+): List<T> = withoutArgumentNamed(listOf(name, *names))
 
 /**
  * List containing declarations without any of specified arguments.
@@ -91,10 +85,7 @@ fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(names: Collection<Stri
 fun <T : KoArgumentProvider> List<T>.withAllArgumentsNamed(
     name: String,
     vararg names: String,
-): List<T> =
-    filter {
-        it.hasArgumentsWithAllNames(name, *names)
-    }
+): List<T> = withAllArgumentsNamed(listOf(name, *names))
 
 /**
  * List containing declarations that have all specified arguments.
@@ -120,10 +111,7 @@ fun <T : KoArgumentProvider> List<T>.withAllArgumentsNamed(names: Collection<Str
 fun <T : KoArgumentProvider> List<T>.withoutAllArgumentsNamed(
     name: String,
     vararg names: String,
-): List<T> =
-    filterNot {
-        it.hasArgumentsWithAllNames(name, *names)
-    }
+): List<T> = withoutAllArgumentsNamed(listOf(name, *names))
 
 /**
  * List containing declarations without all specified arguments.

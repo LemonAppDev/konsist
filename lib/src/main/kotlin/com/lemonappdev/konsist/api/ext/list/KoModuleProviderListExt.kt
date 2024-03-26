@@ -12,10 +12,7 @@ import com.lemonappdev.konsist.api.provider.KoModuleProvider
 fun <T : KoModuleProvider> List<T>.withModule(
     name: String,
     vararg names: String,
-): List<T> =
-    filter {
-        it.resideInModule(name) || names.any { module -> it.resideInModule(module) }
-    }
+): List<T> = withModule(listOf(name, *names))
 
 /**
  * List containing declarations with module.
@@ -41,10 +38,7 @@ fun <T : KoModuleProvider> List<T>.withModule(names: Collection<String>): List<T
 fun <T : KoModuleProvider> List<T>.withoutModule(
     name: String,
     vararg names: String,
-): List<T> =
-    filter {
-        !it.resideInModule(name) && names.none { module -> it.resideInModule(module) }
-    }
+): List<T> = withoutModule(listOf(name, *names))
 
 /**
  * List containing declarations without module.

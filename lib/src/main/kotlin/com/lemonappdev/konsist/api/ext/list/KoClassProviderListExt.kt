@@ -53,10 +53,7 @@ fun <T : KoClassProvider> List<T>.withClassNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> =
-    filter {
-        it.hasClassWithName(name, *names, includeNested = includeNested, includeLocal = includeLocal)
-    }
+): List<T> = withClassNamed(listOf(name, *names), includeNested, includeLocal)
 
 /**
  * List containing declarations that have at least one class with the specified name(s).
@@ -98,10 +95,7 @@ fun <T : KoClassProvider> List<T>.withoutClassNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> =
-    filterNot {
-        it.hasClassWithName(name, *names, includeNested = includeNested, includeLocal = includeLocal)
-    }
+): List<T> = withoutClassNamed(listOf(name, *names), includeNested, includeLocal)
 
 /**
  * List containing declarations without any of specified classes.
@@ -143,10 +137,7 @@ fun <T : KoClassProvider> List<T>.withAllClassesNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> =
-    filter {
-        it.hasClassesWithAllNames(name, *names, includeNested = includeNested, includeLocal = includeLocal)
-    }
+): List<T> = withAllClassesNamed(listOf(name, *names), includeNested, includeLocal)
 
 /**
  * List containing declarations that have all specified classes.
@@ -188,10 +179,7 @@ fun <T : KoClassProvider> List<T>.withoutAllClassesNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> =
-    filterNot {
-        it.hasClassesWithAllNames(name, *names, includeNested = includeNested, includeLocal = includeLocal)
-    }
+): List<T> = withoutAllClassesNamed(listOf(name, *names), includeNested, includeLocal)
 
 /**
  * List containing declarations without all specified classes.

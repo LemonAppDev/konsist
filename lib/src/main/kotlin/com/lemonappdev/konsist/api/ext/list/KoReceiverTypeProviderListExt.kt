@@ -78,17 +78,7 @@ fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverType(predicate: ((KoType
 fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> =
-    filter {
-        val hasAtLeastOneReceiver =
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.hasReceiverTypeOf(kClass) }
-            } else {
-                false
-            }
-
-        it.hasReceiverTypeOf(kClass) || hasAtLeastOneReceiver
-    }
+): List<T> = withReceiverTypeOf(listOf(kClass, *kClasses))
 
 /**
  * List containing declarations with receiver type.
@@ -114,17 +104,7 @@ fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(kClasses: Collection
 fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverTypeOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> =
-    filterNot {
-        val hasAtLeastOneReceiver =
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.hasReceiverTypeOf(kClass) }
-            } else {
-                false
-            }
-
-        it.hasReceiverTypeOf(kClass) || hasAtLeastOneReceiver
-    }
+): List<T> = withoutReceiverTypeOf(listOf(kClass, *kClasses))
 
 /**
  * List containing declarations without receiver type.

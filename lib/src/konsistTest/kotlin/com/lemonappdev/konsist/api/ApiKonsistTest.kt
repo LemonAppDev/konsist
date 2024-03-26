@@ -1,7 +1,12 @@
 package com.lemonappdev.konsist.api
 
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
+import com.lemonappdev.konsist.api.ext.list.withParameter
+import com.lemonappdev.konsist.api.ext.list.withParameters
 import com.lemonappdev.konsist.api.ext.list.withProperty
+import com.lemonappdev.konsist.api.ext.list.withoutAnnotation
+import com.lemonappdev.konsist.api.ext.list.withoutAnnotationNamed
+import com.lemonappdev.konsist.api.ext.list.withoutAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withoutName
 import com.lemonappdev.konsist.api.ext.list.withoutNameMatching
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
@@ -77,6 +82,16 @@ class ApiKonsistTest {
             .assertTrue {
                 it.hasCorrectMethods(false)
             }
+    }
+
+    @Test
+    fun `every method with vararg parameter calls method with the same name`() {
+        Konsist
+            .scopeFromPackage("com.lemonappdev.konsist.api.ext..", sourceSetName = "main")
+            .functions()
+            .withoutAnnotationOf(Suppress::class)
+            .withParameter { it.hasVarArgModifier }
+            .assertTrue { it.hasExpressionBody && it.text.contains("= ${it.name}(listOf(")  }
     }
 
     @Test

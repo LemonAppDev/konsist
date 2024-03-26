@@ -21,7 +21,8 @@ fun <T : KoChildProvider> List<T>.children(indirectChildren: Boolean = false): L
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations with class or interface child.
  */
-fun <T : KoChildProvider> List<T>.withChildren(indirectChildren: Boolean = false): List<T> = filter { it.hasChildren(indirectChildren) }
+fun <T : KoChildProvider> List<T>.withChildren(indirectChildren: Boolean = false): List<T> =
+    filter { it.hasChildren(indirectChildren) }
 
 /**
  * List containing declarations with no child - class does not extend any class and does not implement any interface.
@@ -45,10 +46,7 @@ fun <T : KoChildProvider> List<T>.withChildNamed(
     name: String,
     vararg names: String,
     indirectChildren: Boolean = false,
-): List<T> =
-    filter {
-        it.hasChildWithName(name, *names, indirectChildren = indirectChildren)
-    }
+): List<T> = withChildNamed(listOf(name, *names), indirectChildren)
 
 /**
  * List containing declarations that have at least one child with the specified name(s).
@@ -85,10 +83,7 @@ fun <T : KoChildProvider> List<T>.withoutChildNamed(
     name: String,
     vararg names: String,
     indirectChildren: Boolean = false,
-): List<T> =
-    filterNot {
-        it.hasChildWithName(name, *names, indirectChildren = indirectChildren)
-    }
+): List<T> = withoutChildNamed(listOf(name, *names), indirectChildren)
 
 /**
  * List containing declarations without any of specified children.
@@ -125,10 +120,7 @@ fun <T : KoChildProvider> List<T>.withAllChildrenNamed(
     name: String,
     vararg names: String,
     indirectChildren: Boolean = false,
-): List<T> =
-    filter {
-        it.hasChildrenWithAllNames(name, *names, indirectChildren = indirectChildren)
-    }
+): List<T> = withAllChildrenNamed(listOf(name, *names), indirectChildren)
 
 /**
  * List containing declarations that have all specified children.
@@ -165,10 +157,7 @@ fun <T : KoChildProvider> List<T>.withoutAllChildrenNamed(
     name: String,
     vararg names: String,
     indirectChildren: Boolean = false,
-): List<T> =
-    filterNot {
-        it.hasChildrenWithAllNames(name, *names, indirectChildren = indirectChildren)
-    }
+): List<T> = withoutAllChildrenNamed(listOf(name, *names), indirectChildren)
 
 /**
  * List containing declarations without all specified children.
@@ -292,7 +281,7 @@ fun <T : KoChildProvider> List<T>.withChildOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectChildren: Boolean = false,
-): List<T> = filter { it.hasChildOf(kClass, *kClasses, indirectChildren = indirectChildren) }
+): List<T> = withChildOf(listOf(kClass, *kClasses), indirectChildren)
 
 /**
  * List containing declarations that have at least one child of the specified `KClass` type.
@@ -329,7 +318,7 @@ fun <T : KoChildProvider> List<T>.withoutChildOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectChildren: Boolean = false,
-): List<T> = filterNot { it.hasChildOf(kClass, *kClasses, indirectChildren = indirectChildren) }
+): List<T> = withoutChildOf(listOf(kClass, *kClasses), indirectChildren)
 
 /**
  * List containing declarations without any child of the specified `KClass` type.
@@ -366,7 +355,7 @@ fun <T : KoChildProvider> List<T>.withAllChildrenOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectChildren: Boolean = false,
-): List<T> = filter { it.hasAllChildrenOf(kClass, *kClasses, indirectChildren = indirectChildren) }
+): List<T> = withAllChildrenOf(listOf(kClass, *kClasses), indirectChildren)
 
 /**
  * List containing declarations that have all children of the specified `KClass` type.
@@ -403,7 +392,7 @@ fun <T : KoChildProvider> List<T>.withoutAllChildrenOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectChildren: Boolean = false,
-): List<T> = filterNot { it.hasAllChildrenOf(kClass, *kClasses, indirectChildren = indirectChildren) }
+): List<T> = withoutAllChildrenOf(listOf(kClass, *kClasses), indirectChildren)
 
 /**
  * List containing declarations without all specified `KClass` type children.

@@ -33,7 +33,7 @@ fun <T : KoTypeAliasProvider> List<T>.withoutTypeAliases(): List<T> = filterNot 
 fun <T : KoTypeAliasProvider> List<T>.withTypeAliasNamed(
     name: String,
     vararg names: String,
-): List<T> = filter { it.hasTypeAliasWithName(name, *names) }
+): List<T> = withTypeAliasNamed(listOf(name, *names))
 
 /**
  * List containing declarations that have at least one type alias with the specified name(s).
@@ -59,7 +59,7 @@ fun <T : KoTypeAliasProvider> List<T>.withTypeAliasNamed(names: Collection<Strin
 fun <T : KoTypeAliasProvider> List<T>.withoutTypeAliasNamed(
     name: String,
     vararg names: String,
-): List<T> = filterNot { it.hasTypeAliasWithName(name, *names) }
+): List<T> = withoutTypeAliasNamed(listOf(name, *names))
 
 /**
  * List containing declarations without any of specified type aliases.
@@ -85,7 +85,7 @@ fun <T : KoTypeAliasProvider> List<T>.withoutTypeAliasNamed(names: Collection<St
 fun <T : KoTypeAliasProvider> List<T>.withAllTypeAliasesNamed(
     name: String,
     vararg names: String,
-): List<T> = filter { it.hasTypeAliasesWithAllNames(name, *names) }
+): List<T> = withAllTypeAliasesNamed(listOf(name, *names))
 
 /**
  * List containing declarations that have all specified type aliases.
@@ -111,7 +111,7 @@ fun <T : KoTypeAliasProvider> List<T>.withAllTypeAliasesNamed(names: Collection<
 fun <T : KoTypeAliasProvider> List<T>.withoutAllTypeAliasesNamed(
     name: String,
     vararg names: String,
-): List<T> = filterNot { it.hasTypeAliasesWithAllNames(name, *names) }
+): List<T> = withoutAllTypeAliasesNamed(listOf(name, *names))
 
 /**
  * List containing declarations without all specified type aliases.
