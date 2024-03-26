@@ -72,6 +72,46 @@ class KoHasPackageProviderListExtTest {
     }
 
     @Test
+    fun `withPackage(empty list) returns declaration with any package`() {
+        // given
+        val declaration1: SampleTestDeclaration =
+            mockk {
+                every { packagee } returns mockk()
+            }
+        val declaration2: SampleTestDeclaration =
+            mockk {
+                every { packagee } returns null
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withPackage(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withPackage(empty set) returns declaration with any package`() {
+        // given
+        val declaration1: SampleTestDeclaration =
+            mockk {
+                every { packagee } returns mockk()
+            }
+        val declaration2: SampleTestDeclaration =
+            mockk {
+                every { packagee } returns null
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withPackage(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withPackage(String) returns declarations with one of given package names`() {
         // given
         val package1 = "SamplePackage1"
@@ -101,6 +141,66 @@ class KoHasPackageProviderListExtTest {
     }
 
     @Test
+    fun `withPackage(list of String) returns declarations with one of given package names`() {
+        // given
+        val package1 = "SamplePackage1"
+        val package2 = "SamplePackage2"
+        val declaration1: SampleTestDeclaration =
+            mockk {
+                every { hasPackage(package1) } returns true
+                every { hasPackage(package2) } returns false
+            }
+        val declaration2: SampleTestDeclaration =
+            mockk {
+                every { hasPackage(package1) } returns false
+                every { hasPackage(package2) } returns true
+            }
+        val declaration3: SampleTestDeclaration =
+            mockk {
+                every { hasPackage(package1) } returns false
+                every { hasPackage(package2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+        val packages = listOf(package1, package2)
+
+        // when
+        val sut = declarations.withPackage(packages)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withPackage(set of String) returns declarations with one of given package names`() {
+        // given
+        val package1 = "SamplePackage1"
+        val package2 = "SamplePackage2"
+        val declaration1: SampleTestDeclaration =
+            mockk {
+                every { hasPackage(package1) } returns true
+                every { hasPackage(package2) } returns false
+            }
+        val declaration2: SampleTestDeclaration =
+            mockk {
+                every { hasPackage(package1) } returns false
+                every { hasPackage(package2) } returns true
+            }
+        val declaration3: SampleTestDeclaration =
+            mockk {
+                every { hasPackage(package1) } returns false
+                every { hasPackage(package2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+        val packages = setOf(package1, package2)
+
+        // when
+        val sut = declarations.withPackage(packages)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
     fun `withoutPackage() returns declaration without given package name`() {
         // given
         val declaration1: SampleTestDeclaration =
@@ -115,6 +215,46 @@ class KoHasPackageProviderListExtTest {
 
         // when
         val sut = declarations.withoutPackage()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutPackage(empty list) returns declaration without given package name`() {
+        // given
+        val declaration1: SampleTestDeclaration =
+            mockk {
+                every { packagee } returns mockk()
+            }
+        val declaration2: SampleTestDeclaration =
+            mockk {
+                every { packagee } returns null
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutPackage(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutPackage(empty set) returns declaration without given package name`() {
+        // given
+        val declaration1: SampleTestDeclaration =
+            mockk {
+                every { packagee } returns mockk()
+            }
+        val declaration2: SampleTestDeclaration =
+            mockk {
+                every { packagee } returns null
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutPackage(emptySet())
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -144,6 +284,66 @@ class KoHasPackageProviderListExtTest {
 
         // when
         val sut = declarations.withoutPackage(package1, package2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration3)
+    }
+
+    @Test
+    fun `withoutPackage(list of String) returns declaration without any of given package names`() {
+        // given
+        val package1 = "SamplePackage1"
+        val package2 = "SamplePackage2"
+        val declaration1: SampleTestDeclaration =
+            mockk {
+                every { hasPackage(package1) } returns true
+                every { hasPackage(package2) } returns false
+            }
+        val declaration2: SampleTestDeclaration =
+            mockk {
+                every { hasPackage(package1) } returns false
+                every { hasPackage(package2) } returns true
+            }
+        val declaration3: SampleTestDeclaration =
+            mockk {
+                every { hasPackage(package1) } returns false
+                every { hasPackage(package2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+        val packages = listOf(package1, package2)
+
+        // when
+        val sut = declarations.withoutPackage(packages)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration3)
+    }
+
+    @Test
+    fun `withoutPackage(set of String) returns declaration without any of given package names`() {
+        // given
+        val package1 = "SamplePackage1"
+        val package2 = "SamplePackage2"
+        val declaration1: SampleTestDeclaration =
+            mockk {
+                every { hasPackage(package1) } returns true
+                every { hasPackage(package2) } returns false
+            }
+        val declaration2: SampleTestDeclaration =
+            mockk {
+                every { hasPackage(package1) } returns false
+                every { hasPackage(package2) } returns true
+            }
+        val declaration3: SampleTestDeclaration =
+            mockk {
+                every { hasPackage(package1) } returns false
+                every { hasPackage(package2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+        val packages = setOf(package1, package2)
+
+        // when
+        val sut = declarations.withoutPackage(packages)
 
         // then
         sut shouldBeEqualTo listOf(declaration3)

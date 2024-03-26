@@ -57,6 +57,86 @@ class KoKDocTagProviderListExtTest {
     }
 
     @Test
+    fun `withTag(empty list) returns declaration with any tag`() {
+        // given
+        val declaration1: KoKDocTagProvider =
+            mockk {
+                every { hasTags() } returns true
+            }
+        val declaration2: KoKDocTagProvider =
+            mockk {
+                every { hasTags() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withTag(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withTag(empty set) returns declaration with any tag`() {
+        // given
+        val declaration1: KoKDocTagProvider =
+            mockk {
+                every { hasTags() } returns true
+            }
+        val declaration2: KoKDocTagProvider =
+            mockk {
+                every { hasTags() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withTag(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllTags(empty list) returns declaration with any tag`() {
+        // given
+        val declaration1: KoKDocTagProvider =
+            mockk {
+                every { hasTags() } returns true
+            }
+        val declaration2: KoKDocTagProvider =
+            mockk {
+                every { hasTags() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllTags(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllTags(empty set) returns declaration with any tag`() {
+        // given
+        val declaration1: KoKDocTagProvider =
+            mockk {
+                every { hasTags() } returns true
+            }
+        val declaration2: KoKDocTagProvider =
+            mockk {
+                every { hasTags() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllTags(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutTags() returns declaration with any tag`() {
         // given
         val declaration1: KoKDocTagProvider =
@@ -71,6 +151,86 @@ class KoKDocTagProviderListExtTest {
 
         // when
         val sut = declarations.withoutTags()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutTag(empty list) returns declaration with any tag`() {
+        // given
+        val declaration1: KoKDocTagProvider =
+            mockk {
+                every { hasTags() } returns true
+            }
+        val declaration2: KoKDocTagProvider =
+            mockk {
+                every { hasTags() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutTag(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutTag(empty set) returns declaration with any tag`() {
+        // given
+        val declaration1: KoKDocTagProvider =
+            mockk {
+                every { hasTags() } returns true
+            }
+        val declaration2: KoKDocTagProvider =
+            mockk {
+                every { hasTags() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutTag(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllTags(empty list) returns declaration with any tag`() {
+        // given
+        val declaration1: KoKDocTagProvider =
+            mockk {
+                every { hasTags() } returns true
+            }
+        val declaration2: KoKDocTagProvider =
+            mockk {
+                every { hasTags() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllTags(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllTags(empty set) returns declaration with any tag`() {
+        // given
+        val declaration1: KoKDocTagProvider =
+            mockk {
+                every { hasTags() } returns true
+            }
+        val declaration2: KoKDocTagProvider =
+            mockk {
+                every { hasTags() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllTags(emptySet())
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -99,6 +259,52 @@ class KoKDocTagProviderListExtTest {
     }
 
     @Test
+    fun `withTag(List) returns declaration with any of given tags`() {
+        // given
+        val tag1 = KoKDocTag.SINCE
+        val tag2 = KoKDocTag.SEE
+        val declaration1: KoKDocTagProvider =
+            mockk {
+                every { hasTag(tag1, tag2) } returns true
+            }
+        val declaration2: KoKDocTagProvider =
+            mockk {
+                every { hasTag(tag1, tag2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val tags = listOf(tag1, tag2)
+
+        // when
+        val sut = declarations.withTag(tags)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withTag(Set) returns declaration with any of given tags`() {
+        // given
+        val tag1 = KoKDocTag.SINCE
+        val tag2 = KoKDocTag.SEE
+        val declaration1: KoKDocTagProvider =
+            mockk {
+                every { hasTag(tag1, tag2) } returns true
+            }
+        val declaration2: KoKDocTagProvider =
+            mockk {
+                every { hasTag(tag1, tag2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val tags = setOf(tag1, tag2)
+
+        // when
+        val sut = declarations.withTag(tags)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutTag() returns declaration without all of given tags`() {
         // given
         val tag1 = KoKDocTag.SINCE
@@ -115,6 +321,52 @@ class KoKDocTagProviderListExtTest {
 
         // when
         val sut = declarations.withoutTag(tag1, tag2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutTag(List) returns declaration without all of given tags`() {
+        // given
+        val tag1 = KoKDocTag.SINCE
+        val tag2 = KoKDocTag.SEE
+        val declaration1: KoKDocTagProvider =
+            mockk {
+                every { hasTag(tag1, tag2) } returns true
+            }
+        val declaration2: KoKDocTagProvider =
+            mockk {
+                every { hasTag(tag1, tag2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val tags = listOf(tag1, tag2)
+
+        // when
+        val sut = declarations.withoutTag(tags)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutTag(Set) returns declaration without all of given tags`() {
+        // given
+        val tag1 = KoKDocTag.SINCE
+        val tag2 = KoKDocTag.SEE
+        val declaration1: KoKDocTagProvider =
+            mockk {
+                every { hasTag(tag1, tag2) } returns true
+            }
+        val declaration2: KoKDocTagProvider =
+            mockk {
+                every { hasTag(tag1, tag2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val tags = setOf(tag1, tag2)
+
+        // when
+        val sut = declarations.withoutTag(tags)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -143,6 +395,52 @@ class KoKDocTagProviderListExtTest {
     }
 
     @Test
+    fun `withAllTags(List) returns declaration with all of given tags`() {
+        // given
+        val tag1 = KoKDocTag.SINCE
+        val tag2 = KoKDocTag.SEE
+        val declaration1: KoKDocTagProvider =
+            mockk {
+                every { hasAllTags(tag1, tag2) } returns true
+            }
+        val declaration2: KoKDocTagProvider =
+            mockk {
+                every { hasAllTags(tag1, tag2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val tags = listOf(tag1, tag2)
+
+        // when
+        val sut = declarations.withAllTags(tags)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllTags(Set) returns declaration with all of given tags`() {
+        // given
+        val tag1 = KoKDocTag.SINCE
+        val tag2 = KoKDocTag.SEE
+        val declaration1: KoKDocTagProvider =
+            mockk {
+                every { hasAllTags(tag1, tag2) } returns true
+            }
+        val declaration2: KoKDocTagProvider =
+            mockk {
+                every { hasAllTags(tag1, tag2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val tags = setOf(tag1, tag2)
+
+        // when
+        val sut = declarations.withAllTags(tags)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllTags() returns declaration without any of given tags`() {
         // given
         val tag1 = KoKDocTag.SINCE
@@ -159,6 +457,52 @@ class KoKDocTagProviderListExtTest {
 
         // when
         val sut = declarations.withoutAllTags(tag1, tag2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllTags(List) returns declaration without any of given tags`() {
+        // given
+        val tag1 = KoKDocTag.SINCE
+        val tag2 = KoKDocTag.SEE
+        val declaration1: KoKDocTagProvider =
+            mockk {
+                every { hasAllTags(tag1, tag2) } returns true
+            }
+        val declaration2: KoKDocTagProvider =
+            mockk {
+                every { hasAllTags(tag1, tag2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val tags = listOf(tag1, tag2)
+
+        // when
+        val sut = declarations.withoutAllTags(tags)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllTags(Set) returns declaration without any of given tags`() {
+        // given
+        val tag1 = KoKDocTag.SINCE
+        val tag2 = KoKDocTag.SEE
+        val declaration1: KoKDocTagProvider =
+            mockk {
+                every { hasAllTags(tag1, tag2) } returns true
+            }
+        val declaration2: KoKDocTagProvider =
+            mockk {
+                every { hasAllTags(tag1, tag2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val tags = setOf(tag1, tag2)
+
+        // when
+        val sut = declarations.withoutAllTags(tags)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

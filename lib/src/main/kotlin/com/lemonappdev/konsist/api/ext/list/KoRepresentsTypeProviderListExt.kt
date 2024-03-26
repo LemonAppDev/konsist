@@ -13,9 +13,20 @@ import kotlin.reflect.KClass
 fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedType(
     name: String?,
     vararg names: String?,
-): List<T> =
+): List<T> = withRepresentedType(listOf(name, *names))
+
+/**
+ * List containing declarations that represents the type.
+ *
+ * @param names The type name(s) to include.
+ * @return A list containing declarations with the specified types.
+ */
+fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedType(names: Collection<String?>): List<T> =
     filter {
-        it.representsType(name) || names.any { type -> it.representsType(type) }
+        when {
+            names.isEmpty() -> true
+            else -> names.any { type -> it.representsType(type) }
+        }
     }
 
 /**
@@ -28,9 +39,20 @@ fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedType(
 fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedType(
     name: String?,
     vararg names: String?,
-): List<T> =
+): List<T> = withoutRepresentedType(listOf(name, *names))
+
+/**
+ * List containing declarations that do not represent the type.
+ *
+ * @param names The type name(s) to exclude.
+ * @return A list containing declarations without the specified types.
+ */
+fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedType(names: Collection<String?>): List<T> =
     filter {
-        !it.representsType(name) && names.none { type -> it.representsType(type) }
+        when {
+            names.isEmpty() -> false
+            else -> names.none { type -> it.representsType(type) }
+        }
     }
 
 /**
@@ -43,18 +65,20 @@ fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedType(
 fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedTypeOf(
     kClass: KClass<*>?,
     vararg kClasses: KClass<*>?,
-): List<T> =
-    filter {
-        val hasOneRepresentedType =
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { type ->
-                    it.representsType(type?.qualifiedName)
-                }
-            } else {
-                false
-            }
+): List<T> = withRepresentedTypeOf(listOf(kClass, *kClasses))
 
-        it.representsType(kClass?.qualifiedName) || hasOneRepresentedType
+/**
+ * List containing declarations that represents the type.
+ *
+ * @param kClasses The Kotlin classes representing the types to include.
+ * @return A list containing declarations with types matching the specified Kotlin classes.
+ */
+fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedTypeOf(kClasses: Collection<KClass<*>?>): List<T> =
+    filter {
+        when {
+            kClasses.isEmpty() -> true
+            else -> kClasses.any { type -> it.representsType(type?.qualifiedName) }
+        }
     }
 
 /**
@@ -65,18 +89,20 @@ fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedTypeOf(
  * @return A list containing declarations without types matching the specified Kotlin classes.
  */
 fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedTypeOf(
-    kClass: KClass<*>,
+    kClass: KClass<*>?,
     vararg kClasses: KClass<*>?,
-): List<T> =
-    filter {
-        val hasNoRepresentedType =
-            if (kClasses.isNotEmpty()) {
-                kClasses.none { type ->
-                    it.representsType(type?.qualifiedName)
-                }
-            } else {
-                true
-            }
+): List<T> = withoutRepresentedTypeOf(listOf(kClass, *kClasses))
 
-        !it.representsType(kClass.qualifiedName) && hasNoRepresentedType
+/**
+ * List containing declarations that do not represent the type.
+ *
+ * @param kClasses The Kotlin classes representing the types to exclude.
+ * @return A list containing declarations without types matching the specified Kotlin classes.
+ */
+fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedTypeOf(kClasses: Collection<KClass<*>?>): List<T> =
+    filter {
+        when {
+            kClasses.isEmpty() -> false
+            else -> kClasses.none { type -> it.representsType(type?.qualifiedName) }
+        }
     }

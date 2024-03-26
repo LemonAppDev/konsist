@@ -34,9 +34,20 @@ fun <T : KoImportProvider> List<T>.withoutImports(): List<T> = filterNot { it.ha
 fun <T : KoImportProvider> List<T>.withImportNamed(
     name: String,
     vararg names: String,
-): List<T> =
+): List<T> = withImportNamed(listOf(name, *names))
+
+/**
+ * List containing declarations that have at least one import with the specified name(s).
+ *
+ * @param names The names of additional imports to include.
+ * @return A list containing declarations with at least one of the specified import(s).
+ */
+fun <T : KoImportProvider> List<T>.withImportNamed(names: Collection<String>): List<T> =
     filter {
-        it.hasImportWithName(name, *names)
+        when {
+            names.isEmpty() -> it.hasImports()
+            else -> it.hasImportWithName(names.first(), *names.drop(1).toTypedArray())
+        }
     }
 
 /**
@@ -49,7 +60,21 @@ fun <T : KoImportProvider> List<T>.withImportNamed(
 fun <T : KoImportProvider> List<T>.withoutImportNamed(
     name: String,
     vararg names: String,
-): List<T> = filterNot { it.hasImportWithName(name, *names) }
+): List<T> = withoutImportNamed(listOf(name, *names))
+
+/**
+ * List containing declarations without any of specified imports.
+ *
+ * @param names The names of additional imports to exclude.
+ * @return A list containing declarations without any of specified imports.
+ */
+fun <T : KoImportProvider> List<T>.withoutImportNamed(names: Collection<String>): List<T> =
+    filterNot {
+        when {
+            names.isEmpty() -> it.hasImports()
+            else -> it.hasImportWithName(names.first(), *names.drop(1).toTypedArray())
+        }
+    }
 
 /**
  * List containing declarations that have all specified imports.
@@ -61,7 +86,21 @@ fun <T : KoImportProvider> List<T>.withoutImportNamed(
 fun <T : KoImportProvider> List<T>.withAllImportsNamed(
     name: String,
     vararg names: String,
-): List<T> = filter { it.hasImportsWithAllNames(name, *names) }
+): List<T> = withAllImportsNamed(listOf(name, *names))
+
+/**
+ * List containing declarations that have all specified imports.
+ *
+ * @param names The name(s) of the import(s) to include.
+ * @return A list containing declarations with all specified import(s).
+ */
+fun <T : KoImportProvider> List<T>.withAllImportsNamed(names: Collection<String>): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> it.hasImports()
+            else -> it.hasImportsWithAllNames(names.first(), *names.drop(1).toTypedArray())
+        }
+    }
 
 /**
  * List containing declarations without all specified imports.
@@ -73,7 +112,21 @@ fun <T : KoImportProvider> List<T>.withAllImportsNamed(
 fun <T : KoImportProvider> List<T>.withoutAllImportsNamed(
     name: String,
     vararg names: String,
-): List<T> = filterNot { it.hasImportsWithAllNames(name, *names) }
+): List<T> = withoutAllImportsNamed(listOf(name, *names))
+
+/**
+ * List containing declarations without all specified imports.
+ *
+ * @param names The name(s) of the import(s) to exclude.
+ * @return A list containing declarations without all specified import(s).
+ */
+fun <T : KoImportProvider> List<T>.withoutAllImportsNamed(names: Collection<String>): List<T> =
+    filterNot {
+        when {
+            names.isEmpty() -> it.hasImports()
+            else -> it.hasImportsWithAllNames(names.first(), *names.drop(1).toTypedArray())
+        }
+    }
 
 /**
  * List containing declarations that have at least one import satisfying the provided predicate.
@@ -81,10 +134,7 @@ fun <T : KoImportProvider> List<T>.withoutAllImportsNamed(
  * @param predicate A function that defines the condition to be met by an import declaration.
  * @return A list containing declarations with at least one import satisfying the predicate.
  */
-fun <T : KoImportProvider> List<T>.withImport(predicate: (KoImportDeclaration) -> Boolean): List<T> =
-    filter {
-        it.hasImport(predicate)
-    }
+fun <T : KoImportProvider> List<T>.withImport(predicate: (KoImportDeclaration) -> Boolean): List<T> = filter { it.hasImport(predicate) }
 
 /**
  * List containing declarations that not have import satisfying the provided predicate.
@@ -93,9 +143,7 @@ fun <T : KoImportProvider> List<T>.withImport(predicate: (KoImportDeclaration) -
  * @return A list containing declarations without import satisfying the provided predicate.
  */
 fun <T : KoImportProvider> List<T>.withoutImport(predicate: (KoImportDeclaration) -> Boolean): List<T> =
-    filterNot {
-        it.hasImport(predicate)
-    }
+    filterNot { it.hasImport(predicate) }
 
 /**
  * List containing declarations that have all imports satisfying the provided predicate.
@@ -104,9 +152,7 @@ fun <T : KoImportProvider> List<T>.withoutImport(predicate: (KoImportDeclaration
  * @return A filtered list containing declarations with all imports satisfying the predicate.
  */
 fun <T : KoImportProvider> List<T>.withAllImports(predicate: (KoImportDeclaration) -> Boolean): List<T> =
-    filter {
-        it.hasAllImports(predicate)
-    }
+    filter { it.hasAllImports(predicate) }
 
 /**
  * List containing declarations that have at least one import not satisfying the provided predicate.
@@ -115,9 +161,7 @@ fun <T : KoImportProvider> List<T>.withAllImports(predicate: (KoImportDeclaratio
  * @return A list containing declarations that have at least one import not satisfying the provided predicate.
  */
 fun <T : KoImportProvider> List<T>.withoutAllImports(predicate: (KoImportDeclaration) -> Boolean): List<T> =
-    filterNot {
-        it.hasAllImports(predicate)
-    }
+    filterNot { it.hasAllImports(predicate) }
 
 /**
  * List containing declarations with import declarations satisfying the predicate.

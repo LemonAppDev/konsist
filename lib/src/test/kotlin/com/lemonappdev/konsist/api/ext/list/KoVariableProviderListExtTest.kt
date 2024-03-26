@@ -56,6 +56,86 @@ class KoVariableProviderListExtTest {
     }
 
     @Test
+    fun `withVariableNamed(empty list) returns declaration with any variable`() {
+        // given
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariables() } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariables() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withVariableNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withVariableNamed(empty set) returns declaration with any variable`() {
+        // given
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariables() } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariables() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withVariableNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllVariablesNamed(empty list) returns declaration with any variable`() {
+        // given
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariables() } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariables() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllVariablesNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllVariablesNamed(empty set) returns declaration with any variable`() {
+        // given
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariables() } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariables() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllVariablesNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutVariables() returns declaration without any variable`() {
         // given
         val declaration1: KoVariableProvider =
@@ -70,6 +150,86 @@ class KoVariableProviderListExtTest {
 
         // when
         val sut = declarations.withoutVariables()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutVariableNamed(empty list) returns declaration without any variable`() {
+        // given
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariables() } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariables() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutVariableNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutVariableNamed(empty set) returns declaration without any variable`() {
+        // given
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariables() } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariables() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutVariableNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllVariablesNamed(empty list) returns declaration without any variable`() {
+        // given
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariables() } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariables() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllVariablesNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllVariablesNamed(empty set) returns declaration without any variable`() {
+        // given
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariables() } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariables() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllVariablesNamed(emptySet())
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -119,6 +279,52 @@ class KoVariableProviderListExtTest {
     }
 
     @Test
+    fun `withVariableNamed(list of String) returns declaration with any of given variables`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariableWithName(name1, name2) } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariableWithName(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withVariableNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withVariableNamed(set of String) returns declaration with any of given variables`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariableWithName(name1, name2) } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariableWithName(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withVariableNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutVariableNamed(name) returns declaration without given variable`() {
         // given
         val name = "SampleName"
@@ -156,6 +362,52 @@ class KoVariableProviderListExtTest {
 
         // when
         val sut = declarations.withoutVariableNamed(name1, name2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutVariableNamed(list of String) returns declaration without any of given variables`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariableWithName(name1, name2) } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariableWithName(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutVariableNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutVariableNamed(set of String) returns declaration without any of given variables`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariableWithName(name1, name2) } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariableWithName(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutVariableNamed(names)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -205,6 +457,52 @@ class KoVariableProviderListExtTest {
     }
 
     @Test
+    fun `withAllVariablesNamed(list of String) returns declaration with all given variables`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariablesWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariablesWithAllNames(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllVariablesNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllVariablesNamed(set of String) returns declaration with all given variables`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariablesWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariablesWithAllNames(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllVariablesNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllVariablesNamed(name) returns declaration without given variable`() {
         // given
         val name = "SampleName"
@@ -242,6 +540,52 @@ class KoVariableProviderListExtTest {
 
         // when
         val sut = declarations.withoutAllVariablesNamed(name1, name2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllVariablesNamed(list of String) returns declaration without all of given variables`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariablesWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariablesWithAllNames(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllVariablesNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllVariablesNamed(set of String) returns declaration without all of given variables`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariablesWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariablesWithAllNames(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllVariablesNamed(names)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

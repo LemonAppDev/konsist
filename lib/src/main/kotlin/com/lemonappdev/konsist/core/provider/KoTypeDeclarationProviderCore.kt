@@ -88,7 +88,7 @@ internal interface KoTypeDeclarationProviderCore :
 
     override fun hasClassDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asClassDeclaration()?.fullyQualifiedName
 
-    override fun haObjectDeclaration(predicate: ((KoObjectDeclaration) -> Boolean)?): Boolean =
+    override fun hasObjectDeclaration(predicate: ((KoObjectDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
             null -> asObjectDeclaration() != null
             else -> asObjectDeclaration()?.let { predicate(it) } ?: false

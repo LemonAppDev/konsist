@@ -140,7 +140,7 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
      * @return `true` if the type has the specified object declaration (or any object declaration if [predicate] is `null`),
      * `false` otherwise.
      */
-    fun haObjectDeclaration(predicate: ((KoObjectDeclaration) -> Boolean)? = null): Boolean
+    fun hasObjectDeclaration(predicate: ((KoObjectDeclaration) -> Boolean)? = null): Boolean
 
     /**
      * Whether type has a object declaration of the specified Kotlin class.

@@ -53,9 +53,32 @@ fun <T : KoFunctionProvider> List<T>.withFunctionNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
+): List<T> = withFunctionNamed(listOf(name, *names), includeNested, includeLocal)
+
+/**
+ * List containing declarations that have at least one function with the specified name(s).
+ *
+ * @param names The names of additional functions to include.
+ * @param includeNested Whether to include nested functions.
+ * @param includeLocal Whether to include local functions.
+ * @return A list containing declarations with at least one of the specified function(s).
+ */
+fun <T : KoFunctionProvider> List<T>.withFunctionNamed(
+    names: Collection<String>,
+    includeNested: Boolean = true,
+    includeLocal: Boolean = true,
 ): List<T> =
     filter {
-        it.hasFunctionWithName(name, *names, includeNested = includeNested, includeLocal = includeLocal)
+        when {
+            names.isEmpty() -> it.hasFunctions(includeNested, includeLocal)
+            else ->
+                it.hasFunctionWithName(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    includeNested = includeNested,
+                    includeLocal = includeLocal,
+                )
+        }
     }
 
 /**
@@ -72,9 +95,32 @@ fun <T : KoFunctionProvider> List<T>.withoutFunctionNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
+): List<T> = withoutFunctionNamed(listOf(name, *names), includeNested, includeLocal)
+
+/**
+ * List containing declarations without any of specified functions.
+ *
+ * @param names The names of additional functions to exclude.
+ * @param includeNested Whether to include nested functions.
+ * @param includeLocal Whether to include local functions.
+ * @return A list containing declarations without any of specified functions.
+ */
+fun <T : KoFunctionProvider> List<T>.withoutFunctionNamed(
+    names: Collection<String>,
+    includeNested: Boolean = true,
+    includeLocal: Boolean = true,
 ): List<T> =
     filterNot {
-        it.hasFunctionWithName(name, *names, includeNested = includeNested, includeLocal = includeLocal)
+        when {
+            names.isEmpty() -> it.hasFunctions(includeNested, includeLocal)
+            else ->
+                it.hasFunctionWithName(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    includeNested = includeNested,
+                    includeLocal = includeLocal,
+                )
+        }
     }
 
 /**
@@ -91,9 +137,32 @@ fun <T : KoFunctionProvider> List<T>.withAllFunctionsNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
+): List<T> = withAllFunctionsNamed(listOf(name, *names), includeNested, includeLocal)
+
+/**
+ * List containing declarations that have all specified functions.
+ *
+ * @param names The name(s) of the function(s) to include.
+ * @param includeNested Whether to include nested functions.
+ * @param includeLocal Whether to include local functions.
+ * @return A list containing declarations with all specified function(s).
+ */
+fun <T : KoFunctionProvider> List<T>.withAllFunctionsNamed(
+    names: Collection<String>,
+    includeNested: Boolean = true,
+    includeLocal: Boolean = true,
 ): List<T> =
     filter {
-        it.hasFunctionsWithAllNames(name, *names, includeNested = includeNested, includeLocal = includeLocal)
+        when {
+            names.isEmpty() -> it.hasFunctions(includeNested, includeLocal)
+            else ->
+                it.hasFunctionsWithAllNames(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    includeNested = includeNested,
+                    includeLocal = includeLocal,
+                )
+        }
     }
 
 /**
@@ -110,9 +179,32 @@ fun <T : KoFunctionProvider> List<T>.withoutAllFunctionsNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
+): List<T> = withoutAllFunctionsNamed(listOf(name, *names), includeNested, includeLocal)
+
+/**
+ * List containing declarations without all specified functions.
+ *
+ * @param names The name(s) of the function(s) to exclude.
+ * @param includeNested Whether to include nested functions.
+ * @param includeLocal Whether to include local functions.
+ * @return A list containing declarations without all specified function(s).
+ */
+fun <T : KoFunctionProvider> List<T>.withoutAllFunctionsNamed(
+    names: Collection<String>,
+    includeNested: Boolean = true,
+    includeLocal: Boolean = true,
 ): List<T> =
     filterNot {
-        it.hasFunctionsWithAllNames(name, *names, includeNested = includeNested, includeLocal = includeLocal)
+        when {
+            names.isEmpty() -> it.hasFunctions(includeNested, includeLocal)
+            else ->
+                it.hasFunctionsWithAllNames(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    includeNested = includeNested,
+                    includeLocal = includeLocal,
+                )
+        }
     }
 
 /**

@@ -56,6 +56,86 @@ class KoTypeAliasProviderListExtTest {
     }
 
     @Test
+    fun `withTypeAliasNamed(empty list) returns declaration with typealias`() {
+        // given
+        val declaration1: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliases() } returns true
+            }
+        val declaration2: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliases() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withTypeAliasNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withTypeAliasNamed(empty set) returns declaration with typealias`() {
+        // given
+        val declaration1: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliases() } returns true
+            }
+        val declaration2: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliases() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withTypeAliasNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllTypeAliasesNamed(empty list) returns declaration with typealias`() {
+        // given
+        val declaration1: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliases() } returns true
+            }
+        val declaration2: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliases() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllTypeAliasesNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllTypeAliasesNamed(empty set) returns declaration with typealias`() {
+        // given
+        val declaration1: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliases() } returns true
+            }
+        val declaration2: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliases() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllTypeAliasesNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutTypeAlias() returns declaration without typealias`() {
         // given
         val declaration1: KoTypeAliasProvider =
@@ -70,6 +150,86 @@ class KoTypeAliasProviderListExtTest {
 
         // when
         val sut = declarations.withoutTypeAliases()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutTypeAliasNamed(empty list) returns declaration without typealias`() {
+        // given
+        val declaration1: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliases() } returns true
+            }
+        val declaration2: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliases() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutTypeAliasNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutTypeAliasNamed(empty set) returns declaration without typealias`() {
+        // given
+        val declaration1: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliases() } returns true
+            }
+        val declaration2: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliases() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutTypeAliasNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllTypeAliasesNamed(empty list) returns declaration without typealias`() {
+        // given
+        val declaration1: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliases() } returns true
+            }
+        val declaration2: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliases() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllTypeAliasesNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllTypeAliasesNamed(empty set) returns declaration without typealias`() {
+        // given
+        val declaration1: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliases() } returns true
+            }
+        val declaration2: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliases() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllTypeAliasesNamed(emptySet())
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -119,6 +279,52 @@ class KoTypeAliasProviderListExtTest {
     }
 
     @Test
+    fun `withTypeAliasNamed(list of String) returns declaration with any of given type aliases`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliasWithName(name1, name2) } returns true
+            }
+        val declaration2: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliasWithName(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withTypeAliasNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withTypeAliasNamed(set of String) returns declaration with any of given type aliases`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliasWithName(name1, name2) } returns true
+            }
+        val declaration2: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliasWithName(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withTypeAliasNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutTypeAliasNamed(name) returns declaration without given type alias`() {
         // given
         val name = "SampleName"
@@ -156,6 +362,52 @@ class KoTypeAliasProviderListExtTest {
 
         // when
         val sut = declarations.withoutTypeAliasNamed(name1, name2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutTypeAliasNamed(list of String) returns declaration without any of given type aliases`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliasWithName(name1, name2) } returns true
+            }
+        val declaration2: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliasWithName(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutTypeAliasNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutTypeAliasNamed(set of String) returns declaration without any of given type aliases`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliasWithName(name1, name2) } returns true
+            }
+        val declaration2: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliasWithName(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutTypeAliasNamed(names)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -205,6 +457,52 @@ class KoTypeAliasProviderListExtTest {
     }
 
     @Test
+    fun `withAllTypeAliasesNamed(list of String) returns declaration with all given type aliases`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliasesWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliasesWithAllNames(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllTypeAliasesNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllTypeAliasesNamed(set of String) returns declaration with all given type aliases`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliasesWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliasesWithAllNames(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllTypeAliasesNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllTypeAliasesNamed(name) returns declaration without given type alias`() {
         // given
         val name = "SampleName"
@@ -242,6 +540,52 @@ class KoTypeAliasProviderListExtTest {
 
         // when
         val sut = declarations.withoutAllTypeAliasesNamed(name1, name2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllTypeAliasesNamed(list of String) returns declaration without all of given type aliases`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliasesWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliasesWithAllNames(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllTypeAliasesNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllTypeAliasesNamed(set of String) returns declaration without all of given type aliases`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliasesWithAllNames(name1, name2) } returns true
+            }
+        val declaration2: KoTypeAliasProvider =
+            mockk {
+                every { hasTypeAliasesWithAllNames(name1, name2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllTypeAliasesNamed(names)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
