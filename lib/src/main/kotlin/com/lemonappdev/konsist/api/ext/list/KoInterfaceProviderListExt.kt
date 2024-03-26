@@ -41,9 +41,24 @@ fun <T : KoInterfaceProvider> List<T>.withInterfaceNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
+): List<T> = withInterfaceNamed(listOf(name, *names), includeNested)
+
+/**
+ * List containing declarations that have at least one interface with the specified name(s).
+ *
+ * @param names The names of additional interfaces to include.
+ * @param includeNested Whether to include nested interfaces.
+ * @return A list containing declarations with at least one of the specified interface(s).
+ */
+fun <T : KoInterfaceProvider> List<T>.withInterfaceNamed(
+    names: Collection<String>,
+    includeNested: Boolean = true,
 ): List<T> =
     filter {
-        it.hasInterfaceWithName(name, *names, includeNested = includeNested)
+        when {
+            names.isEmpty() -> it.hasInterfaces(includeNested)
+            else -> it.hasInterfaceWithName(names.first(), *names.drop(1).toTypedArray(), includeNested = includeNested)
+        }
     }
 
 /**
@@ -58,9 +73,24 @@ fun <T : KoInterfaceProvider> List<T>.withoutInterfaceNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
+): List<T> = withoutInterfaceNamed(listOf(name, *names), includeNested)
+
+/**
+ * List containing declarations without any of specified interfaces.
+ *
+ * @param names The names of additional interfaces to exclude.
+ * @param includeNested Whether to include nested interfaces.
+ * @return A list containing declarations without any of specified interfaces.
+ */
+fun <T : KoInterfaceProvider> List<T>.withoutInterfaceNamed(
+    names: Collection<String>,
+    includeNested: Boolean = true,
 ): List<T> =
     filterNot {
-        it.hasInterfaceWithName(name, *names, includeNested = includeNested)
+        when {
+            names.isEmpty() -> it.hasInterfaces(includeNested)
+            else -> it.hasInterfaceWithName(names.first(), *names.drop(1).toTypedArray(), includeNested = includeNested)
+        }
     }
 
 /**
@@ -75,9 +105,29 @@ fun <T : KoInterfaceProvider> List<T>.withAllInterfacesNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
+): List<T> = withAllInterfacesNamed(listOf(name, *names), includeNested)
+
+/**
+ * List containing declarations that have all specified interfaces.
+ *
+ * @param names The name(s) of the interface(s) to include.
+ * @param includeNested Whether to include nested interfaces.
+ * @return A list containing declarations with all specified interface(s).
+ */
+fun <T : KoInterfaceProvider> List<T>.withAllInterfacesNamed(
+    names: Collection<String>,
+    includeNested: Boolean = true,
 ): List<T> =
     filter {
-        it.hasInterfacesWithAllNames(name, *names, includeNested = includeNested)
+        when {
+            names.isEmpty() -> it.hasInterfaces(includeNested)
+            else ->
+                it.hasInterfacesWithAllNames(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    includeNested = includeNested,
+                )
+        }
     }
 
 /**
@@ -92,9 +142,29 @@ fun <T : KoInterfaceProvider> List<T>.withoutAllInterfacesNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
+): List<T> = withoutAllInterfacesNamed(listOf(name, *names), includeNested)
+
+/**
+ * List containing declarations without all specified interfaces.
+ *
+ * @param names The name(s) of the interface(s) to exclude.
+ * @param includeNested Whether to include nested interfaces.
+ * @return A list containing declarations without all specified interface(s).
+ */
+fun <T : KoInterfaceProvider> List<T>.withoutAllInterfacesNamed(
+    names: Collection<String>,
+    includeNested: Boolean = true,
 ): List<T> =
     filterNot {
-        it.hasInterfacesWithAllNames(name, *names, includeNested = includeNested)
+        when {
+            names.isEmpty() -> it.hasInterfaces(includeNested)
+            else ->
+                it.hasInterfacesWithAllNames(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    includeNested = includeNested,
+                )
+        }
     }
 
 /**

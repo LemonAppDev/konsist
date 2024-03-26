@@ -24,7 +24,16 @@ fun <T : KoHasPackageProvider> List<T>.withoutMatchingPackage(): List<T> = filte
  * @return A list containing declarations with a package matching any of the specified package names
  * (or any package if [names] is empty).
  */
-fun <T : KoHasPackageProvider> List<T>.withPackage(vararg names: String): List<T> =
+fun <T : KoHasPackageProvider> List<T>.withPackage(vararg names: String): List<T> = withPackage(listOf(*names))
+
+/**
+ * List containing declarations with package.
+ *
+ * @param names The package names to include.
+ * @return A list containing declarations with a package matching any of the specified package names
+ * (or any package if [names] is empty).
+ */
+fun <T : KoHasPackageProvider> List<T>.withPackage(names: Collection<String>): List<T> =
     filter {
         when {
             names.isEmpty() -> (it as? KoPackageProvider)?.packagee != null
@@ -39,7 +48,16 @@ fun <T : KoHasPackageProvider> List<T>.withPackage(vararg names: String): List<T
  * @return A list containing declarations without a package matching any of the specified package names
  * (or none package if [names] is empty).
  */
-fun <T : KoHasPackageProvider> List<T>.withoutPackage(vararg names: String): List<T> =
+fun <T : KoHasPackageProvider> List<T>.withoutPackage(vararg names: String): List<T> = withoutPackage(listOf(*names))
+
+/**
+ * List containing declarations with some package.
+ *
+ * @param names The package names to exclude.
+ * @return A list containing declarations without a package matching any of the specified package names
+ * (or none package if [names] is empty).
+ */
+fun <T : KoHasPackageProvider> List<T>.withoutPackage(names: Collection<String>): List<T> =
     filter {
         when {
             names.isEmpty() -> (it as? KoPackageProvider)?.packagee == null

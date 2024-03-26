@@ -1,3 +1,5 @@
+@file:Suppress("detekt.TooManyFunctions")
+
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
@@ -47,7 +49,31 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParentNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> = filter { it.hasExternalParentWithName(name, *names, indirectParents = indirectParents) }
+): List<T> = withExternalParentNamed(listOf(name, *names), indirectParents)
+
+/**
+ * List containing declarations that have at least one external parent with the specified name(s).
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
+ *
+ * @param names The names of additional external parents to include.
+ * @param indirectParents Whether to include indirect external parents.
+ * @return A list containing declarations with at least one of the specified external parent(s).
+ */
+fun <T : KoExternalParentProvider> List<T>.withExternalParentNamed(
+    names: Collection<String>,
+    indirectParents: Boolean = false,
+): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> it.hasExternalParents(indirectParents)
+            else ->
+                it.hasExternalParentWithName(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
+        }
+    }
 
 /**
  * List containing declarations without any of specified external parents.
@@ -62,7 +88,31 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> = filterNot { it.hasExternalParentWithName(name, *names, indirectParents = indirectParents) }
+): List<T> = withoutExternalParentNamed(listOf(name, *names), indirectParents)
+
+/**
+ * List containing declarations without any of specified external parents.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
+ *
+ * @param names The names of additional external parents to exclude.
+ * @param indirectParents Whether to include indirect external parents.
+ * @return A list containing declarations without any of specified external parents.
+ */
+fun <T : KoExternalParentProvider> List<T>.withoutExternalParentNamed(
+    names: Collection<String>,
+    indirectParents: Boolean = false,
+): List<T> =
+    filterNot {
+        when {
+            names.isEmpty() -> it.hasExternalParents(indirectParents)
+            else ->
+                it.hasExternalParentWithName(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
+        }
+    }
 
 /**
  * List containing declarations that have all specified external parents.
@@ -77,7 +127,31 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> = filter { it.hasExternalParentsWithAllNames(name, *names, indirectParents = indirectParents) }
+): List<T> = withAllExternalParentsNamed(listOf(name, *names), indirectParents)
+
+/**
+ * List containing declarations that have all specified external parents.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
+ *
+ * @param names The name(s) of the external parent(s) to include.
+ * @param indirectParents Whether to include indirect external parents.
+ * @return A list containing declarations with all specified external parent(s).
+ */
+fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsNamed(
+    names: Collection<String>,
+    indirectParents: Boolean = false,
+): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> it.hasExternalParents(indirectParents)
+            else ->
+                it.hasExternalParentsWithAllNames(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
+        }
+    }
 
 /**
  * List containing declarations without all specified external parents.
@@ -92,7 +166,31 @@ fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> = filterNot { it.hasExternalParentsWithAllNames(name, *names, indirectParents = indirectParents) }
+): List<T> = withoutAllExternalParentsNamed(listOf(name, *names), indirectParents)
+
+/**
+ * List containing declarations without all specified external parents.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
+ *
+ * @param names The name(s) of the external parent(s) to exclude.
+ * @param indirectParents Whether to include indirect external parents.
+ * @return A list containing declarations without all specified external parent(s).
+ */
+fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsNamed(
+    names: Collection<String>,
+    indirectParents: Boolean = false,
+): List<T> =
+    filterNot {
+        when {
+            names.isEmpty() -> it.hasExternalParents(indirectParents)
+            else ->
+                it.hasExternalParentsWithAllNames(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
+        }
+    }
 
 /**
  * List containing declarations that have at least one external parent satisfying the provided predicate.
@@ -185,7 +283,31 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParentOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectParents: Boolean = false,
-): List<T> = filter { it.hasExternalParentOf(kClass, *kClasses, indirectParents = indirectParents) }
+): List<T> = withExternalParentOf(listOf(kClass, *kClasses), indirectParents)
+
+/**
+ * List containing declarations that have at least one external parent of the specified `KClass` type.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
+ *
+ * @param kClasses The Kotlin classes representing external parents to include.
+ * @param indirectParents Whether to include indirect external parents.
+ * @return A list containing declarations with at least one external parent of the specified `KClass` type.
+ */
+fun <T : KoExternalParentProvider> List<T>.withExternalParentOf(
+    kClasses: Collection<KClass<*>>,
+    indirectParents: Boolean = false,
+): List<T> =
+    filter {
+        when {
+            kClasses.isEmpty() -> it.hasExternalParents(indirectParents)
+            else ->
+                it.hasExternalParentOf(
+                    kClasses.first(),
+                    *kClasses.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
+        }
+    }
 
 /**
  * List containing declarations without any external parent of the specified `KClass` type.
@@ -200,7 +322,31 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectParents: Boolean = false,
-): List<T> = filterNot { it.hasExternalParentOf(kClass, *kClasses, indirectParents = indirectParents) }
+): List<T> = withoutExternalParentOf(listOf(kClass, *kClasses), indirectParents)
+
+/**
+ * List containing declarations without any external parent of the specified `KClass` type.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
+ *
+ * @param kClasses The Kotlin classes representing external parents to exclude.
+ * @param indirectParents Whether to include indirect external parents.
+ * @return A list containing declarations without any of the specified external parents.
+ */
+fun <T : KoExternalParentProvider> List<T>.withoutExternalParentOf(
+    kClasses: Collection<KClass<*>>,
+    indirectParents: Boolean = false,
+): List<T> =
+    filterNot {
+        when {
+            kClasses.isEmpty() -> it.hasExternalParents(indirectParents)
+            else ->
+                it.hasExternalParentOf(
+                    kClasses.first(),
+                    *kClasses.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
+        }
+    }
 
 /**
  * List containing declarations that have all external parents of the specified `KClass` type.
@@ -215,7 +361,31 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectParents: Boolean = false,
-): List<T> = filter { it.hasAllExternalParentsOf(kClass, *kClasses, indirectParents = indirectParents) }
+): List<T> = withAllExternalParentsOf(listOf(kClass, *kClasses), indirectParents)
+
+/**
+ * List containing declarations that have all external parents of the specified `KClass` type.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
+ *
+ * @param kClasses The Kotlin classes representing external parents to include.
+ * @param indirectParents Whether to include indirect external parents.
+ * @return A list containing declarations that have all external parents of the specified `KClass` type.
+ */
+fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsOf(
+    kClasses: Collection<KClass<*>>,
+    indirectParents: Boolean = false,
+): List<T> =
+    filter {
+        when {
+            kClasses.isEmpty() -> it.hasExternalParents(indirectParents)
+            else ->
+                it.hasAllExternalParentsOf(
+                    kClasses.first(),
+                    *kClasses.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
+        }
+    }
 
 /**
  * List containing declarations without all specified `KClass` type external parents.
@@ -230,4 +400,28 @@ fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
     indirectParents: Boolean = false,
-): List<T> = filterNot { it.hasAllExternalParentsOf(kClass, *kClasses, indirectParents = indirectParents) }
+): List<T> = withoutAllExternalParentsOf(listOf(kClass, *kClasses), indirectParents)
+
+/**
+ * List containing declarations without all specified `KClass` type external parents.
+ * The external parent is a parent defined outside the project codebase (defined inside external library).
+ *
+ * @param kClasses The Kotlin classes representing external parents to exclude.
+ * @param indirectParents Whether to include indirect external parents.
+ * @return A list containing declarations without all specified `KClass` type external parents.
+ */
+fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsOf(
+    kClasses: Collection<KClass<*>>,
+    indirectParents: Boolean = false,
+): List<T> =
+    filterNot {
+        when {
+            kClasses.isEmpty() -> it.hasExternalParents(indirectParents)
+            else ->
+                it.hasAllExternalParentsOf(
+                    kClasses.first(),
+                    *kClasses.drop(1).toTypedArray(),
+                    indirectParents = indirectParents,
+                )
+        }
+    }

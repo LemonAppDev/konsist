@@ -92,16 +92,20 @@ fun <T : KoReturnProvider> List<T>.withoutReturnType(predicate: ((KoTypeDeclarat
 fun <T : KoReturnProvider> List<T>.withReturnTypeOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> =
-    filter {
-        val hasAtLeastOneReturnType =
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.hasReturnTypeOf(kClass) }
-            } else {
-                false
-            }
+): List<T> = withReturnTypeOf(listOf(kClass, *kClasses))
 
-        it.hasReturnTypeOf(kClass) || hasAtLeastOneReturnType
+/**
+ * List containing declarations with return type.
+ *
+ * @param kClasses The Kotlin class(es) representing the return type(s) to include.
+ * @return A list containing declarations with the return type of the specified Kotlin class(es).
+ */
+fun <T : KoReturnProvider> List<T>.withReturnTypeOf(kClasses: Collection<KClass<*>>): List<T> =
+    filter {
+        when {
+            kClasses.isEmpty() -> it.hasReturnType()
+            else -> kClasses.any { kClass -> it.hasReturnTypeOf(kClass) }
+        }
     }
 
 /**
@@ -114,14 +118,18 @@ fun <T : KoReturnProvider> List<T>.withReturnTypeOf(
 fun <T : KoReturnProvider> List<T>.withoutReturnTypeOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> =
-    filterNot {
-        val hasAtLeastOneReturnType =
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.hasReturnTypeOf(kClass) }
-            } else {
-                false
-            }
+): List<T> = withoutReturnTypeOf(listOf(kClass, *kClasses))
 
-        it.hasReturnTypeOf(kClass) || hasAtLeastOneReturnType
+/**
+ * List containing declarations without return type.
+ *
+ * @param kClasses The Kotlin class(es) representing the return type(s) to exclude.
+ * @return A list containing declarations without return type of the specified Kotlin class(es).
+ */
+fun <T : KoReturnProvider> List<T>.withoutReturnTypeOf(kClasses: Collection<KClass<*>>): List<T> =
+    filterNot {
+        when {
+            kClasses.isEmpty() -> it.hasReturnType()
+            else -> kClasses.any { kClass -> it.hasReturnTypeOf(kClass) }
+        }
     }

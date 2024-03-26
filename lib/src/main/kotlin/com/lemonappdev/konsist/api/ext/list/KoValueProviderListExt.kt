@@ -8,7 +8,15 @@ import com.lemonappdev.konsist.api.provider.KoValueProvider
  * @param values The value(s) to include.
  * @return A list containing elements with the specified values (or any value if [values] is empty).
  */
-fun <T : KoValueProvider> List<T>.withValue(vararg values: String): List<T> =
+fun <T : KoValueProvider> List<T>.withValue(vararg values: String): List<T> = withValue(listOf(*values))
+
+/**
+ * List containing elements with value.
+ *
+ * @param values The value(s) to include.
+ * @return A list containing elements with the specified values (or any value if [values] is empty).
+ */
+fun <T : KoValueProvider> List<T>.withValue(values: Collection<String>): List<T> =
     filter {
         when {
             values.isEmpty() -> it.hasValue()
@@ -22,7 +30,15 @@ fun <T : KoValueProvider> List<T>.withValue(vararg values: String): List<T> =
  * @param values The value(s) to exclude.
  * @return A list containing elements without the specified values (or none value if [values] is empty).
  */
-fun <T : KoValueProvider> List<T>.withoutValue(vararg values: String): List<T> =
+fun <T : KoValueProvider> List<T>.withoutValue(vararg values: String): List<T> = withoutValue(listOf(*values))
+
+/**
+ * List containing elements without value.
+ *
+ * @param values The value(s) to exclude.
+ * @return A list containing elements without the specified values (or none value if [values] is empty).
+ */
+fun <T : KoValueProvider> List<T>.withoutValue(values: Collection<String>): List<T> =
     filter {
         when {
             values.isEmpty() -> !it.hasValue()

@@ -33,9 +33,20 @@ fun <T : KoArgumentProvider> List<T>.withoutArguments(): List<T> = filterNot { i
 fun <T : KoArgumentProvider> List<T>.withArgumentNamed(
     name: String,
     vararg names: String,
-): List<T> =
+): List<T> = withArgumentNamed(listOf(name, *names))
+
+/**
+ * List containing declarations that have at least one argument with the specified name(s).
+ *
+ * @param names The names of additional arguments to include.
+ * @return A list containing declarations with at least one of the specified argument(s).
+ */
+fun <T : KoArgumentProvider> List<T>.withArgumentNamed(names: Collection<String>): List<T> =
     filter {
-        it.hasArgumentWithName(name, *names)
+        when {
+            names.isEmpty() -> it.hasArguments()
+            else -> it.hasArgumentWithName(names.first(), *names.drop(1).toTypedArray())
+        }
     }
 
 /**
@@ -48,9 +59,20 @@ fun <T : KoArgumentProvider> List<T>.withArgumentNamed(
 fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(
     name: String,
     vararg names: String,
-): List<T> =
+): List<T> = withoutArgumentNamed(listOf(name, *names))
+
+/**
+ * List containing declarations without any of specified arguments.
+ *
+ * @param names The names of additional arguments to exclude.
+ * @return A list containing declarations without any of specified arguments.
+ */
+fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(names: Collection<String>): List<T> =
     filterNot {
-        it.hasArgumentWithName(name, *names)
+        when {
+            names.isEmpty() -> it.hasArguments()
+            else -> it.hasArgumentWithName(names.first(), *names.drop(1).toTypedArray())
+        }
     }
 
 /**
@@ -63,9 +85,20 @@ fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(
 fun <T : KoArgumentProvider> List<T>.withAllArgumentsNamed(
     name: String,
     vararg names: String,
-): List<T> =
+): List<T> = withAllArgumentsNamed(listOf(name, *names))
+
+/**
+ * List containing declarations that have all specified arguments.
+ *
+ * @param names The name(s) of the argument(s) to include.
+ * @return A list containing declarations with all specified argument(s).
+ */
+fun <T : KoArgumentProvider> List<T>.withAllArgumentsNamed(names: Collection<String>): List<T> =
     filter {
-        it.hasArgumentsWithAllNames(name, *names)
+        when {
+            names.isEmpty() -> it.hasArguments()
+            else -> it.hasArgumentsWithAllNames(names.first(), *names.drop(1).toTypedArray())
+        }
     }
 
 /**
@@ -78,9 +111,20 @@ fun <T : KoArgumentProvider> List<T>.withAllArgumentsNamed(
 fun <T : KoArgumentProvider> List<T>.withoutAllArgumentsNamed(
     name: String,
     vararg names: String,
-): List<T> =
+): List<T> = withoutAllArgumentsNamed(listOf(name, *names))
+
+/**
+ * List containing declarations without all specified arguments.
+ *
+ * @param names The name(s) of the argument(s) to exclude.
+ * @return A list containing declarations without all specified argument(s).
+ */
+fun <T : KoArgumentProvider> List<T>.withoutAllArgumentsNamed(names: Collection<String>): List<T> =
     filterNot {
-        it.hasArgumentsWithAllNames(name, *names)
+        when {
+            names.isEmpty() -> it.hasArguments()
+            else -> it.hasArgumentsWithAllNames(names.first(), *names.drop(1).toTypedArray())
+        }
     }
 
 /**

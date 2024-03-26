@@ -39,9 +39,24 @@ fun <T : KoObjectProvider> List<T>.withObjectNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
+): List<T> = withObjectNamed(listOf(name, *names), includeNested)
+
+/**
+ * List containing declarations that have at least one object with the specified name(s).
+ *
+ * @param names The names of additional objects to include.
+ * @param includeNested Whether to include nested objects.
+ * @return A list containing declarations with at least one of the specified object(s).
+ */
+fun <T : KoObjectProvider> List<T>.withObjectNamed(
+    names: Collection<String>,
+    includeNested: Boolean = true,
 ): List<T> =
     filter {
-        it.hasObjectWithName(name, *names, includeNested = includeNested)
+        when {
+            names.isEmpty() -> it.hasObjects(includeNested)
+            else -> it.hasObjectWithName(names.first(), *names.drop(1).toTypedArray(), includeNested = includeNested)
+        }
     }
 
 /**
@@ -56,9 +71,24 @@ fun <T : KoObjectProvider> List<T>.withoutObjectNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
+): List<T> = withoutObjectNamed(listOf(name, *names), includeNested)
+
+/**
+ * List containing declarations without any of specified objects.
+ *
+ * @param names The names of additional objects to exclude.
+ * @param includeNested Whether to include nested objects.
+ * @return A list containing declarations without any of specified objects.
+ */
+fun <T : KoObjectProvider> List<T>.withoutObjectNamed(
+    names: Collection<String>,
+    includeNested: Boolean = true,
 ): List<T> =
     filterNot {
-        it.hasObjectWithName(name, *names, includeNested = includeNested)
+        when {
+            names.isEmpty() -> it.hasObjects(includeNested)
+            else -> it.hasObjectWithName(names.first(), *names.drop(1).toTypedArray(), includeNested = includeNested)
+        }
     }
 
 /**
@@ -73,9 +103,29 @@ fun <T : KoObjectProvider> List<T>.withAllObjectsNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
+): List<T> = withAllObjectsNamed(listOf(name, *names), includeNested)
+
+/**
+ * List containing declarations that have all specified objects.
+ *
+ * @param names The name(s) of the object(s) to include.
+ * @param includeNested Whether to include nested objects.
+ * @return A list containing declarations with all specified object(s).
+ */
+fun <T : KoObjectProvider> List<T>.withAllObjectsNamed(
+    names: Collection<String>,
+    includeNested: Boolean = true,
 ): List<T> =
     filter {
-        it.hasObjectsWithAllNames(name, *names, includeNested = includeNested)
+        when {
+            names.isEmpty() -> it.hasObjects(includeNested)
+            else ->
+                it.hasObjectsWithAllNames(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    includeNested = includeNested,
+                )
+        }
     }
 
 /**
@@ -90,9 +140,29 @@ fun <T : KoObjectProvider> List<T>.withoutAllObjectsNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
+): List<T> = withoutAllObjectsNamed(listOf(name, *names), includeNested)
+
+/**
+ * List containing declarations without any of specified objects.
+ *
+ * @param names The names of additional objects to exclude.
+ * @param includeNested Whether to include nested objects.
+ * @return A list containing declarations without any of specified objects.
+ */
+fun <T : KoObjectProvider> List<T>.withoutAllObjectsNamed(
+    names: Collection<String>,
+    includeNested: Boolean = true,
 ): List<T> =
     filterNot {
-        it.hasObjectsWithAllNames(name, *names, includeNested = includeNested)
+        when {
+            names.isEmpty() -> it.hasObjects(includeNested)
+            else ->
+                it.hasObjectsWithAllNames(
+                    names.first(),
+                    *names.drop(1).toTypedArray(),
+                    includeNested = includeNested,
+                )
+        }
     }
 
 /**
