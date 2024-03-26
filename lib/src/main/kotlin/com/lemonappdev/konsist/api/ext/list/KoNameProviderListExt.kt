@@ -10,13 +10,7 @@ import com.lemonappdev.konsist.api.provider.KoNameProvider
  * @param names The name(s) to include.
  * @return A list containing declarations with the specified names (or any name if [names] is empty).
  */
-fun <T : KoNameProvider> List<T>.withName(vararg names: String): List<T> =
-    filter {
-        when {
-            names.isEmpty() -> it.name != ""
-            else -> names.any { name -> it.name == name }
-        }
-    }
+fun <T : KoNameProvider> List<T>.withName(vararg names: String): List<T> = withName(listOf(*names))
 
 /**
  * List containing declarations with name.
@@ -38,13 +32,7 @@ fun <T : KoNameProvider> List<T>.withName(names: Collection<String>): List<T> =
  * @param names The name(s) to exclude.
  * @return A list containing declarations without the specified names (or none name if [names] is empty).
  */
-fun <T : KoNameProvider> List<T>.withoutName(vararg names: String): List<T> =
-    filter {
-        when {
-            names.isEmpty() -> it.name == ""
-            else -> names.none { name -> it.name == name }
-        }
-    }
+fun <T : KoNameProvider> List<T>.withoutName(vararg names: String): List<T> = withoutName(listOf(*names))
 
 /**
  * List containing declarations without name.
@@ -86,7 +74,7 @@ fun <T : KoNameProvider> List<T>.withoutName(predicate: (String) -> Boolean): Li
 fun <T : KoNameProvider> List<T>.withNameStartingWith(
     prefix: String,
     vararg prefixes: String,
-): List<T> = filter { it.hasNameStartingWith(prefix) || prefixes.any { prefix -> it.hasNameStartingWith(prefix) } }
+): List<T> = withNameStartingWith(listOf(prefix, *prefixes))
 
 /**
  * List containing declarations with name with any of the specified prefix.
@@ -112,7 +100,7 @@ fun <T : KoNameProvider> List<T>.withNameStartingWith(prefixes: Collection<Strin
 fun <T : KoNameProvider> List<T>.withoutNameStartingWith(
     prefix: String,
     vararg prefixes: String,
-): List<T> = filter { !it.hasNameStartingWith(prefix) && prefixes.none { prefix -> it.hasNameStartingWith(prefix) } }
+): List<T> = withoutNameStartingWith(listOf(prefix, *prefixes))
 
 /**
  * List containing declarations without name with any of the specified prefix.
@@ -138,7 +126,7 @@ fun <T : KoNameProvider> List<T>.withoutNameStartingWith(prefixes: Collection<St
 fun <T : KoNameProvider> List<T>.withNameEndingWith(
     suffix: String,
     vararg suffixes: String,
-): List<T> = filter { it.hasNameEndingWith(suffix) || suffixes.any { suffix -> it.hasNameEndingWith(suffix) } }
+): List<T> = withNameEndingWith(listOf(suffix, *suffixes))
 
 /**
  * List containing declarations with name with any of the specified suffix.
@@ -164,7 +152,7 @@ fun <T : KoNameProvider> List<T>.withNameEndingWith(suffixes: Collection<String>
 fun <T : KoNameProvider> List<T>.withoutNameEndingWith(
     suffix: String,
     vararg suffixes: String,
-): List<T> = filter { !it.hasNameEndingWith(suffix) && suffixes.none { suffix -> it.hasNameEndingWith(suffix) } }
+): List<T> = withoutNameEndingWith(listOf(suffix, *suffixes))
 
 /**
  * List containing declarations without name with any of the specified suffix.
@@ -190,7 +178,7 @@ fun <T : KoNameProvider> List<T>.withoutNameEndingWith(suffixes: Collection<Stri
 fun <T : KoNameProvider> List<T>.withNameContaining(
     text: String,
     vararg texts: String,
-): List<T> = filter { it.hasNameContaining(text) || texts.any { text -> it.hasNameContaining(text) } }
+): List<T> = withNameContaining(listOf(text, *texts))
 
 /**
  * List containing declarations with name containing any of the specified String.
@@ -216,7 +204,7 @@ fun <T : KoNameProvider> List<T>.withNameContaining(texts: Collection<String>): 
 fun <T : KoNameProvider> List<T>.withoutNameContaining(
     text: String,
     vararg texts: String,
-): List<T> = filter { !it.hasNameContaining(text) && texts.none { text -> it.hasNameContaining(text) } }
+): List<T> = withoutNameContaining(listOf(text, *texts))
 
 /**
  * List containing declarations without name containing any of the specified String.
@@ -242,7 +230,7 @@ fun <T : KoNameProvider> List<T>.withoutNameContaining(texts: Collection<String>
 fun <T : KoNameProvider> List<T>.withNameMatching(
     regex: Regex,
     vararg regexes: Regex,
-): List<T> = filter { it.hasNameMatching(regex) || regexes.any { regex -> it.hasNameMatching(regex) } }
+): List<T> = withNameMatching(listOf(regex, *regexes))
 
 /**
  * List containing declarations with name matching any of the specified regex.
@@ -268,7 +256,7 @@ fun <T : KoNameProvider> List<T>.withNameMatching(regexes: Collection<Regex>): L
 fun <T : KoNameProvider> List<T>.withoutNameMatching(
     regex: Regex,
     vararg regexes: Regex,
-): List<T> = filter { !it.hasNameMatching(regex) && regexes.none { regex -> it.hasNameMatching(regex) } }
+): List<T> = withoutNameMatching(listOf(regex, *regexes))
 
 /**
  * List containing declarations without name matching any of the specified regex.

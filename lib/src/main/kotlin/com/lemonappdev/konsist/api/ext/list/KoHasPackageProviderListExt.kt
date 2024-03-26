@@ -33,12 +33,13 @@ fun <T : KoHasPackageProvider> List<T>.withPackage(vararg names: String): List<T
  * @return A list containing declarations with a package matching any of the specified package names
  * (or any package if [names] is empty).
  */
-fun <T : KoHasPackageProvider> List<T>.withPackage(names: Collection<String>): List<T> = filter {
-    when {
-        names.isEmpty() -> (it as? KoPackageProvider)?.packagee != null
-        else -> names.any { packagee -> it.hasPackage(packagee) }
+fun <T : KoHasPackageProvider> List<T>.withPackage(names: Collection<String>): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> (it as? KoPackageProvider)?.packagee != null
+            else -> names.any { packagee -> it.hasPackage(packagee) }
+        }
     }
-}
 
 /**
  * List containing declarations with some package.
@@ -47,7 +48,7 @@ fun <T : KoHasPackageProvider> List<T>.withPackage(names: Collection<String>): L
  * @return A list containing declarations without a package matching any of the specified package names
  * (or none package if [names] is empty).
  */
-fun <T : KoHasPackageProvider> List<T>.withoutPackage(vararg names: String): List<T> = withoutPackage((listOf(*names)))
+fun <T : KoHasPackageProvider> List<T>.withoutPackage(vararg names: String): List<T> = withoutPackage(listOf(*names))
 
 /**
  * List containing declarations with some package.
@@ -56,9 +57,10 @@ fun <T : KoHasPackageProvider> List<T>.withoutPackage(vararg names: String): Lis
  * @return A list containing declarations without a package matching any of the specified package names
  * (or none package if [names] is empty).
  */
-fun <T : KoHasPackageProvider> List<T>.withoutPackage(names: Collection<String>): List<T> = filter {
-    when {
-        names.isEmpty() -> (it as? KoPackageProvider)?.packagee == null
-        else -> names.none { packagee -> it.hasPackage(packagee) }
+fun <T : KoHasPackageProvider> List<T>.withoutPackage(names: Collection<String>): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> (it as? KoPackageProvider)?.packagee == null
+            else -> names.none { packagee -> it.hasPackage(packagee) }
+        }
     }
-}

@@ -28,8 +28,7 @@ fun <T : KoParentProvider> List<T>.parents(indirectParents: Boolean = false): Li
  * @param indirectParents Whether to include indirect parents.
  * @return A list containing declarations with any parent.
  */
-fun <T : KoParentProvider> List<T>.withParents(indirectParents: Boolean = false): List<T> =
-    filter { it.hasParents(indirectParents) }
+fun <T : KoParentProvider> List<T>.withParents(indirectParents: Boolean = false): List<T> = filter { it.hasParents(indirectParents) }
 
 /**
  * List containing declarations with none parent - declaration does not extend any class and does not implement any interface.
@@ -38,8 +37,7 @@ fun <T : KoParentProvider> List<T>.withParents(indirectParents: Boolean = false)
  * @return A list containing declarations with no parent - declaration does not extend any class and does not implement any
  * interface.
  */
-fun <T : KoParentProvider> List<T>.withoutParents(indirectParents: Boolean = false): List<T> =
-    filterNot { it.hasParents(indirectParents) }
+fun <T : KoParentProvider> List<T>.withoutParents(indirectParents: Boolean = false): List<T> = filterNot { it.hasParents(indirectParents) }
 
 /**
  * List containing declarations that have at least one parent with the specified name(s).
@@ -438,11 +436,11 @@ fun <T : KoParentProvider> List<T>.withSomeParentsOf(
 ): List<T> =
     filter {
         it.parents.any { parent -> parent.name == kClass.simpleName } ||
-                kClasses.any { kClass ->
-                    it
-                        .parents
-                        .any { parent -> parent.name == kClass.simpleName }
-                }
+            kClasses.any { kClass ->
+                it
+                    .parents
+                    .any { parent -> parent.name == kClass.simpleName }
+            }
     }
 
 /**
