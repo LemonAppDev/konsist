@@ -35,10 +35,11 @@ internal interface KoChildProviderCore :
         name: String,
         vararg names: String,
         indirectChildren: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasChildWithName(listOf(name, *names), indirectChildren)
 
-        return givenNames.any {
+    override fun hasChildWithName(names: Collection<String>, indirectChildren: Boolean): Boolean = when {
+        names.isEmpty() -> hasChildren(indirectChildren)
+        else -> names.any {
             children(indirectChildren).any { child -> it == child.name }
         }
     }
@@ -47,10 +48,11 @@ internal interface KoChildProviderCore :
         name: String,
         vararg names: String,
         indirectChildren: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasChildrenWithAllNames(listOf(name, *names), indirectChildren)
 
-        return givenNames.all {
+    override fun hasChildrenWithAllNames(names: Collection<String>, indirectChildren: Boolean): Boolean = when {
+        names.isEmpty() -> hasChildren(indirectChildren)
+        else -> names.all {
             children(indirectChildren).any { child -> it == child.name }
         }
     }
@@ -69,15 +71,21 @@ internal interface KoChildProviderCore :
         name: KClass<*>,
         vararg names: KClass<*>,
         indirectChildren: Boolean,
-    ): Boolean =
-        checkIfKClassOf(name, children(indirectChildren)) ||
-            names.any { checkIfKClassOf(it, children(indirectChildren)) }
+    ): Boolean = hasChildOf(listOf(name, *names))
+
+    override fun hasChildOf(names: Collection<KClass<*>>, indirectChildren: Boolean): Boolean = when {
+        names.isEmpty() -> hasChildren(indirectChildren)
+        else -> names.any { checkIfKClassOf(it, children(indirectChildren)) }
+    }
 
     override fun hasAllChildrenOf(
         name: KClass<*>,
         vararg names: KClass<*>,
         indirectChildren: Boolean,
-    ): Boolean =
-        checkIfKClassOf(name, children(indirectChildren)) &&
-            names.all { checkIfKClassOf(it, children(indirectChildren)) }
+    ): Boolean = hasAllChildrenOf(listOf(name, *names))
+
+    override fun hasAllChildrenOf(names: Collection<KClass<*>>, indirectChildren: Boolean): Boolean = when {
+        names.isEmpty() -> hasChildren(indirectChildren)
+        else -> names.all { checkIfKClassOf(it, children(indirectChildren)) }
+    }
 }
