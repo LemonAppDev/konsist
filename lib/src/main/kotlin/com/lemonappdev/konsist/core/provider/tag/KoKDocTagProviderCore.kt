@@ -68,16 +68,23 @@ internal interface KoKDocTagProviderCore : KoKDocTagProvider, KoTextProviderCore
     override fun hasTag(
         tag: KoKDocTag,
         vararg tags: KoKDocTag,
-    ): Boolean {
-        val givenKoKDocTags = tags.toList() + tag
+    ): Boolean = hasTag(listOf(tag, *tags))
 
-        return givenKoKDocTags.any { this.tags.any { tag -> tag.name == it } }
+    override fun hasTag(tags: Collection<KoKDocTag>): Boolean = when {
+        tags.isEmpty() -> hasTags()
+        else -> tags.any { this.tags.any { tag -> tag.name == it } }
     }
 
     override fun hasAllTags(
         tag: KoKDocTag,
         vararg tags: KoKDocTag,
-    ): Boolean = this.tags.map { it.name }.containsAll(tags.toList() + tag)
+    ): Boolean = hasAllTags(listOf(tag, *tags))
+
+    override fun hasAllTags(tags: Collection<KoKDocTag>): Boolean =
+        when {
+            tags.isEmpty() -> hasTags()
+            else -> this.tags.map { it.name }.containsAll(tags)
+        }
 
     private fun parseToValuedTag(
         koKDocTag: KoKDocTag,
