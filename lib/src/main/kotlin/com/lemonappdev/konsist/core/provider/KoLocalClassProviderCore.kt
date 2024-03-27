@@ -20,10 +20,11 @@ internal interface KoLocalClassProviderCore : KoLocalClassProvider, KoLocalDecla
     override fun hasLocalClassWithName(
         name: String,
         vararg names: String,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasLocalClassWithName(listOf(name, *names))
 
-        return givenNames.any {
+    override fun hasLocalClassWithName(names: Collection<String>): Boolean = when {
+        names.isEmpty() -> hasLocalClasses()
+        else -> names.any {
             localClasses.any { localClass -> it == localClass.name }
         }
     }
@@ -31,10 +32,11 @@ internal interface KoLocalClassProviderCore : KoLocalClassProvider, KoLocalDecla
     override fun hasLocalClassesWithAllNames(
         name: String,
         vararg names: String,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasLocalClassesWithAllNames(listOf(name, *names))
 
-        return givenNames.all {
+    override fun hasLocalClassesWithAllNames(names: Collection<String>): Boolean = when {
+        names.isEmpty() -> hasLocalClasses()
+        else -> names.all {
             localClasses.any { localClass -> it == localClass.name }
         }
     }

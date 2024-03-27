@@ -20,8 +20,16 @@ class KoFunctionDeclarationForKoLocalClassProviderTest {
             numLocalClasses shouldBeEqualTo 0
             countLocalClasses { it.name == "SampleClass" } shouldBeEqualTo 0
             hasLocalClasses() shouldBeEqualTo false
+            hasLocalClassWithName(emptyList()) shouldBeEqualTo false
+            hasLocalClassWithName(emptySet()) shouldBeEqualTo false
+            hasLocalClassesWithAllNames(emptyList()) shouldBeEqualTo false
+            hasLocalClassesWithAllNames(emptySet()) shouldBeEqualTo false
             hasLocalClassWithName("SampleClass") shouldBeEqualTo false
+            hasLocalClassWithName(listOf("SampleClass")) shouldBeEqualTo false
+            hasLocalClassWithName(setOf("SampleClass")) shouldBeEqualTo false
             hasLocalClassesWithAllNames("SampleClass1", "SampleClass2") shouldBeEqualTo false
+            hasLocalClassesWithAllNames(listOf("SampleClass1", "SampleClass2")) shouldBeEqualTo false
+            hasLocalClassesWithAllNames(setOf("SampleClass1", "SampleClass2")) shouldBeEqualTo false
             hasLocalClass { it.name == "SampleClass" } shouldBeEqualTo false
             hasAllLocalClasses { it.name == "SampleClass" } shouldBeEqualTo true
             containsLocalClass { it.name == "SampleClass" } shouldBeEqualTo false
@@ -42,18 +50,34 @@ class KoFunctionDeclarationForKoLocalClassProviderTest {
             numLocalClasses shouldBeEqualTo 2
             countLocalClasses { it.name == "SampleClass1" } shouldBeEqualTo 1
             hasLocalClasses() shouldBeEqualTo true
+            hasLocalClassWithName(emptyList()) shouldBeEqualTo true
+            hasLocalClassWithName(emptySet()) shouldBeEqualTo true
+            hasLocalClassesWithAllNames(emptyList()) shouldBeEqualTo true
+            hasLocalClassesWithAllNames(emptySet()) shouldBeEqualTo true
             hasLocalClassWithName("SampleClass1") shouldBeEqualTo true
-            hasLocalClassWithName("OtherClass") shouldBeEqualTo false
-            hasLocalClassWithName("SampleClass1", "OtherClass") shouldBeEqualTo true
+            hasLocalClassWithName("OtherLocalClass") shouldBeEqualTo false
+            hasLocalClassWithName("SampleClass1", "OtherLocalClass") shouldBeEqualTo true
+            hasLocalClassWithName(listOf("SampleClass1")) shouldBeEqualTo true
+            hasLocalClassWithName(listOf("OtherLocalClass")) shouldBeEqualTo false
+            hasLocalClassWithName(listOf("SampleClass1", "OtherLocalClass")) shouldBeEqualTo true
+            hasLocalClassWithName(setOf("SampleClass1")) shouldBeEqualTo true
+            hasLocalClassWithName(setOf("OtherLocalClass")) shouldBeEqualTo false
+            hasLocalClassWithName(setOf("SampleClass1", "OtherLocalClass")) shouldBeEqualTo true
             hasLocalClassesWithAllNames("SampleClass1") shouldBeEqualTo true
             hasLocalClassesWithAllNames("SampleClass1", "SampleClass2") shouldBeEqualTo true
-            hasLocalClassesWithAllNames("SampleClass1", "OtherClass") shouldBeEqualTo false
+            hasLocalClassesWithAllNames("SampleClass1", "OtherLocalClass") shouldBeEqualTo false
+            hasLocalClassesWithAllNames(listOf("SampleClass1")) shouldBeEqualTo true
+            hasLocalClassesWithAllNames(listOf("SampleClass1", "SampleClass2")) shouldBeEqualTo true
+            hasLocalClassesWithAllNames(listOf("SampleClass1", "OtherLocalClass")) shouldBeEqualTo false
+            hasLocalClassesWithAllNames(setOf("SampleClass1")) shouldBeEqualTo true
+            hasLocalClassesWithAllNames(setOf("SampleClass1", "SampleClass2")) shouldBeEqualTo true
+            hasLocalClassesWithAllNames(setOf("SampleClass1", "OtherLocalClass")) shouldBeEqualTo false
             hasLocalClass { it.name == "SampleClass1" } shouldBeEqualTo true
-            hasLocalClass { it.name == "OtherClass" } shouldBeEqualTo false
+            hasLocalClass { it.name == "OtherLocalClass" } shouldBeEqualTo false
             hasAllLocalClasses { it.name.endsWith("2") || it.name == "SampleClass1" } shouldBeEqualTo true
             hasAllLocalClasses { it.name.endsWith("2") } shouldBeEqualTo false
             containsLocalClass { it.name == "SampleClass1" } shouldBeEqualTo true
-            containsLocalClass { it.name == "OtherClass" } shouldBeEqualTo false
+            containsLocalClass { it.name == "OtherLocalClass" } shouldBeEqualTo false
         }
     }
 
