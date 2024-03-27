@@ -83,8 +83,7 @@ class ApiKonsistTest {
 
     @Test
     fun `every method with vararg parameter calls the method with the same name and list parameter`() {
-        Konsist
-            .scopeFromPackage("com.lemonappdev.konsist.api.ext..", sourceSetName = "main")
+        apiPackageScope
             .functions()
             .withoutAnnotationOf(Deprecated::class)
             .withParameter { it.hasVarArgModifier }
