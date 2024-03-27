@@ -43,10 +43,15 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
         vararg names: String,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasClassWithName(listOf(name, *names), includeNested, includeLocal)
 
-        return givenNames.any {
+    override fun hasClassWithName(
+        names: Collection<String>,
+        includeNested: Boolean,
+        includeLocal: Boolean,
+    ): Boolean = when {
+        names.isEmpty() -> hasClasses(includeNested, includeLocal)
+        else -> names.any {
             classes(includeNested, includeLocal).any { koClass -> it == koClass.name }
         }
     }
@@ -56,10 +61,15 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
         vararg names: String,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasClassesWithAllNames(listOf(name, *names), includeNested, includeLocal)
 
-        return givenNames.all {
+    override fun hasClassesWithAllNames(
+        names: Collection<String>,
+        includeNested: Boolean,
+        includeLocal: Boolean,
+    ): Boolean = when {
+        names.isEmpty() -> hasClasses(includeNested, includeLocal)
+        else -> names.all {
             classes(includeNested, includeLocal).any { koClass -> it == koClass.name }
         }
     }
