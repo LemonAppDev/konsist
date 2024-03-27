@@ -32,10 +32,11 @@ internal interface KoParametersProviderCore :
     override fun hasParameterWithName(
         name: String,
         vararg names: String,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasParameterWithName(listOf(name, *names))
 
-        return givenNames.any {
+    override fun hasParameterWithName(names: Collection<String>): Boolean = when {
+        names.isEmpty() -> hasParameters()
+        else -> names.any {
             parameters.any { parameter -> it == parameter.name }
         }
     }
@@ -43,10 +44,11 @@ internal interface KoParametersProviderCore :
     override fun hasParametersWithAllNames(
         name: String,
         vararg names: String,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasParametersWithAllNames(listOf(name, *names))
 
-        return givenNames.all {
+    override fun hasParametersWithAllNames(names: Collection<String>): Boolean = when {
+        names.isEmpty() -> hasParameters()
+        else -> names.all {
             parameters.any { parameter -> it == parameter.name }
         }
     }

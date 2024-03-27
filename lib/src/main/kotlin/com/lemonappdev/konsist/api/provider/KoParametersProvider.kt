@@ -53,6 +53,14 @@ interface KoParametersProvider : KoBaseProvider {
     ): Boolean
 
     /**
+     * Determines whether the declaration has at least one parameter whose name matches any of the specified names.
+     *
+     * @param names the names of the parameters to check.
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasParameterWithName(names: Collection<String>): Boolean
+
+    /**
      * Determines whether the declaration has parameters with all the specified names.
      *
      * @param name The name of the parameter to check.
@@ -63,6 +71,14 @@ interface KoParametersProvider : KoBaseProvider {
         name: String,
         vararg names: String,
     ): Boolean
+
+    /**
+     * Determines whether the declaration has parameters with all the specified names.
+     *
+     * @param names The names of the parameters to check.
+     * @return `true` if there are declarations with all the specified names, `false` otherwise.
+     */
+    fun hasParametersWithAllNames(names: Collection<String>): Boolean
 
     /**
      * Determines whether the declaration has at least one parameter that satisfies the provided predicate.
