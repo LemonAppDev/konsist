@@ -17,10 +17,11 @@ internal interface KoArgumentProviderCore :
     override fun hasArgumentWithName(
         name: String,
         vararg names: String,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasArgumentWithName(listOf(name, *names))
 
-        return givenNames.any {
+    override fun hasArgumentWithName(names: Collection<String>): Boolean = when {
+        names.isEmpty() -> hasArguments()
+        else -> names.any {
             arguments.any { argument -> it == argument.name }
         }
     }
@@ -28,10 +29,11 @@ internal interface KoArgumentProviderCore :
     override fun hasArgumentsWithAllNames(
         name: String,
         vararg names: String,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasArgumentsWithAllNames(listOf(name, *names))
 
-        return givenNames.all {
+    override fun hasArgumentsWithAllNames(names: Collection<String>): Boolean = when {
+        names.isEmpty() -> hasArguments()
+        else -> names.all {
             arguments.any { argument -> it == argument.name }
         }
     }

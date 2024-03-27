@@ -64,24 +64,28 @@ internal interface KoAnnotationProviderCore :
     override fun hasAnnotationWithName(
         name: String,
         vararg names: String,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasAnnotationWithName(listOf(name, *names))
 
-        return givenNames.any {
-            annotations.any { annotation -> annotation.representsType(it) }
+    override fun hasAnnotationWithName(names: Collection<String>): Boolean =
+        when {
+            names.isEmpty() -> hasAnnotations()
+            else -> names.any {
+                annotations.any { annotation -> annotation.representsType(it) }
+            }
         }
-    }
 
     override fun hasAnnotationsWithAllNames(
         name: String,
         vararg names: String,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasAnnotationsWithAllNames(listOf(name, *names))
 
-        return givenNames.all {
-            annotations.any { annotation -> annotation.representsType(it) }
+    override fun hasAnnotationsWithAllNames(names: Collection<String>): Boolean =
+        when {
+            names.isEmpty() -> hasAnnotations()
+            else -> names.all {
+                annotations.any { annotation -> annotation.representsType(it) }
+            }
         }
-    }
 
     override fun hasAnnotation(predicate: (KoAnnotationDeclaration) -> Boolean): Boolean = annotations.any(predicate)
 
@@ -90,10 +94,20 @@ internal interface KoAnnotationProviderCore :
     override fun hasAnnotationOf(
         name: KClass<*>,
         vararg names: KClass<*>,
-    ): Boolean = checkIfAnnotated(name) || names.any { checkIfAnnotated(it) }
+    ): Boolean = hasAnnotationOf(listOf(name, *names))
+
+    override fun hasAnnotationOf(names: Collection<KClass<*>>): Boolean =  when {
+        names.isEmpty() -> hasAnnotations()
+        else -> names.any { checkIfAnnotated(it) }
+    }
 
     override fun hasAllAnnotationsOf(
         name: KClass<*>,
         vararg names: KClass<*>,
-    ): Boolean = checkIfAnnotated(name) && names.all { checkIfAnnotated(it) }
+    ): Boolean = hasAllAnnotationsOf(listOf(name, *names))
+
+    override fun hasAllAnnotationsOf(names: Collection<KClass<*>>): Boolean =  when {
+        names.isEmpty() -> hasAnnotations()
+        else -> names.all { checkIfAnnotated(it) }
+    }
 }
