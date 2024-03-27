@@ -50,10 +50,11 @@ internal interface KoEnumConstantProviderCore :
     override fun hasEnumConstantWithName(
         name: String,
         vararg names: String,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasEnumConstantWithName(listOf(name, *names))
 
-        return givenNames.any {
+    override fun hasEnumConstantWithName(names: Collection<String>): Boolean = when {
+        names.isEmpty() -> hasEnumConstants()
+        else -> names.any {
             enumConstants.any { enumConstant -> it == enumConstant.name }
         }
     }
@@ -61,10 +62,11 @@ internal interface KoEnumConstantProviderCore :
     override fun hasEnumConstantsWithAllNames(
         name: String,
         vararg names: String,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasEnumConstantsWithAllNames(listOf(name, *names))
 
-        return givenNames.all {
+    override fun hasEnumConstantsWithAllNames(names: Collection<String>): Boolean = when {
+        names.isEmpty() -> hasEnumConstants()
+        else -> names.all {
             enumConstants.any { enumConstant -> it == enumConstant.name }
         }
     }
