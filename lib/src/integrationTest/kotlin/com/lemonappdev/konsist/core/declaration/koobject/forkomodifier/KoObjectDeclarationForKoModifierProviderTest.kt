@@ -27,14 +27,24 @@ class KoObjectDeclarationForKoModifierProviderTest {
             modifiers shouldBeEqualTo emptyList()
             numModifiers shouldBeEqualTo 0
             hasModifiers() shouldBeEqualTo false
+            hasModifier(emptyList()) shouldBeEqualTo false
+            hasModifier(emptySet()) shouldBeEqualTo false
+            hasAllModifiers(emptyList()) shouldBeEqualTo false
+            hasAllModifiers(emptySet()) shouldBeEqualTo false
             hasModifier(OPEN) shouldBeEqualTo false
             hasModifier(OPEN, DATA) shouldBeEqualTo false
+            hasModifier(listOf(OPEN)) shouldBeEqualTo false
+            hasModifier(listOf(OPEN, DATA)) shouldBeEqualTo false
+            hasModifier(setOf(OPEN)) shouldBeEqualTo false
+            hasModifier(setOf(OPEN, DATA)) shouldBeEqualTo false
             hasAllModifiers(OPEN) shouldBeEqualTo false
             hasAllModifiers(OPEN, DATA) shouldBeEqualTo false
+            hasAllModifiers(listOf(OPEN)) shouldBeEqualTo false
+            hasAllModifiers(listOf(OPEN, DATA)) shouldBeEqualTo false
+            hasAllModifiers(setOf(OPEN)) shouldBeEqualTo false
+            hasAllModifiers(setOf(OPEN, DATA)) shouldBeEqualTo false
             hasModifiers(OPEN) shouldBeEqualTo false
             hasModifiers(OPEN, DATA) shouldBeEqualTo false
-            hasDataModifier shouldBeEqualTo false
-            hasCompanionModifier shouldBeEqualTo false
         }
     }
 
@@ -49,14 +59,32 @@ class KoObjectDeclarationForKoModifierProviderTest {
         // then
         assertSoftly(sut) {
             numModifiers shouldBeEqualTo 2
+            hasModifiers() shouldBeEqualTo true
+            hasModifier(emptyList()) shouldBeEqualTo true
+            hasModifier(emptySet()) shouldBeEqualTo true
+            hasAllModifiers(emptyList()) shouldBeEqualTo true
+            hasAllModifiers(emptySet()) shouldBeEqualTo true
             hasModifier(DATA) shouldBeEqualTo true
             hasModifier(PUBLIC) shouldBeEqualTo false
             hasModifier(DATA, PUBLIC) shouldBeEqualTo true
+            hasModifier(listOf(DATA)) shouldBeEqualTo true
+            hasModifier(listOf(PUBLIC)) shouldBeEqualTo false
+            hasModifier(listOf(DATA, PUBLIC)) shouldBeEqualTo true
+            hasModifier(setOf(DATA)) shouldBeEqualTo true
+            hasModifier(setOf(PUBLIC)) shouldBeEqualTo false
+            hasModifier(setOf(DATA, PUBLIC)) shouldBeEqualTo true
             hasAllModifiers(DATA) shouldBeEqualTo true
             hasAllModifiers(PUBLIC) shouldBeEqualTo false
             hasAllModifiers(DATA, PUBLIC) shouldBeEqualTo false
             hasAllModifiers(DATA, PRIVATE) shouldBeEqualTo true
-            hasModifiers() shouldBeEqualTo true
+            hasAllModifiers(listOf(DATA)) shouldBeEqualTo true
+            hasAllModifiers(listOf(PUBLIC)) shouldBeEqualTo false
+            hasAllModifiers(listOf(DATA, PUBLIC)) shouldBeEqualTo false
+            hasAllModifiers(listOf(DATA, PRIVATE)) shouldBeEqualTo true
+            hasAllModifiers(setOf(DATA)) shouldBeEqualTo true
+            hasAllModifiers(setOf(PUBLIC)) shouldBeEqualTo false
+            hasAllModifiers(setOf(DATA, PUBLIC)) shouldBeEqualTo false
+            hasAllModifiers(setOf(DATA, PRIVATE)) shouldBeEqualTo true
             hasModifiers(PRIVATE) shouldBeEqualTo true
             hasModifiers(DATA) shouldBeEqualTo true
             hasModifiers(OPEN) shouldBeEqualTo false
