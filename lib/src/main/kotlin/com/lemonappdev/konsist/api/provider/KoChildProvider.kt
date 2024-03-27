@@ -59,6 +59,19 @@ interface KoChildProvider : KoBaseProvider {
     ): Boolean
 
     /**
+     * Determines whether the declaration has at least one child defined directly
+     * in the Kotlin file whose name matches any of the specified names.
+     *
+     * @param names the names of the children to check.
+     * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasChildWithName(
+        names: Collection<String>,
+        indirectChildren: Boolean = false,
+    ): Boolean
+
+    /**
      * Determines whether the declaration has children defined directly in the Kotlin
      * file with all the specified names.
      *
@@ -70,6 +83,19 @@ interface KoChildProvider : KoBaseProvider {
     fun hasChildrenWithAllNames(
         name: String,
         vararg names: String,
+        indirectChildren: Boolean = false,
+    ): Boolean
+
+    /**
+     * Determines whether the declaration has children defined directly in the Kotlin
+     * file with all the specified names.
+     *
+     * @param names The names of the children to check.
+     * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
+     * @return `true` if there are declarations with all the specified names, `false` otherwise.
+     */
+    fun hasChildrenWithAllNames(
+        names: Collection<String>,
         indirectChildren: Boolean = false,
     ): Boolean
 
@@ -118,6 +144,18 @@ interface KoChildProvider : KoBaseProvider {
     ): Boolean
 
     /**
+     * Determines whether the declaration has at least one child of the specified `KClass` type.
+     *
+     * @param names the `KClass` types of the children to check.
+     * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasChildOf(
+        names: Collection<KClass<*>>,
+        indirectChildren: Boolean = false,
+    ): Boolean
+
+    /**
      * Determines whether the declaration has children with all the specified `KClass` type.
      *
      * @param name the `KClass` type of the child to check.
@@ -128,6 +166,18 @@ interface KoChildProvider : KoBaseProvider {
     fun hasAllChildrenOf(
         name: KClass<*>,
         vararg names: KClass<*>,
+        indirectChildren: Boolean = false,
+    ): Boolean
+
+    /**
+     * Determines whether the declaration has children with all the specified `KClass` type.
+     *
+     * @param names the `KClass` types of the children to check.
+     * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
+     * @return `true` if the declaration has children of all the specified `KClass` types, `false` otherwise.
+     */
+    fun hasAllChildrenOf(
+        names: Collection<KClass<*>>,
         indirectChildren: Boolean = false,
     ): Boolean
 }

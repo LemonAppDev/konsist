@@ -28,10 +28,22 @@ class KoConstructorDeclarationForKoModifierProviderTest {
             modifiers shouldBeEqualTo emptyList()
             numModifiers shouldBeEqualTo 0
             hasModifiers() shouldBeEqualTo false
+            hasModifier(emptyList()) shouldBeEqualTo false
+            hasModifier(emptySet()) shouldBeEqualTo false
+            hasAllModifiers(emptyList()) shouldBeEqualTo false
+            hasAllModifiers(emptySet()) shouldBeEqualTo false
             hasModifier(OPEN) shouldBeEqualTo false
             hasModifier(OPEN, DATA) shouldBeEqualTo false
+            hasModifier(listOf(OPEN)) shouldBeEqualTo false
+            hasModifier(listOf(OPEN, DATA)) shouldBeEqualTo false
+            hasModifier(setOf(OPEN)) shouldBeEqualTo false
+            hasModifier(setOf(OPEN, DATA)) shouldBeEqualTo false
             hasAllModifiers(OPEN) shouldBeEqualTo false
             hasAllModifiers(OPEN, DATA) shouldBeEqualTo false
+            hasAllModifiers(listOf(OPEN)) shouldBeEqualTo false
+            hasAllModifiers(listOf(OPEN, DATA)) shouldBeEqualTo false
+            hasAllModifiers(setOf(OPEN)) shouldBeEqualTo false
+            hasAllModifiers(setOf(OPEN, DATA)) shouldBeEqualTo false
             hasModifiers(OPEN) shouldBeEqualTo false
             hasModifiers(OPEN, DATA) shouldBeEqualTo false
         }
@@ -52,12 +64,29 @@ class KoConstructorDeclarationForKoModifierProviderTest {
         assertSoftly(sut) {
             modifiers shouldBeEqualTo listOf(PRIVATE)
             numModifiers shouldBeEqualTo 1
+            hasModifiers() shouldBeEqualTo true
+            hasModifier(emptyList()) shouldBeEqualTo true
+            hasModifier(emptySet()) shouldBeEqualTo true
+            hasAllModifiers(emptyList()) shouldBeEqualTo true
+            hasAllModifiers(emptySet()) shouldBeEqualTo true
             hasModifier(PRIVATE) shouldBeEqualTo true
             hasModifier(PROTECTED) shouldBeEqualTo false
             hasModifier(PRIVATE, DATA) shouldBeEqualTo true
+            hasModifier(listOf(PRIVATE)) shouldBeEqualTo true
+            hasModifier(listOf(PROTECTED)) shouldBeEqualTo false
+            hasModifier(listOf(PRIVATE, DATA)) shouldBeEqualTo true
+            hasModifier(setOf(PRIVATE)) shouldBeEqualTo true
+            hasModifier(setOf(PROTECTED)) shouldBeEqualTo false
+            hasModifier(setOf(PRIVATE, DATA)) shouldBeEqualTo true
             hasAllModifiers(PRIVATE) shouldBeEqualTo true
             hasAllModifiers(PROTECTED) shouldBeEqualTo false
             hasAllModifiers(PRIVATE, DATA) shouldBeEqualTo false
+            hasAllModifiers(listOf(PRIVATE)) shouldBeEqualTo true
+            hasAllModifiers(listOf(PROTECTED)) shouldBeEqualTo false
+            hasAllModifiers(listOf(PRIVATE, DATA)) shouldBeEqualTo false
+            hasAllModifiers(setOf(PRIVATE)) shouldBeEqualTo true
+            hasAllModifiers(setOf(PROTECTED)) shouldBeEqualTo false
+            hasAllModifiers(setOf(PRIVATE, DATA)) shouldBeEqualTo false
         }
     }
 

@@ -95,10 +95,28 @@ class KoKDocDeclarationForKoKDocTagProviderTest {
         assertSoftly(sut) {
             it?.numTags shouldBeEqualTo 0
             it?.hasTags() shouldBeEqualTo false
+            it?.hasTag(emptyList()) shouldBeEqualTo false
+            it?.hasTag(emptySet()) shouldBeEqualTo false
+            it?.hasAllTags(emptyList()) shouldBeEqualTo false
+            it?.hasAllTags(emptySet()) shouldBeEqualTo false
             it?.hasTag(KoKDocTag.SINCE) shouldBeEqualTo false
             it?.hasTag(KoKDocTag.SINCE, KoKDocTag.SUPPRESS) shouldBeEqualTo false
+            it?.hasTag(listOf(KoKDocTag.SINCE)) shouldBeEqualTo false
+            it?.hasTag(listOf(KoKDocTag.SINCE, KoKDocTag.SUPPRESS)) shouldBeEqualTo false
+            it?.hasTag(setOf(KoKDocTag.SINCE)) shouldBeEqualTo false
+            it?.hasTag(setOf(KoKDocTag.SINCE, KoKDocTag.SUPPRESS)) shouldBeEqualTo false
             it?.hasAllTags(KoKDocTag.SINCE) shouldBeEqualTo false
             it?.hasAllTags(KoKDocTag.SINCE, KoKDocTag.SUPPRESS) shouldBeEqualTo false
+            it?.hasAllTags(KoKDocTag.SINCE) shouldBeEqualTo false
+            it?.hasAllTags(KoKDocTag.SINCE, KoKDocTag.SUPPRESS) shouldBeEqualTo false
+            it?.hasAllTags(listOf(KoKDocTag.SINCE)) shouldBeEqualTo false
+            it?.hasAllTags(listOf(KoKDocTag.SINCE, KoKDocTag.SUPPRESS)) shouldBeEqualTo false
+            it?.hasAllTags(listOf(KoKDocTag.SINCE)) shouldBeEqualTo false
+            it?.hasAllTags(listOf(KoKDocTag.SINCE, KoKDocTag.SUPPRESS)) shouldBeEqualTo false
+            it?.hasAllTags(setOf(KoKDocTag.SINCE)) shouldBeEqualTo false
+            it?.hasAllTags(setOf(KoKDocTag.SINCE, KoKDocTag.SUPPRESS)) shouldBeEqualTo false
+            it?.hasAllTags(setOf(KoKDocTag.SINCE)) shouldBeEqualTo false
+            it?.hasAllTags(setOf(KoKDocTag.SINCE, KoKDocTag.SUPPRESS)) shouldBeEqualTo false
             it?.hasTags(KoKDocTag.SINCE) shouldBeEqualTo false
         }
     }
@@ -116,12 +134,28 @@ class KoKDocDeclarationForKoKDocTagProviderTest {
         assertSoftly(sut) {
             it?.numTags shouldBeEqualTo 2
             it?.hasTags() shouldBeEqualTo true
+            it?.hasTag(emptyList()) shouldBeEqualTo true
+            it?.hasTag(emptySet()) shouldBeEqualTo true
+            it?.hasAllTags(emptyList()) shouldBeEqualTo true
+            it?.hasAllTags(emptySet()) shouldBeEqualTo true
             it?.hasTag(KoKDocTag.SINCE) shouldBeEqualTo true
             it?.hasTag(KoKDocTag.SINCE, KoKDocTag.SEE) shouldBeEqualTo true
             it?.hasTag(KoKDocTag.SINCE, KoKDocTag.SUPPRESS) shouldBeEqualTo true
+            it?.hasTag(listOf(KoKDocTag.SINCE)) shouldBeEqualTo true
+            it?.hasTag(listOf(KoKDocTag.SINCE, KoKDocTag.SEE)) shouldBeEqualTo true
+            it?.hasTag(listOf(KoKDocTag.SINCE, KoKDocTag.SUPPRESS)) shouldBeEqualTo true
+            it?.hasTag(setOf(KoKDocTag.SINCE)) shouldBeEqualTo true
+            it?.hasTag(setOf(KoKDocTag.SINCE, KoKDocTag.SEE)) shouldBeEqualTo true
+            it?.hasTag(setOf(KoKDocTag.SINCE, KoKDocTag.SUPPRESS)) shouldBeEqualTo true
             it?.hasAllTags(KoKDocTag.SINCE) shouldBeEqualTo true
             it?.hasAllTags(KoKDocTag.SINCE, KoKDocTag.SEE) shouldBeEqualTo true
             it?.hasAllTags(KoKDocTag.SINCE, KoKDocTag.SUPPRESS) shouldBeEqualTo false
+            it?.hasAllTags(listOf(KoKDocTag.SINCE)) shouldBeEqualTo true
+            it?.hasAllTags(listOf(KoKDocTag.SINCE, KoKDocTag.SEE)) shouldBeEqualTo true
+            it?.hasAllTags(listOf(KoKDocTag.SINCE, KoKDocTag.SUPPRESS)) shouldBeEqualTo false
+            it?.hasAllTags(setOf(KoKDocTag.SINCE)) shouldBeEqualTo true
+            it?.hasAllTags(setOf(KoKDocTag.SINCE, KoKDocTag.SEE)) shouldBeEqualTo true
+            it?.hasAllTags(setOf(KoKDocTag.SINCE, KoKDocTag.SUPPRESS)) shouldBeEqualTo false
             it?.hasTags(KoKDocTag.SINCE) shouldBeEqualTo true
             it?.hasTags(KoKDocTag.SINCE, KoKDocTag.SEE) shouldBeEqualTo true
             it?.hasTags(KoKDocTag.SAMPLE) shouldBeEqualTo false

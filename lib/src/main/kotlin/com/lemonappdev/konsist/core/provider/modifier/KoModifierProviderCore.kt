@@ -51,16 +51,24 @@ internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCo
     override fun hasModifier(
         modifier: KoModifier,
         vararg modifiers: KoModifier,
-    ): Boolean {
-        val givenModifiers = modifiers.toList() + modifier
+    ): Boolean = hasModifier(listOf(modifier, *modifiers))
 
-        return givenModifiers.any { this.modifiers.any { modifier -> modifier == it } }
-    }
+    override fun hasModifier(modifiers: Collection<KoModifier>): Boolean =
+        when {
+            modifiers.isEmpty() -> hasModifiers()
+            else -> modifiers.any { this.modifiers.any { modifier -> modifier == it } }
+        }
 
     override fun hasAllModifiers(
         modifier: KoModifier,
         vararg modifiers: KoModifier,
-    ): Boolean = this.modifiers.containsAll(modifiers.toList() + modifier)
+    ): Boolean = hasAllModifiers(listOf(modifier, *modifiers))
+
+    override fun hasAllModifiers(modifiers: Collection<KoModifier>): Boolean =
+        when {
+            modifiers.isEmpty() -> hasModifiers()
+            else -> this.modifiers.containsAll(modifiers)
+        }
 
     private fun String.isKDocLine(): Boolean {
         val trimmed = trim()
