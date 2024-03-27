@@ -57,7 +57,7 @@ interface KoKDocTagProvider : KoBaseProvider {
      * @param tags the tags to check.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasTag( tags: Collection<KoKDocTag>): Boolean
+    fun hasTag(tags: Collection<KoKDocTag>): Boolean
 
     /**
      * Determines whether the declaration has all specified tags.

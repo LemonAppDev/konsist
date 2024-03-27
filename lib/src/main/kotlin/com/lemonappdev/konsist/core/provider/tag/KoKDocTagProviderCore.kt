@@ -70,10 +70,11 @@ internal interface KoKDocTagProviderCore : KoKDocTagProvider, KoTextProviderCore
         vararg tags: KoKDocTag,
     ): Boolean = hasTag(listOf(tag, *tags))
 
-    override fun hasTag(tags: Collection<KoKDocTag>): Boolean = when {
-        tags.isEmpty() -> hasTags()
-        else -> tags.any { this.tags.any { tag -> tag.name == it } }
-    }
+    override fun hasTag(tags: Collection<KoKDocTag>): Boolean =
+        when {
+            tags.isEmpty() -> hasTags()
+            else -> tags.any { this.tags.any { tag -> tag.name == it } }
+        }
 
     override fun hasAllTags(
         tag: KoKDocTag,

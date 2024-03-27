@@ -19,24 +19,28 @@ internal interface KoArgumentProviderCore :
         vararg names: String,
     ): Boolean = hasArgumentWithName(listOf(name, *names))
 
-    override fun hasArgumentWithName(names: Collection<String>): Boolean = when {
-        names.isEmpty() -> hasArguments()
-        else -> names.any {
-            arguments.any { argument -> it == argument.name }
+    override fun hasArgumentWithName(names: Collection<String>): Boolean =
+        when {
+            names.isEmpty() -> hasArguments()
+            else ->
+                names.any {
+                    arguments.any { argument -> it == argument.name }
+                }
         }
-    }
 
     override fun hasArgumentsWithAllNames(
         name: String,
         vararg names: String,
     ): Boolean = hasArgumentsWithAllNames(listOf(name, *names))
 
-    override fun hasArgumentsWithAllNames(names: Collection<String>): Boolean = when {
-        names.isEmpty() -> hasArguments()
-        else -> names.all {
-            arguments.any { argument -> it == argument.name }
+    override fun hasArgumentsWithAllNames(names: Collection<String>): Boolean =
+        when {
+            names.isEmpty() -> hasArguments()
+            else ->
+                names.all {
+                    arguments.any { argument -> it == argument.name }
+                }
         }
-    }
 
     override fun hasArgument(predicate: (KoArgumentDeclaration) -> Boolean): Boolean = arguments.any(predicate)
 

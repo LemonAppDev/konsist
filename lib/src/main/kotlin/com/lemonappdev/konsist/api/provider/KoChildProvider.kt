@@ -66,7 +66,10 @@ interface KoChildProvider : KoBaseProvider {
      * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasChildWithName(names: Collection<String>, indirectChildren: Boolean = false): Boolean
+    fun hasChildWithName(
+        names: Collection<String>,
+        indirectChildren: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has children defined directly in the Kotlin
@@ -91,7 +94,10 @@ interface KoChildProvider : KoBaseProvider {
      * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasChildrenWithAllNames(names: Collection<String>, indirectChildren: Boolean = false): Boolean
+    fun hasChildrenWithAllNames(
+        names: Collection<String>,
+        indirectChildren: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one child defined directly
@@ -144,7 +150,10 @@ interface KoChildProvider : KoBaseProvider {
      * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasChildOf(names: Collection<KClass<*>>, indirectChildren: Boolean = false): Boolean
+    fun hasChildOf(
+        names: Collection<KClass<*>>,
+        indirectChildren: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has children with all the specified `KClass` type.
@@ -167,5 +176,8 @@ interface KoChildProvider : KoBaseProvider {
      * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
      * @return `true` if the declaration has children of all the specified `KClass` types, `false` otherwise.
      */
-    fun hasAllChildrenOf(names: Collection<KClass<*>>, indirectChildren: Boolean = false): Boolean
+    fun hasAllChildrenOf(
+        names: Collection<KClass<*>>,
+        indirectChildren: Boolean = false,
+    ): Boolean
 }

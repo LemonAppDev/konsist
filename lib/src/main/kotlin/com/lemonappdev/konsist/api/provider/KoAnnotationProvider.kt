@@ -83,7 +83,7 @@ interface KoAnnotationProvider : KoBaseProvider {
      * @param names the names of the annotations to check. It can be either a simple name or a fully qualified name.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasAnnotationWithName(names: Collection<String>, ): Boolean
+    fun hasAnnotationWithName(names: Collection<String>): Boolean
 
     /**
      * Determines whether the declaration has annotations with all the specified names.
@@ -103,7 +103,7 @@ interface KoAnnotationProvider : KoBaseProvider {
      * @param names The names of the annotations to check. It can be either a simple name or a fully qualified name.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasAnnotationsWithAllNames(names: Collection<String>, ): Boolean
+    fun hasAnnotationsWithAllNames(names: Collection<String>): Boolean
 
     /**
      * Determines whether the declaration has at least one annotation that satisfies the provided predicate.
@@ -136,7 +136,7 @@ interface KoAnnotationProvider : KoBaseProvider {
         vararg names: KClass<*>,
     ): Boolean
 
-        /**
+    /**
      * Determines whether the declaration has at least one annotation of the specified `KClass` type.
      *
      * @param names the `KClass` types of the annotations to check.
@@ -156,7 +156,7 @@ interface KoAnnotationProvider : KoBaseProvider {
         vararg names: KClass<*>,
     ): Boolean
 
-        /**
+    /**
      * Determines whether the declaration has annotations with all the specified `KClass` type.
      *
      * @param names the `KClass` types of the annotations to check.

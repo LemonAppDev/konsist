@@ -67,12 +67,12 @@ class KoClassDeclarationForKoModifierProviderTest {
             hasModifier(OPEN) shouldBeEqualTo true
             hasModifier(DATA) shouldBeEqualTo false
             hasModifier(OPEN, DATA) shouldBeEqualTo true
-            hasModifier(listOf( OPEN)) shouldBeEqualTo true
-            hasModifier(listOf( DATA)) shouldBeEqualTo false
-            hasModifier(listOf( OPEN, DATA)) shouldBeEqualTo true
-            hasModifier(setOf( OPEN)) shouldBeEqualTo true
-            hasModifier(setOf( DATA)) shouldBeEqualTo false
-            hasModifier(setOf( OPEN, DATA)) shouldBeEqualTo true
+            hasModifier(listOf(OPEN)) shouldBeEqualTo true
+            hasModifier(listOf(DATA)) shouldBeEqualTo false
+            hasModifier(listOf(OPEN, DATA)) shouldBeEqualTo true
+            hasModifier(setOf(OPEN)) shouldBeEqualTo true
+            hasModifier(setOf(DATA)) shouldBeEqualTo false
+            hasModifier(setOf(OPEN, DATA)) shouldBeEqualTo true
             hasAllModifiers(OPEN) shouldBeEqualTo true
             hasAllModifiers(DATA) shouldBeEqualTo false
             hasAllModifiers(OPEN, DATA) shouldBeEqualTo false

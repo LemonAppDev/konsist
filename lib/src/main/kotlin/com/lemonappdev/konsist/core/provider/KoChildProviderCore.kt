@@ -37,12 +37,17 @@ internal interface KoChildProviderCore :
         indirectChildren: Boolean,
     ): Boolean = hasChildWithName(listOf(name, *names), indirectChildren)
 
-    override fun hasChildWithName(names: Collection<String>, indirectChildren: Boolean): Boolean = when {
-        names.isEmpty() -> hasChildren(indirectChildren)
-        else -> names.any {
-            children(indirectChildren).any { child -> it == child.name }
+    override fun hasChildWithName(
+        names: Collection<String>,
+        indirectChildren: Boolean,
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasChildren(indirectChildren)
+            else ->
+                names.any {
+                    children(indirectChildren).any { child -> it == child.name }
+                }
         }
-    }
 
     override fun hasChildrenWithAllNames(
         name: String,
@@ -50,12 +55,17 @@ internal interface KoChildProviderCore :
         indirectChildren: Boolean,
     ): Boolean = hasChildrenWithAllNames(listOf(name, *names), indirectChildren)
 
-    override fun hasChildrenWithAllNames(names: Collection<String>, indirectChildren: Boolean): Boolean = when {
-        names.isEmpty() -> hasChildren(indirectChildren)
-        else -> names.all {
-            children(indirectChildren).any { child -> it == child.name }
+    override fun hasChildrenWithAllNames(
+        names: Collection<String>,
+        indirectChildren: Boolean,
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasChildren(indirectChildren)
+            else ->
+                names.all {
+                    children(indirectChildren).any { child -> it == child.name }
+                }
         }
-    }
 
     override fun hasChild(
         indirectChildren: Boolean,
@@ -73,10 +83,14 @@ internal interface KoChildProviderCore :
         indirectChildren: Boolean,
     ): Boolean = hasChildOf(listOf(name, *names))
 
-    override fun hasChildOf(names: Collection<KClass<*>>, indirectChildren: Boolean): Boolean = when {
-        names.isEmpty() -> hasChildren(indirectChildren)
-        else -> names.any { checkIfKClassOf(it, children(indirectChildren)) }
-    }
+    override fun hasChildOf(
+        names: Collection<KClass<*>>,
+        indirectChildren: Boolean,
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasChildren(indirectChildren)
+            else -> names.any { checkIfKClassOf(it, children(indirectChildren)) }
+        }
 
     override fun hasAllChildrenOf(
         name: KClass<*>,
@@ -84,8 +98,12 @@ internal interface KoChildProviderCore :
         indirectChildren: Boolean,
     ): Boolean = hasAllChildrenOf(listOf(name, *names))
 
-    override fun hasAllChildrenOf(names: Collection<KClass<*>>, indirectChildren: Boolean): Boolean = when {
-        names.isEmpty() -> hasChildren(indirectChildren)
-        else -> names.all { checkIfKClassOf(it, children(indirectChildren)) }
-    }
+    override fun hasAllChildrenOf(
+        names: Collection<KClass<*>>,
+        indirectChildren: Boolean,
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasChildren(indirectChildren)
+            else -> names.all { checkIfKClassOf(it, children(indirectChildren)) }
+        }
 }
