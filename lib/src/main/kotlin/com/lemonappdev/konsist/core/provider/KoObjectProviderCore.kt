@@ -35,12 +35,14 @@ internal interface KoObjectProviderCore : KoObjectProvider, KoDeclarationProvide
     override fun hasObjectWithName(
         names: Collection<String>,
         includeNested: Boolean,
-    ): Boolean = when {
-        names.isEmpty() -> hasObjects(includeNested)
-        else -> names.any {
-            objects(includeNested).any { koObject -> it == koObject.name }
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasObjects(includeNested)
+            else ->
+                names.any {
+                    objects(includeNested).any { koObject -> it == koObject.name }
+                }
         }
-    }
 
     override fun hasObjectsWithAllNames(
         name: String,
@@ -51,12 +53,14 @@ internal interface KoObjectProviderCore : KoObjectProvider, KoDeclarationProvide
     override fun hasObjectsWithAllNames(
         names: Collection<String>,
         includeNested: Boolean,
-    ): Boolean = when {
-        names.isEmpty() -> hasObjects(includeNested)
-        else -> names.all {
-            objects(includeNested).any { koObject -> it == koObject.name }
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasObjects(includeNested)
+            else ->
+                names.all {
+                    objects(includeNested).any { koObject -> it == koObject.name }
+                }
         }
-    }
 
     override fun hasObject(
         includeNested: Boolean,

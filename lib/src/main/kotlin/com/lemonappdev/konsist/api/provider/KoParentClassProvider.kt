@@ -117,7 +117,7 @@ interface KoParentClassProvider : KoBaseProvider {
      */
     fun hasParentClassWithName(
         names: Collection<String>,
-        indirectParents: Boolean = false
+        indirectParents: Boolean = false,
     ): Boolean
 
     /**

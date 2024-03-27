@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.declaration.koobject
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleParentClass
-import com.lemonappdev.konsist.testdata.SampleParentClass1
 import com.lemonappdev.konsist.testdata.SampleParentClass2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -228,11 +227,11 @@ class KoObjectDeclarationForKoParentClassProviderTest {
         assertSoftly(sut) {
             parentClasses(indirectParents = false).map { it.name } shouldBeEqualTo listOf("SampleParentClass")
             parentClasses(indirectParents = true).map { it.name } shouldBeEqualTo
-                    listOf(
-                        "SampleParentClass",
-                        "SampleParentClass1",
-                        "SampleParentClass2",
-                    )
+                listOf(
+                    "SampleParentClass",
+                    "SampleParentClass1",
+                    "SampleParentClass2",
+                )
             numParentClasses(indirectParents = false) shouldBeEqualTo 1
             numParentClasses(indirectParents = true) shouldBeEqualTo 3
             countParentClasses(indirectParents = false) { it.name == "SampleParentClass1" } shouldBeEqualTo 0
@@ -260,26 +259,34 @@ class KoObjectDeclarationForKoParentClassProviderTest {
             ) shouldBeEqualTo true
             hasParentClassWithName(listOf("SampleParentClass1"), indirectParents = true) shouldBeEqualTo true
             hasParentClassWithName(listOf("OtherClass"), indirectParents = true) shouldBeEqualTo false
-            hasParentClassWithName(listOf(
-                "SampleParentClass1",
-                "SampleParentClass2"),
+            hasParentClassWithName(
+                listOf(
+                    "SampleParentClass1",
+                    "SampleParentClass2",
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasParentClassWithName(listOf(
-                "SampleParentClass1",
-                "OtherClass"),
+            hasParentClassWithName(
+                listOf(
+                    "SampleParentClass1",
+                    "OtherClass",
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasParentClassWithName(setOf("SampleParentClass1"), indirectParents = true) shouldBeEqualTo true
             hasParentClassWithName(setOf("OtherClass"), indirectParents = true) shouldBeEqualTo false
-            hasParentClassWithName(setOf(
-                "SampleParentClass1",
-                "SampleParentClass2"),
+            hasParentClassWithName(
+                setOf(
+                    "SampleParentClass1",
+                    "SampleParentClass2",
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasParentClassWithName(setOf(
-                "SampleParentClass1",
-                "OtherClass"),
+            hasParentClassWithName(
+                setOf(
+                    "SampleParentClass1",
+                    "OtherClass",
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasParentClassesWithAllNames("SampleParentClass1", indirectParents = true) shouldBeEqualTo true
@@ -296,26 +303,34 @@ class KoObjectDeclarationForKoParentClassProviderTest {
             ) shouldBeEqualTo false
             hasParentClassesWithAllNames(listOf("SampleParentClass1"), indirectParents = true) shouldBeEqualTo true
             hasParentClassesWithAllNames(listOf("OtherClass"), indirectParents = true) shouldBeEqualTo false
-            hasParentClassesWithAllNames(listOf(
-                "SampleParentClass1",
-                "SampleParentClass2"),
+            hasParentClassesWithAllNames(
+                listOf(
+                    "SampleParentClass1",
+                    "SampleParentClass2",
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasParentClassesWithAllNames(listOf(
-                "SampleParentClass1",
-                "OtherClass"),
+            hasParentClassesWithAllNames(
+                listOf(
+                    "SampleParentClass1",
+                    "OtherClass",
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo false
             hasParentClassesWithAllNames(setOf("SampleParentClass1"), indirectParents = true) shouldBeEqualTo true
             hasParentClassesWithAllNames(setOf("OtherClass"), indirectParents = true) shouldBeEqualTo false
-            hasParentClassesWithAllNames(setOf(
-                "SampleParentClass1",
-                "SampleParentClass2"),
+            hasParentClassesWithAllNames(
+                setOf(
+                    "SampleParentClass1",
+                    "SampleParentClass2",
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasParentClassesWithAllNames(setOf(
-                "SampleParentClass1",
-                "OtherClass"),
+            hasParentClassesWithAllNames(
+                setOf(
+                    "SampleParentClass1",
+                    "OtherClass",
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo false
             hasParentClass(indirectParents = true) { it.name == "SampleParentClass1" } shouldBeEqualTo true
@@ -333,15 +348,19 @@ class KoObjectDeclarationForKoParentClassProviderTest {
                 indirectParents = true,
             ) shouldBeEqualTo false
             hasAllParentClassesOf(listOf(SampleParentClass2::class), indirectParents = true) shouldBeEqualTo true
-            hasAllParentClassesOf(listOf(
-                SampleParentClass2::class,
-                SampleClass::class),
+            hasAllParentClassesOf(
+                listOf(
+                    SampleParentClass2::class,
+                    SampleClass::class,
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo false
             hasAllParentClassesOf(setOf(SampleParentClass2::class), indirectParents = true) shouldBeEqualTo true
-            hasAllParentClassesOf(setOf(
-                SampleParentClass2::class,
-                SampleClass::class),
+            hasAllParentClassesOf(
+                setOf(
+                    SampleParentClass2::class,
+                    SampleClass::class,
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo false
         }

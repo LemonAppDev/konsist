@@ -49,7 +49,7 @@ class KoSetterDeclarationForKoLocalClassProviderTest {
         // then
         assertSoftly(sut) {
             it?.localClasses?.map { localClass -> localClass.name } shouldBeEqualTo
-                    it?.localClasses?.map { it.name } shouldBeEqualTo listOf("SampleClass1", "SampleClass2")
+                it?.localClasses?.map { it.name } shouldBeEqualTo listOf("SampleClass1", "SampleClass2")
             it?.numLocalClasses shouldBeEqualTo 2
             it?.countLocalClasses { it.name == "SampleClass1" } shouldBeEqualTo 1
             it?.hasLocalClasses() shouldBeEqualTo true

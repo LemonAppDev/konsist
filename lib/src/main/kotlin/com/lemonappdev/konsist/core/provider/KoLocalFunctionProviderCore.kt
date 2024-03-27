@@ -25,24 +25,28 @@ internal interface KoLocalFunctionProviderCore :
         vararg names: String,
     ): Boolean = hasLocalFunctionWithName(listOf(name, *names))
 
-    override fun hasLocalFunctionWithName(names: Collection<String>): Boolean = when {
-        names.isEmpty() -> hasLocalFunctions()
-        else -> names.any {
-            localFunctions.any { localFunction -> it == localFunction.name }
+    override fun hasLocalFunctionWithName(names: Collection<String>): Boolean =
+        when {
+            names.isEmpty() -> hasLocalFunctions()
+            else ->
+                names.any {
+                    localFunctions.any { localFunction -> it == localFunction.name }
+                }
         }
-    }
 
     override fun hasLocalFunctionsWithAllNames(
         name: String,
         vararg names: String,
     ): Boolean = hasLocalFunctionsWithAllNames(listOf(name, *names))
 
-    override fun hasLocalFunctionsWithAllNames(names: Collection<String>): Boolean = when {
-        names.isEmpty() -> hasLocalFunctions()
-        else -> names.all {
-            localFunctions.any { localFunction -> it == localFunction.name }
+    override fun hasLocalFunctionsWithAllNames(names: Collection<String>): Boolean =
+        when {
+            names.isEmpty() -> hasLocalFunctions()
+            else ->
+                names.all {
+                    localFunctions.any { localFunction -> it == localFunction.name }
+                }
         }
-    }
 
     override fun hasLocalFunction(predicate: (KoFunctionDeclaration) -> Boolean): Boolean = localFunctions.any(predicate)
 

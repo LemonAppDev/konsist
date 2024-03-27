@@ -34,24 +34,28 @@ internal interface KoParametersProviderCore :
         vararg names: String,
     ): Boolean = hasParameterWithName(listOf(name, *names))
 
-    override fun hasParameterWithName(names: Collection<String>): Boolean = when {
-        names.isEmpty() -> hasParameters()
-        else -> names.any {
-            parameters.any { parameter -> it == parameter.name }
+    override fun hasParameterWithName(names: Collection<String>): Boolean =
+        when {
+            names.isEmpty() -> hasParameters()
+            else ->
+                names.any {
+                    parameters.any { parameter -> it == parameter.name }
+                }
         }
-    }
 
     override fun hasParametersWithAllNames(
         name: String,
         vararg names: String,
     ): Boolean = hasParametersWithAllNames(listOf(name, *names))
 
-    override fun hasParametersWithAllNames(names: Collection<String>): Boolean = when {
-        names.isEmpty() -> hasParameters()
-        else -> names.all {
-            parameters.any { parameter -> it == parameter.name }
+    override fun hasParametersWithAllNames(names: Collection<String>): Boolean =
+        when {
+            names.isEmpty() -> hasParameters()
+            else ->
+                names.all {
+                    parameters.any { parameter -> it == parameter.name }
+                }
         }
-    }
 
     override fun hasParameter(predicate: (KoParameterDeclaration) -> Boolean): Boolean = parameters.any(predicate)
 
