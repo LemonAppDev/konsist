@@ -59,7 +59,7 @@ interface KoEnumConstantProvider : KoBaseProvider {
         vararg names: String,
     ): Boolean
 
-     /**
+    /**
      * Determines whether the declaration has at least one enum constant whose name matches any of the specified names.
      *
      * @param names the names of the enum constants to check.
@@ -79,7 +79,7 @@ interface KoEnumConstantProvider : KoBaseProvider {
         vararg names: String,
     ): Boolean
 
-     /**
+    /**
      * Determines whether the declaration has enum constants with all the specified names.
      *
      * @param names The names of the enum constants to check.

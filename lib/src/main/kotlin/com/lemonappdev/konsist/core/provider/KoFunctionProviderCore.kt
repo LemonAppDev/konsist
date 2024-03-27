@@ -49,12 +49,14 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
         names: Collection<String>,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Boolean = when {
-        names.isEmpty() -> hasFunctions(includeNested, includeLocal)
-        else -> names.any {
-            functions(includeNested, includeLocal).any { function -> it == function.name }
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasFunctions(includeNested, includeLocal)
+            else ->
+                names.any {
+                    functions(includeNested, includeLocal).any { function -> it == function.name }
+                }
         }
-    }
 
     override fun hasFunctionsWithAllNames(
         name: String,
@@ -67,12 +69,14 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
         names: Collection<String>,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Boolean = when {
-        names.isEmpty() -> hasFunctions(includeNested, includeLocal)
-        else -> names.all {
-            functions(includeNested, includeLocal).any { function -> it == function.name }
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasFunctions(includeNested, includeLocal)
+            else ->
+                names.all {
+                    functions(includeNested, includeLocal).any { function -> it == function.name }
+                }
         }
-    }
 
     override fun hasFunction(
         includeNested: Boolean,

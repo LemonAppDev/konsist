@@ -49,12 +49,14 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
         names: Collection<String>,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Boolean = when {
-        names.isEmpty() -> hasClasses(includeNested, includeLocal)
-        else -> names.any {
-            classes(includeNested, includeLocal).any { koClass -> it == koClass.name }
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasClasses(includeNested, includeLocal)
+            else ->
+                names.any {
+                    classes(includeNested, includeLocal).any { koClass -> it == koClass.name }
+                }
         }
-    }
 
     override fun hasClassesWithAllNames(
         name: String,
@@ -67,12 +69,14 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
         names: Collection<String>,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Boolean = when {
-        names.isEmpty() -> hasClasses(includeNested, includeLocal)
-        else -> names.all {
-            classes(includeNested, includeLocal).any { koClass -> it == koClass.name }
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasClasses(includeNested, includeLocal)
+            else ->
+                names.all {
+                    classes(includeNested, includeLocal).any { koClass -> it == koClass.name }
+                }
         }
-    }
 
     override fun hasClass(
         includeNested: Boolean,

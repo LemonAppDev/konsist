@@ -52,24 +52,28 @@ internal interface KoImportProviderCore : KoImportProvider, KoContainingDeclarat
         vararg names: String,
     ): Boolean = hasImportWithName(listOf(name, *names))
 
-    override fun hasImportWithName(names: Collection<String>): Boolean = when {
-        names.isEmpty() -> hasImports()
-        else -> names.any {
-            imports.any { import -> it == import.name }
+    override fun hasImportWithName(names: Collection<String>): Boolean =
+        when {
+            names.isEmpty() -> hasImports()
+            else ->
+                names.any {
+                    imports.any { import -> it == import.name }
+                }
         }
-    }
 
     override fun hasImportsWithAllNames(
         name: String,
         vararg names: String,
     ): Boolean = hasImportsWithAllNames(listOf(name, *names))
 
-    override fun hasImportsWithAllNames(names: Collection<String>): Boolean = when {
-        names.isEmpty() -> hasImports()
-        else -> names.all {
-            imports.any { import -> it == import.name }
+    override fun hasImportsWithAllNames(names: Collection<String>): Boolean =
+        when {
+            names.isEmpty() -> hasImports()
+            else ->
+                names.all {
+                    imports.any { import -> it == import.name }
+                }
         }
-    }
 
     override fun hasImport(predicate: (KoImportDeclaration) -> Boolean): Boolean = imports.any(predicate)
 

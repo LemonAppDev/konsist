@@ -35,12 +35,14 @@ internal interface KoInterfaceProviderCore : KoInterfaceProvider, KoDeclarationP
     override fun hasInterfaceWithName(
         names: Collection<String>,
         includeNested: Boolean,
-    ): Boolean = when {
-        names.isEmpty() -> hasInterfaces(includeNested)
-        else -> names.any {
-            interfaces(includeNested).any { koInterface -> it == koInterface.name }
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasInterfaces(includeNested)
+            else ->
+                names.any {
+                    interfaces(includeNested).any { koInterface -> it == koInterface.name }
+                }
         }
-    }
 
     override fun hasInterfacesWithAllNames(
         name: String,
@@ -51,12 +53,14 @@ internal interface KoInterfaceProviderCore : KoInterfaceProvider, KoDeclarationP
     override fun hasInterfacesWithAllNames(
         names: Collection<String>,
         includeNested: Boolean,
-    ): Boolean = when {
-        names.isEmpty() -> hasInterfaces(includeNested)
-        else -> names.all {
-            interfaces(includeNested).any { koInterface -> it == koInterface.name }
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasInterfaces(includeNested)
+            else ->
+                names.all {
+                    interfaces(includeNested).any { koInterface -> it == koInterface.name }
+                }
         }
-    }
 
     override fun hasInterface(
         includeNested: Boolean,

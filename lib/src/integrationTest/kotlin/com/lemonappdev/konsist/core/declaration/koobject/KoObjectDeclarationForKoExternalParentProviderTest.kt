@@ -11,6 +11,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+@Suppress("detekt.LongMethod")
 class KoObjectDeclarationForKoExternalParentProviderTest {
     @Test
     fun `object-has-no-external-parent`() {
@@ -192,10 +193,10 @@ class KoObjectDeclarationForKoExternalParentProviderTest {
         assertSoftly(sut) {
             externalParents(indirectParents = false) shouldBeEqualTo emptyList()
             externalParents(indirectParents = true).map { it.name } shouldBeEqualTo
-                    listOf(
-                        "SampleExternalClass",
-                        "SampleExternalInterface",
-                    )
+                listOf(
+                    "SampleExternalClass",
+                    "SampleExternalInterface",
+                )
             numExternalParents(indirectParents = false) shouldBeEqualTo 0
             numExternalParents(indirectParents = true) shouldBeEqualTo 2
             countExternalParents(indirectParents = false) { it.name == "SampleExternalInterface" } shouldBeEqualTo 0
@@ -226,14 +227,18 @@ class KoObjectDeclarationForKoExternalParentProviderTest {
             ) shouldBeEqualTo true
             hasExternalParentWithName(listOf("SampleExternalInterface"), indirectParents = true) shouldBeEqualTo true
             hasExternalParentWithName(listOf("OtherInterface"), indirectParents = true) shouldBeEqualTo false
-            hasExternalParentWithName(listOf(
-                "SampleExternalInterface",
-                "SampleExternalClass"),
+            hasExternalParentWithName(
+                listOf(
+                    "SampleExternalInterface",
+                    "SampleExternalClass",
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasExternalParentWithName(listOf(
-                "SampleExternalInterface",
-                "OtherInterface"),
+            hasExternalParentWithName(
+                listOf(
+                    "SampleExternalInterface",
+                    "OtherInterface",
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasExternalParentsWithAllNames("SampleExternalInterface", indirectParents = true) shouldBeEqualTo true
@@ -251,14 +256,18 @@ class KoObjectDeclarationForKoExternalParentProviderTest {
 
             hasExternalParentsWithAllNames(listOf("SampleExternalInterface"), indirectParents = true) shouldBeEqualTo true
             hasExternalParentsWithAllNames(listOf("OtherInterface"), indirectParents = true) shouldBeEqualTo false
-            hasExternalParentsWithAllNames(listOf(
-                "SampleExternalInterface",
-                "SampleExternalClass"),
+            hasExternalParentsWithAllNames(
+                listOf(
+                    "SampleExternalInterface",
+                    "SampleExternalClass",
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasExternalParentsWithAllNames(listOf(
-                "SampleExternalInterface",
-                "OtherInterface"),
+            hasExternalParentsWithAllNames(
+                listOf(
+                    "SampleExternalInterface",
+                    "OtherInterface",
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo false
             hasExternalParent(indirectParents = true) { it.name == "SampleExternalInterface" } shouldBeEqualTo true
@@ -273,9 +282,11 @@ class KoObjectDeclarationForKoExternalParentProviderTest {
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasExternalParentOf(listOf(SampleExternalInterface::class), indirectParents = true) shouldBeEqualTo true
-            hasExternalParentOf(listOf(
-                SampleExternalInterface::class,
-                SampleParentClass::class),
+            hasExternalParentOf(
+                listOf(
+                    SampleExternalInterface::class,
+                    SampleParentClass::class,
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasAllExternalParentsOf(SampleExternalInterface::class, indirectParents = true) shouldBeEqualTo true
@@ -291,14 +302,18 @@ class KoObjectDeclarationForKoExternalParentProviderTest {
             ) shouldBeEqualTo true
 
             hasAllExternalParentsOf(listOf(SampleExternalInterface::class), indirectParents = true) shouldBeEqualTo true
-            hasAllExternalParentsOf(listOf(
-                SampleExternalInterface::class,
-                SampleParentClass::class),
+            hasAllExternalParentsOf(
+                listOf(
+                    SampleExternalInterface::class,
+                    SampleParentClass::class,
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo false
-            hasAllExternalParentsOf(listOf(
-                SampleExternalInterface::class,
-                SampleExternalClass::class),
+            hasAllExternalParentsOf(
+                listOf(
+                    SampleExternalInterface::class,
+                    SampleExternalClass::class,
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo true
         }

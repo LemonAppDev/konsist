@@ -5,6 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+@Suppress("detekt.LongMethod")
 class KoFileDeclarationForKoImportProviderTest {
     @Test
     fun `file-has-no-import`() {
@@ -33,13 +34,15 @@ class KoFileDeclarationForKoImportProviderTest {
             ).shouldBeEqualTo(false)
             hasImportsWithAllNames(
                 listOf(
-                "com.lemonappdev.konsist.testdata.SampleClass",
-                "com.lemonappdev.konsist.testdata.SampleType"),
+                    "com.lemonappdev.konsist.testdata.SampleClass",
+                    "com.lemonappdev.konsist.testdata.SampleType",
+                ),
             ).shouldBeEqualTo(false)
             hasImportsWithAllNames(
                 setOf(
                     "com.lemonappdev.konsist.testdata.SampleClass",
-                    "com.lemonappdev.konsist.testdata.SampleType"),
+                    "com.lemonappdev.konsist.testdata.SampleType",
+                ),
             ).shouldBeEqualTo(false)
             hasImport { it.name == "com.lemonappdev.konsist.testdata.OtherImport" } shouldBeEqualTo false
             hasAllImports { it.hasNameStartingWith("com.lemonappdev.") } shouldBeEqualTo true
@@ -73,15 +76,19 @@ class KoFileDeclarationForKoImportProviderTest {
             ).shouldBeEqualTo(true)
             hasImportWithName(listOf("com.lemonappdev.konsist.testdata.SampleType")) shouldBeEqualTo true
             hasImportWithName(listOf("com.lemonappdev.konsist.testdata.SampleClass")) shouldBeEqualTo false
-            hasImportWithName(listOf(
-                "com.lemonappdev.konsist.testdata.SampleClass",
-                "com.lemonappdev.konsist.testdata.SampleType"),
+            hasImportWithName(
+                listOf(
+                    "com.lemonappdev.konsist.testdata.SampleClass",
+                    "com.lemonappdev.konsist.testdata.SampleType",
+                ),
             ).shouldBeEqualTo(true)
             hasImportWithName(setOf("com.lemonappdev.konsist.testdata.SampleType")) shouldBeEqualTo true
             hasImportWithName(setOf("com.lemonappdev.konsist.testdata.SampleClass")) shouldBeEqualTo false
-            hasImportWithName(setOf(
-                "com.lemonappdev.konsist.testdata.SampleClass",
-                "com.lemonappdev.konsist.testdata.SampleType"),
+            hasImportWithName(
+                setOf(
+                    "com.lemonappdev.konsist.testdata.SampleClass",
+                    "com.lemonappdev.konsist.testdata.SampleType",
+                ),
             ).shouldBeEqualTo(true)
             hasImportsWithAllNames("com.lemonappdev.konsist.testdata.SampleType") shouldBeEqualTo true
             hasImportsWithAllNames(
@@ -89,14 +96,18 @@ class KoFileDeclarationForKoImportProviderTest {
                 "com.lemonappdev.konsist.testdata.SampleType",
             ).shouldBeEqualTo(false)
             hasImportsWithAllNames(listOf("com.lemonappdev.konsist.testdata.SampleType")) shouldBeEqualTo true
-            hasImportsWithAllNames(listOf(
-                "com.lemonappdev.konsist.testdata.SampleClass",
-                "com.lemonappdev.konsist.testdata.SampleType"),
+            hasImportsWithAllNames(
+                listOf(
+                    "com.lemonappdev.konsist.testdata.SampleClass",
+                    "com.lemonappdev.konsist.testdata.SampleType",
+                ),
             ).shouldBeEqualTo(false)
             hasImportsWithAllNames(setOf("com.lemonappdev.konsist.testdata.SampleType")) shouldBeEqualTo true
-            hasImportsWithAllNames(setOf(
-                "com.lemonappdev.konsist.testdata.SampleClass",
-                "com.lemonappdev.konsist.testdata.SampleType"),
+            hasImportsWithAllNames(
+                setOf(
+                    "com.lemonappdev.konsist.testdata.SampleClass",
+                    "com.lemonappdev.konsist.testdata.SampleType",
+                ),
             ).shouldBeEqualTo(false)
             hasImport { it.hasNameStartingWith("com.lemonappdev.") } shouldBeEqualTo true
             hasImport { it.name == "com.lemonappdev.konsist.testdata.SampleClass" } shouldBeEqualTo false
@@ -143,24 +154,28 @@ class KoFileDeclarationForKoImportProviderTest {
             hasImportsWithAllNames(listOf("com.lemonappdev.konsist.testdata.SampleType")) shouldBeEqualTo true
             hasImportsWithAllNames(
                 listOf(
-                "com.lemonappdev.konsist.testdata.SampleType",
-                "com.lemonappdev.konsist.testdata.SampleAnnotation"),
+                    "com.lemonappdev.konsist.testdata.SampleType",
+                    "com.lemonappdev.konsist.testdata.SampleAnnotation",
+                ),
             ).shouldBeEqualTo(true)
             hasImportsWithAllNames(
                 listOf(
-                "com.lemonappdev.konsist.testdata.SampleType",
-                "com.lemonappdev.konsist.testdata.SampleClass"),
+                    "com.lemonappdev.konsist.testdata.SampleType",
+                    "com.lemonappdev.konsist.testdata.SampleClass",
+                ),
             ).shouldBeEqualTo(false)
             hasImportsWithAllNames(setOf("com.lemonappdev.konsist.testdata.SampleType")) shouldBeEqualTo true
             hasImportsWithAllNames(
                 setOf(
                     "com.lemonappdev.konsist.testdata.SampleType",
-                    "com.lemonappdev.konsist.testdata.SampleAnnotation"),
+                    "com.lemonappdev.konsist.testdata.SampleAnnotation",
+                ),
             ).shouldBeEqualTo(true)
             hasImportsWithAllNames(
                 setOf(
                     "com.lemonappdev.konsist.testdata.SampleType",
-                    "com.lemonappdev.konsist.testdata.SampleClass"),
+                    "com.lemonappdev.konsist.testdata.SampleClass",
+                ),
             ).shouldBeEqualTo(false)
             hasImport { it.name == "com.lemonappdev.konsist.testdata.SampleType" } shouldBeEqualTo true
             hasImport { it.name == "com.lemonappdev.konsist.testdata.OtherType" } shouldBeEqualTo false

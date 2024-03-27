@@ -5,6 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+@Suppress("detekt.LongMethod")
 class KoFileDeclarationForKoImportAliasProviderTest {
     @Test
     fun `file-has-no-import-alias`() {
@@ -34,13 +35,13 @@ class KoFileDeclarationForKoImportAliasProviderTest {
             hasImportAliasesWithAllNames(
                 listOf(
                     "SampleImportAlias1",
-                    "SampleImportAlias2"
+                    "SampleImportAlias2",
                 ),
             ).shouldBeEqualTo(false)
             hasImportAliasesWithAllNames(
                 setOf(
                     "SampleImportAlias1",
-                    "SampleImportAlias2"
+                    "SampleImportAlias2",
                 ),
             ).shouldBeEqualTo(false)
             hasImportAlias { it.name == "SampleImportAlias" } shouldBeEqualTo false
@@ -74,30 +75,38 @@ class KoFileDeclarationForKoImportAliasProviderTest {
             ).shouldBeEqualTo(true)
             hasImportAliasWithName(listOf("SampleImportAlias")) shouldBeEqualTo true
             hasImportAliasWithName(listOf("SampleOtherImportAlias")) shouldBeEqualTo false
-            hasImportAliasWithName(listOf(
-                "SampleOtherImportAlias",
-                "SampleImportAlias",
-            )).shouldBeEqualTo(true)
+            hasImportAliasWithName(
+                listOf(
+                    "SampleOtherImportAlias",
+                    "SampleImportAlias",
+                ),
+            ).shouldBeEqualTo(true)
             hasImportAliasWithName(setOf("SampleImportAlias")) shouldBeEqualTo true
             hasImportAliasWithName(setOf("SampleOtherImportAlias")) shouldBeEqualTo false
-            hasImportAliasWithName(setOf(
-                "SampleOtherImportAlias",
-                "SampleImportAlias",
-            )).shouldBeEqualTo(true)
+            hasImportAliasWithName(
+                setOf(
+                    "SampleOtherImportAlias",
+                    "SampleImportAlias",
+                ),
+            ).shouldBeEqualTo(true)
             hasImportAliasesWithAllNames("SampleImportAlias") shouldBeEqualTo true
             hasImportAliasesWithAllNames(
                 "SampleOtherImportAlias",
                 "SampleImportAlias",
             ).shouldBeEqualTo(false)
             hasImportAliasesWithAllNames(listOf("SampleImportAlias")) shouldBeEqualTo true
-            hasImportAliasesWithAllNames(listOf(
-                "SampleOtherImportAlias",
-                "SampleImportAlias"),
+            hasImportAliasesWithAllNames(
+                listOf(
+                    "SampleOtherImportAlias",
+                    "SampleImportAlias",
+                ),
             ).shouldBeEqualTo(false)
             hasImportAliasesWithAllNames(setOf("SampleImportAlias")) shouldBeEqualTo true
-            hasImportAliasesWithAllNames(setOf(
-                "SampleOtherImportAlias",
-                "SampleImportAlias"),
+            hasImportAliasesWithAllNames(
+                setOf(
+                    "SampleOtherImportAlias",
+                    "SampleImportAlias",
+                ),
             ).shouldBeEqualTo(false)
             hasImportAlias { it.hasNameStartingWith("SampleImport") } shouldBeEqualTo true
             hasImportAlias { it.name == "SampleOtherImportAlias" } shouldBeEqualTo false
@@ -142,22 +151,30 @@ class KoFileDeclarationForKoImportAliasProviderTest {
                 "SampleOtherImportAlias",
             ).shouldBeEqualTo(false)
             hasImportAliasesWithAllNames(listOf("SampleImportAlias1")) shouldBeEqualTo true
-            hasImportAliasesWithAllNames(listOf(
-                "SampleImportAlias1",
-                "SampleImportAlias2"),
+            hasImportAliasesWithAllNames(
+                listOf(
+                    "SampleImportAlias1",
+                    "SampleImportAlias2",
+                ),
             ).shouldBeEqualTo(true)
-            hasImportAliasesWithAllNames(listOf(
-                "SampleImportAlias1",
-                "SampleOtherImportAlias"),
+            hasImportAliasesWithAllNames(
+                listOf(
+                    "SampleImportAlias1",
+                    "SampleOtherImportAlias",
+                ),
             ).shouldBeEqualTo(false)
             hasImportAliasesWithAllNames(setOf("SampleImportAlias1")) shouldBeEqualTo true
-            hasImportAliasesWithAllNames(setOf(
-                "SampleImportAlias1",
-                "SampleImportAlias2"),
+            hasImportAliasesWithAllNames(
+                setOf(
+                    "SampleImportAlias1",
+                    "SampleImportAlias2",
+                ),
             ).shouldBeEqualTo(true)
-            hasImportAliasesWithAllNames(setOf(
-                "SampleImportAlias1",
-                "SampleOtherImportAlias"),
+            hasImportAliasesWithAllNames(
+                setOf(
+                    "SampleImportAlias1",
+                    "SampleOtherImportAlias",
+                ),
             ).shouldBeEqualTo(false)
             hasImportAlias { it.name == "SampleImportAlias1" } shouldBeEqualTo true
             hasImportAlias { it.name == "SampleOtherImportAlias" } shouldBeEqualTo false

@@ -52,24 +52,28 @@ internal interface KoEnumConstantProviderCore :
         vararg names: String,
     ): Boolean = hasEnumConstantWithName(listOf(name, *names))
 
-    override fun hasEnumConstantWithName(names: Collection<String>): Boolean = when {
-        names.isEmpty() -> hasEnumConstants()
-        else -> names.any {
-            enumConstants.any { enumConstant -> it == enumConstant.name }
+    override fun hasEnumConstantWithName(names: Collection<String>): Boolean =
+        when {
+            names.isEmpty() -> hasEnumConstants()
+            else ->
+                names.any {
+                    enumConstants.any { enumConstant -> it == enumConstant.name }
+                }
         }
-    }
 
     override fun hasEnumConstantsWithAllNames(
         name: String,
         vararg names: String,
     ): Boolean = hasEnumConstantsWithAllNames(listOf(name, *names))
 
-    override fun hasEnumConstantsWithAllNames(names: Collection<String>): Boolean = when {
-        names.isEmpty() -> hasEnumConstants()
-        else -> names.all {
-            enumConstants.any { enumConstant -> it == enumConstant.name }
+    override fun hasEnumConstantsWithAllNames(names: Collection<String>): Boolean =
+        when {
+            names.isEmpty() -> hasEnumConstants()
+            else ->
+                names.all {
+                    enumConstants.any { enumConstant -> it == enumConstant.name }
+                }
         }
-    }
 
     override fun hasEnumConstant(predicate: (KoEnumConstantDeclaration) -> Boolean): Boolean = enumConstants.any(predicate)
 
