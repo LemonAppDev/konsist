@@ -20,8 +20,16 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
         assertSoftly(sut) {
             functions() shouldBeEqualTo emptyList()
             hasFunctions() shouldBeEqualTo false
+            hasFunctionWithName(emptyList()) shouldBeEqualTo false
+            hasFunctionWithName(emptySet()) shouldBeEqualTo false
+            hasFunctionsWithAllNames(emptyList()) shouldBeEqualTo false
+            hasFunctionsWithAllNames(emptySet()) shouldBeEqualTo false
             hasFunctionWithName("sampleFunction") shouldBeEqualTo false
+            hasFunctionWithName(listOf("sampleFunction")) shouldBeEqualTo false
+            hasFunctionWithName(setOf("sampleFunction")) shouldBeEqualTo false
             hasFunctionsWithAllNames("sampleFunction1", "sampleFunction2") shouldBeEqualTo false
+            hasFunctionsWithAllNames(listOf("sampleFunction1", "sampleFunction2")) shouldBeEqualTo false
+            hasFunctionsWithAllNames(setOf("sampleFunction1", "sampleFunction2")) shouldBeEqualTo false
             hasFunction { it.name == "sampleFunction" } shouldBeEqualTo false
             hasAllFunctions { it.hasNameStartingWith("sample") } shouldBeEqualTo true
         }
@@ -38,11 +46,25 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
         // then
         assertSoftly(sut) {
             hasFunctions() shouldBeEqualTo true
+            hasFunctionWithName(emptyList()) shouldBeEqualTo true
+            hasFunctionWithName(emptySet()) shouldBeEqualTo true
+            hasFunctionsWithAllNames(emptyList()) shouldBeEqualTo true
+            hasFunctionsWithAllNames(emptySet()) shouldBeEqualTo true
             hasFunctionWithName("sampleFunction1") shouldBeEqualTo true
             hasFunctionWithName("sampleFunction1", "otherFunction") shouldBeEqualTo true
+            hasFunctionWithName(listOf("sampleFunction1")) shouldBeEqualTo true
+            hasFunctionWithName(listOf("sampleFunction1", "otherFunction")) shouldBeEqualTo true
+            hasFunctionWithName(setOf("sampleFunction1")) shouldBeEqualTo true
+            hasFunctionWithName(setOf("sampleFunction1", "otherFunction")) shouldBeEqualTo true
             hasFunctionsWithAllNames("sampleFunction1") shouldBeEqualTo true
             hasFunctionsWithAllNames("sampleFunction1", "sampleFunction2") shouldBeEqualTo true
             hasFunctionsWithAllNames("sampleFunction1", "otherFunction") shouldBeEqualTo false
+            hasFunctionsWithAllNames(listOf("sampleFunction1")) shouldBeEqualTo true
+            hasFunctionsWithAllNames(listOf("sampleFunction1", "sampleFunction2")) shouldBeEqualTo true
+            hasFunctionsWithAllNames(listOf("sampleFunction1", "otherFunction")) shouldBeEqualTo false
+            hasFunctionsWithAllNames(setOf("sampleFunction1")) shouldBeEqualTo true
+            hasFunctionsWithAllNames(setOf("sampleFunction1", "sampleFunction2")) shouldBeEqualTo true
+            hasFunctionsWithAllNames(setOf("sampleFunction1", "otherFunction")) shouldBeEqualTo false
             hasFunction { it.name == "sampleFunction1" } shouldBeEqualTo true
             hasFunction { it.hasNameEndingWith("Function1") } shouldBeEqualTo true
             hasAllFunctions { it.hasNameStartingWith("sample") } shouldBeEqualTo true

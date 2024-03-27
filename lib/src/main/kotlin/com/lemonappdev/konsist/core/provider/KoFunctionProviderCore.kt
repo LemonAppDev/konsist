@@ -43,10 +43,15 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
         vararg names: String,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasFunctionWithName(listOf(name, *names), includeNested, includeLocal)
 
-        return givenNames.any {
+    override fun hasFunctionWithName(
+        names: Collection<String>,
+        includeNested: Boolean,
+        includeLocal: Boolean,
+    ): Boolean = when {
+        names.isEmpty() -> hasFunctions(includeNested, includeLocal)
+        else -> names.any {
             functions(includeNested, includeLocal).any { function -> it == function.name }
         }
     }
@@ -56,10 +61,15 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
         vararg names: String,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasFunctionsWithAllNames(listOf(name, *names), includeNested, includeLocal)
 
-        return givenNames.all {
+    override fun hasFunctionsWithAllNames(
+        names: Collection<String>,
+        includeNested: Boolean,
+        includeLocal: Boolean,
+    ): Boolean = when {
+        names.isEmpty() -> hasFunctions(includeNested, includeLocal)
+        else -> names.all {
             functions(includeNested, includeLocal).any { function -> it == function.name }
         }
     }
