@@ -26,10 +26,14 @@ internal interface KoExternalParentProviderCore :
         name: String,
         vararg names: String,
         indirectParents: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasExternalParentWithName(listOf(name, *names), indirectParents)
 
-        return givenNames.any {
+    override fun hasExternalParentWithName(
+        names: Collection<String>,
+        indirectParents: Boolean,
+    ): Boolean = when {
+        names.isEmpty() -> hasExternalParents(indirectParents)
+        else -> names.any {
             externalParents(indirectParents).any { parentInterface -> it == parentInterface.name }
         }
     }
@@ -38,10 +42,14 @@ internal interface KoExternalParentProviderCore :
         name: String,
         vararg names: String,
         indirectParents: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasExternalParentsWithAllNames(listOf(name, *names), indirectParents)
 
-        return givenNames.all {
+    override fun hasExternalParentsWithAllNames(
+        names: Collection<String>,
+        indirectParents: Boolean,
+    ): Boolean = when {
+        names.isEmpty() -> hasExternalParents(indirectParents)
+        else -> names.all {
             externalParents(indirectParents).any { parentInterface -> it == parentInterface.name }
         }
     }
@@ -60,15 +68,27 @@ internal interface KoExternalParentProviderCore :
         name: KClass<*>,
         vararg names: KClass<*>,
         indirectParents: Boolean,
-    ): Boolean =
-        checkIfParentOf(name, externalParents(indirectParents)) ||
-            names.any { checkIfParentOf(it, externalParents(indirectParents)) }
+    ): Boolean = hasExternalParentOf(listOf(name, *names), indirectParents)
+
+    override fun hasExternalParentOf(
+        names: Collection<KClass<*>>,
+        indirectParents: Boolean,
+    ): Boolean = when {
+        names.isEmpty() -> hasExternalParents(indirectParents)
+        else -> names.any { checkIfParentOf(it, externalParents(indirectParents)) }
+    }
 
     override fun hasAllExternalParentsOf(
         name: KClass<*>,
         vararg names: KClass<*>,
         indirectParents: Boolean,
-    ): Boolean =
-        checkIfParentOf(name, externalParents(indirectParents)) &&
-            names.all { checkIfParentOf(it, externalParents(indirectParents)) }
+    ): Boolean = hasAllExternalParentsOf(listOf(name, *names), indirectParents)
+
+    override fun hasAllExternalParentsOf(
+        names: Collection<KClass<*>>,
+        indirectParents: Boolean,
+    ): Boolean = when {
+        names.isEmpty() -> hasExternalParents(indirectParents)
+        else -> names.all { checkIfParentOf(it, externalParents(indirectParents)) }
+    }
 }
