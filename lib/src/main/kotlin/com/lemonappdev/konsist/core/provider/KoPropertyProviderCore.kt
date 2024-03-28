@@ -33,14 +33,16 @@ internal interface KoPropertyProviderCore : KoPropertyProvider, KoDeclarationPro
     ): Boolean = hasPropertyWithName(listOf(name, *names), includeNested)
 
     override fun hasPropertyWithName(
-         names: Collection<String>,
+        names: Collection<String>,
         includeNested: Boolean,
-    ): Boolean = when {
-        names.isEmpty() -> hasProperties(includeNested)
-        else -> names.any {
-            properties(includeNested).any { koProperty -> it == koProperty.name }
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasProperties(includeNested)
+            else ->
+                names.any {
+                    properties(includeNested).any { koProperty -> it == koProperty.name }
+                }
         }
-    }
 
     override fun hasPropertiesWithAllNames(
         name: String,
@@ -49,14 +51,16 @@ internal interface KoPropertyProviderCore : KoPropertyProvider, KoDeclarationPro
     ): Boolean = hasPropertiesWithAllNames(listOf(name, *names), includeNested)
 
     override fun hasPropertiesWithAllNames(
-         names: Collection<String>,
+        names: Collection<String>,
         includeNested: Boolean,
-    ): Boolean = when {
-        names.isEmpty() -> hasProperties(includeNested)
-        else -> names.all {
-            properties(includeNested).any { koProperty -> it == koProperty.name }
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasProperties(includeNested)
+            else ->
+                names.all {
+                    properties(includeNested).any { koProperty -> it == koProperty.name }
+                }
         }
-    }
 
     override fun hasProperty(
         includeNested: Boolean,
