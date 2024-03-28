@@ -153,12 +153,7 @@ fun <T : KoParentClassProvider> List<T>.withParentClassNamed(
     filter {
         when {
             names.isEmpty() -> it.hasParentClasses(indirectParents)
-            else ->
-                it.hasParentClassWithName(
-                    names.first(),
-                    *names.drop(1).toTypedArray(),
-                    indirectParents = indirectParents,
-                )
+            else -> it.hasParentClassWithName(names, indirectParents = indirectParents)
         }
     }
 
@@ -190,12 +185,7 @@ fun <T : KoParentClassProvider> List<T>.withoutParentClassNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasParentClasses(indirectParents)
-            else ->
-                it.hasParentClassWithName(
-                    names.first(),
-                    *names.drop(1).toTypedArray(),
-                    indirectParents = indirectParents,
-                )
+            else -> it.hasParentClassWithName(names, indirectParents = indirectParents)
         }
     }
 
@@ -227,12 +217,7 @@ fun <T : KoParentClassProvider> List<T>.withAllParentClassesNamed(
     filter {
         when {
             names.isEmpty() -> it.hasParentClasses(indirectParents)
-            else ->
-                it.hasParentClassesWithAllNames(
-                    names.first(),
-                    *names.drop(1).toTypedArray(),
-                    indirectParents = indirectParents,
-                )
+            else -> it.hasParentClassesWithAllNames(names, indirectParents = indirectParents)
         }
     }
 
@@ -264,12 +249,7 @@ fun <T : KoParentClassProvider> List<T>.withoutAllParentClassesNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasParentClasses(indirectParents)
-            else ->
-                it.hasParentClassesWithAllNames(
-                    names.first(),
-                    *names.drop(1).toTypedArray(),
-                    indirectParents = indirectParents,
-                )
+            else -> it.hasParentClassesWithAllNames(names, indirectParents = indirectParents)
         }
     }
 
@@ -301,12 +281,7 @@ fun <T : KoParentClassProvider> List<T>.withParentClassOf(
     filter {
         when {
             kClasses.isEmpty() -> it.hasParentClasses(indirectParents)
-            else ->
-                it.hasParentClassOf(
-                    kClasses.first(),
-                    *kClasses.drop(1).toTypedArray(),
-                    indirectParents = indirectParents,
-                )
+            else -> it.hasParentClassOf(kClasses, indirectParents = indirectParents,)
         }
     }
 
@@ -338,12 +313,7 @@ fun <T : KoParentClassProvider> List<T>.withoutParentClassOf(
     filterNot {
         when {
             kClasses.isEmpty() -> it.hasParentClasses(indirectParents)
-            else ->
-                it.hasParentClassOf(
-                    kClasses.first(),
-                    *kClasses.drop(1).toTypedArray(),
-                    indirectParents = indirectParents,
-                )
+            else -> it.hasParentClassOf(kClasses, indirectParents = indirectParents,)
         }
     }
 
@@ -375,12 +345,7 @@ fun <T : KoParentClassProvider> List<T>.withAllParentClassesOf(
     filter {
         when {
             kClasses.isEmpty() -> it.hasParentClasses(indirectParents)
-            else ->
-                it.hasAllParentClassesOf(
-                    kClasses.first(),
-                    *kClasses.drop(1).toTypedArray(),
-                    indirectParents = indirectParents,
-                )
+            else -> it.hasAllParentClassesOf(kClasses, indirectParents = indirectParents,)
         }
     }
 
@@ -412,12 +377,7 @@ fun <T : KoParentClassProvider> List<T>.withoutAllParentClassesOf(
     filterNot {
         when {
             kClasses.isEmpty() -> it.hasParentClasses(indirectParents)
-            else ->
-                it.hasAllParentClassesOf(
-                    kClasses.first(),
-                    *kClasses.drop(1).toTypedArray(),
-                    indirectParents = indirectParents,
-                )
+            else -> it.hasAllParentClassesOf(kClasses, indirectParents = indirectParents,)
         }
     }
 

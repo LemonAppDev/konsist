@@ -45,7 +45,7 @@ fun <T : KoEnumConstantProvider> List<T>.withEnumConstantNamed(names: Collection
     filter {
         when {
             names.isEmpty() -> it.hasEnumConstants()
-            else -> it.hasEnumConstantWithName(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasEnumConstantWithName(names)
         }
     }
 
@@ -71,7 +71,7 @@ fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstantNamed(names: Collect
     filterNot {
         when {
             names.isEmpty() -> it.hasEnumConstants()
-            else -> it.hasEnumConstantWithName(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasEnumConstantWithName(names)
         }
     }
 
@@ -97,7 +97,7 @@ fun <T : KoEnumConstantProvider> List<T>.withAllEnumConstantsNamed(names: Collec
     filter {
         when {
             names.isEmpty() -> it.hasEnumConstants()
-            else -> it.hasEnumConstantsWithAllNames(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasEnumConstantsWithAllNames(names)
         }
     }
 
@@ -123,7 +123,7 @@ fun <T : KoEnumConstantProvider> List<T>.withoutAllEnumConstantsNamed(names: Col
     filterNot {
         when {
             names.isEmpty() -> it.hasEnumConstants()
-            else -> it.hasEnumConstantsWithAllNames(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasEnumConstantsWithAllNames(names)
         }
     }
 

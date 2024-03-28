@@ -46,7 +46,7 @@ fun <T : KoKDocTagProvider> List<T>.withTag(tags: Collection<KoKDocTag>): List<T
     filter {
         when {
             tags.isEmpty() -> it.hasTags()
-            else -> it.hasTag(tags.first(), *tags.drop(1).toTypedArray())
+            else -> it.hasTag(tags)
         }
     }
 
@@ -72,7 +72,7 @@ fun <T : KoKDocTagProvider> List<T>.withoutTag(tags: Collection<KoKDocTag>): Lis
     filterNot {
         when {
             tags.isEmpty() -> it.hasTags()
-            else -> it.hasTag(tags.first(), *tags.drop(1).toTypedArray())
+            else -> it.hasTag(tags)
         }
     }
 
@@ -98,7 +98,7 @@ fun <T : KoKDocTagProvider> List<T>.withAllTags(tags: Collection<KoKDocTag>): Li
     filter {
         when {
             tags.isEmpty() -> it.hasTags()
-            else -> it.hasAllTags(tags.first(), *tags.drop(1).toTypedArray())
+            else -> it.hasAllTags(tags)
         }
     }
 
@@ -124,6 +124,6 @@ fun <T : KoKDocTagProvider> List<T>.withoutAllTags(tags: Collection<KoKDocTag>):
     filterNot {
         when {
             tags.isEmpty() -> it.hasTags()
-            else -> it.hasAllTags(tags.first(), *tags.drop(1).toTypedArray())
+            else -> it.hasAllTags(tags)
         }
     }

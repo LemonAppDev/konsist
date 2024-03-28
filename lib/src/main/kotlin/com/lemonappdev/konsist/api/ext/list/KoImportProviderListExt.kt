@@ -46,7 +46,7 @@ fun <T : KoImportProvider> List<T>.withImportNamed(names: Collection<String>): L
     filter {
         when {
             names.isEmpty() -> it.hasImports()
-            else -> it.hasImportWithName(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasImportWithName(names)
         }
     }
 
@@ -72,7 +72,7 @@ fun <T : KoImportProvider> List<T>.withoutImportNamed(names: Collection<String>)
     filterNot {
         when {
             names.isEmpty() -> it.hasImports()
-            else -> it.hasImportWithName(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasImportWithName(names)
         }
     }
 
@@ -98,7 +98,7 @@ fun <T : KoImportProvider> List<T>.withAllImportsNamed(names: Collection<String>
     filter {
         when {
             names.isEmpty() -> it.hasImports()
-            else -> it.hasImportsWithAllNames(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasImportsWithAllNames(names)
         }
     }
 
@@ -124,7 +124,7 @@ fun <T : KoImportProvider> List<T>.withoutAllImportsNamed(names: Collection<Stri
     filterNot {
         when {
             names.isEmpty() -> it.hasImports()
-            else -> it.hasImportsWithAllNames(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasImportsWithAllNames(names)
         }
     }
 
