@@ -10,6 +10,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+@Suppress("detekt.LongMethod")
 class KoInterfaceDeclarationForKoParentProviderTest {
     @Test
     fun `interface-has-no-parents`() {
@@ -179,17 +180,21 @@ class KoInterfaceDeclarationForKoParentProviderTest {
             hasParentsWithAllNames("SampleParentInterface2", "OtherInterface", indirectParents = true) shouldBeEqualTo false
             hasParentsWithAllNames(listOf("SampleParentInterface2"), indirectParents = true) shouldBeEqualTo true
             hasParentsWithAllNames(listOf("OtherInterface"), indirectParents = true) shouldBeEqualTo false
-            hasParentsWithAllNames(listOf(
-                "SampleParentInterface2",
-                "SampleParentInterface1"),
+            hasParentsWithAllNames(
+                listOf(
+                    "SampleParentInterface2",
+                    "SampleParentInterface1",
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasParentsWithAllNames(listOf("SampleParentInterface2", "OtherInterface"), indirectParents = true) shouldBeEqualTo false
             hasParentsWithAllNames(setOf("SampleParentInterface2"), indirectParents = true) shouldBeEqualTo true
             hasParentsWithAllNames(setOf("OtherInterface"), indirectParents = true) shouldBeEqualTo false
-            hasParentsWithAllNames(setOf(
-                "SampleParentInterface2",
-                "SampleParentInterface1"),
+            hasParentsWithAllNames(
+                setOf(
+                    "SampleParentInterface2",
+                    "SampleParentInterface1",
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasParentsWithAllNames(setOf("SampleParentInterface2", "OtherInterface"), indirectParents = true) shouldBeEqualTo false
@@ -216,14 +221,18 @@ class KoInterfaceDeclarationForKoParentProviderTest {
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasAllParentsOf(listOf(SampleParentInterface2::class), indirectParents = true) shouldBeEqualTo true
-            hasAllParentsOf(listOf(
-                SampleParentInterface2::class,
-                SampleInterface::class),
+            hasAllParentsOf(
+                listOf(
+                    SampleParentInterface2::class,
+                    SampleInterface::class,
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo false
-            hasAllParentsOf(listOf(
-                SampleParentInterface2::class,
-                SampleParentInterface1::class),
+            hasAllParentsOf(
+                listOf(
+                    SampleParentInterface2::class,
+                    SampleParentInterface1::class,
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo true
         }

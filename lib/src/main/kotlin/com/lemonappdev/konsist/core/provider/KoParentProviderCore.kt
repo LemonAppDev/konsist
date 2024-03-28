@@ -109,12 +109,14 @@ internal interface KoParentProviderCore :
     override fun hasParentWithName(
         names: Collection<String>,
         indirectParents: Boolean,
-    ): Boolean = when {
-        names.isEmpty() -> hasParents(indirectParents)
-        else -> names.any {
-            parents(indirectParents).any { parent -> it == parent.name }
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasParents(indirectParents)
+            else ->
+                names.any {
+                    parents(indirectParents).any { parent -> it == parent.name }
+                }
         }
-    }
 
     override fun hasParentsWithAllNames(
         name: String,
@@ -125,12 +127,14 @@ internal interface KoParentProviderCore :
     override fun hasParentsWithAllNames(
         names: Collection<String>,
         indirectParents: Boolean,
-    ): Boolean = when {
-        names.isEmpty() -> hasParents(indirectParents)
-        else -> names.all {
-            parents(indirectParents).any { parent -> it == parent.name }
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasParents(indirectParents)
+            else ->
+                names.all {
+                    parents(indirectParents).any { parent -> it == parent.name }
+                }
         }
-    }
 
     override fun hasParent(
         indirectParents: Boolean,
@@ -149,12 +153,13 @@ internal interface KoParentProviderCore :
     ): Boolean = hasParentOf(listOf(name, *names), indirectParents)
 
     override fun hasParentOf(
-         names: Collection<KClass<*>>,
+        names: Collection<KClass<*>>,
         indirectParents: Boolean,
-    ): Boolean = when {
-        names.isEmpty() -> hasParents(indirectParents)
-        else -> names.any { checkIfParentOf(it, parents(indirectParents)) }
-    }
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasParents(indirectParents)
+            else -> names.any { checkIfParentOf(it, parents(indirectParents)) }
+        }
 
     override fun hasAllParentsOf(
         name: KClass<*>,
@@ -163,10 +168,11 @@ internal interface KoParentProviderCore :
     ): Boolean = hasAllParentsOf(listOf(name, *names), indirectParents)
 
     override fun hasAllParentsOf(
-         names: Collection<KClass<*>>,
+        names: Collection<KClass<*>>,
         indirectParents: Boolean,
-    ): Boolean = when {
-        names.isEmpty() -> hasParents(indirectParents)
-        else -> names.all { checkIfParentOf(it, parents(indirectParents)) }
-    }
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasParents(indirectParents)
+            else -> names.all { checkIfParentOf(it, parents(indirectParents)) }
+        }
 }

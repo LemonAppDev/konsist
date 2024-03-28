@@ -9,6 +9,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+@Suppress("detekt.LongMethod")
 class KoInterfaceDeclarationForKoParentInterfaceProviderTest {
     @Test
     fun `interface-has-no-parent-interface`() {

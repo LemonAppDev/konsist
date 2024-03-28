@@ -11,6 +11,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+@Suppress("detekt.LongMethod")
 class KoClassDeclarationForKoParentProviderTest {
     @Test
     fun `class-has-no-parents`() {
@@ -59,13 +60,13 @@ class KoClassDeclarationForKoParentProviderTest {
         // then
         assertSoftly(sut) {
             parents.map { it.name } shouldBeEqualTo
-                    parents.map { it.name } shouldBeEqualTo
-                    listOf(
-                        "SampleParentClass",
-                        "SampleParentInterface1",
-                        "SampleParentInterface2",
-                        "SampleExternalInterface",
-                    )
+                parents.map { it.name } shouldBeEqualTo
+                listOf(
+                    "SampleParentClass",
+                    "SampleParentInterface1",
+                    "SampleParentInterface2",
+                    "SampleExternalInterface",
+                )
             numParents shouldBeEqualTo 4
             countParents { it.name == "SampleParentClass" } shouldBeEqualTo 1
             countParents { it.hasNameStartingWith("SampleParentInterface") } shouldBeEqualTo 2
@@ -133,19 +134,19 @@ class KoClassDeclarationForKoParentProviderTest {
         // then
         assertSoftly(sut) {
             parents().map { it.name } shouldBeEqualTo
-                    listOf(
-                        "SampleParentClass",
-                        "SampleParentInterface1",
-                        "SampleExternalInterface",
-                    )
+                listOf(
+                    "SampleParentClass",
+                    "SampleParentInterface1",
+                    "SampleExternalInterface",
+                )
             numParents(indirectParents = false) shouldBeEqualTo 3
             parents(indirectParents = true).map { it.name } shouldBeEqualTo
-                    listOf(
-                        "SampleParentClass",
-                        "SampleParentInterface1",
-                        "SampleExternalInterface",
-                        "SampleParentInterface2",
-                    )
+                listOf(
+                    "SampleParentClass",
+                    "SampleParentInterface1",
+                    "SampleExternalInterface",
+                    "SampleParentInterface2",
+                )
             numParents(indirectParents = true) shouldBeEqualTo 4
             countParents(indirectParents = true) { it.name == "SampleParentInterface2" } shouldBeEqualTo 1
             countParents(indirectParents = true) { it.hasNameStartingWith("SampleParentInterface") } shouldBeEqualTo 2
@@ -173,17 +174,21 @@ class KoClassDeclarationForKoParentProviderTest {
             hasParentsWithAllNames("SampleParentInterface2", "OtherInterface", indirectParents = true) shouldBeEqualTo false
             hasParentsWithAllNames(listOf("SampleParentInterface2"), indirectParents = true) shouldBeEqualTo true
             hasParentsWithAllNames(listOf("OtherInterface"), indirectParents = true) shouldBeEqualTo false
-            hasParentsWithAllNames(listOf(
-                "SampleParentInterface2",
-                "SampleParentInterface1"),
+            hasParentsWithAllNames(
+                listOf(
+                    "SampleParentInterface2",
+                    "SampleParentInterface1",
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasParentsWithAllNames(listOf("SampleParentInterface2", "OtherInterface"), indirectParents = true) shouldBeEqualTo false
             hasParentsWithAllNames(setOf("SampleParentInterface2"), indirectParents = true) shouldBeEqualTo true
             hasParentsWithAllNames(setOf("OtherInterface"), indirectParents = true) shouldBeEqualTo false
-            hasParentsWithAllNames(setOf(
-                "SampleParentInterface2",
-                "SampleParentInterface1"),
+            hasParentsWithAllNames(
+                setOf(
+                    "SampleParentInterface2",
+                    "SampleParentInterface1",
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasParentsWithAllNames(setOf("SampleParentInterface2", "OtherInterface"), indirectParents = true) shouldBeEqualTo false
@@ -205,15 +210,19 @@ class KoClassDeclarationForKoParentProviderTest {
                 indirectParents = true,
             ) shouldBeEqualTo false
             hasAllParentsOf(listOf(SampleParentInterface2::class), indirectParents = true) shouldBeEqualTo true
-            hasAllParentsOf(listOf(
-                SampleParentInterface2::class,
-                SampleInterface::class),
+            hasAllParentsOf(
+                listOf(
+                    SampleParentInterface2::class,
+                    SampleInterface::class,
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo false
             hasAllParentsOf(setOf(SampleParentInterface2::class), indirectParents = true) shouldBeEqualTo true
-            hasAllParentsOf(setOf(
-                SampleParentInterface2::class,
-                SampleInterface::class),
+            hasAllParentsOf(
+                setOf(
+                    SampleParentInterface2::class,
+                    SampleInterface::class,
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo false
         }

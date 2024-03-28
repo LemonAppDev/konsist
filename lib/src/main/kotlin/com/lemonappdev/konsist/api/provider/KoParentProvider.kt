@@ -160,7 +160,7 @@ interface KoParentProvider : KoBaseProvider {
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasParentWithName(
-       names: Collection<String>,
+        names: Collection<String>,
         indirectParents: Boolean = false,
     ): Boolean
 
