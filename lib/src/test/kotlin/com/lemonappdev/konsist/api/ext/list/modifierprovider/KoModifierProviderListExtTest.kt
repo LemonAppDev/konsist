@@ -244,11 +244,11 @@ class KoModifierProviderListExtTest {
         val modifier2 = OPEN
         val declaration1: KoModifierProvider =
             mockk {
-                every { hasModifier(modifier1, modifier2) } returns true
+                every { hasModifier(listOf(modifier1, modifier2)) } returns true
             }
         val declaration2: KoModifierProvider =
             mockk {
-                every { hasModifier(modifier1, modifier2) } returns false
+                every { hasModifier(listOf(modifier1, modifier2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -266,11 +266,11 @@ class KoModifierProviderListExtTest {
         val modifier2 = OPEN
         val declaration1: KoModifierProvider =
             mockk {
-                every { hasModifier(modifier1, modifier2) } returns true
+                every { hasModifier(listOf(modifier1, modifier2)) } returns true
             }
         val declaration2: KoModifierProvider =
             mockk {
-                every { hasModifier(modifier1, modifier2) } returns false
+                every { hasModifier(listOf(modifier1, modifier2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val modifiers = listOf(modifier1, modifier2)
@@ -289,11 +289,11 @@ class KoModifierProviderListExtTest {
         val modifier2 = OPEN
         val declaration1: KoModifierProvider =
             mockk {
-                every { hasModifier(modifier1, modifier2) } returns true
+                every { hasModifier(setOf(modifier1, modifier2)) } returns true
             }
         val declaration2: KoModifierProvider =
             mockk {
-                every { hasModifier(modifier1, modifier2) } returns false
+                every { hasModifier(setOf(modifier1, modifier2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val modifiers = setOf(modifier1, modifier2)
@@ -312,11 +312,11 @@ class KoModifierProviderListExtTest {
         val modifier2 = OPEN
         val declaration1: KoModifierProvider =
             mockk {
-                every { hasModifier(modifier1, modifier2) } returns true
+                every { hasModifier(listOf(modifier1, modifier2)) } returns true
             }
         val declaration2: KoModifierProvider =
             mockk {
-                every { hasModifier(modifier1, modifier2) } returns false
+                every { hasModifier(listOf(modifier1, modifier2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -334,11 +334,11 @@ class KoModifierProviderListExtTest {
         val modifier2 = OPEN
         val declaration1: KoModifierProvider =
             mockk {
-                every { hasModifier(modifier1, modifier2) } returns true
+                every { hasModifier(listOf(modifier1, modifier2)) } returns true
             }
         val declaration2: KoModifierProvider =
             mockk {
-                every { hasModifier(modifier1, modifier2) } returns false
+                every { hasModifier(listOf(modifier1, modifier2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val modifiers = listOf(modifier1, modifier2)
@@ -357,14 +357,14 @@ class KoModifierProviderListExtTest {
         val modifier2 = OPEN
         val declaration1: KoModifierProvider =
             mockk {
-                every { hasModifier(modifier1, modifier2) } returns true
+                every { hasModifier(setOf(modifier1, modifier2)) } returns true
             }
         val declaration2: KoModifierProvider =
             mockk {
-                every { hasModifier(modifier1, modifier2) } returns false
+                every { hasModifier(setOf(modifier1, modifier2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val modifiers = listOf(modifier1, modifier2)
+        val modifiers = setOf(modifier1, modifier2)
 
         // when
         val sut = declarations.withoutModifier(modifiers)
@@ -380,11 +380,11 @@ class KoModifierProviderListExtTest {
         val modifier2 = OPEN
         val declaration1: KoModifierProvider =
             mockk {
-                every { hasAllModifiers(modifier1, modifier2) } returns true
+                every { hasAllModifiers(listOf(modifier1, modifier2)) } returns true
             }
         val declaration2: KoModifierProvider =
             mockk {
-                every { hasAllModifiers(modifier1, modifier2) } returns false
+                every { hasAllModifiers(listOf(modifier1, modifier2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -402,11 +402,11 @@ class KoModifierProviderListExtTest {
         val modifier2 = OPEN
         val declaration1: KoModifierProvider =
             mockk {
-                every { hasAllModifiers(modifier1, modifier2) } returns true
+                every { hasAllModifiers(listOf(modifier1, modifier2)) } returns true
             }
         val declaration2: KoModifierProvider =
             mockk {
-                every { hasAllModifiers(modifier1, modifier2) } returns false
+                every { hasAllModifiers(listOf(modifier1, modifier2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val modifiers = listOf(modifier1, modifier2)
@@ -425,11 +425,11 @@ class KoModifierProviderListExtTest {
         val modifier2 = OPEN
         val declaration1: KoModifierProvider =
             mockk {
-                every { hasAllModifiers(modifier1, modifier2) } returns true
+                every { hasAllModifiers(setOf(modifier1, modifier2)) } returns true
             }
         val declaration2: KoModifierProvider =
             mockk {
-                every { hasAllModifiers(modifier1, modifier2) } returns false
+                every { hasAllModifiers(setOf(modifier1, modifier2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val modifiers = setOf(modifier1, modifier2)
@@ -448,11 +448,11 @@ class KoModifierProviderListExtTest {
         val modifier2 = OPEN
         val declaration1: KoModifierProvider =
             mockk {
-                every { hasAllModifiers(modifier1, modifier2) } returns true
+                every { hasAllModifiers(listOf(modifier1, modifier2)) } returns true
             }
         val declaration2: KoModifierProvider =
             mockk {
-                every { hasAllModifiers(modifier1, modifier2) } returns false
+                every { hasAllModifiers(listOf(modifier1, modifier2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -470,11 +470,11 @@ class KoModifierProviderListExtTest {
         val modifier2 = OPEN
         val declaration1: KoModifierProvider =
             mockk {
-                every { hasAllModifiers(modifier1, modifier2) } returns true
+                every { hasAllModifiers(listOf(modifier1, modifier2)) } returns true
             }
         val declaration2: KoModifierProvider =
             mockk {
-                every { hasAllModifiers(modifier1, modifier2) } returns false
+                every { hasAllModifiers(listOf(modifier1, modifier2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val modifiers = listOf(modifier1, modifier2)
@@ -493,11 +493,11 @@ class KoModifierProviderListExtTest {
         val modifier2 = OPEN
         val declaration1: KoModifierProvider =
             mockk {
-                every { hasAllModifiers(modifier1, modifier2) } returns true
+                every { hasAllModifiers(setOf(modifier1, modifier2)) } returns true
             }
         val declaration2: KoModifierProvider =
             mockk {
-                every { hasAllModifiers(modifier1, modifier2) } returns false
+                every { hasAllModifiers(setOf(modifier1, modifier2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val modifiers = setOf(modifier1, modifier2)

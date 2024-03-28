@@ -243,11 +243,11 @@ class KoKDocTagProviderListExtTest {
         val tag2 = KoKDocTag.SEE
         val declaration1: KoKDocTagProvider =
             mockk {
-                every { hasTag(tag1, tag2) } returns true
+                every { hasTag(listOf(tag1, tag2)) } returns true
             }
         val declaration2: KoKDocTagProvider =
             mockk {
-                every { hasTag(tag1, tag2) } returns false
+                every { hasTag(listOf(tag1, tag2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -265,11 +265,11 @@ class KoKDocTagProviderListExtTest {
         val tag2 = KoKDocTag.SEE
         val declaration1: KoKDocTagProvider =
             mockk {
-                every { hasTag(tag1, tag2) } returns true
+                every { hasTag(listOf(tag1, tag2)) } returns true
             }
         val declaration2: KoKDocTagProvider =
             mockk {
-                every { hasTag(tag1, tag2) } returns false
+                every { hasTag(listOf(tag1, tag2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val tags = listOf(tag1, tag2)
@@ -288,11 +288,11 @@ class KoKDocTagProviderListExtTest {
         val tag2 = KoKDocTag.SEE
         val declaration1: KoKDocTagProvider =
             mockk {
-                every { hasTag(tag1, tag2) } returns true
+                every { hasTag(setOf(tag1, tag2)) } returns true
             }
         val declaration2: KoKDocTagProvider =
             mockk {
-                every { hasTag(tag1, tag2) } returns false
+                every { hasTag(setOf(tag1, tag2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val tags = setOf(tag1, tag2)
@@ -311,11 +311,11 @@ class KoKDocTagProviderListExtTest {
         val tag2 = KoKDocTag.SEE
         val declaration1: KoKDocTagProvider =
             mockk {
-                every { hasTag(tag1, tag2) } returns true
+                every { hasTag(listOf(tag1, tag2)) } returns true
             }
         val declaration2: KoKDocTagProvider =
             mockk {
-                every { hasTag(tag1, tag2) } returns false
+                every { hasTag(listOf(tag1, tag2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -333,11 +333,11 @@ class KoKDocTagProviderListExtTest {
         val tag2 = KoKDocTag.SEE
         val declaration1: KoKDocTagProvider =
             mockk {
-                every { hasTag(tag1, tag2) } returns true
+                every { hasTag(listOf(tag1, tag2)) } returns true
             }
         val declaration2: KoKDocTagProvider =
             mockk {
-                every { hasTag(tag1, tag2) } returns false
+                every { hasTag(listOf(tag1, tag2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val tags = listOf(tag1, tag2)
@@ -356,11 +356,11 @@ class KoKDocTagProviderListExtTest {
         val tag2 = KoKDocTag.SEE
         val declaration1: KoKDocTagProvider =
             mockk {
-                every { hasTag(tag1, tag2) } returns true
+                every { hasTag(setOf(tag1, tag2)) } returns true
             }
         val declaration2: KoKDocTagProvider =
             mockk {
-                every { hasTag(tag1, tag2) } returns false
+                every { hasTag(setOf(tag1, tag2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val tags = setOf(tag1, tag2)
@@ -379,11 +379,11 @@ class KoKDocTagProviderListExtTest {
         val tag2 = KoKDocTag.SEE
         val declaration1: KoKDocTagProvider =
             mockk {
-                every { hasAllTags(tag1, tag2) } returns true
+                every { hasAllTags(listOf(tag1, tag2)) } returns true
             }
         val declaration2: KoKDocTagProvider =
             mockk {
-                every { hasAllTags(tag1, tag2) } returns false
+                every { hasAllTags(listOf(tag1, tag2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -401,11 +401,11 @@ class KoKDocTagProviderListExtTest {
         val tag2 = KoKDocTag.SEE
         val declaration1: KoKDocTagProvider =
             mockk {
-                every { hasAllTags(tag1, tag2) } returns true
+                every { hasAllTags(listOf(tag1, tag2)) } returns true
             }
         val declaration2: KoKDocTagProvider =
             mockk {
-                every { hasAllTags(tag1, tag2) } returns false
+                every { hasAllTags(listOf(tag1, tag2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val tags = listOf(tag1, tag2)
@@ -424,11 +424,11 @@ class KoKDocTagProviderListExtTest {
         val tag2 = KoKDocTag.SEE
         val declaration1: KoKDocTagProvider =
             mockk {
-                every { hasAllTags(tag1, tag2) } returns true
+                every { hasAllTags(setOf(tag1, tag2)) } returns true
             }
         val declaration2: KoKDocTagProvider =
             mockk {
-                every { hasAllTags(tag1, tag2) } returns false
+                every { hasAllTags(setOf(tag1, tag2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val tags = setOf(tag1, tag2)
@@ -447,11 +447,11 @@ class KoKDocTagProviderListExtTest {
         val tag2 = KoKDocTag.SEE
         val declaration1: KoKDocTagProvider =
             mockk {
-                every { hasAllTags(tag1, tag2) } returns true
+                every { hasAllTags(listOf(tag1, tag2)) } returns true
             }
         val declaration2: KoKDocTagProvider =
             mockk {
-                every { hasAllTags(tag1, tag2) } returns false
+                every { hasAllTags(listOf(tag1, tag2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -469,11 +469,11 @@ class KoKDocTagProviderListExtTest {
         val tag2 = KoKDocTag.SEE
         val declaration1: KoKDocTagProvider =
             mockk {
-                every { hasAllTags(tag1, tag2) } returns true
+                every { hasAllTags(listOf(tag1, tag2)) } returns true
             }
         val declaration2: KoKDocTagProvider =
             mockk {
-                every { hasAllTags(tag1, tag2) } returns false
+                every { hasAllTags(listOf(tag1, tag2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val tags = listOf(tag1, tag2)
@@ -492,11 +492,11 @@ class KoKDocTagProviderListExtTest {
         val tag2 = KoKDocTag.SEE
         val declaration1: KoKDocTagProvider =
             mockk {
-                every { hasAllTags(tag1, tag2) } returns true
+                every { hasAllTags(setOf(tag1, tag2)) } returns true
             }
         val declaration2: KoKDocTagProvider =
             mockk {
-                every { hasAllTags(tag1, tag2) } returns false
+                every { hasAllTags(setOf(tag1, tag2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val tags = setOf(tag1, tag2)
