@@ -30,10 +30,14 @@ internal interface KoPropertyProviderCore : KoPropertyProvider, KoDeclarationPro
         name: String,
         vararg names: String,
         includeNested: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasPropertyWithName(listOf(name, *names), includeNested)
 
-        return givenNames.any {
+    override fun hasPropertyWithName(
+         names: Collection<String>,
+        includeNested: Boolean,
+    ): Boolean = when {
+        names.isEmpty() -> hasProperties(includeNested)
+        else -> names.any {
             properties(includeNested).any { koProperty -> it == koProperty.name }
         }
     }
@@ -42,10 +46,14 @@ internal interface KoPropertyProviderCore : KoPropertyProvider, KoDeclarationPro
         name: String,
         vararg names: String,
         includeNested: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasPropertiesWithAllNames(listOf(name, *names), includeNested)
 
-        return givenNames.all {
+    override fun hasPropertiesWithAllNames(
+         names: Collection<String>,
+        includeNested: Boolean,
+    ): Boolean = when {
+        names.isEmpty() -> hasProperties(includeNested)
+        else -> names.all {
             properties(includeNested).any { koProperty -> it == koProperty.name }
         }
     }
