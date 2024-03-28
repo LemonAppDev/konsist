@@ -43,10 +43,14 @@ internal interface KoParentInterfaceProviderCore :
         name: String,
         vararg names: String,
         indirectParents: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasParentInterfaceWithName(listOf(name, *names), indirectParents)
 
-        return givenNames.any {
+    override fun hasParentInterfaceWithName(
+         names: Collection<String>,
+        indirectParents: Boolean,
+    ): Boolean = when {
+        names.isEmpty() -> hasParentInterfaces(indirectParents)
+        else -> names.any {
             parentInterfaces(indirectParents).any { parentInterface -> it == parentInterface.name }
         }
     }
@@ -55,10 +59,14 @@ internal interface KoParentInterfaceProviderCore :
         name: String,
         vararg names: String,
         indirectParents: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasParentInterfacesWithAllNames(listOf(name, *names), indirectParents)
 
-        return givenNames.all {
+    override fun hasParentInterfacesWithAllNames(
+         names: Collection<String>,
+        indirectParents: Boolean,
+    ): Boolean = when {
+        names.isEmpty() -> hasParentInterfaces(indirectParents)
+        else -> names.all {
             parentInterfaces(indirectParents).any { parentInterface -> it == parentInterface.name }
         }
     }
@@ -77,15 +85,27 @@ internal interface KoParentInterfaceProviderCore :
         name: KClass<*>,
         vararg names: KClass<*>,
         indirectParents: Boolean,
-    ): Boolean =
-        checkIfParentOf(name, parentInterfaces(indirectParents)) ||
-            names.any { checkIfParentOf(it, parentInterfaces(indirectParents)) }
+    ): Boolean = hasParentInterfaceOf(listOf(name, *names), indirectParents)
+
+        override fun hasParentInterfaceOf(
+        names: Collection<KClass<*>>,
+        indirectParents: Boolean,
+    ): Boolean = when {
+        names.isEmpty() -> hasParentInterfaces(indirectParents)
+            else -> names.any { checkIfParentOf(it, parentInterfaces(indirectParents)) }
+    }
 
     override fun hasAllParentInterfacesOf(
         name: KClass<*>,
         vararg names: KClass<*>,
         indirectParents: Boolean,
-    ): Boolean =
-        checkIfParentOf(name, parentInterfaces(indirectParents)) &&
-            names.all { checkIfParentOf(it, parentInterfaces(indirectParents)) }
+    ): Boolean = hasAllParentInterfacesOf(listOf(name, *names), indirectParents)
+
+        override fun hasAllParentInterfacesOf(
+        names: Collection<KClass<*>>,
+        indirectParents: Boolean,
+    ): Boolean = when {
+        names.isEmpty() -> hasParentInterfaces(indirectParents)
+            else -> names.all { checkIfParentOf(it, parentInterfaces(indirectParents)) }
+    }
 }
