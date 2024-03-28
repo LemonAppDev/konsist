@@ -230,14 +230,18 @@ class KoInterfaceDeclarationForKoParentInterfaceProviderTest {
             ) shouldBeEqualTo true
             hasParentInterfaceWithName(listOf("SampleParentInterface2"), indirectParents = true) shouldBeEqualTo true
             hasParentInterfaceWithName(listOf("OtherInterface"), indirectParents = true) shouldBeEqualTo false
-            hasParentInterfaceWithName(listOf(
-                "SampleParentInterface1",
-                "SampleParentInterface2"),
+            hasParentInterfaceWithName(
+                listOf(
+                    "SampleParentInterface1",
+                    "SampleParentInterface2",
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasParentInterfaceWithName(listOf(
-                "SampleParentInterface2",
-                "OtherInterface"),
+            hasParentInterfaceWithName(
+                listOf(
+                    "SampleParentInterface2",
+                    "OtherInterface",
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasParentInterfacesWithAllNames("SampleParentInterface2", indirectParents = true) shouldBeEqualTo true
@@ -254,14 +258,18 @@ class KoInterfaceDeclarationForKoParentInterfaceProviderTest {
             ) shouldBeEqualTo false
             hasParentInterfacesWithAllNames(listOf("SampleParentInterface2"), indirectParents = true) shouldBeEqualTo true
             hasParentInterfacesWithAllNames(listOf("OtherInterface"), indirectParents = true) shouldBeEqualTo false
-            hasParentInterfacesWithAllNames(listOf(
-                "SampleParentInterface1",
-                "SampleParentInterface2"),
+            hasParentInterfacesWithAllNames(
+                listOf(
+                    "SampleParentInterface1",
+                    "SampleParentInterface2",
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasParentInterfacesWithAllNames(listOf(
-                "SampleParentInterface2",
-                "OtherInterface"),
+            hasParentInterfacesWithAllNames(
+                listOf(
+                    "SampleParentInterface2",
+                    "OtherInterface",
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo false
             hasParentInterface(indirectParents = true) { it.name == "SampleParentInterface2" } shouldBeEqualTo true
@@ -276,9 +284,11 @@ class KoInterfaceDeclarationForKoParentInterfaceProviderTest {
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasParentInterfaceOf(listOf(SampleParentInterface2::class), indirectParents = true) shouldBeEqualTo true
-            hasParentInterfaceOf(listOf(
-                SampleParentInterface1::class,
-                SampleParentInterface2::class),
+            hasParentInterfaceOf(
+                listOf(
+                    SampleParentInterface1::class,
+                    SampleParentInterface2::class,
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasAllParentInterfacesOf(SampleParentInterface2::class, indirectParents = true) shouldBeEqualTo true
@@ -288,9 +298,11 @@ class KoInterfaceDeclarationForKoParentInterfaceProviderTest {
                 indirectParents = true,
             ) shouldBeEqualTo false
             hasAllParentInterfacesOf(listOf(SampleParentInterface2::class), indirectParents = true) shouldBeEqualTo true
-            hasAllParentInterfacesOf(listOf(
-                SampleParentInterface2::class,
-                SampleParentInterface::class),
+            hasAllParentInterfacesOf(
+                listOf(
+                    SampleParentInterface2::class,
+                    SampleParentInterface::class,
+                ),
                 indirectParents = true,
             ) shouldBeEqualTo false
         }
