@@ -67,7 +67,7 @@ fun <T : KoParentProvider> List<T>.withParentNamed(
     filter {
         when {
             names.isEmpty() -> it.hasParents(indirectParents)
-            else -> it.hasParentWithName(names, indirectParents = indirectParents,)
+            else -> it.hasParentWithName(names, indirectParents = indirectParents)
         }
     }
 
@@ -99,7 +99,7 @@ fun <T : KoParentProvider> List<T>.withoutParentNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasParents(indirectParents)
-            else -> it.hasParentWithName(names, indirectParents = indirectParents,)
+            else -> it.hasParentWithName(names, indirectParents = indirectParents)
         }
     }
 
@@ -131,7 +131,7 @@ fun <T : KoParentProvider> List<T>.withAllParentsNamed(
     filter {
         when {
             names.isEmpty() -> it.hasParents(indirectParents)
-            else -> it.hasParentsWithAllNames(names, indirectParents = indirectParents,)
+            else -> it.hasParentsWithAllNames(names, indirectParents = indirectParents)
         }
     }
 
@@ -163,7 +163,7 @@ fun <T : KoParentProvider> List<T>.withoutAllParentsNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasParents(indirectParents)
-            else -> it.hasParentsWithAllNames(names, indirectParents = indirectParents,)
+            else -> it.hasParentsWithAllNames(names, indirectParents = indirectParents)
         }
     }
 
@@ -282,7 +282,7 @@ fun <T : KoParentProvider> List<T>.withParentOf(
     filter {
         when {
             kClasses.isEmpty() -> it.hasParents(indirectParents)
-            else -> it.hasParentOf(kClasses, indirectParents = indirectParents,)
+            else -> it.hasParentOf(kClasses, indirectParents = indirectParents)
         }
     }
 
@@ -314,7 +314,7 @@ fun <T : KoParentProvider> List<T>.withoutParentOf(
     filterNot {
         when {
             kClasses.isEmpty() -> it.hasParents(indirectParents)
-            else -> it.hasParentOf(kClasses, indirectParents = indirectParents,)
+            else -> it.hasParentOf(kClasses, indirectParents = indirectParents)
         }
     }
 
@@ -346,7 +346,7 @@ fun <T : KoParentProvider> List<T>.withAllParentsOf(
     filter {
         when {
             kClasses.isEmpty() -> it.hasParents(indirectParents)
-            else -> it.hasAllParentsOf(kClasses, indirectParents = indirectParents,)
+            else -> it.hasAllParentsOf(kClasses, indirectParents = indirectParents)
         }
     }
 
@@ -378,7 +378,7 @@ fun <T : KoParentProvider> List<T>.withoutAllParentsOf(
     filterNot {
         when {
             kClasses.isEmpty() -> it.hasParents(indirectParents)
-            else -> it.hasAllParentsOf(kClasses, indirectParents = indirectParents,)
+            else -> it.hasAllParentsOf(kClasses, indirectParents = indirectParents)
         }
     }
 

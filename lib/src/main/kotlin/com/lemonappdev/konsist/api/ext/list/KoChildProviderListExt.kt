@@ -61,7 +61,7 @@ fun <T : KoChildProvider> List<T>.withChildNamed(
     filter {
         when {
             names.isEmpty() -> it.hasChildren(indirectChildren = indirectChildren)
-            else -> it.hasChildWithName(names, indirectChildren = indirectChildren,)
+            else -> it.hasChildWithName(names, indirectChildren = indirectChildren)
         }
     }
 
@@ -93,7 +93,7 @@ fun <T : KoChildProvider> List<T>.withoutChildNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasChildren(indirectChildren = indirectChildren)
-            else -> it.hasChildWithName(names, indirectChildren = indirectChildren,)
+            else -> it.hasChildWithName(names, indirectChildren = indirectChildren)
         }
     }
 
@@ -125,7 +125,7 @@ fun <T : KoChildProvider> List<T>.withAllChildrenNamed(
     filter {
         when {
             names.isEmpty() -> it.hasChildren(indirectChildren = indirectChildren)
-            else -> it.hasChildrenWithAllNames(names, indirectChildren = indirectChildren,)
+            else -> it.hasChildrenWithAllNames(names, indirectChildren = indirectChildren)
         }
     }
 
@@ -157,7 +157,7 @@ fun <T : KoChildProvider> List<T>.withoutAllChildrenNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasChildren(indirectChildren = indirectChildren)
-            else -> it.hasChildrenWithAllNames(names, indirectChildren = indirectChildren,)
+            else -> it.hasChildrenWithAllNames(names, indirectChildren = indirectChildren)
         }
     }
 
@@ -276,7 +276,7 @@ fun <T : KoChildProvider> List<T>.withChildOf(
     filter {
         when {
             kClasses.isEmpty() -> it.hasChildren(indirectChildren)
-            else -> it.hasChildOf(kClasses, indirectChildren = indirectChildren,)
+            else -> it.hasChildOf(kClasses, indirectChildren = indirectChildren)
         }
     }
 
@@ -308,7 +308,7 @@ fun <T : KoChildProvider> List<T>.withoutChildOf(
     filterNot {
         when {
             kClasses.isEmpty() -> it.hasChildren(indirectChildren)
-            else -> it.hasChildOf(kClasses, indirectChildren = indirectChildren,)
+            else -> it.hasChildOf(kClasses, indirectChildren = indirectChildren)
         }
     }
 
@@ -340,7 +340,7 @@ fun <T : KoChildProvider> List<T>.withAllChildrenOf(
     filter {
         when {
             kClasses.isEmpty() -> it.hasChildren(indirectChildren)
-            else -> it.hasAllChildrenOf(kClasses, indirectChildren = indirectChildren,)
+            else -> it.hasAllChildrenOf(kClasses, indirectChildren = indirectChildren)
         }
     }
 
@@ -372,6 +372,6 @@ fun <T : KoChildProvider> List<T>.withoutAllChildrenOf(
     filterNot {
         when {
             kClasses.isEmpty() -> it.hasChildren(indirectChildren)
-            else -> it.hasAllChildrenOf(kClasses, indirectChildren = indirectChildren,)
+            else -> it.hasAllChildrenOf(kClasses, indirectChildren = indirectChildren)
         }
     }

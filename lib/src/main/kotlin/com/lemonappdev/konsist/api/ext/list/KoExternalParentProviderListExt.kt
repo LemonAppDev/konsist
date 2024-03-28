@@ -66,7 +66,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParentNamed(
     filter {
         when {
             names.isEmpty() -> it.hasExternalParents(indirectParents)
-            else -> it.hasExternalParentWithName(names, indirectParents = indirectParents,)
+            else -> it.hasExternalParentWithName(names, indirectParents = indirectParents)
         }
     }
 
@@ -100,7 +100,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasExternalParents(indirectParents)
-            else -> it.hasExternalParentWithName(names, indirectParents = indirectParents,)
+            else -> it.hasExternalParentWithName(names, indirectParents = indirectParents)
         }
     }
 
@@ -134,7 +134,7 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsNamed(
     filter {
         when {
             names.isEmpty() -> it.hasExternalParents(indirectParents)
-            else -> it.hasExternalParentsWithAllNames(names, indirectParents = indirectParents,)
+            else -> it.hasExternalParentsWithAllNames(names, indirectParents = indirectParents)
         }
     }
 
@@ -168,7 +168,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasExternalParents(indirectParents)
-            else -> it.hasExternalParentsWithAllNames(names, indirectParents = indirectParents,)
+            else -> it.hasExternalParentsWithAllNames(names, indirectParents = indirectParents)
         }
     }
 
@@ -280,7 +280,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParentOf(
     filter {
         when {
             kClasses.isEmpty() -> it.hasExternalParents(indirectParents)
-            else -> it.hasExternalParentOf(kClasses, indirectParents = indirectParents,)
+            else -> it.hasExternalParentOf(kClasses, indirectParents = indirectParents)
         }
     }
 
@@ -314,7 +314,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentOf(
     filterNot {
         when {
             kClasses.isEmpty() -> it.hasExternalParents(indirectParents)
-            else -> it.hasExternalParentOf(kClasses, indirectParents = indirectParents,)
+            else -> it.hasExternalParentOf(kClasses, indirectParents = indirectParents)
         }
     }
 
@@ -348,7 +348,7 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsOf(
     filter {
         when {
             kClasses.isEmpty() -> it.hasExternalParents(indirectParents)
-            else -> it.hasAllExternalParentsOf(kClasses, indirectParents = indirectParents,)
+            else -> it.hasAllExternalParentsOf(kClasses, indirectParents = indirectParents)
         }
     }
 
@@ -382,6 +382,6 @@ fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsOf(
     filterNot {
         when {
             kClasses.isEmpty() -> it.hasExternalParents(indirectParents)
-            else -> it.hasAllExternalParentsOf(kClasses, indirectParents = indirectParents,)
+            else -> it.hasAllExternalParentsOf(kClasses, indirectParents = indirectParents)
         }
     }

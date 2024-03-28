@@ -121,7 +121,7 @@ fun <T : KoInterfaceProvider> List<T>.withAllInterfacesNamed(
     filter {
         when {
             names.isEmpty() -> it.hasInterfaces(includeNested)
-            else -> it.hasInterfacesWithAllNames(names, includeNested = includeNested,)
+            else -> it.hasInterfacesWithAllNames(names, includeNested = includeNested)
         }
     }
 
@@ -154,7 +154,7 @@ fun <T : KoInterfaceProvider> List<T>.withoutAllInterfacesNamed(
         when {
             names.isEmpty() -> it.hasInterfaces(includeNested)
             else ->
-                it.hasInterfacesWithAllNames(names, includeNested = includeNested,)
+                it.hasInterfacesWithAllNames(names, includeNested = includeNested)
         }
     }
 
