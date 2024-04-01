@@ -45,7 +45,7 @@ fun <T : KoVariableProvider> List<T>.withVariableNamed(names: Collection<String>
     filter {
         when {
             names.isEmpty() -> it.hasVariables()
-            else -> it.hasVariableWithName(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasVariableWithName(names)
         }
     }
 
@@ -71,7 +71,7 @@ fun <T : KoVariableProvider> List<T>.withoutVariableNamed(names: Collection<Stri
     filterNot {
         when {
             names.isEmpty() -> it.hasVariables()
-            else -> it.hasVariableWithName(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasVariableWithName(names)
         }
     }
 
@@ -97,7 +97,7 @@ fun <T : KoVariableProvider> List<T>.withAllVariablesNamed(names: Collection<Str
     filter {
         when {
             names.isEmpty() -> it.hasVariables()
-            else -> it.hasVariablesWithAllNames(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasVariablesWithAllNames(names)
         }
     }
 
@@ -123,7 +123,7 @@ fun <T : KoVariableProvider> List<T>.withoutAllVariablesNamed(names: Collection<
     filterNot {
         when {
             names.isEmpty() -> it.hasVariables()
-            else -> it.hasVariablesWithAllNames(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasVariablesWithAllNames(names)
         }
     }
 

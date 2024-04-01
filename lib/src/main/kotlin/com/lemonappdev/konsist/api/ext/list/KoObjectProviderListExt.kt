@@ -55,7 +55,7 @@ fun <T : KoObjectProvider> List<T>.withObjectNamed(
     filter {
         when {
             names.isEmpty() -> it.hasObjects(includeNested)
-            else -> it.hasObjectWithName(names.first(), *names.drop(1).toTypedArray(), includeNested = includeNested)
+            else -> it.hasObjectWithName(names, includeNested = includeNested)
         }
     }
 
@@ -87,7 +87,7 @@ fun <T : KoObjectProvider> List<T>.withoutObjectNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasObjects(includeNested)
-            else -> it.hasObjectWithName(names.first(), *names.drop(1).toTypedArray(), includeNested = includeNested)
+            else -> it.hasObjectWithName(names, includeNested = includeNested)
         }
     }
 
@@ -119,12 +119,7 @@ fun <T : KoObjectProvider> List<T>.withAllObjectsNamed(
     filter {
         when {
             names.isEmpty() -> it.hasObjects(includeNested)
-            else ->
-                it.hasObjectsWithAllNames(
-                    names.first(),
-                    *names.drop(1).toTypedArray(),
-                    includeNested = includeNested,
-                )
+            else -> it.hasObjectsWithAllNames(names, includeNested = includeNested)
         }
     }
 
@@ -156,12 +151,7 @@ fun <T : KoObjectProvider> List<T>.withoutAllObjectsNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasObjects(includeNested)
-            else ->
-                it.hasObjectsWithAllNames(
-                    names.first(),
-                    *names.drop(1).toTypedArray(),
-                    includeNested = includeNested,
-                )
+            else -> it.hasObjectsWithAllNames(names, includeNested = includeNested)
         }
     }
 

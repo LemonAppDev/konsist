@@ -45,7 +45,7 @@ fun <T : KoTypeAliasProvider> List<T>.withTypeAliasNamed(names: Collection<Strin
     filter {
         when {
             names.isEmpty() -> it.hasTypeAliases()
-            else -> it.hasTypeAliasWithName(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasTypeAliasWithName(names)
         }
     }
 
@@ -71,7 +71,7 @@ fun <T : KoTypeAliasProvider> List<T>.withoutTypeAliasNamed(names: Collection<St
     filterNot {
         when {
             names.isEmpty() -> it.hasTypeAliases()
-            else -> it.hasTypeAliasWithName(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasTypeAliasWithName(names)
         }
     }
 
@@ -97,7 +97,7 @@ fun <T : KoTypeAliasProvider> List<T>.withAllTypeAliasesNamed(names: Collection<
     filter {
         when {
             names.isEmpty() -> it.hasTypeAliases()
-            else -> it.hasTypeAliasesWithAllNames(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasTypeAliasesWithAllNames(names)
         }
     }
 
@@ -123,7 +123,7 @@ fun <T : KoTypeAliasProvider> List<T>.withoutAllTypeAliasesNamed(names: Collecti
     filterNot {
         when {
             names.isEmpty() -> it.hasTypeAliases()
-            else -> it.hasTypeAliasesWithAllNames(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasTypeAliasesWithAllNames(names)
         }
     }
 

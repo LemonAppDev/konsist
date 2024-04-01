@@ -33,7 +33,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         vararg moduleNames: String,
     ): KoScope = scopeFromModules(setOf(moduleName) + moduleNames)
 
-    override fun scopeFromModules(moduleNames: Set<String>): KoScopeCore =
+    override fun scopeFromModules(moduleNames: Collection<String>): KoScopeCore =
         runBlocking {
             moduleNames
                 .flatMap { getFiles(it) }
@@ -58,7 +58,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         vararg sourceSetNames: String,
     ): KoScope = scopeFromSourceSets(setOf(sourceSetName) + sourceSetNames)
 
-    override fun scopeFromSourceSets(sourceSetNames: Set<String>): KoScope =
+    override fun scopeFromSourceSets(sourceSetNames: Collection<String>): KoScope =
         runBlocking {
             sourceSetNames
                 .flatMap { getFiles(sourceSetName = it) }
@@ -142,7 +142,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     /**
      * Get the scope of the paths obtaining the absolute path of it and, getting the files from that directory
      */
-    private fun getScopeFromPaths(paths: Set<String>): KoScope {
+    private fun getScopeFromPaths(paths: Collection<String>): KoScope {
         val filesFromPaths =
             paths
                 .map { getAbsolutePath(projectPath = it) }
@@ -172,7 +172,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         return getScopeFromPaths(paths = setOf(path) + paths)
     }
 
-    override fun scopeFromDirectories(paths: Set<String>): KoScope {
+    override fun scopeFromDirectories(paths: Collection<String>): KoScope {
         return getScopeFromPaths(paths = paths)
     }
 
@@ -186,7 +186,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         return KoScopeCore(koFiles = filesFromPaths)
     }
 
-    override fun scopeFromExternalDirectories(absolutePaths: Set<String>): KoScope {
+    override fun scopeFromExternalDirectories(absolutePaths: Collection<String>): KoScope {
         val filesFromPaths = absolutePaths.flatMap { getFilesFromDirectory(absolutePath = it) }
 
         return KoScopeCore(koFiles = filesFromPaths)
@@ -197,7 +197,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         vararg paths: String,
     ): KoScope = scopeFromFiles(setOf(path) + paths)
 
-    override fun scopeFromFiles(paths: Set<String>): KoScope {
+    override fun scopeFromFiles(paths: Collection<String>): KoScope {
         val files =
             paths
                 .map { getAbsolutePath(it) }

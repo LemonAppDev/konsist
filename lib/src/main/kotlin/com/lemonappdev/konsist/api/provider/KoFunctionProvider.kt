@@ -88,6 +88,20 @@ interface KoFunctionProvider : KoBaseProvider {
     ): Boolean
 
     /**
+     * Determines whether the declaration has at least one function whose name matches any of the specified names.
+     *
+     * @param names the names of the functions to check.
+     * @param includeNested Specifies whether to include nested functions in the check (optional, default is `true`).
+     * @param includeLocal Specifies whether to include local functions in the check (optional, default is `true`).
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasFunctionWithName(
+        names: Collection<String>,
+        includeNested: Boolean = true,
+        includeLocal: Boolean = true,
+    ): Boolean
+
+    /**
      * Determines whether the declaration has functions with all the specified names.
      *
      * @param name The name of the function to check.
@@ -99,6 +113,20 @@ interface KoFunctionProvider : KoBaseProvider {
     fun hasFunctionsWithAllNames(
         name: String,
         vararg names: String,
+        includeNested: Boolean = true,
+        includeLocal: Boolean = true,
+    ): Boolean
+
+    /**
+     * Determines whether the declaration has functions with all the specified names.
+     *
+     * @param names The names of the functions to check.
+     * @param includeNested Specifies whether to include nested functions in the check (optional, default is `true`).
+     * @param includeLocal Specifies whether to include local functions in the check (optional, default is `true`).
+     * @return `true` if there are declarations with all the specified names, `false` otherwise.
+     */
+    fun hasFunctionsWithAllNames(
+        names: Collection<String>,
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
     ): Boolean

@@ -241,11 +241,11 @@ class KoVariableProviderListExtTest {
         val name = "SampleName"
         val declaration1: KoVariableProvider =
             mockk {
-                every { hasVariableWithName(name) } returns true
+                every { hasVariableWithName(listOf(name)) } returns true
             }
         val declaration2: KoVariableProvider =
             mockk {
-                every { hasVariableWithName(name) } returns false
+                every { hasVariableWithName(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -263,11 +263,11 @@ class KoVariableProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoVariableProvider =
             mockk {
-                every { hasVariableWithName(name1, name2) } returns true
+                every { hasVariableWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoVariableProvider =
             mockk {
-                every { hasVariableWithName(name1, name2) } returns false
+                every { hasVariableWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -285,11 +285,11 @@ class KoVariableProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoVariableProvider =
             mockk {
-                every { hasVariableWithName(name1, name2) } returns true
+                every { hasVariableWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoVariableProvider =
             mockk {
-                every { hasVariableWithName(name1, name2) } returns false
+                every { hasVariableWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = listOf(name1, name2)
@@ -308,14 +308,14 @@ class KoVariableProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoVariableProvider =
             mockk {
-                every { hasVariableWithName(name1, name2) } returns true
+                every { hasVariableWithName(setOf(name1, name2)) } returns true
             }
         val declaration2: KoVariableProvider =
             mockk {
-                every { hasVariableWithName(name1, name2) } returns false
+                every { hasVariableWithName(setOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val names = listOf(name1, name2)
+        val names = setOf(name1, name2)
 
         // when
         val sut = declarations.withVariableNamed(names)
@@ -330,11 +330,11 @@ class KoVariableProviderListExtTest {
         val name = "SampleName"
         val declaration1: KoVariableProvider =
             mockk {
-                every { hasVariableWithName(name) } returns true
+                every { hasVariableWithName(listOf(name)) } returns true
             }
         val declaration2: KoVariableProvider =
             mockk {
-                every { hasVariableWithName(name) } returns false
+                every { hasVariableWithName(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -352,11 +352,11 @@ class KoVariableProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoVariableProvider =
             mockk {
-                every { hasVariableWithName(name1, name2) } returns true
+                every { hasVariableWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoVariableProvider =
             mockk {
-                every { hasVariableWithName(name1, name2) } returns false
+                every { hasVariableWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -374,11 +374,11 @@ class KoVariableProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoVariableProvider =
             mockk {
-                every { hasVariableWithName(name1, name2) } returns true
+                every { hasVariableWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoVariableProvider =
             mockk {
-                every { hasVariableWithName(name1, name2) } returns false
+                every { hasVariableWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = listOf(name1, name2)
@@ -397,11 +397,11 @@ class KoVariableProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoVariableProvider =
             mockk {
-                every { hasVariableWithName(name1, name2) } returns true
+                every { hasVariableWithName(setOf(name1, name2)) } returns true
             }
         val declaration2: KoVariableProvider =
             mockk {
-                every { hasVariableWithName(name1, name2) } returns false
+                every { hasVariableWithName(setOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = setOf(name1, name2)
@@ -419,11 +419,11 @@ class KoVariableProviderListExtTest {
         val name = "SampleName"
         val declaration1: KoVariableProvider =
             mockk {
-                every { hasVariablesWithAllNames(name) } returns true
+                every { hasVariablesWithAllNames(listOf(name)) } returns true
             }
         val declaration2: KoVariableProvider =
             mockk {
-                every { hasVariablesWithAllNames(name) } returns false
+                every { hasVariablesWithAllNames(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -441,11 +441,11 @@ class KoVariableProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoVariableProvider =
             mockk {
-                every { hasVariablesWithAllNames(name1, name2) } returns true
+                every { hasVariablesWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoVariableProvider =
             mockk {
-                every { hasVariablesWithAllNames(name1, name2) } returns false
+                every { hasVariablesWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -463,11 +463,11 @@ class KoVariableProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoVariableProvider =
             mockk {
-                every { hasVariablesWithAllNames(name1, name2) } returns true
+                every { hasVariablesWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoVariableProvider =
             mockk {
-                every { hasVariablesWithAllNames(name1, name2) } returns false
+                every { hasVariablesWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = listOf(name1, name2)
@@ -486,14 +486,14 @@ class KoVariableProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoVariableProvider =
             mockk {
-                every { hasVariablesWithAllNames(name1, name2) } returns true
+                every { hasVariablesWithAllNames(setOf(name1, name2)) } returns true
             }
         val declaration2: KoVariableProvider =
             mockk {
-                every { hasVariablesWithAllNames(name1, name2) } returns false
+                every { hasVariablesWithAllNames(setOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val names = listOf(name1, name2)
+        val names = setOf(name1, name2)
 
         // when
         val sut = declarations.withAllVariablesNamed(names)
@@ -508,11 +508,11 @@ class KoVariableProviderListExtTest {
         val name = "SampleName"
         val declaration1: KoVariableProvider =
             mockk {
-                every { hasVariablesWithAllNames(name) } returns true
+                every { hasVariablesWithAllNames(listOf(name)) } returns true
             }
         val declaration2: KoVariableProvider =
             mockk {
-                every { hasVariablesWithAllNames(name) } returns false
+                every { hasVariablesWithAllNames(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -530,11 +530,11 @@ class KoVariableProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoVariableProvider =
             mockk {
-                every { hasVariablesWithAllNames(name1, name2) } returns true
+                every { hasVariablesWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoVariableProvider =
             mockk {
-                every { hasVariablesWithAllNames(name1, name2) } returns false
+                every { hasVariablesWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -552,11 +552,11 @@ class KoVariableProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoVariableProvider =
             mockk {
-                every { hasVariablesWithAllNames(name1, name2) } returns true
+                every { hasVariablesWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoVariableProvider =
             mockk {
-                every { hasVariablesWithAllNames(name1, name2) } returns false
+                every { hasVariablesWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = listOf(name1, name2)
@@ -575,14 +575,14 @@ class KoVariableProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoVariableProvider =
             mockk {
-                every { hasVariablesWithAllNames(name1, name2) } returns true
+                every { hasVariablesWithAllNames(setOf(name1, name2)) } returns true
             }
         val declaration2: KoVariableProvider =
             mockk {
-                every { hasVariablesWithAllNames(name1, name2) } returns false
+                every { hasVariablesWithAllNames(setOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val names = listOf(name1, name2)
+        val names = setOf(name1, name2)
 
         // when
         val sut = declarations.withoutAllVariablesNamed(names)

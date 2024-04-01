@@ -70,6 +70,18 @@ interface KoInterfaceProvider : KoBaseProvider {
     ): Boolean
 
     /**
+     * Determines whether the declaration has at least one interface whose name matches any of the specified names.
+     *
+     * @param names the names of the interfaces to check.
+     * @param includeNested Specifies whether to include nested interfaces in the check (optional, default is `true`).
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasInterfaceWithName(
+        names: Collection<String>,
+        includeNested: Boolean = true,
+    ): Boolean
+
+    /**
      * Determines whether the declaration has interfaces with all the specified names.
      *
      * @param name The name of the interface to check.
@@ -80,6 +92,18 @@ interface KoInterfaceProvider : KoBaseProvider {
     fun hasInterfacesWithAllNames(
         name: String,
         vararg names: String,
+        includeNested: Boolean = true,
+    ): Boolean
+
+    /**
+     * Determines whether the declaration has interfaces with all the specified names.
+     *
+     * @param names The names of the interfaces to check.
+     * @param includeNested Specifies whether to include nested interfaces in the check (optional, default is `true`).
+     * @return `true` if there are declarations with all the specified names, `false` otherwise.
+     */
+    fun hasInterfacesWithAllNames(
+        names: Collection<String>,
         includeNested: Boolean = true,
     ): Boolean
 

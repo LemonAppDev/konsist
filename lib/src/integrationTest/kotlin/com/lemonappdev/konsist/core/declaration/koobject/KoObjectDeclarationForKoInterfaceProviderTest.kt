@@ -19,10 +19,17 @@ class KoObjectDeclarationForKoInterfaceProviderTest {
 
         // then
         assertSoftly(sut) {
-            interfaces() shouldBeEqualTo emptyList()
             hasInterfaces() shouldBeEqualTo false
+            hasInterfaceWithName(emptyList()) shouldBeEqualTo false
+            hasInterfaceWithName(emptySet()) shouldBeEqualTo false
+            hasInterfacesWithAllNames(emptyList()) shouldBeEqualTo false
+            hasInterfacesWithAllNames(emptySet()) shouldBeEqualTo false
             hasInterfaceWithName("SampleInterface") shouldBeEqualTo false
+            hasInterfaceWithName(listOf("SampleInterface")) shouldBeEqualTo false
+            hasInterfaceWithName(setOf("SampleInterface")) shouldBeEqualTo false
             hasInterfacesWithAllNames("SampleInterface1", "SampleInterface2") shouldBeEqualTo false
+            hasInterfacesWithAllNames(listOf("SampleInterface1", "SampleInterface2")) shouldBeEqualTo false
+            hasInterfacesWithAllNames(setOf("SampleInterface1", "SampleInterface2")) shouldBeEqualTo false
             hasInterface { it.name == "SampleInterface" } shouldBeEqualTo false
             hasAllInterfaces { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
         }
@@ -39,11 +46,25 @@ class KoObjectDeclarationForKoInterfaceProviderTest {
         // then
         assertSoftly(sut) {
             hasInterfaces() shouldBeEqualTo true
+            hasInterfaceWithName(emptyList()) shouldBeEqualTo true
+            hasInterfaceWithName(emptySet()) shouldBeEqualTo true
+            hasInterfacesWithAllNames(emptyList()) shouldBeEqualTo true
+            hasInterfacesWithAllNames(emptySet()) shouldBeEqualTo true
             hasInterfaceWithName("SampleInterface1") shouldBeEqualTo true
             hasInterfaceWithName("SampleInterface1", "OtherInterface") shouldBeEqualTo true
+            hasInterfaceWithName(listOf("SampleInterface1")) shouldBeEqualTo true
+            hasInterfaceWithName(listOf("SampleInterface1", "OtherInterface")) shouldBeEqualTo true
+            hasInterfaceWithName(setOf("SampleInterface1")) shouldBeEqualTo true
+            hasInterfaceWithName(setOf("SampleInterface1", "OtherInterface")) shouldBeEqualTo true
             hasInterfacesWithAllNames("SampleInterface1") shouldBeEqualTo true
             hasInterfacesWithAllNames("SampleInterface1", "SampleInterface2") shouldBeEqualTo true
             hasInterfacesWithAllNames("SampleInterface1", "OtherInterface") shouldBeEqualTo false
+            hasInterfacesWithAllNames(listOf("SampleInterface1")) shouldBeEqualTo true
+            hasInterfacesWithAllNames(listOf("SampleInterface1", "SampleInterface2")) shouldBeEqualTo true
+            hasInterfacesWithAllNames(listOf("SampleInterface1", "OtherInterface")) shouldBeEqualTo false
+            hasInterfacesWithAllNames(setOf("SampleInterface1")) shouldBeEqualTo true
+            hasInterfacesWithAllNames(setOf("SampleInterface1", "SampleInterface2")) shouldBeEqualTo true
+            hasInterfacesWithAllNames(setOf("SampleInterface1", "OtherInterface")) shouldBeEqualTo false
             hasInterface { it.name == "SampleInterface1" } shouldBeEqualTo true
             hasInterface { it.hasNameEndingWith("Interface1") } shouldBeEqualTo true
             hasAllInterfaces { it.hasNameStartingWith("Sample") } shouldBeEqualTo true

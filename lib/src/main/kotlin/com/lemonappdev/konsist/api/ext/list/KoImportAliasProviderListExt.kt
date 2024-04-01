@@ -46,7 +46,7 @@ fun <T : KoImportAliasProvider> List<T>.withImportAliasNamed(names: Collection<S
     filter {
         when {
             names.isEmpty() -> it.hasImportAliases()
-            else -> it.hasImportAliasWithName(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasImportAliasWithName(names)
         }
     }
 
@@ -72,7 +72,7 @@ fun <T : KoImportAliasProvider> List<T>.withoutImportAliasNamed(names: Collectio
     filterNot {
         when {
             names.isEmpty() -> it.hasImportAliases()
-            else -> it.hasImportAliasWithName(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasImportAliasWithName(names)
         }
     }
 
@@ -98,7 +98,7 @@ fun <T : KoImportAliasProvider> List<T>.withAllImportAliasesNamed(names: Collect
     filter {
         when {
             names.isEmpty() -> it.hasImportAliases()
-            else -> it.hasImportAliasesWithAllNames(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasImportAliasesWithAllNames(names)
         }
     }
 
@@ -124,7 +124,7 @@ fun <T : KoImportAliasProvider> List<T>.withoutAllImportAliasesNamed(names: Coll
     filterNot {
         when {
             names.isEmpty() -> it.hasImportAliases()
-            else -> it.hasImportAliasesWithAllNames(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasImportAliasesWithAllNames(names)
         }
     }
 

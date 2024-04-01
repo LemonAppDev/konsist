@@ -57,7 +57,7 @@ fun <T : KoPropertyProvider> List<T>.withPropertyNamed(
     filter {
         when {
             names.isEmpty() -> it.hasProperties(includeNested)
-            else -> it.hasPropertyWithName(names.first(), *names.drop(1).toTypedArray(), includeNested = includeNested)
+            else -> it.hasPropertyWithName(names, includeNested = includeNested)
         }
     }
 
@@ -89,7 +89,7 @@ fun <T : KoPropertyProvider> List<T>.withoutPropertyNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasProperties(includeNested)
-            else -> it.hasPropertyWithName(names.first(), *names.drop(1).toTypedArray(), includeNested = includeNested)
+            else -> it.hasPropertyWithName(names, includeNested = includeNested)
         }
     }
 
@@ -121,7 +121,7 @@ fun <T : KoPropertyProvider> List<T>.withAllPropertiesNamed(
     filter {
         when {
             names.isEmpty() -> it.hasProperties(includeNested)
-            else -> it.hasPropertiesWithAllNames(names.first(), *names.drop(1).toTypedArray(), includeNested = includeNested)
+            else -> it.hasPropertiesWithAllNames(names, includeNested = includeNested)
         }
     }
 
@@ -153,7 +153,7 @@ fun <T : KoPropertyProvider> List<T>.withoutAllPropertiesNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasProperties(includeNested)
-            else -> it.hasPropertiesWithAllNames(names.first(), *names.drop(1).toTypedArray(), includeNested = includeNested)
+            else -> it.hasPropertiesWithAllNames(names, includeNested = includeNested)
         }
     }
 

@@ -246,11 +246,11 @@ class KoFunctionProviderListExtTest {
         val name = "SampleName"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name) } returns true
+                every { hasFunctionWithName(listOf(name)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name) } returns false
+                every { hasFunctionWithName(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -268,11 +268,11 @@ class KoFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name1, name2) } returns true
+                every { hasFunctionWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name1, name2) } returns false
+                every { hasFunctionWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -290,11 +290,11 @@ class KoFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name1, name2) } returns true
+                every { hasFunctionWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name1, name2) } returns false
+                every { hasFunctionWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = listOf(name1, name2)
@@ -313,11 +313,11 @@ class KoFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name1, name2) } returns true
+                every { hasFunctionWithName(setOf(name1, name2)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name1, name2) } returns false
+                every { hasFunctionWithName(setOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = setOf(name1, name2)
@@ -335,11 +335,11 @@ class KoFunctionProviderListExtTest {
         val name = "SampleName"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name) } returns true
+                every { hasFunctionWithName(listOf(name)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name) } returns false
+                every { hasFunctionWithName(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -357,11 +357,11 @@ class KoFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name1, name2) } returns true
+                every { hasFunctionWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name1, name2) } returns false
+                every { hasFunctionWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -379,11 +379,11 @@ class KoFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name1, name2) } returns true
+                every { hasFunctionWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name1, name2) } returns false
+                every { hasFunctionWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = listOf(name1, name2)
@@ -402,11 +402,11 @@ class KoFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name1, name2) } returns true
+                every { hasFunctionWithName(setOf(name1, name2)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name1, name2) } returns false
+                every { hasFunctionWithName(setOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = setOf(name1, name2)
@@ -424,11 +424,11 @@ class KoFunctionProviderListExtTest {
         val name = "SampleName"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name) } returns true
+                every { hasFunctionsWithAllNames(listOf(name)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name) } returns false
+                every { hasFunctionsWithAllNames(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -446,11 +446,11 @@ class KoFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name1, name2) } returns true
+                every { hasFunctionsWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name1, name2) } returns false
+                every { hasFunctionsWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -468,11 +468,11 @@ class KoFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name1, name2) } returns true
+                every { hasFunctionsWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name1, name2) } returns false
+                every { hasFunctionsWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = listOf(name1, name2)
@@ -491,11 +491,11 @@ class KoFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name1, name2) } returns true
+                every { hasFunctionsWithAllNames(setOf(name1, name2)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name1, name2) } returns false
+                every { hasFunctionsWithAllNames(setOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = setOf(name1, name2)
@@ -513,11 +513,11 @@ class KoFunctionProviderListExtTest {
         val name = "SampleName"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name) } returns true
+                every { hasFunctionsWithAllNames(listOf(name)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name) } returns false
+                every { hasFunctionsWithAllNames(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -535,11 +535,11 @@ class KoFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name1, name2) } returns true
+                every { hasFunctionsWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name1, name2) } returns false
+                every { hasFunctionsWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -557,11 +557,11 @@ class KoFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name1, name2) } returns true
+                every { hasFunctionsWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name1, name2) } returns false
+                every { hasFunctionsWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = listOf(name1, name2)
@@ -580,11 +580,11 @@ class KoFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name1, name2) } returns true
+                every { hasFunctionsWithAllNames(setOf(name1, name2)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name1, name2) } returns false
+                every { hasFunctionsWithAllNames(setOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = setOf(name1, name2)

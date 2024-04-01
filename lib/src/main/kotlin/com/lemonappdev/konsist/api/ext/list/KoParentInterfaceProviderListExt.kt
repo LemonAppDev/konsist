@@ -68,12 +68,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaceNamed(
     filter {
         when {
             names.isEmpty() -> it.hasParentInterfaces(indirectParents = indirectParents)
-            else ->
-                it.hasParentInterfaceWithName(
-                    names.first(),
-                    *names.drop(1).toTypedArray(),
-                    indirectParents = indirectParents,
-                )
+            else -> it.hasParentInterfaceWithName(names, indirectParents = indirectParents)
         }
     }
 
@@ -105,12 +100,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaceNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasParentInterfaces(indirectParents = indirectParents)
-            else ->
-                it.hasParentInterfaceWithName(
-                    names.first(),
-                    *names.drop(1).toTypedArray(),
-                    indirectParents = indirectParents,
-                )
+            else -> it.hasParentInterfaceWithName(names, indirectParents = indirectParents)
         }
     }
 
@@ -142,12 +132,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesNamed(
     filter {
         when {
             names.isEmpty() -> it.hasParentInterfaces(indirectParents = indirectParents)
-            else ->
-                it.hasParentInterfacesWithAllNames(
-                    names.first(),
-                    *names.drop(1).toTypedArray(),
-                    indirectParents = indirectParents,
-                )
+            else -> it.hasParentInterfacesWithAllNames(names, indirectParents = indirectParents)
         }
     }
 
@@ -179,12 +164,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasParentInterfaces(indirectParents = indirectParents)
-            else ->
-                it.hasParentInterfacesWithAllNames(
-                    names.first(),
-                    *names.drop(1).toTypedArray(),
-                    indirectParents = indirectParents,
-                )
+            else -> it.hasParentInterfacesWithAllNames(names, indirectParents = indirectParents)
         }
     }
 
@@ -288,12 +268,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaceOf(
     filter {
         when {
             kClasses.isEmpty() -> it.hasParentInterfaces(indirectParents)
-            else ->
-                it.hasParentInterfaceOf(
-                    kClasses.first(),
-                    *kClasses.drop(1).toTypedArray(),
-                    indirectParents = indirectParents,
-                )
+            else -> it.hasParentInterfaceOf(kClasses, indirectParents = indirectParents)
         }
     }
 
@@ -325,12 +300,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaceOf(
     filterNot {
         when {
             kClasses.isEmpty() -> it.hasParentInterfaces(indirectParents)
-            else ->
-                it.hasParentInterfaceOf(
-                    kClasses.first(),
-                    *kClasses.drop(1).toTypedArray(),
-                    indirectParents = indirectParents,
-                )
+            else -> it.hasParentInterfaceOf(kClasses, indirectParents = indirectParents)
         }
     }
 
@@ -362,12 +332,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesOf(
     filter {
         when {
             kClasses.isEmpty() -> it.hasParentInterfaces(indirectParents)
-            else ->
-                it.hasAllParentInterfacesOf(
-                    kClasses.first(),
-                    *kClasses.drop(1).toTypedArray(),
-                    indirectParents = indirectParents,
-                )
+            else -> it.hasAllParentInterfacesOf(kClasses, indirectParents = indirectParents)
         }
     }
 
@@ -399,12 +364,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesOf(
     filterNot {
         when {
             kClasses.isEmpty() -> it.hasParentInterfaces(indirectParents)
-            else ->
-                it.hasAllParentInterfacesOf(
-                    kClasses.first(),
-                    *kClasses.drop(1).toTypedArray(),
-                    indirectParents = indirectParents,
-                )
+            else -> it.hasAllParentInterfacesOf(kClasses, indirectParents = indirectParents)
         }
     }
 

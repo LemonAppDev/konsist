@@ -48,7 +48,7 @@ fun <T : KoAnnotationProvider> List<T>.withAnnotationNamed(names: Collection<Str
     filter {
         when {
             names.isEmpty() -> it.hasAnnotations()
-            else -> it.hasAnnotationWithName(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasAnnotationWithName(names)
         }
     }
 
@@ -74,7 +74,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAnnotationNamed(names: Collection<
     filterNot {
         when {
             names.isEmpty() -> it.hasAnnotations()
-            else -> it.hasAnnotationWithName(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasAnnotationWithName(names)
         }
     }
 
@@ -100,7 +100,7 @@ fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsNamed(names: Collection
     filter {
         when {
             names.isEmpty() -> it.hasAnnotations()
-            else -> it.hasAnnotationsWithAllNames(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasAnnotationsWithAllNames(names)
         }
     }
 
@@ -126,7 +126,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotationsNamed(names: Collect
     filterNot {
         when {
             names.isEmpty() -> it.hasAnnotations()
-            else -> it.hasAnnotationsWithAllNames(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasAnnotationsWithAllNames(names)
         }
     }
 
@@ -206,7 +206,7 @@ fun <T : KoAnnotationProvider> List<T>.withAnnotationOf(kClasses: Collection<KCl
     filter {
         when {
             kClasses.isEmpty() -> it.hasAnnotations()
-            else -> it.hasAnnotationOf(kClasses.first(), *kClasses.drop(1).toTypedArray())
+            else -> it.hasAnnotationOf(kClasses)
         }
     }
 
@@ -232,7 +232,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAnnotationOf(kClasses: Collection<
     filterNot {
         when {
             kClasses.isEmpty() -> it.hasAnnotations()
-            else -> it.hasAnnotationOf(kClasses.first(), *kClasses.drop(1).toTypedArray())
+            else -> it.hasAnnotationOf(kClasses)
         }
     }
 
@@ -258,7 +258,7 @@ fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsOf(kClasses: Collection
     filter {
         when {
             kClasses.isEmpty() -> it.hasAnnotations()
-            else -> it.hasAllAnnotationsOf(kClasses.first(), *kClasses.drop(1).toTypedArray())
+            else -> it.hasAllAnnotationsOf(kClasses)
         }
     }
 
@@ -284,7 +284,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotationsOf(kClasses: Collect
     filterNot {
         when {
             kClasses.isEmpty() -> it.hasAnnotations()
-            else -> it.hasAllAnnotationsOf(kClasses.first(), *kClasses.drop(1).toTypedArray())
+            else -> it.hasAllAnnotationsOf(kClasses)
         }
     }
 

@@ -30,25 +30,37 @@ internal interface KoObjectProviderCore : KoObjectProvider, KoDeclarationProvide
         name: String,
         vararg names: String,
         includeNested: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasObjectWithName(listOf(name, *names), includeNested)
 
-        return givenNames.any {
-            objects(includeNested).any { koObject -> it == koObject.name }
+    override fun hasObjectWithName(
+        names: Collection<String>,
+        includeNested: Boolean,
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasObjects(includeNested)
+            else ->
+                names.any {
+                    objects(includeNested).any { koObject -> it == koObject.name }
+                }
         }
-    }
 
     override fun hasObjectsWithAllNames(
         name: String,
         vararg names: String,
         includeNested: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasObjectsWithAllNames(listOf(name, *names), includeNested)
 
-        return givenNames.all {
-            objects(includeNested).any { koObject -> it == koObject.name }
+    override fun hasObjectsWithAllNames(
+        names: Collection<String>,
+        includeNested: Boolean,
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasObjects(includeNested)
+            else ->
+                names.all {
+                    objects(includeNested).any { koObject -> it == koObject.name }
+                }
         }
-    }
 
     override fun hasObject(
         includeNested: Boolean,

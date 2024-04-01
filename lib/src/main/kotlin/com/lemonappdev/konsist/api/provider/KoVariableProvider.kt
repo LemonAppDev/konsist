@@ -44,6 +44,14 @@ interface KoVariableProvider : KoBaseProvider {
     ): Boolean
 
     /**
+     * Determines whether the declaration has at least one variable whose name matches any of the specified names.
+     *
+     * @param names the names of the variables to check.
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasVariableWithName(names: Collection<String>): Boolean
+
+    /**
      * Determines whether the declaration has variables with all the specified names.
      *
      * @param name The name of the variable to check.
@@ -54,6 +62,14 @@ interface KoVariableProvider : KoBaseProvider {
         name: String,
         vararg names: String,
     ): Boolean
+
+    /**
+     * Determines whether the declaration has variables with all the specified names.
+     *
+     * @param names The names of the variables to check.
+     * @return `true` if there are declarations with all the specified names, `false` otherwise.
+     */
+    fun hasVariablesWithAllNames(names: Collection<String>): Boolean
 
     /**
      * Determines whether the declaration has at least one variable that satisfies the provided predicate.

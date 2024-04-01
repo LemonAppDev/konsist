@@ -45,7 +45,7 @@ fun <T : KoLocalFunctionProvider> List<T>.withLocalFunctionNamed(names: Collecti
     filter {
         when {
             names.isEmpty() -> it.hasLocalFunctions()
-            else -> it.hasLocalFunctionWithName(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasLocalFunctionWithName(names)
         }
     }
 
@@ -71,7 +71,7 @@ fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunctionNamed(names: Colle
     filterNot {
         when {
             names.isEmpty() -> it.hasLocalFunctions()
-            else -> it.hasLocalFunctionWithName(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasLocalFunctionWithName(names)
         }
     }
 
@@ -97,7 +97,7 @@ fun <T : KoLocalFunctionProvider> List<T>.withAllLocalFunctionsNamed(names: Coll
     filter {
         when {
             names.isEmpty() -> it.hasLocalFunctions()
-            else -> it.hasLocalFunctionsWithAllNames(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasLocalFunctionsWithAllNames(names)
         }
     }
 
@@ -123,7 +123,7 @@ fun <T : KoLocalFunctionProvider> List<T>.withoutAllLocalFunctionsNamed(names: C
     filterNot {
         when {
             names.isEmpty() -> it.hasLocalFunctions()
-            else -> it.hasLocalFunctionsWithAllNames(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasLocalFunctionsWithAllNames(names)
         }
     }
 

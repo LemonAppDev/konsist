@@ -45,24 +45,30 @@ internal interface KoTypeAliasProviderCore :
     override fun hasTypeAliasWithName(
         name: String,
         vararg names: String,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasTypeAliasWithName(listOf(name, *names))
 
-        return givenNames.any {
-            typeAliases.any { typeAlias -> it == typeAlias.name }
+    override fun hasTypeAliasWithName(names: Collection<String>): Boolean =
+        when {
+            names.isEmpty() -> hasTypeAliases()
+            else ->
+                names.any {
+                    typeAliases.any { typeAlias -> it == typeAlias.name }
+                }
         }
-    }
 
     override fun hasTypeAliasesWithAllNames(
         name: String,
         vararg names: String,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasTypeAliasesWithAllNames(listOf(name, *names))
 
-        return givenNames.all {
-            typeAliases.any { typeAlias -> it == typeAlias.name }
+    override fun hasTypeAliasesWithAllNames(names: Collection<String>): Boolean =
+        when {
+            names.isEmpty() -> hasTypeAliases()
+            else ->
+                names.all {
+                    typeAliases.any { typeAlias -> it == typeAlias.name }
+                }
         }
-    }
 
     override fun hasTypeAlias(predicate: (KoTypeAliasDeclaration) -> Boolean): Boolean = typeAliases.any(predicate)
 
