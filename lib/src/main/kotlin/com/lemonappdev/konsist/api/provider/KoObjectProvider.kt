@@ -70,6 +70,18 @@ interface KoObjectProvider : KoBaseProvider {
     ): Boolean
 
     /**
+     * Determines whether the declaration has at least one object whose name matches any of the specified names.
+     *
+     * @param names the names of the objects to check.
+     * @param includeNested Specifies whether to include nested objects in the check (optional, default is `true`).
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasObjectWithName(
+        names: Collection<String>,
+        includeNested: Boolean = true,
+    ): Boolean
+
+    /**
      * Determines whether the declaration has objects with all the specified names.
      *
      * @param name The name of the object to check.
@@ -80,6 +92,18 @@ interface KoObjectProvider : KoBaseProvider {
     fun hasObjectsWithAllNames(
         name: String,
         vararg names: String,
+        includeNested: Boolean = true,
+    ): Boolean
+
+    /**
+     * Determines whether the declaration has objects with all the specified names.
+     *
+     * @param names The names of the objects to check.
+     * @param includeNested Specifies whether to include nested objects in the check (optional, default is `true`).
+     * @return `true` if there are declarations with all the specified names, `false` otherwise.
+     */
+    fun hasObjectsWithAllNames(
+        names: Collection<String>,
         includeNested: Boolean = true,
     ): Boolean
 

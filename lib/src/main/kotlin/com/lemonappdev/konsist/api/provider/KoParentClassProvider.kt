@@ -108,6 +108,19 @@ interface KoParentClassProvider : KoBaseProvider {
     ): Boolean
 
     /**
+     * Determines whether the declaration has a parent class whose name matches any of the specified names.
+     * If `indirectParents` is set to `true`, it verifies if there's at least one parent class that matches.
+     *
+     * @param names the names of the parent classes to check.
+     * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasParentClassWithName(
+        names: Collection<String>,
+        indirectParents: Boolean = false,
+    ): Boolean
+
+    /**
      * Determines whether the declaration has parent classes with all the specified names.
      *
      * @param name The name of the parent class to check.
@@ -118,6 +131,18 @@ interface KoParentClassProvider : KoBaseProvider {
     fun hasParentClassesWithAllNames(
         name: String,
         vararg names: String,
+        indirectParents: Boolean = false,
+    ): Boolean
+
+    /**
+     * Determines whether the declaration has parent classes with all the specified names.
+     *
+     * @param names The names of the parent classes to check.
+     * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
+     * @return `true` if there are declarations with all the specified names, `false` otherwise.
+     */
+    fun hasParentClassesWithAllNames(
+        names: Collection<String>,
         indirectParents: Boolean = false,
     ): Boolean
 
@@ -137,6 +162,19 @@ interface KoParentClassProvider : KoBaseProvider {
     ): Boolean
 
     /**
+     * Determines whether the declaration has a parent class of the specified Kotlin class.
+     * If `indirectParents` is set to `true`, it verifies if there's at least one parent class that matches.
+     *
+     * @param names the `KClass` types of the parent classes to check.
+     * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasParentClassOf(
+        names: Collection<KClass<*>>,
+        indirectParents: Boolean = false,
+    ): Boolean
+
+    /**
      * Determines whether the declaration has parent classes with all the specified `KClass` type.
      *
      * @param name the `KClass` type of the parent class to check.
@@ -147,6 +185,18 @@ interface KoParentClassProvider : KoBaseProvider {
     fun hasAllParentClassesOf(
         name: KClass<*>,
         vararg names: KClass<*>,
+        indirectParents: Boolean = false,
+    ): Boolean
+
+    /**
+     * Determines whether the declaration has parent classes with all the specified `KClass` type.
+     *
+     * @param names the `KClass` types of the parent classes to check.
+     * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
+     * @return `true` if the declaration has parent classes of all the specified `KClass` types, `false` otherwise.
+     */
+    fun hasAllParentClassesOf(
+        names: Collection<KClass<*>>,
         indirectParents: Boolean = false,
     ): Boolean
 }

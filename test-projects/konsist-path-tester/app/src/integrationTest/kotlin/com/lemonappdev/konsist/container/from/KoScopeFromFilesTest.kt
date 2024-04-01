@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test
 class KoScopeFromFilesTest {
 
     @Test
-    fun `scopeFromFiles`() {
+    fun `scopeFromFiles(set)`() {
         // given
         val files = setOf(
             "/app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt".toOsSeparator(),
@@ -32,14 +32,32 @@ class KoScopeFromFilesTest {
     }
 
     @Test
-    fun `scopeFromFiles throws exception if path does not exist`() {
+    fun `scopeFromFiles(list)`() {
+        // given
+        val files = listOf(
+            "/app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt".toOsSeparator(),
+            "/app/src/main/kotlin/com/lemonappdev/sample/data/AppDataClass.kt".toOsSeparator()
+        )
+        val sut = Konsist.scopeFromFiles(files)
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$appMainSourceSetDirectory/sample/AppClass.kt",
+                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
+            ).toOsSeparator(),
+        )
+    }
+
+    @Test
+    fun `scopeFromFiles(set) throws exception if path does not exist`() {
         // given
         val files = setOf(
             "app/src/main/kotlin/com/lemonappdev/NonExistingTest.kt".toOsSeparator()
         )
 
-        val func =
-            { Konsist.scopeFromFiles(files) }
+        val func = { Konsist.scopeFromFiles(files) }
 
         // then
         val message = "File does not exist: $appMainSourceSetDirectory${fileSeparator}NonExistingTest.kt"
@@ -47,9 +65,37 @@ class KoScopeFromFilesTest {
     }
 
     @Test
-    fun `scopeFromFiles throws exception if path points to directory`() {
+    fun `scopeFromFiles(list) throws exception if path does not exist`() {
+        // given
+        val files = listOf(
+            "app/src/main/kotlin/com/lemonappdev/NonExistingTest.kt".toOsSeparator()
+        )
+
+        val func = { Konsist.scopeFromFiles(files) }
+
+        // then
+        val message = "File does not exist: $appMainSourceSetDirectory${fileSeparator}NonExistingTest.kt"
+        func shouldThrow IllegalArgumentException::class withMessage message
+    }
+
+    @Test
+    fun `scopeFromFiles(set) throws exception if path points to directory`() {
         // given
         val files = setOf(
+            "app/src/main/kotlin/com/lemonappdev/sample".toOsSeparator()
+        )
+
+        val func = { Konsist.scopeFromFiles(files) }
+
+        // then
+        val message = "Path is a directory, but should be a file: $appMainSourceSetDirectory${fileSeparator}sample"
+        func shouldThrow IllegalArgumentException::class withMessage message
+    }
+
+    @Test
+    fun `scopeFromFiles(list) throws exception if path points to directory`() {
+        // given
+        val files = listOf(
             "app/src/main/kotlin/com/lemonappdev/sample".toOsSeparator()
         )
 

@@ -20,24 +20,30 @@ internal interface KoVariableProviderCore :
     override fun hasVariableWithName(
         name: String,
         vararg names: String,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasVariableWithName(listOf(name, *names))
 
-        return givenNames.any {
-            variables.any { variable -> it == variable.name }
+    override fun hasVariableWithName(names: Collection<String>): Boolean =
+        when {
+            names.isEmpty() -> hasVariables()
+            else ->
+                names.any {
+                    variables.any { variable -> it == variable.name }
+                }
         }
-    }
 
     override fun hasVariablesWithAllNames(
         name: String,
         vararg names: String,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasVariablesWithAllNames(listOf(name, *names))
 
-        return givenNames.all {
-            variables.any { variable -> it == variable.name }
+    override fun hasVariablesWithAllNames(names: Collection<String>): Boolean =
+        when {
+            names.isEmpty() -> hasVariables()
+            else ->
+                names.all {
+                    variables.any { variable -> it == variable.name }
+                }
         }
-    }
 
     override fun hasVariable(predicate: (KoVariableDeclaration) -> Boolean): Boolean = variables.any(predicate)
 

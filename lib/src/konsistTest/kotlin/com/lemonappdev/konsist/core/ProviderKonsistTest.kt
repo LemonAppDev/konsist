@@ -3,6 +3,8 @@ package com.lemonappdev.konsist.core
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.returnTypes
 import com.lemonappdev.konsist.api.ext.list.types
+import com.lemonappdev.konsist.api.ext.list.withParameter
+import com.lemonappdev.konsist.api.ext.list.withoutAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withoutName
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
@@ -60,5 +62,14 @@ class ProviderKonsistTest {
 
                 it.hasParentWithName(name, indirectParents = true)
             }
+    }
+
+    @Test
+    fun `every method with vararg parameter calls the method with the same name and list parameter`() {
+        providerPackageScope
+            .functions()
+            .withoutAnnotationOf(Deprecated::class)
+            .withParameter { it.hasVarArgModifier }
+            .assertTrue { it.hasExpressionBody && it.text.contains("${it.name}(listOf(") }
     }
 }

@@ -33,9 +33,20 @@ fun <T : KoParametersProvider> List<T>.withoutParameters(): List<T> = filterNot 
 fun <T : KoParametersProvider> List<T>.withParameterNamed(
     name: String,
     vararg names: String,
-): List<T> =
+): List<T> = withParameterNamed(listOf(name, *names))
+
+/**
+ * List containing declarations that have at least one parameter with the specified name(s).
+ *
+ * @param names The names of additional parameters to include.
+ * @return A list containing declarations with at least one of the specified parameter(s).
+ */
+fun <T : KoParametersProvider> List<T>.withParameterNamed(names: Collection<String>): List<T> =
     filter {
-        it.hasParameterWithName(name, *names)
+        when {
+            names.isEmpty() -> it.hasParameters()
+            else -> it.hasParameterWithName(names)
+        }
     }
 
 /**
@@ -48,9 +59,20 @@ fun <T : KoParametersProvider> List<T>.withParameterNamed(
 fun <T : KoParametersProvider> List<T>.withoutParameterNamed(
     name: String,
     vararg names: String,
-): List<T> =
+): List<T> = withoutParameterNamed(listOf(name, *names))
+
+/**
+ * List containing declarations without any of specified parameters.
+ *
+ * @param names The names of additional parameters to exclude.
+ * @return A list containing declarations without any of specified parameters.
+ */
+fun <T : KoParametersProvider> List<T>.withoutParameterNamed(names: Collection<String>): List<T> =
     filterNot {
-        it.hasParameterWithName(name, *names)
+        when {
+            names.isEmpty() -> it.hasParameters()
+            else -> it.hasParameterWithName(names)
+        }
     }
 
 /**
@@ -63,9 +85,20 @@ fun <T : KoParametersProvider> List<T>.withoutParameterNamed(
 fun <T : KoParametersProvider> List<T>.withAllParametersNamed(
     name: String,
     vararg names: String,
-): List<T> =
+): List<T> = withAllParametersNamed(listOf(name, *names))
+
+/**
+ * List containing declarations that have all specified parameters.
+ *
+ * @param names The name(s) of the parameter(s) to include.
+ * @return A list containing declarations with all specified parameter(s).
+ */
+fun <T : KoParametersProvider> List<T>.withAllParametersNamed(names: Collection<String>): List<T> =
     filter {
-        it.hasParametersWithAllNames(name, *names)
+        when {
+            names.isEmpty() -> it.hasParameters()
+            else -> it.hasParametersWithAllNames(names)
+        }
     }
 
 /**
@@ -78,9 +111,20 @@ fun <T : KoParametersProvider> List<T>.withAllParametersNamed(
 fun <T : KoParametersProvider> List<T>.withoutAllParametersNamed(
     name: String,
     vararg names: String,
-): List<T> =
+): List<T> = withoutAllParametersNamed(listOf(name, *names))
+
+/**
+ * List containing declarations without all specified parameters.
+ *
+ * @param names The name(s) of the parameter(s) to exclude.
+ * @return A list containing declarations without all specified parameter(s).
+ */
+fun <T : KoParametersProvider> List<T>.withoutAllParametersNamed(names: Collection<String>): List<T> =
     filterNot {
-        it.hasParametersWithAllNames(name, *names)
+        when {
+            names.isEmpty() -> it.hasParameters()
+            else -> it.hasParametersWithAllNames(names)
+        }
     }
 
 /**

@@ -104,25 +104,37 @@ internal interface KoParentProviderCore :
         name: String,
         vararg names: String,
         indirectParents: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasParentWithName(listOf(name, *names), indirectParents)
 
-        return givenNames.any {
-            parents(indirectParents).any { parent -> it == parent.name }
+    override fun hasParentWithName(
+        names: Collection<String>,
+        indirectParents: Boolean,
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasParents(indirectParents)
+            else ->
+                names.any {
+                    parents(indirectParents).any { parent -> it == parent.name }
+                }
         }
-    }
 
     override fun hasParentsWithAllNames(
         name: String,
         vararg names: String,
         indirectParents: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasParentsWithAllNames(listOf(name, *names), indirectParents)
 
-        return givenNames.all {
-            parents(indirectParents).any { parent -> it == parent.name }
+    override fun hasParentsWithAllNames(
+        names: Collection<String>,
+        indirectParents: Boolean,
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasParents(indirectParents)
+            else ->
+                names.all {
+                    parents(indirectParents).any { parent -> it == parent.name }
+                }
         }
-    }
 
     override fun hasParent(
         indirectParents: Boolean,
@@ -138,11 +150,29 @@ internal interface KoParentProviderCore :
         name: KClass<*>,
         vararg names: KClass<*>,
         indirectParents: Boolean,
-    ): Boolean = checkIfParentOf(name, parents(indirectParents)) || names.any { checkIfParentOf(it, parents(indirectParents)) }
+    ): Boolean = hasParentOf(listOf(name, *names), indirectParents)
+
+    override fun hasParentOf(
+        names: Collection<KClass<*>>,
+        indirectParents: Boolean,
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasParents(indirectParents)
+            else -> names.any { checkIfParentOf(it, parents(indirectParents)) }
+        }
 
     override fun hasAllParentsOf(
         name: KClass<*>,
         vararg names: KClass<*>,
         indirectParents: Boolean,
-    ): Boolean = checkIfParentOf(name, parents(indirectParents)) && names.all { checkIfParentOf(it, parents(indirectParents)) }
+    ): Boolean = hasAllParentsOf(listOf(name, *names), indirectParents)
+
+    override fun hasAllParentsOf(
+        names: Collection<KClass<*>>,
+        indirectParents: Boolean,
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasParents(indirectParents)
+            else -> names.all { checkIfParentOf(it, parents(indirectParents)) }
+        }
 }

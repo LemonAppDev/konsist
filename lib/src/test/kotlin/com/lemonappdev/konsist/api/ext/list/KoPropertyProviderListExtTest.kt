@@ -57,6 +57,86 @@ class KoPropertyProviderListExtTest {
     }
 
     @Test
+    fun `withPropertyNamed(empty list) returns declaration with any property`() {
+        // given
+        val declaration1: KoPropertyProvider =
+            mockk {
+                every { hasProperties() } returns true
+            }
+        val declaration2: KoPropertyProvider =
+            mockk {
+                every { hasProperties() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withPropertyNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withPropertyNamed(empty set) returns declaration with any property`() {
+        // given
+        val declaration1: KoPropertyProvider =
+            mockk {
+                every { hasProperties() } returns true
+            }
+        val declaration2: KoPropertyProvider =
+            mockk {
+                every { hasProperties() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withPropertyNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllPropertiesNamed(empty list) returns declaration with any property`() {
+        // given
+        val declaration1: KoPropertyProvider =
+            mockk {
+                every { hasProperties() } returns true
+            }
+        val declaration2: KoPropertyProvider =
+            mockk {
+                every { hasProperties() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllPropertiesNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllPropertiesNamed(empty set) returns declaration with any property`() {
+        // given
+        val declaration1: KoPropertyProvider =
+            mockk {
+                every { hasProperties() } returns true
+            }
+        val declaration2: KoPropertyProvider =
+            mockk {
+                every { hasProperties() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllPropertiesNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutProperties() returns declaration without any property`() {
         // given
         val declaration1: KoPropertyProvider =
@@ -77,16 +157,96 @@ class KoPropertyProviderListExtTest {
     }
 
     @Test
+    fun `withoutPropertyNamed(empty list) returns declaration without any property`() {
+        // given
+        val declaration1: KoPropertyProvider =
+            mockk {
+                every { hasProperties() } returns true
+            }
+        val declaration2: KoPropertyProvider =
+            mockk {
+                every { hasProperties() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutPropertyNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutPropertyNamed(empty set) returns declaration without any property`() {
+        // given
+        val declaration1: KoPropertyProvider =
+            mockk {
+                every { hasProperties() } returns true
+            }
+        val declaration2: KoPropertyProvider =
+            mockk {
+                every { hasProperties() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutPropertyNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllPropertiesNamed(empty list) returns declaration without any property`() {
+        // given
+        val declaration1: KoPropertyProvider =
+            mockk {
+                every { hasProperties() } returns true
+            }
+        val declaration2: KoPropertyProvider =
+            mockk {
+                every { hasProperties() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllPropertiesNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllPropertiesNamed(empty set) returns declaration without any property`() {
+        // given
+        val declaration1: KoPropertyProvider =
+            mockk {
+                every { hasProperties() } returns true
+            }
+        val declaration2: KoPropertyProvider =
+            mockk {
+                every { hasProperties() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllPropertiesNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withPropertyNamed(name) returns declaration with given property`() {
         // given
         val name = "SampleName"
         val declaration1: KoPropertyProvider =
             mockk {
-                every { hasPropertyWithName(name) } returns true
+                every { hasPropertyWithName(listOf(name)) } returns true
             }
         val declaration2: KoPropertyProvider =
             mockk {
-                every { hasPropertyWithName(name) } returns false
+                every { hasPropertyWithName(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -104,11 +264,11 @@ class KoPropertyProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoPropertyProvider =
             mockk {
-                every { hasPropertyWithName(name1, name2) } returns true
+                every { hasPropertyWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoPropertyProvider =
             mockk {
-                every { hasPropertyWithName(name1, name2) } returns false
+                every { hasPropertyWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -120,16 +280,62 @@ class KoPropertyProviderListExtTest {
     }
 
     @Test
+    fun `withPropertyNamed(list of String) returns declaration with any of given properties`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoPropertyProvider =
+            mockk {
+                every { hasPropertyWithName(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoPropertyProvider =
+            mockk {
+                every { hasPropertyWithName(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withPropertyNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withPropertyNamed(set of String) returns declaration with any of given properties`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoPropertyProvider =
+            mockk {
+                every { hasPropertyWithName(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoPropertyProvider =
+            mockk {
+                every { hasPropertyWithName(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withPropertyNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutPropertyNamed(name) returns declaration without given property`() {
         // given
         val name = "SampleName"
         val declaration1: KoPropertyProvider =
             mockk {
-                every { hasPropertyWithName(name) } returns true
+                every { hasPropertyWithName(listOf(name)) } returns true
             }
         val declaration2: KoPropertyProvider =
             mockk {
-                every { hasPropertyWithName(name) } returns false
+                every { hasPropertyWithName(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -147,11 +353,11 @@ class KoPropertyProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoPropertyProvider =
             mockk {
-                every { hasPropertyWithName(name1, name2) } returns true
+                every { hasPropertyWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoPropertyProvider =
             mockk {
-                every { hasPropertyWithName(name1, name2) } returns false
+                every { hasPropertyWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -163,16 +369,62 @@ class KoPropertyProviderListExtTest {
     }
 
     @Test
+    fun `withoutPropertyNamed(list of String) returns declaration without any of given properties`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoPropertyProvider =
+            mockk {
+                every { hasPropertyWithName(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoPropertyProvider =
+            mockk {
+                every { hasPropertyWithName(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutPropertyNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutPropertyNamed(set of String) returns declaration without any of given properties`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoPropertyProvider =
+            mockk {
+                every { hasPropertyWithName(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoPropertyProvider =
+            mockk {
+                every { hasPropertyWithName(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutPropertyNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withAllPropertiesNamed(name) returns declaration with given property`() {
         // given
         val name = "SampleName"
         val declaration1: KoPropertyProvider =
             mockk {
-                every { hasPropertiesWithAllNames(name) } returns true
+                every { hasPropertiesWithAllNames(listOf(name)) } returns true
             }
         val declaration2: KoPropertyProvider =
             mockk {
-                every { hasPropertiesWithAllNames(name) } returns false
+                every { hasPropertiesWithAllNames(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -190,11 +442,11 @@ class KoPropertyProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoPropertyProvider =
             mockk {
-                every { hasPropertiesWithAllNames(name1, name2) } returns true
+                every { hasPropertiesWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoPropertyProvider =
             mockk {
-                every { hasPropertiesWithAllNames(name1, name2) } returns false
+                every { hasPropertiesWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -206,16 +458,62 @@ class KoPropertyProviderListExtTest {
     }
 
     @Test
+    fun `withAllPropertiesNamed(list of String) returns declaration with all given properties`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoPropertyProvider =
+            mockk {
+                every { hasPropertiesWithAllNames(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoPropertyProvider =
+            mockk {
+                every { hasPropertiesWithAllNames(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllPropertiesNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllPropertiesNamed(set of String) returns declaration with all given properties`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoPropertyProvider =
+            mockk {
+                every { hasPropertiesWithAllNames(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoPropertyProvider =
+            mockk {
+                every { hasPropertiesWithAllNames(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllPropertiesNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllPropertiesNamed(name) returns declaration without given property`() {
         // given
         val name = "SampleName"
         val declaration1: KoPropertyProvider =
             mockk {
-                every { hasPropertiesWithAllNames(name) } returns true
+                every { hasPropertiesWithAllNames(listOf(name)) } returns true
             }
         val declaration2: KoPropertyProvider =
             mockk {
-                every { hasPropertiesWithAllNames(name) } returns false
+                every { hasPropertiesWithAllNames(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -233,16 +531,62 @@ class KoPropertyProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoPropertyProvider =
             mockk {
-                every { hasPropertiesWithAllNames(name1, name2) } returns true
+                every { hasPropertiesWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoPropertyProvider =
             mockk {
-                every { hasPropertiesWithAllNames(name1, name2) } returns false
+                every { hasPropertiesWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutAllPropertiesNamed(name1, name2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllPropertiesNamed(list of String) returns declaration without all of given properties`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoPropertyProvider =
+            mockk {
+                every { hasPropertiesWithAllNames(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoPropertyProvider =
+            mockk {
+                every { hasPropertiesWithAllNames(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllPropertiesNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllPropertiesNamed(set of String) returns declaration without all of given properties`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoPropertyProvider =
+            mockk {
+                every { hasPropertiesWithAllNames(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoPropertyProvider =
+            mockk {
+                every { hasPropertiesWithAllNames(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllPropertiesNamed(names)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

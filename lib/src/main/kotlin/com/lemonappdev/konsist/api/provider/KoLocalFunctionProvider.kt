@@ -53,6 +53,14 @@ interface KoLocalFunctionProvider : KoBaseProvider {
     ): Boolean
 
     /**
+     * Determines whether the declaration has at least one local function whose name matches any of the specified names.
+     *
+     * @param names the names of the local functions to check.
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasLocalFunctionWithName(names: Collection<String>): Boolean
+
+    /**
      * Determines whether the declaration has local functions with all the specified names.
      *
      * @param name The name of the local function to check.
@@ -63,6 +71,14 @@ interface KoLocalFunctionProvider : KoBaseProvider {
         name: String,
         vararg names: String,
     ): Boolean
+
+    /**
+     * Determines whether the declaration has local functions with all the specified names.
+     *
+     * @param names The names of the local functions to check.
+     * @return `true` if there are declarations with all the specified names, `false` otherwise.
+     */
+    fun hasLocalFunctionsWithAllNames(names: Collection<String>): Boolean
 
     /**
      * Determines whether the declaration has at least one local function that satisfies the provided predicate.

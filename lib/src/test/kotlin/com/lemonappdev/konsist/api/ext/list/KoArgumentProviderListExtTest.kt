@@ -56,6 +56,86 @@ class KoArgumentProviderListExtTest {
     }
 
     @Test
+    fun `withArgumentNamed(empty list) returns declaration with any argument`() {
+        // given
+        val declaration1: KoArgumentProvider =
+            mockk {
+                every { hasArguments() } returns true
+            }
+        val declaration2: KoArgumentProvider =
+            mockk {
+                every { hasArguments() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withArgumentNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withArgumentNamed(empty set) returns declaration with any argument`() {
+        // given
+        val declaration1: KoArgumentProvider =
+            mockk {
+                every { hasArguments() } returns true
+            }
+        val declaration2: KoArgumentProvider =
+            mockk {
+                every { hasArguments() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withArgumentNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllArgumentsNamed(empty list) returns declaration with any argument`() {
+        // given
+        val declaration1: KoArgumentProvider =
+            mockk {
+                every { hasArguments() } returns true
+            }
+        val declaration2: KoArgumentProvider =
+            mockk {
+                every { hasArguments() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllArgumentsNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllArgumentsNamed(empty set) returns declaration with any argument`() {
+        // given
+        val declaration1: KoArgumentProvider =
+            mockk {
+                every { hasArguments() } returns true
+            }
+        val declaration2: KoArgumentProvider =
+            mockk {
+                every { hasArguments() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllArgumentsNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutArguments() returns declaration without any argument`() {
         // given
         val declaration1: KoArgumentProvider =
@@ -76,16 +156,96 @@ class KoArgumentProviderListExtTest {
     }
 
     @Test
+    fun `withoutArgumentNamed(empty list) returns declaration without any argument`() {
+        // given
+        val declaration1: KoArgumentProvider =
+            mockk {
+                every { hasArguments() } returns true
+            }
+        val declaration2: KoArgumentProvider =
+            mockk {
+                every { hasArguments() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutArgumentNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutArgumentNamed(empty set) returns declaration without any argument`() {
+        // given
+        val declaration1: KoArgumentProvider =
+            mockk {
+                every { hasArguments() } returns true
+            }
+        val declaration2: KoArgumentProvider =
+            mockk {
+                every { hasArguments() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutArgumentNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllArgumentsNamed(empty list) returns declaration without any argument`() {
+        // given
+        val declaration1: KoArgumentProvider =
+            mockk {
+                every { hasArguments() } returns true
+            }
+        val declaration2: KoArgumentProvider =
+            mockk {
+                every { hasArguments() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllArgumentsNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllArgumentsNamed(empty set) returns declaration without any argument`() {
+        // given
+        val declaration1: KoArgumentProvider =
+            mockk {
+                every { hasArguments() } returns true
+            }
+        val declaration2: KoArgumentProvider =
+            mockk {
+                every { hasArguments() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllArgumentsNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withArgumentNamed(name) returns declaration with given argument`() {
         // given
         val name = "SampleName"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name) } returns true
+                every { hasArgumentWithName(listOf(name)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name) } returns false
+                every { hasArgumentWithName(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -103,11 +263,11 @@ class KoArgumentProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name1, name2) } returns true
+                every { hasArgumentWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name1, name2) } returns false
+                every { hasArgumentWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -119,16 +279,62 @@ class KoArgumentProviderListExtTest {
     }
 
     @Test
+    fun `withArgumentNamed(list of String) returns declaration with any of given arguments`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoArgumentProvider =
+            mockk {
+                every { hasArgumentWithName(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoArgumentProvider =
+            mockk {
+                every { hasArgumentWithName(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withArgumentNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withArgumentNamed(set of String) returns declaration with any of given arguments`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoArgumentProvider =
+            mockk {
+                every { hasArgumentWithName(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoArgumentProvider =
+            mockk {
+                every { hasArgumentWithName(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withArgumentNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutArgumentNamed(name) returns declaration without given argument`() {
         // given
         val name = "SampleName"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name) } returns true
+                every { hasArgumentWithName(listOf(name)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name) } returns false
+                every { hasArgumentWithName(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -146,11 +352,11 @@ class KoArgumentProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name1, name2) } returns true
+                every { hasArgumentWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name1, name2) } returns false
+                every { hasArgumentWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -162,16 +368,62 @@ class KoArgumentProviderListExtTest {
     }
 
     @Test
+    fun `withoutArgumentNamed(list of String) returns declaration without any of given arguments`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoArgumentProvider =
+            mockk {
+                every { hasArgumentWithName(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoArgumentProvider =
+            mockk {
+                every { hasArgumentWithName(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutArgumentNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutArgumentNamed(set of String) returns declaration without any of given arguments`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoArgumentProvider =
+            mockk {
+                every { hasArgumentWithName(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoArgumentProvider =
+            mockk {
+                every { hasArgumentWithName(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutArgumentNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withAllArgumentsNamed(name) returns declaration with given argument`() {
         // given
         val name = "SampleName"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name) } returns true
+                every { hasArgumentsWithAllNames(listOf(name)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name) } returns false
+                every { hasArgumentsWithAllNames(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -189,11 +441,11 @@ class KoArgumentProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name1, name2) } returns true
+                every { hasArgumentsWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name1, name2) } returns false
+                every { hasArgumentsWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -205,16 +457,62 @@ class KoArgumentProviderListExtTest {
     }
 
     @Test
+    fun `withAllArgumentsNamed(list of String) returns declaration with all given arguments`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoArgumentProvider =
+            mockk {
+                every { hasArgumentsWithAllNames(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoArgumentProvider =
+            mockk {
+                every { hasArgumentsWithAllNames(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllArgumentsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllArgumentsNamed(set of String) returns declaration with all given arguments`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoArgumentProvider =
+            mockk {
+                every { hasArgumentsWithAllNames(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoArgumentProvider =
+            mockk {
+                every { hasArgumentsWithAllNames(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllArgumentsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllArgumentsNamed(name) returns declaration without given argument`() {
         // given
         val name = "SampleName"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name) } returns true
+                every { hasArgumentsWithAllNames(listOf(name)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name) } returns false
+                every { hasArgumentsWithAllNames(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -232,16 +530,62 @@ class KoArgumentProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name1, name2) } returns true
+                every { hasArgumentsWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name1, name2) } returns false
+                every { hasArgumentsWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutAllArgumentsNamed(name1, name2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllArgumentsNamed(list of String) returns declaration without all of given arguments`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoArgumentProvider =
+            mockk {
+                every { hasArgumentsWithAllNames(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoArgumentProvider =
+            mockk {
+                every { hasArgumentsWithAllNames(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllArgumentsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllArgumentsNamed(set of String) returns declaration without all of given arguments`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoArgumentProvider =
+            mockk {
+                every { hasArgumentsWithAllNames(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoArgumentProvider =
+            mockk {
+                every { hasArgumentsWithAllNames(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllArgumentsNamed(names)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

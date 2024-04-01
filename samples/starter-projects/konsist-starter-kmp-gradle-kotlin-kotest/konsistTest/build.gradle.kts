@@ -11,6 +11,6 @@ tasks.withType<Test> {
 }
 
 dependencies {
-    testImplementation("com.lemonappdev:konsist:0.13.0")
+    testImplementation("com.lemonappdev:konsist:0.14.0")
     testImplementation("io.kotest:kotest-runner-junit5:5.8.1")
 }

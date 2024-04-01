@@ -57,6 +57,86 @@ class KoObjectProviderListExtTest {
     }
 
     @Test
+    fun `withObjectNamed(empty list) returns declaration with any object`() {
+        // given
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjects() } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjects() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withObjectNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withObjectNamed(empty set) returns declaration with any object`() {
+        // given
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjects() } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjects() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withObjectNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllObjectsNamed(empty list) returns declaration with any object`() {
+        // given
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjects() } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjects() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllObjectsNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllObjectsNamed(empty set) returns declaration with any object`() {
+        // given
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjects() } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjects() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllObjectsNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutObjects() returns declaration without any object`() {
         // given
         val declaration1: KoObjectProvider =
@@ -77,16 +157,96 @@ class KoObjectProviderListExtTest {
     }
 
     @Test
+    fun `withoutObjectNamed(empty list) returns declaration without any object`() {
+        // given
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjects() } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjects() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutObjectNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutObjectNamed(empty set) returns declaration without any object`() {
+        // given
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjects() } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjects() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutObjectNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllObjectsNamed(empty list) returns declaration without any object`() {
+        // given
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjects() } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjects() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllObjectsNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllObjectsNamed(empty set) returns declaration without any object`() {
+        // given
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjects() } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjects() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllObjectsNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withObjectNamed(name) returns declaration with given object`() {
         // given
         val name = "SampleName"
         val declaration1: KoObjectProvider =
             mockk {
-                every { hasObjectWithName(name) } returns true
+                every { hasObjectWithName(listOf(name)) } returns true
             }
         val declaration2: KoObjectProvider =
             mockk {
-                every { hasObjectWithName(name) } returns false
+                every { hasObjectWithName(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -104,11 +264,11 @@ class KoObjectProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoObjectProvider =
             mockk {
-                every { hasObjectWithName(name1, name2) } returns true
+                every { hasObjectWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoObjectProvider =
             mockk {
-                every { hasObjectWithName(name1, name2) } returns false
+                every { hasObjectWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -120,16 +280,62 @@ class KoObjectProviderListExtTest {
     }
 
     @Test
+    fun `withObjectNamed(list of String) returns declaration with any of given objects`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjectWithName(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjectWithName(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withObjectNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withObjectNamed(set of String) returns declaration with any of given objects`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjectWithName(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjectWithName(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withObjectNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutObjectNamed(name) returns declaration without given object`() {
         // given
         val name = "SampleName"
         val declaration1: KoObjectProvider =
             mockk {
-                every { hasObjectWithName(name) } returns true
+                every { hasObjectWithName(listOf(name)) } returns true
             }
         val declaration2: KoObjectProvider =
             mockk {
-                every { hasObjectWithName(name) } returns false
+                every { hasObjectWithName(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -147,11 +353,11 @@ class KoObjectProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoObjectProvider =
             mockk {
-                every { hasObjectWithName(name1, name2) } returns true
+                every { hasObjectWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoObjectProvider =
             mockk {
-                every { hasObjectWithName(name1, name2) } returns false
+                every { hasObjectWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -163,16 +369,62 @@ class KoObjectProviderListExtTest {
     }
 
     @Test
+    fun `withoutObjectNamed(list of String) returns declaration without any of given objects`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjectWithName(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjectWithName(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutObjectNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutObjectNamed(set of String) returns declaration without any of given objects`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjectWithName(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjectWithName(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutObjectNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withAllObjectsNamed(name) returns declaration with given object`() {
         // given
         val name = "SampleName"
         val declaration1: KoObjectProvider =
             mockk {
-                every { hasObjectsWithAllNames(name) } returns true
+                every { hasObjectsWithAllNames(listOf(name)) } returns true
             }
         val declaration2: KoObjectProvider =
             mockk {
-                every { hasObjectsWithAllNames(name) } returns false
+                every { hasObjectsWithAllNames(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -190,11 +442,11 @@ class KoObjectProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoObjectProvider =
             mockk {
-                every { hasObjectsWithAllNames(name1, name2) } returns true
+                every { hasObjectsWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoObjectProvider =
             mockk {
-                every { hasObjectsWithAllNames(name1, name2) } returns false
+                every { hasObjectsWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -206,16 +458,62 @@ class KoObjectProviderListExtTest {
     }
 
     @Test
+    fun `withAllObjectsNamed(list of String) returns declaration with all given objects`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjectsWithAllNames(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjectsWithAllNames(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllObjectsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllObjectsNamed(set of String) returns declaration with all given objects`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjectsWithAllNames(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjectsWithAllNames(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllObjectsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllObjectsNamed(name) returns declaration without given object`() {
         // given
         val name = "SampleName"
         val declaration1: KoObjectProvider =
             mockk {
-                every { hasObjectsWithAllNames(name) } returns true
+                every { hasObjectsWithAllNames(listOf(name)) } returns true
             }
         val declaration2: KoObjectProvider =
             mockk {
-                every { hasObjectsWithAllNames(name) } returns false
+                every { hasObjectsWithAllNames(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -233,16 +531,62 @@ class KoObjectProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoObjectProvider =
             mockk {
-                every { hasObjectsWithAllNames(name1, name2) } returns true
+                every { hasObjectsWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoObjectProvider =
             mockk {
-                every { hasObjectsWithAllNames(name1, name2) } returns false
+                every { hasObjectsWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutAllObjectsNamed(name1, name2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllObjectsNamed(list of String) returns declaration without all of given objects`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjectsWithAllNames(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjectsWithAllNames(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllObjectsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllObjectsNamed(set of String) returns declaration without all of given objects`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjectsWithAllNames(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjectsWithAllNames(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllObjectsNamed(names)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

@@ -5,8 +5,6 @@
 ![Check Workflow](https://github.com/LemonAppDev/konsist/actions/workflows/check.yml/badge.svg)
 [<img src="https://img.shields.io/maven-central/v/com.lemonappdev/konsist?label=Release"/>](https://central.sonatype.com/artifact/com.lemonappdev/konsist)
 
-[![Slack channel](https://img.shields.io/badge/Chat-Slack-orange.svg?style=flat&logo=slack)](https://kotlinlang.slack.com/messages/konsist/)
-
 Konsist is a linter that guards the consistency of [Kotlin](https://kotlinlang.org/) projects by enforcing a cohesive code structure 
 and unified architecture. Konsist guards are written in the form of unit tests ([JUnit](https://junit.org/) / [Kotest](https://kotest.io/)).
 
@@ -14,16 +12,16 @@ and unified architecture. Konsist guards are written in the form of unit tests (
 
 ```kotlin
 // Gradle Kotlin:
-testImplementation("com.lemonappdev:konsist:0.14.0")
+testImplementation("com.lemonappdev:konsist:0.15.0")
 
 // Gradle Groovy:
-testImplementation "com.lemonappdev:konsist:0.14.0"
+testImplementation "com.lemonappdev:konsist:0.15.0"
 
 // Maven:
 <dependency>
     <groupId>com.lemonappdev</groupId>
     <artifactId>konsist</artifactId>
-    <version>0.14.0</version>
+    <version>0.15.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -99,6 +97,10 @@ Check out our [snippet](https://docs.konsist.lemonappdev.com/inspiration/snippet
 ## Articles
 
 Read the [Konsist articles](https://docs.konsist.lemonappdev.com/getting-started/getting-started/articles) to gain valuable insights into best practices and strategies for maintaining consistency in your projects.
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=LemonAppDev/konsist&type=Date)](https://star-history.com/#LemonAppDev/konsist&Date)
 
 ## Star History
 

@@ -76,7 +76,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasClassDeclarationOf(SampleType::class) shouldBeEqualTo true
             it?.hasClassDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
-            it?.haObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclaration() shouldBeEqualTo false
             it?.hasObjectDeclarationOf(SampleType::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
@@ -129,7 +129,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasClassDeclarationOf(SampleType::class) shouldBeEqualTo true
             it?.hasClassDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
-            it?.haObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclaration() shouldBeEqualTo false
             it?.hasObjectDeclarationOf(SampleType::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
@@ -176,9 +176,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
             it?.asObjectDeclaration()?.name shouldBeEqualTo "SampleObject"
-            it?.haObjectDeclaration() shouldBeEqualTo true
-            it?.haObjectDeclaration { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
-            it?.haObjectDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasObjectDeclaration() shouldBeEqualTo true
+            it?.hasObjectDeclaration { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
+            it?.hasObjectDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasObjectDeclarationOf(SampleObject::class) shouldBeEqualTo true
             it?.hasObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -229,9 +229,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
             it?.asObjectDeclaration()?.name shouldBeEqualTo "SampleObject"
-            it?.haObjectDeclaration() shouldBeEqualTo true
-            it?.haObjectDeclaration { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
-            it?.haObjectDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasObjectDeclaration() shouldBeEqualTo true
+            it?.hasObjectDeclaration { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
+            it?.hasObjectDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasObjectDeclarationOf(SampleObject::class) shouldBeEqualTo true
             it?.hasObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -291,7 +291,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.hasClassDeclarationOf(SampleInterface::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
-            it?.haObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclaration() shouldBeEqualTo false
             it?.hasObjectDeclarationOf(SampleInterface::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
@@ -344,7 +344,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.hasClassDeclarationOf(SampleInterface::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
-            it?.haObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclaration() shouldBeEqualTo false
             it?.hasObjectDeclarationOf(SampleInterface::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
@@ -393,7 +393,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
-            it?.haObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclaration() shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
@@ -440,7 +440,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
-            it?.haObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclaration() shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
@@ -487,7 +487,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
-            it?.haObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclaration() shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
@@ -534,7 +534,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
-            it?.haObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclaration() shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
@@ -585,7 +585,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.hasClassDeclarationOf(String::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
-            it?.haObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclaration() shouldBeEqualTo false
             it?.hasObjectDeclarationOf(String::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
@@ -639,7 +639,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.hasClassDeclarationOf(String::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
-            it?.haObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclaration() shouldBeEqualTo false
             it?.hasObjectDeclarationOf(String::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
@@ -693,7 +693,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.hasClassDeclarationOf(List::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
-            it?.haObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclaration() shouldBeEqualTo false
             it?.hasObjectDeclarationOf(List::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
@@ -747,7 +747,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.hasClassDeclarationOf(List::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
-            it?.haObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclaration() shouldBeEqualTo false
             it?.hasObjectDeclarationOf(List::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
@@ -797,7 +797,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
-            it?.haObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclaration() shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
@@ -844,7 +844,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
-            it?.haObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclaration() shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
@@ -895,7 +895,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.hasClassDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
-            it?.haObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclaration() shouldBeEqualTo false
             it?.hasObjectDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
@@ -949,7 +949,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.hasClassDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
-            it?.haObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclaration() shouldBeEqualTo false
             it?.hasObjectDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false

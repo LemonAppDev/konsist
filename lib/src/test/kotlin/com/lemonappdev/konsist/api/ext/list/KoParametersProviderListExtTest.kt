@@ -56,6 +56,46 @@ class KoParametersProviderListExtTest {
     }
 
     @Test
+    fun `withParameterNamed(empty list) returns declaration with any parameter`() {
+        // given
+        val declaration1: KoParametersProvider =
+            mockk {
+                every { hasParameters() } returns true
+            }
+        val declaration2: KoParametersProvider =
+            mockk {
+                every { hasParameters() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withParameterNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withParameterNamed(empty set) returns declaration with any parameter`() {
+        // given
+        val declaration1: KoParametersProvider =
+            mockk {
+                every { hasParameters() } returns true
+            }
+        val declaration2: KoParametersProvider =
+            mockk {
+                every { hasParameters() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withParameterNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutParameters() returns declaration with no parameter`() {
         // given
         val declaration1: KoParametersProvider =
@@ -76,16 +116,56 @@ class KoParametersProviderListExtTest {
     }
 
     @Test
+    fun `withoutParameterNamed(empty list) returns declaration with no parameter`() {
+        // given
+        val declaration1: KoParametersProvider =
+            mockk {
+                every { hasParameters() } returns true
+            }
+        val declaration2: KoParametersProvider =
+            mockk {
+                every { hasParameters() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutParameterNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutParameterNamed(empty set) returns declaration with no parameter`() {
+        // given
+        val declaration1: KoParametersProvider =
+            mockk {
+                every { hasParameters() } returns true
+            }
+        val declaration2: KoParametersProvider =
+            mockk {
+                every { hasParameters() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutParameterNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withParameterNamed(name) returns declaration with given parameter`() {
         // given
         val name = "SampleName"
         val declaration1: KoParametersProvider =
             mockk {
-                every { hasParameterWithName(name) } returns true
+                every { hasParameterWithName(listOf(name)) } returns true
             }
         val declaration2: KoParametersProvider =
             mockk {
-                every { hasParameterWithName(name) } returns false
+                every { hasParameterWithName(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -103,11 +183,11 @@ class KoParametersProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoParametersProvider =
             mockk {
-                every { hasParameterWithName(name1, name2) } returns true
+                every { hasParameterWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoParametersProvider =
             mockk {
-                every { hasParameterWithName(name1, name2) } returns false
+                every { hasParameterWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -119,16 +199,62 @@ class KoParametersProviderListExtTest {
     }
 
     @Test
+    fun `withParameterNamed(list of String) returns declaration with any of given parameters`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoParametersProvider =
+            mockk {
+                every { hasParameterWithName(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoParametersProvider =
+            mockk {
+                every { hasParameterWithName(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withParameterNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withParameterNamed(set of String) returns declaration with any of given parameters`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoParametersProvider =
+            mockk {
+                every { hasParameterWithName(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoParametersProvider =
+            mockk {
+                every { hasParameterWithName(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withParameterNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutParameterNamed(name) returns declaration without given parameter`() {
         // given
         val name = "SampleName"
         val declaration1: KoParametersProvider =
             mockk {
-                every { hasParameterWithName(name) } returns true
+                every { hasParameterWithName(listOf(name)) } returns true
             }
         val declaration2: KoParametersProvider =
             mockk {
-                every { hasParameterWithName(name) } returns false
+                every { hasParameterWithName(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -146,11 +272,11 @@ class KoParametersProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoParametersProvider =
             mockk {
-                every { hasParameterWithName(name1, name2) } returns true
+                every { hasParameterWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoParametersProvider =
             mockk {
-                every { hasParameterWithName(name1, name2) } returns false
+                every { hasParameterWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -162,16 +288,62 @@ class KoParametersProviderListExtTest {
     }
 
     @Test
+    fun `withoutParameterNamed(list of String) returns declaration without any of given parameters`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoParametersProvider =
+            mockk {
+                every { hasParameterWithName(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoParametersProvider =
+            mockk {
+                every { hasParameterWithName(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutParameterNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutParameterNamed(set of String) returns declaration without any of given parameters`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoParametersProvider =
+            mockk {
+                every { hasParameterWithName(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoParametersProvider =
+            mockk {
+                every { hasParameterWithName(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutParameterNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withAllParametersNamed(name) returns declaration with given parameter`() {
         // given
         val name = "SampleName"
         val declaration1: KoParametersProvider =
             mockk {
-                every { hasParametersWithAllNames(name) } returns true
+                every { hasParametersWithAllNames(listOf(name)) } returns true
             }
         val declaration2: KoParametersProvider =
             mockk {
-                every { hasParametersWithAllNames(name) } returns false
+                every { hasParametersWithAllNames(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -189,11 +361,11 @@ class KoParametersProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoParametersProvider =
             mockk {
-                every { hasParametersWithAllNames(name1, name2) } returns true
+                every { hasParametersWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoParametersProvider =
             mockk {
-                every { hasParametersWithAllNames(name1, name2) } returns false
+                every { hasParametersWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -205,16 +377,62 @@ class KoParametersProviderListExtTest {
     }
 
     @Test
+    fun `withAllParametersNamed(list of String) returns declaration with all given parameters`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoParametersProvider =
+            mockk {
+                every { hasParametersWithAllNames(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoParametersProvider =
+            mockk {
+                every { hasParametersWithAllNames(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllParametersNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllParametersNamed(set of String) returns declaration with all given parameters`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoParametersProvider =
+            mockk {
+                every { hasParametersWithAllNames(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoParametersProvider =
+            mockk {
+                every { hasParametersWithAllNames(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllParametersNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllParametersNamed(name) returns declaration without given parameter`() {
         // given
         val name = "SampleName"
         val declaration1: KoParametersProvider =
             mockk {
-                every { hasParametersWithAllNames(name) } returns true
+                every { hasParametersWithAllNames(listOf(name)) } returns true
             }
         val declaration2: KoParametersProvider =
             mockk {
-                every { hasParametersWithAllNames(name) } returns false
+                every { hasParametersWithAllNames(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -232,16 +450,62 @@ class KoParametersProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoParametersProvider =
             mockk {
-                every { hasParametersWithAllNames(name1, name2) } returns true
+                every { hasParametersWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoParametersProvider =
             mockk {
-                every { hasParametersWithAllNames(name1, name2) } returns false
+                every { hasParametersWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutAllParametersNamed(name1, name2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllParametersNamed(list of String) returns declaration without all of given parameters`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoParametersProvider =
+            mockk {
+                every { hasParametersWithAllNames(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoParametersProvider =
+            mockk {
+                every { hasParametersWithAllNames(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllParametersNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllParametersNamed(set of String) returns declaration without all of given parameters`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoParametersProvider =
+            mockk {
+                every { hasParametersWithAllNames(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoParametersProvider =
+            mockk {
+                every { hasParametersWithAllNames(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllParametersNamed(names)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

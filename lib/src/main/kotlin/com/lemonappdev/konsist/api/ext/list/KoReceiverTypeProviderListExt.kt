@@ -78,16 +78,20 @@ fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverType(predicate: ((KoType
 fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> =
-    filter {
-        val hasAtLeastOneReceiver =
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.hasReceiverTypeOf(kClass) }
-            } else {
-                false
-            }
+): List<T> = withReceiverTypeOf(listOf(kClass, *kClasses))
 
-        it.hasReceiverTypeOf(kClass) || hasAtLeastOneReceiver
+/**
+ * List containing declarations with receiver type.
+ *
+ * @param kClasses The Kotlin class(es) representing the receiver type(s) to include.
+ * @return A list containing declarations with the receiver type of the specified Kotlin class(es).
+ */
+fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(kClasses: Collection<KClass<*>>): List<T> =
+    filter {
+        when {
+            kClasses.isEmpty() -> it.hasReceiverType()
+            else -> kClasses.any { kClass -> it.hasReceiverTypeOf(kClass) }
+        }
     }
 
 /**
@@ -100,14 +104,18 @@ fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(
 fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverTypeOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> =
-    filterNot {
-        val hasAtLeastOneReceiver =
-            if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.hasReceiverTypeOf(kClass) }
-            } else {
-                false
-            }
+): List<T> = withoutReceiverTypeOf(listOf(kClass, *kClasses))
 
-        it.hasReceiverTypeOf(kClass) || hasAtLeastOneReceiver
+/**
+ * List containing declarations without receiver type.
+ *
+ * @param kClasses The Kotlin class(es) representing the receiver type(s) to exclude.
+ * @return A list containing declarations without receiver type of the specified Kotlin class(es).
+ */
+fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverTypeOf(kClasses: Collection<KClass<*>>): List<T> =
+    filterNot {
+        when {
+            kClasses.isEmpty() -> it.hasReceiverType()
+            else -> kClasses.any { kClass -> it.hasReceiverTypeOf(kClass) }
+        }
     }

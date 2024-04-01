@@ -49,15 +49,15 @@ kotlin {
         }
         val jvmTest by getting {
             dependencies {
-                implementation("com.lemonappdev:konsist:0.13.0")
+                implementation("com.lemonappdev:konsist:0.14.0")
             }
         }
 
         val jsMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.2.0-pre.712")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.2.0-pre.712")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.11.4-pre.712")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.2.0-pre.722")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.2.0-pre.722")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.11.4-pre.722")
             }
         }
         val jsTest by getting

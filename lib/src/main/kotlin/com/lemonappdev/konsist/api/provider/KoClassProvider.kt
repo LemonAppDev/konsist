@@ -88,6 +88,20 @@ interface KoClassProvider : KoBaseProvider {
     ): Boolean
 
     /**
+     * Determines whether the declaration has at least one class whose name matches any of the specified names.
+     *
+     * @param names the names of the classes to check.
+     * @param includeNested Specifies whether to include nested classes in the check (optional, default is `true`).
+     * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasClassWithName(
+        names: Collection<String>,
+        includeNested: Boolean = true,
+        includeLocal: Boolean = true,
+    ): Boolean
+
+    /**
      * Determines whether the declaration has classes with all the specified names.
      *
      * @param name The name of the class to check.
@@ -99,6 +113,20 @@ interface KoClassProvider : KoBaseProvider {
     fun hasClassesWithAllNames(
         name: String,
         vararg names: String,
+        includeNested: Boolean = true,
+        includeLocal: Boolean = true,
+    ): Boolean
+
+    /**
+     * Determines whether the declaration has classes with all the specified names.
+     *
+     * @param names The names of the classes to check.
+     * @param includeNested Specifies whether to include nested classes in the check (optional, default is `true`).
+     * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
+     * @return `true` if there are declarations with all the specified names, `false` otherwise.
+     */
+    fun hasClassesWithAllNames(
+        names: Collection<String>,
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
     ): Boolean

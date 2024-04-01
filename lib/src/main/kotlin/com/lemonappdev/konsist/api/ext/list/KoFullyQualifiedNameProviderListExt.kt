@@ -12,9 +12,20 @@ import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 fun <T : KoFullyQualifiedNameProvider> List<T>.withFullyQualifiedName(
     name: String,
     vararg names: String,
-): List<T> =
+): List<T> = withFullyQualifiedName(listOf(name, *names))
+
+/**
+ * List containing declarations with the fully qualified name.
+ *
+ * @param names The names to include.
+ * @return A list containing declarations with the specified fully qualified names.
+ */
+fun <T : KoFullyQualifiedNameProvider> List<T>.withFullyQualifiedName(names: Collection<String>): List<T> =
     filter {
-        it.fullyQualifiedName == name || names.any { fullyQualifiedName -> it.fullyQualifiedName == fullyQualifiedName }
+        when {
+            names.isEmpty() -> true
+            else -> names.any { fullyQualifiedName -> it.fullyQualifiedName == fullyQualifiedName }
+        }
     }
 
 /**
@@ -27,7 +38,18 @@ fun <T : KoFullyQualifiedNameProvider> List<T>.withFullyQualifiedName(
 fun <T : KoFullyQualifiedNameProvider> List<T>.withoutFullyQualifiedName(
     name: String,
     vararg names: String,
-): List<T> =
+): List<T> = withoutFullyQualifiedName(listOf(name, *names))
+
+/**
+ * List containing declarations without fully qualified name.
+ *
+ * @param names The names to exclude.
+ * @return A list containing declarations without the specified fully qualified names.
+ */
+fun <T : KoFullyQualifiedNameProvider> List<T>.withoutFullyQualifiedName(names: Collection<String>): List<T> =
     filter {
-        it.fullyQualifiedName != name && names.none { fullyQualifiedName -> it.fullyQualifiedName == fullyQualifiedName }
+        when {
+            names.isEmpty() -> false
+            else -> names.none { fullyQualifiedName -> it.fullyQualifiedName == fullyQualifiedName }
+        }
     }

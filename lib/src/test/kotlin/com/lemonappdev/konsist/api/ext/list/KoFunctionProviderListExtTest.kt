@@ -61,6 +61,86 @@ class KoFunctionProviderListExtTest {
     }
 
     @Test
+    fun `withFunctionNamed(empty list) returns declaration with any function`() {
+        // given
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctions() } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctions() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withFunctionNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withFunctionNamed(empty set) returns declaration with any function`() {
+        // given
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctions() } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctions() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withFunctionNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllFunctionsNamed(empty list) returns declaration with any function`() {
+        // given
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctions() } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctions() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllFunctionsNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllFunctionsNamed(empty set) returns declaration with any function`() {
+        // given
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctions() } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctions() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllFunctionsNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutFunctions() returns declaration without any function`() {
         // given
         val declaration1: KoFunctionProvider =
@@ -81,16 +161,96 @@ class KoFunctionProviderListExtTest {
     }
 
     @Test
+    fun `withoutFunctionNamed(empty list) returns declaration without any function`() {
+        // given
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctions() } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctions() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutFunctionNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutFunctionNamed(empty set) returns declaration without any function`() {
+        // given
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctions() } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctions() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutFunctionNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllFunctionsNamed(empty list) returns declaration without any function`() {
+        // given
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctions() } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctions() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllFunctionsNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllFunctionsNamed(empty set) returns declaration without any function`() {
+        // given
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctions() } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctions() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllFunctionsNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withFunctionNamed(name) returns declaration with given function`() {
         // given
         val name = "SampleName"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name) } returns true
+                every { hasFunctionWithName(listOf(name)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name) } returns false
+                every { hasFunctionWithName(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -108,11 +268,11 @@ class KoFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name1, name2) } returns true
+                every { hasFunctionWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name1, name2) } returns false
+                every { hasFunctionWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -124,16 +284,62 @@ class KoFunctionProviderListExtTest {
     }
 
     @Test
+    fun `withFunctionNamed(list of String) returns declaration with any of given functions`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctionWithName(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctionWithName(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withFunctionNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withFunctionNamed(set of String) returns declaration with any of given functions`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctionWithName(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctionWithName(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withFunctionNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutFunctionNamed(name) returns declaration without given function`() {
         // given
         val name = "SampleName"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name) } returns true
+                every { hasFunctionWithName(listOf(name)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name) } returns false
+                every { hasFunctionWithName(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -151,11 +357,11 @@ class KoFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name1, name2) } returns true
+                every { hasFunctionWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionWithName(name1, name2) } returns false
+                every { hasFunctionWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -167,16 +373,62 @@ class KoFunctionProviderListExtTest {
     }
 
     @Test
+    fun `withoutFunctionNamed(list of String) returns declaration without any of given functions`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctionWithName(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctionWithName(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutFunctionNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutFunctionNamed(set of String) returns declaration without any of given functions`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctionWithName(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctionWithName(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutFunctionNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withAllFunctionsNamed(name) returns declaration with given function`() {
         // given
         val name = "SampleName"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name) } returns true
+                every { hasFunctionsWithAllNames(listOf(name)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name) } returns false
+                every { hasFunctionsWithAllNames(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -194,11 +446,11 @@ class KoFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name1, name2) } returns true
+                every { hasFunctionsWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name1, name2) } returns false
+                every { hasFunctionsWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -210,16 +462,62 @@ class KoFunctionProviderListExtTest {
     }
 
     @Test
+    fun `withAllFunctionsNamed(list of String) returns declaration with all given functions`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctionsWithAllNames(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctionsWithAllNames(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllFunctionsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllFunctionsNamed(set of String) returns declaration with all given functions`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctionsWithAllNames(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctionsWithAllNames(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllFunctionsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllFunctionsNamed(name) returns declaration without given function`() {
         // given
         val name = "SampleName"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name) } returns true
+                every { hasFunctionsWithAllNames(listOf(name)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name) } returns false
+                every { hasFunctionsWithAllNames(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -237,16 +535,62 @@ class KoFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name1, name2) } returns true
+                every { hasFunctionsWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoFunctionProvider =
             mockk {
-                every { hasFunctionsWithAllNames(name1, name2) } returns false
+                every { hasFunctionsWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutAllFunctionsNamed(name1, name2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllFunctionsNamed(list of String) returns declaration without all of given functions`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctionsWithAllNames(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctionsWithAllNames(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllFunctionsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllFunctionsNamed(set of String) returns declaration without all of given functions`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctionsWithAllNames(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctionsWithAllNames(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllFunctionsNamed(names)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

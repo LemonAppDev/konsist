@@ -41,7 +41,25 @@ fun <T : KoPropertyProvider> List<T>.withPropertyNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = filter { it.hasPropertyWithName(name, *names, includeNested = includeNested) }
+): List<T> = withPropertyNamed(listOf(name, *names), includeNested)
+
+/**
+ * List containing declarations that have at least one property with the specified name(s).
+ *
+ * @param names The names of additional properties to include.
+ * @param includeNested Whether to include nested properties.
+ * @return A list containing declarations with at least one of the specified properties.
+ */
+fun <T : KoPropertyProvider> List<T>.withPropertyNamed(
+    names: Collection<String>,
+    includeNested: Boolean = true,
+): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> it.hasProperties(includeNested)
+            else -> it.hasPropertyWithName(names, includeNested = includeNested)
+        }
+    }
 
 /**
  * List containing declarations without any of specified properties.
@@ -55,7 +73,25 @@ fun <T : KoPropertyProvider> List<T>.withoutPropertyNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = filterNot { it.hasPropertyWithName(name, *names, includeNested = includeNested) }
+): List<T> = withoutPropertyNamed(listOf(name, *names), includeNested)
+
+/**
+ * List containing declarations without any of specified properties.
+ *
+ * @param names The names of additional properties to exclude.
+ * @param includeNested Whether to include nested properties.
+ * @return A list containing declarations without any of specified properties.
+ */
+fun <T : KoPropertyProvider> List<T>.withoutPropertyNamed(
+    names: Collection<String>,
+    includeNested: Boolean = true,
+): List<T> =
+    filterNot {
+        when {
+            names.isEmpty() -> it.hasProperties(includeNested)
+            else -> it.hasPropertyWithName(names, includeNested = includeNested)
+        }
+    }
 
 /**
  * List containing declarations that have all specified properties.
@@ -69,7 +105,25 @@ fun <T : KoPropertyProvider> List<T>.withAllPropertiesNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = filter { it.hasPropertiesWithAllNames(name, *names, includeNested = includeNested) }
+): List<T> = withAllPropertiesNamed(listOf(name, *names), includeNested)
+
+/**
+ * List containing declarations that have all specified properties.
+ *
+ * @param names The name(s) of the properties to include.
+ * @param includeNested Whether to include nested properties.
+ * @return A list containing declarations with all specified properties.
+ */
+fun <T : KoPropertyProvider> List<T>.withAllPropertiesNamed(
+    names: Collection<String>,
+    includeNested: Boolean = true,
+): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> it.hasProperties(includeNested)
+            else -> it.hasPropertiesWithAllNames(names, includeNested = includeNested)
+        }
+    }
 
 /**
  * List containing declarations without all specified properties.
@@ -83,7 +137,25 @@ fun <T : KoPropertyProvider> List<T>.withoutAllPropertiesNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = filterNot { it.hasPropertiesWithAllNames(name, *names, includeNested = includeNested) }
+): List<T> = withoutAllPropertiesNamed(listOf(name, *names), includeNested)
+
+/**
+ * List containing declarations without all specified properties.
+ *
+ * @param names The name(s) of the properties to exclude.
+ * @param includeNested Whether to include nested properties.
+ * @return A list containing declarations without all specified properties.
+ */
+fun <T : KoPropertyProvider> List<T>.withoutAllPropertiesNamed(
+    names: Collection<String>,
+    includeNested: Boolean = true,
+): List<T> =
+    filterNot {
+        when {
+            names.isEmpty() -> it.hasProperties(includeNested)
+            else -> it.hasPropertiesWithAllNames(names, includeNested = includeNested)
+        }
+    }
 
 /**
  * List containing declarations that have at least one property satisfying the provided predicate.

@@ -58,6 +58,14 @@ interface KoImportProvider : KoBaseProvider {
     ): Boolean
 
     /**
+     * Determines whether the declaration has at least one import whose name matches any of the specified names.
+     *
+     * @param names the names of the imports to check.
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasImportWithName(names: Collection<String>): Boolean
+
+    /**
      * Determines whether the declaration has imports with all the specified names.
      *
      * @param name The name of the import to check.
@@ -68,6 +76,14 @@ interface KoImportProvider : KoBaseProvider {
         name: String,
         vararg names: String,
     ): Boolean
+
+    /**
+     * Determines whether the declaration has imports with all the specified names.
+     *
+     * @param names The names of the imports to check.
+     * @return `true` if there are declarations with all the specified names, `false` otherwise.
+     */
+    fun hasImportsWithAllNames(names: Collection<String>): Boolean
 
     /**
      * Determines whatever the declaration has any import with the specified predicate.

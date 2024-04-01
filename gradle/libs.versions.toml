@@ -2,6 +2,7 @@
 kotlinVersion = "1.9.23"
 jUnitVersion = "5.10.2"
 ktlintCliVersion = "1.2.1"
+coroutinesVersion = "1.8.0"
 
 [libraries]
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlinVersion" }
@@ -10,9 +11,11 @@ junitJupiterParams =  { module = "org.junit.jupiter:junit-jupiter-params", versi
 kotest =  "io.kotest:kotest-runner-junit5:5.8.1"
 kluent = "org.amshove.kluent:kluent:1.73"
 mockk = "io.mockk:mockk:1.13.9"
-kotlin-compiler = { module = "org.jetbrains.kotlin:kotlin-compiler", version.ref = "kotlinVersion" }
+kotlin-compiler-embeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlinVersion" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
+
 # This dependency is included as it's internally utilized by Spotless.
-# This location, it allows Renovate to upgrade ktlint version.
+# It allows Renovate to upgrade ktlint version.
 ktlint-cli = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktlintCliVersion" }
 
 [bundles]
@@ -22,4 +25,4 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
 dokka = "org.jetbrains.dokka:1.9.20"
 spotless = "com.diffplug.spotless:6.25.0"
 testLogger = "com.adarshr.test-logger:4.0.0"
-detekt = "io.gitlab.arturbosch.detekt:1.23.5"
+detekt = "io.gitlab.arturbosch.detekt:1.23.6"

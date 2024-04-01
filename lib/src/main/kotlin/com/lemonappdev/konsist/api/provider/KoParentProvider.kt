@@ -141,6 +141,30 @@ interface KoParentProvider : KoBaseProvider {
     ): Boolean
 
     /**
+     * Determines whether the declaration has at least one parent (parent class and parent interfaces) whose name
+     * matches any of the specified names.
+     *
+     * @param names the names of the parents to check.
+     * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
+     *                        If `true`, it includes only those parents defined within our scope and those used
+     *                        by our declarations.
+     *                        For example:
+     *
+     *                        // Android
+     *                        class AppCompactActivity: Activity
+     *                        interface Activity
+     *
+     *                        // Project
+     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
+     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasParentWithName(
+        names: Collection<String>,
+        indirectParents: Boolean = false,
+    ): Boolean
+
+    /**
      * Determines whether the declaration has parents (parent classes and parent interfaces) with all the specified names.
      *
      * @param name The name of the parent to check.
@@ -162,6 +186,29 @@ interface KoParentProvider : KoBaseProvider {
     fun hasParentsWithAllNames(
         name: String,
         vararg names: String,
+        indirectParents: Boolean = false,
+    ): Boolean
+
+    /**
+     * Determines whether the declaration has parents (parent classes and parent interfaces) with all the specified names.
+     *
+     * @param names The names of the parents to check.
+     * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
+     *                        If `true`, it includes only those parents defined within our scope and those used
+     *                        by our declarations.
+     *                        For example:
+     *
+     *                        // Android
+     *                        class AppCompactActivity: Activity
+     *                        interface Activity
+     *
+     *                        // Project
+     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
+     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
+     * @return `true` if there are declarations with all the specified names, `false` otherwise.
+     */
+    fun hasParentsWithAllNames(
+        names: Collection<String>,
         indirectParents: Boolean = false,
     ): Boolean
 
@@ -242,6 +289,29 @@ interface KoParentProvider : KoBaseProvider {
     ): Boolean
 
     /**
+     * Determines whether the declaration has at least one parent of the specified `KClass` type.
+     *
+     * @param names the `KClass` types of the parents to check.
+     * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
+     *                        If `true`, it includes only those parents defined within our scope and those used
+     *                        by our declarations.
+     *                        For example:
+     *
+     *                        // Android
+     *                        class AppCompactActivity: Activity
+     *                        interface Activity
+     *
+     *                        // Project
+     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
+     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasParentOf(
+        names: Collection<KClass<*>>,
+        indirectParents: Boolean = false,
+    ): Boolean
+
+    /**
      * Determines whether the declaration has parents with all the specified `KClass` type.
      *
      * @param name the `KClass` type of the parent to check.
@@ -263,6 +333,29 @@ interface KoParentProvider : KoBaseProvider {
     fun hasAllParentsOf(
         name: KClass<*>,
         vararg names: KClass<*>,
+        indirectParents: Boolean = false,
+    ): Boolean
+
+    /**
+     * Determines whether the declaration has parents with all the specified `KClass` type.
+     *
+     * @param names the `KClass` types of the parents to check.
+     * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
+     *                        If `true`, it includes only those parents defined within our scope and those used
+     *                        by our declarations.
+     *                        For example:
+     *
+     *                        // Android
+     *                        class AppCompactActivity: Activity
+     *                        interface Activity
+     *
+     *                        // Project
+     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
+     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
+     * @return `true` if the declaration has parents of all the specified `KClass` types, `false` otherwise.
+     */
+    fun hasAllParentsOf(
+        names: Collection<KClass<*>>,
         indirectParents: Boolean = false,
     ): Boolean
 }

@@ -57,6 +57,86 @@ class KoClassProviderListExtTest {
     }
 
     @Test
+    fun `withClassNamed(empty list) returns declaration with any class`() {
+        // given
+        val declaration1: KoClassProvider =
+            mockk {
+                every { hasClasses() } returns true
+            }
+        val declaration2: KoClassProvider =
+            mockk {
+                every { hasClasses() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withClassNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withClassNamed(empty set) returns declaration with any class`() {
+        // given
+        val declaration1: KoClassProvider =
+            mockk {
+                every { hasClasses() } returns true
+            }
+        val declaration2: KoClassProvider =
+            mockk {
+                every { hasClasses() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withClassNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllClassesNamed(empty list) returns declaration with any class`() {
+        // given
+        val declaration1: KoClassProvider =
+            mockk {
+                every { hasClasses() } returns true
+            }
+        val declaration2: KoClassProvider =
+            mockk {
+                every { hasClasses() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllClassesNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllClassesNamed(empty set) returns declaration with any class`() {
+        // given
+        val declaration1: KoClassProvider =
+            mockk {
+                every { hasClasses() } returns true
+            }
+        val declaration2: KoClassProvider =
+            mockk {
+                every { hasClasses() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllClassesNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutClasses() returns declaration without any class`() {
         // given
         val declaration1: KoClassProvider =
@@ -77,16 +157,96 @@ class KoClassProviderListExtTest {
     }
 
     @Test
+    fun `withoutClassNamed(empty list) returns declaration without any class`() {
+        // given
+        val declaration1: KoClassProvider =
+            mockk {
+                every { hasClasses() } returns true
+            }
+        val declaration2: KoClassProvider =
+            mockk {
+                every { hasClasses() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutClassNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutClassNamed(empty set) returns declaration without any class`() {
+        // given
+        val declaration1: KoClassProvider =
+            mockk {
+                every { hasClasses() } returns true
+            }
+        val declaration2: KoClassProvider =
+            mockk {
+                every { hasClasses() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutClassNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllClassesNamed(empty list) returns declaration without any class`() {
+        // given
+        val declaration1: KoClassProvider =
+            mockk {
+                every { hasClasses() } returns true
+            }
+        val declaration2: KoClassProvider =
+            mockk {
+                every { hasClasses() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllClassesNamed(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllClassesNamed(empty set) returns declaration without any class`() {
+        // given
+        val declaration1: KoClassProvider =
+            mockk {
+                every { hasClasses() } returns true
+            }
+        val declaration2: KoClassProvider =
+            mockk {
+                every { hasClasses() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllClassesNamed(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withClassNamed(name) returns declaration with given class`() {
         // given
         val name = "SampleName"
         val declaration1: KoClassProvider =
             mockk {
-                every { hasClassWithName(name) } returns true
+                every { hasClassWithName(listOf(name)) } returns true
             }
         val declaration2: KoClassProvider =
             mockk {
-                every { hasClassWithName(name) } returns false
+                every { hasClassWithName(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -104,11 +264,11 @@ class KoClassProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoClassProvider =
             mockk {
-                every { hasClassWithName(name1, name2) } returns true
+                every { hasClassWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoClassProvider =
             mockk {
-                every { hasClassWithName(name1, name2) } returns false
+                every { hasClassWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -120,16 +280,62 @@ class KoClassProviderListExtTest {
     }
 
     @Test
+    fun `withClassNamed(list of String) returns declaration with any of given classes`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoClassProvider =
+            mockk {
+                every { hasClassWithName(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoClassProvider =
+            mockk {
+                every { hasClassWithName(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withClassNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withClassNamed(set of String) returns declaration with any of given classes`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoClassProvider =
+            mockk {
+                every { hasClassWithName(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoClassProvider =
+            mockk {
+                every { hasClassWithName(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withClassNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutClassNamed(name) returns declaration without given class`() {
         // given
         val name = "SampleName"
         val declaration1: KoClassProvider =
             mockk {
-                every { hasClassWithName(name) } returns true
+                every { hasClassWithName(listOf(name)) } returns true
             }
         val declaration2: KoClassProvider =
             mockk {
-                every { hasClassWithName(name) } returns false
+                every { hasClassWithName(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -147,11 +353,11 @@ class KoClassProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoClassProvider =
             mockk {
-                every { hasClassWithName(name1, name2) } returns true
+                every { hasClassWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoClassProvider =
             mockk {
-                every { hasClassWithName(name1, name2) } returns false
+                every { hasClassWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -163,16 +369,62 @@ class KoClassProviderListExtTest {
     }
 
     @Test
+    fun `withoutClassNamed(list of String) returns declaration without any of given classes`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoClassProvider =
+            mockk {
+                every { hasClassWithName(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoClassProvider =
+            mockk {
+                every { hasClassWithName(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutClassNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutClassNamed(set of String) returns declaration without any of given classes`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoClassProvider =
+            mockk {
+                every { hasClassWithName(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoClassProvider =
+            mockk {
+                every { hasClassWithName(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutClassNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withAllClassesNamed(name) returns declaration with given class`() {
         // given
         val name = "SampleName"
         val declaration1: KoClassProvider =
             mockk {
-                every { hasClassesWithAllNames(name) } returns true
+                every { hasClassesWithAllNames(listOf(name)) } returns true
             }
         val declaration2: KoClassProvider =
             mockk {
-                every { hasClassesWithAllNames(name) } returns false
+                every { hasClassesWithAllNames(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -190,11 +442,11 @@ class KoClassProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoClassProvider =
             mockk {
-                every { hasClassesWithAllNames(name1, name2) } returns true
+                every { hasClassesWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoClassProvider =
             mockk {
-                every { hasClassesWithAllNames(name1, name2) } returns false
+                every { hasClassesWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -206,16 +458,62 @@ class KoClassProviderListExtTest {
     }
 
     @Test
+    fun `withAllClassesNamed(list of String) returns declaration with all given classes`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoClassProvider =
+            mockk {
+                every { hasClassesWithAllNames(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoClassProvider =
+            mockk {
+                every { hasClassesWithAllNames(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllClassesNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllClassesNamed(set of String) returns declaration with all given classes`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoClassProvider =
+            mockk {
+                every { hasClassesWithAllNames(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoClassProvider =
+            mockk {
+                every { hasClassesWithAllNames(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllClassesNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllClassesNamed(name) returns declaration without given class`() {
         // given
         val name = "SampleName"
         val declaration1: KoClassProvider =
             mockk {
-                every { hasClassesWithAllNames(name) } returns true
+                every { hasClassesWithAllNames(listOf(name)) } returns true
             }
         val declaration2: KoClassProvider =
             mockk {
-                every { hasClassesWithAllNames(name) } returns false
+                every { hasClassesWithAllNames(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -233,16 +531,62 @@ class KoClassProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoClassProvider =
             mockk {
-                every { hasClassesWithAllNames(name1, name2) } returns true
+                every { hasClassesWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoClassProvider =
             mockk {
-                every { hasClassesWithAllNames(name1, name2) } returns false
+                every { hasClassesWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutAllClassesNamed(name1, name2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllClassesNamed(list of String) returns declaration without all of given classes`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoClassProvider =
+            mockk {
+                every { hasClassesWithAllNames(listOf(name1, name2)) } returns true
+            }
+        val declaration2: KoClassProvider =
+            mockk {
+                every { hasClassesWithAllNames(listOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllClassesNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllClassesNamed(set of String) returns declaration without all of given classes`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoClassProvider =
+            mockk {
+                every { hasClassesWithAllNames(setOf(name1, name2)) } returns true
+            }
+        val declaration2: KoClassProvider =
+            mockk {
+                every { hasClassesWithAllNames(setOf(name1, name2)) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = setOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllClassesNamed(names)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
