@@ -71,13 +71,7 @@ fun <T : KoFunctionProvider> List<T>.withFunctionNamed(
     filter {
         when {
             names.isEmpty() -> it.hasFunctions(includeNested, includeLocal)
-            else ->
-                it.hasFunctionWithName(
-                    names.first(),
-                    *names.drop(1).toTypedArray(),
-                    includeNested = includeNested,
-                    includeLocal = includeLocal,
-                )
+            else -> it.hasFunctionWithName(names, includeNested = includeNested, includeLocal = includeLocal)
         }
     }
 
@@ -113,13 +107,7 @@ fun <T : KoFunctionProvider> List<T>.withoutFunctionNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasFunctions(includeNested, includeLocal)
-            else ->
-                it.hasFunctionWithName(
-                    names.first(),
-                    *names.drop(1).toTypedArray(),
-                    includeNested = includeNested,
-                    includeLocal = includeLocal,
-                )
+            else -> it.hasFunctionWithName(names, includeNested = includeNested, includeLocal = includeLocal)
         }
     }
 
@@ -155,13 +143,7 @@ fun <T : KoFunctionProvider> List<T>.withAllFunctionsNamed(
     filter {
         when {
             names.isEmpty() -> it.hasFunctions(includeNested, includeLocal)
-            else ->
-                it.hasFunctionsWithAllNames(
-                    names.first(),
-                    *names.drop(1).toTypedArray(),
-                    includeNested = includeNested,
-                    includeLocal = includeLocal,
-                )
+            else -> it.hasFunctionsWithAllNames(names, includeNested = includeNested, includeLocal = includeLocal)
         }
     }
 
@@ -197,13 +179,7 @@ fun <T : KoFunctionProvider> List<T>.withoutAllFunctionsNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasFunctions(includeNested, includeLocal)
-            else ->
-                it.hasFunctionsWithAllNames(
-                    names.first(),
-                    *names.drop(1).toTypedArray(),
-                    includeNested = includeNested,
-                    includeLocal = includeLocal,
-                )
+            else -> it.hasFunctionsWithAllNames(names, includeNested = includeNested, includeLocal = includeLocal)
         }
     }
 

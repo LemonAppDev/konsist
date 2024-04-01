@@ -241,11 +241,11 @@ class KoLocalFunctionProviderListExtTest {
         val name = "SampleName"
         val declaration1: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionWithName(name) } returns true
+                every { hasLocalFunctionWithName(listOf(name)) } returns true
             }
         val declaration2: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionWithName(name) } returns false
+                every { hasLocalFunctionWithName(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -263,11 +263,11 @@ class KoLocalFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionWithName(name1, name2) } returns true
+                every { hasLocalFunctionWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionWithName(name1, name2) } returns false
+                every { hasLocalFunctionWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -285,11 +285,11 @@ class KoLocalFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionWithName(name1, name2) } returns true
+                every { hasLocalFunctionWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionWithName(name1, name2) } returns false
+                every { hasLocalFunctionWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = listOf(name1, name2)
@@ -308,11 +308,11 @@ class KoLocalFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionWithName(name1, name2) } returns true
+                every { hasLocalFunctionWithName(setOf(name1, name2)) } returns true
             }
         val declaration2: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionWithName(name1, name2) } returns false
+                every { hasLocalFunctionWithName(setOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = setOf(name1, name2)
@@ -330,11 +330,11 @@ class KoLocalFunctionProviderListExtTest {
         val name = "SampleName"
         val declaration1: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionWithName(name) } returns true
+                every { hasLocalFunctionWithName(listOf(name)) } returns true
             }
         val declaration2: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionWithName(name) } returns false
+                every { hasLocalFunctionWithName(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -352,11 +352,11 @@ class KoLocalFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionWithName(name1, name2) } returns true
+                every { hasLocalFunctionWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionWithName(name1, name2) } returns false
+                every { hasLocalFunctionWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -374,11 +374,11 @@ class KoLocalFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionWithName(name1, name2) } returns true
+                every { hasLocalFunctionWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionWithName(name1, name2) } returns false
+                every { hasLocalFunctionWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = listOf(name1, name2)
@@ -397,11 +397,11 @@ class KoLocalFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionWithName(name1, name2) } returns true
+                every { hasLocalFunctionWithName(setOf(name1, name2)) } returns true
             }
         val declaration2: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionWithName(name1, name2) } returns false
+                every { hasLocalFunctionWithName(setOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = setOf(name1, name2)
@@ -419,11 +419,11 @@ class KoLocalFunctionProviderListExtTest {
         val name = "SampleName"
         val declaration1: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionsWithAllNames(name) } returns true
+                every { hasLocalFunctionsWithAllNames(listOf(name)) } returns true
             }
         val declaration2: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionsWithAllNames(name) } returns false
+                every { hasLocalFunctionsWithAllNames(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -441,11 +441,11 @@ class KoLocalFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionsWithAllNames(name1, name2) } returns true
+                every { hasLocalFunctionsWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionsWithAllNames(name1, name2) } returns false
+                every { hasLocalFunctionsWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -463,11 +463,11 @@ class KoLocalFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionsWithAllNames(name1, name2) } returns true
+                every { hasLocalFunctionsWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionsWithAllNames(name1, name2) } returns false
+                every { hasLocalFunctionsWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = listOf(name1, name2)
@@ -486,11 +486,11 @@ class KoLocalFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionsWithAllNames(name1, name2) } returns true
+                every { hasLocalFunctionsWithAllNames(setOf(name1, name2)) } returns true
             }
         val declaration2: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionsWithAllNames(name1, name2) } returns false
+                every { hasLocalFunctionsWithAllNames(setOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = setOf(name1, name2)
@@ -508,11 +508,11 @@ class KoLocalFunctionProviderListExtTest {
         val name = "SampleName"
         val declaration1: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionsWithAllNames(name) } returns true
+                every { hasLocalFunctionsWithAllNames(listOf(name)) } returns true
             }
         val declaration2: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionsWithAllNames(name) } returns false
+                every { hasLocalFunctionsWithAllNames(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -530,11 +530,11 @@ class KoLocalFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionsWithAllNames(name1, name2) } returns true
+                every { hasLocalFunctionsWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionsWithAllNames(name1, name2) } returns false
+                every { hasLocalFunctionsWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -552,11 +552,11 @@ class KoLocalFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionsWithAllNames(name1, name2) } returns true
+                every { hasLocalFunctionsWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionsWithAllNames(name1, name2) } returns false
+                every { hasLocalFunctionsWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = listOf(name1, name2)
@@ -575,11 +575,11 @@ class KoLocalFunctionProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionsWithAllNames(name1, name2) } returns true
+                every { hasLocalFunctionsWithAllNames(setOf(name1, name2)) } returns true
             }
         val declaration2: KoLocalFunctionProvider =
             mockk {
-                every { hasLocalFunctionsWithAllNames(name1, name2) } returns false
+                every { hasLocalFunctionsWithAllNames(setOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = setOf(name1, name2)

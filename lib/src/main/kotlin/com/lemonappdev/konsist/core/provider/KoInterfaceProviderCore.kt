@@ -30,25 +30,37 @@ internal interface KoInterfaceProviderCore : KoInterfaceProvider, KoDeclarationP
         name: String,
         vararg names: String,
         includeNested: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasInterfaceWithName(listOf(name, *names), includeNested)
 
-        return givenNames.any {
-            interfaces(includeNested).any { koInterface -> it == koInterface.name }
+    override fun hasInterfaceWithName(
+        names: Collection<String>,
+        includeNested: Boolean,
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasInterfaces(includeNested)
+            else ->
+                names.any {
+                    interfaces(includeNested).any { koInterface -> it == koInterface.name }
+                }
         }
-    }
 
     override fun hasInterfacesWithAllNames(
         name: String,
         vararg names: String,
         includeNested: Boolean,
-    ): Boolean {
-        val givenNames = names.toList() + name
+    ): Boolean = hasInterfacesWithAllNames(listOf(name, *names), includeNested)
 
-        return givenNames.all {
-            interfaces(includeNested).any { koInterface -> it == koInterface.name }
+    override fun hasInterfacesWithAllNames(
+        names: Collection<String>,
+        includeNested: Boolean,
+    ): Boolean =
+        when {
+            names.isEmpty() -> hasInterfaces(includeNested)
+            else ->
+                names.all {
+                    interfaces(includeNested).any { koInterface -> it == koInterface.name }
+                }
         }
-    }
 
     override fun hasInterface(
         includeNested: Boolean,

@@ -45,7 +45,7 @@ fun <T : KoParametersProvider> List<T>.withParameterNamed(names: Collection<Stri
     filter {
         when {
             names.isEmpty() -> it.hasParameters()
-            else -> it.hasParameterWithName(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasParameterWithName(names)
         }
     }
 
@@ -71,7 +71,7 @@ fun <T : KoParametersProvider> List<T>.withoutParameterNamed(names: Collection<S
     filterNot {
         when {
             names.isEmpty() -> it.hasParameters()
-            else -> it.hasParameterWithName(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasParameterWithName(names)
         }
     }
 
@@ -97,7 +97,7 @@ fun <T : KoParametersProvider> List<T>.withAllParametersNamed(names: Collection<
     filter {
         when {
             names.isEmpty() -> it.hasParameters()
-            else -> it.hasParametersWithAllNames(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasParametersWithAllNames(names)
         }
     }
 
@@ -123,7 +123,7 @@ fun <T : KoParametersProvider> List<T>.withoutAllParametersNamed(names: Collecti
     filterNot {
         when {
             names.isEmpty() -> it.hasParameters()
-            else -> it.hasParametersWithAllNames(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasParametersWithAllNames(names)
         }
     }
 

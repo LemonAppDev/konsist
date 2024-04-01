@@ -120,6 +120,30 @@ interface KoExternalParentProvider : KoBaseProvider {
     ): Boolean
 
     /**
+     * Determines whether the declaration has at least one external parent whose name matches any of the specified.
+     *
+     * @param names the names of the external parents to check.
+     * @param indirectParents specifies whether to include external parents defined in other files such as parent of the parent.
+     *                        If `true`, it includes only those external parents defined within our scope and those used
+     *                        by our declarations.
+     *                        For example:
+     *
+     *                        // Android
+     *                        class AppCompactActivity: Activity
+     *                        interface Activity
+     *
+     *                        // Project
+     *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
+     */
+    fun hasExternalParentWithName(
+        names: Collection<String>,
+        indirectParents: Boolean = false,
+    ): Boolean
+
+    /**
      * Determines whether the declaration has parents interface defined project codebase (external == false)
      *
      * @param name The name of the external parent to check.
@@ -142,6 +166,30 @@ interface KoExternalParentProvider : KoBaseProvider {
     fun hasExternalParentsWithAllNames(
         name: String,
         vararg names: String,
+        indirectParents: Boolean = false,
+    ): Boolean
+
+    /**
+     * Determines whether the declaration has parents interface defined project codebase (external == false)
+     *
+     * @param names The names of the external parents to check.
+     * @param indirectParents specifies whether to include external parents defined in other files such as parent of the parent.
+     *                        If `true`, it includes only those external parents defined within our scope and those used
+     *                        by our declarations.
+     *                        For example:
+     *
+     *                        // Android
+     *                        class AppCompactActivity: Activity
+     *                        interface Activity
+     *
+     *                        // Project
+     *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     * @return `true` if there are declarations with all the specified names, `false` otherwise.
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
+     */
+    fun hasExternalParentsWithAllNames(
+        names: Collection<String>,
         indirectParents: Boolean = false,
     ): Boolean
 
@@ -223,6 +271,30 @@ interface KoExternalParentProvider : KoBaseProvider {
     ): Boolean
 
     /**
+     * Determines whether the declaration has at least one external parent of the specified `KClass` type.
+     *
+     * @param names the `KClass` types of the external parents to check.
+     * @param indirectParents specifies whether to include external parents defined in other files such as parent of the parent.
+     *                        If `true`, it includes only those external parents defined within our scope and those used
+     *                        by our declarations.
+     *                        For example:
+     *
+     *                        // Android
+     *                        class AppCompactActivity: Activity
+     *                        interface Activity
+     *
+     *                        // Project
+     *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
+     */
+    fun hasExternalParentOf(
+        names: Collection<KClass<*>>,
+        indirectParents: Boolean = false,
+    ): Boolean
+
+    /**
      * Determines whether the declaration has external parents with all the specified `KClass` type.
      *
      * @param name the `KClass` type of the external parent to check.
@@ -245,6 +317,30 @@ interface KoExternalParentProvider : KoBaseProvider {
     fun hasAllExternalParentsOf(
         name: KClass<*>,
         vararg names: KClass<*>,
+        indirectParents: Boolean = false,
+    ): Boolean
+
+    /**
+     * Determines whether the declaration has external parents with all the specified `KClass` type.
+     *
+     * @param names the `KClass` types of the external parents to check.
+     * @param indirectParents specifies whether to include external parents defined in other files such as parent of the parent.
+     *                        If `true`, it includes only those external parents defined within our scope and those used
+     *                        by our declarations.
+     *                        For example:
+     *
+     *                        // Android
+     *                        class AppCompactActivity: Activity
+     *                        interface Activity
+     *
+     *                        // Project
+     *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     * @return `true` if the declaration has external parents of all the specified `KClass` types, `false` otherwise.
+     * @see com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
+     */
+    fun hasAllExternalParentsOf(
+        names: Collection<KClass<*>>,
         indirectParents: Boolean = false,
     ): Boolean
 }

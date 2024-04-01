@@ -45,7 +45,7 @@ fun <T : KoLocalClassProvider> List<T>.withLocalClassNamed(names: Collection<Str
     filter {
         when {
             names.isEmpty() -> it.hasLocalClasses()
-            else -> it.hasLocalClassWithName(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasLocalClassWithName(names)
         }
     }
 
@@ -71,7 +71,7 @@ fun <T : KoLocalClassProvider> List<T>.withoutLocalClassNamed(names: Collection<
     filterNot {
         when {
             names.isEmpty() -> it.hasLocalClasses()
-            else -> it.hasLocalClassWithName(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasLocalClassWithName(names)
         }
     }
 
@@ -97,7 +97,7 @@ fun <T : KoLocalClassProvider> List<T>.withAllLocalClassesNamed(names: Collectio
     filter {
         when {
             names.isEmpty() -> it.hasLocalClasses()
-            else -> it.hasLocalClassesWithAllNames(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasLocalClassesWithAllNames(names)
         }
     }
 
@@ -123,7 +123,7 @@ fun <T : KoLocalClassProvider> List<T>.withoutAllLocalClassesNamed(names: Collec
     filterNot {
         when {
             names.isEmpty() -> it.hasLocalClasses()
-            else -> it.hasLocalClassesWithAllNames(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasLocalClassesWithAllNames(names)
         }
     }
 

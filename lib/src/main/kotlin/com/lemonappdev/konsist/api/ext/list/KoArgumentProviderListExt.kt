@@ -45,7 +45,7 @@ fun <T : KoArgumentProvider> List<T>.withArgumentNamed(names: Collection<String>
     filter {
         when {
             names.isEmpty() -> it.hasArguments()
-            else -> it.hasArgumentWithName(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasArgumentWithName(names)
         }
     }
 
@@ -71,7 +71,7 @@ fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(names: Collection<Stri
     filterNot {
         when {
             names.isEmpty() -> it.hasArguments()
-            else -> it.hasArgumentWithName(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasArgumentWithName(names)
         }
     }
 
@@ -97,7 +97,7 @@ fun <T : KoArgumentProvider> List<T>.withAllArgumentsNamed(names: Collection<Str
     filter {
         when {
             names.isEmpty() -> it.hasArguments()
-            else -> it.hasArgumentsWithAllNames(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasArgumentsWithAllNames(names)
         }
     }
 
@@ -123,7 +123,7 @@ fun <T : KoArgumentProvider> List<T>.withoutAllArgumentsNamed(names: Collection<
     filterNot {
         when {
             names.isEmpty() -> it.hasArguments()
-            else -> it.hasArgumentsWithAllNames(names.first(), *names.drop(1).toTypedArray())
+            else -> it.hasArgumentsWithAllNames(names)
         }
     }
 

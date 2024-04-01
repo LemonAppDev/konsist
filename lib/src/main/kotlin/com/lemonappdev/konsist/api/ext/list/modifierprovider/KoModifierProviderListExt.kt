@@ -45,7 +45,7 @@ fun <T : KoModifierProvider> List<T>.withModifier(modifiers: Collection<KoModifi
     filter {
         when {
             modifiers.isEmpty() -> it.hasModifiers()
-            else -> it.hasModifier(modifiers.first(), *modifiers.drop(1).toTypedArray())
+            else -> it.hasModifier(modifiers)
         }
     }
 
@@ -71,7 +71,7 @@ fun <T : KoModifierProvider> List<T>.withoutModifier(modifiers: Collection<KoMod
     filterNot {
         when {
             modifiers.isEmpty() -> it.hasModifiers()
-            else -> it.hasModifier(modifiers.first(), *modifiers.drop(1).toTypedArray())
+            else -> it.hasModifier(modifiers)
         }
     }
 
@@ -97,7 +97,7 @@ fun <T : KoModifierProvider> List<T>.withAllModifiers(modifiers: Collection<KoMo
     filter {
         when {
             modifiers.isEmpty() -> it.hasModifiers()
-            else -> it.hasAllModifiers(modifiers.first(), *modifiers.drop(1).toTypedArray())
+            else -> it.hasAllModifiers(modifiers)
         }
     }
 
@@ -123,7 +123,7 @@ fun <T : KoModifierProvider> List<T>.withoutAllModifiers(modifiers: Collection<K
     filterNot {
         when {
             modifiers.isEmpty() -> it.hasModifiers()
-            else -> it.hasAllModifiers(modifiers.first(), *modifiers.drop(1).toTypedArray())
+            else -> it.hasAllModifiers(modifiers)
         }
     }
 

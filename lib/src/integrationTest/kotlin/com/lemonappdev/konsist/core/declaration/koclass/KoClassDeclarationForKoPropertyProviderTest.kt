@@ -21,8 +21,16 @@ class KoClassDeclarationForKoPropertyProviderTest {
         assertSoftly(sut) {
             properties() shouldBeEqualTo emptyList()
             hasProperties() shouldBeEqualTo false
+            hasPropertyWithName(emptyList()) shouldBeEqualTo false
+            hasPropertyWithName(emptySet()) shouldBeEqualTo false
+            hasPropertiesWithAllNames(emptyList()) shouldBeEqualTo false
+            hasPropertiesWithAllNames(emptySet()) shouldBeEqualTo false
             hasPropertyWithName("sampleProperty") shouldBeEqualTo false
+            hasPropertyWithName(listOf("sampleProperty")) shouldBeEqualTo false
+            hasPropertyWithName(setOf("sampleProperty")) shouldBeEqualTo false
             hasPropertiesWithAllNames("sampleProperty1", "sampleProperty2") shouldBeEqualTo false
+            hasPropertiesWithAllNames(listOf("sampleProperty1", "sampleProperty2")) shouldBeEqualTo false
+            hasPropertiesWithAllNames(setOf("sampleProperty1", "sampleProperty2")) shouldBeEqualTo false
             hasProperty { it.name == "sampleProperty" } shouldBeEqualTo false
             hasAllProperties { it.hasNameStartingWith("sample") } shouldBeEqualTo true
         }
@@ -39,11 +47,25 @@ class KoClassDeclarationForKoPropertyProviderTest {
         // then
         assertSoftly(sut) {
             hasProperties() shouldBeEqualTo true
+            hasPropertyWithName(emptyList()) shouldBeEqualTo true
+            hasPropertyWithName(emptySet()) shouldBeEqualTo true
+            hasPropertiesWithAllNames(emptyList()) shouldBeEqualTo true
+            hasPropertiesWithAllNames(emptySet()) shouldBeEqualTo true
             hasPropertyWithName("sampleProperty1") shouldBeEqualTo true
             hasPropertyWithName("sampleProperty1", "otherProperty") shouldBeEqualTo true
+            hasPropertyWithName(listOf("sampleProperty1")) shouldBeEqualTo true
+            hasPropertyWithName(listOf("sampleProperty1", "otherProperty")) shouldBeEqualTo true
+            hasPropertyWithName(setOf("sampleProperty1")) shouldBeEqualTo true
+            hasPropertyWithName(setOf("sampleProperty1", "otherProperty")) shouldBeEqualTo true
             hasPropertiesWithAllNames("sampleProperty1") shouldBeEqualTo true
             hasPropertiesWithAllNames("sampleProperty1", "sampleProperty2") shouldBeEqualTo true
             hasPropertiesWithAllNames("sampleProperty1", "otherProperty") shouldBeEqualTo false
+            hasPropertiesWithAllNames(listOf("sampleProperty1")) shouldBeEqualTo true
+            hasPropertiesWithAllNames(listOf("sampleProperty1", "sampleProperty2")) shouldBeEqualTo true
+            hasPropertiesWithAllNames(listOf("sampleProperty1", "otherProperty")) shouldBeEqualTo false
+            hasPropertiesWithAllNames(setOf("sampleProperty1")) shouldBeEqualTo true
+            hasPropertiesWithAllNames(setOf("sampleProperty1", "sampleProperty2")) shouldBeEqualTo true
+            hasPropertiesWithAllNames(setOf("sampleProperty1", "otherProperty")) shouldBeEqualTo false
             hasProperty { it.name == "sampleProperty1" } shouldBeEqualTo true
             hasProperty { it.hasNameEndingWith("Property1") } shouldBeEqualTo true
             hasAllProperties { it.hasNameStartingWith("sample") } shouldBeEqualTo true

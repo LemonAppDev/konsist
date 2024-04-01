@@ -71,13 +71,7 @@ fun <T : KoClassProvider> List<T>.withClassNamed(
     filter {
         when {
             names.isEmpty() -> it.hasClasses(includeNested, includeLocal)
-            else ->
-                it.hasClassWithName(
-                    names.first(),
-                    *names.drop(1).toTypedArray(),
-                    includeNested = includeNested,
-                    includeLocal = includeLocal,
-                )
+            else -> it.hasClassWithName(names, includeNested = includeNested, includeLocal = includeLocal)
         }
     }
 
@@ -113,13 +107,7 @@ fun <T : KoClassProvider> List<T>.withoutClassNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasClasses(includeNested, includeLocal)
-            else ->
-                it.hasClassWithName(
-                    names.first(),
-                    *names.drop(1).toTypedArray(),
-                    includeNested = includeNested,
-                    includeLocal = includeLocal,
-                )
+            else -> it.hasClassWithName(names, includeNested = includeNested, includeLocal = includeLocal)
         }
     }
 
@@ -155,13 +143,7 @@ fun <T : KoClassProvider> List<T>.withAllClassesNamed(
     filter {
         when {
             names.isEmpty() -> it.hasClasses(includeNested, includeLocal)
-            else ->
-                it.hasClassesWithAllNames(
-                    names.first(),
-                    *names.drop(1).toTypedArray(),
-                    includeNested = includeNested,
-                    includeLocal = includeLocal,
-                )
+            else -> it.hasClassesWithAllNames(names, includeNested = includeNested, includeLocal = includeLocal)
         }
     }
 
@@ -197,13 +179,7 @@ fun <T : KoClassProvider> List<T>.withoutAllClassesNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasClasses(includeNested, includeLocal)
-            else ->
-                it.hasClassesWithAllNames(
-                    names.first(),
-                    *names.drop(1).toTypedArray(),
-                    includeNested = includeNested,
-                    includeLocal = includeLocal,
-                )
+            else -> it.hasClassesWithAllNames(names, includeNested = includeNested, includeLocal = includeLocal)
         }
     }
 

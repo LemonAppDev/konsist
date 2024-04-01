@@ -19,12 +19,21 @@ class KoSetterDeclarationForKoLocalClassProviderTest {
         assertSoftly(sut) {
             it?.localClasses shouldBeEqualTo emptyList()
             it?.numLocalClasses shouldBeEqualTo 0
-            it?.countLocalClasses { localClass -> localClass.name == "SampleClass" } shouldBeEqualTo 0
+            it?.countLocalClasses { it.name == "SampleClass" } shouldBeEqualTo 0
             it?.hasLocalClasses() shouldBeEqualTo false
+            it?.hasLocalClassWithName(emptyList()) shouldBeEqualTo false
+            it?.hasLocalClassWithName(emptySet()) shouldBeEqualTo false
+            it?.hasLocalClassesWithAllNames(emptyList()) shouldBeEqualTo false
+            it?.hasLocalClassesWithAllNames(emptySet()) shouldBeEqualTo false
             it?.hasLocalClassWithName("SampleClass") shouldBeEqualTo false
+            it?.hasLocalClassWithName(listOf("SampleClass")) shouldBeEqualTo false
+            it?.hasLocalClassWithName(setOf("SampleClass")) shouldBeEqualTo false
             it?.hasLocalClassesWithAllNames("SampleClass1", "SampleClass2") shouldBeEqualTo false
-            it?.hasLocalClass { localClass -> localClass.name == "SampleClass" } shouldBeEqualTo false
-            it?.hasAllLocalClasses { localClass -> localClass.name == "SampleClass" } shouldBeEqualTo true
+            it?.hasLocalClassesWithAllNames(listOf("SampleClass1", "SampleClass2")) shouldBeEqualTo false
+            it?.hasLocalClassesWithAllNames(setOf("SampleClass1", "SampleClass2")) shouldBeEqualTo false
+            it?.hasLocalClass { it.name == "SampleClass" } shouldBeEqualTo false
+            it?.hasAllLocalClasses { it.name == "SampleClass" } shouldBeEqualTo true
+            it?.containsLocalClass { it.name == "SampleClass" } shouldBeEqualTo false
         }
     }
 
@@ -40,25 +49,38 @@ class KoSetterDeclarationForKoLocalClassProviderTest {
         // then
         assertSoftly(sut) {
             it?.localClasses?.map { localClass -> localClass.name } shouldBeEqualTo
-                listOf(
-                    "SampleClass1",
-                    "SampleClass2",
-                )
+                it?.localClasses?.map { it.name } shouldBeEqualTo listOf("SampleClass1", "SampleClass2")
             it?.numLocalClasses shouldBeEqualTo 2
-            it?.countLocalClasses { localClass -> localClass.name == "SampleClass1" } shouldBeEqualTo 1
+            it?.countLocalClasses { it.name == "SampleClass1" } shouldBeEqualTo 1
             it?.hasLocalClasses() shouldBeEqualTo true
+            it?.hasLocalClassWithName(emptyList()) shouldBeEqualTo true
+            it?.hasLocalClassWithName(emptySet()) shouldBeEqualTo true
+            it?.hasLocalClassesWithAllNames(emptyList()) shouldBeEqualTo true
+            it?.hasLocalClassesWithAllNames(emptySet()) shouldBeEqualTo true
             it?.hasLocalClassWithName("SampleClass1") shouldBeEqualTo true
-            it?.hasLocalClassWithName("OtherClass") shouldBeEqualTo false
-            it?.hasLocalClassWithName("SampleClass1", "OtherClass") shouldBeEqualTo true
+            it?.hasLocalClassWithName("OtherLocalClass") shouldBeEqualTo false
+            it?.hasLocalClassWithName("SampleClass1", "OtherLocalClass") shouldBeEqualTo true
+            it?.hasLocalClassWithName(listOf("SampleClass1")) shouldBeEqualTo true
+            it?.hasLocalClassWithName(listOf("OtherLocalClass")) shouldBeEqualTo false
+            it?.hasLocalClassWithName(listOf("SampleClass1", "OtherLocalClass")) shouldBeEqualTo true
+            it?.hasLocalClassWithName(setOf("SampleClass1")) shouldBeEqualTo true
+            it?.hasLocalClassWithName(setOf("OtherLocalClass")) shouldBeEqualTo false
+            it?.hasLocalClassWithName(setOf("SampleClass1", "OtherLocalClass")) shouldBeEqualTo true
             it?.hasLocalClassesWithAllNames("SampleClass1") shouldBeEqualTo true
             it?.hasLocalClassesWithAllNames("SampleClass1", "SampleClass2") shouldBeEqualTo true
-            it?.hasLocalClassesWithAllNames("SampleClass1", "OtherClass") shouldBeEqualTo false
-            it?.hasLocalClass { localClass -> localClass.name == "SampleClass1" } shouldBeEqualTo true
-            it?.hasLocalClass { localClass -> localClass.name == "OtherClass" } shouldBeEqualTo false
-            it?.hasAllLocalClasses { localClass ->
-                localClass.name.endsWith("2") || localClass.name == "SampleClass1"
-            }.shouldBeEqualTo(true)
-            it?.hasAllLocalClasses { localClass -> localClass.name.endsWith("2") } shouldBeEqualTo false
+            it?.hasLocalClassesWithAllNames("SampleClass1", "OtherLocalClass") shouldBeEqualTo false
+            it?.hasLocalClassesWithAllNames(listOf("SampleClass1")) shouldBeEqualTo true
+            it?.hasLocalClassesWithAllNames(listOf("SampleClass1", "SampleClass2")) shouldBeEqualTo true
+            it?.hasLocalClassesWithAllNames(listOf("SampleClass1", "OtherLocalClass")) shouldBeEqualTo false
+            it?.hasLocalClassesWithAllNames(setOf("SampleClass1")) shouldBeEqualTo true
+            it?.hasLocalClassesWithAllNames(setOf("SampleClass1", "SampleClass2")) shouldBeEqualTo true
+            it?.hasLocalClassesWithAllNames(setOf("SampleClass1", "OtherLocalClass")) shouldBeEqualTo false
+            it?.hasLocalClass { it.name == "SampleClass1" } shouldBeEqualTo true
+            it?.hasLocalClass { it.name == "OtherLocalClass" } shouldBeEqualTo false
+            it?.hasAllLocalClasses { it.name.endsWith("2") || it.name == "SampleClass1" } shouldBeEqualTo true
+            it?.hasAllLocalClasses { it.name.endsWith("2") } shouldBeEqualTo false
+            it?.containsLocalClass { it.name == "SampleClass1" } shouldBeEqualTo true
+            it?.containsLocalClass { it.name == "OtherLocalClass" } shouldBeEqualTo false
         }
     }
 

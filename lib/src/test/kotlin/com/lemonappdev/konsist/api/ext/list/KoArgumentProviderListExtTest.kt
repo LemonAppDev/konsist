@@ -241,11 +241,11 @@ class KoArgumentProviderListExtTest {
         val name = "SampleName"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name) } returns true
+                every { hasArgumentWithName(listOf(name)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name) } returns false
+                every { hasArgumentWithName(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -263,11 +263,11 @@ class KoArgumentProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name1, name2) } returns true
+                every { hasArgumentWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name1, name2) } returns false
+                every { hasArgumentWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -285,11 +285,11 @@ class KoArgumentProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name1, name2) } returns true
+                every { hasArgumentWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name1, name2) } returns false
+                every { hasArgumentWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = listOf(name1, name2)
@@ -308,14 +308,14 @@ class KoArgumentProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name1, name2) } returns true
+                every { hasArgumentWithName(setOf(name1, name2)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name1, name2) } returns false
+                every { hasArgumentWithName(setOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val names = listOf(name1, name2)
+        val names = setOf(name1, name2)
 
         // when
         val sut = declarations.withArgumentNamed(names)
@@ -330,11 +330,11 @@ class KoArgumentProviderListExtTest {
         val name = "SampleName"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name) } returns true
+                every { hasArgumentWithName(listOf(name)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name) } returns false
+                every { hasArgumentWithName(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -352,11 +352,11 @@ class KoArgumentProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name1, name2) } returns true
+                every { hasArgumentWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name1, name2) } returns false
+                every { hasArgumentWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -374,11 +374,11 @@ class KoArgumentProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name1, name2) } returns true
+                every { hasArgumentWithName(listOf(name1, name2)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name1, name2) } returns false
+                every { hasArgumentWithName(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = listOf(name1, name2)
@@ -397,11 +397,11 @@ class KoArgumentProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name1, name2) } returns true
+                every { hasArgumentWithName(setOf(name1, name2)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentWithName(name1, name2) } returns false
+                every { hasArgumentWithName(setOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = setOf(name1, name2)
@@ -419,11 +419,11 @@ class KoArgumentProviderListExtTest {
         val name = "SampleName"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name) } returns true
+                every { hasArgumentsWithAllNames(listOf(name)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name) } returns false
+                every { hasArgumentsWithAllNames(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -441,11 +441,11 @@ class KoArgumentProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name1, name2) } returns true
+                every { hasArgumentsWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name1, name2) } returns false
+                every { hasArgumentsWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -463,11 +463,11 @@ class KoArgumentProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name1, name2) } returns true
+                every { hasArgumentsWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name1, name2) } returns false
+                every { hasArgumentsWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = listOf(name1, name2)
@@ -486,14 +486,14 @@ class KoArgumentProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name1, name2) } returns true
+                every { hasArgumentsWithAllNames(setOf(name1, name2)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name1, name2) } returns false
+                every { hasArgumentsWithAllNames(setOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val names = listOf(name1, name2)
+        val names = setOf(name1, name2)
 
         // when
         val sut = declarations.withAllArgumentsNamed(names)
@@ -508,11 +508,11 @@ class KoArgumentProviderListExtTest {
         val name = "SampleName"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name) } returns true
+                every { hasArgumentsWithAllNames(listOf(name)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name) } returns false
+                every { hasArgumentsWithAllNames(listOf(name)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -530,11 +530,11 @@ class KoArgumentProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name1, name2) } returns true
+                every { hasArgumentsWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name1, name2) } returns false
+                every { hasArgumentsWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -552,11 +552,11 @@ class KoArgumentProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name1, name2) } returns true
+                every { hasArgumentsWithAllNames(listOf(name1, name2)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name1, name2) } returns false
+                every { hasArgumentsWithAllNames(listOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
         val names = listOf(name1, name2)
@@ -575,14 +575,14 @@ class KoArgumentProviderListExtTest {
         val name2 = "SampleName2"
         val declaration1: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name1, name2) } returns true
+                every { hasArgumentsWithAllNames(setOf(name1, name2)) } returns true
             }
         val declaration2: KoArgumentProvider =
             mockk {
-                every { hasArgumentsWithAllNames(name1, name2) } returns false
+                every { hasArgumentsWithAllNames(setOf(name1, name2)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val names = listOf(name1, name2)
+        val names = setOf(name1, name2)
 
         // when
         val sut = declarations.withoutAllArgumentsNamed(names)

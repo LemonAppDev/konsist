@@ -21,8 +21,16 @@ class KoObjectDeclarationForKoClassProviderTest {
         assertSoftly(sut) {
             classes() shouldBeEqualTo emptyList()
             hasClasses() shouldBeEqualTo false
+            hasClassWithName(emptyList()) shouldBeEqualTo false
+            hasClassWithName(emptySet()) shouldBeEqualTo false
+            hasClassesWithAllNames(emptyList()) shouldBeEqualTo false
+            hasClassesWithAllNames(emptySet()) shouldBeEqualTo false
             hasClassWithName("SampleClass") shouldBeEqualTo false
+            hasClassWithName(listOf("SampleClass")) shouldBeEqualTo false
+            hasClassWithName(setOf("SampleClass")) shouldBeEqualTo false
             hasClassesWithAllNames("SampleClass1", "SampleClass2") shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("SampleClass1", "SampleClass2")) shouldBeEqualTo false
+            hasClassesWithAllNames(setOf("SampleClass1", "SampleClass2")) shouldBeEqualTo false
             hasClass { it.name == "SampleClass" } shouldBeEqualTo false
             hasAllClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
         }
@@ -39,11 +47,25 @@ class KoObjectDeclarationForKoClassProviderTest {
         // then
         assertSoftly(sut) {
             hasClasses() shouldBeEqualTo true
+            hasClassWithName(emptyList()) shouldBeEqualTo true
+            hasClassWithName(emptySet()) shouldBeEqualTo true
+            hasClassesWithAllNames(emptyList()) shouldBeEqualTo true
+            hasClassesWithAllNames(emptySet()) shouldBeEqualTo true
             hasClassWithName("SampleClass1") shouldBeEqualTo true
             hasClassWithName("SampleClass1", "OtherClass") shouldBeEqualTo true
+            hasClassWithName(listOf("SampleClass1")) shouldBeEqualTo true
+            hasClassWithName(listOf("SampleClass1", "OtherClass")) shouldBeEqualTo true
+            hasClassWithName(setOf("SampleClass1")) shouldBeEqualTo true
+            hasClassWithName(setOf("SampleClass1", "OtherClass")) shouldBeEqualTo true
             hasClassesWithAllNames("SampleClass1") shouldBeEqualTo true
             hasClassesWithAllNames("SampleClass1", "SampleClass2") shouldBeEqualTo true
             hasClassesWithAllNames("SampleClass1", "OtherClass") shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("SampleClass1")) shouldBeEqualTo true
+            hasClassesWithAllNames(listOf("SampleClass1", "SampleClass2")) shouldBeEqualTo true
+            hasClassesWithAllNames(listOf("SampleClass1", "OtherClass")) shouldBeEqualTo false
+            hasClassesWithAllNames(setOf("SampleClass1")) shouldBeEqualTo true
+            hasClassesWithAllNames(setOf("SampleClass1", "SampleClass2")) shouldBeEqualTo true
+            hasClassesWithAllNames(setOf("SampleClass1", "OtherClass")) shouldBeEqualTo false
             hasClass { it.name == "SampleClass1" } shouldBeEqualTo true
             hasClass { it.hasNameEndingWith("Class1") } shouldBeEqualTo true
             hasAllClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo true

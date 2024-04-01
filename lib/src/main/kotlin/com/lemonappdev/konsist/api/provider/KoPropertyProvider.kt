@@ -70,6 +70,18 @@ interface KoPropertyProvider : KoBaseProvider {
     ): Boolean
 
     /**
+     * Determines whether the declaration has at least one property whose name matches any of the specified names.
+     *
+     * @param names the names of the properties to check.
+     * @param includeNested Specifies whether to include nested properties in the check (optional, default is `true`).
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasPropertyWithName(
+        names: Collection<String>,
+        includeNested: Boolean = true,
+    ): Boolean
+
+    /**
      * Determines whether the declaration has properties with all the specified names.
      *
      * @param name The name of the property to check.
@@ -80,6 +92,18 @@ interface KoPropertyProvider : KoBaseProvider {
     fun hasPropertiesWithAllNames(
         name: String,
         vararg names: String,
+        includeNested: Boolean = true,
+    ): Boolean
+
+    /**
+     * Determines whether the declaration has properties with all the specified names.
+     *
+     * @param names The names of the properties to check.
+     * @param includeNested Specifies whether to include nested properties in the check (optional, default is `true`).
+     * @return `true` if there are declarations with all the specified names, `false` otherwise.
+     */
+    fun hasPropertiesWithAllNames(
+        names: Collection<String>,
         includeNested: Boolean = true,
     ): Boolean
 
