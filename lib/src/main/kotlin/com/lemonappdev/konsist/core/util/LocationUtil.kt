@@ -18,10 +18,6 @@ object LocationUtil {
      *  (?:)  = non-capturing group.
      *   \w   = Matches one word character (alphanumeric character or underscore).
      *    |   = OR
-     *  \.{2}?= allow using '..' as wildcard optionally (only one accepted)
-     *    \w  = Matches any word char (alpha & underscore).
-     *    +   = Match 1 or more of the preceding token.
-     *    |   = OR
      *  \.{2} = escaped char '.' (dot) appearing 2 times
      *   \w   = Matches one word character (alphanumeric character or underscore).
      *   .*   = Matches zero or more of any character
