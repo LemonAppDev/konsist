@@ -28,11 +28,15 @@ data class Layer(internal val name: String, internal val definedBy: String) {
 
         if (!definedBy.matches(pattern)) {
             if (!definedBy.matches(withoutSingleDotAtTheBeginningPattern)) {
-                throw KoPreconditionFailedException("Layer $name cannot be defined by a package starting with a single dot. Now: $definedBy .")
+                throw KoPreconditionFailedException(
+                    "Layer $name cannot be defined by a package starting with a single dot. Now: $definedBy .",
+                )
             }
 
             if (!definedBy.matches(twoDotsAtTheEndPattern)) {
-                throw KoPreconditionFailedException("Layer $name must be defined by package ending with '..'. Now: $definedBy .")
+                throw KoPreconditionFailedException(
+                    "Layer $name must be defined by package ending with '..'. Now: $definedBy .",
+                )
             }
 
             if (!definedBy.matches(withoutFewDotsInOnePlacePattern)) {
@@ -43,5 +47,3 @@ data class Layer(internal val name: String, internal val definedBy: String) {
         }
     }
 }
-
-
