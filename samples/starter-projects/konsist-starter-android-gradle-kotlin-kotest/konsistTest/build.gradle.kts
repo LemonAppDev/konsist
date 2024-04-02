@@ -34,5 +34,5 @@ dependencies {
     testImplementation("io.kotest:kotest-runner-junit5:5.8.1")
 
     // Add Konsist dependency
-    testImplementation("com.lemonappdev:konsist:0.14.0")
+    testImplementation("com.lemonappdev:konsist:0.15.1")
 }

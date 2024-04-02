@@ -51,7 +51,7 @@ kotlin {
         }
         val jvmTest by getting {
             dependencies {
-                implementation("com.lemonappdev:konsist:0.14.0")
+                implementation("com.lemonappdev:konsist:0.15.1")
                 implementation("io.kotest:kotest-runner-junit5:5.8.1")
             }
         }
