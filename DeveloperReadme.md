@@ -43,9 +43,6 @@
 14. Upgrade `konist` version on `develop` branch
 15. Notify devs who have reported the issue (community link in original ticket)
 
-Respond
-fix starter link
-
 ## Production Release
 
 1. Merge `main` to `develop`
