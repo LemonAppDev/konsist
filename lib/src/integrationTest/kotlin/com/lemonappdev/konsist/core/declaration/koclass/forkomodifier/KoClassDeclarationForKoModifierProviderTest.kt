@@ -43,8 +43,6 @@ class KoClassDeclarationForKoModifierProviderTest {
             hasAllModifiers(listOf(OPEN, DATA)) shouldBeEqualTo false
             hasAllModifiers(setOf(OPEN)) shouldBeEqualTo false
             hasAllModifiers(setOf(OPEN, DATA)) shouldBeEqualTo false
-            hasModifiers(OPEN) shouldBeEqualTo false
-            hasModifiers(OPEN, DATA) shouldBeEqualTo false
         }
     }
 
@@ -85,13 +83,6 @@ class KoClassDeclarationForKoModifierProviderTest {
             hasAllModifiers(setOf(DATA)) shouldBeEqualTo false
             hasAllModifiers(setOf(OPEN, DATA)) shouldBeEqualTo false
             hasAllModifiers(setOf(OPEN, PRIVATE)) shouldBeEqualTo true
-            hasModifiers(PRIVATE) shouldBeEqualTo true
-            hasModifiers(OPEN) shouldBeEqualTo true
-            hasModifiers(PROTECTED) shouldBeEqualTo false
-            hasModifiers(PRIVATE, OPEN) shouldBeEqualTo true
-            hasModifiers(OPEN, PRIVATE) shouldBeEqualTo true
-            hasModifiers(PROTECTED, OPEN) shouldBeEqualTo false
-            hasModifiers(PROTECTED, OPEN, PRIVATE) shouldBeEqualTo false
         }
     }
 

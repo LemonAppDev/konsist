@@ -17,7 +17,6 @@ class KoFunctionDeclarationForKoReturnProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasReturnType shouldBeEqualTo false
             returnType shouldBeEqualTo null
             hasReturnType() shouldBeEqualTo false
             hasReturnType { it.name == "String" } shouldBeEqualTo false
@@ -35,7 +34,6 @@ class KoFunctionDeclarationForKoReturnProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasReturnType shouldBeEqualTo false
             returnType shouldBeEqualTo null
             hasReturnType() shouldBeEqualTo false
             hasReturnType { it.name == "String" } shouldBeEqualTo false
@@ -53,7 +51,6 @@ class KoFunctionDeclarationForKoReturnProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasReturnType shouldBeEqualTo true
             returnType?.name shouldBeEqualTo "SampleType"
             hasReturnType() shouldBeEqualTo true
             hasReturnType { it.name == "SampleType" } shouldBeEqualTo true
@@ -73,7 +70,6 @@ class KoFunctionDeclarationForKoReturnProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasReturnType shouldBeEqualTo true
             returnType?.name shouldBeEqualTo "ImportAlias"
             hasReturnType() shouldBeEqualTo true
             hasReturnType { it.name == "ImportAlias" } shouldBeEqualTo true
@@ -93,7 +89,6 @@ class KoFunctionDeclarationForKoReturnProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasReturnType shouldBeEqualTo true
             returnType?.name shouldBeEqualTo "SampleType"
             hasReturnType() shouldBeEqualTo true
             hasReturnType { it.name == "SampleType" } shouldBeEqualTo true

@@ -123,52 +123,5 @@ class KoFileDeclarationForKoObjectProviderTest {
         }
     }
 
-    @Test
-    fun `contains-objects-with-specified-conditions`() {
-        // given
-        val sut =
-            getSnippetFile("contains-objects-with-specified-conditions")
-                .files
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            containsObject {
-                it.name == "SampleObject" && it.hasPrivateModifier
-            } shouldBeEqualTo true
-            containsObject {
-                it.name == "SampleObject" && it.hasModifiers(PRIVATE, DATA)
-            } shouldBeEqualTo true
-            containsObject {
-                it.name == "SampleObject" && it.hasPublicModifier
-            } shouldBeEqualTo false
-            containsObject {
-                it.name == "SampleObject" && it.hasModifiers(INTERNAL, PRIVATE)
-            } shouldBeEqualTo false
-            containsObject(includeNested = true) { it.name == "SampleNestedObject" && it.hasPrivateModifier } shouldBeEqualTo true
-            containsObject(includeNested = false) { it.name == "SampleNestedObject" && it.hasPrivateModifier } shouldBeEqualTo false
-            containsObject(includeNested = true) { it.name == "SampleNestedObject" && it.hasCompanionModifier } shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `contains-objects-with-specified-regex`() {
-        // given
-        val regex1 = Regex("[a-zA-Z]+")
-        val regex2 = Regex("[0-9]+")
-        val sut =
-            getSnippetFile("contains-objects-with-specified-regex")
-                .files
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            containsObject(includeNested = false) { it.name.matches(regex1) } shouldBeEqualTo true
-            containsObject(includeNested = true) { it.name.matches(regex1) } shouldBeEqualTo true
-            containsObject(includeNested = false) { it.name.matches(regex2) } shouldBeEqualTo false
-            containsObject(includeNested = true) { it.name.matches(regex2) } shouldBeEqualTo false
-        }
-    }
-
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofile/snippet/forkoobjectprovider/", fileName)
 }

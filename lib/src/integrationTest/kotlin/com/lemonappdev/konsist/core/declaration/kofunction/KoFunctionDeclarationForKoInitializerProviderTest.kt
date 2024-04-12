@@ -41,42 +41,6 @@ class KoFunctionDeclarationForKoInitializerProviderTest {
         sut.isInitialized shouldBeEqualTo false
     }
 
-    @Test
-    fun `function-has-implementation-in-block-body`() {
-        // given
-        val sut =
-            getSnippetFile("function-has-implementation-in-block-body")
-                .functions(includeNested = true)
-                .first()
-
-        // then
-        sut.hasImplementation shouldBeEqualTo true
-    }
-
-    @Test
-    fun `function-has-implementation-in-expression-body`() {
-        // given
-        val sut =
-            getSnippetFile("function-has-implementation-in-expression-body")
-                .functions(includeNested = true)
-                .first()
-
-        // then
-        sut.hasImplementation shouldBeEqualTo true
-    }
-
-    @Test
-    fun `function-inside-interface-has-no-implementation`() {
-        // given
-        val sut =
-            getSnippetFile("function-inside-interface-has-no-implementation")
-                .functions(includeNested = true)
-                .first()
-
-        // then
-        sut.hasImplementation shouldBeEqualTo false
-    }
-
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/kofunction/snippet/forkoinitializerprovider/", fileName)
 }
