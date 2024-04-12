@@ -9,19 +9,6 @@ import kotlin.reflect.KClass
 interface KoParentInterfaceProvider : KoBaseProvider {
     /**
      * The parent interfaces of the declaration.
-     * Does not include parent interfaces defined in other files such as parent of the parent.
-     */
-    @Deprecated("Will be removed in v0.16.0.", replaceWith = ReplaceWith("parentInterfaces()"))
-    val parentInterfaces: List<KoInterfaceDeclaration>
-
-    /**
-     * Gets the number of parent interfaces.
-     */
-    @Deprecated("Will be removed in v0.16.0.", replaceWith = ReplaceWith("numParentInterfaces()"))
-    val numParentInterfaces: Int
-
-    /**
-     * The parent interfaces of the declaration.
      *
      * @param indirectParents specifies whether to include parent interfaces defined in other files such as parent of the parent.
      * @return a list of [KoInterfaceDeclaration] representing the parent interfaces of the declaration.
@@ -47,16 +34,6 @@ interface KoParentInterfaceProvider : KoBaseProvider {
         indirectParents: Boolean = false,
         predicate: (KoInterfaceDeclaration) -> Boolean,
     ): Int
-
-    /**
-     * Determines whatever declaration has parent interfaces.
-     *
-     * @param names the names of the parent interfaces to check.
-     * @return `true` if the declaration has parent interfaces with the specified names (or any parent interface if [names] is empty),
-     * `false` otherwise.
-     */
-    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasParents()"))
-    fun hasParentInterfaces(vararg names: String): Boolean
 
     /**
      * Determines whatever declaration has any parent interface.

@@ -12,9 +12,6 @@ internal interface KoLocalClassProviderCore : KoLocalClassProvider, KoLocalDecla
 
     override fun countLocalClasses(predicate: (KoClassDeclaration) -> Boolean): Int = localClasses.count { predicate(it) }
 
-    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasLocalClass()"))
-    override fun containsLocalClass(predicate: (KoClassDeclaration) -> Boolean): Boolean = localClasses.any { predicate(it) }
-
     override fun hasLocalClasses(): Boolean = localClasses.isNotEmpty()
 
     override fun hasLocalClassWithName(

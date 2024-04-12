@@ -30,21 +30,6 @@ internal interface KoEnumConstantProviderCore :
 
     override fun countEnumConstants(predicate: (KoEnumConstantDeclaration) -> Boolean): Int = enumConstants.count { predicate(it) }
 
-    @Deprecated(
-        """
-            Will be removed in v0.16.0. 
-            If you passed one argument - replace with `hasEnumConstantWithName`, otherwise with `hasEnumConstantsWithAllNames`.
-            """,
-    )
-    override fun hasEnumConstants(vararg names: String): Boolean =
-        when {
-            names.isEmpty() -> enumConstants.isNotEmpty()
-            else ->
-                names.all {
-                    enumConstants.any { constant -> constant.name == it }
-                }
-        }
-
     override fun hasEnumConstants(): Boolean = enumConstants.isNotEmpty()
 
     override fun hasEnumConstantWithName(

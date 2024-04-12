@@ -30,21 +30,6 @@ internal interface KoImportProviderCore : KoImportProvider, KoContainingDeclarat
 
     override fun countImports(predicate: (KoImportDeclaration) -> Boolean): Int = imports.count { predicate(it) }
 
-    @Deprecated(
-        """
-            Will be removed in v0.16.0. 
-            If you passed one argument - replace with `hasImportWithName`, otherwise with `hasImportsWithAllNames`.
-            """,
-    )
-    override fun hasImports(vararg names: String): Boolean =
-        when {
-            names.isEmpty() -> imports.isNotEmpty()
-            else ->
-                names.all {
-                    imports.any { import -> LocationUtil.resideInLocation(it, import.name) }
-                }
-        }
-
     override fun hasImports(): Boolean = imports.isNotEmpty()
 
     override fun hasImportWithName(

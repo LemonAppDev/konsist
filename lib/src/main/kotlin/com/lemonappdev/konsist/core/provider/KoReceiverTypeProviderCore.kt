@@ -34,9 +34,6 @@ internal interface KoReceiverTypeProviderCore :
             }
         }
 
-    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasReceiverType { it.name == name }"))
-    override fun hasReceiverType(name: String): Boolean = TypeUtil.hasReceiverType(receiverType, name)
-
     override fun hasReceiverType(predicate: ((KoTypeDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
             null -> receiverType != null

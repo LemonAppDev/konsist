@@ -11,12 +11,6 @@ internal interface KoPropertyProviderCore : KoPropertyProvider, KoDeclarationPro
             includeNested,
         )
 
-    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasProperty()"))
-    override fun containsProperty(
-        includeNested: Boolean,
-        predicate: (KoPropertyDeclaration) -> Boolean,
-    ): Boolean = properties(includeNested).any { predicate(it) }
-
     override fun numProperties(includeNested: Boolean): Int = properties(includeNested).size
 
     override fun countProperties(
