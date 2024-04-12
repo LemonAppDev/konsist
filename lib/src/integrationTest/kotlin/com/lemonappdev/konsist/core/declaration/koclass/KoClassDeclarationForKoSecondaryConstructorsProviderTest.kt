@@ -23,7 +23,6 @@ class KoClassDeclarationForKoSecondaryConstructorsProviderTest {
             hasSecondaryConstructors() shouldBeEqualTo false
             hasSecondaryConstructor { it.hasPublicModifier } shouldBeEqualTo false
             hasAllSecondaryConstructors { it.hasPublicModifier } shouldBeEqualTo true
-            hasSecondaryConstructors shouldBeEqualTo false
         }
     }
 
@@ -46,7 +45,6 @@ class KoClassDeclarationForKoSecondaryConstructorsProviderTest {
             hasSecondaryConstructor { it.hasPublicModifier } shouldBeEqualTo false
             hasAllSecondaryConstructors { it.hasPrivateModifier } shouldBeEqualTo true
             hasAllSecondaryConstructors { it.hasPublicModifier } shouldBeEqualTo false
-            hasSecondaryConstructors shouldBeEqualTo true
         }
     }
 
@@ -86,7 +84,7 @@ class KoClassDeclarationForKoSecondaryConstructorsProviderTest {
             numSecondaryConstructors shouldBeEqualTo 1
             countSecondaryConstructors { it.hasPublicOrDefaultModifier } shouldBeEqualTo 1
             countSecondaryConstructors { it.hasPublicModifier } shouldBeEqualTo 0
-            hasSecondaryConstructors shouldBeEqualTo true
+            hasSecondaryConstructors() shouldBeEqualTo true
         }
     }
 

@@ -20,7 +20,6 @@ class KoPropertyDeclarationForKoNullableTypeProviderTest {
             hasType() shouldBeEqualTo false
             hasType { it.name == "String" } shouldBeEqualTo false
             hasTypeOf(String::class) shouldBeEqualTo false
-            hasType("String") shouldBeEqualTo false
         }
     }
 
@@ -40,8 +39,6 @@ class KoPropertyDeclarationForKoNullableTypeProviderTest {
             hasType { it.name == "Int" } shouldBeEqualTo false
             hasTypeOf(String::class) shouldBeEqualTo true
             hasTypeOf(Int::class) shouldBeEqualTo false
-            hasType("String") shouldBeEqualTo true
-            hasType("Int") shouldBeEqualTo false
         }
     }
 

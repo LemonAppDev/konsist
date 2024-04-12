@@ -118,21 +118,6 @@ class KoFunctionDeclarationForKoParametersProviderTest {
         }
     }
 
-    @Test
-    fun `function-has-parameter`() {
-        // given
-        val sut =
-            getSnippetFile("function-has-parameter")
-                .functions()
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            hasParameterNamed("sampleProperty") shouldBeEqualTo true
-            hasParameterNamed("otherProperty") shouldBeEqualTo false
-        }
-    }
-
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kofunction/snippet/forkoparametersprovider/", fileName)
 }

@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.declaration.koproperty.forkomodifier
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.KoModifier.DATA
-import com.lemonappdev.konsist.api.KoModifier.FINAL
 import com.lemonappdev.konsist.api.KoModifier.OPEN
 import com.lemonappdev.konsist.api.KoModifier.PROTECTED
 import org.amshove.kluent.assertSoftly
@@ -43,8 +42,6 @@ class KoPropertyDeclarationForKoModifierProviderTest {
             hasAllModifiers(listOf(OPEN, DATA)) shouldBeEqualTo false
             hasAllModifiers(setOf(OPEN)) shouldBeEqualTo false
             hasAllModifiers(setOf(OPEN, DATA)) shouldBeEqualTo false
-            hasModifiers(OPEN) shouldBeEqualTo false
-            hasModifiers(OPEN, DATA) shouldBeEqualTo false
         }
     }
 
@@ -85,13 +82,6 @@ class KoPropertyDeclarationForKoModifierProviderTest {
             hasAllModifiers(setOf(DATA)) shouldBeEqualTo false
             hasAllModifiers(setOf(OPEN, DATA)) shouldBeEqualTo false
             hasAllModifiers(setOf(OPEN, PROTECTED)) shouldBeEqualTo true
-            hasModifiers(PROTECTED) shouldBeEqualTo true
-            hasModifiers(OPEN) shouldBeEqualTo true
-            hasModifiers(FINAL) shouldBeEqualTo false
-            hasModifiers(PROTECTED, OPEN) shouldBeEqualTo true
-            hasModifiers(OPEN, PROTECTED) shouldBeEqualTo true
-            hasModifiers(PROTECTED, FINAL) shouldBeEqualTo false
-            hasModifiers(FINAL, OPEN, PROTECTED) shouldBeEqualTo false
         }
     }
 

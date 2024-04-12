@@ -12,7 +12,7 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-class-is-not-in-package")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -25,7 +25,7 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-class-is-in-package")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -38,7 +38,7 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-interface-is-not-in-package")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -51,7 +51,7 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-interface-is-in-package")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -64,7 +64,7 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-object-is-not-in-package")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -77,7 +77,7 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-object-is-in-package")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -90,7 +90,7 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-import-of-class-package")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -103,7 +103,7 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-import-of-interface-package")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -116,7 +116,7 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-import-of-object-package")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -129,7 +129,7 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("external-parent-of-class-package")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -142,7 +142,7 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("external-parent-of-interface-package")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -155,7 +155,7 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("external-parent-of-object-package")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then

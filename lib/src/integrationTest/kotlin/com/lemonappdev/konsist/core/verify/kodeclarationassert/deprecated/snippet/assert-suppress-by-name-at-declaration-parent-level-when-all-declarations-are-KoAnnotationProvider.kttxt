@@ -1,6 +1,0 @@
-package com.lemonappdev.konsist.core.verify.kodeclarationassert.deprecated.snippet
-
-@Suppress("assert-suppress-by-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider")
-class SampleClassWithIncorrectSuffix1 {
-    class SampleClassWithIncorrectSuffix2
-}

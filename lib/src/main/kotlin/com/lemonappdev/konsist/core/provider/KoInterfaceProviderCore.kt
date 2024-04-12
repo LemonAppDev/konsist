@@ -11,12 +11,6 @@ internal interface KoInterfaceProviderCore : KoInterfaceProvider, KoDeclarationP
             includeNested,
         )
 
-    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasInterface()"))
-    override fun containsInterface(
-        includeNested: Boolean,
-        predicate: (KoInterfaceDeclaration) -> Boolean,
-    ): Boolean = interfaces(includeNested).any { predicate(it) }
-
     override fun numInterfaces(includeNested: Boolean): Int = interfaces(includeNested).size
 
     override fun countInterfaces(

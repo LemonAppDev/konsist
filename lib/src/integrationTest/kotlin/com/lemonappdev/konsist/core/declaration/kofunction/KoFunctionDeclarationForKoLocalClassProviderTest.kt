@@ -32,7 +32,6 @@ class KoFunctionDeclarationForKoLocalClassProviderTest {
             hasLocalClassesWithAllNames(setOf("SampleClass1", "SampleClass2")) shouldBeEqualTo false
             hasLocalClass { it.name == "SampleClass" } shouldBeEqualTo false
             hasAllLocalClasses { it.name == "SampleClass" } shouldBeEqualTo true
-            containsLocalClass { it.name == "SampleClass" } shouldBeEqualTo false
         }
     }
 
@@ -76,8 +75,6 @@ class KoFunctionDeclarationForKoLocalClassProviderTest {
             hasLocalClass { it.name == "OtherLocalClass" } shouldBeEqualTo false
             hasAllLocalClasses { it.name.endsWith("2") || it.name == "SampleClass1" } shouldBeEqualTo true
             hasAllLocalClasses { it.name.endsWith("2") } shouldBeEqualTo false
-            containsLocalClass { it.name == "SampleClass1" } shouldBeEqualTo true
-            containsLocalClass { it.name == "OtherLocalClass" } shouldBeEqualTo false
         }
     }
 

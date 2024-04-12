@@ -13,15 +13,6 @@ interface KoNullableTypeProvider : KoBaseProvider {
     val type: KoTypeDeclaration?
 
     /**
-     * Whatever declaration has a type.
-     *
-     * @param name the type name to check for.
-     * @return `true` if the declaration has the specified type, `false` otherwise.
-     */
-    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasType { it.name == name }"))
-    fun hasType(name: String): Boolean
-
-    /**
      * Whether declaration has a specified type.
      *
      * @param predicate The predicate function used to determine if a declaration type satisfies a condition.

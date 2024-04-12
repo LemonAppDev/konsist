@@ -1,3 +1,0 @@
-class SampleClass1(val sampleParameter: String)
-
-class SampleClass2

@@ -1,9 +1,0 @@
-interface SampleTopLevelInterface {
-    public fun sampleFunction() {
-        suspend fun sampleLocalFunction() {}
-    }
-
-    open class SampleClass {
-        open fun sampleNestedFunction() {}
-    }
-}

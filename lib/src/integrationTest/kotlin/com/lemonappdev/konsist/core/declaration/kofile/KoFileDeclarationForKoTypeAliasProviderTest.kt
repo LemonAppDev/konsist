@@ -32,7 +32,6 @@ class KoFileDeclarationForKoTypeAliasProviderTest {
             hasTypeAliasesWithAllNames(setOf("SampleTypeAlias1", "SampleTypeAlias2")) shouldBeEqualTo false
             hasTypeAlias { it.hasPublicModifier } shouldBeEqualTo false
             hasAllTypeAliases { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
-            hasTypeAliases("SampleTypeAlias") shouldBeEqualTo false
         }
     }
 
@@ -115,9 +114,6 @@ class KoFileDeclarationForKoTypeAliasProviderTest {
             hasTypeAlias { it.hasPublicModifier } shouldBeEqualTo true
             hasAllTypeAliases { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
             hasAllTypeAliases { it.hasPublicModifier } shouldBeEqualTo false
-            hasTypeAliases("SampleTypeAlias1") shouldBeEqualTo true
-            hasTypeAliases("SampleTypeAlias1", "SampleTypeAlias2") shouldBeEqualTo true
-            hasTypeAliases("OtherTypeAlias") shouldBeEqualTo false
         }
     }
 

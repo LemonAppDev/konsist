@@ -28,10 +28,4 @@ interface KoInitializerProvider : KoBaseProvider {
      * ```
      */
     val isInitialized: Boolean
-
-    /**
-     * Determines whatever this declaration has implementation.
-     */
-    @Deprecated("Will be removed in v0.16.0", ReplaceWith("isInitialized"))
-    val hasImplementation: Boolean
 }

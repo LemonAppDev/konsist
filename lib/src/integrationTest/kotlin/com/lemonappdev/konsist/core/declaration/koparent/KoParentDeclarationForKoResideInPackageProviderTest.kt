@@ -12,7 +12,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-class-not-reside-in-file-package")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -25,7 +25,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-class-reside-in-file-package")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -38,7 +38,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-class-not-reside-outside-file-package")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -51,7 +51,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-class-reside-outside-file-package")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -64,7 +64,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-interface-not-reside-in-file-package")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -77,7 +77,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-interface-reside-in-file-package")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -90,7 +90,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-interface-not-reside-outside-file-package")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -103,7 +103,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-interface-reside-outside-file-package")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -116,7 +116,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-object-not-reside-in-file-package")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -129,7 +129,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-object-reside-in-file-package")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -142,7 +142,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-object-not-reside-outside-file-package")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -155,7 +155,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-object-reside-outside-file-package")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -168,7 +168,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-import-of-class-not-reside-in-file-package")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -181,7 +181,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-import-of-class-reside-in-file-package")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -194,7 +194,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-import-of-class-not-reside-outside-file-package")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -207,7 +207,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-import-of-class-reside-outside-file-package")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -220,7 +220,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-import-of-interface-not-reside-in-file-package")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -233,7 +233,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-import-of-interface-reside-in-file-package")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -246,7 +246,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-import-of-interface-not-reside-outside-file-package")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -259,7 +259,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-import-of-interface-reside-outside-file-package")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -272,7 +272,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-import-of-object-not-reside-in-file-package")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -285,7 +285,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-import-of-object-reside-in-file-package")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -298,7 +298,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-import-of-object-not-reside-outside-file-package")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -311,7 +311,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-import-of-object-reside-outside-file-package")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -324,7 +324,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("external-parent-of-class-not-reside-in-file-package")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -337,7 +337,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("external-parent-of-class-reside-in-file-package")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -350,7 +350,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("external-parent-of-class-not-reside-outside-file-package")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -363,7 +363,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("external-parent-of-class-reside-outside-file-package")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -376,7 +376,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("external-parent-of-interface-not-reside-in-file-package")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -389,7 +389,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("external-parent-of-interface-reside-in-file-package")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -402,7 +402,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("external-parent-of-interface-not-reside-outside-file-package")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -415,7 +415,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("external-parent-of-interface-reside-outside-file-package")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -428,7 +428,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("external-parent-of-object-not-reside-in-file-package")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -441,7 +441,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("external-parent-of-object-reside-in-file-package")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -454,7 +454,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("external-parent-of-object-not-reside-outside-file-package")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -467,7 +467,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
         val sut =
             getSnippetFile("external-parent-of-object-reside-outside-file-package")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then

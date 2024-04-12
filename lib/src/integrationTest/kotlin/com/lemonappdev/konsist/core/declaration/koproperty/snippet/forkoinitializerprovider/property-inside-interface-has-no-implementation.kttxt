@@ -1,3 +1,0 @@
-interface SampleInterface {
-    val sampleProperty: Int
-}
