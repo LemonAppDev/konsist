@@ -1,9 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kointerface
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.KoModifier.COMPANION
-import com.lemonappdev.konsist.api.KoModifier.INTERNAL
-import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test

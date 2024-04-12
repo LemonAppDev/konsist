@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.provider.KoAliasProvider
-import com.lemonappdev.konsist.api.provider.KoNameProvider
 
 /**
  * List containing import alias declarations.
