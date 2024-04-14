@@ -14,7 +14,7 @@ class SampleDynamicKonsistTest : FreeSpec({
         .withNameEndingWith("UseCase")
         .forEach { useCase ->
             "${useCase.name} should have test" {
-                useCase.assertTrue(testName = this.testCase.name.testName) { it.hasTestClass() }
+                useCase.assertTrue(testName = this.testCase.name.testName) { it.hasTestClasses() }
             }
             "${useCase.name} should reside in ..domain.usecase.. package" {
                 useCase.assertTrue(testName = this.testCase.name.testName) { it.resideInPackage("..domain.usecase..") }
