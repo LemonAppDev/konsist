@@ -1,6 +1,7 @@
 package com.sample.domain.usecase
 
 class AdjustCaloricGoalUseCaseTest {
-    private val sut = AdjustCaloricGoalUseCase()
+    @Suppress("detekt.UnusedPrivateProperty")
+    private val sut = CalculateDailyIntakeUseCase() = AdjustCaloricGoalUseCase()
 // unit tests
 }
