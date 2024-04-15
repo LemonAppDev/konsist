@@ -70,4 +70,4 @@ jobs:
 
       - name: Run Python Script With Changed .kttxt Files
         run: |
-          python3 scripts/check_kttxt_snippets.py ${{ env.CHANGED_FILES_NAMES }}
+          python3 scripts/check_kttxt_snippets.py -all
