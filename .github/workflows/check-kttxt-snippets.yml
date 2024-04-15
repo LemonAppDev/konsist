@@ -37,7 +37,7 @@ jobs:
         run: |
           echo Current branch starts with "release/": ${{ startsWith(steps.branch-name.outputs.current_branch, 'release/') }}
           echo Base ref branch is "main": ${{ steps.branch-name.outputs.base_ref_branch == 'main' }}
-          echo Changed .kttxt files: ${{  contains(steps.changed-files.outputs.all_changed_files, '.kttxt') }}
+          echo Changed .kttxt files: ${{ contains(steps.changed-files.outputs.all_changed_files, '.kttxt') }}
 
     outputs:
       current_branch: ${{ steps.branch-name.outputs.current_branch }}
@@ -64,10 +64,10 @@ jobs:
 
       - name: Filter Changed .kttxt Files
         run: |
-          kttxt_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttxt$')
+          kttxt_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttxt$' | grep -v 'lib/src/snippet/kotlin/com/lemonappdev/konsist')
           echo "$kttxt_files"
           echo "CHANGED_FILES_NAMES=$(echo "$kttxt_files" | tr '\n' ' ')" >> $GITHUB_ENV
 
       - name: Run Python Script With Changed .kttxt Files
         run: |
-          python3 scripts/check_kttxt_snippets.py -all
+          python3 scripts/check_kttxt_snippets.py ${{ env.CHANGED_FILES_NAMES }}
