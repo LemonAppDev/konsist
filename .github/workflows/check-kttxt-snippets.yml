@@ -70,4 +70,10 @@ jobs:
 
       - name: Run Python Script With Changed .kttxt Files
         run: |
-          python3 scripts/check_kttxt_snippets.py ${{ env.CHANGED_FILES_NAMES }}
+           if [ -n "$CHANGED_FILES_NAMES" ]; then
+            python3 scripts/check_kttxt_snippets.py $CHANGED_FILES_NAMES
+           else
+            echo "No changed .kttxt files to process."
+           fi
+        env:
+         CHANGED_FILES_NAMES: ${{ env.CHANGED_FILES_NAMES }}

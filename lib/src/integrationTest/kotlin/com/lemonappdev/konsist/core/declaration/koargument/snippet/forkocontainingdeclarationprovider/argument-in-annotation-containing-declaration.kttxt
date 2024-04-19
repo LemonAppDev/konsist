@@ -3,4 +3,3 @@ import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
 @SampleAnnotationWithParameter(sampleParameter = "text")
 fun sampleFunction() {
 }
-val test change
