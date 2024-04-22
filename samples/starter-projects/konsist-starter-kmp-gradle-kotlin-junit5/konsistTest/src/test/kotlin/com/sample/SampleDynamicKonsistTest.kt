@@ -17,7 +17,7 @@ class SampleDynamicKonsistTest {
             Stream.of(
                 dynamicTest("${useCase.name} should have test") {
                     useCase.assertTrue {
-                        it.hasTestClass()
+                        it.hasTestClasses()
                     }
                 },
                 dynamicTest("${useCase.name} should reside in ..domain.usecase.. package") {
