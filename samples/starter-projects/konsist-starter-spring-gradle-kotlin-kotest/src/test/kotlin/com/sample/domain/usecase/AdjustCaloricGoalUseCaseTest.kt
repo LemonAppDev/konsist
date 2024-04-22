@@ -1,6 +1,6 @@
 package com.sample.domain.usecase
 
 class AdjustCaloricGoalUseCaseTest {
-    private val sut = CalculateDailyIntakeUseCase() = AdjustCaloricGoalUseCase()
+    private val sut = AdjustCaloricGoalUseCase()
 // unit tests
 }
