@@ -19,7 +19,7 @@ class KoClassDeclarationForKoHasTestClassProviderTest {
             .first()
 
         // then
-        sut.hasTestClass() shouldBeEqualTo true
+        sut.hasTestClasses() shouldBeEqualTo true
     }
 
     @Test
@@ -31,7 +31,7 @@ class KoClassDeclarationForKoHasTestClassProviderTest {
             .first()
 
         // then
-        sut.hasTestClass() shouldBeEqualTo false
+        sut.hasTestClasses() shouldBeEqualTo false
     }
 
     @Test
@@ -43,7 +43,7 @@ class KoClassDeclarationForKoHasTestClassProviderTest {
             .first { it.name == "LibClass" }
 
         // then
-        sut.hasTestClass("Spec") shouldBeEqualTo true
+        sut.hasTestClasses("Spec") shouldBeEqualTo true
     }
 
     @Test
@@ -55,7 +55,7 @@ class KoClassDeclarationForKoHasTestClassProviderTest {
             .first()
 
         // then
-        sut.hasTestClass("Spec") shouldBeEqualTo false
+        sut.hasTestClasses("Spec") shouldBeEqualTo false
     }
 
     @ParameterizedTest
@@ -72,7 +72,7 @@ class KoClassDeclarationForKoHasTestClassProviderTest {
             .first()
 
         // then
-        sut.hasTestClass(moduleName = moduleName, sourceSetName = sourceSetName) shouldBeEqualTo value
+        sut.hasTestClasses(moduleName = moduleName, sourceSetName = sourceSetName) shouldBeEqualTo value
     }
 
     companion object {
