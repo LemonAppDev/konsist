@@ -1,6 +1,9 @@
 package com.lemonappdev.konsist.declaration.type.kotype
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
 import com.lemonappdev.sample.ClassType.NestedClassType
@@ -96,12 +99,12 @@ class KoTypeForKoTypeDeclarationProviderTest {
                 ?.hasObjectDeclaration { declaration ->
                     declaration.fullyQualifiedName == "com.lemonappdev.sample.ObjectType.NestedObjectType"
                 }
-                .shouldBeEqualTo.(true)
+                .shouldBeEqualTo(true)
             it
                 ?.hasObjectDeclaration { declaration ->
                     declaration.fullyQualifiedName == "com.lemonappdev.sample.ObjectType.OtherName"
                 }
-                .shouldBeEqualTo.(false)
+                .shouldBeEqualTo(false)
             it?.hasObjectDeclarationOf(NestedObjectType::class) shouldBeEqualTo true
             it?.hasObjectDeclarationOf(NestedClassType::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
