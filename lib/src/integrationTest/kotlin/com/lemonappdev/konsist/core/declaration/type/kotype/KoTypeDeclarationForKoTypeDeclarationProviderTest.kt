@@ -69,10 +69,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasDeclarationOf(SampleType::class) shouldBeEqualTo true
             it?.hasDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
-            it?.asClassDeclaration()?.name shouldBeEqualTo "SampleType"
+            it?.asClassDeclaration()?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
             it?.hasClassDeclaration() shouldBeEqualTo true
-            it?.hasClassDeclaration { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
-            it?.hasClassDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasClassDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.konsist.testdata.SampleType" } shouldBeEqualTo true
+            it?.hasClassDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.konsist.testdata.OtherName" } shouldBeEqualTo false
             it?.hasClassDeclarationOf(SampleType::class) shouldBeEqualTo true
             it?.hasClassDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
@@ -122,10 +122,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasDeclarationOf(SampleType::class) shouldBeEqualTo true
             it?.hasDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
-            it?.asClassDeclaration()?.name shouldBeEqualTo "SampleType"
+            it?.asClassDeclaration()?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
             it?.hasClassDeclaration() shouldBeEqualTo true
-            it?.hasClassDeclaration { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
-            it?.hasClassDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasClassDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.konsist.testdata.SampleType" } shouldBeEqualTo true
+            it?.hasClassDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.konsist.testdata.OtherName" } shouldBeEqualTo false
             it?.hasClassDeclarationOf(SampleType::class) shouldBeEqualTo true
             it?.hasClassDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
@@ -175,10 +175,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasDeclarationOf(SampleObject::class) shouldBeEqualTo true
             it?.hasDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
-            it?.asObjectDeclaration()?.name shouldBeEqualTo "SampleObject"
+            it?.asObjectDeclaration()?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleObject"
             it?.hasObjectDeclaration() shouldBeEqualTo true
-            it?.hasObjectDeclaration { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
-            it?.hasObjectDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasObjectDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.konsist.testdata.SampleObject" } shouldBeEqualTo true
+            it?.hasObjectDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.konsist.testdata.OtherName" } shouldBeEqualTo false
             it?.hasObjectDeclarationOf(SampleObject::class) shouldBeEqualTo true
             it?.hasObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -228,10 +228,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasDeclarationOf(SampleObject::class) shouldBeEqualTo true
             it?.hasDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
-            it?.asObjectDeclaration()?.name shouldBeEqualTo "SampleObject"
+            it?.asObjectDeclaration()?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleObject"
             it?.hasObjectDeclaration() shouldBeEqualTo true
-            it?.hasObjectDeclaration { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
-            it?.hasObjectDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasObjectDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.konsist.testdata.SampleObject" } shouldBeEqualTo true
+            it?.hasObjectDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.konsist.testdata.OtherName" } shouldBeEqualTo false
             it?.hasObjectDeclarationOf(SampleObject::class) shouldBeEqualTo true
             it?.hasObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -281,10 +281,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasDeclarationOf(SampleInterface::class) shouldBeEqualTo true
             it?.hasDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
-            it?.asInterfaceDeclaration()?.name shouldBeEqualTo "SampleInterface"
+            it?.asInterfaceDeclaration()?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleInterface"
             it?.hasInterfaceDeclaration() shouldBeEqualTo true
-            it?.hasInterfaceDeclaration { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
-            it?.hasInterfaceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasInterfaceDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.konsist.testdata.SampleInterface" } shouldBeEqualTo true
+            it?.hasInterfaceDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.konsist.testdata.OtherName" } shouldBeEqualTo false
             it?.hasInterfaceDeclarationOf(SampleInterface::class) shouldBeEqualTo true
             it?.hasInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -334,10 +334,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasDeclarationOf(SampleInterface::class) shouldBeEqualTo true
             it?.hasDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
-            it?.asInterfaceDeclaration()?.name shouldBeEqualTo "SampleInterface"
+            it?.asInterfaceDeclaration()?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleInterface"
             it?.hasInterfaceDeclaration() shouldBeEqualTo true
-            it?.hasInterfaceDeclaration { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
-            it?.hasInterfaceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasInterfaceDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.konsist.testdata.SampleInterface" } shouldBeEqualTo true
+            it?.hasInterfaceDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.konsist.testdata.OtherName" } shouldBeEqualTo false
             it?.hasInterfaceDeclarationOf(SampleInterface::class) shouldBeEqualTo true
             it?.hasInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -575,10 +575,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasDeclarationOf(List::class) shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeInstanceOf KoKotlinTypeDeclaration::class
-            it?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "String"
+            it?.asKotlinTypeDeclaration()?.fullyQualifiedName shouldBeEqualTo "kotlin.String"
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo true
-            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo true
-            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "List<String>" } shouldBeEqualTo false
+            it?.hasKotlinTypeDeclaration { declaration -> declaration.fullyQualifiedName == "kotlin.String" } shouldBeEqualTo true
+            it?.hasKotlinTypeDeclaration { declaration -> declaration.fullyQualifiedName == "kotlin.collections.List" } shouldBeEqualTo false
             it?.hasKotlinTypeDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasKotlinTypeDeclarationOf(Int::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -629,10 +629,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasDeclarationOf(List::class) shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeInstanceOf KoKotlinTypeDeclaration::class
-            it?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "String"
+            it?.asKotlinTypeDeclaration()?.fullyQualifiedName shouldBeEqualTo "kotlin.String"
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo true
-            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo true
-            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "List<String>" } shouldBeEqualTo false
+            it?.hasKotlinTypeDeclaration { declaration -> declaration.fullyQualifiedName == "kotlin.String" } shouldBeEqualTo true
+            it?.hasKotlinTypeDeclaration { declaration -> declaration.fullyQualifiedName == "kotlin.collections.List" } shouldBeEqualTo false
             it?.hasKotlinTypeDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasKotlinTypeDeclarationOf(Int::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -683,10 +683,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasDeclarationOf(List::class) shouldBeEqualTo true
             it?.hasDeclarationOf(String::class) shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeInstanceOf KoKotlinTypeDeclaration::class
-            it?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "List<String>"
+            it?.asKotlinTypeDeclaration()?.fullyQualifiedName shouldBeEqualTo "kotlin.collections.List"
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo true
-            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "List<String>" } shouldBeEqualTo true
-            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo false
+            it?.hasKotlinTypeDeclaration { declaration -> declaration.fullyQualifiedName == "kotlin.collections.List" } shouldBeEqualTo true
+            it?.hasKotlinTypeDeclaration { declaration -> declaration.fullyQualifiedName == "kotlin.String" } shouldBeEqualTo false
             it?.hasKotlinTypeDeclarationOf(List::class) shouldBeEqualTo true
             it?.hasKotlinTypeDeclarationOf(String::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -737,10 +737,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasDeclarationOf(List::class) shouldBeEqualTo true
             it?.hasDeclarationOf(String::class) shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeInstanceOf KoKotlinTypeDeclaration::class
-            it?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "List<String>"
+            it?.asKotlinTypeDeclaration()?.fullyQualifiedName shouldBeEqualTo "kotlin.collections.List"
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo true
-            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "List<String>" } shouldBeEqualTo true
-            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo false
+            it?.hasKotlinTypeDeclaration { declaration -> declaration.fullyQualifiedName == "kotlin.collections.List" } shouldBeEqualTo true
+            it?.hasKotlinTypeDeclaration { declaration -> declaration.fullyQualifiedName == "kotlin.String" } shouldBeEqualTo false
             it?.hasKotlinTypeDeclarationOf(List::class) shouldBeEqualTo true
             it?.hasKotlinTypeDeclarationOf(String::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -976,7 +976,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
-            "core/declaration/type/kotype/snippet/forkosourcedeclarationprovider/",
+            "core/declaration/type/kotype/snippet/kotypedeclarationprovider/",
             fileName,
         )
 
