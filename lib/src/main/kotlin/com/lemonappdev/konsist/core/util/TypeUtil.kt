@@ -134,7 +134,6 @@ object TypeUtil {
                     ?: getTypeAlias(typeText, fqn, containingFile)
                     ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
             }
-
             else -> null
         }
     }
