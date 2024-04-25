@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoFunctionTypeDeclarationCore
@@ -107,12 +108,11 @@ object TypeUtil {
             }
         val typeText = nestedType?.text
 
-        val fqn =
-            containingFile
-                .imports
-                .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
-                ?.name
-                ?: (containingFile.packagee?.fullyQualifiedName + "." + typeText)
+        val fqn = containingFile
+            .imports
+            .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
+            ?.name
+            ?: (firstParentWithFqn(parentDeclaration, containingFile) + "." + typeText)
 
         return when {
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
@@ -134,9 +134,22 @@ object TypeUtil {
                     ?: getTypeAlias(typeText, fqn, containingFile)
                     ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
             }
+
             else -> null
         }
     }
+
+    private fun firstParentWithFqn(parentDeclaration: KoBaseDeclaration, containingFile: KoFileDeclaration): String? =
+        if ((parentDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName.isNullOrBlank()) {
+            (parentDeclaration as? KoContainingDeclarationProvider)?.containingDeclaration?.let {
+                firstParentWithFqn(
+                    it,
+                    containingFile
+                )
+            } ?: containingFile.packagee?.fullyQualifiedName
+        } else {
+            (parentDeclaration as KoFullyQualifiedNameProvider).fullyQualifiedName.substringBeforeLast(".")
+        }
 
     /*
     1.0.0 CleanUp - When we remove KoReceiverTypeProviderCore.hasReceiverType it will be unused.
