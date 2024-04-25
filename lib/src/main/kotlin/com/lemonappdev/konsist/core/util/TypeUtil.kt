@@ -108,11 +108,12 @@ object TypeUtil {
             }
         val typeText = nestedType?.text
 
-        val fqn = containingFile
-            .imports
-            .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
-            ?.name
-            ?: (firstParentWithFqn(parentDeclaration, containingFile) + "." + typeText)
+        val fqn =
+            containingFile
+                .imports
+                .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
+                ?.name
+                ?: (firstParentWithFqn(parentDeclaration, containingFile) + "." + typeText)
 
         return when {
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
@@ -138,12 +139,15 @@ object TypeUtil {
         }
     }
 
-    private fun firstParentWithFqn(parentDeclaration: KoBaseDeclaration, containingFile: KoFileDeclaration): String? =
+    private fun firstParentWithFqn(
+        parentDeclaration: KoBaseDeclaration,
+        containingFile: KoFileDeclaration,
+    ): String? =
         if ((parentDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName.isNullOrBlank()) {
             (parentDeclaration as? KoContainingDeclarationProvider)?.containingDeclaration?.let {
                 firstParentWithFqn(
                     it,
-                    containingFile
+                    containingFile,
                 )
             } ?: containingFile.packagee?.fullyQualifiedName
         } else {

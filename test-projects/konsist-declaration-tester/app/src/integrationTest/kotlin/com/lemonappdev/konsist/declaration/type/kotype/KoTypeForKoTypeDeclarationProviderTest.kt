@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.declaration.type.kotype
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.declaration.*
 import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
 import com.lemonappdev.sample.ClassType.NestedClassType
@@ -19,7 +18,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut = Konsist
             .scopeFromFile("$appMainSourceSetProjectDirectory/sample/FileWithTypeParameters.kt".toOsSeparator())
             .classes()
-            .first { it.name == "FirstClass"}
+            .first { it.name == "FirstClass" }
             .primaryConstructor
             ?.parameters
             ?.first()
@@ -34,8 +33,14 @@ class KoTypeForKoTypeDeclarationProviderTest {
             it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             it?.asClassDeclaration()?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.sample.ClassType.NestedClassType"
             it?.hasClassDeclaration() shouldBeEqualTo true
-            it?.hasClassDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.sample.ClassType.NestedClassType" } shouldBeEqualTo true
-            it?.hasClassDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.sample.ClassType.OtherName" } shouldBeEqualTo false
+            it
+                ?.hasClassDeclaration {
+                    declaration -> declaration.fullyQualifiedName == "com.lemonappdev.sample.ClassType.NestedClassType"
+                }
+                .shouldBeEqualTo(true)
+            it
+                ?.hasClassDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.sample.ClassType.OtherName" }
+                .shouldBeEqualTo(false)
             it?.hasClassDeclarationOf(NestedClassType::class) shouldBeEqualTo true
             it?.hasClassDeclarationOf(NestedClassType::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
@@ -72,7 +77,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut = Konsist
             .scopeFromFile("$appMainSourceSetProjectDirectory/sample/FileWithTypeParameters.kt".toOsSeparator())
             .classes()
-            .first { it.name == "SecondClass"}
+            .first { it.name == "SecondClass" }
             .primaryConstructor
             ?.parameters
             ?.first()
@@ -87,8 +92,16 @@ class KoTypeForKoTypeDeclarationProviderTest {
             it?.asObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
             it?.asObjectDeclaration()?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.sample.ObjectType.NestedObjectType"
             it?.hasObjectDeclaration() shouldBeEqualTo true
-            it?.hasObjectDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.sample.ObjectType.NestedObjectType" } shouldBeEqualTo true
-            it?.hasObjectDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.sample.ObjectType.OtherName" } shouldBeEqualTo false
+            it
+                ?.hasObjectDeclaration { declaration ->
+                    declaration.fullyQualifiedName == "com.lemonappdev.sample.ObjectType.NestedObjectType"
+                }
+                .shouldBeEqualTo.(true)
+            it
+                ?.hasObjectDeclaration { declaration ->
+                    declaration.fullyQualifiedName == "com.lemonappdev.sample.ObjectType.OtherName"
+                }
+                .shouldBeEqualTo.(false)
             it?.hasObjectDeclarationOf(NestedObjectType::class) shouldBeEqualTo true
             it?.hasObjectDeclarationOf(NestedClassType::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -125,7 +138,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut = Konsist
             .scopeFromFile("$appMainSourceSetProjectDirectory/sample/FileWithTypeParameters.kt".toOsSeparator())
             .classes()
-            .first { it.name == "ThirdClass"}
+            .first { it.name == "ThirdClass" }
             .primaryConstructor
             ?.parameters
             ?.first()
@@ -140,8 +153,16 @@ class KoTypeForKoTypeDeclarationProviderTest {
             it?.asInterfaceDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
             it?.asInterfaceDeclaration()?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.sample.InterfaceType.NestedInterfaceType"
             it?.hasInterfaceDeclaration() shouldBeEqualTo true
-            it?.hasInterfaceDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.sample.InterfaceType.NestedInterfaceType" } shouldBeEqualTo true
-            it?.hasInterfaceDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.sample.InterfaceType.OtherName" } shouldBeEqualTo false
+            it
+                ?.hasInterfaceDeclaration { declaration ->
+                    declaration.fullyQualifiedName == "com.lemonappdev.sample.InterfaceType.NestedInterfaceType"
+                }
+                .shouldBeEqualTo(true)
+            it
+                ?.hasInterfaceDeclaration { declaration ->
+                    declaration.fullyQualifiedName == "com.lemonappdev.sample.InterfaceType.OtherName"
+                }
+                .shouldBeEqualTo(false)
             it?.hasInterfaceDeclarationOf(NestedInterfaceType::class) shouldBeEqualTo true
             it?.hasInterfaceDeclarationOf(NestedClassType::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
