@@ -1,5 +1,5 @@
 [versions]
-kotlinVersion = "1.9.23"
+kotlinVersion = "1.9.24"
 jUnitVersion = "5.10.2"
 ktlintCliVersion = "1.2.1"
 coroutinesVersion = "1.8.0"
