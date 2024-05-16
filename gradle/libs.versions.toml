@@ -10,7 +10,7 @@ junitJupiterEngine =  { module = "org.junit.jupiter:junit-jupiter-engine", versi
 junitJupiterParams =  { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "jUnitVersion" }
 kotest =  "io.kotest:kotest-runner-junit5:5.9.0"
 kluent = "org.amshove.kluent:kluent:1.73"
-mockk = "io.mockk:mockk:1.13.9"
+mockk = "io.mockk:mockk:1.13.11"
 kotlin-compiler-embeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlinVersion" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
 
