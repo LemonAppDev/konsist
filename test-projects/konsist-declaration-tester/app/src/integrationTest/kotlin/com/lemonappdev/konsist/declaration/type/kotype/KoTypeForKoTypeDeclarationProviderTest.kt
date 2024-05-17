@@ -6,8 +6,10 @@ import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
+import com.lemonappdev.sample.ClassType
 import com.lemonappdev.sample.ClassType.NestedClassType
 import com.lemonappdev.sample.InterfaceType.NestedInterfaceType
+import com.lemonappdev.sample.ObjectType
 import com.lemonappdev.sample.ObjectType.NestedObjectType
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -32,7 +34,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             it?.hasDeclaration { declaration -> declaration.name == "NestedClassType" } shouldBeEqualTo true
             it?.hasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasDeclarationOf(NestedClassType::class) shouldBeEqualTo true
-            it?.hasDeclarationOf(NestedClassType::class) shouldBeEqualTo false
+            it?.hasDeclarationOf(ObjectType.NestedClassType::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             it?.asClassDeclaration()?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.sample.ClassType.NestedClassType"
             it?.hasClassDeclaration() shouldBeEqualTo true
@@ -42,10 +44,10 @@ class KoTypeForKoTypeDeclarationProviderTest {
                 }
                 .shouldBeEqualTo(true)
             it
-                ?.hasClassDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.sample.ClassType.OtherName" }
+                ?.hasClassDeclaration { declaration -> declaration.fullyQualifiedName == "com.lemonappdev.sample.ObjectType.NestedClassType" }
                 .shouldBeEqualTo(false)
             it?.hasClassDeclarationOf(NestedClassType::class) shouldBeEqualTo true
-            it?.hasClassDeclarationOf(NestedClassType::class) shouldBeEqualTo false
+            it?.hasClassDeclarationOf(ObjectType.NestedClassType::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
             it?.hasObjectDeclaration() shouldBeEqualTo false
             it?.hasObjectDeclarationOf(NestedClassType::class) shouldBeEqualTo false
@@ -91,7 +93,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             it?.hasDeclaration { declaration -> declaration.name == "NestedObjectType" } shouldBeEqualTo true
             it?.hasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasDeclarationOf(NestedObjectType::class) shouldBeEqualTo true
-            it?.hasDeclarationOf(NestedClassType::class) shouldBeEqualTo false
+            it?.hasDeclarationOf(ClassType.NestedObjectType::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
             it?.asObjectDeclaration()?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.sample.ObjectType.NestedObjectType"
             it?.hasObjectDeclaration() shouldBeEqualTo true
@@ -102,11 +104,11 @@ class KoTypeForKoTypeDeclarationProviderTest {
                 .shouldBeEqualTo(true)
             it
                 ?.hasObjectDeclaration { declaration ->
-                    declaration.fullyQualifiedName == "com.lemonappdev.sample.ObjectType.OtherName"
+                    declaration.fullyQualifiedName == "com.lemonappdev.sample.ClassType.NestedObjectType"
                 }
                 .shouldBeEqualTo(false)
             it?.hasObjectDeclarationOf(NestedObjectType::class) shouldBeEqualTo true
-            it?.hasObjectDeclarationOf(NestedClassType::class) shouldBeEqualTo false
+            it?.hasObjectDeclarationOf(ClassType.NestedObjectType::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.hasClassDeclarationOf(NestedObjectType::class) shouldBeEqualTo false
@@ -152,7 +154,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             it?.hasDeclaration { declaration -> declaration.name == "NestedInterfaceType" } shouldBeEqualTo true
             it?.hasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasDeclarationOf(NestedInterfaceType::class) shouldBeEqualTo true
-            it?.hasDeclarationOf(NestedClassType::class) shouldBeEqualTo false
+            it?.hasDeclarationOf(ClassType.NestedInterfaceType::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
             it?.asInterfaceDeclaration()?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.sample.InterfaceType.NestedInterfaceType"
             it?.hasInterfaceDeclaration() shouldBeEqualTo true
@@ -163,11 +165,11 @@ class KoTypeForKoTypeDeclarationProviderTest {
                 .shouldBeEqualTo(true)
             it
                 ?.hasInterfaceDeclaration { declaration ->
-                    declaration.fullyQualifiedName == "com.lemonappdev.sample.InterfaceType.OtherName"
+                    declaration.fullyQualifiedName == "com.lemonappdev.sample.ClassType.NestedInterfaceType"
                 }
                 .shouldBeEqualTo(false)
             it?.hasInterfaceDeclarationOf(NestedInterfaceType::class) shouldBeEqualTo true
-            it?.hasInterfaceDeclarationOf(NestedClassType::class) shouldBeEqualTo false
+            it?.hasInterfaceDeclarationOf(ClassType.NestedInterfaceType::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.hasClassDeclarationOf(NestedInterfaceType::class) shouldBeEqualTo false
