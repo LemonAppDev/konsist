@@ -52,6 +52,26 @@ class KoVariableDeclarationForKoNullableTypeProviderTest {
         }
     }
 
+    @ParameterizedTest
+    @MethodSource("provideValuesWithAnnotatedType")
+    fun `variable-with-annotated-type`(declarations: List<KoVariableProvider>) {
+        // given
+        val sut =
+            declarations
+                .variables
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            type?.name shouldBeEqualTo "String"
+            hasType() shouldBeEqualTo true
+            hasType { it.name == "String" } shouldBeEqualTo true
+            hasType { it.name == "Int" } shouldBeEqualTo false
+            hasTypeOf(String::class) shouldBeEqualTo true
+            hasTypeOf(Int::class) shouldBeEqualTo false
+        }
+    }
+
     companion object {
         private fun getSnippetFile(fileName: String) =
             TestSnippetProvider.getSnippetKoScope("core/declaration/kovariable/snippet/forkonullabletypeprovider/", fileName)
@@ -76,6 +96,17 @@ class KoVariableDeclarationForKoNullableTypeProviderTest {
                 arguments(getSnippetFile("variable-in-enum-constant-with-type").classes().enumConstants),
                 arguments(getSnippetFile("variable-in-getter-with-type").properties().getters),
                 arguments(getSnippetFile("variable-in-setter-with-type").properties().setters),
+            )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesWithAnnotatedType() =
+            listOf(
+                arguments(getSnippetFile("variable-in-function-with-annotated-type").functions()),
+                arguments(getSnippetFile("variable-in-init-block-with-annotated-type").classes().initBlocks),
+                arguments(getSnippetFile("variable-in-enum-constant-with-annotated-type").classes().enumConstants),
+                arguments(getSnippetFile("variable-in-getter-with-annotated-type").properties().getters),
+                arguments(getSnippetFile("variable-in-setter-with-annotated-type").properties().setters),
             )
     }
 }

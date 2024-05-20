@@ -30,6 +30,27 @@ class KoParameterDeclarationForKoNonNullableTypeProviderTest {
     }
 
     @Test
+    fun `class-has-annotated-complex-default-parameter-value`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-annotated-complex-default-parameter-value")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+
+        // then
+        assertSoftly(sut) {
+            it?.type?.name shouldBeEqualTo "SampleType"
+            it?.hasType { type -> type.name == "SampleType" } shouldBeEqualTo true
+            it?.hasType { type -> type.name == "Int" } shouldBeEqualTo false
+            it?.hasTypeOf(SampleType::class) shouldBeEqualTo true
+            it?.hasTypeOf(Int::class) shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `class-has-one-parameter-with-import-alias`() {
         // given
         val sut =
@@ -45,7 +66,28 @@ class KoParameterDeclarationForKoNonNullableTypeProviderTest {
             it?.type?.name shouldBeEqualTo "ImportAlias"
             it?.hasType { type -> type.name == "ImportAlias" } shouldBeEqualTo true
             it?.hasType { type -> type.name == "Int" } shouldBeEqualTo false
-//            it?.hasTypeOf(SampleType::class) shouldBeEqualTo false
+            it?.hasTypeOf(SampleType::class) shouldBeEqualTo false
+            it?.hasTypeOf(Int::class) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `class-has-one-parameter-with-annotated-import-alias`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-one-parameter-with-annotated-import-alias")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+
+        // then
+        assertSoftly(sut) {
+            it?.type?.name shouldBeEqualTo "ImportAlias"
+            it?.hasType { type -> type.name == "ImportAlias" } shouldBeEqualTo true
+            it?.hasType { type -> type.name == "Int" } shouldBeEqualTo false
+            it?.hasTypeOf(SampleType::class) shouldBeEqualTo false
             it?.hasTypeOf(Int::class) shouldBeEqualTo false
         }
     }

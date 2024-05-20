@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koproperty
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.testdata.SampleAnnotation
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -28,6 +29,25 @@ class KoPropertyDeclarationForKoNullableTypeProviderTest {
         // given
         val sut =
             getSnippetFile("property-with-type")
+                .properties(includeNested = true)
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            type?.name shouldBeEqualTo "String"
+            hasType() shouldBeEqualTo true
+            hasType { it.name == "String" } shouldBeEqualTo true
+            hasType { it.name == "Int" } shouldBeEqualTo false
+            hasTypeOf(String::class) shouldBeEqualTo true
+            hasTypeOf(Int::class) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `property-with-annotated-type`() {
+        // given
+        val sut =
+            getSnippetFile("property-with-annotated-type")
                 .properties(includeNested = true)
                 .first()
 
