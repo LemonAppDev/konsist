@@ -1,9 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kofile
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.KoModifier.CONST
-import com.lemonappdev.konsist.api.KoModifier.INTERNAL
-import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -120,54 +117,6 @@ class KoFileDeclarationForKoPropertyProviderTest {
             countProperties(includeNested = false) { it.hasInternalModifier } shouldBeEqualTo 1
             countProperties { it.hasInternalModifier } shouldBeEqualTo 2
             countProperties { it.name == "sampleProperty" && it.hasPrivateModifier } shouldBeEqualTo 0
-        }
-    }
-
-    @Test
-    fun `contains-properties-with-specified-conditions`() {
-        // given
-        val sut =
-            getSnippetFile("contains-properties-with-specified-conditions")
-                .files
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            containsProperty {
-                it.name == "sampleProperty" && it.hasInternalModifier
-            } shouldBeEqualTo true
-            containsProperty {
-                it.name == "sampleProperty" && it.hasModifiers(INTERNAL, CONST)
-            } shouldBeEqualTo true
-            containsProperty {
-                it.name == "sampleProperty" && it.hasPublicModifier
-            } shouldBeEqualTo false
-            containsProperty {
-                it.name == "sampleProperty" && it.hasModifiers(INTERNAL, PRIVATE)
-            } shouldBeEqualTo false
-            containsProperty(includeNested = false) { it.name == "sampleOtherProperty" } shouldBeEqualTo false
-            containsProperty(includeNested = true) { it.name == "sampleNestedProperty" && it.hasInternalModifier } shouldBeEqualTo true
-            containsProperty(includeNested = false) { it.name == "sampleNestedProperty" && it.hasInternalModifier } shouldBeEqualTo false
-            containsProperty(includeNested = true) { it.name == "sampleNestedProperty" && it.hasOpenModifier } shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `contains-properties-with-specified-regex`() {
-        // given
-        val regex1 = Regex("[a-zA-Z]+")
-        val regex2 = Regex("[0-9]+")
-        val sut =
-            getSnippetFile("contains-properties-with-specified-regex")
-                .files
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            containsProperty(includeNested = false) { it.name.matches(regex1) } shouldBeEqualTo true
-            containsProperty(includeNested = true) { it.name.matches(regex1) } shouldBeEqualTo true
-            containsProperty(includeNested = false) { it.name.matches(regex2) } shouldBeEqualTo false
-            containsProperty(includeNested = true) { it.name.matches(regex2) } shouldBeEqualTo false
         }
     }
 

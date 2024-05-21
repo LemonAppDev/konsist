@@ -19,21 +19,6 @@ interface KoFunctionProvider : KoBaseProvider {
     ): List<KoFunctionDeclaration>
 
     /**
-     * Determines whatever the declaration contains a function that satisfies the specified predicate.
-     *
-     * @param includeNested Specifies whether to include nested functions in the check (optional, default is `true`).
-     * @param includeLocal Specifies whether to include local functions in the check (optional, default is `true`).
-     * @param predicate The predicate function to determine if a function satisfies a condition.
-     * @return `true` if the declaration contains a function with the specified predicate, `true` otherwise.
-     */
-    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasFunction()"))
-    fun containsFunction(
-        includeNested: Boolean = true,
-        includeLocal: Boolean = true,
-        predicate: (KoFunctionDeclaration) -> Boolean,
-    ): Boolean
-
-    /**
      * Returns the number of functions present in the declaration.
      *
      * @param includeNested Specifies whether to include nested functions in the count (optional, default is `true`).

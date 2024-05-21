@@ -84,15 +84,6 @@ interface KoParentClassProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether declaration has a specified parent class.
-     *
-     * @param name the name of the parent class to check.
-     * @return `true` if the declaration has the specified parent class, `false` otherwise.
-     */
-    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasParents()"))
-    fun hasParentClass(name: String): Boolean
-
-    /**
      * Determines whether the declaration has a parent class whose name matches any of the specified names.
      * If `indirectParents` is set to `true`, it verifies if there's at least one parent class that matches.
      *

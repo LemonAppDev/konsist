@@ -1,3 +1,0 @@
-interface SampleInterface {
-    fun sampleFunction()
-}

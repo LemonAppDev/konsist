@@ -1,0 +1,8 @@
+import com.lemonappdev.konsist.testdata.SampleAnnotation
+
+var sampleProperty: String = "text"
+    set(value) {
+        val sampleVariable: @SampleAnnotation String = ""
+
+        if (true) field = value
+    }

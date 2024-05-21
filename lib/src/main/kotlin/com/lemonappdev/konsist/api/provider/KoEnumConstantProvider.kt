@@ -26,21 +26,6 @@ interface KoEnumConstantProvider : KoBaseProvider {
     fun countEnumConstants(predicate: (KoEnumConstantDeclaration) -> Boolean): Int
 
     /**
-     * Determines whatever the declaration has enum constants.
-     *
-     * @param names the names of the enum constants to check.
-     * @return `true` if the declaration has enum constants with the specified names (or any constant if [names] is empty),
-     * `false` otherwise.
-     */
-    @Deprecated(
-        """
-            Will be removed in v0.16.0. 
-            If you passed one argument - replace with `hasEnumConstantWithName`, otherwise with `hasEnumConstantsWithAllNames`.
-            """,
-    )
-    fun hasEnumConstants(vararg names: String): Boolean
-
-    /**
      * Determines whatever the declaration has any enum constant.
      *
      * @return `true` if the declaration has any enum constant, `false` otherwise.

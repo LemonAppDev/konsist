@@ -80,6 +80,7 @@ annotation class NonExistingAnnotation
     AnnotationTarget.FILE,
     AnnotationTarget.TYPEALIAS,
     AnnotationTarget.LOCAL_VARIABLE,
+    AnnotationTarget.TYPE,
 )
 annotation class SampleAnnotation
 

@@ -1,5 +1,0 @@
-@file:Suppress("detekt.someRule", "konsist.assert-suppress-with-few-parameters-on-declarations-which-items-have-null-parent")
-
-package com.lemonappdev.konsist.core.verify.kodeclarationassert.deprecated.snippet
-
-class SampleClass

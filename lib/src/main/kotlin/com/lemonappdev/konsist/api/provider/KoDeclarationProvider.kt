@@ -19,21 +19,6 @@ interface KoDeclarationProvider : KoBaseProvider {
     ): List<KoBaseDeclaration>
 
     /**
-     * Determines whatever the declaration contains a declaration that satisfies the specified predicate.
-     *
-     * @param includeNested Specifies whether to include nested declarations in the check (optional, default is `true`).
-     * @param includeLocal Specifies whether to include local declarations in the check (optional, default is `true`).
-     * @param predicate The predicate function to determine if a declaration satisfies a condition.
-     * @return `true` if the declaration contains a declaration that satisfies the specified predicate, `true` otherwise.
-     */
-    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasDeclaration()"))
-    fun containsDeclaration(
-        includeNested: Boolean = true,
-        includeLocal: Boolean = true,
-        predicate: (KoBaseDeclaration) -> Boolean,
-    ): Boolean
-
-    /**
      * Returns the number of declarations present in the declaration.
      *
      * @param includeNested Specifies whether to include nested declarations in the count (optional, default is `true`).

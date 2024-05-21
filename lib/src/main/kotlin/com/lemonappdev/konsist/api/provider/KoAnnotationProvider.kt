@@ -26,39 +26,6 @@ interface KoAnnotationProvider : KoBaseProvider {
     fun countAnnotations(predicate: (KoAnnotationDeclaration) -> Boolean): Int
 
     /**
-     * Determines whatever the declaration has annotations.
-     *
-     * @param names the annotation names to check. It can be either a simple name or a fully qualified name.
-     * @return `true` if the declaration has annotations with the specified names (or any annotation if [names] is empty),
-     * `false` otherwise.
-     */
-    @Deprecated(
-        """
-            Will be removed in v0.16.0. 
-            If you passed one argument - replace with `hasAnnotationWithName`, otherwise with `hasAnnotationsWithAllNames`.
-            """,
-    )
-    fun hasAnnotations(vararg names: String): Boolean
-
-    /**
-     * Determines whatever the declaration has annotations of `KClass` type.
-     *
-     * @param name the `KClass` type of the annotation to check.
-     * @param names the `KClass` types of the annotations to check.
-     * @return `true` if the declaration has annotations of the specified `KClass` types, `false` otherwise.
-     */
-    @Deprecated(
-        """
-            Will be removed in v0.16.0. 
-            If you passed one argument - replace with `hasAnnotationOf`, otherwise with `hasAllAnnotationsOf`.
-            """,
-    )
-    fun hasAnnotationsOf(
-        name: KClass<*>,
-        vararg names: KClass<*>,
-    ): Boolean
-
-    /**
      * Determines whatever declaration has any annotation.
      *
      * @return `true` if the declaration has any annotation, `false` otherwise.

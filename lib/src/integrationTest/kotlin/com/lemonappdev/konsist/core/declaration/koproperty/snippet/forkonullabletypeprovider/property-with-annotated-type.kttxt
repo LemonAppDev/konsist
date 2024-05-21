@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.SampleAnnotation
+
+val sampleProperty: @SampleAnnotation String = ""

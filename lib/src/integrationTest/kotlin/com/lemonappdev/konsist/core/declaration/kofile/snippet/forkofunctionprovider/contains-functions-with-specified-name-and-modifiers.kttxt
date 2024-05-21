@@ -1,7 +1,0 @@
-internal suspend fun sampleFunction() {
-    suspend fun sampleLocalFunction() {}
-}
-
-open class SampleClass {
-    open fun sampleNestedFunction() {}
-}

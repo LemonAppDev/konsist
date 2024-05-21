@@ -1,9 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.koclass
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.KoModifier.INTERNAL
-import com.lemonappdev.konsist.api.KoModifier.OPEN
-import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -154,86 +151,6 @@ class KoClassDeclarationForKoFunctionProviderTest {
             countFunctions(includeNested = false, includeLocal = false) { it.hasPrivateModifier } shouldBeEqualTo 1
             countFunctions { it.hasPrivateModifier } shouldBeEqualTo 2
             countFunctions { it.name == "sampleFunction" && it.hasSuspendModifier } shouldBeEqualTo 0
-        }
-    }
-
-    @Test
-    fun `contains-functions-with-specified-name-and-modifiers`() {
-        // given
-        val sut =
-            getSnippetFile("contains-functions-with-specified-name-and-modifiers")
-                .classes()
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            containsFunction { it.name == "sampleFunction" && it.hasInternalModifier } shouldBeEqualTo true
-            containsFunction { it.name == "sampleFunction" && it.hasModifiers(INTERNAL, OPEN) } shouldBeEqualTo true
-            containsFunction { it.name == "sampleFunction" && it.hasPrivateModifier } shouldBeEqualTo false
-            containsFunction { it.name == "sampleFunction" && it.hasModifiers(INTERNAL, PRIVATE) } shouldBeEqualTo false
-            containsFunction(
-                includeNested = false,
-                includeLocal = true,
-            ) { it.name == "sampleLocalFunction" && it.hasSuspendModifier } shouldBeEqualTo true
-            containsFunction(
-                includeNested = false,
-                includeLocal = false,
-            ) { it.name == "sampleLocalFunction" && it.hasSuspendModifier } shouldBeEqualTo false
-            containsFunction(
-                includeNested = false,
-                includeLocal = true,
-            ) { it.name == "sampleLocalFunction" && it.hasPrivateModifier } shouldBeEqualTo false
-            containsFunction(
-                includeNested = true,
-                includeLocal = false,
-            ) { it.name == "sampleNestedFunction" && it.hasOpenModifier } shouldBeEqualTo true
-            containsFunction(
-                includeNested = false,
-                includeLocal = false,
-            ) { it.name == "sampleNestedFunction" && it.hasOpenModifier } shouldBeEqualTo false
-            containsFunction(
-                includeNested = true,
-                includeLocal = false,
-            ) { it.name == "sampleNestedFunction" && it.hasPrivateModifier } shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `contains-functions-with-specified-regex`() {
-        // given
-        val regex1 = Regex("[a-zA-Z]+")
-        val regex2 = Regex("[0-9]+")
-        val sut =
-            getSnippetFile("contains-functions-with-specified-regex")
-                .classes()
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            containsFunction(
-                includeNested = false,
-                includeLocal = false,
-            ) { it.name.matches(regex1) } shouldBeEqualTo true
-            containsFunction(
-                includeNested = false,
-                includeLocal = true,
-            ) { it.name.matches(regex1) } shouldBeEqualTo true
-            containsFunction(
-                includeNested = true,
-                includeLocal = false,
-            ) { it.name.matches(regex1) } shouldBeEqualTo true
-            containsFunction(
-                includeNested = false,
-                includeLocal = false,
-            ) { it.name.matches(regex2) } shouldBeEqualTo false
-            containsFunction(
-                includeNested = false,
-                includeLocal = true,
-            ) { it.name.matches(regex2) } shouldBeEqualTo false
-            containsFunction(
-                includeNested = true,
-                includeLocal = false,
-            ) { it.name.matches(regex2) } shouldBeEqualTo false
         }
     }
 

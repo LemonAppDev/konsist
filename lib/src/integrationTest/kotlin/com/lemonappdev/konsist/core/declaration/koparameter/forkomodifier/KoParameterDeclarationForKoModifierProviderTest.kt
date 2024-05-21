@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.declaration.koparameter.forkomodifier
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoModifier.DATA
 import com.lemonappdev.konsist.api.KoModifier.OPEN
-import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.KoModifier.PUBLIC
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -43,8 +42,6 @@ class KoParameterDeclarationForKoModifierProviderTest {
             it?.hasAllModifiers(listOf(OPEN, DATA)) shouldBeEqualTo false
             it?.hasAllModifiers(setOf(OPEN)) shouldBeEqualTo false
             it?.hasAllModifiers(setOf(OPEN, DATA)) shouldBeEqualTo false
-            it?.hasModifiers(OPEN) shouldBeEqualTo false
-            it?.hasModifiers(OPEN, DATA) shouldBeEqualTo false
         }
     }
 
@@ -80,9 +77,6 @@ class KoParameterDeclarationForKoModifierProviderTest {
             it?.hasAllModifiers(PUBLIC) shouldBeEqualTo true
             it?.hasAllModifiers(DATA) shouldBeEqualTo false
             it?.hasAllModifiers(PUBLIC, DATA) shouldBeEqualTo false
-            it?.hasModifiers(PUBLIC) shouldBeEqualTo true
-            it?.hasModifiers(PRIVATE) shouldBeEqualTo false
-            it?.hasModifiers(PUBLIC, PRIVATE) shouldBeEqualTo false
         }
     }
 

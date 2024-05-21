@@ -58,10 +58,6 @@ internal interface KoReturnProviderCore :
                 true
             }
 
-    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasReturnType()"))
-    override val hasReturnType: Boolean
-        get() = ktFunction.hasDeclaredReturnType()
-
     override fun hasReturnType(predicate: ((KoTypeDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
             null -> ktFunction.hasDeclaredReturnType()

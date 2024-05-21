@@ -240,7 +240,7 @@ class AssertTrueOnProviderListTest {
                 .filterIsInstance<KoPrimaryConstructorProvider>()
 
         // then
-        sut.assertTrue { it.primaryConstructor?.hasParameterNamed("sampleParameter") ?: true }
+        sut.assertTrue { it.primaryConstructor?.hasParameterWithName("sampleParameter") ?: true }
     }
 
     @Test
@@ -253,7 +253,7 @@ class AssertTrueOnProviderListTest {
 
         // when
         val func = {
-            sut.assertTrue { it.primaryConstructor?.hasParameterNamed("sampleParameter") ?: true }
+            sut.assertTrue { it.primaryConstructor?.hasParameterWithName("sampleParameter") ?: true }
         }
 
         // then
@@ -269,7 +269,7 @@ class AssertTrueOnProviderListTest {
                 .filterIsInstance<KoPrimaryConstructorProvider>()
 
         // then
-        sut.assertFalse { it.primaryConstructor?.hasParameterNamed("otherParameter") ?: false }
+        sut.assertFalse { it.primaryConstructor?.hasParameterWithName("otherParameter") ?: false }
     }
 
     @Test
@@ -282,7 +282,7 @@ class AssertTrueOnProviderListTest {
 
         // when
         val func = {
-            sut.assertFalse { it.primaryConstructor?.hasParameterNamed("sampleParameter") ?: false }
+            sut.assertFalse { it.primaryConstructor?.hasParameterWithName("sampleParameter") ?: false }
         }
 
         // then

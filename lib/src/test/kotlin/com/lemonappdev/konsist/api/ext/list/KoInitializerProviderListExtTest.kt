@@ -46,44 +46,4 @@ class KoInitializerProviderListExtTest {
         // then
         sut shouldBeEqualTo listOf(declaration2)
     }
-
-    @Test
-    fun `withImplementation() returns declaration with implementation`() {
-        // given
-        val declaration1: KoInitializerProvider =
-            mockk {
-                every { hasImplementation } returns true
-            }
-        val declaration2: KoInitializerProvider =
-            mockk {
-                every { hasImplementation } returns false
-            }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withImplementation()
-
-        // then
-        sut shouldBeEqualTo listOf(declaration1)
-    }
-
-    @Test
-    fun `withoutImplementation() returns declaration without implementation`() {
-        // given
-        val declaration1: KoInitializerProvider =
-            mockk {
-                every { hasImplementation } returns true
-            }
-        val declaration2: KoInitializerProvider =
-            mockk {
-                every { hasImplementation } returns false
-            }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withoutImplementation()
-
-        // then
-        sut shouldBeEqualTo listOf(declaration2)
-    }
 }

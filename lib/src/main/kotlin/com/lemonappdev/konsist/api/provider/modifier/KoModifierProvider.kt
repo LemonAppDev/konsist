@@ -20,20 +20,6 @@ interface KoModifierProvider : KoBaseProvider {
     /**
      * Determines whatever the declaration has modifiers.
      *
-     * @param koModifiers the modifiers to check.
-     * @return `true` if the declaration has all the specified modifiers (or any modifier if [koModifiers] is empty), `false` otherwise.
-     */
-    @Deprecated(
-        """
-            Will be removed in v0.16.0. 
-            If you passed one argument - replace with `hasModifier`, otherwise with `hasAllModifiers`.
-            """,
-    )
-    fun hasModifiers(vararg koModifiers: KoModifier): Boolean
-
-    /**
-     * Determines whatever the declaration has modifiers.
-     *
      * @return `true` if the declaration has modifier, `false` otherwise.
      */
     fun hasModifiers(): Boolean

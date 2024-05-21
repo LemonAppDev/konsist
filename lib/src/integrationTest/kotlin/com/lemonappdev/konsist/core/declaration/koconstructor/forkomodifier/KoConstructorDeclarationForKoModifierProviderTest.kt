@@ -44,8 +44,6 @@ class KoConstructorDeclarationForKoModifierProviderTest {
             hasAllModifiers(listOf(OPEN, DATA)) shouldBeEqualTo false
             hasAllModifiers(setOf(OPEN)) shouldBeEqualTo false
             hasAllModifiers(setOf(OPEN, DATA)) shouldBeEqualTo false
-            hasModifiers(OPEN) shouldBeEqualTo false
-            hasModifiers(OPEN, DATA) shouldBeEqualTo false
         }
     }
 

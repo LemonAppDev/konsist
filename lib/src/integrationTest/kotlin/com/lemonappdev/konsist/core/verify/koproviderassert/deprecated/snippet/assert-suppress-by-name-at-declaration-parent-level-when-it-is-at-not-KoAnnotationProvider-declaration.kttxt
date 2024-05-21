@@ -1,8 +1,0 @@
-val otherProperty = ""
-
-@Suppress("assert-suppress-by-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-class SampleClassWithoutOtherProperty {
-    init {
-        val sampleProperty = 6
-    }
-}

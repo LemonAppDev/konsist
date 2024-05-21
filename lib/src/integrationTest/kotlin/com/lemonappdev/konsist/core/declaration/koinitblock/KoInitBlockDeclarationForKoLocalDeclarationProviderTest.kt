@@ -25,7 +25,6 @@ class KoInitBlockDeclarationForKoLocalDeclarationProviderTest {
             hasLocalDeclarations() shouldBeEqualTo false
             hasLocalDeclaration { (it as KoNameProvider).name == "SampleLocalDeclaration" } shouldBeEqualTo false
             hasAllLocalDeclarations { (it as KoNameProvider).name == "SampleLocalDeclaration" } shouldBeEqualTo true
-            containsLocalDeclaration { (it as KoNameProvider).name == "sampleLocalProperty" } shouldBeEqualTo false
         }
     }
 
@@ -47,10 +46,6 @@ class KoInitBlockDeclarationForKoLocalDeclarationProviderTest {
             hasLocalDeclaration { (it as KoNameProvider).name == "otherLocalProperty" } shouldBeEqualTo false
             hasAllLocalDeclarations { (it as KoNameProvider).hasNameContaining("Local") } shouldBeEqualTo true
             hasAllLocalDeclarations { (it as KoNameProvider).hasNameStartingWith("sample") } shouldBeEqualTo false
-            containsLocalDeclaration { (it as KoNameProvider).name == "sampleLocalProperty" } shouldBeEqualTo true
-            containsLocalDeclaration { (it as KoNameProvider).name == "sampleLocalFunction" } shouldBeEqualTo true
-            containsLocalDeclaration { (it as KoNameProvider).name == "SampleLocalClass" } shouldBeEqualTo true
-            containsLocalDeclaration { (it as KoNameProvider).name == "sampleOtherDeclaration" } shouldBeEqualTo false
             localDeclarations
                 .filterIsInstance<KoNameProvider>()
                 .map { it.name }

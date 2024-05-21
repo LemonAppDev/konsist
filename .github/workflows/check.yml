@@ -158,6 +158,12 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
+          java-version: 8
+          distribution: 'corretto'
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
           java-version: 21
           distribution: 'corretto'
 

@@ -9,8 +9,4 @@ internal interface KoInitializerProviderCore : KoInitializerProvider, KoBaseProv
 
     override val isInitialized: Boolean
         get() = ktDeclaration.hasBody()
-
-    @Deprecated("Will be removed in v0.16.0", ReplaceWith("isInitialized"))
-    override val hasImplementation: Boolean
-        get() = ktDeclaration.hasBody()
 }

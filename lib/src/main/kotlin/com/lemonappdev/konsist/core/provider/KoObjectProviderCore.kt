@@ -11,12 +11,6 @@ internal interface KoObjectProviderCore : KoObjectProvider, KoDeclarationProvide
             includeNested,
         )
 
-    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasObject()"))
-    override fun containsObject(
-        includeNested: Boolean,
-        predicate: (KoObjectDeclaration) -> Boolean,
-    ): Boolean = objects(includeNested).any { predicate(it) }
-
     override fun numObjects(includeNested: Boolean): Int = objects(includeNested).size
 
     override fun countObjects(

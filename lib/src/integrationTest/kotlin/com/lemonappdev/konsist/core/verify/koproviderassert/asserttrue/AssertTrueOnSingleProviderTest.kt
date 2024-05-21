@@ -261,7 +261,7 @@ class AssertTrueOnSingleProviderTest {
                 .first()
 
         // then
-        sut.assertTrue { it.primaryConstructor?.hasParameterNamed("sampleParameter") ?: true }
+        sut.assertTrue { it.primaryConstructor?.hasParameterWithName("sampleParameter") ?: true }
     }
 
     @Test
@@ -275,7 +275,7 @@ class AssertTrueOnSingleProviderTest {
 
         // when
         val func = {
-            sut.assertTrue { it.primaryConstructor?.hasParameterNamed("sampleParameter") ?: true }
+            sut.assertTrue { it.primaryConstructor?.hasParameterWithName("sampleParameter") ?: true }
         }
 
         // then
@@ -292,7 +292,7 @@ class AssertTrueOnSingleProviderTest {
                 .first()
 
         // then
-        sut.assertFalse { it.primaryConstructor?.hasParameterNamed("otherParameter") ?: false }
+        sut.assertFalse { it.primaryConstructor?.hasParameterWithName("otherParameter") ?: false }
     }
 
     @Test
@@ -306,7 +306,7 @@ class AssertTrueOnSingleProviderTest {
 
         // when
         val func = {
-            sut.assertFalse { it.primaryConstructor?.hasParameterNamed("sampleParameter") ?: false }
+            sut.assertFalse { it.primaryConstructor?.hasParameterWithName("sampleParameter") ?: false }
         }
 
         // then
