@@ -1,0 +1,4 @@
+import com.lemonappdev.konsist.testdata.SampleAnnotation
+import com.lemonappdev.konsist.externalsample.SampleExternalClass
+
+class SampleClass1(val sampleProperty1: @SampleAnnotation SampleExternalClass)
