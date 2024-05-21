@@ -42,6 +42,25 @@ class KoPropertyDeclarationForKoNullableTypeProviderTest {
         }
     }
 
+    @Test
+    fun `property-with-annotated-type`() {
+        // given
+        val sut =
+            getSnippetFile("property-with-annotated-type")
+                .properties(includeNested = true)
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            type?.name shouldBeEqualTo "String"
+            hasType() shouldBeEqualTo true
+            hasType { it.name == "String" } shouldBeEqualTo true
+            hasType { it.name == "Int" } shouldBeEqualTo false
+            hasTypeOf(String::class) shouldBeEqualTo true
+            hasTypeOf(Int::class) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/koproperty/snippet/forkonullabletypeprovider/", fileName)
 }
