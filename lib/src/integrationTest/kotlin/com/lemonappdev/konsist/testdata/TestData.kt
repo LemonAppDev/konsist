@@ -92,6 +92,7 @@ annotation class SampleAnnotation
     AnnotationTarget.CONSTRUCTOR,
     AnnotationTarget.TYPEALIAS,
     AnnotationTarget.LOCAL_VARIABLE,
+    AnnotationTarget.TYPE,
 )
 annotation class SampleAnnotation1
 
@@ -103,6 +104,7 @@ annotation class SampleAnnotation1
     AnnotationTarget.CONSTRUCTOR,
     AnnotationTarget.TYPEALIAS,
     AnnotationTarget.LOCAL_VARIABLE,
+    AnnotationTarget.TYPE,
 )
 annotation class SampleAnnotation2
 
