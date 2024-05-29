@@ -28,7 +28,7 @@ android {
 
 dependencies {
     // Add Appcompat dependency (to be able to access Android specific classes in Konsit tests)
-    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.appcompat:appcompat:1.7.0")
 
     // Add JUnit dependency
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")

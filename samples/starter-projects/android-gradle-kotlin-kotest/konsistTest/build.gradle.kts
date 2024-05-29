@@ -28,7 +28,7 @@ android {
 
 dependencies {
     // Add Appcompat dependency (to be able to access Android specific classes in Konsit tests)
-    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.appcompat:appcompat:1.7.0")
 
     // Add Kotest dependency
     testImplementation("io.kotest:kotest-runner-junit5:5.9.0")
