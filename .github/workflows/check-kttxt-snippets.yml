@@ -51,7 +51,8 @@ jobs:
     if: |
       needs.get-github-context.outputs.base_ref_branch == 'main' ||
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      contains(needs.get-github-context.outputs.all_changed_files, '.kttxt')
+      filter(github.event.files, f -> endsWith(f.name, '.kttxt') and not startsWith(f.path, 'lib/src/snippet/kotlin/com/lemonappdev/konsist/'))  # Filter logic
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -62,18 +63,19 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
-      - name: Filter Changed .kttxt Files
+      - name: Filter Changed .kttxt Files (Excluding Specific Path)
         run: |
-          kttxt_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttxt$' )
+          kttxt_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttxt$' | grep -vE 'lib\/src\/snippet\/kotlin\/com\/lemonappdev\/konsist\/')
           echo "$kttxt_files"
-          echo "CHANGED_FILES_NAMES=$(echo "$kttxt_files" | tr '\n' ' ')" >> $GITHUB_ENV
+          CHANGED_FILES_NAMES=$(echo "$kttxt_files" | tr '\n' ' ')
+          echo "CHANGED_FILES_NAMES=$CHANGED_FILES_NAMES" >> $GITHUB_ENV  # Update environment variable
 
       - name: Run Python Script With Changed .kttxt Files
         run: |
-           if [ -n "$CHANGED_FILES_NAMES" ]; then
-            python3 scripts/check_kttxt_snippets.py $CHANGED_FILES_NAMES
-           else
-            echo "No changed .kttxt files to process."
-           fi
+          if [ -n "$CHANGED_FILES_NAMES" ]; then
+           python3 scripts/check_kttxt_snippets.py $CHANGED_FILES_NAMES
+          else
+           echo "No changed .kttxt files to process."
+          fi
         env:
-         CHANGED_FILES_NAMES: ${{ env.CHANGED_FILES_NAMES }}
+          CHANGED_FILES_NAMES: ${{ env.CHANGED_FILES_NAMES }}
