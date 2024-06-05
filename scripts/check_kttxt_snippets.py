@@ -58,6 +58,7 @@ def compile_all_project_files_jar():
     ]
 
     print("@@@@@")
+    print("@@@@@ project_root" + project_root)
     print("@@@@@ main_source_dir" + main_source_dir)
 
     for file in all_kt_files:
