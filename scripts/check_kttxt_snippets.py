@@ -75,7 +75,7 @@ def compile_all_modules(module_directory):
     if error_occurred:
         print_and_flush("Compile all modules failed!")
     else:
-        print_and_flush("Compiled all modules successfully!")
+        print_and_flush(f"Compiled all modules successfully: {module_directory}")
 
 def create_snippet_test_dir():
     if os.path.exists(kt_temp_files_dir):
@@ -274,7 +274,7 @@ if __name__ == '__main__':
 
     start_time = time.time()
     compile_test_data_jar()
-    compile_all_modules(os.path.join(project_root, "main"))
+    compile_all_modules(os.path.join(project_root, "lib", "src", "main"))
     compile_kotlin_files(kotlin_kt_temp_files)
     clean()
     end_time = time.time()  # Capture the end time to calculate the duration
