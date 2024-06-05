@@ -333,14 +333,14 @@ def complete_summary_file(root, file_text, summary_dir):
 
 
 def copy_content(expanded_source_directory, expanded_destination_directory, summary_dir):
-    # Iterate through all .md and .kttxt files in the source folder and copy them content
+    # Iterate through all .md and .kttest files in the source folder and copy them content
     for root, dirs, files in os.walk(expanded_source_directory):
         for filename_md in files:
             if filename_md.endswith(".md"):
                 prefix = filename_md.split(".")[0]
-                for filename_kttxt in files:
-                    if filename_kttxt.startswith(prefix) and filename_kttxt.endswith("kttxt"):
-                        kt_path = os.path.join(root, filename_kttxt)
+                for filename_kttest in files:
+                    if filename_kttest.startswith(prefix) and filename_kttest.endswith("kttest"):
+                        kt_path = os.path.join(root, filename_kttest)
                         md_path = os.path.join(root, filename_md)
 
                         try:

@@ -1,4 +1,4 @@
-name: Check Snippet kttxt Snippets
+name: Check Snippet kttest Snippets
 
 on:
   pull_request:
@@ -37,21 +37,21 @@ jobs:
         run: |
           echo Current branch starts with "release/": ${{ startsWith(steps.branch-name.outputs.current_branch, 'release/') }}
           echo Base ref branch is "main": ${{ steps.branch-name.outputs.base_ref_branch == 'main' }}
-          echo Changed .kttxt files: ${{ contains(steps.changed-files.outputs.all_changed_files, '.kttxt') }}
+          echo Changed .kttest files: ${{ contains(steps.changed-files.outputs.all_changed_files, '.kttest') }}
 
     outputs:
       current_branch: ${{ steps.branch-name.outputs.current_branch }}
       base_ref_branch: ${{ steps.branch-name.outputs.base_ref_branch }}
       all_changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
 
-  check-kttxt-snippets:
-    name: Check kttxt Snippets
+  check-kttest-snippets:
+    name: Check kttest Snippets
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
       needs.get-github-context.outputs.base_ref_branch == 'main' ||
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      contains(needs.get-github-context.outputs.all_changed_files, '.kttxt')
+      contains(needs.get-github-context.outputs.all_changed_files, '.kttest')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -62,18 +62,18 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
-      - name: Filter Changed .kttxt Files
+      - name: Filter Changed .kttest Files
         run: |
-          kttxt_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttxt$')
-          echo "$kttxt_files"
-          echo "CHANGED_FILES_NAMES=$(echo "$kttxt_files" | tr '\n' ' ')" >> $GITHUB_ENV
+          kttest_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttest$')
+          echo "$kttest_files"
+          echo "CHANGED_FILES_NAMES=$(echo "$kttest_files" | tr '\n' ' ')" >> $GITHUB_ENV
 
-      - name: Run Python Script With Changed .kttxt Files
+      - name: Run Python Script With Changed .kttest Files
         run: |
            if [ -n "$CHANGED_FILES_NAMES" ]; then
-            python3 scripts/check_kttxt_snippets.py $CHANGED_FILES_NAMES
+            python3 scripts/check_kttest_snippets.py $CHANGED_FILES_NAMES
            else
-            echo "No changed .kttxt files to process."
+            echo "No changed .kttest files to process."
            fi
         env:
          CHANGED_FILES_NAMES: ${{ env.CHANGED_FILES_NAMES }}
