@@ -50,7 +50,7 @@ def compile_all_project_files_jar():
     global error_occurred
 
     # Target 'main' source directory
-    main_source_dir = os.path.join(project_root, "lib", "src", "main", "kotlin")
+    main_source_dir = os.path.join(project_root, "src", "main", "kotlin")
 
     # Find all .kt files within 'main' source directory
     all_kt_files = [
