@@ -58,7 +58,7 @@ def compile_all_project_files_jar():
     ]
 
     print("@@@@@")
-    print(all_kt_files)
+    print("@@@@@ main_source_dir" + main_source_dir)
 
     for file in all_kt_files:
         command_converting_file_to_jar = [
