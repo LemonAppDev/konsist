@@ -57,7 +57,7 @@ def create_snippet_test_dir():
 def copy_kttxt_files_and_change_extension_to_kt(source_files, target_dir):
     # Iterate over the source files
     for source_file_path in source_files:
-        # Check if the current file has a '.kttxt' extension
+        # Check if the current file has a .kttxt' extension
         if source_file_path.endswith('.kttxt'):
             # Extract the part of the path after project_root if it is a substring of the path
             if project_root in source_file_path:
@@ -93,7 +93,7 @@ def compile_kotlin_file(file_path):
     snippet_command = [
         "kotlinc",
         "-cp",
-        test_data_jar_file_path + ":" + sample_external_library_path,
+        test_data_jar_file_path + ":" + sample_external_library_path + ":" + os.path.join(project_root, "lib", "src", "main",),
         "-nowarn",
         "-d", temp_dir,
         file_path
