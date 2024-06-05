@@ -46,45 +46,6 @@ def compile_test_data_jar():
     else:
         print_and_flush("Compile test-data.jar " + success)
 
-def compile_all_project_files_jar():
-    global error_occurred
-
-    # Target 'main' source directory
-    main_source_dir = os.path.join(project_root, "src", "main", "kotlin")
-
-    # Find all .kt files within 'main' source directory
-    all_kt_files = [
-        os.path.join(root, file) for root, _, files in os.walk(main_source_dir) for file in files if file.endswith(".kt")
-    ]
-
-    for root, dirs, files in os.walk(project_root):
-        for file in files:
-            for dir in dirs:
-                if "main/kotlin" in dir:
-                    all_kt_files.append(file)
-
-
-    print("@@@@@")
-    print(*all_kt_files)
-
-    for file in all_kt_files:
-        command_converting_file_to_jar = [
-        "kotlinc",
-        os.path.join(project_root, file),
-        "-include-runtime",
-        "-d",
-        test_data_jar_file_path
-        ]
-
-        try:
-            subprocess.run(command_converting_file_to_jar, check=True, text=True, capture_output=True)
-        except subprocess.CalledProcessError as e:
-            print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-            print_and_flush("Compile " + file + " " + failed)
-            error_occurred = True
-        else:
-            print_and_flush(f"Compile {file}.jar " + success)
-
 def create_snippet_test_dir():
     if os.path.exists(kt_temp_files_dir):
         shutil.rmtree(kt_temp_files_dir)
@@ -131,7 +92,7 @@ def compile_kotlin_file(file_path):
     snippet_command = [
         "kotlinc",
         "-cp",
-        test_data_jar_file_path + ":" + sample_external_library_path + ":" + os.path.join(project_root, "lib", "src", "main",),
+        test_data_jar_file_path + ":" + sample_external_library_path,
         "-nowarn",
         "-d", temp_dir,
         file_path
@@ -281,7 +242,6 @@ if __name__ == '__main__':
 
     start_time = time.time()
     compile_test_data_jar()
-    compile_all_project_files_jar()
     compile_kotlin_files(kotlin_kt_temp_files)
     clean()
     end_time = time.time()  # Capture the end time to calculate the duration
