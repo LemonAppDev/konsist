@@ -57,24 +57,23 @@ def compile_all_project_files_jar():
         os.path.join(root, file) for root, _, files in os.walk(main_source_dir) for file in files if file.endswith(".kt")
     ]
 
-    for root, dirs, files in all_kt_files:
-        for file in files:
-            command_converting_file_to_jar = [
-            "kotlinc",
-            os.path.join(root, file),
-            "-include-runtime",
-            "-d",
-            test_data_jar_file_path
-            ]
+    for file in all_kt_files:
+        command_converting_file_to_jar = [
+        "kotlinc",
+        os.path.join(project_root, file),
+        "-include-runtime",
+        "-d",
+        test_data_jar_file_path
+        ]
 
-            try:
-                subprocess.run(command_converting_file_to_jar, check=True, text=True, capture_output=True)
-            except subprocess.CalledProcessError as e:
-                print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-                print_and_flush("Compile " + test_data_jar_file_path + " " + failed)
-                error_occurred = True
-            else:
-                print_and_flush("Compile test-data.jar " + success)
+        try:
+            subprocess.run(command_converting_file_to_jar, check=True, text=True, capture_output=True)
+        except subprocess.CalledProcessError as e:
+            print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
+            print_and_flush("Compile " + test_data_jar_file_path + " " + failed)
+            error_occurred = True
+        else:
+            print_and_flush("Compile test-data.jar " + success)
 
 def create_snippet_test_dir():
     if os.path.exists(kt_temp_files_dir):
