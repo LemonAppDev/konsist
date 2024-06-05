@@ -59,7 +59,7 @@ def compile_all_modules(module_directory):
 
     # Compile each .kt file individually
     for kt_file in all_kt_files:
-        command = ["kotlinc", "-cp", "-include-runtime", "-d", test_data_jar_file_path, kt_file, "-cp",
+        command = ["kotlinc", "-cp", "-include-runtime", "-d", kt_file, "-cp",
                    os.path.join(project_root, "lib/src")]
 
         # Add project classpath (adjust based on your structure)
@@ -274,7 +274,7 @@ if __name__ == '__main__':
 
     start_time = time.time()
     compile_test_data_jar()
-    compile_all_modules(os.path.join(project_root, "lib", "src", "main"))
+    compile_all_modules(os.path.join(project_root, "main"))
     compile_kotlin_files(kotlin_kt_temp_files)
     clean()
     end_time = time.time()  # Capture the end time to calculate the duration
