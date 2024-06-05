@@ -64,7 +64,7 @@ def compile_all_project_files_jar():
                     all_kt_files.append(file)
 
 
-    print("@@@@ files:" + {all_kt_files})
+    print("@@@@ files:" + all_kt_files)
 
     for file in all_kt_files:
         command_converting_file_to_jar = [
