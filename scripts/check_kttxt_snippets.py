@@ -49,7 +49,15 @@ def compile_test_data_jar():
 def compile_all_project_files_jar():
     global error_occurred
 
-    for root, dirs, files in os.walk(project_root):
+    # Target 'main' source directory
+    main_source_dir = os.path.join(project_root, "lib", "src", "main", "kotlin")
+
+    # Find all .kt files within 'main' source directory
+    all_kt_files = [
+        os.path.join(root, file) for root, _, files in os.walk(main_source_dir) for file in files if file.endswith(".kt")
+    ]
+
+    for root, dirs, files in all_kt_files:
         for file in files:
             command_converting_file_to_jar = [
             "kotlinc",
