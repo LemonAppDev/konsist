@@ -15,6 +15,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(script_dir)
 kt_temp_files_dir = tempfile.mkdtemp()
 test_data_jar_file_path = kt_temp_files_dir + "/test-data.jar"
+konsist_library_jar_file_path = kt_temp_files_dir + "/konsist.jar"
 sample_external_library_path = project_root + "/lib/libs/sample-external-library-1.2.jar"
 success = "SUCCESS"
 failed = "FAILED"
@@ -42,6 +43,25 @@ def compile_test_data_jar():
     except subprocess.CalledProcessError as e:
         print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
         print_and_flush("Compile " + test_data_jar_file_path + " " + failed)
+        error_occurred = True
+    else:
+        print_and_flush("Compile test-data.jar " + success)
+
+def compile_konsist_library_jar():
+    global error_occurred
+    command_converting_konsist_library_to_jar = [
+        "kotlinc",
+        project_root + "/lib/src/main/**/*.kt",
+        "-include-runtime",
+        "-d",
+        konsist_library_jar_file_path
+    ]
+
+    try:
+        subprocess.run(command_converting_konsist_library_to_jar, check=True, text=True, capture_output=True)
+    except subprocess.CalledProcessError as e:
+        print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
+        print_and_flush("Compile " + konsist_library_jar_file_path + " " + failed)
         error_occurred = True
     else:
         print_and_flush("Compile test-data.jar " + success)
@@ -81,18 +101,25 @@ def copy_kttxt_files_and_change_extension_to_kt(source_files, target_dir):
 
 def compile_kotlin_file(file_path):
     error_occurred_local = False
+
+    # Read the content of the file
     with open(file_path, 'r') as file:
         file_content = file.read()
 
+    # Skip files containing "actual" or "expect"
     if "actual" in file_content or "expect" in file_content:
         return os.path.basename(file_path), "SKIPPED"
 
+    # Create a temporary directory
     temp_dir = tempfile.mkdtemp()
+
+    # Join the JAR file paths into a single classpath string
+    classpath = ":".join([sample_external_library_path, test_data_jar_file_path, konsist_library_jar_file_path])
 
     snippet_command = [
         "kotlinc",
         "-cp",
-        test_data_jar_file_path + ":" + sample_external_library_path,
+        classpath,
         "-nowarn",
         "-d", temp_dir,
         file_path
@@ -104,8 +131,10 @@ def compile_kotlin_file(file_path):
         error_occurred_local = True
         print_and_flush(e.stderr)
 
+    # Clean up the temporary directory
     shutil.rmtree(temp_dir)
 
+    # Prepare the message
     message = "compile " + os.path.basename(file_path)
 
     if error_occurred_local:
@@ -242,6 +271,7 @@ if __name__ == '__main__':
 
     start_time = time.time()
     compile_test_data_jar()
+    compile_konsist_library_jar()
     compile_kotlin_files(kotlin_kt_temp_files)
     clean()
     end_time = time.time()  # Capture the end time to calculate the duration
