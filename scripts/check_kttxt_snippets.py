@@ -46,6 +46,36 @@ def compile_test_data_jar():
     else:
         print_and_flush("Compile test-data.jar " + success)
 
+def compile_all_modules(module_directory):
+    global error_occurred
+    error_occurred = False  # Reset error flag before compilation
+
+    # Get all .kt files within the module directory (including subdirectories)
+    all_kt_files = []
+    for root, _, files in os.walk(module_directory):
+        for file in files:
+            if file.endswith(".kt"):
+                all_kt_files.append(os.path.join(root, file))
+
+    # Compile each .kt file individually
+    for kt_file in all_kt_files:
+        command = ["kotlinc", "-cp", "-include-runtime", "-d", test_data_jar_file_path, kt_file, "-cp",
+                   os.path.join(project_root, "lib/src")]
+
+        # Add project classpath (adjust based on your structure)
+
+        try:
+            subprocess.run(command, check=True, text=True, capture_output=True)
+        except subprocess.CalledProcessError as e:
+            print_and_flush(f"An error occurred while compiling {kt_file}:\n{e.stderr}")
+            error_occurred = True
+        else:
+            print_and_flush(f"Compiled {kt_file} successfully")
+
+    if error_occurred:
+        print_and_flush("Compile all modules failed!")
+    else:
+        print_and_flush("Compiled all modules successfully!")
 
 def create_snippet_test_dir():
     if os.path.exists(kt_temp_files_dir):
@@ -244,6 +274,7 @@ if __name__ == '__main__':
 
     start_time = time.time()
     compile_test_data_jar()
+    compile_all_modules(os.path.join(project_root, "lib", "src", "main"))
     compile_kotlin_files(kotlin_kt_temp_files)
     clean()
     end_time = time.time()  # Capture the end time to calculate the duration
