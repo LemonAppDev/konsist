@@ -57,9 +57,14 @@ def compile_all_project_files_jar():
         os.path.join(root, file) for root, _, files in os.walk(main_source_dir) for file in files if file.endswith(".kt")
     ]
 
-    print("@@@@@")
-    print("@@@@@ project_root" + project_root)
-    print("@@@@@ main_source_dir" + main_source_dir)
+    for root, dirs, files in os.walk(project_root):
+        for file in files:
+            for dir in dirs:
+                if "main/kotlin" in dir:
+                    all_kt_files.append(file)
+
+
+    print("@@@@ files:" + {all_kt_files})
 
     for file in all_kt_files:
         command_converting_file_to_jar = [
