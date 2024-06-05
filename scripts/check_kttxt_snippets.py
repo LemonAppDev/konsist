@@ -273,7 +273,7 @@ if __name__ == '__main__':
 
     start_time = time.time()
     compile_test_data_jar()
-    compile_all_modules(os.path.join(project_root, "lib", "src", "main"))
+    compile_all_modules(os.path.join(project_root, "main"))
     compile_kotlin_files(kotlin_kt_temp_files)
     clean()
     end_time = time.time()  # Capture the end time to calculate the duration
