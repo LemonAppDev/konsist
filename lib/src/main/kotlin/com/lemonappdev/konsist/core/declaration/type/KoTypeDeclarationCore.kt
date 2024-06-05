@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -21,6 +22,7 @@ import com.lemonappdev.konsist.core.provider.KoTypeDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
+import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtNullableType
 import org.jetbrains.kotlin.psi.KtTypeReference
@@ -45,16 +47,21 @@ internal class KoTypeDeclarationCore private constructor(
         KoGenericTypeProviderCore,
         KoPackageProviderCore,
         KoResideInPackageProviderCore,
+        KoAnnotationProviderCore,
         KoTypeDeclarationProviderCore {
         override val psiElement: PsiElement by lazy { ktTypeReference }
 
         override val ktElement: KtElement by lazy { ktTypeReference }
 
+        override val ktAnnotated: KtAnnotated by lazy { ktTypeReference }
+
         override val name: String by lazy {
             val typeReference =
                 ktTypeReference
                     .children
-                    .firstOrNull()
+                    // The last item is chosen because when a type is preceded by an annotation or modifier,
+                    // the type being searched for is the last item in the list.
+                    .lastOrNull()
 
             if (typeReference is KtNullableType) {
                 typeReference

@@ -29,7 +29,8 @@ object TypeUtil {
     ): KoBaseTypeDeclaration? {
         val type =
             if (isExtension && types.size > 1) {
-                // We choose last because when we have extension the first one is receiver and the second one is (return) type.
+                // The last element is chosen because, in the case of an extension, the first element is the receiver
+                // and the second element is the return type.
                 types.last()
             } else {
                 if (!isExtension) {
@@ -38,7 +39,9 @@ object TypeUtil {
                     null
                 }
                     ?.children
-                    ?.firstOrNull()
+                    // The last item is chosen because when a type is preceded by an annotation or modifier,
+                    // the type being searched for is the last item in the list.
+                    ?.lastOrNull()
             }
 
         val nestedType =
@@ -127,6 +130,7 @@ object TypeUtil {
                         ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
                 }
             }
+
             nestedType is KtTypeReference && typeText != null -> {
                 getClass(typeText, fqn, containingFile)
                     ?: getInterface(typeText, fqn, containingFile)
@@ -134,6 +138,7 @@ object TypeUtil {
                     ?: getTypeAlias(typeText, fqn, containingFile)
                     ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
             }
+
             else -> null
         }
     }

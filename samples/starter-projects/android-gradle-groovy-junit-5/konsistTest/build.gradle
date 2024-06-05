@@ -1,0 +1,46 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id "de.mannodermaus.android-junit5" version "1.10.0.0"
+}
+
+android {
+    namespace 'com.sample'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.sample"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    kotlin {
+        jvmToolchain(8)
+    }
+}
+
+dependencies {
+    // Add Appcompat dependency (to be able to access Android specific classes in Konsit tests)
+    implementation "androidx.appcompat:appcompat:1.7.0"
+
+    // Add JUnit dependency
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.10.2"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.10.2"
+
+    // Add Konsist dependency
+    testImplementation 'com.lemonappdev:konsist:0.15.1'
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}

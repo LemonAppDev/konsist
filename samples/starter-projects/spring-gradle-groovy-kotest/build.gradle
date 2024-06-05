@@ -1,0 +1,72 @@
+plugins {
+	id 'org.springframework.boot' version '3.3.0'
+	id 'io.spring.dependency-management' version '1.1.5'
+	id 'org.jetbrains.kotlin.jvm' version '1.9.24'
+	id 'org.jetbrains.kotlin.plugin.spring' version '1.9.24'
+	id 'jvm-test-suite'
+}
+
+group = 'com.sample'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '19'
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+
+dependencies {
+	// The 'api' is used, so classes are available in the konsistTest source set
+	api 'org.springframework.boot:spring-boot-starter'
+
+	implementation 'org.jetbrains.kotlin:kotlin-reflect'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+kotlin {
+	jvmToolchain(21)
+}
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+testing {
+	suites {
+		test {
+			useJUnitJupiter()
+		}
+
+		konsistTest(JvmTestSuite) {
+			dependencies {
+				// Add 'main' source set dependency
+				implementation project()
+
+				// Add Konsist dependency
+				implementation "com.lemonappdev:konsist:0.15.1"
+
+				// Add Kotest dependency
+				implementation "io.kotest:kotest-runner-junit5:5.9.0"
+			}
+
+			targets {
+				all {
+					testTask.configure {
+						shouldRunAfter(test)
+					}
+				}
+			}
+		}
+	}
+}
+
+// Optional block to run Konsist tests together with the Gradle 'check' task
+tasks.named('check') {
+	dependsOn(testing.suites.konsistTest)
+}
