@@ -46,35 +46,27 @@ def compile_test_data_jar():
     else:
         print_and_flush("Compile test-data.jar " + success)
 
-def compile_all_modules(module_directory):
+def compile_all_project_files_jar():
     global error_occurred
-    error_occurred = False  # Reset error flag before compilation
 
-    # Get all .kt files within the module directory (including subdirectories)
-    all_kt_files = []
-    for root, _, files in os.walk(module_directory):
+    for root, dirs, files in os.walk(project_root):
         for file in files:
-            if file.endswith(".kt"):
-                all_kt_files.append(os.path.join(root, file))
+            command_converting_file_to_jar = [
+            "kotlinc",
+            os.path.join(root, file),
+            "-include-runtime",
+            "-d",
+            test_data_jar_file_path
+            ]
 
-    # Compile each .kt file individually
-    for kt_file in all_kt_files:
-        command = ["kotlinc", kt_file, "-include-runtime", "-d", "-cp"]
-
-        # Add project classpath (adjust based on your structure)
-
-        try:
-            subprocess.run(command, check=True, text=True, capture_output=True)
-        except subprocess.CalledProcessError as e:
-            print_and_flush(f"An error occurred while compiling {kt_file}:\n{e.stderr}")
-            error_occurred = True
-        else:
-            print_and_flush(f"Compiled {kt_file} successfully")
-
-    if error_occurred:
-        print_and_flush("Compile all modules failed!")
-    else:
-        print_and_flush(f"Compiled all modules successfully: {module_directory}")
+            try:
+                subprocess.run(command_converting_file_to_jar, check=True, text=True, capture_output=True)
+            except subprocess.CalledProcessError as e:
+                print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
+                print_and_flush("Compile " + test_data_jar_file_path + " " + failed)
+                error_occurred = True
+            else:
+                print_and_flush("Compile test-data.jar " + success)
 
 def create_snippet_test_dir():
     if os.path.exists(kt_temp_files_dir):
@@ -190,7 +182,6 @@ def get_all_kttxt_files():
 
     for root, dirs, files in os.walk(project_root):
         for file in files:
-            file_abs_path = os.path.abspath(os.path.join(root, file))
             if file.endswith('.kttxt'):
                 kttxt_temp_file_paths.append(os.path.join(root, file))
 
@@ -273,7 +264,7 @@ if __name__ == '__main__':
 
     start_time = time.time()
     compile_test_data_jar()
-    compile_all_modules(os.path.join(project_root, "main"))
+    compile_all_project_files_jar()
     compile_kotlin_files(kotlin_kt_temp_files)
     clean()
     end_time = time.time()  # Capture the end time to calculate the duration
