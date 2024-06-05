@@ -6,6 +6,7 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 import multiprocessing
 import tempfile
 import time
+import glob
 
 multiprocessing.set_start_method('fork')
 
@@ -49,22 +50,34 @@ def compile_test_data_jar():
 
 def compile_konsist_library_jar():
     global error_occurred
+    error_occurred = False
+
+    # Find all .kt files in the specified directory
+    kotlin_files = glob.glob(os.path.join(project_root, "lib/src/main/**/*.kt"), recursive=True)
+
+    if not kotlin_files:
+        print_and_flush(f"Error: No Kotlin files found in the directory {project_root}/lib/src/main")
+        error_occurred = True
+        return
+
+    # Create the command list
     command_converting_konsist_library_to_jar = [
         "kotlinc",
-        project_root + "/lib/src/main/**/*.kt",
+        *kotlin_files,  # Expand the list of Kotlin files
         "-include-runtime",
         "-d",
         konsist_library_jar_file_path
     ]
 
     try:
+        # Run the command
         subprocess.run(command_converting_konsist_library_to_jar, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-        print_and_flush("Compile " + konsist_library_jar_file_path + " " + failed)
+        print_and_flush("Compile " + konsist_library_jar_file_path + " " + "FAILED")
         error_occurred = True
     else:
-        print_and_flush("Compile test-data.jar " + success)
+        print_and_flush("Compile test-data.jar " + "SUCCESS")
 
 def create_snippet_test_dir():
     if os.path.exists(kt_temp_files_dir):
