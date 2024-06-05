@@ -59,8 +59,7 @@ def compile_all_modules(module_directory):
 
     # Compile each .kt file individually
     for kt_file in all_kt_files:
-        command = ["kotlinc", "-cp", "-include-runtime", "-d", kt_file, "-cp",
-                   os.path.join(project_root, "lib/src")]
+        command = ["kotlinc", kt_file, "-include-runtime", "-d", "-cp"]
 
         # Add project classpath (adjust based on your structure)
 
