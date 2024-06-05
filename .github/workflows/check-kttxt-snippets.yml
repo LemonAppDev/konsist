@@ -64,9 +64,7 @@ jobs:
 
       - name: Filter Changed .kttxt Files
         run: |
-          echo before substring = echo '${{ needs.get-github-context.outputs.all_changed_files }}'
-          echo after substring = echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' 
-          kttxt_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttxt$'')
+          kttxt_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttxt$' | grep -vE '^lib\/src\/snippet\/kotlin\/com\/lemonappdev\/konsist\/'')
           echo "$kttxt_files"
           echo "CHANGED_FILES_NAMES=$(echo "$kttxt_files" | tr '\n' ' ')" >> $GITHUB_ENV
 
