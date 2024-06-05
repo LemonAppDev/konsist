@@ -53,7 +53,7 @@ def compile_konsist_library_jar():
     error_occurred = False
 
     # Find all .kt files in the specified directory
-    kotlin_files = glob.glob(os.path.join(project_root, "lib/src/main/**/*.kt"), recursive=True)
+    kotlin_files = glob.glob(os.path.join(project_root, "lib/src/main/kotlin/com/lemonappdev/konsist/api/**/*.kt"), recursive=True)
 
     if not kotlin_files:
         print_and_flush(f"Error: No Kotlin files found in the directory {project_root}/lib/src/main")
