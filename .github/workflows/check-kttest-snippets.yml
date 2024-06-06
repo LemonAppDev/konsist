@@ -70,10 +70,6 @@ jobs:
 
       - name: Run Python Script With Changed .kttest Files
         run: |
-           if [ -n "$CHANGED_FILES_NAMES" ]; then
-            python3 scripts/check_kttest_snippets.py $CHANGED_FILES_NAMES
-           else
-            echo "No changed .kttest files to process."
-           fi
+          python3 scripts/check_kttxt_snippets.py ${{ env.CHANGED_FILES_NAMES }}
         env:
          CHANGED_FILES_NAMES: ${{ env.CHANGED_FILES_NAMES }}
