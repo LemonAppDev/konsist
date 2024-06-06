@@ -387,8 +387,8 @@ class KoParameterDeclarationForKoAnnotationProviderTest {
             it?.hasAllAnnotationsOf(
                 listOf(
                     SampleAnnotation1::class,
-                    NonExistingAnnotation::class
-                )
+                    NonExistingAnnotation::class,
+                ),
             ) shouldBeEqualTo false
             it?.hasAllAnnotationsOf(setOf(SampleAnnotation1::class)) shouldBeEqualTo true
             it?.hasAllAnnotationsOf(setOf(NonExistingAnnotation::class)) shouldBeEqualTo false
@@ -504,8 +504,8 @@ class KoParameterDeclarationForKoAnnotationProviderTest {
             hasAllAnnotationsOf(
                 listOf(
                     SampleAnnotation1::class,
-                    NonExistingAnnotation::class
-                )
+                    NonExistingAnnotation::class,
+                ),
             ) shouldBeEqualTo false
             hasAllAnnotationsOf(setOf(SampleAnnotation1::class)) shouldBeEqualTo true
             hasAllAnnotationsOf(setOf(NonExistingAnnotation::class)) shouldBeEqualTo false
