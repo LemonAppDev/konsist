@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test
 
 class KoParameterDeclarationForKoContainingFileProviderTest {
     @Test
-    fun `parameter-containing-file`() {
+    fun `parameter-in-constructor-containing-file`() {
         // given
         val sut =
-            getSnippetFile("parameter-containing-file")
+            getSnippetFile("parameter-in-constructor-containing-file")
                 .classes()
                 .first()
                 .primaryConstructor
@@ -21,6 +21,24 @@ class KoParameterDeclarationForKoContainingFileProviderTest {
             ?.containingFile
             ?.nameWithExtension
             ?.endsWith("file.kt")
+            .shouldBeEqualTo(true)
+    }
+
+    @Test
+    fun `parameter-in-function-invocation-containing-file`() {
+        // given
+        val sut =
+            getSnippetFile("parameter-in-function-invocation-containing-file")
+                .functions()
+                .first()
+                .parameters
+                .first()
+
+        // then
+        sut
+            .containingFile
+            .nameWithExtension
+            .endsWith("file.kt")
             .shouldBeEqualTo(true)
     }
 

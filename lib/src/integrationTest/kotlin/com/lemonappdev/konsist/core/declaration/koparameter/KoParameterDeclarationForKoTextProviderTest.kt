@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test
 
 class KoParameterDeclarationForKoTextProviderTest {
     @Test
-    fun `parameter-text`() {
+    fun `parameter-in-constructor-text`() {
         // given
         val sut =
-            getSnippetFile("parameter-text")
+            getSnippetFile("parameter-in-constructor-text")
                 .classes()
                 .first()
                 .primaryConstructor

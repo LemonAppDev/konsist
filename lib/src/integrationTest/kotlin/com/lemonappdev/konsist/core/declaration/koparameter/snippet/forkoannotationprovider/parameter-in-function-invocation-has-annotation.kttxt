@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.SampleAnnotation
+
+fun sampleFunction(@SampleAnnotation sampleParameter: Int) {}

@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test
 
 class KoParameterDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
-    fun `parameter-fully-qualified-name`() {
+    fun `parameter-in-constructor-fully-qualified-name`() {
         // given
         val sut =
-            getSnippetFile("parameter-fully-qualified-name")
+            getSnippetFile("parameter-in-constructor-fully-qualified-name")
                 .classes()
                 .first()
                 .primaryConstructor
@@ -21,10 +21,24 @@ class KoParameterDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     @Test
-    fun `parameter-fully-qualified-name-without-package`() {
+    fun `parameter-in-function-invocation-fully-qualified-name`() {
         // given
         val sut =
-            getSnippetFile("parameter-fully-qualified-name-without-package")
+            getSnippetFile("parameter-in-function-invocation-fully-qualified-name")
+                .functions()
+                .first()
+                .parameters
+                .first()
+
+        // then
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.sampleParameter"
+    }
+
+    @Test
+    fun `parameter-in-constructor-fully-qualified-name-without-package`() {
+        // given
+        val sut =
+            getSnippetFile("parameter-in-constructor-fully-qualified-name-without-package")
                 .classes()
                 .first()
                 .primaryConstructor
@@ -36,10 +50,24 @@ class KoParameterDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     @Test
-    fun `nested-parameter-fully-qualified-name`() {
+    fun `parameter-in-function-invocation-fully-qualified-name-without-package`() {
         // given
         val sut =
-            getSnippetFile("nested-parameter-fully-qualified-name")
+            getSnippetFile("parameter-in-function-invocation-fully-qualified-name-without-package")
+                .functions()
+                .first()
+                .parameters
+                .first()
+
+        // then
+        sut.fullyQualifiedName shouldBeEqualTo "sampleParameter"
+    }
+
+    @Test
+    fun `nested-parameter-in-constructor-fully-qualified-name`() {
+        // given
+        val sut =
+            getSnippetFile("nested-parameter-in-constructor-fully-qualified-name")
                 .classes()
                 .first()
                 .primaryConstructor
@@ -51,10 +79,24 @@ class KoParameterDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     @Test
-    fun `nested-parameter-fully-qualified-name-without-package`() {
+    fun `nested-parameter-in-function-invocation-fully-qualified-name`() {
         // given
         val sut =
-            getSnippetFile("nested-parameter-fully-qualified-name-without-package")
+            getSnippetFile("nested-parameter-in-function-invocation-fully-qualified-name")
+                .functions()
+                .first()
+                .parameters
+                .first()
+
+        // then
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleInterface.sampleParameter"
+    }
+
+    @Test
+    fun `nested-parameter-in-constructor-fully-qualified-name-without-package`() {
+        // given
+        val sut =
+            getSnippetFile("nested-parameter-in-constructor-fully-qualified-name-without-package")
                 .classes()
                 .first()
                 .primaryConstructor
@@ -63,6 +105,20 @@ class KoParameterDeclarationForKoFullyQualifiedNameProviderTest {
 
         // then
         sut?.fullyQualifiedName shouldBeEqualTo "SampleInterface.SampleClassWithParameter.sampleParameter"
+    }
+
+    @Test
+    fun `nested-parameter-in-function-invocation-fully-qualified-name-without-package`() {
+        // given
+        val sut =
+            getSnippetFile("nested-parameter-in-function-invocation-fully-qualified-name-without-package")
+                .functions()
+                .first()
+                .parameters
+                .first()
+
+        // then
+        sut.fullyQualifiedName shouldBeEqualTo "SampleInterface.sampleParameter"
     }
 
     private fun getSnippetFile(fileName: String) =

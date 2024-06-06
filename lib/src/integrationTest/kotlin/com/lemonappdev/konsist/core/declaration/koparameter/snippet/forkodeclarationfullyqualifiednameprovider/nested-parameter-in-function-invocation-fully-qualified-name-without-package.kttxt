@@ -1,0 +1,3 @@
+interface SampleInterface {
+    fun sampleFunction(sampleParameter: Int) {}
+}
