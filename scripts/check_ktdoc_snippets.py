@@ -26,27 +26,6 @@ def print_and_flush(message):
     print(message)
     sys.stdout.flush()
 
-
-def compile_konsist_jar():
-    global error_occurred
-    command_converting_konsist_to_jar = [
-        "kotlinc",
-        project_root + "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/konsist/TestData.kt",
-        "-include-runtime",
-        "-d",
-        konsist_jar_file_path
-    ]
-
-    try:
-        subprocess.run(command_converting_konsist_to_jar, check=True, text=True, capture_output=True)
-    except subprocess.CalledProcessError as e:
-        print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-        print_and_flush("Compile " + konsist_jar_file_path + " " + failed)
-        error_occurred = True
-    else:
-        print_and_flush("Compile konsist.jar " + success)
-
-
 def create_snippet_test_dir():
     if os.path.exists(kt_temp_files_dir):
         shutil.rmtree(kt_temp_files_dir)
@@ -241,7 +220,6 @@ if __name__ == '__main__':
     print()
 
     start_time = time.time()
-    compile_konsist_jar()
     compile_kotlin_files(kotlin_kt_temp_files)
     clean()
     end_time = time.time()  # Capture the end time to calculate the duration
