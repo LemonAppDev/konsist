@@ -66,10 +66,14 @@ jobs:
         run: |
           kttest_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttest$')
           echo "$kttest_files"
-          echo "CHANGED_FILES_NAMES=$(echo "$kttest_files" | tr '\n' ' ')" >> $GITHUB_ENV
+          echo "$kttest_files" > changed_kttest_files.txt
 
       - name: Run Python Script With Changed .kttest Files
         run: |
-          python3 scripts/check_kttxt_snippets.py ${{ env.CHANGED_FILES_NAMES }}
+          if [ -s changed_kttest_files.txt ]; then
+            python3 scripts/check_kttest_snippets.py changed_kttest_files.txt
+          else
+            echo "No changed .kttest files to process."
+          fi
         env:
          CHANGED_FILES_NAMES: ${{ env.CHANGED_FILES_NAMES }}

@@ -14,11 +14,10 @@ error_occurred = False
 script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(script_dir)
 kt_temp_files_dir = tempfile.mkdtemp()
-test_data_jar_file_path = kt_temp_files_dir + "/test-data.jar"
-sample_external_library_path = project_root + "/lib/libs/sample-external-library-1.2.jar"
+test_data_jar_file_path = os.path.join(kt_temp_files_dir, "test-data.jar")
+sample_external_library_path = os.path.join(project_root, "lib/libs/sample-external-library-1.2.jar")
 success = "SUCCESS"
 failed = "FAILED"
-
 
 # Methods =============================================================================================================
 
@@ -26,12 +25,11 @@ def print_and_flush(message):
     print(message)
     sys.stdout.flush()
 
-
 def compile_test_data_jar():
     global error_occurred
     command_converting_testdata_to_jar = [
         "kotlinc",
-        project_root + "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/testdata/TestData.kt",
+        os.path.join(project_root, "lib/src/integrationTest/kotlin/com/lemonappdev/konsist/testdata/TestData.kt"),
         "-include-runtime",
         "-d",
         test_data_jar_file_path
@@ -52,32 +50,14 @@ def create_snippet_test_dir():
 
     os.makedirs(kt_temp_files_dir)
 
-
 def copy_kttest_files_and_change_extension_to_kt(source_files, target_dir):
-    # Iterate over the source files
     for source_file_path in source_files:
-        # Check if the current file has a .kttest' extension
         if source_file_path.endswith('.kttest'):
-            # Extract the part of the path after project_root if it is a substring of the path
-            if project_root in source_file_path:
-                relative_path_part = source_file_path.split(project_root, 1)[1]
-            else:
-                relative_path_part = source_file_path
-
-            # Remove leading slashes
-            relative_path_part = relative_path_part.lstrip("/\\")
-
-            # Concatenate the target directory with the relative path part
+            relative_path_part = os.path.relpath(source_file_path, project_root)
             target_file_path_with_extension = os.path.join(target_dir, relative_path_part)
-
-            # Replace the .kttest extension with .kt
             target_file_path = os.path.splitext(target_file_path_with_extension)[0] + '.kt'
-
-            # Create the target directory if it doesn't exist
             os.makedirs(os.path.dirname(target_file_path), exist_ok=True)
-            # Copy the file from source to target with new extension
             shutil.copy2(source_file_path, target_file_path)
-
 
 def compile_kotlin_file(file_path):
     error_occurred_local = False
@@ -92,7 +72,7 @@ def compile_kotlin_file(file_path):
     snippet_command = [
         "kotlinc",
         "-cp",
-        test_data_jar_file_path + ":" + sample_external_library_path,
+        f"{test_data_jar_file_path}:{sample_external_library_path}",
         "-nowarn",
         "-d", temp_dir,
         file_path
@@ -113,7 +93,6 @@ def compile_kotlin_file(file_path):
     else:
         return message, success
 
-
 def compile_kotlin_files(kotlin_files):
     global error_occurred
     total_files = len(kotlin_files)
@@ -121,11 +100,11 @@ def compile_kotlin_files(kotlin_files):
 
     if not os.path.exists(test_data_jar_file_path):
         print_and_flush(f"Error: The file {test_data_jar_file_path} does not exist.")
-        sys.exit(1)  # Exit the script with an error code
+        sys.exit(1)
 
     if not os.path.exists(sample_external_library_path):
         print_and_flush(f"Error: The file {sample_external_library_path} does not exist.")
-        sys.exit(1)  # Exit the script with an error code
+        sys.exit(1)
 
     with ProcessPoolExecutor() as executor:
         futures = {executor.submit(compile_kotlin_file, file_path): file_path for file_path in kotlin_files}
@@ -137,23 +116,18 @@ def compile_kotlin_files(kotlin_files):
             if result == "FAILED":
                 error_occurred = True
 
-
 def clean():
     shutil.rmtree(kt_temp_files_dir)
     subprocess.run(["git", "clean", "-f"])
 
-
 def get_kt_temp_file_from_kttest_file(kttest_snippet_file_path):
-    # Ensure the snippet_file_path starts with the project_root
     if not kttest_snippet_file_path.startswith(project_root):
-        kttest_snippet_file_path = project_root + "/" + kttest_snippet_file_path
+        kttest_snippet_file_path = os.path.join(project_root, kttest_snippet_file_path)
 
-    # Verify that the .kttest file exists
     if not os.path.isfile(kttest_snippet_file_path):
         raise FileNotFoundError(f"The file {kttest_snippet_file_path} does not exist.")
 
     return kttest_snippet_file_path
-
 
 def get_all_kttest_files():
     kttest_temp_file_paths = []
@@ -163,23 +137,18 @@ def get_all_kttest_files():
             if file.endswith('.kttest'):
                 kttest_temp_file_paths.append(os.path.join(root, file))
 
-    kt_temp_file_paths = [get_kt_temp_file_from_kttest_file(path) for path in kttest_temp_file_paths]
-    return kt_temp_file_paths
-
+    return kttest_temp_file_paths
 
 def ensure_files_exist(file_paths):
     for file_path in file_paths:
         if not os.path.exists(file_path):
-            # File does not exist, raise an exception
             raise FileNotFoundError(f"The file {file_path} does not exist.")
-
 
 def count_files_in_directory(directory):
     total_files = 0
     for root, dirs, files in os.walk(directory):
         total_files += len(files)
     return total_files
-
 
 def list_files(directory):
     file_list = []
@@ -188,24 +157,17 @@ def list_files(directory):
             file_list.append(os.path.join(root, file))
     return file_list
 
-
 def print_relative_file_paths(file_list):
     for file in file_list:
         print(os.path.relpath(file, project_root))
 
-
 def get_all_file_paths(directory):
-    file_paths = []  # List to store file paths
-
-    # Walking top-down from the root
+    file_paths = []
     for root, _, files in os.walk(directory):
         for file in files:
-            # Concatenate the root directory and the filename to get full file path
             file_path = os.path.join(root, file)
             file_paths.append(file_path)
-
     return file_paths
-
 
 # Script ===============================================================================================================
 
@@ -213,17 +175,17 @@ if __name__ == '__main__':
     kotlin_kttest_temp_files = []
 
     if len(sys.argv) > 1:
-        if '-all' in sys.argv[1:]:
-            print_and_flush("kttest_snippet_file_paths not provided - checking all kttest files")
+        input_file_path = sys.argv[1]
+        if input_file_path == '-all':
+            print_and_flush("Checking all kttest files")
             kotlin_kttest_temp_files = get_all_kttest_files()
         else:
-            print_and_flush("kttest_snippet_file_paths are provided - checking provided kttest files")
-            kotlin_kttest_temp_files = sys.argv[1:]
-
+            with open(input_file_path, 'r') as file:
+                kotlin_kttest_temp_files = [line.strip() for line in file.readlines()]
     else:
         print("No files provided")
         print("To check all files, use the -all parameter")
-        print("To check files use script.py file1 file2 ...")
+        print("To check files use script.py <file_list>")
         sys.exit(1)
 
     ensure_files_exist(kotlin_kttest_temp_files)
@@ -244,7 +206,7 @@ if __name__ == '__main__':
     compile_test_data_jar()
     compile_kotlin_files(kotlin_kt_temp_files)
     clean()
-    end_time = time.time()  # Capture the end time to calculate the duration
+    end_time = time.time()
     duration = end_time - start_time
 
     print()
