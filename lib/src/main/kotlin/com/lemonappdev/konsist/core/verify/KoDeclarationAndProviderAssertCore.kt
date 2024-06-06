@@ -145,8 +145,8 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(
             it is KoAnnotationDeclaration &&
                 (
                     it.name == "Suppress" &&
-                        it.text.contains("\"konsist.$suppressName\"") ||
-                        it.text.contains("\"$suppressName\"")
+                        it.hasTextContaining("\"konsist.$suppressName\"") ||
+                        it.hasTextContaining("\"$suppressName\"")
                 )
         }
         .forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it as KoBaseDeclaration, suppressName) }

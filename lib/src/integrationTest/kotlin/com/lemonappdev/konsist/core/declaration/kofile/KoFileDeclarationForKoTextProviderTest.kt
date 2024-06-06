@@ -22,7 +22,7 @@ class KoFileDeclarationForKoTextProviderTest {
                     "SampleText"
                 }
                 
-                """.trimIndent()
+                """.trimIndent(),
             )
             hasTextStartingWith("fun sampleF") shouldBeEqualTo true
             hasTextStartingWith("Other") shouldBeEqualTo false

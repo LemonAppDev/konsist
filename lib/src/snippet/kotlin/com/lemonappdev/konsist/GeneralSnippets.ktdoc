@@ -179,7 +179,7 @@ class GeneralSnippets {
         Konsist
             .scopeFromProject()
             .files
-            .assertFalse { it.text.contains("forbiddenString") }
+            .assertFalse { it.hasTextContaining("forbiddenString") }
     }
 
     fun `all function parameters are interfaces`() {

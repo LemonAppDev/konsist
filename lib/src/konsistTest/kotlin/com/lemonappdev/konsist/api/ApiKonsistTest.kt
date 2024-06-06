@@ -88,7 +88,7 @@ class ApiKonsistTest {
             .functions()
             .withoutAnnotationOf(Deprecated::class)
             .withParameter { it.hasVarArgModifier }
-            .assertTrue { it.hasExpressionBody && it.text.contains("${it.name}(listOf(") }
+            .assertTrue { it.hasExpressionBody && it.hasTextContaining("${it.name}(listOf(") }
     }
 
     @Test
