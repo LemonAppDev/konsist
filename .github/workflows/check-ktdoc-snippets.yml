@@ -62,6 +62,12 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
+      - name: Filter Changed .ktdoc Files
+        run: |
+          ktdoc_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.ktdoc$')
+          echo "$ktdoc_files"
+          echo "CHANGED_FILES_NAMES=$(echo "$ktdoc_files" | tr '\n' ' ')" >> $GITHUB_ENV
+
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-maven-kotest/pom.xml
 
@@ -70,12 +76,6 @@ jobs:
 
       - name: Publish Konsist Artifact To Local Maven Repository
         run: ./gradlew publishToMavenLocal
-
-      - name: Filter Changed .ktdoc Files
-        run: |
-          ktdoc_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.ktdoc$')
-          echo "$ktdoc_files"
-          echo "CHANGED_FILES_NAMES=$(echo "$ktdoc_files" | tr '\n' ' ')" >> $GITHUB_ENV
 
       - name: Run Python Script With Changed .ktdoc Files
         run: |
