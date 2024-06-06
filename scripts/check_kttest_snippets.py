@@ -175,17 +175,26 @@ if __name__ == '__main__':
     kotlin_kttest_temp_files = []
 
     if len(sys.argv) > 1:
-        input_file_path = sys.argv[1]
-        if input_file_path == '-all':
-            print_and_flush("Checking all kttest files")
-            kotlin_kttest_temp_files = get_all_kttest_files()
-        else:
-            with open(input_file_path, 'r') as file:
+        input_files = sys.argv[1:]
+
+        # Check if all provided arguments are files and read their contents
+        temp_files = [f for f in input_files if os.path.isfile(f)]
+        kttest_files = [f for f in input_files if f.endswith('.kttest')]
+
+        if len(temp_files) > 1:
+            raise Exception("Multiple temporary files provided. Only one is allowed.")
+        elif len(temp_files) == 1:
+            with open(temp_files[0], 'r') as file:
                 kotlin_kttest_temp_files = [line.strip() for line in file.readlines()]
+        elif kttest_files:
+            kotlin_kttest_temp_files = kttest_files
+        else:
+            print("No valid input files provided")
+            sys.exit(1)
     else:
         print("No files provided")
         print("To check all files, use the -all parameter")
-        print("To check files use script.py <file_list>")
+        print("To check files use script.py <file_list_or_kttest_files>")
         sys.exit(1)
 
     ensure_files_exist(kotlin_kttest_temp_files)

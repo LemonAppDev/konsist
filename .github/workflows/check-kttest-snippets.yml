@@ -65,15 +65,18 @@ jobs:
       - name: Filter Changed .kttest Files
         run: |
           kttest_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttest$')
-          echo "$kttest_files"
-          echo "$kttest_files" > changed_kttest_files.txt
+          if [ -n "$kttest_files" ]; then
+            temp_file=$(mktemp)
+            echo "$kttest_files" > "$temp_file"
+            echo "TEMP_FILE=$temp_file" >> $GITHUB_ENV
+          fi
 
       - name: Run Python Script With Changed .kttest Files
         run: |
-          if [ -s changed_kttest_files.txt ]; then
-            python3 scripts/check_kttest_snippets.py changed_kttest_files.txt
+          if [ -n "$TEMP_FILE" ]; then
+            python3 scripts/check_kttest_snippets.py "$TEMP_FILE"
           else
             echo "No changed .kttest files to process."
           fi
         env:
-         CHANGED_FILES_NAMES: ${{ env.CHANGED_FILES_NAMES }}
+          TEMP_FILE: ${{ env.TEMP_FILE }}
