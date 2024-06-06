@@ -14,7 +14,7 @@ error_occurred = False
 script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(script_dir)
 kt_temp_files_dir = tempfile.mkdtemp()
-test_data_jar_file_path = kt_temp_files_dir + "/test-data.jar"
+konsist_jar_file_path = "~/.m2/repository/0.16.0-SNAPSHOT/konsist-0.16.0-SNAPSHOT.jar"
 sample_external_library_path = project_root + "/lib/libs/sample-external-library-1.2.jar"
 success = "SUCCESS"
 failed = "FAILED"
@@ -27,24 +27,24 @@ def print_and_flush(message):
     sys.stdout.flush()
 
 
-def compile_test_data_jar():
+def compile_konsist_jar():
     global error_occurred
-    command_converting_testdata_to_jar = [
+    command_converting_konsist_to_jar = [
         "kotlinc",
-        project_root + "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/testdata/TestData.kt",
+        project_root + "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/konsist/TestData.kt",
         "-include-runtime",
         "-d",
-        test_data_jar_file_path
+        konsist_jar_file_path
     ]
 
     try:
-        subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
+        subprocess.run(command_converting_konsist_to_jar, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-        print_and_flush("Compile " + test_data_jar_file_path + " " + failed)
+        print_and_flush("Compile " + konsist_jar_file_path + " " + failed)
         error_occurred = True
     else:
-        print_and_flush("Compile test-data.jar " + success)
+        print_and_flush("Compile konsist.jar " + success)
 
 
 def create_snippet_test_dir():
@@ -93,7 +93,7 @@ def compile_kotlin_file(file_path):
     snippet_command = [
         "kotlinc",
         "-cp",
-        test_data_jar_file_path + ":" + sample_external_library_path,
+        konsist_jar_file_path,
         "-nowarn",
         "-d", temp_dir,
         file_path
@@ -120,12 +120,8 @@ def compile_kotlin_files(kotlin_files):
     total_files = len(kotlin_files)
     processed_files = 0
 
-    if not os.path.exists(test_data_jar_file_path):
-        print_and_flush(f"Error: The file {test_data_jar_file_path} does not exist.")
-        sys.exit(1)  # Exit the script with an error code
-
-    if not os.path.exists(sample_external_library_path):
-        print_and_flush(f"Error: The file {sample_external_library_path} does not exist.")
+    if not os.path.exists(konsist_jar_file_path):
+        print_and_flush(f"Error: The file {konsist_jar_file_path} does not exist.")
         sys.exit(1)  # Exit the script with an error code
 
     with ProcessPoolExecutor() as executor:
@@ -245,7 +241,7 @@ if __name__ == '__main__':
     print()
 
     start_time = time.time()
-    compile_test_data_jar()
+    compile_konsist_jar()
     compile_kotlin_files(kotlin_kt_temp_files)
     clean()
     end_time = time.time()  # Capture the end time to calculate the duration
