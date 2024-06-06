@@ -17,7 +17,7 @@ class KoSetterDeclarationForKoTextProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.text shouldBeEqualTo("set(value) = println(value)")
+            it?.text shouldBeEqualTo ("set(value) = println(value)")
             it?.hasTextStartingWith("set(") shouldBeEqualTo true
             it?.hasTextStartingWith("Other") shouldBeEqualTo false
             it?.hasTextEndingWith("(value)") shouldBeEqualTo true

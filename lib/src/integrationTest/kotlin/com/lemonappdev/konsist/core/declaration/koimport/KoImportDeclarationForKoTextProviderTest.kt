@@ -78,6 +78,5 @@ class KoImportDeclarationForKoTextProviderTest {
         }
     }
 
-
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koimport/snippet/forkotextprovider/", fileName)
 }

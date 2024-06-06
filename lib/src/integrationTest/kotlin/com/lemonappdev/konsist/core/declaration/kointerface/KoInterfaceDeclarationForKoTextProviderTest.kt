@@ -31,7 +31,8 @@ class KoInterfaceDeclarationForKoTextProviderTest {
                 interface SampleInterface {
                     val sampleProperty: Int
                 }
-                """.trimIndent(),)
+                """.trimIndent(),
+            )
             hasTextStartingWith("interface Sample") shouldBeEqualTo true
             hasTextStartingWith("Other") shouldBeEqualTo false
             hasTextEndingWith("\n}") shouldBeEqualTo true

@@ -65,7 +65,7 @@ class KoKotlinTypeDeclarationForKoTextProviderTest {
                 ?.asKotlinTypeDeclaration()
 
         // then
-                assertSoftly(sut) {
+        assertSoftly(sut) {
             it?.text shouldBeEqualTo "List<String>"
             it?.hasTextStartingWith("List<St") shouldBeEqualTo true
             it?.hasTextStartingWith("Other") shouldBeEqualTo false
@@ -89,7 +89,7 @@ class KoKotlinTypeDeclarationForKoTextProviderTest {
                 ?.asKotlinTypeDeclaration()
 
         // then
-                assertSoftly(sut) {
+        assertSoftly(sut) {
             it?.text shouldBeEqualTo "List<String>"
             it?.hasTextStartingWith("List<St") shouldBeEqualTo true
             it?.hasTextStartingWith("Other") shouldBeEqualTo false

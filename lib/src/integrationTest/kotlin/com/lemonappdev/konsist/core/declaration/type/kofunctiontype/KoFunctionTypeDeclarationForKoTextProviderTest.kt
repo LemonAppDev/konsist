@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource
 class KoFunctionTypeDeclarationForKoTextProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `type-text`(fileName: String, ) {
+    fun `type-text`(fileName: String) {
         // given
         val sut =
             getSnippetFile(fileName)

@@ -23,7 +23,8 @@ class KoInitBlockDeclarationForKoTextProviderTest {
                 init {
                         val sampleInitProperty = 6
                     }
-                """.trimIndent())
+                """.trimIndent(),
+            )
             hasTextStartingWith("init {") shouldBeEqualTo true
             hasTextStartingWith("Other") shouldBeEqualTo false
             hasTextEndingWith("}") shouldBeEqualTo true
