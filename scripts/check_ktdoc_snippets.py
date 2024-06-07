@@ -198,7 +198,7 @@ def get_all_file_paths(directory):
 # Script ===============================================================================================================
 
 if __name__ == '__main__':
-    kotlin_ktdoc_temp_files = []
+    # kotlin_ktdoc_temp_files = []
 
     # if len(sys.argv) > 1:
     #     if '-all' in sys.argv[1:]:
