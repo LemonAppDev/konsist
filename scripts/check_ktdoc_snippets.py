@@ -198,15 +198,15 @@ def get_all_file_paths(directory):
 # Script ===============================================================================================================
 
 if __name__ == '__main__':
-    # kotlin_ktdoc_temp_files = []
+    kotlin_ktdoc_temp_files = []
 
-    # if len(sys.argv) > 1:
-    #     if '-all' in sys.argv[1:]:
-    #         print_and_flush("ktdoc_snippet_file_paths not provided - checking all ktdoc files")
-    kotlin_ktdoc_temp_files = get_all_ktdoc_files()
-        # else:
-        #     print_and_flush("ktdoc_snippet_file_paths are provided - checking provided ktdoc files")
-        #     kotlin_ktdoc_temp_files = sys.argv[1:]
+    if len(sys.argv) > 1:
+        if '-all' in sys.argv[1:]:
+            print_and_flush("ktdoc_snippet_file_paths not provided - checking all ktdoc files")
+            kotlin_ktdoc_temp_files = get_all_ktdoc_files()
+        else:
+            print_and_flush("ktdoc_snippet_file_paths are provided - checking provided ktdoc files")
+            kotlin_ktdoc_temp_files = sys.argv[1:]
 
     else:
         print("No files provided")
