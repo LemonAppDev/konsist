@@ -13,39 +13,16 @@ multiprocessing.set_start_method('fork')
 error_occurred = False
 script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(script_dir)
+user_root = os.path.abspath(os.sep)
 kt_temp_files_dir = tempfile.mkdtemp()
-test_data_jar_file_path = kt_temp_files_dir + "/test-data.jar"
-sample_external_library_path = project_root + "/lib/libs/sample-external-library-1.2.jar"
 success = "SUCCESS"
 failed = "FAILED"
-
 
 # Methods =============================================================================================================
 
 def print_and_flush(message):
     print(message)
     sys.stdout.flush()
-
-
-def compile_test_data_jar():
-    global error_occurred
-    command_converting_testdata_to_jar = [
-        "kotlinc",
-        project_root + "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/testdata/TestData.kt",
-        "-include-runtime",
-        "-d",
-        test_data_jar_file_path
-    ]
-
-    try:
-        subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
-    except subprocess.CalledProcessError as e:
-        print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-        print_and_flush("Compile " + test_data_jar_file_path + " " + failed)
-        error_occurred = True
-    else:
-        print_and_flush("Compile test-data.jar " + success)
-
 
 def create_snippet_test_dir():
     if os.path.exists(kt_temp_files_dir):
@@ -80,20 +57,34 @@ def copy_ktdoc_files_and_change_extension_to_kt(source_files, target_dir):
             shutil.copy2(source_file_path, target_file_path)
 
 
+def run_gradle_publish():
+    try:
+        result = subprocess.run(
+            ['./gradlew', 'publishToMavenLocal', '-Pkonsist.releaseTarget=local'],
+            check=True,
+            text=True,
+            capture_output=True
+        )
+        print("Gradle command executed successfully.")
+        print("Output:")
+        print(result.stdout)
+    except subprocess.CalledProcessError as e:
+        print("An error occurred while running the Gradle command.")
+        print("Error output:")
+        print(e.stderr)
+
+
 def compile_kotlin_file(file_path):
     error_occurred_local = False
-    with open(file_path, 'r') as file:
-        file_content = file.read()
-
-    if "actual" in file_content or "expect" in file_content:
-        return os.path.basename(file_path), "SKIPPED"
 
     temp_dir = tempfile.mkdtemp()
+
+    sample_konsist_library_path = user_root + "/.m2/repository/com/lemonappdev/konsist/0.16.0-SNAPSHOT/konsist-0.16.0-SNAPSHOT.jar"
 
     snippet_command = [
         "kotlinc",
         "-cp",
-        test_data_jar_file_path + ":" + sample_external_library_path,
+        sample_konsist_library_path,
         "-nowarn",
         "-d", temp_dir,
         file_path
@@ -119,10 +110,6 @@ def compile_kotlin_files(kotlin_files):
     global error_occurred
     total_files = len(kotlin_files)
     processed_files = 0
-
-    if not os.path.exists(test_data_jar_file_path):
-        print_and_flush(f"Error: The file {test_data_jar_file_path} does not exist.")
-        sys.exit(1)  # Exit the script with an error code
 
     if not os.path.exists(sample_external_library_path):
         print_and_flush(f"Error: The file {sample_external_library_path} does not exist.")
@@ -159,12 +146,9 @@ def get_kt_temp_file_from_ktdoc_file(ktdoc_snippet_file_path):
 def get_all_ktdoc_files():
     ktdoc_temp_file_paths = []
 
-    documentation_snippets_path = "lib/src/snippet/kotlin/com/lemonappdev/konsist"
-
     for root, dirs, files in os.walk(project_root):
         for file in files:
-            file_abs_path = os.path.abspath(os.path.join(root, file))
-            if file.endswith('.ktdoc') and documentation_snippets_path not in file_abs_path:
+            if file.endswith('.ktdoc'):
                 ktdoc_temp_file_paths.append(os.path.join(root, file))
 
     kt_temp_file_paths = [get_kt_temp_file_from_ktdoc_file(path) for path in ktdoc_temp_file_paths]
@@ -244,8 +228,9 @@ if __name__ == '__main__':
     print("Total: " + str(count_files_in_directory(kt_temp_files_dir)))
     print()
 
+    run_gradle_publish()
+
     start_time = time.time()
-    compile_test_data_jar()
     compile_kotlin_files(kotlin_kt_temp_files)
     clean()
     end_time = time.time()  # Capture the end time to calculate the duration
