@@ -15,14 +15,17 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(script_dir)
 user_home = os.path.expanduser("~")
 kt_temp_files_dir = tempfile.mkdtemp()
+dummy_classes_jar_file_path = os.path.join(kt_temp_files_dir, "dummy-classes.jar")
 success = "SUCCESS"
 failed = "FAILED"
+
 
 # Methods =============================================================================================================
 
 def print_and_flush(message):
     print(message)
     sys.stdout.flush()
+
 
 def create_snippet_test_dir():
     if os.path.exists(kt_temp_files_dir):
@@ -72,6 +75,36 @@ def run_gradle_publish():
         print("An error occurred while running the Gradle command.")
         print("Error output:")
         print(e.stderr)
+
+
+def compile_dummy_classes_jar():
+    global error_occurred
+
+    # Root directory of the package
+    package_root = os.path.join(project_root, "lib/src/snippet/kotlin/dummyclasses")
+
+    # Gather all .kt files in the package and its subpackages
+    kotlin_files = []
+    for root, dirs, files in os.walk(package_root):
+        for file in files:
+            if file.endswith(".kt"):
+                kotlin_files.append(os.path.join(root, file))
+
+    # Command to compile test data to JAR
+    command_converting_dummy_classes_to_jar = ["kotlinc"] + kotlin_files + ["-include-runtime", "-d",
+                                                                            dummy_classes_jar_file_path]
+
+    try:
+        # Execute the compilation command
+        result = subprocess.run(command_converting_dummy_classes_to_jar, check=True, text=True, capture_output=True)
+        print_and_flush(result.stdout)
+    except subprocess.CalledProcessError as e:
+        # Handle errors during compilation
+        print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
+        print_and_flush("Compile " + dummy_classes_jar_file_path + " failed")
+        error_occurred = True
+    else:
+        print_and_flush("Compile dummy-classes.jar success")
 
 
 def compile_kotlin_file(file_path):
@@ -233,6 +266,8 @@ if __name__ == '__main__':
     run_gradle_publish()
 
     start_time = time.time()
+    compile_dummy_classes_jar()
+
     compile_kotlin_files(kotlin_kt_temp_files)
     clean()
     end_time = time.time()  # Capture the end time to calculate the duration
