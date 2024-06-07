@@ -48,10 +48,10 @@ jobs:
     name: Check ktdoc Snippets
     needs: get-github-context
     runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      contains(needs.get-github-context.outputs.all_changed_files, '.ktdoc')
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, '.ktdoc')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
