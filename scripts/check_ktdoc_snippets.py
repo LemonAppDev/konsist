@@ -79,7 +79,7 @@ def compile_kotlin_file(file_path):
 
     temp_dir = tempfile.mkdtemp()
 
-    sample_konsist_library_path = user_root + "/.m2/repository/com/lemonappdev/konsist/0.16.0-SNAPSHOT/konsist-0.16.0-SNAPSHOT.jar"
+    sample_konsist_library_path = user_root + "/.m2/repository/com/lemonappdev/konsist/0.16.0-SNAPSHOT/"
 
     snippet_command = [
         "kotlinc",
