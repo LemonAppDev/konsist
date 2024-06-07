@@ -73,10 +73,10 @@ jobs:
 
       - name: Run Python Script With Changed .ktdoc Files
         run: |
-          if [ -n "$TEMP_FILE" ]; then
-            python3 scripts/check_ktdoc_snippets.py -all
-          else
-            echo "No changed .ktdoc files to process."
-          fi
+#          if [ -n "$TEMP_FILE" ]; then
+          python3 scripts/check_ktdoc_snippets.py -all
+#          else
+#            echo "No changed .ktdoc files to process."
+#          fi
         env:
           TEMP_FILE: ${{ env.TEMP_FILE }}
