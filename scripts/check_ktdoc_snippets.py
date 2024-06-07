@@ -13,7 +13,7 @@ multiprocessing.set_start_method('fork')
 error_occurred = False
 script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(script_dir)
-user_root = os.path.abspath(os.sep)
+user_home = os.path.expanduser("~")
 kt_temp_files_dir = tempfile.mkdtemp()
 success = "SUCCESS"
 failed = "FAILED"
@@ -79,7 +79,7 @@ def compile_kotlin_file(file_path):
 
     temp_dir = tempfile.mkdtemp()
 
-    sample_konsist_library_path = user_root + ".m2/repository/com/lemonappdev/konsist/0.16.0-SNAPSHOT/"
+    sample_konsist_library_path = user_home + ".m2/repository/com/lemonappdev/konsist/0.16.0-SNAPSHOT/"
 
     snippet_command = [
         "kotlinc",
@@ -111,7 +111,7 @@ def compile_kotlin_files(kotlin_files):
     total_files = len(kotlin_files)
     processed_files = 0
 
-    sample_konsist_library_path = user_root + ".m2/repository/com/lemonappdev/konsist/0.16.0-SNAPSHOT/"
+    sample_konsist_library_path = user_home + ".m2/repository/com/lemonappdev/konsist/0.16.0-SNAPSHOT/"
 
     if not os.path.exists(sample_konsist_library_path):
         print_and_flush(f"Error: The file {sample_konsist_library_path} does not exist.")
