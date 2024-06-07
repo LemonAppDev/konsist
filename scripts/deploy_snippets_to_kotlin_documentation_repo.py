@@ -286,7 +286,6 @@ def complete_summary_file(root, file_text, summary_dir):
 
     content, snippet_name = snippet_name_to_summary(root, file_text)
 
-
     name_without_tab = snippet_name.strip()
 
     if not name_without_tab in file_content:
@@ -334,14 +333,14 @@ def complete_summary_file(root, file_text, summary_dir):
 
 
 def copy_content(expanded_source_directory, expanded_destination_directory, summary_dir):
-    # Iterate through all .md and .kt files in the source folder and copy them content
+    # Iterate through all .md and .ktdoc files in the source folder and copy them content
     for root, dirs, files in os.walk(expanded_source_directory):
         for filename_md in files:
-            if filename_md.endswith("snippets.md"):
-                prefix = filename_md.split("-")[0]
-                for filename_kt in files:
-                    if filename_kt.lower().startswith(prefix) and filename_kt.lower().endswith("kt"):
-                        kt_path = os.path.join(root, filename_kt)
+            if filename_md.endswith(".md"):
+                prefix = filename_md.split(".")[0]
+                for filename_ktdoc in files:
+                    if filename_ktdoc.startswith(prefix) and filename_ktdoc.endswith("ktdoc"):
+                        kt_path = os.path.join(root, filename_ktdoc)
                         md_path = os.path.join(root, filename_md)
 
                         try:
@@ -352,7 +351,10 @@ def copy_content(expanded_source_directory, expanded_destination_directory, summ
                             else:
                                 path = expanded_destination_directory + directory + "/"
 
-                            destination_path = os.path.join(path, filename_md)
+                            list = [w.lower() for w in re.findall('[A-Z/][^A-Z/]*', filename_md)]
+                            suffix = "-".join(list[0:])
+
+                            destination_path = os.path.join(path, suffix)
 
                             md_content = read_file(md_path)
 
