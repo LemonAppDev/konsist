@@ -111,8 +111,10 @@ def compile_kotlin_files(kotlin_files):
     total_files = len(kotlin_files)
     processed_files = 0
 
-    if not os.path.exists(sample_external_library_path):
-        print_and_flush(f"Error: The file {sample_external_library_path} does not exist.")
+    sample_konsist_library_path = user_root + "/.m2/repository/com/lemonappdev/konsist/0.16.0-SNAPSHOT/"
+
+    if not os.path.exists(sample_konsist_library_path):
+        print_and_flush(f"Error: The file {sample_konsist_library_path} does not exist.")
         sys.exit(1)  # Exit the script with an error code
 
     with ProcessPoolExecutor() as executor:
