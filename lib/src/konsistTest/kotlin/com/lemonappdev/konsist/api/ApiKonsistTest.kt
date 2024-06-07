@@ -11,6 +11,7 @@ import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
+import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
 import java.util.Locale
@@ -62,6 +63,13 @@ class ApiKonsistTest {
             .withNameEndingWith("Provider")
             .withoutName("KoBaseProvider")
             .assertTrue { it.hasParentWithName("KoBaseProvider", indirectParents = true) }
+    }
+
+    @Test
+    fun `none method has name containing 'Some'`() {
+        apiPackageScope
+            .functions()
+            .assertFalse { it.hasNameContaining("Some") }
     }
 
     @Test
@@ -123,8 +131,8 @@ class ApiKonsistTest {
     private fun <T> T.hasCorrectMethods(
         isExtension: Boolean,
     ): Boolean
-        where T : KoPropertyProvider,
-              T : KoFunctionProvider {
+            where T : KoPropertyProvider,
+                  T : KoFunctionProvider {
         val property =
             properties()
                 .firstOrNull { property ->
@@ -262,7 +270,11 @@ class ApiKonsistTest {
             function.name == "has${singularName}WithName" && function.hasParametersWithAllNames("name", "names")
         } &&
             hasFunction { function ->
-                function.name == "has${pluralName}WithAllNames" && function.hasParametersWithAllNames("name", "names")
+                function.name == "has${pluralName}WithAllNames" &&
+                    function.hasParametersWithAllNames(
+                        "name",
+                        "names",
+                    )
             }
 
     private fun KoFunctionProvider.hasNamedFunctionsForExt(
@@ -274,7 +286,11 @@ class ApiKonsistTest {
             function.name == "$prefix${singularName}Named" && function.hasParametersWithAllNames("name", "names")
         } &&
             hasFunction { function ->
-                function.name == "${prefix}All${pluralName}Named" && function.hasParametersWithAllNames("name", "names")
+                function.name == "${prefix}All${pluralName}Named" &&
+                    function.hasParametersWithAllNames(
+                        "name",
+                        "names",
+                    )
             }
 
     private fun KoFunctionProvider.checkForExceptions(
