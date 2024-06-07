@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test
 
 class KoParameterDeclarationForKoTextProviderTest {
     @Test
-    fun `parameter-text`() {
+    fun `parameter-in-constructor-text`() {
         // given
         val sut =
-            getSnippetFile("parameter-text")
+            getSnippetFile("parameter-in-constructor-text")
                 .classes()
                 .first()
                 .primaryConstructor
@@ -28,6 +28,30 @@ class KoParameterDeclarationForKoTextProviderTest {
             it?.hasTextContaining("anno") shouldBeEqualTo false
             it?.hasTextMatching(Regex("^[^@]*\$")) shouldBeEqualTo true
             it?.hasTextMatching(Regex("[0-9]+")) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `parameter-in-function-invocation-text`() {
+        // given
+        val sut =
+            getSnippetFile("parameter-in-function-invocation-text")
+                .functions()
+                .first()
+                .parameters
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            text shouldBeEqualTo "sampleParameter: Int"
+            hasTextStartingWith("sampl") shouldBeEqualTo true
+            hasTextStartingWith("Other") shouldBeEqualTo false
+            hasTextEndingWith(": Int") shouldBeEqualTo true
+            hasTextEndingWith("other") shouldBeEqualTo false
+            hasTextContaining("sampleParameter: ") shouldBeEqualTo true
+            hasTextContaining("anno") shouldBeEqualTo false
+            hasTextMatching(Regex("^[^@]*\$")) shouldBeEqualTo true
+            hasTextMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
     }
 
