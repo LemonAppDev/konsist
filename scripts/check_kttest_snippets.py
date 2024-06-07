@@ -15,6 +15,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(script_dir)
 kt_temp_files_dir = tempfile.mkdtemp()
 test_data_jar_file_path = os.path.join(kt_temp_files_dir, "test-data.jar")
+nested_test_data_jar_file_path = os.path.join(kt_temp_files_dir, "nested_test-data.jar")
 sample_external_library_path = os.path.join(project_root, "lib/libs/sample-external-library-1.2.jar")
 success = "SUCCESS"
 failed = "FAILED"
@@ -47,6 +48,28 @@ def compile_test_data_jar():
         error_occurred = True
     else:
         print_and_flush("Compile test-data.jar " + success)
+
+def compile_nested_test_data_jar():
+    global error_occurred
+    # Command to compile test data to JAR
+    command_converting_testdata_to_jar = [
+        "kotlinc",
+        os.path.join(project_root, "lib/src/integrationTest/kotlin/com/lemonappdev/konsist/testdata/testpackage/TestNestedData.kt"),
+        "-include-runtime",
+        "-d",
+        nested_test_data_jar_file_path
+    ]
+
+    try:
+        # Execute the compilation command
+        subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
+    except subprocess.CalledProcessError as e:
+        # Handle errors during compilation
+        print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
+        print_and_flush("Compile " + nested_test_data_jar_file_path + " " + failed)
+        error_occurred = True
+    else:
+        print_and_flush("Compile nested-test-data.jar " + success)
 
 # Function to create a temporary directory for snippet files
 def create_snippet_test_dir():
@@ -91,7 +114,7 @@ def compile_kotlin_file(file_path):
     snippet_command = [
         "kotlinc",
         "-cp",
-        f"{test_data_jar_file_path}:{sample_external_library_path}",
+        f"{test_data_jar_file_path}:{nested_test_data_jar_file_path}:{sample_external_library_path}",
         "-nowarn",
         "-d", temp_dir,
         file_path
@@ -124,6 +147,10 @@ def compile_kotlin_files(kotlin_files):
     # Check if necessary files exist
     if not os.path.exists(test_data_jar_file_path):
         print_and_flush(f"Error: The file {test_data_jar_file_path} does not exist.")
+        sys.exit(1)
+
+    if not os.path.exists(nested_test_data_jar_file_path):
+        print_and_flush(f"Error: The file {nested_test_data_jar_file_path} does not exist.")
         sys.exit(1)
 
     if not os.path.exists(sample_external_library_path):
@@ -262,6 +289,7 @@ if __name__ == '__main__':
 
     # Compile the test data JAR file
     compile_test_data_jar()
+    compile_nested_test_data_jar()
 
     # Compile the Kotlin files in parallel
     compile_kotlin_files(kotlin_kt_temp_files)
