@@ -79,7 +79,7 @@ def compile_kotlin_file(file_path):
 
     temp_dir = tempfile.mkdtemp()
 
-    sample_konsist_library_path = user_root + "/.m2/repository/com/lemonappdev/konsist/0.16.0-SNAPSHOT/"
+    sample_konsist_library_path = user_root + ".m2/repository/com/lemonappdev/konsist/0.16.0-SNAPSHOT/"
 
     snippet_command = [
         "kotlinc",
@@ -111,7 +111,7 @@ def compile_kotlin_files(kotlin_files):
     total_files = len(kotlin_files)
     processed_files = 0
 
-    sample_konsist_library_path = user_root + "/.m2/repository/com/lemonappdev/konsist/0.16.0-SNAPSHOT/"
+    sample_konsist_library_path = user_root + ".m2/repository/com/lemonappdev/konsist/0.16.0-SNAPSHOT/"
 
     if not os.path.exists(sample_konsist_library_path):
         print_and_flush(f"Error: The file {sample_konsist_library_path} does not exist.")
