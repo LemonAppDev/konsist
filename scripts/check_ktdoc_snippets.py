@@ -17,19 +17,8 @@ project_root = os.path.dirname(script_dir)
 user_home = os.path.expanduser("~")
 gradlew_path = os.path.join(project_root, 'gradlew')
 kt_temp_files_dir = tempfile.mkdtemp()
-dummy_classes_jar_file_path = os.path.join(kt_temp_files_dir, "dummy-classes.jar")
-test_data_jar_1_file_path = os.path.join(kt_temp_files_dir, "test_data_1.jar")
-test_data_jar_2_file_path = os.path.join(kt_temp_files_dir, "test_data_2.jar")
-test_data_jar_3_file_path = os.path.join(kt_temp_files_dir, "test_data_3.jar")
-test_data_jar_4_file_path = os.path.join(kt_temp_files_dir, "test_data_4.jar")
-test_data_jar_5_file_path = os.path.join(kt_temp_files_dir, "test_data_5.jar")
-test_data_jar_6_file_path = os.path.join(kt_temp_files_dir, "test_data_6.jar")
-test_data_jar_7_file_path = os.path.join(kt_temp_files_dir, "test_data_7.jar")
-test_data_jar_8_file_path = os.path.join(kt_temp_files_dir, "test_data_8.jar")
-test_data_jar_9_file_path = os.path.join(kt_temp_files_dir, "test_data_9.jar")
-test_data_jar_10_file_path = os.path.join(kt_temp_files_dir, "test_data_10.jar")
-test_data_jar_11_file_path = os.path.join(kt_temp_files_dir, "test_data_11.jar")
-test_data_jar_12_file_path = os.path.join(kt_temp_files_dir, "test_data_12.jar")
+dummy_classes_path = os.path.join(project_root, "lib/src/snippet/kotlin/dummyclasses")
+output_jar_path = os.path.join(kt_temp_files_dir, "all_test_data.jar")
 success = "SUCCESS"
 failed = "FAILED"
 konsist_version = get_konsist_snapshot_version()
@@ -91,313 +80,29 @@ def run_gradle_publish():
         print("Error output:")
         print(e.stderr)
 
-
-# def compile_dummy_classes_jar():
-#     global error_occurred
-#
-#     # Root directory of the package
-#     package_root = os.path.join(project_root, "lib/src/snippet/kotlin/dummyclasses")
-#
-#     # Gather all .kt files in the package and its subpackages
-#     kotlin_files = []
-#     for root, dirs, files in os.walk(package_root):
-#         for file in files:
-#             if file.endswith(".kt"):
-#                 kotlin_files.append(os.path.join(root, file))
-#
-#     # Command to compile test data to JAR
-#     command_converting_dummy_classes_to_jar = ["kotlinc"] + kotlin_files + ["-include-runtime", "-d",
-#                                                                             dummy_classes_jar_file_path]
-#
-#     try:
-#         # Execute the compilation command
-#         result = subprocess.run(command_converting_dummy_classes_to_jar, check=True, text=True, capture_output=True)
-#         print_and_flush(result.stdout)
-#     except subprocess.CalledProcessError as e:
-#         # Handle errors during compilation
-#         print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-#         print_and_flush("Compile " + dummy_classes_jar_file_path + " failed")
-#         error_occurred = True
-#     else:
-#         print_and_flush("Compile dummy-classes.jar success")
-
-# Function to compile the test data JAR file
-def compile_test_data_jar_1():
+def compile_test_data_jar(package_path, output_jar_path):
     global error_occurred
-    # Command to compile test data to JAR
-    command_converting_testdata_to_jar_1 = [
-        "kotlinc",
-        os.path.join(project_root,
-                     "lib/src/snippet/kotlin/dummyclasses/androidx/compose/ui/tooling/preview/Preview.kt"),
-        "-include-runtime",
-        "-d",
-        test_data_jar_1_file_path
-    ]
+    error_occurred = False
+
+    # Include Kotlin standard library
+    command = ["kotlinc", "-include-runtime", "-d", output_jar_path]
+
+    # Get all Kotlin source files recursively
+    kotlin_files = glob.glob(os.path.join(package_path, "**/*.kt"), recursive=True)
+
+    # Add each Kotlin file as source to the command
+    for file in kotlin_files:
+        command.append(file)
 
     try:
-        # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar_1, check=True, text=True, capture_output=True)
-    except subprocess.CalledProcessError as e:
-        # Handle errors during compilation
-        print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-        print_and_flush("Compile " + test_data_jar_1_file_path + " " + failed)
+        check_output(command, stderr=subprocess.STDOUT, encoding="utf-8")
+        print(f"Compile {output_jar_path} successful")
+    except CalledProcessError as e:
         error_occurred = True
-    else:
-        print_and_flush("Compile test-data_1.jar " + success)
+        print(f"An error occurred while compiling:\n{e.output}")
 
-
-def compile_test_data_jar_2():
-    global error_occurred
-    # Command to compile test data to JAR
-    command_converting_testdata_to_jar_2 = [
-        "kotlinc",
-        os.path.join(project_root, "lib/src/snippet/kotlin/dummyclasses/androidx/lifecycle/ViewModel.kt"),
-        "-include-runtime",
-        "-d",
-        test_data_jar_2_file_path
-    ]
-
-    try:
-        # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar_2, check=True, text=True, capture_output=True)
-    except subprocess.CalledProcessError as e:
-        # Handle errors during compilation
-        print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-        print_and_flush("Compile " + test_data_jar_2_file_path + " " + failed)
-        error_occurred = True
-    else:
-        print_and_flush("Compile test-data_2.jar " + success)
-
-
-def compile_test_data_jar_3():
-    global error_occurred
-    # Command to compile test data to JAR
-    command_converting_testdata_to_jar_3 = [
-        "kotlinc",
-        os.path.join(project_root, "lib/src/snippet/kotlin/dummyclasses/javax/inject/Inject.kt"),
-        "-include-runtime",
-        "-d",
-        test_data_jar_3_file_path
-    ]
-
-    try:
-        # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar_3, check=True, text=True, capture_output=True)
-    except subprocess.CalledProcessError as e:
-        # Handle errors during compilation
-        print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-        print_and_flush("Compile " + test_data_jar_3_file_path + " " + failed)
-        error_occurred = True
-    else:
-        print_and_flush("Compile test-data_3.jar " + success)
-
-
-def compile_test_data_jar_4():
-    global error_occurred
-    # Command to compile test data to JAR
-    command_converting_testdata_to_jar_4 = [
-        "kotlinc",
-        os.path.join(project_root, "lib/src/snippet/kotlin/dummyclasses/kotlinx/coroutines/flow/Flow.kt"),
-        "-include-runtime",
-        "-d",
-        test_data_jar_4_file_path
-    ]
-
-    try:
-        # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar_4, check=True, text=True, capture_output=True)
-    except subprocess.CalledProcessError as e:
-        # Handle errors during compilation
-        print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-        print_and_flush("Compile " + test_data_jar_4_file_path + " " + failed)
-        error_occurred = True
-    else:
-        print_and_flush("Compile test-data_4.jar " + success)
-
-
-def compile_test_data_jar_5():
-    global error_occurred
-    # Command to compile test data to JAR
-    command_converting_testdata_to_jar_5 = [
-        "kotlinc",
-        os.path.join(project_root, "lib/src/snippet/kotlin/dummyclasses/kotlinx/serialization/Serializable.kt"),
-        "-include-runtime",
-        "-d",
-        test_data_jar_5_file_path
-    ]
-
-    try:
-        # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar_5, check=True, text=True, capture_output=True)
-    except subprocess.CalledProcessError as e:
-        # Handle errors during compilation
-        print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-        print_and_flush("Compile " + test_data_jar_5_file_path + " " + failed)
-        error_occurred = True
-    else:
-        print_and_flush("Compile test-data_5.jar " + success)
-
-
-def compile_test_data_jar_6():
-    global error_occurred
-    # Command to compile test data to JAR
-    command_converting_testdata_to_jar_6 = [
-        "kotlinc",
-        os.path.join(project_root, "lib/src/snippet/kotlin/dummyclasses/kotlinx/serialization/SerialName.kt"),
-        "-include-runtime",
-        "-d",
-        test_data_jar_6_file_path
-    ]
-
-    try:
-        # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar_6, check=True, text=True, capture_output=True)
-    except subprocess.CalledProcessError as e:
-        # Handle errors during compilation
-        print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-        print_and_flush("Compile " + test_data_jar_6_file_path + " " + failed)
-        error_occurred = True
-    else:
-        print_and_flush("Compile test-data_6.jar " + success)
-
-
-def compile_test_data_jar_7():
-    global error_occurred
-    # Command to compile test data to JAR
-    command_converting_testdata_to_jar_7 = [
-        "kotlinc",
-        os.path.join(project_root, "lib/src/snippet/kotlin/dummyclasses/org/junit/jupiter/api/RepeatedTest.kt"),
-        "-include-runtime",
-        "-d",
-        test_data_jar_7_file_path
-    ]
-
-    try:
-        # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar_7, check=True, text=True, capture_output=True)
-    except subprocess.CalledProcessError as e:
-        # Handle errors during compilation
-        print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-        print_and_flush("Compile " + test_data_jar_7_file_path + " " + failed)
-        error_occurred = True
-    else:
-        print_and_flush("Compile test-data_7.jar " + success)
-
-
-def compile_test_data_jar_8():
-    global error_occurred
-    # Command to compile test data to JAR
-    command_converting_testdata_to_jar_8 = [
-        "kotlinc",
-        os.path.join(project_root, "lib/src/snippet/kotlin/dummyclasses/org/junit/jupiter/api/TestFactory.kt"),
-        "-include-runtime",
-        "-d",
-        test_data_jar_8_file_path
-    ]
-
-    try:
-        # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar_8, check=True, text=True, capture_output=True)
-    except subprocess.CalledProcessError as e:
-        # Handle errors during compilation
-        print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-        print_and_flush("Compile " + test_data_jar_8_file_path + " " + failed)
-        error_occurred = True
-    else:
-        print_and_flush("Compile test-data_8.jar " + success)
-
-
-def compile_test_data_jar_9():
-    global error_occurred
-    # Command to compile test data to JAR
-    command_converting_testdata_to_jar_9 = [
-        "kotlinc",
-        os.path.join(project_root, "lib/src/snippet/kotlin/dummyclasses/org/junit/jupiter/api/TestTemplate.kt"),
-        "-include-runtime",
-        "-d",
-        test_data_jar_9_file_path
-    ]
-
-    try:
-        # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar_9, check=True, text=True, capture_output=True)
-    except subprocess.CalledProcessError as e:
-        # Handle errors during compilation
-        print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-        print_and_flush("Compile " + test_data_jar_9_file_path + " " + failed)
-        error_occurred = True
-    else:
-        print_and_flush("Compile test-data_9.jar " + success)
-
-
-def compile_test_data_jar_10():
-    global error_occurred
-    # Command to compile test data to JAR
-    command_converting_testdata_to_jar_10 = [
-        "kotlinc",
-        os.path.join(project_root, "lib/src/snippet/kotlin/dummyclasses/org/junit/jupiter/params/ParameterizedTest.kt"),
-        "-include-runtime",
-        "-d",
-        test_data_jar_10_file_path
-    ]
-
-    try:
-        # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar_10, check=True, text=True, capture_output=True)
-    except subprocess.CalledProcessError as e:
-        # Handle errors during compilation
-        print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-        print_and_flush("Compile " + test_data_jar_10_file_path + " " + failed)
-        error_occurred = True
-    else:
-        print_and_flush("Compile test-data_10.jar " + success)
-
-
-def compile_test_data_jar_11():
-    global error_occurred
-    # Command to compile test data to JAR
-    command_converting_testdata_to_jar_11 = [
-        "kotlinc",
-        os.path.join(project_root, "lib/src/snippet/kotlin/dummyclasses/org/springframework/stereotype/Repository.kt"),
-        "-include-runtime",
-        "-d",
-        test_data_jar_11_file_path
-    ]
-
-    try:
-        # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar_11, check=True, text=True, capture_output=True)
-    except subprocess.CalledProcessError as e:
-        # Handle errors during compilation
-        print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-        print_and_flush("Compile " + test_data_jar_11_file_path + " " + failed)
-        error_occurred = True
-    else:
-        print_and_flush("Compile test-data_11.jar " + success)
-
-
-def compile_test_data_jar_12():
-    global error_occurred
-    # Command to compile test data to JAR
-    command_converting_testdata_to_jar_12 = [
-        "kotlinc",
-        os.path.join(project_root,
-                     "lib/src/snippet/kotlin/dummyclasses/org/springframework/web/bind/annotation/RestController.kt"),
-        "-include-runtime",
-        "-d",
-        test_data_jar_12_file_path
-    ]
-
-    try:
-        # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar_12, check=True, text=True, capture_output=True)
-    except subprocess.CalledProcessError as e:
-        # Handle errors during compilation
-        print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-        print_and_flush("Compile " + test_data_jar_12_file_path + " " + failed)
-        error_occurred = True
-    else:
-        print_and_flush("Compile test-data_12.jar " + success)
+    if error_occurred:
+        print("Errors encountered during compilation.")
 
 
 def compile_kotlin_file(file_path):
@@ -559,20 +264,7 @@ if __name__ == '__main__':
     run_gradle_publish()
 
     start_time = time.time()
-    # compile_dummy_classes_jar()
-
-    compile_test_data_jar_1()
-    compile_test_data_jar_2()
-    compile_test_data_jar_3()
-    compile_test_data_jar_4()
-    compile_test_data_jar_5()
-    compile_test_data_jar_6()
-    compile_test_data_jar_7()
-    compile_test_data_jar_8()
-    compile_test_data_jar_9()
-    compile_test_data_jar_10()
-    compile_test_data_jar_11()
-    compile_test_data_jar_12()
+    compile_test_data_jar(dummy_classes_path, output_jar_path)
 
     compile_kotlin_files(kotlin_kt_temp_files)
     clean()
