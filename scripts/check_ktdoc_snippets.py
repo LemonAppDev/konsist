@@ -133,7 +133,7 @@ def compile_test_data_jar_1():
 
     try:
         # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
+        subprocess.run(command_converting_testdata_to_jar_1, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         # Handle errors during compilation
         print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
@@ -156,7 +156,7 @@ def compile_test_data_jar_2():
 
     try:
         # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
+        subprocess.run(command_converting_testdata_to_jar_2, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         # Handle errors during compilation
         print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
@@ -179,7 +179,7 @@ def compile_test_data_jar_3():
 
     try:
         # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
+        subprocess.run(command_converting_testdata_to_jar_3, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         # Handle errors during compilation
         print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
@@ -202,7 +202,7 @@ def compile_test_data_jar_4():
 
     try:
         # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
+        subprocess.run(command_converting_testdata_to_jar_4, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         # Handle errors during compilation
         print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
@@ -225,7 +225,7 @@ def compile_test_data_jar_5():
 
     try:
         # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
+        subprocess.run(command_converting_testdata_to_jar_5, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         # Handle errors during compilation
         print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
@@ -248,7 +248,7 @@ def compile_test_data_jar_6():
 
     try:
         # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
+        subprocess.run(command_converting_testdata_to_jar_6, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         # Handle errors during compilation
         print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
@@ -271,7 +271,7 @@ def compile_test_data_jar_7():
 
     try:
         # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
+        subprocess.run(command_converting_testdata_to_jar_7, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         # Handle errors during compilation
         print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
@@ -294,7 +294,7 @@ def compile_test_data_jar_8():
 
     try:
         # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
+        subprocess.run(command_converting_testdata_to_jar_8, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         # Handle errors during compilation
         print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
@@ -317,7 +317,7 @@ def compile_test_data_jar_9():
 
     try:
         # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
+        subprocess.run(command_converting_testdata_to_jar_9, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         # Handle errors during compilation
         print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
@@ -340,7 +340,7 @@ def compile_test_data_jar_10():
 
     try:
         # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
+        subprocess.run(command_converting_testdata_to_jar_10, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         # Handle errors during compilation
         print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
@@ -363,7 +363,7 @@ def compile_test_data_jar_11():
 
     try:
         # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
+        subprocess.run(command_converting_testdata_to_jar_11, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         # Handle errors during compilation
         print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
@@ -387,7 +387,7 @@ def compile_test_data_jar_12():
 
     try:
         # Execute the compilation command
-        subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
+        subprocess.run(command_converting_testdata_to_jar_12, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         # Handle errors during compilation
         print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
