@@ -62,17 +62,17 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
-      - name: Filter Changed .kttest Files
-        run: |
-          kttest_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttest$')
-          if [ -n "$kttest_files" ]; then
-            temp_file=$(mktemp)
-            echo "$kttest_files" > "$temp_file"
-            echo "TEMP_FILE=$temp_file" >> $GITHUB_ENV
-          fi
+#      - name: Filter Changed .kttest Files
+#        run: |
+#          kttest_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttest$')
+#          if [ -n "$kttest_files" ]; then
+#            temp_file=$(mktemp)
+#            echo "$kttest_files" > "$temp_file"
+#            echo "TEMP_FILE=$temp_file" >> $GITHUB_ENV
+#          fi
 
       - name: Run Python Script With Changed .kttest Files
         run: |
           python3 scripts/check_kttest_snippets.py -all
-        env:
-          TEMP_FILE: ${{ env.TEMP_FILE }}
+#        env:
+#          TEMP_FILE: ${{ env.TEMP_FILE }}
