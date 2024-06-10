@@ -1,5 +1,8 @@
+import subprocess
+import shutil
 import sys
 import os
+import tempfile
 
 # Variables ============================================================================================================
 script_dir = os.path.dirname(os.path.abspath(__file__))
