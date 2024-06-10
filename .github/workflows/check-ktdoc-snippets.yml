@@ -64,4 +64,4 @@ jobs:
 
       - name: Run Python Script to Process All .ktdoc Files
         run: |
-          python3 scripts/check_ktdoc_snippets.py -all
+          python3 scripts/check_snippets/check_ktdoc_snippets.py -all
