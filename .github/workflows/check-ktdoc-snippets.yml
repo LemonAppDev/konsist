@@ -65,18 +65,15 @@ jobs:
       - name: Filter Changed .ktdoc Files
         run: |
           ktdoc_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.ktdoc$')
-          if [ -n "$ktdoc_files" ]; then
-            temp_file=$(mktemp)
-            echo "$ktdoc_files" > "$temp_file"
-            echo "TEMP_FILE=$temp_file" >> $GITHUB_ENV
-          fi
+          echo "$ktdoc_files"
+          echo "CHANGED_FILES_NAMES=$(echo "$ktdoc_files" | tr '\n' ' ')" >> $GITHUB_ENV
 
       - name: Run Python Script With Changed .ktdoc Files
         run: |
-          if [ -n "$TEMP_FILE" ]; then
-            python3 scripts/check_ktdoc_snippets.py "$TEMP_FILE"
+          if [ -n "$CHANGED_FILES_NAMES" ]; then
+          python3 scripts/check_ktdoc_snippets.py ${{ env.CHANGED_FILES_NAMES }}
           else
-            echo "No changed .ktdoc files to process."
+          echo "No changed .kttest files to process."
           fi
         env:
-          TEMP_FILE: ${{ env.TEMP_FILE }}
+          CHANGED_FILES_NAMES: ${{ env.CHANGED_FILES_NAMES }}
