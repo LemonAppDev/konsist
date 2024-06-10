@@ -48,10 +48,10 @@ jobs:
     name: Check ktdoc Snippets
     needs: get-github-context
     runs-on: ubuntu-latest
-#    if: |
-#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-#      contains(needs.get-github-context.outputs.all_changed_files, '.ktdoc')
+    if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      contains(needs.get-github-context.outputs.all_changed_files, '.ktdoc')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -62,6 +62,21 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
-      - name: Run Python Script to Process All .ktdoc Files
+      - name: Filter Changed .ktdoc Files
         run: |
-          python3 scripts/check_ktdoc_snippets.py -all
+          ktdoc_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.ktdoc$')
+          if [ -n "$ktdoc_files" ]; then
+            temp_file=$(mktemp)
+            echo "$ktdoc_files" > "$temp_file"
+            echo "TEMP_FILE=$temp_file" >> $GITHUB_ENV
+          fi
+
+      - name: Run Python Script With Changed .ktdoc Files
+        run: |
+          if [ -n "$TEMP_FILE" ]; then
+            python3 scripts/check_ktdoc_snippets.py "$TEMP_FILE"
+          else
+            echo "No changed .ktdoc files to process."
+          fi
+        env:
+          TEMP_FILE: ${{ env.TEMP_FILE }}
