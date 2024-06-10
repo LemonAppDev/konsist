@@ -1,12 +1,10 @@
 import sys
 import os
-from get_konsist_snapshot_version import get_konsist_snapshot_version
 
 # Variables ============================================================================================================
 project_root = os.path.dirname(script_dir)
 user_home = os.path.expanduser("~")
 kt_temp_files_dir = tempfile.mkdtemp()
-konsist_version = get_konsist_snapshot_version()
 
 # Methods =============================================================================================================
 
