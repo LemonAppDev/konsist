@@ -20,7 +20,7 @@ user_home = os.path.expanduser("~")
 gradlew_path = os.path.join(project_root, 'gradlew')
 kt_temp_files_dir = tempfile.mkdtemp()
 dummy_classes_path = os.path.join(project_root, "lib/src/snippet/kotlin/dummyclasses")
-output_jar_path = os.path.join(kt_temp_files_dir, "all_dummy_classes.jar")
+dummy_classes_jar_path = os.path.join(kt_temp_files_dir, "all_dummy_classes.jar")
 success = "SUCCESS"
 failed = "FAILED"
 konsist_version = get_konsist_snapshot_version()
@@ -81,12 +81,12 @@ def run_gradle_publish():
         print("Error output:")
         print(e.stderr)
 
-def compile_dummy_classes_jar(package_path, output_jar_path):
+def compile_dummy_classes_jar(package_path, dummy_classes_jar_path):
     global error_occurred
     error_occurred = False
 
     # Include Kotlin standard library
-    command = ["kotlinc", "-include-runtime", "-d", output_jar_path]
+    command = ["kotlinc", "-include-runtime", "-d", dummy_classes_jar_path]
 
     # Get all Kotlin source files recursively
     kotlin_files = glob.glob(os.path.join(package_path, "**/*.kt"), recursive=True)
@@ -97,7 +97,7 @@ def compile_dummy_classes_jar(package_path, output_jar_path):
 
     try:
         check_output(command, stderr=subprocess.STDOUT, encoding="utf-8")
-        print(f"Compile {output_jar_path} successful")
+        print(f"Compile {dummy_classes_jar_path} successful")
     except CalledProcessError as e:
         error_occurred = True
         print(f"An error occurred while compiling:\n{e.output}")
@@ -112,11 +112,13 @@ def compile_kotlin_file(file_path):
     temp_dir = tempfile.mkdtemp()
 
     sample_konsist_library_path = user_home + f"/.m2/repository/com/lemonappdev/konsist/{konsist_version}/konsist-{konsist_version}.jar"
+    junit_test_path = user_home + f"/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/5.8.2/4c21029217adf07e4c0d0c5e192b6bf610c94bdc/junit-jupiter-api-5.8.2.jar"
+    kotest_test_path = user_home + f"/.gradle/caches/modules-2/files-2.1/io.kotest/kotest-framework-api-jvm/5.9.0/bfeb77c154a6938201e6d1490586484e405b4819/kotest-framework-api-jvm-5.9.0.jar"
 
     snippet_command = [
         "kotlinc",
         "-cp",
-        f"{sample_konsist_library_path}:{output_jar_path}",
+        f"{sample_konsist_library_path}:{dummy_classes_jar_path}:{junit_test_path}:{kotest_test_path}",
         "-nowarn",
         "-d", temp_dir,
         file_path
@@ -265,7 +267,7 @@ if __name__ == '__main__':
     run_gradle_publish()
 
     start_time = time.time()
-    compile_dummy_classes_jar(dummy_classes_path, output_jar_path)
+    compile_dummy_classes_jar(dummy_classes_path, dummy_classes_jar_path)
 
     compile_kotlin_files(kotlin_kt_temp_files)
     clean()
