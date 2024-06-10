@@ -74,7 +74,7 @@
 #      - name: Run Python Script With Changed .kttest Files
 #        run: |
 #          if [ -n "$TEMP_FILE" ]; then
-#            python3 scripts/check_snippets/check_kttest_snippets.py "$TEMP_FILE"
+#            python3 scripts/check_kttest_snippets.py "$TEMP_FILE"
 #          else
 #            echo "No changed .kttest files to process."
 #          fi
