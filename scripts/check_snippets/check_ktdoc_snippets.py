@@ -2,42 +2,26 @@ import subprocess
 import shutil
 import sys
 import os
-from concurrent.futures import ProcessPoolExecutor, as_completed
 import multiprocessing
 import tempfile
 import time
-from get_konsist_snapshot_version import get_konsist_snapshot_version
 import glob
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from subprocess import CalledProcessError, check_output
+from common import (project_root, user_home, konsist_version, print_and_flush, clean, ensure_files_exist, count_files_in_directory, print_relative_file_paths, get_all_file_paths)
 
 multiprocessing.set_start_method('fork')
 
 # Variables ============================================================================================================
 error_occurred = False
 script_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.dirname(script_dir)
-user_home = os.path.expanduser("~")
-gradlew_path = os.path.join(project_root, 'gradlew')
 kt_temp_files_dir = tempfile.mkdtemp()
 dummy_classes_path = os.path.join(project_root, "lib/src/snippet/kotlin/dummyclasses")
 dummy_classes_jar_path = os.path.join(kt_temp_files_dir, "all_dummy_classes.jar")
 success = "SUCCESS"
 failed = "FAILED"
-konsist_version = get_konsist_snapshot_version()
 
 # Methods =============================================================================================================
-
-def print_and_flush(message):
-    print(message)
-    sys.stdout.flush()
-
-
-def create_snippet_test_dir():
-    if os.path.exists(kt_temp_files_dir):
-        shutil.rmtree(kt_temp_files_dir)
-
-    os.makedirs(kt_temp_files_dir)
-
 
 def copy_ktdoc_files_and_change_extension_to_kt(source_files, target_dir):
     # Iterate over the source files
@@ -112,13 +96,11 @@ def compile_kotlin_file(file_path):
     temp_dir = tempfile.mkdtemp()
 
     sample_konsist_library_path = user_home + f"/.m2/repository/com/lemonappdev/konsist/{konsist_version}/konsist-{konsist_version}.jar"
-    junit_test_path = user_home + f"/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/5.8.2/4c21029217adf07e4c0d0c5e192b6bf610c94bdc/junit-jupiter-api-5.8.2.jar"
-    kotest_test_path = user_home + f"/.gradle/caches/modules-2/files-2.1/io.kotest/kotest-framework-api-jvm/5.9.0/bfeb77c154a6938201e6d1490586484e405b4819/kotest-framework-api-jvm-5.9.0.jar"
 
     snippet_command = [
         "kotlinc",
         "-cp",
-        f"{sample_konsist_library_path}:{dummy_classes_jar_path}:{junit_test_path}:{kotest_test_path}",
+        f"{sample_konsist_library_path}:{dummy_classes_jar_path}",
         "-nowarn",
         "-d", temp_dir,
         file_path
@@ -162,11 +144,6 @@ def compile_kotlin_files(kotlin_files):
                 error_occurred = True
 
 
-def clean():
-    shutil.rmtree(kt_temp_files_dir)
-    subprocess.run(["git", "clean", "-f"])
-
-
 def get_kt_temp_file_from_ktdoc_file(ktdoc_snippet_file_path):
     # Ensure the snippet_file_path starts with the project_root
     if not ktdoc_snippet_file_path.startswith(project_root):
@@ -189,47 +166,6 @@ def get_all_ktdoc_files():
 
     kt_temp_file_paths = [get_kt_temp_file_from_ktdoc_file(path) for path in ktdoc_temp_file_paths]
     return kt_temp_file_paths
-
-
-def ensure_files_exist(file_paths):
-    for file_path in file_paths:
-        if not os.path.exists(file_path):
-            # File does not exist, raise an exception
-            raise FileNotFoundError(f"The file {file_path} does not exist.")
-
-
-def count_files_in_directory(directory):
-    total_files = 0
-    for root, dirs, files in os.walk(directory):
-        total_files += len(files)
-    return total_files
-
-
-def list_files(directory):
-    file_list = []
-    for root, dirs, files in os.walk(directory):
-        for file in files:
-            file_list.append(os.path.join(root, file))
-    return file_list
-
-
-def print_relative_file_paths(file_list):
-    for file in file_list:
-        print(os.path.relpath(file, project_root))
-
-
-def get_all_file_paths(directory):
-    file_paths = []  # List to store file paths
-
-    # Walking top-down from the root
-    for root, _, files in os.walk(directory):
-        for file in files:
-            # Concatenate the root directory and the filename to get full file path
-            file_path = os.path.join(root, file)
-            file_paths.append(file_path)
-
-    return file_paths
-
 
 # Script ===============================================================================================================
 
