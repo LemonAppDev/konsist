@@ -8,7 +8,7 @@ import time
 import glob
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from subprocess import CalledProcessError, check_output
-from scripts.get_konsist_snapshot_version import get_konsist_snapshot_version
+from .. import get_konsist_snapshot_version
 from common import (project_root, user_home, print_and_flush, clean, ensure_files_exist, count_files_in_directory, print_relative_file_paths, get_all_file_paths)
 
 multiprocessing.set_start_method('fork')
@@ -19,7 +19,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 kt_temp_files_dir = tempfile.mkdtemp()
 dummy_classes_path = os.path.join(project_root, "lib/src/snippet/kotlin/dummyclasses")
 dummy_classes_jar_path = os.path.join(kt_temp_files_dir, "all_dummy_classes.jar")
-konsist_version = get_konsist_snapshot_version()
+konsist_version = get_konsist_snapshot_version.get_konsist_snapshot_version()
 success = "SUCCESS"
 failed = "FAILED"
 
