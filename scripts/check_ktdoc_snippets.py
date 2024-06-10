@@ -20,11 +20,10 @@ user_home = os.path.expanduser("~")
 gradlew_path = os.path.join(project_root, 'gradlew')
 kt_temp_files_dir = tempfile.mkdtemp()
 dummy_classes_path = os.path.join(project_root, "lib/src/snippet/kotlin/dummyclasses")
-output_jar_path = os.path.join(kt_temp_files_dir, "all_test_data.jar")
+output_jar_path = os.path.join(kt_temp_files_dir, "all_dummy_classes.jar")
 success = "SUCCESS"
 failed = "FAILED"
 konsist_version = get_konsist_snapshot_version()
-
 
 # Methods =============================================================================================================
 
@@ -82,7 +81,7 @@ def run_gradle_publish():
         print("Error output:")
         print(e.stderr)
 
-def compile_test_data_jar(package_path, output_jar_path):
+def compile_dummy_classes_jar(package_path, output_jar_path):
     global error_occurred
     error_occurred = False
 
@@ -266,7 +265,7 @@ if __name__ == '__main__':
     run_gradle_publish()
 
     start_time = time.time()
-    compile_test_data_jar(dummy_classes_path, output_jar_path)
+    compile_dummy_classes_jar(dummy_classes_path, output_jar_path)
 
     compile_kotlin_files(kotlin_kt_temp_files)
     clean()
