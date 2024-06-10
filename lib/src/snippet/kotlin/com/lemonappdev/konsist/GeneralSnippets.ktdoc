@@ -46,7 +46,7 @@ class GeneralSnippets {
         Konsist
             .scopeFromProduction()
             .classes()
-            .assertTrue { it.hasTestClass() }
+            .assertTrue { it.hasTestClasses() }
     }
 
     fun `every class - except data and value class - has test`() {
@@ -54,7 +54,7 @@ class GeneralSnippets {
             .scopeFromProduction()
             .classes()
             .withoutModifier(KoModifier.DATA, KoModifier.VALUE)
-            .assertTrue { it.hasTestClass() }
+            .assertTrue { it.hasTestClasses() }
     }
 
     fun `properties are declared before functions`() {
@@ -193,13 +193,11 @@ class GeneralSnippets {
             }
     }
 
-    fun `all parrent interfaces are public`() {
+    fun `all parent interfaces are public`() {
         Konsist
             .scopeFromProject()
             .classes()
             .parentInterfaces()
-            .assertTrue {
-                it.hasPublicModifier()
-            }
+            .assertTrue { it.hasPublicModifier }
     }
 }

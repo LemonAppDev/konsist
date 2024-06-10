@@ -60,6 +60,6 @@ class CleanArchitectureSnippets {
             .scopeFromProduction()
             .classes()
             .withNameEndingWith("UseCase")
-            .assertTrue { it.hasTestClass() }
+            .assertTrue { it.hasTestClasses() }
     }
 }
