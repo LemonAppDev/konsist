@@ -117,7 +117,7 @@ def compile_kotlin_file(file_path):
     snippet_command = [
         "kotlinc",
         "-cp",
-        f"{sample_konsist_library_path}:{test_data_jar_1_file_path}:{test_data_jar_2_file_path}:{test_data_jar_3_file_path}:{test_data_jar_3_file_path}:{test_data_jar_4_file_path}:{test_data_jar_5_file_path}:{test_data_jar_6_file_path}:{test_data_jar_7_file_path}:{test_data_jar_8_file_path}:{test_data_jar_9_file_path}:{test_data_jar_10_file_path}:{test_data_jar_11_file_path}:{test_data_jar_12_file_path}",
+        f"{sample_konsist_library_path}",
         "-nowarn",
         "-d", temp_dir,
         file_path
