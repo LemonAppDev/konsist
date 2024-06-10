@@ -7,6 +7,7 @@ import multiprocessing
 import tempfile
 import time
 from get_konsist_snapshot_version import get_konsist_snapshot_version
+import glob
 
 multiprocessing.set_start_method('fork')
 
