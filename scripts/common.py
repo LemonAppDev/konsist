@@ -2,6 +2,7 @@ import sys
 import os
 
 # Variables ============================================================================================================
+script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(script_dir)
 user_home = os.path.expanduser("~")
 kt_temp_files_dir = tempfile.mkdtemp()

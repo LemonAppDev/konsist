@@ -15,7 +15,6 @@ multiprocessing.set_start_method('fork')
 
 # Variables ============================================================================================================
 error_occurred = False
-script_dir = os.path.dirname(os.path.abspath(__file__))
 kt_temp_files_dir = tempfile.mkdtemp()
 dummy_classes_path = os.path.join(project_root, "lib/src/snippet/kotlin/dummyclasses")
 dummy_classes_jar_path = os.path.join(kt_temp_files_dir, "all_dummy_classes.jar")
