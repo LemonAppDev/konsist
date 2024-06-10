@@ -146,9 +146,14 @@ def compile_kotlin_files(kotlin_files):
     processed_files = 0
 
     sample_konsist_library_path = user_home + f"/.m2/repository/com/lemonappdev/konsist/{konsist_version}/"
+    kotest_test_path = user_home + f"/.gradle/caches/modules-2/files-2.1/io.kotest/kotest-framework-api-jvm/5.9.0/bfeb77c154a6938201e6d1490586484e405b4819/kotest-framework-api-jvm-5.9.0.jar"
 
     if not os.path.exists(sample_konsist_library_path):
         print_and_flush(f"Error: The file {sample_konsist_library_path} does not exist.")
+        sys.exit(1)  # Exit the script with an error code
+
+    if not os.path.exists(kotest_test_path):
+        print_and_flush(f"Error: The file {kotest_test_path} does not exist.")
         sys.exit(1)  # Exit the script with an error code
 
     with ProcessPoolExecutor() as executor:
