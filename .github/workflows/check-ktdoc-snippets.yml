@@ -1,0 +1,79 @@
+name: Check Snippet ktdoc Snippets
+
+on:
+  pull_request:
+    types: [ opened, synchronize ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  get-github-context:
+    name: Get Branches And Changed Files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v8
+
+      - name: List Branches
+        run: |
+          echo current branch: ${{ steps.branch-name.outputs.current_branch }}
+          echo base ref branch branch: ${{ steps.branch-name.outputs.base_ref_branch }}
+          echo default branch: ${{ steps.branch-name.outputs.default_branch }}
+
+      - name: Get Changed Files
+        id: changed-files
+        uses: tj-actions/changed-files@v44.5.2
+
+      - name: Echo List Changed Files
+        run: |
+          echo Changed files:
+          echo ${{ steps.changed-files.outputs.all_changed_files }} | tr ' ' '\n'
+
+      - name: Echo Run Condition (any true to run)
+        run: |
+          echo Current branch starts with "release/": ${{ startsWith(steps.branch-name.outputs.current_branch, 'release/') }}
+          echo Base ref branch is "main": ${{ steps.branch-name.outputs.base_ref_branch == 'main' }}
+          echo Changed .ktdoc files: ${{ contains(steps.changed-files.outputs.all_changed_files, '.ktdoc') }}
+
+    outputs:
+      current_branch: ${{ steps.branch-name.outputs.current_branch }}
+      base_ref_branch: ${{ steps.branch-name.outputs.base_ref_branch }}
+      all_changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
+
+  check-ktdoc-snippets:
+    name: Check ktdoc Snippets
+    needs: get-github-context
+    runs-on: ubuntu-latest
+    if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      contains(needs.get-github-context.outputs.all_changed_files, '.ktdoc')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'corretto'
+
+      - name: Filter Changed .ktdoc Files
+        run: |
+          ktdoc_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.ktdoc$')
+          echo "$ktdoc_files"
+          echo "CHANGED_FILES_NAMES=$(echo "$ktdoc_files" | tr '\n' ' ')" >> $GITHUB_ENV
+
+      - name: Run Python Script With Changed .ktdoc Files
+        run: |
+          if [ -n "$CHANGED_FILES_NAMES" ]; then
+            python3 scripts/check_ktdoc_snippets.py ${{ env.CHANGED_FILES_NAMES }}
+          else
+            echo "No changed .kttest files to process."
+          fi
+        env:
+          CHANGED_FILES_NAMES: ${{ env.CHANGED_FILES_NAMES }}
