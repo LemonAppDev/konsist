@@ -8,10 +8,29 @@ import org.junit.jupiter.api.Test
 
 class KoParameterDeclarationForKoRepresentsTypeProviderTest {
     @Test
-    fun `parameter-represents-type`() {
+    fun `parameter-in-constructor-represents-type`() {
         // given
         val sut =
-            getSnippetFile("parameter-represents-type")
+            getSnippetFile("parameter-in-constructor-represents-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+
+        // then
+        assertSoftly(sut) {
+            it?.representsType("() -> Unit") shouldBeEqualTo true
+            it?.representsType("OtherType") shouldBeEqualTo false
+            it?.representsType(null) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `parameter-in-function-invocation-represents-type`() {
+        // given
+        val sut =
+            getSnippetFile("parameter-in-function-invocation-represents-type")
                 .functions()
                 .parameters
                 .first()

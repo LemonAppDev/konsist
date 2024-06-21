@@ -37,10 +37,30 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
 
         // then
         assertSoftly(sut) {
-            it.defaultValue shouldBeEqualTo "2"
-            it.hasDefaultValue() shouldBeEqualTo true
-            it.hasDefaultValue("2") shouldBeEqualTo true
-            it.hasDefaultValue("10") shouldBeEqualTo false
+            defaultValue shouldBeEqualTo "2"
+            hasDefaultValue() shouldBeEqualTo true
+            hasDefaultValue("2") shouldBeEqualTo true
+            hasDefaultValue("10") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `class-has-complex-default-parameter-value`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-complex-default-parameter-value")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+
+        // then
+        assertSoftly(sut) {
+            it?.defaultValue shouldBeEqualTo "SampleType()"
+            it?.hasDefaultValue() shouldBeEqualTo true
+            it?.hasDefaultValue("SampleType()") shouldBeEqualTo true
+            it?.hasDefaultValue("OtherType()") shouldBeEqualTo false
         }
     }
 
@@ -56,10 +76,29 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
 
         // then
         assertSoftly(sut) {
-            it.defaultValue shouldBeEqualTo "SampleType()"
-            it.hasDefaultValue() shouldBeEqualTo true
-            it.hasDefaultValue("SampleType()") shouldBeEqualTo true
-            it.hasDefaultValue("OtherType()") shouldBeEqualTo false
+            defaultValue shouldBeEqualTo "SampleType()"
+            hasDefaultValue() shouldBeEqualTo true
+            hasDefaultValue("SampleType()") shouldBeEqualTo true
+            hasDefaultValue("OtherType()") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `class-has-null-default-parameter-value`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-null-default-parameter-value")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+
+        // then
+        assertSoftly(sut) {
+            it?.defaultValue shouldBeEqualTo "null"
+            it?.hasDefaultValue() shouldBeEqualTo true
+            it?.hasDefaultValue("SampleType()") shouldBeEqualTo false
         }
     }
 
@@ -75,9 +114,28 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
 
         // then
         assertSoftly(sut) {
-            it.defaultValue shouldBeEqualTo "null"
-            it.hasDefaultValue() shouldBeEqualTo true
-            it.hasDefaultValue("SampleType()") shouldBeEqualTo false
+            defaultValue shouldBeEqualTo "null"
+            hasDefaultValue() shouldBeEqualTo true
+            hasDefaultValue("SampleType()") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `class-has-no-default-parameter-value`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-no-default-parameter-value")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+
+        // then
+        assertSoftly(sut) {
+            it?.defaultValue shouldBeEqualTo null
+            it?.hasDefaultValue() shouldBeEqualTo false
+            it?.hasDefaultValue("SampleType()") shouldBeEqualTo false
         }
     }
 
@@ -93,9 +151,9 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
 
         // then
         assertSoftly(sut) {
-            it.defaultValue shouldBeEqualTo null
-            it.hasDefaultValue() shouldBeEqualTo false
-            it.hasDefaultValue("SampleType()") shouldBeEqualTo false
+            defaultValue shouldBeEqualTo null
+            hasDefaultValue() shouldBeEqualTo false
+            hasDefaultValue("SampleType()") shouldBeEqualTo false
         }
     }
 

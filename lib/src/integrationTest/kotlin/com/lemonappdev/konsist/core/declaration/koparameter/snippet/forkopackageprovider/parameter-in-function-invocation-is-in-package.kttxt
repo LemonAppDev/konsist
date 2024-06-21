@@ -1,0 +1,3 @@
+package com.samplepackage
+
+fun sampleFunction(sampleParameter: Int) {}
