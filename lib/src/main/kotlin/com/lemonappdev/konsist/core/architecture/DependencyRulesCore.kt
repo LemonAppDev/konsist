@@ -37,6 +37,33 @@ class DependencyRulesCore : DependencyRules {
         }
     }
 
+    override fun Layer.doesNotDependOn(
+        layer: Layer,
+        vararg layers: Layer,
+    ) {
+        checkIfLayerHasTheSameValuesAsOtherLayer(this, layer, *layers)
+        checkIfLayerIsDependentOnItself(this, layer, *layers)
+        checkStatusOfLayer(false, this, layer, *layers)
+        checkCircularDependencies(this, layer, *layers)
+
+        allLayers =
+            (allLayers + this + layer + layers)
+                .distinct()
+                .toMutableList()
+
+        dependencies[this] = (dependencies.getOrDefault(this, setOf(this))) + allLayers - layer - layers.toSet()
+        statuses[this] = Status.DEPEND_ON_LAYER
+
+        if (statuses.getOrDefault(layer, Status.NONE) == Status.NONE) {
+            statuses[layer] = Status.NONE
+        }
+        layers.onEach {
+            if (statuses.getOrDefault(it, Status.NONE) == Status.NONE) {
+                statuses[it] = Status.NONE
+            }
+        }
+    }
+
     override fun Layer.dependsOnNothing() {
         checkIfLayerHasTheSameValuesAsOtherLayer(this)
         checkStatusOfLayer(true, this)
