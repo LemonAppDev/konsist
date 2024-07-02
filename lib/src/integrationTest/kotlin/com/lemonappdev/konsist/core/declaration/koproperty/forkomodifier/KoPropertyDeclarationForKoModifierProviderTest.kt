@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.KoModifier.DATA
 import com.lemonappdev.konsist.api.KoModifier.OPEN
+import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.KoModifier.PROTECTED
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -122,6 +123,7 @@ class KoPropertyDeclarationForKoModifierProviderTest {
                 arguments("property-has-modifiers-multiline-comment-and-annotation-before-them", listOf(PROTECTED, OPEN)),
                 arguments("property-has-modifiers-and-comment-before-them", listOf(PROTECTED, OPEN)),
                 arguments("property-has-modifiers-and-comment-after-them", listOf(PROTECTED, OPEN)),
+                arguments("property-has-modifier-and-annotation-with-string-parameter-containing-link", listOf(PRIVATE)),
             )
     }
 }

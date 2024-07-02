@@ -105,6 +105,7 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
                 arguments("typealias-has-modifiers-multiline-comment-and-annotation-before-them"),
                 arguments("typealias-has-modifiers-and-comment-before-them"),
                 arguments("typealias-has-modifiers-and-comment-after-them"),
+                arguments("typealias-has-modifier-and-annotation-with-string-parameter-containing-link"),
             )
     }
 }

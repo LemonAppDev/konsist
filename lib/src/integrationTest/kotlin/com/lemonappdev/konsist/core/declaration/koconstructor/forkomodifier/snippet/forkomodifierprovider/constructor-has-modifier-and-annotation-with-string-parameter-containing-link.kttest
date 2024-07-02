@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
+
+class SampleClass @SampleAnnotationWithParameter("Link: https://some/link") private constructor () {
+
+}

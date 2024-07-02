@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.KoModifier.DATA
 import com.lemonappdev.konsist.api.KoModifier.OPEN
+import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.KoModifier.PROTECTED
 import com.lemonappdev.konsist.api.KoModifier.PUBLIC
 import com.lemonappdev.konsist.api.KoModifier.SUSPEND
@@ -122,6 +123,7 @@ class KoFunctionDeclarationForKoModifierProviderTest {
                 arguments("function-has-modifiers-multiline-comment-and-annotation-before-them", listOf(PROTECTED, OPEN)),
                 arguments("function-has-modifiers-and-comment-before-them", listOf(PROTECTED, OPEN)),
                 arguments("function-has-modifiers-and-comment-after-them", listOf(PROTECTED, OPEN)),
+                arguments("function-has-modifier-and-annotation-with-string-parameter-containing-link", listOf(PRIVATE)),
             )
     }
 }
