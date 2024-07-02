@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.KoModifier.ABSTRACT
 import com.lemonappdev.konsist.api.KoModifier.DATA
 import com.lemonappdev.konsist.api.KoModifier.OPEN
+import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.KoModifier.PROTECTED
 import com.lemonappdev.konsist.api.KoModifier.PUBLIC
 import org.amshove.kluent.assertSoftly
@@ -121,6 +122,7 @@ class KoInterfaceDeclarationForKoModifierProviderTest {
                 arguments("interface-has-modifiers-multiline-comment-and-annotation-before-them", listOf(PUBLIC, ABSTRACT)),
                 arguments("interface-has-modifiers-and-comment-before-them", listOf(PUBLIC, ABSTRACT)),
                 arguments("interface-has-modifiers-and-comment-after-them", listOf(PUBLIC, ABSTRACT)),
+                arguments("interface-has-modifier-and-annotation-with-string-parameter-containing-link", listOf(PRIVATE)),
             )
     }
 }

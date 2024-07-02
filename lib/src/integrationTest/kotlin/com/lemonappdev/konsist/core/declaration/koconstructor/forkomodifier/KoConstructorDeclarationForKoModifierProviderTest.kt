@@ -100,6 +100,7 @@ class KoConstructorDeclarationForKoModifierProviderTest {
                 arguments("constructor-has-modifiers-and-annotation-with-parameter"),
                 arguments("constructor-has-modifiers-and-annotation-without-parameter"),
                 arguments("constructor-has-modifiers-and-annotations"),
+                arguments("constructor-has-modifier-and-annotation-with-string-parameter-containing-link"),
             )
     }
 }

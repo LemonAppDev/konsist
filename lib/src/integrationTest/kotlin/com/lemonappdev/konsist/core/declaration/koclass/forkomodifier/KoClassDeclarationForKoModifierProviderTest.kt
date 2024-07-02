@@ -120,6 +120,7 @@ class KoClassDeclarationForKoModifierProviderTest {
                 arguments("class-has-modifiers-multiline-comment-and-annotation-before-them", listOf(PRIVATE, OPEN)),
                 arguments("class-has-modifiers-and-comment-before-them", listOf(PRIVATE, OPEN)),
                 arguments("class-has-modifiers-and-comment-after-them", listOf(PRIVATE, OPEN)),
+                arguments("class-has-modifier-and-annotation-with-string-parameter-containing-link", listOf(PRIVATE)),
             )
     }
 }

@@ -1,0 +1,4 @@
+import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
+
+@SampleAnnotationWithParameter("Link: https://some/link")
+private val sampleProperty: Boolean = true
