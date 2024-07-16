@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArch
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
+import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.springframework.stereotype.Repository
 
@@ -44,6 +45,38 @@ class CleanArchitectureSnippets {
                 }
 
                 hasSingleInvokeOperatorMethod && it.countFunctions { item -> item.hasPublicOrDefaultModifier } == 1
+            }
+    }
+
+    fun `classes with 'UseCase' suffix and parents should have single 'public operator' method named 'invoke'`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .withNameEndingWith("UseCase")
+            .assertTrue {
+                // Class and it's parent
+                val declarations = listOf(it) + it.parents(true)
+
+                // Functions from all parents without overrides
+                val uniqueFunctions = declarations
+                    .mapNotNull { koParentDeclaration -> koParentDeclaration as? KoFunctionProvider }
+                    .flatMap { koFunctionProvider ->
+                        koFunctionProvider.functions(
+                            includeNested = false,
+                            includeLocal = false
+                        )
+                    }
+                    .filterNot { koFunctionDeclaration -> koFunctionDeclaration.hasOverrideModifier }
+
+                val hasInvokeOperatorMethod = uniqueFunctions.any { functionDeclaration ->
+                    functionDeclaration.name == "invoke" && functionDeclaration.hasPublicOrDefaultModifier && functionDeclaration.hasOperatorModifier
+                }
+
+                val numParentPublicFunctions = uniqueFunctions.count { functionDeclaration ->
+                    functionDeclaration.hasPublicOrDefaultModifier
+                }
+
+                hasInvokeOperatorMethod && numParentPublicFunctions == 1
             }
     }
 
