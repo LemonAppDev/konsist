@@ -7,8 +7,7 @@ import com.lemonappdev.konsist.core.verify.assert
  * Asserts that element match the specified predicate.
  *
  * @param strict A flag indicating whether strict checking should be enabled.
- *               If set to `true`, an assertion error will be thrown if assert is called on null,
- *               which can be helpful for debugging.
+ *               If set to `true`, an assertion error will be thrown if assert is called on null.
  *               If set to `false`, the method will pass successfully when called on null.
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
@@ -32,8 +31,7 @@ fun <E : KoBaseProvider> E?.assertTrue(
  * Asserts that element not match the specified predicate.
  *
  * @param strict A flag indicating whether strict checking should be enabled.
- *               If set to `true`, an assertion error will be thrown if assert is called on null,
- *               which can be helpful for debugging.
+ *               If set to `true`, an assertion error will be thrown if assert is called on null.
  *               If set to `false`, the method will pass successfully when called on null.
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
@@ -57,8 +55,8 @@ fun <E : KoBaseProvider> E?.assertFalse(
  * Asserts that all elements in the list match the specified predicate.
  *
  * @param strict A flag indicating whether strict checking should be enabled.
- *               If set to `true`, an assertion error will be thrown if the list is empty or contains only null values,
- *               which can be helpful for debugging.
+ *               If set to `true`, an assertion error will be thrown if the declaration list is empty or contains only
+ *               null values.
  *               If set to `false`, the method will pass successfully when called on an empty list.
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
@@ -82,8 +80,7 @@ fun <E : KoBaseProvider> List<E?>.assertTrue(
  * Asserts that no elements in the list match the specified predicate.
  *
  * @param strict A flag indicating whether strict checking should be enabled.
- *               If set to `true`, an assertion error will be thrown if the list is empty or contains only null values,
- *               which can be helpful for debugging.
+ *               If set to `true`, an assertion error will be thrown if the list is empty or contains only null values.
  *               If set to `false`, the method will pass successfully when called on an empty list.
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
@@ -107,8 +104,7 @@ fun <E : KoBaseProvider> List<E?>.assertFalse(
  * Asserts that all elements in the sequence match the specified predicate.
  *
  * @param strict A flag indicating whether strict checking should be enabled.
- *               If set to `true`, an assertion error will be thrown if the sequence is empty or contains only null values,
- *               which can be helpful for debugging.
+ *               If set to `true`, an assertion error will be thrown if the sequence is empty or contains only null values.
  *               If set to `false`, the method will pass successfully when called on an empty sequence.
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
@@ -132,8 +128,7 @@ fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
  * Asserts that no elements in the sequence match the specified predicate.
  *
  * @param strict A flag indicating whether strict checking should be enabled.
- *               If set to `true`, an assertion error will be thrown if the sequence is empty or contains only null values,
- *               which can be helpful for debugging.
+ *               If set to `true`, an assertion error will be thrown if the sequence is empty or contains only null values.
  *               If set to `false`, the method will pass successfully when called on an empty sequence.
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
