@@ -44,7 +44,6 @@ internal class KoParameterDeclarationCore private constructor(
         KoBaseProviderCore,
         KoAnnotationProviderCore,
         KoContainingFileProviderCore,
-        KoDeclarationFullyQualifiedNameProviderCore,
         KoDefaultValueProviderCore,
         KoLocationProviderCore,
         KoModifierProviderCore,
@@ -66,8 +65,6 @@ internal class KoParameterDeclarationCore private constructor(
         override val ktAnnotated: KtAnnotated by lazy { ktParameter }
 
         override val ktModifierListOwner: KtModifierListOwner by lazy { ktParameter }
-
-        override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktParameter }
 
         override val psiElement: PsiElement by lazy { ktParameter }
 

@@ -91,7 +91,7 @@ class KoFileDeclarationForKoFileDeclarationProviderTest {
                 listOf(
                     "SampleAnnotation1",
                     "SampleAnnotation2",
-                    "samplepackage",
+                    "com.samplepackage",
                     "com.lemonappdev.konsist.testdata.SampleAnnotation1",
                     "com.lemonappdev.konsist.testdata.SampleAnnotation2",
                     "sampleProperty",

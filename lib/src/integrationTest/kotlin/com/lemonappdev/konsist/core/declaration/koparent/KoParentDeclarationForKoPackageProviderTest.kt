@@ -29,7 +29,7 @@ class KoParentDeclarationForKoPackageProviderTest {
                 .first()
 
         // then
-        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
+        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
     }
 
     @Test
@@ -55,7 +55,7 @@ class KoParentDeclarationForKoPackageProviderTest {
                 .first()
 
         // then
-        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
+        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
     }
 
     @Test
@@ -81,7 +81,7 @@ class KoParentDeclarationForKoPackageProviderTest {
                 .first()
 
         // then
-        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
+        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
     }
 
     @Test
@@ -94,7 +94,7 @@ class KoParentDeclarationForKoPackageProviderTest {
                 .first()
 
         // then
-        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata"
+        sut.packagee?.name shouldBeEqualTo "com.lemonappdev.konsist.testdata"
     }
 
     @Test
@@ -107,7 +107,7 @@ class KoParentDeclarationForKoPackageProviderTest {
                 .first()
 
         // then
-        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata"
+        sut.packagee?.name shouldBeEqualTo "com.lemonappdev.konsist.testdata"
     }
 
     @Test
@@ -120,7 +120,7 @@ class KoParentDeclarationForKoPackageProviderTest {
                 .first()
 
         // then
-        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata"
+        sut.packagee?.name shouldBeEqualTo "com.lemonappdev.konsist.testdata"
     }
 
     @Test
@@ -133,7 +133,7 @@ class KoParentDeclarationForKoPackageProviderTest {
                 .first()
 
         // then
-        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.externalsample"
+        sut.packagee?.name shouldBeEqualTo "com.lemonappdev.konsist.externalsample"
     }
 
     @Test
@@ -146,7 +146,7 @@ class KoParentDeclarationForKoPackageProviderTest {
                 .first()
 
         // then
-        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.externalsample"
+        sut.packagee?.name shouldBeEqualTo "com.lemonappdev.konsist.externalsample"
     }
 
     @Test
@@ -159,7 +159,7 @@ class KoParentDeclarationForKoPackageProviderTest {
                 .first()
 
         // then
-        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.externalsample"
+        sut.packagee?.name shouldBeEqualTo "com.lemonappdev.konsist.externalsample"
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koparent/snippet/forkopackageprovider/", fileName)

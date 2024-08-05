@@ -42,7 +42,6 @@ internal class KoVariableDeclarationCore private constructor(
         KoContainingFileProviderCore,
         KoDelegateProviderCore,
         KoNullableTypeProviderCore,
-        KoFullyQualifiedNameProviderCore,
         KoKDocProviderCore,
         KoLocationProviderCore,
         KoNameProviderCore,
@@ -86,8 +85,6 @@ internal class KoVariableDeclarationCore private constructor(
         override val hasValModifier: Boolean by lazy { !ktProperty.isVar }
 
         override val hasVarModifier: Boolean by lazy { ktProperty.isVar }
-
-        override val fullyQualifiedName: String by lazy { name }
 
         override fun toString(): String = name
 

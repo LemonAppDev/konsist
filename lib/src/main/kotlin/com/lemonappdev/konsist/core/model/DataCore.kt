@@ -40,7 +40,7 @@ fun getClass(
 ): KoClassDeclaration? =
     DataCore
         .classes
-        .firstOrNull { decl -> (decl.packagee?.fullyQualifiedName + "." + decl.name) == fqn }
+        .firstOrNull { decl -> (decl.packagee?.name + "." + decl.name) == fqn }
         ?: containingFile
             .classes()
             .firstOrNull { decl -> decl.name == name }
@@ -52,7 +52,7 @@ fun getInterface(
 ): KoInterfaceDeclaration? =
     DataCore
         .interfaces
-        .firstOrNull { decl -> (decl.packagee?.fullyQualifiedName + "." + decl.name) == fqn }
+        .firstOrNull { decl -> (decl.packagee?.name + "." + decl.name) == fqn }
         ?: containingFile
             .interfaces()
             .firstOrNull { decl -> decl.name == name }
@@ -64,7 +64,7 @@ fun getObject(
 ): KoObjectDeclaration? =
     DataCore
         .objects
-        .firstOrNull { decl -> (decl.packagee?.fullyQualifiedName + "." + decl.name) == fqn }
+        .firstOrNull { decl -> (decl.packagee?.name + "." + decl.name) == fqn }
         ?: containingFile
             .objects()
             .firstOrNull { decl -> decl.name == name }
@@ -76,7 +76,7 @@ fun getTypeAlias(
 ): KoTypeAliasDeclaration? =
     DataCore
         .typeAliases
-        .firstOrNull { decl -> (decl.packagee?.fullyQualifiedName + "." + decl.name) == fqn }
+        .firstOrNull { decl -> (decl.packagee?.name + "." + decl.name) == fqn }
         ?: containingFile
             .typeAliases
             .firstOrNull { decl -> decl.name == name }

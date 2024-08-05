@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.core.util.LocationUtil
 
 internal interface KoResideInPackageProviderCore : KoResideInPackageProvider, KoPackageProviderCore, KoBaseProviderCore {
     override fun resideInPackage(name: String): Boolean =
-        this.packagee?.let { LocationUtil.resideInLocation(name, it.fullyQualifiedName) } ?: false
+        this.packagee?.let { LocationUtil.resideInLocation(name, it.name) } ?: false
 
     override fun resideOutsidePackage(name: String): Boolean = !resideInPackage(name)
 }

@@ -32,7 +32,6 @@ interface KoParameterDeclaration :
     KoAnnotationProvider,
     KoContainingFileProvider,
     KoDefaultValueProvider,
-    KoFullyQualifiedNameProvider,
     KoLocationProvider,
     KoModifierProvider,
     KoNameProvider,

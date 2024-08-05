@@ -115,7 +115,7 @@ object TypeUtil {
                 .imports
                 .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
                 ?.name
-                ?: (containingFile.packagee?.fullyQualifiedName + "." + typeText)
+                ?: (containingFile.packagee?.name + "." + typeText)
 
         return when {
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)

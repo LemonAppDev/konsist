@@ -1,6 +1,0 @@
-val sampleProperty: String
-    get() {
-        val sampleVariable = ""
-
-        return ""
-    }

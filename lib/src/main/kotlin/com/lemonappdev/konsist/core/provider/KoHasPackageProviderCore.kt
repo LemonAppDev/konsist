@@ -12,12 +12,12 @@ internal interface KoHasPackageProviderCore :
     override val hasMatchingPackage: Boolean
         get() =
             packagee
-                ?.fullyQualifiedName
+                ?.name
                 ?.replace(".", "/")
                 ?.let { path.contains(it) } ?: false
 
     override fun hasPackage(name: String): Boolean =
         packagee
-            ?.fullyQualifiedName
+            ?.name
             ?.let { LocationUtil.resideInLocation(name, it) } ?: false
 }
