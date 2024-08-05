@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.architecture.assertarchitecture.architecture7
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architecture
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
@@ -54,13 +53,14 @@ class Architecture7Test {
     @Test
     fun `passes when good dependency is set and architecture is passed as parameter (scope)`() {
         // then
-        val architecture = architecture {
-            domain.dependsOn(common)
-            adapter.dependsOn(common)
-            port.dependsOn(domain, common)
-            adapter.dependsOn(port)
-            common.dependsOnNothing()
-        }
+        val architecture =
+            architecture {
+                domain.dependsOn(common)
+                adapter.dependsOn(common)
+                port.dependsOn(domain, common)
+                adapter.dependsOn(port)
+                common.dependsOnNothing()
+            }
 
         scope.assertArchitecture(architecture)
     }
@@ -68,13 +68,14 @@ class Architecture7Test {
     @Test
     fun `passes when good dependency is set and architecture is passed as parameter (files)`() {
         // then
-        val architecture = architecture {
-            domain.dependsOn(common)
-            adapter.dependsOn(common)
-            port.dependsOn(domain, common)
-            adapter.dependsOn(port)
-            common.dependsOnNothing()
-        }
+        val architecture =
+            architecture {
+                domain.dependsOn(common)
+                adapter.dependsOn(common)
+                port.dependsOn(domain, common)
+                adapter.dependsOn(port)
+                common.dependsOnNothing()
+            }
 
         scope
             .files

@@ -12,19 +12,19 @@ class Architecture5Test {
     private val presentation =
         Layer(
             "Presentation",
-            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.presentation.."
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.presentation..",
         )
     private val application =
         Layer(
             "Application",
-            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.application.."
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.application..",
         )
     private val domain =
         Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.domain..")
     private val infrastructure =
         Layer(
             "Infrastructure",
-            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.infrastructure.."
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.infrastructure..",
         )
     private val scope =
         Konsist.scopeFromDirectory(

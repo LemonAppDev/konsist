@@ -192,6 +192,7 @@ private data class FailedFiles(
     val imports: List<KoImportDeclaration>,
 )
 
+@Suppress("detekt.LongParameterList")
 private fun getCheckFailedMessages(
     failedFiles: List<FailedFiles>,
     positiveDependencies: Map<Layer, Set<Layer>>,
