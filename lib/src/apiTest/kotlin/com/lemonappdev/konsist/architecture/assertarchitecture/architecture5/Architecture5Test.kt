@@ -10,12 +10,22 @@ import org.junit.jupiter.api.Test
 
 class Architecture5Test {
     private val presentation =
-        Layer("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.presentation..")
+        Layer(
+            "Presentation",
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.presentation.."
+        )
     private val application =
-        Layer("Application", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.application..")
-    private val domain = Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.domain..")
+        Layer(
+            "Application",
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.application.."
+        )
+    private val domain =
+        Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.domain..")
     private val infrastructure =
-        Layer("Infrastructure", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.infrastructure..")
+        Layer(
+            "Infrastructure",
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.infrastructure.."
+        )
     private val scope =
         Konsist.scopeFromDirectory(
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture5/project",
@@ -71,6 +81,52 @@ class Architecture5Test {
                 application.dependsOn(domain, infrastructure)
                 domain.dependsOn(infrastructure)
                 infrastructure.dependsOnNothing()
+            }
+
+        // then
+        scope
+            .files
+            .assertArchitecture(architecture)
+    }
+
+    @Test
+    fun `passes when good dependency is set using doesNotDependsOn (scope)`() {
+        // then
+        scope
+            .assertArchitecture {
+                infrastructure.doesNotDependOn(presentation)
+            }
+    }
+
+    @Test
+    fun `passes when good dependency is set using doesNotDependsOn (files)`() {
+        // then
+        scope
+            .files
+            .assertArchitecture {
+                infrastructure.doesNotDependOn(presentation)
+            }
+    }
+
+    @Test
+    fun `passes when good dependency is set using doesNotDependsOn and architecture is passed as parameter (scope)`() {
+        // given
+        val architecture =
+            architecture {
+                infrastructure.doesNotDependOn(presentation)
+            }
+
+        // then
+        scope
+            .assertArchitecture(architecture)
+    }
+
+    @Test
+    fun `passes when good dependency is set using doesNotDependsOn and architecture is passed as parameter (files)`() {
+        // given
+        val architecture =
+            architecture {
+                infrastructure.doesNotDependOn(presentation)
             }
 
         // then
@@ -143,6 +199,58 @@ class Architecture5Test {
                 domain.dependsOn(infrastructure)
                 infrastructure.dependsOnNothing()
             }
+
+        val sut = {
+            scope
+                .files
+                .assertArchitecture(architecture)
+        }
+
+        // then
+        sut shouldThrow KoAssertionFailedException::class
+    }
+
+    @Test
+    fun `fails when bad dependency using doesNotDependsOn is set (scope)`() {
+        // given
+        val sut = {
+            scope.assertArchitecture { infrastructure.doesNotDependOn(application) }
+        }
+
+        // then
+        sut shouldThrow KoAssertionFailedException::class
+    }
+
+    @Test
+    fun `fails when bad dependency using doesNotDependsOn is set (files)`() {
+        // given
+        val sut = {
+            scope
+                .files
+                .assertArchitecture { infrastructure.doesNotDependOn(application) }
+        }
+
+        // then
+        sut shouldThrow KoAssertionFailedException::class
+    }
+
+    @Test
+    fun `fails when bad dependency using doesNotDependsOn is set and architecture is passed as parameter (scope)`() {
+        // given
+        val architecture = architecture { infrastructure.doesNotDependOn(application) }
+
+        val sut = {
+            scope.assertArchitecture(architecture)
+        }
+
+        // then
+        sut shouldThrow KoAssertionFailedException::class
+    }
+
+    @Test
+    fun `fails when bad dependency using doesNotDependsOn is set and architecture is passed as parameter (files)`() {
+        // given
+        val architecture = architecture { infrastructure.doesNotDependOn(application) }
 
         val sut = {
             scope
