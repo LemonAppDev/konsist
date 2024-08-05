@@ -31,7 +31,8 @@ internal fun KoArchitectureFiles.assert(
             throw KoAssertionFailedException(
                 getCheckFailedMessages(
                     failedFiles.distinct(),
-                    dependencyRules.dependencies,
+                    dependencyRules.positiveDependencies,
+                    dependencyRules.negativeDependencies,
                     dependencyRules.statuses,
                     additionalMessage,
                     testName,
@@ -65,7 +66,8 @@ internal fun KoArchitectureScope.assert(
             throw KoAssertionFailedException(
                 getCheckFailedMessages(
                     failedFiles.distinct(),
-                    dependencyRules.dependencies,
+                    dependencyRules.positiveDependencies,
+                    dependencyRules.negativeDependencies,
                     dependencyRules.statuses,
                     additionalMessage,
                     testName,
@@ -142,7 +144,7 @@ private fun validateLayersContainingFailedFiles(
     val failedFiles = mutableListOf<FailedFiles>()
 
     dependencyRules
-        .dependencies
+        .positiveDependencies
         .forEach { (layer, layers) ->
             val otherLayers = (dependencyRules.allLayers - layers)
 
@@ -150,6 +152,25 @@ private fun validateLayersContainingFailedFiles(
                 .withPackage(layer.definedBy)
                 .onEach {
                     otherLayers.forEach { otherLayer ->
+                        val imports =
+                            it.imports.filter { import ->
+                                LocationUtil.resideInLocation(otherLayer.definedBy, import.name)
+                            }
+
+                        if (imports.isNotEmpty()) {
+                            failedFiles += FailedFiles(it.path, layer, otherLayer.name, imports)
+                        }
+                    }
+                }
+        }
+
+    dependencyRules
+        .negativeDependencies
+        .forEach { (layer, layers) ->
+            files
+                .withPackage(layer.definedBy)
+                .onEach {
+                    layers.forEach { otherLayer ->
                         val imports =
                             it.imports.filter { import ->
                                 LocationUtil.resideInLocation(otherLayer.definedBy, import.name)
@@ -173,7 +194,8 @@ private data class FailedFiles(
 
 private fun getCheckFailedMessages(
     failedFiles: List<FailedFiles>,
-    dependencies: Map<Layer, Set<Layer>>,
+    positiveDependencies: Map<Layer, Set<Layer>>,
+    negativeDependencies: Map<Layer, Set<Layer>>,
     statuses: Map<Layer, Status>,
     additionalMessage: String?,
     testName: String?,
@@ -193,12 +215,18 @@ private fun getCheckFailedMessages(
                             }"
                         }
 
-                val layerDependencies = (dependencies.getOrDefault(layer, emptySet()) - layer).map { it.name }
+                val positiveLayerDependencies = (positiveDependencies.getOrDefault(layer, emptySet()) - layer).map { it.name }
+
+                val negativeLayerDependencies = (negativeDependencies.getOrDefault(layer, emptySet()) - layer).map { it.name }
 
                 val message =
                     when (statuses.getOrDefault(layer, Status.NONE)) {
                         Status.DEPEND_ON_LAYER -> {
-                            "depends on ${layerDependencies.joinToString(", ")} assertion failure:"
+                            "depends on ${positiveLayerDependencies.joinToString(", ")} assertion failure:"
+                        }
+
+                        Status.NOT_DEPEND_ON_LAYER -> {
+                            "does not depend on ${negativeLayerDependencies.joinToString(", ")} assertion failure:"
                         }
 
                         Status.DEPENDENT_ON_NOTHING -> {

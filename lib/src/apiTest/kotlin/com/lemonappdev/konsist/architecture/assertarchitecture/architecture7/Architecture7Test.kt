@@ -118,7 +118,7 @@ class Architecture7Test {
     fun `fails when bad dependency using doesNotDependsOn is set (scope)`() {
         // given
         val sut = {
-            scope.assertArchitecture { domain.doesNotDependOn(adapter, port) }
+            scope.assertArchitecture { domain.doesNotDependOn(adapter, common) }
         }
 
         // then
@@ -131,7 +131,7 @@ class Architecture7Test {
         val sut = {
             scope
                 .files
-                .assertArchitecture { domain.doesNotDependOn(adapter, port) }
+                .assertArchitecture { domain.doesNotDependOn(adapter, common) }
         }
 
         // then
@@ -141,7 +141,7 @@ class Architecture7Test {
     @Test
     fun `fails when bad dependency using doesNotDependsOn is set and architecture is passed as parameter (scope)`() {
         // given
-        val architecture = architecture { domain.doesNotDependOn(adapter, port) }
+        val architecture = architecture { domain.doesNotDependOn(adapter, common) }
 
         val sut = {
             scope.assertArchitecture(architecture)
@@ -154,7 +154,7 @@ class Architecture7Test {
     @Test
     fun `fails when bad dependency using doesNotDependsOn is set and architecture is passed as parameter (files)`() {
         // given
-        val architecture = architecture { domain.doesNotDependOn(adapter, port) }
+        val architecture = architecture { domain.doesNotDependOn(adapter, common) }
 
         val sut = {
             scope

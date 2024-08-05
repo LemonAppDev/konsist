@@ -214,7 +214,7 @@ class Architecture5Test {
     fun `fails when bad dependency using doesNotDependsOn is set (scope)`() {
         // given
         val sut = {
-            scope.assertArchitecture { infrastructure.doesNotDependOn(application) }
+            scope.assertArchitecture { application.doesNotDependOn(infrastructure) }
         }
 
         // then
@@ -227,7 +227,7 @@ class Architecture5Test {
         val sut = {
             scope
                 .files
-                .assertArchitecture { infrastructure.doesNotDependOn(application) }
+                .assertArchitecture { application.doesNotDependOn(infrastructure) }
         }
 
         // then
@@ -237,7 +237,7 @@ class Architecture5Test {
     @Test
     fun `fails when bad dependency using doesNotDependsOn is set and architecture is passed as parameter (scope)`() {
         // given
-        val architecture = architecture { infrastructure.doesNotDependOn(application) }
+        val architecture = architecture { application.doesNotDependOn(infrastructure) }
 
         val sut = {
             scope.assertArchitecture(architecture)
@@ -250,7 +250,7 @@ class Architecture5Test {
     @Test
     fun `fails when bad dependency using doesNotDependsOn is set and architecture is passed as parameter (files)`() {
         // given
-        val architecture = architecture { infrastructure.doesNotDependOn(application) }
+        val architecture = architecture { application.doesNotDependOn(infrastructure) }
 
         val sut = {
             scope
