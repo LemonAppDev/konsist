@@ -86,7 +86,7 @@ class Architecture7Test {
     fun `passes when good dependency is set using doesNotDependsOn (scope)`() {
         // then
         scope
-            .assertArchitecture { domain.doesNotDependOn(adapter) }
+            .assertArchitecture { domain.doesNotDependOn(adapter, port) }
     }
 
     @Test
@@ -94,13 +94,13 @@ class Architecture7Test {
         // then
         scope
             .files
-            .assertArchitecture { domain.doesNotDependOn(adapter) }
+            .assertArchitecture { domain.doesNotDependOn(adapter, port) }
     }
 
     @Test
     fun `passes when good dependency is set using doesNotDependsOn and architecture is passed as parameter (scope)`() {
         // then
-        val architecture = architecture { domain.doesNotDependOn(adapter) }
+        val architecture = architecture { domain.doesNotDependOn(adapter, port) }
 
         scope.assertArchitecture(architecture)
     }
@@ -108,7 +108,7 @@ class Architecture7Test {
     @Test
     fun `passes when good dependency is set using doesNotDependsOn and architecture is passed as parameter (files)`() {
         // then
-        val architecture = architecture { domain.doesNotDependOn(adapter) }
+        val architecture = architecture { domain.doesNotDependOn(adapter, port) }
 
         scope
             .files

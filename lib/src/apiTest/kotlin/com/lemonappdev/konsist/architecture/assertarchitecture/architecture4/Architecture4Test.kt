@@ -79,6 +79,40 @@ class Architecture4Test {
     }
 
     @Test
+    fun `passes when dependency is set correctly using doesNotDependsOn (scope)`() {
+        // then
+        scope.assertArchitecture { domain.doesNotDependOn(data, presentation) }
+    }
+
+    @Test
+    fun `passes when dependency is set correctly using doesNotDependsOn (files)`() {
+        // then
+        scope
+            .files
+            .assertArchitecture { domain.doesNotDependOn(data, presentation) }
+    }
+
+    @Test
+    fun `passes when dependency is set correctly using doesNotDependsOn and architecture is passed as parameter (scope)`() {
+        // given
+        val architecture = architecture { domain.doesNotDependOn(data, presentation) }
+
+        // then
+        scope.assertArchitecture(architecture)
+    }
+
+    @Test
+    fun `passes when dependency is set correctly using doesNotDependsOn and architecture is passed as parameter (files)`() {
+        // given
+        val architecture = architecture { domain.doesNotDependOn(data, presentation) }
+
+        // then
+        scope
+            .files
+            .assertArchitecture(architecture)
+    }
+
+    @Test
     fun `fails when bad dependency is set (scope)`() {
         // when
         val sut =
@@ -169,6 +203,81 @@ class Architecture4Test {
                 "'fails when bad dependency is set and architecture is passed as parameter (files)' test has failed.\n",
             )
             message?.shouldContain("Presentation depends on Data assertion failure:\n")
+        }
+    }
+
+    @Test
+    fun `fails when bad dependency is set using doesNotDependsOn (scope)`() {
+        // when
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope.assertArchitecture { presentation.doesNotDependOn(data, domain) }
+            }
+
+        // then
+        assertSoftly(sut) {
+            message?.shouldContain("'fails when bad dependency is set using doesNotDependsOn (scope)' test has failed.\n")
+            message?.shouldContain("Presentation does not depend on Data, Domain assertion failure:\n")
+        }
+    }
+
+    @Test
+    fun `fails when bad dependency is set using doesNotDependsOn (files)`() {
+        // when
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope
+                    .files
+                    .assertArchitecture { presentation.doesNotDependOn(data, domain) }
+            }
+
+        // then
+        assertSoftly(sut) {
+            message?.shouldContain("'fails when bad dependency is set using doesNotDependsOn (files)' test has failed.\n")
+            message?.shouldContain("Presentation does not depend on Data, Domain assertion failure:\n")
+        }
+    }
+
+    @Test
+    fun `fails when bad dependency is set using doesNotDependsOn and architecture is passed as parameter (scope)`() {
+        // given
+        val architecture = architecture { presentation.doesNotDependOn(data, domain) }
+
+        // when
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope
+                    .assertArchitecture(architecture)
+            }
+
+        // then
+        assertSoftly(sut) {
+            message?.shouldContain(
+                "'fails when bad dependency is set using doesNotDependsOn and architecture is passed as parameter (scope)' test has failed.\n",
+            )
+            message?.shouldContain("Presentation does not depend on Data, Domain assertion failure:\n")
+        }
+    }
+
+    @Test
+    fun `fails when bad dependency is set using doesNotDependsOn and architecture is passed as parameter (files)`() {
+        // given
+        val architecture = architecture { presentation.doesNotDependOn(data, domain) }
+
+        // when
+        val sut =
+            shouldThrow<KoAssertionFailedException> {
+                scope
+                    .files
+                    .assertArchitecture(architecture)
+            }
+
+        // then
+        assertSoftly(sut) {
+            message?.shouldContain(
+                "'fails when bad dependency is set using doesNotDependsOn and architecture is passed as parameter (files)' test has failed.\n",
+            )
+            message?.shouldContain("Presentation does not depend on Data, Domain assertion failure:\n")
         }
     }
 }

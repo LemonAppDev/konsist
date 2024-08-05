@@ -92,10 +92,7 @@ class Architecture5Test {
     @Test
     fun `passes when good dependency is set using doesNotDependsOn (scope)`() {
         // then
-        scope
-            .assertArchitecture {
-                infrastructure.doesNotDependOn(presentation)
-            }
+        scope.assertArchitecture { presentation.doesNotDependOn(domain, infrastructure) }
     }
 
     @Test
@@ -103,31 +100,22 @@ class Architecture5Test {
         // then
         scope
             .files
-            .assertArchitecture {
-                infrastructure.doesNotDependOn(presentation)
-            }
+            .assertArchitecture { presentation.doesNotDependOn(domain, infrastructure) }
     }
 
     @Test
     fun `passes when good dependency is set using doesNotDependsOn and architecture is passed as parameter (scope)`() {
         // given
-        val architecture =
-            architecture {
-                infrastructure.doesNotDependOn(presentation)
-            }
+        val architecture = architecture { presentation.doesNotDependOn(domain, infrastructure) }
 
         // then
-        scope
-            .assertArchitecture(architecture)
+        scope.assertArchitecture(architecture)
     }
 
     @Test
     fun `passes when good dependency is set using doesNotDependsOn and architecture is passed as parameter (files)`() {
         // given
-        val architecture =
-            architecture {
-                infrastructure.doesNotDependOn(presentation)
-            }
+        val architecture = architecture { presentation.doesNotDependOn(domain, infrastructure) }
 
         // then
         scope
@@ -213,9 +201,7 @@ class Architecture5Test {
     @Test
     fun `fails when bad dependency using doesNotDependsOn is set (scope)`() {
         // given
-        val sut = {
-            scope.assertArchitecture { application.doesNotDependOn(infrastructure) }
-        }
+        val sut = { scope.assertArchitecture { application.doesNotDependOn(infrastructure) } }
 
         // then
         sut shouldThrow KoAssertionFailedException::class
@@ -239,9 +225,7 @@ class Architecture5Test {
         // given
         val architecture = architecture { application.doesNotDependOn(infrastructure) }
 
-        val sut = {
-            scope.assertArchitecture(architecture)
-        }
+        val sut = { scope.assertArchitecture(architecture) }
 
         // then
         sut shouldThrow KoAssertionFailedException::class
