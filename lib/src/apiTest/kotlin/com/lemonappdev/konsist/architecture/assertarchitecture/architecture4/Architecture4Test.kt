@@ -253,7 +253,8 @@ class Architecture4Test {
         // then
         assertSoftly(sut) {
             message?.shouldContain(
-                "'fails when bad dependency is set using doesNotDependsOn and architecture is passed as parameter (scope)' test has failed.\n",
+                "'fails when bad dependency is set using doesNotDependsOn and architecture is passed as" +
+                    " parameter (scope)' test has failed.\n",
             )
             message?.shouldContain("Presentation does not depend on Data, Domain assertion failure:\n")
         }
@@ -275,7 +276,8 @@ class Architecture4Test {
         // then
         assertSoftly(sut) {
             message?.shouldContain(
-                "'fails when bad dependency is set using doesNotDependsOn and architecture is passed as parameter (files)' test has failed.\n",
+                "'fails when bad dependency is set using doesNotDependsOn and architecture is passed as" +
+                    " parameter (files)' test has failed.\n",
             )
             message?.shouldContain("Presentation does not depend on Data, Domain assertion failure:\n")
         }
