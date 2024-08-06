@@ -8,6 +8,10 @@ open class SampleParentClass2
 
 open class SampleParentClassWithDuplicatedName
 
+open class SampleParentClassWithNestedDeclarations {
+    open class SampleNestedClass
+}
+
 class SampleClass
 
 class SampleClass1
@@ -63,6 +67,10 @@ interface SampleParentInterface
 interface SampleParentInterface1
 
 interface SampleParentInterface2
+
+interface SampleParentInterfaceWithNestedDeclarations {
+    interface SampleNestedInterface
+}
 
 interface SampleGenericSuperInterface<T>
 

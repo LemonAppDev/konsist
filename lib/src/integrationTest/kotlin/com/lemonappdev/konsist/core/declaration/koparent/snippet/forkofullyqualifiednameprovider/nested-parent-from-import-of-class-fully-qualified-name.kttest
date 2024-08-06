@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.SampleParentInterfaceWithNestedDeclarations
+
+class SampleBaseClass: SampleParentInterfaceWithNestedDeclarations.SampleNestedInterface()
