@@ -61,4 +61,53 @@ class Architecture1Test {
             .files
             .assertArchitecture(koArchitecture)
     }
+
+    @Test
+    fun `passes when dependency is set that Domain not depends on Presentation (scope)`() {
+        // then
+        scope
+            .assertArchitecture {
+                domain.doesNotDependOn(presentation)
+                presentation.dependsOnNothing()
+            }
+    }
+
+    @Test
+    fun `passes when dependency is set that Domain not depends on Presentation (files)`() {
+        // then
+        scope
+            .files
+            .assertArchitecture {
+                domain.doesNotDependOn(presentation)
+                presentation.dependsOnNothing()
+            }
+    }
+
+    @Test
+    fun `passes when dependency is set that Domain not depends on Presentation when architecture is passed as parameter (scope)`() {
+        // given
+        val koArchitecture =
+            architecture {
+                domain.dependsOnNothing()
+                presentation.dependsOnNothing()
+            }
+
+        // then
+        scope.assertArchitecture(koArchitecture)
+    }
+
+    @Test
+    fun `passes when dependency is set that Domain not depends on Presentation when architecture is passed as parameter (files)`() {
+        // given
+        val koArchitecture =
+            architecture {
+                domain.dependsOnNothing()
+                presentation.dependsOnNothing()
+            }
+
+        // then
+        scope
+            .files
+            .assertArchitecture(koArchitecture)
+    }
 }
