@@ -29,12 +29,7 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut
-            .fullyQualifiedName
-            .shouldBeEqualTo(
-                "com.lemonappdev.konsist.testdata." +
-                    "SampleParentClassWithNestedDeclarations.SampleNestedClass",
-            )
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleParentInterfaceWithNestedDeclarations.SampleNestedClass"
     }
 
     @Test
@@ -125,12 +120,7 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut
-            .fullyQualifiedName
-            .shouldBeEqualTo(
-                "com.lemonappdev.konsist.testdata." +
-                    "SampleParentInterfaceWithNestedDeclarations.SampleNestedInterface",
-            )
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleParentInterfaceWithNestedDeclarations.SampleNestedInterface"
     }
 
     @Test
@@ -221,12 +211,7 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut
-            .fullyQualifiedName
-            .shouldBeEqualTo(
-                "com.lemonappdev.konsist.testdata." +
-                    "SampleParentClassWithNestedDeclarations.SampleNestedClass",
-            )
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleParentClassWithNestedDeclarations.SampleNestedClass"
     }
 
     @Test
