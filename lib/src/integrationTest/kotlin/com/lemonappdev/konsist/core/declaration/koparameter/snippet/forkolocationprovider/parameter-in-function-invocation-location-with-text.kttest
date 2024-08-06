@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.SampleType
+
+fun sampleFunction(sampleParameter: SampleType) {}

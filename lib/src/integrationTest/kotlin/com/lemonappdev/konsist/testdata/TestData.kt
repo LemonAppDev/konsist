@@ -81,6 +81,7 @@ annotation class NonExistingAnnotation
     AnnotationTarget.TYPEALIAS,
     AnnotationTarget.LOCAL_VARIABLE,
     AnnotationTarget.TYPE,
+    AnnotationTarget.VALUE_PARAMETER,
 )
 annotation class SampleAnnotation
 
@@ -93,6 +94,7 @@ annotation class SampleAnnotation
     AnnotationTarget.TYPEALIAS,
     AnnotationTarget.LOCAL_VARIABLE,
     AnnotationTarget.TYPE,
+    AnnotationTarget.VALUE_PARAMETER,
 )
 annotation class SampleAnnotation1
 
@@ -105,6 +107,7 @@ annotation class SampleAnnotation1
     AnnotationTarget.TYPEALIAS,
     AnnotationTarget.LOCAL_VARIABLE,
     AnnotationTarget.TYPE,
+    AnnotationTarget.VALUE_PARAMETER,
 )
 annotation class SampleAnnotation2
 
