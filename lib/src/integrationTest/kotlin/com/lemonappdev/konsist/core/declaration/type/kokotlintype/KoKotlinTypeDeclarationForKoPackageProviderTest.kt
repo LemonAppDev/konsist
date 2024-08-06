@@ -16,7 +16,7 @@ class KoKotlinTypeDeclarationForKoPackageProviderTest {
                 ?.asKotlinTypeDeclaration()
 
         // then
-        sut?.packagee?.fullyQualifiedName shouldBeEqualTo "kotlin"
+        sut?.packagee?.name shouldBeEqualTo "kotlin"
     }
 
     @Test
@@ -30,7 +30,7 @@ class KoKotlinTypeDeclarationForKoPackageProviderTest {
                 ?.asKotlinTypeDeclaration()
 
         // then
-        sut?.packagee?.fullyQualifiedName shouldBeEqualTo "kotlin"
+        sut?.packagee?.name shouldBeEqualTo "kotlin"
     }
 
     @Test
@@ -44,7 +44,7 @@ class KoKotlinTypeDeclarationForKoPackageProviderTest {
                 ?.asKotlinTypeDeclaration()
 
         // then
-        sut?.packagee?.fullyQualifiedName shouldBeEqualTo "kotlin.collections"
+        sut?.packagee?.name shouldBeEqualTo "kotlin.collections"
     }
 
     @Test
@@ -58,7 +58,7 @@ class KoKotlinTypeDeclarationForKoPackageProviderTest {
                 ?.asKotlinTypeDeclaration()
 
         // then
-        sut?.packagee?.fullyQualifiedName shouldBeEqualTo "kotlin.collections"
+        sut?.packagee?.name shouldBeEqualTo "kotlin.collections"
     }
 
     private fun getSnippetFile(fileName: String) =

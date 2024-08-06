@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.core.util.PathUtil.separator
 
 internal interface KoPackageMatchingPathProviderCore :
     KoPackageMatchingPathProvider,
-    KoFullyQualifiedNameProviderCore,
+    KoNameProviderCore,
     KoContainingFileProviderCore,
     KoPathProviderCore,
     KoBaseProviderCore {
@@ -13,5 +13,5 @@ internal interface KoPackageMatchingPathProviderCore :
         get() =
             path
                 .replace(separator, ".")
-                .endsWith(fullyQualifiedName + "." + containingFile.nameWithExtension)
+                .endsWith(name + "." + containingFile.nameWithExtension)
 }

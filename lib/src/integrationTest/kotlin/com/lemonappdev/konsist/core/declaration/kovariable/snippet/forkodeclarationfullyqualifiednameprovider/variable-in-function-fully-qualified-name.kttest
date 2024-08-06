@@ -1,5 +1,0 @@
-package com.samplepackage
-
-fun sampleFunction() {
-    val sampleVariable = ""
-}

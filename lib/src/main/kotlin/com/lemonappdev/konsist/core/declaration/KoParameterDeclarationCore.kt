@@ -10,7 +10,6 @@ import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
-import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDefaultValueProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -33,7 +32,6 @@ import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtParameter
-import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.KtTypeReference
 
 internal class KoParameterDeclarationCore private constructor(
@@ -44,7 +42,6 @@ internal class KoParameterDeclarationCore private constructor(
         KoBaseProviderCore,
         KoAnnotationProviderCore,
         KoContainingFileProviderCore,
-        KoDeclarationFullyQualifiedNameProviderCore,
         KoDefaultValueProviderCore,
         KoLocationProviderCore,
         KoModifierProviderCore,
@@ -66,8 +63,6 @@ internal class KoParameterDeclarationCore private constructor(
         override val ktAnnotated: KtAnnotated by lazy { ktParameter }
 
         override val ktModifierListOwner: KtModifierListOwner by lazy { ktParameter }
-
-        override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktParameter }
 
         override val psiElement: PsiElement by lazy { ktParameter }
 

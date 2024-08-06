@@ -5,7 +5,6 @@ import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
-import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
@@ -19,13 +18,12 @@ import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtPackageDirective
 
 internal class KoPackageDeclarationCore internal constructor(
-    private val fqn: String,
+    private val qualifiedName: String,
     override val ktElement: KtElement,
 ) :
     KoPackageDeclaration,
         KoBaseProviderCore,
         KoContainingFileProviderCore,
-        KoFullyQualifiedNameProviderCore,
         KoLocationProviderCore,
         KoNameProviderCore,
         KoPackageMatchingPathProviderCore,
@@ -45,9 +43,9 @@ internal class KoPackageDeclarationCore internal constructor(
         override val psiElement: PsiElement
             get() = ktElement
 
-        override val fullyQualifiedName: String by lazy {
+        override val name: String by lazy {
             if (ktPackageDirective == null) {
-                fqn.substringBeforeLast(".")
+                qualifiedName.substringBeforeLast(".")
             } else if (ktPackageDirective?.fqName != FqName.ROOT) {
                 ktPackageDirective?.fqName.toString()
             } else {

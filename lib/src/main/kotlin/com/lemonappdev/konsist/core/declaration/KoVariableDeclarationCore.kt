@@ -8,7 +8,6 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
-import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -42,7 +41,6 @@ internal class KoVariableDeclarationCore private constructor(
         KoContainingFileProviderCore,
         KoDelegateProviderCore,
         KoNullableTypeProviderCore,
-        KoFullyQualifiedNameProviderCore,
         KoKDocProviderCore,
         KoLocationProviderCore,
         KoNameProviderCore,
@@ -86,8 +84,6 @@ internal class KoVariableDeclarationCore private constructor(
         override val hasValModifier: Boolean by lazy { !ktProperty.isVar }
 
         override val hasVarModifier: Boolean by lazy { ktProperty.isVar }
-
-        override val fullyQualifiedName: String by lazy { name }
 
         override fun toString(): String = name
 

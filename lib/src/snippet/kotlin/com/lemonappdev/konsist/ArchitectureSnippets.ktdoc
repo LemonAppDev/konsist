@@ -28,7 +28,7 @@ class ArchitectureSnippets {
         Konsist
             .scopeFromProject()
             .files
-            .assertTrue { it.packagee?.fullyQualifiedName?.startsWith(it.moduleName) }
+            .assertTrue { it.packagee?.name?.startsWith(it.moduleName) }
     }
 
     fun `files reside in package that is derived from module name`() {
