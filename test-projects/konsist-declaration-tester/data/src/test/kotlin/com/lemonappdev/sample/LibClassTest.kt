@@ -47,7 +47,7 @@ enum class LibEnumClassTest {
 fun libFunctionTest(libTestParameter: String) {
     @Suppress("detekt.UnusedPrivateProperty")
     val libVariableTest = ""
-    println("some text")
+    println(libTestParameter)
 }
 
 typealias libTypeAliasTest = String
