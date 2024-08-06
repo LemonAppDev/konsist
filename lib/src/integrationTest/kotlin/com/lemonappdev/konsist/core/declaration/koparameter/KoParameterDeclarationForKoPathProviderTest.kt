@@ -57,7 +57,7 @@ class KoParameterDeclarationForKoPathProviderTest {
             ?.projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koparameter/snippet/" +
-                        "forkopathprovider/parameter-in-constructor-project-file-path.kt",
+                    "forkopathprovider/parameter-in-constructor-project-file-path.kt",
             )
     }
 
@@ -76,7 +76,7 @@ class KoParameterDeclarationForKoPathProviderTest {
             .projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koparameter/snippet/" +
-                        "forkopathprovider/parameter-in-function-invocation-project-file-path.kt",
+                    "forkopathprovider/parameter-in-function-invocation-project-file-path.kt",
             )
     }
 
