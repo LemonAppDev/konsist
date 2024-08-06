@@ -48,7 +48,7 @@ fun libFunction(libParameter: String) {
     @Suppress("detekt.UnusedPrivateProperty")
     val libVariable = ""
 
-    println("some text")
+    println(libParameter)
 }
 
 typealias libTypeAlias = String

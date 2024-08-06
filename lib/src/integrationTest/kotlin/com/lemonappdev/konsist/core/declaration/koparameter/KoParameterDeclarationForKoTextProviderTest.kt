@@ -57,7 +57,3 @@ class KoParameterDeclarationForKoTextProviderTest {
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koparameter/snippet/forkotextprovider/", fileName)
 }
-
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-
-fun sampleFunction(@SampleAnnotation sampleParameter: Int) {}
