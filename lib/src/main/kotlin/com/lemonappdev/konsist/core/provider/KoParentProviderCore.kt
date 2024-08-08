@@ -38,17 +38,16 @@ internal interface KoParentProviderCore :
                         containingFile
                             .imports
                             .firstOrNull { import ->
-                                if (import.alias != null) {
+                                if (import?.alias != null) {
                                     import.alias?.name == innerName
                                 } else {
                                     import.name.substringAfterLast(".") == innerName
                                 }
                             }
 
-                    val fqn =
-                        import
-                            ?.name
-                            ?: (containingFile.packagee?.name + "." + name)
+                    val fqn = import
+                        ?.name
+                        ?: (containingFile.packagee?.name + "." + name)
 
                     val isAlias = import?.alias != null
 

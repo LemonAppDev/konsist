@@ -32,11 +32,10 @@ object DataCore {
             .typeAliases
     }
 }
-
 fun getClass(
     name: String,
     fqn: String?,
-    isAlias: Boolean = false,
+    isAlias: Boolean =  false,
     containingFile: KoFileDeclaration,
 ): KoClassDeclaration? =
     DataCore
