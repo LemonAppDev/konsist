@@ -32,15 +32,19 @@ object DataCore {
             .typeAliases
     }
 }
-
 fun getClass(
     name: String,
     fqn: String?,
+    isAlias: Boolean =  false,
     containingFile: KoFileDeclaration,
 ): KoClassDeclaration? =
     DataCore
         .classes
-        .firstOrNull { decl -> (decl.packagee?.name + "." + decl.name) == fqn }
+        .firstOrNull { decl ->
+            val declarationQualifiedName = if (fqn?.endsWith(name) == true || isAlias) fqn else "$fqn.$name"
+
+            decl.fullyQualifiedName == declarationQualifiedName
+        }
         ?: containingFile
             .classes()
             .firstOrNull { decl -> decl.name == name }
@@ -48,11 +52,16 @@ fun getClass(
 fun getInterface(
     name: String,
     fqn: String?,
+    isAlias: Boolean,
     containingFile: KoFileDeclaration,
 ): KoInterfaceDeclaration? =
     DataCore
         .interfaces
-        .firstOrNull { decl -> (decl.packagee?.name + "." + decl.name) == fqn }
+        .firstOrNull { decl ->
+            val declarationQualifiedName = if (fqn?.endsWith(name) == true || isAlias) fqn else "$fqn.$name"
+
+            decl.fullyQualifiedName == declarationQualifiedName
+        }
         ?: containingFile
             .interfaces()
             .firstOrNull { decl -> decl.name == name }
@@ -60,11 +69,16 @@ fun getInterface(
 fun getObject(
     name: String,
     fqn: String?,
+    isAlias: Boolean,
     containingFile: KoFileDeclaration,
 ): KoObjectDeclaration? =
     DataCore
         .objects
-        .firstOrNull { decl -> (decl.packagee?.name + "." + decl.name) == fqn }
+        .firstOrNull { decl ->
+            val declarationQualifiedName = if (fqn?.endsWith(name) == true || isAlias) fqn else "$fqn.$name"
+
+            decl.fullyQualifiedName == declarationQualifiedName
+        }
         ?: containingFile
             .objects()
             .firstOrNull { decl -> decl.name == name }

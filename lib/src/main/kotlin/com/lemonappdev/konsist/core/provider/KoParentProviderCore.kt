@@ -31,18 +31,29 @@ internal interface KoParentProviderCore :
                             .substringBefore("(")
                             .substringBefore("<")
 
-                    val fqn =
+                    val innerName = if (name.contains(".")) name.substringBeforeLast(".") else name
+                    val outerName = if (name.contains(".")) name.substringAfterLast(".") else name
+
+                    val import =
                         containingFile
                             .imports
                             .firstOrNull { import ->
-                                import.name.substringAfterLast(".") == name || import.alias?.name == name
+                                if (import?.alias != null) {
+                                    import.alias?.name == innerName
+                                } else {
+                                    import.name.substringAfterLast(".") == innerName
+                                }
                             }
-                            ?.name
-                            ?: (containingFile.packagee?.name + "." + name)
 
-                    return@map getClass(name, fqn, containingFile)
-                        ?: getInterface(name, fqn, containingFile)
-                        ?: KoExternalDeclarationCore.getInstance(name, it)
+                    val fqn = import
+                        ?.name
+                        ?: (containingFile.packagee?.name + "." + name)
+
+                    val isAlias = import?.alias != null
+
+                    return@map getClass(outerName, fqn, isAlias, containingFile)
+                        ?: getInterface(outerName, fqn, isAlias, containingFile)
+                        ?: KoExternalDeclarationCore.getInstance(outerName, it)
                 }
                 ?.toMutableList()
                 .orEmpty()
