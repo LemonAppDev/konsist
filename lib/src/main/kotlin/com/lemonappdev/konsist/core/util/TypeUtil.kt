@@ -27,31 +27,29 @@ object TypeUtil {
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
     ): KoBaseTypeDeclaration? {
-        val type =
-            if (isExtension && types.size > 1) {
-                // The last element is chosen because, in the case of an extension, the first element is the receiver
-                // and the second element is the return type.
-                types.last()
+        val type = if (isExtension && types.size > 1) {
+            // The last element is chosen because, in the case of an extension, the first element is the receiver
+            // and the second element is the return type.
+            types.last()
+        } else {
+            if (!isExtension) {
+                types.firstOrNull()
             } else {
-                if (!isExtension) {
-                    types.firstOrNull()
-                } else {
-                    null
-                }
-                    ?.children
-                    // The last item is chosen because when a type is preceded by an annotation or modifier,
-                    // the type being searched for is the last item in the list.
-                    ?.lastOrNull()
+                null
             }
+                ?.children
+                // The last item is chosen because when a type is preceded by an annotation or modifier,
+                // the type being searched for is the last item in the list.
+                ?.lastOrNull()
+        }
 
-        val nestedType =
-            if (type is KtNullableType) {
-                type
-                    .children
-                    .firstOrNull()
-            } else {
-                type
-            }
+        val nestedType = if (type is KtNullableType) {
+            type
+                .children
+                .firstOrNull()
+        } else {
+            type
+        }
 
         val importDirective =
             containingFile
@@ -70,52 +68,27 @@ object TypeUtil {
         kClass: KClass<*>,
     ): Boolean = kClass.qualifiedName == (type?.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
 
-    /*
-    1.0.0 CleanUp - When we remove KoReceiverTypeProviderCore.hasReceiverType it will be unused.
-     */
-    internal fun getReceiverType(
-        types: List<KtTypeReference>,
-        isExtension: Boolean,
-        containingDeclaration: KoBaseDeclaration,
-    ): KoTypeDeclaration? {
-        val type =
-            if (isExtension) {
-                types.first()
-            } else {
-                null
-            }
-                ?.children
-                ?.firstOrNull()
-
-        return if (type is KtTypeReference) {
-            KoTypeDeclarationCore.getInstance(type, containingDeclaration)
-        } else {
-            null
-        }
-    }
-
     @Suppress("detekt.CyclomaticComplexMethod")
     private fun transformPsiElementToKoTypeDeclaration(
         type: PsiElement?,
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
     ): KoBaseTypeDeclaration? {
-        val nestedType =
-            if (type is KtNullableType) {
-                type
-                    .children
-                    .firstOrNull()
-            } else {
-                type
-            }
+        val nestedType = if (type is KtNullableType) {
+            type
+                .children
+                .firstOrNull()
+        } else {
+            type
+        }
+
         val typeText = nestedType?.text
 
-        val fqn =
-            containingFile
-                .imports
-                .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
-                ?.name
-                ?: (containingFile.packagee?.name + "." + typeText)
+        val fqn = containingFile
+            .imports
+            .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
+            ?.name
+            ?: (containingFile.packagee?.name + "." + typeText)
 
         return when {
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
@@ -142,18 +115,6 @@ object TypeUtil {
             else -> null
         }
     }
-
-    /*
-    1.0.0 CleanUp - When we remove KoReceiverTypeProviderCore.hasReceiverType it will be unused.
-     */
-    internal fun hasReceiverType(
-        receiverType: KoTypeDeclaration?,
-        name: String?,
-    ): Boolean =
-        when (name) {
-            null -> receiverType != null
-            else -> receiverType?.name == name
-        }
 
     internal fun isKotlinBasicType(name: String): Boolean = kotlinBasicTypes.any { it == name }
 
