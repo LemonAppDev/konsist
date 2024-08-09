@@ -51,7 +51,6 @@ internal class KoParameterDeclarationCore private constructor(
         KoPathProviderCore,
         KoModuleProviderCore,
         KoSourceSetProviderCore,
-        KoRepresentsTypeProviderCore,
         KoResideInPackageProviderCore,
         KoTextProviderCore,
         KoNonNullableTypeProviderCore,
@@ -79,7 +78,7 @@ internal class KoParameterDeclarationCore private constructor(
                 ?: throw KoInternalException("Class type cannot be null")
         }
 
-        override fun representsType(name: String?): Boolean = type.name == name // todo: add this?: || type.fullyQualifiedName == name
+        override fun representsType(name: String?): Boolean = type.name == name
 
         override val hasValModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "val" }
 
