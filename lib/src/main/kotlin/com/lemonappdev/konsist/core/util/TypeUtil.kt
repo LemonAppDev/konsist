@@ -4,10 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
-import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoFunctionTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
@@ -89,25 +86,29 @@ object TypeUtil {
 
         val typeText = nestedType?.text
 
-        var fqn = containingFile
-            .imports
-            .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
-            ?.name
+        var fqn =
+            containingFile
+                .imports
+                .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
+                ?.name
 
-        val declarations = containingFile
-            .declarations()
-            .filterIsInstance<KoFullyQualifiedNameProvider>()
-            .filter { it.fullyQualifiedName?.endsWith(typeText ?: "") == true }
+        val declarations =
+            containingFile
+                .declarations()
+                .filterIsInstance<KoFullyQualifiedNameProvider>()
+                .filter { it.fullyQualifiedName?.endsWith(typeText ?: "") == true }
 
-        val parentDeclFqn = if (parentDeclaration is KoFullyQualifiedNameProvider && parentDeclaration.fullyQualifiedName != null) {
-            parentDeclaration.fullyQualifiedName!!.substringBeforeLast(".")
-        } else {
-            (parentDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName ?: ""
-        }
+        val parentDeclFqn =
+            if (parentDeclaration is KoFullyQualifiedNameProvider && parentDeclaration.fullyQualifiedName != null) {
+                parentDeclaration.fullyQualifiedName!!.substringBeforeLast(".")
+            } else {
+                (parentDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName ?: ""
+            }
 
-        val decl = declarations.singleOrNull() ?: declarations.firstOrNull {
-            it.fullyQualifiedName?.contains(parentDeclFqn) == true
-        }
+        val decl =
+            declarations.singleOrNull() ?: declarations.firstOrNull {
+                it.fullyQualifiedName?.contains(parentDeclFqn) == true
+            }
 
         fqn = fqn ?: decl?.fullyQualifiedName
 

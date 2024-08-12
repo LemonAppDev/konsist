@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.model
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
@@ -66,7 +65,7 @@ fun getInterface(
         .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
         ?: containingFile
             .interfaces()
-            .firstOrNull {decl -> decl.fullyQualifiedName == declarationQualifiedName}
+            .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
         ?: containingFile
             .interfaces()
             .firstOrNull { decl -> decl.name == name }
@@ -85,7 +84,7 @@ fun getObject(
         .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
         ?: containingFile
             .objects()
-            .firstOrNull {decl -> decl.fullyQualifiedName == declarationQualifiedName}
+            .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
         ?: containingFile
             .objects()
             .firstOrNull { decl -> decl.name == name }
