@@ -99,7 +99,11 @@ object TypeUtil {
             .filterIsInstance<KoFullyQualifiedNameProvider>()
             .filter { it.fullyQualifiedName?.endsWith(typeText ?: "") == true }
 
-        val parentDeclFqn = (parentDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName.orEmpty()
+        val parentDeclFqn = if (parentDeclaration is KoFullyQualifiedNameProvider && parentDeclaration.fullyQualifiedName != null) {
+            parentDeclaration.fullyQualifiedName!!.substringBeforeLast(".")
+        } else {
+            (parentDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName ?: ""
+        }
 
         val decl = declarations.singleOrNull() ?: declarations.firstOrNull {
             it.fullyQualifiedName?.contains(parentDeclFqn) == true
@@ -113,18 +117,18 @@ object TypeUtil {
                 if (isKotlinBasicType(typeText) || isKotlinCollectionTypes(typeText)) {
                     KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
                 } else {
-                    getClass(typeText, fqn, false, parentDeclaration, containingFile)
-                        ?: getInterface(typeText, fqn, false, parentDeclaration, containingFile)
-                        ?: getObject(typeText, fqn, false, parentDeclaration, containingFile)
+                    getClass(typeText, fqn, false, containingFile)
+                        ?: getInterface(typeText, fqn, false, containingFile)
+                        ?: getObject(typeText, fqn, false, containingFile)
                         ?: getTypeAlias(typeText, fqn, containingFile)
                         ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
                 }
             }
 
             nestedType is KtTypeReference && typeText != null -> {
-                getClass(typeText, fqn, false, parentDeclaration, containingFile)
-                    ?: getInterface(typeText, fqn, false, parentDeclaration, containingFile)
-                    ?: getObject(typeText, fqn, false, parentDeclaration, containingFile)
+                getClass(typeText, fqn, false, containingFile)
+                    ?: getInterface(typeText, fqn, false, containingFile)
+                    ?: getObject(typeText, fqn, false, containingFile)
                     ?: getTypeAlias(typeText, fqn, containingFile)
                     ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
             }

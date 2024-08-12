@@ -18,9 +18,21 @@ interface ContractB {
 
 @Frank
 interface ContractC {
-    fun method(arg: Foo): Foo
+    fun method(arg: Foo):  Foo
 
     data class Foo(val other: String)
 }
 
 // Todo: remove file
+
+
+
+interface FirstInterface {
+    class NestedClass(val arg: SampleNestedObjectWithTheSameName?)
+    object SampleNestedObjectWithTheSameName
+}
+
+interface SecondInterface {
+    class NestedClass(val arg: SampleNestedObjectWithTheSameName?)
+    object SampleNestedObjectWithTheSameName
+}
