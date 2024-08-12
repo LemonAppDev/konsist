@@ -3,13 +3,7 @@ package com.lemonappdev.konsist.core.declaration.koparameter
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
-import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
-import com.lemonappdev.konsist.api.provider.KoFunctionProvider
-import com.lemonappdev.konsist.api.provider.KoTextProvider
-import org.amshove.kluent.assertSoftly
-import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
-import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoParameterDeclarationForKoContainingDeclarationProviderTest {

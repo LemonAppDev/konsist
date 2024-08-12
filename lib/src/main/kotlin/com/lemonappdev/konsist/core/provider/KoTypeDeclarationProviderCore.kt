@@ -14,7 +14,6 @@ import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
 import com.lemonappdev.konsist.core.exception.KoInternalException
-import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
@@ -89,9 +88,9 @@ internal interface KoTypeDeclarationProviderCore :
 
     override fun hasDeclarationOf(kClass: KClass<*>): Boolean =
         hasClassDeclarationOf(kClass) || hasObjectDeclarationOf(kClass) || hasInterfaceDeclarationOf(kClass) ||
-                hasKotlinTypeDeclarationOf(
-                    kClass,
-                ) || hasExternalTypeDeclarationOf(kClass)
+            hasKotlinTypeDeclarationOf(
+                kClass,
+            ) || hasExternalTypeDeclarationOf(kClass)
 
     override fun hasClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -99,8 +98,7 @@ internal interface KoTypeDeclarationProviderCore :
             else -> asClassDeclaration()?.let { predicate(it) } ?: false
         }
 
-    override fun hasClassDeclarationOf(kClass: KClass<*>): Boolean =
-        kClass.qualifiedName == asClassDeclaration()?.fullyQualifiedName
+    override fun hasClassDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asClassDeclaration()?.fullyQualifiedName
 
     override fun hasObjectDeclaration(predicate: ((KoObjectDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -108,8 +106,7 @@ internal interface KoTypeDeclarationProviderCore :
             else -> asObjectDeclaration()?.let { predicate(it) } ?: false
         }
 
-    override fun hasObjectDeclarationOf(kClass: KClass<*>): Boolean =
-        kClass.qualifiedName == asObjectDeclaration()?.fullyQualifiedName
+    override fun hasObjectDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asObjectDeclaration()?.fullyQualifiedName
 
     override fun hasInterfaceDeclaration(predicate: ((KoInterfaceDeclaration) -> Boolean)?): Boolean =
         when (predicate) {

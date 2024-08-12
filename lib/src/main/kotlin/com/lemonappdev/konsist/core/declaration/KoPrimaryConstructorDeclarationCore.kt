@@ -31,6 +31,3 @@ internal class KoPrimaryConstructorDeclarationCore private constructor(
                 }
         }
     }
-class SampleClass() {
-    constructor(sampleParameter2: String): this()
-}

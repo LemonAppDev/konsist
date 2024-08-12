@@ -1009,7 +1009,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
         )
 
     companion object {
-        @Suppress("unused")
+        @Suppress("unused", "detekt.LongMethod")
         @JvmStatic
         fun provideValues() =
             listOf(
@@ -1017,19 +1017,19 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
                     "nullable-kotlin-basic-type",
                     KoKotlinTypeDeclaration::class,
                     KoClassDeclaration::class,
-                    "kotlin.String"
+                    "kotlin.String",
                 ),
                 arguments(
                     "not-nullable-kotlin-basic-type",
                     KoKotlinTypeDeclaration::class,
                     KoClassDeclaration::class,
-                    "kotlin.String"
+                    "kotlin.String",
                 ),
                 arguments(
                     "nullable-kotlin-collection-type",
                     KoKotlinTypeDeclaration::class,
                     KoClassDeclaration::class,
-                    "kotlin.collections.List"
+                    "kotlin.collections.List",
                 ),
                 arguments(
                     "not-nullable-kotlin-collection-type",
@@ -1041,43 +1041,43 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
                     "nullable-class-type",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.lemonappdev.konsist.testdata.SampleType"
+                    "com.lemonappdev.konsist.testdata.SampleType",
                 ),
                 arguments(
                     "not-nullable-class-type",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.lemonappdev.konsist.testdata.SampleType"
+                    "com.lemonappdev.konsist.testdata.SampleType",
                 ),
                 arguments(
                     "nullable-interface-type",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.lemonappdev.konsist.testdata.SampleInterface"
+                    "com.lemonappdev.konsist.testdata.SampleInterface",
                 ),
                 arguments(
                     "not-nullable-interface-type",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.lemonappdev.konsist.testdata.SampleInterface"
+                    "com.lemonappdev.konsist.testdata.SampleInterface",
                 ),
                 arguments(
                     "nullable-object-type",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.lemonappdev.konsist.testdata.SampleObject"
+                    "com.lemonappdev.konsist.testdata.SampleObject",
                 ),
                 arguments(
                     "not-nullable-object-type",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.lemonappdev.konsist.testdata.SampleObject"
+                    "com.lemonappdev.konsist.testdata.SampleObject",
                 ),
                 arguments(
                     "nullable-function-type",
                     KoFunctionTypeDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    null
+                    null,
                 ),
                 arguments(
                     "not-nullable-function-type",
@@ -1089,37 +1089,37 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
                     "nullable-import-alias-type",
                     KoImportAliasDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    null
+                    null,
                 ),
                 arguments(
                     "not-nullable-import-alias-type",
                     KoImportAliasDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    null
+                    null,
                 ),
                 arguments(
                     "nullable-typealias-type",
                     KoTypeAliasDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.lemonappdev.konsist.testdata.SampleTypeAlias"
+                    "com.lemonappdev.konsist.testdata.SampleTypeAlias",
                 ),
                 arguments(
                     "not-nullable-typealias-type",
                     KoTypeAliasDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "SampleTypeAlias"
+                    "SampleTypeAlias",
                 ),
                 arguments(
                     "nullable-external-type",
                     KoExternalDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalClass"
+                    "com.lemonappdev.konsist.externalsample.SampleExternalClass",
                 ),
                 arguments(
                     "not-nullable-external-type",
                     KoExternalDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalClass"
+                    "com.lemonappdev.konsist.externalsample.SampleExternalClass",
                 ),
             )
 
@@ -1131,37 +1131,37 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
                     "nullable-nested-class-type-with-the-same-name",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedClassWithTheSameName"
+                    "SecondInterface.SampleNestedClassWithTheSameName",
                 ),
                 arguments(
                     "not-nullable-nested-class-type-with-the-same-name",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedClassWithTheSameName"
+                    "SecondInterface.SampleNestedClassWithTheSameName",
                 ),
                 arguments(
                     "nullable-nested-interface-type-with-the-same-name",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedInterfaceWithTheSameName"
+                    "SecondInterface.SampleNestedInterfaceWithTheSameName",
                 ),
                 arguments(
                     "not-nullable-nested-interface-type-with-the-same-name",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedInterfaceWithTheSameName"
+                    "SecondInterface.SampleNestedInterfaceWithTheSameName",
                 ),
                 arguments(
                     "nullable-nested-object-type-with-the-same-name",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                   "SecondInterface.SampleNestedObjectWithTheSameName"
+                    "SecondInterface.SampleNestedObjectWithTheSameName",
                 ),
                 arguments(
                     "not-nullable-nested-object-type-with-the-same-name",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                   "SecondInterface.SampleNestedObjectWithTheSameName"
+                    "SecondInterface.SampleNestedObjectWithTheSameName",
                 ),
             )
     }

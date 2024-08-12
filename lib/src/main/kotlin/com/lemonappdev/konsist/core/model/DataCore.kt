@@ -50,7 +50,7 @@ fun getClass(
         }
         ?: containingFile
             .classes()
-            .firstOrNull { decl -> decl.name == name  && decl.containingDeclaration == containingDeclaration}
+            .firstOrNull { decl -> decl.name == name && decl.containingDeclaration == containingDeclaration }
 
 fun getInterface(
     name: String,
@@ -68,7 +68,7 @@ fun getInterface(
         }
         ?: containingFile
             .interfaces()
-            .firstOrNull { decl -> decl.name == name  && decl.containingDeclaration == containingDeclaration}
+            .firstOrNull { decl -> decl.name == name && decl.containingDeclaration == containingDeclaration }
 
 fun getObject(
     name: String,
@@ -86,7 +86,7 @@ fun getObject(
         }
         ?: containingFile
             .objects()
-            .firstOrNull { decl -> decl.name == name  && decl.containingDeclaration == containingDeclaration}
+            .firstOrNull { decl -> decl.name == name && decl.containingDeclaration == containingDeclaration }
 
 fun getTypeAlias(
     name: String,

@@ -101,28 +101,28 @@ internal class KoFunctionDeclarationCore private constructor(
         KoExpectModifierProviderCore {
         override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }
 
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktCallableDeclaration }
+        override val ktModifierListOwner: KtModifierListOwner by lazy { ktCallableDeclaration }
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktCallableDeclaration }
+        override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktCallableDeclaration }
 
-    override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktFunction }
+        override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktFunction }
 
-    override val psiElement: PsiElement by lazy { ktFunction }
+        override val psiElement: PsiElement by lazy { ktFunction }
 
-    override val ktElement: KtElement by lazy { ktFunction }
+        override val ktElement: KtElement by lazy { ktFunction }
 
-    override val ktDeclarationWithBody: KtDeclarationWithBody by lazy { ktFunction }
+        override val ktDeclarationWithBody: KtDeclarationWithBody by lazy { ktFunction }
 
-    override val ktDeclaration: KtDeclaration by lazy { ktFunction }
+        override val ktDeclaration: KtDeclaration by lazy { ktFunction }
 
-    override val localDeclarations: List<KoBaseDeclaration> by lazy {
-        val psiElements =
-            ktFunction
-                .bodyBlockExpression
-                ?.children
+        override val localDeclarations: List<KoBaseDeclaration> by lazy {
+            val psiElements =
+                ktFunction
+                    .bodyBlockExpression
+                    ?.children
 
-        KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
-    }
+            KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
+        }
 
     /*
     Remove in version 0.18.0
@@ -144,17 +144,25 @@ internal class KoFunctionDeclarationCore private constructor(
         }
     }
 
+    override val fullyQualifiedName: String? by lazy {
+        if (this.isTopLevel) {
+            super.fullyQualifiedName
+        } else {
+            null
+        }
+    }
+
         override fun toString(): String = name
 
-    internal companion object {
-        private val cache: KoDeclarationCache<KoFunctionDeclaration> = KoDeclarationCache()
+        internal companion object {
+            private val cache: KoDeclarationCache<KoFunctionDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(
-            ktFunction: KtFunction,
-            containingDeclaration: KoBaseDeclaration,
-        ): KoFunctionDeclaration =
-            cache.getOrCreateInstance(ktFunction, containingDeclaration) {
-                KoFunctionDeclarationCore(ktFunction, containingDeclaration)
-            }
+            internal fun getInstance(
+                ktFunction: KtFunction,
+                containingDeclaration: KoBaseDeclaration,
+            ): KoFunctionDeclaration =
+                cache.getOrCreateInstance(ktFunction, containingDeclaration) {
+                    KoFunctionDeclarationCore(ktFunction, containingDeclaration)
+                }
+        }
     }
-}

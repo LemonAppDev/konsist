@@ -1,11 +1,8 @@
 package com.lemonappdev.konsist.api
 
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.ext.list.functions
 import com.lemonappdev.konsist.api.ext.list.parameters
-import com.lemonappdev.konsist.api.ext.list.print
 import com.lemonappdev.konsist.api.ext.list.returnTypes
-import com.lemonappdev.konsist.api.ext.list.types
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withParameter
 import com.lemonappdev.konsist.api.ext.list.withProperty
@@ -37,7 +34,7 @@ class ApiKonsistTest {
             .functions()
             .returnTypes
             .map { it.asClassDeclaration() }
-            .forEach { println(("@@@@@" + it?.fullyQualifiedName))}
+            .forEach { println(("@@@@@" + it?.fullyQualifiedName)) }
     }
 
     @Test

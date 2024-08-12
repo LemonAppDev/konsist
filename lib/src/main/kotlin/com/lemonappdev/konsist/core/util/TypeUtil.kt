@@ -8,7 +8,6 @@ import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoFunctionTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
-import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
 import com.lemonappdev.konsist.core.model.getObject
@@ -27,29 +26,31 @@ object TypeUtil {
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
     ): KoBaseTypeDeclaration? {
-        val type = if (isExtension && types.size > 1) {
-            // The last element is chosen because, in the case of an extension, the first element is the receiver
-            // and the second element is the return type.
-            types.last()
-        } else {
-            if (!isExtension) {
-                types.firstOrNull()
+        val type =
+            if (isExtension && types.size > 1) {
+                // The last element is chosen because, in the case of an extension, the first element is the receiver
+                // and the second element is the return type.
+                types.last()
             } else {
-                null
+                if (!isExtension) {
+                    types.firstOrNull()
+                } else {
+                    null
+                }
+                    ?.children
+                    // The last item is chosen because when a type is preceded by an annotation or modifier,
+                    // the type being searched for is the last item in the list.
+                    ?.lastOrNull()
             }
-                ?.children
-                // The last item is chosen because when a type is preceded by an annotation or modifier,
-                // the type being searched for is the last item in the list.
-                ?.lastOrNull()
-        }
 
-        val nestedType = if (type is KtNullableType) {
-            type
-                .children
-                .firstOrNull()
-        } else {
-            type
-        }
+        val nestedType =
+            if (type is KtNullableType) {
+                type
+                    .children
+                    .firstOrNull()
+            } else {
+                type
+            }
 
         val importDirective =
             containingFile
@@ -74,21 +75,23 @@ object TypeUtil {
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
     ): KoBaseTypeDeclaration? {
-        val nestedType = if (type is KtNullableType) {
-            type
-                .children
-                .firstOrNull()
-        } else {
-            type
-        }
+        val nestedType =
+            if (type is KtNullableType) {
+                type
+                    .children
+                    .firstOrNull()
+            } else {
+                type
+            }
 
         val typeText = nestedType?.text
 
-        val fqn = containingFile
-            .imports
-            .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
-            ?.name
-            ?: (containingFile.packagee?.name + "." + typeText)
+        val fqn =
+            containingFile
+                .imports
+                .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
+                ?.name
+                ?: (containingFile.packagee?.name + "." + typeText)
 
         return when {
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
