@@ -37,23 +37,11 @@ internal interface KoTypeDeclarationProviderCore :
             ) ?: throw KoInternalException("Source declaration cannot be a null")
         }
 
-    private fun getDeclarationWithFqn(declaration: KoBaseDeclaration): KoBaseDeclaration? = when (declaration) {
-        is KoFullyQualifiedNameProvider -> {
-            if (declaration.fullyQualifiedName != null) {
-                declaration
-            } else if (declaration is KoContainingDeclarationProvider) {
-                getDeclarationWithFqn(declaration.containingDeclaration)
-            } else {
-                null
-            }
-        }
-
-        is KoContainingDeclarationProvider -> {
-            getDeclarationWithFqn(declaration.containingDeclaration)
-        }
-
-        else -> {
-            null
+    private fun getDeclarationWithFqn(declaration: KoBaseDeclaration): KoBaseDeclaration? {
+        return when {
+            declaration is KoFullyQualifiedNameProvider && declaration.fullyQualifiedName != null -> declaration
+            declaration is KoContainingDeclarationProvider -> getDeclarationWithFqn(declaration.containingDeclaration)
+            else -> null
         }
     }
 
