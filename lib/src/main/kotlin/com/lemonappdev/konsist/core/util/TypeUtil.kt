@@ -89,11 +89,10 @@ object TypeUtil {
 
         val typeText = nestedType?.text
 
-        var fqn =
-            containingFile
-                .imports
-                .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
-                ?.name
+        var fqn = containingFile
+            .imports
+            .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
+            ?.name
 
         val declarations = containingFile
             .declarations()
