@@ -129,7 +129,7 @@ object TypeUtil {
                         (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == name
             } -> (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
 
-            declaration is KoContainingDeclarationProvider -> getParentDeclarationFqn(
+            declaration !is KoFileDeclaration && declaration is KoContainingDeclarationProvider -> getParentDeclarationFqn(
                 name,
                 declaration.containingDeclaration
             )
