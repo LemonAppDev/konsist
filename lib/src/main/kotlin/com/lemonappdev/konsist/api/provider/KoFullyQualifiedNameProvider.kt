@@ -7,5 +7,5 @@ interface KoFullyQualifiedNameProvider : KoBaseProvider {
     /**
      * Fully qualified name of the declaration.
      */
-    val fullyQualifiedName: String
+    val fullyQualifiedName: String?
 }

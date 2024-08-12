@@ -34,7 +34,7 @@ internal class KoExternalDeclarationCore(name: String, override val ktElement: K
 
     override val packagee: KoPackageDeclaration? by lazy {
         KoPackageDeclarationCore(
-            fullyQualifiedName,
+            fullyQualifiedName ?: "",
             ktElement,
         )
     }

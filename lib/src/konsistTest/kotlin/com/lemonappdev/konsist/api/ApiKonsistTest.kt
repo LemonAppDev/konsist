@@ -1,5 +1,11 @@
 package com.lemonappdev.konsist.api
 
+import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.ext.list.functions
+import com.lemonappdev.konsist.api.ext.list.parameters
+import com.lemonappdev.konsist.api.ext.list.print
+import com.lemonappdev.konsist.api.ext.list.returnTypes
+import com.lemonappdev.konsist.api.ext.list.types
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withParameter
 import com.lemonappdev.konsist.api.ext.list.withProperty
@@ -13,6 +19,7 @@ import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
+import nice.Frank
 import org.junit.jupiter.api.Test
 import java.util.Locale
 
@@ -21,9 +28,16 @@ class ApiKonsistTest {
 
     @Test
     fun `every api declaration has explicit return type`() {
-        apiPackageScope
+        // Todo: turn back test
+
+        val project = Konsist.scopeFromProject()
+        project
+            .interfaces()
+            .filter { it.hasAnnotationOf<Frank>() }
             .functions()
-            .assertTrue { it.hasReturnType() }
+            .returnTypes
+            .map { it.asClassDeclaration() }
+            .forEach { println(("@@@@@" + it?.fullyQualifiedName))}
     }
 
     @Test

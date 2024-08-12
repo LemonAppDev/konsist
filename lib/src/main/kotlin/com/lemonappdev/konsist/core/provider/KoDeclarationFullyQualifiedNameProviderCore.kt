@@ -7,11 +7,11 @@ internal interface KoDeclarationFullyQualifiedNameProviderCore :
     KoBaseProviderCore {
     val ktTypeParameterListOwner: KtTypeParameterListOwner
 
-    override val fullyQualifiedName: String
+    override val fullyQualifiedName: String?
         get() =
             if (ktTypeParameterListOwner.fqName != null) {
                 ktTypeParameterListOwner.fqName.toString()
             } else {
-                ""
+                null
             }
 }
