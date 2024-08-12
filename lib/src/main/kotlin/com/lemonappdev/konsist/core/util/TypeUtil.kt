@@ -4,7 +4,10 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoFunctionTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
@@ -91,7 +94,7 @@ object TypeUtil {
                 .imports
                 .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
                 ?.name
-                ?: (containingFile.packagee?.name + "." + typeText)
+                ?: getParentDeclarationFqn(typeText, parentDeclaration)
 
         return when {
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
@@ -116,6 +119,34 @@ object TypeUtil {
             }
 
             else -> null
+        }
+    }
+
+    private fun getParentDeclarationFqn(name: String?, declaration: KoBaseDeclaration): String? {
+        val fqn = when {
+            declaration is KoDeclarationProvider && declaration.hasDeclaration {
+                (it as? KoNameProvider)?.name == name ||
+                        (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == name
+            } -> (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+
+            declaration is KoContainingDeclarationProvider -> getParentDeclarationFqn(
+                name,
+                declaration.containingDeclaration
+            )
+
+            else -> null
+        }
+
+        return if (fqn != null) {
+            val x = name?.let { fqn.substringBeforeLast(it) }
+
+            if (x.isNullOrBlank()) {
+                name
+            } else {
+                "$x.$name"
+            }
+        } else {
+            name
         }
     }
 
