@@ -1,0 +1,10 @@
+
+interface FirstInterface {
+    fun method(arg: SampleNestedInterfaceWithTheSameName?)
+    interface SampleNestedInterfaceWithTheSameName
+}
+
+interface SecondInterface {
+    fun method(arg: SampleNestedInterfaceWithTheSameName?)
+    interface SampleNestedInterfaceWithTheSameName
+}

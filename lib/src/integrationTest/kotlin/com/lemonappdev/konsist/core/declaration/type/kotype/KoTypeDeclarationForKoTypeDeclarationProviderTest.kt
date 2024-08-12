@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.externalsample.SampleExternalClass
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleInterface
@@ -32,6 +33,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
         fileName: String,
         instanceOf: KClass<*>,
         notInstanceOf: KClass<*>,
+        fqn: String?,
     ) {
         // given
         val sut =
@@ -47,6 +49,32 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
         assertSoftly(sut) {
             it?.declaration shouldBeInstanceOf instanceOf
             it?.declaration shouldNotBeInstanceOf notInstanceOf
+            (it?.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideNestedValues")
+    fun `source declaration when nested declaration names are the same`(
+        fileName: String,
+        instanceOf: KClass<*>,
+        notInstanceOf: KClass<*>,
+        fqn: String?,
+    ) {
+        // given
+        val sut =
+            getSnippetFile(fileName)
+                .functions()
+                .last()
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf instanceOf
+            declaration shouldNotBeInstanceOf notInstanceOf
+            (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
         }
     }
 
@@ -985,40 +1013,156 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("nullable-kotlin-basic-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
-                arguments("not-nullable-kotlin-basic-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
-                arguments("nullable-kotlin-collection-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
+                arguments(
+                    "nullable-kotlin-basic-type",
+                    KoKotlinTypeDeclaration::class,
+                    KoClassDeclaration::class,
+                    "kotlin.String"
+                ),
+                arguments(
+                    "not-nullable-kotlin-basic-type",
+                    KoKotlinTypeDeclaration::class,
+                    KoClassDeclaration::class,
+                    "kotlin.String"
+                ),
+                arguments(
+                    "nullable-kotlin-collection-type",
+                    KoKotlinTypeDeclaration::class,
+                    KoClassDeclaration::class,
+                    "kotlin.collections.List"
+                ),
                 arguments(
                     "not-nullable-kotlin-collection-type",
                     KoKotlinTypeDeclaration::class,
                     KoClassDeclaration::class,
+                    "kotlin.collections.List",
                 ),
-                arguments("nullable-class-type", KoClassDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("not-nullable-class-type", KoClassDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("nullable-interface-type", KoInterfaceDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("not-nullable-interface-type", KoInterfaceDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("nullable-object-type", KoObjectDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("not-nullable-object-type", KoObjectDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("nullable-function-type", KoFunctionTypeDeclaration::class, KoKotlinTypeDeclaration::class),
+                arguments(
+                    "nullable-class-type",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.lemonappdev.konsist.testdata.SampleType"
+                ),
+                arguments(
+                    "not-nullable-class-type",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.lemonappdev.konsist.testdata.SampleType"
+                ),
+                arguments(
+                    "nullable-interface-type",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.lemonappdev.konsist.testdata.SampleInterface"
+                ),
+                arguments(
+                    "not-nullable-interface-type",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.lemonappdev.konsist.testdata.SampleInterface"
+                ),
+                arguments(
+                    "nullable-object-type",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.lemonappdev.konsist.testdata.SampleObject"
+                ),
+                arguments(
+                    "not-nullable-object-type",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.lemonappdev.konsist.testdata.SampleObject"
+                ),
+                arguments(
+                    "nullable-function-type",
+                    KoFunctionTypeDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    null
+                ),
                 arguments(
                     "not-nullable-function-type",
                     KoFunctionTypeDeclaration::class,
                     KoKotlinTypeDeclaration::class,
+                    null,
                 ),
                 arguments(
                     "nullable-import-alias-type",
                     KoImportAliasDeclaration::class,
                     KoKotlinTypeDeclaration::class,
+                    null
                 ),
                 arguments(
                     "not-nullable-import-alias-type",
                     KoImportAliasDeclaration::class,
                     KoKotlinTypeDeclaration::class,
+                    null
                 ),
-                arguments("nullable-typealias-type", KoTypeAliasDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("not-nullable-typealias-type", KoTypeAliasDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("nullable-external-type", KoExternalDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("not-nullable-external-type", KoExternalDeclaration::class, KoKotlinTypeDeclaration::class),
+                arguments(
+                    "nullable-typealias-type",
+                    KoTypeAliasDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.lemonappdev.konsist.testdata.SampleTypeAlias"
+                ),
+                arguments(
+                    "not-nullable-typealias-type",
+                    KoTypeAliasDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "SampleTypeAlias"
+                ),
+                arguments(
+                    "nullable-external-type",
+                    KoExternalDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.lemonappdev.konsist.externalsample.SampleExternalClass"
+                ),
+                arguments(
+                    "not-nullable-external-type",
+                    KoExternalDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.lemonappdev.konsist.externalsample.SampleExternalClass"
+                ),
+            )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideNestedValues() =
+            listOf(
+                arguments(
+                    "nullable-nested-class-type-with-the-same-name",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "SecondInterface.SampleNestedClassWithTheSameName"
+                ),
+                arguments(
+                    "not-nullable-nested-class-type-with-the-same-name",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "SecondInterface.SampleNestedClassWithTheSameName"
+                ),
+                arguments(
+                    "nullable-nested-interface-type-with-the-same-name",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "SecondInterface.SampleNestedInterfaceWithTheSameName"
+                ),
+                arguments(
+                    "not-nullable-nested-interface-type-with-the-same-name",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "SecondInterface.SampleNestedInterfaceWithTheSameName"
+                ),
+                arguments(
+                    "nullable-nested-object-type-with-the-same-name",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                   "SecondInterface.SampleNestedObjectWithTheSameName"
+                ),
+                arguments(
+                    "not-nullable-nested-object-type-with-the-same-name",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                   "SecondInterface.SampleNestedObjectWithTheSameName"
+                ),
             )
     }
 }
