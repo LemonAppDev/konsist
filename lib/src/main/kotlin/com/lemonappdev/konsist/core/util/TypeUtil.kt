@@ -89,12 +89,24 @@ object TypeUtil {
 
         val typeText = nestedType?.text
 
-        val fqn =
+        var fqn =
             containingFile
                 .imports
                 .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
                 ?.name
-                ?: getParentDeclarationFqn(typeText, parentDeclaration)
+
+        val declarations = containingFile
+            .declarations()
+            .filterIsInstance<KoFullyQualifiedNameProvider>()
+            .filter { it.fullyQualifiedName?.endsWith(typeText ?: "") == true }
+
+        val parentDeclFqn = (parentDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName.orEmpty()
+
+        val decl = declarations.singleOrNull() ?: declarations.firstOrNull {
+            it.fullyQualifiedName?.contains(parentDeclFqn) == true
+        }
+
+        fqn = fqn ?: decl?.fullyQualifiedName
 
         return when {
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
@@ -119,36 +131,6 @@ object TypeUtil {
             }
 
             else -> null
-        }
-    }
-
-    private fun getParentDeclarationFqn(name: String?, declaration: KoBaseDeclaration): String? {
-        val fqn = when {
-            declaration is KoDeclarationProvider && declaration.hasDeclaration {
-                (it as? KoNameProvider)?.name == name ||
-                        name?.let { it1 -> (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName?.endsWith(it1) } == true
-            } -> (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
-                ?: (declaration.declarations().firstOrNull { (it as? KoNameProvider)?.name == name ||
-                        name?.let { it1 -> (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName?.endsWith(it1) } == true } as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
-
-            declaration !is KoFileDeclaration && declaration is KoContainingDeclarationProvider -> getParentDeclarationFqn(
-                name,
-                declaration.containingDeclaration
-            )
-
-            else -> null
-        }
-
-        return if (fqn != null) {
-            val x = name?.let { fqn.substringBeforeLast(it) }
-
-            if (x.isNullOrBlank()) {
-                name
-            } else {
-                "$x$name"
-            }
-        } else {
-            name
         }
     }
 
