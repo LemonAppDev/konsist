@@ -976,7 +976,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
-            "core/declaration/type/kotype/snippet/forkosourcedeclarationprovider/",
+            "core/declaration/type/kotype/snippet/forkotypedeclarationprovider/",
             fileName,
         )
 
