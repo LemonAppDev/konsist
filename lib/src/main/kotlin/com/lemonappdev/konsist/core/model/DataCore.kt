@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.model
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
@@ -37,6 +38,7 @@ fun getClass(
     name: String,
     fqn: String?,
     isAlias: Boolean = false,
+    containingDeclaration: KoBaseDeclaration,
     containingFile: KoFileDeclaration,
 ): KoClassDeclaration? =
     DataCore
@@ -48,12 +50,13 @@ fun getClass(
         }
         ?: containingFile
             .classes()
-            .firstOrNull { decl -> decl.name == name }
+            .firstOrNull { decl -> decl.name == name  && decl.containingDeclaration == containingDeclaration}
 
 fun getInterface(
     name: String,
     fqn: String?,
     isAlias: Boolean,
+    containingDeclaration: KoBaseDeclaration,
     containingFile: KoFileDeclaration,
 ): KoInterfaceDeclaration? =
     DataCore
@@ -65,12 +68,13 @@ fun getInterface(
         }
         ?: containingFile
             .interfaces()
-            .firstOrNull { decl -> decl.name == name }
+            .firstOrNull { decl -> decl.name == name  && decl.containingDeclaration == containingDeclaration}
 
 fun getObject(
     name: String,
     fqn: String?,
     isAlias: Boolean,
+    containingDeclaration: KoBaseDeclaration,
     containingFile: KoFileDeclaration,
 ): KoObjectDeclaration? =
     DataCore
@@ -82,7 +86,7 @@ fun getObject(
         }
         ?: containingFile
             .objects()
-            .firstOrNull { decl -> decl.name == name }
+            .firstOrNull { decl -> decl.name == name  && decl.containingDeclaration == containingDeclaration}
 
 fun getTypeAlias(
     name: String,

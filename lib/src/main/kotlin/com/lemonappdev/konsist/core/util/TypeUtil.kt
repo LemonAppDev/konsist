@@ -96,18 +96,18 @@ object TypeUtil {
                 if (isKotlinBasicType(typeText) || isKotlinCollectionTypes(typeText)) {
                     KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
                 } else {
-                    getClass(typeText, fqn, false, containingFile)
-                        ?: getInterface(typeText, fqn, false, containingFile)
-                        ?: getObject(typeText, fqn, false, containingFile)
+                    getClass(typeText, fqn, false, parentDeclaration, containingFile)
+                        ?: getInterface(typeText, fqn, false, parentDeclaration, containingFile)
+                        ?: getObject(typeText, fqn, false, parentDeclaration, containingFile)
                         ?: getTypeAlias(typeText, fqn, containingFile)
                         ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
                 }
             }
 
             nestedType is KtTypeReference && typeText != null -> {
-                getClass(typeText, fqn, false, containingFile)
-                    ?: getInterface(typeText, fqn, false, containingFile)
-                    ?: getObject(typeText, fqn, false, containingFile)
+                getClass(typeText, fqn, false, parentDeclaration, containingFile)
+                    ?: getInterface(typeText, fqn, false, parentDeclaration, containingFile)
+                    ?: getObject(typeText, fqn, false, parentDeclaration, containingFile)
                     ?: getTypeAlias(typeText, fqn, containingFile)
                     ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
             }

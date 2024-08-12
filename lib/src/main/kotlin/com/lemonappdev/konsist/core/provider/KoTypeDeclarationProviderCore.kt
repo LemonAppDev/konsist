@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
@@ -9,6 +10,8 @@ import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
@@ -21,16 +24,38 @@ internal interface KoTypeDeclarationProviderCore :
     KoTypeDeclarationProvider,
     KoBaseProviderCore,
     KoContainingFileProviderCore,
+    KoContainingDeclarationProviderCore,
     KoTypeProviderCore {
     val ktTypeReference: KtTypeReference
     override val declaration: KoBaseTypeDeclaration
-        get() =
-            TypeUtil.getBasicType(
+        get() {
+            return TypeUtil.getBasicType(
                 listOf(ktTypeReference),
                 ktTypeReference.isExtensionDeclaration(),
-                castToKoBaseDeclaration(),
+                getDeclarationWithFqn(containingDeclaration) ?: containingDeclaration,
                 containingFile,
             ) ?: throw KoInternalException("Source declaration cannot be a null")
+        }
+
+    private fun getDeclarationWithFqn(declaration: KoBaseDeclaration): KoBaseDeclaration? = when (declaration) {
+        is KoFullyQualifiedNameProvider -> {
+            if (declaration.fullyQualifiedName != null) {
+                declaration
+            } else if (declaration is KoContainingDeclarationProvider) {
+                getDeclarationWithFqn(declaration.containingDeclaration)
+            } else {
+                null
+            }
+        }
+
+        is KoContainingDeclarationProvider -> {
+            getDeclarationWithFqn(declaration.containingDeclaration)
+        }
+
+        else -> {
+            null
+        }
+    }
 
     override fun asClassDeclaration(): KoClassDeclaration? = declaration as? KoClassDeclaration
 
@@ -76,9 +101,9 @@ internal interface KoTypeDeclarationProviderCore :
 
     override fun hasDeclarationOf(kClass: KClass<*>): Boolean =
         hasClassDeclarationOf(kClass) || hasObjectDeclarationOf(kClass) || hasInterfaceDeclarationOf(kClass) ||
-            hasKotlinTypeDeclarationOf(
-                kClass,
-            ) || hasExternalTypeDeclarationOf(kClass)
+                hasKotlinTypeDeclarationOf(
+                    kClass,
+                ) || hasExternalTypeDeclarationOf(kClass)
 
     override fun hasClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -86,7 +111,8 @@ internal interface KoTypeDeclarationProviderCore :
             else -> asClassDeclaration()?.let { predicate(it) } ?: false
         }
 
-    override fun hasClassDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asClassDeclaration()?.fullyQualifiedName
+    override fun hasClassDeclarationOf(kClass: KClass<*>): Boolean =
+        kClass.qualifiedName == asClassDeclaration()?.fullyQualifiedName
 
     override fun hasObjectDeclaration(predicate: ((KoObjectDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -94,7 +120,8 @@ internal interface KoTypeDeclarationProviderCore :
             else -> asObjectDeclaration()?.let { predicate(it) } ?: false
         }
 
-    override fun hasObjectDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asObjectDeclaration()?.fullyQualifiedName
+    override fun hasObjectDeclarationOf(kClass: KClass<*>): Boolean =
+        kClass.qualifiedName == asObjectDeclaration()?.fullyQualifiedName
 
     override fun hasInterfaceDeclaration(predicate: ((KoInterfaceDeclaration) -> Boolean)?): Boolean =
         when (predicate) {

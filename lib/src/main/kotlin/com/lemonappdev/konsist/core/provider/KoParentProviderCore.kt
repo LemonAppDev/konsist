@@ -52,8 +52,8 @@ internal interface KoParentProviderCore :
 
                     val isAlias = import?.alias != null
 
-                    return@map getClass(outerName, fqn, isAlias, containingFile)
-                        ?: getInterface(outerName, fqn, isAlias, containingFile)
+                    return@map getClass(outerName, fqn, isAlias, containingDeclaration, containingFile)
+                        ?: getInterface(outerName, fqn, isAlias, containingDeclaration, containingFile)
                         ?: KoExternalDeclarationCore.getInstance(outerName, it)
                 }
                 ?.toMutableList()
