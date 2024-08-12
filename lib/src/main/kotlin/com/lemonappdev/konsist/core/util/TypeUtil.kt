@@ -126,8 +126,10 @@ object TypeUtil {
         val fqn = when {
             declaration is KoDeclarationProvider && declaration.hasDeclaration {
                 (it as? KoNameProvider)?.name == name ||
-                        (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == name
+                        name?.let { it1 -> (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName?.endsWith(it1) } == true
             } -> (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+                ?: (declaration.declarations().firstOrNull { (it as? KoNameProvider)?.name == name ||
+                        name?.let { it1 -> (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName?.endsWith(it1) } == true } as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
 
             declaration !is KoFileDeclaration && declaration is KoContainingDeclarationProvider -> getParentDeclarationFqn(
                 name,
@@ -143,7 +145,7 @@ object TypeUtil {
             if (x.isNullOrBlank()) {
                 name
             } else {
-                "$x.$name"
+                "$x$name"
             }
         } else {
             name
