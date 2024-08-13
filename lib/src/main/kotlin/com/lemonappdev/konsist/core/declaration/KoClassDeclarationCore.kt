@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoChildProviderCore
+import com.lemonappdev.konsist.core.provider.KoClassAndInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoConstructorProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -70,6 +71,7 @@ internal class KoClassDeclarationCore private constructor(
     KoAnnotationProviderCore,
     KoChildProviderCore,
     KoClassProviderCore,
+    KoClassAndInterfaceProviderCore,
     KoEnumConstantProviderCore,
     KoConstructorProviderCore,
     KoContainingFileProviderCore,
