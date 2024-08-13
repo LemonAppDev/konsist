@@ -64,6 +64,36 @@ class KoRepresentsTypeProviderExtTest {
         }
     }
 
+    @Test
+    fun `import-represents-complex-type`() {
+        // given
+        val sut =
+            getSnippetFile("import-represents-complex-type")
+                .imports
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            representsTypeOf<SampleClass>() shouldBeEqualTo true
+            representsTypeOf<String>() shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `import-represents-kotlin-type`() {
+        // given
+        val sut =
+            getSnippetFile("import-represents-kotlin-type")
+                .imports
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            representsTypeOf<String>() shouldBeEqualTo true
+            representsTypeOf<SampleType>() shouldBeEqualTo false
+        }
+    }
+
     @ParameterizedTest
     @MethodSource("provideValues")
     fun `declaration-represents-type`(
@@ -87,7 +117,8 @@ class KoRepresentsTypeProviderExtTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("api/ext/provider/korepresentstype/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("api/ext/provider/korepresentstype/snippet/", fileName)
 
     companion object {
         @Suppress("unused")
