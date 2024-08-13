@@ -1288,7 +1288,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
                 ),
             )
 
-        @Suppress("unused")
+        @Suppress("unused", "detekt.LongMethod")
         @JvmStatic
         fun provideNestedDeclarationsWithParentsWithoutFullyQualifiedNameDifferentCombinations() =
             listOf(
@@ -1366,7 +1366,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
                 ),
             )
 
-        @Suppress("unused")
+        @Suppress("unused", "detekt.LongMethod")
         @JvmStatic
         fun provideNestedDeclarationsWithParentsWithFullyQualifiedNameDifferentCombinations() =
             listOf(
