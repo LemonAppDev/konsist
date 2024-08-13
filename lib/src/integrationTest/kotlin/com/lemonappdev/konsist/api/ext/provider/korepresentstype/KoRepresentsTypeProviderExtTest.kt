@@ -117,8 +117,7 @@ class KoRepresentsTypeProviderExtTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("api/ext/provider/korepresentstype/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("api/ext/provider/korepresentstype/snippet/", fileName)
 
     companion object {
         @Suppress("unused")
