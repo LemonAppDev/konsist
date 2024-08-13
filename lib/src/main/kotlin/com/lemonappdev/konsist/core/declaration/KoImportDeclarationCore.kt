@@ -12,7 +12,6 @@ import com.lemonappdev.konsist.core.provider.KoMatchesProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
-import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoWildcardProviderCore
@@ -32,8 +31,7 @@ internal class KoImportDeclarationCore private constructor(override val ktImport
     KoModuleProviderCore,
     KoSourceSetProviderCore,
     KoTextProviderCore,
-    KoWildcardProviderCore,
-    KoRepresentsTypeProviderCore {
+    KoWildcardProviderCore {
         override val psiElement: PsiElement by lazy { ktImportDirective }
 
         override val ktElement: KtElement by lazy { ktImportDirective }
@@ -46,6 +44,8 @@ internal class KoImportDeclarationCore private constructor(override val ktImport
                 ?.let { KoImportAliasDeclarationCore.getInstance(it, this) }
         }
 
+        // KoImportDeclarationCore does not implement KoRepresentsTypeProviderCore because it internally implements
+        // KoFullyQualifiedNameProviderCore, which import declaration does not possess. Therefore, this function is manually overridden.
         override fun representsType(name: String?): Boolean = name?.let { this.name.endsWith(it) } ?: false
 
         override fun toString(): String = name
