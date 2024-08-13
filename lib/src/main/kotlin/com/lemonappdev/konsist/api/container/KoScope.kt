@@ -11,6 +11,8 @@ import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
+import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceDeclaration
+import com.lemonappdev.konsist.api.provider.KoClassAndInterfaceProvider
 
 /**
  * Represents a scope of Kotlin declarations.
@@ -81,6 +83,18 @@ interface KoScope {
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
     ): List<KoFunctionDeclaration>
+
+    /**
+     * The classes and interfaces present in the scope.
+     *
+     * @param includeNested specifies whether to include nested classes and interfaces, by default `true`.
+     * @param includeLocal specifies whether to include local classes, by default `true`.
+     * @return a list of [KoClassDeclaration] representing the classes and interfaces in the scope.
+     */
+    fun classesAndInterfaces(
+        includeNested: Boolean = true,
+        includeLocal: Boolean = true,
+    ): List<KoClassAndInterfaceDeclaration>
 
     /**
      * The declarations present in the scope.
