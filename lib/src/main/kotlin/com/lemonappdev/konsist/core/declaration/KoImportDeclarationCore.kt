@@ -58,9 +58,7 @@ internal class KoImportDeclarationCore private constructor(override val ktImport
                 containingDeclaration: KoBaseDeclaration,
             ): KoImportDeclaration =
                 cache.getOrCreateInstance(ktImportDirective, containingDeclaration) {
-                    KoImportDeclarationCore(
-                        ktImportDirective,
-                    )
+                    KoImportDeclarationCore(ktImportDirective,)
                 }
         }
     }
