@@ -1305,6 +1305,18 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
                     "com.samplepackage.SecondInterface.SampleNestedClassWithTheSameName",
                 ),
                 arguments(
+                    "nested-class-type-with-the-same-name-and-parent-without-fqn-using-all-fqn-of-other-declaration",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedClassWithTheSameName",
+                ),
+                arguments(
+                    "nested-class-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn-of-other-declaration",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedClassWithTheSameName",
+                ),
+                arguments(
                     "nested-interface-type-with-the-same-name-and-parent-without-fqn-using-all-fqn",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
@@ -1317,6 +1329,18 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
                     "com.samplepackage.SecondInterface.SampleNestedInterfaceWithTheSameName",
                 ),
                 arguments(
+                    "nested-interface-type-with-the-same-name-and-parent-without-fqn-using-all-fqn-of-other-declaration",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedInterfaceWithTheSameName",
+                ),
+                arguments(
+                    "nested-interface-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn-of-other-declaration",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedInterfaceWithTheSameName",
+                ),
+                arguments(
                     "nested-object-type-with-the-same-name-and-parent-without-fqn-using-all-fqn",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
@@ -1327,6 +1351,18 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
                     "com.samplepackage.SecondInterface.SampleNestedObjectWithTheSameName",
+                ),
+                arguments(
+                    "nested-object-type-with-the-same-name-and-parent-without-fqn-using-all-fqn-of-other-declaration",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedObjectWithTheSameName",
+                ),
+                arguments(
+                    "nested-object-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn-of-other-declaration",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedObjectWithTheSameName",
                 ),
             )
 
@@ -1347,6 +1383,18 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
                     "com.samplepackage.SecondInterface.SampleNestedClassWithTheSameName",
                 ),
                 arguments(
+                    "nested-class-type-with-the-same-name-and-parent-with-fqn-using-all-fqn-of-other-declaration",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedClassWithTheSameName",
+                ),
+                arguments(
+                    "nested-class-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn-of-other-declaration",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedClassWithTheSameName",
+                ),
+                arguments(
                     "nested-interface-type-with-the-same-name-and-parent-with-fqn-using-all-fqn",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
@@ -1359,6 +1407,18 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
                     "com.samplepackage.SecondInterface.SampleNestedInterfaceWithTheSameName",
                 ),
                 arguments(
+                    "nested-interface-type-with-the-same-name-and-parent-with-fqn-using-all-fqn-of-other-declaration",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedInterfaceWithTheSameName",
+                ),
+                arguments(
+                    "nested-interface-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn-of-other-declaration",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedInterfaceWithTheSameName",
+                ),
+                arguments(
                     "nested-object-type-with-the-same-name-and-parent-with-fqn-using-all-fqn",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
@@ -1369,6 +1429,18 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
                     "com.samplepackage.SecondInterface.SampleNestedObjectWithTheSameName",
+                ),
+                arguments(
+                    "nested-object-type-with-the-same-name-and-parent-with-fqn-using-all-fqn-of-other-declaration",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedObjectWithTheSameName",
+                ),
+                arguments(
+                    "nested-object-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn-of-other-declaration",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedObjectWithTheSameName",
                 ),
             )
     }

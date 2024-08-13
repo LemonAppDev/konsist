@@ -1,0 +1,11 @@
+package com.samplepackage
+
+interface FirstInterface {
+    fun method(arg: SampleNestedClassWithTheSameName)
+    data class SampleNestedClassWithTheSameName(val sampleFirstParameter: String)
+}
+
+interface SecondInterface {
+    fun method(arg: FirstInterface.SampleNestedClassWithTheSameName)
+    data class SampleNestedClassWithTheSameName(val sampleSecondParameter: String)
+}
