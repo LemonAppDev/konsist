@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndOb
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoClassAndInterfaceAndObjectProvider
 import com.lemonappdev.konsist.api.provider.KoClassProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
@@ -38,6 +39,7 @@ import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoClassAndInterfaceAndObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -80,6 +82,7 @@ internal interface KoClassAndInterfaceAndObjectDeclarationCore :
     KoChildDeclarationCore,
     KoBaseTypeDeclarationCore,
     KoAnnotationProviderCore,
+    KoClassAndInterfaceAndObjectProviderCore,
     KoClassProviderCore,
     KoContainingDeclarationProviderCore,
     KoContainingFileProviderCore,

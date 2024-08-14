@@ -84,16 +84,28 @@ interface KoScope {
     ): List<KoFunctionDeclaration>
 
     /**
-     * The classes and interfaces present in the scope.
+     * The classes, interfaces and objects present in the scope.
      *
-     * @param includeNested specifies whether to include nested classes and interfaces, by default `true`.
+     * @param includeNested specifies whether to include nested classes, interfaces and objects, by default `true`.
      * @param includeLocal specifies whether to include local classes, by default `true`.
-     * @return a list of [KoClassDeclaration] representing the classes and interfaces in the scope.
+     * @return a list of [KoClassDeclaration] representing the classes, interfaces and objects in the scope.
      */
-    fun classesAndInterfaces(
+    fun classesAndInterfacesAndObjects(
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
     ): List<KoClassAndInterfaceAndObjectDeclaration>
+
+//    /**
+//     * The classes and interfaces present in the scope.
+//     *
+//     * @param includeNested specifies whether to include nested classes and interfaces, by default `true`.
+//     * @param includeLocal specifies whether to include local classes, by default `true`.
+//     * @return a list of [KoClassDeclaration] representing the classes and interfaces in the scope.
+//     */
+//    fun classesAndInterfaces(
+//        includeNested: Boolean = true,
+//        includeLocal: Boolean = true,
+//    ): List<KoClassAndInterfaceAndObjectDeclaration>
 
     /**
      * The declarations present in the scope.

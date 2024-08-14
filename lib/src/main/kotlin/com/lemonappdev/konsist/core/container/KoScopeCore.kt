@@ -44,10 +44,16 @@ class KoScopeCore(
         includeLocal: Boolean,
     ): List<KoFunctionDeclaration> = koFiles.flatMap { it.functions(includeNested, includeLocal) }
 
-    override fun classesAndInterfaces(
+    override fun classesAndInterfacesAndObjects(
         includeNested: Boolean,
         includeLocal: Boolean
-    ): List<KoClassAndInterfaceAndObjectDeclaration> = koFiles.flatMap { it.classesAndInterfaces(includeNested, includeLocal) }
+    ): List<KoClassAndInterfaceAndObjectDeclaration> =
+        koFiles.flatMap { it.classesAndInterfacesAndObjects(includeNested, includeLocal) }
+
+//    override fun classesAndInterfaces(
+//        includeNested: Boolean,
+//        includeLocal: Boolean
+//    ): List<KoClassAndInterfaceAndObjectDeclaration> = koFiles.flatMap { it.classesAndInterfaces(includeNested, includeLocal) }
 
     override fun declarations(
         includeNested: Boolean,
