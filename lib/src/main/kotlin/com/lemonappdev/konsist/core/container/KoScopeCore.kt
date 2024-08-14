@@ -12,7 +12,7 @@ import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
-import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
 
 @Suppress("detekt.TooManyFunctions")
 class KoScopeCore(
@@ -47,7 +47,7 @@ class KoScopeCore(
     override fun classesAndInterfaces(
         includeNested: Boolean,
         includeLocal: Boolean
-    ): List<KoClassAndInterfaceDeclaration> = koFiles.flatMap { it.classesAndInterfaces(includeNested, includeLocal) }
+    ): List<KoClassAndInterfaceAndObjectDeclaration> = koFiles.flatMap { it.classesAndInterfaces(includeNested, includeLocal) }
 
     override fun declarations(
         includeNested: Boolean,

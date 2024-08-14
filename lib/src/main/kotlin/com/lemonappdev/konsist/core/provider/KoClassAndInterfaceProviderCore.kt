@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
 import com.lemonappdev.konsist.api.provider.KoClassAndInterfaceProvider
 
 internal interface KoClassAndInterfaceProviderCore :
@@ -11,11 +11,11 @@ internal interface KoClassAndInterfaceProviderCore :
     override fun classesAndInterfaces(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): List<KoClassAndInterfaceDeclaration> =
+    ): List<KoClassAndInterfaceAndObjectDeclaration> =
         classes(
             includeNested,
             includeLocal,
-        ).map { it as KoClassAndInterfaceDeclaration } + interfaces(includeNested).map { it as KoClassAndInterfaceDeclaration }
+        ).map { it as KoClassAndInterfaceAndObjectDeclaration } + interfaces(includeNested).map { it as KoClassAndInterfaceAndObjectDeclaration }
 
     override fun numClassesAndInterfaces(
         includeNested: Boolean,
@@ -25,7 +25,7 @@ internal interface KoClassAndInterfaceProviderCore :
     override fun countClassesAndInterfaces(
         includeNested: Boolean,
         includeLocal: Boolean,
-        predicate: (KoClassAndInterfaceDeclaration) -> Boolean,
+        predicate: (KoClassAndInterfaceAndObjectDeclaration) -> Boolean,
     ): Int = classesAndInterfaces(includeNested, includeLocal).count { predicate(it) }
 
     override fun hasClassesOrInterfaces(
@@ -76,12 +76,12 @@ internal interface KoClassAndInterfaceProviderCore :
     override fun hasClassOrInterface(
         includeNested: Boolean,
         includeLocal: Boolean,
-        predicate: (KoClassAndInterfaceDeclaration) -> Boolean,
+        predicate: (KoClassAndInterfaceAndObjectDeclaration) -> Boolean,
     ): Boolean = classesAndInterfaces(includeNested, includeLocal).any(predicate)
 
     override fun hasAllClassesAndInterfaces(
         includeNested: Boolean,
         includeLocal: Boolean,
-        predicate: (KoClassAndInterfaceDeclaration) -> Boolean,
+        predicate: (KoClassAndInterfaceAndObjectDeclaration) -> Boolean,
     ): Boolean = classesAndInterfaces(includeNested, includeLocal).all(predicate)
 }

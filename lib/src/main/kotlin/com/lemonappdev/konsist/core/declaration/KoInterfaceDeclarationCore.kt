@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.declaration.combined.KoClassAndInterfaceAndObjectDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -51,41 +52,13 @@ internal class KoInterfaceDeclarationCore private constructor(
     override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoInterfaceDeclaration,
-    KoParentDeclarationCore,
-    KoChildDeclarationCore,
-    KoBaseTypeDeclarationCore,
-    KoBaseProviderCore,
-    KoAnnotationProviderCore,
-    KoChildProviderCore,
-    KoClassProviderCore,
-    KoClassAndInterfaceProviderCore,
-    KoContainingFileProviderCore,
-    KoDeclarationFullyQualifiedNameProviderCore,
-    KoDeclarationProviderCore,
-    KoFunctionProviderCore,
-    KoInterfaceProviderCore,
-    KoKDocProviderCore,
-    KoLocationProviderCore,
-    KoModifierProviderCore,
-    KoNameProviderCore,
-    KoObjectProviderCore,
-    KoPackageDeclarationProviderCore,
-    KoContainingDeclarationProviderCore,
-    KoPathProviderCore,
-    KoModuleProviderCore,
-    KoSourceSetProviderCore,
-    KoParentProviderCore,
-    KoParentInterfaceProviderCore,
-    KoExternalParentProviderCore,
-    KoPropertyProviderCore,
-    KoRepresentsTypeProviderCore,
-    KoResideInPackageProviderCore,
-    KoTextProviderCore,
-    KoTopLevelProviderCore,
-    KoVisibilityModifierProviderCore,
+    KoClassAndInterfaceAndObjectDeclarationCore,
     KoActualModifierProviderCore,
+    KoChildProviderCore,
+    KoClassAndInterfaceProviderCore,
     KoExpectModifierProviderCore,
     KoFunModifierProviderCore,
+    KoParentDeclarationCore,
     KoSealedModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktClass }
 

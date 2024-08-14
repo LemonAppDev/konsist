@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
@@ -39,40 +40,11 @@ import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvide
  * Represents a Kotlin import declaration.
  */
 interface KoInterfaceDeclaration :
+    KoClassAndInterfaceAndObjectDeclaration,
     KoParentDeclaration,
-    KoBaseDeclaration,
-    KoChildDeclaration,
-    KoBaseTypeDeclaration,
-    KoBaseProvider,
-    KoChildProvider,
-    KoFullyQualifiedNameProvider,
-    KoNameProvider,
-    KoAnnotationProvider,
-    KoClassProvider,
-    KoClassAndInterfaceProvider,
-    KoContainingFileProvider,
-    KoDeclarationProvider,
-    KoFunctionProvider,
-    KoInterfaceProvider,
-    KoKDocProvider,
-    KoLocationProvider,
-    KoModifierProvider,
-    KoObjectProvider,
-    KoPackageProvider,
-    KoParentInterfaceProvider,
-    KoParentProvider,
-    KoExternalParentProvider,
-    KoContainingDeclarationProvider,
-    KoPathProvider,
-    KoModuleProvider,
-    KoSourceSetProvider,
-    KoPropertyProvider,
-    KoRepresentsTypeProvider,
-    KoResideInPackageProvider,
-    KoTextProvider,
-    KoTopLevelProvider,
-    KoVisibilityModifierProvider,
     KoActualModifierProvider,
+    KoChildProvider,
+    KoClassAndInterfaceProvider,
     KoExpectModifierProvider,
     KoFunModifierProvider,
     KoSealedModifierProvider

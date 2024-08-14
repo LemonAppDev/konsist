@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.declaration.combined.KoClassAndInterfaceAndObjectDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -39,6 +40,7 @@ import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProvid
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotated
+import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
@@ -50,40 +52,13 @@ internal class KoObjectDeclarationCore(
     override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoObjectDeclaration,
-    KoChildDeclarationCore,
-    KoBaseTypeDeclarationCore,
-    KoBaseProviderCore,
-    KoAnnotationProviderCore,
-    KoClassProviderCore,
+    KoClassAndInterfaceAndObjectDeclarationCore,
     KoClassAndInterfaceProviderCore,
-    KoContainingFileProviderCore,
-    KoDeclarationFullyQualifiedNameProviderCore,
-    KoDeclarationProviderCore,
-    KoFunctionProviderCore,
-    KoInitBlockProviderCore,
-    KoInterfaceProviderCore,
-    KoKDocProviderCore,
-    KoLocationProviderCore,
-    KoModifierProviderCore,
-    KoNameProviderCore,
-    KoObjectProviderCore,
-    KoPackageDeclarationProviderCore,
-    KoContainingDeclarationProviderCore,
-    KoParentProviderCore,
-    KoParentClassProviderCore,
-    KoParentInterfaceProviderCore,
-    KoExternalParentProviderCore,
-    KoPathProviderCore,
-    KoModuleProviderCore,
-    KoSourceSetProviderCore,
-    KoPropertyProviderCore,
-    KoRepresentsTypeProviderCore,
-    KoResideInPackageProviderCore,
-    KoTextProviderCore,
-    KoTopLevelProviderCore,
-    KoVisibilityModifierProviderCore,
+    KoCompanionModifierProviderCore,
     KoDataModifierProviderCore,
-    KoCompanionModifierProviderCore {
+    KoInitBlockProviderCore,
+    KoNameProviderCore, // Todo: add comment
+    KoParentClassProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktObjectDeclaration }
 
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktObjectDeclaration }
