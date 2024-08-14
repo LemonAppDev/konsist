@@ -1,4 +1,4 @@
-class SampleTopLevelClass {
+interface SampleTopLevelInterface {
     private open class SampleClass {
         private inner class SampleNestedClass
 

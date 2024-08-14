@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.koclass
+package com.lemonappdev.konsist.core.declaration.kofile
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
@@ -6,13 +6,13 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoClassDeclarationForKoClassAndInterfaceProviderTest {
+class KoFileDeclarationForKoClassAndInterfaceProviderTest {
     @Test
-    fun `class-has-no-classes-and-interfaces`() {
+    fun `file-has-no-classes-and-interfaces`() {
         // given
         val sut =
-            getSnippetFile("class-has-no-classes-and-interfaces")
-                .classes()
+            getSnippetFile("file-has-no-classes-and-interfaces")
+                .files
                 .first()
 
         // then
@@ -39,11 +39,11 @@ class KoClassDeclarationForKoClassAndInterfaceProviderTest {
     }
 
     @Test
-    fun `class-has-class-and-interface`() {
+    fun `file-has-class-and-interface`() {
         // given
         val sut =
-            getSnippetFile("class-has-class-and-interface")
-                .classes()
+            getSnippetFile("file-has-class-and-interface")
+                .files
                 .first()
 
         // then
@@ -81,11 +81,11 @@ class KoClassDeclarationForKoClassAndInterfaceProviderTest {
     }
 
     @Test
-    fun `class-contains-nested-and-local-classes-and-interfaces includeNested true includeLocal true`() {
+    fun `file-contains-nested-and-local-classes-and-interfaces includeNested true includeLocal true`() {
         // given
         val sut =
-            getSnippetFile("class-contains-nested-and-local-classes-and-interfaces")
-                .classes()
+            getSnippetFile("file-contains-nested-and-local-classes-and-interfaces")
+                .files
                 .first()
 
         // then
@@ -97,11 +97,11 @@ class KoClassDeclarationForKoClassAndInterfaceProviderTest {
     }
 
     @Test
-    fun `class-contains-nested-and-local-classes-and-interfaces includeNested true includeLocal false`() {
+    fun `file-contains-nested-and-local-classes-and-interfaces includeNested true includeLocal false`() {
         // given
         val sut =
-            getSnippetFile("class-contains-nested-and-local-classes-and-interfaces")
-                .classes()
+            getSnippetFile("file-contains-nested-and-local-classes-and-interfaces")
+                .files
                 .first()
 
         // then
@@ -113,11 +113,11 @@ class KoClassDeclarationForKoClassAndInterfaceProviderTest {
     }
 
     @Test
-    fun `class-contains-nested-and-local-classes-and-interfaces includeNested false includeLocal true`() {
+    fun `file-contains-nested-and-local-classes-and-interfaces includeNested false includeLocal true`() {
         // given
         val sut =
-            getSnippetFile("class-contains-nested-and-local-classes-and-interfaces")
-                .classes()
+            getSnippetFile("file-contains-nested-and-local-classes-and-interfaces")
+                .files
                 .first()
 
         // then
@@ -129,11 +129,11 @@ class KoClassDeclarationForKoClassAndInterfaceProviderTest {
     }
 
     @Test
-    fun `class-contains-nested-and-local-classes-and-interfaces includeNested false includeLocal false`() {
+    fun `file-contains-nested-and-local-classes-and-interfaces includeNested false includeLocal false`() {
         // given
         val sut =
-            getSnippetFile("class-contains-nested-and-local-classes-and-interfaces")
-                .classes()
+            getSnippetFile("file-contains-nested-and-local-classes-and-interfaces")
+                .files
                 .first()
 
         // then
@@ -149,7 +149,7 @@ class KoClassDeclarationForKoClassAndInterfaceProviderTest {
         // given
         val sut =
             getSnippetFile("count-classes-and-interfaces")
-                .classes()
+                .files
                 .first()
 
         // then
@@ -164,5 +164,5 @@ class KoClassDeclarationForKoClassAndInterfaceProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koclass/snippet/forkoclassandinterfaceprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofile/snippet/forkoclassandinterfaceprovider/", fileName)
 }

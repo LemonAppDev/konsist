@@ -1,4 +1,4 @@
-class SampleTopLevelClass {
+object SampleTopLevelObject {
     private open class SampleClass {
         private inner class SampleNestedClass
 

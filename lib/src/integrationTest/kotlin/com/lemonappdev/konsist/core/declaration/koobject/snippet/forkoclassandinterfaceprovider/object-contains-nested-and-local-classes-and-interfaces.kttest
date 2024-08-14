@@ -1,4 +1,4 @@
-class SampleTopLevelClass {
+object SampleTopLevelObject {
     fun sampleFunction() {
         class SampleLocalClass
     }

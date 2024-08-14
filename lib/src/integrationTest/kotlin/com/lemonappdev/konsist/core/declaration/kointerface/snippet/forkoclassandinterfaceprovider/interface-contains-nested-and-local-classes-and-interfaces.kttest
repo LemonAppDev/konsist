@@ -1,4 +1,4 @@
-class SampleTopLevelClass {
+interface SampleTopLevelInterface {
     fun sampleFunction() {
         class SampleLocalClass
     }
