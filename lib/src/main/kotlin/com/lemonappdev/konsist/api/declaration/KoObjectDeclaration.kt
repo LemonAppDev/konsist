@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
-import com.lemonappdev.konsist.api.provider.KoClassAndInterfaceProvider
 import com.lemonappdev.konsist.api.provider.KoInitBlockProvider
 import com.lemonappdev.konsist.api.provider.KoParentClassProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoCompanionModifierProvider
@@ -12,7 +11,6 @@ import com.lemonappdev.konsist.api.provider.modifier.KoDataModifierProvider
  */
 interface KoObjectDeclaration :
     KoClassAndInterfaceAndObjectDeclaration,
-    KoClassAndInterfaceProvider,
     KoCompanionModifierProvider,
     KoDataModifierProvider,
     KoInitBlockProvider,
