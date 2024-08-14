@@ -13,6 +13,7 @@ import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceDeclaration
 
 @Suppress("detekt.TooManyFunctions")
 class KoScopeCore(
@@ -35,34 +36,38 @@ class KoScopeCore(
         includeLocal: Boolean,
     ): List<KoClassDeclaration> = koFiles.flatMap { it.classes(includeNested, includeLocal) }
 
-    override fun interfaces(includeNested: Boolean): List<KoInterfaceDeclaration> = koFiles.flatMap { it.interfaces(includeNested) }
+    override fun interfaces(includeNested: Boolean): List<KoInterfaceDeclaration> =
+        koFiles.flatMap { it.interfaces(includeNested) }
 
-    override fun objects(includeNested: Boolean): List<KoObjectDeclaration> = koFiles.flatMap { it.objects(includeNested) }
+    override fun objects(includeNested: Boolean): List<KoObjectDeclaration> =
+        koFiles.flatMap { it.objects(includeNested) }
 
     override fun functions(
         includeNested: Boolean,
         includeLocal: Boolean,
     ): List<KoFunctionDeclaration> = koFiles.flatMap { it.functions(includeNested, includeLocal) }
 
-    override fun classesAndInterfacesAndObjects( // Todo: Add tests
+    override fun classesAndInterfacesAndObjects(
         includeNested: Boolean,
         includeLocal: Boolean
     ): List<KoClassAndInterfaceAndObjectDeclaration> =
         koFiles.flatMap { it.classesAndInterfacesAndObjects(includeNested, includeLocal) }
 
-//    override fun classesAndInterfaces(
-//        includeNested: Boolean,
-//        includeLocal: Boolean
-//    ): List<KoClassAndInterfaceAndObjectDeclaration> = koFiles.flatMap { it.classesAndInterfaces(includeNested, includeLocal) }
+    override fun classesAndInterfaces(
+        includeNested: Boolean,
+        includeLocal: Boolean
+    ): List<KoClassAndInterfaceDeclaration> = koFiles.flatMap { it.classesAndInterfaces(includeNested, includeLocal) }
 
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
     ): List<KoBaseDeclaration> = koFiles.flatMap { listOf(it) + it.declarations(includeNested, includeLocal) }
 
-    override fun properties(includeNested: Boolean): List<KoPropertyDeclaration> = koFiles.flatMap { it.properties(includeNested) }
+    override fun properties(includeNested: Boolean): List<KoPropertyDeclaration> =
+        koFiles.flatMap { it.properties(includeNested) }
 
-    override fun slice(predicate: (KoFileDeclaration) -> Boolean): KoScope = KoScopeCore(koFiles.filter { predicate(it) })
+    override fun slice(predicate: (KoFileDeclaration) -> Boolean): KoScope =
+        KoScopeCore(koFiles.filter { predicate(it) })
 
     override operator fun plus(scope: KoScope): KoScope = KoScopeCore(files + scope.files)
 

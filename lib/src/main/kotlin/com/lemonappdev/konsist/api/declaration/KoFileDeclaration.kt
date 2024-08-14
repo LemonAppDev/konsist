@@ -31,6 +31,7 @@ interface KoFileDeclaration :
     KoAnnotationProvider,
     KoClassProvider,
     KoClassAndInterfaceAndObjectProvider,
+    KoClassAndInterfaceProvider,
     KoDeclarationProvider,
     KoFileExtensionProvider,
     KoFunctionProvider,

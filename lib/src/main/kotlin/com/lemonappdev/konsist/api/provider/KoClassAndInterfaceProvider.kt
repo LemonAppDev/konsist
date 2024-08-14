@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceDeclaration
 
 /**
  * An interface representing a Kotlin declaration that provides information about classes and interfaces.
@@ -11,12 +11,12 @@ interface KoClassAndInterfaceProvider : KoBaseProvider {
      *
      * @param includeNested specifies whether to include nested classes and interfaces.
      * @param includeLocal specifies whether to include local classes and interfaces.
-     * @return a list of [KoClassAndInterfaceAndObjectDeclaration] representing the classes and interfaces in the declaration.
+     * @return a list of [KoClassAndInterfaceDeclaration] representing the classes and interfaces in the declaration.
      */
     fun classesAndInterfaces(
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
-    ): List<KoClassAndInterfaceAndObjectDeclaration>
+    ): List<KoClassAndInterfaceDeclaration>
 
     /**
      * Returns the number of classes and interfaces present in the declaration.
@@ -41,7 +41,7 @@ interface KoClassAndInterfaceProvider : KoBaseProvider {
     fun countClassesAndInterfaces(
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
-        predicate: (KoClassAndInterfaceAndObjectDeclaration) -> Boolean,
+        predicate: (KoClassAndInterfaceDeclaration) -> Boolean,
     ): Int
 
     /**
@@ -127,7 +127,7 @@ interface KoClassAndInterfaceProvider : KoBaseProvider {
     fun hasClassOrInterface(
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
-        predicate: (KoClassAndInterfaceAndObjectDeclaration) -> Boolean,
+        predicate: (KoClassAndInterfaceDeclaration) -> Boolean,
     ): Boolean
 
     /**
@@ -144,6 +144,6 @@ interface KoClassAndInterfaceProvider : KoBaseProvider {
     fun hasAllClassesAndInterfaces(
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
-        predicate: (KoClassAndInterfaceAndObjectDeclaration) -> Boolean,
+        predicate: (KoClassAndInterfaceDeclaration) -> Boolean,
     ): Boolean
 }

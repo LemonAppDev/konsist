@@ -12,6 +12,7 @@ import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceDeclaration
 
 /**
  * Represents a scope of Kotlin declarations.
@@ -88,24 +89,24 @@ interface KoScope {
      *
      * @param includeNested specifies whether to include nested classes, interfaces and objects, by default `true`.
      * @param includeLocal specifies whether to include local classes, by default `true`.
-     * @return a list of [KoClassDeclaration] representing the classes, interfaces and objects in the scope.
+     * @return a list of [KoClassAndInterfaceAndObjectDeclaration] representing the classes, interfaces and objects in the scope.
      */
     fun classesAndInterfacesAndObjects(
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
     ): List<KoClassAndInterfaceAndObjectDeclaration>
 
-//    /**
-//     * The classes and interfaces present in the scope.
-//     *
-//     * @param includeNested specifies whether to include nested classes and interfaces, by default `true`.
-//     * @param includeLocal specifies whether to include local classes, by default `true`.
-//     * @return a list of [KoClassDeclaration] representing the classes and interfaces in the scope.
-//     */
-//    fun classesAndInterfaces(
-//        includeNested: Boolean = true,
-//        includeLocal: Boolean = true,
-//    ): List<KoClassAndInterfaceAndObjectDeclaration>
+    /**
+     * The classes and interfaces present in the scope.
+     *
+     * @param includeNested specifies whether to include nested classes and interfaces, by default `true`.
+     * @param includeLocal specifies whether to include local classes, by default `true`.
+     * @return a list of [KoClassAndInterfaceDeclaration] representing the classes and interfaces in the scope.
+     */
+    fun classesAndInterfaces(
+        includeNested: Boolean = true,
+        includeLocal: Boolean = true,
+    ): List<KoClassAndInterfaceDeclaration>
 
     /**
      * The declarations present in the scope.
