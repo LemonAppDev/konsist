@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.api.provider.KoMatchesProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoWildcardProvider
@@ -27,4 +28,5 @@ interface KoImportDeclaration :
     KoModuleProvider,
     KoSourceSetProvider,
     KoTextProvider,
-    KoWildcardProvider
+    KoWildcardProvider,
+    KoRepresentsTypeProvider

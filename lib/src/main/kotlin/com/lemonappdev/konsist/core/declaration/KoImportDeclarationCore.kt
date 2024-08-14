@@ -44,6 +44,10 @@ internal class KoImportDeclarationCore private constructor(override val ktImport
                 ?.let { KoImportAliasDeclarationCore.getInstance(it, this) }
         }
 
+        // KoImportDeclarationCore does not implement KoRepresentsTypeProviderCore because it internally implements
+        // KoFullyQualifiedNameProviderCore, which import declaration does not possess. Therefore, this function is manually overridden.
+        override fun representsType(name: String?): Boolean = name?.let { this.name.endsWith(it) } ?: false
+
         override fun toString(): String = name
 
         internal companion object {
@@ -53,6 +57,8 @@ internal class KoImportDeclarationCore private constructor(override val ktImport
                 ktImportDirective: KtImportDirective,
                 containingDeclaration: KoBaseDeclaration,
             ): KoImportDeclaration =
-                cache.getOrCreateInstance(ktImportDirective, containingDeclaration) { KoImportDeclarationCore(ktImportDirective) }
+                cache.getOrCreateInstance(ktImportDirective, containingDeclaration) {
+                    KoImportDeclarationCore(ktImportDirective)
+                }
         }
     }
