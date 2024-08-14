@@ -3,14 +3,14 @@ package com.lemonappdev.konsist.api.provider
 import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
 
 /**
- * An interface representing a Kotlin declaration that provides information about classes and interfaces.
+ * An interface representing a Kotlin declaration that provides information about classes, interfaces and objects.
  */
 interface KoClassAndInterfaceAndObjectProvider : KoBaseProvider {
     /**
-     * The classes and interfaces present in the declaration.
+     * The classes, interfaces and objects present in the declaration.
      *
      * @param includeNested specifies whether to include nested classes, interfaces and objects.
-     * @param includeLocal specifies whether to include local classes, interfaces and objects.
+     * @param includeLocal specifies whether to include local classes.
      * @return a list of [KoClassAndInterfaceAndObjectDeclaration] representing the classes, interfaces and objects in the declaration.
      */
     fun classesAndInterfacesAndObjects(
@@ -35,7 +35,7 @@ interface KoClassAndInterfaceAndObjectProvider : KoBaseProvider {
      *
      * @param includeNested Specifies whether to include nested classes, interfaces and objects in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the count (optional, default is `true`).
-     * @param predicate The predicate function to determine if a class or interface satisfies a condition.
+     * @param predicate The predicate function to determine if a class, interface or object satisfies a condition.
      * @return The number of classes, interfaces and objects in the declaration.
      */
     fun countClassesAndInterfacesAndObjects(
@@ -49,7 +49,7 @@ interface KoClassAndInterfaceAndObjectProvider : KoBaseProvider {
      *
      * @param includeNested Specifies whether to include nested classes, interfaces and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
-     * @return `true` if the declaration has any class or interface, `false` otherwise.
+     * @return `true` if the declaration has any class, interface or object, `false` otherwise.
      */
     fun hasClassesOrInterfacesOrObjects(
         includeNested: Boolean = true,
@@ -57,9 +57,9 @@ interface KoClassAndInterfaceAndObjectProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has at least one class or interface whose name matches any of the specified names.
+     * Determines whether the declaration has at least one class, interface or object whose name matches any of the specified names.
      *
-     * @param name the name of the class or interface to check.
+     * @param name the name of the class, interface or object to check.
      * @param names the names of the classes, interfaces and objects to check.
      * @param includeNested Specifies whether to include nested classes, interfaces and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
@@ -73,7 +73,7 @@ interface KoClassAndInterfaceAndObjectProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has at least one class or interface whose name matches any of the specified names.
+     * Determines whether the declaration has at least one class, interface or object whose name matches any of the specified names.
      *
      * @param names the names of the classes, interfaces and objects to check.
      * @param includeNested Specifies whether to include nested classes, interfaces and objects in the check (optional, default is `true`).
@@ -89,7 +89,7 @@ interface KoClassAndInterfaceAndObjectProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has classes, interfaces and objects with all the specified names.
      *
-     * @param name The name of the class or interface to check.
+     * @param name The name of the class, interface or object to check.
      * @param names The names of the classes, interfaces and objects to check.
      * @param includeNested Specifies whether to include nested classes, interfaces and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
@@ -117,11 +117,11 @@ interface KoClassAndInterfaceAndObjectProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has at least one class or interface that satisfies the provided predicate.
+     * Determines whether the declaration has at least one class, interface or object that satisfies the provided predicate.
      *
      * @param includeNested Specifies whether to include nested classes, interfaces and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
-     * @param predicate A function that defines the condition to be met by a class or interface declaration.
+     * @param predicate A function that defines the condition to be met by a class, interface or object declaration.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasClassOrInterfaceOrObject(
@@ -138,8 +138,8 @@ interface KoClassAndInterfaceAndObjectProvider : KoBaseProvider {
      *
      * @param includeNested Specifies whether to include nested classes, interfaces and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
-     * @param predicate A function that defines the condition to be met by class or interface declarations.
-     * @return `true` if all class or interface declarations satisfy the predicate, `false` otherwise.
+     * @param predicate A function that defines the condition to be met by class, interface or object declarations.
+     * @return `true` if all class, interface or object declarations satisfy the predicate, `false` otherwise.
      */
     fun hasAllClassesAndInterfacesAndObjects(
         includeNested: Boolean = true,

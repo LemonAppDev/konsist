@@ -3,14 +3,14 @@ package com.lemonappdev.konsist.api.provider
 import com.lemonappdev.konsist.api.declaration.combined.KoClassAndObjectDeclaration
 
 /**
- * An interface representing a Kotlin declaration that provides information about classes.
+ * An interface representing a Kotlin declaration that provides information about classes and objects.
  */
 interface KoClassAndObjectProvider : KoBaseProvider {
     /**
-     * The classes present in the declaration.
+     * The classes and objects present in the declaration.
      *
      * @param includeNested specifies whether to include nested classes and objects.
-     * @param includeLocal specifies whether to include local classes and objects.
+     * @param includeLocal specifies whether to include local classes.
      * @return a list of [KoClassAndObjectDeclaration] representing the classes and objects in the declaration.
      */
     fun classesAndObjects(
@@ -35,7 +35,7 @@ interface KoClassAndObjectProvider : KoBaseProvider {
      *
      * @param includeNested Specifies whether to include nested classes and objects in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the count (optional, default is `true`).
-     * @param predicate The predicate function to determine if a class satisfies a condition.
+     * @param predicate The predicate function to determine if a class or object satisfies a condition.
      * @return The number of classes and objects in the declaration.
      */
     fun countClassesAndObjects(
@@ -49,7 +49,7 @@ interface KoClassAndObjectProvider : KoBaseProvider {
      *
      * @param includeNested Specifies whether to include nested classes and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
-     * @return `true` if the declaration has any class, `false` otherwise.
+     * @return `true` if the declaration has any class or object, `false` otherwise.
      */
     fun hasClassesOrObjects(
         includeNested: Boolean = true,
@@ -57,9 +57,9 @@ interface KoClassAndObjectProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has at least one class whose name matches any of the specified names.
+     * Determines whether the declaration has at least one class or object whose name matches any of the specified names.
      *
-     * @param name the name of the class to check.
+     * @param name the name of the class or object to check.
      * @param names the names of the classes and objects to check.
      * @param includeNested Specifies whether to include nested classes and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
@@ -73,7 +73,7 @@ interface KoClassAndObjectProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has at least one class whose name matches any of the specified names.
+     * Determines whether the declaration has at least one class or object whose name matches any of the specified names.
      *
      * @param names the names of the classes and objects to check.
      * @param includeNested Specifies whether to include nested classes and objects in the check (optional, default is `true`).
@@ -89,7 +89,7 @@ interface KoClassAndObjectProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has classes and objects with all the specified names.
      *
-     * @param name The name of the class to check.
+     * @param name The name of the class or object to check.
      * @param names The names of the classes and objects to check.
      * @param includeNested Specifies whether to include nested classes and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
@@ -117,11 +117,11 @@ interface KoClassAndObjectProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has at least one class that satisfies the provided predicate.
+     * Determines whether the declaration has at least one class or object that satisfies the provided predicate.
      *
      * @param includeNested Specifies whether to include nested classes and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
-     * @param predicate A function that defines the condition to be met by a class declaration.
+     * @param predicate A function that defines the condition to be met by a class or object declaration.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasClassOrObject(
@@ -138,8 +138,8 @@ interface KoClassAndObjectProvider : KoBaseProvider {
      *
      * @param includeNested Specifies whether to include nested classes and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
-     * @param predicate A function that defines the condition to be met by class declarations.
-     * @return `true` if all class declarations satisfy the predicate, `false` otherwise.
+     * @param predicate A function that defines the condition to be met by class or object declarations.
+     * @return `true` if all class and object declarations satisfy the predicate, `false` otherwise.
      */
     fun hasAllClassesAndObjects(
         includeNested: Boolean = true,

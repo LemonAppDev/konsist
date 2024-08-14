@@ -26,7 +26,7 @@ interface KoInterfaceAndObjectProvider : KoBaseProvider {
      * Returns the number of interfaces and objects that satisfies the specified predicate present in the declaration.
      *
      * @param includeNested Specifies whether to include nested interfaces and objects in the count (optional, default is `true`).
-     * @param predicate The predicate function to determine if a interface or object satisfies a condition.
+     * @param predicate The predicate function to determine if an interface or object satisfies a condition.
      * @return The number of interfaces and objects in the declaration.
      */
     fun countInterfacesAndObjects(
@@ -98,7 +98,7 @@ interface KoInterfaceAndObjectProvider : KoBaseProvider {
      * Determines whether the declaration has at least one interface or object that satisfies the provided predicate.
      *
      * @param includeNested Specifies whether to include nested interfaces and objects in the check (optional, default is `true`).
-     * @param predicate A function that defines the condition to be met by a interface or object declaration.
+     * @param predicate A function that defines the condition to be met by an interface or object declaration.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasInterfaceOrObject(

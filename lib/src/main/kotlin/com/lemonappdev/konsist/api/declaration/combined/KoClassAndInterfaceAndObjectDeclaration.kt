@@ -35,6 +35,9 @@ import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 
+/**
+ * Represents a Kotlin class, interface or object declaration.
+ */
 interface KoClassAndInterfaceAndObjectDeclaration :
     KoBaseDeclaration,
     KoBaseProvider,
