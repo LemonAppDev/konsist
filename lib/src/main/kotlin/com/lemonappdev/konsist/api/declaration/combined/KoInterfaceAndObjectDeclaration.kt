@@ -1,0 +1,3 @@
+package com.lemonappdev.konsist.api.declaration.combined
+
+interface KoInterfaceAndObjectDeclaration : KoClassAndInterfaceAndObjectDeclaration
