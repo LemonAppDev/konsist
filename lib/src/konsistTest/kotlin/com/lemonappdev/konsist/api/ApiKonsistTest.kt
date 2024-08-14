@@ -1,10 +1,8 @@
 package com.lemonappdev.konsist.api
 
-import com.lemonappdev.konsist.api.ext.list.withImport
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withParameter
 import com.lemonappdev.konsist.api.ext.list.withProperty
-import com.lemonappdev.konsist.api.ext.list.withRepresentedType
 import com.lemonappdev.konsist.api.ext.list.withoutAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withoutName
 import com.lemonappdev.konsist.api.ext.list.withoutNameMatching
@@ -24,8 +22,8 @@ class ApiKonsistTest {
     @Test
     fun `every api declaration has explicit return type`() {
         apiPackageScope
-            .imports
-            .withRepresentedType("SampleType")
+            .functions()
+            .assertTrue { it.hasReturnType() }
     }
 
     @Test
