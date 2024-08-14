@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.combined.KoClassAndInterfaceAndObjectDeclarationCore
 import com.lemonappdev.konsist.core.declaration.combined.KoClassAndInterfaceDeclarationCore
+import com.lemonappdev.konsist.core.declaration.combined.KoClassAndObjectDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -54,6 +55,7 @@ internal class KoInterfaceDeclarationCore private constructor(
 ) :
     KoInterfaceDeclaration,
     KoClassAndInterfaceDeclarationCore,
+    KoClassAndObjectDeclarationCore,
     KoFunModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktClass }
 
