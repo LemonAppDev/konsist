@@ -24,13 +24,17 @@ internal class KoObjectDeclarationCore(
     override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoObjectDeclaration,
-        KoClassAndObjectDeclarationCore,
-        KoInterfaceAndObjectDeclarationCore,
-        KoCompanionModifierProviderCore,
-        KoDataModifierProviderCore,
-        KoInitBlockProviderCore,
-        KoNameProviderCore, // Todo: add comment
-        KoParentClassProviderCore {
+    KoClassAndObjectDeclarationCore,
+    KoInterfaceAndObjectDeclarationCore,
+    KoCompanionModifierProviderCore,
+    KoDataModifierProviderCore,
+    KoInitBlockProviderCore,
+    /*
+    We need to manually add KoNameProviderCore, even though KoObjectDeclarationCore indirectly implements this provider,
+    because it is used to override the `name` property.
+     */
+    KoNameProviderCore,
+    KoParentClassProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktObjectDeclaration }
 
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktObjectDeclaration }
