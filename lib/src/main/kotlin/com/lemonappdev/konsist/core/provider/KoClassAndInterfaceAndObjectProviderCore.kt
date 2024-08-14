@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
 import com.lemonappdev.konsist.api.provider.KoClassAndInterfaceAndObjectProvider
-import com.lemonappdev.konsist.api.provider.KoClassAndInterfaceProvider
 
 internal interface KoClassAndInterfaceAndObjectProviderCore :
     KoClassAndInterfaceAndObjectProvider,

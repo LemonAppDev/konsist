@@ -2,47 +2,16 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
-import com.lemonappdev.konsist.api.declaration.combined.KoClassAndObjectDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.declaration.combined.KoClassAndInterfaceAndObjectDeclarationCore
 import com.lemonappdev.konsist.core.declaration.combined.KoClassAndObjectDeclarationCore
-import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
-import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
-import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
-import com.lemonappdev.konsist.core.provider.KoClassAndInterfaceProviderCore
-import com.lemonappdev.konsist.core.provider.KoClassProviderCore
-import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
-import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
-import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
-import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
-import com.lemonappdev.konsist.core.provider.KoExternalParentProviderCore
-import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoInitBlockProviderCore
-import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
-import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
-import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
-import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
-import com.lemonappdev.konsist.core.provider.KoObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentClassProviderCore
-import com.lemonappdev.konsist.core.provider.KoParentInterfaceProviderCore
-import com.lemonappdev.konsist.core.provider.KoParentProviderCore
-import com.lemonappdev.konsist.core.provider.KoPathProviderCore
-import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
-import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
-import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
-import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
-import com.lemonappdev.konsist.core.provider.KoTextProviderCore
-import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoCompanionModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoDataModifierProviderCore
-import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
-import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
-import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotated
-import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
@@ -54,12 +23,12 @@ internal class KoObjectDeclarationCore(
     override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoObjectDeclaration,
-    KoClassAndObjectDeclarationCore,
-    KoCompanionModifierProviderCore,
-    KoDataModifierProviderCore,
-    KoInitBlockProviderCore,
-    KoNameProviderCore, // Todo: add comment
-    KoParentClassProviderCore {
+        KoClassAndObjectDeclarationCore,
+        KoCompanionModifierProviderCore,
+        KoDataModifierProviderCore,
+        KoInitBlockProviderCore,
+        KoNameProviderCore, // Todo: add comment
+        KoParentClassProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktObjectDeclaration }
 
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktObjectDeclaration }

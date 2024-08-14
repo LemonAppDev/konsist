@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.container
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceDeclaration
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -25,11 +24,12 @@ class KoScopeForKoClassAndInterfaceDeclarationTest {
         val sut = getSnippetFile("scope-contains-nested-and-local-classes-and-interfaces")
 
         // then
-        val expected = listOf(
-            "SampleLocalClass",
-            "SampleClassNestedInsideObject",
-            "SampleInterfaceNestedInsideObject",
-        )
+        val expected =
+            listOf(
+                "SampleLocalClass",
+                "SampleClassNestedInsideObject",
+                "SampleInterfaceNestedInsideObject",
+            )
 
         sut.classesAndInterfaces(includeNested = true, includeLocal = true)
             .map { it.name }
@@ -42,10 +42,11 @@ class KoScopeForKoClassAndInterfaceDeclarationTest {
         val sut = getSnippetFile("scope-contains-nested-and-local-classes-and-interfaces")
 
         // then
-        val expected = listOf(
-            "SampleClassNestedInsideObject",
-            "SampleInterfaceNestedInsideObject",
-        )
+        val expected =
+            listOf(
+                "SampleClassNestedInsideObject",
+                "SampleInterfaceNestedInsideObject",
+            )
 
         sut.classesAndInterfaces(includeNested = true, includeLocal = false)
             .map { it.name }

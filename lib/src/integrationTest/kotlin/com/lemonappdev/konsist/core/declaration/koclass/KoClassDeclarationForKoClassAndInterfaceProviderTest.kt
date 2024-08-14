@@ -74,7 +74,7 @@ class KoClassDeclarationForKoClassAndInterfaceProviderTest {
             hasClassOrInterface { it.name == "SampleClass" } shouldBeEqualTo true
             hasClassOrInterface { it.name == "SampleInterface" } shouldBeEqualTo true
             hasClassOrInterface { it.hasNameEndingWith("Class") } shouldBeEqualTo true
-            hasClassOrInterface { it.hasNameEndingWith("Class") || it.hasNameEndingWith("Interface")} shouldBeEqualTo true
+            hasClassOrInterface { it.hasNameEndingWith("Class") || it.hasNameEndingWith("Interface") } shouldBeEqualTo true
             hasAllClassesAndInterfaces { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
             hasAllClassesAndInterfaces { it.hasNameEndingWith("Class") } shouldBeEqualTo false
         }
@@ -154,15 +154,16 @@ class KoClassDeclarationForKoClassAndInterfaceProviderTest {
 
         // then
         assertSoftly(sut) {
-            numClassesAndInterfaces (includeNested = true, includeLocal = true) shouldBeEqualTo 4
-            numClassesAndInterfaces (includeNested = true, includeLocal = false) shouldBeEqualTo 3
-            numClassesAndInterfaces (includeNested = false, includeLocal = true) shouldBeEqualTo 2
-            numClassesAndInterfaces (includeNested = false, includeLocal = false) shouldBeEqualTo 1
-            countClassesAndInterfaces (includeNested = false, includeLocal = false) { it.hasPrivateModifier } shouldBeEqualTo 1
-            countClassesAndInterfaces  { it.hasPrivateModifier } shouldBeEqualTo 3
-            countClassesAndInterfaces  { it.name == "SampleClass" && it.hasInternalModifier } shouldBeEqualTo 0
+            numClassesAndInterfaces(includeNested = true, includeLocal = true) shouldBeEqualTo 4
+            numClassesAndInterfaces(includeNested = true, includeLocal = false) shouldBeEqualTo 3
+            numClassesAndInterfaces(includeNested = false, includeLocal = true) shouldBeEqualTo 2
+            numClassesAndInterfaces(includeNested = false, includeLocal = false) shouldBeEqualTo 1
+            countClassesAndInterfaces(includeNested = false, includeLocal = false) { it.hasPrivateModifier } shouldBeEqualTo 1
+            countClassesAndInterfaces { it.hasPrivateModifier } shouldBeEqualTo 3
+            countClassesAndInterfaces { it.name == "SampleClass" && it.hasInternalModifier } shouldBeEqualTo 0
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koclass/snippet/forkoclassandinterfaceprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koclass/snippet/forkoclassandinterfaceprovider/", fileName)
 }

@@ -32,8 +32,8 @@ class KoInterfaceDeclarationForKoClassAndInterfaceAndObjectProviderTest {
             hasClassesAndInterfacesAndObjectsWithAllNames(
                 listOf(
                     "SampleClass",
-                    "SampleInterface"
-                )
+                    "SampleInterface",
+                ),
             ) shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(setOf("SampleClass", "SampleInterface")) shouldBeEqualTo false
             hasClassOrInterfaceOrObject { it.name == "SampleClass" } shouldBeEqualTo false
@@ -73,7 +73,7 @@ class KoInterfaceDeclarationForKoClassAndInterfaceAndObjectProviderTest {
             hasClassesAndInterfacesAndObjectsWithAllNames(
                 "SampleClass",
                 "SampleInterface",
-                "SampleObject"
+                "SampleObject",
             ) shouldBeEqualTo true
             hasClassesAndInterfacesAndObjectsWithAllNames("SampleClass", "SampleInterface") shouldBeEqualTo true
             hasClassesAndInterfacesAndObjectsWithAllNames("SampleClass", "OtherInterface") shouldBeEqualTo false
@@ -84,8 +84,8 @@ class KoInterfaceDeclarationForKoClassAndInterfaceAndObjectProviderTest {
                 listOf(
                     "SampleClass",
                     "SampleInterface",
-                    "SampleObject"
-                )
+                    "SampleObject",
+                ),
             ) shouldBeEqualTo true
             hasClassesAndInterfacesAndObjectsWithAllNames(setOf("SampleClass")) shouldBeEqualTo true
             hasClassesAndInterfacesAndObjectsWithAllNames(setOf("SampleClass", "SampleInterface")) shouldBeEqualTo true
@@ -94,8 +94,8 @@ class KoInterfaceDeclarationForKoClassAndInterfaceAndObjectProviderTest {
                 setOf(
                     "SampleClass",
                     "SampleInterface",
-                    "SampleObject"
-                )
+                    "SampleObject",
+                ),
             ) shouldBeEqualTo true
             hasClassOrInterfaceOrObject { it.name == "SampleClass" } shouldBeEqualTo true
             hasClassOrInterfaceOrObject { it.name == "SampleInterface" } shouldBeEqualTo true
@@ -115,13 +115,14 @@ class KoInterfaceDeclarationForKoClassAndInterfaceAndObjectProviderTest {
                 .first()
 
         // then
-        val expected = listOf(
-            "SampleLocalClass",
-            "SampleClassNestedInsideObject",
-            "SampleInterfaceNestedInsideObject",
-            "SampleObject",
-            "SampleObjectNestedInsideObject"
-        )
+        val expected =
+            listOf(
+                "SampleLocalClass",
+                "SampleClassNestedInsideObject",
+                "SampleInterfaceNestedInsideObject",
+                "SampleObject",
+                "SampleObjectNestedInsideObject",
+            )
 
         sut.classesAndInterfacesAndObjects(includeNested = true, includeLocal = true)
             .map { it.name }
@@ -137,12 +138,13 @@ class KoInterfaceDeclarationForKoClassAndInterfaceAndObjectProviderTest {
                 .first()
 
         // then
-        val expected = listOf(
-            "SampleClassNestedInsideObject",
-            "SampleInterfaceNestedInsideObject",
-            "SampleObject",
-            "SampleObjectNestedInsideObject"
-        )
+        val expected =
+            listOf(
+                "SampleClassNestedInsideObject",
+                "SampleInterfaceNestedInsideObject",
+                "SampleObject",
+                "SampleObjectNestedInsideObject",
+            )
 
         sut.classesAndInterfacesAndObjects(includeNested = true, includeLocal = false)
             .map { it.name }
@@ -197,7 +199,7 @@ class KoInterfaceDeclarationForKoClassAndInterfaceAndObjectProviderTest {
             numClassesAndInterfacesAndObjects(includeNested = false, includeLocal = false) shouldBeEqualTo 1
             countClassesAndInterfacesAndObjects(
                 includeNested = false,
-                includeLocal = false
+                includeLocal = false,
             ) { it.hasPrivateModifier } shouldBeEqualTo 1
             countClassesAndInterfacesAndObjects { it.hasPrivateModifier } shouldBeEqualTo 4
             countClassesAndInterfacesAndObjects { it.name == "SampleClass" && it.hasInternalModifier } shouldBeEqualTo 0

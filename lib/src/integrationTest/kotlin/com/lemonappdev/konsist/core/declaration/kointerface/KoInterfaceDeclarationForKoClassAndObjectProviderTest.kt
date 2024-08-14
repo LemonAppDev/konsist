@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kointerface
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -74,7 +73,7 @@ class KoInterfaceDeclarationForKoClassAndObjectProviderTest {
             hasClassOrObject { it.name == "SampleClass" } shouldBeEqualTo true
             hasClassOrObject { it.name == "SampleObject" } shouldBeEqualTo true
             hasClassOrObject { it.hasNameEndingWith("Class") } shouldBeEqualTo true
-            hasClassOrObject { it.hasNameEndingWith("Class") || it.hasNameEndingWith("Object")} shouldBeEqualTo true
+            hasClassOrObject { it.hasNameEndingWith("Class") || it.hasNameEndingWith("Object") } shouldBeEqualTo true
             hasAllClassesAndObjects { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
             hasAllClassesAndObjects { it.hasNameEndingWith("Class") } shouldBeEqualTo false
         }
@@ -154,15 +153,16 @@ class KoInterfaceDeclarationForKoClassAndObjectProviderTest {
 
         // then
         assertSoftly(sut) {
-            numClassesAndObjects (includeNested = true, includeLocal = true) shouldBeEqualTo 4
-            numClassesAndObjects (includeNested = true, includeLocal = false) shouldBeEqualTo 3
-            numClassesAndObjects (includeNested = false, includeLocal = true) shouldBeEqualTo 2
-            numClassesAndObjects (includeNested = false, includeLocal = false) shouldBeEqualTo 1
-            countClassesAndObjects (includeNested = false, includeLocal = false) { it.hasPrivateModifier } shouldBeEqualTo 1
-            countClassesAndObjects  { it.hasPrivateModifier } shouldBeEqualTo 3
-            countClassesAndObjects  { it.name == "SampleClass" && it.hasInternalModifier } shouldBeEqualTo 0
+            numClassesAndObjects(includeNested = true, includeLocal = true) shouldBeEqualTo 4
+            numClassesAndObjects(includeNested = true, includeLocal = false) shouldBeEqualTo 3
+            numClassesAndObjects(includeNested = false, includeLocal = true) shouldBeEqualTo 2
+            numClassesAndObjects(includeNested = false, includeLocal = false) shouldBeEqualTo 1
+            countClassesAndObjects(includeNested = false, includeLocal = false) { it.hasPrivateModifier } shouldBeEqualTo 1
+            countClassesAndObjects { it.hasPrivateModifier } shouldBeEqualTo 3
+            countClassesAndObjects { it.name == "SampleClass" && it.hasInternalModifier } shouldBeEqualTo 0
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kointerface/snippet/forkoclassandobjectprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kointerface/snippet/forkoclassandobjectprovider/", fileName)
 }

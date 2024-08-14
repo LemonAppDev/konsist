@@ -1,41 +1,8 @@
 package com.lemonappdev.konsist.core.declaration.combined
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoChildDeclaration
 import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
-import com.lemonappdev.konsist.api.provider.KoBaseProvider
-import com.lemonappdev.konsist.api.provider.KoClassAndInterfaceAndObjectProvider
-import com.lemonappdev.konsist.api.provider.KoClassProvider
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
-import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoExternalParentProvider
-import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
-import com.lemonappdev.konsist.api.provider.KoFunctionProvider
-import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
-import com.lemonappdev.konsist.api.provider.KoKDocProvider
-import com.lemonappdev.konsist.api.provider.KoLocationProvider
-import com.lemonappdev.konsist.api.provider.KoModuleProvider
-import com.lemonappdev.konsist.api.provider.KoNameProvider
-import com.lemonappdev.konsist.api.provider.KoObjectProvider
-import com.lemonappdev.konsist.api.provider.KoPackageProvider
-import com.lemonappdev.konsist.api.provider.KoParentInterfaceProvider
-import com.lemonappdev.konsist.api.provider.KoParentProvider
-import com.lemonappdev.konsist.api.provider.KoPathProvider
-import com.lemonappdev.konsist.api.provider.KoPropertyProvider
-import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
-import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
-import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
-import com.lemonappdev.konsist.api.provider.KoTextProvider
-import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
-import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
-import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
-import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.KoChildDeclarationCore
-import com.lemonappdev.konsist.core.declaration.KoClassDeclarationCore
-import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -48,7 +15,6 @@ import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoExternalParentProviderCore
-import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
@@ -71,9 +37,7 @@ import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotated
-import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtClassOrObject
-import org.jetbrains.kotlin.psi.KtConstructor
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
@@ -132,6 +96,5 @@ internal interface KoClassAndInterfaceAndObjectDeclarationCore :
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): List<KoBaseDeclaration> =
-        KoDeclarationProviderCoreUtil.getKoDeclarations(ktClassOrObject, includeNested, includeLocal, this)
+    ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil.getKoDeclarations(ktClassOrObject, includeNested, includeLocal, this)
 }

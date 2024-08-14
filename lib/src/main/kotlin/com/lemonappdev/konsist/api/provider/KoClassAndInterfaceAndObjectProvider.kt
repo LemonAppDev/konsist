@@ -133,8 +133,8 @@ interface KoClassAndInterfaceAndObjectProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all classes, interfaces and objects that satisfy the provided predicate.
      *
-     * Note that if the classes, interfaces and objects contains no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate.
+     * Note that if the classes, interfaces and objects contains no elements, the function returns `true` because
+     * there are no elements in it that do not match the predicate.
      *
      * @param includeNested Specifies whether to include nested classes, interfaces and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
