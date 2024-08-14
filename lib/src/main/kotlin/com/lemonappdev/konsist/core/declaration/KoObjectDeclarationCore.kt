@@ -53,7 +53,6 @@ internal class KoObjectDeclarationCore(
 ) :
     KoObjectDeclaration,
     KoClassAndInterfaceAndObjectDeclarationCore,
-    KoClassAndInterfaceProviderCore,
     KoCompanionModifierProviderCore,
     KoDataModifierProviderCore,
     KoInitBlockProviderCore,

@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.combined.KoClassAndInterfaceAndObjectDeclarationCore
+import com.lemonappdev.konsist.core.declaration.combined.KoClassAndInterfaceDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -65,24 +66,19 @@ internal class KoClassDeclarationCore private constructor(
     override val ktClass: KtClass,
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoClassDeclaration,
-    KoClassAndInterfaceAndObjectDeclarationCore,
+    KoClassAndInterfaceDeclarationCore,
     KoAbstractModifierProviderCore,
-    KoActualModifierProviderCore,
     KoAnnotationModifierProviderCore,
-    KoChildProviderCore,
     KoConstructorProviderCore,
     KoDataModifierProviderCore,
     KoEnumConstantProviderCore,
     KoEnumModifierProviderCore,
-    KoExpectModifierProviderCore,
     KoFinalModifierProviderCore,
     KoInitBlockProviderCore,
     KoInnerModifierProviderCore,
     KoOpenModifierProviderCore,
     KoParentClassProviderCore,
-    KoParentDeclarationCore,
     KoPrimaryConstructorProviderCore,
-    KoSealedModifierProviderCore,
     KoSecondaryConstructorsProviderCore,
     KoTestClassProviderCore,
     KoValueModifierProviderCore {

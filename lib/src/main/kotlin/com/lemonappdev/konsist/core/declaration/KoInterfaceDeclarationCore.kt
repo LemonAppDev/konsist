@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.combined.KoClassAndInterfaceAndObjectDeclarationCore
+import com.lemonappdev.konsist.core.declaration.combined.KoClassAndInterfaceDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -52,14 +53,8 @@ internal class KoInterfaceDeclarationCore private constructor(
     override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoInterfaceDeclaration,
-    KoClassAndInterfaceAndObjectDeclarationCore,
-    KoActualModifierProviderCore,
-    KoChildProviderCore,
-    KoClassAndInterfaceProviderCore,
-    KoExpectModifierProviderCore,
-    KoFunModifierProviderCore,
-    KoParentDeclarationCore,
-    KoSealedModifierProviderCore {
+    KoClassAndInterfaceDeclarationCore,
+    KoFunModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktClass }
 
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktClass }
