@@ -1,32 +1,24 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.combined.KoInterfaceAndObjectDeclaration
-import com.lemonappdev.konsist.api.provider.KoClassAndInterfaceAndObjectProvider
 import com.lemonappdev.konsist.api.provider.KoInterfaceAndObjectProvider
-import com.lemonappdev.konsist.core.model.DataCore.classes
 
 internal interface KoInterfaceAndObjectProviderCore :
     KoInterfaceAndObjectProvider,
     KoBaseProviderCore,
     KoInterfaceProviderCore,
     KoObjectProviderCore {
-    override fun interfacesAndObjects(
-        includeNested: Boolean,
-    ): List<KoInterfaceAndObjectDeclaration> =
+    override fun interfacesAndObjects(includeNested: Boolean): List<KoInterfaceAndObjectDeclaration> =
         interfaces(includeNested) + objects(includeNested)
 
-    override fun numInterfacesAndObjects(
-        includeNested: Boolean,
-    ): Int = interfacesAndObjects(includeNested).size
+    override fun numInterfacesAndObjects(includeNested: Boolean): Int = interfacesAndObjects(includeNested).size
 
     override fun countInterfacesAndObjects(
         includeNested: Boolean,
         predicate: (KoInterfaceAndObjectDeclaration) -> Boolean,
     ): Int = interfacesAndObjects(includeNested).count { predicate(it) }
 
-    override fun hasInterfacesOrObjects(
-        includeNested: Boolean,
-    ): Boolean = interfacesAndObjects(includeNested).isNotEmpty()
+    override fun hasInterfacesOrObjects(includeNested: Boolean): Boolean = interfacesAndObjects(includeNested).isNotEmpty()
 
     override fun hasInterfaceOrObjectWithName(
         name: String,

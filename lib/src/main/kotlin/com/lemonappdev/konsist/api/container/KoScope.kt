@@ -128,9 +128,7 @@ interface KoScope {
      * @param includeNested specifies whether to include nested interface and objects, by default `true`.
      * @return a list of [KoInterfaceAndObjectDeclaration] representing the interface and objects in the scope.
      */
-    fun interfacesAndObjects(
-        includeNested: Boolean = true,
-    ): List<KoInterfaceAndObjectDeclaration>
+    fun interfacesAndObjects(includeNested: Boolean = true): List<KoInterfaceAndObjectDeclaration>
 
     /**
      * The declarations present in the scope.

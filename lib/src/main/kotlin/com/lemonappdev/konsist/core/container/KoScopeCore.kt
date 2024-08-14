@@ -62,9 +62,8 @@ class KoScopeCore(
         includeLocal: Boolean,
     ): List<KoClassAndObjectDeclaration> = koFiles.flatMap { it.classesAndObjects(includeNested, includeLocal) }
 
-    override fun interfacesAndObjects(
-        includeNested: Boolean,
-    ): List<KoInterfaceAndObjectDeclaration> = koFiles.flatMap { it.interfacesAndObjects(includeNested) }
+    override fun interfacesAndObjects(includeNested: Boolean): List<KoInterfaceAndObjectDeclaration> =
+        koFiles.flatMap { it.interfacesAndObjects(includeNested) }
 
     override fun declarations(
         includeNested: Boolean,

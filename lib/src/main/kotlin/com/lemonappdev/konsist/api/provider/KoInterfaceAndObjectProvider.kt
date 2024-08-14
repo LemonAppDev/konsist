@@ -12,9 +12,7 @@ interface KoInterfaceAndObjectProvider : KoBaseProvider {
      * @param includeNested specifies whether to include nested interfaces and objects.
      * @return a list of [KoInterfaceAndObjectDeclaration] representing the interfaces and objects in the declaration.
      */
-    fun interfacesAndObjects(
-        includeNested: Boolean = true,
-    ): List<KoInterfaceAndObjectDeclaration>
+    fun interfacesAndObjects(includeNested: Boolean = true): List<KoInterfaceAndObjectDeclaration>
 
     /**
      * Returns the number of interfaces and objects present in the declaration.
@@ -22,9 +20,7 @@ interface KoInterfaceAndObjectProvider : KoBaseProvider {
      * @param includeNested Specifies whether to include nested interfaces and objects in the count (optional, default is `true`).
      * @return The number of interfaces and objects in the declaration.
      */
-    fun numInterfacesAndObjects(
-        includeNested: Boolean = true,
-    ): Int
+    fun numInterfacesAndObjects(includeNested: Boolean = true): Int
 
     /**
      * Returns the number of interfaces and objects that satisfies the specified predicate present in the declaration.
@@ -44,9 +40,7 @@ interface KoInterfaceAndObjectProvider : KoBaseProvider {
      * @param includeNested Specifies whether to include nested interfaces and objects in the check (optional, default is `true`).
      * @return `true` if the declaration has any interface or object, `false` otherwise.
      */
-    fun hasInterfacesOrObjects(
-        includeNested: Boolean = true,
-    ): Boolean
+    fun hasInterfacesOrObjects(includeNested: Boolean = true): Boolean
 
     /**
      * Determines whether the declaration has at least one interface or object whose name matches any of the specified names.
