@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "2.0.10"
+    kotlin("multiplatform") version "2.0.20"
     application
     id("com.android.application")
 }
