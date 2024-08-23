@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoGetterDeclarationForKoInitializerProviderTest {
+class KoGetterDeclarationForKoIsInitializedProviderTest {
     @Test
     fun `getter-is-initialized-in-block-body`() {
         // given
@@ -45,5 +45,5 @@ class KoGetterDeclarationForKoInitializerProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kogetter/snippet/forkoinitializerprovider/", fileName)
+        getSnippetKoScope("core/declaration/kogetter/snippet/forkoisinitializedprovider/", fileName)
 }

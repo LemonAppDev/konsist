@@ -10,6 +10,7 @@ import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoInitializerProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsInitializedProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalDeclarationProviderCore
@@ -64,6 +65,7 @@ internal class KoFunctionDeclarationCore private constructor(
         KoDeclarationFullyQualifiedNameProviderCore,
         KoReturnProviderCore,
         KoInitializerProviderCore,
+        KoIsInitializedProviderCore,
         KoKDocProviderCore,
         KoLocalClassProviderCore,
         KoLocalDeclarationProviderCore,
@@ -119,6 +121,12 @@ internal class KoFunctionDeclarationCore private constructor(
 
             KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
         }
+
+    /*
+    Remove in version 0.18.0
+     */
+        override val isInitialized: Boolean
+            get() = super<KoIsInitializedProviderCore>.isInitialized
 
         override fun toString(): String = name
 

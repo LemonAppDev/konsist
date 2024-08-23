@@ -1,21 +1,20 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.provider.KoInitializerProvider
+import com.lemonappdev.konsist.api.provider.KoIsInitializedProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("KoIsInitializedProviderListExtTest"))
-class KoInitializerProviderListExtTest {
+class KoIsInitializedProviderListExtTest {
     @Test
     fun `withInitialized() returns declaration that has been initialized`() {
         // given
-        val declaration1: KoInitializerProvider =
+        val declaration1: KoIsInitializedProvider =
             mockk {
                 every { isInitialized } returns true
             }
-        val declaration2: KoInitializerProvider =
+        val declaration2: KoIsInitializedProvider =
             mockk {
                 every { isInitialized } returns false
             }
@@ -31,11 +30,11 @@ class KoInitializerProviderListExtTest {
     @Test
     fun `withoutInitialized() returns declaration that has not been initialized`() {
         // given
-        val declaration1: KoInitializerProvider =
+        val declaration1: KoIsInitializedProvider =
             mockk {
                 every { isInitialized } returns true
             }
-        val declaration2: KoInitializerProvider =
+        val declaration2: KoIsInitializedProvider =
             mockk {
                 every { isInitialized } returns false
             }

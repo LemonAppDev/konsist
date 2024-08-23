@@ -1,11 +1,10 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.provider.KoInitializerProvider
+import com.lemonappdev.konsist.api.provider.KoIsInitializedProvider
 import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.psiUtil.hasBody
 
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("KoIsInitializedProviderCore"))
-internal interface KoInitializerProviderCore : KoInitializerProvider, KoBaseProviderCore {
+internal interface KoIsInitializedProviderCore : KoIsInitializedProvider, KoBaseProviderCore {
     val ktDeclaration: KtDeclaration
 
     override val isInitialized: Boolean

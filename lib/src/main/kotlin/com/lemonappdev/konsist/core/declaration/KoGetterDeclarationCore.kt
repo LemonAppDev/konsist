@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.core.provider.KoBodyProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoInitializerProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsInitializedProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalFunctionProviderCore
@@ -37,6 +38,7 @@ internal class KoGetterDeclarationCore private constructor(
         KoContainingDeclarationProviderCore,
         KoContainingFileProviderCore,
         KoInitializerProviderCore,
+        KoIsInitializedProviderCore,
         KoLocalClassProviderCore,
         KoLocalDeclarationProviderCore,
         KoLocalFunctionProviderCore,

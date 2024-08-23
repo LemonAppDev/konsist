@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.api.provider.KoDelegateProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoGetterProvider
 import com.lemonappdev.konsist.api.provider.KoInitializerProvider
+import com.lemonappdev.konsist.api.provider.KoIsInitializedProvider
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
@@ -51,6 +52,7 @@ interface KoPropertyDeclaration :
     KoNullableTypeProvider,
     KoFullyQualifiedNameProvider,
     KoInitializerProvider,
+    KoIsInitializedProvider,
     KoKDocProvider,
     KoLocationProvider,
     KoModifierProvider,

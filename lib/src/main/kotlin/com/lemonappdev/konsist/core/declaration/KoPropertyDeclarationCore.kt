@@ -14,6 +14,7 @@ import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProv
 import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoGetterProviderCore
 import com.lemonappdev.konsist.core.provider.KoInitializerProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsInitializedProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -79,6 +80,7 @@ internal class KoPropertyDeclarationCore private constructor(
         KoDelegateProviderCore,
         KoNullableTypeProviderCore,
         KoInitializerProviderCore,
+        KoIsInitializedProviderCore,
         KoKDocProviderCore,
         KoLocationProviderCore,
         KoModifierProviderCore,
@@ -119,6 +121,12 @@ internal class KoPropertyDeclarationCore private constructor(
         override val ktElement: KtElement by lazy { ktCallableDeclaration }
 
         override val ktDeclaration: KtDeclaration by lazy { ktCallableDeclaration }
+
+    /*
+    Remove in version 0.18.0
+     */
+        override val isInitialized: Boolean
+            get() = super<KoIsInitializedProviderCore>.isInitialized
 
         override val ktExpression: KtExpression? by lazy {
             ktCallableDeclaration
