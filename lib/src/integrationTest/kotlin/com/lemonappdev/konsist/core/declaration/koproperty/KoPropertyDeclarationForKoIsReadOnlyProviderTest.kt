@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoPropertyDeclarationForKoReadOnlyProviderTest {
+class KoPropertyDeclarationForKoIsReadOnlyProviderTest {
     @Test
     fun `property-is-val`() {
         // given
@@ -53,5 +53,5 @@ class KoPropertyDeclarationForKoReadOnlyProviderTest {
         sut.isReadOnly shouldBeEqualTo true
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koproperty/snippet/forkoreadonlyprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koproperty/snippet/forkoisreadonlyprovider/", fileName)
 }
