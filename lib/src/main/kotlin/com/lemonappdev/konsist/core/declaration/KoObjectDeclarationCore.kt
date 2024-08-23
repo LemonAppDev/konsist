@@ -15,6 +15,7 @@ import com.lemonappdev.konsist.core.provider.KoExternalParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoInitBlockProviderCore
 import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -49,39 +50,40 @@ internal class KoObjectDeclarationCore(
     override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoObjectDeclaration,
-        KoChildDeclarationCore,
-        KoBaseTypeDeclarationCore,
-        KoBaseProviderCore,
-        KoAnnotationProviderCore,
-        KoClassProviderCore,
-        KoContainingFileProviderCore,
-        KoDeclarationFullyQualifiedNameProviderCore,
-        KoDeclarationProviderCore,
-        KoFunctionProviderCore,
-        KoInitBlockProviderCore,
-        KoInterfaceProviderCore,
-        KoKDocProviderCore,
-        KoLocationProviderCore,
-        KoModifierProviderCore,
-        KoNameProviderCore,
-        KoObjectProviderCore,
-        KoPackageDeclarationProviderCore,
-        KoContainingDeclarationProviderCore,
-        KoParentProviderCore,
-        KoParentClassProviderCore,
-        KoParentInterfaceProviderCore,
-        KoExternalParentProviderCore,
-        KoPathProviderCore,
-        KoModuleProviderCore,
-        KoSourceSetProviderCore,
-        KoPropertyProviderCore,
-        KoRepresentsTypeProviderCore,
-        KoResideInPackageProviderCore,
-        KoTextProviderCore,
-        KoTopLevelProviderCore,
-        KoVisibilityModifierProviderCore,
-        KoDataModifierProviderCore,
-        KoCompanionModifierProviderCore {
+    KoChildDeclarationCore,
+    KoBaseTypeDeclarationCore,
+    KoBaseProviderCore,
+    KoAnnotationProviderCore,
+    KoClassProviderCore,
+    KoContainingFileProviderCore,
+    KoDeclarationFullyQualifiedNameProviderCore,
+    KoDeclarationProviderCore,
+    KoFunctionProviderCore,
+    KoInitBlockProviderCore,
+    KoInterfaceProviderCore,
+    KoKDocProviderCore,
+    KoLocationProviderCore,
+    KoModifierProviderCore,
+    KoNameProviderCore,
+    KoObjectProviderCore,
+    KoPackageDeclarationProviderCore,
+    KoContainingDeclarationProviderCore,
+    KoParentProviderCore,
+    KoParentClassProviderCore,
+    KoParentInterfaceProviderCore,
+    KoExternalParentProviderCore,
+    KoPathProviderCore,
+    KoModuleProviderCore,
+    KoSourceSetProviderCore,
+    KoPropertyProviderCore,
+    KoRepresentsTypeProviderCore,
+    KoResideInPackageProviderCore,
+    KoTextProviderCore,
+    KoTopLevelProviderCore,
+    KoIsTopLevelProviderCore,
+    KoVisibilityModifierProviderCore,
+    KoDataModifierProviderCore,
+    KoCompanionModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktObjectDeclaration }
 
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktObjectDeclaration }
@@ -108,6 +110,12 @@ internal class KoObjectDeclarationCore(
     ): List<KoBaseDeclaration> =
         KoDeclarationProviderCoreUtil
             .getKoDeclarations(ktObjectDeclaration, includeNested, includeLocal, this)
+
+    /*
+    Remove in version 0.18.0
+    */
+    override val isTopLevel: Boolean
+        get() = super<KoIsTopLevelProviderCore>.isTopLevel
 
     override fun toString(): String = name
 

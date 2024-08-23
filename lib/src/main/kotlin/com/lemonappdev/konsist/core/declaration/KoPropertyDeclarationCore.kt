@@ -17,6 +17,7 @@ import com.lemonappdev.konsist.core.provider.KoInitializerProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsConstructorDefinedProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsInitializedProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsReadOnlyProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -97,6 +98,7 @@ internal class KoPropertyDeclarationCore private constructor(
     KoResideInPackageProviderCore,
     KoTextProviderCore,
     KoTopLevelProviderCore,
+    KoIsTopLevelProviderCore,
     KoValueProviderCore,
     KoVisibilityModifierProviderCore,
     KoValModifierProviderCore,
@@ -143,6 +145,12 @@ internal class KoPropertyDeclarationCore private constructor(
     */
     override val isReadOnly: Boolean
         get() = super<KoIsReadOnlyProviderCore>.isReadOnly
+
+    /*
+    Remove in version 0.18.0
+    */
+    override val isTopLevel: Boolean
+        get() = super<KoIsTopLevelProviderCore>.isTopLevel
 
     override val ktExpression: KtExpression? by lazy {
         ktCallableDeclaration

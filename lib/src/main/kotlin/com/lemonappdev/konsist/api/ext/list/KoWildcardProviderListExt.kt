@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoWildcardProvider
  *
  * @return A list containing declarations with a wildcard.
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("method from KoIsWildcardProvider"))
 fun <T : KoWildcardProvider> List<T>.withWildcard(): List<T> = filter { it.isWildcard }
 
 /**
@@ -14,4 +15,5 @@ fun <T : KoWildcardProvider> List<T>.withWildcard(): List<T> = filter { it.isWil
  *
  * @return A list containing declarations without a wildcard.
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("method from KoIsWildcardProvider"))
 fun <T : KoWildcardProvider> List<T>.withoutWildcard(): List<T> = filterNot { it.isWildcard }

@@ -1,21 +1,20 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
+import com.lemonappdev.konsist.api.provider.KoIsTopLevelProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("KoIsTopLevelProviderListExtTest"))
-class KoTopLevelProviderListExtTest {
+class KoIsTopLevelProviderListExtTest {
     @Test
     fun `withTopLevel() returns declaration which is top level declaration`() {
         // given
-        val declaration1: KoTopLevelProvider =
+        val declaration1: KoIsTopLevelProvider =
             mockk {
                 every { isTopLevel } returns true
             }
-        val declaration2: KoTopLevelProvider =
+        val declaration2: KoIsTopLevelProvider =
             mockk {
                 every { isTopLevel } returns false
             }
@@ -31,11 +30,11 @@ class KoTopLevelProviderListExtTest {
     @Test
     fun `withoutTopLevel() returns declaration which is not top level declaration`() {
         // given
-        val declaration1: KoTopLevelProvider =
+        val declaration1: KoIsTopLevelProvider =
             mockk {
                 every { isTopLevel } returns true
             }
-        val declaration2: KoTopLevelProvider =
+        val declaration2: KoIsTopLevelProvider =
             mockk {
                 every { isTopLevel } returns false
             }

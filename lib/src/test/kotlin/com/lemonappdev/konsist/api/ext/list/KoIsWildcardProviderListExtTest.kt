@@ -1,21 +1,20 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.provider.KoWildcardProvider
+import com.lemonappdev.konsist.api.provider.KoIsWildcardProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("KoIsWildcardProviderListExtTest"))
-class KoWildcardProviderListExtTest {
+class KoIsWildcardProviderListExtTest {
     @Test
     fun `withWildcard() returns import with wildcard`() {
         // given
-        val import1: KoWildcardProvider =
+        val import1: KoIsWildcardProvider =
             mockk {
                 every { isWildcard } returns true
             }
-        val import2: KoWildcardProvider =
+        val import2: KoIsWildcardProvider =
             mockk {
                 every { isWildcard } returns false
             }
@@ -31,11 +30,11 @@ class KoWildcardProviderListExtTest {
     @Test
     fun `withoutWildcard() returns import without wildcard`() {
         // given
-        val import1: KoWildcardProvider =
+        val import1: KoIsWildcardProvider =
             mockk {
                 every { isWildcard } returns true
             }
-        val import2: KoWildcardProvider =
+        val import2: KoIsWildcardProvider =
             mockk {
                 every { isWildcard } returns false
             }

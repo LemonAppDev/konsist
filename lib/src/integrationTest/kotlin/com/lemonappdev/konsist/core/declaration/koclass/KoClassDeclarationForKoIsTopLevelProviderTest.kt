@@ -1,11 +1,10 @@
 package com.lemonappdev.konsist.core.declaration.koclass
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.ext.list.classes
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoClassDeclarationForKoTopLevelProviderTest {
+class KoClassDeclarationForKoIsTopLevelProviderTest {
     @Test
     fun `class-is-not-top-level`() {
         // given
@@ -30,5 +29,5 @@ class KoClassDeclarationForKoTopLevelProviderTest {
         sut.isTopLevel shouldBeEqualTo true
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koclass/snippet/forkotoplevelprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koclass/snippet/forkoistoplevelprovider/", fileName)
 }

@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.ext.list.interfaces
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoInterfaceDeclarationForKoTopLevelProviderTest {
+class KoInterfaceDeclarationForKoIsTopLevelProviderTest {
     @Test
     fun `interface-is-not-top-level`() {
         // given
@@ -32,5 +32,5 @@ class KoInterfaceDeclarationForKoTopLevelProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kointerface/snippet/forkotoplevelprovider/", fileName)
+        getSnippetKoScope("core/declaration/kointerface/snippet/forkoistoplevelprovider/", fileName)
 }

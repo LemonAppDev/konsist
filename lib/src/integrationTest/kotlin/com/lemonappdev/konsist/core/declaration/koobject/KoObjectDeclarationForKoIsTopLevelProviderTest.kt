@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.ext.list.objects
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoObjectDeclarationForKoTopLevelProviderTest {
+class KoObjectDeclarationForKoIsTopLevelProviderTest {
     @Test
     fun `object-is-not-top-level`() {
         // given
@@ -31,5 +31,5 @@ class KoObjectDeclarationForKoTopLevelProviderTest {
         sut.isTopLevel shouldBeEqualTo true
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/forkotoplevelprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/forkoistoplevelprovider/", fileName)
 }
