@@ -53,5 +53,6 @@ class KoPropertyDeclarationForKoIsReadOnlyProviderTest {
         sut.isReadOnly shouldBeEqualTo true
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koproperty/snippet/forkoisreadonlyprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koproperty/snippet/forkoisreadonlyprovider/", fileName)
 }

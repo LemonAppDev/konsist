@@ -34,74 +34,74 @@ internal class KoTypeDeclarationCore private constructor(
     override val containingDeclaration: KoBaseDeclaration,
 ) :
     KoTypeDeclaration,
-    KoBaseProviderCore,
-    KoNameProviderCore,
-    KoTextProviderCore,
-    KoPathProviderCore,
-    KoLocationProviderCore,
-    KoNullableProviderCore,
-    KoIsNullableProviderCore,
-    KoContainingFileProviderCore,
-    KoContainingDeclarationProviderCore,
-    KoModuleProviderCore,
-    KoSourceSetProviderCore,
-    KoTypeProviderCore,
-    KoSourceAndAliasTypeProviderCore,
-    KoGenericTypeProviderCore,
-    KoIsGenericTypeProviderCore,
-    KoPackageProviderCore,
-    KoResideInPackageProviderCore,
-    KoAnnotationProviderCore,
-    KoTypeDeclarationProviderCore {
-    override val psiElement: PsiElement by lazy { ktTypeReference }
+        KoBaseProviderCore,
+        KoNameProviderCore,
+        KoTextProviderCore,
+        KoPathProviderCore,
+        KoLocationProviderCore,
+        KoNullableProviderCore,
+        KoIsNullableProviderCore,
+        KoContainingFileProviderCore,
+        KoContainingDeclarationProviderCore,
+        KoModuleProviderCore,
+        KoSourceSetProviderCore,
+        KoTypeProviderCore,
+        KoSourceAndAliasTypeProviderCore,
+        KoGenericTypeProviderCore,
+        KoIsGenericTypeProviderCore,
+        KoPackageProviderCore,
+        KoResideInPackageProviderCore,
+        KoAnnotationProviderCore,
+        KoTypeDeclarationProviderCore {
+        override val psiElement: PsiElement by lazy { ktTypeReference }
 
-    override val ktElement: KtElement by lazy { ktTypeReference }
+        override val ktElement: KtElement by lazy { ktTypeReference }
 
-    override val ktAnnotated: KtAnnotated by lazy { ktTypeReference }
+        override val ktAnnotated: KtAnnotated by lazy { ktTypeReference }
 
-    override val name: String by lazy {
-        val typeReference =
-            ktTypeReference
-                .children
-                // The last item is chosen because when a type is preceded by an annotation or modifier,
-                // the type being searched for is the last item in the list.
-                .lastOrNull()
+        override val name: String by lazy {
+            val typeReference =
+                ktTypeReference
+                    .children
+                    // The last item is chosen because when a type is preceded by an annotation or modifier,
+                    // the type being searched for is the last item in the list.
+                    .lastOrNull()
 
-        if (typeReference is KtNullableType) {
-            typeReference
-                .children
-                .firstOrNull()
-                ?.text ?: ""
-        } else {
-            typeReference?.text ?: ""
+            if (typeReference is KtNullableType) {
+                typeReference
+                    .children
+                    .firstOrNull()
+                    ?.text ?: ""
+            } else {
+                typeReference?.text ?: ""
+            }
         }
-    }
 
-    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
+        override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
     /*
     Remove in version 0.18.0
      */
-    override val isGenericType: Boolean
-        get() = super<KoIsGenericTypeProviderCore>.isGenericType
+        override val isGenericType: Boolean
+            get() = super<KoIsGenericTypeProviderCore>.isGenericType
 
     /*
     Remove in version 0.18.0
-    */
-    override val isNullable: Boolean
-        get() = super<KoIsNullableProviderCore>.isNullable
+     */
+        override val isNullable: Boolean
+            get() = super<KoIsNullableProviderCore>.isNullable
 
-    override fun toString(): String = text
+        override fun toString(): String = text
 
-    internal companion object {
-        private val cache: KoDeclarationCache<KoTypeDeclaration> = KoDeclarationCache()
+        internal companion object {
+            private val cache: KoDeclarationCache<KoTypeDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(
-            ktTypeReference: KtTypeReference,
-            containingDeclaration: KoBaseDeclaration,
-        ): KoTypeDeclaration =
-            cache.getOrCreateInstance(ktTypeReference, containingDeclaration) {
-                KoTypeDeclarationCore(ktTypeReference, containingDeclaration)
-            }
+            internal fun getInstance(
+                ktTypeReference: KtTypeReference,
+                containingDeclaration: KoBaseDeclaration,
+            ): KoTypeDeclaration =
+                cache.getOrCreateInstance(ktTypeReference, containingDeclaration) {
+                    KoTypeDeclarationCore(ktTypeReference, containingDeclaration)
+                }
+        }
     }
-}

@@ -31,5 +31,6 @@ class KoFunctionDeclarationForKoIsTopLevelProviderTest {
         sut.isTopLevel shouldBeEqualTo true
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofunction/snippet/forkoistoplevelprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kofunction/snippet/forkoistoplevelprovider/", fileName)
 }
