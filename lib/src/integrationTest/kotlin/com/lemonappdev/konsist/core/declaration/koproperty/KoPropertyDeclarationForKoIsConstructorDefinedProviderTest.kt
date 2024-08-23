@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.ext.list.properties
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoPropertyDeclarationForKoConstructorDefinedProviderTest {
+class KoPropertyDeclarationForKoIsConstructorDefinedProviderTest {
     @Test
     fun `property-is-defined-in-constructor`() {
         // given
@@ -33,5 +33,5 @@ class KoPropertyDeclarationForKoConstructorDefinedProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koproperty/snippet/forkoconstructordefinedprovider/", fileName)
+        getSnippetKoScope("core/declaration/koproperty/snippet/forkoisconstructordefinedprovider/", fileName)
 }

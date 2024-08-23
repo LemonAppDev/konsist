@@ -1,21 +1,20 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.provider.KoConstructorDefinedProvider
+import com.lemonappdev.konsist.api.provider.KoIsConstructorDefinedProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("KoIsConstructorDefinedProviderListExtTest"))
-class KoConstructorDefinedProviderListExtTest {
+class KoIsConstructorDefinedProviderListExtTest {
     @Test
     fun `withConstructorDefined() returns declaration defined within constructor`() {
         // given
-        val declaration1: KoConstructorDefinedProvider =
+        val declaration1: KoIsConstructorDefinedProvider =
             mockk {
                 every { isConstructorDefined } returns true
             }
-        val declaration2: KoConstructorDefinedProvider =
+        val declaration2: KoIsConstructorDefinedProvider =
             mockk {
                 every { isConstructorDefined } returns false
             }
@@ -31,11 +30,11 @@ class KoConstructorDefinedProviderListExtTest {
     @Test
     fun `withoutConstructorDefined() returns declaration defined outside constructor`() {
         // given
-        val declaration1: KoConstructorDefinedProvider =
+        val declaration1: KoIsConstructorDefinedProvider =
             mockk {
                 every { isConstructorDefined } returns true
             }
-        val declaration2: KoConstructorDefinedProvider =
+        val declaration2: KoIsConstructorDefinedProvider =
             mockk {
                 every { isConstructorDefined } returns false
             }
