@@ -36,7 +36,7 @@ class ApiKonsistTest {
     @Test
     fun `every api declaration has valid KDoc`() {
         apiPackageScope
-            .interfaces()
+            .classesAndInterfacesAndObjects()
             .assertTrue { it.hasKDoc }
     }
 
