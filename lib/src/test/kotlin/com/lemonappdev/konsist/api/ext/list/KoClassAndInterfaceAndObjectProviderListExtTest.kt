@@ -733,7 +733,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
             }
         val interfaceDeclaration: KoInterfaceDeclaration =
             mockk {
-                every { hasNameEndingWith(suffix) } returns false
+                every { hasNameEndingWith(suffix) } returns true
             }
         val objectDeclaration: KoObjectDeclaration =
             mockk {
@@ -757,6 +757,6 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
         val sut = declarations.withoutClassesAndInterfacesAndObjects(true, true, predicate)
 
         // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 }

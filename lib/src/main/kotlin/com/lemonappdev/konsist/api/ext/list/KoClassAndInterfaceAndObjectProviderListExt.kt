@@ -4,11 +4,11 @@ import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndOb
 import com.lemonappdev.konsist.api.provider.KoClassAndInterfaceAndObjectProvider
 
 /**
- * List containing class, interfaces and objects declarations.
+ * List containing class, interface or/and object declarations.
  *
  * @param includeNested Whether to include nested classes, interfaces and objects.
  * @param includeLocal Whether to include local classes.
- * @return A list containing class, interfaces and objects declarations.
+ * @return A list containing class, interface or/and object declarations.
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.classesAndInterfacesAndObjects(
     includeNested: Boolean = true,
@@ -46,7 +46,7 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withoutClassesAndInterfac
  * @param names The names of additional classes, interfaces and objects to include.
  * @param includeNested Whether to include nested classes, interfaces and objects.
  * @param includeLocal Whether to include local classes.
- * @return A list containing declarations with at least one of the specified class(es), interface(s) and object(s).
+ * @return A list containing declarations with at least one of the specified class(es), interface(s) or object(s).
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withClassOrInterfaceOrObjectNamed(
     name: String,
@@ -61,7 +61,7 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withClassOrInterfaceOrObj
  * @param names The names of additional classes, interfaces and objects to include.
  * @param includeNested Whether to include nested classes, interfaces and objects.
  * @param includeLocal Whether to include local classes.
- * @return A list containing declarations with at least one of the specified class(es), interface(s) and object(s).
+ * @return A list containing declarations with at least one of the specified class(es), interface(s) or object(s).
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withClassOrInterfaceOrObjectNamed(
     names: Collection<String>,
@@ -244,12 +244,12 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withoutAllClassesAndInter
 ): List<T> = filterNot { it.hasAllClassesAndInterfacesAndObjects(includeNested, includeLocal, predicate) }
 
 /**
- * List containing declarations with class, interfaces and objects declarations satisfying the predicate.
+ * List containing declarations with classes, interfaces and objects declarations satisfying the predicate.
  *
  * @param includeNested Whether to include nested classes, interfaces and objects.
  * @param includeLocal Whether to include local classes.
- * @param predicate A function that defines the condition to be met by the list of class, interfaces and objects declarations.
- * @return A list containing declarations with class, interfaces and objects declarations satisfying the predicate.
+ * @param predicate A function that defines the condition to be met by the list of classes, interfaces and objects declarations.
+ * @return A list containing declarations with classes, interfaces and objects declarations satisfying the predicate.
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withClassesAndInterfacesAndObjects(
     includeNested: Boolean = true,
@@ -258,12 +258,12 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withClassesAndInterfacesA
 ): List<T> = filter { predicate(it.classesAndInterfacesAndObjects(includeNested, includeLocal)) }
 
 /**
- * List containing declarations without class, interfaces and objects declarations satisfying the predicate.
+ * List containing declarations without classes, interfaces and objects declarations satisfying the predicate.
  *
  * @param includeNested Whether to include nested classes, interfaces and objects.
  * @param includeLocal Whether to include local classes.
- * @param predicate A function that defines the condition to be met by the list of class, interfaces and objects declarations.
- * @return A list containing declarations without class, interfaces and objects declarations satisfying the predicate.
+ * @param predicate A function that defines the condition to be met by the list of classes, interfaces and objects declarations.
+ * @return A list containing declarations without classes, interfaces and objects declarations satisfying the predicate.
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withoutClassesAndInterfacesAndObjects(
     includeNested: Boolean = true,
