@@ -1,48 +1,47 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.provider.KoNullableProvider
+import com.lemonappdev.konsist.api.provider.KoIsNullableProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("KoIsNullableProviderListExtTest"))
-class KoNullableProviderListExtTest {
+class KoIsNullableProviderListExtTest {
     @Test
-    fun `withNullableType() returns type with Nullable basic type`() {
+    fun `withNullable() returns type with Nullable basic type`() {
         // given
-        val type1: KoNullableProvider =
+        val type1: KoIsNullableProvider =
             mockk {
                 every { isNullable } returns true
             }
-        val type2: KoNullableProvider =
+        val type2: KoIsNullableProvider =
             mockk {
                 every { isNullable } returns false
             }
         val types = listOf(type1, type2)
 
         // when
-        val sut = types.withNullableType()
+        val sut = types.withNullable()
 
         // then
         sut shouldBeEqualTo listOf(type1)
     }
 
     @Test
-    fun `withoutNullableType() returns type without Nullable basic type`() {
+    fun `withoutNullable() returns type without Nullable basic type`() {
         // given
-        val type1: KoNullableProvider =
+        val type1: KoIsNullableProvider =
             mockk {
                 every { isNullable } returns true
             }
-        val type2: KoNullableProvider =
+        val type2: KoIsNullableProvider =
             mockk {
                 every { isNullable } returns false
             }
         val types = listOf(type1, type2)
 
         // when
-        val sut = types.withoutNullableType()
+        val sut = types.withoutNullable()
 
         // then
         sut shouldBeEqualTo listOf(type2)
