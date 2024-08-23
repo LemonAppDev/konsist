@@ -195,8 +195,7 @@ fun <T : KoClassAndObjectProvider> List<T>.withClassOrObject(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
     predicate: (KoClassAndObjectDeclaration) -> Boolean,
-): List<T> =
-    filter { it.hasClassOrObject(includeNested, includeLocal, predicate) }
+): List<T> = filter { it.hasClassOrObject(includeNested, includeLocal, predicate) }
 
 /**
  * List containing declarations that not have class or object satisfying the provided predicate.

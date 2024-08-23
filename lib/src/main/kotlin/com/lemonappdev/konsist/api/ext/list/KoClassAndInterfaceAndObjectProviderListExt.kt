@@ -195,8 +195,7 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withClassOrInterfaceOrObj
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
     predicate: (KoClassAndInterfaceAndObjectDeclaration) -> Boolean,
-): List<T> =
-    filter { it.hasClassOrInterfaceOrObject(includeNested, includeLocal, predicate) }
+): List<T> = filter { it.hasClassOrInterfaceOrObject(includeNested, includeLocal, predicate) }
 
 /**
  * List containing declarations that not have class, interface or object satisfying the provided predicate.

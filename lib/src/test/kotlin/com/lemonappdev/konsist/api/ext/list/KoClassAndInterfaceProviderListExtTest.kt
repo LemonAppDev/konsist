@@ -18,11 +18,19 @@ class KoClassAndInterfaceProviderListExtTest {
         val interfaceDeclaration2: KoInterfaceDeclaration = mockk()
         val declaration1: KoClassAndInterfaceProvider =
             mockk {
-                every { classesAndInterfaces(includeNested = true, includeLocal = false) } returns listOf(classDeclaration, interfaceDeclaration1)
+                every {
+                    classesAndInterfaces(
+                        includeNested = true,
+                        includeLocal = false,
+                    )
+                } returns listOf(classDeclaration, interfaceDeclaration1)
             }
         val declaration2: KoClassAndInterfaceProvider =
             mockk {
-                every { classesAndInterfaces(includeNested = true, includeLocal = false) } returns listOf(interfaceDeclaration2)
+                every { classesAndInterfaces(includeNested = true, includeLocal = false) } returns
+                    listOf(
+                        interfaceDeclaration2,
+                    )
             }
         val declaration3: KoClassAndInterfaceProvider =
             mockk {
