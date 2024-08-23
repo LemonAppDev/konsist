@@ -6,7 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoTypeDeclarationForKoGenericTypeProviderTest {
+class KoTypeDeclarationForKoIsGenericTypeProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
     fun `is-generic-type`(
@@ -25,7 +25,7 @@ class KoTypeDeclarationForKoGenericTypeProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/type/kotype/snippet/forkogenerictypeprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/type/kotype/snippet/forkoisgenerictypeprovider/", fileName)
 
     companion object {
         @Suppress("unused")

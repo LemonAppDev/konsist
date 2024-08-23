@@ -1,11 +1,10 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoGenericTypeProvider
+import com.lemonappdev.konsist.api.provider.KoIsGenericTypeProvider
 
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("KoIsGenericTypeProviderCore"))
-internal interface KoGenericTypeProviderCore :
-    KoGenericTypeProvider,
+internal interface KoIsGenericTypeProviderCore :
+    KoIsGenericTypeProvider,
     KoSourceAndAliasTypeProviderCore,
     KoBaseProviderCore {
     override val isGenericType: Boolean

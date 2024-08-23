@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoGenericTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsGenericTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
@@ -45,6 +46,7 @@ internal class KoTypeDeclarationCore private constructor(
         KoTypeProviderCore,
         KoSourceAndAliasTypeProviderCore,
         KoGenericTypeProviderCore,
+        KoIsGenericTypeProviderCore,
         KoPackageProviderCore,
         KoResideInPackageProviderCore,
         KoAnnotationProviderCore,
@@ -74,6 +76,12 @@ internal class KoTypeDeclarationCore private constructor(
         }
 
         override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
+
+    /*
+    Remove in version 0.18.0
+     */
+        override val isGenericType: Boolean
+            get() = super<KoIsGenericTypeProviderCore>.isGenericType
 
         override fun toString(): String = text
 
