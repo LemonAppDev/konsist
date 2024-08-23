@@ -39,7 +39,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withClassesAndInterfacesAndObjects() returns declaration with any class`() {
+    fun `withClassesAndInterfacesAndObjects() returns declaration with any class or interface or object`() {
         // given
         val declaration1: KoClassAndInterfaceAndObjectProvider =
             mockk {
@@ -59,7 +59,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withClassOrInterfaceOrObjectNamed(empty list) returns declaration with any class`() {
+    fun `withClassOrInterfaceOrObjectNamed(empty list) returns declaration with any class or interface or object`() {
         // given
         val declaration1: KoClassAndInterfaceAndObjectProvider =
             mockk {
@@ -79,7 +79,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withClassOrInterfaceOrObjectNamed(empty set) returns declaration with any class`() {
+    fun `withClassOrInterfaceOrObjectNamed(empty set) returns declaration with any class or interface or object`() {
         // given
         val declaration1: KoClassAndInterfaceAndObjectProvider =
             mockk {
@@ -99,7 +99,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withAllClassesAndInterfacesAndObjectsNamed(empty list) returns declaration with any class`() {
+    fun `withAllClassesAndInterfacesAndObjectsNamed(empty list) returns declaration with any class or interface or object`() {
         // given
         val declaration1: KoClassAndInterfaceAndObjectProvider =
             mockk {
@@ -119,7 +119,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withAllClassesAndInterfacesAndObjectsNamed(empty set) returns declaration with any class`() {
+    fun `withAllClassesAndInterfacesAndObjectsNamed(empty set) returns declaration with any class or interface or object`() {
         // given
         val declaration1: KoClassAndInterfaceAndObjectProvider =
             mockk {
@@ -139,7 +139,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withoutClassesAndInterfacesAndObjects() returns declaration without any class`() {
+    fun `withoutClassesAndInterfacesAndObjects() returns declaration without any class, interface or object`() {
         // given
         val declaration1: KoClassAndInterfaceAndObjectProvider =
             mockk {
@@ -159,7 +159,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withoutClassOrInterfaceOrObjectNamed(empty list) returns declaration without any class`() {
+    fun `withoutClassOrInterfaceOrObjectNamed(empty list) returns declaration without any class, interface or object`() {
         // given
         val declaration1: KoClassAndInterfaceAndObjectProvider =
             mockk {
@@ -179,7 +179,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withoutClassOrInterfaceOrObjectNamed(empty set) returns declaration without any class`() {
+    fun `withoutClassOrInterfaceOrObjectNamed(empty set) returns declaration without any class, interface or object`() {
         // given
         val declaration1: KoClassAndInterfaceAndObjectProvider =
             mockk {
@@ -199,7 +199,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withoutAllClassesAndInterfacesAndObjectsNamed(empty list) returns declaration without any class`() {
+    fun `withoutAllClassesAndInterfacesAndObjectsNamed(empty list) returns declaration without any class, interface or object`() {
         // given
         val declaration1: KoClassAndInterfaceAndObjectProvider =
             mockk {
@@ -219,7 +219,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withoutAllClassesAndInterfacesAndObjectsNamed(empty set) returns declaration without any class`() {
+    fun `withoutAllClassesAndInterfacesAndObjectsNamed(empty set) returns declaration without any class, interface or object`() {
         // given
         val declaration1: KoClassAndInterfaceAndObjectProvider =
             mockk {
@@ -239,7 +239,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withClassOrInterfaceOrObjectNamed(name) returns declaration with given class`() {
+    fun `withClassOrInterfaceOrObjectNamed(name) returns declaration with given class, interface or object`() {
         // given
         val name = "SampleName"
         val declaration1: KoClassAndInterfaceAndObjectProvider =
@@ -260,7 +260,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withClassOrInterfaceOrObjectNamed(String) returns declaration with any of given classesAndInterfacesAndObjects`() {
+    fun `withClassOrInterfaceOrObjectNamed(String) returns declaration with any of given class, interface or object`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -282,7 +282,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withClassOrInterfaceOrObjectNamed(list of String) returns declaration with any of given classesAndInterfacesAndObjects`() {
+    fun `withClassOrInterfaceOrObjectNamed(list of String) returns declaration with any of given class, interface or object`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -305,7 +305,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withClassOrInterfaceOrObjectNamed(set of String) returns declaration with any of given classesAndInterfacesAndObjects`() {
+    fun `withClassOrInterfaceOrObjectNamed(set of String) returns declaration with any of given class, interface or object`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -328,7 +328,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withoutClassOrInterfaceOrObjectNamed(name) returns declaration without given class`() {
+    fun `withoutClassOrInterfaceOrObjectNamed(name) returns declaration without given class, interface or object`() {
         // given
         val name = "SampleName"
         val declaration1: KoClassAndInterfaceAndObjectProvider =
@@ -349,7 +349,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withoutClassOrInterfaceOrObjectNamed(String) returns declaration without any of given classesAndInterfacesAndObjects`() {
+    fun `withoutClassOrInterfaceOrObjectNamed(String) returns declaration without any of given class, interface or object`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -371,7 +371,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withoutClassOrInterfaceOrObjectNamed(list of String) returns declaration without any of given classesAndInterfacesAndObjects`() {
+    fun `withoutClassOrInterfaceOrObjectNamed(list of String) returns declaration without any of given class, interface or object`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -394,7 +394,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withoutClassOrInterfaceOrObjectNamed(set of String) returns declaration without any of given classesAndInterfacesAndObjects`() {
+    fun `withoutClassOrInterfaceOrObjectNamed(set of String) returns declaration without any of given class, interface or object`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -417,7 +417,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withAllClassesAndInterfacesAndObjectsNamed(name) returns declaration with given class`() {
+    fun `withAllClassesAndInterfacesAndObjectsNamed(name) returns declaration with given classes, interfaces and objects`() {
         // given
         val name = "SampleName"
         val declaration1: KoClassAndInterfaceAndObjectProvider =
@@ -438,7 +438,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withAllClassesAndInterfacesAndObjectsNamed(String) returns declaration with all given classesAndInterfacesAndObjects`() {
+    fun `withAllClassesAndInterfacesAndObjectsNamed(String) returns declaration with all given classes, interfaces and objects`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -460,7 +460,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withAllClassesAndInterfacesAndObjectsNamed(list of String) returns declaration with all given classesAndInterfacesAndObjects`() {
+    fun `withAllClassesAndInterfacesAndObjectsNamed(list of String) returns declaration with all given classes, interfaces and objects`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -483,7 +483,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withAllClassesAndInterfacesAndObjectsNamed(set of String) returns declaration with all given classesAndInterfacesAndObjects`() {
+    fun `withAllClassesAndInterfacesAndObjectsNamed(set of String) returns declaration with all given classes, interfaces and objects`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -506,7 +506,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withoutAllClassesAndInterfacesAndObjectsNamed(name) returns declaration without given class`() {
+    fun `withoutAllClassesAndInterfacesAndObjectsNamed(name) returns declaration without given classes, interfaces and objects`() {
         // given
         val name = "SampleName"
         val declaration1: KoClassAndInterfaceAndObjectProvider =
@@ -527,7 +527,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withoutAllClassesAndInterfacesAndObjectsNamed(String) returns declaration without all of given classesAndInterfacesAndObjects`() {
+    fun `withoutAllClassesAndInterfacesAndObjectsNamed(String) returns declaration without all of given classes, interfaces and objects`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -549,7 +549,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withoutAllClassesAndInterfacesAndObjectsNamed(list of String) returns declaration without all of given classesAndInterfacesAndObjects`() {
+    fun `withoutAllClassesAndInterfacesAndObjectsNamed(list of String) returns declaration without all of given classes, interfaces and objects`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -572,7 +572,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withoutAllClassesAndInterfacesAndObjectsNamed(set of String) returns declaration without all of given classesAndInterfacesAndObjects`() {
+    fun `withoutAllClassesAndInterfacesAndObjectsNamed(set of String) returns declaration without all of given classes, interfaces and objects`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -595,7 +595,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withClassOrInterfaceOrObject{} returns declaration with classesAndInterfacesAndObjects which satisfy predicate`() {
+    fun `withClassOrInterfaceOrObject{} returns declaration with classes, interfaces and objects which satisfy predicate`() {
         // given
         val suffix = "Name"
         val predicate: (KoClassAndInterfaceAndObjectDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
@@ -617,7 +617,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withoutClassOrInterfaceOrObject{} returns declaration without classesAndInterfacesAndObjects which satisfy predicate`() {
+    fun `withoutClassOrInterfaceOrObject{} returns declaration without classes, interfaces and objects which satisfy predicate`() {
         // given
         val suffix = "Name"
         val predicate: (KoClassAndInterfaceAndObjectDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
@@ -639,7 +639,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withAllClassesAndInterfacesAndObjects{} returns declaration with all classesAndInterfacesAndObjects satisfy predicate`() {
+    fun `withAllClassesAndInterfacesAndObjects{} returns declaration with all classes, interfaces and objects satisfy predicate`() {
         // given
         val suffix = "Name"
         val predicate: (KoClassAndInterfaceAndObjectDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
@@ -661,7 +661,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withoutAllClassesAndInterfacesAndObjects{} returns declaration with all classesAndInterfacesAndObjects which not satisfy predicate`() {
+    fun `withoutAllClassesAndInterfacesAndObjects{} returns declaration with all classes, interfaces and objects which not satisfy predicate`() {
         // given
         val suffix = "Name"
         val predicate: (KoClassAndInterfaceAndObjectDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
@@ -683,7 +683,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withClassesAndInterfacesAndObjects{} returns declaration with classesAndInterfacesAndObjects which satisfy predicate`() {
+    fun `withClassesAndInterfacesAndObjects{} returns declaration with classes, interfaces and objects which satisfy predicate`() {
         // given
         val suffix = "Name"
         val predicate: (List<KoClassAndInterfaceAndObjectDeclaration>) -> Boolean =
@@ -722,7 +722,7 @@ class KoClassAndInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withoutClassesAndInterfacesAndObjects{} returns declaration without classesAndInterfacesAndObjects which satisfy predicate`() {
+    fun `withoutClassesAndInterfacesAndObjects{} returns declaration without classes, interfaces and objects which satisfy predicate`() {
         // given
         val suffix = "Name"
         val predicate: (List<KoClassAndInterfaceAndObjectDeclaration>) -> Boolean =
