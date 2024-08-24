@@ -45,10 +45,10 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
     }
 
     @Test
-    fun `class-has-complex-default-parameter-value`() {
+    fun `class-has-class-default-parameter-value`() {
         // given
         val sut =
-            getSnippetFile("class-has-complex-default-parameter-value")
+            getSnippetFile("class-has-class-default-parameter-value")
                 .classes()
                 .first()
                 .primaryConstructor
@@ -65,10 +65,10 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
     }
 
     @Test
-    fun `function-has-complex-default-parameter-value`() {
+    fun `function-has-class-default-parameter-value`() {
         // given
         val sut =
-            getSnippetFile("function-has-complex-default-parameter-value")
+            getSnippetFile("function-has-class-default-parameter-value")
                 .functions()
                 .first()
                 .parameters
@@ -80,6 +80,123 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
             hasDefaultValue() shouldBeEqualTo true
             hasDefaultValue("SampleType()") shouldBeEqualTo true
             hasDefaultValue("OtherType()") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `class-has-object-default-parameter-value`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-object-default-parameter-value")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+
+        // then
+        assertSoftly(sut) {
+            it?.defaultValue shouldBeEqualTo "SampleObject"
+            it?.hasDefaultValue() shouldBeEqualTo true
+            it?.hasDefaultValue("SampleObject") shouldBeEqualTo true
+            it?.hasDefaultValue("SampleObject()") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `function-has-object-default-parameter-value`() {
+        // given
+        val sut =
+            getSnippetFile("function-has-object-default-parameter-value")
+                .functions()
+                .first()
+                .parameters
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            defaultValue shouldBeEqualTo "SampleObject"
+            hasDefaultValue() shouldBeEqualTo true
+            hasDefaultValue("SampleObject") shouldBeEqualTo true
+            hasDefaultValue("SampleObject()") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `class-has-lambda-default-parameter-value`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-lambda-default-parameter-value")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+
+        // then
+        assertSoftly(sut) {
+            it?.defaultValue shouldBeEqualTo "{ }"
+            it?.hasDefaultValue() shouldBeEqualTo true
+            it?.hasDefaultValue("{ }") shouldBeEqualTo true
+            it?.hasDefaultValue("SampleObject()") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `function-has-lambda-default-parameter-value`() {
+        // given
+        val sut =
+            getSnippetFile("function-has-lambda-default-parameter-value")
+                .functions()
+                .first()
+                .parameters
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            defaultValue shouldBeEqualTo "{ }"
+            hasDefaultValue() shouldBeEqualTo true
+            hasDefaultValue("{ }") shouldBeEqualTo true
+            hasDefaultValue("SampleObject()") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `class-has-generic-default-parameter-value`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-generic-default-parameter-value")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+
+        // then
+        assertSoftly(sut) {
+            it?.defaultValue shouldBeEqualTo "SampleGenericClassWithParameter(\"\")"
+            it?.hasDefaultValue() shouldBeEqualTo true
+            it?.hasDefaultValue("SampleGenericClassWithParameter(\"\")") shouldBeEqualTo true
+            it?.hasDefaultValue("SampleGenericClassWithParameter") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `function-has-generic-default-parameter-value`() {
+        // given
+        val sut =
+            getSnippetFile("function-has-generic-default-parameter-value")
+                .functions()
+                .first()
+                .parameters
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            defaultValue shouldBeEqualTo "SampleGenericClassWithParameter(\"\")"
+            hasDefaultValue() shouldBeEqualTo true
+            hasDefaultValue("SampleGenericClassWithParameter(\"\")") shouldBeEqualTo true
+            hasDefaultValue("SampleGenericClassWithParameter") shouldBeEqualTo false
         }
     }
 

@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.SampleObject
+
+class SampleClass(val sampleParameter: SampleObject = SampleObject) {}
