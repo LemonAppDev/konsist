@@ -6,6 +6,8 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoGenericTypeProvider
+import com.lemonappdev.konsist.api.provider.KoIsGenericTypeProvider
+import com.lemonappdev.konsist.api.provider.KoIsNullableProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
@@ -30,12 +32,14 @@ interface KoTypeDeclaration :
     KoPathProvider,
     KoLocationProvider,
     KoNullableProvider,
+    KoIsNullableProvider,
     KoContainingFileProvider,
     KoContainingDeclarationProvider,
     KoModuleProvider,
     KoSourceSetProvider,
     KoTypeProvider,
     KoGenericTypeProvider,
+    KoIsGenericTypeProvider,
     KoSourceAndAliasTypeProvider,
     KoPackageProvider,
     KoResideInPackageProvider,

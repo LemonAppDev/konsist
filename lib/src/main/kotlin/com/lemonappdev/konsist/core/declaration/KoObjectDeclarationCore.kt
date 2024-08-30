@@ -15,6 +15,7 @@ import com.lemonappdev.konsist.core.provider.KoExternalParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoInitBlockProviderCore
 import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -79,6 +80,7 @@ internal class KoObjectDeclarationCore(
         KoResideInPackageProviderCore,
         KoTextProviderCore,
         KoTopLevelProviderCore,
+        KoIsTopLevelProviderCore,
         KoVisibilityModifierProviderCore,
         KoDataModifierProviderCore,
         KoCompanionModifierProviderCore {
@@ -108,6 +110,12 @@ internal class KoObjectDeclarationCore(
     ): List<KoBaseDeclaration> =
         KoDeclarationProviderCoreUtil
             .getKoDeclarations(ktObjectDeclaration, includeNested, includeLocal, this)
+
+    /*
+    Remove in version 0.18.0
+     */
+    override val isTopLevel: Boolean
+        get() = super<KoIsTopLevelProviderCore>.isTopLevel
 
     override fun toString(): String = name
 
