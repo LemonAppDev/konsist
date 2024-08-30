@@ -34,6 +34,13 @@ class ApiKonsistTest {
     }
 
     @Test
+    fun `every api declaration has valid KDoc`() {
+        apiPackageScope
+            .classesAndInterfacesAndObjects()
+            .assertTrue { it.hasKDoc }
+    }
+
+    @Test
     fun `includeNested parameter is always before includeLocal parameter`() {
         apiPackageScope
             .functions()
