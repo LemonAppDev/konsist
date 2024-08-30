@@ -20,6 +20,24 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     @Test
+    fun `nested-parent-from-import-of-class-fully-qualified-name`() {
+        // given
+        val sut =
+            getSnippetFile("nested-parent-from-import-of-class-fully-qualified-name")
+                .classes()
+                .parents()
+                .first()
+
+        // then
+        sut
+            .fullyQualifiedName
+            .shouldBeEqualTo(
+                "com.lemonappdev.konsist.testdata." +
+                    "SampleParentClassWithNestedDeclarations.SampleNestedClass",
+            )
+    }
+
+    @Test
     fun `parent-from-file-with-package-of-class-fully-qualified-name`() {
         // given
         val sut =
@@ -98,6 +116,24 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     @Test
+    fun `nested-parent-from-import-of-interface-fully-qualified-name`() {
+        // given
+        val sut =
+            getSnippetFile("nested-parent-from-import-of-interface-fully-qualified-name")
+                .interfaces()
+                .parents()
+                .first()
+
+        // then
+        sut
+            .fullyQualifiedName
+            .shouldBeEqualTo(
+                "com.lemonappdev.konsist.testdata." +
+                    "SampleParentInterfaceWithNestedDeclarations.SampleNestedInterface",
+            )
+    }
+
+    @Test
     fun `parent-from-file-with-package-of-interface-fully-qualified-name`() {
         // given
         val sut =
@@ -173,6 +209,24 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleParentClass"
+    }
+
+    @Test
+    fun `nested-parent-from-import-of-object-fully-qualified-name`() {
+        // given
+        val sut =
+            getSnippetFile("nested-parent-from-import-of-object-fully-qualified-name")
+                .objects()
+                .parents()
+                .first()
+
+        // then
+        sut
+            .fullyQualifiedName
+            .shouldBeEqualTo(
+                "com.lemonappdev.konsist.testdata." +
+                    "SampleParentClassWithNestedDeclarations.SampleNestedClass",
+            )
     }
 
     @Test

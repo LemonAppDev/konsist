@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAliasProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsWildcardProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoMatchesProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -31,7 +32,8 @@ internal class KoImportDeclarationCore private constructor(override val ktImport
     KoModuleProviderCore,
     KoSourceSetProviderCore,
     KoTextProviderCore,
-    KoWildcardProviderCore {
+    KoWildcardProviderCore,
+    KoIsWildcardProviderCore {
         override val psiElement: PsiElement by lazy { ktImportDirective }
 
         override val ktElement: KtElement by lazy { ktImportDirective }
@@ -44,6 +46,16 @@ internal class KoImportDeclarationCore private constructor(override val ktImport
                 ?.let { KoImportAliasDeclarationCore.getInstance(it, this) }
         }
 
+    /*
+    Remove in version 0.18.0
+     */
+        override val isWildcard: Boolean
+            get() = super<KoIsWildcardProviderCore>.isWildcard
+
+        // KoImportDeclarationCore does not implement KoRepresentsTypeProviderCore because it internally implements
+        // KoFullyQualifiedNameProviderCore, which import declaration does not possess. Therefore, this function is manually overridden.
+        override fun representsType(name: String?): Boolean = name?.let { this.name.endsWith(it) } ?: false
+
         override fun toString(): String = name
 
         internal companion object {
@@ -53,6 +65,8 @@ internal class KoImportDeclarationCore private constructor(override val ktImport
                 ktImportDirective: KtImportDirective,
                 containingDeclaration: KoBaseDeclaration,
             ): KoImportDeclaration =
-                cache.getOrCreateInstance(ktImportDirective, containingDeclaration) { KoImportDeclarationCore(ktImportDirective) }
+                cache.getOrCreateInstance(ktImportDirective, containingDeclaration) {
+                    KoImportDeclarationCore(ktImportDirective)
+                }
         }
     }

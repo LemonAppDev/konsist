@@ -1,7 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("de.mannodermaus.android-junit5") version "1.10.2.0"
+    id("de.mannodermaus.android-junit5") version "1.11.0.0"
 }
 
 android {

@@ -14,6 +14,10 @@ import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProv
 import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoGetterProviderCore
 import com.lemonappdev.konsist.core.provider.KoInitializerProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsConstructorDefinedProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsInitializedProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsReadOnlyProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -74,11 +78,13 @@ internal class KoPropertyDeclarationCore private constructor(
         KoBaseProviderCore,
         KoAnnotationProviderCore,
         KoConstructorDefinedProviderCore,
+        KoIsConstructorDefinedProviderCore,
         KoContainingFileProviderCore,
         KoDeclarationFullyQualifiedNameProviderCore,
         KoDelegateProviderCore,
         KoNullableTypeProviderCore,
         KoInitializerProviderCore,
+        KoIsInitializedProviderCore,
         KoKDocProviderCore,
         KoLocationProviderCore,
         KoModifierProviderCore,
@@ -92,6 +98,7 @@ internal class KoPropertyDeclarationCore private constructor(
         KoResideInPackageProviderCore,
         KoTextProviderCore,
         KoTopLevelProviderCore,
+        KoIsTopLevelProviderCore,
         KoValueProviderCore,
         KoVisibilityModifierProviderCore,
         KoValModifierProviderCore,
@@ -107,7 +114,8 @@ internal class KoPropertyDeclarationCore private constructor(
         KoGetterProviderCore,
         KoTacitTypeProviderCore,
         KoSetterProviderCore,
-        KoReadOnlyProviderCore {
+        KoReadOnlyProviderCore,
+        KoIsReadOnlyProviderCore {
         override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }
 
         override val ktModifierListOwner: KtModifierListOwner by lazy { ktCallableDeclaration }
@@ -119,6 +127,30 @@ internal class KoPropertyDeclarationCore private constructor(
         override val ktElement: KtElement by lazy { ktCallableDeclaration }
 
         override val ktDeclaration: KtDeclaration by lazy { ktCallableDeclaration }
+
+    /*
+    Remove in version 0.18.0
+     */
+        override val isInitialized: Boolean
+            get() = super<KoIsInitializedProviderCore>.isInitialized
+
+    /*
+    Remove in version 0.18.0
+     */
+        override val isConstructorDefined: Boolean
+            get() = super<KoIsConstructorDefinedProviderCore>.isConstructorDefined
+
+    /*
+    Remove in version 0.18.0
+     */
+        override val isReadOnly: Boolean
+            get() = super<KoIsReadOnlyProviderCore>.isReadOnly
+
+    /*
+    Remove in version 0.18.0
+     */
+        override val isTopLevel: Boolean
+            get() = super<KoIsTopLevelProviderCore>.isTopLevel
 
         override val ktExpression: KtExpression? by lazy {
             ktCallableDeclaration

@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.api.provider
 /**
  * An interface representing a Kotlin declaration that provides information about whether it has been initialized.
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("KoIsInitializedProvider"))
 interface KoInitializerProvider : KoBaseProvider {
     /**
      * Determines whatever this declaration has been initialized. Declaration that has been initialized has a body.

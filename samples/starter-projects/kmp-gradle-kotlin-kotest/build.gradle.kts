@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "2.0.10"
+    kotlin("multiplatform") version "2.0.20"
     id("io.kotest.multiplatform") version "5.9.1"
     application
     id("com.android.application")
@@ -58,9 +58,9 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.3.1-pre.791")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.3.1-pre.791")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.13.0-pre.791")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.3.1-pre.799")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.3.1-pre.799")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.13.3-pre.799")
             }
         }
         val jsTest by getting

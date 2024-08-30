@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoNullableProvider
  *
  * @return A list containing declarations that have nullable type.
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("withNullable"))
 fun <T : KoNullableProvider> List<T>.withNullableType(): List<T> = filter { it.isNullable }
 
 /**
@@ -14,4 +15,5 @@ fun <T : KoNullableProvider> List<T>.withNullableType(): List<T> = filter { it.i
  *
  * @return A list containing declarations that don't have nullable type.
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("withoutNullable"))
 fun <T : KoNullableProvider> List<T>.withoutNullableType(): List<T> = filterNot { it.isNullable }
