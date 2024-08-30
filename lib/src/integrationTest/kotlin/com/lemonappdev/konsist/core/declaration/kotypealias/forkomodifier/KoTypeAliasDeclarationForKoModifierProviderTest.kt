@@ -42,6 +42,8 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
             hasAllModifiers(listOf(OPEN, DATA)) shouldBeEqualTo false
             hasAllModifiers(setOf(OPEN)) shouldBeEqualTo false
             hasAllModifiers(setOf(OPEN, DATA)) shouldBeEqualTo false
+            hasModifiers(OPEN) shouldBeEqualTo false
+            hasModifiers(OPEN, DATA) shouldBeEqualTo false
         }
     }
 
@@ -105,7 +107,6 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
                 arguments("typealias-has-modifiers-multiline-comment-and-annotation-before-them"),
                 arguments("typealias-has-modifiers-and-comment-before-them"),
                 arguments("typealias-has-modifiers-and-comment-after-them"),
-                arguments("typealias-has-modifier-and-annotation-with-string-parameter-containing-link"),
             )
     }
 }

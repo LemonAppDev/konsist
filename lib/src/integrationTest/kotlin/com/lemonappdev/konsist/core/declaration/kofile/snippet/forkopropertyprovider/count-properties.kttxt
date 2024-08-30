@@ -1,0 +1,5 @@
+internal const val sampleProperty = ""
+
+class SampleClass {
+    internal val sampleNestedProperty = ""
+}

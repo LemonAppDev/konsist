@@ -9,10 +9,7 @@ import com.lemonappdev.konsist.api.provider.KoNullableTypeProvider
 import com.lemonappdev.konsist.api.provider.KoTestClassProvider
 import com.lemonappdev.konsist.api.provider.KoValueProvider
 
-internal interface KoTestClassProviderCore :
-    KoTestClassProvider,
-    KoNameProviderCore,
-    KoBaseProviderCore {
+internal interface KoTestClassProviderCore : KoTestClassProvider, KoNameProviderCore, KoBaseProviderCore {
     override fun testClasses(
         testPropertyName: String,
         moduleName: String?,

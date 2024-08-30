@@ -2,6 +2,4 @@ package com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.pr
 
 import com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.infrastructure.InfrastructureFirstClass
 
-class InfrastructureSecondClass(
-    val sampleParameter: InfrastructureFirstClass,
-)
+class InfrastructureSecondClass(val sampleParameter: InfrastructureFirstClass)

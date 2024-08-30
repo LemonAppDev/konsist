@@ -26,7 +26,8 @@ class KoKDocDeclarationForKoKDocTagProviderTest {
                     .declarations(includeNested = true)
                     .filterIsInstance<KoNameProvider>()
                     .first { it.name == declarationName } as KoKDocProvider
-            ).kDoc
+            )
+                .kDoc
 
         // then
         sut
@@ -116,6 +117,7 @@ class KoKDocDeclarationForKoKDocTagProviderTest {
             it?.hasAllTags(setOf(KoKDocTag.SINCE, KoKDocTag.SUPPRESS)) shouldBeEqualTo false
             it?.hasAllTags(setOf(KoKDocTag.SINCE)) shouldBeEqualTo false
             it?.hasAllTags(setOf(KoKDocTag.SINCE, KoKDocTag.SUPPRESS)) shouldBeEqualTo false
+            it?.hasTags(KoKDocTag.SINCE) shouldBeEqualTo false
         }
     }
 
@@ -154,6 +156,11 @@ class KoKDocDeclarationForKoKDocTagProviderTest {
             it?.hasAllTags(setOf(KoKDocTag.SINCE)) shouldBeEqualTo true
             it?.hasAllTags(setOf(KoKDocTag.SINCE, KoKDocTag.SEE)) shouldBeEqualTo true
             it?.hasAllTags(setOf(KoKDocTag.SINCE, KoKDocTag.SUPPRESS)) shouldBeEqualTo false
+            it?.hasTags(KoKDocTag.SINCE) shouldBeEqualTo true
+            it?.hasTags(KoKDocTag.SINCE, KoKDocTag.SEE) shouldBeEqualTo true
+            it?.hasTags(KoKDocTag.SAMPLE) shouldBeEqualTo false
+            it?.hasTags(KoKDocTag.SINCE, KoKDocTag.SAMPLE) shouldBeEqualTo false
+            it?.hasTags(KoKDocTag.SINCE, KoKDocTag.SEE, KoKDocTag.SAMPLE) shouldBeEqualTo false
         }
     }
 
@@ -170,6 +177,8 @@ class KoKDocDeclarationForKoKDocTagProviderTest {
         assertSoftly(sut) {
             it?.numTags shouldBeEqualTo 1
             it?.hasTags() shouldBeEqualTo true
+            it?.hasTags(KoKDocTag.SINCE) shouldBeEqualTo true
+            it?.hasTags(KoKDocTag.SINCE, KoKDocTag.SEE) shouldBeEqualTo false
         }
     }
 
@@ -186,11 +195,11 @@ class KoKDocDeclarationForKoKDocTagProviderTest {
         assertSoftly(sut) {
             it?.description shouldBeEqualTo ""
             it?.numTags shouldBeEqualTo 2
-            it?.hasAllTags(KoKDocTag.SINCE) shouldBeEqualTo true
-            it?.hasAllTags(KoKDocTag.SINCE, KoKDocTag.SEE) shouldBeEqualTo true
-            it?.hasAllTags(KoKDocTag.SAMPLE) shouldBeEqualTo false
-            it?.hasAllTags(KoKDocTag.SINCE, KoKDocTag.SAMPLE) shouldBeEqualTo false
-            it?.hasAllTags(KoKDocTag.SINCE, KoKDocTag.SEE, KoKDocTag.SAMPLE) shouldBeEqualTo false
+            it?.hasTags(KoKDocTag.SINCE) shouldBeEqualTo true
+            it?.hasTags(KoKDocTag.SINCE, KoKDocTag.SEE) shouldBeEqualTo true
+            it?.hasTags(KoKDocTag.SAMPLE) shouldBeEqualTo false
+            it?.hasTags(KoKDocTag.SINCE, KoKDocTag.SAMPLE) shouldBeEqualTo false
+            it?.hasTags(KoKDocTag.SINCE, KoKDocTag.SEE, KoKDocTag.SAMPLE) shouldBeEqualTo false
         }
     }
 

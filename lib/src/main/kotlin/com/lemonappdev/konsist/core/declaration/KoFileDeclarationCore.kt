@@ -6,9 +6,6 @@ import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
-import com.lemonappdev.konsist.core.provider.KoClassAndInterfaceAndObjectProviderCore
-import com.lemonappdev.konsist.core.provider.KoClassAndInterfaceProviderCore
-import com.lemonappdev.konsist.core.provider.KoClassAndObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoFileExtensionProviderCore
@@ -16,7 +13,6 @@ import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoHasPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoImportAliasProviderCore
 import com.lemonappdev.konsist.core.provider.KoImportProviderCore
-import com.lemonappdev.konsist.core.provider.KoInterfaceAndObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
@@ -33,15 +29,10 @@ import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
 
-internal class KoFileDeclarationCore(
-    override val ktFile: KtFile,
-) : KoFileDeclaration,
+internal class KoFileDeclarationCore(override val ktFile: KtFile) :
+    KoFileDeclaration,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
-    KoClassAndInterfaceAndObjectProviderCore,
-    KoClassAndInterfaceProviderCore,
-    KoClassAndObjectProviderCore,
-    KoInterfaceAndObjectProviderCore,
     KoClassProviderCore,
     KoDeclarationProviderCore,
     KoFileExtensionProviderCore,

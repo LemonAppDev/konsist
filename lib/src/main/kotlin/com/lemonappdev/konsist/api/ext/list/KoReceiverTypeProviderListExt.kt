@@ -11,6 +11,36 @@ val <T : KoReceiverTypeProvider> List<T>.receiverTypes: List<KoTypeDeclaration>
     get() = mapNotNull { it.receiverType }
 
 /**
+ * List containing declarations with receiver type.
+ *
+ * @param names The receiver type name(s) to include.
+ * @return A list containing declarations with the specified receiver type(s) (or any receiver type if [names] is empty).
+ */
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("withReceiverType { it.name == ... }"))
+fun <T : KoReceiverTypeProvider> List<T>.withReceiverType(vararg names: String): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> it.hasReceiverType()
+            else -> names.any { type -> it.hasReceiverType(type) }
+        }
+    }
+
+/**
+ * List containing declarations without receiver type.
+ *
+ * @param names The receiver type name(s) to exclude.
+ * @return A list containing declarations without specified receiver type(s) (or none receiver type if [names] is empty).
+ */
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("withoutReceiverType { it.name != ... }"))
+fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverType(vararg names: String): List<T> =
+    filter {
+        when {
+            names.isEmpty() -> !it.hasReceiverType()
+            else -> names.none { type -> it.hasReceiverType(type) }
+        }
+    }
+
+/**
  * List containing declarations with the specified receiver type.
  *
  * @param predicate The predicate function to determine if a declaration receiver type satisfies a condition.

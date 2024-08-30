@@ -24,7 +24,7 @@ class KoScopeForKoDeclarationTest {
                     "scope-contains-all-type-of-declarations",
                     "SampleAnnotation1",
                     "SampleAnnotation2",
-                    "com.samplepackage",
+                    "samplepackage",
                     "com.lemonappdev.konsist.testdata.SampleAnnotation1",
                     "com.lemonappdev.konsist.testdata.SampleAnnotation2",
                     "sampleProperty",

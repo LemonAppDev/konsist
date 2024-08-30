@@ -13,6 +13,15 @@ interface KoReceiverTypeProvider : KoBaseProvider {
     val receiverType: KoTypeDeclaration?
 
     /**
+     * Determines whatever declaration has receiver type.
+     *
+     * @param name the receiver type to check.
+     * @return `true` if the declaration has receiver type with the specified name, `false` otherwise.
+     */
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasReceiverType { it.name == name }"))
+    fun hasReceiverType(name: String): Boolean
+
+    /**
      * Determines whatever declaration has a specified receiver type.
      *
      * @param predicate The predicate function used to determine if a declaration receiver type satisfies a condition.

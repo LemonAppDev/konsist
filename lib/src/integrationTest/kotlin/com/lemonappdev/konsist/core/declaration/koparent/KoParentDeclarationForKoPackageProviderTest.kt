@@ -12,7 +12,7 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-class-is-not-in-package")
                 .classes()
-                .parents()
+                .parents
                 .first()
 
         // then
@@ -25,11 +25,11 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-class-is-in-package")
                 .classes()
-                .parents()
+                .parents
                 .first()
 
         // then
-        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
+        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
     }
 
     @Test
@@ -38,7 +38,7 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-interface-is-not-in-package")
                 .interfaces()
-                .parents()
+                .parents
                 .first()
 
         // then
@@ -51,11 +51,11 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-interface-is-in-package")
                 .interfaces()
-                .parents()
+                .parents
                 .first()
 
         // then
-        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
+        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
     }
 
     @Test
@@ -64,7 +64,7 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-object-is-not-in-package")
                 .objects()
-                .parents()
+                .parents
                 .first()
 
         // then
@@ -77,11 +77,11 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-file-of-object-is-in-package")
                 .objects()
-                .parents()
+                .parents
                 .first()
 
         // then
-        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
+        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
     }
 
     @Test
@@ -90,11 +90,11 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-import-of-class-package")
                 .classes()
-                .parents()
+                .parents
                 .first()
 
         // then
-        sut.packagee?.name shouldBeEqualTo "com.lemonappdev.konsist.testdata"
+        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata"
     }
 
     @Test
@@ -103,11 +103,11 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-import-of-interface-package")
                 .interfaces()
-                .parents()
+                .parents
                 .first()
 
         // then
-        sut.packagee?.name shouldBeEqualTo "com.lemonappdev.konsist.testdata"
+        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata"
     }
 
     @Test
@@ -116,11 +116,11 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("parent-from-import-of-object-package")
                 .objects()
-                .parents()
+                .parents
                 .first()
 
         // then
-        sut.packagee?.name shouldBeEqualTo "com.lemonappdev.konsist.testdata"
+        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata"
     }
 
     @Test
@@ -129,11 +129,11 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("external-parent-of-class-package")
                 .classes()
-                .parents()
+                .parents
                 .first()
 
         // then
-        sut.packagee?.name shouldBeEqualTo "com.lemonappdev.konsist.externalsample"
+        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.externalsample"
     }
 
     @Test
@@ -142,11 +142,11 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("external-parent-of-interface-package")
                 .interfaces()
-                .parents()
+                .parents
                 .first()
 
         // then
-        sut.packagee?.name shouldBeEqualTo "com.lemonappdev.konsist.externalsample"
+        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.externalsample"
     }
 
     @Test
@@ -155,11 +155,11 @@ class KoParentDeclarationForKoPackageProviderTest {
         val sut =
             getSnippetFile("external-parent-of-object-package")
                 .objects()
-                .parents()
+                .parents
                 .first()
 
         // then
-        sut.packagee?.name shouldBeEqualTo "com.lemonappdev.konsist.externalsample"
+        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.externalsample"
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koparent/snippet/forkopackageprovider/", fileName)

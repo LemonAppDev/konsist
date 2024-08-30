@@ -25,6 +25,21 @@ internal interface KoTypeAliasProviderCore :
 
     override fun countTypeAliases(predicate: (KoTypeAliasDeclaration) -> Boolean): Int = typeAliases.count { predicate(it) }
 
+    @Deprecated(
+        """
+            Will be removed in v0.16.0. 
+            If you passed one argument - replace with `hasTypeAliasWithName`, otherwise with `hasTypeAliasesWithAllNames`.
+            """,
+    )
+    override fun hasTypeAliases(vararg names: String): Boolean =
+        when {
+            names.isEmpty() -> typeAliases.isNotEmpty()
+            else ->
+                names.all {
+                    typeAliases.any { typeAlias -> typeAlias.name == it }
+                }
+        }
+
     override fun hasTypeAliases(): Boolean = typeAliases.isNotEmpty()
 
     override fun hasTypeAliasWithName(

@@ -5,9 +5,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 /**
  * An interface representing a Kotlin declaration that provides information about whether it has `annotation` modifier.
  */
-interface KoAnnotationModifierProvider :
-    KoBaseProvider,
-    KoModifierProvider {
+interface KoAnnotationModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
      * Determines whatever declaration has `annotation` modifier.
      */

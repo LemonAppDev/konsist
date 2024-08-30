@@ -32,6 +32,7 @@ class KoFunctionDeclarationForKoLocalFunctionProviderTest {
             hasLocalFunctionsWithAllNames(setOf("sampleLocalFunction1", "sampleLocalFunction2")) shouldBeEqualTo false
             hasLocalFunction { it.name == "sampleLocalFunction" } shouldBeEqualTo false
             hasAllLocalFunctions { it.name == "sampleLocalFunction" } shouldBeEqualTo true
+            containsLocalFunction { it.name == "sampleLocalFunction" } shouldBeEqualTo false
         }
     }
 
@@ -74,6 +75,8 @@ class KoFunctionDeclarationForKoLocalFunctionProviderTest {
             hasLocalFunction { it.name == "otherLocalFunction" } shouldBeEqualTo false
             hasAllLocalFunctions { it.name.endsWith("2") || it.name == "sampleLocalFunction1" } shouldBeEqualTo true
             hasAllLocalFunctions { it.name.endsWith("2") } shouldBeEqualTo false
+            containsLocalFunction { it.name == "sampleLocalFunction1" } shouldBeEqualTo true
+            containsLocalFunction { it.name == "otherLocalFunction1" } shouldBeEqualTo false
             localFunctions
                 .map { it.name }
                 .shouldBeEqualTo(listOf("sampleLocalFunction1", "sampleLocalFunction2"))

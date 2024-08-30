@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
@@ -17,6 +18,7 @@ interface KoPackageDeclaration :
     KoBaseDeclaration,
     KoBaseProvider,
     KoContainingFileProvider,
+    KoFullyQualifiedNameProvider,
     KoLocationProvider,
     KoNameProvider,
     KoPackageMatchingPathProvider,

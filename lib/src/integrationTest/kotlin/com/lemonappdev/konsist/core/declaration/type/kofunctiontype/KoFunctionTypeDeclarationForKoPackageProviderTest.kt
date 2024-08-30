@@ -36,7 +36,7 @@ class KoFunctionTypeDeclarationForKoPackageProviderTest {
                 ?.asFunctionTypeDeclaration()
 
         // then
-        sut?.packagee?.name shouldBeEqualTo "com.samplepackage"
+        sut?.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
     }
 
     private fun getSnippetFile(fileName: String) =

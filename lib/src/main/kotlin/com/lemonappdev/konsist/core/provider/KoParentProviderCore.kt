@@ -17,6 +17,14 @@ internal interface KoParentProviderCore :
     KoBaseProviderCore {
     val ktClassOrObject: KtClassOrObject
 
+    @Deprecated("Will be removed in v0.16.0.", replaceWith = ReplaceWith("parents()"))
+    override val parents: List<KoParentDeclaration>
+        get() = parents()
+
+    @Deprecated("Will be removed in v0.16.0.", replaceWith = ReplaceWith("numParents()"))
+    override val numParents: Int
+        get() = parents.size
+
     override fun parents(indirectParents: Boolean): List<KoParentDeclaration> {
         val directParentDeclarations =
             ktClassOrObject
@@ -31,31 +39,20 @@ internal interface KoParentProviderCore :
                             .substringBefore("(")
                             .substringBefore("<")
 
-                    val innerName = if (name.contains(".")) name.substringBeforeLast(".") else name
-                    val outerName = if (name.contains(".")) name.substringAfterLast(".") else name
-
-                    val import =
+                    val fqn =
                         containingFile
                             .imports
                             .firstOrNull { import ->
-                                if (import.alias != null) {
-                                    import.alias?.name == innerName
-                                } else {
-                                    import.name.substringAfterLast(".") == innerName
-                                }
+                                import.name.substringAfterLast(".") == name || import.alias?.name == name
                             }
-
-                    val fqn =
-                        import
                             ?.name
-                            ?: (containingFile.packagee?.name + "." + name)
+                            ?: (containingFile.packagee?.fullyQualifiedName + "." + name)
 
-                    val isAlias = import?.alias != null
-
-                    return@map getClass(outerName, fqn, isAlias, containingFile)
-                        ?: getInterface(outerName, fqn, isAlias, containingFile)
-                        ?: KoExternalDeclarationCore.getInstance(outerName, it)
-                }?.toMutableList()
+                    return@map getClass(name, fqn, containingFile)
+                        ?: getInterface(name, fqn, containingFile)
+                        ?: KoExternalDeclarationCore.getInstance(name, it)
+                }
+                ?.toMutableList()
                 .orEmpty()
 
         val indirectParentDeclarations =
@@ -90,6 +87,16 @@ internal interface KoParentProviderCore :
         indirectParents: Boolean,
         predicate: (KoParentDeclaration) -> Boolean,
     ): Int = parents(indirectParents).count { predicate(it) }
+
+    @Deprecated("Will be removed in v0.16.0.", ReplaceWith("hasParentsWithAllNames(*names)"))
+    override fun hasParents(vararg names: String): Boolean =
+        when {
+            names.isEmpty() -> parents().isNotEmpty()
+            else ->
+                names.all {
+                    parents().any { parent -> it == parent.name }
+                }
+        }
 
     override fun hasParents(indirectParents: Boolean): Boolean = parents(indirectParents).isNotEmpty()
 

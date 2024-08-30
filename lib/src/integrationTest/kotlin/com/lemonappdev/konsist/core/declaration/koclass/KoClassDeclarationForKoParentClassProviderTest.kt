@@ -56,6 +56,7 @@ class KoClassDeclarationForKoParentClassProviderTest {
             hasAllParentClassesOf(listOf(SampleParentClass::class, SampleClass::class)) shouldBeEqualTo false
             hasAllParentClassesOf(setOf(SampleParentClass::class)) shouldBeEqualTo false
             hasAllParentClassesOf(setOf(SampleParentClass::class, SampleClass::class)) shouldBeEqualTo false
+            hasParentClass("SampleParentClass") shouldBeEqualTo false
         }
     }
 
@@ -120,6 +121,8 @@ class KoClassDeclarationForKoParentClassProviderTest {
             hasAllParentClassesOf(setOf(SampleParentClass::class)) shouldBeEqualTo true
             hasAllParentClassesOf(setOf(SampleClass::class)) shouldBeEqualTo false
             hasAllParentClassesOf(setOf(SampleParentClass::class, SampleClass::class)) shouldBeEqualTo false
+            hasParentClass("SampleParentClass") shouldBeEqualTo true
+            hasParentClass("OtherClass") shouldBeEqualTo false
         }
     }
 
@@ -184,6 +187,8 @@ class KoClassDeclarationForKoParentClassProviderTest {
             hasAllParentClassesOf(setOf(SampleParentClass::class)) shouldBeEqualTo true
             hasAllParentClassesOf(setOf(SampleClass::class)) shouldBeEqualTo false
             hasAllParentClassesOf(setOf(SampleParentClass::class, SampleClass::class)) shouldBeEqualTo false
+            hasParentClass("SampleParentClass") shouldBeEqualTo true
+            hasParentClass("OtherClass") shouldBeEqualTo false
         }
     }
 

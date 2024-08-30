@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
+import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
@@ -18,53 +19,55 @@ import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtPackageDirective
 
 internal class KoPackageDeclarationCore internal constructor(
-    private val qualifiedName: String,
+    private val fqn: String,
     override val ktElement: KtElement,
-) : KoPackageDeclaration,
-    KoBaseProviderCore,
-    KoContainingFileProviderCore,
-    KoLocationProviderCore,
-    KoNameProviderCore,
-    KoPackageMatchingPathProviderCore,
-    KoPathProviderCore,
-    KoModuleProviderCore,
-    KoSourceSetProviderCore,
-    KoTextProviderCore {
-    private var ktPackageDirective: KtPackageDirective? = null
+) :
+    KoPackageDeclaration,
+        KoBaseProviderCore,
+        KoContainingFileProviderCore,
+        KoFullyQualifiedNameProviderCore,
+        KoLocationProviderCore,
+        KoNameProviderCore,
+        KoPackageMatchingPathProviderCore,
+        KoPathProviderCore,
+        KoModuleProviderCore,
+        KoSourceSetProviderCore,
+        KoTextProviderCore {
+        private var ktPackageDirective: KtPackageDirective? = null
 
-    private constructor(ktPackageDirective: KtPackageDirective) : this(
-        ktPackageDirective.fqName.toString(),
-        ktPackageDirective,
-    ) {
-        this.ktPackageDirective = ktPackageDirective
-    }
+        private constructor(ktPackageDirective: KtPackageDirective) : this(
+            ktPackageDirective.fqName.toString(),
+            ktPackageDirective,
+        ) {
+            this.ktPackageDirective = ktPackageDirective
+        }
 
-    override val psiElement: PsiElement
-        get() = ktElement
+        override val psiElement: PsiElement
+            get() = ktElement
 
-    override val name: String by lazy {
-        if (ktPackageDirective == null) {
-            qualifiedName.substringBeforeLast(".")
-        } else if (ktPackageDirective?.fqName != FqName.ROOT) {
-            ktPackageDirective?.fqName.toString()
-        } else {
-            name
+        override val fullyQualifiedName: String by lazy {
+            if (ktPackageDirective == null) {
+                fqn.substringBeforeLast(".")
+            } else if (ktPackageDirective?.fqName != FqName.ROOT) {
+                ktPackageDirective?.fqName.toString()
+            } else {
+                name
+            }
+        }
+
+        override fun toString(): String = name
+
+        internal companion object {
+            private val cache: KoDeclarationCache<KoPackageDeclaration> = KoDeclarationCache()
+
+            internal fun getInstance(
+                ktPackageDirective: KtPackageDirective,
+                containingDeclaration: KoBaseDeclaration,
+            ): KoPackageDeclaration =
+                cache.getOrCreateInstance(ktPackageDirective, containingDeclaration) {
+                    KoPackageDeclarationCore(
+                        ktPackageDirective,
+                    )
+                }
         }
     }
-
-    override fun toString(): String = name
-
-    internal companion object {
-        private val cache: KoDeclarationCache<KoPackageDeclaration> = KoDeclarationCache()
-
-        internal fun getInstance(
-            ktPackageDirective: KtPackageDirective,
-            containingDeclaration: KoBaseDeclaration,
-        ): KoPackageDeclaration =
-            cache.getOrCreateInstance(ktPackageDirective, containingDeclaration) {
-                KoPackageDeclarationCore(
-                    ktPackageDirective,
-                )
-            }
-    }
-}

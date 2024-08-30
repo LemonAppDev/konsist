@@ -25,6 +25,20 @@ interface KoImportProvider : KoBaseProvider {
     fun countImports(predicate: (KoImportDeclaration) -> Boolean): Int
 
     /**
+     * Determines whatever the declaration has imports.
+     *
+     * @param names the names of the imports to check.
+     * @return `true` if the declaration has imports with the specified names (or any import if [names] is empty), `false` otherwise.
+     */
+    @Deprecated(
+        """
+            Will be removed in v0.16.0. 
+            If you passed one argument - replace with `hasImportWithName`, otherwise with `hasImportsWithAllNames`.
+            """,
+    )
+    fun hasImports(vararg names: String): Boolean
+
+    /**
      * Determines whatever the declaration has any import.
      *
      * @return `true` if the declaration has any import, `false` otherwise.

@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.type.kokotlintype
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -17,17 +16,7 @@ class KoKotlinTypeDeclarationForKoTextProviderTest {
                 ?.asKotlinTypeDeclaration()
 
         // then
-        assertSoftly(sut) {
-            it?.text shouldBeEqualTo "String"
-            it?.hasTextStartingWith("St") shouldBeEqualTo true
-            it?.hasTextStartingWith("Other") shouldBeEqualTo false
-            it?.hasTextEndingWith("ing") shouldBeEqualTo true
-            it?.hasTextEndingWith("other") shouldBeEqualTo false
-            it?.hasTextContaining("rin") shouldBeEqualTo true
-            it?.hasTextContaining("anno") shouldBeEqualTo false
-            it?.hasTextMatching(Regex("^[^@]*\$")) shouldBeEqualTo true
-            it?.hasTextMatching(Regex("[0-9]+")) shouldBeEqualTo false
-        }
+        sut?.text shouldBeEqualTo "String"
     }
 
     @Test
@@ -41,17 +30,7 @@ class KoKotlinTypeDeclarationForKoTextProviderTest {
                 ?.asKotlinTypeDeclaration()
 
         // then
-        assertSoftly(sut) {
-            it?.text shouldBeEqualTo "String"
-            it?.hasTextStartingWith("St") shouldBeEqualTo true
-            it?.hasTextStartingWith("Other") shouldBeEqualTo false
-            it?.hasTextEndingWith("ing") shouldBeEqualTo true
-            it?.hasTextEndingWith("other") shouldBeEqualTo false
-            it?.hasTextContaining("rin") shouldBeEqualTo true
-            it?.hasTextContaining("anno") shouldBeEqualTo false
-            it?.hasTextMatching(Regex("^[^@]*\$")) shouldBeEqualTo true
-            it?.hasTextMatching(Regex("[0-9]+")) shouldBeEqualTo false
-        }
+        sut?.text shouldBeEqualTo "String"
     }
 
     @Test
@@ -65,17 +44,7 @@ class KoKotlinTypeDeclarationForKoTextProviderTest {
                 ?.asKotlinTypeDeclaration()
 
         // then
-        assertSoftly(sut) {
-            it?.text shouldBeEqualTo "List<String>"
-            it?.hasTextStartingWith("List<St") shouldBeEqualTo true
-            it?.hasTextStartingWith("Other") shouldBeEqualTo false
-            it?.hasTextEndingWith("ing>") shouldBeEqualTo true
-            it?.hasTextEndingWith("other") shouldBeEqualTo false
-            it?.hasTextContaining("rin") shouldBeEqualTo true
-            it?.hasTextContaining("anno") shouldBeEqualTo false
-            it?.hasTextMatching(Regex("^[^@]*\$")) shouldBeEqualTo true
-            it?.hasTextMatching(Regex("[0-9]+")) shouldBeEqualTo false
-        }
+        sut?.text shouldBeEqualTo "List<String>"
     }
 
     @Test
@@ -89,17 +58,7 @@ class KoKotlinTypeDeclarationForKoTextProviderTest {
                 ?.asKotlinTypeDeclaration()
 
         // then
-        assertSoftly(sut) {
-            it?.text shouldBeEqualTo "List<String>"
-            it?.hasTextStartingWith("List<St") shouldBeEqualTo true
-            it?.hasTextStartingWith("Other") shouldBeEqualTo false
-            it?.hasTextEndingWith("ing>") shouldBeEqualTo true
-            it?.hasTextEndingWith("other") shouldBeEqualTo false
-            it?.hasTextContaining("rin") shouldBeEqualTo true
-            it?.hasTextContaining("anno") shouldBeEqualTo false
-            it?.hasTextMatching(Regex("^[^@]*\$")) shouldBeEqualTo true
-            it?.hasTextMatching(Regex("[0-9]+")) shouldBeEqualTo false
-        }
+        sut?.text shouldBeEqualTo "List<String>"
     }
 
     private fun getSnippetFile(fileName: String) =

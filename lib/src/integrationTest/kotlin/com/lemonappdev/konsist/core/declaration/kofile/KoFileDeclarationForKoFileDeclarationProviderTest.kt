@@ -1,7 +1,11 @@
 package com.lemonappdev.konsist.core.declaration.kofile
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.KoModifier.INTERNAL
+import com.lemonappdev.konsist.api.KoModifier.OPEN
+import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -75,6 +79,55 @@ class KoFileDeclarationForKoFileDeclarationProviderTest {
     }
 
     @Test
+    fun `contains-declarations-with-specified-conditions`() {
+        // given
+        val sut =
+            getSnippetFile("contains-declarations-with-specified-conditions")
+                .files
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            containsDeclaration {
+                (it as? KoVisibilityModifierProvider)?.hasInternalModifier ?: false
+            } shouldBeEqualTo true
+            containsDeclaration {
+                (it as? KoModifierProvider)?.hasModifiers(INTERNAL, OPEN) ?: false
+            } shouldBeEqualTo true
+            containsDeclaration {
+                (it as? KoVisibilityModifierProvider)?.hasPrivateModifier ?: false
+            } shouldBeEqualTo false
+            containsDeclaration {
+                (it as? KoModifierProvider)?.hasModifiers(INTERNAL, PRIVATE) ?: false
+            } shouldBeEqualTo false
+            containsDeclaration(
+                includeNested = false,
+                includeLocal = true,
+            ) { (it as? KoNameProvider)?.name == "sampleLocalProperty" } shouldBeEqualTo true
+            containsDeclaration(
+                includeNested = false,
+                includeLocal = false,
+            ) { (it as? KoNameProvider)?.name == "sampleLocalProperty" } shouldBeEqualTo false
+            containsDeclaration(
+                includeNested = false,
+                includeLocal = true,
+            ) { (it as? KoNameProvider)?.name == "sampleOtherProperty" } shouldBeEqualTo false
+            containsDeclaration(
+                includeNested = true,
+                includeLocal = false,
+            ) { (it as? KoNameProvider)?.name == "sampleNestedProperty" } shouldBeEqualTo true
+            containsDeclaration(
+                includeNested = false,
+                includeLocal = false,
+            ) { (it as? KoNameProvider)?.name == "sampleNestedProperty" } shouldBeEqualTo false
+            containsDeclaration(
+                includeNested = true,
+                includeLocal = false,
+            ) { (it as? KoNameProvider)?.name == "sampleOtherProperty" } shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `file-contains-all-type-of-declarations`() {
         // given
         val sut =
@@ -91,7 +144,7 @@ class KoFileDeclarationForKoFileDeclarationProviderTest {
                 listOf(
                     "SampleAnnotation1",
                     "SampleAnnotation2",
-                    "com.samplepackage",
+                    "samplepackage",
                     "com.lemonappdev.konsist.testdata.SampleAnnotation1",
                     "com.lemonappdev.konsist.testdata.SampleAnnotation2",
                     "sampleProperty",

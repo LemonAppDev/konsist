@@ -8,30 +8,24 @@ open class SampleParentClass2
 
 open class SampleParentClassWithDuplicatedName
 
-open class SampleParentClassWithNestedDeclarations {
-    open class SampleNestedClass
-}
-
 class SampleClass
 
 class SampleClass1
 
 class SampleClass2
 
-open class SampleClassWithParameter(
-    val param: String,
-)
+open class SampleClassWithParameter(val param: String)
 
-open class SampleGenericClassWithParameter<T>(
-    val param: String,
-)
+open class SampleGenericClassWithParameter<T>(val param: String)
 
 open class SampleCollection1<out E> : Collection<E> {
     override val size: Int = 1
 
     override fun isEmpty(): Boolean = false
 
-    override fun iterator(): Iterator<E> = this.iterator()
+    override fun iterator(): Iterator<E> {
+        return this.iterator()
+    }
 
     override fun containsAll(elements: Collection<@UnsafeVariance E>): Boolean = false
 
@@ -43,7 +37,9 @@ class SampleCollection2<out E, out V> : Collection<E> {
 
     override fun isEmpty(): Boolean = false
 
-    override fun iterator(): Iterator<E> = this.iterator()
+    override fun iterator(): Iterator<E> {
+        return this.iterator()
+    }
 
     override fun containsAll(elements: Collection<@UnsafeVariance E>): Boolean = false
 
@@ -68,10 +64,6 @@ interface SampleParentInterface1
 
 interface SampleParentInterface2
 
-interface SampleParentInterfaceWithNestedDeclarations {
-    interface SampleNestedInterface
-}
-
 interface SampleGenericSuperInterface<T>
 
 object SampleObject
@@ -88,8 +80,6 @@ annotation class NonExistingAnnotation
     AnnotationTarget.FILE,
     AnnotationTarget.TYPEALIAS,
     AnnotationTarget.LOCAL_VARIABLE,
-    AnnotationTarget.TYPE,
-    AnnotationTarget.VALUE_PARAMETER,
 )
 annotation class SampleAnnotation
 
@@ -101,8 +91,6 @@ annotation class SampleAnnotation
     AnnotationTarget.CONSTRUCTOR,
     AnnotationTarget.TYPEALIAS,
     AnnotationTarget.LOCAL_VARIABLE,
-    AnnotationTarget.TYPE,
-    AnnotationTarget.VALUE_PARAMETER,
 )
 annotation class SampleAnnotation1
 
@@ -114,8 +102,6 @@ annotation class SampleAnnotation1
     AnnotationTarget.CONSTRUCTOR,
     AnnotationTarget.TYPEALIAS,
     AnnotationTarget.LOCAL_VARIABLE,
-    AnnotationTarget.TYPE,
-    AnnotationTarget.VALUE_PARAMETER,
 )
 annotation class SampleAnnotation2
 
@@ -126,14 +112,9 @@ annotation class SampleAnnotation2
     AnnotationTarget.FUNCTION,
     AnnotationTarget.TYPEALIAS,
 )
-annotation class SampleAnnotationWithParameter(
-    val sampleParameter: String,
-)
+annotation class SampleAnnotationWithParameter(val sampleParameter: String)
 
-annotation class SampleAnnotationWithParameters(
-    val sampleParameter1: String,
-    val sampleParameter2: Boolean,
-)
+annotation class SampleAnnotationWithParameters(val sampleParameter1: String, val sampleParameter2: Boolean)
 
 @Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.TYPEALIAS)
 annotation class SampleAnnotationWithAngleBrackets<T, U>

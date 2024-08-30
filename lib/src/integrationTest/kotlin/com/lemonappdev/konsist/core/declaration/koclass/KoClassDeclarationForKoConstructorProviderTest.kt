@@ -43,7 +43,7 @@ class KoClassDeclarationForKoConstructorProviderTest {
             hasConstructors() shouldBeEqualTo true
             hasConstructor { it.hasPublicModifier } shouldBeEqualTo true
             hasConstructor { it.hasPrivateModifier } shouldBeEqualTo false
-            hasAllConstructors { it.hasParameterWithName("sampleProperty1") } shouldBeEqualTo true
+            hasAllConstructors { it.hasParameterNamed("sampleProperty1") } shouldBeEqualTo true
             hasAllConstructors { it.hasPublicModifier } shouldBeEqualTo false
         }
     }

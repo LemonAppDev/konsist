@@ -38,6 +38,12 @@ interface KoReturnProvider : KoBaseProvider {
     val hasReturnValue: Boolean
 
     /**
+     * Determines whatever this declaration has a return type.
+     */
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasReturnType()"))
+    val hasReturnType: Boolean
+
+    /**
      * Determines whatever declaration has a specified return type.
      *
      * @param predicate The predicate function used to determine if a declaration return type satisfies a condition.

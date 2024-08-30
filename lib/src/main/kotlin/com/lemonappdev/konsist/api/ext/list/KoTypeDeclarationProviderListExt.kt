@@ -549,8 +549,7 @@ fun <T : KoTypeDeclarationProvider> List<T>.withFunctionTypeDeclaration(
         when (predicate) {
             null -> it.hasFunctionTypeDeclaration()
             else ->
-                it
-                    .asFunctionTypeDeclaration()
+                it.asFunctionTypeDeclaration()
                     ?.let { functionTypeDeclaration -> predicate(functionTypeDeclaration) } ?: false
         }
     }
@@ -568,8 +567,7 @@ fun <T : KoTypeDeclarationProvider> List<T>.withoutFunctionTypeDeclaration(
         when (predicate) {
             null -> it.hasFunctionTypeDeclaration()
             else ->
-                it
-                    .asFunctionTypeDeclaration()
+                it.asFunctionTypeDeclaration()
                     ?.let { functionTypeDeclaration -> predicate(functionTypeDeclaration) } ?: false
         }
     }
@@ -585,8 +583,7 @@ fun <T : KoTypeDeclarationProvider> List<T>.withExternalTypeDeclaration(predicat
         when (predicate) {
             null -> it.hasExternalTypeDeclaration()
             else ->
-                it
-                    .asExternalTypeDeclaration()
+                it.asExternalTypeDeclaration()
                     ?.let { externalTypeDeclaration -> predicate(externalTypeDeclaration) } ?: false
         }
     }
@@ -604,8 +601,7 @@ fun <T : KoTypeDeclarationProvider> List<T>.withoutExternalTypeDeclaration(
         when (predicate) {
             null -> it.hasExternalTypeDeclaration()
             else ->
-                it
-                    .asExternalTypeDeclaration()
+                it.asExternalTypeDeclaration()
                     ?.let { externalTypeDeclaration -> predicate(externalTypeDeclaration) } ?: false
         }
     }

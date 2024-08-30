@@ -85,7 +85,8 @@ class SuppressAssertNullOnSingleDeclarationTest {
         val sut =
             getSnippetFile(
                 "assert-suppress-by-konsist-and-parameter-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider",
-            ).classes(includeNested = true)
+            )
+                .classes(includeNested = true)
                 .last()
 
         // then
@@ -290,7 +291,8 @@ class SuppressAssertNullOnSingleDeclarationTest {
         val sut =
             getSnippetFile(
                 "assert-suppress-by-konsist-and-parameter-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration",
-            ).classes()
+            )
+                .classes()
                 .initBlocks
                 .localFunctions
                 .first()
@@ -319,7 +321,8 @@ class SuppressAssertNullOnSingleDeclarationTest {
         val sut =
             getSnippetFile(
                 "assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
-            ).classes()
+            )
+                .classes()
                 .initBlocks
                 .localFunctions
                 .first()
@@ -348,7 +351,8 @@ class SuppressAssertNullOnSingleDeclarationTest {
         val sut =
             getSnippetFile(
                 "assert-suppress-by-konsist-and-parameter-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
-            ).classes()
+            )
+                .classes()
                 .initBlocks
                 .localFunctions
                 .first()

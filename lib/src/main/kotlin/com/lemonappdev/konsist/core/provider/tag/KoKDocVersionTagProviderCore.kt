@@ -5,10 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
 import com.lemonappdev.konsist.api.provider.tag.KoKDocVersionTagProvider
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 
-internal interface KoKDocVersionTagProviderCore :
-    KoBaseProviderCore,
-    KoKDocVersionTagProvider,
-    KoKDocTagProviderCore {
+internal interface KoKDocVersionTagProviderCore : KoBaseProviderCore, KoKDocVersionTagProvider, KoKDocTagProviderCore {
     override val versionTag: KoKDocTagDeclaration?
         get() = tags.firstOrNull { it.name == KoKDocTag.VERSION }
 

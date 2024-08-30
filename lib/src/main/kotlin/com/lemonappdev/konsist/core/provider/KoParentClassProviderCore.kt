@@ -36,6 +36,9 @@ internal interface KoParentClassProviderCore :
         predicate: (KoClassDeclaration) -> Boolean,
     ): Boolean = parentClasses(indirectParents).all(predicate)
 
+    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasParents()"))
+    override fun hasParentClass(name: String): Boolean = parentClass?.name == name
+
     override fun hasParentClassWithName(
         name: String,
         vararg names: String,

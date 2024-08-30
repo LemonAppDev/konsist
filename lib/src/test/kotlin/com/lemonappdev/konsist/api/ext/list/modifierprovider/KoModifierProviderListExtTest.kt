@@ -508,4 +508,104 @@ class KoModifierProviderListExtTest {
         // then
         sut shouldBeEqualTo listOf(declaration2)
     }
+
+    @Test
+    fun `withSomeModifiers(String) returns declaration with given modifier`() {
+        // given
+        val modifier = PROTECTED
+        val declaration1: KoModifierProvider =
+            mockk {
+                every { hasModifiers(modifier) } returns true
+            }
+        val declaration2: KoModifierProvider =
+            mockk {
+                every { hasModifiers(modifier) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withSomeModifiers(modifier)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withSomeModifiers(String) returns declarations with at least one of given modifiers`() {
+        // given
+        val modifier1 = PROTECTED
+        val modifier2 = OPEN
+        val declaration1: KoModifierProvider =
+            mockk {
+                every { hasModifiers(modifier1) } returns true
+                every { hasModifiers(modifier2) } returns true
+            }
+        val declaration2: KoModifierProvider =
+            mockk {
+                every { hasModifiers(modifier1) } returns false
+                every { hasModifiers(modifier2) } returns true
+            }
+        val declaration3: KoModifierProvider =
+            mockk {
+                every { hasModifiers(modifier1) } returns false
+                every { hasModifiers(modifier2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withSomeModifiers(modifier1, modifier2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withoutSomeModifiers(String) returns declaration with given modifier`() {
+        // given
+        val modifier = PROTECTED
+        val declaration1: KoModifierProvider =
+            mockk {
+                every { hasModifiers(modifier) } returns true
+            }
+        val declaration2: KoModifierProvider =
+            mockk {
+                every { hasModifiers(modifier) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutSomeModifiers(modifier)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutSomeModifiers(String) returns declarations with at least one of given modifiers`() {
+        // given
+        val modifier1 = PROTECTED
+        val modifier2 = OPEN
+        val declaration1: KoModifierProvider =
+            mockk {
+                every { hasModifiers(modifier1) } returns true
+                every { hasModifiers(modifier2) } returns true
+            }
+        val declaration2: KoModifierProvider =
+            mockk {
+                every { hasModifiers(modifier1) } returns false
+                every { hasModifiers(modifier2) } returns true
+            }
+        val declaration3: KoModifierProvider =
+            mockk {
+                every { hasModifiers(modifier1) } returns false
+                every { hasModifiers(modifier2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutSomeModifiers(modifier1, modifier2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration3)
+    }
 }

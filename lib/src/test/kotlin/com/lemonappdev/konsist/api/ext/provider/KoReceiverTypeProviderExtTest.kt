@@ -35,13 +35,13 @@ class KoReceiverTypeProviderExtTest {
         val declaration: SampleTestReceiverTypeDeclaration =
             mockk {
                 every { receiverType } returns mockk()
-                every { kDoc?.hasTag(KoKDocTag.RECEIVER) } returns true
+                every { kDoc?.hasTags(KoKDocTag.RECEIVER) } returns true
             }
 
         // when
         declaration.hasValidKDocReceiverTag()
 
         // then
-        verify { declaration.kDoc?.hasTag(KoKDocTag.RECEIVER) }
+        verify { declaration.kDoc?.hasTags(KoKDocTag.RECEIVER) }
     }
 }

@@ -168,9 +168,13 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     override fun scopeFromDirectory(
         path: String,
         vararg paths: String,
-    ): KoScope = getScopeFromPaths(paths = setOf(path) + paths)
+    ): KoScope {
+        return getScopeFromPaths(paths = setOf(path) + paths)
+    }
 
-    override fun scopeFromDirectories(paths: Collection<String>): KoScope = getScopeFromPaths(paths = paths)
+    override fun scopeFromDirectories(paths: Collection<String>): KoScope {
+        return getScopeFromPaths(paths = paths)
+    }
 
     override fun scopeFromExternalDirectory(
         absolutePath: String,
@@ -218,7 +222,9 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     /**
      * Determines whether the provided path corresponds to a directory created by a build tool (Gradle, Maven)
      */
-    private fun isBuildToolPath(path: String): Boolean = isBuildOrTargetPath(path) || isDotGradlePath(path)
+    private fun isBuildToolPath(path: String): Boolean {
+        return isBuildOrTargetPath(path) || isDotGradlePath(path)
+    }
 
     /**
      * Determines if the given path is a build directory "build" for Gradle and "target" for Maven.

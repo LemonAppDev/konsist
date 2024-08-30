@@ -1,3 +1,0 @@
-import kotlin.String
-
-val sampleProperty: String = ""

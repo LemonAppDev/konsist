@@ -25,6 +25,15 @@ interface KoParametersProvider : KoBaseProvider {
     fun countParameters(predicate: (KoParameterDeclaration) -> Boolean): Int
 
     /**
+     * Determines whatever declaration has a parameter with given name.
+     *
+     * @param name the name of the parameter to check.
+     * @return `true` if the declaration has a parameter with the specified name, `false` otherwise.
+     */
+    @Deprecated("Will be removed in v0.16.0.", ReplaceWith("hasParameterWithName(name)"))
+    fun hasParameterNamed(name: String): Boolean
+
+    /**
      * Determines whatever declaration has any parameter.
      *
      * @return `true` if the declaration has any parameter, `false` otherwise.

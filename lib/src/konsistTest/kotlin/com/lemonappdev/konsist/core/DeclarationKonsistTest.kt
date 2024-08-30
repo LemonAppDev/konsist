@@ -69,8 +69,10 @@ class DeclarationKonsistTest {
 
     @Test
     fun `every core declaration implements KoBaseProviderCore and its api equivalent(`() {
-        declarationPackageScope
-            .classesAndInterfaces()
+        val classes = declarationPackageScope.classes()
+        val interfaces = declarationPackageScope.interfaces()
+
+        (classes + interfaces)
             .assertTrue {
                 val name = it.name.removeSuffix("Core")
 

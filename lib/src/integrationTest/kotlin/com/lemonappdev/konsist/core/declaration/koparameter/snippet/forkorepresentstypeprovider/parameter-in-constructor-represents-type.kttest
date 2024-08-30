@@ -1,1 +1,0 @@
-class SampleClass(val sampleParameter: () -> Unit)

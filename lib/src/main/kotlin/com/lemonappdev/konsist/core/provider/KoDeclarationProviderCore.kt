@@ -4,9 +4,18 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 
-internal interface KoDeclarationProviderCore :
-    KoDeclarationProvider,
-    KoBaseProviderCore {
+internal interface KoDeclarationProviderCore : KoDeclarationProvider, KoBaseProviderCore {
+    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasDeclaration()"))
+    override fun containsDeclaration(
+        includeNested: Boolean,
+        includeLocal: Boolean,
+        predicate: (KoBaseDeclaration) -> Boolean,
+    ): Boolean =
+        declarations(
+            includeNested = includeNested,
+            includeLocal = includeLocal,
+        ).any { predicate(it) }
+
     override fun numDeclarations(
         includeNested: Boolean,
         includeLocal: Boolean,

@@ -36,16 +36,11 @@ object DataCore {
 fun getClass(
     name: String,
     fqn: String?,
-    isAlias: Boolean = false,
     containingFile: KoFileDeclaration,
 ): KoClassDeclaration? =
     DataCore
         .classes
-        .firstOrNull { decl ->
-            val declarationQualifiedName = if (fqn?.endsWith(name) == true || isAlias) fqn else "$fqn.$name"
-
-            decl.fullyQualifiedName == declarationQualifiedName
-        }
+        .firstOrNull { decl -> (decl.packagee?.fullyQualifiedName + "." + decl.name) == fqn }
         ?: containingFile
             .classes()
             .firstOrNull { decl -> decl.name == name }
@@ -53,16 +48,11 @@ fun getClass(
 fun getInterface(
     name: String,
     fqn: String?,
-    isAlias: Boolean,
     containingFile: KoFileDeclaration,
 ): KoInterfaceDeclaration? =
     DataCore
         .interfaces
-        .firstOrNull { decl ->
-            val declarationQualifiedName = if (fqn?.endsWith(name) == true || isAlias) fqn else "$fqn.$name"
-
-            decl.fullyQualifiedName == declarationQualifiedName
-        }
+        .firstOrNull { decl -> (decl.packagee?.fullyQualifiedName + "." + decl.name) == fqn }
         ?: containingFile
             .interfaces()
             .firstOrNull { decl -> decl.name == name }
@@ -70,16 +60,11 @@ fun getInterface(
 fun getObject(
     name: String,
     fqn: String?,
-    isAlias: Boolean,
     containingFile: KoFileDeclaration,
 ): KoObjectDeclaration? =
     DataCore
         .objects
-        .firstOrNull { decl ->
-            val declarationQualifiedName = if (fqn?.endsWith(name) == true || isAlias) fqn else "$fqn.$name"
-
-            decl.fullyQualifiedName == declarationQualifiedName
-        }
+        .firstOrNull { decl -> (decl.packagee?.fullyQualifiedName + "." + decl.name) == fqn }
         ?: containingFile
             .objects()
             .firstOrNull { decl -> decl.name == name }
@@ -91,7 +76,7 @@ fun getTypeAlias(
 ): KoTypeAliasDeclaration? =
     DataCore
         .typeAliases
-        .firstOrNull { decl -> (decl.packagee?.name + "." + decl.name) == fqn }
+        .firstOrNull { decl -> (decl.packagee?.fullyQualifiedName + "." + decl.name) == fqn }
         ?: containingFile
             .typeAliases
             .firstOrNull { decl -> decl.name == name }

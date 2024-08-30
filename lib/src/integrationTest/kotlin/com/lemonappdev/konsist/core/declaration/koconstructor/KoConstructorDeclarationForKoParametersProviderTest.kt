@@ -124,6 +124,23 @@ class KoConstructorDeclarationForKoParametersProviderTest {
         }
     }
 
+    @Test
+    fun `constructor-has-parameter`() {
+        // given
+        val sut =
+            getSnippetFile("constructor-has-parameter")
+                .classes()
+                .first()
+                .constructors
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasParameterNamed("sampleParameter") shouldBeEqualTo true
+            hasParameterNamed("otherParameter") shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/koconstructor/snippet/forkoparametersprovider/", fileName)
 }

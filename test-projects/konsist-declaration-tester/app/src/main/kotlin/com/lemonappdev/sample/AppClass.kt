@@ -56,10 +56,10 @@ enum class AppEnumClass {
     }
 }
 
-fun appFunction(appParameter: String) {
+fun appFunction() {
     @Suppress("detekt.UnusedPrivateProperty")
     val appVariable = ""
-    println(appParameter)
+    println("some text")
 }
 
 typealias appTypeAlias = String

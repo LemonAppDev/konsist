@@ -4,10 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 
-internal interface KoFunctionProviderCore :
-    KoFunctionProvider,
-    KoDeclarationProviderCore,
-    KoBaseProviderCore {
+internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationProviderCore, KoBaseProviderCore {
     override fun functions(
         includeNested: Boolean,
         includeLocal: Boolean,
@@ -17,6 +14,13 @@ internal interface KoFunctionProviderCore :
             includeNested,
             includeLocal,
         )
+
+    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasFunction()"))
+    override fun containsFunction(
+        includeNested: Boolean,
+        includeLocal: Boolean,
+        predicate: (KoFunctionDeclaration) -> Boolean,
+    ): Boolean = functions(includeNested, includeLocal).any { predicate(it) }
 
     override fun numFunctions(
         includeNested: Boolean,

@@ -4,9 +4,7 @@ import com.lemonappdev.konsist.api.provider.KoFileExtensionProvider
 import com.lemonappdev.konsist.core.ext.sep
 import org.jetbrains.kotlin.psi.KtFile
 
-internal interface KoFileExtensionProviderCore :
-    KoFileExtensionProvider,
-    KoBaseProviderCore {
+internal interface KoFileExtensionProviderCore : KoFileExtensionProvider, KoBaseProviderCore {
     val ktFile: KtFile
 
     override val extension: String

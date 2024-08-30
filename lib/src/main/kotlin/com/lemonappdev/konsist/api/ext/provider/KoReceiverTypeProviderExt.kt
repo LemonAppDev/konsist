@@ -18,7 +18,7 @@ inline fun <reified T> KoReceiverTypeProvider.hasReceiverTypeOf(): Boolean = has
  */
 fun <T : KoReceiverTypeProvider> T.hasValidKDocReceiverTag(): Boolean =
     if (receiverType != null) {
-        (this as? KoKDocProvider)?.kDoc?.hasTag(KoKDocTag.RECEIVER) == true
+        (this as? KoKDocProvider)?.kDoc?.hasTags(KoKDocTag.RECEIVER) == true
     } else {
         (this as? KoKDocProvider)?.kDoc?.receiverTag == null
     }

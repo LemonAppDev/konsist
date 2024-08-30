@@ -9,10 +9,8 @@ import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
 
-internal class KoExternalDeclarationCore(
-    name: String,
-    override val ktElement: KtElement,
-) : KoExternalDeclaration,
+internal class KoExternalDeclarationCore(name: String, override val ktElement: KtElement) :
+    KoExternalDeclaration,
     KoParentDeclarationCore,
     KoChildProviderCore,
     KoBaseTypeDeclarationCore {

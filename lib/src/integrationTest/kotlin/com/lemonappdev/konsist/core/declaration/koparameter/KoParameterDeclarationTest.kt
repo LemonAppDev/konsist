@@ -6,29 +6,15 @@ import org.junit.jupiter.api.Test
 
 class KoParameterDeclarationTest {
     @Test
-    fun `parameter-in-constructor-to-string`() {
+    fun `parameter-to-string`() {
         // given
         val sut =
-            getSnippetFile("parameter-in-constructor-to-string")
+            getSnippetFile("parameter-to-string")
                 .classes()
                 .first()
                 .primaryConstructor
                 ?.parameters
                 ?.first()
-
-        // then
-        sut.toString() shouldBeEqualTo "sampleParameter"
-    }
-
-    @Test
-    fun `parameter-in-function-invocation-to-string`() {
-        // given
-        val sut =
-            getSnippetFile("parameter-in-function-invocation-to-string")
-                .functions()
-                .first()
-                .parameters
-                .first()
 
         // then
         sut.toString() shouldBeEqualTo "sampleParameter"

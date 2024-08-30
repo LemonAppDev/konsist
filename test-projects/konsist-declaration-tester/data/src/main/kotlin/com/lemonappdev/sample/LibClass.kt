@@ -44,11 +44,11 @@ enum class LibEnumClass {
     }
 }
 
-fun libFunction(libParameter: String) {
+fun libFunction() {
     @Suppress("detekt.UnusedPrivateProperty")
     val libVariable = ""
 
-    println(libParameter)
+    println("some text")
 }
 
 typealias libTypeAlias = String

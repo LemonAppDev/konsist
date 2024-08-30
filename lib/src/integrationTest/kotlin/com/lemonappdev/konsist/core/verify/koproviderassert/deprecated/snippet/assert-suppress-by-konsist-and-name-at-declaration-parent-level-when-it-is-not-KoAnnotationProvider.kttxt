@@ -1,0 +1,8 @@
+val otherProperty = ""
+
+@Suppress("konsist.assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider")
+class SampleClassWithoutOtherProperty {
+    init {
+        val sampleProperty = 6
+    }
+}

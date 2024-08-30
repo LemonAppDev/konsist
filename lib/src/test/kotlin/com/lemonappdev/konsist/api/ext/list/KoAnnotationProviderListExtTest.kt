@@ -1159,4 +1159,202 @@ class KoAnnotationProviderListExtTest {
         // then
         sut shouldBeEqualTo listOf(declaration2)
     }
+
+    @Test
+    fun `withAllAnnotations(String) returns declaration with all of given annotations`() {
+        // given
+        val annotation1 = "SampleAnnotation1"
+        val annotation2 = "SampleAnnotation2"
+        val declaration1: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotations(annotation1, annotation2) } returns true
+            }
+        val declaration2: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotations(annotation1, annotation2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllAnnotations(annotation1, annotation2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutAllAnnotations(String) returns declaration without any of given annotations`() {
+        // given
+        val annotation1 = "SampleAnnotation1"
+        val annotation2 = "SampleAnnotation2"
+        val declaration1: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotations(annotation1, annotation2) } returns true
+            }
+        val declaration2: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotations(annotation1, annotation2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllAnnotations(annotation1, annotation2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withSomeAnnotations(String) returns declaration with given annotation`() {
+        // given
+        val annotation = "SampleAnnotation"
+        val declaration1: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotations(annotation) } returns true
+            }
+        val declaration2: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotations(annotation) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withSomeAnnotations(annotation)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withSomeAnnotations(String) returns declarations with at least one of given annotations`() {
+        // given
+        val annotation1 = "SampleAnnotation1"
+        val annotation2 = "SampleAnnotation2"
+        val declaration1: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotations(annotation1) } returns true
+                every { hasAnnotations(annotation2) } returns true
+            }
+        val declaration2: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotations(annotation1) } returns false
+                every { hasAnnotations(annotation2) } returns true
+            }
+        val declaration3: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotations(annotation1) } returns false
+                every { hasAnnotations(annotation2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withSomeAnnotations(annotation1, annotation2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withoutSomeAnnotations(String) returns declaration without given annotation`() {
+        // given
+        val annotation = "SampleAnnotation"
+        val declaration1: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotations(annotation) } returns true
+            }
+        val declaration2: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotations(annotation) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutSomeAnnotations(annotation)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutSomeAnnotations(String) returns declarations with at least one of given annotations`() {
+        // given
+        val annotation1 = "SampleAnnotation1"
+        val annotation2 = "SampleAnnotation2"
+        val declaration1: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotations(annotation1) } returns true
+                every { hasAnnotations(annotation2) } returns true
+            }
+        val declaration2: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotations(annotation1) } returns false
+                every { hasAnnotations(annotation2) } returns true
+            }
+        val declaration3: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotations(annotation1) } returns false
+                every { hasAnnotations(annotation2) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutSomeAnnotations(annotation1, annotation2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration3)
+    }
+
+    @Test
+    fun `withSomeAnnotationsOf(KClass) returns declarations with at least one of given annotations`() {
+        // given
+        val declaration1: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationsOf(SampleAnnotation1::class) } returns true
+                every { hasAnnotationsOf(SampleAnnotation2::class) } returns true
+            }
+        val declaration2: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationsOf(SampleAnnotation1::class) } returns true
+                every { hasAnnotationsOf(SampleAnnotation2::class) } returns false
+            }
+        val declaration3: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationsOf(SampleAnnotation1::class) } returns false
+                every { hasAnnotationsOf(SampleAnnotation2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withSomeAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withoutSomeAnnotationsOf(KClass) returns declarations without at least one of given annotations`() {
+        // given
+        val declaration1: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationsOf(SampleAnnotation1::class) } returns true
+                every { hasAnnotationsOf(SampleAnnotation2::class) } returns true
+            }
+        val declaration2: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationsOf(SampleAnnotation1::class) } returns true
+                every { hasAnnotationsOf(SampleAnnotation2::class) } returns false
+            }
+        val declaration3: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationsOf(SampleAnnotation1::class) } returns false
+                every { hasAnnotationsOf(SampleAnnotation2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutSomeAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration3)
+    }
 }

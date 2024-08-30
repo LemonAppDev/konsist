@@ -4,15 +4,18 @@ import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.provider.KoObjectProvider
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 
-internal interface KoObjectProviderCore :
-    KoObjectProvider,
-    KoDeclarationProviderCore,
-    KoBaseProviderCore {
+internal interface KoObjectProviderCore : KoObjectProvider, KoDeclarationProviderCore, KoBaseProviderCore {
     override fun objects(includeNested: Boolean): List<KoObjectDeclaration> =
         KoDeclarationProviderCoreUtil.getKoDeclarations(
             declarations(includeNested = false, includeLocal = false),
             includeNested,
         )
+
+    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasObject()"))
+    override fun containsObject(
+        includeNested: Boolean,
+        predicate: (KoObjectDeclaration) -> Boolean,
+    ): Boolean = objects(includeNested).any { predicate(it) }
 
     override fun numObjects(includeNested: Boolean): Int = objects(includeNested).size
 

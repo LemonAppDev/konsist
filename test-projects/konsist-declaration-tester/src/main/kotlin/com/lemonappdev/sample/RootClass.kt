@@ -43,10 +43,10 @@ enum class RootEnumClass {
     }
 }
 
-fun rootFunction(rootParameter: String) {
+fun rootFunction() {
     @Suppress("detekt.UnusedPrivateProperty")
     val rootVariable = ""
-    println(rootParameter)
+    println("some text")
 }
 
 typealias rootTypeAlias = String

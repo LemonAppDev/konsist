@@ -26,7 +26,7 @@ class KoFileDeclarationForKoPackageProviderTest {
                 .first()
 
         // then
-        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
+        sut.packagee?.name shouldBeEqualTo "samplepackage"
     }
 
     private fun getSnippetFile(fileName: String) =

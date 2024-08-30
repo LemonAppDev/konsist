@@ -45,8 +45,7 @@ class KoSetterDeclarationForKoLocalDeclarationProviderTest {
             it?.hasLocalDeclaration { decl -> (decl as KoNameProvider).name == "otherLocalProperty" } shouldBeEqualTo false
             it?.hasAllLocalDeclarations { decl -> (decl as KoNameProvider).hasNameContaining("Local") } shouldBeEqualTo true
             it?.hasAllLocalDeclarations { decl -> (decl as KoNameProvider).hasNameStartingWith("sample") } shouldBeEqualTo false
-            it
-                ?.localDeclarations
+            it?.localDeclarations
                 ?.filterIsInstance<KoNameProvider>()
                 ?.map { decl -> decl.name }
                 .shouldBeEqualTo(

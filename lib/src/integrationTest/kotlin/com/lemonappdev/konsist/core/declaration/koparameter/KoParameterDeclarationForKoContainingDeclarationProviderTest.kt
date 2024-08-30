@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test
 
 class KoParameterDeclarationForKoContainingDeclarationProviderTest {
     @Test
-    fun `parameter-in-constructor-parent-declaration`() {
+    fun `parameter-parent-declaration`() {
         // given
         val sut =
-            getSnippetFile("parameter-in-constructor-parent-declaration")
+            getSnippetFile("parameter-parent-declaration")
                 .classes()
                 .first()
                 .primaryConstructor
@@ -18,20 +18,6 @@ class KoParameterDeclarationForKoContainingDeclarationProviderTest {
 
         // then
         sut?.containingDeclaration shouldNotBeEqualTo null
-    }
-
-    @Test
-    fun `parameter-in-function-invocation-parent-declaration`() {
-        // given
-        val sut =
-            getSnippetFile("parameter-in-function-invocation-parent-declaration")
-                .functions()
-                .first()
-                .parameters
-                .first()
-
-        // then
-        sut.containingDeclaration shouldNotBeEqualTo null
     }
 
     private fun getSnippetFile(fileName: String) =

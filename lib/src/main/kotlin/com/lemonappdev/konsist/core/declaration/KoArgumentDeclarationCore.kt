@@ -48,7 +48,9 @@ internal class KoArgumentDeclarationCore private constructor(
                 .getArgumentName()
                 ?.text ?: ""
 
-    override fun toString(): String = locationWithText
+    override fun toString(): String {
+        return locationWithText
+    }
 
     internal companion object {
         private val cache: KoDeclarationCache<KoArgumentDeclaration> = KoDeclarationCache()

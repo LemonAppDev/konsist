@@ -28,26 +28,6 @@ class KoTypeAliasDeclarationForKoNonNullableTypeProviderTest {
     }
 
     @Test
-    fun `typealias-has-annotated-simple-type`() {
-        // given
-        val sut =
-            getSnippetFile("typealias-has-annotated-simple-type")
-                .files
-                .first()
-                .typeAliases
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            it.type.name shouldBeEqualTo "String"
-            it.hasType { type -> type.name == "String" } shouldBeEqualTo true
-            it.hasType { type -> type.name == "Int" } shouldBeEqualTo false
-            it.hasTypeOf(String::class) shouldBeEqualTo true
-            it.hasTypeOf(Int::class) shouldBeEqualTo false
-        }
-    }
-
-    @Test
     fun `typealias-has-complex-type`() {
         // given
         val sut =
@@ -68,49 +48,10 @@ class KoTypeAliasDeclarationForKoNonNullableTypeProviderTest {
     }
 
     @Test
-    fun `typealias-has-annotated-complex-type`() {
-        // given
-        val sut =
-            getSnippetFile("typealias-has-annotated-complex-type")
-                .files
-                .first()
-                .typeAliases
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            it.type.name shouldBeEqualTo "SampleType"
-            it.hasType { type -> type.name == "SampleType" } shouldBeEqualTo true
-            it.hasType { type -> type.name == "Int" } shouldBeEqualTo false
-            it.hasTypeOf(SampleType::class) shouldBeEqualTo true
-            it.hasTypeOf(Int::class) shouldBeEqualTo false
-        }
-    }
-
-    @Test
     fun `typealias-has-lambda-type`() {
         // given
         val sut =
             getSnippetFile("typealias-has-lambda-type")
-                .files
-                .first()
-                .typeAliases
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            it.type.name shouldBeEqualTo "() -> Int"
-            it.hasType { type -> type.name == "() -> Int" } shouldBeEqualTo true
-            it.hasType { type -> type.name == "Int" } shouldBeEqualTo false
-            it.hasTypeOf(Int::class) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `typealias-has-annotated-lambda-type`() {
-        // given
-        val sut =
-            getSnippetFile("typealias-has-annotated-lambda-type")
                 .files
                 .first()
                 .typeAliases

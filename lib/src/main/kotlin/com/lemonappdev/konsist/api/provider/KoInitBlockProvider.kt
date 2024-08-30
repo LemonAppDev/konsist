@@ -17,6 +17,12 @@ interface KoInitBlockProvider : KoBaseProvider {
     val numInitBlocks: Int
 
     /**
+     * Determines whatever declaration has init blocks.
+     */
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasInitBlocks()"))
+    val hasInitBlocks: Boolean
+
+    /**
      * Returns the number of init blocks that satisfies the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if an init block satisfies a condition.

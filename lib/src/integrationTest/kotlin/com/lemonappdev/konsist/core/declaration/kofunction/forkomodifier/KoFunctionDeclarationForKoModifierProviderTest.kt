@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.KoModifier.DATA
 import com.lemonappdev.konsist.api.KoModifier.OPEN
-import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.KoModifier.PROTECTED
 import com.lemonappdev.konsist.api.KoModifier.PUBLIC
 import com.lemonappdev.konsist.api.KoModifier.SUSPEND
@@ -45,6 +44,8 @@ class KoFunctionDeclarationForKoModifierProviderTest {
             hasAllModifiers(listOf(OPEN, DATA)) shouldBeEqualTo false
             hasAllModifiers(setOf(OPEN)) shouldBeEqualTo false
             hasAllModifiers(setOf(OPEN, DATA)) shouldBeEqualTo false
+            hasModifiers(OPEN) shouldBeEqualTo false
+            hasModifiers(OPEN, DATA) shouldBeEqualTo false
         }
     }
 
@@ -85,6 +86,13 @@ class KoFunctionDeclarationForKoModifierProviderTest {
             hasAllModifiers(setOf(PUBLIC)) shouldBeEqualTo false
             hasAllModifiers(setOf(PROTECTED, OPEN)) shouldBeEqualTo false
             hasAllModifiers(setOf(PROTECTED, SUSPEND)) shouldBeEqualTo true
+            hasModifiers(PROTECTED) shouldBeEqualTo true
+            hasModifiers(SUSPEND) shouldBeEqualTo true
+            hasModifiers(OPEN) shouldBeEqualTo false
+            hasModifiers(PROTECTED, SUSPEND) shouldBeEqualTo true
+            hasModifiers(SUSPEND, PROTECTED) shouldBeEqualTo true
+            hasModifiers(PROTECTED, OPEN) shouldBeEqualTo false
+            hasModifiers(OPEN, SUSPEND, PROTECTED) shouldBeEqualTo false
         }
     }
 
@@ -123,7 +131,6 @@ class KoFunctionDeclarationForKoModifierProviderTest {
                 arguments("function-has-modifiers-multiline-comment-and-annotation-before-them", listOf(PROTECTED, OPEN)),
                 arguments("function-has-modifiers-and-comment-before-them", listOf(PROTECTED, OPEN)),
                 arguments("function-has-modifiers-and-comment-after-them", listOf(PROTECTED, OPEN)),
-                arguments("function-has-modifier-and-annotation-with-string-parameter-containing-link", listOf(PRIVATE)),
             )
     }
 }

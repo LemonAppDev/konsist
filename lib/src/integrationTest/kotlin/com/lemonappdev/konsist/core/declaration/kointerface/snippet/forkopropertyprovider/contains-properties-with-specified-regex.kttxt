@@ -1,0 +1,7 @@
+interface SampleInterface {
+    abstract var sampleProperty: String
+
+    class SampleClass {
+        internal val sampleNestedProperty = ""
+    }
+}

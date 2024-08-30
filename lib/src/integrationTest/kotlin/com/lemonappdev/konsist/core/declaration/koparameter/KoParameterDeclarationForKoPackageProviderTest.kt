@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test
 
 class KoParameterDeclarationForKoPackageProviderTest {
     @Test
-    fun `parameter-in-constructor-is-not-in-package`() {
+    fun `parameter-is-not-in-package`() {
         // given
         val sut =
-            getSnippetFile("parameter-in-constructor-is-not-in-package")
+            getSnippetFile("parameter-is-not-in-package")
                 .classes()
                 .first()
                 .primaryConstructor
@@ -23,24 +23,10 @@ class KoParameterDeclarationForKoPackageProviderTest {
     }
 
     @Test
-    fun `parameter-in-function-invocation-is-not-in-package`() {
+    fun `parameter-is-in-package`() {
         // given
         val sut =
-            getSnippetFile("parameter-in-function-invocation-is-not-in-package")
-                .functions()
-                .first()
-                .parameters
-                .first()
-
-        // then
-        sut.packagee shouldBeEqualTo null
-    }
-
-    @Test
-    fun `parameter-in-constructor-is-in-package`() {
-        // given
-        val sut =
-            getSnippetFile("parameter-in-constructor-is-in-package")
+            getSnippetFile("parameter-is-in-package")
                 .classes()
                 .first()
                 .primaryConstructor
@@ -50,24 +36,7 @@ class KoParameterDeclarationForKoPackageProviderTest {
         // then
         assertSoftly(sut) {
             it?.packagee shouldNotBeEqualTo null
-            it?.packagee?.name shouldBeEqualTo "com.samplepackage"
-        }
-    }
-
-    @Test
-    fun `parameter-in-function-invocation-is-in-package`() {
-        // given
-        val sut =
-            getSnippetFile("parameter-in-function-invocation-is-in-package")
-                .functions()
-                .first()
-                .parameters
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            packagee shouldNotBeEqualTo null
-            packagee?.name shouldBeEqualTo "com.samplepackage"
+            it?.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
         }
     }
 

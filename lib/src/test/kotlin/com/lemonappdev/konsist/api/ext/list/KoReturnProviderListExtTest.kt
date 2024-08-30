@@ -131,6 +131,33 @@ class KoReturnProviderListExtTest {
     }
 
     @Test
+    fun `withReturnType() returns declarations with one of given return types`() {
+        // given
+        val typeName1 = "SampleType1"
+        val typeName2 = "SampleType2"
+        val typeName3 = "SampleType3"
+        val declaration1: KoReturnProvider =
+            mockk {
+                every { returnType?.name } returns typeName1
+            }
+        val declaration2: KoReturnProvider =
+            mockk {
+                every { returnType?.name } returns typeName2
+            }
+        val declaration3: KoReturnProvider =
+            mockk {
+                every { returnType?.name } returns typeName3
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withReturnType(typeName1, typeName2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
     fun `withoutReturnType() returns declaration without any return type`() {
         // given
         val declaration1: KoReturnProvider =
@@ -182,6 +209,33 @@ class KoReturnProviderListExtTest {
 
         // then
         sut shouldBeEqualTo listOf(declaration2, declaration3)
+    }
+
+    @Test
+    fun `withoutReturnType(name) returns declaration without any of given return types`() {
+        // given
+        val typeName1 = "SampleType1"
+        val typeName2 = "SampleType2"
+        val typeName3 = "SampleType3"
+        val declaration1: KoReturnProvider =
+            mockk {
+                every { returnType?.name } returns typeName1
+            }
+        val declaration2: KoReturnProvider =
+            mockk {
+                every { returnType?.name } returns typeName2
+            }
+        val declaration3: KoReturnProvider =
+            mockk {
+                every { returnType?.name } returns typeName3
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutReturnType(typeName1, typeName2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
