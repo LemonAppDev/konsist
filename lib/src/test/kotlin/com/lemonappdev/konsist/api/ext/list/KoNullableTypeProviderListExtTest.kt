@@ -91,35 +91,6 @@ class KoNullableTypeProviderListExtTest {
     }
 
     @Test
-    fun `withType(name) returns declarations with one of given types`() {
-        // given
-        val typeName1 = "SampleType1"
-        val typeName2 = "SampleType2"
-        val declaration1: KoNullableTypeProvider =
-            mockk {
-                every { hasType(typeName1) } returns true
-                every { hasType(typeName2) } returns false
-            }
-        val declaration2: KoNullableTypeProvider =
-            mockk {
-                every { hasType(typeName1) } returns false
-                every { hasType(typeName2) } returns true
-            }
-        val declaration3: KoNullableTypeProvider =
-            mockk {
-                every { hasType(typeName1) } returns false
-                every { hasType(typeName2) } returns false
-            }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.withType(typeName1, typeName2)
-
-        // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
-    }
-
-    @Test
     fun `withoutType() returns declaration without any type`() {
         // given
         val declaration1: KoNullableTypeProvider =
@@ -171,35 +142,6 @@ class KoNullableTypeProviderListExtTest {
 
         // then
         sut shouldBeEqualTo listOf(declaration2, declaration3)
-    }
-
-    @Test
-    fun `withoutType(name) returns declaration without any of given types`() {
-        // given
-        val typeName1 = "SampleType1"
-        val typeName2 = "SampleType2"
-        val declaration1: KoNullableTypeProvider =
-            mockk {
-                every { hasType(typeName1) } returns true
-                every { hasType(typeName2) } returns false
-            }
-        val declaration2: KoNullableTypeProvider =
-            mockk {
-                every { hasType(typeName1) } returns false
-                every { hasType(typeName2) } returns true
-            }
-        val declaration3: KoNullableTypeProvider =
-            mockk {
-                every { hasType(typeName1) } returns false
-                every { hasType(typeName2) } returns false
-            }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.withoutType(typeName1, typeName2)
-
-        // then
-        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test

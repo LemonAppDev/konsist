@@ -4,7 +4,10 @@ import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.provider.KoClassProvider
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 
-internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderCore, KoBaseProviderCore {
+internal interface KoClassProviderCore :
+    KoClassProvider,
+    KoDeclarationProviderCore,
+    KoBaseProviderCore {
     override fun classes(
         includeNested: Boolean,
         includeLocal: Boolean,
@@ -14,13 +17,6 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
             includeNested,
             includeLocal,
         )
-
-    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasClass()"))
-    override fun containsClass(
-        includeNested: Boolean,
-        includeLocal: Boolean,
-        predicate: (KoClassDeclaration) -> Boolean,
-    ): Boolean = classes(includeNested, includeLocal).any { predicate(it) }
 
     override fun numClasses(
         includeNested: Boolean,

@@ -22,7 +22,8 @@ class KoScopeForKoPropertyDeclarationTest {
         // then
         val expected = listOf("sampleProperty", "sampleNestedProperty")
 
-        sut.properties(includeNested = true)
+        sut
+            .properties(includeNested = true)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -35,7 +36,8 @@ class KoScopeForKoPropertyDeclarationTest {
         // then
         val expected = listOf("sampleProperty")
 
-        sut.properties(includeNested = false)
+        sut
+            .properties(includeNested = false)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }

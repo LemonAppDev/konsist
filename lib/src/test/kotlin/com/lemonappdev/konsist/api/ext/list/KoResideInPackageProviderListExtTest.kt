@@ -8,7 +8,9 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoResideInPackageProviderListExtTest {
-    private interface SampleTestDeclaration : KoPackageProvider, KoResideInPackageProvider
+    private interface SampleTestDeclaration :
+        KoPackageProvider,
+        KoResideInPackageProvider
 
     @Test
     fun `withPackage() returns declaration reside in any package`() {

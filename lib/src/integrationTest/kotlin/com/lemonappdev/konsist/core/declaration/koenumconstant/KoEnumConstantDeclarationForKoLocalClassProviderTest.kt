@@ -34,7 +34,6 @@ class KoEnumConstantDeclarationForKoLocalClassProviderTest {
             hasLocalClassesWithAllNames(setOf("SampleLocalClass1", "SampleLocalClass2")) shouldBeEqualTo false
             hasLocalClass { it.name == "SampleLocalClass" } shouldBeEqualTo false
             hasAllLocalClasses { it.name == "SampleLocalClass" } shouldBeEqualTo true
-            containsLocalClass { it.name == "SampleLocalClass" } shouldBeEqualTo false
         }
     }
 
@@ -79,8 +78,6 @@ class KoEnumConstantDeclarationForKoLocalClassProviderTest {
             hasLocalClass { it.name == "OtherLocalClass" } shouldBeEqualTo false
             hasAllLocalClasses { it.name.endsWith("2") || it.name == "SampleLocalClass1" } shouldBeEqualTo true
             hasAllLocalClasses { it.name.endsWith("2") } shouldBeEqualTo false
-            containsLocalClass { it.name == "SampleLocalClass1" } shouldBeEqualTo true
-            containsLocalClass { it.name == "OtherLocalClass" } shouldBeEqualTo false
         }
     }
 

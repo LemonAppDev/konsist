@@ -22,8 +22,8 @@ class KoObjectDeclarationForKoParentProviderTest {
 
         // then
         assertSoftly(sut) {
-            parents shouldBeEqualTo emptyList()
-            numParents shouldBeEqualTo 0
+            parents() shouldBeEqualTo emptyList()
+            numParents() shouldBeEqualTo 0
             countParents { it.name == "SampleParentClass" } shouldBeEqualTo 0
             hasParents() shouldBeEqualTo false
             hasParentWithName(emptyList()) shouldBeEqualTo false
@@ -44,7 +44,6 @@ class KoObjectDeclarationForKoParentProviderTest {
             hasAllParentsOf(SampleParentClass::class, SampleParentInterface::class) shouldBeEqualTo false
             hasAllParentsOf(listOf(SampleParentClass::class, SampleParentInterface::class)) shouldBeEqualTo false
             hasAllParentsOf(setOf(SampleParentClass::class, SampleParentInterface::class)) shouldBeEqualTo false
-            hasParents("SampleParentClass") shouldBeEqualTo false
         }
     }
 
@@ -58,14 +57,14 @@ class KoObjectDeclarationForKoParentProviderTest {
 
         // then
         assertSoftly(sut) {
-            parents.map { it.name } shouldBeEqualTo
+            parents().map { it.name } shouldBeEqualTo
                 listOf(
                     "SampleParentClass",
                     "SampleParentInterface1",
                     "SampleParentInterface2",
                     "SampleExternalInterface",
                 )
-            numParents shouldBeEqualTo 4
+            numParents() shouldBeEqualTo 4
             countParents { it.name == "SampleParentClass" } shouldBeEqualTo 1
             countParents { it.hasNameStartingWith("SampleParentInterface") } shouldBeEqualTo 2
             hasParents() shouldBeEqualTo true
@@ -114,10 +113,6 @@ class KoObjectDeclarationForKoParentProviderTest {
             hasAllParentsOf(setOf(SampleParentClass::class)) shouldBeEqualTo true
             hasAllParentsOf(setOf(SampleParentClass::class, SampleInterface::class)) shouldBeEqualTo false
             hasAllParentsOf(setOf(SampleParentClass::class, SampleParentInterface1::class)) shouldBeEqualTo true
-            hasParents("SampleParentClass") shouldBeEqualTo true
-            hasParents("OtherInterface") shouldBeEqualTo false
-            hasParents("SampleParentClass", "SampleParentInterface1") shouldBeEqualTo true
-            hasParents("SampleParentClass", "SampleParentInterface1", "OtherInterface") shouldBeEqualTo false
         }
     }
 
@@ -263,7 +258,7 @@ class KoObjectDeclarationForKoParentProviderTest {
                 .first()
 
         // then
-        assertSoftly(sut.parents.first()) {
+        assertSoftly(sut.parents().first()) {
             name shouldBeEqualTo "SampleParentInterface"
             fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleParentInterface"
         }

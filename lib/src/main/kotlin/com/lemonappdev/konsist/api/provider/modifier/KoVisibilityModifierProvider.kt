@@ -5,7 +5,9 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 /**
  * An interface representing a Kotlin declaration that provides access to its visibility modifiers.
  */
-interface KoVisibilityModifierProvider : KoBaseProvider, KoModifierProvider {
+interface KoVisibilityModifierProvider :
+    KoBaseProvider,
+    KoModifierProvider {
     /**
      * Determines whatever the declaration has public modifier.
      */

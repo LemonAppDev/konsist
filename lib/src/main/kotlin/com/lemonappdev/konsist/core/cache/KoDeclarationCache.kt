@@ -62,12 +62,11 @@ internal object KoExternalDeclarationCache {
         key: String,
         ktElement: KtElement,
         value: (ktElement: KtElement) -> KoExternalDeclaration,
-    ): KoExternalDeclaration {
-        return if (hasKey(key)) {
+    ): KoExternalDeclaration =
+        if (hasKey(key)) {
             get(key)
         } else {
             set(key, value.invoke(ktElement))
             get(key)
         }
-    }
 }

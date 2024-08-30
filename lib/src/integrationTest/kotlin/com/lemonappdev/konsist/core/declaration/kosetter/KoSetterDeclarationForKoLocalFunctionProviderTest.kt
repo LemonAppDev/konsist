@@ -33,7 +33,6 @@ class KoSetterDeclarationForKoLocalFunctionProviderTest {
             it?.hasLocalFunctionsWithAllNames(setOf("sampleLocalFunction1", "sampleLocalFunction2")) shouldBeEqualTo false
             it?.hasLocalFunction { it.name == "sampleLocalFunction" } shouldBeEqualTo false
             it?.hasAllLocalFunctions { it.name == "sampleLocalFunction" } shouldBeEqualTo true
-            it?.containsLocalFunction { it.name == "sampleLocalFunction" } shouldBeEqualTo false
         }
     }
 
@@ -77,9 +76,8 @@ class KoSetterDeclarationForKoLocalFunctionProviderTest {
             it?.hasLocalFunction { it.name == "otherLocalFunction" } shouldBeEqualTo false
             it?.hasAllLocalFunctions { it.name.endsWith("2") || it.name == "sampleLocalFunction1" } shouldBeEqualTo true
             it?.hasAllLocalFunctions { it.name.endsWith("2") } shouldBeEqualTo false
-            it?.containsLocalFunction { it.name == "sampleLocalFunction1" } shouldBeEqualTo true
-            it?.containsLocalFunction { it.name == "otherLocalFunction1" } shouldBeEqualTo false
-            it?.localFunctions
+            it
+                ?.localFunctions
                 ?.map { it.name }
                 .shouldBeEqualTo(listOf("sampleLocalFunction1", "sampleLocalFunction2"))
         }

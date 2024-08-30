@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAliasProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsWildcardProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoMatchesProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -19,8 +20,9 @@ import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtImportDirective
 
-internal class KoImportDeclarationCore private constructor(override val ktImportDirective: KtImportDirective) :
-    KoImportDeclaration,
+internal class KoImportDeclarationCore private constructor(
+    override val ktImportDirective: KtImportDirective,
+) : KoImportDeclaration,
     KoBaseProviderCore,
     KoAliasProviderCore,
     KoContainingFileProviderCore,
@@ -31,28 +33,41 @@ internal class KoImportDeclarationCore private constructor(override val ktImport
     KoModuleProviderCore,
     KoSourceSetProviderCore,
     KoTextProviderCore,
-    KoWildcardProviderCore {
-        override val psiElement: PsiElement by lazy { ktImportDirective }
+    KoWildcardProviderCore,
+    KoIsWildcardProviderCore {
+    override val psiElement: PsiElement by lazy { ktImportDirective }
 
-        override val ktElement: KtElement by lazy { ktImportDirective }
+    override val ktElement: KtElement by lazy { ktImportDirective }
 
-        override val name: String by lazy { ktImportDirective.importPath?.fqName.toString() }
+    override val name: String by lazy { ktImportDirective.importPath?.fqName.toString() }
 
-        override val alias: KoImportAliasDeclaration? by lazy {
-            ktImportDirective
-                .alias
-                ?.let { KoImportAliasDeclarationCore.getInstance(it, this) }
-        }
-
-        override fun toString(): String = name
-
-        internal companion object {
-            private val cache: KoDeclarationCache<KoImportDeclaration> = KoDeclarationCache()
-
-            internal fun getInstance(
-                ktImportDirective: KtImportDirective,
-                containingDeclaration: KoBaseDeclaration,
-            ): KoImportDeclaration =
-                cache.getOrCreateInstance(ktImportDirective, containingDeclaration) { KoImportDeclarationCore(ktImportDirective) }
-        }
+    override val alias: KoImportAliasDeclaration? by lazy {
+        ktImportDirective
+            .alias
+            ?.let { KoImportAliasDeclarationCore.getInstance(it, this) }
     }
+
+    /*
+    Remove in version 0.18.0
+     */
+    override val isWildcard: Boolean
+        get() = super<KoIsWildcardProviderCore>.isWildcard
+
+    // KoImportDeclarationCore does not implement KoRepresentsTypeProviderCore because it internally implements
+    // KoFullyQualifiedNameProviderCore, which import declaration does not possess. Therefore, this function is manually overridden.
+    override fun representsType(name: String?): Boolean = name?.let { this.name.endsWith(it) } ?: false
+
+    override fun toString(): String = name
+
+    internal companion object {
+        private val cache: KoDeclarationCache<KoImportDeclaration> = KoDeclarationCache()
+
+        internal fun getInstance(
+            ktImportDirective: KtImportDirective,
+            containingDeclaration: KoBaseDeclaration,
+        ): KoImportDeclaration =
+            cache.getOrCreateInstance(ktImportDirective, containingDeclaration) {
+                KoImportDeclarationCore(ktImportDirective)
+            }
+    }
+}

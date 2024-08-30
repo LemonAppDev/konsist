@@ -3,7 +3,9 @@ package com.lemonappdev.konsist.api
 /**
  * Represents a Kotlin modifier.
  */
-enum class KoModifier(val type: String) {
+enum class KoModifier(
+    val type: String,
+) {
     /**
      * The `data` modifier.
      */

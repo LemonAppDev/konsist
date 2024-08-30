@@ -26,7 +26,7 @@ class KoFunctionDeclarationForKoPackageProviderTest {
                 .first()
 
         // then
-        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
+        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofunction/snippet/forkopackageprovider/", fileName)

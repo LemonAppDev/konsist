@@ -46,7 +46,6 @@ class KoFileDeclarationForKoImportProviderTest {
             ).shouldBeEqualTo(false)
             hasImport { it.name == "com.lemonappdev.konsist.testdata.OtherImport" } shouldBeEqualTo false
             hasAllImports { it.hasNameStartingWith("com.lemonappdev.") } shouldBeEqualTo true
-            hasImports("com.lemonappdev.konsist.testdata.OtherImport") shouldBeEqualTo false
         }
     }
 
@@ -181,12 +180,6 @@ class KoFileDeclarationForKoImportProviderTest {
             hasImport { it.name == "com.lemonappdev.konsist.testdata.OtherType" } shouldBeEqualTo false
             hasAllImports { it.hasNameStartingWith("com.lemonappdev.") } shouldBeEqualTo true
             hasAllImports { it.hasNameStartingWith("com.other.") } shouldBeEqualTo false
-            hasImports("com..") shouldBeEqualTo true
-            hasImports("com..", "..testdata..") shouldBeEqualTo true
-            hasImports("com") shouldBeEqualTo false
-            hasImports("com", "..testdata..") shouldBeEqualTo false
-            hasImports("com.lemonappdev..testdata.SampleType") shouldBeEqualTo true
-            hasImports("com.lemonappdev.konsist.testdata.OtherImport") shouldBeEqualTo false
         }
     }
 

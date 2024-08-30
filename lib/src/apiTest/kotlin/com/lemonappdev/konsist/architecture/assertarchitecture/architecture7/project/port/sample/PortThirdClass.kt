@@ -2,4 +2,6 @@ package com.lemonappdev.konsist.architecture.assertarchitecture.architecture7.pr
 
 import com.lemonappdev.konsist.architecture.assertarchitecture.architecture7.project.domain.DomainFirstClass
 
-class PortThirdClass(val sampleParameter: DomainFirstClass)
+class PortThirdClass(
+    val sampleParameter: DomainFirstClass,
+)

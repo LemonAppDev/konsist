@@ -11,7 +11,7 @@ class KoScopeForKoFileDeclarationTest {
         val sut =
             Konsist
                 .scopeFromTest(sourceSetName = "integrationTest")
-                .slice { it.packagee?.fullyQualifiedName == "com.lemonappdev.konsist.core.container" }
+                .slice { it.packagee?.name == "com.lemonappdev.konsist.core.container" }
 
         // then
         sut
@@ -21,11 +21,15 @@ class KoScopeForKoFileDeclarationTest {
                 listOf(
                     "KoScopeCreatorTest",
                     "KoScopeForKoAnnotationDeclarationTest",
+                    "KoScopeForKoClassAndInterfaceAndObjectDeclarationTest",
+                    "KoScopeForKoClassAndInterfaceDeclarationTest",
+                    "KoScopeForKoClassAndObjectDeclarationTest",
                     "KoScopeForKoClassDeclarationTest",
                     "KoScopeForKoDeclarationTest",
                     "KoScopeForKoFileDeclarationTest",
                     "KoScopeForKoFunctionDeclarationTest",
                     "KoScopeForKoImportDeclarationTest",
+                    "KoScopeForKoInterfaceAndObjectDeclarationTest",
                     "KoScopeForKoInterfaceDeclarationTest",
                     "KoScopeForKoObjectDeclarationTest",
                     "KoScopeForKoPackagesDeclarationTest",

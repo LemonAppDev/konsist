@@ -1,3 +1,0 @@
-package com.lemonappdev.konsist.testdata
-
-class SampleClassWithParameter(val sampleParameter: Int)

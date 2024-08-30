@@ -21,7 +21,6 @@ class KoPropertyDeclarationForKoReceiverTypeProviderTest {
             hasReceiverType() shouldBeEqualTo false
             hasReceiverType { it.name == "Int" } shouldBeEqualTo false
             hasReceiverTypeOf(Int::class) shouldBeEqualTo false
-            hasReceiverType("Int") shouldBeEqualTo false
         }
     }
 
@@ -41,8 +40,6 @@ class KoPropertyDeclarationForKoReceiverTypeProviderTest {
             hasReceiverType { it.name == "String" } shouldBeEqualTo false
             hasReceiverTypeOf(SampleClass::class) shouldBeEqualTo true
             hasReceiverTypeOf(String::class) shouldBeEqualTo false
-            hasReceiverType("SampleClass") shouldBeEqualTo true
-            hasReceiverType("String") shouldBeEqualTo false
         }
     }
 

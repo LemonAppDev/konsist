@@ -14,22 +14,6 @@ val <T : KoConstructorProvider> List<T>.constructors: List<KoConstructorDeclarat
  *
  * @return A list containing declarations with the constructor.
  */
-@Deprecated("Will be removed in v0.16.0", ReplaceWith("withConstructors()"))
-fun <T : KoConstructorProvider> List<T>.withConstructor(): List<T> = filter { it.hasConstructors() }
-
-/**
- * List containing declarations without constructor.
- *
- * @return A list containing declarations without the constructor.
- */
-@Deprecated("Will be removed in v0.16.0", ReplaceWith("withoutConstructors()"))
-fun <T : KoConstructorProvider> List<T>.withoutConstructor(): List<T> = filterNot { it.hasConstructors() }
-
-/**
- * List containing declarations with constructor.
- *
- * @return A list containing declarations with the constructor.
- */
 fun <T : KoConstructorProvider> List<T>.withConstructors(): List<T> = filter { it.hasConstructors() }
 
 /**

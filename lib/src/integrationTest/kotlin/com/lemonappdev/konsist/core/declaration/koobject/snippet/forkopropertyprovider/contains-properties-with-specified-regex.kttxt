@@ -1,7 +1,0 @@
-object SampleObject {
-    internal var sampleProperty: String = ""
-
-    class SampleClass {
-        internal val sampleNestedProperty = ""
-    }
-}

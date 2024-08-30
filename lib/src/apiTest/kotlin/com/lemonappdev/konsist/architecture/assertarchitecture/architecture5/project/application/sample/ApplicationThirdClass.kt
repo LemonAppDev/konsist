@@ -2,4 +2,6 @@ package com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.pr
 
 import com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.domain.DomainFirstClass
 
-class ApplicationThirdClass(val sampleParameter: DomainFirstClass)
+class ApplicationThirdClass(
+    val sampleParameter: DomainFirstClass,
+)

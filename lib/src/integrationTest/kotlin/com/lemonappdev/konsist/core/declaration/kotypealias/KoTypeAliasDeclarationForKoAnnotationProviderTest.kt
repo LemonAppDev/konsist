@@ -47,7 +47,6 @@ class KoTypeAliasDeclarationForKoAnnotationProviderTest {
             hasAllAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo false
             hasAllAnnotationsOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) shouldBeEqualTo false
             hasAllAnnotationsOf(setOf(SampleAnnotation1::class, SampleAnnotation2::class)) shouldBeEqualTo false
-            hasAnnotations("SampleAnnotation") shouldBeEqualTo false
         }
     }
 
@@ -138,12 +137,6 @@ class KoTypeAliasDeclarationForKoAnnotationProviderTest {
             hasAllAnnotationsOf(setOf(SampleAnnotation::class)) shouldBeEqualTo true
             hasAllAnnotationsOf(setOf(NonExistingAnnotation::class)) shouldBeEqualTo false
             hasAllAnnotationsOf(setOf(SampleAnnotation::class, NonExistingAnnotation::class)) shouldBeEqualTo false
-            hasAnnotations("SampleAnnotation") shouldBeEqualTo true
-            hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
-            hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
-            hasAnnotations("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
-            hasAnnotationsOf(SampleAnnotation::class) shouldBeEqualTo true
-            hasAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
         }
     }
 
@@ -254,16 +247,6 @@ class KoTypeAliasDeclarationForKoAnnotationProviderTest {
             hasAllAnnotationsOf(setOf(NonExistingAnnotation::class)) shouldBeEqualTo false
             hasAllAnnotationsOf(setOf(SampleAnnotation1::class, SampleAnnotation2::class)) shouldBeEqualTo true
             hasAllAnnotationsOf(setOf(SampleAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo false
-            hasAnnotations("SampleAnnotation1") shouldBeEqualTo true
-            hasAnnotations("SampleAnnotation2") shouldBeEqualTo true
-            hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
-            hasAnnotations("SampleAnnotation1", "SampleAnnotation2") shouldBeEqualTo true
-            hasAnnotations("SampleAnnotation1", "NonExistingAnnotation") shouldBeEqualTo false
-            hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
-            hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
-            hasAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
-            hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation1::class) shouldBeEqualTo true
-            hasAnnotationsOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
         }
     }
 
@@ -278,7 +261,7 @@ class KoTypeAliasDeclarationForKoAnnotationProviderTest {
         // then
         assertSoftly(sut) {
             numAnnotations shouldBeEqualTo 1
-            hasAnnotationsOf(Suppress::class) shouldBeEqualTo true
+            hasAllAnnotationsOf(Suppress::class) shouldBeEqualTo true
         }
     }
 

@@ -5,12 +5,12 @@
   ],
   "baseBranches": ["develop"],
   "lockFileMaintenance": {
-    "enabled": true,
-    "automerge": true,
-    "automergeType": "pr",
-    "automergeStrategy": "squash",
-    "platformAutomerge": true
+    "enabled": true
   },
+  "automerge": true,
+  "automergeType": "pr",
+  "automergeStrategy": "squash",
+  "platformAutomerge": true,
   "packageRules": [
     {
       "matchUpdateTypes": [
