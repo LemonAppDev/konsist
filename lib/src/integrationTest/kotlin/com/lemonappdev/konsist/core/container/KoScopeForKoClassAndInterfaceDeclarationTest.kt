@@ -31,7 +31,8 @@ class KoScopeForKoClassAndInterfaceDeclarationTest {
                 "SampleInterfaceNestedInsideObject",
             )
 
-        sut.classesAndInterfaces(includeNested = true, includeLocal = true)
+        sut
+            .classesAndInterfaces(includeNested = true, includeLocal = true)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -48,7 +49,8 @@ class KoScopeForKoClassAndInterfaceDeclarationTest {
                 "SampleInterfaceNestedInsideObject",
             )
 
-        sut.classesAndInterfaces(includeNested = true, includeLocal = false)
+        sut
+            .classesAndInterfaces(includeNested = true, includeLocal = false)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -61,7 +63,8 @@ class KoScopeForKoClassAndInterfaceDeclarationTest {
         // then
         val expected = listOf("SampleLocalClass")
 
-        sut.classesAndInterfaces(includeNested = false, includeLocal = true)
+        sut
+            .classesAndInterfaces(includeNested = false, includeLocal = true)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -74,7 +77,8 @@ class KoScopeForKoClassAndInterfaceDeclarationTest {
         // then
         val expected = emptyList<KoClassAndInterfaceDeclaration>()
 
-        sut.classesAndInterfaces(includeNested = false, includeLocal = false)
+        sut
+            .classesAndInterfaces(includeNested = false, includeLocal = false)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }

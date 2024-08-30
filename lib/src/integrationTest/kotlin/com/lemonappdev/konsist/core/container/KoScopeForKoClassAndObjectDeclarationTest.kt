@@ -31,7 +31,8 @@ class KoScopeForKoClassAndObjectDeclarationTest {
                 "SampleObjectNestedInsideObject",
             )
 
-        sut.classesAndObjects(includeNested = true, includeLocal = true)
+        sut
+            .classesAndObjects(includeNested = true, includeLocal = true)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -49,7 +50,8 @@ class KoScopeForKoClassAndObjectDeclarationTest {
                 "SampleObjectNestedInsideObject",
             )
 
-        sut.classesAndObjects(includeNested = true, includeLocal = false)
+        sut
+            .classesAndObjects(includeNested = true, includeLocal = false)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -62,7 +64,8 @@ class KoScopeForKoClassAndObjectDeclarationTest {
         // then
         val expected = listOf("SampleLocalClass", "SampleObject")
 
-        sut.classesAndObjects(includeNested = false, includeLocal = true)
+        sut
+            .classesAndObjects(includeNested = false, includeLocal = true)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -75,7 +78,8 @@ class KoScopeForKoClassAndObjectDeclarationTest {
         // then
         val expected = listOf("SampleObject")
 
-        sut.classesAndObjects(includeNested = false, includeLocal = false)
+        sut
+            .classesAndObjects(includeNested = false, includeLocal = false)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
