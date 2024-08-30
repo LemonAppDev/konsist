@@ -4,9 +4,7 @@ import com.lemonappdev.konsist.api.provider.KoValueProvider
 import org.jetbrains.kotlin.psi.KtExpression
 import org.jetbrains.kotlin.psi.KtStringTemplateExpression
 
-internal interface KoValueProviderCore :
-    KoValueProvider,
-    KoBaseProviderCore {
+internal interface KoValueProviderCore : KoValueProvider, KoBaseProviderCore {
     val ktExpression: KtExpression?
 
     override val value: String?

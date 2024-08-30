@@ -13,7 +13,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-external-parent-class")
                 .classes()
-                .parents()
+                .parents
                 .first()
 
         // then

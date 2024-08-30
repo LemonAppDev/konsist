@@ -15,6 +15,19 @@ interface KoPropertyProvider : KoBaseProvider {
     fun properties(includeNested: Boolean = true): List<KoPropertyDeclaration>
 
     /**
+     * Determines whatever the declaration contains a property that satisfies the specified predicate.
+     *
+     * @param includeNested Specifies whether to include nested properties in the check (optional, default is `true`).
+     * @param predicate The predicate function to determine if a property satisfies a condition.
+     * @return `true` if the declaration contains a property with the specified predicate, `true` otherwise.
+     */
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasProperty()"))
+    fun containsProperty(
+        includeNested: Boolean = true,
+        predicate: (KoPropertyDeclaration) -> Boolean,
+    ): Boolean
+
+    /**
      * Returns the number of properties present in the declaration.
      *
      * @param includeNested Specifies whether to include nested properties in the count (optional, default is `true`).

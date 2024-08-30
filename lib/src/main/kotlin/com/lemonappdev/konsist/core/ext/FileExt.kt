@@ -7,6 +7,6 @@ import java.io.File
 
 internal val File.isKotlinFile: Boolean get() = isFile && name.endsWith(FileExtension.KOTLIN)
 
-internal val File.isKotlinSnippetFile: Boolean get() = isFile && name.endsWith(FileExtension.KOTLIN_TEST_SNIPPET)
+internal val File.isKotlinSnippetFile: Boolean get() = isFile && name.endsWith(FileExtension.KOTLIN_SNIPPET)
 
 internal fun File.toKoFile(): KoFileDeclaration = KotlinFileParser.getKoFile(this)

@@ -1,0 +1,8 @@
+internal open class SampleNestedClass {
+
+    open val sampleNestedProperty = ""
+}
+
+fun sampleFunction() {
+    val sampleLocalProperty = ""
+}

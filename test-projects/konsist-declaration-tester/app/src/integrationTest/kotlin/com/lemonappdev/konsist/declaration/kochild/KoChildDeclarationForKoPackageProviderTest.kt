@@ -22,7 +22,10 @@ class KoChildDeclarationForKoPackageProviderTest {
             .first()
 
         // then
-            sut.packagee?.name shouldBeEqualTo "com.lemonappdev.sample"
+        assertSoftly(sut){
+            packagee?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.sample"
+            packagee?.name shouldBeEqualTo "sample"
+        }
     }
 
     @Test
@@ -36,7 +39,10 @@ class KoChildDeclarationForKoPackageProviderTest {
             .first()
 
         // then
-            sut.packagee?.name shouldBeEqualTo "com.lemonappdev.sample"
+        assertSoftly(sut){
+            packagee?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.sample"
+            packagee?.name shouldBeEqualTo "sample"
+        }
     }
 
     @Test
@@ -50,6 +56,9 @@ class KoChildDeclarationForKoPackageProviderTest {
             .first()
 
         // then
-            sut.packagee?.name shouldBeEqualTo "com.lemonappdev.sample"
+        assertSoftly(sut){
+            packagee?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.sample"
+            packagee?.name shouldBeEqualTo "sample"
+        }
     }
 }

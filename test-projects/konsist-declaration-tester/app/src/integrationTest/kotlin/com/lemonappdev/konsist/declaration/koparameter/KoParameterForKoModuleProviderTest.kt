@@ -19,7 +19,7 @@ class KoParameterForKoModuleProviderTest {
     private val root = "root"
 
     @Test
-    fun `module name for parameter in constructor is 'app'`() {
+    fun `module name is 'app'`() {
         // given
         val sut = Konsist
             .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
@@ -37,25 +37,7 @@ class KoParameterForKoModuleProviderTest {
     }
 
     @Test
-    fun `module name for parameter in function invocation is 'app'`() {
-        // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
-            .functions()
-            .first()
-            .parameters
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            moduleName shouldBeEqualTo app
-            resideInModule(app) shouldBeEqualTo true
-            resideInModule(data) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `module name for parameter in constructor is 'data'`() {
+    fun `module name is 'data'`() {
         // given
         val sut = Konsist
             .scopeFromFile("$dataMainSourceSetProjectDirectory/sample/LibClass.kt".toOsSeparator())
@@ -73,48 +55,12 @@ class KoParameterForKoModuleProviderTest {
     }
 
     @Test
-    fun `module name for parameter in function invocation is 'data'`() {
-        // given
-        val sut = Konsist
-            .scopeFromFile("$dataMainSourceSetProjectDirectory/sample/LibClass.kt".toOsSeparator())
-            .functions()
-            .first()
-            .parameters
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            moduleName shouldBeEqualTo data
-            resideInModule(data) shouldBeEqualTo true
-            resideInModule(app) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `module name for parameter in constructor is 'root'`() {
+    fun `module name is 'root'`() {
         // given
         val sut = Konsist
             .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/RootClass.kt".toOsSeparator())
             .classes()
             .constructors
-            .parameters
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            moduleName shouldBeEqualTo root
-            resideInModule(root) shouldBeEqualTo true
-            resideInModule(app) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `module name for parameter in function invocation is 'root'`() {
-        // given
-        val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/RootClass.kt".toOsSeparator())
-            .functions()
-            .first()
             .parameters
             .first()
 

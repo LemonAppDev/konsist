@@ -64,8 +64,7 @@ internal object KoFileDeclarationProvider {
             val currentDeferred: Deferred<List<KoFileDeclaration>> =
                 mutex.withLock {
                     createKoFilesDeclarationDeferred ?: async(Dispatchers.IO) {
-                        projectRootDir
-                            .walk()
+                        projectRootDir.walk()
                             .filter { it.isKotlinFile }
                             .map { async { parseKotlinFile(it) } }
                             .toList()

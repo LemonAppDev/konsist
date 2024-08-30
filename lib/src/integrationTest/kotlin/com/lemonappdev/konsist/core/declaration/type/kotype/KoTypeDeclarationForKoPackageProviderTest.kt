@@ -42,7 +42,7 @@ class KoTypeDeclarationForKoPackageProviderTest {
         // then
         assertSoftly(sut) {
             it?.packagee shouldNotBeEqualTo null
-            it?.packagee?.name shouldBeEqualTo "com.samplepackage"
+            it?.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
         }
     }
 

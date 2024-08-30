@@ -2,6 +2,4 @@ package com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.pr
 
 import com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.domain.DomainFirstClass
 
-class DomainSecondClass(
-    val sampleParameter: DomainFirstClass,
-)
+class DomainSecondClass(val sampleParameter: DomainFirstClass)

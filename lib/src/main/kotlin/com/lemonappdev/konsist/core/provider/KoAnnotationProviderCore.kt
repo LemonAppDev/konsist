@@ -24,6 +24,32 @@ internal interface KoAnnotationProviderCore :
 
     override fun countAnnotations(predicate: (KoAnnotationDeclaration) -> Boolean): Int = annotations.count { predicate(it) }
 
+    @Deprecated(
+        """
+            Will be removed in v0.16.0. 
+            If you passed one argument - replace with `hasAnnotationWithName`, otherwise with `hasAnnotationsWithAllNames`.
+            """,
+    )
+    override fun hasAnnotations(vararg names: String): Boolean =
+        when {
+            names.isEmpty() -> annotations.isNotEmpty()
+            else ->
+                names.all {
+                    annotations.any { annotation -> annotation.representsType(it) }
+                }
+        }
+
+    @Deprecated(
+        """
+            Will be removed in v0.16.0. 
+            If you passed one argument - replace with `hasAnnotationOf`, otherwise with `hasAllAnnotationsOf`.
+            """,
+    )
+    override fun hasAnnotationsOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+    ): Boolean = checkIfAnnotated(name) && names.all { checkIfAnnotated(it) }
+
     private fun checkIfAnnotated(kClass: KClass<*>): Boolean =
         annotations.any { annotation ->
             if (kClass.qualifiedName?.startsWith("kotlin.") == true) {

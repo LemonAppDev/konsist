@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
+import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
@@ -103,6 +104,42 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
     }
 }
 
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("assert"))
+internal fun <E : KoBaseProvider> List<E>.assert(
+    additionalMessage: String? = null,
+    function: (E) -> Boolean?,
+    positiveCheck: Boolean,
+) {
+    var lastDeclaration: KoBaseProvider? = null
+
+    try {
+        val testMethodName =
+            if (additionalMessage != null) {
+                getTestMethodNameFromFifthIndex()
+            } else {
+                getTestMethodNameFromSixthIndex()
+            }
+
+        checkIfLocalListIsEmpty(this, getTestMethodNameFromFourthIndex())
+
+        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this, testMethodName)
+
+        val result =
+            notSuppressedDeclarations.groupBy {
+                lastDeclaration = it
+                function(it) ?: positiveCheck
+            }
+
+        deprecatedGetResult(notSuppressedDeclarations, result, positiveCheck, testMethodName, additionalMessage)
+    } catch (e: KoException) {
+        throw e
+    } catch (
+        @Suppress("detekt.TooGenericExceptionCaught") e: Exception,
+    ) {
+        throw KoInternalException(e.message.orEmpty(), e, lastDeclaration)
+    }
+}
+
 fun checkIfLocalListHasOnlyNullElements(
     localList: List<*>,
     testMethodName: String,
@@ -145,10 +182,11 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(
             it is KoAnnotationDeclaration &&
                 (
                     it.name == "Suppress" &&
-                        it.hasTextContaining("\"konsist.$suppressName\"") ||
-                        it.hasTextContaining("\"$suppressName\"")
+                        it.text.contains("\"konsist.$suppressName\"") ||
+                        it.text.contains("\"$suppressName\"")
                 )
-        }.forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it as KoBaseDeclaration, suppressName) }
+        }
+        .forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it as KoBaseDeclaration, suppressName) }
 
     val withoutSuppress = mutableListOf<E>()
 
@@ -219,6 +257,22 @@ private fun getResult(
     if (!allChecksPassed) {
         val failedItems = result[!positiveCheck].orEmpty()
         throw KoAssertionFailedException(getCheckFailedMessage(failedItems, testName, additionalMessage))
+    }
+}
+
+@Deprecated("Will be removed in v0.16.0", ReplaceWith("getResult()"))
+private fun deprecatedGetResult(
+    items: List<*>,
+    result: Map<Boolean, List<Any>>,
+    positiveCheck: Boolean,
+    testName: String,
+    additionalMessage: String?,
+): Unit {
+    val allChecksPassed = (result[positiveCheck]?.size ?: 0) == items.size
+
+    if (!allChecksPassed) {
+        val failedItems = result[!positiveCheck].orEmpty()
+        throw KoCheckFailedException(getCheckFailedMessage(failedItems, testName, additionalMessage))
     }
 }
 

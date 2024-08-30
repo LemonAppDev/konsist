@@ -15,43 +15,44 @@ import org.jetbrains.kotlin.psi.KtUserType
 
 internal class KoKotlinTypeDeclarationCore private constructor(
     private val ktUserType: KtUserType,
-) : KoKotlinTypeDeclaration,
-    KoBaseTypeDeclarationCore,
-    KoBaseProviderCore,
-    KoFullyQualifiedNameProviderCore,
-    KoSourceAndAliasTypeProviderCore {
-    override val psiElement: PsiElement by lazy { ktUserType }
+) :
+    KoKotlinTypeDeclaration,
+        KoBaseTypeDeclarationCore,
+        KoBaseProviderCore,
+        KoFullyQualifiedNameProviderCore,
+        KoSourceAndAliasTypeProviderCore {
+        override val psiElement: PsiElement by lazy { ktUserType }
 
-    override val ktElement: KtElement by lazy { ktUserType }
+        override val ktElement: KtElement by lazy { ktUserType }
 
-    override val packagee: KoPackageDeclaration? by lazy {
-        KoPackageDeclarationCore(
-            fullyQualifiedName,
-            ktUserType,
-        )
-    }
+        override val packagee: KoPackageDeclaration? by lazy {
+            KoPackageDeclarationCore(
+                fullyQualifiedName,
+                ktUserType,
+            )
+        }
 
-    override val name: String by lazy { ktUserType.text }
+        override val name: String by lazy { ktUserType.text }
 
-    override val fullyQualifiedName: String by lazy {
-        when {
-            TypeUtil.isKotlinBasicType(name) -> "kotlin.$bareSourceType"
-            TypeUtil.isKotlinCollectionTypes(name) -> "kotlin.collections.$bareSourceType"
-            else -> throw IllegalArgumentException("Kotlin type has incorrect fullyQualified name")
+        override val fullyQualifiedName: String by lazy {
+            when {
+                TypeUtil.isKotlinBasicType(name) -> "kotlin.$bareSourceType"
+                TypeUtil.isKotlinCollectionTypes(name) -> "kotlin.collections.$bareSourceType"
+                else -> throw IllegalArgumentException("Kotlin type has incorrect fullyQualified name")
+            }
+        }
+
+        override fun toString(): String = ktUserType.text
+
+        internal companion object {
+            private val cache: KoDeclarationCache<KoKotlinTypeDeclaration> = KoDeclarationCache()
+
+            internal fun getInstance(
+                ktUserType: KtUserType,
+                containingDeclaration: KoBaseDeclaration,
+            ): KoKotlinTypeDeclaration =
+                cache.getOrCreateInstance(ktUserType, containingDeclaration) {
+                    KoKotlinTypeDeclarationCore(ktUserType)
+                }
         }
     }
-
-    override fun toString(): String = ktUserType.text
-
-    internal companion object {
-        private val cache: KoDeclarationCache<KoKotlinTypeDeclaration> = KoDeclarationCache()
-
-        internal fun getInstance(
-            ktUserType: KtUserType,
-            containingDeclaration: KoBaseDeclaration,
-        ): KoKotlinTypeDeclaration =
-            cache.getOrCreateInstance(ktUserType, containingDeclaration) {
-                KoKotlinTypeDeclarationCore(ktUserType)
-            }
-    }
-}

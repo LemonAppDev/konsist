@@ -9,10 +9,28 @@ internal interface KoParentInterfaceProviderCore :
     KoParentInterfaceProvider,
     KoBaseProviderCore,
     KoParentProviderCore {
+    @Deprecated("Will be removed in v0.16.0.", replaceWith = ReplaceWith("parentInterfaces()"))
+    override val parentInterfaces: List<KoInterfaceDeclaration>
+        get() = parents().filterIsInstance<KoInterfaceDeclaration>()
+
+    @Deprecated("Will be removed in v0.16.0.", replaceWith = ReplaceWith("numParentInterfaces()"))
+    override val numParentInterfaces: Int
+        get() = parentInterfaces.size
+
     override fun parentInterfaces(indirectParents: Boolean): List<KoInterfaceDeclaration> =
         parents(indirectParents).filterIsInstance<KoInterfaceDeclaration>()
 
     override fun numParentInterfaces(indirectParents: Boolean): Int = parentInterfaces(indirectParents).size
+
+    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasParents()"))
+    override fun hasParentInterfaces(vararg names: String): Boolean =
+        when {
+            names.isEmpty() -> parentInterfaces.isNotEmpty()
+            else ->
+                names.all {
+                    parentInterfaces.any { koParent -> it == koParent.name }
+                }
+        }
 
     override fun countParentInterfaces(
         indirectParents: Boolean,

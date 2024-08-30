@@ -1,0 +1,10 @@
+class SampleTopLevelClass {
+    private open class SampleClass {
+
+        private inner class SampleNestedClass
+    }
+
+    fun sampleFunction() {
+        class SampleLocalClass
+    }
+}

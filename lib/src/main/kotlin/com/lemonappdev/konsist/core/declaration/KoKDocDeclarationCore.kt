@@ -27,9 +27,8 @@ import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 
-internal class KoKDocDeclarationCore(
-    private val kDocElement: KDocElement,
-) : KoKDocDeclaration,
+internal class KoKDocDeclarationCore(private val kDocElement: KDocElement) :
+    KoKDocDeclaration,
     KoKDocDescriptionProviderCore,
     KoKDocTagProviderCore,
     KoTextProviderCore,
@@ -68,11 +67,11 @@ internal class KoKDocDeclarationCore(
                 .removeSuffix("*/")
                 .trim()
         } else {
-            splitKDoc
-                .also {
-                    it.removeFirst()
-                    it.removeLast()
-                }.joinToString("\n") {
+            splitKDoc.also {
+                it.removeFirst()
+                it.removeLast()
+            }
+                .joinToString("\n") {
                     it
                         .trim()
                         .removePrefix("*")

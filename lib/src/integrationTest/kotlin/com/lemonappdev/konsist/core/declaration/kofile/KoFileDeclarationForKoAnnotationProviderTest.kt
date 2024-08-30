@@ -47,6 +47,7 @@ class KoFileDeclarationForKoAnnotationProviderTest {
             hasAllAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo false
             hasAllAnnotationsOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) shouldBeEqualTo false
             hasAllAnnotationsOf(setOf(SampleAnnotation1::class, SampleAnnotation2::class)) shouldBeEqualTo false
+            hasAnnotations("SampleAnnotation") shouldBeEqualTo false
         }
     }
 
@@ -157,6 +158,16 @@ class KoFileDeclarationForKoAnnotationProviderTest {
             hasAllAnnotationsOf(setOf(NonExistingAnnotation::class)) shouldBeEqualTo false
             hasAllAnnotationsOf(setOf(SampleAnnotation1::class, SampleAnnotation2::class)) shouldBeEqualTo true
             hasAllAnnotationsOf(setOf(SampleAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo false
+            hasAnnotations("SampleAnnotation1") shouldBeEqualTo true
+            hasAnnotations("SampleAnnotation2") shouldBeEqualTo true
+            hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
+            hasAnnotations("SampleAnnotation1", "SampleAnnotation2") shouldBeEqualTo true
+            hasAnnotations("SampleAnnotation1", "NonExistingAnnotation") shouldBeEqualTo false
+            hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation1::class) shouldBeEqualTo true
+            hasAnnotationsOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
         }
     }
 
@@ -177,6 +188,10 @@ class KoFileDeclarationForKoAnnotationProviderTest {
             hasAllAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
             hasAllAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo true
             hasAllAnnotationsOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo true
+            hasAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAnnotationsOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
         }
     }
 
@@ -190,9 +205,9 @@ class KoFileDeclarationForKoAnnotationProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasAllAnnotationsOf(Suppress::class) shouldBeEqualTo true
-            hasAllAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo false
-            hasAllAnnotationsOf(Suppress::class, SampleAnnotation1::class) shouldBeEqualTo false
+            hasAnnotationsOf(Suppress::class) shouldBeEqualTo true
+            hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo false
+            hasAnnotationsOf(Suppress::class, SampleAnnotation1::class) shouldBeEqualTo false
         }
     }
 

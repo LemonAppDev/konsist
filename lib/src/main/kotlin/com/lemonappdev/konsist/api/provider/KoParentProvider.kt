@@ -8,6 +8,18 @@ import kotlin.reflect.KClass
  */
 interface KoParentProvider : KoBaseProvider {
     /**
+     * The parents (parent class and parent interfaces) defined directly in the Kotlin file.
+     */
+    @Deprecated("Will be removed in v0.16.0.", ReplaceWith("parents()"))
+    val parents: List<KoParentDeclaration>
+
+    /**
+     * Gets the number of parents.
+     */
+    @Deprecated("Will be removed in v0.16.0.", ReplaceWith("numParents()"))
+    val numParents: Int
+
+    /**
      * The parents (parent class and parent interfaces) of the declaration.
      *
      * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
@@ -67,6 +79,21 @@ interface KoParentProvider : KoBaseProvider {
         indirectParents: Boolean = false,
         predicate: (KoParentDeclaration) -> Boolean,
     ): Int
+
+    /**
+     * Determines whatever declaration has parents (parent class and parent interfaces) defined directly in the Kotlin file.
+     * Does not include parents defined in other files such as parent of the parent.
+     *
+     * @param names the names of the parents to check.
+     * @return `true` if the declaration has parents with the specified names (or any parent if [names] is empty), `false` otherwise.
+     */
+    @Deprecated(
+        """
+            Will be removed in v0.16.0. 
+            If you passed one argument - replace with `hasParentWithName`, otherwise with `hasParentsWithAllNames`.
+            """,
+    )
+    fun hasParents(vararg names: String): Boolean
 
     /**
      * Determines whatever declaration has any parent (parent class and parent interfaces).

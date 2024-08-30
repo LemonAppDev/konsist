@@ -85,7 +85,8 @@ class SuppressAssertTrueOnProviderListTest {
         val sut =
             getSnippetFile(
                 "assert-suppress-by-konsist-and-parameter-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider",
-            ).declarations(includeNested = true)
+            )
+                .declarations(includeNested = true)
                 .filterIsInstance<KoModifierProvider>()
 
         // then
@@ -278,7 +279,8 @@ class SuppressAssertTrueOnProviderListTest {
         val sut =
             getSnippetFile(
                 "assert-suppress-by-konsist-and-parameter-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration",
-            ).declarations(includeNested = true)
+            )
+                .declarations(includeNested = true)
                 .filterIsInstance<KoPropertyProvider>()
 
         // then
@@ -303,7 +305,8 @@ class SuppressAssertTrueOnProviderListTest {
         val sut =
             getSnippetFile(
                 "assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
-            ).declarations(includeNested = true)
+            )
+                .declarations(includeNested = true)
                 .filterIsInstance<KoPropertyProvider>()
 
         // then
@@ -328,7 +331,8 @@ class SuppressAssertTrueOnProviderListTest {
         val sut =
             getSnippetFile(
                 "assert-suppress-by-konsist-and-parameter-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
-            ).declarations(includeNested = true)
+            )
+                .declarations(includeNested = true)
                 .filterIsInstance<KoPropertyProvider>()
 
         // then

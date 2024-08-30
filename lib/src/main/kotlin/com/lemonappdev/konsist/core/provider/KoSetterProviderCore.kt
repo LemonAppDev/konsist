@@ -7,10 +7,7 @@ import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtPropertyAccessor
 
-internal interface KoSetterProviderCore :
-    KoSetterProvider,
-    KoBaseProviderCore,
-    KoContainingDeclarationProviderCore {
+internal interface KoSetterProviderCore : KoSetterProvider, KoBaseProviderCore, KoContainingDeclarationProviderCore {
     val ktCallableDeclaration: KtCallableDeclaration
 
     private val ktPropertyAccessor: List<KtPropertyAccessor>

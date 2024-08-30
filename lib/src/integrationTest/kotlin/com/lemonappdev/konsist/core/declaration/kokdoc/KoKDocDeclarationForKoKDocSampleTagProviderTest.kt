@@ -42,7 +42,8 @@ class KoKDocDeclarationForKoKDocSampleTagProviderTest {
                     .declarations(includeNested = true)
                     .filterIsInstance<KoNameProvider>()
                     .first { it.name == declarationName } as KoKDocProvider
-            ).kDoc
+            )
+                .kDoc
 
         // then
         assertSoftly(sut) {

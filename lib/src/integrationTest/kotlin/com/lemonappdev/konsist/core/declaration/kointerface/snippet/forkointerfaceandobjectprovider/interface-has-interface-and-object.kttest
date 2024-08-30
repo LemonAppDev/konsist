@@ -1,7 +1,0 @@
-interface SampleTopLevelInterface {
-    public class SampleClass
-
-    interface SampleInterface
-
-    object SampleObject
-}

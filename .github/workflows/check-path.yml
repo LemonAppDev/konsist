@@ -50,12 +50,6 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 8
-          distribution: 'corretto'
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
           java-version: 21
           distribution: 'corretto'
 
@@ -142,12 +136,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: 8
-          distribution: 'corretto'
 
       - name: Set up JDK
         uses: actions/setup-java@v4

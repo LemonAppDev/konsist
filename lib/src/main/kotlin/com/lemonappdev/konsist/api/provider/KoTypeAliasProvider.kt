@@ -26,6 +26,21 @@ interface KoTypeAliasProvider : KoBaseProvider {
     fun countTypeAliases(predicate: (KoTypeAliasDeclaration) -> Boolean): Int
 
     /**
+     * Determines whatever the declaration has type aliases.
+     *
+     * @param names the names of the type aliases to check.
+     * @return `true` if the declaration has type aliases with the specified names (or any type alias if [names] is empty),
+     * `false` otherwise.
+     */
+    @Deprecated(
+        """
+            Will be removed in v0.16.0. 
+            If you passed one argument - replace with `hasTypeAliasWithName`, otherwise with `hasTypeAliasesWithAllNames`.
+            """,
+    )
+    fun hasTypeAliases(vararg names: String): Boolean
+
+    /**
      * Determines whatever declaration has any type alias.
      *
      * @return `true` if the declaration has any type alias, `false` otherwise.

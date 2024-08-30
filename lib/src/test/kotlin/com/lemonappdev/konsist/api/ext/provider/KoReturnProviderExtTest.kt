@@ -37,13 +37,13 @@ class KoReturnProviderExtTest {
             mockk {
                 every { returnType } returns mockk()
                 every { returnType?.name } returns "Boolean"
-                every { kDoc?.hasTag(KoKDocTag.RETURN) } returns true
+                every { kDoc?.hasTags(KoKDocTag.RETURN) } returns true
             }
 
         // when
         declaration.hasValidKDocReturnTag()
 
         // then
-        verify { declaration.kDoc?.hasTag(KoKDocTag.RETURN) }
+        verify { declaration.kDoc?.hasTags(KoKDocTag.RETURN) }
     }
 }

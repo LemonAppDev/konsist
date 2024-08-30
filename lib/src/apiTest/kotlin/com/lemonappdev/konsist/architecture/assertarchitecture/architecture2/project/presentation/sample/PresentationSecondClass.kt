@@ -2,6 +2,4 @@ package com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.pr
 
 import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.presentation.PresentationFirstClass
 
-class PresentationSecondClass(
-    val sampleParameter: PresentationFirstClass,
-)
+class PresentationSecondClass(val sampleParameter: PresentationFirstClass)

@@ -22,8 +22,7 @@ class KoScopeForKoFunctionDeclarationTest {
         // then
         val expected = listOf("sampleFunction", "sampleLocalFunction", "sampleNestedFunction")
 
-        sut
-            .functions(includeNested = true, includeLocal = true)
+        sut.functions(includeNested = true, includeLocal = true)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -36,8 +35,7 @@ class KoScopeForKoFunctionDeclarationTest {
         // then
         val expected = listOf("sampleFunction", "sampleNestedFunction")
 
-        sut
-            .functions(includeNested = true, includeLocal = false)
+        sut.functions(includeNested = true, includeLocal = false)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -50,8 +48,7 @@ class KoScopeForKoFunctionDeclarationTest {
         // then
         val expected = listOf("sampleFunction", "sampleLocalFunction")
 
-        sut
-            .functions(includeNested = false, includeLocal = true)
+        sut.functions(includeNested = false, includeLocal = true)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -64,8 +61,7 @@ class KoScopeForKoFunctionDeclarationTest {
         // then
         val expected = listOf("sampleFunction")
 
-        sut
-            .functions(includeNested = false, includeLocal = false)
+        sut.functions(includeNested = false, includeLocal = false)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }

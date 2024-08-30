@@ -1,0 +1,9 @@
+interface SampleInterface {
+    fun sampleFunction() {
+        fun sampleLocalFunction() {}
+    }
+
+    class SampleClass {
+        fun sampleNestedFunction() {}
+    }
+}

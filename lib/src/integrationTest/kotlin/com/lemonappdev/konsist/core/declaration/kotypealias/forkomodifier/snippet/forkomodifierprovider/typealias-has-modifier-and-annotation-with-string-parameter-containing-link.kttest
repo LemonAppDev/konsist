@@ -1,6 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
-
-@SampleAnnotationWithParameter("Link: https://some/link")
-private typealias SampleTypeAlias = (Boolean) -> Int
-
-class SampleClass(val sampleProperty: SampleTypeAlias)

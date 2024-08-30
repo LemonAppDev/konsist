@@ -44,6 +44,8 @@ class KoConstructorDeclarationForKoModifierProviderTest {
             hasAllModifiers(listOf(OPEN, DATA)) shouldBeEqualTo false
             hasAllModifiers(setOf(OPEN)) shouldBeEqualTo false
             hasAllModifiers(setOf(OPEN, DATA)) shouldBeEqualTo false
+            hasModifiers(OPEN) shouldBeEqualTo false
+            hasModifiers(OPEN, DATA) shouldBeEqualTo false
         }
     }
 
@@ -100,7 +102,6 @@ class KoConstructorDeclarationForKoModifierProviderTest {
                 arguments("constructor-has-modifiers-and-annotation-with-parameter"),
                 arguments("constructor-has-modifiers-and-annotation-without-parameter"),
                 arguments("constructor-has-modifiers-and-annotations"),
-                arguments("constructor-has-modifier-and-annotation-with-string-parameter-containing-link"),
             )
     }
 }

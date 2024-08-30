@@ -3,10 +3,7 @@ package com.lemonappdev.konsist.api
 /**
  * Represents a KDoc tag.
  */
-enum class KoKDocTag(
-    val type: String,
-    val isValued: Boolean = false,
-) {
+enum class KoKDocTag(val type: String, val isValued: Boolean = false) {
     /**
      * The `@param` tag.
      */

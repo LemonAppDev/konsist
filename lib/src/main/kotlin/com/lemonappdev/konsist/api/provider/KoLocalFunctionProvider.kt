@@ -25,6 +25,15 @@ interface KoLocalFunctionProvider : KoBaseProvider {
     fun countLocalFunctions(predicate: (KoFunctionDeclaration) -> Boolean): Int
 
     /**
+     * Determines whatever the declaration contains a local function with the specified name.
+     *
+     * @param predicate The predicate function to determine if a local function satisfies a condition.
+     * @return `true` if the declaration contains a local function with the specified name, `false` otherwise.
+     */
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasLocalFunction()"))
+    fun containsLocalFunction(predicate: (KoFunctionDeclaration) -> Boolean): Boolean
+
+    /**
      * Determines whatever the declaration has local functions.
      *
      * @return `true` if the declaration has any local function, `false` otherwise.

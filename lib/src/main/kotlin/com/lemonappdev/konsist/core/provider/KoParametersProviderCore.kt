@@ -24,6 +24,9 @@ internal interface KoParametersProviderCore :
 
     override fun countParameters(predicate: (KoParameterDeclaration) -> Boolean): Int = parameters.count { predicate(it) }
 
+    @Deprecated("Will be removed in v0.16.0.", replaceWith = ReplaceWith("hasParameterWithName(name)"))
+    override fun hasParameterNamed(name: String): Boolean = parameters.any { it.name == name }
+
     override fun hasParameters(): Boolean = parameters.isNotEmpty()
 
     override fun hasParameterWithName(

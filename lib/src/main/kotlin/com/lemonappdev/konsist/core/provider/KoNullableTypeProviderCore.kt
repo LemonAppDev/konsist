@@ -27,6 +27,9 @@ internal interface KoNullableTypeProviderCore :
             .children
             .filterIsInstance<KtTypeReference>()
 
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasType { it.name == name }"))
+    override fun hasType(name: String): Boolean = this.type?.name == name
+
     override fun hasType(predicate: ((KoTypeDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
             null -> type != null

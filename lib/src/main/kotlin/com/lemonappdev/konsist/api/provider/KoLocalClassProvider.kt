@@ -25,6 +25,15 @@ interface KoLocalClassProvider : KoBaseProvider {
     fun countLocalClasses(predicate: (KoClassDeclaration) -> Boolean): Int
 
     /**
+     * Determines whatever the declaration contains a local class with the specified name.
+     *
+     * @param predicate The predicate function to determine if a local class satisfies a condition.
+     * @return `true` if the declaration contains a local class with the specified predicate, `false` otherwise.
+     */
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasLocalClass()"))
+    fun containsLocalClass(predicate: (KoClassDeclaration) -> Boolean): Boolean
+
+    /**
      * Determines whatever the declaration has local classes.
      *
      * @return `true` if the declaration has any local class, `false` otherwise.

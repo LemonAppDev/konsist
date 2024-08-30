@@ -2,6 +2,4 @@ package com.lemonappdev.konsist.architecture.optionalparameters.project.presenta
 
 import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass
 
-class PresentationThirdClass(
-    val sampleParameter: DomainFirstClass,
-)
+class PresentationThirdClass(val sampleParameter: DomainFirstClass)

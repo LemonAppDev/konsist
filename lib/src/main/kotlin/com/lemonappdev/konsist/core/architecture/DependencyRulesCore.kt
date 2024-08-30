@@ -5,8 +5,7 @@ import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
 class DependencyRulesCore : DependencyRules {
-    internal val positiveDependencies = mutableMapOf<Layer, Set<Layer>>()
-    internal val negativeDependencies = mutableMapOf<Layer, Set<Layer>>()
+    internal val dependencies = mutableMapOf<Layer, Set<Layer>>()
     internal val statuses = mutableMapOf<Layer, Status>()
 
     internal var allLayers = mutableListOf<Layer>()
@@ -25,35 +24,8 @@ class DependencyRulesCore : DependencyRules {
                 .distinct()
                 .toMutableList()
 
-        positiveDependencies[this] = (positiveDependencies.getOrDefault(this, setOf(this))) + layer + layers
+        dependencies[this] = (dependencies.getOrDefault(this, setOf(this))) + layer + layers
         statuses[this] = Status.DEPEND_ON_LAYER
-
-        if (statuses.getOrDefault(layer, Status.NONE) == Status.NONE) {
-            statuses[layer] = Status.NONE
-        }
-        layers.onEach {
-            if (statuses.getOrDefault(it, Status.NONE) == Status.NONE) {
-                statuses[it] = Status.NONE
-            }
-        }
-    }
-
-    override fun Layer.doesNotDependOn(
-        layer: Layer,
-        vararg layers: Layer,
-    ) {
-        checkIfLayerHasTheSameValuesAsOtherLayer(this, layer, *layers)
-        checkIfLayerIsDependentOnItself(this, layer, *layers)
-        checkStatusOfLayer(false, this, layer, *layers)
-        checkCircularDependencies(this, layer, *layers)
-
-        allLayers =
-            (allLayers + this + layer + layers)
-                .distinct()
-                .toMutableList()
-
-        negativeDependencies[this] = setOf(layer) + layers
-        statuses[this] = Status.NOT_DEPEND_ON_LAYER
 
         if (statuses.getOrDefault(layer, Status.NONE) == Status.NONE) {
             statuses[layer] = Status.NONE
@@ -73,8 +45,7 @@ class DependencyRulesCore : DependencyRules {
             (allLayers + this)
                 .distinct()
                 .toMutableList()
-
-        positiveDependencies[this] = setOf(this)
+        dependencies[this] = setOf(this)
         statuses[this] = Status.DEPENDENT_ON_NOTHING
     }
 
@@ -104,7 +75,7 @@ class DependencyRulesCore : DependencyRules {
                 )
             }
         } else if (statuses[layer] == Status.DEPEND_ON_LAYER) {
-            val dependency = positiveDependencies.getOrDefault(layer, emptySet())
+            val dependency = dependencies.getOrDefault(layer, emptySet())
 
             if (toBeIndependent) {
                 val alreadySetLayer = dependency.first { it != layer }
@@ -135,8 +106,7 @@ class DependencyRulesCore : DependencyRules {
             val layerName = layer.name
             throw KoPreconditionFailedException(
                 "Illegal circular dependencies:\n" +
-                    notEmpty
-                        .filterNot { it == null }
+                    notEmpty.filterNot { it == null }
                         .joinToString(
                             prefix = "Layer $layerName -->\n",
                             postfix = "Layer $layerName.",
@@ -152,7 +122,7 @@ class DependencyRulesCore : DependencyRules {
         alreadyChecked: List<Layer>,
         potentialCircular: List<Layer>,
     ): List<Layer?> {
-        val layerToCheckDependencies = positiveDependencies.getOrDefault(layerToCheck, emptySet()) - layerToCheck
+        val layerToCheckDependencies = dependencies.getOrDefault(layerToCheck, emptySet()) - layerToCheck
 
         if (layerToCheckDependencies.isEmpty()) {
             return potentialCircular
@@ -206,6 +176,5 @@ class DependencyRulesCore : DependencyRules {
 internal enum class Status {
     DEPENDENT_ON_NOTHING,
     DEPEND_ON_LAYER,
-    NOT_DEPEND_ON_LAYER,
     NONE,
 }

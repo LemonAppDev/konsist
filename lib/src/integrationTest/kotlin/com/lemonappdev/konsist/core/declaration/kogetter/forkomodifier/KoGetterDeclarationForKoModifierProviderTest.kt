@@ -40,6 +40,8 @@ class KoGetterDeclarationForKoModifierProviderTest {
             it?.hasAllModifiers(listOf(KoModifier.OPEN, DATA)) shouldBeEqualTo false
             it?.hasAllModifiers(setOf(KoModifier.OPEN)) shouldBeEqualTo false
             it?.hasAllModifiers(setOf(KoModifier.OPEN, DATA)) shouldBeEqualTo false
+            it?.hasModifiers(KoModifier.OPEN) shouldBeEqualTo false
+            it?.hasModifiers(KoModifier.OPEN, DATA) shouldBeEqualTo false
         }
     }
 

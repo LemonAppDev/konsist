@@ -18,7 +18,7 @@ inline fun <reified T> KoReturnProvider.hasReturnTypeOf(): Boolean = hasReturnTy
  */
 fun <T : KoReturnProvider> T.hasValidKDocReturnTag(): Boolean =
     if (returnType != null && returnType?.name != "Unit") {
-        (this as? KoKDocProvider)?.kDoc?.hasTag(KoKDocTag.RETURN) == true
+        (this as? KoKDocProvider)?.kDoc?.hasTags(KoKDocTag.RETURN) == true
     } else {
         (this as? KoKDocProvider)?.kDoc?.returnTag == null
     }

@@ -17,6 +17,12 @@ interface KoSecondaryConstructorsProvider : KoBaseProvider {
     val numSecondaryConstructors: Int
 
     /**
+     * Determines whatever declaration has secondary constructors.
+     */
+    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasSecondaryConstructors()"))
+    val hasSecondaryConstructors: Boolean
+
+    /**
      * Returns the number of secondary constructors that satisfies the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if a secondary constructor satisfies a condition.

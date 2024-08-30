@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.container.KoScope
 
 object TestSnippetProvider {
     private const val TEST_SOURCE_SET_PATH = "lib/src/integrationTest/kotlin/com/lemonappdev/konsist/"
-    private const val SNIPPET_EXTENSION = ".kttest"
+    private const val SNIPPET_EXTENSION = ".kttxt"
 
     fun getSnippetKoScope(
         snippetRelativePath: String,

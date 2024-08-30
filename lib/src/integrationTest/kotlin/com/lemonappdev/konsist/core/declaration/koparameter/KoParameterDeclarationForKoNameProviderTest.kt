@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test
 
 class KoParameterDeclarationForKoNameProviderTest {
     @Test
-    fun `parameter-in-constructor-name`() {
+    fun `parameter-name`() {
         // given
         val sut =
-            getSnippetFile("parameter-in-constructor-name")
+            getSnippetFile("parameter-name")
                 .classes()
                 .first()
                 .primaryConstructor
@@ -28,30 +28,6 @@ class KoParameterDeclarationForKoNameProviderTest {
             it?.hasNameContaining("lepar") shouldBeEqualTo false
             it?.hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             it?.hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `parameter-in-function-invocation-name`() {
-        // given
-        val sut =
-            getSnippetFile("parameter-in-function-invocation-name")
-                .functions()
-                .first()
-                .parameters
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            name shouldBeEqualTo "sampleParameter"
-            hasNameStartingWith("sample") shouldBeEqualTo true
-            hasNameStartingWith("Other") shouldBeEqualTo false
-            hasNameEndingWith("meter") shouldBeEqualTo true
-            hasNameEndingWith("other") shouldBeEqualTo false
-            hasNameContaining("lePar") shouldBeEqualTo true
-            hasNameContaining("lepar") shouldBeEqualTo false
-            hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
-            hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
     }
 

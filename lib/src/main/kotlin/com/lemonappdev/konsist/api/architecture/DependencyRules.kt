@@ -19,18 +19,6 @@ interface DependencyRules {
     ): Unit
 
     /**
-     * Specifies that the current layer does not depend on any given layer.
-     *
-     * @param layer The layer that the current layer does not depend on.
-     * @param layers The layers that the current layer does not depend on.
-     * @receiver The [Layer] that does not depend on other layers.
-     */
-    fun Layer.doesNotDependOn(
-        layer: Layer,
-        vararg layers: Layer,
-    ): Unit
-
-    /**
      * Specifies that the current layer does not depend on any other layer.
      *
      * @receiver The [Layer] that does not depend on any other layer.

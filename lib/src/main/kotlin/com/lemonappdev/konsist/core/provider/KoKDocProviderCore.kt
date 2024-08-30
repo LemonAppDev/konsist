@@ -5,10 +5,7 @@ import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.core.declaration.KoKDocDeclarationCore
 import org.jetbrains.kotlin.kdoc.psi.api.KDoc
 
-internal interface KoKDocProviderCore :
-    KoKDocProvider,
-    KoTextProviderCore,
-    KoBaseProviderCore {
+internal interface KoKDocProviderCore : KoKDocProvider, KoTextProviderCore, KoBaseProviderCore {
     override val kDoc: KoKDocDeclaration?
         get() {
             val kDocElement =

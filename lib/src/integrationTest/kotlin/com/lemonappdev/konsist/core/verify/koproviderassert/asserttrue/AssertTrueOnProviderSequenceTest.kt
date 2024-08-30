@@ -235,7 +235,7 @@ class AssertTrueOnProviderSequenceTest {
                 .asSequence()
 
         // then
-        sut.assertTrue { it.primaryConstructor?.hasParameterWithName("sampleParameter") }
+        sut.assertTrue { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
     }
 
     @Test
@@ -249,7 +249,7 @@ class AssertTrueOnProviderSequenceTest {
 
         // when
         val func = {
-            sut.assertTrue { it.primaryConstructor?.hasParameterWithName("sampleParameter") }
+            sut.assertTrue { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
         }
 
         // then
@@ -266,7 +266,7 @@ class AssertTrueOnProviderSequenceTest {
                 .asSequence()
 
         // then
-        sut.assertFalse { it.primaryConstructor?.hasParameterWithName("otherParameter") }
+        sut.assertFalse { it.primaryConstructor?.hasParameterNamed("otherParameter") }
     }
 
     @Test
@@ -280,7 +280,7 @@ class AssertTrueOnProviderSequenceTest {
 
         // when
         val func = {
-            sut.assertFalse { it.primaryConstructor?.hasParameterWithName("sampleParameter") }
+            sut.assertFalse { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
         }
 
         // then
