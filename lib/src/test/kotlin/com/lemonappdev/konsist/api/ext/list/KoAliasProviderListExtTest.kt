@@ -9,7 +9,9 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoAliasProviderListExtTest {
-    private interface SampleTestDeclaration : KoAliasProvider, KoNameProvider
+    private interface SampleTestDeclaration :
+        KoAliasProvider,
+        KoNameProvider
 
     @Test
     fun `importAliases returns import aliases from all declarations`() {

@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test
 import java.io.File
 
 class ProjectRootDirResolverTest {
-    private class Sut(pathVerifier: PathVerifier) : ProjectRootDirResolver(pathVerifier) {
+    private class Sut(
+        pathVerifier: PathVerifier,
+    ) : ProjectRootDirResolver(pathVerifier) {
         override val paths = setOf("/path-1", "/path-2")
     }
 

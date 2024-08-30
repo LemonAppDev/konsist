@@ -6,7 +6,9 @@ import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.util.LocationUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 
-internal interface KoPathProviderCore : KoPathProvider, KoBaseProviderCore {
+internal interface KoPathProviderCore :
+    KoPathProvider,
+    KoBaseProviderCore {
     val psiElement: PsiElement
 
     override val path: String

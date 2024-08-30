@@ -37,68 +37,67 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 internal class KoParameterDeclarationCore private constructor(
     override val ktParameter: KtParameter,
     override val containingDeclaration: KoBaseDeclaration,
-) :
-    KoParameterDeclaration,
-        KoBaseProviderCore,
-        KoAnnotationProviderCore,
-        KoContainingFileProviderCore,
-        KoDefaultValueProviderCore,
-        KoLocationProviderCore,
-        KoModifierProviderCore,
-        KoNameProviderCore,
-        KoPackageDeclarationProviderCore,
-        KoContainingDeclarationProviderCore,
-        KoPathProviderCore,
-        KoModuleProviderCore,
-        KoSourceSetProviderCore,
-        KoRepresentsTypeProviderCore,
-        KoResideInPackageProviderCore,
-        KoTextProviderCore,
-        KoNonNullableTypeProviderCore,
-        KoVarModifierProviderCore,
-        KoValModifierProviderCore,
-        KoVarArgModifierProviderCore,
-        KoNoInlineModifierProviderCore,
-        KoCrossInlineModifierProviderCore {
-        override val ktAnnotated: KtAnnotated by lazy { ktParameter }
+) : KoParameterDeclaration,
+    KoBaseProviderCore,
+    KoAnnotationProviderCore,
+    KoContainingFileProviderCore,
+    KoDefaultValueProviderCore,
+    KoLocationProviderCore,
+    KoModifierProviderCore,
+    KoNameProviderCore,
+    KoPackageDeclarationProviderCore,
+    KoContainingDeclarationProviderCore,
+    KoPathProviderCore,
+    KoModuleProviderCore,
+    KoSourceSetProviderCore,
+    KoRepresentsTypeProviderCore,
+    KoResideInPackageProviderCore,
+    KoTextProviderCore,
+    KoNonNullableTypeProviderCore,
+    KoVarModifierProviderCore,
+    KoValModifierProviderCore,
+    KoVarArgModifierProviderCore,
+    KoNoInlineModifierProviderCore,
+    KoCrossInlineModifierProviderCore {
+    override val ktAnnotated: KtAnnotated by lazy { ktParameter }
 
-        override val ktModifierListOwner: KtModifierListOwner by lazy { ktParameter }
+    override val ktModifierListOwner: KtModifierListOwner by lazy { ktParameter }
 
-        override val psiElement: PsiElement by lazy { ktParameter }
+    override val psiElement: PsiElement by lazy { ktParameter }
 
-        override val ktElement: KtElement by lazy { ktParameter }
+    override val ktElement: KtElement by lazy { ktParameter }
 
-        override val type: KoTypeDeclaration by lazy {
-            val type =
-                ktParameter
-                    .children
-                    .filterIsInstance<KtTypeReference>()
-                    .firstOrNull()
+    override val type: KoTypeDeclaration by lazy {
+        val type =
+            ktParameter
+                .children
+                .filterIsInstance<KtTypeReference>()
+                .firstOrNull()
 
-            type?.let { KoTypeDeclarationCore.getInstance(it, this) }
-                ?: throw KoInternalException("Class type cannot be null")
-        }
-
-        override fun representsType(name: String?): Boolean = type.name == name // todo: add this?: || type.fullyQualifiedName == name
-
-        override val hasValModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "val" }
-
-        override val hasVarModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "var" }
-
-        override fun toString(): String = name
-
-        internal companion object {
-            private val cache: KoDeclarationCache<KoParameterDeclaration> = KoDeclarationCache()
-
-            internal fun getInstance(
-                ktParameter: KtParameter,
-                containingDeclaration: KoBaseDeclaration,
-            ): KoParameterDeclaration =
-                cache.getOrCreateInstance(ktParameter, containingDeclaration) {
-                    KoParameterDeclarationCore(
-                        ktParameter,
-                        containingDeclaration,
-                    )
-                }
-        }
+        type?.let { KoTypeDeclarationCore.getInstance(it, this) }
+            ?: throw KoInternalException("Class type cannot be null")
     }
+
+    override fun representsType(name: String?): Boolean = type.name == name // todo: add this?: || type.fullyQualifiedName == name
+
+    override val hasValModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "val" }
+
+    override val hasVarModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "var" }
+
+    override fun toString(): String = name
+
+    internal companion object {
+        private val cache: KoDeclarationCache<KoParameterDeclaration> = KoDeclarationCache()
+
+        internal fun getInstance(
+            ktParameter: KtParameter,
+            containingDeclaration: KoBaseDeclaration,
+        ): KoParameterDeclaration =
+            cache.getOrCreateInstance(ktParameter, containingDeclaration) {
+                KoParameterDeclarationCore(
+                    ktParameter,
+                    containingDeclaration,
+                )
+            }
+    }
+}

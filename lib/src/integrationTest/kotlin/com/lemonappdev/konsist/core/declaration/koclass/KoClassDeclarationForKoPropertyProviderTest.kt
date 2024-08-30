@@ -81,7 +81,8 @@ class KoClassDeclarationForKoPropertyProviderTest {
         // then
         val expected = listOf("sampleProperty", "sampleNestedProperty")
 
-        sut.properties(includeNested = true)
+        sut
+            .properties(includeNested = true)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -97,7 +98,8 @@ class KoClassDeclarationForKoPropertyProviderTest {
         // then
         val expected = listOf("sampleProperty")
 
-        sut.properties(includeNested = false)
+        sut
+            .properties(includeNested = false)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -129,7 +131,8 @@ class KoClassDeclarationForKoPropertyProviderTest {
                 .first()
 
         // then
-        sut.properties()
+        sut
+            .properties()
             .map { it.name }
             .shouldBeEqualTo(listOf("sampleProperty"))
     }
@@ -143,7 +146,8 @@ class KoClassDeclarationForKoPropertyProviderTest {
                 .first()
 
         // then
-        sut.properties()
+        sut
+            .properties()
             .map { it.name }
             .shouldBeEqualTo(listOf("sampleProperty1", "sampleProperty2"))
     }

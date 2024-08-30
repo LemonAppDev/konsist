@@ -37,8 +37,7 @@ object TypeUtil {
                     types.firstOrNull()
                 } else {
                     null
-                }
-                    ?.children
+                }?.children
                     // The last item is chosen because when a type is preceded by an annotation or modifier,
                     // the type being searched for is the last item in the list.
                     ?.lastOrNull()
@@ -83,8 +82,7 @@ object TypeUtil {
                 types.first()
             } else {
                 null
-            }
-                ?.children
+            }?.children
                 ?.firstOrNull()
 
         return if (type is KtTypeReference) {

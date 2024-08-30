@@ -2,4 +2,6 @@ package com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.pr
 
 import com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.data.DataFirstClass
 
-class DataSecondClass(val sampleParameter: DataFirstClass)
+class DataSecondClass(
+    val sampleParameter: DataFirstClass,
+)

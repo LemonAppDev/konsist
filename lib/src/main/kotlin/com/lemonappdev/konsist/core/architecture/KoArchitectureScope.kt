@@ -9,7 +9,10 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
  * @param dependencyRules dependency configuration for a particular Layer
  * @param koScope Scope of declaration
  */
-internal data class KoArchitectureScope(val dependencyRules: DependencyRules, val koScope: KoScope)
+internal data class KoArchitectureScope(
+    val dependencyRules: DependencyRules,
+    val koScope: KoScope,
+)
 
 /**
  * Architecture files for:
@@ -17,4 +20,7 @@ internal data class KoArchitectureScope(val dependencyRules: DependencyRules, va
  * @param dependencyRules dependency configuration for a particular Layer
  * @param files Files within the scope
  */
-internal data class KoArchitectureFiles(val dependencyRules: DependencyRules, val files: List<KoFileDeclaration>)
+internal data class KoArchitectureFiles(
+    val dependencyRules: DependencyRules,
+    val files: List<KoFileDeclaration>,
+)

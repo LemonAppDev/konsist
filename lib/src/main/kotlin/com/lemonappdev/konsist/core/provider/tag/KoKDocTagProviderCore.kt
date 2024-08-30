@@ -11,7 +11,10 @@ import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.util.EndOfLine
 import java.util.Locale
 
-internal interface KoKDocTagProviderCore : KoKDocTagProvider, KoTextProviderCore, KoBaseProviderCore {
+internal interface KoKDocTagProviderCore :
+    KoKDocTagProvider,
+    KoTextProviderCore,
+    KoBaseProviderCore {
     override val tags: List<KoKDocTagDeclaration>
         get() {
             val regex = "@(\\w+)".toRegex()

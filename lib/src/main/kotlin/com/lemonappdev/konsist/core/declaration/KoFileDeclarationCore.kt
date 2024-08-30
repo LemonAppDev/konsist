@@ -33,8 +33,9 @@ import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
 
-internal class KoFileDeclarationCore(override val ktFile: KtFile) :
-    KoFileDeclaration,
+internal class KoFileDeclarationCore(
+    override val ktFile: KtFile,
+) : KoFileDeclaration,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
     KoClassAndInterfaceAndObjectProviderCore,

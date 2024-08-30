@@ -4,7 +4,10 @@ import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 
-internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationProviderCore, KoBaseProviderCore {
+internal interface KoFunctionProviderCore :
+    KoFunctionProvider,
+    KoDeclarationProviderCore,
+    KoBaseProviderCore {
     override fun functions(
         includeNested: Boolean,
         includeLocal: Boolean,

@@ -135,7 +135,8 @@ class DependencyRulesCore : DependencyRules {
             val layerName = layer.name
             throw KoPreconditionFailedException(
                 "Illegal circular dependencies:\n" +
-                    notEmpty.filterNot { it == null }
+                    notEmpty
+                        .filterNot { it == null }
                         .joinToString(
                             prefix = "Layer $layerName -->\n",
                             postfix = "Layer $layerName.",

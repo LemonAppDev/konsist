@@ -81,7 +81,8 @@ class KoInterfaceDeclarationForKoObjectProviderTest {
         // then
         val expected = listOf("SampleObject", "SampleNestedObject")
 
-        sut.objects(includeNested = true)
+        sut
+            .objects(includeNested = true)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -97,7 +98,8 @@ class KoInterfaceDeclarationForKoObjectProviderTest {
         // then
         val expected = listOf("SampleObject")
 
-        sut.objects(includeNested = false)
+        sut
+            .objects(includeNested = false)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }

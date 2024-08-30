@@ -90,8 +90,7 @@ class ApiKonsistTest {
                     property.hasType { type ->
                         type.hasNameStartingWith("List<Ko")
                     }
-            }
-            .assertTrue {
+            }.assertTrue {
                 it.hasCorrectMethods(false)
             }
     }
@@ -118,16 +117,14 @@ class ApiKonsistTest {
                         property.hasType { type ->
                             type.hasNameStartingWith("List<Ko")
                         }
-                }
-                .map { it.name }
+                }.map { it.name }
 
         Konsist
             .scopeFromPackage("com.lemonappdev.konsist.api.ext.list..", sourceSetName = "main")
             .files
             .filter {
                 providers.any { providerName -> it.hasNameContaining(providerName) }
-            }
-            .assertTrue { it.hasCorrectMethods(true) }
+            }.assertTrue { it.hasCorrectMethods(true) }
     }
 
     private val declarations =
@@ -253,8 +250,8 @@ class ApiKonsistTest {
         singularName: String,
         pluralName: String,
         prefix: String,
-    ): Boolean {
-        return hasFunction { function -> function.name == "${prefix}$pluralName" && !function.hasParameters() } &&
+    ): Boolean =
+        hasFunction { function -> function.name == "${prefix}$pluralName" && !function.hasParameters() } &&
             hasFunction { function ->
                 function.name == "${prefix}$singularName" &&
                     function.hasParameterWithName(
@@ -267,7 +264,6 @@ class ApiKonsistTest {
                         "predicate",
                     )
             }
-    }
 
     private fun KoFunctionProvider.hasNamedFunctions(
         singularName: String,

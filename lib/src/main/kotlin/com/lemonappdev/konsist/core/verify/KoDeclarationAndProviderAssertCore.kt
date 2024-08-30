@@ -148,8 +148,7 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(
                         it.hasTextContaining("\"konsist.$suppressName\"") ||
                         it.hasTextContaining("\"$suppressName\"")
                 )
-        }
-        .forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it as KoBaseDeclaration, suppressName) }
+        }.forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it as KoBaseDeclaration, suppressName) }
 
     val withoutSuppress = mutableListOf<E>()
 

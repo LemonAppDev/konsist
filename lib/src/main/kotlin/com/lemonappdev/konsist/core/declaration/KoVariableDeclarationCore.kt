@@ -34,68 +34,67 @@ import org.jetbrains.kotlin.psi.KtPropertyAccessor
 internal class KoVariableDeclarationCore private constructor(
     private val ktProperty: KtProperty,
     override val containingDeclaration: KoBaseDeclaration,
-) :
-    KoVariableDeclaration,
-        KoBaseProviderCore,
-        KoAnnotationProviderCore,
-        KoContainingFileProviderCore,
-        KoDelegateProviderCore,
-        KoNullableTypeProviderCore,
-        KoKDocProviderCore,
-        KoLocationProviderCore,
-        KoNameProviderCore,
-        KoPackageDeclarationProviderCore,
-        KoContainingDeclarationProviderCore,
-        KoPathProviderCore,
-        KoModuleProviderCore,
-        KoSourceSetProviderCore,
-        KoResideInPackageProviderCore,
-        KoTextProviderCore,
-        KoValueProviderCore,
-        KoValModifierProviderCore,
-        KoVarModifierProviderCore,
-        KoTacitTypeProviderCore {
-        override val ktAnnotated: KtAnnotated by lazy { ktProperty }
+) : KoVariableDeclaration,
+    KoBaseProviderCore,
+    KoAnnotationProviderCore,
+    KoContainingFileProviderCore,
+    KoDelegateProviderCore,
+    KoNullableTypeProviderCore,
+    KoKDocProviderCore,
+    KoLocationProviderCore,
+    KoNameProviderCore,
+    KoPackageDeclarationProviderCore,
+    KoContainingDeclarationProviderCore,
+    KoPathProviderCore,
+    KoModuleProviderCore,
+    KoSourceSetProviderCore,
+    KoResideInPackageProviderCore,
+    KoTextProviderCore,
+    KoValueProviderCore,
+    KoValModifierProviderCore,
+    KoVarModifierProviderCore,
+    KoTacitTypeProviderCore {
+    override val ktAnnotated: KtAnnotated by lazy { ktProperty }
 
-        override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktProperty }
+    override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktProperty }
 
-        override val psiElement: PsiElement by lazy { ktProperty }
+    override val psiElement: PsiElement by lazy { ktProperty }
 
-        override val ktElement: KtElement by lazy { ktProperty }
+    override val ktElement: KtElement by lazy { ktProperty }
 
-        override val ktExpression: KtExpression? by lazy {
-            ktProperty
-                .children
-                .filterNot { it is KtPropertyAccessor }
-                .filterIsInstance<KtExpression>()
-                .firstOrNull()
-        }
-
-        override val delegateName: String? by lazy {
-            ktProperty
-                .delegateExpression
-                ?.text
-                ?.replace(EndOfLine.UNIX.value, " ")
-                ?.substringAfter("by ")
-                ?.substringBefore("{")
-                ?.removeSuffix(" ")
-        }
-
-        override val hasValModifier: Boolean by lazy { !ktProperty.isVar }
-
-        override val hasVarModifier: Boolean by lazy { ktProperty.isVar }
-
-        override fun toString(): String = name
-
-        internal companion object {
-            private val cache: KoDeclarationCache<KoVariableDeclaration> = KoDeclarationCache()
-
-            internal fun getInstance(
-                ktProperty: KtProperty,
-                containingDeclaration: KoBaseDeclaration,
-            ): KoVariableDeclaration =
-                cache.getOrCreateInstance(ktProperty, containingDeclaration) {
-                    KoVariableDeclarationCore(ktProperty, containingDeclaration)
-                }
-        }
+    override val ktExpression: KtExpression? by lazy {
+        ktProperty
+            .children
+            .filterNot { it is KtPropertyAccessor }
+            .filterIsInstance<KtExpression>()
+            .firstOrNull()
     }
+
+    override val delegateName: String? by lazy {
+        ktProperty
+            .delegateExpression
+            ?.text
+            ?.replace(EndOfLine.UNIX.value, " ")
+            ?.substringAfter("by ")
+            ?.substringBefore("{")
+            ?.removeSuffix(" ")
+    }
+
+    override val hasValModifier: Boolean by lazy { !ktProperty.isVar }
+
+    override val hasVarModifier: Boolean by lazy { ktProperty.isVar }
+
+    override fun toString(): String = name
+
+    internal companion object {
+        private val cache: KoDeclarationCache<KoVariableDeclaration> = KoDeclarationCache()
+
+        internal fun getInstance(
+            ktProperty: KtProperty,
+            containingDeclaration: KoBaseDeclaration,
+        ): KoVariableDeclaration =
+            cache.getOrCreateInstance(ktProperty, containingDeclaration) {
+                KoVariableDeclarationCore(ktProperty, containingDeclaration)
+            }
+    }
+}
