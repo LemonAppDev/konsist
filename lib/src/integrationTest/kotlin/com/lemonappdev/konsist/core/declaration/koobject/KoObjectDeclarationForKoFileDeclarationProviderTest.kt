@@ -72,7 +72,8 @@ class KoObjectDeclarationForKoFileDeclarationProviderTest {
                 "SampleInterfaceNestedInsideInterface",
             )
 
-        sut.declarations(includeNested = true, includeLocal = true)
+        sut
+            .declarations(includeNested = true, includeLocal = true)
             .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .shouldBeEqualTo(expected)
@@ -104,7 +105,8 @@ class KoObjectDeclarationForKoFileDeclarationProviderTest {
                 "SampleInterfaceNestedInsideInterface",
             )
 
-        sut.declarations(includeNested = true, includeLocal = false)
+        sut
+            .declarations(includeNested = true, includeLocal = false)
             .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .shouldBeEqualTo(expected)
@@ -130,7 +132,8 @@ class KoObjectDeclarationForKoFileDeclarationProviderTest {
                 "SampleInterface",
             )
 
-        sut.declarations(includeNested = false, includeLocal = true)
+        sut
+            .declarations(includeNested = false, includeLocal = true)
             .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .shouldBeEqualTo(expected)
@@ -153,7 +156,8 @@ class KoObjectDeclarationForKoFileDeclarationProviderTest {
                 "SampleInterface",
             )
 
-        sut.declarations(includeNested = false, includeLocal = false)
+        sut
+            .declarations(includeNested = false, includeLocal = false)
             .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .shouldBeEqualTo(expected)

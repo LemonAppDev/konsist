@@ -91,7 +91,8 @@ class KoFileDeclarationForKoClassAndInterfaceProviderTest {
         // then
         val expected = listOf("SampleLocalClass", "SampleClassNestedInsideObject", "SampleInterfaceNestedInsideObject")
 
-        sut.classesAndInterfaces(includeNested = true, includeLocal = true)
+        sut
+            .classesAndInterfaces(includeNested = true, includeLocal = true)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -107,7 +108,8 @@ class KoFileDeclarationForKoClassAndInterfaceProviderTest {
         // then
         val expected = listOf("SampleClassNestedInsideObject", "SampleInterfaceNestedInsideObject")
 
-        sut.classesAndInterfaces(includeNested = true, includeLocal = false)
+        sut
+            .classesAndInterfaces(includeNested = true, includeLocal = false)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -123,7 +125,8 @@ class KoFileDeclarationForKoClassAndInterfaceProviderTest {
         // then
         val expected = listOf("SampleLocalClass")
 
-        sut.classesAndInterfaces(includeNested = false, includeLocal = true)
+        sut
+            .classesAndInterfaces(includeNested = false, includeLocal = true)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -139,7 +142,8 @@ class KoFileDeclarationForKoClassAndInterfaceProviderTest {
         // then
         val expected = emptyList<KoClassDeclaration>()
 
-        sut.classesAndInterfaces(includeNested = false, includeLocal = false)
+        sut
+            .classesAndInterfaces(includeNested = false, includeLocal = false)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }

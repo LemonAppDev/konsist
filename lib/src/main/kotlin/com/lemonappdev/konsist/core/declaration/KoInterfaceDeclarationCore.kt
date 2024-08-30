@@ -18,41 +18,40 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 internal class KoInterfaceDeclarationCore private constructor(
     private val ktClass: KtClass,
     override val containingDeclaration: KoBaseDeclaration,
-) :
-    KoInterfaceDeclaration,
-        KoClassAndInterfaceDeclarationCore,
-        KoInterfaceAndObjectDeclarationCore,
-        KoFunModifierProviderCore {
-        override val ktAnnotated: KtAnnotated by lazy { ktClass }
+) : KoInterfaceDeclaration,
+    KoClassAndInterfaceDeclarationCore,
+    KoInterfaceAndObjectDeclarationCore,
+    KoFunModifierProviderCore {
+    override val ktAnnotated: KtAnnotated by lazy { ktClass }
 
-        override val ktModifierListOwner: KtModifierListOwner by lazy { ktClass }
+    override val ktModifierListOwner: KtModifierListOwner by lazy { ktClass }
 
-        override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktClass }
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktClass }
 
-        override val psiElement: PsiElement by lazy { ktClass }
+    override val psiElement: PsiElement by lazy { ktClass }
 
-        override val ktElement: KtElement by lazy { ktClass }
+    override val ktElement: KtElement by lazy { ktClass }
 
-        override val ktClassOrObject: KtClassOrObject by lazy { ktClass }
+    override val ktClassOrObject: KtClassOrObject by lazy { ktClass }
 
-        override fun declarations(
-            includeNested: Boolean,
-            includeLocal: Boolean,
-        ): List<KoBaseDeclaration> =
-            KoDeclarationProviderCoreUtil
-                .getKoDeclarations(ktClass, includeNested, includeLocal, this)
+    override fun declarations(
+        includeNested: Boolean,
+        includeLocal: Boolean,
+    ): List<KoBaseDeclaration> =
+        KoDeclarationProviderCoreUtil
+            .getKoDeclarations(ktClass, includeNested, includeLocal, this)
 
-        override fun toString(): String = name
+    override fun toString(): String = name
 
-        internal companion object {
-            private val cache: KoDeclarationCache<KoInterfaceDeclaration> = KoDeclarationCache()
+    internal companion object {
+        private val cache: KoDeclarationCache<KoInterfaceDeclaration> = KoDeclarationCache()
 
-            internal fun getInstance(
-                ktClass: KtClass,
-                containingDeclaration: KoBaseDeclaration,
-            ): KoInterfaceDeclaration =
-                cache.getOrCreateInstance(ktClass, containingDeclaration) {
-                    KoInterfaceDeclarationCore(ktClass, containingDeclaration)
-                }
-        }
+        internal fun getInstance(
+            ktClass: KtClass,
+            containingDeclaration: KoBaseDeclaration,
+        ): KoInterfaceDeclaration =
+            cache.getOrCreateInstance(ktClass, containingDeclaration) {
+                KoInterfaceDeclarationCore(ktClass, containingDeclaration)
+            }
     }
+}

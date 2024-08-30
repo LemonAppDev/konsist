@@ -22,19 +22,18 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 internal class KoObjectDeclarationCore(
     private val ktObjectDeclaration: KtObjectDeclaration,
     override val containingDeclaration: KoBaseDeclaration,
-) :
-    KoObjectDeclaration,
-        KoClassAndObjectDeclarationCore,
-        KoInterfaceAndObjectDeclarationCore,
-        KoCompanionModifierProviderCore,
-        KoDataModifierProviderCore,
-        KoInitBlockProviderCore,
+) : KoObjectDeclaration,
+    KoClassAndObjectDeclarationCore,
+    KoInterfaceAndObjectDeclarationCore,
+    KoCompanionModifierProviderCore,
+    KoDataModifierProviderCore,
+    KoInitBlockProviderCore,
     /*
     We need to manually add KoNameProviderCore, even though KoObjectDeclarationCore indirectly implements this provider,
     because it is used to override the `name` property.
      */
-        KoNameProviderCore,
-        KoParentClassProviderCore {
+    KoNameProviderCore,
+    KoParentClassProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktObjectDeclaration }
 
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktObjectDeclaration }

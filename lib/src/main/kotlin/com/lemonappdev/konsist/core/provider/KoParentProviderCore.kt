@@ -55,8 +55,7 @@ internal interface KoParentProviderCore :
                     return@map getClass(outerName, fqn, isAlias, containingFile)
                         ?: getInterface(outerName, fqn, isAlias, containingFile)
                         ?: KoExternalDeclarationCore.getInstance(outerName, it)
-                }
-                ?.toMutableList()
+                }?.toMutableList()
                 .orEmpty()
 
         val indirectParentDeclarations =

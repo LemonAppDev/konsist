@@ -17,7 +17,10 @@ import com.lemonappdev.konsist.core.util.LocationUtil
  *
  * @throws KoPreconditionFailedException if the [definedBy] package does not end with '..'.
  */
-data class Layer(internal val name: String, internal val definedBy: String) {
+data class Layer(
+    internal val name: String,
+    internal val definedBy: String,
+) {
     init {
         val pattern = Regex(pattern = LocationUtil.REGEX_PACKAGE_NAME_END_TWO_DOTS)
         val twoDotsAtTheEndPattern = Regex(pattern = LocationUtil.REGEX_PACKAGE_NAME_END_TWO_DOTS)

@@ -4,7 +4,10 @@ import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 
-internal interface KoModuleProviderCore : KoModuleProvider, KoPathProviderCore, KoBaseProviderCore {
+internal interface KoModuleProviderCore :
+    KoModuleProvider,
+    KoPathProviderCore,
+    KoBaseProviderCore {
     override val moduleName: String
         get() {
             val projectName =

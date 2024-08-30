@@ -19,11 +19,12 @@ import java.io.File
 
 object KotlinFileParser {
     private val project by lazy {
-        KotlinCoreEnvironment.createForProduction(
-            Disposer.newDisposable(),
-            CompilerConfiguration(),
-            EnvironmentConfigFiles.JVM_CONFIG_FILES,
-        ).project
+        KotlinCoreEnvironment
+            .createForProduction(
+                Disposer.newDisposable(),
+                CompilerConfiguration(),
+                EnvironmentConfigFiles.JVM_CONFIG_FILES,
+            ).project
     }
 
     private val psiManager by lazy {

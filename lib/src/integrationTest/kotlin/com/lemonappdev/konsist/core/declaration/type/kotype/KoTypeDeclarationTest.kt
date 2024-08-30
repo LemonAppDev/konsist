@@ -18,7 +18,8 @@ class KoTypeDeclarationTest {
             getSnippetFile(fileName)
                 .classes()
                 .first()
-                .primaryConstructor?.parameters
+                .primaryConstructor
+                ?.parameters
                 ?.first()
                 ?.type
 

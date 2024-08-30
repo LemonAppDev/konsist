@@ -5,7 +5,9 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 /**
  * An interface representing a Kotlin declaration that provides information about whether it has `crossinline` modifier.
  */
-interface KoCrossInlineModifierProvider : KoBaseProvider, KoModifierProvider {
+interface KoCrossInlineModifierProvider :
+    KoBaseProvider,
+    KoModifierProvider {
     /**
      * Determines whatever the declaration has `crossinline` modifier.
      */

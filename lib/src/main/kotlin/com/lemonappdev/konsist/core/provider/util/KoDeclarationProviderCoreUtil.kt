@@ -128,21 +128,19 @@ internal object KoDeclarationProviderCoreUtil {
 
                             else -> listOf(it)
                         }
-                    }
-                    .filterIsInstance<T>()
+                    }.filterIsInstance<T>()
         }
 
         return result.filterIsInstance<T>()
     }
 
-    fun nestedDeclarations(koNamedDeclarations: List<KoBaseDeclaration>): List<KoBaseDeclaration> {
-        return koNamedDeclarations.flatMap {
+    fun nestedDeclarations(koNamedDeclarations: List<KoBaseDeclaration>): List<KoBaseDeclaration> =
+        koNamedDeclarations.flatMap {
             when (it) {
                 is KoDeclarationProvider -> it.declarations(includeNested = true, includeLocal = false)
                 else -> emptyList()
             }
         }
-    }
 
     fun localDeclarations(
         koFunctions: List<KoFunctionDeclaration>,

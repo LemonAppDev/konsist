@@ -73,142 +73,141 @@ internal class KoPropertyDeclarationCore private constructor(
      */
     override val ktCallableDeclaration: KtCallableDeclaration,
     override val containingDeclaration: KoBaseDeclaration,
-) :
-    KoPropertyDeclaration,
-        KoBaseProviderCore,
-        KoAnnotationProviderCore,
-        KoConstructorDefinedProviderCore,
-        KoIsConstructorDefinedProviderCore,
-        KoContainingFileProviderCore,
-        KoDeclarationFullyQualifiedNameProviderCore,
-        KoDelegateProviderCore,
-        KoNullableTypeProviderCore,
-        KoInitializerProviderCore,
-        KoIsInitializedProviderCore,
-        KoKDocProviderCore,
-        KoLocationProviderCore,
-        KoModifierProviderCore,
-        KoNameProviderCore,
-        KoPackageDeclarationProviderCore,
-        KoContainingDeclarationProviderCore,
-        KoPathProviderCore,
-        KoModuleProviderCore,
-        KoSourceSetProviderCore,
-        KoReceiverTypeProviderCore,
-        KoResideInPackageProviderCore,
-        KoTextProviderCore,
-        KoTopLevelProviderCore,
-        KoIsTopLevelProviderCore,
-        KoValueProviderCore,
-        KoVisibilityModifierProviderCore,
-        KoValModifierProviderCore,
-        KoVarModifierProviderCore,
-        KoLateinitModifierProviderCore,
-        KoOverrideModifierProviderCore,
-        KoAbstractModifierProviderCore,
-        KoOpenModifierProviderCore,
-        KoFinalModifierProviderCore,
-        KoActualModifierProviderCore,
-        KoExpectModifierProviderCore,
-        KoConstModifierProviderCore,
-        KoGetterProviderCore,
-        KoTacitTypeProviderCore,
-        KoSetterProviderCore,
-        KoReadOnlyProviderCore,
-        KoIsReadOnlyProviderCore {
-        override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }
+) : KoPropertyDeclaration,
+    KoBaseProviderCore,
+    KoAnnotationProviderCore,
+    KoConstructorDefinedProviderCore,
+    KoIsConstructorDefinedProviderCore,
+    KoContainingFileProviderCore,
+    KoDeclarationFullyQualifiedNameProviderCore,
+    KoDelegateProviderCore,
+    KoNullableTypeProviderCore,
+    KoInitializerProviderCore,
+    KoIsInitializedProviderCore,
+    KoKDocProviderCore,
+    KoLocationProviderCore,
+    KoModifierProviderCore,
+    KoNameProviderCore,
+    KoPackageDeclarationProviderCore,
+    KoContainingDeclarationProviderCore,
+    KoPathProviderCore,
+    KoModuleProviderCore,
+    KoSourceSetProviderCore,
+    KoReceiverTypeProviderCore,
+    KoResideInPackageProviderCore,
+    KoTextProviderCore,
+    KoTopLevelProviderCore,
+    KoIsTopLevelProviderCore,
+    KoValueProviderCore,
+    KoVisibilityModifierProviderCore,
+    KoValModifierProviderCore,
+    KoVarModifierProviderCore,
+    KoLateinitModifierProviderCore,
+    KoOverrideModifierProviderCore,
+    KoAbstractModifierProviderCore,
+    KoOpenModifierProviderCore,
+    KoFinalModifierProviderCore,
+    KoActualModifierProviderCore,
+    KoExpectModifierProviderCore,
+    KoConstModifierProviderCore,
+    KoGetterProviderCore,
+    KoTacitTypeProviderCore,
+    KoSetterProviderCore,
+    KoReadOnlyProviderCore,
+    KoIsReadOnlyProviderCore {
+    override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }
 
-        override val ktModifierListOwner: KtModifierListOwner by lazy { ktCallableDeclaration }
+    override val ktModifierListOwner: KtModifierListOwner by lazy { ktCallableDeclaration }
 
-        override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktCallableDeclaration }
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktCallableDeclaration }
 
-        override val psiElement: PsiElement by lazy { ktCallableDeclaration }
+    override val psiElement: PsiElement by lazy { ktCallableDeclaration }
 
-        override val ktElement: KtElement by lazy { ktCallableDeclaration }
+    override val ktElement: KtElement by lazy { ktCallableDeclaration }
 
-        override val ktDeclaration: KtDeclaration by lazy { ktCallableDeclaration }
-
-    /*
-    Remove in version 0.18.0
-     */
-        override val isInitialized: Boolean
-            get() = super<KoIsInitializedProviderCore>.isInitialized
+    override val ktDeclaration: KtDeclaration by lazy { ktCallableDeclaration }
 
     /*
     Remove in version 0.18.0
      */
-        override val isConstructorDefined: Boolean
-            get() = super<KoIsConstructorDefinedProviderCore>.isConstructorDefined
+    override val isInitialized: Boolean
+        get() = super<KoIsInitializedProviderCore>.isInitialized
 
     /*
     Remove in version 0.18.0
      */
-        override val isReadOnly: Boolean
-            get() = super<KoIsReadOnlyProviderCore>.isReadOnly
+    override val isConstructorDefined: Boolean
+        get() = super<KoIsConstructorDefinedProviderCore>.isConstructorDefined
 
     /*
     Remove in version 0.18.0
      */
-        override val isTopLevel: Boolean
-            get() = super<KoIsTopLevelProviderCore>.isTopLevel
+    override val isReadOnly: Boolean
+        get() = super<KoIsReadOnlyProviderCore>.isReadOnly
 
-        override val ktExpression: KtExpression? by lazy {
+    /*
+    Remove in version 0.18.0
+     */
+    override val isTopLevel: Boolean
+        get() = super<KoIsTopLevelProviderCore>.isTopLevel
+
+    override val ktExpression: KtExpression? by lazy {
+        ktCallableDeclaration
+            .children
+            .filterNot { it is KtPropertyAccessor }
+            .filterIsInstance<KtExpression>()
+            .firstOrNull()
+    }
+
+    override val delegateName: String? by lazy {
+        if (ktCallableDeclaration is KtProperty) {
             ktCallableDeclaration
-                .children
-                .filterNot { it is KtPropertyAccessor }
-                .filterIsInstance<KtExpression>()
-                .firstOrNull()
-        }
-
-        override val delegateName: String? by lazy {
-            if (ktCallableDeclaration is KtProperty) {
-                ktCallableDeclaration
-                    .delegateExpression
-                    ?.text
-                    ?.replace(EndOfLine.UNIX.value, " ")
-                    ?.substringAfter("by ")
-                    ?.substringBefore("{")
-                    ?.removeSuffix(" ")
-            } else {
-                null
-            }
-        }
-
-        override val hasValModifier: Boolean by lazy {
-            when (ktCallableDeclaration) {
-                is KtProperty -> !ktCallableDeclaration.isVar
-                is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "val"
-                else -> false
-            }
-        }
-
-        override val hasVarModifier: Boolean by lazy {
-            when (ktCallableDeclaration) {
-                is KtProperty -> ktCallableDeclaration.isVar
-                is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "var"
-                else -> false
-            }
-        }
-
-        override val kDoc: KoKDocDeclaration? by lazy {
-            if (ktCallableDeclaration is KtParameter) {
-                (containingDeclaration as? KoKDocProvider)?.kDoc
-            } else {
-                super<KoKDocProviderCore>.kDoc
-            }
-        }
-
-        override fun toString(): String = name
-
-        internal companion object {
-            private val cache: KoDeclarationCache<KoPropertyDeclaration> = KoDeclarationCache()
-
-            internal fun getInstance(
-                ktCallableDeclaration: KtCallableDeclaration,
-                containingDeclaration: KoBaseDeclaration,
-            ): KoPropertyDeclaration =
-                cache.getOrCreateInstance(ktCallableDeclaration, containingDeclaration) {
-                    KoPropertyDeclarationCore(ktCallableDeclaration, containingDeclaration)
-                }
+                .delegateExpression
+                ?.text
+                ?.replace(EndOfLine.UNIX.value, " ")
+                ?.substringAfter("by ")
+                ?.substringBefore("{")
+                ?.removeSuffix(" ")
+        } else {
+            null
         }
     }
+
+    override val hasValModifier: Boolean by lazy {
+        when (ktCallableDeclaration) {
+            is KtProperty -> !ktCallableDeclaration.isVar
+            is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "val"
+            else -> false
+        }
+    }
+
+    override val hasVarModifier: Boolean by lazy {
+        when (ktCallableDeclaration) {
+            is KtProperty -> ktCallableDeclaration.isVar
+            is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "var"
+            else -> false
+        }
+    }
+
+    override val kDoc: KoKDocDeclaration? by lazy {
+        if (ktCallableDeclaration is KtParameter) {
+            (containingDeclaration as? KoKDocProvider)?.kDoc
+        } else {
+            super<KoKDocProviderCore>.kDoc
+        }
+    }
+
+    override fun toString(): String = name
+
+    internal companion object {
+        private val cache: KoDeclarationCache<KoPropertyDeclaration> = KoDeclarationCache()
+
+        internal fun getInstance(
+            ktCallableDeclaration: KtCallableDeclaration,
+            containingDeclaration: KoBaseDeclaration,
+        ): KoPropertyDeclaration =
+            cache.getOrCreateInstance(ktCallableDeclaration, containingDeclaration) {
+                KoPropertyDeclarationCore(ktCallableDeclaration, containingDeclaration)
+            }
+    }
+}

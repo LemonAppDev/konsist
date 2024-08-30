@@ -75,10 +75,13 @@ internal interface KoTypeDeclarationProviderCore :
     override fun hasDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean = predicate(declaration)
 
     override fun hasDeclarationOf(kClass: KClass<*>): Boolean =
-        hasClassDeclarationOf(kClass) || hasObjectDeclarationOf(kClass) || hasInterfaceDeclarationOf(kClass) ||
+        hasClassDeclarationOf(kClass) ||
+            hasObjectDeclarationOf(kClass) ||
+            hasInterfaceDeclarationOf(kClass) ||
             hasKotlinTypeDeclarationOf(
                 kClass,
-            ) || hasExternalTypeDeclarationOf(kClass)
+            ) ||
+            hasExternalTypeDeclarationOf(kClass)
 
     override fun hasClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =
         when (predicate) {

@@ -30,7 +30,8 @@ class KoScopeForKoInterfaceAndObjectDeclarationTest {
                 "SampleObjectNestedInsideObject",
             )
 
-        sut.interfacesAndObjects(includeNested = true)
+        sut
+            .interfacesAndObjects(includeNested = true)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -43,7 +44,8 @@ class KoScopeForKoInterfaceAndObjectDeclarationTest {
         // then
         val expected = listOf("SampleObject")
 
-        sut.interfacesAndObjects(includeNested = false)
+        sut
+            .interfacesAndObjects(includeNested = false)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
