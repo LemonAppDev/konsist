@@ -99,7 +99,7 @@ internal interface KoClassAndInterfaceAndObjectDeclarationCore :
 
     /*
 Remove in version 0.18.0
- */
+     */
     override val isTopLevel: Boolean
         get() = super<KoIsTopLevelProviderCore>.isTopLevel
 
