@@ -18,6 +18,7 @@ import com.lemonappdev.konsist.core.provider.KoExternalParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoInterfaceAndObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -77,6 +78,7 @@ internal interface KoClassAndInterfaceAndObjectDeclarationCore :
     KoSourceSetProviderCore,
     KoTextProviderCore,
     KoTopLevelProviderCore,
+    KoIsTopLevelProviderCore,
     KoVisibilityModifierProviderCore {
     override val ktClassOrObject: KtClassOrObject
 
@@ -94,6 +96,12 @@ internal interface KoClassAndInterfaceAndObjectDeclarationCore :
 
     override val ktElement: KtElement
         get() = ktClassOrObject
+
+    /*
+Remove in version 0.18.0
+ */
+    override val isTopLevel: Boolean
+        get() = super<KoIsTopLevelProviderCore>.isTopLevel
 
     override fun declarations(
         includeNested: Boolean,

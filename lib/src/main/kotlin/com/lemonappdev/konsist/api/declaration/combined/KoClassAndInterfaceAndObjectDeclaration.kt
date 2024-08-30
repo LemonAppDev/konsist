@@ -17,6 +17,7 @@ import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoInterfaceAndObjectProvider
 import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
+import com.lemonappdev.konsist.api.provider.KoIsTopLevelProvider
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
@@ -34,6 +35,7 @@ import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
+import com.lemonappdev.konsist.core.provider.KoIsTopLevelProviderCore
 
 /**
  * Represents a Kotlin class, interface or object declaration.
@@ -72,4 +74,5 @@ interface KoClassAndInterfaceAndObjectDeclaration :
     KoSourceSetProvider,
     KoTextProvider,
     KoTopLevelProvider,
+    KoIsTopLevelProvider,
     KoVisibilityModifierProvider

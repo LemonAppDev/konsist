@@ -62,12 +62,6 @@ internal class KoObjectDeclarationCore(
         KoDeclarationProviderCoreUtil
             .getKoDeclarations(ktObjectDeclaration, includeNested, includeLocal, this)
 
-    /*
-    Remove in version 0.18.0
-     */
-    override val isTopLevel: Boolean
-        get() = super<KoIsTopLevelProviderCore>.isTopLevel
-
     override fun toString(): String = name
 
     internal companion object {
