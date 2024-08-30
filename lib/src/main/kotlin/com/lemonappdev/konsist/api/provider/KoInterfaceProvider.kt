@@ -15,19 +15,6 @@ interface KoInterfaceProvider : KoBaseProvider {
     fun interfaces(includeNested: Boolean = true): List<KoInterfaceDeclaration>
 
     /**
-     * Determines whatever the declaration contains an interface that satisfies the specified predicate.
-     *
-     * @param includeNested Specifies whether to include nested interfaces in the check (optional, default is `true`).
-     * @param predicate The predicate function to determine if an interface satisfies a condition.
-     * @return `true` if the declaration contains an interface with the specified predicate, `true` otherwise.
-     */
-    @Deprecated("Will be removed in v0.16.0", ReplaceWith("hasInterface()"))
-    fun containsInterface(
-        includeNested: Boolean = true,
-        predicate: (KoInterfaceDeclaration) -> Boolean,
-    ): Boolean
-
-    /**
      * Returns the number of interfaces present in the declaration.
      *
      * @param includeNested Specifies whether to include nested interfaces in the count (optional, default is `true`).

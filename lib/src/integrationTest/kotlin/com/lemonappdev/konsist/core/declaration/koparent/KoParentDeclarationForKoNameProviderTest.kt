@@ -12,7 +12,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-parent-class-from-file")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -25,7 +25,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-generic-parent-class-from-file")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -38,7 +38,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-parametrized-parent-class-from-file")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -51,7 +51,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-parametrized-and-generic-parent-class-from-file")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -64,7 +64,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-parent-interface-from-file")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -77,7 +77,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-generic-parent-interface-from-file")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -90,7 +90,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-parent-by-delegation-from-file")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -104,7 +104,7 @@ class KoParentDeclarationForKoNameProviderTest {
             getSnippetFile("class-with-multiline-parent-from-file")
                 .classes()
                 .first()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -119,7 +119,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-parent-class-from-import")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -132,7 +132,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-generic-parent-class-from-import")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -145,7 +145,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-parametrized-parent-class-from-import")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -158,7 +158,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-parametrized-and-generic-parent-class-from-import")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -171,7 +171,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-parent-interface-from-import")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -184,7 +184,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-generic-parent-interface-from-import")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -197,7 +197,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-parent-by-delegation-from-import")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -210,7 +210,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-multiline-parent-from-import")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -225,7 +225,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-external-parent-class")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -238,7 +238,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-generic-external-parent-class")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -251,7 +251,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-parametrized-external-parent-class")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -264,7 +264,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-parametrized-and-generic-external-parent-class")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -277,7 +277,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-external-parent-interface")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -290,7 +290,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-generic-external-parent-interface")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -303,7 +303,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("class-with-external-parent-by-delegation")
                 .classes()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -316,7 +316,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("interface-with-parent-interface-from-file")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -329,7 +329,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("interface-with-generic-parent-interface-from-file")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -342,7 +342,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("interface-with-parent-interface-from-import")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -355,7 +355,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("interface-with-generic-parent-interface-from-import")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -368,7 +368,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("interface-with-external-parent-interface")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -381,7 +381,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("interface-with-generic-external-parent-interface")
                 .interfaces()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -394,7 +394,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("object-with-parent-class-from-file")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -407,7 +407,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("object-with-generic-parent-class-from-file")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -420,7 +420,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("object-with-parametrized-parent-class-from-file")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -433,7 +433,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("object-with-parametrized-and-generic-parent-class-from-file")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -446,7 +446,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("object-with-parent-interface-from-file")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -459,7 +459,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("object-with-generic-parent-interface-from-file")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -473,7 +473,7 @@ class KoParentDeclarationForKoNameProviderTest {
             getSnippetFile("object-with-multiline-parent-from-file")
                 .objects()
                 .first()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -488,7 +488,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("object-with-parent-class-from-import")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -501,7 +501,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("object-with-generic-parent-class-from-import")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -514,7 +514,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("object-with-parametrized-parent-class-from-import")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -527,7 +527,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("object-with-parametrized-and-generic-parent-class-from-import")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -540,7 +540,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("object-with-parent-interface-from-import")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -553,7 +553,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("object-with-generic-parent-interface-from-import")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -567,7 +567,7 @@ class KoParentDeclarationForKoNameProviderTest {
             getSnippetFile("object-with-multiline-parent-from-import")
                 .objects()
                 .first()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -582,7 +582,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("object-with-external-parent-class")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -595,7 +595,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("object-with-generic-external-parent-class")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -608,7 +608,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("object-with-parametrized-external-parent-class")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -621,7 +621,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("object-with-parametrized-and-generic-external-parent-class")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -634,7 +634,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("object-with-external-parent-interface")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -647,7 +647,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut =
             getSnippetFile("object-with-generic-external-parent-interface")
                 .objects()
-                .parents
+                .parents()
                 .first()
 
         // then
@@ -661,7 +661,7 @@ class KoParentDeclarationForKoNameProviderTest {
             getSnippetFile("object-with-multiline-external-parent")
                 .objects()
                 .first()
-                .parents
+                .parents()
                 .first()
 
         // then

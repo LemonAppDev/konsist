@@ -31,10 +31,6 @@ internal interface KoInitBlockProviderCore :
     override val numInitBlocks: Int
         get() = initBlocks.size
 
-    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasInitBlocks()"))
-    override val hasInitBlocks: Boolean
-        get() = initBlocks.isNotEmpty()
-
     override fun countInitBlocks(predicate: (KoInitBlockDeclaration) -> Boolean): Int = initBlocks.count { predicate(it) }
 
     override fun hasInitBlocks(): Boolean = initBlocks.isNotEmpty()

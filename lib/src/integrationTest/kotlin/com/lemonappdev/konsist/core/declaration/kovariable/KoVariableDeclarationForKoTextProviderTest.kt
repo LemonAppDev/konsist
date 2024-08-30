@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.setters
 import com.lemonappdev.konsist.api.ext.list.variables
 import com.lemonappdev.konsist.api.provider.KoVariableProvider
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
@@ -23,9 +24,17 @@ class KoVariableDeclarationForKoTextProviderTest {
                 .first()
 
         // then
-        sut
-            .text
-            .shouldBeEqualTo("val sampleVariable = \"\"")
+        assertSoftly(sut) {
+            text shouldBeEqualTo "val sampleVariable = \"\""
+            hasTextStartingWith("val sample") shouldBeEqualTo true
+            hasTextStartingWith("Other") shouldBeEqualTo false
+            hasTextEndingWith("Variable = \"\"") shouldBeEqualTo true
+            hasTextEndingWith("other") shouldBeEqualTo false
+            hasTextContaining("sampleVariable =") shouldBeEqualTo true
+            hasTextContaining("anno") shouldBeEqualTo false
+            hasTextMatching(Regex("^[^@]*\$")) shouldBeEqualTo true
+            hasTextMatching(Regex("[0-9]+")) shouldBeEqualTo false
+        }
     }
 
     companion object {

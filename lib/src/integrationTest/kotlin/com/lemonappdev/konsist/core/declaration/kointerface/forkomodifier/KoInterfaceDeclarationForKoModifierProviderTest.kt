@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.KoModifier.ABSTRACT
 import com.lemonappdev.konsist.api.KoModifier.DATA
 import com.lemonappdev.konsist.api.KoModifier.OPEN
+import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.KoModifier.PROTECTED
 import com.lemonappdev.konsist.api.KoModifier.PUBLIC
 import org.amshove.kluent.assertSoftly
@@ -44,8 +45,6 @@ class KoInterfaceDeclarationForKoModifierProviderTest {
             hasAllModifiers(listOf(OPEN, DATA)) shouldBeEqualTo false
             hasAllModifiers(setOf(OPEN)) shouldBeEqualTo false
             hasAllModifiers(setOf(OPEN, DATA)) shouldBeEqualTo false
-            hasModifiers(OPEN) shouldBeEqualTo false
-            hasModifiers(OPEN, DATA) shouldBeEqualTo false
         }
     }
 
@@ -86,13 +85,6 @@ class KoInterfaceDeclarationForKoModifierProviderTest {
             hasAllModifiers(setOf(PROTECTED)) shouldBeEqualTo false
             hasAllModifiers(setOf(PUBLIC, DATA)) shouldBeEqualTo false
             hasAllModifiers(setOf(PUBLIC, ABSTRACT)) shouldBeEqualTo true
-            hasModifiers(PUBLIC) shouldBeEqualTo true
-            hasModifiers(ABSTRACT) shouldBeEqualTo true
-            hasModifiers(PROTECTED) shouldBeEqualTo false
-            hasModifiers(PUBLIC, ABSTRACT) shouldBeEqualTo true
-            hasModifiers(ABSTRACT, PUBLIC) shouldBeEqualTo true
-            hasModifiers(PROTECTED, ABSTRACT) shouldBeEqualTo false
-            hasModifiers(PROTECTED, ABSTRACT, PUBLIC) shouldBeEqualTo false
         }
     }
 
@@ -130,6 +122,7 @@ class KoInterfaceDeclarationForKoModifierProviderTest {
                 arguments("interface-has-modifiers-multiline-comment-and-annotation-before-them", listOf(PUBLIC, ABSTRACT)),
                 arguments("interface-has-modifiers-and-comment-before-them", listOf(PUBLIC, ABSTRACT)),
                 arguments("interface-has-modifiers-and-comment-after-them", listOf(PUBLIC, ABSTRACT)),
+                arguments("interface-has-modifier-and-annotation-with-string-parameter-containing-link", listOf(PRIVATE)),
             )
     }
 }

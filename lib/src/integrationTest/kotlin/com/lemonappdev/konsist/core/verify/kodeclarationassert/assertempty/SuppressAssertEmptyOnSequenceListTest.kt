@@ -86,8 +86,7 @@ class SuppressAssertEmptyOnSequenceListTest {
         val sut =
             getSnippetFile(
                 "assert-suppress-by-konsist-and-parameter-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider",
-            )
-                .classes(includeNested = true)
+            ).classes(includeNested = true)
                 .asSequence()
 
         // then
@@ -296,8 +295,7 @@ class SuppressAssertEmptyOnSequenceListTest {
         val sut =
             getSnippetFile(
                 "assert-suppress-by-konsist-and-parameter-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration",
-            )
-                .classes()
+            ).classes()
                 .initBlocks
                 .localFunctions
                 .asSequence()
@@ -326,8 +324,7 @@ class SuppressAssertEmptyOnSequenceListTest {
         val sut =
             getSnippetFile(
                 "assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
-            )
-                .classes()
+            ).classes()
                 .initBlocks
                 .localFunctions
                 .asSequence()
@@ -356,8 +353,7 @@ class SuppressAssertEmptyOnSequenceListTest {
         val sut =
             getSnippetFile(
                 "assert-suppress-by-konsist-and-parameter-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
-            )
-                .classes()
+            ).classes()
                 .initBlocks
                 .localFunctions
                 .asSequence()

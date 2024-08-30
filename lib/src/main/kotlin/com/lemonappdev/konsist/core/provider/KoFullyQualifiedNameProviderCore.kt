@@ -29,8 +29,7 @@ internal interface KoFullyQualifiedNameProviderCore :
                             } else {
                                 false
                             }
-                        }
-                        .mapNotNull { (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName }
+                        }.mapNotNull { (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName }
                         .firstOrNull { it.isFullyQualifiedName() }
             }
 

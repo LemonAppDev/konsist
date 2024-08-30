@@ -4,18 +4,15 @@ import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 
-internal interface KoPropertyProviderCore : KoPropertyProvider, KoDeclarationProviderCore, KoBaseProviderCore {
+internal interface KoPropertyProviderCore :
+    KoPropertyProvider,
+    KoDeclarationProviderCore,
+    KoBaseProviderCore {
     override fun properties(includeNested: Boolean): List<KoPropertyDeclaration> =
         KoDeclarationProviderCoreUtil.getKoDeclarations(
             declarations(includeNested = false, includeLocal = false),
             includeNested,
         )
-
-    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasProperty()"))
-    override fun containsProperty(
-        includeNested: Boolean,
-        predicate: (KoPropertyDeclaration) -> Boolean,
-    ): Boolean = properties(includeNested).any { predicate(it) }
 
     override fun numProperties(includeNested: Boolean): Int = properties(includeNested).size
 

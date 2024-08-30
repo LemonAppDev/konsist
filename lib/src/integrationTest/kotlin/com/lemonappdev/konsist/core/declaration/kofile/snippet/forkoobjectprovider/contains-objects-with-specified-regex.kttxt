@@ -1,3 +1,0 @@
-private data object SampleObject {
-    private object SampleNestedObject
-}

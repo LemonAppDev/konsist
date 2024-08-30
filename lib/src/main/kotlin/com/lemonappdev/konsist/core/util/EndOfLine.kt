@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.core.util
 
-internal enum class EndOfLine(val value: String) {
+internal enum class EndOfLine(
+    val value: String,
+) {
     /**
      * Unix-style end-of-line marker (LF)
      */

@@ -1,0 +1,11 @@
+fun sampleFunction() {
+    class SampleLocalClass
+}
+
+object SampleObject {
+    class SampleClassNestedInsideObject
+
+    interface SampleInterfaceNestedInsideObject
+
+    object SampleObjectNestedInsideObject
+}

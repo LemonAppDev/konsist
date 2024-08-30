@@ -35,58 +35,57 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 internal class KoTypeAliasDeclarationCore private constructor(
     private val ktTypeAlias: KtTypeAlias,
     override val containingDeclaration: KoBaseDeclaration,
-) :
-    KoTypeAliasDeclaration,
-        KoBaseTypeDeclarationCore,
-        KoBaseProviderCore,
-        KoAnnotationProviderCore,
-        KoContainingFileProviderCore,
-        KoDeclarationFullyQualifiedNameProviderCore,
-        KoKDocProviderCore,
-        KoLocationProviderCore,
-        KoModifierProviderCore,
-        KoNameProviderCore,
-        KoPackageDeclarationProviderCore,
-        KoContainingDeclarationProviderCore,
-        KoPathProviderCore,
-        KoModuleProviderCore,
-        KoSourceSetProviderCore,
-        KoResideInPackageProviderCore,
-        KoTextProviderCore,
-        KoNonNullableTypeProviderCore,
-        KoVisibilityModifierProviderCore,
-        KoActualModifierProviderCore {
-        override val ktAnnotated: KtAnnotated by lazy { ktTypeAlias }
+) : KoTypeAliasDeclaration,
+    KoBaseTypeDeclarationCore,
+    KoBaseProviderCore,
+    KoAnnotationProviderCore,
+    KoContainingFileProviderCore,
+    KoDeclarationFullyQualifiedNameProviderCore,
+    KoKDocProviderCore,
+    KoLocationProviderCore,
+    KoModifierProviderCore,
+    KoNameProviderCore,
+    KoPackageDeclarationProviderCore,
+    KoContainingDeclarationProviderCore,
+    KoPathProviderCore,
+    KoModuleProviderCore,
+    KoSourceSetProviderCore,
+    KoResideInPackageProviderCore,
+    KoTextProviderCore,
+    KoNonNullableTypeProviderCore,
+    KoVisibilityModifierProviderCore,
+    KoActualModifierProviderCore {
+    override val ktAnnotated: KtAnnotated by lazy { ktTypeAlias }
 
-        override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktTypeAlias }
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktTypeAlias }
 
-        override val ktModifierListOwner: KtModifierListOwner by lazy { ktTypeAlias }
+    override val ktModifierListOwner: KtModifierListOwner by lazy { ktTypeAlias }
 
-        override val psiElement: PsiElement by lazy { ktTypeAlias }
+    override val psiElement: PsiElement by lazy { ktTypeAlias }
 
-        override val ktElement: KtElement by lazy { ktTypeAlias }
+    override val ktElement: KtElement by lazy { ktTypeAlias }
 
-        override val type: KoTypeDeclaration by lazy {
-            val type = ktTypeAlias.getTypeReference()
+    override val type: KoTypeDeclaration by lazy {
+        val type = ktTypeAlias.getTypeReference()
 
-            type?.let { KoTypeDeclarationCore.getInstance(it, this) }
-                ?: throw KoInternalException("Type alias has no specified type.")
-        }
-
-        override fun toString(): String = name
-
-        internal companion object {
-            private val cache: KoDeclarationCache<KoTypeAliasDeclaration> = KoDeclarationCache()
-
-            internal fun getInstance(
-                ktTypeAlias: KtTypeAlias,
-                containingDeclaration: KoBaseDeclaration,
-            ): KoTypeAliasDeclaration =
-                cache.getOrCreateInstance(ktTypeAlias, containingDeclaration) {
-                    KoTypeAliasDeclarationCore(
-                        ktTypeAlias,
-                        containingDeclaration,
-                    )
-                }
-        }
+        type?.let { KoTypeDeclarationCore.getInstance(it, this) }
+            ?: throw KoInternalException("Type alias has no specified type.")
     }
+
+    override fun toString(): String = name
+
+    internal companion object {
+        private val cache: KoDeclarationCache<KoTypeAliasDeclaration> = KoDeclarationCache()
+
+        internal fun getInstance(
+            ktTypeAlias: KtTypeAlias,
+            containingDeclaration: KoBaseDeclaration,
+        ): KoTypeAliasDeclaration =
+            cache.getOrCreateInstance(ktTypeAlias, containingDeclaration) {
+                KoTypeAliasDeclarationCore(
+                    ktTypeAlias,
+                    containingDeclaration,
+                )
+            }
+    }
+}

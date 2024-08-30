@@ -1,5 +1,0 @@
-package com.lemonappdev.konsist.testdata
-
-interface SampleInterface {
-    class SampleClassWithParameter(val sampleParameter: Int)
-}

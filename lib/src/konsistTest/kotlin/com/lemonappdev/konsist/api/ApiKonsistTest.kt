@@ -11,6 +11,7 @@ import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
+import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
 import java.util.Locale
@@ -30,6 +31,13 @@ class ApiKonsistTest {
         apiPackageScope
             .functions()
             .assertTrue { it.hasValidKDocParamTags() && it.hasValidKDocReturnTag() }
+    }
+
+    @Test
+    fun `every api declaration has valid KDoc`() {
+        apiPackageScope
+            .classesAndInterfacesAndObjects()
+            .assertTrue { it.hasKDoc }
     }
 
     @Test
@@ -65,6 +73,13 @@ class ApiKonsistTest {
     }
 
     @Test
+    fun `none method has name containing 'Some'`() {
+        apiPackageScope
+            .functions()
+            .assertFalse { it.hasNameContaining("Some") }
+    }
+
+    @Test
     fun `every provider has correct hasX methods`() {
         Konsist
             .scopeFromPackage("com.lemonappdev.konsist.api.provider..", sourceSetName = "main")
@@ -75,8 +90,7 @@ class ApiKonsistTest {
                     property.hasType { type ->
                         type.hasNameStartingWith("List<Ko")
                     }
-            }
-            .assertTrue {
+            }.assertTrue {
                 it.hasCorrectMethods(false)
             }
     }
@@ -88,7 +102,7 @@ class ApiKonsistTest {
             .functions()
             .withoutAnnotationOf(Deprecated::class)
             .withParameter { it.hasVarArgModifier }
-            .assertTrue { it.hasExpressionBody && it.text.contains("${it.name}(listOf(") }
+            .assertTrue { it.hasExpressionBody && it.hasTextContaining("${it.name}(listOf(") }
     }
 
     @Test
@@ -103,16 +117,14 @@ class ApiKonsistTest {
                         property.hasType { type ->
                             type.hasNameStartingWith("List<Ko")
                         }
-                }
-                .map { it.name }
+                }.map { it.name }
 
         Konsist
             .scopeFromPackage("com.lemonappdev.konsist.api.ext.list..", sourceSetName = "main")
             .files
             .filter {
                 providers.any { providerName -> it.hasNameContaining(providerName) }
-            }
-            .assertTrue { it.hasCorrectMethods(true) }
+            }.assertTrue { it.hasCorrectMethods(true) }
     }
 
     private val declarations =
@@ -123,8 +135,8 @@ class ApiKonsistTest {
     private fun <T> T.hasCorrectMethods(
         isExtension: Boolean,
     ): Boolean
-        where T : KoPropertyProvider,
-              T : KoFunctionProvider {
+            where T : KoPropertyProvider,
+                  T : KoFunctionProvider {
         val property =
             properties()
                 .firstOrNull { property ->
@@ -238,8 +250,8 @@ class ApiKonsistTest {
         singularName: String,
         pluralName: String,
         prefix: String,
-    ): Boolean {
-        return hasFunction { function -> function.name == "${prefix}$pluralName" && !function.hasParameters() } &&
+    ): Boolean =
+        hasFunction { function -> function.name == "${prefix}$pluralName" && !function.hasParameters() } &&
             hasFunction { function ->
                 function.name == "${prefix}$singularName" &&
                     function.hasParameterWithName(
@@ -252,7 +264,6 @@ class ApiKonsistTest {
                         "predicate",
                     )
             }
-    }
 
     private fun KoFunctionProvider.hasNamedFunctions(
         singularName: String,
@@ -262,7 +273,11 @@ class ApiKonsistTest {
             function.name == "has${singularName}WithName" && function.hasParametersWithAllNames("name", "names")
         } &&
             hasFunction { function ->
-                function.name == "has${pluralName}WithAllNames" && function.hasParametersWithAllNames("name", "names")
+                function.name == "has${pluralName}WithAllNames" &&
+                    function.hasParametersWithAllNames(
+                        "name",
+                        "names",
+                    )
             }
 
     private fun KoFunctionProvider.hasNamedFunctionsForExt(
@@ -274,7 +289,11 @@ class ApiKonsistTest {
             function.name == "$prefix${singularName}Named" && function.hasParametersWithAllNames("name", "names")
         } &&
             hasFunction { function ->
-                function.name == "${prefix}All${pluralName}Named" && function.hasParametersWithAllNames("name", "names")
+                function.name == "${prefix}All${pluralName}Named" &&
+                    function.hasParametersWithAllNames(
+                        "name",
+                        "names",
+                    )
             }
 
     private fun KoFunctionProvider.checkForExceptions(

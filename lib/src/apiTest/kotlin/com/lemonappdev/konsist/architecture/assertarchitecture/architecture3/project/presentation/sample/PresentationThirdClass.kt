@@ -2,4 +2,6 @@ package com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.pr
 
 import com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.domain.DomainFirstClass
 
-class PresentationThirdClass(val sampleParameter: DomainFirstClass)
+class PresentationThirdClass(
+    val sampleParameter: DomainFirstClass,
+)

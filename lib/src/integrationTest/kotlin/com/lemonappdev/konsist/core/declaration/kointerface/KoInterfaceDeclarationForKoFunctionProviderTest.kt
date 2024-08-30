@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kointerface
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.KoModifier.OPEN
-import com.lemonappdev.konsist.api.KoModifier.PUBLIC
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -83,7 +81,8 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
         // then
         val expected = listOf("sampleFunction", "sampleLocalFunction", "sampleNestedFunction")
 
-        sut.functions(includeNested = true, includeLocal = true)
+        sut
+            .functions(includeNested = true, includeLocal = true)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -99,7 +98,8 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
         // then
         val expected = listOf("sampleFunction", "sampleNestedFunction")
 
-        sut.functions(includeNested = true, includeLocal = false)
+        sut
+            .functions(includeNested = true, includeLocal = false)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -115,7 +115,8 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
         // then
         val expected = listOf("sampleFunction", "sampleLocalFunction")
 
-        sut.functions(includeNested = false, includeLocal = true)
+        sut
+            .functions(includeNested = false, includeLocal = true)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -131,7 +132,8 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
         // then
         val expected = listOf("sampleFunction")
 
-        sut.functions(includeNested = false, includeLocal = false)
+        sut
+            .functions(includeNested = false, includeLocal = false)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -153,80 +155,6 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
             countFunctions(includeNested = false, includeLocal = false) { it.hasPrivateModifier } shouldBeEqualTo 1
             countFunctions { it.hasPrivateModifier } shouldBeEqualTo 2
             countFunctions { it.name == "sampleFunction" && it.hasSuspendModifier } shouldBeEqualTo 0
-        }
-    }
-
-    @Test
-    fun `contains-functions-with-specified-name-and-modifiers`() {
-        // given
-        val sut =
-            getSnippetFile("contains-functions-with-specified-name-and-modifiers")
-                .interfaces()
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            containsFunction { it.name == "sampleFunction" && it.hasPublicModifier } shouldBeEqualTo true
-            containsFunction { it.name == "sampleFunction" && it.hasModifiers(PUBLIC, OPEN) } shouldBeEqualTo false
-            containsFunction(
-                includeNested = false,
-                includeLocal = true,
-            ) { it.name == "sampleLocalFunction" && it.hasSuspendModifier } shouldBeEqualTo true
-            containsFunction(
-                includeNested = false,
-                includeLocal = false,
-            ) { it.name == "sampleLocalFunction" && it.hasSuspendModifier } shouldBeEqualTo false
-            containsFunction(
-                includeNested = false,
-                includeLocal = true,
-            ) { it.name == "sampleLocalFunction" && it.hasPrivateModifier } shouldBeEqualTo false
-            containsFunction(
-                includeNested = true,
-                includeLocal = false,
-            ) { it.name == "sampleNestedFunction" && it.hasOpenModifier } shouldBeEqualTo true
-            containsFunction(
-                includeNested = false,
-                includeLocal = false,
-            ) { it.name == "sampleNestedFunction" && it.hasOpenModifier } shouldBeEqualTo false
-            containsFunction(
-                includeNested = true,
-                includeLocal = false,
-            ) { it.name == "sampleNestedFunction" && it.hasPrivateModifier } shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `contains-functions-with-specified-regex`() {
-        // given
-        val regex1 = Regex("[a-zA-Z]+")
-        val regex2 = Regex("[0-9]+")
-        val sut =
-            getSnippetFile("contains-functions-with-specified-regex")
-                .interfaces()
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            containsFunction(
-                includeNested = false,
-                includeLocal = false,
-            ) { it.name.matches(regex1) } shouldBeEqualTo true
-            containsFunction(
-                includeNested = false,
-                includeLocal = true,
-            ) { it.name.matches(regex1) } shouldBeEqualTo true
-            containsFunction(
-                includeNested = false,
-                includeLocal = false,
-            ) { it.name.matches(regex2) } shouldBeEqualTo false
-            containsFunction(
-                includeNested = true,
-                includeLocal = false,
-            ) { it.name.matches(regex1) } shouldBeEqualTo true
-            containsFunction(
-                includeNested = false,
-                includeLocal = false,
-            ) { it.name.matches(regex2) } shouldBeEqualTo false
         }
     }
 

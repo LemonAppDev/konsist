@@ -20,7 +20,7 @@ class KoScopeForKoPackagesDeclarationTest {
         val sut = getSnippetFile("scope-has-package")
 
         // then
-        sut.packages.map { it.name } shouldBeEqualTo listOf("samplepackage")
+        sut.packages.map { it.name } shouldBeEqualTo listOf("com.samplepackage")
     }
 
     private fun getSnippetFile(fileName: String) =

@@ -11,7 +11,8 @@ internal interface KoKDocPropertyTagProviderCore :
     KoKDocTagProviderCore {
     override val propertyTags: List<KoValuedKDocTagDeclaration>
         get() =
-            tags.filter { it.name == KoKDocTag.PROPERTY }
+            tags
+                .filter { it.name == KoKDocTag.PROPERTY }
                 .map { it as KoValuedKDocTagDeclaration }
 
     override val numPropertyTags: Int

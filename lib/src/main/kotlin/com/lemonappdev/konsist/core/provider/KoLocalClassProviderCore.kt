@@ -3,7 +3,10 @@ package com.lemonappdev.konsist.core.provider
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.provider.KoLocalClassProvider
 
-internal interface KoLocalClassProviderCore : KoLocalClassProvider, KoLocalDeclarationProviderCore, KoBaseProviderCore {
+internal interface KoLocalClassProviderCore :
+    KoLocalClassProvider,
+    KoLocalDeclarationProviderCore,
+    KoBaseProviderCore {
     override val localClasses: List<KoClassDeclaration>
         get() = localDeclarations.filterIsInstance<KoClassDeclaration>()
 
@@ -11,9 +14,6 @@ internal interface KoLocalClassProviderCore : KoLocalClassProvider, KoLocalDecla
         get() = localClasses.size
 
     override fun countLocalClasses(predicate: (KoClassDeclaration) -> Boolean): Int = localClasses.count { predicate(it) }
-
-    @Deprecated("Will be removed in v0.16.0", replaceWith = ReplaceWith("hasLocalClass()"))
-    override fun containsLocalClass(predicate: (KoClassDeclaration) -> Boolean): Boolean = localClasses.any { predicate(it) }
 
     override fun hasLocalClasses(): Boolean = localClasses.isNotEmpty()
 

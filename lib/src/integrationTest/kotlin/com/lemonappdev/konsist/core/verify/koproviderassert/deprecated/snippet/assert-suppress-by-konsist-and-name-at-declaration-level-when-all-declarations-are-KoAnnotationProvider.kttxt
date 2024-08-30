@@ -1,5 +1,0 @@
-open class SampleClassWithModifier {
-    @Suppress("konsist.assert-suppress-by-konsist-and-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider")
-    fun sampleFunctionWithoutModifier() {
-    }
-}

@@ -23,7 +23,6 @@ class KoClassDeclarationForKoInitBlockProviderTest {
             hasInitBlocks() shouldBeEqualTo false
             hasInitBlock { it.localFunctions.isNotEmpty() } shouldBeEqualTo false
             hasAllInitBlocks { it.localFunctions.isNotEmpty() } shouldBeEqualTo true
-            hasInitBlocks shouldBeEqualTo false
         }
     }
 
@@ -45,7 +44,6 @@ class KoClassDeclarationForKoInitBlockProviderTest {
             hasInitBlock { it.localFunctions.isNotEmpty() } shouldBeEqualTo false
             hasAllInitBlocks { it.localDeclarations.isNotEmpty() } shouldBeEqualTo true
             hasAllInitBlocks { it.localFunctions.isNotEmpty() } shouldBeEqualTo false
-            hasInitBlocks shouldBeEqualTo true
         }
     }
 
@@ -68,7 +66,6 @@ class KoClassDeclarationForKoInitBlockProviderTest {
             hasInitBlock { it.localClasses.isNotEmpty() } shouldBeEqualTo false
             hasAllInitBlocks { it.localDeclarations.isNotEmpty() } shouldBeEqualTo true
             hasAllInitBlocks { it.localFunctions.isNotEmpty() } shouldBeEqualTo false
-            hasInitBlocks shouldBeEqualTo true
         }
     }
 

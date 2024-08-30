@@ -210,6 +210,7 @@ empty-blocks:
     active: true
   EmptyFunctionBlock:
     active: true
+    excludes: [ '**/dummyclasses/**']
     ignoreOverridden: false
   EmptyIfBlock:
     active: true
@@ -344,6 +345,7 @@ naming:
     mustBeFirst: true
   MemberNameEqualsClassName:
     active: true
+    excludes: [ '**/dummyclasses/**']
     ignoreOverridden: true
   NoNameShadowing:
     active: true

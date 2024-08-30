@@ -11,36 +11,6 @@ val <T : KoNullableTypeProvider> List<T>.types: List<KoTypeDeclaration>
     get() = mapNotNull { it.type }
 
 /**
- * List containing declarations with type.
- *
- * @param names The type name(s) to include.
- * @return A list containing declarations with the specified type (or any type if [names] is empty).
- */
-@Deprecated("Will be removed in v0.16.0", ReplaceWith("withType { it.name == ... }"))
-fun <T : KoNullableTypeProvider> List<T>.withType(vararg names: String): List<T> =
-    filter {
-        when {
-            names.isEmpty() -> it.hasType()
-            else -> names.any { type -> it.hasType(type) }
-        }
-    }
-
-/**
- * List containing declarations without type.
- *
- * @param names The type name(s) to exclude.
- * @return A list containing declarations without specified type (or none type if [names] is empty).
- */
-@Deprecated("Will be removed in v0.16.0", ReplaceWith("withoutType { it.name != ... }"))
-fun <T : KoNullableTypeProvider> List<T>.withoutType(vararg names: String): List<T> =
-    filter {
-        when {
-            names.isEmpty() -> !it.hasType()
-            else -> names.none { type -> it.hasType(type) }
-        }
-    }
-
-/**
  * List containing declarations with the specified type.
  *
  * @param predicate The predicate function to determine if a declaration type satisfies a condition.

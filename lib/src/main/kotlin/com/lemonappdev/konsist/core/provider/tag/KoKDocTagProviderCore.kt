@@ -11,7 +11,10 @@ import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.util.EndOfLine
 import java.util.Locale
 
-internal interface KoKDocTagProviderCore : KoKDocTagProvider, KoTextProviderCore, KoBaseProviderCore {
+internal interface KoKDocTagProviderCore :
+    KoKDocTagProvider,
+    KoTextProviderCore,
+    KoBaseProviderCore {
     override val tags: List<KoKDocTagDeclaration>
         get() {
             val regex = "@(\\w+)".toRegex()
@@ -41,27 +44,6 @@ internal interface KoKDocTagProviderCore : KoKDocTagProvider, KoTextProviderCore
 
     override val numTags: Int
         get() = tags.size
-
-    @Deprecated(
-        """
-        Will be removed in v0.16.0. 
-        If you passed one argument - replace with `hasTag`, otherwise with `hasAllTags`.
-       """,
-    )
-    override fun hasTags(vararg tags: KoKDocTag): Boolean =
-        when {
-            tags.isEmpty() -> {
-                this.tags.isNotEmpty()
-            }
-
-            else -> {
-                tags.all {
-                    this.tags
-                        .map { tag -> tag.name }
-                        .contains(it)
-                }
-            }
-        }
 
     override fun hasTags(): Boolean = tags.isNotEmpty()
 

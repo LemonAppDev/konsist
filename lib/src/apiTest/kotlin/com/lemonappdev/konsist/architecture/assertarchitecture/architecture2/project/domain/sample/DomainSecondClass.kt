@@ -2,4 +2,6 @@ package com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.pr
 
 import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain.DomainFirstClass
 
-class DomainSecondClass(val sampleParameter: DomainFirstClass)
+class DomainSecondClass(
+    val sampleParameter: DomainFirstClass,
+)

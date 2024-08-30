@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koimport
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -29,5 +30,65 @@ class KoImportDeclarationForKoNameProviderTest {
         sut.name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koimport/snippet/forkonameprovider/", fileName)
+    @Test
+    fun `import-has-name-with-prefix`() {
+        // given
+        val sut =
+            getSnippetFile("import-has-name-with-prefix")
+                .imports
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasNameStartingWith("com.lemonappdev") shouldBeEqualTo true
+            hasNameStartingWith("wrong-prefix") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `import-has-name-with-suffix`() {
+        // given
+        val sut =
+            getSnippetFile("import-has-name-with-suffix")
+                .imports
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasNameEndingWith("testdata.SampleClass") shouldBeEqualTo true
+            hasNameEndingWith("wrong-suffix") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `import-has-name-containing-text`() {
+        // given
+        val sut =
+            getSnippetFile("import-has-name-containing-text")
+                .imports
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasNameContaining("konsist.testdata.") shouldBeEqualTo true
+            hasNameContaining("not-containing") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `import-has-name-matching-regex`() {
+        // given
+        val sut =
+            getSnippetFile("import-has-name-matching-regex")
+                .imports
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasNameMatching(Regex("^[a-zA-Z[^0-9]]+")) shouldBeEqualTo true
+            hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
+        }
+    }
+
+    private fun getSnippetFile(importName: String) = getSnippetKoScope("core/declaration/koimport/snippet/forkonameprovider/", importName)
 }
