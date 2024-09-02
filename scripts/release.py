@@ -2,6 +2,7 @@ import os
 import subprocess
 from common import (project_root)
 
+
 # Methods ==============================================================================================================
 def choose_release_option():
     """
@@ -21,11 +22,12 @@ def choose_release_option():
         else:
             print(f"\033[31mInvalid choice. Please enter 1 or 2.\033[0m")
 
+
 def get_old_konsist_version():
     """
     Reads the gradle.properties file and returns the value of the `konsist.version` property.
 
-    Returns: The value of the `konsist.version` property or stop script if not found.
+    Returns: The value of the `konsist.version` property or None if not found.
     """
 
     gradle_properties_file = os.path.join(project_root, "gradle.properties")
@@ -41,7 +43,8 @@ def get_old_konsist_version():
         print(f"Error: Gradle properties file '{gradle_properties_file}' not found.")
     except Exception as e:
         print(f"Error: An unexpected error occurred: {e}")
-    return
+    return None
+
 
 def get_new_konsist_version(release_option_num, old_version):
     """
@@ -51,12 +54,12 @@ def get_new_konsist_version(release_option_num, old_version):
         release_option_num: The chosen release option number (1 or 2).
         old_version: The current version string (obtained from get_old_konsist_version).
 
-    Returns: The new version string or stop script if invalid option.
+    Returns: The new version string or None if invalid option.
     """
 
     if not old_version:
         print("Error: Unable to determine old version.")
-        return
+        return None
 
     major_version, minor_version, patch_version = old_version.split('.')
 
@@ -66,9 +69,10 @@ def get_new_konsist_version(release_option_num, old_version):
         new_version = f"{major_version}.{minor_version}.{int(patch_version) + 1}"
     else:
         print(f"Error: Invalid release option number: {release_option_num}")
-        return
+        return None
 
     return new_version
+
 
 def change_branch_and_merge():
     """
@@ -93,6 +97,7 @@ def change_branch_and_merge():
     except subprocess.CalledProcessError as e:
         print(f"Error: {e}")
 
+
 def check_for_uncommitted_changes():
     """
     Checks if there are uncommitted changes in the current Git repository.
@@ -102,6 +107,7 @@ def check_for_uncommitted_changes():
 
     result = subprocess.run(["git", "status", "--porcelain"], check=True, capture_output=True)
     return bool(result.stdout.strip())
+
 
 def create_release_branch(version):
     """
@@ -127,8 +133,9 @@ def create_release_branch(version):
     except subprocess.CalledProcessError as e:
         print(f"Error: {e}")
 
+
 def create_release():
-    chosen_option = 1 # remove!!!
+    chosen_option = 2  # remove!!!
 
     # chosen_option = choose_release_option()
     print(f"You chose option: {chosen_option}")
@@ -136,8 +143,18 @@ def create_release():
     old_konsist_version = get_old_konsist_version()
     print(f"Old konsist version: {old_konsist_version}")
 
+    # Check if old version is None
+    if old_konsist_version is None:
+        print("Error: Unable to determine old version from `gradle.properties`.")
+        return
+
     new_konsist_version = get_new_konsist_version(chosen_option, old_konsist_version)
     print(f"New konsist version: {new_konsist_version}")
+
+    # Check if new version is None
+    if new_konsist_version is None:
+        print("Error: Unable to determine new version.")
+        return
 
     change_branch_and_merge()
 
@@ -148,6 +165,7 @@ def create_release():
         print("There are no uncommitted changes. Script continues...")
 
     create_release_branch(new_konsist_version)
+
 
 # Script ===============================================================================================================
 create_release()
