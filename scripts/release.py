@@ -204,8 +204,8 @@ def create_pull_request_to_main(version):
     """
 
     try:
-        # Push the current branch to the remote repository
-        subprocess.run(["git", "push", "origin"], check=True)
+        # Push the current branch to the remote repository, setting the upstream branch if needed
+        subprocess.run(["git", "push", "--set-upstream", "origin", "HEAD"], check=True)
 
         # Create the pull request using the GitHub CLI
         subprocess.run(["gh", "pr", "create", f"Release/v{version}", "--base", "main"], check=True)
