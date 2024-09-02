@@ -220,7 +220,7 @@ def create_release():
 
     replace_konsist_version(old_konsist_version, new_konsist_version, files_with_version_to_change)
 
-    deprecated_files = find_files_with_deprecated_annotation(api_directory, new_konsist_version)
+    deprecated_files = find_files_with_deprecated_annotation(api_directory, "0.18.0")
 
     # Check if list of files with deprecated annotation is not empty
     if deprecated_files:
