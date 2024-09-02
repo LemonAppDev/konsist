@@ -208,7 +208,7 @@ def create_pull_request_to_main(version):
         subprocess.run(["git", "push", "--set-upstream", "origin", "HEAD"], check=True)
 
         # Create the pull request using the GitHub CLI
-        subprocess.run(["gh", "pr", "create", f"Release/v{version}", "--base", "main"], check=True)
+        subprocess.run(["gh", "pr", "create", "--title", f"Release/v{version}", "--project", "nataliapeterwas/konsist", "--base", "main"], check=True)
 
     except subprocess.CalledProcessError as e:
         print(f"Error: {e}")
