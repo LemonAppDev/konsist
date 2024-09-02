@@ -186,52 +186,61 @@ def find_files_with_deprecated_annotation(directory, version):
 
     return  files_with_deprecated_annotation
 
+def display_clickable_file_paths(file_path):
+    # Construct the hyperlink URL
+    hyperlink_url = f"file://{os.path.abspath(file_path)}"
+
+    # Create the colored hyperlink text
+    hyperlink_text = f"\033[34m\033]8;;{hyperlink_url}\033\\{file_path}\033]8;;\033\\\033[0m"
+
+    print(hyperlink_text)
+
 def create_release():
     chosen_option = 1  # remove!!!
-
-    # chosen_option = choose_release_option()
-    print(f"You chose option: {chosen_option}")
-
+    #
+    # # chosen_option = choose_release_option()
+    # print(f"You chose option: {chosen_option}")
+    #
     old_konsist_version = get_old_konsist_version()
-    print(f"Old konsist version: {old_konsist_version}")
-
-    # Check if old version is None
-    if old_konsist_version is None:
-        print("Error: Unable to determine old version from `gradle.properties`.")
-        return
-
+    # print(f"Old konsist version: {old_konsist_version}")
+    #
+    # # Check if old version is None
+    # if old_konsist_version is None:
+    #     print("Error: Unable to determine old version from `gradle.properties`.")
+    #     return
+    #
     new_konsist_version = get_new_konsist_version(chosen_option, old_konsist_version)
-    print(f"New konsist version: {new_konsist_version}")
+    # print(f"New konsist version: {new_konsist_version}")
+    #
+    # # Check if new version is None
+    # if new_konsist_version is None:
+    #     print("Error: Unable to determine new version.")
+    #     return
+    #
+    # change_branch_and_merge()
+    #
+    # if check_for_uncommitted_changes():
+    #     print("Error: There are uncommitted changes. Please commit or stash them before merging.")
+    #     return
+    # else:
+    #     print("There are no uncommitted changes. Script continues...")
+    #
+    # create_release_branch(new_konsist_version)
+    #
+    # replace_konsist_version(old_konsist_version, new_konsist_version, files_with_version_to_change)
 
-    # Check if new version is None
-    if new_konsist_version is None:
-        print("Error: Unable to determine new version.")
-        return
-
-    change_branch_and_merge()
-
-    if check_for_uncommitted_changes():
-        print("Error: There are uncommitted changes. Please commit or stash them before merging.")
-        return
-    else:
-        print("There are no uncommitted changes. Script continues...")
-
-    create_release_branch(new_konsist_version)
-
-    replace_konsist_version(old_konsist_version, new_konsist_version, files_with_version_to_change)
-
-    deprecated_files = find_files_with_deprecated_annotation(api_directory, "0.18.0")
+    deprecated_files = find_files_with_deprecated_annotation(api_directory, new_konsist_version)
 
     # Check if list of files with deprecated annotation is not empty
     if deprecated_files:
         print(f"Files contains @Deprecated annotation with {new_konsist_version} version:")
         for file in deprecated_files:
-            print(file)
+            file_path = os.path.join(project_root, file)
+            display_clickable_file_paths(file_path)
         print(f"Remove deprecated declarations in the above files.")
         return
     else:
         print(f"No files contains @Deprecated annotation with {new_konsist_version} version.")
-
 
 # Script ===============================================================================================================
 create_release()
