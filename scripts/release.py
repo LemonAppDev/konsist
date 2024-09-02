@@ -127,15 +127,15 @@ def create_release_branch(version):
         # Check if the release branch already exists
         result = subprocess.run(["git", "branch", "--list"], check=True, capture_output=True)
         if f"Release/v{version}" in result.stdout.decode():
-            print(f"Release branch 'Release/v{version}' already exists.")
+            print(f"Release branch 'release/v{version}' already exists.")
 
             # Switch to the existing branch
-            subprocess.run(["git", "checkout", f"Release/v{version}"], check=True)
+            subprocess.run(["git", "checkout", f"release/v{version}"], check=True)
             return
 
         # Create the release branch from 'development'
-        subprocess.run(["git", "checkout", "-b", f"Release/v{version}"], check=True)
-        print(f"Created release branch 'Release/v{version}'")
+        subprocess.run(["git", "checkout", "-b", f"release/v{version}"], check=True)
+        print(f"Created release branch 'release/v{version}'")
 
     except subprocess.CalledProcessError as e:
         print(f"Error: {e}")
@@ -195,39 +195,57 @@ def display_clickable_file_paths(file_path):
 
     print(hyperlink_text)
 
+def create_pull_request_to_main(version):
+    """
+    Creates a pull request to the main branch with the specified title.
+
+    Args:
+      version: The version number to include in the title.
+    """
+
+    try:
+        # Push the current branch to the remote repository
+        subprocess.run(["git", "push", "origin"], check=True)
+
+        # Create the pull request using the GitHub CLI
+        subprocess.run(["gh", "pr", "create", f"Release/v{version}", "--base", "main"], check=True)
+
+    except subprocess.CalledProcessError as e:
+        print(f"Error: {e}")
+
 def create_release():
     chosen_option = 1  # remove!!!
-    #
-    # # chosen_option = choose_release_option()
-    # print(f"You chose option: {chosen_option}")
-    #
+
+    # chosen_option = choose_release_option()
+    print(f"You chose option: {chosen_option}")
+
     old_konsist_version = get_old_konsist_version()
-    # print(f"Old konsist version: {old_konsist_version}")
-    #
-    # # Check if old version is None
-    # if old_konsist_version is None:
-    #     print("Error: Unable to determine old version from `gradle.properties`.")
-    #     return
-    #
+    print(f"Old konsist version: {old_konsist_version}")
+
+    # Check if old version is None
+    if old_konsist_version is None:
+        print("Error: Unable to determine old version from `gradle.properties`.")
+        return
+
     new_konsist_version = get_new_konsist_version(chosen_option, old_konsist_version)
-    # print(f"New konsist version: {new_konsist_version}")
-    #
-    # # Check if new version is None
-    # if new_konsist_version is None:
-    #     print("Error: Unable to determine new version.")
-    #     return
-    #
-    # change_branch_and_merge()
-    #
-    # if check_for_uncommitted_changes():
-    #     print("Error: There are uncommitted changes. Please commit or stash them before merging.")
-    #     return
-    # else:
-    #     print("There are no uncommitted changes. Script continues...")
-    #
-    # create_release_branch(new_konsist_version)
-    #
-    # replace_konsist_version(old_konsist_version, new_konsist_version, files_with_version_to_change)
+    print(f"New konsist version: {new_konsist_version}")
+
+    # Check if new version is None
+    if new_konsist_version is None:
+        print("Error: Unable to determine new version.")
+        return
+
+    change_branch_and_merge()
+
+    if check_for_uncommitted_changes():
+        print("Error: There are uncommitted changes. Please commit or stash them before merging.")
+        return
+    else:
+        print("There are no uncommitted changes. Script continues...")
+
+    create_release_branch(new_konsist_version)
+
+    replace_konsist_version(old_konsist_version, new_konsist_version, files_with_version_to_change)
 
     deprecated_files = find_files_with_deprecated_annotation(api_directory, new_konsist_version)
 
@@ -241,6 +259,8 @@ def create_release():
         return
     else:
         print(f"No files contains @Deprecated annotation with {new_konsist_version} version.")
+
+    create_pull_request_to_main(new_konsist_version)
 
 # Script ===============================================================================================================
 create_release()
