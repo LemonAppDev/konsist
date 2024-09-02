@@ -1,7 +1,12 @@
 import os
 import subprocess
+import fileinput
 from common import (project_root)
 
+# Variables ============================================================================================================
+gradle_properties_file = os.path.join(project_root, "gradle.properties")
+read_me_file = os.path.join(project_root, "README.md")
+files_with_version_to_change = [gradle_properties_file, read_me_file]
 
 # Methods ==============================================================================================================
 def choose_release_option():
@@ -133,9 +138,25 @@ def create_release_branch(version):
     except subprocess.CalledProcessError as e:
         print(f"Error: {e}")
 
+def replace_version(old_version, new_version, files):
+    """
+    Replaces all occurrences of `old_version` with `new_version` in the provided files.
+
+    Args:
+      old_version: The old version string.
+      new_version: The new version string.
+      files: A list of file paths to modify.
+    """
+
+    for file_path in files:
+        with fileinput.input(file_path, inplace=True) as f:
+            for line in f:
+                line = line.replace(old_version, new_version)
+                f.write(line)
+        print(f"Updated version in: {file_path}")
 
 def create_release():
-    chosen_option = 2  # remove!!!
+    chosen_option = 1  # remove!!!
 
     # chosen_option = choose_release_option()
     print(f"You chose option: {chosen_option}")
@@ -166,6 +187,7 @@ def create_release():
 
     create_release_branch(new_konsist_version)
 
+    replace_version(old_konsist_version, new_konsist_version, files_with_version_to_change)
 
 # Script ===============================================================================================================
 create_release()
