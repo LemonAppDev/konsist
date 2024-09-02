@@ -1,12 +1,14 @@
 import os
+import re
 import subprocess
-import fileinput
 from common import (project_root)
 
 # Variables ============================================================================================================
 gradle_properties_file = os.path.join(project_root, "gradle.properties")
 read_me_file = os.path.join(project_root, "README.md")
 files_with_version_to_change = [gradle_properties_file, read_me_file]
+
+api_directory = 'lib/src/main/kotlin/com/lemonappdev/konsist/api'
 
 # Methods ==============================================================================================================
 def choose_release_option():
@@ -138,7 +140,7 @@ def create_release_branch(version):
     except subprocess.CalledProcessError as e:
         print(f"Error: {e}")
 
-def replace_version(old_version, new_version, files):
+def replace_konsist_version(old_version, new_version, files):
     """
     Replaces all occurrences of `old_version` with `new_version` in the provided files.
 
@@ -149,11 +151,40 @@ def replace_version(old_version, new_version, files):
     """
 
     for file_path in files:
-        with fileinput.input(file_path, inplace=True) as f:
-            for line in f:
-                line = line.replace(old_version, new_version)
-                f.write(line)
-        print(f"Updated version in: {file_path}")
+        with open(file_path, 'r') as f:
+            file_text = f.read()
+            file_text = file_text.replace(old_version, new_version)
+
+        with open(file_path, 'w') as f:
+            f.write(file_text)
+            print(f"Updated version in: {file_path}")
+
+    commit_message = f"Replace Konsist version {old_version} to {new_version}"
+    subprocess.run(["git", "add", "."], check=True)  # Stage all changes
+    subprocess.run(["git", "commit", "-m", commit_message], check=True)  # Commit changes
+
+def find_files_with_deprecated_annotation(directory, version):
+    """
+    Finds Kotlin files containing the @Deprecated annotation with the specified pattern.
+
+    Args: directory: The directory to search.
+
+    Returns: A list of file paths that match the criteria.
+    """
+
+    files_with_deprecated_annotation = []
+    pattern = fr'@Deprecated\(".*{version}'
+
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if file.endswith('.kt'):
+                file_path = os.path.join(root, file)
+                with open(file_path, 'r') as f:
+                    text = f.read()
+                    if re.search(pattern, text):
+                        files_with_deprecated_annotation.append(file_path)
+
+    return  files_with_deprecated_annotation
 
 def create_release():
     chosen_option = 1  # remove!!!
@@ -187,7 +218,20 @@ def create_release():
 
     create_release_branch(new_konsist_version)
 
-    replace_version(old_konsist_version, new_konsist_version, files_with_version_to_change)
+    replace_konsist_version(old_konsist_version, new_konsist_version, files_with_version_to_change)
+
+    deprecated_files = find_files_with_deprecated_annotation(api_directory, new_konsist_version)
+
+    # Check if list of files with deprecated annotation is not empty
+    if deprecated_files:
+        print(f"Files contains @Deprecated annotation with {new_konsist_version} version:")
+        for file in deprecated_files:
+            print(file)
+        print(f"Remove deprecated declarations in the above files.")
+        return
+    else:
+        print(f"No files contains @Deprecated annotation with {new_konsist_version} version.")
+
 
 # Script ===============================================================================================================
 create_release()
