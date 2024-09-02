@@ -138,23 +138,21 @@ def create_release_branch(version):
     except subprocess.CalledProcessError as e:
         print(f"Error: {e}")
 
-def replace_version(old_version, new_version, paths):
+def replace_version(old_version, new_version, files):
     """
-    Replaces all occurrences of `old_version` with `new_version` in the provided paths.
+    Replaces all occurrences of `old_version` with `new_version` in the provided files.
 
     Args:
       old_version: The old version string.
       new_version: The new version string.
-      paths: A list of file paths to modify.
+      files: A list of file paths to modify.
     """
 
-    for file_path in paths:
-        with open(file_path, 'r') as f_in, open(file_path + '.bak', 'w') as f_out:  # Create a backup
-            for line in f_in:
-                line = line.replace(old_text, new_text)
-                f_out.write(line)
-        os.remove(file_path)  # Remove the original file
-        os.rename(file_path + '.bak', file_path)  # Rename the backup to the original filename
+    for file_path in files:
+        with fileinput.input(file_path, inplace=True) as f:
+            for line in f:
+                line = line.replace(old_version, new_version)
+                f.write(line)
         print(f"Updated version in: {file_path}")
 
 def create_release():
