@@ -98,12 +98,7 @@ object TypeUtil {
                 .filterIsInstance<KoFullyQualifiedNameProvider>()
                 .filter { it.fullyQualifiedName?.endsWith(typeText ?: "") == true }
 
-        val parentDeclFqn =
-            if (parentDeclaration is KoFullyQualifiedNameProvider && parentDeclaration.fullyQualifiedName != null) {
-                parentDeclaration.fullyQualifiedName!!.substringBeforeLast(".")
-            } else {
-                (parentDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName ?: ""
-            }
+        val parentDeclFqn = (parentDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName.orEmpty()
 
         val decl =
             declarations.singleOrNull() ?: declarations.firstOrNull {
