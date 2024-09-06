@@ -136,6 +136,10 @@ def change_branch_to_main():
         subprocess.run(["git", "checkout", "main"], check=True)
         print(f"\033[32mSwitched to branch 'main'\033[0m")
 
+        # Set upstream to 'origin/main' if it's not set
+        subprocess.run(["git", "branch", "--set-upstream-to=origin/main", "main"], check=True)
+        print(f"\033[32mSet upstream tracking to 'origin/main'\033[0m")
+
         # Fetch and pull changes
         subprocess.run(["git", "fetch"], check=True)
         print(f"\033[32mFetched changes\033[0m")
