@@ -9,4 +9,4 @@ The snippets are placed here to ensure that the documentation always reflects th
 functional code.
 
 To update GitBook documentation run
-[deploy_snippets_to_kotlin_documentation_repo.py](../../../scripts/deploy_snippets_to_kotlin_documentation_repo) script.
+[deploy_snippets_to_konsist_documentation_repo.py](../../../scripts/deploy_snippets_to_konsist_documentation_repo) script.

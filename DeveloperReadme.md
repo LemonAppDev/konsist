@@ -38,7 +38,7 @@
 11. Update Konsist version in the
     Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/getting-started)
     docs page
-12. Run `/scripts/deploy_snippets_to_kotlin_documentation_repo.py` snippet to generate PR with updated snippets for Konsist Documentation
+12. Run `/scripts/deploy_snippets_to_konsist_documentation_repo.py` snippet to generate PR with updated snippets for Konsist Documentation
 13. Merge `main` to `develop`
 14. Upgrade `konist` version on `develop` branch
 15. Notify devs who have reported the issue (community link in original ticket)
@@ -64,7 +64,7 @@
 10. Update Konsist version in the
     Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/gettingstarted)
     docs page
-11. Run `/scripts/deploy_snippets_to_kotlin_documentation_repo.py` snippet to generate PR with updated snippets for
+11. Run `/scripts/deploy_snippets_to_konsist_documentation_repo.py` snippet to generate PR with updated snippets for
     Konsist Documentation
 12. Merge `main` to `develop` (`release` branch will have changes e.g. version, deprecated APi removed...)
 13. Notify the community about the release

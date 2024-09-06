@@ -776,7 +776,7 @@ def update_version_in_konsist_documentation(repository, old_version, new_version
         shutil.rmtree(temp_dir, ignore_errors=True)
 
 def update_snippets_in_konsist_documentation():
-    from deploy_snippets_to_kotlin_documentation_repo import (deploy_snippets_to_kotlin_documentation_repo)
+    from deploy_snippets_to_konsist_documentation_repo import (deploy_snippets_to_konsist_documentation_repo)
 
 def create_release():
     check_for_uncommitted_changes()
