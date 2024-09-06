@@ -126,6 +126,25 @@ def change_branch_to_develop_and_and_merge_main():
         print(f"\033[31mError: {e}\033[0m")
         sys.exit()
 
+def change_branch_to_main():
+    """
+    Changes branch to 'main' and fetches and pulls changes.
+    """
+
+    try:
+        # Change branch to 'main'
+        subprocess.run(["git", "checkout", "main"], check=True)
+        print(f"\033[32mSwitched to branch 'main'\033[0m")
+
+        # Fetch and pull changes
+        subprocess.run(["git", "fetch"], check=True)
+        print(f"\033[32mFetched changes\033[0m")
+        subprocess.run(["git", "pull"], check=True)
+        print(f"\033[32mPulled changes\033[0m")
+    except subprocess.CalledProcessError as e:
+        print(f"\033[31mError: {e}\033[0m")
+        sys.exit()
+
 
 def check_for_uncommitted_changes():
     """
@@ -148,9 +167,9 @@ def check_for_uncommitted_changes():
         print(f"\033[32mThere are no uncommitted changes. Script continues...\033[0m")
 
 
-def create_release_branch(version):
+def create_release_branch(version, base_branch):
     """
-    Checks if a release branch with the specified version exists. If not, creates it from the 'development' branch.
+    Checks if a release branch with the specified version exists. If not, creates it from the 'base_branch' branch.
 
     Args: version: The version number to check for.
 
@@ -167,10 +186,10 @@ def create_release_branch(version):
         if branch_title in existing_branches:
             print(f"\033[32mRelease branch '{branch_title}' already exists.\033[0m")
         else:
-            print(f"\033[32mRelease branch '{branch_title}' does not exist. Creating it from 'development'.\033[0m")
-            # Switch to the 'development' branch
-            subprocess.run(["git", "checkout", "development"], check=True)
-            # Create the new release branch from 'development'
+            print(f"\033[32mRelease branch '{branch_title}' does not exist. Creating it from 'base_branch'.\033[0m")
+            # Switch to the 'base_branch' branch
+            subprocess.run(["git", "checkout", base_branch], check=True)
+            # Create the new release branch from 'base_branch'
             subprocess.run(["git", "checkout", "-b", branch_title], check=True)
             print(f"\033[32mCreated and switched to release branch '{branch_title}'\033[0m")
             return branch_title
@@ -783,14 +802,19 @@ def create_release():
 
     chosen_option = choose_release_option()
 
-    change_branch_to_develop_and_and_merge_main()
+    if chosen_option == 1:
+        change_branch_to_develop_and_and_merge_main()
+        base_branch = "development"
+    else:
+        change_branch_to_main()
+        base_branch = "main"
 
     old_konsist_version = get_old_konsist_version()
     new_konsist_version = get_new_konsist_version(chosen_option, old_konsist_version)
 
     check_for_uncommitted_changes()
 
-    release_branch_title = create_release_branch(new_konsist_version)
+    release_branch_title = create_release_branch(new_konsist_version, base_branch)
 
     replace_konsist_version(old_konsist_version, new_konsist_version, files_with_version_to_change)
 

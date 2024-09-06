@@ -19,6 +19,7 @@
   repository after some time.
 
 ## Production Release
+
 1. Run `/scripts/create_release.py` script
 2. Select option `1` on the console
 3. (If needed) Remove deprecated API
@@ -27,55 +28,18 @@
 6. Notify devs who have reported the issue or asked for the new feature (community links in original ticket)
 
 
-1. Merge `main` to `develop`
-2. Create `release/vX.Y.Z` branch from `develop`
-3. Update Konsist version
-    1. [gradle.properties](gradle.properties) file
-    2. [README.md](README.md) file
-4. Remove deprecated API
-5. Open PR targeting `main` and wait for all checks to pass
-6. Release local artifact and test 3rd party projects using local artifact
-    1. [Android-showcase](https://github.com/igorwojda/android-showcase)
-    2. Mango (internal)
-    3. [CleanArchitectureForAndroid](https://github.com/EranBoudjnah/CleanArchitectureForAndroid)
-7. Merge PR to `main`
-8. Run `./gradlew publish -Pkonsist.releaseTarget=release` on the `main` branch to release a new version
-9. Create a new [GitHub release](https://github.com/LemonAppDev/konsist/releases/new)
-    1. set `vX.Y.Z` as tag version
-    2. set `vX.Y.Z` as release title
-10. Update Konsist version in the
-    Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/gettingstarted)
-    docs page
-11. Run `/scripts/deploy_snippets_to_konsist_documentation_repo.py` snippet to generate PR with updated snippets for
-    Konsist Documentation
-12. Merge `main` to `develop` (`release` branch will have changes e.g. version, deprecated APi removed...)
-13. Notify the community about the release
-14. Notify devs who have reported the issue or asked for the new feature (community links in original ticket)
-
 ## Hotfix Release
 
 1. Create `hotfix/KON-XXX-...` branch from `main`
-2. Fix the bug and open PR targeting `mian`
+2. Fix the bug and open PR targeting `main`
 3. Merge the PR
-4. Create `release/vX.Y.Z` branch from `main`
-5. Update Konsist version
-    1. [gradle.properties](gradle.properties) file
-    2. [README.md](README.md) file
-    3. Sample projects
-6. Open the release PR targeting `main` and wait for all checks to pass
-7. Merge PR
-8. Switch to the `main` branch and pull changes
-9. Run `./gradlew publish -Pkonsist.releaseTarget=release` on the `main` branch to release a new version
-10. Create a new [GitHub release](https://github.com/LemonAppDev/konsist/releases/new)
-    1. set `vX.Y.Z` as tag version
-    2. set `vX.Y.Z` as release title
-11. Update Konsist version in the
-    Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/getting-started)
-    docs page
-12. Run `/scripts/deploy_snippets_to_konsist_documentation_repo.py` snippet to generate PR with updated snippets for Konsist Documentation
-13. Merge `main` to `develop`
-14. Upgrade `konist` version on `develop` branch
-15. Notify devs who have reported the issue (community link in original ticket)
+4. Run `/scripts/create_release.py` script
+5. Select option `2` on the console
+6. (If needed) Remove deprecated API
+7. Run `./gradlew publish -Pkonsist.releaseTarget=release` on the `main` branch to release a new version
+8. Notify the community about the release
+9. Notify devs who have reported the issue (community link in original ticket)
+
 
 ## Sonatype
 
