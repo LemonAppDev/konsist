@@ -102,12 +102,13 @@ object TypeUtil {
         val parentDeclFqn = (parentDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName.orEmpty()
 
         val decl =
-            declarations.singleOrNull() ?: declarations.firstOrNull { decl ->
-                decl.fullyQualifiedName?.contains(parentDeclFqn) == true || (
-                    (decl as? KoContainingDeclarationProvider)
-                        ?.containingDeclaration as? KoDeclarationProvider
-                )?.hasDeclaration { it == parentDeclaration } == true
-            }
+            declarations.singleOrNull()
+                ?: declarations.firstOrNull { decl ->
+                    decl.fullyQualifiedName?.contains(parentDeclFqn) == true ||
+                        ((decl as? KoContainingDeclarationProvider)?.containingDeclaration as? KoDeclarationProvider)?.hasDeclaration {
+                            it == parentDeclaration
+                        } == true
+                }
 
         fqn = fqn ?: decl?.fullyQualifiedName
 
