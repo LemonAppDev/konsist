@@ -9,7 +9,9 @@ import org.jetbrains.kotlin.lexer.KtModifierKeywordToken
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.psiUtil.allChildren
 
-internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCore {
+internal interface KoModifierProviderCore :
+    KoModifierProvider,
+    KoBaseProviderCore {
     val ktModifierListOwner: KtModifierListOwner
 
     override val modifiers: List<KoModifier>
@@ -26,8 +28,7 @@ internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCo
                         .entries
                         .firstOrNull { modifier -> modifier.type == it.toString() }
                         ?: throw KoInternalException("Modifier not found: $it")
-                }
-                .orEmpty()
+                }.orEmpty()
 
     override val numModifiers: Int
         get() = modifiers.size

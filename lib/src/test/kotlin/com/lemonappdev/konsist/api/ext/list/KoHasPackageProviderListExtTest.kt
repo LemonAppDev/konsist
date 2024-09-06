@@ -9,7 +9,9 @@ import org.junit.jupiter.api.Test
 
 @Suppress("detekt.LargeClass")
 class KoHasPackageProviderListExtTest {
-    private interface SampleTestDeclaration : KoPackageProvider, KoHasPackageProvider
+    private interface SampleTestDeclaration :
+        KoPackageProvider,
+        KoHasPackageProvider
 
     @Test
     fun `withMatchingPackage() returns declaration which has matching package`() {

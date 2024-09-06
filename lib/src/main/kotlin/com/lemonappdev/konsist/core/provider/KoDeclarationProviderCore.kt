@@ -4,7 +4,9 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 
-internal interface KoDeclarationProviderCore : KoDeclarationProvider, KoBaseProviderCore {
+internal interface KoDeclarationProviderCore :
+    KoDeclarationProvider,
+    KoBaseProviderCore {
     override fun numDeclarations(
         includeNested: Boolean,
         includeLocal: Boolean,

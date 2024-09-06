@@ -76,7 +76,8 @@ class KoSetterDeclarationForKoLocalFunctionProviderTest {
             it?.hasLocalFunction { it.name == "otherLocalFunction" } shouldBeEqualTo false
             it?.hasAllLocalFunctions { it.name.endsWith("2") || it.name == "sampleLocalFunction1" } shouldBeEqualTo true
             it?.hasAllLocalFunctions { it.name.endsWith("2") } shouldBeEqualTo false
-            it?.localFunctions
+            it
+                ?.localFunctions
                 ?.map { it.name }
                 .shouldBeEqualTo(listOf("sampleLocalFunction1", "sampleLocalFunction2"))
         }

@@ -31,59 +31,58 @@ import org.jetbrains.kotlin.psi.KtPropertyAccessor
 internal class KoSetterDeclarationCore private constructor(
     private val ktPropertyAccessor: KtPropertyAccessor,
     override val containingDeclaration: KoBaseDeclaration,
-) :
-    KoSetterDeclaration,
-        KoBaseProviderCore,
-        KoBodyProviderCore,
-        KoContainingDeclarationProviderCore,
-        KoContainingFileProviderCore,
-        KoInitializerProviderCore,
-        KoIsInitializedProviderCore,
-        KoLocalClassProviderCore,
-        KoLocalDeclarationProviderCore,
-        KoLocalFunctionProviderCore,
-        KoVariableProviderCore,
-        KoLocationProviderCore,
-        KoPathProviderCore,
-        KoModuleProviderCore,
-        KoSourceSetProviderCore,
-        KoTextProviderCore,
-        KoModifierProviderCore,
-        KoVisibilityModifierProviderCore {
-        override val ktElement: KtElement by lazy { ktPropertyAccessor }
+) : KoSetterDeclaration,
+    KoBaseProviderCore,
+    KoBodyProviderCore,
+    KoContainingDeclarationProviderCore,
+    KoContainingFileProviderCore,
+    KoInitializerProviderCore,
+    KoIsInitializedProviderCore,
+    KoLocalClassProviderCore,
+    KoLocalDeclarationProviderCore,
+    KoLocalFunctionProviderCore,
+    KoVariableProviderCore,
+    KoLocationProviderCore,
+    KoPathProviderCore,
+    KoModuleProviderCore,
+    KoSourceSetProviderCore,
+    KoTextProviderCore,
+    KoModifierProviderCore,
+    KoVisibilityModifierProviderCore {
+    override val ktElement: KtElement by lazy { ktPropertyAccessor }
 
-        override val psiElement: PsiElement by lazy { ktPropertyAccessor }
+    override val psiElement: PsiElement by lazy { ktPropertyAccessor }
 
-        override val ktDeclarationWithBody: KtDeclarationWithBody by lazy { ktPropertyAccessor }
+    override val ktDeclarationWithBody: KtDeclarationWithBody by lazy { ktPropertyAccessor }
 
-        override val ktModifierListOwner: KtModifierListOwner by lazy { ktPropertyAccessor }
+    override val ktModifierListOwner: KtModifierListOwner by lazy { ktPropertyAccessor }
 
-        override val ktDeclaration: KtDeclaration by lazy { ktPropertyAccessor }
+    override val ktDeclaration: KtDeclaration by lazy { ktPropertyAccessor }
 
-        override val localDeclarations: List<KoBaseDeclaration> by lazy {
-            val psiElements =
-                ktPropertyAccessor
-                    .bodyBlockExpression
-                    ?.children
+    override val localDeclarations: List<KoBaseDeclaration> by lazy {
+        val psiElements =
+            ktPropertyAccessor
+                .bodyBlockExpression
+                ?.children
 
-            KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
-        }
-
-        override val hasPublicOrDefaultModifier: Boolean by lazy { !(hasPrivateModifier || hasProtectedModifier || hasInternalModifier) }
-
-        override val isInitialized: Boolean by lazy { hasExpressionBody || hasBlockBody }
-
-        override fun toString(): String = locationWithText
-
-        internal companion object {
-            private val cache: KoDeclarationCache<KoSetterDeclaration> = KoDeclarationCache()
-
-            internal fun getInstance(
-                ktPropertyAccessor: KtPropertyAccessor,
-                containingDeclaration: KoBaseDeclaration,
-            ): KoSetterDeclaration =
-                cache.getOrCreateInstance(ktPropertyAccessor, containingDeclaration) {
-                    KoSetterDeclarationCore(ktPropertyAccessor, containingDeclaration)
-                }
-        }
+        KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
     }
+
+    override val hasPublicOrDefaultModifier: Boolean by lazy { !(hasPrivateModifier || hasProtectedModifier || hasInternalModifier) }
+
+    override val isInitialized: Boolean by lazy { hasExpressionBody || hasBlockBody }
+
+    override fun toString(): String = locationWithText
+
+    internal companion object {
+        private val cache: KoDeclarationCache<KoSetterDeclaration> = KoDeclarationCache()
+
+        internal fun getInstance(
+            ktPropertyAccessor: KtPropertyAccessor,
+            containingDeclaration: KoBaseDeclaration,
+        ): KoSetterDeclaration =
+            cache.getOrCreateInstance(ktPropertyAccessor, containingDeclaration) {
+                KoSetterDeclarationCore(ktPropertyAccessor, containingDeclaration)
+            }
+    }
+}

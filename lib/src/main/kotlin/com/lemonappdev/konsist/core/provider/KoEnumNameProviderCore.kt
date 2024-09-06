@@ -11,7 +11,11 @@ internal interface KoEnumNameProviderCore :
     KoBaseProviderCore {
     val ktEnumEntry: KtEnumEntry
     override val enumName: String
-        get() = ktEnumEntry.parents.filterIsInstance<KtClass>().first().name ?: ""
+        get() =
+            ktEnumEntry.parents
+                .filterIsInstance<KtClass>()
+                .first()
+                .name ?: ""
 
     override val fullEnumName: String
         get() = "$enumName.$name"

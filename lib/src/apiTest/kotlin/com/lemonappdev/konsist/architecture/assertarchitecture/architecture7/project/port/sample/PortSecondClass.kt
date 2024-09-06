@@ -2,4 +2,6 @@ package com.lemonappdev.konsist.architecture.assertarchitecture.architecture7.pr
 
 import com.lemonappdev.konsist.architecture.assertarchitecture.architecture7.project.port.PortFirstClass
 
-class PortSecondClass(val sampleParameter: PortFirstClass)
+class PortSecondClass(
+    val sampleParameter: PortFirstClass,
+)

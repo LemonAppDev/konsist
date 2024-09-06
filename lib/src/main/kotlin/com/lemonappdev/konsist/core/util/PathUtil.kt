@@ -13,7 +13,8 @@ object PathUtil {
     fun toOsSeparator(paths: List<String>): List<String> =
         paths
             .map {
-                it.replace("/", File.separator)
+                it
+                    .replace("/", File.separator)
                     .replace("\\", File.separator)
             }
 

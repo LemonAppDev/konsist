@@ -48,36 +48,29 @@ internal interface KoSourceAndAliasTypeProviderCore :
      * Removes generic type arguments from the type.
      * For `MyClass<String>` value will be "MyClass"
      */
-    private fun String.removeGenericTypeArguments(): String {
-        return substringBefore("<")
-    }
+    private fun String.removeGenericTypeArguments(): String = substringBefore("<")
 
     /*
      * Removes nullability from the type.
      * For `MyClass?` value will be "MyClass"
      */
-    private fun String.removeNullability(): String {
-        return replace("?", "")
-    }
+    private fun String.removeNullability(): String = replace("?", "")
 
     /*
      * Removes package from the type.
      * For `com.app.MyClass` value will be "MyClass"
      */
-    private fun String.removePackage(): String {
-        return substringAfterLast(".")
-    }
+    private fun String.removePackage(): String = substringAfterLast(".")
 
     /*
      * Removes brackets from the type.
      * For `((Int) -> Unit)` value will be "(Int) -> Unit)"
      */
-    private fun String.removeBrackets(): String {
-        return if (startsWith("(") and endsWith(")")) {
+    private fun String.removeBrackets(): String =
+        if (startsWith("(") and endsWith(")")) {
             removePrefix("(")
                 .removeSuffix(")")
         } else {
             this
         }
-    }
 }

@@ -5,10 +5,14 @@ import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
 import com.lemonappdev.konsist.api.provider.tag.KoKDocSampleTagProvider
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 
-internal interface KoKDocSampleTagProviderCore : KoBaseProviderCore, KoKDocSampleTagProvider, KoKDocTagProviderCore {
+internal interface KoKDocSampleTagProviderCore :
+    KoBaseProviderCore,
+    KoKDocSampleTagProvider,
+    KoKDocTagProviderCore {
     override val sampleTags: List<KoValuedKDocTagDeclaration>
         get() =
-            tags.filter { it.name == KoKDocTag.SAMPLE }
+            tags
+                .filter { it.name == KoKDocTag.SAMPLE }
                 .map { it as KoValuedKDocTagDeclaration }
 
     override val numSampleTags: Int

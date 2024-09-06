@@ -5,7 +5,9 @@ import org.jetbrains.kotlin.psi.KtExpression
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-internal interface KoDefaultValueProviderCore : KoDefaultValueProvider, KoBaseProviderCore {
+internal interface KoDefaultValueProviderCore :
+    KoDefaultValueProvider,
+    KoBaseProviderCore {
     val ktParameter: KtParameter
 
     override val defaultValue: String?

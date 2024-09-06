@@ -81,7 +81,8 @@ class KoInterfaceDeclarationForKoClassProviderTest {
         // then
         val expected = listOf("SampleNestedClass", "SampleLocalClass")
 
-        sut.classes(includeNested = true, includeLocal = true)
+        sut
+            .classes(includeNested = true, includeLocal = true)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -97,7 +98,8 @@ class KoInterfaceDeclarationForKoClassProviderTest {
         // then
         val expected = listOf("SampleNestedClass")
 
-        sut.classes(includeNested = true, includeLocal = false)
+        sut
+            .classes(includeNested = true, includeLocal = false)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -113,7 +115,8 @@ class KoInterfaceDeclarationForKoClassProviderTest {
         // then
         val expected = listOf("SampleLocalClass")
 
-        sut.classes(includeNested = false, includeLocal = true)
+        sut
+            .classes(includeNested = false, includeLocal = true)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -129,7 +132,8 @@ class KoInterfaceDeclarationForKoClassProviderTest {
         // then
         val expected = emptyList<String>()
 
-        sut.classes(includeNested = false, includeLocal = false)
+        sut
+            .classes(includeNested = false, includeLocal = false)
             .map { it.name }
             .shouldBeEqualTo(expected)
     }

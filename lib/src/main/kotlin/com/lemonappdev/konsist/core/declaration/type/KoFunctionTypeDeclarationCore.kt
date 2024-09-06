@@ -25,51 +25,50 @@ import org.jetbrains.kotlin.psi.KtParameterList
 internal class KoFunctionTypeDeclarationCore private constructor(
     private val ktFunctionType: KtFunctionType,
     override val containingDeclaration: KoBaseDeclaration,
-) :
-    KoFunctionTypeDeclaration,
-        KoBaseTypeDeclarationCore,
-        KoBaseProviderCore,
-        KoContainingFileProviderCore,
-        KoContainingDeclarationProviderCore,
-        KoLocationProviderCore,
-        KoPathProviderCore,
-        KoModuleProviderCore,
-        KoSourceSetProviderCore {
-        override val psiElement: PsiElement by lazy { ktFunctionType }
+) : KoFunctionTypeDeclaration,
+    KoBaseTypeDeclarationCore,
+    KoBaseProviderCore,
+    KoContainingFileProviderCore,
+    KoContainingDeclarationProviderCore,
+    KoLocationProviderCore,
+    KoPathProviderCore,
+    KoModuleProviderCore,
+    KoSourceSetProviderCore {
+    override val psiElement: PsiElement by lazy { ktFunctionType }
 
-        override val ktElement: KtElement by lazy { ktFunctionType }
+    override val ktElement: KtElement by lazy { ktFunctionType }
 
-        override val name: String by lazy { ktFunctionType.text }
+    override val name: String by lazy { ktFunctionType.text }
 
-        override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
+    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
-        override val parameterTypes: List<KoParameterDeclaration> by lazy {
-            ktFunctionType
-                .children
-                .filterIsInstance<KtParameterList>()
-                .flatMap { it.children.toList() }
-                .filterIsInstance<KtParameter>()
-                .map { KoParameterDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
-        }
-
-        override val returnType: KoTypeDeclaration by lazy {
-            val type = ktFunctionType.returnTypeReference
-
-            type?.let { KoTypeDeclarationCore.getInstance(it, this) }
-                ?: throw KoInternalException("Lambda function has no specified type")
-        }
-
-        override fun toString(): String = text // Todo: change to name
-
-        internal companion object {
-            private val cache: KoDeclarationCache<KoFunctionTypeDeclaration> = KoDeclarationCache() // Todo: change this?
-
-            internal fun getInstance(
-                ktFunctionType: KtFunctionType,
-                containingDeclaration: KoBaseDeclaration,
-            ): KoFunctionTypeDeclaration =
-                cache.getOrCreateInstance(ktFunctionType, containingDeclaration) {
-                    KoFunctionTypeDeclarationCore(ktFunctionType, containingDeclaration)
-                }
-        }
+    override val parameterTypes: List<KoParameterDeclaration> by lazy {
+        ktFunctionType
+            .children
+            .filterIsInstance<KtParameterList>()
+            .flatMap { it.children.toList() }
+            .filterIsInstance<KtParameter>()
+            .map { KoParameterDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
     }
+
+    override val returnType: KoTypeDeclaration by lazy {
+        val type = ktFunctionType.returnTypeReference
+
+        type?.let { KoTypeDeclarationCore.getInstance(it, this) }
+            ?: throw KoInternalException("Lambda function has no specified type")
+    }
+
+    override fun toString(): String = text // Todo: change to name
+
+    internal companion object {
+        private val cache: KoDeclarationCache<KoFunctionTypeDeclaration> = KoDeclarationCache() // Todo: change this?
+
+        internal fun getInstance(
+            ktFunctionType: KtFunctionType,
+            containingDeclaration: KoBaseDeclaration,
+        ): KoFunctionTypeDeclaration =
+            cache.getOrCreateInstance(ktFunctionType, containingDeclaration) {
+                KoFunctionTypeDeclarationCore(ktFunctionType, containingDeclaration)
+            }
+    }
+}

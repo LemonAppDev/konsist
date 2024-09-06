@@ -17,9 +17,13 @@ import org.junit.jupiter.params.provider.MethodSource
 
 class KoFileDeclarationProviderExtTest {
     // We add these interfaces to simulate declarations that different providers implement.
-    private interface TestDeclarationWithModifierProvider : KoBaseDeclaration, KoModifierProvider
+    private interface TestDeclarationWithModifierProvider :
+        KoBaseDeclaration,
+        KoModifierProvider
 
-    private interface TestDeclarationWithoutModifierProvider : KoBaseDeclaration, KoAnnotationProvider
+    private interface TestDeclarationWithoutModifierProvider :
+        KoBaseDeclaration,
+        KoAnnotationProvider
 
     @ParameterizedTest
     @MethodSource("provideValues")
