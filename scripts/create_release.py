@@ -137,7 +137,11 @@ def check_for_uncommitted_changes():
         check=True
     )
 
-    return bool(result.stdout.strip())
+    if bool(result.stdout.strip()):
+        print(f"\033[31mError: There are uncommitted changes. Please commit or stash them before merging.\033[0m")
+        sys.exit()
+    else:
+        print(f"\033[32mThere are no uncommitted changes. Script continues...\033[0m")
 
 
 def create_release_branch(version):
@@ -720,8 +724,12 @@ def update_snippets_in_konsist_documentation():
     from deploy_snippets_to_kotlin_documentation_repo import (deploy_snippets_to_kotlin_documentation_repo)
 
 def create_release():
+    check_for_uncommitted_changes()
+
     chosen_option = choose_release_option()
     print(f"\033[32mYou chose option: {chosen_option}\033[0m")
+
+    change_branch_to_develop_and_and_merge_main()
 
     old_konsist_version = get_old_konsist_version()
     print(f"\033[32mOld konsist version: {old_konsist_version}\033[0m")
@@ -739,13 +747,7 @@ def create_release():
         print(f"\033[31mError: Unable to determine new version.\033[0m")
         return
 
-    change_branch_to_develop_and_and_merge_main()
-
-    if check_for_uncommitted_changes():
-        print(f"\033[31mError: There are uncommitted changes. Please commit or stash them before merging.\033[0m")
-        return
-    else:
-        print(f"\033[32mThere are no uncommitted changes. Script continues...\033[0m")
+    check_for_uncommitted_changes()
 
     release_branch_title = create_release_branch(new_konsist_version)
 
