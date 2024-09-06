@@ -4,6 +4,8 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoFunctionTypeDeclarationCore
@@ -100,9 +102,13 @@ object TypeUtil {
         val parentDeclFqn = (parentDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName.orEmpty()
 
         val decl =
-            declarations.singleOrNull() ?: declarations.firstOrNull {
-                it.fullyQualifiedName?.contains(parentDeclFqn) == true
+            declarations.singleOrNull() ?: declarations.firstOrNull { decl ->
+                decl.fullyQualifiedName?.contains(parentDeclFqn) == true || (
+                        (decl as? KoContainingDeclarationProvider)
+                            ?.containingDeclaration as? KoDeclarationProvider)
+                    ?.hasDeclaration { it == parentDeclaration } == true
             }
+
 
         fqn = fqn ?: decl?.fullyQualifiedName
 
