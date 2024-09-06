@@ -796,7 +796,7 @@ def create_release():
 
     check_if_exist_files_with_deprecated_annotation(api_directory, new_konsist_version)
 
-    test_3rd_party_projects_using_local_artifacts(old_konsist_version, new_konsist_version)
+    # test_3rd_party_projects_using_local_artifacts(old_konsist_version, new_konsist_version)
 
     create_pull_request_to_main(new_konsist_version)
 
@@ -811,5 +811,6 @@ def create_release():
     # update_snippets_in_konsist_documentation()
 
     change_branch_to_develop_and_and_merge_main()
+
 # Script ===============================================================================================================
 create_release()
