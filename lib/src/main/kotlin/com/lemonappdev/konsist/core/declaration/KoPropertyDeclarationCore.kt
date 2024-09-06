@@ -197,15 +197,15 @@ internal class KoPropertyDeclarationCore private constructor(
         }
     }
 
-        override val fullyQualifiedName: String? by lazy {
-            if (this.isTopLevel) {
-                super.fullyQualifiedName
-            } else {
-                null
-            }
+    override val fullyQualifiedName: String? by lazy {
+        if (this.isTopLevel) {
+            super.fullyQualifiedName
+        } else {
+            null
         }
+    }
 
-        override fun toString(): String = name
+    override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoPropertyDeclaration> = KoDeclarationCache()

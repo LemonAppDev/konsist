@@ -36,29 +36,28 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 internal class KoParameterDeclarationCore private constructor(
     override val ktParameter: KtParameter,
     override val containingDeclaration: KoBaseDeclaration,
-) :
-    KoParameterDeclaration,
-        KoBaseProviderCore,
-        KoAnnotationProviderCore,
-        KoContainingFileProviderCore,
-        KoDefaultValueProviderCore,
-        KoLocationProviderCore,
-        KoModifierProviderCore,
-        KoNameProviderCore,
-        KoPackageDeclarationProviderCore,
-        KoContainingDeclarationProviderCore,
-        KoPathProviderCore,
-        KoModuleProviderCore,
-        KoSourceSetProviderCore,
-        KoResideInPackageProviderCore,
-        KoTextProviderCore,
-        KoNonNullableTypeProviderCore,
-        KoVarModifierProviderCore,
-        KoValModifierProviderCore,
-        KoVarArgModifierProviderCore,
-        KoNoInlineModifierProviderCore,
-        KoCrossInlineModifierProviderCore {
-        override val ktAnnotated: KtAnnotated by lazy { ktParameter }
+) : KoParameterDeclaration,
+    KoBaseProviderCore,
+    KoAnnotationProviderCore,
+    KoContainingFileProviderCore,
+    KoDefaultValueProviderCore,
+    KoLocationProviderCore,
+    KoModifierProviderCore,
+    KoNameProviderCore,
+    KoPackageDeclarationProviderCore,
+    KoContainingDeclarationProviderCore,
+    KoPathProviderCore,
+    KoModuleProviderCore,
+    KoSourceSetProviderCore,
+    KoResideInPackageProviderCore,
+    KoTextProviderCore,
+    KoNonNullableTypeProviderCore,
+    KoVarModifierProviderCore,
+    KoValModifierProviderCore,
+    KoVarArgModifierProviderCore,
+    KoNoInlineModifierProviderCore,
+    KoCrossInlineModifierProviderCore {
+    override val ktAnnotated: KtAnnotated by lazy { ktParameter }
 
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktParameter }
 
