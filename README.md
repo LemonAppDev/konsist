@@ -12,16 +12,16 @@ and unified architecture. Konsist guards are written in the form of unit tests (
 
 ```kotlin
 // Gradle Kotlin:
-testImplementation("com.lemonappdev:konsist:0.19.0")
+testImplementation("com.lemonappdev:konsist:0.19.1")
 
 // Gradle Groovy:
-testImplementation "com.lemonappdev:konsist:0.19.0"
+testImplementation "com.lemonappdev:konsist:0.19.1"
 
 // Maven:
 <dependency>
     <groupId>com.lemonappdev</groupId>
     <artifactId>konsist</artifactId>
-    <version>0.19.0</version>
+    <version>0.19.1</version>
     <scope>test</scope>
 </dependency>
 ```
