@@ -397,7 +397,7 @@ def create_pull_request_to_main(version):
     except subprocess.CalledProcessError as e:
         print(f"\033[31mError: {e}\033[0m")
 
-def get_latest_commit_sha(branch):
+def check_github_checks(branch):
     """
     Get the latest commit SHA from a specific branch using GitHub CLI.
     """
@@ -417,25 +417,25 @@ def get_latest_commit_sha(branch):
         print(f"\033[32mLatest commit SHA: {latest_commit_sha}\033[0m")
 
         print(f"\033[32mWait for running checks...\033[0m")
-        time.sleep(30)
+        # time.sleep(30)
 
         # Execute if all GitHub checks have passed
         while True:
             # Check GitHub checks
-            check_statuses = check_github_checks(latest_commit_sha)
+            check_statuses = get_statues_of_github_checks(latest_commit_sha)
 
             # Determine the status of the checks
             if -1 in check_statuses:
-                print(f"\033[31mThe checks failed. Exiting script.\033[0m")
+                print(f"\033[31m\nThe checks failed. Exiting script.\033[0m")
                 sys.exit()
 
             if 0 in check_statuses:
-                print(f"\033[33mChecks in progress...\033[0m")
+                print(f"\033[33m\nChecks in progress...\033[0m")
                 time.sleep(60)  # Wait a minute before checking again
                 continue
 
             if all(status == 1 for status in check_statuses):
-                print(f"\033[32mAll checks passed. Continuing script execution.\033[0m")
+                print(f"\033[32m\nAll checks passed. Continuing script execution.\033[0m")
                 # Add your script logic here
                 break  # Exit the loop if all checks passed
 
@@ -443,7 +443,7 @@ def get_latest_commit_sha(branch):
         print(f"\033[31mAn error occurred while getting the latest commit SHA: {e}\033[0m")
         sys.exit()
 
-def check_github_checks(ref):
+def get_statues_of_github_checks(ref):
     """
     Check the status of GitHub checks for a specific commit.
     """
@@ -800,7 +800,7 @@ def create_release():
 
     create_pull_request_to_main(new_konsist_version)
 
-    get_latest_commit_sha(release_branch_title)
+    check_github_checks(release_branch_title)
 
     merge_release_pr(release_branch_title)
 
