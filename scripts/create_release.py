@@ -799,7 +799,15 @@ def update_version_in_konsist_documentation(repository, old_version, new_version
         shutil.rmtree(temp_dir, ignore_errors=True)
 
 def update_snippets_in_konsist_documentation():
-    from deploy_snippets_to_konsist_documentation_repo import (deploy_snippets_to_konsist_documentation_repo)
+    script_path = "scripts/deploy_snippets_to_konsist_documentation_repo.py"
+
+    try:
+        # Call the other Python script using subprocess
+        subprocess.run(["python3", script_path], check=True)
+        print(f"Successfully ran {script_path}")
+
+    except subprocess.CalledProcessError as e:
+        print(f"Error occurred while running {script_path}: {e}")
 
 def create_release():
     check_for_uncommitted_changes()
@@ -824,7 +832,7 @@ def create_release():
 
     check_if_exist_files_with_deprecated_annotation(api_directory, new_konsist_version)
 
-    # test_3rd_party_projects_using_local_artifacts(old_konsist_version, new_konsist_version)
+    test_3rd_party_projects_using_local_artifacts(old_konsist_version, new_konsist_version)
 
     create_pull_request_to_main(new_konsist_version)
 
@@ -834,9 +842,9 @@ def create_release():
 
     create_github_release(new_konsist_version)
 
-    # update_version_in_konsist_documentation(konsist_documentation_repository_address, old_konsist_version, new_konsist_version)
+    update_version_in_konsist_documentation(konsist_documentation_repository_address, old_konsist_version, new_konsist_version)
 
-    # update_snippets_in_konsist_documentation()
+    update_snippets_in_konsist_documentation()
 
     change_branch_to_develop_and_and_merge_main()
 
