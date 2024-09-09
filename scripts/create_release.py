@@ -454,7 +454,7 @@ def check_github_checks(branch):
         latest_commit_sha = result.stdout.strip()
         print_success_message(f"Latest commit SHA: {latest_commit_sha}")
 
-        print_success_message(f"Wait for running checks...")
+        print_success_message(f"Wait for running checks...\n")
         # time.sleep(30)
 
         # Execute if all GitHub checks have passed
