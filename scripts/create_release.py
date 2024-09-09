@@ -501,12 +501,12 @@ def check_github_checks(branch):
                 sys.exit()
 
             if 0 in check_statuses:
-                print_yellow_message(f"\nChecks in progress...")
+                print_yellow_message(f"\nChecks in progress...\n")
                 time.sleep(60)  # Wait a minute before checking again
                 continue
 
             if all(status == 1 for status in check_statuses):
-                print_success_message(f"\nAll checks passed. Continuing script execution.")
+                print_success_message(f"\nAll checks passed. Continuing script execution.\n")
                 break  # Exit the loop if all checks passed
 
     except Exception as e:
