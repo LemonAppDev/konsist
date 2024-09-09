@@ -881,21 +881,21 @@ def update_snippets_in_konsist_documentation():
         print_error_message(f"Error occurred while running {script_path}: {e}")
 
 def create_release():
-    # check_for_uncommitted_changes()
-    #
-    # chosen_option = choose_release_option()
-    #
+    check_for_uncommitted_changes()
+
+    chosen_option = choose_release_option()
+
     # if chosen_option == 1:
     #     change_branch_to_develop_and_and_merge_main()
     #     base_branch = "develop"
     # else:
     #     change_branch_to_main()
     #     base_branch = "main"
-    #
-    # old_konsist_version = get_old_konsist_version()
-    # new_konsist_version = get_new_konsist_version(chosen_option, old_konsist_version)
-    #
-    # check_for_uncommitted_changes()
+
+    old_konsist_version = get_old_konsist_version()
+    new_konsist_version = get_new_konsist_version(chosen_option, old_konsist_version)
+
+    check_for_uncommitted_changes()
     #
     # release_branch_title = create_release_branch(new_konsist_version, base_branch)
     #
