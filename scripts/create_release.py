@@ -29,11 +29,20 @@ test_konsist_projects = [
 destination_dir = os.path.expanduser('~/test_konsist_projects')
 
 # Methods ==============================================================================================================
-def printErrorMessage(text):
+def print_error_message(text):
     print(f"\033[31m{text}\033[0m")
 
-def printSuccessMessage(text):
+def print_success_message(text):
     print(f"\033[32m{text}\033[0m")
+
+def print_yellow_message(text):
+    print(f"\033[33m{text}\033[0m")
+
+def print_blue_message(text):
+    print(f"\033[34m{text}\033[0m")
+
+def print_magenta_message(text):
+    print(f"\033[35m{text}\033[0m")
 
 def choose_release_option():
     """
@@ -42,17 +51,17 @@ def choose_release_option():
     Returns: The chosen option (1 or 2).
     """
 
-    printSuccessMessage(f"Which release option do you choose? Write:")
-    print(f"\033[35m1 - if you want to create \"Main Release - Upgrade Minor\"\033[0m")
-    print(f"\033[34m2 - if you want to create \"Hotfix Release - Upgrade Patch\"\033[0m")
+    print_success_message(f"Which release option do you choose? Write:")
+    print_magenta_message(f"1 - if you want to create \"Main Release - Upgrade Minor\"")
+    print_blue_message(f"2 - if you want to create \"Hotfix Release - Upgrade Patch\"")
 
     while True:
         choice = input(f"\033[31;1mEnter your choice (1 or 2): \033[0m")
         if choice in ["1", "2"]:
-            printSuccessMessage(f"You chose option: {int(choice)}")
+            print_success_message(f"You chose option: {int(choice)}")
             return int(choice)
         else:
-            printErrorMessage(f"Invalid choice. Please enter 1 or 2.")
+            print_error_message(f"Invalid choice. Please enter 1 or 2.")
 
 
 def get_old_konsist_version():
@@ -70,13 +79,13 @@ def get_old_konsist_version():
                 line = line.strip()
                 if line.startswith('konsist.version='):
                     version = line.split('=')[1]
-                    printSuccessMessage(f"Old konsist version: {version}")
+                    print_success_message(f"Old konsist version: {version}")
                     return version
         raise ValueError("konsist.version property not found in gradle.properties")
     except FileNotFoundError:
-        printErrorMessage(f"Error: Gradle properties file '{gradle_properties_file}' not found.")
+        print_error_message(f"Error: Gradle properties file '{gradle_properties_file}' not found.")
     except Exception as e:
-        printErrorMessage(f"Error: An unexpected error occurred: {e}")
+        print_error_message(f"Error: An unexpected error occurred: {e}")
 
     sys.exit()
 
@@ -92,7 +101,7 @@ def get_new_konsist_version(release_option_num, old_version):
     """
 
     if not old_version:
-        printErrorMessage(f"Error: Unable to determine old version.")
+        print_error_message(f"Error: Unable to determine old version.")
         sys.exit()
 
     major_version, minor_version, patch_version = old_version.split('.')
@@ -102,10 +111,10 @@ def get_new_konsist_version(release_option_num, old_version):
     elif release_option_num == 2:
         new_version = f"{major_version}.{minor_version}.{int(patch_version) + 1}"
     else:
-        printErrorMessage(f"Error: Invalid release option number: {release_option_num}")
+        print_error_message(f"Error: Invalid release option number: {release_option_num}")
         sys.exit()
 
-    printSuccessMessage(f"New konsist version: {new_version}")
+    print_success_message(f"New konsist version: {new_version}")
     return new_version
 
 def change_branch_to_develop_and_and_merge_main():
@@ -116,20 +125,20 @@ def change_branch_to_develop_and_and_merge_main():
     try:
         # Change branch to 'develop'
         subprocess.run(["git", "checkout", "develop"], check=True)
-        printSuccessMessage(f"Switched to branch 'develop'")
+        print_success_message(f"Switched to branch 'develop'")
 
         # Fetch and pull changes
         subprocess.run(["git", "fetch"], check=True)
-        printSuccessMessage(f"Fetched changes")
+        print_success_message(f"Fetched changes")
         subprocess.run(["git", "pull"], check=True)
-        printSuccessMessage(f"Pulled changes")
+        print_success_message(f"Pulled changes")
 
         # Merge 'main' into 'develop'
         subprocess.run(["git", "merge", "main", "--no-commit"], check=True)
-        printSuccessMessage(f"Merged 'main' into 'develop'")
+        print_success_message(f"Merged 'main' into 'develop'")
 
     except subprocess.CalledProcessError as e:
-        printErrorMessage(f"Error: {e}")
+        print_error_message(f"Error: {e}")
         sys.exit()
 
 def change_branch_to_main():
@@ -140,19 +149,19 @@ def change_branch_to_main():
     try:
         # Change branch to 'main'
         subprocess.run(["git", "checkout", "main"], check=True)
-        printSuccessMessage(f"Switched to branch 'main'")
+        print_success_message(f"Switched to branch 'main'")
 
         # Set upstream to 'origin/main' if it's not set
         subprocess.run(["git", "branch", "--set-upstream-to=origin/main", "main"], check=True)
-        printSuccessMessage(f"Set upstream tracking to 'origin/main'")
+        print_success_message(f"Set upstream tracking to 'origin/main'")
 
         # Fetch and pull changes
         subprocess.run(["git", "fetch"], check=True)
-        printSuccessMessage(f"Fetched changes")
+        print_success_message(f"Fetched changes")
         subprocess.run(["git", "pull"], check=True)
-        printSuccessMessage(f"Pulled changes")
+        print_success_message(f"Pulled changes")
     except subprocess.CalledProcessError as e:
-        printErrorMessage(f"Error: {e}")
+        print_error_message(f"Error: {e}")
         sys.exit()
 
 
@@ -171,10 +180,10 @@ def check_for_uncommitted_changes():
     )
 
     if bool(result.stdout.strip()):
-        printErrorMessage(f"Error: There are uncommitted changes. Please commit or stash them before merging.")
+        print_error_message(f"Error: There are uncommitted changes. Please commit or stash them before merging.")
         sys.exit()
     else:
-        printSuccessMessage(f"There are no uncommitted changes. Script continues...")
+        print_success_message(f"There are no uncommitted changes. Script continues...")
 
 
 def create_release_branch(version, base_branch):
@@ -194,14 +203,14 @@ def create_release_branch(version, base_branch):
         existing_branches = [branch.strip() for branch in result.stdout.decode().splitlines()]
 
         if branch_title in existing_branches:
-            printSuccessMessage(f"Release branch '{branch_title}' already exists.")
+            print_success_message(f"Release branch '{branch_title}' already exists.")
         else:
-            printSuccessMessage(f"Release branch '{branch_title}' does not exist. Creating it from 'base_branch'.")
+            print_success_message(f"Release branch '{branch_title}' does not exist. Creating it from 'base_branch'.")
             # Switch to the 'base_branch' branch
             subprocess.run(["git", "checkout", base_branch], check=True)
             # Create the new release branch from 'base_branch'
             subprocess.run(["git", "checkout", "-b", branch_title], check=True)
-            printSuccessMessage(f"Created and switched to release branch '{branch_title}'")
+            print_success_message(f"Created and switched to release branch '{branch_title}'")
             return branch_title
 
         # Switch to the existing branch
@@ -209,7 +218,7 @@ def create_release_branch(version, base_branch):
         return branch_title
 
     except subprocess.CalledProcessError as e:
-        printErrorMessage(f"Error: {e}")
+        print_error_message(f"Error: {e}")
         sys.exit()
 
 def replace_konsist_version(old_version, new_version, files):
@@ -229,7 +238,7 @@ def replace_konsist_version(old_version, new_version, files):
 
         with open(file_path, 'w') as f:
             f.write(file_text)
-            printSuccessMessage(f"Updated version in: {file_path}")
+            print_success_message(f"Updated version in: {file_path}")
 
     # Check if there are any changes to commit
     result = subprocess.run(["git", "status", "--porcelain"], check=True, capture_output=True)
@@ -237,9 +246,9 @@ def replace_konsist_version(old_version, new_version, files):
         commit_message = f"Replace Konsist version {old_version} with {new_version}"
         subprocess.run(["git", "add", "."], check=True)  # Stage all changes
         subprocess.run(["git", "commit", "-m", commit_message], check=True)  # Commit changes
-        printSuccessMessage(f"Changes committed.")
+        print_success_message(f"Changes committed.")
     else:
-        printSuccessMessage(f"No changes made to files.")
+        print_success_message(f"No changes made to files.")
 
 def check_if_exist_files_with_deprecated_annotation(directory, version):
     """
@@ -264,14 +273,14 @@ def check_if_exist_files_with_deprecated_annotation(directory, version):
 
     # Check if list of files with deprecated annotation is not empty
     if files_with_deprecated_annotation:
-        printErrorMessage(f"Files contains @Deprecated annotation with {version} version:")
+        print_error_message(f"Files contains @Deprecated annotation with {version} version:")
         for file in files_with_deprecated_annotation:
             file_path = os.path.join(project_root, file)
             display_clickable_file_paths(file_path)
-        printErrorMessage(f"Remove deprecated declarations in the above files.")
+        print_error_message(f"Remove deprecated declarations in the above files.")
         sys.exit()
     else:
-        printSuccessMessage(f"No files contains @Deprecated annotation with {version} version.")
+        print_success_message(f"No files contains @Deprecated annotation with {version} version.")
 
 def display_clickable_file_paths(file_path):
     # Construct the hyperlink URL
@@ -291,11 +300,11 @@ def test_3rd_party_projects_using_local_artifacts(old_version, new_version):
             ['./gradlew', 'publishToMavenLocal', '-Pkonsist.releaseTarget=local'],
             check=True
         )
-        printSuccessMessage(f"Gradle command executed successfully.")
+        print_success_message(f"Gradle command executed successfully.")
     except subprocess.CalledProcessError as e:
-        printErrorMessage(f"Gradle command failed with error: {e}")
+        print_error_message(f"Gradle command failed with error: {e}")
     except FileNotFoundError:
-        printErrorMessage(f"Gradle wrapper ('./gradlew') not found. Make sure you're in the correct directory.")
+        print_error_message(f"Gradle wrapper ('./gradlew') not found. Make sure you're in the correct directory.")
 
     for repo in test_konsist_projects:
         repo_name = clone_or_pull_repo(repo)
@@ -318,12 +327,12 @@ def run_gradle_task(project_path, gradle_command):
     try:
         # Run the Gradle command
         subprocess.run(gradle_command, check=True)
-        printSuccessMessage(f"Gradle task executed successfully.")
+        print_success_message(f"Gradle task executed successfully.")
     except subprocess.CalledProcessError as e:
-        printErrorMessage(f"Gradle task failed with error: {e}")
+        print_error_message(f"Gradle task failed with error: {e}")
         exit(1)  # Exit the script with an error code
     except FileNotFoundError:
-        printErrorMessage(f"Gradle wrapper ('./gradlew') not found. Make sure you're in the correct directory.")
+        print_error_message(f"Gradle wrapper ('./gradlew') not found. Make sure you're in the correct directory.")
 
 def replace_konsist_version_to_snapshot_version(file_path, old_version, new_version):
     try:
@@ -341,19 +350,19 @@ def replace_konsist_version_to_snapshot_version(file_path, old_version, new_vers
         with open(file_path, 'w', encoding='utf-8') as file:
             file.write(content)
 
-        printSuccessMessage(f"Replaced all occurrences of '{old_version}' with '{new_version}' in {file_path}")
+        print_success_message(f"Replaced all occurrences of '{old_version}' with '{new_version}' in {file_path}")
     except Exception as e:
-        printErrorMessage(f"Error processing {file_path}: {e}")
+        print_error_message(f"Error processing {file_path}: {e}")
 
 def run_add_maven_local_repository(file_path):
     try:
         # Command to run the Python script
         subprocess.run(['python3', 'scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py', file_path], check=True)
-        printSuccessMessage(f"Script executed successfully.")
+        print_success_message(f"Script executed successfully.")
     except subprocess.CalledProcessError as e:
-        printErrorMessage(f"Script execution failed with error: {e}")
+        print_error_message(f"Script execution failed with error: {e}")
     except FileNotFoundError:
-        printErrorMessage(f"The specified script or file was not found.")
+        print_error_message(f"The specified script or file was not found.")
 
 def remove_snapshot_directories(path):
     """
@@ -370,7 +379,7 @@ def remove_snapshot_directories(path):
             if re.match(pattern, dir_name):
                 dir_path = os.path.join(root, dir_name)
                 shutil.rmtree(dir_path)
-                printSuccessMessage(f"Removed directory: {dir_path}")
+                print_success_message(f"Removed directory: {dir_path}")
 
 def clone_or_pull_repo(repo_url):
     # Ensure the destination directory exists
@@ -382,11 +391,11 @@ def clone_or_pull_repo(repo_url):
 
     if os.path.exists(repo_path):
         # If the repo exists, pull the latest changes
-        printSuccessMessage(f"Pulling latest changes for {repo_name}...")
+        print_success_message(f"Pulling latest changes for {repo_name}...")
         subprocess.run(["git", "-C", repo_path, "pull"], check=True)
     else:
         # If the repo doesn't exist, clone it
-        printSuccessMessage(f"Cloning repository {repo_name}...")
+        print_success_message(f"Cloning repository {repo_name}...")
         subprocess.run(["git", "clone", repo_url, repo_path], check=True)
 
     return repo_name
@@ -417,14 +426,14 @@ def create_pull_request_to_main(version):
         if pr_list:
             # If a PR already exists, log the information
             pr_url = pr_list[0]['url']
-            printSuccessMessage(f"Pull request already exists from branch '{current_branch}': {pr_url}")
+            print_success_message(f"Pull request already exists from branch '{current_branch}': {pr_url}")
         else:
             # If no PR exists, create a new one
-            printSuccessMessage(f"Creating a new pull request from branch '{current_branch}'...")
+            print_success_message(f"Creating a new pull request from branch '{current_branch}'...")
             subprocess.run(["gh", "pr", "create", "--title", f"Release/v{version}", "--body", "", "--base", "main"], check=True)
 
     except subprocess.CalledProcessError as e:
-        printErrorMessage(f"Error: {e}")
+        print_error_message(f"Error: {e}")
 
 def check_github_checks(branch):
     """
@@ -439,13 +448,13 @@ def check_github_checks(branch):
         )
 
         if result.returncode != 0:
-            printErrorMessage(f"Error fetching latest commit SHA: {result.stderr}")
+            print_error_message(f"Error fetching latest commit SHA: {result.stderr}")
             sys.exit()
 
         latest_commit_sha = result.stdout.strip()
-        printSuccessMessage(f"Latest commit SHA: {latest_commit_sha}")
+        print_success_message(f"Latest commit SHA: {latest_commit_sha}")
 
-        printSuccessMessage(f"Wait for running checks...")
+        print_success_message(f"Wait for running checks...")
         # time.sleep(30)
 
         # Execute if all GitHub checks have passed
@@ -455,21 +464,21 @@ def check_github_checks(branch):
 
             # Determine the status of the checks
             if -1 in check_statuses:
-                printErrorMessage(f"\nThe checks failed. Exiting script.")
+                print_error_message(f"\nThe checks failed. Exiting script.")
                 sys.exit()
 
             if 0 in check_statuses:
-                print(f"\033[33m\nChecks in progress...\033[0m")
+                print_yellow_message(f"\nChecks in progress...")
                 time.sleep(60)  # Wait a minute before checking again
                 continue
 
             if all(status == 1 for status in check_statuses):
-                printSuccessMessage(f"\nAll checks passed. Continuing script execution.")
+                print_success_message(f"\nAll checks passed. Continuing script execution.")
                 # Add your script logic here
                 break  # Exit the loop if all checks passed
 
     except Exception as e:
-        printErrorMessage(f"An error occurred while getting the latest commit SHA: {e}")
+        print_error_message(f"An error occurred while getting the latest commit SHA: {e}")
         sys.exit()
 
 def get_statues_of_github_checks(ref):
@@ -485,7 +494,7 @@ def get_statues_of_github_checks(ref):
         )
 
         if result.returncode != 0:
-            printErrorMessage(f"Error fetching check runs: {result.stderr}")
+            print_error_message(f"Error fetching check runs: {result.stderr}")
             return None
 
         check_runs = json.loads(result.stdout)
@@ -500,27 +509,27 @@ def get_statues_of_github_checks(ref):
             check_status_text = check.get('status', '')  # Check the status field for queued, in progress, etc.
 
             if check_status == 'success':
-                printSuccessMessage(f"Check '{check_name}' passed.")
+                print_success_message(f"Check '{check_name}' passed.")
                 statuses.append(1)
             elif check_status == 'failure':
-                printErrorMessage(f"Check '{check_name}' failed.")
+                print_error_message(f"Check '{check_name}' failed.")
                 statuses.append(-1)
             elif check_status_text == 'queued':
-                print(f"\033[34mCheck '{check_name}' is queued and waiting to run.\033[0m")
+                print_blue_message(f"Check '{check_name}' is queued and waiting to run.")
                 statuses.append(0)
             elif check_status_text == 'in_progress':
-                print(f"\033[33mCheck '{check_name}' is currently running.\033[0m")
+                print_yellow_message(f"Check '{check_name}' is currently running.")
                 statuses.append(0)
             elif check_status == 'neutral':
-                print(f"\033[34mCheck '{check_name}' skipped.\033[0m")
+                print_blue_message(f"Check '{check_name}' skipped.")
                 statuses.append(0)
             else:
-                printSuccessMessage(f"Check '{check_name}' status: {check_status_text}")
+                print_success_message(f"Check '{check_name}' status: {check_status_text}")
 
         return statuses
 
     except Exception as e:
-        printErrorMessage(f"An error occurred while checking the GitHub checks: {e}")
+        print_error_message(f"An error occurred while checking the GitHub checks: {e}")
         return None
 
 def merge_release_pr(branch_name):
@@ -532,9 +541,9 @@ def merge_release_pr(branch_name):
     # Merge the branch without squashing using GitHub CLI
     try:
         subprocess.check_call(["gh", "pr", "merge", branch_name, "--merge", "--delete-branch"])
-        printSuccessMessage(f"Successfully merged branch '{branch_name}'.")
+        print_success_message(f"Successfully merged branch '{branch_name}'.")
     except subprocess.CalledProcessError as e:
-        printErrorMessage(f"Error: Failed to merge branch '{branch_name}': {e}")
+        print_error_message(f"Error: Failed to merge branch '{branch_name}': {e}")
         sys.exit()
 
 def generate_release_notes(tag_name):
@@ -661,9 +670,9 @@ def arrange_pull_requests_by_labels(section):
                     if not labels_found:
                         label_to_lines["others"].append(line)
                 except subprocess.CalledProcessError as e:
-                    printErrorMessage(f"Error executing command for PR {pr_number}: {e}")
+                    print_error_message(f"Error executing command for PR {pr_number}: {e}")
                 except json.JSONDecodeError as e:
-                    printErrorMessage(f"Error decoding JSON output for PR {pr_number}: {e}")
+                    print_error_message(f"Error decoding JSON output for PR {pr_number}: {e}")
 
     # Add renovate lines to the "dependency-upgrade" entry
     label_to_lines["dependency-upgrade"].extend(renovate_lines)
@@ -737,18 +746,18 @@ def create_or_checkout_git_branch(branch, temp_dir):
             create_branch_result = subprocess.run(["git", "checkout", "-b", branch], cwd=temp_dir,
                                                   stderr=subprocess.PIPE)
             if create_branch_result.returncode != 0:
-                printErrorMessage(f"Error creating branch '{branch}': {create_branch_result.stderr.decode().strip()}")
+                print_error_message(f"Error creating branch '{branch}': {create_branch_result.stderr.decode().strip()}")
                 return False
         else:
             checkout_result = subprocess.run(["git", "checkout", branch], cwd=temp_dir, stderr=subprocess.PIPE)
             if checkout_result.returncode != 0:
-                printErrorMessage(f"Error checking out branch '{branch}': {checkout_result.stderr.decode().strip()}")
+                print_error_message(f"Error checking out branch '{branch}': {checkout_result.stderr.decode().strip()}")
                 return False
         return True
     except subprocess.CalledProcessError as e:
-        printErrorMessage(f"Error running Git command: {e}")
+        print_error_message(f"Error running Git command: {e}")
     except Exception as e:
-        printErrorMessage(f"An error occurred: {e}")
+        print_error_message(f"An error occurred: {e}")
     return False
 
 def update_version_in_konsist_documentation(repository, old_version, new_version):
@@ -795,10 +804,10 @@ def update_version_in_konsist_documentation(repository, old_version, new_version
 
         return temp_dir
     except subprocess.CalledProcessError as e:
-        printErrorMessage(f"Error running Git command: {e}")
+        print_error_message(f"Error running Git command: {e}")
         sys.exit()
     except Exception as e:
-        printErrorMessage(f"An error occurred: {e}")
+        print_error_message(f"An error occurred: {e}")
         sys.exit()
     finally:
         # Cleanup: Remove the temporary directory
@@ -810,10 +819,10 @@ def update_snippets_in_konsist_documentation():
     try:
         # Call the other Python script using subprocess
         subprocess.run(["python3", script_path], check=True)
-        printSuccessMessage(f"Successfully ran {script_path}")
+        print_success_message(f"Successfully ran {script_path}")
 
     except subprocess.CalledProcessError as e:
-        printErrorMessage(f"Error occurred while running {script_path}: {e}")
+        print_error_message(f"Error occurred while running {script_path}: {e}")
 
 def create_release():
     check_for_uncommitted_changes()
