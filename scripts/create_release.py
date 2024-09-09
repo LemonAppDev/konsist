@@ -44,6 +44,9 @@ def print_blue_message(text):
 def print_magenta_message(text):
     print(f"\033[35m{text}\033[0m")
 
+def print_method_name(text):
+    print(f"\033[3;33m\nMethod: {text}()\033[0m")
+
 def choose_release_option():
     """
     Prompts the user to choose between "Main Release - Upgrade Minor" and "Hotfix Release - Upgrade Patch".
@@ -51,7 +54,7 @@ def choose_release_option():
     Returns: The chosen option (1 or 2).
     """
 
-    print_yellow_message(f"Method: choose_release_option()")
+    print_method_name("choose_release_option")
 
     print_success_message(f"Which release option do you choose? Write:")
     print_magenta_message(f"1 - if you want to create \"Main Release - Upgrade Minor\"")
@@ -72,7 +75,7 @@ def get_old_konsist_version():
 
     Returns: The value of the `konsist.version` property or None if not found.
     """
-    print_yellow_message(f"Method: get_old_konsist_version()")
+    print_method_name("get_old_konsist_version")
 
     gradle_properties_file = os.path.join(project_root, "gradle.properties")
 
@@ -103,7 +106,7 @@ def get_new_konsist_version(release_option_num, old_version):
     Returns: The new version string or None if invalid option.
     """
 
-    print_yellow_message(f"Method: get_new_konsist_version()")
+    print_method_name("get_new_konsist_version")
 
     if not old_version:
         print_error_message(f"Error: Unable to determine old version.")
@@ -127,7 +130,7 @@ def change_branch_to_develop_and_and_merge_main():
     Changes branch to 'develop', fetches and pulls changes and merges 'main' into 'develop'.
     """
 
-    print_yellow_message(f"Method: change_branch_to_develop_and_and_merge_main()")
+    print_method_name("change_branch_to_develop_and_and_merge_main")
 
     try:
         # Change branch to 'develop'
@@ -153,7 +156,7 @@ def change_branch_to_main():
     Changes branch to 'main' and fetches and pulls changes.
     """
 
-    print_yellow_message(f"Method: change_branch_to_main()")
+    print_method_name("change_branch_to_main")
 
     try:
         # Change branch to 'main'
@@ -181,7 +184,7 @@ def check_for_uncommitted_changes():
     Returns: True if there are uncommitted changes, False otherwise.
     """
 
-    print_yellow_message(f"Method: check_for_uncommitted_changes()")
+    print_method_name("check_for_uncommitted_changes")
 
     result = subprocess.run(
         ["git", "status", "--porcelain"],
@@ -206,7 +209,7 @@ def create_release_branch(version, base_branch):
     Returns: Branch title
     """
 
-    print_yellow_message(f"Method: create_release_branch()")
+    print_method_name("create_release_branch")
 
     branch_title = f"release/v{version}"
 
@@ -244,7 +247,7 @@ def replace_konsist_version(old_version, new_version, files):
       files: A list of file paths to modify.
     """
 
-    print_yellow_message(f"Method: replace_konsist_version()")
+    print_method_name("replace_konsist_version")
 
     for file_path in files:
         with open(file_path, 'r') as f:
@@ -274,7 +277,7 @@ def check_if_exist_files_with_deprecated_annotation(directory, version):
     Returns: A list of file paths that match the criteria.
     """
 
-    print_yellow_message(f"Method: check_if_exist_files_with_deprecated_annotation()")
+    print_method_name("check_if_exist_files_with_deprecated_annotation")
 
     files_with_deprecated_annotation = []
     pattern = fr'@Deprecated\(".*{version}'
@@ -309,7 +312,7 @@ def display_clickable_file_paths(file_path):
     print(hyperlink_text)
 
 def test_3rd_party_projects_using_local_artifacts(old_version, new_version):
-    print_yellow_message(f"Method: test_3rd_party_projects_using_local_artifacts()")
+    print_method_name("test_3rd_party_projects_using_local_artifacts")
 
     remove_snapshot_directories(m2_repo_path)
 
@@ -340,7 +343,7 @@ def test_3rd_party_projects_using_local_artifacts(old_version, new_version):
         #     run_gradle_task(project_path, gradle_command)
 
 def run_gradle_task(project_path, gradle_command):
-    print_yellow_message(f"Method: run_gradle_task()")
+    print_method_name("run_gradle_task")
 
     # Change to the project directory
     os.chdir(project_path)
@@ -356,7 +359,7 @@ def run_gradle_task(project_path, gradle_command):
         print_error_message(f"Gradle wrapper ('./gradlew') not found. Make sure you're in the correct directory.")
 
 def replace_konsist_version_to_snapshot_version(file_path, old_version, new_version):
-    print_yellow_message(f"Method: replace_konsist_version_to_snapshot_version()")
+    print_method_name("replace_konsist_version_to_snapshot_version")
 
     try:
         # Read the contents of the file
@@ -378,7 +381,7 @@ def replace_konsist_version_to_snapshot_version(file_path, old_version, new_vers
         print_error_message(f"Error processing {file_path}: {e}")
 
 def run_add_maven_local_repository(file_path):
-    print_yellow_message(f"Method: run_add_maven_local_repository()")
+    print_method_name("run_add_maven_local_repository")
 
     try:
         # Command to run the Python script
@@ -396,7 +399,7 @@ def remove_snapshot_directories(path):
     Args: path: The path to the directory to search.
     """
 
-    print_yellow_message(f"Method: remove_snapshot_directories()")
+    print_method_name("remove_snapshot_directories")
 
     pattern = r"\d+\.\d+\.\d+-SNAPSHOT"
 
@@ -408,7 +411,7 @@ def remove_snapshot_directories(path):
                 print_success_message(f"Removed directory: {dir_path}")
 
 def clone_or_pull_repo(repo_url):
-    print_yellow_message(f"Method: clone_or_pull_repo()")
+    print_method_name("clone_or_pull_repo")
 
     # Ensure the destination directory exists
     os.makedirs(destination_dir, exist_ok=True)
@@ -436,7 +439,7 @@ def create_pull_request_to_main(version):
       version: The version number to include in the title.
     """
 
-    print_yellow_message(f"Method: create_pull_request_to_main()")
+    print_method_name("create_pull_request_to_main")
 
     try:
         # Push the current branch to the remote repository, setting the upstream branch if needed
@@ -470,7 +473,7 @@ def check_github_checks(branch):
     Get the latest commit SHA from a specific branch using GitHub CLI.
     """
 
-    print_yellow_message(f"Method: check_github_checks()")
+    print_method_name("check_github_checks")
 
     try:
         result = subprocess.run(
@@ -518,7 +521,7 @@ def get_statues_of_github_checks(ref):
     Check the status of GitHub checks for a specific commit.
     """
 
-    print_yellow_message(f"Method: get_statues_of_github_checks()")
+    print_method_name("get_statues_of_github_checks")
 
     try:
         result = subprocess.run(
@@ -573,7 +576,7 @@ def merge_release_pr(branch_name):
     Args: branch_name (str): The name of the branch to merge.
     """
 
-    print_yellow_message(f"Method: merge_release_pr()")
+    print_method_name("merge_release_pr")
 
     # Merge the branch without squashing using GitHub CLI
     try:
@@ -591,7 +594,7 @@ def generate_release_notes(tag_name):
     :return: The release notes as a string or an error message
     """
 
-    print_yellow_message(f"Method: generate_release_notes()")
+    print_method_name("generate_release_notes")
 
     try:
         # Run GitHub CLI command to fetch release notes for a specific tag
@@ -620,7 +623,7 @@ def create_github_release(version):
     Returns: str: The generated release notes.
     """
 
-    print_yellow_message(f"Method: create_github_release()")
+    print_method_name("create_github_release")
 
     # Set tag and release title
     tag = f"v{version}"
@@ -637,7 +640,7 @@ def create_github_release(version):
     subprocess.run(["gh", "release", "edit", tag, "--notes", updated_release_notes], check=True)
 
 def parse_github_release_text_into_section(text):
-    print_yellow_message(f"Method: parse_github_release_text_into_section()")
+    print_method_name("parse_github_release_text_into_section")
 
     # Remove trailing whitespace and split the text into lines
     lines = text.strip().splitlines()
@@ -673,7 +676,7 @@ def parse_github_release_text_into_section(text):
     return sections, full_changelog
 
 def arrange_pull_requests_by_labels(section):
-    print_yellow_message(f"Method: arrange_pull_requests_by_labels()")
+    print_method_name("arrange_pull_requests_by_labels")
 
     # Regular expression pattern for URLs
     url_pattern = re.compile(r'https?://[^\s]+')
@@ -726,7 +729,7 @@ def arrange_pull_requests_by_labels(section):
     return label_to_lines
 
 def generate_changelog(updated_map, full_changelog, sections):
-    print_yellow_message(f"Method: generate_changelog()")
+    print_method_name("generate_changelog")
 
     # Start with the initial headers and empty lines
     changelog = (
@@ -776,7 +779,7 @@ def generate_changelog(updated_map, full_changelog, sections):
     return changelog
 
 def format_and_update_github_release_notes(release_notes):
-    print_yellow_message(f"Method: format_and_update_github_release_notes()")
+    print_method_name("format_and_update_github_release_notes")
 
     sections, full_changelog = parse_github_release_text_into_section(release_notes)
 
@@ -789,7 +792,7 @@ def format_and_update_github_release_notes(release_notes):
     return changelog
 
 def create_or_checkout_git_branch(branch, temp_dir):
-    print_yellow_message(f"Method: create_or_checkout_git_branch()")
+    print_method_name("create_or_checkout_git_branch")
 
     try:
         result = subprocess.run(["git", "rev-parse", "--verify", branch], cwd=temp_dir, stderr=subprocess.PIPE)
@@ -821,7 +824,7 @@ def update_version_in_konsist_documentation(repository, old_version, new_version
         new_version (str): The new version number to replace with.
     """
 
-    print_yellow_message(f"Method: update_version_in_konsist_documentation()")
+    print_method_name("update_version_in_konsist_documentation")
 
     temp_dir = tempfile.mkdtemp()
 
@@ -868,7 +871,7 @@ def update_version_in_konsist_documentation(repository, old_version, new_version
         shutil.rmtree(temp_dir, ignore_errors=True)
 
 def update_snippets_in_konsist_documentation():
-    print_yellow_message(f"Method: update_snippets_in_konsist_documentation()")
+    print_method_name("update_snippets_in_konsist_documentation")
 
     script_path = "scripts/deploy_snippets_to_konsist_documentation_repo.py"
 
