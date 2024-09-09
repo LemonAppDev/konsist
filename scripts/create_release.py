@@ -881,43 +881,43 @@ def update_snippets_in_konsist_documentation():
         print_error_message(f"Error occurred while running {script_path}: {e}")
 
 def create_release():
-    check_for_uncommitted_changes()
-
-    chosen_option = choose_release_option()
-
-    if chosen_option == 1:
-        change_branch_to_develop_and_and_merge_main()
-        base_branch = "develop"
-    else:
-        change_branch_to_main()
-        base_branch = "main"
-
-    old_konsist_version = get_old_konsist_version()
-    new_konsist_version = get_new_konsist_version(chosen_option, old_konsist_version)
-
-    check_for_uncommitted_changes()
-
-    release_branch_title = create_release_branch(new_konsist_version, base_branch)
-
-    replace_konsist_version(old_konsist_version, new_konsist_version, files_with_version_to_change)
-
-    check_if_exist_files_with_deprecated_annotation(api_directory, new_konsist_version)
-
-    test_3rd_party_projects_using_local_artifacts(old_konsist_version, new_konsist_version)
-
-    create_pull_request_to_main(new_konsist_version)
-
-    check_github_checks(release_branch_title)
-
-    merge_release_pr(release_branch_title)
-
-    create_github_release(new_konsist_version)
-
-    update_version_in_konsist_documentation(konsist_documentation_repository_address, old_konsist_version, new_konsist_version)
-
-    update_snippets_in_konsist_documentation()
-
-    change_branch_to_develop_and_and_merge_main()
+    # check_for_uncommitted_changes()
+    #
+    # chosen_option = choose_release_option()
+    #
+    # if chosen_option == 1:
+    #     change_branch_to_develop_and_and_merge_main()
+    #     base_branch = "develop"
+    # else:
+    #     change_branch_to_main()
+    #     base_branch = "main"
+    #
+    # old_konsist_version = get_old_konsist_version()
+    # new_konsist_version = get_new_konsist_version(chosen_option, old_konsist_version)
+    #
+    # check_for_uncommitted_changes()
+    #
+    # release_branch_title = create_release_branch(new_konsist_version, base_branch)
+    #
+    # replace_konsist_version(old_konsist_version, new_konsist_version, files_with_version_to_change)
+    #
+    # check_if_exist_files_with_deprecated_annotation(api_directory, new_konsist_version)
+    #
+    # test_3rd_party_projects_using_local_artifacts(old_konsist_version, new_konsist_version)
+    #
+    # create_pull_request_to_main(new_konsist_version)
+    #
+    check_github_checks("KON-631-write-a-script-to-create-release")
+    #
+    # merge_release_pr(release_branch_title)
+    #
+    # create_github_release(new_konsist_version)
+    #
+    # update_version_in_konsist_documentation(konsist_documentation_repository_address, old_konsist_version, new_konsist_version)
+    #
+    # update_snippets_in_konsist_documentation()
+    #
+    # change_branch_to_develop_and_and_merge_main()
 
 # Script ===============================================================================================================
 create_release()
