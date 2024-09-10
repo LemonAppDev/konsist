@@ -69,7 +69,7 @@ jobs:
       - name: Run Python Script With Changed .ktdoc Files
         if: contains(needs.get-github-context.outputs.all_changed_files, '.ktdoc')
         run: |
-          ktdoc_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.ktdoc$' || true)
+          ktdoc_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.ktdoc$')
           if [ -n "$ktdoc_files" ]; then
             echo "$ktdoc_files"
             echo "CHANGED_FILES_NAMES=$(echo "$ktdoc_files" | tr '\n' ' ')" >> $GITHUB_ENV

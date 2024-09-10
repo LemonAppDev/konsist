@@ -69,7 +69,7 @@ jobs:
       - name: Run Python Script With Changed .kttest Files
         if: contains(needs.get-github-context.outputs.all_changed_files, '.kttest')
         run: |
-          kttest_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttest$' || true)
+          kttest_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttest$')
           if [ -n "$kttest_files" ]; then
             temp_file=$(mktemp)
             echo "$kttest_files" > "$temp_file"
