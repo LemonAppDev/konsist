@@ -33,7 +33,7 @@ class AndroidSnippets {
     fun `'Repository' classes should reside in 'repository' package`() {
         Konsist
             .scopeFromProject()
-            .classes()
+            .classes
             .withNameEndingWith("Repository")
             .assertTrue { it.resideInPackage("..repository..") }
     }
