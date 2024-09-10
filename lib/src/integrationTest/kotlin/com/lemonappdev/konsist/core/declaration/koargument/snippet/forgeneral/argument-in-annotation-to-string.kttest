@@ -1,5 +1,5 @@
 import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
 
 @SampleAnnotationWithParameter(sampleParameter = "text")
-fun sampleFunction {
+fun sampleFunction() {
 }
