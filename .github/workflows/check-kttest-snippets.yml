@@ -78,7 +78,7 @@ jobs:
           if [ -n "$TEMP_FILE" ]; then
             python3 scripts/check_kttest_snippets.py "$TEMP_FILE"
           else
-            echo "No changed .kttest files to process."
+            python3 scripts/check_kttest_snippets.py -all
           fi
         env:
           TEMP_FILE: ${{ env.TEMP_FILE }}
