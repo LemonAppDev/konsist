@@ -135,6 +135,14 @@ internal class KoFunctionDeclarationCore private constructor(
     override val isTopLevel: Boolean
         get() = super<KoIsTopLevelProviderCore>.isTopLevel
 
+    override val fullyQualifiedName: String? by lazy {
+        if (this.isTopLevel) {
+            super.fullyQualifiedName
+        } else {
+            null
+        }
+    }
+
     override fun toString(): String = name
 
     internal companion object {

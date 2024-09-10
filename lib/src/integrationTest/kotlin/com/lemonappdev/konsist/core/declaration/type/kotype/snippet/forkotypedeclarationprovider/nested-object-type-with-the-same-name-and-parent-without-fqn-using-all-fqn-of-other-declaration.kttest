@@ -1,0 +1,11 @@
+package com.samplepackage
+
+interface FirstInterface {
+    fun method(arg: SampleNestedObjectWithTheSameName)
+    object SampleNestedObjectWithTheSameName
+}
+
+interface SecondInterface {
+    fun method(arg: com.samplepackage.FirstInterface.SampleNestedObjectWithTheSameName)
+    object SampleNestedObjectWithTheSameName
+}

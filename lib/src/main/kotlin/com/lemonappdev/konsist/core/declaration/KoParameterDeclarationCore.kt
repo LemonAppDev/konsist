@@ -16,7 +16,6 @@ import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoNonNullableTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
-import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
@@ -50,7 +49,6 @@ internal class KoParameterDeclarationCore private constructor(
     KoPathProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore,
-    KoRepresentsTypeProviderCore,
     KoResideInPackageProviderCore,
     KoTextProviderCore,
     KoNonNullableTypeProviderCore,
@@ -78,7 +76,7 @@ internal class KoParameterDeclarationCore private constructor(
             ?: throw KoInternalException("Class type cannot be null")
     }
 
-    override fun representsType(name: String?): Boolean = type.name == name // todo: add this?: || type.fullyQualifiedName == name
+    override fun representsType(name: String?): Boolean = type.name == name
 
     override val hasValModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "val" }
 

@@ -9,6 +9,9 @@ import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifiers
+import com.lemonappdev.konsist.api.ext.list.parameters
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.externalsample.SampleExternalClass
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleInterface
@@ -32,6 +35,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
         fileName: String,
         instanceOf: KClass<*>,
         notInstanceOf: KClass<*>,
+        fqn: String?,
     ) {
         // given
         val sut =
@@ -47,6 +51,111 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
         assertSoftly(sut) {
             it?.declaration shouldBeInstanceOf instanceOf
             it?.declaration shouldNotBeInstanceOf notInstanceOf
+            (it?.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideNestedDeclarationsWithParentsWithoutFullyQualifiedName")
+    fun `source declaration when nested declaration names are the same and parent has no fqn`(
+        fileName: String,
+        instanceOf: KClass<*>,
+        notInstanceOf: KClass<*>,
+        fqn: String?,
+    ) {
+        // given
+        val sut =
+            getSnippetFile(fileName)
+                .functions()
+                .last()
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf instanceOf
+            declaration shouldNotBeInstanceOf notInstanceOf
+            (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideNestedDeclarationsWithParentsWithFullyQualifiedName")
+    fun `source declaration when nested declaration names are the same and parent has fqn`(
+        fileName: String,
+        instanceOf: KClass<*>,
+        notInstanceOf: KClass<*>,
+        fqn: String?,
+    ) {
+        // given
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .withoutModifiers()
+                .last()
+                .constructors
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf instanceOf
+            declaration shouldNotBeInstanceOf notInstanceOf
+            (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideNestedDeclarationsWithParentsWithoutFullyQualifiedNameDifferentCombinations")
+    fun `source declaration when nested declaration names are the same and parent has no fqn - different combinations`(
+        fileName: String,
+        instanceOf: KClass<*>,
+        notInstanceOf: KClass<*>,
+        fqn: String?,
+    ) {
+        // given
+        val sut =
+            getSnippetFile(fileName)
+                .functions()
+                .last()
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf instanceOf
+            declaration shouldNotBeInstanceOf notInstanceOf
+            (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideNestedDeclarationsWithParentsWithFullyQualifiedNameDifferentCombinations")
+    fun `source declaration when nested declaration names are the same and parent has fqn - different combinations`(
+        fileName: String,
+        instanceOf: KClass<*>,
+        notInstanceOf: KClass<*>,
+        fqn: String?,
+    ) {
+        // given
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .withoutModifiers()
+                .last()
+                .constructors
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf instanceOf
+            declaration shouldNotBeInstanceOf notInstanceOf
+            (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
         }
     }
 
@@ -976,49 +1085,363 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
-            "core/declaration/type/kotype/snippet/forkosourcedeclarationprovider/",
+            "core/declaration/type/kotype/snippet/forkotypedeclarationprovider/",
             fileName,
         )
 
     companion object {
-        @Suppress("unused")
+        @Suppress("unused", "detekt.LongMethod")
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("nullable-kotlin-basic-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
-                arguments("not-nullable-kotlin-basic-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
-                arguments("nullable-kotlin-collection-type", KoKotlinTypeDeclaration::class, KoClassDeclaration::class),
+                arguments(
+                    "nullable-kotlin-basic-type",
+                    KoKotlinTypeDeclaration::class,
+                    KoClassDeclaration::class,
+                    "kotlin.String",
+                ),
+                arguments(
+                    "not-nullable-kotlin-basic-type",
+                    KoKotlinTypeDeclaration::class,
+                    KoClassDeclaration::class,
+                    "kotlin.String",
+                ),
+                arguments(
+                    "nullable-kotlin-collection-type",
+                    KoKotlinTypeDeclaration::class,
+                    KoClassDeclaration::class,
+                    "kotlin.collections.List",
+                ),
                 arguments(
                     "not-nullable-kotlin-collection-type",
                     KoKotlinTypeDeclaration::class,
                     KoClassDeclaration::class,
+                    "kotlin.collections.List",
                 ),
-                arguments("nullable-class-type", KoClassDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("not-nullable-class-type", KoClassDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("nullable-interface-type", KoInterfaceDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("not-nullable-interface-type", KoInterfaceDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("nullable-object-type", KoObjectDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("not-nullable-object-type", KoObjectDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("nullable-function-type", KoFunctionTypeDeclaration::class, KoKotlinTypeDeclaration::class),
+                arguments(
+                    "nullable-class-type",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.lemonappdev.konsist.testdata.SampleType",
+                ),
+                arguments(
+                    "not-nullable-class-type",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.lemonappdev.konsist.testdata.SampleType",
+                ),
+                arguments(
+                    "nullable-interface-type",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.lemonappdev.konsist.testdata.SampleInterface",
+                ),
+                arguments(
+                    "not-nullable-interface-type",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.lemonappdev.konsist.testdata.SampleInterface",
+                ),
+                arguments(
+                    "nullable-object-type",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.lemonappdev.konsist.testdata.SampleObject",
+                ),
+                arguments(
+                    "not-nullable-object-type",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.lemonappdev.konsist.testdata.SampleObject",
+                ),
+                arguments(
+                    "nullable-function-type",
+                    KoFunctionTypeDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    null,
+                ),
                 arguments(
                     "not-nullable-function-type",
                     KoFunctionTypeDeclaration::class,
                     KoKotlinTypeDeclaration::class,
+                    null,
                 ),
                 arguments(
                     "nullable-import-alias-type",
                     KoImportAliasDeclaration::class,
                     KoKotlinTypeDeclaration::class,
+                    null,
                 ),
                 arguments(
                     "not-nullable-import-alias-type",
                     KoImportAliasDeclaration::class,
                     KoKotlinTypeDeclaration::class,
+                    null,
                 ),
-                arguments("nullable-typealias-type", KoTypeAliasDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("not-nullable-typealias-type", KoTypeAliasDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("nullable-external-type", KoExternalDeclaration::class, KoKotlinTypeDeclaration::class),
-                arguments("not-nullable-external-type", KoExternalDeclaration::class, KoKotlinTypeDeclaration::class),
+                arguments(
+                    "nullable-typealias-type",
+                    KoTypeAliasDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.lemonappdev.konsist.testdata.SampleTypeAlias",
+                ),
+                arguments(
+                    "not-nullable-typealias-type",
+                    KoTypeAliasDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "SampleTypeAlias",
+                ),
+                arguments(
+                    "nullable-external-type",
+                    KoExternalDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.lemonappdev.konsist.externalsample.SampleExternalClass",
+                ),
+                arguments(
+                    "not-nullable-external-type",
+                    KoExternalDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.lemonappdev.konsist.externalsample.SampleExternalClass",
+                ),
+            )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideNestedDeclarationsWithParentsWithoutFullyQualifiedName() =
+            listOf(
+                arguments(
+                    "nullable-nested-class-type-with-the-same-name-and-parent-without-fqn",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "SecondInterface.SampleNestedClassWithTheSameName",
+                ),
+                arguments(
+                    "not-nullable-nested-class-type-with-the-same-name-and-parent-without-fqn",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "SecondInterface.SampleNestedClassWithTheSameName",
+                ),
+                arguments(
+                    "nullable-nested-interface-type-with-the-same-name-and-parent-without-fqn",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "SecondInterface.SampleNestedInterfaceWithTheSameName",
+                ),
+                arguments(
+                    "not-nullable-nested-interface-type-with-the-same-name-and-parent-without-fqn",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "SecondInterface.SampleNestedInterfaceWithTheSameName",
+                ),
+                arguments(
+                    "nullable-nested-object-type-with-the-same-name-and-parent-without-fqn",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "SecondInterface.SampleNestedObjectWithTheSameName",
+                ),
+                arguments(
+                    "not-nullable-nested-object-type-with-the-same-name-and-parent-without-fqn",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "SecondInterface.SampleNestedObjectWithTheSameName",
+                ),
+            )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideNestedDeclarationsWithParentsWithFullyQualifiedName() =
+            listOf(
+                arguments(
+                    "nullable-nested-class-type-with-the-same-name-and-parent-with-fqn",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "SecondInterface.SampleNestedClassWithTheSameName",
+                ),
+                arguments(
+                    "not-nullable-nested-class-type-with-the-same-name-and-parent-with-fqn",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "SecondInterface.SampleNestedClassWithTheSameName",
+                ),
+                arguments(
+                    "nullable-nested-interface-type-with-the-same-name-and-parent-with-fqn",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "SecondInterface.SampleNestedInterfaceWithTheSameName",
+                ),
+                arguments(
+                    "not-nullable-nested-interface-type-with-the-same-name-and-parent-with-fqn",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "SecondInterface.SampleNestedInterfaceWithTheSameName",
+                ),
+                arguments(
+                    "nullable-nested-object-type-with-the-same-name-and-parent-with-fqn",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "SecondInterface.SampleNestedObjectWithTheSameName",
+                ),
+                arguments(
+                    "not-nullable-nested-object-type-with-the-same-name-and-parent-with-fqn",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "SecondInterface.SampleNestedObjectWithTheSameName",
+                ),
+            )
+
+        @Suppress("unused", "detekt.LongMethod")
+        @JvmStatic
+        fun provideNestedDeclarationsWithParentsWithoutFullyQualifiedNameDifferentCombinations() =
+            listOf(
+                arguments(
+                    "nested-class-type-with-the-same-name-and-parent-without-fqn-using-all-fqn",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.SecondInterface.SampleNestedClassWithTheSameName",
+                ),
+                arguments(
+                    "nested-class-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.SecondInterface.SampleNestedClassWithTheSameName",
+                ),
+                arguments(
+                    "nested-class-type-with-the-same-name-and-parent-without-fqn-using-all-fqn-of-other-declaration",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedClassWithTheSameName",
+                ),
+                arguments(
+                    "nested-class-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn-of-other-declaration",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedClassWithTheSameName",
+                ),
+                arguments(
+                    "nested-interface-type-with-the-same-name-and-parent-without-fqn-using-all-fqn",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.SecondInterface.SampleNestedInterfaceWithTheSameName",
+                ),
+                arguments(
+                    "nested-interface-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.SecondInterface.SampleNestedInterfaceWithTheSameName",
+                ),
+                arguments(
+                    "nested-interface-type-with-the-same-name-and-parent-without-fqn-using-all-fqn-of-other-declaration",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedInterfaceWithTheSameName",
+                ),
+                arguments(
+                    "nested-interface-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn-of-other-declaration",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedInterfaceWithTheSameName",
+                ),
+                arguments(
+                    "nested-object-type-with-the-same-name-and-parent-without-fqn-using-all-fqn",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.SecondInterface.SampleNestedObjectWithTheSameName",
+                ),
+                arguments(
+                    "nested-object-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.SecondInterface.SampleNestedObjectWithTheSameName",
+                ),
+                arguments(
+                    "nested-object-type-with-the-same-name-and-parent-without-fqn-using-all-fqn-of-other-declaration",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedObjectWithTheSameName",
+                ),
+                arguments(
+                    "nested-object-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn-of-other-declaration",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedObjectWithTheSameName",
+                ),
+            )
+
+        @Suppress("unused", "detekt.LongMethod")
+        @JvmStatic
+        fun provideNestedDeclarationsWithParentsWithFullyQualifiedNameDifferentCombinations() =
+            listOf(
+                arguments(
+                    "nested-class-type-with-the-same-name-and-parent-with-fqn-using-all-fqn",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.SecondInterface.SampleNestedClassWithTheSameName",
+                ),
+                arguments(
+                    "nested-class-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.SecondInterface.SampleNestedClassWithTheSameName",
+                ),
+                arguments(
+                    "nested-class-type-with-the-same-name-and-parent-with-fqn-using-all-fqn-of-other-declaration",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedClassWithTheSameName",
+                ),
+                arguments(
+                    "nested-class-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn-of-other-declaration",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedClassWithTheSameName",
+                ),
+                arguments(
+                    "nested-interface-type-with-the-same-name-and-parent-with-fqn-using-all-fqn",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.SecondInterface.SampleNestedInterfaceWithTheSameName",
+                ),
+                arguments(
+                    "nested-interface-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.SecondInterface.SampleNestedInterfaceWithTheSameName",
+                ),
+                arguments(
+                    "nested-interface-type-with-the-same-name-and-parent-with-fqn-using-all-fqn-of-other-declaration",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedInterfaceWithTheSameName",
+                ),
+                arguments(
+                    "nested-interface-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn-of-other-declaration",
+                    KoInterfaceDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedInterfaceWithTheSameName",
+                ),
+                arguments(
+                    "nested-object-type-with-the-same-name-and-parent-with-fqn-using-all-fqn",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.SecondInterface.SampleNestedObjectWithTheSameName",
+                ),
+                arguments(
+                    "nested-object-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.SecondInterface.SampleNestedObjectWithTheSameName",
+                ),
+                arguments(
+                    "nested-object-type-with-the-same-name-and-parent-with-fqn-using-all-fqn-of-other-declaration",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedObjectWithTheSameName",
+                ),
+                arguments(
+                    "nested-object-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn-of-other-declaration",
+                    KoObjectDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    "com.samplepackage.FirstInterface.SampleNestedObjectWithTheSameName",
+                ),
             )
     }
 }

@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
@@ -9,9 +10,10 @@ import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
 import com.lemonappdev.konsist.core.exception.KoInternalException
-import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
@@ -21,16 +23,25 @@ internal interface KoTypeDeclarationProviderCore :
     KoTypeDeclarationProvider,
     KoBaseProviderCore,
     KoContainingFileProviderCore,
+    KoContainingDeclarationProviderCore,
     KoTypeProviderCore {
     val ktTypeReference: KtTypeReference
     override val declaration: KoBaseTypeDeclaration
-        get() =
-            TypeUtil.getBasicType(
+        get() {
+            return TypeUtil.getBasicType(
                 listOf(ktTypeReference),
                 ktTypeReference.isExtensionDeclaration(),
-                castToKoBaseDeclaration(),
+                getDeclarationWithFqn(containingDeclaration) ?: containingDeclaration,
                 containingFile,
             ) ?: throw KoInternalException("Source declaration cannot be a null")
+        }
+
+    private fun getDeclarationWithFqn(declaration: KoBaseDeclaration): KoBaseDeclaration? =
+        when {
+            declaration is KoFullyQualifiedNameProvider && declaration.fullyQualifiedName != null -> declaration
+            declaration is KoContainingDeclarationProvider -> getDeclarationWithFqn(declaration.containingDeclaration)
+            else -> null
+        }
 
     override fun asClassDeclaration(): KoClassDeclaration? = declaration as? KoClassDeclaration
 

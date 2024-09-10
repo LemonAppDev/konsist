@@ -11,7 +11,7 @@ internal interface KoFullyQualifiedNameProviderCore :
     val textUsedToFqn: String
         get() = name
 
-    override val fullyQualifiedName: String
+    override val fullyQualifiedName: String?
         get() {
             var fqn =
                 containingFile

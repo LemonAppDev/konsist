@@ -38,51 +38,57 @@ fun getClass(
     fqn: String?,
     isAlias: Boolean = false,
     containingFile: KoFileDeclaration,
-): KoClassDeclaration? =
-    DataCore
-        .classes
-        .firstOrNull { decl ->
-            val declarationQualifiedName = if (fqn?.endsWith(name) == true || isAlias) fqn else "$fqn.$name"
+): KoClassDeclaration? {
+    val declarationQualifiedName = if (fqn?.endsWith(name) == true || isAlias) fqn else "$fqn.$name"
 
-            decl.fullyQualifiedName == declarationQualifiedName
-        }
+    return DataCore
+        .classes
+        .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
+        ?: containingFile
+            .classes()
+            .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
         ?: containingFile
             .classes()
             .firstOrNull { decl -> decl.name == name }
+}
 
 fun getInterface(
     name: String,
     fqn: String?,
     isAlias: Boolean,
     containingFile: KoFileDeclaration,
-): KoInterfaceDeclaration? =
-    DataCore
-        .interfaces
-        .firstOrNull { decl ->
-            val declarationQualifiedName = if (fqn?.endsWith(name) == true || isAlias) fqn else "$fqn.$name"
+): KoInterfaceDeclaration? {
+    val declarationQualifiedName = if (fqn?.endsWith(name) == true || isAlias) fqn else "$fqn.$name"
 
-            decl.fullyQualifiedName == declarationQualifiedName
-        }
+    return DataCore
+        .interfaces
+        .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
+        ?: containingFile
+            .interfaces()
+            .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
         ?: containingFile
             .interfaces()
             .firstOrNull { decl -> decl.name == name }
+}
 
 fun getObject(
     name: String,
     fqn: String?,
     isAlias: Boolean,
     containingFile: KoFileDeclaration,
-): KoObjectDeclaration? =
-    DataCore
-        .objects
-        .firstOrNull { decl ->
-            val declarationQualifiedName = if (fqn?.endsWith(name) == true || isAlias) fqn else "$fqn.$name"
+): KoObjectDeclaration? {
+    val declarationQualifiedName = if (fqn?.endsWith(name) == true || isAlias) fqn else "$fqn.$name"
 
-            decl.fullyQualifiedName == declarationQualifiedName
-        }
+    return DataCore
+        .objects
+        .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
+        ?: containingFile
+            .objects()
+            .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
         ?: containingFile
             .objects()
             .firstOrNull { decl -> decl.name == name }
+}
 
 fun getTypeAlias(
     name: String,
