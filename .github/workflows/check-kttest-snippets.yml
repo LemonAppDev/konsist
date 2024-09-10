@@ -80,5 +80,5 @@ jobs:
 
       - name: Run Python Script for All Files
         run: |
-          python3 scripts/check_kttest_snippets.py -all
+          python3 scripts/check_kttest_snippets.py
         if: "!contains(needs.get-github-context.outputs.all_changed_files, '.kttest')"
