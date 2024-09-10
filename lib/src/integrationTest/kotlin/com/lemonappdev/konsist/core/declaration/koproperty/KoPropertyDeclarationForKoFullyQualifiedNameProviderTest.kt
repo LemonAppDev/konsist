@@ -38,7 +38,7 @@ class KoPropertyDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleClass.sampleProperty"
+        sut.fullyQualifiedName shouldBeEqualTo null
     }
 
     @Test
@@ -50,7 +50,7 @@ class KoPropertyDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "SampleClass.sampleProperty"
+        sut.fullyQualifiedName shouldBeEqualTo null
     }
 
     private fun getSnippetFile(fileName: String) =

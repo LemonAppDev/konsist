@@ -1,7 +1,9 @@
 package com.lemonappdev.konsist.core.declaration.koparameter
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import org.amshove.kluent.shouldNotBeEqualTo
+import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
+import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
 
 class KoParameterDeclarationForKoContainingDeclarationProviderTest {
@@ -17,7 +19,7 @@ class KoParameterDeclarationForKoContainingDeclarationProviderTest {
                 ?.first()
 
         // then
-        sut?.containingDeclaration shouldNotBeEqualTo null
+        sut?.containingDeclaration?.shouldBeInstanceOf(KoClassDeclaration::class)
     }
 
     @Test
@@ -31,7 +33,7 @@ class KoParameterDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldNotBeEqualTo null
+        sut.containingDeclaration.shouldBeInstanceOf(KoFunctionDeclaration::class)
     }
 
     private fun getSnippetFile(fileName: String) =

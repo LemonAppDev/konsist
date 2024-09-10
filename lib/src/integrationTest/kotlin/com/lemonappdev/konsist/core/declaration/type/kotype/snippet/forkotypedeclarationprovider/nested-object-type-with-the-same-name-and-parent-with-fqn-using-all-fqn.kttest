@@ -1,0 +1,11 @@
+package com.samplepackage
+
+interface FirstInterface {
+    class NestedClass(val arg: SampleNestedObjectWithTheSameName)
+    object SampleNestedObjectWithTheSameName
+}
+
+interface SecondInterface {
+    class NestedClass(val arg: com.samplepackage.SecondInterface.SampleNestedObjectWithTheSameName)
+    object SampleNestedObjectWithTheSameName
+}
