@@ -62,24 +62,18 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
-      - name: Filter Changed .ktdoc Files
+      - name: Run Python Script for All Files
+        if: "!contains(needs.get-github-context.outputs.all_changed_files, '.ktdoc')"
+        run: python3 scripts/check_ktdoc_snippets.py -all
+
+      - name: Run Python Script With Changed .ktdoc Files
+        if: contains(needs.get-github-context.outputs.all_changed_files, '.ktdoc')
         run: |
           ktdoc_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.ktdoc$' || true)
           if [ -n "$ktdoc_files" ]; then
-            temp_file=$(mktemp)
-            echo "$ktdoc_files" > "$temp_file"
-            echo "TEMP_FILE=$temp_file" >> $GITHUB_ENV
-          else
-            echo "No .ktdoc files changed."
-          fi
-
-      - name: Run Python Script With Changed .ktdoc Files
-        run: |
-          if [ -n "$TEMP_FILE" ]; then
-            python3 scripts/check_ktdoc_snippets.py "$TEMP_FILE"
-          else
-            echo "No changed .ktdoc files to process."
+            echo "$ktdoc_files"
+            echo "CHANGED_FILES_NAMES=$(echo "$ktdoc_files" | tr '\n' ' ')" >> $GITHUB_ENV
+            python3 scripts/check_ktdoc_snippets.py $CHANGED_FILES_NAMES
           fi
         env:
-          TEMP_FILE: ${{ env.TEMP_FILE }}
-
+          CHANGED_FILES_NAMES: ${{ env.CHANGED_FILES_NAMES }}
