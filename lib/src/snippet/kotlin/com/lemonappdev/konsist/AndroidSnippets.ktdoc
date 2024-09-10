@@ -22,7 +22,7 @@ class AndroidSnippets {
     fun `Every 'ViewModel' public property has 'Flow' type`() {
         Konsist
             .scopeFromProject()
-            .classes()
+            .classes
             .withParentClassOf(ViewModel::class)
             .properties()
             .assertTrue {
