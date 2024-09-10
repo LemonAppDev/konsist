@@ -75,10 +75,10 @@ jobs:
 
       - name: Run Python Script With Changed .kttest Files
         run: |
-          if [ -n "$TEMP_FILE" ]; then
-            python3 scripts/check_kttest_snippets.py "$TEMP_FILE"
-          else
-            python3 scripts/check_kttest_snippets.py -all
-          fi
-        env:
-          TEMP_FILE: ${{ env.TEMP_FILE }}
+          python3 scripts/check_kttest_snippets.py "${{ env.TEMP_FILE }}"
+        if: contains(needs.get-github-context.outputs.all_changed_files, '.kttest')
+
+      - name: Run Python Script for All Files
+        run: |
+          python3 scripts/check_kttest_snippets.py -all
+        if: "!contains(needs.get-github-context.outputs.all_changed_files, '.kttest')"
