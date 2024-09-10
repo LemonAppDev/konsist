@@ -70,14 +70,22 @@ internal object KoFileDeclarationProvider {
                             .map { async { parseKotlinFile(it) } }
                             .toList()
                             .awaitAll()
+                            .filterNotNull()
                     }.also { createKoFilesDeclarationDeferred = it }
                 }
 
             currentDeferred.await()
         }
 
-    private suspend fun parseKotlinFile(it: File): KoFileDeclaration =
-        coroutineScope {
-            async { it.toKoFile() }.await()
+    private fun parseKotlinFile(file: File): KoFileDeclaration? {
+        // We need to check whether the file is still a Kotlin file before parsing it.
+        // Since this is ran async, the file may have been removed/changed since the initial
+        // file tree walk above. A common scenario is via code generators. Since we don't
+        // exclude build or generated files here (that happens later), we need to make the initial
+        // loading more permissive, and return null for files which disappear.
+        return when {
+            file.isKotlinFile -> file.toKoFile()
+            else -> null
         }
+    }
 }
