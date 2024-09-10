@@ -63,7 +63,7 @@ jobs:
           distribution: 'corretto'
 
       - name: Run Python Script for All Files
-        if: "!contains(needs.get-github-context.outputs.all_changed_files, '.ktdoc')"
+        if: needs.get-github-context.outputs.base_ref_branch == 'main' || startsWith(needs.get-github-context.outputs.current_branch, 'release/')
         run: python3 scripts/check_ktdoc_snippets.py -all
 
       - name: Run Python Script With Changed .ktdoc Files
