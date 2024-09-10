@@ -62,18 +62,19 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
+      - name: Run Python Script for All Files
+        if: needs.get-github-context.outputs.base_ref_branch == 'main' || startsWith(needs.get-github-context.outputs.current_branch, 'release/')
+        run: python3 scripts/check_ktdoc_snippets.py -all
+
       - name: Filter Changed .ktdoc Files
+        if: contains(needs.get-github-context.outputs.all_changed_files, '.ktdoc')
         run: |
           ktdoc_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.ktdoc$')
           echo "$ktdoc_files"
           echo "CHANGED_FILES_NAMES=$(echo "$ktdoc_files" | tr '\n' ' ')" >> $GITHUB_ENV
 
       - name: Run Python Script With Changed .ktdoc Files
-        run: |
-          if [ -n "$CHANGED_FILES_NAMES" ]; then
-            python3 scripts/check_ktdoc_snippets.py ${{ env.CHANGED_FILES_NAMES }}
-          else
-            echo "No changed .kttest files to process."
-          fi
+        if: contains(needs.get-github-context.outputs.all_changed_files, '.ktdoc')
+        run: python3 scripts/check_ktdoc_snippets.py ${{ env.CHANGED_FILES_NAMES }}
         env:
           CHANGED_FILES_NAMES: ${{ env.CHANGED_FILES_NAMES }}

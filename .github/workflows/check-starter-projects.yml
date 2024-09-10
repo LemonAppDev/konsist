@@ -52,6 +52,12 @@ jobs:
     name: Android Gradle Groovy Junit 4
     needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
 
     steps:
       - name: Checkout

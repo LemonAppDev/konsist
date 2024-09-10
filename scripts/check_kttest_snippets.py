@@ -200,27 +200,32 @@ if __name__ == '__main__':
 
     # Check if command line arguments are provided
     if len(sys.argv) > 1:
-        # Extract input file paths from command line arguments
-        input_files = sys.argv[1:]
-
-        # Check if the input files are valid
-        temp_files = [f for f in input_files if os.path.isfile(f)]
-        kttest_files = [f for f in input_files if f.endswith('.kttest')]
-
-        # If multiple temporary files are provided, raise an exception
-        if len(temp_files) > 1:
-            raise Exception("Multiple temporary files provided. Only one is allowed.")
-        # If a single temporary file is provided, read its contents
-        elif len(temp_files) == 1:
-            with open(temp_files[0], 'r') as file:
-                kotlin_kttest_temp_files = [line.strip() for line in file.readlines()]
-        # If .kttest files are provided, use them
-        elif kttest_files:
-            kotlin_kttest_temp_files = kttest_files
+        # If '-all' is provided, execute specific logic
+        if '-all' in sys.argv[1:]:
+            print("All kttest files will be checked")
+            kotlin_kttest_temp_files = get_all_kttest_files()
         else:
-            # No valid input files provided
-            print("No valid input files provided")
-            sys.exit(1)
+            # Extract input file paths from command line arguments
+            input_files = sys.argv[1:]
+
+            # Check if the input files are valid
+            temp_files = [f for f in input_files if os.path.isfile(f)]
+            kttest_files = [f for f in input_files if f.endswith('.kttest')]
+
+            # If multiple temporary files are provided, raise an exception
+            if len(temp_files) > 1:
+                raise Exception("Multiple temporary files provided. Only one is allowed.")
+            # If a single temporary file is provided, read its contents
+            elif len(temp_files) == 1:
+                with open(temp_files[0], 'r') as file:
+                    kotlin_kttest_temp_files = [line.strip() for line in file.readlines()]
+            # If .kttest files are provided, use them
+            elif kttest_files:
+                kotlin_kttest_temp_files = kttest_files
+            else:
+                # No valid input files provided
+                print("No valid input files provided")
+                sys.exit(1)
     else:
         # No files provided
         print("No files provided")

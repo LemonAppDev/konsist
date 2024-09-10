@@ -62,7 +62,12 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
+      - name: Run Python Script for All Files
+        if: needs.get-github-context.outputs.base_ref_branch == 'main' || startsWith(needs.get-github-context.outputs.current_branch, 'release/')
+        run: python3 scripts/check_kttest_snippets.py -all
+
       - name: Filter Changed .kttest Files
+        if: contains(needs.get-github-context.outputs.all_changed_files, '.kttest')
         run: |
           kttest_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttest$')
           if [ -n "$kttest_files" ]; then
@@ -72,11 +77,7 @@ jobs:
           fi
 
       - name: Run Python Script With Changed .kttest Files
-        run: |
-          if [ -n "$TEMP_FILE" ]; then
-            python3 scripts/check_kttest_snippets.py "$TEMP_FILE"
-          else
-            echo "No changed .kttest files to process."
-          fi
+        if: contains(needs.get-github-context.outputs.all_changed_files, '.kttest')
+        run: python3 scripts/check_kttest_snippets.py "$TEMP_FILE"
         env:
           TEMP_FILE: ${{ env.TEMP_FILE }}
