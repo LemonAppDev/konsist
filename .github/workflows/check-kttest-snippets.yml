@@ -74,7 +74,7 @@ jobs:
             temp_file=$(mktemp)
             echo "$kttest_files" > "$temp_file"
             echo "TEMP_FILE=$temp_file" >> $GITHUB_ENV
-            python3 scripts/check_kttest_snippets.py "$TEMP_FILE"
+            python3 scripts/check_kttest_snippets.py ${{ env.TEMP_FILE }}
           fi
         env:
           TEMP_FILE: ${{ env.TEMP_FILE }}

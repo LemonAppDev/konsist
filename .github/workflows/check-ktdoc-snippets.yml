@@ -73,7 +73,7 @@ jobs:
           if [ -n "$ktdoc_files" ]; then
             echo "$ktdoc_files"
             echo "CHANGED_FILES_NAMES=$(echo "$ktdoc_files" | tr '\n' ' ')" >> $GITHUB_ENV
-            python3 scripts/check_ktdoc_snippets.py $CHANGED_FILES_NAMES
+            python3 scripts/check_ktdoc_snippets.py ${{ env.CHANGED_FILES_NAMES }}
           fi
         env:
           CHANGED_FILES_NAMES: ${{ env.CHANGED_FILES_NAMES }}
