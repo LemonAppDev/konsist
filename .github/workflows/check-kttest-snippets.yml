@@ -66,7 +66,7 @@ jobs:
         if: needs.get-github-context.outputs.base_ref_branch == 'main' || startsWith(needs.get-github-context.outputs.current_branch, 'release/')
         run: python3 scripts/check_kttest_snippets.py -all
 
-      - name: Run Python Script With Changed .kttest Files
+      - name: Filter Changed .kttest Files
         if: contains(needs.get-github-context.outputs.all_changed_files, '.kttest')
         run: |
           kttest_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttest$')
@@ -74,7 +74,10 @@ jobs:
             temp_file=$(mktemp)
             echo "$kttest_files" > "$temp_file"
             echo "TEMP_FILE=$temp_file" >> $GITHUB_ENV
-            python3 scripts/check_kttest_snippets.py ${{ env.TEMP_FILE }}
           fi
+
+      - name: Run Python Script With Changed .kttest Files
+        if: contains(needs.get-github-context.outputs.all_changed_files, '.kttest')
+        run: python3 scripts/check_kttest_snippets.py "$TEMP_FILE"
         env:
           TEMP_FILE: ${{ env.TEMP_FILE }}
