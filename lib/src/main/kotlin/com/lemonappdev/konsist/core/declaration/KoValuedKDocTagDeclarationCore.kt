@@ -6,12 +6,12 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocTagValueProviderCore
 
 internal open class KoValuedKDocTagDeclarationCore(
-    override val name: KoKDocTag,
-    override val value: String,
-    override val description: String,
+    final override val name: KoKDocTag,
+    final override val value: String,
+    final override val description: String,
 ) : KoKDocTagDeclarationCore(name, description),
     KoValuedKDocTagDeclaration,
     KoKDocTagValueProviderCore,
     KoBaseProviderCore {
-    override fun toString(): String = name.type + " " + value + " " + description
+    final override fun toString(): String = name.type + " " + value + " " + description
 }
