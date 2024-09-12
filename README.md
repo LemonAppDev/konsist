@@ -94,9 +94,9 @@ fun `clean architecture layers have correct dependencies`() {
     
 Check out our [snippet](https://docs.konsist.lemonappdev.com/inspiration/snippets) page for a feast of examples!
     
-## Articles
+## Articles & Videos
 
-Read the [Konsist articles](https://docs.konsist.lemonappdev.com/getting-started/getting-started/articles) to gain valuable insights into best practices and strategies for maintaining consistency in your projects.
+Check the [videos & articles](https://docs.konsist.lemonappdev.com/getting-started/getting-started/articles).
 
 ## Star History
 
