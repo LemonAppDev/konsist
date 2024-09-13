@@ -35,5 +35,5 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.0")
 
     // Add Konsist dependency
-    testImplementation("com.lemonappdev:konsist:0.16.0")
+    testImplementation("com.lemonappdev:konsist:0.16.1")
 }
