@@ -1,8 +1,5 @@
 package com.lemonappdev.konsist.api
 
-import com.lemonappdev.konsist.api.ext.list.constructors
-import com.lemonappdev.konsist.api.ext.list.parameters
-import com.lemonappdev.konsist.api.ext.list.types
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withParameter
 import com.lemonappdev.konsist.api.ext.list.withProperty
@@ -12,7 +9,6 @@ import com.lemonappdev.konsist.api.ext.list.withoutNameMatching
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
-import com.lemonappdev.konsist.api.ext.provider.print
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 import com.lemonappdev.konsist.api.verify.assertFalse
@@ -22,19 +18,6 @@ import java.util.Locale
 
 class ApiKonsistTest {
     private val apiPackageScope = Konsist.scopeFromPackage("com.lemonappdev.konsist.api..", sourceSetName = "main")
-
-    @Test
-    fun `test`() {
-        Konsist
-            .scopeFromPackage("a.b..", sourceSetName = "main")
-            .classes()
-            .constructors
-            .parameters
-            .first()
-            .type
-            .asClassDeclaration()
-            ?.print { "@@@@@ $it" }
-    }
 
     @Test
     fun `every api declaration has explicit return type`() {
