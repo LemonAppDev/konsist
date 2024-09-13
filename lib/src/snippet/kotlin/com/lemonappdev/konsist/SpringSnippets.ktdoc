@@ -1,12 +1,18 @@
 package com.lemonappdev.konsist
 
+import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.functions
+import com.lemonappdev.konsist.api.ext.list.modifierprovider.withModifier
+import com.lemonappdev.konsist.api.ext.list.objects
 import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
+import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.springframework.stereotype.Repository
+import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.RestController
+import jakarta.persistence.Entity
 
 class SpringSnippets {
     fun `interfaces with 'Repository' annotation should have 'Repository' suffix`() {
@@ -59,6 +65,46 @@ class SpringSnippets {
             .functions()
             .assertFalse { function ->
                 function.hasReturnType { it.hasNameStartingWith("List") }
+            }
+    }
+
+    fun `Service classes should be annotated with Service annotation`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .withNameEndingWith("Service")
+            .assertTrue { it.hasAnnotationOf<Service>() }
+    }
+
+    fun `Entity classes should have an Id field`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .withAnnotationOf(Entity::class)
+            .assertTrue { clazz ->
+                clazz.properties().any { property ->
+                    property.hasAnnotation("Id")
+                }
+            }
+    }
+
+    fun `DTO classes should be data classes`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .withNameEndingWith("DTO")
+            .assertTrue { it.hasModifier(KoModifier.DATA) }
+    }
+
+    fun `RestControllers should not have state fields`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .withAnnotationOf(RestController::class)
+            .objects()
+            .withModifier(KoModifier.COMPANION)
+            .assertTrue {
+                it.properties().isEmpty()
             }
     }
 }
