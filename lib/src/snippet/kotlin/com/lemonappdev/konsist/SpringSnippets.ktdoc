@@ -73,7 +73,7 @@ class SpringSnippets {
             .scopeFromProject()
             .classes()
             .withNameEndingWith("Service")
-            .assertTrue { it.hasAnnotationOf<Service>() }
+            .assertTrue { it.hasAnnotationOf(Service::class) }
     }
 
     fun `Entity classes should have an Id field`() {
