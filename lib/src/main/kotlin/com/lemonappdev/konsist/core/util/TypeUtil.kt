@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.util
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.container.KoScope
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
@@ -103,15 +102,16 @@ object TypeUtil {
         fqn = fqn ?: declarationFqn
 
         if (fqn == null) {
-            val declarationsFqnFromPackage = containingFile
-                .packagee
-                ?.name
-                ?.let {
-                    Konsist
-                        .scopeFromPackage(it)
-                        .declarations()
-                        .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
-                }
+            val declarationsFqnFromPackage =
+                containingFile
+                    .packagee
+                    ?.name
+                    ?.let {
+                        Konsist
+                            .scopeFromPackage(it)
+                            .declarations()
+                            .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
+                    }
 
             fqn = declarationsFqnFromPackage
         }
@@ -144,20 +144,21 @@ object TypeUtil {
 
     private fun List<KoBaseDeclaration>.getDeclarationFullyQualifiedName(
         typeText: String?,
-        parentDeclaration: KoBaseDeclaration
+        parentDeclaration: KoBaseDeclaration,
     ): String? {
         val parentDeclFqn = (parentDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName.orEmpty()
 
-        val declarations = filterIsInstance<KoFullyQualifiedNameProvider>()
-            .filter { it.fullyQualifiedName?.endsWith(typeText ?: "") == true }
+        val declarations =
+            filterIsInstance<KoFullyQualifiedNameProvider>()
+                .filter { it.fullyQualifiedName?.endsWith(typeText ?: "") == true }
 
         val decl =
             declarations.singleOrNull()
                 ?: declarations.firstOrNull { decl ->
                     decl.fullyQualifiedName?.contains(parentDeclFqn) == true ||
-                            ((decl as? KoContainingDeclarationProvider)?.containingDeclaration as? KoDeclarationProvider)?.hasDeclaration {
-                                it == parentDeclaration
-                            } == true
+                        ((decl as? KoContainingDeclarationProvider)?.containingDeclaration as? KoDeclarationProvider)?.hasDeclaration {
+                            it == parentDeclaration
+                        } == true
                 }
 
         return decl?.fullyQualifiedName

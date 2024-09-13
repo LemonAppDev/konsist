@@ -35,7 +35,9 @@ class KoTypeForKoTypeDeclarationProviderTest {
         assertSoftly(sut) {
             declaration shouldBeInstanceOf KoClassDeclaration::class
             declaration shouldNotBeInstanceOf KoInterfaceDeclaration::class
-            (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.sample.fortypetest.ClassType"
+            (declaration as? KoFullyQualifiedNameProvider)
+                ?.fullyQualifiedName
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.ClassType")
         }
     }
 
@@ -55,7 +57,9 @@ class KoTypeForKoTypeDeclarationProviderTest {
         assertSoftly(sut) {
             declaration shouldBeInstanceOf KoClassDeclaration::class
             declaration shouldNotBeInstanceOf KoInterfaceDeclaration::class
-            (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.sample.fortypetest.ClassType"
+            (declaration as? KoFullyQualifiedNameProvider)
+                ?.fullyQualifiedName
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.ClassType")
         }
     }
 
@@ -76,7 +80,9 @@ class KoTypeForKoTypeDeclarationProviderTest {
         assertSoftly(sut) {
             declaration shouldBeInstanceOf KoInterfaceDeclaration::class
             declaration shouldNotBeInstanceOf KoClassDeclaration::class
-            (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.sample.fortypetest.InterfaceType"
+            (declaration as? KoFullyQualifiedNameProvider)
+                ?.fullyQualifiedName
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.InterfaceType")
         }
     }
 
@@ -96,7 +102,9 @@ class KoTypeForKoTypeDeclarationProviderTest {
         assertSoftly(sut) {
             declaration shouldBeInstanceOf KoInterfaceDeclaration::class
             declaration shouldNotBeInstanceOf KoClassDeclaration::class
-            (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.sample.fortypetest.InterfaceType"
+            (declaration as? KoFullyQualifiedNameProvider)
+                ?.fullyQualifiedName
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.InterfaceType")
         }
     }
 
@@ -117,7 +125,9 @@ class KoTypeForKoTypeDeclarationProviderTest {
         assertSoftly(sut) {
             declaration shouldBeInstanceOf KoObjectDeclaration::class
             declaration shouldNotBeInstanceOf KoClassDeclaration::class
-            (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.sample.fortypetest.ObjectType"
+            (declaration as? KoFullyQualifiedNameProvider)
+                ?.fullyQualifiedName
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.ObjectType")
         }
     }
 
@@ -137,7 +147,9 @@ class KoTypeForKoTypeDeclarationProviderTest {
         assertSoftly(sut) {
             declaration shouldBeInstanceOf KoObjectDeclaration::class
             declaration shouldNotBeInstanceOf KoClassDeclaration::class
-            (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.sample.fortypetest.ObjectType"
+            (declaration as? KoFullyQualifiedNameProvider)
+                ?.fullyQualifiedName
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.ObjectType")
         }
     }
 
@@ -158,7 +170,9 @@ class KoTypeForKoTypeDeclarationProviderTest {
         assertSoftly(sut) {
             declaration shouldBeInstanceOf KoTypeAliasDeclaration::class
             declaration shouldNotBeInstanceOf KoClassDeclaration::class
-            (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.sample.fortypetest.TypeAliasType"
+            (declaration as? KoFullyQualifiedNameProvider)
+                ?.fullyQualifiedName
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.TypeAliasType")
         }
     }
 
@@ -178,7 +192,9 @@ class KoTypeForKoTypeDeclarationProviderTest {
         assertSoftly(sut) {
             declaration shouldBeInstanceOf KoTypeAliasDeclaration::class
             declaration shouldNotBeInstanceOf KoClassDeclaration::class
-            (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.sample.fortypetest.TypeAliasType"
+            (declaration as? KoFullyQualifiedNameProvider)
+                ?.fullyQualifiedName
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.TypeAliasType")
         }
     }
 }
