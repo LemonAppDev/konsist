@@ -95,47 +95,25 @@ object TypeUtil {
                 .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
                 ?.name
 
-        val declarations =
+        val declarationFqn =
             containingFile
                 .declarations()
-                .filterIsInstance<KoFullyQualifiedNameProvider>()
-                .filter { it.fullyQualifiedName?.endsWith(typeText ?: "") == true }
+                .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
 
-        val parentDeclFqn = (parentDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName.orEmpty()
-
-        val decl =
-            declarations.singleOrNull()
-                ?: declarations.firstOrNull { decl ->
-                    decl.fullyQualifiedName?.contains(parentDeclFqn) == true ||
-                            ((decl as? KoContainingDeclarationProvider)?.containingDeclaration as? KoDeclarationProvider)?.hasDeclaration {
-                                it == parentDeclaration
-                            } == true
-                }
-
-        fqn = fqn ?: decl?.fullyQualifiedName
+        fqn = fqn ?: declarationFqn
 
         if (fqn == null) {
-            val declarationsFromPackage = containingFile
+            val declarationsFqnFromPackage = containingFile
                 .packagee
                 ?.name
                 ?.let {
                     Konsist
                         .scopeFromPackage(it)
                         .declarations()
-                        .filterIsInstance<KoFullyQualifiedNameProvider>()
-                        .filter { it.fullyQualifiedName?.endsWith(typeText ?: "") == true }
+                        .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
                 }
 
-            val declFromPackage =
-                declarationsFromPackage?.singleOrNull()
-                    ?: declarationsFromPackage?.firstOrNull { decl ->
-                        decl.fullyQualifiedName?.contains(parentDeclFqn) == true ||
-                                ((decl as? KoContainingDeclarationProvider)?.containingDeclaration as? KoDeclarationProvider)?.hasDeclaration {
-                                    it == parentDeclaration
-                                } == true
-                    }
-
-            fqn = declFromPackage?.fullyQualifiedName
+            fqn = declarationsFqnFromPackage
         }
 
         return when {
@@ -162,6 +140,27 @@ object TypeUtil {
 
             else -> null
         }
+    }
+
+    private fun List<KoBaseDeclaration>.getDeclarationFullyQualifiedName(
+        typeText: String?,
+        parentDeclaration: KoBaseDeclaration
+    ): String? {
+        val parentDeclFqn = (parentDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName.orEmpty()
+
+        val declarations = filterIsInstance<KoFullyQualifiedNameProvider>()
+            .filter { it.fullyQualifiedName?.endsWith(typeText ?: "") == true }
+
+        val decl =
+            declarations.singleOrNull()
+                ?: declarations.firstOrNull { decl ->
+                    decl.fullyQualifiedName?.contains(parentDeclFqn) == true ||
+                            ((decl as? KoContainingDeclarationProvider)?.containingDeclaration as? KoDeclarationProvider)?.hasDeclaration {
+                                it == parentDeclaration
+                            } == true
+                }
+
+        return decl?.fullyQualifiedName
     }
 
     internal fun isKotlinBasicType(name: String): Boolean = kotlinBasicTypes.any { it == name }
