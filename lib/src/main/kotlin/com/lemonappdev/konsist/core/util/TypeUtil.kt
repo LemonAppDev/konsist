@@ -1,5 +1,7 @@
 package com.lemonappdev.konsist.core.util
 
+import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.container.KoScope
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
@@ -105,12 +107,36 @@ object TypeUtil {
             declarations.singleOrNull()
                 ?: declarations.firstOrNull { decl ->
                     decl.fullyQualifiedName?.contains(parentDeclFqn) == true ||
-                        ((decl as? KoContainingDeclarationProvider)?.containingDeclaration as? KoDeclarationProvider)?.hasDeclaration {
-                            it == parentDeclaration
-                        } == true
+                            ((decl as? KoContainingDeclarationProvider)?.containingDeclaration as? KoDeclarationProvider)?.hasDeclaration {
+                                it == parentDeclaration
+                            } == true
                 }
 
         fqn = fqn ?: decl?.fullyQualifiedName
+
+        if (fqn == null) {
+            val declarationsFromPackage = containingFile
+                .packagee
+                ?.name
+                ?.let {
+                    Konsist
+                        .scopeFromPackage(it)
+                        .declarations()
+                        .filterIsInstance<KoFullyQualifiedNameProvider>()
+                        .filter { it.fullyQualifiedName?.endsWith(typeText ?: "") == true }
+                }
+
+            val declFromPackage =
+                declarationsFromPackage?.singleOrNull()
+                    ?: declarationsFromPackage?.firstOrNull { decl ->
+                        decl.fullyQualifiedName?.contains(parentDeclFqn) == true ||
+                                ((decl as? KoContainingDeclarationProvider)?.containingDeclaration as? KoDeclarationProvider)?.hasDeclaration {
+                                    it == parentDeclaration
+                                } == true
+                    }
+
+            fqn = declFromPackage?.fullyQualifiedName
+        }
 
         return when {
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
