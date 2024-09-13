@@ -1,6 +1,11 @@
 package com.lemonappdev.konsist.declaration.type.kotype
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
+import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.ext.list.primaryConstructors
 import com.lemonappdev.konsist.api.ext.list.withName
@@ -143,22 +148,22 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()" +
-                    ")
-                        .functions()
-                        .withName("functionWithObjectTypeParameter")
-                        .parameters
-                        .first()
-                        .type
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                )
+                .functions()
+                .withName("functionWithObjectTypeParameter")
+                .parameters
+                .first()
+                .type
 
-                            // then
-                            assertSoftly (sut) {
-                        declaration shouldBeInstanceOf KoObjectDeclaration::class
-                        declaration shouldNotBeInstanceOf KoClassDeclaration::class
-                        (declaration as? KoFullyQualifiedNameProvider)
-                            ?.fullyQualifiedName
-                            .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.packagecase.ObjectType")
-                    }
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf KoObjectDeclaration::class
+            declaration shouldNotBeInstanceOf KoClassDeclaration::class
+            (declaration as? KoFullyQualifiedNameProvider)
+                ?.fullyQualifiedName
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.packagecase.ObjectType")
+        }
     }
 
     @Test
@@ -269,23 +274,22 @@ class KoTypeForKoTypeDeclarationProviderTest {
                 .scopeFromFile(
                     "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
                         .toOsSeparator()
-                    " +
-                    ")
-                        .classes()
-                        .withName("ClassContainingParameterWithInterfaceTypeWithImportAlias")
-                        .primaryConstructors
-                        .parameters
-                        .first()
-                        .type
+                )
+                .classes()
+                .withName("ClassContainingParameterWithInterfaceTypeWithImportAlias")
+                .primaryConstructors
+                .parameters
+                .first()
+                .type
 
-                            // then
-                            assertSoftly (sut) {
-                        declaration shouldBeInstanceOf KoImportAliasDeclaration::class
-                        declaration shouldNotBeInstanceOf KoClassDeclaration::class
-                        asImportAliasDeclaration()?.importDirective
-                            ?.name
-                            .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.InterfaceType")
-                    }
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf KoImportAliasDeclaration::class
+            declaration shouldNotBeInstanceOf KoClassDeclaration::class
+            asImportAliasDeclaration()?.importDirective
+                ?.name
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.InterfaceType")
+        }
     }
 
     @Test
@@ -398,22 +402,21 @@ class KoTypeForKoTypeDeclarationProviderTest {
                 .scopeFromFile(
                     "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
                         .toOsSeparator()
-                    " +
-                    ")
-                        .functions()
-                        .withName("functionContainingParameterWithTypeAliasTypeWithImportAlias")
-                        .parameters
-                        .first()
-                        .type
+                )
+                .functions()
+                .withName("functionContainingParameterWithTypeAliasTypeWithImportAlias")
+                .parameters
+                .first()
+                .type
 
-                            // then
-                            assertSoftly (sut) {
-                        declaration shouldBeInstanceOf KoImportAliasDeclaration::class
-                        declaration shouldNotBeInstanceOf KoClassDeclaration::class
-                        asImportAliasDeclaration()?.importDirective
-                            ?.name
-                            .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.TypeAliasType")
-                    }
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf KoImportAliasDeclaration::class
+            declaration shouldNotBeInstanceOf KoClassDeclaration::class
+            asImportAliasDeclaration()?.importDirective
+                ?.name
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.TypeAliasType")
+        }
     }
 
     @Test
@@ -526,23 +529,22 @@ class KoTypeForKoTypeDeclarationProviderTest {
                 .scopeFromFile(
                     "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
                         .toOsSeparator()
-                    " +
-                    ")
-                        .classes()
-                        .withName("ClassContainingParameterWithObjectTypeWithoutImportAlias")
-                        .primaryConstructors
-                        .parameters
-                        .first()
-                        .type
+                )
+                .classes()
+                .withName("ClassContainingParameterWithObjectTypeWithoutImportAlias")
+                .primaryConstructors
+                .parameters
+                .first()
+                .type
 
-                            // then
-                            assertSoftly (sut) {
-                        declaration shouldBeInstanceOf KoObjectDeclaration::class
-                        declaration shouldNotBeInstanceOf KoClassDeclaration::class
-                        (declaration as? KoFullyQualifiedNameProvider)
-                            ?.fullyQualifiedName
-                            .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.ObjectType")
-                    }
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf KoObjectDeclaration::class
+            declaration shouldNotBeInstanceOf KoClassDeclaration::class
+            (declaration as? KoFullyQualifiedNameProvider)
+                ?.fullyQualifiedName
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.ObjectType")
+        }
     }
 
     @Test
