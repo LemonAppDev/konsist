@@ -91,7 +91,13 @@ object TypeUtil {
         var fqn =
             containingFile
                 .imports
-                .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
+                .firstOrNull() { import ->
+                    if (import.hasAlias()) {
+                        import.alias?.name == typeText
+                    } else {
+                        import.name.substringAfterLast(".") == typeText
+                    }
+                }
                 ?.name
 
         val declarationFqn =
@@ -156,9 +162,9 @@ object TypeUtil {
             declarations.singleOrNull()
                 ?: declarations.firstOrNull { decl ->
                     decl.fullyQualifiedName?.contains(parentDeclFqn) == true ||
-                        ((decl as? KoContainingDeclarationProvider)?.containingDeclaration as? KoDeclarationProvider)?.hasDeclaration {
-                            it == parentDeclaration
-                        } == true
+                            ((decl as? KoContainingDeclarationProvider)?.containingDeclaration as? KoDeclarationProvider)?.hasDeclaration {
+                                it == parentDeclaration
+                            } == true
                 }
 
         return decl?.fullyQualifiedName
