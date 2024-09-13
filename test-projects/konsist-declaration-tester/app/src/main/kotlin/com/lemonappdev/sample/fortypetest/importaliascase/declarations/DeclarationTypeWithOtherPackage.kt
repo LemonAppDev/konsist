@@ -1,4 +1,4 @@
-package com.lemonappdev.sample.fortypetest
+package com.lemonappdev.sample.fortypetest.importaliascase.declarations.other
 
 enum class ClassType {
     FIRST,

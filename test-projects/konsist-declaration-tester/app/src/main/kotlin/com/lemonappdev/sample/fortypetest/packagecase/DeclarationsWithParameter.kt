@@ -1,4 +1,4 @@
-package com.lemonappdev.sample.fortypetest
+package com.lemonappdev.sample.fortypetest.packagecase
 
 class ClassWithClassTypeParameter(val parameter: ClassType = ClassType.FIRST)
 
