@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository
 import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.RestController
 import jakarta.persistence.Entity
+import jakarta.persistence.Id
 
 class SpringSnippets {
     fun `interfaces with 'Repository' annotation should have 'Repository' suffix`() {
@@ -83,7 +84,7 @@ class SpringSnippets {
             .withAnnotationOf(Entity::class)
             .assertTrue { clazz ->
                 clazz.properties().any { property ->
-                    property.hasAnnotation("Id")
+                    property.hasAnnotationOf(Id::class)
                 }
             }
     }
