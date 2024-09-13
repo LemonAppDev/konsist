@@ -1,3 +1,3 @@
-package com.test.konsist.therealone
+package com.test.konsist.good
 
 class A(val z: Boolean)
