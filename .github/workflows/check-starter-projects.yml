@@ -52,12 +52,12 @@ jobs:
     name: Android Gradle Groovy Junit 4
     needs: get-github-context
     runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
 
     steps:
       - name: Checkout
@@ -90,12 +90,12 @@ jobs:
     name: Android Gradle Groovy Junit 5
     needs: get-github-context
     runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
 
     steps:
       - name: Checkout
@@ -128,12 +128,12 @@ jobs:
     name: Android Gradle Groovy Kotest
     needs: get-github-context
     runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
 
     steps:
       - name: Checkout
@@ -166,12 +166,12 @@ jobs:
     name: Android Gradle Kotlin Junit 4
     needs: get-github-context
     runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
 
     steps:
       - name: Checkout
@@ -204,12 +204,12 @@ jobs:
     name: Android Gradle Kotlin Junit 5
     needs: get-github-context
     runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -241,12 +241,12 @@ jobs:
     name: Android Gradle Kotlin Kotest
     needs: get-github-context
     runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -278,12 +278,12 @@ jobs:
     name: Spring Gradle Kotlin Junit 5
     needs: get-github-context
     runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -315,12 +315,12 @@ jobs:
     name: Spring Gradle Groovy Kotest
     needs: get-github-context
     runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -352,12 +352,12 @@ jobs:
     name: Spring Gradle Groovy Junit 5
     needs: get-github-context
     runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -390,12 +390,12 @@ jobs:
     name: Spring Gradle Groovy Kotest
     needs: get-github-context
     runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -427,12 +427,12 @@ jobs:
     name: Spring Maven Junit 5
     needs: get-github-context
     runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -464,12 +464,12 @@ jobs:
     name: Spring Maven Kotest
     needs: get-github-context
     runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
