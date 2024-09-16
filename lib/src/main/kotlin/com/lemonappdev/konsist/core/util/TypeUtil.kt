@@ -97,8 +97,7 @@ object TypeUtil {
                     } else {
                         import.name.substringAfterLast(".") == typeText
                     }
-                }
-                ?.name
+                }?.name
                 ?: containingFile
                     .declarations()
                     .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
