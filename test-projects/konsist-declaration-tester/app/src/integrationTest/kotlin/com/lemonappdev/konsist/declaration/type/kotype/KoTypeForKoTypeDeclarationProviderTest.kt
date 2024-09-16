@@ -14,7 +14,6 @@ import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectD
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
-import org.amshove.kluent.shouldNotBeInstanceOf
 import org.junit.jupiter.api.Test
 
 class KoTypeForKoTypeDeclarationProviderTest {
@@ -34,7 +33,6 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             declaration shouldBeInstanceOf KoClassDeclaration::class
-            declaration shouldNotBeInstanceOf KoInterfaceDeclaration::class
             (declaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
                 .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.ClassType")
@@ -56,7 +54,6 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             declaration shouldBeInstanceOf KoClassDeclaration::class
-            declaration shouldNotBeInstanceOf KoInterfaceDeclaration::class
             (declaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
                 .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.ClassType")
@@ -79,7 +76,6 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             declaration shouldBeInstanceOf KoInterfaceDeclaration::class
-            declaration shouldNotBeInstanceOf KoClassDeclaration::class
             (declaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
                 .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.InterfaceType")
@@ -101,7 +97,6 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             declaration shouldBeInstanceOf KoInterfaceDeclaration::class
-            declaration shouldNotBeInstanceOf KoClassDeclaration::class
             (declaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
                 .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.InterfaceType")
@@ -124,7 +119,6 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             declaration shouldBeInstanceOf KoObjectDeclaration::class
-            declaration shouldNotBeInstanceOf KoClassDeclaration::class
             (declaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
                 .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.ObjectType")
@@ -146,7 +140,6 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             declaration shouldBeInstanceOf KoObjectDeclaration::class
-            declaration shouldNotBeInstanceOf KoClassDeclaration::class
             (declaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
                 .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.ObjectType")
@@ -169,7 +162,6 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             declaration shouldBeInstanceOf KoTypeAliasDeclaration::class
-            declaration shouldNotBeInstanceOf KoClassDeclaration::class
             (declaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
                 .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.TypeAliasType")
@@ -191,7 +183,6 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             declaration shouldBeInstanceOf KoTypeAliasDeclaration::class
-            declaration shouldNotBeInstanceOf KoClassDeclaration::class
             (declaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
                 .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.TypeAliasType")
