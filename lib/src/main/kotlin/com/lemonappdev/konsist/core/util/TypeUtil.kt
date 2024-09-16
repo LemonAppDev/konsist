@@ -88,21 +88,23 @@ object TypeUtil {
 
         val typeText = nestedType?.text
 
-        val fullyQualifiedName = containingFile
-            .imports
-            .firstOrNull { it.name.substringAfterLast(".") == typeText }
-            ?.name
-            ?: containingFile
-                .declarations()
-                .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
-            ?: containingFile
-                .packagee
+        val fullyQualifiedName =
+            containingFile
+                .imports
+                .firstOrNull { it.name.substringAfterLast(".") == typeText }
                 ?.name
-                ?.let { packageName ->
-                    Konsist.scopeFromPackage(packageName)
-                        .declarations()
-                        .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
-                }
+                ?: containingFile
+                    .declarations()
+                    .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
+                ?: containingFile
+                    .packagee
+                    ?.name
+                    ?.let { packageName ->
+                        Konsist
+                            .scopeFromPackage(packageName)
+                            .declarations()
+                            .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
+                    }
 
         return when {
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
@@ -134,7 +136,8 @@ object TypeUtil {
         typeText: String?,
         parentDeclaration: KoBaseDeclaration,
     ): String? {
-        val parentDeclFqn = (parentDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName.orEmpty()
+        val parentDeclarationFullyQualifiedName =
+            (parentDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName.orEmpty()
 
         val declarations =
             filterIsInstance<KoFullyQualifiedNameProvider>()
@@ -143,10 +146,11 @@ object TypeUtil {
         val declaration =
             declarations.singleOrNull()
                 ?: declarations.firstOrNull { declaration ->
-                    declaration.fullyQualifiedName?.contains(parentDeclFqn) == true ||
-                            ((declaration as? KoContainingDeclarationProvider)?.containingDeclaration as? KoDeclarationProvider)?.hasDeclaration {
-                                it == parentDeclaration
-                            } == true
+                    declaration.fullyQualifiedName?.contains(parentDeclarationFullyQualifiedName) == true ||
+                        (
+                            (declaration as? KoContainingDeclarationProvider)
+                                ?.containingDeclaration as? KoDeclarationProvider
+                        )?.hasDeclaration { it == parentDeclaration } == true
                 }
 
         return declaration?.fullyQualifiedName
