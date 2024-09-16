@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.declaration.type.kotype
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
@@ -22,7 +23,9 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // given
         val sut =
             Konsist
-                .scopeFromFile("$appMainSourceSetProjectDirectory/sample/fortypetest/DeclarationsWithParameter.kt".toOsSeparator())
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                )
                 .classes()
                 .withName("ClassWithClassTypeParameter")
                 .primaryConstructors
@@ -35,7 +38,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             declaration shouldBeInstanceOf KoClassDeclaration::class
             (declaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.ClassType")
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.packagecase.ClassType")
         }
     }
 
@@ -44,7 +47,9 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // given
         val sut =
             Konsist
-                .scopeFromFile("$appMainSourceSetProjectDirectory/sample/fortypetest/DeclarationsWithParameter.kt".toOsSeparator())
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                )
                 .functions()
                 .withName("functionWithClassTypeParameter")
                 .parameters
@@ -56,7 +61,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             declaration shouldBeInstanceOf KoClassDeclaration::class
             (declaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.ClassType")
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.packagecase.ClassType")
         }
     }
 
@@ -65,7 +70,9 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // given
         val sut =
             Konsist
-                .scopeFromFile("$appMainSourceSetProjectDirectory/sample/fortypetest/DeclarationsWithParameter.kt".toOsSeparator())
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                )
                 .classes()
                 .withName("ClassWithInterfaceTypeParameter")
                 .primaryConstructors
@@ -78,7 +85,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             declaration shouldBeInstanceOf KoInterfaceDeclaration::class
             (declaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.InterfaceType")
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.packagecase.InterfaceType")
         }
     }
 
@@ -87,7 +94,9 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // given
         val sut =
             Konsist
-                .scopeFromFile("$appMainSourceSetProjectDirectory/sample/fortypetest/DeclarationsWithParameter.kt".toOsSeparator())
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                )
                 .functions()
                 .withName("functionWithInterfaceTypeParameter")
                 .parameters
@@ -99,7 +108,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             declaration shouldBeInstanceOf KoInterfaceDeclaration::class
             (declaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.InterfaceType")
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.packagecase.InterfaceType")
         }
     }
 
@@ -108,7 +117,9 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // given
         val sut =
             Konsist
-                .scopeFromFile("$appMainSourceSetProjectDirectory/sample/fortypetest/DeclarationsWithParameter.kt".toOsSeparator())
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                )
                 .classes()
                 .withName("ClassWithObjectTypeParameter")
                 .primaryConstructors
@@ -121,7 +132,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             declaration shouldBeInstanceOf KoObjectDeclaration::class
             (declaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.ObjectType")
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.packagecase.ObjectType")
         }
     }
 
@@ -130,7 +141,9 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // given
         val sut =
             Konsist
-                .scopeFromFile("$appMainSourceSetProjectDirectory/sample/fortypetest/DeclarationsWithParameter.kt".toOsSeparator())
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                )
                 .functions()
                 .withName("functionWithObjectTypeParameter")
                 .parameters
@@ -142,7 +155,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             declaration shouldBeInstanceOf KoObjectDeclaration::class
             (declaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.ObjectType")
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.packagecase.ObjectType")
         }
     }
 
@@ -151,7 +164,9 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // given
         val sut =
             Konsist
-                .scopeFromFile("$appMainSourceSetProjectDirectory/sample/fortypetest/DeclarationsWithParameter.kt".toOsSeparator())
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                )
                 .classes()
                 .withName("ClassWithTypeAliasTypeParameter")
                 .primaryConstructors
@@ -164,7 +179,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             declaration shouldBeInstanceOf KoTypeAliasDeclaration::class
             (declaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.TypeAliasType")
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.packagecase.TypeAliasType")
         }
     }
 
@@ -173,7 +188,9 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // given
         val sut =
             Konsist
-                .scopeFromFile("$appMainSourceSetProjectDirectory/sample/fortypetest/DeclarationsWithParameter.kt".toOsSeparator())
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                )
                 .functions()
                 .withName("functionWithTypeAliasTypeParameter")
                 .parameters
@@ -185,7 +202,399 @@ class KoTypeForKoTypeDeclarationProviderTest {
             declaration shouldBeInstanceOf KoTypeAliasDeclaration::class
             (declaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.TypeAliasType")
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.packagecase.TypeAliasType")
+        }
+    }
+
+    @Test
+    fun `parameter in class constructor has class type declaration which was imported using import alias`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
+                        .toOsSeparator()
+                )
+                .classes()
+                .withName("ClassContainingParameterWithClassTypeWithImportAlias")
+                .primaryConstructors
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf KoImportAliasDeclaration::class
+            asImportAliasDeclaration()?.importDirective
+                ?.name
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.ClassType")
+        }
+    }
+
+    @Test
+    fun `parameter in function constructor has class type declaration which was imported using import alias`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
+                        .toOsSeparator()
+                )
+                .functions()
+                .withName("functionContainingParameterWithClassTypeWithImportAlias")
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf KoImportAliasDeclaration::class
+            asImportAliasDeclaration()?.importDirective
+                ?.name
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.ClassType")
+        }
+    }
+
+    @Test
+    fun `parameter in class constructor has interface type declaration which was imported using import alias`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
+                        .toOsSeparator()
+                )
+                .classes()
+                .withName("ClassContainingParameterWithInterfaceTypeWithImportAlias")
+                .primaryConstructors
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf KoImportAliasDeclaration::class
+            asImportAliasDeclaration()?.importDirective
+                ?.name
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.InterfaceType")
+        }
+    }
+
+    @Test
+    fun `parameter in function constructor has interface type declaration which was imported using import alias`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
+                        .toOsSeparator()
+                )
+                .functions()
+                .withName("functionContainingParameterWithInterfaceTypeWithImportAlias")
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf KoImportAliasDeclaration::class
+            asImportAliasDeclaration()?.importDirective
+                ?.name
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.InterfaceType")
+        }
+    }
+
+    @Test
+    fun `parameter in class constructor has object type declaration which was imported using import alias`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
+                        .toOsSeparator()
+                )
+                .classes()
+                .withName("ClassContainingParameterWithObjectTypeWithImportAlias")
+                .primaryConstructors
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf KoImportAliasDeclaration::class
+            asImportAliasDeclaration()?.importDirective
+                ?.name
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.ObjectType")
+        }
+    }
+
+    @Test
+    fun `parameter in function constructor has object type declaration which was imported using import alias`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
+                        .toOsSeparator()
+                )
+                .functions()
+                .withName("functionContainingParameterWithObjectTypeWithImportAlias")
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf KoImportAliasDeclaration::class
+            asImportAliasDeclaration()?.importDirective
+                ?.name
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.ObjectType")
+        }
+    }
+
+    @Test
+    fun `parameter in class constructor has typealias type declaration which was imported using import alias`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
+                        .toOsSeparator()
+                )
+                .classes()
+                .withName("ClassContainingParameterWithTypeAliasTypeWithImportAlias")
+                .primaryConstructors
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf KoImportAliasDeclaration::class
+            asImportAliasDeclaration()?.importDirective
+                ?.name
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.TypeAliasType")
+        }
+    }
+
+    @Test
+    fun `parameter in function constructor has typealias type declaration which was imported using import alias`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
+                        .toOsSeparator()
+                )
+                .functions()
+                .withName("functionContainingParameterWithTypeAliasTypeWithImportAlias")
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf KoImportAliasDeclaration::class
+            asImportAliasDeclaration()?.importDirective
+                ?.name
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.TypeAliasType")
+        }
+    }
+
+    @Test
+    fun `parameter in class constructor has class type declaration which was imported without import alias`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
+                        .toOsSeparator()
+                )
+                .classes()
+                .withName("ClassContainingParameterWithClassTypeWithoutImportAlias")
+                .primaryConstructors
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf KoClassDeclaration::class
+            (declaration as? KoFullyQualifiedNameProvider)
+                ?.fullyQualifiedName
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.ClassType")
+        }
+    }
+
+    @Test
+    fun `parameter in function constructor has class type declaration which was imported without import alias`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
+                        .toOsSeparator()
+                )
+                .functions()
+                .withName("functionContainingParameterWithClassTypeWithoutImportAlias")
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf KoClassDeclaration::class
+            (declaration as? KoFullyQualifiedNameProvider)
+                ?.fullyQualifiedName
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.ClassType")
+        }
+    }
+
+    @Test
+    fun `parameter in class constructor has interface type declaration which was imported without import alias`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
+                        .toOsSeparator()
+                )
+                .classes()
+                .withName("ClassContainingParameterWithInterfaceTypeWithoutImportAlias")
+                .primaryConstructors
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf KoInterfaceDeclaration::class
+            (declaration as? KoFullyQualifiedNameProvider)
+                ?.fullyQualifiedName
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.InterfaceType")
+        }
+    }
+
+    @Test
+    fun `parameter in function constructor has interface type declaration which was imported without import alias`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
+                        .toOsSeparator()
+                )
+                .functions()
+                .withName("functionContainingParameterWithInterfaceTypeWithoutImportAlias")
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf KoInterfaceDeclaration::class
+            (declaration as? KoFullyQualifiedNameProvider)
+                ?.fullyQualifiedName
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.InterfaceType")
+        }
+    }
+
+    @Test
+    fun `parameter in class constructor has object type declaration which was imported without import alias`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
+                        .toOsSeparator()
+                )
+                .classes()
+                .withName("ClassContainingParameterWithObjectTypeWithoutImportAlias")
+                .primaryConstructors
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf KoObjectDeclaration::class
+            (declaration as? KoFullyQualifiedNameProvider)
+                ?.fullyQualifiedName
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.ObjectType")
+        }
+    }
+
+    @Test
+    fun `parameter in function constructor has object type declaration which was imported without import alias`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
+                        .toOsSeparator()
+                )
+                .functions()
+                .withName("functionContainingParameterWithObjectTypeWithoutImportAlias")
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf KoObjectDeclaration::class
+            (declaration as? KoFullyQualifiedNameProvider)
+                ?.fullyQualifiedName
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.ObjectType")
+        }
+    }
+
+    @Test
+    fun `parameter in class constructor has typealias type declaration which was imported without import alias`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
+                        .toOsSeparator()
+                )
+                .classes()
+                .withName("ClassContainingParameterWithTypeAliasTypeWithoutImportAlias")
+                .primaryConstructors
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf KoTypeAliasDeclaration::class
+            (declaration as? KoFullyQualifiedNameProvider)
+                ?.fullyQualifiedName
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.TypeAliasType")
+        }
+    }
+
+    @Test
+    fun `parameter in function constructor has typealias type declaration which was imported without import alias`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile(
+                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
+                        .toOsSeparator()
+                )
+                .functions()
+                .withName("functionContainingParameterWithTypeAliasTypeWithoutImportAlias")
+                .parameters
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            declaration shouldBeInstanceOf KoTypeAliasDeclaration::class
+            (declaration as? KoFullyQualifiedNameProvider)
+                ?.fullyQualifiedName
+                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.TypeAliasType")
         }
     }
 }

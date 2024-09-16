@@ -91,8 +91,13 @@ object TypeUtil {
         val fullyQualifiedName =
             containingFile
                 .imports
-                .firstOrNull { it.name.substringAfterLast(".") == typeText }
-                ?.name
+                .firstOrNull { import ->
+                    if (import.hasAlias()) {
+                        import.alias?.name == typeText
+                    } else {
+                        import.name.substringAfterLast(".") == typeText
+                    }
+                }?.name
                 ?: containingFile
                     .declarations()
                     .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
