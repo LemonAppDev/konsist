@@ -88,33 +88,21 @@ object TypeUtil {
 
         val typeText = nestedType?.text
 
-        var fullyQualifiedName =
-            containingFile
-                .imports
-                .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
-                ?.name
-
-        val declarationFqn =
-            containingFile
+        val fullyQualifiedName = containingFile
+            .imports
+            .firstOrNull { it.name.substringAfterLast(".") == typeText }
+            ?.name
+            ?: containingFile
                 .declarations()
                 .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
-
-        fullyQualifiedName = fullyQualifiedName ?: declarationFqn
-
-        if (fullyQualifiedName == null) {
-            val declarationsFqnFromPackage =
-                containingFile
-                    .packagee
-                    ?.name
-                    ?.let {
-                        Konsist
-                            .scopeFromPackage(it)
-                            .declarations()
-                            .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
-                    }
-
-            fullyQualifiedName = declarationsFqnFromPackage
-        }
+            ?: containingFile
+                .packagee
+                ?.name
+                ?.let { packageName ->
+                    Konsist.scopeFromPackage(packageName)
+                        .declarations()
+                        .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
+                }
 
         return when {
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
@@ -156,9 +144,9 @@ object TypeUtil {
             declarations.singleOrNull()
                 ?: declarations.firstOrNull { declaration ->
                     declaration.fullyQualifiedName?.contains(parentDeclFqn) == true ||
-                        ((declaration as? KoContainingDeclarationProvider)?.containingDeclaration as? KoDeclarationProvider)?.hasDeclaration {
-                            it == parentDeclaration
-                        } == true
+                            ((declaration as? KoContainingDeclarationProvider)?.containingDeclaration as? KoDeclarationProvider)?.hasDeclaration {
+                                it == parentDeclaration
+                            } == true
                 }
 
         return declaration?.fullyQualifiedName
