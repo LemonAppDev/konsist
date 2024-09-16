@@ -71,7 +71,7 @@ object TypeUtil {
         kClass: KClass<*>,
     ): Boolean = kClass.qualifiedName == (type?.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
 
-    @Suppress("detekt.CyclomaticComplexMethod", "detekt.LongMethod")
+    @Suppress("detekt.CyclomaticComplexMethod")
     private fun transformPsiElementToKoTypeDeclaration(
         type: PsiElement?,
         parentDeclaration: KoBaseDeclaration,
