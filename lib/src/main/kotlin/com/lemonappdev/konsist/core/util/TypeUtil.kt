@@ -88,7 +88,7 @@ object TypeUtil {
 
         val typeText = nestedType?.text
 
-        var fqn =
+        var fullyQualifiedName =
             containingFile
                 .imports
                 .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
@@ -99,9 +99,9 @@ object TypeUtil {
                 .declarations()
                 .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
 
-        fqn = fqn ?: declarationFqn
+        fullyQualifiedName = fullyQualifiedName ?: declarationFqn
 
-        if (fqn == null) {
+        if (fullyQualifiedName == null) {
             val declarationsFqnFromPackage =
                 containingFile
                     .packagee
@@ -113,7 +113,7 @@ object TypeUtil {
                             .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
                     }
 
-            fqn = declarationsFqnFromPackage
+            fullyQualifiedName = declarationsFqnFromPackage
         }
 
         return when {
@@ -122,19 +122,19 @@ object TypeUtil {
                 if (isKotlinBasicType(typeText) || isKotlinCollectionTypes(typeText)) {
                     KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
                 } else {
-                    getClass(typeText, fqn, false, containingFile)
-                        ?: getInterface(typeText, fqn, false, containingFile)
-                        ?: getObject(typeText, fqn, false, containingFile)
-                        ?: getTypeAlias(typeText, fqn, containingFile)
+                    getClass(typeText, fullyQualifiedName, false, containingFile)
+                        ?: getInterface(typeText, fullyQualifiedName, false, containingFile)
+                        ?: getObject(typeText, fullyQualifiedName, false, containingFile)
+                        ?: getTypeAlias(typeText, fullyQualifiedName, containingFile)
                         ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
                 }
             }
 
             nestedType is KtTypeReference && typeText != null -> {
-                getClass(typeText, fqn, false, containingFile)
-                    ?: getInterface(typeText, fqn, false, containingFile)
-                    ?: getObject(typeText, fqn, false, containingFile)
-                    ?: getTypeAlias(typeText, fqn, containingFile)
+                getClass(typeText, fullyQualifiedName, false, containingFile)
+                    ?: getInterface(typeText, fullyQualifiedName, false, containingFile)
+                    ?: getObject(typeText, fullyQualifiedName, false, containingFile)
+                    ?: getTypeAlias(typeText, fullyQualifiedName, containingFile)
                     ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
             }
 
@@ -152,16 +152,16 @@ object TypeUtil {
             filterIsInstance<KoFullyQualifiedNameProvider>()
                 .filter { it.fullyQualifiedName?.endsWith(typeText ?: "") == true }
 
-        val decl =
+        val declaration =
             declarations.singleOrNull()
-                ?: declarations.firstOrNull { decl ->
-                    decl.fullyQualifiedName?.contains(parentDeclFqn) == true ||
-                        ((decl as? KoContainingDeclarationProvider)?.containingDeclaration as? KoDeclarationProvider)?.hasDeclaration {
+                ?: declarations.firstOrNull { declaration ->
+                    declaration.fullyQualifiedName?.contains(parentDeclFqn) == true ||
+                        ((declaration as? KoContainingDeclarationProvider)?.containingDeclaration as? KoDeclarationProvider)?.hasDeclaration {
                             it == parentDeclaration
                         } == true
                 }
 
-        return decl?.fullyQualifiedName
+        return declaration?.fullyQualifiedName
     }
 
     internal fun isKotlinBasicType(name: String): Boolean = kotlinBasicTypes.any { it == name }
