@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.util
 
+import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
@@ -87,30 +88,23 @@ object TypeUtil {
 
         val typeText = nestedType?.text
 
-        var fqn =
+        val fullyQualifiedName =
             containingFile
                 .imports
-                .firstOrNull { import -> import.name.substringAfterLast(".") == typeText }
+                .firstOrNull { it.name.substringAfterLast(".") == typeText }
                 ?.name
-
-        val declarations =
-            containingFile
-                .declarations()
-                .filterIsInstance<KoFullyQualifiedNameProvider>()
-                .filter { it.fullyQualifiedName?.endsWith(typeText ?: "") == true }
-
-        val parentDeclFqn = (parentDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName.orEmpty()
-
-        val decl =
-            declarations.singleOrNull()
-                ?: declarations.firstOrNull { decl ->
-                    decl.fullyQualifiedName?.contains(parentDeclFqn) == true ||
-                        ((decl as? KoContainingDeclarationProvider)?.containingDeclaration as? KoDeclarationProvider)?.hasDeclaration {
-                            it == parentDeclaration
-                        } == true
-                }
-
-        fqn = fqn ?: decl?.fullyQualifiedName
+                ?: containingFile
+                    .declarations()
+                    .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
+                ?: containingFile
+                    .packagee
+                    ?.name
+                    ?.let { packageName ->
+                        Konsist
+                            .scopeFromPackage(packageName)
+                            .declarations()
+                            .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
+                    }
 
         return when {
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
@@ -118,24 +112,48 @@ object TypeUtil {
                 if (isKotlinBasicType(typeText) || isKotlinCollectionTypes(typeText)) {
                     KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
                 } else {
-                    getClass(typeText, fqn, false, containingFile)
-                        ?: getInterface(typeText, fqn, false, containingFile)
-                        ?: getObject(typeText, fqn, false, containingFile)
-                        ?: getTypeAlias(typeText, fqn, containingFile)
+                    getClass(typeText, fullyQualifiedName, false, containingFile)
+                        ?: getInterface(typeText, fullyQualifiedName, false, containingFile)
+                        ?: getObject(typeText, fullyQualifiedName, false, containingFile)
+                        ?: getTypeAlias(typeText, fullyQualifiedName, containingFile)
                         ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
                 }
             }
 
             nestedType is KtTypeReference && typeText != null -> {
-                getClass(typeText, fqn, false, containingFile)
-                    ?: getInterface(typeText, fqn, false, containingFile)
-                    ?: getObject(typeText, fqn, false, containingFile)
-                    ?: getTypeAlias(typeText, fqn, containingFile)
+                getClass(typeText, fullyQualifiedName, false, containingFile)
+                    ?: getInterface(typeText, fullyQualifiedName, false, containingFile)
+                    ?: getObject(typeText, fullyQualifiedName, false, containingFile)
+                    ?: getTypeAlias(typeText, fullyQualifiedName, containingFile)
                     ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
             }
 
             else -> null
         }
+    }
+
+    private fun List<KoBaseDeclaration>.getDeclarationFullyQualifiedName(
+        typeText: String?,
+        parentDeclaration: KoBaseDeclaration,
+    ): String? {
+        val parentDeclarationFullyQualifiedName =
+            (parentDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName.orEmpty()
+
+        val declarations =
+            filterIsInstance<KoFullyQualifiedNameProvider>()
+                .filter { it.fullyQualifiedName?.endsWith(typeText ?: "") == true }
+
+        val declaration =
+            declarations.singleOrNull()
+                ?: declarations.firstOrNull { declaration ->
+                    declaration.fullyQualifiedName?.contains(parentDeclarationFullyQualifiedName) == true ||
+                        (
+                            (declaration as? KoContainingDeclarationProvider)
+                                ?.containingDeclaration as? KoDeclarationProvider
+                        )?.hasDeclaration { it == parentDeclaration } == true
+                }
+
+        return declaration?.fullyQualifiedName
     }
 
     internal fun isKotlinBasicType(name: String): Boolean = kotlinBasicTypes.any { it == name }
