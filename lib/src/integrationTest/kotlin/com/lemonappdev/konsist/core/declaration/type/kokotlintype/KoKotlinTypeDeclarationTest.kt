@@ -44,7 +44,7 @@ class KoKotlinTypeDeclarationTest {
                 ?.asKotlinTypeDeclaration()
 
         // then
-        sut?.toString() shouldBeEqualTo "List<String>"
+        sut?.toString() shouldBeEqualTo "List"
     }
 
     @Test
@@ -58,7 +58,7 @@ class KoKotlinTypeDeclarationTest {
                 ?.asKotlinTypeDeclaration()
 
         // then
-        sut?.toString() shouldBeEqualTo "List<String>"
+        sut?.toString() shouldBeEqualTo "List"
     }
 
     private fun getSnippetFile(fileName: String) =

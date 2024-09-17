@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
@@ -57,6 +58,8 @@ internal interface KoTypeDeclarationProviderCore :
 
     override fun asFunctionTypeDeclaration(): KoFunctionTypeDeclaration? = declaration as? KoFunctionTypeDeclaration
 
+    override fun asGenericTypeDeclaration(): KoGenericTypeDeclaration? = declaration as? KoGenericTypeDeclaration
+
     override fun asExternalTypeDeclaration(): KoExternalDeclaration? = declaration as? KoExternalDeclaration
 
     override val isClass: Boolean
@@ -79,6 +82,9 @@ internal interface KoTypeDeclarationProviderCore :
 
     override val isFunctionType: Boolean
         get() = declaration is KoFunctionTypeDeclaration
+
+    override val isGenericType: Boolean
+        get() = declaration is KoGenericTypeDeclaration
 
     override val isExternalType: Boolean
         get() = declaration is KoExternalDeclaration
@@ -144,6 +150,12 @@ internal interface KoTypeDeclarationProviderCore :
         when (predicate) {
             null -> asFunctionTypeDeclaration() != null
             else -> asFunctionTypeDeclaration()?.let { predicate(it) } ?: false
+        }
+
+    override fun hasGenericTypeDeclaration(predicate: ((KoGenericTypeDeclaration) -> Boolean)?): Boolean =
+        when (predicate) {
+            null -> asGenericTypeDeclaration() != null
+            else -> asGenericTypeDeclaration()?.let { predicate(it) } ?: false
         }
 
     override fun hasExternalTypeDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)?): Boolean =
