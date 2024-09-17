@@ -35,10 +35,10 @@ class KoTypeDeclarationTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("nullable-kotlin-basic-type", "String?"),
-                arguments("not-nullable-kotlin-basic-type", "String"),
-                arguments("nullable-kotlin-collection-type", "List<String>?"),
-                arguments("not-nullable-kotlin-collection-type", "List<String>"),
+                arguments("nullable-kotlin-type", "String?"),
+                arguments("not-nullable-kotlin-type", "String"),
+                arguments("nullable-generic-type", "List<Set<String>>?"),
+                arguments("not-nullable-generic-type", "List<Set<String>>"),
                 arguments("nullable-class-type", "SampleType?"),
                 arguments("not-nullable-class-type", "SampleType"),
                 arguments("nullable-interface-type", "SampleInterface?"),

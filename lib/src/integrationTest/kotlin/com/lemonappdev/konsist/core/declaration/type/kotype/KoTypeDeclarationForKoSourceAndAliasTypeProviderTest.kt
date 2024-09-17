@@ -143,10 +143,10 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
     }
 
     @Test
-    fun `not-nullable-kotlin-basic-type`() {
+    fun `not-nullable-kotlin-type`() {
         // given
         val sut =
-            getSnippetFile("not-nullable-kotlin-basic-type")
+            getSnippetFile("not-nullable-kotlin-type")
                 .properties()
                 .first()
                 .type
@@ -160,10 +160,10 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
     }
 
     @Test
-    fun `nullable-kotlin-basic-type`() {
+    fun `nullable-kotlin-type`() {
         // given
         val sut =
-            getSnippetFile("nullable-kotlin-basic-type")
+            getSnippetFile("nullable-kotlin-type")
                 .properties()
                 .first()
                 .type
@@ -177,10 +177,10 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
     }
 
     @Test
-    fun `not-nullable-kotlin-collection-type`() {
+    fun `not-nullable-generic-type`() {
         // given
         val sut =
-            getSnippetFile("not-nullable-kotlin-collection-type")
+            getSnippetFile("not-nullable-generic-type")
                 .properties()
                 .first()
                 .type
@@ -194,10 +194,10 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
     }
 
     @Test
-    fun `not-nullable-kotlin-collection-type-with-nullable-type-argument`() {
+    fun `not-nullable-generic-type-with-nullable-type-argument`() {
         // given
         val sut =
-            getSnippetFile("not-nullable-kotlin-collection-type-with-nullable-type-argument")
+            getSnippetFile("not-nullable-generic-type-with-nullable-type-argument")
                 .properties()
                 .first()
                 .type
@@ -211,10 +211,10 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
     }
 
     @Test
-    fun `nullable-kotlin-collection-type`() {
+    fun `nullable-generic-type`() {
         // given
         val sut =
-            getSnippetFile("nullable-kotlin-collection-type")
+            getSnippetFile("nullable-generic-type")
                 .properties()
                 .first()
                 .type
@@ -228,10 +228,10 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
     }
 
     @Test
-    fun `nullable-kotlin-collection-type-with-nullable-type-argument`() {
+    fun `nullable-generic-type-with-nullable-type-argument`() {
         // given
         val sut =
-            getSnippetFile("nullable-kotlin-collection-type-with-nullable-type-argument")
+            getSnippetFile("nullable-generic-type-with-nullable-type-argument")
                 .properties()
                 .first()
                 .type

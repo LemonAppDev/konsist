@@ -53,10 +53,10 @@ class KoTypeDeclarationForKoPackageProviderTest {
         @JvmStatic
         fun provideValuesForTypeInsidePackage() =
             listOf(
-                arguments("nullable-kotlin-basic-type-is-in-package"),
-                arguments("not-nullable-kotlin-basic-type-is-in-package"),
-                arguments("nullable-kotlin-collection-type-is-in-package"),
-                arguments("not-nullable-kotlin-collection-type-is-in-package"),
+                arguments("nullable-kotlin-type-is-in-package"),
+                arguments("not-nullable-kotlin-type-is-in-package"),
+                arguments("nullable-generic-type-is-in-package"),
+                arguments("not-nullable-generic-type-is-in-package"),
                 arguments("nullable-class-type-is-in-package"),
                 arguments("not-nullable-class-type-is-in-package"),
                 arguments("nullable-interface-type-is-in-package"),
@@ -77,10 +77,10 @@ class KoTypeDeclarationForKoPackageProviderTest {
         @JvmStatic
         fun provideValuesForTypeOutsidePackage() =
             listOf(
-                arguments("nullable-kotlin-basic-type-is-not-in-package"),
-                arguments("not-nullable-kotlin-basic-type-is-not-in-package"),
-                arguments("nullable-kotlin-collection-type-is-not-in-package"),
-                arguments("not-nullable-kotlin-collection-type-is-not-in-package"),
+                arguments("nullable-kotlin-type-is-not-in-package"),
+                arguments("not-nullable-kotlin-type-is-not-in-package"),
+                arguments("nullable-generic-type-is-not-in-package"),
+                arguments("not-nullable-generic-type-is-not-in-package"),
                 arguments("nullable-class-type-is-not-in-package"),
                 arguments("not-nullable-class-type-is-not-in-package"),
                 arguments("nullable-interface-type-is-not-in-package"),

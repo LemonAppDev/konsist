@@ -32,10 +32,10 @@ class KoTypeDeclarationForKoContainingFileProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("nullable-kotlin-basic-type-containing-file"),
-                arguments("not-nullable-kotlin-basic-type-containing-file"),
-                arguments("nullable-kotlin-collection-type-containing-file"),
-                arguments("not-nullable-kotlin-collection-type-containing-file"),
+                arguments("nullable-kotlin-type-containing-file"),
+                arguments("not-nullable-kotlin-type-containing-file"),
+                arguments("nullable-generic-type-containing-file"),
+                arguments("not-nullable-generic-type-containing-file"),
                 arguments("nullable-class-type-containing-file"),
                 arguments("not-nullable-class-type-containing-file"),
                 arguments("nullable-interface-type-containing-file"),

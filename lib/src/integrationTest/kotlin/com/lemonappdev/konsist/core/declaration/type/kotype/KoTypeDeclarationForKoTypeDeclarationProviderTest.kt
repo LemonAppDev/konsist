@@ -666,10 +666,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
     }
 
     @Test
-    fun `nullable-kotlin-basic-type`() {
+    fun `nullable-kotlin-type`() {
         // given
         val sut =
-            getSnippetFile("nullable-kotlin-basic-type")
+            getSnippetFile("nullable-kotlin-type")
                 .classes()
                 .first()
                 .primaryConstructor
@@ -680,14 +680,14 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             it?.hasDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo true
-            it?.hasDeclaration { declaration -> declaration.name == "List<String>" } shouldBeEqualTo false
+            it?.hasDeclaration { declaration -> declaration.name == "List<Set<String>>" } shouldBeEqualTo false
             it?.hasDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasDeclarationOf(List::class) shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "String"
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo true
             it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo true
-            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "List<String>" } shouldBeEqualTo false
+            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "List<Set<String>>" } shouldBeEqualTo false
             it?.hasKotlinTypeDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasKotlinTypeDeclarationOf(Int::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -720,10 +720,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
     }
 
     @Test
-    fun `not-nullable-kotlin-basic-type`() {
+    fun `not-nullable-kotlin-type`() {
         // given
         val sut =
-            getSnippetFile("not-nullable-kotlin-basic-type")
+            getSnippetFile("not-nullable-kotlin-type")
                 .classes()
                 .first()
                 .primaryConstructor
@@ -734,14 +734,14 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             it?.hasDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo true
-            it?.hasDeclaration { declaration -> declaration.name == "List<String>" } shouldBeEqualTo false
+            it?.hasDeclaration { declaration -> declaration.name == "List<Set<String>>" } shouldBeEqualTo false
             it?.hasDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasDeclarationOf(List::class) shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "String"
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo true
             it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo true
-            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "List<String>" } shouldBeEqualTo false
+            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "List<Set<String>>" } shouldBeEqualTo false
             it?.hasKotlinTypeDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasKotlinTypeDeclarationOf(Int::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -774,10 +774,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
     }
 
 //    @Test
-//    fun `nullable-kotlin-collection-type`() {
+//    fun `nullable-generic-type`() {
 //        // given
 //        val sut =
-//            getSnippetFile("nullable-kotlin-collection-type")
+//            getSnippetFile("nullable-generic-type")
 //                .classes()
 //                .first()
 //                .primaryConstructor
@@ -787,14 +787,14 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 //
 //        // then
 //        assertSoftly(sut) {
-//            it?.hasDeclaration { declaration -> declaration.name == "List<String>" } shouldBeEqualTo true
+//            it?.hasDeclaration { declaration -> declaration.name == "List<Set<String>>" } shouldBeEqualTo true
 //            it?.hasDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo false
 //            it?.hasDeclarationOf(List::class) shouldBeEqualTo true
 //            it?.hasDeclarationOf(String::class) shouldBeEqualTo false
 //            it?.asKotlinTypeDeclaration() shouldBeInstanceOf KoKotlinTypeDeclaration::class
-//            it?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "List<String>"
+//            it?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "List<Set<String>>"
 //            it?.hasKotlinTypeDeclaration() shouldBeEqualTo true
-//            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "List<String>" } shouldBeEqualTo true
+//            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "List<Set<String>>" } shouldBeEqualTo true
 //            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo false
 //            it?.hasKotlinTypeDeclarationOf(List::class) shouldBeEqualTo true
 //            it?.hasKotlinTypeDeclarationOf(String::class) shouldBeEqualTo false
@@ -828,10 +828,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 //    }
 
 //    @Test
-//    fun `not-nullable-kotlin-collection-type`() {
+//    fun `not-nullable-generic-type`() {
 //        // given
 //        val sut =
-//            getSnippetFile("not-nullable-kotlin-collection-type")
+//            getSnippetFile("not-nullable-generic-type")
 //                .classes()
 //                .first()
 //                .primaryConstructor
@@ -841,14 +841,14 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 //
 //        // then
 //        assertSoftly(sut) {
-//            it?.hasDeclaration { declaration -> declaration.name == "List<String>" } shouldBeEqualTo true
+//            it?.hasDeclaration { declaration -> declaration.name == "List<Set<String>>" } shouldBeEqualTo true
 //            it?.hasDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo false
 //            it?.hasDeclarationOf(List::class) shouldBeEqualTo true
 //            it?.hasDeclarationOf(String::class) shouldBeEqualTo false
 //            it?.asKotlinTypeDeclaration() shouldBeInstanceOf KoKotlinTypeDeclaration::class
-//            it?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "List<String>"
+//            it?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "List<Set<String>>"
 //            it?.hasKotlinTypeDeclaration() shouldBeEqualTo true
-//            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "List<String>" } shouldBeEqualTo true
+//            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "List<Set<String>>" } shouldBeEqualTo true
 //            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo false
 //            it?.hasKotlinTypeDeclarationOf(List::class) shouldBeEqualTo true
 //            it?.hasKotlinTypeDeclarationOf(String::class) shouldBeEqualTo false
@@ -1095,25 +1095,25 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
         fun provideValues() =
             listOf(
                 arguments(
-                    "nullable-kotlin-basic-type",
+                    "nullable-kotlin-type",
                     KoKotlinTypeDeclaration::class,
                     KoClassDeclaration::class,
                     "kotlin.String",
                 ),
                 arguments(
-                    "not-nullable-kotlin-basic-type",
+                    "not-nullable-kotlin-type",
                     KoKotlinTypeDeclaration::class,
                     KoClassDeclaration::class,
                     "kotlin.String",
                 ),
 //                arguments(
-//                    "nullable-kotlin-collection-type",
+//                    "nullable-generic-type",
 //                    KoKotlinTypeDeclaration::class,
 //                    KoClassDeclaration::class,
 //                    "kotlin.collections.List",
 //                ),
 //                arguments(
-//                    "not-nullable-kotlin-collection-type",
+//                    "not-nullable-generic-type",
 //                    KoKotlinTypeDeclaration::class,
 //                    KoClassDeclaration::class,
 //                    "kotlin.collections.List",

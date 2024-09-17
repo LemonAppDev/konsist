@@ -60,7 +60,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
         fun provideValues() =
             listOf(
                 arguments(
-                    "nullable-kotlin-basic-type-is-kotlin-type",
+                    "nullable-kotlin-type-is-kotlin-type",
                     false,
                     false,
                     false,
@@ -74,7 +74,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false
                 ),
                 arguments(
-                    "not-nullable-kotlin-basic-type-is-kotlin-type",
+                    "not-nullable-kotlin-type-is-kotlin-type",
                     false,
                     false,
                     false,
@@ -87,8 +87,8 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false
                 ),
-//                arguments("nullable-kotlin-collection-type-is-kotlin-type", false, false, false, false, false, true, false, true, false, false, false),
-//                arguments("not-nullable-kotlin-collection-type-is-kotlin-type", false, false, false, false, false, true, false, true, false, false, false),
+//                arguments("nullable-generic-type-is-kotlin-type", false, false, false, false, false, true, false, true, false, false, false),
+//                arguments("not-nullable-generic-type-is-kotlin-type", false, false, false, false, false, true, false, true, false, false, false),
                 arguments(
                     "nullable-class-type-is-not-kotlin-type",
                     true,

@@ -32,8 +32,8 @@ class KoTypeDeclarationForKoIsGenericTypeProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("kotlin-basic-type", false),
-                arguments("kotlin-collection-type", true),
+                arguments("kotlin-type", false),
+                arguments("generic-type", true),
                 arguments("generic-class-type", true),
                 arguments("not-generic-class-type", false),
                 arguments("interface-type", false),

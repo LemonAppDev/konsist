@@ -288,14 +288,14 @@ class KoTypeDeclarationForKoAnnotationProviderTest {
         @JvmStatic
         fun provideValuesForNoAnnotation() =
             listOf(
-                arguments("kotlin-basic-type-has-no-annotation"),
-                arguments("kotlin-collection-type-has-no-annotation"),
+                arguments("kotlin-type-has-no-annotation"),
                 arguments("class-type-has-no-annotation"),
                 arguments("interface-type-has-no-annotation"),
                 arguments("object-type-has-no-annotation"),
                 arguments("function-type-has-no-annotation"),
                 arguments("import-alias-type-has-no-annotation"),
                 arguments("typealias-type-has-no-annotation"),
+                arguments("generic-type-has-no-annotation"),
                 arguments("external-type-has-no-annotation"),
             )
 
@@ -303,14 +303,14 @@ class KoTypeDeclarationForKoAnnotationProviderTest {
         @JvmStatic
         fun provideValuesForOneAnnotation() =
             listOf(
-                arguments("kotlin-basic-type-has-annotation"),
-                arguments("kotlin-collection-type-has-annotation"),
+                arguments("kotlin-type-has-annotation"),
                 arguments("class-type-has-annotation"),
                 arguments("interface-type-has-annotation"),
                 arguments("object-type-has-annotation"),
                 arguments("function-type-has-annotation"),
                 arguments("import-alias-type-has-annotation"),
                 arguments("typealias-type-has-annotation"),
+                arguments("generic-type-has-annotation"),
                 arguments("external-type-has-annotation"),
             )
 
@@ -318,14 +318,14 @@ class KoTypeDeclarationForKoAnnotationProviderTest {
         @JvmStatic
         fun provideValuesForTwoAnnotations() =
             listOf(
-                arguments("kotlin-basic-type-has-two-annotations"),
-                arguments("kotlin-collection-type-has-two-annotations"),
+                arguments("kotlin-type-has-two-annotations"),
                 arguments("class-type-has-two-annotations"),
                 arguments("interface-type-has-two-annotations"),
                 arguments("object-type-has-two-annotations"),
                 arguments("function-type-has-two-annotations"),
                 arguments("import-alias-type-has-two-annotations"),
                 arguments("typealias-type-has-two-annotations"),
+                arguments("generic-type-has-two-annotations"),
                 arguments("external-type-has-two-annotations"),
             )
     }
