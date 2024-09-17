@@ -32,34 +32,6 @@ class KoKotlinTypeDeclarationTest {
         // then
         sut?.toString() shouldBeEqualTo "String"
     }
-//
-//    @Test
-//    fun `nullable-collection-type-to-string`() {
-//        // given
-//        val sut =
-//            getSnippetFile("nullable-collection-type-to-string")
-//                .properties()
-//                .first()
-//                .type
-//                ?.asKotlinTypeDeclaration()
-//
-//        // then
-//        sut?.toString() shouldBeEqualTo "List"
-//    }
-//
-//    @Test
-//    fun `not-nullable-collection-type-to-string`() {
-//        // given
-//        val sut =
-//            getSnippetFile("not-nullable-collection-type-to-string")
-//                .properties()
-//                .first()
-//                .type
-//                ?.asKotlinTypeDeclaration()
-//
-//        // then
-//        sut?.toString() shouldBeEqualTo "List"
-//    }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/type/kokotlintype/snippet/forgeneral/", fileName)

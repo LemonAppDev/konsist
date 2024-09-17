@@ -346,23 +346,6 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         }
     }
 
-    //    @Test
-    //    fun `fully-qualified-type`() {
-    //        // given
-    //        val sut = getSnippetFile("fully-qualified-type")
-    //            .properties()
-    //            .first()
-    //            .type
-    //
-    //        // then
-    //        assertSoftly(sut) {
-    //            it?.sourceType shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType?"
-    //            it?.bareSourceType shouldBeEqualTo "SampleType"
-    //
-    //            it?.isAlias shouldBeEqualTo false
-    //        }
-    //    }
-
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/type/kotype/snippet/forkosourceandaliastypeprovider/",
