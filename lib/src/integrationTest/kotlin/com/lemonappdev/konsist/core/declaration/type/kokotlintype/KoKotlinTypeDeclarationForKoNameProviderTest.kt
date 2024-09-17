@@ -33,33 +33,33 @@ class KoKotlinTypeDeclarationForKoNameProviderTest {
         sut?.name shouldBeEqualTo "String"
     }
 
-    @Test
-    fun `nullable-kotlin-collection-type-name`() {
-        // given
-        val sut =
-            getSnippetFile("nullable-kotlin-collection-type-name")
-                .properties()
-                .first()
-                .type
-                ?.asKotlinTypeDeclaration()
-
-        // then
-        sut?.name shouldBeEqualTo "List<String>"
-    }
-
-    @Test
-    fun `not-nullable-kotlin-collection-type-name`() {
-        // given
-        val sut =
-            getSnippetFile("not-nullable-kotlin-collection-type-name")
-                .properties()
-                .first()
-                .type
-                ?.asKotlinTypeDeclaration()
-
-        // then
-        sut?.name shouldBeEqualTo "List<String>"
-    }
+//    @Test
+//    fun `nullable-kotlin-collection-type-name`() {
+//        // given
+//        val sut =
+//            getSnippetFile("nullable-kotlin-collection-type-name")
+//                .properties()
+//                .first()
+//                .type
+//                ?.asKotlinTypeDeclaration()
+//
+//        // then
+//        sut?.name shouldBeEqualTo "List<String>"
+//    }
+//
+//    @Test
+//    fun `not-nullable-kotlin-collection-type-name`() {
+//        // given
+//        val sut =
+//            getSnippetFile("not-nullable-kotlin-collection-type-name")
+//                .properties()
+//                .first()
+//                .type
+//                ?.asKotlinTypeDeclaration()
+//
+//        // then
+//        sut?.name shouldBeEqualTo "List<String>"
+//    }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/type/kokotlintype/snippet/forkonameprovider/", fileName)

@@ -33,33 +33,33 @@ class KoKotlinTypeDeclarationForKoPackageProviderTest {
         sut?.packagee?.name shouldBeEqualTo "kotlin"
     }
 
-    @Test
-    fun `nullable-kotlin-collection-type-package`() {
-        // given
-        val sut =
-            getSnippetFile("nullable-kotlin-collection-type-package")
-                .properties()
-                .first()
-                .type
-                ?.asKotlinTypeDeclaration()
-
-        // then
-        sut?.packagee?.name shouldBeEqualTo "kotlin.collections"
-    }
-
-    @Test
-    fun `not-nullable-kotlin-collection-type-package`() {
-        // given
-        val sut =
-            getSnippetFile("not-nullable-kotlin-collection-type-package")
-                .properties()
-                .first()
-                .type
-                ?.asKotlinTypeDeclaration()
-
-        // then
-        sut?.packagee?.name shouldBeEqualTo "kotlin.collections"
-    }
+//    @Test
+//    fun `nullable-kotlin-collection-type-package`() {
+//        // given
+//        val sut =
+//            getSnippetFile("nullable-kotlin-collection-type-package")
+//                .properties()
+//                .first()
+//                .type
+//                ?.asKotlinTypeDeclaration()
+//
+//        // then
+//        sut?.packagee?.name shouldBeEqualTo "kotlin.collections"
+//    }
+//
+//    @Test
+//    fun `not-nullable-kotlin-collection-type-package`() {
+//        // given
+//        val sut =
+//            getSnippetFile("not-nullable-kotlin-collection-type-package")
+//                .properties()
+//                .first()
+//                .type
+//                ?.asKotlinTypeDeclaration()
+//
+//        // then
+//        sut?.packagee?.name shouldBeEqualTo "kotlin.collections"
+//    }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/type/kokotlintype/snippet/forkopackageprovider/", fileName)

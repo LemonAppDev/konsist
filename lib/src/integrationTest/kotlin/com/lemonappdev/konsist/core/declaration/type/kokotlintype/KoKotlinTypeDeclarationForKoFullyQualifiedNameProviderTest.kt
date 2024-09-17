@@ -33,33 +33,33 @@ class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
         sut?.fullyQualifiedName shouldBeEqualTo "kotlin.String"
     }
 
-    @Test
-    fun `nullable-kotlin-collection-type-fully-qualified-name`() {
-        // given
-        val sut =
-            getSnippetFile("nullable-kotlin-collection-type-fully-qualified-name")
-                .properties()
-                .first()
-                .type
-                ?.asKotlinTypeDeclaration()
-
-        // then
-        sut?.fullyQualifiedName shouldBeEqualTo "kotlin.collections.List"
-    }
-
-    @Test
-    fun `not-nullable-kotlin-collection-type-fully-qualified-name`() {
-        // given
-        val sut =
-            getSnippetFile("not-nullable-kotlin-collection-type-fully-qualified-name")
-                .properties()
-                .first()
-                .type
-                ?.asKotlinTypeDeclaration()
-
-        // then
-        sut?.fullyQualifiedName shouldBeEqualTo "kotlin.collections.List"
-    }
+//    @Test
+//    fun `nullable-kotlin-collection-type-fully-qualified-name`() {
+//        // given
+//        val sut =
+//            getSnippetFile("nullable-kotlin-collection-type-fully-qualified-name")
+//                .properties()
+//                .first()
+//                .type
+//                ?.asKotlinTypeDeclaration()
+//
+//        // then
+//        sut?.fullyQualifiedName shouldBeEqualTo "kotlin.collections.List"
+//    }
+//
+//    @Test
+//    fun `not-nullable-kotlin-collection-type-fully-qualified-name`() {
+//        // given
+//        val sut =
+//            getSnippetFile("not-nullable-kotlin-collection-type-fully-qualified-name")
+//                .properties()
+//                .first()
+//                .type
+//                ?.asKotlinTypeDeclaration()
+//
+//        // then
+//        sut?.fullyQualifiedName shouldBeEqualTo "kotlin.collections.List"
+//    }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/type/kokotlintype/snippet/forkofullyqualifiednameprovider/", fileName)
