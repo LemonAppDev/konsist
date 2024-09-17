@@ -24,8 +24,7 @@ class ApiKonsistTest {
     fun `every api declaration has explicit return type`() {
         apiPackageScope
             .functions()
-            .returnTypes
-            .assertTrue { it.isGenericType}
+            .assertTrue { it.hasReturnType() }
     }
 
     @Test
