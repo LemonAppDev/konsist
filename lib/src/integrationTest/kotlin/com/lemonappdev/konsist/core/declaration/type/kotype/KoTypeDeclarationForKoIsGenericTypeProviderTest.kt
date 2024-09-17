@@ -41,7 +41,7 @@ class KoTypeDeclarationForKoIsGenericTypeProviderTest {
                 arguments("function-type", false),
                 arguments("generic-import-alias-type", true),
                 arguments("not-generic-import-alias-type", false),
-                arguments("generic-typealias-type", true),
+                arguments("generic-typealias-type", false),
                 arguments("not-generic-typealias-type", false),
                 arguments("external-type", false),
             )
