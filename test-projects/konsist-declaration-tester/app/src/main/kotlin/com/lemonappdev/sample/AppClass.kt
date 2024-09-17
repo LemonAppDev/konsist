@@ -46,6 +46,8 @@ var appProperty: AppClass = AppClass("")
 
 val appPropertyWithFunctionType: () -> Unit = {}
 
+val appPropertyWithGenericType: List<Set<String>> = emptyList()
+
 val appPropertyWithImportAliasType: ImportAlias = SampleObject
 
 object AppObject

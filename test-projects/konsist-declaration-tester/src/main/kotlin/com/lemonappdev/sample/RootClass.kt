@@ -33,6 +33,8 @@ var rootProperty: RootClass = RootClass("")
 
 val rootPropertyWithFunctionType: () -> Unit = {}
 
+val rootPropertyWithGenericType: List<Set<String>> = emptyList()
+
 val rootPropertyWithImportAliasType: ImportAlias = ImportAlias
 
 object RootObject

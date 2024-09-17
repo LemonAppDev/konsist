@@ -34,6 +34,8 @@ var libProperty: LibClass = LibClass("")
 
 val libPropertyWithFunctionType: () -> Unit = {}
 
+val libPropertyWithGenericType: List<Set<String>> = emptyList()
+
 val libPropertyWithImportAliasType: ImportAlias = LibObject
 
 object LibObject
