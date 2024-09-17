@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.type.kotype
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import io.kotest.matchers.equals.shouldBeEqual
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
@@ -11,6 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource
 class KoTypeDeclarationForKoTypeProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
+    @Suppress("detekt.LongParameterList")
     fun `kotlin-type`(
         fileName: String,
         isClass: Boolean,
@@ -55,7 +55,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
         TestSnippetProvider.getSnippetKoScope("core/declaration/type/kotype/snippet/forkokotlintypeprovider/", fileName)
 
     companion object {
-        @Suppress("unused")
+        @Suppress("unused", "detekt.LongMethod")
         @JvmStatic
         fun provideValues() =
             listOf(
@@ -71,7 +71,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
-                    false
+                    false,
                 ),
                 arguments(
                     "not-nullable-kotlin-type-is-kotlin-type",
@@ -85,10 +85,36 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
-                    false
+                    false,
                 ),
-//                arguments("nullable-generic-type-is-kotlin-type", false, false, false, false, false, false, false, true, false, true, false),
-//                arguments("not-nullable-generic-type-is-kotlin-type", false, false, false, false, false, false, false, true, false, true, false),
+//                arguments(
+//                "nullable-generic-type-is-kotlin-type",
+//                false,
+//                false,
+//                false,
+//                false,
+//                false,
+//                false,
+//                false,
+//                true,
+//                false,
+//                true,
+//                false,
+//                ),
+//                arguments(
+//                "not-nullable-generic-type-is-kotlin-type",
+//                false,
+//                false,
+//                false,
+//                false,
+//                false,
+//                false,
+//                false,
+//                true,
+//                false,
+//                true,
+//                false,
+//                ),
                 arguments(
                     "nullable-class-type-is-not-kotlin-type",
                     true,
@@ -101,7 +127,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
-                    false
+                    false,
                 ),
                 arguments(
                     "not-nullable-class-type-is-not-kotlin-type",
@@ -115,7 +141,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
-                    false
+                    false,
                 ),
                 arguments(
                     "nullable-interface-type-is-not-kotlin-type",
@@ -129,7 +155,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
-                    false
+                    false,
                 ),
                 arguments(
                     "not-nullable-interface-type-is-not-kotlin-type",
@@ -143,7 +169,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
-                    false
+                    false,
                 ),
                 arguments(
                     "nullable-object-type-is-not-kotlin-type",
@@ -157,7 +183,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
-                    false
+                    false,
                 ),
                 arguments(
                     "not-nullable-object-type-is-not-kotlin-type",
@@ -171,7 +197,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
-                    false
+                    false,
                 ),
                 arguments(
                     "nullable-function-type-type-is-not-kotlin-type",
@@ -185,7 +211,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     true,
                     false,
-                    false
+                    false,
                 ),
                 arguments(
                     "not-nullable-function-type-type-is-not-kotlin-type",
@@ -199,7 +225,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     true,
                     false,
-                    false
+                    false,
                 ),
                 arguments(
                     "nullable-import-alias-type-is-not-kotlin-type",
@@ -213,7 +239,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
-                    false
+                    false,
                 ),
                 arguments(
                     "not-nullable-import-alias-type-is-not-kotlin-type",
@@ -227,7 +253,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
-                    false
+                    false,
                 ),
                 arguments(
                     "nullable-typealias-type-is-not-kotlin-type",
@@ -241,7 +267,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
-                    false
+                    false,
                 ),
                 arguments(
                     "not-nullable-typealias-type-is-not-kotlin-type",
@@ -255,7 +281,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
-                    false
+                    false,
                 ),
                 arguments(
                     "nullable-external-type-is-not-kotlin-type",
@@ -269,7 +295,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
-                    true
+                    true,
                 ),
                 arguments(
                     "not-nullable-external-type-is-not-kotlin-type",
@@ -283,7 +309,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
-                    true
+                    true,
                 ),
             )
     }

@@ -15,6 +15,7 @@ import kotlin.reflect.KClass
 /**
  * An interface representing a Kotlin declaration that provides the declaration associated with this type.
  */
+@Suppress("detekt.TooManyFunctions")
 interface KoTypeDeclarationProvider : KoBaseProvider {
     /**
      * Represents the declaration associated with this type.

@@ -2513,7 +2513,7 @@ class KoTypeDeclarationProviderListExtTest {
         // then
         sut shouldBeEqualTo listOf(declaration2, declaration3)
     }
-    
+
     @Test
     fun `withGenericTypeDeclaration() returns declaration with generic type`() {
         // given

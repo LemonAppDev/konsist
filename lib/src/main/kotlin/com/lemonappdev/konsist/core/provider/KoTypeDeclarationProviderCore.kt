@@ -20,6 +20,7 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import kotlin.reflect.KClass
 
+@Suppress("detekt.TooManyFunctions")
 internal interface KoTypeDeclarationProviderCore :
     KoTypeDeclarationProvider,
     KoBaseProviderCore,

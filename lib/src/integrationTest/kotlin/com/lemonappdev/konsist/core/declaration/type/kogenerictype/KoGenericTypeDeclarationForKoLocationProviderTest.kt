@@ -9,9 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource
 class KoGenericTypeDeclarationForKoLocationProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `type-location`(
-        fileName: String,
-    ) {
+    fun `type-location`(fileName: String) {
         // given
         val sut =
             getSnippetFile(fileName)
