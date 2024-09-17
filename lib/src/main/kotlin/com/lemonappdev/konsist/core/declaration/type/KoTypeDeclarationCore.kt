@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration.type
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoTypeProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -82,7 +83,7 @@ internal class KoTypeDeclarationCore private constructor(
     Remove in version 0.18.0
      */
     override val isGenericType: Boolean
-        get() = super<KoIsGenericTypeProviderCore>.isGenericType
+        get() = super<KoTypeDeclarationProviderCore>.isGenericType
 
     /*
     Remove in version 0.18.0

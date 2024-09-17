@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api
 
+import com.lemonappdev.konsist.api.ext.list.returnTypes
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withParameter
 import com.lemonappdev.konsist.api.ext.list.withProperty
@@ -23,7 +24,8 @@ class ApiKonsistTest {
     fun `every api declaration has explicit return type`() {
         apiPackageScope
             .functions()
-            .assertTrue { it.hasReturnType() }
+            .returnTypes
+            .assertTrue { it.isGenericType}
     }
 
     @Test
