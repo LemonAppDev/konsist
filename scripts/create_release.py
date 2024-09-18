@@ -44,6 +44,9 @@ def print_blue_message(text):
 def print_magenta_message(text):
     print(f"\033[35m{text}\033[0m")
 
+def print_cyan_message(text):
+    print(f"\033[36m{text}\033[0m")
+
 def print_method_name(text):
     print(f"\033[3;33m\nMethod: {text}()\033[0m")
 
@@ -59,7 +62,7 @@ def choose_release_option():
     print_success_message(f"Which release option do you choose? Write:")
     print_magenta_message(f"1 - Create Release (Update Minor)")
     print_blue_message(f"2 - Create Release (Update Patch)")
-    print_yellow_message(f"3 - Create Hotfix Release (Update Patch)")
+    print_cyan_message(f"3 - Create Hotfix Release (Update Patch)")
 
     while True:
         choice = input(f"\033[31;1mEnter your choice (1, 2 or 3): \033[0m")
