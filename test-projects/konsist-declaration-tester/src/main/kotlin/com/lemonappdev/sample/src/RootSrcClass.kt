@@ -34,6 +34,8 @@ var rootSrcProperty: RootSrcClass = RootSrcClass("")
 
 val rootSrcPropertyWithFunctionType: () -> Unit = {}
 
+val rootSrcPropertyWithGenericType: List<Set<String>> = emptyList()
+
 val rootSrcPropertyWithImportAliasType: ImportAlias = RootSrcObject
 
 object RootSrcObject

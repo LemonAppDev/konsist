@@ -34,6 +34,8 @@ var appPropertyTest: AppClassTest = AppClassTest("")
 
 val appPropertyWithFunctionTypeTest: () -> Unit = {}
 
+val appPropertyWithGenericTypeTest: List<Set<String>> = emptyList()
+
 val appPropertyWithImportAliasTypeTest: ImportAlias = AppTestClass1()
 
 object AppObjectTest

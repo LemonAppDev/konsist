@@ -34,10 +34,10 @@ class KoTypeDeclarationForKoTextProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("nullable-kotlin-basic-type-text", "String?"),
-                arguments("not-nullable-kotlin-basic-type-text", "String"),
-                arguments("nullable-kotlin-collection-type-text", "List<String>?"),
-                arguments("not-nullable-kotlin-collection-type-text", "List<String>"),
+                arguments("nullable-kotlin-type-text", "String?"),
+                arguments("not-nullable-kotlin-type-text", "String"),
+                arguments("nullable-generic-type-text", "List<Set<String>>?"),
+                arguments("not-nullable-generic-type-text", "List<Set<String>>"),
                 arguments("nullable-class-type-text", "SampleType?"),
                 arguments("not-nullable-class-type-text", "SampleType"),
                 arguments("nullable-interface-type-text", "SampleInterface?"),

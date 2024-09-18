@@ -54,6 +54,11 @@ interface KoTypeProvider : KoBaseProvider {
     val isFunctionType: Boolean
 
     /**
+     * Determines whatever source declaration is a generic.
+     */
+    val isGenericType: Boolean
+
+    /**
      * Determines whatever source declaration is an external type.
      * An external type refers to a type that is defined outside the project's codebase. for e.g. in external library.
      */

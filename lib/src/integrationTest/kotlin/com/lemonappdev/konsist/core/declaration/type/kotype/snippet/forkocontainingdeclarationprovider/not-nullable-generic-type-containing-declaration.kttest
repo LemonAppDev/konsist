@@ -1,0 +1,3 @@
+package com.lemonappdev.konsist.core.declaration.type.kotype.snippet.forkocontainingdeclarationprovider
+
+class SampleClass1(val sampleProperty1: List<Set<String>>)

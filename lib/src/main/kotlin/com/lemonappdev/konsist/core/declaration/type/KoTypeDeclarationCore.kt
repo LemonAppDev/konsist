@@ -82,7 +82,7 @@ internal class KoTypeDeclarationCore private constructor(
     Remove in version 0.18.0
      */
     override val isGenericType: Boolean
-        get() = super<KoIsGenericTypeProviderCore>.isGenericType
+        get() = super<KoTypeDeclarationProviderCore>.isGenericType
 
     /*
     Remove in version 0.18.0

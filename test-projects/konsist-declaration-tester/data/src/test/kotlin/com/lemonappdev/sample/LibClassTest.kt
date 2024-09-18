@@ -34,6 +34,8 @@ var libPropertyTest: LibClassTest = LibClassTest("")
 
 val libPropertyWithFunctionTypeTest: () -> Unit = {}
 
+val libPropertyWithGenericTypeTest: List<Set<String>> = emptyList()
+
 val libPropertyWithImportAliasTypeTest: ImportAlias = LibObject
 
 object LibObjectTest

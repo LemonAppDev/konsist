@@ -101,10 +101,10 @@ class KoTypeDeclarationForKoPathProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("nullable-kotlin-basic-type-path"),
-                arguments("not-nullable-kotlin-basic-type-path"),
-                arguments("nullable-kotlin-collection-type-path"),
-                arguments("not-nullable-kotlin-collection-type-path"),
+                arguments("nullable-kotlin-type-path"),
+                arguments("not-nullable-kotlin-type-path"),
+                arguments("nullable-generic-type-path"),
+                arguments("not-nullable-generic-type-path"),
                 arguments("nullable-class-type-path"),
                 arguments("not-nullable-class-type-path"),
                 arguments("nullable-interface-type-path"),

@@ -10,6 +10,7 @@ import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoFunctionTypeDeclarationCore
+import com.lemonappdev.konsist.core.declaration.type.KoGenericTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
@@ -18,6 +19,7 @@ import com.lemonappdev.konsist.core.model.getTypeAlias
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtFunctionType
 import org.jetbrains.kotlin.psi.KtNullableType
+import org.jetbrains.kotlin.psi.KtTypeArgumentList
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
 import kotlin.reflect.KClass
@@ -114,7 +116,9 @@ object TypeUtil {
         return when {
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
             nestedType is KtUserType && typeText != null -> {
-                if (isKotlinBasicType(typeText) || isKotlinCollectionTypes(typeText)) {
+                if (nestedType.children.filterIsInstance<KtTypeArgumentList>().isNotEmpty()) {
+                    KoGenericTypeDeclarationCore.getInstance(nestedType, containingFile)
+                } else if (isKotlinBasicType(typeText) || isKotlinCollectionTypes(typeText)) {
                     KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
                 } else {
                     getClass(typeText, fullyQualifiedName, false, containingFile)
@@ -163,7 +167,7 @@ object TypeUtil {
 
     internal fun isKotlinBasicType(name: String): Boolean = kotlinBasicTypes.any { it == name }
 
-    internal fun isKotlinCollectionTypes(name: String): Boolean = kotlinCollectionTypes.any { name.startsWith("$it<") }
+    internal fun isKotlinCollectionTypes(name: String): Boolean = kotlinCollectionTypes.any { it == name }
 
     // Basic types in Kotlin are described here: https://kotlinlang.org/docs/basic-types.html
     private val kotlinBasicTypes: Set<String>
