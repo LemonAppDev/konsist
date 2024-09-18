@@ -54,7 +54,7 @@ def choose_release_option():
     """
     Prompts the user to choose between "Main Release - Upgrade Minor" and "Hotfix Release - Upgrade Patch".
 
-    Returns: The chosen option (1 or 2).
+    Returns: The chosen option (1, 2 or 3).
     """
 
     print_method_name("choose_release_option")
