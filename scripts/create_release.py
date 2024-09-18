@@ -262,11 +262,13 @@ def replace_konsist_version(old_version, new_version, files):
             f.write(file_text)
             print_success_message(f"Updated version in: {file_path}")
 
+    # Add changes to the staging area
+    subprocess.run(["git", "add", "."], check=True)  # Stage all changes
+
     # Check if there are any changes to commit
     result = subprocess.run(["git", "status", "--porcelain"], check=True, capture_output=True)
     if result.stdout.decode().strip():
         commit_message = f"Replace Konsist version {old_version} with {new_version}"
-        subprocess.run(["git", "add", "."], check=True)  # Stage all changes
         subprocess.run(["git", "commit", "-m", commit_message], check=True)  # Commit changes
         print_success_message(f"Changes committed.")
     else:
