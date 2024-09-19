@@ -71,6 +71,23 @@ internal class KoGenericTypeDeclarationCore private constructor(
         KoTypeDeclarationCore.getInstance(ktTypeReference, this.castToKoBaseDeclaration())
     }
 
+    override val typeArguments: List<KoTypeDeclaration> by lazy {
+        val arguments = mutableListOf<KoTypeDeclaration>()
+        var currentArgument: KoTypeDeclaration? = typeArgument
+
+        while (currentArgument != null) {
+            if (currentArgument.declaration is KoGenericTypeDeclaration) {
+                arguments.add((currentArgument.declaration as KoGenericTypeDeclaration).genericType)
+                currentArgument = (currentArgument.declaration as KoGenericTypeDeclaration).typeArgument
+            } else {
+                arguments.add(currentArgument)
+                currentArgument = null
+            }
+        }
+
+        arguments
+    }
+
     override fun toString(): String = name
 
     internal companion object {

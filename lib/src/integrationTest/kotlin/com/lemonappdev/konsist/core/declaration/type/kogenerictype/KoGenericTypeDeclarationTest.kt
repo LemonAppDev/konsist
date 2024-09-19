@@ -44,6 +44,7 @@ class KoGenericTypeDeclarationTest {
         assertSoftly(sut) {
             it?.typeArgument?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.typeArgument?.name shouldBeEqualTo "String"
+            it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
         }
     }
 
@@ -61,6 +62,7 @@ class KoGenericTypeDeclarationTest {
         assertSoftly(sut) {
             it?.typeArgument?.declaration shouldBeInstanceOf KoClassDeclaration::class
             it?.typeArgument?.name shouldBeEqualTo "SampleClass"
+            it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("SampleClass")
         }
     }
 
@@ -78,6 +80,7 @@ class KoGenericTypeDeclarationTest {
         assertSoftly(sut) {
             it?.typeArgument?.declaration shouldBeInstanceOf KoInterfaceDeclaration::class
             it?.typeArgument?.name shouldBeEqualTo "SampleInterface"
+            it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("SampleInterface")
         }
     }
 
@@ -95,6 +98,7 @@ class KoGenericTypeDeclarationTest {
         assertSoftly(sut) {
             it?.typeArgument?.declaration shouldBeInstanceOf KoObjectDeclaration::class
             it?.typeArgument?.name shouldBeEqualTo "SampleObject"
+            it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("SampleObject")
         }
     }
 
@@ -112,6 +116,7 @@ class KoGenericTypeDeclarationTest {
         assertSoftly(sut) {
             it?.typeArgument?.declaration shouldBeInstanceOf KoGenericTypeDeclaration::class
             it?.typeArgument?.name shouldBeEqualTo "Set<String>"
+            it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("Set", "String")
         }
     }
 
@@ -139,6 +144,13 @@ class KoGenericTypeDeclarationTest {
                 ?.typeArgument
                 ?.name
                 ?.shouldBeEqualTo("String")
+
+            it
+                ?.typeArgument
+                ?.asGenericTypeDeclaration()
+                ?.typeArguments
+                ?.map { typeArgument -> typeArgument.name }
+                ?.shouldBeEqualTo(listOf("String"))
         }
     }
 
@@ -156,6 +168,7 @@ class KoGenericTypeDeclarationTest {
         assertSoftly(sut) {
             it?.typeArgument?.declaration shouldBeInstanceOf KoFunctionTypeDeclaration::class
             it?.typeArgument?.name shouldBeEqualTo "() -> Unit"
+            it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("() -> Unit")
         }
     }
 
@@ -173,6 +186,7 @@ class KoGenericTypeDeclarationTest {
         assertSoftly(sut) {
             it?.typeArgument?.declaration shouldBeInstanceOf KoImportAliasDeclaration::class
             it?.typeArgument?.name shouldBeEqualTo "ImportAlias"
+            it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("ImportAlias")
         }
     }
 
@@ -190,6 +204,7 @@ class KoGenericTypeDeclarationTest {
         assertSoftly(sut) {
             it?.typeArgument?.declaration shouldBeInstanceOf KoTypeAliasDeclaration::class
             it?.typeArgument?.name shouldBeEqualTo "SampleTypeAlias"
+            it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("SampleTypeAlias")
         }
     }
 
@@ -207,6 +222,7 @@ class KoGenericTypeDeclarationTest {
         assertSoftly(sut) {
             it?.typeArgument?.declaration shouldBeInstanceOf KoExternalDeclaration::class
             it?.typeArgument?.name shouldBeEqualTo "SampleExternalClass"
+            it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("SampleExternalClass")
         }
     }
 
