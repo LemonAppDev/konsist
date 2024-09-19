@@ -38,5 +38,13 @@ interface KoGenericTypeDeclaration :
      */
     val typeArgument: KoTypeDeclaration
 
+    /**
+     * A list of type declarations representing all type arguments, including nested ones.
+     *
+     * This property recursively retrieves type arguments from the generic type declaration.
+     * For example:
+     * 1) In `List<String>`, the list will contain `String`.
+     * 2) In `List<Set<String>>`, the list will contain `Set` and `String`.
+     */
     val typeArguments: List<KoTypeDeclaration>
 }
