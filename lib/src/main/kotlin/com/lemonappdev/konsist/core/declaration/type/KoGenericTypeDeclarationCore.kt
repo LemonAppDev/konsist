@@ -21,8 +21,7 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
 
 internal class KoGenericTypeDeclarationCore private constructor(
-    private val ktUserType: KtUserType?,
-    private val ktTypeProjection: KtTypeProjection?,
+    private val ktUserType: KtUserType,
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoGenericTypeDeclaration,
     KoBaseTypeDeclarationCore,
@@ -33,28 +32,16 @@ internal class KoGenericTypeDeclarationCore private constructor(
     KoPathProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore {
+    override val psiElement: PsiElement by lazy { ktUserType }
 
-    init {
-        require(ktUserType != null || ktTypeProjection != null) { "Either KtUserType or KtTypeProjection must be provided" }
-    }
+    override val ktElement: KtElement by lazy { ktUserType }
 
-    override val psiElement: PsiElement by lazy {
-        ktUserType ?: ktTypeProjection ?: error("Both KtUserType and KtTypeProjection are null")
-    }
-
-    override val ktElement: KtElement by lazy {
-        ktUserType ?: ktTypeProjection ?: error("Both KtUserType and KtTypeProjection are null")
-    }
-
-    override val name: String by lazy {
-        ktUserType?.text ?: ktTypeProjection?.text ?: error("Both KtUserType and KtTypeProjection are null")
-    }
+    override val name: String by lazy { ktUserType.text }
 
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
     override val typeArgument: KoTypeDeclaration by lazy {
-        val ktTypeReference = when {
-            ktUserType != null -> ktUserType
+        val ktTypeReference = ktUserType
                 .children
                 .filterIsInstance<KtTypeArgumentList>()
                 .firstOrNull()
@@ -64,14 +51,6 @@ internal class KoGenericTypeDeclarationCore private constructor(
                 ?.children
                 ?.filterIsInstance<KtTypeReference>()
                 ?.firstOrNull()
-
-            ktTypeProjection != null -> ktTypeProjection
-                .children
-                .filterIsInstance<KtTypeReference>()
-                .firstOrNull()
-
-            else -> null
-        }
 
         require(ktTypeReference != null) { "Type argument cannot be null." }
 
@@ -83,22 +62,12 @@ internal class KoGenericTypeDeclarationCore private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoGenericTypeDeclaration> = KoDeclarationCache()
 
-        // Factory method to create instance using KtUserType
         internal fun getInstance(
             ktUserType: KtUserType,
             containingDeclaration: KoBaseDeclaration,
         ): KoGenericTypeDeclaration =
             cache.getOrCreateInstance(ktUserType, containingDeclaration) {
-                KoGenericTypeDeclarationCore(ktUserType, null, containingDeclaration)
-            }
-
-        // Factory method to create instance using KtTypeProjection
-        internal fun getInstance(
-            ktTypeProjection: KtTypeProjection,
-            containingDeclaration: KoBaseDeclaration,
-        ): KoGenericTypeDeclaration =
-            cache.getOrCreateInstance(ktTypeProjection, containingDeclaration) {
-                KoGenericTypeDeclarationCore(null, ktTypeProjection, containingDeclaration)
+                KoGenericTypeDeclarationCore(ktUserType, containingDeclaration)
             }
     }
 }
