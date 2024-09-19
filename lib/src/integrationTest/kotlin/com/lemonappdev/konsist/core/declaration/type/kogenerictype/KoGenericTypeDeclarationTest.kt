@@ -201,6 +201,108 @@ class KoGenericTypeDeclarationTest {
         }
     }
 
+    @Test
+    fun `kotlin-generic-type`() {
+        // given
+        val sut =
+            getSnippetFile("kotlin-generic-type")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+
+        // then
+        assertSoftly(sut) {
+            it?.genericType?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
+            it?.genericType?.name shouldBeEqualTo "List"
+        }
+    }
+
+    @Test
+    fun `class-generic-type`() {
+        // given
+        val sut =
+            getSnippetFile("class-generic-type")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+
+        // then
+        assertSoftly(sut) {
+            it?.genericType?.declaration shouldBeInstanceOf KoClassDeclaration::class
+            it?.genericType?.name shouldBeEqualTo "SampleGenericClassWithParameter"
+        }
+    }
+
+    @Test
+    fun `interface-generic-type`() {
+        // given
+        val sut =
+            getSnippetFile("interface-generic-type")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+
+        // then
+        assertSoftly(sut) {
+            it?.genericType?.declaration shouldBeInstanceOf KoInterfaceDeclaration::class
+            it?.genericType?.name shouldBeEqualTo "SampleGenericSuperInterface"
+        }
+    }
+
+    @Test
+    fun `nested-generic-type`() {
+        // given
+        val sut =
+            getSnippetFile("nested-generic-type")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+
+        // then
+        assertSoftly(sut) {
+            it?.typeArgument?.asGenericTypeDeclaration()?.genericType?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
+            it?.typeArgument?.asGenericTypeDeclaration()?.genericType?.name shouldBeEqualTo "Set"
+        }
+    }
+
+    @Test
+    fun `import-alias-generic-type`() {
+        // given
+        val sut =
+            getSnippetFile("import-alias-generic-type")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+
+        // then
+        assertSoftly(sut) {
+            it?.genericType?.declaration shouldBeInstanceOf KoImportAliasDeclaration::class
+            it?.genericType?.name shouldBeEqualTo "SampleImportAlias"
+        }
+    }
+
+    @Test
+    fun `external-generic-type`() {
+        // given
+        val sut =
+            getSnippetFile("external-generic-type")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+
+        // then
+        assertSoftly(sut) {
+            it?.genericType?.declaration shouldBeInstanceOf KoExternalDeclaration::class
+            it?.genericType?.name shouldBeEqualTo "SampleExternalGenericClass"
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/type/kogenerictype/snippet/forgeneral/", fileName)
 }

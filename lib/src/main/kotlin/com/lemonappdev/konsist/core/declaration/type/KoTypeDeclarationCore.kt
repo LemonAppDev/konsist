@@ -26,11 +26,13 @@ import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtNullableType
 import org.jetbrains.kotlin.psi.KtTypeReference
 
 internal class KoTypeDeclarationCore private constructor(
-    override val ktTypeReference: KtTypeReference,
+    override val ktTypeReference: KtTypeReference?,
+    override val ktNameReferenceExpression: KtNameReferenceExpression?,
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoTypeDeclaration,
     KoBaseProviderCore,
@@ -52,25 +54,30 @@ internal class KoTypeDeclarationCore private constructor(
     KoResideInPackageProviderCore,
     KoAnnotationProviderCore,
     KoTypeDeclarationProviderCore {
-    override val psiElement: PsiElement by lazy { ktTypeReference }
 
-    override val ktElement: KtElement by lazy { ktTypeReference }
+    // Ensure that at least one of the parameters is not null
+    init {
+        require(ktTypeReference != null || ktNameReferenceExpression != null) {
+            "Either KtTypeReference or KtNameReferenceExpression must be provided"
+        }
+    }
 
-    override val ktAnnotated: KtAnnotated by lazy { ktTypeReference }
+    override val psiElement: PsiElement by lazy {
+        ktTypeReference ?: ktNameReferenceExpression ?: error("Both KtTypeReference and KtNameReferenceExpression are null")
+    }
+
+    override val ktElement: KtElement by lazy {
+        ktTypeReference ?: ktNameReferenceExpression ?: error("Both KtTypeReference and KtNameReferenceExpression are null")
+    }
+
+    override val ktAnnotated: KtAnnotated? by lazy { ktTypeReference }
 
     override val name: String by lazy {
-        val typeReference =
-            ktTypeReference
-                .children
-                // The last item is chosen because when a type is preceded by an annotation or modifier,
-                // the type being searched for is the last item in the list.
-                .lastOrNull()
+        val typeReference = ktTypeReference?.children?.lastOrNull()
+            ?: ktNameReferenceExpression
 
         if (typeReference is KtNullableType) {
-            typeReference
-                .children
-                .firstOrNull()
-                ?.text ?: ""
+            typeReference.children.firstOrNull()?.text ?: ""
         } else {
             typeReference?.text ?: ""
         }
@@ -95,12 +102,22 @@ internal class KoTypeDeclarationCore private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoTypeDeclaration> = KoDeclarationCache()
 
+        // Factory method for KtTypeReference
         internal fun getInstance(
             ktTypeReference: KtTypeReference,
             containingDeclaration: KoBaseDeclaration,
         ): KoTypeDeclaration =
             cache.getOrCreateInstance(ktTypeReference, containingDeclaration) {
-                KoTypeDeclarationCore(ktTypeReference, containingDeclaration)
+                KoTypeDeclarationCore(ktTypeReference, null, containingDeclaration)
+            }
+
+        // Factory method for KtNameReferenceExpression
+        internal fun getInstance(
+            ktNameReferenceExpression: KtNameReferenceExpression,
+            containingDeclaration: KoBaseDeclaration,
+        ): KoTypeDeclaration =
+            cache.getOrCreateInstance(ktNameReferenceExpression, containingDeclaration) {
+                KoTypeDeclarationCore(null, ktNameReferenceExpression, containingDeclaration)
             }
     }
 }

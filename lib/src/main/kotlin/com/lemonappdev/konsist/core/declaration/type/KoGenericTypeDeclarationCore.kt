@@ -15,6 +15,7 @@ import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtTypeArgumentList
 import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
@@ -39,6 +40,17 @@ internal class KoGenericTypeDeclarationCore private constructor(
     override val name: String by lazy { ktUserType.text }
 
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
+
+    override val genericType: KoTypeDeclaration by lazy {
+        val ktNameReferenceExpression = ktUserType
+            .children
+            .filterIsInstance<KtNameReferenceExpression>()
+            .firstOrNull()
+
+        require(ktNameReferenceExpression != null) { "Generic type cannot be null." }
+
+        KoTypeDeclarationCore.getInstance(ktNameReferenceExpression, this.castToKoBaseDeclaration())
+    }
 
     override val typeArgument: KoTypeDeclaration by lazy {
         val ktTypeReference = ktUserType

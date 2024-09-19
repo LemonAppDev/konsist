@@ -17,7 +17,9 @@ import com.lemonappdev.konsist.core.model.getInterface
 import com.lemonappdev.konsist.core.model.getObject
 import com.lemonappdev.konsist.core.model.getTypeAlias
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
+import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunctionType
+import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtNullableType
 import org.jetbrains.kotlin.psi.KtTypeArgumentList
 import org.jetbrains.kotlin.psi.KtTypeReference
@@ -26,25 +28,33 @@ import kotlin.reflect.KClass
 
 object TypeUtil {
     internal fun getBasicType(
-        types: List<KtTypeReference>,
+        types: List<KtElement?>,
         isExtension: Boolean,
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
     ): KoBaseTypeDeclaration? {
+        val notNullTypes = types.filterNotNull()
+
         val type =
-            if (isExtension && types.size > 1) {
-                // The last element is chosen because, in the case of an extension, the first element is the receiver
-                // and the second element is the return type.
-                types.last()
-            } else {
-                if (!isExtension) {
-                    types.firstOrNull()
+            if (notNullTypes.filterIsInstance<KtTypeReference>().isNotEmpty()) {
+                if (isExtension && notNullTypes.size > 1) {
+                    // The last element is chosen because, in the case of an extension, the first element is the receiver
+                    // and the second element is the return type.
+                    notNullTypes.last()
                 } else {
-                    null
-                }?.children
-                    // The last item is chosen because when a type is preceded by an annotation or modifier,
-                    // the type being searched for is the last item in the list.
-                    ?.lastOrNull()
+                    if (!isExtension) {
+                        notNullTypes.firstOrNull()
+                    } else {
+                        null
+                    }?.children
+                        // The last item is chosen because when a type is preceded by an annotation or modifier,
+                        // the type being searched for is the last item in the list.
+                        ?.lastOrNull()
+                }
+            } else if (notNullTypes.filterIsInstance<KtNameReferenceExpression>().isNotEmpty()) {
+                notNullTypes.filterIsInstance<KtNameReferenceExpression>().firstOrNull()
+            } else {
+                null
             }
 
         val nestedType =
@@ -99,7 +109,8 @@ object TypeUtil {
                     } else {
                         import.name.substringAfterLast(".") == typeText
                     }
-                }?.name
+                }
+                ?.name
                 ?: containingFile
                     .declarations()
                     .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
@@ -119,6 +130,18 @@ object TypeUtil {
                 if (nestedType.children.filterIsInstance<KtTypeArgumentList>().isNotEmpty()) {
                     KoGenericTypeDeclarationCore.getInstance(nestedType, containingFile)
                 } else if (isKotlinBasicType(typeText) || isKotlinCollectionTypes(typeText)) {
+                    KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
+                } else {
+                    getClass(typeText, fullyQualifiedName, false, containingFile)
+                        ?: getInterface(typeText, fullyQualifiedName, false, containingFile)
+                        ?: getObject(typeText, fullyQualifiedName, false, containingFile)
+                        ?: getTypeAlias(typeText, fullyQualifiedName, containingFile)
+                        ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
+                }
+            }
+
+            nestedType is KtNameReferenceExpression && typeText != null -> {
+                if (isKotlinBasicType(typeText) || isKotlinCollectionTypes(typeText)) {
                     KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
                 } else {
                     getClass(typeText, fullyQualifiedName, false, containingFile)
@@ -156,10 +179,10 @@ object TypeUtil {
             declarations.singleOrNull()
                 ?: declarations.firstOrNull { declaration ->
                     declaration.fullyQualifiedName?.contains(parentDeclarationFullyQualifiedName) == true ||
-                        (
-                            (declaration as? KoContainingDeclarationProvider)
-                                ?.containingDeclaration as? KoDeclarationProvider
-                        )?.hasDeclaration { it == parentDeclaration } == true
+                            (
+                                    (declaration as? KoContainingDeclarationProvider)
+                                        ?.containingDeclaration as? KoDeclarationProvider
+                                    )?.hasDeclaration { it == parentDeclaration } == true
                 }
 
         return declaration?.fullyQualifiedName
