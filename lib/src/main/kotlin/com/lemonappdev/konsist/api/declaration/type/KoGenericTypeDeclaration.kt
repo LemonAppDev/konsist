@@ -20,5 +20,6 @@ interface KoGenericTypeDeclaration :
     KoPathProvider,
     KoModuleProvider,
     KoSourceSetProvider {
+//    val genericType: KoTypeDeclaration
     val typeArgument: KoTypeDeclaration
 }
