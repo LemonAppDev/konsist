@@ -53,22 +53,21 @@ internal class KoGenericTypeDeclarationCore private constructor(
         KoTypeDeclarationCore.getInstance(ktNameReferenceExpression, this.castToKoBaseDeclaration())
     }
 
-    override val typeArgument: KoTypeDeclaration by lazy {
-        val ktTypeReference =
+    override val typeArguments: List<KoTypeDeclaration> by lazy {
+        val ktTypeReferences =
             ktUserType
                 .children
+                .asSequence()
                 .filterIsInstance<KtTypeArgumentList>()
-                .firstOrNull()
-                ?.children
-                ?.filterIsInstance<KtTypeProjection>()
-                ?.firstOrNull()
-                ?.children
-                ?.filterIsInstance<KtTypeReference>()
-                ?.firstOrNull()
+                .flatMap { it.children.toList() }
+                .filterIsInstance<KtTypeProjection>()
+                .flatMap { it.children.toList() }
+                .filterIsInstance<KtTypeReference>()
+                .toList()
 
-        require(ktTypeReference != null) { "Type argument cannot be null." }
+        require(ktTypeReferences.isNotEmpty()) { "Type argument cannot be empty list." }
 
-        KoTypeDeclarationCore.getInstance(ktTypeReference, this.castToKoBaseDeclaration())
+        ktTypeReferences.map { KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
     }
 
     override fun toString(): String = name

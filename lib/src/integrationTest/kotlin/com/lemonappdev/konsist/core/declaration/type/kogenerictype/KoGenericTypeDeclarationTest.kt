@@ -31,186 +31,6 @@ class KoGenericTypeDeclarationTest {
     }
 
     @Test
-    fun `kotlin-type-argument`() {
-        // given
-        val sut =
-            getSnippetFile("kotlin-type-argument")
-                .properties()
-                .first()
-                .type
-                ?.asGenericTypeDeclaration()
-
-        // then
-        assertSoftly(sut) {
-            it?.typeArgument?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
-            it?.typeArgument?.name shouldBeEqualTo "String"
-        }
-    }
-
-    @Test
-    fun `class-type-argument`() {
-        // given
-        val sut =
-            getSnippetFile("class-type-argument")
-                .properties()
-                .first()
-                .type
-                ?.asGenericTypeDeclaration()
-
-        // then
-        assertSoftly(sut) {
-            it?.typeArgument?.declaration shouldBeInstanceOf KoClassDeclaration::class
-            it?.typeArgument?.name shouldBeEqualTo "SampleClass"
-        }
-    }
-
-    @Test
-    fun `interface-type-argument`() {
-        // given
-        val sut =
-            getSnippetFile("interface-type-argument")
-                .properties()
-                .first()
-                .type
-                ?.asGenericTypeDeclaration()
-
-        // then
-        assertSoftly(sut) {
-            it?.typeArgument?.declaration shouldBeInstanceOf KoInterfaceDeclaration::class
-            it?.typeArgument?.name shouldBeEqualTo "SampleInterface"
-        }
-    }
-
-    @Test
-    fun `object-type-argument`() {
-        // given
-        val sut =
-            getSnippetFile("object-type-argument")
-                .properties()
-                .first()
-                .type
-                ?.asGenericTypeDeclaration()
-
-        // then
-        assertSoftly(sut) {
-            it?.typeArgument?.declaration shouldBeInstanceOf KoObjectDeclaration::class
-            it?.typeArgument?.name shouldBeEqualTo "SampleObject"
-        }
-    }
-
-    @Test
-    fun `generic-type-argument`() {
-        // given
-        val sut =
-            getSnippetFile("generic-type-argument")
-                .properties()
-                .first()
-                .type
-                ?.asGenericTypeDeclaration()
-
-        // then
-        assertSoftly(sut) {
-            it?.typeArgument?.declaration shouldBeInstanceOf KoGenericTypeDeclaration::class
-            it?.typeArgument?.name shouldBeEqualTo "Set<String>"
-        }
-    }
-
-    @Test
-    fun `nested-generic-type-argument`() {
-        // given
-        val sut =
-            getSnippetFile("nested-generic-type-argument")
-                .properties()
-                .first()
-                .type
-                ?.asGenericTypeDeclaration()
-
-        // then
-        assertSoftly(sut) {
-            it
-                ?.typeArgument
-                ?.asGenericTypeDeclaration()
-                ?.typeArgument
-                ?.declaration
-                ?.shouldBeInstanceOf(KoKotlinTypeDeclaration::class)
-            it
-                ?.typeArgument
-                ?.asGenericTypeDeclaration()
-                ?.typeArgument
-                ?.name
-                ?.shouldBeEqualTo("String")
-        }
-    }
-
-    @Test
-    fun `function-type-argument`() {
-        // given
-        val sut =
-            getSnippetFile("function-type-argument")
-                .properties()
-                .first()
-                .type
-                ?.asGenericTypeDeclaration()
-
-        // then
-        assertSoftly(sut) {
-            it?.typeArgument?.declaration shouldBeInstanceOf KoFunctionTypeDeclaration::class
-            it?.typeArgument?.name shouldBeEqualTo "() -> Unit"
-        }
-    }
-
-    @Test
-    fun `import-alias-type-argument`() {
-        // given
-        val sut =
-            getSnippetFile("import-alias-type-argument")
-                .properties()
-                .first()
-                .type
-                ?.asGenericTypeDeclaration()
-
-        // then
-        assertSoftly(sut) {
-            it?.typeArgument?.declaration shouldBeInstanceOf KoImportAliasDeclaration::class
-            it?.typeArgument?.name shouldBeEqualTo "ImportAlias"
-        }
-    }
-
-    @Test
-    fun `typealias-type-argument`() {
-        // given
-        val sut =
-            getSnippetFile("typealias-type-argument")
-                .properties()
-                .first()
-                .type
-                ?.asGenericTypeDeclaration()
-
-        // then
-        assertSoftly(sut) {
-            it?.typeArgument?.declaration shouldBeInstanceOf KoTypeAliasDeclaration::class
-            it?.typeArgument?.name shouldBeEqualTo "SampleTypeAlias"
-        }
-    }
-
-    @Test
-    fun `external-type-argument`() {
-        // given
-        val sut =
-            getSnippetFile("external-type-argument")
-                .properties()
-                .first()
-                .type
-                ?.asGenericTypeDeclaration()
-
-        // then
-        assertSoftly(sut) {
-            it?.typeArgument?.declaration shouldBeInstanceOf KoExternalDeclaration::class
-            it?.typeArgument?.name shouldBeEqualTo "SampleExternalClass"
-        }
-    }
-
-    @Test
     fun `kotlin-generic-type`() {
         // given
         val sut =
@@ -274,13 +94,15 @@ class KoGenericTypeDeclarationTest {
         // then
         assertSoftly(sut) {
             it
-                ?.typeArgument
+                ?.typeArguments
+                ?.firstOrNull()
                 ?.asGenericTypeDeclaration()
                 ?.genericType
                 ?.declaration
                 ?.shouldBeInstanceOf(KoKotlinTypeDeclaration::class)
             it
-                ?.typeArgument
+                ?.typeArguments
+                ?.firstOrNull()
                 ?.asGenericTypeDeclaration()
                 ?.genericType
                 ?.name
@@ -320,6 +142,207 @@ class KoGenericTypeDeclarationTest {
             it?.genericType?.declaration shouldBeInstanceOf KoExternalDeclaration::class
             it?.genericType?.name shouldBeEqualTo "SampleExternalGenericClass"
         }
+    }
+
+    @Test
+    fun `kotlin-type-argument`() {
+        // given
+        val sut =
+            getSnippetFile("kotlin-type-argument")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+
+        // then
+        assertSoftly(sut) {
+            it?.typeArguments?.firstOrNull()?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
+            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "String"
+        }
+    }
+
+    @Test
+    fun `class-type-argument`() {
+        // given
+        val sut =
+            getSnippetFile("class-type-argument")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+
+        // then
+        assertSoftly(sut) {
+            it?.typeArguments?.firstOrNull()?.declaration shouldBeInstanceOf KoClassDeclaration::class
+            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleClass"
+        }
+    }
+
+    @Test
+    fun `interface-type-argument`() {
+        // given
+        val sut =
+            getSnippetFile("interface-type-argument")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+
+        // then
+        assertSoftly(sut) {
+            it?.typeArguments?.firstOrNull()?.declaration shouldBeInstanceOf KoInterfaceDeclaration::class
+            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleInterface"
+        }
+    }
+
+    @Test
+    fun `object-type-argument`() {
+        // given
+        val sut =
+            getSnippetFile("object-type-argument")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+
+        // then
+        assertSoftly(sut) {
+            it?.typeArguments?.firstOrNull()?.declaration shouldBeInstanceOf KoObjectDeclaration::class
+            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleObject"
+        }
+    }
+
+    @Test
+    fun `generic-type-argument`() {
+        // given
+        val sut =
+            getSnippetFile("generic-type-argument")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+
+        // then
+        assertSoftly(sut) {
+            it?.typeArguments?.firstOrNull()?.declaration shouldBeInstanceOf KoGenericTypeDeclaration::class
+            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "Set<String>"
+        }
+    }
+
+    @Test
+    fun `nested-generic-type-argument`() {
+        // given
+        val sut =
+            getSnippetFile("nested-generic-type-argument")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+
+        // then
+        assertSoftly(sut) {
+            it
+                ?.typeArguments
+                ?.firstOrNull()
+                ?.asGenericTypeDeclaration()
+                ?.typeArguments
+                ?.firstOrNull()
+                ?.declaration
+                ?.shouldBeInstanceOf(KoKotlinTypeDeclaration::class)
+            it
+                ?.typeArguments
+                ?.firstOrNull()
+                ?.asGenericTypeDeclaration()
+                ?.typeArguments
+                ?.firstOrNull()
+                ?.name
+                ?.shouldBeEqualTo("String")
+        }
+    }
+
+    @Test
+    fun `function-type-argument`() {
+        // given
+        val sut =
+            getSnippetFile("function-type-argument")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+
+        // then
+        assertSoftly(sut) {
+            it?.typeArguments?.firstOrNull()?.declaration shouldBeInstanceOf KoFunctionTypeDeclaration::class
+            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "() -> Unit"
+        }
+    }
+
+    @Test
+    fun `import-alias-type-argument`() {
+        // given
+        val sut =
+            getSnippetFile("import-alias-type-argument")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+
+        // then
+        assertSoftly(sut) {
+            it?.typeArguments?.firstOrNull()?.declaration shouldBeInstanceOf KoImportAliasDeclaration::class
+            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "ImportAlias"
+        }
+    }
+
+    @Test
+    fun `typealias-type-argument`() {
+        // given
+        val sut =
+            getSnippetFile("typealias-type-argument")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+
+        // then
+        assertSoftly(sut) {
+            it?.typeArguments?.firstOrNull()?.declaration shouldBeInstanceOf KoTypeAliasDeclaration::class
+            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleTypeAlias"
+        }
+    }
+
+    @Test
+    fun `external-type-argument`() {
+        // given
+        val sut =
+            getSnippetFile("external-type-argument")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+
+        // then
+        assertSoftly(sut) {
+            it?.typeArguments?.firstOrNull()?.declaration shouldBeInstanceOf KoExternalDeclaration::class
+            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleExternalClass"
+        }
+    }
+
+    @Test
+    fun `few-type-arguments`() {
+        // given
+        val sut =
+            getSnippetFile("few-type-arguments")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+
+        // then
+        sut
+            ?.typeArguments
+            ?.map { typeArgument -> typeArgument.name }
+            .shouldBeEqualTo(listOf("SampleClass", "String"))
     }
 
     private fun getSnippetFile(fileName: String) =
