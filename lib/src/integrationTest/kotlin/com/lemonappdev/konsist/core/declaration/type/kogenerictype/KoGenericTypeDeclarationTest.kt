@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.declaration.type.kogenerictype
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
-import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
@@ -128,8 +127,18 @@ class KoGenericTypeDeclarationTest {
 
         // then
         assertSoftly(sut) {
-            it?.typeArgument?.asGenericTypeDeclaration()?.typeArgument?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
-            it?.typeArgument?.asGenericTypeDeclaration()?.typeArgument?.name shouldBeEqualTo "String"
+            it
+                ?.typeArgument
+                ?.asGenericTypeDeclaration()
+                ?.typeArgument
+                ?.declaration
+                ?.shouldBeInstanceOf(KoKotlinTypeDeclaration::class)
+            it
+                ?.typeArgument
+                ?.asGenericTypeDeclaration()
+                ?.typeArgument
+                ?.name
+                ?.shouldBeEqualTo("String")
         }
     }
 
@@ -264,8 +273,18 @@ class KoGenericTypeDeclarationTest {
 
         // then
         assertSoftly(sut) {
-            it?.typeArgument?.asGenericTypeDeclaration()?.genericType?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
-            it?.typeArgument?.asGenericTypeDeclaration()?.genericType?.name shouldBeEqualTo "Set"
+            it
+                ?.typeArgument
+                ?.asGenericTypeDeclaration()
+                ?.genericType
+                ?.declaration
+                ?.shouldBeInstanceOf(KoKotlinTypeDeclaration::class)
+            it
+                ?.typeArgument
+                ?.asGenericTypeDeclaration()
+                ?.genericType
+                ?.name
+                ?.shouldBeEqualTo("Set")
         }
     }
 

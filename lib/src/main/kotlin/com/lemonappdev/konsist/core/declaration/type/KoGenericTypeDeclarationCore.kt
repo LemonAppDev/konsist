@@ -42,10 +42,11 @@ internal class KoGenericTypeDeclarationCore private constructor(
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
     override val genericType: KoTypeDeclaration by lazy {
-        val ktNameReferenceExpression = ktUserType
-            .children
-            .filterIsInstance<KtNameReferenceExpression>()
-            .firstOrNull()
+        val ktNameReferenceExpression =
+            ktUserType
+                .children
+                .filterIsInstance<KtNameReferenceExpression>()
+                .firstOrNull()
 
         require(ktNameReferenceExpression != null) { "Generic type cannot be null." }
 
@@ -53,7 +54,8 @@ internal class KoGenericTypeDeclarationCore private constructor(
     }
 
     override val typeArgument: KoTypeDeclaration by lazy {
-        val ktTypeReference = ktUserType
+        val ktTypeReference =
+            ktUserType
                 .children
                 .filterIsInstance<KtTypeArgumentList>()
                 .firstOrNull()

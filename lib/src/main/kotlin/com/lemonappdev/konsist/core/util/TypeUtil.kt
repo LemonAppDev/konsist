@@ -83,7 +83,7 @@ object TypeUtil {
         kClass: KClass<*>,
     ): Boolean = kClass.qualifiedName == (type?.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
 
-    @Suppress("detekt.CyclomaticComplexMethod")
+    @Suppress("detekt.CyclomaticComplexMethod", "detekt.LongMethod")
     private fun transformPsiElementToKoTypeDeclaration(
         type: PsiElement?,
         parentDeclaration: KoBaseDeclaration,
@@ -109,8 +109,7 @@ object TypeUtil {
                     } else {
                         import.name.substringAfterLast(".") == typeText
                     }
-                }
-                ?.name
+                }?.name
                 ?: containingFile
                     .declarations()
                     .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
@@ -179,10 +178,10 @@ object TypeUtil {
             declarations.singleOrNull()
                 ?: declarations.firstOrNull { declaration ->
                     declaration.fullyQualifiedName?.contains(parentDeclarationFullyQualifiedName) == true ||
-                            (
-                                    (declaration as? KoContainingDeclarationProvider)
-                                        ?.containingDeclaration as? KoDeclarationProvider
-                                    )?.hasDeclaration { it == parentDeclaration } == true
+                        (
+                            (declaration as? KoContainingDeclarationProvider)
+                                ?.containingDeclaration as? KoDeclarationProvider
+                        )?.hasDeclaration { it == parentDeclaration } == true
                 }
 
         return declaration?.fullyQualifiedName

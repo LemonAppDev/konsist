@@ -54,7 +54,6 @@ internal class KoTypeDeclarationCore private constructor(
     KoResideInPackageProviderCore,
     KoAnnotationProviderCore,
     KoTypeDeclarationProviderCore {
-
     // Ensure that at least one of the parameters is not null
     init {
         require(ktTypeReference != null || ktNameReferenceExpression != null) {
@@ -63,18 +62,23 @@ internal class KoTypeDeclarationCore private constructor(
     }
 
     override val psiElement: PsiElement by lazy {
-        ktTypeReference ?: ktNameReferenceExpression ?: error("Both KtTypeReference and KtNameReferenceExpression are null")
+        ktTypeReference ?: ktNameReferenceExpression
+            ?: error("Both KtTypeReference and KtNameReferenceExpression are null")
     }
 
     override val ktElement: KtElement by lazy {
-        ktTypeReference ?: ktNameReferenceExpression ?: error("Both KtTypeReference and KtNameReferenceExpression are null")
+        ktTypeReference ?: ktNameReferenceExpression
+            ?: error("Both KtTypeReference and KtNameReferenceExpression are null")
     }
 
     override val ktAnnotated: KtAnnotated? by lazy { ktTypeReference }
 
     override val name: String by lazy {
-        val typeReference = ktTypeReference?.children?.lastOrNull()
-            ?: ktNameReferenceExpression
+        val typeReference =
+            ktTypeReference
+                ?.children
+                ?.lastOrNull()
+                ?: ktNameReferenceExpression
 
         if (typeReference is KtNullableType) {
             typeReference.children.firstOrNull()?.text ?: ""

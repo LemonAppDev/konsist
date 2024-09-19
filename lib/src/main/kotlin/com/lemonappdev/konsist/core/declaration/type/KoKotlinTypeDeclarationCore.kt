@@ -22,7 +22,6 @@ internal class KoKotlinTypeDeclarationCore private constructor(
     KoBaseProviderCore,
     KoFullyQualifiedNameProviderCore,
     KoSourceAndAliasTypeProviderCore {
-
     // Ensure that at least one of the parameters is non-null
     init {
         require(ktUserType != null || ktNameReferenceExpression != null) {
@@ -41,7 +40,7 @@ internal class KoKotlinTypeDeclarationCore private constructor(
     override val packagee: KoPackageDeclaration? by lazy {
         KoPackageDeclarationCore(
             fullyQualifiedName,
-            ktElement
+            ktElement,
         )
     }
 
