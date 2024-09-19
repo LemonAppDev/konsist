@@ -19,4 +19,6 @@ interface KoGenericTypeDeclaration :
     KoLocationProvider,
     KoPathProvider,
     KoModuleProvider,
-    KoSourceSetProvider
+    KoSourceSetProvider {
+    val typeArgument: KoTypeDeclaration
+}

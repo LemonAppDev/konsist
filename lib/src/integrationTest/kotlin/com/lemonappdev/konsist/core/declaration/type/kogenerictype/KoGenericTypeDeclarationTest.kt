@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import org.amshove.kluent.assertSoftly
@@ -60,7 +61,7 @@ class KoGenericTypeDeclarationTest {
         // then
         assertSoftly(sut) {
             it?.typeArgument?.declaration shouldBeInstanceOf KoClassDeclaration::class
-            it?.typeArgument?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "SampleClass"
+            it?.typeArgument?.asClassDeclaration()?.name shouldBeEqualTo "SampleClass"
         }
     }
 
@@ -77,7 +78,7 @@ class KoGenericTypeDeclarationTest {
         // then
         assertSoftly(sut) {
             it?.typeArgument?.declaration shouldBeInstanceOf KoInterfaceDeclaration::class
-            it?.typeArgument?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "SampleInterface"
+            it?.typeArgument?.asInterfaceDeclaration()?.name shouldBeEqualTo "SampleInterface"
         }
     }
 
@@ -94,7 +95,7 @@ class KoGenericTypeDeclarationTest {
         // then
         assertSoftly(sut) {
             it?.typeArgument?.declaration shouldBeInstanceOf KoObjectDeclaration::class
-            it?.typeArgument?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "SampleObject"
+            it?.typeArgument?.asObjectDeclaration()?.name shouldBeEqualTo "SampleObject"
         }
     }
 
@@ -111,7 +112,7 @@ class KoGenericTypeDeclarationTest {
         // then
         assertSoftly(sut) {
             it?.typeArgument?.declaration shouldBeInstanceOf KoGenericTypeDeclaration::class
-            it?.typeArgument?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "Set<String>"
+            it?.typeArgument?.asGenericTypeDeclaration()?.name shouldBeEqualTo "Set<String>"
         }
     }
 
@@ -127,8 +128,8 @@ class KoGenericTypeDeclarationTest {
 
         // then
         assertSoftly(sut) {
-            it?.typeArgument?.declaration shouldBeInstanceOf KoFunctionDeclaration::class
-            it?.typeArgument?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "() -> Unit"
+            it?.typeArgument?.declaration shouldBeInstanceOf KoFunctionTypeDeclaration::class
+            it?.typeArgument?.asFunctionTypeDeclaration()?.name shouldBeEqualTo "() -> Unit"
         }
     }
 
@@ -145,7 +146,7 @@ class KoGenericTypeDeclarationTest {
         // then
         assertSoftly(sut) {
             it?.typeArgument?.declaration shouldBeInstanceOf KoImportAliasDeclaration::class
-            it?.typeArgument?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "ImportAlias"
+            it?.typeArgument?.asImportAliasDeclaration()?.name shouldBeEqualTo "ImportAlias"
         }
     }
 
@@ -162,7 +163,7 @@ class KoGenericTypeDeclarationTest {
         // then
         assertSoftly(sut) {
             it?.typeArgument?.declaration shouldBeInstanceOf KoTypeAliasDeclaration::class
-            it?.typeArgument?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "SampleTypeAlias"
+            it?.typeArgument?.asTypeAliasDeclaration()?.name shouldBeEqualTo "SampleTypeAlias"
         }
     }
 
@@ -179,7 +180,7 @@ class KoGenericTypeDeclarationTest {
         // then
         assertSoftly(sut) {
             it?.typeArgument?.declaration shouldBeInstanceOf KoExternalDeclaration::class
-            it?.typeArgument?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "SampleExternalClass"
+            it?.typeArgument?.asExternalTypeDeclaration()?.name shouldBeEqualTo "SampleExternalClass"
         }
     }
 
