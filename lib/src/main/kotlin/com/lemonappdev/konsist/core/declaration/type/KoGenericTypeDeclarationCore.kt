@@ -70,20 +70,21 @@ internal class KoGenericTypeDeclarationCore private constructor(
         ktTypeReferences.map { KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
     }
 
-    override val typeArguments: List<KoTypeDeclaration> by lazy {
-        val arguments = mutableListOf<KoTypeDeclaration>()
-        var currentArgument: KoTypeDeclaration? = typeArgument
-
-        while (currentArgument != null) {
-            if (currentArgument.declaration is KoGenericTypeDeclaration) {
-                arguments.add((currentArgument.declaration as KoGenericTypeDeclaration).genericType)
-                currentArgument = (currentArgument.declaration as KoGenericTypeDeclaration).typeArgument
-            } else {
-                arguments.add(currentArgument)
-                currentArgument = null
+    override val typeArgumentsFlatten: List<KoTypeDeclaration> by lazy {
+        fun flattenTypeArguments(arguments: List<KoTypeDeclaration>, acc: MutableList<KoTypeDeclaration>) {
+            arguments.forEach { currentArgument ->
+                if (currentArgument.declaration is KoGenericTypeDeclaration) {
+                    val genericDeclaration = currentArgument.declaration as KoGenericTypeDeclaration
+                    acc.add(genericDeclaration.genericType)
+                    flattenTypeArguments(genericDeclaration.typeArguments, acc)
+                } else {
+                    acc.add(currentArgument)
+                }
             }
         }
 
+        val arguments = mutableListOf<KoTypeDeclaration>()
+        flattenTypeArguments(typeArguments, arguments)
         arguments
     }
 

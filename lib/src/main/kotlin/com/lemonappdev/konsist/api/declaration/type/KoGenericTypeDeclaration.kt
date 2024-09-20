@@ -46,5 +46,5 @@ interface KoGenericTypeDeclaration :
      * 1) In `List<String>`, the list will contain `String`.
      * 2) In `List<Set<String>>`, the list will contain `Set` and `String`.
      */
-    val typeArguments: List<KoTypeDeclaration>
+    val typeArgumentsFlatten: List<KoTypeDeclaration>
 }
