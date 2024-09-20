@@ -36,7 +36,7 @@ interface KoGenericTypeDeclaration :
      * 1) in `List<String>`, `String` is the type argument,
      * 2) in `List<Set<String>>`, `Set<String>` is the type argument,
      */
-    val typeArgument: KoTypeDeclaration
+    val typeArguments: List<KoTypeDeclaration>
 
     /**
      * A list of type declarations representing all type arguments, including nested ones.
