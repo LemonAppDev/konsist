@@ -71,7 +71,10 @@ internal class KoGenericTypeDeclarationCore private constructor(
     }
 
     override val typeArgumentsFlatten: List<KoTypeDeclaration> by lazy {
-        fun flattenTypeArguments(arguments: List<KoTypeDeclaration>, acc: MutableList<KoTypeDeclaration>) {
+        fun flattenTypeArguments(
+            arguments: List<KoTypeDeclaration>,
+            acc: MutableList<KoTypeDeclaration>,
+        ) {
             arguments.forEach { currentArgument ->
                 if (currentArgument.declaration is KoGenericTypeDeclaration) {
                     val genericDeclaration = currentArgument.declaration as KoGenericTypeDeclaration
