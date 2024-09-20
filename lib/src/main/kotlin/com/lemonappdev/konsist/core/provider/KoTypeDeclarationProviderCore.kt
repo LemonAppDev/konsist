@@ -16,6 +16,7 @@ import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.util.TypeUtil
+import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import kotlin.reflect.KClass
@@ -27,19 +28,25 @@ internal interface KoTypeDeclarationProviderCore :
     KoContainingFileProviderCore,
     KoContainingDeclarationProviderCore,
     KoTypeProviderCore {
-    val ktTypeReference: KtTypeReference
+    val ktTypeReference: KtTypeReference?
+    val ktNameReferenceExpression: KtNameReferenceExpression?
+
     override val declaration: KoBaseTypeDeclaration
-        get() {
-            return TypeUtil.getBasicType(
-                listOf(ktTypeReference),
-                ktTypeReference.isExtensionDeclaration(),
+        get() =
+            TypeUtil.getBasicType(
+                listOf(ktTypeReference, ktNameReferenceExpression),
+                isExtensionDeclaration(),
                 getDeclarationWithFqn(containingDeclaration) ?: containingDeclaration,
                 containingFile,
             ) ?: throw KoInternalException("Source declaration cannot be a null")
-        }
+
+    private fun isExtensionDeclaration(): Boolean =
+        ktTypeReference?.isExtensionDeclaration() == true ||
+            ktNameReferenceExpression?.isExtensionDeclaration() == true
 
     private fun getDeclarationWithFqn(declaration: KoBaseDeclaration): KoBaseDeclaration? =
         when {
+            declaration is KoGenericTypeDeclaration -> containingFile
             declaration is KoFullyQualifiedNameProvider && declaration.fullyQualifiedName != null -> declaration
             declaration is KoContainingDeclarationProvider -> getDeclarationWithFqn(declaration.containingDeclaration)
             else -> null

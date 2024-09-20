@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.externalsample.SampleExternalGenericClass
+
+val sampleProperty1: SampleExternalGenericClass<String> = SampleExternalGenericClass()
