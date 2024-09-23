@@ -29,7 +29,7 @@ internal interface KoKDocTagProviderCore :
                 tagsAsStringList
                     .filterNot { it == "@" }
                     .flatMap { regex.findAll(it) }
-                    .mapNotNull { KoKDocTag.entries.firstOrNull { tag -> tag.type == it.value } }
+                    .mapNotNull { KoKDocTag.values().firstOrNull { tag -> tag.type == it.value } }
                     .zip(tagsAsStringList)
 
             val tagsGroupingByValued = tagsWithName.groupBy { it.first.isValued }
