@@ -11,6 +11,7 @@ import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
@@ -71,6 +72,8 @@ internal interface KoTypeDeclarationProviderCore :
 
     override fun asGenericTypeDeclaration(): KoGenericTypeDeclaration? = declaration as? KoGenericTypeDeclaration
 
+    override fun asTypeParameterDeclaration(): KoTypeParameterDeclaration? = declaration as? KoTypeParameterDeclaration
+
     override fun asExternalTypeDeclaration(): KoExternalDeclaration? = declaration as? KoExternalDeclaration
 
     override val isClass: Boolean
@@ -96,6 +99,9 @@ internal interface KoTypeDeclarationProviderCore :
 
     override val isGenericType: Boolean
         get() = declaration is KoGenericTypeDeclaration
+
+    override val isTypeParameter: Boolean
+        get() = declaration is KoTypeParameterDeclaration
 
     override val isExternalType: Boolean
         get() = declaration is KoExternalDeclaration
@@ -169,6 +175,12 @@ internal interface KoTypeDeclarationProviderCore :
         when (predicate) {
             null -> asGenericTypeDeclaration() != null
             else -> asGenericTypeDeclaration()?.let { predicate(it) } ?: false
+        }
+
+    override fun hasTypeParameterDeclaration(predicate: ((KoTypeParameterDeclaration) -> Boolean)?): Boolean =
+        when (predicate) {
+            null -> asTypeParameterDeclaration() != null
+            else -> asTypeParameterDeclaration()?.let { predicate(it) } ?: false
         }
 
     override fun hasExternalTypeDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)?): Boolean =

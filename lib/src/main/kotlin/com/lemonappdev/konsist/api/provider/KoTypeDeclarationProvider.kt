@@ -10,6 +10,7 @@ import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoTypeParameterDeclaration
 import kotlin.reflect.KClass
 
 /**
@@ -100,6 +101,13 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
      * @return the generic type declaration associated with this type.
      */
     fun asGenericTypeDeclaration(): KoGenericTypeDeclaration?
+
+    /**
+     * Represents the type parameter declaration associated with this type.
+     *
+     * @return the type parameter declaration associated with this type.
+     */
+    fun asTypeParameterDeclaration(): KoTypeParameterDeclaration?
 
     /**
      * Represents the external declaration associated with this type.
@@ -228,6 +236,15 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
      * `null`), `false` otherwise.
      */
     fun hasGenericTypeDeclaration(predicate: ((KoGenericTypeDeclaration) -> Boolean)? = null): Boolean
+
+    /**
+     * Whether type has a specified type parameter declaration.
+     *
+     * @param predicate The predicate generic used to determine if a type parameter declaration satisfies a condition.
+     * @return `true` if the type has the specified type parameter declaration (or any generic type declaration if [predicate] is
+     * `null`), `false` otherwise.
+     */
+    fun hasTypeParameterDeclaration(predicate: ((KoTypeParameterDeclaration) -> Boolean)? = null): Boolean
 
     /**
      * Whether type has a specified external type declaration.
