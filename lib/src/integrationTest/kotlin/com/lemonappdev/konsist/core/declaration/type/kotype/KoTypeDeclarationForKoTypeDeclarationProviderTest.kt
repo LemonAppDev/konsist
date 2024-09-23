@@ -1068,8 +1068,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
         }
     }
 
-
-
     @Test
     fun `not-nullable-external-type`() {
         // given
