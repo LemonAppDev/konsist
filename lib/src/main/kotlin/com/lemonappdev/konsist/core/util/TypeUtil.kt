@@ -13,7 +13,9 @@ import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoFunctionTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoGenericTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
+import com.lemonappdev.konsist.core.declaration.type.KoStarProjectionDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoTypeParameterDeclarationCore
+import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
 import com.lemonappdev.konsist.core.model.getObject
@@ -25,6 +27,7 @@ import org.jetbrains.kotlin.psi.KtFunctionType
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtNullableType
 import org.jetbrains.kotlin.psi.KtTypeArgumentList
+import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
 import kotlin.reflect.KClass
@@ -56,6 +59,8 @@ object TypeUtil {
                 }
             } else if (notNullTypes.filterIsInstance<KtNameReferenceExpression>().isNotEmpty()) {
                 notNullTypes.filterIsInstance<KtNameReferenceExpression>().firstOrNull()
+            } else if (notNullTypes.filterIsInstance<KtTypeProjection>().isNotEmpty()) {
+                notNullTypes.filterIsInstance<KtTypeProjection>().firstOrNull()
             } else {
                 null
             }
@@ -133,6 +138,7 @@ object TypeUtil {
             ?.any { it == typeText }
 
         return when {
+            nestedType is KtTypeProjection -> KoStarProjectionDeclarationCore.getInstance(nestedType, containingFile)
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
             nestedType is KtUserType && typeText != null -> {
                 if (nestedType.children.filterIsInstance<KtTypeArgumentList>().isNotEmpty()) {

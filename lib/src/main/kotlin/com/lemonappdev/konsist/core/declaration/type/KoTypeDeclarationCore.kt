@@ -28,11 +28,13 @@ import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtNullableType
+import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
 
 internal class KoTypeDeclarationCore private constructor(
     override val ktTypeReference: KtTypeReference?,
     override val ktNameReferenceExpression: KtNameReferenceExpression?,
+    override val ktTypeProjection: KtTypeProjection?,
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoTypeDeclaration,
     KoBaseProviderCore,
@@ -56,19 +58,19 @@ internal class KoTypeDeclarationCore private constructor(
     KoTypeDeclarationProviderCore {
     // Ensure that at least one of the parameters is not null
     init {
-        require(ktTypeReference != null || ktNameReferenceExpression != null) {
-            "Either KtTypeReference or KtNameReferenceExpression must be provided"
+        require(ktTypeReference != null || ktNameReferenceExpression != null || ktTypeProjection != null) {
+            "Either KtTypeReference, KtNameReferenceExpression or KtTypeProjection must be provided"
         }
     }
 
     override val psiElement: PsiElement by lazy {
-        ktTypeReference ?: ktNameReferenceExpression
-            ?: error("Both KtTypeReference and KtNameReferenceExpression are null")
+        ktTypeReference ?: ktNameReferenceExpression ?: ktTypeProjection
+            ?: error("KtTypeReference, KtNameReferenceExpression and KtTypeProjection are null")
     }
 
     override val ktElement: KtElement by lazy {
-        ktTypeReference ?: ktNameReferenceExpression
-            ?: error("Both KtTypeReference and KtNameReferenceExpression are null")
+        ktTypeReference ?: ktNameReferenceExpression ?: ktTypeProjection
+            ?: error("KtTypeReference, KtNameReferenceExpression and KtTypeProjection are null")
     }
 
     override val ktAnnotated: KtAnnotated? by lazy { ktTypeReference }
@@ -79,6 +81,7 @@ internal class KoTypeDeclarationCore private constructor(
                 ?.children
                 ?.lastOrNull()
                 ?: ktNameReferenceExpression
+                ?: ktTypeProjection
 
         if (typeReference is KtNullableType) {
             typeReference.children.firstOrNull()?.text ?: ""
@@ -112,7 +115,7 @@ internal class KoTypeDeclarationCore private constructor(
             containingDeclaration: KoBaseDeclaration,
         ): KoTypeDeclaration =
             cache.getOrCreateInstance(ktTypeReference, containingDeclaration) {
-                KoTypeDeclarationCore(ktTypeReference, null, containingDeclaration)
+                KoTypeDeclarationCore(ktTypeReference, null, null, containingDeclaration)
             }
 
         // Factory method for KtNameReferenceExpression
@@ -121,7 +124,16 @@ internal class KoTypeDeclarationCore private constructor(
             containingDeclaration: KoBaseDeclaration,
         ): KoTypeDeclaration =
             cache.getOrCreateInstance(ktNameReferenceExpression, containingDeclaration) {
-                KoTypeDeclarationCore(null, ktNameReferenceExpression, containingDeclaration)
+                KoTypeDeclarationCore(null, ktNameReferenceExpression, null, containingDeclaration)
+            }
+
+        // Factory method for KtTypeProjection
+        internal fun getInstance(
+            ktTypeProjection: KtTypeProjection,
+            containingDeclaration: KoBaseDeclaration,
+        ): KoTypeDeclaration =
+            cache.getOrCreateInstance(ktTypeProjection, containingDeclaration) {
+                KoTypeDeclarationCore(null, null, ktTypeProjection, containingDeclaration)
             }
     }
 }

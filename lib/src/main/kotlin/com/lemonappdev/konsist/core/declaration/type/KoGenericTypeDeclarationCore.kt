@@ -2,8 +2,10 @@ package com.lemonappdev.konsist.core.declaration.type
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -16,6 +18,7 @@ import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
+import org.jetbrains.kotlin.psi.KtProjectionKind
 import org.jetbrains.kotlin.psi.KtTypeArgumentList
 import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
@@ -54,21 +57,27 @@ internal class KoGenericTypeDeclarationCore private constructor(
     }
 
     override val typeArguments: List<KoTypeDeclaration> by lazy {
-        val ktTypeReferences =
-            ktUserType
-                .children
-                .asSequence()
-                .filterIsInstance<KtTypeArgumentList>()
-                .flatMap { it.children.toList() }
-                .filterIsInstance<KtTypeProjection>()
-                .flatMap {
-                    it.children.toList() }
-                .filterIsInstance<KtTypeReference>()
-                .toList()
+        val ktTypeProjections = ktUserType
+            .children
+            .filterIsInstance<KtTypeArgumentList>()
+            .flatMap { it.children.toList() }
+            .filterIsInstance<KtTypeProjection>()
 
-        require(ktTypeReferences.isNotEmpty()) { "Type argument cannot be empty list." }
+        val starProjections = ktTypeProjections
+            .filter { it.projectionKind == KtProjectionKind.STAR }
+            .map {  KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
 
-        ktTypeReferences.map { KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
+        val otherTypes = ktTypeProjections
+            .flatMap { it.children.toList() }
+            .filterIsInstance<KtTypeReference>()
+            .map { KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
+
+
+        val types = starProjections + otherTypes
+
+        require(types.isNotEmpty()) { "Type argument cannot be empty list." }
+
+        types
     }
 
     override val typeArgumentsFlatten: List<KoTypeDeclaration> by lazy {
