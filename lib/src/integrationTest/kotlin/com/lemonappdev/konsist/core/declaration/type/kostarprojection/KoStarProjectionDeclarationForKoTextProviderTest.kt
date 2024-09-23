@@ -5,9 +5,6 @@ import com.lemonappdev.konsist.api.ext.list.returnTypes
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments.arguments
-import org.junit.jupiter.params.provider.MethodSource
 
 class KoStarProjectionDeclarationForKoTextProviderTest {
     @Test
@@ -18,7 +15,7 @@ class KoStarProjectionDeclarationForKoTextProviderTest {
                 .functions()
                 .returnTypes
                 .firstOrNull()
-                                ?.asGenericTypeDeclaration()
+                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 

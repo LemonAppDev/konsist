@@ -15,7 +15,7 @@ class KoStarProjectionDeclarationForKoResideInPackageProviderTest {
                 .functions()
                 .returnTypes
                 .firstOrNull()
-                                ?.asGenericTypeDeclaration()
+                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
