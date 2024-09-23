@@ -10,6 +10,7 @@ import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeParameterDeclaration
 import kotlin.reflect.KClass
 
@@ -116,6 +117,8 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
      * @return the external declaration associated with this type.
      */
     fun asExternalTypeDeclaration(): KoExternalDeclaration?
+
+    fun asStarProjectionDeclaration(): KoStarProjectionDeclaration?
 
     /**
      * Determines whatever type has a specified declaration.

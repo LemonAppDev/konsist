@@ -11,6 +11,7 @@ import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
@@ -76,6 +77,8 @@ internal interface KoTypeDeclarationProviderCore :
 
     override fun asExternalTypeDeclaration(): KoExternalDeclaration? = declaration as? KoExternalDeclaration
 
+    override fun asStarProjectionDeclaration(): KoStarProjectionDeclaration? = declaration as? KoStarProjectionDeclaration
+
     override val isClass: Boolean
         get() = declaration is KoClassDeclaration
 
@@ -105,6 +108,9 @@ internal interface KoTypeDeclarationProviderCore :
 
     override val isExternalType: Boolean
         get() = declaration is KoExternalDeclaration
+
+    override val isStarProjection: Boolean
+        get() = declaration is KoStarProjectionDeclaration
 
     override fun hasDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean = predicate(declaration)
 
