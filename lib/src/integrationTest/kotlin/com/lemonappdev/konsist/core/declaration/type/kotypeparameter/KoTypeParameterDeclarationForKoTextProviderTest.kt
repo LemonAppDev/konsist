@@ -15,7 +15,7 @@ class KoTypeParameterDeclarationForKoTextProviderTest {
         // given
         val sut =
             getSnippetFile(fileName)
-.functions()
+                .functions()
                 .returnTypes
                 .firstOrNull()
                 ?.asTypeParameterDeclaration()

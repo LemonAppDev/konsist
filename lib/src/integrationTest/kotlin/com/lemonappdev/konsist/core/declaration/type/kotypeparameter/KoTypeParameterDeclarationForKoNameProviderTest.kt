@@ -7,10 +7,10 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoTypeParameterDeclarationForKoLocationProviderTest {
+class KoTypeParameterDeclarationForKoNameProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `type-location`(
+    fun `type-name`(
         fileName: String,
         value: String,
     ) {
@@ -23,13 +23,13 @@ class KoTypeParameterDeclarationForKoLocationProviderTest {
                 ?.asTypeParameterDeclaration()
 
         // then
-        sut?.location shouldBeEqualTo "${sut?.path}:$value"
+        sut?.name shouldBeEqualTo value
     }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
-            "core/declaration/type/kotypeparameter/snippet/forkolocationprovider/",
-            fileName
+            "core/declaration/type/kotypeparameter/snippet/forkonameprovider/",
+            fileName,
         )
 
     companion object {
@@ -37,8 +37,8 @@ class KoTypeParameterDeclarationForKoLocationProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("type-parameter-location", "1:43"),
-                arguments("nullable-type-parameter-location", "1:43"),
+                arguments("type-parameter-name", "TestType"),
+                arguments("nullable-type-parameter-name", "TestType"),
             )
     }
 }

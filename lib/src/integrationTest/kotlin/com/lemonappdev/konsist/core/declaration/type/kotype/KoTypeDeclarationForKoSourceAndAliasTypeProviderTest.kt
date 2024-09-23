@@ -147,7 +147,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         // given
         val sut =
             getSnippetFile("nullable-type-parameter")
-                    .classes()
+                .classes()
                 .first()
                 .primaryConstructor
                 ?.parameters
@@ -167,7 +167,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         // given
         val sut =
             getSnippetFile("not-nullable-type-parameter")
-                    .classes()
+                .classes()
                 .first()
                 .primaryConstructor
                 ?.parameters

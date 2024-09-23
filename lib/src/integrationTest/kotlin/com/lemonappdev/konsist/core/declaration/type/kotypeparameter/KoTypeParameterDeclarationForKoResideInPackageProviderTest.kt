@@ -12,7 +12,7 @@ class KoTypeParameterDeclarationForKoResideInPackageProviderTest {
         // given
         val sut =
             getSnippetFile("type-parameter-reside-in-package")
-.functions()
+                .functions()
                 .returnTypes
                 .firstOrNull()
                 ?.asTypeParameterDeclaration()

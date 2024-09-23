@@ -2,10 +2,8 @@ package com.lemonappdev.konsist.core.declaration.type
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -57,21 +55,23 @@ internal class KoGenericTypeDeclarationCore private constructor(
     }
 
     override val typeArguments: List<KoTypeDeclaration> by lazy {
-        val ktTypeProjections = ktUserType
-            .children
-            .filterIsInstance<KtTypeArgumentList>()
-            .flatMap { it.children.toList() }
-            .filterIsInstance<KtTypeProjection>()
+        val ktTypeProjections =
+            ktUserType
+                .children
+                .filterIsInstance<KtTypeArgumentList>()
+                .flatMap { it.children.toList() }
+                .filterIsInstance<KtTypeProjection>()
 
-        val starProjections = ktTypeProjections
-            .filter { it.projectionKind == KtProjectionKind.STAR }
-            .map {  KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
+        val starProjections =
+            ktTypeProjections
+                .filter { it.projectionKind == KtProjectionKind.STAR }
+                .map { KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
 
-        val otherTypes = ktTypeProjections
-            .flatMap { it.children.toList() }
-            .filterIsInstance<KtTypeReference>()
-            .map { KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
-
+        val otherTypes =
+            ktTypeProjections
+                .flatMap { it.children.toList() }
+                .filterIsInstance<KtTypeReference>()
+                .map { KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
 
         val types = starProjections + otherTypes
 

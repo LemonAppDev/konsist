@@ -15,7 +15,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // given
         val sut =
             getSnippetFile(fileName)
-.functions()
+                .functions()
                 .returnTypes
                 .firstOrNull()
                 ?.asTypeParameterDeclaration()
@@ -33,7 +33,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // given
         val sut =
             getSnippetFile(fileName)
-.functions()
+                .functions()
                 .returnTypes
                 .firstOrNull()
                 ?.asTypeParameterDeclaration()
@@ -53,7 +53,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // given
         val sut =
             getSnippetFile(fileName)
-.functions()
+                .functions()
                 .returnTypes
                 .firstOrNull()
                 ?.asTypeParameterDeclaration()
@@ -73,7 +73,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // given
         val sut =
             getSnippetFile(fileName)
-.functions()
+                .functions()
                 .returnTypes
                 .firstOrNull()
                 ?.asTypeParameterDeclaration()
