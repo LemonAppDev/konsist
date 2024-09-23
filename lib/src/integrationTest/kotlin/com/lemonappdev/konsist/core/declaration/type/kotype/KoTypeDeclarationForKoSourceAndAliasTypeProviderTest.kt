@@ -143,6 +143,46 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
     }
 
     @Test
+    fun `nullable-type-parameter`() {
+        // given
+        val sut =
+            getSnippetFile("nullable-type-parameter")
+                    .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.sourceType shouldBeEqualTo "TestType?"
+            it?.bareSourceType shouldBeEqualTo "TestType"
+            it?.isAlias shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `not-nullable-type-parameter`() {
+        // given
+        val sut =
+            getSnippetFile("not-nullable-type-parameter")
+                    .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.sourceType shouldBeEqualTo "TestType"
+            it?.bareSourceType shouldBeEqualTo "TestType"
+            it?.isAlias shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `not-nullable-kotlin-type`() {
         // given
         val sut =

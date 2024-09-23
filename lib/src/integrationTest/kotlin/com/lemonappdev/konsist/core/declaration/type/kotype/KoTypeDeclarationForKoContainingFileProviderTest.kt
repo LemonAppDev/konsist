@@ -36,6 +36,8 @@ class KoTypeDeclarationForKoContainingFileProviderTest {
                 arguments("not-nullable-kotlin-type-containing-file"),
                 arguments("nullable-generic-type-containing-file"),
                 arguments("not-nullable-generic-type-containing-file"),
+                arguments("nullable-type-parameter-containing-file"),
+                arguments("not-nullable-type-parameter-containing-file"),
                 arguments("nullable-class-type-containing-file"),
                 arguments("not-nullable-class-type-containing-file"),
                 arguments("nullable-interface-type-containing-file"),

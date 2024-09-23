@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.type.kotype.snippet.forkokotlintypeprovider
+package com.lemonappdev.konsist.core.declaration.type.kotype.snippet.forkotypeprovider
 
 import com.lemonappdev.konsist.testdata.SampleInterface
 
