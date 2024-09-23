@@ -61,7 +61,8 @@ internal class KoGenericTypeDeclarationCore private constructor(
                 .filterIsInstance<KtTypeArgumentList>()
                 .flatMap { it.children.toList() }
                 .filterIsInstance<KtTypeProjection>()
-                .flatMap { it.children.toList() }
+                .flatMap {
+                    it.children.toList() }
                 .filterIsInstance<KtTypeReference>()
                 .toList()
 
