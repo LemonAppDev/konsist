@@ -7,6 +7,9 @@ import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 
+/**
+ * Represents a type parameter declaration.
+ */
 interface KoTypeParameterDeclaration :
     KoBaseTypeDeclaration,
     KoContainingFileProvider,

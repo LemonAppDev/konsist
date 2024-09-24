@@ -118,6 +118,12 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
      */
     fun asExternalTypeDeclaration(): KoExternalDeclaration?
 
+    /**
+     * Represents the star projection declaration associated with this type.
+     * A star projection is a wildcard that can represent any type in generic type parameters.
+     *
+     * @return the star projection declaration associated with this type.
+     */
     fun asStarProjectionDeclaration(): KoStarProjectionDeclaration?
 
     /**

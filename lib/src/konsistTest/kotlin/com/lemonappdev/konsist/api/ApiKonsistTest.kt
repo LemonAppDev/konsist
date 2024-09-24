@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.api.ext.list.withoutName
 import com.lemonappdev.konsist.api.ext.list.withoutNameMatching
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
+import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReceiverTag
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
@@ -31,6 +32,13 @@ class ApiKonsistTest {
         apiPackageScope
             .functions()
             .assertTrue { it.hasValidKDocParamTags() && it.hasValidKDocReturnTag() }
+    }
+
+    @Test
+    fun `every api property has valid KDoc`() {
+        apiPackageScope
+            .properties()
+            .assertTrue { it.hasKDoc  }
     }
 
     @Test
