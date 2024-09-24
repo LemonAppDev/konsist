@@ -3,10 +3,10 @@ package com.lemonappdev.konsist
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.ext.list.provider.properties
-import com.lemonappdev.konsist.api.ext.list.provider.withAnnotationOf
-import com.lemonappdev.konsist.api.ext.list.provider.withNameEndingWith
-import com.lemonappdev.konsist.api.ext.list.provider.withParentClassOf
+import com.lemonappdev.konsist.api.ext.list.properties
+import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
+import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
+import com.lemonappdev.konsist.api.ext.list.withParentClassOf
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 
