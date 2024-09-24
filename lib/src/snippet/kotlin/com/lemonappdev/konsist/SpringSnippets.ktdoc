@@ -2,11 +2,11 @@ package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.ext.list.functions
-import com.lemonappdev.konsist.api.ext.list.modifierprovider.withModifier
-import com.lemonappdev.konsist.api.ext.list.objects
-import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
-import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
+import com.lemonappdev.konsist.api.ext.list.provider.functions
+import com.lemonappdev.konsist.api.ext.list.provider.modifierprovider.withModifier
+import com.lemonappdev.konsist.api.ext.list.provider.objects
+import com.lemonappdev.konsist.api.ext.list.provider.withAnnotationOf
+import com.lemonappdev.konsist.api.ext.list.provider.withNameEndingWith
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.springframework.stereotype.Repository

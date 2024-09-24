@@ -3,8 +3,8 @@ package com.lemonappdev.konsist
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
-import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
-import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
+import com.lemonappdev.konsist.api.ext.list.provider.withAnnotationOf
+import com.lemonappdev.konsist.api.ext.list.provider.withNameEndingWith
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.springframework.stereotype.Repository

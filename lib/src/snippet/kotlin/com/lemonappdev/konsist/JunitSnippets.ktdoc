@@ -1,9 +1,9 @@
 package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.ext.list.declarations
-import com.lemonappdev.konsist.api.ext.list.functions
-import com.lemonappdev.konsist.api.ext.list.withoutAnnotationOf
+import com.lemonappdev.konsist.api.ext.list.provider.declarations
+import com.lemonappdev.konsist.api.ext.list.provider.functions
+import com.lemonappdev.konsist.api.ext.list.provider.withoutAnnotationOf
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 import com.lemonappdev.konsist.api.verify.assertFalse
