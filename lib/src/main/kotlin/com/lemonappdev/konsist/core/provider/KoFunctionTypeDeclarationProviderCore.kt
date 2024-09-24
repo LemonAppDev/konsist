@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoFunctionTypeDeclarationProvider
 import com.lemonappdev.konsist.core.declaration.KoParameterDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
@@ -21,30 +20,29 @@ internal interface KoFunctionTypeDeclarationProviderCore :
 
     override val parameterTypes: List<KoParameterDeclaration>
         get() =
-        ktFunctionType
-            .children
-            .filterIsInstance<KtParameterList>()
-            .flatMap { it.children.toList() }
-            .filterIsInstance<KtParameter>()
-            .map { KoParameterDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
+            ktFunctionType
+                .children
+                .filterIsInstance<KtParameterList>()
+                .flatMap { it.children.toList() }
+                .filterIsInstance<KtParameter>()
+                .map { KoParameterDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
 
     override val numParameterTypes: Int
         get() = parameterTypes.size
 
     override val returnType: KoTypeDeclaration
         get() {
-        val typeReference = ktFunctionType.returnTypeReference
+            val typeReference = ktFunctionType.returnTypeReference
 
-        return typeReference?.let { KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
-            ?: throw KoInternalException("Lambda function has no specified type")
-    }
+            return typeReference?.let { KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
+                ?: throw KoInternalException("Lambda function has no specified type")
+        }
 
     override fun hasReturnType(predicate: (KoTypeDeclaration) -> Boolean): Boolean = predicate(returnType)
 
     override fun hasReturnTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(returnType, kClass)
 
-    override fun countParameterTypes(predicate: (KoParameterDeclaration) -> Boolean): Int =
-        parameterTypes.count { predicate(it) }
+    override fun countParameterTypes(predicate: (KoParameterDeclaration) -> Boolean): Int = parameterTypes.count { predicate(it) }
 
     override fun hasParameterType(predicate: (KoParameterDeclaration) -> Boolean): Boolean = parameterTypes.any(predicate)
 

@@ -52,9 +52,15 @@ internal interface KoTypeDeclarationProviderCore :
 
     private fun getDeclarationWithFqn(declaration: KoBaseDeclaration): KoBaseDeclaration? =
         when {
-            declaration is KoFullyQualifiedNameProvider && declaration.fullyQualifiedName != null -> declaration
-            declaration is KoContainingDeclarationProvider && declaration !is KoFileDeclaration-> getDeclarationWithFqn(declaration.containingDeclaration)
-            else -> null
+            declaration is KoFullyQualifiedNameProvider && declaration.fullyQualifiedName != null -> {
+                declaration
+            }
+            declaration is KoContainingDeclarationProvider && declaration !is KoFileDeclaration -> {
+                getDeclarationWithFqn(declaration.containingDeclaration)
+            }
+            else -> {
+                null
+            }
         }
 
     override fun asClassDeclaration(): KoClassDeclaration? = declaration as? KoClassDeclaration

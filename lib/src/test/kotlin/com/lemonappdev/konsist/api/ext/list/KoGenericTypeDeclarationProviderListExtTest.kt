@@ -9,6 +9,7 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+@Suppress("detekt.LargeClass")
 class KoGenericTypeDeclarationProviderListExtTest {
     @Test
     fun `genericTypes returns generic types from all declarations`() {
@@ -1006,18 +1007,6 @@ class KoGenericTypeDeclarationProviderListExtTest {
         // then
         sut shouldBeEqualTo listOf(declaration2)
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
     @Test
     fun `typeArgumentsFlatten returns type arguments from all declarations`() {

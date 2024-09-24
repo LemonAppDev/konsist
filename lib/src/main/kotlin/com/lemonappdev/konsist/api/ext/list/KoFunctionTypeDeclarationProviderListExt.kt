@@ -8,7 +8,6 @@ import kotlin.reflect.KClass
 val <T : KoFunctionTypeDeclarationProvider> List<T>.returnTypes: List<KoTypeDeclaration>
     get() = mapNotNull { it.returnType }
 
-
 val <T : KoFunctionTypeDeclarationProvider> List<T>.parameterTypes: List<KoParameterDeclaration>
     get() = flatMap { it.parameterTypes }
 

@@ -92,8 +92,7 @@ internal interface KoGenericTypeDeclarationProviderCore :
 
     override fun hasGenericTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(genericType, kClass)
 
-    override fun countTypeArguments(predicate: (KoTypeDeclaration) -> Boolean): Int =
-        typeArguments.count { predicate(it) }
+    override fun countTypeArguments(predicate: (KoTypeDeclaration) -> Boolean): Int = typeArguments.count { predicate(it) }
 
     override fun hasTypeArgumentWithName(
         name: String,
@@ -128,16 +127,15 @@ internal interface KoGenericTypeDeclarationProviderCore :
         vararg names: KClass<*>,
     ): Boolean = hasTypeArgumentOf(listOf(name, *names))
 
-    override fun hasTypeArgumentOf(
-        names: Collection<KClass<*>>,
-    ): Boolean =
+    override fun hasTypeArgumentOf(names: Collection<KClass<*>>): Boolean =
         when {
             names.isEmpty() -> true
-            else -> names.any { name ->
-                typeArguments.any { typeArgument ->
-                    name.qualifiedName == (typeArgument.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+            else ->
+                names.any { name ->
+                    typeArguments.any { typeArgument ->
+                        name.qualifiedName == (typeArgument.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+                    }
                 }
-            }
         }
 
     override fun hasAllTypeArgumentsOf(
@@ -145,24 +143,22 @@ internal interface KoGenericTypeDeclarationProviderCore :
         vararg names: KClass<*>,
     ): Boolean = hasAllTypeArgumentsOf(listOf(name, *names))
 
-    override fun hasAllTypeArgumentsOf(
-        names: Collection<KClass<*>>,
-    ): Boolean =
+    override fun hasAllTypeArgumentsOf(names: Collection<KClass<*>>): Boolean =
         when {
             names.isEmpty() -> true
-            else -> names.all { name ->
-                typeArguments.any { typeArgument ->
-                    name.qualifiedName == (typeArgument.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+            else ->
+                names.all { name ->
+                    typeArguments.any { typeArgument ->
+                        name.qualifiedName == (typeArgument.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+                    }
                 }
-            }
         }
 
     override fun hasTypeArgument(predicate: (KoTypeDeclaration) -> Boolean): Boolean = typeArguments.any(predicate)
 
     override fun hasAllTypeArguments(predicate: (KoTypeDeclaration) -> Boolean): Boolean = typeArguments.all(predicate)
 
-    override fun countTypeArgumentsFlatten(predicate: (KoTypeDeclaration) -> Boolean): Int =
-        typeArgumentsFlatten.count { predicate(it) }
+    override fun countTypeArgumentsFlatten(predicate: (KoTypeDeclaration) -> Boolean): Int = typeArgumentsFlatten.count { predicate(it) }
 
     override fun hasTypeArgumentFlattenWithName(
         name: String,
@@ -197,16 +193,15 @@ internal interface KoGenericTypeDeclarationProviderCore :
         vararg names: KClass<*>,
     ): Boolean = hasTypeArgumentFlattenOf(listOf(name, *names))
 
-    override fun hasTypeArgumentFlattenOf(
-        names: Collection<KClass<*>>,
-    ): Boolean =
+    override fun hasTypeArgumentFlattenOf(names: Collection<KClass<*>>): Boolean =
         when {
             names.isEmpty() -> true
-            else -> names.any { name ->
-                typeArgumentsFlatten.any { typeArgument ->
-                    name.qualifiedName == (typeArgument.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+            else ->
+                names.any { name ->
+                    typeArgumentsFlatten.any { typeArgument ->
+                        name.qualifiedName == (typeArgument.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+                    }
                 }
-            }
         }
 
     override fun hasAllTypeArgumentsFlattenOf(
@@ -214,21 +209,18 @@ internal interface KoGenericTypeDeclarationProviderCore :
         vararg names: KClass<*>,
     ): Boolean = hasAllTypeArgumentsFlattenOf(listOf(name, *names))
 
-    override fun hasAllTypeArgumentsFlattenOf(
-        names: Collection<KClass<*>>,
-    ): Boolean =
+    override fun hasAllTypeArgumentsFlattenOf(names: Collection<KClass<*>>): Boolean =
         when {
             names.isEmpty() -> true
-            else -> names.all { name ->
-                typeArgumentsFlatten.any { typeArgument ->
-                    name.qualifiedName == (typeArgument.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+            else ->
+                names.all { name ->
+                    typeArgumentsFlatten.any { typeArgument ->
+                        name.qualifiedName == (typeArgument.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+                    }
                 }
-            }
         }
 
-    override fun hasTypeArgumentFlatten(predicate: (KoTypeDeclaration) -> Boolean): Boolean =
-        typeArgumentsFlatten.any(predicate)
+    override fun hasTypeArgumentFlatten(predicate: (KoTypeDeclaration) -> Boolean): Boolean = typeArgumentsFlatten.any(predicate)
 
-    override fun hasAllTypeArgumentsFlatten(predicate: (KoTypeDeclaration) -> Boolean): Boolean =
-        typeArgumentsFlatten.all(predicate)
+    override fun hasAllTypeArgumentsFlatten(predicate: (KoTypeDeclaration) -> Boolean): Boolean = typeArgumentsFlatten.all(predicate)
 }

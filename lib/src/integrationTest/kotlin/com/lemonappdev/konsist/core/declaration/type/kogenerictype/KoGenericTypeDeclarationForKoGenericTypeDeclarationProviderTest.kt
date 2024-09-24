@@ -1,12 +1,5 @@
 package com.lemonappdev.konsist.core.declaration.type.kogenerictype
 
-import com.lemonappdev.konsist.testdata.SampleClass
-import com.lemonappdev.konsist.testdata.SampleInterface
-import com.lemonappdev.konsist.testdata.SampleObject
-import com.lemonappdev.konsist.testdata.SampleGenericClassWithParameter
-import com.lemonappdev.konsist.testdata.SampleGenericSuperInterface
-import com.lemonappdev.konsist.externalsample.SampleExternalClass
-import com.lemonappdev.konsist.externalsample.SampleExternalGenericClass
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
@@ -17,11 +10,19 @@ import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.externalsample.SampleExternalClass
+import com.lemonappdev.konsist.externalsample.SampleExternalGenericClass
+import com.lemonappdev.konsist.testdata.SampleClass
+import com.lemonappdev.konsist.testdata.SampleGenericClassWithParameter
+import com.lemonappdev.konsist.testdata.SampleGenericSuperInterface
+import com.lemonappdev.konsist.testdata.SampleInterface
+import com.lemonappdev.konsist.testdata.SampleObject
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
 
+@Suppress("detekt.LongMethod")
 class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
     @Test
     fun `kotlin-generic-type`() {
@@ -872,6 +873,6 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/type/kogenerictype/snippet/forkogenerictypedeclarationprovider/",
-            fileName
+            fileName,
         )
 }

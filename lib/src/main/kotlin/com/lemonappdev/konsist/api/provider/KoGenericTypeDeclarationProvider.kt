@@ -56,11 +56,17 @@ interface KoGenericTypeDeclarationProvider : KoBaseProvider {
 
     fun hasTypeArgumentsWithAllNames(names: Collection<String>): Boolean
 
-    fun hasTypeArgumentOf(name: KClass<*>, vararg names: KClass<*>): Boolean
+    fun hasTypeArgumentOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+    ): Boolean
 
     fun hasTypeArgumentOf(names: Collection<KClass<*>>): Boolean
 
-    fun hasAllTypeArgumentsOf(name: KClass<*>, vararg names: KClass<*>): Boolean
+    fun hasAllTypeArgumentsOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+    ): Boolean
 
     fun hasAllTypeArgumentsOf(names: Collection<KClass<*>>): Boolean
 
@@ -84,11 +90,17 @@ interface KoGenericTypeDeclarationProvider : KoBaseProvider {
 
     fun hasTypeArgumentsFlattenWithAllNames(names: Collection<String>): Boolean
 
-    fun hasTypeArgumentFlattenOf(name: KClass<*>, vararg names: KClass<*>): Boolean
+    fun hasTypeArgumentFlattenOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+    ): Boolean
 
     fun hasTypeArgumentFlattenOf(names: Collection<KClass<*>>): Boolean
 
-    fun hasAllTypeArgumentsFlattenOf(name: KClass<*>, vararg names: KClass<*>): Boolean
+    fun hasAllTypeArgumentsFlattenOf(
+        name: KClass<*>,
+        vararg names: KClass<*>,
+    ): Boolean
 
     fun hasAllTypeArgumentsFlattenOf(names: Collection<KClass<*>>): Boolean
 
