@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.api.declaration.type
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoFunctionTypeDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
@@ -20,14 +21,5 @@ interface KoFunctionTypeDeclaration :
     KoLocationProvider,
     KoPathProvider,
     KoModuleProvider,
-    KoSourceSetProvider {
-    /**
-     * Represents the parameters of the function type.
-     */
-    val parameterTypes: List<KoParameterDeclaration>
-
-    /**
-     * Represents the return type of the function type.
-     */
-    val returnType: KoTypeDeclaration
-}
+    KoSourceSetProvider,
+    KoFunctionTypeDeclarationProvider
