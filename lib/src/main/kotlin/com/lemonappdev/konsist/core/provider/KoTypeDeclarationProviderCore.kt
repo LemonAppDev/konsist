@@ -51,7 +51,6 @@ internal interface KoTypeDeclarationProviderCore :
 
     private fun getDeclarationWithFqn(declaration: KoBaseDeclaration): KoBaseDeclaration? =
         when {
-            declaration is KoGenericTypeDeclaration -> containingFile
             declaration is KoFullyQualifiedNameProvider && declaration.fullyQualifiedName != null -> declaration
             declaration is KoContainingDeclarationProvider -> getDeclarationWithFqn(declaration.containingDeclaration)
             else -> null

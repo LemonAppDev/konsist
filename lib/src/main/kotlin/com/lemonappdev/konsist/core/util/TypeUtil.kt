@@ -141,7 +141,7 @@ object TypeUtil {
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
             nestedType is KtUserType && typeText != null -> {
                 if (nestedType.children.filterIsInstance<KtTypeArgumentList>().isNotEmpty()) {
-                    KoGenericTypeDeclarationCore.getInstance(nestedType, containingFile)
+                    KoGenericTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
                 } else if (isKotlinBasicType(typeText) || isKotlinCollectionTypes(typeText)) {
                     KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
                 } else if (hasTypeParameterWithTheSameName == true) {

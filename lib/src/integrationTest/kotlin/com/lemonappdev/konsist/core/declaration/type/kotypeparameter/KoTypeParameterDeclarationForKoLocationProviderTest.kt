@@ -82,7 +82,7 @@ class KoTypeParameterDeclarationForKoLocationProviderTest {
                 ?.asTypeParameterDeclaration()
 
         // then
-        sut?.location shouldBeEqualTo "${sut?.path}:"
+        sut?.location shouldBeEqualTo "${sut?.path}:1:37"
     }
 
     private fun getSnippetFile(fileName: String) =

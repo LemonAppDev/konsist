@@ -1,1 +1,1 @@
-typealias SampleTypeAlias<T> = List<T>
+typealias SampleTypeAlias<TestType> = List<TestType>

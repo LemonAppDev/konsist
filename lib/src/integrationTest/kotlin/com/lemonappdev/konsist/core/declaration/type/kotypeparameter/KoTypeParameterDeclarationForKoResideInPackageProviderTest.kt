@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Test
 
 class KoTypeParameterDeclarationForKoResideInPackageProviderTest {
     @Test
-    fun `type-parameter-reside-in-package`() {
+    fun `function-type-parameter-reside-in-package`() {
         // given
         val sut =
-            getSnippetFile("type-parameter-reside-in-package")
+            getSnippetFile("function-type-parameter-reside-in-package")
                 .functions()
                 .returnTypes
                 .firstOrNull()
