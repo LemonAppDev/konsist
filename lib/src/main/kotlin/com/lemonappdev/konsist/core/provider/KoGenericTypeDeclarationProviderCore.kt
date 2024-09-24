@@ -203,7 +203,7 @@ internal interface KoGenericTypeDeclarationProviderCore :
         when {
             names.isEmpty() -> true
             else -> names.any { name ->
-                typeArguments.any { typeArgument ->
+                typeArgumentsFlatten.any { typeArgument ->
                     name.qualifiedName == (typeArgument.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
                 }
             }
@@ -220,7 +220,7 @@ internal interface KoGenericTypeDeclarationProviderCore :
         when {
             names.isEmpty() -> true
             else -> names.all { name ->
-                typeArguments.any { typeArgument ->
+                typeArgumentsFlatten.any { typeArgument ->
                     name.qualifiedName == (typeArgument.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
                 }
             }
