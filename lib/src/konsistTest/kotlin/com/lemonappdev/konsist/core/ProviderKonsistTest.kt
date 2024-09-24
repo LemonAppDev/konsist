@@ -59,9 +59,8 @@ class ProviderKonsistTest {
             .withoutName(
                 "KoPackageDeclarationProviderCore",
                 "KoDeclarationFullyQualifiedNameProviderCore",
-                "KoTypeParameterProviderCore"
-            )
-            .assertTrue {
+                "KoTypeParameterProviderCore",
+            ).assertTrue {
                 val name = it.name.removeSuffix("Core")
 
                 it.hasParentWithName(name, indirectParents = true)
