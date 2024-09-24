@@ -145,7 +145,7 @@ class KoGenericTypeDeclarationProviderListExt {
         val sut = declarations.withoutGenericTypeOf(emptySet())
 
         // then
-        sut shouldBeEqualTo em
+        sut shouldBeEqualTo emptyList()
     }
 
     @Test
