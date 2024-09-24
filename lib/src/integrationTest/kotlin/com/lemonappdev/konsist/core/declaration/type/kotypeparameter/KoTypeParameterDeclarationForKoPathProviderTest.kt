@@ -8,9 +8,6 @@ import com.lemonappdev.konsist.api.ext.list.returnTypes
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments.arguments
-import org.junit.jupiter.params.provider.MethodSource
 
 class KoTypeParameterDeclarationForKoPathProviderTest {
     @Test
@@ -45,7 +42,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
             ?.projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/type/kotypeparameter/snippet/" +
-                        "forkopathprovider/function-type-parameter-path.kt",
+                    "forkopathprovider/function-type-parameter-path.kt",
             )
     }
 
@@ -123,7 +120,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
             ?.projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/type/kotypeparameter/snippet/" +
-                        "forkopathprovider/class-type-parameter-path.kt",
+                    "forkopathprovider/class-type-parameter-path.kt",
             )
     }
 
@@ -203,7 +200,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
             ?.projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/type/kotypeparameter/snippet/" +
-                        "forkopathprovider/interface-type-parameter-path.kt",
+                    "forkopathprovider/interface-type-parameter-path.kt",
             )
     }
 
@@ -279,7 +276,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
             ?.projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/type/kotypeparameter/snippet/" +
-                        "forkopathprovider/property-type-parameter-path.kt",
+                    "forkopathprovider/property-type-parameter-path.kt",
             )
     }
 
@@ -359,7 +356,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
             ?.projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/type/kotypeparameter/snippet/" +
-                        "forkopathprovider/typealias-type-parameter-path.kt",
+                    "forkopathprovider/typealias-type-parameter-path.kt",
             )
     }
 

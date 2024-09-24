@@ -42,7 +42,7 @@ class KoTypeParameterDeclarationForKoResideInPackageProviderTest {
                 .asTypeParameterDeclaration()
 
         // then
-                assertSoftly(sut) {
+        assertSoftly(sut) {
             it?.resideInPackage("com..") shouldBeEqualTo true
             it?.resideInPackage("com") shouldBeEqualTo false
             it?.resideOutsidePackage("com..") shouldBeEqualTo false
@@ -62,7 +62,7 @@ class KoTypeParameterDeclarationForKoResideInPackageProviderTest {
                 ?.asTypeParameterDeclaration()
 
         // then
-                assertSoftly(sut) {
+        assertSoftly(sut) {
             it?.resideInPackage("com..") shouldBeEqualTo true
             it?.resideInPackage("com") shouldBeEqualTo false
             it?.resideOutsidePackage("com..") shouldBeEqualTo false
@@ -81,7 +81,7 @@ class KoTypeParameterDeclarationForKoResideInPackageProviderTest {
                 ?.asTypeParameterDeclaration()
 
         // then
-                assertSoftly(sut) {
+        assertSoftly(sut) {
             it?.resideInPackage("com..") shouldBeEqualTo true
             it?.resideInPackage("com") shouldBeEqualTo false
             it?.resideOutsidePackage("com..") shouldBeEqualTo false
@@ -103,7 +103,7 @@ class KoTypeParameterDeclarationForKoResideInPackageProviderTest {
                 ?.asTypeParameterDeclaration()
 
         // then
-                assertSoftly(sut) {
+        assertSoftly(sut) {
             it?.resideInPackage("com..") shouldBeEqualTo true
             it?.resideInPackage("com") shouldBeEqualTo false
             it?.resideOutsidePackage("com..") shouldBeEqualTo false
