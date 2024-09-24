@@ -79,6 +79,8 @@ internal class KoTypeDeclarationCore private constructor(
         val typeReference =
             ktTypeReference
                 ?.children
+                // The last item is chosen because when a type is preceded by an annotation or modifier,
+                // the type being searched for is the last item in the list.
                 ?.lastOrNull()
                 ?: ktNameReferenceExpression
                 ?: ktTypeProjection
