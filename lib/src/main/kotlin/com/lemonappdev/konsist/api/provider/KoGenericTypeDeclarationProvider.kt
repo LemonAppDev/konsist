@@ -34,7 +34,6 @@ interface KoGenericTypeDeclarationProvider : KoBaseProvider {
      */
     val typeArgumentsFlatten: List<KoTypeDeclaration>
 
-    // Todo
     val numTypeArgumentsFlatten: Int
 
     fun hasGenericType(predicate: (KoTypeDeclaration) -> Boolean): Boolean
