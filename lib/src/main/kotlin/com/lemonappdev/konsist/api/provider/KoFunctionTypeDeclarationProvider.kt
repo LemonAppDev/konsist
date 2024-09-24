@@ -19,20 +19,6 @@ interface KoFunctionTypeDeclarationProvider : KoBaseProvider {
 
     fun countParameterTypes(predicate: (KoParameterDeclaration) -> Boolean): Int
 
-    fun hasParameterTypeWithName(
-        name: String,
-        vararg names: String,
-    ): Boolean
-
-    fun hasParameterTypeWithName(names: Collection<String>): Boolean
-
-    fun hasParameterTypesWithAllNames(
-        name: String,
-        vararg names: String,
-    ): Boolean
-
-    fun hasParameterTypesWithAllNames(names: Collection<String>): Boolean
-
     fun hasParameterType(predicate: (KoParameterDeclaration) -> Boolean): Boolean
 
     fun hasAllParameterTypes(predicate: (KoParameterDeclaration) -> Boolean): Boolean

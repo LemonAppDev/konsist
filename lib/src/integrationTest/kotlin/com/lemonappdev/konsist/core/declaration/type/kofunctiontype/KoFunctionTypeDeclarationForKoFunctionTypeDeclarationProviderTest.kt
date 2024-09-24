@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.core.declaration.type.kofunctiontype
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.testdata.SampleClass
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -16,7 +18,13 @@ class KoFunctionTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
                 ?.asFunctionTypeDeclaration()
 
         // then
-        sut?.parameterTypes shouldBeEqualTo emptyList()
+        assertSoftly(sut) {
+            it?.parameterTypes shouldBeEqualTo emptyList()
+            it?.numParameterTypes shouldBeEqualTo 0
+            it?.countParameterTypes { parameter -> parameter.type.isKotlinType } shouldBeEqualTo 0
+            it?.hasParameterType { parameter -> parameter.type.isKotlinType } shouldBeEqualTo false
+            it?.hasAllParameterTypes { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -30,7 +38,16 @@ class KoFunctionTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
                 ?.asFunctionTypeDeclaration()
 
         // then
-        sut?.parameterTypes?.map { it.type.name } shouldBeEqualTo listOf("String")
+        assertSoftly(sut) {
+            it?.parameterTypes?.map { parameter -> parameter.type.name } shouldBeEqualTo listOf("String")
+            it?.numParameterTypes shouldBeEqualTo 1
+            it?.countParameterTypes { parameter -> parameter.type.isKotlinType } shouldBeEqualTo 1
+            it?.countParameterTypes { parameter -> parameter.type.isClass } shouldBeEqualTo 0
+            it?.hasParameterType { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
+            it?.hasParameterType { parameter -> parameter.type.isExternalType } shouldBeEqualTo false
+            it?.hasAllParameterTypes { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
+            it?.hasAllParameterTypes { parameter -> parameter.type.isExternalType } shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -44,7 +61,16 @@ class KoFunctionTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
                 ?.asFunctionTypeDeclaration()
 
         // then
-        sut?.parameterTypes?.map { it.type.name } shouldBeEqualTo listOf("String", "List<Int>")
+        assertSoftly(sut) {
+            it?.parameterTypes?.map { parameter -> parameter.type.name } shouldBeEqualTo listOf("String", "List<Int>")
+            it?.numParameterTypes shouldBeEqualTo 2
+            it?.countParameterTypes { parameter -> parameter.type.isKotlinType } shouldBeEqualTo 1
+            it?.countParameterTypes { parameter -> parameter.type.isClass } shouldBeEqualTo 0
+            it?.hasParameterType { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
+            it?.hasParameterType { parameter -> parameter.type.isExternalType } shouldBeEqualTo false
+            it?.hasAllParameterTypes { parameter -> parameter.type.isKotlinType || parameter.type.isGenericType } shouldBeEqualTo true
+            it?.hasAllParameterTypes { parameter -> parameter.type.isExternalType } shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -58,7 +84,13 @@ class KoFunctionTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
                 ?.asFunctionTypeDeclaration()
 
         // then
-        sut?.returnType?.name shouldBeEqualTo "Unit"
+        assertSoftly(sut) {
+            it?.returnType?.name shouldBeEqualTo "Unit"
+            it?.hasReturnType { type -> type.isKotlinType } shouldBeEqualTo true
+            it?.hasReturnType { type -> type.isExternalType } shouldBeEqualTo false
+            it?.hasReturnTypeOf(Unit::class) shouldBeEqualTo true
+            it?.hasReturnTypeOf(String::class) shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -72,7 +104,12 @@ class KoFunctionTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
                 ?.asFunctionTypeDeclaration()
 
         // then
-        sut?.returnType?.name shouldBeEqualTo "List<String>"
+        assertSoftly(sut) {
+            it?.returnType?.name shouldBeEqualTo "List<String>"
+            it?.hasReturnType { type -> type.isGenericType } shouldBeEqualTo true
+            it?.hasReturnType { type -> type.isExternalType } shouldBeEqualTo false
+            it?.hasReturnTypeOf(String::class) shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -86,7 +123,13 @@ class KoFunctionTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
                 ?.asFunctionTypeDeclaration()
 
         // then
-        sut?.returnType?.name shouldBeEqualTo "SampleClass"
+        assertSoftly(sut) {
+            it?.returnType?.name shouldBeEqualTo "SampleClass"
+            it?.hasReturnType { type -> type.isClass } shouldBeEqualTo true
+            it?.hasReturnType { type -> type.isExternalType } shouldBeEqualTo false
+            it?.hasReturnTypeOf(SampleClass::class) shouldBeEqualTo true
+            it?.hasReturnTypeOf(String::class) shouldBeEqualTo false
+        }
     }
 
     private fun getSnippetFile(fileName: String) =

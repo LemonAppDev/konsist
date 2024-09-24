@@ -44,58 +44,6 @@ fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutReturnTypeOf(kClasses
         }
     }
 
-fun <T : KoFunctionTypeDeclarationProvider> List<T>.withParameterTypeNamed(
-    name: String,
-    vararg names: String,
-): List<T> = withParameterTypeNamed(listOf(name, *names))
-
-fun <T : KoFunctionTypeDeclarationProvider> List<T>.withParameterTypeNamed(names: Collection<String>): List<T> =
-    filter {
-        when {
-            names.isEmpty() -> true
-            else -> it.hasParameterTypeWithName(names)
-        }
-    }
-
-fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutParameterTypeNamed(
-    name: String,
-    vararg names: String,
-): List<T> = withoutParameterTypeNamed(listOf(name, *names))
-
-fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutParameterTypeNamed(names: Collection<String>): List<T> =
-    filterNot {
-        when {
-            names.isEmpty() -> true
-            else -> it.hasParameterTypeWithName(names)
-        }
-    }
-
-fun <T : KoFunctionTypeDeclarationProvider> List<T>.withAllParameterTypesNamed(
-    name: String,
-    vararg names: String,
-): List<T> = withAllParameterTypesNamed(listOf(name, *names))
-
-fun <T : KoFunctionTypeDeclarationProvider> List<T>.withAllParameterTypesNamed(names: Collection<String>): List<T> =
-    filter {
-        when {
-            names.isEmpty() -> true
-            else -> it.hasParameterTypesWithAllNames(names)
-        }
-    }
-
-fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutAllParameterTypesNamed(
-    name: String,
-    vararg names: String,
-): List<T> = withoutAllParameterTypesNamed(listOf(name, *names))
-
-fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutAllParameterTypesNamed(names: Collection<String>): List<T> =
-    filterNot {
-        when {
-            names.isEmpty() -> true
-            else -> it.hasParameterTypesWithAllNames(names)
-        }
-    }
-
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withParameterType(predicate: (KoParameterDeclaration) -> Boolean): List<T> =
     filter {
         it.hasParameterType(predicate)

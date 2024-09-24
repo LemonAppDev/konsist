@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.provider
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
@@ -52,7 +53,7 @@ internal interface KoTypeDeclarationProviderCore :
     private fun getDeclarationWithFqn(declaration: KoBaseDeclaration): KoBaseDeclaration? =
         when {
             declaration is KoFullyQualifiedNameProvider && declaration.fullyQualifiedName != null -> declaration
-            declaration is KoContainingDeclarationProvider -> getDeclarationWithFqn(declaration.containingDeclaration)
+            declaration is KoContainingDeclarationProvider && declaration !is KoFileDeclaration-> getDeclarationWithFqn(declaration.containingDeclaration)
             else -> null
         }
 

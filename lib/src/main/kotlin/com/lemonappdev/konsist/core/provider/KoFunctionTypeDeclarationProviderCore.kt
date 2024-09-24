@@ -46,28 +46,6 @@ internal interface KoFunctionTypeDeclarationProviderCore :
     override fun countParameterTypes(predicate: (KoParameterDeclaration) -> Boolean): Int =
         parameterTypes.count { predicate(it) }
 
-    override fun hasParameterTypeWithName(
-        name: String,
-        vararg names: String,
-    ): Boolean = hasParameterTypeWithName(listOf(name, *names))
-
-    override fun hasParameterTypeWithName(names: Collection<String>): Boolean =
-        when {
-            names.isEmpty() -> true
-            else -> names.any { parameterTypes.any { argument -> it == argument.name } }
-        }
-
-    override fun hasParameterTypesWithAllNames(
-        name: String,
-        vararg names: String,
-    ): Boolean = hasParameterTypesWithAllNames(listOf(name, *names))
-
-    override fun hasParameterTypesWithAllNames(names: Collection<String>): Boolean =
-        when {
-            names.isEmpty() -> true
-            else -> names.all { parameterTypes.any { argument -> it == argument.name } }
-        }
-
     override fun hasParameterType(predicate: (KoParameterDeclaration) -> Boolean): Boolean = parameterTypes.any(predicate)
 
     override fun hasAllParameterTypes(predicate: (KoParameterDeclaration) -> Boolean): Boolean = parameterTypes.all(predicate)
