@@ -20,74 +20,153 @@ import kotlin.reflect.KClass
 /**
  * List containing declarations associated with types.
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("declarations()"))
 val <T : KoTypeDeclarationProvider> List<T>.declarations: List<KoBaseTypeDeclaration>
     get() = mapNotNull { it.declaration }
 
 /**
  * List containing class declarations associated with types.
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("classDeclarations()"))
 val <T : KoTypeDeclarationProvider> List<T>.classDeclarations: List<KoClassDeclaration>
     get() = mapNotNull { it.asClassDeclaration() }
 
 /**
  * List containing object declarations associated with types.
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("objectDeclarations()"))
 val <T : KoTypeDeclarationProvider> List<T>.objectDeclarations: List<KoObjectDeclaration>
     get() = mapNotNull { it.asObjectDeclaration() }
 
 /**
  * List containing interface declarations associated with types.
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("interfaceDeclarations()"))
 val <T : KoTypeDeclarationProvider> List<T>.interfaceDeclarations: List<KoInterfaceDeclaration>
     get() = mapNotNull { it.asInterfaceDeclaration() }
 
 /**
  * List containing type alias declarations associated with types.
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("typeAliasDeclarations()"))
 val <T : KoTypeDeclarationProvider> List<T>.typeAliasDeclarations: List<KoTypeAliasDeclaration>
     get() = mapNotNull { it.asTypeAliasDeclaration() }
 
 /**
  * List containing import alias declarations associated with types.
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("importAliasDeclarations()"))
 val <T : KoTypeDeclarationProvider> List<T>.importAliasDeclarations: List<KoImportAliasDeclaration>
     get() = mapNotNull { it.asImportAliasDeclaration() }
 
 /**
  * List containing kotlin type declarations associated with types.
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("kotlinTypeDeclarations()"))
 val <T : KoTypeDeclarationProvider> List<T>.kotlinTypeDeclarations: List<KoKotlinTypeDeclaration>
     get() = mapNotNull { it.asKotlinTypeDeclaration() }
 
 /**
  * List containing function type declarations associated with types.
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("functionTypeDeclarations()"))
 val <T : KoTypeDeclarationProvider> List<T>.functionTypeDeclarations: List<KoFunctionTypeDeclaration>
     get() = mapNotNull { it.asFunctionTypeDeclaration() }
 
 /**
+ * List containing external type declarations associated with types.
+ */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("externalTypeDeclarations()"))
+val <T : KoTypeDeclarationProvider> List<T>.externalTypeDeclarations: List<KoExternalDeclaration>
+    get() = mapNotNull { it.asExternalTypeDeclaration() }
+
+/**
+ * List containing declarations associated with types.
+ */
+fun <T : KoTypeDeclarationProvider> List<T>.typeDeclarations(predicate: ((KoBaseTypeDeclaration) -> Boolean)? = null): List<KoBaseTypeDeclaration> =
+    filter {
+        when (predicate) {
+            null -> true
+            else -> it.hasDeclaration(predicate)
+        } }
+        .map { it.declaration }
+
+/**
+ * List containing class declarations associated with types.
+ */
+fun <T : KoTypeDeclarationProvider> List<T>.classDeclarations(predicate: ((KoClassDeclaration) -> Boolean)? = null): List<KoClassDeclaration> =
+    filter { it.hasClassDeclaration(predicate) }
+        .mapNotNull { it.asClassDeclaration() }
+
+/**
+ * List containing object declarations associated with types.
+ */
+fun <T : KoTypeDeclarationProvider> List<T>.objectDeclarations(predicate: ((KoObjectDeclaration) -> Boolean)? = null): List<KoObjectDeclaration> =
+    filter { it.hasObjectDeclaration(predicate) }
+        .mapNotNull { it.asObjectDeclaration() }
+
+/**
+ * List containing interface declarations associated with types.
+ */
+fun <T : KoTypeDeclarationProvider> List<T>.interfaceDeclarations(predicate: ((KoInterfaceDeclaration) -> Boolean)? = null): List<KoInterfaceDeclaration> =
+    filter { it.hasInterfaceDeclaration(predicate) }
+        .mapNotNull { it.asInterfaceDeclaration() }
+
+/**
+ * List containing type alias declarations associated with types.
+ */
+fun <T : KoTypeDeclarationProvider> List<T>.typeAliasDeclarations(predicate: ((KoTypeAliasDeclaration) -> Boolean)? = null): List<KoTypeAliasDeclaration> =
+    filter { it.hasTypeAliasDeclaration(predicate) }
+        .mapNotNull { it.asTypeAliasDeclaration() }
+
+/**
+ * List containing import alias declarations associated with types.
+ */
+fun <T : KoTypeDeclarationProvider> List<T>.importAliasDeclarations(predicate: ((KoImportAliasDeclaration) -> Boolean)? = null): List<KoImportAliasDeclaration> =
+    filter { it.hasImportAliasDeclaration(predicate) }
+        .mapNotNull { it.asImportAliasDeclaration() }
+
+/**
+ * List containing kotlin type declarations associated with types.
+ */
+fun <T : KoTypeDeclarationProvider> List<T>.kotlinTypeDeclarations(predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null): List<KoKotlinTypeDeclaration> =
+    filter { it.hasKotlinTypeDeclaration(predicate) }
+        .mapNotNull { it.asKotlinTypeDeclaration() }
+
+/**
+ * List containing function type declarations associated with types.
+ */
+fun <T : KoTypeDeclarationProvider> List<T>.functionTypeDeclarations(predicate: ((KoFunctionTypeDeclaration) -> Boolean)? = null): List<KoFunctionTypeDeclaration> =
+    filter { it.hasFunctionTypeDeclaration(predicate) }
+        .mapNotNull { it.asFunctionTypeDeclaration() }
+
+/**
  * List containing generic type declarations associated with types.
  */
-val <T : KoTypeDeclarationProvider> List<T>.genericTypeDeclarations: List<KoGenericTypeDeclaration>
-    get() = mapNotNull { it.asGenericTypeDeclaration() }
+fun <T : KoTypeDeclarationProvider> List<T>.genericTypeDeclarations(predicate: ((KoGenericTypeDeclaration) -> Boolean)? = null): List<KoGenericTypeDeclaration> =
+    filter { it.hasGenericTypeDeclaration(predicate) }
+        .mapNotNull { it.asGenericTypeDeclaration() }
 
 /**
  * List containing type parameter declarations associated with types.
  */
-val <T : KoTypeDeclarationProvider> List<T>.typeParameterDeclarations: List<KoTypeParameterDeclaration>
-    get() = mapNotNull { it.asTypeParameterDeclaration() }
+fun <T : KoTypeDeclarationProvider> List<T>.typeParameterDeclarations(predicate: ((KoTypeParameterDeclaration) -> Boolean)? = null): List<KoTypeParameterDeclaration> =
+    filter { it.hasTypeParameterDeclaration(predicate) }
+        .mapNotNull { it.asTypeParameterDeclaration() }
 
 /**
  * List containing star projection declarations associated with types.
  */
-val <T : KoTypeDeclarationProvider> List<T>.starProjectionDeclarations: List<KoStarProjectionDeclaration>
-    get() = mapNotNull { it.asStarProjectionDeclaration() }
+fun <T : KoTypeDeclarationProvider> List<T>.starProjectionDeclarations(predicate: ((KoStarProjectionDeclaration) -> Boolean)? = null): List<KoStarProjectionDeclaration> =
+    filter { it.hasStarProjectionDeclaration(predicate) }
+        .mapNotNull { it.asStarProjectionDeclaration() }
 
 /**
  * List containing external type declarations associated with types.
  */
-val <T : KoTypeDeclarationProvider> List<T>.externalTypeDeclarations: List<KoExternalDeclaration>
-    get() = mapNotNull { it.asExternalTypeDeclaration() }
+fun <T : KoTypeDeclarationProvider> List<T>.externalTypeDeclarations(predicate: ((KoExternalDeclaration) -> Boolean)? = null): List<KoExternalDeclaration> =
+    filter { it.hasExternalTypeDeclaration(predicate) }
+        .mapNotNull { it.asExternalTypeDeclaration() }
 
 /**
  * List containing declarations with the specified declaration.
