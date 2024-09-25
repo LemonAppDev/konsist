@@ -193,6 +193,12 @@ internal interface KoTypeDeclarationProviderCore :
             else -> asTypeParameterDeclaration()?.let { predicate(it) } ?: false
         }
 
+    override fun hasStarProjectionDeclaration(predicate: ((KoStarProjectionDeclaration) -> Boolean)?): Boolean =
+        when (predicate) {
+            null -> asStarProjectionDeclaration() != null
+            else -> asStarProjectionDeclaration()?.let { predicate(it) } ?: false
+        }
+
     override fun hasExternalTypeDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
             null -> asExternalTypeDeclaration() != null

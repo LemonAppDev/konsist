@@ -9,6 +9,9 @@ import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
 import com.lemonappdev.konsist.testdata.SampleType1
 import com.lemonappdev.konsist.testdata.SampleType2
@@ -203,7 +206,7 @@ class KoTypeDeclarationProviderListExtTest {
     }
 
     @Test
-    fun `functionTypeDeclarations returns kotlin types from all declarations`() {
+    fun `functionTypeDeclarations returns function types from all declarations`() {
         // given
         val sourceDeclaration1: KoFunctionTypeDeclaration = mockk()
         val sourceDeclaration2: KoFunctionTypeDeclaration = mockk()
@@ -229,7 +232,7 @@ class KoTypeDeclarationProviderListExtTest {
     }
 
     @Test
-    fun `genericTypeDeclarations returns kotlin types from all declarations`() {
+    fun `genericTypeDeclarations returns generic types from all declarations`() {
         // given
         val sourceDeclaration1: KoGenericTypeDeclaration = mockk()
         val sourceDeclaration2: KoGenericTypeDeclaration = mockk()
@@ -249,6 +252,58 @@ class KoTypeDeclarationProviderListExtTest {
 
         // when
         val sut = declarations.genericTypeDeclarations
+
+        // then
+        sut shouldBeEqualTo listOf(sourceDeclaration1, sourceDeclaration2)
+    }
+
+    @Test
+    fun `typeParameterDeclarations returns type parameters from all declarations`() {
+        // given
+        val sourceDeclaration1: KoTypeParameterDeclaration = mockk()
+        val sourceDeclaration2: KoTypeParameterDeclaration = mockk()
+        val declaration1: KoTypeDeclarationProvider =
+            mockk {
+                every { asTypeParameterDeclaration() } returns sourceDeclaration1
+            }
+        val declaration2: KoTypeDeclarationProvider =
+            mockk {
+                every { asTypeParameterDeclaration() } returns sourceDeclaration2
+            }
+        val declaration3: KoTypeDeclarationProvider =
+            mockk {
+                every { asTypeParameterDeclaration() } returns null
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.typeParameterDeclarations
+
+        // then
+        sut shouldBeEqualTo listOf(sourceDeclaration1, sourceDeclaration2)
+    }
+
+    @Test
+    fun `starProjectionDeclarations returns star projections from all declarations`() {
+        // given
+        val sourceDeclaration1: KoStarProjectionDeclaration = mockk()
+        val sourceDeclaration2: KoStarProjectionDeclaration = mockk()
+        val declaration1: KoTypeDeclarationProvider =
+            mockk {
+                every { asStarProjectionDeclaration() } returns sourceDeclaration1
+            }
+        val declaration2: KoTypeDeclarationProvider =
+            mockk {
+                every { asStarProjectionDeclaration() } returns sourceDeclaration2
+            }
+        val declaration3: KoTypeDeclarationProvider =
+            mockk {
+                every { asStarProjectionDeclaration() } returns null
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.starProjectionDeclarations
 
         // then
         sut shouldBeEqualTo listOf(sourceDeclaration1, sourceDeclaration2)
@@ -2617,6 +2672,222 @@ class KoTypeDeclarationProviderListExtTest {
 
         // when
         val sut = declarations.withoutGenericTypeDeclaration { it.name == name1 }
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2, declaration3)
+    }
+
+    @Test
+    fun `withTypeParameterDeclaration() returns declaration with type parameter`() {
+        // given
+        val declaration1: KoTypeDeclarationProvider =
+            mockk {
+                every { hasTypeParameterDeclaration() } returns true
+            }
+        val declaration2: KoTypeDeclarationProvider =
+            mockk {
+                every { hasTypeParameterDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withTypeParameterDeclaration()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withTypeParameterDeclaration{} returns declaration which satisfy predicate`() {
+        // given
+        val name1 = "name1"
+        val name2 = "name2"
+        val sourceTypeParameter1: KoTypeParameterDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val sourceTypeParameter2: KoTypeParameterDeclaration =
+            mockk {
+                every { name } returns name2
+            }
+        val declaration1: KoTypeDeclarationProvider =
+            mockk {
+                every { asTypeParameterDeclaration() } returns sourceTypeParameter1
+            }
+        val declaration2: KoTypeDeclarationProvider =
+            mockk {
+                every { asTypeParameterDeclaration() } returns sourceTypeParameter2
+            }
+        val declaration3: KoTypeDeclarationProvider =
+            mockk {
+                every { asTypeParameterDeclaration() } returns null
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withTypeParameterDeclaration { it.name == name1 }
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutTypeParameterDeclaration() returns declaration without type parameter`() {
+        // given
+        val declaration1: KoTypeDeclarationProvider =
+            mockk {
+                every { hasTypeParameterDeclaration() } returns true
+            }
+        val declaration2: KoTypeDeclarationProvider =
+            mockk {
+                every { hasTypeParameterDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutTypeParameterDeclaration()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutTypeParameterDeclaration{} returns declarations which not satisfy predicate`() {
+        // given
+        val name1 = "name1"
+        val name2 = "name2"
+        val sourceTypeParameter1: KoTypeParameterDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val sourceTypeParameter2: KoTypeParameterDeclaration =
+            mockk {
+                every { name } returns name2
+            }
+        val declaration1: KoTypeDeclarationProvider =
+            mockk {
+                every { asTypeParameterDeclaration() } returns sourceTypeParameter1
+            }
+        val declaration2: KoTypeDeclarationProvider =
+            mockk {
+                every { asTypeParameterDeclaration() } returns sourceTypeParameter2
+            }
+        val declaration3: KoTypeDeclarationProvider =
+            mockk {
+                every { asTypeParameterDeclaration() } returns null
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutTypeParameterDeclaration { it.name == name1 }
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2, declaration3)
+    }
+
+    @Test
+    fun `withStarProjectionDeclaration() returns declaration with star projection`() {
+        // given
+        val declaration1: KoTypeDeclarationProvider =
+            mockk {
+                every { hasStarProjectionDeclaration() } returns true
+            }
+        val declaration2: KoTypeDeclarationProvider =
+            mockk {
+                every { hasStarProjectionDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withStarProjectionDeclaration()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withStarProjectionDeclaration{} returns declaration which satisfy predicate`() {
+        // given
+        val name1 = "name1"
+        val name2 = "name2"
+        val sourceStarProjection1: KoStarProjectionDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val sourceStarProjection2: KoStarProjectionDeclaration =
+            mockk {
+                every { name } returns name2
+            }
+        val declaration1: KoTypeDeclarationProvider =
+            mockk {
+                every { asStarProjectionDeclaration() } returns sourceStarProjection1
+            }
+        val declaration2: KoTypeDeclarationProvider =
+            mockk {
+                every { asStarProjectionDeclaration() } returns sourceStarProjection2
+            }
+        val declaration3: KoTypeDeclarationProvider =
+            mockk {
+                every { asStarProjectionDeclaration() } returns null
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withStarProjectionDeclaration { it.name == name1 }
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutStarProjectionDeclaration() returns declaration without star projection`() {
+        // given
+        val declaration1: KoTypeDeclarationProvider =
+            mockk {
+                every { hasStarProjectionDeclaration() } returns true
+            }
+        val declaration2: KoTypeDeclarationProvider =
+            mockk {
+                every { hasStarProjectionDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutStarProjectionDeclaration()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutStarProjectionDeclaration{} returns declarations which not satisfy predicate`() {
+        // given
+        val name1 = "name1"
+        val name2 = "name2"
+        val sourceStarProjection1: KoStarProjectionDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val sourceStarProjection2: KoStarProjectionDeclaration =
+            mockk {
+                every { name } returns name2
+            }
+        val declaration1: KoTypeDeclarationProvider =
+            mockk {
+                every { asStarProjectionDeclaration() } returns sourceStarProjection1
+            }
+        val declaration2: KoTypeDeclarationProvider =
+            mockk {
+                every { asStarProjectionDeclaration() } returns sourceStarProjection2
+            }
+        val declaration3: KoTypeDeclarationProvider =
+            mockk {
+                every { asStarProjectionDeclaration() } returns null
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutStarProjectionDeclaration { it.name == name1 }
 
         // then
         sut shouldBeEqualTo listOf(declaration2, declaration3)

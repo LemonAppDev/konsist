@@ -250,10 +250,19 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
      * Whether type has a specified type parameter declaration.
      *
      * @param predicate The predicate generic used to determine if a type parameter declaration satisfies a condition.
-     * @return `true` if the type has the specified type parameter declaration (or any generic type declaration if [predicate] is
+     * @return `true` if the type has the specified type parameter declaration (or any parameter type declaration if [predicate] is
      * `null`), `false` otherwise.
      */
     fun hasTypeParameterDeclaration(predicate: ((KoTypeParameterDeclaration) -> Boolean)? = null): Boolean
+
+    /**
+     * Whether type has a specified star projection declaration.
+     *
+     * @param predicate The predicate generic used to determine if a star projection declaration satisfies a condition.
+     * @return `true` if the type has the specified star projection declaration (or any star projection declaration if [predicate] is
+     * `null`), `false` otherwise.
+     */
+    fun hasStarProjectionDeclaration(predicate: ((KoStarProjectionDeclaration) -> Boolean)? = null): Boolean
 
     /**
      * Whether type has a specified external type declaration.

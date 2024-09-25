@@ -160,6 +160,14 @@ fun <T : KoTypeProvider> List<T>.withFunctionType(): List<T> = filter { it.isFun
  */
 fun <T : KoTypeProvider> List<T>.withoutFunctionType(): List<T> = filterNot { it.isFunctionType }
 
+fun <T : KoTypeProvider> List<T>.withTypeParameter(): List<T> = filter { it.isTypeParameter }
+
+fun <T : KoTypeProvider> List<T>.withoutTypeParameter(): List<T> = filterNot { it.isTypeParameter }
+
+fun <T : KoTypeProvider> List<T>.withStarProjection(): List<T> = filter { it.isStarProjection }
+
+fun <T : KoTypeProvider> List<T>.withoutStarProjection(): List<T> = filterNot { it.isStarProjection }
+
 /**
  * Filters the list to include only declarations that are external types.
  * External types are those defined outside the project's codebase, typically in external libraries.

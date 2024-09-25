@@ -206,6 +206,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo true
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -263,6 +264,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo true
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -320,6 +322,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo true
             it?.isInterface shouldBeEqualTo false
@@ -377,6 +380,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo true
             it?.isInterface shouldBeEqualTo false
@@ -434,6 +438,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo true
@@ -491,6 +496,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo true
@@ -542,6 +548,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -593,6 +600,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -644,6 +652,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -677,6 +686,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeInstanceOf KoTypeParameterDeclaration::class
             it?.asTypeParameterDeclaration()?.name shouldBeEqualTo "TestType"
             it?.hasTypeParameterDeclaration() shouldBeEqualTo true
+            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
             it?.hasTypeParameterDeclaration { declaration -> declaration.name == "TestType" } shouldBeEqualTo true
             it?.hasTypeParameterDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -728,6 +738,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeInstanceOf KoTypeParameterDeclaration::class
             it?.asTypeParameterDeclaration()?.name shouldBeEqualTo "TestType"
             it?.hasTypeParameterDeclaration() shouldBeEqualTo true
+            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
             it?.hasTypeParameterDeclaration { declaration -> declaration.name == "TestType" } shouldBeEqualTo true
             it?.hasTypeParameterDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -797,6 +808,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -855,6 +867,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclarationOf(String::class) shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -913,6 +926,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclarationOf(String::class) shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -964,6 +978,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -1015,6 +1030,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -1073,6 +1089,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -1131,6 +1148,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -1182,6 +1200,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+            it?.hasStarProjectionDeclaration() shouldBeEqualTo true
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
