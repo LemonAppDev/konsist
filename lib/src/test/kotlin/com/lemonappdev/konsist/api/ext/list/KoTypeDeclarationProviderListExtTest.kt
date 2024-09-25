@@ -672,16 +672,13 @@ class KoTypeDeclarationProviderListExtTest {
     @Test
     fun `withClassDeclaration() returns declaration with class`() {
         // given
-        val classType: KoClassDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasClassDeclaration() } returns true
-                every { asClassDeclaration() } returns classType
             }
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasClassDeclaration() } returns false
-                every { asClassDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -689,22 +686,19 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withClassDeclaration()
 
         // then
-        sut shouldBeEqualTo listOf(classType)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withClassDeclarationOf(empty list) returns declaration with class`() {
         // given
-        val classType: KoClassDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasClassDeclaration() } returns true
-                every { asClassDeclaration() } returns classType
             }
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasClassDeclaration() } returns false
-                every { asClassDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -712,22 +706,19 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withClassDeclarationOf(emptyList())
 
         // then
-        sut shouldBeEqualTo listOf(classType)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withClassDeclarationOf(empty set) returns declaration with class`() {
         // given
-        val classType: KoClassDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasClassDeclaration() } returns true
-                every { asClassDeclaration() } returns classType
             }
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasClassDeclaration() } returns false
-                every { asClassDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -735,7 +726,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withClassDeclarationOf(emptySet())
 
         // then
-        sut shouldBeEqualTo listOf(classType)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -769,7 +760,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withClassDeclaration { it.name == name1 }
 
         // then
-        sut shouldBeEqualTo listOf(sourceClass1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -869,16 +860,13 @@ class KoTypeDeclarationProviderListExtTest {
     @Test
     fun `withClassDeclarationOf(KClass) returns declaration with given class`() {
         // given
-        val classType: KoClassDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasClassDeclarationOf(SampleType1::class) } returns true
-                every { asClassDeclaration() } returns classType
             }
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasClassDeclarationOf(SampleType1::class) } returns false
-                every { asClassDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -886,32 +874,26 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withClassDeclarationOf(SampleType1::class)
 
         // then
-        sut shouldBeEqualTo listOf(classType)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withClassDeclarationOf(KClass) returns declarations with one of given classes`() {
         // given
-        val classType1: KoClassDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasClassDeclarationOf(SampleType1::class) } returns true
                 every { hasClassDeclarationOf(SampleType2::class) } returns false
-                every { asClassDeclaration() } returns classType1
             }
-        val classType2: KoClassDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasClassDeclarationOf(SampleType1::class) } returns false
                 every { hasClassDeclarationOf(SampleType2::class) } returns true
-                every { asClassDeclaration() } returns classType2
             }
-        val classType3: KoClassDeclaration = mockk()
         val declaration3: KoTypeDeclarationProvider =
             mockk {
                 every { hasClassDeclarationOf(SampleType1::class) } returns false
                 every { hasClassDeclarationOf(SampleType2::class) } returns false
-                every { asClassDeclaration() } returns classType3
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -919,32 +901,26 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withClassDeclarationOf(SampleType1::class, SampleType2::class)
 
         // then
-        sut shouldBeEqualTo listOf(classType1, classType2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
     fun `withClassDeclarationOf(list of KClass) returns declarations with one of given classes`() {
         // given
-        val classType1: KoClassDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasClassDeclarationOf(SampleType1::class) } returns true
                 every { hasClassDeclarationOf(SampleType2::class) } returns false
-                every { asClassDeclaration() } returns classType1
             }
-        val classType2: KoClassDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasClassDeclarationOf(SampleType1::class) } returns false
                 every { hasClassDeclarationOf(SampleType2::class) } returns true
-                every { asClassDeclaration() } returns classType2
             }
-        val classType3: KoClassDeclaration = mockk()
         val declaration3: KoTypeDeclarationProvider =
             mockk {
                 every { hasClassDeclarationOf(SampleType1::class) } returns false
                 every { hasClassDeclarationOf(SampleType2::class) } returns false
-                every { asClassDeclaration() } returns classType3
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = listOf(SampleType1::class, SampleType2::class)
@@ -953,32 +929,26 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withClassDeclarationOf(kClasses)
 
         // then
-        sut shouldBeEqualTo listOf(classType1, classType2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
     fun `withClassDeclarationOf(set of KClass) returns declarations with one of given classes`() {
         // given
-        val classType1: KoClassDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasClassDeclarationOf(SampleType1::class) } returns true
                 every { hasClassDeclarationOf(SampleType2::class) } returns false
-                every { asClassDeclaration() } returns classType1
             }
-        val classType2: KoClassDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasClassDeclarationOf(SampleType1::class) } returns false
                 every { hasClassDeclarationOf(SampleType2::class) } returns true
-                every { asClassDeclaration() } returns classType2
             }
-        val classType3: KoClassDeclaration = mockk()
         val declaration3: KoTypeDeclarationProvider =
             mockk {
                 every { hasClassDeclarationOf(SampleType1::class) } returns false
                 every { hasClassDeclarationOf(SampleType2::class) } returns false
-                every { asClassDeclaration() } returns classType3
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = setOf(SampleType1::class, SampleType2::class)
@@ -987,7 +957,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withClassDeclarationOf(kClasses)
 
         // then
-        sut shouldBeEqualTo listOf(classType1, classType2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -1096,16 +1066,13 @@ class KoTypeDeclarationProviderListExtTest {
     @Test
     fun `withObjectDeclaration() returns declaration with object`() {
         // given
-        val objectType: KoObjectDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasObjectDeclaration() } returns true
-                every { asObjectDeclaration() } returns objectType
             }
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasObjectDeclaration() } returns false
-                every { asObjectDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1113,22 +1080,19 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withObjectDeclaration()
 
         // then
-        sut shouldBeEqualTo listOf(objectType)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withObjectDeclarationOf(empty list) returns declaration with object`() {
         // given
-        val objectType: KoObjectDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasObjectDeclaration() } returns true
-                every { asObjectDeclaration() } returns objectType
             }
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasObjectDeclaration() } returns false
-                every { asObjectDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1136,22 +1100,19 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withObjectDeclarationOf(emptyList())
 
         // then
-        sut shouldBeEqualTo listOf(objectType)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withObjectDeclarationOf(empty set) returns declaration with object`() {
         // given
-        val objectType: KoObjectDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasObjectDeclaration() } returns true
-                every { asObjectDeclaration() } returns objectType
             }
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasObjectDeclaration() } returns false
-                every { asObjectDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1159,7 +1120,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withObjectDeclarationOf(emptySet())
 
         // then
-        sut shouldBeEqualTo listOf(objectType)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -1193,7 +1154,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withObjectDeclaration { it.name == name1 }
 
         // then
-        sut shouldBeEqualTo listOf(sourceObject1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -1293,17 +1254,13 @@ class KoTypeDeclarationProviderListExtTest {
     @Test
     fun `withObjectDeclarationOf(KClass) returns declaration with given object`() {
         // given
-        val objectType1: KoObjectDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasObjectDeclarationOf(SampleType1::class) } returns true
-                every { asObjectDeclaration() } returns objectType1
             }
-        val objectType2: KoObjectDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasObjectDeclarationOf(SampleType1::class) } returns false
-                every { asObjectDeclaration() } returns objectType2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1311,32 +1268,26 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withObjectDeclarationOf(SampleType1::class)
 
         // then
-        sut shouldBeEqualTo listOf(objectType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withObjectDeclarationOf(KClass) returns declarations with one of given objects`() {
         // given
-        val objectType1: KoObjectDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasObjectDeclarationOf(SampleType1::class) } returns true
                 every { hasObjectDeclarationOf(SampleType2::class) } returns false
-                every { asObjectDeclaration() } returns objectType1
             }
-        val objectType2: KoObjectDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasObjectDeclarationOf(SampleType1::class) } returns false
                 every { hasObjectDeclarationOf(SampleType2::class) } returns true
-                every { asObjectDeclaration() } returns objectType2
             }
-        val objectType3: KoObjectDeclaration = mockk()
         val declaration3: KoTypeDeclarationProvider =
             mockk {
                 every { hasObjectDeclarationOf(SampleType1::class) } returns false
                 every { hasObjectDeclarationOf(SampleType2::class) } returns false
-                every { asObjectDeclaration() } returns objectType3
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -1344,32 +1295,26 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withObjectDeclarationOf(SampleType1::class, SampleType2::class)
 
         // then
-        sut shouldBeEqualTo listOf(objectType1, objectType2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
     fun `withObjectDeclarationOf(list of KClass) returns declarations with one of given objects`() {
         // given
-        val objectType1: KoObjectDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasObjectDeclarationOf(SampleType1::class) } returns true
                 every { hasObjectDeclarationOf(SampleType2::class) } returns false
-                every { asObjectDeclaration() } returns objectType1
             }
-        val objectType2: KoObjectDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasObjectDeclarationOf(SampleType1::class) } returns false
                 every { hasObjectDeclarationOf(SampleType2::class) } returns true
-                every { asObjectDeclaration() } returns objectType2
             }
-        val objectType3: KoObjectDeclaration = mockk()
         val declaration3: KoTypeDeclarationProvider =
             mockk {
                 every { hasObjectDeclarationOf(SampleType1::class) } returns false
                 every { hasObjectDeclarationOf(SampleType2::class) } returns false
-                every { asObjectDeclaration() } returns objectType3
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = listOf(SampleType1::class, SampleType2::class)
@@ -1378,32 +1323,26 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withObjectDeclarationOf(kClasses)
 
         // then
-        sut shouldBeEqualTo listOf(objectType1, objectType2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
     fun `withObjectDeclarationOf(set of KClass) returns declarations with one of given objects`() {
         // given
-        val objectType1: KoObjectDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasObjectDeclarationOf(SampleType1::class) } returns true
                 every { hasObjectDeclarationOf(SampleType2::class) } returns false
-                every { asObjectDeclaration() } returns objectType1
             }
-        val objectType2: KoObjectDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasObjectDeclarationOf(SampleType1::class) } returns false
                 every { hasObjectDeclarationOf(SampleType2::class) } returns true
-                every { asObjectDeclaration() } returns objectType2
             }
-        val objectType3: KoObjectDeclaration = mockk()
         val declaration3: KoTypeDeclarationProvider =
             mockk {
                 every { hasObjectDeclarationOf(SampleType1::class) } returns false
                 every { hasObjectDeclarationOf(SampleType2::class) } returns false
-                every { asObjectDeclaration() } returns objectType3
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = setOf(SampleType1::class, SampleType2::class)
@@ -1412,7 +1351,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withObjectDeclarationOf(kClasses)
 
         // then
-        sut shouldBeEqualTo listOf(objectType1, objectType2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -1521,17 +1460,13 @@ class KoTypeDeclarationProviderListExtTest {
     @Test
     fun `withInterfaceDeclaration() returns declaration with interface`() {
         // given
-        val interfaceType1: KoInterfaceDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasInterfaceDeclaration() } returns true
-                every { asInterfaceDeclaration() } returns interfaceType1
             }
-        val interfaceType2: KoInterfaceDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasInterfaceDeclaration() } returns false
-                every { asInterfaceDeclaration() } returns interfaceType2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1539,23 +1474,19 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withInterfaceDeclaration()
 
         // then
-        sut shouldBeEqualTo listOf(interfaceType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withInterfaceDeclarationOf(empty list) returns declaration with interface`() {
         // given
-        val interfaceType1: KoInterfaceDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasInterfaceDeclaration() } returns true
-                every { asInterfaceDeclaration() } returns interfaceType1
             }
-        val interfaceType2: KoInterfaceDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasInterfaceDeclaration() } returns false
-                every { asInterfaceDeclaration() } returns interfaceType2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1563,23 +1494,19 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withInterfaceDeclarationOf(emptyList())
 
         // then
-        sut shouldBeEqualTo listOf(interfaceType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withInterfaceDeclarationOf(empty set) returns declaration with interface`() {
         // given
-        val interfaceType1: KoInterfaceDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasInterfaceDeclaration() } returns true
-                every { asInterfaceDeclaration() } returns interfaceType1
             }
-        val interfaceType2: KoInterfaceDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasInterfaceDeclaration() } returns false
-                every { asInterfaceDeclaration() } returns interfaceType2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1587,7 +1514,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withInterfaceDeclarationOf(emptySet())
 
         // then
-        sut shouldBeEqualTo listOf(interfaceType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -1621,7 +1548,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withInterfaceDeclaration { it.name == name1 }
 
         // then
-        sut shouldBeEqualTo listOf(sourceInterface1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -1721,17 +1648,13 @@ class KoTypeDeclarationProviderListExtTest {
     @Test
     fun `withInterfaceDeclarationOf(KClass) returns declaration with given interface`() {
         // given
-        val interfaceType1: KoInterfaceDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasInterfaceDeclarationOf(SampleType1::class) } returns true
-                every { asInterfaceDeclaration() } returns interfaceType1
             }
-        val interfaceType2: KoInterfaceDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasInterfaceDeclarationOf(SampleType1::class) } returns false
-                every { asInterfaceDeclaration() } returns interfaceType2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1739,32 +1662,26 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withInterfaceDeclarationOf(SampleType1::class)
 
         // then
-        sut shouldBeEqualTo listOf(interfaceType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withInterfaceDeclarationOf(KClass) returns declarations with one of given interfaces`() {
         // given
-        val interfaceType1: KoInterfaceDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasInterfaceDeclarationOf(SampleType1::class) } returns true
                 every { hasInterfaceDeclarationOf(SampleType2::class) } returns false
-                every { asInterfaceDeclaration() } returns interfaceType1
             }
-        val interfaceType2: KoInterfaceDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasInterfaceDeclarationOf(SampleType1::class) } returns false
                 every { hasInterfaceDeclarationOf(SampleType2::class) } returns true
-                every { asInterfaceDeclaration() } returns interfaceType2
             }
-        val interfaceType3: KoInterfaceDeclaration = mockk()
         val declaration3: KoTypeDeclarationProvider =
             mockk {
                 every { hasInterfaceDeclarationOf(SampleType1::class) } returns false
                 every { hasInterfaceDeclarationOf(SampleType2::class) } returns false
-                every { asInterfaceDeclaration() } returns interfaceType3
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -1772,32 +1689,26 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withInterfaceDeclarationOf(SampleType1::class, SampleType2::class)
 
         // then
-        sut shouldBeEqualTo listOf(interfaceType1, interfaceType2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
     fun `withInterfaceDeclarationOf(list of KClass) returns declarations with one of given interfaces`() {
         // given
-        val interfaceType1: KoInterfaceDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasInterfaceDeclarationOf(SampleType1::class) } returns true
                 every { hasInterfaceDeclarationOf(SampleType2::class) } returns false
-                every { asInterfaceDeclaration() } returns interfaceType1
             }
-        val interfaceType2: KoInterfaceDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasInterfaceDeclarationOf(SampleType1::class) } returns false
                 every { hasInterfaceDeclarationOf(SampleType2::class) } returns true
-                every { asInterfaceDeclaration() } returns interfaceType2
             }
-        val interfaceType3: KoInterfaceDeclaration = mockk()
         val declaration3: KoTypeDeclarationProvider =
             mockk {
                 every { hasInterfaceDeclarationOf(SampleType1::class) } returns false
                 every { hasInterfaceDeclarationOf(SampleType2::class) } returns false
-                every { asInterfaceDeclaration() } returns interfaceType3
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = listOf(SampleType1::class, SampleType2::class)
@@ -1806,32 +1717,26 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withInterfaceDeclarationOf(kClasses)
 
         // then
-        sut shouldBeEqualTo listOf(interfaceType1, interfaceType2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
     fun `withInterfaceDeclarationOf(set of KClass) returns declarations with one of given interfaces`() {
         // given
-        val interfaceType1: KoInterfaceDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasInterfaceDeclarationOf(SampleType1::class) } returns true
                 every { hasInterfaceDeclarationOf(SampleType2::class) } returns false
-                every { asInterfaceDeclaration() } returns interfaceType1
             }
-        val interfaceType2: KoInterfaceDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasInterfaceDeclarationOf(SampleType1::class) } returns false
                 every { hasInterfaceDeclarationOf(SampleType2::class) } returns true
-                every { asInterfaceDeclaration() } returns interfaceType2
             }
-        val interfaceType3: KoInterfaceDeclaration = mockk()
         val declaration3: KoTypeDeclarationProvider =
             mockk {
                 every { hasInterfaceDeclarationOf(SampleType1::class) } returns false
                 every { hasInterfaceDeclarationOf(SampleType2::class) } returns false
-                every { asInterfaceDeclaration() } returns interfaceType3
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = setOf(SampleType1::class, SampleType2::class)
@@ -1840,7 +1745,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withInterfaceDeclarationOf(kClasses)
 
         // then
-        sut shouldBeEqualTo listOf(interfaceType1, interfaceType2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -1949,17 +1854,13 @@ class KoTypeDeclarationProviderListExtTest {
     @Test
     fun `withTypeAliasDeclaration() returns declaration with type alias`() {
         // given
-        val typeAliasType1: KoTypeAliasDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasTypeAliasDeclaration() } returns true
-                every { asTypeAliasDeclaration() } returns typeAliasType1
             }
-        val typeAliasType2: KoTypeAliasDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasTypeAliasDeclaration() } returns false
-                every { asTypeAliasDeclaration() } returns typeAliasType2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1967,7 +1868,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withTypeAliasDeclaration()
 
         // then
-        sut shouldBeEqualTo listOf(typeAliasType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -2001,7 +1902,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withTypeAliasDeclaration { it.name == name1 }
 
         // then
-        sut shouldBeEqualTo listOf(sourceTypeAlias1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -2061,17 +1962,13 @@ class KoTypeDeclarationProviderListExtTest {
     @Test
     fun `withImportAliasDeclaration() returns declaration with import alias`() {
         // given
-        val importAliasType1: KoImportAliasDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasImportAliasDeclaration() } returns true
-                every { asImportAliasDeclaration() } returns importAliasType1
             }
-        val importAliasType2: KoImportAliasDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasImportAliasDeclaration() } returns false
-                every { asImportAliasDeclaration() } returns importAliasType2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -2079,7 +1976,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withImportAliasDeclaration()
 
         // then
-        sut shouldBeEqualTo listOf(importAliasType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -2113,7 +2010,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withImportAliasDeclaration { it.name == name1 }
 
         // then
-        sut shouldBeEqualTo listOf(sourceImportAlias1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -2173,17 +2070,13 @@ class KoTypeDeclarationProviderListExtTest {
     @Test
     fun `withKotlinTypeDeclaration() returns declaration with kotlin type`() {
         // given
-        val kotlinType1: KoKotlinTypeDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasKotlinTypeDeclaration() } returns true
-                every { asKotlinTypeDeclaration() } returns kotlinType1
             }
-        val kotlinType2: KoKotlinTypeDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasKotlinTypeDeclaration() } returns false
-                every { asKotlinTypeDeclaration() } returns kotlinType2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -2191,23 +2084,19 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withKotlinTypeDeclaration()
 
         // then
-        sut shouldBeEqualTo listOf(kotlinType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withKotlinTypeDeclarationOf(empty list) returns declaration with kotlin type`() {
         // given
-  val kotlinType1: KoKotlinTypeDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasKotlinTypeDeclaration() } returns true
-                every { asKotlinTypeDeclaration() } returns kotlinType1
             }
-        val kotlinType2: KoKotlinTypeDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasKotlinTypeDeclaration() } returns false
-                every { asKotlinTypeDeclaration() } returns kotlinType2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -2215,23 +2104,19 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withKotlinTypeDeclarationOf(emptyList())
 
         // then
-        sut shouldBeEqualTo listOf(kotlinType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withKotlinTypeDeclarationOf(empty set) returns declaration with kotlin type`() {
         // given
-  val kotlinType1: KoKotlinTypeDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasKotlinTypeDeclaration() } returns true
-                every { asKotlinTypeDeclaration() } returns kotlinType1
             }
-        val kotlinType2: KoKotlinTypeDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasKotlinTypeDeclaration() } returns false
-                every { asKotlinTypeDeclaration() } returns kotlinType2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -2239,7 +2124,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withKotlinTypeDeclarationOf(emptySet())
 
         // then
-        sut shouldBeEqualTo listOf(kotlinType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -2273,7 +2158,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withKotlinTypeDeclaration { it.name == name1 }
 
         // then
-        sut shouldBeEqualTo listOf(sourceKotlinType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -2373,17 +2258,13 @@ class KoTypeDeclarationProviderListExtTest {
     @Test
     fun `withKotlinTypeDeclarationOf(KClass) returns declaration with given kotlin type`() {
         // given
-        val kotlinType1: KoKotlinTypeDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasKotlinTypeDeclarationOf(String::class) } returns true
-                every { asKotlinTypeDeclaration() } returns kotlinType1
             }
-        val kotlinType2: KoKotlinTypeDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasKotlinTypeDeclarationOf(String::class) } returns false
-                every { asKotlinTypeDeclaration() } returns kotlinType2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -2391,32 +2272,26 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withKotlinTypeDeclarationOf(String::class)
 
         // then
-        sut shouldBeEqualTo listOf(kotlinType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withKotlinTypeDeclarationOf(KClass) returns declarations with one of given kotlin types`() {
         // given
-        val kotlinType1: KoKotlinTypeDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasKotlinTypeDeclarationOf(String::class) } returns true
                 every { hasKotlinTypeDeclarationOf(Int::class) } returns false
-                every { asKotlinTypeDeclaration() } returns kotlinType1
             }
-        val kotlinType2: KoKotlinTypeDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasKotlinTypeDeclarationOf(String::class) } returns false
                 every { hasKotlinTypeDeclarationOf(Int::class) } returns true
-                every { asKotlinTypeDeclaration() } returns kotlinType2
             }
-        val kotlinType3: KoKotlinTypeDeclaration = mockk()
         val declaration3: KoTypeDeclarationProvider =
             mockk {
                 every { hasKotlinTypeDeclarationOf(String::class) } returns false
                 every { hasKotlinTypeDeclarationOf(Int::class) } returns false
-                every { asKotlinTypeDeclaration() } returns kotlinType3
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -2424,32 +2299,26 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withKotlinTypeDeclarationOf(String::class, Int::class)
 
         // then
-        sut shouldBeEqualTo listOf(kotlinType1, kotlinType2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
     fun `withKotlinTypeDeclarationOf(list of KClass) returns declarations with one of given kotlin types`() {
         // given
-        val kotlinType1: KoKotlinTypeDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasKotlinTypeDeclarationOf(String::class) } returns true
                 every { hasKotlinTypeDeclarationOf(Int::class) } returns false
-                every { asKotlinTypeDeclaration() } returns kotlinType1
             }
-        val kotlinType2: KoKotlinTypeDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasKotlinTypeDeclarationOf(String::class) } returns false
                 every { hasKotlinTypeDeclarationOf(Int::class) } returns true
-                every { asKotlinTypeDeclaration() } returns kotlinType2
             }
-        val kotlinType3: KoKotlinTypeDeclaration = mockk()
         val declaration3: KoTypeDeclarationProvider =
             mockk {
                 every { hasKotlinTypeDeclarationOf(String::class) } returns false
                 every { hasKotlinTypeDeclarationOf(Int::class) } returns false
-                every { asKotlinTypeDeclaration() } returns kotlinType3
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = listOf(String::class, Int::class)
@@ -2458,32 +2327,26 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withKotlinTypeDeclarationOf(kClasses)
 
         // then
-        sut shouldBeEqualTo listOf(kotlinType1, kotlinType2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
     fun `withKotlinTypeDeclarationOf(set of KClass) returns declarations with one of given kotlin types`() {
         // given
-        val kotlinType1: KoKotlinTypeDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasKotlinTypeDeclarationOf(String::class) } returns true
                 every { hasKotlinTypeDeclarationOf(Int::class) } returns false
-                every { asKotlinTypeDeclaration() } returns kotlinType1
             }
-        val kotlinType2: KoKotlinTypeDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasKotlinTypeDeclarationOf(String::class) } returns false
                 every { hasKotlinTypeDeclarationOf(Int::class) } returns true
-                every { asKotlinTypeDeclaration() } returns kotlinType2
             }
-        val kotlinType3: KoKotlinTypeDeclaration = mockk()
         val declaration3: KoTypeDeclarationProvider =
             mockk {
                 every { hasKotlinTypeDeclarationOf(String::class) } returns false
                 every { hasKotlinTypeDeclarationOf(Int::class) } returns false
-                every { asKotlinTypeDeclaration() } returns kotlinType3
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = setOf(String::class, Int::class)
@@ -2492,7 +2355,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withKotlinTypeDeclarationOf(kClasses)
 
         // then
-        sut shouldBeEqualTo listOf(kotlinType1, kotlinType2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -2601,17 +2464,13 @@ class KoTypeDeclarationProviderListExtTest {
     @Test
     fun `withFunctionTypeDeclaration() returns declaration with function type`() {
         // given
-        val functionType1: KoFunctionTypeDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasFunctionTypeDeclaration() } returns true
-                every { asFunctionTypeDeclaration() } returns functionType1
             }
-        val functionType2: KoFunctionTypeDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasFunctionTypeDeclaration() } returns false
-                every { asFunctionTypeDeclaration() } returns functionType2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -2619,7 +2478,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withFunctionTypeDeclaration()
 
         // then
-        sut shouldBeEqualTo listOf(functionType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -2653,7 +2512,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withFunctionTypeDeclaration { it.name == name1 }
 
         // then
-        sut shouldBeEqualTo listOf(sourceFunctionType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -2713,17 +2572,13 @@ class KoTypeDeclarationProviderListExtTest {
     @Test
     fun `withGenericTypeDeclaration() returns declaration with generic type`() {
         // given
-        val genericType1: KoGenericTypeDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasGenericTypeDeclaration() } returns true
-                every { asGenericTypeDeclaration() } returns genericType1
             }
-        val genericType2: KoGenericTypeDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasGenericTypeDeclaration() } returns false
-                every { asGenericTypeDeclaration() } returns genericType2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -2731,7 +2586,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withGenericTypeDeclaration()
 
         // then
-        sut shouldBeEqualTo listOf(genericType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -2765,7 +2620,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withGenericTypeDeclaration { it.name == name1 }
 
         // then
-        sut shouldBeEqualTo listOf(sourceGenericType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -2825,17 +2680,13 @@ class KoTypeDeclarationProviderListExtTest {
     @Test
     fun `withTypeParameterDeclaration() returns declaration with type parameter`() {
         // given
-        val typeParameter1: KoTypeParameterDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasTypeParameterDeclaration() } returns true
-                every { asTypeParameterDeclaration() } returns typeParameter1
             }
-        val typeParameter2: KoTypeParameterDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasTypeParameterDeclaration() } returns false
-                every { asTypeParameterDeclaration() } returns typeParameter2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -2843,7 +2694,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withTypeParameterDeclaration()
 
         // then
-        sut shouldBeEqualTo listOf(typeParameter1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -2877,7 +2728,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withTypeParameterDeclaration { it.name == name1 }
 
         // then
-        sut shouldBeEqualTo listOf(sourceTypeParameter1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -2937,17 +2788,13 @@ class KoTypeDeclarationProviderListExtTest {
     @Test
     fun `withStarProjectionDeclaration() returns declaration with star projection`() {
         // given
-        val starProjection1: KoStarProjectionDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasStarProjectionDeclaration() } returns true
-                every { asStarProjectionDeclaration() } returns starProjection1
             }
-        val starProjection2: KoStarProjectionDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasStarProjectionDeclaration() } returns false
-                every { asStarProjectionDeclaration() } returns starProjection2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -2955,7 +2802,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withStarProjectionDeclaration()
 
         // then
-        sut shouldBeEqualTo listOf(starProjection1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -2989,7 +2836,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withStarProjectionDeclaration { it.name == name1 }
 
         // then
-        sut shouldBeEqualTo listOf(sourceStarProjection1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -3049,17 +2896,13 @@ class KoTypeDeclarationProviderListExtTest {
     @Test
     fun `withExternalTypeDeclaration() returns declaration with external type`() {
         // given
-        val externalType1: KoExternalDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasExternalTypeDeclaration() } returns true
-                every { asExternalTypeDeclaration() } returns externalType1
             }
-        val externalType2: KoExternalDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasExternalTypeDeclaration() } returns false
-                every { asExternalTypeDeclaration() } returns externalType2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -3067,23 +2910,19 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withExternalTypeDeclaration()
 
         // then
-        sut shouldBeEqualTo listOf(externalType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withExternalTypeDeclarationOf(empty list) returns declaration with external type`() {
         // given
-        val externalType1: KoExternalDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasExternalTypeDeclaration() } returns true
-                every { asExternalTypeDeclaration() } returns externalType1
             }
-        val externalType2: KoExternalDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasExternalTypeDeclaration() } returns false
-                every { asExternalTypeDeclaration() } returns externalType2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -3091,23 +2930,19 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withExternalTypeDeclarationOf(emptyList())
 
         // then
-        sut shouldBeEqualTo listOf(externalType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withExternalTypeDeclarationOf(empty set) returns declaration with external type`() {
         // given
-        val externalType1: KoExternalDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasExternalTypeDeclaration() } returns true
-                every { asExternalTypeDeclaration() } returns externalType1
             }
-        val externalType2: KoExternalDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasExternalTypeDeclaration() } returns false
-                every { asExternalTypeDeclaration() } returns externalType2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -3115,7 +2950,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withExternalTypeDeclarationOf(emptySet())
 
         // then
-        sut shouldBeEqualTo listOf(externalType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -3149,7 +2984,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withExternalTypeDeclaration { it.name == name1 }
 
         // then
-        sut shouldBeEqualTo listOf(sourceExternalType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -3249,17 +3084,13 @@ class KoTypeDeclarationProviderListExtTest {
     @Test
     fun `withExternalTypeDeclarationOf(KClass) returns declaration with given external type`() {
         // given
-        val externalType1: KoExternalDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasExternalTypeDeclarationOf(SampleType1::class) } returns true
-                every { asExternalTypeDeclaration() } returns externalType1
             }
-        val externalType2: KoExternalDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasExternalTypeDeclarationOf(SampleType1::class) } returns false
-                every { asExternalTypeDeclaration() } returns externalType2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -3267,32 +3098,26 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withExternalTypeDeclarationOf(SampleType1::class)
 
         // then
-        sut shouldBeEqualTo listOf(externalType1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withExternalTypeDeclarationOf(KClass) returns declarations with one of given external types`() {
         // given
-        val externalType1: KoExternalDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasExternalTypeDeclarationOf(SampleType1::class) } returns true
                 every { hasExternalTypeDeclarationOf(SampleType2::class) } returns false
-                every { asExternalTypeDeclaration() } returns externalType1
             }
-        val externalType2: KoExternalDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasExternalTypeDeclarationOf(SampleType1::class) } returns false
                 every { hasExternalTypeDeclarationOf(SampleType2::class) } returns true
-                every { asExternalTypeDeclaration() } returns externalType2
             }
-        val externalType3: KoExternalDeclaration = mockk()
         val declaration3: KoTypeDeclarationProvider =
             mockk {
                 every { hasExternalTypeDeclarationOf(SampleType1::class) } returns false
                 every { hasExternalTypeDeclarationOf(SampleType2::class) } returns false
-                every { asExternalTypeDeclaration() } returns externalType3
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -3300,32 +3125,26 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withExternalTypeDeclarationOf(SampleType1::class, SampleType2::class)
 
         // then
-        sut shouldBeEqualTo listOf(externalType1, externalType2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
     fun `withExternalTypeDeclarationOf(list of KClass) returns declarations with one of given external types`() {
         // given
-        val externalType1: KoExternalDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasExternalTypeDeclarationOf(SampleType1::class) } returns true
                 every { hasExternalTypeDeclarationOf(SampleType2::class) } returns false
-                every { asExternalTypeDeclaration() } returns externalType1
             }
-        val externalType2: KoExternalDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasExternalTypeDeclarationOf(SampleType1::class) } returns false
                 every { hasExternalTypeDeclarationOf(SampleType2::class) } returns true
-                every { asExternalTypeDeclaration() } returns externalType2
             }
-        val externalType3: KoExternalDeclaration = mockk()
         val declaration3: KoTypeDeclarationProvider =
             mockk {
                 every { hasExternalTypeDeclarationOf(SampleType1::class) } returns false
                 every { hasExternalTypeDeclarationOf(SampleType2::class) } returns false
-                every { asExternalTypeDeclaration() } returns externalType3
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = listOf(SampleType1::class, SampleType2::class)
@@ -3334,32 +3153,26 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withExternalTypeDeclarationOf(kClasses)
 
         // then
-        sut shouldBeEqualTo listOf(externalType1, externalType2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
     fun `withExternalTypeDeclarationOf(set of KClass) returns declarations with one of given external types`() {
         // given
-        val externalType1: KoExternalDeclaration = mockk()
         val declaration1: KoTypeDeclarationProvider =
             mockk {
                 every { hasExternalTypeDeclarationOf(SampleType1::class) } returns true
                 every { hasExternalTypeDeclarationOf(SampleType2::class) } returns false
-                every { asExternalTypeDeclaration() } returns externalType1
             }
-        val externalType2: KoExternalDeclaration = mockk()
         val declaration2: KoTypeDeclarationProvider =
             mockk {
                 every { hasExternalTypeDeclarationOf(SampleType1::class) } returns false
                 every { hasExternalTypeDeclarationOf(SampleType2::class) } returns true
-                every { asExternalTypeDeclaration() } returns externalType2
             }
-        val externalType3: KoExternalDeclaration = mockk()
         val declaration3: KoTypeDeclarationProvider =
             mockk {
                 every { hasExternalTypeDeclarationOf(SampleType1::class) } returns false
                 every { hasExternalTypeDeclarationOf(SampleType2::class) } returns false
-                every { asExternalTypeDeclaration() } returns externalType3
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = setOf(SampleType1::class, SampleType2::class)
@@ -3368,7 +3181,7 @@ class KoTypeDeclarationProviderListExtTest {
         val sut = declarations.withExternalTypeDeclarationOf(kClasses)
 
         // then
-        sut shouldBeEqualTo listOf(externalType1, externalType2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
