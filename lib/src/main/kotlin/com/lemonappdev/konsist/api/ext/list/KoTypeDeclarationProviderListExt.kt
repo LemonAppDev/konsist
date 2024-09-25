@@ -79,6 +79,7 @@ val <T : KoTypeDeclarationProvider> List<T>.functionTypeDeclarations: List<KoFun
 @Deprecated("Will be removed in version 0.18.0", ReplaceWith("externalTypeDeclarations()"))
 val <T : KoTypeDeclarationProvider> List<T>.externalTypeDeclarations: List<KoExternalDeclaration>
     get() = mapNotNull { it.asExternalTypeDeclaration() }
+
 /**
  * List containing declarations associated with types.
  *
@@ -101,7 +102,8 @@ fun <T : KoTypeDeclarationProvider> List<T>.typeDeclarations(
  *
  * @param predicate A function that defines the condition to be met by the class declaration.
  *                  If null, all class declarations are included.
- * @return A list of class declarations that match the provided predicate, or all class declarations if no predicate is provided.
+ * @return A list of class declarations that match the provided predicate, or all class declarations if no predicate
+ * is provided.
  */
 fun <T : KoTypeDeclarationProvider> List<T>.classDeclarations(
     predicate: ((KoClassDeclaration) -> Boolean)? = null,
@@ -114,7 +116,8 @@ fun <T : KoTypeDeclarationProvider> List<T>.classDeclarations(
  *
  * @param predicate A function that defines the condition to be met by the object declaration.
  *                  If null, all object declarations are included.
- * @return A list of object declarations that match the provided predicate, or all object declarations if no predicate is provided.
+ * @return A list of object declarations that match the provided predicate, or all object declarations if no predicate
+ * is provided.
  */
 fun <T : KoTypeDeclarationProvider> List<T>.objectDeclarations(
     predicate: ((KoObjectDeclaration) -> Boolean)? = null,
@@ -127,7 +130,8 @@ fun <T : KoTypeDeclarationProvider> List<T>.objectDeclarations(
  *
  * @param predicate A function that defines the condition to be met by the interface declaration.
  *                  If null, all interface declarations are included.
- * @return A list of interface declarations that match the provided predicate, or all interface declarations if no predicate is provided.
+ * @return A list of interface declarations that match the provided predicate, or all interface declarations if no
+ * predicate is provided.
  */
 fun <T : KoTypeDeclarationProvider> List<T>.interfaceDeclarations(
     predicate: ((KoInterfaceDeclaration) -> Boolean)? = null,
@@ -140,7 +144,8 @@ fun <T : KoTypeDeclarationProvider> List<T>.interfaceDeclarations(
  *
  * @param predicate A function that defines the condition to be met by the type alias declaration.
  *                  If null, all type alias declarations are included.
- * @return A list of type alias declarations that match the provided predicate, or all type alias declarations if no predicate is provided.
+ * @return A list of type alias declarations that match the provided predicate, or all type alias declarations if no
+ * predicate is provided.
  */
 fun <T : KoTypeDeclarationProvider> List<T>.typeAliasDeclarations(
     predicate: ((KoTypeAliasDeclaration) -> Boolean)? = null,
@@ -153,7 +158,8 @@ fun <T : KoTypeDeclarationProvider> List<T>.typeAliasDeclarations(
  *
  * @param predicate A function that defines the condition to be met by the import alias declaration.
  *                  If null, all import alias declarations are included.
- * @return A list of import alias declarations that match the provided predicate, or all import alias declarations if no predicate is provided.
+ * @return A list of import alias declarations that match the provided predicate, or all import alias declarations if
+ * no predicate is provided.
  */
 fun <T : KoTypeDeclarationProvider> List<T>.importAliasDeclarations(
     predicate: ((KoImportAliasDeclaration) -> Boolean)? = null,
@@ -166,7 +172,8 @@ fun <T : KoTypeDeclarationProvider> List<T>.importAliasDeclarations(
  *
  * @param predicate A function that defines the condition to be met by the Kotlin type declaration.
  *                  If null, all Kotlin type declarations are included.
- * @return A list of Kotlin type declarations that match the provided predicate, or all Kotlin type declarations if no predicate is provided.
+ * @return A list of Kotlin type declarations that match the provided predicate, or all Kotlin type declarations if
+ * no predicate is provided.
  */
 fun <T : KoTypeDeclarationProvider> List<T>.kotlinTypeDeclarations(
     predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null,
@@ -179,7 +186,8 @@ fun <T : KoTypeDeclarationProvider> List<T>.kotlinTypeDeclarations(
  *
  * @param predicate A function that defines the condition to be met by the function type declaration.
  *                  If null, all function type declarations are included.
- * @return A list of function type declarations that match the provided predicate, or all function type declarations if no predicate is provided.
+ * @return A list of function type declarations that match the provided predicate, or all function type declarations
+ * if no predicate is provided.
  */
 fun <T : KoTypeDeclarationProvider> List<T>.functionTypeDeclarations(
     predicate: ((KoFunctionTypeDeclaration) -> Boolean)? = null,
@@ -192,7 +200,8 @@ fun <T : KoTypeDeclarationProvider> List<T>.functionTypeDeclarations(
  *
  * @param predicate A function that defines the condition to be met by the generic type declaration.
  *                  If null, all generic type declarations are included.
- * @return A list of generic type declarations that match the provided predicate, or all generic type declarations if no predicate is provided.
+ * @return A list of generic type declarations that match the provided predicate, or all generic type declarations
+ * if no predicate is provided.
  */
 fun <T : KoTypeDeclarationProvider> List<T>.genericTypeDeclarations(
     predicate: ((KoGenericTypeDeclaration) -> Boolean)? = null,
@@ -205,7 +214,8 @@ fun <T : KoTypeDeclarationProvider> List<T>.genericTypeDeclarations(
  *
  * @param predicate A function that defines the condition to be met by the type parameter declaration.
  *                  If null, all type parameter declarations are included.
- * @return A list of type parameter declarations that match the provided predicate, or all type parameter declarations if no predicate is provided.
+ * @return A list of type parameter declarations that match the provided predicate, or all type parameter declarations
+ * if no predicate is provided.
  */
 fun <T : KoTypeDeclarationProvider> List<T>.typeParameterDeclarations(
     predicate: ((KoTypeParameterDeclaration) -> Boolean)? = null,
@@ -218,7 +228,8 @@ fun <T : KoTypeDeclarationProvider> List<T>.typeParameterDeclarations(
  *
  * @param predicate A function that defines the condition to be met by the star projection declaration.
  *                  If null, all star projection declarations are included.
- * @return A list of star projection declarations that match the provided predicate, or all star projection declarations if no predicate is provided.
+ * @return A list of star projection declarations that match the provided predicate, or all star projection declarations
+ * if no predicate is provided.
  */
 fun <T : KoTypeDeclarationProvider> List<T>.starProjectionDeclarations(
     predicate: ((KoStarProjectionDeclaration) -> Boolean)? = null,
@@ -231,7 +242,8 @@ fun <T : KoTypeDeclarationProvider> List<T>.starProjectionDeclarations(
  *
  * @param predicate A function that defines the condition to be met by the external type declaration.
  *                  If null, all external type declarations are included.
- * @return A list of external type declarations that match the provided predicate, or all external type declarations if no predicate is provided.
+ * @return A list of external type declarations that match the provided predicate, or all external type declarations
+ * if no predicate is provided.
  */
 fun <T : KoTypeDeclarationProvider> List<T>.externalTypeDeclarations(
     predicate: ((KoExternalDeclaration) -> Boolean)? = null,
