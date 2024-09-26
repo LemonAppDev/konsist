@@ -42,7 +42,7 @@ internal class KoGenericTypeDeclarationCore private constructor(
 
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
-    override val genericType: KoTypeDeclaration by lazy {
+    override val type: KoTypeDeclaration by lazy {
         val ktNameReferenceExpression =
             ktUserType
                 .children
@@ -88,7 +88,7 @@ internal class KoGenericTypeDeclarationCore private constructor(
             arguments.forEach { currentArgument ->
                 if (currentArgument.declaration is KoGenericTypeDeclaration) {
                     val genericDeclaration = currentArgument.declaration as KoGenericTypeDeclaration
-                    acc.add(genericDeclaration.genericType)
+                    acc.add(genericDeclaration.type)
                     flattenTypeArguments(genericDeclaration.typeArguments, acc)
                 } else {
                     acc.add(currentArgument)

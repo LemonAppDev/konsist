@@ -42,8 +42,8 @@ class KoGenericTypeDeclarationTest {
 
         // then
         assertSoftly(sut) {
-            it?.genericType?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
-            it?.genericType?.name shouldBeEqualTo "List"
+            it?.type?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
+            it?.type?.name shouldBeEqualTo "List"
         }
     }
 
@@ -59,8 +59,8 @@ class KoGenericTypeDeclarationTest {
 
         // then
         assertSoftly(sut) {
-            it?.genericType?.declaration shouldBeInstanceOf KoClassDeclaration::class
-            it?.genericType?.name shouldBeEqualTo "SampleGenericClassWithParameter"
+            it?.type?.declaration shouldBeInstanceOf KoClassDeclaration::class
+            it?.type?.name shouldBeEqualTo "SampleGenericClassWithParameter"
         }
     }
 
@@ -76,8 +76,8 @@ class KoGenericTypeDeclarationTest {
 
         // then
         assertSoftly(sut) {
-            it?.genericType?.declaration shouldBeInstanceOf KoInterfaceDeclaration::class
-            it?.genericType?.name shouldBeEqualTo "SampleGenericSuperInterface"
+            it?.type?.declaration shouldBeInstanceOf KoInterfaceDeclaration::class
+            it?.type?.name shouldBeEqualTo "SampleGenericSuperInterface"
         }
     }
 
@@ -97,14 +97,14 @@ class KoGenericTypeDeclarationTest {
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.asGenericTypeDeclaration()
-                ?.genericType
+                ?.type
                 ?.declaration
                 ?.shouldBeInstanceOf(KoKotlinTypeDeclaration::class)
             it
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.asGenericTypeDeclaration()
-                ?.genericType
+                ?.type
                 ?.name
                 ?.shouldBeEqualTo("Set")
         }
@@ -122,8 +122,8 @@ class KoGenericTypeDeclarationTest {
 
         // then
         assertSoftly(sut) {
-            it?.genericType?.declaration shouldBeInstanceOf KoImportAliasDeclaration::class
-            it?.genericType?.name shouldBeEqualTo "SampleImportAlias"
+            it?.type?.declaration shouldBeInstanceOf KoImportAliasDeclaration::class
+            it?.type?.name shouldBeEqualTo "SampleImportAlias"
         }
     }
 
@@ -139,8 +139,8 @@ class KoGenericTypeDeclarationTest {
 
         // then
         assertSoftly(sut) {
-            it?.genericType?.declaration shouldBeInstanceOf KoExternalDeclaration::class
-            it?.genericType?.name shouldBeEqualTo "SampleExternalGenericClass"
+            it?.type?.declaration shouldBeInstanceOf KoExternalDeclaration::class
+            it?.type?.name shouldBeEqualTo "SampleExternalGenericClass"
         }
     }
 

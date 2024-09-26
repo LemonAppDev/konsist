@@ -27,7 +27,7 @@ interface KoGenericTypeDeclaration :
      * 1) in `List<T>`, `List` is the generic type,
      * 2) in `List<Set<String>>`, `List` is the generic type.
      */
-    val genericType: KoTypeDeclaration
+    val type: KoTypeDeclaration
 
     /**
      * The type argument for the generic type.
