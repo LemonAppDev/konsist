@@ -69,6 +69,8 @@ class KoTypeDeclarationForKoPackageProviderTest {
                 arguments("not-nullable-import-alias-type-is-in-package"),
                 arguments("nullable-typealias-type-is-in-package"),
                 arguments("not-nullable-typealias-type-is-in-package"),
+                arguments("nullable-type-parameter-is-in-package"),
+                arguments("not-nullable-type-parameter-is-in-package"),
                 arguments("nullable-external-type-is-in-package"),
                 arguments("not-nullable-external-type-is-in-package"),
             )
@@ -93,6 +95,8 @@ class KoTypeDeclarationForKoPackageProviderTest {
                 arguments("not-nullable-import-alias-type-is-not-in-package"),
                 arguments("nullable-typealias-type-is-not-in-package"),
                 arguments("not-nullable-typealias-type-is-not-in-package"),
+                arguments("nullable-type-parameter-is-not-in-package"),
+                arguments("not-nullable-type-parameter-is-not-in-package"),
                 arguments("nullable-external-type-is-not-in-package"),
                 arguments("not-nullable-external-type-is-not-in-package"),
             )

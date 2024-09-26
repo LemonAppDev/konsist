@@ -50,6 +50,8 @@ class KoTypeDeclarationForKoNameProviderTest {
                 arguments("not-nullable-import-alias-type-name", "ImportAlias"),
                 arguments("nullable-typealias-type-name", "SampleTypeAlias"),
                 arguments("not-nullable-typealias-type-name", "SampleTypeAlias"),
+                arguments("nullable-type-parameter-name", "TestType"),
+                arguments("not-nullable-type-parameter-name", "TestType"),
                 arguments("nullable-external-type-name", "SampleExternalClass"),
                 arguments("not-nullable-external-type-name", "SampleExternalClass"),
             )

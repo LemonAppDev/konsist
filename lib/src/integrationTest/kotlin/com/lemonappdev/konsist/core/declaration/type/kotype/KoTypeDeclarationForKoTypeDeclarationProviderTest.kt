@@ -8,7 +8,10 @@ import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifiers
 import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
@@ -201,6 +204,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
             it?.asExternalTypeDeclaration() shouldBeEqualTo null
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo true
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -208,7 +213,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
             it?.isFunctionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
             it?.isExternalType shouldBeEqualTo false
+            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -254,6 +261,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
             it?.asExternalTypeDeclaration() shouldBeEqualTo null
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo true
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -261,7 +270,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
             it?.isFunctionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
             it?.isExternalType shouldBeEqualTo false
+            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -307,6 +318,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
             it?.asExternalTypeDeclaration() shouldBeEqualTo null
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo true
             it?.isInterface shouldBeEqualTo false
@@ -314,7 +327,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
             it?.isFunctionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
             it?.isExternalType shouldBeEqualTo false
+            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -360,6 +375,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
             it?.asExternalTypeDeclaration() shouldBeEqualTo null
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo true
             it?.isInterface shouldBeEqualTo false
@@ -367,7 +384,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
             it?.isFunctionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
             it?.isExternalType shouldBeEqualTo false
+            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -413,6 +432,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
             it?.asExternalTypeDeclaration() shouldBeEqualTo null
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo true
@@ -420,7 +441,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
             it?.isFunctionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
             it?.isExternalType shouldBeEqualTo false
+            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -466,6 +489,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
             it?.asExternalTypeDeclaration() shouldBeEqualTo null
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo true
@@ -473,7 +498,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
             it?.isFunctionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
             it?.isExternalType shouldBeEqualTo false
+            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -513,6 +540,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
             it?.asExternalTypeDeclaration() shouldBeEqualTo null
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -520,7 +549,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.isImportAlias shouldBeEqualTo true
             it?.isKotlinType shouldBeEqualTo false
             it?.isFunctionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
             it?.isExternalType shouldBeEqualTo false
+            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -560,6 +591,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
             it?.asExternalTypeDeclaration() shouldBeEqualTo null
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -567,7 +600,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
             it?.isFunctionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
             it?.isExternalType shouldBeEqualTo false
+            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -607,6 +642,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
             it?.asExternalTypeDeclaration() shouldBeEqualTo null
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -614,7 +651,111 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.isImportAlias shouldBeEqualTo true
             it?.isKotlinType shouldBeEqualTo false
             it?.isFunctionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
             it?.isExternalType shouldBeEqualTo false
+            it?.isStarProjection shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `nullable-type-parameter`() {
+        // given
+        val sut =
+            getSnippetFile("nullable-type-parameter")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.hasDeclaration { declaration -> declaration.name == "TestType" } shouldBeEqualTo true
+            it?.hasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeInstanceOf KoTypeParameterDeclaration::class
+            it?.asTypeParameterDeclaration()?.name shouldBeEqualTo "TestType"
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo true
+            it?.hasTypeParameterDeclaration { declaration -> declaration.name == "TestType" } shouldBeEqualTo true
+            it?.hasTypeParameterDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.asClassDeclaration() shouldBeEqualTo null
+            it?.hasClassDeclaration() shouldBeEqualTo false
+            it?.asObjectDeclaration() shouldBeEqualTo null
+            it?.hasObjectDeclaration() shouldBeEqualTo false
+            it?.asInterfaceDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceDeclaration() shouldBeEqualTo false
+            it?.asImportAliasDeclaration() shouldBeEqualTo null
+            it?.hasImportAliasDeclaration() shouldBeEqualTo false
+            it?.asKotlinTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
+            it?.asFunctionTypeDeclaration() shouldBeEqualTo null
+            it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
+            it?.asExternalTypeDeclaration() shouldBeEqualTo null
+            it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asTypeAliasDeclaration() shouldBeEqualTo null
+            it?.hasTypeAliasDeclaration() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo true
+            it?.isExternalType shouldBeEqualTo false
+            it?.isStarProjection shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `not-nullable-type-parameter`() {
+        // given
+        val sut =
+            getSnippetFile("not-nullable-type-parameter")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.hasDeclaration { declaration -> declaration.name == "TestType" } shouldBeEqualTo true
+            it?.hasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeInstanceOf KoTypeParameterDeclaration::class
+            it?.asTypeParameterDeclaration()?.name shouldBeEqualTo "TestType"
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo true
+            it?.hasTypeParameterDeclaration { declaration -> declaration.name == "TestType" } shouldBeEqualTo true
+            it?.hasTypeParameterDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.asClassDeclaration() shouldBeEqualTo null
+            it?.hasClassDeclaration() shouldBeEqualTo false
+            it?.asObjectDeclaration() shouldBeEqualTo null
+            it?.hasObjectDeclaration() shouldBeEqualTo false
+            it?.asInterfaceDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceDeclaration() shouldBeEqualTo false
+            it?.asImportAliasDeclaration() shouldBeEqualTo null
+            it?.hasImportAliasDeclaration() shouldBeEqualTo false
+            it?.asKotlinTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
+            it?.asFunctionTypeDeclaration() shouldBeEqualTo null
+            it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
+            it?.asExternalTypeDeclaration() shouldBeEqualTo null
+            it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asTypeAliasDeclaration() shouldBeEqualTo null
+            it?.hasTypeAliasDeclaration() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo true
+            it?.isExternalType shouldBeEqualTo false
+            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -654,6 +795,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
             it?.asExternalTypeDeclaration() shouldBeEqualTo null
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -661,7 +804,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
             it?.isFunctionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
             it?.isExternalType shouldBeEqualTo false
+            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -708,6 +853,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asExternalTypeDeclaration() shouldBeEqualTo null
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.hasExternalTypeDeclarationOf(String::class) shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -715,7 +862,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo true
             it?.isFunctionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
             it?.isExternalType shouldBeEqualTo false
+            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -762,6 +911,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asExternalTypeDeclaration() shouldBeEqualTo null
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.hasExternalTypeDeclarationOf(String::class) shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -769,7 +920,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo true
             it?.isFunctionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
             it?.isExternalType shouldBeEqualTo false
+            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -809,6 +962,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
             it?.asExternalTypeDeclaration() shouldBeEqualTo null
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -816,7 +971,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
             it?.isFunctionType shouldBeEqualTo true
+            it?.isTypeParameter shouldBeEqualTo false
             it?.isExternalType shouldBeEqualTo false
+            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -856,6 +1013,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
             it?.asExternalTypeDeclaration() shouldBeEqualTo null
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -863,7 +1022,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
             it?.isFunctionType shouldBeEqualTo true
+            it?.isTypeParameter shouldBeEqualTo false
             it?.isExternalType shouldBeEqualTo false
+            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -910,6 +1071,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasKotlinTypeDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
             it?.asFunctionTypeDeclaration() shouldBeEqualTo null
             it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -917,7 +1080,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
             it?.isFunctionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
             it?.isExternalType shouldBeEqualTo true
+            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -964,6 +1129,8 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasKotlinTypeDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
             it?.asFunctionTypeDeclaration() shouldBeEqualTo null
             it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
@@ -971,7 +1138,60 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
             it?.isFunctionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
             it?.isExternalType shouldBeEqualTo true
+            it?.isStarProjection shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `star-projection-type`() {
+        // given
+        val sut =
+            getSnippetFile("star-projection-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.asGenericTypeDeclaration()
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        assertSoftly(sut) {
+            it?.hasDeclaration { declaration -> declaration.name == "*" } shouldBeEqualTo true
+            it?.hasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asStarProjectionDeclaration() shouldBeInstanceOf KoStarProjectionDeclaration::class
+            it?.asStarProjectionDeclaration()?.name shouldBeEqualTo "*"
+            it?.asClassDeclaration() shouldBeEqualTo null
+            it?.hasClassDeclaration() shouldBeEqualTo false
+            it?.asObjectDeclaration() shouldBeEqualTo null
+            it?.hasObjectDeclaration() shouldBeEqualTo false
+            it?.asInterfaceDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceDeclaration() shouldBeEqualTo false
+            it?.asTypeAliasDeclaration() shouldBeEqualTo null
+            it?.hasTypeAliasDeclaration() shouldBeEqualTo false
+            it?.asImportAliasDeclaration() shouldBeEqualTo null
+            it?.hasImportAliasDeclaration() shouldBeEqualTo false
+            it?.asKotlinTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
+            it?.asFunctionTypeDeclaration() shouldBeEqualTo null
+            it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
+            it?.isStarProjection shouldBeEqualTo true
         }
     }
 
@@ -998,18 +1218,18 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
                     KoClassDeclaration::class,
                     "kotlin.String",
                 ),
-//                arguments(
-//                    "nullable-generic-type",
-//                    KoKotlinTypeDeclaration::class,
-//                    KoClassDeclaration::class,
-//                    "kotlin.collections.List",
-//                ),
-//                arguments(
-//                    "not-nullable-generic-type",
-//                    KoKotlinTypeDeclaration::class,
-//                    KoClassDeclaration::class,
-//                    "kotlin.collections.List",
-//                ),
+                arguments(
+                    "nullable-generic-type",
+                    KoGenericTypeDeclaration::class,
+                    KoClassDeclaration::class,
+                    null,
+                ),
+                arguments(
+                    "not-nullable-generic-type",
+                    KoGenericTypeDeclaration::class,
+                    KoClassDeclaration::class,
+                    null,
+                ),
                 arguments(
                     "nullable-class-type",
                     KoClassDeclaration::class,

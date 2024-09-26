@@ -1,0 +1,1 @@
+class SampleClass <TestType>(sampleProperty1: TestType) {}

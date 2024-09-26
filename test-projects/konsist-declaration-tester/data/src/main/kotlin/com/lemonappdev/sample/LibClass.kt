@@ -38,6 +38,11 @@ val libPropertyWithGenericType: List<Set<String>> = emptyList()
 
 val libPropertyWithImportAliasType: ImportAlias = LibObject
 
+val <T> T.libPropertyWithTypeParameter: T
+    get() = this
+
+val libPropertyWithStarProjection: List<*> = emptyList<String>()
+
 object LibObject
 
 enum class LibEnumClass {

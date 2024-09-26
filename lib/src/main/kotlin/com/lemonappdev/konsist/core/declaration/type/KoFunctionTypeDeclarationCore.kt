@@ -58,10 +58,10 @@ internal class KoFunctionTypeDeclarationCore private constructor(
             ?: throw KoInternalException("Lambda function has no specified type")
     }
 
-    override fun toString(): String = text // Todo: change to name
+    override fun toString(): String = text
 
     internal companion object {
-        private val cache: KoDeclarationCache<KoFunctionTypeDeclaration> = KoDeclarationCache() // Todo: change this?
+        private val cache: KoDeclarationCache<KoFunctionTypeDeclaration> = KoDeclarationCache()
 
         internal fun getInstance(
             ktFunctionType: KtFunctionType,

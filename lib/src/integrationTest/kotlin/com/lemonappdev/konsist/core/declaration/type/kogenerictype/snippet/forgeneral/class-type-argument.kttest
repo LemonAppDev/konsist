@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.SampleClass
+
+val sampleProperty: List<SampleClass> = emptyList()

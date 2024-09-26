@@ -49,6 +49,8 @@ class KoTypeDeclarationForKoContainingDeclarationProviderTest {
                 arguments("not-nullable-typealias-type-containing-declaration"),
                 arguments("nullable-generic-type-containing-declaration"),
                 arguments("not-nullable-generic-type-containing-declaration"),
+                arguments("nullable-type-parameter-containing-declaration"),
+                arguments("not-nullable-type-parameter-containing-declaration"),
                 arguments("nullable-external-type-containing-declaration"),
                 arguments("not-nullable-external-type-containing-declaration"),
             )

@@ -1,0 +1,1 @@
+fun sampleFunction(): List<*> = emptyList<String>()

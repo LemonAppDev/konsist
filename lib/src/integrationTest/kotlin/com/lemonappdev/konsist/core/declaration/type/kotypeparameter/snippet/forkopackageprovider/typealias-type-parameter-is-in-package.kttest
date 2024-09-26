@@ -1,0 +1,3 @@
+package com.samplepackage
+
+typealias SampleTypeAlias<T> = List<T>

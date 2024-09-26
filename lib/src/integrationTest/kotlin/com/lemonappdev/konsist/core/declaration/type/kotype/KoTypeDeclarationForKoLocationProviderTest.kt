@@ -51,6 +51,8 @@ class KoTypeDeclarationForKoLocationProviderTest {
                 arguments("not-nullable-import-alias-type-location", "3:41"),
                 arguments("nullable-typealias-type-location", "3:41"),
                 arguments("not-nullable-typealias-type-location", "3:41"),
+                arguments("nullable-type-parameter-location", "1:46"),
+                arguments("not-nullable-type-parameter-location", "1:46"),
                 arguments("nullable-external-type-location", "3:41"),
                 arguments("not-nullable-external-type-location", "3:41"),
             )

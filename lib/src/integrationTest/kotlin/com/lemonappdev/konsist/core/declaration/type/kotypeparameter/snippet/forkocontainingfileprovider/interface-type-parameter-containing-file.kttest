@@ -1,0 +1,3 @@
+interface SampleInterface<TestType> {
+    val sampleProperty: TestType
+}

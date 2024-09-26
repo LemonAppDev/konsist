@@ -117,6 +117,8 @@ class KoTypeDeclarationForKoPathProviderTest {
                 arguments("not-nullable-import-alias-type-path"),
                 arguments("nullable-typealias-type-path"),
                 arguments("not-nullable-typealias-type-path"),
+                arguments("nullable-type-parameter-path"),
+                arguments("not-nullable-type-parameter-path"),
                 arguments("nullable-external-type-path"),
                 arguments("not-nullable-external-type-path"),
             )

@@ -296,6 +296,7 @@ class KoTypeDeclarationForKoAnnotationProviderTest {
                 arguments("import-alias-type-has-no-annotation"),
                 arguments("typealias-type-has-no-annotation"),
                 arguments("generic-type-has-no-annotation"),
+                arguments("type-parameter-has-no-annotation"),
                 arguments("external-type-has-no-annotation"),
             )
 
@@ -311,6 +312,7 @@ class KoTypeDeclarationForKoAnnotationProviderTest {
                 arguments("import-alias-type-has-annotation"),
                 arguments("typealias-type-has-annotation"),
                 arguments("generic-type-has-annotation"),
+                arguments("type-parameter-has-annotation"),
                 arguments("external-type-has-annotation"),
             )
 
@@ -326,6 +328,7 @@ class KoTypeDeclarationForKoAnnotationProviderTest {
                 arguments("import-alias-type-has-two-annotations"),
                 arguments("typealias-type-has-two-annotations"),
                 arguments("generic-type-has-two-annotations"),
+                arguments("type-parameter-has-two-annotations"),
                 arguments("external-type-has-two-annotations"),
             )
     }

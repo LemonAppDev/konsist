@@ -23,7 +23,7 @@ class KoGenericTypeDeclarationForKoContainingDeclarationProviderTest {
                 ?.asGenericTypeDeclaration()
 
         // then
-        (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo fileName
+        (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo "SampleClass1"
     }
 
     private fun getSnippetFile(fileName: String) =

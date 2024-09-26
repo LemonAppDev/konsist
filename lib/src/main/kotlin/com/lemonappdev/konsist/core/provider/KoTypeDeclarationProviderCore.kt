@@ -11,11 +11,15 @@ import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.util.TypeUtil
+import org.jetbrains.kotlin.psi.KtNameReferenceExpression
+import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import kotlin.reflect.KClass
@@ -27,16 +31,23 @@ internal interface KoTypeDeclarationProviderCore :
     KoContainingFileProviderCore,
     KoContainingDeclarationProviderCore,
     KoTypeProviderCore {
-    val ktTypeReference: KtTypeReference
+    val ktTypeReference: KtTypeReference?
+    val ktNameReferenceExpression: KtNameReferenceExpression?
+    val ktTypeProjection: KtTypeProjection?
+
     override val declaration: KoBaseTypeDeclaration
-        get() {
-            return TypeUtil.getBasicType(
-                listOf(ktTypeReference),
-                ktTypeReference.isExtensionDeclaration(),
+        get() =
+            TypeUtil.getBasicType(
+                listOf(ktTypeReference, ktNameReferenceExpression, ktTypeProjection),
+                isExtensionDeclaration(),
                 getDeclarationWithFqn(containingDeclaration) ?: containingDeclaration,
                 containingFile,
             ) ?: throw KoInternalException("Source declaration cannot be a null")
-        }
+
+    private fun isExtensionDeclaration(): Boolean =
+        ktTypeReference?.isExtensionDeclaration() == true ||
+            ktNameReferenceExpression?.isExtensionDeclaration() == true ||
+            ktTypeProjection?.isExtensionDeclaration() == true
 
     private fun getDeclarationWithFqn(declaration: KoBaseDeclaration): KoBaseDeclaration? =
         when {
@@ -61,7 +72,11 @@ internal interface KoTypeDeclarationProviderCore :
 
     override fun asGenericTypeDeclaration(): KoGenericTypeDeclaration? = declaration as? KoGenericTypeDeclaration
 
+    override fun asTypeParameterDeclaration(): KoTypeParameterDeclaration? = declaration as? KoTypeParameterDeclaration
+
     override fun asExternalTypeDeclaration(): KoExternalDeclaration? = declaration as? KoExternalDeclaration
+
+    override fun asStarProjectionDeclaration(): KoStarProjectionDeclaration? = declaration as? KoStarProjectionDeclaration
 
     override val isClass: Boolean
         get() = declaration is KoClassDeclaration
@@ -87,8 +102,14 @@ internal interface KoTypeDeclarationProviderCore :
     override val isGenericType: Boolean
         get() = declaration is KoGenericTypeDeclaration
 
+    override val isTypeParameter: Boolean
+        get() = declaration is KoTypeParameterDeclaration
+
     override val isExternalType: Boolean
         get() = declaration is KoExternalDeclaration
+
+    override val isStarProjection: Boolean
+        get() = declaration is KoStarProjectionDeclaration
 
     override fun hasDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean = predicate(declaration)
 
@@ -157,6 +178,12 @@ internal interface KoTypeDeclarationProviderCore :
         when (predicate) {
             null -> asGenericTypeDeclaration() != null
             else -> asGenericTypeDeclaration()?.let { predicate(it) } ?: false
+        }
+
+    override fun hasTypeParameterDeclaration(predicate: ((KoTypeParameterDeclaration) -> Boolean)?): Boolean =
+        when (predicate) {
+            null -> asTypeParameterDeclaration() != null
+            else -> asTypeParameterDeclaration()?.let { predicate(it) } ?: false
         }
 
     override fun hasExternalTypeDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)?): Boolean =

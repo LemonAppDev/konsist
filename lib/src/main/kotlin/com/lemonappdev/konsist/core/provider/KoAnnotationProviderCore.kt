@@ -11,13 +11,14 @@ internal interface KoAnnotationProviderCore :
     KoAnnotationProvider,
     KoContainingDeclarationProviderCore,
     KoBaseProviderCore {
-    val ktAnnotated: KtAnnotated
+    val ktAnnotated: KtAnnotated?
 
     override val annotations: List<KoAnnotationDeclaration>
         get() =
             ktAnnotated
-                .annotationEntries
-                .map { KoAnnotationDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
+                ?.annotationEntries
+                ?.map { KoAnnotationDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
+                ?: emptyList()
 
     override val numAnnotations: Int
         get() = annotations.size

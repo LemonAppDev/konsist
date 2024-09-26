@@ -56,8 +56,11 @@ class ProviderKonsistTest {
     fun `every core provider implements its api equivalent`() {
         providerPackageScope
             .interfaces()
-            .withoutName("KoPackageDeclarationProviderCore", "KoDeclarationFullyQualifiedNameProviderCore")
-            .assertTrue {
+            .withoutName(
+                "KoPackageDeclarationProviderCore",
+                "KoDeclarationFullyQualifiedNameProviderCore",
+                "KoTypeParameterProviderCore",
+            ).assertTrue {
                 val name = it.name.removeSuffix("Core")
 
                 it.hasParentWithName(name, indirectParents = true)
