@@ -26,7 +26,8 @@ class KoImportDeclarationForKoSourceDeclarationProviderTest {
         fileName: String,
         instanceOf: KClass<*>,
         notInstanceOf: KClass<*>,
-        fqn: String?,
+        kClass: KClass<*>,
+        fullyQualifiedName: String?,
     ) {
         // given
         val sut =
@@ -38,7 +39,14 @@ class KoImportDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             sourceDeclaration shouldBeInstanceOf instanceOf
             sourceDeclaration shouldNotBeInstanceOf notInstanceOf
-            (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
+            hasSourceDeclaration {
+                (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fullyQualifiedName
+            }.shouldBeEqualTo(true)
+            hasSourceDeclaration {
+                (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == "com.samplepackage.other"
+            }.shouldBeEqualTo(false)
+            hasSourceDeclarationOf(kClass) shouldBeEqualTo false
+            hasSourceDeclarationOf(Int::class) shouldBeEqualTo false
         }
     }
 
@@ -54,48 +62,56 @@ class KoImportDeclarationForKoSourceDeclarationProviderTest {
                     "kotlin-source-declaration",
                     KoKotlinTypeDeclaration::class,
                     KoClassDeclaration::class,
+                    String::class,
                     "kotlin.String",
                 ),
                 arguments(
                     "class-source-declaration",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
+                    SampleClass::class,
                     "com.lemonappdev.konsist.testdata.SampleClass",
                 ),
                 arguments(
                     "interface-source-declaration",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
+                    SampleInterface::class,
                     "com.lemonappdev.konsist.testdata.SampleInterface",
                 ),
                 arguments(
                     "object-source-declaration",
                     KoObjectDeclaration::class,
                     KoClassDeclaration::class,
+                    SampleObject::class,
                     "com.lemonappdev.konsist.testdata.SampleObject",
                 ),
                 arguments(
                     "function-source-declaration",
                     KoFunctionDeclaration::class,
                     KoClassDeclaration::class,
+                    sampleFunction::class,
                     "com.lemonappdev.konsist.testdata.sampleFunction",
                 ),
                 arguments(
                     "property-source-declaration",
                     KoPropertyDeclaration::class,
                     KoClassDeclaration::class,
+                    SAMPLE_PROPERTY::class,
                     "com.lemonappdev.konsist.testdata.SAMPLE_PROPERTY",
                 ),
                 arguments(
                     "typealias-source-declaration",
                     KoTypeAliasDeclaration::class,
                     KoClassDeclaration::class,
+                    SampleTypeAlias::class,
                     "com.lemonappdev.konsist.testdata.SampleTypeAlias",
                 ),
                 arguments(
                     "external-source-declaration",
                     KoExternalDeclaration::class,
                     KoClassDeclaration::class,
+                    SampleExternalClass::class,
                     "com.lemonappdev.konsist.externalsample.SampleExternalClass",
                 ),
             )
