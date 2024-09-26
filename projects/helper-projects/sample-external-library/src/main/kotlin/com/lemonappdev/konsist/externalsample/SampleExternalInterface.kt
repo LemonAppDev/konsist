@@ -1,0 +1,3 @@
+package com.lemonappdev.konsist.externalsample
+
+interface SampleExternalInterface
