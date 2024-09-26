@@ -9,8 +9,8 @@ import kotlin.reflect.KClass
 /**
  * Returns a list containing generic type declarations.
  */
-val <T : KoGenericTypeDeclarationProvider> List<T>.genericTypes: List<KoTypeDeclaration>
-    get() = mapNotNull { it.genericType }
+val <T : KoGenericTypeDeclarationProvider> List<T>.types: List<KoTypeDeclaration>
+    get() = mapNotNull { it.type }
 
 /**
  * Returns a list containing type argument declarations.
@@ -30,8 +30,8 @@ val <T : KoGenericTypeDeclarationProvider> List<T>.typeArgumentsFlatten: List<Ko
  * @param predicate A function that defines the condition to be met by the generic type.
  * @return A list containing elements with a generic type satisfying the predicate.
  */
-fun <T : KoGenericTypeDeclarationProvider> List<T>.withGenericType(predicate: (KoTypeDeclaration) -> Boolean): List<T> =
-    filter { predicate(it.genericType) }
+fun <T : KoGenericTypeDeclarationProvider> List<T>.withType(predicate: (KoTypeDeclaration) -> Boolean): List<T> =
+    filter { predicate(it.type) }
 
 /**
  * Filters the list to exclude elements with a generic type satisfying the given predicate.
@@ -39,8 +39,8 @@ fun <T : KoGenericTypeDeclarationProvider> List<T>.withGenericType(predicate: (K
  * @param predicate A function that defines the condition to be met by the generic type.
  * @return A list excluding elements with a generic type satisfying the predicate.
  */
-fun <T : KoGenericTypeDeclarationProvider> List<T>.withoutGenericType(predicate: (KoTypeDeclaration) -> Boolean): List<T> =
-    filterNot { predicate(it.genericType) }
+fun <T : KoGenericTypeDeclarationProvider> List<T>.withoutType(predicate: (KoTypeDeclaration) -> Boolean): List<T> =
+    filterNot { predicate(it.type) }
 
 /**
  * Filters the list to include only elements with a generic type matching any of the specified KClass types.
@@ -49,10 +49,10 @@ fun <T : KoGenericTypeDeclarationProvider> List<T>.withoutGenericType(predicate:
  * @param kClasses Additional KClass types to match the generic type.
  * @return A list containing elements with a generic type matching the specified KClasses.
  */
-fun <T : KoGenericTypeDeclarationProvider> List<T>.withGenericTypeOf(
+fun <T : KoGenericTypeDeclarationProvider> List<T>.withTypeOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> = withGenericTypeOf(listOf(kClass, *kClasses))
+): List<T> = withTypeOf(listOf(kClass, *kClasses))
 
 /**
  * Filters the list to include only elements with a generic type matching any of the specified KClass types.
@@ -60,11 +60,11 @@ fun <T : KoGenericTypeDeclarationProvider> List<T>.withGenericTypeOf(
  * @param kClasses A collection of KClass types to match the generic type.
  * @return A list containing elements with a generic type matching the specified KClasses.
  */
-fun <T : KoGenericTypeDeclarationProvider> List<T>.withGenericTypeOf(kClasses: Collection<KClass<*>>): List<T> =
+fun <T : KoGenericTypeDeclarationProvider> List<T>.withTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
         when {
             kClasses.isEmpty() -> true
-            else -> kClasses.any { kClass -> it.hasGenericTypeOf(kClass) }
+            else -> kClasses.any { kClass -> it.hasTypeOf(kClass) }
         }
     }
 
@@ -75,10 +75,10 @@ fun <T : KoGenericTypeDeclarationProvider> List<T>.withGenericTypeOf(kClasses: C
  * @param kClasses Additional KClass types to match the generic type.
  * @return A list excluding elements with a generic type matching the specified KClasses.
  */
-fun <T : KoGenericTypeDeclarationProvider> List<T>.withoutGenericTypeOf(
+fun <T : KoGenericTypeDeclarationProvider> List<T>.withoutTypeOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> = withoutGenericTypeOf(listOf(kClass, *kClasses))
+): List<T> = withoutTypeOf(listOf(kClass, *kClasses))
 
 /**
  * Filters the list to exclude elements with a generic type matching any of the specified KClass types.
@@ -86,11 +86,11 @@ fun <T : KoGenericTypeDeclarationProvider> List<T>.withoutGenericTypeOf(
  * @param kClasses A collection of KClass types to match the generic type.
  * @return A list excluding elements with a generic type matching the specified KClasses.
  */
-fun <T : KoGenericTypeDeclarationProvider> List<T>.withoutGenericTypeOf(kClasses: Collection<KClass<*>>): List<T> =
+fun <T : KoGenericTypeDeclarationProvider> List<T>.withoutTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
         when {
             kClasses.isEmpty() -> true
-            else -> kClasses.any { kClass -> it.hasGenericTypeOf(kClass) }
+            else -> kClasses.any { kClass -> it.hasTypeOf(kClass) }
         }
     }
 

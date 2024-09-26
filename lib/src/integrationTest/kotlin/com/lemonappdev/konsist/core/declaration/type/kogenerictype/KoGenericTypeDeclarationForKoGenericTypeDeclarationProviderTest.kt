@@ -28,7 +28,7 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
     fun `kotlin-generic-type`() {
         // given
         val sut =
-            getSnippetFile("kotlin-generic-type")
+            getSnippetFile("kotlin-type")
                 .properties()
                 .first()
                 .type
@@ -36,20 +36,20 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.genericType?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
-            it?.genericType?.name shouldBeEqualTo "List"
-            it?.hasGenericType { type -> type.isKotlinCollectionType } shouldBeEqualTo true
-            it?.hasGenericType { type -> type.isClass } shouldBeEqualTo false
-            it?.hasGenericTypeOf(List::class) shouldBeEqualTo true
-            it?.hasGenericTypeOf(Map::class) shouldBeEqualTo false
+            it?.type?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
+            it?.type?.name shouldBeEqualTo "List"
+            it?.hasType { type -> type.isKotlinCollectionType } shouldBeEqualTo true
+            it?.hasType { type -> type.isClass } shouldBeEqualTo false
+            it?.hasTypeOf(List::class) shouldBeEqualTo true
+            it?.hasTypeOf(Map::class) shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `class-generic-type`() {
+    fun `class-type`() {
         // given
         val sut =
-            getSnippetFile("class-generic-type")
+            getSnippetFile("class-type")
                 .properties()
                 .first()
                 .type
@@ -57,20 +57,20 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.genericType?.declaration shouldBeInstanceOf KoClassDeclaration::class
-            it?.genericType?.name shouldBeEqualTo "SampleGenericClassWithParameter"
-            it?.hasGenericType { type -> type.isClass } shouldBeEqualTo true
-            it?.hasGenericType { type -> type.isKotlinType } shouldBeEqualTo false
-            it?.hasGenericTypeOf(SampleGenericClassWithParameter::class) shouldBeEqualTo true
-            it?.hasGenericTypeOf(Map::class) shouldBeEqualTo false
+            it?.type?.declaration shouldBeInstanceOf KoClassDeclaration::class
+            it?.type?.name shouldBeEqualTo "SampleGenericClassWithParameter"
+            it?.hasType { type -> type.isClass } shouldBeEqualTo true
+            it?.hasType { type -> type.isKotlinType } shouldBeEqualTo false
+            it?.hasTypeOf(SampleGenericClassWithParameter::class) shouldBeEqualTo true
+            it?.hasTypeOf(Map::class) shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `interface-generic-type`() {
+    fun `interface-type`() {
         // given
         val sut =
-            getSnippetFile("interface-generic-type")
+            getSnippetFile("interface-type")
                 .properties()
                 .first()
                 .type
@@ -78,12 +78,12 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.genericType?.declaration shouldBeInstanceOf KoInterfaceDeclaration::class
-            it?.genericType?.name shouldBeEqualTo "SampleGenericSuperInterface"
-            it?.hasGenericType { type -> type.isInterface } shouldBeEqualTo true
-            it?.hasGenericType { type -> type.isClass } shouldBeEqualTo false
-            it?.hasGenericTypeOf(SampleGenericSuperInterface::class) shouldBeEqualTo true
-            it?.hasGenericTypeOf(Map::class) shouldBeEqualTo false
+            it?.type?.declaration shouldBeInstanceOf KoInterfaceDeclaration::class
+            it?.type?.name shouldBeEqualTo "SampleGenericSuperInterface"
+            it?.hasType { type -> type.isInterface } shouldBeEqualTo true
+            it?.hasType { type -> type.isClass } shouldBeEqualTo false
+            it?.hasTypeOf(SampleGenericSuperInterface::class) shouldBeEqualTo true
+            it?.hasTypeOf(Map::class) shouldBeEqualTo false
         }
     }
 
@@ -103,24 +103,24 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.asGenericTypeDeclaration()
-                ?.genericType
+                ?.type
                 ?.declaration
                 ?.shouldBeInstanceOf(KoKotlinTypeDeclaration::class)
             it
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.asGenericTypeDeclaration()
-                ?.genericType
+                ?.type
                 ?.name
                 ?.shouldBeEqualTo("Set")
         }
     }
 
     @Test
-    fun `import-alias-generic-type`() {
+    fun `import-alias-type`() {
         // given
         val sut =
-            getSnippetFile("import-alias-generic-type")
+            getSnippetFile("import-alias-type")
                 .properties()
                 .first()
                 .type
@@ -128,19 +128,19 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.genericType?.declaration shouldBeInstanceOf KoImportAliasDeclaration::class
-            it?.genericType?.name shouldBeEqualTo "SampleImportAlias"
-            it?.hasGenericType { type -> type.isImportAlias } shouldBeEqualTo true
-            it?.hasGenericType { type -> type.isClass } shouldBeEqualTo false
-            it?.hasGenericTypeOf(Map::class) shouldBeEqualTo false
+            it?.type?.declaration shouldBeInstanceOf KoImportAliasDeclaration::class
+            it?.type?.name shouldBeEqualTo "SampleImportAlias"
+            it?.hasType { type -> type.isImportAlias } shouldBeEqualTo true
+            it?.hasType { type -> type.isClass } shouldBeEqualTo false
+            it?.hasTypeOf(Map::class) shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `external-generic-type`() {
+    fun `external-type`() {
         // given
         val sut =
-            getSnippetFile("external-generic-type")
+            getSnippetFile("external-type")
                 .properties()
                 .first()
                 .type
@@ -148,12 +148,12 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.genericType?.declaration shouldBeInstanceOf KoExternalDeclaration::class
-            it?.genericType?.name shouldBeEqualTo "SampleExternalGenericClass"
-            it?.hasGenericType { type -> type.isExternalType } shouldBeEqualTo true
-            it?.hasGenericType { type -> type.isClass } shouldBeEqualTo false
-            it?.hasGenericTypeOf(SampleExternalGenericClass::class) shouldBeEqualTo true
-            it?.hasGenericTypeOf(Map::class) shouldBeEqualTo false
+            it?.type?.declaration shouldBeInstanceOf KoExternalDeclaration::class
+            it?.type?.name shouldBeEqualTo "SampleExternalGenericClass"
+            it?.hasType { type -> type.isExternalType } shouldBeEqualTo true
+            it?.hasType { type -> type.isClass } shouldBeEqualTo false
+            it?.hasTypeOf(SampleExternalGenericClass::class) shouldBeEqualTo true
+            it?.hasTypeOf(Map::class) shouldBeEqualTo false
         }
     }
 

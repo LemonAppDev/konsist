@@ -20,7 +20,7 @@ internal interface KoGenericTypeDeclarationProviderCore :
     KoBaseProviderCore {
     val ktUserType: KtUserType
 
-    override val genericType: KoTypeDeclaration
+    override val type: KoTypeDeclaration
         get() {
             val ktNameReferenceExpression =
                 ktUserType
@@ -72,7 +72,7 @@ internal interface KoGenericTypeDeclarationProviderCore :
                 arguments.forEach { currentArgument ->
                     if (currentArgument.declaration is KoGenericTypeDeclaration) {
                         val genericDeclaration = currentArgument.declaration as KoGenericTypeDeclaration
-                        acc.add(genericDeclaration.genericType)
+                        acc.add(genericDeclaration.type)
                         flattenTypeArguments(genericDeclaration.typeArguments, acc)
                     } else {
                         acc.add(currentArgument)
@@ -88,9 +88,9 @@ internal interface KoGenericTypeDeclarationProviderCore :
     override val numTypeArgumentsFlatten: Int
         get() = typeArgumentsFlatten.size
 
-    override fun hasGenericType(predicate: (KoTypeDeclaration) -> Boolean): Boolean = predicate(genericType)
+    override fun hasType(predicate: (KoTypeDeclaration) -> Boolean): Boolean = predicate(type)
 
-    override fun hasGenericTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(genericType, kClass)
+    override fun hasTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(type, kClass)
 
     override fun countTypeArguments(predicate: (KoTypeDeclaration) -> Boolean): Int = typeArguments.count { predicate(it) }
 
