@@ -1,14 +1,12 @@
 package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import kotlin.reflect.KClass
 
 /**
  * Provides access to the source declaration of a declaration.
  */
 interface KoSourceDeclarationProvider : KoBaseProvider {
-
     /**
      * The source declaration associated with this declaration.
      */

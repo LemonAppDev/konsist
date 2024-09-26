@@ -13,13 +13,13 @@ internal interface KoSourceDeclarationProviderCore :
     KoBaseProviderCore {
     override val sourceDeclaration: KoBaseDeclaration
 
-    override fun hasSourceDeclaration(predicate: (KoBaseDeclaration) -> Boolean): Boolean =
-        predicate(sourceDeclaration)
+    override fun hasSourceDeclaration(predicate: (KoBaseDeclaration) -> Boolean): Boolean = predicate(sourceDeclaration)
 
-    override fun hasSourceDeclarationOf(kClass: KClass<*>): Boolean = when(sourceDeclaration) {
-        is KoFunctionDeclaration -> (sourceDeclaration as? KoFunctionDeclaration)?.hasReturnTypeOf(kClass) == true
-        is KoPropertyDeclaration -> (sourceDeclaration as? KoPropertyDeclaration)?.hasTypeOf(kClass) == true
-        is KoTypeAliasDeclaration -> (sourceDeclaration as? KoTypeAliasDeclaration)?.hasTypeOf(kClass) == true
-        else -> kClass.qualifiedName == (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
-    }
+    override fun hasSourceDeclarationOf(kClass: KClass<*>): Boolean =
+        when (sourceDeclaration) {
+            is KoFunctionDeclaration -> (sourceDeclaration as? KoFunctionDeclaration)?.hasReturnTypeOf(kClass) == true
+            is KoPropertyDeclaration -> (sourceDeclaration as? KoPropertyDeclaration)?.hasTypeOf(kClass) == true
+            is KoTypeAliasDeclaration -> (sourceDeclaration as? KoTypeAliasDeclaration)?.hasTypeOf(kClass) == true
+            else -> kClass.qualifiedName == (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+        }
 }
