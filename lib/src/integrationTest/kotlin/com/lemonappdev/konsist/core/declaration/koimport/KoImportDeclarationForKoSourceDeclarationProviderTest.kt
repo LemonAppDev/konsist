@@ -52,7 +52,7 @@ class KoImportDeclarationForKoSourceDeclarationProviderTest {
             hasSourceDeclaration {
                 (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == "com.samplepackage.other"
             }.shouldBeEqualTo(false)
-            hasSourceDeclarationOf(kClass) shouldBeEqualTo false
+            hasSourceDeclarationOf(kClass) shouldBeEqualTo true
             hasSourceDeclarationOf(Int::class) shouldBeEqualTo false
         }
     }
