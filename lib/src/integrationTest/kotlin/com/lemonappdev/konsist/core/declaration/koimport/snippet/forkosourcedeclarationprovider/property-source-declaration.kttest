@@ -1,4 +1,4 @@
-import com.lemonappdev.konsist.testdata.sampleProperty
+import com.lemonappdev.konsist.testdata.SAMPLE_PROPERTY
 
 val exampleProperty: Int
-    get() = sampleProperty
+    get() = SAMPLE_PROPERTY

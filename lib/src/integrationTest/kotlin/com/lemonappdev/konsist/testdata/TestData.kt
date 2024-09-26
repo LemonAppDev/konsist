@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.testdata
 
-
-const val sampleProperty = 0
+const val SAMPLE_PROPERTY = 0
 
 fun sampleFunction() = {}
 

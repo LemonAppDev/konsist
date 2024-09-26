@@ -47,7 +47,7 @@ class KoImportAliasDeclarationForKoSourceDeclarationProviderTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/koimportalias/snippet/forkosourcedeclarationprovider/",
-            fileName
+            fileName,
         )
 
     companion object {
