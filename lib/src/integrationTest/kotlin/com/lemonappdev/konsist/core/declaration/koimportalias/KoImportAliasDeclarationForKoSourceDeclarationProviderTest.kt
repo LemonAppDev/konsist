@@ -89,7 +89,7 @@ class KoImportAliasDeclarationForKoSourceDeclarationProviderTest {
                     "property-source-declaration",
                     KoPropertyDeclaration::class,
                     KoClassDeclaration::class,
-                    "com.lemonappdev.konsist.testdata.sampleProperty",
+                    "com.lemonappdev.konsist.testdata.SAMPLE_PROPERTY",
                 ),
                 arguments(
                     "typealias-source-declaration",

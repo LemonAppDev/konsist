@@ -3,8 +3,10 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.model.DataCore
 import com.lemonappdev.konsist.core.provider.KoAliasProviderCore
@@ -20,9 +22,12 @@ import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoWildcardProviderCore
+import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
+import org.jetbrains.kotlin.psi.KtDotQualifiedExpression
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtImportDirective
+import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 
 internal class KoImportDeclarationCore private constructor(
     override val ktImportDirective: KtImportDirective,
@@ -54,13 +59,32 @@ internal class KoImportDeclarationCore private constructor(
 
     override val sourceDeclaration: KoBaseDeclaration by lazy {
         val shortName = name.substringAfterLast(".")
+
         DataCore
             .declarations
             .filterIsInstance<KoFullyQualifiedNameProvider>()
             .firstOrNull { it.fullyQualifiedName == name }
             ?.castToKoBaseDeclaration()
+            ?: getKotlinType(shortName)
             ?: KoExternalDeclarationCore.getInstance(shortName, ktImportDirective)
     }
+
+    private fun getKotlinType(name: String): KoKotlinTypeDeclaration? =
+        if (TypeUtil.isKotlinBasicType(name) || TypeUtil.isKotlinCollectionTypes(name)) {
+            val ktNameReferenceExpression =
+                ktImportDirective
+                    .children
+                    .filterIsInstance<KtDotQualifiedExpression>()
+                    .flatMap { it.children.toList() }
+                    .filterIsInstance<KtNameReferenceExpression>()
+                    .lastOrNull()
+
+            ktNameReferenceExpression?.let {
+                KoKotlinTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration())
+            }
+        } else {
+            null
+        }
 
     /*
     Remove in version 0.18.0
