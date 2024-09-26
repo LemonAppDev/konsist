@@ -56,8 +56,8 @@ internal class KoTypeDeclarationCore private constructor(
     KoPackageProviderCore,
     KoResideInPackageProviderCore,
     KoAnnotationProviderCore,
-    KoTypeDeclarationProviderCore, {
-    KoIsMutableTypeProviderCore
+    KoTypeDeclarationProviderCore,
+    KoIsMutableTypeProviderCore {
     // Ensure that at least one of the parameters is not null
     init {
         require(ktTypeReference != null || ktNameReferenceExpression != null || ktTypeProjection != null) {
