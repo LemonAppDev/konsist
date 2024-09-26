@@ -82,6 +82,8 @@ object SampleObject
 
 typealias SampleTypeAlias = (SampleClass) -> Unit
 
+typealias SampleBasicTypeAlias = SampleClass
+
 annotation class NonExistingAnnotation
 
 @Target(

@@ -10,6 +10,13 @@ import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+import com.lemonappdev.konsist.testdata.SampleClass
+import com.lemonappdev.konsist.testdata.SampleInterface
+import com.lemonappdev.konsist.testdata.SampleObject
+import com.lemonappdev.konsist.testdata.sampleFunction
+import com.lemonappdev.konsist.testdata.SAMPLE_PROPERTY
+import com.lemonappdev.konsist.testdata.SampleBasicTypeAlias
+import com.lemonappdev.konsist.externalsample.SampleExternalClass
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -90,7 +97,7 @@ class KoImportDeclarationForKoSourceDeclarationProviderTest {
                     "function-source-declaration",
                     KoFunctionDeclaration::class,
                     KoClassDeclaration::class,
-                    sampleFunction::class,
+                    sampleFunction()::class,
                     "com.lemonappdev.konsist.testdata.sampleFunction",
                 ),
                 arguments(
@@ -104,8 +111,8 @@ class KoImportDeclarationForKoSourceDeclarationProviderTest {
                     "typealias-source-declaration",
                     KoTypeAliasDeclaration::class,
                     KoClassDeclaration::class,
-                    SampleTypeAlias::class,
-                    "com.lemonappdev.konsist.testdata.SampleTypeAlias",
+                    SampleBasicTypeAlias::class,
+                    "com.lemonappdev.konsist.testdata.SampleBasicTypeAlias",
                 ),
                 arguments(
                     "external-source-declaration",
