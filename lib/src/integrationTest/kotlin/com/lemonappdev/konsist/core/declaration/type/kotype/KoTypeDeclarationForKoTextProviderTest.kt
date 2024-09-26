@@ -50,6 +50,8 @@ class KoTypeDeclarationForKoTextProviderTest {
                 arguments("not-nullable-import-alias-type-text", "ImportAlias"),
                 arguments("nullable-typealias-type-text", "SampleTypeAlias?"),
                 arguments("not-nullable-typealias-type-text", "SampleTypeAlias"),
+                arguments("nullable-type-parameter-text", "TestType?"),
+                arguments("not-nullable-type-parameter-text", "TestType"),
                 arguments("nullable-external-type-text", "SampleExternalClass?"),
                 arguments("not-nullable-external-type-text", "SampleExternalClass"),
             )

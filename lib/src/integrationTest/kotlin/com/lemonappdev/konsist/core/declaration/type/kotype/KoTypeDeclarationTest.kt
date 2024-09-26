@@ -51,6 +51,8 @@ class KoTypeDeclarationTest {
                 arguments("not-nullable-import-alias-type", "ImportAlias"),
                 arguments("nullable-typealias-type", "SampleTypeAlias?"),
                 arguments("not-nullable-typealias-type", "SampleTypeAlias"),
+                arguments("nullable-type-parameter", "TestType?"),
+                arguments("not-nullable-type-parameter", "TestType"),
                 arguments("nullable-external-type", "SampleExternalClass?"),
                 arguments("not-nullable-external-type", "SampleExternalClass"),
             )
