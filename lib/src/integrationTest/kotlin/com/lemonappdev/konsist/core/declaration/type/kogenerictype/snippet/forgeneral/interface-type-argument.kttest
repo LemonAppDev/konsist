@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.SampleInterface
+
+val sampleProperty: List<SampleInterface> = emptyList()
