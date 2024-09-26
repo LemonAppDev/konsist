@@ -10,6 +10,7 @@ import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoGenericTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsGenericTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsMutableTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsNullableProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -51,7 +52,8 @@ internal class KoTypeDeclarationCore private constructor(
     KoPackageProviderCore,
     KoResideInPackageProviderCore,
     KoAnnotationProviderCore,
-    KoTypeDeclarationProviderCore {
+    KoTypeDeclarationProviderCore,
+    KoIsMutableTypeProviderCore {
     override val psiElement: PsiElement by lazy { ktTypeReference }
 
     override val ktElement: KtElement by lazy { ktTypeReference }
