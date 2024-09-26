@@ -5,7 +5,9 @@ package com.lemonappdev.konsist.api.provider
  */
 interface KoIsMutableTypeProvider : KoBaseProvider {
     /**
-     * Determines whatever the declaration is a mutable type.
+     * Determines whether the declaration is a mutable type.
+     *
+     * This method only works if the type contains the "Mutable" string in its name.
      */
     val isMutableType: Boolean
 }
