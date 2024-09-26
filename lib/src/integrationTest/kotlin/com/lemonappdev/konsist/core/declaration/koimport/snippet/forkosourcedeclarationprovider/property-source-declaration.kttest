@@ -1,0 +1,4 @@
+import com.lemonappdev.konsist.testdata.sampleProperty
+
+val exampleProperty: Int
+    get() = sampleProperty

@@ -1,5 +1,10 @@
 package com.lemonappdev.konsist.testdata
 
+
+const val sampleProperty = 0
+
+fun sampleFunction() = {}
+
 open class SampleParentClass
 
 open class SampleParentClass1

@@ -3,7 +3,11 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
+import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
+import com.lemonappdev.konsist.core.model.DataCore
 import com.lemonappdev.konsist.core.provider.KoAliasProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -13,9 +17,11 @@ import com.lemonappdev.konsist.core.provider.KoMatchesProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoWildcardProviderCore
+import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtImportDirective
@@ -34,7 +40,8 @@ internal class KoImportDeclarationCore private constructor(
     KoSourceSetProviderCore,
     KoTextProviderCore,
     KoWildcardProviderCore,
-    KoIsWildcardProviderCore {
+    KoIsWildcardProviderCore,
+    KoSourceDeclarationProviderCore {
     override val psiElement: PsiElement by lazy { ktImportDirective }
 
     override val ktElement: KtElement by lazy { ktImportDirective }
@@ -45,6 +52,16 @@ internal class KoImportDeclarationCore private constructor(
         ktImportDirective
             .alias
             ?.let { KoImportAliasDeclarationCore.getInstance(it, this) }
+    }
+
+    override val sourceDeclaration: KoBaseDeclaration by lazy {
+        val shortName = name.substringAfterLast(".")
+        DataCore
+            .declarations
+            .filterIsInstance<KoFullyQualifiedNameProvider>()
+            .firstOrNull { it.fullyQualifiedName == name }
+            ?.castToKoBaseDeclaration()
+            ?: KoExternalDeclarationCore.getInstance(shortName, ktImportDirective)
     }
 
     /*
