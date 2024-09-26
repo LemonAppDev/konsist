@@ -15,7 +15,7 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
     /**
      * Determines whatever declaration has a specified source declaration.
      *
-     * @param predicate The predicate function used to determine if a declaration source declaration satisfies a condition.
+     * @param predicate The predicate function used to determine if a source declaration satisfies a condition.
      * @return `true` if the declaration has the specified source declaration, `false` otherwise.
      */
     fun hasSourceDeclaration(predicate: (KoBaseDeclaration) -> Boolean): Boolean

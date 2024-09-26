@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test
 
 class KoSourceDeclarationProviderListExtTest {
     @Test
-    fun `sourceDeclarations returns receiver types from all declarations`() {
+    fun `sourceDeclarations returns source declaration types from all declarations`() {
         // given
         val sourceDeclaration1: KoBaseDeclaration = mockk()
         val sourceDeclaration2: KoBaseDeclaration = mockk()
@@ -75,7 +75,7 @@ class KoSourceDeclarationProviderListExtTest {
     }
 
     @Test
-    fun `withSourceDeclarationOf(empty list) returns declaration with any receiver`() {
+    fun `withSourceDeclarationOf(empty list) returns declaration with any source declaration`() {
         // given
         val declaration1: KoSourceDeclarationProvider = mockk()
         val declaration2: KoSourceDeclarationProvider = mockk()
@@ -89,7 +89,7 @@ class KoSourceDeclarationProviderListExtTest {
     }
 
     @Test
-    fun `withSourceDeclarationOf(empty set) returns declaration with any receiver`() {
+    fun `withSourceDeclarationOf(empty set) returns declaration with any source declaration`() {
         // given
         val declaration1: KoSourceDeclarationProvider = mockk()
         val declaration2: KoSourceDeclarationProvider = mockk()
@@ -103,7 +103,7 @@ class KoSourceDeclarationProviderListExtTest {
     }
 
     @Test
-    fun `withoutSourceDeclarationOf(empty list) returns declaration without any receiver`() {
+    fun `withoutSourceDeclarationOf(empty list) returns declaration without any source declaration`() {
         // given
         val declaration1: KoSourceDeclarationProvider = mockk()
         val declaration2: KoSourceDeclarationProvider = mockk()
@@ -117,7 +117,7 @@ class KoSourceDeclarationProviderListExtTest {
     }
 
     @Test
-    fun `withoutSourceDeclarationOf(empty set) returns declaration without any receiver`() {
+    fun `withoutSourceDeclarationOf(empty set) returns declaration without any source declaration`() {
         // given
         val declaration1: KoSourceDeclarationProvider = mockk()
         val declaration2: KoSourceDeclarationProvider = mockk()
@@ -131,7 +131,7 @@ class KoSourceDeclarationProviderListExtTest {
     }
 
     @Test
-    fun `withSourceDeclarationOf(KClass) returns declaration with one of given receiver`() {
+    fun `withSourceDeclarationOf(KClass) returns declaration with one of given source declaration`() {
         // given
         val declaration1: KoSourceDeclarationProvider =
             mockk {
@@ -151,7 +151,7 @@ class KoSourceDeclarationProviderListExtTest {
     }
 
     @Test
-    fun `withSourceDeclarationOf(KClass) returns declarations with one of given receivers`() {
+    fun `withSourceDeclarationOf(KClass) returns declarations with one of given source declarations`() {
         // given
         val declaration1: KoSourceDeclarationProvider =
             mockk {
@@ -178,7 +178,7 @@ class KoSourceDeclarationProviderListExtTest {
     }
 
     @Test
-    fun `withSourceDeclarationOf(list of KClass) returns declarations with one of given receivers`() {
+    fun `withSourceDeclarationOf(list of KClass) returns declarations with one of given source declarations`() {
         // given
         val declaration1: KoSourceDeclarationProvider =
             mockk {
@@ -206,7 +206,7 @@ class KoSourceDeclarationProviderListExtTest {
     }
 
     @Test
-    fun `withSourceDeclarationOf(set of KClass) returns declarations with one of given receivers`() {
+    fun `withSourceDeclarationOf(set of KClass) returns declarations with one of given source declarations`() {
         // given
         val declaration1: KoSourceDeclarationProvider =
             mockk {
@@ -234,7 +234,7 @@ class KoSourceDeclarationProviderListExtTest {
     }
 
     @Test
-    fun `withoutSourceDeclarationOf(KClass) returns declaration without one of given receiver`() {
+    fun `withoutSourceDeclarationOf(KClass) returns declaration without one of given source declaration`() {
         // given
         val declaration1: KoSourceDeclarationProvider =
             mockk {
@@ -254,7 +254,7 @@ class KoSourceDeclarationProviderListExtTest {
     }
 
     @Test
-    fun `withoutSourceDeclarationOf(KClass) returns declaration without any of given receivers`() {
+    fun `withoutSourceDeclarationOf(KClass) returns declaration without any of given source declarations`() {
         // given
         val declaration1: KoSourceDeclarationProvider =
             mockk {
@@ -281,7 +281,7 @@ class KoSourceDeclarationProviderListExtTest {
     }
 
     @Test
-    fun `withoutSourceDeclarationOf(list of KClass) returns declaration without any of given receivers`() {
+    fun `withoutSourceDeclarationOf(list of KClass) returns declaration without any of given source declarations`() {
         // given
         val declaration1: KoSourceDeclarationProvider =
             mockk {
@@ -309,7 +309,7 @@ class KoSourceDeclarationProviderListExtTest {
     }
 
     @Test
-    fun `withoutSourceDeclarationOf(set of KClass) returns declaration without any of given receivers`() {
+    fun `withoutSourceDeclarationOf(set of KClass) returns declaration without any of given source declarations`() {
         // given
         val declaration1: KoSourceDeclarationProvider =
             mockk {
