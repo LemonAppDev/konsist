@@ -7,7 +7,8 @@ interface KoIsMutableTypeProvider : KoBaseProvider {
     /**
      * Determines whether the declaration is a mutable type.
      *
-     * This method only works if the type contains the "Mutable" string in its name.
+     * A mutable type is considered any type whose name starts with "Mutable",
+     * such as `MutableList`, `MutableStateFlow`, `MutableLiveData`, etc.
      */
     val isMutableType: Boolean
 }
