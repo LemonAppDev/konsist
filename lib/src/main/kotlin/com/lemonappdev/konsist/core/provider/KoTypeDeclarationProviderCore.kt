@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.provider
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
@@ -51,9 +52,15 @@ internal interface KoTypeDeclarationProviderCore :
 
     private fun getDeclarationWithFqn(declaration: KoBaseDeclaration): KoBaseDeclaration? =
         when {
-            declaration is KoFullyQualifiedNameProvider && declaration.fullyQualifiedName != null -> declaration
-            declaration is KoContainingDeclarationProvider -> getDeclarationWithFqn(declaration.containingDeclaration)
-            else -> null
+            declaration is KoFullyQualifiedNameProvider && declaration.fullyQualifiedName != null -> {
+                declaration
+            }
+            declaration is KoContainingDeclarationProvider && declaration !is KoFileDeclaration -> {
+                getDeclarationWithFqn(declaration.containingDeclaration)
+            }
+            else -> {
+                null
+            }
         }
 
     override fun asClassDeclaration(): KoClassDeclaration? = declaration as? KoClassDeclaration
@@ -184,6 +191,12 @@ internal interface KoTypeDeclarationProviderCore :
         when (predicate) {
             null -> asTypeParameterDeclaration() != null
             else -> asTypeParameterDeclaration()?.let { predicate(it) } ?: false
+        }
+
+    override fun hasStarProjectionDeclaration(predicate: ((KoStarProjectionDeclaration) -> Boolean)?): Boolean =
+        when (predicate) {
+            null -> asStarProjectionDeclaration() != null
+            else -> asStarProjectionDeclaration()?.let { predicate(it) } ?: false
         }
 
     override fun hasExternalTypeDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)?): Boolean =

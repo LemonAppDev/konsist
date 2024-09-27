@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
+import com.lemonappdev.konsist.core.provider.KoGenericTypeDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
@@ -23,7 +24,7 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
 
 internal class KoGenericTypeDeclarationCore private constructor(
-    private val ktUserType: KtUserType,
+    override val ktUserType: KtUserType,
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoGenericTypeDeclaration,
     KoBaseTypeDeclarationCore,
@@ -33,7 +34,8 @@ internal class KoGenericTypeDeclarationCore private constructor(
     KoLocationProviderCore,
     KoPathProviderCore,
     KoModuleProviderCore,
-    KoSourceSetProviderCore {
+    KoSourceSetProviderCore,
+    KoGenericTypeDeclarationProviderCore {
     override val psiElement: PsiElement by lazy { ktUserType }
 
     override val ktElement: KtElement by lazy { ktUserType }
