@@ -281,5 +281,5 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: dokka-html-doc.zip
+          name: dokka-html-doc
           path: ./lib/build/dokka/html/*
