@@ -276,7 +276,7 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
-      - name: Dokka Generate Html Doc
+      - name: Generate Dokka
         run: ./gradlew lib:dokkaHtml
 
       - uses: actions/upload-artifact@v4

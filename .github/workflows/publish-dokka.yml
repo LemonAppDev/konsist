@@ -1,0 +1,41 @@
+name: Check
+
+on:
+  push:
+    branches: [ main ]
+
+  pull_request:
+    types: [ opened, synchronize ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  publish-dokka:
+    name: Konsist Dokka
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'corretto'
+
+      - name: Generate Dokka
+        run: ./gradlew lib:dokkaHtml
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dokka-html-doc
+          path: lib/build/dokka/html*
+
+      - name: Publish documentation
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: lib/build/dokka/html
