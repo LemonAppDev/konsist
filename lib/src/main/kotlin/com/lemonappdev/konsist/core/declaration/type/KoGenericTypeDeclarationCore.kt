@@ -44,65 +44,6 @@ internal class KoGenericTypeDeclarationCore private constructor(
 
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
-    override val type: KoTypeDeclaration by lazy {
-        val ktNameReferenceExpression =
-            ktUserType
-                .children
-                .filterIsInstance<KtNameReferenceExpression>()
-                .firstOrNull()
-
-        require(ktNameReferenceExpression != null) { "Generic type cannot be null." }
-
-        KoTypeDeclarationCore.getInstance(ktNameReferenceExpression, this.castToKoBaseDeclaration())
-    }
-
-    override val typeArguments: List<KoTypeDeclaration> by lazy {
-        val ktTypeProjections =
-            ktUserType
-                .children
-                .filterIsInstance<KtTypeArgumentList>()
-                .flatMap { it.children.toList() }
-                .filterIsInstance<KtTypeProjection>()
-
-        val starProjections =
-            ktTypeProjections
-                .filter { it.projectionKind == KtProjectionKind.STAR }
-                .map { KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
-
-        val otherTypes =
-            ktTypeProjections
-                .flatMap { it.children.toList() }
-                .filterIsInstance<KtTypeReference>()
-                .map { KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
-
-        val types = starProjections + otherTypes
-
-        require(types.isNotEmpty()) { "Type argument cannot be empty list." }
-
-        types
-    }
-
-    override val typeArgumentsFlatten: List<KoTypeDeclaration> by lazy {
-        fun flattenTypeArguments(
-            arguments: List<KoTypeDeclaration>,
-            acc: MutableList<KoTypeDeclaration>,
-        ) {
-            arguments.forEach { currentArgument ->
-                if (currentArgument.declaration is KoGenericTypeDeclaration) {
-                    val genericDeclaration = currentArgument.declaration as KoGenericTypeDeclaration
-                    acc.add(genericDeclaration.type)
-                    flattenTypeArguments(genericDeclaration.typeArguments, acc)
-                } else {
-                    acc.add(currentArgument)
-                }
-            }
-        }
-
-        val arguments = mutableListOf<KoTypeDeclaration>()
-        flattenTypeArguments(typeArguments, arguments)
-        arguments
-    }
-
     override fun toString(): String = name
 
     internal companion object {
