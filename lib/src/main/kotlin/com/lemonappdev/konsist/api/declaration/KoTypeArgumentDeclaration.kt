@@ -19,9 +19,9 @@ import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvide
 interface KoTypeArgumentDeclaration :
     KoBaseDeclaration,
     KoBaseProvider {
-        val name: String
+    val name: String
 
-        val typeArgument: KoTypeArgumentDeclaration?
+    val typeArguments: List<KoTypeArgumentDeclaration>?
 
-        val sourceDeclaration: KoBaseTypeDeclaration
-    }
+    val sourceDeclaration: KoBaseTypeDeclaration
+}
