@@ -263,8 +263,8 @@ jobs:
 
 # ======================================= Other =========================================================
 
-  konsist-dokka:
-    name: Konsist Dokka
+  check-dokka:
+    name: Check Dokka
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -276,10 +276,10 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
-      - name: Dokka Generate Html Doc
+      - name: Generate Dokka
         run: ./gradlew lib:dokkaHtml
 
       - uses: actions/upload-artifact@v4
         with:
-          name: dokka-html-doc.jar
-          path: ./lib/build/dokka/*
+          name: dokka-html-doc
+          path: ./lib/build/dokka/html/*
