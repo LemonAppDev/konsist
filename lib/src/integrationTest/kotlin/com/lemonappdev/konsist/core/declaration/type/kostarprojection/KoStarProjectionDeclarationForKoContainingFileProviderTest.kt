@@ -17,6 +17,7 @@ class KoStarProjectionDeclarationForKoContainingFileProviderTest {
                 ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
+                ?.sourceDeclaration
 
         // then
         sut?.containingFile?.nameWithExtension shouldBeEqualTo "star-projection-containing-file.kt"

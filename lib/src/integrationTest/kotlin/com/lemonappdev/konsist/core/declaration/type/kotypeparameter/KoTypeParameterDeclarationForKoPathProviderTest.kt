@@ -329,6 +329,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -349,6 +350,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -371,6 +373,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -393,6 +396,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then

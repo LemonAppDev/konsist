@@ -17,6 +17,7 @@ class KoStarProjectionDeclarationForKoLocationProviderTest {
                 ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
+                ?.sourceDeclaration
 
         // then
         sut?.location shouldBeEqualTo "${sut?.path}:1:28"

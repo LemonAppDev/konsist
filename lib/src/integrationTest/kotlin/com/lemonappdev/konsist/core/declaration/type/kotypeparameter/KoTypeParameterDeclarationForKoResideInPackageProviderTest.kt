@@ -100,6 +100,7 @@ class KoTypeParameterDeclarationForKoResideInPackageProviderTest {
                 .asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
