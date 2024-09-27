@@ -14,6 +14,7 @@ import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.ext.list.parentInterfaces
 import com.lemonappdev.konsist.api.ext.list.primaryConstructors
 import com.lemonappdev.konsist.api.ext.list.properties
+import com.lemonappdev.konsist.api.ext.list.returnTypes
 import com.lemonappdev.konsist.api.ext.list.types
 import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
@@ -199,5 +200,13 @@ class GeneralSnippets {
             .classes()
             .parentInterfaces()
             .assertTrue { it.hasPublicModifier }
+    }
+
+    fun `return type of all functions are immutable`() {
+        Konsist
+            .scopeFromProject()
+            .functions()
+            .returnTypes
+            .assertFalse { it.isMutableType }
     }
 }

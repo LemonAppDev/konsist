@@ -1,0 +1,3 @@
+class SampleClass(val sampleProperty1: MutableSampleClass?)
+
+class MutableSampleClass
