@@ -1,9 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-
-@SampleAnnotation
-/*
- Some comment
- */
-private data object SampleObject {
-}
-

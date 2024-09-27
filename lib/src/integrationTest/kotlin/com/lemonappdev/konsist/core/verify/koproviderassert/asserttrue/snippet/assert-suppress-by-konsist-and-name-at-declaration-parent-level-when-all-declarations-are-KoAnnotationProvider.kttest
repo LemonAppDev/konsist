@@ -1,4 +1,0 @@
-@Suppress("konsist.assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider")
-class SampleClassWithoutModifier {
-    fun sampleFunctionWithoutModifier() {}
-}

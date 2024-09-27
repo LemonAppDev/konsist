@@ -1,3 +1,0 @@
-private abstract interface SampleInterface {
-    private interface SampleNestedInterface
-}

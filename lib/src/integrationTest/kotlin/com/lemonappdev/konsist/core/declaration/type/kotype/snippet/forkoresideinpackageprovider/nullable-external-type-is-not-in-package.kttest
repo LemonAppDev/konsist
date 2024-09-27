@@ -1,3 +1,0 @@
-import com.lemonappdev.konsist.externalsample.SampleExternalClass
-
-class SampleClass1(val sampleProperty1: SampleExternalClass?)

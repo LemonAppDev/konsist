@@ -1,5 +1,0 @@
-open class SampleClassWithModifier {
-    @Suppress("konsist.suppress-text")
-    fun sampleFunctionWithoutModifier() {
-    }
-}

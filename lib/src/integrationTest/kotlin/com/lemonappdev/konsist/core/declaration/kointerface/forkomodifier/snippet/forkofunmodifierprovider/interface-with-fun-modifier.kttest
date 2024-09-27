@@ -1,3 +1,0 @@
-fun interface SampleInterface {
-    fun singleAbstractMethod()
-}

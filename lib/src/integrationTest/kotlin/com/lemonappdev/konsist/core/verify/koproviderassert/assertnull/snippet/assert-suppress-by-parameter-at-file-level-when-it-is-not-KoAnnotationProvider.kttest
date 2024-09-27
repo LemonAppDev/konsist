@@ -1,7 +1,0 @@
-@file:Suppress("konsist.suppress-text")
-
-class SampleClassWithoutOtherProperty {
-    init {
-        val sampleProperty = 6
-    }
-}

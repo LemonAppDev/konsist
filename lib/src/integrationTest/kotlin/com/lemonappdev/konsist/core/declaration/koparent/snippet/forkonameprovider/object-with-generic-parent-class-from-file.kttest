@@ -1,3 +1,0 @@
-object SampleObject : SampleGenericSuperClass<Int>()
-
-open class SampleGenericSuperClass<T>

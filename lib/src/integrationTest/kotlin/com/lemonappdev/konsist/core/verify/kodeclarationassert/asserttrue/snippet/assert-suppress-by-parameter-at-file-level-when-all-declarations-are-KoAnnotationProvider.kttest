@@ -1,5 +1,0 @@
-@file:Suppress("suppress-text")
-
-class SampleClassWithIncorrectSuffix1 {
-    class SampleClassWithIncorrectSuffix2
-}

@@ -1,3 +1,0 @@
-object SampleObject: SampleParentClass()
-
-open class SampleParentClass

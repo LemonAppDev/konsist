@@ -1,4 +1,0 @@
-fun sampleFunction() {
-    fun sampleLocalFunction1() {
-    }
-}

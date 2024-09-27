@@ -1,3 +1,0 @@
-enum class SampleClass(sampleArgument: Int) {
-    SAMPLE_CONSTANT_1(sampleArgument = 0)
-}

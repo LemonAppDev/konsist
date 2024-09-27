@@ -1,4 +1,0 @@
-enum class SampleClass(sampleParameter: String) {
-    SAMPLE_CONSTANT(sampleParameter = """first line
-    second line""")
-}

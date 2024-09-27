@@ -1,7 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotationWithAngleBrackets
-
-class SampleClass {
-    @SampleAnnotationWithAngleBrackets<String, Int>
-    protected open fun invoke() {
-    }
-}

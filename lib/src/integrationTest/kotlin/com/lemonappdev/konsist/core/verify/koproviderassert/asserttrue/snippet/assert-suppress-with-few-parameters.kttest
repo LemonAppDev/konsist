@@ -1,5 +1,0 @@
-open class SampleClassWithModifier {
-    @Suppress("detekt.someRule", "assert-suppress-with-few-parameters")
-    fun sampleFunctionWithoutModifier() {
-    }
-}

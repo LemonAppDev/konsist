@@ -1,5 +1,0 @@
-@SampleAnnotation
-fun sampleFunction() {
-}
-
-annotation class SampleAnnotation

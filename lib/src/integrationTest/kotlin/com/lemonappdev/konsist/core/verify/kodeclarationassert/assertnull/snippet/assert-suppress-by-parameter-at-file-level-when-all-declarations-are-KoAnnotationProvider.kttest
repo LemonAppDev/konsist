@@ -1,5 +1,0 @@
-@file:Suppress("konsist.suppress-text")
-
-class SampleClassWithIncorrectSuffix1 {
-    class SampleClassWithIncorrectSuffix2
-}

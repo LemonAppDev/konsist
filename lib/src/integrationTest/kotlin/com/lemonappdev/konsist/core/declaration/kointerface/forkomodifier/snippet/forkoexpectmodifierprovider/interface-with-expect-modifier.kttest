@@ -1,3 +1,0 @@
-expect interface SampleInterface {
-    open fun sampleFunction(): String
-}

@@ -1,5 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-
-enum class SampleClass {
-    @SampleAnnotation SAMPLE_CONSTANT_1
-}

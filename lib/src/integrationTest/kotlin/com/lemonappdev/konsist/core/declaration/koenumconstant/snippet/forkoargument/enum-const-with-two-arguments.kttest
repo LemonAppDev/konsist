@@ -1,3 +1,0 @@
-enum class SampleClass(sampleParameter1: Int, sampleParameter2: Boolean) {
-    SAMPLE_CONSTANT(sampleParameter1 = 0, false)
-}

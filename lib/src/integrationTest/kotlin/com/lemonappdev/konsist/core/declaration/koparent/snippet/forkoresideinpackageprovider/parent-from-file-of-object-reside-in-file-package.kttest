@@ -1,5 +1,0 @@
-package com.samplepackage
-
-interface SampleSuperInterface
-
-object SampleObject: SampleSuperInterface

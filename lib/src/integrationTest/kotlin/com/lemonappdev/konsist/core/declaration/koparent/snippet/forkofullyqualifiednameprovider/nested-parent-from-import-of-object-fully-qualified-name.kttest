@@ -1,3 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleParentClassWithNestedDeclarations
-
-object SampleObject: SampleParentClassWithNestedDeclarations.SampleNestedClass()

@@ -1,8 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-
-val sampleProperty: String
-    get() {
-        val sampleVariable: @SampleAnnotation String = ""
-
-        return ""
-    }

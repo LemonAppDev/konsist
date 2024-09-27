@@ -1,8 +1,0 @@
-class SampleClass {
-    init {
-        /**
-         * Sample KDoc
-         */
-        val sampleVariable = ""
-    }
-}

@@ -1,6 +1,0 @@
-/**
- * This is a sample kdoc.
- *
- * @return sample text
- */
-fun sampleFunction(): String = ""

@@ -1,4 +1,0 @@
-var sampleProperty: String = "text"
-    internal set(value) {
-        if (true) field = value
-    }

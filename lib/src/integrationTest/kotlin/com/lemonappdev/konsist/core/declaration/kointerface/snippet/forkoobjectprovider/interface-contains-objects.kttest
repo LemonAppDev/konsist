@@ -1,5 +1,0 @@
-interface SampleInterface {
-    object SampleObject {
-        object SampleNestedObject
-    }
-}

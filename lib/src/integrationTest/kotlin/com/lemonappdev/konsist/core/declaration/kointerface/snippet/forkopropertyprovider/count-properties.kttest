@@ -1,7 +1,0 @@
-interface SampleInterface {
-    abstract val sampleProperty: String
-
-    class SampleClass {
-        internal val sampleNestedProperty = ""
-    }
-}

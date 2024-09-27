@@ -1,7 +1,0 @@
-/**
- * Sample description
- *
- * @receiver sample description
- */
-fun Int.sampleFunction() {
-}

@@ -1,5 +1,0 @@
-object SampleObject: SomeParentClass(
-    "some parent constructor param here"
-)
-
-open class SomeParentClass(val param: String)

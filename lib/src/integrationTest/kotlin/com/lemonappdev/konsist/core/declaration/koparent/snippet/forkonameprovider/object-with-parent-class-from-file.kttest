@@ -1,3 +1,0 @@
-object SampleObject: SampleSuperClass()
-
-open class SampleSuperClass

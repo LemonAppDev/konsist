@@ -1,3 +1,0 @@
-enum class SampleClass {
-    SAMPLE_CONSTANT
-}

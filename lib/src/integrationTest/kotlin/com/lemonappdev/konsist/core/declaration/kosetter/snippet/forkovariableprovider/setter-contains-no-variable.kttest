@@ -1,7 +1,0 @@
-var sampleProperty: String = "text"
-    set(value) {
-        fun sampleLocalFunction() {
-        }
-
-        if (true) field = value
-    }

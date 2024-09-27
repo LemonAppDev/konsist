@@ -1,6 +1,0 @@
-var sampleProperty: String = "text"
-    set(value) {
-        println("Some text")
-
-        if (true) field = value
-    }

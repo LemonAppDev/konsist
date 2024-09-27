@@ -1,5 +1,0 @@
-class SampleClass {
-    init {
-        val sampleVariable = ""
-    }
-}

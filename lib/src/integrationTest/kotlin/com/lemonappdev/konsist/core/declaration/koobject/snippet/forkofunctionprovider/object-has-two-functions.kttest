@@ -1,7 +1,0 @@
-object SampleObject {
-    fun sampleFunction1() {
-    }
-
-    fun sampleFunction2() {
-    }
-}

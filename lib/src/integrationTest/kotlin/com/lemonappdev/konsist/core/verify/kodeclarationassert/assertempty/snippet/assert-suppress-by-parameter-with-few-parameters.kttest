@@ -1,5 +1,0 @@
-class SampleClassText {
-    @Suppress("detekt.someRule", "konsist.suppress-text")
-    fun sampleFunctionWithIncorrectSuffix() {
-    }
-}

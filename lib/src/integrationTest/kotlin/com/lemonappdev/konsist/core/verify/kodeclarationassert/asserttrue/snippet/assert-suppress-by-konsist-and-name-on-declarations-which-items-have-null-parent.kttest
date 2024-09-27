@@ -1,3 +1,0 @@
-@file:Suppress("konsist.assert-suppress-by-konsist-and-name-on-declarations-which-items-have-null-parent")
-
-class SampleClass

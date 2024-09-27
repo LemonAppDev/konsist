@@ -1,5 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-
-@SampleAnnotation // sample comment
-public abstract interface SampleInterface {
-}

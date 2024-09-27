@@ -1,6 +1,0 @@
-object SampleTopLevelObject {
-    object SampleObject1
-
-    object SampleObject2
-
-}

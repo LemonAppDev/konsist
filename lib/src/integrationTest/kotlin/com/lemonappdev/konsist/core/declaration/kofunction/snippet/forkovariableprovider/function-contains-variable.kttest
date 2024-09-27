@@ -1,5 +1,0 @@
-fun sampleFunction() {
-    val sampleVariable1 = ""
-
-    var sampleVariable2 = 0
-}

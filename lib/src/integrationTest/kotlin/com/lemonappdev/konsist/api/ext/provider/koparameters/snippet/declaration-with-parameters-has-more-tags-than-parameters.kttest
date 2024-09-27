@@ -1,7 +1,0 @@
-/**
- * Sample description
- *
- * @param sampleParameter1
- * @param sampleParameter2
- */
-fun sampleFunction(sampleParameter1: Int) {}

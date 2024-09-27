@@ -1,6 +1,0 @@
-/**
- * Sample description
- *
- * @param sampleParameter
- */
-fun sampleFunction() {}

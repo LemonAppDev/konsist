@@ -1,7 +1,0 @@
-/**
- * Sample description
- *
- * @property sampleProperty
- * @property sampleProperty
- */
-class SampleClass(val sampleProperty: Int)

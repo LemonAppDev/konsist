@@ -1,7 +1,0 @@
-class SampleClass : SuperClass() {
-    override fun sampleFunction() {}
-}
-
-open class SuperClass {
-    open fun sampleFunction() {}
-}

@@ -1,4 +1,0 @@
-actual interface SampleInterface {
-    actual fun sampleFunction() {
-    }
-}

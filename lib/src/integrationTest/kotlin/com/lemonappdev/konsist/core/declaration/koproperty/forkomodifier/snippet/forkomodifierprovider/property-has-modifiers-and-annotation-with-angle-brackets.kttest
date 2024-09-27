@@ -1,6 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotationWithAngleBrackets
-
-open class SampleClass {
-    @SampleAnnotationWithAngleBrackets<Int, String>
-    protected open val sampleProperty: Boolean = true
-}

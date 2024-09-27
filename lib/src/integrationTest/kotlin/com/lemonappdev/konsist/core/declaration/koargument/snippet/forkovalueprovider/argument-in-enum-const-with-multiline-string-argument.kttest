@@ -1,4 +1,0 @@
-enum class SampleClass(sampleArgument: String) {
-    SAMPLE_CONSTANT_1(sampleArgument = """first line
-    second line""")
-}

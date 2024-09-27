@@ -1,3 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleInterface
-
-class SampleClass1(val sampleProperty1: SampleInterface)

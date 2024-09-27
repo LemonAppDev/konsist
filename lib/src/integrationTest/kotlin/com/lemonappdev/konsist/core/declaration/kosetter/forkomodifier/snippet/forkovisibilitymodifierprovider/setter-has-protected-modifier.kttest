@@ -1,6 +1,0 @@
-open class SampleClass{
-    var sampleProperty: String = "text"
-        protected set(value) {
-            if (true) field = value
-        }
-}

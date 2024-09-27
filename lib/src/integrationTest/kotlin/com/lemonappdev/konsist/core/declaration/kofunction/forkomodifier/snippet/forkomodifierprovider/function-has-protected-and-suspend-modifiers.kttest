@@ -1,4 +1,0 @@
-open class SampleClass {
-    protected suspend fun sampleFunction() {
-    }
-}

@@ -1,6 +1,0 @@
-enum class SampleClass {
-    SAMPLE_CONSTANT_1 {
-        /** Sample KDoc */
-        val sampleVariable = ""
-    };
-}

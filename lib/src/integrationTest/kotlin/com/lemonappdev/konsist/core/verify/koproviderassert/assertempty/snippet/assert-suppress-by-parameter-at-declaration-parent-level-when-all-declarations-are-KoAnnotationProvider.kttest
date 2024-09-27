@@ -1,4 +1,0 @@
-@Suppress("suppress-text")
-class SampleClassWithoutModifier {
-    fun sampleFunctionWithoutModifier() {}
-}

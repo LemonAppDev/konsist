@@ -1,5 +1,0 @@
-/**
- * Sample description
- */
-fun Int.sampleFunction() {
-}

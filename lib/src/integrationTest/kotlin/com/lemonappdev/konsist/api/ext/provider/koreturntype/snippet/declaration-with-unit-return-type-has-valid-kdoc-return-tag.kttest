@@ -1,6 +1,0 @@
-/**
- * Sample description
- */
-fun sampleFunction(): Unit {
-    ""
-}

@@ -1,4 +1,0 @@
-class SampleClass {
-    inner class InnerClass {
-    }
-}

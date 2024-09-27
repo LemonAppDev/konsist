@@ -1,4 +1,0 @@
-import com.lemonappdev.konsist.externalsample.SampleExternalClass
-import com.lemonappdev.konsist.externalsample.SampleExternalInterface
-
-object SampleObject : SampleExternalClass(), SampleExternalInterface

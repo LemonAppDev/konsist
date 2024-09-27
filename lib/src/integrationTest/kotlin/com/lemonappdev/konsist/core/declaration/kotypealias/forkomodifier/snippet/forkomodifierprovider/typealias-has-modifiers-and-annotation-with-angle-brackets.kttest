@@ -1,6 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotationWithAngleBrackets
-
-@SampleAnnotationWithAngleBrackets<Int, String>
-private typealias SampleTypeAlias = (Boolean) -> Int
-
-class SampleClass(val sampleProperty: SampleTypeAlias)

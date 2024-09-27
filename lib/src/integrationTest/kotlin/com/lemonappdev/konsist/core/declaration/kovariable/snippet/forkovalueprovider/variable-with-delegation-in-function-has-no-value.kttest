@@ -1,5 +1,0 @@
-fun sampleFunction() {
-    val sampleProperty by lazy {
-        val x = 0
-    }
-}

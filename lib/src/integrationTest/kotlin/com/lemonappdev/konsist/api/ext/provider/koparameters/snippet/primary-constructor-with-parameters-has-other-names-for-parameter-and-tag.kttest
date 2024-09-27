@@ -1,6 +1,0 @@
-/**
- * Sample description
- *
- * @param otherParameter
- */
-class SampleClass(sampleParameter: Int)

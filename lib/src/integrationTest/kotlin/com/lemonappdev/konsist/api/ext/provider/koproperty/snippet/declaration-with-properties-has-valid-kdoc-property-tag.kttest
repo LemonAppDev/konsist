@@ -1,9 +1,0 @@
-/**
- * Sample description
- *
- * @property sampleConstructorProperty
- * @property sampleBodyProperty
- */
-class SampleClass(val sampleConstructorProperty: Int) {
-    val sampleBodyProperty = ""
-}

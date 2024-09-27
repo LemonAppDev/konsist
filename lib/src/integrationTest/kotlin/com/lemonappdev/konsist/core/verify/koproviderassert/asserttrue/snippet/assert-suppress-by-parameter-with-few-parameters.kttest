@@ -1,5 +1,0 @@
-open class SampleClassWithModifier {
-    @Suppress("detekt.someRule", "suppress-text")
-    fun sampleFunctionWithoutModifier() {
-    }
-}

@@ -1,5 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-
-typealias SampleTypeAlias = @SampleAnnotation () -> Int
-
-class SampleClass1(val sampleProperty1: SampleTypeAlias)

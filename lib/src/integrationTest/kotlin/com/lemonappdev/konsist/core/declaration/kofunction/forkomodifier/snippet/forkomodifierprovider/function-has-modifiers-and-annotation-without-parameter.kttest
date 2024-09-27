@@ -1,7 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-
-class SampleClass {
-    @SampleAnnotation
-    protected open fun invoke() {
-    }
-}

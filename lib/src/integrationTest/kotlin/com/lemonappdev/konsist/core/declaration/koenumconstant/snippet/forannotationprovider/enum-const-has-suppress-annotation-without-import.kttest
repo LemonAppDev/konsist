@@ -1,4 +1,0 @@
-enum class SampleClass {
-    @Suppress
-    SAMPLE_CONSTANT_1
-}

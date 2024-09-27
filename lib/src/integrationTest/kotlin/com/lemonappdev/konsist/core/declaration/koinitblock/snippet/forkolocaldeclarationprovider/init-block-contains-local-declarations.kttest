@@ -1,9 +1,0 @@
-class SampleClass {
-    init {
-        val sampleLocalProperty: Boolean = true
-
-        fun sampleLocalFunction() { }
-
-        class SampleLocalClass
-    }
-}

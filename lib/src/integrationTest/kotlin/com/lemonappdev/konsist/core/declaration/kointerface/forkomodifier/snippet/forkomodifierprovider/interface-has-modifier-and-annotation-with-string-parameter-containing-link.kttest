@@ -1,5 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
-
-@SampleAnnotationWithParameter("Link: https://some/link")
-private interface SampleInterface {
-}

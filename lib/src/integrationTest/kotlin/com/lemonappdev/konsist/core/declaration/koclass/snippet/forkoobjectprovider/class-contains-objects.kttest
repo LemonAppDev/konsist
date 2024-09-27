@@ -1,5 +1,0 @@
-class SampleTopLevelClass {
-    object SampleObject {
-        object SampleNestedObject
-    }
-}

@@ -1,3 +1,0 @@
-package com.lemonappdev.konsist.architecture.optionalparameters.project.presentation
-
-class PresentationFirstClass

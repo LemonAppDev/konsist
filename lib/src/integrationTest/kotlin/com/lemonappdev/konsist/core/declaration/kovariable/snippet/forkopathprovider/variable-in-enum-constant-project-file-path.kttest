@@ -1,5 +1,0 @@
-enum class SampleClass {
-    SAMPLE_CONSTANT_1 {
-        val sampleVariable = ""
-    };
-}

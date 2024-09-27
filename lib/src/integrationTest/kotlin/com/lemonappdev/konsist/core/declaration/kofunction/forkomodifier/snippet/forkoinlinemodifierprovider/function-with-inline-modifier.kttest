@@ -1,2 +1,0 @@
-inline fun sampleFunction(sampleProperty: () -> Unit) {
-}

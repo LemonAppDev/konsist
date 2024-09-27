@@ -1,8 +1,0 @@
-/**
- * Sample description
- *
- * @property sampleParameter
- */
-class SampleClass(sampleParameter: Int) {
-    fun sampleFunction() {}
-}

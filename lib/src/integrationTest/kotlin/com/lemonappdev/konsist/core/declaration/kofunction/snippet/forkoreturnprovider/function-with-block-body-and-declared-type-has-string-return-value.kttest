@@ -1,3 +1,0 @@
-fun sampleFunction(): String {
-    return "some text"
-}

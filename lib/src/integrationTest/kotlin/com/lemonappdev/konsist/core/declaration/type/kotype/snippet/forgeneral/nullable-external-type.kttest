@@ -1,5 +1,0 @@
-package com.lemonappdev.konsist.core.declaration.type.kotype.snippet.forgeneral
-
-import com.lemonappdev.konsist.externalsample.SampleExternalClass
-
-class SampleClass1(val sampleProperty1: SampleExternalClass?)

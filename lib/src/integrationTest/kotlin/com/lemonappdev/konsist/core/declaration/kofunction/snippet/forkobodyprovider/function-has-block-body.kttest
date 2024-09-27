@@ -1,3 +1,0 @@
-fun sampleFunction(): Int {
-    return 0
-}
