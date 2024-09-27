@@ -263,8 +263,8 @@ jobs:
 
 # ======================================= Other =========================================================
 
-  generate-dokka:
-    name: Konsist Dokka
+  check-dokka:
+    name: Check Dokka
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

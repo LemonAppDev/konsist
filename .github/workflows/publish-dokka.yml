@@ -33,7 +33,7 @@ jobs:
           name: dokka-html-doc
           path: lib/build/dokka/html*
 
-      - name: Publish documentation
+      - name: Publish dokka
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
