@@ -263,7 +263,7 @@ jobs:
 
 # ======================================= Other =========================================================
 
-  konsist-dokka:
+  generate-dokka:
     name: Konsist Dokka
     runs-on: ubuntu-latest
     steps:
@@ -281,5 +281,5 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: dokka-html-doc.jar
-          path: ./lib/build/dokka/*
+          name: dokka-html-doc.zip
+          path: ./lib/build/dokka/html/*
