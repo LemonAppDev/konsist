@@ -19,6 +19,11 @@
       ],
       "matchCurrentVersion": "!/^0/",
       "automerge": true
+    },
+    {
+      "matchPackagePatterns": ["^org\\.jetbrains\\.kotlin:"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true
     }
   ]
 }
