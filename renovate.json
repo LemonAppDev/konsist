@@ -11,6 +11,7 @@
   "automergeType": "pr",
   "automergeStrategy": "squash",
   "platformAutomerge": true,
+  "labels": ["maintenance"],
   "packageRules": [
     {
       "matchUpdateTypes": [
