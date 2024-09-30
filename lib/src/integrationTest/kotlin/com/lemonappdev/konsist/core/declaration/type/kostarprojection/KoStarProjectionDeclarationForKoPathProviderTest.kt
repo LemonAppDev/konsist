@@ -19,6 +19,7 @@ class KoStarProjectionDeclarationForKoPathProviderTest {
                 ?.typeArguments
                 ?.firstOrNull()
         ?.sourceDeclaration
+        ?.asStarProjectionDeclaration()
 
         // then
         assertSoftly(sut?.path) {
@@ -39,6 +40,7 @@ class KoStarProjectionDeclarationForKoPathProviderTest {
                 ?.typeArguments
                 ?.firstOrNull()
         ?.sourceDeclaration
+        ?.asStarProjectionDeclaration()
 
         // then
         sut
@@ -61,6 +63,7 @@ class KoStarProjectionDeclarationForKoPathProviderTest {
                 ?.typeArguments
                 ?.firstOrNull()
         ?.sourceDeclaration
+        ?.asStarProjectionDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -83,6 +86,7 @@ class KoStarProjectionDeclarationForKoPathProviderTest {
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration
+        ?.asStarProjectionDeclaration()
 
         // then
         assertSoftly(sut) {

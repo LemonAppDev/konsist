@@ -19,6 +19,7 @@ class KoStarProjectionDeclarationForKoContainingDeclarationProviderTest {
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration
+                ?.asStarProjectionDeclaration()
 
         // then
         (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo "List<*>"

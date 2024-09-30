@@ -19,6 +19,7 @@ class KoStarProjectionDeclarationForKoTextProviderTest {
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration
+                ?.asStarProjectionDeclaration()
 
         // then
         assertSoftly(sut) {

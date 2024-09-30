@@ -17,6 +17,7 @@ class KoStarProjectionDeclarationTest {
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration
+                ?.asStarProjectionDeclaration()
 
         // then
         sut.toString() shouldBeEqualTo "*"
