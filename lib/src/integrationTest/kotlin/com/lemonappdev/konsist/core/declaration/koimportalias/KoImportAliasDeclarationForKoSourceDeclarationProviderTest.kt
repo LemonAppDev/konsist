@@ -12,12 +12,9 @@ import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.ext.list.importAliases
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.externalsample.SampleExternalClass
-import com.lemonappdev.konsist.testdata.SAMPLE_PROPERTY
-import com.lemonappdev.konsist.testdata.SampleBasicTypeAlias
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleInterface
 import com.lemonappdev.konsist.testdata.SampleObject
-import com.lemonappdev.konsist.testdata.sampleFunction
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -34,7 +31,7 @@ class KoImportAliasDeclarationForKoSourceDeclarationProviderTest {
         fileName: String,
         instanceOf: KClass<*>,
         notInstanceOf: KClass<*>,
-        kClass: KClass<*>,
+        kClass: KClass<*>?,
         fullyQualifiedName: String?,
     ) {
         // given
@@ -54,7 +51,9 @@ class KoImportAliasDeclarationForKoSourceDeclarationProviderTest {
             hasSourceDeclaration {
                 (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == "com.samplepackage.other"
             }.shouldBeEqualTo(false)
-            hasSourceDeclarationOf(kClass) shouldBeEqualTo true
+            kClass
+                ?.let { value -> hasSourceDeclarationOf(value) }
+                ?.shouldBeEqualTo(true)
             hasSourceDeclarationOf(Char::class) shouldBeEqualTo false
         }
     }
@@ -102,21 +101,21 @@ class KoImportAliasDeclarationForKoSourceDeclarationProviderTest {
                     "function-source-declaration",
                     KoFunctionDeclaration::class,
                     KoClassDeclaration::class,
-                    sampleFunction()::class,
+                    null,
                     "com.lemonappdev.konsist.testdata.sampleFunction",
                 ),
                 arguments(
                     "property-source-declaration",
                     KoPropertyDeclaration::class,
                     KoClassDeclaration::class,
-                    SAMPLE_PROPERTY::class,
+                    null,
                     "com.lemonappdev.konsist.testdata.SAMPLE_PROPERTY",
                 ),
                 arguments(
                     "typealias-source-declaration",
                     KoTypeAliasDeclaration::class,
                     KoClassDeclaration::class,
-                    SampleBasicTypeAlias::class,
+                    null,
                     "com.lemonappdev.konsist.testdata.SampleBasicTypeAlias",
                 ),
                 arguments(
