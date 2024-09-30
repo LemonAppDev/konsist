@@ -472,12 +472,12 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.typeArguments?.firstOrNull()?.sourceDeclaration?.declaration shouldBeInstanceOf KoGenericTypeDeclaration::class
+            it?.typeArguments?.firstOrNull()?.sourceDeclaration?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "Set<String>"
 //            it?.typeArgumentsFlatten?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("Set", "String")
 
             it?.numTypeArguments shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isGenericType } shouldBeEqualTo 1
+            it?.countTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration.isClass } shouldBeEqualTo 0
             it?.hasTypeArgumentWithName("Set<String>", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
@@ -499,9 +499,9 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
             it?.hasAllTypeArgumentsOf(listOf(Set::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(Set::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isGenericType } shouldBeEqualTo true
+            it?.hasTypeArgument { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isGenericType } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo true
             it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
 
 //            it?.numTypeArgumentsFlatten shouldBeEqualTo 2

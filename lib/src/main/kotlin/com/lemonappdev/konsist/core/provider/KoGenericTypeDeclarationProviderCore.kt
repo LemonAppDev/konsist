@@ -65,7 +65,7 @@ internal interface KoGenericTypeDeclarationProviderCore :
                  KoTypeArgumentDeclarationCore(
                         it.name,
                         if (it.isGenericType) it.asGenericTypeDeclaration()?.typeArguments else null,
-                      it,
+                     if (it.isGenericType) it.asGenericTypeDeclaration()?.type ?: it else it,
                     )
 
             }
@@ -119,7 +119,7 @@ internal interface KoGenericTypeDeclarationProviderCore :
             else ->
                 names.any { name ->
                     typeArguments.any { typeArgument ->
-                        name.qualifiedName == (typeArgument.sourceDeclaration.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+                        name.qualifiedName == (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
                     }
                 }
         }
@@ -135,7 +135,7 @@ internal interface KoGenericTypeDeclarationProviderCore :
             else ->
                 names.all { name ->
                     typeArguments.any { typeArgument ->
-                        name.qualifiedName == (typeArgument.sourceDeclaration.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+                        name.qualifiedName == (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
                     }
                 }
         }

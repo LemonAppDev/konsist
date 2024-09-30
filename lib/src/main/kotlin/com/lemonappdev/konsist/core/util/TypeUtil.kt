@@ -137,7 +137,7 @@ object TypeUtil {
                 ?.any { it == typeText }
 
         return when {
-            nestedType is KtTypeProjection -> KoStarProjectionDeclarationCore.getInstance(nestedType, containingFile)
+            nestedType is KtTypeProjection -> KoStarProjectionDeclarationCore.getInstance(nestedType, parentDeclaration)
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
             nestedType is KtUserType && typeText != null -> {
                 if (nestedType.children.filterIsInstance<KtTypeArgumentList>().isNotEmpty()) {
