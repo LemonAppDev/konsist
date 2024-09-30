@@ -26,8 +26,14 @@ testImplementation "com.lemonappdev:konsist:0.16.1"
 </dependency>
 ```
 
-Check the [Konsist documentation](https://docs.konsist.lemonappdev.com/) to learn more about Konsist and take a 
-look at [getting started guide](https://docs.konsist.lemonappdev.com/getting-started/getting-started).
+## Getting Started
+
+To begin using Konsist in your project, consider these steps:
+
+1. See [Konsist Documentation](https://docs.konsist.lemonappdev.com/) to Familiarize yourself with Konsist's 
+   features and usage guidelines.
+2. Check [Starter Projects](https://github.com/LemonAppDev/konsist/tree/main/samples/starter-projects) to see Konsist in action.
+3. Review [Konsist API Reference](https://reference.konsist.lemonappdev.com) to learn about the available API methods.
 
 ## Examples
 
