@@ -30,7 +30,7 @@ testImplementation "com.lemonappdev:konsist:0.16.1"
 
 To begin using Konsist in your project, consider these steps:
 
-1. See [Konsist Documentation](https://docs.konsist.lemonappdev.com/) to Familiarize yourself with Konsist's 
+1. See [Konsist Documentation](https://docs.konsist.lemonappdev.com/) to familiarize yourself with Konsist's 
    features and usage guidelines.
 2. Check [Starter Projects](https://github.com/LemonAppDev/konsist/tree/main/samples/starter-projects) to see Konsist in action.
 3. Review [Konsist API Reference](https://reference.konsist.lemonappdev.com) to learn about the available API methods.
