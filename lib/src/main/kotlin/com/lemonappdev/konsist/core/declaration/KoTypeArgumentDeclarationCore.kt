@@ -9,4 +9,6 @@ data class KoTypeArgumentDeclarationCore(
     override val typeArguments: List<KoTypeArgumentDeclaration>?,
     override val sourceDeclaration: KoTypeDeclaration,
 ) : KoTypeArgumentDeclaration,
-    KoBaseProviderCore
+    KoBaseProviderCore, {
+    override fun toString(): String = name
+}
