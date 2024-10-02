@@ -1,3 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleClass
-
-val sampleProperty: Map<SampleClass, List<String>> = emptyMap()
