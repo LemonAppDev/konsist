@@ -1,13 +1,10 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoGenericTypeDeclarationProvider
 import com.lemonappdev.konsist.core.declaration.KoTypeArgumentDeclarationCore
-import com.lemonappdev.konsist.core.declaration.type.KoStarProjectionDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.util.TypeUtil.hasTypeOf
@@ -62,12 +59,11 @@ internal interface KoGenericTypeDeclarationProviderCore :
             require(types.isNotEmpty()) { "Type argument cannot be empty list." }
 
             return types.map {
-                 KoTypeArgumentDeclarationCore(
-                        it.name,
-                        if (it.isGenericType) it.asGenericTypeDeclaration()?.typeArguments else null,
-                     if (it.isGenericType) it.asGenericTypeDeclaration()?.type ?: it else it,
-                    )
-
+                KoTypeArgumentDeclarationCore(
+                    it.name,
+                    if (it.isGenericType) it.asGenericTypeDeclaration()?.typeArguments else null,
+                    if (it.isGenericType) it.asGenericTypeDeclaration()?.type ?: it else it,
+                )
             }
         }
 
@@ -119,7 +115,9 @@ internal interface KoGenericTypeDeclarationProviderCore :
             else ->
                 names.any { name ->
                     typeArguments.any { typeArgument ->
-                        name.qualifiedName == (typeArgument.sourceDeclaration.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+                        name.qualifiedName ==
+                            (typeArgument.sourceDeclaration.declaration as? KoFullyQualifiedNameProvider)
+                                ?.fullyQualifiedName
                     }
                 }
         }
@@ -135,7 +133,9 @@ internal interface KoGenericTypeDeclarationProviderCore :
             else ->
                 names.all { name ->
                     typeArguments.any { typeArgument ->
-                        name.qualifiedName == (typeArgument.sourceDeclaration.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+                        name.qualifiedName ==
+                            (typeArgument.sourceDeclaration.declaration as? KoFullyQualifiedNameProvider)
+                                ?.fullyQualifiedName
                     }
                 }
         }

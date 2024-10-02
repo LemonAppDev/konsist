@@ -70,7 +70,11 @@ class KoTypeArgumentDeclarationTest {
             it?.name shouldBeEqualTo "Map<List<String>, Int>"
             it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("List<String>", "Int")
             it?.typeArguments?.map { typeArgument -> typeArgument.sourceDeclaration.name } shouldBeEqualTo listOf("List", "Int")
-            it?.typeArguments?.firstOrNull()?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
+            it
+                ?.typeArguments
+                ?.firstOrNull()
+                ?.typeArguments
+                ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
             it?.sourceDeclaration?.name shouldBeEqualTo "Map"
             it?.sourceDeclaration?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
         }

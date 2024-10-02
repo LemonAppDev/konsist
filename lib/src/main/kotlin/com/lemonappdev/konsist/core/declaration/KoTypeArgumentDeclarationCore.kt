@@ -14,5 +14,6 @@ data class KoTypeArgumentDeclarationCore(
     KoBaseProviderCore,
     KoNameProviderCore {
     override val ktElement: KtElement? by lazy { null }
+
     override fun toString(): String = name
 }

@@ -8,7 +8,6 @@ import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.externalsample.SampleExternalClass
 import com.lemonappdev.konsist.externalsample.SampleExternalGenericClass
@@ -168,7 +167,11 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.typeArguments?.firstOrNull()?.sourceDeclaration?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
+            it
+                ?.typeArguments
+                ?.firstOrNull()
+                ?.sourceDeclaration
+                ?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "String"
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo 1
@@ -197,7 +200,6 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
             it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo true
             it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
-
         }
     }
 
@@ -213,7 +215,11 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.typeArguments?.firstOrNull()?.sourceDeclaration?.declaration shouldBeInstanceOf KoClassDeclaration::class
+            it
+                ?.typeArguments
+                ?.firstOrNull()
+                ?.sourceDeclaration
+                ?.declaration shouldBeInstanceOf KoClassDeclaration::class
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleClass"
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration.isClass } shouldBeEqualTo 1
@@ -257,7 +263,11 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.typeArguments?.firstOrNull()?.sourceDeclaration?.declaration shouldBeInstanceOf KoInterfaceDeclaration::class
+            it
+                ?.typeArguments
+                ?.firstOrNull()
+                ?.sourceDeclaration
+                ?.declaration shouldBeInstanceOf KoInterfaceDeclaration::class
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleInterface"
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration.isInterface } shouldBeEqualTo 1
@@ -301,7 +311,11 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.typeArguments?.firstOrNull()?.sourceDeclaration?.declaration shouldBeInstanceOf KoObjectDeclaration::class
+            it
+                ?.typeArguments
+                ?.firstOrNull()
+                ?.sourceDeclaration
+                ?.declaration shouldBeInstanceOf KoObjectDeclaration::class
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleObject"
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration.isObject } shouldBeEqualTo 1
@@ -345,7 +359,11 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.typeArguments?.firstOrNull()?.sourceDeclaration?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
+            it
+                ?.typeArguments
+                ?.firstOrNull()
+                ?.sourceDeclaration
+                ?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "Set<String>"
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo 1
@@ -427,7 +445,11 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.typeArguments?.firstOrNull()?.sourceDeclaration?.declaration shouldBeInstanceOf KoFunctionTypeDeclaration::class
+            it
+                ?.typeArguments
+                ?.firstOrNull()
+                ?.sourceDeclaration
+                ?.declaration shouldBeInstanceOf KoFunctionTypeDeclaration::class
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "() -> Unit"
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration.isFunctionType } shouldBeEqualTo 1
@@ -465,7 +487,11 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.typeArguments?.firstOrNull()?.sourceDeclaration?.declaration shouldBeInstanceOf KoImportAliasDeclaration::class
+            it
+                ?.typeArguments
+                ?.firstOrNull()
+                ?.sourceDeclaration
+                ?.declaration shouldBeInstanceOf KoImportAliasDeclaration::class
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "ImportAlias"
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration.isImportAlias } shouldBeEqualTo 1
@@ -503,7 +529,11 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.typeArguments?.firstOrNull()?.sourceDeclaration?.declaration shouldBeInstanceOf KoTypeAliasDeclaration::class
+            it
+                ?.typeArguments
+                ?.firstOrNull()
+                ?.sourceDeclaration
+                ?.declaration shouldBeInstanceOf KoTypeAliasDeclaration::class
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleTypeAlias"
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration.isTypeAlias } shouldBeEqualTo 1
@@ -541,7 +571,11 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.typeArguments?.firstOrNull()?.sourceDeclaration?.declaration shouldBeInstanceOf KoExternalDeclaration::class
+            it
+                ?.typeArguments
+                ?.firstOrNull()
+                ?.sourceDeclaration
+                ?.declaration shouldBeInstanceOf KoExternalDeclaration::class
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleExternalClass"
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo 1
