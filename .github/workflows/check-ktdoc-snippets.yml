@@ -13,6 +13,12 @@ jobs:
     name: Get Branches And Changed Files
     runs-on: ubuntu-latest
 
+    # Allow the workflow to read the contents of the repository and pull request to be
+    # able to retrieve list of changed files when PR is opened from forked repository.
+    permissions:
+      contents: read
+      pull-requests: read
+
     steps:
       - name: Get branch name
         id: branch-name
