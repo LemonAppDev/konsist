@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.verify.koproviderassert.assertempty
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.list.localDeclarations
+import com.lemonappdev.konsist.api.ext.list.provider.localDeclarations
 import com.lemonappdev.konsist.api.provider.KoLocalDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider

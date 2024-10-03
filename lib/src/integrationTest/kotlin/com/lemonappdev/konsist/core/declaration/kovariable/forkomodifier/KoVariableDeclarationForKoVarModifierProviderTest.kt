@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kovariable.forkomodifier
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.list.variables
+import com.lemonappdev.konsist.api.ext.list.provider.variables
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 

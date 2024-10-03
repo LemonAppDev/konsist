@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core.verify.kodeclarationassert.asserttrue
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.list.initBlocks
-import com.lemonappdev.konsist.api.ext.list.localFunctions
+import com.lemonappdev.konsist.api.ext.list.provider.initBlocks
+import com.lemonappdev.konsist.api.ext.list.provider.localFunctions
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
 

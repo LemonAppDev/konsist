@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.kotypeargument
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.ext.list.declaration.flatten
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -46,6 +47,10 @@ class KoTypeArgumentDeclarationTest {
             it?.name shouldBeEqualTo "Set<String>"
             it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
             it?.typeArguments?.map { typeArgument -> typeArgument.sourceDeclaration.name } shouldBeEqualTo listOf("String")
+            it
+                ?.typeArguments
+                ?.flatten()
+                ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
             it?.typeArguments?.firstOrNull()?.typeArguments shouldBeEqualTo null
             it?.sourceDeclaration?.name shouldBeEqualTo "Set"
             it?.sourceDeclaration?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
@@ -74,6 +79,16 @@ class KoTypeArgumentDeclarationTest {
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.typeArguments
+                ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
+            it
+                ?.typeArguments
+                ?.flatten()
+                ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("List<String>", "String", "Int")
+            it
+                ?.typeArguments
+                ?.firstOrNull()
+                ?.typeArguments
+                ?.flatten()
                 ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
             it?.sourceDeclaration?.name shouldBeEqualTo "Map"
             it?.sourceDeclaration?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class

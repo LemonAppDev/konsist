@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.api.ext.provider.korepresentstype
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.ext.list.annotations
-import com.lemonappdev.konsist.api.ext.list.parameters
+import com.lemonappdev.konsist.api.ext.list.provider.annotations
+import com.lemonappdev.konsist.api.ext.list.provider.parameters
 import com.lemonappdev.konsist.api.ext.provider.representsTypeOf
 import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation

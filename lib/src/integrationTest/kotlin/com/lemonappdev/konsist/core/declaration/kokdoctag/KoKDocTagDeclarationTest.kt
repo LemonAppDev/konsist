@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kokdoctag
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.list.kDocs
+import com.lemonappdev.konsist.api.ext.list.provider.kDocs
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 

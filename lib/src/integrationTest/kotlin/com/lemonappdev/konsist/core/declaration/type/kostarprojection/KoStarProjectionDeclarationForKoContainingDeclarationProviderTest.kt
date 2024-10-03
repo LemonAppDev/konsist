@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.type.kostarprojection
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.list.returnTypes
+import com.lemonappdev.konsist.api.ext.list.provider.returnTypes
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
