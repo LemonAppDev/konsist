@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtTypeProjection
 
 internal class KoStarProjectionDeclarationCore private constructor(
-    private val ktTypeProjection: KtTypeProjection,
+    override val ktTypeProjection: KtTypeProjection,
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoStarProjectionDeclaration,
     KoBaseTypeDeclarationCore,

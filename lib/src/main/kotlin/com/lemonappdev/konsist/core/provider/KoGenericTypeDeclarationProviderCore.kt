@@ -1,12 +1,14 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoGenericTypeDeclarationProvider
 import com.lemonappdev.konsist.core.declaration.KoTypeArgumentDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
+import com.lemonappdev.konsist.core.util.TypeUtil
 import com.lemonappdev.konsist.core.util.TypeUtil.hasTypeOf
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtProjectionKind
@@ -14,14 +16,16 @@ import org.jetbrains.kotlin.psi.KtTypeArgumentList
 import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
+import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import kotlin.reflect.KClass
 
 internal interface KoGenericTypeDeclarationProviderCore :
     KoGenericTypeDeclarationProvider,
-    KoBaseProviderCore {
+    KoBaseProviderCore,
+    KoContainingFileProviderCore {
     val ktUserType: KtUserType
 
-    override val type: KoTypeDeclaration
+    override val type: KoBaseTypeDeclaration
         get() {
             val ktNameReferenceExpression =
                 ktUserType
@@ -31,7 +35,12 @@ internal interface KoGenericTypeDeclarationProviderCore :
 
             require(ktNameReferenceExpression != null) { "Generic type cannot be null." }
 
-            return KoTypeDeclarationCore.getInstance(ktNameReferenceExpression, this.castToKoBaseDeclaration())
+            return TypeUtil.getBasicType(
+                listOf(ktNameReferenceExpression),
+                ktNameReferenceExpression.isExtensionDeclaration(),
+                this.castToKoBaseDeclaration(),
+                containingFile
+            ) ?: throw (Exception("Generic type cannot be null."))
         }
 
     override val typeArguments: List<KoTypeArgumentDeclaration>
@@ -62,7 +71,7 @@ internal interface KoGenericTypeDeclarationProviderCore :
                 KoTypeArgumentDeclarationCore(
                     it.name,
                     if (it.isGenericType) it.asGenericTypeDeclaration()?.typeArguments else null,
-                    if (it.isGenericType) it.asGenericTypeDeclaration()?.type ?: it else it,
+                    if (it.isGenericType) it.asGenericTypeDeclaration()?.type ?: it.sourceDeclaration else it.sourceDeclaration,
                 )
             }
         }
@@ -70,11 +79,12 @@ internal interface KoGenericTypeDeclarationProviderCore :
     override val numTypeArguments: Int
         get() = typeArguments.size
 
-    override fun hasType(predicate: (KoTypeDeclaration) -> Boolean): Boolean = predicate(type)
+    override fun hasType(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean = predicate(type)
 
     override fun hasTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(type, kClass)
 
-    override fun countTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Int = typeArguments.count { predicate(it) }
+    override fun countTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Int =
+        typeArguments.count { predicate(it) }
 
     override fun hasTypeArgumentWithName(
         name: String,
@@ -116,8 +126,8 @@ internal interface KoGenericTypeDeclarationProviderCore :
                 names.any { name ->
                     typeArguments.any { typeArgument ->
                         name.qualifiedName ==
-                            (typeArgument.sourceDeclaration.declaration as? KoFullyQualifiedNameProvider)
-                                ?.fullyQualifiedName
+                                (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)
+                                    ?.fullyQualifiedName
                     }
                 }
         }
@@ -134,13 +144,15 @@ internal interface KoGenericTypeDeclarationProviderCore :
                 names.all { name ->
                     typeArguments.any { typeArgument ->
                         name.qualifiedName ==
-                            (typeArgument.sourceDeclaration.declaration as? KoFullyQualifiedNameProvider)
-                                ?.fullyQualifiedName
+                                (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)
+                                    ?.fullyQualifiedName
                     }
                 }
         }
 
-    override fun hasTypeArgument(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean = typeArguments.any(predicate)
+    override fun hasTypeArgument(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean =
+        typeArguments.any(predicate)
 
-    override fun hasAllTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean = typeArguments.all(predicate)
+    override fun hasAllTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean =
+        typeArguments.all(predicate)
 }

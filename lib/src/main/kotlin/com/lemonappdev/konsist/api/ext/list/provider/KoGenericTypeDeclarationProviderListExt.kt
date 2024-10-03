@@ -3,6 +3,7 @@
 package com.lemonappdev.konsist.api.ext.list.provider
 
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoGenericTypeDeclarationProvider
 import kotlin.reflect.KClass
@@ -10,7 +11,7 @@ import kotlin.reflect.KClass
 /**
  * Returns a list containing generic type declarations.
  */
-val <T : KoGenericTypeDeclarationProvider> List<T>.types: List<KoTypeDeclaration>
+val <T : KoGenericTypeDeclarationProvider> List<T>.types: List<KoBaseTypeDeclaration>
     get() = mapNotNull { it.type }
 
 /**
@@ -25,7 +26,7 @@ val <T : KoGenericTypeDeclarationProvider> List<T>.typeArguments: List<KoTypeArg
  * @param predicate A function that defines the condition to be met by the generic type.
  * @return A list containing elements with a generic type satisfying the predicate.
  */
-fun <T : KoGenericTypeDeclarationProvider> List<T>.withType(predicate: (KoTypeDeclaration) -> Boolean): List<T> =
+fun <T : KoGenericTypeDeclarationProvider> List<T>.withType(predicate: (KoBaseTypeDeclaration) -> Boolean): List<T> =
     filter { predicate(it.type) }
 
 /**
@@ -34,7 +35,7 @@ fun <T : KoGenericTypeDeclarationProvider> List<T>.withType(predicate: (KoTypeDe
  * @param predicate A function that defines the condition to be met by the generic type.
  * @return A list excluding elements with a generic type satisfying the predicate.
  */
-fun <T : KoGenericTypeDeclarationProvider> List<T>.withoutType(predicate: (KoTypeDeclaration) -> Boolean): List<T> =
+fun <T : KoGenericTypeDeclarationProvider> List<T>.withoutType(predicate: (KoBaseTypeDeclaration) -> Boolean): List<T> =
     filterNot { predicate(it.type) }
 
 /**

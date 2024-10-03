@@ -31,103 +31,31 @@ internal interface KoTypeDeclarationProviderCore :
     KoBaseProviderCore,
     KoContainingFileProviderCore,
     KoContainingDeclarationProviderCore,
-    KoTypeProviderCore {
-    val ktTypeReference: KtTypeReference?
-    val ktNameReferenceExpression: KtNameReferenceExpression?
-    val ktTypeProjection: KtTypeProjection?
+    KoSourceDeclarationProviderCore {
+    override fun asClassDeclaration(): KoClassDeclaration? = sourceDeclaration as? KoClassDeclaration
 
-    override val declaration: KoBaseTypeDeclaration
-        get() =
-            TypeUtil.getBasicType(
-                listOf(ktTypeReference, ktNameReferenceExpression, ktTypeProjection),
-                isExtensionDeclaration(),
-                getDeclarationWithFqn(containingDeclaration) ?: containingDeclaration,
-                containingFile,
-            ) ?: throw KoInternalException("Source declaration cannot be a null")
+    override fun asObjectDeclaration(): KoObjectDeclaration? = sourceDeclaration as? KoObjectDeclaration
 
-    private fun isExtensionDeclaration(): Boolean =
-        ktTypeReference?.isExtensionDeclaration() == true ||
-            ktNameReferenceExpression?.isExtensionDeclaration() == true ||
-            ktTypeProjection?.isExtensionDeclaration() == true
+    override fun asInterfaceDeclaration(): KoInterfaceDeclaration? = sourceDeclaration as? KoInterfaceDeclaration
 
-    private fun getDeclarationWithFqn(declaration: KoBaseDeclaration): KoBaseDeclaration? =
-        when {
-            declaration is KoFullyQualifiedNameProvider && declaration.fullyQualifiedName != null -> {
-                declaration
-            }
-            declaration is KoContainingDeclarationProvider && declaration !is KoFileDeclaration -> {
-                getDeclarationWithFqn(declaration.containingDeclaration)
-            }
-            else -> {
-                null
-            }
-        }
+    override fun asTypeAliasDeclaration(): KoTypeAliasDeclaration? = sourceDeclaration as? KoTypeAliasDeclaration
 
-    override fun asClassDeclaration(): KoClassDeclaration? = declaration as? KoClassDeclaration
+    override fun asImportAliasDeclaration(): KoImportAliasDeclaration? = sourceDeclaration as? KoImportAliasDeclaration
 
-    override fun asObjectDeclaration(): KoObjectDeclaration? = declaration as? KoObjectDeclaration
+    override fun asKotlinTypeDeclaration(): KoKotlinTypeDeclaration? = sourceDeclaration as? KoKotlinTypeDeclaration
 
-    override fun asInterfaceDeclaration(): KoInterfaceDeclaration? = declaration as? KoInterfaceDeclaration
+    override fun asFunctionTypeDeclaration(): KoFunctionTypeDeclaration? =
+        sourceDeclaration as? KoFunctionTypeDeclaration
 
-    override fun asTypeAliasDeclaration(): KoTypeAliasDeclaration? = declaration as? KoTypeAliasDeclaration
+    override fun asGenericTypeDeclaration(): KoGenericTypeDeclaration? = sourceDeclaration as? KoGenericTypeDeclaration
 
-    override fun asImportAliasDeclaration(): KoImportAliasDeclaration? = declaration as? KoImportAliasDeclaration
+    override fun asTypeParameterDeclaration(): KoTypeParameterDeclaration? =
+        sourceDeclaration as? KoTypeParameterDeclaration
 
-    override fun asKotlinTypeDeclaration(): KoKotlinTypeDeclaration? = declaration as? KoKotlinTypeDeclaration
+    override fun asExternalTypeDeclaration(): KoExternalDeclaration? = sourceDeclaration as? KoExternalDeclaration
 
-    override fun asFunctionTypeDeclaration(): KoFunctionTypeDeclaration? = declaration as? KoFunctionTypeDeclaration
-
-    override fun asGenericTypeDeclaration(): KoGenericTypeDeclaration? = declaration as? KoGenericTypeDeclaration
-
-    override fun asTypeParameterDeclaration(): KoTypeParameterDeclaration? = declaration as? KoTypeParameterDeclaration
-
-    override fun asExternalTypeDeclaration(): KoExternalDeclaration? = declaration as? KoExternalDeclaration
-
-    override fun asStarProjectionDeclaration(): KoStarProjectionDeclaration? = declaration as? KoStarProjectionDeclaration
-
-    override val isClass: Boolean
-        get() = declaration is KoClassDeclaration
-
-    override val isObject: Boolean
-        get() = declaration is KoObjectDeclaration
-
-    override val isInterface: Boolean
-        get() = declaration is KoInterfaceDeclaration
-
-    override val isTypeAlias: Boolean
-        get() = declaration is KoTypeAliasDeclaration
-
-    override val isImportAlias: Boolean
-        get() = declaration is KoImportAliasDeclaration
-
-    override val isKotlinType: Boolean
-        get() = declaration is KoKotlinTypeDeclaration
-
-    override val isFunctionType: Boolean
-        get() = declaration is KoFunctionTypeDeclaration
-
-    override val isGenericType: Boolean
-        get() = declaration is KoGenericTypeDeclaration
-
-    override val isTypeParameter: Boolean
-        get() = declaration is KoTypeParameterDeclaration
-
-    override val isExternalType: Boolean
-        get() = declaration is KoExternalDeclaration
-
-    override val isStarProjection: Boolean
-        get() = declaration is KoStarProjectionDeclaration
-
-    override fun hasDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean = predicate(declaration)
-
-    override fun hasDeclarationOf(kClass: KClass<*>): Boolean =
-        hasClassDeclarationOf(kClass) ||
-            hasObjectDeclarationOf(kClass) ||
-            hasInterfaceDeclarationOf(kClass) ||
-            hasKotlinTypeDeclarationOf(
-                kClass,
-            ) ||
-            hasExternalTypeDeclarationOf(kClass)
+    override fun asStarProjectionDeclaration(): KoStarProjectionDeclaration? =
+        sourceDeclaration as? KoStarProjectionDeclaration
 
     override fun hasClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -135,7 +63,17 @@ internal interface KoTypeDeclarationProviderCore :
             else -> asClassDeclaration()?.let { predicate(it) } ?: false
         }
 
-    override fun hasClassDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asClassDeclaration()?.fullyQualifiedName
+    override fun hasSourceDeclarationOf(kClass: KClass<*>): Boolean =
+        hasClassDeclarationOf(kClass) ||
+                hasObjectDeclarationOf(kClass) ||
+                hasInterfaceDeclarationOf(kClass) ||
+                hasKotlinTypeDeclarationOf(
+                    kClass,
+                ) ||
+                hasExternalTypeDeclarationOf(kClass)
+
+    override fun hasClassDeclarationOf(kClass: KClass<*>): Boolean =
+        kClass.qualifiedName == asClassDeclaration()?.fullyQualifiedName
 
     override fun hasObjectDeclaration(predicate: ((KoObjectDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -143,7 +81,8 @@ internal interface KoTypeDeclarationProviderCore :
             else -> asObjectDeclaration()?.let { predicate(it) } ?: false
         }
 
-    override fun hasObjectDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asObjectDeclaration()?.fullyQualifiedName
+    override fun hasObjectDeclarationOf(kClass: KClass<*>): Boolean =
+        kClass.qualifiedName == asObjectDeclaration()?.fullyQualifiedName
 
     override fun hasInterfaceDeclaration(predicate: ((KoInterfaceDeclaration) -> Boolean)?): Boolean =
         when (predicate) {

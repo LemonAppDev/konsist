@@ -1,8 +1,10 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
 
 /**
  * Represents a type argument declaration.
@@ -10,7 +12,8 @@ import com.lemonappdev.konsist.api.provider.KoNameProvider
 interface KoTypeArgumentDeclaration :
     KoBaseDeclaration,
     KoBaseProvider,
-    KoNameProvider {
+    KoNameProvider,
+    KoSourceDeclarationProvider {
     /**
      * A list of type arguments associated with this declaration, if any.
      * If there are no type arguments, this returns `null`.
@@ -19,13 +22,4 @@ interface KoTypeArgumentDeclaration :
      * In `List<String>`, `String` is a type argument for `List`.
      */
     val typeArguments: List<KoTypeArgumentDeclaration>?
-
-    /**
-     * The source type declaration associated with this type argument.
-     * This represents the original type that this type argument refers to.
-     *
-     * Example:
-     * In `List<String>`, `List` is the source type declaration for the `String` type argument.
-     */
-    val sourceDeclaration: KoTypeDeclaration
 }

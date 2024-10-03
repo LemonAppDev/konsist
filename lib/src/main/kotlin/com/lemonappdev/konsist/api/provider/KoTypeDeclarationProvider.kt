@@ -20,34 +20,6 @@ import kotlin.reflect.KClass
 @Suppress("detekt.TooManyFunctions")
 interface KoTypeDeclarationProvider : KoBaseProvider {
     /**
-     * Represents the declaration associated with this type.
-     *
-     * The `sourceDeclaration` property provides access to the declaration of the type within the Kotlin codebase.
-     * It allows to retrie additional information about the declaration, such as its properties, functions,
-     * annotations, and other relevant metadata.
-     *
-     * It points to an instance of [KoBaseTypeDeclaration], which serves as the base interface for various types:
-     *  - `KoClassDeclaration` represents class
-     *  - `KoInterfaceDeclaration` represents interface
-     *  - `KoObjectDeclaration` represents object
-     *  - `KoTypeAliasDeclaration` represents type alias
-     *  - `KoImportAliasDeclaration` represents import alias
-     *  - `KoKotlinTypeDeclaration` represents kotlin basic types and collections
-     *  - `KoFunctionDeclaration` represents function type
-     *  - `KoExternalDeclaration` represents declaration which is not defined in the project
-     *
-     *  e.g.
-     *
-     *  ```kotlin
-     *  scope
-     *      .properties()
-     *      .types
-     *      .assertTrue { it.isInterface }
-     *  ```
-     */
-    val declaration: KoBaseTypeDeclaration
-
-    /**
      * Represents the class declaration associated with this type.
      *
      * @return the class declaration associated with this type.
@@ -127,20 +99,12 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
     fun asStarProjectionDeclaration(): KoStarProjectionDeclaration?
 
     /**
-     * Determines whatever type has a specified declaration.
+     * Whether type has a source declaration of the specified Kotlin class.
      *
-     * @param predicate The predicate function used to determine if a declaration satisfies a condition.
-     * @return `true` if the type has the specified declaration, `false` otherwise.
+     * @param kClass The Kotlin class representing the source declaration to check for.
+     * @return `true` if the type has a source declaration matching the specified KClass, `false` otherwise.
      */
-    fun hasDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean
-
-    /**
-     * Whether type has a declaration of the specified Kotlin class.
-     *
-     * @param kClass The Kotlin class representing the declaration to check for.
-     * @return `true` if the type has a declaration matching the specified KClass, `false` otherwise.
-     */
-    fun hasDeclarationOf(kClass: KClass<*>): Boolean
+    fun hasSourceDeclarationOf(kClass: KClass<*>): Boolean
 
     /**
      * Whether type has a specified class declaration.

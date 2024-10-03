@@ -17,12 +17,12 @@ import com.lemonappdev.konsist.api.declaration.type.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
 import kotlin.reflect.KClass
 
-/**
- * List containing declarations associated with types.
- */
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("declarations()"))
-val <T : KoTypeDeclarationProvider> List<T>.declarations: List<KoBaseTypeDeclaration>
-    get() = mapNotNull { it.declaration }
+///**
+// * List containing declarations associated with types.
+// */
+//@Deprecated("Will be removed in version 0.18.0", ReplaceWith("declarations()"))
+//val <T : KoTypeDeclarationProvider> List<T>.declarations: List<KoBaseTypeDeclaration>
+//    get() = mapNotNull { it.declaration }
 
 /**
  * List containing class declarations associated with types.
@@ -80,22 +80,22 @@ val <T : KoTypeDeclarationProvider> List<T>.functionTypeDeclarations: List<KoFun
 val <T : KoTypeDeclarationProvider> List<T>.externalTypeDeclarations: List<KoExternalDeclaration>
     get() = mapNotNull { it.asExternalTypeDeclaration() }
 
-/**
- * List containing declarations associated with types.
- *
- * @param predicate A function that defines the condition to be met by the type declaration.
- *                  If null, all declarations are included.
- * @return A list of declarations that match the provided predicate, or all declarations if no predicate is provided.
- */
-fun <T : KoTypeDeclarationProvider> List<T>.typeDeclarations(
-    predicate: ((KoBaseTypeDeclaration) -> Boolean)? = null,
-): List<KoBaseTypeDeclaration> =
-    filter {
-        when (predicate) {
-            null -> true
-            else -> it.hasDeclaration(predicate)
-        }
-    }.map { it.declaration }
+///**
+// * List containing declarations associated with types.
+// *
+// * @param predicate A function that defines the condition to be met by the type declaration.
+// *                  If null, all declarations are included.
+// * @return A list of declarations that match the provided predicate, or all declarations if no predicate is provided.
+// */
+//fun <T : KoTypeDeclarationProvider> List<T>.typeDeclarations(
+//    predicate: ((KoBaseTypeDeclaration) -> Boolean)? = null,
+//): List<KoBaseTypeDeclaration> =
+//    filter {
+//        when (predicate) {
+//            null -> true
+//            else -> it.hasDeclaration(predicate)
+//        }
+//    }.map { it.declaration }
 
 /**
  * List containing class declarations associated with types.
@@ -251,75 +251,75 @@ fun <T : KoTypeDeclarationProvider> List<T>.externalTypeDeclarations(
     filter { it.hasExternalTypeDeclaration(predicate) }
         .mapNotNull { it.asExternalTypeDeclaration() }
 
-/**
- * List containing declarations with the specified declaration.
- *
- * @param predicate The predicate function to determine if a declaration satisfies a condition.
- * @return A list containing declarations with the specified declaration.
- */
-fun <T : KoTypeDeclarationProvider> List<T>.withDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): List<T> =
-    filter { predicate(it.declaration) }
+///**
+// * List containing declarations with the specified declaration.
+// *
+// * @param predicate The predicate function to determine if a declaration satisfies a condition.
+// * @return A list containing declarations with the specified declaration.
+// */
+//fun <T : KoTypeDeclarationProvider> List<T>.withDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): List<T> =
+//    filter { predicate(it.declaration) }
+//
+///**
+// * List containing declarations without the specified declaration.
+// *
+// * @param predicate The predicate function to determine if a declaration satisfies a condition.
+// * @return A list containing declarations without the specified declaration.
+// */
+//fun <T : KoTypeDeclarationProvider> List<T>.withoutDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): List<T> =
+//    filterNot { predicate(it.declaration) }
 
-/**
- * List containing declarations without the specified declaration.
- *
- * @param predicate The predicate function to determine if a declaration satisfies a condition.
- * @return A list containing declarations without the specified declaration.
- */
-fun <T : KoTypeDeclarationProvider> List<T>.withoutDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): List<T> =
-    filterNot { predicate(it.declaration) }
+///**
+// * List containing declarations with declaration of.
+// *
+// * @param kClass The Kotlin class representing the declaration to include.
+// * @param kClasses The Kotlin class(es) representing the declaration(s) to include.
+// * @return A list containing declarations with the declaration of the specified Kotlin class(es).
+// */
+//fun <T : KoTypeDeclarationProvider> List<T>.withDeclarationOf(
+//    kClass: KClass<*>,
+//    vararg kClasses: KClass<*>,
+//): List<T> = withDeclarationOf(listOf(kClass, *kClasses))
 
-/**
- * List containing declarations with declaration of.
- *
- * @param kClass The Kotlin class representing the declaration to include.
- * @param kClasses The Kotlin class(es) representing the declaration(s) to include.
- * @return A list containing declarations with the declaration of the specified Kotlin class(es).
- */
-fun <T : KoTypeDeclarationProvider> List<T>.withDeclarationOf(
-    kClass: KClass<*>,
-    vararg kClasses: KClass<*>,
-): List<T> = withDeclarationOf(listOf(kClass, *kClasses))
+///**
+// * List containing declarations with declaration of.
+// *
+// * @param kClasses The Kotlin class(es) representing the declaration(s) to include.
+// * @return A list containing declarations with the declaration of the specified Kotlin class(es).
+// */
+//fun <T : KoTypeDeclarationProvider> List<T>.withDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
+//    filter {
+//        when {
+//            kClasses.isEmpty() -> true
+//            else -> kClasses.any { kClass -> it.hasDeclarationOf(kClass) }
+//        }
+//    }
 
-/**
- * List containing declarations with declaration of.
- *
- * @param kClasses The Kotlin class(es) representing the declaration(s) to include.
- * @return A list containing declarations with the declaration of the specified Kotlin class(es).
- */
-fun <T : KoTypeDeclarationProvider> List<T>.withDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
-    filter {
-        when {
-            kClasses.isEmpty() -> true
-            else -> kClasses.any { kClass -> it.hasDeclarationOf(kClass) }
-        }
-    }
+///**
+// * List containing declarations without declaration of.
+// *
+// * @param kClass The Kotlin class representing the declaration to exclude.
+// * @param kClasses The Kotlin class(es) representing the declaration(s) to exclude.
+// * @return A list containing declarations without declaration of the specified Kotlin class(es).
+// */
+//fun <T : KoTypeDeclarationProvider> List<T>.withoutDeclarationOf(
+//    kClass: KClass<*>,
+//    vararg kClasses: KClass<*>,
+//): List<T> = withoutDeclarationOf(listOf(kClass, *kClasses))
 
-/**
- * List containing declarations without declaration of.
- *
- * @param kClass The Kotlin class representing the declaration to exclude.
- * @param kClasses The Kotlin class(es) representing the declaration(s) to exclude.
- * @return A list containing declarations without declaration of the specified Kotlin class(es).
- */
-fun <T : KoTypeDeclarationProvider> List<T>.withoutDeclarationOf(
-    kClass: KClass<*>,
-    vararg kClasses: KClass<*>,
-): List<T> = withoutDeclarationOf(listOf(kClass, *kClasses))
-
-/**
- * List containing declarations without declaration of.
- *
- * @param kClasses The Kotlin class(es) representing the declaration(s) to exclude.
- * @return A list containing declarations without declaration of the specified Kotlin class(es).
- */
-fun <T : KoTypeDeclarationProvider> List<T>.withoutDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
-    filterNot {
-        when {
-            kClasses.isEmpty() -> true
-            else -> kClasses.any { kClass -> it.hasDeclarationOf(kClass) }
-        }
-    }
+///**
+// * List containing declarations without declaration of.
+// *
+// * @param kClasses The Kotlin class(es) representing the declaration(s) to exclude.
+// * @return A list containing declarations without declaration of the specified Kotlin class(es).
+// */
+//fun <T : KoTypeDeclarationProvider> List<T>.withoutDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
+//    filterNot {
+//        when {
+//            kClasses.isEmpty() -> true
+//            else -> kClasses.any { kClass -> it.hasDeclarationOf(kClass) }
+//        }
+//    }
 
 /**
  * List containing declarations with the specified class declaration.

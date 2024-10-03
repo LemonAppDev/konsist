@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.api.ext.list.provider
 
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoGenericTypeDeclarationProvider
 import com.lemonappdev.konsist.testdata.SampleType1
 import com.lemonappdev.konsist.testdata.SampleType2
@@ -15,8 +15,8 @@ class KoGenericTypeDeclarationProviderListExtTest {
     @Test
     fun `types returns generic types from all declarations`() {
         // given
-        val type1: KoTypeDeclaration = mockk()
-        val type2: KoTypeDeclaration = mockk()
+        val type1: KoBaseTypeDeclaration = mockk()
+        val type2: KoBaseTypeDeclaration = mockk()
         val declaration1: KoGenericTypeDeclarationProvider =
             mockk {
                 every { type } returns type1
@@ -39,11 +39,11 @@ class KoGenericTypeDeclarationProviderListExtTest {
         // given
         val name1 = "name1"
         val name2 = "name2"
-        val type1: KoTypeDeclaration =
+        val type1: KoBaseTypeDeclaration =
             mockk {
                 every { name } returns name1
             }
-        val type2: KoTypeDeclaration =
+        val type2: KoBaseTypeDeclaration =
             mockk {
                 every { name } returns name2
             }
@@ -69,11 +69,11 @@ class KoGenericTypeDeclarationProviderListExtTest {
         // given
         val name1 = "name1"
         val name2 = "name2"
-        val type1: KoTypeDeclaration =
+        val type1: KoBaseTypeDeclaration =
             mockk {
                 every { name } returns name1
             }
-        val type2: KoTypeDeclaration =
+        val type2: KoBaseTypeDeclaration =
             mockk {
                 every { name } returns name2
             }

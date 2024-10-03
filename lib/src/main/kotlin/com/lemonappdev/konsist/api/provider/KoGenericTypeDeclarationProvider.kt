@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import kotlin.reflect.KClass
 
 /**
@@ -15,7 +15,7 @@ interface KoGenericTypeDeclarationProvider : KoBaseProvider {
      * 1) in `List<T>`, `List` is the generic type,
      * 2) in `List<Set<String>>`, `List` is the generic type.
      */
-    val type: KoTypeDeclaration
+    val type: KoBaseTypeDeclaration
 
     /**
      * The type argument for the generic type.
@@ -37,7 +37,7 @@ interface KoGenericTypeDeclarationProvider : KoBaseProvider {
      * @param predicate The predicate to evaluate against the generic type.
      * @return `true` if the generic type matches the predicate, otherwise `false`.
      */
-    fun hasType(predicate: (KoTypeDeclaration) -> Boolean): Boolean
+    fun hasType(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean
 
     /**
      * Checks if the generic type matches the specified class.

@@ -19,6 +19,7 @@ import com.lemonappdev.konsist.core.provider.KoNullableProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceAndAliasTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeDeclarationProviderCore
@@ -57,6 +58,7 @@ internal class KoTypeDeclarationCore private constructor(
     KoResideInPackageProviderCore,
     KoAnnotationProviderCore,
     KoTypeDeclarationProviderCore,
+    KoSourceDeclarationProviderCore,
     KoIsMutableTypeProviderCore {
     // Ensure that at least one of the parameters is not null
     init {
@@ -100,7 +102,7 @@ internal class KoTypeDeclarationCore private constructor(
     Remove in version 0.18.0
      */
     override val isGenericType: Boolean
-        get() = super<KoTypeDeclarationProviderCore>.isGenericType
+        get() = super<KoTypeProviderCore>.isGenericType
 
     /*
     Remove in version 0.18.0

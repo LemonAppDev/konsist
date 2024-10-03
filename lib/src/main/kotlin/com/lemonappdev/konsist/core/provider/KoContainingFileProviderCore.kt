@@ -8,11 +8,11 @@ import org.jetbrains.kotlin.psi.KtElement
 internal interface KoContainingFileProviderCore :
     KoContainingFileProvider,
     KoBaseProviderCore {
-    val ktElement: KtElement
+    val ktElement: KtElement?
 
     /**
      * KoFile containing the declaration
      */
     override val containingFile: KoFileDeclaration
-        get() = KoFileDeclarationCore(ktElement.containingKtFile)
+        get() = ktElement?.containingKtFile?.let { KoFileDeclarationCore(it) } ?: throw Exception("Containing file not found")
 }

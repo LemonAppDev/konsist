@@ -22,32 +22,32 @@ import org.junit.jupiter.api.Test
 
 @Suppress("detekt.LargeClass")
 class KoTypeDeclarationProviderListExtTest {
-    @Test
-    fun `deprecated - declarations returns declarations from all declarations`() {
-        // given
-        val sourceDeclaration1: KoClassDeclaration = mockk()
-        val sourceDeclaration2: KoKotlinTypeDeclaration = mockk()
-        val sourceDeclaration3: KoExternalDeclaration = mockk()
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { declaration } returns sourceDeclaration1
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { declaration } returns sourceDeclaration2
-            }
-        val declaration3: KoTypeDeclarationProvider =
-            mockk {
-                every { declaration } returns sourceDeclaration3
-            }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.declarations
-
-        // then
-        sut shouldBeEqualTo listOf(sourceDeclaration1, sourceDeclaration2, sourceDeclaration3)
-    }
+//    @Test
+//    fun `deprecated - declarations returns declarations from all declarations`() {
+//        // given
+//        val sourceDeclaration1: KoClassDeclaration = mockk()
+//        val sourceDeclaration2: KoKotlinTypeDeclaration = mockk()
+//        val sourceDeclaration3: KoExternalDeclaration = mockk()
+//        val declaration1: KoTypeDeclarationProvider =
+//            mockk {
+//                every { declaration } returns sourceDeclaration1
+//            }
+//        val declaration2: KoTypeDeclarationProvider =
+//            mockk {
+//                every { declaration } returns sourceDeclaration2
+//            }
+//        val declaration3: KoTypeDeclarationProvider =
+//            mockk {
+//                every { declaration } returns sourceDeclaration3
+//            }
+//        val declarations = listOf(declaration1, declaration2, declaration3)
+//
+//        // when
+//        val sut = declarations.declarations
+//
+//        // then
+//        sut shouldBeEqualTo listOf(sourceDeclaration1, sourceDeclaration2, sourceDeclaration3)
+//    }
 
     @Test
     fun `deprecated - classDeclarations returns classes from all declarations`() {
@@ -257,57 +257,57 @@ class KoTypeDeclarationProviderListExtTest {
         sut shouldBeEqualTo listOf(sourceDeclaration1, sourceDeclaration2)
     }
 
-    @Test
-    fun `declarations returns declarations from all declarations`() {
-        // given
-        val sourceDeclaration1: KoClassDeclaration = mockk()
-        val sourceDeclaration2: KoKotlinTypeDeclaration = mockk()
-        val sourceDeclaration3: KoExternalDeclaration = mockk()
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { declaration } returns sourceDeclaration1
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { declaration } returns sourceDeclaration2
-            }
-        val declaration3: KoTypeDeclarationProvider =
-            mockk {
-                every { declaration } returns sourceDeclaration3
-            }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.typeDeclarations()
-
-        // then
-        sut shouldBeEqualTo listOf(sourceDeclaration1, sourceDeclaration2, sourceDeclaration3)
-    }
-
-    @Test
-    fun `declarations returns declarations from all declarations which satisfies predicate`() {
-        // given
-        val predicate: (KoBaseTypeDeclaration) -> Boolean = { it.hasNameContaining("SomeClass") }
-        val sourceDeclaration1: KoClassDeclaration = mockk()
-        val sourceDeclaration2: KoKotlinTypeDeclaration = mockk()
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { declaration } returns sourceDeclaration1
-                every { hasDeclaration(predicate) } returns true
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { declaration } returns sourceDeclaration2
-                every { hasDeclaration(predicate) } returns false
-            }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.typeDeclarations(predicate)
-
-        // then
-        sut shouldBeEqualTo listOf(sourceDeclaration1)
-    }
+//    @Test
+//    fun `declarations returns declarations from all declarations`() {
+//        // given
+//        val sourceDeclaration1: KoClassDeclaration = mockk()
+//        val sourceDeclaration2: KoKotlinTypeDeclaration = mockk()
+//        val sourceDeclaration3: KoExternalDeclaration = mockk()
+//        val declaration1: KoTypeDeclarationProvider =
+//            mockk {
+//                every { declaration } returns sourceDeclaration1
+//            }
+//        val declaration2: KoTypeDeclarationProvider =
+//            mockk {
+//                every { declaration } returns sourceDeclaration2
+//            }
+//        val declaration3: KoTypeDeclarationProvider =
+//            mockk {
+//                every { declaration } returns sourceDeclaration3
+//            }
+//        val declarations = listOf(declaration1, declaration2, declaration3)
+//
+//        // when
+//        val sut = declarations.typeDeclarations()
+//
+//        // then
+//        sut shouldBeEqualTo listOf(sourceDeclaration1, sourceDeclaration2, sourceDeclaration3)
+//    }
+//
+//    @Test
+//    fun `declarations returns declarations from all declarations which satisfies predicate`() {
+//        // given
+//        val predicate: (KoBaseTypeDeclaration) -> Boolean = { it.hasNameContaining("SomeClass") }
+//        val sourceDeclaration1: KoClassDeclaration = mockk()
+//        val sourceDeclaration2: KoKotlinTypeDeclaration = mockk()
+//        val declaration1: KoTypeDeclarationProvider =
+//            mockk {
+//                every { declaration } returns sourceDeclaration1
+//                every { hasDeclaration(predicate) } returns true
+//            }
+//        val declaration2: KoTypeDeclarationProvider =
+//            mockk {
+//                every { declaration } returns sourceDeclaration2
+//                every { hasDeclaration(predicate) } returns false
+//            }
+//        val declarations = listOf(declaration1, declaration2)
+//
+//        // when
+//        val sut = declarations.typeDeclarations(predicate)
+//
+//        // then
+//        sut shouldBeEqualTo listOf(sourceDeclaration1)
+//    }
 
     @Test
     fun `classDeclarations returns classes from all declarations`() {
@@ -935,340 +935,340 @@ class KoTypeDeclarationProviderListExtTest {
         // then
         sut shouldBeEqualTo listOf(sourceDeclaration1)
     }
-
-    @Test
-    fun `withDeclaration{} returns declaration which satisfy predicate`() {
-        // given
-        val name1 = "name1"
-        val name2 = "name2"
-        val sourceDeclaration1: KoClassDeclaration =
-            mockk {
-                every { name } returns name1
-            }
-        val sourceDeclaration2: KoKotlinTypeDeclaration =
-            mockk {
-                every { name } returns name2
-            }
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { declaration } returns sourceDeclaration1
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { declaration } returns sourceDeclaration2
-            }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withDeclaration { it.name == name1 }
-
-        // then
-        sut shouldBeEqualTo listOf(declaration1)
-    }
-
-    @Test
-    fun `withoutDeclaration{} returns declarations which not satisfy predicate`() {
-        // given
-        val name1 = "name1"
-        val name2 = "name2"
-        val sourceDeclaration1: KoClassDeclaration =
-            mockk {
-                every { name } returns name1
-            }
-        val sourceDeclaration2: KoKotlinTypeDeclaration =
-            mockk {
-                every { name } returns name2
-            }
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { declaration } returns sourceDeclaration1
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { declaration } returns sourceDeclaration2
-            }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withoutDeclaration { it.name == name1 }
-
-        // then
-        sut shouldBeEqualTo listOf(declaration2)
-    }
-
-    @Test
-    fun `withDeclarationOf(empty list) returns all declarations`() {
-        // given
-        val declaration1: KoTypeDeclarationProvider = mockk()
-        val declaration2: KoTypeDeclarationProvider = mockk()
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withDeclarationOf(emptyList())
-
-        // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
-    }
-
-    @Test
-    fun `withDeclarationOf(empty set) returns all declarations`() {
-        // given
-        val declaration1: KoTypeDeclarationProvider = mockk()
-        val declaration2: KoTypeDeclarationProvider = mockk()
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withDeclarationOf(emptySet())
-
-        // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
-    }
-
-    @Test
-    fun `withDeclarationOf(KClass) returns declaration with given declaration`() {
-        // given
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns true
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns false
-            }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withDeclarationOf(SampleType1::class)
-
-        // then
-        sut shouldBeEqualTo listOf(declaration1)
-    }
-
-    @Test
-    fun `withDeclarationOf(KClass) returns declarations with one of given declarations`() {
-        // given
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns true
-                every { hasDeclarationOf(SampleType2::class) } returns false
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns false
-                every { hasDeclarationOf(SampleType2::class) } returns true
-            }
-        val declaration3: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns false
-                every { hasDeclarationOf(SampleType2::class) } returns false
-            }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.withDeclarationOf(SampleType1::class, SampleType2::class)
-
-        // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
-    }
-
-    @Test
-    fun `withDeclarationOf(list of KClass) returns declarations with one of given declarations`() {
-        // given
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns true
-                every { hasDeclarationOf(SampleType2::class) } returns false
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns false
-                every { hasDeclarationOf(SampleType2::class) } returns true
-            }
-        val declaration3: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns false
-                every { hasDeclarationOf(SampleType2::class) } returns false
-            }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-        val kClasses = listOf(SampleType1::class, SampleType2::class)
-
-        // when
-        val sut = declarations.withDeclarationOf(kClasses)
-
-        // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
-    }
-
-    @Test
-    fun `withDeclarationOf(set of KClass) returns declarations with one of given declarations`() {
-        // given
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns true
-                every { hasDeclarationOf(SampleType2::class) } returns false
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns false
-                every { hasDeclarationOf(SampleType2::class) } returns true
-            }
-        val declaration3: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns false
-                every { hasDeclarationOf(SampleType2::class) } returns false
-            }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-        val kClasses = setOf(SampleType1::class, SampleType2::class)
-
-        // when
-        val sut = declarations.withDeclarationOf(kClasses)
-
-        // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
-    }
-
-    @Test
-    fun `withoutDeclarationOf(empty list) returns none declaration`() {
-        // given
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns true
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns false
-            }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withoutDeclarationOf(emptyList())
-
-        // then
-        sut shouldBeEqualTo emptyList()
-    }
-
-    @Test
-    fun `withoutDeclarationOf(empty set) returns none declaration`() {
-        // given
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns true
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns false
-            }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withoutDeclarationOf(emptySet())
-
-        // then
-        sut shouldBeEqualTo emptyList()
-    }
-
-    @Test
-    fun `withoutDeclarationOf(KClass) returns declaration without given declaration`() {
-        // given
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns true
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns false
-            }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withoutDeclarationOf(SampleType1::class)
-
-        // then
-        sut shouldBeEqualTo listOf(declaration2)
-    }
-
-    @Test
-    fun `withoutDeclarationOf(KClass) returns declaration without any of given declarations`() {
-        // given
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns true
-                every { hasDeclarationOf(SampleType2::class) } returns false
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns false
-                every { hasDeclarationOf(SampleType2::class) } returns true
-            }
-        val declaration3: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns false
-                every { hasDeclarationOf(SampleType2::class) } returns false
-            }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.withoutDeclarationOf(SampleType1::class, SampleType2::class)
-
-        // then
-        sut shouldBeEqualTo listOf(declaration3)
-    }
-
-    @Test
-    fun `withoutDeclarationOf(list of KClass) returns declaration without any of given declarations`() {
-        // given
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns true
-                every { hasDeclarationOf(SampleType2::class) } returns false
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns false
-                every { hasDeclarationOf(SampleType2::class) } returns true
-            }
-        val declaration3: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns false
-                every { hasDeclarationOf(SampleType2::class) } returns false
-            }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-        val kClasses = listOf(SampleType1::class, SampleType2::class)
-
-        // when
-        val sut = declarations.withoutDeclarationOf(kClasses)
-
-        // then
-        sut shouldBeEqualTo listOf(declaration3)
-    }
-
-    @Test
-    fun `withoutDeclarationOf(set of KClass) returns declaration without any of given declarations`() {
-        // given
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns true
-                every { hasDeclarationOf(SampleType2::class) } returns false
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns false
-                every { hasDeclarationOf(SampleType2::class) } returns true
-            }
-        val declaration3: KoTypeDeclarationProvider =
-            mockk {
-                every { hasDeclarationOf(SampleType1::class) } returns false
-                every { hasDeclarationOf(SampleType2::class) } returns false
-            }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-        val kClasses = setOf(SampleType1::class, SampleType2::class)
-
-        // when
-        val sut = declarations.withoutDeclarationOf(kClasses)
-
-        // then
-        sut shouldBeEqualTo listOf(declaration3)
-    }
+//
+//    @Test
+//    fun `withDeclaration{} returns declaration which satisfy predicate`() {
+//        // given
+//        val name1 = "name1"
+//        val name2 = "name2"
+//        val sourceDeclaration1: KoClassDeclaration =
+//            mockk {
+//                every { name } returns name1
+//            }
+//        val sourceDeclaration2: KoKotlinTypeDeclaration =
+//            mockk {
+//                every { name } returns name2
+//            }
+//        val declaration1: KoTypeDeclarationProvider =
+//            mockk {
+//                every { declaration } returns sourceDeclaration1
+//            }
+//        val declaration2: KoTypeDeclarationProvider =
+//            mockk {
+//                every { declaration } returns sourceDeclaration2
+//            }
+//        val declarations = listOf(declaration1, declaration2)
+//
+//        // when
+//        val sut = declarations.withDeclaration { it.name == name1 }
+//
+//        // then
+//        sut shouldBeEqualTo listOf(declaration1)
+//    }
+//
+//    @Test
+//    fun `withoutDeclaration{} returns declarations which not satisfy predicate`() {
+//        // given
+//        val name1 = "name1"
+//        val name2 = "name2"
+//        val sourceDeclaration1: KoClassDeclaration =
+//            mockk {
+//                every { name } returns name1
+//            }
+//        val sourceDeclaration2: KoKotlinTypeDeclaration =
+//            mockk {
+//                every { name } returns name2
+//            }
+//        val declaration1: KoTypeDeclarationProvider =
+//            mockk {
+//                every { declaration } returns sourceDeclaration1
+//            }
+//        val declaration2: KoTypeDeclarationProvider =
+//            mockk {
+//                every { declaration } returns sourceDeclaration2
+//            }
+//        val declarations = listOf(declaration1, declaration2)
+//
+//        // when
+//        val sut = declarations.withoutDeclaration { it.name == name1 }
+//
+//        // then
+//        sut shouldBeEqualTo listOf(declaration2)
+//    }
+//
+//    @Test
+//    fun `withDeclarationOf(empty list) returns all declarations`() {
+//        // given
+//        val declaration1: KoTypeDeclarationProvider = mockk()
+//        val declaration2: KoTypeDeclarationProvider = mockk()
+//        val declarations = listOf(declaration1, declaration2)
+//
+//        // when
+//        val sut = declarations.withDeclarationOf(emptyList())
+//
+//        // then
+//        sut shouldBeEqualTo listOf(declaration1, declaration2)
+//    }
+//
+//    @Test
+//    fun `withDeclarationOf(empty set) returns all declarations`() {
+//        // given
+//        val declaration1: KoTypeDeclarationProvider = mockk()
+//        val declaration2: KoTypeDeclarationProvider = mockk()
+//        val declarations = listOf(declaration1, declaration2)
+//
+//        // when
+//        val sut = declarations.withDeclarationOf(emptySet())
+//
+//        // then
+//        sut shouldBeEqualTo listOf(declaration1, declaration2)
+//    }
+//
+//    @Test
+//    fun `withDeclarationOf(KClass) returns declaration with given declaration`() {
+//        // given
+//        val declaration1: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns true
+//            }
+//        val declaration2: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns false
+//            }
+//        val declarations = listOf(declaration1, declaration2)
+//
+//        // when
+//        val sut = declarations.withDeclarationOf(SampleType1::class)
+//
+//        // then
+//        sut shouldBeEqualTo listOf(declaration1)
+//    }
+//
+//    @Test
+//    fun `withDeclarationOf(KClass) returns declarations with one of given declarations`() {
+//        // given
+//        val declaration1: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns true
+//                every { hasDeclarationOf(SampleType2::class) } returns false
+//            }
+//        val declaration2: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns false
+//                every { hasDeclarationOf(SampleType2::class) } returns true
+//            }
+//        val declaration3: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns false
+//                every { hasDeclarationOf(SampleType2::class) } returns false
+//            }
+//        val declarations = listOf(declaration1, declaration2, declaration3)
+//
+//        // when
+//        val sut = declarations.withDeclarationOf(SampleType1::class, SampleType2::class)
+//
+//        // then
+//        sut shouldBeEqualTo listOf(declaration1, declaration2)
+//    }
+//
+//    @Test
+//    fun `withDeclarationOf(list of KClass) returns declarations with one of given declarations`() {
+//        // given
+//        val declaration1: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns true
+//                every { hasDeclarationOf(SampleType2::class) } returns false
+//            }
+//        val declaration2: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns false
+//                every { hasDeclarationOf(SampleType2::class) } returns true
+//            }
+//        val declaration3: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns false
+//                every { hasDeclarationOf(SampleType2::class) } returns false
+//            }
+//        val declarations = listOf(declaration1, declaration2, declaration3)
+//        val kClasses = listOf(SampleType1::class, SampleType2::class)
+//
+//        // when
+//        val sut = declarations.withDeclarationOf(kClasses)
+//
+//        // then
+//        sut shouldBeEqualTo listOf(declaration1, declaration2)
+//    }
+//
+//    @Test
+//    fun `withDeclarationOf(set of KClass) returns declarations with one of given declarations`() {
+//        // given
+//        val declaration1: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns true
+//                every { hasDeclarationOf(SampleType2::class) } returns false
+//            }
+//        val declaration2: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns false
+//                every { hasDeclarationOf(SampleType2::class) } returns true
+//            }
+//        val declaration3: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns false
+//                every { hasDeclarationOf(SampleType2::class) } returns false
+//            }
+//        val declarations = listOf(declaration1, declaration2, declaration3)
+//        val kClasses = setOf(SampleType1::class, SampleType2::class)
+//
+//        // when
+//        val sut = declarations.withDeclarationOf(kClasses)
+//
+//        // then
+//        sut shouldBeEqualTo listOf(declaration1, declaration2)
+//    }
+//
+//    @Test
+//    fun `withoutDeclarationOf(empty list) returns none declaration`() {
+//        // given
+//        val declaration1: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns true
+//            }
+//        val declaration2: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns false
+//            }
+//        val declarations = listOf(declaration1, declaration2)
+//
+//        // when
+//        val sut = declarations.withoutDeclarationOf(emptyList())
+//
+//        // then
+//        sut shouldBeEqualTo emptyList()
+//    }
+//
+//    @Test
+//    fun `withoutDeclarationOf(empty set) returns none declaration`() {
+//        // given
+//        val declaration1: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns true
+//            }
+//        val declaration2: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns false
+//            }
+//        val declarations = listOf(declaration1, declaration2)
+//
+//        // when
+//        val sut = declarations.withoutDeclarationOf(emptySet())
+//
+//        // then
+//        sut shouldBeEqualTo emptyList()
+//    }
+//
+//    @Test
+//    fun `withoutDeclarationOf(KClass) returns declaration without given declaration`() {
+//        // given
+//        val declaration1: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns true
+//            }
+//        val declaration2: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns false
+//            }
+//        val declarations = listOf(declaration1, declaration2)
+//
+//        // when
+//        val sut = declarations.withoutDeclarationOf(SampleType1::class)
+//
+//        // then
+//        sut shouldBeEqualTo listOf(declaration2)
+//    }
+//
+//    @Test
+//    fun `withoutDeclarationOf(KClass) returns declaration without any of given declarations`() {
+//        // given
+//        val declaration1: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns true
+//                every { hasDeclarationOf(SampleType2::class) } returns false
+//            }
+//        val declaration2: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns false
+//                every { hasDeclarationOf(SampleType2::class) } returns true
+//            }
+//        val declaration3: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns false
+//                every { hasDeclarationOf(SampleType2::class) } returns false
+//            }
+//        val declarations = listOf(declaration1, declaration2, declaration3)
+//
+//        // when
+//        val sut = declarations.withoutDeclarationOf(SampleType1::class, SampleType2::class)
+//
+//        // then
+//        sut shouldBeEqualTo listOf(declaration3)
+//    }
+//
+//    @Test
+//    fun `withoutDeclarationOf(list of KClass) returns declaration without any of given declarations`() {
+//        // given
+//        val declaration1: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns true
+//                every { hasDeclarationOf(SampleType2::class) } returns false
+//            }
+//        val declaration2: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns false
+//                every { hasDeclarationOf(SampleType2::class) } returns true
+//            }
+//        val declaration3: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns false
+//                every { hasDeclarationOf(SampleType2::class) } returns false
+//            }
+//        val declarations = listOf(declaration1, declaration2, declaration3)
+//        val kClasses = listOf(SampleType1::class, SampleType2::class)
+//
+//        // when
+//        val sut = declarations.withoutDeclarationOf(kClasses)
+//
+//        // then
+//        sut shouldBeEqualTo listOf(declaration3)
+//    }
+//
+//    @Test
+//    fun `withoutDeclarationOf(set of KClass) returns declaration without any of given declarations`() {
+//        // given
+//        val declaration1: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns true
+//                every { hasDeclarationOf(SampleType2::class) } returns false
+//            }
+//        val declaration2: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns false
+//                every { hasDeclarationOf(SampleType2::class) } returns true
+//            }
+//        val declaration3: KoTypeDeclarationProvider =
+//            mockk {
+//                every { hasDeclarationOf(SampleType1::class) } returns false
+//                every { hasDeclarationOf(SampleType2::class) } returns false
+//            }
+//        val declarations = listOf(declaration1, declaration2, declaration3)
+//        val kClasses = setOf(SampleType1::class, SampleType2::class)
+//
+//        // when
+//        val sut = declarations.withoutDeclarationOf(kClasses)
+//
+//        // then
+//        sut shouldBeEqualTo listOf(declaration3)
+//    }
 
     @Test
     fun `withClassDeclaration() returns declaration with class`() {

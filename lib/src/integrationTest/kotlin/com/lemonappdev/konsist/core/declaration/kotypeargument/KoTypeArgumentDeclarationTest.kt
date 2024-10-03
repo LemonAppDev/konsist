@@ -53,7 +53,7 @@ class KoTypeArgumentDeclarationTest {
                 ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
             it?.typeArguments?.firstOrNull()?.typeArguments shouldBeEqualTo null
             it?.sourceDeclaration?.name shouldBeEqualTo "Set"
-            it?.sourceDeclaration?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
+            it?.sourceDeclaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
         }
     }
 
@@ -83,7 +83,7 @@ class KoTypeArgumentDeclarationTest {
             it
                 ?.typeArguments
                 ?.flatten()
-                ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("List<String>", "String", "Int")
+                ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("List", "String", "Int")
             it
                 ?.typeArguments
                 ?.firstOrNull()
@@ -91,7 +91,7 @@ class KoTypeArgumentDeclarationTest {
                 ?.flatten()
                 ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
             it?.sourceDeclaration?.name shouldBeEqualTo "Map"
-            it?.sourceDeclaration?.declaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
+            it?.sourceDeclaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
         }
     }
 
