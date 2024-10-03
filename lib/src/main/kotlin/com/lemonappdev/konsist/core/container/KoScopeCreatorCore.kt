@@ -18,6 +18,22 @@ import java.io.File
 internal class KoScopeCreatorCore : KoScopeCreator {
     override val projectRootPath: String by lazy { PathProvider.rootProjectPath }
 
+    private val gradleRootBuildDirectoryRegex by lazy {
+        Regex("$projectRootPath/$GRADLE_BUILD_DIR/.*".toMacOsSeparator())
+    }
+    private val gradleModuleBuildDirectoryRegex by lazy {
+        Regex("$projectRootPath/.+/$GRADLE_BUILD_DIR/.*".toMacOsSeparator())
+    }
+    private val mavenRootBuildDirectoryRegex by lazy {
+        Regex("$projectRootPath/$MAVEN_BUILD_DIR/.*".toMacOsSeparator())
+    }
+    private val mavenModuleBuildDirectoryRegex by lazy {
+        Regex("$projectRootPath/.+/$MAVEN_BUILD_DIR/.*".toMacOsSeparator())
+    }
+    private val gradleDotGradleDirectoryRegex by lazy {
+        Regex("$projectRootPath/.gradle/.*".toMacOsSeparator())
+    }
+
     override fun scopeFromProject(
         moduleName: String?,
         sourceSetName: String?,
@@ -73,8 +89,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         coroutineScope {
             val localProjectKotlinFiles =
                 KoFileDeclarationProvider
-                    .getKoFileDeclarations()
-                    .filterNot { isBuildToolPath(it.path.toMacOsSeparator()) }
+                    .getKoFileDeclarations { !isBuildToolPath(it.path.toMacOsSeparator()) }
                     .let {
                         if (ignoreBuildConfig) {
                             it.filterNot { file -> file.isBuildConfigFile() }
@@ -228,21 +243,11 @@ internal class KoScopeCreatorCore : KoScopeCreator {
      * are conventions established by each build tool to organize and manage these files. Developers working with
      * these tools need to be aware of these directories to locate and work with the output of their builds.
      */
-    private fun isBuildOrTargetPath(path: String): Boolean {
-        val gradleBuildDirectoryName = "build"
-        val gradleRootBuildDirectoryRegex = Regex("$projectRootPath/$gradleBuildDirectoryName/.*".toMacOsSeparator())
-        val gradleModuleBuildDirectoryRegex =
-            Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*".toMacOsSeparator())
-
-        val mavenBuildDirectoryName = "target"
-        val mavenRootBuildDirectoryRegex = Regex("$projectRootPath/$mavenBuildDirectoryName/.*".toMacOsSeparator())
-        val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$mavenBuildDirectoryName/.*".toMacOsSeparator())
-
-        return path.matches(gradleRootBuildDirectoryRegex) ||
+    private fun isBuildOrTargetPath(path: String): Boolean =
+        path.matches(gradleRootBuildDirectoryRegex) ||
             path.matches(gradleModuleBuildDirectoryRegex) ||
             path.matches(mavenRootBuildDirectoryRegex) ||
             path.matches(mavenModuleBuildDirectoryRegex)
-    }
 
     /**
      * Determines if the given path is a directory ".gradle".
@@ -254,11 +259,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
      * metadata. This directory helps improve the efficiency of Gradle builds by storing and managing essential
      * information and artifacts.
      */
-    private fun isDotGradlePath(path: String): Boolean {
-        val dotGradleBuildDirectoryName = ".gradle"
-        val gradleRootBuildDirectoryRegex = Regex("$projectRootPath/$dotGradleBuildDirectoryName/.*".toMacOsSeparator())
-        return path.matches(gradleRootBuildDirectoryRegex)
-    }
+    private fun isDotGradlePath(path: String): Boolean = path.matches(gradleDotGradleDirectoryRegex)
 
     private fun isTestSourceSet(name: String): Boolean {
         val lowercaseName = name.lowercase()
@@ -280,7 +281,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     private fun getKoFiles(files: List<File>) =
         runBlocking {
             KoFileDeclarationProvider
-                .getKoFileDeclarations()
+                .getKoFileDeclarations { !isBuildToolPath(it.path.toMacOsSeparator()) }
                 .filter {
                     files.any { file ->
                         file.path == it.path
@@ -291,5 +292,8 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     companion object {
         private const val TEST_NAME_IN_PATH = "test"
         private const val ROOT_MODULE_NAME = "root"
+
+        private const val GRADLE_BUILD_DIR = "build"
+        private const val MAVEN_BUILD_DIR = "target"
     }
 }
