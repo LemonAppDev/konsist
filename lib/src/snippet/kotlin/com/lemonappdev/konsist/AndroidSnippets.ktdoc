@@ -4,9 +4,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.properties
+import com.lemonappdev.konsist.api.ext.list.types
 import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withParentClassOf
+import com.lemonappdev.konsist.api.ext.list.withParentNamed
+import com.lemonappdev.konsist.api.ext.list.withParentOf
+import com.lemonappdev.konsist.api.ext.list.withoutClassDeclaration
+import com.lemonappdev.konsist.api.ext.list.withoutKotlinBasicType
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 
@@ -52,6 +57,27 @@ class AndroidSnippets {
             .withAnnotationOf(Preview::class)
             .assertTrue {
                 it.hasNameContaining("Preview")
+            }
+    }
+
+    fun `every class with Serializable must have its properties Serializable`() {
+        val message =
+            """In Android, every serializable class must implement the Serializable interface 
+        |or be a simple non-enum type because this is how the Java and Android serialization 
+        |mechanisms identify which objects can be safely converted to a byte stream for 
+        |storage or transmission, ensuring that complex objects can be properly reconstructed 
+        |when deserialized.""".trimMargin()
+
+        Konsist
+            .scopeFromProduction()
+            .classes()
+            .withParentNamed("Serializable")
+            .properties()
+            .types
+            .withoutKotlinBasicType()
+            .withoutClassDeclaration { it.hasEnumModifier }
+            .assertTrue(additionalMessage = message) {
+                it.asClassDeclaration()?.hasParentWithName("Serializable")
             }
     }
 }
