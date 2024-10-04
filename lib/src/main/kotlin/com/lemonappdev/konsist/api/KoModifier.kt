@@ -164,6 +164,5 @@ enum class KoModifier(
     /**
      * The `fun` modifier.
      */
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("koScope.functions()"))
     FUN("fun"),
 }
