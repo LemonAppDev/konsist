@@ -8,7 +8,6 @@ import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoTypeProvider
-import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
 
 /**
  * Represents a Kotlin base type declaration.

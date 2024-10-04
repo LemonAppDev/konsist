@@ -3,11 +3,9 @@ package com.lemonappdev.konsist.core.declaration.kotypeargument
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
-import com.lemonappdev.konsist.api.ext.list.declaration.flatten
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
-import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoTypeArgumentDeclarationForKoGenericTypeProviderTest {
@@ -27,8 +25,8 @@ class KoTypeArgumentDeclarationForKoGenericTypeProviderTest {
         assertSoftly(sut) {
             it?.genericType shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.genericType?.name shouldBeEqualTo "String"
-            it?.hasGenericType { type -> type.name == "String" } shouldBeEqualTo  true
-            it?.hasGenericType { type -> type.name == "Int" } shouldBeEqualTo  false
+            it?.hasGenericType { type -> type.name == "String" } shouldBeEqualTo true
+            it?.hasGenericType { type -> type.name == "Int" } shouldBeEqualTo false
             it?.hasGenericTypeOf(String::class) shouldBeEqualTo true
             it?.hasGenericTypeOf(Int::class) shouldBeEqualTo false
         }
@@ -50,8 +48,8 @@ class KoTypeArgumentDeclarationForKoGenericTypeProviderTest {
         assertSoftly(sut) {
             it?.genericType shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.genericType?.name shouldBeEqualTo "Set"
-            it?.hasGenericType { type -> type.name == "Set" } shouldBeEqualTo  true
-            it?.hasGenericType { type -> type.name == "Map" } shouldBeEqualTo  false
+            it?.hasGenericType { type -> type.name == "Set" } shouldBeEqualTo true
+            it?.hasGenericType { type -> type.name == "Map" } shouldBeEqualTo false
             it?.hasGenericTypeOf(Set::class) shouldBeEqualTo true
             it?.hasGenericTypeOf(Map::class) shouldBeEqualTo false
         }
@@ -73,8 +71,8 @@ class KoTypeArgumentDeclarationForKoGenericTypeProviderTest {
         assertSoftly(sut) {
             it?.genericType shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.genericType?.name shouldBeEqualTo "Map"
-            it?.hasGenericType { type -> type.name == "Map" } shouldBeEqualTo  true
-            it?.hasGenericType { type -> type.name == "Set" } shouldBeEqualTo  false
+            it?.hasGenericType { type -> type.name == "Map" } shouldBeEqualTo true
+            it?.hasGenericType { type -> type.name == "Set" } shouldBeEqualTo false
             it?.hasGenericTypeOf(Map::class) shouldBeEqualTo true
             it?.hasGenericTypeOf(Set::class) shouldBeEqualTo false
         }
@@ -96,8 +94,8 @@ class KoTypeArgumentDeclarationForKoGenericTypeProviderTest {
         assertSoftly(sut) {
             it?.genericType shouldBeInstanceOf KoStarProjectionDeclaration::class
             it?.genericType?.name shouldBeEqualTo "*"
-            it?.hasGenericType { type -> type.name == "*" } shouldBeEqualTo  true
-            it?.hasGenericType { type -> type.name == "Set" } shouldBeEqualTo  false
+            it?.hasGenericType { type -> type.name == "*" } shouldBeEqualTo true
+            it?.hasGenericType { type -> type.name == "Set" } shouldBeEqualTo false
             it?.hasGenericTypeOf(Set::class) shouldBeEqualTo false
         }
     }
@@ -105,6 +103,6 @@ class KoTypeArgumentDeclarationForKoGenericTypeProviderTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/kotypeargument/snippet/forkogenerictypeprovider/",
-            fileName
+            fileName,
         )
 }

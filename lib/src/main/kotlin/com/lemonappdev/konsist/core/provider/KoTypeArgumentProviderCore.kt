@@ -47,10 +47,14 @@ internal interface KoTypeArgumentProviderCore :
             return types.map {
                 KoTypeArgumentDeclarationCore(
                     it.name,
-                    if (it.isGenericType) it.asGenericTypeDeclaration()?.genericType
-                        ?: it.sourceDeclaration else it.sourceDeclaration,
+                    if (it.isGenericType) {
+                        it.asGenericTypeDeclaration()?.genericType
+                            ?: it.sourceDeclaration
+                    } else {
+                        it.sourceDeclaration
+                    },
                     if (it.isGenericType) it.asGenericTypeDeclaration()?.typeArguments ?: emptyList() else emptyList(),
-                    it.sourceDeclaration
+                    it.sourceDeclaration,
                 )
             }
         }
@@ -58,9 +62,7 @@ internal interface KoTypeArgumentProviderCore :
     override val numTypeArguments: Int
         get() = typeArguments.size
 
-
-    override fun countTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Int =
-        typeArguments.count { predicate(it) }
+    override fun countTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Int = typeArguments.count { predicate(it) }
 
     override fun hasTypeArgumentWithName(
         name: String,
@@ -102,8 +104,8 @@ internal interface KoTypeArgumentProviderCore :
                 names.any { name ->
                     typeArguments.any { typeArgument ->
                         name.qualifiedName ==
-                                (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)
-                                    ?.fullyQualifiedName
+                            (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)
+                                ?.fullyQualifiedName
                     }
                 }
         }
@@ -120,15 +122,13 @@ internal interface KoTypeArgumentProviderCore :
                 names.all { name ->
                     typeArguments.any { typeArgument ->
                         name.qualifiedName ==
-                                (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)
-                                    ?.fullyQualifiedName
+                            (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)
+                                ?.fullyQualifiedName
                     }
                 }
         }
 
-    override fun hasTypeArgument(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean =
-        typeArguments.any(predicate)
+    override fun hasTypeArgument(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean = typeArguments.any(predicate)
 
-    override fun hasAllTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean =
-        typeArguments.all(predicate)
+    override fun hasAllTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean = typeArguments.all(predicate)
 }

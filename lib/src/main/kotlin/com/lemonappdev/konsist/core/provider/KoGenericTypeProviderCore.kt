@@ -30,7 +30,7 @@ internal interface KoGenericTypeProviderCore :
                 listOf(ktNameReferenceExpression),
                 ktNameReferenceExpression.isExtensionDeclaration(),
                 this.castToKoBaseDeclaration(),
-                containingFile
+                containingFile,
             ) ?: throw (Exception("Generic type cannot be null."))
         }
 

@@ -6,20 +6,20 @@ import com.lemonappdev.konsist.core.declaration.KoTypeArgumentDeclarationCore
 
 fun <T : KoTypeArgumentDeclaration> List<T>.flatten(): List<KoBaseTypeDeclaration> =
     flatMap { typeArg ->
-        val baseDeclaration = if (typeArg.typeArguments.isNotEmpty()) {
-            KoTypeArgumentDeclarationCore(
-                typeArg.sourceDeclaration.name,
-                typeArg.genericType,
-                typeArg.typeArguments,
-                typeArg.sourceDeclaration,
-            )
-        } else {
-            typeArg
-        }
+        val baseDeclaration =
+            if (typeArg.typeArguments.isNotEmpty()) {
+                KoTypeArgumentDeclarationCore(
+                    typeArg.sourceDeclaration.name,
+                    typeArg.genericType,
+                    typeArg.typeArguments,
+                    typeArg.sourceDeclaration,
+                )
+            } else {
+                typeArg
+            }
 
         listOf(baseDeclaration) + (typeArg.typeArguments.flattenRecursively())
-    }
-        .map { it.genericType }
+    }.map { it.genericType }
 
 private fun <T : KoTypeArgumentDeclaration> List<T>.flattenRecursively(): List<KoTypeArgumentDeclaration> =
     flatMap { typeArg -> listOf(typeArg) + (typeArg.typeArguments.flattenRecursively()) }
