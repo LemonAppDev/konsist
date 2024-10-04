@@ -1,9 +1,5 @@
 package com.lemonappdev.konsist.core.declaration.type.kotype
 
-import com.lemonappdev.konsist.externalsample.SampleExternalClass
-import com.lemonappdev.konsist.testdata.SampleInterface
-import com.lemonappdev.konsist.testdata.SampleObject
-import com.lemonappdev.konsist.testdata.SampleType
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
@@ -17,6 +13,10 @@ import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifiers
 import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+import com.lemonappdev.konsist.externalsample.SampleExternalClass
+import com.lemonappdev.konsist.testdata.SampleInterface
+import com.lemonappdev.konsist.testdata.SampleObject
+import com.lemonappdev.konsist.testdata.SampleType
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -31,6 +31,7 @@ import kotlin.reflect.KClass
 class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
+    @Suppress("detekt.LongParameterList")
     fun `source declaration`(
         fileName: String,
         instanceOf: KClass<*>,

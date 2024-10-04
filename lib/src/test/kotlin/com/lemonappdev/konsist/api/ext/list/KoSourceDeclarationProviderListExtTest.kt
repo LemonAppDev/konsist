@@ -99,7 +99,6 @@ class KoSourceDeclarationProviderListExtTest {
         sut shouldBeEqualTo listOf(declaration2)
     }
 
-
     @Test
     fun `withSourceDeclarationOf(empty list) returns all source declarations`() {
         // given
