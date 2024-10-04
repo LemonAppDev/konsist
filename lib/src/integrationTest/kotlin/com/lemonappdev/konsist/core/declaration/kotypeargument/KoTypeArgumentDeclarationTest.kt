@@ -25,7 +25,7 @@ class KoTypeArgumentDeclarationTest {
         assertSoftly(sut) {
             it?.toString() shouldBeEqualTo "String"
             it?.name shouldBeEqualTo "String"
-            it?.typeArguments shouldBeEqualTo null
+            it?.typeArguments shouldBeEqualTo emptyList()
         }
     }
 
@@ -51,7 +51,7 @@ class KoTypeArgumentDeclarationTest {
                 ?.typeArguments
                 ?.flatten()
                 ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
-            it?.typeArguments?.firstOrNull()?.typeArguments shouldBeEqualTo null
+            it?.typeArguments?.firstOrNull()?.typeArguments shouldBeEqualTo emptyList()
             it?.sourceDeclaration?.name shouldBeEqualTo "Set"
             it?.sourceDeclaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
         }
@@ -111,7 +111,7 @@ class KoTypeArgumentDeclarationTest {
         assertSoftly(sut) {
             it?.toString() shouldBeEqualTo "*"
             it?.name shouldBeEqualTo "*"
-            it?.typeArguments shouldBeEqualTo null
+            it?.typeArguments shouldBeEqualTo emptyList()
         }
     }
 

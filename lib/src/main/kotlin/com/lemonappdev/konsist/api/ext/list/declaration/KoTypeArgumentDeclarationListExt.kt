@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.core.declaration.KoTypeArgumentDeclarationCore
 
 fun <T : KoTypeArgumentDeclaration> List<T>.flatten(): List<KoBaseTypeDeclaration> =
     flatMap { typeArg ->
-        val baseDeclaration = if (typeArg.typeArguments?.isNotEmpty() == true) {
+        val baseDeclaration = if (typeArg.typeArguments.isNotEmpty()) {
             KoTypeArgumentDeclarationCore(
                 typeArg.sourceDeclaration.name,
                 typeArg.typeArguments,

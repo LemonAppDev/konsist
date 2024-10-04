@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
+import com.lemonappdev.konsist.api.provider.KoTypeArgumentProvider
 
 /**
  * Represents a generic type declaration.
@@ -21,4 +22,5 @@ interface KoGenericTypeDeclaration :
     KoPathProvider,
     KoModuleProvider,
     KoSourceSetProvider,
-    KoGenericTypeDeclarationProvider
+    KoGenericTypeDeclarationProvider,
+    KoTypeArgumentProvider
