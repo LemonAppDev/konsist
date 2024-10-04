@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api
 
+import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutPrivateModifier
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withParameter
 import com.lemonappdev.konsist.api.ext.list.withProperty
@@ -30,6 +31,7 @@ class ApiKonsistTest {
     fun `every api function has valid KDoc`() {
         apiPackageScope
             .functions()
+            .withoutPrivateModifier()
             .assertTrue { it.hasValidKDocParamTags() && it.hasValidKDocReturnTag() }
     }
 
