@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.ext.list.genericTypeDeclarations
 import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.ext.list.returnTypes
 import com.lemonappdev.konsist.api.ext.list.typeArguments
-import com.lemonappdev.konsist.api.ext.list.types
+import com.lemonappdev.konsist.api.ext.list.genericTypes
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
@@ -51,7 +51,7 @@ class GenericTypesSnippets {
             .parameters
             .types
             .genericTypeDeclarations()
-            .types
+            .genericTypes
             .assertFalse { it.hasNameEndingWith("Repository") }
     }
 }

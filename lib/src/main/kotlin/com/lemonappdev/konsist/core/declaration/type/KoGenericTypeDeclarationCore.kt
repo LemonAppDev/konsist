@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
-import com.lemonappdev.konsist.core.provider.KoGenericTypeDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoGenericTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
@@ -29,7 +29,7 @@ internal class KoGenericTypeDeclarationCore private constructor(
     KoPathProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore,
-    KoGenericTypeDeclarationProviderCore,
+    KoGenericTypeProviderCore,
     KoTypeArgumentProviderCore {
     override val psiElement: PsiElement by lazy { ktUserType }
 

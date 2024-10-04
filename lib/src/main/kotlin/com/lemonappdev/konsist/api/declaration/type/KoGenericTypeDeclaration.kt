@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.declaration.type
 
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
-import com.lemonappdev.konsist.api.provider.KoGenericTypeDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoGenericTypeProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
@@ -22,5 +22,5 @@ interface KoGenericTypeDeclaration :
     KoPathProvider,
     KoModuleProvider,
     KoSourceSetProvider,
-    KoGenericTypeDeclarationProvider,
+    KoGenericTypeProvider,
     KoTypeArgumentProvider

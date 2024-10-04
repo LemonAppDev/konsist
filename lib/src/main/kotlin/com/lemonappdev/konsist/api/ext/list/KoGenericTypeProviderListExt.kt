@@ -3,13 +3,13 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoGenericTypeDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoGenericTypeProvider
 import kotlin.reflect.KClass
 
 /**
  * Returns a list containing generic type declarations.
  */
-val <T : KoGenericTypeDeclarationProvider> List<T>.types: List<KoBaseTypeDeclaration>
+val <T : KoGenericTypeProvider> List<T>.genericTypes: List<KoBaseTypeDeclaration>
     get() = mapNotNull { it.genericType }
 
 /**
@@ -18,7 +18,7 @@ val <T : KoGenericTypeDeclarationProvider> List<T>.types: List<KoBaseTypeDeclara
  * @param predicate A function that defines the condition to be met by the generic type.
  * @return A list containing elements with a generic type satisfying the predicate.
  */
-fun <T : KoGenericTypeDeclarationProvider> List<T>.withType(predicate: (KoBaseTypeDeclaration) -> Boolean): List<T> =
+fun <T : KoGenericTypeProvider> List<T>.withGenericType(predicate: (KoBaseTypeDeclaration) -> Boolean): List<T> =
     filter { predicate(it.genericType) }
 
 /**
@@ -27,7 +27,7 @@ fun <T : KoGenericTypeDeclarationProvider> List<T>.withType(predicate: (KoBaseTy
  * @param predicate A function that defines the condition to be met by the generic type.
  * @return A list excluding elements with a generic type satisfying the predicate.
  */
-fun <T : KoGenericTypeDeclarationProvider> List<T>.withoutType(predicate: (KoBaseTypeDeclaration) -> Boolean): List<T> =
+fun <T : KoGenericTypeProvider> List<T>.withoutGenericType(predicate: (KoBaseTypeDeclaration) -> Boolean): List<T> =
     filterNot { predicate(it.genericType) }
 
 /**
@@ -37,10 +37,10 @@ fun <T : KoGenericTypeDeclarationProvider> List<T>.withoutType(predicate: (KoBas
  * @param kClasses Additional KClass types to match the generic type.
  * @return A list containing elements with a generic type matching the specified KClasses.
  */
-fun <T : KoGenericTypeDeclarationProvider> List<T>.withTypeOf(
+fun <T : KoGenericTypeProvider> List<T>.withGenericTypeOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> = withTypeOf(listOf(kClass, *kClasses))
+): List<T> = withGenericTypeOf(listOf(kClass, *kClasses))
 
 /**
  * Filters the list to include only elements with a generic type matching any of the specified KClass types.
@@ -48,7 +48,7 @@ fun <T : KoGenericTypeDeclarationProvider> List<T>.withTypeOf(
  * @param kClasses A collection of KClass types to match the generic type.
  * @return A list containing elements with a generic type matching the specified KClasses.
  */
-fun <T : KoGenericTypeDeclarationProvider> List<T>.withTypeOf(kClasses: Collection<KClass<*>>): List<T> =
+fun <T : KoGenericTypeProvider> List<T>.withGenericTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
         when {
             kClasses.isEmpty() -> true
@@ -63,10 +63,10 @@ fun <T : KoGenericTypeDeclarationProvider> List<T>.withTypeOf(kClasses: Collecti
  * @param kClasses Additional KClass types to match the generic type.
  * @return A list excluding elements with a generic type matching the specified KClasses.
  */
-fun <T : KoGenericTypeDeclarationProvider> List<T>.withoutTypeOf(
+fun <T : KoGenericTypeProvider> List<T>.withoutGenericTypeOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
-): List<T> = withoutTypeOf(listOf(kClass, *kClasses))
+): List<T> = withoutGenericTypeOf(listOf(kClass, *kClasses))
 
 /**
  * Filters the list to exclude elements with a generic type matching any of the specified KClass types.
@@ -74,7 +74,7 @@ fun <T : KoGenericTypeDeclarationProvider> List<T>.withoutTypeOf(
  * @param kClasses A collection of KClass types to match the generic type.
  * @return A list excluding elements with a generic type matching the specified KClasses.
  */
-fun <T : KoGenericTypeDeclarationProvider> List<T>.withoutTypeOf(kClasses: Collection<KClass<*>>): List<T> =
+fun <T : KoGenericTypeProvider> List<T>.withoutGenericTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
         when {
             kClasses.isEmpty() -> true

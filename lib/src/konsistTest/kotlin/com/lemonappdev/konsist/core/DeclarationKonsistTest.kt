@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.declarations
 import com.lemonappdev.konsist.api.ext.list.returnTypes
-import com.lemonappdev.konsist.api.ext.list.types
 import com.lemonappdev.konsist.api.ext.list.withoutName
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue

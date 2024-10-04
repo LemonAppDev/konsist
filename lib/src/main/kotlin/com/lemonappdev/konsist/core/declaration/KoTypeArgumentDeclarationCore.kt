@@ -2,11 +2,8 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoGenericTypeDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoTypeArgumentProvider
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
-import com.lemonappdev.konsist.core.provider.KoGenericTypeDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoGenericTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
@@ -23,7 +20,7 @@ data class KoTypeArgumentDeclarationCore(
     KoNameProviderCore,
     KoSourceDeclarationProviderCore,
     KoTypeArgumentProviderCore,
-    KoGenericTypeDeclarationProviderCore {
+    KoGenericTypeProviderCore {
     override val ktElement: KtElement? by lazy { null }
 
     override val ktUserType: KtUserType? by lazy { null }

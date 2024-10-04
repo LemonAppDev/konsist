@@ -22,7 +22,7 @@ import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
 
 @Suppress("detekt.LongMethod")
-class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
+class KoGenericTypeDeclarationForKoGenericTypeProviderTest {
     @Test
     fun `kotlin-generic-type`() {
         // given
