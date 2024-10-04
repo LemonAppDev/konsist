@@ -1,11 +1,13 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
@@ -21,6 +23,10 @@ internal interface KoTypeDeclarationProviderCore :
     KoContainingFileProviderCore,
     KoContainingDeclarationProviderCore,
     KoSourceDeclarationProviderCore {
+    @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("sourceDeclaration"))
+    override val declaration: KoBaseTypeDeclaration
+        get() = sourceDeclaration
+
     override fun asClassDeclaration(): KoClassDeclaration? = sourceDeclaration as? KoClassDeclaration
 
     override fun asObjectDeclaration(): KoObjectDeclaration? = sourceDeclaration as? KoObjectDeclaration
@@ -48,6 +54,19 @@ internal interface KoTypeDeclarationProviderCore :
             null -> asClassDeclaration() != null
             else -> asClassDeclaration()?.let { predicate(it) } ?: false
         }
+
+    @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("hasSourceDeclaration"))
+    override fun hasDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean = predicate(declaration)
+
+    @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("hasSourceDeclarationOf"))
+    override fun hasDeclarationOf(kClass: KClass<*>): Boolean =
+        hasClassDeclarationOf(kClass) ||
+                hasObjectDeclarationOf(kClass) ||
+                hasInterfaceDeclarationOf(kClass) ||
+                hasKotlinTypeDeclarationOf(
+                    kClass,
+                ) ||
+                hasExternalTypeDeclarationOf(kClass)
 
     override fun hasSourceDeclarationOf(kClass: KClass<*>): Boolean =
         hasClassDeclarationOf(kClass) ||

@@ -37,6 +37,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.hasDeclaration { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
+            it?.hasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasDeclarationOf(SampleType::class) shouldBeEqualTo true
+            it?.hasDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleType::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
@@ -83,6 +87,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.hasDeclaration { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
+            it?.hasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasDeclarationOf(SampleType::class) shouldBeEqualTo true
+            it?.hasDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleType::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
@@ -129,6 +137,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.hasDeclaration { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
+            it?.hasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasDeclarationOf(SampleObject::class) shouldBeEqualTo true
+            it?.hasDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
@@ -175,6 +187,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.hasDeclaration { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
+            it?.hasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasDeclarationOf(SampleObject::class) shouldBeEqualTo true
+            it?.hasDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
@@ -221,6 +237,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.hasDeclaration { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
+            it?.hasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasDeclarationOf(SampleInterface::class) shouldBeEqualTo true
+            it?.hasDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleInterface::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
@@ -267,6 +287,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.hasDeclaration { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
+            it?.hasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasDeclarationOf(SampleInterface::class) shouldBeEqualTo true
+            it?.hasDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleInterface::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
@@ -313,6 +337,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.hasDeclaration { declaration -> declaration.name == "ImportAlias" } shouldBeEqualTo true
+            it?.hasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasDeclarationOf(SampleObject::class) shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeInstanceOf KoImportAliasDeclaration::class
             it?.asImportAliasDeclaration()?.name shouldBeEqualTo "ImportAlias"
@@ -353,6 +380,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.hasDeclaration { declaration -> declaration.name == "SampleTypeAlias" } shouldBeEqualTo true
+            it?.hasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasDeclarationOf(SampleObject::class) shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeInstanceOf KoTypeAliasDeclaration::class
             it?.asTypeAliasDeclaration()?.name shouldBeEqualTo "SampleTypeAlias"
@@ -393,6 +423,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.hasDeclaration { declaration -> declaration.name == "ImportAlias" } shouldBeEqualTo true
+            it?.hasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasDeclarationOf(SampleObject::class) shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeInstanceOf KoImportAliasDeclaration::class
             it?.asImportAliasDeclaration()?.name shouldBeEqualTo "ImportAlias"
@@ -513,6 +546,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.hasDeclaration { declaration -> declaration.name == "SampleTypeAlias" } shouldBeEqualTo true
+            it?.hasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasDeclarationOf(SampleObject::class) shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeInstanceOf KoTypeAliasDeclaration::class
             it?.asTypeAliasDeclaration()?.name shouldBeEqualTo "SampleTypeAlias"
@@ -553,13 +589,16 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.hasDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo true
+            it?.hasDeclaration { declaration -> declaration.name == "Int" } shouldBeEqualTo false
+            it?.hasDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(List::class) shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "String"
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo true
             it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo true
-            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "List<Set<String>>" } shouldBeEqualTo false
+            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "Set<String>" } shouldBeEqualTo false
             it?.hasKotlinTypeDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasKotlinTypeDeclarationOf(Int::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -600,13 +639,17 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.hasDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo true
+            it?.hasDeclaration { declaration -> declaration.name == "Int" } shouldBeEqualTo false
+            it?.hasDeclarationOf(String::class) shouldBeEqualTo true
+            it?.hasDeclarationOf(Int::class) shouldBeEqualTo false
             it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(List::class) shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "String"
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo true
             it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo true
-            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "List<Set<String>>" } shouldBeEqualTo false
+            it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "Set<String>" } shouldBeEqualTo false
             it?.hasKotlinTypeDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasKotlinTypeDeclarationOf(Int::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -647,6 +690,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.hasDeclaration { declaration -> declaration.name == "(SampleObject) -> Unit" } shouldBeEqualTo true
+            it?.hasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasDeclarationOf(SampleObject::class) shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
             it?.asFunctionTypeDeclaration() shouldBeInstanceOf KoFunctionTypeDeclaration::class
             it?.asFunctionTypeDeclaration()?.name shouldBeEqualTo "(SampleObject) -> Unit"
@@ -687,6 +733,9 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.hasDeclaration { declaration -> declaration.name == "(SampleObject) -> Unit" } shouldBeEqualTo true
+            it?.hasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasDeclarationOf(SampleObject::class) shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
             it?.asFunctionTypeDeclaration() shouldBeInstanceOf KoFunctionTypeDeclaration::class
             it?.asFunctionTypeDeclaration()?.name shouldBeEqualTo "(SampleObject) -> Unit"
@@ -727,6 +776,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.hasDeclaration { declaration -> declaration.name == "SampleExternalClass" } shouldBeEqualTo true
+            it?.hasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasDeclarationOf(SampleExternalClass::class) shouldBeEqualTo true
+            it?.hasDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleExternalClass::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asExternalTypeDeclaration() shouldBeInstanceOf KoExternalDeclaration::class
@@ -774,6 +827,10 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.hasDeclaration { declaration -> declaration.name == "SampleExternalClass" } shouldBeEqualTo true
+            it?.hasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasDeclarationOf(SampleExternalClass::class) shouldBeEqualTo true
+            it?.hasDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleExternalClass::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asExternalTypeDeclaration() shouldBeInstanceOf KoExternalDeclaration::class
