@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoGenericTypeDeclarationProvider
 import com.lemonappdev.konsist.testdata.SampleType1
@@ -18,11 +17,11 @@ class KoGenericTypeDeclarationProviderListExtTest {
         val type2: KoBaseTypeDeclaration = mockk()
         val declaration1: KoGenericTypeDeclarationProvider =
             mockk {
-                every { type } returns type1
+                every { genericType } returns type1
             }
         val declaration2: KoGenericTypeDeclarationProvider =
             mockk {
-                every { type } returns type2
+                every { genericType } returns type2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -48,11 +47,11 @@ class KoGenericTypeDeclarationProviderListExtTest {
             }
         val declaration1: KoGenericTypeDeclarationProvider =
             mockk {
-                every { type } returns type1
+                every { genericType } returns type1
             }
         val declaration2: KoGenericTypeDeclarationProvider =
             mockk {
-                every { type } returns type2
+                every { genericType } returns type2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -78,11 +77,11 @@ class KoGenericTypeDeclarationProviderListExtTest {
             }
         val declaration1: KoGenericTypeDeclarationProvider =
             mockk {
-                every { type } returns type1
+                every { genericType } returns type1
             }
         val declaration2: KoGenericTypeDeclarationProvider =
             mockk {
-                every { type } returns type2
+                every { genericType } returns type2
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -154,11 +153,11 @@ class KoGenericTypeDeclarationProviderListExtTest {
         // given
         val declaration1: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns true
+                every { hasGenericTypeOf(SampleType1::class) } returns true
             }
         val declaration2: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns false
+                every { hasGenericTypeOf(SampleType1::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -174,18 +173,18 @@ class KoGenericTypeDeclarationProviderListExtTest {
         // given
         val declaration1: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns true
-                every { hasTypeOf(SampleType2::class) } returns false
+                every { hasGenericTypeOf(SampleType1::class) } returns true
+                every { hasGenericTypeOf(SampleType2::class) } returns false
             }
         val declaration2: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns false
-                every { hasTypeOf(SampleType2::class) } returns true
+                every { hasGenericTypeOf(SampleType1::class) } returns false
+                every { hasGenericTypeOf(SampleType2::class) } returns true
             }
         val declaration3: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns false
-                every { hasTypeOf(SampleType2::class) } returns false
+                every { hasGenericTypeOf(SampleType1::class) } returns false
+                every { hasGenericTypeOf(SampleType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -201,18 +200,18 @@ class KoGenericTypeDeclarationProviderListExtTest {
         // given
         val declaration1: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns true
-                every { hasTypeOf(SampleType2::class) } returns false
+                every { hasGenericTypeOf(SampleType1::class) } returns true
+                every { hasGenericTypeOf(SampleType2::class) } returns false
             }
         val declaration2: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns false
-                every { hasTypeOf(SampleType2::class) } returns true
+                every { hasGenericTypeOf(SampleType1::class) } returns false
+                every { hasGenericTypeOf(SampleType2::class) } returns true
             }
         val declaration3: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns false
-                every { hasTypeOf(SampleType2::class) } returns false
+                every { hasGenericTypeOf(SampleType1::class) } returns false
+                every { hasGenericTypeOf(SampleType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = listOf(SampleType1::class, SampleType2::class)
@@ -229,18 +228,18 @@ class KoGenericTypeDeclarationProviderListExtTest {
         // given
         val declaration1: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns true
-                every { hasTypeOf(SampleType2::class) } returns false
+                every { hasGenericTypeOf(SampleType1::class) } returns true
+                every { hasGenericTypeOf(SampleType2::class) } returns false
             }
         val declaration2: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns false
-                every { hasTypeOf(SampleType2::class) } returns true
+                every { hasGenericTypeOf(SampleType1::class) } returns false
+                every { hasGenericTypeOf(SampleType2::class) } returns true
             }
         val declaration3: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns false
-                every { hasTypeOf(SampleType2::class) } returns false
+                every { hasGenericTypeOf(SampleType1::class) } returns false
+                every { hasGenericTypeOf(SampleType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = setOf(SampleType1::class, SampleType2::class)
@@ -257,11 +256,11 @@ class KoGenericTypeDeclarationProviderListExtTest {
         // given
         val declaration1: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns true
+                every { hasGenericTypeOf(SampleType1::class) } returns true
             }
         val declaration2: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns false
+                every { hasGenericTypeOf(SampleType1::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -277,18 +276,18 @@ class KoGenericTypeDeclarationProviderListExtTest {
         // given
         val declaration1: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns true
-                every { hasTypeOf(SampleType2::class) } returns false
+                every { hasGenericTypeOf(SampleType1::class) } returns true
+                every { hasGenericTypeOf(SampleType2::class) } returns false
             }
         val declaration2: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns false
-                every { hasTypeOf(SampleType2::class) } returns true
+                every { hasGenericTypeOf(SampleType1::class) } returns false
+                every { hasGenericTypeOf(SampleType2::class) } returns true
             }
         val declaration3: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns false
-                every { hasTypeOf(SampleType2::class) } returns false
+                every { hasGenericTypeOf(SampleType1::class) } returns false
+                every { hasGenericTypeOf(SampleType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -304,18 +303,18 @@ class KoGenericTypeDeclarationProviderListExtTest {
         // given
         val declaration1: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns true
-                every { hasTypeOf(SampleType2::class) } returns false
+                every { hasGenericTypeOf(SampleType1::class) } returns true
+                every { hasGenericTypeOf(SampleType2::class) } returns false
             }
         val declaration2: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns false
-                every { hasTypeOf(SampleType2::class) } returns true
+                every { hasGenericTypeOf(SampleType1::class) } returns false
+                every { hasGenericTypeOf(SampleType2::class) } returns true
             }
         val declaration3: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns false
-                every { hasTypeOf(SampleType2::class) } returns false
+                every { hasGenericTypeOf(SampleType1::class) } returns false
+                every { hasGenericTypeOf(SampleType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = listOf(SampleType1::class, SampleType2::class)
@@ -332,18 +331,18 @@ class KoGenericTypeDeclarationProviderListExtTest {
         // given
         val declaration1: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns true
-                every { hasTypeOf(SampleType2::class) } returns false
+                every { hasGenericTypeOf(SampleType1::class) } returns true
+                every { hasGenericTypeOf(SampleType2::class) } returns false
             }
         val declaration2: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns false
-                every { hasTypeOf(SampleType2::class) } returns true
+                every { hasGenericTypeOf(SampleType1::class) } returns false
+                every { hasGenericTypeOf(SampleType2::class) } returns true
             }
         val declaration3: KoGenericTypeDeclarationProvider =
             mockk {
-                every { hasTypeOf(SampleType1::class) } returns false
-                every { hasTypeOf(SampleType2::class) } returns false
+                every { hasGenericTypeOf(SampleType1::class) } returns false
+                every { hasGenericTypeOf(SampleType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = setOf(SampleType1::class, SampleType2::class)

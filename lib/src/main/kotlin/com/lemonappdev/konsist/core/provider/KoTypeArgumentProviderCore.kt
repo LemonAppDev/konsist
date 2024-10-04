@@ -1,26 +1,17 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
-import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoTypeArgumentProvider
 import com.lemonappdev.konsist.core.declaration.KoTypeArgumentDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
-import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
-import com.lemonappdev.konsist.core.util.TypeUtil
-import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtProjectionKind
 import org.jetbrains.kotlin.psi.KtTypeArgumentList
 import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
-import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import kotlin.reflect.KClass
 
 internal interface KoTypeArgumentProviderCore :
@@ -56,9 +47,10 @@ internal interface KoTypeArgumentProviderCore :
             return types.map {
                 KoTypeArgumentDeclarationCore(
                     it.name,
-                    if (it.isGenericType) it.asGenericTypeDeclaration()?.typeArguments ?: emptyList() else emptyList(),
-                    if (it.isGenericType) it.asGenericTypeDeclaration()?.type
+                    if (it.isGenericType) it.asGenericTypeDeclaration()?.genericType
                         ?: it.sourceDeclaration else it.sourceDeclaration,
+                    if (it.isGenericType) it.asGenericTypeDeclaration()?.typeArguments ?: emptyList() else emptyList(),
+                    it.sourceDeclaration
                 )
             }
         }

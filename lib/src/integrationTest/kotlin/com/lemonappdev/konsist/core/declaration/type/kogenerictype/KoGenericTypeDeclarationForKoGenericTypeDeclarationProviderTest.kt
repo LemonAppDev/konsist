@@ -35,12 +35,12 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.type shouldBeInstanceOf KoKotlinTypeDeclaration::class
-            it?.type?.name shouldBeEqualTo "List"
-            it?.hasType { type -> type.isKotlinCollectionType } shouldBeEqualTo true
-            it?.hasType { type -> type.isClass } shouldBeEqualTo false
-            it?.hasTypeOf(List::class) shouldBeEqualTo true
-            it?.hasTypeOf(Map::class) shouldBeEqualTo false
+            it?.genericType shouldBeInstanceOf KoKotlinTypeDeclaration::class
+            it?.genericType?.name shouldBeEqualTo "List"
+            it?.hasGenericType { type -> type.isKotlinCollectionType } shouldBeEqualTo true
+            it?.hasGenericType { type -> type.isClass } shouldBeEqualTo false
+            it?.hasGenericTypeOf(List::class) shouldBeEqualTo true
+            it?.hasGenericTypeOf(Map::class) shouldBeEqualTo false
         }
     }
 
@@ -56,12 +56,12 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.type shouldBeInstanceOf KoClassDeclaration::class
-            it?.type?.name shouldBeEqualTo "SampleGenericClassWithParameter"
-            it?.hasType { type -> type.isClass } shouldBeEqualTo true
-            it?.hasType { type -> type.isKotlinType } shouldBeEqualTo false
-            it?.hasTypeOf(SampleGenericClassWithParameter::class) shouldBeEqualTo true
-            it?.hasTypeOf(Map::class) shouldBeEqualTo false
+            it?.genericType shouldBeInstanceOf KoClassDeclaration::class
+            it?.genericType?.name shouldBeEqualTo "SampleGenericClassWithParameter"
+            it?.hasGenericType { type -> type.isClass } shouldBeEqualTo true
+            it?.hasGenericType { type -> type.isKotlinType } shouldBeEqualTo false
+            it?.hasGenericTypeOf(SampleGenericClassWithParameter::class) shouldBeEqualTo true
+            it?.hasGenericTypeOf(Map::class) shouldBeEqualTo false
         }
     }
 
@@ -77,12 +77,12 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.type shouldBeInstanceOf KoInterfaceDeclaration::class
-            it?.type?.name shouldBeEqualTo "SampleGenericSuperInterface"
-            it?.hasType { type -> type.isInterface } shouldBeEqualTo true
-            it?.hasType { type -> type.isClass } shouldBeEqualTo false
-            it?.hasTypeOf(SampleGenericSuperInterface::class) shouldBeEqualTo true
-            it?.hasTypeOf(Map::class) shouldBeEqualTo false
+            it?.genericType shouldBeInstanceOf KoInterfaceDeclaration::class
+            it?.genericType?.name shouldBeEqualTo "SampleGenericSuperInterface"
+            it?.hasGenericType { type -> type.isInterface } shouldBeEqualTo true
+            it?.hasGenericType { type -> type.isClass } shouldBeEqualTo false
+            it?.hasGenericTypeOf(SampleGenericSuperInterface::class) shouldBeEqualTo true
+            it?.hasGenericTypeOf(Map::class) shouldBeEqualTo false
         }
     }
 
@@ -124,11 +124,11 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.type shouldBeInstanceOf KoImportAliasDeclaration::class
-            it?.type?.name shouldBeEqualTo "SampleImportAlias"
-            it?.hasType { type -> type.isImportAlias } shouldBeEqualTo true
-            it?.hasType { type -> type.isClass } shouldBeEqualTo false
-            it?.hasTypeOf(Map::class) shouldBeEqualTo false
+            it?.genericType shouldBeInstanceOf KoImportAliasDeclaration::class
+            it?.genericType?.name shouldBeEqualTo "SampleImportAlias"
+            it?.hasGenericType { type -> type.isImportAlias } shouldBeEqualTo true
+            it?.hasGenericType { type -> type.isClass } shouldBeEqualTo false
+            it?.hasGenericTypeOf(Map::class) shouldBeEqualTo false
         }
     }
 
@@ -144,12 +144,12 @@ class KoGenericTypeDeclarationForKoGenericTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.type shouldBeInstanceOf KoExternalDeclaration::class
-            it?.type?.name shouldBeEqualTo "SampleExternalGenericClass"
-            it?.hasType { type -> type.isExternalType } shouldBeEqualTo true
-            it?.hasType { type -> type.isClass } shouldBeEqualTo false
-            it?.hasTypeOf(SampleExternalGenericClass::class) shouldBeEqualTo true
-            it?.hasTypeOf(Map::class) shouldBeEqualTo false
+            it?.genericType shouldBeInstanceOf KoExternalDeclaration::class
+            it?.genericType?.name shouldBeEqualTo "SampleExternalGenericClass"
+            it?.hasGenericType { type -> type.isExternalType } shouldBeEqualTo true
+            it?.hasGenericType { type -> type.isClass } shouldBeEqualTo false
+            it?.hasGenericTypeOf(SampleExternalGenericClass::class) shouldBeEqualTo true
+            it?.hasGenericTypeOf(Map::class) shouldBeEqualTo false
         }
     }
 

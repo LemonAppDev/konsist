@@ -27,7 +27,7 @@ class GenericTypesSnippets {
             .scopeFromProduction()
             .properties()
             .types
-            .genericTypeDeclarations { it.hasType { type -> type.isKotlinType } }
+            .genericTypeDeclarations { it.hasGenericType { type -> type.isKotlinType } }
             .typeArguments
             .assertFalse { it.isStarProjection }
     }

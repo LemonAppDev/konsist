@@ -9,6 +9,7 @@ fun <T : KoTypeArgumentDeclaration> List<T>.flatten(): List<KoBaseTypeDeclaratio
         val baseDeclaration = if (typeArg.typeArguments.isNotEmpty()) {
             KoTypeArgumentDeclarationCore(
                 typeArg.sourceDeclaration.name,
+                typeArg.genericType,
                 typeArg.typeArguments,
                 typeArg.sourceDeclaration,
             )
@@ -16,9 +17,9 @@ fun <T : KoTypeArgumentDeclaration> List<T>.flatten(): List<KoBaseTypeDeclaratio
             typeArg
         }
 
-        listOf(baseDeclaration) + (typeArg.typeArguments?.flattenRecursively() ?: emptyList())
+        listOf(baseDeclaration) + (typeArg.typeArguments.flattenRecursively())
     }
-        .map { it.sourceDeclaration }
+        .map { it.genericType }
 
 private fun <T : KoTypeArgumentDeclaration> List<T>.flattenRecursively(): List<KoTypeArgumentDeclaration> =
-    flatMap { typeArg -> listOf(typeArg) + (typeArg.typeArguments?.flattenRecursively() ?: emptyList()) }
+    flatMap { typeArg -> listOf(typeArg) + (typeArg.typeArguments.flattenRecursively()) }

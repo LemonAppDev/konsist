@@ -2,9 +2,7 @@
 
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoGenericTypeDeclarationProvider
 import kotlin.reflect.KClass
 
@@ -12,7 +10,7 @@ import kotlin.reflect.KClass
  * Returns a list containing generic type declarations.
  */
 val <T : KoGenericTypeDeclarationProvider> List<T>.types: List<KoBaseTypeDeclaration>
-    get() = mapNotNull { it.type }
+    get() = mapNotNull { it.genericType }
 
 /**
  * Filters the list to include only elements with a generic type satisfying the given predicate.
@@ -21,7 +19,7 @@ val <T : KoGenericTypeDeclarationProvider> List<T>.types: List<KoBaseTypeDeclara
  * @return A list containing elements with a generic type satisfying the predicate.
  */
 fun <T : KoGenericTypeDeclarationProvider> List<T>.withType(predicate: (KoBaseTypeDeclaration) -> Boolean): List<T> =
-    filter { predicate(it.type) }
+    filter { predicate(it.genericType) }
 
 /**
  * Filters the list to exclude elements with a generic type satisfying the given predicate.
@@ -30,7 +28,7 @@ fun <T : KoGenericTypeDeclarationProvider> List<T>.withType(predicate: (KoBaseTy
  * @return A list excluding elements with a generic type satisfying the predicate.
  */
 fun <T : KoGenericTypeDeclarationProvider> List<T>.withoutType(predicate: (KoBaseTypeDeclaration) -> Boolean): List<T> =
-    filterNot { predicate(it.type) }
+    filterNot { predicate(it.genericType) }
 
 /**
  * Filters the list to include only elements with a generic type matching any of the specified KClass types.
@@ -54,7 +52,7 @@ fun <T : KoGenericTypeDeclarationProvider> List<T>.withTypeOf(kClasses: Collecti
     filter {
         when {
             kClasses.isEmpty() -> true
-            else -> kClasses.any { kClass -> it.hasTypeOf(kClass) }
+            else -> kClasses.any { kClass -> it.hasGenericTypeOf(kClass) }
         }
     }
 
@@ -80,6 +78,6 @@ fun <T : KoGenericTypeDeclarationProvider> List<T>.withoutTypeOf(kClasses: Colle
     filterNot {
         when {
             kClasses.isEmpty() -> true
-            else -> kClasses.any { kClass -> it.hasTypeOf(kClass) }
+            else -> kClasses.any { kClass -> it.hasGenericTypeOf(kClass) }
         }
     }

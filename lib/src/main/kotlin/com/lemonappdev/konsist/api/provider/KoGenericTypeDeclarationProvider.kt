@@ -14,7 +14,7 @@ interface KoGenericTypeDeclarationProvider : KoBaseProvider {
      * 1) in `List<T>`, `List` is the generic type,
      * 2) in `List<Set<String>>`, `List` is the generic type.
      */
-    val type: KoBaseTypeDeclaration
+    val genericType: KoBaseTypeDeclaration
 
     /**
      * Checks if the generic type matches the given predicate.
@@ -22,7 +22,7 @@ interface KoGenericTypeDeclarationProvider : KoBaseProvider {
      * @param predicate The predicate to evaluate against the generic type.
      * @return `true` if the generic type matches the predicate, otherwise `false`.
      */
-    fun hasType(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean
+    fun hasGenericType(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean
 
     /**
      * Checks if the generic type matches the specified class.
@@ -30,5 +30,5 @@ interface KoGenericTypeDeclarationProvider : KoBaseProvider {
      * @param kClass The class to check the generic type against.
      * @return `true` if the generic type matches the specified class, otherwise `false`.
      */
-    fun hasTypeOf(kClass: KClass<*>): Boolean
+    fun hasGenericTypeOf(kClass: KClass<*>): Boolean
 }

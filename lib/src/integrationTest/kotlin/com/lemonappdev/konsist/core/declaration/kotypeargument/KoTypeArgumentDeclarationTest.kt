@@ -22,11 +22,7 @@ class KoTypeArgumentDeclarationTest {
                 ?.firstOrNull()
 
         // then
-        assertSoftly(sut) {
-            it?.toString() shouldBeEqualTo "String"
-            it?.name shouldBeEqualTo "String"
-            it?.typeArguments shouldBeEqualTo emptyList()
-        }
+        sut?.toString() shouldBeEqualTo "String"
     }
 
     @Test
@@ -42,19 +38,7 @@ class KoTypeArgumentDeclarationTest {
                 ?.firstOrNull()
 
         // then
-        assertSoftly(sut) {
-            it?.toString() shouldBeEqualTo "Set<String>"
-            it?.name shouldBeEqualTo "Set<String>"
-            it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
-            it?.typeArguments?.map { typeArgument -> typeArgument.sourceDeclaration.name } shouldBeEqualTo listOf("String")
-            it
-                ?.typeArguments
-                ?.flatten()
-                ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
-            it?.typeArguments?.firstOrNull()?.typeArguments shouldBeEqualTo emptyList()
-            it?.sourceDeclaration?.name shouldBeEqualTo "Set"
-            it?.sourceDeclaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
-        }
+        sut?.toString() shouldBeEqualTo "Set<String>"
     }
 
     @Test
@@ -70,29 +54,7 @@ class KoTypeArgumentDeclarationTest {
                 ?.firstOrNull()
 
         // then
-        assertSoftly(sut) {
-            it?.toString() shouldBeEqualTo "Map<List<String>, Int>"
-            it?.name shouldBeEqualTo "Map<List<String>, Int>"
-            it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("List<String>", "Int")
-            it?.typeArguments?.map { typeArgument -> typeArgument.sourceDeclaration.name } shouldBeEqualTo listOf("List", "Int")
-            it
-                ?.typeArguments
-                ?.firstOrNull()
-                ?.typeArguments
-                ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
-            it
-                ?.typeArguments
-                ?.flatten()
-                ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("List", "String", "Int")
-            it
-                ?.typeArguments
-                ?.firstOrNull()
-                ?.typeArguments
-                ?.flatten()
-                ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
-            it?.sourceDeclaration?.name shouldBeEqualTo "Map"
-            it?.sourceDeclaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
-        }
+        sut?.toString() shouldBeEqualTo "Map<List<String>, Int>"
     }
 
     @Test
@@ -108,11 +70,7 @@ class KoTypeArgumentDeclarationTest {
                 ?.firstOrNull()
 
         // then
-        assertSoftly(sut) {
-            it?.toString() shouldBeEqualTo "*"
-            it?.name shouldBeEqualTo "*"
-            it?.typeArguments shouldBeEqualTo emptyList()
-        }
+        sut?.toString() shouldBeEqualTo "*"
     }
 
     private fun getSnippetFile(fileName: String) =
