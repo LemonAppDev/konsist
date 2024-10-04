@@ -1,9 +1,9 @@
 package com.lemonappdev.konsist.core.declaration.koargument
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.ext.list.provider.annotations
-import com.lemonappdev.konsist.api.ext.list.provider.arguments
-import com.lemonappdev.konsist.api.ext.list.provider.enumConstants
+import com.lemonappdev.konsist.api.ext.list.annotations
+import com.lemonappdev.konsist.api.ext.list.arguments
+import com.lemonappdev.konsist.api.ext.list.enumConstants
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test

@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.container
 import com.lemonappdev.konsist.api.container.KoScope
 import com.lemonappdev.konsist.api.container.KoScopeCreator
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
-import com.lemonappdev.konsist.api.ext.list.provider.withPackage
+import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.ext.toKoFile

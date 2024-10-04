@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kogetter
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.list.provider.getters
+import com.lemonappdev.konsist.api.ext.list.getters
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test

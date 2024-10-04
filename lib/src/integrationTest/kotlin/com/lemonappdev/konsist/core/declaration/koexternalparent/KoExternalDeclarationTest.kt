@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koexternalparent
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.list.provider.externalParents
+import com.lemonappdev.konsist.api.ext.list.externalParents
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 

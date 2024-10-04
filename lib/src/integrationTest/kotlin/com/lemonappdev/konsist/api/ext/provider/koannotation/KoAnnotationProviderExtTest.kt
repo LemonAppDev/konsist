@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.ext.provider.koannotation
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
-import com.lemonappdev.konsist.api.ext.list.provider.secondaryConstructors
+import com.lemonappdev.konsist.api.ext.list.secondaryConstructors
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation

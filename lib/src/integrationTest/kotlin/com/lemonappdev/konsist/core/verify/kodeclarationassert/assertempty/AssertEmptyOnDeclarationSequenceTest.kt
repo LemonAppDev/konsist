@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.verify.kodeclarationassert.assertempty
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.list.provider.classes
+import com.lemonappdev.konsist.api.ext.list.classes
 import com.lemonappdev.konsist.api.verify.assertEmpty
 import com.lemonappdev.konsist.api.verify.assertNotEmpty
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException

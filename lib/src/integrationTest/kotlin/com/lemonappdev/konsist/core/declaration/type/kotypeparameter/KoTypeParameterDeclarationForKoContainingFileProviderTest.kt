@@ -1,10 +1,10 @@
 package com.lemonappdev.konsist.core.declaration.type.kotypeparameter
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.list.provider.parameters
-import com.lemonappdev.konsist.api.ext.list.provider.primaryConstructors
-import com.lemonappdev.konsist.api.ext.list.provider.properties
-import com.lemonappdev.konsist.api.ext.list.provider.returnTypes
+import com.lemonappdev.konsist.api.ext.list.parameters
+import com.lemonappdev.konsist.api.ext.list.primaryConstructors
+import com.lemonappdev.konsist.api.ext.list.properties
+import com.lemonappdev.konsist.api.ext.list.returnTypes
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test

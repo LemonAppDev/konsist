@@ -1,11 +1,11 @@
 package com.lemonappdev.konsist.core.declaration.kovariable
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.ext.list.provider.enumConstants
-import com.lemonappdev.konsist.api.ext.list.provider.getters
-import com.lemonappdev.konsist.api.ext.list.provider.initBlocks
-import com.lemonappdev.konsist.api.ext.list.provider.setters
-import com.lemonappdev.konsist.api.ext.list.provider.variables
+import com.lemonappdev.konsist.api.ext.list.enumConstants
+import com.lemonappdev.konsist.api.ext.list.getters
+import com.lemonappdev.konsist.api.ext.list.initBlocks
+import com.lemonappdev.konsist.api.ext.list.setters
+import com.lemonappdev.konsist.api.ext.list.variables
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoVariableProvider
 import org.amshove.kluent.shouldContain

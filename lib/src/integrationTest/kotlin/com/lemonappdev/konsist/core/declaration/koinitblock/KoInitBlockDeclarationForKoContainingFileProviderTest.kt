@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koinitblock
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.ext.list.provider.initBlocks
+import com.lemonappdev.konsist.api.ext.list.initBlocks
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
