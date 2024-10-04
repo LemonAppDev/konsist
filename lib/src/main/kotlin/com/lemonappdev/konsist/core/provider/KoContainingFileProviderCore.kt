@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.core.declaration.KoFileDeclarationCore
 import com.lemonappdev.konsist.core.exception.KoException
+import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.jetbrains.kotlin.psi.KtElement
 
 internal interface KoContainingFileProviderCore :
@@ -17,5 +18,5 @@ internal interface KoContainingFileProviderCore :
     override val containingFile: KoFileDeclaration
         get() =
             ktElement?.containingKtFile?.let { KoFileDeclarationCore(it) }
-                ?: throw KoException("Containing file not found")
+                ?: throw KoInternalException("Containing file not found")
 }
