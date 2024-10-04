@@ -32,136 +32,6 @@ import kotlin.reflect.KClass
 
 @Suppress("detekt.LargeClass")
 class KoTypeDeclarationForKoTypeDeclarationProviderTest {
-    @ParameterizedTest
-    @MethodSource("provideValues")
-    fun `source declaration`(
-        fileName: String,
-        instanceOf: KClass<*>,
-        notInstanceOf: KClass<*>,
-        fqn: String?,
-    ) {
-        // given
-        val sut =
-            getSnippetFile(fileName)
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
-                ?.type
-
-        // then
-        assertSoftly(sut) {
-            it?.sourceDeclaration shouldBeInstanceOf instanceOf
-            it?.sourceDeclaration shouldNotBeInstanceOf notInstanceOf
-            (it?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
-        }
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideNestedDeclarationsWithParentsWithoutFullyQualifiedName")
-    fun `source declaration when nested declaration names are the same and parent has no fqn`(
-        fileName: String,
-        instanceOf: KClass<*>,
-        notInstanceOf: KClass<*>,
-        fqn: String?,
-    ) {
-        // given
-        val sut =
-            getSnippetFile(fileName)
-                .functions()
-                .last()
-                .parameters
-                .first()
-                .type
-
-        // then
-        assertSoftly(sut) {
-            sourceDeclaration shouldBeInstanceOf instanceOf
-            sourceDeclaration shouldNotBeInstanceOf notInstanceOf
-            (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
-        }
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideNestedDeclarationsWithParentsWithFullyQualifiedName")
-    fun `source declaration when nested declaration names are the same and parent has fqn`(
-        fileName: String,
-        instanceOf: KClass<*>,
-        notInstanceOf: KClass<*>,
-        fqn: String?,
-    ) {
-        // given
-        val sut =
-            getSnippetFile(fileName)
-                .classes()
-                .withoutModifiers()
-                .last()
-                .constructors
-                .parameters
-                .first()
-                .type
-
-        // then
-        assertSoftly(sut) {
-            sourceDeclaration shouldBeInstanceOf instanceOf
-            sourceDeclaration shouldNotBeInstanceOf notInstanceOf
-            (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
-        }
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideNestedDeclarationsWithParentsWithoutFullyQualifiedNameDifferentCombinations")
-    fun `source declaration when nested declaration names are the same and parent has no fqn - different combinations`(
-        fileName: String,
-        instanceOf: KClass<*>,
-        notInstanceOf: KClass<*>,
-        fqn: String?,
-    ) {
-        // given
-        val sut =
-            getSnippetFile(fileName)
-                .functions()
-                .last()
-                .parameters
-                .first()
-                .type
-
-        // then
-        assertSoftly(sut) {
-            sourceDeclaration shouldBeInstanceOf instanceOf
-            sourceDeclaration shouldNotBeInstanceOf notInstanceOf
-            (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
-        }
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideNestedDeclarationsWithParentsWithFullyQualifiedNameDifferentCombinations")
-    fun `source declaration when nested declaration names are the same and parent has fqn - different combinations`(
-        fileName: String,
-        instanceOf: KClass<*>,
-        notInstanceOf: KClass<*>,
-        fqn: String?,
-    ) {
-        // given
-        val sut =
-            getSnippetFile(fileName)
-                .classes()
-                .withoutModifiers()
-                .last()
-                .constructors
-                .parameters
-                .first()
-                .type
-
-        // then
-        assertSoftly(sut) {
-            sourceDeclaration shouldBeInstanceOf instanceOf
-            sourceDeclaration shouldNotBeInstanceOf notInstanceOf
-            (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
-        }
-    }
-
     @Test
     fun `nullable-class-type`() {
         // given
@@ -176,8 +46,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleType::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
@@ -207,16 +75,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.hasStarProjectionDeclaration() shouldBeEqualTo false
-            it?.isClass shouldBeEqualTo true
-            it?.isObject shouldBeEqualTo false
-            it?.isInterface shouldBeEqualTo false
-            it?.isTypeAlias shouldBeEqualTo false
-            it?.isImportAlias shouldBeEqualTo false
-            it?.isKotlinType shouldBeEqualTo false
-            it?.isFunctionType shouldBeEqualTo false
-            it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternalType shouldBeEqualTo false
-            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -234,8 +92,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleType::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
@@ -265,16 +121,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.hasStarProjectionDeclaration() shouldBeEqualTo false
-            it?.isClass shouldBeEqualTo true
-            it?.isObject shouldBeEqualTo false
-            it?.isInterface shouldBeEqualTo false
-            it?.isTypeAlias shouldBeEqualTo false
-            it?.isImportAlias shouldBeEqualTo false
-            it?.isKotlinType shouldBeEqualTo false
-            it?.isFunctionType shouldBeEqualTo false
-            it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternalType shouldBeEqualTo false
-            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -292,8 +138,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
@@ -323,16 +167,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.hasStarProjectionDeclaration() shouldBeEqualTo false
-            it?.isClass shouldBeEqualTo false
-            it?.isObject shouldBeEqualTo true
-            it?.isInterface shouldBeEqualTo false
-            it?.isTypeAlias shouldBeEqualTo false
-            it?.isImportAlias shouldBeEqualTo false
-            it?.isKotlinType shouldBeEqualTo false
-            it?.isFunctionType shouldBeEqualTo false
-            it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternalType shouldBeEqualTo false
-            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -350,8 +184,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
@@ -381,16 +213,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.hasStarProjectionDeclaration() shouldBeEqualTo false
-            it?.isClass shouldBeEqualTo false
-            it?.isObject shouldBeEqualTo true
-            it?.isInterface shouldBeEqualTo false
-            it?.isTypeAlias shouldBeEqualTo false
-            it?.isImportAlias shouldBeEqualTo false
-            it?.isKotlinType shouldBeEqualTo false
-            it?.isFunctionType shouldBeEqualTo false
-            it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternalType shouldBeEqualTo false
-            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -408,8 +230,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleInterface::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
@@ -439,16 +259,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.hasStarProjectionDeclaration() shouldBeEqualTo false
-            it?.isClass shouldBeEqualTo false
-            it?.isObject shouldBeEqualTo false
-            it?.isInterface shouldBeEqualTo true
-            it?.isTypeAlias shouldBeEqualTo false
-            it?.isImportAlias shouldBeEqualTo false
-            it?.isKotlinType shouldBeEqualTo false
-            it?.isFunctionType shouldBeEqualTo false
-            it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternalType shouldBeEqualTo false
-            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -466,8 +276,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleInterface::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
@@ -497,16 +305,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.hasStarProjectionDeclaration() shouldBeEqualTo false
-            it?.isClass shouldBeEqualTo false
-            it?.isObject shouldBeEqualTo false
-            it?.isInterface shouldBeEqualTo true
-            it?.isTypeAlias shouldBeEqualTo false
-            it?.isImportAlias shouldBeEqualTo false
-            it?.isKotlinType shouldBeEqualTo false
-            it?.isFunctionType shouldBeEqualTo false
-            it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternalType shouldBeEqualTo false
-            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -524,8 +322,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "ImportAlias" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeInstanceOf KoImportAliasDeclaration::class
             it?.asImportAliasDeclaration()?.name shouldBeEqualTo "ImportAlias"
@@ -549,16 +345,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.hasStarProjectionDeclaration() shouldBeEqualTo false
-            it?.isClass shouldBeEqualTo false
-            it?.isObject shouldBeEqualTo false
-            it?.isInterface shouldBeEqualTo false
-            it?.isTypeAlias shouldBeEqualTo false
-            it?.isImportAlias shouldBeEqualTo true
-            it?.isKotlinType shouldBeEqualTo false
-            it?.isFunctionType shouldBeEqualTo false
-            it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternalType shouldBeEqualTo false
-            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -576,8 +362,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleTypeAlias" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeInstanceOf KoTypeAliasDeclaration::class
             it?.asTypeAliasDeclaration()?.name shouldBeEqualTo "SampleTypeAlias"
@@ -601,16 +385,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.hasStarProjectionDeclaration() shouldBeEqualTo false
-            it?.isClass shouldBeEqualTo false
-            it?.isObject shouldBeEqualTo false
-            it?.isInterface shouldBeEqualTo false
-            it?.isTypeAlias shouldBeEqualTo true
-            it?.isImportAlias shouldBeEqualTo false
-            it?.isKotlinType shouldBeEqualTo false
-            it?.isFunctionType shouldBeEqualTo false
-            it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternalType shouldBeEqualTo false
-            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -628,8 +402,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "ImportAlias" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeInstanceOf KoImportAliasDeclaration::class
             it?.asImportAliasDeclaration()?.name shouldBeEqualTo "ImportAlias"
@@ -653,16 +425,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.hasStarProjectionDeclaration() shouldBeEqualTo false
-            it?.isClass shouldBeEqualTo false
-            it?.isObject shouldBeEqualTo false
-            it?.isInterface shouldBeEqualTo false
-            it?.isTypeAlias shouldBeEqualTo false
-            it?.isImportAlias shouldBeEqualTo true
-            it?.isKotlinType shouldBeEqualTo false
-            it?.isFunctionType shouldBeEqualTo false
-            it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternalType shouldBeEqualTo false
-            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -680,8 +442,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "TestType" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeInstanceOf KoTypeParameterDeclaration::class
             it?.asTypeParameterDeclaration()?.name shouldBeEqualTo "TestType"
@@ -705,16 +465,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
-            it?.isClass shouldBeEqualTo false
-            it?.isObject shouldBeEqualTo false
-            it?.isInterface shouldBeEqualTo false
-            it?.isTypeAlias shouldBeEqualTo false
-            it?.isImportAlias shouldBeEqualTo false
-            it?.isKotlinType shouldBeEqualTo false
-            it?.isFunctionType shouldBeEqualTo false
-            it?.isTypeParameter shouldBeEqualTo true
-            it?.isExternalType shouldBeEqualTo false
-            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -732,8 +482,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "TestType" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeInstanceOf KoTypeParameterDeclaration::class
             it?.asTypeParameterDeclaration()?.name shouldBeEqualTo "TestType"
@@ -757,16 +505,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
-            it?.isClass shouldBeEqualTo false
-            it?.isObject shouldBeEqualTo false
-            it?.isInterface shouldBeEqualTo false
-            it?.isTypeAlias shouldBeEqualTo false
-            it?.isImportAlias shouldBeEqualTo false
-            it?.isKotlinType shouldBeEqualTo false
-            it?.isFunctionType shouldBeEqualTo false
-            it?.isTypeParameter shouldBeEqualTo true
-            it?.isExternalType shouldBeEqualTo false
-            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -784,8 +522,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleTypeAlias" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeInstanceOf KoTypeAliasDeclaration::class
             it?.asTypeAliasDeclaration()?.name shouldBeEqualTo "SampleTypeAlias"
@@ -809,16 +545,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.hasStarProjectionDeclaration() shouldBeEqualTo false
-            it?.isClass shouldBeEqualTo false
-            it?.isObject shouldBeEqualTo false
-            it?.isInterface shouldBeEqualTo false
-            it?.isTypeAlias shouldBeEqualTo true
-            it?.isImportAlias shouldBeEqualTo false
-            it?.isKotlinType shouldBeEqualTo false
-            it?.isFunctionType shouldBeEqualTo false
-            it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternalType shouldBeEqualTo false
-            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -836,8 +562,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "List<Set<String>>" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(List::class) shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeInstanceOf KoKotlinTypeDeclaration::class
@@ -868,16 +592,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.hasStarProjectionDeclaration() shouldBeEqualTo false
-            it?.isClass shouldBeEqualTo false
-            it?.isObject shouldBeEqualTo false
-            it?.isInterface shouldBeEqualTo false
-            it?.isTypeAlias shouldBeEqualTo false
-            it?.isImportAlias shouldBeEqualTo false
-            it?.isKotlinType shouldBeEqualTo true
-            it?.isFunctionType shouldBeEqualTo false
-            it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternalType shouldBeEqualTo false
-            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -895,8 +609,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "List<Set<String>>" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(List::class) shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeInstanceOf KoKotlinTypeDeclaration::class
@@ -927,16 +639,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.hasStarProjectionDeclaration() shouldBeEqualTo false
-            it?.isClass shouldBeEqualTo false
-            it?.isObject shouldBeEqualTo false
-            it?.isInterface shouldBeEqualTo false
-            it?.isTypeAlias shouldBeEqualTo false
-            it?.isImportAlias shouldBeEqualTo false
-            it?.isKotlinType shouldBeEqualTo true
-            it?.isFunctionType shouldBeEqualTo false
-            it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternalType shouldBeEqualTo false
-            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -954,8 +656,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "(SampleObject) -> Unit" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
             it?.asFunctionTypeDeclaration() shouldBeInstanceOf KoFunctionTypeDeclaration::class
             it?.asFunctionTypeDeclaration()?.name shouldBeEqualTo "(SampleObject) -> Unit"
@@ -979,16 +679,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.hasStarProjectionDeclaration() shouldBeEqualTo false
-            it?.isClass shouldBeEqualTo false
-            it?.isObject shouldBeEqualTo false
-            it?.isInterface shouldBeEqualTo false
-            it?.isTypeAlias shouldBeEqualTo false
-            it?.isImportAlias shouldBeEqualTo false
-            it?.isKotlinType shouldBeEqualTo false
-            it?.isFunctionType shouldBeEqualTo true
-            it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternalType shouldBeEqualTo false
-            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -1006,8 +696,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "(SampleObject) -> Unit" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleObject::class) shouldBeEqualTo false
             it?.asFunctionTypeDeclaration() shouldBeInstanceOf KoFunctionTypeDeclaration::class
             it?.asFunctionTypeDeclaration()?.name shouldBeEqualTo "(SampleObject) -> Unit"
@@ -1031,16 +719,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.hasStarProjectionDeclaration() shouldBeEqualTo false
-            it?.isClass shouldBeEqualTo false
-            it?.isObject shouldBeEqualTo false
-            it?.isInterface shouldBeEqualTo false
-            it?.isTypeAlias shouldBeEqualTo false
-            it?.isImportAlias shouldBeEqualTo false
-            it?.isKotlinType shouldBeEqualTo false
-            it?.isFunctionType shouldBeEqualTo true
-            it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternalType shouldBeEqualTo false
-            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -1058,8 +736,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleExternalClass" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleExternalClass::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asExternalTypeDeclaration() shouldBeInstanceOf KoExternalDeclaration::class
@@ -1090,16 +766,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.hasStarProjectionDeclaration() shouldBeEqualTo false
-            it?.isClass shouldBeEqualTo false
-            it?.isObject shouldBeEqualTo false
-            it?.isInterface shouldBeEqualTo false
-            it?.isTypeAlias shouldBeEqualTo false
-            it?.isImportAlias shouldBeEqualTo false
-            it?.isKotlinType shouldBeEqualTo false
-            it?.isFunctionType shouldBeEqualTo false
-            it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternalType shouldBeEqualTo true
-            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -1117,8 +783,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "SampleExternalClass" } shouldBeEqualTo true
-            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleExternalClass::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asExternalTypeDeclaration() shouldBeInstanceOf KoExternalDeclaration::class
@@ -1149,16 +813,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.hasStarProjectionDeclaration() shouldBeEqualTo false
-            it?.isClass shouldBeEqualTo false
-            it?.isObject shouldBeEqualTo false
-            it?.isInterface shouldBeEqualTo false
-            it?.isTypeAlias shouldBeEqualTo false
-            it?.isImportAlias shouldBeEqualTo false
-            it?.isKotlinType shouldBeEqualTo false
-            it?.isFunctionType shouldBeEqualTo false
-            it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternalType shouldBeEqualTo true
-            it?.isStarProjection shouldBeEqualTo false
         }
     }
 
@@ -1180,8 +834,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-//            it?.hasSourceDeclaration { declaration -> declaration.name == "*" } shouldBeEqualTo true
-//            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asStarProjectionDeclaration() shouldBeInstanceOf KoStarProjectionDeclaration::class
             it?.asStarProjectionDeclaration()?.name shouldBeEqualTo "*"
@@ -1202,16 +854,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.hasStarProjectionDeclaration() shouldBeEqualTo true
-            it?.isClass shouldBeEqualTo false
-            it?.isObject shouldBeEqualTo false
-            it?.isInterface shouldBeEqualTo false
-            it?.isTypeAlias shouldBeEqualTo false
-            it?.isImportAlias shouldBeEqualTo false
-            it?.isKotlinType shouldBeEqualTo false
-            it?.isFunctionType shouldBeEqualTo false
-            it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternalType shouldBeEqualTo false
-            it?.isStarProjection shouldBeEqualTo true
         }
     }
 
@@ -1220,360 +862,4 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             "core/declaration/type/kotype/snippet/forkotypedeclarationprovider/",
             fileName,
         )
-
-    companion object {
-        @Suppress("unused", "detekt.LongMethod")
-        @JvmStatic
-        fun provideValues() =
-            listOf(
-                arguments(
-                    "nullable-kotlin-type",
-                    KoKotlinTypeDeclaration::class,
-                    KoClassDeclaration::class,
-                    "kotlin.String",
-                ),
-                arguments(
-                    "not-nullable-kotlin-type",
-                    KoKotlinTypeDeclaration::class,
-                    KoClassDeclaration::class,
-                    "kotlin.String",
-                ),
-                arguments(
-                    "nullable-generic-type",
-                    KoGenericTypeDeclaration::class,
-                    KoClassDeclaration::class,
-                    null,
-                ),
-                arguments(
-                    "not-nullable-generic-type",
-                    KoGenericTypeDeclaration::class,
-                    KoClassDeclaration::class,
-                    null,
-                ),
-                arguments(
-                    "nullable-class-type",
-                    KoClassDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.lemonappdev.konsist.testdata.SampleType",
-                ),
-                arguments(
-                    "not-nullable-class-type",
-                    KoClassDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.lemonappdev.konsist.testdata.SampleType",
-                ),
-                arguments(
-                    "nullable-interface-type",
-                    KoInterfaceDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.lemonappdev.konsist.testdata.SampleInterface",
-                ),
-                arguments(
-                    "not-nullable-interface-type",
-                    KoInterfaceDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.lemonappdev.konsist.testdata.SampleInterface",
-                ),
-                arguments(
-                    "nullable-object-type",
-                    KoObjectDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.lemonappdev.konsist.testdata.SampleObject",
-                ),
-                arguments(
-                    "not-nullable-object-type",
-                    KoObjectDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.lemonappdev.konsist.testdata.SampleObject",
-                ),
-                arguments(
-                    "nullable-function-type",
-                    KoFunctionTypeDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    null,
-                ),
-                arguments(
-                    "not-nullable-function-type",
-                    KoFunctionTypeDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    null,
-                ),
-                arguments(
-                    "nullable-import-alias-type",
-                    KoImportAliasDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    null,
-                ),
-                arguments(
-                    "not-nullable-import-alias-type",
-                    KoImportAliasDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    null,
-                ),
-                arguments(
-                    "nullable-typealias-type",
-                    KoTypeAliasDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.lemonappdev.konsist.testdata.SampleTypeAlias",
-                ),
-                arguments(
-                    "not-nullable-typealias-type",
-                    KoTypeAliasDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "SampleTypeAlias",
-                ),
-                arguments(
-                    "nullable-external-type",
-                    KoExternalDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalClass",
-                ),
-                arguments(
-                    "not-nullable-external-type",
-                    KoExternalDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalClass",
-                ),
-            )
-
-        @Suppress("unused")
-        @JvmStatic
-        fun provideNestedDeclarationsWithParentsWithoutFullyQualifiedName() =
-            listOf(
-                arguments(
-                    "nullable-nested-class-type-with-the-same-name-and-parent-without-fqn",
-                    KoClassDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedClassWithTheSameName",
-                ),
-                arguments(
-                    "not-nullable-nested-class-type-with-the-same-name-and-parent-without-fqn",
-                    KoClassDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedClassWithTheSameName",
-                ),
-                arguments(
-                    "nullable-nested-interface-type-with-the-same-name-and-parent-without-fqn",
-                    KoInterfaceDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedInterfaceWithTheSameName",
-                ),
-                arguments(
-                    "not-nullable-nested-interface-type-with-the-same-name-and-parent-without-fqn",
-                    KoInterfaceDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedInterfaceWithTheSameName",
-                ),
-                arguments(
-                    "nullable-nested-object-type-with-the-same-name-and-parent-without-fqn",
-                    KoObjectDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedObjectWithTheSameName",
-                ),
-                arguments(
-                    "not-nullable-nested-object-type-with-the-same-name-and-parent-without-fqn",
-                    KoObjectDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedObjectWithTheSameName",
-                ),
-            )
-
-        @Suppress("unused")
-        @JvmStatic
-        fun provideNestedDeclarationsWithParentsWithFullyQualifiedName() =
-            listOf(
-                arguments(
-                    "nullable-nested-class-type-with-the-same-name-and-parent-with-fqn",
-                    KoClassDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedClassWithTheSameName",
-                ),
-                arguments(
-                    "not-nullable-nested-class-type-with-the-same-name-and-parent-with-fqn",
-                    KoClassDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedClassWithTheSameName",
-                ),
-                arguments(
-                    "nullable-nested-interface-type-with-the-same-name-and-parent-with-fqn",
-                    KoInterfaceDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedInterfaceWithTheSameName",
-                ),
-                arguments(
-                    "not-nullable-nested-interface-type-with-the-same-name-and-parent-with-fqn",
-                    KoInterfaceDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedInterfaceWithTheSameName",
-                ),
-                arguments(
-                    "nullable-nested-object-type-with-the-same-name-and-parent-with-fqn",
-                    KoObjectDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedObjectWithTheSameName",
-                ),
-                arguments(
-                    "not-nullable-nested-object-type-with-the-same-name-and-parent-with-fqn",
-                    KoObjectDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedObjectWithTheSameName",
-                ),
-            )
-
-        @Suppress("unused", "detekt.LongMethod")
-        @JvmStatic
-        fun provideNestedDeclarationsWithParentsWithoutFullyQualifiedNameDifferentCombinations() =
-            listOf(
-                arguments(
-                    "nested-class-type-with-the-same-name-and-parent-without-fqn-using-all-fqn",
-                    KoClassDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedClassWithTheSameName",
-                ),
-                arguments(
-                    "nested-class-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn",
-                    KoClassDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedClassWithTheSameName",
-                ),
-                arguments(
-                    "nested-class-type-with-the-same-name-and-parent-without-fqn-using-all-fqn-of-other-declaration",
-                    KoClassDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedClassWithTheSameName",
-                ),
-                arguments(
-                    "nested-class-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn-of-other-declaration",
-                    KoClassDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedClassWithTheSameName",
-                ),
-                arguments(
-                    "nested-interface-type-with-the-same-name-and-parent-without-fqn-using-all-fqn",
-                    KoInterfaceDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedInterfaceWithTheSameName",
-                ),
-                arguments(
-                    "nested-interface-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn",
-                    KoInterfaceDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedInterfaceWithTheSameName",
-                ),
-                arguments(
-                    "nested-interface-type-with-the-same-name-and-parent-without-fqn-using-all-fqn-of-other-declaration",
-                    KoInterfaceDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedInterfaceWithTheSameName",
-                ),
-                arguments(
-                    "nested-interface-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn-of-other-declaration",
-                    KoInterfaceDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedInterfaceWithTheSameName",
-                ),
-                arguments(
-                    "nested-object-type-with-the-same-name-and-parent-without-fqn-using-all-fqn",
-                    KoObjectDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedObjectWithTheSameName",
-                ),
-                arguments(
-                    "nested-object-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn",
-                    KoObjectDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedObjectWithTheSameName",
-                ),
-                arguments(
-                    "nested-object-type-with-the-same-name-and-parent-without-fqn-using-all-fqn-of-other-declaration",
-                    KoObjectDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedObjectWithTheSameName",
-                ),
-                arguments(
-                    "nested-object-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn-of-other-declaration",
-                    KoObjectDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedObjectWithTheSameName",
-                ),
-            )
-
-        @Suppress("unused", "detekt.LongMethod")
-        @JvmStatic
-        fun provideNestedDeclarationsWithParentsWithFullyQualifiedNameDifferentCombinations() =
-            listOf(
-                arguments(
-                    "nested-class-type-with-the-same-name-and-parent-with-fqn-using-all-fqn",
-                    KoClassDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedClassWithTheSameName",
-                ),
-                arguments(
-                    "nested-class-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn",
-                    KoClassDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedClassWithTheSameName",
-                ),
-                arguments(
-                    "nested-class-type-with-the-same-name-and-parent-with-fqn-using-all-fqn-of-other-declaration",
-                    KoClassDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedClassWithTheSameName",
-                ),
-                arguments(
-                    "nested-class-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn-of-other-declaration",
-                    KoClassDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedClassWithTheSameName",
-                ),
-                arguments(
-                    "nested-interface-type-with-the-same-name-and-parent-with-fqn-using-all-fqn",
-                    KoInterfaceDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedInterfaceWithTheSameName",
-                ),
-                arguments(
-                    "nested-interface-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn",
-                    KoInterfaceDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedInterfaceWithTheSameName",
-                ),
-                arguments(
-                    "nested-interface-type-with-the-same-name-and-parent-with-fqn-using-all-fqn-of-other-declaration",
-                    KoInterfaceDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedInterfaceWithTheSameName",
-                ),
-                arguments(
-                    "nested-interface-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn-of-other-declaration",
-                    KoInterfaceDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedInterfaceWithTheSameName",
-                ),
-                arguments(
-                    "nested-object-type-with-the-same-name-and-parent-with-fqn-using-all-fqn",
-                    KoObjectDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedObjectWithTheSameName",
-                ),
-                arguments(
-                    "nested-object-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn",
-                    KoObjectDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedObjectWithTheSameName",
-                ),
-                arguments(
-                    "nested-object-type-with-the-same-name-and-parent-with-fqn-using-all-fqn-of-other-declaration",
-                    KoObjectDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedObjectWithTheSameName",
-                ),
-                arguments(
-                    "nested-object-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn-of-other-declaration",
-                    KoObjectDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedObjectWithTheSameName",
-                ),
-            )
-    }
 }

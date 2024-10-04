@@ -1,10 +1,9 @@
-
 interface FirstInterface {
-    fun method(arg: SampleNestedInterfaceWithTheSameName?)
+    class NestedClass(val arg: SampleNestedInterfaceWithTheSameName)
     interface SampleNestedInterfaceWithTheSameName
 }
 
 interface SecondInterface {
-    fun method(arg: SampleNestedInterfaceWithTheSameName?)
+    class NestedClass(val arg: SampleNestedInterfaceWithTheSameName)
     interface SampleNestedInterfaceWithTheSameName
 }

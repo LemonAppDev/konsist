@@ -1,4 +1,3 @@
-
 interface FirstInterface {
     fun method(arg: SampleNestedClassWithTheSameName)
     data class SampleNestedClassWithTheSameName(val sampleFirstParameter: String)

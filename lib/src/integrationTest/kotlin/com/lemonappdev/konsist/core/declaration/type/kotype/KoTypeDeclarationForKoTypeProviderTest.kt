@@ -1,8 +1,12 @@
 package com.lemonappdev.konsist.core.declaration.type.kotype
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
+import com.lemonappdev.konsist.testdata.SampleClass
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldBeInstanceOf
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -25,6 +29,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
         isGenericType: Boolean,
         isTypeParameter: Boolean,
         isExternalType: Boolean,
+        isStarProjection: Boolean,
     ) {
         // given
         val sut =
@@ -50,6 +55,41 @@ class KoTypeDeclarationForKoTypeProviderTest {
             it?.isGenericType shouldBeEqualTo isGenericType
             it?.isTypeParameter shouldBeEqualTo isTypeParameter
             it?.isExternalType shouldBeEqualTo isExternalType
+            it?.isStarProjection shouldBeEqualTo isStarProjection
+        }
+    }
+
+    @Test
+    fun `star-projection-type`() {
+        // given
+        val sut =
+            getSnippetFile("star-projection-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.asGenericTypeDeclaration()
+                ?.typeArguments
+                ?.firstOrNull()
+                ?.sourceDeclaration
+
+        // then
+        assertSoftly(sut) {
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isKotlinBasicType shouldBeEqualTo false
+            it?.isKotlinCollectionType shouldBeEqualTo false
+            it?.isFunctionType shouldBeEqualTo false
+            it?.isGenericType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
+            it?.isExternalType shouldBeEqualTo false
+            it?.isStarProjection shouldBeEqualTo true
         }
     }
 
@@ -75,6 +115,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
+                    false,
                 ),
                 arguments(
                     "not-nullable-kotlin-type",
@@ -90,10 +131,12 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
+                    false,
                 ),
                 arguments(
                     "nullable-class-type",
                     true,
+                    false,
                     false,
                     false,
                     false,
@@ -120,12 +163,14 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
+                    false,
                 ),
                 arguments(
                     "nullable-interface-type",
                     false,
                     false,
                     true,
+                    false,
                     false,
                     false,
                     false,
@@ -150,11 +195,13 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
+                    false,
                 ),
                 arguments(
                     "nullable-object-type",
                     false,
                     true,
+                    false,
                     false,
                     false,
                     false,
@@ -180,6 +227,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
+                    false,
                 ),
                 arguments(
                     "nullable-function-type-type",
@@ -192,6 +240,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     true,
+                    false,
                     false,
                     false,
                     false,
@@ -210,6 +259,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
+                    false,
                 ),
                 arguments(
                     "nullable-import-alias-type",
@@ -218,6 +268,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     true,
+                    false,
                     false,
                     false,
                     false,
@@ -240,6 +291,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
+                    false,
                 ),
                 arguments(
                     "nullable-typealias-type",
@@ -247,6 +299,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     true,
+                    false,
                     false,
                     false,
                     false,
@@ -270,6 +323,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     false,
+                    false,
                 ),
                 arguments(
                     "nullable-type-parameter",
@@ -284,6 +338,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     true,
+                    false,
                     false,
                 ),
                 arguments(
@@ -300,6 +355,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     true,
                     false,
+                    false,
                 ),
                 arguments(
                     "nullable-external-type",
@@ -315,6 +371,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     true,
+                    false,
                 ),
                 arguments(
                     "not-nullable-external-type",
@@ -330,6 +387,7 @@ class KoTypeDeclarationForKoTypeProviderTest {
                     false,
                     false,
                     true,
+                    false,
                 ),
             )
     }

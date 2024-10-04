@@ -1,4 +1,3 @@
-
 interface FirstInterface {
     class NestedClass(val arg: SampleNestedInterfaceWithTheSameName?)
     interface SampleNestedInterfaceWithTheSameName
