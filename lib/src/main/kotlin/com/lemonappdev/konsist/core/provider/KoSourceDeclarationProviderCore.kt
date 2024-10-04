@@ -12,6 +12,7 @@ import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
+import kotlin.reflect.KClass
 
 @Suppress("detekt.TooManyFunctions")
 internal interface KoSourceDeclarationProviderCore :
@@ -42,21 +43,33 @@ internal interface KoSourceDeclarationProviderCore :
 
     private fun isExtensionDeclaration(): Boolean =
         ktTypeReference?.isExtensionDeclaration() == true ||
-            ktNameReferenceExpression?.isExtensionDeclaration() == true ||
-            ktTypeProjection?.isExtensionDeclaration() == true
+                ktNameReferenceExpression?.isExtensionDeclaration() == true ||
+                ktTypeProjection?.isExtensionDeclaration() == true
 
     private fun getDeclarationWithFqn(declaration: KoBaseDeclaration): KoBaseDeclaration? =
         when {
             declaration is KoFullyQualifiedNameProvider && declaration.fullyQualifiedName != null -> {
                 declaration
             }
+
             declaration is KoContainingDeclarationProvider && declaration !is KoFileDeclaration -> {
                 getDeclarationWithFqn(declaration.containingDeclaration)
             }
+
             else -> {
                 null
             }
         }
 
-    override fun hasSourceDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean = predicate(sourceDeclaration)
+    override fun hasSourceDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean =
+        predicate(sourceDeclaration)
+
+    override fun hasSourceDeclarationOf(kClass: KClass<*>): Boolean =
+        sourceDeclaration.hasClassDeclarationOf(kClass) ||
+                sourceDeclaration.hasObjectDeclarationOf(kClass) ||
+                sourceDeclaration.hasInterfaceDeclarationOf(kClass) ||
+                sourceDeclaration.hasKotlinTypeDeclarationOf(
+                    kClass,
+                ) ||
+                sourceDeclaration.hasExternalTypeDeclarationOf(kClass)
 }

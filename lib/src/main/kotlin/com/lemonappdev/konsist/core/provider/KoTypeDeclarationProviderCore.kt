@@ -67,15 +67,6 @@ internal interface KoTypeDeclarationProviderCore :
             ) ||
             hasExternalTypeDeclarationOf(kClass)
 
-    override fun hasSourceDeclarationOf(kClass: KClass<*>): Boolean =
-        hasClassDeclarationOf(kClass) ||
-            hasObjectDeclarationOf(kClass) ||
-            hasInterfaceDeclarationOf(kClass) ||
-            hasKotlinTypeDeclarationOf(
-                kClass,
-            ) ||
-            hasExternalTypeDeclarationOf(kClass)
-
     override fun hasClassDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asClassDeclaration()?.fullyQualifiedName
 
     override fun hasObjectDeclaration(predicate: ((KoObjectDeclaration) -> Boolean)?): Boolean =

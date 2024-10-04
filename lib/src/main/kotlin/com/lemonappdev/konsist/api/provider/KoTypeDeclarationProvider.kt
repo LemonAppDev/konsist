@@ -22,8 +22,8 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
     /**
      * Represents the declaration associated with this type.
      *
-     * The `sourceDeclaration` property provides access to the declaration of the type within the Kotlin codebase.
-     * It allows to retrie additional information about the declaration, such as its properties, functions,
+     * The `declaration` property provides access to the declaration of the type within the Kotlin codebase.
+     * It allows to retries additional information about the declaration, such as its properties, functions,
      * annotations, and other relevant metadata.
      *
      * It points to an instance of [KoBaseTypeDeclaration], which serves as the base interface for various types:
@@ -144,14 +144,6 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
      */
     @Deprecated("Will be removed in version 0.18.0", ReplaceWith("hasSourceDeclarationOf"))
     fun hasDeclarationOf(kClass: KClass<*>): Boolean
-
-    /**
-     * Whether type has a source declaration of the specified Kotlin class.
-     *
-     * @param kClass The Kotlin class representing the source declaration to check for.
-     * @return `true` if the type has a source declaration matching the specified KClass, `false` otherwise.
-     */
-    fun hasSourceDeclarationOf(kClass: KClass<*>): Boolean
 
     /**
      * Whether type has a specified class declaration.

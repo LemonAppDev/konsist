@@ -28,6 +28,8 @@ class KoTypeArgumentDeclarationForKoSourceDeclarationProviderTest {
             it?.sourceDeclaration?.name shouldBeEqualTo "String"
             it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isKotlinType } shouldBeEqualTo true
             it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo true
+            it?.hasSourceDeclarationOf(Int::class) shouldBeEqualTo false
         }
     }
 
@@ -49,6 +51,7 @@ class KoTypeArgumentDeclarationForKoSourceDeclarationProviderTest {
             it?.sourceDeclaration?.name shouldBeEqualTo "Set<String>"
             it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isGenericType } shouldBeEqualTo true
             it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo false
         }
     }
 
@@ -70,6 +73,7 @@ class KoTypeArgumentDeclarationForKoSourceDeclarationProviderTest {
             it?.sourceDeclaration?.name shouldBeEqualTo "Map<List<String>, Int>"
             it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isGenericType } shouldBeEqualTo true
             it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo false
         }
     }
 
@@ -91,6 +95,7 @@ class KoTypeArgumentDeclarationForKoSourceDeclarationProviderTest {
             it?.sourceDeclaration?.name shouldBeEqualTo "*"
             it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isStarProjection } shouldBeEqualTo true
             it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo false
         }
     }
 

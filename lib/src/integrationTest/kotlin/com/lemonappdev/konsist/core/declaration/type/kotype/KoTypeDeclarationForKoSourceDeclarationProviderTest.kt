@@ -1,5 +1,9 @@
 package com.lemonappdev.konsist.core.declaration.type.kotype
 
+import com.lemonappdev.konsist.externalsample.SampleExternalClass
+import com.lemonappdev.konsist.testdata.SampleInterface
+import com.lemonappdev.konsist.testdata.SampleObject
+import com.lemonappdev.konsist.testdata.SampleType
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
@@ -31,6 +35,8 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         fileName: String,
         instanceOf: KClass<*>,
         notInstanceOf: KClass<*>,
+        kClassOf: KClass<*>?,
+        notKClassOf: KClass<*>,
         fqn: String?,
     ) {
         // given
@@ -53,6 +59,8 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                     (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fqn
                 }?.shouldBeEqualTo(true)
             it?.hasSourceDeclaration { declaration -> declaration.isStarProjection } shouldBeEqualTo false
+            kClassOf?.let { kClass -> it?.hasSourceDeclarationOf(kClass) }?.shouldBeEqualTo(true)
+            it?.hasSourceDeclarationOf(notKClassOf) shouldBeEqualTo false
         }
     }
 
@@ -196,6 +204,7 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.hasSourceDeclaration { declaration -> declaration.name == "TestType" } shouldBeEqualTo true
             it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo false
         }
     }
 
@@ -215,6 +224,7 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.hasSourceDeclaration { declaration -> declaration.name == "TestType" } shouldBeEqualTo true
             it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo false
         }
     }
 
@@ -238,6 +248,7 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
 //            it?.hasSourceDeclaration { declaration -> declaration.name == "*" } shouldBeEqualTo true
 //            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+//            it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo false
         }
     }
 
@@ -256,12 +267,16 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                     "nullable-kotlin-type",
                     KoKotlinTypeDeclaration::class,
                     KoClassDeclaration::class,
+                    String::class,
+                    Int::class,
                     "kotlin.String",
                 ),
                 arguments(
                     "not-nullable-kotlin-type",
                     KoKotlinTypeDeclaration::class,
                     KoClassDeclaration::class,
+                    String::class,
+                    Int::class,
                     "kotlin.String",
                 ),
                 arguments(
@@ -269,47 +284,63 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                     KoGenericTypeDeclaration::class,
                     KoClassDeclaration::class,
                     null,
+                    String::class,
+                    null,
                 ),
                 arguments(
                     "not-nullable-generic-type",
                     KoGenericTypeDeclaration::class,
                     KoClassDeclaration::class,
                     null,
+                    String::class,
+                    null,
                 ),
                 arguments(
                     "nullable-class-type",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
+                    SampleType::class,
+                    String::class,
                     "com.lemonappdev.konsist.testdata.SampleType",
                 ),
                 arguments(
                     "not-nullable-class-type",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
+                    SampleType::class,
+                    String::class,
                     "com.lemonappdev.konsist.testdata.SampleType",
                 ),
                 arguments(
                     "nullable-interface-type",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
+                    SampleInterface::class,
+                    String::class,
                     "com.lemonappdev.konsist.testdata.SampleInterface",
                 ),
                 arguments(
                     "not-nullable-interface-type",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
+                    SampleInterface::class,
+                    String::class,
                     "com.lemonappdev.konsist.testdata.SampleInterface",
                 ),
                 arguments(
                     "nullable-object-type",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
+                    SampleObject::class,
+                    String::class,
                     "com.lemonappdev.konsist.testdata.SampleObject",
                 ),
                 arguments(
                     "not-nullable-object-type",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
+                    SampleObject::class,
+                    String::class,
                     "com.lemonappdev.konsist.testdata.SampleObject",
                 ),
                 arguments(
@@ -317,11 +348,15 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                     KoFunctionTypeDeclaration::class,
                     KoKotlinTypeDeclaration::class,
                     null,
+                    String::class,
+                    null,
                 ),
                 arguments(
                     "not-nullable-function-type",
                     KoFunctionTypeDeclaration::class,
                     KoKotlinTypeDeclaration::class,
+                    null,
+                    String::class,
                     null,
                 ),
                 arguments(
@@ -329,35 +364,47 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                     KoImportAliasDeclaration::class,
                     KoKotlinTypeDeclaration::class,
                     null,
+                    String::class,
+                    null,
                 ),
                 arguments(
                     "not-nullable-import-alias-type",
                     KoImportAliasDeclaration::class,
                     KoKotlinTypeDeclaration::class,
                     null,
+                    String::class,
+                    null,
                 ),
                 arguments(
                     "nullable-typealias-type",
                     KoTypeAliasDeclaration::class,
                     KoKotlinTypeDeclaration::class,
+                    null,
+                    String::class,
                     "com.lemonappdev.konsist.testdata.SampleTypeAlias",
                 ),
                 arguments(
                     "not-nullable-typealias-type",
                     KoTypeAliasDeclaration::class,
                     KoKotlinTypeDeclaration::class,
+                    null,
+                    String::class,
                     "SampleTypeAlias",
                 ),
                 arguments(
                     "nullable-external-type",
                     KoExternalDeclaration::class,
                     KoKotlinTypeDeclaration::class,
+                    SampleExternalClass::class,
+                    String::class,
                     "com.lemonappdev.konsist.externalsample.SampleExternalClass",
                 ),
                 arguments(
                     "not-nullable-external-type",
                     KoExternalDeclaration::class,
                     KoKotlinTypeDeclaration::class,
+                    SampleExternalClass::class,
+                    String::class,
                     "com.lemonappdev.konsist.externalsample.SampleExternalClass",
                 ),
             )

@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
+import kotlin.reflect.KClass
 
 /**
  * List containing source declarations associated with types.
@@ -37,3 +38,55 @@ fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclaration(predicate: (
  */
 fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): List<T> =
     filterNot { predicate(it.sourceDeclaration) }
+
+/**
+ * List containing declarations with source declaration of.
+ *
+ * @param kClass The Kotlin class representing the source declaration to include.
+ * @param kClasses The Kotlin class(es) representing the source declaration(s) to include.
+ * @return A list containing declarations with the source declaration of the specified Kotlin class(es).
+ */
+fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclarationOf(
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
+): List<T> = withSourceDeclarationOf(listOf(kClass, *kClasses))
+
+/**
+ * List containing declarations with source declaration of.
+ *
+ * @param kClasses The Kotlin class(es) representing the source declaration(s) to include.
+ * @return A list containing declarations with the source declaration of the specified Kotlin class(es).
+ */
+fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
+    filter {
+        when {
+            kClasses.isEmpty() -> true
+            else -> kClasses.any { kClass -> it.hasSourceDeclarationOf(kClass) }
+        }
+    }
+
+/**
+ * List containing declarations without source declaration of.
+ *
+ * @param kClass The Kotlin class representing the source declaration to exclude.
+ * @param kClasses The Kotlin class(es) representing the source declaration(s) to exclude.
+ * @return A list containing declarations without source declaration of the specified Kotlin class(es).
+ */
+fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclarationOf(
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
+): List<T> = withoutSourceDeclarationOf(listOf(kClass, *kClasses))
+
+/**
+ * List containing declarations without source declaration of.
+ *
+ * @param kClasses The Kotlin class(es) representing the source declaration(s) to exclude.
+ * @return A list containing declarations without source declaration of the specified Kotlin class(es).
+ */
+fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
+    filterNot {
+        when {
+            kClasses.isEmpty() -> true
+            else -> kClasses.any { kClass -> it.hasSourceDeclarationOf(kClass) }
+        }
+    }

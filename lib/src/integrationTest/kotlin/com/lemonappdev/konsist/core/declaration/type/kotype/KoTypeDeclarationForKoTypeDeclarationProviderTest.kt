@@ -882,7 +882,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asStarProjectionDeclaration() shouldBeInstanceOf KoStarProjectionDeclaration::class
             it?.asStarProjectionDeclaration()?.name shouldBeEqualTo "*"
             it?.asClassDeclaration() shouldBeEqualTo null
