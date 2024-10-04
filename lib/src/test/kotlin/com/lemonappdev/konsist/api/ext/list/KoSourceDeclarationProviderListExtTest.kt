@@ -1,0 +1,99 @@
+package com.lemonappdev.konsist.api.ext.list
+
+import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
+import io.mockk.every
+import io.mockk.mockk
+import org.amshove.kluent.shouldBeEqualTo
+import org.junit.jupiter.api.Test
+
+class KoSourceDeclarationProviderListExtTest {
+    @Test
+    fun `sourceDeclarations returns source declarations from all declarations`() {
+        // given
+        val sourceDeclaration1: KoClassDeclaration = mockk()
+        val sourceDeclaration2: KoKotlinTypeDeclaration = mockk()
+        val sourceDeclaration3: KoExternalDeclaration = mockk()
+        val declaration1: KoSourceDeclarationProvider =
+            mockk {
+                every { sourceDeclaration } returns sourceDeclaration1
+            }
+        val declaration2: KoSourceDeclarationProvider =
+            mockk {
+                every { sourceDeclaration } returns sourceDeclaration2
+            }
+        val declaration3: KoSourceDeclarationProvider =
+            mockk {
+                every { sourceDeclaration } returns sourceDeclaration3
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.sourceDeclarations()
+
+        // then
+        sut shouldBeEqualTo listOf(sourceDeclaration1, sourceDeclaration2, sourceDeclaration3)
+    }
+
+    @Test
+    fun `withSourceDeclaration{} returns source declaration which satisfy predicate`() {
+        // given
+        val name1 = "name1"
+        val name2 = "name2"
+        val sourceDeclaration1: KoClassDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val sourceDeclaration2: KoKotlinTypeDeclaration =
+            mockk {
+                every { name } returns name2
+            }
+        val declaration1: KoSourceDeclarationProvider =
+            mockk {
+                every { sourceDeclaration } returns sourceDeclaration1
+            }
+        val declaration2: KoSourceDeclarationProvider =
+            mockk {
+                every { sourceDeclaration } returns sourceDeclaration2
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withSourceDeclaration { it.name == name1 }
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutSourceDeclaration{} returns source declarations which not satisfy predicate`() {
+        // given
+        val name1 = "name1"
+        val name2 = "name2"
+        val sourceDeclaration1: KoClassDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val sourceDeclaration2: KoKotlinTypeDeclaration =
+            mockk {
+                every { name } returns name2
+            }
+        val declaration1: KoSourceDeclarationProvider =
+            mockk {
+                every { sourceDeclaration } returns sourceDeclaration1
+            }
+        val declaration2: KoSourceDeclarationProvider =
+            mockk {
+                every { sourceDeclaration } returns sourceDeclaration2
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutSourceDeclaration { it.name == name1 }
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+}
