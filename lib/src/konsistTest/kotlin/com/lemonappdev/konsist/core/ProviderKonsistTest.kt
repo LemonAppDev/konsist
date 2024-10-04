@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.returnTypes
+import com.lemonappdev.konsist.api.ext.list.types
 import com.lemonappdev.konsist.api.ext.list.withParameter
 import com.lemonappdev.konsist.api.ext.list.withoutAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withoutName
