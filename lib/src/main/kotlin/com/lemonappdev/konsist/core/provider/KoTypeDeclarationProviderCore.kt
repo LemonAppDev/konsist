@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
@@ -61,12 +60,12 @@ internal interface KoTypeDeclarationProviderCore :
     @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("hasSourceDeclarationOf"))
     override fun hasDeclarationOf(kClass: KClass<*>): Boolean =
         hasClassDeclarationOf(kClass) ||
-                hasObjectDeclarationOf(kClass) ||
-                hasInterfaceDeclarationOf(kClass) ||
-                hasKotlinTypeDeclarationOf(
-                    kClass,
-                ) ||
-                hasExternalTypeDeclarationOf(kClass)
+            hasObjectDeclarationOf(kClass) ||
+            hasInterfaceDeclarationOf(kClass) ||
+            hasKotlinTypeDeclarationOf(
+                kClass,
+            ) ||
+            hasExternalTypeDeclarationOf(kClass)
 
     override fun hasSourceDeclarationOf(kClass: KClass<*>): Boolean =
         hasClassDeclarationOf(kClass) ||
