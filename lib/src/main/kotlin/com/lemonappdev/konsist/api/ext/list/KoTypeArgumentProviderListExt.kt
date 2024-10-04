@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
+import com.lemonappdev.konsist.api.provider.KoLocalFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoTypeArgumentProvider
 
 /**
@@ -8,6 +9,20 @@ import com.lemonappdev.konsist.api.provider.KoTypeArgumentProvider
  */
 val <T : KoTypeArgumentProvider> List<T>.typeArguments: List<KoTypeArgumentDeclaration>
     get() = flatMap { it.typeArguments }
+
+/**
+ * List containing declarations with any type argument.
+ *
+ * @return A list containing declarations with any type argument.
+ */
+fun <T : KoTypeArgumentProvider> List<T>.withTypeArguments(): List<T> = filter { it.hasTypeArguments() }
+
+/**
+ * List containing declarations with no type arguments.
+ *
+ * @return A list containing declarations with no type arguments.
+ */
+fun <T : KoTypeArgumentProvider> List<T>.withoutTypeArguments(): List<T> = filterNot { it.hasTypeArguments() }
 
 /**
  * List containing declarations that have at least one type argument with the specified name(s).

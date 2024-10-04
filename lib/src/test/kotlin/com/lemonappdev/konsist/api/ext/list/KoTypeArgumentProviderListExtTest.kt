@@ -36,6 +36,46 @@ class KoTypeArgumentProviderListExtTest {
     }
 
     @Test
+    fun `withTypeArguments() returns declaration with any type argument`() {
+        // given
+        val declaration1: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArguments() } returns true
+            }
+        val declaration2: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArguments() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withTypeArguments()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutTypeArguments() returns declaration without any type argument`() {
+        // given
+        val declaration1: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArguments() } returns true
+            }
+        val declaration2: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArguments() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutTypeArguments()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withTypeArgumentNamed(empty list) returns declaration with any type argument`() {
         // given
         val declaration1: KoTypeArgumentProvider = mockk()

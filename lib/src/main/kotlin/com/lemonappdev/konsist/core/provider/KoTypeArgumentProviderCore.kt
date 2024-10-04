@@ -64,6 +64,8 @@ internal interface KoTypeArgumentProviderCore :
 
     override fun countTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Int = typeArguments.count { predicate(it) }
 
+    override fun hasTypeArguments(): Boolean = typeArguments.isNotEmpty()
+
     override fun hasTypeArgumentWithName(
         name: String,
         vararg names: String,

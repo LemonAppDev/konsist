@@ -25,6 +25,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.typeArguments shouldBeEqualTo emptyList()
             it?.numTypeArguments shouldBeEqualTo 0
             it?.countTypeArguments { typeArgument -> typeArgument.name == "String" } shouldBeEqualTo 0
+            it?.hasTypeArguments() shouldBeEqualTo false
             it?.hasTypeArgumentWithName("String", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentWithName(listOf("String", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames("String") shouldBeEqualTo false
@@ -62,6 +63,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration.isClass } shouldBeEqualTo 0
+            it?.hasTypeArguments() shouldBeEqualTo true
             it?.hasTypeArgumentWithName("String", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentWithName(listOf("String", "Int")) shouldBeEqualTo true
@@ -123,6 +125,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.numTypeArguments shouldBeEqualTo 2
             it?.countTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration.isClass } shouldBeEqualTo 0
+            it?.hasTypeArguments() shouldBeEqualTo true
             it?.hasTypeArgumentWithName("Int", "String") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "String") shouldBeEqualTo false
             it?.hasTypeArgumentWithName(listOf("Int", "String")) shouldBeEqualTo true
@@ -167,6 +170,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.typeArguments shouldBeEqualTo emptyList()
             it?.numTypeArguments shouldBeEqualTo 0
             it?.countTypeArguments { typeArgument -> typeArgument.name == "*" } shouldBeEqualTo 0
+            it?.hasTypeArguments() shouldBeEqualTo false
             it?.hasTypeArgumentWithName("*", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentWithName(listOf("*", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames("*") shouldBeEqualTo false

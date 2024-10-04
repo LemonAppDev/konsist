@@ -31,6 +31,13 @@ interface KoTypeArgumentProvider : KoBaseProvider {
     fun countTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Int
 
     /**
+     * Determines whatever the declaration has type arguments.
+     *
+     * @return `true` if the declaration has any type argument, `false` otherwise.
+     */
+    fun hasTypeArguments(): Boolean
+
+    /**
      * Checks if any type argument has one of the specified names.
      *
      * @param name The first name to check.
