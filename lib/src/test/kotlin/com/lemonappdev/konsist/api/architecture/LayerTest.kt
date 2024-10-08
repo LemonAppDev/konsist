@@ -14,9 +14,7 @@ class LayerTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage
-            """
-            Layer Domain must be defined by package ending with '..'. Now: package .
-            """.trimIndent()
+                "Invalid package definition for layer 'Domain'. To include subpackages, the definition must end with '..'. Current definition: package"
     }
 
     @Test
@@ -26,9 +24,7 @@ class LayerTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage
-            """
-            Layer Domain must be defined by package ending with '..'. Now: package..feature .
-            """.trimIndent()
+                "Invalid package definition for layer 'Domain'. To include subpackages, the definition must end with '..'. Current definition: package..feature"
     }
 
     @Test
@@ -38,9 +34,7 @@ class LayerTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage
-            """
-            Layer Domain must be defined by package ending with '..'. Now: package... .
-            """.trimIndent()
+                "Invalid package definition for layer 'Domain'. To include subpackages, the definition must end with '..'. Current definition: package..."
     }
 
     @Test
@@ -50,9 +44,7 @@ class LayerTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage
-            """
-            Layer Domain must be defined by package ending with '..'. Now: first.package .
-            """.trimIndent()
+                "Invalid package definition for layer 'Domain'. To include subpackages, the definition must end with '..'. Current definition: first.package"
     }
 
     @Test
@@ -62,9 +54,7 @@ class LayerTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage
-            """
-            Layer Domain must be defined by package ending with '..'. Now: first.second..third_p.package.... .
-            """.trimIndent()
+                "Invalid package definition for layer 'Domain'. To include subpackages, the definition must end with '..'. Current definition: first.second..third_p.package...."
     }
 
     @Test
@@ -73,10 +63,7 @@ class LayerTest {
         val sut = { Layer("Domain", "first.second.package..") }
 
         // then
-        sut shouldNotThrow KoPreconditionFailedException::class withMessage
-            """
-            Layer Domain must be defined by package ending with '..'. Now: first.second.third_p.package.... .
-            """.trimIndent()
+        sut shouldNotThrow KoPreconditionFailedException::class
     }
 
     @Test
@@ -85,9 +72,6 @@ class LayerTest {
         val sut = { Layer("Domain", "first.second..package..") }
 
         // then
-        sut shouldNotThrow KoPreconditionFailedException::class withMessage
-            """
-            Layer Domain must be defined by package ending with '..'. Now: first.second.third_p.package.... .
-            """.trimIndent()
+        sut shouldNotThrow KoPreconditionFailedException::class
     }
 }
