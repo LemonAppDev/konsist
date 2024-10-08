@@ -33,21 +33,21 @@ data class Layer(
             if (!definedBy.matches(withoutSingleDotAtTheBeginningPattern)) {
                 throw KoPreconditionFailedException(
                     "Invalid package definition for layer '$name'. " +
-                            "Package names cannot start with a single dot. Current definition: $definedBy"
+                        "Package names cannot start with a single dot. Current definition: $definedBy",
                 )
             }
 
             if (!definedBy.matches(twoDotsAtTheEndPattern)) {
                 throw KoPreconditionFailedException(
                     "Invalid package definition for layer '$name'. " +
-                            "To include subpackages, the definition must end with '..'. Current definition: $definedBy"
+                        "To include subpackages, the definition must end with '..'. Current definition: $definedBy",
                 )
             }
 
             if (!definedBy.matches(withoutFewDotsInOnePlacePattern)) {
                 throw KoPreconditionFailedException(
                     "Invalid package definition for layer '$name'. " +
-                            "Package names cannot contain more than two consecutive dots. Current definition: $definedBy"
+                        "Package names cannot contain more than two consecutive dots. Current definition: $definedBy",
                 )
             }
         }
