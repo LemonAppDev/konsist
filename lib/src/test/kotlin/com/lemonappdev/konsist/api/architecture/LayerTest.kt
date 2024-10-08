@@ -14,7 +14,8 @@ class LayerTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage
-                "Invalid package definition for layer 'Domain'. To include subpackages, the definition must end with '..'. Current definition: package"
+            "Invalid package definition for layer 'Domain'. To include subpackages, " +
+            "the definition must end with '..'. Current definition: package"
     }
 
     @Test
@@ -24,7 +25,8 @@ class LayerTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage
-                "Invalid package definition for layer 'Domain'. To include subpackages, the definition must end with '..'. Current definition: package..feature"
+            "Invalid package definition for layer 'Domain'. To include subpackages, " +
+            "the definition must end with '..'. Current definition: package..feature"
     }
 
     @Test
@@ -34,7 +36,8 @@ class LayerTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage
-                "Invalid package definition for layer 'Domain'. To include subpackages, the definition must end with '..'. Current definition: package..."
+            "Invalid package definition for layer 'Domain'. To include subpackages, " +
+            "the definition must end with '..'. Current definition: package..."
     }
 
     @Test
@@ -44,7 +47,8 @@ class LayerTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage
-                "Invalid package definition for layer 'Domain'. To include subpackages, the definition must end with '..'. Current definition: first.package"
+            "Invalid package definition for layer 'Domain'. To include subpackages, " +
+            "the definition must end with '..'. Current definition: first.package"
     }
 
     @Test
@@ -54,7 +58,8 @@ class LayerTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage
-                "Invalid package definition for layer 'Domain'. To include subpackages, the definition must end with '..'. Current definition: first.second..third_p.package...."
+            "Invalid package definition for layer 'Domain'. To include subpackages, " +
+            "the definition must end with '..'. Current definition: first.second..third_p.package...."
     }
 
     @Test
