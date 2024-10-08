@@ -102,10 +102,12 @@ Read the [Konsist articles](https://docs.konsist.lemonappdev.com/getting-started
 
 [![Star History Chart](https://api.star-history.com/svg?repos=LemonAppDev/konsist&type=Date)](https://star-history.com/#LemonAppDev/konsist&Date)
 
-## Community & Support
+## Support 
 
-Write a message on the  [#konsist channel](https://kotlinlang.slack.com/archives/C05QG9FD6KS) at kotlinlang Slack 
-Workspace (preferred) or start a [GitHub discussion](https://github.com/LemonAppDev/konsist/discussions).
+We're here to help you make the most of Konsist. Here are the best ways to get support:
+
+For quick inquiries and general discussions, join our [#konsist Slack channel](https://kotlinlang.slack.com/archives/C05QG9FD6KS).
+Use [GitHub Discussion](https://github.com/LemonAppDev/konsist/discussions) for bug reports, issues, and feature requests.
 
 ## Contributing
 
