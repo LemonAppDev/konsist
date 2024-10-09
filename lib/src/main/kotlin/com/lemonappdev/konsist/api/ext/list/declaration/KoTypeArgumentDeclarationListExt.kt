@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list.declaration
 
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.core.declaration.KoTypeArgumentDeclarationCore
@@ -17,7 +18,7 @@ import com.lemonappdev.konsist.core.declaration.KoTypeArgumentDeclarationCore
  *
  * @return A flattened list of `KoBaseTypeDeclaration` objects, representing the source types of all type arguments and their nested types.
  */
-fun <T : KoTypeArgumentDeclaration> List<T>.flatten(): List<KoBaseTypeDeclaration> =
+fun <T : KoTypeArgumentDeclaration> List<T>.flatten(): List<KoSourceDeclaration> =
     mapNotNull { typeArg ->
         val baseDeclaration =
             if (typeArg.typeArguments?.isNotEmpty() == true) {

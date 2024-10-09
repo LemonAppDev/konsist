@@ -2,50 +2,40 @@ package com.lemonappdev.konsist.core.declaration.type
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.declaration.KoSourceDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
+import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
+import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtTypeProjection
 
-internal class KoStarProjectionDeclarationCore private constructor(
-    override val ktTypeProjection: KtTypeProjection,
-    override val containingDeclaration: KoBaseDeclaration,
-) : KoStarProjectionDeclaration,
-    KoBaseTypeDeclarationCore,
-    KoBaseProviderCore,
-    KoContainingFileProviderCore,
-    KoContainingDeclarationProviderCore,
-    KoLocationProviderCore,
-    KoPathProviderCore,
-    KoModuleProviderCore,
-    KoSourceSetProviderCore {
-    override val psiElement: PsiElement by lazy { ktTypeProjection }
+internal object KoStarProjectionDeclarationCore:
+    KoStarProjectionDeclaration,
+    KoSourceDeclarationCore,
+    KoBaseProviderCore {
+    override val ktElement: KtElement? by lazy { null }
 
-    override val ktElement: KtElement by lazy { ktTypeProjection }
+    override val psiElement: PsiElement? by lazy { null }
 
-    override val name: String by lazy { ktTypeProjection.text }
+    override val name: String by lazy { text }
 
-    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
+    override val text: String by lazy { "*" }
 
-    override fun toString(): String = name
-
-    internal companion object {
-        private val cache: KoDeclarationCache<KoStarProjectionDeclaration> = KoDeclarationCache()
-
-        internal fun getInstance(
-            ktTypeProjection: KtTypeProjection,
-            containingDeclaration: KoBaseDeclaration,
-        ): KoStarProjectionDeclaration =
-            cache.getOrCreateInstance(ktTypeProjection, containingDeclaration) {
-                KoStarProjectionDeclarationCore(ktTypeProjection, containingDeclaration)
-            }
+    override val sourceDeclaration: KoSourceDeclaration by lazy {
+        KoStarProjectionDeclarationCore
     }
+
+    override fun toString(): String = text
 }

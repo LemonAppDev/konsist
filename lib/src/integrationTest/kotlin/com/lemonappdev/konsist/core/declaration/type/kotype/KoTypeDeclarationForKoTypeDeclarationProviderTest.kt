@@ -69,7 +69,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
-            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
         }
     }
 
@@ -119,7 +118,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
-            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
         }
     }
 
@@ -169,7 +167,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
-            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
         }
     }
 
@@ -219,7 +216,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
-            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
         }
     }
 
@@ -269,7 +265,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
-            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
         }
     }
 
@@ -319,7 +314,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
-            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
         }
     }
 
@@ -362,7 +356,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
-            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
         }
     }
 
@@ -405,7 +398,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
-            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
         }
     }
 
@@ -448,7 +440,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
-            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
         }
     }
 
@@ -470,7 +461,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeInstanceOf KoTypeParameterDeclaration::class
             it?.asTypeParameterDeclaration()?.name shouldBeEqualTo "TestType"
             it?.hasTypeParameterDeclaration() shouldBeEqualTo true
-            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
             it?.hasTypeParameterDeclaration { declaration -> declaration.name == "TestType" } shouldBeEqualTo true
             it?.hasTypeParameterDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -510,7 +500,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.asTypeParameterDeclaration() shouldBeInstanceOf KoTypeParameterDeclaration::class
             it?.asTypeParameterDeclaration()?.name shouldBeEqualTo "TestType"
             it?.hasTypeParameterDeclaration() shouldBeEqualTo true
-            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
             it?.hasTypeParameterDeclaration { declaration -> declaration.name == "TestType" } shouldBeEqualTo true
             it?.hasTypeParameterDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
@@ -571,7 +560,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
-            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
         }
     }
 
@@ -621,7 +609,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclarationOf(String::class) shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
-            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
         }
     }
 
@@ -672,7 +659,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclarationOf(String::class) shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
-            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
         }
     }
 
@@ -715,7 +701,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
-            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
         }
     }
 
@@ -758,7 +743,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
-            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
         }
     }
 
@@ -809,7 +793,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
-            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
         }
     }
 
@@ -860,7 +843,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
-            it?.hasStarProjectionDeclaration() shouldBeEqualTo false
         }
     }
 
@@ -882,8 +864,7 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.asStarProjectionDeclaration() shouldBeInstanceOf KoStarProjectionDeclaration::class
-            it?.asStarProjectionDeclaration()?.name shouldBeEqualTo "*"
+            it shouldBeInstanceOf KoStarProjectionDeclaration::class
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
@@ -900,7 +881,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
             it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
-            it?.hasStarProjectionDeclaration() shouldBeEqualTo true
         }
     }
 

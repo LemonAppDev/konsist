@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -12,9 +13,9 @@ import org.jetbrains.kotlin.psi.KtUserType
 
 data class KoTypeArgumentDeclarationCore(
     override val name: String,
-    override val genericType: KoBaseTypeDeclaration,
+    override val genericType: KoSourceDeclaration,
     override val typeArguments: List<KoTypeArgumentDeclaration>?,
-    override val sourceDeclaration: KoBaseTypeDeclaration,
+    override val sourceDeclaration: KoSourceDeclaration,
 ) : KoTypeArgumentDeclaration,
     KoBaseProviderCore,
     KoNameProviderCore,

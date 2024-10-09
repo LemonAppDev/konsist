@@ -59,7 +59,7 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                 ?.hasSourceDeclaration { declaration ->
                     (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fqn
                 }?.shouldBeEqualTo(true)
-            it?.hasSourceDeclaration { declaration -> declaration.isStarProjection } shouldBeEqualTo false
+            it?.hasSourceDeclaration { declaration -> declaration.hasNameEndingWith("Suffix") } shouldBeEqualTo false
             kClassOf?.let { kClass -> it?.hasSourceDeclarationOf(kClass) }?.shouldBeEqualTo(true)
             it?.hasSourceDeclarationOf(notKClassOf) shouldBeEqualTo false
         }
@@ -91,7 +91,7 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                 .hasSourceDeclaration { declaration ->
                     (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fqn
                 }.shouldBeEqualTo(true)
-            it.hasSourceDeclaration { declaration -> declaration.isStarProjection } shouldBeEqualTo false
+            it.hasSourceDeclaration { declaration -> declaration.hasNameEndingWith("Suffix") } shouldBeEqualTo false
         }
     }
 
@@ -123,7 +123,7 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                 .hasSourceDeclaration { declaration ->
                     (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fqn
                 }.shouldBeEqualTo(true)
-            it.hasSourceDeclaration { declaration -> declaration.isStarProjection } shouldBeEqualTo false
+            it.hasSourceDeclaration { declaration -> declaration.hasNameEndingWith("Suffix") } shouldBeEqualTo false
         }
     }
 
@@ -153,7 +153,7 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                 .hasSourceDeclaration { declaration ->
                     (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fqn
                 }.shouldBeEqualTo(true)
-            it.hasSourceDeclaration { declaration -> declaration.isStarProjection } shouldBeEqualTo false
+            it.hasSourceDeclaration { declaration -> declaration.hasNameEndingWith("Suffix") } shouldBeEqualTo false
         }
     }
 
@@ -185,7 +185,7 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                 .hasSourceDeclaration { declaration ->
                     (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fqn
                 }.shouldBeEqualTo(true)
-            it.hasSourceDeclaration { declaration -> declaration.isStarProjection } shouldBeEqualTo false
+            it.hasSourceDeclaration { declaration -> declaration.hasNameEndingWith("Suffix") } shouldBeEqualTo false
         }
     }
 

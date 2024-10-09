@@ -1,7 +1,9 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoGenericTypeProvider
+import com.lemonappdev.konsist.core.declaration.KoSourceDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.util.TypeUtil
 import com.lemonappdev.konsist.core.util.TypeUtil.hasTypeOf
@@ -16,7 +18,7 @@ internal interface KoGenericTypeProviderCore :
     KoContainingFileProviderCore {
     val ktUserType: KtUserType?
 
-    override val genericType: KoBaseTypeDeclaration
+    override val genericType: KoSourceDeclaration
         get() {
             val ktNameReferenceExpression =
                 ktUserType
@@ -34,7 +36,7 @@ internal interface KoGenericTypeProviderCore :
             ) ?: throw (Exception("Generic type cannot be null."))
         }
 
-    override fun hasGenericType(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean = predicate(genericType)
+    override fun hasGenericType(predicate: (KoSourceDeclaration) -> Boolean): Boolean = predicate(genericType)
 
     override fun hasGenericTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(genericType, kClass)
 }

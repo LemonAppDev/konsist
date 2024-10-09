@@ -1,3 +1,0 @@
-package com.samplepackage
-
-fun sampleFunction(): List<*> = emptyList<String>()

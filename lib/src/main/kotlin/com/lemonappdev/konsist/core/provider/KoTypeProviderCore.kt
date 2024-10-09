@@ -54,7 +54,4 @@ internal interface KoTypeProviderCore :
 
     override val isExternalType: Boolean
         get() = sourceDeclaration is KoExternalDeclaration
-
-    override val isStarProjection: Boolean
-        get() = sourceDeclaration is KoStarProjectionDeclaration
 }

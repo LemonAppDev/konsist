@@ -179,8 +179,8 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isStarProjection } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isStarProjection } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
         }
     }
 

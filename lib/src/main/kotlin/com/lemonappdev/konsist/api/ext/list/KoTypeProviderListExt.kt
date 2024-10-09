@@ -192,21 +192,6 @@ fun <T : KoTypeProvider> List<T>.withTypeParameter(): List<T> = filter { it.isTy
 fun <T : KoTypeProvider> List<T>.withoutTypeParameter(): List<T> = filterNot { it.isTypeParameter }
 
 /**
- * Filters the list to include only declarations that are star projections.
- * Star projections represent wildcard types in Kotlin (e.g., `*` in generics).
- *
- * @return A list containing only star projections.
- */
-fun <T : KoTypeProvider> List<T>.withStarProjection(): List<T> = filter { it.isStarProjection }
-
-/**
- * Filters the list to exclude declarations that are star projections.
- *
- * @return A list excluding star projections.
- */
-fun <T : KoTypeProvider> List<T>.withoutStarProjection(): List<T> = filterNot { it.isStarProjection }
-
-/**
  * Filters the list to include only declarations that are external types.
  * External types are those defined outside the project's codebase, typically in external libraries.
  *

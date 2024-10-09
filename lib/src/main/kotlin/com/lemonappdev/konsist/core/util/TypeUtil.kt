@@ -3,12 +3,14 @@ package com.lemonappdev.konsist.core.util
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoSourceDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoFunctionTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoGenericTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
@@ -36,7 +38,7 @@ object TypeUtil {
         isExtension: Boolean,
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
-    ): KoBaseTypeDeclaration? {
+    ): KoSourceDeclaration? {
         val notNullTypes = types.filterNotNull()
 
         val type =
@@ -90,7 +92,7 @@ object TypeUtil {
     ): Boolean = kClass.qualifiedName == (type?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
 
     internal fun hasTypeOf(
-        type: KoBaseTypeDeclaration?,
+        type: KoSourceDeclaration?,
         kClass: KClass<*>,
     ): Boolean = kClass.qualifiedName == (type as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
 
@@ -99,7 +101,7 @@ object TypeUtil {
         type: PsiElement?,
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
-    ): KoBaseTypeDeclaration? {
+    ): KoSourceDeclaration? {
         val nestedType =
             if (type is KtNullableType) {
                 type
@@ -142,7 +144,7 @@ object TypeUtil {
                 ?.any { it == typeText }
 
         return when {
-            nestedType is KtTypeProjection -> KoStarProjectionDeclarationCore.getInstance(nestedType, parentDeclaration)
+            nestedType is KtTypeProjection -> KoStarProjectionDeclarationCore
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
             nestedType is KtUserType && typeText != null -> {
                 if (nestedType.children.filterIsInstance<KtTypeArgumentList>().isNotEmpty()) {
