@@ -15,7 +15,7 @@ interface KoTypeArgumentProvider : KoBaseProvider {
      * 1) In `List<String>`, `String` is a type argument for `List`
      * 2) in `List<Set<String>>`, `Set<String>` is a type argument for `List`,
      */
-    val typeArguments: List<KoTypeArgumentDeclaration>
+    val typeArguments: List<KoTypeArgumentDeclaration>?
 
     /**
      * The number of type arguments.

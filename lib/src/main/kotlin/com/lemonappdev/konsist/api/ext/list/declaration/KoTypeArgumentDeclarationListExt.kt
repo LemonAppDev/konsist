@@ -18,9 +18,9 @@ import com.lemonappdev.konsist.core.declaration.KoTypeArgumentDeclarationCore
  * @return A flattened list of `KoBaseTypeDeclaration` objects, representing the source types of all type arguments and their nested types.
  */
 fun <T : KoTypeArgumentDeclaration> List<T>.flatten(): List<KoBaseTypeDeclaration> =
-    flatMap { typeArg ->
+    mapNotNull { typeArg ->
         val baseDeclaration =
-            if (typeArg.typeArguments.isNotEmpty()) {
+            if (typeArg.typeArguments?.isNotEmpty() == true) {
                 KoTypeArgumentDeclarationCore(
                     typeArg.sourceDeclaration.name,
                     typeArg.genericType,
@@ -31,8 +31,9 @@ fun <T : KoTypeArgumentDeclaration> List<T>.flatten(): List<KoBaseTypeDeclaratio
                 typeArg
             }
 
-        listOf(baseDeclaration) + (typeArg.typeArguments.flattenRecursively())
-    }.map { it.genericType }
+        listOf(baseDeclaration) + ((typeArg.typeArguments ?: emptyList()).flattenRecursively())
+    }.flatten()
+        .map { it.genericType }
 
 private fun <T : KoTypeArgumentDeclaration> List<T>.flattenRecursively(): List<KoTypeArgumentDeclaration> =
-    flatMap { typeArg -> listOf(typeArg) + (typeArg.typeArguments.flattenRecursively()) }
+    flatMap { typeArg -> listOf(typeArg) + (typeArg.typeArguments?.flattenRecursively() ?: emptyList()) }

@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.psi.KtUserType
 data class KoTypeArgumentDeclarationCore(
     override val name: String,
     override val genericType: KoBaseTypeDeclaration,
-    override val typeArguments: List<KoTypeArgumentDeclaration>,
+    override val typeArguments: List<KoTypeArgumentDeclaration>?,
     override val sourceDeclaration: KoBaseTypeDeclaration,
 ) : KoTypeArgumentDeclaration,
     KoBaseProviderCore,

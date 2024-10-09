@@ -22,7 +22,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.typeArguments shouldBeEqualTo emptyList()
+            it?.typeArguments shouldBeEqualTo null
             it?.numTypeArguments shouldBeEqualTo 0
             it?.countTypeArguments { typeArgument -> typeArgument.name == "String" } shouldBeEqualTo 0
             it?.hasTypeArguments() shouldBeEqualTo false
@@ -35,7 +35,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo false
         }
     }
 
@@ -59,7 +59,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
                 ?.typeArguments
                 ?.flatten()
                 ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
-            it?.typeArguments?.firstOrNull()?.typeArguments shouldBeEqualTo emptyList()
+            it?.typeArguments?.firstOrNull()?.typeArguments shouldBeEqualTo null
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration.isClass } shouldBeEqualTo 0
@@ -167,7 +167,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.typeArguments shouldBeEqualTo emptyList()
+            it?.typeArguments shouldBeEqualTo null
             it?.numTypeArguments shouldBeEqualTo 0
             it?.countTypeArguments { typeArgument -> typeArgument.name == "*" } shouldBeEqualTo 0
             it?.hasTypeArguments() shouldBeEqualTo false
@@ -180,7 +180,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration.isStarProjection } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isStarProjection } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isStarProjection } shouldBeEqualTo false
         }
     }
 
