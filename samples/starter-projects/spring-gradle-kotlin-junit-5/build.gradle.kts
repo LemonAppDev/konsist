@@ -8,7 +8,7 @@ plugins {
 
 group = "com.sample"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_19
+java.sourceCompatibility = JavaVersion.VERSION_21
 
 repositories {
     mavenCentral()
@@ -48,7 +48,7 @@ testing {
                 implementation("com.lemonappdev:konsist:0.16.1")
 
                 // Add junit-jupiter-params dependency (required for dynamic Tests)
-                implementation("org.junit.jupiter:junit-jupiter-params:5.11.1")
+                implementation("org.junit.jupiter:junit-jupiter-params:5.11.2")
             }
         }
     }

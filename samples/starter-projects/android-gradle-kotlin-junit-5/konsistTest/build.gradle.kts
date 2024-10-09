@@ -1,7 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("de.mannodermaus.android-junit5") version "1.11.0.0"
+    id("de.mannodermaus.android-junit5") version "1.11.2.0"
 }
 
 android {
@@ -31,8 +31,8 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.7.0")
 
     // Add JUnit dependency
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.2")
 
     // Add Konsist dependency
     testImplementation("com.lemonappdev:konsist:0.16.1")

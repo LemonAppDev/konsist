@@ -5,16 +5,12 @@ import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.toKoFile
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlinx.coroutines.withContext
 import java.io.File
 
 internal object KoFileDeclarationProvider {
@@ -28,13 +24,6 @@ internal object KoFileDeclarationProvider {
     init {
         check(projectRootDir.exists()) { "Directory does not exist: ${projectRootDir.absolutePath}" }
         check(projectRootDir.isDirectory) { "Project root directory is a File ${projectRootDir.absolutePath}" }
-
-        @OptIn(DelicateCoroutinesApi::class)
-        GlobalScope.launch {
-            withContext(Dispatchers.IO) {
-                getKoFileDeclarations()
-            }
-        }
     }
 
     /**
@@ -56,10 +45,11 @@ internal object KoFileDeclarationProvider {
      * 4. getKoFileDeclarations  started at Thread 1 completes
      * 5. getKoFileDeclarations  started at Thread 2 completes
      *
+     * @param filter - Block to filter files. Return true to include the file.
      * @return A list of [KoFileDeclaration]s representing the parsed Kotlin files.
      * @throws Exception if there's an issue accessing the file system or parsing the files.
      */
-    suspend fun getKoFileDeclarations(): List<KoFileDeclaration> =
+    suspend fun getKoFileDeclarations(filter: ((File) -> Boolean)? = null): List<KoFileDeclaration> =
         coroutineScope {
             val currentDeferred: Deferred<List<KoFileDeclaration>> =
                 mutex.withLock {
@@ -67,6 +57,7 @@ internal object KoFileDeclarationProvider {
                         projectRootDir
                             .walk()
                             .filter { it.isKotlinFile }
+                            .filter { filter == null || filter(it) }
                             .map { async { parseKotlinFile(it) } }
                             .toList()
                             .awaitAll()

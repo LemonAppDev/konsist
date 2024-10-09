@@ -15,7 +15,7 @@ repositories {
 
 kotlin {
     jvm {
-        jvmToolchain(8)
+        jvmToolchain(11)
         withJava()
         testRuns.named("test") {
             executionTask.configure {
@@ -55,9 +55,9 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.3.1-pre.812")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.3.1-pre.812")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.13.3-pre.813")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.3.1-pre.816")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.3.1-pre.816")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.13.3-pre.816")
             }
         }
         val jsTest by getting

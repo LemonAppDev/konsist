@@ -26,8 +26,14 @@ testImplementation "com.lemonappdev:konsist:0.16.1"
 </dependency>
 ```
 
-Check the [Konsist documentation](https://docs.konsist.lemonappdev.com/) to learn more about Konsist and take a 
-look at [getting started guide](https://docs.konsist.lemonappdev.com/getting-started/getting-started).
+## Getting Started
+
+To begin using Konsist in your project, consider these steps:
+
+1. See [Konsist Documentation](https://docs.konsist.lemonappdev.com/) to familiarize yourself with Konsist's 
+   features and usage guidelines.
+2. Check [Starter Projects](https://github.com/LemonAppDev/konsist/tree/main/samples/starter-projects) to see Konsist in action.
+3. Review [Konsist API Reference](https://reference.konsist.lemonappdev.com) to learn about the available API methods.
 
 ## Examples
 
@@ -102,10 +108,12 @@ Check the [videos & articles](https://docs.konsist.lemonappdev.com/getting-start
 
 [![Star History Chart](https://api.star-history.com/svg?repos=LemonAppDev/konsist&type=Date)](https://star-history.com/#LemonAppDev/konsist&Date)
 
-## Community & Support
+## Support 
 
-Write a message on the  [#konsist channel](https://kotlinlang.slack.com/archives/C05QG9FD6KS) at kotlinlang Slack 
-Workspace (preferred) or start a [GitHub discussion](https://github.com/LemonAppDev/konsist/discussions).
+We're here to help you make the most of Konsist. Here are the best ways to get support:
+
+For quick inquiries and general discussions, join our [#konsist Slack channel](https://kotlinlang.slack.com/archives/C05QG9FD6KS).
+Use [GitHub Discussion](https://github.com/LemonAppDev/konsist/discussions) for bug reports, issues, and feature requests.
 
 ## Contributing
 

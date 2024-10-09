@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.api
 
-import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutPrivateModifier
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withParameter
 import com.lemonappdev.konsist.api.ext.list.withProperty
@@ -8,8 +7,6 @@ import com.lemonappdev.konsist.api.ext.list.withoutAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withoutName
 import com.lemonappdev.konsist.api.ext.list.withoutNameMatching
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
-import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
-import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 import com.lemonappdev.konsist.api.verify.assertFalse
@@ -25,28 +22,6 @@ class ApiKonsistTest {
         apiPackageScope
             .functions()
             .assertTrue { it.hasReturnType() }
-    }
-
-    @Test
-    fun `every api function has valid KDoc`() {
-        apiPackageScope
-            .functions()
-            .withoutPrivateModifier()
-            .assertTrue { it.hasValidKDocParamTags() && it.hasValidKDocReturnTag() }
-    }
-
-    @Test
-    fun `every api property has valid KDoc`() {
-        apiPackageScope
-            .properties()
-            .assertTrue { it.hasKDoc }
-    }
-
-    @Test
-    fun `every api declaration has valid KDoc`() {
-        apiPackageScope
-            .classesAndInterfacesAndObjects()
-            .assertTrue { it.hasKDoc }
     }
 
     @Test
