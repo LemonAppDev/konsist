@@ -23,43 +23,29 @@ internal interface KoTypeArgumentProviderCore :
         get() {
             val ktTypeProjections: List<KtTypeProjection> =
                 ktUserType
-                    ?.children
-                    ?.filterIsInstance<KtTypeArgumentList>()
-                    ?.flatMap { it.children.toList() }
-                    ?.filterIsInstance<KtTypeProjection>()
+                    ?.typeArguments
                     ?: emptyList()
 
-            val starProjections: List<KoTypeDeclaration> =
-                ktTypeProjections
-                    .filter { it.projectionKind == KtProjectionKind.STAR }
-                    .map { KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
-
-            val otherTypes: List<KoTypeDeclaration> =
-                ktTypeProjections
-                    .flatMap { it.children.toList() }
-                    .filterIsInstance<KtTypeReference>()
-                    .map { KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
-
-            val types = starProjections + otherTypes
-
-            if (types.isEmpty()) {
-                return null
-            }
-
             val typeArguments =
-                types.map {
-                    KoTypeArgumentDeclarationCore(
-                        it.name,
-                        if (it.isGenericType) {
-                            it.asGenericTypeDeclaration()?.genericType
-                                ?: it.sourceDeclaration
-                        } else {
-                            it.sourceDeclaration
-                        },
-                        if (it.isGenericType) it.asGenericTypeDeclaration()?.typeArguments else null,
-                        it.sourceDeclaration,
-                    )
-                }
+                ktTypeProjections
+                    .map {
+                        val type = KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration())
+
+                        KoTypeArgumentDeclarationCore(
+                            type.name,
+                            if (type.isGenericType) {
+                                type.asGenericTypeDeclaration()?.genericType
+                                    ?: type.sourceDeclaration
+                            } else {
+                                type.sourceDeclaration
+                            },
+                            if (type.isGenericType) type.asGenericTypeDeclaration()?.typeArguments else null,
+                            type.sourceDeclaration,
+                            it.projectionKind == KtProjectionKind.STAR,
+                            it.projectionKind == KtProjectionKind.IN,
+                            it.projectionKind == KtProjectionKind.OUT,
+                            )
+                    }
 
             return typeArguments.ifEmpty { null }
         }

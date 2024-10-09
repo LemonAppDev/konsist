@@ -27,6 +27,9 @@ fun <T : KoTypeArgumentDeclaration> List<T>.flatten(): List<KoSourceDeclaration>
                     typeArg.genericType,
                     typeArg.typeArguments,
                     typeArg.sourceDeclaration,
+                    typeArg.isStarProjection,
+                    typeArg.hasInProjection,
+                    typeArg.hasOutProjection,
                 )
             } else {
                 typeArg
