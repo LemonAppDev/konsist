@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kotypeargument.forkomodifier
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -19,7 +18,7 @@ class KoTypeArgumentDeclarationForKoInModifierProviderTest {
                 ?.firstOrNull()
 
         // then
-            sut?.hasInModifier shouldBeEqualTo false
+        sut?.hasInModifier shouldBeEqualTo false
     }
 
     @Test
@@ -35,7 +34,7 @@ class KoTypeArgumentDeclarationForKoInModifierProviderTest {
                 ?.firstOrNull()
 
         // then
-            sut?.hasInModifier shouldBeEqualTo false
+        sut?.hasInModifier shouldBeEqualTo false
     }
 
     @Test
@@ -51,7 +50,7 @@ class KoTypeArgumentDeclarationForKoInModifierProviderTest {
                 ?.firstOrNull()
 
         // then
-            sut?.hasInModifier shouldBeEqualTo false
+        sut?.hasInModifier shouldBeEqualTo false
     }
 
     @Test
@@ -67,7 +66,7 @@ class KoTypeArgumentDeclarationForKoInModifierProviderTest {
                 ?.firstOrNull()
 
         // then
-            sut?.hasInModifier shouldBeEqualTo false
+        sut?.hasInModifier shouldBeEqualTo false
     }
 
     @Test
@@ -83,7 +82,7 @@ class KoTypeArgumentDeclarationForKoInModifierProviderTest {
                 ?.firstOrNull()
 
         // then
-            sut?.hasInModifier shouldBeEqualTo false
+        sut?.hasInModifier shouldBeEqualTo false
     }
 
     @Test
@@ -99,7 +98,7 @@ class KoTypeArgumentDeclarationForKoInModifierProviderTest {
                 ?.firstOrNull()
 
         // then
-            sut?.hasInModifier shouldBeEqualTo true
+        sut?.hasInModifier shouldBeEqualTo true
     }
 
     private fun getSnippetFile(fileName: String) =
