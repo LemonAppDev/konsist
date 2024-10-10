@@ -9,4 +9,4 @@ internal interface KoStarProjectionProviderCore :
     KoSourceDeclarationProviderCore {
     override val isStarProjection: Boolean
         get() = sourceDeclaration is KoStarProjectionDeclaration
-    }
+}
