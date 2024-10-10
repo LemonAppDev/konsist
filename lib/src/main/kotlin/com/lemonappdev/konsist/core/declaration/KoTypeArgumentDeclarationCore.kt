@@ -10,8 +10,9 @@ import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoStarProjectionProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoInModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
-import com.lemonappdev.konsist.core.provider.modifier.KoTypeProjectionModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoOutModifierProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
@@ -34,7 +35,8 @@ data class KoTypeArgumentDeclarationCore(
     KoGenericTypeProviderCore,
     KoStarProjectionProviderCore,
     KoModifierProviderCore,
-    KoTypeProjectionModifierProviderCore {
+    KoOutModifierProviderCore,
+    KoInModifierProviderCore {
     override val ktElement: KtElement? by lazy { null }
 
     override val ktUserType: KtUserType? by lazy { null }

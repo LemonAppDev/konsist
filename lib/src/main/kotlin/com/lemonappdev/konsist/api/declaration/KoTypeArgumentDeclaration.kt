@@ -7,8 +7,9 @@ import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoStarProjectionProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTypeArgumentProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoInModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
-import com.lemonappdev.konsist.api.provider.modifier.KoTypeProjectionModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoOutModifierProvider
 
 /**
  * Represents a type argument declaration.
@@ -23,4 +24,5 @@ interface KoTypeArgumentDeclaration :
     KoGenericTypeProvider,
     KoStarProjectionProvider,
     KoModifierProvider,
-    KoTypeProjectionModifierProvider
+    KoOutModifierProvider,
+    KoInModifierProvider

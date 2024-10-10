@@ -5,12 +5,12 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoTypeArgumentDeclarationForKoTypeProjectionModifierProviderTest {
+class KoTypeArgumentDeclarationForKoInModifierProviderTest {
     @Test
-    fun `not-generic-type-argument-type-projection`() {
+    fun `not-generic-type-argument-has-in-modifier`() {
         // given
         val sut =
-            getSnippetFile("not-generic-type-argument-type-projection")
+            getSnippetFile("not-generic-type-argument-has-in-modifier")
                 .properties()
                 .first()
                 .type
@@ -19,17 +19,14 @@ class KoTypeArgumentDeclarationForKoTypeProjectionModifierProviderTest {
                 ?.firstOrNull()
 
         // then
-        assertSoftly(sut) {
-            it?.hasInModifier shouldBeEqualTo false
-            it?.hasOutModifier shouldBeEqualTo false
-        }
+            sut?.hasInModifier shouldBeEqualTo false
     }
 
     @Test
-    fun `generic-type-argument-type-projection`() {
+    fun `generic-type-argument-has-in-modifier`() {
         // given
         val sut =
-            getSnippetFile("generic-type-argument-type-projection")
+            getSnippetFile("generic-type-argument-has-in-modifier")
                 .properties()
                 .first()
                 .type
@@ -38,17 +35,14 @@ class KoTypeArgumentDeclarationForKoTypeProjectionModifierProviderTest {
                 ?.firstOrNull()
 
         // then
-        assertSoftly(sut) {
-            it?.hasInModifier shouldBeEqualTo false
-            it?.hasOutModifier shouldBeEqualTo false
-        }
+            sut?.hasInModifier shouldBeEqualTo false
     }
 
     @Test
-    fun `generic-complex-type-argument-type-projection`() {
+    fun `generic-complex-type-argument-has-in-modifier`() {
         // given
         val sut =
-            getSnippetFile("generic-complex-type-argument-type-projection")
+            getSnippetFile("generic-complex-type-argument-has-in-modifier")
                 .properties()
                 .first()
                 .type
@@ -57,17 +51,14 @@ class KoTypeArgumentDeclarationForKoTypeProjectionModifierProviderTest {
                 ?.firstOrNull()
 
         // then
-        assertSoftly(sut) {
-            it?.hasInModifier shouldBeEqualTo false
-            it?.hasOutModifier shouldBeEqualTo false
-        }
+            sut?.hasInModifier shouldBeEqualTo false
     }
 
     @Test
-    fun `star-projection-type-argument-type-projection`() {
+    fun `star-projection-type-argument-has-in-modifier`() {
         // given
         val sut =
-            getSnippetFile("star-projection-type-argument-type-projection")
+            getSnippetFile("star-projection-type-argument-has-in-modifier")
                 .properties()
                 .first()
                 .type
@@ -76,17 +67,14 @@ class KoTypeArgumentDeclarationForKoTypeProjectionModifierProviderTest {
                 ?.firstOrNull()
 
         // then
-        assertSoftly(sut) {
-            it?.hasInModifier shouldBeEqualTo false
-            it?.hasOutModifier shouldBeEqualTo false
-        }
+            sut?.hasInModifier shouldBeEqualTo false
     }
 
     @Test
-    fun `out-projection-type-argument-type-projection`() {
+    fun `out-projection-type-argument-has-in-modifier`() {
         // given
         val sut =
-            getSnippetFile("out-projection-type-argument-type-projection")
+            getSnippetFile("out-projection-type-argument-has-in-modifier")
                 .properties()
                 .first()
                 .type
@@ -95,17 +83,14 @@ class KoTypeArgumentDeclarationForKoTypeProjectionModifierProviderTest {
                 ?.firstOrNull()
 
         // then
-        assertSoftly(sut) {
-            it?.hasInModifier shouldBeEqualTo false
-            it?.hasOutModifier shouldBeEqualTo true
-        }
+            sut?.hasInModifier shouldBeEqualTo false
     }
 
     @Test
-    fun `in-projection-type-argument-type-projection`() {
+    fun `in-projection-type-argument-has-in-modifier`() {
         // given
         val sut =
-            getSnippetFile("in-projection-type-argument-type-projection")
+            getSnippetFile("in-projection-type-argument-has-in-modifier")
                 .properties()
                 .first()
                 .type
@@ -114,15 +99,12 @@ class KoTypeArgumentDeclarationForKoTypeProjectionModifierProviderTest {
                 ?.firstOrNull()
 
         // then
-        assertSoftly(sut) {
-            it?.hasInModifier shouldBeEqualTo true
-            it?.hasOutModifier shouldBeEqualTo false
-        }
+            sut?.hasInModifier shouldBeEqualTo true
     }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
-            "core/declaration/kotypeargument/forkomodifier/snippet/forkotypeprojectionmodifierprovider/",
+            "core/declaration/kotypeargument/forkomodifier/snippet/forkoinmodifierprovider/",
             fileName,
         )
 }
