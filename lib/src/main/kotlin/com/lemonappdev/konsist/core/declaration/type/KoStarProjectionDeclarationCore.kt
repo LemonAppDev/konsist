@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.psi.KtTypeProjection
 internal class KoStarProjectionDeclarationCore private constructor(
     override val ktTypeProjection: KtTypeProjection,
     override val containingDeclaration: KoBaseDeclaration,
-)  : KoStarProjectionDeclaration,
+) : KoStarProjectionDeclaration,
     KoSourceDeclarationCore,
     KoBaseProviderCore,
     KoContainingFileProviderCore,

@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.api.ext.list.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
-import com.lemonappdev.konsist.core.declaration.KoTypeArgumentDeclarationCore
 
 /**
  * Flattens the list of `KoTypeArgumentDeclaration` objects into a list of `KoBaseTypeDeclaration` objects.
