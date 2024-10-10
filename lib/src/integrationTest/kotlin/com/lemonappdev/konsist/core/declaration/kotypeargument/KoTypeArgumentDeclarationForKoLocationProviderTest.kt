@@ -291,6 +291,6 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/kotypeargument/snippet/forkolocationprovider/",
-            fileName
+            fileName,
         )
 }
