@@ -55,10 +55,12 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.sourceDeclaration shouldBeInstanceOf instanceOf
             it?.sourceDeclaration shouldNotBeInstanceOf notInstanceOf
             (it?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
+
             it
                 ?.hasSourceDeclaration { declaration ->
                     (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fqn
                 }?.shouldBeEqualTo(true)
+
             it?.hasSourceDeclaration { declaration -> declaration.isStarProjection } shouldBeEqualTo false
             kClassOf?.let { kClass -> it?.hasSourceDeclarationOf(kClass) }?.shouldBeEqualTo(true)
             it?.hasSourceDeclarationOf(notKClassOf) shouldBeEqualTo false
@@ -87,10 +89,12 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf instanceOf
             sourceDeclaration shouldNotBeInstanceOf notInstanceOf
             (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
+
             it
                 .hasSourceDeclaration { declaration ->
                     (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fqn
                 }.shouldBeEqualTo(true)
+
             it.hasSourceDeclaration { declaration -> declaration.isStarProjection } shouldBeEqualTo false
         }
     }
@@ -119,10 +123,12 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf instanceOf
             sourceDeclaration shouldNotBeInstanceOf notInstanceOf
             (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
+
             it
                 .hasSourceDeclaration { declaration ->
                     (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fqn
                 }.shouldBeEqualTo(true)
+
             it.hasSourceDeclaration { declaration -> declaration.isStarProjection } shouldBeEqualTo false
         }
     }
@@ -149,10 +155,12 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf instanceOf
             sourceDeclaration shouldNotBeInstanceOf notInstanceOf
             (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
+
             it
                 .hasSourceDeclaration { declaration ->
                     (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fqn
                 }.shouldBeEqualTo(true)
+
             it.hasSourceDeclaration { declaration -> declaration.isStarProjection } shouldBeEqualTo false
         }
     }
@@ -181,10 +189,12 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf instanceOf
             sourceDeclaration shouldNotBeInstanceOf notInstanceOf
             (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
+
             it
                 .hasSourceDeclaration { declaration ->
                     (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fqn
                 }.shouldBeEqualTo(true)
+
             it.hasSourceDeclaration { declaration -> declaration.isStarProjection } shouldBeEqualTo false
         }
     }
