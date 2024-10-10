@@ -41,8 +41,6 @@ val appPropertyWithImportAliasTypeTest: ImportAlias = AppTestClass1()
 val <T> T.appPropertyWithTypeParameterTest: T
     get() = this
 
-val appPropertyWithStarProjectionTest: List<*> = emptyList<String>()
-
 object AppObjectTest
 
 enum class AppEnumClassTest {
