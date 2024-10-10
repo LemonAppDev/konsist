@@ -51,8 +51,7 @@ object TypeUtil {
                         notNullTypes.firstOrNull()
                     } else {
                         null
-                    }
-                        ?.children
+                    }?.children
                         // The last item is chosen because when a type is preceded by an annotation or modifier,
                         // the type being searched for is the last item in the list.
                         ?.lastOrNull()
@@ -60,21 +59,22 @@ object TypeUtil {
             } else if (notNullTypes.filterIsInstance<KtNameReferenceExpression>().isNotEmpty()) {
                 notNullTypes.filterIsInstance<KtNameReferenceExpression>().firstOrNull()
             } else if (notNullTypes.filterIsInstance<KtTypeProjection>().isNotEmpty()) {
-                val typeProjection = notNullTypes
-                    .filterIsInstance<KtTypeProjection>()
-                    .firstOrNull()
+                val typeProjection =
+                    notNullTypes
+                        .filterIsInstance<KtTypeProjection>()
+                        .firstOrNull()
 
-                    if (typeProjection?.projectionKind == KtProjectionKind.STAR) {
-                        return KoStarProjectionDeclarationCore
-                    } else {
-                        typeProjection
-                            ?.children
-                            // The last item is chosen because when a type is preceded by an type projection modifier (out or in),
-                            // the type being searched for is the last item in the list.
-                            ?.lastOrNull()
-                            ?.children
-                            ?.firstOrNull()
-                    }
+                if (typeProjection?.projectionKind == KtProjectionKind.STAR) {
+                    return KoStarProjectionDeclarationCore
+                } else {
+                    typeProjection
+                        ?.children
+                        // The last item is chosen because when a type is preceded by an type projection modifier (out or in),
+                        // the type being searched for is the last item in the list.
+                        ?.lastOrNull()
+                        ?.children
+                        ?.firstOrNull()
+                }
             } else {
                 null
             }

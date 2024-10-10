@@ -12,7 +12,6 @@ import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
@@ -31,22 +30,23 @@ internal interface KoTypeDeclarationProviderCore :
     KoSourceDeclarationProviderCore {
     @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("sourceDeclaration"))
     override val declaration: KoBaseTypeDeclaration
-        get() = TypeUtil.getBasicType(
-            listOf(ktTypeReference, ktNameReferenceExpression, ktTypeProjection),
-            isExtensionDeclaration(),
-            getDeclarationWithFqn(containingDeclaration) ?: containingDeclaration,
-            containingFile,
-        ) as? KoBaseTypeDeclaration
-            ?: if (this is KoBaseTypeDeclaration) {
-                this
-            } else {
-                throw KoInternalException("Source declaration cannot be a null")
-            }
+        get() =
+            TypeUtil.getBasicType(
+                listOf(ktTypeReference, ktNameReferenceExpression, ktTypeProjection),
+                isExtensionDeclaration(),
+                getDeclarationWithFqn(containingDeclaration) ?: containingDeclaration,
+                containingFile,
+            ) as? KoBaseTypeDeclaration
+                ?: if (this is KoBaseTypeDeclaration) {
+                    this
+                } else {
+                    throw KoInternalException("Source declaration cannot be a null")
+                }
 
     private fun isExtensionDeclaration(): Boolean =
         ktTypeReference?.isExtensionDeclaration() == true ||
-                ktNameReferenceExpression?.isExtensionDeclaration() == true ||
-                ktTypeProjection?.isExtensionDeclaration() == true
+            ktNameReferenceExpression?.isExtensionDeclaration() == true ||
+            ktTypeProjection?.isExtensionDeclaration() == true
 
     private fun getDeclarationWithFqn(declaration: KoBaseDeclaration): KoBaseDeclaration? =
         when {
@@ -62,7 +62,6 @@ internal interface KoTypeDeclarationProviderCore :
                 null
             }
         }
-
 
     override fun asClassDeclaration(): KoClassDeclaration? = sourceDeclaration as? KoClassDeclaration
 

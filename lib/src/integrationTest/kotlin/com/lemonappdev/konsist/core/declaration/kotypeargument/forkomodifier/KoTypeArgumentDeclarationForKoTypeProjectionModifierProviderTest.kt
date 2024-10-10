@@ -22,7 +22,6 @@ class KoTypeArgumentDeclarationForKoTypeProjectionModifierProviderTest {
         assertSoftly(sut) {
             it?.hasInModifier shouldBeEqualTo false
             it?.hasOutModifier shouldBeEqualTo false
-
         }
     }
 
@@ -124,6 +123,6 @@ class KoTypeArgumentDeclarationForKoTypeProjectionModifierProviderTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/kotypeargument/forkomodifier/snippet/forkotypeprojectionmodifierprovider/",
-            fileName
+            fileName,
         )
 }

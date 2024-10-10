@@ -1,11 +1,9 @@
 package com.lemonappdev.konsist.core.declaration.kotypeargument.forkomodifier
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.KoModifier.DATA
 import com.lemonappdev.konsist.api.KoModifier.IN
 import com.lemonappdev.konsist.api.KoModifier.OUT
-import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.KoModifier.PROTECTED
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -243,6 +241,6 @@ class KoTypeArgumentDeclarationForKoModifierProviderTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/kotypeargument/forkomodifier/snippet/forkomodifierprovider/",
-            fileName
+            fileName,
         )
 }

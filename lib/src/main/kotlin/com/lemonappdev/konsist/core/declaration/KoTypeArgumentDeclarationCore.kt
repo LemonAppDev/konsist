@@ -3,14 +3,13 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
-import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoGenericTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoStarProjectionProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
-import com.lemonappdev.konsist.core.provider.KoStarProjectionProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoTypeProjectionModifierProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
@@ -25,7 +24,7 @@ data class KoTypeArgumentDeclarationCore(
     override val sourceDeclaration: KoSourceDeclaration,
     override val isStarProjection: Boolean,
     override val hasInModifier: Boolean,
-    override val hasOutModifier: Boolean
+    override val hasOutModifier: Boolean,
 ) : KoTypeArgumentDeclaration,
     KoBaseProviderCore,
     KoNameProviderCore,

@@ -23,7 +23,6 @@ class KoTypeArgumentDeclarationForKoStarProjectionProviderTest {
             it?.isStarProjection shouldBeEqualTo false
             it?.hasInModifier shouldBeEqualTo false
             it?.hasOutModifier shouldBeEqualTo false
-
         }
     }
 

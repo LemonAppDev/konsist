@@ -1,16 +1,13 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoTypeArgumentProvider
 import com.lemonappdev.konsist.core.declaration.KoTypeArgumentDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import org.jetbrains.kotlin.psi.KtProjectionKind
-import org.jetbrains.kotlin.psi.KtTypeArgumentList
 import org.jetbrains.kotlin.psi.KtTypeProjection
-import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
 import kotlin.reflect.KClass
 
@@ -29,9 +26,10 @@ internal interface KoTypeArgumentProviderCore :
             val typeArguments =
                 ktTypeProjections
                     .map {
-                        val type = it.typeReference?.let { typeReference ->
-                            KoTypeDeclarationCore.getInstance(typeReference, this.castToKoBaseDeclaration())
-                        } ?: KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration())
+                        val type =
+                            it.typeReference?.let { typeReference ->
+                                KoTypeDeclarationCore.getInstance(typeReference, this.castToKoBaseDeclaration())
+                            } ?: KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration())
 
                         KoTypeArgumentDeclarationCore(
                             type.name,
@@ -55,8 +53,7 @@ internal interface KoTypeArgumentProviderCore :
     override val numTypeArguments: Int
         get() = typeArguments?.size ?: 0
 
-    override fun countTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Int =
-        typeArguments?.count { predicate(it) } ?: 0
+    override fun countTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Int = typeArguments?.count { predicate(it) } ?: 0
 
     override fun hasTypeArguments(): Boolean = typeArguments?.isNotEmpty() ?: false
 
@@ -94,8 +91,8 @@ internal interface KoTypeArgumentProviderCore :
                 names.any { name ->
                     typeArguments?.any { typeArgument ->
                         name.qualifiedName ==
-                                (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)
-                                    ?.fullyQualifiedName
+                            (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)
+                                ?.fullyQualifiedName
                     } == true
                 }
         }
@@ -112,15 +109,13 @@ internal interface KoTypeArgumentProviderCore :
                 names.all { name ->
                     typeArguments?.any { typeArgument ->
                         name.qualifiedName ==
-                                (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)
-                                    ?.fullyQualifiedName
+                            (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)
+                                ?.fullyQualifiedName
                     } == true
                 }
         }
 
-    override fun hasTypeArgument(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean =
-        typeArguments?.any(predicate) ?: false
+    override fun hasTypeArgument(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean = typeArguments?.any(predicate) ?: false
 
-    override fun hasAllTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean =
-        typeArguments?.all(predicate) ?: false
+    override fun hasAllTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean = typeArguments?.all(predicate) ?: false
 }
