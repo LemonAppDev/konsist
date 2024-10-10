@@ -41,8 +41,6 @@ val libPropertyWithImportAliasTypeTest: ImportAlias = LibObject
 val <T> T.libPropertyWithTypeParameterTest: T
     get() = this
 
-val libPropertyWithStarProjectionTest: List<*> = emptyList<String>()
-
 object LibObjectTest
 
 enum class LibEnumClassTest {

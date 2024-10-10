@@ -352,34 +352,6 @@ class KoTypeProviderListExtTest {
     }
 
     @Test
-    fun `withStarProjection() returns types that are star projections`() {
-        // given
-        val starProjection: KoTypeProvider = mockk { every { isStarProjection } returns true }
-        val nonStarProjection: KoTypeProvider = mockk { every { isStarProjection } returns false }
-        val types = listOf(starProjection, nonStarProjection)
-
-        // when
-        val result = types.withStarProjection()
-
-        // then
-        result shouldBeEqualTo listOf(starProjection)
-    }
-
-    @Test
-    fun `withoutStarProjection() returns types that are not star projections`() {
-        // given
-        val starProjection: KoTypeProvider = mockk { every { isStarProjection } returns true }
-        val notStarProjection: KoTypeProvider = mockk { every { isStarProjection } returns false }
-        val types = listOf(starProjection, notStarProjection)
-
-        // when
-        val result = types.withoutStarProjection()
-
-        // then
-        result shouldBeEqualTo listOf(notStarProjection)
-    }
-
-    @Test
     fun `withExternalType() returns types that are external`() {
         // given
         val externalType: KoTypeProvider = mockk { every { isExternalType } returns true }

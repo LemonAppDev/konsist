@@ -100,6 +100,52 @@ class KoTypeArgumentDeclarationForKoGenericTypeProviderTest {
         }
     }
 
+    @Test
+    fun `out-projection-type-argument-generic-type`() {
+        // given
+        val sut =
+            getSnippetFile("out-projection-type-argument-generic-type")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        assertSoftly(sut) {
+            it?.genericType shouldBeInstanceOf KoKotlinTypeDeclaration::class
+            it?.genericType?.name shouldBeEqualTo "String"
+            it?.hasGenericType { type -> type.name == "String" } shouldBeEqualTo true
+            it?.hasGenericType { type -> type.name == "Int" } shouldBeEqualTo false
+            it?.hasGenericTypeOf(String::class) shouldBeEqualTo true
+            it?.hasGenericTypeOf(Int::class) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `in-projection-type-argument-generic-type`() {
+        // given
+        val sut =
+            getSnippetFile("in-projection-type-argument-generic-type")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        assertSoftly(sut) {
+            it?.genericType shouldBeInstanceOf KoKotlinTypeDeclaration::class
+            it?.genericType?.name shouldBeEqualTo "String"
+            it?.hasGenericType { type -> type.name == "String" } shouldBeEqualTo true
+            it?.hasGenericType { type -> type.name == "Int" } shouldBeEqualTo false
+            it?.hasGenericTypeOf(String::class) shouldBeEqualTo true
+            it?.hasGenericTypeOf(Int::class) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/kotypeargument/snippet/forkogenerictypeprovider/",

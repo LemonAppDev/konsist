@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.type.kostarprojection
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -16,8 +17,7 @@ class KoStarProjectionDeclarationTest {
                 ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
-                ?.sourceDeclaration
-                ?.asStarProjectionDeclaration()
+                ?.sourceDeclaration as? KoStarProjectionDeclaration
 
         // then
         sut.toString() shouldBeEqualTo "*"

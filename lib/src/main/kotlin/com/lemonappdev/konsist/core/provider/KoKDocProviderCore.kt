@@ -13,9 +13,9 @@ internal interface KoKDocProviderCore :
         get() {
             val kDocElement =
                 psiElement
-                    .children
-                    .filterIsInstance<KDoc>()
-                    .firstOrNull()
+                    ?.children
+                    ?.filterIsInstance<KDoc>()
+                    ?.firstOrNull()
 
             return kDocElement?.let { KoKDocDeclarationCore(kDocElement) }
         }

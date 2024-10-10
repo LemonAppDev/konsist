@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import kotlin.reflect.KClass
 
 /**
@@ -14,7 +14,7 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
      * It allows to retries additional information about the declaration, such as its properties, functions,
      * annotations, and other relevant metadata.
      *
-     * It points to an instance of [KoBaseTypeDeclaration], which serves as the base interface for various types:
+     * It points to an instance of [KoSourceDeclaration], which serves as the base interface for various types:
      *  - `KoClassDeclaration` represents class
      *  - `KoInterfaceDeclaration` represents interface
      *  - `KoObjectDeclaration` represents object
@@ -33,7 +33,7 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
      *      .assertTrue { it.isInterface }
      *  ```
      */
-    val sourceDeclaration: KoBaseTypeDeclaration
+    val sourceDeclaration: KoSourceDeclaration
 
     /**
      * Determines whatever type has a specified source declaration.
@@ -41,7 +41,7 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
      * @param predicate The predicate function used to determine if a source declaration satisfies a condition.
      * @return `true` if the type has the specified source declaration, `false` otherwise.
      */
-    fun hasSourceDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean
+    fun hasSourceDeclaration(predicate: (KoSourceDeclaration) -> Boolean): Boolean
 
     /**
      * Whether type has a source declaration of the specified Kotlin class.

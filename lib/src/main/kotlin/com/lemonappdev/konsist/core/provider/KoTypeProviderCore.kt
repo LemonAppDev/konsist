@@ -9,7 +9,6 @@ import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.provider.KoTypeProvider
 import com.lemonappdev.konsist.core.util.TypeUtil
@@ -54,7 +53,4 @@ internal interface KoTypeProviderCore :
 
     override val isExternalType: Boolean
         get() = sourceDeclaration is KoExternalDeclaration
-
-    override val isStarProjection: Boolean
-        get() = sourceDeclaration is KoStarProjectionDeclaration
 }

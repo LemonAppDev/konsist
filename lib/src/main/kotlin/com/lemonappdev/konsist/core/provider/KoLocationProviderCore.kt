@@ -12,12 +12,13 @@ internal interface KoLocationProviderCore :
         get() {
             val lineAndColumn =
                 psiElement
-                    .getTextWithLocation()
-                    .substringAfterLast("' at (")
-                    .substringBefore(") in")
-                    .split(",")
-                    .toMutableList()
-                    .filterNot { it.isBlank() }
+                    ?.getTextWithLocation()
+                    ?.substringAfterLast("' at (")
+                    ?.substringBefore(") in")
+                    ?.split(",")
+                    ?.toMutableList()
+                    ?.filterNot { it.isBlank() }
+                    ?: emptyList()
 
             val line = lineAndColumn[0]
             val column = lineAndColumn[1]

@@ -53,8 +53,6 @@ val appPropertyWithImportAliasType: ImportAlias = SampleObject
 val <T> T.appPropertyWithTypeParameter: T
     get() = this
 
-val appPropertyWithStarProjection: List<*> = emptyList<String>()
-
 object AppObject
 
 enum class AppEnumClass {

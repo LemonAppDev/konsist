@@ -18,6 +18,7 @@ import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
 import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
+import com.lemonappdev.konsist.api.provider.KoStarProjectionProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoTypeProvider
@@ -39,6 +40,7 @@ interface KoTypeDeclaration :
     KoModuleProvider,
     KoSourceSetProvider,
     KoTypeProvider,
+    KoStarProjectionProvider,
     KoIsGenericTypeProvider,
     KoSourceAndAliasTypeProvider,
     KoPackageProvider,

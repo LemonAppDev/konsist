@@ -68,10 +68,4 @@ interface KoTypeProvider : KoBaseProvider {
      * An external type refers to a type that is defined outside the project's codebase. for e.g. in external library.
      */
     val isExternalType: Boolean
-
-    /**
-     * Determines whether the source declaration is a star projection.
-     * A star projection is a placeholder that represents any type in a generic context, allowing for flexible type constraints.
-     */
-    val isStarProjection: Boolean
 }
