@@ -41,7 +41,6 @@ internal interface KoTypeArgumentProviderCore :
                             },
                             if (type.isGenericType) type.asGenericTypeDeclaration()?.typeArguments else null,
                             type.sourceDeclaration,
-                            it.projectionKind == KtProjectionKind.STAR,
                             it.projectionKind == KtProjectionKind.IN,
                             it.projectionKind == KtProjectionKind.OUT,
                             it,

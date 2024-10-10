@@ -24,7 +24,6 @@ interface KoTypeArgumentDeclaration :
     KoSourceDeclarationProvider,
     KoTypeArgumentProvider,
     KoGenericTypeProvider,
-    KoStarProjectionProvider,
     KoModifierProvider,
     KoOutModifierProvider,
     KoInModifierProvider,
