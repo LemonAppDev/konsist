@@ -1,3 +1,5 @@
+@file:Suppress("detekt.TooManyFunctions")
+
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.provider.KoTypeProvider
@@ -159,6 +161,20 @@ fun <T : KoTypeProvider> List<T>.withFunctionType(): List<T> = filter { it.isFun
  * @return A list excluding function types.
  */
 fun <T : KoTypeProvider> List<T>.withoutFunctionType(): List<T> = filterNot { it.isFunctionType }
+
+/**
+ * Filters the list to include only declarations that are recognized as generic types.
+ *
+ * @return A list containing only generic types.
+ */
+fun <T : KoTypeProvider> List<T>.withGenericType(): List<T> = filter { it.isGenericType }
+
+/**
+ * Filters the list to exclude declarations that are recognized as generic types.
+ *
+ * @return A list excluding generic types.
+ */
+fun <T : KoTypeProvider> List<T>.withoutGenericType(): List<T> = filterNot { it.isGenericType }
 
 /**
  * Filters the list to include only declarations that are type parameters.

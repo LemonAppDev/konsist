@@ -17,6 +17,8 @@ class KoStarProjectionDeclarationForKoPackageProviderTest {
                 ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
+                ?.sourceDeclaration
+                ?.asStarProjectionDeclaration()
 
         // then
         sut?.packagee shouldBeEqualTo null
@@ -33,6 +35,8 @@ class KoStarProjectionDeclarationForKoPackageProviderTest {
                 ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
+                ?.sourceDeclaration
+                ?.asStarProjectionDeclaration()
 
         // then
         sut?.packagee?.name shouldBeEqualTo "com.samplepackage"

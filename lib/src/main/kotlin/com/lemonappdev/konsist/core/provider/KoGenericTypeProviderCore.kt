@@ -1,24 +1,40 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoGenericTypeProvider
+import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
+import com.lemonappdev.konsist.core.util.TypeUtil
+import com.lemonappdev.konsist.core.util.TypeUtil.hasTypeOf
+import org.jetbrains.kotlin.psi.KtNameReferenceExpression
+import org.jetbrains.kotlin.psi.KtUserType
+import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
+import kotlin.reflect.KClass
 
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("KoIsGenericTypeProviderCore"))
 internal interface KoGenericTypeProviderCore :
     KoGenericTypeProvider,
-    KoSourceAndAliasTypeProviderCore,
-    KoBaseProviderCore {
-    override val isGenericType: Boolean
+    KoBaseProviderCore,
+    KoContainingFileProviderCore {
+    val ktUserType: KtUserType?
+
+    override val genericType: KoBaseTypeDeclaration
         get() {
-            val regex = "\\w+<[^<>]+>".toRegex()
+            val ktNameReferenceExpression =
+                ktUserType
+                    ?.children
+                    ?.filterIsInstance<KtNameReferenceExpression>()
+                    ?.firstOrNull()
 
-            val type =
-                if ((this as? KoTypeDeclaration)?.isTypeAlias == true) {
-                    bareSourceType
-                } else {
-                    sourceType
-                }
+            require(ktNameReferenceExpression != null) { "Generic type cannot be null." }
 
-            return regex.matches(type)
+            return TypeUtil.getBasicType(
+                listOf(ktNameReferenceExpression),
+                ktNameReferenceExpression.isExtensionDeclaration(),
+                this.castToKoBaseDeclaration(),
+                containingFile,
+            ) ?: throw (Exception("Generic type cannot be null."))
         }
+
+    override fun hasGenericType(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean = predicate(genericType)
+
+    override fun hasGenericTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(genericType, kClass)
 }

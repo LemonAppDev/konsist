@@ -1,3 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleGenericClassWithParameter
-
-val sampleProperty: SampleGenericClassWithParameter<String> = SampleGenericClassWithParameter("")

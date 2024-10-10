@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.psi.KtUserType
 
 internal class KoKotlinTypeDeclarationCore private constructor(
     private val ktUserType: KtUserType?,
-    private val ktNameReferenceExpression: KtNameReferenceExpression?,
+    override val ktNameReferenceExpression: KtNameReferenceExpression?,
 ) : KoKotlinTypeDeclaration,
     KoBaseTypeDeclarationCore,
     KoBaseProviderCore,

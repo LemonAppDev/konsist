@@ -180,9 +180,11 @@ class KoClassDeclarationForKoFileDeclarationProviderTest {
             countDeclarations(includeNested = false, includeLocal = false) {
                 (it as? KoVisibilityModifierProvider)?.hasPrivateModifier ?: false
             } shouldBeEqualTo 2
+
             countDeclarations {
                 (it as? KoVisibilityModifierProvider)?.hasPrivateModifier ?: false
             } shouldBeEqualTo 3
+
             countDeclarations {
                 (it as? KoVisibilityModifierProvider)?.hasInternalModifier ?: false
             } shouldBeEqualTo 0

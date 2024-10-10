@@ -25,6 +25,7 @@ class KoStarProjectionForKoModuleProviderTest {
             ?.asGenericTypeDeclaration()
             ?.typeArguments
             ?.firstOrNull()
+            ?.sourceDeclaration
             ?.asStarProjectionDeclaration()
 
         // then
@@ -46,6 +47,7 @@ class KoStarProjectionForKoModuleProviderTest {
             ?.asGenericTypeDeclaration()
             ?.typeArguments
             ?.firstOrNull()
+            ?.sourceDeclaration
             ?.asStarProjectionDeclaration()
 
         // then
@@ -67,6 +69,7 @@ class KoStarProjectionForKoModuleProviderTest {
             ?.asGenericTypeDeclaration()
             ?.typeArguments
             ?.firstOrNull()
+            ?.sourceDeclaration
             ?.asStarProjectionDeclaration()
 
         // then

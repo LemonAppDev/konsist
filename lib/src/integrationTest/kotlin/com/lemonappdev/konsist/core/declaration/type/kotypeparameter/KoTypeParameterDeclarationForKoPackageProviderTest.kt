@@ -138,6 +138,7 @@ class KoTypeParameterDeclarationForKoPackageProviderTest {
                 .asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -155,6 +156,7 @@ class KoTypeParameterDeclarationForKoPackageProviderTest {
                 .asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then

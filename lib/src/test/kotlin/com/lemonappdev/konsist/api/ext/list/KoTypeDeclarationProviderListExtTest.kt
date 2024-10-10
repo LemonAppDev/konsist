@@ -6,7 +6,6 @@ import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
@@ -255,58 +254,6 @@ class KoTypeDeclarationProviderListExtTest {
 
         // then
         sut shouldBeEqualTo listOf(sourceDeclaration1, sourceDeclaration2)
-    }
-
-    @Test
-    fun `declarations returns declarations from all declarations`() {
-        // given
-        val sourceDeclaration1: KoClassDeclaration = mockk()
-        val sourceDeclaration2: KoKotlinTypeDeclaration = mockk()
-        val sourceDeclaration3: KoExternalDeclaration = mockk()
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { declaration } returns sourceDeclaration1
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { declaration } returns sourceDeclaration2
-            }
-        val declaration3: KoTypeDeclarationProvider =
-            mockk {
-                every { declaration } returns sourceDeclaration3
-            }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.typeDeclarations()
-
-        // then
-        sut shouldBeEqualTo listOf(sourceDeclaration1, sourceDeclaration2, sourceDeclaration3)
-    }
-
-    @Test
-    fun `declarations returns declarations from all declarations which satisfies predicate`() {
-        // given
-        val predicate: (KoBaseTypeDeclaration) -> Boolean = { it.hasNameContaining("SomeClass") }
-        val sourceDeclaration1: KoClassDeclaration = mockk()
-        val sourceDeclaration2: KoKotlinTypeDeclaration = mockk()
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { declaration } returns sourceDeclaration1
-                every { hasDeclaration(predicate) } returns true
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { declaration } returns sourceDeclaration2
-                every { hasDeclaration(predicate) } returns false
-            }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.typeDeclarations(predicate)
-
-        // then
-        sut shouldBeEqualTo listOf(sourceDeclaration1)
     }
 
     @Test

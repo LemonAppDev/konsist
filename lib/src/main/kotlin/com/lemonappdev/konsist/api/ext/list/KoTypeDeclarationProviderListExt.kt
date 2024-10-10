@@ -20,7 +20,7 @@ import kotlin.reflect.KClass
 /**
  * List containing declarations associated with types.
  */
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("declarations()"))
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("sourceDeclarations()"))
 val <T : KoTypeDeclarationProvider> List<T>.declarations: List<KoBaseTypeDeclaration>
     get() = mapNotNull { it.declaration }
 
@@ -79,23 +79,6 @@ val <T : KoTypeDeclarationProvider> List<T>.functionTypeDeclarations: List<KoFun
 @Deprecated("Will be removed in version 0.18.0", ReplaceWith("externalTypeDeclarations()"))
 val <T : KoTypeDeclarationProvider> List<T>.externalTypeDeclarations: List<KoExternalDeclaration>
     get() = mapNotNull { it.asExternalTypeDeclaration() }
-
-/**
- * List containing declarations associated with types.
- *
- * @param predicate A function that defines the condition to be met by the type declaration.
- *                  If null, all declarations are included.
- * @return A list of declarations that match the provided predicate, or all declarations if no predicate is provided.
- */
-fun <T : KoTypeDeclarationProvider> List<T>.typeDeclarations(
-    predicate: ((KoBaseTypeDeclaration) -> Boolean)? = null,
-): List<KoBaseTypeDeclaration> =
-    filter {
-        when (predicate) {
-            null -> true
-            else -> it.hasDeclaration(predicate)
-        }
-    }.map { it.declaration }
 
 /**
  * List containing class declarations associated with types.
@@ -257,6 +240,7 @@ fun <T : KoTypeDeclarationProvider> List<T>.externalTypeDeclarations(
  * @param predicate The predicate function to determine if a declaration satisfies a condition.
  * @return A list containing declarations with the specified declaration.
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("withSourceDeclaration()"))
 fun <T : KoTypeDeclarationProvider> List<T>.withDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): List<T> =
     filter { predicate(it.declaration) }
 
@@ -266,6 +250,7 @@ fun <T : KoTypeDeclarationProvider> List<T>.withDeclaration(predicate: (KoBaseTy
  * @param predicate The predicate function to determine if a declaration satisfies a condition.
  * @return A list containing declarations without the specified declaration.
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("withoutSourceDeclaration()"))
 fun <T : KoTypeDeclarationProvider> List<T>.withoutDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): List<T> =
     filterNot { predicate(it.declaration) }
 
@@ -276,6 +261,7 @@ fun <T : KoTypeDeclarationProvider> List<T>.withoutDeclaration(predicate: (KoBas
  * @param kClasses The Kotlin class(es) representing the declaration(s) to include.
  * @return A list containing declarations with the declaration of the specified Kotlin class(es).
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("withSourceDeclarationOf()"))
 fun <T : KoTypeDeclarationProvider> List<T>.withDeclarationOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
@@ -287,6 +273,7 @@ fun <T : KoTypeDeclarationProvider> List<T>.withDeclarationOf(
  * @param kClasses The Kotlin class(es) representing the declaration(s) to include.
  * @return A list containing declarations with the declaration of the specified Kotlin class(es).
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("withSourceDeclarationOf()"))
 fun <T : KoTypeDeclarationProvider> List<T>.withDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
         when {
@@ -302,6 +289,7 @@ fun <T : KoTypeDeclarationProvider> List<T>.withDeclarationOf(kClasses: Collecti
  * @param kClasses The Kotlin class(es) representing the declaration(s) to exclude.
  * @return A list containing declarations without declaration of the specified Kotlin class(es).
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("withoutSourceDeclarationOf()"))
 fun <T : KoTypeDeclarationProvider> List<T>.withoutDeclarationOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
@@ -313,6 +301,7 @@ fun <T : KoTypeDeclarationProvider> List<T>.withoutDeclarationOf(
  * @param kClasses The Kotlin class(es) representing the declaration(s) to exclude.
  * @return A list containing declarations without declaration of the specified Kotlin class(es).
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("withoutSourceDeclarationOf()"))
 fun <T : KoTypeDeclarationProvider> List<T>.withoutDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
         when {

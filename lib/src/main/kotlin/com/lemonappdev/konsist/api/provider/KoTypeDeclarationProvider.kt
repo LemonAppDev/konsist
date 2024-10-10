@@ -22,8 +22,8 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
     /**
      * Represents the declaration associated with this type.
      *
-     * The `sourceDeclaration` property provides access to the declaration of the type within the Kotlin codebase.
-     * It allows to retrie additional information about the declaration, such as its properties, functions,
+     * The `declaration` property provides access to the declaration of the type within the Kotlin codebase.
+     * It allows to retries additional information about the declaration, such as its properties, functions,
      * annotations, and other relevant metadata.
      *
      * It points to an instance of [KoBaseTypeDeclaration], which serves as the base interface for various types:
@@ -45,6 +45,7 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
      *      .assertTrue { it.isInterface }
      *  ```
      */
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith("sourceDeclaration"))
     val declaration: KoBaseTypeDeclaration
 
     /**
@@ -132,6 +133,7 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
      * @param predicate The predicate function used to determine if a declaration satisfies a condition.
      * @return `true` if the type has the specified declaration, `false` otherwise.
      */
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith("hasSourceDeclaration"))
     fun hasDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean
 
     /**
@@ -140,6 +142,7 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
      * @param kClass The Kotlin class representing the declaration to check for.
      * @return `true` if the type has a declaration matching the specified KClass, `false` otherwise.
      */
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith("hasSourceDeclarationOf"))
     fun hasDeclarationOf(kClass: KClass<*>): Boolean
 
     /**

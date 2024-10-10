@@ -80,6 +80,7 @@ class KoTypeParameterDeclarationForKoContainingFileProviderTest {
                 .asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then

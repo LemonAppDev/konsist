@@ -120,6 +120,7 @@ class KoTypeParameterDeclarationForKoTextProviderTest {
                 .asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then

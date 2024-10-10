@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.ext.list.declarations
 import com.lemonappdev.konsist.api.ext.list.returnTypes
 import com.lemonappdev.konsist.api.ext.list.types
 import com.lemonappdev.konsist.api.ext.list.withoutName
@@ -41,7 +40,7 @@ class DeclarationKonsistTest {
         declarationPackageScope
             .properties()
             .types
-            .declarations
+            .assertFalse { it.sourceType.endsWith("Impl") }
     }
 
     @Test

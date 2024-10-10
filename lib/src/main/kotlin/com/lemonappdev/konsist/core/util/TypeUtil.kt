@@ -87,7 +87,12 @@ object TypeUtil {
     internal fun hasTypeOf(
         type: KoTypeDeclaration?,
         kClass: KClass<*>,
-    ): Boolean = kClass.qualifiedName == (type?.declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+    ): Boolean = kClass.qualifiedName == (type?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+
+    internal fun hasTypeOf(
+        type: KoBaseTypeDeclaration?,
+        kClass: KClass<*>,
+    ): Boolean = kClass.qualifiedName == (type as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
 
     @Suppress("detekt.CyclomaticComplexMethod", "detekt.LongMethod")
     private fun transformPsiElementToKoTypeDeclaration(
@@ -137,7 +142,7 @@ object TypeUtil {
                 ?.any { it == typeText }
 
         return when {
-            nestedType is KtTypeProjection -> KoStarProjectionDeclarationCore.getInstance(nestedType, containingFile)
+            nestedType is KtTypeProjection -> KoStarProjectionDeclarationCore.getInstance(nestedType, parentDeclaration)
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
             nestedType is KtUserType && typeText != null -> {
                 if (nestedType.children.filterIsInstance<KtTypeArgumentList>().isNotEmpty()) {

@@ -80,6 +80,7 @@ class KoTypeParameterDeclarationForKoContainingDeclarationProviderTest {
                 .asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then

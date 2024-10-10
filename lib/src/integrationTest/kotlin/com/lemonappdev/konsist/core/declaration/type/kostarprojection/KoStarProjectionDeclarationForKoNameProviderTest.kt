@@ -17,6 +17,8 @@ class KoStarProjectionDeclarationForKoNameProviderTest {
                 ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
+                ?.sourceDeclaration
+                ?.asStarProjectionDeclaration()
 
         // then
         sut?.name shouldBeEqualTo "*"

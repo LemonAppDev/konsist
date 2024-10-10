@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
+import com.lemonappdev.konsist.core.provider.KoTypeDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
 
 internal interface KoBaseTypeDeclarationCore :
@@ -13,4 +15,6 @@ internal interface KoBaseTypeDeclarationCore :
     KoNameProviderCore,
     KoTextProviderCore,
     KoPackageProviderCore,
-    KoResideInPackageProviderCore
+    KoResideInPackageProviderCore,
+    KoTypeProviderCore,
+    KoTypeDeclarationProviderCore

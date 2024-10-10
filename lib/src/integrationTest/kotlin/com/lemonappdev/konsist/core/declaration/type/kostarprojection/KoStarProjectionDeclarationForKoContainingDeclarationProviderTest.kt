@@ -18,9 +18,11 @@ class KoStarProjectionDeclarationForKoContainingDeclarationProviderTest {
                 ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
+                ?.sourceDeclaration
+                ?.asStarProjectionDeclaration()
 
         // then
-        (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo "List<*>"
+        (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo "sampleFunction"
     }
 
     private fun getSnippetFile(fileName: String) =

@@ -23,6 +23,7 @@ class KoStarProjectionForKoSourceSetProviderTest {
             ?.asGenericTypeDeclaration()
             ?.typeArguments
             ?.firstOrNull()
+            ?.sourceDeclaration
             ?.asStarProjectionDeclaration()
 
         // then
@@ -44,6 +45,7 @@ class KoStarProjectionForKoSourceSetProviderTest {
             ?.asGenericTypeDeclaration()
             ?.typeArguments
             ?.firstOrNull()
+            ?.sourceDeclaration
             ?.asStarProjectionDeclaration()
 
         // then
@@ -65,6 +67,7 @@ class KoStarProjectionForKoSourceSetProviderTest {
             ?.asGenericTypeDeclaration()
             ?.typeArguments
             ?.firstOrNull()
+            ?.sourceDeclaration
             ?.asStarProjectionDeclaration()
 
         // then
@@ -86,6 +89,7 @@ class KoStarProjectionForKoSourceSetProviderTest {
             ?.asGenericTypeDeclaration()
             ?.typeArguments
             ?.firstOrNull()
+            ?.sourceDeclaration
             ?.asStarProjectionDeclaration()
 
         // then
@@ -107,6 +111,7 @@ class KoStarProjectionForKoSourceSetProviderTest {
             ?.asGenericTypeDeclaration()
             ?.typeArguments
             ?.firstOrNull()
+            ?.sourceDeclaration
             ?.asStarProjectionDeclaration()
 
         // then
@@ -128,6 +133,7 @@ class KoStarProjectionForKoSourceSetProviderTest {
             ?.asGenericTypeDeclaration()
             ?.typeArguments
             ?.firstOrNull()
+            ?.sourceDeclaration
             ?.asStarProjectionDeclaration()
 
         // then

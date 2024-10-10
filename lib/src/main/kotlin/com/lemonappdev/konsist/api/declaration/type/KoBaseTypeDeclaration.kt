@@ -6,6 +6,8 @@ import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
+import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoTypeProvider
 
 /**
  * Represents a Kotlin base type declaration.
@@ -19,4 +21,6 @@ interface KoBaseTypeDeclaration :
     KoNameProvider,
     KoTextProvider,
     KoPackageProvider,
-    KoResideInPackageProvider
+    KoResideInPackageProvider,
+    KoTypeProvider,
+    KoTypeDeclarationProvider

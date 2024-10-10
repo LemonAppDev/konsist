@@ -1,9 +1,7 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
-import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
@@ -14,15 +12,7 @@ import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeParameterDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
-import com.lemonappdev.konsist.core.exception.KoInternalException
-import com.lemonappdev.konsist.core.util.TypeUtil
-import org.jetbrains.kotlin.psi.KtNameReferenceExpression
-import org.jetbrains.kotlin.psi.KtTypeProjection
-import org.jetbrains.kotlin.psi.KtTypeReference
-import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import kotlin.reflect.KClass
 
 @Suppress("detekt.TooManyFunctions")
@@ -31,95 +21,43 @@ internal interface KoTypeDeclarationProviderCore :
     KoBaseProviderCore,
     KoContainingFileProviderCore,
     KoContainingDeclarationProviderCore,
-    KoTypeProviderCore {
-    val ktTypeReference: KtTypeReference?
-    val ktNameReferenceExpression: KtNameReferenceExpression?
-    val ktTypeProjection: KtTypeProjection?
-
+    KoSourceDeclarationProviderCore {
+    @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("sourceDeclaration"))
     override val declaration: KoBaseTypeDeclaration
-        get() =
-            TypeUtil.getBasicType(
-                listOf(ktTypeReference, ktNameReferenceExpression, ktTypeProjection),
-                isExtensionDeclaration(),
-                getDeclarationWithFqn(containingDeclaration) ?: containingDeclaration,
-                containingFile,
-            ) ?: throw KoInternalException("Source declaration cannot be a null")
+        get() = sourceDeclaration
 
-    private fun isExtensionDeclaration(): Boolean =
-        ktTypeReference?.isExtensionDeclaration() == true ||
-            ktNameReferenceExpression?.isExtensionDeclaration() == true ||
-            ktTypeProjection?.isExtensionDeclaration() == true
+    override fun asClassDeclaration(): KoClassDeclaration? = sourceDeclaration as? KoClassDeclaration
 
-    private fun getDeclarationWithFqn(declaration: KoBaseDeclaration): KoBaseDeclaration? =
-        when {
-            declaration is KoFullyQualifiedNameProvider && declaration.fullyQualifiedName != null -> {
-                declaration
-            }
-            declaration is KoContainingDeclarationProvider && declaration !is KoFileDeclaration -> {
-                getDeclarationWithFqn(declaration.containingDeclaration)
-            }
-            else -> {
-                null
-            }
+    override fun asObjectDeclaration(): KoObjectDeclaration? = sourceDeclaration as? KoObjectDeclaration
+
+    override fun asInterfaceDeclaration(): KoInterfaceDeclaration? = sourceDeclaration as? KoInterfaceDeclaration
+
+    override fun asTypeAliasDeclaration(): KoTypeAliasDeclaration? = sourceDeclaration as? KoTypeAliasDeclaration
+
+    override fun asImportAliasDeclaration(): KoImportAliasDeclaration? = sourceDeclaration as? KoImportAliasDeclaration
+
+    override fun asKotlinTypeDeclaration(): KoKotlinTypeDeclaration? = sourceDeclaration as? KoKotlinTypeDeclaration
+
+    override fun asFunctionTypeDeclaration(): KoFunctionTypeDeclaration? = sourceDeclaration as? KoFunctionTypeDeclaration
+
+    override fun asGenericTypeDeclaration(): KoGenericTypeDeclaration? = sourceDeclaration as? KoGenericTypeDeclaration
+
+    override fun asTypeParameterDeclaration(): KoTypeParameterDeclaration? = sourceDeclaration as? KoTypeParameterDeclaration
+
+    override fun asExternalTypeDeclaration(): KoExternalDeclaration? = sourceDeclaration as? KoExternalDeclaration
+
+    override fun asStarProjectionDeclaration(): KoStarProjectionDeclaration? = sourceDeclaration as? KoStarProjectionDeclaration
+
+    override fun hasClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =
+        when (predicate) {
+            null -> asClassDeclaration() != null
+            else -> asClassDeclaration()?.let { predicate(it) } ?: false
         }
 
-    override fun asClassDeclaration(): KoClassDeclaration? = declaration as? KoClassDeclaration
-
-    override fun asObjectDeclaration(): KoObjectDeclaration? = declaration as? KoObjectDeclaration
-
-    override fun asInterfaceDeclaration(): KoInterfaceDeclaration? = declaration as? KoInterfaceDeclaration
-
-    override fun asTypeAliasDeclaration(): KoTypeAliasDeclaration? = declaration as? KoTypeAliasDeclaration
-
-    override fun asImportAliasDeclaration(): KoImportAliasDeclaration? = declaration as? KoImportAliasDeclaration
-
-    override fun asKotlinTypeDeclaration(): KoKotlinTypeDeclaration? = declaration as? KoKotlinTypeDeclaration
-
-    override fun asFunctionTypeDeclaration(): KoFunctionTypeDeclaration? = declaration as? KoFunctionTypeDeclaration
-
-    override fun asGenericTypeDeclaration(): KoGenericTypeDeclaration? = declaration as? KoGenericTypeDeclaration
-
-    override fun asTypeParameterDeclaration(): KoTypeParameterDeclaration? = declaration as? KoTypeParameterDeclaration
-
-    override fun asExternalTypeDeclaration(): KoExternalDeclaration? = declaration as? KoExternalDeclaration
-
-    override fun asStarProjectionDeclaration(): KoStarProjectionDeclaration? = declaration as? KoStarProjectionDeclaration
-
-    override val isClass: Boolean
-        get() = declaration is KoClassDeclaration
-
-    override val isObject: Boolean
-        get() = declaration is KoObjectDeclaration
-
-    override val isInterface: Boolean
-        get() = declaration is KoInterfaceDeclaration
-
-    override val isTypeAlias: Boolean
-        get() = declaration is KoTypeAliasDeclaration
-
-    override val isImportAlias: Boolean
-        get() = declaration is KoImportAliasDeclaration
-
-    override val isKotlinType: Boolean
-        get() = declaration is KoKotlinTypeDeclaration
-
-    override val isFunctionType: Boolean
-        get() = declaration is KoFunctionTypeDeclaration
-
-    override val isGenericType: Boolean
-        get() = declaration is KoGenericTypeDeclaration
-
-    override val isTypeParameter: Boolean
-        get() = declaration is KoTypeParameterDeclaration
-
-    override val isExternalType: Boolean
-        get() = declaration is KoExternalDeclaration
-
-    override val isStarProjection: Boolean
-        get() = declaration is KoStarProjectionDeclaration
-
+    @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("hasSourceDeclaration"))
     override fun hasDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean = predicate(declaration)
 
+    @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("hasSourceDeclarationOf"))
     override fun hasDeclarationOf(kClass: KClass<*>): Boolean =
         hasClassDeclarationOf(kClass) ||
             hasObjectDeclarationOf(kClass) ||
@@ -128,12 +66,6 @@ internal interface KoTypeDeclarationProviderCore :
                 kClass,
             ) ||
             hasExternalTypeDeclarationOf(kClass)
-
-    override fun hasClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =
-        when (predicate) {
-            null -> asClassDeclaration() != null
-            else -> asClassDeclaration()?.let { predicate(it) } ?: false
-        }
 
     override fun hasClassDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asClassDeclaration()?.fullyQualifiedName
 
