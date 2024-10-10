@@ -23,12 +23,25 @@ class KoGenericTypeDeclarationForKoTypeArgumentProviderTest {
     @Test
     fun `kotlin-type-argument`() {
         // given
+        val a = getSnippetFile("kotlin-type-argument")
+            .properties()
+            .first()
+            .type
+            ?.asGenericTypeDeclaration()
+
+        val b = a?.isKotlinType
+        val c = a?.isKotlinCollectionType
+        return
+
+
         val sut =
             getSnippetFile("kotlin-type-argument")
                 .properties()
                 .first()
                 .type
                 ?.asGenericTypeDeclaration()
+
+
 
         // then
         assertSoftly(sut) {

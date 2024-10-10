@@ -199,18 +199,61 @@ object TypeUtil {
             declarations.singleOrNull()
                 ?: declarations.firstOrNull { declaration ->
                     declaration.fullyQualifiedName?.contains(parentDeclarationFullyQualifiedName) == true ||
-                        (
-                            (declaration as? KoContainingDeclarationProvider)
-                                ?.containingDeclaration as? KoDeclarationProvider
-                        )?.hasDeclaration { it == parentDeclaration } == true
+                            (
+                                    (declaration as? KoContainingDeclarationProvider)
+                                        ?.containingDeclaration as? KoDeclarationProvider
+                                    )?.hasDeclaration { it == parentDeclaration } == true
                 }
 
         return declaration?.fullyQualifiedName
     }
 
-    internal fun isKotlinBasicType(name: String): Boolean = kotlinBasicTypes.any { it == name }
+    internal fun isKotlinType(typeName: String): Boolean = isKotlinBasicType(typeName) || isKotlinCollectionTypes(typeName)
 
-    internal fun isKotlinCollectionTypes(name: String): Boolean = kotlinCollectionTypes.any { it == name }
+    internal fun isKotlinBasicType(typeName: String): Boolean {
+        val bareTypeName = getBareType(typeName)
+        return kotlinBasicTypes.any { it == bareTypeName }
+    }
+
+    internal fun isKotlinCollectionTypes(typeName: String): Boolean {
+        val bareTypeName = getBareType(typeName)
+        return kotlinCollectionTypes.any { it == bareTypeName }
+    }
+
+    internal fun getBareType(name: String): String = name.removeGenericTypeArguments()
+        .removeNullability()
+        .removePackage()
+        .removeBrackets()
+
+    /*
+     * Removes generic type arguments from the type.
+     * For `MyClass<String>` value will be "MyClass"
+     */
+    private fun String.removeGenericTypeArguments(): String = substringBefore("<")
+
+    /*
+     * Removes nullability from the type.
+     * For `MyClass?` value will be "MyClass"
+     */
+    private fun String.removeNullability(): String = replace("?", "")
+
+    /*
+     * Removes package from the type.
+     * For `com.app.MyClass` value will be "MyClass"
+     */
+    private fun String.removePackage(): String = substringAfterLast(".")
+
+    /*
+     * Removes brackets from the type.
+     * For `((Int) -> Unit)` value will be "(Int) -> Unit)"
+     */
+    private fun String.removeBrackets(): String =
+        if (startsWith("(") and endsWith(")")) {
+            removePrefix("(")
+                .removeSuffix(")")
+        } else {
+            this
+        }
 
     // Basic types in Kotlin are described here: https://kotlinlang.org/docs/basic-types.html
     private val kotlinBasicTypes: Set<String>
@@ -239,7 +282,7 @@ object TypeUtil {
             )
 
     // Collections in Kotlin are described here: https://kotlinlang.org/docs/collections-overview.html#collection
-    // and here https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections
+// and here https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections
     private val kotlinCollectionTypes: Set<String>
         get() =
             setOf(

@@ -123,7 +123,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
                 ?.flatten()
                 ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
             it?.numTypeArguments shouldBeEqualTo 2
-            it?.countTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo 1
+            it?.countTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo 2
             it?.countTypeArguments { type -> type.sourceDeclaration.isClass } shouldBeEqualTo 0
             it?.hasTypeArguments() shouldBeEqualTo true
             it?.hasTypeArgumentWithName("Int", "String") shouldBeEqualTo true

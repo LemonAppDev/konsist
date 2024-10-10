@@ -20,10 +20,10 @@ internal interface KoTypeProviderCore :
     KoBaseProviderCore,
     KoSourceDeclarationProviderCore {
     override val isKotlinBasicType: Boolean
-        get() = isKotlinType && TypeUtil.isKotlinBasicType(name)
+        get() = TypeUtil.isKotlinBasicType(name)
 
     override val isKotlinCollectionType: Boolean
-        get() = isKotlinType && TypeUtil.isKotlinCollectionTypes(name)
+        get() = TypeUtil.isKotlinCollectionTypes(name)
 
     override val isClass: Boolean
         get() = sourceDeclaration is KoClassDeclaration
@@ -41,7 +41,8 @@ internal interface KoTypeProviderCore :
         get() = sourceDeclaration is KoImportAliasDeclaration
 
     override val isKotlinType: Boolean
-        get() = sourceDeclaration is KoKotlinTypeDeclaration
+        get() = sourceDeclaration is KoKotlinTypeDeclaration ||
+                (sourceDeclaration is KoGenericTypeDeclaration && TypeUtil.isKotlinType(name))
 
     override val isFunctionType: Boolean
         get() = sourceDeclaration is KoFunctionTypeDeclaration
