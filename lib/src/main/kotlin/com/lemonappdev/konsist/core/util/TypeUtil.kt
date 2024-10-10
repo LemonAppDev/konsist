@@ -199,10 +199,10 @@ object TypeUtil {
             declarations.singleOrNull()
                 ?: declarations.firstOrNull { declaration ->
                     declaration.fullyQualifiedName?.contains(parentDeclarationFullyQualifiedName) == true ||
-                            (
-                                    (declaration as? KoContainingDeclarationProvider)
-                                        ?.containingDeclaration as? KoDeclarationProvider
-                                    )?.hasDeclaration { it == parentDeclaration } == true
+                        (
+                            (declaration as? KoContainingDeclarationProvider)
+                                ?.containingDeclaration as? KoDeclarationProvider
+                        )?.hasDeclaration { it == parentDeclaration } == true
                 }
 
         return declaration?.fullyQualifiedName
@@ -220,10 +220,12 @@ object TypeUtil {
         return kotlinCollectionTypes.any { it == bareTypeName }
     }
 
-    internal fun getBareType(name: String): String = name.removeGenericTypeArguments()
-        .removeNullability()
-        .removePackage()
-        .removeBrackets()
+    internal fun getBareType(name: String): String =
+        name
+            .removeGenericTypeArguments()
+            .removeNullability()
+            .removePackage()
+            .removeBrackets()
 
     /*
      * Removes generic type arguments from the type.

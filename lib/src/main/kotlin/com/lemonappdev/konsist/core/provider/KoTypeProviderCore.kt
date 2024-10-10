@@ -41,7 +41,8 @@ internal interface KoTypeProviderCore :
         get() = sourceDeclaration is KoImportAliasDeclaration
 
     override val isKotlinType: Boolean
-        get() = sourceDeclaration is KoKotlinTypeDeclaration ||
+        get() =
+            sourceDeclaration is KoKotlinTypeDeclaration ||
                 (sourceDeclaration is KoGenericTypeDeclaration && TypeUtil.isKotlinType(name))
 
     override val isFunctionType: Boolean
