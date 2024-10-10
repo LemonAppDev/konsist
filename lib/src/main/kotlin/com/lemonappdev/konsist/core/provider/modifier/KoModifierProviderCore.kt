@@ -12,12 +12,12 @@ import org.jetbrains.kotlin.psi.psiUtil.allChildren
 internal interface KoModifierProviderCore :
     KoModifierProvider,
     KoBaseProviderCore {
-    val ktModifierListOwner: KtModifierListOwner
+    val ktModifierListOwner: KtModifierListOwner?
 
     override val modifiers: List<KoModifier>
         get() =
             ktModifierListOwner
-                .modifierList
+                ?.modifierList
                 ?.allChildren
                 ?.toList()
                 ?.filterIsInstance<LeafElement>()

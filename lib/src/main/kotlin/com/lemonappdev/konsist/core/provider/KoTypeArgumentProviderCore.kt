@@ -29,7 +29,6 @@ internal interface KoTypeArgumentProviderCore :
             val typeArguments =
                 ktTypeProjections
                     .map {
-
                         val type = it.typeReference?.let { typeReference ->
                             KoTypeDeclarationCore.getInstance(typeReference, this.castToKoBaseDeclaration())
                         } ?: KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration())

@@ -1,11 +1,11 @@
-package com.lemonappdev.konsist.core.declaration.kotypeargument
+package com.lemonappdev.konsist.core.declaration.kotypeargument.forkomodifier
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoTypeArgumentDeclarationForKoTypeProjectionProviderTest {
+class KoTypeArgumentDeclarationForKoTypeProjectionModifierProviderTest {
     @Test
     fun `not-generic-type-argument-type-projection`() {
         // given
@@ -20,7 +20,6 @@ class KoTypeArgumentDeclarationForKoTypeProjectionProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.isStarProjection shouldBeEqualTo false
             it?.hasInModifier shouldBeEqualTo false
             it?.hasOutModifier shouldBeEqualTo false
 
@@ -41,7 +40,6 @@ class KoTypeArgumentDeclarationForKoTypeProjectionProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.isStarProjection shouldBeEqualTo false
             it?.hasInModifier shouldBeEqualTo false
             it?.hasOutModifier shouldBeEqualTo false
         }
@@ -61,7 +59,6 @@ class KoTypeArgumentDeclarationForKoTypeProjectionProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.isStarProjection shouldBeEqualTo false
             it?.hasInModifier shouldBeEqualTo false
             it?.hasOutModifier shouldBeEqualTo false
         }
@@ -81,7 +78,6 @@ class KoTypeArgumentDeclarationForKoTypeProjectionProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.isStarProjection shouldBeEqualTo true
             it?.hasInModifier shouldBeEqualTo false
             it?.hasOutModifier shouldBeEqualTo false
         }
@@ -101,7 +97,6 @@ class KoTypeArgumentDeclarationForKoTypeProjectionProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.isStarProjection shouldBeEqualTo false
             it?.hasInModifier shouldBeEqualTo false
             it?.hasOutModifier shouldBeEqualTo true
         }
@@ -121,12 +116,14 @@ class KoTypeArgumentDeclarationForKoTypeProjectionProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.isStarProjection shouldBeEqualTo false
             it?.hasInModifier shouldBeEqualTo true
             it?.hasOutModifier shouldBeEqualTo false
         }
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypeargument/snippet/forkotypeprojectionprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope(
+            "core/declaration/kotypeargument/forkomodifier/snippet/forkotypeprojectionmodifierprovider/",
+            fileName
+        )
 }
