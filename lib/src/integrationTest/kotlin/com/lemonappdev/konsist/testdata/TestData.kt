@@ -1,5 +1,9 @@
 package com.lemonappdev.konsist.testdata
 
+const val SAMPLE_PROPERTY: Int = 0
+
+fun sampleFunction() = {}
+
 open class SampleParentClass
 
 open class SampleParentClass1
@@ -77,6 +81,8 @@ interface SampleGenericSuperInterface<T>
 object SampleObject
 
 typealias SampleTypeAlias = (SampleClass) -> Unit
+
+typealias SampleBasicTypeAlias = SampleClass
 
 annotation class NonExistingAnnotation
 

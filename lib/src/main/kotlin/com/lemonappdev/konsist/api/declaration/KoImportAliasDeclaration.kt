@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 
 /**
@@ -18,7 +19,8 @@ interface KoImportAliasDeclaration :
     KoLocationProvider,
     KoPathProvider,
     KoModuleProvider,
-    KoSourceSetProvider {
+    KoSourceSetProvider,
+    KoSourceDeclarationProvider {
     /**
      * Represents the import directive associated with the alias declaration.
      */
