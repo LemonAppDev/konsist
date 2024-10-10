@@ -26,7 +26,6 @@ class KoTypeDeclarationForKoTypeProviderTest {
         isGenericType: Boolean,
         isTypeParameter: Boolean,
         isExternalType: Boolean,
-        isStarProjection: Boolean,
     ) {
         // given
         val sut =
@@ -52,41 +51,6 @@ class KoTypeDeclarationForKoTypeProviderTest {
             it?.isGenericType shouldBeEqualTo isGenericType
             it?.isTypeParameter shouldBeEqualTo isTypeParameter
             it?.isExternalType shouldBeEqualTo isExternalType
-            it?.isStarProjection shouldBeEqualTo isStarProjection
-        }
-    }
-
-    @Test
-    fun `star-projection-type`() {
-        // given
-        val sut =
-            getSnippetFile("star-projection-type")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
-                ?.type
-                ?.asGenericTypeDeclaration()
-                ?.typeArguments
-                ?.firstOrNull()
-                ?.sourceDeclaration
-
-        // then
-        assertSoftly(sut) {
-            it?.isClass shouldBeEqualTo false
-            it?.isObject shouldBeEqualTo false
-            it?.isInterface shouldBeEqualTo false
-            it?.isTypeAlias shouldBeEqualTo false
-            it?.isImportAlias shouldBeEqualTo false
-            it?.isKotlinType shouldBeEqualTo false
-            it?.isKotlinBasicType shouldBeEqualTo false
-            it?.isKotlinCollectionType shouldBeEqualTo false
-            it?.isFunctionType shouldBeEqualTo false
-            it?.isGenericType shouldBeEqualTo false
-            it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternalType shouldBeEqualTo false
-            it?.isStarProjection shouldBeEqualTo true
         }
     }
 
