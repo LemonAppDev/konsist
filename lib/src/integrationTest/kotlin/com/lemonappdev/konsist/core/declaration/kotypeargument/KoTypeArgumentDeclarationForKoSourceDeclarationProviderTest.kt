@@ -93,8 +93,7 @@ class KoTypeArgumentDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.sourceDeclaration shouldBeInstanceOf KoStarProjectionDeclaration::class
             it?.sourceDeclaration?.name shouldBeEqualTo "*"
-            // Todo: Uncomment
-//            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isStarProjection } shouldBeEqualTo true
+            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isStarProjection } shouldBeEqualTo true
             it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternalType } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo false
         }

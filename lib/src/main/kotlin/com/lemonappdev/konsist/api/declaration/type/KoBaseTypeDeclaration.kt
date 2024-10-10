@@ -15,10 +15,6 @@ import com.lemonappdev.konsist.api.provider.KoTextProvider
  * and information about a declaration.
  */
 interface KoBaseTypeDeclaration :
-    KoBaseDeclaration,
     KoSourceDeclaration,
-    KoBaseProvider,
-    KoNameProvider,
-    KoTextProvider,
     KoPackageProvider,
     KoResideInPackageProvider
