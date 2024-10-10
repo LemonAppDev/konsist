@@ -29,7 +29,10 @@ internal interface KoTypeArgumentProviderCore :
             val typeArguments =
                 ktTypeProjections
                     .map {
-                        val type = KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration())
+
+                        val type = it.typeReference?.let { typeReference ->
+                            KoTypeDeclarationCore.getInstance(typeReference, this.castToKoBaseDeclaration())
+                        } ?: KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration())
 
                         KoTypeArgumentDeclarationCore(
                             type.name,
@@ -44,7 +47,7 @@ internal interface KoTypeArgumentProviderCore :
                             it.projectionKind == KtProjectionKind.STAR,
                             it.projectionKind == KtProjectionKind.IN,
                             it.projectionKind == KtProjectionKind.OUT,
-                            )
+                        )
                     }
 
             return typeArguments.ifEmpty { null }
@@ -53,7 +56,8 @@ internal interface KoTypeArgumentProviderCore :
     override val numTypeArguments: Int
         get() = typeArguments?.size ?: 0
 
-    override fun countTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Int = typeArguments?.count { predicate(it) } ?: 0
+    override fun countTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Int =
+        typeArguments?.count { predicate(it) } ?: 0
 
     override fun hasTypeArguments(): Boolean = typeArguments?.isNotEmpty() ?: false
 
@@ -91,8 +95,8 @@ internal interface KoTypeArgumentProviderCore :
                 names.any { name ->
                     typeArguments?.any { typeArgument ->
                         name.qualifiedName ==
-                            (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)
-                                ?.fullyQualifiedName
+                                (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)
+                                    ?.fullyQualifiedName
                     } == true
                 }
         }
@@ -109,13 +113,15 @@ internal interface KoTypeArgumentProviderCore :
                 names.all { name ->
                     typeArguments?.any { typeArgument ->
                         name.qualifiedName ==
-                            (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)
-                                ?.fullyQualifiedName
+                                (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)
+                                    ?.fullyQualifiedName
                     } == true
                 }
         }
 
-    override fun hasTypeArgument(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean = typeArguments?.any(predicate) ?: false
+    override fun hasTypeArgument(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean =
+        typeArguments?.any(predicate) ?: false
 
-    override fun hasAllTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean = typeArguments?.all(predicate) ?: false
+    override fun hasAllTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean =
+        typeArguments?.all(predicate) ?: false
 }

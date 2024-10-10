@@ -69,7 +69,9 @@ object TypeUtil {
                     } else {
                         typeProjection
                             ?.children
-                            ?.firstOrNull()
+                            // The last item is chosen because when a type is preceded by an type projection modifier (out or in),
+                            // the type being searched for is the last item in the list.
+                            ?.lastOrNull()
                             ?.children
                             ?.firstOrNull()
                     }

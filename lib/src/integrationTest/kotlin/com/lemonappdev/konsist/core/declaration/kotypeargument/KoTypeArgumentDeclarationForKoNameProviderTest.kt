@@ -1,8 +1,10 @@
 package com.lemonappdev.konsist.core.declaration.kotypeargument
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
 
 class KoTypeArgumentDeclarationForKoNameProviderTest {
@@ -106,6 +108,58 @@ class KoTypeArgumentDeclarationForKoNameProviderTest {
             it?.hasNameContaining("*") shouldBeEqualTo true
             it?.hasNameContaining("levari") shouldBeEqualTo false
             it?.hasNameMatching(Regex("[a-zA-Z*]+")) shouldBeEqualTo true
+            it?.hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `out-projection-type-argument-name`() {
+        // given
+        val sut =
+            getSnippetFile("out-projection-type-argument-name")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        assertSoftly(sut) {
+            it?.name shouldBeEqualTo "String"
+            it?.hasNameStartingWith("Str") shouldBeEqualTo true
+            it?.hasNameStartingWith("other") shouldBeEqualTo false
+            it?.hasNameEndingWith("ing") shouldBeEqualTo true
+            it?.hasNameEndingWith("other") shouldBeEqualTo false
+            it?.hasNameContaining("rin") shouldBeEqualTo true
+            it?.hasNameContaining("levari") shouldBeEqualTo false
+            it?.hasNameMatching(Regex("[a-zA-Z<>]+")) shouldBeEqualTo true
+            it?.hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `in-projection-type-argument-name`() {
+        // given
+        val sut =
+            getSnippetFile("in-projection-type-argument-name")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        assertSoftly(sut) {
+            it?.name shouldBeEqualTo "String"
+            it?.hasNameStartingWith("Str") shouldBeEqualTo true
+            it?.hasNameStartingWith("other") shouldBeEqualTo false
+            it?.hasNameEndingWith("ing") shouldBeEqualTo true
+            it?.hasNameEndingWith("other") shouldBeEqualTo false
+            it?.hasNameContaining("rin") shouldBeEqualTo true
+            it?.hasNameContaining("levari") shouldBeEqualTo false
+            it?.hasNameMatching(Regex("[a-zA-Z<>]+")) shouldBeEqualTo true
             it?.hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
     }

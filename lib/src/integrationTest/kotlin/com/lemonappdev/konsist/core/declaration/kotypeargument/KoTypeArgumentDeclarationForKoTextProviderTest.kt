@@ -4,12 +4,12 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoTypeArgumentDeclarationTest {
+class KoTypeArgumentDeclarationForKoTextProviderTest {
     @Test
-    fun `not-generic-type-argument-to-string`() {
+    fun `not-generic-type-argument-text`() {
         // given
         val sut =
-            getSnippetFile("not-generic-type-argument-to-string")
+            getSnippetFile("not-generic-type-argument-text")
                 .properties()
                 .first()
                 .type
@@ -22,10 +22,10 @@ class KoTypeArgumentDeclarationTest {
     }
 
     @Test
-    fun `generic-type-argument-to-string`() {
+    fun `generic-type-argument-text`() {
         // given
         val sut =
-            getSnippetFile("generic-type-argument-to-string")
+            getSnippetFile("generic-type-argument-text")
                 .properties()
                 .first()
                 .type
@@ -38,10 +38,10 @@ class KoTypeArgumentDeclarationTest {
     }
 
     @Test
-    fun `generic-complex-type-argument-to-string`() {
+    fun `generic-complex-type-argument-text`() {
         // given
         val sut =
-            getSnippetFile("generic-complex-type-argument-to-string")
+            getSnippetFile("generic-complex-type-argument-text")
                 .properties()
                 .first()
                 .type
@@ -54,10 +54,10 @@ class KoTypeArgumentDeclarationTest {
     }
 
     @Test
-    fun `star-projection-type-argument-to-string`() {
+    fun `star-projection-type-argument-text`() {
         // given
         val sut =
-            getSnippetFile("star-projection-type-argument-to-string")
+            getSnippetFile("star-projection-type-argument-text")
                 .properties()
                 .first()
                 .type
@@ -70,10 +70,10 @@ class KoTypeArgumentDeclarationTest {
     }
 
     @Test
-    fun `out-projection-type-argument-to-string`() {
+    fun `out-projection-type-argument-text`() {
         // given
         val sut =
-            getSnippetFile("out-projection-type-argument-to-string")
+            getSnippetFile("out-projection-type-argument-text")
                 .properties()
                 .first()
                 .type
@@ -86,10 +86,10 @@ class KoTypeArgumentDeclarationTest {
     }
 
     @Test
-    fun `in-projection-type-argument-to-string`() {
+    fun `in-projection-type-argument-text`() {
         // given
         val sut =
-            getSnippetFile("in-projection-type-argument-to-string")
+            getSnippetFile("in-projection-type-argument-text")
                 .properties()
                 .first()
                 .type
@@ -102,5 +102,5 @@ class KoTypeArgumentDeclarationTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypeargument/snippet/forgeneral/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypeargument/snippet/forkotextprovider/", fileName)
 }

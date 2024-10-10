@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.api.ext.list.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.core.declaration.KoTypeArgumentDeclarationCore
 
 /**
@@ -28,8 +27,8 @@ fun <T : KoTypeArgumentDeclaration> List<T>.flatten(): List<KoSourceDeclaration>
                     typeArg.typeArguments,
                     typeArg.sourceDeclaration,
                     typeArg.isStarProjection,
-                    typeArg.hasInProjection,
-                    typeArg.hasOutProjection,
+                    typeArg.hasInModifier,
+                    typeArg.hasOutModifier,
                 )
             } else {
                 typeArg

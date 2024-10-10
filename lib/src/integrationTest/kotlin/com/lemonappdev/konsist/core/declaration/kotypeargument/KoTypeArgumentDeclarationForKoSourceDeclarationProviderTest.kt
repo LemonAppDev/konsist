@@ -100,6 +100,52 @@ class KoTypeArgumentDeclarationForKoSourceDeclarationProviderTest {
         }
     }
 
+    @Test
+    fun `out-projection-type-argument-source-declaration`() {
+        // given
+        val sut =
+            getSnippetFile("out-projection-type-argument-source-declaration")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        assertSoftly(sut) {
+            it?.sourceDeclaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
+            it?.sourceDeclaration?.name shouldBeEqualTo "String"
+            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isKotlinType } shouldBeEqualTo true
+            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo true
+            it?.hasSourceDeclarationOf(Int::class) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `in-projection-type-argument-source-declaration`() {
+        // given
+        val sut =
+            getSnippetFile("in-projection-type-argument-source-declaration")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        assertSoftly(sut) {
+            it?.sourceDeclaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
+            it?.sourceDeclaration?.name shouldBeEqualTo "String"
+            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isKotlinType } shouldBeEqualTo true
+            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo true
+            it?.hasSourceDeclarationOf(Int::class) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/kotypeargument/snippet/forkosourcedeclarationprovider/",
