@@ -9,12 +9,12 @@ import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 internal interface KoPathProviderCore :
     KoPathProvider,
     KoBaseProviderCore {
-    val psiElement: PsiElement?
+    val psiElement: PsiElement
 
     override val path: String
         get() =
             psiElement
-                ?.containingFile
+                .containingFile
                 ?.name
                 ?.toOsSeparator()
                 ?: ""

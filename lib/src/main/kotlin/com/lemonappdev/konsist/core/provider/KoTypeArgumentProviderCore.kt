@@ -44,6 +44,7 @@ internal interface KoTypeArgumentProviderCore :
                             it.projectionKind == KtProjectionKind.STAR,
                             it.projectionKind == KtProjectionKind.IN,
                             it.projectionKind == KtProjectionKind.OUT,
+                            it,
                         )
                     }
 

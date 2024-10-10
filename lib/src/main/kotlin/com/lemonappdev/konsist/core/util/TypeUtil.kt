@@ -65,7 +65,7 @@ object TypeUtil {
                         .firstOrNull()
 
                 if (typeProjection?.projectionKind == KtProjectionKind.STAR) {
-                    return KoStarProjectionDeclarationCore
+                    return KoStarProjectionDeclarationCore.getInstance(typeProjection, containingFile)
                 } else {
                     typeProjection
                         ?.children
@@ -158,7 +158,7 @@ object TypeUtil {
                 ?.any { it == typeText }
 
         return when {
-            nestedType is KtTypeProjection -> KoStarProjectionDeclarationCore
+            nestedType is KtTypeProjection -> KoStarProjectionDeclarationCore.getInstance(nestedType, containingFile)
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
             nestedType is KtUserType && typeText != null -> {
                 if (nestedType.children.filterIsInstance<KtTypeArgumentList>().isNotEmpty()) {

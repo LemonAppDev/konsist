@@ -5,7 +5,9 @@ import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoGenericTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoStarProjectionProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
@@ -16,6 +18,7 @@ import com.lemonappdev.konsist.core.provider.modifier.KoOutModifierProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
+import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtUserType
 
 data class KoTypeArgumentDeclarationCore(
@@ -26,6 +29,7 @@ data class KoTypeArgumentDeclarationCore(
     override val isStarProjection: Boolean,
     override val hasInModifier: Boolean,
     override val hasOutModifier: Boolean,
+    override val ktTypeProjection: KtTypeProjection,
 ) : KoTypeArgumentDeclaration,
     KoBaseProviderCore,
     KoNameProviderCore,
@@ -36,14 +40,16 @@ data class KoTypeArgumentDeclarationCore(
     KoStarProjectionProviderCore,
     KoModifierProviderCore,
     KoOutModifierProviderCore,
-    KoInModifierProviderCore {
-    override val ktElement: KtElement? by lazy { null }
+    KoInModifierProviderCore,
+    KoLocationProviderCore,
+    KoPathProviderCore {
+    override val ktElement: KtElement by lazy { ktTypeProjection }
 
     override val ktUserType: KtUserType? by lazy { null }
 
-    override val psiElement: PsiElement? by lazy { null }
+    override val psiElement: PsiElement by lazy { ktTypeProjection }
 
-    override val ktModifierListOwner: KtModifierListOwner? by lazy { null }
+    override val ktModifierListOwner: KtModifierListOwner by lazy { ktTypeProjection }
 
     override val text: String by lazy {
         when {

@@ -19,24 +19,14 @@ import com.lemonappdev.konsist.core.declaration.KoTypeArgumentDeclarationCore
  */
 fun <T : KoTypeArgumentDeclaration> List<T>.flatten(): List<KoSourceDeclaration> =
     mapNotNull { typeArg ->
-        val baseDeclaration =
-            if (typeArg.typeArguments?.isNotEmpty() == true) {
-                KoTypeArgumentDeclarationCore(
-                    typeArg.sourceDeclaration.name,
-                    typeArg.genericType,
-                    typeArg.typeArguments,
-                    typeArg.sourceDeclaration,
-                    typeArg.isStarProjection,
-                    typeArg.hasInModifier,
-                    typeArg.hasOutModifier,
-                )
-            } else {
-                typeArg
-            }
-
-        listOf(baseDeclaration) + ((typeArg.typeArguments ?: emptyList()).flattenRecursively())
+        // Directly use the existing type argument declaration and flatten recursively
+        val flattenedDeclarations = listOf(typeArg) + (typeArg.typeArguments?.flattenRecursively() ?: emptyList())
+        flattenedDeclarations
     }.flatten()
         .map { it.genericType }
 
 private fun <T : KoTypeArgumentDeclaration> List<T>.flattenRecursively(): List<KoTypeArgumentDeclaration> =
-    flatMap { typeArg -> listOf(typeArg) + (typeArg.typeArguments?.flattenRecursively() ?: emptyList()) }
+    flatMap { typeArg ->
+        // Recursively flatten type arguments, if any
+        listOf(typeArg) + (typeArg.typeArguments?.flattenRecursively() ?: emptyList())
+    }
