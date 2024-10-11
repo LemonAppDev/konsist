@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.type.kotypeparameter
+package com.lemonappdev.konsist.core.declaration.kotypeparameter
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.parameters
@@ -23,7 +23,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("type/kotypeparameter/snippet/forkopathprovider/function-type-parameter-path.kt") shouldBeEqualTo true
+            it?.endsWith("kotypeparameter/snippet/forkopathprovider/function-type-parameter-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -41,7 +41,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/type/kotypeparameter/snippet/" +
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeparameter/snippet/" +
                     "forkopathprovider/function-type-parameter-path.kt",
             )
     }
@@ -59,9 +59,9 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..type/kotypeparameter/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..type/kotypeparameter..function-type-parameter-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("type/kotypeparameter/snippet/", true) shouldBeEqualTo false
+            it?.resideInPath("..kotypeparameter/snippet..", true) shouldBeEqualTo true
+            it?.resideInPath("..kotypeparameter..function-type-parameter-path.kt", true) shouldBeEqualTo true
+            it?.resideInPath("kotypeparameter/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -78,9 +78,9 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             it?.resideInPath("..snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..type/kotypeparameter/snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..type/kotypeparameter..function-type-parameter-path.kt", false) shouldBeEqualTo true
-            it?.resideInPath("type/kotypeparameter/snippet/", false) shouldBeEqualTo false
+            it?.resideInPath("..kotypeparameter/snippet..", false) shouldBeEqualTo true
+            it?.resideInPath("..kotypeparameter..function-type-parameter-path.kt", false) shouldBeEqualTo true
+            it?.resideInPath("kotypeparameter/snippet/", false) shouldBeEqualTo false
         }
     }
 
@@ -99,7 +99,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("type/kotypeparameter/snippet/forkopathprovider/class-type-parameter-path.kt") shouldBeEqualTo true
+            it?.endsWith("kotypeparameter/snippet/forkopathprovider/class-type-parameter-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -119,7 +119,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/type/kotypeparameter/snippet/" +
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeparameter/snippet/" +
                     "forkopathprovider/class-type-parameter-path.kt",
             )
     }
@@ -139,9 +139,9 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..type/kotypeparameter/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..type/kotypeparameter..class-type-parameter-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("type/kotypeparameter/snippet/", true) shouldBeEqualTo false
+            it?.resideInPath("..kotypeparameter/snippet..", true) shouldBeEqualTo true
+            it?.resideInPath("..kotypeparameter..class-type-parameter-path.kt", true) shouldBeEqualTo true
+            it?.resideInPath("kotypeparameter/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -160,9 +160,9 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             it?.resideInPath("..snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..type/kotypeparameter/snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..type/kotypeparameter..class-type-parameter-path.kt", false) shouldBeEqualTo true
-            it?.resideInPath("type/kotypeparameter/snippet/", false) shouldBeEqualTo false
+            it?.resideInPath("..kotypeparameter/snippet..", false) shouldBeEqualTo true
+            it?.resideInPath("..kotypeparameter..class-type-parameter-path.kt", false) shouldBeEqualTo true
+            it?.resideInPath("kotypeparameter/snippet/", false) shouldBeEqualTo false
         }
     }
 
@@ -180,7 +180,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("type/kotypeparameter/snippet/forkopathprovider/interface-type-parameter-path.kt") shouldBeEqualTo true
+            it?.endsWith("kotypeparameter/snippet/forkopathprovider/interface-type-parameter-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -199,7 +199,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/type/kotypeparameter/snippet/" +
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeparameter/snippet/" +
                     "forkopathprovider/interface-type-parameter-path.kt",
             )
     }
@@ -218,9 +218,9 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..type/kotypeparameter/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..type/kotypeparameter..interface-type-parameter-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("type/kotypeparameter/snippet/", true) shouldBeEqualTo false
+            it?.resideInPath("..kotypeparameter/snippet..", true) shouldBeEqualTo true
+            it?.resideInPath("..kotypeparameter..interface-type-parameter-path.kt", true) shouldBeEqualTo true
+            it?.resideInPath("kotypeparameter/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -238,9 +238,9 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             it?.resideInPath("..snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..type/kotypeparameter/snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..type/kotypeparameter..interface-type-parameter-path.kt", false) shouldBeEqualTo true
-            it?.resideInPath("type/kotypeparameter/snippet/", false) shouldBeEqualTo false
+            it?.resideInPath("..kotypeparameter/snippet..", false) shouldBeEqualTo true
+            it?.resideInPath("..kotypeparameter..interface-type-parameter-path.kt", false) shouldBeEqualTo true
+            it?.resideInPath("kotypeparameter/snippet/", false) shouldBeEqualTo false
         }
     }
 
@@ -257,7 +257,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("type/kotypeparameter/snippet/forkopathprovider/property-type-parameter-path.kt") shouldBeEqualTo true
+            it?.endsWith("kotypeparameter/snippet/forkopathprovider/property-type-parameter-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -275,7 +275,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/type/kotypeparameter/snippet/" +
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeparameter/snippet/" +
                     "forkopathprovider/property-type-parameter-path.kt",
             )
     }
@@ -293,9 +293,9 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..type/kotypeparameter/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..type/kotypeparameter..property-type-parameter-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("type/kotypeparameter/snippet/", true) shouldBeEqualTo false
+            it?.resideInPath("..kotypeparameter/snippet..", true) shouldBeEqualTo true
+            it?.resideInPath("..kotypeparameter..property-type-parameter-path.kt", true) shouldBeEqualTo true
+            it?.resideInPath("kotypeparameter/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -312,9 +312,9 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             it?.resideInPath("..snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..type/kotypeparameter/snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..type/kotypeparameter..property-type-parameter-path.kt", false) shouldBeEqualTo true
-            it?.resideInPath("type/kotypeparameter/snippet/", false) shouldBeEqualTo false
+            it?.resideInPath("..kotypeparameter/snippet..", false) shouldBeEqualTo true
+            it?.resideInPath("..kotypeparameter..property-type-parameter-path.kt", false) shouldBeEqualTo true
+            it?.resideInPath("kotypeparameter/snippet/", false) shouldBeEqualTo false
         }
     }
 
@@ -335,7 +335,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("type/kotypeparameter/snippet/forkopathprovider/typealias-type-parameter-path.kt") shouldBeEqualTo true
+            it?.endsWith("kotypeparameter/snippet/forkopathprovider/typealias-type-parameter-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -357,7 +357,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/type/kotypeparameter/snippet/" +
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeparameter/snippet/" +
                     "forkopathprovider/typealias-type-parameter-path.kt",
             )
     }
@@ -379,9 +379,9 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..type/kotypeparameter/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..type/kotypeparameter..typealias-type-parameter-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("type/kotypeparameter/snippet/", true) shouldBeEqualTo false
+            it?.resideInPath("..kotypeparameter/snippet..", true) shouldBeEqualTo true
+            it?.resideInPath("..kotypeparameter..typealias-type-parameter-path.kt", true) shouldBeEqualTo true
+            it?.resideInPath("kotypeparameter/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -402,15 +402,15 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             it?.resideInPath("..snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..type/kotypeparameter/snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..type/kotypeparameter..typealias-type-parameter-path.kt", false) shouldBeEqualTo true
-            it?.resideInPath("type/kotypeparameter/snippet/", false) shouldBeEqualTo false
+            it?.resideInPath("..kotypeparameter/snippet..", false) shouldBeEqualTo true
+            it?.resideInPath("..kotypeparameter..typealias-type-parameter-path.kt", false) shouldBeEqualTo true
+            it?.resideInPath("kotypeparameter/snippet/", false) shouldBeEqualTo false
         }
     }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
-            "core/declaration/type/kotypeparameter/snippet/forkopathprovider/",
+            "core/declaration/kotypeparameter/snippet/forkopathprovider/",
             fileName,
         )
 }

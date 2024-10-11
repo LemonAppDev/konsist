@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoEnumConstantProvider
 import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
 import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
 import com.lemonappdev.konsist.api.provider.KoTestClassProvider
+import com.lemonappdev.konsist.api.provider.KoTypeParameterProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoAbstractModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoAnnotationModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoEnumModifierProvider
@@ -32,4 +33,5 @@ interface KoClassDeclaration :
     KoPrimaryConstructorProvider,
     KoSecondaryConstructorsProvider,
     KoTestClassProvider,
-    KoValueModifierProvider
+    KoValueModifierProvider,
+    KoTypeParameterProvider

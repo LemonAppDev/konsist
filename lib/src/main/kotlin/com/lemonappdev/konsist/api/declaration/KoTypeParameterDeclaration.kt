@@ -1,5 +1,6 @@
-package com.lemonappdev.konsist.api.declaration.type
+package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider

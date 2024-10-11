@@ -13,7 +13,7 @@ import com.lemonappdev.konsist.core.declaration.type.KoFunctionTypeDeclarationCo
 import com.lemonappdev.konsist.core.declaration.type.KoGenericTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoStarProjectionDeclarationCore
-import com.lemonappdev.konsist.core.declaration.type.KoTypeParameterDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoTypeParameterDeclarationCore
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
 import com.lemonappdev.konsist.core.model.getObject
@@ -25,6 +25,7 @@ import org.jetbrains.kotlin.psi.KtFunctionType
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtNullableType
 import org.jetbrains.kotlin.psi.KtTypeArgumentList
+import org.jetbrains.kotlin.psi.KtTypeParameter
 import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
@@ -134,14 +135,12 @@ object TypeUtil {
                             .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
                     }
 
-        val hasTypeParameterWithTheSameName =
-            (parentDeclaration as? KoTypeParameterProviderCore)
+        val typeParameter = (parentDeclaration as? KoTypeParameterProviderCore)
                 ?.typeParameters
-                ?.map { it.text.substringBefore(":") }
-                ?.map { it.trim() }
-                ?.any { it == typeText }
+                ?.firstOrNull { it.name == typeText }
 
         return when {
+            typeParameter != null -> KoTypeParameterDeclarationCore.getInstance(typeParameter, containingFile)
             nestedType is KtTypeProjection -> KoStarProjectionDeclarationCore.getInstance(nestedType, parentDeclaration)
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
             nestedType is KtUserType && typeText != null -> {
@@ -149,8 +148,6 @@ object TypeUtil {
                     KoGenericTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
                 } else if (isKotlinBasicType(typeText) || isKotlinCollectionTypes(typeText)) {
                     KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
-                } else if (hasTypeParameterWithTheSameName == true) {
-                    KoTypeParameterDeclarationCore.getInstance(nestedType, containingFile)
                 } else {
                     getClass(typeText, fullyQualifiedName, false, containingFile)
                         ?: getInterface(typeText, fullyQualifiedName, false, containingFile)

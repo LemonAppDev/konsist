@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.type.kotypeparameter
+package com.lemonappdev.konsist.core.declaration.kotypeparameter
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.parameters
@@ -138,5 +138,5 @@ class KoTypeParameterDeclarationForKoTextProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/type/kotypeparameter/snippet/forkotextprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypeparameter/snippet/forkotextprovider/", fileName)
 }

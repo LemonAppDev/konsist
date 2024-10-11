@@ -1,33 +1,32 @@
-package com.lemonappdev.konsist.core.declaration.type.kotypeparameter
+package com.lemonappdev.konsist.core.declaration.kotypeparameter
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.ext.list.primaryConstructors
 import com.lemonappdev.konsist.api.ext.list.properties
-import com.lemonappdev.konsist.api.ext.list.returnTypes
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoTypeParameterDeclarationForKoNameProviderTest {
+class KoTypeParameterDeclarationTest {
     @Test
-    fun `function-type-parameter-name`() {
+    fun `function-parameter-type-to-string`() {
         // given
         val sut =
-            getSnippetFile("function-type-parameter-name")
+            getSnippetFile("function-parameter-type-to-string")
                 .functions()
-                .returnTypes
-                .firstOrNull()
+                .first()
+                .returnType
                 ?.asTypeParameterDeclaration()
 
         // then
-        sut?.name shouldBeEqualTo "TestType"
+        sut.toString() shouldBeEqualTo "TestType"
     }
 
     @Test
-    fun `class-type-parameter-name`() {
+    fun `class-parameter-type-to-string`() {
         // given
         val sut =
-            getSnippetFile("class-type-parameter-name")
+            getSnippetFile("class-parameter-type-to-string")
                 .classes()
                 .primaryConstructors
                 .parameters
@@ -36,14 +35,14 @@ class KoTypeParameterDeclarationForKoNameProviderTest {
                 .asTypeParameterDeclaration()
 
         // then
-        sut?.name shouldBeEqualTo "TestType"
+        sut.toString() shouldBeEqualTo "TestType"
     }
 
     @Test
-    fun `interface-type-parameter-name`() {
+    fun `interface-parameter-type-to-string`() {
         // given
         val sut =
-            getSnippetFile("interface-type-parameter-name")
+            getSnippetFile("interface-parameter-type-to-string")
                 .interfaces()
                 .properties()
                 .first()
@@ -51,28 +50,28 @@ class KoTypeParameterDeclarationForKoNameProviderTest {
                 ?.asTypeParameterDeclaration()
 
         // then
-        sut?.name shouldBeEqualTo "TestType"
+        sut.toString() shouldBeEqualTo "TestType"
     }
 
     @Test
-    fun `property-type-parameter-name`() {
+    fun `property-parameter-type-to-string`() {
         // given
         val sut =
-            getSnippetFile("property-type-parameter-name")
+            getSnippetFile("property-parameter-type-to-string")
                 .properties()
                 .first()
                 .type
                 ?.asTypeParameterDeclaration()
 
         // then
-        sut?.name shouldBeEqualTo "TestType"
+        sut.toString() shouldBeEqualTo "TestType"
     }
 
     @Test
-    fun `typealias-type-parameter-name`() {
+    fun `typealias-parameter-type-to-string`() {
         // given
         val sut =
-            getSnippetFile("typealias-type-parameter-name")
+            getSnippetFile("typealias-parameter-type-to-string")
                 .typeAliases
                 .first()
                 .type
@@ -83,12 +82,9 @@ class KoTypeParameterDeclarationForKoNameProviderTest {
                 ?.asTypeParameterDeclaration()
 
         // then
-        sut?.name shouldBeEqualTo "TestType"
+        sut.toString() shouldBeEqualTo "TestType"
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope(
-            "core/declaration/type/kotypeparameter/snippet/forkonameprovider/",
-            fileName,
-        )
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypeparameter/snippet/forgeneral/", fileName)
 }

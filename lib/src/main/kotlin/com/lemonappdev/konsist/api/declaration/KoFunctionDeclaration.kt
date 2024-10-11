@@ -25,6 +25,7 @@ import com.lemonappdev.konsist.api.provider.KoReturnProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
+import com.lemonappdev.konsist.api.provider.KoTypeParameterProvider
 import com.lemonappdev.konsist.api.provider.KoVariableProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoAbstractModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoActualModifierProvider
@@ -85,4 +86,5 @@ interface KoFunctionDeclaration :
     KoFinalModifierProvider,
     KoAbstractModifierProvider,
     KoActualModifierProvider,
-    KoExpectModifierProvider
+    KoExpectModifierProvider,
+    KoTypeParameterProvider

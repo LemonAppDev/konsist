@@ -1,34 +1,33 @@
-package com.lemonappdev.konsist.core.declaration.type.kotypeparameter
+package com.lemonappdev.konsist.core.declaration.kotypeparameter
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.ext.list.primaryConstructors
 import com.lemonappdev.konsist.api.ext.list.properties
 import com.lemonappdev.konsist.api.ext.list.returnTypes
-import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoTypeParameterDeclarationForKoContainingFileProviderTest {
+class KoTypeParameterDeclarationForKoNameProviderTest {
     @Test
-    fun `function-type-parameter-containing-file`() {
+    fun `function-type-parameter-name`() {
         // given
         val sut =
-            getSnippetFile("function-type-parameter-containing-file")
+            getSnippetFile("function-type-parameter-name")
                 .functions()
                 .returnTypes
                 .firstOrNull()
                 ?.asTypeParameterDeclaration()
 
         // then
-        sut?.containingFile?.nameWithExtension shouldBeEqualTo "function-type-parameter-containing-file.kt"
+        sut?.name shouldBeEqualTo "TestType"
     }
 
     @Test
-    fun `class-type-parameter-containing-file`() {
+    fun `class-type-parameter-name`() {
         // given
         val sut =
-            getSnippetFile("class-type-parameter-containing-file")
+            getSnippetFile("class-type-parameter-name")
                 .classes()
                 .primaryConstructors
                 .parameters
@@ -37,14 +36,14 @@ class KoTypeParameterDeclarationForKoContainingFileProviderTest {
                 .asTypeParameterDeclaration()
 
         // then
-        (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo "class-type-parameter-containing-file"
+        sut?.name shouldBeEqualTo "TestType"
     }
 
     @Test
-    fun `interface-type-parameter-containing-file`() {
+    fun `interface-type-parameter-name`() {
         // given
         val sut =
-            getSnippetFile("interface-type-parameter-containing-file")
+            getSnippetFile("interface-type-parameter-name")
                 .interfaces()
                 .properties()
                 .first()
@@ -52,28 +51,28 @@ class KoTypeParameterDeclarationForKoContainingFileProviderTest {
                 ?.asTypeParameterDeclaration()
 
         // then
-        (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo "interface-type-parameter-containing-file"
+        sut?.name shouldBeEqualTo "TestType"
     }
 
     @Test
-    fun `property-type-parameter-containing-file`() {
+    fun `property-type-parameter-name`() {
         // given
         val sut =
-            getSnippetFile("property-type-parameter-containing-file")
+            getSnippetFile("property-type-parameter-name")
                 .properties()
                 .first()
                 .type
                 ?.asTypeParameterDeclaration()
 
         // then
-        (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo "property-type-parameter-containing-file"
+        sut?.name shouldBeEqualTo "TestType"
     }
 
     @Test
-    fun `typealias-type-parameter-containing-file`() {
+    fun `typealias-type-parameter-name`() {
         // given
         val sut =
-            getSnippetFile("typealias-type-parameter-containing-file")
+            getSnippetFile("typealias-type-parameter-name")
                 .typeAliases
                 .first()
                 .type
@@ -84,9 +83,12 @@ class KoTypeParameterDeclarationForKoContainingFileProviderTest {
                 ?.asTypeParameterDeclaration()
 
         // then
-        (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo "typealias-type-parameter-containing-file"
+        sut?.name shouldBeEqualTo "TestType"
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/type/kotypeparameter/snippet/forkocontainingfileprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope(
+            "core/declaration/kotypeparameter/snippet/forkonameprovider/",
+            fileName,
+        )
 }
