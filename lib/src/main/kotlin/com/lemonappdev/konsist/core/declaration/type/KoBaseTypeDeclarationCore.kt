@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.type
 
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.core.declaration.KoSourceDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -19,4 +20,10 @@ internal interface KoBaseTypeDeclarationCore :
     KoPackageProviderCore,
     KoResideInPackageProviderCore,
     KoTypeProviderCore,
-    KoTypeDeclarationProviderCore
+    KoTypeDeclarationProviderCore {
+    override val koTypeDeclarationProviderDeclaration: KoSourceDeclaration
+        get() = sourceDeclaration
+
+    override val koTypeProviderDeclaration: KoSourceDeclaration
+        get() = sourceDeclaration
+    }
