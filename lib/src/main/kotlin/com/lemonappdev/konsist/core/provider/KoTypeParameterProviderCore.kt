@@ -15,38 +15,37 @@ internal interface KoTypeParameterProviderCore :
     val ktTypeParameterListOwner: KtTypeParameterListOwner
 
     override val typeParameters: List<KoTypeParameterDeclaration>
-        get() {
-            val typeReferences = ktTypeParameterListOwner
-                .typeParameters
-                .flatMap {
-                    it
-                        .children
-                        .filterIsInstance<KtTypeReference>()
-                }
+        get() = ktTypeParameterListOwner
+            .typeParameters
+            .map { typeParameter ->
+                val typeReferences = ktTypeParameterListOwner
+                    .typeParameters
+                    .filter { it.name == typeParameter.name }
+                    .flatMap {
+                        it
+                            .children
+                            .filterIsInstance<KtTypeReference>()
+                    }
 
-            return ktTypeParameterListOwner
-                .typeParameters
-                .map { typeParameter ->
-                    val typeConstraints = ktTypeParameterListOwner
-                        .typeConstraintList
-                        ?.children
-                        ?.groupBy {
-                            it
+                val typeConstraints = ktTypeParameterListOwner
+                    .typeConstraintList
+                    ?.children
+                    ?.groupBy {
+                        it
+                            .children
+                            .firstIsInstance<KtNameReferenceExpression>()
+                            .text
+                    }
+                    ?.filter { it.key == typeParameter.name }
+                    ?.flatMap { it
+                        .value
+                        .map { value ->
+                            value
                                 .children
-                                .firstIsInstance<KtNameReferenceExpression>()
-                                .text
+                                .firstIsInstance<KtTypeReference>()
                         }
-                        ?.filter { it.key == typeParameter.text }
-                        ?.flatMap { it
-                            .value
-                            .map { value ->
-                                value
-                                    .children
-                                    .firstIsInstance<KtTypeReference>()
-                            }
-                        }
-                        ?: emptyList()
+                    }
+                    ?: emptyList()
 
-                    KoTypeParameterDeclarationCore.getInstance(typeParameter, typeReferences + typeConstraints, this.castToKoBaseDeclaration()) }
-        }
+                KoTypeParameterDeclarationCore.getInstance(typeParameter, typeReferences + typeConstraints, this.castToKoBaseDeclaration()) }
 }
