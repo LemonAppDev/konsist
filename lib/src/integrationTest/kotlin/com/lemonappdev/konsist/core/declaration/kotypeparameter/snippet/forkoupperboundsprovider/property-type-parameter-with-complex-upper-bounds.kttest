@@ -1,0 +1,2 @@
+val <T: List<*>, V: List<*>> Map<T, V>.sampleProperty: Int where T : Set<*>, T : CharSequence, V: Set<*>
+    get() = 0

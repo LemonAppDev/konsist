@@ -1,0 +1,1 @@
+fun <T: List<*>, V: List<*>> sampleFunction() where T : Set<*>, T : CharSequence, V: Set<*> {}
