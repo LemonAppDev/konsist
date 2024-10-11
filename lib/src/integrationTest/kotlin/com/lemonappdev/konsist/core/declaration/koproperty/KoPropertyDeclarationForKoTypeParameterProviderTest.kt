@@ -121,4 +121,3 @@ class KoPropertyDeclarationForKoTypeParameterProviderTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/koproperty/snippet/forkotypeparameterprovider/", fileName)
 }
-

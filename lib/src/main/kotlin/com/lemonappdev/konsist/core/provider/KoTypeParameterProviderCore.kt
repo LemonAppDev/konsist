@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.provider.KoTypeParameterProvider
 import com.lemonappdev.konsist.core.declaration.KoTypeParameterDeclarationCore
@@ -61,8 +60,7 @@ internal interface KoTypeParameterProviderCore :
     override val numTypeParameters: Int
         get() = typeParameters.size
 
-    override fun countTypeParameters(predicate: (KoTypeParameterDeclaration) -> Boolean): Int =
-        typeParameters.count { predicate(it) }
+    override fun countTypeParameters(predicate: (KoTypeParameterDeclaration) -> Boolean): Int = typeParameters.count { predicate(it) }
 
     override fun hasTypeParameters(): Boolean = typeParameters.isNotEmpty()
 
@@ -94,9 +92,7 @@ internal interface KoTypeParameterProviderCore :
                 }
         }
 
-    override fun hasTypeParameter(predicate: (KoTypeParameterDeclaration) -> Boolean): Boolean =
-        typeParameters.any(predicate)
+    override fun hasTypeParameter(predicate: (KoTypeParameterDeclaration) -> Boolean): Boolean = typeParameters.any(predicate)
 
-    override fun hasAllTypeParameters(predicate: (KoTypeParameterDeclaration) -> Boolean): Boolean =
-        typeParameters.all(predicate)
+    override fun hasAllTypeParameters(predicate: (KoTypeParameterDeclaration) -> Boolean): Boolean = typeParameters.all(predicate)
 }
