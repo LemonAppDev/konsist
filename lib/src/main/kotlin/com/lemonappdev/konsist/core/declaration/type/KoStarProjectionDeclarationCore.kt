@@ -24,9 +24,7 @@ internal class KoStarProjectionDeclarationCore private constructor(
     KoContainingFileProviderCore,
     KoContainingDeclarationProviderCore,
     KoLocationProviderCore,
-    KoPathProviderCore,
-    KoModuleProviderCore,
-    KoSourceSetProviderCore {
+    KoPathProviderCore {
     override val ktElement: KtElement by lazy { ktTypeProjection }
 
     override val psiElement: PsiElement by lazy { ktTypeProjection }

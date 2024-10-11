@@ -3,6 +3,18 @@ package com.lemonappdev.konsist.api.declaration.type
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoModuleProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
+import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
+import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
+import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
+import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 
 /**
  * Represents a star projection declaration.
@@ -10,4 +22,8 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 interface KoStarProjectionDeclaration :
     KoBaseDeclaration,
     KoSourceDeclaration,
-    KoBaseProvider
+    KoBaseProvider,
+    KoContainingFileProvider,
+    KoContainingDeclarationProvider,
+    KoLocationProvider,
+    KoPathProvider
