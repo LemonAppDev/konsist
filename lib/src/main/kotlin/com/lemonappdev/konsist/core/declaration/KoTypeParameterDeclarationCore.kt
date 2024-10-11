@@ -12,6 +12,7 @@ import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
+import com.lemonappdev.konsist.core.provider.KoUpperBoundsProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoInModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoOutModifierProviderCore
@@ -21,7 +22,7 @@ import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtTypeParameter
 
 internal class KoTypeParameterDeclarationCore private constructor(
-    private val ktTypeParameter: KtTypeParameter,
+    override val ktTypeParameter: KtTypeParameter,
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoTypeParameterDeclaration,
     KoBaseTypeDeclarationCore,
@@ -34,7 +35,8 @@ internal class KoTypeParameterDeclarationCore private constructor(
     KoSourceSetProviderCore,
     KoModifierProviderCore,
     KoOutModifierProviderCore,
-    KoInModifierProviderCore {
+    KoInModifierProviderCore,
+    KoUpperBoundsProviderCore {
     override val psiElement: PsiElement by lazy { ktTypeParameter }
 
     override val ktElement: KtElement by lazy { ktTypeParameter }

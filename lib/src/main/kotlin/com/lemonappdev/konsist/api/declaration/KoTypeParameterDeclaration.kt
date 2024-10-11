@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
+import com.lemonappdev.konsist.api.provider.KoUpperBoundsProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoInModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoOutModifierProvider
@@ -24,4 +25,5 @@ interface KoTypeParameterDeclaration :
     KoSourceSetProvider,
     KoModifierProvider,
     KoOutModifierProvider,
-    KoInModifierProvider
+    KoInModifierProvider,
+    KoUpperBoundsProvider
