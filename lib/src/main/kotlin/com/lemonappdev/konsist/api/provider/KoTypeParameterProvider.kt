@@ -2,6 +2,9 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
 
+/**
+ * An interface representing a Kotlin declaration that provides access to its type parameters.
+ */
 interface KoTypeParameterProvider : KoBaseProvider {
     /**
      * Type parameters of the declaration.
