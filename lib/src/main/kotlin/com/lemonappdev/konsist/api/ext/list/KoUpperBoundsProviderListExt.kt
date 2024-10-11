@@ -17,9 +17,9 @@ val <T : KoUpperBoundsProvider> List<T>.upperBounds: List<KoSourceDeclaration>
 fun <T : KoUpperBoundsProvider> List<T>.withUpperBounds(): List<T> = filter { it.hasUpperBounds() }
 
 /**
- * List containing declarations with no upperBounds.
+ * List containing declarations with no upper bounds.
  *
- * @return A list containing declarations with no upperBounds.
+ * @return A list containing declarations with no upper bounds.
  */
 fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBounds(): List<T> = filterNot { it.hasUpperBounds() }
 
@@ -27,7 +27,7 @@ fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBounds(): List<T> = filterNo
  * List containing declarations that have at least one upper bound with the specified name(s).
  *
  * @param name The name of the upper bound to include.
- * @param names The names of additional upperBounds to include.
+ * @param names The names of additional upper bounds to include.
  * @return A list containing declarations with at least one of the specified upper bound(s).
  */
 fun <T : KoUpperBoundsProvider> List<T>.withUpperBoundNamed(
@@ -38,7 +38,7 @@ fun <T : KoUpperBoundsProvider> List<T>.withUpperBoundNamed(
 /**
  * List containing declarations that have at least one upper bound with the specified name(s).
  *
- * @param names The names of additional upperBounds to include.
+ * @param names The names of additional upper bounds to include.
  * @return A list containing declarations with at least one of the specified upper bound(s).
  */
 fun <T : KoUpperBoundsProvider> List<T>.withUpperBoundNamed(names: Collection<String>): List<T> =
@@ -50,11 +50,11 @@ fun <T : KoUpperBoundsProvider> List<T>.withUpperBoundNamed(names: Collection<St
     }
 
 /**
- * List containing declarations without any of specified upperBounds.
+ * List containing declarations without any of specified upper bounds.
  *
  * @param name The name of the upper bound to exclude.
- * @param names The names of additional upperBounds to exclude.
- * @return A list containing declarations without any of specified upperBounds.
+ * @param names The names of additional upper bounds to exclude.
+ * @return A list containing declarations without any of specified upper bounds.
  */
 fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBoundNamed(
     name: String,
@@ -62,10 +62,10 @@ fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBoundNamed(
 ): List<T> = withoutUpperBoundNamed(listOf(name, *names))
 
 /**
- * List containing declarations without any of specified upperBounds.
+ * List containing declarations without any of specified upper bounds.
  *
- * @param names The names of additional upperBounds to exclude.
- * @return A list containing declarations without any of specified upperBounds.
+ * @param names The names of additional upper bounds to exclude.
+ * @return A list containing declarations without any of specified upper bounds.
  */
 fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBoundNamed(names: Collection<String>): List<T> =
     filterNot {
@@ -76,7 +76,7 @@ fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBoundNamed(names: Collection
     }
 
 /**
- * List containing declarations that have all specified upperBounds.
+ * List containing declarations that have all specified upper bounds.
  *
  * @param name The name of the upper bound to include.
  * @param names The name(s) of the upper bound(s) to include.
@@ -88,7 +88,7 @@ fun <T : KoUpperBoundsProvider> List<T>.withAllUpperBoundsNamed(
 ): List<T> = withAllUpperBoundsNamed(listOf(name, *names))
 
 /**
- * List containing declarations that have all specified upperBounds.
+ * List containing declarations that have all specified upper bounds.
  *
  * @param names The name(s) of the upper bound(s) to include.
  * @return A list containing declarations with all specified upper bound(s).
@@ -102,7 +102,7 @@ fun <T : KoUpperBoundsProvider> List<T>.withAllUpperBoundsNamed(names: Collectio
     }
 
 /**
- * List containing declarations without all specified upperBounds.
+ * List containing declarations without all specified upper bounds.
  *
  * @param name The name of the upper bound to exclude.
  * @param names The name(s) of the upper bound(s) to exclude.
@@ -114,7 +114,7 @@ fun <T : KoUpperBoundsProvider> List<T>.withoutAllUpperBoundsNamed(
 ): List<T> = withoutAllUpperBoundsNamed(listOf(name, *names))
 
 /**
- * List containing declarations without all specified upperBounds.
+ * List containing declarations without all specified upper bounds.
  *
  * @param names The name(s) of the upper bound(s) to exclude.
  * @return A list containing declarations without all specified upper bound(s).
@@ -150,10 +150,10 @@ fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBound(predicate: (KoSourceDe
     }
 
 /**
- * List containing declarations that have all upperBounds satisfying the provided predicate.
+ * List containing declarations that have all upper bounds satisfying the provided predicate.
  *
  * @param predicate A function that defines the condition to be met by all upper bound declarations.
- * @return A filtered list containing declarations with all upperBounds satisfying the predicate.
+ * @return A filtered list containing declarations with all upper bounds satisfying the predicate.
  */
 fun <T : KoUpperBoundsProvider> List<T>.withAllUpperBounds(predicate: (KoSourceDeclaration) -> Boolean): List<T> =
     filter {
