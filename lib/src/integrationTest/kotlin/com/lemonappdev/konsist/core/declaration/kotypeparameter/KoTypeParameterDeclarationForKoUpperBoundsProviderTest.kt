@@ -97,8 +97,8 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
         assertSoftly(sut) {
             upperBounds.size shouldBeEqualTo 2
             numUpperBounds shouldBeEqualTo 2
-            countUpperBounds { it.hasNameStartingWith("sample") } shouldBeEqualTo 2
-            countUpperBounds { upperBound -> upperBound.isKotlinType } shouldBeEqualTo 1
+            countUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo 2
+            countUpperBounds { upperBound -> upperBound.isGenericType } shouldBeEqualTo 1
             hasUpperBounds() shouldBeEqualTo true
             hasUpperBoundWithName(emptyList()) shouldBeEqualTo true
             hasUpperBoundWithName(emptySet()) shouldBeEqualTo true
@@ -123,9 +123,9 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBoundsWithAllNames(setOf("List<*>", "CharSequence")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>", "Int")) shouldBeEqualTo false
             hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
-            hasUpperBound { upperBound -> upperBound.isKotlinType } shouldBeEqualTo true
-            hasAllUpperBounds { it.hasNameStartingWith("sample") } shouldBeEqualTo true
-            hasAllUpperBounds { upperBound -> upperBound.isExternalType } shouldBeEqualTo false
+            hasUpperBound { upperBound -> upperBound.isGenericType } shouldBeEqualTo true
+            hasAllUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo true
+            hasAllUpperBounds { upperBound -> upperBound.isInterface } shouldBeEqualTo false
         }
     }
 
@@ -202,6 +202,52 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
     }
 
     @Test
+    fun `class-type-parameter-with-two-upper-bounds`() {
+        // given
+        val sut =
+            getSnippetFile("class-type-parameter-with-two-upper-bounds")
+                .classes()
+                .first()
+                .typeParameters
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            upperBounds.size shouldBeEqualTo 2
+            numUpperBounds shouldBeEqualTo 2
+            countUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo 2
+            countUpperBounds { upperBound -> upperBound.isGenericType } shouldBeEqualTo 1
+            hasUpperBounds() shouldBeEqualTo true
+            hasUpperBoundWithName(emptyList()) shouldBeEqualTo true
+            hasUpperBoundWithName(emptySet()) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames(emptyList()) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames(emptySet()) shouldBeEqualTo true
+            hasUpperBoundWithName("List<*>") shouldBeEqualTo true
+            hasUpperBoundWithName("Int") shouldBeEqualTo false
+            hasUpperBoundWithName("List<*>", "Int") shouldBeEqualTo true
+            hasUpperBoundWithName(listOf("List<*>")) shouldBeEqualTo true
+            hasUpperBoundWithName(listOf("Int")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundWithName(setOf("List<*>")) shouldBeEqualTo true
+            hasUpperBoundWithName(setOf("Int")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames("List<*>") shouldBeEqualTo true
+            hasUpperBoundsWithAllNames("List<*>", "CharSequence") shouldBeEqualTo true
+            hasUpperBoundsWithAllNames("List<*>", "Int") shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("List<*>")) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames(listOf("List<*>", "CharSequence")) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames(listOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("List<*>")) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames(setOf("List<*>", "CharSequence")) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames(setOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
+            hasUpperBound { upperBound -> upperBound.isGenericType } shouldBeEqualTo true
+            hasAllUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo true
+            hasAllUpperBounds { upperBound -> upperBound.isInterface } shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `interface-type-parameter-without-upper-bound`() {
         // given
         val sut =
@@ -270,6 +316,52 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
             hasUpperBound { it.hasNameStartingWith("Int") } shouldBeEqualTo false
             hasAllUpperBounds { it.hasNameStartingWith("List") } shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `interface-type-parameter-with-two-upper-bounds`() {
+        // given
+        val sut =
+            getSnippetFile("interface-type-parameter-with-two-upper-bounds")
+                .interfaces()
+                .first()
+                .typeParameters
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            upperBounds.size shouldBeEqualTo 2
+            numUpperBounds shouldBeEqualTo 2
+            countUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo 2
+            countUpperBounds { upperBound -> upperBound.isGenericType } shouldBeEqualTo 1
+            hasUpperBounds() shouldBeEqualTo true
+            hasUpperBoundWithName(emptyList()) shouldBeEqualTo true
+            hasUpperBoundWithName(emptySet()) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames(emptyList()) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames(emptySet()) shouldBeEqualTo true
+            hasUpperBoundWithName("List<*>") shouldBeEqualTo true
+            hasUpperBoundWithName("Int") shouldBeEqualTo false
+            hasUpperBoundWithName("List<*>", "Int") shouldBeEqualTo true
+            hasUpperBoundWithName(listOf("List<*>")) shouldBeEqualTo true
+            hasUpperBoundWithName(listOf("Int")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundWithName(setOf("List<*>")) shouldBeEqualTo true
+            hasUpperBoundWithName(setOf("Int")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames("List<*>") shouldBeEqualTo true
+            hasUpperBoundsWithAllNames("List<*>", "CharSequence") shouldBeEqualTo true
+            hasUpperBoundsWithAllNames("List<*>", "Int") shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("List<*>")) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames(listOf("List<*>", "CharSequence")) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames(listOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("List<*>")) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames(setOf("List<*>", "CharSequence")) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames(setOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
+            hasUpperBound { upperBound -> upperBound.isGenericType } shouldBeEqualTo true
+            hasAllUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo true
+            hasAllUpperBounds { upperBound -> upperBound.isInterface } shouldBeEqualTo false
         }
     }
 
@@ -346,6 +438,52 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
     }
 
     @Test
+    fun `property-type-parameter-with-two-upper-bounds`() {
+        // given
+        val sut =
+            getSnippetFile("property-type-parameter-with-two-upper-bounds")
+                .properties()
+                .first()
+                .typeParameters
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            upperBounds.size shouldBeEqualTo 2
+            numUpperBounds shouldBeEqualTo 2
+            countUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo 2
+            countUpperBounds { upperBound -> upperBound.isGenericType } shouldBeEqualTo 1
+            hasUpperBounds() shouldBeEqualTo true
+            hasUpperBoundWithName(emptyList()) shouldBeEqualTo true
+            hasUpperBoundWithName(emptySet()) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames(emptyList()) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames(emptySet()) shouldBeEqualTo true
+            hasUpperBoundWithName("List<*>") shouldBeEqualTo true
+            hasUpperBoundWithName("Int") shouldBeEqualTo false
+            hasUpperBoundWithName("List<*>", "Int") shouldBeEqualTo true
+            hasUpperBoundWithName(listOf("List<*>")) shouldBeEqualTo true
+            hasUpperBoundWithName(listOf("Int")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundWithName(setOf("List<*>")) shouldBeEqualTo true
+            hasUpperBoundWithName(setOf("Int")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames("List<*>") shouldBeEqualTo true
+            hasUpperBoundsWithAllNames("List<*>", "CharSequence") shouldBeEqualTo true
+            hasUpperBoundsWithAllNames("List<*>", "Int") shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("List<*>")) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames(listOf("List<*>", "CharSequence")) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames(listOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("List<*>")) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames(setOf("List<*>", "CharSequence")) shouldBeEqualTo true
+            hasUpperBoundsWithAllNames(setOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
+            hasUpperBound { upperBound -> upperBound.isGenericType } shouldBeEqualTo true
+            hasAllUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo true
+            hasAllUpperBounds { upperBound -> upperBound.isInterface } shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `typealias-type-parameter-without-upper-bound`() {
         // given
         val sut =
@@ -377,5 +515,8 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypeparameter/snippet/forkoupperboundsprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope(
+            "core/declaration/kotypeparameter/snippet/forkoupperboundsprovider/",
+            fileName
+        )
 }

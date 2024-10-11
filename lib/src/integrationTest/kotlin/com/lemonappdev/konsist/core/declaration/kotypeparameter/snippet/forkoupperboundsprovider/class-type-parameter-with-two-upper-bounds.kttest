@@ -1,0 +1,1 @@
+class SampleClass<T> where  T : List<*>, T : CharSequence

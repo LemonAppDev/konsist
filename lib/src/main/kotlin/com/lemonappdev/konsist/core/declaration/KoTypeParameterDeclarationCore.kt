@@ -20,9 +20,11 @@ import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtTypeParameter
+import org.jetbrains.kotlin.psi.KtTypeReference
 
 internal class KoTypeParameterDeclarationCore private constructor(
-    override val ktTypeParameter: KtTypeParameter,
+    private val ktTypeParameter: KtTypeParameter,
+    override val ktTypeReferences: List<KtTypeReference>,
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoTypeParameterDeclaration,
     KoBaseTypeDeclarationCore,
@@ -54,10 +56,11 @@ internal class KoTypeParameterDeclarationCore private constructor(
 
         internal fun getInstance(
             ktTypeParameter: KtTypeParameter,
+            ktTypeReferences: List<KtTypeReference>,
             containingDeclaration: KoBaseDeclaration,
         ): KoTypeParameterDeclaration =
             cache.getOrCreateInstance(ktTypeParameter, containingDeclaration) {
-                KoTypeParameterDeclarationCore(ktTypeParameter, containingDeclaration)
+                KoTypeParameterDeclarationCore(ktTypeParameter, ktTypeReferences, containingDeclaration)
             }
     }
 }

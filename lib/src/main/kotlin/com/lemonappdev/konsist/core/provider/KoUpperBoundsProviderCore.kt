@@ -11,15 +11,11 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 internal interface KoUpperBoundsProviderCore :
     KoUpperBoundsProvider,
     KoBaseProviderCore {
-    val ktTypeParameter: KtTypeParameter
+    val ktTypeReferences: List<KtTypeReference>
 
     override val upperBounds: List<KoSourceDeclaration>
-        get() = ktTypeParameter
-            .children
-            .filterIsInstance<KtTypeReference>()
-            .map { typeReference ->
-                KoTypeDeclarationCore.getInstance(typeReference, this.castToKoBaseDeclaration())
-            }
+        get() = ktTypeReferences
+            .map { typeReference -> KoTypeDeclarationCore.getInstance(typeReference, this.castToKoBaseDeclaration()) }
             .sourceDeclarations()
 
     override val numUpperBounds: Int
