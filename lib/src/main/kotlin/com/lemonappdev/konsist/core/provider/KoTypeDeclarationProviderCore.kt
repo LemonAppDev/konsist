@@ -33,19 +33,19 @@ internal interface KoTypeDeclarationProviderCore :
     KoContainingDeclarationProviderCore {
     /*
     Remove in version 0.18.0
-    */
+     */
     val ktTypeReference: KtTypeReference?
         get() = null
 
     /*
     Remove in version 0.18.0
-    */
+     */
     val ktNameReferenceExpression: KtNameReferenceExpression?
         get() = null
 
     /*
     Remove in version 0.18.0
-    */
+     */
     val ktTypeProjection: KtTypeProjection?
         get() = null
 
@@ -99,11 +99,13 @@ internal interface KoTypeDeclarationProviderCore :
 
     override fun asKotlinTypeDeclaration(): KoKotlinTypeDeclaration? = koTypeDeclarationProviderDeclaration as? KoKotlinTypeDeclaration
 
-    override fun asFunctionTypeDeclaration(): KoFunctionTypeDeclaration? = koTypeDeclarationProviderDeclaration as? KoFunctionTypeDeclaration
+    override fun asFunctionTypeDeclaration(): KoFunctionTypeDeclaration? =
+        koTypeDeclarationProviderDeclaration as? KoFunctionTypeDeclaration
 
     override fun asGenericTypeDeclaration(): KoGenericTypeDeclaration? = koTypeDeclarationProviderDeclaration as? KoGenericTypeDeclaration
 
-    override fun asTypeParameterDeclaration(): KoTypeParameterDeclaration? = koTypeDeclarationProviderDeclaration as? KoTypeParameterDeclaration
+    override fun asTypeParameterDeclaration(): KoTypeParameterDeclaration? =
+        koTypeDeclarationProviderDeclaration as? KoTypeParameterDeclaration
 
     override fun asExternalTypeDeclaration(): KoExternalDeclaration? = koTypeDeclarationProviderDeclaration as? KoExternalDeclaration
 

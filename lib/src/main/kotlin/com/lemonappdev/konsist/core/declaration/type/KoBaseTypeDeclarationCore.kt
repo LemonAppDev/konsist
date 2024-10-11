@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.declaration.type
 
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
-import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.core.declaration.KoSourceDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -27,11 +26,12 @@ internal interface KoBaseTypeDeclarationCore :
     // is actually a reference to the imported declaration. In this case, returning `sourceDeclaration` would
     // not be accurate, so we return `this` to ensure the correct reference is maintained.
     private val baseDeclaration: KoSourceDeclaration
-        get() = if (this is KoImportAliasDeclaration) {
-            this
-        } else {
-            sourceDeclaration
-        }
+        get() =
+            if (this is KoImportAliasDeclaration) {
+                this
+            } else {
+                sourceDeclaration
+            }
 
     override val koTypeDeclarationProviderDeclaration: KoSourceDeclaration
         get() = baseDeclaration

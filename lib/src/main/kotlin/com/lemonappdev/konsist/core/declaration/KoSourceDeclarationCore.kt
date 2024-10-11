@@ -21,19 +21,19 @@ internal interface KoSourceDeclarationCore :
     KoStarProjectionProviderCore {
     /*
     Remove in version 0.18.0
-    */
+     */
     override val ktTypeReference: KtTypeReference?
         get() = null
 
     /*
     Remove in version 0.18.0
-    */
+     */
     override val ktNameReferenceExpression: KtNameReferenceExpression?
         get() = null
 
     /*
     Remove in version 0.18.0
-    */
+     */
     override val ktTypeProjection: KtTypeProjection?
         get() = null
-    }
+}
