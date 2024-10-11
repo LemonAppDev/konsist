@@ -152,6 +152,7 @@ object TypeUtil {
 
         val typeParameter =
             (parentDeclaration as? KoTypeParameterProviderCore)
+                ?.ktTypeParameterListOwner
                 ?.typeParameters
                 ?.firstOrNull { it.name == typeText }
 
