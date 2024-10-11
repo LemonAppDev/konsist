@@ -110,6 +110,58 @@ class KoTypeArgumentDeclarationForKoNameProviderTest {
         }
     }
 
+    @Test
+    fun `out-projection-type-argument-name`() {
+        // given
+        val sut =
+            getSnippetFile("out-projection-type-argument-name")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        assertSoftly(sut) {
+            it?.name shouldBeEqualTo "String"
+            it?.hasNameStartingWith("Str") shouldBeEqualTo true
+            it?.hasNameStartingWith("other") shouldBeEqualTo false
+            it?.hasNameEndingWith("ing") shouldBeEqualTo true
+            it?.hasNameEndingWith("other") shouldBeEqualTo false
+            it?.hasNameContaining("rin") shouldBeEqualTo true
+            it?.hasNameContaining("levari") shouldBeEqualTo false
+            it?.hasNameMatching(Regex("[a-zA-Z<>]+")) shouldBeEqualTo true
+            it?.hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `in-projection-type-argument-name`() {
+        // given
+        val sut =
+            getSnippetFile("in-projection-type-argument-name")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        assertSoftly(sut) {
+            it?.name shouldBeEqualTo "String"
+            it?.hasNameStartingWith("Str") shouldBeEqualTo true
+            it?.hasNameStartingWith("other") shouldBeEqualTo false
+            it?.hasNameEndingWith("ing") shouldBeEqualTo true
+            it?.hasNameEndingWith("other") shouldBeEqualTo false
+            it?.hasNameContaining("rin") shouldBeEqualTo true
+            it?.hasNameContaining("levari") shouldBeEqualTo false
+            it?.hasNameMatching(Regex("[a-zA-Z<>]+")) shouldBeEqualTo true
+            it?.hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kotypeargument/snippet/forkonameprovider/", fileName)
 }

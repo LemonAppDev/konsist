@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.type.kostarprojection
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.api.ext.list.returnTypes
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -17,8 +18,7 @@ class KoStarProjectionDeclarationForKoContainingFileProviderTest {
                 ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
-                ?.sourceDeclaration
-                ?.asStarProjectionDeclaration()
+                ?.sourceDeclaration as? KoStarProjectionDeclaration
 
         // then
         sut?.containingFile?.nameWithExtension shouldBeEqualTo "star-projection-containing-file.kt"

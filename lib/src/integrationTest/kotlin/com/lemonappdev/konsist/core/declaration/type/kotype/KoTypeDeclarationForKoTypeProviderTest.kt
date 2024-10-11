@@ -26,7 +26,6 @@ class KoTypeDeclarationForKoTypeProviderTest {
         isGenericType: Boolean,
         isTypeParameter: Boolean,
         isExternalType: Boolean,
-        isStarProjection: Boolean,
     ) {
         // given
         val sut =
@@ -52,7 +51,6 @@ class KoTypeDeclarationForKoTypeProviderTest {
             it?.isGenericType shouldBeEqualTo isGenericType
             it?.isTypeParameter shouldBeEqualTo isTypeParameter
             it?.isExternalType shouldBeEqualTo isExternalType
-            it?.isStarProjection shouldBeEqualTo isStarProjection
         }
     }
 
@@ -86,7 +84,6 @@ class KoTypeDeclarationForKoTypeProviderTest {
             it?.isGenericType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
             it?.isExternalType shouldBeEqualTo false
-            it?.isStarProjection shouldBeEqualTo true
         }
     }
 

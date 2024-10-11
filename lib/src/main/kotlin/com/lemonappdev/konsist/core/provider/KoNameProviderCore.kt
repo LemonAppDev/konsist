@@ -6,10 +6,10 @@ import org.jetbrains.kotlin.psi.KtElement
 internal interface KoNameProviderCore :
     KoNameProvider,
     KoBaseProviderCore {
-    val ktElement: KtElement?
+    val ktElement: KtElement
 
     override val name: String
-        get() = ktElement?.name ?: ""
+        get() = ktElement.name ?: ""
 
     override fun hasNameStartingWith(prefix: String): Boolean = name.startsWith(prefix)
 

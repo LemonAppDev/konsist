@@ -69,6 +69,38 @@ class KoTypeArgumentDeclarationTest {
         sut?.toString() shouldBeEqualTo "*"
     }
 
+    @Test
+    fun `out-projection-type-argument-to-string`() {
+        // given
+        val sut =
+            getSnippetFile("out-projection-type-argument-to-string")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        sut?.toString() shouldBeEqualTo "out String"
+    }
+
+    @Test
+    fun `in-projection-type-argument-to-string`() {
+        // given
+        val sut =
+            getSnippetFile("in-projection-type-argument-to-string")
+                .properties()
+                .first()
+                .type
+                ?.asGenericTypeDeclaration()
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        sut?.toString() shouldBeEqualTo "in String"
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kotypeargument/snippet/forgeneral/", fileName)
 }

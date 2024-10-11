@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
@@ -27,7 +27,7 @@ internal interface KoSourceDeclarationProviderCore :
     val ktTypeProjection: KtTypeProjection?
         get() = null
 
-    override val sourceDeclaration: KoBaseTypeDeclaration
+    override val sourceDeclaration: KoSourceDeclaration
         get() =
             TypeUtil.getBasicType(
                 listOf(ktTypeReference, ktNameReferenceExpression, ktTypeProjection),
@@ -35,7 +35,7 @@ internal interface KoSourceDeclarationProviderCore :
                 getDeclarationWithFqn(containingDeclaration) ?: containingDeclaration,
                 containingFile,
             )
-                ?: if (this is KoBaseTypeDeclaration) {
+                ?: if (this is KoSourceDeclaration) {
                     this
                 } else {
                     throw KoInternalException("Source declaration cannot be a null")
@@ -61,7 +61,7 @@ internal interface KoSourceDeclarationProviderCore :
             }
         }
 
-    override fun hasSourceDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean = predicate(sourceDeclaration)
+    override fun hasSourceDeclaration(predicate: (KoSourceDeclaration) -> Boolean): Boolean = predicate(sourceDeclaration)
 
     override fun hasSourceDeclarationOf(kClass: KClass<*>): Boolean =
         sourceDeclaration.hasClassDeclarationOf(kClass) ||

@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
 import kotlin.reflect.KClass
 
@@ -12,8 +12,8 @@ import kotlin.reflect.KClass
  * @return A list of source declarations that match the provided predicate, or all source declarations if no predicate is provided.
  */
 fun <T : KoSourceDeclarationProvider> List<T>.sourceDeclarations(
-    predicate: ((KoBaseTypeDeclaration) -> Boolean)? = null,
-): List<KoBaseTypeDeclaration> =
+    predicate: ((KoSourceDeclaration) -> Boolean)? = null,
+): List<KoSourceDeclaration> =
     filter {
         when (predicate) {
             null -> true
@@ -27,7 +27,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.sourceDeclarations(
  * @param predicate The predicate function to determine if a source declaration satisfies a condition.
  * @return A list containing source declarations with the specified source declaration.
  */
-fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): List<T> =
+fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclaration(predicate: (KoSourceDeclaration) -> Boolean): List<T> =
     filter { predicate(it.sourceDeclaration) }
 
 /**
@@ -36,7 +36,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclaration(predicate: (
  * @param predicate The predicate function to determine if a source declaration satisfies a condition.
  * @return A list containing source declarations without the specified source declaration.
  */
-fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): List<T> =
+fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclaration(predicate: (KoSourceDeclaration) -> Boolean): List<T> =
     filterNot { predicate(it.sourceDeclaration) }
 
 /**

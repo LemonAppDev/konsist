@@ -112,6 +112,11 @@ enum class KoModifier(
     OUT("out"),
 
     /**
+     * The `in` modifier.
+     */
+    IN("in"),
+
+    /**
      * The `vararg` modifier.
      */
     VARARG("vararg"),

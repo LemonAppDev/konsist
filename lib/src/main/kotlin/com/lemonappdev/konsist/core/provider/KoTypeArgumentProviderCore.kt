@@ -1,16 +1,13 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoTypeArgumentProvider
 import com.lemonappdev.konsist.core.declaration.KoTypeArgumentDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import org.jetbrains.kotlin.psi.KtProjectionKind
-import org.jetbrains.kotlin.psi.KtTypeArgumentList
 import org.jetbrains.kotlin.psi.KtTypeProjection
-import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
 import kotlin.reflect.KClass
 
@@ -23,43 +20,32 @@ internal interface KoTypeArgumentProviderCore :
         get() {
             val ktTypeProjections: List<KtTypeProjection> =
                 ktUserType
-                    ?.children
-                    ?.filterIsInstance<KtTypeArgumentList>()
-                    ?.flatMap { it.children.toList() }
-                    ?.filterIsInstance<KtTypeProjection>()
+                    ?.typeArguments
                     ?: emptyList()
 
-            val starProjections: List<KoTypeDeclaration> =
-                ktTypeProjections
-                    .filter { it.projectionKind == KtProjectionKind.STAR }
-                    .map { KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
-
-            val otherTypes: List<KoTypeDeclaration> =
-                ktTypeProjections
-                    .flatMap { it.children.toList() }
-                    .filterIsInstance<KtTypeReference>()
-                    .map { KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
-
-            val types = starProjections + otherTypes
-
-            if (types.isEmpty()) {
-                return null
-            }
-
             val typeArguments =
-                types.map {
-                    KoTypeArgumentDeclarationCore(
-                        it.name,
-                        if (it.isGenericType) {
-                            it.asGenericTypeDeclaration()?.genericType
-                                ?: it.sourceDeclaration
-                        } else {
-                            it.sourceDeclaration
-                        },
-                        if (it.isGenericType) it.asGenericTypeDeclaration()?.typeArguments else null,
-                        it.sourceDeclaration,
-                    )
-                }
+                ktTypeProjections
+                    .map {
+                        val type =
+                            it.typeReference?.let { typeReference ->
+                                KoTypeDeclarationCore.getInstance(typeReference, this.castToKoBaseDeclaration())
+                            } ?: KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration())
+
+                        KoTypeArgumentDeclarationCore(
+                            type.name,
+                            if (type.isGenericType) {
+                                type.asGenericTypeDeclaration()?.genericType
+                                    ?: type.sourceDeclaration
+                            } else {
+                                type.sourceDeclaration
+                            },
+                            if (type.isGenericType) type.asGenericTypeDeclaration()?.typeArguments else null,
+                            type.sourceDeclaration,
+                            it.projectionKind == KtProjectionKind.IN,
+                            it.projectionKind == KtProjectionKind.OUT,
+                            it,
+                        )
+                    }
 
             return typeArguments.ifEmpty { null }
         }

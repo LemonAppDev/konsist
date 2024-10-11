@@ -40,8 +40,6 @@ val rootPropertyWithImportAliasType: ImportAlias = ImportAlias
 val <T> T.rootPropertyWithTypeParameter: T
     get() = this
 
-val rootPropertyWithStarProjection: List<*> = emptyList<String>()
-
 object RootObject
 
 enum class RootEnumClass {

@@ -9,7 +9,7 @@ internal interface KoTextProviderCore :
     val psiElement: PsiElement
 
     override val text: String
-        get() = psiElement.text
+        get() = psiElement.text ?: ""
 
     override fun hasTextStartingWith(prefix: String): Boolean = text.startsWith(prefix)
 
