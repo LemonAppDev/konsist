@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 
-
 /**
  * An interface representing a Kotlin declaration that provides access to its upper bounds.
  */

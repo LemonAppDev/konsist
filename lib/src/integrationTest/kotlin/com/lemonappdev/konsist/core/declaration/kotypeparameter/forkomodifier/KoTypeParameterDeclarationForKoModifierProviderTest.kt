@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.declaration.kotypeparameter.forkomodifier
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.KoModifier.DATA
-import com.lemonappdev.konsist.api.KoModifier.IN
 import com.lemonappdev.konsist.api.KoModifier.OUT
 import com.lemonappdev.konsist.api.KoModifier.PROTECTED
 import org.amshove.kluent.assertSoftly

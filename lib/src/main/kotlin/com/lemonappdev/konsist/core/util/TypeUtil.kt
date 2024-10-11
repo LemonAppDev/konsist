@@ -157,7 +157,7 @@ object TypeUtil {
                 ?.firstOrNull { it.name == typeText }
 
         return when {
-            typeParameter != null -> KoTypeParameterDeclarationCore.getInstance(typeParameter, emptyList(),  containingFile)
+            typeParameter != null -> KoTypeParameterDeclarationCore.getInstance(typeParameter, emptyList(), containingFile)
             nestedType is KtTypeProjection -> KoStarProjectionDeclarationCore.getInstance(nestedType, parentDeclaration)
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
             nestedType is KtUserType && typeText != null -> {

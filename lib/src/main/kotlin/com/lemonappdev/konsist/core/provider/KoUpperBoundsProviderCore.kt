@@ -5,7 +5,6 @@ import com.lemonappdev.konsist.api.ext.list.sourceDeclarations
 import com.lemonappdev.konsist.api.provider.KoUpperBoundsProvider
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
-import org.jetbrains.kotlin.psi.KtTypeParameter
 import org.jetbrains.kotlin.psi.KtTypeReference
 
 internal interface KoUpperBoundsProviderCore :
@@ -14,9 +13,10 @@ internal interface KoUpperBoundsProviderCore :
     val ktTypeReferences: List<KtTypeReference>
 
     override val upperBounds: List<KoSourceDeclaration>
-        get() = ktTypeReferences
-            .map { typeReference -> KoTypeDeclarationCore.getInstance(typeReference, this.castToKoBaseDeclaration()) }
-            .sourceDeclarations()
+        get() =
+            ktTypeReferences
+                .map { typeReference -> KoTypeDeclarationCore.getInstance(typeReference, this.castToKoBaseDeclaration()) }
+                .sourceDeclarations()
 
     override val numUpperBounds: Int
         get() = upperBounds.size

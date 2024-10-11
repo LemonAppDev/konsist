@@ -1,11 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kotypeparameter
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.list.parameters
-import com.lemonappdev.konsist.api.ext.list.primaryConstructors
 import com.lemonappdev.konsist.api.ext.list.properties
-import com.lemonappdev.konsist.api.ext.list.returnTypes
-import net.bytebuddy.matcher.ElementMatchers.hasParameters
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -585,6 +581,6 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/kotypeparameter/snippet/forkoupperboundsprovider/",
-            fileName
+            fileName,
         )
 }

@@ -60,7 +60,7 @@ class KoTypeParameterDeclarationForKoInModifierProviderTest {
         // then
         sut.hasInModifier shouldBeEqualTo true
     }
-    
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/kotypeparameter/forkomodifier/snippet/forkoinmodifierprovider/",
