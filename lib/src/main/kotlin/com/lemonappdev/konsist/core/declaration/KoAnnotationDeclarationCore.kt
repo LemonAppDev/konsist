@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -24,6 +25,7 @@ import org.jetbrains.kotlin.psi.KtValueArgumentList
 internal class KoAnnotationDeclarationCore private constructor(
     private val ktAnnotationEntry: KtAnnotationEntry,
 ) : KoAnnotationDeclaration,
+    KoSourceDeclarationCore,
     KoBaseProviderCore,
     KoArgumentProviderCore,
     KoContainingFileProviderCore,

@@ -1,0 +1,4 @@
+import com.lemonappdev.konsist.testdata.SAMPLE_PROPERTY as SampleImportAlias
+
+val exampleProperty: Int
+    get() = SampleImportAlias

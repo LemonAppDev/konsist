@@ -84,7 +84,8 @@ internal interface KoTypeDeclarationProviderCore :
             }
         }
 
-    val koTypeDeclarationProviderDeclaration: KoSourceDeclaration
+    val koTypeDeclarationProviderDeclaration: KoSourceDeclaration?
+        get() = null
 
     override fun asClassDeclaration(): KoClassDeclaration? = koTypeDeclarationProviderDeclaration as? KoClassDeclaration
 

@@ -18,7 +18,8 @@ internal interface KoTypeProviderCore :
     KoTypeProvider,
     KoNameProviderCore,
     KoBaseProviderCore {
-    val koTypeProviderDeclaration: KoSourceDeclaration
+    val koTypeProviderDeclaration: KoSourceDeclaration?
+        get() = null
 
     override val isKotlinBasicType: Boolean
         get() = isKotlinType && TypeUtil.isKotlinBasicType(name)
