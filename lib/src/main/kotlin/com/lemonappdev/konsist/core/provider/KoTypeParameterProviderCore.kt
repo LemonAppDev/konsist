@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.provider.KoTypeParameterProvider
 import com.lemonappdev.konsist.core.declaration.KoTypeParameterDeclarationCore
@@ -56,4 +57,46 @@ internal interface KoTypeParameterProviderCore :
                         this.castToKoBaseDeclaration(),
                     )
                 }
+
+    override val numTypeParameters: Int
+        get() = typeParameters.size
+
+    override fun countTypeParameters(predicate: (KoTypeParameterDeclaration) -> Boolean): Int =
+        typeParameters.count { predicate(it) }
+
+    override fun hasTypeParameters(): Boolean = typeParameters.isNotEmpty()
+
+    override fun hasTypeParameterWithName(
+        name: String,
+        vararg names: String,
+    ): Boolean = hasTypeParameterWithName(listOf(name, *names))
+
+    override fun hasTypeParameterWithName(names: Collection<String>): Boolean =
+        when {
+            names.isEmpty() -> hasTypeParameters()
+            else ->
+                names.any {
+                    typeParameters.any { parameter -> it == parameter.name }
+                }
+        }
+
+    override fun hasTypeParametersWithAllNames(
+        name: String,
+        vararg names: String,
+    ): Boolean = hasTypeParametersWithAllNames(listOf(name, *names))
+
+    override fun hasTypeParametersWithAllNames(names: Collection<String>): Boolean =
+        when {
+            names.isEmpty() -> hasTypeParameters()
+            else ->
+                names.all {
+                    typeParameters.any { parameter -> it == parameter.name }
+                }
+        }
+
+    override fun hasTypeParameter(predicate: (KoTypeParameterDeclaration) -> Boolean): Boolean =
+        typeParameters.any(predicate)
+
+    override fun hasAllTypeParameters(predicate: (KoTypeParameterDeclaration) -> Boolean): Boolean =
+        typeParameters.all(predicate)
 }
