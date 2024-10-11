@@ -42,7 +42,7 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
             ?.projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeargument/snippet/" +
-                        "forkopathprovider/not-generic-type-argument-project-file-path.kt",
+                    "forkopathprovider/not-generic-type-argument-project-file-path.kt",
             )
     }
 
@@ -124,7 +124,7 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
             ?.projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeargument/snippet/" +
-                        "forkopathprovider/generic-type-argument-project-file-path.kt",
+                    "forkopathprovider/generic-type-argument-project-file-path.kt",
             )
     }
 
@@ -206,7 +206,7 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
             ?.projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeargument/snippet/" +
-                        "forkopathprovider/generic-complex-type-argument-project-file-path.kt",
+                    "forkopathprovider/generic-complex-type-argument-project-file-path.kt",
             )
     }
 
@@ -288,7 +288,7 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
             ?.projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeargument/snippet/" +
-                        "forkopathprovider/star-projection-type-argument-project-file-path.kt",
+                    "forkopathprovider/star-projection-type-argument-project-file-path.kt",
             )
     }
 
@@ -370,7 +370,7 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
             ?.projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeargument/snippet/" +
-                        "forkopathprovider/out-projection-type-argument-project-file-path.kt",
+                    "forkopathprovider/out-projection-type-argument-project-file-path.kt",
             )
     }
 
@@ -452,7 +452,7 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
             ?.projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeargument/snippet/" +
-                        "forkopathprovider/in-projection-type-argument-project-file-path.kt",
+                    "forkopathprovider/in-projection-type-argument-project-file-path.kt",
             )
     }
 

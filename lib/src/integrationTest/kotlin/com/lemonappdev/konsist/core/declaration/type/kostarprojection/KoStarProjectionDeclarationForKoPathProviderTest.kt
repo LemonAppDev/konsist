@@ -46,7 +46,7 @@ class KoStarProjectionDeclarationForKoPathProviderTest {
             ?.projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/type/kostarprojection/snippet/" +
-                        "forkopathprovider/star-projection-path.kt",
+                    "forkopathprovider/star-projection-path.kt",
             )
     }
 
