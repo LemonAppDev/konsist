@@ -1,0 +1,1 @@
+typealias SampleTypeAlias<T, V> = (T, V) -> Unit

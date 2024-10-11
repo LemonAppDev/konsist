@@ -1,17 +1,17 @@
-package com.lemonappdev.konsist.core.declaration.kofunction
+package com.lemonappdev.konsist.core.declaration.koproperty
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFunctionDeclarationForKoTypeParameterProviderTest {
+class KoPropertyDeclarationForKoTypeParameterProviderTest {
     @Test
-    fun `function-contains-no-type-parameters`() {
+    fun `property-contains-no-type-parameters`() {
         // given
         val sut =
-            getSnippetFile("function-contains-no-type-parameters")
-                .functions()
+            getSnippetFile("property-contains-no-type-parameters")
+                .properties()
                 .first()
 
         // then
@@ -36,11 +36,11 @@ class KoFunctionDeclarationForKoTypeParameterProviderTest {
     }
 
     @Test
-    fun `function-contains-one-type-parameter`() {
+    fun `property-contains-one-type-parameter`() {
         // given
         val sut =
-            getSnippetFile("function-contains-one-type-parameter")
-                .functions()
+            getSnippetFile("property-contains-one-type-parameter")
+                .properties()
                 .first()
 
         // then
@@ -75,11 +75,11 @@ class KoFunctionDeclarationForKoTypeParameterProviderTest {
     }
 
     @Test
-    fun `function-contains-two-type-parameters`() {
+    fun `property-contains-two-type-parameters`() {
         // given
         val sut =
-            getSnippetFile("function-contains-two-type-parameters")
-                .functions()
+            getSnippetFile("property-contains-two-type-parameters")
+                .properties()
                 .first()
 
         // then
@@ -119,5 +119,6 @@ class KoFunctionDeclarationForKoTypeParameterProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kofunction/snippet/forkotypeparameterprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koproperty/snippet/forkotypeparameterprovider/", fileName)
 }
+

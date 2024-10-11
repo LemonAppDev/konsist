@@ -1,17 +1,17 @@
-package com.lemonappdev.konsist.core.declaration.kofunction
+package com.lemonappdev.konsist.core.declaration.kotypealias
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFunctionDeclarationForKoTypeParameterProviderTest {
+class KoTypeAliasDeclarationForKoTypeParameterProviderTest {
     @Test
-    fun `function-contains-no-type-parameters`() {
+    fun `typealias-contains-no-type-parameters`() {
         // given
         val sut =
-            getSnippetFile("function-contains-no-type-parameters")
-                .functions()
+            getSnippetFile("typealias-contains-no-type-parameters")
+                .typeAliases
                 .first()
 
         // then
@@ -36,11 +36,11 @@ class KoFunctionDeclarationForKoTypeParameterProviderTest {
     }
 
     @Test
-    fun `function-contains-one-type-parameter`() {
+    fun `typealias-contains-one-type-parameter`() {
         // given
         val sut =
-            getSnippetFile("function-contains-one-type-parameter")
-                .functions()
+            getSnippetFile("typealias-contains-one-type-parameter")
+                .typeAliases
                 .first()
 
         // then
@@ -75,11 +75,11 @@ class KoFunctionDeclarationForKoTypeParameterProviderTest {
     }
 
     @Test
-    fun `function-contains-two-type-parameters`() {
+    fun `typealias-contains-two-type-parameters`() {
         // given
         val sut =
-            getSnippetFile("function-contains-two-type-parameters")
-                .functions()
+            getSnippetFile("typealias-contains-two-type-parameters")
+                .typeAliases
                 .first()
 
         // then
@@ -119,5 +119,5 @@ class KoFunctionDeclarationForKoTypeParameterProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kofunction/snippet/forkotypeparameterprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypealias/snippet/forkotypeparameterprovider/", fileName)
 }
