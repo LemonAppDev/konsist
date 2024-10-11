@@ -36,7 +36,7 @@ internal interface KoSourceDeclarationProviderCore :
                 getDeclarationWithFqn(containingDeclaration) ?: containingDeclaration,
                 containingFile,
             )
-                ?: if (this is KoBaseTypeDeclaration) {
+                ?: if (this is KoSourceDeclaration) {
                     this
                 } else {
                     throw KoInternalException("Source declaration cannot be a null")
