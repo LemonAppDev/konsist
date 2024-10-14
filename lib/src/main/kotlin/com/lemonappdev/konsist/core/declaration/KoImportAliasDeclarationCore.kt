@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -11,6 +12,7 @@ import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
@@ -27,7 +29,8 @@ internal class KoImportAliasDeclarationCore private constructor(
     KoLocationProviderCore,
     KoPathProviderCore,
     KoModuleProviderCore,
-    KoSourceSetProviderCore {
+    KoSourceSetProviderCore,
+    KoSourceDeclarationProviderCore {
     override val psiElement: PsiElement by lazy { ktImportAlias }
 
     override val ktElement: KtElement by lazy { ktImportAlias }
@@ -39,6 +42,8 @@ internal class KoImportAliasDeclarationCore private constructor(
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
     override val importDirective: KoImportDeclaration by lazy { containingDeclaration }
+
+    override val sourceDeclaration: KoSourceDeclaration by lazy { importDirective.sourceDeclaration }
 
     override fun toString(): String = text
 

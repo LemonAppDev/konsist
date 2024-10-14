@@ -17,6 +17,7 @@ import com.lemonappdev.konsist.api.provider.KoTextProvider
  */
 interface KoAnnotationDeclaration :
     KoBaseDeclaration,
+    KoSourceDeclaration,
     KoBaseProvider,
     KoArgumentProvider,
     KoContainingFileProvider,

@@ -1,13 +1,21 @@
 package com.lemonappdev.konsist.core.model
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
+import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
 
 object DataCore {
+    val declarations: List<KoBaseDeclaration> by lazy {
+        Konsist
+            .scopeFromProject()
+            .declarationsOf()
+    }
+
     val classes: List<KoClassDeclaration> by lazy {
         Konsist
             .scopeFromProject()

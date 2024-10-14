@@ -59,6 +59,7 @@ internal class KoFunctionDeclarationCore private constructor(
     override val ktFunction: KtFunction,
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoFunctionDeclaration,
+    KoSourceDeclarationCore,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
     KoBodyProviderCore,

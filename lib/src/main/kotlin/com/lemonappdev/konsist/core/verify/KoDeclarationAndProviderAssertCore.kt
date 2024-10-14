@@ -243,7 +243,7 @@ private fun getCheckFailedMessage(
                             ?.substringAfter(konsistDeclarationClassNamePrefix)
                             ?.substringBeforeLast(konsistDeclarationClassNameSuffix)
 
-                    "${it.path} ($name $declarationType)"
+                    "${it.path} ${getFailedNameWithDeclarationType(name, declarationType)}"
                 }
 
                 is KoBaseProvider -> {
@@ -255,7 +255,7 @@ private fun getCheckFailedMessage(
                             ?.substringAfter(konsistDeclarationClassNamePrefix)
                             ?.substringBeforeLast(konsistDeclarationClassNameSuffix)
 
-                    "${(it as? KoLocationProvider)?.location} ($name $declarationType)"
+                    "${(it as? KoLocationProvider)?.location} ${getFailedNameWithDeclarationType(name, declarationType)}"
                 }
 
                 else -> {
@@ -269,6 +269,11 @@ private fun getCheckFailedMessage(
 
     return "Assert '$testName' was violated (${failedItems.size} $times).${customMessage}Invalid $types:\n$failedDeclarationsMessage"
 }
+
+private fun getFailedNameWithDeclarationType(
+    name: String?,
+    declarationType: String?,
+) = "($name) ($declarationType)"
 
 private fun getEmptyResult(
     items: List<*>,

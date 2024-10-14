@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
@@ -18,6 +19,9 @@ import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.util.TypeUtil
+import org.jetbrains.kotlin.psi.KtNameReferenceExpression
+import org.jetbrains.kotlin.psi.KtTypeProjection
+import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import kotlin.reflect.KClass
 
@@ -26,8 +30,25 @@ internal interface KoTypeDeclarationProviderCore :
     KoTypeDeclarationProvider,
     KoBaseProviderCore,
     KoContainingFileProviderCore,
-    KoContainingDeclarationProviderCore,
-    KoSourceDeclarationProviderCore {
+    KoContainingDeclarationProviderCore {
+    /*
+    Remove in version 0.18.0
+     */
+    val ktTypeReference: KtTypeReference?
+        get() = null
+
+    /*
+    Remove in version 0.18.0
+     */
+    val ktNameReferenceExpression: KtNameReferenceExpression?
+        get() = null
+
+    /*
+    Remove in version 0.18.0
+     */
+    val ktTypeProjection: KtTypeProjection?
+        get() = null
+
     @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("sourceDeclaration"))
     override val declaration: KoBaseTypeDeclaration
         get() =
@@ -63,25 +84,30 @@ internal interface KoTypeDeclarationProviderCore :
             }
         }
 
-    override fun asClassDeclaration(): KoClassDeclaration? = sourceDeclaration as? KoClassDeclaration
+    val koTypeDeclarationProviderDeclaration: KoSourceDeclaration?
+        get() = null
 
-    override fun asObjectDeclaration(): KoObjectDeclaration? = sourceDeclaration as? KoObjectDeclaration
+    override fun asClassDeclaration(): KoClassDeclaration? = koTypeDeclarationProviderDeclaration as? KoClassDeclaration
 
-    override fun asInterfaceDeclaration(): KoInterfaceDeclaration? = sourceDeclaration as? KoInterfaceDeclaration
+    override fun asObjectDeclaration(): KoObjectDeclaration? = koTypeDeclarationProviderDeclaration as? KoObjectDeclaration
 
-    override fun asTypeAliasDeclaration(): KoTypeAliasDeclaration? = sourceDeclaration as? KoTypeAliasDeclaration
+    override fun asInterfaceDeclaration(): KoInterfaceDeclaration? = koTypeDeclarationProviderDeclaration as? KoInterfaceDeclaration
 
-    override fun asImportAliasDeclaration(): KoImportAliasDeclaration? = sourceDeclaration as? KoImportAliasDeclaration
+    override fun asTypeAliasDeclaration(): KoTypeAliasDeclaration? = koTypeDeclarationProviderDeclaration as? KoTypeAliasDeclaration
 
-    override fun asKotlinTypeDeclaration(): KoKotlinTypeDeclaration? = sourceDeclaration as? KoKotlinTypeDeclaration
+    override fun asImportAliasDeclaration(): KoImportAliasDeclaration? = koTypeDeclarationProviderDeclaration as? KoImportAliasDeclaration
 
-    override fun asFunctionTypeDeclaration(): KoFunctionTypeDeclaration? = sourceDeclaration as? KoFunctionTypeDeclaration
+    override fun asKotlinTypeDeclaration(): KoKotlinTypeDeclaration? = koTypeDeclarationProviderDeclaration as? KoKotlinTypeDeclaration
 
-    override fun asGenericTypeDeclaration(): KoGenericTypeDeclaration? = sourceDeclaration as? KoGenericTypeDeclaration
+    override fun asFunctionTypeDeclaration(): KoFunctionTypeDeclaration? =
+        koTypeDeclarationProviderDeclaration as? KoFunctionTypeDeclaration
 
-    override fun asTypeParameterDeclaration(): KoTypeParameterDeclaration? = sourceDeclaration as? KoTypeParameterDeclaration
+    override fun asGenericTypeDeclaration(): KoGenericTypeDeclaration? = koTypeDeclarationProviderDeclaration as? KoGenericTypeDeclaration
 
-    override fun asExternalTypeDeclaration(): KoExternalDeclaration? = sourceDeclaration as? KoExternalDeclaration
+    override fun asTypeParameterDeclaration(): KoTypeParameterDeclaration? =
+        koTypeDeclarationProviderDeclaration as? KoTypeParameterDeclaration
+
+    override fun asExternalTypeDeclaration(): KoExternalDeclaration? = koTypeDeclarationProviderDeclaration as? KoExternalDeclaration
 
     override fun hasClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
