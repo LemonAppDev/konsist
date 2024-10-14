@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.api
 
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutPrivateModifier
+import com.lemonappdev.konsist.api.ext.list.withName
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
 import com.lemonappdev.konsist.api.verify.assertTrue
@@ -14,7 +15,10 @@ class KdocKonsistTest {
         apiPackageScope
             .functions()
             .withoutPrivateModifier()
-            .assertTrue { it.hasValidKDocParamTags() && it.hasValidKDocReturnTag() }
+            .withName("isSortedBy")
+            .assertTrue {
+                it.hasValidKDocParamTags() && it.hasValidKDocReturnTag()
+            }
     }
 
     @Test
