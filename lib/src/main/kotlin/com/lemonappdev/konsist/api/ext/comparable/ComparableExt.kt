@@ -7,8 +7,6 @@ package com.lemonappdev.konsist.api.ext.comparable
  * when transformed by the given selector function. The order is determined by the
  * natural order of the [Comparable] type [R] returned by the selector.
  *
- * @param T The type of elements in the list.
- * @param R The comparable type returned by the selector function.
  * @param selector A function that extracts a comparable value from an element.
  * @param ascending Determines the order of sorting. If true (default), checks for ascending order.
  *                  If false, checks for descending order.

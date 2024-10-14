@@ -50,6 +50,7 @@ class DeclarationKonsistTest {
             .assertTrue {
                 val includeNestedParameter =
                     it.parameters.indexOfFirst { parameter -> parameter.name == "includeNested" }
+
                 val includeLocalParameter =
                     it.parameters.indexOfFirst { parameter -> parameter.name == "includeLocal" }
 
@@ -72,7 +73,6 @@ class DeclarationKonsistTest {
             .classesAndInterfaces()
             .assertTrue {
                 val name = it.name.removeSuffix("Core")
-
                 it.hasParentsWithAllNames("KoBaseProviderCore", name, indirectParents = true)
             }
     }
