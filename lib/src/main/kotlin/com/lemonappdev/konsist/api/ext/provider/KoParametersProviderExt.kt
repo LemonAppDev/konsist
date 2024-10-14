@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.api.ext.provider
 import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
+import com.lemonappdev.konsist.core.provider.KoTypeParameterProviderCore
 
 /**
  * Determines whatever declaration has a valid KDoc with a PARAM tag.
@@ -18,7 +19,17 @@ fun <T : KoParametersProvider> T.hasValidKDocParamTags(): Boolean =
                 else -> null
             }
 
-        parameters.map { it.name }.sorted() == kDoc?.paramTags?.map { it.value }?.sorted()
+        val typeParameterNames = (this as? KoTypeParameterProviderCore)
+            ?.typeParameters
+            ?.mapNotNull { it.name }
+            .orEmpty()
+
+        val functionParameterNames = parameters
+            .map { it.name }
+
+        val parameterNames = typeParameterNames + functionParameterNames
+
+        parameterNames.sorted() == kDoc?.paramTags?.map { it.value }?.sorted()
     } else {
         (this as? KoKDocProvider)?.kDoc?.paramTags?.isEmpty() ?: true
     }
