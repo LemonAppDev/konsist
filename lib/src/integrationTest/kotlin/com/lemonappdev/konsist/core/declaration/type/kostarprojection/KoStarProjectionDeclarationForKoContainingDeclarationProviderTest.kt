@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.type.kostarprojection
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.api.ext.list.returnTypes
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.shouldBeEqualTo
@@ -18,8 +19,7 @@ class KoStarProjectionDeclarationForKoContainingDeclarationProviderTest {
                 ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
-                ?.sourceDeclaration
-                ?.asStarProjectionDeclaration()
+                ?.sourceDeclaration as? KoStarProjectionDeclaration
 
         // then
         (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo "sampleFunction"

@@ -10,7 +10,6 @@ import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeParameterDeclaration
 import kotlin.reflect.KClass
 
@@ -118,14 +117,6 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
      * @return the external declaration associated with this type.
      */
     fun asExternalTypeDeclaration(): KoExternalDeclaration?
-
-    /**
-     * Represents the star projection declaration associated with this type.
-     * A star projection is a wildcard that can represent any type in generic type parameters.
-     *
-     * @return the star projection declaration associated with this type.
-     */
-    fun asStarProjectionDeclaration(): KoStarProjectionDeclaration?
 
     /**
      * Determines whatever type has a specified declaration.
@@ -257,15 +248,6 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
      * `null`), `false` otherwise.
      */
     fun hasTypeParameterDeclaration(predicate: ((KoTypeParameterDeclaration) -> Boolean)? = null): Boolean
-
-    /**
-     * Whether type has a specified star projection declaration.
-     *
-     * @param predicate The predicate generic used to determine if a star projection declaration satisfies a condition.
-     * @return `true` if the type has the specified star projection declaration (or any star projection declaration if [predicate] is
-     * `null`), `false` otherwise.
-     */
-    fun hasStarProjectionDeclaration(predicate: ((KoStarProjectionDeclaration) -> Boolean)? = null): Boolean
 
     /**
      * Whether type has a specified external type declaration.

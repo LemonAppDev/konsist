@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.util
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
@@ -24,6 +24,7 @@ import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunctionType
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtNullableType
+import org.jetbrains.kotlin.psi.KtProjectionKind
 import org.jetbrains.kotlin.psi.KtTypeArgumentList
 import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
@@ -36,7 +37,7 @@ object TypeUtil {
         isExtension: Boolean,
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
-    ): KoBaseTypeDeclaration? {
+    ): KoSourceDeclaration? {
         val notNullTypes = types.filterNotNull()
 
         val type =
@@ -58,7 +59,22 @@ object TypeUtil {
             } else if (notNullTypes.filterIsInstance<KtNameReferenceExpression>().isNotEmpty()) {
                 notNullTypes.filterIsInstance<KtNameReferenceExpression>().firstOrNull()
             } else if (notNullTypes.filterIsInstance<KtTypeProjection>().isNotEmpty()) {
-                notNullTypes.filterIsInstance<KtTypeProjection>().firstOrNull()
+                val typeProjection =
+                    notNullTypes
+                        .filterIsInstance<KtTypeProjection>()
+                        .firstOrNull()
+
+                if (typeProjection?.projectionKind == KtProjectionKind.STAR) {
+                    return KoStarProjectionDeclarationCore.getInstance(typeProjection, parentDeclaration)
+                } else {
+                    typeProjection
+                        ?.children
+                        // The last item is chosen because when a type is preceded by an type projection modifier (out or in),
+                        // the type being searched for is the last item in the list.
+                        ?.lastOrNull()
+                        ?.children
+                        ?.firstOrNull()
+                }
             } else {
                 null
             }
@@ -90,7 +106,7 @@ object TypeUtil {
     ): Boolean = kClass.qualifiedName == (type?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
 
     internal fun hasTypeOf(
-        type: KoBaseTypeDeclaration?,
+        type: KoSourceDeclaration?,
         kClass: KClass<*>,
     ): Boolean = kClass.qualifiedName == (type as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
 
@@ -99,7 +115,7 @@ object TypeUtil {
         type: PsiElement?,
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
-    ): KoBaseTypeDeclaration? {
+    ): KoSourceDeclaration? {
         val nestedType =
             if (type is KtNullableType) {
                 type

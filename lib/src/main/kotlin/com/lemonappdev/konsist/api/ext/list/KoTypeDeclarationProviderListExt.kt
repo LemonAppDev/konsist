@@ -12,7 +12,6 @@ import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
 import kotlin.reflect.KClass
@@ -205,20 +204,6 @@ fun <T : KoTypeDeclarationProvider> List<T>.typeParameterDeclarations(
 ): List<KoTypeParameterDeclaration> =
     filter { it.hasTypeParameterDeclaration(predicate) }
         .mapNotNull { it.asTypeParameterDeclaration() }
-
-/**
- * List containing star projection declarations associated with types.
- *
- * @param predicate A function that defines the condition to be met by the star projection declaration.
- *                  If null, all star projection declarations are included.
- * @return A list of star projection declarations that match the provided predicate, or all star projection declarations
- * if no predicate is provided.
- */
-fun <T : KoTypeDeclarationProvider> List<T>.starProjectionDeclarations(
-    predicate: ((KoStarProjectionDeclaration) -> Boolean)? = null,
-): List<KoStarProjectionDeclaration> =
-    filter { it.hasStarProjectionDeclaration(predicate) }
-        .mapNotNull { it.asStarProjectionDeclaration() }
 
 /**
  * List containing external type declarations associated with types.
@@ -818,44 +803,6 @@ fun <T : KoTypeDeclarationProvider> List<T>.withoutTypeParameterDeclaration(
             else ->
                 it
                     .asTypeParameterDeclaration()
-                    ?.let { externalTypeDeclaration -> predicate(externalTypeDeclaration) } ?: false
-        }
-    }
-
-/**
- * List containing declarations with the specified star projection declaration.
- *
- * @param predicate The predicate function to determine if a star projection declaration satisfies a condition.
- * @return A list containing declarations with the specified star projection declaration.
- */
-fun <T : KoTypeDeclarationProvider> List<T>.withStarProjectionDeclaration(
-    predicate: ((KoStarProjectionDeclaration) -> Boolean)? = null,
-): List<T> =
-    filter {
-        when (predicate) {
-            null -> it.hasStarProjectionDeclaration()
-            else ->
-                it
-                    .asStarProjectionDeclaration()
-                    ?.let { externalTypeDeclaration -> predicate(externalTypeDeclaration) } ?: false
-        }
-    }
-
-/**
- * List containing declarations without the specified star projection declaration.
- *
- * @param predicate The predicate function to determine if a star projection declaration satisfies a condition.
- * @return A list containing declarations without the specified star projection declaration.
- */
-fun <T : KoTypeDeclarationProvider> List<T>.withoutStarProjectionDeclaration(
-    predicate: ((KoStarProjectionDeclaration) -> Boolean)? = null,
-): List<T> =
-    filterNot {
-        when (predicate) {
-            null -> it.hasStarProjectionDeclaration()
-            else ->
-                it
-                    .asStarProjectionDeclaration()
                     ?.let { externalTypeDeclaration -> predicate(externalTypeDeclaration) } ?: false
         }
     }
