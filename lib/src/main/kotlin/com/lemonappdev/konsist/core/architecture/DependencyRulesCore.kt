@@ -204,8 +204,8 @@ class DependencyRulesCore : DependencyRules {
 }
 
 internal enum class Status {
-    DEPENDENT_ON_NOTHING,
     DEPEND_ON_LAYER,
-    NOT_DEPEND_ON_LAYER,
+    DEPENDENT_ON_NOTHING,
     NONE,
+    NOT_DEPEND_ON_LAYER,
 }

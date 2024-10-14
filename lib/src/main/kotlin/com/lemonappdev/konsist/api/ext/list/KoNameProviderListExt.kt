@@ -271,3 +271,36 @@ fun <T : KoNameProvider> List<T>.withoutNameMatching(regexes: Collection<Regex>)
             else -> regexes.any { regex -> it.hasNameMatching(regex) }
         }
     }
+
+/**
+ * Extension function to check if a collection of KoNameProvider is sorted by name.
+ *
+ * @param ascending Determines the order of sorting. If true (default), checks for ascending order.
+ *                  If false, checks for descending order.
+ * @param ignoreCase Determines whether the comparison should be case-insensitive.
+ *                   Default is true.
+ * @return true if the collection is sorted by name in the specified order, false otherwise.
+ */
+fun List<KoNameProvider>.isSortedByName(
+    ascending: Boolean = true,
+    ignoreCase: Boolean = true,
+): Boolean {
+    if (size <= 1) return true
+
+    val iterator = iterator()
+    var previous = iterator.next().name
+
+    while (iterator.hasNext()) {
+        val current = iterator.next().name
+
+        val comparisonResult = previous.compareTo(current, ignoreCase = ignoreCase)
+
+        if ((ascending && comparisonResult > 0) || (!ascending && comparisonResult < 0)) {
+            return false
+        }
+
+        previous = current
+    }
+
+    return true
+}
