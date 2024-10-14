@@ -104,7 +104,7 @@ class AssertTrueOnProviderListTest {
         try {
             sut.assertTrue { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("(SampleClass ClassDeclaration)")
+            e.message?.shouldContain("(SampleClass) (ClassDeclaration)")
                 ?: throw e
         }
     }
