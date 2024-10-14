@@ -227,53 +227,37 @@ private fun getCheckFailedMessage(
     testName: String,
     additionalMessage: String?,
 ): String {
-    var types = ""
-    val failedDeclarationsMessage =
-        failedItems.joinToString("\n") {
-            val konsistDeclarationClassNamePrefix = "Ko"
-            val konsistDeclarationClassNameSuffix = "Core"
+    val (types, failedDeclarationsMessage) = processFailedItems(failedItems)
 
-            when (it) {
-                is KoFileDeclaration -> {
-                    types = "files"
-                    val name = it.name
-                    val declarationType =
-                        it::class
-                            .simpleName
-                            ?.substringAfter(konsistDeclarationClassNamePrefix)
-                            ?.substringBeforeLast(konsistDeclarationClassNameSuffix)
-
-                    "${it.path} ${getFailedNameWithDeclarationType(name, declarationType)}"
-                }
-
-                is KoBaseProvider -> {
-                    types = "declarations"
-                    val name = (it as? KoNameProvider)?.name
-                    val declarationType =
-                        it::class
-                            .simpleName
-                            ?.substringAfter(konsistDeclarationClassNamePrefix)
-                            ?.substringBeforeLast(konsistDeclarationClassNameSuffix)
-
-                    "${(it as? KoLocationProvider)?.location} ${getFailedNameWithDeclarationType(name, declarationType)}"
-                }
-
-                else -> {
-                    ""
-                }
-            }
-        }
-
-    val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
+    val customMessage = additionalMessage?.let { "\n$it\n" } ?: " "
     val times = if (failedItems.size == 1) "time" else "times"
 
-    return "Assert '$testName' was violated (${failedItems.size} $times).${customMessage}Invalid $types:\n$failedDeclarationsMessage"
+    return "Assert '$testName' was violated (${failedItems.size} $times).$customMessage" +
+            "Invalid $types:\n$failedDeclarationsMessage"
 }
 
-private fun getFailedNameWithDeclarationType(
-    name: String?,
-    declarationType: String?,
-) = "($name) ($declarationType)"
+private fun processFailedItems(failedItems: List<*>): Pair<String, String> {
+    var types = ""
+    val failedDeclarationsMessage = failedItems.joinToString("\n") { item ->
+        when (item) {
+            is KoFileDeclaration -> {
+                types = "files"
+                "${item.path} ${getFailedNameWithDeclarationType(item.name, item.getDeclarationType())}"
+            }
+            is KoBaseProvider -> {
+                types = "declarations"
+                val name = (item as? KoNameProvider)?.name
+                val location = (item as? KoLocationProvider)?.location
+                "$location ${getFailedNameWithDeclarationType(name, item.getDeclarationType())}"
+            }
+            else -> ""
+        }
+    }
+    return Pair(types, failedDeclarationsMessage)
+}
+
+private fun getFailedNameWithDeclarationType(name: String?, declarationType: String?) =
+    if (name != null) "($declarationType '$name')" else "($declarationType)"
 
 private fun getEmptyResult(
     items: List<*>,
@@ -331,3 +315,9 @@ private fun getNullResult(
         throw KoAssertionFailedException(message)
     }
 }
+
+private fun Any.getDeclarationType(): String? =
+    this::class.simpleName
+        ?.removePrefix("Ko")
+        ?.removeSuffix("DeclarationCore")
+
