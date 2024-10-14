@@ -22,10 +22,10 @@ internal interface KoTypeProviderCore :
         get() = null
 
     override val isKotlinBasicType: Boolean
-        get() = isKotlinType && TypeUtil.isKotlinBasicType(name)
+        get() = TypeUtil.isKotlinBasicType(name)
 
     override val isKotlinCollectionType: Boolean
-        get() = isKotlinType && TypeUtil.isKotlinCollectionTypes(name)
+        get() = TypeUtil.isKotlinCollectionTypes(name)
 
     override val isClass: Boolean
         get() = koTypeProviderDeclaration is KoClassDeclaration

@@ -22,6 +22,8 @@ class KoFunctionTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
             it?.parameterTypes shouldBeEqualTo emptyList()
             it?.numParameterTypes shouldBeEqualTo 0
             it?.countParameterTypes { parameter -> parameter.type.isKotlinType } shouldBeEqualTo 0
+            it?.countParameterTypes { parameter -> parameter.type.isKotlinCollectionType } shouldBeEqualTo 0
+            it?.countParameterTypes { parameter -> parameter.type.isKotlinBasicType } shouldBeEqualTo 0
             it?.hasParameterType { parameter -> parameter.type.isKotlinType } shouldBeEqualTo false
             it?.hasAllParameterTypes { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
         }
@@ -42,6 +44,8 @@ class KoFunctionTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
             it?.parameterTypes?.map { parameter -> parameter.type.name } shouldBeEqualTo listOf("String")
             it?.numParameterTypes shouldBeEqualTo 1
             it?.countParameterTypes { parameter -> parameter.type.isKotlinType } shouldBeEqualTo 1
+            it?.countParameterTypes { parameter -> parameter.type.isKotlinCollectionType } shouldBeEqualTo 0
+            it?.countParameterTypes { parameter -> parameter.type.isKotlinBasicType } shouldBeEqualTo 1
             it?.countParameterTypes { parameter -> parameter.type.isClass } shouldBeEqualTo 0
             it?.hasParameterType { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
             it?.hasParameterType { parameter -> parameter.type.isExternalType } shouldBeEqualTo false
@@ -64,7 +68,9 @@ class KoFunctionTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
         assertSoftly(sut) {
             it?.parameterTypes?.map { parameter -> parameter.type.name } shouldBeEqualTo listOf("String", "List<Int>")
             it?.numParameterTypes shouldBeEqualTo 2
-            it?.countParameterTypes { parameter -> parameter.type.isKotlinType } shouldBeEqualTo 1
+            it?.countParameterTypes { parameter -> parameter.type.isKotlinType } shouldBeEqualTo 2
+            it?.countParameterTypes { parameter -> parameter.type.isKotlinCollectionType } shouldBeEqualTo 1
+            it?.countParameterTypes { parameter -> parameter.type.isKotlinBasicType } shouldBeEqualTo 1
             it?.countParameterTypes { parameter -> parameter.type.isClass } shouldBeEqualTo 0
             it?.hasParameterType { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
             it?.hasParameterType { parameter -> parameter.type.isExternalType } shouldBeEqualTo false

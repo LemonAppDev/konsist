@@ -8,6 +8,13 @@
 Konsist is a linter that guards the consistency of [Kotlin](https://kotlinlang.org/) projects by enforcing a cohesive code structure 
 and unified architecture. Konsist guards are written in the form of unit tests ([JUnit](https://junit.org/) / [Kotest](https://kotest.io/)).
 
+<p align="center">
+  <a href="https://kotlinfoundation.org/news/grants-program-winners-24/" target="_blank" rel="noopener noreferrer">
+    <img src="misc/library-grant-program-winner.png" alt="Library Grant Program Winner 2024" title="Library Grant 
+Program Winner 2024" width="300">
+  </a>
+</p>
+
 ## Dependencies
 
 ```kotlin
