@@ -19,13 +19,15 @@ fun <T : KoParametersProvider> T.hasValidKDocParamTags(): Boolean =
                 else -> null
             }
 
-        val typeParameterNames = (this as? KoTypeParameterProviderCore)
-            ?.typeParameters
-            ?.mapNotNull { it.name }
-            .orEmpty()
+        val typeParameterNames =
+            (this as? KoTypeParameterProviderCore)
+                ?.typeParameters
+                ?.mapNotNull { it.name }
+                .orEmpty()
 
-        val functionParameterNames = parameters
-            .map { it.name }
+        val functionParameterNames =
+            parameters
+                .map { it.name }
 
         val parameterNames = typeParameterNames + functionParameterNames
 
