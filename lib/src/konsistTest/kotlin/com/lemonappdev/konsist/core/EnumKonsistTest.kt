@@ -8,9 +8,6 @@ import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
 
 class EnumKonsistTest {
-    private val declarationPackageScope =
-        Konsist.scopeFromPackage("com.lemonappdev.konsist.core.declaration..", sourceSetName = "main")
-
     @Test
     fun `enums consts are defined interface alphabetical order `() {
         Konsist
