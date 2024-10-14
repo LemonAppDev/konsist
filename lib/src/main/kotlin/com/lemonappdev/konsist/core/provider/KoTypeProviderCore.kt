@@ -44,6 +44,7 @@ internal interface KoTypeProviderCore :
 
     override val isKotlinType: Boolean
         get() = koTypeProviderDeclaration is KoKotlinTypeDeclaration
+                || koTypeProviderDeclaration?.name?.let { TypeUtil.isKotlinType(it) } == true
 
     override val isFunctionType: Boolean
         get() = koTypeProviderDeclaration is KoFunctionTypeDeclaration
