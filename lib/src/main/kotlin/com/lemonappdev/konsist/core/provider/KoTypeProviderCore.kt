@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
@@ -16,8 +17,10 @@ import com.lemonappdev.konsist.core.util.TypeUtil
 internal interface KoTypeProviderCore :
     KoTypeProvider,
     KoNameProviderCore,
-    KoBaseProviderCore,
-    KoSourceDeclarationProviderCore {
+    KoBaseProviderCore {
+    val koTypeProviderDeclaration: KoSourceDeclaration?
+        get() = null
+
     override val isKotlinBasicType: Boolean
         get() = TypeUtil.isKotlinBasicType(name)
 
@@ -25,34 +28,34 @@ internal interface KoTypeProviderCore :
         get() = TypeUtil.isKotlinCollectionTypes(name)
 
     override val isClass: Boolean
-        get() = sourceDeclaration is KoClassDeclaration
+        get() = koTypeProviderDeclaration is KoClassDeclaration
 
     override val isObject: Boolean
-        get() = sourceDeclaration is KoObjectDeclaration
+        get() = koTypeProviderDeclaration is KoObjectDeclaration
 
     override val isInterface: Boolean
-        get() = sourceDeclaration is KoInterfaceDeclaration
+        get() = koTypeProviderDeclaration is KoInterfaceDeclaration
 
     override val isTypeAlias: Boolean
-        get() = sourceDeclaration is KoTypeAliasDeclaration
+        get() = koTypeProviderDeclaration is KoTypeAliasDeclaration
 
     override val isImportAlias: Boolean
-        get() = sourceDeclaration is KoImportAliasDeclaration
+        get() = koTypeProviderDeclaration is KoImportAliasDeclaration
 
     override val isKotlinType: Boolean
         get() =
-            sourceDeclaration is KoKotlinTypeDeclaration ||
-                (sourceDeclaration is KoGenericTypeDeclaration && TypeUtil.isKotlinType(name))
+            koTypeProviderDeclaration is KoKotlinTypeDeclaration ||
+                koTypeProviderDeclaration?.name?.let { TypeUtil.isKotlinType(it) } == true
 
     override val isFunctionType: Boolean
-        get() = sourceDeclaration is KoFunctionTypeDeclaration
+        get() = koTypeProviderDeclaration is KoFunctionTypeDeclaration
 
     override val isGenericType: Boolean
-        get() = sourceDeclaration is KoGenericTypeDeclaration
+        get() = koTypeProviderDeclaration is KoGenericTypeDeclaration
 
     override val isTypeParameter: Boolean
-        get() = sourceDeclaration is KoTypeParameterDeclaration
+        get() = koTypeProviderDeclaration is KoTypeParameterDeclaration
 
     override val isExternalType: Boolean
-        get() = sourceDeclaration is KoExternalDeclaration
+        get() = koTypeProviderDeclaration is KoExternalDeclaration
 }

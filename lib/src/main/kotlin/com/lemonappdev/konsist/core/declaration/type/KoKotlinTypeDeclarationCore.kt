@@ -11,31 +11,15 @@ import com.lemonappdev.konsist.core.provider.KoSourceAndAliasTypeProviderCore
 import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
-import org.jetbrains.kotlin.psi.KtNameReferenceExpression
-import org.jetbrains.kotlin.psi.KtUserType
 
 internal class KoKotlinTypeDeclarationCore private constructor(
-    private val ktUserType: KtUserType?,
-    override val ktNameReferenceExpression: KtNameReferenceExpression?,
+    override val ktElement: KtElement,
 ) : KoKotlinTypeDeclaration,
     KoBaseTypeDeclarationCore,
     KoBaseProviderCore,
     KoFullyQualifiedNameProviderCore,
     KoSourceAndAliasTypeProviderCore {
-    // Ensure that at least one of the parameters is non-null
-    init {
-        require(ktUserType != null || ktNameReferenceExpression != null) {
-            "Either KtUserType or KtNameReferenceExpression must be provided"
-        }
-    }
-
-    override val psiElement: PsiElement by lazy {
-        ktUserType ?: ktNameReferenceExpression ?: error("Both KtUserType and KtNameReferenceExpression are null")
-    }
-
-    override val ktElement: KtElement by lazy {
-        ktUserType ?: ktNameReferenceExpression ?: error("Both KtUserType and KtNameReferenceExpression are null")
-    }
+    override val psiElement: PsiElement by lazy { ktElement }
 
     override val packagee: KoPackageDeclaration? by lazy {
         KoPackageDeclarationCore(
@@ -44,39 +28,27 @@ internal class KoKotlinTypeDeclarationCore private constructor(
         )
     }
 
-    override val name: String by lazy {
-        ktUserType?.text ?: ktNameReferenceExpression?.text ?: error("Both KtUserType and KtNameReferenceExpression are null")
-    }
+    override val name: String by lazy { ktElement.text }
 
     override val fullyQualifiedName: String by lazy {
         when {
             TypeUtil.isKotlinBasicType(name) -> "kotlin.$bareSourceType"
             TypeUtil.isKotlinCollectionTypes(name) -> "kotlin.collections.$bareSourceType"
-            else -> throw IllegalArgumentException("Kotlin type has incorrect fully qualified name")
+            else -> throw IllegalArgumentException("Kotlin type has incorrect fullyQualified name")
         }
     }
 
-    override fun toString(): String = name
+    override fun toString(): String = ktElement.text
 
     internal companion object {
         private val cache: KoDeclarationCache<KoKotlinTypeDeclaration> = KoDeclarationCache()
 
-        // Factory method for KtUserType
         internal fun getInstance(
-            ktUserType: KtUserType,
+            ktElement: KtElement,
             containingDeclaration: KoBaseDeclaration,
         ): KoKotlinTypeDeclaration =
-            cache.getOrCreateInstance(ktUserType, containingDeclaration) {
-                KoKotlinTypeDeclarationCore(ktUserType, null)
-            }
-
-        // Factory method for KtNameReferenceExpression
-        internal fun getInstance(
-            ktNameReferenceExpression: KtNameReferenceExpression,
-            containingDeclaration: KoBaseDeclaration,
-        ): KoKotlinTypeDeclaration =
-            cache.getOrCreateInstance(ktNameReferenceExpression, containingDeclaration) {
-                KoKotlinTypeDeclarationCore(null, ktNameReferenceExpression)
+            cache.getOrCreateInstance(ktElement, containingDeclaration) {
+                KoKotlinTypeDeclarationCore(ktElement)
             }
     }
 }

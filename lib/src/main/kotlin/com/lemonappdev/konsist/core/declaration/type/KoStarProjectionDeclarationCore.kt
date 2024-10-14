@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.type
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.KoSourceDeclarationCore
@@ -26,6 +27,10 @@ internal class KoStarProjectionDeclarationCore private constructor(
     override val ktElement: KtElement by lazy { ktTypeProjection }
 
     override val psiElement: PsiElement by lazy { ktTypeProjection }
+
+    override val koTypeDeclarationProviderDeclaration: KoSourceDeclaration by lazy { sourceDeclaration }
+
+    override val koTypeProviderDeclaration: KoSourceDeclaration by lazy { sourceDeclaration }
 
     override val name: String by lazy { text }
 
