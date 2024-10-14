@@ -196,7 +196,7 @@ class AssertTrueOnDeclarationSequenceTest {
         try {
             sut.assertTrue { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("(File 'file-declaration-assert-displaying-correct-failed-declaration-type'")
+            e.message?.shouldContain("(File 'file-declaration-assert-displaying-correct-failed-declaration-type.kt'")
                 ?: throw e
         }
     }

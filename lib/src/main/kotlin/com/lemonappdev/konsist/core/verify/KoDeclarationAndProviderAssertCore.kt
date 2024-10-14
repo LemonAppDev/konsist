@@ -233,31 +233,34 @@ private fun getCheckFailedMessage(
     val times = if (failedItems.size == 1) "time" else "times"
 
     return "Assert '$testName' was violated (${failedItems.size} $times).$customMessage" +
-            "Invalid $types:\n$failedDeclarationsMessage"
+        "Invalid $types:\n$failedDeclarationsMessage"
 }
 
 private fun processFailedItems(failedItems: List<*>): Pair<String, String> {
     var types = ""
-    val failedDeclarationsMessage = failedItems.joinToString("\n") { item ->
-        when (item) {
-            is KoFileDeclaration -> {
-                types = "files"
-                "${item.path} ${getFailedNameWithDeclarationType(item.name, item.getDeclarationType())}"
+    val failedDeclarationsMessage =
+        failedItems.joinToString("\n") { item ->
+            when (item) {
+                is KoFileDeclaration -> {
+                    types = "files"
+                    "${item.path} ${getFailedNameWithDeclarationType(item.nameWithExtension, item.getDeclarationType())}"
+                }
+                is KoBaseProvider -> {
+                    types = "declarations"
+                    val name = (item as? KoNameProvider)?.name
+                    val location = (item as? KoLocationProvider)?.location
+                    "$location ${getFailedNameWithDeclarationType(name, item.getDeclarationType())}"
+                }
+                else -> ""
             }
-            is KoBaseProvider -> {
-                types = "declarations"
-                val name = (item as? KoNameProvider)?.name
-                val location = (item as? KoLocationProvider)?.location
-                "$location ${getFailedNameWithDeclarationType(name, item.getDeclarationType())}"
-            }
-            else -> ""
         }
-    }
     return Pair(types, failedDeclarationsMessage)
 }
 
-private fun getFailedNameWithDeclarationType(name: String?, declarationType: String?) =
-    if (name != null) "($declarationType '$name')" else "($declarationType)"
+private fun getFailedNameWithDeclarationType(
+    name: String?,
+    declarationType: String?,
+) = if (name != null) "($declarationType '$name')" else "($declarationType)"
 
 private fun getEmptyResult(
     items: List<*>,
@@ -317,7 +320,7 @@ private fun getNullResult(
 }
 
 private fun Any.getDeclarationType(): String? =
-    this::class.simpleName
+    this::class
+        .simpleName
         ?.removePrefix("Ko")
         ?.removeSuffix("DeclarationCore")
-
