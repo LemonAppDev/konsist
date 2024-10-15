@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoValModifierProvider
  *
  * @return A list containing declarations with the `val` modifier.
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("withVal"))
 fun <T : KoValModifierProvider> List<T>.withValModifier(): List<T> = filter { it.hasValModifier }
 
 /**
@@ -14,4 +15,5 @@ fun <T : KoValModifierProvider> List<T>.withValModifier(): List<T> = filter { it
  *
  * @return A list containing declarations without the `val` modifier.
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith("withoutVal"))
 fun <T : KoValModifierProvider> List<T>.withoutValModifier(): List<T> = filterNot { it.hasValModifier }

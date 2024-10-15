@@ -178,6 +178,7 @@ internal class KoPropertyDeclarationCore private constructor(
         }
     }
 
+    @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("isVal"))
     override val hasValModifier: Boolean by lazy {
         when (ktCallableDeclaration) {
             is KtProperty -> !ktCallableDeclaration.isVar
@@ -186,6 +187,7 @@ internal class KoPropertyDeclarationCore private constructor(
         }
     }
 
+    @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith(""))
     override val hasVarModifier: Boolean by lazy {
         when (ktCallableDeclaration) {
             is KtProperty -> ktCallableDeclaration.isVar

@@ -80,8 +80,10 @@ internal class KoVariableDeclarationCore private constructor(
             ?.removeSuffix(" ")
     }
 
+    @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("isVal"))
     override val hasValModifier: Boolean = !ktProperty.isVar
 
+    @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith(""))
     override val hasVarModifier: Boolean = ktProperty.isVar
 
     override fun toString(): String = name
