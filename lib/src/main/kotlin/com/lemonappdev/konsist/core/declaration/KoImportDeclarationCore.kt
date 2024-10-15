@@ -46,9 +46,9 @@ internal class KoImportDeclarationCore private constructor(
     KoWildcardProviderCore,
     KoIsWildcardProviderCore,
     KoSourceDeclarationProviderCore {
-    override val psiElement: PsiElement by lazy { ktImportDirective }
+    override val psiElement: PsiElement = ktImportDirective
 
-    override val ktElement: KtElement by lazy { ktImportDirective }
+    override val ktElement: KtElement = ktImportDirective
 
     override val name: String by lazy { ktImportDirective.importPath?.fqName.toString() }
 

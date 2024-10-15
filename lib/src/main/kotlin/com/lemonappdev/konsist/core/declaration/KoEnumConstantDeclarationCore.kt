@@ -57,13 +57,13 @@ internal class KoEnumConstantDeclarationCore private constructor(
     KoPackageDeclarationProviderCore,
     KoResideInPackageProviderCore,
     KoTextProviderCore {
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktEnumEntry }
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner = ktEnumEntry
 
-    override val ktAnnotated: KtAnnotated by lazy { ktEnumEntry }
+    override val ktAnnotated: KtAnnotated = ktEnumEntry
 
-    override val psiElement: PsiElement by lazy { ktEnumEntry }
+    override val psiElement: PsiElement = ktEnumEntry
 
-    override val ktElement: KtElement by lazy { ktEnumEntry }
+    override val ktElement: KtElement = ktEnumEntry
 
     override val localDeclarations: List<KoBaseDeclaration> by lazy {
         val psiElements =

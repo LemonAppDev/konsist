@@ -101,21 +101,21 @@ internal class KoFunctionDeclarationCore private constructor(
     KoActualModifierProviderCore,
     KoExpectModifierProviderCore,
     KoTypeParameterProviderCore {
-    override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }
+    override val ktCallableDeclaration: KtCallableDeclaration = ktFunction
 
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktCallableDeclaration }
+    override val ktAnnotated: KtAnnotated = ktCallableDeclaration
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktCallableDeclaration }
+    override val ktModifierListOwner: KtModifierListOwner = ktCallableDeclaration
 
-    override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktFunction }
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner = ktCallableDeclaration
 
-    override val psiElement: PsiElement by lazy { ktFunction }
+    override val psiElement: PsiElement = ktFunction
 
-    override val ktElement: KtElement by lazy { ktFunction }
+    override val ktElement: KtElement = ktFunction
 
-    override val ktDeclarationWithBody: KtDeclarationWithBody by lazy { ktFunction }
+    override val ktDeclarationWithBody: KtDeclarationWithBody = ktFunction
 
-    override val ktDeclaration: KtDeclaration by lazy { ktFunction }
+    override val ktDeclaration: KtDeclaration = ktFunction
 
     override val localDeclarations: List<KoBaseDeclaration> by lazy {
         val psiElements =

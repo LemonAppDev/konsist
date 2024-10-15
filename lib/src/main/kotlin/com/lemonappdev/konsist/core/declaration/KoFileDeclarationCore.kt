@@ -59,11 +59,11 @@ internal class KoFileDeclarationCore(
     KoSourceSetProviderCore,
     KoTextProviderCore,
     KoTypeAliasProviderCore {
-    override val ktElement: KtElement by lazy { ktFile }
+    override val ktElement: KtElement = ktFile
 
-    override val psiElement: PsiElement by lazy { ktFile }
+    override val psiElement: PsiElement = ktFile
 
-    override val ktAnnotated: KtAnnotated by lazy { ktFile }
+    override val ktAnnotated: KtAnnotated = ktFile
 
     override val name: String by lazy { nameWithExtension.substringBeforeLast('.') }
 
