@@ -132,27 +132,19 @@ internal class KoPropertyDeclarationCore private constructor(
 
     override val ktDeclaration: KtDeclaration = ktCallableDeclaration
 
-    /*
-    Remove in version 0.18.0
-     */
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
     override val isInitialized: Boolean
         get() = super<KoIsInitializedProviderCore>.isInitialized
 
-    /*
-    Remove in version 0.18.0
-     */
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
     override val isConstructorDefined: Boolean
         get() = super<KoIsConstructorDefinedProviderCore>.isConstructorDefined
 
-    /*
-    Remove in version 0.18.0
-     */
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
     override val isReadOnly: Boolean
         get() = super<KoIsReadOnlyProviderCore>.isReadOnly
 
-    /*
-    Remove in version 0.18.0
-     */
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
     override val isTopLevel: Boolean
         get() = super<KoIsTopLevelProviderCore>.isTopLevel
 

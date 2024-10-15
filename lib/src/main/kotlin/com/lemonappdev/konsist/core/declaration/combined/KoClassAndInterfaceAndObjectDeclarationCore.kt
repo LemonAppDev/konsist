@@ -97,9 +97,7 @@ internal interface KoClassAndInterfaceAndObjectDeclarationCore :
     override val ktElement: KtElement
         get() = ktClassOrObject
 
-    /*
-Remove in version 0.18.0
-     */
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
     override val isTopLevel: Boolean
         get() = super<KoIsTopLevelProviderCore>.isTopLevel
 

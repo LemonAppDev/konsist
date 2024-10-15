@@ -103,15 +103,11 @@ internal class KoTypeDeclarationCore private constructor(
 
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
-    /*
-    Remove in version 0.18.0
-     */
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
     override val isGenericType: Boolean
         get() = super<KoTypeProviderCore>.isGenericType
 
-    /*
-    Remove in version 0.18.0
-     */
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
     override val isNullable: Boolean
         get() = super<KoIsNullableProviderCore>.isNullable
 
