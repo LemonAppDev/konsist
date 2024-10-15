@@ -27,8 +27,6 @@ class KoFunctionDeclarationForKoIsExtensionProviderTest {
 
         // then
         sut.isExtension shouldBeEqualTo false
-
-
     }
 
     @Test
