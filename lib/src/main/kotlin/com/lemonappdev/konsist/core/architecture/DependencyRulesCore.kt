@@ -89,6 +89,7 @@ class DependencyRulesCore : DependencyRules {
         vararg dependentLayers: Layer,
     ) {
         val layerName = layer.name
+
         when (layerDependencyTypes[layer]) {
             LayerDependencyType.DEPENDENT_ON_NOTHING -> handleIndependentLayerConflict(shouldBeIndependent, layerName, dependentLayers)
             LayerDependencyType.DEPEND_ON_LAYER -> handleDependentLayerConflict(shouldBeIndependent, layer, layerName, dependentLayers)
