@@ -118,17 +118,17 @@ internal class KoPropertyDeclarationCore private constructor(
     KoReadOnlyProviderCore,
     KoIsReadOnlyProviderCore,
     KoTypeParameterProviderCore {
-    override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }
+    override val ktAnnotated: KtAnnotated = ktCallableDeclaration
 
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktCallableDeclaration }
+    override val ktModifierListOwner: KtModifierListOwner = ktCallableDeclaration
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktCallableDeclaration }
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner = ktCallableDeclaration
 
-    override val psiElement: PsiElement by lazy { ktCallableDeclaration }
+    override val psiElement: PsiElement = ktCallableDeclaration
 
-    override val ktElement: KtElement by lazy { ktCallableDeclaration }
+    override val ktElement: KtElement = ktCallableDeclaration
 
-    override val ktDeclaration: KtDeclaration by lazy { ktCallableDeclaration }
+    override val ktDeclaration: KtDeclaration = ktCallableDeclaration
 
     /*
     Remove in version 0.18.0

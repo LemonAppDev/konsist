@@ -11,5 +11,5 @@ internal open class KoKDocTagDeclarationCore(
 ) : KoKDocTagDeclaration,
     KoKDocTagNameAndDescriptionProviderCore,
     KoBaseProviderCore {
-    override fun toString(): String = name.type + " " + description
+    override fun toString(): String = "${name.type} $description"
 }

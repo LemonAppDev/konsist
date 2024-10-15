@@ -49,15 +49,15 @@ internal class KoGetterDeclarationCore private constructor(
     KoTextProviderCore,
     KoModifierProviderCore,
     KoVisibilityModifierProviderCore {
-    override val ktElement: KtElement by lazy { ktPropertyAccessor }
+    override val ktElement: KtElement = ktPropertyAccessor
 
-    override val psiElement: PsiElement by lazy { ktPropertyAccessor }
+    override val psiElement: PsiElement = ktPropertyAccessor
 
-    override val ktDeclarationWithBody: KtDeclarationWithBody by lazy { ktPropertyAccessor }
+    override val ktDeclarationWithBody: KtDeclarationWithBody = ktPropertyAccessor
 
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktPropertyAccessor }
+    override val ktModifierListOwner: KtModifierListOwner = ktPropertyAccessor
 
-    override val ktDeclaration: KtDeclaration by lazy { ktPropertyAccessor }
+    override val ktDeclaration: KtDeclaration = ktPropertyAccessor
 
     override val localDeclarations: List<KoBaseDeclaration> by lazy {
         val psiElements =

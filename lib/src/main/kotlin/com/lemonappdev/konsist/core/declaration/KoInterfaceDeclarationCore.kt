@@ -24,17 +24,17 @@ internal class KoInterfaceDeclarationCore private constructor(
     KoInterfaceAndObjectDeclarationCore,
     KoFunModifierProviderCore,
     KoTypeParameterProviderCore {
-    override val ktAnnotated: KtAnnotated by lazy { ktClass }
+    override val ktAnnotated: KtAnnotated = ktClass
 
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktClass }
+    override val ktModifierListOwner: KtModifierListOwner = ktClass
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktClass }
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner = ktClass
 
-    override val psiElement: PsiElement by lazy { ktClass }
+    override val psiElement: PsiElement = ktClass
 
-    override val ktElement: KtElement by lazy { ktClass }
+    override val ktElement: KtElement = ktClass
 
-    override val ktClassOrObject: KtClassOrObject by lazy { ktClass }
+    override val ktClassOrObject: KtClassOrObject = ktClass
 
     override fun declarations(
         includeNested: Boolean,
