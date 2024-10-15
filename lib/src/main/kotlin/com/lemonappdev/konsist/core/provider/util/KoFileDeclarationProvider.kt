@@ -75,7 +75,7 @@ internal object KoFileDeclarationProvider {
         (that happens later), so we need to be more permissive in the initial loading process.
         We verify the file is still a valid Kotlin file before parsing to handle cases where files may have been
         removed or altered. If the file is no longer valid, we return null instead of attempting to parse it.
-        */
+         */
         return when {
             file.isKotlinFile -> file.toKoFile()
             else -> null
