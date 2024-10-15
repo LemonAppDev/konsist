@@ -68,7 +68,7 @@ class DeclarationKonsistTest {
     }
 
     @Test
-    fun `every core declaration implements KoBaseProviderCore and its api equivalent(`() {
+    fun `every core declaration implements KoBaseProviderCore and its api equivalent`() {
         declarationPackageScope
             .classesAndInterfaces()
             .assertTrue {
