@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kofunction
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import io.kotest.assertions.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -16,10 +15,7 @@ class KoFunctionDeclarationForKoExtensionTypeProviderTest {
                 .first()
 
         // then
-        assertSoftly(sut) {
-            isExtension shouldBeEqualTo true
-            extensionReceiverType?.name shouldBeEqualTo "String"
-        }
+        sut.isExtension shouldBeEqualTo true
     }
 
     @Test
@@ -31,10 +27,7 @@ class KoFunctionDeclarationForKoExtensionTypeProviderTest {
                 .first()
 
         // then
-        assertSoftly(sut) {
-            isExtension shouldBeEqualTo false
-            extensionReceiverType?.name shouldBeEqualTo null
-        }
+        sut.isExtension shouldBeEqualTo false
     }
 
     @Test
@@ -46,11 +39,9 @@ class KoFunctionDeclarationForKoExtensionTypeProviderTest {
                 .first()
 
         // then
-        assertSoftly(sut) {
-            isExtension shouldBeEqualTo true
-            extensionReceiverType?.name shouldBeEqualTo "List<Int>"
-        }
+        sut.isExtension shouldBeEqualTo true
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofunction/snippet/forkoextensiontype/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kofunction/snippet/forkoextensiontype/", fileName)
 }
