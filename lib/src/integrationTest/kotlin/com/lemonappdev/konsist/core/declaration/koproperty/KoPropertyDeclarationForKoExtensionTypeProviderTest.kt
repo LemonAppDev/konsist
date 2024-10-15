@@ -42,6 +42,5 @@ class KoPropertyDeclarationForKoExtensionTypeProviderTest {
         sut.isExtension shouldBeEqualTo true
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koproperty/snippet/forkoextensiontype/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koproperty/snippet/forkoextensiontype/", fileName)
 }
