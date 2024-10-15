@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 class DependencyRulesCore : DependencyRules {
     internal val positiveDependencies = mutableMapOf<Layer, Set<Layer>>()
     internal val negativeDependencies = mutableMapOf<Layer, Set<Layer>>()
-    internal val statuses = mutableMapOf<Layer, Status>()
+    internal val statuses = mutableMapOf<Layer, LayerDependencyType>()
 
     internal var allLayers = mutableListOf<Layer>()
 
@@ -26,14 +26,15 @@ class DependencyRulesCore : DependencyRules {
                 .toMutableList()
 
         positiveDependencies[this] = (positiveDependencies.getOrDefault(this, setOf(this))) + layer + layers
-        statuses[this] = Status.DEPEND_ON_LAYER
+        statuses[this] = LayerDependencyType.DEPEND_ON_LAYER
 
-        if (statuses.getOrDefault(layer, Status.NONE) == Status.NONE) {
-            statuses[layer] = Status.NONE
+        if (statuses.getOrDefault(layer, LayerDependencyType.NONE) == LayerDependencyType.NONE) {
+            statuses[layer] = LayerDependencyType.NONE
         }
+
         layers.onEach {
-            if (statuses.getOrDefault(it, Status.NONE) == Status.NONE) {
-                statuses[it] = Status.NONE
+            if (statuses.getOrDefault(it, LayerDependencyType.NONE) == LayerDependencyType.NONE) {
+                statuses[it] = LayerDependencyType.NONE
             }
         }
     }
@@ -53,14 +54,15 @@ class DependencyRulesCore : DependencyRules {
                 .toMutableList()
 
         negativeDependencies[this] = setOf(layer) + layers
-        statuses[this] = Status.NOT_DEPEND_ON_LAYER
+        statuses[this] = LayerDependencyType.NOT_DEPEND_ON_LAYER
 
-        if (statuses.getOrDefault(layer, Status.NONE) == Status.NONE) {
-            statuses[layer] = Status.NONE
+        if (statuses.getOrDefault(layer, LayerDependencyType.NONE) == LayerDependencyType.NONE) {
+            statuses[layer] = LayerDependencyType.NONE
         }
+
         layers.onEach {
-            if (statuses.getOrDefault(it, Status.NONE) == Status.NONE) {
-                statuses[it] = Status.NONE
+            if (statuses.getOrDefault(it, LayerDependencyType.NONE) == LayerDependencyType.NONE) {
+                statuses[it] = LayerDependencyType.NONE
             }
         }
     }
@@ -75,7 +77,7 @@ class DependencyRulesCore : DependencyRules {
                 .toMutableList()
 
         positiveDependencies[this] = setOf(this)
-        statuses[this] = Status.DEPENDENT_ON_NOTHING
+        statuses[this] = LayerDependencyType.DEPENDENT_ON_NOTHING
     }
 
     private fun checkIfLayerIsDependentOnItself(
@@ -94,7 +96,7 @@ class DependencyRulesCore : DependencyRules {
         vararg layers: Layer,
     ) {
         val layerName = layer.name
-        if (statuses[layer] == Status.DEPENDENT_ON_NOTHING) {
+        if (statuses[layer] == LayerDependencyType.DEPENDENT_ON_NOTHING) {
             if (toBeIndependent) {
                 throw KoPreconditionFailedException("Duplicated the dependency that $layerName layer should be depend on nothing.")
             } else {
@@ -103,7 +105,7 @@ class DependencyRulesCore : DependencyRules {
                         "so it cannot depend on ${layers.first().name} layer.",
                 )
             }
-        } else if (statuses[layer] == Status.DEPEND_ON_LAYER) {
+        } else if (statuses[layer] == LayerDependencyType.DEPEND_ON_LAYER) {
             val dependency = positiveDependencies.getOrDefault(layer, emptySet())
 
             if (toBeIndependent) {
@@ -203,9 +205,3 @@ class DependencyRulesCore : DependencyRules {
     }
 }
 
-internal enum class Status {
-    DEPEND_ON_LAYER,
-    DEPENDENT_ON_NOTHING,
-    NONE,
-    NOT_DEPEND_ON_LAYER,
-}
