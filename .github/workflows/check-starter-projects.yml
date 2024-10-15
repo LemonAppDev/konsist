@@ -1,510 +1,61 @@
-name: Check Starter Projects
-
-on:
-  pull_request:
-    types: [ opened, synchronize ]
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
-jobs:
-  get-github-context:
-    name: Get GitHub Context
-    runs-on: ubuntu-latest
-
-    # Allow the workflow to read the contents of the repository and pull request to be
-    # able to retrieve list of changed files when PR is opened from forked repository.
-    permissions:
-      contents: read
-      pull-requests: read
-
-    steps:
-      - name: Get branch name
-        id: branch-name
-        uses: tj-actions/branch-names@v8
-
-      - name: List Branches
-        run: |
-          echo current branch: ${{ steps.branch-name.outputs.current_branch }}
-          echo base ref branch: ${{ steps.branch-name.outputs.base_ref_branch }}
-          echo default branch: ${{ steps.branch-name.outputs.default_branch }}
-
-      - name: Get Changed Files
-        id: changed-files
-        uses: tj-actions/changed-files@v45.0.3
-
-      - name: List Changed Files
-        run: |
-          echo Changed files:
-          echo ${{ steps.changed-files.outputs.all_changed_files }} | tr ' ' '\n'
-
-      - name: Echo Run Condition (any true to run)
-        run: |
-          echo Current branch starts with "release/": ${{ startsWith(steps.branch-name.outputs.current_branch, 'release/') }}
-          echo Current branch starts with "renovate/": ${{ startsWith(steps.branch-name.outputs.current_branch, 'renovate/') }}
-          echo Current branch contains "starter-projects": ${{ contains(steps.branch-name.outputs.current_branch, 'starter-projects') }}
-          echo Base ref branch is "main": ${{ steps.branch-name.outputs.base_ref_branch == 'main' }}
-          echo Changed files in the "samples/starter-projects/" directory: ${{ contains(steps.changed-files.outputs.all_changed_files, 'samples/starter-projects/') }}
-
-    outputs:
-      current_branch: ${{ steps.branch-name.outputs.current_branch }}
-      base_ref_branch: ${{ steps.branch-name.outputs.base_ref_branch }}
-      default_branch: ${{ steps.branch-name.outputs.default_branch }}
-      all_changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
-      head_commit_message: ${{ github.event.head_commit.message }}
-
-  android-gradle-groovy-junit-4:
-    name: Android Gradle Groovy Junit 4
-    needs: get-github-context
-    runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: 21
-          distribution: 'corretto'
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11.3'
-
-      - name: Add Maven Local Repository
-        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-junit-4/settings.gradle
-
-      - name: Replace Konsist Version
-        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-groovy-junit-4/konsistTest/build.gradle
-
-      - name: Publish Konsist Artifact To Local Maven Repository
-        run: ./gradlew publishToMavenLocal
-
-      - name: Run Konsist Test
-        run: cd samples/starter-projects/android-gradle-groovy-junit-4/ && ./gradlew konsistTest:test
-
-  android-gradle-groovy-junit-5:
-    name: Android Gradle Groovy Junit 5
-    needs: get-github-context
-    runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: 21
-          distribution: 'corretto'
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11.3'
-
-      - name: Add Maven Local Repository
-        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-junit-5/settings.gradle
-
-      - name: Replace Konsist Version
-        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-groovy-junit-5/konsistTest/build.gradle
-
-      - name: Publish Konsist Artifact To Local Maven Repository
-        run: ./gradlew publishToMavenLocal
-
-      - name: Run Konsist Test
-        run: cd samples/starter-projects/android-gradle-groovy-junit-5/ && ./gradlew konsistTest:test
-
-  android-gradle-groovy-kotest:
-    name: Android Gradle Groovy Kotest
-    needs: get-github-context
-    runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: 21
-          distribution: 'corretto'
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11.3'
-
-      - name: Add Maven Local Repository
-        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-kotest/settings.gradle
-
-      - name: Replace Konsist Version
-        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-groovy-kotest/konsistTest/build.gradle
-
-      - name: Publish Konsist Artifact To Local Maven Repository
-        run: ./gradlew publishToMavenLocal
-
-      - name: Run Konsist Test
-        run: cd samples/starter-projects/android-gradle-groovy-kotest/ && ./gradlew konsistTest:test
-
-  android-gradle-kotlin-junit-4:
-    name: Android Gradle Kotlin Junit 4
-    needs: get-github-context
-    runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: 21
-          distribution: 'corretto'
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11.3'
-
-      - name: Add Maven Local Repository
-        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-junit-4/settings.gradle.kts
-
-      - name: Replace Konsist Version
-        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-kotlin-junit-4/konsistTest/build.gradle.kts
-
-      - name: Publish Konsist Artifact To Local Maven Repository
-        run: ./gradlew publishToMavenLocal
-
-      - name: Run Konsist Test
-        run: cd samples/starter-projects/android-gradle-kotlin-junit-4/ && ./gradlew konsistTest:test
-
-  android-gradle-kotlin-junit-5:
-    name: Android Gradle Kotlin Junit 5
-    needs: get-github-context
-    runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: 21
-          distribution: 'corretto'
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11.3'
-
-      - name: Add Maven Local Repository
-        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-junit-5/settings.gradle.kts
-
-      - name: Replace Konsist Version
-        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-kotlin-junit-5/konsistTest/build.gradle.kts
-
-      - name: Publish Konsist Artifact To Local Maven Repository
-        run: ./gradlew publishToMavenLocal
-
-      - name: Run Konsist Test
-        run: cd samples/starter-projects/android-gradle-kotlin-junit-5/ && ./gradlew konsistTest:test
-
-  android-gradle-kotlin-kotest:
-    name: Android Gradle Kotlin Kotest
-    needs: get-github-context
-    runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: 21
-          distribution: 'corretto'
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11.3'
-
-      - name: Add Maven Local Repository
-        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-kotest/settings.gradle.kts
-
-      - name: Replace Konsist Version
-        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-kotlin-kotest/konsistTest/build.gradle.kts
-
-      - name: Publish Konsist Artifact To Local Maven Repository
-        run: ./gradlew publishToMavenLocal
-
-      - name: Run Konsist Test
-        run: cd samples/starter-projects/android-gradle-kotlin-kotest/ && ./gradlew konsistTest:test
-
-  spring-gradle-kotlin-junit-5:
-    name: Spring Gradle Kotlin Junit 5
-    needs: get-github-context
-    runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: 21
-          distribution: 'corretto'
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11.3'
-
-      - name: Add Maven Local Repository
-        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-gradle-kotlin-junit-5/build.gradle.kts
-
-      - name: Replace Konsist Version
-        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-kotlin-junit-5/build.gradle.kts
-
-      - name: Publish Konsist Artifact To Local Maven Repository
-        run: ./gradlew publishToMavenLocal
-
-      - name: Run Konsist Test
-        run: cd samples/starter-projects/spring-gradle-kotlin-junit-5/ && ./gradlew konsistTest
-
-  spring-gradle-kotlin-kotest:
-    name: Spring Gradle Groovy Kotest
-    needs: get-github-context
-    runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: 21
-          distribution: 'corretto'
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11.3'
-
-      - name: Add Maven Local Repository
-        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-gradle-kotlin-kotest/build.gradle.kts
-
-      - name: Replace Konsist Version
-        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-kotlin-kotest/build.gradle.kts
-
-      - name: Publish Konsist Artifact To Local Maven Repository
-        run: ./gradlew publishToMavenLocal
-
-      - name: Run Konsist Test
-        run: cd samples/starter-projects/spring-gradle-kotlin-kotest/ && ./gradlew konsistTest
-
-  spring-gradle-groovy-junit-5:
-    name: Spring Gradle Groovy Junit 5
-    needs: get-github-context
-    runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: 21
-          distribution: 'corretto'
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11.3'
-
-      - name: Add Maven Local Repository
-        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-gradle-groovy-junit-5/build.gradle
-
-      - name: Replace Konsist Version
-        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-groovy-junit-5/build.gradle
-
-      - name: Publish Konsist Artifact To Local Maven Repository
-        run: ./gradlew publishToMavenLocal
-
-      - name: Run Konsist Test
-        run: cd samples/starter-projects/spring-gradle-groovy-junit-5/ && ./gradlew konsistTest
-
-
-  spring-gradle-groovy-kotest:
-    name: Spring Gradle Groovy Kotest
-    needs: get-github-context
-    runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: 21
-          distribution: 'corretto'
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11.3'
-
-      - name: Add Maven Local Repository
-        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-gradle-groovy-kotest/build.gradle
-
-      - name: Replace Konsist Version
-        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-groovy-kotest/build.gradle
-
-      - name: Publish Konsist Artifact To Local Maven Repository
-        run: ./gradlew publishToMavenLocal
-
-      - name: Run Konsist Test
-        run: cd samples/starter-projects/spring-gradle-groovy-kotest/ && ./gradlew konsistTest
-
-  spring-maven-junit5:
-    name: Spring Maven Junit 5
-    needs: get-github-context
-    runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: 21
-          distribution: 'corretto'
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11.3'
-
-      - name: Add Maven Local Repository
-        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-maven-junit5/pom.xml
-
-      - name: Replace Konsist Version
-        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-maven-junit5/pom.xml
-
-      - name: Publish Konsist Artifact To Local Maven Repository
-        run: ./gradlew publishToMavenLocal
-
-      - name: Run Konsist Test
-        run: cd samples/starter-projects/spring-maven-junit5/ && mvn test
-
-  spring-maven-kotest:
-    name: Spring Maven Kotest
-    needs: get-github-context
-    runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: 21
-          distribution: 'corretto'
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11.3'
-
-      - name: Add Maven Local Repository
-        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-maven-kotest/pom.xml
-
-      - name: Replace Konsist Version
-        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-maven-kotest/pom.xml
-
-      - name: Publish Konsist Artifact To Local Maven Repository
-        run: ./gradlew publishToMavenLocal
-
-      - name: Run Konsist Test
-        run: cd samples/starter-projects/spring-maven-kotest/ && mvn test
-
-#  kmp-gradle-kotlin-junit5:
-#    name: KMP Gradle Kotlin Junit 5
+#name: Check Starter Projects
+#
+#on:
+#  pull_request:
+#    types: [ opened, synchronize ]
+#
+#concurrency:
+#  group: ${{ github.workflow }}-${{ github.ref }}
+#  cancel-in-progress: true
+#
+#jobs:
+#  get-github-context:
+#    name: Get GitHub Context
+#    runs-on: ubuntu-latest
+#
+#    # Allow the workflow to read the contents of the repository and pull request to be
+#    # able to retrieve list of changed files when PR is opened from forked repository.
+#    permissions:
+#      contents: read
+#      pull-requests: read
+#
+#    steps:
+#      - name: Get branch name
+#        id: branch-name
+#        uses: tj-actions/branch-names@v8
+#
+#      - name: List Branches
+#        run: |
+#          echo current branch: ${{ steps.branch-name.outputs.current_branch }}
+#          echo base ref branch: ${{ steps.branch-name.outputs.base_ref_branch }}
+#          echo default branch: ${{ steps.branch-name.outputs.default_branch }}
+#
+#      - name: Get Changed Files
+#        id: changed-files
+#        uses: tj-actions/changed-files@v45.0.3
+#
+#      - name: List Changed Files
+#        run: |
+#          echo Changed files:
+#          echo ${{ steps.changed-files.outputs.all_changed_files }} | tr ' ' '\n'
+#
+#      - name: Echo Run Condition (any true to run)
+#        run: |
+#          echo Current branch starts with "release/": ${{ startsWith(steps.branch-name.outputs.current_branch, 'release/') }}
+#          echo Current branch starts with "renovate/": ${{ startsWith(steps.branch-name.outputs.current_branch, 'renovate/') }}
+#          echo Current branch contains "starter-projects": ${{ contains(steps.branch-name.outputs.current_branch, 'starter-projects') }}
+#          echo Base ref branch is "main": ${{ steps.branch-name.outputs.base_ref_branch == 'main' }}
+#          echo Changed files in the "samples/starter-projects/" directory: ${{ contains(steps.changed-files.outputs.all_changed_files, 'samples/starter-projects/') }}
+#
+#    outputs:
+#      current_branch: ${{ steps.branch-name.outputs.current_branch }}
+#      base_ref_branch: ${{ steps.branch-name.outputs.base_ref_branch }}
+#      default_branch: ${{ steps.branch-name.outputs.default_branch }}
+#      all_changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
+#      head_commit_message: ${{ github.event.head_commit.message }}
+#
+#  android-gradle-groovy-junit-4:
+#    name: Android Gradle Groovy Junit 4
 #    needs: get-github-context
 #    runs-on: ubuntu-latest
 #    if: |
@@ -519,31 +70,30 @@ jobs:
 #        uses: actions/checkout@v4
 #
 #      - name: Set up JDK
-#        uses: actions/setup-java@v3
+#        uses: actions/setup-java@v4
 #        with:
 #          java-version: 21
 #          distribution: 'corretto'
 #
 #      - name: Set up Python
-#        uses: actions/setup-python@v4
+#        uses: actions/setup-python@v5
 #        with:
 #          python-version: '3.11.3'
 #
 #      - name: Add Maven Local Repository
-#        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/kmp-gradle-kotlin-junit5/build.gradle.kts
+#        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-junit-4/settings.gradle
 #
 #      - name: Replace Konsist Version
-#        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/kmp-gradle-kotlin-junit5/build.gradle.kts
+#        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-groovy-junit-4/konsistTest/build.gradle
 #
 #      - name: Publish Konsist Artifact To Local Maven Repository
 #        run: ./gradlew publishToMavenLocal
 #
 #      - name: Run Konsist Test
-#        run: cd samples/starter-projects/kmp-gradle-kotlin-junit5/ && ./gradlew test
-
-
-#  kmp-gradle-kotlin-kotest:
-#    name: KMP Gradle Kotlin Kotest
+#        run: cd samples/starter-projects/android-gradle-groovy-junit-4/ && ./gradlew konsistTest:test
+#
+#  android-gradle-groovy-junit-5:
+#    name: Android Gradle Groovy Junit 5
 #    needs: get-github-context
 #    runs-on: ubuntu-latest
 #    if: |
@@ -558,24 +108,474 @@ jobs:
 #        uses: actions/checkout@v4
 #
 #      - name: Set up JDK
-#        uses: actions/setup-java@v3
+#        uses: actions/setup-java@v4
 #        with:
 #          java-version: 21
 #          distribution: 'corretto'
 #
 #      - name: Set up Python
-#        uses: actions/setup-python@v4
+#        uses: actions/setup-python@v5
 #        with:
 #          python-version: '3.11.3'
 #
 #      - name: Add Maven Local Repository
-#        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/kmp-gradle-kotlin-kotest/build.gradle.kts
+#        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-junit-5/settings.gradle
 #
 #      - name: Replace Konsist Version
-#        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/kmp-gradle-kotlin-kotest/build.gradle.kts
+#        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-groovy-junit-5/konsistTest/build.gradle
 #
 #      - name: Publish Konsist Artifact To Local Maven Repository
 #        run: ./gradlew publishToMavenLocal
 #
 #      - name: Run Konsist Test
-#        run: cd samples/starter-projects/kmp-gradle-kotlin-kotest/ && ./gradlew test
+#        run: cd samples/starter-projects/android-gradle-groovy-junit-5/ && ./gradlew konsistTest:test
+#
+#  android-gradle-groovy-kotest:
+#    name: Android Gradle Groovy Kotest
+#    needs: get-github-context
+#    runs-on: ubuntu-latest
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: 21
+#          distribution: 'corretto'
+#
+#      - name: Set up Python
+#        uses: actions/setup-python@v5
+#        with:
+#          python-version: '3.11.3'
+#
+#      - name: Add Maven Local Repository
+#        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-kotest/settings.gradle
+#
+#      - name: Replace Konsist Version
+#        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-groovy-kotest/konsistTest/build.gradle
+#
+#      - name: Publish Konsist Artifact To Local Maven Repository
+#        run: ./gradlew publishToMavenLocal
+#
+#      - name: Run Konsist Test
+#        run: cd samples/starter-projects/android-gradle-groovy-kotest/ && ./gradlew konsistTest:test
+#
+#  android-gradle-kotlin-junit-4:
+#    name: Android Gradle Kotlin Junit 4
+#    needs: get-github-context
+#    runs-on: ubuntu-latest
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: 21
+#          distribution: 'corretto'
+#
+#      - name: Set up Python
+#        uses: actions/setup-python@v5
+#        with:
+#          python-version: '3.11.3'
+#
+#      - name: Add Maven Local Repository
+#        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-junit-4/settings.gradle.kts
+#
+#      - name: Replace Konsist Version
+#        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-kotlin-junit-4/konsistTest/build.gradle.kts
+#
+#      - name: Publish Konsist Artifact To Local Maven Repository
+#        run: ./gradlew publishToMavenLocal
+#
+#      - name: Run Konsist Test
+#        run: cd samples/starter-projects/android-gradle-kotlin-junit-4/ && ./gradlew konsistTest:test
+#
+#  android-gradle-kotlin-junit-5:
+#    name: Android Gradle Kotlin Junit 5
+#    needs: get-github-context
+#    runs-on: ubuntu-latest
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: 21
+#          distribution: 'corretto'
+#
+#      - name: Set up Python
+#        uses: actions/setup-python@v5
+#        with:
+#          python-version: '3.11.3'
+#
+#      - name: Add Maven Local Repository
+#        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-junit-5/settings.gradle.kts
+#
+#      - name: Replace Konsist Version
+#        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-kotlin-junit-5/konsistTest/build.gradle.kts
+#
+#      - name: Publish Konsist Artifact To Local Maven Repository
+#        run: ./gradlew publishToMavenLocal
+#
+#      - name: Run Konsist Test
+#        run: cd samples/starter-projects/android-gradle-kotlin-junit-5/ && ./gradlew konsistTest:test
+#
+#  android-gradle-kotlin-kotest:
+#    name: Android Gradle Kotlin Kotest
+#    needs: get-github-context
+#    runs-on: ubuntu-latest
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: 21
+#          distribution: 'corretto'
+#
+#      - name: Set up Python
+#        uses: actions/setup-python@v5
+#        with:
+#          python-version: '3.11.3'
+#
+#      - name: Add Maven Local Repository
+#        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-kotest/settings.gradle.kts
+#
+#      - name: Replace Konsist Version
+#        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-kotlin-kotest/konsistTest/build.gradle.kts
+#
+#      - name: Publish Konsist Artifact To Local Maven Repository
+#        run: ./gradlew publishToMavenLocal
+#
+#      - name: Run Konsist Test
+#        run: cd samples/starter-projects/android-gradle-kotlin-kotest/ && ./gradlew konsistTest:test
+#
+#  spring-gradle-kotlin-junit-5:
+#    name: Spring Gradle Kotlin Junit 5
+#    needs: get-github-context
+#    runs-on: ubuntu-latest
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: 21
+#          distribution: 'corretto'
+#
+#      - name: Set up Python
+#        uses: actions/setup-python@v5
+#        with:
+#          python-version: '3.11.3'
+#
+#      - name: Add Maven Local Repository
+#        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-gradle-kotlin-junit-5/build.gradle.kts
+#
+#      - name: Replace Konsist Version
+#        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-kotlin-junit-5/build.gradle.kts
+#
+#      - name: Publish Konsist Artifact To Local Maven Repository
+#        run: ./gradlew publishToMavenLocal
+#
+#      - name: Run Konsist Test
+#        run: cd samples/starter-projects/spring-gradle-kotlin-junit-5/ && ./gradlew konsistTest
+#
+#  spring-gradle-kotlin-kotest:
+#    name: Spring Gradle Groovy Kotest
+#    needs: get-github-context
+#    runs-on: ubuntu-latest
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: 21
+#          distribution: 'corretto'
+#
+#      - name: Set up Python
+#        uses: actions/setup-python@v5
+#        with:
+#          python-version: '3.11.3'
+#
+#      - name: Add Maven Local Repository
+#        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-gradle-kotlin-kotest/build.gradle.kts
+#
+#      - name: Replace Konsist Version
+#        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-kotlin-kotest/build.gradle.kts
+#
+#      - name: Publish Konsist Artifact To Local Maven Repository
+#        run: ./gradlew publishToMavenLocal
+#
+#      - name: Run Konsist Test
+#        run: cd samples/starter-projects/spring-gradle-kotlin-kotest/ && ./gradlew konsistTest
+#
+#  spring-gradle-groovy-junit-5:
+#    name: Spring Gradle Groovy Junit 5
+#    needs: get-github-context
+#    runs-on: ubuntu-latest
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: 21
+#          distribution: 'corretto'
+#
+#      - name: Set up Python
+#        uses: actions/setup-python@v5
+#        with:
+#          python-version: '3.11.3'
+#
+#      - name: Add Maven Local Repository
+#        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-gradle-groovy-junit-5/build.gradle
+#
+#      - name: Replace Konsist Version
+#        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-groovy-junit-5/build.gradle
+#
+#      - name: Publish Konsist Artifact To Local Maven Repository
+#        run: ./gradlew publishToMavenLocal
+#
+#      - name: Run Konsist Test
+#        run: cd samples/starter-projects/spring-gradle-groovy-junit-5/ && ./gradlew konsistTest
+#
+#
+#  spring-gradle-groovy-kotest:
+#    name: Spring Gradle Groovy Kotest
+#    needs: get-github-context
+#    runs-on: ubuntu-latest
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: 21
+#          distribution: 'corretto'
+#
+#      - name: Set up Python
+#        uses: actions/setup-python@v5
+#        with:
+#          python-version: '3.11.3'
+#
+#      - name: Add Maven Local Repository
+#        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-gradle-groovy-kotest/build.gradle
+#
+#      - name: Replace Konsist Version
+#        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-groovy-kotest/build.gradle
+#
+#      - name: Publish Konsist Artifact To Local Maven Repository
+#        run: ./gradlew publishToMavenLocal
+#
+#      - name: Run Konsist Test
+#        run: cd samples/starter-projects/spring-gradle-groovy-kotest/ && ./gradlew konsistTest
+#
+#  spring-maven-junit5:
+#    name: Spring Maven Junit 5
+#    needs: get-github-context
+#    runs-on: ubuntu-latest
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: 21
+#          distribution: 'corretto'
+#
+#      - name: Set up Python
+#        uses: actions/setup-python@v5
+#        with:
+#          python-version: '3.11.3'
+#
+#      - name: Add Maven Local Repository
+#        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-maven-junit5/pom.xml
+#
+#      - name: Replace Konsist Version
+#        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-maven-junit5/pom.xml
+#
+#      - name: Publish Konsist Artifact To Local Maven Repository
+#        run: ./gradlew publishToMavenLocal
+#
+#      - name: Run Konsist Test
+#        run: cd samples/starter-projects/spring-maven-junit5/ && mvn test
+#
+#  spring-maven-kotest:
+#    name: Spring Maven Kotest
+#    needs: get-github-context
+#    runs-on: ubuntu-latest
+#    if: |
+#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: 21
+#          distribution: 'corretto'
+#
+#      - name: Set up Python
+#        uses: actions/setup-python@v5
+#        with:
+#          python-version: '3.11.3'
+#
+#      - name: Add Maven Local Repository
+#        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-maven-kotest/pom.xml
+#
+#      - name: Replace Konsist Version
+#        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-maven-kotest/pom.xml
+#
+#      - name: Publish Konsist Artifact To Local Maven Repository
+#        run: ./gradlew publishToMavenLocal
+#
+#      - name: Run Konsist Test
+#        run: cd samples/starter-projects/spring-maven-kotest/ && mvn test
+#
+##  kmp-gradle-kotlin-junit5:
+##    name: KMP Gradle Kotlin Junit 5
+##    needs: get-github-context
+##    runs-on: ubuntu-latest
+##    if: |
+##      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+##      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+##      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+##      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+##      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+##
+##    steps:
+##      - name: Checkout
+##        uses: actions/checkout@v4
+##
+##      - name: Set up JDK
+##        uses: actions/setup-java@v3
+##        with:
+##          java-version: 21
+##          distribution: 'corretto'
+##
+##      - name: Set up Python
+##        uses: actions/setup-python@v4
+##        with:
+##          python-version: '3.11.3'
+##
+##      - name: Add Maven Local Repository
+##        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/kmp-gradle-kotlin-junit5/build.gradle.kts
+##
+##      - name: Replace Konsist Version
+##        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/kmp-gradle-kotlin-junit5/build.gradle.kts
+##
+##      - name: Publish Konsist Artifact To Local Maven Repository
+##        run: ./gradlew publishToMavenLocal
+##
+##      - name: Run Konsist Test
+##        run: cd samples/starter-projects/kmp-gradle-kotlin-junit5/ && ./gradlew test
+#
+#
+##  kmp-gradle-kotlin-kotest:
+##    name: KMP Gradle Kotlin Kotest
+##    needs: get-github-context
+##    runs-on: ubuntu-latest
+##    if: |
+##      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+##      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+##      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+##      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+##      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+##
+##    steps:
+##      - name: Checkout
+##        uses: actions/checkout@v4
+##
+##      - name: Set up JDK
+##        uses: actions/setup-java@v3
+##        with:
+##          java-version: 21
+##          distribution: 'corretto'
+##
+##      - name: Set up Python
+##        uses: actions/setup-python@v4
+##        with:
+##          python-version: '3.11.3'
+##
+##      - name: Add Maven Local Repository
+##        run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/kmp-gradle-kotlin-kotest/build.gradle.kts
+##
+##      - name: Replace Konsist Version
+##        run: python3 scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/kmp-gradle-kotlin-kotest/build.gradle.kts
+##
+##      - name: Publish Konsist Artifact To Local Maven Repository
+##        run: ./gradlew publishToMavenLocal
+##
+##      - name: Run Konsist Test
+##        run: cd samples/starter-projects/kmp-gradle-kotlin-kotest/ && ./gradlew test

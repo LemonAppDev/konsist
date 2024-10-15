@@ -1,0 +1,3 @@
+class SampleClass {
+    constructor(value: Int)
+}
