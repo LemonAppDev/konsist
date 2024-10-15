@@ -15,7 +15,7 @@ class DependencyRulesCore : DependencyRules {
         layer: Layer,
         vararg layers: Layer,
     ) {
-        checkIfLayerHasTheSameValuesAsOtherLayer(this, layer, *layers)
+        requireUniqueLayers(this, layer, *layers)
         checkIfLayerIsDependentOnItself(this, layer, *layers)
         checkStatusOfLayer(false, this, layer, *layers)
         checkCircularDependencies(this, layer, *layers)
@@ -44,7 +44,7 @@ class DependencyRulesCore : DependencyRules {
         layer: Layer,
         vararg layers: Layer,
     ) {
-        checkIfLayerHasTheSameValuesAsOtherLayer(this, layer, *layers)
+        requireUniqueLayers(this, layer, *layers)
         checkIfLayerIsDependentOnItself(this, layer, *layers)
         checkStatusOfLayer(false, this, layer, *layers)
         checkCircularDependencies(this, layer, *layers)
@@ -70,7 +70,7 @@ class DependencyRulesCore : DependencyRules {
     }
 
     override fun Layer.dependsOnNothing() {
-        checkIfLayerHasTheSameValuesAsOtherLayer(this)
+        requireUniqueLayers(this)
         checkStatusOfLayer(true, this)
 
         allLayers.add(this)
@@ -180,22 +180,16 @@ class DependencyRulesCore : DependencyRules {
         }
     }
 
-    private fun checkIfLayerHasTheSameValuesAsOtherLayer(vararg layers: Layer) {
-        val list: MutableList<Layer> = allLayers
-                .distinct()
-                .toMutableList()
-
-        allLayers.forEach {
+    private fun requireUniqueLayers(vararg layers: Layer) {
+        layers.forEach {
             val similarLayer =
-                list.firstOrNull { layerAlreadyDefined ->
+                allLayers.firstOrNull { layerAlreadyDefined ->
                     it != layerAlreadyDefined && (layerAlreadyDefined.name == it.name || layerAlreadyDefined.definedBy == it.definedBy)
                 }
 
             if (similarLayer != null) {
                 val value = if (similarLayer.name == it.name) "name: ${it.name}" else "definedBy: ${it.definedBy} "
                 throw KoPreconditionFailedException("Layers have the same name $value.")
-            } else {
-                list += it
             }
         }
     }
