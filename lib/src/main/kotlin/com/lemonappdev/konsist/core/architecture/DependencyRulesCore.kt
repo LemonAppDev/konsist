@@ -9,7 +9,7 @@ class DependencyRulesCore : DependencyRules {
     internal val negativeDependencies = mutableMapOf<Layer, Set<Layer>>()
     internal val statuses = mutableMapOf<Layer, LayerDependencyType>()
 
-    internal var allLayers = mutableListOf<Layer>()
+    internal val allLayers = mutableSetOf<Layer>()
 
     override fun Layer.dependsOn(
         layer: Layer,
@@ -20,10 +20,11 @@ class DependencyRulesCore : DependencyRules {
         checkStatusOfLayer(false, this, layer, *layers)
         checkCircularDependencies(this, layer, *layers)
 
-        allLayers =
-            (allLayers + this + layer + layers)
-                .distinct()
-                .toMutableList()
+        allLayers.apply {
+            add(layer)
+            add(this@dependsOn)
+            addAll(layers)
+        }
 
         positiveDependencies[this] = (positiveDependencies.getOrDefault(this, setOf(this))) + layer + layers
         statuses[this] = LayerDependencyType.DEPEND_ON_LAYER
@@ -48,10 +49,11 @@ class DependencyRulesCore : DependencyRules {
         checkStatusOfLayer(false, this, layer, *layers)
         checkCircularDependencies(this, layer, *layers)
 
-        allLayers =
-            (allLayers + this + layer + layers)
-                .distinct()
-                .toMutableList()
+        allLayers.apply {
+            add(layer)
+            add(this@doesNotDependOn)
+            addAll(layers)
+        }
 
         negativeDependencies[this] = setOf(layer) + layers
         statuses[this] = LayerDependencyType.NOT_DEPEND_ON_LAYER
@@ -71,10 +73,7 @@ class DependencyRulesCore : DependencyRules {
         checkIfLayerHasTheSameValuesAsOtherLayer(this)
         checkStatusOfLayer(true, this)
 
-        allLayers =
-            (allLayers + this)
-                .distinct()
-                .toMutableList()
+        allLayers.add(this)
 
         positiveDependencies[this] = setOf(this)
         statuses[this] = LayerDependencyType.DEPENDENT_ON_NOTHING
@@ -125,11 +124,9 @@ class DependencyRulesCore : DependencyRules {
         layer: Layer,
         vararg layers: Layer,
     ) {
-        val allLayers =
-            layers
+        val allLayers = layers
                 .map { checkCircularDependenciesHelper(layer, it, emptyList(), emptyList()) }
-                .distinct()
-                .toMutableList()
+                .toSet()
 
         val notEmpty = allLayers.firstOrNull { it.size > 2 }
 
@@ -184,12 +181,11 @@ class DependencyRulesCore : DependencyRules {
     }
 
     private fun checkIfLayerHasTheSameValuesAsOtherLayer(vararg layers: Layer) {
-        val list: MutableList<Layer> =
-            allLayers
+        val list: MutableList<Layer> = allLayers
                 .distinct()
                 .toMutableList()
 
-        layers.forEach {
+        allLayers.forEach {
             val similarLayer =
                 list.firstOrNull { layerAlreadyDefined ->
                     it != layerAlreadyDefined && (layerAlreadyDefined.name == it.name || layerAlreadyDefined.definedBy == it.definedBy)
