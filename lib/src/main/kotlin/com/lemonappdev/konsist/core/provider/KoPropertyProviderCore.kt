@@ -7,7 +7,8 @@ import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 internal interface KoPropertyProviderCore :
     KoPropertyProvider,
     KoDeclarationProviderCore,
-    KoBaseProviderCore {
+    KoBaseProviderCore,
+    KoExtensionTypeProviderCore {
     override fun properties(includeNested: Boolean): List<KoPropertyDeclaration> =
         KoDeclarationProviderCoreUtil.getKoDeclarations(
             declarations(includeNested = false, includeLocal = false),

@@ -12,6 +12,7 @@ import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
+import com.lemonappdev.konsist.core.provider.KoExtensionTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoGetterProviderCore
 import com.lemonappdev.konsist.core.provider.KoInitializerProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsConstructorDefinedProviderCore
@@ -117,7 +118,8 @@ internal class KoPropertyDeclarationCore private constructor(
     KoSetterProviderCore,
     KoReadOnlyProviderCore,
     KoIsReadOnlyProviderCore,
-    KoTypeParameterProviderCore {
+    KoTypeParameterProviderCore,
+    KoExtensionTypeProviderCore {
     override val ktAnnotated: KtAnnotated = ktCallableDeclaration
 
     override val ktModifierListOwner: KtModifierListOwner = ktCallableDeclaration

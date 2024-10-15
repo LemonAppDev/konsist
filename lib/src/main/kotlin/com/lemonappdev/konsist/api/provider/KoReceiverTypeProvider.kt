@@ -9,6 +9,8 @@ import kotlin.reflect.KClass
 interface KoReceiverTypeProvider : KoBaseProvider {
     /**
      * Receiver type of the declaration.
+     *
+     * @see KoExtensionTypeProvider.isExtension
      */
     val receiverType: KoTypeDeclaration?
 
