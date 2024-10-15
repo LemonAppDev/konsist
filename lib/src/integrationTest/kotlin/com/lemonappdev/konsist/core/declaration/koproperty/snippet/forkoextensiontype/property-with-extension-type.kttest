@@ -1,1 +1,5 @@
-val Int.sampleFunction: String? = null
+val String.sampleProperty
+    get() = this.isNotEmpty()
+
+
+
