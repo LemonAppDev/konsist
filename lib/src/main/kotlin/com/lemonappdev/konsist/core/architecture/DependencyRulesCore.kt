@@ -17,7 +17,7 @@ class DependencyRulesCore : DependencyRules {
     ) {
         requireUniqueLayers(this, layer, *layers)
         requireNotDependentOnItself(this, layer, *layers)
-        checkStatusOfLayer(false, this, layer, *layers)
+        requireLayerStatusConsistency(false, this, layer, *layers)
         requireNoCilcularDependencies(this, layer, *layers)
 
         allLayers.apply {
@@ -46,7 +46,7 @@ class DependencyRulesCore : DependencyRules {
     ) {
         requireUniqueLayers(this, layer, *layers)
         requireNotDependentOnItself(this, layer, *layers)
-        checkStatusOfLayer(false, this, layer, *layers)
+        requireLayerStatusConsistency(false, this, layer, *layers)
         requireNoCilcularDependencies(this, layer, *layers)
 
         allLayers.apply {
@@ -71,7 +71,7 @@ class DependencyRulesCore : DependencyRules {
 
     override fun Layer.dependsOnNothing() {
         requireUniqueLayers(this)
-        checkStatusOfLayer(true, this)
+        requireLayerStatusConsistency(true, this)
 
         allLayers.add(this)
         positiveDependencies[this] = setOf(this)
@@ -87,34 +87,43 @@ class DependencyRulesCore : DependencyRules {
         }
     }
 
-    @Suppress("detekt.ThrowsCount")
-    private fun checkStatusOfLayer(
-        toBeIndependent: Boolean,
+    private fun requireLayerStatusConsistency(
+        shouldBeIndependent: Boolean,
         layer: Layer,
-        vararg layers: Layer,
+        vararg dependentLayers: Layer,
     ) {
         val layerName = layer.name
-        if (layerDependencyTypes[layer] == LayerDependencyType.DEPENDENT_ON_NOTHING) {
-            if (toBeIndependent) {
-                throw KoPreconditionFailedException("Duplicated the dependency that $layerName layer should be depend on nothing.")
-            } else {
-                throw KoPreconditionFailedException(
-                    "Layer $layerName was previously set as depend on nothing, " +
-                        "so it cannot depend on ${layers.first().name} layer.",
-                )
-            }
-        } else if (layerDependencyTypes[layer] == LayerDependencyType.DEPEND_ON_LAYER) {
-            val dependency = positiveDependencies.getOrDefault(layer, emptySet())
+        when (layerDependencyTypes[layer]) {
+            LayerDependencyType.DEPENDENT_ON_NOTHING -> handleIndependentLayerConflict(shouldBeIndependent, layerName, dependentLayers)
+            LayerDependencyType.DEPEND_ON_LAYER -> handleDependentLayerConflict(shouldBeIndependent, layer, layerName, dependentLayers)
+            else -> {} // No action needed for other statuses
+        }
+    }
 
-            if (toBeIndependent) {
-                val alreadySetLayer = dependency.first { it != layer }
-                throw KoPreconditionFailedException(
-                    "Layer $layerName had a dependency previously set with ${alreadySetLayer.name} layer, " +
-                        "so it cannot be depend on nothing.",
-                )
-            } else if (layers.any { dependency.contains(it) }) {
-                val alreadySetLayer = layers.first { dependency.contains(it) }
-                throw KoPreconditionFailedException("Duplicated the dependency between $layerName and ${alreadySetLayer.name} layers.")
+    private fun handleIndependentLayerConflict(shouldBeIndependent: Boolean, layerName: String, dependentLayers: Array<out Layer>) {
+        if (shouldBeIndependent) {
+            throw KoPreconditionFailedException("Redundant requirement: $layerName layer is already set to be independent.")
+        } else {
+            throw KoPreconditionFailedException(
+                "Conflict: $layerName was previously set as independent, " +
+                        "so it cannot depend on ${dependentLayers.first().name} layer."
+            )
+        }
+    }
+
+    private fun handleDependentLayerConflict(shouldBeIndependent: Boolean, layer: Layer, layerName: String, dependentLayers: Array<out Layer>) {
+        val existingDependencies = positiveDependencies.getOrDefault(layer, emptySet())
+
+        if (shouldBeIndependent) {
+            val existingDependency = existingDependencies.first { it != layer }
+            throw KoPreconditionFailedException(
+                "Conflict: $layerName already depends on ${existingDependency.name} layer, " +
+                        "so it cannot be set as independent."
+            )
+        } else {
+            val conflictingLayer = dependentLayers.firstOrNull { existingDependencies.contains(it) }
+            if (conflictingLayer != null) {
+                throw KoPreconditionFailedException("Redundant dependency between $layerName and ${conflictingLayer.name} layers.")
             }
         }
     }
