@@ -1,1 +1,1 @@
-val String.sampleFunction: Int = 12
+val String.sampleFunction: Int? = null
