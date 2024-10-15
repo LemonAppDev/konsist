@@ -4,8 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-@Suppress("detekt.LongMethod")
-class KoFunctionDeclarationForKoExtensionTypeProviderTest {
+class KoFunctionDeclarationForKoIsExtensionProviderTest {
     @Test
     fun `function-with-extension-type`() {
         // given

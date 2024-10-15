@@ -6,7 +6,7 @@ package com.lemonappdev.konsist.api.provider
  * This interface extends [KoBaseProvider] and offers methods to determine
  * if a declaration is an extension and to retrieve its extension receiver type.
  */
-interface KoExtensionTypeProvider : KoBaseProvider {
+interface KoIsExtensionProvider : KoBaseProvider {
     /**
      * Indicates whether the declaration is an extension.
      *

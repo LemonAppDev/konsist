@@ -10,7 +10,7 @@ interface KoReceiverTypeProvider : KoBaseProvider {
     /**
      * Receiver type of the declaration.
      *
-     * @see KoExtensionTypeProvider.isExtension
+     * @see KoIsExtensionProvider.isExtension
      */
     val receiverType: KoTypeDeclaration?
 

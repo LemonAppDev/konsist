@@ -9,8 +9,8 @@ import com.lemonappdev.konsist.core.provider.KoBodyProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
-import com.lemonappdev.konsist.core.provider.KoExtensionTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoInitializerProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsExtensionProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsInitializedProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
@@ -102,7 +102,7 @@ internal class KoFunctionDeclarationCore private constructor(
     KoActualModifierProviderCore,
     KoExpectModifierProviderCore,
     KoTypeParameterProviderCore,
-    KoExtensionTypeProviderCore {
+    KoIsExtensionProviderCore {
     override val ktCallableDeclaration: KtCallableDeclaration = ktFunction
 
     override val ktAnnotated: KtAnnotated = ktCallableDeclaration

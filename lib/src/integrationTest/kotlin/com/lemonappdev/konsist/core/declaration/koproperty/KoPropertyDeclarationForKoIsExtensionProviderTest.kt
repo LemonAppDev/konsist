@@ -5,7 +5,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 @Suppress("detekt.LongMethod")
-class KoPropertyDeclarationForKoExtensionTypeProviderTest {
+class KoPropertyDeclarationForKoIsExtensionProviderTest {
     @Test
     fun `property-with-extension-type`() {
         // given

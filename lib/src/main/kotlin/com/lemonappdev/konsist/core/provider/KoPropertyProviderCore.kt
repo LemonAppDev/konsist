@@ -8,7 +8,7 @@ internal interface KoPropertyProviderCore :
     KoPropertyProvider,
     KoDeclarationProviderCore,
     KoBaseProviderCore,
-    KoExtensionTypeProviderCore {
+    KoIsExtensionProviderCore {
     override fun properties(includeNested: Boolean): List<KoPropertyDeclaration> =
         KoDeclarationProviderCoreUtil.getKoDeclarations(
             declarations(includeNested = false, includeLocal = false),
