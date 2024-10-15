@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 class DependencyRulesCore : DependencyRules {
     internal val positiveDependencies = mutableMapOf<Layer, Set<Layer>>()
     internal val negativeDependencies = mutableMapOf<Layer, Set<Layer>>()
-    internal val statuses = mutableMapOf<Layer, LayerDependencyType>()
+    internal val layerDependencyTypes = mutableMapOf<Layer, LayerDependencyType>()
 
     internal val allLayers = mutableSetOf<Layer>()
 
@@ -16,9 +16,9 @@ class DependencyRulesCore : DependencyRules {
         vararg layers: Layer,
     ) {
         requireUniqueLayers(this, layer, *layers)
-        checkIfLayerIsDependentOnItself(this, layer, *layers)
+        requireNotDependentOnItself(this, layer, *layers)
         checkStatusOfLayer(false, this, layer, *layers)
-        checkCircularDependencies(this, layer, *layers)
+        requireNoCilcularDependencies(this, layer, *layers)
 
         allLayers.apply {
             add(layer)
@@ -27,15 +27,15 @@ class DependencyRulesCore : DependencyRules {
         }
 
         positiveDependencies[this] = (positiveDependencies.getOrDefault(this, setOf(this))) + layer + layers
-        statuses[this] = LayerDependencyType.DEPEND_ON_LAYER
+        layerDependencyTypes[this] = LayerDependencyType.DEPEND_ON_LAYER
 
-        if (statuses.getOrDefault(layer, LayerDependencyType.NONE) == LayerDependencyType.NONE) {
-            statuses[layer] = LayerDependencyType.NONE
+        if (layerDependencyTypes.getOrDefault(layer, LayerDependencyType.NONE) == LayerDependencyType.NONE) {
+            layerDependencyTypes[layer] = LayerDependencyType.NONE
         }
 
         layers.onEach {
-            if (statuses.getOrDefault(it, LayerDependencyType.NONE) == LayerDependencyType.NONE) {
-                statuses[it] = LayerDependencyType.NONE
+            if (layerDependencyTypes.getOrDefault(it, LayerDependencyType.NONE) == LayerDependencyType.NONE) {
+                layerDependencyTypes[it] = LayerDependencyType.NONE
             }
         }
     }
@@ -45,9 +45,9 @@ class DependencyRulesCore : DependencyRules {
         vararg layers: Layer,
     ) {
         requireUniqueLayers(this, layer, *layers)
-        checkIfLayerIsDependentOnItself(this, layer, *layers)
+        requireNotDependentOnItself(this, layer, *layers)
         checkStatusOfLayer(false, this, layer, *layers)
-        checkCircularDependencies(this, layer, *layers)
+        requireNoCilcularDependencies(this, layer, *layers)
 
         allLayers.apply {
             add(layer)
@@ -56,15 +56,15 @@ class DependencyRulesCore : DependencyRules {
         }
 
         negativeDependencies[this] = setOf(layer) + layers
-        statuses[this] = LayerDependencyType.NOT_DEPEND_ON_LAYER
+        layerDependencyTypes[this] = LayerDependencyType.NOT_DEPEND_ON_LAYER
 
-        if (statuses.getOrDefault(layer, LayerDependencyType.NONE) == LayerDependencyType.NONE) {
-            statuses[layer] = LayerDependencyType.NONE
+        if (layerDependencyTypes.getOrDefault(layer, LayerDependencyType.NONE) == LayerDependencyType.NONE) {
+            layerDependencyTypes[layer] = LayerDependencyType.NONE
         }
 
         layers.onEach {
-            if (statuses.getOrDefault(it, LayerDependencyType.NONE) == LayerDependencyType.NONE) {
-                statuses[it] = LayerDependencyType.NONE
+            if (layerDependencyTypes.getOrDefault(it, LayerDependencyType.NONE) == LayerDependencyType.NONE) {
+                layerDependencyTypes[it] = LayerDependencyType.NONE
             }
         }
     }
@@ -74,12 +74,11 @@ class DependencyRulesCore : DependencyRules {
         checkStatusOfLayer(true, this)
 
         allLayers.add(this)
-
         positiveDependencies[this] = setOf(this)
-        statuses[this] = LayerDependencyType.DEPENDENT_ON_NOTHING
+        layerDependencyTypes[this] = LayerDependencyType.DEPENDENT_ON_NOTHING
     }
 
-    private fun checkIfLayerIsDependentOnItself(
+    private fun requireNotDependentOnItself(
         layer: Layer,
         vararg layers: Layer,
     ) {
@@ -95,7 +94,7 @@ class DependencyRulesCore : DependencyRules {
         vararg layers: Layer,
     ) {
         val layerName = layer.name
-        if (statuses[layer] == LayerDependencyType.DEPENDENT_ON_NOTHING) {
+        if (layerDependencyTypes[layer] == LayerDependencyType.DEPENDENT_ON_NOTHING) {
             if (toBeIndependent) {
                 throw KoPreconditionFailedException("Duplicated the dependency that $layerName layer should be depend on nothing.")
             } else {
@@ -104,7 +103,7 @@ class DependencyRulesCore : DependencyRules {
                         "so it cannot depend on ${layers.first().name} layer.",
                 )
             }
-        } else if (statuses[layer] == LayerDependencyType.DEPEND_ON_LAYER) {
+        } else if (layerDependencyTypes[layer] == LayerDependencyType.DEPEND_ON_LAYER) {
             val dependency = positiveDependencies.getOrDefault(layer, emptySet())
 
             if (toBeIndependent) {
@@ -120,7 +119,7 @@ class DependencyRulesCore : DependencyRules {
         }
     }
 
-    private fun checkCircularDependencies(
+    private fun requireNoCilcularDependencies(
         layer: Layer,
         vararg layers: Layer,
     ) {
