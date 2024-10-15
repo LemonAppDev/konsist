@@ -10,6 +10,7 @@ import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoInitializerProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsExtensionProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsInitializedProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
@@ -100,22 +101,23 @@ internal class KoFunctionDeclarationCore private constructor(
     KoAbstractModifierProviderCore,
     KoActualModifierProviderCore,
     KoExpectModifierProviderCore,
-    KoTypeParameterProviderCore {
-    override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }
+    KoTypeParameterProviderCore,
+    KoIsExtensionProviderCore {
+    override val ktCallableDeclaration: KtCallableDeclaration = ktFunction
 
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktCallableDeclaration }
+    override val ktAnnotated: KtAnnotated = ktCallableDeclaration
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktCallableDeclaration }
+    override val ktModifierListOwner: KtModifierListOwner = ktCallableDeclaration
 
-    override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktFunction }
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner = ktCallableDeclaration
 
-    override val psiElement: PsiElement by lazy { ktFunction }
+    override val psiElement: PsiElement = ktFunction
 
-    override val ktElement: KtElement by lazy { ktFunction }
+    override val ktElement: KtElement = ktFunction
 
-    override val ktDeclarationWithBody: KtDeclarationWithBody by lazy { ktFunction }
+    override val ktDeclarationWithBody: KtDeclarationWithBody = ktFunction
 
-    override val ktDeclaration: KtDeclaration by lazy { ktFunction }
+    override val ktDeclaration: KtDeclaration = ktFunction
 
     override val localDeclarations: List<KoBaseDeclaration> by lazy {
         val psiElements =

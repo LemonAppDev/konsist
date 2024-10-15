@@ -34,17 +34,17 @@ internal class KoObjectDeclarationCore(
      */
     KoNameProviderCore,
     KoParentClassProviderCore {
-    override val ktAnnotated: KtAnnotated by lazy { ktObjectDeclaration }
+    override val ktAnnotated: KtAnnotated = ktObjectDeclaration
 
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktObjectDeclaration }
+    override val ktModifierListOwner: KtModifierListOwner = ktObjectDeclaration
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktObjectDeclaration }
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner = ktObjectDeclaration
 
-    override val psiElement: PsiElement by lazy { ktObjectDeclaration }
+    override val psiElement: PsiElement = ktObjectDeclaration
 
-    override val ktElement: KtElement by lazy { ktObjectDeclaration }
+    override val ktElement: KtElement = ktObjectDeclaration
 
-    override val ktClassOrObject: KtClassOrObject by lazy { ktObjectDeclaration }
+    override val ktClassOrObject: KtClassOrObject = ktObjectDeclaration
 
     override val name: String by lazy {
         if (hasCompanionModifier && super<KoNameProviderCore>.name == "") {

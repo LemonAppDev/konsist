@@ -21,14 +21,13 @@ interface KoTypeArgumentProvider : KoBaseProvider {
      * 3. In `List<Set<String>>`, `Set<String>` is a type argument for `List`. It has a nested type argument `String`.
      * 4. For a non-generic type like `String`, this property would return `null`.
      *
-     * Examples:
-     * Kotlin code:
+     * Kotlin snippet:
      * ```kotlin
      * val sampleProperty: Map<String, Int> = emptyList()
      *```
      *
      * Konsist:
-     * ````kotlin
+     * ```kotlin
      * Konsist
      *     scopeFromProject()
      *     .properties()
@@ -41,13 +40,13 @@ interface KoTypeArgumentProvider : KoBaseProvider {
      *
      * The flattened list of type arguments can be obtained using the `flatten` extension function:
      *
-     * Kotlin code:
+     * Kotlin snippet:
      * ```kotlin
      * val sampleProperty: List<String, Map<Int, Boolean>> = emptyList()
      *```
      *
      * Konsist:
-     * ````kotlin
+     * ```kotlin
      * Konsist
      *     scopeFromProject()
      *     .properties()

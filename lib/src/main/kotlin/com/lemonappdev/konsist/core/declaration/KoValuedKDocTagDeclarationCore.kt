@@ -13,5 +13,5 @@ internal open class KoValuedKDocTagDeclarationCore(
     KoValuedKDocTagDeclaration,
     KoKDocTagValueProviderCore,
     KoBaseProviderCore {
-    final override fun toString(): String = name.type + " " + value + " " + description
+    final override fun toString(): String = "${name.type} $value $description"
 }

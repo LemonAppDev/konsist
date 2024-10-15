@@ -69,11 +69,13 @@ internal object KoFileDeclarationProvider {
         }
 
     private fun parseKotlinFile(file: File): KoFileDeclaration? {
-        // We need to check whether the file is still a Kotlin file before parsing it.
-        // Since this is ran async, the file may have been removed/changed since the initial
-        // file tree walk above. A common scenario is via code generators. Since we don't
-        // exclude build or generated files here (that happens later), we need to make the initial
-        // loading more permissive, and return null for files which disappear.
+        /*
+        Due to asynchronous execution, the file's state may have changed since the initial file tree walk.
+        This is particularly common with code generators. We don't exclude build or generated files at this stage
+        (that happens later), so we need to be more permissive in the initial loading process.
+        We verify the file is still a valid Kotlin file before parsing to handle cases where files may have been
+        removed or altered. If the file is no longer valid, we return null instead of attempting to parse it.
+         */
         return when {
             file.isKotlinFile -> file.toKoFile()
             else -> null

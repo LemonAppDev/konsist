@@ -39,8 +39,7 @@ internal class KoPackageDeclarationCore internal constructor(
         this.ktPackageDirective = ktPackageDirective
     }
 
-    override val psiElement: PsiElement
-        get() = ktElement
+    override val psiElement: PsiElement = ktElement
 
     override val name: String by lazy {
         if (ktPackageDirective == null) {

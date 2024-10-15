@@ -8,14 +8,9 @@ enum class KoKDocTag(
     val isValued: Boolean = false,
 ) {
     /**
-     * The `@param` tag.
+     * The `@author` tag.
      */
-    PARAM("@param", true),
-
-    /**
-     * The `@return` tag.
-     */
-    RETURN("@return"),
+    AUTHOR("@author"),
 
     /**
      * The `@constructor` tag.
@@ -23,9 +18,14 @@ enum class KoKDocTag(
     CONSTRUCTOR("@constructor"),
 
     /**
-     * The `@receiver` tag.
+     * The `@exception` tag.
      */
-    RECEIVER("@receiver"),
+    EXCEPTION("@exception", true),
+
+    /**
+     * The `@param` tag.
+     */
+    PARAM("@param", true),
 
     /**
      * The `@property` tag.
@@ -33,14 +33,24 @@ enum class KoKDocTag(
     PROPERTY("@property", true),
 
     /**
-     * The `@throws` tag.
+     * The `@propertyGetter` tag.
      */
-    THROWS("@throws", true),
+    PROPERTY_GETTER("@propertyGetter"),
 
     /**
-     * The `@exception` tag.
+     * The `@propertySetter` tag.
      */
-    EXCEPTION("@exception", true),
+    PROPERTY_SETTER("@propertySetter"),
+
+    /**
+     * The `@receiver` tag.
+     */
+    RECEIVER("@receiver"),
+
+    /**
+     * The `@return` tag.
+     */
+    RETURN("@return"),
 
     /**
      * The `@sample` tag.
@@ -53,11 +63,6 @@ enum class KoKDocTag(
     SEE("@see", true),
 
     /**
-     * The `@author` tag.
-     */
-    AUTHOR("@author"),
-
-    /**
      * The `@since` tag.
      */
     SINCE("@since"),
@@ -68,17 +73,12 @@ enum class KoKDocTag(
     SUPPRESS("@suppress"),
 
     /**
+     * The `@throws` tag.
+     */
+    THROWS("@throws", true),
+
+    /**
      * The `@version` tag.
      */
     VERSION("@version"),
-
-    /**
-     * The `@propertySetter` tag.
-     */
-    PROPERTY_SETTER("@propertySetter"),
-
-    /**
-     * The `@propertyGetter` tag.
-     */
-    PROPERTY_GETTER("@propertyGetter"),
 }

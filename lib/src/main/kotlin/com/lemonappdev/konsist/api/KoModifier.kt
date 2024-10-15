@@ -7,34 +7,14 @@ enum class KoModifier(
     val type: String,
 ) {
     /**
-     * The `data` modifier.
+     * The `abstract` modifier.
      */
-    DATA("data"),
+    ABSTRACT("abstract"),
 
     /**
-     * The `value` modifier.
+     * The `actual` modifier.
      */
-    VALUE("value"),
-
-    /**
-     * The `inline` modifier.
-     */
-    INLINE("inline"),
-
-    /**
-     * The `noinline` modifier.
-     */
-    NOINLINE("noinline"),
-
-    /**
-     * The `tailrec` modifier.
-     */
-    TAILREC("tailrec"),
-
-    /**
-     * The `external` modifier.
-     */
-    EXTERNAL("external"),
+    ACTUAL("actual"),
 
     /**
      * The `annotation` modifier.
@@ -42,29 +22,14 @@ enum class KoModifier(
     ANNOTATION("annotation"),
 
     /**
-     * The `crossinline` modifier.
+     * The `companion` modifier.
      */
-    CROSSINLINE("crossinline"),
+    COMPANION("companion"),
 
     /**
-     * The `operator` modifier.
+     * The `const` modifier.
      */
-    OPERATOR("operator"),
-
-    /**
-     * The `infix` modifier.
-     */
-    INFIX("infix"),
-
-    /**
-     * The `abstract` modifier.
-     */
-    ABSTRACT("abstract"),
-
-    /**
-     * The `num` modifier.
-     */
-    ENUM("enum"),
+    CONST("const"),
 
     /**
      * The `contract` modifier.
@@ -72,14 +37,89 @@ enum class KoModifier(
     CONTRACT("contract"),
 
     /**
-     * The `open` modifier.
+     * The `crossinline` modifier.
      */
-    OPEN("open"),
+    CROSSINLINE("crossinline"),
+
+    /**
+     * The `data` modifier.
+     */
+    DATA("data"),
+
+    /**
+     * The `num` modifier.
+     */
+    ENUM("enum"),
+
+    /**
+     * The `expect` modifier.
+     */
+    EXPECT("expect"),
+
+    /**
+     * The `external` modifier.
+     */
+    EXTERNAL("external"),
+
+    /**
+     * The `final` modifier.
+     */
+    FINAL("final"),
+
+    /**
+     * The `fun` modifier.
+     */
+    FUN("fun"),
+
+    /**
+     * The `in` modifier.
+     */
+    IN("in"),
+
+    /**
+     * The `infix` modifier.
+     */
+    INFIX("infix"),
+
+    /**
+     * The `inline` modifier.
+     */
+    INLINE("inline"),
 
     /**
      * The `inner` modifier.
      */
     INNER("inner"),
+
+    /**
+     * The `internal` modifier.
+     */
+    INTERNAL("internal"),
+
+    /**
+     * The `lateinit` modifier.
+     */
+    LATEINIT("lateinit"),
+
+    /**
+     * The `noinline` modifier.
+     */
+    NOINLINE("noinline"),
+
+    /**
+     * The `open` modifier.
+     */
+    OPEN("open"),
+
+    /**
+     * The `operator` modifier.
+     */
+    OPERATOR("operator"),
+
+    /**
+     * The `out` modifier.
+     */
+    OUT("out"),
 
     /**
      * The `override` modifier.
@@ -92,34 +132,14 @@ enum class KoModifier(
     PRIVATE("private"),
 
     /**
-     * The `public` modifier.
-     */
-    PUBLIC("public"),
-
-    /**
-     * The `internal` modifier.
-     */
-    INTERNAL("internal"),
-
-    /**
      * The `protected` modifier.
      */
     PROTECTED("protected"),
 
     /**
-     * The `out` modifier.
+     * The `public` modifier.
      */
-    OUT("out"),
-
-    /**
-     * The `in` modifier.
-     */
-    IN("in"),
-
-    /**
-     * The `vararg` modifier.
-     */
-    VARARG("vararg"),
+    PUBLIC("public"),
 
     /**
      * The `reified` modifier.
@@ -127,29 +147,9 @@ enum class KoModifier(
     REIFIED("reified"),
 
     /**
-     * The `companion` modifier.
-     */
-    COMPANION("companion"),
-
-    /**
      * The `sealed` modifier.
      */
     SEALED("sealed"),
-
-    /**
-     * The `final` modifier.
-     */
-    FINAL("final"),
-
-    /**
-     * The `lateinit` modifier.
-     */
-    LATEINIT("lateinit"),
-
-    /**
-     * The `const` modifier.
-     */
-    CONST("const"),
 
     /**
      * The `suspend` modifier.
@@ -157,17 +157,17 @@ enum class KoModifier(
     SUSPEND("suspend"),
 
     /**
-     * The `expect` modifier.
+     * The `tailrec` modifier.
      */
-    EXPECT("expect"),
+    TAILREC("tailrec"),
 
     /**
-     * The `actual` modifier.
+     * The `value` modifier.
      */
-    ACTUAL("actual"),
+    VALUE("value"),
 
     /**
-     * The `fun` modifier.
+     * The `vararg` modifier.
      */
-    FUN("fun"),
+    VARARG("vararg"),
 }

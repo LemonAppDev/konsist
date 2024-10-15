@@ -57,13 +57,13 @@ internal class KoParameterDeclarationCore private constructor(
     KoVarArgModifierProviderCore,
     KoNoInlineModifierProviderCore,
     KoCrossInlineModifierProviderCore {
-    override val ktAnnotated: KtAnnotated by lazy { ktParameter }
+    override val ktAnnotated: KtAnnotated = ktParameter
 
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktParameter }
+    override val ktModifierListOwner: KtModifierListOwner = ktParameter
 
-    override val psiElement: PsiElement by lazy { ktParameter }
+    override val psiElement: PsiElement = ktParameter
 
-    override val ktElement: KtElement by lazy { ktParameter }
+    override val ktElement: KtElement = ktParameter
 
     override val type: KoTypeDeclaration by lazy {
         val type =

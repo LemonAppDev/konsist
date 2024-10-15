@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.api.ext.list
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import io.mockk.every
 import io.mockk.mockk
+import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -1630,5 +1631,79 @@ class KoNameProviderListExtTest {
 
         // then
         sut shouldBeEqualTo listOf(declaration3)
+    }
+
+    @Test
+    fun `isSortedByName - empty list should return true`() {
+        emptyList<KoNameProvider>().isSortedByName() shouldBe true
+    }
+
+    @Test
+    fun `isSortedByName - single element list should return true`() {
+        val koNameProviderA: KoNameProvider = mockk { every { name } returns "A" }
+        listOf(koNameProviderA).isSortedByName() shouldBe true
+    }
+
+    @Test
+    fun `isSortedByName - sorted list should return true`() {
+        val koNameProviderA: KoNameProvider = mockk { every { name } returns "A" }
+        val koNameProviderB: KoNameProvider = mockk { every { name } returns "B" }
+        val koNameProviderC: KoNameProvider = mockk { every { name } returns "C" }
+
+        listOf(koNameProviderA, koNameProviderB, koNameProviderC).isSortedByName() shouldBe true
+    }
+
+    @Test
+    fun `isSortedByName - unsorted list should return false`() {
+        val koNameProviderA: KoNameProvider = mockk { every { name } returns "A" }
+        val koNameProviderB: KoNameProvider = mockk { every { name } returns "B" }
+        val koNameProviderC: KoNameProvider = mockk { every { name } returns "C" }
+
+        listOf(koNameProviderB, koNameProviderA, koNameProviderC).isSortedByName() shouldBe false
+    }
+
+    @Test
+    fun `isSortedByName - case-insensitive sorted list should return true by default`() {
+        val koNameProviderA: KoNameProvider = mockk { every { name } returns "a" }
+        val koNameProviderB: KoNameProvider = mockk { every { name } returns "B" }
+        val koNameProviderC: KoNameProvider = mockk { every { name } returns "c" }
+
+        listOf(koNameProviderA, koNameProviderB, koNameProviderC).isSortedByName() shouldBe true
+    }
+
+    @Test
+    fun `isSortedByName - case-sensitive sorted list should return false when ignoreCase is false`() {
+        val koNameProviderA: KoNameProvider = mockk { every { name } returns "a" }
+        val koNameProviderB: KoNameProvider = mockk { every { name } returns "B" }
+        val koNameProviderC: KoNameProvider = mockk { every { name } returns "c" }
+
+        listOf(koNameProviderA, koNameProviderB, koNameProviderC).isSortedByName(ignoreCase = false) shouldBe false
+    }
+
+    @Test
+    fun `isSortedByName - descending sorted list should return true`() {
+        val koNameProviderA: KoNameProvider = mockk { every { name } returns "A" }
+        val koNameProviderB: KoNameProvider = mockk { every { name } returns "B" }
+        val koNameProviderC: KoNameProvider = mockk { every { name } returns "C" }
+
+        listOf(koNameProviderC, koNameProviderB, koNameProviderA).isSortedByName(ascending = false) shouldBe true
+    }
+
+    @Test
+    fun `isSortedByName - descending case-insensitive sorted list should return true by default`() {
+        val koNameProviderA: KoNameProvider = mockk { every { name } returns "A" }
+        val koNameProviderB: KoNameProvider = mockk { every { name } returns "b" }
+        val koNameProviderC: KoNameProvider = mockk { every { name } returns "C" }
+
+        listOf(koNameProviderC, koNameProviderB, koNameProviderA).isSortedByName(ascending = false) shouldBe true
+    }
+
+    @Test
+    fun `isSortedByName - descending case-sensitive sorted list should return false when ignoreCase is false`() {
+        val koNameProviderA: KoNameProvider = mockk { every { name } returns "A" }
+        val koNameProviderB: KoNameProvider = mockk { every { name } returns "b" }
+        val koNameProviderC: KoNameProvider = mockk { every { name } returns "C" }
+
+        listOf(koNameProviderC, koNameProviderB, koNameProviderA).isSortedByName(ascending = false, ignoreCase = false) shouldBe false
     }
 }

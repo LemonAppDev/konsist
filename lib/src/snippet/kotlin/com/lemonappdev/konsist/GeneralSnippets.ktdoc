@@ -7,6 +7,8 @@ import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.ext.list.constructors
 import com.lemonappdev.konsist.api.ext.list.indexOfFirstInstance
 import com.lemonappdev.konsist.api.ext.list.indexOfLastInstance
+import com.lemonappdev.konsist.api.ext.list.isSortedByName
+import com.lemonappdev.konsist.api.ext.list.modifierprovider.withAllModifiers
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withModifier
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withValueModifier
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifier
@@ -20,6 +22,7 @@ import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
+import org.junit.jupiter.api.Test
 import java.util.Locale
 import javax.inject.Inject
 
@@ -97,9 +100,18 @@ class GeneralSnippets {
             .classes()
             .constructors
             .assertTrue {
-                val names = it.parameters.map { parameter -> parameter.name }
-                val sortedNames = names.sorted()
-                names == sortedNames
+                it.parameters.isSortedByName()
+            }
+    }
+
+    @Test
+    fun `enums has alphabetically ordered consts`() {
+        Konsist
+            .scopeFromProduction()
+            .classes()
+            .withAllModifiers(KoModifier.ENUM)
+            .assertTrue {
+                it.enumConstants.isSortedByName()
             }
     }
 
