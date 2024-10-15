@@ -96,7 +96,7 @@ private fun validateAllLayersAreValid(
     dependencyRules: DependencyRulesCore,
 ): Unit {
     val isAllLayersValid =
-        dependencyRules.allLayers
+        dependencyRules.uniqueLayers
             .all {
                 files
                     .withPackage(it.definedBy)
@@ -106,7 +106,7 @@ private fun validateAllLayersAreValid(
     if (!isAllLayersValid) {
         val layer =
             dependencyRules
-                .allLayers
+                .uniqueLayers
                 .first {
                     files
                         .withPackage(it.definedBy)
@@ -124,7 +124,7 @@ private fun validateAllLayersAreValid(
  * @throws KoPreconditionFailedException Architecture doesn't contain layers or dependencies
  */
 private fun validateLayersOnDependencyRules(dependencyRules: DependencyRulesCore): Unit {
-    if (dependencyRules.allLayers.isEmpty()) {
+    if (dependencyRules.uniqueLayers.isEmpty()) {
         throw KoPreconditionFailedException("Architecture doesn't contain layers or dependencies.")
     }
 }
@@ -146,7 +146,7 @@ private fun validateLayersContainingFailedFiles(
     dependencyRules
         .positiveDependencies
         .forEach { (layer, layers) ->
-            val otherLayers = (dependencyRules.allLayers - layers)
+            val otherLayers = (dependencyRules.uniqueLayers - layers)
 
             files
                 .withPackage(layer.definedBy)

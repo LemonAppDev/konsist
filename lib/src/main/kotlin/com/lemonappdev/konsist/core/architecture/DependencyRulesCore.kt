@@ -9,7 +9,7 @@ class DependencyRulesCore : DependencyRules {
     internal val negativeDependencies = mutableMapOf<Layer, Set<Layer>>()
     internal val layerDependencyTypes = mutableMapOf<Layer, LayerDependencyType>()
 
-    internal val allLayers = mutableSetOf<Layer>()
+    internal val uniqueLayers = mutableSetOf<Layer>()
 
     override fun Layer.dependsOn(
         layer: Layer,
@@ -20,7 +20,7 @@ class DependencyRulesCore : DependencyRules {
         requireLayerStatusConsistency(false, this, layer, *layers)
         requireNoCilcularDependencies(this, layer, *layers)
 
-        allLayers.apply {
+        uniqueLayers.apply {
             add(layer)
             add(this@dependsOn)
             addAll(layers)
@@ -29,14 +29,10 @@ class DependencyRulesCore : DependencyRules {
         positiveDependencies[this] = (positiveDependencies.getOrDefault(this, setOf(this))) + layer + layers
         layerDependencyTypes[this] = LayerDependencyType.DEPEND_ON_LAYER
 
-        if (layerDependencyTypes.getOrDefault(layer, LayerDependencyType.NONE) == LayerDependencyType.NONE) {
-            layerDependencyTypes[layer] = LayerDependencyType.NONE
-        }
+        val allLayers = listOf(layer) + layers + this
 
-        layers.onEach {
-            if (layerDependencyTypes.getOrDefault(it, LayerDependencyType.NONE) == LayerDependencyType.NONE) {
-                layerDependencyTypes[it] = LayerDependencyType.NONE
-            }
+        allLayers.forEach { dependency ->
+            layerDependencyTypes.putIfAbsent(dependency, LayerDependencyType.NONE)
         }
     }
 
@@ -49,7 +45,7 @@ class DependencyRulesCore : DependencyRules {
         requireLayerStatusConsistency(false, this, layer, *layers)
         requireNoCilcularDependencies(this, layer, *layers)
 
-        allLayers.apply {
+        uniqueLayers.apply {
             add(layer)
             add(this@doesNotDependOn)
             addAll(layers)
@@ -73,7 +69,7 @@ class DependencyRulesCore : DependencyRules {
         requireUniqueLayers(this)
         requireLayerStatusConsistency(true, this)
 
-        allLayers.add(this)
+        uniqueLayers.add(this)
         positiveDependencies[this] = setOf(this)
         layerDependencyTypes[this] = LayerDependencyType.DEPENDENT_ON_NOTHING
     }
@@ -191,7 +187,7 @@ class DependencyRulesCore : DependencyRules {
     private fun requireUniqueLayers(vararg layers: Layer) {
         layers.forEach {
             val similarLayer =
-                allLayers.firstOrNull { layerAlreadyDefined ->
+                uniqueLayers.firstOrNull { layerAlreadyDefined ->
                     it != layerAlreadyDefined && (layerAlreadyDefined.name == it.name || layerAlreadyDefined.definedBy == it.definedBy)
                 }
 
