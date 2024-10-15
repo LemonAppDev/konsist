@@ -1,2 +1,2 @@
 val List<Int>.sampleProperty
-    get() = listOf()
+    get() = listOf(1)
