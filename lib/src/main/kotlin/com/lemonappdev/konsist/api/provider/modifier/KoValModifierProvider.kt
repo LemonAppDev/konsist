@@ -5,9 +5,11 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 /**
  * An interface representing a Kotlin declaration that provides information about whether it has a `val` modifier.
  */
+@Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
 interface KoValModifierProvider : KoBaseProvider {
     /**
      * Determines whatever the declaration has `val` modifier.
      */
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith("isVal"))
     val hasValModifier: Boolean
 }
