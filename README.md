@@ -138,8 +138,8 @@ requests.
 
 ## 💰Sponsor Konsist
 
-We appreciate your interest in Konsist. If you've found our project beneficial, we
-welcome [your support](https://docs.konsist.lemonappdev.com/help/sponsor-konsist).
+We appreciate your interest in Konsist. If you've found our project beneficial, [we
+welcome your support](https://docs.konsist.lemonappdev.com/help/sponsor-konsist).
 
 ## Contributing
 
