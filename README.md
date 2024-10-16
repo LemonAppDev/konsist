@@ -139,7 +139,7 @@ requests.
 ## 💰Sponsor Konsist
 
 We appreciate your interest in Konsist. If you've found our project beneficial, we
-welcome [your support](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/~/changes/487/help/sponsor-konsist).
+welcome [your support](https://docs.konsist.lemonappdev.com/help/sponsor-konsist).
 
 ## Contributing
 
