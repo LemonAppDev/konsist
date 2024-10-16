@@ -8,6 +8,8 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsValProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsVarProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -53,7 +55,9 @@ internal class KoVariableDeclarationCore private constructor(
     KoValueProviderCore,
     KoValModifierProviderCore,
     KoVarModifierProviderCore,
-    KoTacitTypeProviderCore {
+    KoTacitTypeProviderCore,
+    KoIsValProviderCore,
+    KoIsVarProviderCore {
     override val ktAnnotated: KtAnnotated = ktProperty
 
     override val ktCallableDeclaration: KtCallableDeclaration = ktProperty
@@ -85,6 +89,10 @@ internal class KoVariableDeclarationCore private constructor(
 
     @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith(""))
     override val hasVarModifier: Boolean = ktProperty.isVar
+
+    override val isVal: Boolean = !ktProperty.isVar
+
+    override val isVar: Boolean = ktProperty.isVar
 
     override fun toString(): String = name
 

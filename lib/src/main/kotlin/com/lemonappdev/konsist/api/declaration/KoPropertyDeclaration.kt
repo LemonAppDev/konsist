@@ -14,6 +14,8 @@ import com.lemonappdev.konsist.api.provider.KoIsExtensionProvider
 import com.lemonappdev.konsist.api.provider.KoIsInitializedProvider
 import com.lemonappdev.konsist.api.provider.KoIsReadOnlyProvider
 import com.lemonappdev.konsist.api.provider.KoIsTopLevelProvider
+import com.lemonappdev.konsist.api.provider.KoIsValProvider
+import com.lemonappdev.konsist.api.provider.KoIsVarProvider
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
@@ -90,4 +92,6 @@ interface KoPropertyDeclaration :
     KoReadOnlyProvider,
     KoIsReadOnlyProvider,
     KoTacitTypeProvider,
-    KoIsExtensionProvider
+    KoIsExtensionProvider,
+    KoIsValProvider,
+    KoIsVarProvider
