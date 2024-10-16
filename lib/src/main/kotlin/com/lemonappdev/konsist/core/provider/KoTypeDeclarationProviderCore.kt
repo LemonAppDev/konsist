@@ -31,21 +31,15 @@ internal interface KoTypeDeclarationProviderCore :
     KoBaseProviderCore,
     KoContainingFileProviderCore,
     KoContainingDeclarationProviderCore {
-    /*
-    Remove in version 0.18.0
-     */
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
     val ktTypeReference: KtTypeReference?
         get() = null
 
-    /*
-    Remove in version 0.18.0
-     */
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
     val ktNameReferenceExpression: KtNameReferenceExpression?
         get() = null
 
-    /*
-    Remove in version 0.18.0
-     */
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
     val ktTypeProjection: KtTypeProjection?
         get() = null
 

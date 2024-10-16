@@ -11,6 +11,8 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDefaultValueProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsValProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsVarProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
@@ -56,7 +58,9 @@ internal class KoParameterDeclarationCore private constructor(
     KoValModifierProviderCore,
     KoVarArgModifierProviderCore,
     KoNoInlineModifierProviderCore,
-    KoCrossInlineModifierProviderCore {
+    KoCrossInlineModifierProviderCore,
+    KoIsValProviderCore,
+    KoIsVarProviderCore {
     override val ktAnnotated: KtAnnotated = ktParameter
 
     override val ktModifierListOwner: KtModifierListOwner = ktParameter
@@ -78,9 +82,15 @@ internal class KoParameterDeclarationCore private constructor(
 
     override fun representsType(name: String?): Boolean = type.name == name
 
+    @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("isVal"))
     override val hasValModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "val" }
 
+    @Deprecated("Will be removed in version 0.18.0")
     override val hasVarModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "var" }
+
+    override val isVal: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "val" }
+
+    override val isVar: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "var" }
 
     override fun toString(): String = name
 

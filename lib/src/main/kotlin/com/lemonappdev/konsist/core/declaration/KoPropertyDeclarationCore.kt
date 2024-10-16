@@ -19,6 +19,8 @@ import com.lemonappdev.konsist.core.provider.KoIsExtensionProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsInitializedProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsReadOnlyProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsTopLevelProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsValProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsVarProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -119,7 +121,9 @@ internal class KoPropertyDeclarationCore private constructor(
     KoReadOnlyProviderCore,
     KoIsReadOnlyProviderCore,
     KoTypeParameterProviderCore,
-    KoIsExtensionProviderCore {
+    KoIsExtensionProviderCore,
+    KoIsValProviderCore,
+    KoIsVarProviderCore {
     override val ktAnnotated: KtAnnotated = ktCallableDeclaration
 
     override val ktModifierListOwner: KtModifierListOwner = ktCallableDeclaration
@@ -132,27 +136,19 @@ internal class KoPropertyDeclarationCore private constructor(
 
     override val ktDeclaration: KtDeclaration = ktCallableDeclaration
 
-    /*
-    Remove in version 0.18.0
-     */
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
     override val isInitialized: Boolean
         get() = super<KoIsInitializedProviderCore>.isInitialized
 
-    /*
-    Remove in version 0.18.0
-     */
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
     override val isConstructorDefined: Boolean
         get() = super<KoIsConstructorDefinedProviderCore>.isConstructorDefined
 
-    /*
-    Remove in version 0.18.0
-     */
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
     override val isReadOnly: Boolean
         get() = super<KoIsReadOnlyProviderCore>.isReadOnly
 
-    /*
-    Remove in version 0.18.0
-     */
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
     override val isTopLevel: Boolean
         get() = super<KoIsTopLevelProviderCore>.isTopLevel
 
@@ -178,6 +174,7 @@ internal class KoPropertyDeclarationCore private constructor(
         }
     }
 
+    @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("isVal"))
     override val hasValModifier: Boolean by lazy {
         when (ktCallableDeclaration) {
             is KtProperty -> !ktCallableDeclaration.isVar
@@ -186,7 +183,24 @@ internal class KoPropertyDeclarationCore private constructor(
         }
     }
 
+    @Deprecated("Will be removed in version 0.18.0")
     override val hasVarModifier: Boolean by lazy {
+        when (ktCallableDeclaration) {
+            is KtProperty -> ktCallableDeclaration.isVar
+            is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "var"
+            else -> false
+        }
+    }
+
+    override val isVal: Boolean by lazy {
+        when (ktCallableDeclaration) {
+            is KtProperty -> !ktCallableDeclaration.isVar
+            is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "val"
+            else -> false
+        }
+    }
+
+    override val isVar: Boolean by lazy {
         when (ktCallableDeclaration) {
             is KtProperty -> ktCallableDeclaration.isVar
             is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "var"

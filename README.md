@@ -5,8 +5,10 @@
 ![Check Workflow](https://github.com/LemonAppDev/konsist/actions/workflows/check.yml/badge.svg)
 [<img src="https://img.shields.io/maven-central/v/com.lemonappdev/konsist?label=Release"/>](https://central.sonatype.com/artifact/com.lemonappdev/konsist)
 
-Konsist is a linter that guards the consistency of [Kotlin](https://kotlinlang.org/) projects by enforcing a cohesive code structure 
-and unified architecture. Konsist guards are written in the form of unit tests ([JUnit](https://junit.org/) / [Kotest](https://kotest.io/)).
+Konsist is a linter that guards the consistency of [Kotlin](https://kotlinlang.org/) projects by enforcing a cohesive
+code structure
+and unified architecture. Konsist guards are written in the form of unit
+tests ([JUnit](https://junit.org/) / [Kotest](https://kotest.io/)).
 
 <p align="center">
   <a href="https://kotlinfoundation.org/news/grants-program-winners-24/" target="_blank" rel="noopener noreferrer">
@@ -25,21 +27,22 @@ testImplementation("com.lemonappdev:konsist:0.16.1")
 testImplementation "com.lemonappdev:konsist:0.16.1"
 
 // Maven:
-<dependency>
-    <groupId>com.lemonappdev</groupId>
-    <artifactId>konsist</artifactId>
-    <version>0.16.1</version>
-    <scope>test</scope>
-</dependency>
+<dependency >
+<groupId > com.lemonappdev < / groupId >
+<artifactId > konsist < / artifactId >
+<version > 0.16.1 < / version >
+<scope > test < / scope >
+</dependency >
 ```
 
 ## Getting Started
 
 To begin using Konsist in your project, consider these steps:
 
-1. See [Konsist Documentation](https://docs.konsist.lemonappdev.com/) to familiarize yourself with Konsist's 
+1. See [Konsist Documentation](https://docs.konsist.lemonappdev.com/) to familiarize yourself with Konsist's
    features and usage guidelines.
-2. Check [Starter Projects](https://github.com/LemonAppDev/konsist/tree/main/samples/starter-projects) to see Konsist in action.
+2. Check [Starter Projects](https://github.com/LemonAppDev/konsist/tree/main/samples/starter-projects) to see Konsist in
+   action.
 3. Review [Konsist API Reference](https://reference.konsist.lemonappdev.com) to learn about the available API methods.
 
 ## Examples
@@ -86,6 +89,15 @@ fun `interfaces with 'Repository' annotation should have 'Repository' suffix`() 
 
 ### Architecture Layers Check
 
+Test that `Presentation` and `Data` layers depend on `Domain` layer and `Domain` layer don't have any dependencies
+from `Presentation` and `Data` layers.
+
+```mermaid
+%%{init: {'theme': 'forest'}}%%
+flowchart
+    Presentation[Presentation Layer] & Data[Data Layer] --> Domain[Domain Layer]
+```
+
 ```kotlin
 @Test
 fun `clean architecture layers have correct dependencies`() {
@@ -104,9 +116,9 @@ fun `clean architecture layers have correct dependencies`() {
         }
 }
 ```
-    
+
 Check out our [snippet](https://docs.konsist.lemonappdev.com/inspiration/snippets) page for a feast of examples!
-    
+
 ## Articles & Videos
 
 Check the [videos & articles](https://docs.konsist.lemonappdev.com/getting-started/getting-started/articles).
@@ -115,12 +127,19 @@ Check the [videos & articles](https://docs.konsist.lemonappdev.com/getting-start
 
 [![Star History Chart](https://api.star-history.com/svg?repos=LemonAppDev/konsist&type=Date)](https://star-history.com/#LemonAppDev/konsist&Date)
 
-## Support 
+## Support
 
 We're here to help you make the most of Konsist. Here are the best ways to get support:
 
-For quick inquiries and general discussions, join our [#konsist Slack channel](https://kotlinlang.slack.com/archives/C05QG9FD6KS).
-Use [GitHub Discussion](https://github.com/LemonAppDev/konsist/discussions) for bug reports, issues, and feature requests.
+For quick inquiries and general discussions, join
+our [#konsist Slack channel](https://kotlinlang.slack.com/archives/C05QG9FD6KS).
+Use [GitHub Discussion](https://github.com/LemonAppDev/konsist/discussions) for bug reports, issues, and feature
+requests.
+
+## 💰Sponsor Konsist
+
+We appreciate your interest in Konsist. If you've found our project beneficial, [we
+welcome your support](https://docs.konsist.lemonappdev.com/help/sponsor-konsist).
 
 ## Contributing
 
