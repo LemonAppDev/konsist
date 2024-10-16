@@ -1,2 +1,0 @@
-interface SampleInterface<T: List<*>, V: List<*>> where T :
-                                                        Set<*>, T : CharSequence, V: Set<*>

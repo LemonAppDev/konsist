@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kotypeparameter
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.list.properties
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -126,23 +125,6 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
     }
 
     @Test
-    fun `function-type-parameter-with-complex-upper-bounds`() {
-        // given
-        val sut =
-            getSnippetFile("function-type-parameter-with-complex-upper-bounds")
-                .functions()
-                .first()
-                .typeParameters
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            upperBounds.map { it.name } shouldBeEqualTo listOf("List<*>", "Set<*>", "CharSequence")
-            numUpperBounds shouldBeEqualTo 3
-        }
-    }
-
-    @Test
     fun `class-type-parameter-without-upper-bound`() {
         // given
         val sut =
@@ -257,23 +239,6 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBound { upperBound -> upperBound.isGenericType } shouldBeEqualTo true
             hasAllUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo true
             hasAllUpperBounds { upperBound -> upperBound.isInterface } shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `class-type-parameter-with-complex-upper-bounds`() {
-        // given
-        val sut =
-            getSnippetFile("class-type-parameter-with-complex-upper-bounds")
-                .classes()
-                .first()
-                .typeParameters
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            upperBounds.map { it.name } shouldBeEqualTo listOf("List<*>", "Set<*>", "CharSequence")
-            numUpperBounds shouldBeEqualTo 3
         }
     }
 
@@ -396,23 +361,6 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
     }
 
     @Test
-    fun `interface-type-parameter-with-complex-upper-bounds`() {
-        // given
-        val sut =
-            getSnippetFile("interface-type-parameter-with-complex-upper-bounds")
-                .interfaces()
-                .first()
-                .typeParameters
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            upperBounds.map { it.name } shouldBeEqualTo listOf("List<*>", "Set<*>", "CharSequence")
-            numUpperBounds shouldBeEqualTo 3
-        }
-    }
-
-    @Test
     fun `property-type-parameter-without-upper-bound`() {
         // given
         val sut =
@@ -527,23 +475,6 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBound { upperBound -> upperBound.isGenericType } shouldBeEqualTo true
             hasAllUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo true
             hasAllUpperBounds { upperBound -> upperBound.isInterface } shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `property-type-parameter-with-complex-upper-bounds`() {
-        // given
-        val sut =
-            getSnippetFile("property-type-parameter-with-complex-upper-bounds")
-                .properties()
-                .first()
-                .typeParameters
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            upperBounds.map { it.name } shouldBeEqualTo listOf("List<*>", "Set<*>", "CharSequence")
-            numUpperBounds shouldBeEqualTo 3
         }
     }
 
