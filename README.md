@@ -86,6 +86,15 @@ fun `interfaces with 'Repository' annotation should have 'Repository' suffix`() 
 
 ### Architecture Layers Check
 
+Test that `Presentation` and `Data` layers depend on `Domain` layer and `Domain` layer don't have any dependencies 
+from `Presentation` and `Data` layers.
+
+```mermaid
+%%{init: {'theme': 'forest'}}%%
+flowchart
+    Presentation[Presentation Layer] & Data[Data Layer] --> Domain[Domain Layer]
+```
+
 ```kotlin
 @Test
 fun `clean architecture layers have correct dependencies`() {
