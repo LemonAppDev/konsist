@@ -87,7 +87,7 @@ internal class KoVariableDeclarationCore private constructor(
     @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("isVal"))
     override val hasValModifier: Boolean = !ktProperty.isVar
 
-    @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith(""))
+    @Deprecated("Will be removed in version 0.18.0")
     override val hasVarModifier: Boolean = ktProperty.isVar
 
     override val isVal: Boolean = !ktProperty.isVar

@@ -85,7 +85,7 @@ internal class KoParameterDeclarationCore private constructor(
     @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("isVal"))
     override val hasValModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "val" }
 
-    @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith(""))
+    @Deprecated("Will be removed in version 0.18.0")
     override val hasVarModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "var" }
 
     override val isVal: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "val" }
