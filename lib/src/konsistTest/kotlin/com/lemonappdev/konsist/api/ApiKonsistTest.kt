@@ -70,7 +70,7 @@ class ApiKonsistTest {
             .interfaces()
             // Exclude the providers below because the declarations from their properties with list return types implement
             // KoNameProvider, but all of these methods are not relevant.
-            .filterNot { it.name == "KoFunctionTypeDeclarationProvider" }
+            .filterNot { it.name == "KoFunctionTypeDeclarationProvider" || it.name == "KoUpperBoundsProvider" }
             .withoutNameMatching(Regex("\\bKoKDoc[A-Za-z]+TagProvider\\b")) // exclude providers like KoKDocXTagProvider
             .withProperty { property ->
                 !property.hasAnnotationOf<Deprecated>() &&

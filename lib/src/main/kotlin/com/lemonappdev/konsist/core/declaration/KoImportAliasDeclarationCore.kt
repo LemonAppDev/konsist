@@ -31,7 +31,7 @@ internal class KoImportAliasDeclarationCore private constructor(
     KoModuleProviderCore,
     KoSourceSetProviderCore,
     KoSourceDeclarationProviderCore {
-    override val psiElement: PsiElement = ktImportAlias
+    override val psiElement: PsiElement by lazy { ktImportAlias }
 
     override val ktElement: KtElement = ktImportAlias
 
@@ -43,7 +43,7 @@ internal class KoImportAliasDeclarationCore private constructor(
 
     override val importDirective: KoImportDeclaration = containingDeclaration
 
-    override val sourceDeclaration: KoSourceDeclaration = importDirective.sourceDeclaration
+    override val sourceDeclaration: KoSourceDeclaration by lazy { importDirective.sourceDeclaration }
 
     override fun toString(): String = text
 

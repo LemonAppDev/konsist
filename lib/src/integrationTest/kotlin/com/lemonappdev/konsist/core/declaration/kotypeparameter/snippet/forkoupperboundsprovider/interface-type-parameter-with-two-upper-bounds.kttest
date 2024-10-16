@@ -1,0 +1,1 @@
+interface SampleInterface<T> where T : List<*>, T : CharSequence

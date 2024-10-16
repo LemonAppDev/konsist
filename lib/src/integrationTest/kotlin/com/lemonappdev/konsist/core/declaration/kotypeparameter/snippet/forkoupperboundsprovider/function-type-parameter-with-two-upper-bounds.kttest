@@ -1,0 +1,1 @@
+fun <T> sampleFunction() where T : List<*>, T : CharSequence {}
