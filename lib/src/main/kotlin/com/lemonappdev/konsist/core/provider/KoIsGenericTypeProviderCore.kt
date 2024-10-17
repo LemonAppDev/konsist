@@ -10,11 +10,12 @@ internal interface KoIsGenericTypeProviderCore :
         get() {
             val regex = "\\w+<[a-zA-Z*<>, ]+>".toRegex()
 
-            val type = if ((this as? KoTypeDeclaration)?.isTypeAlias == true) {
-                (this as? KoTypeDeclaration)?.bareSourceType
-            } else {
-                (this as? KoTypeDeclaration)?.name
-            }
+            val type =
+                if ((this as? KoTypeDeclaration)?.isTypeAlias == true) {
+                    (this as? KoTypeDeclaration)?.bareSourceType
+                } else {
+                    (this as? KoTypeDeclaration)?.name
+                }
 
             return type?.let { regex.matches(it) } ?: false
         }

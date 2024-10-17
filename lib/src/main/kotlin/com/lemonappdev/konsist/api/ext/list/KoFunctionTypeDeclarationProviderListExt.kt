@@ -15,8 +15,9 @@ val <T : KoFunctionTypeDeclarationProvider> List<T>.returnTypes: List<KoTypeDecl
  * Gets the list of parameter types for the function declarations in the list.
  */
 val <T : KoFunctionTypeDeclarationProvider> List<T>.parameterTypes: List<KoParameterDeclaration>
-    get() = mapNotNull { it.parameterTypes }
-        .flatten()
+    get() =
+        mapNotNull { it.parameterTypes }
+            .flatten()
 
 /**
  * Filters the list by return type using the given predicate.

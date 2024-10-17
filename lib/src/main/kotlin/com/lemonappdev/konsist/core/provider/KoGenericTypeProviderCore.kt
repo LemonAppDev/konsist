@@ -20,10 +20,11 @@ internal interface KoGenericTypeProviderCore :
 
     override val genericType: KoSourceDeclaration?
         get() {
-            val hasKtTypeArgumentListChild = ktUserType
-                ?.children
-                ?.filterIsInstance<KtTypeArgumentList>()
-                ?.isNotEmpty()
+            val hasKtTypeArgumentListChild =
+                ktUserType
+                    ?.children
+                    ?.filterIsInstance<KtTypeArgumentList>()
+                    ?.isNotEmpty()
 
             if (hasKtTypeArgumentListChild == false) {
                 return null
@@ -37,12 +38,13 @@ internal interface KoGenericTypeProviderCore :
                 return if (ktNameReferenceExpression == null) {
                     null
                 } else {
-                    val type = TypeUtil.getBasicType(
-                        listOf(ktNameReferenceExpression),
-                        ktNameReferenceExpression.isExtensionDeclaration(),
-                        this.castToKoBaseDeclaration(),
-                        containingFile,
-                    )
+                    val type =
+                        TypeUtil.getBasicType(
+                            listOf(ktNameReferenceExpression),
+                            ktNameReferenceExpression.isExtensionDeclaration(),
+                            this.castToKoBaseDeclaration(),
+                            containingFile,
+                        )
 
                     if (type is KoGenericTypeDeclarationCore) {
                         type.sourceDeclaration
@@ -53,8 +55,7 @@ internal interface KoGenericTypeProviderCore :
             }
         }
 
-    override fun hasGenericType(predicate: (KoSourceDeclaration) -> Boolean): Boolean =
-        genericType?.let { predicate(it) } ?: false
+    override fun hasGenericType(predicate: (KoSourceDeclaration) -> Boolean): Boolean = genericType?.let { predicate(it) } ?: false
 
     override fun hasGenericTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(genericType, kClass)
 }

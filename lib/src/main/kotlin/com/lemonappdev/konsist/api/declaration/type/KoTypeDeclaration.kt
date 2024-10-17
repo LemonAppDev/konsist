@@ -25,7 +25,6 @@ import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTypeArgumentProvider
 import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoTypeProvider
-import com.lemonappdev.konsist.core.provider.KoFunctionTypeDeclarationProviderCore
 
 /**
  * Represents a Kotlin type declaration.

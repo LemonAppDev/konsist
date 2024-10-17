@@ -46,14 +46,15 @@ internal interface KoTypeDeclarationProviderCore :
     @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("sourceDeclaration"))
     override val declaration: KoBaseTypeDeclaration
         get() {
-            val type =  TypeUtil.getBasicType(
-                listOf(ktTypeReference, ktNameReferenceExpression, ktTypeProjection),
-                isExtensionDeclaration(),
-                getDeclarationWithFqn(containingDeclaration) ?: containingDeclaration,
-                containingFile,
-            )
+            val type =
+                TypeUtil.getBasicType(
+                    listOf(ktTypeReference, ktNameReferenceExpression, ktTypeProjection),
+                    isExtensionDeclaration(),
+                    getDeclarationWithFqn(containingDeclaration) ?: containingDeclaration,
+                    containingFile,
+                )
 
-          return  if (type is KoGenericTypeDeclarationCore) {
+            return if (type is KoGenericTypeDeclarationCore) {
                 type.sourceDeclaration
             } else {
                 type
