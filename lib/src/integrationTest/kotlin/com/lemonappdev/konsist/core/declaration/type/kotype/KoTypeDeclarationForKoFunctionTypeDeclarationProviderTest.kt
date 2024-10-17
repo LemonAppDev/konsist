@@ -8,6 +8,27 @@ import org.junit.jupiter.api.Test
 
 class KoTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
     @Test
+    fun `type-without-parameters-list`() {
+        // given
+        val sut =
+            getSnippetFile("type-without-parameters-list")
+                .properties()
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            it?.parameterTypes shouldBeEqualTo null
+            it?.numParameterTypes shouldBeEqualTo 0
+            it?.countParameterTypes { parameter -> parameter.type.isKotlinType } shouldBeEqualTo 0
+            it?.countParameterTypes { parameter -> parameter.type.isKotlinCollectionType } shouldBeEqualTo 0
+            it?.countParameterTypes { parameter -> parameter.type.isKotlinBasicType } shouldBeEqualTo 0
+            it?.hasParameterType { parameter -> parameter.type.isKotlinType } shouldBeEqualTo false
+            it?.hasAllParameterTypes { parameter -> parameter.type.isKotlinType } shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `parameters-list-is-empty`() {
         // given
         val sut =
@@ -73,6 +94,25 @@ class KoTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
             it?.hasParameterType { parameter -> parameter.type.isExternalType } shouldBeEqualTo false
             it?.hasAllParameterTypes { parameter -> parameter.type.isKotlinType || parameter.type.isGenericType } shouldBeEqualTo true
             it?.hasAllParameterTypes { parameter -> parameter.type.isExternalType } shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `type-without-return-type`() {
+        // given
+        val sut =
+            getSnippetFile("type-without-return-type")
+                .properties()
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            it?.returnType shouldBeEqualTo null
+            it?.hasReturnType { type -> type.isKotlinType } shouldBeEqualTo false
+            it?.hasReturnType { type -> type.isExternalType } shouldBeEqualTo false
+            it?.hasReturnTypeOf(Unit::class) shouldBeEqualTo false
+            it?.hasReturnTypeOf(String::class) shouldBeEqualTo false
         }
     }
 

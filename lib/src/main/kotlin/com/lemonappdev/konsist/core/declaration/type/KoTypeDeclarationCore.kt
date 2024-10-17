@@ -100,14 +100,13 @@ internal class KoTypeDeclarationCore private constructor(
             ?: error("KtTypeReference, KtNameReferenceExpression and KtTypeProjection are null")
     }
 
-    override val ktFunctionType: KtFunctionType by lazy {
+    override val ktFunctionType: KtFunctionType? by lazy {
         ktTypeReference
             ?.children
             // The last item is chosen because when a type is preceded by an annotation or modifier,
             // the type being searched for is the last item in the list.
             ?.filterIsInstance<KtFunctionType>()
-            ?.last()
-            ?: error("KtTypeReference, KtNameReferenceExpression and KtTypeProjection are null")
+            ?.lastOrNull()
     }
 
     override val ktAnnotated: KtAnnotated? by lazy { ktTypeReference }

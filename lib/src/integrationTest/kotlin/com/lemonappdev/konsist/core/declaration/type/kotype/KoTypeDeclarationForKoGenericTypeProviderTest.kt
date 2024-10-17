@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration.type.kotype
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.externalsample.SampleExternalGenericClass
@@ -16,10 +17,29 @@ import org.junit.jupiter.api.Test
 @Suppress("detekt.LongMethod")
 class KoTypeDeclarationForKoGenericTypeProviderTest {
     @Test
+    fun `type-without-generic-type`() {
+        // given
+        val sut =
+            getSnippetFile("type-without-generic-type")
+                .properties()
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            it?.genericType shouldBeEqualTo null
+            it?.hasGenericType { type -> type.isKotlinCollectionType } shouldBeEqualTo false
+            it?.hasGenericType { type -> type.isClass } shouldBeEqualTo false
+            it?.hasGenericTypeOf(List::class) shouldBeEqualTo false
+            it?.hasGenericTypeOf(Map::class) shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `kotlin-generic-type`() {
         // given
         val sut =
-            getSnippetFile("kotlin-type")
+            getSnippetFile("kotlin-generic-type")
                 .properties()
                 .first()
                 .type
@@ -36,10 +56,10 @@ class KoTypeDeclarationForKoGenericTypeProviderTest {
     }
 
     @Test
-    fun `class-type`() {
+    fun `class-generic-type`() {
         // given
         val sut =
-            getSnippetFile("class-type")
+            getSnippetFile("class-generic-type")
                 .properties()
                 .first()
                 .type
@@ -56,10 +76,10 @@ class KoTypeDeclarationForKoGenericTypeProviderTest {
     }
 
     @Test
-    fun `interface-type`() {
+    fun `interface-generic-type`() {
         // given
         val sut =
-            getSnippetFile("interface-type")
+            getSnippetFile("interface-generic-type")
                 .properties()
                 .first()
                 .type
@@ -101,29 +121,29 @@ class KoTypeDeclarationForKoGenericTypeProviderTest {
     }
 
     @Test
-    fun `import-alias-type`() {
+    fun `import-alias-generic-type`() {
         // given
         val sut =
-            getSnippetFile("import-alias-type")
+            getSnippetFile("import-alias-generic-type")
                 .properties()
                 .first()
                 .type
 
         // then
         assertSoftly(sut) {
-//            it?.genericType shouldBeInstanceOf KoImportAliasDeclaration::class
-//            it?.genericType?.name shouldBeEqualTo "SampleImportAlias"
+            it?.genericType shouldBeInstanceOf KoImportAliasDeclaration::class
+            it?.genericType?.name shouldBeEqualTo "SampleImportAlias"
             it?.hasGenericType { type -> type.isImportAlias } shouldBeEqualTo true
-//            it?.hasGenericType { type -> type.isClass } shouldBeEqualTo false
-//            it?.hasGenericTypeOf(Map::class) shouldBeEqualTo false
+            it?.hasGenericType { type -> type.isClass } shouldBeEqualTo false
+            it?.hasGenericTypeOf(Map::class) shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `external-type`() {
+    fun `external-generic-type`() {
         // given
         val sut =
-            getSnippetFile("external-type")
+            getSnippetFile("external-generic-type")
                 .properties()
                 .first()
                 .type

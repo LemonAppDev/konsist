@@ -21,6 +21,34 @@ import org.junit.jupiter.api.Test
 @Suppress("detekt.LongMethod")
 class KoTypeDeclarationForKoTypeArgumentProviderTest {
     @Test
+    fun `type-without-type-arguments`() {
+        // given
+        val sut =
+            getSnippetFile("type-without-type-arguments")
+                .properties()
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            it?.typeArguments shouldBeEqualTo null
+            it?.numTypeArguments shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration.isClass } shouldBeEqualTo 0
+            it?.hasTypeArgumentWithName("String", "Int") shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("String", "Int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("String", "Int") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("String", "Int")) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(String::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(String::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(String::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `kotlin-type-argument`() {
         // given
         val sut =
@@ -226,8 +254,8 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
 
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "Set<String>"
             it?.numTypeArguments shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.genericType.isKotlinType } shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.genericType.isClass } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.genericType?.isKotlinType == true } shouldBeEqualTo 1
+            it?.countTypeArguments { type -> type.genericType?.isClass == true } shouldBeEqualTo 0
             it?.hasTypeArgumentWithName("Set<String>", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentWithName(listOf("Set<String>", "Int")) shouldBeEqualTo true
@@ -242,10 +270,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentOf(listOf(Set::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(Set::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(Set::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.genericType.isKotlinType } shouldBeEqualTo true
-            it?.hasTypeArgument { type -> type.genericType.isExternalType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.genericType.isKotlinType } shouldBeEqualTo true
-            it?.hasAllTypeArguments { type -> type.genericType.isExternalType } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.genericType?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasTypeArgument { type -> type.genericType?.isExternalType == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.genericType?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.genericType?.isExternalType == true } shouldBeEqualTo false
         }
     }
 

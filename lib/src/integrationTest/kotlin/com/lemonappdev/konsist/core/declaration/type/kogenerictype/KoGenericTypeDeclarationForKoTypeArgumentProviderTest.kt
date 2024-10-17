@@ -231,8 +231,8 @@ class KoGenericTypeDeclarationForKoTypeArgumentProviderTest {
 
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "Set<String>"
             it?.numTypeArguments shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.genericType.isKotlinType } shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.genericType.isClass } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.genericType?.isKotlinType == true } shouldBeEqualTo 1
+            it?.countTypeArguments { type -> type.genericType?.isClass == true } shouldBeEqualTo 0
             it?.hasTypeArgumentWithName("Set<String>", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentWithName(listOf("Set<String>", "Int")) shouldBeEqualTo true
@@ -247,10 +247,10 @@ class KoGenericTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentOf(listOf(Set::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(Set::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(Set::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.genericType.isKotlinType } shouldBeEqualTo true
-            it?.hasTypeArgument { type -> type.genericType.isExternalType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.genericType.isKotlinType } shouldBeEqualTo true
-            it?.hasAllTypeArguments { type -> type.genericType.isExternalType } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.genericType?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasTypeArgument { type -> type.genericType?.isExternalType == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.genericType?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.genericType?.isExternalType == true } shouldBeEqualTo false
         }
     }
 
