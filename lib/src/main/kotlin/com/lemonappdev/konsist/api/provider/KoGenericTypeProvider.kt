@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import kotlin.reflect.KClass
 
 /**

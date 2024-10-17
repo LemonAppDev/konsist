@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoGenericTypeProvider
 import com.lemonappdev.konsist.core.declaration.model.KoGenericTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
