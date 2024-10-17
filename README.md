@@ -136,10 +136,9 @@ our [#konsist Slack channel](https://kotlinlang.slack.com/archives/C05QG9FD6KS).
 Use [GitHub Discussion](https://github.com/LemonAppDev/konsist/discussions) for bug reports, issues, and feature
 requests.
 
-## 💰Sponsor Konsist
+## Sponsor Konsist
 
-We appreciate your interest in Konsist. If you've found our project beneficial, [we
-welcome your support](https://docs.konsist.lemonappdev.com/help/sponsor-konsist).
+We appreciate your interest in Konsist. If you've found our project beneficial, [please consider supportting the project](https://docs.konsist.lemonappdev.com/help/sponsor-konsist).
 
 ## Contributing
 
