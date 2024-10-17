@@ -19,7 +19,7 @@ val <T : KoGenericTypeProvider> List<T>.genericTypes: List<KoSourceDeclaration>
  * @return A list containing elements with a generic type satisfying the predicate.
  */
 fun <T : KoGenericTypeProvider> List<T>.withGenericType(predicate: (KoSourceDeclaration) -> Boolean): List<T> =
-    filter { predicate(it.genericType) }
+    filter { it.genericType?.let { type -> predicate(type) } == true }
 
 /**
  * Filters the list to exclude elements with a generic type satisfying the given predicate.
@@ -28,7 +28,7 @@ fun <T : KoGenericTypeProvider> List<T>.withGenericType(predicate: (KoSourceDecl
  * @return A list excluding elements with a generic type satisfying the predicate.
  */
 fun <T : KoGenericTypeProvider> List<T>.withoutGenericType(predicate: (KoSourceDeclaration) -> Boolean): List<T> =
-    filterNot { predicate(it.genericType) }
+    filterNot { it.genericType?.let { type -> predicate(type) } == true }
 
 /**
  * Filters the list to include only elements with a generic type matching any of the specified KClass types.

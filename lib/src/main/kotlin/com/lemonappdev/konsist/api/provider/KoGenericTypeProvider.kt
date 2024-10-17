@@ -14,7 +14,7 @@ interface KoGenericTypeProvider : KoBaseProvider {
      * 1) in `List<T>`, `List` is the generic type,
      * 2) in `List<Set<String>>`, `List` is the generic type.
      */
-    val genericType: KoSourceDeclaration
+    val genericType: KoSourceDeclaration?
 
     /**
      * Checks if the generic type matches the given predicate.

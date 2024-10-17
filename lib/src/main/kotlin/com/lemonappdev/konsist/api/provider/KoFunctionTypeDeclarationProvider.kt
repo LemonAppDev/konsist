@@ -11,7 +11,7 @@ interface KoFunctionTypeDeclarationProvider : KoBaseProvider {
     /**
      * Represents the parameters of the function type.
      */
-    val parameterTypes: List<KoParameterDeclaration>
+    val parameterTypes: List<KoParameterDeclaration>?
 
     /**
      * The number of parameters for the function type.
@@ -21,7 +21,7 @@ interface KoFunctionTypeDeclarationProvider : KoBaseProvider {
     /**
      * Represents the return type of the function type.
      */
-    val returnType: KoTypeDeclaration
+    val returnType: KoTypeDeclaration?
 
     /**
      * Counts the number of parameter types that match the given predicate.

@@ -11,7 +11,6 @@ import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
 import kotlin.reflect.KClass
@@ -176,20 +175,6 @@ fun <T : KoTypeDeclarationProvider> List<T>.functionTypeDeclarations(
 ): List<KoFunctionTypeDeclaration> =
     filter { it.hasFunctionTypeDeclaration(predicate) }
         .mapNotNull { it.asFunctionTypeDeclaration() }
-
-/**
- * List containing generic type declarations associated with types.
- *
- * @param predicate A function that defines the condition to be met by the generic type declaration.
- *                  If null, all generic type declarations are included.
- * @return A list of generic type declarations that match the provided predicate, or all generic type declarations
- * if no predicate is provided.
- */
-fun <T : KoTypeDeclarationProvider> List<T>.genericTypeDeclarations(
-    predicate: ((KoGenericTypeDeclaration) -> Boolean)? = null,
-): List<KoGenericTypeDeclaration> =
-    filter { it.hasGenericTypeDeclaration(predicate) }
-        .mapNotNull { it.asGenericTypeDeclaration() }
 
 /**
  * List containing type parameter declarations associated with types.
@@ -728,44 +713,6 @@ fun <T : KoTypeDeclarationProvider> List<T>.withoutFunctionTypeDeclaration(
                 it
                     .asFunctionTypeDeclaration()
                     ?.let { functionTypeDeclaration -> predicate(functionTypeDeclaration) } ?: false
-        }
-    }
-
-/**
- * List containing declarations with the specified generic type declaration.
- *
- * @param predicate The predicate function to determine if a generic type declaration satisfies a condition.
- * @return A list containing declarations with the specified generic type declaration.
- */
-fun <T : KoTypeDeclarationProvider> List<T>.withGenericTypeDeclaration(
-    predicate: ((KoGenericTypeDeclaration) -> Boolean)? = null,
-): List<T> =
-    filter {
-        when (predicate) {
-            null -> it.hasGenericTypeDeclaration()
-            else ->
-                it
-                    .asGenericTypeDeclaration()
-                    ?.let { genericTypeDeclaration -> predicate(genericTypeDeclaration) } ?: false
-        }
-    }
-
-/**
- * List containing declarations without the specified generic type declaration.
- *
- * @param predicate The predicate function to determine if a generic type declaration satisfies a condition.
- * @return A list containing declarations without the specified generic type declaration.
- */
-fun <T : KoTypeDeclarationProvider> List<T>.withoutGenericTypeDeclaration(
-    predicate: ((KoGenericTypeDeclaration) -> Boolean)? = null,
-): List<T> =
-    filterNot {
-        when (predicate) {
-            null -> it.hasGenericTypeDeclaration()
-            else ->
-                it
-                    .asGenericTypeDeclaration()
-                    ?.let { genericTypeDeclaration -> predicate(genericTypeDeclaration) } ?: false
         }
     }
 

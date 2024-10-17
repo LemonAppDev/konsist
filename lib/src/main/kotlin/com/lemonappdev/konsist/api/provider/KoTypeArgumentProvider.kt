@@ -33,7 +33,6 @@ interface KoTypeArgumentProvider : KoBaseProvider {
      *     .properties()
      *     .first()
      *     .type
-     *     ?.asGenericTypeDeclaration()
      *     ?.typeArguments
      *     ?.map { it.name } // listOf("String", "Int")
      * ```
@@ -52,7 +51,6 @@ interface KoTypeArgumentProvider : KoBaseProvider {
      *     .properties()
      *     .first()
      *     .type
-     *     ?.asGenericTypeDeclaration()
      *     .typeArguments // listOf("String", "Map<Int, Boolean>")
      *     .flatten() // listOf("String", "Map", "Int", "Boolean")
      * ```

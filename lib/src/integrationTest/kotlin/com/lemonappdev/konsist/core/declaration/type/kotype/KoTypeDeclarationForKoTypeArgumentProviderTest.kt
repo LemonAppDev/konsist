@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.type.kogenerictype
+package com.lemonappdev.konsist.core.declaration.type.kotype
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
@@ -19,7 +19,35 @@ import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
 
 @Suppress("detekt.LongMethod")
-class KoGenericTypeDeclarationForKoTypeArgumentProviderTest {
+class KoTypeDeclarationForKoTypeArgumentProviderTest {
+    @Test
+    fun `type-without-type-arguments`() {
+        // given
+        val sut =
+            getSnippetFile("type-without-type-arguments")
+                .properties()
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            it?.typeArguments shouldBeEqualTo null
+            it?.numTypeArguments shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration.isClass } shouldBeEqualTo 0
+            it?.hasTypeArgumentWithName("String", "Int") shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("String", "Int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("String", "Int") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("String", "Int")) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(String::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(String::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(String::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
+        }
+    }
+
     @Test
     fun `kotlin-type-argument`() {
         // given
@@ -28,7 +56,6 @@ class KoGenericTypeDeclarationForKoTypeArgumentProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -76,7 +103,6 @@ class KoGenericTypeDeclarationForKoTypeArgumentProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -124,7 +150,6 @@ class KoGenericTypeDeclarationForKoTypeArgumentProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -172,7 +197,6 @@ class KoGenericTypeDeclarationForKoTypeArgumentProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -220,7 +244,6 @@ class KoGenericTypeDeclarationForKoTypeArgumentProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -231,8 +254,8 @@ class KoGenericTypeDeclarationForKoTypeArgumentProviderTest {
 
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "Set<String>"
             it?.numTypeArguments shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.genericType.isKotlinType } shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.genericType.isClass } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.genericType?.isKotlinType == true } shouldBeEqualTo 1
+            it?.countTypeArguments { type -> type.genericType?.isClass == true } shouldBeEqualTo 0
             it?.hasTypeArgumentWithName("Set<String>", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentWithName(listOf("Set<String>", "Int")) shouldBeEqualTo true
@@ -243,14 +266,18 @@ class KoGenericTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames(listOf("Set<String>")) shouldBeEqualTo true
             it?.hasTypeArgumentsWithAllNames(listOf("Set<String>", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(Set::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(Set::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(Set::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(Set::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.genericType.isKotlinType } shouldBeEqualTo true
-            it?.hasTypeArgument { type -> type.genericType.isExternalType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.genericType.isKotlinType } shouldBeEqualTo true
-            it?.hasAllTypeArguments { type -> type.genericType.isExternalType } shouldBeEqualTo false
+            it?.hasTypeArgumentOf(Set::class, Int::class) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(List::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(Set::class, Int::class)) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(listOf(List::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(Set::class) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(List::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(Set::class)) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(listOf(List::class)) shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.genericType?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasTypeArgument { type -> type.genericType?.isExternalType == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.genericType?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.genericType?.isExternalType == true } shouldBeEqualTo false
         }
     }
 
@@ -262,7 +289,6 @@ class KoGenericTypeDeclarationForKoTypeArgumentProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -300,7 +326,6 @@ class KoGenericTypeDeclarationForKoTypeArgumentProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -342,7 +367,6 @@ class KoGenericTypeDeclarationForKoTypeArgumentProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -384,7 +408,6 @@ class KoGenericTypeDeclarationForKoTypeArgumentProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -426,7 +449,6 @@ class KoGenericTypeDeclarationForKoTypeArgumentProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -474,7 +496,6 @@ class KoGenericTypeDeclarationForKoTypeArgumentProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -488,7 +509,7 @@ class KoGenericTypeDeclarationForKoTypeArgumentProviderTest {
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
-            "core/declaration/type/kogenerictype/snippet/forkotypeargumentprovider/",
+            "core/declaration/type/kotype/snippet/forkotypeargumentprovider/",
             fileName,
         )
 }

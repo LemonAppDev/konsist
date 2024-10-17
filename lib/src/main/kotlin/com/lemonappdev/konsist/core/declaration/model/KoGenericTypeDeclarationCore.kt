@@ -1,9 +1,9 @@
-package com.lemonappdev.konsist.core.declaration.type
+package com.lemonappdev.konsist.core.declaration.model
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -20,8 +20,7 @@ import org.jetbrains.kotlin.psi.KtUserType
 internal class KoGenericTypeDeclarationCore private constructor(
     override val ktUserType: KtUserType,
     override val containingDeclaration: KoBaseDeclaration,
-) : KoGenericTypeDeclaration,
-    KoBaseTypeDeclarationCore,
+) : KoBaseTypeDeclarationCore,
     KoBaseProviderCore,
     KoContainingFileProviderCore,
     KoContainingDeclarationProviderCore,
@@ -42,12 +41,12 @@ internal class KoGenericTypeDeclarationCore private constructor(
     override fun toString(): String = name
 
     internal companion object {
-        private val cache: KoDeclarationCache<KoGenericTypeDeclaration> = KoDeclarationCache()
+        private val cache: KoDeclarationCache<KoGenericTypeDeclarationCore> = KoDeclarationCache()
 
         internal fun getInstance(
             ktUserType: KtUserType,
             containingDeclaration: KoBaseDeclaration,
-        ): KoGenericTypeDeclaration =
+        ): KoGenericTypeDeclarationCore =
             cache.getOrCreateInstance(ktUserType, containingDeclaration) {
                 KoGenericTypeDeclarationCore(ktUserType, containingDeclaration)
             }

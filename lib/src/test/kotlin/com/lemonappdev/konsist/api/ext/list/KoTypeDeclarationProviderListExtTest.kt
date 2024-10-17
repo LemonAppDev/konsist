@@ -8,7 +8,6 @@ import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
 import com.lemonappdev.konsist.testdata.SampleType1
@@ -649,63 +648,6 @@ class KoTypeDeclarationProviderListExtTest {
 
         // when
         val sut = declarations.functionTypeDeclarations(predicate)
-
-        // then
-        sut shouldBeEqualTo listOf(sourceDeclaration1)
-    }
-
-    @Test
-    fun `genericTypeDeclarations returns generic types from all declarations`() {
-        // given
-        val sourceDeclaration1: KoGenericTypeDeclaration = mockk()
-        val sourceDeclaration2: KoGenericTypeDeclaration = mockk()
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { asGenericTypeDeclaration() } returns sourceDeclaration1
-                every { hasGenericTypeDeclaration() } returns true
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { asGenericTypeDeclaration() } returns sourceDeclaration2
-                every { hasGenericTypeDeclaration() } returns true
-            }
-        val declaration3: KoTypeDeclarationProvider =
-            mockk {
-                every { hasGenericTypeDeclaration() } returns false
-            }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.genericTypeDeclarations()
-
-        // then
-        sut shouldBeEqualTo listOf(sourceDeclaration1, sourceDeclaration2)
-    }
-
-    @Test
-    fun `genericTypeDeclarations returns generic types from all declarations which satisfies predicate`() {
-        // given
-        val predicate: (KoGenericTypeDeclaration) -> Boolean = { it.hasNameContaining("SomeGenericType") }
-        val sourceDeclaration1: KoGenericTypeDeclaration = mockk()
-        val sourceDeclaration2: KoGenericTypeDeclaration = mockk()
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { asGenericTypeDeclaration() } returns sourceDeclaration1
-                every { hasGenericTypeDeclaration(predicate) } returns true
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { asGenericTypeDeclaration() } returns sourceDeclaration2
-                every { hasGenericTypeDeclaration(predicate) } returns false
-            }
-        val declaration3: KoTypeDeclarationProvider =
-            mockk {
-                every { hasGenericTypeDeclaration(predicate) } returns false
-            }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.genericTypeDeclarations(predicate)
 
         // then
         sut shouldBeEqualTo listOf(sourceDeclaration1)
@@ -3054,114 +2996,6 @@ class KoTypeDeclarationProviderListExtTest {
 
         // when
         val sut = declarations.withoutFunctionTypeDeclaration { it.name == name1 }
-
-        // then
-        sut shouldBeEqualTo listOf(declaration2, declaration3)
-    }
-
-    @Test
-    fun `withGenericTypeDeclaration() returns declaration with generic type`() {
-        // given
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { hasGenericTypeDeclaration() } returns true
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { hasGenericTypeDeclaration() } returns false
-            }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withGenericTypeDeclaration()
-
-        // then
-        sut shouldBeEqualTo listOf(declaration1)
-    }
-
-    @Test
-    fun `withGenericTypeDeclaration{} returns declaration which satisfy predicate`() {
-        // given
-        val name1 = "name1"
-        val name2 = "name2"
-        val sourceGenericType1: KoGenericTypeDeclaration =
-            mockk {
-                every { name } returns name1
-            }
-        val sourceGenericType2: KoGenericTypeDeclaration =
-            mockk {
-                every { name } returns name2
-            }
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { asGenericTypeDeclaration() } returns sourceGenericType1
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { asGenericTypeDeclaration() } returns sourceGenericType2
-            }
-        val declaration3: KoTypeDeclarationProvider =
-            mockk {
-                every { asGenericTypeDeclaration() } returns null
-            }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.withGenericTypeDeclaration { it.name == name1 }
-
-        // then
-        sut shouldBeEqualTo listOf(declaration1)
-    }
-
-    @Test
-    fun `withoutGenericTypeDeclaration() returns declaration without generic type`() {
-        // given
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { hasGenericTypeDeclaration() } returns true
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { hasGenericTypeDeclaration() } returns false
-            }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withoutGenericTypeDeclaration()
-
-        // then
-        sut shouldBeEqualTo listOf(declaration2)
-    }
-
-    @Test
-    fun `withoutGenericTypeDeclaration{} returns declarations which not satisfy predicate`() {
-        // given
-        val name1 = "name1"
-        val name2 = "name2"
-        val sourceGenericType1: KoGenericTypeDeclaration =
-            mockk {
-                every { name } returns name1
-            }
-        val sourceGenericType2: KoGenericTypeDeclaration =
-            mockk {
-                every { name } returns name2
-            }
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { asGenericTypeDeclaration() } returns sourceGenericType1
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { asGenericTypeDeclaration() } returns sourceGenericType2
-            }
-        val declaration3: KoTypeDeclarationProvider =
-            mockk {
-                every { asGenericTypeDeclaration() } returns null
-            }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.withoutGenericTypeDeclaration { it.name == name1 }
 
         // then
         sut shouldBeEqualTo listOf(declaration2, declaration3)

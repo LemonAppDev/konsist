@@ -829,7 +829,6 @@ class KoTypeDeclarationForKoTypeDeclarationProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration

@@ -135,8 +135,7 @@ class KoTypeParameterDeclarationForKoPackageProviderTest {
                 .typeAliases
                 .first()
                 .type
-                .asGenericTypeDeclaration()
-                ?.typeArguments
+                .typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
@@ -153,8 +152,7 @@ class KoTypeParameterDeclarationForKoPackageProviderTest {
                 .typeAliases
                 .first()
                 .type
-                .asGenericTypeDeclaration()
-                ?.typeArguments
+                .typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()

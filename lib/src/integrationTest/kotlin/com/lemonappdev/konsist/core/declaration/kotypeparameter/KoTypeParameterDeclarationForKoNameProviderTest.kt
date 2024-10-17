@@ -76,8 +76,7 @@ class KoTypeParameterDeclarationForKoNameProviderTest {
                 .typeAliases
                 .first()
                 .type
-                .asGenericTypeDeclaration()
-                ?.typeArguments
+                .typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
