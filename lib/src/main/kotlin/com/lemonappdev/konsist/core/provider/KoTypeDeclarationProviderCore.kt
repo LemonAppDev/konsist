@@ -16,7 +16,7 @@ import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
-import com.lemonappdev.konsist.core.declaration.type.KoGenericTypeDeclarationCore
+import com.lemonappdev.konsist.core.declaration.model.KoGenericTypeDeclarationCore
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
