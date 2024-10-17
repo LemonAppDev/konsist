@@ -28,18 +28,24 @@ internal interface KoSourceDeclarationProviderCore :
         get() = null
 
     override val sourceDeclaration: KoSourceDeclaration
-        get() =
-            TypeUtil.getBasicType(
+        get() {
+            val type = TypeUtil.getBasicType(
                 listOf(ktTypeReference, ktNameReferenceExpression, ktTypeProjection),
                 isExtensionDeclaration(),
                 getDeclarationWithFqn(containingDeclaration) ?: containingDeclaration,
                 containingFile,
             )
-                ?: if (this is KoSourceDeclaration) {
+
+                return if (type is KoGenericTypeProviderCore) {
+                    type.genericType
+                } else {
+                    type
+                } ?: if (this is KoSourceDeclaration) {
                     this
                 } else {
                     throw KoInternalException("Source declaration cannot be a null")
                 }
+        }
 
     private fun isExtensionDeclaration(): Boolean =
         ktTypeReference?.isExtensionDeclaration() == true ||

@@ -18,7 +18,6 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -49,7 +48,6 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -101,7 +99,6 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -167,7 +164,6 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -198,7 +194,6 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -229,7 +224,6 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -282,7 +276,6 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -313,7 +306,6 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 

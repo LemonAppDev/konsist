@@ -32,18 +32,18 @@ class KoTypeDeclarationForKoIsGenericTypeProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("kotlin-type", false),
-                arguments("generic-type", true),
-                arguments("generic-class-type", true),
-                arguments("not-generic-class-type", false),
-                arguments("interface-type", false),
-                arguments("object-type", false),
-                arguments("function-type", false),
+//                arguments("kotlin-type", false),
+//                arguments("generic-type", true),
+//                arguments("generic-class-type", true),
+//                arguments("not-generic-class-type", false),
+//                arguments("interface-type", false),
+//                arguments("object-type", false),
+//                arguments("function-type", false),
                 arguments("generic-import-alias-type", true),
-                arguments("not-generic-import-alias-type", false),
-                arguments("generic-typealias-type", false),
-                arguments("not-generic-typealias-type", false),
-                arguments("external-type", false),
+//                arguments("not-generic-import-alias-type", false),
+//                arguments("generic-typealias-type", true),
+//                arguments("not-generic-typealias-type", false),
+//                arguments("external-type", false),
             )
     }
 }

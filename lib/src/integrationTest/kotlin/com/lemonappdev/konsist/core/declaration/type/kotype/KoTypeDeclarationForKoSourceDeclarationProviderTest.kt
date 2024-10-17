@@ -8,7 +8,6 @@ import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifiers
 import com.lemonappdev.konsist.api.ext.list.parameters
@@ -250,7 +249,6 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration
@@ -292,19 +290,19 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                 ),
                 arguments(
                     "nullable-generic-type",
-                    KoGenericTypeDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
                     KoClassDeclaration::class,
-                    null,
+                    List::class,
                     String::class,
-                    null,
+                    "kotlin.collections.List",
                 ),
                 arguments(
                     "not-nullable-generic-type",
-                    KoGenericTypeDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
                     KoClassDeclaration::class,
-                    null,
+                    List::class,
                     String::class,
-                    null,
+                    "kotlin.collections.List",
                 ),
                 arguments(
                     "nullable-class-type",

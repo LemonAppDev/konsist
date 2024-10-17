@@ -1,3 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleClass as ImportAlias
-
-val sampleProperty: List<ImportAlias> = emptyList()

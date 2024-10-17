@@ -93,7 +93,7 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             upperBounds.size shouldBeEqualTo 2
             numUpperBounds shouldBeEqualTo 2
             countUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo 2
-            countUpperBounds { upperBound -> upperBound.isGenericType } shouldBeEqualTo 1
+            countUpperBounds { upperBound -> upperBound.isKotlinType } shouldBeEqualTo 1
             hasUpperBounds() shouldBeEqualTo true
             hasUpperBoundWithName(emptyList()) shouldBeEqualTo true
             hasUpperBoundWithName(emptySet()) shouldBeEqualTo true
@@ -118,7 +118,7 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBoundsWithAllNames(setOf("List<*>", "CharSequence")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>", "Int")) shouldBeEqualTo false
             hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
-            hasUpperBound { upperBound -> upperBound.isGenericType } shouldBeEqualTo true
+            hasUpperBound { upperBound -> upperBound.isKotlinType } shouldBeEqualTo true
             hasAllUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo true
             hasAllUpperBounds { upperBound -> upperBound.isInterface } shouldBeEqualTo false
         }
@@ -211,7 +211,7 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             upperBounds.size shouldBeEqualTo 2
             numUpperBounds shouldBeEqualTo 2
             countUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo 2
-            countUpperBounds { upperBound -> upperBound.isGenericType } shouldBeEqualTo 1
+            countUpperBounds { upperBound -> upperBound.isKotlinType } shouldBeEqualTo 1
             hasUpperBounds() shouldBeEqualTo true
             hasUpperBoundWithName(emptyList()) shouldBeEqualTo true
             hasUpperBoundWithName(emptySet()) shouldBeEqualTo true
@@ -236,7 +236,7 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBoundsWithAllNames(setOf("List<*>", "CharSequence")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>", "Int")) shouldBeEqualTo false
             hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
-            hasUpperBound { upperBound -> upperBound.isGenericType } shouldBeEqualTo true
+            hasUpperBound { upperBound -> upperBound.isKotlinType } shouldBeEqualTo true
             hasAllUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo true
             hasAllUpperBounds { upperBound -> upperBound.isInterface } shouldBeEqualTo false
         }
@@ -329,7 +329,7 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             upperBounds.size shouldBeEqualTo 2
             numUpperBounds shouldBeEqualTo 2
             countUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo 2
-            countUpperBounds { upperBound -> upperBound.isGenericType } shouldBeEqualTo 1
+            countUpperBounds { upperBound -> upperBound.isKotlinType } shouldBeEqualTo 1
             hasUpperBounds() shouldBeEqualTo true
             hasUpperBoundWithName(emptyList()) shouldBeEqualTo true
             hasUpperBoundWithName(emptySet()) shouldBeEqualTo true
@@ -354,7 +354,7 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBoundsWithAllNames(setOf("List<*>", "CharSequence")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>", "Int")) shouldBeEqualTo false
             hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
-            hasUpperBound { upperBound -> upperBound.isGenericType } shouldBeEqualTo true
+            hasUpperBound { upperBound -> upperBound.isKotlinType } shouldBeEqualTo true
             hasAllUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo true
             hasAllUpperBounds { upperBound -> upperBound.isInterface } shouldBeEqualTo false
         }
@@ -447,7 +447,7 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             upperBounds.size shouldBeEqualTo 2
             numUpperBounds shouldBeEqualTo 2
             countUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo 2
-            countUpperBounds { upperBound -> upperBound.isGenericType } shouldBeEqualTo 1
+            countUpperBounds { upperBound -> upperBound.isKotlinType } shouldBeEqualTo 1
             hasUpperBounds() shouldBeEqualTo true
             hasUpperBoundWithName(emptyList()) shouldBeEqualTo true
             hasUpperBoundWithName(emptySet()) shouldBeEqualTo true
@@ -472,7 +472,7 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBoundsWithAllNames(setOf("List<*>", "CharSequence")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>", "Int")) shouldBeEqualTo false
             hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
-            hasUpperBound { upperBound -> upperBound.isGenericType } shouldBeEqualTo true
+            hasUpperBound { upperBound -> upperBound.isKotlinType } shouldBeEqualTo true
             hasAllUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo true
             hasAllUpperBounds { upperBound -> upperBound.isInterface } shouldBeEqualTo false
         }

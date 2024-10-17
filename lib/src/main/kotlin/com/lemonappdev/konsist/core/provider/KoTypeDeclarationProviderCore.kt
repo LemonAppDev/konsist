@@ -12,11 +12,11 @@ import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
+import com.lemonappdev.konsist.core.declaration.type.KoGenericTypeDeclarationCore
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
@@ -45,18 +45,25 @@ internal interface KoTypeDeclarationProviderCore :
 
     @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("sourceDeclaration"))
     override val declaration: KoBaseTypeDeclaration
-        get() =
-            TypeUtil.getBasicType(
+        get() {
+            val type =  TypeUtil.getBasicType(
                 listOf(ktTypeReference, ktNameReferenceExpression, ktTypeProjection),
                 isExtensionDeclaration(),
                 getDeclarationWithFqn(containingDeclaration) ?: containingDeclaration,
                 containingFile,
-            ) as? KoBaseTypeDeclaration
+            )
+
+          return  if (type is KoGenericTypeDeclarationCore) {
+                type.sourceDeclaration
+            } else {
+                type
+            } as? KoBaseTypeDeclaration
                 ?: if (this is KoBaseTypeDeclaration) {
                     this
                 } else {
                     throw KoInternalException("Source declaration cannot be a null")
                 }
+        }
 
     private fun isExtensionDeclaration(): Boolean =
         ktTypeReference?.isExtensionDeclaration() == true ||
@@ -95,8 +102,6 @@ internal interface KoTypeDeclarationProviderCore :
 
     override fun asFunctionTypeDeclaration(): KoFunctionTypeDeclaration? =
         koTypeDeclarationProviderDeclaration as? KoFunctionTypeDeclaration
-
-    override fun asGenericTypeDeclaration(): KoGenericTypeDeclaration? = koTypeDeclarationProviderDeclaration as? KoGenericTypeDeclaration
 
     override fun asTypeParameterDeclaration(): KoTypeParameterDeclaration? =
         koTypeDeclarationProviderDeclaration as? KoTypeParameterDeclaration
@@ -166,12 +171,6 @@ internal interface KoTypeDeclarationProviderCore :
         when (predicate) {
             null -> asFunctionTypeDeclaration() != null
             else -> asFunctionTypeDeclaration()?.let { predicate(it) } ?: false
-        }
-
-    override fun hasGenericTypeDeclaration(predicate: ((KoGenericTypeDeclaration) -> Boolean)?): Boolean =
-        when (predicate) {
-            null -> asGenericTypeDeclaration() != null
-            else -> asGenericTypeDeclaration()?.let { predicate(it) } ?: false
         }
 
     override fun hasTypeParameterDeclaration(predicate: ((KoTypeParameterDeclaration) -> Boolean)?): Boolean =

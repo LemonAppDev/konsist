@@ -136,7 +136,7 @@ internal class KoTypeDeclarationCore private constructor(
 
     @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
     override val isGenericType: Boolean
-        get() = super<KoTypeProviderCore>.isGenericType
+        get() = super<KoIsGenericTypeProviderCore>.isGenericType
 
     @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
     override val isNullable: Boolean

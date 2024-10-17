@@ -13,7 +13,6 @@ class KoTypeArgumentDeclarationForKoOutModifierProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -29,7 +28,6 @@ class KoTypeArgumentDeclarationForKoOutModifierProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -45,7 +43,6 @@ class KoTypeArgumentDeclarationForKoOutModifierProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -61,7 +58,6 @@ class KoTypeArgumentDeclarationForKoOutModifierProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -77,7 +73,6 @@ class KoTypeArgumentDeclarationForKoOutModifierProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -93,7 +88,6 @@ class KoTypeArgumentDeclarationForKoOutModifierProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 

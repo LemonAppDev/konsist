@@ -65,7 +65,6 @@ class KoTypeDeclarationForKoTypeProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration
@@ -81,7 +80,6 @@ class KoTypeDeclarationForKoTypeProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isFunctionType shouldBeEqualTo false
-            it?.isGenericType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
             it?.isExternalType shouldBeEqualTo false
         }

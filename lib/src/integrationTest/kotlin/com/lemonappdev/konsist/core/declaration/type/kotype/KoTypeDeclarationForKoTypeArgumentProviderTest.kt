@@ -266,10 +266,14 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames(listOf("Set<String>")) shouldBeEqualTo true
             it?.hasTypeArgumentsWithAllNames(listOf("Set<String>", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(Set::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(Set::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(Set::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(Set::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(Set::class, Int::class) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(List::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(Set::class, Int::class)) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(listOf(List::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(Set::class) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(List::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(Set::class)) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(listOf(List::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.genericType?.isKotlinType == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.genericType?.isExternalType == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.genericType?.isKotlinType == true } shouldBeEqualTo true

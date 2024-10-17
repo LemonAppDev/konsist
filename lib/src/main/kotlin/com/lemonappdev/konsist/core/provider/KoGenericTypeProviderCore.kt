@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.provider.KoGenericTypeProvider
+import com.lemonappdev.konsist.core.declaration.type.KoGenericTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.util.TypeUtil
 import com.lemonappdev.konsist.core.util.TypeUtil.hasTypeOf
@@ -36,12 +37,18 @@ internal interface KoGenericTypeProviderCore :
                 return if (ktNameReferenceExpression == null) {
                     null
                 } else {
-                    TypeUtil.getBasicType(
+                    val type = TypeUtil.getBasicType(
                         listOf(ktNameReferenceExpression),
                         ktNameReferenceExpression.isExtensionDeclaration(),
                         this.castToKoBaseDeclaration(),
                         containingFile,
                     )
+
+                    if (type is KoGenericTypeDeclarationCore) {
+                        type.sourceDeclaration
+                    } else {
+                        type
+                    }
                 }
             }
         }

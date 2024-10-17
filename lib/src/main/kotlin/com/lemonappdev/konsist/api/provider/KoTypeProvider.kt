@@ -54,11 +54,6 @@ interface KoTypeProvider : KoBaseProvider {
     val isFunctionType: Boolean
 
     /**
-     * Determines whatever source declaration is a generic.
-     */
-    val isGenericType: Boolean
-
-    /**
      * Determines whatever source declaration is a type parameter.
      */
     val isTypeParameter: Boolean

@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.ext.list.sourceDeclarations
 import com.lemonappdev.konsist.api.provider.KoUpperBoundsProvider
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
@@ -12,16 +13,15 @@ internal interface KoUpperBoundsProviderCore :
     KoBaseProviderCore {
     val ktTypeReferences: List<KtTypeReference>
 
-    override val upperBounds: List<KoSourceDeclaration>
+    override val upperBounds: List<KoTypeDeclaration>
         get() =
             ktTypeReferences
                 .map { typeReference -> KoTypeDeclarationCore.getInstance(typeReference, this.castToKoBaseDeclaration()) }
-                .sourceDeclarations()
 
     override val numUpperBounds: Int
         get() = upperBounds.size
 
-    override fun countUpperBounds(predicate: (KoSourceDeclaration) -> Boolean): Int = upperBounds.count { predicate(it) }
+    override fun countUpperBounds(predicate: (KoTypeDeclaration) -> Boolean): Int = upperBounds.count { predicate(it) }
 
     override fun hasUpperBounds(): Boolean = upperBounds.isNotEmpty()
 
@@ -53,7 +53,7 @@ internal interface KoUpperBoundsProviderCore :
                 }
         }
 
-    override fun hasUpperBound(predicate: (KoSourceDeclaration) -> Boolean): Boolean = upperBounds.any(predicate)
+    override fun hasUpperBound(predicate: (KoTypeDeclaration) -> Boolean): Boolean = upperBounds.any(predicate)
 
-    override fun hasAllUpperBounds(predicate: (KoSourceDeclaration) -> Boolean): Boolean = upperBounds.all(predicate)
+    override fun hasAllUpperBounds(predicate: (KoTypeDeclaration) -> Boolean): Boolean = upperBounds.all(predicate)
 }
