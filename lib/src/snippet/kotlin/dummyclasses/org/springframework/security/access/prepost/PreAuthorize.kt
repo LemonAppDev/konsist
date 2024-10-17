@@ -1,3 +1,5 @@
 package dummyclasses.org.springframework.security.access.prepost
 
-annotation class PreAuthorize(val message: String)
+annotation class PreAuthorize(
+    val message: String,
+)
