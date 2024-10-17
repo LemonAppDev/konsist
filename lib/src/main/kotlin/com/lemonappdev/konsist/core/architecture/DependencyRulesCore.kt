@@ -18,7 +18,7 @@ class DependencyRulesCore : DependencyRules {
         requireUniqueLayers(this, layer, *layers)
         requireNotDependentOnItself(this, layer, *layers)
         requireLayerStatusConsistency(false, this, layer, *layers)
-        requireNoCilcularDependencies(this, layer, *layers)
+        requireNoCircularDependencies(this, layer, *layers)
 
         uniqueLayers.apply {
             add(layer)
@@ -43,7 +43,7 @@ class DependencyRulesCore : DependencyRules {
         requireUniqueLayers(this, layer, *layers)
         requireNotDependentOnItself(this, layer, *layers)
         requireLayerStatusConsistency(false, this, layer, *layers)
-        requireNoCilcularDependencies(this, layer, *layers)
+        requireNoCircularDependencies(this, layer, *layers)
 
         uniqueLayers.apply {
             add(layer)
@@ -125,7 +125,7 @@ class DependencyRulesCore : DependencyRules {
         }
     }
 
-    private fun requireNoCilcularDependencies(
+    private fun requireNoCircularDependencies(
         layer: Layer,
         vararg layers: Layer,
     ) {
