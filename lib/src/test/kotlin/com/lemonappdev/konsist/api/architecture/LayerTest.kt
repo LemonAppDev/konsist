@@ -8,6 +8,26 @@ import org.junit.jupiter.api.Test
 
 class LayerTest {
     @Test
+    fun `throws an exception when layer name is blank`() {
+        // given
+        val sut = { Layer("", "package") }
+
+        // then
+        sut shouldThrow IllegalArgumentException::class withMessage
+            "name is blank"
+    }
+
+    @Test
+    fun `throws an exception when layer definedBy is blank`() {
+        // given
+        val sut = { Layer("name", "") }
+
+        // then
+        sut shouldThrow IllegalArgumentException::class withMessage
+            "definedBy is blank"
+    }
+
+    @Test
     fun `throws an exception when layer is defined by package without two dots at the end`() {
         // given
         val sut = { Layer("Domain", "package") }
