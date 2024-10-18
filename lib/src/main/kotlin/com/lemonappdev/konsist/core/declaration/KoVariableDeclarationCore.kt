@@ -34,7 +34,7 @@ import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtPropertyAccessor
 
 internal class KoVariableDeclarationCore private constructor(
-    private val ktProperty: KtProperty,
+    override val ktProperty: KtProperty,
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoVariableDeclaration,
     KoBaseProviderCore,
@@ -72,16 +72,6 @@ internal class KoVariableDeclarationCore private constructor(
             .filterNot { it is KtPropertyAccessor }
             .filterIsInstance<KtExpression>()
             .firstOrNull()
-    }
-
-    override val delegateName: String? by lazy {
-        ktProperty
-            .delegateExpression
-            ?.text
-            ?.replace(EndOfLine.UNIX.value, " ")
-            ?.substringAfter("by ")
-            ?.substringBefore("{")
-            ?.removeSuffix(" ")
     }
 
     @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("isVal"))

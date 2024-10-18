@@ -136,6 +136,8 @@ internal class KoPropertyDeclarationCore private constructor(
 
     override val ktDeclaration: KtDeclaration by lazy { ktCallableDeclaration }
 
+    override val ktProperty: KtProperty? by lazy { ktCallableDeclaration as? KtProperty }
+
     @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
     override val isInitialized: Boolean by lazy { super<KoIsInitializedProviderCore>.isInitialized }
 
@@ -154,20 +156,6 @@ internal class KoPropertyDeclarationCore private constructor(
             .filterNot { it is KtPropertyAccessor }
             .filterIsInstance<KtExpression>()
             .firstOrNull()
-    }
-
-    override val delegateName: String? by lazy {
-        if (ktCallableDeclaration is KtProperty) {
-            ktCallableDeclaration
-                .delegateExpression
-                ?.text
-                ?.replace(EndOfLine.UNIX.value, " ")
-                ?.substringAfter("by ")
-                ?.substringBefore("{")
-                ?.removeSuffix(" ")
-        } else {
-            null
-        }
     }
 
     @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("isVal"))
