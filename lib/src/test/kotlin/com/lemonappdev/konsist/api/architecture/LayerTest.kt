@@ -14,7 +14,7 @@ class LayerTest {
 
         // then
         sut shouldThrow IllegalArgumentException::class withMessage
-                "name is blank"
+            "name is blank"
     }
 
     @Test
@@ -24,7 +24,7 @@ class LayerTest {
 
         // then
         sut shouldThrow IllegalArgumentException::class withMessage
-                "definedBy is blank"
+            "definedBy is blank"
     }
 
     @Test
