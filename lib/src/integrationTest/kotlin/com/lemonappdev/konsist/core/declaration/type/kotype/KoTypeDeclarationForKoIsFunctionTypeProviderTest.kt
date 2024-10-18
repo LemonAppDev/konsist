@@ -10,9 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource
 class KoTypeDeclarationForKoIsFunctionTypeProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `type-is-not-function-type`(
-        fileName: String,
-    ) {
+    fun `type-is-not-function-type`(fileName: String) {
         // given
         val sut =
             getSnippetFile(fileName)

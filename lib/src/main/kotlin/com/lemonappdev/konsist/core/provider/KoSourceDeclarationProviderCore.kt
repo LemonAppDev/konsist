@@ -13,7 +13,6 @@ import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.com.intellij.util.containers.ContainerUtil.filterIsInstance
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtNullableType
-import org.jetbrains.kotlin.psi.KtTypeArgumentList
 import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
@@ -43,24 +42,26 @@ internal interface KoSourceDeclarationProviderCore :
                 )
 
             return if (type is KoGenericTypeDeclarationCore) {
-                val nestedKtNameReferenceExpression = if (ktNameReferenceExpression != null) {
-                    ktNameReferenceExpression
-                } else {
-                    val typeElement = ktTypeReference?.typeElement
-
-                    val notNullableTypeElement = if (typeElement is KtNullableType) {
-                        typeElement
-                            .children
-                            .firstOrNull()
+                val nestedKtNameReferenceExpression =
+                    if (ktNameReferenceExpression != null) {
+                        ktNameReferenceExpression
                     } else {
-                        typeElement
-                    }
+                        val typeElement = ktTypeReference?.typeElement
 
-                    notNullableTypeElement
-                        ?.children
-                        ?.filterIsInstance<KtNameReferenceExpression>()
-                        ?.firstOrNull()
-                }
+                        val notNullableTypeElement =
+                            if (typeElement is KtNullableType) {
+                                typeElement
+                                    .children
+                                    .firstOrNull()
+                            } else {
+                                typeElement
+                            }
+
+                        notNullableTypeElement
+                            ?.children
+                            ?.filterIsInstance<KtNameReferenceExpression>()
+                            ?.firstOrNull()
+                    }
 
                 val nestedType =
                     nestedKtNameReferenceExpression
@@ -79,18 +80,16 @@ internal interface KoSourceDeclarationProviderCore :
                 } else {
                     nestedType
                 }
-
-
             } else {
                 type
             } ?: this as? KoSourceDeclaration
-            ?: throw KoInternalException("Source declaration cannot be a null")
+                ?: throw KoInternalException("Source declaration cannot be a null")
         }
 
     private fun isExtensionDeclaration(): Boolean =
         ktTypeReference?.isExtensionDeclaration() == true ||
-                ktNameReferenceExpression?.isExtensionDeclaration() == true ||
-                ktTypeProjection?.isExtensionDeclaration() == true
+            ktNameReferenceExpression?.isExtensionDeclaration() == true ||
+            ktTypeProjection?.isExtensionDeclaration() == true
 
     private fun getDeclarationWithFqn(declaration: KoBaseDeclaration): KoBaseDeclaration? =
         when {
@@ -107,15 +106,14 @@ internal interface KoSourceDeclarationProviderCore :
             }
         }
 
-    override fun hasSourceDeclaration(predicate: (KoSourceDeclaration) -> Boolean): Boolean =
-        predicate(sourceDeclaration)
+    override fun hasSourceDeclaration(predicate: (KoSourceDeclaration) -> Boolean): Boolean = predicate(sourceDeclaration)
 
     override fun hasSourceDeclarationOf(kClass: KClass<*>): Boolean =
         sourceDeclaration.hasClassDeclarationOf(kClass) ||
-                sourceDeclaration.hasObjectDeclarationOf(kClass) ||
-                sourceDeclaration.hasInterfaceDeclarationOf(kClass) ||
-                sourceDeclaration.hasKotlinTypeDeclarationOf(
-                    kClass,
-                ) ||
-                sourceDeclaration.hasExternalTypeDeclarationOf(kClass)
+            sourceDeclaration.hasObjectDeclarationOf(kClass) ||
+            sourceDeclaration.hasInterfaceDeclarationOf(kClass) ||
+            sourceDeclaration.hasKotlinTypeDeclarationOf(
+                kClass,
+            ) ||
+            sourceDeclaration.hasExternalTypeDeclarationOf(kClass)
 }
