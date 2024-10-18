@@ -32,10 +32,6 @@ var libPropertyTest: LibClassTest = LibClassTest("")
         if (true) field = value
     }
 
-val libPropertyWithFunctionTypeTest: () -> Unit = {}
-
-val libPropertyWithGenericTypeTest: List<Set<String>> = emptyList()
-
 val libPropertyWithImportAliasTypeTest: ImportAlias = LibObject
 
 val <T> T.libPropertyWithTypeParameterTest: T
