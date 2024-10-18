@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.core.declaration.koclass
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleParentClass
 import com.lemonappdev.konsist.testdata.SampleParentClass2
@@ -23,7 +25,7 @@ class KoClassDeclarationForKoParentClassProviderTest {
             parentClass shouldBeEqualTo null
             parentClasses() shouldBeEqualTo emptyList()
             numParentClasses() shouldBeEqualTo 0
-            countParentClasses { it.hasPrivateModifier } shouldBeEqualTo 0
+            countParentClasses { (it.sourceDeclaration as? KoVisibilityModifierProvider)?.hasPrivateModifier == true } shouldBeEqualTo 0
             hasParentClass() shouldBeEqualTo false
             hasParentClass { it.name == "SampleParentClass" } shouldBeEqualTo false
             hasParentClasses() shouldBeEqualTo false
@@ -31,7 +33,7 @@ class KoClassDeclarationForKoParentClassProviderTest {
             hasParentClassWithName(emptySet()) shouldBeEqualTo false
             hasParentClassesWithAllNames(emptyList()) shouldBeEqualTo false
             hasParentClassesWithAllNames(emptySet()) shouldBeEqualTo false
-            hasAllParentClasses { it.hasPrivateModifier } shouldBeEqualTo true
+            hasAllParentClasses { (it.sourceDeclaration as? KoVisibilityModifierProvider)?.hasPrivateModifier == true } shouldBeEqualTo true
             hasParentClassWithName("SampleParentClass") shouldBeEqualTo false
             hasParentClassWithName("SampleParentClass", "OtherClass") shouldBeEqualTo false
             hasParentClassWithName(listOf("SampleParentClass")) shouldBeEqualTo false
@@ -73,7 +75,7 @@ class KoClassDeclarationForKoParentClassProviderTest {
             parentClasses().map { it.name } shouldBeEqualTo listOf("SampleParentClass")
             numParentClasses() shouldBeEqualTo 1
             countParentClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo 1
-            countParentClasses { it.hasPrivateModifier } shouldBeEqualTo 0
+            countParentClasses { (it.sourceDeclaration as? KoVisibilityModifierProvider)?.hasPrivateModifier == true } shouldBeEqualTo 0
             hasParentClass() shouldBeEqualTo true
             hasParentClass { it.name == "SampleParentClass" } shouldBeEqualTo true
             hasParentClass { it.name == "OtherClass" } shouldBeEqualTo false
@@ -83,7 +85,7 @@ class KoClassDeclarationForKoParentClassProviderTest {
             hasParentClassesWithAllNames(emptyList()) shouldBeEqualTo true
             hasParentClassesWithAllNames(emptySet()) shouldBeEqualTo true
             hasAllParentClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
-            hasAllParentClasses { it.hasPrivateModifier } shouldBeEqualTo false
+            hasAllParentClasses { (it.sourceDeclaration as? KoVisibilityModifierProvider)?.hasPrivateModifier == true } shouldBeEqualTo false
             hasParentClassWithName("SampleParentClass") shouldBeEqualTo true
             hasParentClassWithName("OtherClass") shouldBeEqualTo false
             hasParentClassWithName("SampleParentClass", "OtherClass") shouldBeEqualTo true
@@ -137,7 +139,7 @@ class KoClassDeclarationForKoParentClassProviderTest {
             parentClasses().map { it.name } shouldBeEqualTo listOf("SampleParentClass")
             numParentClasses() shouldBeEqualTo 1
             countParentClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo 1
-            countParentClasses { it.hasPrivateModifier } shouldBeEqualTo 0
+            countParentClasses { (it.sourceDeclaration as? KoVisibilityModifierProvider)?.hasPrivateModifier == true } shouldBeEqualTo 0
             hasParentClass() shouldBeEqualTo true
             hasParentClass { it.name == "SampleParentClass" } shouldBeEqualTo true
             hasParentClass { it.name == "OtherClass" } shouldBeEqualTo false
@@ -147,7 +149,7 @@ class KoClassDeclarationForKoParentClassProviderTest {
             hasParentClassesWithAllNames(emptyList()) shouldBeEqualTo true
             hasParentClassesWithAllNames(emptySet()) shouldBeEqualTo true
             hasAllParentClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
-            hasAllParentClasses { it.hasPrivateModifier } shouldBeEqualTo false
+            hasAllParentClasses { (it.sourceDeclaration as? KoVisibilityModifierProvider)?.hasPrivateModifier == true } shouldBeEqualTo false
             hasParentClassWithName("SampleParentClass") shouldBeEqualTo true
             hasParentClassWithName("OtherClass") shouldBeEqualTo false
             hasParentClassWithName("SampleParentClass", "OtherClass") shouldBeEqualTo true

@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import kotlin.reflect.KClass
 
 /**
@@ -10,15 +10,15 @@ interface KoParentClassProvider : KoBaseProvider {
     /**
      * The direct parent class of the declaration.
      */
-    val parentClass: KoClassDeclaration?
+    val parentClass: KoParentDeclaration?
 
     /**
      * The parent classes of the declaration.
      *
      * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
-     * @return a list of [KoClassDeclaration] representing the parent classes of the declaration.
+     * @return a list of [KoParentDeclaration] representing the parent classes of the declaration.
      */
-    fun parentClasses(indirectParents: Boolean = false): List<KoClassDeclaration>
+    fun parentClasses(indirectParents: Boolean = false): List<KoParentDeclaration>
 
     /**
      * Returns the number of parent classes.
@@ -37,7 +37,7 @@ interface KoParentClassProvider : KoBaseProvider {
      */
     fun countParentClasses(
         indirectParents: Boolean = false,
-        predicate: (KoClassDeclaration) -> Boolean,
+        predicate: (KoParentDeclaration) -> Boolean,
     ): Int
 
     /**
@@ -57,7 +57,7 @@ interface KoParentClassProvider : KoBaseProvider {
      */
     fun hasParentClass(
         indirectParents: Boolean = false,
-        predicate: (KoClassDeclaration) -> Boolean,
+        predicate: (KoParentDeclaration) -> Boolean,
     ): Boolean
 
     /**
@@ -80,7 +80,7 @@ interface KoParentClassProvider : KoBaseProvider {
      */
     fun hasAllParentClasses(
         indirectParents: Boolean = false,
-        predicate: (KoClassDeclaration) -> Boolean,
+        predicate: (KoParentDeclaration) -> Boolean,
     ): Boolean
 
     /**

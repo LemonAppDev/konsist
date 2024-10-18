@@ -11,7 +11,6 @@ import com.lemonappdev.konsist.api.provider.modifier.KoSealedModifierProvider
  */
 interface KoClassAndInterfaceDeclaration :
     KoClassAndInterfaceAndObjectDeclaration,
-    KoParentDeclaration,
     KoActualModifierProvider,
     KoChildProvider,
     KoExpectModifierProvider,

@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentClassProvider
 import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
 import kotlin.reflect.KClass
@@ -9,31 +9,31 @@ internal interface KoParentClassProviderCore :
     KoParentClassProvider,
     KoBaseProviderCore,
     KoParentProviderCore {
-    override val parentClass: KoClassDeclaration?
+    override val parentClass: KoParentDeclaration?
         get() = parentClasses(false).firstOrNull()
 
-    override fun parentClasses(indirectParents: Boolean): List<KoClassDeclaration> =
-        parents(indirectParents).filterIsInstance<KoClassDeclaration>()
+    override fun parentClasses(indirectParents: Boolean): List<KoParentDeclaration> =
+        parents(indirectParents).filter { it.sourceDeclaration.isClass }
 
     override fun numParentClasses(indirectParents: Boolean): Int = parentClasses(indirectParents).size
 
     override fun countParentClasses(
         indirectParents: Boolean,
-        predicate: (KoClassDeclaration) -> Boolean,
+        predicate: (KoParentDeclaration) -> Boolean,
     ): Int = parentClasses(indirectParents).count { predicate(it) }
 
     override fun hasParentClass(): Boolean = parentClass != null
 
     override fun hasParentClass(
         indirectParents: Boolean,
-        predicate: (KoClassDeclaration) -> Boolean,
+        predicate: (KoParentDeclaration) -> Boolean,
     ): Boolean = parentClasses(indirectParents).any(predicate)
 
     override fun hasParentClasses(indirectParents: Boolean): Boolean = parentClasses(indirectParents).isNotEmpty()
 
     override fun hasAllParentClasses(
         indirectParents: Boolean,
-        predicate: (KoClassDeclaration) -> Boolean,
+        predicate: (KoParentDeclaration) -> Boolean,
     ): Boolean = parentClasses(indirectParents).all(predicate)
 
     override fun hasParentClassWithName(

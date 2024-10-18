@@ -10,7 +10,6 @@ import com.lemonappdev.konsist.core.provider.modifier.KoSealedModifierProviderCo
 internal interface KoClassAndInterfaceDeclarationCore :
     KoClassAndInterfaceDeclaration,
     KoClassAndInterfaceAndObjectDeclarationCore,
-    KoParentDeclarationCore,
     KoActualModifierProviderCore,
     KoChildProviderCore,
     KoExpectModifierProviderCore,

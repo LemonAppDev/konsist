@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.provider
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoParentDeclarationCore
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
 import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
@@ -18,44 +19,11 @@ internal interface KoParentProviderCore :
     val ktClassOrObject: KtClassOrObject
 
     override fun parents(indirectParents: Boolean): List<KoParentDeclaration> {
-        val directParentDeclarations =
-            ktClassOrObject
+            val directParentDeclarations =  ktClassOrObject
                 .getSuperTypeList()
                 ?.children
                 ?.filterIsInstance<KtSuperTypeListEntry>()
-                ?.map {
-                    val name =
-                        it
-                            .text
-                            .substringBefore(" ")
-                            .substringBefore("(")
-                            .substringBefore("<")
-
-                    val innerName = if (name.contains(".")) name.substringBeforeLast(".") else name
-                    val outerName = if (name.contains(".")) name.substringAfterLast(".") else name
-
-                    val import =
-                        containingFile
-                            .imports
-                            .firstOrNull { import ->
-                                if (import.alias != null) {
-                                    import.alias?.name == innerName
-                                } else {
-                                    import.name.substringAfterLast(".") == innerName
-                                }
-                            }
-
-                    val fqn =
-                        import
-                            ?.name
-                            ?: (containingFile.packagee?.name + "." + name)
-
-                    val isAlias = import?.alias != null
-
-                    return@map getClass(outerName, fqn, isAlias, containingFile)
-                        ?: getInterface(outerName, fqn, isAlias, containingFile)
-                        ?: KoExternalDeclarationCore.getInstance(outerName, it)
-                }?.toMutableList()
+                ?.map { KoParentDeclarationCore.getInstance(it, containingDeclaration) }
                 .orEmpty()
 
         val indirectParentDeclarations =
@@ -70,8 +38,8 @@ internal interface KoParentProviderCore :
         parents
             .forEach {
                 val nextParents =
-                    if (it as? KoParentProvider != null) {
-                        it.parents(indirectParents = true)
+                    if (it.sourceDeclaration as? KoParentProvider != null) {
+                        (it.sourceDeclaration as? KoParentProvider)?.parents(indirectParents = true) ?: emptyList()
                     } else {
                         emptyList()
                     }
