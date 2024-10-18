@@ -50,7 +50,6 @@ import com.lemonappdev.konsist.core.provider.modifier.KoValModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVarModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
-import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
@@ -124,33 +123,31 @@ internal class KoPropertyDeclarationCore private constructor(
     KoIsExtensionProviderCore,
     KoIsValProviderCore,
     KoIsVarProviderCore {
-    override val ktAnnotated: KtAnnotated = ktCallableDeclaration
+    override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }
 
-    override val ktModifierListOwner: KtModifierListOwner = ktCallableDeclaration
+    override val ktModifierListOwner: KtModifierListOwner by lazy { ktCallableDeclaration }
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner = ktCallableDeclaration
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktCallableDeclaration }
 
-    override val psiElement: PsiElement = ktCallableDeclaration
+    override val psiElement: PsiElement by lazy { ktCallableDeclaration }
 
-    override val ktElement: KtElement = ktCallableDeclaration
+    override val ktElement: KtElement by lazy { ktCallableDeclaration }
 
-    override val ktDeclaration: KtDeclaration = ktCallableDeclaration
+    override val ktDeclaration: KtDeclaration by lazy { ktCallableDeclaration }
 
-    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
-    override val isInitialized: Boolean
-        get() = super<KoIsInitializedProviderCore>.isInitialized
+    override val ktProperty: KtProperty? by lazy { ktCallableDeclaration as? KtProperty }
 
     @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
-    override val isConstructorDefined: Boolean
-        get() = super<KoIsConstructorDefinedProviderCore>.isConstructorDefined
+    override val isInitialized: Boolean by lazy { super<KoIsInitializedProviderCore>.isInitialized }
 
     @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
-    override val isReadOnly: Boolean
-        get() = super<KoIsReadOnlyProviderCore>.isReadOnly
+    override val isConstructorDefined: Boolean by lazy { super<KoIsConstructorDefinedProviderCore>.isConstructorDefined }
 
     @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
-    override val isTopLevel: Boolean
-        get() = super<KoIsTopLevelProviderCore>.isTopLevel
+    override val isReadOnly: Boolean by lazy { super<KoIsReadOnlyProviderCore>.isReadOnly }
+
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
+    override val isTopLevel: Boolean by lazy { super<KoIsTopLevelProviderCore>.isTopLevel }
 
     override val ktExpression: KtExpression? by lazy {
         ktCallableDeclaration
@@ -158,20 +155,6 @@ internal class KoPropertyDeclarationCore private constructor(
             .filterNot { it is KtPropertyAccessor }
             .filterIsInstance<KtExpression>()
             .firstOrNull()
-    }
-
-    override val delegateName: String? by lazy {
-        if (ktCallableDeclaration is KtProperty) {
-            ktCallableDeclaration
-                .delegateExpression
-                ?.text
-                ?.replace(EndOfLine.UNIX.value, " ")
-                ?.substringAfter("by ")
-                ?.substringBefore("{")
-                ?.removeSuffix(" ")
-        } else {
-            null
-        }
     }
 
     @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("isVal"))

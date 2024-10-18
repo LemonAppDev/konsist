@@ -52,7 +52,7 @@ internal class KoKDocDeclarationCore(
     KoKDocPropertySetterTagProviderCore,
     KoKDocConstructorTagProviderCore,
     KoKDocSinceTagProviderCore {
-    override val psiElement: PsiElement = kDocElement
+    override val psiElement: PsiElement by lazy { kDocElement }
 
     override val text: String by lazy {
         val splitKDoc =

@@ -24,7 +24,6 @@ import com.lemonappdev.konsist.core.provider.KoValueProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoValModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVarModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
-import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
@@ -34,7 +33,7 @@ import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtPropertyAccessor
 
 internal class KoVariableDeclarationCore private constructor(
-    private val ktProperty: KtProperty,
+    override val ktProperty: KtProperty,
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoVariableDeclaration,
     KoBaseProviderCore,
@@ -58,13 +57,13 @@ internal class KoVariableDeclarationCore private constructor(
     KoTacitTypeProviderCore,
     KoIsValProviderCore,
     KoIsVarProviderCore {
-    override val ktAnnotated: KtAnnotated = ktProperty
+    override val ktAnnotated: KtAnnotated by lazy { ktProperty }
 
-    override val ktCallableDeclaration: KtCallableDeclaration = ktProperty
+    override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktProperty }
 
-    override val psiElement: PsiElement = ktProperty
+    override val psiElement: PsiElement by lazy { ktProperty }
 
-    override val ktElement: KtElement = ktProperty
+    override val ktElement: KtElement by lazy { ktProperty }
 
     override val ktExpression: KtExpression? by lazy {
         ktProperty
@@ -74,25 +73,15 @@ internal class KoVariableDeclarationCore private constructor(
             .firstOrNull()
     }
 
-    override val delegateName: String? by lazy {
-        ktProperty
-            .delegateExpression
-            ?.text
-            ?.replace(EndOfLine.UNIX.value, " ")
-            ?.substringAfter("by ")
-            ?.substringBefore("{")
-            ?.removeSuffix(" ")
-    }
-
     @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("isVal"))
-    override val hasValModifier: Boolean = !ktProperty.isVar
+    override val hasValModifier: Boolean by lazy { !ktProperty.isVar }
 
     @Deprecated("Will be removed in version 0.18.0")
-    override val hasVarModifier: Boolean = ktProperty.isVar
+    override val hasVarModifier: Boolean by lazy { ktProperty.isVar }
 
-    override val isVal: Boolean = !ktProperty.isVar
+    override val isVal: Boolean by lazy { !ktProperty.isVar }
 
-    override val isVar: Boolean = ktProperty.isVar
+    override val isVar: Boolean by lazy { ktProperty.isVar }
 
     override fun toString(): String = name
 

@@ -36,17 +36,18 @@ internal class KoArgumentDeclarationCore private constructor(
     KoResideInPackageProviderCore,
     KoPackageDeclarationProviderCore,
     KoTextProviderCore {
-    override val psiElement: PsiElement = ktValueArgument
+    override val psiElement: PsiElement by lazy { ktValueArgument }
 
-    override val ktElement: KtElement = ktValueArgument
+    override val ktElement: KtElement by lazy { ktValueArgument }
 
-    override val ktExpression: KtExpression? = ktValueArgument.getArgumentExpression()
+    override val ktExpression: KtExpression? by lazy { ktValueArgument.getArgumentExpression() }
 
-    override val name: String
-        get() =
-            ktValueArgument
-                .getArgumentName()
-                ?.text ?: ""
+    override val name: String by lazy {
+        ktValueArgument
+            .getArgumentName()
+            ?.text
+            ?: ""
+    }
 
     override fun toString(): String = locationWithText
 

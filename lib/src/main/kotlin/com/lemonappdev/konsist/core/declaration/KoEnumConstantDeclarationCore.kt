@@ -57,13 +57,13 @@ internal class KoEnumConstantDeclarationCore private constructor(
     KoPackageDeclarationProviderCore,
     KoResideInPackageProviderCore,
     KoTextProviderCore {
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner = ktEnumEntry
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktEnumEntry }
 
-    override val ktAnnotated: KtAnnotated = ktEnumEntry
+    override val ktAnnotated: KtAnnotated by lazy { ktEnumEntry }
 
-    override val psiElement: PsiElement = ktEnumEntry
+    override val psiElement: PsiElement by lazy { ktEnumEntry }
 
-    override val ktElement: KtElement = ktEnumEntry
+    override val ktElement: KtElement by lazy { ktEnumEntry }
 
     override val localDeclarations: List<KoBaseDeclaration> by lazy {
         val psiElements =
@@ -74,19 +74,19 @@ internal class KoEnumConstantDeclarationCore private constructor(
         KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
     }
 
-    override val arguments: List<KoArgumentDeclaration>
-        get() =
-            ktEnumEntry
-                .initializerList
-                ?.initializers
-                ?.firstOrNull()
-                ?.children
-                ?.filterIsInstance<KtValueArgumentList>()
-                ?.firstOrNull()
-                ?.children
-                ?.filterIsInstance<KtValueArgument>()
-                ?.map { KoArgumentDeclarationCore.getInstance(it, this) }
-                .orEmpty()
+    override val arguments: List<KoArgumentDeclaration> by lazy {
+        ktEnumEntry
+            .initializerList
+            ?.initializers
+            ?.firstOrNull()
+            ?.children
+            ?.filterIsInstance<KtValueArgumentList>()
+            ?.firstOrNull()
+            ?.children
+            ?.filterIsInstance<KtValueArgument>()
+            ?.map { KoArgumentDeclarationCore.getInstance(it, this) }
+            .orEmpty()
+    }
 
     override fun toString(): String = name
 

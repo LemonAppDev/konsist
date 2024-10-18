@@ -40,13 +40,13 @@ data class KoTypeArgumentDeclarationCore(
     KoInModifierProviderCore,
     KoLocationProviderCore,
     KoPathProviderCore {
-    override val ktElement: KtElement = ktTypeProjection
+    override val ktElement: KtElement by lazy { ktTypeProjection }
 
-    override val ktUserType: KtUserType? = null
+    override val ktUserType: KtUserType? by lazy { null }
 
-    override val psiElement: PsiElement = ktTypeProjection
+    override val psiElement: PsiElement by lazy { ktTypeProjection }
 
-    override val ktModifierListOwner: KtModifierListOwner = ktTypeProjection
+    override val ktModifierListOwner: KtModifierListOwner by lazy { ktTypeProjection }
 
     override val text: String by lazy {
         when {
