@@ -64,7 +64,7 @@ internal class KoAnnotationDeclarationCore private constructor(
         ): KoAnnotationDeclaration =
             cache.getOrCreateInstance(ktAnnotationEntry, containingDeclaration) {
                 KoAnnotationDeclarationCore(
-                    ktAnnotationEntry
+                    ktAnnotationEntry,
                 )
             }
     }

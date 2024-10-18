@@ -24,7 +24,6 @@ import com.lemonappdev.konsist.core.provider.KoValueProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoValModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVarModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
-import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration

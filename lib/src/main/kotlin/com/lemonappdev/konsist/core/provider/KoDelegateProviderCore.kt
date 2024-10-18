@@ -10,13 +10,14 @@ internal interface KoDelegateProviderCore :
     val ktProperty: KtProperty?
 
     override val delegateName: String?
-        get() = ktProperty
-            ?.delegate
-            ?.text
-            ?.replace(EndOfLine.UNIX.value, " ")
-            ?.substringAfter("by ")
-            ?.substringBefore("{")
-            ?.removeSuffix(" ")
+        get() =
+            ktProperty
+                ?.delegate
+                ?.text
+                ?.replace(EndOfLine.UNIX.value, " ")
+                ?.substringAfter("by ")
+                ?.substringBefore("{")
+                ?.removeSuffix(" ")
 
     override fun hasDelegate(delegateName: String?): Boolean =
         when (delegateName) {
