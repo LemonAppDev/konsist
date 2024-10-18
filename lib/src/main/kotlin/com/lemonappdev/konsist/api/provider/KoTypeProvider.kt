@@ -51,6 +51,7 @@ interface KoTypeProvider : KoBaseProvider {
     /**
      * Determines whatever source declaration is a function.
      */
+    @Deprecated("Will be removed in version 0.19.0") // Todo: replaceWith - fill in
     val isFunctionType: Boolean
 
     /**

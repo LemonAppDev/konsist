@@ -93,6 +93,7 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
      *
      * @return the function type declaration associated with this type.
      */
+    @Deprecated("Will be removed in version 0.19.0")
     fun asFunctionTypeDeclaration(): KoFunctionTypeDeclaration?
 
     /**
@@ -221,6 +222,7 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
      * @return `true` if the type has the specified function type declaration (or any function type declaration if [predicate] is
      * `null`), `false` otherwise.
      */
+    @Deprecated("Will be removed in version 0.19.0")
     fun hasFunctionTypeDeclaration(predicate: ((KoFunctionTypeDeclaration) -> Boolean)? = null): Boolean
 
     /**

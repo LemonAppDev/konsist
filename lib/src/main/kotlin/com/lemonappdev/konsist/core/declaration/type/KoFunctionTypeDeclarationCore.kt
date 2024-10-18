@@ -16,6 +16,7 @@ import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunctionType
 
+@Deprecated("Will be removed in version 0.19.0")
 internal class KoFunctionTypeDeclarationCore private constructor(
     override val ktFunctionType: KtFunctionType,
     override val containingDeclaration: KoBaseDeclaration,

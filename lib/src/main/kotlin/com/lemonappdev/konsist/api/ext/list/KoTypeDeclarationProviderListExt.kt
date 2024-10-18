@@ -67,7 +67,7 @@ val <T : KoTypeDeclarationProvider> List<T>.kotlinTypeDeclarations: List<KoKotli
 /**
  * List containing function type declarations associated with types.
  */
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("functionTypeDeclarations()"))
+@Deprecated("Will be removed in version 0.18.0")
 val <T : KoTypeDeclarationProvider> List<T>.functionTypeDeclarations: List<KoFunctionTypeDeclaration>
     get() = mapNotNull { it.asFunctionTypeDeclaration() }
 
@@ -161,20 +161,6 @@ fun <T : KoTypeDeclarationProvider> List<T>.kotlinTypeDeclarations(
 ): List<KoKotlinTypeDeclaration> =
     filter { it.hasKotlinTypeDeclaration(predicate) }
         .mapNotNull { it.asKotlinTypeDeclaration() }
-
-/**
- * List containing function type declarations associated with types.
- *
- * @param predicate A function that defines the condition to be met by the function type declaration.
- *                  If null, all function type declarations are included.
- * @return A list of function type declarations that match the provided predicate, or all function type declarations
- * if no predicate is provided.
- */
-fun <T : KoTypeDeclarationProvider> List<T>.functionTypeDeclarations(
-    predicate: ((KoFunctionTypeDeclaration) -> Boolean)? = null,
-): List<KoFunctionTypeDeclaration> =
-    filter { it.hasFunctionTypeDeclaration(predicate) }
-        .mapNotNull { it.asFunctionTypeDeclaration() }
 
 /**
  * List containing type parameter declarations associated with types.
@@ -684,6 +670,7 @@ fun <T : KoTypeDeclarationProvider> List<T>.withoutKotlinTypeDeclarationOf(kClas
  * @param predicate The predicate function to determine if a function type declaration satisfies a condition.
  * @return A list containing declarations with the specified function type declaration.
  */
+@Deprecated("Will be removed in version 0.19.0")
 fun <T : KoTypeDeclarationProvider> List<T>.withFunctionTypeDeclaration(
     predicate: ((KoFunctionTypeDeclaration) -> Boolean)? = null,
 ): List<T> =
@@ -703,6 +690,7 @@ fun <T : KoTypeDeclarationProvider> List<T>.withFunctionTypeDeclaration(
  * @param predicate The predicate function to determine if a function type declaration satisfies a condition.
  * @return A list containing declarations without the specified function type declaration.
  */
+@Deprecated("Will be removed in version 0.19.0")
 fun <T : KoTypeDeclarationProvider> List<T>.withoutFunctionTypeDeclaration(
     predicate: ((KoFunctionTypeDeclaration) -> Boolean)? = null,
 ): List<T> =

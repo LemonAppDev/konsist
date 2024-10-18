@@ -153,6 +153,7 @@ fun <T : KoTypeProvider> List<T>.withoutKotlinCollectionType(): List<T> = filter
  *
  * @return A list containing only function types.
  */
+@Deprecated("Will be removed in version 0.19.0")
 fun <T : KoTypeProvider> List<T>.withFunctionType(): List<T> = filter { it.isFunctionType }
 
 /**
@@ -160,6 +161,7 @@ fun <T : KoTypeProvider> List<T>.withFunctionType(): List<T> = filter { it.isFun
  *
  * @return A list excluding function types.
  */
+@Deprecated("Will be removed in version 0.19.0")
 fun <T : KoTypeProvider> List<T>.withoutFunctionType(): List<T> = filterNot { it.isFunctionType }
 
 /**

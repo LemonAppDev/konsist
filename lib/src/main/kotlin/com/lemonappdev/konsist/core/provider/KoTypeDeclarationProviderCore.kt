@@ -101,6 +101,7 @@ internal interface KoTypeDeclarationProviderCore :
 
     override fun asKotlinTypeDeclaration(): KoKotlinTypeDeclaration? = koTypeDeclarationProviderDeclaration as? KoKotlinTypeDeclaration
 
+    @Deprecated("Will be removed in version 0.19.0")
     override fun asFunctionTypeDeclaration(): KoFunctionTypeDeclaration? =
         koTypeDeclarationProviderDeclaration as? KoFunctionTypeDeclaration
 
@@ -168,6 +169,7 @@ internal interface KoTypeDeclarationProviderCore :
     override fun hasKotlinTypeDeclarationOf(kClass: KClass<*>): Boolean =
         kClass.qualifiedName == asKotlinTypeDeclaration()?.fullyQualifiedName
 
+    @Deprecated("Will be removed in version 0.19.0")
     override fun hasFunctionTypeDeclaration(predicate: ((KoFunctionTypeDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
             null -> asFunctionTypeDeclaration() != null

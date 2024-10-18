@@ -10,6 +10,8 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionTypeDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoGenericTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsFunctionTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsGenericTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsMutableTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsNullableProviderCore
@@ -58,7 +60,9 @@ internal class KoTypeDeclarationCore private constructor(
     KoTypeProviderCore,
     KoStarProjectionProviderCore,
     KoSourceAndAliasTypeProviderCore,
+    KoGenericTypeProviderCore,
     KoIsGenericTypeProviderCore,
+    KoIsFunctionTypeProviderCore,
     KoPackageProviderCore,
     KoResideInPackageProviderCore,
     KoAnnotationProviderCore,
@@ -128,11 +132,15 @@ internal class KoTypeDeclarationCore private constructor(
 
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
-    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
+    @Deprecated("Will be removed in version 0.18.0")
     override val isGenericType: Boolean
         get() = super<KoIsGenericTypeProviderCore>.isGenericType
 
-    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
+    @Deprecated("Will be removed in version 0.19.0")
+    override val isFunctionType: Boolean
+        get() = super<KoIsFunctionTypeProviderCore>.isFunctionType
+
+    @Deprecated("Will be removed in version 0.18.0")
     override val isNullable: Boolean
         get() = super<KoIsNullableProviderCore>.isNullable
 

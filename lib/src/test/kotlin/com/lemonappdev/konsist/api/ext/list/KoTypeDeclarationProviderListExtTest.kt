@@ -597,63 +597,6 @@ class KoTypeDeclarationProviderListExtTest {
     }
 
     @Test
-    fun `functionTypeDeclarations returns function types from all declarations`() {
-        // given
-        val sourceDeclaration1: KoFunctionTypeDeclaration = mockk()
-        val sourceDeclaration2: KoFunctionTypeDeclaration = mockk()
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { asFunctionTypeDeclaration() } returns sourceDeclaration1
-                every { hasFunctionTypeDeclaration() } returns true
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { asFunctionTypeDeclaration() } returns sourceDeclaration2
-                every { hasFunctionTypeDeclaration() } returns true
-            }
-        val declaration3: KoTypeDeclarationProvider =
-            mockk {
-                every { hasFunctionTypeDeclaration() } returns false
-            }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.functionTypeDeclarations()
-
-        // then
-        sut shouldBeEqualTo listOf(sourceDeclaration1, sourceDeclaration2)
-    }
-
-    @Test
-    fun `functionTypeDeclarations returns function types from all declarations which satisfies predicate`() {
-        // given
-        val predicate: (KoFunctionTypeDeclaration) -> Boolean = { it.hasNameContaining("SomeFunctionType") }
-        val sourceDeclaration1: KoFunctionTypeDeclaration = mockk()
-        val sourceDeclaration2: KoFunctionTypeDeclaration = mockk()
-        val declaration1: KoTypeDeclarationProvider =
-            mockk {
-                every { asFunctionTypeDeclaration() } returns sourceDeclaration1
-                every { hasFunctionTypeDeclaration(predicate) } returns true
-            }
-        val declaration2: KoTypeDeclarationProvider =
-            mockk {
-                every { asFunctionTypeDeclaration() } returns sourceDeclaration2
-                every { hasFunctionTypeDeclaration(predicate) } returns false
-            }
-        val declaration3: KoTypeDeclarationProvider =
-            mockk {
-                every { hasFunctionTypeDeclaration(predicate) } returns false
-            }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.functionTypeDeclarations(predicate)
-
-        // then
-        sut shouldBeEqualTo listOf(sourceDeclaration1)
-    }
-
-    @Test
     fun `typeParameterDeclarations returns type parameters from all declarations`() {
         // given
         val sourceDeclaration1: KoTypeParameterDeclaration = mockk()

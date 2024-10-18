@@ -13,6 +13,7 @@ import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
  *
  * This interface defines the structure for representing function types, including their parameter types and return type.
  */
+@Deprecated("Will be removed in version 0.19.0")
 interface KoFunctionTypeDeclaration :
     KoBaseTypeDeclaration,
     KoContainingFileProvider,

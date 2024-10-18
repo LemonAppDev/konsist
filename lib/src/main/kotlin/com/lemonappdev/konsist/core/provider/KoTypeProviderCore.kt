@@ -46,6 +46,7 @@ internal interface KoTypeProviderCore :
             koTypeProviderDeclaration is KoKotlinTypeDeclaration ||
                 koTypeProviderDeclaration?.name?.let { TypeUtil.isKotlinType(it) } == true
 
+    @Deprecated("Will be removed in version 0.19.0")
     override val isFunctionType: Boolean
         get() = koTypeProviderDeclaration is KoFunctionTypeDeclaration
 
