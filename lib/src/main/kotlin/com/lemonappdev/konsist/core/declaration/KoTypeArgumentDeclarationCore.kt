@@ -59,9 +59,9 @@ data class KoTypeArgumentDeclarationCore(
 
     override val ktTypeReference: KtTypeReference? by lazy { null }
 
-    override val koTypeProviderDeclaration by lazy { sourceDeclaration }
+    override val koTypeProviderDeclaration: KoSourceDeclaration by lazy { sourceDeclaration }
 
-    override val koTypeDeclarationProviderDeclaration by lazy { sourceDeclaration }
+    override val koTypeDeclarationProviderDeclaration: KoSourceDeclaration by lazy { sourceDeclaration }
 
     override val text: String by lazy {
         when {
