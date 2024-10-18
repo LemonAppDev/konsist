@@ -52,7 +52,7 @@ class KoScopeFromTest {
         val func = { Konsist.scopeFromTest(sourceSetName = "main") }
 
         // then
-        val message = "Source set 'main' is a production source set, but it should be test source set."
+        val message = "Source set 'main' is a production source set, but it should be test source set"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 
@@ -144,7 +144,7 @@ class KoScopeFromTest {
         val func = { Konsist.scopeFromTest(moduleName = "app", sourceSetName = "main") }
 
         // then
-        val message = "Source set 'main' is a production source set, but it should be test source set."
+        val message = "Source set 'main' is a production source set, but it should be test source set"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 
@@ -214,7 +214,7 @@ class KoScopeFromTest {
         val func = { Konsist.scopeFromTest(moduleName = "data", sourceSetName = "main") }
 
         // then
-        val message = "Source set 'main' is a production source set, but it should be test source set."
+        val message = "Source set 'main' is a production source set, but it should be test source set"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 
