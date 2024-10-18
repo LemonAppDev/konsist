@@ -92,7 +92,7 @@ internal class KoTypeDeclarationCore private constructor(
             // The last item is chosen because when a type is preceded by an annotation or modifier,
             // the type being searched for is the last item in the list.
             ?.filterIsInstance<KtUserType>()
-            ?.last()
+            ?.lastOrNull()
             ?: error("KtTypeReference, KtNameReferenceExpression and KtTypeProjection are null")
     }
 
