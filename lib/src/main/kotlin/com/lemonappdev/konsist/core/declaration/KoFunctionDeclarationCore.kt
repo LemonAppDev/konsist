@@ -103,21 +103,21 @@ internal class KoFunctionDeclarationCore private constructor(
     KoExpectModifierProviderCore,
     KoTypeParameterProviderCore,
     KoIsExtensionProviderCore {
-    override val ktCallableDeclaration: KtCallableDeclaration = ktFunction
+    override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktFunction }
 
-    override val ktAnnotated: KtAnnotated = ktCallableDeclaration
+    override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }
 
-    override val ktModifierListOwner: KtModifierListOwner = ktCallableDeclaration
+    override val ktModifierListOwner: KtModifierListOwner by lazy { ktCallableDeclaration }
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner = ktCallableDeclaration
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktCallableDeclaration }
 
-    override val psiElement: PsiElement = ktFunction
+    override val psiElement: PsiElement by lazy { ktFunction }
 
-    override val ktElement: KtElement = ktFunction
+    override val ktElement: KtElement by lazy { ktFunction }
 
-    override val ktDeclarationWithBody: KtDeclarationWithBody = ktFunction
+    override val ktDeclarationWithBody: KtDeclarationWithBody by lazy { ktFunction }
 
-    override val ktDeclaration: KtDeclaration = ktFunction
+    override val ktDeclaration: KtDeclaration by lazy { ktFunction }
 
     override val localDeclarations: List<KoBaseDeclaration> by lazy {
         val psiElements =
@@ -129,12 +129,10 @@ internal class KoFunctionDeclarationCore private constructor(
     }
 
     @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
-    override val isInitialized: Boolean
-        get() = super<KoIsInitializedProviderCore>.isInitialized
+    override val isInitialized: Boolean by lazy { super<KoIsInitializedProviderCore>.isInitialized }
 
     @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
-    override val isTopLevel: Boolean
-        get() = super<KoIsTopLevelProviderCore>.isTopLevel
+    override val isTopLevel: Boolean by lazy { super<KoIsTopLevelProviderCore>.isTopLevel }
 
     override val fullyQualifiedName: String? by lazy {
         if (this.isTopLevel) {

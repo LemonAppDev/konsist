@@ -33,15 +33,15 @@ internal class KoImportAliasDeclarationCore private constructor(
     KoSourceDeclarationProviderCore {
     override val psiElement: PsiElement by lazy { ktImportAlias }
 
-    override val ktElement: KtElement = ktImportAlias
+    override val ktElement: KtElement by lazy { ktImportAlias }
 
-    override val text: String = ktImportAlias.name ?: ktImportAlias.text
+    override val text: String by lazy { ktImportAlias.name ?: ktImportAlias.text }
 
-    override val name: String = text
+    override val name: String by lazy { text }
 
-    override val packagee: KoPackageDeclaration? = containingFile.packagee
+    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
-    override val importDirective: KoImportDeclaration = containingDeclaration
+    override val importDirective: KoImportDeclaration by lazy { containingDeclaration }
 
     override val sourceDeclaration: KoSourceDeclaration by lazy { importDirective.sourceDeclaration }
 

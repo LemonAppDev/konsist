@@ -57,15 +57,15 @@ internal class KoTypeAliasDeclarationCore private constructor(
     KoVisibilityModifierProviderCore,
     KoActualModifierProviderCore,
     KoTypeParameterProviderCore {
-    override val ktAnnotated: KtAnnotated = ktTypeAlias
+    override val ktAnnotated: KtAnnotated by lazy { ktTypeAlias }
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner = ktTypeAlias
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktTypeAlias }
 
-    override val ktModifierListOwner: KtModifierListOwner = ktTypeAlias
+    override val ktModifierListOwner: KtModifierListOwner by lazy { ktTypeAlias }
 
-    override val psiElement: PsiElement = ktTypeAlias
+    override val psiElement: PsiElement by lazy { ktTypeAlias }
 
-    override val ktElement: KtElement = ktTypeAlias
+    override val ktElement: KtElement by lazy { ktTypeAlias }
 
     override val type: KoTypeDeclaration by lazy {
         val type = ktTypeAlias.getTypeReference()
