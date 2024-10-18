@@ -35,8 +35,8 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo false
         }
     }
 
@@ -54,15 +54,15 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
         // then
         assertSoftly(sut) {
             it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
-            it?.typeArguments?.map { typeArgument -> typeArgument.sourceDeclaration.name } shouldBeEqualTo listOf("String")
+            it?.typeArguments?.map { typeArgument -> typeArgument.sourceDeclaration?.name } shouldBeEqualTo listOf("String")
             it
                 ?.typeArguments
                 ?.flatten()
                 ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
             it?.typeArguments?.firstOrNull()?.typeArguments shouldBeEqualTo null
             it?.numTypeArguments shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isClass } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo 1
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
             it?.hasTypeArguments() shouldBeEqualTo true
             it?.hasTypeArgumentWithName("String", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
@@ -84,10 +84,10 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo true
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo true
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
         }
     }
 
@@ -105,7 +105,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
         // then
         assertSoftly(sut) {
             it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("List<String>", "Int")
-            it?.typeArguments?.map { typeArgument -> typeArgument.sourceDeclaration.name } shouldBeEqualTo listOf("List", "Int")
+            it?.typeArguments?.map { typeArgument -> typeArgument.sourceDeclaration?.name } shouldBeEqualTo listOf("List", "Int")
 
             it
                 ?.typeArguments
@@ -126,8 +126,8 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
                 ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
 
             it?.numTypeArguments shouldBeEqualTo 2
-            it?.countTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo 2
-            it?.countTypeArguments { type -> type.sourceDeclaration.isClass } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo 2
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
             it?.hasTypeArguments() shouldBeEqualTo true
             it?.hasTypeArgumentWithName("Int", "String") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "String") shouldBeEqualTo false
@@ -149,10 +149,10 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasAllTypeArgumentsOf(listOf(Int::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(Int::class, String::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, String::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo true
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo true
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
         }
     }
 
@@ -181,8 +181,8 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
         }
     }
 
@@ -211,8 +211,8 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo false
         }
     }
 
@@ -231,15 +231,15 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
         assertSoftly(sut) {
             it?.typeArguments?.firstOrNull()?.sourceDeclaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
-            it?.typeArguments?.map { typeArgument -> typeArgument.sourceDeclaration.name } shouldBeEqualTo listOf("String")
+            it?.typeArguments?.map { typeArgument -> typeArgument.sourceDeclaration?.name } shouldBeEqualTo listOf("String")
             it
                 ?.typeArguments
                 ?.flatten()
                 ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
             it?.typeArguments?.firstOrNull()?.typeArguments shouldBeEqualTo null
             it?.numTypeArguments shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isClass } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo 1
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
             it?.hasTypeArguments() shouldBeEqualTo true
             it?.hasTypeArgumentWithName("String", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
@@ -261,10 +261,10 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo true
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo true
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
         }
     }
 
@@ -293,8 +293,8 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo false
         }
     }
 
@@ -313,15 +313,15 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
         assertSoftly(sut) {
             it?.typeArguments?.firstOrNull()?.sourceDeclaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
-            it?.typeArguments?.map { typeArgument -> typeArgument.sourceDeclaration.name } shouldBeEqualTo listOf("String")
+            it?.typeArguments?.map { typeArgument -> typeArgument.sourceDeclaration?.name } shouldBeEqualTo listOf("String")
             it
                 ?.typeArguments
                 ?.flatten()
                 ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
             it?.typeArguments?.firstOrNull()?.typeArguments shouldBeEqualTo null
             it?.numTypeArguments shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isClass } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo 1
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
             it?.hasTypeArguments() shouldBeEqualTo true
             it?.hasTypeArgumentWithName("String", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
@@ -343,10 +343,10 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo true
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo true
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
         }
     }
 

@@ -72,7 +72,7 @@ class DeclarationKonsistTest {
     fun `every core declaration implements KoBaseProviderCore and its api equivalent`() {
         declarationPackageScope
             .classesAndInterfaces()
-            .withoutPackage("..model")
+            .withoutPackage("..private")
             .assertTrue {
                 val name = it.name.removeSuffix("Core")
                 it.hasParentsWithAllNames("KoBaseProviderCore", name, indirectParents = true)

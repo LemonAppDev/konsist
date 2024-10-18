@@ -8,7 +8,6 @@ import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import kotlin.reflect.KClass
 
@@ -17,35 +16,6 @@ import kotlin.reflect.KClass
  */
 @Suppress("detekt.TooManyFunctions")
 interface KoTypeDeclarationProvider : KoBaseProvider {
-    /**
-     * Represents the declaration associated with this type.
-     *
-     * The `declaration` property provides access to the declaration of the type within the Kotlin codebase.
-     * It allows to retries additional information about the declaration, such as its properties, functions,
-     * annotations, and other relevant metadata.
-     *
-     * It points to an instance of [KoBaseTypeDeclaration], which serves as the base interface for various types:
-     *  - `KoClassDeclaration` represents class
-     *  - `KoInterfaceDeclaration` represents interface
-     *  - `KoObjectDeclaration` represents object
-     *  - `KoTypeAliasDeclaration` represents type alias
-     *  - `KoImportAliasDeclaration` represents import alias
-     *  - `KoKotlinTypeDeclaration` represents kotlin basic types and collections
-     *  - `KoFunctionDeclaration` represents function type
-     *  - `KoExternalDeclaration` represents declaration which is not defined in the project
-     *
-     *  e.g.
-     *
-     *  ```kotlin
-     *  scope
-     *      .properties()
-     *      .types
-     *      .assertTrue { it.isInterface }
-     *  ```
-     */
-    @Deprecated("Will be removed in version 0.18.0", ReplaceWith("sourceDeclaration"))
-    val declaration: KoBaseTypeDeclaration
-
     /**
      * Represents the class declaration associated with this type.
      *
@@ -89,14 +59,6 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
     fun asKotlinTypeDeclaration(): KoKotlinTypeDeclaration?
 
     /**
-     * Represents the function type declaration associated with this type.
-     *
-     * @return the function type declaration associated with this type.
-     */
-    @Deprecated("Will be removed in version 0.19.0")
-    fun asFunctionTypeDeclaration(): KoFunctionTypeDeclaration?
-
-    /**
      * Represents the type parameter declaration associated with this type.
      *
      * @return the type parameter declaration associated with this type.
@@ -110,24 +72,6 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
      * @return the external declaration associated with this type.
      */
     fun asExternalTypeDeclaration(): KoExternalDeclaration?
-
-    /**
-     * Determines whatever type has a specified declaration.
-     *
-     * @param predicate The predicate function used to determine if a declaration satisfies a condition.
-     * @return `true` if the type has the specified declaration, `false` otherwise.
-     */
-    @Deprecated("Will be removed in version 0.18.0", ReplaceWith("hasSourceDeclaration"))
-    fun hasDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): Boolean
-
-    /**
-     * Whether type has a declaration of the specified Kotlin class.
-     *
-     * @param kClass The Kotlin class representing the declaration to check for.
-     * @return `true` if the type has a declaration matching the specified KClass, `false` otherwise.
-     */
-    @Deprecated("Will be removed in version 0.18.0", ReplaceWith("hasSourceDeclarationOf"))
-    fun hasDeclarationOf(kClass: KClass<*>): Boolean
 
     /**
      * Whether type has a specified class declaration.
@@ -214,16 +158,6 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
      * @return `true` if the type has a kotlin type declaration matching the specified KClass, `false` otherwise.
      */
     fun hasKotlinTypeDeclarationOf(kClass: KClass<*>): Boolean
-
-    /**
-     * Whether type has a specified function type declaration.
-     *
-     * @param predicate The predicate function used to determine if a function type declaration satisfies a condition.
-     * @return `true` if the type has the specified function type declaration (or any function type declaration if [predicate] is
-     * `null`), `false` otherwise.
-     */
-    @Deprecated("Will be removed in version 0.19.0")
-    fun hasFunctionTypeDeclaration(predicate: ((KoFunctionTypeDeclaration) -> Boolean)? = null): Boolean
 
     /**
      * Whether type has a specified type parameter declaration.

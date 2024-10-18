@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.psi.KtUserType
 
 data class KoTypeArgumentDeclarationCore(
     override val name: String,
-    override val sourceDeclaration: KoSourceDeclaration,
+    override val sourceDeclaration: KoSourceDeclaration?,
     override val typeArguments: List<KoTypeArgumentDeclaration>?,
     override val hasInModifier: Boolean,
     override val hasOutModifier: Boolean,
@@ -59,9 +59,9 @@ data class KoTypeArgumentDeclarationCore(
 
     override val ktTypeReference: KtTypeReference? by lazy { null }
 
-    override val koTypeProviderDeclaration: KoSourceDeclaration by lazy { sourceDeclaration }
+    override val koTypeProviderDeclaration: KoSourceDeclaration? by lazy { sourceDeclaration }
 
-    override val koTypeDeclarationProviderDeclaration: KoSourceDeclaration by lazy { sourceDeclaration }
+    override val koTypeDeclarationProviderDeclaration: KoSourceDeclaration? by lazy { sourceDeclaration }
 
     override val text: String by lazy {
         when {

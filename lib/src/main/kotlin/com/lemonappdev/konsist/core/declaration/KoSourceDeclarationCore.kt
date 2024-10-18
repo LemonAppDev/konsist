@@ -18,16 +18,4 @@ internal interface KoSourceDeclarationCore :
     KoTextProviderCore,
     KoTypeDeclarationProviderCore,
     KoTypeProviderCore,
-    KoStarProjectionProviderCore {
-    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
-    override val ktTypeReference: KtTypeReference?
-        get() = null
-
-    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
-    override val ktNameReferenceExpression: KtNameReferenceExpression?
-        get() = null
-
-    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
-    override val ktTypeProjection: KtTypeProjection?
-        get() = null
-}
+    KoStarProjectionProviderCore

@@ -49,12 +49,6 @@ interface KoTypeProvider : KoBaseProvider {
     val isKotlinCollectionType: Boolean
 
     /**
-     * Determines whatever source declaration is a function.
-     */
-    @Deprecated("Will be removed in version 0.19.0") // Todo: replaceWith - fill in
-    val isFunctionType: Boolean
-
-    /**
      * Determines whatever source declaration is a type parameter.
      */
     val isTypeParameter: Boolean

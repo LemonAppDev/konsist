@@ -7,7 +7,6 @@ import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.externalsample.SampleExternalClass
 import com.lemonappdev.konsist.testdata.SampleClass
@@ -33,7 +32,7 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
         assertSoftly(sut) {
             it?.typeArguments shouldBeEqualTo null
             it?.numTypeArguments shouldBeEqualTo 0
-            it?.countTypeArguments { type -> type.sourceDeclaration.isClass } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
             it?.hasTypeArgumentWithName("String", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentWithName(listOf("String", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames("String", "Int") shouldBeEqualTo false
@@ -43,8 +42,8 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasAllTypeArgumentsOf(String::class, Int::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
         }
     }
 
@@ -66,8 +65,8 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
 
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "String"
             it?.numTypeArguments shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isClass } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo 1
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
             it?.hasTypeArgumentWithName("String", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentWithName(listOf("String", "Int")) shouldBeEqualTo true
@@ -88,10 +87,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo true
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo true
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
         }
     }
 
@@ -113,8 +112,8 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
 
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleClass"
             it?.numTypeArguments shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isClass } shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 1
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo 0
             it?.hasTypeArgumentWithName("SampleClass", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentWithName(listOf("SampleClass", "Int")) shouldBeEqualTo true
@@ -135,10 +134,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasAllTypeArgumentsOf(listOf(SampleClass::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isClass } shouldBeEqualTo true
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isClass } shouldBeEqualTo true
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo true
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
         }
     }
 
@@ -160,8 +159,8 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
 
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleInterface"
             it?.numTypeArguments shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isInterface } shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isClass } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isInterface == true } shouldBeEqualTo 1
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
             it?.hasTypeArgumentWithName("SampleInterface", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentWithName(listOf("SampleInterface", "Int")) shouldBeEqualTo true
@@ -182,10 +181,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isInterface } shouldBeEqualTo true
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isInterface } shouldBeEqualTo true
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isInterface == true } shouldBeEqualTo true
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isInterface == true } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
         }
     }
 
@@ -207,8 +206,8 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
 
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleObject"
             it?.numTypeArguments shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isObject } shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isClass } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isObject == true } shouldBeEqualTo 1
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
             it?.hasTypeArgumentWithName("SampleObject", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentWithName(listOf("SampleObject", "Int")) shouldBeEqualTo true
@@ -229,10 +228,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasAllTypeArgumentsOf(listOf(SampleObject::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(SampleObject::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isObject } shouldBeEqualTo true
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isObject } shouldBeEqualTo true
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isObject == true } shouldBeEqualTo true
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isObject == true } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
         }
     }
 
@@ -254,8 +253,8 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
 
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "Set<String>"
             it?.numTypeArguments shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isClass } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo 1
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
             it?.hasTypeArgumentWithName("Set<String>", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentWithName(listOf("Set<String>", "Int")) shouldBeEqualTo true
@@ -274,10 +273,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasAllTypeArgumentsOf(List::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(Set::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(List::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo true
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo true
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
         }
     }
 
@@ -332,12 +331,11 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it
                 ?.typeArguments
                 ?.firstOrNull()
-                ?.sourceDeclaration shouldBeInstanceOf KoFunctionTypeDeclaration::class
+                ?.sourceDeclaration shouldBeEqualTo null
 
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "() -> Unit"
             it?.numTypeArguments shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isFunctionType } shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo 0
             it?.hasTypeArgumentWithName("() -> Unit", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentWithName(listOf("() -> Unit", "Int")) shouldBeEqualTo true
@@ -352,10 +350,8 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(SampleInterface::class, Int::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isFunctionType } shouldBeEqualTo true
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isFunctionType } shouldBeEqualTo true
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
         }
     }
 
@@ -377,8 +373,8 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
 
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "ImportAlias"
             it?.numTypeArguments shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isImportAlias } shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isImportAlias == true } shouldBeEqualTo 1
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo 0
             it?.hasTypeArgumentWithName("ImportAlias", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentWithName(listOf("ImportAlias", "Int")) shouldBeEqualTo true
@@ -393,10 +389,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(SampleInterface::class, Int::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isImportAlias } shouldBeEqualTo true
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isImportAlias } shouldBeEqualTo true
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isImportAlias == true } shouldBeEqualTo true
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isImportAlias == true } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
         }
     }
 
@@ -418,8 +414,8 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
 
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleTypeAlias"
             it?.numTypeArguments shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isTypeAlias } shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isTypeAlias == true } shouldBeEqualTo 1
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo 0
             it?.hasTypeArgumentWithName("SampleTypeAlias", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentWithName(listOf("SampleTypeAlias", "Int")) shouldBeEqualTo true
@@ -434,10 +430,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(SampleInterface::class, Int::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isTypeAlias } shouldBeEqualTo true
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isTypeAlias } shouldBeEqualTo true
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isTypeAlias == true } shouldBeEqualTo true
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isTypeAlias == true } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo false
         }
     }
 
@@ -459,8 +455,8 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
 
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleExternalClass"
             it?.numTypeArguments shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration.isInterface } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo 1
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isInterface == true } shouldBeEqualTo 0
             it?.hasTypeArgumentWithName("SampleExternalClass", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentWithName(listOf("SampleExternalClass", "Int")) shouldBeEqualTo true
@@ -481,10 +477,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasAllTypeArgumentsOf(listOf(SampleExternalClass::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(SampleExternalClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo true
-            it?.hasTypeArgument { type -> type.sourceDeclaration.isInterface } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo true
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isInterface } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo true
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isInterface == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalType == true } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isInterface == true } shouldBeEqualTo false
         }
     }
 

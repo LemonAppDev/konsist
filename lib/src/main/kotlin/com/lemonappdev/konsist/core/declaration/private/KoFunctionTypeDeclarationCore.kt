@@ -1,9 +1,9 @@
-package com.lemonappdev.konsist.core.declaration.type
+package com.lemonappdev.konsist.core.declaration.private
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -16,12 +16,10 @@ import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunctionType
 
-@Deprecated("Will be removed in version 0.19.0")
 internal class KoFunctionTypeDeclarationCore private constructor(
     override val ktFunctionType: KtFunctionType,
     override val containingDeclaration: KoBaseDeclaration,
-) : KoFunctionTypeDeclaration,
-    KoBaseTypeDeclarationCore,
+) : KoBaseTypeDeclarationCore,
     KoBaseProviderCore,
     KoContainingFileProviderCore,
     KoContainingDeclarationProviderCore,
@@ -41,12 +39,12 @@ internal class KoFunctionTypeDeclarationCore private constructor(
     override fun toString(): String = text
 
     internal companion object {
-        private val cache: KoDeclarationCache<KoFunctionTypeDeclaration> = KoDeclarationCache()
+        private val cache: KoDeclarationCache<KoFunctionTypeDeclarationCore> = KoDeclarationCache()
 
         internal fun getInstance(
             ktFunctionType: KtFunctionType,
             containingDeclaration: KoBaseDeclaration,
-        ): KoFunctionTypeDeclaration =
+        ): KoFunctionTypeDeclarationCore =
             cache.getOrCreateInstance(ktFunctionType, containingDeclaration) {
                 KoFunctionTypeDeclarationCore(ktFunctionType, containingDeclaration)
             }

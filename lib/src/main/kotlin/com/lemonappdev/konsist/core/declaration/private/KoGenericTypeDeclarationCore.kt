@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.model
+package com.lemonappdev.konsist.core.declaration.private
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration

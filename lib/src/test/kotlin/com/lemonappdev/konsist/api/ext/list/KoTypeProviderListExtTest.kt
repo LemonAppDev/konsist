@@ -268,34 +268,6 @@ class KoTypeProviderListExtTest {
     }
 
     @Test
-    fun `withFunctionType() returns types that are functions`() {
-        // given
-        val functionType: KoTypeProvider = mockk { every { isFunctionType } returns true }
-        val nonFunctionType: KoTypeProvider = mockk { every { isFunctionType } returns false }
-        val types = listOf(functionType, nonFunctionType)
-
-        // when
-        val result = types.withFunctionType()
-
-        // then
-        result shouldBeEqualTo listOf(functionType)
-    }
-
-    @Test
-    fun `withoutFunctionType() returns types that are not function types`() {
-        // given
-        val functionType: KoTypeProvider = mockk { every { isFunctionType } returns true }
-        val notFunctionType: KoTypeProvider = mockk { every { isFunctionType } returns false }
-        val types = listOf(functionType, notFunctionType)
-
-        // when
-        val result = types.withoutFunctionType()
-
-        // then
-        result shouldBeEqualTo listOf(notFunctionType)
-    }
-
-    @Test
     fun `withTypeParameter() returns types that are type parameters`() {
         // given
         val typeParameter: KoTypeProvider = mockk { every { isTypeParameter } returns true }

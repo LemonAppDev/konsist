@@ -7,7 +7,6 @@ import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifiers
 import com.lemonappdev.konsist.api.ext.list.parameters
@@ -351,22 +350,22 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                     String::class,
                     "com.lemonappdev.konsist.testdata.SampleObject",
                 ),
-                arguments(
-                    "nullable-function-type",
-                    KoFunctionTypeDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    null,
-                    String::class,
-                    null,
-                ),
-                arguments(
-                    "not-nullable-function-type",
-                    KoFunctionTypeDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    null,
-                    String::class,
-                    null,
-                ),
+//                arguments(
+//                    "nullable-function-type",
+//                    KoFunctionTypeDeclaration::class,
+//                    KoKotlinTypeDeclaration::class,
+//                    null,
+//                    String::class,
+//                    null,
+//                ),
+//                arguments(
+//                    "not-nullable-function-type",
+//                    KoFunctionTypeDeclaration::class,
+//                    KoKotlinTypeDeclaration::class,
+//                    null,
+//                    String::class,
+//                    null,
+//                ),
                 arguments(
                     "nullable-import-alias-type",
                     KoImportAliasDeclaration::class,

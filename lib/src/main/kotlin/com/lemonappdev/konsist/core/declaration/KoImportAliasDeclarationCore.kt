@@ -43,7 +43,7 @@ internal class KoImportAliasDeclarationCore private constructor(
 
     override val importDirective: KoImportDeclaration = containingDeclaration
 
-    override val sourceDeclaration: KoSourceDeclaration by lazy { importDirective.sourceDeclaration }
+    override val sourceDeclaration: KoSourceDeclaration? by lazy { importDirective.sourceDeclaration }
 
     override fun toString(): String = text
 

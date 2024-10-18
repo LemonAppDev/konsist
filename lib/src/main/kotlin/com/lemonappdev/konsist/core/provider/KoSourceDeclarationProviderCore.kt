@@ -6,11 +6,11 @@ import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
-import com.lemonappdev.konsist.core.declaration.model.KoGenericTypeDeclarationCore
+import com.lemonappdev.konsist.core.declaration.private.KoFunctionTypeDeclarationCore
+import com.lemonappdev.konsist.core.declaration.private.KoGenericTypeDeclarationCore
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.util.TypeUtil
-import org.jetbrains.kotlin.com.intellij.util.containers.ContainerUtil.filterIsInstance
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtNullableType
 import org.jetbrains.kotlin.psi.KtTypeProjection
@@ -31,7 +31,7 @@ internal interface KoSourceDeclarationProviderCore :
     val ktTypeProjection: KtTypeProjection?
         get() = null
 
-    override val sourceDeclaration: KoSourceDeclaration
+    override val sourceDeclaration: KoSourceDeclaration?
         get() {
             val type =
                 TypeUtil.getBasicType(
@@ -75,15 +75,16 @@ internal interface KoSourceDeclarationProviderCore :
                             )
                         }
 
-                if (nestedType is KoGenericTypeDeclarationCore) {
-                    nestedType.sourceDeclaration
-                } else {
-                    nestedType
+                when (nestedType) {
+                    is KoGenericTypeDeclarationCore -> nestedType.sourceDeclaration
+                    is KoFunctionTypeDeclarationCore -> null
+                    else -> nestedType
                 }
+            } else if (type is KoFunctionTypeDeclarationCore) {
+                null
             } else {
                 type
             } ?: this as? KoSourceDeclaration
-                ?: throw KoInternalException("Source declaration cannot be a null")
         }
 
     private fun isExtensionDeclaration(): Boolean =
@@ -106,14 +107,13 @@ internal interface KoSourceDeclarationProviderCore :
             }
         }
 
-    override fun hasSourceDeclaration(predicate: (KoSourceDeclaration) -> Boolean): Boolean = predicate(sourceDeclaration)
+    override fun hasSourceDeclaration(predicate: (KoSourceDeclaration) -> Boolean): Boolean =
+        sourceDeclaration?.let { predicate(it) } == true
 
     override fun hasSourceDeclarationOf(kClass: KClass<*>): Boolean =
-        sourceDeclaration.hasClassDeclarationOf(kClass) ||
-            sourceDeclaration.hasObjectDeclarationOf(kClass) ||
-            sourceDeclaration.hasInterfaceDeclarationOf(kClass) ||
-            sourceDeclaration.hasKotlinTypeDeclarationOf(
-                kClass,
-            ) ||
-            sourceDeclaration.hasExternalTypeDeclarationOf(kClass)
+        sourceDeclaration?.hasClassDeclarationOf(kClass) == true ||
+            sourceDeclaration?.hasObjectDeclarationOf(kClass) == true ||
+            sourceDeclaration?.hasInterfaceDeclarationOf(kClass) == true ||
+            sourceDeclaration?.hasKotlinTypeDeclarationOf(kClass) == true ||
+            sourceDeclaration?.hasExternalTypeDeclarationOf(kClass) == true
 }
