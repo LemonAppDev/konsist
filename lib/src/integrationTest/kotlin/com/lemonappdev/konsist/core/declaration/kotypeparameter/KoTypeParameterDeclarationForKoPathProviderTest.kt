@@ -326,8 +326,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .typeAliases
                 .first()
                 .type
-                .asGenericTypeDeclaration()
-                ?.typeArguments
+                .typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
@@ -347,8 +346,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .typeAliases
                 .first()
                 .type
-                .asGenericTypeDeclaration()
-                ?.typeArguments
+                .typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
@@ -370,8 +368,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .typeAliases
                 .first()
                 .type
-                .asGenericTypeDeclaration()
-                ?.typeArguments
+                .typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
@@ -393,8 +390,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .typeAliases
                 .first()
                 .type
-                .asGenericTypeDeclaration()
-                ?.typeArguments
+                .typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()

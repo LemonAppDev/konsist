@@ -15,7 +15,6 @@ class KoStarProjectionDeclarationForKoContainingFileProviderTest {
                 .functions()
                 .returnTypes
                 .firstOrNull()
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration as? KoStarProjectionDeclaration

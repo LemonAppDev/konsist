@@ -16,7 +16,6 @@ class KoStarProjectionDeclarationForKoTextProviderTest {
                 .functions()
                 .returnTypes
                 .firstOrNull()
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration as? KoStarProjectionDeclaration

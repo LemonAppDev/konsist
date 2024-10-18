@@ -148,35 +148,6 @@ fun <T : KoTypeProvider> List<T>.withKotlinCollectionType(): List<T> = filter { 
 fun <T : KoTypeProvider> List<T>.withoutKotlinCollectionType(): List<T> = filterNot { it.isKotlinCollectionType }
 
 /**
- * Filters the list to include only declarations that are recognized as function types.
- * Function types refer to declarations that define a function signature.
- *
- * @return A list containing only function types.
- */
-fun <T : KoTypeProvider> List<T>.withFunctionType(): List<T> = filter { it.isFunctionType }
-
-/**
- * Filters the list to exclude declarations that are recognized as function types.
- *
- * @return A list excluding function types.
- */
-fun <T : KoTypeProvider> List<T>.withoutFunctionType(): List<T> = filterNot { it.isFunctionType }
-
-/**
- * Filters the list to include only declarations that are recognized as generic types.
- *
- * @return A list containing only generic types.
- */
-fun <T : KoTypeProvider> List<T>.withGenericType(): List<T> = filter { it.isGenericType }
-
-/**
- * Filters the list to exclude declarations that are recognized as generic types.
- *
- * @return A list excluding generic types.
- */
-fun <T : KoTypeProvider> List<T>.withoutGenericType(): List<T> = filterNot { it.isGenericType }
-
-/**
  * Filters the list to include only declarations that are type parameters.
  * Type parameters are placeholders for types that are specified when a generic class or method is instantiated.
  *

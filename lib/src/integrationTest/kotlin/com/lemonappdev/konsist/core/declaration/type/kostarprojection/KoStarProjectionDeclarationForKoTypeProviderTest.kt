@@ -16,7 +16,6 @@ class KoStarProjectionDeclarationForKoTypeProviderTest {
                 .functions()
                 .returnTypes
                 .firstOrNull()
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration as? KoStarProjectionDeclaration
@@ -31,8 +30,6 @@ class KoStarProjectionDeclarationForKoTypeProviderTest {
             it?.isKotlinType shouldBeEqualTo false
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
-            it?.isFunctionType shouldBeEqualTo false
-            it?.isGenericType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
             it?.isExternalType shouldBeEqualTo false
         }

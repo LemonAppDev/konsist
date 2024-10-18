@@ -76,8 +76,7 @@ class KoTypeParameterDeclarationForKoLocationProviderTest {
                 .typeAliases
                 .first()
                 .type
-                .asGenericTypeDeclaration()
-                ?.typeArguments
+                .typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()

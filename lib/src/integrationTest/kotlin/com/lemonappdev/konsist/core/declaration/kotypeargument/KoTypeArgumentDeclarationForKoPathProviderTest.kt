@@ -14,7 +14,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -33,7 +32,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -54,7 +52,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -75,7 +72,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -96,7 +92,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -115,7 +110,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -136,7 +130,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -157,7 +150,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -178,7 +170,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -197,7 +188,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -218,7 +208,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -239,7 +228,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -260,7 +248,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -279,7 +266,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -300,7 +286,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -321,7 +306,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -342,7 +326,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -361,7 +344,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -382,7 +364,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -403,7 +384,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -424,7 +404,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -443,7 +422,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -464,7 +442,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -485,7 +462,6 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 

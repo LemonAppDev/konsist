@@ -18,9 +18,9 @@ class KoTypeParameterForKoSourceSetProviderTest {
         val sut = Konsist
             .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
             .properties()
-            .first { it.name == "appPropertyWithFunctionType" }
+            .first { it.name == "appPropertyWithTypeParameter" }
             .type
-            ?.asFunctionTypeDeclaration()
+            ?.asTypeParameterDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -36,9 +36,9 @@ class KoTypeParameterForKoSourceSetProviderTest {
         val sut = Konsist
             .scopeFromFile("$appIntegrationTestSourceSetProjectDirectory/sample/AppClassTest.kt".toOsSeparator())
             .properties()
-            .first { it.name == "appPropertyWithFunctionTypeTest" }
+            .first { it.name == "appPropertyWithTypeParameterTest" }
             .type
-            ?.asFunctionTypeDeclaration()
+            ?.asTypeParameterDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -54,9 +54,9 @@ class KoTypeParameterForKoSourceSetProviderTest {
         val sut = Konsist
             .scopeFromFile("$dataMainSourceSetProjectDirectory/sample/LibClass.kt".toOsSeparator())
             .properties()
-            .first { it.name == "libPropertyWithFunctionType" }
+            .first { it.name == "libPropertyWithTypeParameter" }
             .type
-            ?.asFunctionTypeDeclaration()
+            ?.asTypeParameterDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -72,9 +72,9 @@ class KoTypeParameterForKoSourceSetProviderTest {
         val sut = Konsist
             .scopeFromFile("$dataTestSourceSetProjectDirectory/sample/LibClassTest.kt".toOsSeparator())
             .properties()
-            .first { it.name == "libPropertyWithFunctionTypeTest" }
+            .first { it.name == "libPropertyWithTypeParameterTest" }
             .type
-            ?.asFunctionTypeDeclaration()
+            ?.asTypeParameterDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -90,9 +90,9 @@ class KoTypeParameterForKoSourceSetProviderTest {
         val sut = Konsist
             .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/RootClass.kt".toOsSeparator())
             .properties()
-            .first { it.name == "rootPropertyWithFunctionType" }
+            .first { it.name == "rootPropertyWithTypeParameter" }
             .type
-            ?.asFunctionTypeDeclaration()
+            ?.asTypeParameterDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -108,9 +108,9 @@ class KoTypeParameterForKoSourceSetProviderTest {
         val sut = Konsist
             .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/src/RootSrcClass.kt".toOsSeparator())
             .properties()
-            .first { it.name == "rootSrcPropertyWithFunctionType" }
+            .first { it.name == "rootSrcPropertyWithTypeParameter" }
             .type
-            ?.asFunctionTypeDeclaration()
+            ?.asTypeParameterDeclaration()
 
         // then
         assertSoftly(sut) {

@@ -9,19 +9,9 @@ import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoBaseTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
 import kotlin.reflect.KClass
-
-/**
- * List containing declarations associated with types.
- */
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("sourceDeclarations()"))
-val <T : KoTypeDeclarationProvider> List<T>.declarations: List<KoBaseTypeDeclaration>
-    get() = mapNotNull { it.declaration }
 
 /**
  * List containing class declarations associated with types.
@@ -64,13 +54,6 @@ val <T : KoTypeDeclarationProvider> List<T>.importAliasDeclarations: List<KoImpo
 @Deprecated("Will be removed in version 0.18.0", ReplaceWith("kotlinTypeDeclarations()"))
 val <T : KoTypeDeclarationProvider> List<T>.kotlinTypeDeclarations: List<KoKotlinTypeDeclaration>
     get() = mapNotNull { it.asKotlinTypeDeclaration() }
-
-/**
- * List containing function type declarations associated with types.
- */
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("functionTypeDeclarations()"))
-val <T : KoTypeDeclarationProvider> List<T>.functionTypeDeclarations: List<KoFunctionTypeDeclaration>
-    get() = mapNotNull { it.asFunctionTypeDeclaration() }
 
 /**
  * List containing external type declarations associated with types.
@@ -164,34 +147,6 @@ fun <T : KoTypeDeclarationProvider> List<T>.kotlinTypeDeclarations(
         .mapNotNull { it.asKotlinTypeDeclaration() }
 
 /**
- * List containing function type declarations associated with types.
- *
- * @param predicate A function that defines the condition to be met by the function type declaration.
- *                  If null, all function type declarations are included.
- * @return A list of function type declarations that match the provided predicate, or all function type declarations
- * if no predicate is provided.
- */
-fun <T : KoTypeDeclarationProvider> List<T>.functionTypeDeclarations(
-    predicate: ((KoFunctionTypeDeclaration) -> Boolean)? = null,
-): List<KoFunctionTypeDeclaration> =
-    filter { it.hasFunctionTypeDeclaration(predicate) }
-        .mapNotNull { it.asFunctionTypeDeclaration() }
-
-/**
- * List containing generic type declarations associated with types.
- *
- * @param predicate A function that defines the condition to be met by the generic type declaration.
- *                  If null, all generic type declarations are included.
- * @return A list of generic type declarations that match the provided predicate, or all generic type declarations
- * if no predicate is provided.
- */
-fun <T : KoTypeDeclarationProvider> List<T>.genericTypeDeclarations(
-    predicate: ((KoGenericTypeDeclaration) -> Boolean)? = null,
-): List<KoGenericTypeDeclaration> =
-    filter { it.hasGenericTypeDeclaration(predicate) }
-        .mapNotNull { it.asGenericTypeDeclaration() }
-
-/**
  * List containing type parameter declarations associated with types.
  *
  * @param predicate A function that defines the condition to be met by the type parameter declaration.
@@ -218,82 +173,6 @@ fun <T : KoTypeDeclarationProvider> List<T>.externalTypeDeclarations(
 ): List<KoExternalDeclaration> =
     filter { it.hasExternalTypeDeclaration(predicate) }
         .mapNotNull { it.asExternalTypeDeclaration() }
-
-/**
- * List containing declarations with the specified declaration.
- *
- * @param predicate The predicate function to determine if a declaration satisfies a condition.
- * @return A list containing declarations with the specified declaration.
- */
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("withSourceDeclaration()"))
-fun <T : KoTypeDeclarationProvider> List<T>.withDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): List<T> =
-    filter { predicate(it.declaration) }
-
-/**
- * List containing declarations without the specified declaration.
- *
- * @param predicate The predicate function to determine if a declaration satisfies a condition.
- * @return A list containing declarations without the specified declaration.
- */
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("withoutSourceDeclaration()"))
-fun <T : KoTypeDeclarationProvider> List<T>.withoutDeclaration(predicate: (KoBaseTypeDeclaration) -> Boolean): List<T> =
-    filterNot { predicate(it.declaration) }
-
-/**
- * List containing declarations with declaration of.
- *
- * @param kClass The Kotlin class representing the declaration to include.
- * @param kClasses The Kotlin class(es) representing the declaration(s) to include.
- * @return A list containing declarations with the declaration of the specified Kotlin class(es).
- */
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("withSourceDeclarationOf()"))
-fun <T : KoTypeDeclarationProvider> List<T>.withDeclarationOf(
-    kClass: KClass<*>,
-    vararg kClasses: KClass<*>,
-): List<T> = withDeclarationOf(listOf(kClass, *kClasses))
-
-/**
- * List containing declarations with declaration of.
- *
- * @param kClasses The Kotlin class(es) representing the declaration(s) to include.
- * @return A list containing declarations with the declaration of the specified Kotlin class(es).
- */
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("withSourceDeclarationOf()"))
-fun <T : KoTypeDeclarationProvider> List<T>.withDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
-    filter {
-        when {
-            kClasses.isEmpty() -> true
-            else -> kClasses.any { kClass -> it.hasDeclarationOf(kClass) }
-        }
-    }
-
-/**
- * List containing declarations without declaration of.
- *
- * @param kClass The Kotlin class representing the declaration to exclude.
- * @param kClasses The Kotlin class(es) representing the declaration(s) to exclude.
- * @return A list containing declarations without declaration of the specified Kotlin class(es).
- */
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("withoutSourceDeclarationOf()"))
-fun <T : KoTypeDeclarationProvider> List<T>.withoutDeclarationOf(
-    kClass: KClass<*>,
-    vararg kClasses: KClass<*>,
-): List<T> = withoutDeclarationOf(listOf(kClass, *kClasses))
-
-/**
- * List containing declarations without declaration of.
- *
- * @param kClasses The Kotlin class(es) representing the declaration(s) to exclude.
- * @return A list containing declarations without declaration of the specified Kotlin class(es).
- */
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("withoutSourceDeclarationOf()"))
-fun <T : KoTypeDeclarationProvider> List<T>.withoutDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
-    filterNot {
-        when {
-            kClasses.isEmpty() -> true
-            else -> kClasses.any { kClass -> it.hasDeclarationOf(kClass) }
-        }
-    }
 
 /**
  * List containing declarations with the specified class declaration.
@@ -690,82 +569,6 @@ fun <T : KoTypeDeclarationProvider> List<T>.withoutKotlinTypeDeclarationOf(kClas
         when {
             kClasses.isEmpty() -> it.hasKotlinTypeDeclaration()
             else -> kClasses.any { kClass -> it.hasKotlinTypeDeclarationOf(kClass) }
-        }
-    }
-
-/**
- * List containing declarations with the specified function type declaration.
- *
- * @param predicate The predicate function to determine if a function type declaration satisfies a condition.
- * @return A list containing declarations with the specified function type declaration.
- */
-fun <T : KoTypeDeclarationProvider> List<T>.withFunctionTypeDeclaration(
-    predicate: ((KoFunctionTypeDeclaration) -> Boolean)? = null,
-): List<T> =
-    filter {
-        when (predicate) {
-            null -> it.hasFunctionTypeDeclaration()
-            else ->
-                it
-                    .asFunctionTypeDeclaration()
-                    ?.let { functionTypeDeclaration -> predicate(functionTypeDeclaration) } ?: false
-        }
-    }
-
-/**
- * List containing declarations without the specified function type declaration.
- *
- * @param predicate The predicate function to determine if a function type declaration satisfies a condition.
- * @return A list containing declarations without the specified function type declaration.
- */
-fun <T : KoTypeDeclarationProvider> List<T>.withoutFunctionTypeDeclaration(
-    predicate: ((KoFunctionTypeDeclaration) -> Boolean)? = null,
-): List<T> =
-    filterNot {
-        when (predicate) {
-            null -> it.hasFunctionTypeDeclaration()
-            else ->
-                it
-                    .asFunctionTypeDeclaration()
-                    ?.let { functionTypeDeclaration -> predicate(functionTypeDeclaration) } ?: false
-        }
-    }
-
-/**
- * List containing declarations with the specified generic type declaration.
- *
- * @param predicate The predicate function to determine if a generic type declaration satisfies a condition.
- * @return A list containing declarations with the specified generic type declaration.
- */
-fun <T : KoTypeDeclarationProvider> List<T>.withGenericTypeDeclaration(
-    predicate: ((KoGenericTypeDeclaration) -> Boolean)? = null,
-): List<T> =
-    filter {
-        when (predicate) {
-            null -> it.hasGenericTypeDeclaration()
-            else ->
-                it
-                    .asGenericTypeDeclaration()
-                    ?.let { genericTypeDeclaration -> predicate(genericTypeDeclaration) } ?: false
-        }
-    }
-
-/**
- * List containing declarations without the specified generic type declaration.
- *
- * @param predicate The predicate function to determine if a generic type declaration satisfies a condition.
- * @return A list containing declarations without the specified generic type declaration.
- */
-fun <T : KoTypeDeclarationProvider> List<T>.withoutGenericTypeDeclaration(
-    predicate: ((KoGenericTypeDeclaration) -> Boolean)? = null,
-): List<T> =
-    filterNot {
-        when (predicate) {
-            null -> it.hasGenericTypeDeclaration()
-            else ->
-                it
-                    .asGenericTypeDeclaration()
-                    ?.let { genericTypeDeclaration -> predicate(genericTypeDeclaration) } ?: false
         }
     }
 

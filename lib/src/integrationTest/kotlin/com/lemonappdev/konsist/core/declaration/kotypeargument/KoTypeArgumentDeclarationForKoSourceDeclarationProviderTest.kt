@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kotypeargument
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import org.amshove.kluent.assertSoftly
@@ -18,7 +17,6 @@ class KoTypeArgumentDeclarationForKoSourceDeclarationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -41,15 +39,14 @@ class KoTypeArgumentDeclarationForKoSourceDeclarationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
         // then
         assertSoftly(sut) {
-            it?.sourceDeclaration shouldBeInstanceOf KoGenericTypeDeclaration::class
-            it?.sourceDeclaration?.name shouldBeEqualTo "Set<String>"
-            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isGenericType } shouldBeEqualTo true
+            it?.sourceDeclaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
+            it?.sourceDeclaration?.name shouldBeEqualTo "Set"
+            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isKotlinCollectionType } shouldBeEqualTo true
             it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternalType } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo false
         }
@@ -63,15 +60,14 @@ class KoTypeArgumentDeclarationForKoSourceDeclarationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
         // then
         assertSoftly(sut) {
-            it?.sourceDeclaration shouldBeInstanceOf KoGenericTypeDeclaration::class
-            it?.sourceDeclaration?.name shouldBeEqualTo "Map<List<String>, Int>"
-            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isGenericType } shouldBeEqualTo true
+            it?.sourceDeclaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
+            it?.sourceDeclaration?.name shouldBeEqualTo "Map"
+            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isKotlinCollectionType } shouldBeEqualTo true
             it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternalType } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo false
         }
@@ -85,7 +81,6 @@ class KoTypeArgumentDeclarationForKoSourceDeclarationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -107,7 +102,6 @@ class KoTypeArgumentDeclarationForKoSourceDeclarationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -130,7 +124,6 @@ class KoTypeArgumentDeclarationForKoSourceDeclarationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 

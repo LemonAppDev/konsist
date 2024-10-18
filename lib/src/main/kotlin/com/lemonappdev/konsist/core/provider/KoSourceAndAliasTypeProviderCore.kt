@@ -24,11 +24,12 @@ internal interface KoSourceAndAliasTypeProviderCore :
             if (isAlias) {
                 file
                     .imports
-                    .first { it.alias?.name == ktElement.text.removeSuffix("?") }
-                    .name
-                    .split(".")
-                    .toMutableList()
-                    .last { it.isNotBlank() }
+                    .firstOrNull { it.alias?.name == ktElement.text.removeSuffix("?") }
+                    ?.name
+                    ?.split(".")
+                    ?.toMutableList()
+                    ?.lastOrNull { it.isNotBlank() }
+                    ?: text
             } else {
                 text
             }

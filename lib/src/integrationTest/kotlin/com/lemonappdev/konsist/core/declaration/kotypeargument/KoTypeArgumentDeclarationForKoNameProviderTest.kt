@@ -14,7 +14,6 @@ class KoTypeArgumentDeclarationForKoNameProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -40,7 +39,6 @@ class KoTypeArgumentDeclarationForKoNameProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -66,7 +64,6 @@ class KoTypeArgumentDeclarationForKoNameProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -92,7 +89,6 @@ class KoTypeArgumentDeclarationForKoNameProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -118,7 +114,6 @@ class KoTypeArgumentDeclarationForKoNameProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -144,7 +139,6 @@ class KoTypeArgumentDeclarationForKoNameProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 

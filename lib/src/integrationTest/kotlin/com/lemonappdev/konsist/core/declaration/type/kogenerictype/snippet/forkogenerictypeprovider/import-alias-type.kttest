@@ -1,5 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleGenericSuperInterface as SampleImportAlias
-
-val sampleProperty: SampleImportAlias<String> = X()
-
-class X: SampleImportAlias<String>

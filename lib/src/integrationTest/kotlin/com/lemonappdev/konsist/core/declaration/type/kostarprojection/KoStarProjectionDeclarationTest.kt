@@ -14,7 +14,6 @@ class KoStarProjectionDeclarationTest {
                 .functions()
                 .first()
                 .returnType
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration as? KoStarProjectionDeclaration

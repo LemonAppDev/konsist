@@ -18,7 +18,6 @@ class KoStarProjectionDeclarationForKoTypeDeclarationProviderTest {
                 .functions()
                 .returnTypes
                 .firstOrNull()
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration as? KoStarProjectionDeclaration
@@ -47,9 +46,6 @@ class KoStarProjectionDeclarationForKoTypeDeclarationProviderTest {
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
             it?.hasKotlinTypeDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
             it?.hasKotlinTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
-            it?.asFunctionTypeDeclaration() shouldBeEqualTo null
-            it?.hasFunctionTypeDeclaration() shouldBeEqualTo false
-            it?.hasFunctionTypeDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
             it?.asExternalTypeDeclaration() shouldBeEqualTo null
             it?.hasExternalTypeDeclaration() shouldBeEqualTo false
             it?.hasExternalTypeDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false

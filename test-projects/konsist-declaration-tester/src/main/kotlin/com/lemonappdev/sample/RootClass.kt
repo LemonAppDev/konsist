@@ -31,10 +31,6 @@ var rootProperty: RootClass = RootClass("")
         if (true) field = value
     }
 
-val rootPropertyWithFunctionType: () -> Unit = {}
-
-val rootPropertyWithGenericType: List<Set<String>> = emptyList()
-
 val rootPropertyWithImportAliasType: ImportAlias = ImportAlias
 
 val <T> T.rootPropertyWithTypeParameter: T

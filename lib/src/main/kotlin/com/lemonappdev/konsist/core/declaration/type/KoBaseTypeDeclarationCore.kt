@@ -25,7 +25,7 @@ internal interface KoBaseTypeDeclarationCore :
     // We need to handle it this way because the import alias is the only type where the source declaration
     // is actually a reference to the imported declaration. In this case, returning `sourceDeclaration` would
     // not be accurate, so we return `this` to ensure the correct reference is maintained.
-    private val baseDeclaration: KoSourceDeclaration
+    private val baseDeclaration: KoSourceDeclaration?
         get() =
             if (this is KoImportAliasDeclaration) {
                 this
@@ -33,9 +33,9 @@ internal interface KoBaseTypeDeclarationCore :
                 sourceDeclaration
             }
 
-    override val koTypeDeclarationProviderDeclaration: KoSourceDeclaration
+    override val koTypeDeclarationProviderDeclaration: KoSourceDeclaration?
         get() = baseDeclaration
 
-    override val koTypeProviderDeclaration: KoSourceDeclaration
+    override val koTypeProviderDeclaration: KoSourceDeclaration?
         get() = baseDeclaration
 }
