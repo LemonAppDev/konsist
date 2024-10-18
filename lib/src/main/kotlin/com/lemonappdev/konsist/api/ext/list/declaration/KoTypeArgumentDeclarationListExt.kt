@@ -22,7 +22,7 @@ fun <T : KoTypeArgumentDeclaration> List<T>.flatten(): List<KoSourceDeclaration>
         val flattenedDeclarations = listOf(typeArg) + (typeArg.typeArguments?.flattenRecursively() ?: emptyList())
         flattenedDeclarations
     }.flatten()
-        .mapNotNull { it.genericType }
+        .map { it.sourceDeclaration }
 
 private fun <T : KoTypeArgumentDeclaration> List<T>.flattenRecursively(): List<KoTypeArgumentDeclaration> =
     flatMap { typeArg ->

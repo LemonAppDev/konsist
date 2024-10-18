@@ -10,7 +10,6 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionTypeDeclarationProviderCore
-import com.lemonappdev.konsist.core.provider.KoGenericTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsGenericTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsMutableTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsNullableProviderCore
@@ -66,7 +65,6 @@ internal class KoTypeDeclarationCore private constructor(
     KoTypeDeclarationProviderCore,
     KoSourceDeclarationProviderCore,
     KoIsMutableTypeProviderCore,
-    KoGenericTypeProviderCore,
     KoTypeArgumentProviderCore,
     KoFunctionTypeDeclarationProviderCore {
     // Ensure that at least one of the parameters is not null

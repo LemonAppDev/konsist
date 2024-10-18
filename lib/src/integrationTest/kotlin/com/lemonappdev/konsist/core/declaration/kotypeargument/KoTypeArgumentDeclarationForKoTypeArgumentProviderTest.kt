@@ -105,7 +105,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
         // then
         assertSoftly(sut) {
             it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("List<String>", "Int")
-            it?.typeArguments?.map { typeArgument -> typeArgument.genericType?.name } shouldBeEqualTo listOf("List", "Int")
+            it?.typeArguments?.map { typeArgument -> typeArgument.sourceDeclaration.name } shouldBeEqualTo listOf("List", "Int")
 
             it
                 ?.typeArguments
@@ -151,7 +151,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, String::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.genericType?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isKotlinType } shouldBeEqualTo true
             it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
         }
     }

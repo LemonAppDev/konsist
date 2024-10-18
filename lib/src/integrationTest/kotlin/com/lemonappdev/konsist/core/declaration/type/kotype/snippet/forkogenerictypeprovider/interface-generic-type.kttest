@@ -1,5 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleGenericSuperInterface
-
-val sampleProperty: SampleGenericSuperInterface<String> = SampleClass()
-
-class SampleClass: SampleGenericSuperInterface<String>

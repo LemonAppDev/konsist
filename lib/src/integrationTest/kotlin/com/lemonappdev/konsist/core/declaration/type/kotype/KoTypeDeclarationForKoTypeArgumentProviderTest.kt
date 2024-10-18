@@ -250,12 +250,12 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it
                 ?.typeArguments
                 ?.firstOrNull()
-                ?.genericType shouldBeInstanceOf KoKotlinTypeDeclaration::class
+                ?.sourceDeclaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
 
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "Set<String>"
             it?.numTypeArguments shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.genericType?.isKotlinType == true } shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.genericType?.isClass == true } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration.isKotlinType  } shouldBeEqualTo 1
+            it?.countTypeArguments { type -> type.sourceDeclaration.isClass  } shouldBeEqualTo 0
             it?.hasTypeArgumentWithName("Set<String>", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentWithName(listOf("Set<String>", "Int")) shouldBeEqualTo true
@@ -274,10 +274,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasAllTypeArgumentsOf(List::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(Set::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(List::class)) shouldBeEqualTo false
-            it?.hasTypeArgument { type -> type.genericType?.isKotlinType == true } shouldBeEqualTo true
-            it?.hasTypeArgument { type -> type.genericType?.isExternalType == true } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.genericType?.isKotlinType == true } shouldBeEqualTo true
-            it?.hasAllTypeArguments { type -> type.genericType?.isExternalType == true } shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration.isKotlinType  } shouldBeEqualTo true
+            it?.hasTypeArgument { type -> type.sourceDeclaration.isExternalType  } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isKotlinType  } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration.isExternalType } shouldBeEqualTo false
         }
     }
 
