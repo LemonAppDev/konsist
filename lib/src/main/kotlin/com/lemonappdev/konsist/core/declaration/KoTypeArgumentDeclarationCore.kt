@@ -4,19 +4,25 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsFunctionTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsGenericTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
+import com.lemonappdev.konsist.core.provider.KoTypeDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoInModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoOutModifierProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
+import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtTypeProjection
+import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
 
 data class KoTypeArgumentDeclarationCore(
@@ -36,7 +42,11 @@ data class KoTypeArgumentDeclarationCore(
     KoOutModifierProviderCore,
     KoInModifierProviderCore,
     KoLocationProviderCore,
-    KoPathProviderCore {
+    KoPathProviderCore,
+    KoTypeProviderCore,
+    KoTypeDeclarationProviderCore,
+    KoIsGenericTypeProviderCore,
+    KoIsFunctionTypeProviderCore {
     override val ktElement: KtElement = ktTypeProjection
 
     override val ktUserType: KtUserType? = null
@@ -44,6 +54,14 @@ data class KoTypeArgumentDeclarationCore(
     override val psiElement: PsiElement = ktTypeProjection
 
     override val ktModifierListOwner: KtModifierListOwner = ktTypeProjection
+
+    override val ktNameReferenceExpression: KtNameReferenceExpression? by lazy { null }
+
+    override val ktTypeReference: KtTypeReference? by lazy { null }
+
+    override val koTypeProviderDeclaration by lazy { sourceDeclaration }
+
+    override val koTypeDeclarationProviderDeclaration by lazy { sourceDeclaration }
 
     override val text: String by lazy {
         when {
@@ -60,6 +78,10 @@ data class KoTypeArgumentDeclarationCore(
             else -> emptyList()
         }
     }
+
+    @Deprecated("Will be removed in version 0.19.0")
+    override val isFunctionType: Boolean
+        get() = super<KoIsFunctionTypeProviderCore>.isFunctionType
 
     override fun toString(): String = text
 }

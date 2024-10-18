@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.SampleObject
+
+class SampleClass1(val sampleProperty1: List<SampleTypeAlias>)
+
+typealias SampleTypeAlias = (SampleObject) -> Unit

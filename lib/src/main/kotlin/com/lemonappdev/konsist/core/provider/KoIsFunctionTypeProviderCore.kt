@@ -1,7 +1,9 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoIsFunctionTypeProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoTypeProvider
 
 internal interface KoIsFunctionTypeProviderCore :
     KoIsFunctionTypeProvider,
@@ -9,10 +11,13 @@ internal interface KoIsFunctionTypeProviderCore :
     override val isFunctionType: Boolean
         get() {
             val type =
-                if ((this as? KoTypeDeclaration)?.isTypeAlias == true) {
-                    (this as? KoTypeDeclaration)?.bareSourceType
+                if ((this as? KoTypeProvider)?.isTypeAlias == true) {
+                    (this as? KoTypeDeclarationProvider)
+                        ?.asTypeAliasDeclaration()
+                        ?.type
+                        ?.text
                 } else {
-                    (this as? KoTypeDeclaration)?.name
+                    (this as? KoNameProvider)?.name
                 }
 
             return type?.contains("->") ?: false
