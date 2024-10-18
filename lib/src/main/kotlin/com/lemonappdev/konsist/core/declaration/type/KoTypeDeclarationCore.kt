@@ -95,7 +95,6 @@ internal class KoTypeDeclarationCore private constructor(
             // the type being searched for is the last item in the list.
             ?.filterIsInstance<KtUserType>()
             ?.lastOrNull()
-            ?: error("KtTypeReference, KtNameReferenceExpression and KtTypeProjection are null")
     }
 
     override val ktFunctionType: KtFunctionType? by lazy {
@@ -135,10 +134,6 @@ internal class KoTypeDeclarationCore private constructor(
     @Deprecated("Will be removed in version 0.18.0")
     override val isGenericType: Boolean
         get() = super<KoIsGenericTypeProviderCore>.isGenericType
-
-    @Deprecated("Will be removed in version 0.19.0")
-    override val isFunctionType: Boolean
-        get() = super<KoIsFunctionTypeProviderCore>.isFunctionType
 
     @Deprecated("Will be removed in version 0.18.0")
     override val isNullable: Boolean

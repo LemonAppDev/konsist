@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoFunctionTypeDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsFunctionTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsGenericTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
@@ -19,6 +20,7 @@ import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoOutModifierProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtFunctionType
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtTypeProjection
@@ -46,7 +48,8 @@ data class KoTypeArgumentDeclarationCore(
     KoTypeProviderCore,
     KoTypeDeclarationProviderCore,
     KoIsGenericTypeProviderCore,
-    KoIsFunctionTypeProviderCore {
+    KoIsFunctionTypeProviderCore,
+    KoFunctionTypeDeclarationProviderCore {
     override val ktElement: KtElement = ktTypeProjection
 
     override val ktUserType: KtUserType? = null
@@ -54,6 +57,15 @@ data class KoTypeArgumentDeclarationCore(
     override val psiElement: PsiElement = ktTypeProjection
 
     override val ktModifierListOwner: KtModifierListOwner = ktTypeProjection
+
+    override val ktFunctionType: KtFunctionType? by lazy {
+        ktTypeProjection
+            .children
+            .firstOrNull()
+            ?.children
+            ?.filterIsInstance<KtFunctionType>()
+            ?.firstOrNull()
+    }
 
     override val ktNameReferenceExpression: KtNameReferenceExpression? by lazy { null }
 
@@ -78,10 +90,6 @@ data class KoTypeArgumentDeclarationCore(
             else -> emptyList()
         }
     }
-
-    @Deprecated("Will be removed in version 0.19.0")
-    override val isFunctionType: Boolean
-        get() = super<KoIsFunctionTypeProviderCore>.isFunctionType
 
     override fun toString(): String = text
 }
