@@ -128,7 +128,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     ): KoScope =
         runBlocking {
             sourceSetName?.let {
-                require(!isTestSourceSet(it)) { "Source set '$it' is a test source set, but it should be production source set." }
+                require(!isTestSourceSet(it)) { "Source set '$it' is a test source set, but it should be production source set" }
             }
 
             val koFiles =
@@ -144,7 +144,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     ): KoScope =
         runBlocking {
             sourceSetName?.let {
-                require(isTestSourceSet(it)) { "Source set '$it' is a production source set, but it should be test source set." }
+                require(isTestSourceSet(it)) { "Source set '$it' is a production source set, but it should be test source set" }
             }
 
             val koFiles =
