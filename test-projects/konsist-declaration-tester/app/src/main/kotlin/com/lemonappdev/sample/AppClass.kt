@@ -44,10 +44,6 @@ var appProperty: AppClass = AppClass("")
         if (true) field = value
     }
 
-val appPropertyWithFunctionType: () -> Unit = {}
-
-val appPropertyWithGenericType: List<Set<String>> = emptyList()
-
 val appPropertyWithImportAliasType: ImportAlias = SampleObject
 
 val <T> T.appPropertyWithTypeParameter: T

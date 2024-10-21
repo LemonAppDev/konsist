@@ -4,27 +4,33 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
-import com.lemonappdev.konsist.core.provider.KoGenericTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoFunctionTypeDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsFunctionTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsGenericTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
+import com.lemonappdev.konsist.core.provider.KoTypeDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoInModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoOutModifierProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtFunctionType
 import org.jetbrains.kotlin.psi.KtModifierListOwner
+import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtTypeProjection
+import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
 
 data class KoTypeArgumentDeclarationCore(
     override val name: String,
-    override val genericType: KoSourceDeclaration,
+    override val sourceDeclaration: KoSourceDeclaration?,
     override val typeArguments: List<KoTypeArgumentDeclaration>?,
-    override val sourceDeclaration: KoSourceDeclaration,
     override val hasInModifier: Boolean,
     override val hasOutModifier: Boolean,
     override val ktTypeProjection: KtTypeProjection,
@@ -34,12 +40,16 @@ data class KoTypeArgumentDeclarationCore(
     KoTextProviderCore,
     KoSourceDeclarationProviderCore,
     KoTypeArgumentProviderCore,
-    KoGenericTypeProviderCore,
     KoModifierProviderCore,
     KoOutModifierProviderCore,
     KoInModifierProviderCore,
     KoLocationProviderCore,
-    KoPathProviderCore {
+    KoPathProviderCore,
+    KoTypeProviderCore,
+    KoTypeDeclarationProviderCore,
+    KoIsGenericTypeProviderCore,
+    KoIsFunctionTypeProviderCore,
+    KoFunctionTypeDeclarationProviderCore {
     override val ktElement: KtElement by lazy { ktTypeProjection }
 
     override val ktUserType: KtUserType? by lazy { null }
@@ -47,6 +57,23 @@ data class KoTypeArgumentDeclarationCore(
     override val psiElement: PsiElement by lazy { ktTypeProjection }
 
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktTypeProjection }
+
+    override val ktFunctionType: KtFunctionType? by lazy {
+        ktTypeProjection
+            .children
+            .firstOrNull()
+            ?.children
+            ?.filterIsInstance<KtFunctionType>()
+            ?.firstOrNull()
+    }
+
+    override val ktNameReferenceExpression: KtNameReferenceExpression? by lazy { null }
+
+    override val ktTypeReference: KtTypeReference? by lazy { null }
+
+    override val koTypeProviderDeclaration: KoSourceDeclaration? by lazy { sourceDeclaration }
+
+    override val koTypeDeclarationProviderDeclaration: KoSourceDeclaration? by lazy { sourceDeclaration }
 
     override val text: String by lazy {
         when {

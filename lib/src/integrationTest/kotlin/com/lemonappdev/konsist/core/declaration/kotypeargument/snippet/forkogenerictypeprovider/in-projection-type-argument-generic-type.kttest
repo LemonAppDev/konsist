@@ -1,3 +1,0 @@
-package com.lemonappdev.konsist.core.declaration.kotypeargument.snippet.forkogenerictypeprovider
-
-val sampleProperty: MutableList<in String> = mutableListOf()

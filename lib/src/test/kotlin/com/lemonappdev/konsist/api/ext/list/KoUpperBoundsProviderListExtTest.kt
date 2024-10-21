@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoUpperBoundsProvider
 import io.mockk.every
 import io.mockk.mockk
@@ -11,9 +11,9 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `upperBounds returns upper bounds from all declarations`() {
         // given
-        val upperBound1: KoSourceDeclaration = mockk()
-        val upperBound2: KoSourceDeclaration = mockk()
-        val upperBound3: KoSourceDeclaration = mockk()
+        val upperBound1: KoTypeDeclaration = mockk()
+        val upperBound2: KoTypeDeclaration = mockk()
+        val upperBound3: KoTypeDeclaration = mockk()
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { upperBounds } returns listOf(upperBound1, upperBound2)
@@ -515,7 +515,7 @@ class KoUpperBoundsProviderListExtTest {
     fun `withUpperBound{} returns declaration with upper bound which satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (KoSourceDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val predicate: (KoTypeDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBound(predicate) } returns true
@@ -537,7 +537,7 @@ class KoUpperBoundsProviderListExtTest {
     fun `withoutUpperBound{} returns declaration without upper bound which satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (KoSourceDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val predicate: (KoTypeDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBound(predicate) } returns true
@@ -559,7 +559,7 @@ class KoUpperBoundsProviderListExtTest {
     fun `withAllUpperBounds{} returns declaration with all upper bounds satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (KoSourceDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val predicate: (KoTypeDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasAllUpperBounds(predicate) } returns true
@@ -581,7 +581,7 @@ class KoUpperBoundsProviderListExtTest {
     fun `withoutAllUpperBounds{} returns declaration with all upper bounds which not satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (KoSourceDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val predicate: (KoTypeDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasAllUpperBounds(predicate) } returns true
@@ -603,13 +603,13 @@ class KoUpperBoundsProviderListExtTest {
     fun `withUpperBounds{} returns declaration with upper bounds which satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (List<KoSourceDeclaration>) -> Boolean =
+        val predicate: (List<KoTypeDeclaration>) -> Boolean =
             { it.all { upperBound -> upperBound.hasNameEndingWith(suffix) } }
-        val upperBound1: KoSourceDeclaration =
+        val upperBound1: KoTypeDeclaration =
             mockk {
                 every { hasNameEndingWith(suffix) } returns true
             }
-        val upperBound2: KoSourceDeclaration =
+        val upperBound2: KoTypeDeclaration =
             mockk {
                 every { hasNameEndingWith(suffix) } returns false
             }
@@ -638,13 +638,13 @@ class KoUpperBoundsProviderListExtTest {
     fun `withoutUpperBounds{} returns declaration without upper bounds which satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (List<KoSourceDeclaration>) -> Boolean =
+        val predicate: (List<KoTypeDeclaration>) -> Boolean =
             { it.all { upperBound -> upperBound.hasNameEndingWith(suffix) } }
-        val upperBound1: KoSourceDeclaration =
+        val upperBound1: KoTypeDeclaration =
             mockk {
                 every { hasNameEndingWith(suffix) } returns true
             }
-        val upperBound2: KoSourceDeclaration =
+        val upperBound2: KoTypeDeclaration =
             mockk {
                 every { hasNameEndingWith(suffix) } returns false
             }

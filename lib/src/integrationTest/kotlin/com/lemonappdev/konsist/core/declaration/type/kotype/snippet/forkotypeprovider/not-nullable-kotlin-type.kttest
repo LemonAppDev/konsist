@@ -1,3 +1,1 @@
-package com.lemonappdev.konsist.core.declaration.type.kotype.snippet.forkotypeprovider
-
 class SampleClass1(val sampleProperty1: String)

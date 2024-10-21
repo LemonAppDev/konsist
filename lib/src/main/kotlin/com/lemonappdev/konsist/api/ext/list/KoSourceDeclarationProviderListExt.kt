@@ -19,7 +19,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.sourceDeclarations(
             null -> true
             else -> it.hasSourceDeclaration(predicate)
         }
-    }.map { it.sourceDeclaration }
+    }.mapNotNull { it.sourceDeclaration }
 
 /**
  * List containing source declarations with the specified source declaration.
@@ -28,7 +28,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.sourceDeclarations(
  * @return A list containing source declarations with the specified source declaration.
  */
 fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclaration(predicate: (KoSourceDeclaration) -> Boolean): List<T> =
-    filter { predicate(it.sourceDeclaration) }
+    filter { it.sourceDeclaration?.let { declaration -> predicate(declaration) } == true }
 
 /**
  * List containing source declarations without the specified source declaration.
@@ -37,7 +37,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclaration(predicate: (
  * @return A list containing source declarations without the specified source declaration.
  */
 fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclaration(predicate: (KoSourceDeclaration) -> Boolean): List<T> =
-    filterNot { predicate(it.sourceDeclaration) }
+    filterNot { it.sourceDeclaration?.let { declaration -> predicate(declaration) } == true }
 
 /**
  * List containing declarations with source declaration of.

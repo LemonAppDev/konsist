@@ -8,8 +8,6 @@ import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoTypeProvider
 import com.lemonappdev.konsist.core.util.TypeUtil
@@ -46,12 +44,6 @@ internal interface KoTypeProviderCore :
         get() =
             koTypeProviderDeclaration is KoKotlinTypeDeclaration ||
                 koTypeProviderDeclaration?.name?.let { TypeUtil.isKotlinType(it) } == true
-
-    override val isFunctionType: Boolean
-        get() = koTypeProviderDeclaration is KoFunctionTypeDeclaration
-
-    override val isGenericType: Boolean
-        get() = koTypeProviderDeclaration is KoGenericTypeDeclaration
 
     override val isTypeParameter: Boolean
         get() = koTypeProviderDeclaration is KoTypeParameterDeclaration
