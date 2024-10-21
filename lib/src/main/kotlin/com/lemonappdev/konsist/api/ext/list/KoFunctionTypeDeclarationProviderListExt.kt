@@ -15,7 +15,9 @@ val <T : KoFunctionTypeDeclarationProvider> List<T>.returnTypes: List<KoTypeDecl
  * Gets the list of parameter types for the function declarations in the list.
  */
 val <T : KoFunctionTypeDeclarationProvider> List<T>.parameterTypes: List<KoParameterDeclaration>
-    get() = flatMap { it.parameterTypes }
+    get() =
+        mapNotNull { it.parameterTypes }
+            .flatten()
 
 /**
  * Filters the list by return type using the given predicate.
@@ -24,7 +26,7 @@ val <T : KoFunctionTypeDeclarationProvider> List<T>.parameterTypes: List<KoParam
  * @return A list of function declarations that match the predicate for the return type.
  */
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withReturnType(predicate: (KoTypeDeclaration) -> Boolean): List<T> =
-    filter { predicate(it.returnType) }
+    filter { it.returnType?.let { type -> predicate(type) } == true }
 
 /**
  * Filters the list by excluding function declarations that match the return type predicate.
@@ -33,7 +35,7 @@ fun <T : KoFunctionTypeDeclarationProvider> List<T>.withReturnType(predicate: (K
  * @return A list of function declarations that do not match the predicate for the return type.
  */
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutReturnType(predicate: (KoTypeDeclaration) -> Boolean): List<T> =
-    filterNot { predicate(it.returnType) }
+    filterNot { it.returnType?.let { type -> predicate(type) } == true }
 
 /**
  * Filters the list to include only the functions that return a type of the specified class(es).
@@ -134,7 +136,7 @@ fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutAllParameterTypes(pre
  * @return A list of function declarations that match the predicate for the list of parameter types.
  */
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withParameterTypes(predicate: (List<KoParameterDeclaration>) -> Boolean): List<T> =
-    filter { predicate(it.parameterTypes) }
+    filter { it.parameterTypes?.let { parameterTypes -> predicate(parameterTypes) } == true }
 
 /**
  * Filters the list by excluding functions that match the parameter types predicate as a collection.
@@ -143,4 +145,4 @@ fun <T : KoFunctionTypeDeclarationProvider> List<T>.withParameterTypes(predicate
  * @return A list of function declarations that do not match the predicate for the list of parameter types.
  */
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutParameterTypes(predicate: (List<KoParameterDeclaration>) -> Boolean): List<T> =
-    filterNot { predicate(it.parameterTypes) }
+    filterNot { it.parameterTypes?.let { parameterTypes -> predicate(parameterTypes) } == true }

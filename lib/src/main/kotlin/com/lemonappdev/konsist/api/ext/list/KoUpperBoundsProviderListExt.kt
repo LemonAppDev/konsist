@@ -1,12 +1,12 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoUpperBoundsProvider
 
 /**
  * List containing upper bound declarations.
  */
-val <T : KoUpperBoundsProvider> List<T>.upperBounds: List<KoSourceDeclaration>
+val <T : KoUpperBoundsProvider> List<T>.upperBounds: List<KoTypeDeclaration>
     get() = flatMap { it.upperBounds }
 
 /**
@@ -133,7 +133,7 @@ fun <T : KoUpperBoundsProvider> List<T>.withoutAllUpperBoundsNamed(names: Collec
  * @param predicate A function that defines the condition to be met by a upper bound declaration.
  * @return A list containing declarations with at least one upper bound satisfying the predicate.
  */
-fun <T : KoUpperBoundsProvider> List<T>.withUpperBound(predicate: (KoSourceDeclaration) -> Boolean): List<T> =
+fun <T : KoUpperBoundsProvider> List<T>.withUpperBound(predicate: (KoTypeDeclaration) -> Boolean): List<T> =
     filter {
         it.hasUpperBound(predicate)
     }
@@ -144,7 +144,7 @@ fun <T : KoUpperBoundsProvider> List<T>.withUpperBound(predicate: (KoSourceDecla
  * @param predicate A function that defines the condition to be met by a upper bound declaration.
  * @return A list containing declarations without upper bound satisfying the provided predicate.
  */
-fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBound(predicate: (KoSourceDeclaration) -> Boolean): List<T> =
+fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBound(predicate: (KoTypeDeclaration) -> Boolean): List<T> =
     filterNot {
         it.hasUpperBound(predicate)
     }
@@ -155,7 +155,7 @@ fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBound(predicate: (KoSourceDe
  * @param predicate A function that defines the condition to be met by all upper bound declarations.
  * @return A filtered list containing declarations with all upper bounds satisfying the predicate.
  */
-fun <T : KoUpperBoundsProvider> List<T>.withAllUpperBounds(predicate: (KoSourceDeclaration) -> Boolean): List<T> =
+fun <T : KoUpperBoundsProvider> List<T>.withAllUpperBounds(predicate: (KoTypeDeclaration) -> Boolean): List<T> =
     filter {
         it.hasAllUpperBounds(predicate)
     }
@@ -166,7 +166,7 @@ fun <T : KoUpperBoundsProvider> List<T>.withAllUpperBounds(predicate: (KoSourceD
  * @param predicate A function that defines the condition to be met by all upper bound declarations.
  * @return A list containing declarations that have at least one upper bound not satisfying the provided predicate.
  */
-fun <T : KoUpperBoundsProvider> List<T>.withoutAllUpperBounds(predicate: (KoSourceDeclaration) -> Boolean): List<T> =
+fun <T : KoUpperBoundsProvider> List<T>.withoutAllUpperBounds(predicate: (KoTypeDeclaration) -> Boolean): List<T> =
     filterNot {
         it.hasAllUpperBounds(predicate)
     }
@@ -177,7 +177,7 @@ fun <T : KoUpperBoundsProvider> List<T>.withoutAllUpperBounds(predicate: (KoSour
  * @param predicate A function that defines the condition to be met by the list of upper bound declarations.
  * @return A list containing declarations with upper bound declarations satisfying the predicate.
  */
-fun <T : KoUpperBoundsProvider> List<T>.withUpperBounds(predicate: (List<KoSourceDeclaration>) -> Boolean): List<T> =
+fun <T : KoUpperBoundsProvider> List<T>.withUpperBounds(predicate: (List<KoTypeDeclaration>) -> Boolean): List<T> =
     filter {
         predicate(it.upperBounds)
     }
@@ -188,5 +188,5 @@ fun <T : KoUpperBoundsProvider> List<T>.withUpperBounds(predicate: (List<KoSourc
  * @param predicate A function that defines the condition to be met by the list of upper bound declarations.
  * @return A list containing declarations without upper bound declarations satisfying the predicate.
  */
-fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBounds(predicate: (List<KoSourceDeclaration>) -> Boolean): List<T> =
+fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBounds(predicate: (List<KoTypeDeclaration>) -> Boolean): List<T> =
     filterNot { predicate(it.upperBounds) }
