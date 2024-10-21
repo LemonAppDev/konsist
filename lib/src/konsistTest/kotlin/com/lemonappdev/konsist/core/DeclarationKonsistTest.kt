@@ -1,8 +1,11 @@
 package com.lemonappdev.konsist.core
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.ext.list.properties
 import com.lemonappdev.konsist.api.ext.list.returnTypes
 import com.lemonappdev.konsist.api.ext.list.types
+import com.lemonappdev.konsist.api.ext.list.withVal
+import com.lemonappdev.konsist.api.ext.list.withoutConstructorDefined
 import com.lemonappdev.konsist.api.ext.list.withoutName
 import com.lemonappdev.konsist.api.ext.list.withoutPackage
 import com.lemonappdev.konsist.api.verify.assertFalse
@@ -77,5 +80,15 @@ class DeclarationKonsistTest {
                 val name = it.name.removeSuffix("Core")
                 it.hasParentsWithAllNames("KoBaseProviderCore", name, indirectParents = true)
             }
+    }
+
+    @Test
+    fun `every property inside class body is implemented using lazy delegate`() {
+        declarationPackageScope
+            .classes()
+            .properties(includeNested = false)
+            .withoutConstructorDefined()
+            .withVal()
+            .assertTrue { it.hasDelegate("lazy") }
     }
 }

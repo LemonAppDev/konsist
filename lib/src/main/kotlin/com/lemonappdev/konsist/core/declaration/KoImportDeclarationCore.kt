@@ -48,7 +48,7 @@ internal class KoImportDeclarationCore private constructor(
     KoSourceDeclarationProviderCore {
     override val psiElement: PsiElement by lazy { ktImportDirective }
 
-    override val ktElement: KtElement = ktImportDirective
+    override val ktElement: KtElement by lazy { ktImportDirective }
 
     override val name: String by lazy { ktImportDirective.importPath?.fqName.toString() }
 
@@ -59,8 +59,7 @@ internal class KoImportDeclarationCore private constructor(
     }
 
     @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
-    override val isWildcard: Boolean
-        get() = super<KoIsWildcardProviderCore>.isWildcard
+    override val isWildcard: Boolean by lazy { super<KoIsWildcardProviderCore>.isWildcard }
 
     override val sourceDeclaration: KoSourceDeclaration by lazy {
         val shortName = name.substringAfterLast(".")

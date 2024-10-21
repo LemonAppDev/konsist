@@ -50,13 +50,13 @@ data class KoTypeArgumentDeclarationCore(
     KoIsGenericTypeProviderCore,
     KoIsFunctionTypeProviderCore,
     KoFunctionTypeDeclarationProviderCore {
-    override val ktElement: KtElement = ktTypeProjection
+    override val ktElement: KtElement by lazy { ktTypeProjection }
 
-    override val ktUserType: KtUserType? = null
+    override val ktUserType: KtUserType? by lazy { null }
 
-    override val psiElement: PsiElement = ktTypeProjection
+    override val psiElement: PsiElement by lazy { ktTypeProjection }
 
-    override val ktModifierListOwner: KtModifierListOwner = ktTypeProjection
+    override val ktModifierListOwner: KtModifierListOwner by lazy { ktTypeProjection }
 
     override val ktFunctionType: KtFunctionType? by lazy {
         ktTypeProjection
