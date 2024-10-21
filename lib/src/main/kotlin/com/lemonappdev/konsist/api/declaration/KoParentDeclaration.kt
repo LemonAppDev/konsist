@@ -29,10 +29,10 @@ import com.lemonappdev.konsist.api.provider.KoTypeProvider
 interface KoParentDeclaration :
     KoBaseDeclaration,
     KoBaseProvider,
-    KoFullyQualifiedNameProvider,
     KoNameProvider,
     KoPackageProvider,
     KoResideInPackageProvider,
+    KoFullyQualifiedNameProvider,
     KoSourceDeclarationProvider,
 
 
@@ -43,4 +43,7 @@ interface KoParentDeclaration :
     KoContainingDeclarationProvider,
     KoModuleProvider,
     KoSourceSetProvider,
-    KoAnnotationProvider
+    KoAnnotationProvider,
+    KoTypeProvider,
+//    KoSourceAndAliasTypeProvider ?????
+    KoTypeDeclarationProvider

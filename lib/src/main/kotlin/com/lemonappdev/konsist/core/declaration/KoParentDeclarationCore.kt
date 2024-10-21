@@ -3,18 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
-import com.lemonappdev.konsist.api.provider.KoLocationProvider
-import com.lemonappdev.konsist.api.provider.KoModuleProvider
-import com.lemonappdev.konsist.api.provider.KoPathProvider
-import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
-import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
@@ -30,17 +19,17 @@ import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
+import com.lemonappdev.konsist.core.provider.KoTypeDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotated
-import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtConstructorCalleeExpression
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
-import java.awt.SystemColor.text
 
 internal class KoParentDeclarationCore(
     private val ktSuperTypeListEntry: KtSuperTypeListEntry,
@@ -61,12 +50,20 @@ internal class KoParentDeclarationCore(
     KoContainingDeclarationProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore,
-    KoAnnotationProviderCore {
+    KoAnnotationProviderCore,
+    KoTypeProviderCore,
+    KoTypeDeclarationProviderCore {
     override val ktAnnotated: KtAnnotated? by lazy { null } // Todo: change
 
     override val psiElement: PsiElement by lazy { ktSuperTypeListEntry }
 
     override val ktElement: KtElement by lazy { ktSuperTypeListEntry }
+
+    override val ktTypeReference: KtTypeReference? by lazy { null }
+
+    override val ktNameReferenceExpression: KtNameReferenceExpression? by lazy { null }
+
+    override val ktTypeProjection: KtTypeProjection? by lazy { null }
 
     override val sourceDeclaration: KoSourceDeclaration by lazy {
         val name =
@@ -103,11 +100,17 @@ internal class KoParentDeclarationCore(
     }
 
     override val name: String by lazy {
-        ktElement
-            .children
-            .filterIsInstance<KtConstructorCalleeExpression>()
+        val children = ktElement.children
+
+        children
+            .filterIsInstance<KtTypeReference>()
             .firstOrNull()
             ?.text
+            ?: children
+                .flatMap { it.children.toList() }
+                .filterIsInstance<KtTypeReference>()
+                .firstOrNull()
+                ?.text
             ?: text
     }
 

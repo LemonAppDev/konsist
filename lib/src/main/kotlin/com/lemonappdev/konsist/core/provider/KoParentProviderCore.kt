@@ -29,7 +29,7 @@ internal interface KoParentProviderCore :
         val indirectParentDeclarations =
             if (indirectParents) getIndirectParents(directParentDeclarations) else emptyList()
 
-        return (directParentDeclarations + indirectParentDeclarations).distinct()
+        return (directParentDeclarations + indirectParentDeclarations).distinctBy { it.sourceDeclaration }
     }
 
     private fun getIndirectParents(parents: List<KoParentDeclaration>): List<KoParentDeclaration> {

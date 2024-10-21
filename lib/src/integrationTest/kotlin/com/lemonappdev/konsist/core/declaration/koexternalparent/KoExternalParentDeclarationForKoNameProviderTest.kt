@@ -30,7 +30,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalGenericClass"
+        sut.name shouldBeEqualTo "SampleExternalGenericClass<Int>"
     }
 
     @Test
@@ -56,7 +56,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalGenericClassWithParameter"
+        sut.name shouldBeEqualTo "SampleExternalGenericClassWithParameter<Int>"
     }
 
     @Test
@@ -82,7 +82,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalGenericInterface"
+        sut.name shouldBeEqualTo "SampleExternalGenericInterface<Int>"
     }
 
     @Test
@@ -134,7 +134,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalGenericInterface"
+        sut.name shouldBeEqualTo "SampleExternalGenericInterface<Int>"
     }
 
     @Test
@@ -160,7 +160,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalGenericClass"
+        sut.name shouldBeEqualTo "SampleExternalGenericClass<Int>"
     }
 
     @Test
@@ -186,7 +186,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalGenericClassWithParameter"
+        sut.name shouldBeEqualTo "SampleExternalGenericClassWithParameter<Int>"
     }
 
     @Test
@@ -212,7 +212,7 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalGenericInterface"
+        sut.name shouldBeEqualTo "SampleExternalGenericInterface<Int>"
     }
 
     @Test

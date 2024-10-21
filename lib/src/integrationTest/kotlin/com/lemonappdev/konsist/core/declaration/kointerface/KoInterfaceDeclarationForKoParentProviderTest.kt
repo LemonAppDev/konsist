@@ -62,7 +62,7 @@ class KoInterfaceDeclarationForKoParentProviderTest {
                     "SampleParentInterface1",
                     "SampleParentInterface2",
                     "SampleExternalInterface",
-                    "SampleExternalGenericInterface",
+                    "SampleExternalGenericInterface<Int>",
                 )
             numParents() shouldBeEqualTo 4
             countParents { it.name == "SampleParentInterface1" } shouldBeEqualTo 1
@@ -261,7 +261,7 @@ class KoInterfaceDeclarationForKoParentProviderTest {
 
         // then
         assertSoftly(sut.parents().first()) {
-            name shouldBeEqualTo "SampleParentInterface"
+            name shouldBeEqualTo "AliasParent"
             fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleParentInterface"
         }
     }
