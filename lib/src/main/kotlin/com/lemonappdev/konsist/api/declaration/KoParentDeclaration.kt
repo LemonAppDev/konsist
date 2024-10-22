@@ -37,10 +37,11 @@ interface KoParentDeclaration :
 
 
     KoTextProvider,
-    KoPathProvider,
-    KoLocationProvider,
     KoContainingFileProvider,
     KoContainingDeclarationProvider,
+
+    KoPathProvider,
+    KoLocationProvider,
     KoModuleProvider,
     KoSourceSetProvider,
     KoAnnotationProvider,
