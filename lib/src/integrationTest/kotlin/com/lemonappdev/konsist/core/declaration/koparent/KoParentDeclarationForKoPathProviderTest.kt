@@ -5,11 +5,12 @@ import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.ext.list.parents
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
 
-class KoParentDeclarationForKoContainingDeclarationProviderTest {
+class KoParentDeclarationForKoPathProviderTest {
     @Test
     fun `class-with-parent-class-from-file`() {
         // given
@@ -20,7 +21,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-parent-class-from-file.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -33,7 +37,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-generic-parent-class-from-file.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -46,7 +53,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-parametrized-parent-class-from-file.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -59,7 +69,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-parametrized-and-generic-parent-class-from-file.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -72,7 +85,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-parent-interface-from-file.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -85,7 +101,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-generic-parent-interface-from-file.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -98,7 +117,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-parent-by-delegation-from-file.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -107,12 +129,14 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
         val sut =
             getSnippetFile("class-with-multiline-parent-from-file")
                 .classes()
-                .first()
                 .parents()
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-multiline-parent-from-file.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -125,7 +149,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-parent-class-from-import.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -138,7 +165,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-generic-parent-class-from-import.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -151,7 +181,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-parametrized-parent-class-from-import.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -164,7 +197,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-parametrized-and-generic-parent-class-from-import.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -177,7 +213,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-parent-interface-from-import.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -190,7 +229,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-generic-parent-interface-from-import.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -203,7 +245,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-parent-by-delegation-from-import.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -216,7 +261,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-multiline-parent-from-import.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -229,7 +277,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-external-parent-class.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -242,7 +293,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-generic-external-parent-class.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -255,7 +309,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-parametrized-external-parent-class.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -268,7 +325,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-parametrized-and-generic-external-parent-class.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -281,7 +341,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-external-parent-interface.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -294,7 +357,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-generic-external-parent-interface.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -307,7 +373,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/class-with-external-parent-by-delegation.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -320,7 +389,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/interface-with-parent-interface-from-file.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -333,7 +405,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/interface-with-generic-parent-interface-from-file.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -346,7 +421,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/interface-with-parent-interface-from-import.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -359,7 +437,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/interface-with-generic-parent-interface-from-import.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -372,7 +453,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/interface-with-external-parent-interface.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -385,7 +469,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/interface-with-generic-external-parent-interface.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -398,7 +485,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-parent-class-from-file.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -411,7 +501,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-generic-parent-class-from-file.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -424,7 +517,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-parametrized-parent-class-from-file.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -437,7 +533,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-parametrized-and-generic-parent-class-from-file.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -450,7 +549,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-parent-interface-from-file.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -463,7 +565,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-generic-parent-interface-from-file.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -476,7 +581,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-multiline-parent-from-file.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -489,7 +597,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-parent-class-from-import.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -502,7 +613,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-generic-parent-class-from-import.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -515,7 +629,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-parametrized-parent-class-from-import.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -528,7 +645,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-parametrized-and-generic-parent-class-from-import.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -541,7 +661,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-parent-interface-from-import.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -554,7 +677,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-generic-parent-interface-from-import.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -567,7 +693,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-multiline-parent-from-import.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -580,7 +709,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-external-parent-class.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -593,7 +725,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-generic-external-parent-class.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -606,7 +741,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-parametrized-external-parent-class.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -619,7 +757,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-parametrized-and-generic-external-parent-class.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -632,7 +773,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-external-parent-interface.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -645,7 +789,10 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-generic-external-parent-interface.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -658,12 +805,15 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+        assertSoftly(sut.path) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("koparent/snippet/forkopathprovider/object-with-multiline-external-parent.kt") shouldBeEqualTo true
+        }
     }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
-            "core/declaration/koparent/snippet/forkocontainingdeclarationprovider/",
+            "core/declaration/koparent/snippet/forkopathprovider/",
             fileName
         )
 }

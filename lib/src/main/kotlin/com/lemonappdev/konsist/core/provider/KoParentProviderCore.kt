@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoParentDeclarationCore
+import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
 import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
@@ -13,7 +14,6 @@ import kotlin.reflect.KClass
 
 internal interface KoParentProviderCore :
     KoParentProvider,
-    KoContainingDeclarationProviderCore,
     KoContainingFileProviderCore,
     KoBaseProviderCore {
     val ktClassOrObject: KtClassOrObject
@@ -23,7 +23,7 @@ internal interface KoParentProviderCore :
                 .getSuperTypeList()
                 ?.children
                 ?.filterIsInstance<KtSuperTypeListEntry>()
-                ?.map { KoParentDeclarationCore.getInstance(it, containingDeclaration) }
+                ?.map { KoParentDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
                 .orEmpty()
 
         val indirectParentDeclarations =

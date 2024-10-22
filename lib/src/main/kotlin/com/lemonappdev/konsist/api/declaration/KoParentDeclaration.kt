@@ -39,12 +39,12 @@ interface KoParentDeclaration :
     KoTextProvider,
     KoContainingFileProvider,
     KoContainingDeclarationProvider,
-
     KoPathProvider,
     KoLocationProvider,
+
     KoModuleProvider,
     KoSourceSetProvider,
     KoAnnotationProvider,
     KoTypeProvider,
-//    KoSourceAndAliasTypeProvider ?????
     KoTypeDeclarationProvider
+//    KoSourceAndAliasTypeProvider ?????

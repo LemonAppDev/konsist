@@ -5,11 +5,12 @@ import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.ext.list.parents
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
 
-class KoParentDeclarationForKoContainingDeclarationProviderTest {
+class KoParentDeclarationForKoLocationProviderTest {
     @Test
     fun `class-with-parent-class-from-file`() {
         // given
@@ -20,7 +21,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:1:23"
     }
 
     @Test
@@ -33,7 +34,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:1:23"
     }
 
     @Test
@@ -46,7 +47,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:1:23"
     }
 
     @Test
@@ -59,7 +60,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:1:23"
     }
 
     @Test
@@ -72,7 +73,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:23"
     }
 
     @Test
@@ -85,7 +86,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:23"
     }
 
     @Test
@@ -98,7 +99,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:59"
     }
 
     @Test
@@ -107,12 +108,11 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
         val sut =
             getSnippetFile("class-with-multiline-parent-from-file")
                 .classes()
-                .first()
                 .parents()
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:1:20"
     }
 
     @Test
@@ -125,7 +125,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:23"
     }
 
     @Test
@@ -138,7 +138,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:23"
     }
 
     @Test
@@ -151,7 +151,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:23"
     }
 
     @Test
@@ -164,7 +164,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:23"
     }
 
     @Test
@@ -177,7 +177,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:23"
     }
 
     @Test
@@ -190,7 +190,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:23"
     }
 
     @Test
@@ -203,7 +203,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:54"
     }
 
     @Test
@@ -216,7 +216,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:20"
     }
 
     @Test
@@ -229,7 +229,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:23"
     }
 
     @Test
@@ -242,7 +242,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:23"
     }
 
     @Test
@@ -255,7 +255,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:23"
     }
 
     @Test
@@ -268,7 +268,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:23"
     }
 
     @Test
@@ -281,7 +281,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:23"
     }
 
     @Test
@@ -294,7 +294,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:23"
     }
 
     @Test
@@ -307,7 +307,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:62"
     }
 
     @Test
@@ -320,7 +320,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:1:29"
     }
 
     @Test
@@ -333,7 +333,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:1:29"
     }
 
     @Test
@@ -346,7 +346,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:29"
     }
 
     @Test
@@ -359,7 +359,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:29"
     }
 
     @Test
@@ -372,7 +372,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:29"
     }
 
     @Test
@@ -385,7 +385,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:29"
     }
 
     @Test
@@ -398,7 +398,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:1:22"
     }
 
     @Test
@@ -411,7 +411,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:1:23"
     }
 
     @Test
@@ -424,7 +424,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:1:22"
     }
 
     @Test
@@ -437,7 +437,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:1:22"
     }
 
     @Test
@@ -450,7 +450,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:22"
     }
 
     @Test
@@ -463,7 +463,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:22"
     }
 
     @Test
@@ -476,7 +476,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:1:22"
     }
 
     @Test
@@ -489,7 +489,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:22"
     }
 
     @Test
@@ -502,7 +502,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:23"
     }
 
     @Test
@@ -515,7 +515,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:22"
     }
 
     @Test
@@ -528,7 +528,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:22"
     }
 
     @Test
@@ -541,7 +541,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:22"
     }
 
     @Test
@@ -554,7 +554,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:22"
     }
 
     @Test
@@ -567,7 +567,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:22"
     }
 
     @Test
@@ -580,7 +580,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:22"
     }
 
     @Test
@@ -593,7 +593,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:23"
     }
 
     @Test
@@ -606,7 +606,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:22"
     }
 
     @Test
@@ -619,7 +619,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:22"
     }
 
     @Test
@@ -632,7 +632,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:22"
     }
 
     @Test
@@ -645,7 +645,7 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:22"
     }
 
     @Test
@@ -658,12 +658,12 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
+         sut.location shouldBeEqualTo "${sut.path}:3:22"
     }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
-            "core/declaration/koparent/snippet/forkocontainingdeclarationprovider/",
+            "core/declaration/koparent/snippet/forkolocationprovider/",
             fileName
         )
 }
