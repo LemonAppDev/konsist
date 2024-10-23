@@ -11,10 +11,65 @@ import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import kotlin.reflect.KClass
 
 /**
- * An interface representing a Kotlin declaration that provides the declaration associated with this type.
+ * An interface representing a Kotlin declaration that provides the information associated with this type.
  */
 @Suppress("detekt.TooManyFunctions")
-interface KoTypeDeclarationProvider : KoBaseProvider {
+interface KoDeclarationCastProvider : KoBaseProvider {
+    /**
+     * Determines whatever source declaration is a class.
+     */
+    val isClass: Boolean
+
+    /**
+     * Determines whatever source declaration is an object.
+     */
+    val isObject: Boolean
+
+    /**
+     * Determines whatever source declaration is a interface.
+     */
+    val isInterface: Boolean
+
+    /**
+     * Determines whatever source declaration is a type alias.
+     */
+    val isTypeAlias: Boolean
+
+    /**
+     * Determines whatever source declaration is import alias.
+     */
+    val isImportAlias: Boolean
+
+    /**
+     * Determines whatever type is a build in Kotlin type. It can be a basic Kotlin type
+     * [Basic types](https://kotlinlang.org/docs/basic-types.html) or collection type
+     * [Collections overview] (https://kotlinlang.org/docs/collections-overview.html#collection).
+     */
+    val isKotlinType: Boolean
+
+    /**
+     * Determines whatever type is a Kotlin stdlib basic type
+     * [Basic types](https://kotlinlang.org/docs/basic-types.html)
+     */
+    val isKotlinBasicType: Boolean
+
+    /**
+     * Determines whatever type is a Kotlin stdlib Collection type
+     * [Collections overview](https://kotlinlang.org/docs/collections-overview.html#collection).
+     */
+    val isKotlinCollectionType: Boolean
+
+    /**
+     * Determines whatever source declaration is a type parameter.
+     */
+    val isTypeParameter: Boolean
+
+    /**
+     * Determines whatever source declaration is an external type.
+     * An external type refers to a type that is defined outside the project's codebase. for e.g. in external library.
+     */
+    val isExternal: Boolean
+
     /**
      * Represents the class declaration associated with this type.
      *
@@ -58,6 +113,20 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
     fun asKotlinTypeDeclaration(): KoKotlinTypeDeclaration?
 
     /**
+     * Represents the Kotlin basic type declaration associated with this type.
+     *
+     * @return the Kotlin basic type declaration associated with this type.
+     */
+    fun asKotlinBasicTypeDeclaration(): KoKotlinTypeDeclaration?
+
+    /**
+     * Represents the Kotlin collection type declaration associated with this type.
+     *
+     * @return the Kotlin collection type declaration associated with this type.
+     */
+    fun asKotlinCollectionTypeDeclaration(): KoKotlinTypeDeclaration?
+
+    /**
      * Represents the type parameter declaration associated with this type.
      *
      * @return the type parameter declaration associated with this type.
@@ -70,7 +139,7 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
      *
      * @return the external declaration associated with this type.
      */
-    fun asExternalTypeDeclaration(): KoExternalDeclaration?
+    fun asExternalDeclaration(): KoExternalDeclaration?
 
     /**
      * Whether type has a specified class declaration.
@@ -159,6 +228,40 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
     fun hasKotlinTypeDeclarationOf(kClass: KClass<*>): Boolean
 
     /**
+     * Whether type has a specified kotlin basic type declaration.
+     *
+     * @param predicate The predicate function used to determine if a kotlin basic type declaration satisfies a condition.
+     * @return `true` if the type has the specified kotlin basic type declaration (or any kotlin basic type declaration if [predicate] is
+     * `null`), `false` otherwise.
+     */
+    fun hasKotlinBasicTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null): Boolean
+
+    /**
+     * Whether type has a kotlin basic type declaration of the specified Kotlin class.
+     *
+     * @param kClass The Kotlin class representing the kotlin basic type declaration to check for.
+     * @return `true` if the type has a kotlin basic type declaration matching the specified KClass, `false` otherwise.
+     */
+    fun hasKotlinBasicTypeDeclarationOf(kClass: KClass<*>): Boolean
+
+    /**
+     * Whether type has a specified kotlin collection type declaration.
+     *
+     * @param predicate The predicate function used to determine if a kotlin collection type declaration satisfies a condition.
+     * @return `true` if the type has the specified kotlin collection type declaration (or any kotlin collection type declaration if [predicate] is
+     * `null`), `false` otherwise.
+     */
+    fun hasKotlinCollectionTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null): Boolean
+
+    /**
+     * Whether type has a kotlin collection type declaration of the specified Kotlin class.
+     *
+     * @param kClass The Kotlin class representing the kotlin collection type declaration to check for.
+     * @return `true` if the type has a kotlin collection type declaration matching the specified KClass, `false` otherwise.
+     */
+    fun hasKotlinCollectionTypeDeclarationOf(kClass: KClass<*>): Boolean
+
+    /**
      * Whether type has a specified type parameter declaration.
      *
      * @param predicate The predicate generic used to determine if a type parameter declaration satisfies a condition.
@@ -175,7 +278,7 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
      * @return `true` if the type has the specified external type declaration (or any external type declaration if [predicate] is
      * `null`), `false` otherwise.
      */
-    fun hasExternalTypeDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)? = null): Boolean
+    fun hasExternalDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)? = null): Boolean
 
     /**
      * Whether type has a external type declaration of the specified Kotlin class.
@@ -185,5 +288,5 @@ interface KoTypeDeclarationProvider : KoBaseProvider {
      * @return `true` if the type has a external type declaration (type defined outside the project codebase for e.g.
      * in external library) matching the specified KClass, `false` otherwise.
      */
-    fun hasExternalTypeDeclarationOf(kClass: KClass<*>): Boolean
+    fun hasExternalDeclarationOf(kClass: KClass<*>): Boolean
 }

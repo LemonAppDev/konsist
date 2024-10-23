@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoDeclarationCastProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionTypeDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsFunctionTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsGenericTypeProviderCore
@@ -13,8 +14,6 @@ import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
-import com.lemonappdev.konsist.core.provider.KoTypeDeclarationProviderCore
-import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoInModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoOutModifierProviderCore
@@ -45,8 +44,7 @@ data class KoTypeArgumentDeclarationCore(
     KoInModifierProviderCore,
     KoLocationProviderCore,
     KoPathProviderCore,
-    KoTypeProviderCore,
-    KoTypeDeclarationProviderCore,
+    KoDeclarationCastProviderCore,
     KoIsGenericTypeProviderCore,
     KoIsFunctionTypeProviderCore,
     KoFunctionTypeDeclarationProviderCore {
@@ -71,9 +69,7 @@ data class KoTypeArgumentDeclarationCore(
 
     override val ktTypeReference: KtTypeReference? by lazy { null }
 
-    override val koTypeProviderDeclaration: KoSourceDeclaration? by lazy { sourceDeclaration }
-
-    override val koTypeDeclarationProviderDeclaration: KoSourceDeclaration? by lazy { sourceDeclaration }
+    override val koDeclarationCastProviderDeclaration: KoSourceDeclaration? by lazy { sourceDeclaration }
 
     override val text: String by lazy {
         when {

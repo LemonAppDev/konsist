@@ -1,9 +1,8 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.api.provider.KoIsGenericTypeProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
-import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoTypeProvider
 
 internal interface KoIsGenericTypeProviderCore :
     KoIsGenericTypeProvider,
@@ -13,8 +12,8 @@ internal interface KoIsGenericTypeProviderCore :
             val regex = "\\w+<[a-zA-Z*<>(), ]+>".toRegex()
 
             val type =
-                if ((this as? KoTypeProvider)?.isTypeAlias == true) {
-                    (this as? KoTypeDeclarationProvider)
+                if ((this as? KoDeclarationCastProvider)?.isTypeAlias == true) {
+                    (this as? KoDeclarationCastProvider)
                         ?.asTypeAliasDeclaration()
                         ?.type
                         ?.text
