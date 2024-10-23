@@ -9,12 +9,12 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoStarProjectionDeclarationForKoTypeDeclarationProviderTest {
+class KoStarProjectionDeclarationForKoDeclarationCastProviderTest {
     @Test
-    fun `star-projection-type-declaration`() {
+    fun `star-projection-type`() {
         // given
         val sut =
-            getSnippetFile("star-projection-type-declaration")
+            getSnippetFile("star-projection-type")
                 .functions()
                 .returnTypes
                 .firstOrNull()
@@ -24,6 +24,16 @@ class KoStarProjectionDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isKotlinBasicType shouldBeEqualTo false
+            it?.isKotlinCollectionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
+            it?.isExternal shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.hasClassDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
@@ -46,9 +56,17 @@ class KoStarProjectionDeclarationForKoTypeDeclarationProviderTest {
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
             it?.hasKotlinTypeDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
             it?.hasKotlinTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
-            it?.asExternalTypeDeclaration() shouldBeEqualTo null
-            it?.hasExternalTypeDeclaration() shouldBeEqualTo false
-            it?.hasExternalTypeDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asExternalDeclaration() shouldBeEqualTo null
+            it?.hasExternalDeclaration() shouldBeEqualTo false
+            it?.hasExternalDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
             it?.hasTypeParameterDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
@@ -57,7 +75,7 @@ class KoStarProjectionDeclarationForKoTypeDeclarationProviderTest {
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
-            "core/declaration/type/kostarprojection/snippet/forkotypedeclarationprovider/",
+            "core/declaration/type/kostarprojection/snippet/forkodeclarationcastprovider/",
             fileName,
         )
 }
