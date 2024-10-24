@@ -11,7 +11,7 @@ internal interface KoParentInterfaceProviderCore :
     KoBaseProviderCore,
     KoParentProviderCore {
     override fun parentInterfaces(indirectParents: Boolean): List<KoParentDeclaration> =
-        parents(indirectParents).filter { it.sourceDeclaration.isInterface }
+        parents(indirectParents).filter { it.sourceDeclaration?.isInterface == true }
 
     override fun numParentInterfaces(indirectParents: Boolean): Int = parentInterfaces(indirectParents).size
 

@@ -122,7 +122,6 @@ class KoClassDeclarationForKoExternalParentProviderTest {
             getSnippetFile("class-has-internal-and-external-parents")
                 .classes()
                 .first()
-                .print("@@@@@") { it.externalParents().map { it.sourceDeclaration.text }.toString() }
 
         // then
         assertSoftly(sut) {

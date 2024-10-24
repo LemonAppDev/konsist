@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.koparent.snippet
+package com.lemonappdev.konsist.core.declaration.koparent
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.parents

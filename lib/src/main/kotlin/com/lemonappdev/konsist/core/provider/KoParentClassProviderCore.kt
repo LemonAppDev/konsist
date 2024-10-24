@@ -13,7 +13,7 @@ internal interface KoParentClassProviderCore :
         get() = parentClasses(false).firstOrNull()
 
     override fun parentClasses(indirectParents: Boolean): List<KoParentDeclaration> =
-        parents(indirectParents).filter { it.sourceDeclaration.isClass }
+        parents(indirectParents).filter { it.sourceDeclaration?.isClass == true }
 
     override fun numParentClasses(indirectParents: Boolean): Int = parentClasses(indirectParents).size
 
