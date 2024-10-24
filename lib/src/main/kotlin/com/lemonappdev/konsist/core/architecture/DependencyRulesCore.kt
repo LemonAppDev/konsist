@@ -9,21 +9,19 @@ class DependencyRulesCore : DependencyRules {
     internal val negativeDependencies = mutableMapOf<Layer, Set<Layer>>()
     internal val statuses = mutableMapOf<Layer, Status>()
 
-    internal var allLayers = mutableListOf<Layer>()
+    internal var allLayers = mutableSetOf<Layer>()
 
     override fun Layer.dependsOn(
         layer: Layer,
         vararg layers: Layer,
     ) {
-        checkIfLayerHasTheSameValuesAsOtherLayer(this, layer, *layers)
-        checkIfLayerIsDependentOnItself(this, layer, *layers)
-        checkStatusOfLayer(false, this, layer, *layers)
-        checkCircularDependencies(this, layer, *layers)
+        checkLayers(layer, layers)
 
-        allLayers =
-            (allLayers + this + layer + layers)
-                .distinct()
-                .toMutableList()
+        with(allLayers) {
+            add(this@dependsOn)
+            add(layer)
+            addAll(layers)
+        }
 
         positiveDependencies[this] = (positiveDependencies.getOrDefault(this, setOf(this))) + layer + layers
         statuses[this] = Status.DEPEND_ON_LAYER
@@ -38,19 +36,27 @@ class DependencyRulesCore : DependencyRules {
         }
     }
 
-    override fun Layer.doesNotDependOn(
+    private fun Layer.checkLayers(
         layer: Layer,
-        vararg layers: Layer,
+        layers: Array<out Layer>
     ) {
         checkIfLayerHasTheSameValuesAsOtherLayer(this, layer, *layers)
         checkIfLayerIsDependentOnItself(this, layer, *layers)
         checkStatusOfLayer(false, this, layer, *layers)
         checkCircularDependencies(this, layer, *layers)
+    }
 
-        allLayers =
-            (allLayers + this + layer + layers)
-                .distinct()
-                .toMutableList()
+    override fun Layer.doesNotDependOn(
+        layer: Layer,
+        vararg layers: Layer,
+    ) {
+        checkLayers(layer, layers)
+
+        with(allLayers) {
+            add(this@doesNotDependOn)
+            add(layer)
+            addAll(layers)
+        }
 
         negativeDependencies[this] = setOf(layer) + layers
         statuses[this] = Status.NOT_DEPEND_ON_LAYER
@@ -69,10 +75,7 @@ class DependencyRulesCore : DependencyRules {
         checkIfLayerHasTheSameValuesAsOtherLayer(this)
         checkStatusOfLayer(true, this)
 
-        allLayers =
-            (allLayers + this)
-                .distinct()
-                .toMutableList()
+        allLayers.add(this)
 
         positiveDependencies[this] = setOf(this)
         statuses[this] = Status.DEPENDENT_ON_NOTHING
