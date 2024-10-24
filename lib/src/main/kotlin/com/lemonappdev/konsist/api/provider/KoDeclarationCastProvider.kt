@@ -248,8 +248,8 @@ interface KoDeclarationCastProvider : KoBaseProvider {
      * Whether type has a specified kotlin collection type declaration.
      *
      * @param predicate The predicate function used to determine if a kotlin collection type declaration satisfies a condition.
-     * @return `true` if the type has the specified kotlin collection type declaration (or any kotlin collection type declaration if [predicate] is
-     * `null`), `false` otherwise.
+     * @return `true` if the type has the specified kotlin collection type declaration (or any kotlin collection type
+     * declaration if [predicate] is `null`), `false` otherwise.
      */
     fun hasKotlinCollectionTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null): Boolean
 

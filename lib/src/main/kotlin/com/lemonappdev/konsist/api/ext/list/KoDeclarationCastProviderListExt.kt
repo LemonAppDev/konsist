@@ -557,7 +557,9 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutKotlinTypeDeclarationOf(kClas
  * @param predicate The predicate function to determine if a kotlin basic type declaration satisfies a condition.
  * @return A list containing declarations with the specified kotlin basic type declaration.
  */
-fun <T : KoDeclarationCastProvider> List<T>.withKotlinBasicTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null): List<T> =
+fun <T : KoDeclarationCastProvider> List<T>.withKotlinBasicTypeDeclaration(
+    predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null,
+): List<T> =
     filter {
         when (predicate) {
             null -> it.isKotlinBasicType
@@ -643,7 +645,9 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutKotlinBasicTypeDeclarationOf(
  * @param predicate The predicate function to determine if a kotlin collection type declaration satisfies a condition.
  * @return A list containing declarations with the specified kotlin collection type declaration.
  */
-fun <T : KoDeclarationCastProvider> List<T>.withKotlinCollectionTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null): List<T> =
+fun <T : KoDeclarationCastProvider> List<T>.withKotlinCollectionTypeDeclaration(
+    predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null,
+): List<T> =
     filter {
         when (predicate) {
             null -> it.isKotlinCollectionType
@@ -784,9 +788,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withExternalDeclaration(predicate: (
  * @param predicate The predicate function to determine if a external type declaration satisfies a condition.
  * @return A list containing declarations without the specified external type declaration.
  */
-fun <T : KoDeclarationCastProvider> List<T>.withoutExternalDeclaration(
-    predicate: ((KoExternalDeclaration) -> Boolean)? = null,
-): List<T> =
+fun <T : KoDeclarationCastProvider> List<T>.withoutExternalDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
         when (predicate) {
             null -> it.isExternal

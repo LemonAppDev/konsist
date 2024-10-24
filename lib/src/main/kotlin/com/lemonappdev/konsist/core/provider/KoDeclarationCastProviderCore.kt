@@ -47,7 +47,7 @@ internal interface KoDeclarationCastProviderCore :
     override val isKotlinType: Boolean
         get() =
             koDeclarationCastProviderDeclaration is KoKotlinTypeDeclaration ||
-                    koDeclarationCastProviderDeclaration?.name?.let { TypeUtil.isKotlinType(it) } == true
+                koDeclarationCastProviderDeclaration?.name?.let { TypeUtil.isKotlinType(it) } == true
 
     override val isTypeParameter: Boolean
         get() = koDeclarationCastProviderDeclaration is KoTypeParameterDeclaration
@@ -57,20 +57,15 @@ internal interface KoDeclarationCastProviderCore :
 
     override fun asClassDeclaration(): KoClassDeclaration? = koDeclarationCastProviderDeclaration as? KoClassDeclaration
 
-    override fun asObjectDeclaration(): KoObjectDeclaration? =
-        koDeclarationCastProviderDeclaration as? KoObjectDeclaration
+    override fun asObjectDeclaration(): KoObjectDeclaration? = koDeclarationCastProviderDeclaration as? KoObjectDeclaration
 
-    override fun asInterfaceDeclaration(): KoInterfaceDeclaration? =
-        koDeclarationCastProviderDeclaration as? KoInterfaceDeclaration
+    override fun asInterfaceDeclaration(): KoInterfaceDeclaration? = koDeclarationCastProviderDeclaration as? KoInterfaceDeclaration
 
-    override fun asTypeAliasDeclaration(): KoTypeAliasDeclaration? =
-        koDeclarationCastProviderDeclaration as? KoTypeAliasDeclaration
+    override fun asTypeAliasDeclaration(): KoTypeAliasDeclaration? = koDeclarationCastProviderDeclaration as? KoTypeAliasDeclaration
 
-    override fun asImportAliasDeclaration(): KoImportAliasDeclaration? =
-        koDeclarationCastProviderDeclaration as? KoImportAliasDeclaration
+    override fun asImportAliasDeclaration(): KoImportAliasDeclaration? = koDeclarationCastProviderDeclaration as? KoImportAliasDeclaration
 
-    override fun asKotlinTypeDeclaration(): KoKotlinTypeDeclaration? =
-        koDeclarationCastProviderDeclaration as? KoKotlinTypeDeclaration
+    override fun asKotlinTypeDeclaration(): KoKotlinTypeDeclaration? = koDeclarationCastProviderDeclaration as? KoKotlinTypeDeclaration
 
     override fun asKotlinBasicTypeDeclaration(): KoKotlinTypeDeclaration? =
         if (koDeclarationCastProviderDeclaration?.isKotlinBasicType == true) asKotlinTypeDeclaration() else null
@@ -81,8 +76,7 @@ internal interface KoDeclarationCastProviderCore :
     override fun asTypeParameterDeclaration(): KoTypeParameterDeclaration? =
         koDeclarationCastProviderDeclaration as? KoTypeParameterDeclaration
 
-    override fun asExternalDeclaration(): KoExternalDeclaration? =
-        koDeclarationCastProviderDeclaration as? KoExternalDeclaration
+    override fun asExternalDeclaration(): KoExternalDeclaration? = koDeclarationCastProviderDeclaration as? KoExternalDeclaration
 
     override fun hasClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -90,8 +84,7 @@ internal interface KoDeclarationCastProviderCore :
             else -> asClassDeclaration()?.let { predicate(it) } ?: false
         }
 
-    override fun hasClassDeclarationOf(kClass: KClass<*>): Boolean =
-        kClass.qualifiedName == asClassDeclaration()?.fullyQualifiedName
+    override fun hasClassDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asClassDeclaration()?.fullyQualifiedName
 
     override fun hasObjectDeclaration(predicate: ((KoObjectDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -99,8 +92,7 @@ internal interface KoDeclarationCastProviderCore :
             else -> asObjectDeclaration()?.let { predicate(it) } ?: false
         }
 
-    override fun hasObjectDeclarationOf(kClass: KClass<*>): Boolean =
-        kClass.qualifiedName == asObjectDeclaration()?.fullyQualifiedName
+    override fun hasObjectDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asObjectDeclaration()?.fullyQualifiedName
 
     override fun hasInterfaceDeclaration(predicate: ((KoInterfaceDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -162,6 +154,5 @@ internal interface KoDeclarationCastProviderCore :
             else -> asExternalDeclaration()?.let { predicate(it) } ?: false
         }
 
-    override fun hasExternalDeclarationOf(kClass: KClass<*>): Boolean =
-        kClass.qualifiedName == asExternalDeclaration()?.fullyQualifiedName
+    override fun hasExternalDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asExternalDeclaration()?.fullyQualifiedName
 }
