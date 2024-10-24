@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.core.architecture.DependencyRulesCore
 import com.lemonappdev.konsist.core.architecture.KoArchitectureFiles
 import com.lemonappdev.konsist.core.architecture.KoArchitectureScope
-import com.lemonappdev.konsist.core.architecture.Status
+import com.lemonappdev.konsist.core.architecture.LayerDependencyType
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
@@ -197,7 +197,7 @@ private fun getCheckFailedMessages(
     failedFiles: List<FailedFiles>,
     positiveDependencies: Map<Layer, Set<Layer>>,
     negativeDependencies: Map<Layer, Set<Layer>>,
-    statuses: Map<Layer, Status>,
+    statuses: Map<Layer, LayerDependencyType>,
     additionalMessage: String?,
     testName: String?,
 ): String {
@@ -221,16 +221,16 @@ private fun getCheckFailedMessages(
                 val negativeLayerDependencies = (negativeDependencies.getOrDefault(layer, emptySet()) - layer).map { it.name }
 
                 val message =
-                    when (statuses.getOrDefault(layer, Status.NONE)) {
-                        Status.DEPEND_ON_LAYER -> {
+                    when (statuses.getOrDefault(layer, LayerDependencyType.NONE)) {
+                        LayerDependencyType.DEPEND_ON_LAYER -> {
                             "depends on ${positiveLayerDependencies.joinToString(", ")} assertion failure:"
                         }
 
-                        Status.NOT_DEPEND_ON_LAYER -> {
+                        LayerDependencyType.NOT_DEPEND_ON_LAYER -> {
                             "does not depend on ${negativeLayerDependencies.joinToString(", ")} assertion failure:"
                         }
 
-                        Status.DEPENDENT_ON_NOTHING -> {
+                        LayerDependencyType.DEPENDENT_ON_NOTHING -> {
                             "depends on nothing assertion failure:"
                         }
 
