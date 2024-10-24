@@ -231,8 +231,8 @@ interface KoDeclarationCastProvider : KoBaseProvider {
      * Whether declaration has a specified kotlin basic type declaration.
      *
      * @param predicate The predicate function used to determine if a kotlin basic type declaration satisfies a condition.
-     * @return `true` if the declaration has the specified kotlin basic type declaration (or any kotlin basic type declaration if [predicate] is
-     * `null`), `false` otherwise.
+     * @return `true` if the declaration has the specified kotlin basic type declaration (or any kotlin basic type
+     * declaration if [predicate] is `null`), `false` otherwise.
      */
     fun hasKotlinBasicTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null): Boolean
 
