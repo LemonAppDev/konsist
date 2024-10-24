@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 class DependencyRulesCore : DependencyRules {
     internal val positiveDependencies = mutableMapOf<Layer, Set<Layer>>()
     internal val negativeDependencies = mutableMapOf<Layer, Set<Layer>>()
-    internal val statuses = mutableMapOf<Layer, LayerDependencyType>()
+    internal val statuses = mutableMapOf<Layer, Status>()
 
     internal var allLayers = mutableSetOf<Layer>()
 
@@ -15,7 +15,7 @@ class DependencyRulesCore : DependencyRules {
         layer: Layer,
         vararg layers: Layer,
     ) {
-        requireValidLayers(layer, layers)
+        checkLayers(layer, layers)
 
         with(allLayers) {
             add(this@dependsOn)
@@ -24,33 +24,33 @@ class DependencyRulesCore : DependencyRules {
         }
 
         positiveDependencies[this] = (positiveDependencies.getOrDefault(this, setOf(this))) + layer + layers
-        statuses[this] = LayerDependencyType.DEPEND_ON_LAYER
+        statuses[this] = Status.DEPEND_ON_LAYER
 
-        if (statuses.getOrDefault(layer, LayerDependencyType.NONE) == LayerDependencyType.NONE) {
-            statuses[layer] = LayerDependencyType.NONE
+        if (statuses.getOrDefault(layer, Status.NONE) == Status.NONE) {
+            statuses[layer] = Status.NONE
         }
         layers.onEach {
-            if (statuses.getOrDefault(it, LayerDependencyType.NONE) == LayerDependencyType.NONE) {
-                statuses[it] = LayerDependencyType.NONE
+            if (statuses.getOrDefault(it, Status.NONE) == Status.NONE) {
+                statuses[it] = Status.NONE
             }
         }
     }
 
-    private fun Layer.requireValidLayers(
+    private fun Layer.checkLayers(
         layer: Layer,
-        layers: Array<out Layer>,
+        layers: Array<out Layer>
     ) {
-        requireLayerNotBeingDependentOnItself(this, layer, *layers)
-        requireUniqueLayers(this, layer, *layers)
-        requireNoCircularDependencies(this, layer, *layers)
-        requireValidLayerStatus(false, this, layer, *layers)
+        checkIfLayerHasTheSameValuesAsOtherLayer(this, layer, *layers)
+        checkIfLayerIsDependentOnItself(this, layer, *layers)
+        checkStatusOfLayer(false, this, layer, *layers)
+        checkCircularDependencies(this, layer, *layers)
     }
 
     override fun Layer.doesNotDependOn(
         layer: Layer,
         vararg layers: Layer,
     ) {
-        requireValidLayers(layer, layers)
+        checkLayers(layer, layers)
 
         with(allLayers) {
             add(this@doesNotDependOn)
@@ -59,29 +59,29 @@ class DependencyRulesCore : DependencyRules {
         }
 
         negativeDependencies[this] = setOf(layer) + layers
-        statuses[this] = LayerDependencyType.NOT_DEPEND_ON_LAYER
+        statuses[this] = Status.NOT_DEPEND_ON_LAYER
 
-        if (statuses.getOrDefault(layer, LayerDependencyType.NONE) == LayerDependencyType.NONE) {
-            statuses[layer] = LayerDependencyType.NONE
+        if (statuses.getOrDefault(layer, Status.NONE) == Status.NONE) {
+            statuses[layer] = Status.NONE
         }
         layers.onEach {
-            if (statuses.getOrDefault(it, LayerDependencyType.NONE) == LayerDependencyType.NONE) {
-                statuses[it] = LayerDependencyType.NONE
+            if (statuses.getOrDefault(it, Status.NONE) == Status.NONE) {
+                statuses[it] = Status.NONE
             }
         }
     }
 
     override fun Layer.dependsOnNothing() {
-        requireUniqueLayers(this)
-        requireValidLayerStatus(true, this)
+        checkIfLayerHasTheSameValuesAsOtherLayer(this)
+        checkStatusOfLayer(true, this)
 
         allLayers.add(this)
 
         positiveDependencies[this] = setOf(this)
-        statuses[this] = LayerDependencyType.DEPENDENT_ON_NOTHING
+        statuses[this] = Status.DEPENDENT_ON_NOTHING
     }
 
-    private fun requireLayerNotBeingDependentOnItself(
+    private fun checkIfLayerIsDependentOnItself(
         layer: Layer,
         vararg layers: Layer,
     ) {
@@ -91,13 +91,13 @@ class DependencyRulesCore : DependencyRules {
     }
 
     @Suppress("detekt.ThrowsCount")
-    private fun requireValidLayerStatus(
+    private fun checkStatusOfLayer(
         toBeIndependent: Boolean,
         layer: Layer,
         vararg layers: Layer,
     ) {
         val layerName = layer.name
-        if (statuses[layer] == LayerDependencyType.DEPENDENT_ON_NOTHING) {
+        if (statuses[layer] == Status.DEPENDENT_ON_NOTHING) {
             if (toBeIndependent) {
                 throw KoPreconditionFailedException("Duplicated the dependency that $layerName layer should be depend on nothing.")
             } else {
@@ -106,7 +106,7 @@ class DependencyRulesCore : DependencyRules {
                         "so it cannot depend on ${layers.first().name} layer.",
                 )
             }
-        } else if (statuses[layer] == LayerDependencyType.DEPEND_ON_LAYER) {
+        } else if (statuses[layer] == Status.DEPEND_ON_LAYER) {
             val dependency = positiveDependencies.getOrDefault(layer, emptySet())
 
             if (toBeIndependent) {
@@ -122,7 +122,7 @@ class DependencyRulesCore : DependencyRules {
         }
     }
 
-    private fun requireNoCircularDependencies(
+    private fun checkCircularDependencies(
         layer: Layer,
         vararg layers: Layer,
     ) {
@@ -184,26 +184,29 @@ class DependencyRulesCore : DependencyRules {
         }
     }
 
-    private fun requireUniqueLayers(vararg layers: Layer) {
-        // Using a set to ensure uniqueness based solely on each attribute.
-        val uniqueNames = mutableSetOf<String>()
-        val uniqueDefinedBy = mutableSetOf<String>()
+    private fun checkIfLayerHasTheSameValuesAsOtherLayer(vararg layers: Layer) {
+        val list: MutableList<Layer> =
+            allLayers
+                .distinct()
+                .toMutableList()
 
-        layers.forEach { layer ->
-            if (!uniqueNames.add(layer.name)) {
-                throw KoPreconditionFailedException("""Layer name must be unique. Duplicated name: "${layer.name}"""")
+        layers.forEach {
+            val similarLayer =
+                list.firstOrNull { layerAlreadyDefined ->
+                    it != layerAlreadyDefined && (layerAlreadyDefined.name == it.name || layerAlreadyDefined.definedBy == it.definedBy)
+                }
+
+            if (similarLayer != null) {
+                val value = if (similarLayer.name == it.name) "name: ${it.name}" else "definedBy: ${it.definedBy} "
+                throw KoPreconditionFailedException("Layers have the same name $value.")
+            } else {
+                list += it
             }
-
-            if (!uniqueDefinedBy.add(layer.definedBy)) {
-                throw KoPreconditionFailedException("""Layer definedBy must be unique. Duplicated definedBy: "${layer.definedBy}"""")
-            }
-
-            allLayers.add(layer)
         }
     }
 }
 
-internal enum class LayerDependencyType {
+internal enum class Status {
     DEPEND_ON_LAYER,
     DEPENDENT_ON_NOTHING,
     NONE,
