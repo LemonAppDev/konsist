@@ -38,7 +38,7 @@ class DependencyRulesCore : DependencyRules {
 
     private fun Layer.requireValidLayers(
         layer: Layer,
-        layers: Array<out Layer>
+        layers: Array<out Layer>,
     ) {
         requireLayerNotBeingDependentOnItself(this, layer, *layers)
         requireUniqueLayers(this, layer, *layers)
