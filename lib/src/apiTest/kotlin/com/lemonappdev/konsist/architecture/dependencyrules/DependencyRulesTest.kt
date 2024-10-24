@@ -22,9 +22,7 @@ class DependencyRulesTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage
-            """
-            Layers have the same name name: Name.
-            """.trimIndent()
+            """Layer name must be unique. Duplicated name: "Name""""
     }
 
     @Test
@@ -41,9 +39,7 @@ class DependencyRulesTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage
-            """
-            Layers have the same name definedBy: package.. .
-            """.trimIndent()
+            """Layer definedBy must be unique. Duplicated definedBy: "package..""""
     }
 
     @Test
