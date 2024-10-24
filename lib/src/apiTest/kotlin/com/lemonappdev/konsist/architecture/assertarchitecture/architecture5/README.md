@@ -1,7 +1,8 @@
 # Architecture 5
 
-Test scenario where `Presentation` depends on `Application`, `Application` depends on `Domain` and `Infrastructure`,
-`Domain` depends on `Infrastructure`:
+Test scenario where:
+- `Presentation` layer depends on `Application` layer  
+- `Application` and `Domain` layer depends on `Infrastructure`:
 
 
 ```mermaid
