@@ -67,9 +67,9 @@ class KoTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
             it?.countParameterTypes { parameter -> parameter.type.isKotlinBasicType } shouldBeEqualTo 1
             it?.countParameterTypes { parameter -> parameter.type.isClass } shouldBeEqualTo 0
             it?.hasParameterType { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
-            it?.hasParameterType { parameter -> parameter.type.isExternalType } shouldBeEqualTo false
+            it?.hasParameterType { parameter -> parameter.type.isExternal } shouldBeEqualTo false
             it?.hasAllParameterTypes { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
-            it?.hasAllParameterTypes { parameter -> parameter.type.isExternalType } shouldBeEqualTo false
+            it?.hasAllParameterTypes { parameter -> parameter.type.isExternal } shouldBeEqualTo false
         }
     }
 
@@ -91,9 +91,9 @@ class KoTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
             it?.countParameterTypes { parameter -> parameter.type.isKotlinBasicType } shouldBeEqualTo 1
             it?.countParameterTypes { parameter -> parameter.type.isClass } shouldBeEqualTo 0
             it?.hasParameterType { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
-            it?.hasParameterType { parameter -> parameter.type.isExternalType } shouldBeEqualTo false
+            it?.hasParameterType { parameter -> parameter.type.isExternal } shouldBeEqualTo false
             it?.hasAllParameterTypes { parameter -> parameter.type.isKotlinType || parameter.type.isGenericType } shouldBeEqualTo true
-            it?.hasAllParameterTypes { parameter -> parameter.type.isExternalType } shouldBeEqualTo false
+            it?.hasAllParameterTypes { parameter -> parameter.type.isExternal } shouldBeEqualTo false
         }
     }
 
@@ -110,7 +110,7 @@ class KoTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
         assertSoftly(sut) {
             it?.returnType shouldBeEqualTo null
             it?.hasReturnType { type -> type.isKotlinType } shouldBeEqualTo false
-            it?.hasReturnType { type -> type.isExternalType } shouldBeEqualTo false
+            it?.hasReturnType { type -> type.isExternal } shouldBeEqualTo false
             it?.hasReturnTypeOf(Unit::class) shouldBeEqualTo false
             it?.hasReturnTypeOf(String::class) shouldBeEqualTo false
         }
@@ -129,7 +129,7 @@ class KoTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
         assertSoftly(sut) {
             it?.returnType?.name shouldBeEqualTo "Unit"
             it?.hasReturnType { type -> type.isKotlinType } shouldBeEqualTo true
-            it?.hasReturnType { type -> type.isExternalType } shouldBeEqualTo false
+            it?.hasReturnType { type -> type.isExternal } shouldBeEqualTo false
             it?.hasReturnTypeOf(Unit::class) shouldBeEqualTo true
             it?.hasReturnTypeOf(String::class) shouldBeEqualTo false
         }
@@ -148,7 +148,7 @@ class KoTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
         assertSoftly(sut) {
             it?.returnType?.name shouldBeEqualTo "List<String>"
             it?.hasReturnType { type -> type.isGenericType } shouldBeEqualTo true
-            it?.hasReturnType { type -> type.isExternalType } shouldBeEqualTo false
+            it?.hasReturnType { type -> type.isExternal } shouldBeEqualTo false
             it?.hasReturnTypeOf(String::class) shouldBeEqualTo false
         }
     }
@@ -166,7 +166,7 @@ class KoTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
         assertSoftly(sut) {
             it?.returnType?.name shouldBeEqualTo "SampleClass"
             it?.hasReturnType { type -> type.isClass } shouldBeEqualTo true
-            it?.hasReturnType { type -> type.isExternalType } shouldBeEqualTo false
+            it?.hasReturnType { type -> type.isExternal } shouldBeEqualTo false
             it?.hasReturnTypeOf(SampleClass::class) shouldBeEqualTo true
             it?.hasReturnTypeOf(String::class) shouldBeEqualTo false
         }

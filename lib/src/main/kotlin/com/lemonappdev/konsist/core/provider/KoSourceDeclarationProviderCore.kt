@@ -114,5 +114,5 @@ internal interface KoSourceDeclarationProviderCore :
             sourceDeclaration?.hasObjectDeclarationOf(kClass) == true ||
             sourceDeclaration?.hasInterfaceDeclarationOf(kClass) == true ||
             sourceDeclaration?.hasKotlinTypeDeclarationOf(kClass) == true ||
-            sourceDeclaration?.hasExternalTypeDeclarationOf(kClass) == true
+            sourceDeclaration?.hasExternalDeclarationOf(kClass) == true
 }
