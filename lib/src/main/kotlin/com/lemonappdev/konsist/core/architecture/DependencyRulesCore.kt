@@ -187,15 +187,15 @@ class DependencyRulesCore : DependencyRules {
     private fun requireUniqueLayers(vararg layers: Layer) {
         // Using a set to ensure uniqueness based solely on each attribute.
         val uniqueNames = mutableSetOf<String>()
-        val uniqueDefinedBy = mutableSetOf<String>()
+        val uniqueRootPackages = mutableSetOf<String>()
 
         layers.forEach { layer ->
             if (!uniqueNames.add(layer.name)) {
                 throw KoPreconditionFailedException("""Layer name must be unique. Duplicated name: "${layer.name}"""")
             }
 
-            if (!uniqueDefinedBy.add(layer.definedBy)) {
-                throw KoPreconditionFailedException("""Layer definedBy must be unique. Duplicated definedBy: "${layer.definedBy}"""")
+            if (!uniqueRootPackages.add(layer.rootPackage)) {
+                throw KoPreconditionFailedException("""Layer rootPackage must be unique. Duplicated rootPackage: "${layer.rootPackage}"""")
             }
 
             allLayers.add(layer)
