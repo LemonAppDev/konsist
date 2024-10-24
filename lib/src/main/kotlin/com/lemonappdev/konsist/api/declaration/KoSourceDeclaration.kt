@@ -1,11 +1,10 @@
 package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoStarProjectionProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
-import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoTypeProvider
 
 /**
  * Represents a source declaration in the Kotlin codebase.
@@ -20,6 +19,5 @@ interface KoSourceDeclaration :
     KoBaseProvider,
     KoNameProvider,
     KoTextProvider,
-    KoTypeDeclarationProvider,
-    KoTypeProvider,
+    KoDeclarationCastProvider,
     KoStarProjectionProvider

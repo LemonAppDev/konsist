@@ -28,9 +28,7 @@ internal class KoStarProjectionDeclarationCore private constructor(
 
     override val psiElement: PsiElement by lazy { ktTypeProjection }
 
-    override val koTypeDeclarationProviderDeclaration: KoSourceDeclaration by lazy { sourceDeclaration }
-
-    override val koTypeProviderDeclaration: KoSourceDeclaration by lazy { sourceDeclaration }
+    override val koDeclarationCastProviderDeclaration: KoSourceDeclaration? by lazy { sourceDeclaration }
 
     override val name: String by lazy { text }
 

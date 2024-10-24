@@ -36,7 +36,6 @@ class KoTypeDeclarationForKoStarProjectionProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration

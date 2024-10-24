@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 
 /**
  * An interface representing a Kotlin declaration that provides access to its upper bounds.
@@ -9,7 +9,7 @@ interface KoUpperBoundsProvider : KoBaseProvider {
     /**
      * Upper bounds of the declaration.
      */
-    val upperBounds: List<KoSourceDeclaration>
+    val upperBounds: List<KoTypeDeclaration>
 
     /**
      * The number of upper bounds.
@@ -22,7 +22,7 @@ interface KoUpperBoundsProvider : KoBaseProvider {
      * @param predicate The predicate function to determine if an upper bound satisfies a condition.
      * @return The number of upper bounds in the declaration.
      */
-    fun countUpperBounds(predicate: (KoSourceDeclaration) -> Boolean): Int
+    fun countUpperBounds(predicate: (KoTypeDeclaration) -> Boolean): Int
 
     /**
      * Determines whatever declaration has any upper bound.
@@ -77,7 +77,7 @@ interface KoUpperBoundsProvider : KoBaseProvider {
      * @param predicate A function that defines the condition to be met by an upper bound declaration.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasUpperBound(predicate: (KoSourceDeclaration) -> Boolean): Boolean
+    fun hasUpperBound(predicate: (KoTypeDeclaration) -> Boolean): Boolean
 
     /**
      * Determines whether the declaration has all upper bounds that satisfy the provided predicate.
@@ -88,5 +88,5 @@ interface KoUpperBoundsProvider : KoBaseProvider {
      * @param predicate A function that defines the condition to be met by upper bound declarations.
      * @return `true` if all upper bound declarations satisfy the predicate, `false` otherwise.
      */
-    fun hasAllUpperBounds(predicate: (KoSourceDeclaration) -> Boolean): Boolean
+    fun hasAllUpperBounds(predicate: (KoTypeDeclaration) -> Boolean): Boolean
 }

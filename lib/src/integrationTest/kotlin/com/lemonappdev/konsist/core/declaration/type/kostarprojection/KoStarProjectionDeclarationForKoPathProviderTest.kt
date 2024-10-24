@@ -16,7 +16,6 @@ class KoStarProjectionDeclarationForKoPathProviderTest {
                 .functions()
                 .returnTypes
                 .firstOrNull()
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration as? KoStarProjectionDeclaration
@@ -36,7 +35,6 @@ class KoStarProjectionDeclarationForKoPathProviderTest {
                 .functions()
                 .returnTypes
                 .firstOrNull()
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration as? KoStarProjectionDeclaration
@@ -58,7 +56,6 @@ class KoStarProjectionDeclarationForKoPathProviderTest {
                 .functions()
                 .returnTypes
                 .firstOrNull()
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration as? KoStarProjectionDeclaration
@@ -80,7 +77,6 @@ class KoStarProjectionDeclarationForKoPathProviderTest {
                 .functions()
                 .returnTypes
                 .firstOrNull()
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration as? KoStarProjectionDeclaration

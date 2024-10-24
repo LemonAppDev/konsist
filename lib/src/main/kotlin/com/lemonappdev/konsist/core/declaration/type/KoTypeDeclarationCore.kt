@@ -9,6 +9,10 @@ import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
+import com.lemonappdev.konsist.core.provider.KoDeclarationCastProviderCore
+import com.lemonappdev.konsist.core.provider.KoFunctionTypeDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoGenericTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsFunctionTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsGenericTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsMutableTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsNullableProviderCore
@@ -23,16 +27,17 @@ import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoStarProjectionProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
-import com.lemonappdev.konsist.core.provider.KoTypeDeclarationProviderCore
-import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtFunctionType
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtNullableType
 import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
+import org.jetbrains.kotlin.psi.KtUserType
 
 internal class KoTypeDeclarationCore private constructor(
     override val ktTypeReference: KtTypeReference?,
@@ -51,16 +56,19 @@ internal class KoTypeDeclarationCore private constructor(
     KoContainingDeclarationProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore,
-    KoTypeProviderCore,
     KoStarProjectionProviderCore,
     KoSourceAndAliasTypeProviderCore,
+    KoGenericTypeProviderCore,
     KoIsGenericTypeProviderCore,
+    KoIsFunctionTypeProviderCore,
     KoPackageProviderCore,
     KoResideInPackageProviderCore,
     KoAnnotationProviderCore,
-    KoTypeDeclarationProviderCore,
+    KoDeclarationCastProviderCore,
     KoSourceDeclarationProviderCore,
-    KoIsMutableTypeProviderCore {
+    KoIsMutableTypeProviderCore,
+    KoTypeArgumentProviderCore,
+    KoFunctionTypeDeclarationProviderCore {
     // Ensure that at least one of the parameters is not null
     init {
         require(ktTypeReference != null || ktNameReferenceExpression != null || ktTypeProjection != null) {
@@ -78,11 +86,27 @@ internal class KoTypeDeclarationCore private constructor(
             ?: error("KtTypeReference, KtNameReferenceExpression and KtTypeProjection are null")
     }
 
+    override val ktUserType: KtUserType? by lazy {
+        ktTypeReference
+            ?.children
+            // The last item is chosen because when a type is preceded by an annotation or modifier,
+            // the type being searched for is the last item in the list.
+            ?.filterIsInstance<KtUserType>()
+            ?.lastOrNull()
+    }
+
+    override val ktFunctionType: KtFunctionType? by lazy {
+        ktTypeReference
+            ?.children
+            // The last item is chosen because when a type is preceded by an annotation or modifier,
+            // the type being searched for is the last item in the list.
+            ?.filterIsInstance<KtFunctionType>()
+            ?.lastOrNull()
+    }
+
     override val ktAnnotated: KtAnnotated? by lazy { ktTypeReference }
 
-    override val koTypeDeclarationProviderDeclaration: KoSourceDeclaration by lazy { sourceDeclaration }
-
-    override val koTypeProviderDeclaration: KoSourceDeclaration by lazy { sourceDeclaration }
+    override val koDeclarationCastProviderDeclaration: KoSourceDeclaration? by lazy { sourceDeclaration }
 
     override val name: String by lazy {
         val typeReference =
@@ -103,10 +127,10 @@ internal class KoTypeDeclarationCore private constructor(
 
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
-    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
-    override val isGenericType: Boolean by lazy { super<KoTypeProviderCore>.isGenericType }
+    @Deprecated("Will be removed in version 0.18.0")
+    override val isGenericType: Boolean by lazy { super<KoIsGenericTypeProviderCore>.isGenericType }
 
-    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
+    @Deprecated("Will be removed in version 0.18.0")
     override val isNullable: Boolean by lazy { super<KoIsNullableProviderCore>.isNullable }
 
     override fun toString(): String = text

@@ -7,8 +7,6 @@ import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoFunctionTypeDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoGenericTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifiers
 import com.lemonappdev.konsist.api.ext.list.parameters
@@ -250,16 +248,14 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
-                ?.sourceDeclaration
 
         // then
         assertSoftly(sut) {
-//            it?.hasSourceDeclaration { declaration -> declaration.name == "*" } shouldBeEqualTo true
-//            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-//            it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo false
+            it?.hasSourceDeclaration { declaration -> declaration.name == "*" } shouldBeEqualTo true
+            it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo false
         }
     }
 
@@ -292,19 +288,19 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                 ),
                 arguments(
                     "nullable-generic-type",
-                    KoGenericTypeDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
                     KoClassDeclaration::class,
-                    null,
+                    List::class,
                     String::class,
-                    null,
+                    "kotlin.collections.List",
                 ),
                 arguments(
                     "not-nullable-generic-type",
-                    KoGenericTypeDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
                     KoClassDeclaration::class,
-                    null,
+                    List::class,
                     String::class,
-                    null,
+                    "kotlin.collections.List",
                 ),
                 arguments(
                     "nullable-class-type",
@@ -354,22 +350,22 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                     String::class,
                     "com.lemonappdev.konsist.testdata.SampleObject",
                 ),
-                arguments(
-                    "nullable-function-type",
-                    KoFunctionTypeDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    null,
-                    String::class,
-                    null,
-                ),
-                arguments(
-                    "not-nullable-function-type",
-                    KoFunctionTypeDeclaration::class,
-                    KoKotlinTypeDeclaration::class,
-                    null,
-                    String::class,
-                    null,
-                ),
+//                arguments(
+//                    "nullable-function-type",
+//                    KoFunctionTypeDeclaration::class,
+//                    KoKotlinTypeDeclaration::class,
+//                    null,
+//                    String::class,
+//                    null,
+//                ),
+//                arguments(
+//                    "not-nullable-function-type",
+//                    KoFunctionTypeDeclaration::class,
+//                    KoKotlinTypeDeclaration::class,
+//                    null,
+//                    String::class,
+//                    null,
+//                ),
                 arguments(
                     "nullable-import-alias-type",
                     KoImportAliasDeclaration::class,

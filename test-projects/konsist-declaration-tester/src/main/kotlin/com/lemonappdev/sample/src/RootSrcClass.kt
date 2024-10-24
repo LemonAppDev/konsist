@@ -32,10 +32,6 @@ var rootSrcProperty: RootSrcClass = RootSrcClass("")
         if (true) field = value
     }
 
-val rootSrcPropertyWithFunctionType: () -> Unit = {}
-
-val rootSrcPropertyWithGenericType: List<Set<String>> = emptyList()
-
 val rootSrcPropertyWithImportAliasType: ImportAlias = RootSrcObject
 
 val <T> T.rootSrcPropertyWithTypeParameter: T

@@ -32,10 +32,6 @@ var appPropertyTest: AppClassTest = AppClassTest("")
         if (true) field = value
     }
 
-val appPropertyWithFunctionTypeTest: () -> Unit = {}
-
-val appPropertyWithGenericTypeTest: List<Set<String>> = emptyList()
-
 val appPropertyWithImportAliasTypeTest: ImportAlias = AppTestClass1()
 
 val <T> T.appPropertyWithTypeParameterTest: T

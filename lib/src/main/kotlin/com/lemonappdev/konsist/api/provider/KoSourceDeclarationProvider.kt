@@ -37,7 +37,7 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
      *     .assertTrue { it.isInterface }
      * ```
      */
-    val sourceDeclaration: KoSourceDeclaration
+    val sourceDeclaration: KoSourceDeclaration?
 
     /**
      * Determines whatever type has a specified source declaration.

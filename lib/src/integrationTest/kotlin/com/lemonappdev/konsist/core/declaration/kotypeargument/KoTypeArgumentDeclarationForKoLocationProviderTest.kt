@@ -14,7 +14,6 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -30,7 +29,6 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.projectPath
@@ -40,7 +38,6 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -61,7 +58,6 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -77,7 +73,6 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.projectPath
@@ -87,7 +82,6 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -108,7 +102,6 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -124,7 +117,6 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.projectPath
@@ -134,7 +126,6 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -155,7 +146,6 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -171,7 +161,6 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.projectPath
@@ -181,7 +170,6 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -202,7 +190,6 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -218,7 +205,6 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.projectPath
@@ -228,7 +214,6 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -249,7 +234,6 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
@@ -265,7 +249,6 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.projectPath
@@ -275,7 +258,6 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 .properties()
                 .first()
                 .type
-                ?.asGenericTypeDeclaration()
                 ?.typeArguments
                 ?.firstOrNull()
 
