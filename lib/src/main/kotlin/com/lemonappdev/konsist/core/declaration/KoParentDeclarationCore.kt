@@ -64,6 +64,8 @@ internal class KoParentDeclarationCore(
 
     override val ktTypeProjection: KtTypeProjection? by lazy { null }
 
+    override val koDeclarationCastProviderDeclaration: KoSourceDeclaration by lazy { sourceDeclaration }
+
     override val sourceDeclaration: KoSourceDeclaration by lazy {
         val name =
             ktSuperTypeListEntry
