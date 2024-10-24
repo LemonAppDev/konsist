@@ -21,7 +21,7 @@ data class Layer(
 ) {
     init {
         require(name.isNotBlank()) { "name is blank" }
-        require(rootPackage.isNotBlank()) { "definedBy is blank" }
+        require(rootPackage.isNotBlank()) { "rootPackage is blank" }
 
         val pattern = Regex(pattern = LocationUtil.REGEX_PACKAGE_NAME_END_TWO_DOTS)
         val twoDotsAtTheEndPattern = Regex(pattern = LocationUtil.REGEX_PACKAGE_NAME_END_TWO_DOTS)
