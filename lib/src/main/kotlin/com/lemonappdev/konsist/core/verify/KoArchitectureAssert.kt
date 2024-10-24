@@ -99,7 +99,7 @@ private fun validateAllLayersAreValid(
         dependencyRules.allLayers
             .all {
                 files
-                    .withPackage(it.definedBy)
+                    .withPackage(it.rootPackage)
                     .isNotEmpty()
             }
 
@@ -109,7 +109,7 @@ private fun validateAllLayersAreValid(
                 .allLayers
                 .first {
                     files
-                        .withPackage(it.definedBy)
+                        .withPackage(it.rootPackage)
                         .isEmpty()
                 }
         throw KoPreconditionFailedException("Layer ${layer.name} doesn't contain any files.")
@@ -149,12 +149,12 @@ private fun validateLayersContainingFailedFiles(
             val otherLayers = (dependencyRules.allLayers - layers)
 
             files
-                .withPackage(layer.definedBy)
+                .withPackage(layer.rootPackage)
                 .onEach {
                     otherLayers.forEach { otherLayer ->
                         val imports =
                             it.imports.filter { import ->
-                                LocationUtil.resideInLocation(otherLayer.definedBy, import.name)
+                                LocationUtil.resideInLocation(otherLayer.rootPackage, import.name)
                             }
 
                         if (imports.isNotEmpty()) {
@@ -168,12 +168,12 @@ private fun validateLayersContainingFailedFiles(
         .negativeDependencies
         .forEach { (layer, layers) ->
             files
-                .withPackage(layer.definedBy)
+                .withPackage(layer.rootPackage)
                 .onEach {
                     layers.forEach { otherLayer ->
                         val imports =
                             it.imports.filter { import ->
-                                LocationUtil.resideInLocation(otherLayer.definedBy, import.name)
+                                LocationUtil.resideInLocation(otherLayer.rootPackage, import.name)
                             }
 
                         if (imports.isNotEmpty()) {

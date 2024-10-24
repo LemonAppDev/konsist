@@ -7,21 +7,21 @@ import com.lemonappdev.konsist.core.util.LocationUtil
  * Represents a layer within an architecture.
  *
  * @param name The name of the layer.
- * @param definedBy The package that defines this layer. Layer contains all classes from this package and its subpackages.
- * Layer definition must end with two dots, e.g., `com.app.domain..`.
+ * @param rootPackage The root package that defines this layer. The layer contains all classes from this package and its
+ * subpackages. The root package definition must end with two dots, e.g., `com.app.domain..`.
  *
  * @throws KoPreconditionFailedException if:
- * - The [definedBy] package starts with a single dot.
- * - The [definedBy] package doesn't end with '..' (when including subpackages).
- * - The [definedBy] package contains more than two consecutive dots.
+ * - The [rootPackage] starts with a single dot.
+ * - The [rootPackage] must end with '..' (when including subpackages).
+ * - The [rootPackage] contains more than two consecutive dots.
  */
 data class Layer(
     internal val name: String,
-    internal val definedBy: String,
+    internal val rootPackage: String,
 ) {
     init {
         require(name.isNotBlank()) { "name is blank" }
-        require(definedBy.isNotBlank()) { "definedBy is blank" }
+        require(rootPackage.isNotBlank()) { "definedBy is blank" }
 
         val pattern = Regex(pattern = LocationUtil.REGEX_PACKAGE_NAME_END_TWO_DOTS)
         val twoDotsAtTheEndPattern = Regex(pattern = LocationUtil.REGEX_PACKAGE_NAME_END_TWO_DOTS)
@@ -32,25 +32,25 @@ data class Layer(
         val withoutFewDotsInOnePlacePattern =
             Regex(pattern = LocationUtil.REGEX_PACKAGE_NAME_WITHOUT_FEW_DOTS_IN_ONE_PLACE)
 
-        if (!definedBy.matches(pattern)) {
-            if (!definedBy.matches(withoutSingleDotAtTheBeginningPattern)) {
+        if (!rootPackage.matches(pattern)) {
+            if (!rootPackage.matches(withoutSingleDotAtTheBeginningPattern)) {
                 throw KoPreconditionFailedException(
                     "Invalid package definition for layer '$name'. " +
-                        "Package names cannot start with a single dot. Current definition: $definedBy",
+                        "Package names cannot start with a single dot. Current definition: $rootPackage",
                 )
             }
 
-            if (!definedBy.matches(twoDotsAtTheEndPattern)) {
+            if (!rootPackage.matches(twoDotsAtTheEndPattern)) {
                 throw KoPreconditionFailedException(
                     "Invalid package definition for layer '$name'. " +
-                        "To include subpackages, the definition must end with '..'. Current definition: $definedBy",
+                        "To include subpackages, the definition must end with '..'. Current definition: $rootPackage",
                 )
             }
 
-            if (!definedBy.matches(withoutFewDotsInOnePlacePattern)) {
+            if (!rootPackage.matches(withoutFewDotsInOnePlacePattern)) {
                 throw KoPreconditionFailedException(
                     "Invalid package definition for layer '$name'. " +
-                        "Package names cannot contain more than two consecutive dots. Current definition: $definedBy",
+                        "Package names cannot contain more than two consecutive dots. Current definition: $rootPackage",
                 )
             }
         }

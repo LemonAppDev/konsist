@@ -26,7 +26,7 @@ class DependencyRulesTest {
     }
 
     @Test
-    fun `throws an exception when a layer with the same definedBy already exists`() {
+    fun `throws an exception when a layer with the same rootPackage already exists`() {
         // given
         val layer1 = Layer("Name1", "package..")
         val layer2 = Layer("Name2", "package..")
@@ -39,7 +39,7 @@ class DependencyRulesTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage
-            """Layer definedBy must be unique. Duplicated definedBy: "package..""""
+            """Layer rootPackage must be unique. Duplicated rootPackage: "package..""""
     }
 
     @Test
