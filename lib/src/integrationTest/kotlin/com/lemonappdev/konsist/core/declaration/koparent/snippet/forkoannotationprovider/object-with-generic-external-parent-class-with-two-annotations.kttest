@@ -1,5 +1,0 @@
-import com.lemonappdev.konsist.externalsample.SampleExternalGenericClass
-import com.lemonappdev.konsist.testdata.SampleAnnotation1
-import com.lemonappdev.konsist.testdata.SampleAnnotation2
-
-object SampleObject : @SampleAnnotation1 @SampleAnnotation2 SampleExternalGenericClass<Int>()

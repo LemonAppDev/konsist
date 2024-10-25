@@ -172,7 +172,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideInPackage("com.lemonappdev") shouldBeEqualTo false
+        sut.resideInPackage("com") shouldBeEqualTo false
     }
 
     @Test
@@ -185,7 +185,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideInPackage("com.lemonappdev..") shouldBeEqualTo true
+        sut.resideInPackage("com..") shouldBeEqualTo true
     }
 
     @Test
@@ -198,7 +198,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideOutsidePackage("com.lemonappdev..") shouldBeEqualTo false
+        sut.resideOutsidePackage("com..") shouldBeEqualTo false
     }
 
     @Test
@@ -211,7 +211,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideOutsidePackage("com.lemonappdev") shouldBeEqualTo true
+        sut.resideOutsidePackage("com") shouldBeEqualTo true
     }
 
     @Test
@@ -224,7 +224,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideInPackage("com.lemonappdev") shouldBeEqualTo false
+        sut.resideInPackage("com") shouldBeEqualTo false
     }
 
     @Test
@@ -237,7 +237,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideInPackage("com.lemonappdev..") shouldBeEqualTo true
+        sut.resideInPackage("com..") shouldBeEqualTo true
     }
 
     @Test
@@ -250,7 +250,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideOutsidePackage("com.lemonappdev..") shouldBeEqualTo false
+        sut.resideOutsidePackage("com..") shouldBeEqualTo false
     }
 
     @Test
@@ -263,7 +263,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideOutsidePackage("com.lemonappdev") shouldBeEqualTo true
+        sut.resideOutsidePackage("com") shouldBeEqualTo true
     }
 
     @Test
@@ -276,7 +276,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideInPackage("com.lemonappdev") shouldBeEqualTo false
+        sut.resideInPackage("com") shouldBeEqualTo false
     }
 
     @Test
@@ -289,7 +289,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideInPackage("com.lemonappdev..") shouldBeEqualTo true
+        sut.resideInPackage("com..") shouldBeEqualTo true
     }
 
     @Test
@@ -302,7 +302,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideOutsidePackage("com.lemonappdev..") shouldBeEqualTo false
+        sut.resideOutsidePackage("com..") shouldBeEqualTo false
     }
 
     @Test
@@ -315,7 +315,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideOutsidePackage("com.lemonappdev") shouldBeEqualTo true
+        sut.resideOutsidePackage("com") shouldBeEqualTo true
     }
 
     @Test
@@ -328,7 +328,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideInPackage("com.lemonappdev.konsist") shouldBeEqualTo false
+        sut.resideInPackage("com") shouldBeEqualTo false
     }
 
     @Test
@@ -341,7 +341,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideInPackage("com.lemonappdev.konsist..") shouldBeEqualTo true
+        sut.resideInPackage("com..") shouldBeEqualTo true
     }
 
     @Test
@@ -354,7 +354,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideOutsidePackage("com.lemonappdev.konsist..") shouldBeEqualTo false
+        sut.resideOutsidePackage("com..") shouldBeEqualTo false
     }
 
     @Test
@@ -367,7 +367,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideOutsidePackage("com.lemonappdev.konsist") shouldBeEqualTo true
+        sut.resideOutsidePackage("com") shouldBeEqualTo true
     }
 
     @Test
@@ -380,7 +380,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideInPackage("com.lemonappdev.konsist") shouldBeEqualTo false
+        sut.resideInPackage("com") shouldBeEqualTo false
     }
 
     @Test
@@ -393,7 +393,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideInPackage("com.lemonappdev.konsist..") shouldBeEqualTo true
+        sut.resideInPackage("com..") shouldBeEqualTo true
     }
 
     @Test
@@ -406,7 +406,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideOutsidePackage("com.lemonappdev.konsist..") shouldBeEqualTo false
+        sut.resideOutsidePackage("com..") shouldBeEqualTo false
     }
 
     @Test
@@ -419,7 +419,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideOutsidePackage("com.lemonappdev.konsist") shouldBeEqualTo true
+        sut.resideOutsidePackage("com") shouldBeEqualTo true
     }
 
     @Test
@@ -432,7 +432,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideInPackage("com.lemonappdev.konsist") shouldBeEqualTo false
+        sut.resideInPackage("com") shouldBeEqualTo false
     }
 
     @Test
@@ -445,7 +445,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideInPackage("com.lemonappdev.konsist..") shouldBeEqualTo true
+        sut.resideInPackage("com..") shouldBeEqualTo true
     }
 
     @Test
@@ -458,7 +458,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideOutsidePackage("com.lemonappdev.konsist..") shouldBeEqualTo false
+        sut.resideOutsidePackage("com..") shouldBeEqualTo false
     }
 
     @Test
@@ -471,7 +471,7 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
                 .first()
 
         // then
-        sut.resideOutsidePackage("com.lemonappdev.konsist") shouldBeEqualTo true
+        sut.resideOutsidePackage("com") shouldBeEqualTo true
     }
 
     private fun getSnippetFile(fileName: String) =

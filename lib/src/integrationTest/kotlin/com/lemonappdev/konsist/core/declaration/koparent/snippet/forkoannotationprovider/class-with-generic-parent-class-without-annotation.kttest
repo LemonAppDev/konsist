@@ -1,3 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleCollection1
-
-class SampleClass() : SampleCollection1<Int>()
