@@ -240,6 +240,5 @@ class KoParentDeclarationForKoPackageProviderTest {
         sut.packagee?.name shouldBeEqualTo "com.samplepackage"
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koparent/snippet/forkopackageprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koparent/snippet/forkopackageprovider/", fileName)
 }

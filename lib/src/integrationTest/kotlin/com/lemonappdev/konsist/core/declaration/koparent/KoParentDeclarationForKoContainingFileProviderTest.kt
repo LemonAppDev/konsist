@@ -863,6 +863,6 @@ class KoParentDeclarationForKoContainingFileProviderTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/koparent/snippet/forkocontainingfileprovider/",
-            fileName
+            fileName,
         )
 }

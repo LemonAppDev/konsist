@@ -85,7 +85,8 @@ class KoObjectDeclarationForKoParentClassProviderTest {
             hasParentClassesWithAllNames(emptyList()) shouldBeEqualTo true
             hasParentClassesWithAllNames(emptySet()) shouldBeEqualTo true
             hasAllParentClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
-            hasAllParentClasses { (it.sourceDeclaration as? KoVisibilityModifierProvider)?.hasPrivateModifier == true } shouldBeEqualTo false
+            hasAllParentClasses { (it.sourceDeclaration as? KoVisibilityModifierProvider)?.hasPrivateModifier == true } shouldBeEqualTo
+                false
             hasParentClassWithName("SampleParentClass") shouldBeEqualTo true
             hasParentClassWithName("OtherClass") shouldBeEqualTo false
             hasParentClassWithName("SampleParentClass", "OtherClass") shouldBeEqualTo true
@@ -149,7 +150,8 @@ class KoObjectDeclarationForKoParentClassProviderTest {
             hasParentClassesWithAllNames(emptyList()) shouldBeEqualTo true
             hasParentClassesWithAllNames(emptySet()) shouldBeEqualTo true
             hasAllParentClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
-            hasAllParentClasses { (it.sourceDeclaration as? KoVisibilityModifierProvider)?.hasPrivateModifier == true } shouldBeEqualTo false
+            hasAllParentClasses { (it.sourceDeclaration as? KoVisibilityModifierProvider)?.hasPrivateModifier == true } shouldBeEqualTo
+                false
             hasParentClassWithName("SampleParentClass") shouldBeEqualTo true
             hasParentClassWithName("OtherClass") shouldBeEqualTo false
             hasParentClassWithName("SampleParentClass", "OtherClass") shouldBeEqualTo true
@@ -207,7 +209,8 @@ class KoObjectDeclarationForKoParentClassProviderTest {
         // then
         assertSoftly(sut) {
             parentClass?.name shouldBeEqualTo "SampleParentClassWithDuplicatedName"
-            parentClass?.asClassDeclaration()?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleParentClassWithDuplicatedName"
+            parentClass?.asClassDeclaration()?.fullyQualifiedName shouldBeEqualTo
+                "com.lemonappdev.konsist.testdata.SampleParentClassWithDuplicatedName"
         }
     }
 

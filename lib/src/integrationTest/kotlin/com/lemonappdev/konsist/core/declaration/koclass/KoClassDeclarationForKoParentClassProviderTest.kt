@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.koclass
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleParentClass
@@ -85,7 +84,8 @@ class KoClassDeclarationForKoParentClassProviderTest {
             hasParentClassesWithAllNames(emptyList()) shouldBeEqualTo true
             hasParentClassesWithAllNames(emptySet()) shouldBeEqualTo true
             hasAllParentClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
-            hasAllParentClasses { (it.sourceDeclaration as? KoVisibilityModifierProvider)?.hasPrivateModifier == true } shouldBeEqualTo false
+            hasAllParentClasses { (it.sourceDeclaration as? KoVisibilityModifierProvider)?.hasPrivateModifier == true } shouldBeEqualTo
+                false
             hasParentClassWithName("SampleParentClass") shouldBeEqualTo true
             hasParentClassWithName("OtherClass") shouldBeEqualTo false
             hasParentClassWithName("SampleParentClass", "OtherClass") shouldBeEqualTo true
@@ -149,7 +149,8 @@ class KoClassDeclarationForKoParentClassProviderTest {
             hasParentClassesWithAllNames(emptyList()) shouldBeEqualTo true
             hasParentClassesWithAllNames(emptySet()) shouldBeEqualTo true
             hasAllParentClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
-            hasAllParentClasses { (it.sourceDeclaration as? KoVisibilityModifierProvider)?.hasPrivateModifier == true } shouldBeEqualTo false
+            hasAllParentClasses { (it.sourceDeclaration as? KoVisibilityModifierProvider)?.hasPrivateModifier == true } shouldBeEqualTo
+                false
             hasParentClassWithName("SampleParentClass") shouldBeEqualTo true
             hasParentClassWithName("OtherClass") shouldBeEqualTo false
             hasParentClassWithName("SampleParentClass", "OtherClass") shouldBeEqualTo true
@@ -207,7 +208,10 @@ class KoClassDeclarationForKoParentClassProviderTest {
         // then
         assertSoftly(sut) {
             parentClass?.name shouldBeEqualTo "SampleParentClassWithDuplicatedName"
-//            parentClass?.asClassDeclaration()?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleParentClassWithDuplicatedName"
+            parentClass
+                ?.asClassDeclaration()
+                ?.fullyQualifiedName
+                .shouldBeEqualTo("com.lemonappdev.konsist.testdata.SampleParentClassWithDuplicatedName")
         }
     }
 

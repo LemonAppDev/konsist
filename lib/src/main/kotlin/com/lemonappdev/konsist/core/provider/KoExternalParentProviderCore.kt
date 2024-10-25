@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
-import com.lemonappdev.konsist.api.ext.list.sourceDeclarations
 import com.lemonappdev.konsist.api.provider.KoExternalParentProvider
 import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
 import kotlin.reflect.KClass
@@ -97,5 +96,4 @@ internal interface KoExternalParentProviderCore :
             names.isEmpty() -> hasExternalParents(indirectParents)
             else -> names.all { checkIfParentOf(it, externalParents(indirectParents)) }
         }
-
 }

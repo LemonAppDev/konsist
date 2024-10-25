@@ -108,11 +108,12 @@ class KoParentDeclarationTest {
                 .first()
 
         // then
-        val text = """
+        val text =
+            """
             SomeParentClass(
                 "some parent constructor param here"
             )
-        """.trimIndent()
+            """.trimIndent()
 
         sut.toString() shouldBeEqualTo text
     }
@@ -218,11 +219,12 @@ class KoParentDeclarationTest {
                 .first()
 
         // then
-        val text = """
+        val text =
+            """
             SampleClassWithParameter(
                 "some parent constructor param here"
             )
-        """.trimIndent()
+            """.trimIndent()
 
         sut.toString() shouldBeEqualTo text
     }
@@ -485,11 +487,12 @@ class KoParentDeclarationTest {
                 .first()
 
         // then
-        val text = """
+        val text =
+            """
             SomeParentClass(
                 "some parent constructor param here"
             )
-        """.trimIndent()
+            """.trimIndent()
 
         sut.toString() shouldBeEqualTo text
     }
@@ -583,11 +586,12 @@ class KoParentDeclarationTest {
                 .first()
 
         // then
-        val text = """
+        val text =
+            """
             SampleClassWithParameter(
                 "some parent constructor param here"
             )
-        """.trimIndent()
+            """.trimIndent()
 
         sut.toString() shouldBeEqualTo text
     }
@@ -681,11 +685,12 @@ class KoParentDeclarationTest {
                 .first()
 
         // then
-        val text = """
+        val text =
+            """
             SampleExternalClassWithParameter(
                 "some parent constructor param here"
             )
-        """.trimIndent()
+            """.trimIndent()
 
         sut.toString() shouldBeEqualTo text
     }

@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.koclass
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.ext.provider.print
 import com.lemonappdev.konsist.externalsample.SampleExternalClass
 import com.lemonappdev.konsist.externalsample.SampleExternalGenericInterface
 import com.lemonappdev.konsist.externalsample.SampleExternalInterface

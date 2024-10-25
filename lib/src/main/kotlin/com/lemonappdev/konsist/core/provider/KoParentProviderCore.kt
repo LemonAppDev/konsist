@@ -2,11 +2,8 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
-import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoParentDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
-import com.lemonappdev.konsist.core.model.getClass
-import com.lemonappdev.konsist.core.model.getInterface
 import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
@@ -19,7 +16,8 @@ internal interface KoParentProviderCore :
     val ktClassOrObject: KtClassOrObject
 
     override fun parents(indirectParents: Boolean): List<KoParentDeclaration> {
-            val directParentDeclarations =  ktClassOrObject
+        val directParentDeclarations =
+            ktClassOrObject
                 .getSuperTypeList()
                 ?.children
                 ?.filterIsInstance<KtSuperTypeListEntry>()

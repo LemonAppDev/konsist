@@ -3,7 +3,19 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoModuleProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoPackageProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
+import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTypeArgumentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.model.getClass
@@ -13,7 +25,6 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationCastProviderCore
-import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
@@ -24,9 +35,9 @@ import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.com.intellij.util.containers.ContainerUtil.filterIsInstance
-import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtConstructorCalleeExpression
 import org.jetbrains.kotlin.psi.KtDeclarationModifierList
@@ -46,16 +57,16 @@ internal class KoParentDeclarationCore(
     KoPackageDeclarationProviderCore,
     KoResideInPackageProviderCore,
     KoSourceDeclarationProviderCore,
+    KoTypeArgumentProviderCore,
     KoTextProviderCore,
-    KoPathProviderCore,
-    KoLocationProviderCore,
     KoContainingFileProviderCore,
     KoContainingDeclarationProviderCore,
-    KoModuleProviderCore,
-    KoSourceSetProviderCore,
-    KoAnnotationProviderCore,
+    KoPathProviderCore,
+    KoLocationProviderCore,
     KoDeclarationCastProviderCore,
-    KoTypeArgumentProviderCore {
+    KoAnnotationProviderCore,
+    KoModuleProviderCore,
+    KoSourceSetProviderCore {
     override val psiElement: PsiElement by lazy { ktSuperTypeListEntry }
 
     override val ktElement: KtElement by lazy { ktSuperTypeListEntry }
@@ -71,11 +82,12 @@ internal class KoParentDeclarationCore(
     override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy {
         val children = ktSuperTypeListEntry.children
 
-        val targetChildren = children
-            .filterIsInstance<KtConstructorCalleeExpression>()
-            .firstOrNull()
-            ?.children
-            ?: children
+        val targetChildren =
+            children
+                .filterIsInstance<KtConstructorCalleeExpression>()
+                .firstOrNull()
+                ?.children
+                ?: children
 
         targetChildren
             .firstOrNull { it is KtTypeReference }

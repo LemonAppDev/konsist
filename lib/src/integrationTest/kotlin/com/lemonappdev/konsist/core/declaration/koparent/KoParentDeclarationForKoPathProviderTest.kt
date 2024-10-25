@@ -1,13 +1,9 @@
 package com.lemonappdev.konsist.core.declaration.koparent
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
-import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.ext.list.parents
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
 
 class KoParentDeclarationForKoPathProviderTest {
@@ -71,7 +67,8 @@ class KoParentDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koparent/snippet/forkopathprovider/class-with-parametrized-and-generic-parent-class-from-file.kt") shouldBeEqualTo true
+            endsWith("koparent/snippet/forkopathprovider/class-with-parametrized-and-generic-parent-class-from-file.kt") shouldBeEqualTo
+                true
         }
     }
 
@@ -199,7 +196,8 @@ class KoParentDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koparent/snippet/forkopathprovider/class-with-parametrized-and-generic-parent-class-from-import.kt") shouldBeEqualTo true
+            endsWith("koparent/snippet/forkopathprovider/class-with-parametrized-and-generic-parent-class-from-import.kt") shouldBeEqualTo
+                true
         }
     }
 
@@ -535,7 +533,8 @@ class KoParentDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koparent/snippet/forkopathprovider/object-with-parametrized-and-generic-parent-class-from-file.kt") shouldBeEqualTo true
+            endsWith("koparent/snippet/forkopathprovider/object-with-parametrized-and-generic-parent-class-from-file.kt") shouldBeEqualTo
+                true
         }
     }
 
@@ -647,7 +646,8 @@ class KoParentDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koparent/snippet/forkopathprovider/object-with-parametrized-and-generic-parent-class-from-import.kt") shouldBeEqualTo true
+            endsWith("koparent/snippet/forkopathprovider/object-with-parametrized-and-generic-parent-class-from-import.kt") shouldBeEqualTo
+                true
         }
     }
 
@@ -759,7 +759,8 @@ class KoParentDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koparent/snippet/forkopathprovider/object-with-parametrized-and-generic-external-parent-class.kt") shouldBeEqualTo true
+            endsWith("koparent/snippet/forkopathprovider/object-with-parametrized-and-generic-external-parent-class.kt") shouldBeEqualTo
+                true
         }
     }
 
@@ -814,6 +815,6 @@ class KoParentDeclarationForKoPathProviderTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/koparent/snippet/forkopathprovider/",
-            fileName
+            fileName,
         )
 }

@@ -11,4 +11,4 @@ import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 interface KoExternalDeclaration :
     KoChildProvider,
     KoBaseTypeDeclaration,
-        KoFullyQualifiedNameProvider
+    KoFullyQualifiedNameProvider

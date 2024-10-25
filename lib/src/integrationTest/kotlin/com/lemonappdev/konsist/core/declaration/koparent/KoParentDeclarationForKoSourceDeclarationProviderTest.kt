@@ -6,20 +6,19 @@ import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.ext.list.parents
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
-import com.lemonappdev.konsist.testdata.SampleClass
-import com.lemonappdev.konsist.testdata.SampleInterface
-import com.lemonappdev.konsist.testdata.SampleParentClass
-import com.lemonappdev.konsist.testdata.SampleCollection1
+import com.lemonappdev.konsist.externalsample.SampleExternalClass
+import com.lemonappdev.konsist.externalsample.SampleExternalClassWithParameter
+import com.lemonappdev.konsist.externalsample.SampleExternalGenericClass
+import com.lemonappdev.konsist.externalsample.SampleExternalGenericClassWithParameter
+import com.lemonappdev.konsist.externalsample.SampleExternalGenericInterface
+import com.lemonappdev.konsist.externalsample.SampleExternalInterface
 import com.lemonappdev.konsist.testdata.SampleClassWithParameter
+import com.lemonappdev.konsist.testdata.SampleCollection1
 import com.lemonappdev.konsist.testdata.SampleGenericClassWithParameter
 import com.lemonappdev.konsist.testdata.SampleGenericSuperInterface
+import com.lemonappdev.konsist.testdata.SampleInterface
+import com.lemonappdev.konsist.testdata.SampleParentClass
 import com.lemonappdev.konsist.testdata.SampleParentInterface
-import com.lemonappdev.konsist.externalsample.SampleExternalClass
-import com.lemonappdev.konsist.externalsample.SampleExternalGenericClass
-import com.lemonappdev.konsist.externalsample.SampleExternalClassWithParameter
-import com.lemonappdev.konsist.externalsample.SampleExternalGenericClassWithParameter
-import com.lemonappdev.konsist.externalsample.SampleExternalInterface
-import com.lemonappdev.konsist.externalsample.SampleExternalGenericInterface
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -132,7 +131,7 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/koparent/snippet/forkosourcedeclarationprovider/",
-            fileName
+            fileName,
         )
 
     companion object {

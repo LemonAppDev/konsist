@@ -9,8 +9,8 @@ import com.lemonappdev.konsist.externalsample.SampleExternalClass
 import com.lemonappdev.konsist.externalsample.SampleExternalClassWithParameter
 import com.lemonappdev.konsist.externalsample.SampleExternalGenericClass
 import com.lemonappdev.konsist.externalsample.SampleExternalGenericClassWithParameter
-import com.lemonappdev.konsist.externalsample.SampleExternalInterface
 import com.lemonappdev.konsist.externalsample.SampleExternalGenericInterface
+import com.lemonappdev.konsist.externalsample.SampleExternalInterface
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleClassWithParameter
 import com.lemonappdev.konsist.testdata.SampleCollection1
@@ -25,6 +25,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
 
+@Suppress("detekt.LargeClass", "detekt.LongMethod")
 class KoParentDeclarationForKoDeclarationCastProviderTest {
     @Test
     fun `class-with-parent-class-from-file`() {

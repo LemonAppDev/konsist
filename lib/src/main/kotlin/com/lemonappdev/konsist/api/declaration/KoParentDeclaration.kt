@@ -26,9 +26,7 @@ interface KoParentDeclaration :
     KoPackageProvider,
     KoResideInPackageProvider,
     KoSourceDeclarationProvider,
-
     KoTypeArgumentProvider,
-
     KoTextProvider,
     KoContainingFileProvider,
     KoContainingDeclarationProvider,

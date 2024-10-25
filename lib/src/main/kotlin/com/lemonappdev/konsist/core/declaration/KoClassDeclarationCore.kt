@@ -23,7 +23,6 @@ import com.lemonappdev.konsist.core.provider.modifier.KoOpenModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoValueModifierProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
-import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtClassOrObject
