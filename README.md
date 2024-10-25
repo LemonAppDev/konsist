@@ -20,14 +20,18 @@ Program Winner 2024" width="210">
 
 ## Dependencies
 
+Gradle Kotlin:
 ```kotlin
-// Gradle Kotlin:
 testImplementation("com.lemonappdev:konsist:0.16.1")
+```
 
-// Gradle Groovy:
+Gradle Groovy:
+```groovy
 testImplementation "com.lemonappdev:konsist:0.16.1"
+```
 
-// Maven:
+Maven:
+```xml
 <dependency>
 <groupId>com.lemonappdev</groupId>
 <artifactId>konsist</artifactId>
