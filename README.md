@@ -28,12 +28,12 @@ testImplementation("com.lemonappdev:konsist:0.16.1")
 testImplementation "com.lemonappdev:konsist:0.16.1"
 
 // Maven:
-<dependency >
-<groupId > com.lemonappdev < / groupId >
-<artifactId > konsist < / artifactId >
-<version > 0.16.1 < / version >
-<scope > test < / scope >
-</dependency >
+<dependency>
+<groupId>com.lemonappdev</groupId>
+<artifactId>konsist</artifactId>
+<version>0.16.1</version>
+<scope>test</scope>
+</dependency>
 ```
 
 ## Getting Started
