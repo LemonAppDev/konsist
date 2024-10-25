@@ -58,7 +58,7 @@ class KoArchitectureAssertionCore : KoArchitectureAssertion {
      * Obtain the dependency rules from dependencies literal function
      */
     private fun instanceDependencyRules(dependencies: DependencyRules.() -> Unit): DependencyRules {
-        val dependencyRules = DependencyRulesCore()
+        val dependencyRules = LayerDependencyCore()
         dependencies(dependencyRules)
         return dependencyRules
     }
