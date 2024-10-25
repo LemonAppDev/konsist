@@ -1,5 +1,7 @@
 <p align="left">
-    <img src="misc/konsist-logo/logo.png" alt="Konsit Logo" width="400">
+    <a href="https://docs.konsist.lemonappdev.com/" target="_blank">
+        <img src="misc/konsist-logo/logo.png" alt="Konsit Logo" width="400">
+    </a>
 </p>
 
 [![Kotlin](https://img.shields.io/badge/Kotlin-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
@@ -12,9 +14,8 @@ and unified architecture. Konsist guards are written in the form of unit
 tests ([JUnit](https://junit.org/) / [Kotest](https://kotest.io/)).
 
 <p align="left">
-  <a href="https://kotlinfoundation.org/news/grants-program-winners-24/" target="_blank" rel="noopener noreferrer">
-    <img src="misc/library-grant-program-winner.png" alt="Library Grant Program Winner 2024" title="Library Grant 
-Program Winner 2024" width="210">
+  <a href="https://kotlinfoundation.org/news/grants-program-winners-24/" target="_blank">
+    <img src="misc/library-grant-program-winner.png" alt="Library Grant Program Winner 2024" title="Library Grant Program Winner 2024" width="210">
   </a>
 </p>
 
