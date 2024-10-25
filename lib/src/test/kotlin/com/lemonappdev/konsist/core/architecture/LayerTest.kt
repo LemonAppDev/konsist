@@ -7,11 +7,6 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class LayerTest {
-    private val sut = Layer(
-        name = "name",
-        rootPackage = "com.example..",
-    )
-
     @Test
     fun `create Layer with valid parameters should succeed`() {
         // given
