@@ -1,0 +1,5 @@
+package com.samplepackage
+
+import com.lemonappdev.konsist.externalsample.SampleExternalInterface
+
+class SampleClass: SampleExternalInterface

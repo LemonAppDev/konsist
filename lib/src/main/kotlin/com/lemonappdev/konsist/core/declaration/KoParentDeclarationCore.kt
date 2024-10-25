@@ -36,7 +36,6 @@ import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
-import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 
 internal class KoParentDeclarationCore(
     private val ktSuperTypeListEntry: KtSuperTypeListEntry,

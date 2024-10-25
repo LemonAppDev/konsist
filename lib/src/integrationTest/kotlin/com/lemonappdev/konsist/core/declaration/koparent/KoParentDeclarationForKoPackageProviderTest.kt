@@ -85,82 +85,161 @@ class KoParentDeclarationForKoPackageProviderTest {
     }
 
     @Test
-    fun `parent-from-import-of-class-package`() {
+    fun `parent-from-import-of-class-is-not-in-package`() {
         // given
         val sut =
-            getSnippetFile("parent-from-import-of-class-package")
+            getSnippetFile("parent-from-import-of-class-is-not-in-package")
                 .classes()
                 .parents()
                 .first()
 
         // then
-        sut.packagee?.name shouldBeEqualTo "com.lemonappdev.konsist.testdata"
+        sut.packagee shouldBeEqualTo null
     }
 
     @Test
-    fun `parent-from-import-of-interface-package`() {
+    fun `parent-from-import-of-class-is-in-package`() {
         // given
         val sut =
-            getSnippetFile("parent-from-import-of-interface-package")
-                .interfaces()
-                .parents()
-                .first()
-
-        // then
-        sut.packagee?.name shouldBeEqualTo "com.lemonappdev.konsist.testdata"
-    }
-
-    @Test
-    fun `parent-from-import-of-object-package`() {
-        // given
-        val sut =
-            getSnippetFile("parent-from-import-of-object-package")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.packagee?.name shouldBeEqualTo "com.lemonappdev.konsist.testdata"
-    }
-
-    @Test
-    fun `external-parent-of-class-package`() {
-        // given
-        val sut =
-            getSnippetFile("external-parent-of-class-package")
+            getSnippetFile("parent-from-import-of-class-is-in-package")
                 .classes()
                 .parents()
                 .first()
 
         // then
-        sut.packagee?.name shouldBeEqualTo "com.lemonappdev.konsist.externalsample"
+        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
     }
 
     @Test
-    fun `external-parent-of-interface-package`() {
+    fun `parent-from-import-of-interface-is-not-in-package`() {
         // given
         val sut =
-            getSnippetFile("external-parent-of-interface-package")
+            getSnippetFile("parent-from-import-of-interface-is-not-in-package")
                 .interfaces()
                 .parents()
                 .first()
 
         // then
-        sut.packagee?.name shouldBeEqualTo "com.lemonappdev.konsist.externalsample"
+        sut.packagee shouldBeEqualTo null
     }
 
     @Test
-    fun `external-parent-of-object-package`() {
+    fun `parent-from-import-of-interface-is-in-package`() {
         // given
         val sut =
-            getSnippetFile("external-parent-of-object-package")
+            getSnippetFile("parent-from-import-of-interface-is-in-package")
+                .interfaces()
+                .parents()
+                .first()
+
+        // then
+        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
+    }
+
+    @Test
+    fun `parent-from-import-of-object-is-not-in-package`() {
+        // given
+        val sut =
+            getSnippetFile("parent-from-import-of-object-is-not-in-package")
                 .objects()
                 .parents()
                 .first()
 
         // then
-        sut.packagee?.name shouldBeEqualTo "com.lemonappdev.konsist.externalsample"
+        sut.packagee shouldBeEqualTo null
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koparent/snippet/forkopackageprovider/", fileName)
+    @Test
+    fun `parent-from-import-of-object-is-in-package`() {
+        // given
+        val sut =
+            getSnippetFile("parent-from-import-of-object-is-in-package")
+                .objects()
+                .parents()
+                .first()
+
+        // then
+        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
+    }
+
+    @Test
+    fun `external-parent-of-class-is-not-in-package`() {
+        // given
+        val sut =
+            getSnippetFile("external-parent-of-class-is-not-in-package")
+                .classes()
+                .parents()
+                .first()
+
+        // then
+        sut.packagee shouldBeEqualTo null
+    }
+
+    @Test
+    fun `external-parent-of-class-is-in-package`() {
+        // given
+        val sut =
+            getSnippetFile("external-parent-of-class-is-in-package")
+                .classes()
+                .parents()
+                .first()
+
+        // then
+        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
+    }
+
+    @Test
+    fun `external-parent-of-interface-is-not-in-package`() {
+        // given
+        val sut =
+            getSnippetFile("external-parent-of-interface-is-not-in-package")
+                .interfaces()
+                .parents()
+                .first()
+
+        // then
+        sut.packagee shouldBeEqualTo null
+    }
+
+    @Test
+    fun `external-parent-of-interface-is-in-package`() {
+        // given
+        val sut =
+            getSnippetFile("external-parent-of-interface-is-in-package")
+                .interfaces()
+                .parents()
+                .first()
+
+        // then
+        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
+    }
+
+    @Test
+    fun `external-parent-of-object-is-not-in-package`() {
+        // given
+        val sut =
+            getSnippetFile("external-parent-of-object-is-not-in-package")
+                .objects()
+                .parents()
+                .first()
+
+        // then
+        sut.packagee shouldBeEqualTo null
+    }
+
+    @Test
+    fun `external-parent-of-object-is-in-package`() {
+        // given
+        val sut =
+            getSnippetFile("external-parent-of-object-is-in-package")
+                .objects()
+                .parents()
+                .first()
+
+        // then
+        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
+    }
+
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koparent/snippet/forkopackageprovider/", fileName)
 }
