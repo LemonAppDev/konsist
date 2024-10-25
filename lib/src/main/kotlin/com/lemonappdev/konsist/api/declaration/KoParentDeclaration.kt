@@ -38,7 +38,5 @@ interface KoParentDeclaration :
     KoLocationProvider,
     KoDeclarationCastProvider,
     KoAnnotationProvider,
-
     KoModuleProvider,
     KoSourceSetProvider
-//    KoSourceAndAliasTypeProvider ?????
