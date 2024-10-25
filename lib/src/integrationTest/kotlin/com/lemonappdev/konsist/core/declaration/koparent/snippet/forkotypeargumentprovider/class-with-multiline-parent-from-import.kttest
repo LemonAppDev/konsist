@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.SampleClassWithParameter
+
+class SomeClass(): SampleClassWithParameter(
+    "some parent constructor param here"
+)

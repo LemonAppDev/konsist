@@ -77,18 +77,24 @@ internal class KoParentDeclarationCore(
 
     override val ktTypeProjection: KtTypeProjection? by lazy { null }
 
-    override val ktUserType: KtUserType? by lazy { null }
+    private val children = ktSuperTypeListEntry.children
+
+    private val targetChildren =
+        children
+            .filterIsInstance<KtConstructorCalleeExpression>()
+            .firstOrNull()
+            ?.children
+            ?: children
+
+    override val ktUserType: KtUserType? by lazy {
+        targetChildren
+            .firstOrNull { it is KtTypeReference }
+            ?.children
+            ?.filterIsInstance<KtUserType>()
+            ?.firstOrNull()
+    }
 
     override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy {
-        val children = ktSuperTypeListEntry.children
-
-        val targetChildren =
-            children
-                .filterIsInstance<KtConstructorCalleeExpression>()
-                .firstOrNull()
-                ?.children
-                ?: children
-
         targetChildren
             .firstOrNull { it is KtTypeReference }
             ?.children
