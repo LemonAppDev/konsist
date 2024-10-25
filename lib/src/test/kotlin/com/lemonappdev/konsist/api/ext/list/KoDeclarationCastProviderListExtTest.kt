@@ -532,7 +532,7 @@ class KoDeclarationCastProviderListExtTest {
     }
 
     @Test
-    fun `externalTypeDeclarations returns external types from all declarations`() {
+    fun `externalDeclarations returns external types from all declarations`() {
         // given
         val sourceDeclaration1: KoExternalDeclaration = mockk()
         val sourceDeclaration2: KoExternalDeclaration = mockk()
@@ -553,14 +553,14 @@ class KoDeclarationCastProviderListExtTest {
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.externalTypeDeclarations()
+        val sut = declarations.externalDeclarations()
 
         // then
         sut shouldBeEqualTo listOf(sourceDeclaration1, sourceDeclaration2)
     }
 
     @Test
-    fun `externalTypeDeclarations returns external types from all declarations which satisfies predicate`() {
+    fun `externalDeclarations returns external types from all declarations which satisfies predicate`() {
         // given
         val predicate: (KoExternalDeclaration) -> Boolean = { it.hasNameContaining("SomeExternalType") }
         val sourceDeclaration1: KoExternalDeclaration = mockk()
@@ -582,7 +582,7 @@ class KoDeclarationCastProviderListExtTest {
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.externalTypeDeclarations(predicate)
+        val sut = declarations.externalDeclarations(predicate)
 
         // then
         sut shouldBeEqualTo listOf(sourceDeclaration1)
@@ -3261,11 +3261,11 @@ class KoDeclarationCastProviderListExtTest {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
-                every { isExternal } returns true
+                every { isExternalDeclaration } returns true
             }
         val declaration2: KoDeclarationCastProvider =
             mockk {
-                every { isExternal } returns false
+                every { isExternalDeclaration } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -3355,11 +3355,11 @@ class KoDeclarationCastProviderListExtTest {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
-                every { isExternal } returns true
+                every { isExternalDeclaration } returns true
             }
         val declaration2: KoDeclarationCastProvider =
             mockk {
-                every { isExternal } returns false
+                every { isExternalDeclaration } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 

@@ -68,7 +68,14 @@ interface KoDeclarationCastProvider : KoBaseProvider {
      * Determines whatever declaration is an external type.
      * An external type refers to a type that is defined outside the project's codebase. for e.g. in external library.
      */
-    val isExternal: Boolean
+    val isExternalDeclaration: Boolean
+
+    /**
+     * Determines whatever source declaration is an external type.
+     * An external type refers to a type that is defined outside the project's codebase. for e.g. in external library.
+     */
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isExternalDeclaration"))
+    val isExternalType: Boolean
 
     /**
      * Represents the class declaration associated with this declaration.
@@ -140,6 +147,15 @@ interface KoDeclarationCastProvider : KoBaseProvider {
      * @return the external declaration associated with this declaration.
      */
     fun asExternalDeclaration(): KoExternalDeclaration?
+
+    /**
+     * Represents the external declaration associated with this declaration.
+     * An external type refers to a type that is defined outside the project's codebase. for e.g. in external library.
+     *
+     * @return the external declaration associated with this declaration.
+     */
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("asExternalDeclaration"))
+    fun asExternalTypeDeclaration(): KoExternalDeclaration?
 
     /**
      * Whether declaration has a specified class declaration.
@@ -289,4 +305,26 @@ interface KoDeclarationCastProvider : KoBaseProvider {
      * in external library) matching the specified KClass, `false` otherwise.
      */
     fun hasExternalDeclarationOf(kClass: KClass<*>): Boolean
+
+    /**
+     * Whether type has a specified external type declaration.
+     * An external type refers to a type that is defined outside the project's codebase. for e.g. in external library.
+     *
+     * @param predicate The predicate external used to determine if a external type declaration satisfies a condition.
+     * @return `true` if the type has the specified external type declaration (or any external type declaration if [predicate] is
+     * `null`), `false` otherwise.
+     */
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("hasExternalDeclaration"))
+    fun hasExternalTypeDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)? = null): Boolean
+
+    /**
+     * Whether type has a external type declaration of the specified Kotlin class.
+     * An external type refers to a type that is defined outside the project's codebase. for e.g. in external library.
+     *
+     * @param kClass The Kotlin class representing the external type declaration to check for.
+     * @return `true` if the type has a external type declaration (type defined outside the project codebase for e.g.
+     * in external library) matching the specified KClass, `false` otherwise.
+     */
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("hasExternalDeclarationOf"))
+    fun hasExternalTypeDeclarationOf(kClass: KClass<*>): Boolean
 }
