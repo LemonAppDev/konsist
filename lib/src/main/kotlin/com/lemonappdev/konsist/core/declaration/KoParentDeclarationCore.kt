@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
+import com.lemonappdev.konsist.api.provider.KoTypeArgumentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
@@ -21,6 +22,7 @@ import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
+import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotated
@@ -30,6 +32,7 @@ import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
+import org.jetbrains.kotlin.psi.KtUserType
 
 internal class KoParentDeclarationCore(
     private val ktSuperTypeListEntry: KtSuperTypeListEntry,
@@ -41,8 +44,6 @@ internal class KoParentDeclarationCore(
     KoPackageDeclarationProviderCore,
     KoResideInPackageProviderCore,
     KoSourceDeclarationProviderCore,
-
-
     KoTextProviderCore,
     KoPathProviderCore,
     KoLocationProviderCore,
@@ -51,7 +52,8 @@ internal class KoParentDeclarationCore(
     KoModuleProviderCore,
     KoSourceSetProviderCore,
     KoAnnotationProviderCore,
-    KoDeclarationCastProviderCore {
+    KoDeclarationCastProviderCore,
+    KoTypeArgumentProviderCore {
     override val ktAnnotated: KtAnnotated? by lazy { null } // Todo: change
 
     override val psiElement: PsiElement by lazy { ktSuperTypeListEntry }
@@ -63,6 +65,8 @@ internal class KoParentDeclarationCore(
     override val ktNameReferenceExpression: KtNameReferenceExpression? by lazy { null }
 
     override val ktTypeProjection: KtTypeProjection? by lazy { null }
+
+    override val ktUserType: KtUserType? by lazy { null }
 
     override val koDeclarationCastProviderDeclaration: KoSourceDeclaration by lazy { sourceDeclaration }
 
