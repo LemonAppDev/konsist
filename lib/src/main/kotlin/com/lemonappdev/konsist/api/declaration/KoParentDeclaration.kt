@@ -26,8 +26,8 @@ interface KoParentDeclaration :
     KoPackageProvider,
     KoResideInPackageProvider,
     KoFullyQualifiedNameProvider,
-    KoSourceDeclarationProvider,
 
+    KoSourceDeclarationProvider,
 
     KoTextProvider,
     KoContainingFileProvider,
@@ -36,7 +36,8 @@ interface KoParentDeclaration :
     KoLocationProvider,
     KoDeclarationCastProvider,
 
+    KoAnnotationProvider,
+
     KoModuleProvider,
-    KoSourceSetProvider,
-    KoAnnotationProvider
+    KoSourceSetProvider
 //    KoSourceAndAliasTypeProvider ?????
