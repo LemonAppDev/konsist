@@ -42,7 +42,6 @@ internal class KoParentDeclarationCore(
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoParentDeclaration,
     KoBaseProviderCore,
-    KoFullyQualifiedNameProviderCore,
     KoNameProviderCore,
     KoPackageDeclarationProviderCore,
     KoResideInPackageProviderCore,

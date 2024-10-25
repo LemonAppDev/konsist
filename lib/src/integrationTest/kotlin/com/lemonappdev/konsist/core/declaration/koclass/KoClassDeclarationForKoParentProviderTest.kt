@@ -284,7 +284,7 @@ class KoClassDeclarationForKoParentProviderTest {
         // then
         assertSoftly(sut.parents().first()) {
             name shouldBeEqualTo "AliasParent"
-            fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleParentInterface"
+            asInterfaceDeclaration()?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleParentInterface"
         }
     }
 

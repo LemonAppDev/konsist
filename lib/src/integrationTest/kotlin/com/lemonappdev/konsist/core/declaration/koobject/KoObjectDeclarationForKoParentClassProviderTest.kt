@@ -207,7 +207,7 @@ class KoObjectDeclarationForKoParentClassProviderTest {
         // then
         assertSoftly(sut) {
             parentClass?.name shouldBeEqualTo "SampleParentClassWithDuplicatedName"
-            parentClass?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleParentClassWithDuplicatedName"
+            parentClass?.asClassDeclaration()?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleParentClassWithDuplicatedName"
         }
     }
 
