@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource
 @Suppress("detekt.LongMethod")
 class KoParentDeclarationForKoTypeArgumentProviderTest {
     @ParameterizedTest
-    @MethodSource("provideClassesForNoAnnotation")
+    @MethodSource("provideClassesForNoTypeArgument")
     fun `class-parent-has-no-type-argument`(fileName: String) {
         // given
         val sut =
@@ -54,7 +54,6 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
 
         // then
         assertSoftly(sut) {
-            name
             typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
@@ -90,7 +89,7 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
     }
 
     @ParameterizedTest
-    @MethodSource("provideInterfacesForNoAnnotation")
+    @MethodSource("provideInterfacesForNoTypeArgument")
     fun `interface-parent-has-no-type-argument`(fileName: String) {
         // given
         val sut =
@@ -166,7 +165,7 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
     }
 
     @ParameterizedTest
-    @MethodSource("provideObjectsForNoAnnotation")
+    @MethodSource("provideObjectsForNoTypeArgument")
     fun `object-parent-has-no-type-argument`(fileName: String) {
         // given
         val sut =
@@ -247,7 +246,7 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideClassesForNoAnnotation() =
+        fun provideClassesForNoTypeArgument() =
             listOf(
                 arguments("class-with-parent-class-from-file"),
                 arguments("class-with-parametrized-parent-class-from-file"),
@@ -282,7 +281,7 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
 
         @Suppress("unused")
         @JvmStatic
-        fun provideInterfacesForNoAnnotation() =
+        fun provideInterfacesForNoTypeArgument() =
             listOf(
                 arguments("interface-with-parent-interface-from-file"),
                 arguments("interface-with-parent-interface-from-import"),
@@ -300,7 +299,7 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
 
         @Suppress("unused")
         @JvmStatic
-        fun provideObjectsForNoAnnotation() =
+        fun provideObjectsForNoTypeArgument() =
             listOf(
                 arguments("object-with-parent-class-from-file"),
                 arguments("object-with-parametrized-parent-class-from-file"),
@@ -320,15 +319,15 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
         @JvmStatic
         fun provideObjectsForTypeArgument() =
             listOf(
-//                arguments("object-with-generic-parent-class-from-file"),
-//                arguments("object-with-parametrized-and-generic-parent-class-from-file"),
+                arguments("object-with-generic-parent-class-from-file"),
+                arguments("object-with-parametrized-and-generic-parent-class-from-file"),
                 arguments("object-with-generic-parent-interface-from-file"),
-//                arguments("object-with-generic-parent-class-from-import"),
-//                arguments("object-with-parametrized-and-generic-parent-class-from-import"),
-//                arguments("object-with-generic-parent-interface-from-import"),
-//                arguments("object-with-generic-external-parent-class"),
-//                arguments("object-with-parametrized-and-generic-external-parent-class"),
-//                arguments("object-with-generic-external-parent-interface"),
+                arguments("object-with-generic-parent-class-from-import"),
+                arguments("object-with-parametrized-and-generic-parent-class-from-import"),
+                arguments("object-with-generic-parent-interface-from-import"),
+                arguments("object-with-generic-external-parent-class"),
+                arguments("object-with-parametrized-and-generic-external-parent-class"),
+                arguments("object-with-generic-external-parent-interface"),
             )
     }
 }
