@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentClassProvider
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleClass1
@@ -16,8 +16,8 @@ class KoParentClassProviderListExtTest {
     @Test
     fun `parentClasses returns parent classes from all declarations`() {
         // given
-        val parentClass1: KoClassDeclaration = mockk()
-        val parentClass2: KoClassDeclaration = mockk()
+        val parentClass1: KoParentDeclaration = mockk()
+        val parentClass2: KoParentDeclaration = mockk()
         val declaration1: KoParentClassProvider =
             mockk {
                 every { parentClass } returns parentClass1
@@ -42,9 +42,9 @@ class KoParentClassProviderListExtTest {
     @Test
     fun `parentClasses() returns parent classes from all declarations`() {
         // given
-        val parentClass1: KoClassDeclaration = mockk()
-        val parentClass2: KoClassDeclaration = mockk()
-        val parentClass3: KoClassDeclaration = mockk()
+        val parentClass1: KoParentDeclaration = mockk()
+        val parentClass2: KoParentDeclaration = mockk()
+        val parentClass3: KoParentDeclaration = mockk()
         val declaration1: KoParentClassProvider =
             mockk {
                 every { parentClasses(indirectParents = true) } returns listOf(parentClass1, parentClass2)
@@ -310,7 +310,7 @@ class KoParentClassProviderListExtTest {
     fun `withParentClass{} returns declaration with parent class which satisfy predicate`() {
         // given
         val prefix = "sample"
-        val predicate: (KoClassDeclaration) -> Boolean = { it.hasNameStartingWith(prefix) }
+        val predicate: (KoParentDeclaration) -> Boolean = { it.hasNameStartingWith(prefix) }
         val declaration1: KoParentClassProvider =
             mockk {
                 every { hasParentClass(indirectParents = true, predicate) } returns true
@@ -332,7 +332,7 @@ class KoParentClassProviderListExtTest {
     fun `withoutParentClass{} returns declaration without parent class which satisfy predicate`() {
         // given
         val prefix = "sample"
-        val predicate: (KoClassDeclaration) -> Boolean = { it.hasNameStartingWith(prefix) }
+        val predicate: (KoParentDeclaration) -> Boolean = { it.hasNameStartingWith(prefix) }
         val declaration1: KoParentClassProvider =
             mockk {
                 every { hasParentClass(indirectParents = true, predicate) } returns true
@@ -354,7 +354,7 @@ class KoParentClassProviderListExtTest {
     fun `withAllParentClasses{} returns declaration with all parent classes satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (KoClassDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val predicate: (KoParentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoParentClassProvider =
             mockk {
                 every { hasAllParentClasses(predicate = predicate) } returns true
@@ -376,7 +376,7 @@ class KoParentClassProviderListExtTest {
     fun `withoutAllParentClasses{} returns declaration with all parent classes which not satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (KoClassDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val predicate: (KoParentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoParentClassProvider =
             mockk {
                 every { hasAllParentClasses(predicate = predicate) } returns true
@@ -398,13 +398,13 @@ class KoParentClassProviderListExtTest {
     fun `withParentClasses{} returns declaration with parent classes which satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (List<KoClassDeclaration>) -> Boolean =
+        val predicate: (List<KoParentDeclaration>) -> Boolean =
             { it.all { parent -> parent.hasNameEndingWith(suffix) } }
-        val parent1: KoClassDeclaration =
+        val parent1: KoParentDeclaration =
             mockk {
                 every { hasNameEndingWith(suffix) } returns true
             }
-        val parent2: KoClassDeclaration =
+        val parent2: KoParentDeclaration =
             mockk {
                 every { hasNameEndingWith(suffix) } returns false
             }
@@ -433,13 +433,13 @@ class KoParentClassProviderListExtTest {
     fun `withoutParentClasses{} returns declaration without parent classes which satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (List<KoClassDeclaration>) -> Boolean =
+        val predicate: (List<KoParentDeclaration>) -> Boolean =
             { it.all { parent -> parent.hasNameEndingWith(suffix) } }
-        val parent1: KoClassDeclaration =
+        val parent1: KoParentDeclaration =
             mockk {
                 every { hasNameEndingWith(suffix) } returns true
             }
-        val parent2: KoClassDeclaration =
+        val parent2: KoParentDeclaration =
             mockk {
                 every { hasNameEndingWith(suffix) } returns false
             }
