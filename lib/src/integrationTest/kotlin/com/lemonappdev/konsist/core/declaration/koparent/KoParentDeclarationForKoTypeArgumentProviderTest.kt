@@ -37,8 +37,8 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             hasAllTypeArgumentsOf(String::class, Int::class) shouldBeEqualTo false
             hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
             hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
-            hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
-            hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+            hasTypeArgument { type -> type.sourceDeclaration?.isExternalDeclaration == true } shouldBeEqualTo false
+            hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalDeclaration == true } shouldBeEqualTo false
         }
     }
 
@@ -82,9 +82,9 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             hasAllTypeArgumentsOf(listOf(Int::class, String::class)) shouldBeEqualTo false
             hasAllTypeArgumentsOf(listOf(SampleClass::class, String::class)) shouldBeEqualTo false
             hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
-            hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+            hasTypeArgument { type -> type.sourceDeclaration?.isExternalDeclaration == true } shouldBeEqualTo false
             hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
-            hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+            hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalDeclaration == true } shouldBeEqualTo false
         }
     }
 
@@ -112,8 +112,8 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             hasAllTypeArgumentsOf(String::class, Int::class) shouldBeEqualTo false
             hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
             hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
-            hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
-            hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+            hasTypeArgument { type -> type.sourceDeclaration?.isExternalDeclaration == true } shouldBeEqualTo false
+            hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalDeclaration == true } shouldBeEqualTo false
         }
     }
 
@@ -158,9 +158,9 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             hasAllTypeArgumentsOf(listOf(Int::class, String::class)) shouldBeEqualTo false
             hasAllTypeArgumentsOf(listOf(SampleClass::class, String::class)) shouldBeEqualTo false
             hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
-            hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+            hasTypeArgument { type -> type.sourceDeclaration?.isExternalDeclaration == true } shouldBeEqualTo false
             hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
-            hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+            hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalDeclaration == true } shouldBeEqualTo false
         }
     }
 
@@ -188,8 +188,8 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             hasAllTypeArgumentsOf(String::class, Int::class) shouldBeEqualTo false
             hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
             hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
-            hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
-            hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+            hasTypeArgument { type -> type.sourceDeclaration?.isExternalDeclaration == true } shouldBeEqualTo false
+            hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalDeclaration == true } shouldBeEqualTo false
         }
     }
 
@@ -234,9 +234,9 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             hasAllTypeArgumentsOf(listOf(Int::class, String::class)) shouldBeEqualTo false
             hasAllTypeArgumentsOf(listOf(SampleClass::class, String::class)) shouldBeEqualTo false
             hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
-            hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+            hasTypeArgument { type -> type.sourceDeclaration?.isExternalDeclaration == true } shouldBeEqualTo false
             hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
-            hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+            hasAllTypeArguments { type -> type.sourceDeclaration?.isExternalDeclaration == true } shouldBeEqualTo false
         }
     }
 

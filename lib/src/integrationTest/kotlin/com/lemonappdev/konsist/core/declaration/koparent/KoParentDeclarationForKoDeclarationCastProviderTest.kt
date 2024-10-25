@@ -47,7 +47,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             hasClassDeclaration() shouldBeEqualTo true
             hasClassDeclaration { decl -> decl.name == "SampleSuperClass" } shouldBeEqualTo true
@@ -107,7 +107,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             hasClassDeclaration() shouldBeEqualTo true
             hasClassDeclaration { decl -> decl.name == "SampleGenericSuperClass" } shouldBeEqualTo true
@@ -167,7 +167,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             hasClassDeclaration() shouldBeEqualTo true
             hasClassDeclaration { decl -> decl.name == "SampleParametrizedSuperClass" } shouldBeEqualTo true
@@ -227,7 +227,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             hasClassDeclaration() shouldBeEqualTo true
             hasClassDeclaration { decl -> decl.name == "SampleParametrizedSuperClass" } shouldBeEqualTo true
@@ -287,7 +287,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleSuperInterface" } shouldBeEqualTo false
@@ -347,7 +347,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleGenericSuperInterface" } shouldBeEqualTo false
@@ -407,7 +407,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleSuperInterface" } shouldBeEqualTo false
@@ -467,7 +467,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             hasClassDeclaration() shouldBeEqualTo true
             hasClassDeclaration { decl -> decl.name == "SampleParentClass" } shouldBeEqualTo true
@@ -535,7 +535,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             hasClassDeclaration() shouldBeEqualTo true
             hasClassDeclaration { decl -> decl.name == "SampleCollection1" } shouldBeEqualTo true
@@ -603,7 +603,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             hasClassDeclaration() shouldBeEqualTo true
             hasClassDeclaration { decl -> decl.name == "SampleClassWithParameter" } shouldBeEqualTo true
@@ -671,7 +671,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             hasClassDeclaration() shouldBeEqualTo true
             hasClassDeclaration { decl -> decl.name == "SampleGenericClassWithParameter" } shouldBeEqualTo true
@@ -739,7 +739,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
@@ -799,7 +799,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleGenericSuperInterface" } shouldBeEqualTo false
@@ -859,7 +859,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
@@ -919,7 +919,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo true
+            isExternalDeclaration shouldBeEqualTo true
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleExternalClass" } shouldBeEqualTo false
@@ -980,7 +980,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo true
+            isExternalDeclaration shouldBeEqualTo true
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleExternalGenericClass" } shouldBeEqualTo false
@@ -1041,7 +1041,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo true
+            isExternalDeclaration shouldBeEqualTo true
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleExternalClassWithParameter" } shouldBeEqualTo false
@@ -1102,7 +1102,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo true
+            isExternalDeclaration shouldBeEqualTo true
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleExternalGenericClassWithParameter" } shouldBeEqualTo false
@@ -1163,7 +1163,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo true
+            isExternalDeclaration shouldBeEqualTo true
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleExternalInterface" } shouldBeEqualTo false
@@ -1224,7 +1224,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo true
+            isExternalDeclaration shouldBeEqualTo true
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleExternalGenericInterface" } shouldBeEqualTo false
@@ -1285,7 +1285,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo true
+            isExternalDeclaration shouldBeEqualTo true
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleExternalInterface" } shouldBeEqualTo false
@@ -1346,7 +1346,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleSuperInterface" } shouldBeEqualTo false
@@ -1406,7 +1406,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleGenericSuperInterface" } shouldBeEqualTo false
@@ -1466,7 +1466,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleParentInterface" } shouldBeEqualTo false
@@ -1526,7 +1526,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleGenericSuperInterface" } shouldBeEqualTo false
@@ -1586,7 +1586,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo true
+            isExternalDeclaration shouldBeEqualTo true
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleExternalInterface" } shouldBeEqualTo false
@@ -1647,7 +1647,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo true
+            isExternalDeclaration shouldBeEqualTo true
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleExternalGenericInterface" } shouldBeEqualTo false
@@ -1708,7 +1708,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             hasClassDeclaration() shouldBeEqualTo true
             hasClassDeclaration { decl -> decl.name == "SampleSuperClass" } shouldBeEqualTo true
@@ -1768,7 +1768,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             hasClassDeclaration() shouldBeEqualTo true
             hasClassDeclaration { decl -> decl.name == "SampleGenericSuperClass" } shouldBeEqualTo true
@@ -1828,7 +1828,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             hasClassDeclaration() shouldBeEqualTo true
             hasClassDeclaration { decl -> decl.name == "SampleParametrizedSuperClass" } shouldBeEqualTo true
@@ -1888,7 +1888,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             hasClassDeclaration() shouldBeEqualTo true
             hasClassDeclaration { decl -> decl.name == "SampleParametrizedSuperClass" } shouldBeEqualTo true
@@ -1948,7 +1948,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleSuperInterface" } shouldBeEqualTo false
@@ -2008,7 +2008,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleGenericSuperInterface" } shouldBeEqualTo false
@@ -2068,7 +2068,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             hasClassDeclaration() shouldBeEqualTo true
             hasClassDeclaration { decl -> decl.name == "SampleParentClass" } shouldBeEqualTo true
@@ -2136,7 +2136,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             hasClassDeclaration() shouldBeEqualTo true
             hasClassDeclaration { decl -> decl.name == "SampleCollection1" } shouldBeEqualTo true
@@ -2204,7 +2204,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             hasClassDeclaration() shouldBeEqualTo true
             hasClassDeclaration { decl -> decl.name == "SampleClassWithParameter" } shouldBeEqualTo true
@@ -2272,7 +2272,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             hasClassDeclaration() shouldBeEqualTo true
             hasClassDeclaration { decl -> decl.name == "SampleGenericClassWithParameter" } shouldBeEqualTo true
@@ -2340,7 +2340,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
@@ -2400,7 +2400,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleGenericSuperInterface" } shouldBeEqualTo false
@@ -2460,7 +2460,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo true
+            isExternalDeclaration shouldBeEqualTo true
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleExternalClass" } shouldBeEqualTo false
@@ -2521,7 +2521,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo true
+            isExternalDeclaration shouldBeEqualTo true
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleExternalGenericClass" } shouldBeEqualTo false
@@ -2582,7 +2582,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo true
+            isExternalDeclaration shouldBeEqualTo true
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleExternalClassWithParameter" } shouldBeEqualTo false
@@ -2643,7 +2643,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo true
+            isExternalDeclaration shouldBeEqualTo true
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleExternalGenericClassWithParameter" } shouldBeEqualTo false
@@ -2704,7 +2704,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo true
+            isExternalDeclaration shouldBeEqualTo true
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleExternalInterface" } shouldBeEqualTo false
@@ -2765,7 +2765,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             isKotlinBasicType shouldBeEqualTo false
             isKotlinCollectionType shouldBeEqualTo false
             isTypeParameter shouldBeEqualTo false
-            isExternal shouldBeEqualTo true
+            isExternalDeclaration shouldBeEqualTo true
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
             hasClassDeclaration { decl -> decl.name == "SampleExternalGenericInterface" } shouldBeEqualTo false

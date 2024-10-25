@@ -501,7 +501,7 @@ class KoTypeArgumentDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternal shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             it?.asClassDeclaration()?.name shouldBeEqualTo "SampleCollection1"
             it?.hasClassDeclaration() shouldBeEqualTo true
