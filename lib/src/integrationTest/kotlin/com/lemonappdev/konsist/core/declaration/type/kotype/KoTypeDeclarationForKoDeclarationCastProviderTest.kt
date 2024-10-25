@@ -45,7 +45,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternal shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             it?.asClassDeclaration()?.name shouldBeEqualTo "SampleType"
             it?.hasClassDeclaration() shouldBeEqualTo true
@@ -102,7 +102,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternal shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             it?.asClassDeclaration()?.name shouldBeEqualTo "SampleType"
             it?.hasClassDeclaration() shouldBeEqualTo true
@@ -159,7 +159,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternal shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
             it?.asObjectDeclaration()?.name shouldBeEqualTo "SampleObject"
             it?.hasObjectDeclaration() shouldBeEqualTo true
@@ -216,7 +216,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternal shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
             it?.asObjectDeclaration()?.name shouldBeEqualTo "SampleObject"
             it?.hasObjectDeclaration() shouldBeEqualTo true
@@ -273,7 +273,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternal shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
             it?.asInterfaceDeclaration()?.name shouldBeEqualTo "SampleInterface"
             it?.hasInterfaceDeclaration() shouldBeEqualTo true
@@ -330,7 +330,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternal shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
             it?.asInterfaceDeclaration()?.name shouldBeEqualTo "SampleInterface"
             it?.hasInterfaceDeclaration() shouldBeEqualTo true
@@ -387,7 +387,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternal shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeInstanceOf KoImportAliasDeclaration::class
             it?.asImportAliasDeclaration()?.name shouldBeEqualTo "ImportAlias"
             it?.hasImportAliasDeclaration() shouldBeEqualTo true
@@ -439,7 +439,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternal shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeInstanceOf KoTypeAliasDeclaration::class
             it?.asTypeAliasDeclaration()?.name shouldBeEqualTo "SampleTypeAlias"
             it?.hasTypeAliasDeclaration() shouldBeEqualTo true
@@ -491,7 +491,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternal shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeInstanceOf KoImportAliasDeclaration::class
             it?.asImportAliasDeclaration()?.name shouldBeEqualTo "ImportAlias"
             it?.hasImportAliasDeclaration() shouldBeEqualTo true
@@ -543,7 +543,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo true
-            it?.isExternal shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeInstanceOf KoTypeParameterDeclaration::class
             it?.asTypeParameterDeclaration()?.name shouldBeEqualTo "TestType"
             it?.hasTypeParameterDeclaration() shouldBeEqualTo true
@@ -595,7 +595,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo true
-            it?.isExternal shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeInstanceOf KoTypeParameterDeclaration::class
             it?.asTypeParameterDeclaration()?.name shouldBeEqualTo "TestType"
             it?.hasTypeParameterDeclaration() shouldBeEqualTo true
@@ -647,7 +647,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternal shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeInstanceOf KoTypeAliasDeclaration::class
             it?.asTypeAliasDeclaration()?.name shouldBeEqualTo "SampleTypeAlias"
             it?.hasTypeAliasDeclaration() shouldBeEqualTo true
@@ -699,7 +699,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo true
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternal shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "String"
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo true
@@ -761,7 +761,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo true
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternal shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "String"
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo true
@@ -823,7 +823,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternal shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
@@ -872,7 +872,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternal shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
@@ -921,7 +921,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternal shouldBeEqualTo true
+            it?.isExternalDeclaration shouldBeEqualTo true
             it?.asExternalDeclaration() shouldBeInstanceOf KoExternalDeclaration::class
             it?.asExternalDeclaration()?.name shouldBeEqualTo "SampleExternalClass"
             it?.hasExternalDeclaration() shouldBeEqualTo true
@@ -979,7 +979,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternal shouldBeEqualTo true
+            it?.isExternalDeclaration shouldBeEqualTo true
             it?.asExternalDeclaration() shouldBeInstanceOf KoExternalDeclaration::class
             it?.asExternalDeclaration()?.name shouldBeEqualTo "SampleExternalClass"
             it?.hasExternalDeclaration() shouldBeEqualTo true
@@ -1040,7 +1040,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternal shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it shouldBeInstanceOf KoStarProjectionDeclaration::class
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false

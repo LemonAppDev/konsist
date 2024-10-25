@@ -52,8 +52,12 @@ internal interface KoDeclarationCastProviderCore :
     override val isTypeParameter: Boolean
         get() = koDeclarationCastProviderDeclaration is KoTypeParameterDeclaration
 
-    override val isExternal: Boolean
+    override val isExternalDeclaration: Boolean
         get() = koDeclarationCastProviderDeclaration is KoExternalDeclaration
+
+    @Deprecated("Will be removed in version 0.19.0", replaceWith = ReplaceWith("isExternalDeclaration"))
+    override val isExternalType: Boolean
+        get() = isExternalDeclaration
 
     override fun asClassDeclaration(): KoClassDeclaration? = koDeclarationCastProviderDeclaration as? KoClassDeclaration
 
@@ -77,6 +81,9 @@ internal interface KoDeclarationCastProviderCore :
         koDeclarationCastProviderDeclaration as? KoTypeParameterDeclaration
 
     override fun asExternalDeclaration(): KoExternalDeclaration? = koDeclarationCastProviderDeclaration as? KoExternalDeclaration
+
+    @Deprecated("Will be removed in version 0.19.0", replaceWith = ReplaceWith("asExternalDeclaration"))
+    override fun asExternalTypeDeclaration(): KoExternalDeclaration? = asExternalDeclaration()
 
     override fun hasClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -150,9 +157,15 @@ internal interface KoDeclarationCastProviderCore :
 
     override fun hasExternalDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
-            null -> isExternal
+            null -> isExternalDeclaration
             else -> asExternalDeclaration()?.let { predicate(it) } ?: false
         }
 
     override fun hasExternalDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asExternalDeclaration()?.fullyQualifiedName
+
+    @Deprecated("Will be removed in version 0.19.0", replaceWith = ReplaceWith("hasExternalDeclaration"))
+    override fun hasExternalTypeDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)?): Boolean = hasExternalDeclaration()
+
+    @Deprecated("Will be removed in version 0.19.0", replaceWith = ReplaceWith("hasExternalDeclarationOf"))
+    override fun hasExternalTypeDeclarationOf(kClass: KClass<*>): Boolean = hasExternalDeclarationOf(kClass)
 }

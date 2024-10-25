@@ -14,6 +14,55 @@ import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import kotlin.reflect.KClass
 
 /**
+ * List containing class declarations associated with types.
+ */
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("classDeclarations()"))
+val <T : KoDeclarationCastProvider> List<T>.classDeclarations: List<KoClassDeclaration>
+    get() = mapNotNull { it.asClassDeclaration() }
+
+/**
+ * List containing object declarations associated with types.
+ */
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("objectDeclarations()"))
+val <T : KoDeclarationCastProvider> List<T>.objectDeclarations: List<KoObjectDeclaration>
+    get() = mapNotNull { it.asObjectDeclaration() }
+
+/**
+ * List containing interface declarations associated with types.
+ */
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("interfaceDeclarations()"))
+val <T : KoDeclarationCastProvider> List<T>.interfaceDeclarations: List<KoInterfaceDeclaration>
+    get() = mapNotNull { it.asInterfaceDeclaration() }
+
+/**
+ * List containing type alias declarations associated with types.
+ */
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("typeAliasDeclarations()"))
+val <T : KoDeclarationCastProvider> List<T>.typeAliasDeclarations: List<KoTypeAliasDeclaration>
+    get() = mapNotNull { it.asTypeAliasDeclaration() }
+
+/**
+ * List containing import alias declarations associated with types.
+ */
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("importAliasDeclarations()"))
+val <T : KoDeclarationCastProvider> List<T>.importAliasDeclarations: List<KoImportAliasDeclaration>
+    get() = mapNotNull { it.asImportAliasDeclaration() }
+
+/**
+ * List containing kotlin type declarations associated with types.
+ */
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("kotlinTypeDeclarations()"))
+val <T : KoDeclarationCastProvider> List<T>.kotlinTypeDeclarations: List<KoKotlinTypeDeclaration>
+    get() = mapNotNull { it.asKotlinTypeDeclaration() }
+
+/**
+ * List containing external type declarations associated with types.
+ */
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("externalTypeDeclarations()"))
+val <T : KoDeclarationCastProvider> List<T>.externalTypeDeclarations: List<KoExternalDeclaration>
+    get() = mapNotNull { it.asExternalDeclaration() }
+
+/**
  * List containing class declarations associated with declarations.
  *
  * @param predicate A function that defines the condition to be met by the class declaration.
@@ -147,7 +196,7 @@ fun <T : KoDeclarationCastProvider> List<T>.typeParameterDeclarations(
  * @return A list of external declarations that match the provided predicate, or all external declarations
  * if no predicate is provided.
  */
-fun <T : KoDeclarationCastProvider> List<T>.externalTypeDeclarations(
+fun <T : KoDeclarationCastProvider> List<T>.externalDeclarations(
     predicate: ((KoExternalDeclaration) -> Boolean)? = null,
 ): List<KoExternalDeclaration> =
     filter { it.hasExternalDeclaration(predicate) }
@@ -742,7 +791,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withTypeParameterDeclaration(
             else ->
                 it
                     .asTypeParameterDeclaration()
-                    ?.let { externalTypeDeclaration -> predicate(externalTypeDeclaration) } ?: false
+                    ?.let { typeParameter -> predicate(typeParameter) } ?: false
         }
     }
 
@@ -761,7 +810,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutTypeParameterDeclaration(
             else ->
                 it
                     .asTypeParameterDeclaration()
-                    ?.let { externalTypeDeclaration -> predicate(externalTypeDeclaration) } ?: false
+                    ?.let { typeParameter -> predicate(typeParameter) } ?: false
         }
     }
 
@@ -774,7 +823,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutTypeParameterDeclaration(
 fun <T : KoDeclarationCastProvider> List<T>.withExternalDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
-            null -> it.isExternal
+            null -> it.isExternalDeclaration
             else ->
                 it
                     .asExternalDeclaration()
@@ -791,7 +840,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withExternalDeclaration(predicate: (
 fun <T : KoDeclarationCastProvider> List<T>.withoutExternalDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.isExternal
+            null -> it.isExternalDeclaration
             else ->
                 it
                     .asExternalDeclaration()
@@ -848,5 +897,99 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutExternalDeclarationOf(kClasse
         when {
             kClasses.isEmpty() -> it.hasExternalDeclaration()
             else -> kClasses.any { kClass -> it.hasExternalDeclarationOf(kClass) }
+        }
+    }
+
+/**
+ * List containing declarations with the specified external declaration.
+ *
+ * @param predicate The predicate function to determine if a external declaration satisfies a condition.
+ * @return A list containing declarations with the specified external declaration.
+ */
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withExternalDeclaration"))
+fun <T : KoDeclarationCastProvider> List<T>.withExternalTypeDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)? = null): List<T> =
+    filter {
+        when (predicate) {
+            null -> it.isExternalType
+            else ->
+                it
+                    .asExternalTypeDeclaration()
+                    ?.let { externalTypeDeclaration -> predicate(externalTypeDeclaration) } ?: false
+        }
+    }
+
+/**
+ * List containing declarations without the specified external declaration.
+ *
+ * @param predicate The predicate function to determine if a external declaration satisfies a condition.
+ * @return A list containing declarations without the specified external declaration.
+ */
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withoutExternalDeclaration"))
+fun <T : KoDeclarationCastProvider> List<T>.withoutExternalTypeDeclaration(
+    predicate: ((KoExternalDeclaration) -> Boolean)? = null,
+): List<T> =
+    filterNot {
+        when (predicate) {
+            null -> it.isExternalType
+            else ->
+                it
+                    .asExternalTypeDeclaration()
+                    ?.let { externalTypeDeclaration -> predicate(externalTypeDeclaration) } ?: false
+        }
+    }
+
+/**
+ * List containing declarations with external declaration of.
+ *
+ * @param kClass The Kotlin class representing the external declaration to include.
+ * @param kClasses The Kotlin class(es) representing the external declaration(s) to include.
+ * @return A list containing declarations with the external declaration of the specified Kotlin class(es).
+ */
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withExternalDeclarationOf"))
+fun <T : KoDeclarationCastProvider> List<T>.withExternalTypeDeclarationOf(
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
+): List<T> = withExternalTypeDeclarationOf(listOf(kClass, *kClasses))
+
+/**
+ * List containing declarations with external declaration of.
+ *
+ * @param kClasses The Kotlin class(es) representing the external declaration(s) to include.
+ * @return A list containing declarations with the external declaration of the specified Kotlin class(es).
+ */
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withExternalDeclarationOf"))
+fun <T : KoDeclarationCastProvider> List<T>.withExternalTypeDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
+    filter {
+        when {
+            kClasses.isEmpty() -> it.hasExternalTypeDeclaration()
+            else -> kClasses.any { kClass -> it.hasExternalTypeDeclarationOf(kClass) }
+        }
+    }
+
+/**
+ * List containing declarations without external declaration of.
+ *
+ * @param kClass The Kotlin class representing the external declaration to exclude.
+ * @param kClasses The Kotlin class(es) representing the external declaration(s) to exclude.
+ * @return A list containing declarations without external declaration of the specified Kotlin class(es).
+ */
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withoutExternalDeclarationOf"))
+fun <T : KoDeclarationCastProvider> List<T>.withoutExternalTypeDeclarationOf(
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
+): List<T> = withoutExternalTypeDeclarationOf(listOf(kClass, *kClasses))
+
+/**
+ * List containing declarations without external declaration of.
+ *
+ * @param kClasses The Kotlin class(es) representing the external declaration(s) to exclude.
+ * @return A list containing declarations without external declaration of the specified Kotlin class(es).
+ */
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withoutExternalDeclarationOf"))
+fun <T : KoDeclarationCastProvider> List<T>.withoutExternalTypeDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
+    filterNot {
+        when {
+            kClasses.isEmpty() -> it.hasExternalTypeDeclaration()
+            else -> kClasses.any { kClass -> it.hasExternalTypeDeclarationOf(kClass) }
         }
     }
