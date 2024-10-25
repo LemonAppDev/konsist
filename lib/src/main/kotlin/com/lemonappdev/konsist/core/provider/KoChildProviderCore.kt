@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoChildDeclaration
-import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.provider.KoChildProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.model.DataCore
@@ -17,7 +17,7 @@ internal interface KoChildProviderCore :
         val items: List<KoChildDeclaration> = DataCore.classes + DataCore.interfaces + DataCore.objects
 
         return items.filter {
-            (it as? KoParentProvider)?.hasParent(indirectChildren) { parent -> parent == (this as? KoParentDeclaration) }
+            (it as? KoParentProvider)?.hasParent(indirectChildren) { parent -> parent.sourceDeclaration == (this as? KoSourceDeclaration) }
                 ?: false
         }
     }
