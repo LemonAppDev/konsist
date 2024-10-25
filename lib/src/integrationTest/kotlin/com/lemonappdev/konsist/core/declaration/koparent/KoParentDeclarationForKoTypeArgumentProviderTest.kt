@@ -3,10 +3,6 @@ package com.lemonappdev.konsist.core.declaration.koparent
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.ext.list.parents
-import com.lemonappdev.konsist.testdata.NonExistingAnnotation
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-import com.lemonappdev.konsist.testdata.SampleAnnotation1
-import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import com.lemonappdev.konsist.testdata.SampleClass
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -267,8 +263,7 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
                 arguments("class-with-parametrized-external-parent-class"),
                 arguments("class-with-external-parent-interface"),
                 arguments("class-with-external-parent-by-delegation"),
-
-                )
+            )
 
         @Suppress("unused")
         @JvmStatic
