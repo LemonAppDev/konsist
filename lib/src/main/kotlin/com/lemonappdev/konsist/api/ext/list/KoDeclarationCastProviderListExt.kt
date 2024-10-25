@@ -58,7 +58,7 @@ val <T : KoDeclarationCastProvider> List<T>.kotlinTypeDeclarations: List<KoKotli
 /**
  * List containing external type declarations associated with types.
  */
-@Deprecated("Will be removed in version 0.19.0", ReplaceWith("externalTypeDeclarations()"))
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("externalDeclarations()"))
 val <T : KoDeclarationCastProvider> List<T>.externalTypeDeclarations: List<KoExternalDeclaration>
     get() = mapNotNull { it.asExternalDeclaration() }
 
@@ -827,7 +827,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withExternalDeclaration(predicate: (
             else ->
                 it
                     .asExternalDeclaration()
-                    ?.let { externalTypeDeclaration -> predicate(externalTypeDeclaration) } ?: false
+                    ?.let { externalDeclaration -> predicate(externalDeclaration) } ?: false
         }
     }
 
@@ -844,7 +844,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutExternalDeclaration(predicate
             else ->
                 it
                     .asExternalDeclaration()
-                    ?.let { externalTypeDeclaration -> predicate(externalTypeDeclaration) } ?: false
+                    ?.let { externalDeclaration -> predicate(externalDeclaration) } ?: false
         }
     }
 
@@ -914,7 +914,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withExternalTypeDeclaration(predicat
             else ->
                 it
                     .asExternalTypeDeclaration()
-                    ?.let { externalTypeDeclaration -> predicate(externalTypeDeclaration) } ?: false
+                    ?.let { externalDeclaration -> predicate(externalDeclaration) } ?: false
         }
     }
 
@@ -934,7 +934,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutExternalTypeDeclaration(
             else ->
                 it
                     .asExternalTypeDeclaration()
-                    ?.let { externalTypeDeclaration -> predicate(externalTypeDeclaration) } ?: false
+                    ?.let { externalDeclaration -> predicate(externalDeclaration) } ?: false
         }
     }
 

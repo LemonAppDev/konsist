@@ -532,7 +532,7 @@ class KoDeclarationCastProviderListExtTest {
     }
 
     @Test
-    fun `externalTypeDeclarations returns external types from all declarations`() {
+    fun `externalDeclarations returns external types from all declarations`() {
         // given
         val sourceDeclaration1: KoExternalDeclaration = mockk()
         val sourceDeclaration2: KoExternalDeclaration = mockk()
@@ -560,7 +560,7 @@ class KoDeclarationCastProviderListExtTest {
     }
 
     @Test
-    fun `externalTypeDeclarations returns external types from all declarations which satisfies predicate`() {
+    fun `externalDeclarations returns external types from all declarations which satisfies predicate`() {
         // given
         val predicate: (KoExternalDeclaration) -> Boolean = { it.hasNameContaining("SomeExternalType") }
         val sourceDeclaration1: KoExternalDeclaration = mockk()
