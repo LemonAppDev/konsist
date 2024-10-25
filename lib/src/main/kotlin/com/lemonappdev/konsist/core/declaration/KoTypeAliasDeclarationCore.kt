@@ -28,6 +28,7 @@ import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProvid
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotated
+import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtTypeAlias
@@ -57,7 +58,7 @@ internal class KoTypeAliasDeclarationCore private constructor(
     KoVisibilityModifierProviderCore,
     KoActualModifierProviderCore,
     KoTypeParameterProviderCore {
-    override val ktAnnotated: KtAnnotated by lazy { ktTypeAlias }
+    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktTypeAlias.annotationEntries }
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktTypeAlias }
 

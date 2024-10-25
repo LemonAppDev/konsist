@@ -5,18 +5,18 @@ import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import org.jetbrains.kotlin.psi.KtAnnotated
+import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import kotlin.reflect.KClass
 
 internal interface KoAnnotationProviderCore :
     KoAnnotationProvider,
     KoContainingDeclarationProviderCore,
     KoBaseProviderCore {
-    val ktAnnotated: KtAnnotated?
+    val ktAnnotationEntries: List<KtAnnotationEntry>?
 
     override val annotations: List<KoAnnotationDeclaration>
         get() =
-            ktAnnotated
-                ?.annotationEntries
+            ktAnnotationEntries
                 ?.map { KoAnnotationDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
                 ?: emptyList()
 

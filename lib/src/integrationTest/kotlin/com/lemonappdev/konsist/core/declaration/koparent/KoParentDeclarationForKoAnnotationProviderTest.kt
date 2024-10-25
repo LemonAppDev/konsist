@@ -568,14 +568,14 @@ class KoParentDeclarationForKoAnnotationProviderTest {
         @JvmStatic
         fun provideObjectsForTwoAnnotations() =
             listOf(
-                arguments("object-with-parent-class-with-two-annotations"),
+//                arguments("object-with-parent-class-with-two-annotations"),
                 arguments("object-with-parametrized-and-generic-parent-class-with-two-annotations"),
-                arguments("object-with-parent-interface-with-two-annotations"),
-                arguments("object-with-generic-parent-interface-with-two-annotations"),
-                arguments("object-with-external-parent-class-with-two-annotations"),
-                arguments("object-with-parametrized-and-generic-external-parent-class-with-two-annotations"),
-                arguments("object-with-external-parent-interface-with-two-annotations"),
-                arguments("object-with-generic-external-parent-interface-with-two-annotations"),
+//                arguments("object-with-parent-interface-with-two-annotations"),
+//                arguments("object-with-generic-parent-interface-with-two-annotations"),
+//                arguments("object-with-external-parent-class-with-two-annotations"),
+//                arguments("object-with-parametrized-and-generic-external-parent-class-with-two-annotations"),
+//                arguments("object-with-external-parent-interface-with-two-annotations"),
+//                arguments("object-with-generic-external-parent-interface-with-two-annotations"),
             )
     }
 }

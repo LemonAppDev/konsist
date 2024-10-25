@@ -13,6 +13,7 @@ import com.lemonappdev.konsist.core.provider.modifier.KoDataModifierProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotated
+import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
@@ -34,7 +35,7 @@ internal class KoObjectDeclarationCore(
      */
     KoNameProviderCore,
     KoParentClassProviderCore {
-    override val ktAnnotated: KtAnnotated by lazy { ktObjectDeclaration }
+    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktObjectDeclaration.annotationEntries }
 
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktObjectDeclaration }
 

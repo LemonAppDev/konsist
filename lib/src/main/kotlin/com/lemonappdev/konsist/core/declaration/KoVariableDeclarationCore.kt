@@ -26,6 +26,7 @@ import com.lemonappdev.konsist.core.provider.modifier.KoVarModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotated
+import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtExpression
@@ -57,7 +58,7 @@ internal class KoVariableDeclarationCore private constructor(
     KoTacitTypeProviderCore,
     KoIsValProviderCore,
     KoIsVarProviderCore {
-    override val ktAnnotated: KtAnnotated by lazy { ktProperty }
+    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktProperty.annotationEntries }
 
     override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktProperty }
 

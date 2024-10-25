@@ -39,6 +39,7 @@ import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotated
+import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
@@ -91,8 +92,8 @@ internal interface KoClassAndInterfaceAndObjectDeclarationCore :
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktClassOrObject
 
-    override val ktAnnotated: KtAnnotated
-        get() = ktClassOrObject
+    override val ktAnnotationEntries: List<KtAnnotationEntry>?
+        get() = ktClassOrObject.annotationEntries
 
     override val ktElement: KtElement
         get() = ktClassOrObject

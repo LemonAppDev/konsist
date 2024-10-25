@@ -27,6 +27,7 @@ import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProvid
 import com.lemonappdev.konsist.core.provider.util.KoLocalDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotated
+import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtEnumEntry
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
@@ -59,7 +60,7 @@ internal class KoEnumConstantDeclarationCore private constructor(
     KoTextProviderCore {
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktEnumEntry }
 
-    override val ktAnnotated: KtAnnotated by lazy { ktEnumEntry }
+    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktEnumEntry.annotationEntries }
 
     override val psiElement: PsiElement by lazy { ktEnumEntry }
 

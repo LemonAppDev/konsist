@@ -25,14 +25,18 @@ import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
+import org.jetbrains.kotlin.com.intellij.util.containers.ContainerUtil.filterIsInstance
 import org.jetbrains.kotlin.psi.KtAnnotated
+import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtConstructorCalleeExpression
+import org.jetbrains.kotlin.psi.KtDeclarationModifierList
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
+import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 
 internal class KoParentDeclarationCore(
     private val ktSuperTypeListEntry: KtSuperTypeListEntry,
@@ -54,8 +58,6 @@ internal class KoParentDeclarationCore(
     KoAnnotationProviderCore,
     KoDeclarationCastProviderCore,
     KoTypeArgumentProviderCore {
-    override val ktAnnotated: KtAnnotated? by lazy { null } // Todo: change
-
     override val psiElement: PsiElement by lazy { ktSuperTypeListEntry }
 
     override val ktElement: KtElement by lazy { ktSuperTypeListEntry }
@@ -67,6 +69,23 @@ internal class KoParentDeclarationCore(
     override val ktTypeProjection: KtTypeProjection? by lazy { null }
 
     override val ktUserType: KtUserType? by lazy { null }
+
+    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy {
+        val children = ktSuperTypeListEntry.children
+
+        val targetChildren = children
+            .filterIsInstance<KtConstructorCalleeExpression>()
+            .firstOrNull()
+            ?.children
+            ?: children
+
+        targetChildren
+            .firstOrNull { it is KtTypeReference }
+            ?.children
+            ?.firstOrNull { it is KtDeclarationModifierList }
+            ?.children
+            ?.filterIsInstance<KtAnnotationEntry>()
+    }
 
     override val koDeclarationCastProviderDeclaration: KoSourceDeclaration by lazy { sourceDeclaration }
 

@@ -31,6 +31,7 @@ import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotated
+import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunctionType
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
@@ -104,7 +105,7 @@ internal class KoTypeDeclarationCore private constructor(
             ?.lastOrNull()
     }
 
-    override val ktAnnotated: KtAnnotated? by lazy { ktTypeReference }
+    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktTypeReference?.annotationEntries }
 
     override val koDeclarationCastProviderDeclaration: KoSourceDeclaration? by lazy { sourceDeclaration }
 
