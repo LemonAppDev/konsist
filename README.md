@@ -131,7 +131,24 @@ Check the [videos & articles](https://docs.konsist.lemonappdev.com/getting-start
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=LemonAppDev/konsist&type=Date)](https://star-history.com/#LemonAppDev/konsist&Date)
+<picture>
+  <source
+    media="(prefers-color-scheme: dark)"
+    srcset="
+      https://api.star-history.com/svg?repos=LemonAppDev/konsist/&type=Date&theme=dark
+    "
+  />
+  <source
+    media="(prefers-color-scheme: light)"
+    srcset="
+      https://api.star-history.com/svg?repos=LemonAppDev/konsisty&type=Date
+    "
+  />
+  <img
+    alt="Star History Chart"
+    src="https://api.star-history.com/svg?repos=LemonAppDev/konsist&type=Date"
+  />
+</picture>
 
 ## Support
 
