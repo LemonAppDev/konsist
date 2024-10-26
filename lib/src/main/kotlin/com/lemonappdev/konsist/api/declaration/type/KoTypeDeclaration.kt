@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.api.provider.KoFunctionTypeDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoGenericTypeProvider
 import com.lemonappdev.konsist.api.provider.KoIsFunctionTypeProvider
@@ -24,8 +25,6 @@ import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoStarProjectionProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTypeArgumentProvider
-import com.lemonappdev.konsist.api.provider.KoTypeDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoTypeProvider
 
 /**
  * Represents a Kotlin type declaration.
@@ -43,7 +42,7 @@ interface KoTypeDeclaration :
     KoContainingDeclarationProvider,
     KoModuleProvider,
     KoSourceSetProvider,
-    KoTypeProvider,
+    KoDeclarationCastProvider,
     KoStarProjectionProvider,
     KoGenericTypeProvider,
     KoIsGenericTypeProvider,
@@ -52,7 +51,6 @@ interface KoTypeDeclaration :
     KoPackageProvider,
     KoResideInPackageProvider,
     KoAnnotationProvider,
-    KoTypeDeclarationProvider,
     KoSourceDeclarationProvider,
     KoIsMutableTypeProvider,
     KoTypeArgumentProvider,

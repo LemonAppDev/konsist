@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
+import com.lemonappdev.konsist.core.provider.KoDeclarationCastProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionTypeDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoGenericTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsFunctionTypeProviderCore
@@ -27,8 +28,6 @@ import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoStarProjectionProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
-import com.lemonappdev.konsist.core.provider.KoTypeDeclarationProviderCore
-import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotated
@@ -57,7 +56,6 @@ internal class KoTypeDeclarationCore private constructor(
     KoContainingDeclarationProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore,
-    KoTypeProviderCore,
     KoStarProjectionProviderCore,
     KoSourceAndAliasTypeProviderCore,
     KoGenericTypeProviderCore,
@@ -66,7 +64,7 @@ internal class KoTypeDeclarationCore private constructor(
     KoPackageProviderCore,
     KoResideInPackageProviderCore,
     KoAnnotationProviderCore,
-    KoTypeDeclarationProviderCore,
+    KoDeclarationCastProviderCore,
     KoSourceDeclarationProviderCore,
     KoIsMutableTypeProviderCore,
     KoTypeArgumentProviderCore,
@@ -108,9 +106,7 @@ internal class KoTypeDeclarationCore private constructor(
 
     override val ktAnnotated: KtAnnotated? by lazy { ktTypeReference }
 
-    override val koTypeDeclarationProviderDeclaration: KoSourceDeclaration? by lazy { sourceDeclaration }
-
-    override val koTypeProviderDeclaration: KoSourceDeclaration? by lazy { sourceDeclaration }
+    override val koDeclarationCastProviderDeclaration: KoSourceDeclaration? by lazy { sourceDeclaration }
 
     override val name: String by lazy {
         val typeReference =

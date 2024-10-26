@@ -20,7 +20,7 @@ import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
 
 @Suppress("detekt.LargeClass")
-class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
+class KoTypeArgumentDeclarationForKoDeclarationCastProviderTest {
     @Test
     fun `class-type-argument`() {
         // given
@@ -37,6 +37,16 @@ class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.isClass shouldBeEqualTo true
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isKotlinBasicType shouldBeEqualTo false
+            it?.isKotlinCollectionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             it?.asClassDeclaration()?.name shouldBeEqualTo "SampleType"
             it?.hasClassDeclaration() shouldBeEqualTo true
@@ -57,8 +67,14 @@ class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
             it?.asKotlinTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
             it?.hasKotlinTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
-            it?.asExternalTypeDeclaration() shouldBeEqualTo null
-            it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asExternalDeclaration() shouldBeEqualTo null
+            it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
         }
@@ -80,6 +96,16 @@ class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo true
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isKotlinBasicType shouldBeEqualTo false
+            it?.isKotlinCollectionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
             it?.asObjectDeclaration()?.name shouldBeEqualTo "SampleObject"
             it?.hasObjectDeclaration() shouldBeEqualTo true
@@ -100,8 +126,14 @@ class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
             it?.asKotlinTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
             it?.hasKotlinTypeDeclarationOf(SampleObject::class) shouldBeEqualTo false
-            it?.asExternalTypeDeclaration() shouldBeEqualTo null
-            it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asExternalDeclaration() shouldBeEqualTo null
+            it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
         }
@@ -123,6 +155,16 @@ class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo true
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isKotlinBasicType shouldBeEqualTo false
+            it?.isKotlinCollectionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
             it?.asInterfaceDeclaration()?.name shouldBeEqualTo "SampleInterface"
             it?.hasInterfaceDeclaration() shouldBeEqualTo true
@@ -143,8 +185,14 @@ class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
             it?.asKotlinTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
             it?.hasKotlinTypeDeclarationOf(SampleInterface::class) shouldBeEqualTo false
-            it?.asExternalTypeDeclaration() shouldBeEqualTo null
-            it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asExternalDeclaration() shouldBeEqualTo null
+            it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
         }
@@ -166,6 +214,16 @@ class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo true
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isKotlinBasicType shouldBeEqualTo false
+            it?.isKotlinCollectionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeInstanceOf KoImportAliasDeclaration::class
             it?.asImportAliasDeclaration()?.name shouldBeEqualTo "ImportAlias"
             it?.hasImportAliasDeclaration() shouldBeEqualTo true
@@ -181,8 +239,14 @@ class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
-            it?.asExternalTypeDeclaration() shouldBeEqualTo null
-            it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asExternalDeclaration() shouldBeEqualTo null
+            it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
         }
@@ -204,6 +268,16 @@ class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isKotlinBasicType shouldBeEqualTo false
+            it?.isKotlinCollectionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo true
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeInstanceOf KoTypeParameterDeclaration::class
             it?.asTypeParameterDeclaration()?.name shouldBeEqualTo "TestType"
             it?.hasTypeParameterDeclaration() shouldBeEqualTo true
@@ -219,8 +293,14 @@ class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
             it?.hasImportAliasDeclaration() shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
-            it?.asExternalTypeDeclaration() shouldBeEqualTo null
-            it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asExternalDeclaration() shouldBeEqualTo null
+            it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
         }
@@ -242,6 +322,16 @@ class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo true
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isKotlinBasicType shouldBeEqualTo false
+            it?.isKotlinCollectionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeInstanceOf KoTypeAliasDeclaration::class
             it?.asTypeAliasDeclaration()?.name shouldBeEqualTo "SampleTypeAlias"
             it?.hasTypeAliasDeclaration() shouldBeEqualTo true
@@ -257,8 +347,14 @@ class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
             it?.hasImportAliasDeclaration() shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
-            it?.asExternalTypeDeclaration() shouldBeEqualTo null
-            it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asExternalDeclaration() shouldBeEqualTo null
+            it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
         }
@@ -280,6 +376,16 @@ class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo true
+            it?.isKotlinBasicType shouldBeEqualTo true
+            it?.isKotlinCollectionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.asKotlinTypeDeclaration()?.name shouldBeEqualTo "String"
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo true
@@ -287,6 +393,16 @@ class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
             it?.hasKotlinTypeDeclaration { declaration -> declaration.name == "Set<String>" } shouldBeEqualTo false
             it?.hasKotlinTypeDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasKotlinTypeDeclarationOf(Int::class) shouldBeEqualTo false
+            it?.asKotlinBasicTypeDeclaration() shouldBeInstanceOf KoKotlinTypeDeclaration::class
+            it?.asKotlinBasicTypeDeclaration()?.name shouldBeEqualTo "String"
+            it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo true
+            it?.hasKotlinBasicTypeDeclaration { declaration -> declaration.name == "String" } shouldBeEqualTo true
+            it?.hasKotlinBasicTypeDeclaration { declaration -> declaration.name == "Set<String>" } shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(String::class) shouldBeEqualTo true
+            it?.hasKotlinBasicTypeDeclarationOf(Int::class) shouldBeEqualTo false
+            it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.hasClassDeclarationOf(String::class) shouldBeEqualTo false
@@ -300,9 +416,9 @@ class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
             it?.hasImportAliasDeclaration() shouldBeEqualTo false
-            it?.asExternalTypeDeclaration() shouldBeEqualTo null
-            it?.hasExternalTypeDeclaration() shouldBeEqualTo false
-            it?.hasExternalTypeDeclarationOf(String::class) shouldBeEqualTo false
+            it?.asExternalDeclaration() shouldBeEqualTo null
+            it?.hasExternalDeclaration() shouldBeEqualTo false
+            it?.hasExternalDeclarationOf(String::class) shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
         }
@@ -324,6 +440,16 @@ class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isKotlinBasicType shouldBeEqualTo false
+            it?.isKotlinCollectionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
@@ -336,8 +462,14 @@ class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
             it?.hasImportAliasDeclaration() shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
-            it?.asExternalTypeDeclaration() shouldBeEqualTo null
-            it?.hasExternalTypeDeclaration() shouldBeEqualTo false
+            it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asExternalDeclaration() shouldBeEqualTo null
+            it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
         }
@@ -359,13 +491,23 @@ class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.asExternalTypeDeclaration() shouldBeInstanceOf KoExternalDeclaration::class
-            it?.asExternalTypeDeclaration()?.name shouldBeEqualTo "SampleExternalClass"
-            it?.hasExternalTypeDeclaration() shouldBeEqualTo true
-            it?.hasExternalTypeDeclaration { declaration -> declaration.name == "SampleExternalClass" } shouldBeEqualTo true
-            it?.hasExternalTypeDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasExternalTypeDeclarationOf(SampleExternalClass::class) shouldBeEqualTo true
-            it?.hasExternalTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isKotlinBasicType shouldBeEqualTo false
+            it?.isKotlinCollectionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo true
+            it?.asExternalDeclaration() shouldBeInstanceOf KoExternalDeclaration::class
+            it?.asExternalDeclaration()?.name shouldBeEqualTo "SampleExternalClass"
+            it?.hasExternalDeclaration() shouldBeEqualTo true
+            it?.hasExternalDeclaration { declaration -> declaration.name == "SampleExternalClass" } shouldBeEqualTo true
+            it?.hasExternalDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasExternalDeclarationOf(SampleExternalClass::class) shouldBeEqualTo true
+            it?.hasExternalDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.hasClassDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
@@ -382,6 +524,12 @@ class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
             it?.asKotlinTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
             it?.hasKotlinTypeDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
+            it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
         }
@@ -389,7 +537,7 @@ class KoTypeArgumentDeclarationForKoTypeDeclarationProviderTest {
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
-            "core/declaration/kotypeargument/snippet/forkotypedeclarationprovider/",
+            "core/declaration/kotypeargument/snippet/forkodeclarationcastprovider/",
             fileName,
         )
 }
