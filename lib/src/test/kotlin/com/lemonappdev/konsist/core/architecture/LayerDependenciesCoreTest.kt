@@ -8,8 +8,8 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-class LayerDependencyCoreTest {
-    val sut = LayerDependencyCore()
+class LayerDependenciesCoreTest {
+    val sut = LayerDependenciesCore()
 
     @Test
     fun `dependsOn throws exception for empty set`() {

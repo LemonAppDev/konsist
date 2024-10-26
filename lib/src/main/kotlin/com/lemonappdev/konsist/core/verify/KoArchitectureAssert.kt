@@ -4,9 +4,9 @@ import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.ext.list.withPackage
-import com.lemonappdev.konsist.core.architecture.LayerDependencyCore
 import com.lemonappdev.konsist.core.architecture.KoArchitectureFiles
 import com.lemonappdev.konsist.core.architecture.KoArchitectureScope
+import com.lemonappdev.konsist.core.architecture.LayerDependenciesCore
 import com.lemonappdev.konsist.core.architecture.LayerDependencyType
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.exception.KoException
@@ -19,20 +19,20 @@ internal fun KoArchitectureFiles.assert(
     testName: String?,
 ): Unit {
     try {
-        val dependencyRules = this.dependencyRules as LayerDependencyCore
+        val layerDependencies = this.layerDependencies as LayerDependenciesCore
 
-        validateLayersOnDependencyRules(dependencyRules = dependencyRules)
-        validateAllLayersAreValid(files = this.files, dependencyRules = dependencyRules)
+        validateLayersDependencies(layerDependencies = layerDependencies)
+        validateAllLayersAreValid(files = this.files, layerDependencies = layerDependencies)
 
-        val failedFiles = validateLayersContainingFailedFiles(this.files, dependencyRules)
+        val failedFiles = validateLayersContainingFailedFiles(this.files, layerDependencies)
 
         if (failedFiles.isNotEmpty()) {
             throw KoAssertionFailedException(
 //                getCheckFailedMessages(
 //                    failedFiles.distinct(),
-//                    dependencyRules.positiveDependencies,
-//                    dependencyRules.negativeDependencies,
-//                    dependencyRules.layerDependencyTypes,
+//                    layerDependencies.positiveDependencies,
+//                    layerDependencies.negativeDependencies,
+//                    layerDependencies.layerDependencyTypes,
 //                    additionalMessage,
 //                    testName,
 //                ),
@@ -54,20 +54,20 @@ internal fun KoArchitectureScope.assert(
 ): Unit {
     try {
         val files = this.koScope.files
-        val dependencyRules = this.dependencyRules as LayerDependencyCore
+        val layerDependencies = this.layerDependencies as LayerDependenciesCore
 
-        validateLayersOnDependencyRules(dependencyRules = dependencyRules)
-        validateAllLayersAreValid(files = files, dependencyRules = dependencyRules)
+        validateLayersDependencies(layerDependencies = layerDependencies)
+        validateAllLayersAreValid(files = files, layerDependencies = layerDependencies)
 
-        val failedFiles = validateLayersContainingFailedFiles(files = files, dependencyRules = dependencyRules)
+        val failedFiles = validateLayersContainingFailedFiles(files = files, layerDependencies = layerDependencies)
 
         if (failedFiles.isNotEmpty()) {
             throw KoAssertionFailedException(
 //                getCheckFailedMessages(
 //                    failedFiles.distinct(),
-//                    dependencyRules.positiveDependencies,
-//                    dependencyRules.negativeDependencies,
-//                    dependencyRules.layerDependencyTypes,
+//                    layerDependencies.positiveDependencies,
+//                    layerDependencies.negativeDependencies,
+//                    layerDependencies.layerDependencyTypes,
 //                    additionalMessage,
 //                    testName,
 //                ),
@@ -86,16 +86,16 @@ internal fun KoArchitectureScope.assert(
  * Validate that all the layers are not empty
  *
  * @param files within the scope
- * @param dependencyRules dependencies of the architecture.
+ * @param layerDependencies dependencies of the architecture.
  *
  * @throws KoPreconditionFailedException Layers do not contain files
  */
 private fun validateAllLayersAreValid(
     files: List<KoFileDeclaration>,
-    dependencyRules: LayerDependencyCore,
+    layerDependencies: LayerDependenciesCore,
 ): Unit {
     val isAllLayersValid =
-        dependencyRules.allLayers
+        layerDependencies.allLayers
             .all {
                 files
                     .withPackage(it.rootPackage)
@@ -104,7 +104,7 @@ private fun validateAllLayersAreValid(
 
     if (!isAllLayersValid) {
         val layer =
-            dependencyRules
+            layerDependencies
                 .allLayers
                 .first {
                     files
@@ -118,12 +118,12 @@ private fun validateAllLayersAreValid(
 /**
  * Validate dependencies among the Layers
  *
- * @param dependencyRules dependencies of the architecture.
+ * @param layerDependencies dependencies of the architecture.
  *
  * @throws KoPreconditionFailedException Architecture doesn't contain layers or dependencies
  */
-private fun validateLayersOnDependencyRules(dependencyRules: LayerDependencyCore): Unit {
-    if (dependencyRules.allLayers.isEmpty()) {
+private fun validateLayersDependencies(layerDependencies: LayerDependenciesCore): Unit {
+    if (layerDependencies.allLayers.isEmpty()) {
         throw KoPreconditionFailedException("Architecture doesn't contain layers or dependencies.")
     }
 }
@@ -132,20 +132,20 @@ private fun validateLayersOnDependencyRules(dependencyRules: LayerDependencyCore
  * Validate layers do not contain [FailedFiles]
  *
  * @param files within the scope
- * @param dependencyRules dependencies of the architecture.
+ * @param layerDependencies dependencies of the architecture.
  *
  * @return List<FailedFiles>
  */
 private fun validateLayersContainingFailedFiles(
     files: List<KoFileDeclaration>,
-    dependencyRules: LayerDependencyCore,
+    layerDependencies: LayerDependenciesCore,
 ): List<FailedFiles> {
     val failedFiles = mutableListOf<FailedFiles>()
 
-//    dependencyRules
+//    layerDependencies
 //        .positiveDependencies
 //        .forEach { (layer, layers) ->
-//            val otherLayers = (dependencyRules.allLayers - layers)
+//            val otherLayers = (layerDependencies.allLayers - layers)
 //
 //            files
 //                .withPackage(layer.rootPackage)
@@ -163,7 +163,7 @@ private fun validateLayersContainingFailedFiles(
 //                }
 //        }
 //
-//    dependencyRules
+//    layerDependencies
 //        .negativeDependencies
 //        .forEach { (layer, layers) ->
 //            files

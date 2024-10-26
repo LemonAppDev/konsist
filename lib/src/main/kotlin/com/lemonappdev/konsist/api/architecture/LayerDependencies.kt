@@ -5,7 +5,7 @@ package com.lemonappdev.konsist.api.architecture
  *
  * This interface provides methods to define dependencies between layers in an architecture.
  */
-interface DependencyRules {
+interface LayerDependencies {
     /**
      * Adds dependencies between the current layer and the specified layers.
      *

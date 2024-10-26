@@ -7,7 +7,7 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-class DependencyRulesTest {
+class LayerDependenciesTest {
     @Test
     fun `throws an exception when a layer with the same name already exists`() {
         // given

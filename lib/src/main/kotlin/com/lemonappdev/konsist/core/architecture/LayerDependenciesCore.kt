@@ -1,10 +1,10 @@
 package com.lemonappdev.konsist.core.architecture
 
-import com.lemonappdev.konsist.api.architecture.DependencyRules
 import com.lemonappdev.konsist.api.architecture.Layer
+import com.lemonappdev.konsist.api.architecture.LayerDependencies
 import com.lemonappdev.konsist.core.exception.KoInvalidAssertArchitectureConfigurationException
 
-class LayerDependencyCore : DependencyRules {
+class LayerDependenciesCore : LayerDependencies {
     internal val layerDependencies = mutableListOf<LayerDependency>()
     internal var allLayers = mutableSetOf<Layer>()
 
