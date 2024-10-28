@@ -226,12 +226,12 @@ object TypeUtil {
 
     internal fun isKotlinBasicType(typeName: String): Boolean {
         val bareTypeName = getBareType(typeName)
-        return kotlinBasicTypes.any { it == bareTypeName }
+        return kotlinBasicTypeNames.any { it == bareTypeName }
     }
 
     internal fun isKotlinCollectionTypes(typeName: String): Boolean {
         val bareTypeName = getBareType(typeName)
-        return kotlinCollectionTypes.any { it == bareTypeName }
+        return kotlinCollectionTypeNames.any { it == bareTypeName }
     }
 
     internal fun getBareType(name: String): String =
@@ -273,59 +273,61 @@ object TypeUtil {
 
     // Kotlin basic types: https://kotlinlang.org/docs/basic-types.html
     @OptIn(ExperimentalUnsignedTypes::class)
-    private val kotlinBasicTypes: Set<String> = setOf(
-        Any::class,
-        Boolean::class,
-        Byte::class,
-        Char::class,
-        Double::class,
-        Float::class,
-        Int::class,
-        Long::class,
-        Nothing::class,
-        Number::class,
-        Short::class,
-        String::class,
-        UByte::class,
-        UByteArray::class,
-        UInt::class,
-        UIntArray::class,
-        ULong::class,
-        ULongArray::class,
-        UShort::class,
-        UShortArray::class,
-        Unit::class,
-    ).mapNotNull { it.simpleName }
-        .toSet()
+    private val kotlinBasicTypeNames: Set<String> =
+        setOf(
+            Any::class,
+            Boolean::class,
+            Byte::class,
+            Char::class,
+            Double::class,
+            Float::class,
+            Int::class,
+            Long::class,
+            Nothing::class,
+            Number::class,
+            Short::class,
+            String::class,
+            UByte::class,
+            UByteArray::class,
+            UInt::class,
+            UIntArray::class,
+            ULong::class,
+            ULongArray::class,
+            UShort::class,
+            UShortArray::class,
+            Unit::class,
+        ).mapNotNull { it.simpleName }
+            .toSet()
 
     // Kotlin collections types:
     // https://kotlinlang.org/docs/collections-overview.html#collection
     // https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections
-    private val kotlinCollectionTypes: Set<String> = setOf(
-        AbstractCollection::class,
-        AbstractIterator::class,
-        AbstractList::class,
-        AbstractMap::class,
-        AbstractMutableCollection::class,
-        AbstractMutableList::class,
-        AbstractMutableMap::class,
-        AbstractMutableSet::class,
-        AbstractSet::class,
-        ArrayDeque::class,
-        ArrayList::class,
-        Array::class,
-        Collection::class,
-        HashMap::class,
-        HashSet::class,
-        LinkedHashMap::class,
-        LinkedHashSet::class,
-        List::class,
-        Map::class,
-        MutableCollection::class,
-        MutableList::class,
-        MutableMap::class,
-        MutableSet::class,
-        Set::class,
-    ).mapNotNull { it.qualifiedName }
-        .toSet()
+    private val kotlinCollectionTypeNames: Set<String> =
+        setOf(
+            AbstractCollection::class,
+            AbstractIterator::class,
+            AbstractList::class,
+            AbstractMap::class,
+            AbstractMutableCollection::class,
+            AbstractMutableList::class,
+            AbstractMutableMap::class,
+            AbstractMutableSet::class,
+            AbstractSet::class,
+            ArrayDeque::class,
+            ArrayList::class,
+            Array::class,
+            Collection::class,
+            HashMap::class,
+            HashSet::class,
+            LinkedHashMap::class,
+            LinkedHashSet::class,
+            List::class,
+            Map::class,
+            MutableCollection::class,
+            MutableList::class,
+            MutableMap::class,
+            MutableSet::class,
+            Set::class,
+        ).mapNotNull { it.simpleName }
+            .toSet()
 }
