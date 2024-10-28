@@ -271,60 +271,61 @@ object TypeUtil {
             this
         }
 
-    // Basic types in Kotlin are described here: https://kotlinlang.org/docs/basic-types.html
-    private val kotlinBasicTypes: Set<String>
-        get() =
-            setOf(
-                "Byte",
-                "Short",
-                "Int",
-                "Long",
-                "Float",
-                "Double",
-                "UByte",
-                "UShort",
-                "UInt",
-                "ULong",
-                "UByteArray",
-                "UShortArray",
-                "UIntArray",
-                "ULongArray",
-                "Boolean",
-                "Char",
-                "String",
-                "Unit",
-                "Any",
-                "Nothing",
-            )
+    // Kotlin basic types: https://kotlinlang.org/docs/basic-types.html
+    @OptIn(ExperimentalUnsignedTypes::class)
+    private val kotlinBasicTypes: Set<String> = setOf(
+        Any::class,
+        Boolean::class,
+        Byte::class,
+        Char::class,
+        Double::class,
+        Float::class,
+        Int::class,
+        Long::class,
+        Nothing::class,
+        Number::class,
+        Short::class,
+        String::class,
+        UByte::class,
+        UByteArray::class,
+        UInt::class,
+        UIntArray::class,
+        ULong::class,
+        ULongArray::class,
+        UShort::class,
+        UShortArray::class,
+        Unit::class,
+    ).mapNotNull { it.simpleName }
+        .toSet()
 
-    // Collections in Kotlin are described here: https://kotlinlang.org/docs/collections-overview.html#collection
-// and here https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections
-    private val kotlinCollectionTypes: Set<String>
-        get() =
-            setOf(
-                "AbstractCollection",
-                "AbstractIterator",
-                "AbstractList",
-                "AbstractMap",
-                "AbstractMutableCollection",
-                "AbstractMutableList",
-                "AbstractMutableMap",
-                "AbstractMutableSet",
-                "AbstractSet",
-                "ArrayDeque",
-                "ArrayList",
-                "Array",
-                "Collection",
-                "HashMap",
-                "HashSet",
-                "LinkedHashMap",
-                "LinkedHashSet",
-                "List",
-                "Map",
-                "MutableCollection",
-                "MutableList",
-                "MutableMap",
-                "MutableSet",
-                "Set",
-            )
+    // Kotlin collections types:
+    // https://kotlinlang.org/docs/collections-overview.html#collection
+    // https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections
+    private val kotlinCollectionTypes: Set<String> = setOf(
+        AbstractCollection::class,
+        AbstractIterator::class,
+        AbstractList::class,
+        AbstractMap::class,
+        AbstractMutableCollection::class,
+        AbstractMutableList::class,
+        AbstractMutableMap::class,
+        AbstractMutableSet::class,
+        AbstractSet::class,
+        ArrayDeque::class,
+        ArrayList::class,
+        Array::class,
+        Collection::class,
+        HashMap::class,
+        HashSet::class,
+        LinkedHashMap::class,
+        LinkedHashSet::class,
+        List::class,
+        Map::class,
+        MutableCollection::class,
+        MutableList::class,
+        MutableMap::class,
+        MutableSet::class,
+        Set::class,
+    ).mapNotNull { it.qualifiedName }
+        .toSet()
 }
