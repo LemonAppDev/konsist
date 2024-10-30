@@ -13,7 +13,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoVariableDeclarationForKoDelegateProviderTest {
+class KoVariableDeclarationForKoPropertyDelegateProviderTest {
     @ParameterizedTest
     @MethodSource("provideValuesForLazyDelegate")
     fun `variable-has-lazy-delegate`(declarations: List<KoVariableProvider>) {
@@ -52,7 +52,7 @@ class KoVariableDeclarationForKoDelegateProviderTest {
     companion object {
         private fun getSnippetFile(fileName: String) =
             TestSnippetProvider.getSnippetKoScope(
-                "core/declaration/kovariable/snippet/forkodelegateprovider/",
+                "core/declaration/kovariable/snippet/forkopropertydelegateprovider/",
                 fileName,
             )
 

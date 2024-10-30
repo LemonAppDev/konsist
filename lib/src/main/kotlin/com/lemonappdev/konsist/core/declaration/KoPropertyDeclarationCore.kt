@@ -27,6 +27,7 @@ import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoNullableTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoPropertyDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoReadOnlyProviderCore
 import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
@@ -84,7 +85,7 @@ internal class KoPropertyDeclarationCore private constructor(
     KoIsConstructorDefinedProviderCore,
     KoContainingFileProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
-    KoDelegateProviderCore,
+    KoPropertyDelegateProviderCore,
     KoNullableTypeProviderCore,
     KoInitializerProviderCore,
     KoIsInitializedProviderCore,

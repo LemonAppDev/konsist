@@ -13,6 +13,7 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationCastProviderCore
+import com.lemonappdev.konsist.core.provider.KoInterfaceDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
@@ -38,7 +39,7 @@ import org.jetbrains.kotlin.psi.KtValueArgument
 import org.jetbrains.kotlin.psi.KtValueArgumentList
 
 internal class KoParentDeclarationCore(
-    private val ktSuperTypeListEntry: KtSuperTypeListEntry,
+    override val ktSuperTypeListEntry: KtSuperTypeListEntry,
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoParentDeclaration,
     KoBaseProviderCore,
@@ -56,7 +57,8 @@ internal class KoParentDeclarationCore(
     KoAnnotationProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore,
-    KoArgumentProviderCore {
+    KoArgumentProviderCore,
+    KoInterfaceDelegateProviderCore {
     override val psiElement: PsiElement by lazy { ktSuperTypeListEntry }
 
     override val ktElement: KtElement by lazy { ktSuperTypeListEntry }
