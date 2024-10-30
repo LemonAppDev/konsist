@@ -1,17 +1,9 @@
 package com.lemonappdev.konsist.core.declaration.koparent
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.list.enumConstants
-import com.lemonappdev.konsist.api.ext.list.getters
-import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.parents
-import com.lemonappdev.konsist.api.ext.list.setters
-import com.lemonappdev.konsist.api.ext.list.variables
-import com.lemonappdev.konsist.api.provider.KoVariableProvider
-import io.kotest.mpp.file
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -21,10 +13,11 @@ class KoParentDeclarationForKoInterfaceDelegateProviderTest {
     @MethodSource("provideValuesForDelegate")
     fun `class-with-parent-has-delegate`(fileName: String) {
         // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .parents()
-            .first()
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .parents()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -39,10 +32,11 @@ class KoParentDeclarationForKoInterfaceDelegateProviderTest {
     @MethodSource("provideValuesForNoDelegate")
     fun `class-with-parent-has-no-delegate`(fileName: String) {
         // given
-        val sut = getSnippetFile("class-with-parent-class-from-file")
-            .classes()
-            .parents()
-            .first()
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .parents()
+                .first()
 
         // then
         assertSoftly(sut) {

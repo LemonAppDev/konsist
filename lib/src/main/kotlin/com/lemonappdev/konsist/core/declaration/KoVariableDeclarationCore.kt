@@ -7,7 +7,6 @@ import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
-import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsValProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsVarProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore

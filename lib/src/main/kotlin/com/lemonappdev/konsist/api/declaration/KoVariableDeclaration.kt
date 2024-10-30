@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
-import com.lemonappdev.konsist.api.provider.KoDelegateProvider
 import com.lemonappdev.konsist.api.provider.KoIsValProvider
 import com.lemonappdev.konsist.api.provider.KoIsVarProvider
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
