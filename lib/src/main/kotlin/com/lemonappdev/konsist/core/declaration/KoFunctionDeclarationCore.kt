@@ -128,10 +128,14 @@ internal class KoFunctionDeclarationCore private constructor(
         KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
     }
 
-    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
+    /*
+    Remove in version 0.18.0
+     */
     override val isInitialized: Boolean by lazy { super<KoIsInitializedProviderCore>.isInitialized }
 
-    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
+    /*
+    Remove in version 0.18.0
+     */
     override val isTopLevel: Boolean by lazy { super<KoIsTopLevelProviderCore>.isTopLevel }
 
     override val fullyQualifiedName: String? by lazy {

@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoVarModifierProvider
  *
  * @return A list containing declarations with the `var` modifier.
  */
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("withVar"))
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withVar"))
 fun <T : KoVarModifierProvider> List<T>.withVarModifier(): List<T> = filter { it.hasVarModifier }
 
 /**
@@ -15,5 +15,5 @@ fun <T : KoVarModifierProvider> List<T>.withVarModifier(): List<T> = filter { it
  *
  * @return A list containing declarations without the `var` modifier.
  */
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("withoutVar"))
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withoutVar"))
 fun <T : KoVarModifierProvider> List<T>.withoutVarModifier(): List<T> = filterNot { it.hasVarModifier }

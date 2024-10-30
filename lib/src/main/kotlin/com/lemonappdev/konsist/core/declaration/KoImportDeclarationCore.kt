@@ -58,7 +58,9 @@ internal class KoImportDeclarationCore private constructor(
             ?.let { KoImportAliasDeclarationCore.getInstance(it, this) }
     }
 
-    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
+    /*
+    Remove in version 0.18.0
+     */
     override val isWildcard: Boolean by lazy { super<KoIsWildcardProviderCore>.isWildcard }
 
     override val sourceDeclaration: KoSourceDeclaration by lazy {
