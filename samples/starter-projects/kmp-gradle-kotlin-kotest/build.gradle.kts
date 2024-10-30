@@ -44,8 +44,8 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-server-netty:3.0.0")
-                implementation("io.ktor:ktor-server-html-builder-jvm:3.0.0")
+                implementation("io.ktor:ktor-server-netty:3.0.1")
+                implementation("io.ktor:ktor-server-html-builder-jvm:3.0.1")
                 implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.11.0")
             }
         }
@@ -58,9 +58,9 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.3.1-pre.820")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.3.1-pre.820")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.13.3-pre.820")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.3.1-pre.822")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.3.1-pre.822")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.13.3-pre.822")
             }
         }
         val jsTest by getting

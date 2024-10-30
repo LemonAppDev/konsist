@@ -18,13 +18,13 @@ class LayerTest {
     }
 
     @Test
-    fun `throws an exception when layer definedBy is blank`() {
+    fun `throws an exception when layer rootPackage is blank`() {
         // given
         val sut = { Layer("name", "") }
 
         // then
         sut shouldThrow IllegalArgumentException::class withMessage
-            "definedBy is blank"
+            "rootPackage is blank"
     }
 
     @Test

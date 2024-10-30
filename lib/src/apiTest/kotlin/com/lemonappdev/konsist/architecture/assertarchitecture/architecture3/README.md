@@ -1,6 +1,8 @@
 # Architecture 3
 
-Test scenario where `Presentation` layer depends on `Domain` one and `Domain` layer depends on `Presentation` one:
+Circular dependency test scenario where:
+- `Presentation` layer depends on `Domain` layer 
+- `Domain` layer depends on `Presentation` layer
 
 ```mermaid
 %%{init: {'theme': 'forest'}}%%
