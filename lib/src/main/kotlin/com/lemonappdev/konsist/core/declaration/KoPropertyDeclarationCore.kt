@@ -139,20 +139,20 @@ internal class KoPropertyDeclarationCore private constructor(
 
     /*
     Remove in version 0.18.0
-    */
+     */
     override val isInitialized: Boolean by lazy { super<KoIsInitializedProviderCore>.isInitialized }
 
     /*
     Remove in version 0.18.0
-    */
+     */
     override val isConstructorDefined: Boolean by lazy { super<KoIsConstructorDefinedProviderCore>.isConstructorDefined }
 
-        /*
+    /*
     Remove in version 0.18.0
      */
     override val isReadOnly: Boolean by lazy { super<KoIsReadOnlyProviderCore>.isReadOnly }
 
-        /*
+    /*
     Remove in version 0.18.0
      */
     override val isTopLevel: Boolean by lazy { super<KoIsTopLevelProviderCore>.isTopLevel }
@@ -164,7 +164,7 @@ internal class KoPropertyDeclarationCore private constructor(
             .filterIsInstance<KtExpression>()
             .firstOrNull()
     }
-    
+
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVal"))
     override val hasValModifier: Boolean by lazy {
         when (ktCallableDeclaration) {
@@ -173,7 +173,7 @@ internal class KoPropertyDeclarationCore private constructor(
             else -> false
         }
     }
-    
+
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVar"))
     override val hasVarModifier: Boolean by lazy {
         when (ktCallableDeclaration) {
