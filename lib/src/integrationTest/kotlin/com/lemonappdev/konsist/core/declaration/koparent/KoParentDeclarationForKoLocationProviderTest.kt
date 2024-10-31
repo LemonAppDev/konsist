@@ -4,661 +4,129 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.parents
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class KoParentDeclarationForKoLocationProviderTest {
-    @Test
-    fun `class-with-parent-class-from-file`() {
+    @ParameterizedTest
+    @MethodSource("provideClasses")
+    fun `class-parent-location`(fileName: String, location: String) {
         // given
         val sut =
-            getSnippetFile("class-with-parent-class-from-file")
+            getSnippetFile(fileName)
                 .classes()
                 .parents()
                 .first()
 
         // then
-        sut.location shouldBeEqualTo "${sut.path}:1:23"
+        sut.location shouldBeEqualTo "${sut.path}:$location"
     }
 
-    @Test
-    fun `class-with-generic-parent-class-from-file`() {
+    @ParameterizedTest
+    @MethodSource("provideInterfaces")
+    fun `interface-parent-location`(fileName: String, location: String) {
         // given
         val sut =
-            getSnippetFile("class-with-generic-parent-class-from-file")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:1:23"
-    }
-
-    @Test
-    fun `class-with-parametrized-parent-class-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parametrized-parent-class-from-file")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:1:23"
-    }
-
-    @Test
-    fun `class-with-parametrized-and-generic-parent-class-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parametrized-and-generic-parent-class-from-file")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:1:23"
-    }
-
-    @Test
-    fun `class-with-parent-interface-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parent-interface-from-file")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:23"
-    }
-
-    @Test
-    fun `class-with-generic-parent-interface-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-generic-parent-interface-from-file")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:23"
-    }
-
-    @Test
-    fun `class-with-parent-by-delegation-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parent-by-delegation-from-file")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:59"
-    }
-
-    @Test
-    fun `class-with-multiline-parent-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-multiline-parent-from-file")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:1:20"
-    }
-
-    @Test
-    fun `class-with-parent-class-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parent-class-from-import")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:23"
-    }
-
-    @Test
-    fun `class-with-generic-parent-class-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-generic-parent-class-from-import")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:23"
-    }
-
-    @Test
-    fun `class-with-parametrized-parent-class-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parametrized-parent-class-from-import")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:23"
-    }
-
-    @Test
-    fun `class-with-parametrized-and-generic-parent-class-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parametrized-and-generic-parent-class-from-import")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:23"
-    }
-
-    @Test
-    fun `class-with-parent-interface-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parent-interface-from-import")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:23"
-    }
-
-    @Test
-    fun `class-with-generic-parent-interface-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-generic-parent-interface-from-import")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:23"
-    }
-
-    @Test
-    fun `class-with-parent-by-delegation-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parent-by-delegation-from-import")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:54"
-    }
-
-    @Test
-    fun `class-with-multiline-parent-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-multiline-parent-from-import")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:20"
-    }
-
-    @Test
-    fun `class-with-external-parent-class`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-external-parent-class")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:23"
-    }
-
-    @Test
-    fun `class-with-generic-external-parent-class`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-generic-external-parent-class")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:23"
-    }
-
-    @Test
-    fun `class-with-parametrized-external-parent-class`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parametrized-external-parent-class")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:23"
-    }
-
-    @Test
-    fun `class-with-parametrized-and-generic-external-parent-class`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parametrized-and-generic-external-parent-class")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:23"
-    }
-
-    @Test
-    fun `class-with-external-parent-interface`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-external-parent-interface")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:23"
-    }
-
-    @Test
-    fun `class-with-generic-external-parent-interface`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-generic-external-parent-interface")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:23"
-    }
-
-    @Test
-    fun `class-with-external-parent-by-delegation`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-external-parent-by-delegation")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:62"
-    }
-
-    @Test
-    fun `interface-with-parent-interface-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("interface-with-parent-interface-from-file")
+            getSnippetFile(fileName)
                 .interfaces()
                 .parents()
                 .first()
 
         // then
-        sut.location shouldBeEqualTo "${sut.path}:1:29"
+        sut.location shouldBeEqualTo "${sut.path}:$location"
     }
 
-    @Test
-    fun `interface-with-generic-parent-interface-from-file`() {
+    @ParameterizedTest
+    @MethodSource("provideObjects")
+    fun `object-parent-location`(fileName: String, location: String) {
         // given
         val sut =
-            getSnippetFile("interface-with-generic-parent-interface-from-file")
-                .interfaces()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:1:29"
-    }
-
-    @Test
-    fun `interface-with-parent-interface-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("interface-with-parent-interface-from-import")
-                .interfaces()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:29"
-    }
-
-    @Test
-    fun `interface-with-generic-parent-interface-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("interface-with-generic-parent-interface-from-import")
-                .interfaces()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:29"
-    }
-
-    @Test
-    fun `interface-with-external-parent-interface`() {
-        // given
-        val sut =
-            getSnippetFile("interface-with-external-parent-interface")
-                .interfaces()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:29"
-    }
-
-    @Test
-    fun `interface-with-generic-external-parent-interface`() {
-        // given
-        val sut =
-            getSnippetFile("interface-with-generic-external-parent-interface")
-                .interfaces()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:29"
-    }
-
-    @Test
-    fun `object-with-parent-class-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-parent-class-from-file")
+            getSnippetFile(fileName)
                 .objects()
                 .parents()
                 .first()
 
         // then
-        sut.location shouldBeEqualTo "${sut.path}:1:22"
-    }
-
-    @Test
-    fun `object-with-generic-parent-class-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-generic-parent-class-from-file")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:1:23"
-    }
-
-    @Test
-    fun `object-with-parametrized-parent-class-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-parametrized-parent-class-from-file")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:1:22"
-    }
-
-    @Test
-    fun `object-with-parametrized-and-generic-parent-class-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-parametrized-and-generic-parent-class-from-file")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:1:22"
-    }
-
-    @Test
-    fun `object-with-parent-interface-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-parent-interface-from-file")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:22"
-    }
-
-    @Test
-    fun `object-with-generic-parent-interface-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-generic-parent-interface-from-file")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:22"
-    }
-
-    @Test
-    fun `object-with-multiline-parent-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-multiline-parent-from-file")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:1:22"
-    }
-
-    @Test
-    fun `object-with-parent-class-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-parent-class-from-import")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:22"
-    }
-
-    @Test
-    fun `object-with-generic-parent-class-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-generic-parent-class-from-import")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:23"
-    }
-
-    @Test
-    fun `object-with-parametrized-parent-class-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-parametrized-parent-class-from-import")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:22"
-    }
-
-    @Test
-    fun `object-with-parametrized-and-generic-parent-class-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-parametrized-and-generic-parent-class-from-import")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:22"
-    }
-
-    @Test
-    fun `object-with-parent-interface-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-parent-interface-from-import")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:22"
-    }
-
-    @Test
-    fun `object-with-generic-parent-interface-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-generic-parent-interface-from-import")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:22"
-    }
-
-    @Test
-    fun `object-with-multiline-parent-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-multiline-parent-from-import")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:22"
-    }
-
-    @Test
-    fun `object-with-external-parent-class`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-external-parent-class")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:22"
-    }
-
-    @Test
-    fun `object-with-generic-external-parent-class`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-generic-external-parent-class")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:23"
-    }
-
-    @Test
-    fun `object-with-parametrized-external-parent-class`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-parametrized-external-parent-class")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:22"
-    }
-
-    @Test
-    fun `object-with-parametrized-and-generic-external-parent-class`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-parametrized-and-generic-external-parent-class")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:22"
-    }
-
-    @Test
-    fun `object-with-external-parent-interface`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-external-parent-interface")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:22"
-    }
-
-    @Test
-    fun `object-with-generic-external-parent-interface`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-generic-external-parent-interface")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:22"
-    }
-
-    @Test
-    fun `object-with-multiline-external-parent`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-multiline-external-parent")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.location shouldBeEqualTo "${sut.path}:3:22"
+        sut.location shouldBeEqualTo "${sut.path}:$location"
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope(
-            "core/declaration/koparent/snippet/forkolocationprovider/",
-            fileName,
-        )
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koparent/snippet/forkolocationprovider/", fileName)
+
+    companion object {
+        @Suppress("unused")
+        @JvmStatic
+        fun provideClasses() =
+            listOf(
+                arguments("class-with-parent-class-from-file", "1:23"),
+                arguments("class-with-generic-parent-class-from-file", "1:23"),
+                arguments("class-with-parametrized-parent-class-from-file", "1:23"),
+                arguments("class-with-parametrized-and-generic-parent-class-from-file", "1:23"),
+                arguments("class-with-parent-interface-from-file", "3:23"),
+                arguments("class-with-generic-parent-interface-from-file", "3:23"),
+                arguments("class-with-parent-by-delegation-from-file", "3:59"),
+                arguments("class-with-multiline-parent-from-file", "1:20"),
+                arguments("class-with-parent-class-from-import", "3:23"),
+                arguments("class-with-generic-parent-class-from-import", "3:23"),
+                arguments("class-with-parametrized-parent-class-from-import", "3:23"),
+                arguments("class-with-parametrized-and-generic-parent-class-from-import", "3:23"),
+                arguments("class-with-parent-interface-from-import", "3:23"),
+                arguments("class-with-generic-parent-interface-from-import", "3:23"),
+                arguments("class-with-parent-by-delegation-from-import", "3:54"),
+                arguments("class-with-multiline-parent-from-import", "3:20"),
+                arguments("class-with-external-parent-class", "3:23"),
+                arguments("class-with-generic-external-parent-class", "3:23"),
+                arguments("class-with-parametrized-external-parent-class", "3:23"),
+                arguments("class-with-parametrized-and-generic-external-parent-class", "3:23"),
+                arguments("class-with-external-parent-interface", "3:23"),
+                arguments("class-with-generic-external-parent-interface", "3:23"),
+                arguments("class-with-external-parent-by-delegation", "3:62"),
+                arguments("class-with-typealias-parent", "3:23"),
+                arguments("class-with-import-alias-parent", "3:23"),
+            )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideInterfaces() =
+            listOf(
+                arguments("interface-with-parent-interface-from-file", "1:29"),
+                arguments("interface-with-generic-parent-interface-from-file", "1:29"),
+                arguments("interface-with-parent-interface-from-import", "3:29"),
+                arguments("interface-with-generic-parent-interface-from-import", "3:29"),
+                arguments("interface-with-external-parent-interface", "3:29"),
+                arguments("interface-with-generic-external-parent-interface", "3:29"),
+                arguments("interface-with-typealias-parent", "3:29"),
+                arguments("interface-with-import-alias-parent", "3:29"),
+            )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideObjects() =
+            listOf(
+                arguments("object-with-parent-class-from-file", "1:22"),
+                arguments("object-with-generic-parent-class-from-file", "1:23"),
+                arguments("object-with-parametrized-parent-class-from-file", "1:22"),
+                arguments("object-with-parametrized-and-generic-parent-class-from-file", "1:22"),
+                arguments("object-with-parent-interface-from-file", "3:22"),
+                arguments("object-with-generic-parent-interface-from-file", "3:22"),
+                arguments("object-with-multiline-parent-from-file", "1:22"),
+                arguments("object-with-parent-class-from-import", "3:22"),
+                arguments("object-with-generic-parent-class-from-import", "3:23"),
+                arguments("object-with-parametrized-parent-class-from-import", "3:22"),
+                arguments("object-with-parametrized-and-generic-parent-class-from-import", "3:22"),
+                arguments("object-with-parent-interface-from-import", "3:22"),
+                arguments("object-with-generic-parent-interface-from-import", "3:22"),
+                arguments("object-with-multiline-parent-from-import", "3:22"),
+                arguments("object-with-external-parent-class", "3:22"),
+                arguments("object-with-generic-external-parent-class", "3:23"),
+                arguments("object-with-parametrized-external-parent-class", "3:22"),
+                arguments("object-with-parametrized-and-generic-external-parent-class", "3:22"),
+                arguments("object-with-external-parent-interface", "3:22"),
+                arguments("object-with-generic-external-parent-interface", "3:22"),
+                arguments("object-with-multiline-external-parent", "3:22"),
+                arguments("object-with-typealias-parent", "3:22"),
+                arguments("object-with-import-alias-parent", "3:22"),
+            )
+    }
 }
