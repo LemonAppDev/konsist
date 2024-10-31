@@ -356,6 +356,191 @@ class KoFunctionTypeDeclarationProviderListExtTest {
     }
 
     @Test
+    fun `parameters returns parameters from all declarations`() {
+        // given
+        val parameter1: KoParameterDeclaration = mockk()
+        val parameter2: KoParameterDeclaration = mockk()
+        val parameter3: KoParameterDeclaration = mockk()
+        val declaration1: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { parameters } returns listOf(parameter1, parameter2)
+            }
+        val declaration2: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { parameters } returns listOf(parameter3)
+            }
+        val declaration3: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { parameters } returns emptyList()
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.parameters
+
+        // then
+        sut shouldBeEqualTo listOf(parameter1, parameter2, parameter3)
+    }
+
+    @Test
+    fun `withParameter{} returns declaration with parameter which satisfy predicate`() {
+        // given
+        val suffix = "Name"
+        val predicate: (KoParameterDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val declaration1: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { hasParameter(predicate) } returns true
+            }
+        val declaration2: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { hasParameter(predicate) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withParameter(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutParameter{} returns declaration without parameter which satisfy predicate`() {
+        // given
+        val suffix = "Name"
+        val predicate: (KoParameterDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val declaration1: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { hasParameter(predicate) } returns true
+            }
+        val declaration2: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { hasParameter(predicate) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutParameter(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withAllParameters{} returns declaration with all parameters satisfy predicate`() {
+        // given
+        val suffix = "Name"
+        val predicate: (KoParameterDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val declaration1: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { hasAllParameters(predicate) } returns true
+            }
+        val declaration2: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { hasAllParameters(predicate) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllParameters(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutAllParameters{} returns declaration with all parameters which not satisfy predicate`() {
+        // given
+        val suffix = "Name"
+        val predicate: (KoParameterDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val declaration1: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { hasAllParameters(predicate) } returns true
+            }
+        val declaration2: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { hasAllParameters(predicate) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllParameters(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withParameter{} returns declaration with parameters which satisfy predicate`() {
+        // given
+        val suffix = "Name"
+        val predicate: (List<KoParameterDeclaration>) -> Boolean =
+            { it.all { argument -> argument.hasNameEndingWith(suffix) } }
+        val parameter1: KoParameterDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns true
+            }
+        val parameter2: KoParameterDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns false
+            }
+        val declaration1: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { parameters } returns listOf(parameter1)
+            }
+        val declaration2: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { parameters } returns listOf(parameter2)
+            }
+        val declaration3: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { parameters } returns emptyList()
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withParameters(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration3)
+    }
+
+    @Test
+    fun `withoutParameter{} returns declaration without parameters which satisfy predicate`() {
+        // given
+        val suffix = "Name"
+        val predicate: (List<KoParameterDeclaration>) -> Boolean =
+            { it.all { argument -> argument.hasNameEndingWith(suffix) } }
+        val parameter1: KoParameterDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns true
+            }
+        val parameter2: KoParameterDeclaration =
+            mockk {
+                every { hasNameEndingWith(suffix) } returns false
+            }
+        val declaration1: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { parameters } returns listOf(parameter1)
+            }
+        val declaration2: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { parameters } returns listOf(parameter2)
+            }
+        val declaration3: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { parameters } returns emptyList()
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutParameters(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `parameterTypes returns parameter types from all declarations`() {
         // given
         val parameterType1: KoParameterDeclaration = mockk()
@@ -363,15 +548,15 @@ class KoFunctionTypeDeclarationProviderListExtTest {
         val parameterType3: KoParameterDeclaration = mockk()
         val declaration1: KoFunctionTypeDeclarationProvider =
             mockk {
-                every { parameterTypes } returns listOf(parameterType1, parameterType2)
+                every { parameters } returns listOf(parameterType1, parameterType2)
             }
         val declaration2: KoFunctionTypeDeclarationProvider =
             mockk {
-                every { parameterTypes } returns listOf(parameterType3)
+                every { parameters } returns listOf(parameterType3)
             }
         val declaration3: KoFunctionTypeDeclarationProvider =
             mockk {
-                every { parameterTypes } returns emptyList()
+                every { parameters } returns emptyList()
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -389,11 +574,11 @@ class KoFunctionTypeDeclarationProviderListExtTest {
         val predicate: (KoParameterDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoFunctionTypeDeclarationProvider =
             mockk {
-                every { hasParameterType(predicate) } returns true
+                every { hasParameter(predicate) } returns true
             }
         val declaration2: KoFunctionTypeDeclarationProvider =
             mockk {
-                every { hasParameterType(predicate) } returns false
+                every { hasParameter(predicate) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -411,11 +596,11 @@ class KoFunctionTypeDeclarationProviderListExtTest {
         val predicate: (KoParameterDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoFunctionTypeDeclarationProvider =
             mockk {
-                every { hasParameterType(predicate) } returns true
+                every { hasParameter(predicate) } returns true
             }
         val declaration2: KoFunctionTypeDeclarationProvider =
             mockk {
-                every { hasParameterType(predicate) } returns false
+                every { hasParameter(predicate) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -433,11 +618,11 @@ class KoFunctionTypeDeclarationProviderListExtTest {
         val predicate: (KoParameterDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoFunctionTypeDeclarationProvider =
             mockk {
-                every { hasAllParameterTypes(predicate) } returns true
+                every { hasAllParameters(predicate) } returns true
             }
         val declaration2: KoFunctionTypeDeclarationProvider =
             mockk {
-                every { hasAllParameterTypes(predicate) } returns false
+                every { hasAllParameters(predicate) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -455,11 +640,11 @@ class KoFunctionTypeDeclarationProviderListExtTest {
         val predicate: (KoParameterDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoFunctionTypeDeclarationProvider =
             mockk {
-                every { hasAllParameterTypes(predicate) } returns true
+                every { hasAllParameters(predicate) } returns true
             }
         val declaration2: KoFunctionTypeDeclarationProvider =
             mockk {
-                every { hasAllParameterTypes(predicate) } returns false
+                every { hasAllParameters(predicate) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -486,15 +671,15 @@ class KoFunctionTypeDeclarationProviderListExtTest {
             }
         val declaration1: KoFunctionTypeDeclarationProvider =
             mockk {
-                every { parameterTypes } returns listOf(parameterType1)
+                every { parameters } returns listOf(parameterType1)
             }
         val declaration2: KoFunctionTypeDeclarationProvider =
             mockk {
-                every { parameterTypes } returns listOf(parameterType2)
+                every { parameters } returns listOf(parameterType2)
             }
         val declaration3: KoFunctionTypeDeclarationProvider =
             mockk {
-                every { parameterTypes } returns emptyList()
+                every { parameters } returns emptyList()
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -521,15 +706,15 @@ class KoFunctionTypeDeclarationProviderListExtTest {
             }
         val declaration1: KoFunctionTypeDeclarationProvider =
             mockk {
-                every { parameterTypes } returns listOf(parameterType1)
+                every { parameters } returns listOf(parameterType1)
             }
         val declaration2: KoFunctionTypeDeclarationProvider =
             mockk {
-                every { parameterTypes } returns listOf(parameterType2)
+                every { parameters } returns listOf(parameterType2)
             }
         val declaration3: KoFunctionTypeDeclarationProvider =
             mockk {
-                every { parameterTypes } returns emptyList()
+                every { parameters } returns emptyList()
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
