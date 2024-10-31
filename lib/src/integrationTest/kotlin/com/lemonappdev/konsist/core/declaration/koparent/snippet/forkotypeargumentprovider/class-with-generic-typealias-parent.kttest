@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.SampleCollection1
+
+class SampleClass() : SampleTypeAlias<Int>()
+
+typealias SampleTypeAlias<T> = SampleCollection1<T>

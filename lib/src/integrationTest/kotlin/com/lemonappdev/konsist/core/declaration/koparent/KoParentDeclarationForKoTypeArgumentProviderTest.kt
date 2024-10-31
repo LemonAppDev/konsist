@@ -262,6 +262,8 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
                 arguments("class-with-parametrized-external-parent-class"),
                 arguments("class-with-external-parent-interface"),
                 arguments("class-with-external-parent-by-delegation"),
+                arguments("class-with-typealias-parent"),
+                arguments("class-with-import-alias-parent"),
             )
 
         @Suppress("unused")
@@ -277,6 +279,8 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
                 arguments("class-with-generic-external-parent-class"),
                 arguments("class-with-parametrized-and-generic-external-parent-class"),
                 arguments("class-with-generic-external-parent-interface"),
+                arguments("class-with-generic-typealias-parent"),
+                arguments("class-with-generic-import-alias-parent"),
             )
 
         @Suppress("unused")
@@ -286,6 +290,8 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
                 arguments("interface-with-parent-interface-from-file"),
                 arguments("interface-with-parent-interface-from-import"),
                 arguments("interface-with-external-parent-interface"),
+                arguments("interface-with-typealias-parent"),
+                arguments("interface-with-import-alias-parent"),
             )
 
         @Suppress("unused")
@@ -295,6 +301,8 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
                 arguments("interface-with-generic-parent-interface-from-file"),
                 arguments("interface-with-generic-parent-interface-from-import"),
                 arguments("interface-with-generic-external-parent-interface"),
+                arguments("interface-with-generic-typealias-parent"),
+                arguments("interface-with-generic-import-alias-parent"),
             )
 
         @Suppress("unused")
@@ -313,6 +321,8 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
                 arguments("object-with-parametrized-external-parent-class"),
                 arguments("object-with-external-parent-interface"),
                 arguments("object-with-multiline-external-parent"),
+                arguments("object-with-typealias-parent"),
+                arguments("object-with-import-alias-parent"),
             )
 
         @Suppress("unused")
@@ -328,6 +338,8 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
                 arguments("object-with-generic-external-parent-class"),
                 arguments("object-with-parametrized-and-generic-external-parent-class"),
                 arguments("object-with-generic-external-parent-interface"),
+                arguments("object-with-generic-typealias-parent"),
+                arguments("object-with-generic-import-alias-parent"),
             )
     }
 }

@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.SampleGenericSuperInterface
+
+interface SampleInterface : SampleTypeAlias<Int>
+
+typealias SampleTypeAlias<T> = SampleGenericSuperInterface<T>
