@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.combined
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
+import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import com.lemonappdev.konsist.core.declaration.KoChildDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
@@ -97,14 +98,13 @@ internal interface KoClassAndInterfaceAndObjectDeclarationCore :
     override val ktElement: KtElement
         get() = ktClassOrObject
 
-    /*
-    Remove in version 0.18.0
-     */
+    @RemoveInVersion("0.18.0")
     override val isTopLevel: Boolean
         get() = super<KoIsTopLevelProviderCore>.isTopLevel
 
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil.getKoDeclarations(ktClassOrObject, includeNested, includeLocal, this)
+    ): List<KoBaseDeclaration> =
+        KoDeclarationProviderCoreUtil.getKoDeclarations(ktClassOrObject, includeNested, includeLocal, this)
 }

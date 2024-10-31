@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
@@ -58,9 +59,7 @@ internal class KoImportDeclarationCore private constructor(
             ?.let { KoImportAliasDeclarationCore.getInstance(it, this) }
     }
 
-    /*
-    Remove in version 0.18.0
-     */
+    @RemoveInVersion("0.18.0")
     override val isWildcard: Boolean by lazy { super<KoIsWildcardProviderCore>.isWildcard }
 
     override val sourceDeclaration: KoSourceDeclaration by lazy {
@@ -70,7 +69,7 @@ internal class KoImportDeclarationCore private constructor(
             .declarations
             .filterIsInstance<KoFullyQualifiedNameProvider>()
             .firstOrNull { it.fullyQualifiedName == name }
-            as? KoSourceDeclaration
+                as? KoSourceDeclaration
             ?: getKotlinType(shortName)
             ?: KoExternalDeclarationCore.getInstance(shortName, ktImportDirective)
     }

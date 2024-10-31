@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
+import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -137,24 +138,16 @@ internal class KoPropertyDeclarationCore private constructor(
 
     override val ktProperty: KtProperty? by lazy { ktCallableDeclaration as? KtProperty }
 
-    /*
-    Remove in version 0.18.0
-     */
+    @RemoveInVersion("0.18.0")
     override val isInitialized: Boolean by lazy { super<KoIsInitializedProviderCore>.isInitialized }
 
-    /*
-    Remove in version 0.18.0
-     */
+    @RemoveInVersion("0.18.0")
     override val isConstructorDefined: Boolean by lazy { super<KoIsConstructorDefinedProviderCore>.isConstructorDefined }
 
-    /*
-    Remove in version 0.18.0
-     */
+    @RemoveInVersion("0.18.0")
     override val isReadOnly: Boolean by lazy { super<KoIsReadOnlyProviderCore>.isReadOnly }
 
-    /*
-    Remove in version 0.18.0
-     */
+    @RemoveInVersion("0.18.0")
     override val isTopLevel: Boolean by lazy { super<KoIsTopLevelProviderCore>.isTopLevel }
 
     override val ktExpression: KtExpression? by lazy {

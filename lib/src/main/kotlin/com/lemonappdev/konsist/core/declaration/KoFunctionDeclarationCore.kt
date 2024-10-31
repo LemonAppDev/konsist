@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -128,14 +129,10 @@ internal class KoFunctionDeclarationCore private constructor(
         KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
     }
 
-    /*
-    Remove in version 0.18.0
-     */
+    @RemoveInVersion("0.18.0")
     override val isInitialized: Boolean by lazy { super<KoIsInitializedProviderCore>.isInitialized }
 
-    /*
-    Remove in version 0.18.0
-     */
+    @RemoveInVersion("0.18.0")
     override val isTopLevel: Boolean by lazy { super<KoIsTopLevelProviderCore>.isTopLevel }
 
     override val fullyQualifiedName: String? by lazy {
