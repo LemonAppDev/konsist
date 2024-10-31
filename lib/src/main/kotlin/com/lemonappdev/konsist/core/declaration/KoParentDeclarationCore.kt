@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
+import com.lemonappdev.konsist.core.model.getTypeAlias
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -37,6 +38,7 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
 import org.jetbrains.kotlin.psi.KtValueArgument
 import org.jetbrains.kotlin.psi.KtValueArgumentList
+import java.awt.SystemColor.text
 
 internal class KoParentDeclarationCore(
     override val ktSuperTypeListEntry: KtSuperTypeListEntry,
@@ -120,8 +122,11 @@ internal class KoParentDeclarationCore(
 
         val isAlias = import?.alias != null
 
-        getClass(outerName, fqn, isAlias, containingFile)
+
+        import?.alias
+            ?: getClass(outerName, fqn, isAlias, containingFile)
             ?: getInterface(outerName, fqn, isAlias, containingFile)
+            ?: getTypeAlias(outerName, fqn, containingFile)
             ?: KoExternalDeclarationCore.getInstance(outerName, ktSuperTypeListEntry)
     }
 

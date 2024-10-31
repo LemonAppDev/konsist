@@ -20,6 +20,7 @@ import com.lemonappdev.konsist.testdata.SampleGenericClassWithParameter
 import com.lemonappdev.konsist.testdata.SampleGenericSuperInterface
 import com.lemonappdev.konsist.testdata.SampleInterface
 import com.lemonappdev.konsist.testdata.SampleParentClass
+import com.lemonappdev.konsist.testdata.SampleParentInterface
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -299,7 +300,7 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     KoImportAliasDeclaration::class,
                     KoTypeAliasDeclaration::class,
                     null,
-                    "SampleImportAlias",
+                    null,
                 ),
             )
 
@@ -307,48 +308,48 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
         @JvmStatic
         fun provideInterfacesForSourceDeclaration() =
             listOf(
-//                arguments(
-//                    "interface-with-parent-interface-from-file",
-//                    KoInterfaceDeclaration::class,
-//                    KoClassDeclaration::class,
-//                    null,
-//                    "SampleSuperInterface",
-//                ),
-//                arguments(
-//                    "interface-with-generic-parent-interface-from-file",
-//                    KoInterfaceDeclaration::class,
-//                    KoClassDeclaration::class,
-//                    null,
-//                    "SampleGenericSuperInterface",
-//                ),
-//                arguments(
-//                    "interface-with-parent-interface-from-import",
-//                    KoInterfaceDeclaration::class,
-//                    KoClassDeclaration::class,
-//                    SampleParentInterface::class,
-//                    "com.lemonappdev.konsist.testdata.SampleParentInterface",
-//                ),
-//                arguments(
-//                    "interface-with-generic-parent-interface-from-import",
-//                    KoInterfaceDeclaration::class,
-//                    KoClassDeclaration::class,
-//                    SampleGenericSuperInterface::class,
-//                    "com.lemonappdev.konsist.testdata.SampleGenericSuperInterface",
-//                ),
-//                arguments(
-//                    "interface-with-external-parent-interface",
-//                    KoExternalDeclaration::class,
-//                    KoClassDeclaration::class,
-//                    SampleExternalInterface::class,
-//                    "com.lemonappdev.konsist.externalsample.SampleExternalInterface",
-//                ),
-//                arguments(
-//                    "interface-with-generic-external-parent-interface",
-//                    KoExternalDeclaration::class,
-//                    KoClassDeclaration::class,
-//                    SampleExternalGenericInterface::class,
-//                    "com.lemonappdev.konsist.externalsample.SampleExternalGenericInterface",
-//                ),
+                arguments(
+                    "interface-with-parent-interface-from-file",
+                    KoInterfaceDeclaration::class,
+                    KoClassDeclaration::class,
+                    null,
+                    "SampleSuperInterface",
+                ),
+                arguments(
+                    "interface-with-generic-parent-interface-from-file",
+                    KoInterfaceDeclaration::class,
+                    KoClassDeclaration::class,
+                    null,
+                    "SampleGenericSuperInterface",
+                ),
+                arguments(
+                    "interface-with-parent-interface-from-import",
+                    KoInterfaceDeclaration::class,
+                    KoClassDeclaration::class,
+                    SampleParentInterface::class,
+                    "com.lemonappdev.konsist.testdata.SampleParentInterface",
+                ),
+                arguments(
+                    "interface-with-generic-parent-interface-from-import",
+                    KoInterfaceDeclaration::class,
+                    KoClassDeclaration::class,
+                    SampleGenericSuperInterface::class,
+                    "com.lemonappdev.konsist.testdata.SampleGenericSuperInterface",
+                ),
+                arguments(
+                    "interface-with-external-parent-interface",
+                    KoExternalDeclaration::class,
+                    KoClassDeclaration::class,
+                    SampleExternalInterface::class,
+                    "com.lemonappdev.konsist.externalsample.SampleExternalInterface",
+                ),
+                arguments(
+                    "interface-with-generic-external-parent-interface",
+                    KoExternalDeclaration::class,
+                    KoClassDeclaration::class,
+                    SampleExternalGenericInterface::class,
+                    "com.lemonappdev.konsist.externalsample.SampleExternalGenericInterface",
+                ),
                 arguments(
                     "interface-with-typealias-parent",
                     KoTypeAliasDeclaration::class,
@@ -361,7 +362,7 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     KoImportAliasDeclaration::class,
                     KoTypeAliasDeclaration::class,
                     null,
-                    "SampleImportAlias",
+                    null,
                 ),
             )
 
@@ -507,7 +508,7 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     KoImportAliasDeclaration::class,
                     KoTypeAliasDeclaration::class,
                     null,
-                    "SampleImportAlias",
+                    null,
                 ),
             )
     }
