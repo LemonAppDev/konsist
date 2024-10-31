@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.SampleParentInterface
+
+class SampleClass(sampleProperty: SampleTypeAlias) : SampleTypeAlias by sampleProperty
+
+typealias SampleTypeAlias = SampleParentInterface
