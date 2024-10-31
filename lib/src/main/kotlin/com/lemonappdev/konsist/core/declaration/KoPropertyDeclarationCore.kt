@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
+import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -137,16 +138,16 @@ internal class KoPropertyDeclarationCore private constructor(
 
     override val ktProperty: KtProperty? by lazy { ktCallableDeclaration as? KtProperty }
 
-    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
+    @RemoveInVersion("0.18.0")
     override val isInitialized: Boolean by lazy { super<KoIsInitializedProviderCore>.isInitialized }
 
-    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
+    @RemoveInVersion("0.18.0")
     override val isConstructorDefined: Boolean by lazy { super<KoIsConstructorDefinedProviderCore>.isConstructorDefined }
 
-    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
+    @RemoveInVersion("0.18.0")
     override val isReadOnly: Boolean by lazy { super<KoIsReadOnlyProviderCore>.isReadOnly }
 
-    @Deprecated("Will be removed in version 0.18.0", ReplaceWith(""))
+    @RemoveInVersion("0.18.0")
     override val isTopLevel: Boolean by lazy { super<KoIsTopLevelProviderCore>.isTopLevel }
 
     override val ktExpression: KtExpression? by lazy {
@@ -157,7 +158,7 @@ internal class KoPropertyDeclarationCore private constructor(
             .firstOrNull()
     }
 
-    @Deprecated("Will be removed in version 0.18.0", replaceWith = ReplaceWith("isVal"))
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVal"))
     override val hasValModifier: Boolean by lazy {
         when (ktCallableDeclaration) {
             is KtProperty -> !ktCallableDeclaration.isVar
@@ -166,7 +167,7 @@ internal class KoPropertyDeclarationCore private constructor(
         }
     }
 
-    @Deprecated("Will be removed in version 0.18.0")
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVar"))
     override val hasVarModifier: Boolean by lazy {
         when (ktCallableDeclaration) {
             is KtProperty -> ktCallableDeclaration.isVar

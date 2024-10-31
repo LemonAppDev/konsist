@@ -55,7 +55,7 @@ internal interface KoDeclarationCastProviderCore :
     override val isExternalDeclaration: Boolean
         get() = koDeclarationCastProviderDeclaration is KoExternalDeclaration
 
-    @Deprecated("Will be removed in version 0.19.0", replaceWith = ReplaceWith("isExternalDeclaration"))
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isExternalDeclaration"))
     override val isExternalType: Boolean
         get() = isExternalDeclaration
 
@@ -82,7 +82,7 @@ internal interface KoDeclarationCastProviderCore :
 
     override fun asExternalDeclaration(): KoExternalDeclaration? = koDeclarationCastProviderDeclaration as? KoExternalDeclaration
 
-    @Deprecated("Will be removed in version 0.19.0", replaceWith = ReplaceWith("asExternalDeclaration"))
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("asExternalDeclaration"))
     override fun asExternalTypeDeclaration(): KoExternalDeclaration? = asExternalDeclaration()
 
     override fun hasClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =
@@ -163,9 +163,9 @@ internal interface KoDeclarationCastProviderCore :
 
     override fun hasExternalDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asExternalDeclaration()?.fullyQualifiedName
 
-    @Deprecated("Will be removed in version 0.19.0", replaceWith = ReplaceWith("hasExternalDeclaration"))
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("hasExternalDeclaration"))
     override fun hasExternalTypeDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)?): Boolean = hasExternalDeclaration()
 
-    @Deprecated("Will be removed in version 0.19.0", replaceWith = ReplaceWith("hasExternalDeclarationOf"))
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("hasExternalDeclarationOf"))
     override fun hasExternalTypeDeclarationOf(kClass: KClass<*>): Boolean = hasExternalDeclarationOf(kClass)
 }

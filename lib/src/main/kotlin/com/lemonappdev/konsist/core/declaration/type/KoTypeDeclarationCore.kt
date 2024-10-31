@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -127,10 +128,10 @@ internal class KoTypeDeclarationCore private constructor(
 
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
-    @Deprecated("Will be removed in version 0.18.0")
+    @RemoveInVersion("0.18.0")
     override val isGenericType: Boolean by lazy { super<KoIsGenericTypeProviderCore>.isGenericType }
 
-    @Deprecated("Will be removed in version 0.18.0")
+    @RemoveInVersion("0.18.0")
     override val isNullable: Boolean by lazy { super<KoIsNullableProviderCore>.isNullable }
 
     override fun toString(): String = text
