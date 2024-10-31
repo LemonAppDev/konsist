@@ -1,0 +1,1 @@
+val sampleProperty: List<(sampleParameter: String) -> Unit> = emptyList()
