@@ -195,7 +195,6 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
             )
     }
 
-
     @Test
     fun `parent-from-file-of-class-reside-in-file-package`() {
         // given

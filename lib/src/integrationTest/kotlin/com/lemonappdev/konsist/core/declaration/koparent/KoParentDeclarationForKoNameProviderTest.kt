@@ -1,13 +1,8 @@
 package com.lemonappdev.konsist.core.declaration.koparent
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
-import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.ext.list.parents
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldBeInstanceOf
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -15,7 +10,10 @@ import org.junit.jupiter.params.provider.MethodSource
 class KoParentDeclarationForKoNameProviderTest {
     @ParameterizedTest
     @MethodSource("provideClasses")
-    fun `class-parent-has-name`(fileName: String, name: String) {
+    fun `class-parent-has-name`(
+        fileName: String,
+        name: String,
+    ) {
         // given
         val sut =
             getSnippetFile(fileName)
@@ -29,7 +27,10 @@ class KoParentDeclarationForKoNameProviderTest {
 
     @ParameterizedTest
     @MethodSource("provideInterfaces")
-    fun `interface-parent-has-name`(fileName: String, name: String) {
+    fun `interface-parent-has-name`(
+        fileName: String,
+        name: String,
+    ) {
         // given
         val sut =
             getSnippetFile(fileName)
@@ -43,7 +44,10 @@ class KoParentDeclarationForKoNameProviderTest {
 
     @ParameterizedTest
     @MethodSource("provideObjects")
-    fun `object-parent-has-name`(fileName: String, name: String) {
+    fun `object-parent-has-name`(
+        fileName: String,
+        name: String,
+    ) {
         // given
         val sut =
             getSnippetFile(fileName)
@@ -68,7 +72,7 @@ class KoParentDeclarationForKoNameProviderTest {
                 arguments("class-with-parametrized-parent-class-from-file", "SampleParametrizedSuperClass"),
                 arguments(
                     "class-with-parametrized-and-generic-parent-class-from-file",
-                    "SampleParametrizedSuperClass<Int>"
+                    "SampleParametrizedSuperClass<Int>",
                 ),
                 arguments("class-with-parent-interface-from-file", "SampleSuperInterface"),
                 arguments("class-with-generic-parent-interface-from-file", "SampleGenericSuperInterface<Int>"),
@@ -79,7 +83,7 @@ class KoParentDeclarationForKoNameProviderTest {
                 arguments("class-with-parametrized-parent-class-from-import", "SampleClassWithParameter"),
                 arguments(
                     "class-with-parametrized-and-generic-parent-class-from-import",
-                    "SampleGenericClassWithParameter<Int>"
+                    "SampleGenericClassWithParameter<Int>",
                 ),
                 arguments("class-with-parent-interface-from-import", "SampleInterface"),
                 arguments("class-with-generic-parent-interface-from-import", "SampleGenericSuperInterface<Int>"),
@@ -90,7 +94,7 @@ class KoParentDeclarationForKoNameProviderTest {
                 arguments("class-with-parametrized-external-parent-class", "SampleExternalClassWithParameter"),
                 arguments(
                     "class-with-parametrized-and-generic-external-parent-class",
-                    "SampleExternalGenericClassWithParameter<Int>"
+                    "SampleExternalGenericClassWithParameter<Int>",
                 ),
                 arguments("class-with-external-parent-interface", "SampleExternalInterface"),
                 arguments("class-with-generic-external-parent-interface", "SampleExternalGenericInterface<Int>"),
@@ -122,7 +126,7 @@ class KoParentDeclarationForKoNameProviderTest {
                 arguments("object-with-parametrized-parent-class-from-file", "SampleParametrizedSuperClass"),
                 arguments(
                     "object-with-parametrized-and-generic-parent-class-from-file",
-                    "SampleParametrizedSuperClass<Int>"
+                    "SampleParametrizedSuperClass<Int>",
                 ),
                 arguments("object-with-parent-interface-from-file", "SampleSuperInterface"),
                 arguments("object-with-generic-parent-interface-from-file", "SampleGenericSuperInterface<Int>"),
@@ -132,7 +136,7 @@ class KoParentDeclarationForKoNameProviderTest {
                 arguments("object-with-parametrized-parent-class-from-import", "SampleClassWithParameter"),
                 arguments(
                     "object-with-parametrized-and-generic-parent-class-from-import",
-                    "SampleGenericClassWithParameter<Int>"
+                    "SampleGenericClassWithParameter<Int>",
                 ),
                 arguments("object-with-parent-interface-from-import", "SampleInterface"),
                 arguments("object-with-generic-parent-interface-from-import", "SampleGenericSuperInterface<Int>"),
@@ -142,7 +146,7 @@ class KoParentDeclarationForKoNameProviderTest {
                 arguments("object-with-parametrized-external-parent-class", "SampleExternalClassWithParameter"),
                 arguments(
                     "object-with-parametrized-and-generic-external-parent-class",
-                    "SampleExternalGenericClassWithParameter<Int>"
+                    "SampleExternalGenericClassWithParameter<Int>",
                 ),
                 arguments("object-with-external-parent-interface", "SampleExternalInterface"),
                 arguments("object-with-generic-external-parent-interface", "SampleExternalGenericInterface<Int>"),

@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.declaration.koparent
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.ext.list.parents
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -93,8 +92,7 @@ class KoParentDeclarationForKoPackageProviderTest {
         sut.packagee shouldBeEqualTo null
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koparent/snippet/forkopackageprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koparent/snippet/forkopackageprovider/", fileName)
 
     companion object {
         @Suppress("unused")

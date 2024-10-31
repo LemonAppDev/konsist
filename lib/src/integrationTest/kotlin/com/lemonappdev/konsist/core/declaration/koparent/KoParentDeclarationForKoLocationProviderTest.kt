@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.declaration.koparent
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.parents
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -11,7 +10,10 @@ import org.junit.jupiter.params.provider.MethodSource
 class KoParentDeclarationForKoLocationProviderTest {
     @ParameterizedTest
     @MethodSource("provideClasses")
-    fun `class-parent-location`(fileName: String, location: String) {
+    fun `class-parent-location`(
+        fileName: String,
+        location: String,
+    ) {
         // given
         val sut =
             getSnippetFile(fileName)
@@ -25,7 +27,10 @@ class KoParentDeclarationForKoLocationProviderTest {
 
     @ParameterizedTest
     @MethodSource("provideInterfaces")
-    fun `interface-parent-location`(fileName: String, location: String) {
+    fun `interface-parent-location`(
+        fileName: String,
+        location: String,
+    ) {
         // given
         val sut =
             getSnippetFile(fileName)
@@ -39,7 +44,10 @@ class KoParentDeclarationForKoLocationProviderTest {
 
     @ParameterizedTest
     @MethodSource("provideObjects")
-    fun `object-parent-location`(fileName: String, location: String) {
+    fun `object-parent-location`(
+        fileName: String,
+        location: String,
+    ) {
         // given
         val sut =
             getSnippetFile(fileName)

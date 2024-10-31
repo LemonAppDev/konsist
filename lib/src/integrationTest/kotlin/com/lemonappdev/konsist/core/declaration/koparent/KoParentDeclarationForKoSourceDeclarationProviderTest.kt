@@ -20,7 +20,6 @@ import com.lemonappdev.konsist.testdata.SampleGenericClassWithParameter
 import com.lemonappdev.konsist.testdata.SampleGenericSuperInterface
 import com.lemonappdev.konsist.testdata.SampleInterface
 import com.lemonappdev.konsist.testdata.SampleParentClass
-import com.lemonappdev.konsist.testdata.SampleParentInterface
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -293,14 +292,14 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     KoTypeAliasDeclaration::class,
                     KoImportAliasDeclaration::class,
                     null,
-                    "SampleTypeAlias"
+                    "SampleTypeAlias",
                 ),
                 arguments(
                     "class-with-import-alias-parent",
                     KoImportAliasDeclaration::class,
                     KoTypeAliasDeclaration::class,
                     null,
-                    "SampleImportAlias"
+                    "SampleImportAlias",
                 ),
             )
 
@@ -355,14 +354,14 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     KoTypeAliasDeclaration::class,
                     KoImportAliasDeclaration::class,
                     null,
-                    "SampleTypeAlias"
+                    "SampleTypeAlias",
                 ),
                 arguments(
                     "interface-with-import-alias-parent",
                     KoImportAliasDeclaration::class,
                     KoTypeAliasDeclaration::class,
                     null,
-                    "SampleImportAlias"
+                    "SampleImportAlias",
                 ),
             )
 
@@ -501,14 +500,14 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     KoTypeAliasDeclaration::class,
                     KoImportAliasDeclaration::class,
                     null,
-                    "SampleTypeAlias"
+                    "SampleTypeAlias",
                 ),
                 arguments(
                     "object-with-import-alias-parent",
                     KoImportAliasDeclaration::class,
                     KoTypeAliasDeclaration::class,
                     null,
-                    "SampleImportAlias"
+                    "SampleImportAlias",
                 ),
             )
     }
