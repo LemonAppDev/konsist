@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import kotlin.reflect.KClass
 
 /**
@@ -11,9 +11,9 @@ interface KoParentInterfaceProvider : KoBaseProvider {
      * The parent interfaces of the declaration.
      *
      * @param indirectParents specifies whether to include parent interfaces defined in other files such as parent of the parent.
-     * @return a list of [KoInterfaceDeclaration] representing the parent interfaces of the declaration.
+     * @return a list of [KoParentDeclaration] representing the parent interfaces of the declaration.
      */
-    fun parentInterfaces(indirectParents: Boolean = false): List<KoInterfaceDeclaration>
+    fun parentInterfaces(indirectParents: Boolean = false): List<KoParentDeclaration>
 
     /**
      * Returns the number of parent interfaces.
@@ -32,7 +32,7 @@ interface KoParentInterfaceProvider : KoBaseProvider {
      */
     fun countParentInterfaces(
         indirectParents: Boolean = false,
-        predicate: (KoInterfaceDeclaration) -> Boolean,
+        predicate: (KoParentDeclaration) -> Boolean,
     ): Int
 
     /**
@@ -104,7 +104,7 @@ interface KoParentInterfaceProvider : KoBaseProvider {
      */
     fun hasParentInterface(
         indirectParents: Boolean = false,
-        predicate: (KoInterfaceDeclaration) -> Boolean,
+        predicate: (KoParentDeclaration) -> Boolean,
     ): Boolean
 
     /**
@@ -119,7 +119,7 @@ interface KoParentInterfaceProvider : KoBaseProvider {
      */
     fun hasAllParentInterfaces(
         indirectParents: Boolean = false,
-        predicate: (KoInterfaceDeclaration) -> Boolean,
+        predicate: (KoParentDeclaration) -> Boolean,
     ): Boolean
 
     /**

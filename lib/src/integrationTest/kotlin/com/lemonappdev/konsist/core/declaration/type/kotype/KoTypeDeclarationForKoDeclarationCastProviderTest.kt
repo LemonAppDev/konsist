@@ -12,6 +12,7 @@ import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.externalsample.SampleExternalClass
 import com.lemonappdev.konsist.testdata.SampleClass
+import com.lemonappdev.konsist.testdata.SampleCollection1
 import com.lemonappdev.konsist.testdata.SampleInterface
 import com.lemonappdev.konsist.testdata.SampleObject
 import com.lemonappdev.konsist.testdata.SampleType
@@ -891,6 +892,120 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
             it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asExternalDeclaration() shouldBeEqualTo null
+            it?.hasExternalDeclaration() shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `nullable-generic-type`() {
+        // given
+        val sut =
+            getSnippetFile("nullable-generic-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.isClass shouldBeEqualTo true
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isKotlinBasicType shouldBeEqualTo false
+            it?.isKotlinCollectionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
+            it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.asClassDeclaration()?.name shouldBeEqualTo "SampleCollection1"
+            it?.hasClassDeclaration() shouldBeEqualTo true
+            it?.hasClassDeclaration { declaration -> declaration.name == "SampleCollection1" } shouldBeEqualTo true
+            it?.hasClassDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasClassDeclarationOf(SampleCollection1::class) shouldBeEqualTo true
+            it?.hasClassDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asObjectDeclaration() shouldBeEqualTo null
+            it?.hasObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.asInterfaceDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceDeclaration() shouldBeEqualTo false
+            it?.hasInterfaceDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.asTypeAliasDeclaration() shouldBeEqualTo null
+            it?.hasTypeAliasDeclaration() shouldBeEqualTo false
+            it?.asImportAliasDeclaration() shouldBeEqualTo null
+            it?.hasImportAliasDeclaration() shouldBeEqualTo false
+            it?.asKotlinTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinTypeDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.asExternalDeclaration() shouldBeEqualTo null
+            it?.hasExternalDeclaration() shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `not-nullable-generic-type`() {
+        // given
+        val sut =
+            getSnippetFile("not-nullable-generic-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.isClass shouldBeEqualTo true
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isKotlinBasicType shouldBeEqualTo false
+            it?.isKotlinCollectionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
+            it?.isExternalDeclaration shouldBeEqualTo false
+            it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.asClassDeclaration()?.name shouldBeEqualTo "SampleCollection1"
+            it?.hasClassDeclaration() shouldBeEqualTo true
+            it?.hasClassDeclaration { declaration -> declaration.name == "SampleCollection1" } shouldBeEqualTo true
+            it?.hasClassDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasClassDeclarationOf(SampleCollection1::class) shouldBeEqualTo true
+            it?.hasClassDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asObjectDeclaration() shouldBeEqualTo null
+            it?.hasObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.asInterfaceDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceDeclaration() shouldBeEqualTo false
+            it?.hasInterfaceDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.asTypeAliasDeclaration() shouldBeEqualTo null
+            it?.hasTypeAliasDeclaration() shouldBeEqualTo false
+            it?.asImportAliasDeclaration() shouldBeEqualTo null
+            it?.hasImportAliasDeclaration() shouldBeEqualTo false
+            it?.asKotlinTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinTypeDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
             it?.asExternalDeclaration() shouldBeEqualTo null
             it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null

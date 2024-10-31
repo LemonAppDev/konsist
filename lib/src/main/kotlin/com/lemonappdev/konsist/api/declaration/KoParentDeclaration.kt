@@ -1,10 +1,22 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
+import com.lemonappdev.konsist.api.provider.KoArgumentProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
-import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
+import com.lemonappdev.konsist.api.provider.KoInterfaceDelegateProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
+import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
+import com.lemonappdev.konsist.api.provider.KoTypeArgumentProvider
 
 /**
  * Represents a Kotlin parent declaration.
@@ -12,7 +24,19 @@ import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 interface KoParentDeclaration :
     KoBaseDeclaration,
     KoBaseProvider,
-    KoFullyQualifiedNameProvider,
     KoNameProvider,
     KoPackageProvider,
-    KoResideInPackageProvider
+    KoResideInPackageProvider,
+    KoSourceDeclarationProvider,
+    KoTypeArgumentProvider,
+    KoTextProvider,
+    KoContainingFileProvider,
+    KoContainingDeclarationProvider,
+    KoPathProvider,
+    KoLocationProvider,
+    KoDeclarationCastProvider,
+    KoAnnotationProvider,
+    KoModuleProvider,
+    KoSourceSetProvider,
+    KoArgumentProvider,
+    KoInterfaceDelegateProvider

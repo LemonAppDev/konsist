@@ -7,7 +7,6 @@ import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
-import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsValProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsVarProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
@@ -16,6 +15,7 @@ import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoNullableTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoPropertyDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTacitTypeProviderCore
@@ -25,7 +25,7 @@ import com.lemonappdev.konsist.core.provider.modifier.KoValModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVarModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
-import org.jetbrains.kotlin.psi.KtAnnotated
+import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtExpression
@@ -39,7 +39,7 @@ internal class KoVariableDeclarationCore private constructor(
     KoBaseProviderCore,
     KoAnnotationProviderCore,
     KoContainingFileProviderCore,
-    KoDelegateProviderCore,
+    KoPropertyDelegateProviderCore,
     KoNullableTypeProviderCore,
     KoKDocProviderCore,
     KoLocationProviderCore,
@@ -57,7 +57,7 @@ internal class KoVariableDeclarationCore private constructor(
     KoTacitTypeProviderCore,
     KoIsValProviderCore,
     KoIsVarProviderCore {
-    override val ktAnnotated: KtAnnotated by lazy { ktProperty }
+    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktProperty.annotationEntries }
 
     override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktProperty }
 

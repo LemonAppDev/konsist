@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.externalsample.SampleExternalClass
+
+object SampleObject: SampleExternalClass()

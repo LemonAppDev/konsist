@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentInterfaceProvider
 import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
 import kotlin.reflect.KClass
@@ -9,14 +9,14 @@ internal interface KoParentInterfaceProviderCore :
     KoParentInterfaceProvider,
     KoBaseProviderCore,
     KoParentProviderCore {
-    override fun parentInterfaces(indirectParents: Boolean): List<KoInterfaceDeclaration> =
-        parents(indirectParents).filterIsInstance<KoInterfaceDeclaration>()
+    override fun parentInterfaces(indirectParents: Boolean): List<KoParentDeclaration> =
+        parents(indirectParents).filter { it.sourceDeclaration?.isInterface == true }
 
     override fun numParentInterfaces(indirectParents: Boolean): Int = parentInterfaces(indirectParents).size
 
     override fun countParentInterfaces(
         indirectParents: Boolean,
-        predicate: (KoInterfaceDeclaration) -> Boolean,
+        predicate: (KoParentDeclaration) -> Boolean,
     ): Int = parentInterfaces(indirectParents).count { predicate(it) }
 
     override fun hasParentInterfaces(indirectParents: Boolean): Boolean = parentInterfaces(indirectParents).isNotEmpty()
@@ -59,12 +59,12 @@ internal interface KoParentInterfaceProviderCore :
 
     override fun hasParentInterface(
         indirectParents: Boolean,
-        predicate: (KoInterfaceDeclaration) -> Boolean,
+        predicate: (KoParentDeclaration) -> Boolean,
     ): Boolean = parentInterfaces(indirectParents).any(predicate)
 
     override fun hasAllParentInterfaces(
         indirectParents: Boolean,
-        predicate: (KoInterfaceDeclaration) -> Boolean,
+        predicate: (KoParentDeclaration) -> Boolean,
     ): Boolean = parentInterfaces(indirectParents).all(predicate)
 
     override fun hasParentInterfaceOf(

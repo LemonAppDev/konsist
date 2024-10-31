@@ -16,7 +16,7 @@ import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
-import org.jetbrains.kotlin.psi.KtAnnotated
+import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtConstructor
 import org.jetbrains.kotlin.psi.KtElement
@@ -40,8 +40,8 @@ internal interface KoConstructorDeclarationCore :
     KoVisibilityModifierProviderCore {
     val ktConstructor: KtConstructor<*>
 
-    override val ktAnnotated: KtAnnotated
-        get() = ktConstructor
+    override val ktAnnotationEntries: List<KtAnnotationEntry>?
+        get() = ktConstructor.annotationEntries
 
     override val ktModifierListOwner: KtTypeParameterListOwner
         get() = ktConstructor

@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.psi.KtElement
 import java.util.concurrent.ConcurrentHashMap
 
 internal class KoDeclarationCache<T : KoBaseProvider> {
-    private val elements = ConcurrentHashMap<Pair<KtElement, KoBaseProvider?>, T>()
+    val elements = ConcurrentHashMap<Pair<KtElement, KoBaseProvider?>, T>()
 
     private fun get(key: Pair<KtElement, KoBaseProvider?>): T {
         var value = elements[key]
@@ -41,7 +41,7 @@ internal class KoDeclarationCache<T : KoBaseProvider> {
 }
 
 internal object KoExternalDeclarationCache {
-    private val elements = ConcurrentHashMap<String, KoExternalDeclaration>()
+    val elements = ConcurrentHashMap<String, KoExternalDeclaration>()
 
     private fun get(key: String): KoExternalDeclaration {
         var value = elements[key]

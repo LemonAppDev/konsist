@@ -2,7 +2,7 @@
 
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentInterfaceProvider
 import kotlin.reflect.KClass
 
@@ -12,7 +12,7 @@ import kotlin.reflect.KClass
  * @param indirectParents Whether to include indirect parent interfaces.
  * @return A list containing parent interface declarations.
  */
-fun <T : KoParentInterfaceProvider> List<T>.parentInterfaces(indirectParents: Boolean = false): List<KoInterfaceDeclaration> =
+fun <T : KoParentInterfaceProvider> List<T>.parentInterfaces(indirectParents: Boolean = false): List<KoParentDeclaration> =
     flatMap { it.parentInterfaces(indirectParents) }
 
 /**
@@ -170,7 +170,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesNamed(
  */
 fun <T : KoParentInterfaceProvider> List<T>.withParentInterface(
     indirectParents: Boolean = false,
-    predicate: (KoInterfaceDeclaration) -> Boolean,
+    predicate: (KoParentDeclaration) -> Boolean,
 ): List<T> = filter { it.hasParentInterface(indirectParents, predicate) }
 
 /**
@@ -182,7 +182,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withParentInterface(
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterface(
     indirectParents: Boolean = false,
-    predicate: (KoInterfaceDeclaration) -> Boolean,
+    predicate: (KoParentDeclaration) -> Boolean,
 ): List<T> = filterNot { it.hasParentInterface(indirectParents, predicate) }
 
 /**
@@ -194,7 +194,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterface(
  */
 fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfaces(
     indirectParents: Boolean = false,
-    predicate: (KoInterfaceDeclaration) -> Boolean,
+    predicate: (KoParentDeclaration) -> Boolean,
 ): List<T> = filter { it.hasAllParentInterfaces(indirectParents, predicate) }
 
 /**
@@ -206,7 +206,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfaces(
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfaces(
     indirectParents: Boolean = false,
-    predicate: (KoInterfaceDeclaration) -> Boolean,
+    predicate: (KoParentDeclaration) -> Boolean,
 ): List<T> = filterNot { it.hasAllParentInterfaces(indirectParents, predicate) }
 
 /**
@@ -218,7 +218,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfaces(
  */
 fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaces(
     indirectParents: Boolean = false,
-    predicate: (List<KoInterfaceDeclaration>) -> Boolean,
+    predicate: (List<KoParentDeclaration>) -> Boolean,
 ): List<T> = filter { predicate(it.parentInterfaces(indirectParents)) }
 
 /**
@@ -230,7 +230,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaces(
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaces(
     indirectParents: Boolean = false,
-    predicate: (List<KoInterfaceDeclaration>) -> Boolean,
+    predicate: (List<KoParentDeclaration>) -> Boolean,
 ): List<T> = filterNot { predicate(it.parentInterfaces(indirectParents)) }
 
 /**

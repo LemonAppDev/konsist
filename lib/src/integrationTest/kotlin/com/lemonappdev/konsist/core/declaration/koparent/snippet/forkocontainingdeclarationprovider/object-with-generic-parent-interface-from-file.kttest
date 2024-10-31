@@ -1,0 +1,3 @@
+interface SampleGenericSuperInterface<T>
+
+object SampleObject: SampleGenericSuperInterface<Int>

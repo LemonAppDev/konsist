@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
+import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoExternalParentProvider
 import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
 import kotlin.reflect.KClass
@@ -9,15 +9,14 @@ internal interface KoExternalParentProviderCore :
     KoExternalParentProvider,
     KoBaseProviderCore,
     KoParentProviderCore {
-    override fun externalParents(indirectParents: Boolean): List<KoExternalDeclaration> =
-        parents(indirectParents)
-            .filterIsInstance<KoExternalDeclaration>()
+    override fun externalParents(indirectParents: Boolean): List<KoParentDeclaration> =
+        parents(indirectParents).filter { it.sourceDeclaration?.isExternalDeclaration == true }
 
     override fun numExternalParents(indirectParents: Boolean): Int = externalParents(indirectParents).size
 
     override fun countExternalParents(
         indirectParents: Boolean,
-        predicate: (KoExternalDeclaration) -> Boolean,
+        predicate: (KoParentDeclaration) -> Boolean,
     ): Int = externalParents(indirectParents).count { predicate(it) }
 
     override fun hasExternalParents(indirectParents: Boolean): Boolean = externalParents(indirectParents).isNotEmpty()
@@ -60,12 +59,12 @@ internal interface KoExternalParentProviderCore :
 
     override fun hasExternalParent(
         indirectParents: Boolean,
-        predicate: (KoExternalDeclaration) -> Boolean,
+        predicate: (KoParentDeclaration) -> Boolean,
     ): Boolean = externalParents(indirectParents).any(predicate)
 
     override fun hasAllExternalParents(
         indirectParents: Boolean,
-        predicate: (KoExternalDeclaration) -> Boolean,
+        predicate: (KoParentDeclaration) -> Boolean,
     ): Boolean = externalParents(indirectParents).all(predicate)
 
     override fun hasExternalParentOf(

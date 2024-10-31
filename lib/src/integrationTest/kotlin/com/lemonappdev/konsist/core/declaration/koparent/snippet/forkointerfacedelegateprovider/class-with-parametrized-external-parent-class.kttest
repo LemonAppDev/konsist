@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.externalsample.SampleExternalClassWithParameter
+
+class SampleClass() : SampleExternalClassWithParameter("param")

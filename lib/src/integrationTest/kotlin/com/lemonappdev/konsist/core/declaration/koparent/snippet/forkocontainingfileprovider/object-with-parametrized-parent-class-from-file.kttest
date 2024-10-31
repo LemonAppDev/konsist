@@ -1,0 +1,3 @@
+object SampleObject: SampleParametrizedSuperClass("param")
+
+open class SampleParametrizedSuperClass(str: String)

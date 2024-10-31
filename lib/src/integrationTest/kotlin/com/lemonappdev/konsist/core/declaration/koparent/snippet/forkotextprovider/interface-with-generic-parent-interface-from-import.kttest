@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.SampleGenericSuperInterface
+
+interface SampleInterface : SampleGenericSuperInterface<Int>
