@@ -1,0 +1,5 @@
+package com.samplepackage
+
+import com.lemonappdev.konsist.testdata.SampleParentInterface as SampleImportAlias
+
+interface SampleInterface : SampleImportAlias

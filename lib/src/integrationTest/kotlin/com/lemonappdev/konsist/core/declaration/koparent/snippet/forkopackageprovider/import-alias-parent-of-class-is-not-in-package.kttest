@@ -1,3 +1,3 @@
 import com.lemonappdev.konsist.testdata.SampleParentClass as SampleImportAlias
 
-object SampleObject: SampleImportAlias()
+class SampleClass() : SampleImportAlias()
