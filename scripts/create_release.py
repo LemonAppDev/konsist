@@ -15,6 +15,8 @@ read_me_file = os.path.join(project_root, "README.md")
 files_with_version_to_change = [gradle_properties_file, read_me_file]
 
 api_directory = 'lib/src/main/kotlin/com/lemonappdev/konsist/api'
+project_directory = 'lib/src/main/kotlin/com/lemonappdev/konsist'
+
 m2_repo_path = os.path.expanduser('~/.m2/repository/')
 
 konsist_documentation_repository_address = "LemonAppDev/konsist-documentation"
@@ -286,9 +288,11 @@ def check_if_exist_files_with_deprecated_annotation(directory, version):
     print_method_name("check_if_exist_files_with_deprecated_annotation")
 
     files_with_deprecated_annotation = []
-    pattern = fr'@Deprecated\(".*{version}'
+    pattern = fr'@Deprecated\(\s*".*{version}'
 
-    for root, dirs, files in os.walk(directory):
+    absolute_directory = os.path.join(project_root, directory)
+
+    for root, dirs, files in os.walk(absolute_directory):
         for file in files:
             if file.endswith('.kt'):
                 file_path = os.path.join(root, file)
@@ -307,6 +311,42 @@ def check_if_exist_files_with_deprecated_annotation(directory, version):
         sys.exit()
     else:
         print_success_message(f"No files contains @Deprecated annotation with {version} version.")
+
+def check_if_exist_files_with_remove_in_version_annotation(directory, version):
+    """
+    Finds Kotlin files containing the @RemoveInVersion annotation with the specified pattern.
+
+    Args: directory: The directory to search.
+
+    Returns: A list of file paths that match the criteria.
+    """
+
+    print_method_name("check_if_exist_files_with_remove_in_version_annotation")
+
+    files_with_remove_in_version_annotation = []
+    pattern = re.compile(rf'@RemoveInVersion\(\s*"{version}"\s*\)', re.MULTILINE)
+
+    absolute_directory = os.path.join(project_root, directory)
+
+    for root, dirs, files in os.walk(absolute_directory):
+        for file in files:
+            if file.endswith('.kt'):
+                file_path = os.path.join(root, file)
+                with open(file_path, 'r') as f:
+                    text = f.read()
+                    if pattern.search(text):
+                        files_with_remove_in_version_annotation.append(file_path)
+
+    # Check if list of files with remove_in_version annotation is not empty
+    if files_with_remove_in_version_annotation:
+        print_error_message(f"Files contains @RemoveInVersion annotation with {version} version:")
+        for file in files_with_remove_in_version_annotation:
+            file_path = os.path.join(project_root, file)
+            display_clickable_file_paths(file_path)
+        print_error_message(f"Remove declarations marked as @RemoveInVersion in the above files.")
+        sys.exit()
+    else:
+        print_success_message(f"No files contains @RemoveInVersion annotation with {version} version.")
 
 def display_clickable_file_paths(file_path):
     # Construct the hyperlink URL
@@ -910,7 +950,9 @@ def create_release():
 
     replace_konsist_version(old_konsist_version, new_konsist_version, files_with_version_to_change)
 
-    check_if_exist_files_with_deprecated_annotation(api_directory, new_konsist_version)
+    check_if_exist_files_with_deprecated_annotation(project_directory, new_konsist_version)
+
+    check_if_exist_files_with_remove_in_version_annotation(project_directory, new_konsist_version)
 
     test_3rd_party_projects_using_local_artifacts(old_konsist_version, new_konsist_version)
 

@@ -10,4 +10,7 @@ import kotlin.annotation.AnnotationTarget.PROPERTY_SETTER
 import kotlin.annotation.AnnotationTarget.TYPEALIAS
 
 @Target(CLASS, FUNCTION, PROPERTY, ANNOTATION_CLASS, CONSTRUCTOR, PROPERTY_SETTER, PROPERTY_GETTER, TYPEALIAS)
-internal annotation class RemoveInVersion(val version: String, val message: String = "")
+internal annotation class RemoveInVersion(
+    val version: String,
+    val message: String = "",
+)

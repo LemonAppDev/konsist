@@ -69,7 +69,7 @@ internal class KoImportDeclarationCore private constructor(
             .declarations
             .filterIsInstance<KoFullyQualifiedNameProvider>()
             .firstOrNull { it.fullyQualifiedName == name }
-                as? KoSourceDeclaration
+            as? KoSourceDeclaration
             ?: getKotlinType(shortName)
             ?: KoExternalDeclarationCore.getInstance(shortName, ktImportDirective)
     }

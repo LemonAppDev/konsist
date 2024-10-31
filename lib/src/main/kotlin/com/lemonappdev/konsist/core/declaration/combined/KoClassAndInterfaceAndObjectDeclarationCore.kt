@@ -105,6 +105,5 @@ internal interface KoClassAndInterfaceAndObjectDeclarationCore :
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): List<KoBaseDeclaration> =
-        KoDeclarationProviderCoreUtil.getKoDeclarations(ktClassOrObject, includeNested, includeLocal, this)
+    ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil.getKoDeclarations(ktClassOrObject, includeNested, includeLocal, this)
 }

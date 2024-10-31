@@ -79,12 +79,12 @@ internal class KoTypeDeclarationCore private constructor(
 
     override val psiElement: PsiElement by lazy {
         ktTypeReference ?: ktNameReferenceExpression ?: ktTypeProjection
-        ?: error("KtTypeReference, KtNameReferenceExpression and KtTypeProjection are null")
+            ?: error("KtTypeReference, KtNameReferenceExpression and KtTypeProjection are null")
     }
 
     override val ktElement: KtElement by lazy {
         ktTypeReference ?: ktNameReferenceExpression ?: ktTypeProjection
-        ?: error("KtTypeReference, KtNameReferenceExpression and KtTypeProjection are null")
+            ?: error("KtTypeReference, KtNameReferenceExpression and KtTypeProjection are null")
     }
 
     override val ktUserType: KtUserType? by lazy {
