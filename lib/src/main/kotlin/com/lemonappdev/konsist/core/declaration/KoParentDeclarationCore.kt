@@ -26,7 +26,6 @@ import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
-import org.jetbrains.kotlin.com.intellij.util.containers.ContainerUtil.filterIsInstance
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtConstructorCalleeExpression
 import org.jetbrains.kotlin.psi.KtDeclarationModifierList
@@ -38,7 +37,6 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
 import org.jetbrains.kotlin.psi.KtValueArgument
 import org.jetbrains.kotlin.psi.KtValueArgumentList
-import java.awt.SystemColor.text
 
 internal class KoParentDeclarationCore(
     override val ktSuperTypeListEntry: KtSuperTypeListEntry,
@@ -121,7 +119,6 @@ internal class KoParentDeclarationCore(
                 ?: (containingFile.packagee?.name + "." + name)
 
         val isAlias = import?.alias != null
-
 
         import?.alias
             ?: getClass(outerName, fqn, isAlias, containingFile)

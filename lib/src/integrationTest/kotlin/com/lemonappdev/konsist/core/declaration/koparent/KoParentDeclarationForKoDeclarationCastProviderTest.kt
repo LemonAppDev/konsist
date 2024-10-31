@@ -3,7 +3,9 @@ package com.lemonappdev.konsist.core.declaration.koparent
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.ext.list.parents
 import com.lemonappdev.konsist.externalsample.SampleExternalClass
 import com.lemonappdev.konsist.externalsample.SampleExternalClassWithParameter
@@ -1327,6 +1329,128 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
     }
 
     @Test
+    fun `class-with-typealias-parent`() {
+        // given
+        val sut =
+            getSnippetFile("class-with-typealias-parent")
+                .classes()
+                .parents()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            isClass shouldBeEqualTo false
+            isObject shouldBeEqualTo false
+            isInterface shouldBeEqualTo false
+            isTypeAlias shouldBeEqualTo true
+            isImportAlias shouldBeEqualTo false
+            isKotlinType shouldBeEqualTo false
+            isKotlinBasicType shouldBeEqualTo false
+            isKotlinCollectionType shouldBeEqualTo false
+            isTypeParameter shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
+            asClassDeclaration() shouldBeEqualTo null
+            hasClassDeclaration() shouldBeEqualTo false
+            hasClassDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasClassDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asObjectDeclaration() shouldBeEqualTo null
+            hasObjectDeclaration() shouldBeEqualTo false
+            hasObjectDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asInterfaceDeclaration() shouldBeEqualTo null
+            hasInterfaceDeclaration() shouldBeEqualTo false
+            hasInterfaceDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asTypeAliasDeclaration() shouldBeInstanceOf KoTypeAliasDeclaration::class
+            hasTypeAliasDeclaration() shouldBeEqualTo true
+            hasTypeAliasDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo true
+            asImportAliasDeclaration() shouldBeEqualTo null
+            hasImportAliasDeclaration() shouldBeEqualTo false
+            hasImportAliasDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            asKotlinTypeDeclaration() shouldBeEqualTo null
+            hasKotlinTypeDeclaration() shouldBeEqualTo false
+            hasKotlinTypeDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasKotlinTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            hasKotlinBasicTypeDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasKotlinBasicTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            hasKotlinCollectionTypeDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasKotlinCollectionTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asExternalDeclaration() shouldBeEqualTo null
+            hasExternalDeclaration() shouldBeEqualTo false
+            hasExternalDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasExternalDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asTypeParameterDeclaration() shouldBeEqualTo null
+            hasTypeParameterDeclaration() shouldBeEqualTo false
+            hasTypeParameterDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `class-with-import-alias-parent`() {
+        // given
+        val sut =
+            getSnippetFile("class-with-import-alias-parent")
+                .classes()
+                .parents()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            isClass shouldBeEqualTo false
+            isObject shouldBeEqualTo false
+            isInterface shouldBeEqualTo false
+            isTypeAlias shouldBeEqualTo false
+            isImportAlias shouldBeEqualTo true
+            isKotlinType shouldBeEqualTo false
+            isKotlinBasicType shouldBeEqualTo false
+            isKotlinCollectionType shouldBeEqualTo false
+            isTypeParameter shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
+            asClassDeclaration() shouldBeEqualTo null
+            hasClassDeclaration() shouldBeEqualTo false
+            hasClassDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasClassDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asObjectDeclaration() shouldBeEqualTo null
+            hasObjectDeclaration() shouldBeEqualTo false
+            hasObjectDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asInterfaceDeclaration() shouldBeEqualTo null
+            hasInterfaceDeclaration() shouldBeEqualTo false
+            hasInterfaceDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asTypeAliasDeclaration() shouldBeEqualTo null
+            hasTypeAliasDeclaration() shouldBeEqualTo false
+            hasTypeAliasDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            asImportAliasDeclaration() shouldBeInstanceOf KoImportAliasDeclaration::class
+            hasImportAliasDeclaration() shouldBeEqualTo true
+            hasImportAliasDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo true
+            asKotlinTypeDeclaration() shouldBeEqualTo null
+            hasKotlinTypeDeclaration() shouldBeEqualTo false
+            hasKotlinTypeDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasKotlinTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            hasKotlinBasicTypeDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasKotlinBasicTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            hasKotlinCollectionTypeDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasKotlinCollectionTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asExternalDeclaration() shouldBeEqualTo null
+            hasExternalDeclaration() shouldBeEqualTo false
+            hasExternalDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasExternalDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asTypeParameterDeclaration() shouldBeEqualTo null
+            hasTypeParameterDeclaration() shouldBeEqualTo false
+            hasTypeParameterDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `interface-with-parent-interface-from-file`() {
         // given
         val sut =
@@ -1685,6 +1809,128 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             asTypeParameterDeclaration() shouldBeEqualTo null
             hasTypeParameterDeclaration() shouldBeEqualTo false
             hasTypeParameterDeclaration { decl -> decl.name == "SampleExternalGenericInterface" } shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `interface-with-typealias-parent`() {
+        // given
+        val sut =
+            getSnippetFile("interface-with-typealias-parent")
+                .interfaces()
+                .parents()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            isClass shouldBeEqualTo false
+            isObject shouldBeEqualTo false
+            isInterface shouldBeEqualTo false
+            isTypeAlias shouldBeEqualTo true
+            isImportAlias shouldBeEqualTo false
+            isKotlinType shouldBeEqualTo false
+            isKotlinBasicType shouldBeEqualTo false
+            isKotlinCollectionType shouldBeEqualTo false
+            isTypeParameter shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
+            asClassDeclaration() shouldBeEqualTo null
+            hasClassDeclaration() shouldBeEqualTo false
+            hasClassDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasClassDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asObjectDeclaration() shouldBeEqualTo null
+            hasObjectDeclaration() shouldBeEqualTo false
+            hasObjectDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asInterfaceDeclaration() shouldBeEqualTo null
+            hasInterfaceDeclaration() shouldBeEqualTo false
+            hasInterfaceDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asTypeAliasDeclaration() shouldBeInstanceOf KoTypeAliasDeclaration::class
+            hasTypeAliasDeclaration() shouldBeEqualTo true
+            hasTypeAliasDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo true
+            asImportAliasDeclaration() shouldBeEqualTo null
+            hasImportAliasDeclaration() shouldBeEqualTo false
+            hasImportAliasDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            asKotlinTypeDeclaration() shouldBeEqualTo null
+            hasKotlinTypeDeclaration() shouldBeEqualTo false
+            hasKotlinTypeDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasKotlinTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            hasKotlinBasicTypeDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasKotlinBasicTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            hasKotlinCollectionTypeDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasKotlinCollectionTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asExternalDeclaration() shouldBeEqualTo null
+            hasExternalDeclaration() shouldBeEqualTo false
+            hasExternalDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasExternalDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asTypeParameterDeclaration() shouldBeEqualTo null
+            hasTypeParameterDeclaration() shouldBeEqualTo false
+            hasTypeParameterDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `interface-with-import-alias-parent`() {
+        // given
+        val sut =
+            getSnippetFile("interface-with-import-alias-parent")
+                .interfaces()
+                .parents()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            isClass shouldBeEqualTo false
+            isObject shouldBeEqualTo false
+            isInterface shouldBeEqualTo false
+            isTypeAlias shouldBeEqualTo false
+            isImportAlias shouldBeEqualTo true
+            isKotlinType shouldBeEqualTo false
+            isKotlinBasicType shouldBeEqualTo false
+            isKotlinCollectionType shouldBeEqualTo false
+            isTypeParameter shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
+            asClassDeclaration() shouldBeEqualTo null
+            hasClassDeclaration() shouldBeEqualTo false
+            hasClassDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasClassDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asObjectDeclaration() shouldBeEqualTo null
+            hasObjectDeclaration() shouldBeEqualTo false
+            hasObjectDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asInterfaceDeclaration() shouldBeEqualTo null
+            hasInterfaceDeclaration() shouldBeEqualTo false
+            hasInterfaceDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asTypeAliasDeclaration() shouldBeEqualTo null
+            hasTypeAliasDeclaration() shouldBeEqualTo false
+            hasTypeAliasDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            asImportAliasDeclaration() shouldBeInstanceOf KoImportAliasDeclaration::class
+            hasImportAliasDeclaration() shouldBeEqualTo true
+            hasImportAliasDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo true
+            asKotlinTypeDeclaration() shouldBeEqualTo null
+            hasKotlinTypeDeclaration() shouldBeEqualTo false
+            hasKotlinTypeDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasKotlinTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            hasKotlinBasicTypeDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasKotlinBasicTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            hasKotlinCollectionTypeDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasKotlinCollectionTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asExternalDeclaration() shouldBeEqualTo null
+            hasExternalDeclaration() shouldBeEqualTo false
+            hasExternalDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasExternalDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asTypeParameterDeclaration() shouldBeEqualTo null
+            hasTypeParameterDeclaration() shouldBeEqualTo false
+            hasTypeParameterDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
         }
     }
 
@@ -2803,6 +3049,128 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             asTypeParameterDeclaration() shouldBeEqualTo null
             hasTypeParameterDeclaration() shouldBeEqualTo false
             hasTypeParameterDeclaration { decl -> decl.name == "SampleExternalGenericInterface" } shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `object-with-typealias-parent`() {
+        // given
+        val sut =
+            getSnippetFile("object-with-typealias-parent")
+                .objects()
+                .parents()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            isClass shouldBeEqualTo false
+            isObject shouldBeEqualTo false
+            isInterface shouldBeEqualTo false
+            isTypeAlias shouldBeEqualTo true
+            isImportAlias shouldBeEqualTo false
+            isKotlinType shouldBeEqualTo false
+            isKotlinBasicType shouldBeEqualTo false
+            isKotlinCollectionType shouldBeEqualTo false
+            isTypeParameter shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
+            asClassDeclaration() shouldBeEqualTo null
+            hasClassDeclaration() shouldBeEqualTo false
+            hasClassDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasClassDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asObjectDeclaration() shouldBeEqualTo null
+            hasObjectDeclaration() shouldBeEqualTo false
+            hasObjectDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asInterfaceDeclaration() shouldBeEqualTo null
+            hasInterfaceDeclaration() shouldBeEqualTo false
+            hasInterfaceDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asTypeAliasDeclaration() shouldBeInstanceOf KoTypeAliasDeclaration::class
+            hasTypeAliasDeclaration() shouldBeEqualTo true
+            hasTypeAliasDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo true
+            asImportAliasDeclaration() shouldBeEqualTo null
+            hasImportAliasDeclaration() shouldBeEqualTo false
+            hasImportAliasDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            asKotlinTypeDeclaration() shouldBeEqualTo null
+            hasKotlinTypeDeclaration() shouldBeEqualTo false
+            hasKotlinTypeDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasKotlinTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            hasKotlinBasicTypeDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasKotlinBasicTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            hasKotlinCollectionTypeDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasKotlinCollectionTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asExternalDeclaration() shouldBeEqualTo null
+            hasExternalDeclaration() shouldBeEqualTo false
+            hasExternalDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+            hasExternalDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asTypeParameterDeclaration() shouldBeEqualTo null
+            hasTypeParameterDeclaration() shouldBeEqualTo false
+            hasTypeParameterDeclaration { decl -> decl.name == "SampleTypeAlias" } shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `object-with-import-alias-parent`() {
+        // given
+        val sut =
+            getSnippetFile("object-with-import-alias-parent")
+                .objects()
+                .parents()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            isClass shouldBeEqualTo false
+            isObject shouldBeEqualTo false
+            isInterface shouldBeEqualTo false
+            isTypeAlias shouldBeEqualTo false
+            isImportAlias shouldBeEqualTo true
+            isKotlinType shouldBeEqualTo false
+            isKotlinBasicType shouldBeEqualTo false
+            isKotlinCollectionType shouldBeEqualTo false
+            isTypeParameter shouldBeEqualTo false
+            isExternalDeclaration shouldBeEqualTo false
+            asClassDeclaration() shouldBeEqualTo null
+            hasClassDeclaration() shouldBeEqualTo false
+            hasClassDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasClassDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asObjectDeclaration() shouldBeEqualTo null
+            hasObjectDeclaration() shouldBeEqualTo false
+            hasObjectDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asInterfaceDeclaration() shouldBeEqualTo null
+            hasInterfaceDeclaration() shouldBeEqualTo false
+            hasInterfaceDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asTypeAliasDeclaration() shouldBeEqualTo null
+            hasTypeAliasDeclaration() shouldBeEqualTo false
+            hasTypeAliasDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            asImportAliasDeclaration() shouldBeInstanceOf KoImportAliasDeclaration::class
+            hasImportAliasDeclaration() shouldBeEqualTo true
+            hasImportAliasDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo true
+            asKotlinTypeDeclaration() shouldBeEqualTo null
+            hasKotlinTypeDeclaration() shouldBeEqualTo false
+            hasKotlinTypeDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasKotlinTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            hasKotlinBasicTypeDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasKotlinBasicTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            hasKotlinCollectionTypeDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasKotlinCollectionTypeDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asExternalDeclaration() shouldBeEqualTo null
+            hasExternalDeclaration() shouldBeEqualTo false
+            hasExternalDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
+            hasExternalDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            asTypeParameterDeclaration() shouldBeEqualTo null
+            hasTypeParameterDeclaration() shouldBeEqualTo false
+            hasTypeParameterDeclaration { decl -> decl.name == "SampleImportAlias" } shouldBeEqualTo false
         }
     }
 
