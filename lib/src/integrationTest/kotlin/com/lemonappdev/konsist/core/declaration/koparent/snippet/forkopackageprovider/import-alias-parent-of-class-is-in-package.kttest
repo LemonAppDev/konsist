@@ -1,0 +1,5 @@
+package com.samplepackage
+
+import com.lemonappdev.konsist.testdata.SampleParentClass as SampleImportAlias
+
+class SampleClass() : SampleImportAlias()

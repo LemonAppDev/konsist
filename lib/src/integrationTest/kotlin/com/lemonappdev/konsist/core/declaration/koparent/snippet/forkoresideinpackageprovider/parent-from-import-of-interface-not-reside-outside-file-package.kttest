@@ -1,5 +1,0 @@
-package com.samplepackage
-
-import com.lemonappdev.konsist.testdata.SampleParentInterface
-
-interface SampleInterface: SampleParentInterface

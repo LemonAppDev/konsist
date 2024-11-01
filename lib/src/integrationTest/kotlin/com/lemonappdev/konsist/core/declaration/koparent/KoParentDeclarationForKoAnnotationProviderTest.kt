@@ -512,6 +512,8 @@ class KoParentDeclarationForKoAnnotationProviderTest {
                 arguments("class-with-external-parent-interface-without-annotation"),
                 arguments("class-with-generic-external-parent-interface-without-annotation"),
                 arguments("class-with-external-parent-by-delegation-without-annotation"),
+                arguments("class-with-typealias-parent-without-annotation"),
+                arguments("class-with-import-alias-parent-without-annotation"),
             )
 
         @Suppress("unused")
@@ -528,6 +530,8 @@ class KoParentDeclarationForKoAnnotationProviderTest {
                 arguments("class-with-external-parent-interface-with-two-annotations"),
                 arguments("class-with-generic-external-parent-interface-with-two-annotations"),
                 arguments("class-with-external-parent-by-delegation-with-two-annotations"),
+                arguments("class-with-typealias-parent-with-two-annotations"),
+                arguments("class-with-import-alias-parent-with-two-annotations"),
             )
 
         @Suppress("unused")
@@ -538,6 +542,8 @@ class KoParentDeclarationForKoAnnotationProviderTest {
                 arguments("interface-with-generic-parent-interface-without-annotation"),
                 arguments("interface-with-external-parent-interface-without-annotation"),
                 arguments("interface-with-generic-external-parent-interface-without-annotation"),
+                arguments("interface-with-typealias-parent-without-annotation"),
+                arguments("interface-with-import-alias-parent-without-annotation"),
             )
 
         @Suppress("unused")
@@ -548,6 +554,8 @@ class KoParentDeclarationForKoAnnotationProviderTest {
                 arguments("interface-with-generic-parent-interface-with-two-annotations"),
                 arguments("interface-with-external-parent-interface-with-two-annotations"),
                 arguments("interface-with-generic-external-parent-interface-with-two-annotations"),
+                arguments("interface-with-typealias-parent-with-two-annotations"),
+                arguments("interface-with-import-alias-parent-with-two-annotations"),
             )
 
         @Suppress("unused")
@@ -562,6 +570,8 @@ class KoParentDeclarationForKoAnnotationProviderTest {
                 arguments("object-with-parametrized-and-generic-external-parent-class-without-annotation"),
                 arguments("object-with-external-parent-interface-without-annotation"),
                 arguments("object-with-generic-external-parent-interface-without-annotation"),
+                arguments("object-with-typealias-parent-without-annotation"),
+                arguments("object-with-import-alias-parent-without-annotation"),
             )
 
         @Suppress("unused")
@@ -576,6 +586,8 @@ class KoParentDeclarationForKoAnnotationProviderTest {
                 arguments("object-with-parametrized-and-generic-external-parent-class-with-two-annotations"),
                 arguments("object-with-external-parent-interface-with-two-annotations"),
                 arguments("object-with-generic-external-parent-interface-with-two-annotations"),
+                arguments("object-with-typealias-parent-with-two-annotations"),
+                arguments("object-with-import-alias-parent-with-two-annotations"),
             )
     }
 }

@@ -182,6 +182,8 @@ class KoParentDeclarationForKoArgumentProviderTest {
                 arguments("class-with-generic-parent-interface-from-import"),
                 arguments("class-with-generic-external-parent-class"),
                 arguments("class-with-generic-external-parent-interface"),
+                arguments("class-with-typealias-parent"),
+                arguments("class-with-import-alias-parent"),
             )
 
         @Suppress("unused")
@@ -194,6 +196,8 @@ class KoParentDeclarationForKoArgumentProviderTest {
                 arguments("class-with-parametrized-and-generic-parent-class-from-file"),
                 arguments("class-with-parametrized-and-generic-parent-class-from-import"),
                 arguments("class-with-parametrized-and-generic-external-parent-class"),
+                arguments("class-with-parametrized-typealias-parent"),
+                arguments("class-with-parametrized-import-alias-parent"),
             )
 
         @Suppress("unused")
@@ -206,6 +210,8 @@ class KoParentDeclarationForKoArgumentProviderTest {
                 arguments("interface-with-generic-parent-interface-from-file"),
                 arguments("interface-with-generic-parent-interface-from-import"),
                 arguments("interface-with-generic-external-parent-interface"),
+                arguments("interface-with-typealias-parent"),
+                arguments("interface-with-import-alias-parent"),
             )
 
         @Suppress("unused")
@@ -224,6 +230,8 @@ class KoParentDeclarationForKoArgumentProviderTest {
                 arguments("object-with-generic-parent-interface-from-import"),
                 arguments("object-with-generic-external-parent-class"),
                 arguments("object-with-generic-external-parent-interface"),
+                arguments("object-with-typealias-parent"),
+                arguments("object-with-import-alias-parent"),
             )
 
         @Suppress("unused")
@@ -236,6 +244,8 @@ class KoParentDeclarationForKoArgumentProviderTest {
                 arguments("object-with-parametrized-and-generic-parent-class-from-file"),
                 arguments("object-with-parametrized-and-generic-parent-class-from-import"),
                 arguments("object-with-parametrized-and-generic-external-parent-class"),
+                arguments("object-with-parametrized-typealias-parent"),
+                arguments("object-with-parametrized-import-alias-parent"),
             )
     }
 }

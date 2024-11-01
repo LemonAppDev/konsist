@@ -350,22 +350,6 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                     String::class,
                     "com.lemonappdev.konsist.testdata.SampleObject",
                 ),
-//                arguments(
-//                    "nullable-function-type",
-//                    KoFunctionTypeDeclaration::class,
-//                    KoKotlinTypeDeclaration::class,
-//                    null,
-//                    String::class,
-//                    null,
-//                ),
-//                arguments(
-//                    "not-nullable-function-type",
-//                    KoFunctionTypeDeclaration::class,
-//                    KoKotlinTypeDeclaration::class,
-//                    null,
-//                    String::class,
-//                    null,
-//                ),
                 arguments(
                     "nullable-import-alias-type",
                     KoImportAliasDeclaration::class,

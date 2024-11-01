@@ -6,14 +6,17 @@ import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.ext.list.parents
 import org.amshove.kluent.shouldBeInstanceOf
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class KoParentDeclarationForKoContainingDeclarationProviderTest {
-    @Test
-    fun `class-with-parent-class-from-file`() {
+    @ParameterizedTest
+    @MethodSource("provideClasses")
+    fun `class-parent-has-no-argument`(fileName: String) {
         // given
         val sut =
-            getSnippetFile("class-with-parent-class-from-file")
+            getSnippetFile(fileName)
                 .classes()
                 .parents()
                 .first()
@@ -22,298 +25,12 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
         sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
     }
 
-    @Test
-    fun `class-with-generic-parent-class-from-file`() {
+    @ParameterizedTest
+    @MethodSource("provideInterfaces")
+    fun `interface-parent-has-no-argument`(fileName: String) {
         // given
         val sut =
-            getSnippetFile("class-with-generic-parent-class-from-file")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-parametrized-parent-class-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parametrized-parent-class-from-file")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-parametrized-and-generic-parent-class-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parametrized-and-generic-parent-class-from-file")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-parent-interface-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parent-interface-from-file")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-generic-parent-interface-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-generic-parent-interface-from-file")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-parent-by-delegation-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parent-by-delegation-from-file")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-multiline-parent-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-multiline-parent-from-file")
-                .classes()
-                .first()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-parent-class-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parent-class-from-import")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-generic-parent-class-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-generic-parent-class-from-import")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-parametrized-parent-class-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parametrized-parent-class-from-import")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-parametrized-and-generic-parent-class-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parametrized-and-generic-parent-class-from-import")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-parent-interface-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parent-interface-from-import")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-generic-parent-interface-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-generic-parent-interface-from-import")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-parent-by-delegation-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parent-by-delegation-from-import")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-multiline-parent-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-multiline-parent-from-import")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-external-parent-class`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-external-parent-class")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-generic-external-parent-class`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-generic-external-parent-class")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-parametrized-external-parent-class`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parametrized-external-parent-class")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-parametrized-and-generic-external-parent-class`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-parametrized-and-generic-external-parent-class")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-external-parent-interface`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-external-parent-interface")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-generic-external-parent-interface`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-generic-external-parent-interface")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `class-with-external-parent-by-delegation`() {
-        // given
-        val sut =
-            getSnippetFile("class-with-external-parent-by-delegation")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoClassDeclaration::class
-    }
-
-    @Test
-    fun `interface-with-parent-interface-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("interface-with-parent-interface-from-file")
+            getSnippetFile(fileName)
                 .interfaces()
                 .parents()
                 .first()
@@ -322,336 +39,12 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
         sut.containingDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
     }
 
-    @Test
-    fun `interface-with-generic-parent-interface-from-file`() {
+    @ParameterizedTest
+    @MethodSource("provideObjects")
+    fun `object-parent-has-no-argument`(fileName: String) {
         // given
         val sut =
-            getSnippetFile("interface-with-generic-parent-interface-from-file")
-                .interfaces()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
-    }
-
-    @Test
-    fun `interface-with-parent-interface-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("interface-with-parent-interface-from-import")
-                .interfaces()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
-    }
-
-    @Test
-    fun `interface-with-generic-parent-interface-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("interface-with-generic-parent-interface-from-import")
-                .interfaces()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
-    }
-
-    @Test
-    fun `interface-with-external-parent-interface`() {
-        // given
-        val sut =
-            getSnippetFile("interface-with-external-parent-interface")
-                .interfaces()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
-    }
-
-    @Test
-    fun `interface-with-generic-external-parent-interface`() {
-        // given
-        val sut =
-            getSnippetFile("interface-with-generic-external-parent-interface")
-                .interfaces()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
-    }
-
-    @Test
-    fun `object-with-parent-class-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-parent-class-from-file")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
-    }
-
-    @Test
-    fun `object-with-generic-parent-class-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-generic-parent-class-from-file")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
-    }
-
-    @Test
-    fun `object-with-parametrized-parent-class-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-parametrized-parent-class-from-file")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
-    }
-
-    @Test
-    fun `object-with-parametrized-and-generic-parent-class-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-parametrized-and-generic-parent-class-from-file")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
-    }
-
-    @Test
-    fun `object-with-parent-interface-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-parent-interface-from-file")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
-    }
-
-    @Test
-    fun `object-with-generic-parent-interface-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-generic-parent-interface-from-file")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
-    }
-
-    @Test
-    fun `object-with-multiline-parent-from-file`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-multiline-parent-from-file")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
-    }
-
-    @Test
-    fun `object-with-parent-class-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-parent-class-from-import")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
-    }
-
-    @Test
-    fun `object-with-generic-parent-class-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-generic-parent-class-from-import")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
-    }
-
-    @Test
-    fun `object-with-parametrized-parent-class-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-parametrized-parent-class-from-import")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
-    }
-
-    @Test
-    fun `object-with-parametrized-and-generic-parent-class-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-parametrized-and-generic-parent-class-from-import")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
-    }
-
-    @Test
-    fun `object-with-parent-interface-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-parent-interface-from-import")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
-    }
-
-    @Test
-    fun `object-with-generic-parent-interface-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-generic-parent-interface-from-import")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
-    }
-
-    @Test
-    fun `object-with-multiline-parent-from-import`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-multiline-parent-from-import")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
-    }
-
-    @Test
-    fun `object-with-external-parent-class`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-external-parent-class")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
-    }
-
-    @Test
-    fun `object-with-generic-external-parent-class`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-generic-external-parent-class")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
-    }
-
-    @Test
-    fun `object-with-parametrized-external-parent-class`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-parametrized-external-parent-class")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
-    }
-
-    @Test
-    fun `object-with-parametrized-and-generic-external-parent-class`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-parametrized-and-generic-external-parent-class")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
-    }
-
-    @Test
-    fun `object-with-external-parent-interface`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-external-parent-interface")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
-    }
-
-    @Test
-    fun `object-with-generic-external-parent-interface`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-generic-external-parent-interface")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.containingDeclaration shouldBeInstanceOf KoObjectDeclaration::class
-    }
-
-    @Test
-    fun `object-with-multiline-external-parent`() {
-        // given
-        val sut =
-            getSnippetFile("object-with-multiline-external-parent")
+            getSnippetFile(fileName)
                 .objects()
                 .parents()
                 .first()
@@ -665,4 +58,80 @@ class KoParentDeclarationForKoContainingDeclarationProviderTest {
             "core/declaration/koparent/snippet/forkocontainingdeclarationprovider/",
             fileName,
         )
+
+    companion object {
+        @Suppress("unused")
+        @JvmStatic
+        fun provideClasses() =
+            listOf(
+                arguments("class-with-parent-class-from-file"),
+                arguments("class-with-generic-parent-class-from-file"),
+                arguments("class-with-parametrized-parent-class-from-file"),
+                arguments("class-with-parametrized-and-generic-parent-class-from-file"),
+                arguments("class-with-parent-interface-from-file"),
+                arguments("class-with-generic-parent-interface-from-file"),
+                arguments("class-with-parent-by-delegation-from-file"),
+                arguments("class-with-multiline-parent-from-file"),
+                arguments("class-with-parent-class-from-import"),
+                arguments("class-with-generic-parent-class-from-import"),
+                arguments("class-with-parametrized-parent-class-from-import"),
+                arguments("class-with-parametrized-and-generic-parent-class-from-import"),
+                arguments("class-with-parent-interface-from-import"),
+                arguments("class-with-generic-parent-interface-from-import"),
+                arguments("class-with-parent-by-delegation-from-import"),
+                arguments("class-with-multiline-parent-from-import"),
+                arguments("class-with-external-parent-class"),
+                arguments("class-with-generic-external-parent-class"),
+                arguments("class-with-parametrized-external-parent-class"),
+                arguments("class-with-parametrized-and-generic-external-parent-class"),
+                arguments("class-with-external-parent-interface"),
+                arguments("class-with-generic-external-parent-interface"),
+                arguments("class-with-external-parent-by-delegation"),
+                arguments("class-with-typealias-parent"),
+                arguments("class-with-import-alias-parent"),
+            )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideInterfaces() =
+            listOf(
+                arguments("interface-with-parent-interface-from-file"),
+                arguments("interface-with-generic-parent-interface-from-file"),
+                arguments("interface-with-parent-interface-from-import"),
+                arguments("interface-with-generic-parent-interface-from-import"),
+                arguments("interface-with-external-parent-interface"),
+                arguments("interface-with-generic-external-parent-interface"),
+                arguments("interface-with-typealias-parent"),
+                arguments("interface-with-import-alias-parent"),
+            )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideObjects() =
+            listOf(
+                arguments("object-with-parent-class-from-file"),
+                arguments("object-with-generic-parent-class-from-file"),
+                arguments("object-with-parametrized-parent-class-from-file"),
+                arguments("object-with-parametrized-and-generic-parent-class-from-file"),
+                arguments("object-with-parent-interface-from-file"),
+                arguments("object-with-generic-parent-interface-from-file"),
+                arguments("object-with-multiline-parent-from-file"),
+                arguments("object-with-parent-class-from-import"),
+                arguments("object-with-generic-parent-class-from-import"),
+                arguments("object-with-parametrized-parent-class-from-import"),
+                arguments("object-with-parametrized-and-generic-parent-class-from-import"),
+                arguments("object-with-parent-interface-from-import"),
+                arguments("object-with-generic-parent-interface-from-import"),
+                arguments("object-with-multiline-parent-from-import"),
+                arguments("object-with-external-parent-class"),
+                arguments("object-with-generic-external-parent-class"),
+                arguments("object-with-parametrized-external-parent-class"),
+                arguments("object-with-parametrized-and-generic-external-parent-class"),
+                arguments("object-with-external-parent-interface"),
+                arguments("object-with-generic-external-parent-interface"),
+                arguments("object-with-multiline-external-parent"),
+                arguments("object-with-typealias-parent"),
+                arguments("object-with-import-alias-parent"),
+            )
+    }
 }

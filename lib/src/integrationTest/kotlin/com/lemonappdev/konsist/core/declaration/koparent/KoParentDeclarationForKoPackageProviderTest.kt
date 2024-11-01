@@ -3,27 +3,17 @@ package com.lemonappdev.konsist.core.declaration.koparent
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.ext.list.parents
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class KoParentDeclarationForKoPackageProviderTest {
-    @Test
-    fun `parent-from-file-of-class-is-not-in-package`() {
+    @ParameterizedTest
+    @MethodSource("provideClassesForPackage")
+    fun `class-parent-is-in-package`(fileName: String) {
         // given
         val sut =
-            getSnippetFile("parent-from-file-of-class-is-not-in-package")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.packagee shouldBeEqualTo null
-    }
-
-    @Test
-    fun `parent-from-file-of-class-is-in-package`() {
-        // given
-        val sut =
-            getSnippetFile("parent-from-file-of-class-is-in-package")
+            getSnippetFile(fileName)
                 .classes()
                 .parents()
                 .first()
@@ -32,63 +22,12 @@ class KoParentDeclarationForKoPackageProviderTest {
         sut.packagee?.name shouldBeEqualTo "com.samplepackage"
     }
 
-    @Test
-    fun `parent-from-file-of-interface-is-not-in-package`() {
+    @ParameterizedTest
+    @MethodSource("provideClassesForNoPackage")
+    fun `class-parent-is-not-in-package`(fileName: String) {
         // given
         val sut =
-            getSnippetFile("parent-from-file-of-interface-is-not-in-package")
-                .interfaces()
-                .parents()
-                .first()
-
-        // then
-        sut.packagee shouldBeEqualTo null
-    }
-
-    @Test
-    fun `parent-from-file-of-interface-is-in-package`() {
-        // given
-        val sut =
-            getSnippetFile("parent-from-file-of-interface-is-in-package")
-                .interfaces()
-                .parents()
-                .first()
-
-        // then
-        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
-    }
-
-    @Test
-    fun `parent-from-file-of-object-is-not-in-package`() {
-        // given
-        val sut =
-            getSnippetFile("parent-from-file-of-object-is-not-in-package")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.packagee shouldBeEqualTo null
-    }
-
-    @Test
-    fun `parent-from-file-of-object-is-in-package`() {
-        // given
-        val sut =
-            getSnippetFile("parent-from-file-of-object-is-in-package")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
-    }
-
-    @Test
-    fun `parent-from-import-of-class-is-not-in-package`() {
-        // given
-        val sut =
-            getSnippetFile("parent-from-import-of-class-is-not-in-package")
+            getSnippetFile(fileName)
                 .classes()
                 .parents()
                 .first()
@@ -97,37 +36,12 @@ class KoParentDeclarationForKoPackageProviderTest {
         sut.packagee shouldBeEqualTo null
     }
 
-    @Test
-    fun `parent-from-import-of-class-is-in-package`() {
+    @ParameterizedTest
+    @MethodSource("provideInterfacesForPackage")
+    fun `interface-parent-is-in-package`(fileName: String) {
         // given
         val sut =
-            getSnippetFile("parent-from-import-of-class-is-in-package")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
-    }
-
-    @Test
-    fun `parent-from-import-of-interface-is-not-in-package`() {
-        // given
-        val sut =
-            getSnippetFile("parent-from-import-of-interface-is-not-in-package")
-                .interfaces()
-                .parents()
-                .first()
-
-        // then
-        sut.packagee shouldBeEqualTo null
-    }
-
-    @Test
-    fun `parent-from-import-of-interface-is-in-package`() {
-        // given
-        val sut =
-            getSnippetFile("parent-from-import-of-interface-is-in-package")
+            getSnippetFile(fileName)
                 .interfaces()
                 .parents()
                 .first()
@@ -136,63 +50,12 @@ class KoParentDeclarationForKoPackageProviderTest {
         sut.packagee?.name shouldBeEqualTo "com.samplepackage"
     }
 
-    @Test
-    fun `parent-from-import-of-object-is-not-in-package`() {
+    @ParameterizedTest
+    @MethodSource("provideInterfacesForNoPackage")
+    fun `interface-parent-is-not-in-package`(fileName: String) {
         // given
         val sut =
-            getSnippetFile("parent-from-import-of-object-is-not-in-package")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.packagee shouldBeEqualTo null
-    }
-
-    @Test
-    fun `parent-from-import-of-object-is-in-package`() {
-        // given
-        val sut =
-            getSnippetFile("parent-from-import-of-object-is-in-package")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
-    }
-
-    @Test
-    fun `external-parent-of-class-is-not-in-package`() {
-        // given
-        val sut =
-            getSnippetFile("external-parent-of-class-is-not-in-package")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.packagee shouldBeEqualTo null
-    }
-
-    @Test
-    fun `external-parent-of-class-is-in-package`() {
-        // given
-        val sut =
-            getSnippetFile("external-parent-of-class-is-in-package")
-                .classes()
-                .parents()
-                .first()
-
-        // then
-        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
-    }
-
-    @Test
-    fun `external-parent-of-interface-is-not-in-package`() {
-        // given
-        val sut =
-            getSnippetFile("external-parent-of-interface-is-not-in-package")
+            getSnippetFile(fileName)
                 .interfaces()
                 .parents()
                 .first()
@@ -201,12 +64,13 @@ class KoParentDeclarationForKoPackageProviderTest {
         sut.packagee shouldBeEqualTo null
     }
 
-    @Test
-    fun `external-parent-of-interface-is-in-package`() {
+    @ParameterizedTest
+    @MethodSource("provideObjectsForPackage")
+    fun `object-parent-is-in-package`(fileName: String) {
         // given
         val sut =
-            getSnippetFile("external-parent-of-interface-is-in-package")
-                .interfaces()
+            getSnippetFile(fileName)
+                .objects()
                 .parents()
                 .first()
 
@@ -214,31 +78,87 @@ class KoParentDeclarationForKoPackageProviderTest {
         sut.packagee?.name shouldBeEqualTo "com.samplepackage"
     }
 
-    @Test
-    fun `external-parent-of-object-is-not-in-package`() {
+    @ParameterizedTest
+    @MethodSource("provideObjectsForNoPackage")
+    fun `object-parent-is-not-in-package`(fileName: String) {
         // given
         val sut =
-            getSnippetFile("external-parent-of-object-is-not-in-package")
+            getSnippetFile(fileName)
                 .objects()
                 .parents()
                 .first()
 
         // then
         sut.packagee shouldBeEqualTo null
-    }
-
-    @Test
-    fun `external-parent-of-object-is-in-package`() {
-        // given
-        val sut =
-            getSnippetFile("external-parent-of-object-is-in-package")
-                .objects()
-                .parents()
-                .first()
-
-        // then
-        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koparent/snippet/forkopackageprovider/", fileName)
+
+    companion object {
+        @Suppress("unused")
+        @JvmStatic
+        fun provideClassesForNoPackage() =
+            listOf(
+                arguments("parent-from-file-of-class-is-not-in-package"),
+                arguments("parent-from-import-of-class-is-not-in-package"),
+                arguments("external-parent-of-class-is-not-in-package"),
+                arguments("typealias-parent-of-class-is-not-in-package"),
+                arguments("import-alias-parent-of-class-is-not-in-package"),
+            )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideClassesForPackage() =
+            listOf(
+                arguments("parent-from-file-of-class-is-in-package"),
+                arguments("parent-from-import-of-class-is-in-package"),
+                arguments("external-parent-of-class-is-in-package"),
+                arguments("typealias-parent-of-class-is-in-package"),
+                arguments("import-alias-parent-of-class-is-in-package"),
+            )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideInterfacesForNoPackage() =
+            listOf(
+                arguments("parent-from-file-of-interface-is-not-in-package"),
+                arguments("parent-from-import-of-interface-is-not-in-package"),
+                arguments("external-parent-of-interface-is-not-in-package"),
+                arguments("typealias-parent-of-interface-is-not-in-package"),
+                arguments("import-alias-parent-of-interface-is-not-in-package"),
+            )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideInterfacesForPackage() =
+            listOf(
+                arguments("parent-from-file-of-interface-is-in-package"),
+                arguments("parent-from-import-of-interface-is-in-package"),
+                arguments("external-parent-of-interface-is-in-package"),
+                arguments("typealias-parent-of-interface-is-in-package"),
+                arguments("import-alias-parent-of-interface-is-in-package"),
+            )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideObjectsForNoPackage() =
+            listOf(
+                arguments("parent-from-file-of-object-is-not-in-package"),
+                arguments("parent-from-import-of-object-is-not-in-package"),
+                arguments("external-parent-of-object-is-not-in-package"),
+                arguments("typealias-parent-of-object-is-not-in-package"),
+                arguments("import-alias-parent-of-object-is-not-in-package"),
+            )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideObjectsForPackage() =
+            listOf(
+                arguments("parent-from-file-of-object-is-in-package"),
+                arguments("parent-from-import-of-object-is-in-package"),
+                arguments("external-parent-of-object-is-in-package"),
+                arguments("typealias-parent-of-object-is-in-package"),
+                arguments("import-alias-parent-of-object-is-in-package"),
+            )
+    }
 }

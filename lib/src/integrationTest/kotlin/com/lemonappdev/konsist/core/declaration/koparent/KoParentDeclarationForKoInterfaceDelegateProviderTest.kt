@@ -57,6 +57,8 @@ class KoParentDeclarationForKoInterfaceDelegateProviderTest {
                 arguments("class-with-parent-by-delegation-from-file"),
                 arguments("class-with-parent-by-delegation-from-import"),
                 arguments("class-with-external-parent-by-delegation"),
+                arguments("class-with-typealias-parent-by-delegation"),
+                arguments("class-with-import-alias-parent-by-delegation"),
             )
 
         @Suppress("unused")
@@ -83,6 +85,8 @@ class KoParentDeclarationForKoInterfaceDelegateProviderTest {
                 arguments("class-with-parametrized-and-generic-external-parent-class"),
                 arguments("class-with-external-parent-interface"),
                 arguments("class-with-generic-external-parent-interface"),
+                arguments("class-with-typealias-parent"),
+                arguments("class-with-import-alias-parent"),
             )
     }
 }
