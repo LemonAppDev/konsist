@@ -2,9 +2,12 @@ package com.lemonappdev.konsist.core.architecture
 
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.architecture.LayerDependencies
+import com.lemonappdev.konsist.core.architecture.validator.LayerValidatorManager
 import com.lemonappdev.konsist.core.exception.KoInvalidAssertArchitectureConfigurationException
 
-class LayerDependenciesCore : LayerDependencies {
+internal class LayerDependenciesCore(
+    private val layerValidatorManager: LayerValidatorManager = LayerValidatorManager(),
+) : LayerDependencies {
     internal val layerDependencies = mutableListOf<LayerDependency>()
     internal var allLayers = mutableSetOf<Layer>()
 
@@ -33,6 +36,8 @@ class LayerDependenciesCore : LayerDependencies {
         layers.forEach {
             addLayerDependency(this, LayerDependencyType.DEPEND_ON_LAYER, it)
         }
+
+        layerValidatorManager.invoke(allLayers)
     }
 
     private fun getLayersMessage(layers: Set<Layer>) = if (layers.size == 1) {
@@ -65,10 +70,12 @@ class LayerDependenciesCore : LayerDependencies {
         layers.forEach {
             addLayerDependency(this, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, it)
         }
+
+        layerValidatorManager.invoke(allLayers)
     }
 
     override fun Layer.dependsOnNothing() {
-        val dependOnLayerDependencies = getAllLayersWithDependency(this, LayerDependencyType.DEPEND_ON_LAYER)
+        val dependOnLayerDependencies = getLayersWithDependency(this, LayerDependencyType.DEPEND_ON_LAYER)
         val dependOnLayers = dependOnLayerDependencies
             .mapNotNull { it.layer2 }
             .toSet()
@@ -83,13 +90,7 @@ class LayerDependenciesCore : LayerDependencies {
         addLayerDependency(this, LayerDependencyType.DEPENDENTS_ON_NOTHING, null)
         allLayers.add(this)
 
-//        requireUniqueLayers(setOf(this))
-//        requireValidLayerStatus(true, this)
-//
-//        allLayers.add(this)
-//
-//        positiveDependencies[this] = setOf(this)
-//        layerDependencyTypes[this] = LayerDependencyType.DEPENDENT_ON_NOTHING
+        layerValidatorManager.invoke(allLayers)
     }
 
     private fun getLayerWithDependency(layer: Layer, layerDependencyType: LayerDependencyType): LayerDependency? {
@@ -99,7 +100,7 @@ class LayerDependenciesCore : LayerDependencies {
         return dependOnLayerDependency
     }
 
-    private fun getAllLayersWithDependency(layer: Layer, layerDependencyType: LayerDependencyType): Set<LayerDependency> {
+    private fun getLayersWithDependency(layer: Layer, layerDependencyType: LayerDependencyType): Set<LayerDependency> {
         val dependOnLayerDependency = layerDependencies.filter {
             it.layer1 == layer && it.dependencyType == layerDependencyType
         }
@@ -220,24 +221,6 @@ class LayerDependenciesCore : LayerDependencies {
 //            lists
 //                .firstOrNull { it.isNotEmpty() && it.last() == null }
 //                .orEmpty()
-//        }
-    }
-
-    private fun requireUniqueLayers(layers: Set<Layer>) {
-//        // Using a set to ensure uniqueness based solely on each attribute.
-//        val uniqueNames = mutableSetOf<String>()
-//        val uniqueRootPackages = mutableSetOf<String>()
-//
-//        layers.forEach { layer ->
-//            if (!uniqueNames.add(layer.name)) {
-//                throw KoPreconditionFailedException("""Layer name must be unique. Duplicated name: "${layer.name}"""")
-//            }
-//
-//            if (!uniqueRootPackages.add(layer.rootPackage)) {
-//                throw KoPreconditionFailedException("""Layer rootPackage must be unique. Duplicated rootPackage: "${layer.rootPackage}"""")
-//            }
-//
-//            allLayers.add(layer)
 //        }
     }
 }

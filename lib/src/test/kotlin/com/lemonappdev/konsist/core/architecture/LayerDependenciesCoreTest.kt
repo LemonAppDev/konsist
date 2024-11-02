@@ -1,7 +1,11 @@
 package com.lemonappdev.konsist.core.architecture
 
 import com.lemonappdev.konsist.api.architecture.Layer
+import com.lemonappdev.konsist.core.architecture.validator.LayerValidatorManager
 import com.lemonappdev.konsist.core.exception.KoInvalidAssertArchitectureConfigurationException
+import io.mockk.justRun
+import io.mockk.mockk
+import io.mockk.verify
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldContainAll
 import org.amshove.kluent.shouldThrow
@@ -9,7 +13,11 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class LayerDependenciesCoreTest {
-    val sut = LayerDependenciesCore()
+    private val layerValidatorManager: LayerValidatorManager = mockk()
+
+    private val sut = LayerDependenciesCore(
+        layerValidatorManager,
+    )
 
     @Test
     fun `dependsOn throws exception for empty set`() {
@@ -50,6 +58,8 @@ class LayerDependenciesCoreTest {
         val layer2 = Layer("name2", "package2..")
         val layer3 = Layer("name3", "package3..")
 
+        justRun { layerValidatorManager.invoke(any()) }
+
         // when
         with(sut) {
             layer1.dependsOn(layer2, layer3)
@@ -65,6 +75,8 @@ class LayerDependenciesCoreTest {
         val layer1 = Layer("name1", "package1..")
         val layer2 = Layer("name2", "package2..")
         val layer3 = Layer("name3", "package3..")
+
+        justRun { layerValidatorManager.invoke(any()) }
 
         // when
         with(sut) {
@@ -82,6 +94,8 @@ class LayerDependenciesCoreTest {
         val layer2 = Layer("name2", "package2..")
         val layer3 = Layer("name3", "package3..")
 
+        justRun { layerValidatorManager.invoke(any()) }
+
         // when
         with(sut) {
             layer1.dependsOn(setOf(layer2, layer3))
@@ -95,11 +109,31 @@ class LayerDependenciesCoreTest {
     }
 
     @Test
+    fun `dependsOn call layer validator`() {
+        // given
+        val layer1 = Layer("name1", "package1..")
+        val layer2 = Layer("name2", "package2..")
+        val layer3 = Layer("name3", "package3..")
+
+        justRun { layerValidatorManager.invoke(any()) }
+
+        // when
+        with(sut) {
+            layer1.dependsOn(setOf(layer2, layer3))
+        }
+
+        // then
+        verify { layerValidatorManager.invoke(sut.allLayers) }
+    }
+
+    @Test
     fun `dependsOn with multiple layers passed throws exception when layer already depends on nothing`() {
         // given
         val layer1 = Layer("name1", "package1..")
         val layer2 = Layer("name2", "package2..")
         val layer3 = Layer("name3", "package3..")
+
+        justRun { layerValidatorManager.invoke(any()) }
 
         with(sut) {
             layer1.dependsOnNothing()
@@ -122,6 +156,8 @@ class LayerDependenciesCoreTest {
         // given
         val layer1 = Layer("name1", "package1..")
         val layer2 = Layer("name2", "package2..")
+
+        justRun { layerValidatorManager.invoke(any()) }
 
         with(sut) {
             layer1.dependsOnNothing()
@@ -162,6 +198,8 @@ class LayerDependenciesCoreTest {
         val layer2 = Layer("name2", "package2..")
         val layer3 = Layer("name3", "package3..")
 
+        justRun { layerValidatorManager.invoke(any()) }
+
         // when
         with(sut) {
             layer1.doesNotDependOn(setOf(layer2, layer3))
@@ -197,6 +235,8 @@ class LayerDependenciesCoreTest {
         val layer2 = Layer("name2", "package2..")
         val layer3 = Layer("name3", "package3..")
 
+        justRun { layerValidatorManager.invoke(any()) }
+
         // when
         with(sut) {
             layer1.doesNotDependOn(layer2, layer3)
@@ -213,6 +253,8 @@ class LayerDependenciesCoreTest {
         val layer2 = Layer("name2", "package2..")
         val layer3 = Layer("name3", "package3..")
 
+        justRun { layerValidatorManager.invoke(any()) }
+
         // when
         with(sut) {
             layer1.doesNotDependOn(setOf(layer2, layer3))
@@ -228,6 +270,8 @@ class LayerDependenciesCoreTest {
         val layer1 = Layer("name1", "package1..")
         val layer2 = Layer("name2", "package2..")
         val layer3 = Layer("name3", "package3..")
+
+        justRun { layerValidatorManager.invoke(any()) }
 
         with(sut) {
             layer1.dependsOnNothing()
@@ -251,6 +295,8 @@ class LayerDependenciesCoreTest {
         val layer1 = Layer("name1", "package1..")
         val layer2 = Layer("name2", "package2..")
 
+        justRun { layerValidatorManager.invoke(any()) }
+
         with(sut) {
             layer1.dependsOnNothing()
         }
@@ -268,9 +314,29 @@ class LayerDependenciesCoreTest {
     }
 
     @Test
+    fun `doesNotDependOn call layer validator`() {
+        // given
+        val layer1 = Layer("name1", "package1..")
+        val layer2 = Layer("name2", "package2..")
+        val layer3 = Layer("name3", "package3..")
+
+        justRun { layerValidatorManager.invoke(any()) }
+
+        // when
+        with(sut) {
+            layer1.doesNotDependOn(setOf(layer2, layer3))
+        }
+
+        // then
+        verify { layerValidatorManager.invoke(sut.allLayers) }
+    }
+
+    @Test
     fun `dependsOnNothing add has layer`() {
         // given
         val layer = Layer("name", "package..")
+
+        justRun { layerValidatorManager.invoke(any()) }
 
         // when
         with(sut) {
@@ -285,6 +351,8 @@ class LayerDependenciesCoreTest {
     fun `dependsOnNothing add layer to layerDependencies`() {
         // given
         val layer = Layer("name", "package..")
+
+        justRun { layerValidatorManager.invoke(any()) }
 
         // when
         with(sut) {
@@ -302,6 +370,8 @@ class LayerDependenciesCoreTest {
         // given
         val layer1 = Layer("name1", "package1..")
         val layer2 = Layer("name2", "package2..")
+
+        justRun { layerValidatorManager.invoke(any()) }
 
         with(sut) {
             layer1.dependsOn(layer2)
@@ -326,6 +396,8 @@ class LayerDependenciesCoreTest {
         val layer2 = Layer("name2", "package2..")
         val layer3 = Layer("name3", "package3..")
 
+        justRun { layerValidatorManager.invoke(any()) }
+
         with(sut) {
             layer1.dependsOn(layer2, layer3)
         }
@@ -340,5 +412,21 @@ class LayerDependenciesCoreTest {
         // then
         func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
                 "Layer 'name1' is already configured to depend on 'layers 'name2', 'name3''. It cannot subsequently have no dependencies."
+    }
+
+    @Test
+    fun `dependsOnNothing call layer validator`() {
+        // given
+        val layer1 = Layer("name1", "package1..")
+
+        justRun { layerValidatorManager.invoke(any()) }
+
+        // when
+        with(sut) {
+            layer1.dependsOnNothing()
+        }
+
+        // then
+        verify { layerValidatorManager.invoke(sut.allLayers) }
     }
 }
