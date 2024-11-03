@@ -12,6 +12,18 @@ class UniqueLayerRuleTest {
     private val sut = UniqueLayerRule()
 
     @Test
+    fun `should validate empty dependencies set`() {
+        // Given
+        val dependencies = emptySet<LayerDependency>()
+
+        // When
+        sut.validate(dependencies)
+
+        // Then
+        // No exception thrown
+    }
+
+    @Test
     fun `should validate unique layers successfully`() {
         // Given
         val layer1 = Layer("layer1", "package1..")
@@ -35,25 +47,6 @@ class UniqueLayerRuleTest {
         val dependencies =
             setOf(
                 LayerDependency(layer1, LayerDependencyType.DEPEND_ON_NOTHING),
-            )
-
-        // When
-        sut.validate(dependencies)
-
-        // Then
-        // No exception thrown
-    }
-
-    @Test
-    fun `should validate two layers with layer1 DOES_NOT_DEPEND_ON_LAYER layer2 and layer2 DEPEND_ON_NOTHING successfully`() {
-        // Given
-        val layer1 = Layer("layer1", "package1..")
-        val layer2 = Layer("layer2", "package2..")
-
-        val dependencies =
-            setOf(
-                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer1),
-                LayerDependency(layer2, LayerDependencyType.DEPEND_ON_NOTHING),
             )
 
         // When
@@ -150,9 +143,150 @@ class UniqueLayerRuleTest {
     }
 
     @Test
-    fun `should validate empty dependencies set`() {
+    fun `should validate single layer with multiple dependency types successfully`() {
         // Given
-        val dependencies = emptySet<LayerDependency>()
+        val layer1 = Layer("layer1", "package1..")
+        val layer2 = Layer("layer2", "package2..")
+
+        val dependencies = setOf(
+            LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
+            LayerDependency(layer1, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, layer1),
+        )
+
+        // When
+        sut.validate(dependencies)
+
+        // Then
+        // No exception thrown
+    }
+
+    @Test
+    fun `should validate multiple dependencies for same layer successfully`() {
+        // Given
+        val layer1 = Layer("layer1", "package1..")
+        val layer2 = Layer("layer2", "package2..")
+        val layer3 = Layer("layer3", "package3..")
+
+        val dependencies = setOf(
+            LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
+            LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer3),
+            LayerDependency(layer2, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, layer3),
+        )
+
+        // When
+        sut.validate(dependencies)
+
+        // Then
+        // No exception thrown
+    }
+
+    @Test
+    fun `should validate self-referential dependencies successfully`() {
+        // Given
+        val layer1 = Layer("layer1", "package1..")
+
+        val dependencies = setOf(
+            LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer1),
+        )
+
+        // When
+        sut.validate(dependencies)
+
+        // Then
+        // No exception thrown
+    }
+
+    @Test
+    fun `should validate complex dependency graph successfully`() {
+        // Given
+        val layer1 = Layer("layer1", "package1..")
+        val layer2 = Layer("layer2", "package2..")
+        val layer3 = Layer("layer3", "package3..")
+        val layer4 = Layer("layer4", "package4..")
+
+        val dependencies = setOf(
+            LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
+            LayerDependency(layer2, LayerDependencyType.DEPEND_ON_LAYER, layer3),
+            LayerDependency(layer3, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, layer4),
+            LayerDependency(layer4, LayerDependencyType.DEPEND_ON_LAYER, layer1),
+        )
+
+        // When
+        sut.validate(dependencies)
+
+        // Then
+        // No exception thrown
+    }
+
+    @Test
+    fun `should validate mixed dependency types successfully`() {
+        // Given
+        val layer1 = Layer("layer1", "package1..")
+        val layer2 = Layer("layer2", "package2..")
+        val layer3 = Layer("layer3", "package3..")
+
+        val dependencies = setOf(
+            LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
+            LayerDependency(layer2, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, layer3),
+            LayerDependency(layer3, LayerDependencyType.DEPEND_ON_NOTHING),
+        )
+
+        // When
+        sut.validate(dependencies)
+
+        // Then
+        // No exception thrown
+    }
+
+    @Test
+    fun `should validate cyclic dependencies successfully`() {
+        // Given
+        val layer1 = Layer("layer1", "package1..")
+        val layer2 = Layer("layer2", "package2..")
+
+        val dependencies = setOf(
+            LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
+            LayerDependency(layer2, LayerDependencyType.DEPEND_ON_LAYER, layer1),
+        )
+
+        // When
+        sut.validate(dependencies)
+
+        // Then
+        // No exception thrown
+    }
+
+    @Test
+    fun `should validate multiple layers with DEPEND_ON_NOTHING successfully`() {
+        // Given
+        val layer1 = Layer("layer1", "package1..")
+        val layer2 = Layer("layer2", "package2..")
+        val layer3 = Layer("layer3", "package3..")
+
+        val dependencies = setOf(
+            LayerDependency(layer1, LayerDependencyType.DEPEND_ON_NOTHING),
+            LayerDependency(layer2, LayerDependencyType.DEPEND_ON_NOTHING),
+            LayerDependency(layer3, LayerDependencyType.DEPEND_ON_NOTHING),
+        )
+
+        // When
+        sut.validate(dependencies)
+
+        // Then
+        // No exception thrown
+    }
+
+    @Test
+    fun `should validate same layer instance used multiple times`() {
+        // Given
+        val layer1 = Layer("layer1", "package1..")
+        val layer2 = Layer("layer2", "package2..")
+
+        val dependencies = setOf(
+            LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
+            LayerDependency(layer2, LayerDependencyType.DEPEND_ON_LAYER, layer1),
+            LayerDependency(layer1, LayerDependencyType.DEPEND_ON_NOTHING),
+        )
 
         // When
         sut.validate(dependencies)
