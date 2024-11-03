@@ -31,7 +31,7 @@ class LayerTest {
 
         // then
         func shouldThrow IllegalArgumentException::class withMessage
-                "Invalid rootPackage definition for layer 'name'. Package must end with '..'. Current definition: com.example"
+            "Invalid rootPackage definition for layer 'name'. Package must end with '..'. Current definition: com.example"
     }
 
     @Test
@@ -41,7 +41,7 @@ class LayerTest {
 
         // then
         func shouldThrow IllegalArgumentException::class withMessage
-                "Invalid rootPackage definition for layer 'name'. Package cannot start with a dot. Current definition: .com.example.."
+            "Invalid rootPackage definition for layer 'name'. Package cannot start with a dot. Current definition: .com.example.."
     }
 
     @Test
@@ -51,7 +51,7 @@ class LayerTest {
 
         // then
         func shouldThrow IllegalArgumentException::class withMessage
-                "Invalid rootPackage definition for layer 'name'. Package name cannot be empty. Current definition: .."
+            "Invalid rootPackage definition for layer 'name'. Package name cannot be empty. Current definition: .."
     }
 
     @Test
@@ -61,9 +61,9 @@ class LayerTest {
 
         // then
         func shouldThrow IllegalArgumentException::class withMessage
-                "Invalid rootPackage definition for layer 'name'. Invalid package segment 'Com' at position 1. " +
-                "Package segments must start with a lowercase letter and contain only lowercase letters, numbers, or underscores. " +
-                "Current definition: Com.example.."
+            "Invalid rootPackage definition for layer 'name'. Invalid package segment 'Com' at position 1. " +
+            "Package segments must start with a lowercase letter and contain only lowercase letters, numbers, or underscores. " +
+            "Current definition: Com.example.."
     }
 
     @Test
@@ -73,9 +73,9 @@ class LayerTest {
 
         // then
         func shouldThrow IllegalArgumentException::class withMessage
-                "Invalid rootPackage definition for layer 'name'. Invalid package segment '1example' at position 2. " +
-                "Package segments must start with a lowercase letter and contain only lowercase letters, numbers, or underscores. " +
-                "Current definition: com.1example.."
+            "Invalid rootPackage definition for layer 'name'. Invalid package segment '1example' at position 2. " +
+            "Package segments must start with a lowercase letter and contain only lowercase letters, numbers, or underscores. " +
+            "Current definition: com.1example.."
     }
 
     @Test
@@ -85,9 +85,9 @@ class LayerTest {
 
         // then
         func shouldThrow IllegalArgumentException::class withMessage
-                "Invalid rootPackage definition for layer 'name'. Invalid package segment 'example$#' at position 2. " +
-                "Package segments must start with a lowercase letter and contain only lowercase letters, numbers, or underscores. " +
-                "Current definition: com.example$#.."
+            "Invalid rootPackage definition for layer 'name'. Invalid package segment 'example$#' at position 2. " +
+            "Package segments must start with a lowercase letter and contain only lowercase letters, numbers, or underscores. " +
+            "Current definition: com.example$#.."
     }
 
     @Test
@@ -97,21 +97,22 @@ class LayerTest {
 
         // then
         func shouldThrow IllegalArgumentException::class withMessage
-                "Invalid rootPackage definition for layer 'name'. Invalid package segment '' at position 2. " +
-                "Package segments must start with a lowercase letter and contain only lowercase letters, numbers, or underscores. " +
-                "Current definition: com..example.."
+            "Invalid rootPackage definition for layer 'name'. Invalid package segment '' at position 2. " +
+            "Package segments must start with a lowercase letter and contain only lowercase letters, numbers, or underscores. " +
+            "Current definition: com..example.."
     }
 
     @Test
     fun `create Layer with valid package name should not throw exception`() {
         // given
-        val validPackages = listOf(
-            "com.example..",
-            "example..",
-            "com.example.test..",
-            "com.example1.test2..",
-            "com.example_test.."
-        )
+        val validPackages =
+            listOf(
+                "com.example..",
+                "example..",
+                "com.example.test..",
+                "com.example1.test2..",
+                "com.example_test..",
+            )
 
         // then
         validPackages.forEach { packageName ->
@@ -119,4 +120,3 @@ class LayerTest {
         }
     }
 }
-
