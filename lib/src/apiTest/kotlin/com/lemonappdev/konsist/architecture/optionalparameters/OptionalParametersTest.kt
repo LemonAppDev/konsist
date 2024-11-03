@@ -242,7 +242,7 @@ class OptionalParametersTest {
         // when
         val result =
             shouldThrow<KoAssertionFailedException> {
-                scope.assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE", dependencies = architecture)
+                scope.assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE", layerDependenciesFunc = architecture)
             }
 
         // then
@@ -266,7 +266,7 @@ class OptionalParametersTest {
         // when
         val result =
             shouldThrow<KoAssertionFailedException> {
-                scope.assertArchitecture(testName = "SOME CUSTOM TEST NAME", dependencies = architecture)
+                scope.assertArchitecture(testName = "SOME CUSTOM TEST NAME", layerDependenciesFunc = architecture)
             }
 
         // then
@@ -292,7 +292,7 @@ class OptionalParametersTest {
                 scope.assertArchitecture(
                     additionalMessage = "SOME ADDITIONAL MESSAGE",
                     testName = "SOME CUSTOM TEST NAME",
-                    dependencies = architecture,
+                    layerDependenciesFunc = architecture,
                 )
             }
 
@@ -344,7 +344,7 @@ class OptionalParametersTest {
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .files
-                    .assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE", dependencies = architecture)
+                    .assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE", layerDependenciesFunc = architecture)
             }
 
         // then
@@ -370,7 +370,7 @@ class OptionalParametersTest {
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .files
-                    .assertArchitecture(testName = "SOME CUSTOM TEST NAME", dependencies = architecture)
+                    .assertArchitecture(testName = "SOME CUSTOM TEST NAME", layerDependenciesFunc = architecture)
             }
 
         // then
@@ -398,7 +398,7 @@ class OptionalParametersTest {
                     .assertArchitecture(
                         additionalMessage = "SOME ADDITIONAL MESSAGE",
                         testName = "SOME CUSTOM TEST NAME",
-                        dependencies = architecture,
+                        layerDependenciesFunc = architecture,
                     )
             }
 

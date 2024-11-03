@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.core.verify.assert
 
 class KoArchitectureAssertionCore : KoArchitectureAssertion {
-    override fun KoScope.assertArchitecture(dependencies: LayerDependencies.() -> Unit) = assertArchitecture(null, null, dependencies)
+    override fun KoScope.assertArchitecture(layerDependenciesFunc: LayerDependencies.() -> Unit) = assertArchitecture(null, null, layerDependenciesFunc)
 
     override fun KoScope.assertArchitecture(
         additionalMessage: String?,
@@ -24,9 +24,9 @@ class KoArchitectureAssertionCore : KoArchitectureAssertion {
     override fun KoScope.assertArchitecture(
         additionalMessage: String?,
         testName: String?,
-        dependencies: LayerDependencies,
+        layerDependenciesFunc: LayerDependencies,
     ) {
-        KoArchitectureScope(dependencies, this).assert(additionalMessage, testName)
+        KoArchitectureScope(layerDependenciesFunc, this).assert(additionalMessage, testName)
     }
 
     override fun List<KoFileDeclaration>.assertArchitecture(layerDependenciesFunc: LayerDependencies.() -> Unit) =
@@ -41,14 +41,14 @@ class KoArchitectureAssertionCore : KoArchitectureAssertion {
         KoArchitectureFiles(layerDependencies, this).assert(additionalMessage, testName)
     }
 
-    override fun List<KoFileDeclaration>.assertArchitecture(dependencies: LayerDependencies) = assertArchitecture(null, null, dependencies)
+    override fun List<KoFileDeclaration>.assertArchitecture(layerDependenciesFunc: LayerDependencies) = assertArchitecture(null, null, layerDependenciesFunc)
 
     override fun List<KoFileDeclaration>.assertArchitecture(
         additionalMessage: String?,
         testName: String?,
-        dependencies: LayerDependencies,
+        layerDependenciesFunc: LayerDependencies,
     ) {
-        KoArchitectureFiles(dependencies, this).assert(additionalMessage, testName)
+        KoArchitectureFiles(layerDependenciesFunc, this).assert(additionalMessage, testName)
     }
 
     override fun architecture(layerDependenciesFunc: LayerDependencies.() -> Unit): LayerDependencies =
