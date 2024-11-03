@@ -8,7 +8,7 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-class UniqueLayerDependenciesRuleTest {
+class UniqueLayerRuleTest {
     private val sut = UniqueLayerRule()
 
     @Test
@@ -35,6 +35,25 @@ class UniqueLayerDependenciesRuleTest {
         val dependencies =
             setOf(
                 LayerDependency(layer1, LayerDependencyType.DEPEND_ON_NOTHING),
+            )
+
+        // When
+        sut.validate(dependencies)
+
+        // Then
+        // No exception thrown
+    }
+
+    @Test
+    fun `should validate two layers with layer1 DOES_NOT_DEPEND_ON_LAYER layer2 and layer2 DEPEND_ON_NOTHING successfully`() {
+        // Given
+        val layer1 = Layer("layer1", "package1..")
+        val layer2 = Layer("layer2", "package2..")
+
+        val dependencies =
+            setOf(
+                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer1),
+                LayerDependency(layer2, LayerDependencyType.DEPEND_ON_NOTHING),
             )
 
         // When
