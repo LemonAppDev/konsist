@@ -7,8 +7,8 @@ import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
 internal class CircularDependencyDependenciesRule : LayerDependenciesRule {
-    override fun validate(dependencies: Set<LayerDependency>) {
-        requireNoCircularDependencies(dependencies)
+    override fun validate(layerDependencies: Set<LayerDependency>) {
+        requireNoCircularDependencies(layerDependencies)
     }
 
     private fun requireNoCircularDependencies(dependencies: Set<LayerDependency>) {
