@@ -2,6 +2,8 @@ package com.lemonappdev.konsist.core.architecture
 
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.architecture.LayerDependencies
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.core.architecture.validator.LayerValidatorManager
 import com.lemonappdev.konsist.core.exception.KoInvalidAssertArchitectureConfigurationException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
@@ -30,9 +32,24 @@ internal class LayerDependenciesCore(
                     dependencies.mapNotNull { it.layer2 }.toSet()
                 }
 
-    fun validateEmptyLayersDependencies() {
+    fun checkEmptyLayersDependencies() {
         if (layers.isEmpty()) {
             throw KoPreconditionFailedException("Architecture doesn't contain layers or dependencies.")
+        }
+    }
+
+    /**
+     * Validate that all the layers are not empty
+     *
+     * @param files within the scope
+     *
+     * @throws KoPreconditionFailedException Layers do not contain files
+     */
+    fun checkLayersWithoutFiles(files: List<KoFileDeclaration>) {
+        layers.firstOrNull { layer ->
+            files.withPackage(layer.rootPackage).isEmpty()
+        }?.let { invalidLayer ->
+            throw KoPreconditionFailedException("Layer ${invalidLayer.name} doesn't contain any files.")
         }
     }
 

@@ -11,7 +11,6 @@ import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeNode
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
-import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.util.LocationUtil
 import com.lemonappdev.konsist.core.verify.failure.DependsOnLayerDependencyFailure
 import com.lemonappdev.konsist.core.verify.failure.DoesNotDependsOnLayerDependencyFailure
@@ -69,9 +68,8 @@ private fun assertCommon(
     additionalMessage: String?,
     testName: String?,
 ) {
-    layerDependenciesCore.validateEmptyLayersDependencies()
-    
-    validateAllLayersAreValid(files, layerDependenciesCore)
+    layerDependenciesCore.checkEmptyLayersDependencies()
+    layerDependenciesCore.checkLayersWithoutFiles(files)
 
     val failedDependsOnLayers = getFailedDependsOnLayers(files, layerDependenciesCore)
     val failedDoesNotDependsOnLayers = getFailedDoesNotDependsOnLayers(files, layerDependenciesCore)
@@ -230,38 +228,4 @@ private fun Layer.getDependentOnFiles(otherLayer: Layer, files: List<KoFileDecla
         }
 
     return dependOnFiles
-}
-
-/**
- * Validate that all the layers are not empty
- *
- * @param files within the scope
- * @param layerDependencies dependencies of the architecture.
- *
- * @throws KoPreconditionFailedException Layers do not contain files
- */
-private fun validateAllLayersAreValid(
-    files: List<KoFileDeclaration>,
-    layerDependencies: LayerDependenciesCore,
-): Unit {
-    val isAllLayersValid =
-        layerDependencies.layers
-            .all {
-                files
-                    .withPackage(it.rootPackage)
-                    .isNotEmpty()
-            }
-
-    if (!isAllLayersValid) {
-        val layer =
-            layerDependencies
-                .layers
-                .first {
-                    files
-                        .withPackage(it.rootPackage)
-                        .isEmpty()
-                }
-
-        throw KoPreconditionFailedException("Layer ${layer.name} doesn't contain any files.")
-    }
 }

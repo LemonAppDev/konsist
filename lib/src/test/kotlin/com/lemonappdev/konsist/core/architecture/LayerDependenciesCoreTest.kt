@@ -25,7 +25,7 @@ class LayerDependenciesCoreTest {
     fun `validateEmptyLayersDependencies throws exception for empty set`() {
         // when
         val func = {
-            sut.validateEmptyLayersDependencies()
+            sut.checkEmptyLayersDependencies()
         }
 
         // then
