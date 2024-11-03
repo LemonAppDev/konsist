@@ -11,6 +11,24 @@ internal class LayerDependenciesCore(
     internal val layerDependencies = mutableSetOf<LayerDependency>()
     internal var layers = mutableSetOf<Layer>()
 
+    internal val dependsOnDependencies: Map<Layer, Set<Layer>>
+        get() =
+            layerDependencies
+                .filter { it.dependencyType == LayerDependencyType.DEPEND_ON_LAYER }
+                .groupBy { it.layer1 }
+                .mapValues { (_, dependencies) ->
+                    dependencies.mapNotNull { it.layer2 }.toSet()
+                }
+
+    internal val doesNotDependsOnDependencies: Map<Layer, Set<Layer>>
+        get() =
+            layerDependencies
+                .filter { it.dependencyType == LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER }
+                .groupBy { it.layer1 }
+                .mapValues { (_, dependencies) ->
+                    dependencies.mapNotNull { it.layer2 }.toSet()
+                }
+
     override fun Layer.dependsOn(
         layer: Layer,
         vararg layers: Layer,
@@ -26,7 +44,7 @@ internal class LayerDependenciesCore(
 
         if (dependOnNothingDependency != null) {
             throw KoInvalidAssertArchitectureConfigurationException(
-                "Layer ''$name'' is already configured with no dependencies. " +
+                "Layer '$name' is already configured with no dependencies. " +
                     "It cannot subsequently depend on ${getLayersMessage(layers)}.",
             )
         }
@@ -90,7 +108,7 @@ internal class LayerDependenciesCore(
 
         if (dependOnLayers.isNotEmpty()) {
             throw KoInvalidAssertArchitectureConfigurationException(
-                "Layer '$name' is already configured to depend on '${getLayersMessage(dependOnLayers)}'. " +
+                "Layer '$name' is already configured to depend on ${getLayersMessage(dependOnLayers)}. " +
                     "It cannot subsequently have no dependencies.",
             )
         }

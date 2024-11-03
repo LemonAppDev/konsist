@@ -2,9 +2,14 @@ package com.lemonappdev.konsist.core.architecture.validator.rule
 
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.architecture.LayerDependency
+import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeCreator
+import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeNodeFactory
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
-internal class UniqueLayerRule : LayerDependenciesRule {
+internal class UniqueLayerRule(
+    private val asciiTreeCreator: AsciiTreeCreator = AsciiTreeCreator(),
+    private val asciiTreeNodeFactory: AsciiTreeNodeFactory = AsciiTreeNodeFactory(),
+) : LayerDependenciesRule {
     override fun validate(dependencies: Set<LayerDependency>) {
         val layers = extractLayers(dependencies)
         requireUniqueLayers(layers)
@@ -34,7 +39,10 @@ internal class UniqueLayerRule : LayerDependenciesRule {
         val violations = nameViolations + packageViolations
 
         if (violations.isNotEmpty()) {
-            val errorMessage = "Invalid layer configurations:\n${violations.joinToString("\n")}"
+            val violationNodes = violations.map { asciiTreeNodeFactory.create(it) }
+            val asciiTreeRootNode = asciiTreeNodeFactory.create("Invalid layers configuration:", violationNodes)
+            val errorMessage = asciiTreeCreator.invoke(asciiTreeRootNode)
+
             throw KoPreconditionFailedException(errorMessage)
         }
     }

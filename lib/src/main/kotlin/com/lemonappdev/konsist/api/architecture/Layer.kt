@@ -29,7 +29,7 @@ data class Layer(
         // Check ends with ..
         require(rootPackage.endsWith("..")) {
             "Invalid rootPackage definition for layer '$name'. " +
-                    "Package must end with '..'. Current definition: $rootPackage"
+                "Package must end with '..'. Current definition: $rootPackage"
         }
 
         val packageWithoutDoubleDot = rootPackage.removeSuffix("..")
@@ -37,13 +37,13 @@ data class Layer(
         // Empty package (just ..) is not valid
         require(packageWithoutDoubleDot.isNotEmpty()) {
             "Invalid rootPackage definition for layer '$name'. " +
-                    "Package name cannot be empty. Current definition: $rootPackage"
+                "Package name cannot be empty. Current definition: $rootPackage"
         }
 
         // Check for starting dot
         require(!packageWithoutDoubleDot.startsWith(".")) {
             "Invalid rootPackage definition for layer '$name'. " +
-                    "Package cannot start with a dot. Current definition: $rootPackage"
+                "Package cannot start with a dot. Current definition: $rootPackage"
         }
 
         // Validate each package segment
@@ -51,9 +51,9 @@ data class Layer(
         segments.forEachIndexed { index, segment ->
             require(segment.matches(REGEX_VALID_PACKAGE_SEGMENT)) {
                 "Invalid rootPackage definition for layer '$name'. " +
-                        "Invalid package segment '${segment}' at position ${index + 1}. " +
-                        "Package segments must start with a lowercase letter and contain only lowercase letters, numbers, or underscores. " +
-                        "Current definition: $rootPackage"
+                    "Invalid package segment '$segment' at position ${index + 1}. " +
+                    "Package segments must start with a lowercase letter and contain only " +
+                    "lowercase letters, numbers, or underscores. Current definition: $rootPackage"
             }
         }
     }

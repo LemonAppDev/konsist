@@ -3,303 +3,412 @@ package com.lemonappdev.konsist.core.architecture.validator.rule
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.architecture.LayerDependency
 import com.lemonappdev.konsist.core.architecture.LayerDependencyType
+import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeCreator
+import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeNode
+import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeNodeFactory
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.verify
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class UniqueLayerRuleTest {
-    private val sut = UniqueLayerRule()
+    private val asciiTreeCreator: AsciiTreeCreator = mockk()
+    private val asciiTreeNodeFactory: AsciiTreeNodeFactory = mockk()
+
+    private val sut = UniqueLayerRule(
+        asciiTreeCreator = asciiTreeCreator,
+        asciiTreeNodeFactory = asciiTreeNodeFactory,
+    )
 
     @Test
-    fun `should validate empty dependencies set`() {
-        // given
+    fun `validate passes for empty dependencies`() {
+        // Given
         val dependencies = emptySet<LayerDependency>()
 
-        // when
+        // When
         sut.validate(dependencies)
 
-        // then
-        // No exception thrown
+        // Then
+        verify(exactly = 0) { asciiTreeNodeFactory.create(any()) }
+        verify(exactly = 0) { asciiTreeCreator.invoke(any()) }
     }
 
     @Test
-    fun `should validate unique layers successfully`() {
-        // given
-        val layer1 = Layer("layer1", "package1..")
-        val layer2 = Layer("layer2", "package2..")
-        val dependencies =
-            setOf(
-                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
-            )
+    fun `validate passes for unique layers`() {
+        // Given
+        val layer1 = Layer("layer 1", "package1..")
+        val layer2 = Layer("layer 2", "package2..")
+        val dependencies = setOf(
+            LayerDependency(
+                layer1 = layer1,
+                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                layer2 = layer2,
+            ),
+        )
 
-        // when
+        // When
         sut.validate(dependencies)
 
-        // then
-        // No exception thrown
+        // Then
+        verify(exactly = 0) { asciiTreeNodeFactory.create(any()) }
+        verify(exactly = 0) { asciiTreeCreator.invoke(any()) }
     }
 
     @Test
-    fun `should validate single layer with DEPEND_ON_NOTHING successfully`() {
-        // given
-        val layer1 = Layer("layer1", "package1..")
-        val dependencies =
-            setOf(
-                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_NOTHING),
-            )
+    fun `validate passes for single layer with DEPEND_ON_NOTHING`() {
+        // Given
+        val layer1 = Layer("layer 1", "package1..")
+        val dependencies = setOf(
+            LayerDependency(
+                layer1 = layer1,
+                dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
+            ),
+        )
 
-        // when
+        // When
         sut.validate(dependencies)
 
-        // then
-        // No exception thrown
+        // Then
+        verify(exactly = 0) { asciiTreeNodeFactory.create(any()) }
+        verify(exactly = 0) { asciiTreeCreator.invoke(any()) }
     }
 
     @Test
-    fun `should throw exception when layers have duplicate names`() {
-        // given
-        val layer1 = Layer("layer1", "package1..")
-        val layer2 = Layer("layer1", "package2..")
-        val dependencies =
-            setOf(
-                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
-            )
+    fun `validate throws when layers have duplicate names`() {
+        // Given
+        val layer1 = Layer("layer 1", "package1..")
+        val layer2 = Layer("layer 1", "package2..")
+        val dependencies = setOf(
+            LayerDependency(
+                layer1 = layer1,
+                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                layer2 = layer2,
+            ),
+        )
 
-        // when
-        val func = { sut.validate(dependencies) }
+        val violationNode = mockk<AsciiTreeNode>()
+        val rootNode = mockk<AsciiTreeNode>()
 
-        // then
+        every {
+            asciiTreeNodeFactory.create("Layer name must be unique. Duplicated name: 'layer 1'.")
+        } returns violationNode
+
+        every {
+            asciiTreeNodeFactory.create("Invalid layers configuration:", listOf(violationNode))
+        } returns rootNode
+
+        every {
+            asciiTreeCreator.invoke(rootNode)
+        } returns "Invalid layers configuration:\nLayer name must be unique. Duplicated name: 'layer 1'."
+
+        // When
+        val func = {
+            sut.validate(dependencies)
+        }
+
+        // Then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Invalid layer configurations:\n" +
-            "Layer name must be unique. Duplicated name: 'layer1'."
+            "Invalid layers configuration:\nLayer name must be unique. Duplicated name: 'layer 1'."
     }
 
     @Test
-    fun `should throw exception when layers have duplicate root packages`() {
-        // given
-        val layer1 = Layer("layer1", "package1..")
-        val layer2 = Layer("layer2", "package1..")
-        val dependencies =
-            setOf(
-                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
-            )
+    fun `validate throws when layers have duplicate packages`() {
+        // Given
+        val layer1 = Layer("layer 1", "package1..")
+        val layer2 = Layer("layer 2", "package1..")
+        val dependencies = setOf(
+            LayerDependency(
+                layer1 = layer1,
+                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                layer2 = layer2,
+            ),
+        )
 
-        // when
-        val func = { sut.validate(dependencies) }
+        val violationNode = mockk<AsciiTreeNode>()
+        val rootNode = mockk<AsciiTreeNode>()
 
-        // then
+        every {
+            asciiTreeNodeFactory.create("Layer rootPackage must be unique. Duplicated rootPackage: 'package1..'.")
+        } returns violationNode
+
+        every {
+            asciiTreeNodeFactory.create("Invalid layers configuration:", listOf(violationNode))
+        } returns rootNode
+
+        every {
+            asciiTreeCreator.invoke(rootNode)
+        } returns "Invalid layers configuration:\nLayer rootPackage must be unique. Duplicated rootPackage: 'package1..'."
+
+        // When
+        val func = {
+            sut.validate(dependencies)
+        }
+
+        // Then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Invalid layer configurations:\n" +
-            "Layer rootPackage must be unique. Duplicated rootPackage: 'package1..'."
+            "Invalid layers configuration:\nLayer rootPackage must be unique. Duplicated rootPackage: 'package1..'."
     }
 
     @Test
-    fun `should throw exception when layers have both duplicate names and root packages`() {
-        // given
-        val layer1 = Layer("layer1", "package1..")
-        val layer2 = Layer("layer1", "package1..")
-        val dependencies =
-            setOf(
-                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
+    fun `validate throws when layers have both duplicate names and packages`() {
+        // Given
+        val layer1 = Layer("layer 1", "package1..")
+        val layer2 = Layer("layer 1", "package1..")
+        val dependencies = setOf(
+            LayerDependency(
+                layer1 = layer1,
+                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                layer2 = layer2,
+            ),
+        )
+
+        val nameViolation = mockk<AsciiTreeNode>()
+        val packageViolation = mockk<AsciiTreeNode>()
+        val rootNode = mockk<AsciiTreeNode>()
+
+        every {
+            asciiTreeNodeFactory.create("Layer name must be unique. Duplicated name: 'layer 1'.")
+        } returns nameViolation
+
+        every {
+            asciiTreeNodeFactory.create("Layer rootPackage must be unique. Duplicated rootPackage: 'package1..'.")
+        } returns packageViolation
+
+        every {
+            asciiTreeNodeFactory.create(
+                "Invalid layers configuration:",
+                listOf(nameViolation, packageViolation),
             )
+        } returns rootNode
 
-        // when
-        val func = { sut.validate(dependencies) }
+        every {
+            asciiTreeCreator.invoke(rootNode)
+        } returns """
+            Invalid layers configuration:
+            Layer name must be unique. Duplicated name: 'layer 1'.
+            Layer rootPackage must be unique. Duplicated rootPackage: 'package1..'.
+        """.trimIndent()
 
-        // then
-        func shouldThrow KoPreconditionFailedException::class withMessage
-            "Invalid layer configurations:\n" +
-            "Layer name must be unique. Duplicated name: 'layer1'.\n" +
-            "Layer rootPackage must be unique. Duplicated rootPackage: 'package1..'."
+        // When
+        val func = {
+            sut.validate(dependencies)
+        }
+        // Then
+        func shouldThrow KoPreconditionFailedException::class withMessage """
+            Invalid layers configuration:
+            Layer name must be unique. Duplicated name: 'layer 1'.
+            Layer rootPackage must be unique. Duplicated rootPackage: 'package1..'.
+        """.trimIndent()
     }
 
     @Test
-    fun `should throw exception when multiple layer validations fail with multiple duplicates`() {
-        // given
-        val layer1 = Layer("layer1", "package1..")
-        val layer2 = Layer("layer1", "package2..") // Duplicate name with layer1
-        val layer3 = Layer("layer3", "package1..") // Duplicate package with layer1
-        val layer4 = Layer("layer3", "package3..") // Duplicate name with layer3
-        val layer5 = Layer("layer5", "package2..") // Duplicate package with layer2
+    fun `validate passes for single layer with multiple dependency types`() {
+        // Given
+        val layer1 = Layer("layer 1", "package1..")
+        val layer2 = Layer("layer 2", "package2..")
+        val dependencies = setOf(
+            LayerDependency(
+                layer1 = layer1,
+                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                layer2 = layer2,
+            ),
+            LayerDependency(
+                layer1 = layer1,
+                dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                layer2 = layer1,
+            ),
+        )
 
-        val dependencies =
-            setOf(
-                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
-                LayerDependency(layer3, LayerDependencyType.DEPEND_ON_LAYER, layer4),
-                LayerDependency(layer5, LayerDependencyType.DEPEND_ON_NOTHING),
-            )
-
-        // when
-        val func = { sut.validate(dependencies) }
-
-        // then
-        func shouldThrow KoPreconditionFailedException::class withMessage
-            "Invalid layer configurations:\n" +
-            "Layer name must be unique. Duplicated name: 'layer1'.\n" +
-            "Layer name must be unique. Duplicated name: 'layer3'.\n" +
-            "Layer rootPackage must be unique. Duplicated rootPackage: 'package1..'.\n" +
-            "Layer rootPackage must be unique. Duplicated rootPackage: 'package2..'."
-    }
-
-    @Test
-    fun `should validate single layer with multiple dependency types successfully`() {
-        // given
-        val layer1 = Layer("layer1", "package1..")
-        val layer2 = Layer("layer2", "package2..")
-
-        val dependencies =
-            setOf(
-                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
-                LayerDependency(layer1, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, layer1),
-            )
-
-        // when
+        // When
         sut.validate(dependencies)
 
-        // then
-        // No exception thrown
+        // Then
+        verify(exactly = 0) { asciiTreeNodeFactory.create(any()) }
+        verify(exactly = 0) { asciiTreeCreator.invoke(any()) }
     }
 
     @Test
-    fun `should validate multiple dependencies for same layer successfully`() {
-        // given
-        val layer1 = Layer("layer1", "package1..")
-        val layer2 = Layer("layer2", "package2..")
-        val layer3 = Layer("layer3", "package3..")
+    fun `validate passes for multiple dependencies for same layer`() {
+        // Given
+        val layer1 = Layer("layer 1", "package1..")
+        val layer2 = Layer("layer 2", "package2..")
+        val layer3 = Layer("layer 3", "package3..")
 
-        val dependencies =
-            setOf(
-                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
-                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer3),
-                LayerDependency(layer2, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, layer3),
-            )
+        val dependencies = setOf(
+            LayerDependency(
+                layer1 = layer1,
+                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                layer2 = layer2,
+            ),
+            LayerDependency(
+                layer1 = layer1,
+                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                layer2 = layer3,
+            ),
+            LayerDependency(
+                layer1 = layer2,
+                dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                layer2 = layer3,
+            ),
+        )
 
-        // when
+        // When
         sut.validate(dependencies)
 
-        // then
-        // No exception thrown
+        // Then
+        verify(exactly = 0) { asciiTreeNodeFactory.create(any()) }
+        verify(exactly = 0) { asciiTreeCreator.invoke(any()) }
     }
 
     @Test
-    fun `should validate self-referential dependencies successfully`() {
-        // given
-        val layer1 = Layer("layer1", "package1..")
+    fun `validate passes for self-referential dependencies`() {
+        // Given
+        val layer1 = Layer("layer 1", "package1..")
+        val dependencies = setOf(
+            LayerDependency(
+                layer1 = layer1,
+                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                layer2 = layer1,
+            ),
+        )
 
-        val dependencies =
-            setOf(
-                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer1),
-            )
-
-        // when
+        // When
         sut.validate(dependencies)
 
-        // then
-        // No exception thrown
+        // Then
+        verify(exactly = 0) { asciiTreeNodeFactory.create(any()) }
+        verify(exactly = 0) { asciiTreeCreator.invoke(any()) }
     }
 
     @Test
-    fun `should validate complex dependency graph successfully`() {
-        // given
-        val layer1 = Layer("layer1", "package1..")
-        val layer2 = Layer("layer2", "package2..")
-        val layer3 = Layer("layer3", "package3..")
-        val layer4 = Layer("layer4", "package4..")
+    fun `validate passes for complex dependency graph`() {
+        // Given
+        val layer1 = Layer("layer 1", "package1..")
+        val layer2 = Layer("layer 2", "package2..")
+        val layer3 = Layer("layer 3", "package3..")
+        val layer4 = Layer("layer 4", "package4..")
 
-        val dependencies =
-            setOf(
-                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
-                LayerDependency(layer2, LayerDependencyType.DEPEND_ON_LAYER, layer3),
-                LayerDependency(layer3, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, layer4),
-                LayerDependency(layer4, LayerDependencyType.DEPEND_ON_LAYER, layer1),
-            )
+        val dependencies = setOf(
+            LayerDependency(
+                layer1 = layer1,
+                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                layer2 = layer2,
+            ),
+            LayerDependency(
+                layer1 = layer2,
+                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                layer2 = layer3,
+            ),
+            LayerDependency(
+                layer1 = layer3,
+                dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                layer2 = layer4,
+            ),
+            LayerDependency(
+                layer1 = layer4,
+                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                layer2 = layer1,
+            ),
+        )
 
-        // when
+        // When
         sut.validate(dependencies)
 
-        // then
-        // No exception thrown
+        // Then
+        verify(exactly = 0) { asciiTreeNodeFactory.create(any()) }
+        verify(exactly = 0) { asciiTreeCreator.invoke(any()) }
     }
 
     @Test
-    fun `should validate mixed dependency types successfully`() {
-        // given
-        val layer1 = Layer("layer1", "package1..")
-        val layer2 = Layer("layer2", "package2..")
-        val layer3 = Layer("layer3", "package3..")
+    fun `validate passes for mixed dependency types`() {
+        // Given
+        val layer1 = Layer("layer 1", "package1..")
+        val layer2 = Layer("layer 2", "package2..")
+        val layer3 = Layer("layer 3", "package3..")
 
-        val dependencies =
-            setOf(
-                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
-                LayerDependency(layer2, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, layer3),
-                LayerDependency(layer3, LayerDependencyType.DEPEND_ON_NOTHING),
-            )
+        val dependencies = setOf(
+            LayerDependency(
+                layer1 = layer1,
+                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                layer2 = layer2,
+            ),
+            LayerDependency(
+                layer1 = layer2,
+                dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                layer2 = layer3,
+            ),
+            LayerDependency(
+                layer1 = layer3,
+                dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
+            ),
+        )
 
-        // when
+        // When
         sut.validate(dependencies)
 
-        // then
-        // No exception thrown
+        // Then
+        verify(exactly = 0) { asciiTreeNodeFactory.create(any()) }
+        verify(exactly = 0) { asciiTreeCreator.invoke(any()) }
     }
 
     @Test
-    fun `should validate cyclic dependencies successfully`() {
-        // given
-        val layer1 = Layer("layer1", "package1..")
-        val layer2 = Layer("layer2", "package2..")
+    fun `validate passes for cyclic dependencies`() {
+        // Given
+        val layer1 = Layer("layer 1", "package1..")
+        val layer2 = Layer("layer 2", "package2..")
 
-        val dependencies =
-            setOf(
-                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
-                LayerDependency(layer2, LayerDependencyType.DEPEND_ON_LAYER, layer1),
-            )
+        val dependencies = setOf(
+            LayerDependency(
+                layer1 = layer1,
+                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                layer2 = layer2,
+            ),
+            LayerDependency(
+                layer1 = layer2,
+                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                layer2 = layer1,
+            ),
+        )
 
-        // when
+        // When
         sut.validate(dependencies)
 
-        // then
-        // No exception thrown
+        // Then
+        verify(exactly = 0) { asciiTreeNodeFactory.create(any()) }
+        verify(exactly = 0) { asciiTreeCreator.invoke(any()) }
     }
 
     @Test
-    fun `should validate multiple layers with DEPEND_ON_NOTHING successfully`() {
-        // given
-        val layer1 = Layer("layer1", "package1..")
-        val layer2 = Layer("layer2", "package2..")
-        val layer3 = Layer("layer3", "package3..")
+    fun `validate passes for multiple layers with DEPEND_ON_NOTHING`() {
+        // Given
+        val layer1 = Layer("layer 1", "package1..")
+        val layer2 = Layer("layer 2", "package2..")
+        val layer3 = Layer("layer 3", "package3..")
 
-        val dependencies =
-            setOf(
-                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_NOTHING),
-                LayerDependency(layer2, LayerDependencyType.DEPEND_ON_NOTHING),
-                LayerDependency(layer3, LayerDependencyType.DEPEND_ON_NOTHING),
-            )
+        val dependencies = setOf(
+            LayerDependency(
+                layer1 = layer1,
+                dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
+            ),
+            LayerDependency(
+                layer1 = layer2,
+                dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
+            ),
+            LayerDependency(
+                layer1 = layer3,
+                dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
+            ),
+        )
 
-        // when
+        // When
         sut.validate(dependencies)
 
-        // then
-        // No exception thrown
-    }
-
-    @Test
-    fun `should validate same layer instance used multiple times`() {
-        // given
-        val layer1 = Layer("layer1", "package1..")
-        val layer2 = Layer("layer2", "package2..")
-
-        val dependencies =
-            setOf(
-                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
-                LayerDependency(layer2, LayerDependencyType.DEPEND_ON_LAYER, layer1),
-                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_NOTHING),
-            )
-
-        // when
-        sut.validate(dependencies)
-
-        // then
-        // No exception thrown
+        // Then
+        verify(exactly = 0) { asciiTreeNodeFactory.create(any()) }
+        verify(exactly = 0) { asciiTreeCreator.invoke(any()) }
     }
 }
+

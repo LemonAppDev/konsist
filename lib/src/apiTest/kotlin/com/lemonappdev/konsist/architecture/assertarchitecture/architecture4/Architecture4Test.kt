@@ -5,12 +5,14 @@ import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architectu
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
+import com.lemonappdev.konsist.core.filesystem.PathProvider
 import io.kotest.assertions.throwables.shouldThrow
-import org.amshove.kluent.assertSoftly
-import org.amshove.kluent.shouldContain
+import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class Architecture4Test {
+    private val rootPath = PathProvider.rootProjectPath
+
     private val scope =
         Konsist.scopeFromDirectory(
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture4/project",
@@ -138,42 +140,47 @@ class Architecture4Test {
     @Test
     fun `fails when bad dependency is set (lambda scope)`() {
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
-                scope
-                    .assertArchitecture {
-                        data.dependsOnNothing()
-                        presentation.dependsOn(data)
-                        domain.dependsOn(data)
-                    }
-            }
+            scope
+                .assertArchitecture {
+                    data.dependsOnNothing()
+                    presentation.dependsOn(data)
+                    domain.dependsOn(data)
+                }
+        }
 
         // then
-        assertSoftly(sut) {
-            message?.shouldContain("'fails when bad dependency is set (lambda scope)' test has failed.\n")
-            message?.shouldContain("Presentation depends on Data assertion failure:\n")
-        }
+        result
+            .message
+            .shouldBeEqualTo(
+                "'fails when bad dependency is set (lambda scope)' test has failed. \n" +
+                        "Layer 'Presentation' does not depends on 'Data' layer.\n" +
+                        "Layer 'Domain' does not depends on 'Data' layer."
+            )
     }
 
     @Test
     fun `fails when bad dependency is set (lambda files)`() {
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
-                scope
-                    .files
-                    .assertArchitecture {
-                        data.dependsOnNothing()
-                        presentation.dependsOn(data)
-                        domain.dependsOn(data)
-                    }
-            }
+            scope
+                .files
+                .assertArchitecture {
+                    data.dependsOnNothing()
+                    presentation.dependsOn(data)
+                    domain.dependsOn(data)
+                }
+        }
 
         // then
-        assertSoftly(sut) {
-            message?.shouldContain("'fails when bad dependency is set (lambda files)' test has failed.\n")
-            message?.shouldContain("Presentation depends on Data assertion failure:\n")
-        }
+        result
+            .message
+            .shouldBeEqualTo("'fails when bad dependency is set (lambda files)' test has failed. \n" +
+                    "Layer 'Presentation' does not depends on 'Data' layer.\n" +
+                    "Layer 'Domain' does not depends on 'Data' layer."
+            )
     }
 
     @Test
@@ -187,19 +194,19 @@ class Architecture4Test {
             }
 
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
-                scope
-                    .assertArchitecture(layerDependencies)
-            }
+            scope.assertArchitecture(layerDependencies)
+        }
 
         // then
-        assertSoftly(sut) {
-            message?.shouldContain(
-                "'fails when bad dependency is set (parameter scope)' test has failed.\n",
+        result
+            .message
+            .shouldBeEqualTo(
+                "'fails when bad dependency is set (parameter scope)' test has failed. \n" +
+                        "Layer 'Presentation' does not depends on 'Data' layer.\n" +
+                        "Layer 'Domain' does not depends on 'Data' layer."
             )
-            message?.shouldContain("Presentation depends on Data assertion failure:\n")
-        }
     }
 
     @Test
@@ -213,20 +220,21 @@ class Architecture4Test {
             }
 
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
-                scope
-                    .files
-                    .assertArchitecture(layerDependencies)
-            }
+            scope
+                .files
+                .assertArchitecture(layerDependencies)
+        }
 
         // then
-        assertSoftly(sut) {
-            message?.shouldContain(
-                "'fails when bad dependency is set (parameter files)' test has failed.\n",
+        result
+            .message
+            .shouldBeEqualTo(
+                "'fails when bad dependency is set (parameter files)' test has failed. \n" +
+                        "Layer 'Presentation' does not depends on 'Data' layer.\n" +
+                        "Layer 'Domain' does not depends on 'Data' layer."
             )
-            message?.shouldContain("Presentation depends on Data assertion failure:\n")
-        }
     }
 
     // endregion
@@ -235,7 +243,7 @@ class Architecture4Test {
     @Test
     fun `fails when bad dependency is set using doesNotDependsOn (lambda scope)`() {
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
                 scope.assertArchitecture {
                     presentation.doesNotDependOn(data, domain)
@@ -243,16 +251,21 @@ class Architecture4Test {
             }
 
         // then
-        assertSoftly(sut) {
-            message?.shouldContain("'fails when bad dependency is set using doesNotDependsOn (lambda scope)' test has failed.\n")
-            message?.shouldContain("Presentation does not depend on Data, Domain assertion failure:\n")
-        }
+        result
+            .message
+            .shouldBeEqualTo(
+                "'fails when bad dependency is set using doesNotDependsOn (lambda scope)' test has failed. \n" +
+                        "'Presentation' layer does not depends on 'Domain' layer failed. Files that depend on 'Domain' layer:\n" +
+                        "\t└──file /Users/igorwojda/IdeaProjects/konsist/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "assertarchitecture/architecture4/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "\t\t└── import com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.domain.DomainFirstClass"
+            )
     }
 
     @Test
     fun `fails when bad dependency is set using doesNotDependsOn (lambda files)`() {
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .files
@@ -262,10 +275,15 @@ class Architecture4Test {
             }
 
         // then
-        assertSoftly(sut) {
-            message?.shouldContain("'fails when bad dependency is set using doesNotDependsOn (lambda files)' test has failed.\n")
-            message?.shouldContain("Presentation does not depend on Data, Domain assertion failure:\n")
-        }
+        result
+            .message
+            .shouldBeEqualTo(
+                "'fails when bad dependency is set using doesNotDependsOn (lambda files)' test has failed. \n" +
+                        "'Presentation' layer does not depends on 'Domain' layer failed. Files that depend on 'Domain' layer:\n" +
+                        "\t└──file /Users/igorwojda/IdeaProjects/konsist/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "assertarchitecture/architecture4/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "\t\t└── import com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.domain.DomainFirstClass"
+            )
     }
 
     @Test
@@ -277,20 +295,22 @@ class Architecture4Test {
             }
 
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .assertArchitecture(layerDependencies)
             }
 
         // then
-        assertSoftly(sut) {
-            message?.shouldContain(
-                "'fails when bad dependency is set using doesNotDependsOn and architecture is passed as" +
-                    " parameter (lambda scope)' test has failed.\n",
+        result
+            .message
+            .shouldBeEqualTo(
+                "'fails when bad dependency is set using doesNotDependsOn (parameter scope)' test has failed. \n" +
+                        "'Presentation' layer does not depends on 'Domain' layer failed. Files that depend on 'Domain' layer:\n" +
+                        "\t└──file /Users/igorwojda/IdeaProjects/konsist/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "assertarchitecture/architecture4/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "\t\t└── import com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.domain.DomainFirstClass"
             )
-            message?.shouldContain("Presentation does not depend on Data, Domain assertion failure:\n")
-        }
     }
 
     @Test
@@ -302,7 +322,7 @@ class Architecture4Test {
             }
 
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .files
@@ -310,13 +330,15 @@ class Architecture4Test {
             }
 
         // then
-        assertSoftly(sut) {
-            message?.shouldContain(
-                "'fails when bad dependency is set using doesNotDependsOn and architecture is passed as" +
-                    " parameter (lambda files)' test has failed.\n",
+        result
+            .message
+            .shouldBeEqualTo(
+                "'fails when bad dependency is set using doesNotDependsOn (parameter files)' test has failed. \n" +
+                        "'Presentation' layer does not depends on 'Domain' layer failed. Files that depend on 'Domain' layer:\n" +
+                        "\t└──file /Users/igorwojda/IdeaProjects/konsist/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "assertarchitecture/architecture4/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "\t\t└── import com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.domain.DomainFirstClass"
             )
-            message?.shouldContain("Presentation does not depend on Data, Domain assertion failure:\n")
-        }
     }
 
     // endregion

@@ -16,11 +16,9 @@ internal class CircularDependencyDependenciesRule : LayerDependenciesRule {
         val recursionStack = mutableSetOf<Layer>()
 
         dependencyGraph.keys.forEach { layer ->
-            if (hasCycle(layer, dependencyGraph, visited, recursionStack)) {
+            if (!visited.contains(layer) && hasCycle(layer, dependencyGraph, visited, recursionStack)) {
                 val cycle = findCycle(layer, dependencyGraph)
-                throw KoPreconditionFailedException(
-                    "Circular dependency detected: ${formatSimpleCycle(cycle)}",
-                )
+                throw KoPreconditionFailedException(formatCircularDependencyMessage(cycle))
             }
         }
     }
@@ -55,7 +53,6 @@ internal class CircularDependencyDependenciesRule : LayerDependenciesRule {
         }
 
         recursionStack.remove(layer)
-
         return false
     }
 
@@ -66,7 +63,6 @@ internal class CircularDependencyDependenciesRule : LayerDependenciesRule {
         val path = mutableListOf<Layer>()
         val visited = mutableSetOf<Layer>()
         findCycleDFS(start, start, graph, path, visited)
-
         return path
     }
 
@@ -91,20 +87,21 @@ internal class CircularDependencyDependenciesRule : LayerDependenciesRule {
         }
 
         path.removeAt(path.lastIndex)
-
         return false
     }
 
-    private fun formatSimpleCycle(cycle: List<Layer>): String =
-        when {
-            isSimpleTwoLayerCycle(cycle) -> "${cycle[0].name}$CIRCULAR_DEPENDENCY_SEPARATOR${cycle[1].name}"
-            else -> cycle.dropLast(1).joinToString(CIRCULAR_DEPENDENCY_SEPARATOR) { it.name }
+    private fun formatCircularDependencyMessage(cycle: List<Layer>): String {
+        if (cycle.size < 2) return ""
+
+        return when (cycle.size) {
+            3 -> "Circular dependency detected: '${cycle[0].name}' <-> '${cycle[1].name}'."
+            else -> {
+                val cycleString = buildString {
+                    append(cycle.dropLast(1).joinToString(" -> ") { "'${it.name}'" })
+                    append(" -> '${cycle[0].name}'") // Add the first layer again at the end to complete the cycle
+                }
+                "Circular dependency detected: $cycleString."
+            }
         }
-
-    private fun isSimpleTwoLayerCycle(cycle: List<Layer>): Boolean = cycle.size == SIMPLE_CYCLE_SIZE && cycle.first() == cycle.last()
-
-    private companion object {
-        private const val SIMPLE_CYCLE_SIZE = 3
-        private const val CIRCULAR_DEPENDENCY_SEPARATOR = " <-> "
     }
 }

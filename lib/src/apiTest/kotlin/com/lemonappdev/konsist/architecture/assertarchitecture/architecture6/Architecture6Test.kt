@@ -53,14 +53,13 @@ class Architecture6Test {
     @Test
     fun `fails when layer contains no files (parameter scope)`() {
         // when
-        val layerDependencies =
-            architecture {
+        val func = {
+            val layerDependencies = architecture {
                 scope.assertArchitecture {
                     layer.dependsOnNothing()
                 }
             }
 
-        val func = {
             scope.assertArchitecture(layerDependencies)
         }
 
@@ -71,14 +70,13 @@ class Architecture6Test {
     @Test
     fun `fails when layer contains no files (parameter files)`() {
         // when
-        val layerDependencies =
-            architecture {
+        val func = {
+            val layerDependencies = architecture {
                 scope.assertArchitecture {
                     layer.dependsOnNothing()
                 }
             }
 
-        val func = {
             scope
                 .files
                 .assertArchitecture(layerDependencies)

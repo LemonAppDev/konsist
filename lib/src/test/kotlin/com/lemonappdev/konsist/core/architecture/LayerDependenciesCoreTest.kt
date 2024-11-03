@@ -40,8 +40,8 @@ class LayerDependenciesCoreTest {
     @Test
     fun `dependsOn throws exception for duplicated layer dependency`() {
         // given
-        val layer1 = Layer("layer name 1", "package1..")
-        val layer2 = Layer("layer name 2", "package2..")
+        val layer1 = Layer("name1", "package1..")
+        val layer2 = Layer("name2", "package2..")
 
         justRun { layerValidatorManager.validateLayerDependencies(sut.layerDependencies) }
 
@@ -55,7 +55,7 @@ class LayerDependenciesCoreTest {
 
         // then
         func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
-            "Duplicate layer dependency configuration: Layer 'layer name 1' is already configured to depend on 'layer name 2'."
+            "Duplicate layer dependency configuration: Layer 'name1' is already configured to depend on 'name2'."
     }
 
     @Test
@@ -172,7 +172,7 @@ class LayerDependenciesCoreTest {
 
         // then
         func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
-            "Layer ''name1'' is already configured with no dependencies. It cannot subsequently depend on layers 'name2', 'name3'."
+            "Layer 'name1' is already configured with no dependencies. It cannot subsequently depend on layers 'name2', 'name3'."
     }
 
     @Test
@@ -196,7 +196,7 @@ class LayerDependenciesCoreTest {
 
         // then
         func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
-            "Layer ''name1'' is already configured with no dependencies. It cannot subsequently depend on layer 'name2'."
+            "Layer 'name1' is already configured with no dependencies. It cannot subsequently depend on layer 'name2'."
     }
 
     // endregion
@@ -221,8 +221,8 @@ class LayerDependenciesCoreTest {
     @Test
     fun `doesNotDependOn throws exception for duplicated layer dependency`() {
         // given
-        val layer1 = Layer("layer name 1", "package1..")
-        val layer2 = Layer("layer name 2", "package2..")
+        val layer1 = Layer("name1", "package1..")
+        val layer2 = Layer("name2", "package2..")
 
         justRun { layerValidatorManager.validateLayerDependencies(sut.layerDependencies) }
 
@@ -236,7 +236,7 @@ class LayerDependenciesCoreTest {
 
         // then
         func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
-            "Duplicate layer dependency configuration: Layer 'layer name 1' is already configured to depend on 'layer name 2'."
+            "Duplicate layer dependency configuration: Layer 'name1' is already configured to depend on 'name2'."
     }
 
     @Test
@@ -460,7 +460,7 @@ class LayerDependenciesCoreTest {
 
         // then
         func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
-            "Layer 'name1' is already configured to depend on 'layer 'name2''. It cannot subsequently have no dependencies."
+            "Layer 'name1' is already configured to depend on layer 'name2'. It cannot subsequently have no dependencies."
     }
 
     @Test
@@ -485,7 +485,7 @@ class LayerDependenciesCoreTest {
 
         // then
         func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
-            "Layer 'name1' is already configured to depend on 'layers 'name2', 'name3''. It cannot subsequently have no dependencies."
+            "Layer 'name1' is already configured to depend on layers 'name2', 'name3'. It cannot subsequently have no dependencies."
     }
 
     @Test

@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.architecture.dependencyrules
 
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architecture
 import com.lemonappdev.konsist.api.architecture.Layer
+import com.lemonappdev.konsist.core.exception.KoInvalidAssertArchitectureConfigurationException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -11,57 +12,59 @@ class LayerDependenciesTest {
     @Test
     fun `throws an exception when a layer with the same name already exists`() {
         // given
-        val layer1 = Layer("Name", "package1..")
-        val layer2 = Layer("Name", "package2..")
+        val layer1 = Layer("name", "package1..")
+        val layer2 = Layer("name", "package2..")
 
-        val sut = {
+        val func = {
             architecture {
                 layer1.dependsOn(layer2)
             }
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage
-            """Layer name must be unique. Duplicated name: "Name""""
+        func shouldThrow KoPreconditionFailedException::class withMessage
+            "Invalid layers configuration:\n" +
+                "└── Layer name must be unique. Duplicated name: 'name'."
     }
 
     @Test
     fun `throws an exception when a layer with the same rootPackage already exists`() {
         // given
-        val layer1 = Layer("Name1", "package..")
-        val layer2 = Layer("Name2", "package..")
+        val layer1 = Layer("name1", "package..")
+        val layer2 = Layer("name2", "package..")
 
-        val sut = {
+        val func = {
             architecture {
                 layer1.dependsOn(layer2)
             }
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage
-            """Layer rootPackage must be unique. Duplicated rootPackage: "package..""""
+        func shouldThrow KoPreconditionFailedException::class withMessage
+            "Invalid layers configuration:\n" +
+                "└── Layer rootPackage must be unique. Duplicated rootPackage: 'package..'."
     }
 
     @Test
     fun `throws an exception when self dependency is set`() {
         // given
-        val layer = Layer("Name", "package..")
+        val layer = Layer("name", "package..")
 
-        val sut = {
+        val func = {
             architecture { layer.dependsOn(layer) }
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage "Layer Name cannot be dependent on itself."
+        func shouldThrow IllegalArgumentException::class withMessage "Layer 'name' cannot be dependent on itself."
     }
 
     @Test
     fun `throws an exception when layer is set as independent and then set as depend on other layer`() {
         // given
-        val layer1 = Layer("Name1", "package1..")
-        val layer2 = Layer("Name2", "package2..")
+        val layer1 = Layer("name1", "package1..")
+        val layer2 = Layer("name2", "package2..")
 
-        val sut = {
+        val func = {
             architecture {
                 layer1.dependsOnNothing()
                 layer1.dependsOn(layer2)
@@ -69,20 +72,18 @@ class LayerDependenciesTest {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage
-            """
-            Layer Name1 was previously set as depend on nothing, so it cannot depend on Name2 layer.
-            """.trimIndent()
+        func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
+            "Layer 'name1' is already configured with no dependencies. It cannot subsequently depend on layer 'name2'."
     }
 
     @Test
     fun `throws an exception when layer is set as independent and then set as depend on other layer after other dependencies are set`() {
         // given
-        val layer1 = Layer("Name1", "package1..")
-        val layer2 = Layer("Name2", "package2..")
-        val layer3 = Layer("Name3", "package3..")
+        val layer1 = Layer("name1", "package1..")
+        val layer2 = Layer("name2", "package2..")
+        val layer3 = Layer("name3", "package3..")
 
-        val sut = {
+        val func = {
             architecture {
                 layer1.dependsOnNothing()
                 layer3.dependsOn(layer1)
@@ -91,18 +92,16 @@ class LayerDependenciesTest {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage
-            """
-            Layer Name1 was previously set as depend on nothing, so it cannot depend on Name2 layer.
-            """.trimIndent()
+        func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
+            "Layer 'name1' is already configured with no dependencies. It cannot subsequently depend on layer 'name2'."
     }
 
     @Test
     fun `throws an exception when layer is set as independent twice`() {
         // given
-        val layer = Layer("Name", "package..")
+        val layer = Layer("name", "package..")
 
-        val sut = {
+        val func = {
             architecture {
                 layer.dependsOnNothing()
                 layer.dependsOnNothing()
@@ -110,20 +109,18 @@ class LayerDependenciesTest {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage
-            """
-            Duplicated the dependency that Name layer should be depend on nothing.
-            """.trimIndent()
+        func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
+            "Duplicate layer dependency configuration: Layer 'name' is already configured to depend on 'null'."
     }
 
     @Test
     fun `throws an exception when layer is set as dependent on other layer and then as independent`() {
         // given
-        val layer1 = Layer("Name1", "package1..")
+        val layer1 = Layer("name1", "package1..")
         val layer2 =
-            Layer("Name2", "package2..")
+            Layer("name2", "package2..")
 
-        val sut = {
+        val func = {
             architecture {
                 layer1.dependsOn(layer2)
                 layer1.dependsOnNothing()
@@ -131,20 +128,18 @@ class LayerDependenciesTest {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage
-            """
-            Layer Name1 had a dependency previously set with Name2 layer, so it cannot be depend on nothing.
-            """.trimIndent()
+        func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
+            "Layer 'name1' is already configured to depend on layer 'name2'. It cannot subsequently have no dependencies."
     }
 
     @Test
     fun `throws an exception when layer is set as dependent on the same layer twice`() {
         // given
-        val layer1 = Layer("Name1", "package1..")
+        val layer1 = Layer("name1", "package1..")
         val layer2 =
-            Layer("Name2", "package2..")
+            Layer("name2", "package2..")
 
-        val sut = {
+        val func = {
             architecture {
                 layer1.dependsOn(layer2)
                 layer1.dependsOn(layer2)
@@ -152,6 +147,7 @@ class LayerDependenciesTest {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage "Duplicated the dependency between Name1 and Name2 layers."
+        func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
+                "Duplicate layer dependency configuration: Layer 'name1' is already configured to depend on 'name2'."
     }
 }
