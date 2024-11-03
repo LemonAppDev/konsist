@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
+import org.amshove.kluent.shouldBeEmpty
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldContainAll
 import org.amshove.kluent.shouldThrow
@@ -21,8 +22,9 @@ class LayerDependenciesCoreTest {
             layerValidatorManager,
         )
 
+    // region general
     @Test
-    fun `validateEmptyLayersDependencies throws exception for empty set`() {
+    fun `checkEmptyLayersDependencies throws exception for empty set`() {
         // when
         val func = {
             sut.checkEmptyLayersDependencies()
@@ -31,6 +33,243 @@ class LayerDependenciesCoreTest {
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage "Architecture doesn't contain layers or dependencies."
     }
+
+    @Test
+    fun `properties return correct results when mixed dependencies are defined`() {
+        // given
+        val layer1: Layer = mockk()
+        val layer2: Layer = mockk()
+        val layer3: Layer = mockk()
+
+        justRun { layerValidatorManager.validateLayerDependencies(sut.layerDependencies) }
+
+        with(sut) {
+            layer1.dependsOn(layer2)
+            layer2.doesNotDependOn(layer3)
+            layer3.dependsOnNothing()
+        }
+
+        // when
+        val dependsOn = sut.dependsOnDependencies
+        val doesNotDependOn = sut.doesNotDependsOnDependencies
+        val dependsOnNothing = sut.dependsOnNothingDependencies
+
+        // then
+        dependsOn shouldBeEqualTo mapOf(
+            layer1 to setOf(layer2)
+        )
+        doesNotDependOn shouldBeEqualTo mapOf(
+            layer2 to setOf(layer3)
+        )
+        dependsOnNothing shouldBeEqualTo setOf(layer3)
+    }
+    // endregion
+
+    // region dependsOnDependencies
+    @Test
+    fun `dependsOnDependencies is empty by default`() {
+        // when
+        val result = sut.dependsOnDependencies
+
+        // then
+        result.shouldBeEmpty()
+    }
+
+    @Test
+    fun `dependsOnDependencies returns correct dependencies for single layer`() {
+        // given
+        val layer1: Layer = mockk()
+        val layer2: Layer = mockk()
+
+        justRun { layerValidatorManager.validateLayerDependencies(sut.layerDependencies) }
+
+        with(sut) {
+            layer1.dependsOn(layer2)
+        }
+
+        // when
+        val result = sut.dependsOnDependencies
+
+        // then
+        result shouldBeEqualTo mapOf(
+            layer1 to setOf(layer2)
+        )
+    }
+
+    @Test
+    fun `dependsOnDependencies returns correct dependencies for multiple layers`() {
+        // given
+        val layer1: Layer = mockk()
+        val layer2: Layer = mockk()
+        val layer3: Layer = mockk()
+
+        justRun { layerValidatorManager.validateLayerDependencies(sut.layerDependencies) }
+
+        with(sut) {
+            layer1.dependsOn(layer2)
+            layer2.dependsOn(layer3)
+        }
+
+        // when
+        val result = sut.dependsOnDependencies
+
+        // then
+        result shouldBeEqualTo mapOf(
+            layer1 to setOf(layer2),
+            layer2 to setOf(layer3)
+        )
+    }
+
+    @Test
+    fun `dependsOnDependencies returns correct dependencies when layer depends on multiple layers`() {
+        // given
+        val layer1: Layer = mockk()
+        val layer2: Layer = mockk()
+        val layer3: Layer = mockk()
+
+        justRun { layerValidatorManager.validateLayerDependencies(sut.layerDependencies) }
+
+        with(sut) {
+            layer1.dependsOn(setOf(layer2, layer3))
+        }
+
+        // when
+        val result = sut.dependsOnDependencies
+
+        // then
+        result shouldBeEqualTo mapOf(
+            layer1 to setOf(layer2, layer3)
+        )
+    }
+    // endregion
+
+    // region doesNotDependsOnDependencies
+    @Test
+    fun `doesNotDependsOnDependencies is empty by default`() {
+        // when
+        val result = sut.doesNotDependsOnDependencies
+
+        // then
+        result.shouldBeEmpty()
+    }
+
+    @Test
+    fun `doesNotDependsOnDependencies returns correct dependencies for single layer`() {
+        // given
+        val layer1: Layer = mockk()
+        val layer2: Layer = mockk()
+
+        justRun { layerValidatorManager.validateLayerDependencies(sut.layerDependencies) }
+
+        with(sut) {
+            layer1.doesNotDependOn(layer2)
+        }
+
+        // when
+        val result = sut.doesNotDependsOnDependencies
+
+        // then
+        result shouldBeEqualTo mapOf(
+            layer1 to setOf(layer2)
+        )
+    }
+
+    @Test
+    fun `doesNotDependsOnDependencies returns correct dependencies for multiple layers`() {
+        // given
+        val layer1: Layer = mockk()
+        val layer2: Layer = mockk()
+        val layer3: Layer = mockk()
+
+        justRun { layerValidatorManager.validateLayerDependencies(sut.layerDependencies) }
+
+        with(sut) {
+            layer1.doesNotDependOn(layer2)
+            layer2.doesNotDependOn(layer3)
+        }
+
+        // when
+        val result = sut.doesNotDependsOnDependencies
+
+        // then
+        result shouldBeEqualTo mapOf(
+            layer1 to setOf(layer2),
+            layer2 to setOf(layer3)
+        )
+    }
+
+    @Test
+    fun `doesNotDependsOnDependencies returns correct dependencies when layer does not depend on multiple layers`() {
+        // given
+        val layer1: Layer = mockk()
+        val layer2: Layer = mockk()
+        val layer3: Layer = mockk()
+
+        justRun { layerValidatorManager.validateLayerDependencies(sut.layerDependencies) }
+
+        with(sut) {
+            layer1.doesNotDependOn(setOf(layer2, layer3))
+        }
+
+        // when
+        val result = sut.doesNotDependsOnDependencies
+
+        // then
+        result shouldBeEqualTo mapOf(
+            layer1 to setOf(layer2, layer3)
+        )
+    }
+    // endregion
+
+    // region dependsOnNothingDependencies
+    @Test
+    fun `dependsOnNothingDependencies is empty by default`() {
+        // when
+        val result = sut.dependsOnNothingDependencies
+
+        // then
+        result.shouldBeEmpty()
+    }
+
+    @Test
+    fun `dependsOnNothingDependencies returns correct layers for single layer`() {
+        // given
+        val layer1: Layer = mockk()
+
+        justRun { layerValidatorManager.validateLayerDependencies(sut.layerDependencies) }
+
+        with(sut) {
+            layer1.dependsOnNothing()
+        }
+
+        // when
+        val result = sut.dependsOnNothingDependencies
+
+        // then
+        result shouldBeEqualTo setOf(layer1)
+    }
+
+    @Test
+    fun `dependsOnNothingDependencies returns correct layers for multiple layers`() {
+        // given
+        val layer1: Layer = mockk()
+        val layer2: Layer = mockk()
+
+        justRun { layerValidatorManager.validateLayerDependencies(sut.layerDependencies) }
+
+        with(sut) {
+            layer1.dependsOnNothing()
+            layer2.dependsOnNothing()
+        }
+
+        // when
+        val result = sut.dependsOnNothingDependencies
+
+        // then
+        result shouldBeEqualTo setOf(layer1, layer2)
+    }
+
+    // endregion
 
     // region dependsOn
     @Test
