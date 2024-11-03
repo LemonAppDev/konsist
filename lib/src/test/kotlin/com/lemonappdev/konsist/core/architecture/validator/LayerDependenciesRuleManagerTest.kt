@@ -16,17 +16,17 @@ class LayerDependenciesRuleManagerTest {
 
     @Test
     fun `should validate layer dependencies`() {
-        // Given
+        // given
         val dependencies = setOf(mockk<LayerDependency>())
 
         layerDependenciesRules.forEach {
             justRun { it.validate(dependencies) }
         }
 
-        // When
+        // when
         sut.validateLayerDependencies(dependencies)
 
-        // Then
+        // then
         layerDependenciesRules.forEach {
             it.validate(dependencies)
         }

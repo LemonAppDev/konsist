@@ -13,19 +13,19 @@ class UniqueLayerRuleTest {
 
     @Test
     fun `should validate empty dependencies set`() {
-        // Given
+        // given
         val dependencies = emptySet<LayerDependency>()
 
-        // When
+        // when
         sut.validate(dependencies)
 
-        // Then
+        // then
         // No exception thrown
     }
 
     @Test
     fun `should validate unique layers successfully`() {
-        // Given
+        // given
         val layer1 = Layer("layer1", "package1..")
         val layer2 = Layer("layer2", "package2..")
         val dependencies =
@@ -33,32 +33,32 @@ class UniqueLayerRuleTest {
                 LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
             )
 
-        // When
+        // when
         sut.validate(dependencies)
 
-        // Then
+        // then
         // No exception thrown
     }
 
     @Test
     fun `should validate single layer with DEPEND_ON_NOTHING successfully`() {
-        // Given
+        // given
         val layer1 = Layer("layer1", "package1..")
         val dependencies =
             setOf(
                 LayerDependency(layer1, LayerDependencyType.DEPEND_ON_NOTHING),
             )
 
-        // When
+        // when
         sut.validate(dependencies)
 
-        // Then
+        // then
         // No exception thrown
     }
 
     @Test
     fun `should throw exception when layers have duplicate names`() {
-        // Given
+        // given
         val layer1 = Layer("layer1", "package1..")
         val layer2 = Layer("layer1", "package2..")
         val dependencies =
@@ -66,10 +66,10 @@ class UniqueLayerRuleTest {
                 LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
             )
 
-        // When
+        // when
         val func = { sut.validate(dependencies) }
 
-        // Then
+        // then
         func shouldThrow KoPreconditionFailedException::class withMessage
             "Invalid layer configurations:\n" +
             "Layer name must be unique. Duplicated name: 'layer1'."
@@ -77,7 +77,7 @@ class UniqueLayerRuleTest {
 
     @Test
     fun `should throw exception when layers have duplicate root packages`() {
-        // Given
+        // given
         val layer1 = Layer("layer1", "package1..")
         val layer2 = Layer("layer2", "package1..")
         val dependencies =
@@ -85,10 +85,10 @@ class UniqueLayerRuleTest {
                 LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
             )
 
-        // When
+        // when
         val func = { sut.validate(dependencies) }
 
-        // Then
+        // then
         func shouldThrow KoPreconditionFailedException::class withMessage
             "Invalid layer configurations:\n" +
             "Layer rootPackage must be unique. Duplicated rootPackage: 'package1..'."
@@ -96,7 +96,7 @@ class UniqueLayerRuleTest {
 
     @Test
     fun `should throw exception when layers have both duplicate names and root packages`() {
-        // Given
+        // given
         val layer1 = Layer("layer1", "package1..")
         val layer2 = Layer("layer1", "package1..")
         val dependencies =
@@ -104,10 +104,10 @@ class UniqueLayerRuleTest {
                 LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
             )
 
-        // When
+        // when
         val func = { sut.validate(dependencies) }
 
-        // Then
+        // then
         func shouldThrow KoPreconditionFailedException::class withMessage
             "Invalid layer configurations:\n" +
             "Layer name must be unique. Duplicated name: 'layer1'.\n" +
@@ -116,7 +116,7 @@ class UniqueLayerRuleTest {
 
     @Test
     fun `should throw exception when multiple layer validations fail with multiple duplicates`() {
-        // Given
+        // given
         val layer1 = Layer("layer1", "package1..")
         val layer2 = Layer("layer1", "package2..") // Duplicate name with layer1
         val layer3 = Layer("layer3", "package1..") // Duplicate package with layer1
@@ -130,10 +130,10 @@ class UniqueLayerRuleTest {
                 LayerDependency(layer5, LayerDependencyType.DEPEND_ON_NOTHING),
             )
 
-        // When
+        // when
         val func = { sut.validate(dependencies) }
 
-        // Then
+        // then
         func shouldThrow KoPreconditionFailedException::class withMessage
             "Invalid layer configurations:\n" +
             "Layer name must be unique. Duplicated name: 'layer1'.\n" +
@@ -144,7 +144,7 @@ class UniqueLayerRuleTest {
 
     @Test
     fun `should validate single layer with multiple dependency types successfully`() {
-        // Given
+        // given
         val layer1 = Layer("layer1", "package1..")
         val layer2 = Layer("layer2", "package2..")
 
@@ -153,16 +153,16 @@ class UniqueLayerRuleTest {
             LayerDependency(layer1, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, layer1),
         )
 
-        // When
+        // when
         sut.validate(dependencies)
 
-        // Then
+        // then
         // No exception thrown
     }
 
     @Test
     fun `should validate multiple dependencies for same layer successfully`() {
-        // Given
+        // given
         val layer1 = Layer("layer1", "package1..")
         val layer2 = Layer("layer2", "package2..")
         val layer3 = Layer("layer3", "package3..")
@@ -173,32 +173,32 @@ class UniqueLayerRuleTest {
             LayerDependency(layer2, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, layer3),
         )
 
-        // When
+        // when
         sut.validate(dependencies)
 
-        // Then
+        // then
         // No exception thrown
     }
 
     @Test
     fun `should validate self-referential dependencies successfully`() {
-        // Given
+        // given
         val layer1 = Layer("layer1", "package1..")
 
         val dependencies = setOf(
             LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer1),
         )
 
-        // When
+        // when
         sut.validate(dependencies)
 
-        // Then
+        // then
         // No exception thrown
     }
 
     @Test
     fun `should validate complex dependency graph successfully`() {
-        // Given
+        // given
         val layer1 = Layer("layer1", "package1..")
         val layer2 = Layer("layer2", "package2..")
         val layer3 = Layer("layer3", "package3..")
@@ -211,16 +211,16 @@ class UniqueLayerRuleTest {
             LayerDependency(layer4, LayerDependencyType.DEPEND_ON_LAYER, layer1),
         )
 
-        // When
+        // when
         sut.validate(dependencies)
 
-        // Then
+        // then
         // No exception thrown
     }
 
     @Test
     fun `should validate mixed dependency types successfully`() {
-        // Given
+        // given
         val layer1 = Layer("layer1", "package1..")
         val layer2 = Layer("layer2", "package2..")
         val layer3 = Layer("layer3", "package3..")
@@ -231,16 +231,16 @@ class UniqueLayerRuleTest {
             LayerDependency(layer3, LayerDependencyType.DEPEND_ON_NOTHING),
         )
 
-        // When
+        // when
         sut.validate(dependencies)
 
-        // Then
+        // then
         // No exception thrown
     }
 
     @Test
     fun `should validate cyclic dependencies successfully`() {
-        // Given
+        // given
         val layer1 = Layer("layer1", "package1..")
         val layer2 = Layer("layer2", "package2..")
 
@@ -249,16 +249,16 @@ class UniqueLayerRuleTest {
             LayerDependency(layer2, LayerDependencyType.DEPEND_ON_LAYER, layer1),
         )
 
-        // When
+        // when
         sut.validate(dependencies)
 
-        // Then
+        // then
         // No exception thrown
     }
 
     @Test
     fun `should validate multiple layers with DEPEND_ON_NOTHING successfully`() {
-        // Given
+        // given
         val layer1 = Layer("layer1", "package1..")
         val layer2 = Layer("layer2", "package2..")
         val layer3 = Layer("layer3", "package3..")
@@ -269,16 +269,16 @@ class UniqueLayerRuleTest {
             LayerDependency(layer3, LayerDependencyType.DEPEND_ON_NOTHING),
         )
 
-        // When
+        // when
         sut.validate(dependencies)
 
-        // Then
+        // then
         // No exception thrown
     }
 
     @Test
     fun `should validate same layer instance used multiple times`() {
-        // Given
+        // given
         val layer1 = Layer("layer1", "package1..")
         val layer2 = Layer("layer2", "package2..")
 
@@ -288,10 +288,10 @@ class UniqueLayerRuleTest {
             LayerDependency(layer1, LayerDependencyType.DEPEND_ON_NOTHING),
         )
 
-        // When
+        // when
         sut.validate(dependencies)
 
-        // Then
+        // then
         // No exception thrown
     }
 }

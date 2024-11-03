@@ -13,7 +13,7 @@ class CircularDependencyDependenciesRuleTest {
 
     @Test
     fun `should validate dependencies without cycles successfully`() {
-        // Given
+        // given
         val layer1 = Layer("layer name 1", "package1..")
         val layer2 = Layer("layer name 2", "package2..")
         val layer3 = Layer("layer name 3", "package3..")
@@ -32,16 +32,16 @@ class CircularDependencyDependenciesRuleTest {
                 ),
             )
 
-        // When
+        // when
         sut.validate(dependencies)
 
-        // Then
+        // then
         // No exception thrown
     }
 
     @Test
     fun `should throw exception when circular dependency detected`() {
-        // Given
+        // given
         val layer1 = Layer("layer name 1", "package1..")
         val layer2 = Layer("layer name 2", "package2..")
 
@@ -59,17 +59,17 @@ class CircularDependencyDependenciesRuleTest {
                 ),
             )
 
-        // When
+        // when
         val func = { sut.validate(dependencies) }
 
-        // Then
+        // then
         func shouldThrow KoPreconditionFailedException::class withMessage
             "Circular dependency detected: layer name 1 <-> layer name 2"
     }
 
     @Test
     fun `should ignore non-layer dependencies`() {
-        // Given
+        // given
         val layer1 = Layer("layer name 1", "package1..")
         val layer2 = Layer("layer name 2", "package2..")
 
@@ -82,10 +82,10 @@ class CircularDependencyDependenciesRuleTest {
                 ),
             )
 
-        // When
+        // when
         sut.validate(dependencies)
 
-        // Then
+        // then
         // No exception thrown
     }
 }

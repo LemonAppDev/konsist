@@ -15,7 +15,7 @@ class DependentOnNothingThenDependOnLayerDependenciesRuleTest {
 
     @Test
     fun `should throw exception when single layer violates dependent on nothing rule`() {
-        // Given
+        // given
         val layer: Layer = mockk()
         val dependentLayer: Layer = mockk()
 
@@ -36,14 +36,14 @@ class DependentOnNothingThenDependOnLayerDependenciesRuleTest {
                 ),
             )
 
-        // When
+        // when
         val func = {
             sut.validate(
                 layerDependencies = layerDependencies,
             )
         }
 
-        // Then
+        // then
         func shouldThrow KoPreconditionFailedException::class withMessage
             "Conflicting dependency configurations:\n" +
             "Layer layer name was previously set as depend on nothing, so it cannot depend on dependent layer name layer."
@@ -51,7 +51,7 @@ class DependentOnNothingThenDependOnLayerDependenciesRuleTest {
 
     @Test
     fun `should throw exception when multiple layers violate dependent on nothing rule`() {
-        // Given
+        // given
         val layer1: Layer = mockk()
         val layer2: Layer = mockk()
         val dependentLayer1: Layer = mockk()
@@ -86,14 +86,14 @@ class DependentOnNothingThenDependOnLayerDependenciesRuleTest {
                 ),
             )
 
-        // When
+        // when
         val func = {
             sut.validate(
                 layerDependencies = layerDependencies,
             )
         }
 
-        // Then
+        // then
         func shouldThrow KoPreconditionFailedException::class withMessage
             "Conflicting dependency configurations:\n" +
             "Layer layer name 1 was previously set as depend on nothing, so it cannot depend on dependent layer name 1 layer.\n" +
@@ -102,7 +102,7 @@ class DependentOnNothingThenDependOnLayerDependenciesRuleTest {
 
     @Test
     fun `should not throw exception when no layer violates dependent on nothing rule`() {
-        // Given
+        // given
         val layer: Layer = mockk()
         val dependentLayer: Layer = mockk()
 
@@ -115,12 +115,12 @@ class DependentOnNothingThenDependOnLayerDependenciesRuleTest {
                 ),
             )
 
-        // When
+        // when
         sut.validate(
             layerDependencies = layerDependencies,
         )
 
-        // Then
+        // then
         // No exception thrown
     }
 }
