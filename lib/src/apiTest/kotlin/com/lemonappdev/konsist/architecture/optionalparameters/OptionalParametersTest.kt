@@ -211,7 +211,7 @@ class OptionalParametersTest {
     @Test
     fun `error message when additionalMessage and testName parameters are not provided and architecture is passed as parameter (scope)`() {
         // given
-        val architecture = architecture {
+        val layerDependencies = architecture {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
             }
@@ -219,7 +219,7 @@ class OptionalParametersTest {
         // when
         val result =
             shouldThrow<KoAssertionFailedException> {
-                scope.assertArchitecture(architecture)
+                scope.assertArchitecture(layerDependencies)
             }
 
         // then
@@ -234,7 +234,7 @@ class OptionalParametersTest {
     @Test
     fun `error message when additionalMessage is provided, testName is not provided and architecture is passed as parameter (scope)`() {
         // given
-        val architecture = architecture {
+        val layerDependencies = architecture {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
             }
@@ -242,7 +242,7 @@ class OptionalParametersTest {
         // when
         val result =
             shouldThrow<KoAssertionFailedException> {
-                scope.assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE", layerDependenciesFunc = architecture)
+                scope.assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE", layerDependenciesFunc = layerDependencies)
             }
 
         // then
@@ -258,7 +258,7 @@ class OptionalParametersTest {
     @Test
     fun `error message when testName is provided, additionalMessage is not provided and architecture is passed as parameter (scope)`() {
         // given
-        val architecture = architecture {
+        val layerDependencies = architecture {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
             }
@@ -266,7 +266,7 @@ class OptionalParametersTest {
         // when
         val result =
             shouldThrow<KoAssertionFailedException> {
-                scope.assertArchitecture(testName = "SOME CUSTOM TEST NAME", layerDependenciesFunc = architecture)
+                scope.assertArchitecture(testName = "SOME CUSTOM TEST NAME", layerDependenciesFunc = layerDependencies)
             }
 
         // then
@@ -281,7 +281,7 @@ class OptionalParametersTest {
     @Test
     fun `error message when testName and additionalMessage are provided and architecture is passed as parameter (scope)`() {
         // given
-        val architecture = architecture {
+        val layerDependencies = architecture {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
             }
@@ -292,7 +292,7 @@ class OptionalParametersTest {
                 scope.assertArchitecture(
                     additionalMessage = "SOME ADDITIONAL MESSAGE",
                     testName = "SOME CUSTOM TEST NAME",
-                    layerDependenciesFunc = architecture,
+                    layerDependenciesFunc = layerDependencies,
                 )
             }
 
@@ -309,7 +309,7 @@ class OptionalParametersTest {
     @Test
     fun `error message when additionalMessage and testName parameters are not provided and architecture is passed as parameter (files)`() {
         // given
-        val architecture = architecture {
+        val layerDependencies = architecture {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
             }
@@ -319,7 +319,7 @@ class OptionalParametersTest {
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .files
-                    .assertArchitecture(architecture)
+                    .assertArchitecture(layerDependencies)
             }
 
         // then
@@ -334,7 +334,7 @@ class OptionalParametersTest {
     @Test
     fun `error message when additionalMessage is provided, testName is not provided and architecture is passed as parameter (files)`() {
         // given
-        val architecture = architecture {
+        val layerDependencies = architecture {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
             }
@@ -344,7 +344,7 @@ class OptionalParametersTest {
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .files
-                    .assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE", layerDependenciesFunc = architecture)
+                    .assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE", layerDependenciesFunc = layerDependencies)
             }
 
         // then
@@ -360,7 +360,7 @@ class OptionalParametersTest {
     @Test
     fun `error message when testName is provided, additionalMessage is not provided and architecture is passed as parameter (files)`() {
         // given
-        val architecture = architecture {
+        val layerDependencies = architecture {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
             }
@@ -370,7 +370,7 @@ class OptionalParametersTest {
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .files
-                    .assertArchitecture(testName = "SOME CUSTOM TEST NAME", layerDependenciesFunc = architecture)
+                    .assertArchitecture(testName = "SOME CUSTOM TEST NAME", layerDependenciesFunc = layerDependencies)
             }
 
         // then
@@ -385,7 +385,7 @@ class OptionalParametersTest {
     @Test
     fun `error message when testName and additionalMessage are provided and architecture is passed as parameter (files)`() {
         // given
-        val architecture = architecture {
+        val layerDependencies = architecture {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
             }
@@ -398,7 +398,7 @@ class OptionalParametersTest {
                     .assertArchitecture(
                         additionalMessage = "SOME ADDITIONAL MESSAGE",
                         testName = "SOME CUSTOM TEST NAME",
-                        layerDependenciesFunc = architecture,
+                        layerDependenciesFunc = layerDependencies,
                     )
             }
 
