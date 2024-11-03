@@ -8,27 +8,30 @@ import com.lemonappdev.konsist.core.exception.KoInvalidAssertArchitectureConfigu
 internal class LayerDependenciesCore(
     private val layerValidatorManager: LayerValidatorManager = LayerValidatorManager(),
 ) : LayerDependencies {
-    internal val layerDependencies = mutableListOf<LayerDependency>()
-    internal var allLayers = mutableSetOf<Layer>()
+    internal val layerDependencies = mutableSetOf<LayerDependency>()
+    internal var layers = mutableSetOf<Layer>()
 
-    override fun Layer.dependsOn(layer: Layer, vararg layers: Layer) {
+    override fun Layer.dependsOn(
+        layer: Layer,
+        vararg layers: Layer,
+    ) {
         dependsOn(setOf(layer) + layers.toSet())
     }
 
     override fun Layer.dependsOn(layers: Set<Layer>) {
         require(layers.isNotEmpty()) { "Layers set is empty." }
-        requireLayerCannotBeDependentOnItself(this, layers) { "Layer '${name}' cannot be dependent on itself." }
+        requireLayerCannotBeDependentOnItself(this, layers) { "Layer '$name' cannot be dependent on itself." }
 
-        val dependOnNothingDependency = getLayerWithDependency(this, LayerDependencyType.DEPENDENTS_ON_NOTHING)
+        val dependOnNothingDependency = getLayerWithDependency(this, LayerDependencyType.DEPEND_ON_NOTHING)
 
-        if(dependOnNothingDependency != null) {
+        if (dependOnNothingDependency != null) {
             throw KoInvalidAssertArchitectureConfigurationException(
-                "Layer ''${name}'' is already configured with no dependencies. " +
-                        "It cannot subsequently depend on ${getLayersMessage(layers)}."
+                "Layer ''$name'' is already configured with no dependencies. " +
+                    "It cannot subsequently depend on ${getLayersMessage(layers)}.",
             )
         }
 
-        with(allLayers) {
+        with(this@LayerDependenciesCore.layers) {
             add(this@dependsOn)
             addAll(layers)
         }
@@ -37,32 +40,36 @@ internal class LayerDependenciesCore(
             addLayerDependency(this, LayerDependencyType.DEPEND_ON_LAYER, it)
         }
 
-        layerValidatorManager.invoke(allLayers)
+        layerValidatorManager.validateLayerDependencies(layerDependencies)
     }
 
-    private fun getLayersMessage(layers: Set<Layer>) = if (layers.size == 1) {
-        "layer '${layers.first().name}'"
-    } else {
-        "layers ${layers.joinToString { "'${it.name}'" }}"
-    }
+    private fun getLayersMessage(layers: Set<Layer>) =
+        if (layers.size == 1) {
+            "layer '${layers.first().name}'"
+        } else {
+            "layers ${layers.joinToString { "'${it.name}'" }}"
+        }
 
-    override fun Layer.doesNotDependOn(layer: Layer, vararg layers: Layer) {
+    override fun Layer.doesNotDependOn(
+        layer: Layer,
+        vararg layers: Layer,
+    ) {
         doesNotDependOn(setOf(layer) + layers.toSet())
     }
 
     override fun Layer.doesNotDependOn(layers: Set<Layer>) {
         require(layers.isNotEmpty()) { "Layers set is empty." }
-        requireLayerCannotBeDependentOnItself(this, layers) { "Layer '${name}' cannot be dependent on itself." }
+        requireLayerCannotBeDependentOnItself(this, layers) { "Layer '$name' cannot be dependent on itself." }
 
-        val dependOnNothingDependency = getLayerWithDependency(this, LayerDependencyType.DEPENDENTS_ON_NOTHING)
+        val dependOnNothingDependency = getLayerWithDependency(this, LayerDependencyType.DEPEND_ON_NOTHING)
 
         if (dependOnNothingDependency != null) {
             throw KoInvalidAssertArchitectureConfigurationException(
-                "Layer '${name}' is already configured with no dependencies. It cannot subsequently depend on ${getLayersMessage(layers)}."
+                "Layer '$name' is already configured with no dependencies. It cannot subsequently depend on ${getLayersMessage(layers)}.",
             )
         }
 
-        with(allLayers) {
+        with(this@LayerDependenciesCore.layers) {
             add(this@doesNotDependOn)
             addAll(layers)
         }
@@ -71,39 +78,48 @@ internal class LayerDependenciesCore(
             addLayerDependency(this, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, it)
         }
 
-        layerValidatorManager.invoke(allLayers)
+        layerValidatorManager.validateLayerDependencies(layerDependencies)
     }
 
     override fun Layer.dependsOnNothing() {
         val dependOnLayerDependencies = getLayersWithDependency(this, LayerDependencyType.DEPEND_ON_LAYER)
-        val dependOnLayers = dependOnLayerDependencies
-            .mapNotNull { it.layer2 }
-            .toSet()
+        val dependOnLayers =
+            dependOnLayerDependencies
+                .mapNotNull { it.layer2 }
+                .toSet()
 
         if (dependOnLayers.isNotEmpty()) {
             throw KoInvalidAssertArchitectureConfigurationException(
-                "Layer '${name}' is already configured to depend on '${getLayersMessage(dependOnLayers)}'. " +
-                        "It cannot subsequently have no dependencies."
+                "Layer '$name' is already configured to depend on '${getLayersMessage(dependOnLayers)}'. " +
+                    "It cannot subsequently have no dependencies.",
             )
         }
 
-        addLayerDependency(this, LayerDependencyType.DEPENDENTS_ON_NOTHING, null)
-        allLayers.add(this)
+        addLayerDependency(this, LayerDependencyType.DEPEND_ON_NOTHING, null)
+        layers.add(this)
 
-        layerValidatorManager.invoke(allLayers)
+        layerValidatorManager.validateLayerDependencies(layerDependencies)
     }
 
-    private fun getLayerWithDependency(layer: Layer, layerDependencyType: LayerDependencyType): LayerDependency? {
-        val dependOnLayerDependency = layerDependencies.firstOrNull {
-            it.layer1 == layer && it.dependencyType == layerDependencyType
-        }
+    private fun getLayerWithDependency(
+        layer: Layer,
+        layerDependencyType: LayerDependencyType,
+    ): LayerDependency? {
+        val dependOnLayerDependency =
+            layerDependencies.firstOrNull {
+                it.layer1 == layer && it.dependencyType == layerDependencyType
+            }
         return dependOnLayerDependency
     }
 
-    private fun getLayersWithDependency(layer: Layer, layerDependencyType: LayerDependencyType): Set<LayerDependency> {
-        val dependOnLayerDependency = layerDependencies.filter {
-            it.layer1 == layer && it.dependencyType == layerDependencyType
-        }
+    private fun getLayersWithDependency(
+        layer: Layer,
+        layerDependencyType: LayerDependencyType,
+    ): Set<LayerDependency> {
+        val dependOnLayerDependency =
+            layerDependencies.filter {
+                it.layer1 == layer && it.dependencyType == layerDependencyType
+            }
 
         return dependOnLayerDependency.toSet()
     }
@@ -111,117 +127,22 @@ internal class LayerDependenciesCore(
     private fun addLayerDependency(
         layer1: Layer,
         layerDependencyType: LayerDependencyType,
-        layer2: Layer?
+        layer2: Layer?,
     ) {
-        layerDependencies.add(LayerDependency(layer1, layerDependencyType, layer2))
+        val result = layerDependencies.add(LayerDependency(layer1, layerDependencyType, layer2))
+
+        if (result.not()) {
+            throw KoInvalidAssertArchitectureConfigurationException(
+                "Duplicate layer dependency configuration: Layer '${layer1.name}' is already configured to depend on '${layer2?.name}'.",
+            )
+        }
     }
 
     private fun requireLayerCannotBeDependentOnItself(
         layer: Layer,
         layers: Set<Layer>,
-        lazyMessage: () -> String
+        lazyMessage: () -> String,
     ) {
         require(layers.none { it == layer }, lazyMessage)
     }
-
-    private fun Layer.requireValidLayerDependencies(layers: Set<Layer>) {
-//        requireUniqueLayers(layers)
-//        requireNoCircularDependencies(this, layers)
-//        requireValidLayerStatus(false, this, layers)
-    }
-
-    @Suppress("detekt.ThrowsCount")
-    private fun requireValidLayerStatus(
-        toBeIndependent: Boolean,
-        layer: Layer,
-        layers: Set<Layer> = emptySet(),
-    ) {
-//        val layerName = layer.name
-//        if (layerDependencyTypes[layer] == LayerDependencyType.DEPENDENT_ON_NOTHING) {
-//            if (toBeIndependent) {
-//                throw KoPreconditionFailedException("Duplicated the dependency that $layerName layer should be depend on nothing.")
-//            } else {
-//                throw KoPreconditionFailedException(
-//                    "Layer $layerName was previously set as depend on nothing, " +
-//                        "so it cannot depend on ${layers.first().name} layer.",
-//                )
-//            }
-//        } else if (layerDependencyTypes[layer] == LayerDependencyType.DEPEND_ON_LAYER) {
-//            val dependency = positiveDependencies.getOrDefault(layer, emptySet())
-//
-//            if (toBeIndependent) {
-//                val alreadySetLayer = dependency.first { it != layer }
-//                throw KoPreconditionFailedException(
-//                    "Layer $layerName had a dependency previously set with ${alreadySetLayer.name} layer, " +
-//                        "so it cannot be depend on nothing.",
-//                )
-//            } else if (layers.any { dependency.contains(it) }) {
-//                val alreadySetLayer = layers.first { dependency.contains(it) }
-//                throw KoPreconditionFailedException("Duplicated the dependency between $layerName and ${alreadySetLayer.name} layers.")
-//            }
-//        }
-    }
-
-    private fun requireNoCircularDependencies(
-        layer: Layer,
-        layers: Set<Layer>,
-    ) {
-//        val allLayers =
-//            layers
-//                .map { checkCircularDependenciesHelper(layer, it, emptyList(), emptyList()) }
-//                .distinct()
-//                .toMutableList()
-//
-//        val notEmpty = allLayers.firstOrNull { it.size > 2 }
-//
-//        if (notEmpty != null) {
-//            val layerName = layer.name
-//            throw KoPreconditionFailedException(
-//                "Illegal circular dependencies:\n" +
-//                    notEmpty
-//                        .filterNot { it == null }
-//                        .joinToString(
-//                            prefix = "Layer $layerName -->\n",
-//                            postfix = "Layer $layerName.",
-//                            separator = "",
-//                        ) { "Layer ${it?.name} -->\n" },
-//            )
-//        }
-    }
-
-    private fun checkCircularDependenciesHelper(
-        nodeLayer: Layer,
-        layerToCheck: Layer,
-        alreadyChecked: List<Layer>,
-        potentialCircular: List<Layer>,
-    ) {
-//        val layerToCheckDependencies = positiveDependencies.getOrDefault(layerToCheck, emptySet()) - layerToCheck
-//
-//        if (layerToCheckDependencies.isEmpty()) {
-//            return potentialCircular
-//        }
-//
-//        val layersToCheck = layerToCheckDependencies.filterNot { alreadyChecked.contains(it) }
-//
-//        val circularLayer = layersToCheck.firstOrNull { it == nodeLayer }
-//
-//        return if (circularLayer != null) {
-//            potentialCircular + layerToCheck + null
-//        } else {
-//            val lists =
-//                layersToCheck.map {
-//                    checkCircularDependenciesHelper(
-//                        nodeLayer,
-//                        it,
-//                        alreadyChecked + layerToCheck,
-//                        potentialCircular + layerToCheck,
-//                    )
-//                }
-//
-//            lists
-//                .firstOrNull { it.isNotEmpty() && it.last() == null }
-//                .orEmpty()
-//        }
-    }
 }
-

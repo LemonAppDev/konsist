@@ -95,7 +95,7 @@ private fun validateAllLayersAreValid(
     layerDependencies: LayerDependenciesCore,
 ): Unit {
     val isAllLayersValid =
-        layerDependencies.allLayers
+        layerDependencies.layers
             .all {
                 files
                     .withPackage(it.rootPackage)
@@ -105,7 +105,7 @@ private fun validateAllLayersAreValid(
     if (!isAllLayersValid) {
         val layer =
             layerDependencies
-                .allLayers
+                .layers
                 .first {
                     files
                         .withPackage(it.rootPackage)
@@ -123,7 +123,7 @@ private fun validateAllLayersAreValid(
  * @throws KoPreconditionFailedException Architecture doesn't contain layers or dependencies
  */
 private fun validateLayersDependencies(layerDependencies: LayerDependenciesCore): Unit {
-    if (layerDependencies.allLayers.isEmpty()) {
+    if (layerDependencies.layers.isEmpty()) {
         throw KoPreconditionFailedException("Architecture doesn't contain layers or dependencies.")
     }
 }
@@ -145,7 +145,7 @@ private fun validateLayersContainingFailedFiles(
 //    layerDependencies
 //        .positiveDependencies
 //        .forEach { (layer, layers) ->
-//            val otherLayers = (layerDependencies.allLayers - layers)
+//            val otherLayers = (layerDependencies.layers - layers)
 //
 //            files
 //                .withPackage(layer.rootPackage)
@@ -229,7 +229,7 @@ private fun getCheckFailedMessages(
                             "does not depend on ${negativeLayerDependencies.joinToString(", ")} assertion failure:"
                         }
 
-                        LayerDependencyType.DEPENDENTS_ON_NOTHING -> {
+                        LayerDependencyType.DEPEND_ON_NOTHING -> {
                             "depends on nothing assertion failure:"
                         }
 

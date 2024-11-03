@@ -15,10 +15,12 @@ import org.junit.jupiter.api.Test
 class LayerDependenciesCoreTest {
     private val layerValidatorManager: LayerValidatorManager = mockk()
 
-    private val sut = LayerDependenciesCore(
-        layerValidatorManager,
-    )
+    private val sut =
+        LayerDependenciesCore(
+            layerValidatorManager,
+        )
 
+    // region dependsOn
     @Test
     fun `dependsOn throws exception for empty set`() {
         // given
@@ -33,6 +35,27 @@ class LayerDependenciesCoreTest {
 
         // then
         func shouldThrow IllegalArgumentException::class withMessage "Layers set is empty."
+    }
+
+    @Test
+    fun `dependsOn throws exception for duplicated layer dependency`() {
+        // given
+        val layer1 = Layer("layer name 1", "package1..")
+        val layer2 = Layer("layer name 2", "package2..")
+
+        justRun { layerValidatorManager.validateLayerDependencies(sut.layerDependencies) }
+
+        // when
+        val func = {
+            with(sut) {
+                layer1.dependsOn(layer2)
+                layer1.dependsOn(layer2)
+            }
+        }
+
+        // then
+        func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
+            "Duplicate layer dependency configuration: Layer 'layer name 1' is already configured to depend on 'layer name 2'."
     }
 
     @Test
@@ -58,7 +81,7 @@ class LayerDependenciesCoreTest {
         val layer2 = Layer("name2", "package2..")
         val layer3 = Layer("name3", "package3..")
 
-        justRun { layerValidatorManager.invoke(any()) }
+        justRun { layerValidatorManager.validateLayerDependencies(any()) }
 
         // when
         with(sut) {
@@ -66,7 +89,7 @@ class LayerDependenciesCoreTest {
         }
 
         // then
-        sut.allLayers shouldBeEqualTo setOf(layer1, layer2, layer3)
+        sut.layers shouldBeEqualTo setOf(layer1, layer2, layer3)
     }
 
     @Test
@@ -76,7 +99,7 @@ class LayerDependenciesCoreTest {
         val layer2 = Layer("name2", "package2..")
         val layer3 = Layer("name3", "package3..")
 
-        justRun { layerValidatorManager.invoke(any()) }
+        justRun { layerValidatorManager.validateLayerDependencies(any()) }
 
         // when
         with(sut) {
@@ -84,7 +107,7 @@ class LayerDependenciesCoreTest {
         }
 
         // then
-        sut.allLayers shouldBeEqualTo setOf(layer1, layer2, layer3)
+        sut.layers shouldBeEqualTo setOf(layer1, layer2, layer3)
     }
 
     @Test
@@ -94,7 +117,7 @@ class LayerDependenciesCoreTest {
         val layer2 = Layer("name2", "package2..")
         val layer3 = Layer("name3", "package3..")
 
-        justRun { layerValidatorManager.invoke(any()) }
+        justRun { layerValidatorManager.validateLayerDependencies(any()) }
 
         // when
         with(sut) {
@@ -102,20 +125,21 @@ class LayerDependenciesCoreTest {
         }
 
         // then
-        sut.layerDependencies shouldContainAll setOf(
-            LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
-            LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer3)
-        )
+        sut.layerDependencies shouldContainAll
+            setOf(
+                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
+                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer3),
+            )
     }
 
     @Test
-    fun `dependsOn call layer validator`() {
+    fun `dependsOn call validateLayerDependencies`() {
         // given
         val layer1 = Layer("name1", "package1..")
         val layer2 = Layer("name2", "package2..")
         val layer3 = Layer("name3", "package3..")
 
-        justRun { layerValidatorManager.invoke(any()) }
+        justRun { layerValidatorManager.validateLayerDependencies(any()) }
 
         // when
         with(sut) {
@@ -123,7 +147,7 @@ class LayerDependenciesCoreTest {
         }
 
         // then
-        verify { layerValidatorManager.invoke(sut.allLayers) }
+        verify { layerValidatorManager.validateLayerDependencies(sut.layerDependencies) }
     }
 
     @Test
@@ -133,7 +157,7 @@ class LayerDependenciesCoreTest {
         val layer2 = Layer("name2", "package2..")
         val layer3 = Layer("name3", "package3..")
 
-        justRun { layerValidatorManager.invoke(any()) }
+        justRun { layerValidatorManager.validateLayerDependencies(any()) }
 
         with(sut) {
             layer1.dependsOnNothing()
@@ -148,7 +172,7 @@ class LayerDependenciesCoreTest {
 
         // then
         func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
-                "Layer ''name1'' is already configured with no dependencies. It cannot subsequently depend on layers 'name2', 'name3'."
+            "Layer ''name1'' is already configured with no dependencies. It cannot subsequently depend on layers 'name2', 'name3'."
     }
 
     @Test
@@ -157,7 +181,7 @@ class LayerDependenciesCoreTest {
         val layer1 = Layer("name1", "package1..")
         val layer2 = Layer("name2", "package2..")
 
-        justRun { layerValidatorManager.invoke(any()) }
+        justRun { layerValidatorManager.validateLayerDependencies(any()) }
 
         with(sut) {
             layer1.dependsOnNothing()
@@ -172,9 +196,12 @@ class LayerDependenciesCoreTest {
 
         // then
         func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
-                "Layer ''name1'' is already configured with no dependencies. It cannot subsequently depend on layer 'name2'."
+            "Layer ''name1'' is already configured with no dependencies. It cannot subsequently depend on layer 'name2'."
     }
 
+    // endregion
+
+    //region doesNotDependOn
     @Test
     fun `doesNotDependOn throws exception for empty set`() {
         // given
@@ -192,13 +219,34 @@ class LayerDependenciesCoreTest {
     }
 
     @Test
+    fun `doesNotDependOn throws exception for duplicated layer dependency`() {
+        // given
+        val layer1 = Layer("layer name 1", "package1..")
+        val layer2 = Layer("layer name 2", "package2..")
+
+        justRun { layerValidatorManager.validateLayerDependencies(sut.layerDependencies) }
+
+        // when
+        val func = {
+            with(sut) {
+                layer1.doesNotDependOn(layer2)
+                layer1.doesNotDependOn(layer2)
+            }
+        }
+
+        // then
+        func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
+            "Duplicate layer dependency configuration: Layer 'layer name 1' is already configured to depend on 'layer name 2'."
+    }
+
+    @Test
     fun `doesNotDependOn add layers to layerDependencies`() {
         // given
         val layer1 = Layer("name1", "package1..")
         val layer2 = Layer("name2", "package2..")
         val layer3 = Layer("name3", "package3..")
 
-        justRun { layerValidatorManager.invoke(any()) }
+        justRun { layerValidatorManager.validateLayerDependencies(any()) }
 
         // when
         with(sut) {
@@ -206,10 +254,11 @@ class LayerDependenciesCoreTest {
         }
 
         // then
-        sut.layerDependencies shouldContainAll setOf(
-            LayerDependency(layer1, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, layer2),
-            LayerDependency(layer1, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, layer3)
-        )
+        sut.layerDependencies shouldContainAll
+            setOf(
+                LayerDependency(layer1, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, layer2),
+                LayerDependency(layer1, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, layer3),
+            )
     }
 
     @Test
@@ -235,7 +284,7 @@ class LayerDependenciesCoreTest {
         val layer2 = Layer("name2", "package2..")
         val layer3 = Layer("name3", "package3..")
 
-        justRun { layerValidatorManager.invoke(any()) }
+        justRun { layerValidatorManager.validateLayerDependencies(any()) }
 
         // when
         with(sut) {
@@ -243,7 +292,7 @@ class LayerDependenciesCoreTest {
         }
 
         // then
-        sut.allLayers shouldBeEqualTo setOf(layer1, layer2, layer3)
+        sut.layers shouldBeEqualTo setOf(layer1, layer2, layer3)
     }
 
     @Test
@@ -253,7 +302,7 @@ class LayerDependenciesCoreTest {
         val layer2 = Layer("name2", "package2..")
         val layer3 = Layer("name3", "package3..")
 
-        justRun { layerValidatorManager.invoke(any()) }
+        justRun { layerValidatorManager.validateLayerDependencies(any()) }
 
         // when
         with(sut) {
@@ -261,7 +310,7 @@ class LayerDependenciesCoreTest {
         }
 
         // then
-        sut.allLayers shouldBeEqualTo setOf(layer1, layer2, layer3)
+        sut.layers shouldBeEqualTo setOf(layer1, layer2, layer3)
     }
 
     @Test
@@ -271,7 +320,7 @@ class LayerDependenciesCoreTest {
         val layer2 = Layer("name2", "package2..")
         val layer3 = Layer("name3", "package3..")
 
-        justRun { layerValidatorManager.invoke(any()) }
+        justRun { layerValidatorManager.validateLayerDependencies(any()) }
 
         with(sut) {
             layer1.dependsOnNothing()
@@ -286,7 +335,7 @@ class LayerDependenciesCoreTest {
 
         // then
         func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
-                "Layer 'name1' is already configured with no dependencies. It cannot subsequently depend on layers 'name2', 'name3'."
+            "Layer 'name1' is already configured with no dependencies. It cannot subsequently depend on layers 'name2', 'name3'."
     }
 
     @Test
@@ -295,7 +344,7 @@ class LayerDependenciesCoreTest {
         val layer1 = Layer("name1", "package1..")
         val layer2 = Layer("name2", "package2..")
 
-        justRun { layerValidatorManager.invoke(any()) }
+        justRun { layerValidatorManager.validateLayerDependencies(any()) }
 
         with(sut) {
             layer1.dependsOnNothing()
@@ -310,17 +359,17 @@ class LayerDependenciesCoreTest {
 
         // then
         func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
-                "Layer 'name1' is already configured with no dependencies. It cannot subsequently depend on layer 'name2'."
+            "Layer 'name1' is already configured with no dependencies. It cannot subsequently depend on layer 'name2'."
     }
 
     @Test
-    fun `doesNotDependOn call layer validator`() {
+    fun `doesNotDependOn call validateLayerDependencies`() {
         // given
         val layer1 = Layer("name1", "package1..")
         val layer2 = Layer("name2", "package2..")
         val layer3 = Layer("name3", "package3..")
 
-        justRun { layerValidatorManager.invoke(any()) }
+        justRun { layerValidatorManager.validateLayerDependencies(any()) }
 
         // when
         with(sut) {
@@ -328,15 +377,19 @@ class LayerDependenciesCoreTest {
         }
 
         // then
-        verify { layerValidatorManager.invoke(sut.allLayers) }
+        verify { layerValidatorManager.validateLayerDependencies(sut.layerDependencies) }
     }
+
+    //endregion
+
+    //region dependsOnNothing
 
     @Test
     fun `dependsOnNothing add has layer`() {
         // given
         val layer = Layer("name", "package..")
 
-        justRun { layerValidatorManager.invoke(any()) }
+        justRun { layerValidatorManager.validateLayerDependencies(any()) }
 
         // when
         with(sut) {
@@ -344,7 +397,27 @@ class LayerDependenciesCoreTest {
         }
 
         // then
-        sut.allLayers shouldBeEqualTo setOf(layer)
+        sut.layers shouldBeEqualTo setOf(layer)
+    }
+
+    @Test
+    fun `dependsOnNothing throws exception for duplicated layer dependency`() {
+        // given
+        val layer = Layer("layer name", "package1..")
+
+        justRun { layerValidatorManager.validateLayerDependencies(sut.layerDependencies) }
+
+        // when
+        val func = {
+            with(sut) {
+                layer.dependsOnNothing()
+                layer.dependsOnNothing()
+            }
+        }
+
+        // then
+        func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
+            "Duplicate layer dependency configuration: Layer 'layer name' is already configured to depend on 'null'."
     }
 
     @Test
@@ -352,7 +425,7 @@ class LayerDependenciesCoreTest {
         // given
         val layer = Layer("name", "package..")
 
-        justRun { layerValidatorManager.invoke(any()) }
+        justRun { layerValidatorManager.validateLayerDependencies(any()) }
 
         // when
         with(sut) {
@@ -360,9 +433,10 @@ class LayerDependenciesCoreTest {
         }
 
         // then
-        sut.layerDependencies shouldContainAll setOf(
-            LayerDependency(layer, LayerDependencyType.DEPENDENTS_ON_NOTHING, null)
-        )
+        sut.layerDependencies shouldContainAll
+            setOf(
+                LayerDependency(layer, LayerDependencyType.DEPEND_ON_NOTHING, null),
+            )
     }
 
     @Test
@@ -371,7 +445,7 @@ class LayerDependenciesCoreTest {
         val layer1 = Layer("name1", "package1..")
         val layer2 = Layer("name2", "package2..")
 
-        justRun { layerValidatorManager.invoke(any()) }
+        justRun { layerValidatorManager.validateLayerDependencies(any()) }
 
         with(sut) {
             layer1.dependsOn(layer2)
@@ -386,7 +460,7 @@ class LayerDependenciesCoreTest {
 
         // then
         func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
-                "Layer 'name1' is already configured to depend on 'layer 'name2''. It cannot subsequently have no dependencies."
+            "Layer 'name1' is already configured to depend on 'layer 'name2''. It cannot subsequently have no dependencies."
     }
 
     @Test
@@ -396,7 +470,7 @@ class LayerDependenciesCoreTest {
         val layer2 = Layer("name2", "package2..")
         val layer3 = Layer("name3", "package3..")
 
-        justRun { layerValidatorManager.invoke(any()) }
+        justRun { layerValidatorManager.validateLayerDependencies(any()) }
 
         with(sut) {
             layer1.dependsOn(layer2, layer3)
@@ -411,15 +485,15 @@ class LayerDependenciesCoreTest {
 
         // then
         func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
-                "Layer 'name1' is already configured to depend on 'layers 'name2', 'name3''. It cannot subsequently have no dependencies."
+            "Layer 'name1' is already configured to depend on 'layers 'name2', 'name3''. It cannot subsequently have no dependencies."
     }
 
     @Test
-    fun `dependsOnNothing call layer validator`() {
+    fun `dependsOnNothing call validateLayerDependencies`() {
         // given
         val layer1 = Layer("name1", "package1..")
 
-        justRun { layerValidatorManager.invoke(any()) }
+        justRun { layerValidatorManager.validateLayerDependencies(any()) }
 
         // when
         with(sut) {
@@ -427,6 +501,8 @@ class LayerDependenciesCoreTest {
         }
 
         // then
-        verify { layerValidatorManager.invoke(sut.allLayers) }
+        verify { layerValidatorManager.validateLayerDependencies(sut.layerDependencies) }
     }
+
+    //endregion
 }

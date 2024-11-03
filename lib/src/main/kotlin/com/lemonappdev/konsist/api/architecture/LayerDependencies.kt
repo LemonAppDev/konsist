@@ -24,9 +24,7 @@ interface LayerDependencies {
      * @receiver The [Layer] that depends on other layers.
      * @param layers The list of layers that the current layer depends on.
      */
-    fun Layer.dependsOn(
-        layers: Set<Layer>,
-    ): Unit
+    fun Layer.dependsOn(layers: Set<Layer>): Unit
 
     /**
      * Specifies that the current layer does not depend on any given layer.
@@ -46,9 +44,7 @@ interface LayerDependencies {
      * @param layers The list of layers that the current layer does not depend on.
      * @receiver The [Layer] that does not depend on other layers.
      */
-    fun Layer.doesNotDependOn(
-        layers: Set<Layer>,
-    ): Unit
+    fun Layer.doesNotDependOn(layers: Set<Layer>): Unit
 
     /**
      * Specifies that the current layer does not depend on any other layer.
@@ -57,4 +53,3 @@ interface LayerDependencies {
      */
     fun Layer.dependsOnNothing(): Unit
 }
-

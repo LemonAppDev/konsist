@@ -23,15 +23,15 @@ data class Layer(
         require(rootPackage.isNotBlank()) { "rootPackage is blank" }
         requirePackageNameEndsWithTwoDots {
             "Invalid rootPackage definition for layer '$name'. " +
-                    "To include subpackages, the definition must end with '..'. Current definition: $rootPackage"
+                "To include subpackages, the definition must end with '..'. Current definition: $rootPackage"
         }
         requirePackageNameHasNoSingleDotAtTheBeginning {
             "Invalid rootPackage definition for layer '$name'. " +
-                    "Package names cannot start with a single dot. Current definition: $rootPackage"
+                "Package names cannot start with a single dot. Current definition: $rootPackage"
         }
         requirePackageNameHasNoMultipleDots {
             "Invalid rootPackage definition for layer '$name'. " +
-                    "Package names cannot contain more than two consecutive dots. Current definition: $rootPackage"
+                "Package names cannot contain more than two consecutive dots. Current definition: $rootPackage"
         }
     }
 

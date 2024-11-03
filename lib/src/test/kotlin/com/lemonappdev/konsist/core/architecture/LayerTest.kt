@@ -14,10 +14,11 @@ class LayerTest {
         val rootPackage = "com.example.."
 
         // when
-        val result = Layer(
-            name = name,
-            rootPackage = rootPackage,
-        )
+        val result =
+            Layer(
+                name = name,
+                rootPackage = rootPackage,
+            )
 
         // Then
         name shouldBeEqualTo result.name
@@ -49,8 +50,8 @@ class LayerTest {
 
         // then
         func shouldThrow IllegalArgumentException::class withMessage
-                "Invalid rootPackage definition for layer 'name'. Package names cannot start with a single dot. " +
-                "Current definition: .com.example.."
+            "Invalid rootPackage definition for layer 'name'. Package names cannot start with a single dot. " +
+            "Current definition: .com.example.."
     }
 
     @Test
@@ -60,8 +61,8 @@ class LayerTest {
 
         // then
         func shouldThrow IllegalArgumentException::class withMessage
-                "Invalid rootPackage definition for layer 'name'. To include subpackages, the definition must " +
-                "end with '..'. Current definition: com.example"
+            "Invalid rootPackage definition for layer 'name'. To include subpackages, the definition must " +
+            "end with '..'. Current definition: com.example"
     }
 
     @Test
@@ -71,7 +72,7 @@ class LayerTest {
 
         // then
         func shouldThrow IllegalArgumentException::class withMessage
-                "Invalid rootPackage definition for layer 'name'. Package names cannot contain more than two " +
-                "consecutive dots. Current definition: com..example.."
+            "Invalid rootPackage definition for layer 'name'. Package names cannot contain more than two " +
+            "consecutive dots. Current definition: com..example.."
     }
 }
