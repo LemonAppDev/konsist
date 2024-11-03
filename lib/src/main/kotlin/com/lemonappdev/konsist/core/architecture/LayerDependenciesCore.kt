@@ -150,8 +150,18 @@ internal class LayerDependenciesCore(
         val result = layerDependencies.add(LayerDependency(layer1, layerDependencyType, layer2))
 
         if (result.not()) {
+
+            val layerName = if(layer2?.name != null) {
+                "'${layer2.name}'"
+            } else {
+                "nothing"
+            }
+
+            val message =
+                "Duplicate layer dependency configuration: Layer '${layer1.name}' is already configured to depend on $layerName."
+
             throw KoInvalidAssertArchitectureConfigurationException(
-                "Duplicate layer dependency configuration: Layer '${layer1.name}' is already configured to depend on '${layer2?.name}'.",
+                message,
             )
         }
     }

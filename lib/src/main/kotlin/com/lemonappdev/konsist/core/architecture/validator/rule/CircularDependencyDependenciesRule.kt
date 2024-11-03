@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.architecture.validator.rule
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.architecture.LayerDependency
 import com.lemonappdev.konsist.core.architecture.LayerDependencyType
+import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
 internal class CircularDependencyDependenciesRule : LayerDependenciesRule {
@@ -91,7 +92,9 @@ internal class CircularDependencyDependenciesRule : LayerDependenciesRule {
     }
 
     private fun formatCircularDependencyMessage(cycle: List<Layer>): String {
-        if (cycle.size < 2) return ""
+        if(cycle.size < 2) {
+            throw KoInternalException("Cycle must have at least 2 layers.")
+        }
 
         return when (cycle.size) {
             3 -> "Circular dependency detected: '${cycle[0].name}' <-> '${cycle[1].name}'."

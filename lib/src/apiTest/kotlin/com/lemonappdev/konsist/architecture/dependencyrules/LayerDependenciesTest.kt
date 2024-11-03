@@ -110,7 +110,7 @@ class LayerDependenciesTest {
 
         // then
         func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
-            "Duplicate layer dependency configuration: Layer 'name' is already configured to depend on 'null'."
+            "Duplicate layer dependency configuration: Layer 'name' is already configured to depend on nothing."
     }
 
     @Test
