@@ -18,10 +18,11 @@ class UniqueLayerRuleTest {
     private val asciiTreeCreator: AsciiTreeCreator = mockk()
     private val asciiTreeNodeFactory: AsciiTreeNodeFactory = mockk()
 
-    private val sut = UniqueLayerRule(
-        asciiTreeCreator = asciiTreeCreator,
-        asciiTreeNodeFactory = asciiTreeNodeFactory,
-    )
+    private val sut =
+        UniqueLayerRule(
+            asciiTreeCreator = asciiTreeCreator,
+            asciiTreeNodeFactory = asciiTreeNodeFactory,
+        )
 
     @Test
     fun `validate passes for empty dependencies`() {
@@ -41,13 +42,14 @@ class UniqueLayerRuleTest {
         // Given
         val layer1 = Layer("layer 1", "package1..")
         val layer2 = Layer("layer 2", "package2..")
-        val dependencies = setOf(
-            LayerDependency(
-                layer1 = layer1,
-                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
-                layer2 = layer2,
-            ),
-        )
+        val dependencies =
+            setOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    layer2 = layer2,
+                ),
+            )
 
         // When
         sut.validate(dependencies)
@@ -61,12 +63,13 @@ class UniqueLayerRuleTest {
     fun `validate passes for single layer with DEPEND_ON_NOTHING`() {
         // Given
         val layer1 = Layer("layer 1", "package1..")
-        val dependencies = setOf(
-            LayerDependency(
-                layer1 = layer1,
-                dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
-            ),
-        )
+        val dependencies =
+            setOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
+                ),
+            )
 
         // When
         sut.validate(dependencies)
@@ -81,13 +84,14 @@ class UniqueLayerRuleTest {
         // Given
         val layer1 = Layer("layer 1", "package1..")
         val layer2 = Layer("layer 1", "package2..")
-        val dependencies = setOf(
-            LayerDependency(
-                layer1 = layer1,
-                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
-                layer2 = layer2,
-            ),
-        )
+        val dependencies =
+            setOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    layer2 = layer2,
+                ),
+            )
 
         val violationNode = mockk<AsciiTreeNode>()
         val rootNode = mockk<AsciiTreeNode>()
@@ -119,13 +123,14 @@ class UniqueLayerRuleTest {
         // Given
         val layer1 = Layer("layer 1", "package1..")
         val layer2 = Layer("layer 2", "package1..")
-        val dependencies = setOf(
-            LayerDependency(
-                layer1 = layer1,
-                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
-                layer2 = layer2,
-            ),
-        )
+        val dependencies =
+            setOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    layer2 = layer2,
+                ),
+            )
 
         val violationNode = mockk<AsciiTreeNode>()
         val rootNode = mockk<AsciiTreeNode>()
@@ -157,13 +162,14 @@ class UniqueLayerRuleTest {
         // Given
         val layer1 = Layer("layer 1", "package1..")
         val layer2 = Layer("layer 1", "package1..")
-        val dependencies = setOf(
-            LayerDependency(
-                layer1 = layer1,
-                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
-                layer2 = layer2,
-            ),
-        )
+        val dependencies =
+            setOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    layer2 = layer2,
+                ),
+            )
 
         val nameViolation = mockk<AsciiTreeNode>()
         val packageViolation = mockk<AsciiTreeNode>()
@@ -186,22 +192,24 @@ class UniqueLayerRuleTest {
 
         every {
             asciiTreeCreator.invoke(rootNode)
-        } returns """
+        } returns
+            """
             Invalid layers configuration:
             Layer name must be unique. Duplicated name: 'layer 1'.
             Layer rootPackage must be unique. Duplicated rootPackage: 'package1..'.
-        """.trimIndent()
+            """.trimIndent()
 
         // When
         val func = {
             sut.validate(dependencies)
         }
         // Then
-        func shouldThrow KoPreconditionFailedException::class withMessage """
+        func shouldThrow KoPreconditionFailedException::class withMessage
+            """
             Invalid layers configuration:
             Layer name must be unique. Duplicated name: 'layer 1'.
             Layer rootPackage must be unique. Duplicated rootPackage: 'package1..'.
-        """.trimIndent()
+            """.trimIndent()
     }
 
     @Test
@@ -209,18 +217,19 @@ class UniqueLayerRuleTest {
         // Given
         val layer1 = Layer("layer 1", "package1..")
         val layer2 = Layer("layer 2", "package2..")
-        val dependencies = setOf(
-            LayerDependency(
-                layer1 = layer1,
-                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
-                layer2 = layer2,
-            ),
-            LayerDependency(
-                layer1 = layer1,
-                dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
-                layer2 = layer1,
-            ),
-        )
+        val dependencies =
+            setOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    layer2 = layer2,
+                ),
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                    layer2 = layer1,
+                ),
+            )
 
         // When
         sut.validate(dependencies)
@@ -237,23 +246,24 @@ class UniqueLayerRuleTest {
         val layer2 = Layer("layer 2", "package2..")
         val layer3 = Layer("layer 3", "package3..")
 
-        val dependencies = setOf(
-            LayerDependency(
-                layer1 = layer1,
-                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
-                layer2 = layer2,
-            ),
-            LayerDependency(
-                layer1 = layer1,
-                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
-                layer2 = layer3,
-            ),
-            LayerDependency(
-                layer1 = layer2,
-                dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
-                layer2 = layer3,
-            ),
-        )
+        val dependencies =
+            setOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    layer2 = layer2,
+                ),
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    layer2 = layer3,
+                ),
+                LayerDependency(
+                    layer1 = layer2,
+                    dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                    layer2 = layer3,
+                ),
+            )
 
         // When
         sut.validate(dependencies)
@@ -267,13 +277,14 @@ class UniqueLayerRuleTest {
     fun `validate passes for self-referential dependencies`() {
         // Given
         val layer1 = Layer("layer 1", "package1..")
-        val dependencies = setOf(
-            LayerDependency(
-                layer1 = layer1,
-                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
-                layer2 = layer1,
-            ),
-        )
+        val dependencies =
+            setOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    layer2 = layer1,
+                ),
+            )
 
         // When
         sut.validate(dependencies)
@@ -291,28 +302,29 @@ class UniqueLayerRuleTest {
         val layer3 = Layer("layer 3", "package3..")
         val layer4 = Layer("layer 4", "package4..")
 
-        val dependencies = setOf(
-            LayerDependency(
-                layer1 = layer1,
-                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
-                layer2 = layer2,
-            ),
-            LayerDependency(
-                layer1 = layer2,
-                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
-                layer2 = layer3,
-            ),
-            LayerDependency(
-                layer1 = layer3,
-                dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
-                layer2 = layer4,
-            ),
-            LayerDependency(
-                layer1 = layer4,
-                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
-                layer2 = layer1,
-            ),
-        )
+        val dependencies =
+            setOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    layer2 = layer2,
+                ),
+                LayerDependency(
+                    layer1 = layer2,
+                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    layer2 = layer3,
+                ),
+                LayerDependency(
+                    layer1 = layer3,
+                    dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                    layer2 = layer4,
+                ),
+                LayerDependency(
+                    layer1 = layer4,
+                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    layer2 = layer1,
+                ),
+            )
 
         // When
         sut.validate(dependencies)
@@ -329,22 +341,23 @@ class UniqueLayerRuleTest {
         val layer2 = Layer("layer 2", "package2..")
         val layer3 = Layer("layer 3", "package3..")
 
-        val dependencies = setOf(
-            LayerDependency(
-                layer1 = layer1,
-                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
-                layer2 = layer2,
-            ),
-            LayerDependency(
-                layer1 = layer2,
-                dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
-                layer2 = layer3,
-            ),
-            LayerDependency(
-                layer1 = layer3,
-                dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
-            ),
-        )
+        val dependencies =
+            setOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    layer2 = layer2,
+                ),
+                LayerDependency(
+                    layer1 = layer2,
+                    dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                    layer2 = layer3,
+                ),
+                LayerDependency(
+                    layer1 = layer3,
+                    dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
+                ),
+            )
 
         // When
         sut.validate(dependencies)
@@ -360,18 +373,19 @@ class UniqueLayerRuleTest {
         val layer1 = Layer("layer 1", "package1..")
         val layer2 = Layer("layer 2", "package2..")
 
-        val dependencies = setOf(
-            LayerDependency(
-                layer1 = layer1,
-                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
-                layer2 = layer2,
-            ),
-            LayerDependency(
-                layer1 = layer2,
-                dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
-                layer2 = layer1,
-            ),
-        )
+        val dependencies =
+            setOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    layer2 = layer2,
+                ),
+                LayerDependency(
+                    layer1 = layer2,
+                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    layer2 = layer1,
+                ),
+            )
 
         // When
         sut.validate(dependencies)
@@ -388,20 +402,21 @@ class UniqueLayerRuleTest {
         val layer2 = Layer("layer 2", "package2..")
         val layer3 = Layer("layer 3", "package3..")
 
-        val dependencies = setOf(
-            LayerDependency(
-                layer1 = layer1,
-                dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
-            ),
-            LayerDependency(
-                layer1 = layer2,
-                dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
-            ),
-            LayerDependency(
-                layer1 = layer3,
-                dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
-            ),
-        )
+        val dependencies =
+            setOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
+                ),
+                LayerDependency(
+                    layer1 = layer2,
+                    dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
+                ),
+                LayerDependency(
+                    layer1 = layer3,
+                    dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
+                ),
+            )
 
         // When
         sut.validate(dependencies)
@@ -411,4 +426,3 @@ class UniqueLayerRuleTest {
         verify(exactly = 0) { asciiTreeCreator.invoke(any()) }
     }
 }
-

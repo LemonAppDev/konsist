@@ -92,19 +92,29 @@ internal class CircularDependencyDependenciesRule : LayerDependenciesRule {
     }
 
     private fun formatCircularDependencyMessage(cycle: List<Layer>): String {
-        if(cycle.size < 2) {
-            throw KoInternalException("Cycle must have at least 2 layers.")
+        if (cycle.size < MINIMUM_CYCLE_SIZE) {
+            throw KoInternalException("Cycle must have at least $MINIMUM_CYCLE_SIZE layers.")
         }
 
         return when (cycle.size) {
-            3 -> "Circular dependency detected: '${cycle[0].name}' <-> '${cycle[1].name}'."
+            DIRECT_CIRCULAR_DEPENDENCY_SIZE -> {
+                // Direct circular dependency between two layers (cycle contains same layer at start/end)
+                "Circular dependency detected: '${cycle[0].name}' <-> '${cycle[1].name}'."
+            }
             else -> {
-                val cycleString = buildString {
-                    append(cycle.dropLast(1).joinToString(" -> ") { "'${it.name}'" })
-                    append(" -> '${cycle[0].name}'") // Add the first layer again at the end to complete the cycle
-                }
+                // Indirect circular dependency involving multiple layers
+                val cycleString =
+                    buildString {
+                        append(cycle.dropLast(1).joinToString(" -> ") { "'${it.name}'" })
+                        append(" -> '${cycle[0].name}'") // Add the first layer again at the end to complete the cycle
+                    }
                 "Circular dependency detected: $cycleString."
             }
         }
+    }
+
+    companion object {
+        private const val MINIMUM_CYCLE_SIZE = 2
+        private const val DIRECT_CIRCULAR_DEPENDENCY_SIZE = 3
     }
 }

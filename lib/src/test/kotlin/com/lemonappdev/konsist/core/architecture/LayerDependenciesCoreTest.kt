@@ -55,12 +55,14 @@ class LayerDependenciesCoreTest {
         val dependsOnNothing = sut.dependsOnNothingDependencies
 
         // then
-        dependsOn shouldBeEqualTo mapOf(
-            layer1 to setOf(layer2)
-        )
-        doesNotDependOn shouldBeEqualTo mapOf(
-            layer2 to setOf(layer3)
-        )
+        dependsOn shouldBeEqualTo
+            mapOf(
+                layer1 to setOf(layer2),
+            )
+        doesNotDependOn shouldBeEqualTo
+            mapOf(
+                layer2 to setOf(layer3),
+            )
         dependsOnNothing shouldBeEqualTo setOf(layer3)
     }
     // endregion
@@ -91,9 +93,10 @@ class LayerDependenciesCoreTest {
         val result = sut.dependsOnDependencies
 
         // then
-        result shouldBeEqualTo mapOf(
-            layer1 to setOf(layer2)
-        )
+        result shouldBeEqualTo
+            mapOf(
+                layer1 to setOf(layer2),
+            )
     }
 
     @Test
@@ -114,10 +117,11 @@ class LayerDependenciesCoreTest {
         val result = sut.dependsOnDependencies
 
         // then
-        result shouldBeEqualTo mapOf(
-            layer1 to setOf(layer2),
-            layer2 to setOf(layer3)
-        )
+        result shouldBeEqualTo
+            mapOf(
+                layer1 to setOf(layer2),
+                layer2 to setOf(layer3),
+            )
     }
 
     @Test
@@ -137,9 +141,10 @@ class LayerDependenciesCoreTest {
         val result = sut.dependsOnDependencies
 
         // then
-        result shouldBeEqualTo mapOf(
-            layer1 to setOf(layer2, layer3)
-        )
+        result shouldBeEqualTo
+            mapOf(
+                layer1 to setOf(layer2, layer3),
+            )
     }
     // endregion
 
@@ -169,9 +174,10 @@ class LayerDependenciesCoreTest {
         val result = sut.doesNotDependsOnDependencies
 
         // then
-        result shouldBeEqualTo mapOf(
-            layer1 to setOf(layer2)
-        )
+        result shouldBeEqualTo
+            mapOf(
+                layer1 to setOf(layer2),
+            )
     }
 
     @Test
@@ -192,10 +198,11 @@ class LayerDependenciesCoreTest {
         val result = sut.doesNotDependsOnDependencies
 
         // then
-        result shouldBeEqualTo mapOf(
-            layer1 to setOf(layer2),
-            layer2 to setOf(layer3)
-        )
+        result shouldBeEqualTo
+            mapOf(
+                layer1 to setOf(layer2),
+                layer2 to setOf(layer3),
+            )
     }
 
     @Test
@@ -215,9 +222,10 @@ class LayerDependenciesCoreTest {
         val result = sut.doesNotDependsOnDependencies
 
         // then
-        result shouldBeEqualTo mapOf(
-            layer1 to setOf(layer2, layer3)
-        )
+        result shouldBeEqualTo
+            mapOf(
+                layer1 to setOf(layer2, layer3),
+            )
     }
     // endregion
 

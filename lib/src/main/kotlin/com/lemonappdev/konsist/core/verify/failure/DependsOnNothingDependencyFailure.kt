@@ -5,5 +5,5 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 
 data class DependsOnNothingDependencyFailure(
     val layer: Layer,
-    val failedFiles: List<KoFileDeclaration>
+    val failedFiles: List<KoFileDeclaration>,
 )

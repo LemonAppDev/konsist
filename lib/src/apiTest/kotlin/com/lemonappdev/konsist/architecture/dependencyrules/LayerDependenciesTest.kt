@@ -24,7 +24,7 @@ class LayerDependenciesTest {
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
             "Invalid layers configuration:\n" +
-                "└── Layer name must be unique. Duplicated name: 'name'."
+            "└── Layer name must be unique. Duplicated name: 'name'."
     }
 
     @Test
@@ -42,7 +42,7 @@ class LayerDependenciesTest {
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
             "Invalid layers configuration:\n" +
-                "└── Layer rootPackage must be unique. Duplicated rootPackage: 'package..'."
+            "└── Layer rootPackage must be unique. Duplicated rootPackage: 'package..'."
     }
 
     @Test
@@ -148,6 +148,6 @@ class LayerDependenciesTest {
 
         // then
         func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
-                "Duplicate layer dependency configuration: Layer 'name1' is already configured to depend on 'name2'."
+            "Duplicate layer dependency configuration: Layer 'name1' is already configured to depend on 'name2'."
     }
 }

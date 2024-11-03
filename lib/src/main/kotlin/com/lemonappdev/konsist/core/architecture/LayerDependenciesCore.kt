@@ -53,11 +53,12 @@ internal class LayerDependenciesCore(
      * @throws KoPreconditionFailedException Layers do not contain files
      */
     fun checkLayersWithoutFiles(files: List<KoFileDeclaration>) {
-        layers.firstOrNull { layer ->
-            files.withPackage(layer.rootPackage).isEmpty()
-        }?.let { invalidLayer ->
-            throw KoPreconditionFailedException("Layer ${invalidLayer.name} doesn't contain any files.")
-        }
+        layers
+            .firstOrNull { layer ->
+                files.withPackage(layer.rootPackage).isEmpty()
+            }?.let { invalidLayer ->
+                throw KoPreconditionFailedException("Layer ${invalidLayer.name} doesn't contain any files.")
+            }
     }
 
     override fun Layer.dependsOn(
@@ -150,9 +151,7 @@ internal class LayerDependenciesCore(
         layerValidatorManager.validateLayerDependencies(layerDependencies)
     }
 
-    private fun getLayerWithDependOnNothingDependency(
-        layer: Layer,
-    ): LayerDependency? {
+    private fun getLayerWithDependOnNothingDependency(layer: Layer): LayerDependency? {
         val dependOnLayerDependency =
             layerDependencies.firstOrNull {
                 it.layer1 == layer && it.dependencyType == LayerDependencyType.DEPEND_ON_NOTHING
@@ -160,9 +159,7 @@ internal class LayerDependenciesCore(
         return dependOnLayerDependency
     }
 
-    private fun getLayersWithDependOnLayerDependency(
-        layer: Layer,
-    ): Set<LayerDependency> {
+    private fun getLayersWithDependOnLayerDependency(layer: Layer): Set<LayerDependency> {
         val dependOnLayerDependency =
             layerDependencies.filter {
                 it.layer1 == layer && it.dependencyType == LayerDependencyType.DEPEND_ON_LAYER
@@ -179,12 +176,12 @@ internal class LayerDependenciesCore(
         val result = layerDependencies.add(LayerDependency(layer1, layerDependencyType, layer2))
 
         if (result.not()) {
-
-            val layerName = if(layer2?.name != null) {
-                "'${layer2.name}'"
-            } else {
-                "nothing"
-            }
+            val layerName =
+                if (layer2?.name != null) {
+                    "'${layer2.name}'"
+                } else {
+                    "nothing"
+                }
 
             val message =
                 "Duplicate layer dependency configuration: Layer '${layer1.name}' is already configured to depend on $layerName."

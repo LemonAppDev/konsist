@@ -25,7 +25,8 @@ internal fun getTestMethodNameFromSixthIndex() = getTestMethodName(INDEX_SIX)
  */
 internal fun getTestMethodNameFromNinthIndex() = getTestMethodName(SEVEN_NINTH)
 
-private fun getTestMethodName(index: Int): String = Thread
-    .currentThread()
-    .stackTrace[index]
-    .methodName
+private fun getTestMethodName(index: Int): String =
+    Thread
+        .currentThread()
+        .stackTrace[index]
+        .methodName

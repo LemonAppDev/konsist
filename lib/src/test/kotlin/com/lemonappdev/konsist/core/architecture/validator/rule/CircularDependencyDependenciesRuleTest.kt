@@ -126,6 +126,6 @@ class CircularDependencyDependenciesRuleTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Circular dependency detected: 'layer name 1' -> 'layer name 2' -> 'layer name 3' -> 'layer name 4' -> 'layer name 1'."
+            "Circular dependency detected: 'layer name 1' -> 'layer name 2' -> 'layer name 3' -> 'layer name 4' -> 'layer name 1'."
     }
 }
