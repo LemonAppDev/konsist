@@ -95,13 +95,13 @@ internal class CircularDependencyDependenciesRule : LayerDependenciesRule {
         return false
     }
 
-    private fun formatSimpleCycle(cycle: List<Layer>): String = when {
-        isSimpleTwoLayerCycle(cycle) -> "${cycle[0].name}$CIRCULAR_DEPENDENCY_SEPARATOR${cycle[1].name}"
-        else -> cycle.dropLast(1).joinToString(CIRCULAR_DEPENDENCY_SEPARATOR) { it.name }
-    }
+    private fun formatSimpleCycle(cycle: List<Layer>): String =
+        when {
+            isSimpleTwoLayerCycle(cycle) -> "${cycle[0].name}$CIRCULAR_DEPENDENCY_SEPARATOR${cycle[1].name}"
+            else -> cycle.dropLast(1).joinToString(CIRCULAR_DEPENDENCY_SEPARATOR) { it.name }
+        }
 
-    private fun isSimpleTwoLayerCycle(cycle: List<Layer>): Boolean =
-        cycle.size == SIMPLE_CYCLE_SIZE && cycle.first() == cycle.last()
+    private fun isSimpleTwoLayerCycle(cycle: List<Layer>): Boolean = cycle.size == SIMPLE_CYCLE_SIZE && cycle.first() == cycle.last()
 
     private companion object {
         private const val SIMPLE_CYCLE_SIZE = 3

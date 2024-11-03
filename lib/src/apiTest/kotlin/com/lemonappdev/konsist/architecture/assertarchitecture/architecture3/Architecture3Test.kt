@@ -12,20 +12,27 @@ import org.junit.jupiter.api.Test
 
 class Architecture3Test {
     private val rootPath = PathProvider.rootProjectPath
-    private val domain =
-        Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.domain..")
-    private val presentation =
-        Layer(
-            "Presentation",
-            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.presentation..",
-        )
+
     private val scope =
         Konsist.scopeFromDirectory(
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture3/project",
         )
 
+    private val domain =
+        Layer(
+            "Domain",
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.domain..",
+        )
+
+    private val presentation =
+        Layer(
+            "Presentation",
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.presentation..",
+        )
+
+    // region passes when dependency is set that presentation and domain layers are dependent on each other
     @Test
-    fun `passes when dependency is set that presentation and domain layers are dependent on each other (scope)`() {
+    fun `passes when dependency is set that presentation and domain layers are dependent on each other (lambda scope)`() {
         // then
         scope
             .assertArchitecture {
@@ -35,7 +42,7 @@ class Architecture3Test {
     }
 
     @Test
-    fun `passes when dependency is set that presentation and domain layers are dependent on each other (files)`() {
+    fun `passes when dependency is set that presentation and domain layers are dependent on each other (lambda files)`() {
         // then
         scope
             .files
@@ -46,22 +53,22 @@ class Architecture3Test {
     }
 
     @Test
-    fun `passes when dependency is set that two layers are dependent on each other and architecture is passed as parameter (scope)`() {
+    fun `passes when dependency is set that two layers are dependent on each other (parameter scope)`() {
         // given
-        val architecture =
+        val layerDependencies =
             architecture {
                 domain.dependsOn(presentation)
                 presentation.dependsOn(domain)
             }
 
         // then
-        scope.assertArchitecture(architecture)
+        scope.assertArchitecture(layerDependencies)
     }
 
     @Test
-    fun `passes when dependency is set that two layers are dependent on each other and architecture is passed as parameter (files)`() {
+    fun `passes when dependency is set that two layers are dependent on each other (parameter files)`() {
         // given
-        val architecture =
+        val layerDependencies =
             architecture {
                 domain.dependsOn(presentation)
                 presentation.dependsOn(domain)
@@ -70,15 +77,20 @@ class Architecture3Test {
         // then
         scope
             .files
-            .assertArchitecture(architecture)
+            .assertArchitecture(layerDependencies)
     }
 
+    // endregion
+
+    // region fails when dependency is set that presentation layer not depends on domain
     @Test
-    fun `fails when dependency is set that presentation layer not depends on domain (scope)`() {
+    fun `fails when dependency is set that presentation layer not depends on domain (lambda scope)`() {
         // when
         val sut =
             shouldThrow<KoAssertionFailedException> {
-                scope.assertArchitecture { presentation.doesNotDependOn(domain) }
+                scope.assertArchitecture {
+                    presentation.doesNotDependOn(domain)
+                }
             }
 
         // then
@@ -98,13 +110,15 @@ class Architecture3Test {
     }
 
     @Test
-    fun `fails when dependency is set that presentation layer not depends on domain (files)`() {
+    fun `fails when dependency is set that presentation layer not depends on domain (lambda files)`() {
         // when
         val sut =
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .files
-                    .assertArchitecture { presentation.doesNotDependOn(domain) }
+                    .assertArchitecture {
+                        presentation.doesNotDependOn(domain)
+                    }
             }
 
         // then
@@ -125,15 +139,17 @@ class Architecture3Test {
 
     @Suppress("detekt.MaxLineLength")
     @Test
-    fun `fails when dependency is set that presentation layer not depends on domain and architecture is passed as parameter (scope)`() {
+    fun `fails when dependency is set that presentation layer not depends on domain (parameter scope)`() {
         // given
-        val architecture =
-            architecture { presentation.doesNotDependOn(domain) }
+        val layerDependencies =
+            architecture {
+                presentation.doesNotDependOn(domain)
+            }
 
         // when
         val sut =
             shouldThrow<KoAssertionFailedException> {
-                scope.assertArchitecture(architecture)
+                scope.assertArchitecture(layerDependencies)
             }
 
         // then
@@ -154,17 +170,19 @@ class Architecture3Test {
 
     @Suppress("detekt.MaxLineLength")
     @Test
-    fun `fails when dependency is set that presentation layer not depends on domain and architecture is passed as parameter (files)`() {
+    fun `fails when dependency is set that presentation layer not depends on domain (parameter files)`() {
         // given
-        val architecture =
-            architecture { presentation.doesNotDependOn(domain) }
+        val layerDependencies =
+            architecture {
+                presentation.doesNotDependOn(domain)
+            }
 
         // when
         val sut =
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .files
-                    .assertArchitecture(architecture)
+                    .assertArchitecture(layerDependencies)
             }
 
         // then
@@ -182,4 +200,6 @@ class Architecture3Test {
                     "assertarchitecture/architecture3/project/presentation/sample/PresentationThirdClass.kt:3:1)",
             )
     }
+
+    // endregion
 }

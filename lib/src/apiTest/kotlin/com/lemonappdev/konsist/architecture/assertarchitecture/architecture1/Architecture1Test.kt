@@ -7,14 +7,26 @@ import com.lemonappdev.konsist.api.architecture.Layer
 import org.junit.jupiter.api.Test
 
 class Architecture1Test {
-    private val domain = Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.domain..")
-    private val presentation =
-        Layer("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.presentation..")
     private val scope =
-        Konsist.scopeFromDirectory("lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture1/project")
+        Konsist.scopeFromDirectory(
+            "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture1/project",
+        )
 
+    private val domain =
+        Layer(
+            "Domain",
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.domain..",
+        )
+
+    private val presentation =
+        Layer(
+            "Presentation",
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.presentation..",
+        )
+
+    // region passes when dependency is set that layers are independent
     @Test
-    fun `passes when dependency is set that layers are independent (scope)`() {
+    fun `passes when dependency is set that layers are independent (lambda scope)`() {
         // then
         scope
             .assertArchitecture {
@@ -24,7 +36,7 @@ class Architecture1Test {
     }
 
     @Test
-    fun `passes when dependency is set that layers are independent (files)`() {
+    fun `passes when dependency is set that layers are independent (lambda files)`() {
         // then
         scope
             .files
@@ -35,22 +47,22 @@ class Architecture1Test {
     }
 
     @Test
-    fun `passes when dependency is set that layers are independent when architecture is passed as parameter (scope)`() {
+    fun `passes when dependency is set that layers are independent (parameter scope)`() {
         // given
-        val koArchitecture =
+        val layerDependencies =
             architecture {
                 domain.dependsOnNothing()
                 presentation.dependsOnNothing()
             }
 
         // then
-        scope.assertArchitecture(koArchitecture)
+        scope.assertArchitecture(layerDependencies)
     }
 
     @Test
-    fun `passes when dependency is set that layers are independent when architecture is passed as parameter (files)`() {
+    fun `passes when dependency is set that layers are independent (parameter files)`() {
         // given
-        val koArchitecture =
+        val layerDependencies =
             architecture {
                 domain.dependsOnNothing()
                 presentation.dependsOnNothing()
@@ -59,11 +71,15 @@ class Architecture1Test {
         // then
         scope
             .files
-            .assertArchitecture(koArchitecture)
+            .assertArchitecture(layerDependencies)
     }
 
+    // endregion
+
+    //region passes when dependency is set that Domain not depends on Presentation
+
     @Test
-    fun `passes when dependency is set that Domain not depends on Presentation (scope)`() {
+    fun `passes when dependency is set that Domain not depends on Presentation (lambda scope)`() {
         // then
         scope
             .assertArchitecture {
@@ -73,7 +89,7 @@ class Architecture1Test {
     }
 
     @Test
-    fun `passes when dependency is set that Domain not depends on Presentation (files)`() {
+    fun `passes when dependency is set that Domain not depends on Presentation (lambda files)`() {
         // then
         scope
             .files
@@ -84,22 +100,22 @@ class Architecture1Test {
     }
 
     @Test
-    fun `passes when dependency is set that Domain not depends on Presentation when architecture is passed as parameter (scope)`() {
+    fun `passes when dependency is set that Domain not depends on Presentation (parameter scope)`() {
         // given
-        val koArchitecture =
+        val layerDependencies =
             architecture {
                 domain.dependsOnNothing()
                 presentation.dependsOnNothing()
             }
 
         // then
-        scope.assertArchitecture(koArchitecture)
+        scope.assertArchitecture(layerDependencies)
     }
 
     @Test
-    fun `passes when dependency is set that Domain not depends on Presentation when architecture is passed as parameter (files)`() {
+    fun `passes when dependency is set that Domain not depends on Presentation (parameter files)`() {
         // given
-        val koArchitecture =
+        val layerDependencies =
             architecture {
                 domain.dependsOnNothing()
                 presentation.dependsOnNothing()
@@ -108,6 +124,8 @@ class Architecture1Test {
         // then
         scope
             .files
-            .assertArchitecture(koArchitecture)
+            .assertArchitecture(layerDependencies)
     }
+
+    // endregion
 }

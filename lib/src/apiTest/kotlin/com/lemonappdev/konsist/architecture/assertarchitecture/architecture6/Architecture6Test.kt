@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.architecture.assertarchitecture.architecture6
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architecture
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
@@ -9,15 +10,25 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class Architecture6Test {
-    private val layer = Layer("EmptyLayer", "com.lemonappdev.konsist.assertarchitecture.architecture6.project.emptylayer..")
-    private val scope =
-        Konsist.scopeFromPackage("com.lemonappdev.konsist.architecture.assertarchitecture.architecture6.project")
+    private val layer =
+        Layer(
+            "EmptyLayer",
+            "com.lemonappdev.konsist.assertarchitecture.architecture6.project.emptylayer..",
+        )
 
+    private val scope =
+        Konsist.scopeFromPackage(
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture6.project",
+        )
+
+    // region fails when layer contains no files
     @Test
-    fun `throws exception when layer contains no files (scope)`() {
+    fun `fails when layer contains no files (lambda scope)`() {
         // when
         val func = {
-            scope.assertArchitecture { layer.dependsOnNothing() }
+            scope.assertArchitecture {
+                layer.dependsOnNothing()
+            }
         }
 
         // then
@@ -25,12 +36,14 @@ class Architecture6Test {
     }
 
     @Test
-    fun `throws exception when layer contains no files (files)`() {
+    fun `fails when layer contains no files (lambda files)`() {
         // when
         val func = {
             scope
                 .files
-                .assertArchitecture { layer.dependsOnNothing() }
+                .assertArchitecture {
+                    layer.dependsOnNothing()
+                }
         }
 
         // then
@@ -38,7 +51,48 @@ class Architecture6Test {
     }
 
     @Test
-    fun `throws exception when architecture contains no layers (scope)`() {
+    fun `fails when layer contains no files (parameter scope)`() {
+        // when
+        val layerDependencies =
+            architecture {
+                scope.assertArchitecture {
+                    layer.dependsOnNothing()
+                }
+            }
+
+        val func = {
+            scope.assertArchitecture(layerDependencies)
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage "Layer EmptyLayer doesn't contain any files."
+    }
+
+    @Test
+    fun `fails when layer contains no files (parameter files)`() {
+        // when
+        val layerDependencies =
+            architecture {
+                scope.assertArchitecture {
+                    layer.dependsOnNothing()
+                }
+            }
+
+        val func = {
+            scope
+                .files
+                .assertArchitecture(layerDependencies)
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage "Layer EmptyLayer doesn't contain any files."
+    }
+
+    // endregion
+
+    // region fails when architecture contains no layers
+    @Test
+    fun `fails when architecture contains no layers (lambda scope)`() {
         // when
         val func = {
             scope.assertArchitecture { }
@@ -49,7 +103,7 @@ class Architecture6Test {
     }
 
     @Test
-    fun `throws exception when architecture contains no layers (files)`() {
+    fun `fails when architecture contains no layers (lambda files)`() {
         // when
         val func = {
             scope
@@ -62,10 +116,12 @@ class Architecture6Test {
     }
 
     @Test
-    fun `throws exception when architecture contains no dependencies (scope)`() {
+    fun `fails when architecture contains no layers (parameter scope)`() {
         // when
+        val layerDependencies = architecture { }
+
         val func = {
-            scope.assertArchitecture { layer }
+            scope.assertArchitecture(layerDependencies)
         }
 
         // then
@@ -73,15 +129,85 @@ class Architecture6Test {
     }
 
     @Test
-    fun `throws exception when architecture contains no dependencies (files)`() {
+    fun `fails when architecture contains no layers (parameter files)`() {
         // when
+        val layerDependencies = architecture { }
+
         val func = {
             scope
                 .files
-                .assertArchitecture { layer }
+                .assertArchitecture(layerDependencies)
         }
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage "Architecture doesn't contain layers or dependencies."
     }
+
+    // endregion
+
+    // region fails when architecture contains no dependencies
+
+    @Test
+    fun `fails when architecture contains no dependencies (lambda scope)`() {
+        // when
+        val func = {
+            scope.assertArchitecture {
+                layer
+            }
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage "Architecture doesn't contain layers or dependencies."
+    }
+
+    @Test
+    fun `fails when architecture contains no dependencies (lambda files)`() {
+        // when
+        val func = {
+            scope
+                .files
+                .assertArchitecture {
+                    layer
+                }
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage "Architecture doesn't contain layers or dependencies."
+    }
+
+    @Test
+    fun `fails when architecture contains no dependencies (parameter scope)`() {
+        // when
+        val layerDependencies =
+            architecture {
+                layer
+            }
+
+        val func = {
+            scope.assertArchitecture(layerDependencies)
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage "Architecture doesn't contain layers or dependencies."
+    }
+
+    @Test
+    fun `fails when architecture contains no dependencies (parameter files)`() {
+        // when
+        val layerDependencies =
+            architecture {
+                layer
+            }
+
+        val func = {
+            scope
+                .files
+                .assertArchitecture(layerDependencies)
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage "Architecture doesn't contain layers or dependencies."
+    }
+
+    // endregion
 }

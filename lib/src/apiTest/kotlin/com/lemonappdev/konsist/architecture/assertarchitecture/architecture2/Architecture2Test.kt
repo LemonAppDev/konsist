@@ -12,23 +12,27 @@ import org.junit.jupiter.api.Test
 
 class Architecture2Test {
     private val rootPath = PathProvider.rootProjectPath
+
     private val domain =
         Layer(
             "Domain",
             "com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain..",
         )
+
     private val presentation =
         Layer(
             "Presentation",
             "com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.presentation..",
         )
+
     private val scope =
         Konsist.scopeFromDirectory(
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture2/project",
         )
 
+    // region passes when dependency is set that presentation layer is depend on domain layer
     @Test
-    fun `passes when dependency is set that presentation layer is depend on domain layer (scope)`() {
+    fun `passes when dependency is set that presentation layer is depend on domain layer (lambda scope)`() {
         // then
         scope
             .assertArchitecture {
@@ -38,7 +42,7 @@ class Architecture2Test {
     }
 
     @Test
-    fun `passes when dependency is set that presentation layer is depend on domain layer (files)`() {
+    fun `passes when dependency is set that presentation layer is depend on domain layer (lambda files)`() {
         // then
         scope
             .files
@@ -49,22 +53,22 @@ class Architecture2Test {
     }
 
     @Test
-    fun `passes when dependency is set to presentation layer depends on domain layer and arch is passed as parameter (scope)`() {
+    fun `passes when dependency is set to presentation layer depends on domain layer (parameter scope)`() {
         // given
-        val architecture =
+        val layerDependencies =
             architecture {
                 domain.dependsOnNothing()
                 presentation.dependsOn(domain)
             }
 
         // then
-        scope.assertArchitecture(architecture)
+        scope.assertArchitecture(layerDependencies)
     }
 
     @Test
-    fun `passes when dependency is set to presentation layer depends on domain layer and arch is passed as parameter (files)`() {
+    fun `passes when dependency is set to presentation layer depends on domain layer (parameter files)`() {
         // given
-        val architecture =
+        val layerDependencies =
             architecture {
                 domain.dependsOnNothing()
                 presentation.dependsOn(domain)
@@ -73,46 +77,63 @@ class Architecture2Test {
         // then
         scope
             .files
-            .assertArchitecture(architecture)
+            .assertArchitecture(layerDependencies)
     }
 
+    // endregion
+
+    // region passes when dependency is set that domain layer not depends on presentation layer
     @Test
-    fun `passes when dependency is set that domain layer not depends on presentation one (scope)`() {
+    fun `passes when dependency is set that domain layer not depends on presentation layer (lambda scope)`() {
         // then
         scope
-            .assertArchitecture { domain.doesNotDependOn(presentation) }
+            .assertArchitecture {
+                domain.doesNotDependOn(presentation)
+            }
     }
 
     @Test
-    fun `passes when dependency is set that domain layer not depends on presentation one (files)`() {
-        // then
-        scope
-            .files
-            .assertArchitecture { domain.doesNotDependOn(presentation) }
-    }
-
-    @Test
-    fun `passes when dependency is set that domain layer not depends on presentation one and arch is passed as parameter (scope)`() {
-        // given
-        val architecture = architecture { domain.doesNotDependOn(presentation) }
-
-        // then
-        scope.assertArchitecture(architecture)
-    }
-
-    @Test
-    fun `passes when dependency is set that domain layer not depends on presentation one and arch is passed as parameter (files)`() {
-        // given
-        val architecture = architecture { domain.doesNotDependOn(presentation) }
-
+    fun `passes when dependency is set that domain layer not depends on presentation layer (lambda files)`() {
         // then
         scope
             .files
-            .assertArchitecture(architecture)
+            .assertArchitecture {
+                domain.doesNotDependOn(presentation)
+            }
     }
 
     @Test
-    fun `fails when dependency is set that domain layer is depend on presentation layer (scope)`() {
+    fun `passes when dependency is set that domain layer not depends on presentation layer (parameter scope)`() {
+        // given
+        val layerDependencies =
+            architecture {
+                domain.doesNotDependOn(presentation)
+            }
+
+        // then
+        scope.assertArchitecture(layerDependencies)
+    }
+
+    @Test
+    fun `passes when dependency is set that domain layer not depends on presentation layer (parameter files)`() {
+        // given
+        val layerDependencies =
+            architecture {
+                domain.doesNotDependOn(presentation)
+            }
+
+        // then
+        scope
+            .files
+            .assertArchitecture(layerDependencies)
+    }
+
+    // endregion
+
+    // region fails when dependency is set that domain layer is depend on presentation layer
+
+    @Test
+    fun `fails when dependency is set that domain layer is depend on presentation layer (parameter scope)`() {
         // when
         val sut =
             shouldThrow<KoAssertionFailedException> {
@@ -139,7 +160,7 @@ class Architecture2Test {
     }
 
     @Test
-    fun `fails when dependency is set that domain layer is depend on presentation layer (files)`() {
+    fun `fails when dependency is set that domain layer is depend on presentation layer (parameter files)`() {
         // when
         val sut =
             shouldThrow<KoAssertionFailedException> {
@@ -169,9 +190,9 @@ class Architecture2Test {
 
     @Suppress("detekt.MaxLineLength")
     @Test
-    fun `fails when dependency is set that domain layer is depend on presentation layer and architecture is passed as parameter (scope)`() {
+    fun `fails when dependency is set that domain layer is depend on presentation layer (lambda scope)`() {
         // given
-        val architecture =
+        val layerDependencies =
             architecture {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
@@ -180,7 +201,7 @@ class Architecture2Test {
         // when
         val sut =
             shouldThrow<KoAssertionFailedException> {
-                scope.assertArchitecture(architecture)
+                scope.assertArchitecture(layerDependencies)
             }
 
         // then
@@ -201,9 +222,9 @@ class Architecture2Test {
 
     @Suppress("detekt.MaxLineLength")
     @Test
-    fun `fails when dependency is set that domain layer is depend on presentation layer and architecture is passed as parameter (files)`() {
+    fun `fails when dependency is set that domain layer is depend on presentation layer (lambda files)`() {
         // given
-        val architecture =
+        val layerDependencies =
             architecture {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
@@ -214,7 +235,7 @@ class Architecture2Test {
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .files
-                    .assertArchitecture(architecture)
+                    .assertArchitecture(layerDependencies)
             }
 
         // then
@@ -233,8 +254,11 @@ class Architecture2Test {
             )
     }
 
+    //endregion
+
+    // region fails when dependency is set that presentation layer not depends on domain
     @Test
-    fun `fails when dependency is set that presentation layer not depends on domain (scope)`() {
+    fun `fails when dependency is set that presentation layer not depends on domain (lambda scope)`() {
         // when
         val sut =
             shouldThrow<KoAssertionFailedException> {
@@ -261,7 +285,7 @@ class Architecture2Test {
     }
 
     @Test
-    fun `fails when dependency is set that presentation layer not depends on domain (files)`() {
+    fun `fails when dependency is set that presentation layer not depends on domain (lambda files)`() {
         // when
         val sut =
             shouldThrow<KoAssertionFailedException> {
@@ -291,9 +315,9 @@ class Architecture2Test {
 
     @Suppress("detekt.MaxLineLength")
     @Test
-    fun `fails when dependency is set that presentation layer not depends on domain and architecture is passed as parameter (scope)`() {
+    fun `fails when dependency is set that presentation layer not depends on domain (parameter scope)`() {
         // given
-        val architecture =
+        val layerDependencies =
             architecture {
                 presentation.doesNotDependOn(domain)
                 domain.dependsOnNothing()
@@ -302,7 +326,7 @@ class Architecture2Test {
         // when
         val sut =
             shouldThrow<KoAssertionFailedException> {
-                scope.assertArchitecture(architecture)
+                scope.assertArchitecture(layerDependencies)
             }
 
         // then
@@ -323,9 +347,9 @@ class Architecture2Test {
 
     @Suppress("detekt.MaxLineLength")
     @Test
-    fun `fails when dependency is set that presentation layer not depends on domain and architecture is passed as parameter (files)`() {
+    fun `fails when dependency is set that presentation layer not depends on domain (parameter files)`() {
         // given
-        val architecture =
+        val layerDependencies =
             architecture {
                 presentation.doesNotDependOn(domain)
                 domain.dependsOnNothing()
@@ -336,7 +360,7 @@ class Architecture2Test {
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .files
-                    .assertArchitecture(architecture)
+                    .assertArchitecture(layerDependencies)
             }
 
         // then
@@ -354,4 +378,6 @@ class Architecture2Test {
                     "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt:3:1)",
             )
     }
+
+    // endregion
 }
