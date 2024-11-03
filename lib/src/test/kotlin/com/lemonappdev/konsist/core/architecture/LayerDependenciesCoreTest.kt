@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.architecture
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.architecture.validator.LayerValidatorManager
 import com.lemonappdev.konsist.core.exception.KoInvalidAssertArchitectureConfigurationException
+import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
@@ -19,6 +20,17 @@ class LayerDependenciesCoreTest {
         LayerDependenciesCore(
             layerValidatorManager,
         )
+
+    @Test
+    fun `validateEmptyLayersDependencies throws exception for empty set`() {
+        // when
+        val func = {
+            sut.validateEmptyLayersDependencies()
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage "Architecture doesn't contain layers or dependencies."
+    }
 
     // region dependsOn
     @Test
@@ -503,6 +515,5 @@ class LayerDependenciesCoreTest {
         // then
         verify { layerValidatorManager.validateLayerDependencies(sut.layerDependencies) }
     }
-
     //endregion
 }

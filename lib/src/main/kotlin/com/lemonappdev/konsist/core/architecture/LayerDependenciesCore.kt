@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.architecture.LayerDependencies
 import com.lemonappdev.konsist.core.architecture.validator.LayerValidatorManager
 import com.lemonappdev.konsist.core.exception.KoInvalidAssertArchitectureConfigurationException
+import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
 internal class LayerDependenciesCore(
     private val layerValidatorManager: LayerValidatorManager = LayerValidatorManager(),
@@ -28,6 +29,12 @@ internal class LayerDependenciesCore(
                 .mapValues { (_, dependencies) ->
                     dependencies.mapNotNull { it.layer2 }.toSet()
                 }
+
+    fun validateEmptyLayersDependencies() {
+        if (layers.isEmpty()) {
+            throw KoPreconditionFailedException("Architecture doesn't contain layers or dependencies.")
+        }
+    }
 
     override fun Layer.dependsOn(
         layer: Layer,

@@ -69,7 +69,8 @@ private fun assertCommon(
     additionalMessage: String?,
     testName: String?,
 ) {
-    validateLayersDependencies(layerDependenciesCore)
+    layerDependenciesCore.validateEmptyLayersDependencies()
+    
     validateAllLayersAreValid(files, layerDependenciesCore)
 
     val failedDependsOnLayers = getFailedDependsOnLayers(files, layerDependenciesCore)
@@ -229,12 +230,6 @@ private fun Layer.getDependentOnFiles(otherLayer: Layer, files: List<KoFileDecla
         }
 
     return dependOnFiles
-}
-
-private fun validateLayersDependencies(layerDependencies: LayerDependenciesCore): Unit {
-    if (layerDependencies.layers.isEmpty()) {
-        throw KoPreconditionFailedException("Architecture doesn't contain layers or dependencies.")
-    }
 }
 
 /**
