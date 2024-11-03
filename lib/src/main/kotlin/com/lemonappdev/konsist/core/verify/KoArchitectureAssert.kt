@@ -6,6 +6,8 @@ import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.core.architecture.KoArchitectureFiles
 import com.lemonappdev.konsist.core.architecture.KoArchitectureScope
 import com.lemonappdev.konsist.core.architecture.LayerDependenciesCore
+import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeCreator
+import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeNode
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
@@ -123,37 +125,37 @@ private fun getFailedDependsOnMessage(dependsOnLayerDependencyFailures: List<Dep
 }
 
 private fun getFailedDoesNotDependsOnLayersMessage(doesNotDependsOnLayerDependencyFailures: List<DoesNotDependsOnLayerDependencyFailure>): String? {
-    if(doesNotDependsOnLayerDependencyFailures.isEmpty()) {
+    if (doesNotDependsOnLayerDependencyFailures.isEmpty()) {
         return null
     }
 
-    return doesNotDependsOnLayerDependencyFailures.joinToString("\n\n") {
-        var message = "'${it.layer1.name}' layer does not depends on '${it.doesNotDependOnLayer.name}' layer failed. " +
-                "Files that depend on '${it.doesNotDependOnLayer.name}' layer:\n"
+    return doesNotDependsOnLayerDependencyFailures.joinToString("\n\n") { failure ->
+        val headerNode = AsciiTreeNode(
+            string = "'${failure.layer1.name}' layer does not depends on '${failure.doesNotDependOnLayer.name}' layer failed. " +
+                    "Files that depend on '${failure.doesNotDependOnLayer.name}' layer:"
+        )
 
-        it.failedFiles.forEachIndexed { fileIndex, file ->
-            val filePrefix = getLogTreeItemPrefix(fileIndex, it.failedFiles.lastIndex)
-            message += "\t${filePrefix}file ${file.path}\n"
-
-            file.imports.forEachIndexed { importIndex, import ->
-                val importPrefix = getLogTreeItemPrefix(importIndex, file.imports.lastIndex)
-                val importSeparator = getLogTreeSubItemSeparator(fileIndex, it.failedFiles.lastIndex)
-                message += "\t${importSeparator}\t${importPrefix} import ${import.name}\n"
+        val fileNodes = failure.failedFiles.map { file ->
+            val importNodes = file.imports.map { import ->
+                AsciiTreeNode(
+                    string = "import ${import.name}",
+                    children = emptyList()
+                )
             }
+
+            AsciiTreeNode(
+                string = "file ${file.path}",
+                children = importNodes
+            )
         }
 
-        message.trimEnd()
+        val rootNode = AsciiTreeNode(
+            string = headerNode.string,
+            children = fileNodes
+        )
+
+        AsciiTreeCreator().invoke(rootNode)
     }
-}
-
-private fun getLogTreeItemPrefix(index: Int, lastIndex: Int): String = when (index) {
-    lastIndex -> "└──"
-    else -> "├──"
-}
-
-private fun getLogTreeSubItemSeparator(index: Int, lastIndex: Int): String = when (index) {
-    lastIndex -> ""
-    else -> "│"
 }
 
 private fun getFailedDependsOnLayers(

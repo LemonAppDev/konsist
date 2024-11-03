@@ -338,9 +338,9 @@ class Architecture2Test {
             .shouldBeEqualTo(
                 "'fails when dependency is set that presentation layer not depends on domain (lambda scope)' test has failed. \n" +
                         "'Presentation' layer does not depends on 'Domain' layer failed. Files that depend on 'Domain' layer:\n" +
-                        "\t└──file /Users/igorwojda/IdeaProjects/konsist/lib/src/apiTest/kotlin/com/lemonappdev/konsist/" +
-                        "architecture/assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt\n" +
-                        "\t\t└── import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain.DomainFirstClass"
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain.DomainFirstClass"
             )
     }
 
@@ -363,9 +363,9 @@ class Architecture2Test {
             .shouldBeEqualTo(
                 "'fails when dependency is set that presentation layer not depends on domain (lambda files)' test has failed. \n" +
                         "'Presentation' layer does not depends on 'Domain' layer failed. Files that depend on 'Domain' layer:\n" +
-                        "\t└──file /Users/igorwojda/IdeaProjects/konsist/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
                         "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt\n" +
-                        "\t\t└── import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain.DomainFirstClass"
+                        "    └── import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain.DomainFirstClass"
             )
     }
 
@@ -391,10 +391,9 @@ class Architecture2Test {
             .shouldBeEqualTo(
                 "'fails when dependency is set that presentation layer not depends on domain (parameter scope)' test has failed. \n" +
                         "'Presentation' layer does not depends on 'Domain' layer failed. Files that depend on 'Domain' layer:\n" +
-                        "\t└──file /Users/igorwojda/IdeaProjects/konsist/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture" +
-                        "/assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt\n" +
-                        "\t\t└── import com.lemonappdev.konsist.architecture.assertarchitecture." +
-                        "architecture2.project.domain.DomainFirstClass"
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain.DomainFirstClass"
             )
     }
 
@@ -424,8 +423,9 @@ class Architecture2Test {
             .shouldBeEqualTo(
                 "'fails when dependency is set that presentation layer not depends on domain (parameter files)' test has failed. \n" +
                         "'Presentation' layer does not depends on 'Domain' layer failed. Files that depend on 'Domain' layer:\n" +
-                        "\t└──file /Users/igorwojda/IdeaProjects/konsist/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt\n" +
-                        "\t\t└── import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain.DomainFirstClass",
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain.DomainFirstClass",
             )
     }
 
