@@ -40,7 +40,7 @@ internal class LayerDependenciesCore(
         require(layers.isNotEmpty()) { "Layers set is empty." }
         requireLayerCannotBeDependentOnItself(this, layers) { "Layer '$name' cannot be dependent on itself." }
 
-        val dependOnNothingDependency = getLayerWithDependency(this, LayerDependencyType.DEPEND_ON_NOTHING)
+        val dependOnNothingDependency = getLayerWithDependOnNothingDependency(this)
 
         if (dependOnNothingDependency != null) {
             throw KoInvalidAssertArchitectureConfigurationException(
@@ -79,7 +79,7 @@ internal class LayerDependenciesCore(
         require(layers.isNotEmpty()) { "Layers set is empty." }
         requireLayerCannotBeDependentOnItself(this, layers) { "Layer '$name' cannot be dependent on itself." }
 
-        val dependOnNothingDependency = getLayerWithDependency(this, LayerDependencyType.DEPEND_ON_NOTHING)
+        val dependOnNothingDependency = getLayerWithDependOnNothingDependency(this)
 
         if (dependOnNothingDependency != null) {
             throw KoInvalidAssertArchitectureConfigurationException(
@@ -100,7 +100,7 @@ internal class LayerDependenciesCore(
     }
 
     override fun Layer.dependsOnNothing() {
-        val dependOnLayerDependencies = getLayersWithDependency(this, LayerDependencyType.DEPEND_ON_LAYER)
+        val dependOnLayerDependencies = getLayersWithDependOnLayerDependency(this)
         val dependOnLayers =
             dependOnLayerDependencies
                 .mapNotNull { it.layer2 }
@@ -119,24 +119,22 @@ internal class LayerDependenciesCore(
         layerValidatorManager.validateLayerDependencies(layerDependencies)
     }
 
-    private fun getLayerWithDependency(
+    private fun getLayerWithDependOnNothingDependency(
         layer: Layer,
-        layerDependencyType: LayerDependencyType,
     ): LayerDependency? {
         val dependOnLayerDependency =
             layerDependencies.firstOrNull {
-                it.layer1 == layer && it.dependencyType == layerDependencyType
+                it.layer1 == layer && it.dependencyType == LayerDependencyType.DEPEND_ON_NOTHING
             }
         return dependOnLayerDependency
     }
 
-    private fun getLayersWithDependency(
+    private fun getLayersWithDependOnLayerDependency(
         layer: Layer,
-        layerDependencyType: LayerDependencyType,
     ): Set<LayerDependency> {
         val dependOnLayerDependency =
             layerDependencies.filter {
-                it.layer1 == layer && it.dependencyType == layerDependencyType
+                it.layer1 == layer && it.dependencyType == LayerDependencyType.DEPEND_ON_LAYER
             }
 
         return dependOnLayerDependency.toSet()
