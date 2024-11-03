@@ -240,7 +240,11 @@ class Architecture2Test {
             .message
             .shouldBeEqualTo(
                 "'fails when dependency is set that domain layer is depend on presentation layer (parameter scope)' test has failed. \n" +
-                        "Layer 'Domain' does not depends on 'Presentation' layer.",
+                        "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                        "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain.DomainFirstClass",
             )
     }
 
@@ -262,7 +266,11 @@ class Architecture2Test {
             .message
             .shouldBeEqualTo(
                 "'fails when dependency is set that domain layer is depend on presentation layer (parameter files)' test has failed. \n" +
-                        "Layer 'Domain' does not depends on 'Presentation' layer.",
+                        "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                        "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain.DomainFirstClass",
             )
     }
 
@@ -287,7 +295,11 @@ class Architecture2Test {
             .message
             .shouldBeEqualTo(
                 "'fails when dependency is set that domain layer is depend on presentation layer (lambda scope)' test has failed. \n" +
-                        "Layer 'Domain' does not depends on 'Presentation' layer.",
+                        "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                        "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain.DomainFirstClass",
             )
     }
 
@@ -314,7 +326,11 @@ class Architecture2Test {
             .message
             .shouldBeEqualTo(
                 "'fails when dependency is set that domain layer is depend on presentation layer (lambda files)' test has failed. \n" +
-                        "Layer 'Domain' does not depends on 'Presentation' layer."
+                        "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                        "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain.DomainFirstClass"
             )
     }
 

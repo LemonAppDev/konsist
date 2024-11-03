@@ -32,6 +32,13 @@ internal class LayerDependenciesCore(
                     dependencies.mapNotNull { it.layer2 }.toSet()
                 }
 
+    internal val dependsOnNothingDependencies: Set<Layer>
+        get() =
+            layerDependencies
+                .filter { it.dependencyType == LayerDependencyType.DEPEND_ON_NOTHING }
+                .map { it.layer1 }
+                .toSet()
+
     fun checkEmptyLayersDependencies() {
         if (layers.isEmpty()) {
             throw KoPreconditionFailedException("Architecture doesn't contain layers or dependencies.")

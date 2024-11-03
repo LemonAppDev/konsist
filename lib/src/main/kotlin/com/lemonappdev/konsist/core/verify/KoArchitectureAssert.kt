@@ -13,6 +13,7 @@ import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.util.LocationUtil
 import com.lemonappdev.konsist.core.verify.failure.DependsOnLayerDependencyFailure
+import com.lemonappdev.konsist.core.verify.failure.DependsOnNothingDependencyFailure
 import com.lemonappdev.konsist.core.verify.failure.DoesNotDependsOnLayerDependencyFailure
 
 @Suppress("detekt.ThrowsCount")
@@ -73,15 +74,15 @@ private fun assertCommon(
 
     val failedDependsOnLayers = getFailedDependsOnLayers(files, layerDependenciesCore)
     val failedDoesNotDependsOnLayers = getFailedDoesNotDependsOnLayers(files, layerDependenciesCore)
+    val failedDependsOnNothing = getFailedDependsOnNothing(files, layerDependenciesCore)
 
-    // DependsOnNothing
-
-    if(failedDependsOnLayers.isNotEmpty() || failedDoesNotDependsOnLayers.isNotEmpty()) {
+    if(failedDependsOnLayers.isNotEmpty() || failedDoesNotDependsOnLayers.isNotEmpty() || failedDependsOnNothing.isNotEmpty()) {
         val exceptionMessage = getExceptionMessage(
             additionalMessage,
             testName,
             failedDependsOnLayers,
-            failedDoesNotDependsOnLayers
+            failedDoesNotDependsOnLayers,
+            failedDependsOnNothing
         )
 
         throw KoAssertionFailedException(exceptionMessage)
@@ -92,25 +93,63 @@ private fun getExceptionMessage(
     additionalMessage: String?,
     testName: String?,
     failedDependsOnLayers: List<DependsOnLayerDependencyFailure>,
-    doesNotDependsOnLayerDependencyFailures: List<DoesNotDependsOnLayerDependencyFailure>
+    doesNotDependsOnLayerDependencyFailures: List<DoesNotDependsOnLayerDependencyFailure>,
+    failedDependsOnNothing: List<DependsOnNothingDependencyFailure>
 ): String {
     val failedDependsOnMessage = getFailedDependsOnMessage(failedDependsOnLayers)
     val failedDoesNotDependsOnLayersMessage = getFailedDoesNotDependsOnLayersMessage(doesNotDependsOnLayerDependencyFailures)
+    val failedDependsOnNothingMessage = getFailedDependsOnNothingMessage(failedDependsOnNothing)
 
-    check(failedDependsOnMessage != null || failedDoesNotDependsOnLayersMessage != null) {
-        "Both failedDependsOnMessage and failedDoesNotDependsOnLayersMessage cannot be null"
+    check(failedDependsOnMessage != null ||
+            failedDoesNotDependsOnLayersMessage != null ||
+            failedDependsOnNothingMessage != null) {
+        "All failure messages cannot be null"
     }
 
-    val errorMessage = when {
-        failedDependsOnMessage != null && failedDoesNotDependsOnLayersMessage != null ->
-            "$failedDependsOnMessage\n$failedDoesNotDependsOnLayersMessage"
-        failedDependsOnMessage != null -> failedDependsOnMessage
-        else -> failedDoesNotDependsOnLayersMessage
-    }
+    val messages = listOfNotNull(
+        failedDependsOnMessage,
+        failedDoesNotDependsOnLayersMessage,
+        failedDependsOnNothingMessage
+    )
 
+    val errorMessage = messages.joinToString("\n")
     val customMessage = if (additionalMessage != null) "\n$additionalMessage" else ""
     val localTestName = testName ?: getTestMethodNameFromNinthIndex()
+
     return "'$localTestName' test has failed. ${customMessage}\n$errorMessage"
+}
+
+private fun getFailedDependsOnNothingMessage(failedDependsOnNothing: List<DependsOnNothingDependencyFailure>): String? {
+    if (failedDependsOnNothing.isEmpty()) {
+        return null
+    }
+
+    return failedDependsOnNothing.joinToString("\n\n") { failure ->
+        val headerNode = AsciiTreeNode(
+            string = "'${failure.layer.name}' layer should not depend on anything but has dependencies in files:"
+        )
+
+        val fileNodes = failure.failedFiles.map { file ->
+            val importNodes = file.imports.map { import ->
+                AsciiTreeNode(
+                    string = "import ${import.name}",
+                    children = emptyList()
+                )
+            }
+
+            AsciiTreeNode(
+                string = "file ${file.path}",
+                children = importNodes
+            )
+        }
+
+        val rootNode = AsciiTreeNode(
+            string = headerNode.string,
+            children = fileNodes
+        )
+
+        AsciiTreeCreator().invoke(rootNode)
+    }
 }
 
 private fun getFailedDependsOnMessage(dependsOnLayerDependencyFailures: List<DependsOnLayerDependencyFailure>): String? {
@@ -201,6 +240,28 @@ private fun getFailedDoesNotDependsOnLayers(
     return failedLayerDependencies
 }
 
+private fun getFailedDependsOnNothing(
+    files: List<KoFileDeclaration>,
+    layerDependencies: LayerDependenciesCore,
+): List<DependsOnNothingDependencyFailure> {
+    val failedLayerDependencies = mutableListOf<DependsOnNothingDependencyFailure>()
+
+    layerDependencies
+        .dependsOnNothingDependencies
+        .forEach { layer ->
+            val dependentFiles = layer.getDependentOnAnythingFiles(files)
+
+            if (dependentFiles.isNotEmpty()) {
+                failedLayerDependencies += DependsOnNothingDependencyFailure(
+                    layer,
+                    dependentFiles
+                )
+            }
+        }
+
+    return failedLayerDependencies
+}
+
 private fun Layer.isDependentOn(otherLayer: Layer, files: List<KoFileDeclaration>): Boolean {
     val layerFiles = files.withPackage(rootPackage)
 
@@ -228,4 +289,21 @@ private fun Layer.getDependentOnFiles(otherLayer: Layer, files: List<KoFileDecla
         }
 
     return dependOnFiles
+}
+
+private fun Layer.getDependentOnAnythingFiles(files: List<KoFileDeclaration>): List<KoFileDeclaration> {
+    val layerFiles = files.withPackage(rootPackage)
+
+    return layerFiles
+        .mapNotNull { koFile ->
+            val imports = koFile
+                .imports
+                .filterNot { LocationUtil.resideInLocation(rootPackage, it.name)}
+
+            if (imports.isNotEmpty()) {
+                koFile
+            } else {
+                null
+            }
+        }
 }

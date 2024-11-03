@@ -156,7 +156,10 @@ class Architecture4Test {
             .shouldBeEqualTo(
                 "'fails when bad dependency is set (lambda scope)' test has failed. \n" +
                         "Layer 'Presentation' does not depends on 'Data' layer.\n" +
-                        "Layer 'Domain' does not depends on 'Data' layer."
+                        "Layer 'Domain' does not depends on 'Data' layer.\n" +
+                        "'Data' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture4/project/data/sample/DataThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.domain.DomainFirstClass"
             )
     }
 
@@ -179,7 +182,11 @@ class Architecture4Test {
             .message
             .shouldBeEqualTo("'fails when bad dependency is set (lambda files)' test has failed. \n" +
                     "Layer 'Presentation' does not depends on 'Data' layer.\n" +
-                    "Layer 'Domain' does not depends on 'Data' layer."
+                    "Layer 'Domain' does not depends on 'Data' layer.\n" +
+                    "'Data' layer should not depend on anything but has dependencies in files:\n" +
+                    "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                    "assertarchitecture/architecture4/project/data/sample/DataThirdClass.kt\n" +
+                    "    └── import com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.domain.DomainFirstClass"
             )
     }
 
@@ -205,7 +212,11 @@ class Architecture4Test {
             .shouldBeEqualTo(
                 "'fails when bad dependency is set (parameter scope)' test has failed. \n" +
                         "Layer 'Presentation' does not depends on 'Data' layer.\n" +
-                        "Layer 'Domain' does not depends on 'Data' layer."
+                        "Layer 'Domain' does not depends on 'Data' layer.\n" +
+                        "'Data' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "assertarchitecture/architecture4/project/data/sample/DataThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.domain.DomainFirstClass"
             )
     }
 
@@ -233,7 +244,11 @@ class Architecture4Test {
             .shouldBeEqualTo(
                 "'fails when bad dependency is set (parameter files)' test has failed. \n" +
                         "Layer 'Presentation' does not depends on 'Data' layer.\n" +
-                        "Layer 'Domain' does not depends on 'Data' layer."
+                        "Layer 'Domain' does not depends on 'Data' layer.\n" +
+                        "'Data' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "assertarchitecture/architecture4/project/data/sample/DataThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.domain.DomainFirstClass"
             )
     }
 

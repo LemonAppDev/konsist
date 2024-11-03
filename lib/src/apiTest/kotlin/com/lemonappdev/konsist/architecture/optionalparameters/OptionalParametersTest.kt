@@ -46,7 +46,11 @@ class OptionalParametersTest {
             .message
             .shouldBeEqualTo(
                 "'error message when additionalMessage and testName parameters are not provided (scope)' test has failed. \n" +
-                        "Layer 'Domain' does not depends on 'Presentation' layer."
+                        "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                        "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass"
             )
     }
 
@@ -67,7 +71,11 @@ class OptionalParametersTest {
             .shouldBeEqualTo(
                 "'error message when additionalMessage is provided and testName is not provided (scope)' test has failed. \n" +
                         "SOME ADDITIONAL MESSAGE\n" +
-                        "Layer 'Domain' does not depends on 'Presentation' layer."
+                        "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                        "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass"
             )
     }
 
@@ -87,7 +95,11 @@ class OptionalParametersTest {
             .message
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
-                        "Layer 'Domain' does not depends on 'Presentation' layer.",
+                        "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                        "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass"
             )
     }
 
@@ -111,7 +123,11 @@ class OptionalParametersTest {
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
                         "SOME ADDITIONAL MESSAGE\n" +
-                        "Layer 'Domain' does not depends on 'Presentation' layer.",
+                        "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                        "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass"
             )
     }
 
@@ -133,7 +149,11 @@ class OptionalParametersTest {
             .message
             .shouldBeEqualTo(
                 "'error message when additionalMessage and testName parameters are not provided (files)' test has failed. \n" +
-                        "Layer 'Domain' does not depends on 'Presentation' layer.",
+                        "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                        "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass"
             )
     }
 
@@ -156,7 +176,11 @@ class OptionalParametersTest {
             .shouldBeEqualTo(
                 "'error message when additionalMessage is provided and testName is not provided (files)' test has failed. \n" +
                         "SOME ADDITIONAL MESSAGE\n" +
-                        "Layer 'Domain' does not depends on 'Presentation' layer.",
+                        "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                        "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass"
             )
     }
 
@@ -178,7 +202,11 @@ class OptionalParametersTest {
             .message
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
-                        "Layer 'Domain' does not depends on 'Presentation' layer.",
+                        "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                        "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass"
             )
     }
 
@@ -204,7 +232,11 @@ class OptionalParametersTest {
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
                         "SOME ADDITIONAL MESSAGE\n" +
-                        "Layer 'Domain' does not depends on 'Presentation' layer.",
+                        "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                        "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass"
             )
     }
 
@@ -226,8 +258,13 @@ class OptionalParametersTest {
         result
             .message
             .shouldBeEqualTo(
-                "'error message when additionalMessage and testName parameters are not provided and architecture is passed as parameter (scope)' test has failed. \n" +
-                        "Layer 'Domain' does not depends on 'Presentation' layer.",
+                "'error message when additionalMessage and testName parameters are not provided and architecture is passed " +
+                        "as parameter (scope)' test has failed. \n" +
+                        "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                        "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass"
             )
     }
 
@@ -249,9 +286,14 @@ class OptionalParametersTest {
         result
             .message
             .shouldBeEqualTo(
-                "'error message when additionalMessage is provided, testName is not provided and architecture is passed as parameter (scope)' test has failed. \n" +
+                "'error message when additionalMessage is provided, testName is not provided and architecture is passed as " +
+                        "parameter (scope)' test has failed. \n" +
                         "SOME ADDITIONAL MESSAGE\n" +
-                        "Layer 'Domain' does not depends on 'Presentation' layer.",
+                        "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                        "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass"
             )
     }
 
@@ -274,7 +316,11 @@ class OptionalParametersTest {
             .message
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
-                        "Layer 'Domain' does not depends on 'Presentation' layer.",
+                        "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                        "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass"
             )
     }
 
@@ -302,7 +348,11 @@ class OptionalParametersTest {
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
                         "SOME ADDITIONAL MESSAGE\n" +
-                        "Layer 'Domain' does not depends on 'Presentation' layer.",
+                        "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                        "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass"
             )
     }
 
@@ -326,8 +376,13 @@ class OptionalParametersTest {
         result
             .message
             .shouldBeEqualTo(
-                "'error message when additionalMessage and testName parameters are not provided and architecture is passed as parameter (files)' test has failed. \n" +
-                        "Layer 'Domain' does not depends on 'Presentation' layer.",
+                "'error message when additionalMessage and testName parameters are not provided and architecture is passed " +
+                        "as parameter (files)' test has failed. \n" +
+                        "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                        "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass"
             )
     }
 
@@ -351,9 +406,14 @@ class OptionalParametersTest {
         result
             .message
             .shouldBeEqualTo(
-                "'error message when additionalMessage is provided, testName is not provided and architecture is passed as parameter (files)' test has failed. \n" +
+                "'error message when additionalMessage is provided, testName is not provided and architecture is passed " +
+                        "as parameter (files)' test has failed. \n" +
                         "SOME ADDITIONAL MESSAGE\n" +
-                        "Layer 'Domain' does not depends on 'Presentation' layer.",
+                        "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                        "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters/" +
+                        "project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass"
             )
     }
 
@@ -378,7 +438,11 @@ class OptionalParametersTest {
             .message
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
-                        "Layer 'Domain' does not depends on 'Presentation' layer.",
+                        "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                        "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass"
             )
     }
 
@@ -408,7 +472,11 @@ class OptionalParametersTest {
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
                         "SOME ADDITIONAL MESSAGE\n" +
-                        "Layer 'Domain' does not depends on 'Presentation' layer.",
+                        "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                        "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                        "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
+                        "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass"
             )
     }
 }
