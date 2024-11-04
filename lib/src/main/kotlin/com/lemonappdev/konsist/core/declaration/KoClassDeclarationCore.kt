@@ -12,7 +12,6 @@ import com.lemonappdev.konsist.core.provider.KoParentClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoPrimaryConstructorProviderCore
 import com.lemonappdev.konsist.core.provider.KoSecondaryConstructorsProviderCore
 import com.lemonappdev.konsist.core.provider.KoTestClassProviderCore
-import com.lemonappdev.konsist.core.provider.KoTypeParameterProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoAbstractModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoAnnotationModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoDataModifierProviderCore
@@ -50,8 +49,7 @@ internal class KoClassDeclarationCore private constructor(
     KoPrimaryConstructorProviderCore,
     KoSecondaryConstructorsProviderCore,
     KoTestClassProviderCore,
-    KoValueModifierProviderCore,
-    KoTypeParameterProviderCore {
+    KoValueModifierProviderCore {
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktClass }
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktClass }
