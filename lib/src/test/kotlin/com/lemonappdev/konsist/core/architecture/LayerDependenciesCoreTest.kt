@@ -813,7 +813,7 @@ class LayerDependenciesCoreTest {
 
         // then
         sut.layers shouldContain layer1
-        sut.layers shouldContain layer2
+        sut.layers shouldContain layer2 //ssdds
         sut.layerDependencies shouldContain LayerDependency(layer1, LayerDependencyType.NONE, null)
         sut.layerDependencies shouldContain LayerDependency(layer2, LayerDependencyType.NONE, null)
     }
