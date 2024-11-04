@@ -3,10 +3,12 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
+import com.lemonappdev.konsist.api.provider.KoIsGenericProvider
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationCastProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionTypeDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsFunctionTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsGenericProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsGenericTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
@@ -46,6 +48,7 @@ data class KoTypeArgumentDeclarationCore(
     KoPathProviderCore,
     KoDeclarationCastProviderCore,
     KoIsGenericTypeProviderCore,
+    KoIsGenericProviderCore,
     KoIsFunctionTypeProviderCore,
     KoFunctionTypeDeclarationProviderCore {
     override val ktElement: KtElement by lazy { ktTypeProjection }
