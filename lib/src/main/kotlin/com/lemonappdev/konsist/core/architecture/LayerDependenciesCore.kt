@@ -17,7 +17,7 @@ internal class LayerDependenciesCore(
     internal val dependsOnDependencies: Map<Layer, Set<Layer>>
         get() =
             layerDependencies
-                .filter { it.dependencyType == LayerDependencyType.DEPEND_ON_LAYER }
+                .filter { it.dependencyType == LayerDependencyType.DEPENDS_ON_LAYER }
                 .groupBy { it.layer1 }
                 .mapValues { (_, dependencies) ->
                     dependencies.mapNotNull { it.layer2 }.toSet()
@@ -87,10 +87,18 @@ internal class LayerDependenciesCore(
         }
 
         layers.forEach {
-            addLayerDependency(this, LayerDependencyType.DEPEND_ON_LAYER, it)
+            addLayerDependency(this, LayerDependencyType.DEPENDS_ON_LAYER, it)
         }
 
         layerValidatorManager.validateLayerDependencies(layerDependencies)
+    }
+
+    override fun Collection<Layer>.dependsOn(layer: Layer) {
+        forEach { it.dependsOn(layer) }
+    }
+
+    override fun Collection<Layer>.dependsOn(layers: Set<Layer>) {
+        forEach { it.dependsOn(layers) }
     }
 
     private fun getLayersMessage(layers: Set<Layer>) =
@@ -131,6 +139,14 @@ internal class LayerDependenciesCore(
         layerValidatorManager.validateLayerDependencies(layerDependencies)
     }
 
+    override fun Collection<Layer>.doesNotDependOn(layer: Layer) {
+        forEach { it.doesNotDependOn(layer) }
+    }
+
+    override fun Collection<Layer>.doesNotDependOn(layers: Set<Layer>) {
+        forEach { it.doesNotDependOn(layers) }
+    }
+
     override fun Layer.dependsOnNothing() {
         val dependOnLayerDependencies = getLayersWithDependOnLayerDependency(this)
         val dependOnLayers =
@@ -151,9 +167,17 @@ internal class LayerDependenciesCore(
         layerValidatorManager.validateLayerDependencies(layerDependencies)
     }
 
+    override fun Collection<Layer>.dependsOnNothing() {
+        forEach { it.dependsOnNothing() }
+    }
+
     override fun Layer.include() {
         layers.add(this)
         layerDependencies.add(LayerDependency(this, LayerDependencyType.NONE, null))
+    }
+
+    override fun Collection<Layer>.include() {
+        forEach { it.include() }
     }
 
     private fun getLayerWithDependOnNothingDependency(layer: Layer): LayerDependency? {
@@ -167,7 +191,7 @@ internal class LayerDependenciesCore(
     private fun getLayersWithDependOnLayerDependency(layer: Layer): Set<LayerDependency> {
         val dependOnLayerDependency =
             layerDependencies.filter {
-                it.layer1 == layer && it.dependencyType == LayerDependencyType.DEPEND_ON_LAYER
+                it.layer1 == layer && it.dependencyType == LayerDependencyType.DEPENDS_ON_LAYER
             }
 
         return dependOnLayerDependency.toSet()

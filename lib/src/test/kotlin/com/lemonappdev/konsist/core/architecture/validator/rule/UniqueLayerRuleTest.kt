@@ -46,7 +46,7 @@ class UniqueLayerRuleTest {
             setOf(
                 LayerDependency(
                     layer1 = layer1,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                     layer2 = layer2,
                 ),
             )
@@ -88,7 +88,7 @@ class UniqueLayerRuleTest {
             setOf(
                 LayerDependency(
                     layer1 = layer1,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                     layer2 = layer2,
                 ),
             )
@@ -127,7 +127,7 @@ class UniqueLayerRuleTest {
             setOf(
                 LayerDependency(
                     layer1 = layer1,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                     layer2 = layer2,
                 ),
             )
@@ -166,7 +166,7 @@ class UniqueLayerRuleTest {
             setOf(
                 LayerDependency(
                     layer1 = layer1,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                     layer2 = layer2,
                 ),
             )
@@ -221,7 +221,7 @@ class UniqueLayerRuleTest {
             setOf(
                 LayerDependency(
                     layer1 = layer1,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                     layer2 = layer2,
                 ),
                 LayerDependency(
@@ -250,12 +250,12 @@ class UniqueLayerRuleTest {
             setOf(
                 LayerDependency(
                     layer1 = layer1,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                     layer2 = layer2,
                 ),
                 LayerDependency(
                     layer1 = layer1,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                     layer2 = layer3,
                 ),
                 LayerDependency(
@@ -281,7 +281,7 @@ class UniqueLayerRuleTest {
             setOf(
                 LayerDependency(
                     layer1 = layer1,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                     layer2 = layer1,
                 ),
             )
@@ -306,12 +306,12 @@ class UniqueLayerRuleTest {
             setOf(
                 LayerDependency(
                     layer1 = layer1,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                     layer2 = layer2,
                 ),
                 LayerDependency(
                     layer1 = layer2,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                     layer2 = layer3,
                 ),
                 LayerDependency(
@@ -321,7 +321,7 @@ class UniqueLayerRuleTest {
                 ),
                 LayerDependency(
                     layer1 = layer4,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                     layer2 = layer1,
                 ),
             )
@@ -345,7 +345,7 @@ class UniqueLayerRuleTest {
             setOf(
                 LayerDependency(
                     layer1 = layer1,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                     layer2 = layer2,
                 ),
                 LayerDependency(
@@ -377,12 +377,12 @@ class UniqueLayerRuleTest {
             setOf(
                 LayerDependency(
                     layer1 = layer1,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                     layer2 = layer2,
                 ),
                 LayerDependency(
                     layer1 = layer2,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                     layer2 = layer1,
                 ),
             )

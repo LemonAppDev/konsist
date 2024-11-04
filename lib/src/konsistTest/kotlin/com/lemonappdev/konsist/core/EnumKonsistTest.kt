@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 
 class EnumKonsistTest {
     @Test
-    fun `enums consts are defined interface alphabetical order `() {
+    fun `enums consts are defined interface alphabetical order`() {
         Konsist
             .scopeFromProduction()
             .classes()

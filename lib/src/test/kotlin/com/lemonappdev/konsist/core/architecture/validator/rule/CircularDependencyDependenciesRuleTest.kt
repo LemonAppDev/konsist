@@ -23,12 +23,12 @@ class CircularDependencyDependenciesRuleTest {
                 LayerDependency(
                     layer1 = layer1,
                     layer2 = layer2,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                 ),
                 LayerDependency(
                     layer1 = layer2,
                     layer2 = layer3,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                 ),
             )
 
@@ -50,12 +50,12 @@ class CircularDependencyDependenciesRuleTest {
                 LayerDependency(
                     layer1 = layer1,
                     layer2 = layer2,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                 ),
                 LayerDependency(
                     layer1 = layer2,
                     layer2 = layer1,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                 ),
             )
 
@@ -102,22 +102,22 @@ class CircularDependencyDependenciesRuleTest {
                 LayerDependency(
                     layer1 = layer1,
                     layer2 = layer2,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                 ),
                 LayerDependency(
                     layer1 = layer2,
                     layer2 = layer3,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                 ),
                 LayerDependency(
                     layer1 = layer3,
                     layer2 = layer4,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                 ),
                 LayerDependency(
                     layer1 = layer4,
                     layer2 = layer1,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                 ),
             )
 

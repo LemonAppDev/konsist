@@ -8,7 +8,7 @@ internal class DependOnLayerThenDependentOnNothingRule : LayerDependenciesRule {
     override fun validate(layerDependencies: Set<LayerDependency>) {
         val layersWithDependencies =
             layerDependencies
-                .filter { it.dependencyType == LayerDependencyType.DEPEND_ON_LAYER }
+                .filter { it.dependencyType == LayerDependencyType.DEPENDS_ON_LAYER }
                 .map { it.layer1 }
 
         val conflictingDependencies =

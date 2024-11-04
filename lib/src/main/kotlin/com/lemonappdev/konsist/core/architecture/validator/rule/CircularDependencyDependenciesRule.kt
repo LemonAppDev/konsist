@@ -26,7 +26,7 @@ internal class CircularDependencyDependenciesRule : LayerDependenciesRule {
 
     private fun buildDependencyGraph(dependencies: Set<LayerDependency>): Map<Layer, Set<Layer>> =
         dependencies
-            .filter { it.dependencyType == LayerDependencyType.DEPEND_ON_LAYER && it.layer2 != null }
+            .filter { it.dependencyType == LayerDependencyType.DEPENDS_ON_LAYER && it.layer2 != null }
             .groupBy { it.layer1 }
             .mapValues { (_, deps) -> deps.mapNotNull { it.layer2 }.toSet() }
 
