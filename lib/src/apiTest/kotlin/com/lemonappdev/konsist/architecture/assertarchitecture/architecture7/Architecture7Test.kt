@@ -38,9 +38,9 @@ class Architecture7Test {
             "com.lemonappdev.konsist.architecture.assertarchitecture.architecture7.project.port..",
         )
 
-    // region passes when good dependency is set
+    // region passes when
     @Test
-    fun `passes when good dependency is set (lambda scope)`() {
+    fun `passes when  (lambda scope)`() {
         // then
         scope
             .assertArchitecture {
@@ -53,7 +53,7 @@ class Architecture7Test {
     }
 
     @Test
-    fun `passes when good dependency is set (lambda files)`() {
+    fun `passes when  (lambda files)`() {
         // then
         scope
             .files
@@ -67,7 +67,7 @@ class Architecture7Test {
     }
 
     @Test
-    fun `passes when good dependency is set (parameter scope)`() {
+    fun `passes when  (parameter scope)`() {
         // then
         val layerDependencies =
             architecture {
@@ -82,7 +82,7 @@ class Architecture7Test {
     }
 
     @Test
-    fun `passes when good dependency is set (parameter files)`() {
+    fun `passes when  (parameter files)`() {
         // then
         val layerDependencies =
             architecture {
@@ -101,7 +101,7 @@ class Architecture7Test {
 
     // region fails when bad dependency is set
     @Test
-    fun `passes when good dependency is set using doesNotDependsOn (lambda scope)`() {
+    fun `passes when  using doesNotDependsOn (lambda scope)`() {
         // then
         scope
             .assertArchitecture {
@@ -110,7 +110,7 @@ class Architecture7Test {
     }
 
     @Test
-    fun `passes when good dependency is set using doesNotDependsOn (lambda files)`() {
+    fun `passes when  using doesNotDependsOn (lambda files)`() {
         // then
         scope
             .files
@@ -120,7 +120,7 @@ class Architecture7Test {
     }
 
     @Test
-    fun `passes when good dependency is set using doesNotDependsOn (parameter scope)`() {
+    fun `passes when  using doesNotDependsOn (parameter scope)`() {
         // then
         val layerDependencies =
             architecture {
@@ -131,7 +131,7 @@ class Architecture7Test {
     }
 
     @Test
-    fun `passes when good dependency is set using doesNotDependsOn (parameter files)`() {
+    fun `passes when  using doesNotDependsOn (parameter files)`() {
         // then
         val layerDependencies =
             architecture {

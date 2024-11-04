@@ -265,7 +265,7 @@ private fun getFailedDependsOnNothing(
     layerDependencies
         .dependsOnNothingDependencies
         .forEach { layer ->
-            val dependentFiles = layer.getDependentOnAnythingFiles(files)
+            val dependentFiles = layer.getDependentOnAnyLayerFiles(files, layerDependencies)
 
             if (dependentFiles.isNotEmpty()) {
                 failedLayerDependencies +=
@@ -316,7 +316,10 @@ private fun Layer.getDependentOnFiles(
     return dependOnFiles
 }
 
-private fun Layer.getDependentOnAnythingFiles(files: List<KoFileDeclaration>): List<KoFileDeclaration> {
+private fun Layer.getDependentOnAnyLayerFiles(
+    files: List<KoFileDeclaration>,
+    layerDependencies: LayerDependenciesCore,
+): List<KoFileDeclaration> {
     val layerFiles = files.withPackage(rootPackage)
 
     return layerFiles
@@ -324,7 +327,14 @@ private fun Layer.getDependentOnAnythingFiles(files: List<KoFileDeclaration>): L
             val imports =
                 koFile
                     .imports
+                    // Import is not part of layer
                     .filterNot { LocationUtil.resideInLocation(rootPackage, it.name) }
+                    // Import is part of other layer
+                    .filter {
+                        layerDependencies.layers.any { layer ->
+                            LocationUtil.resideInLocation(layer.rootPackage, it.name)
+                        }
+                    }
 
             if (imports.isNotEmpty()) {
                 koFile

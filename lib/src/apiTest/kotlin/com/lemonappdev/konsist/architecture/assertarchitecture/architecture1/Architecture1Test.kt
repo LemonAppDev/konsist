@@ -24,9 +24,9 @@ class Architecture1Test {
             "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.presentation..",
         )
 
-    // region passes when dependency is set that layers are independent
+    // region passes when layers are independent
     @Test
-    fun `passes when dependency is set that layers are independent (lambda scope)`() {
+    fun `passes when layers are independent (lambda scope)`() {
         // then
         scope
             .assertArchitecture {
@@ -36,7 +36,7 @@ class Architecture1Test {
     }
 
     @Test
-    fun `passes when dependency is set that layers are independent (lambda files)`() {
+    fun `passes when layers are independent (lambda files)`() {
         // then
         scope
             .files
@@ -47,7 +47,7 @@ class Architecture1Test {
     }
 
     @Test
-    fun `passes when dependency is set that layers are independent (parameter scope)`() {
+    fun `passes when layers are independent (parameter scope)`() {
         // given
         val layerDependencies =
             architecture {
@@ -60,7 +60,7 @@ class Architecture1Test {
     }
 
     @Test
-    fun `passes when dependency is set that layers are independent (parameter files)`() {
+    fun `passes when layers are independent (parameter files)`() {
         // given
         val layerDependencies =
             architecture {
@@ -76,10 +76,10 @@ class Architecture1Test {
 
     // endregion
 
-    //region passes when dependency is set that Domain not depends on Presentation
+    //region passes when Domain not depends on Presentation
 
     @Test
-    fun `passes when dependency is set that Domain not depends on Presentation (lambda scope)`() {
+    fun `passes when domain not depends on presentation (lambda scope)`() {
         // then
         scope
             .assertArchitecture {
@@ -89,7 +89,7 @@ class Architecture1Test {
     }
 
     @Test
-    fun `passes when dependency is set that Domain not depends on Presentation (lambda files)`() {
+    fun `passes when Domain not depends on presentation (lambda files)`() {
         // then
         scope
             .files
@@ -100,7 +100,7 @@ class Architecture1Test {
     }
 
     @Test
-    fun `passes when dependency is set that Domain not depends on Presentation (parameter scope)`() {
+    fun `passes when domain not depends on presentation (parameter scope)`() {
         // given
         val layerDependencies =
             architecture {
@@ -113,7 +113,7 @@ class Architecture1Test {
     }
 
     @Test
-    fun `passes when dependency is set that Domain not depends on Presentation (parameter files)`() {
+    fun `passes when domain not depends on presentation (parameter files)`() {
         // given
         val layerDependencies =
             architecture {
@@ -126,6 +126,5 @@ class Architecture1Test {
             .files
             .assertArchitecture(layerDependencies)
     }
-
     // endregion
 }

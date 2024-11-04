@@ -36,9 +36,9 @@ class Architecture4Test {
             "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.data..",
         )
 
-    // region passes when dependency is set that presentation and data layers are depend on domain layer
+    // region passes when presentation and data layers are depend on domain layer
     @Test
-    fun `passes when dependency is set that presentation and data layers are depend on domain layer (lambda scope)`() {
+    fun `passes when presentation and data layers are depend on domain layer (lambda scope)`() {
         // then
         scope
             .assertArchitecture {
@@ -49,7 +49,7 @@ class Architecture4Test {
     }
 
     @Test
-    fun `passes when dependency is set that presentation and data layers are depend on domain layer (lambda files)`() {
+    fun `passes when presentation and data layers are depend on domain layer (lambda files)`() {
         // then
         scope
             .files
@@ -61,7 +61,7 @@ class Architecture4Test {
     }
 
     @Test
-    fun `passes when dependency is set that presentation and data layers are depend on domain layer (parameter scope)`() {
+    fun `passes when presentation and data layers are depend on domain layer (parameter scope)`() {
         // given
         val layerDependencies =
             architecture {
@@ -75,7 +75,7 @@ class Architecture4Test {
     }
 
     @Test
-    fun `passes when dependency is set that presentation and data layers are depend on domain layer (parameter files)`() {
+    fun `passes when presentation and data layers are depend on domain layer (parameter files)`() {
         // given
         val layerDependencies =
             architecture {
@@ -138,7 +138,7 @@ class Architecture4Test {
 
     // region fails when bad dependency is set
     @Test
-    fun `fails when bad dependency is set (lambda scope)`() {
+    fun `fails when (lambda scope)`() {
         // when
         val result =
             shouldThrow<KoAssertionFailedException> {
@@ -154,7 +154,7 @@ class Architecture4Test {
         result
             .message
             .shouldBeEqualTo(
-                "'fails when bad dependency is set (lambda scope)' test has failed. \n" +
+                "'fails when (lambda scope)' test has failed. \n" +
                     "Layer 'Presentation' does not depends on 'Data' layer.\n" +
                     "Layer 'Domain' does not depends on 'Data' layer.\n" +
                     "'Data' layer should not depend on anything but has dependencies in files:\n" +
@@ -166,7 +166,7 @@ class Architecture4Test {
     }
 
     @Test
-    fun `fails when bad dependency is set (lambda files)`() {
+    fun `fails when (lambda files)`() {
         // when
         val result =
             shouldThrow<KoAssertionFailedException> {
@@ -183,7 +183,7 @@ class Architecture4Test {
         result
             .message
             .shouldBeEqualTo(
-                "'fails when bad dependency is set (lambda files)' test has failed. \n" +
+                "'fails when (lambda files)' test has failed. \n" +
                     "Layer 'Presentation' does not depends on 'Data' layer.\n" +
                     "Layer 'Domain' does not depends on 'Data' layer.\n" +
                     "'Data' layer should not depend on anything but has dependencies in files:\n" +
@@ -195,7 +195,7 @@ class Architecture4Test {
     }
 
     @Test
-    fun `fails when bad dependency is set (parameter scope)`() {
+    fun `fails when (parameter scope)`() {
         // given
         val layerDependencies =
             architecture {
@@ -214,7 +214,7 @@ class Architecture4Test {
         result
             .message
             .shouldBeEqualTo(
-                "'fails when bad dependency is set (parameter scope)' test has failed. \n" +
+                "'fails when (parameter scope)' test has failed. \n" +
                     "Layer 'Presentation' does not depends on 'Data' layer.\n" +
                     "Layer 'Domain' does not depends on 'Data' layer.\n" +
                     "'Data' layer should not depend on anything but has dependencies in files:\n" +
@@ -226,7 +226,7 @@ class Architecture4Test {
     }
 
     @Test
-    fun `fails when bad dependency is set (parameter files)`() {
+    fun `fails when (parameter files)`() {
         // given
         val layerDependencies =
             architecture {
@@ -247,7 +247,7 @@ class Architecture4Test {
         result
             .message
             .shouldBeEqualTo(
-                "'fails when bad dependency is set (parameter files)' test has failed. \n" +
+                "'fails when (parameter files)' test has failed. \n" +
                     "Layer 'Presentation' does not depends on 'Data' layer.\n" +
                     "Layer 'Domain' does not depends on 'Data' layer.\n" +
                     "'Data' layer should not depend on anything but has dependencies in files:\n" +
@@ -260,9 +260,9 @@ class Architecture4Test {
 
     // endregion
 
-    // region fails when bad dependency is set using doesNotDependsOn
+    // region fails when using doesNotDependsOn
     @Test
-    fun `fails when bad dependency is set using doesNotDependsOn (lambda scope)`() {
+    fun `fails when using doesNotDependsOn (lambda scope)`() {
         // when
         val result =
             shouldThrow<KoAssertionFailedException> {
@@ -275,7 +275,7 @@ class Architecture4Test {
         result
             .message
             .shouldBeEqualTo(
-                "'fails when bad dependency is set using doesNotDependsOn (lambda scope)' test has failed. \n" +
+                "'fails when using doesNotDependsOn (lambda scope)' test has failed. \n" +
                     "'Presentation' layer does not depends on 'Domain' layer failed. Files that depend on 'Domain' layer:\n" +
                     "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
                     "assertarchitecture/architecture4/project/presentation/sample/PresentationThirdClass.kt\n" +
@@ -285,7 +285,7 @@ class Architecture4Test {
     }
 
     @Test
-    fun `fails when bad dependency is set using doesNotDependsOn (lambda files)`() {
+    fun `fails when using doesNotDependsOn (lambda files)`() {
         // when
         val result =
             shouldThrow<KoAssertionFailedException> {
@@ -300,7 +300,7 @@ class Architecture4Test {
         result
             .message
             .shouldBeEqualTo(
-                "'fails when bad dependency is set using doesNotDependsOn (lambda files)' test has failed. \n" +
+                "'fails when using doesNotDependsOn (lambda files)' test has failed. \n" +
                     "'Presentation' layer does not depends on 'Domain' layer failed. Files that depend on 'Domain' layer:\n" +
                     "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
                     "assertarchitecture/architecture4/project/presentation/sample/PresentationThirdClass.kt\n" +
@@ -310,7 +310,7 @@ class Architecture4Test {
     }
 
     @Test
-    fun `fails when bad dependency is set using doesNotDependsOn (parameter scope)`() {
+    fun `fails when using doesNotDependsOn (parameter scope)`() {
         // given
         val layerDependencies =
             architecture {
@@ -328,7 +328,7 @@ class Architecture4Test {
         result
             .message
             .shouldBeEqualTo(
-                "'fails when bad dependency is set using doesNotDependsOn (parameter scope)' test has failed. \n" +
+                "'fails when using doesNotDependsOn (parameter scope)' test has failed. \n" +
                     "'Presentation' layer does not depends on 'Domain' layer failed. Files that depend on 'Domain' layer:\n" +
                     "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
                     "assertarchitecture/architecture4/project/presentation/sample/PresentationThirdClass.kt\n" +
@@ -338,7 +338,7 @@ class Architecture4Test {
     }
 
     @Test
-    fun `fails when bad dependency is set using doesNotDependsOn (parameter files)`() {
+    fun `fails when using doesNotDependsOn (parameter files)`() {
         // given
         val layerDependencies =
             architecture {
@@ -357,7 +357,7 @@ class Architecture4Test {
         result
             .message
             .shouldBeEqualTo(
-                "'fails when bad dependency is set using doesNotDependsOn (parameter files)' test has failed. \n" +
+                "'fails when using doesNotDependsOn (parameter files)' test has failed. \n" +
                     "'Presentation' layer does not depends on 'Domain' layer failed. Files that depend on 'Domain' layer:\n" +
                     "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
                     "assertarchitecture/architecture4/project/presentation/sample/PresentationThirdClass.kt\n" +

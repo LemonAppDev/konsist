@@ -50,6 +50,17 @@ interface LayerDependencies {
      * Specifies that the current layer does not depend on any other layer.
      *
      * @receiver The [Layer] that does not depend on any other layer.
+     *
+     * @see include
      */
     fun Layer.dependsOnNothing(): Unit
+
+    /**
+     * This function is used to include a Layer in the architecture without specifying any dependencies.
+     * It can be used in combination with dependsOnNothing() to specify that a layer does not depend on any other layer.
+     *
+     * @receiver LayerDependenciesCore The core dependencies container
+     * @return The LayerDependenciesCore instance for chaining
+     */
+    fun Layer.include(): Unit
 }
