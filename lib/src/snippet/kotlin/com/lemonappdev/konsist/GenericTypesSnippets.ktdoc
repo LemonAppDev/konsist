@@ -1,13 +1,12 @@
 package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.ext.list.genericTypeDeclarations
 import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.ext.list.returnTypes
 import com.lemonappdev.konsist.api.ext.list.typeArguments
-import com.lemonappdev.konsist.api.ext.list.genericTypes
 import com.lemonappdev.konsist.api.ext.list.sourceDeclarations
 import com.lemonappdev.konsist.api.ext.list.types
+import com.lemonappdev.konsist.api.ext.list.withGeneric
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
@@ -19,7 +18,7 @@ class GenericTypesSnippets {
             .scopeFromProduction()
             .functions()
             .returnTypes
-            .genericTypeDeclarations()
+            .withGeneric()
             .assertTrue { it.hasNameContaining("X") }
     }
 
@@ -29,7 +28,6 @@ class GenericTypesSnippets {
             .scopeFromProduction()
             .properties()
             .types
-            .genericTypeDeclarations { it.hasGenericType { type -> type.isKotlinType } }
             .typeArguments
             .sourceDeclarations()
             .assertFalse { it.isStarProjection }
@@ -41,9 +39,7 @@ class GenericTypesSnippets {
             .scopeFromProduction()
             .functions()
             .returnTypes
-            .genericTypeDeclarations()
             .typeArguments
-            .sourceDeclarations()
             .assertTrue { it.isKotlinCollectionType }
     }
 
@@ -54,8 +50,8 @@ class GenericTypesSnippets {
             .functions()
             .parameters
             .types
-            .genericTypeDeclarations()
-            .genericTypes
+            .withGeneric()
+            .sourceDeclarations()
             .assertFalse { it.hasNameEndingWith("Repository") }
     }
 }
