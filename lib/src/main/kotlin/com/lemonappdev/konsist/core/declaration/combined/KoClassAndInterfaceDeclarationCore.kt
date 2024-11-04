@@ -18,5 +18,5 @@ internal interface KoClassAndInterfaceDeclarationCore :
     KoSealedModifierProviderCore,
     KoTypeParameterProviderCore,
     KoIsGenericProviderCore {
-        override val ktTypeParameterListOwner: KtTypeParameterListOwner
-    }
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner
+}

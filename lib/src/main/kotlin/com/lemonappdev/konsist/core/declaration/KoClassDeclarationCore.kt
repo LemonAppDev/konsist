@@ -12,7 +12,6 @@ import com.lemonappdev.konsist.core.provider.KoParentClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoPrimaryConstructorProviderCore
 import com.lemonappdev.konsist.core.provider.KoSecondaryConstructorsProviderCore
 import com.lemonappdev.konsist.core.provider.KoTestClassProviderCore
-import com.lemonappdev.konsist.core.provider.KoTypeParameterProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoAbstractModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoAnnotationModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoDataModifierProviderCore
