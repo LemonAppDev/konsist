@@ -14,7 +14,7 @@ class LayerTest {
 
         // then
         sut shouldThrow IllegalArgumentException::class withMessage
-            "name is blank"
+                "name is blank"
     }
 
     @Test
@@ -24,7 +24,7 @@ class LayerTest {
 
         // then
         sut shouldThrow IllegalArgumentException::class withMessage
-            "rootPackage is blank"
+                "rootPackage is blank"
     }
 
     @Test
@@ -34,8 +34,8 @@ class LayerTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage
-            "Invalid package definition for layer 'Domain'. To include subpackages, " +
-            "the definition must end with '..'. Current definition: package"
+                "Invalid package definition for layer 'Domain'. To include subpackages, " +
+                "the definition must end with '..'. Current definition: package"
     }
 
     @Test
@@ -45,8 +45,8 @@ class LayerTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage
-            "Invalid package definition for layer 'Domain'. To include subpackages, " +
-            "the definition must end with '..'. Current definition: package..feature"
+                "Invalid package definition for layer 'Domain'. To include subpackages, " +
+                "the definition must end with '..'. Current definition: package..feature"
     }
 
     @Test
@@ -56,8 +56,8 @@ class LayerTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage
-            "Invalid package definition for layer 'Domain'. To include subpackages, " +
-            "the definition must end with '..'. Current definition: package..."
+                "Invalid package definition for layer 'Domain'. To include subpackages, " +
+                "the definition must end with '..'. Current definition: package..."
     }
 
     @Test
@@ -67,8 +67,8 @@ class LayerTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage
-            "Invalid package definition for layer 'Domain'. To include subpackages, " +
-            "the definition must end with '..'. Current definition: first.package"
+                "Invalid package definition for layer 'Domain'. To include subpackages, " +
+                "the definition must end with '..'. Current definition: first.package"
     }
 
     @Test
@@ -78,8 +78,52 @@ class LayerTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage
-            "Invalid package definition for layer 'Domain'. To include subpackages, " +
-            "the definition must end with '..'. Current definition: first.second..third_p.package...."
+                "Invalid package definition for layer 'Domain'. To include subpackages, " +
+                "the definition must end with '..'. Current definition: first.second..third_p.package...."
+    }
+
+    @Test
+    fun `throws an exception when package is just dots`() {
+        // given
+        val sut = { Layer("Domain", "..") }
+
+        // then
+        sut shouldThrow KoPreconditionFailedException::class withMessage
+                "Invalid package definition for layer 'Domain'. Package name cannot be empty. Current definition: .."
+    }
+
+    @Test
+    fun `throws an exception when package starts with dot`() {
+        // given
+        val sut = { Layer("Domain", ".package..") }
+
+        // then
+        sut shouldThrow KoPreconditionFailedException::class withMessage
+                "Invalid package definition for layer 'Domain'. Package cannot start with a dot. Current definition: .package.."
+    }
+
+    @Test
+    fun `throws an exception when package segment starts with number`() {
+        // given
+        val sut = { Layer("Domain", "1package..") }
+
+        // then
+        sut shouldThrow KoPreconditionFailedException::class withMessage
+                "Invalid package definition for layer 'Domain'. Invalid package segment '1package' at position 1. " +
+                "Package segments must start with a lowercase letter and contain only lowercase letters, numbers, or underscores. " +
+                "Current definition: 1package.."
+    }
+
+    @Test
+    fun `throws an exception when package segment contains uppercase letters`() {
+        // given
+        val sut = { Layer("Domain", "Package..") }
+
+        // then
+        sut shouldThrow KoPreconditionFailedException::class withMessage
+                "Invalid package definition for layer 'Domain'. Invalid package segment 'Package' at position 1. " +
+                "Package segments must start with a lowercase letter and contain only lowercase letters, numbers, or underscores. " +
+                "Current definition: Package.."
     }
 
     @Test
@@ -95,6 +139,24 @@ class LayerTest {
     fun `do not throw an exception when the package ends with two dots and there are another two dots used as wildcard`() {
         // given
         val sut = { Layer("Domain", "first.second..package..") }
+
+        // then
+        sut shouldNotThrow KoPreconditionFailedException::class
+    }
+
+    @Test
+    fun `do not throw an exception when package segment contains underscore`() {
+        // given
+        val sut = { Layer("Domain", "first_package..") }
+
+        // then
+        sut shouldNotThrow KoPreconditionFailedException::class
+    }
+
+    @Test
+    fun `do not throw an exception when package segment contains numbers after letters`() {
+        // given
+        val sut = { Layer("Domain", "package123..") }
 
         // then
         sut shouldNotThrow KoPreconditionFailedException::class

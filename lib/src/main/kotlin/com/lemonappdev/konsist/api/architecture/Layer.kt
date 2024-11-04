@@ -1,69 +1,106 @@
 package com.lemonappdev.konsist.api.architecture
 
+import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
+
 /**
- * Represents a layer within an architecture.
+ * Represents an architectural layer within a software system.
  *
- * @param name The name of the layer.
- * @param rootPackage The root package that defines this layer. Must follow Java package naming conventions and end with '..'
- * Requirements:
- * - Must end with '..' to indicate inclusion of subpackages
- * - Package segments must be lowercase alphanumeric (first character must be a letter)
- * - Segments must be separated by single dots
+ * A layer is defined by its name and a root package path that determines which code belongs to this layer.
+ * The root package path supports wildcards using ".." notation to include all subpackages.
+ *
+ * Example usage:
+ * ```
+ * val domainLayer = Layer("Domain", "com.example.domain..")
+ * val presentationLayer = Layer("Presentation", "com.example.presentation..")
+ * ```
+ *
+ * Package naming rules:
+ * - Must end with ".." to indicate inclusion of all subpackages
+ * - Cannot be empty (just "..")
  * - Cannot start with a dot
- * - Must be a valid Java package name before the ending '..'
+ * - Each package segment must:
+ *   - Start with a lowercase letter
+ *   - Contain only lowercase letters, numbers, or underscores
+ *   - Follow standard Java package naming conventions
+ * - Intermediate ".." wildcards are allowed (e.g., "com..domain..")
  *
- * @throws IllegalArgumentException if the name is blank or package name doesn't meet the requirements
+ * @property name The name of the layer. Must not be blank.
+ * @property rootPackage The package path defining this layer. Must follow the package naming rules.
+ * @throws IllegalArgumentException If name or rootPackage is blank
+ * @throws KoPreconditionFailedException If the rootPackage doesn't follow the package naming rules
  */
 data class Layer(
     internal val name: String,
     internal val rootPackage: String,
 ) {
     init {
-        require(name.isNotBlank()) { "name is blank" }
-        require(rootPackage.isNotBlank()) { "rootPackage is blank" }
+        if (name.isBlank()) {
+            throw IllegalArgumentException("name is blank")
+        }
+        if (rootPackage.isBlank()) {
+            throw IllegalArgumentException("rootPackage is blank")
+        }
 
-        validatePackageName()
+        validatePackageDefinition()
     }
 
-    private fun validatePackageName() {
-        // Check ends with ..
-        require(rootPackage.endsWith("..")) {
-            "Invalid rootPackage definition for layer '$name'. " +
-                "Package must end with '..'. Current definition: $rootPackage"
+    private fun validatePackageDefinition() {
+        // Check if ends with exactly '..'
+        if (!endsWithExactlyTwoDots()) {
+            throw KoPreconditionFailedException(
+                buildPackageErrorMessage()
+            )
         }
 
         val packageWithoutDoubleDot = rootPackage.removeSuffix("..")
 
         // Empty package (just ..) is not valid
-        require(packageWithoutDoubleDot.isNotEmpty()) {
-            "Invalid rootPackage definition for layer '$name'. " +
-                "Package name cannot be empty. Current definition: $rootPackage"
+        if (packageWithoutDoubleDot.isEmpty()) {
+            throw KoPreconditionFailedException(
+                "Invalid package definition for layer '$name'. " +
+                        "Package name cannot be empty. Current definition: $rootPackage"
+            )
         }
 
         // Check for starting dot
-        require(!packageWithoutDoubleDot.startsWith(".")) {
-            "Invalid rootPackage definition for layer '$name'. " +
-                "Package cannot start with a dot. Current definition: $rootPackage"
+        if (packageWithoutDoubleDot.startsWith(".")) {
+            throw KoPreconditionFailedException(
+                "Invalid package definition for layer '$name'. " +
+                        "Package cannot start with a dot. Current definition: $rootPackage"
+            )
         }
 
         // Validate each package segment
-        val segments = packageWithoutDoubleDot.split(".")
+        val segments = packageWithoutDoubleDot
+            .split(".")
+            .filter { it.isNotEmpty() && it != "." } // Filter out empty segments and single dots
+            .map { if (it == ".") "" else it } // Handle any remaining dots
+
         segments.forEachIndexed { index, segment ->
-            require(segment.matches(REGEX_VALID_PACKAGE_SEGMENT)) {
-                "Invalid rootPackage definition for layer '$name'. " +
-                    "Invalid package segment '$segment' at position ${index + 1}. " +
-                    "Package segments must start with a lowercase letter and contain only " +
-                    "lowercase letters, numbers, or underscores. Current definition: $rootPackage"
+            if (!segment.matches(REGEX_VALID_PACKAGE_SEGMENT)) {
+                throw KoPreconditionFailedException(
+                    "Invalid package definition for layer '$name'. " +
+                            "Invalid package segment '$segment' at position ${index + 1}. " +
+                            "Package segments must start with a lowercase letter and contain only " +
+                            "lowercase letters, numbers, or underscores. Current definition: $rootPackage"
+                )
             }
         }
     }
 
-    companion object {
-        /**
-         * Regex for valid Java package segment.
-         * - Must start with a lowercase letter
-         * - Can contain lowercase letters, numbers, and underscores
-         */
+    private fun endsWithExactlyTwoDots(): Boolean {
+        val lastIndex = rootPackage.length - 1
+        return lastIndex >= 1 &&
+                rootPackage[lastIndex] == '.' &&
+                rootPackage[lastIndex - 1] == '.' &&
+                (lastIndex < 2 || rootPackage[lastIndex - 2] != '.')
+    }
+
+    private fun buildPackageErrorMessage(): String =
+        "Invalid package definition for layer '$name'. To include subpackages, " +
+                "the definition must end with '..'. Current definition: $rootPackage"
+
+    private companion object {
         private val REGEX_VALID_PACKAGE_SEGMENT = Regex("^[a-z][a-z0-9_]*$")
     }
 }
