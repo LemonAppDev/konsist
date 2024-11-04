@@ -151,6 +151,11 @@ internal class LayerDependenciesCore(
         layerValidatorManager.validateLayerDependencies(layerDependencies)
     }
 
+    override fun Layer.include() {
+        layers.add(this)
+        layerDependencies.add(LayerDependency(this, LayerDependencyType.NONE, null))
+    }
+
     private fun getLayerWithDependOnNothingDependency(layer: Layer): LayerDependency? {
         val dependOnLayerDependency =
             layerDependencies.firstOrNull {

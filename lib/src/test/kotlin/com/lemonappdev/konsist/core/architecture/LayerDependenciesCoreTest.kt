@@ -9,6 +9,7 @@ import io.mockk.mockk
 import io.mockk.verify
 import org.amshove.kluent.shouldBeEmpty
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldContainAll
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -763,4 +764,58 @@ class LayerDependenciesCoreTest {
         verify { layerValidatorManager.validateLayerDependencies(sut.layerDependencies) }
     }
     //endregion
+
+    // region include
+    @Test
+    fun `include adds layer to layers collection`() {
+        // given
+        val sut = LayerDependenciesCore()
+        val layer = Layer("Domain", "com.example.domain..")
+
+        // when
+        with(sut) {
+            layer.include()
+        }
+
+        // then
+        sut.layers shouldContain layer
+    }
+
+    @Test
+    fun `include creates dependency with NONE type and null target`() {
+        // given
+        val sut = LayerDependenciesCore()
+        val layer = Layer("Domain", "com.example.domain..")
+        val expectedDependency = LayerDependency(layer, LayerDependencyType.NONE, null)
+
+        // when
+        with(sut) {
+            layer.include()
+        }
+
+        // then
+        sut.layerDependencies shouldContain expectedDependency
+        sut.layerDependencies.first() shouldBeEqualTo expectedDependency
+    }
+
+    @Test
+    fun `include can be called multiple times for different layers`() {
+        // given
+        val sut = LayerDependenciesCore()
+        val layer1 = Layer("Domain", "com.example.domain..")
+        val layer2 = Layer("Presentation", "com.example.presentation..")
+
+        // when
+        with(sut) {
+            layer1.include()
+            layer2.include()
+        }
+
+        // then
+        sut.layers shouldContain layer1
+        sut.layers shouldContain layer2
+        sut.layerDependencies shouldContain LayerDependency(layer1, LayerDependencyType.NONE, null)
+        sut.layerDependencies shouldContain LayerDependency(layer2, LayerDependencyType.NONE, null)
+    }
+    // endregion
 }

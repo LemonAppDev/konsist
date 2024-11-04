@@ -38,9 +38,9 @@ class Architecture5Test {
             "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.infrastructure..",
         )
 
-    // region passes when good dependency is set
+    // region passes when
     @Test
-    fun `passes when good dependency is set (lambda scope)`() {
+    fun `passes when  (lambda scope)`() {
         // then
         scope
             .assertArchitecture {
@@ -52,7 +52,7 @@ class Architecture5Test {
     }
 
     @Test
-    fun `passes when good dependency is set (lambda files)`() {
+    fun `passes when  (lambda files)`() {
         // then
         scope
             .files
@@ -65,7 +65,7 @@ class Architecture5Test {
     }
 
     @Test
-    fun `passes when good dependency is set (parameter scope)`() {
+    fun `passes when  (parameter scope)`() {
         // given
         val layerDependencies =
             architecture {
@@ -81,7 +81,7 @@ class Architecture5Test {
     }
 
     @Test
-    fun `passes when good dependency is set (parameter files)`() {
+    fun `passes when  (parameter files)`() {
         // given
         val layerDependencies =
             architecture {
@@ -99,9 +99,9 @@ class Architecture5Test {
 
     // endregion
 
-    // region passes when good dependency is set using doesNotDependsOn
+    // region passes when  using doesNotDependsOn
     @Test
-    fun `passes when good dependency is set using doesNotDependsOn (lambda scope)`() {
+    fun `passes when  using doesNotDependsOn (lambda scope)`() {
         // then
         scope.assertArchitecture {
             presentation.doesNotDependOn(domain, infrastructure)
@@ -109,7 +109,7 @@ class Architecture5Test {
     }
 
     @Test
-    fun `passes when good dependency is set using doesNotDependsOn (lambda files)`() {
+    fun `passes when  using doesNotDependsOn (lambda files)`() {
         // then
         scope
             .files
@@ -119,7 +119,7 @@ class Architecture5Test {
     }
 
     @Test
-    fun `passes when good dependency is set using doesNotDependsOn (parameter scope)`() {
+    fun `passes when  using doesNotDependsOn (parameter scope)`() {
         // given
         val layerDependencies =
             architecture {
@@ -131,7 +131,7 @@ class Architecture5Test {
     }
 
     @Test
-    fun `passes when good dependency is set using doesNotDependsOn (parameter files)`() {
+    fun `passes when  using doesNotDependsOn (parameter files)`() {
         // given
         val layerDependencies =
             architecture {
@@ -148,7 +148,7 @@ class Architecture5Test {
 
     // region fails when bad dependency is set
     @Test
-    fun `fails when bad dependency is set (lambda scope)`() {
+    fun `fails when (lambda scope)`() {
         // given
         val sut = {
             scope
@@ -165,7 +165,7 @@ class Architecture5Test {
     }
 
     @Test
-    fun `fails when bad dependency is set (lambda files)`() {
+    fun `fails when (lambda files)`() {
         // given
         val sut = {
             scope
@@ -183,7 +183,7 @@ class Architecture5Test {
     }
 
     @Test
-    fun `fails when bad dependency is set (parameter scope)`() {
+    fun `fails when (parameter scope)`() {
         // given
         val architecture =
             architecture {
@@ -202,7 +202,7 @@ class Architecture5Test {
     }
 
     @Test
-    fun `fails when bad dependency is set (parameter files)`() {
+    fun `fails when (parameter files)`() {
         // given
         val architecture =
             architecture {
