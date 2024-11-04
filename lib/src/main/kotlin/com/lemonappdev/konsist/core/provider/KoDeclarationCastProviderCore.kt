@@ -52,12 +52,12 @@ internal interface KoDeclarationCastProviderCore :
     override val isTypeParameter: Boolean
         get() = koDeclarationCastProviderDeclaration is KoTypeParameterDeclaration
 
-    override val isExternalDeclaration: Boolean
+    override val isExternal: Boolean
         get() = koDeclarationCastProviderDeclaration is KoExternalDeclaration
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isExternalDeclaration"))
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isExternal"))
     override val isExternalType: Boolean
-        get() = isExternalDeclaration
+        get() = isExternal
 
     override fun asClassDeclaration(): KoClassDeclaration? = koDeclarationCastProviderDeclaration as? KoClassDeclaration
 
@@ -157,7 +157,7 @@ internal interface KoDeclarationCastProviderCore :
 
     override fun hasExternalDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
-            null -> isExternalDeclaration
+            null -> isExternal
             else -> asExternalDeclaration()?.let { predicate(it) } ?: false
         }
 

@@ -33,7 +33,7 @@ class KoStarProjectionDeclarationForKoDeclarationCastProviderTest {
             it?.isKotlinBasicType shouldBeEqualTo false
             it?.isKotlinCollectionType shouldBeEqualTo false
             it?.isTypeParameter shouldBeEqualTo false
-            it?.isExternalDeclaration shouldBeEqualTo false
+            it?.isExternal shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.hasClassDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false

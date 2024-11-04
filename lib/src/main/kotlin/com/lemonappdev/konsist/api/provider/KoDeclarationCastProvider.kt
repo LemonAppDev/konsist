@@ -65,16 +65,16 @@ interface KoDeclarationCastProvider : KoBaseProvider {
     val isTypeParameter: Boolean
 
     /**
-     * Determines whatever declaration is an external type.
-     * An external type refers to a type that is defined outside the project's codebase. for e.g. in external library.
+     * Determines whatever declaration is an external.
+     * An external declaration refers to a declaration that is defined outside the project's codebase. for e.g. in external library.
      */
-    val isExternalDeclaration: Boolean
+    val isExternal: Boolean
 
     /**
      * Determines whatever source declaration is an external type.
      * An external type refers to a type that is defined outside the project's codebase. for e.g. in external library.
      */
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isExternalDeclaration"))
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isExternal"))
     val isExternalType: Boolean
 
     /**
@@ -154,7 +154,7 @@ interface KoDeclarationCastProvider : KoBaseProvider {
      *
      * @return the external declaration associated with this declaration.
      */
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("asExternalDeclaration"))
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("asExternal"))
     fun asExternalTypeDeclaration(): KoExternalDeclaration?
 
     /**

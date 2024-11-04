@@ -114,7 +114,7 @@ class KoPropertyDeclarationForKoTypeParameterProviderTest {
             hasTypeParameter { it.name == "T" } shouldBeEqualTo true
             hasTypeParameter { param -> param.isTypeParameter } shouldBeEqualTo true
             hasAllTypeParameters { it.name == "T" || it.name == "V" } shouldBeEqualTo true
-            hasAllTypeParameters { param -> param.isExternalDeclaration } shouldBeEqualTo false
+            hasAllTypeParameters { param -> param.isExternal } shouldBeEqualTo false
         }
     }
 

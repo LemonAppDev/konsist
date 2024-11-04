@@ -817,13 +817,13 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutTypeParameterDeclaration(
 /**
  * List containing declarations with the specified external declaration.
  *
- * @param predicate The predicate function to determine if a external declaration satisfies a condition.
+ * @param predicate The predicate function to determine if an external declaration satisfies a condition.
  * @return A list containing declarations with the specified external declaration.
  */
 fun <T : KoDeclarationCastProvider> List<T>.withExternalDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
-            null -> it.isExternalDeclaration
+            null -> it.isExternal
             else ->
                 it
                     .asExternalDeclaration()
@@ -834,13 +834,13 @@ fun <T : KoDeclarationCastProvider> List<T>.withExternalDeclaration(predicate: (
 /**
  * List containing declarations without the specified external declaration.
  *
- * @param predicate The predicate function to determine if a external declaration satisfies a condition.
+ * @param predicate The predicate function to determine if an external declaration satisfies a condition.
  * @return A list containing declarations without the specified external declaration.
  */
 fun <T : KoDeclarationCastProvider> List<T>.withoutExternalDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.isExternalDeclaration
+            null -> it.isExternal
             else ->
                 it
                     .asExternalDeclaration()
@@ -903,7 +903,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutExternalDeclarationOf(kClasse
 /**
  * List containing declarations with the specified external declaration.
  *
- * @param predicate The predicate function to determine if a external declaration satisfies a condition.
+ * @param predicate The predicate function to determine if an external declaration satisfies a condition.
  * @return A list containing declarations with the specified external declaration.
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("withExternalDeclaration"))
@@ -921,7 +921,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withExternalTypeDeclaration(predicat
 /**
  * List containing declarations without the specified external declaration.
  *
- * @param predicate The predicate function to determine if a external declaration satisfies a condition.
+ * @param predicate The predicate function to determine if an external declaration satisfies a condition.
  * @return A list containing declarations without the specified external declaration.
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("withoutExternalDeclaration"))
