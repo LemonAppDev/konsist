@@ -6,4 +6,3 @@ internal enum class LayerDependencyType {
     DOES_NOT_DEPEND_ON_LAYER,
     NONE,
 }
-
