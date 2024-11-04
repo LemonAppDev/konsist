@@ -5,7 +5,7 @@ package com.lemonappdev.konsist.api.architecture
  *
  * This interface provides methods to define dependencies between layers in an architecture.
  */
-interface DependencyRules {
+interface LayerDependencies {
     /**
      * Adds dependencies between the current layer and the specified layers.
      *
@@ -19,6 +19,14 @@ interface DependencyRules {
     ): Unit
 
     /**
+     * Adds dependencies between the current layer and the specified list of layers.
+     *
+     * @receiver The [Layer] that depends on other layers.
+     * @param layers The list of layers that the current layer depends on.
+     */
+    fun Layer.dependsOn(layers: Set<Layer>): Unit
+
+    /**
      * Specifies that the current layer does not depend on any given layer.
      *
      * @param layer The layer that the current layer does not depend on.
@@ -29,6 +37,14 @@ interface DependencyRules {
         layer: Layer,
         vararg layers: Layer,
     ): Unit
+
+    /**
+     * Specifies that the current layer does not depend on the given list of layers.
+     *
+     * @param layers The list of layers that the current layer does not depend on.
+     * @receiver The [Layer] that does not depend on other layers.
+     */
+    fun Layer.doesNotDependOn(layers: Set<Layer>): Unit
 
     /**
      * Specifies that the current layer does not depend on any other layer.

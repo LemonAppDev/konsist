@@ -25,6 +25,7 @@ class KdocKonsistTest {
     fun `every api property has KDoc`() {
         apiPackageScope
             .properties()
+            .withoutPrivateModifier()
             .assertTrue { it.hasKDoc }
     }
 
@@ -32,6 +33,7 @@ class KdocKonsistTest {
     fun `every api declaration has KDoc`() {
         apiPackageScope
             .classesAndInterfacesAndObjects()
+            .withoutPrivateModifier()
             .assertTrue { it.hasKDoc }
     }
 }
