@@ -10,8 +10,8 @@ internal interface KoIsGenericProviderCore :
     KoBaseProviderCore {
     override val isGeneric: Boolean
         get() {
-            if ((this as? KoTypeParameterProvider)?.typeParameters?.isNotEmpty() == true) {
-                return true
+            if ((this as? KoTypeParameterProvider) != null) {
+                return (this as? KoTypeParameterProvider)?.typeParameters?.isNotEmpty() == true
             }
 
             val regex = "\\w+<[a-zA-Z*<>(), ]+>".toRegex()
