@@ -50,8 +50,7 @@ internal class KoClassDeclarationCore private constructor(
     KoPrimaryConstructorProviderCore,
     KoSecondaryConstructorsProviderCore,
     KoTestClassProviderCore,
-    KoValueModifierProviderCore,
-    KoTypeParameterProviderCore {
+    KoValueModifierProviderCore {
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktClass }
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktClass }

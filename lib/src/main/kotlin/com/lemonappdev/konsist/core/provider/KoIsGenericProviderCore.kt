@@ -3,12 +3,17 @@ package com.lemonappdev.konsist.core.provider
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.api.provider.KoIsGenericProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoTypeParameterProvider
 
 internal interface KoIsGenericProviderCore :
     KoIsGenericProvider,
     KoBaseProviderCore {
     override val isGeneric: Boolean
         get() {
+            if ((this as? KoTypeParameterProvider)?.typeParameters?.isNotEmpty() == true) {
+                return true
+            }
+
             val regex = "\\w+<[a-zA-Z*<>(), ]+>".toRegex()
 
             val type =

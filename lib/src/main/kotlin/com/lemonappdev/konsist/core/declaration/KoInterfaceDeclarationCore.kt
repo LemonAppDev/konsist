@@ -22,8 +22,7 @@ internal class KoInterfaceDeclarationCore private constructor(
 ) : KoInterfaceDeclaration,
     KoClassAndInterfaceDeclarationCore,
     KoInterfaceAndObjectDeclarationCore,
-    KoFunModifierProviderCore,
-    KoTypeParameterProviderCore {
+    KoFunModifierProviderCore {
     override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktClass.annotationEntries }
 
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktClass }
