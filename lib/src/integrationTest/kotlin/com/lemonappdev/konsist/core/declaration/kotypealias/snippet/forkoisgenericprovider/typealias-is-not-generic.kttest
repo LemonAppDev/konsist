@@ -1,1 +1,1 @@
-typealias SampleTypeAlias = (Int) -> Unit
+typealias SampleTypeAlias = List<String>
