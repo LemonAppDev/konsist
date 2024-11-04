@@ -8,5 +8,6 @@ interface KoGenericTypeProvider : KoBaseProvider {
     /**
      * Determines whatever type is generic type.
      */
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith("isGeneric"))
     val isGenericType: Boolean
 }

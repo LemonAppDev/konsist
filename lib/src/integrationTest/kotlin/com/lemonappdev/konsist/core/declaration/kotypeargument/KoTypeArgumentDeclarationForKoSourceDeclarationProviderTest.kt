@@ -25,7 +25,7 @@ class KoTypeArgumentDeclarationForKoSourceDeclarationProviderTest {
             it?.sourceDeclaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.sourceDeclaration?.name shouldBeEqualTo "String"
             it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isKotlinType } shouldBeEqualTo true
-            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternalDeclaration } shouldBeEqualTo false
+            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternal } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(Int::class) shouldBeEqualTo false
         }
@@ -47,7 +47,7 @@ class KoTypeArgumentDeclarationForKoSourceDeclarationProviderTest {
             it?.sourceDeclaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.sourceDeclaration?.name shouldBeEqualTo "Set"
             it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isKotlinCollectionType } shouldBeEqualTo true
-            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternalDeclaration } shouldBeEqualTo false
+            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternal } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo false
         }
     }
@@ -68,7 +68,7 @@ class KoTypeArgumentDeclarationForKoSourceDeclarationProviderTest {
             it?.sourceDeclaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.sourceDeclaration?.name shouldBeEqualTo "Map"
             it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isKotlinCollectionType } shouldBeEqualTo true
-            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternalDeclaration } shouldBeEqualTo false
+            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternal } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo false
         }
     }
@@ -89,7 +89,7 @@ class KoTypeArgumentDeclarationForKoSourceDeclarationProviderTest {
             it?.sourceDeclaration shouldBeInstanceOf KoStarProjectionDeclaration::class
             it?.sourceDeclaration?.name shouldBeEqualTo "*"
             it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isStarProjection } shouldBeEqualTo true
-            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternalDeclaration } shouldBeEqualTo false
+            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternal } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo false
         }
     }
@@ -110,7 +110,7 @@ class KoTypeArgumentDeclarationForKoSourceDeclarationProviderTest {
             it?.sourceDeclaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.sourceDeclaration?.name shouldBeEqualTo "String"
             it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isKotlinType } shouldBeEqualTo true
-            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternalDeclaration } shouldBeEqualTo false
+            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternal } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(Int::class) shouldBeEqualTo false
         }
@@ -132,7 +132,7 @@ class KoTypeArgumentDeclarationForKoSourceDeclarationProviderTest {
             it?.sourceDeclaration shouldBeInstanceOf KoKotlinTypeDeclaration::class
             it?.sourceDeclaration?.name shouldBeEqualTo "String"
             it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isKotlinType } shouldBeEqualTo true
-            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternalDeclaration } shouldBeEqualTo false
+            it?.hasSourceDeclaration { sourceDeclaration -> sourceDeclaration.isExternal } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo true
             it?.hasSourceDeclarationOf(Int::class) shouldBeEqualTo false
         }

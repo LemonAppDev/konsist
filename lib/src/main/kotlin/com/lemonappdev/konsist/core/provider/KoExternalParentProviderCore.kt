@@ -10,7 +10,7 @@ internal interface KoExternalParentProviderCore :
     KoBaseProviderCore,
     KoParentProviderCore {
     override fun externalParents(indirectParents: Boolean): List<KoParentDeclaration> =
-        parents(indirectParents).filter { it.sourceDeclaration?.isExternalDeclaration == true }
+        parents(indirectParents).filter { it.sourceDeclaration?.isExternal == true }
 
     override fun numExternalParents(indirectParents: Boolean): Int = externalParents(indirectParents).size
 

@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.SampleGenericClassWithParameter as SampleAlias
+
+val sampleProperty1: SampleAlias<String> = SampleAlias("")

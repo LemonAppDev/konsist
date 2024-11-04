@@ -3261,11 +3261,11 @@ class KoDeclarationCastProviderListExtTest {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
-                every { isExternalDeclaration } returns true
+                every { isExternal } returns true
             }
         val declaration2: KoDeclarationCastProvider =
             mockk {
-                every { isExternalDeclaration } returns false
+                every { isExternal } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -3355,11 +3355,11 @@ class KoDeclarationCastProviderListExtTest {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
-                every { isExternalDeclaration } returns true
+                every { isExternal } returns true
             }
         val declaration2: KoDeclarationCastProvider =
             mockk {
-                every { isExternalDeclaration } returns false
+                every { isExternal } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 

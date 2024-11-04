@@ -87,9 +87,9 @@ class KoTypeArgumentDeclarationForKoFunctionTypeDeclarationProviderTest {
             it?.countParameterTypes { parameter -> parameter.type.isKotlinBasicType } shouldBeEqualTo 1
             it?.countParameterTypes { parameter -> parameter.type.isClass } shouldBeEqualTo 0
             it?.hasParameterType { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
-            it?.hasParameterType { parameter -> parameter.type.isExternalDeclaration } shouldBeEqualTo false
+            it?.hasParameterType { parameter -> parameter.type.isExternal } shouldBeEqualTo false
             it?.hasAllParameterTypes { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
-            it?.hasAllParameterTypes { parameter -> parameter.type.isExternalDeclaration } shouldBeEqualTo false
+            it?.hasAllParameterTypes { parameter -> parameter.type.isExternal } shouldBeEqualTo false
             it?.parameters?.map { parameter -> parameter.type.name } shouldBeEqualTo listOf("String")
             it?.numParameters shouldBeEqualTo 1
             it?.countParameters { parameter -> parameter.type.isKotlinType } shouldBeEqualTo 1
@@ -97,9 +97,9 @@ class KoTypeArgumentDeclarationForKoFunctionTypeDeclarationProviderTest {
             it?.countParameters { parameter -> parameter.type.isKotlinBasicType } shouldBeEqualTo 1
             it?.countParameters { parameter -> parameter.type.isClass } shouldBeEqualTo 0
             it?.hasParameter { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
-            it?.hasParameter { parameter -> parameter.type.isExternalDeclaration } shouldBeEqualTo false
+            it?.hasParameter { parameter -> parameter.type.isExternal } shouldBeEqualTo false
             it?.hasAllParameters { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
-            it?.hasAllParameters { parameter -> parameter.type.isExternalDeclaration } shouldBeEqualTo false
+            it?.hasAllParameters { parameter -> parameter.type.isExternal } shouldBeEqualTo false
         }
     }
 
@@ -123,9 +123,9 @@ class KoTypeArgumentDeclarationForKoFunctionTypeDeclarationProviderTest {
             it?.countParameterTypes { parameter -> parameter.type.isKotlinBasicType } shouldBeEqualTo 1
             it?.countParameterTypes { parameter -> parameter.type.isClass } shouldBeEqualTo 0
             it?.hasParameterType { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
-            it?.hasParameterType { parameter -> parameter.type.isExternalDeclaration } shouldBeEqualTo false
+            it?.hasParameterType { parameter -> parameter.type.isExternal } shouldBeEqualTo false
             it?.hasAllParameterTypes { parameter -> parameter.type.isKotlinType || parameter.type.isGenericType } shouldBeEqualTo true
-            it?.hasAllParameterTypes { parameter -> parameter.type.isExternalDeclaration } shouldBeEqualTo false
+            it?.hasAllParameterTypes { parameter -> parameter.type.isExternal } shouldBeEqualTo false
             it?.parameters?.map { parameter -> parameter.type.name } shouldBeEqualTo listOf("String", "List<Int>")
             it?.numParameters shouldBeEqualTo 2
             it?.countParameters { parameter -> parameter.type.isKotlinType } shouldBeEqualTo 2
@@ -133,9 +133,9 @@ class KoTypeArgumentDeclarationForKoFunctionTypeDeclarationProviderTest {
             it?.countParameters { parameter -> parameter.type.isKotlinBasicType } shouldBeEqualTo 1
             it?.countParameters { parameter -> parameter.type.isClass } shouldBeEqualTo 0
             it?.hasParameter { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
-            it?.hasParameter { parameter -> parameter.type.isExternalDeclaration } shouldBeEqualTo false
+            it?.hasParameter { parameter -> parameter.type.isExternal } shouldBeEqualTo false
             it?.hasAllParameters { parameter -> parameter.type.isKotlinType || parameter.type.isGenericType } shouldBeEqualTo true
-            it?.hasAllParameters { parameter -> parameter.type.isExternalDeclaration } shouldBeEqualTo false
+            it?.hasAllParameters { parameter -> parameter.type.isExternal } shouldBeEqualTo false
         }
     }
 
@@ -174,7 +174,7 @@ class KoTypeArgumentDeclarationForKoFunctionTypeDeclarationProviderTest {
         assertSoftly(sut) {
             it?.returnType shouldBeEqualTo null
             it?.hasReturnType { type -> type.isKotlinType } shouldBeEqualTo false
-            it?.hasReturnType { type -> type.isExternalDeclaration } shouldBeEqualTo false
+            it?.hasReturnType { type -> type.isExternal } shouldBeEqualTo false
             it?.hasReturnTypeOf(Unit::class) shouldBeEqualTo false
             it?.hasReturnTypeOf(String::class) shouldBeEqualTo false
         }
@@ -195,7 +195,7 @@ class KoTypeArgumentDeclarationForKoFunctionTypeDeclarationProviderTest {
         assertSoftly(sut) {
             it?.returnType?.name shouldBeEqualTo "Unit"
             it?.hasReturnType { type -> type.isKotlinType } shouldBeEqualTo true
-            it?.hasReturnType { type -> type.isExternalDeclaration } shouldBeEqualTo false
+            it?.hasReturnType { type -> type.isExternal } shouldBeEqualTo false
             it?.hasReturnTypeOf(Unit::class) shouldBeEqualTo true
             it?.hasReturnTypeOf(String::class) shouldBeEqualTo false
         }
@@ -216,7 +216,7 @@ class KoTypeArgumentDeclarationForKoFunctionTypeDeclarationProviderTest {
         assertSoftly(sut) {
             it?.returnType?.name shouldBeEqualTo "List<String>"
             it?.hasReturnType { type -> type.isGenericType } shouldBeEqualTo true
-            it?.hasReturnType { type -> type.isExternalDeclaration } shouldBeEqualTo false
+            it?.hasReturnType { type -> type.isExternal } shouldBeEqualTo false
             it?.hasReturnTypeOf(String::class) shouldBeEqualTo false
         }
     }
@@ -236,7 +236,7 @@ class KoTypeArgumentDeclarationForKoFunctionTypeDeclarationProviderTest {
         assertSoftly(sut) {
             it?.returnType?.name shouldBeEqualTo "SampleClass"
             it?.hasReturnType { type -> type.isClass } shouldBeEqualTo true
-            it?.hasReturnType { type -> type.isExternalDeclaration } shouldBeEqualTo false
+            it?.hasReturnType { type -> type.isExternal } shouldBeEqualTo false
             it?.hasReturnTypeOf(SampleClass::class) shouldBeEqualTo true
             it?.hasReturnTypeOf(String::class) shouldBeEqualTo false
         }
