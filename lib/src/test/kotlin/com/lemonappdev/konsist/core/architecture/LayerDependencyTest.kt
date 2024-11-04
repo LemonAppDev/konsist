@@ -13,7 +13,7 @@ class LayerDependencyTest {
         val layer2 = Layer("layer2", "package2..")
 
         // when / Then
-        LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2) // Should not throw
+        LayerDependency(layer1, LayerDependencyType.DEPENDS_ON_LAYER, layer2) // Should not throw
     }
 
     @Test
@@ -34,7 +34,7 @@ class LayerDependencyTest {
         val layer1 = Layer("layer1", "package1..")
 
         // when
-        val func = { LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, null) }
+        val func = { LayerDependency(layer1, LayerDependencyType.DEPENDS_ON_LAYER, null) }
 
         // then
         func shouldThrow IllegalArgumentException::class withMessage "layer2 cannot be null when dependency type is DEPEND_ON_LAYER"

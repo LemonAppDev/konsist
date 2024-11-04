@@ -32,7 +32,7 @@ class DependentOnNothingThenDependOnLayerDependenciesRuleTest {
                 LayerDependency(
                     layer1 = layer,
                     layer2 = dependentLayer,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                 ),
             )
 
@@ -77,12 +77,12 @@ class DependentOnNothingThenDependOnLayerDependenciesRuleTest {
                 LayerDependency(
                     layer1 = layer1,
                     layer2 = dependentLayer1,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                 ),
                 LayerDependency(
                     layer1 = layer2,
                     layer2 = dependentLayer2,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                 ),
             )
 
@@ -111,7 +111,7 @@ class DependentOnNothingThenDependOnLayerDependenciesRuleTest {
                 LayerDependency(
                     layer1 = layer,
                     layer2 = dependentLayer,
-                    dependencyType = LayerDependencyType.DEPEND_ON_LAYER,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                 ),
             )
 

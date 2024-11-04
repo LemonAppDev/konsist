@@ -387,8 +387,8 @@ class LayerDependenciesCoreTest {
         // then
         sut.layerDependencies shouldContainAll
             setOf(
-                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer2),
-                LayerDependency(layer1, LayerDependencyType.DEPEND_ON_LAYER, layer3),
+                LayerDependency(layer1, LayerDependencyType.DEPENDS_ON_LAYER, layer2),
+                LayerDependency(layer1, LayerDependencyType.DEPENDS_ON_LAYER, layer3),
             )
     }
 
@@ -816,6 +816,130 @@ class LayerDependenciesCoreTest {
         sut.layers shouldContain layer2
         sut.layerDependencies shouldContain LayerDependency(layer1, LayerDependencyType.NONE, null)
         sut.layerDependencies shouldContain LayerDependency(layer2, LayerDependencyType.NONE, null)
+    }
+    // endregion
+
+    // region Collection<Layer> dependencies
+    @Test
+    fun `collection dependsOn single layer creates dependencies for all layers in collection`() {
+        // given
+        val sut = LayerDependenciesCore()
+        val sourceLayer1 = Layer("Domain", "com.example.domain..")
+        val sourceLayer2 = Layer("Data", "com.example.data..")
+        val targetLayer = Layer("Presentation", "com.example.presentation..")
+        val sourceLayers = setOf(sourceLayer1, sourceLayer2)
+
+        // when
+        with(sut) {
+            sourceLayers.dependsOn(targetLayer)
+        }
+
+        // then
+        sut.layerDependencies shouldContain LayerDependency(sourceLayer1, LayerDependencyType.DEPENDS_ON_LAYER, targetLayer)
+        sut.layerDependencies shouldContain LayerDependency(sourceLayer2, LayerDependencyType.DEPENDS_ON_LAYER, targetLayer)
+    }
+
+    @Test
+    fun `collection dependsOn set of layers creates dependencies for all combinations`() {
+        // given
+        val sut = LayerDependenciesCore()
+        val sourceLayer1 = Layer("Domain", "com.example.domain..")
+        val sourceLayer2 = Layer("Data", "com.example.data..")
+        val targetLayer1 = Layer("Presentation", "com.example.presentation..")
+        val targetLayer2 = Layer("Infrastructure", "com.example.infrastructure..")
+        val sourceLayers = setOf(sourceLayer1, sourceLayer2)
+        val targetLayers = setOf(targetLayer1, targetLayer2)
+
+        // when
+        with(sut) {
+            sourceLayers.dependsOn(targetLayers)
+        }
+
+        // then
+        sut.layerDependencies shouldContain LayerDependency(sourceLayer1, LayerDependencyType.DEPENDS_ON_LAYER, targetLayer1)
+        sut.layerDependencies shouldContain LayerDependency(sourceLayer1, LayerDependencyType.DEPENDS_ON_LAYER, targetLayer2)
+        sut.layerDependencies shouldContain LayerDependency(sourceLayer2, LayerDependencyType.DEPENDS_ON_LAYER, targetLayer1)
+        sut.layerDependencies shouldContain LayerDependency(sourceLayer2, LayerDependencyType.DEPENDS_ON_LAYER, targetLayer2)
+    }
+
+    @Test
+    fun `collection dependsOnNothing creates dependencies for all layers in collection`() {
+        // given
+        val sut = LayerDependenciesCore()
+        val sourceLayer1 = Layer("Domain", "com.example.domain..")
+        val sourceLayer2 = Layer("Data", "com.example.data..")
+        val sourceLayers = setOf(sourceLayer1, sourceLayer2)
+
+        // when
+        with(sut) {
+            sourceLayers.dependsOnNothing()
+        }
+
+        // then
+        sut.layerDependencies shouldContain LayerDependency(sourceLayer1, LayerDependencyType.DEPEND_ON_NOTHING, null)
+        sut.layerDependencies shouldContain LayerDependency(sourceLayer2, LayerDependencyType.DEPEND_ON_NOTHING, null)
+    }
+
+    @Test
+    fun `collection include adds all layers to layers collection`() {
+        // given
+        val sut = LayerDependenciesCore()
+        val layer1 = Layer("Domain", "com.example.domain..")
+        val layer2 = Layer("Data", "com.example.data..")
+        val layers = setOf(layer1, layer2)
+
+        // when
+        with(sut) {
+            layers.include()
+        }
+
+        // then
+        sut.layers shouldContain layer1
+        sut.layers shouldContain layer2
+        sut.layerDependencies shouldContain LayerDependency(layer1, LayerDependencyType.NONE, null)
+        sut.layerDependencies shouldContain LayerDependency(layer2, LayerDependencyType.NONE, null)
+    }
+
+    @Test
+    fun `collection doesNotDependOn single layer creates dependencies for all layers in collection`() {
+        // given
+        val sut = LayerDependenciesCore()
+        val sourceLayer1 = Layer("Domain", "com.example.domain..")
+        val sourceLayer2 = Layer("Data", "com.example.data..")
+        val targetLayer = Layer("Presentation", "com.example.presentation..")
+        val sourceLayers = setOf(sourceLayer1, sourceLayer2)
+
+        // when
+        with(sut) {
+            sourceLayers.doesNotDependOn(targetLayer)
+        }
+
+        // then
+        sut.layerDependencies shouldContain LayerDependency(sourceLayer1, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, targetLayer)
+        sut.layerDependencies shouldContain LayerDependency(sourceLayer2, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, targetLayer)
+    }
+
+    @Test
+    fun `collection doesNotDependOn set of layers creates dependencies for all combinations`() {
+        // given
+        val sut = LayerDependenciesCore()
+        val sourceLayer1 = Layer("Domain", "com.example.domain..")
+        val sourceLayer2 = Layer("Data", "com.example.data..")
+        val targetLayer1 = Layer("Presentation", "com.example.presentation..")
+        val targetLayer2 = Layer("Infrastructure", "com.example.infrastructure..")
+        val sourceLayers = setOf(sourceLayer1, sourceLayer2)
+        val targetLayers = setOf(targetLayer1, targetLayer2)
+
+        // when
+        with(sut) {
+            sourceLayers.doesNotDependOn(targetLayers)
+        }
+
+        // then
+        sut.layerDependencies shouldContain LayerDependency(sourceLayer1, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, targetLayer1)
+        sut.layerDependencies shouldContain LayerDependency(sourceLayer1, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, targetLayer2)
+        sut.layerDependencies shouldContain LayerDependency(sourceLayer2, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, targetLayer1)
+        sut.layerDependencies shouldContain LayerDependency(sourceLayer2, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, targetLayer2)
     }
     // endregion
 }

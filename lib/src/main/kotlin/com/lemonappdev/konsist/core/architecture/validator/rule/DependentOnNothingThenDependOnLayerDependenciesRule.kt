@@ -13,7 +13,7 @@ internal class DependentOnNothingThenDependOnLayerDependenciesRule : LayerDepend
 
         val conflictingDependencies =
             layerDependencies
-                .filter { it.dependencyType == LayerDependencyType.DEPEND_ON_LAYER && independentLayers.contains(it.layer1) }
+                .filter { it.dependencyType == LayerDependencyType.DEPENDS_ON_LAYER && independentLayers.contains(it.layer1) }
 
         if (conflictingDependencies.isNotEmpty()) {
             val violations =
