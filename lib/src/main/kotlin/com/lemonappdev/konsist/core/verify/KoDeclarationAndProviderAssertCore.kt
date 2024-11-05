@@ -15,7 +15,6 @@ import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.util.HyperlinkUtil
-import java.io.File
 
 internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
