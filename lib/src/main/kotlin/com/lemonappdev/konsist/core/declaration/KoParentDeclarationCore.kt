@@ -113,7 +113,7 @@ internal class KoParentDeclarationCore(
                     }
                 }
 
-        val fqn =
+        val fullyQualifiedName =
             import
                 ?.name
                 ?: (containingFile.packagee?.name + "." + name)
@@ -121,9 +121,9 @@ internal class KoParentDeclarationCore(
         val isAlias = import?.alias != null
 
         import?.alias
-            ?: getClass(outerName, fqn, isAlias, containingFile)
-            ?: getInterface(outerName, fqn, isAlias, containingFile)
-            ?: getTypeAlias(outerName, fqn, containingFile)
+            ?: getClass(outerName, fullyQualifiedName, isAlias, containingFile)
+            ?: getInterface(outerName, fullyQualifiedName, isAlias, containingFile)
+            ?: getTypeAlias(outerName, fullyQualifiedName, containingFile)
             ?: KoExternalDeclarationCore.getInstance(outerName, ktSuperTypeListEntry)
     }
 

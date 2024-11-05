@@ -36,7 +36,7 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         notInstanceOf: KClass<*>,
         kClassOf: KClass<*>?,
         notKClassOf: KClass<*>,
-        fqn: String?,
+        fullyQualifiedName: String?,
     ) {
         // given
         val sut =
@@ -52,11 +52,11 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             it?.sourceDeclaration shouldBeInstanceOf instanceOf
             it?.sourceDeclaration shouldNotBeInstanceOf notInstanceOf
-            (it?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
+            (it?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fullyQualifiedName
 
             it
                 ?.hasSourceDeclaration { declaration ->
-                    (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fqn
+                    (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fullyQualifiedName
                 }?.shouldBeEqualTo(true)
 
             it?.hasSourceDeclaration { declaration -> declaration.hasNameEndingWith("Suffix") } shouldBeEqualTo false
@@ -67,11 +67,11 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
 
     @ParameterizedTest
     @MethodSource("provideNestedDeclarationsWithParentsWithoutFullyQualifiedName")
-    fun `source declaration when nested declaration names are the same and parent has no fqn`(
+    fun `source declaration when nested declaration names are the same and parent has no fullyQualifiedName`(
         fileName: String,
         instanceOf: KClass<*>,
         notInstanceOf: KClass<*>,
-        fqn: String?,
+        fullyQualifiedName: String?,
     ) {
         // given
         val sut =
@@ -86,11 +86,11 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             sourceDeclaration shouldBeInstanceOf instanceOf
             sourceDeclaration shouldNotBeInstanceOf notInstanceOf
-            (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
+            (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fullyQualifiedName
 
             it
                 .hasSourceDeclaration { declaration ->
-                    (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fqn
+                    (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fullyQualifiedName
                 }.shouldBeEqualTo(true)
 
             it.hasSourceDeclaration { declaration -> declaration.hasNameEndingWith("Suffix") } shouldBeEqualTo false
@@ -99,11 +99,11 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
 
     @ParameterizedTest
     @MethodSource("provideNestedDeclarationsWithParentsWithFullyQualifiedName")
-    fun `source declaration when nested declaration names are the same and parent has fqn`(
+    fun `source declaration when nested declaration names are the same and parent has fullyQualifiedName`(
         fileName: String,
         instanceOf: KClass<*>,
         notInstanceOf: KClass<*>,
-        fqn: String?,
+        fullyQualifiedName: String?,
     ) {
         // given
         val sut =
@@ -120,11 +120,11 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             sourceDeclaration shouldBeInstanceOf instanceOf
             sourceDeclaration shouldNotBeInstanceOf notInstanceOf
-            (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
+            (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fullyQualifiedName
 
             it
                 .hasSourceDeclaration { declaration ->
-                    (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fqn
+                    (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fullyQualifiedName
                 }.shouldBeEqualTo(true)
 
             it.hasSourceDeclaration { declaration -> declaration.hasNameEndingWith("Suffix") } shouldBeEqualTo false
@@ -133,11 +133,11 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
 
     @ParameterizedTest
     @MethodSource("provideNestedDeclarationsWithParentsWithoutFullyQualifiedNameDifferentCombinations")
-    fun `source declaration when nested declaration names are the same and parent has no fqn - different combinations`(
+    fun `source declaration when nested declaration names are the same and parent has no fullyQualifiedName - different combinations`(
         fileName: String,
         instanceOf: KClass<*>,
         notInstanceOf: KClass<*>,
-        fqn: String?,
+        fullyQualifiedName: String?,
     ) {
         // given
         val sut =
@@ -152,11 +152,11 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             sourceDeclaration shouldBeInstanceOf instanceOf
             sourceDeclaration shouldNotBeInstanceOf notInstanceOf
-            (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
+            (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fullyQualifiedName
 
             it
                 .hasSourceDeclaration { declaration ->
-                    (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fqn
+                    (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fullyQualifiedName
                 }.shouldBeEqualTo(true)
 
             it.hasSourceDeclaration { declaration -> declaration.hasNameEndingWith("Suffix") } shouldBeEqualTo false
@@ -165,11 +165,11 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
 
     @ParameterizedTest
     @MethodSource("provideNestedDeclarationsWithParentsWithFullyQualifiedNameDifferentCombinations")
-    fun `source declaration when nested declaration names are the same and parent has fqn - different combinations`(
+    fun `source declaration when nested declaration names are the same and parent has fullyQualifiedName - different combinations`(
         fileName: String,
         instanceOf: KClass<*>,
         notInstanceOf: KClass<*>,
-        fqn: String?,
+        fullyQualifiedName: String?,
     ) {
         // given
         val sut =
@@ -186,11 +186,11 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         assertSoftly(sut) {
             sourceDeclaration shouldBeInstanceOf instanceOf
             sourceDeclaration shouldNotBeInstanceOf notInstanceOf
-            (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fqn
+            (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo fullyQualifiedName
 
             it
                 .hasSourceDeclaration { declaration ->
-                    (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fqn
+                    (declaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fullyQualifiedName
                 }.shouldBeEqualTo(true)
 
             it.hasSourceDeclaration { declaration -> declaration.hasNameEndingWith("Suffix") } shouldBeEqualTo false
