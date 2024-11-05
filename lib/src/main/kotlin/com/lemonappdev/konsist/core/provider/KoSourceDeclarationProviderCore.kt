@@ -36,7 +36,7 @@ internal interface KoSourceDeclarationProviderCore :
                 TypeUtil.getBasicType(
                     listOf(ktTypeReference, ktNameReferenceExpression, ktTypeProjection),
                     isExtensionDeclaration(),
-                    getDeclarationWithFqn(containingDeclaration) ?: containingDeclaration,
+                    getDeclarationWithfullyQualifiedName(containingDeclaration) ?: containingDeclaration,
                     containingFile,
                 )
 
@@ -91,14 +91,14 @@ internal interface KoSourceDeclarationProviderCore :
             ktNameReferenceExpression?.isExtensionDeclaration() == true ||
             ktTypeProjection?.isExtensionDeclaration() == true
 
-    private fun getDeclarationWithFqn(declaration: KoBaseDeclaration): KoBaseDeclaration? =
+    private fun getDeclarationWithfullyQualifiedName(declaration: KoBaseDeclaration): KoBaseDeclaration? =
         when {
             declaration is KoFullyQualifiedNameProvider && declaration.fullyQualifiedName != null -> {
                 declaration
             }
 
             declaration is KoContainingDeclarationProvider && declaration !is KoFileDeclaration -> {
-                getDeclarationWithFqn(declaration.containingDeclaration)
+                getDeclarationWithfullyQualifiedName(declaration.containingDeclaration)
             }
 
             else -> {
