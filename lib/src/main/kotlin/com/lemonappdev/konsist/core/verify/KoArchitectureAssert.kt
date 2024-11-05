@@ -151,11 +151,11 @@ private fun <T> getFailureMessage(
 
         val asciiTreNodes = fileNodes.map { file ->
             AsciiTreeNode(
-                string = "file ${file.path}",
-                children = file.imports.map { import ->
+                file,
+                file.imports.map { import ->
                     AsciiTreeNode(
-                        string = "import ${import.name}",
-                        children = emptyList(),
+                        import,
+                        emptyList(),
                     )
                 }
             )
@@ -163,8 +163,8 @@ private fun <T> getFailureMessage(
 
         AsciiTreeCreator().invoke(
             AsciiTreeNode(
-                string = getRootMessage(failure),
-                children = asciiTreNodes,
+                getRootMessage(failure),
+                asciiTreNodes,
             )
         )
     }
