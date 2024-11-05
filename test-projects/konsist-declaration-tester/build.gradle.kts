@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlinJvm)
     alias(libs.plugins.testLogger)
 }
 
@@ -27,7 +27,7 @@ tasks.withType<Test> {
 }
 
 dependencies {
-    implementation(libs.kotlin.stdlib.jdk8)
+    implementation(libs.kotlinStdlibJdk8)
 
     testImplementation(libs.konsist)
     testImplementation(libs.junitJupiterEngine)
