@@ -4,8 +4,8 @@ plugins {
 }
 
 dependencies {
-    implementation(libs.kotlin.stdlib.jdk8)
-    implementation(libs.kotlin.compiler.embeddable)
+    implementation(libs.kotlinStdlibJdk8)
+    implementation(libs.kotlinCompilerEmbeddable)
     implementation(libs.kotlinx.coroutines.core)
 
     testImplementation(libs.junitJupiterEngine)
