@@ -1,19 +1,9 @@
 package com.lemonappdev.konsist.api.provider
 
 /**
- * An interface representing a Kotlin declaration that provides access to its source type and import alias name.
+ * An interface representing a Kotlin declaration that provides access to its source type.
  */
-@Deprecated("Will be removed in version 0.19.0", ReplaceWith("KoSourceTypeProvider"))
-interface KoSourceAndAliasTypeProvider : KoBaseProvider {
-    /**
-     * Returns `true` if this type is defined by the import alias.
-     *
-     * For the type import `import com.app.MyClass as MyAlias` the `isAlias` will be `true`.
-     * For the type import `import com.app.MyClass` the `isAlias` will be `false`.
-     */
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isImportAlias"))
-    val isAlias: Boolean
-
+interface KoSourceTypeProvider : KoBaseProvider {
     /**
      * The source type.
      * For `val car:MyClass` it will be "MyClass".

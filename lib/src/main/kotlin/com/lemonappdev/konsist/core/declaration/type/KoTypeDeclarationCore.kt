@@ -27,6 +27,7 @@ import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceAndAliasTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoStarProjectionProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
@@ -60,6 +61,7 @@ internal class KoTypeDeclarationCore private constructor(
     KoSourceSetProviderCore,
     KoStarProjectionProviderCore,
     KoSourceAndAliasTypeProviderCore,
+    KoSourceTypeProviderCore,
     KoGenericTypeProviderCore,
     KoIsGenericTypeProviderCore,
     KoIsGenericProviderCore,
@@ -135,6 +137,12 @@ internal class KoTypeDeclarationCore private constructor(
 
     @RemoveInVersion("0.18.0")
     override val isNullable: Boolean by lazy { super<KoIsNullableProviderCore>.isNullable }
+
+    @RemoveInVersion("0.19.0")
+    override val sourceType: String by lazy { super<KoSourceTypeProviderCore>.sourceType }
+
+    @RemoveInVersion("0.19.0")
+    override val bareSourceType: String by lazy { super<KoSourceTypeProviderCore>.bareSourceType }
 
     override fun toString(): String = text
 
