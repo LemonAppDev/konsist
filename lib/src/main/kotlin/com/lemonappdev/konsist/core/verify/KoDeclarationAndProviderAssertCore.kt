@@ -14,6 +14,7 @@ import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
+import com.lemonappdev.konsist.core.util.HyperlinkUtil
 import java.io.File
 
 internal fun <E : KoBaseProvider> List<E?>.assert(
@@ -256,8 +257,7 @@ private fun processFailedItems(failedItems: List<*>): Pair<String, List<String>>
             when (item) {
                 is KoFileDeclaration -> {
                     types = "files"
-                    val absolutePath = File(item.path).absolutePath
-                    val hyperlinkUrl = "file://$absolutePath"
+                    val hyperlinkUrl = HyperlinkUtil.toHyperlink(item.path)
 
                     "$hyperlinkUrl ${
                         getFailedNameWithDeclarationType(
@@ -271,9 +271,7 @@ private fun processFailedItems(failedItems: List<*>): Pair<String, List<String>>
                     types = "declarations"
                     val name = (item as? KoNameProvider)?.name
                     val location = (item as? KoLocationProvider)?.location
-
-                    val absolutePath = location?.let { File(it).absolutePath }
-                    val hyperlinkUrl = "file://$absolutePath"
+                    val hyperlinkUrl = location?.let { HyperlinkUtil.toHyperlink(it) }
 
                     "$hyperlinkUrl ${getFailedNameWithDeclarationType(name, item.getDeclarationType())}"
                 }

@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.snippet
 import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeCreator
 import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeNode
 import com.lemonappdev.konsist.core.util.FileExtension
+import com.lemonappdev.konsist.core.util.HyperlinkUtil
 import org.amshove.kluent.assertSoftly
 import org.junit.jupiter.api.Test
 import java.io.File
@@ -22,9 +23,8 @@ class SnippetTest {
         val snippetPaths: List<String> =
             snippets.map {
                 val path = it.path.removePrefix("../lib/")
-                val absolutePath = File(path).absolutePath
 
-                "file://$absolutePath"
+                HyperlinkUtil.toHyperlink(path)
             }
 
         /*
@@ -96,8 +96,8 @@ class SnippetTest {
 
                             val testSourceSetPath = "src/integrationTest/kotlin/com/lemonappdev/konsist/"
                             val path = "$testSourceSetPath$filePath$cleanedMatch${FileExtension.KOTLIN_TEST_SNIPPET}"
-                            val absolutePath = File(path).absolutePath
-                            "file://$absolutePath"
+
+                            HyperlinkUtil.toHyperlink(path)
                         }
                 } else {
                     emptySequence()
