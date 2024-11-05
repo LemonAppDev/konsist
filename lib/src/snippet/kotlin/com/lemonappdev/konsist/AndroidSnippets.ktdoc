@@ -12,6 +12,7 @@ import com.lemonappdev.konsist.api.ext.list.withParentNamed
 import com.lemonappdev.konsist.api.ext.list.withParentOf
 import com.lemonappdev.konsist.api.ext.list.withoutClassDeclaration
 import com.lemonappdev.konsist.api.ext.list.withoutKotlinBasicType
+import com.lemonappdev.konsist.api.ext.list.withoutKotlinBasicTypeDeclaration
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 
@@ -74,7 +75,7 @@ class AndroidSnippets {
             .withParentNamed("Serializable")
             .properties()
             .types
-            .withoutKotlinBasicType()
+            .withoutKotlinBasicTypeDeclaration()
             .withoutClassDeclaration { it.hasEnumModifier }
             .assertTrue(additionalMessage = message) {
                 it.asClassDeclaration()?.hasParentWithName("Serializable")
