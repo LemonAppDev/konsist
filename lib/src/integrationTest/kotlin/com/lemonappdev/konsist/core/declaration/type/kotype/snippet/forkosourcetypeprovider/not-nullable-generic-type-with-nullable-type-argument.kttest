@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.SampleType
+
+val sampleProperty1: List<SampleType?> = listOf()

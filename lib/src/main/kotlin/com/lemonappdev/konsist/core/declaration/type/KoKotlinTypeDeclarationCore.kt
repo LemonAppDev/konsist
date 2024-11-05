@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceAndAliasTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceTypeProviderCore
 import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
@@ -18,7 +19,7 @@ internal class KoKotlinTypeDeclarationCore private constructor(
     KoBaseTypeDeclarationCore,
     KoBaseProviderCore,
     KoFullyQualifiedNameProviderCore,
-    KoSourceAndAliasTypeProviderCore {
+    KoSourceTypeProviderCore {
     override val psiElement: PsiElement by lazy { ktElement }
 
     override val packagee: KoPackageDeclaration? by lazy {

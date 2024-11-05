@@ -2,14 +2,15 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
+import com.lemonappdev.konsist.api.provider.KoSourceTypeProvider
 import com.lemonappdev.konsist.core.declaration.KoFileDeclarationCore
 import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.psi.KtElement
 
-@Deprecated("Will be removed in version 0.19.0", ReplaceWith("KoSourceTypeProvider"))
-internal interface KoSourceAndAliasTypeProviderCore :
-    KoSourceAndAliasTypeProvider,
+internal interface KoSourceTypeProviderCore :
+    KoSourceTypeProvider,
     KoTextProviderCore,
     KoBaseProviderCore {
     val ktElement: KtElement
@@ -17,13 +18,9 @@ internal interface KoSourceAndAliasTypeProviderCore :
     private val file: KoFileDeclaration
         get() = KoFileDeclarationCore(ktElement.containingKtFile)
 
-    @Deprecated("Will be removed in version 0.19.0", replaceWith = ReplaceWith("isImportAlias"))
-    override val isAlias: Boolean
-        get() = (this as? KoTypeDeclaration)?.isImportAlias == true
-
     override val sourceType: String
         get() =
-            if (isAlias) {
+            if ((this as? KoDeclarationCastProvider)?.isImportAlias == true) {
                 file
                     .imports
                     .firstOrNull { it.alias?.name == ktElement.text.removeSuffix("?") }
