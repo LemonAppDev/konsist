@@ -16,12 +16,16 @@ internal interface KoSourceAndAliasTypeProviderCore :
     private val file: KoFileDeclaration
         get() = KoFileDeclarationCore(ktElement.containingKtFile)
 
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith("isImportAlias"))
     override val isAlias: Boolean
+        get() = isImportAlias
+
+    override val isImportAlias: Boolean
         get() = (this as? KoTypeDeclaration)?.isImportAlias == true
 
     override val sourceType: String
         get() =
-            if (isAlias) {
+            if (isImportAlias) {
                 file
                     .imports
                     .firstOrNull { it.alias?.name == ktElement.text.removeSuffix("?") }

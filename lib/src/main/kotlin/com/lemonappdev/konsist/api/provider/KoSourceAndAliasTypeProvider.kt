@@ -10,7 +10,16 @@ interface KoSourceAndAliasTypeProvider : KoBaseProvider {
      * For the type import `import com.app.MyClass as MyAlias` the `isAlias` will be `true`.
      * For the type import `import com.app.MyClass` the `isAlias` will be `false`.
      */
+    @Deprecated("Will be removed in version 0.18.0", ReplaceWith("isImportAlias"))
     val isAlias: Boolean
+
+    /**
+     * Returns `true` if this type is defined by the import alias.
+     *
+     * For the type import `import com.app.MyClass as MyAlias` the `isImportAlias` will be `true`.
+     * For the type import `import com.app.MyClass` the `isImportAlias` will be `false`.
+     */
+    val isImportAlias: Boolean
 
     /**
      * The source type.

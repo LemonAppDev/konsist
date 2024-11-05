@@ -19,7 +19,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleType?"
             it?.bareSourceType shouldBeEqualTo "SampleType"
-            it?.isAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
         }
     }
 
@@ -36,7 +36,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleType"
             it?.bareSourceType shouldBeEqualTo "SampleType"
-            it?.isAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
         }
     }
 
@@ -53,7 +53,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleInterface?"
             it?.bareSourceType shouldBeEqualTo "SampleInterface"
-            it?.isAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
         }
     }
 
@@ -70,7 +70,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleInterface"
             it?.bareSourceType shouldBeEqualTo "SampleInterface"
-            it?.isAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
         }
     }
 
@@ -87,7 +87,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleObject?"
             it?.bareSourceType shouldBeEqualTo "SampleObject"
-            it?.isAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
         }
     }
 
@@ -104,7 +104,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleObject"
             it?.bareSourceType shouldBeEqualTo "SampleObject"
-            it?.isAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
         }
     }
 
@@ -121,7 +121,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleTypeAlias?"
             it?.bareSourceType shouldBeEqualTo "() -> Unit"
-            it?.isAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
         }
     }
 
@@ -138,7 +138,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleTypeAlias"
             it?.bareSourceType shouldBeEqualTo "() -> Unit"
-            it?.isAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
         }
     }
 
@@ -158,7 +158,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "TestType?"
             it?.bareSourceType shouldBeEqualTo "TestType"
-            it?.isAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
         }
     }
 
@@ -178,7 +178,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "TestType"
             it?.bareSourceType shouldBeEqualTo "TestType"
-            it?.isAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
         }
     }
 
@@ -195,7 +195,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "String"
             it?.bareSourceType shouldBeEqualTo "String"
-            it?.isAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
         }
     }
 
@@ -212,7 +212,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "String?"
             it?.bareSourceType shouldBeEqualTo "String"
-            it?.isAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
         }
     }
 
@@ -229,7 +229,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "List<SampleType>"
             it?.bareSourceType shouldBeEqualTo "List"
-            it?.isAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
         }
     }
 
@@ -246,7 +246,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "List<SampleType?>"
             it?.bareSourceType shouldBeEqualTo "List"
-            it?.isAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
         }
     }
 
@@ -263,7 +263,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "List<SampleType>?"
             it?.bareSourceType shouldBeEqualTo "List"
-            it?.isAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
         }
     }
 
@@ -280,7 +280,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "List<SampleType?>?"
             it?.bareSourceType shouldBeEqualTo "List"
-            it?.isAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
         }
     }
 
@@ -297,7 +297,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleType"
             it?.bareSourceType shouldBeEqualTo "SampleType"
-            it?.isAlias shouldBeEqualTo true
+            it?.isImportAlias shouldBeEqualTo true
         }
     }
 
@@ -314,7 +314,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleType"
             it?.bareSourceType shouldBeEqualTo "SampleType"
-            it?.isAlias shouldBeEqualTo true
+            it?.isImportAlias shouldBeEqualTo true
         }
     }
 
@@ -331,7 +331,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "() -> Unit"
             it?.bareSourceType shouldBeEqualTo "() -> Unit"
-            it?.isAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
         }
     }
 
@@ -348,7 +348,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "(() -> Unit)?"
             it?.bareSourceType shouldBeEqualTo "() -> Unit"
-            it?.isAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
         }
     }
 
@@ -365,7 +365,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleExternalClass"
             it?.bareSourceType shouldBeEqualTo "SampleExternalClass"
-            it?.isAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
         }
     }
 
@@ -382,7 +382,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleExternalClass?"
             it?.bareSourceType shouldBeEqualTo "SampleExternalClass"
-            it?.isAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
         }
     }
 
