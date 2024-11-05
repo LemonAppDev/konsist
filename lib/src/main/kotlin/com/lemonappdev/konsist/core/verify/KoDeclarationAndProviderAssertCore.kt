@@ -8,10 +8,13 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeCreator
+import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeNode
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
+import java.io.File
 
 internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
@@ -232,28 +235,53 @@ private fun getCheckFailedMessage(
     val customMessage = additionalMessage?.let { "\n$it\n" } ?: " "
     val times = if (failedItems.size == 1) "time" else "times"
 
-    return "Assert '$testName' was violated (${failedItems.size} $times).$customMessage" +
-        "Invalid $types:\n$failedDeclarationsMessage"
+    val getRootMessage =
+        "Assert '$testName' was violated (${failedItems.size} $times).$customMessage" +
+            "Invalid $types:"
+
+    val asciiTreeNodes = failedDeclarationsMessage.map { AsciiTreeNode(it, emptyList()) }
+
+    return AsciiTreeCreator().invoke(
+        AsciiTreeNode(
+            getRootMessage,
+            asciiTreeNodes,
+        ),
+    )
 }
 
-private fun processFailedItems(failedItems: List<*>): Pair<String, String> {
+private fun processFailedItems(failedItems: List<*>): Pair<String, List<String>> {
     var types = ""
     val failedDeclarationsMessage =
-        failedItems.joinToString("\n") { item ->
+        failedItems.map { item ->
             when (item) {
                 is KoFileDeclaration -> {
                     types = "files"
-                    "${item.path} ${getFailedNameWithDeclarationType(item.nameWithExtension, item.getDeclarationType())}"
+                    val absolutePath = File(item.path).absolutePath
+                    val hyperlinkUrl = "file://$absolutePath"
+
+                    "$hyperlinkUrl ${
+                        getFailedNameWithDeclarationType(
+                            item.nameWithExtension,
+                            item.getDeclarationType(),
+                        )
+                    }"
                 }
+
                 is KoBaseProvider -> {
                     types = "declarations"
                     val name = (item as? KoNameProvider)?.name
                     val location = (item as? KoLocationProvider)?.location
-                    "$location ${getFailedNameWithDeclarationType(name, item.getDeclarationType())}"
+
+                    val absolutePath = location?.let { File(it).absolutePath }
+                    val hyperlinkUrl = "file://$absolutePath"
+
+                    "$hyperlinkUrl ${getFailedNameWithDeclarationType(name, item.getDeclarationType())}"
                 }
+
                 else -> ""
             }
         }
+
     return Pair(types, failedDeclarationsMessage)
 }
 

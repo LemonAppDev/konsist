@@ -150,7 +150,7 @@ private fun <T> getFailureMessage(
                 else -> emptyList()
             }
 
-        val asciiTreNodes =
+        val asciiTreeNodes =
             files.map { file ->
                 val children =
                     file
@@ -163,7 +163,7 @@ private fun <T> getFailureMessage(
         AsciiTreeCreator().invoke(
             AsciiTreeNode(
                 getRootMessage(failure),
-                asciiTreNodes,
+                asciiTreeNodes,
             ),
         )
     }
