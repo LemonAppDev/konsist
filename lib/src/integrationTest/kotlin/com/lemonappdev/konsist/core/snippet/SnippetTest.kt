@@ -1,5 +1,7 @@
 package com.lemonappdev.konsist.core.snippet
 
+import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeCreator
+import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeNode
 import com.lemonappdev.konsist.core.util.FileExtension
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -20,7 +22,10 @@ class SnippetTest {
 
         val snippetPaths =
             snippets
-                .map { it.path }
+                .map {
+                    val absolutePath = File(it.path).absolutePath
+                    "file://$absolutePath"
+                }
 
         val snippetNames =
             snippets
@@ -53,8 +58,15 @@ class SnippetTest {
 
         // then
         assertSoftly {
-            sut shouldBeEqualTo emptySet()
-            require(sut.isEmpty()) { "Unused snippets: ${sut.map { snippetMap[it] }}" }
+            val asciiTreeNodes = sut.mapNotNull { snippetMap[it]?.let { path -> AsciiTreeNode(path, emptyList()) } }
+
+            val asciiTree = AsciiTreeCreator().invoke(
+                AsciiTreeNode(
+                    "Unused snippets:",
+                    asciiTreeNodes,
+                ),
+            )
+            require(sut.isEmpty()) { asciiTree }
         }
     }
 
