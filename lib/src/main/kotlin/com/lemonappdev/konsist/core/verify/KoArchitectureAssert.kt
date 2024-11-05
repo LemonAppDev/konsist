@@ -131,7 +131,7 @@ private fun getFailedDependsOnNothingMessage(failures: List<DependsOnNothingDepe
 private fun getFailedDoesNotDependsOnLayersMessage(failures: List<DoesNotDependsOnLayerDependencyFailure>): String? =
     getFailureMessage(failures) {
         "'${it.layer1.name}' layer does not depends on '${it.doesNotDependOnLayer.name}' layer failed. " +
-                "Files that depend on '${it.doesNotDependOnLayer.name}' layer:"
+            "Files that depend on '${it.doesNotDependOnLayer.name}' layer:"
     }
 
 private fun <T> getFailureMessage(
@@ -143,29 +143,34 @@ private fun <T> getFailureMessage(
     }
 
     return failures.joinToString("\n\n") { failure ->
-        val fileNodes = when (failure) {
-            is DependsOnNothingDependencyFailure -> failure.failedFiles
-            is DoesNotDependsOnLayerDependencyFailure -> failure.failedFiles
-            else -> emptyList()
-        }
+        val files =
+            when (failure) {
+                is DependsOnNothingDependencyFailure -> failure.failedFiles
+                is DoesNotDependsOnLayerDependencyFailure -> failure.failedFiles
+                else -> emptyList()
+            }
 
-        val asciiTreNodes = fileNodes.map { file ->
-            AsciiTreeNode(
-                file,
-                file.imports.map { import ->
-                    AsciiTreeNode(
-                        import,
-                        emptyList(),
-                    )
+        val asciiTreNodes =
+            files
+                .map { file ->
+                    val children =
+                        file
+                            .imports
+                            .map { import ->
+                                AsciiTreeNode(
+                                    import,
+                                    emptyList(),
+                                )
+                            }
+
+                    AsciiTreeNode(file, children)
                 }
-            )
-        }
 
         AsciiTreeCreator().invoke(
             AsciiTreeNode(
                 getRootMessage(failure),
                 asciiTreNodes,
-            )
+            ),
         )
     }
 }
