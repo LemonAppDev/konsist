@@ -143,26 +143,22 @@ private fun <T> getFailureMessage(
     }
 
     return failures.joinToString("\n\n") { failure ->
-        val files = when (failure) {
+        val files =
+            when (failure) {
                 is DependsOnNothingDependencyFailure -> failure.failedFiles
                 is DoesNotDependsOnLayerDependencyFailure -> failure.failedFiles
                 else -> emptyList()
             }
 
         val asciiTreNodes =
-            files
-                .map { file ->
-                    val children = file
-                            .imports
-                            .map { import ->
-                                AsciiTreeNode(
-                                    import,
-                                    emptyList(),
-                                )
-                            }
+            files.map { file ->
+                val children =
+                    file
+                        .imports
+                        .map { AsciiTreeNode(it, emptyList()) }
 
-                    AsciiTreeNode(file, children)
-                }
+                AsciiTreeNode(file, children)
+            }
 
         AsciiTreeCreator().invoke(
             AsciiTreeNode(
