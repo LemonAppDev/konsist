@@ -96,6 +96,7 @@ class KoParentDeclarationForKoContainingFileProviderTest {
                 arguments("class-with-external-parent-interface"),
                 arguments("class-with-generic-external-parent-interface"),
                 arguments("class-with-external-parent-by-delegation"),
+                arguments("class-with-multiline-external-parent"),
                 arguments("class-with-typealias-parent"),
                 arguments("class-with-import-alias-parent"),
             )

@@ -238,6 +238,44 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
     }
 
     @Test
+    fun `nullable-function-type`() {
+        // given
+        val sut =
+            getSnippetFile("nullable-function-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.hasSourceDeclaration { declaration -> declaration.name == "(SampleObject) -> Unit" } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `not-nullable-function-type`() {
+        // given
+        val sut =
+            getSnippetFile("not-nullable-function-type")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.hasSourceDeclaration { declaration -> declaration.name == "(SampleObject) -> Unit" } shouldBeEqualTo false
+            it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `star-projection-type`() {
         // given
         val sut =
