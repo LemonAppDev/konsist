@@ -256,6 +256,7 @@ private fun processFailedItems(failedItems: List<*>): Pair<String, List<String>>
             when (item) {
                 is KoFileDeclaration -> {
                     types = "files"
+
                     val hyperlinkUrl = HyperlinkUtil.toHyperlink(item.path)
 
                     "$hyperlinkUrl ${
@@ -270,6 +271,7 @@ private fun processFailedItems(failedItems: List<*>): Pair<String, List<String>>
                     types = "declarations"
                     val name = (item as? KoNameProvider)?.name
                     val location = (item as? KoLocationProvider)?.location
+
                     val hyperlinkUrl = location?.let { HyperlinkUtil.toHyperlink(it) }
 
                     "$hyperlinkUrl ${getFailedNameWithDeclarationType(name, item.getDeclarationType())}"
