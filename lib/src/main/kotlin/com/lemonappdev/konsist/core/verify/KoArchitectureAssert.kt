@@ -123,40 +123,49 @@ private fun getExceptionMessage(
     return "'$localTestName' test has failed. ${customMessage}\n$errorMessage"
 }
 
-private fun getFailedDependsOnNothingMessage(failedDependsOnNothing: List<DependsOnNothingDependencyFailure>): String? {
-    if (failedDependsOnNothing.isEmpty()) {
+private fun getFailedDependsOnNothingMessage(failures: List<DependsOnNothingDependencyFailure>): String? =
+    getFailureMessage(failures) {
+        "'${it.layer.name}' layer should not depend on anything but has dependencies in files:"
+    }
+
+private fun getFailedDoesNotDependsOnLayersMessage(failures: List<DoesNotDependsOnLayerDependencyFailure>): String? =
+    getFailureMessage(failures) {
+        "'${it.layer1.name}' layer does not depends on '${it.doesNotDependOnLayer.name}' layer failed. " +
+            "Files that depend on '${it.doesNotDependOnLayer.name}' layer:"
+    }
+
+private fun <T> getFailureMessage(
+    failures: List<T>,
+    getRootMessage: (T) -> String,
+): String? {
+    if (failures.isEmpty()) {
         return null
     }
 
-    return failedDependsOnNothing.joinToString("\n\n") { failure ->
-        val headerNode =
-            AsciiTreeNode(
-                string = "'${failure.layer.name}' layer should not depend on anything but has dependencies in files:",
-            )
-
-        val fileNodes =
-            failure.failedFiles.map { file ->
-                val importNodes =
-                    file.imports.map { import ->
-                        AsciiTreeNode(
-                            string = "import ${import.name}",
-                            children = emptyList(),
-                        )
-                    }
-
-                AsciiTreeNode(
-                    string = "file ${file.path}",
-                    children = importNodes,
-                )
+    return failures.joinToString("\n\n") { failure ->
+        val files =
+            when (failure) {
+                is DependsOnNothingDependencyFailure -> failure.failedFiles
+                is DoesNotDependsOnLayerDependencyFailure -> failure.failedFiles
+                else -> emptyList()
             }
 
-        val rootNode =
-            AsciiTreeNode(
-                string = headerNode.string,
-                children = fileNodes,
-            )
+        val asciiTreNodes =
+            files.map { file ->
+                val children =
+                    file
+                        .imports
+                        .map { AsciiTreeNode(it, emptyList()) }
 
-        AsciiTreeCreator().invoke(rootNode)
+                AsciiTreeNode(file, children)
+            }
+
+        AsciiTreeCreator().invoke(
+            AsciiTreeNode(
+                getRootMessage(failure),
+                asciiTreNodes,
+            ),
+        )
     }
 }
 
@@ -167,47 +176,6 @@ private fun getFailedDependsOnMessage(dependsOnLayerDependencyFailures: List<Dep
 
     return dependsOnLayerDependencyFailures.joinToString("\n") {
         "Layer '${it.layer1.name}' does not depends on '${it.dependsOnLayer.name}' layer."
-    }
-}
-
-private fun getFailedDoesNotDependsOnLayersMessage(
-    doesNotDependsOnLayerDependencyFailures: List<DoesNotDependsOnLayerDependencyFailure>,
-): String? {
-    if (doesNotDependsOnLayerDependencyFailures.isEmpty()) {
-        return null
-    }
-
-    return doesNotDependsOnLayerDependencyFailures.joinToString("\n\n") { failure ->
-        val headerNode =
-            AsciiTreeNode(
-                string =
-                    "'${failure.layer1.name}' layer does not depends on '${failure.doesNotDependOnLayer.name}' layer failed. " +
-                        "Files that depend on '${failure.doesNotDependOnLayer.name}' layer:",
-            )
-
-        val fileNodes =
-            failure.failedFiles.map { file ->
-                val importNodes =
-                    file.imports.map { import ->
-                        AsciiTreeNode(
-                            string = "import ${import.name}",
-                            children = emptyList(),
-                        )
-                    }
-
-                AsciiTreeNode(
-                    string = "file ${file.path}",
-                    children = importNodes,
-                )
-            }
-
-        val rootNode =
-            AsciiTreeNode(
-                string = headerNode.string,
-                children = fileNodes,
-            )
-
-        AsciiTreeCreator().invoke(rootNode)
     }
 }
 
