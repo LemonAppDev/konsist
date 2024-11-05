@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.ext.list.declaration.flatten
 import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.ext.list.returnTypes
 import com.lemonappdev.konsist.api.ext.list.typeArguments
@@ -29,7 +30,7 @@ class GenericTypesSnippets {
             .properties()
             .types
             .typeArguments
-            .sourceDeclarations()
+            .flatten()
             .assertFalse { it.isStarProjection }
     }
 
@@ -39,6 +40,7 @@ class GenericTypesSnippets {
             .scopeFromProduction()
             .functions()
             .returnTypes
+            .withGeneric()
             .typeArguments
             .assertTrue { it.isKotlinCollectionType }
     }
