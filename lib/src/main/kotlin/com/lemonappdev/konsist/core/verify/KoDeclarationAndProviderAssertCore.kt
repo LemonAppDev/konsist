@@ -239,12 +239,12 @@ private fun getCheckFailedMessage(
         "Assert '$testName' was violated (${failedItems.size} $times).$customMessage" +
             "Invalid $types:"
 
-    val asciiTreeNodes = failedDeclarationsMessage.map { AsciiTreeNode(it, emptyList()) }
+    val failedDeclarationAsciiTreeNodes = failedDeclarationsMessage.map { AsciiTreeNode(it, emptyList()) }
 
     return AsciiTreeCreator().invoke(
         AsciiTreeNode(
             getRootMessage,
-            asciiTreeNodes,
+            failedDeclarationAsciiTreeNodes,
         ),
     )
 }
