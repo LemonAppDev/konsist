@@ -11,7 +11,7 @@ data class AsciiTreeNode(
         koFileDeclaration: KoFileDeclaration,
         children: List<AsciiTreeNode>,
     ) : this(
-        "file ${koFileDeclaration.path}",
+        "File ${koFileDeclaration.path}",
         children,
     )
 
@@ -19,7 +19,7 @@ data class AsciiTreeNode(
         koImportDeclaration: KoImportDeclaration,
         children: List<AsciiTreeNode>,
     ) : this(
-        "import ${koImportDeclaration.name}",
+        "Import ${koImportDeclaration.name}",
         children,
     )
 }
