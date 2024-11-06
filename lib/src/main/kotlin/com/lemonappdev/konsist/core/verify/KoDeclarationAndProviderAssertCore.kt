@@ -259,12 +259,12 @@ private fun processFailedItems(failedItems: List<*>): Pair<String, List<String>>
 
                     val hyperlinkUrl = HyperlinkUtil.toHyperlink(item.path)
 
-                    "$hyperlinkUrl ${
+                    "${
                         getFailedNameWithDeclarationType(
                             item.nameWithExtension,
                             item.getDeclarationType(),
                         )
-                    }"
+                    } $hyperlinkUrl"
                 }
 
                 is KoBaseProvider -> {
@@ -274,7 +274,7 @@ private fun processFailedItems(failedItems: List<*>): Pair<String, List<String>>
 
                     val hyperlinkUrl = location?.let { HyperlinkUtil.toHyperlink(it) }
 
-                    "$hyperlinkUrl ${getFailedNameWithDeclarationType(name, item.getDeclarationType())}"
+                    "${getFailedNameWithDeclarationType(name, item.getDeclarationType())} $hyperlinkUrl"
                 }
 
                 else -> ""
@@ -287,7 +287,7 @@ private fun processFailedItems(failedItems: List<*>): Pair<String, List<String>>
 private fun getFailedNameWithDeclarationType(
     name: String?,
     declarationType: String?,
-) = if (name != null) "($declarationType '$name')" else "($declarationType)"
+) = if (name != null) "$declarationType $name" else "$declarationType"
 
 private fun getEmptyResult(
     items: List<*>,
