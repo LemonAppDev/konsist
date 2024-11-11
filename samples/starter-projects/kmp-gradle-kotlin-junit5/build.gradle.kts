@@ -57,7 +57,7 @@ kotlin {
             dependencies {
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.3.1-pre.828")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.3.1-pre.828")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.13.3-pre.828")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.13.3-pre.829")
             }
         }
         val jsTest by getting
