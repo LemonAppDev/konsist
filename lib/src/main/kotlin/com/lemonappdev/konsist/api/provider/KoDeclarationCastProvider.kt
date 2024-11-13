@@ -7,6 +7,10 @@ import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
+import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.combined.KoClassAndObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.combined.KoInterfaceAndObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import kotlin.reflect.KClass
 
@@ -26,9 +30,29 @@ interface KoDeclarationCastProvider : KoBaseProvider {
     val isObject: Boolean
 
     /**
-     * Determines whatever declaration is a interface.
+     * Determines whatever declaration is an interface.
      */
     val isInterface: Boolean
+
+    /**
+     * Determines whatever declaration is a class or an object.
+     */
+    val isClassOrObject: Boolean
+
+    /**
+     * Determines whatever declaration is a class or an interface.
+     */
+    val isClassOrInterface: Boolean
+
+    /**
+     * Determines whatever declaration is an interface or an object.
+     */
+    val isInterfaceOrObject: Boolean
+
+    /**
+     * Determines whatever declaration is a class, an interface or an object.
+     */
+    val isClassOrInterfaceOrObject: Boolean
 
     /**
      * Determines whatever declaration is a type alias.
@@ -97,6 +121,34 @@ interface KoDeclarationCastProvider : KoBaseProvider {
      * @return the interface declaration associated with this declaration.
      */
     fun asInterfaceDeclaration(): KoInterfaceDeclaration?
+
+    /**
+     * Represents the class or object declaration associated with this declaration.
+     *
+     * @return the class or object declaration associated with this declaration.
+     */
+    fun asClassOrObjectDeclaration(): KoClassAndObjectDeclaration?
+
+    /**
+     * Represents the class or interface declaration associated with this declaration.
+     *
+     * @return the class or interface declaration associated with this declaration.
+     */
+    fun asClassOrInterfaceDeclaration(): KoClassAndInterfaceDeclaration?
+
+    /**
+     * Represents the interface or object declaration associated with this declaration.
+     *
+     * @return the interface or object declaration associated with this declaration.
+     */
+    fun asInterfaceOrObjectDeclaration(): KoInterfaceAndObjectDeclaration?
+
+    /**
+     * Represents the class, interface or object declaration associated with this declaration.
+     *
+     * @return the class, interface or object declaration associated with this declaration.
+     */
+    fun asClassOrInterfaceOrObjectDeclaration(): KoClassAndInterfaceAndObjectDeclaration?
 
     /**
      * Represents the declaration alias declaration associated with this declaration.
@@ -194,19 +246,87 @@ interface KoDeclarationCastProvider : KoBaseProvider {
     /**
      * Whether declaration has a specified interface declaration.
      *
-     * @param predicate The predicate function used to determine if a interface declaration satisfies a condition.
+     * @param predicate The predicate function used to determine if an interface declaration satisfies a condition.
      * @return `true` if the declaration has the specified interface declaration (or any interface declaration if [predicate] is `null`),
      * `false` otherwise.
      */
     fun hasInterfaceDeclaration(predicate: ((KoInterfaceDeclaration) -> Boolean)? = null): Boolean
 
     /**
-     * Whether declaration has a interface declaration of the specified Kotlin class.
+     * Whether declaration has an interface declaration of the specified Kotlin class.
      *
      * @param kClass The Kotlin class representing the interface declaration to check for.
-     * @return `true` if the declaration has a interface declaration matching the specified KClass, `false` otherwise.
+     * @return `true` if the declaration has an interface declaration matching the specified KClass, `false` otherwise.
      */
     fun hasInterfaceDeclarationOf(kClass: KClass<*>): Boolean
+
+    /**
+     * Whether declaration has a specified class or object declaration.
+     *
+     * @param predicate The predicate function used to determine if class or object declaration satisfies a condition.
+     * @return `true` if the declaration has the specified class or object declaration (or any class or object declaration if [predicate] is `null`),
+     * `false` otherwise.
+     */
+    fun hasClassOrObjectDeclaration(predicate: ((KoClassAndObjectDeclaration) -> Boolean)? = null): Boolean
+
+    /**
+     * Whether declaration has a class or an object declaration of the specified Kotlin class.
+     *
+     * @param kClass The Kotlin class representing the class or object declaration to check for.
+     * @return `true` if the declaration has a class or an object declaration matching the specified KClass, `false` otherwise.
+     */
+    fun hasClassOrObjectDeclarationOf(kClass: KClass<*>): Boolean
+
+    /**
+     * Whether declaration has a specified class or interface declaration.
+     *
+     * @param predicate The predicate function used to determine if class or interface declaration satisfies a condition.
+     * @return `true` if the declaration has the specified class or interface declaration (or any class or interface declaration if [predicate] is `null`),
+     * `false` otherwise.
+     */
+    fun hasClassOrInterfaceDeclaration(predicate: ((KoClassAndInterfaceDeclaration) -> Boolean)? = null): Boolean
+
+    /**
+     * Whether declaration has a class or an interface declaration of the specified Kotlin class.
+     *
+     * @param kClass The Kotlin class representing the class or interface declaration to check for.
+     * @return `true` if the declaration has a class or an interface declaration matching the specified KClass, `false` otherwise.
+     */
+    fun hasClassOrInterfaceDeclarationOf(kClass: KClass<*>): Boolean
+
+    /**
+     * Whether declaration has a specified interface or object declaration.
+     *
+     * @param predicate The predicate function used to determine if interface or object declaration satisfies a condition.
+     * @return `true` if the declaration has the specified interface or object declaration (or any interface or object declaration if [predicate] is `null`),
+     * `false` otherwise.
+     */
+    fun hasInterfaceOrObjectDeclaration(predicate: ((KoInterfaceAndObjectDeclaration) -> Boolean)? = null): Boolean
+
+    /**
+     * Whether declaration has an interface or an object declaration of the specified Kotlin class.
+     *
+     * @param kClass The Kotlin class representing the interface or object declaration to check for.
+     * @return `true` if the declaration has an interface or an object declaration matching the specified KClass, `false` otherwise.
+     */
+    fun hasInterfaceOrObjectDeclarationOf(kClass: KClass<*>): Boolean
+
+    /**
+     * Whether declaration has a specified class, interface or object declaration.
+     *
+     * @param predicate The predicate function used to determine if class, interface or object declaration satisfies a condition.
+     * @return `true` if the declaration has the specified class, interface or object declaration (or any class, interface or object declaration if [predicate] is `null`),
+     * `false` otherwise.
+     */
+    fun hasClassOrInterfaceOrObjectDeclaration(predicate: ((KoClassAndInterfaceAndObjectDeclaration) -> Boolean)? = null): Boolean
+
+    /**
+     * Whether declaration has a class, an interface or an object declaration of the specified Kotlin class.
+     *
+     * @param kClass The Kotlin class representing the class, interface or object declaration to check for.
+     * @return `true` if the declaration has a class, an interface  or an object declaration matching the specified KClass, `false` otherwise.
+     */
+    fun hasClassOrInterfaceOrObjectDeclarationOf(kClass: KClass<*>): Boolean
 
     /**
      * Whether declaration has a specified type alias declaration.
