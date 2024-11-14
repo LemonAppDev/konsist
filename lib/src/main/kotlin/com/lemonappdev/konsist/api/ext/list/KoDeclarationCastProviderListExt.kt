@@ -9,6 +9,10 @@ import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
+import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.combined.KoClassAndObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.combined.KoInterfaceAndObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import kotlin.reflect.KClass
@@ -103,6 +107,63 @@ fun <T : KoDeclarationCastProvider> List<T>.interfaceDeclarations(
 ): List<KoInterfaceDeclaration> =
     filter { it.hasInterfaceDeclaration(predicate) }
         .mapNotNull { it.asInterfaceDeclaration() }
+
+/**
+ * List containing class and object declarations associated with declarations.
+ *
+ * @param predicate A function that defines the condition to be met by the class and object declaration.
+ *                  If null, all class and object declarations are included.
+ * @return A list of class and object declarations that match the provided predicate, or all class and object
+ * declarations if no predicate is provided.
+ */
+fun <T : KoDeclarationCastProvider> List<T>.classAndObjectDeclarations(
+    predicate: ((KoClassAndObjectDeclaration) -> Boolean)? = null,
+): List<KoClassAndObjectDeclaration> =
+    filter { it.hasClassOrObjectDeclaration(predicate) }
+        .mapNotNull { it.asClassOrObjectDeclaration() }
+
+/**
+ * List containing class and interface declarations associated with declarations.
+ *
+ * @param predicate A function that defines the condition to be met by the class and interface declaration.
+ *                  If null, all class and interface declarations are included.
+ * @return A list of class and interface declarations that match the provided predicate, or all class and interface
+ * declarations if no predicate is provided.
+ */
+fun <T : KoDeclarationCastProvider> List<T>.classAndInterfaceDeclarations(
+    predicate: ((KoClassAndInterfaceDeclaration) -> Boolean)? = null,
+): List<KoClassAndInterfaceDeclaration> =
+    filter { it.hasClassOrInterfaceDeclaration(predicate) }
+        .mapNotNull { it.asClassOrInterfaceDeclaration() }
+
+/**
+ * List containing interface and object declarations associated with declarations.
+ *
+ * @param predicate A function that defines the condition to be met by the interface and object declaration.
+ *                  If null, all interface and object declarations are included.
+ * @return A list of interface and object declarations that match the provided predicate, or all interface and object
+ * declarations if no predicate is provided.
+ */
+fun <T : KoDeclarationCastProvider> List<T>.interfaceAndObjectDeclarations(
+    predicate: ((KoInterfaceAndObjectDeclaration) -> Boolean)? = null,
+): List<KoInterfaceAndObjectDeclaration> =
+    filter { it.hasInterfaceOrObjectDeclaration(predicate) }
+        .mapNotNull { it.asInterfaceOrObjectDeclaration() }
+
+/**
+ * List containing class, interface and object declarations associated with declarations.
+ *
+ * @param predicate A function that defines the condition to be met by the class, interface and object declaration.
+ *                  If null, all class, interface and object declarations are included.
+ * @return A list of class, interface and object declarations that match the provided predicate, or all class,
+ * interface and object declarations if no predicate
+ * is provided.
+ */
+fun <T : KoDeclarationCastProvider> List<T>.classAndInterfaceAndObjectDeclarations(
+    predicate: ((KoClassAndInterfaceAndObjectDeclaration) -> Boolean)? = null,
+): List<KoClassAndInterfaceAndObjectDeclaration> =
+    filter { it.hasClassOrInterfaceOrObjectDeclaration(predicate) }
+        .mapNotNull { it.asClassOrInterfaceOrObjectDeclaration() }
 
 /**
  * List containing type alias declarations associated with declarations.
@@ -212,7 +273,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withClassDeclaration(predicate: ((Ko
     filter {
         when (predicate) {
             null -> it.isClass
-            else -> it.asClassDeclaration()?.let { classDeclaration -> predicate(classDeclaration) } ?: false
+            else -> it.asClassDeclaration()?.let { classDeclaration -> predicate(classDeclaration) } == true
         }
     }
 
@@ -226,7 +287,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutClassDeclaration(predicate: (
     filterNot {
         when (predicate) {
             null -> it.isClass
-            else -> it.asClassDeclaration()?.let { classDeclaration -> predicate(classDeclaration) } ?: false
+            else -> it.asClassDeclaration()?.let { classDeclaration -> predicate(classDeclaration) } == true
         }
     }
 
@@ -292,7 +353,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withObjectDeclaration(predicate: ((K
     filter {
         when (predicate) {
             null -> it.isObject
-            else -> it.asObjectDeclaration()?.let { objectDeclaration -> predicate(objectDeclaration) } ?: false
+            else -> it.asObjectDeclaration()?.let { objectDeclaration -> predicate(objectDeclaration) } == true
         }
     }
 
@@ -306,7 +367,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutObjectDeclaration(predicate: 
     filterNot {
         when (predicate) {
             null -> it.isObject
-            else -> it.asObjectDeclaration()?.let { objectDeclaration -> predicate(objectDeclaration) } ?: false
+            else -> it.asObjectDeclaration()?.let { objectDeclaration -> predicate(objectDeclaration) } == true
         }
     }
 
@@ -373,8 +434,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withInterfaceDeclaration(predicate: 
         when (predicate) {
             null -> it.isInterface
             else ->
-                it.asInterfaceDeclaration()?.let { interfaceDeclaration -> predicate(interfaceDeclaration) }
-                    ?: false
+                it.asInterfaceDeclaration()?.let { interfaceDeclaration -> predicate(interfaceDeclaration) } == true
         }
     }
 
@@ -389,8 +449,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutInterfaceDeclaration(predicat
         when (predicate) {
             null -> it.isInterface
             else ->
-                it.asInterfaceDeclaration()?.let { interfaceDeclaration -> predicate(interfaceDeclaration) }
-                    ?: false
+                it.asInterfaceDeclaration()?.let { interfaceDeclaration -> predicate(interfaceDeclaration) } == true
         }
     }
 
@@ -447,6 +506,330 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutInterfaceDeclarationOf(kClass
     }
 
 /**
+ * List containing declarations with the specified class or object declaration.
+ *
+ * @param predicate The predicate function to determine if a class or object declaration satisfies a condition.
+ * @return A list containing declarations with the specified class or object declaration.
+ */
+fun <T : KoDeclarationCastProvider> List<T>.withClassOrObjectDeclaration(predicate: ((KoClassAndObjectDeclaration) -> Boolean)? = null): List<T> =
+    filter {
+        when (predicate) {
+            null -> it.isClassOrObject
+            else -> it.asClassOrObjectDeclaration()?.let { declaration -> predicate(declaration) } == true
+        }
+    }
+
+/**
+ * List containing declarations without the specified class or object declaration.
+ *
+ * @param predicate The predicate function to determine if a class or object declaration satisfies a condition.
+ * @return A list containing declarations without the specified class or object declaration.
+ */
+fun <T : KoDeclarationCastProvider> List<T>.withoutClassOrObjectDeclaration(predicate: ((KoClassAndObjectDeclaration) -> Boolean)? = null): List<T> =
+    filterNot {
+        when (predicate) {
+            null -> it.isClassOrObject
+            else -> it.asClassOrObjectDeclaration()?.let { declaration -> predicate(declaration) } == true
+        }
+    }
+
+/**
+ * List containing declarations with class or object declaration of.
+ *
+ * @param kClass The Kotlin class representing the class or object declaration to include.
+ * @param kClasses The Kotlin class(es) representing the class or object declaration(s) to include.
+ * @return A list containing declarations with the class or object declaration of the specified Kotlin class(es).
+ */
+
+fun <T : KoDeclarationCastProvider> List<T>.withClassOrObjectDeclarationOf(
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
+): List<T> = withClassOrObjectDeclarationOf(listOf(kClass, *kClasses))
+
+/**
+ * List containing declarations with class or object declaration of.
+ *
+ * @param kClasses The Kotlin class(es) representing the class or object declaration(s) to include.
+ * @return A list containing declarations with the class or object declaration of the specified Kotlin class(es).
+ */
+fun <T : KoDeclarationCastProvider> List<T>.withClassOrObjectDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
+    filter {
+        when {
+            kClasses.isEmpty() -> it.hasClassOrObjectDeclaration()
+            else -> kClasses.any { kClass -> it.hasClassOrObjectDeclarationOf(kClass) }
+        }
+    }
+
+/**
+ * List containing declarations without class or object declaration of.
+ *
+ * @param kClass The Kotlin class representing the class or object declaration to exclude.
+ * @param kClasses The Kotlin class(es) representing the class or object declaration(s) to exclude.
+ * @return A list containing declarations without class or object declaration of the specified Kotlin class(es).
+ */
+fun <T : KoDeclarationCastProvider> List<T>.withoutClassOrObjectDeclarationOf(
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
+): List<T> = withoutClassOrObjectDeclarationOf(listOf(kClass, *kClasses))
+
+/**
+ * List containing declarations without class or object declaration of.
+ *
+ * @param kClasses The Kotlin class(es) representing the class or object declaration(s) to exclude.
+ * @return A list containing declarations without class or object declaration of the specified Kotlin class(es).
+ */
+fun <T : KoDeclarationCastProvider> List<T>.withoutClassOrObjectDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
+    filterNot {
+        when {
+            kClasses.isEmpty() -> it.hasClassOrObjectDeclaration()
+            else -> kClasses.any { kClass -> it.hasClassOrObjectDeclarationOf(kClass) }
+        }
+    }
+
+/**
+ * List containing declarations with the specified class or interface declaration.
+ *
+ * @param predicate The predicate function to determine if a class or interface declaration satisfies a condition.
+ * @return A list containing declarations with the specified class or interface declaration.
+ */
+fun <T : KoDeclarationCastProvider> List<T>.withClassOrInterfaceDeclaration(predicate: ((KoClassAndInterfaceDeclaration) -> Boolean)? = null): List<T> =
+    filter {
+        when (predicate) {
+            null -> it.isClassOrInterface
+            else -> it.asClassOrInterfaceDeclaration()?.let { declaration -> predicate(declaration) } == true
+        }
+    }
+
+/**
+ * List containing declarations without the specified class or interface declaration.
+ *
+ * @param predicate The predicate function to determine if a class or interface declaration satisfies a condition.
+ * @return A list containing declarations without the specified class or interface declaration.
+ */
+fun <T : KoDeclarationCastProvider> List<T>.withoutClassOrInterfaceDeclaration(predicate: ((KoClassAndInterfaceDeclaration) -> Boolean)? = null): List<T> =
+    filterNot {
+        when (predicate) {
+            null -> it.isClassOrInterface
+            else -> it.asClassOrInterfaceDeclaration()?.let { declaration -> predicate(declaration) } == true
+        }
+    }
+
+/**
+ * List containing declarations with class or interface declaration of.
+ *
+ * @param kClass The Kotlin class representing the class or interface declaration to include.
+ * @param kClasses The Kotlin class(es) representing the class or interface declaration(s) to include.
+ * @return A list containing declarations with the class or interface declaration of the specified Kotlin class(es).
+ */
+
+fun <T : KoDeclarationCastProvider> List<T>.withClassOrInterfaceDeclarationOf(
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
+): List<T> = withClassOrInterfaceDeclarationOf(listOf(kClass, *kClasses))
+
+/**
+ * List containing declarations with class or interface declaration of.
+ *
+ * @param kClasses The Kotlin class(es) representing the class or interface declaration(s) to include.
+ * @return A list containing declarations with the class or interface declaration of the specified Kotlin class(es).
+ */
+fun <T : KoDeclarationCastProvider> List<T>.withClassOrInterfaceDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
+    filter {
+        when {
+            kClasses.isEmpty() -> it.hasClassOrInterfaceDeclaration()
+            else -> kClasses.any { kClass -> it.hasClassOrInterfaceDeclarationOf(kClass) }
+        }
+    }
+
+/**
+ * List containing declarations without class or interface declaration of.
+ *
+ * @param kClass The Kotlin class representing the class or interface declaration to exclude.
+ * @param kClasses The Kotlin class(es) representing the class or interface declaration(s) to exclude.
+ * @return A list containing declarations without class or interface declaration of the specified Kotlin class(es).
+ */
+fun <T : KoDeclarationCastProvider> List<T>.withoutClassOrInterfaceDeclarationOf(
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
+): List<T> = withoutClassOrInterfaceDeclarationOf(listOf(kClass, *kClasses))
+
+/**
+ * List containing declarations without class or interface declaration of.
+ *
+ * @param kClasses The Kotlin class(es) representing the class or interface declaration(s) to exclude.
+ * @return A list containing declarations without class or interface declaration of the specified Kotlin class(es).
+ */
+fun <T : KoDeclarationCastProvider> List<T>.withoutClassOrInterfaceDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
+    filterNot {
+        when {
+            kClasses.isEmpty() -> it.hasClassOrInterfaceDeclaration()
+            else -> kClasses.any { kClass -> it.hasClassOrInterfaceDeclarationOf(kClass) }
+        }
+    }
+
+/**
+ * List containing declarations with the specified interface or object declaration.
+ *
+ * @param predicate The predicate function to determine if a interface or object declaration satisfies a condition.
+ * @return A list containing declarations with the specified interface or object declaration.
+ */
+fun <T : KoDeclarationCastProvider> List<T>.withInterfaceOrObjectDeclaration(predicate: ((KoInterfaceAndObjectDeclaration) -> Boolean)? = null): List<T> =
+    filter {
+        when (predicate) {
+            null -> it.isInterfaceOrObject
+            else -> it.asInterfaceOrObjectDeclaration()?.let { declaration -> predicate(declaration) } == true
+        }
+    }
+
+/**
+ * List containing declarations without the specified interface or object declaration.
+ *
+ * @param predicate The predicate function to determine if a interface or object declaration satisfies a condition.
+ * @return A list containing declarations without the specified interface or object declaration.
+ */
+fun <T : KoDeclarationCastProvider> List<T>.withoutInterfaceOrObjectDeclaration(predicate: ((KoInterfaceAndObjectDeclaration) -> Boolean)? = null): List<T> =
+    filterNot {
+        when (predicate) {
+            null -> it.isInterfaceOrObject
+            else -> it.asInterfaceOrObjectDeclaration()?.let { declaration -> predicate(declaration) } == true
+        }
+    }
+
+/**
+ * List containing declarations with interface or object declaration of.
+ *
+ * @param kClass The Kotlin class representing the interface or object declaration to include.
+ * @param kClasses The Kotlin class(es) representing the interface or object declaration(s) to include.
+ * @return A list containing declarations with the interface or object declaration of the specified Kotlin class(es).
+ */
+
+fun <T : KoDeclarationCastProvider> List<T>.withInterfaceOrObjectDeclarationOf(
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
+): List<T> = withInterfaceOrObjectDeclarationOf(listOf(kClass, *kClasses))
+
+/**
+ * List containing declarations with interface or object declaration of.
+ *
+ * @param kClasses The Kotlin class(es) representing the interface or object declaration(s) to include.
+ * @return A list containing declarations with the interface or object declaration of the specified Kotlin class(es).
+ */
+fun <T : KoDeclarationCastProvider> List<T>.withInterfaceOrObjectDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
+    filter {
+        when {
+            kClasses.isEmpty() -> it.hasInterfaceOrObjectDeclaration()
+            else -> kClasses.any { kClass -> it.hasInterfaceOrObjectDeclarationOf(kClass) }
+        }
+    }
+
+/**
+ * List containing declarations without interface or object declaration of.
+ *
+ * @param kClass The Kotlin class representing the interface or object declaration to exclude.
+ * @param kClasses The Kotlin class(es) representing the interface or object declaration(s) to exclude.
+ * @return A list containing declarations without interface or object declaration of the specified Kotlin class(es).
+ */
+fun <T : KoDeclarationCastProvider> List<T>.withoutInterfaceOrObjectDeclarationOf(
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
+): List<T> = withoutInterfaceOrObjectDeclarationOf(listOf(kClass, *kClasses))
+
+/**
+ * List containing declarations without interface or object declaration of.
+ *
+ * @param kClasses The Kotlin class(es) representing the interface or object declaration(s) to exclude.
+ * @return A list containing declarations without interface or object declaration of the specified Kotlin class(es).
+ */
+fun <T : KoDeclarationCastProvider> List<T>.withoutInterfaceOrObjectDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
+    filterNot {
+        when {
+            kClasses.isEmpty() -> it.hasInterfaceOrObjectDeclaration()
+            else -> kClasses.any { kClass -> it.hasInterfaceOrObjectDeclarationOf(kClass) }
+        }
+    }
+
+/**
+ * List containing declarations with the specified class, interface or object declaration.
+ *
+ * @param predicate The predicate function to determine if an class, interface or object declaration satisfies a condition.
+ * @return A list containing declarations with the specified class, interface or object declaration.
+ */
+fun <T : KoDeclarationCastProvider> List<T>.withClassOrInterfaceOrObjectDeclaration(predicate: ((KoClassAndInterfaceAndObjectDeclaration) -> Boolean)? = null): List<T> =
+    filter {
+        when (predicate) {
+            null -> it.isClassOrInterfaceOrObject
+            else -> it.asClassOrInterfaceOrObjectDeclaration()?.let { declaration -> predicate(declaration) } == true
+        }
+    }
+
+/**
+ * List containing declarations without the specified class, interface or object declaration.
+ *
+ * @param predicate The predicate function to determine if a class, interface or object declaration satisfies a condition.
+ * @return A list containing declarations without the specified class, interface or object declaration.
+ */
+fun <T : KoDeclarationCastProvider> List<T>.withoutClassOrInterfaceOrObjectDeclaration(predicate: ((KoClassAndInterfaceAndObjectDeclaration) -> Boolean)? = null): List<T> =
+    filterNot {
+        when (predicate) {
+            null -> it.isClassOrInterfaceOrObject
+            else -> it.asClassOrInterfaceOrObjectDeclaration()?.let { declaration -> predicate(declaration) } == true
+        }
+    }
+
+/**
+ * List containing declarations with class, interface or object declaration of.
+ *
+ * @param kClass The Kotlin class representing the class, interface or object declaration to include.
+ * @param kClasses The Kotlin class(es) representing the class, interface or object declaration(s) to include.
+ * @return A list containing declarations with the class, interface or object declaration of the specified Kotlin class(es).
+ */
+
+fun <T : KoDeclarationCastProvider> List<T>.withClassOrInterfaceOrObjectDeclarationOf(
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
+): List<T> = withClassOrInterfaceOrObjectDeclarationOf(listOf(kClass, *kClasses))
+
+/**
+ * List containing declarations with class, interface or object declaration of.
+ *
+ * @param kClasses The Kotlin class(es) representing the class, interface or object declaration(s) to include.
+ * @return A list containing declarations with the class, interface or object declaration of the specified Kotlin class(es).
+ */
+fun <T : KoDeclarationCastProvider> List<T>.withClassOrInterfaceOrObjectDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
+    filter {
+        when {
+            kClasses.isEmpty() -> it.hasClassOrInterfaceOrObjectDeclaration()
+            else -> kClasses.any { kClass -> it.hasClassOrInterfaceOrObjectDeclarationOf(kClass) }
+        }
+    }
+
+/**
+ * List containing declarations without class, interface or object declaration of.
+ *
+ * @param kClass The Kotlin class representing the class, interface or object declaration to exclude.
+ * @param kClasses The Kotlin class(es) representing the class, interface or object declaration(s) to exclude.
+ * @return A list containing declarations without class, interface or object declaration of the specified Kotlin class(es).
+ */
+fun <T : KoDeclarationCastProvider> List<T>.withoutClassOrInterfaceOrObjectDeclarationOf(
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
+): List<T> = withoutClassOrInterfaceOrObjectDeclarationOf(listOf(kClass, *kClasses))
+
+/**
+ * List containing declarations without class, interface or object declaration of.
+ *
+ * @param kClasses The Kotlin class(es) representing the class, interface or object declaration(s) to exclude.
+ * @return A list containing declarations without class, interface or object declaration of the specified Kotlin class(es).
+ */
+fun <T : KoDeclarationCastProvider> List<T>.withoutClassOrInterfaceOrObjectDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
+    filterNot {
+        when {
+            kClasses.isEmpty() -> it.hasClassOrInterfaceOrObjectDeclaration()
+            else -> kClasses.any { kClass -> it.hasClassOrInterfaceOrObjectDeclarationOf(kClass) }
+        }
+    }
+
+/**
  * List containing declarations with the specified type alias declaration.
  *
  * @param predicate The predicate function to determine if a type alias declaration satisfies a condition.
@@ -457,8 +840,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withTypeAliasDeclaration(predicate: 
         when (predicate) {
             null -> it.isTypeAlias
             else ->
-                it.asTypeAliasDeclaration()?.let { typeAliasDeclaration -> predicate(typeAliasDeclaration) }
-                    ?: false
+                it.asTypeAliasDeclaration()?.let { typeAliasDeclaration -> predicate(typeAliasDeclaration) } == true
         }
     }
 
@@ -473,8 +855,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutTypeAliasDeclaration(predicat
         when (predicate) {
             null -> it.isTypeAlias
             else ->
-                it.asTypeAliasDeclaration()?.let { typeAliasDeclaration -> predicate(typeAliasDeclaration) }
-                    ?: false
+                it.asTypeAliasDeclaration()?.let { typeAliasDeclaration -> predicate(typeAliasDeclaration) } == true
         }
     }
 
@@ -491,8 +872,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withImportAliasDeclaration(
         when (predicate) {
             null -> it.isImportAlias
             else ->
-                it.asImportAliasDeclaration()?.let { importAliasDeclaration -> predicate(importAliasDeclaration) }
-                    ?: false
+                it.asImportAliasDeclaration()?.let { importAliasDeclaration -> predicate(importAliasDeclaration) } == true
         }
     }
 
@@ -509,8 +889,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutImportAliasDeclaration(
         when (predicate) {
             null -> it.isImportAlias
             else ->
-                it.asImportAliasDeclaration()?.let { importAliasDeclaration -> predicate(importAliasDeclaration) }
-                    ?: false
+                it.asImportAliasDeclaration()?.let { importAliasDeclaration -> predicate(importAliasDeclaration) } == true
         }
     }
 
@@ -525,8 +904,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withKotlinTypeDeclaration(predicate:
         when (predicate) {
             null -> it.isKotlinType
             else ->
-                it.asKotlinTypeDeclaration()?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) }
-                    ?: false
+                it.asKotlinTypeDeclaration()?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) } == true
         }
     }
 
@@ -543,8 +921,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutKotlinTypeDeclaration(
         when (predicate) {
             null -> it.isKotlinType
             else ->
-                it.asKotlinTypeDeclaration()?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) }
-                    ?: false
+                it.asKotlinTypeDeclaration()?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) } == true
         }
     }
 
@@ -613,8 +990,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withKotlinBasicTypeDeclaration(
         when (predicate) {
             null -> it.isKotlinBasicType
             else ->
-                it.asKotlinBasicTypeDeclaration()?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) }
-                    ?: false
+                it.asKotlinBasicTypeDeclaration()?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) } == true
         }
     }
 
@@ -631,8 +1007,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutKotlinBasicTypeDeclaration(
         when (predicate) {
             null -> it.isKotlinBasicType
             else ->
-                it.asKotlinBasicTypeDeclaration()?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) }
-                    ?: false
+                it.asKotlinBasicTypeDeclaration()?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) } == true
         }
     }
 
@@ -701,8 +1076,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withKotlinCollectionTypeDeclaration(
         when (predicate) {
             null -> it.isKotlinCollectionType
             else ->
-                it.asKotlinCollectionTypeDeclaration()?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) }
-                    ?: false
+                it.asKotlinCollectionTypeDeclaration()?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) } == true
         }
     }
 
@@ -719,8 +1093,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutKotlinCollectionTypeDeclarati
         when (predicate) {
             null -> it.isKotlinCollectionType
             else ->
-                it.asKotlinCollectionTypeDeclaration()?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) }
-                    ?: false
+                it.asKotlinCollectionTypeDeclaration()?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) } == true
         }
     }
 
@@ -791,7 +1164,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withTypeParameterDeclaration(
             else ->
                 it
                     .asTypeParameterDeclaration()
-                    ?.let { typeParameter -> predicate(typeParameter) } ?: false
+                    ?.let { typeParameter -> predicate(typeParameter) } == true
         }
     }
 
@@ -810,7 +1183,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutTypeParameterDeclaration(
             else ->
                 it
                     .asTypeParameterDeclaration()
-                    ?.let { typeParameter -> predicate(typeParameter) } ?: false
+                    ?.let { typeParameter -> predicate(typeParameter) } == true
         }
     }
 
@@ -827,7 +1200,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withExternalDeclaration(predicate: (
             else ->
                 it
                     .asExternalDeclaration()
-                    ?.let { externalDeclaration -> predicate(externalDeclaration) } ?: false
+                    ?.let { externalDeclaration -> predicate(externalDeclaration) } == true
         }
     }
 
@@ -844,7 +1217,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutExternalDeclaration(predicate
             else ->
                 it
                     .asExternalDeclaration()
-                    ?.let { externalDeclaration -> predicate(externalDeclaration) } ?: false
+                    ?.let { externalDeclaration -> predicate(externalDeclaration) } == true
         }
     }
 
@@ -914,7 +1287,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withExternalTypeDeclaration(predicat
             else ->
                 it
                     .asExternalTypeDeclaration()
-                    ?.let { externalDeclaration -> predicate(externalDeclaration) } ?: false
+                    ?.let { externalDeclaration -> predicate(externalDeclaration) } == true
         }
     }
 
@@ -934,7 +1307,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutExternalTypeDeclaration(
             else ->
                 it
                     .asExternalTypeDeclaration()
-                    ?.let { externalDeclaration -> predicate(externalDeclaration) } ?: false
+                    ?.let { externalDeclaration -> predicate(externalDeclaration) } == true
         }
     }
 
