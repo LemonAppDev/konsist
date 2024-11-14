@@ -2002,7 +2002,6 @@ class KoDeclarationCastProviderListExtTest {
         sut shouldBeEqualTo listOf(declaration3)
     }
 
-
     @Test
     fun `withClassOrObjectDeclaration() returns declaration with class or object`() {
         // given
@@ -2396,7 +2395,6 @@ class KoDeclarationCastProviderListExtTest {
         // then
         sut shouldBeEqualTo listOf(declaration3)
     }
-
 
     @Test
     fun `withClassOrInterfaceDeclaration() returns declaration with class or interface`() {
@@ -2792,7 +2790,6 @@ class KoDeclarationCastProviderListExtTest {
         sut shouldBeEqualTo listOf(declaration3)
     }
 
-
     @Test
     fun `withInterfaceOrObjectDeclaration() returns declaration with interface or object`() {
         // given
@@ -3187,7 +3184,6 @@ class KoDeclarationCastProviderListExtTest {
         sut shouldBeEqualTo listOf(declaration3)
     }
 
-
     @Test
     fun `withClassOrInterfaceOrObjectDeclaration() returns declaration with class, interface or object`() {
         // given
@@ -3424,7 +3420,7 @@ class KoDeclarationCastProviderListExtTest {
     }
 
     @Test
-    fun `withClassOrInterfaceOrObjectDeclarationOf(list of KClass) returns declarations with one of given classes, interfaces or objects`() {
+    fun `withClassOrInterfaceOrObjectDeclarationOf(list of KClass) returns declarations with one of given declaration`() {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
@@ -3527,7 +3523,7 @@ class KoDeclarationCastProviderListExtTest {
     }
 
     @Test
-    fun `withoutClassOrInterfaceOrObjectDeclarationOf(list of KClass) returns declaration without any of given classes, interfaces or objects`() {
+    fun `withoutClassOrInterfaceOrObjectDeclarationOf(list of KClass) returns declaration without any of given declaration`() {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
@@ -3555,7 +3551,7 @@ class KoDeclarationCastProviderListExtTest {
     }
 
     @Test
-    fun `withoutClassOrInterfaceOrObjectDeclarationOf(set of KClass) returns declaration without any of given classes, interfaces or objects`() {
+    fun `withoutClassOrInterfaceOrObjectDeclarationOf(set of KClass) returns declaration without any of given declaration`() {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
@@ -3581,7 +3577,6 @@ class KoDeclarationCastProviderListExtTest {
         // then
         sut shouldBeEqualTo listOf(declaration3)
     }
-
 
     @Test
     fun `withTypeAliasDeclaration() returns declaration with type alias`() {

@@ -10,6 +10,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoStarProjectionDeclarationForKoDeclarationCastProviderTest {
+    @Suppress("detekt.LongMethod")
     @Test
     fun `star-projection-type`() {
         // given

@@ -21,7 +21,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
 
-@Suppress("detekt.LargeClass")
+@Suppress("detekt.LargeClass", "detekt.LongMethod")
 class KoTypeDeclarationForKoDeclarationCastProviderTest {
     @Test
     fun `nullable-class-type`() {

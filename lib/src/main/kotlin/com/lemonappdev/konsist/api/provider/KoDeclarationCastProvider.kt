@@ -264,7 +264,8 @@ interface KoDeclarationCastProvider : KoBaseProvider {
      * Whether declaration has a specified class or object declaration.
      *
      * @param predicate The predicate function used to determine if class or object declaration satisfies a condition.
-     * @return `true` if the declaration has the specified class or object declaration (or any class or object declaration if [predicate] is `null`),
+     * @return `true` if the declaration has the specified class or object declaration (or any class or object
+     * declaration if [predicate] is `null`),
      * `false` otherwise.
      */
     fun hasClassOrObjectDeclaration(predicate: ((KoClassAndObjectDeclaration) -> Boolean)? = null): Boolean
@@ -281,7 +282,8 @@ interface KoDeclarationCastProvider : KoBaseProvider {
      * Whether declaration has a specified class or interface declaration.
      *
      * @param predicate The predicate function used to determine if class or interface declaration satisfies a condition.
-     * @return `true` if the declaration has the specified class or interface declaration (or any class or interface declaration if [predicate] is `null`),
+     * @return `true` if the declaration has the specified class or interface declaration (or any class or interface
+     * declaration if [predicate] is `null`),
      * `false` otherwise.
      */
     fun hasClassOrInterfaceDeclaration(predicate: ((KoClassAndInterfaceDeclaration) -> Boolean)? = null): Boolean
@@ -298,7 +300,8 @@ interface KoDeclarationCastProvider : KoBaseProvider {
      * Whether declaration has a specified interface or object declaration.
      *
      * @param predicate The predicate function used to determine if interface or object declaration satisfies a condition.
-     * @return `true` if the declaration has the specified interface or object declaration (or any interface or object declaration if [predicate] is `null`),
+     * @return `true` if the declaration has the specified interface or object declaration (or any interface or object
+     * declaration if [predicate] is `null`),
      * `false` otherwise.
      */
     fun hasInterfaceOrObjectDeclaration(predicate: ((KoInterfaceAndObjectDeclaration) -> Boolean)? = null): Boolean
@@ -315,7 +318,8 @@ interface KoDeclarationCastProvider : KoBaseProvider {
      * Whether declaration has a specified class, interface or object declaration.
      *
      * @param predicate The predicate function used to determine if class, interface or object declaration satisfies a condition.
-     * @return `true` if the declaration has the specified class, interface or object declaration (or any class, interface or object declaration if [predicate] is `null`),
+     * @return `true` if the declaration has the specified class, interface or object declaration (or any class,
+     * interface or object declaration if [predicate] is `null`),
      * `false` otherwise.
      */
     fun hasClassOrInterfaceOrObjectDeclaration(predicate: ((KoClassAndInterfaceAndObjectDeclaration) -> Boolean)? = null): Boolean
@@ -324,7 +328,8 @@ interface KoDeclarationCastProvider : KoBaseProvider {
      * Whether declaration has a class, an interface or an object declaration of the specified Kotlin class.
      *
      * @param kClass The Kotlin class representing the class, interface or object declaration to check for.
-     * @return `true` if the declaration has a class, an interface  or an object declaration matching the specified KClass, `false` otherwise.
+     * @return `true` if the declaration has a class, an interface  or an object declaration matching the specified
+     * KClass, `false` otherwise.
      */
     fun hasClassOrInterfaceOrObjectDeclarationOf(kClass: KClass<*>): Boolean
 

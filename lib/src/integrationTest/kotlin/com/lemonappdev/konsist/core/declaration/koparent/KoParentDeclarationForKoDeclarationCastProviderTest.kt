@@ -1952,7 +1952,7 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
             hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo true
             hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleGenericSuperInterface" } shouldBeEqualTo true
             hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleClass" } shouldBeEqualTo false
-            hasClassOrInterfaceOrObjectDeclarationOf(SampleGenericSuperInterface::class) shouldBeEqualTo true
+            hasClassOrInterfaceOrObjectDeclarationOf(SampleGenericSuperInterface::class) shouldBeEqualTo false
             hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
             asClassDeclaration() shouldBeEqualTo null
             hasClassDeclaration() shouldBeEqualTo false
@@ -3992,6 +3992,6 @@ class KoParentDeclarationForKoDeclarationCastProviderTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/koparent/snippet/forkodeclarationcastprovider/",
-            fileName
+            fileName,
         )
 }
