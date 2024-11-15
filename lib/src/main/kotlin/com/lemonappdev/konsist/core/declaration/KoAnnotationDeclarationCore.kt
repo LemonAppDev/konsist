@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.psi.KtValueArgumentList
 internal class KoAnnotationDeclarationCore private constructor(
     private val ktAnnotationEntry: KtAnnotationEntry,
 ) : KoAnnotationDeclaration,
-    KoSourceDeclarationCore,
+    KoBaseSourceDeclarationCore,
     KoBaseProviderCore,
     KoArgumentProviderCore,
     KoContainingFileProviderCore,

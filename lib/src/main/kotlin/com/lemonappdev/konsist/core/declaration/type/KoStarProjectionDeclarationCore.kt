@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.declaration.KoBaseSourceDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoSourceDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -18,6 +19,7 @@ internal class KoStarProjectionDeclarationCore private constructor(
     override val ktTypeProjection: KtTypeProjection,
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoStarProjectionDeclaration,
+    KoBaseSourceDeclarationCore,
     KoSourceDeclarationCore,
     KoBaseProviderCore,
     KoContainingFileProviderCore,

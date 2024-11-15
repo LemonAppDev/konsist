@@ -62,7 +62,7 @@ internal class KoImportDeclarationCore private constructor(
     @RemoveInVersion("0.18.0")
     override val isWildcard: Boolean by lazy { super<KoIsWildcardProviderCore>.isWildcard }
 
-    override val sourceDeclaration: KoSourceDeclaration by lazy {
+    override val sourceDeclaration: KoSourceDeclaration? by lazy {
         val shortName = name.substringAfterLast(".")
 
         DataCore
