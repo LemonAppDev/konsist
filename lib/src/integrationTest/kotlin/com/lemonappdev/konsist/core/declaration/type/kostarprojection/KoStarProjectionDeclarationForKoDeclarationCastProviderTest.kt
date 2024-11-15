@@ -10,6 +10,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoStarProjectionDeclarationForKoDeclarationCastProviderTest {
+    @Suppress("detekt.LongMethod")
     @Test
     fun `star-projection-type`() {
         // given
@@ -27,6 +28,10 @@ class KoStarProjectionDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo false
+            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
@@ -46,6 +51,22 @@ class KoStarProjectionDeclarationForKoDeclarationCastProviderTest {
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
             it?.hasInterfaceDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
             it?.hasInterfaceDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asClassOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasClassOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceDeclaration() shouldBeEqualTo null
+            it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.hasTypeAliasDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false

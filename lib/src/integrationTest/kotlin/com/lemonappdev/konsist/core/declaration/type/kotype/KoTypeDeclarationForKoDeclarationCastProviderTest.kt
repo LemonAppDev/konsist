@@ -21,7 +21,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
 
-@Suppress("detekt.LargeClass")
+@Suppress("detekt.LargeClass", "detekt.LongMethod")
 class KoTypeDeclarationForKoDeclarationCastProviderTest {
     @Test
     fun `nullable-class-type`() {
@@ -40,6 +40,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo true
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo true
+            it?.isClassOrInterface shouldBeEqualTo true
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo true
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
@@ -60,6 +64,28 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
             it?.hasInterfaceDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asClassOrObjectDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.hasClassOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleType" } shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(SampleType::class) shouldBeEqualTo true
+            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleType" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(SampleType::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceOrObjectDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleType" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleType::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
@@ -97,6 +123,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo true
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo true
+            it?.isClassOrInterface shouldBeEqualTo true
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo true
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
@@ -117,6 +147,28 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
             it?.hasInterfaceDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asClassOrObjectDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.hasClassOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleType" } shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(SampleType::class) shouldBeEqualTo true
+            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleType" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(SampleType::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceOrObjectDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleType" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleType::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
@@ -154,6 +206,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo true
             it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo true
+            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isInterfaceOrObject shouldBeEqualTo true
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo true
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
@@ -174,6 +230,28 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
             it?.hasInterfaceDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.asClassOrObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
+            it?.hasClassOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleClass" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(SampleObject::class) shouldBeEqualTo true
+            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceDeclaration() shouldBeEqualTo null
+            it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.asInterfaceOrObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
+            it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo true
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(SampleObject::class) shouldBeEqualTo true
+            it?.hasInterfaceOrObjectDeclarationOf(SampleInterface::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceOrObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
+            it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleClass" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleObject::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
@@ -211,6 +289,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo true
             it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo true
+            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isInterfaceOrObject shouldBeEqualTo true
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo true
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
@@ -231,6 +313,28 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
             it?.hasInterfaceDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.asClassOrObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
+            it?.hasClassOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleClass" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(SampleObject::class) shouldBeEqualTo true
+            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceDeclaration() shouldBeEqualTo null
+            it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.asInterfaceOrObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
+            it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo true
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(SampleObject::class) shouldBeEqualTo true
+            it?.hasInterfaceOrObjectDeclarationOf(SampleInterface::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceOrObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
+            it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleClass" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleObject::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
@@ -268,6 +372,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo true
+            it?.isClassOrObject shouldBeEqualTo false
+            it?.isClassOrInterface shouldBeEqualTo true
+            it?.isInterfaceOrObject shouldBeEqualTo true
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo true
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
@@ -282,6 +390,28 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.hasInterfaceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasInterfaceDeclarationOf(SampleInterface::class) shouldBeEqualTo true
             it?.hasInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasClassOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(SampleInterface::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
+            it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleClass" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(SampleInterface::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asInterfaceOrObjectDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
+            it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo true
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(SampleInterface::class) shouldBeEqualTo true
+            it?.hasInterfaceOrObjectDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceOrObjectDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
+            it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleClass" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleInterface::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.hasClassDeclarationOf(SampleInterface::class) shouldBeEqualTo false
@@ -325,6 +455,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo true
+            it?.isClassOrObject shouldBeEqualTo false
+            it?.isClassOrInterface shouldBeEqualTo true
+            it?.isInterfaceOrObject shouldBeEqualTo true
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo true
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
@@ -339,6 +473,28 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.hasInterfaceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasInterfaceDeclarationOf(SampleInterface::class) shouldBeEqualTo true
             it?.hasInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasClassOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(SampleInterface::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
+            it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleClass" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(SampleInterface::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asInterfaceOrObjectDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
+            it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo true
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(SampleInterface::class) shouldBeEqualTo true
+            it?.hasInterfaceOrObjectDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceOrObjectDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
+            it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleClass" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleInterface::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.hasClassDeclarationOf(SampleInterface::class) shouldBeEqualTo false
@@ -382,6 +538,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo false
+            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo true
             it?.isKotlinType shouldBeEqualTo false
@@ -434,6 +594,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo false
+            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
             it?.isTypeAlias shouldBeEqualTo true
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
@@ -486,6 +650,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo false
+            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo true
             it?.isKotlinType shouldBeEqualTo false
@@ -538,6 +706,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo false
+            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
@@ -590,6 +762,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo false
+            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
@@ -642,6 +818,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo false
+            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
             it?.isTypeAlias shouldBeEqualTo true
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
@@ -694,6 +874,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo false
+            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo true
@@ -727,6 +911,22 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
             it?.hasInterfaceDeclarationOf(String::class) shouldBeEqualTo false
+            it?.asClassOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasClassOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceDeclaration() shouldBeEqualTo null
+            it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
@@ -756,6 +956,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo false
+            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo true
@@ -789,6 +993,22 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
             it?.hasInterfaceDeclarationOf(String::class) shouldBeEqualTo false
+            it?.asClassOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasClassOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceDeclaration() shouldBeEqualTo null
+            it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
@@ -818,6 +1038,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo false
+            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
@@ -867,6 +1091,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo false
+            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
@@ -916,6 +1144,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo true
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo true
+            it?.isClassOrInterface shouldBeEqualTo true
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo true
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
@@ -936,6 +1168,28 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
             it?.hasInterfaceDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.asClassOrObjectDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.hasClassOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleCollection1" } shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(SampleCollection1::class) shouldBeEqualTo true
+            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleCollection1" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(SampleCollection1::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceOrObjectDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleCollection1" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleCollection1::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
@@ -973,6 +1227,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo true
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo true
+            it?.isClassOrInterface shouldBeEqualTo true
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo true
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
@@ -993,6 +1251,28 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
             it?.hasInterfaceDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.asClassOrObjectDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.hasClassOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleCollection1" } shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(SampleCollection1::class) shouldBeEqualTo true
+            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleCollection1" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(SampleCollection1::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceOrObjectDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleCollection1" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleCollection1::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
@@ -1030,6 +1310,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo false
+            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
@@ -1053,6 +1337,22 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
             it?.hasInterfaceDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
+            it?.asClassOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasClassOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceDeclaration() shouldBeEqualTo null
+            it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
@@ -1088,6 +1388,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo false
+            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
@@ -1111,6 +1415,22 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
             it?.hasInterfaceDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
+            it?.asClassOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasClassOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceDeclaration() shouldBeEqualTo null
+            it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
@@ -1149,6 +1469,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isClass shouldBeEqualTo false
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo false
+            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
