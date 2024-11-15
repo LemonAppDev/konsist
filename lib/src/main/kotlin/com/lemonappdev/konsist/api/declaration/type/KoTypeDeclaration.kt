@@ -44,6 +44,7 @@ import kotlin.reflect.KClass
 /**
  * Represents a Kotlin type declaration.
  */
+@Suppress("detekt.TooManyFunctions")
 interface KoTypeDeclaration :
     KoBaseDeclaration,
     KoBaseProvider,
@@ -57,7 +58,8 @@ interface KoTypeDeclaration :
     KoContainingDeclarationProvider,
     KoModuleProvider,
     KoSourceSetProvider,
-    @RemoveInVersion("0.19.0") KoDeclarationCastProvider,
+    @RemoveInVersion("0.19.0")
+    KoDeclarationCastProvider,
     KoStarProjectionProvider,
     KoGenericTypeProvider,
     KoIsGenericTypeProvider,
