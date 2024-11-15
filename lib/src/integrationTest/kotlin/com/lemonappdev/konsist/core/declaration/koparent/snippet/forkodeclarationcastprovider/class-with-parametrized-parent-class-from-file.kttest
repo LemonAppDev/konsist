@@ -1,3 +1,0 @@
-class SampleClass() : SampleParametrizedSuperClass("param")
-
-open class SampleParametrizedSuperClass(str: String)
