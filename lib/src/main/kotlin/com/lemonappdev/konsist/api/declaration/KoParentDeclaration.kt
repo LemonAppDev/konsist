@@ -34,7 +34,6 @@ interface KoParentDeclaration :
     KoContainingDeclarationProvider,
     KoPathProvider,
     KoLocationProvider,
-    KoDeclarationCastProvider,
     KoAnnotationProvider,
     KoModuleProvider,
     KoSourceSetProvider,

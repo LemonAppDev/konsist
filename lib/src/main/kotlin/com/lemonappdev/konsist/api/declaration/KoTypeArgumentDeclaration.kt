@@ -31,7 +31,6 @@ interface KoTypeArgumentDeclaration :
     KoInModifierProvider,
     KoLocationProvider,
     KoPathProvider,
-    KoDeclarationCastProvider,
     KoIsGenericTypeProvider,
     KoIsGenericProvider,
     KoIsFunctionTypeProvider,

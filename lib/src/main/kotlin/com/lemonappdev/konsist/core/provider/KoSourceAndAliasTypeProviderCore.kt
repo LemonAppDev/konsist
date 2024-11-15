@@ -19,7 +19,7 @@ internal interface KoSourceAndAliasTypeProviderCore :
 
     @Deprecated("Will be removed in version 0.19.0", replaceWith = ReplaceWith("isImportAlias"))
     override val isAlias: Boolean
-        get() = (this as? KoTypeDeclaration)?.isImportAlias == true
+        get() = (this as? KoTypeDeclaration)?.sourceDeclaration?.isImportAlias == true
 
     override val sourceType: String
         get() =
@@ -39,8 +39,8 @@ internal interface KoSourceAndAliasTypeProviderCore :
     override val bareSourceType: String
         get() =
             when {
-                this is KoTypeDeclaration && isTypeAlias ->
-                    asTypeAliasDeclaration()?.type?.text ?: text
+                this is KoTypeDeclaration && sourceDeclaration?.isTypeAlias == true ->
+                    sourceDeclaration?.asTypeAliasDeclaration()?.type?.text ?: text
                 else -> TypeUtil.getBareType(sourceType)
             }
 }

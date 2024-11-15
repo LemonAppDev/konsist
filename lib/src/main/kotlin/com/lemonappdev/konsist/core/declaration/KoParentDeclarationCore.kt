@@ -53,7 +53,6 @@ internal class KoParentDeclarationCore(
     KoContainingDeclarationProviderCore,
     KoPathProviderCore,
     KoLocationProviderCore,
-    KoDeclarationCastProviderCore,
     KoAnnotationProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore,
@@ -88,8 +87,6 @@ internal class KoParentDeclarationCore(
             ?.children
             ?.filterIsInstance<KtAnnotationEntry>()
     }
-
-    override val koDeclarationCastProviderDeclaration: KoSourceDeclaration by lazy { sourceDeclaration }
 
     override val sourceDeclaration: KoSourceDeclaration by lazy {
         val name =

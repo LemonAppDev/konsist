@@ -35,8 +35,8 @@ internal interface KoSourceTypeProviderCore :
     override val bareSourceType: String
         get() =
             when {
-                this is KoTypeDeclaration && isTypeAlias ->
-                    asTypeAliasDeclaration()?.type?.text ?: text
+                this is KoTypeDeclaration && sourceDeclaration?.isTypeAlias == true ->
+                    sourceDeclaration?.asTypeAliasDeclaration()?.type?.text ?: text
                 else -> TypeUtil.getBareType(sourceType)
             }
 }
