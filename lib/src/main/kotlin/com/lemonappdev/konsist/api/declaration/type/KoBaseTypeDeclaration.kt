@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.declaration.type
 
+import com.lemonappdev.konsist.api.declaration.KoBaseSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
@@ -11,6 +12,7 @@ import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
  * and information about a declaration.
  */
 interface KoBaseTypeDeclaration :
+    KoBaseSourceDeclaration,
     KoSourceDeclaration,
     KoPackageProvider,
     KoResideInPackageProvider

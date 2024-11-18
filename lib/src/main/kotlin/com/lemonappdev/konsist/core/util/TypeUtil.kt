@@ -65,7 +65,7 @@ object TypeUtil {
                         .firstOrNull()
 
                 if (typeProjection?.projectionKind == KtProjectionKind.STAR) {
-                    return KoStarProjectionDeclarationCore.getInstance(typeProjection, parentDeclaration)
+                    return KoStarProjectionDeclarationCore.getInstance(typeProjection, parentDeclaration) as? KoSourceDeclaration
                 } else {
                     typeProjection
                         ?.children
@@ -195,7 +195,7 @@ object TypeUtil {
             }
 
             else -> null
-        }
+        } as? KoSourceDeclaration
     }
 
     private fun List<KoBaseDeclaration>.getDeclarationFullyQualifiedName(

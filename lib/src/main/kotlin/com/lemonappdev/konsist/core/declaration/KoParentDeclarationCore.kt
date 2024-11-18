@@ -13,7 +13,6 @@ import com.lemonappdev.konsist.core.provider.KoArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
-import com.lemonappdev.konsist.core.provider.KoDeclarationCastProviderCore
 import com.lemonappdev.konsist.core.provider.KoInterfaceDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -53,7 +52,6 @@ internal class KoParentDeclarationCore(
     KoContainingDeclarationProviderCore,
     KoPathProviderCore,
     KoLocationProviderCore,
-    KoDeclarationCastProviderCore,
     KoAnnotationProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore,
@@ -88,8 +86,6 @@ internal class KoParentDeclarationCore(
             ?.children
             ?.filterIsInstance<KtAnnotationEntry>()
     }
-
-    override val koDeclarationCastProviderDeclaration: KoSourceDeclaration by lazy { sourceDeclaration }
 
     override val sourceDeclaration: KoSourceDeclaration by lazy {
         val name =

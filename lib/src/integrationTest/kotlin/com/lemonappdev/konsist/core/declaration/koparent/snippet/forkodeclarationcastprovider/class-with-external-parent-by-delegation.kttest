@@ -1,3 +1,0 @@
-import com.lemonappdev.konsist.externalsample.SampleExternalInterface
-
-class SampleClass(sampleProperty: SampleExternalInterface) : SampleExternalInterface by sampleProperty
