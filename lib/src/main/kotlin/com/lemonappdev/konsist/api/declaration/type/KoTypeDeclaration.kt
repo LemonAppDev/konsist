@@ -58,7 +58,6 @@ interface KoTypeDeclaration :
     KoContainingDeclarationProvider,
     KoModuleProvider,
     KoSourceSetProvider,
-    @RemoveInVersion("0.19.0") KoDeclarationCastProvider,
     KoStarProjectionProvider,
     KoGenericTypeProvider,
     KoIsGenericTypeProvider,
@@ -72,7 +71,9 @@ interface KoTypeDeclaration :
     KoSourceDeclarationProvider,
     KoIsMutableTypeProvider,
     KoTypeArgumentProvider,
-    KoFunctionTypeDeclarationProvider {
+    KoFunctionTypeDeclarationProvider,
+    @RemoveInVersion("0.19.0")
+    KoDeclarationCastProvider {
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isClass"))
     override val isClass: Boolean
 
