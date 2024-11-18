@@ -1,5 +1,8 @@
 package com.lemonappdev.konsist.api
 
+import com.lemonappdev.konsist.api.KoModifier.OVERRIDE
+import com.lemonappdev.konsist.api.KoModifier.PRIVATE
+import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifier
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutPrivateModifier
 import com.lemonappdev.konsist.api.ext.list.withName
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
@@ -25,7 +28,7 @@ class KdocKonsistTest {
     fun `every api property has KDoc`() {
         apiPackageScope
             .properties()
-            .withoutPrivateModifier()
+            .withoutModifier(PRIVATE, OVERRIDE)
             .assertTrue { it.hasKDoc }
     }
 
