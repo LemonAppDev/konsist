@@ -3,9 +3,11 @@ package com.lemonappdev.konsist.api.declaration.type
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
@@ -116,6 +118,12 @@ interface KoTypeDeclaration :
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isExternal"))
     override val isExternal: Boolean
 
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isFunction"))
+    override val isFunction: Boolean
+
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isProperty"))
+    override val isProperty: Boolean
+
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asClassDeclaration()"))
     override fun asClassDeclaration(): KoClassDeclaration?
 
@@ -163,6 +171,12 @@ interface KoTypeDeclaration :
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asExternalDeclaration()"))
     override fun asExternalDeclaration(): KoExternalDeclaration?
+
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asFunctionDeclaration()"))
+    override fun asFunctionDeclaration(): KoFunctionDeclaration?
+
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asPropertyDeclaration()"))
+    override fun asPropertyDeclaration(): KoPropertyDeclaration?
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasClassDeclaration()"))
     override fun hasClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean
@@ -262,4 +276,16 @@ interface KoTypeDeclaration :
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasExternalDeclarationOf()"))
     override fun hasExternalDeclarationOf(kClass: KClass<*>): Boolean
+
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasFunctionDeclaration()"))
+    override fun hasFunctionDeclaration(predicate: ((KoFunctionDeclaration) -> Boolean)?): Boolean
+
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasFunctionDeclarationOf()"))
+    override fun hasFunctionDeclarationOf(kClass: KClass<*>): Boolean
+
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasPropertyDeclaration()"))
+    override fun hasPropertyDeclaration(predicate: ((KoPropertyDeclaration) -> Boolean)?): Boolean
+
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasPropertyDeclarationOf()"))
+    override fun hasPropertyDeclarationOf(kClass: KClass<*>): Boolean
 }
