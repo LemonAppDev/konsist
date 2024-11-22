@@ -103,6 +103,7 @@ class KoParentDeclarationForKoPathProviderTest {
                 arguments("class-with-external-parent-interface", "SampleExternalInterface"),
                 arguments("class-with-generic-external-parent-interface", "SampleExternalGenericInterface<Int>"),
                 arguments("class-with-external-parent-by-delegation", "SampleExternalInterface"),
+                arguments("class-with-multiline-external-parent", "SampleExternalClassWithParameter"),
                 arguments("class-with-typealias-parent", "SampleTypeAlias"),
                 arguments("class-with-import-alias-parent", "SampleImportAlias"),
             )

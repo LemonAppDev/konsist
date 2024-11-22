@@ -90,6 +90,7 @@ class KoParentDeclarationForKoLocationProviderTest {
                 arguments("class-with-external-parent-interface", "3:23"),
                 arguments("class-with-generic-external-parent-interface", "3:23"),
                 arguments("class-with-external-parent-by-delegation", "3:62"),
+                arguments("class-with-multiline-external-parent", "3:20"),
                 arguments("class-with-typealias-parent", "3:23"),
                 arguments("class-with-import-alias-parent", "3:23"),
             )

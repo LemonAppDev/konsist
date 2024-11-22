@@ -1,8 +1,10 @@
 package com.lemonappdev.konsist.core.snippet
 
+import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeCreator
+import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeNode
 import com.lemonappdev.konsist.core.util.FileExtension
+import com.lemonappdev.konsist.core.util.HyperlinkUtil
 import org.amshove.kluent.assertSoftly
-import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import java.io.File
 
@@ -18,16 +20,12 @@ class SnippetTest {
                 .filterNot { it.path.contains("lib/src/snippet/") }
                 .toList()
 
-        val snippetPaths =
-            snippets
-                .map { it.path }
+        val snippetPaths: List<String> =
+            snippets.map {
+                val path = it.path.removePrefix("../lib/")
 
-        val snippetNames =
-            snippets
-                .map { it.name.removeSuffix(FileExtension.KOTLIN_TEST_SNIPPET) }
-
-        val snippetMap = mutableMapOf<String, String>()
-        snippetNames.forEachIndexed { index, s -> snippetMap[s] = snippetPaths[index] }
+                HyperlinkUtil.toHyperlink(path)
+            }
 
         /*
         Matches calls to the `getSnippetFile` function, capturing the argument passed to it.
@@ -43,34 +41,69 @@ class SnippetTest {
          */
         val argumentsRegex = Regex("""arguments\(\s*"([^"]+)"""")
 
-        val withGetSnippetMethod = snippetNamesFromFiles(getSnippetFileRegex, "getSnippetFile(")
-        val withArgument = snippetNamesFromFiles(argumentsRegex, "arguments(")
+        val withGetSnippetMethod = snippetPathsFromFiles(getSnippetFileRegex, "getSnippetFile(")
+        val withArgument = snippetPathsFromFiles(argumentsRegex, "arguments(")
 
         val snippetNamesUsedInTests = (withGetSnippetMethod + withArgument).toSet()
 
         // when
-        val sut = snippetMap.keys.toSet() - snippetNamesUsedInTests
+        val sut = snippetPaths.toSet() - snippetNamesUsedInTests
 
         // then
         assertSoftly {
-            sut shouldBeEqualTo emptySet()
-            require(sut.isEmpty()) { "Unused snippets: ${sut.map { snippetMap[it] }}" }
+            val asciiTreeNodes = sut.map { AsciiTreeNode(it, emptyList()) }
+
+            val asciiTree =
+                AsciiTreeCreator().invoke(
+                    AsciiTreeNode(
+                        "Unused snippets (${sut.size}):",
+                        asciiTreeNodes,
+                    ),
+                )
+            require(sut.isEmpty()) { asciiTree }
         }
     }
 
-    private fun snippetNamesFromFiles(
+    private fun snippetPathsFromFiles(
         regex: Regex,
         prefix: String,
-    ) = File("../")
-        .walk()
-        .filter { it.isKotlinNotSnippetFile }
-        .map { it.readText() }
-        .flatMap { regex.findAll(it) }
-        .map { it.value }
-        .map { it.removePrefix(prefix) }
-        .map { it.trim() }
-        .map { it.removePrefix("\"") }
-        .map { it.substringBefore("\"") }
+    ): List<String> {
+        val getSnippetFileRegex = Regex("""getSnippetKoScope\(\s*"(.+?)"""")
+
+        return File("../")
+            .walk()
+            .filter { it.isKotlinNotSnippetFile }
+            .flatMap { file ->
+                val fileText = file.readText()
+                val filePath =
+                    getSnippetFileRegex
+                        .find(fileText)
+                        ?.groupValues
+                        ?.get(1)
+                        .orEmpty()
+
+                if (filePath.isNotEmpty()) {
+                    regex
+                        .findAll(fileText)
+                        .map { match ->
+                            val cleanedMatch =
+                                match
+                                    .value
+                                    .removePrefix(prefix)
+                                    .trim()
+                                    .removePrefix("\"")
+                                    .substringBefore("\"")
+
+                            val testSourceSetPath = "src/integrationTest/kotlin/com/lemonappdev/konsist/"
+                            val path = "$testSourceSetPath$filePath$cleanedMatch${FileExtension.KOTLIN_TEST_SNIPPET}"
+
+                            HyperlinkUtil.toHyperlink(path)
+                        }
+                } else {
+                    emptySequence()
+                }
+            }.toList()
+    }
 
     companion object {
         private val File.isKotlinSnippetFile: Boolean get() = isFile && name.endsWith(FileExtension.KOTLIN_TEST_SNIPPET)

@@ -170,7 +170,7 @@ class AssertTrueOnDeclarationListTest {
         try {
             sut.assertTrue { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("(Class 'SampleClass')")
+            e.message?.shouldContain("Class SampleClass")
                 ?: throw e
         }
     }
@@ -186,7 +186,7 @@ class AssertTrueOnDeclarationListTest {
         try {
             sut.assertTrue { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("(File 'file-declaration-assert-displaying-correct-failed-declaration-type.kt')")
+            e.message?.shouldContain("File file-declaration-assert-displaying-correct-failed-declaration-type.kt")
                 ?: throw e
         }
     }

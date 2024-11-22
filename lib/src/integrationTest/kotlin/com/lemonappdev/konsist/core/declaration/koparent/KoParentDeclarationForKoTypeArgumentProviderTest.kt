@@ -262,6 +262,7 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
                 arguments("class-with-parametrized-external-parent-class"),
                 arguments("class-with-external-parent-interface"),
                 arguments("class-with-external-parent-by-delegation"),
+                arguments("class-with-multiline-external-parent"),
                 arguments("class-with-typealias-parent"),
                 arguments("class-with-import-alias-parent"),
             )
