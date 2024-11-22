@@ -20,15 +20,4 @@ internal interface KoBaseTypeDeclarationCore :
     KoTextProviderCore,
     KoPackageProviderCore,
     KoResideInPackageProviderCore,
-    KoDeclarationCastProviderCore {
-    // We need to handle it this way because the import alias is the only type where the source declaration
-    // is actually a reference to the imported declaration. In this case, returning `sourceDeclaration` would
-    // not be accurate, so we return `this` to ensure the correct reference is maintained.
-    override val koDeclarationCastProviderDeclaration: KoSourceDeclaration?
-        get() = this
-//            if (this is KoImportAliasDeclaration) {
-//                this
-//            } else {
-//                (this as? KoSourceDeclarationProvider)?.sourceDeclaration
-//            }
-}
+    KoDeclarationCastProviderCore

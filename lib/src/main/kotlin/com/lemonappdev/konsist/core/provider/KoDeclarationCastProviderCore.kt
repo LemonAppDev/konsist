@@ -29,7 +29,7 @@ internal interface KoDeclarationCastProviderCore :
     KoNameProviderCore,
     KoContainingDeclarationProviderCore {
     val koDeclarationCastProviderDeclaration: KoSourceDeclaration?
-        get() = null
+        get() = this
 
     override val isKotlinBasicType: Boolean
         get() = TypeUtil.isKotlinBasicType(name)

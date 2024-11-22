@@ -213,9 +213,6 @@ internal class KoPropertyDeclarationCore private constructor(
         }
     }
 
-    override val koDeclarationCastProviderDeclaration: KoSourceDeclaration?
-        get() = this
-
     override fun toString(): String = name
 
     internal companion object {
