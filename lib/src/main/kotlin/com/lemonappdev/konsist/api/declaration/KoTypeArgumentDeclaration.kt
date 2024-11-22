@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoStarProjectionProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTypeArgumentProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoInModifierProvider
@@ -33,4 +34,5 @@ interface KoTypeArgumentDeclaration :
     KoIsGenericTypeProvider,
     KoIsGenericProvider,
     KoIsFunctionTypeProvider,
-    KoFunctionTypeDeclarationProvider
+    KoFunctionTypeDeclarationProvider,
+    KoStarProjectionProvider
