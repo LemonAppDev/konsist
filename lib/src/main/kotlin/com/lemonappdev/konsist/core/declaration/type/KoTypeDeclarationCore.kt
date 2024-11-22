@@ -397,14 +397,16 @@ internal class KoTypeDeclarationCore private constructor(
         super<KoDeclarationCastProviderCore>.hasFunctionDeclaration(predicate)
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasFunctionDeclarationOf()"))
-    override fun hasFunctionDeclarationOf(kClass: KClass<*>): Boolean = super<KoDeclarationCastProviderCore>.hasFunctionDeclarationOf(kClass)
+    override fun hasFunctionDeclarationOf(kClass: KClass<*>): Boolean =
+        super<KoDeclarationCastProviderCore>.hasFunctionDeclarationOf(kClass)
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasPropertyDeclaration()"))
     override fun hasPropertyDeclaration(predicate: ((KoPropertyDeclaration) -> Boolean)?): Boolean =
         super<KoDeclarationCastProviderCore>.hasPropertyDeclaration(predicate)
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasPropertyDeclarationOf()"))
-    override fun hasPropertyDeclarationOf(kClass: KClass<*>): Boolean = super<KoDeclarationCastProviderCore>.hasPropertyDeclarationOf(kClass)
+    override fun hasPropertyDeclarationOf(kClass: KClass<*>): Boolean =
+        super<KoDeclarationCastProviderCore>.hasPropertyDeclarationOf(kClass)
 
     override fun toString(): String = text
 

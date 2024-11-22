@@ -67,7 +67,7 @@ internal interface KoDeclarationCastProviderCore :
     override val isKotlinType: Boolean
         get() =
             koDeclarationCastProviderDeclaration is KoKotlinTypeDeclaration ||
-                    koDeclarationCastProviderDeclaration?.name?.let { TypeUtil.isKotlinType(it) } == true
+                koDeclarationCastProviderDeclaration?.name?.let { TypeUtil.isKotlinType(it) } == true
 
     override val isTypeParameter: Boolean
         get() = koDeclarationCastProviderDeclaration is KoTypeParameterDeclaration
@@ -87,44 +87,47 @@ internal interface KoDeclarationCastProviderCore :
 
     override fun asClassDeclaration(): KoClassDeclaration? = koDeclarationCastProviderDeclaration as? KoClassDeclaration
 
-    override fun asObjectDeclaration(): KoObjectDeclaration? =
-        koDeclarationCastProviderDeclaration as? KoObjectDeclaration
+    override fun asObjectDeclaration(): KoObjectDeclaration? = koDeclarationCastProviderDeclaration as? KoObjectDeclaration
 
-    override fun asInterfaceDeclaration(): KoInterfaceDeclaration? =
-        koDeclarationCastProviderDeclaration as? KoInterfaceDeclaration
+    override fun asInterfaceDeclaration(): KoInterfaceDeclaration? = koDeclarationCastProviderDeclaration as? KoInterfaceDeclaration
 
-    override fun asClassOrObjectDeclaration(): KoClassAndObjectDeclaration? =
-        asClassDeclaration() ?: asObjectDeclaration()
+    override fun asClassOrObjectDeclaration(): KoClassAndObjectDeclaration? = asClassDeclaration() ?: asObjectDeclaration()
 
-    override fun asClassOrInterfaceDeclaration(): KoClassAndInterfaceDeclaration? =
-        asClassDeclaration() ?: asInterfaceDeclaration()
+    override fun asClassOrInterfaceDeclaration(): KoClassAndInterfaceDeclaration? = asClassDeclaration() ?: asInterfaceDeclaration()
 
-    override fun asInterfaceOrObjectDeclaration(): KoInterfaceAndObjectDeclaration? =
-        asInterfaceDeclaration() ?: asObjectDeclaration()
+    override fun asInterfaceOrObjectDeclaration(): KoInterfaceAndObjectDeclaration? = asInterfaceDeclaration() ?: asObjectDeclaration()
 
     override fun asClassOrInterfaceOrObjectDeclaration(): KoClassAndInterfaceAndObjectDeclaration? =
         asClassDeclaration() ?: asInterfaceDeclaration() ?: asObjectDeclaration()
 
-    override fun asTypeAliasDeclaration(): KoTypeAliasDeclaration? =
-        koDeclarationCastProviderDeclaration as? KoTypeAliasDeclaration
+    override fun asTypeAliasDeclaration(): KoTypeAliasDeclaration? = koDeclarationCastProviderDeclaration as? KoTypeAliasDeclaration
 
-    override fun asImportAliasDeclaration(): KoImportAliasDeclaration? =
-        koDeclarationCastProviderDeclaration as? KoImportAliasDeclaration
+    override fun asImportAliasDeclaration(): KoImportAliasDeclaration? = koDeclarationCastProviderDeclaration as? KoImportAliasDeclaration
 
-    override fun asKotlinTypeDeclaration(): KoKotlinTypeDeclaration? =
-        koDeclarationCastProviderDeclaration as? KoKotlinTypeDeclaration
+    override fun asKotlinTypeDeclaration(): KoKotlinTypeDeclaration? = koDeclarationCastProviderDeclaration as? KoKotlinTypeDeclaration
 
     override fun asKotlinBasicTypeDeclaration(): KoKotlinTypeDeclaration? =
-        if ((koDeclarationCastProviderDeclaration as? KoDeclarationCastProvider)?.isKotlinBasicType == true) asKotlinTypeDeclaration() else null
+        if ((koDeclarationCastProviderDeclaration as? KoDeclarationCastProvider)?.isKotlinBasicType ==
+            true
+        ) {
+            asKotlinTypeDeclaration()
+        } else {
+            null
+        }
 
     override fun asKotlinCollectionTypeDeclaration(): KoKotlinTypeDeclaration? =
-        if ((koDeclarationCastProviderDeclaration as? KoDeclarationCastProvider)?.isKotlinCollectionType == true) asKotlinTypeDeclaration() else null
+        if ((koDeclarationCastProviderDeclaration as? KoDeclarationCastProvider)?.isKotlinCollectionType ==
+            true
+        ) {
+            asKotlinTypeDeclaration()
+        } else {
+            null
+        }
 
     override fun asTypeParameterDeclaration(): KoTypeParameterDeclaration? =
         koDeclarationCastProviderDeclaration as? KoTypeParameterDeclaration
 
-    override fun asExternalDeclaration(): KoExternalDeclaration? =
-        koDeclarationCastProviderDeclaration as? KoExternalDeclaration
+    override fun asExternalDeclaration(): KoExternalDeclaration? = koDeclarationCastProviderDeclaration as? KoExternalDeclaration
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("asExternalDeclaration"))
     override fun asExternalTypeDeclaration(): KoExternalDeclaration? = asExternalDeclaration()

@@ -21,7 +21,9 @@ import kotlin.reflect.KClass
  * An interface representing a Kotlin declaration that provides the information associated with this declaration.
  */
 @Suppress("detekt.TooManyFunctions")
-interface KoDeclarationCastProvider : KoBaseProvider, KoSourceDeclaration {
+interface KoDeclarationCastProvider :
+    KoBaseProvider,
+    KoSourceDeclaration {
     /**
      * Determines whatever declaration is a class.
      */

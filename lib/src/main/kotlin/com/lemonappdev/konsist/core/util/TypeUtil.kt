@@ -93,11 +93,13 @@ object TypeUtil {
                 .imports
                 .firstOrNull { it.alias?.name == nestedType?.text }
 
-        return (if (importDirective != null) {
-            importDirective.alias
-        } else {
-            transformPsiElementToKoTypeDeclaration(type, parentDeclaration, containingFile)
-        }) as KoDeclarationCastProvider?
+        return (
+            if (importDirective != null) {
+                importDirective.alias
+            } else {
+                transformPsiElementToKoTypeDeclaration(type, parentDeclaration, containingFile)
+            }
+        ) as KoDeclarationCastProvider?
     }
 
     internal fun hasTypeOf(
