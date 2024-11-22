@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
@@ -18,7 +19,7 @@ import kotlin.reflect.KClass
  * An interface representing a Kotlin declaration that provides the information associated with this declaration.
  */
 @Suppress("detekt.TooManyFunctions")
-interface KoDeclarationCastProvider : KoBaseProvider {
+interface KoDeclarationCastProvider : KoBaseProvider, KoSourceDeclaration {
     /**
      * Determines whatever declaration is a class.
      */

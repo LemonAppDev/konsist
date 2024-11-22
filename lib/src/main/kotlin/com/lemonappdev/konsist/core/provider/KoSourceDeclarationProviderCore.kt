@@ -4,8 +4,10 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
+import com.lemonappdev.konsist.core.declaration.KoSourceDeclarationCore
 import com.lemonappdev.konsist.core.declaration.private.KoFunctionTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.private.KoGenericTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
@@ -30,7 +32,7 @@ internal interface KoSourceDeclarationProviderCore :
     val ktTypeProjection: KtTypeProjection?
         get() = null
 
-    override val sourceDeclaration: KoSourceDeclaration?
+    override val sourceDeclaration: KoDeclarationCastProvider?
         get() {
             val type =
                 TypeUtil.getBasicType(
@@ -75,7 +77,7 @@ internal interface KoSourceDeclarationProviderCore :
                         }
 
                 when (nestedType) {
-                    is KoGenericTypeDeclarationCore -> nestedType.sourceDeclaration
+                    is KoGenericTypeDeclarationCore -> (nestedType as? KoSourceDeclarationProvider)?.sourceDeclaration
                     is KoFunctionTypeDeclarationCore -> null
                     else -> nestedType
                 }
@@ -83,7 +85,7 @@ internal interface KoSourceDeclarationProviderCore :
                 null
             } else {
                 type
-            } ?: this as? KoSourceDeclaration
+            } ?: this as? KoDeclarationCastProvider
         }
 
     private fun isExtensionDeclaration(): Boolean =
@@ -106,7 +108,7 @@ internal interface KoSourceDeclarationProviderCore :
             }
         }
 
-    override fun hasSourceDeclaration(predicate: (KoSourceDeclaration) -> Boolean): Boolean =
+    override fun hasSourceDeclaration(predicate: (KoDeclarationCastProvider) -> Boolean): Boolean =
         sourceDeclaration?.let { predicate(it) } == true
 
     override fun hasSourceDeclarationOf(kClass: KClass<*>): Boolean =

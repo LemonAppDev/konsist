@@ -79,7 +79,7 @@ internal class KoPropertyDeclarationCore private constructor(
     override val ktCallableDeclaration: KtCallableDeclaration,
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoPropertyDeclaration,
-    KoBaseSourceDeclarationCore,
+    KoSourceDeclarationCore,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
     KoConstructorDefinedProviderCore,

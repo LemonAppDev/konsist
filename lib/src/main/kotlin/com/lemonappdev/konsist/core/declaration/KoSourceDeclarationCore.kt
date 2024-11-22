@@ -11,6 +11,4 @@ internal interface KoSourceDeclarationCore :
     KoSourceDeclaration,
     KoBaseProviderCore,
     KoNameProviderCore,
-    KoTextProviderCore,
-    KoDeclarationCastProviderCore,
-    KoStarProjectionProviderCore
+    KoTextProviderCore

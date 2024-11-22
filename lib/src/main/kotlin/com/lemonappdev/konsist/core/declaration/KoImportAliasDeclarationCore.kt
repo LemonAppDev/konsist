@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
+import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -43,7 +44,7 @@ internal class KoImportAliasDeclarationCore private constructor(
 
     override val importDirective: KoImportDeclaration by lazy { containingDeclaration }
 
-    override val sourceDeclaration: KoSourceDeclaration? by lazy { importDirective.sourceDeclaration }
+    override val sourceDeclaration: KoDeclarationCastProvider? by lazy { importDirective.sourceDeclaration }
 
     override fun toString(): String = text
 

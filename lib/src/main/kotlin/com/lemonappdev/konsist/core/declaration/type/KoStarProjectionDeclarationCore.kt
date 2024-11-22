@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.declaration.KoBaseSourceDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoSourceDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -16,10 +15,9 @@ import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtTypeProjection
 
 internal class KoStarProjectionDeclarationCore private constructor(
-    override val ktTypeProjection: KtTypeProjection,
+    private val ktTypeProjection: KtTypeProjection,
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoStarProjectionDeclaration,
-    KoBaseSourceDeclarationCore,
     KoSourceDeclarationCore,
     KoBaseProviderCore,
     KoContainingFileProviderCore,
@@ -30,7 +28,8 @@ internal class KoStarProjectionDeclarationCore private constructor(
 
     override val psiElement: PsiElement by lazy { ktTypeProjection }
 
-    override val koDeclarationCastProviderDeclaration: KoSourceDeclaration? by lazy { sourceDeclaration }
+    // Todo: ***
+//    override val koDeclarationCastProviderDeclaration: KoSourceDeclaration? by lazy { sourceDeclaration }
 
     override val name: String by lazy { text }
 

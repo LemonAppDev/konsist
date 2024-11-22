@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
+import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionTypeDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsFunctionTypeProviderCore
@@ -28,7 +29,7 @@ import org.jetbrains.kotlin.psi.KtUserType
 
 data class KoTypeArgumentDeclarationCore(
     override val name: String,
-    override val sourceDeclaration: KoSourceDeclaration?,
+    override val sourceDeclaration: KoDeclarationCastProvider?,
     override val typeArguments: List<KoTypeArgumentDeclaration>?,
     override val hasInModifier: Boolean,
     override val hasOutModifier: Boolean,

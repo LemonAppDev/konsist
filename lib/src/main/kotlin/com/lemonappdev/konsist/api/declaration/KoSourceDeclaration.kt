@@ -18,6 +18,4 @@ interface KoSourceDeclaration :
     KoBaseDeclaration,
     KoBaseProvider,
     KoNameProvider,
-    KoTextProvider,
-    KoDeclarationCastProvider,
-    KoStarProjectionProvider
+    KoTextProvider

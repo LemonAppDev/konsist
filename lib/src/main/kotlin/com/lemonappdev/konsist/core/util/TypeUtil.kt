@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
@@ -37,7 +38,7 @@ object TypeUtil {
         isExtension: Boolean,
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
-    ): KoSourceDeclaration? {
+    ): KoDeclarationCastProvider? {
         val notNullTypes = types.filterNotNull()
 
         val type =
@@ -65,7 +66,7 @@ object TypeUtil {
                         .firstOrNull()
 
                 if (typeProjection?.projectionKind == KtProjectionKind.STAR) {
-                    return KoStarProjectionDeclarationCore.getInstance(typeProjection, parentDeclaration) as? KoSourceDeclaration
+                    return null
                 } else {
                     typeProjection
                         ?.children
@@ -93,11 +94,11 @@ object TypeUtil {
                 .imports
                 .firstOrNull { it.alias?.name == nestedType?.text }
 
-        return if (importDirective != null) {
+        return (if (importDirective != null) {
             importDirective.alias
         } else {
             transformPsiElementToKoTypeDeclaration(type, parentDeclaration, containingFile)
-        }
+        }) as KoDeclarationCastProvider?
     }
 
     internal fun hasTypeOf(
@@ -115,7 +116,7 @@ object TypeUtil {
         type: PsiElement?,
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
-    ): KoSourceDeclaration? {
+    ): KoDeclarationCastProvider? {
         val nestedType =
             if (type is KtNullableType) {
                 type
@@ -195,7 +196,7 @@ object TypeUtil {
             }
 
             else -> null
-        } as? KoSourceDeclaration
+        } as? KoSourceDeclaration as KoDeclarationCastProvider?
     }
 
     private fun List<KoBaseDeclaration>.getDeclarationFullyQualifiedName(

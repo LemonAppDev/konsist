@@ -2,6 +2,8 @@ package com.lemonappdev.konsist.core.declaration.private
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
+import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
+import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -10,6 +12,7 @@ import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
@@ -27,7 +30,8 @@ internal class KoGenericTypeDeclarationCore private constructor(
     KoPathProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore,
-    KoTypeArgumentProviderCore {
+    KoTypeArgumentProviderCore,
+    KoSourceDeclarationProviderCore {
     override val psiElement: PsiElement by lazy { ktUserType }
 
     override val ktElement: KtElement by lazy { ktUserType }
@@ -35,6 +39,10 @@ internal class KoGenericTypeDeclarationCore private constructor(
     override val name: String by lazy { ktUserType.text }
 
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
+
+    override val sourceDeclaration: KoDeclarationCastProvider? by lazy {
+        containingDeclaration as? KoDeclarationCastProvider
+    }
 
     override fun toString(): String = name
 
