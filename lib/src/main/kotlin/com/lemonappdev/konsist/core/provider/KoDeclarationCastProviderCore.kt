@@ -2,9 +2,11 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
@@ -73,6 +75,12 @@ internal interface KoDeclarationCastProviderCore :
     override val isExternal: Boolean
         get() = koDeclarationCastProviderDeclaration is KoExternalDeclaration
 
+    override val isFunction: Boolean
+        get() = koDeclarationCastProviderDeclaration is KoFunctionDeclaration
+
+    override val isProperty: Boolean
+        get() = koDeclarationCastProviderDeclaration is KoPropertyDeclaration
+
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isExternal"))
     override val isExternalType: Boolean
         get() = isExternal
@@ -120,6 +128,10 @@ internal interface KoDeclarationCastProviderCore :
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("asExternalDeclaration"))
     override fun asExternalTypeDeclaration(): KoExternalDeclaration? = asExternalDeclaration()
+
+    override fun asFunctionDeclaration(): KoFunctionDeclaration? = koDeclarationCastProviderDeclaration as? KoFunctionDeclaration
+
+    override fun asPropertyDeclaration(): KoPropertyDeclaration? = koDeclarationCastProviderDeclaration as? KoPropertyDeclaration
 
     override fun hasClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -227,4 +239,20 @@ internal interface KoDeclarationCastProviderCore :
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("hasExternalDeclarationOf"))
     override fun hasExternalTypeDeclarationOf(kClass: KClass<*>): Boolean = hasExternalDeclarationOf(kClass)
+
+    override fun hasFunctionDeclaration(predicate: ((KoFunctionDeclaration) -> Boolean)?): Boolean =
+        when (predicate) {
+            null -> isFunction
+            else -> asFunctionDeclaration()?.let { predicate(it) } ?: false
+        }
+
+    override fun hasFunctionDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asFunctionDeclaration()?.fullyQualifiedName
+
+    override fun hasPropertyDeclaration(predicate: ((KoPropertyDeclaration) -> Boolean)?): Boolean =
+        when (predicate) {
+            null -> isProperty
+            else -> asPropertyDeclaration()?.let { predicate(it) } ?: false
+        }
+
+    override fun hasPropertyDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asPropertyDeclaration()?.fullyQualifiedName
 }

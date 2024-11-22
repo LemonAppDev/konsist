@@ -44,7 +44,9 @@ internal class KoImportAliasDeclarationCore private constructor(
 
     override val importDirective: KoImportDeclaration by lazy { containingDeclaration }
 
-    override val sourceDeclaration: KoDeclarationCastProvider? by lazy { importDirective.sourceDeclaration }
+    override val sourceDeclaration: KoDeclarationCastProvider? by lazy {
+        importDirective.sourceDeclaration
+    }
 
     override fun toString(): String = text
 

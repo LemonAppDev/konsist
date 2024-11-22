@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
@@ -9,6 +10,7 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoBodyProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
+import com.lemonappdev.konsist.core.provider.KoDeclarationCastProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoInitializerProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsExtensionProviderCore
@@ -105,7 +107,8 @@ internal class KoFunctionDeclarationCore private constructor(
     KoExpectModifierProviderCore,
     KoTypeParameterProviderCore,
     KoIsExtensionProviderCore,
-    KoIsGenericProviderCore {
+    KoIsGenericProviderCore,
+    KoDeclarationCastProviderCore {
     override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktFunction }
 
     override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktCallableDeclaration.annotationEntries }
@@ -144,6 +147,9 @@ internal class KoFunctionDeclarationCore private constructor(
             null
         }
     }
+
+    override val koDeclarationCastProviderDeclaration: KoSourceDeclaration?
+        get() = this
 
     override fun toString(): String = name
 
