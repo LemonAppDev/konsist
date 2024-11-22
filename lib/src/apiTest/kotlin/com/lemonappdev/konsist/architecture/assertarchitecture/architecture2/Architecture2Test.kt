@@ -554,8 +554,9 @@ class Architecture2Test {
             "'fails when dependency is set that presentation layer depends on nothing and domain layer is included (lambda scope)' " +
                 "test has failed. \n" +
                 "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                "└── File $filepath\n    └── Import com.lemonappdev.konsist.architecture.assertarchitecture." +
-                "architecture2.project.domain.DomainFirstClass ($filepath:3:1)",
+                "└── File $filepath\n" +
+                "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project." +
+                "domain.DomainFirstClass ($filepath:3:1)",
         )
     }
 
@@ -579,8 +580,9 @@ class Architecture2Test {
             "'fails when dependency is set that presentation layer depends on nothing and domain layer is included (lambda files)' " +
                 "test has failed. \n" +
                 "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                "└── File $filepath\n    └── Import com.lemonappdev.konsist.architecture.assertarchitecture." +
-                "architecture2.project.domain.DomainFirstClass ($filepath:3:1)",
+                "└── File $filepath\n" +
+                "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project." +
+                "domain.DomainFirstClass ($filepath:3:1)",
         )
     }
 
@@ -608,8 +610,9 @@ class Architecture2Test {
             "'fails when dependency is set that presentation layer depends on nothing and domain layer is included (parameter scope)' " +
                 "test has failed. \n" +
                 "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                "└── File $filepath\n    └── Import com.lemonappdev.konsist.architecture.assertarchitecture." +
-                "architecture2.project.domain.DomainFirstClass ($filepath:3:1)",
+                "└── File $filepath\n" +
+                "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project." +
+                "domain.DomainFirstClass ($filepath:3:1)",
         )
     }
 
@@ -637,8 +640,9 @@ class Architecture2Test {
             "'fails when dependency is set that presentation layer depends on nothing and domain layer is included (parameter files)' " +
                 "test has failed. \n" +
                 "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                "└── File $filepath\n    └── Import com.lemonappdev.konsist.architecture.assertarchitecture." +
-                "architecture2.project.domain.DomainFirstClass ($filepath:3:1)",
+                "└── File $filepath\n" +
+                "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project." +
+                "domain.DomainFirstClass ($filepath:3:1)",
         )
     }
     // endregion

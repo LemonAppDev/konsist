@@ -52,8 +52,9 @@ class OptionalParametersTest {
                 "'error message when additionalMessage and testName parameters are not provided (scope)' test has failed. \n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── File $filepath\n    └── Import com.lemonappdev.konsist.architecture.optionalparameters." +
-                    "project.domain.DomainFirstClass ($filepath:3:1)",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -80,8 +81,9 @@ class OptionalParametersTest {
                     "SOME ADDITIONAL MESSAGE\n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── File $filepath\n    └── Import com.lemonappdev.konsist.architecture.optionalparameters." +
-                    "project.domain.DomainFirstClass ($filepath:3:1)",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -107,8 +109,9 @@ class OptionalParametersTest {
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── File $filepath\n    └── Import com.lemonappdev.konsist.architecture.optionalparameters." +
-                    "project.domain.DomainFirstClass ($filepath:3:1)",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -138,8 +141,9 @@ class OptionalParametersTest {
                     "SOME ADDITIONAL MESSAGE\n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── File $filepath\n    └── Import com.lemonappdev.konsist.architecture.optionalparameters." +
-                    "project.domain.DomainFirstClass ($filepath:3:1)",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -167,8 +171,9 @@ class OptionalParametersTest {
                 "'error message when additionalMessage and testName parameters are not provided (files)' test has failed. \n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── File $filepath\n    └── Import com.lemonappdev.konsist.architecture.optionalparameters." +
-                    "project.domain.DomainFirstClass ($filepath:3:1)",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -197,8 +202,9 @@ class OptionalParametersTest {
                     "SOME ADDITIONAL MESSAGE\n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── File $filepath\n    └── Import com.lemonappdev.konsist.architecture.optionalparameters." +
-                    "project.domain.DomainFirstClass ($filepath:3:1)",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -226,8 +232,9 @@ class OptionalParametersTest {
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── File $filepath\n    └── Import com.lemonappdev.konsist.architecture.optionalparameters." +
-                    "project.domain.DomainFirstClass ($filepath:3:1)",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -259,8 +266,9 @@ class OptionalParametersTest {
                     "SOME ADDITIONAL MESSAGE\n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── File $filepath\n    └── Import com.lemonappdev.konsist.architecture.optionalparameters." +
-                    "project.domain.DomainFirstClass ($filepath:3:1)",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -291,8 +299,9 @@ class OptionalParametersTest {
                     "as parameter (scope)' test has failed. \n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── File $filepath\n    └── Import com.lemonappdev.konsist.architecture.optionalparameters." +
-                    "project.domain.DomainFirstClass ($filepath:3:1)",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -327,8 +336,9 @@ class OptionalParametersTest {
                     "SOME ADDITIONAL MESSAGE\n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── File $filepath\n    └── Import com.lemonappdev.konsist.architecture.optionalparameters." +
-                    "project.domain.DomainFirstClass ($filepath:3:1)",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -358,8 +368,9 @@ class OptionalParametersTest {
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── File $filepath\n    └── Import com.lemonappdev.konsist.architecture.optionalparameters." +
-                    "project.domain.DomainFirstClass ($filepath:3:1)",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -394,8 +405,9 @@ class OptionalParametersTest {
                     "SOME ADDITIONAL MESSAGE\n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── File $filepath\n    └── Import com.lemonappdev.konsist.architecture.optionalparameters." +
-                    "project.domain.DomainFirstClass ($filepath:3:1)",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -428,8 +440,9 @@ class OptionalParametersTest {
                     "as parameter (files)' test has failed. \n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── File $filepath\n    └── Import com.lemonappdev.konsist.architecture.optionalparameters." +
-                    "project.domain.DomainFirstClass ($filepath:3:1)",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -466,8 +479,9 @@ class OptionalParametersTest {
                     "SOME ADDITIONAL MESSAGE\n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── File $filepath\n    └── Import com.lemonappdev.konsist.architecture.optionalparameters." +
-                    "project.domain.DomainFirstClass ($filepath:3:1)",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -499,8 +513,9 @@ class OptionalParametersTest {
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── File $filepath\n    └── Import com.lemonappdev.konsist.architecture.optionalparameters." +
-                    "project.domain.DomainFirstClass ($filepath:3:1)",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -537,8 +552,9 @@ class OptionalParametersTest {
                     "SOME ADDITIONAL MESSAGE\n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── File $filepath\n    └── Import com.lemonappdev.konsist.architecture.optionalparameters." +
-                    "project.domain.DomainFirstClass ($filepath:3:1)",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 }
