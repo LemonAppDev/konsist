@@ -85,7 +85,7 @@ internal interface KoSourceDeclarationProviderCore :
                 null
             } else {
                 type
-            } ?: this as? KoDeclarationCastProvider
+            }
         }
 
     private fun isExtensionDeclaration(): Boolean =

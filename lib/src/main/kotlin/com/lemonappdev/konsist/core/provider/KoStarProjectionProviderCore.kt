@@ -1,12 +1,13 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.api.provider.KoStarProjectionProvider
+import org.jetbrains.kotlin.psi.KtTypeProjection
 
 internal interface KoStarProjectionProviderCore :
     KoStarProjectionProvider,
-    KoBaseProviderCore,
-    KoSourceDeclarationProviderCore {
+    KoBaseProviderCore {
+    val ktTypeProjection: KtTypeProjection?
+
     override val isStarProjection: Boolean
-        get() = sourceDeclaration is KoStarProjectionDeclaration
+        get() = ktTypeProjection != null
 }

@@ -14,7 +14,6 @@ import com.lemonappdev.konsist.core.declaration.KoTypeParameterDeclarationCore
 import com.lemonappdev.konsist.core.declaration.private.KoFunctionTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.private.KoGenericTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
-import com.lemonappdev.konsist.core.declaration.type.KoStarProjectionDeclarationCore
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
 import com.lemonappdev.konsist.core.model.getObject
@@ -159,7 +158,6 @@ object TypeUtil {
 
         return when {
             typeParameter != null -> KoTypeParameterDeclarationCore.getInstance(typeParameter, emptyList(), containingFile)
-            nestedType is KtTypeProjection -> KoStarProjectionDeclarationCore.getInstance(nestedType, parentDeclaration)
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
             nestedType is KtUserType && typeText != null -> {
                 if (nestedType.children.filterIsInstance<KtTypeArgumentList>().isNotEmpty()) {
