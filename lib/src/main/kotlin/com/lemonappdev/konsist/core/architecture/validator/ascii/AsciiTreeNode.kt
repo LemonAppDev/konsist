@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.architecture.validator.ascii
 
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
+import com.lemonappdev.konsist.core.util.HyperlinkUtil
 
 data class AsciiTreeNode(
     val string: String,
@@ -11,7 +12,7 @@ data class AsciiTreeNode(
         koFileDeclaration: KoFileDeclaration,
         children: List<AsciiTreeNode>,
     ) : this(
-        "File ${koFileDeclaration.path}",
+        "File ${HyperlinkUtil.toHyperlink(koFileDeclaration.path)}",
         children,
     )
 
@@ -19,7 +20,7 @@ data class AsciiTreeNode(
         koImportDeclaration: KoImportDeclaration,
         children: List<AsciiTreeNode>,
     ) : this(
-        "Import ${koImportDeclaration.name}",
+        "Import ${koImportDeclaration.name} (${HyperlinkUtil.toHyperlink(koImportDeclaration.location)})",
         children,
     )
 }
