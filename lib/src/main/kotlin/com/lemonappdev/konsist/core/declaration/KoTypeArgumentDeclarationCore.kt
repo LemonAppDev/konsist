@@ -12,7 +12,7 @@ import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
-import com.lemonappdev.konsist.core.provider.KoStarProjectionProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsStarProjectionProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoInModifierProviderCore
@@ -50,7 +50,7 @@ data class KoTypeArgumentDeclarationCore(
     KoIsGenericProviderCore,
     KoIsFunctionTypeProviderCore,
     KoFunctionTypeDeclarationProviderCore,
-    KoStarProjectionProviderCore {
+    KoIsStarProjectionProviderCore {
     override val ktElement: KtElement by lazy { ktTypeProjection }
 
     override val ktUserType: KtUserType? by lazy { null }

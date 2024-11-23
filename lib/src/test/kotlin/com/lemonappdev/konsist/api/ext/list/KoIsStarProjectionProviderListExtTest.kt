@@ -1,20 +1,20 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.provider.KoStarProjectionProvider
+import com.lemonappdev.konsist.api.provider.KoIsStarProjectionProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoStarProjectionProviderListExtTest {
+class KoIsStarProjectionProviderListExtTest {
     @Test
     fun `withStarProjection() returns import with wildcard`() {
         // given
-        val import1: KoStarProjectionProvider =
+        val import1: KoIsStarProjectionProvider =
             mockk {
                 every { isStarProjection } returns true
             }
-        val import2: KoStarProjectionProvider =
+        val import2: KoIsStarProjectionProvider =
             mockk {
                 every { isStarProjection } returns false
             }
@@ -30,11 +30,11 @@ class KoStarProjectionProviderListExtTest {
     @Test
     fun `withoutStarProjection() returns import without wildcard`() {
         // given
-        val import1: KoStarProjectionProvider =
+        val import1: KoIsStarProjectionProvider =
             mockk {
                 every { isStarProjection } returns true
             }
-        val import2: KoStarProjectionProvider =
+        val import2: KoIsStarProjectionProvider =
             mockk {
                 every { isStarProjection } returns false
             }
