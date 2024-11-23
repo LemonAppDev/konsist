@@ -19,10 +19,16 @@ class KoClassDeclarationForKoNameProviderTest {
             name shouldBeEqualTo "SampleClass"
             hasNameStartingWith("Sample") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
+            hasNameStartingWith("sample", ignoreCase = false) shouldBeEqualTo false
+            hasNameStartingWith("sample", ignoreCase = true) shouldBeEqualTo true
             hasNameEndingWith("ass") shouldBeEqualTo true
             hasNameEndingWith("other") shouldBeEqualTo false
+            hasNameEndingWith("ASS", ignoreCase = false) shouldBeEqualTo false
+            hasNameEndingWith("ASS", ignoreCase = true) shouldBeEqualTo true
             hasNameContaining("leCl") shouldBeEqualTo true
-            hasNameContaining("lecl") shouldBeEqualTo false
+            hasNameContaining("other") shouldBeEqualTo false
+            hasNameContaining("lecl", ignoreCase = false) shouldBeEqualTo false
+            hasNameContaining("lecl", ignoreCase = true) shouldBeEqualTo true
             hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }

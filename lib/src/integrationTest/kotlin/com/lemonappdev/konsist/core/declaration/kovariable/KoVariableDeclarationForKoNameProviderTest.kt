@@ -27,11 +27,17 @@ class KoVariableDeclarationForKoNameProviderTest {
         assertSoftly(sut) {
             name shouldBeEqualTo "sampleVariable"
             hasNameStartingWith("sample") shouldBeEqualTo true
-            hasNameStartingWith("other") shouldBeEqualTo false
+            hasNameStartingWith("Other") shouldBeEqualTo false
+            hasNameStartingWith("SAMPLE", ignoreCase = false) shouldBeEqualTo false
+            hasNameStartingWith("SAMPLE", ignoreCase = true) shouldBeEqualTo true
             hasNameEndingWith("able") shouldBeEqualTo true
             hasNameEndingWith("other") shouldBeEqualTo false
+            hasNameEndingWith("ABLE", ignoreCase = false) shouldBeEqualTo false
+            hasNameEndingWith("ABLE", ignoreCase = true) shouldBeEqualTo true
             hasNameContaining("leVari") shouldBeEqualTo true
-            hasNameContaining("levari") shouldBeEqualTo false
+            hasNameContaining("other") shouldBeEqualTo false
+            hasNameContaining("levari", ignoreCase = false) shouldBeEqualTo false
+            hasNameContaining("levari", ignoreCase = true) shouldBeEqualTo true
             hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
