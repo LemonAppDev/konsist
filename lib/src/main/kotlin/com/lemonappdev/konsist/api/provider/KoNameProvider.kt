@@ -18,7 +18,10 @@ interface KoNameProvider : KoBaseProvider {
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if the declaration's name starts with the prefix, `false` otherwise.
      */
-    fun hasNameStartingWith(prefix: String, ignoreCase: Boolean = false): Boolean
+    fun hasNameStartingWith(
+        prefix: String,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Name of the declaration with suffix.
@@ -29,7 +32,10 @@ interface KoNameProvider : KoBaseProvider {
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if the declaration's name ends with the prefix, `false` otherwise.
      */
-    fun hasNameEndingWith(suffix: String, ignoreCase: Boolean = false): Boolean
+    fun hasNameEndingWith(
+        suffix: String,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Name of the declaration containing text.
@@ -40,7 +46,10 @@ interface KoNameProvider : KoBaseProvider {
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if the declaration's name contains the text, `false` otherwise.
      */
-    fun hasNameContaining(text: String, ignoreCase: Boolean = false): Boolean
+    fun hasNameContaining(
+        text: String,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Name of the declaration matching regex.

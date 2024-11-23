@@ -508,7 +508,6 @@ class KoNameProviderListExtTest {
         sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
-
     @Test
     fun `withoutNameStartingWith() returns declaration which name not starts with given prefix`() {
         // given
@@ -1419,7 +1418,7 @@ class KoNameProviderListExtTest {
 
         listOf(koNameProviderC, koNameProviderB, koNameProviderA).isSortedByName(
             ascending = false,
-            ignoreCase = false
+            ignoreCase = false,
         ) shouldBe false
     }
 }

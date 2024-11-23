@@ -74,6 +74,5 @@ class KoObjectDeclarationForKoNameProviderTest {
         sut.name shouldBeEqualTo "Companion"
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koobject/snippet/forkonameprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/forkonameprovider/", fileName)
 }

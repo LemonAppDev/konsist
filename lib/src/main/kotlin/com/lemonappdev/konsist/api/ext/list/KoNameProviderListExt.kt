@@ -14,7 +14,10 @@ import com.lemonappdev.konsist.api.provider.KoNameProvider
  *
  * @return A list containing declarations with the specified names (or any name if [names] is empty).
  */
-fun <T : KoNameProvider> List<T>.withName(vararg names: String, ignoreCase: Boolean = false): List<T> = withName(listOf(*names), ignoreCase)
+fun <T : KoNameProvider> List<T>.withName(
+    vararg names: String,
+    ignoreCase: Boolean = false,
+): List<T> = withName(listOf(*names), ignoreCase)
 
 /**
  * List containing declarations with name.
@@ -26,7 +29,10 @@ fun <T : KoNameProvider> List<T>.withName(vararg names: String, ignoreCase: Bool
  *
  * @return A list containing declarations with the specified names (or any name if [names] is empty).
  */
-fun <T : KoNameProvider> List<T>.withName(names: Collection<String>, ignoreCase: Boolean = false): List<T> =
+fun <T : KoNameProvider> List<T>.withName(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filter {
         when {
             names.isEmpty() -> it.name != ""
@@ -44,7 +50,10 @@ fun <T : KoNameProvider> List<T>.withName(names: Collection<String>, ignoreCase:
  *
  * @return A list containing declarations without the specified names (or none name if [names] is empty).
  */
-fun <T : KoNameProvider> List<T>.withoutName(vararg names: String, ignoreCase: Boolean = false): List<T> = withoutName(listOf(*names), ignoreCase)
+fun <T : KoNameProvider> List<T>.withoutName(
+    vararg names: String,
+    ignoreCase: Boolean = false,
+): List<T> = withoutName(listOf(*names), ignoreCase)
 
 /**
  * List containing declarations without name.
@@ -56,7 +65,10 @@ fun <T : KoNameProvider> List<T>.withoutName(vararg names: String, ignoreCase: B
  *
  * @return A list containing declarations without the specified names (or none name if [names] is empty).
  */
-fun <T : KoNameProvider> List<T>.withoutName(names: Collection<String>, ignoreCase: Boolean = false): List<T> =
+fun <T : KoNameProvider> List<T>.withoutName(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filter {
         when {
             names.isEmpty() -> it.name == ""
@@ -94,7 +106,7 @@ fun <T : KoNameProvider> List<T>.withoutName(predicate: (String) -> Boolean): Li
 fun <T : KoNameProvider> List<T>.withNameStartingWith(
     prefix: String,
     vararg prefixes: String,
-    ignoreCase: Boolean = false
+    ignoreCase: Boolean = false,
 ): List<T> = withNameStartingWith(listOf(prefix, *prefixes), ignoreCase)
 
 /**
@@ -107,7 +119,10 @@ fun <T : KoNameProvider> List<T>.withNameStartingWith(
  *
  * @return A list containing declarations with names starting with the specified prefixes.
  */
-fun <T : KoNameProvider> List<T>.withNameStartingWith(prefixes: Collection<String>, ignoreCase: Boolean = false): List<T> =
+fun <T : KoNameProvider> List<T>.withNameStartingWith(
+    prefixes: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filter {
         when {
             prefixes.isEmpty() -> it.name != ""
@@ -129,7 +144,7 @@ fun <T : KoNameProvider> List<T>.withNameStartingWith(prefixes: Collection<Strin
 fun <T : KoNameProvider> List<T>.withoutNameStartingWith(
     prefix: String,
     vararg prefixes: String,
-    ignoreCase: Boolean = false
+    ignoreCase: Boolean = false,
 ): List<T> = withoutNameStartingWith(listOf(prefix, *prefixes), ignoreCase)
 
 /**
@@ -142,7 +157,10 @@ fun <T : KoNameProvider> List<T>.withoutNameStartingWith(
  *
  * @return A list containing declarations without names starting with the specified prefixes.
  */
-fun <T : KoNameProvider> List<T>.withoutNameStartingWith(prefixes: Collection<String>, ignoreCase: Boolean = false): List<T> =
+fun <T : KoNameProvider> List<T>.withoutNameStartingWith(
+    prefixes: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filterNot {
         when {
             prefixes.isEmpty() -> it.name != ""
@@ -177,7 +195,10 @@ fun <T : KoNameProvider> List<T>.withNameEndingWith(
  *
  * @return A list containing declarations with names ending with the specified suffixes.
  */
-fun <T : KoNameProvider> List<T>.withNameEndingWith(suffixes: Collection<String>, ignoreCase: Boolean = false): List<T> =
+fun <T : KoNameProvider> List<T>.withNameEndingWith(
+    suffixes: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filter {
         when {
             suffixes.isEmpty() -> it.name != ""
@@ -212,7 +233,10 @@ fun <T : KoNameProvider> List<T>.withoutNameEndingWith(
  *
  * @return A list containing declarations without names ending with the specified suffixes.
  */
-fun <T : KoNameProvider> List<T>.withoutNameEndingWith(suffixes: Collection<String>, ignoreCase: Boolean = false): List<T> =
+fun <T : KoNameProvider> List<T>.withoutNameEndingWith(
+    suffixes: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filterNot {
         when {
             suffixes.isEmpty() -> it.name != ""
@@ -247,7 +271,10 @@ fun <T : KoNameProvider> List<T>.withNameContaining(
  *
  * @return A list containing declarations with names containing the specified texts.
  */
-fun <T : KoNameProvider> List<T>.withNameContaining(texts: Collection<String>, ignoreCase: Boolean = false): List<T> =
+fun <T : KoNameProvider> List<T>.withNameContaining(
+    texts: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filter {
         when {
             texts.isEmpty() -> it.name != ""
@@ -279,10 +306,13 @@ fun <T : KoNameProvider> List<T>.withoutNameContaining(
  * @param ignoreCase Specifies whether the comparison should ignore case.
  *        If `true`, the prefix comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- *        
+ *
  * @return A list containing declarations without names containing the specified texts.
  */
-fun <T : KoNameProvider> List<T>.withoutNameContaining(texts: Collection<String>, ignoreCase: Boolean = false): List<T> =
+fun <T : KoNameProvider> List<T>.withoutNameContaining(
+    texts: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filterNot {
         when {
             texts.isEmpty() -> it.name != ""
