@@ -1306,67 +1306,67 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
 
         // then
         assertSoftly(sut) {
-//            it?.isClass shouldBeEqualTo false
-//            it?.isObject shouldBeEqualTo false
-//            it?.isInterface shouldBeEqualTo false
-//            it?.isClassOrObject shouldBeEqualTo false
-//            it?.isClassOrInterface shouldBeEqualTo false
-//            it?.isInterfaceOrObject shouldBeEqualTo false
-//            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
-//            it?.isTypeAlias shouldBeEqualTo false
-//            it?.isImportAlias shouldBeEqualTo false
-//            it?.isKotlinType shouldBeEqualTo false
-//            it?.isKotlinBasicType shouldBeEqualTo false
-//            it?.isKotlinCollectionType shouldBeEqualTo false
-//            it?.isTypeParameter shouldBeEqualTo false
-//            it?.isExternal shouldBeEqualTo true
-//            it?.asExternalDeclaration() shouldBeInstanceOf KoExternalDeclaration::class
-//            it?.asExternalDeclaration()?.name shouldBeEqualTo "SampleExternalClass"
-//            it?.hasExternalDeclaration() shouldBeEqualTo true
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo false
+            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isKotlinBasicType shouldBeEqualTo false
+            it?.isKotlinCollectionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
+            it?.isExternal shouldBeEqualTo true
+            it?.asExternalDeclaration() shouldBeInstanceOf KoExternalDeclaration::class
+            it?.asExternalDeclaration()?.name shouldBeEqualTo "SampleExternalClass"
+            it?.hasExternalDeclaration() shouldBeEqualTo true
             it?.hasExternalDeclaration { declaration -> declaration.name == "SampleExternalClass" } shouldBeEqualTo true
-//            it?.hasExternalDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-//            it?.hasExternalDeclarationOf(SampleExternalClass::class) shouldBeEqualTo true
-//            it?.hasExternalDeclarationOf(SampleClass::class) shouldBeEqualTo false
-//            it?.asClassDeclaration() shouldBeEqualTo null
-//            it?.hasClassDeclaration() shouldBeEqualTo false
-//            it?.hasClassDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
-//            it?.asObjectDeclaration() shouldBeEqualTo null
-//            it?.hasObjectDeclaration() shouldBeEqualTo false
-//            it?.hasObjectDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
-//            it?.asInterfaceDeclaration() shouldBeEqualTo null
-//            it?.hasInterfaceDeclaration() shouldBeEqualTo false
-//            it?.hasInterfaceDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
-//            it?.asClassOrObjectDeclaration() shouldBeEqualTo null
-//            it?.hasClassOrObjectDeclaration() shouldBeEqualTo false
-//            it?.hasClassOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-//            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
-//            it?.asClassOrInterfaceDeclaration() shouldBeEqualTo null
-//            it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo false
-//            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-//            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
-//            it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
-//            it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
-//            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-//            it?.hasInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
-//            it?.asClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo null
-//            it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo false
-//            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-//            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
-//            it?.asTypeAliasDeclaration() shouldBeEqualTo null
-//            it?.hasTypeAliasDeclaration() shouldBeEqualTo false
-//            it?.asImportAliasDeclaration() shouldBeEqualTo null
-//            it?.hasImportAliasDeclaration() shouldBeEqualTo false
-//            it?.asKotlinTypeDeclaration() shouldBeEqualTo null
-//            it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
-//            it?.hasKotlinTypeDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
-//            it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
-//            it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
-//            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
-//            it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
-//            it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-//            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
-//            it?.asTypeParameterDeclaration() shouldBeEqualTo null
-//            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+            it?.hasExternalDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasExternalDeclarationOf(SampleExternalClass::class) shouldBeEqualTo true
+            it?.hasExternalDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassDeclaration() shouldBeEqualTo null
+            it?.hasClassDeclaration() shouldBeEqualTo false
+            it?.hasClassDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
+            it?.asObjectDeclaration() shouldBeEqualTo null
+            it?.hasObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
+            it?.asInterfaceDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceDeclaration() shouldBeEqualTo false
+            it?.hasInterfaceDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
+            it?.asClassOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasClassOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceDeclaration() shouldBeEqualTo null
+            it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.asTypeAliasDeclaration() shouldBeEqualTo null
+            it?.hasTypeAliasDeclaration() shouldBeEqualTo false
+            it?.asImportAliasDeclaration() shouldBeEqualTo null
+            it?.hasImportAliasDeclaration() shouldBeEqualTo false
+            it?.asKotlinTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinTypeDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
+            it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
         }
     }
 
