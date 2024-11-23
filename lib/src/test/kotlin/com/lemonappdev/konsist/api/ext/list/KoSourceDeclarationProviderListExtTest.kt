@@ -15,15 +15,18 @@ class KoSourceDeclarationProviderListExtTest {
         // given
         val sourceDeclaration1: KoDeclarationCastProvider = mockk()
         val sourceDeclaration2: KoDeclarationCastProvider = mockk()
-        val declaration1: KoSourceDeclarationProvider = mockk {
-            every { sourceDeclaration } returns sourceDeclaration1
-        }
-        val declaration2: KoSourceDeclarationProvider = mockk {
-            every { sourceDeclaration } returns sourceDeclaration2
-        }
-        val declaration3: KoSourceDeclarationProvider = mockk {
-            every { sourceDeclaration } returns null
-        }
+        val declaration1: KoSourceDeclarationProvider =
+            mockk {
+                every { sourceDeclaration } returns sourceDeclaration1
+            }
+        val declaration2: KoSourceDeclarationProvider =
+            mockk {
+                every { sourceDeclaration } returns sourceDeclaration2
+            }
+        val declaration3: KoSourceDeclarationProvider =
+            mockk {
+                every { sourceDeclaration } returns null
+            }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
@@ -38,18 +41,22 @@ class KoSourceDeclarationProviderListExtTest {
         // given
         val name1 = "name1"
         val name2 = "name2"
-        val sourceDeclaration1: KoDeclarationCastProvider = mockk {
-            every { name } returns name1
-        }
-        val sourceDeclaration2: KoDeclarationCastProvider = mockk {
-            every { name } returns name2
-        }
-        val declaration1: KoSourceDeclarationProvider = mockk {
-            every { sourceDeclaration } returns sourceDeclaration1
-        }
-        val declaration2: KoSourceDeclarationProvider = mockk {
-            every { sourceDeclaration } returns sourceDeclaration2
-        }
+        val sourceDeclaration1: KoDeclarationCastProvider =
+            mockk {
+                every { name } returns name1
+            }
+        val sourceDeclaration2: KoDeclarationCastProvider =
+            mockk {
+                every { name } returns name2
+            }
+        val declaration1: KoSourceDeclarationProvider =
+            mockk {
+                every { sourceDeclaration } returns sourceDeclaration1
+            }
+        val declaration2: KoSourceDeclarationProvider =
+            mockk {
+                every { sourceDeclaration } returns sourceDeclaration2
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
