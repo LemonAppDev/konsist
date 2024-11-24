@@ -16,6 +16,7 @@ import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtUserType
 
 internal class KoGenericTypeDeclarationCore private constructor(
@@ -34,6 +35,8 @@ internal class KoGenericTypeDeclarationCore private constructor(
     override val psiElement: PsiElement by lazy { ktUserType }
 
     override val ktElement: KtElement by lazy { ktUserType }
+
+    override val ktTypeProjection: KtTypeProjection? by lazy { null }
 
     override val name: String by lazy { ktUserType.text }
 

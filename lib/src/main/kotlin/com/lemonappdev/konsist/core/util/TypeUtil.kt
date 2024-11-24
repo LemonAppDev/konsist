@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
@@ -14,6 +15,7 @@ import com.lemonappdev.konsist.core.declaration.KoTypeParameterDeclarationCore
 import com.lemonappdev.konsist.core.declaration.private.KoFunctionTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.private.KoGenericTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
+import com.lemonappdev.konsist.core.declaration.type.KoStarProjectionDeclarationCore
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
 import com.lemonappdev.konsist.core.model.getObject
@@ -65,7 +67,7 @@ object TypeUtil {
                         .firstOrNull()
 
                 if (typeProjection?.projectionKind == KtProjectionKind.STAR) {
-                    return null
+                    return KoStarProjectionDeclarationCore as? KoDeclarationCastProvider
                 } else {
                     typeProjection
                         ?.children
@@ -160,6 +162,7 @@ object TypeUtil {
 
         return when {
             typeParameter != null -> KoTypeParameterDeclarationCore.getInstance(typeParameter, emptyList(), containingFile)
+            nestedType is KtTypeProjection -> KoStarProjectionDeclarationCore
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
             nestedType is KtUserType && typeText != null -> {
                 if (nestedType.children.filterIsInstance<KtTypeArgumentList>().isNotEmpty()) {

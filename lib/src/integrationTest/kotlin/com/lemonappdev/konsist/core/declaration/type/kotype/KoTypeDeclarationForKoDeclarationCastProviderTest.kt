@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.externalsample.SampleExternalClass
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleCollection1
@@ -1464,7 +1465,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
                 ?.sourceDeclaration
 
         // then
-        sut shouldBeEqualTo null
+        sut shouldBeInstanceOf KoStarProjectionDeclaration::class
     }
 
     private fun getSnippetFile(fileName: String) =

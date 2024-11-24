@@ -23,7 +23,8 @@ import kotlin.reflect.KClass
 @Suppress("detekt.TooManyFunctions")
 interface KoDeclarationCastProvider :
     KoBaseProvider,
-    KoSourceDeclaration {
+    KoSourceDeclaration,
+    KoIsStarProjectionProvider {
     /**
      * Determines whatever declaration is a class.
      */

@@ -15,7 +15,9 @@ import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceDecla
 import com.lemonappdev.konsist.api.declaration.combined.KoClassAndObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.combined.KoInterfaceAndObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
+import com.lemonappdev.konsist.api.provider.KoIsStarProjectionProvider
 import com.lemonappdev.konsist.core.declaration.KoSourceDeclarationCore
 import com.lemonappdev.konsist.core.util.TypeUtil
 import kotlin.reflect.KClass
@@ -27,7 +29,8 @@ internal interface KoDeclarationCastProviderCore :
     KoBaseProviderCore,
     KoContainingFileProviderCore,
     KoNameProviderCore,
-    KoContainingDeclarationProviderCore {
+    KoContainingDeclarationProviderCore,
+    KoIsStarProjectionProviderCore {
     val koDeclarationCastProviderDeclaration: KoSourceDeclaration?
         get() = this
 
@@ -84,6 +87,9 @@ internal interface KoDeclarationCastProviderCore :
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isExternal"))
     override val isExternalType: Boolean
         get() = isExternal
+
+    override val isStarProjection: Boolean
+        get() = koDeclarationCastProviderDeclaration is KoStarProjectionDeclaration
 
     override fun asClassDeclaration(): KoClassDeclaration? = koDeclarationCastProviderDeclaration as? KoClassDeclaration
 

@@ -17,6 +17,7 @@ import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtImportAlias
+import org.jetbrains.kotlin.psi.KtTypeProjection
 
 internal class KoImportAliasDeclarationCore private constructor(
     private val ktImportAlias: KtImportAlias,
@@ -34,6 +35,8 @@ internal class KoImportAliasDeclarationCore private constructor(
     override val psiElement: PsiElement by lazy { ktImportAlias }
 
     override val ktElement: KtElement by lazy { ktImportAlias }
+
+    override val ktTypeProjection: KtTypeProjection? by lazy { null }
 
     override val text: String by lazy { ktImportAlias.name ?: ktImportAlias.text }
 

@@ -253,7 +253,7 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "*" } shouldBeEqualTo false
+            it?.hasSourceDeclaration { declaration -> declaration.name == "*" } shouldBeEqualTo true
             it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo false
         }

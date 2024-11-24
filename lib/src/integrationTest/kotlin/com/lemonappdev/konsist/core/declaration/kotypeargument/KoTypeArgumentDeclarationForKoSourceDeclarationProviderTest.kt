@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.kotypeargument
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -84,7 +85,7 @@ class KoTypeArgumentDeclarationForKoSourceDeclarationProviderTest {
                 ?.firstOrNull()
 
         // then
-        sut?.sourceDeclaration shouldBeEqualTo null
+        sut?.sourceDeclaration shouldBeInstanceOf KoStarProjectionDeclaration::class
     }
 
     @Test

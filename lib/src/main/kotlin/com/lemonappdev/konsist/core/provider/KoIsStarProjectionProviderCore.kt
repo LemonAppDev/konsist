@@ -7,6 +7,7 @@ internal interface KoIsStarProjectionProviderCore :
     KoIsStarProjectionProvider,
     KoBaseProviderCore {
     val ktTypeProjection: KtTypeProjection?
+        get() = null
 
     override val isStarProjection: Boolean
         get() = ktTypeProjection != null
