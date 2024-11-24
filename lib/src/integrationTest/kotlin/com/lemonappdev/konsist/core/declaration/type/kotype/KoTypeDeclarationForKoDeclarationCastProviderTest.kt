@@ -1465,7 +1465,43 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
                 ?.sourceDeclaration
 
         // then
-        sut shouldBeInstanceOf KoStarProjectionDeclaration::class
+        assertSoftly(sut) {
+            it?.isClass shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo false
+            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isKotlinBasicType shouldBeEqualTo false
+            it?.isKotlinCollectionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
+            it?.isExternal shouldBeEqualTo false
+            it shouldBeInstanceOf KoStarProjectionDeclaration::class
+            it?.asClassDeclaration() shouldBeEqualTo null
+            it?.hasClassDeclaration() shouldBeEqualTo false
+            it?.asObjectDeclaration() shouldBeEqualTo null
+            it?.hasObjectDeclaration() shouldBeEqualTo false
+            it?.asInterfaceDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceDeclaration() shouldBeEqualTo false
+            it?.asTypeAliasDeclaration() shouldBeEqualTo null
+            it?.hasTypeAliasDeclaration() shouldBeEqualTo false
+            it?.asImportAliasDeclaration() shouldBeEqualTo null
+            it?.hasImportAliasDeclaration() shouldBeEqualTo false
+            it?.asKotlinTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
+            it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+        }
     }
 
     private fun getSnippetFile(fileName: String) =

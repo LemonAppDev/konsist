@@ -332,6 +332,7 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
                 ?.typeArguments
                 ?.firstOrNull()
                 ?.sourceDeclaration shouldBeEqualTo null
+
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "() -> Unit"
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo 0
