@@ -17,7 +17,6 @@ import com.lemonappdev.konsist.api.declaration.combined.KoInterfaceAndObjectDecl
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
-import com.lemonappdev.konsist.api.provider.KoIsStarProjectionProvider
 import com.lemonappdev.konsist.core.declaration.KoSourceDeclarationCore
 import com.lemonappdev.konsist.core.util.TypeUtil
 import kotlin.reflect.KClass

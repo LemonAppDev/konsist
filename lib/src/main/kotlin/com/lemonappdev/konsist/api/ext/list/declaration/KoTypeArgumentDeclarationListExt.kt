@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.api.ext.list.declaration
 
-import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 
