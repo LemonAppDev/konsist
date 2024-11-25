@@ -42,15 +42,19 @@ class OptionalParametersTest {
             }
 
         // then
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
         result
             .message
             .shouldBeEqualTo(
                 "'error message when additionalMessage and testName parameters are not provided (scope)' test has failed. \n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
-                    "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -66,6 +70,10 @@ class OptionalParametersTest {
             }
 
         // then
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
         result
             .message
             .shouldBeEqualTo(
@@ -73,9 +81,9 @@ class OptionalParametersTest {
                     "SOME ADDITIONAL MESSAGE\n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
-                    "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -91,15 +99,19 @@ class OptionalParametersTest {
             }
 
         // then
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
         result
             .message
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
-                    "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -118,6 +130,10 @@ class OptionalParametersTest {
             }
 
         // then
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
         result
             .message
             .shouldBeEqualTo(
@@ -125,9 +141,9 @@ class OptionalParametersTest {
                     "SOME ADDITIONAL MESSAGE\n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
-                    "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -145,15 +161,19 @@ class OptionalParametersTest {
             }
 
         // then
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
         result
             .message
             .shouldBeEqualTo(
                 "'error message when additionalMessage and testName parameters are not provided (files)' test has failed. \n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
-                    "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -171,6 +191,10 @@ class OptionalParametersTest {
             }
 
         // then
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
         result
             .message
             .shouldBeEqualTo(
@@ -178,9 +202,9 @@ class OptionalParametersTest {
                     "SOME ADDITIONAL MESSAGE\n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
-                    "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -198,15 +222,19 @@ class OptionalParametersTest {
             }
 
         // then
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
         result
             .message
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
-                    "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -227,6 +255,10 @@ class OptionalParametersTest {
             }
 
         // then
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
         result
             .message
             .shouldBeEqualTo(
@@ -234,9 +266,9 @@ class OptionalParametersTest {
                     "SOME ADDITIONAL MESSAGE\n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
-                    "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -256,6 +288,10 @@ class OptionalParametersTest {
             }
 
         // then
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
         result
             .message
             .shouldBeEqualTo(
@@ -263,9 +299,9 @@ class OptionalParametersTest {
                     "as parameter (scope)' test has failed. \n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
-                    "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -281,10 +317,17 @@ class OptionalParametersTest {
         // when
         val result =
             shouldThrow<KoAssertionFailedException> {
-                scope.assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE", layerDependenciesFunc = layerDependencies)
+                scope.assertArchitecture(
+                    additionalMessage = "SOME ADDITIONAL MESSAGE",
+                    layerDependenciesFunc = layerDependencies,
+                )
             }
 
         // then
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
         result
             .message
             .shouldBeEqualTo(
@@ -293,9 +336,9 @@ class OptionalParametersTest {
                     "SOME ADDITIONAL MESSAGE\n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
-                    "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -315,15 +358,19 @@ class OptionalParametersTest {
             }
 
         // then
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
         result
             .message
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
-                    "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -347,6 +394,10 @@ class OptionalParametersTest {
             }
 
         // then
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
         result
             .message
             .shouldBeEqualTo(
@@ -354,9 +405,9 @@ class OptionalParametersTest {
                     "SOME ADDITIONAL MESSAGE\n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
-                    "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -378,6 +429,10 @@ class OptionalParametersTest {
             }
 
         // then
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
         result
             .message
             .shouldBeEqualTo(
@@ -385,9 +440,9 @@ class OptionalParametersTest {
                     "as parameter (files)' test has failed. \n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
-                    "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -405,10 +460,17 @@ class OptionalParametersTest {
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .files
-                    .assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE", layerDependenciesFunc = layerDependencies)
+                    .assertArchitecture(
+                        additionalMessage = "SOME ADDITIONAL MESSAGE",
+                        layerDependenciesFunc = layerDependencies,
+                    )
             }
 
         // then
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters/" +
+                "project/presentation/sample/PresentationThirdClass.kt"
+
         result
             .message
             .shouldBeEqualTo(
@@ -417,9 +479,9 @@ class OptionalParametersTest {
                     "SOME ADDITIONAL MESSAGE\n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters/" +
-                    "project/presentation/sample/PresentationThirdClass.kt\n" +
-                    "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -441,15 +503,19 @@ class OptionalParametersTest {
             }
 
         // then
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
         result
             .message
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
-                    "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
@@ -475,6 +541,10 @@ class OptionalParametersTest {
             }
 
         // then
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
         result
             .message
             .shouldBeEqualTo(
@@ -482,9 +552,9 @@ class OptionalParametersTest {
                     "SOME ADDITIONAL MESSAGE\n" +
                     "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt\n" +
-                    "    └── import com.lemonappdev.konsist.architecture.optionalparameters.project.domain.DomainFirstClass",
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 }

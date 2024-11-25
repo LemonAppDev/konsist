@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
-import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
+import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -17,6 +17,7 @@ import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtImportAlias
+import org.jetbrains.kotlin.psi.KtTypeProjection
 
 internal class KoImportAliasDeclarationCore private constructor(
     private val ktImportAlias: KtImportAlias,
@@ -35,6 +36,8 @@ internal class KoImportAliasDeclarationCore private constructor(
 
     override val ktElement: KtElement by lazy { ktImportAlias }
 
+    override val ktTypeProjection: KtTypeProjection? by lazy { null }
+
     override val text: String by lazy { ktImportAlias.name ?: ktImportAlias.text }
 
     override val name: String by lazy { text }
@@ -43,7 +46,9 @@ internal class KoImportAliasDeclarationCore private constructor(
 
     override val importDirective: KoImportDeclaration by lazy { containingDeclaration }
 
-    override val sourceDeclaration: KoSourceDeclaration? by lazy { importDirective.sourceDeclaration }
+    override val sourceDeclaration: KoDeclarationCastProvider? by lazy {
+        importDirective.sourceDeclaration
+    }
 
     override fun toString(): String = text
 

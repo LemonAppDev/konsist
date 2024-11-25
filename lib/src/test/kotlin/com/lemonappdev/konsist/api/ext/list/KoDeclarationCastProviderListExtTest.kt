@@ -7,6 +7,10 @@ import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
+import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.combined.KoClassAndObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.combined.KoInterfaceAndObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.testdata.SampleType1
@@ -184,6 +188,234 @@ class KoDeclarationCastProviderListExtTest {
 
         // when
         val sut = declarations.interfaceDeclarations(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(sourceDeclaration1)
+    }
+
+    @Test
+    fun `classAndObjectDeclarations returns classes and objects from all declarations`() {
+        // given
+        val sourceDeclaration1: KoClassAndObjectDeclaration = mockk()
+        val sourceDeclaration2: KoClassAndObjectDeclaration = mockk()
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrObjectDeclaration() } returns sourceDeclaration1
+                every { hasClassOrObjectDeclaration() } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrObjectDeclaration() } returns sourceDeclaration2
+                every { hasClassOrObjectDeclaration() } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.classAndObjectDeclarations()
+
+        // then
+        sut shouldBeEqualTo listOf(sourceDeclaration1, sourceDeclaration2)
+    }
+
+    @Test
+    fun `classAndObjectDeclarations returns classes and objects from all declarations which satisfies predicate`() {
+        // given
+        val predicate: (KoClassAndObjectDeclaration) -> Boolean = { it.hasNameContaining("SomeObject") }
+        val sourceDeclaration1: KoClassAndObjectDeclaration = mockk()
+        val sourceDeclaration2: KoClassAndObjectDeclaration = mockk()
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrObjectDeclaration() } returns sourceDeclaration1
+                every { hasClassOrObjectDeclaration(predicate) } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrObjectDeclaration() } returns sourceDeclaration2
+                every { hasClassOrObjectDeclaration(predicate) } returns false
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclaration(predicate) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.classAndObjectDeclarations(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(sourceDeclaration1)
+    }
+
+    @Test
+    fun `classAndInterfaceDeclarations returns classes and interfaces from all declarations`() {
+        // given
+        val sourceDeclaration1: KoClassAndInterfaceDeclaration = mockk()
+        val sourceDeclaration2: KoClassAndInterfaceDeclaration = mockk()
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrInterfaceDeclaration() } returns sourceDeclaration1
+                every { hasClassOrInterfaceDeclaration() } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrInterfaceDeclaration() } returns sourceDeclaration2
+                every { hasClassOrInterfaceDeclaration() } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.classAndInterfaceDeclarations()
+
+        // then
+        sut shouldBeEqualTo listOf(sourceDeclaration1, sourceDeclaration2)
+    }
+
+    @Test
+    fun `classAndInterfaceDeclarations returns classes and interfaces from all declarations which satisfies predicate`() {
+        // given
+        val predicate: (KoClassAndInterfaceDeclaration) -> Boolean = { it.hasNameContaining("SomeInterface") }
+        val sourceDeclaration1: KoClassAndInterfaceDeclaration = mockk()
+        val sourceDeclaration2: KoClassAndInterfaceDeclaration = mockk()
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrInterfaceDeclaration() } returns sourceDeclaration1
+                every { hasClassOrInterfaceDeclaration(predicate) } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrInterfaceDeclaration() } returns sourceDeclaration2
+                every { hasClassOrInterfaceDeclaration(predicate) } returns false
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclaration(predicate) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.classAndInterfaceDeclarations(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(sourceDeclaration1)
+    }
+
+    @Test
+    fun `interfaceAndObjectDeclarations returns interfaces and objects from all declarations`() {
+        // given
+        val sourceDeclaration1: KoInterfaceAndObjectDeclaration = mockk()
+        val sourceDeclaration2: KoInterfaceAndObjectDeclaration = mockk()
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { asInterfaceOrObjectDeclaration() } returns sourceDeclaration1
+                every { hasInterfaceOrObjectDeclaration() } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { asInterfaceOrObjectDeclaration() } returns sourceDeclaration2
+                every { hasInterfaceOrObjectDeclaration() } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.interfaceAndObjectDeclarations()
+
+        // then
+        sut shouldBeEqualTo listOf(sourceDeclaration1, sourceDeclaration2)
+    }
+
+    @Test
+    fun `interfaceAndObjectDeclarations returns interfaces and objects from all declarations which satisfies predicate`() {
+        // given
+        val predicate: (KoInterfaceAndObjectDeclaration) -> Boolean = { it.hasNameContaining("SomeInterface") }
+        val sourceDeclaration1: KoInterfaceAndObjectDeclaration = mockk()
+        val sourceDeclaration2: KoInterfaceAndObjectDeclaration = mockk()
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { asInterfaceOrObjectDeclaration() } returns sourceDeclaration1
+                every { hasInterfaceOrObjectDeclaration(predicate) } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { asInterfaceOrObjectDeclaration() } returns sourceDeclaration2
+                every { hasInterfaceOrObjectDeclaration(predicate) } returns false
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclaration(predicate) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.interfaceAndObjectDeclarations(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(sourceDeclaration1)
+    }
+
+    @Test
+    fun `classAndInterfaceAndObjectDeclarations returns classes, interfaces and objects from all declarations`() {
+        // given
+        val sourceDeclaration1: KoClassAndInterfaceAndObjectDeclaration = mockk()
+        val sourceDeclaration2: KoClassAndInterfaceAndObjectDeclaration = mockk()
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrInterfaceOrObjectDeclaration() } returns sourceDeclaration1
+                every { hasClassOrInterfaceOrObjectDeclaration() } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrInterfaceOrObjectDeclaration() } returns sourceDeclaration2
+                every { hasClassOrInterfaceOrObjectDeclaration() } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.classAndInterfaceAndObjectDeclarations()
+
+        // then
+        sut shouldBeEqualTo listOf(sourceDeclaration1, sourceDeclaration2)
+    }
+
+    @Test
+    fun `classAndInterfaceAndObjectDeclarations returns classes, interfaces and objects from all declarations which satisfies predicate`() {
+        // given
+        val predicate: (KoClassAndInterfaceAndObjectDeclaration) -> Boolean = { it.hasNameContaining("SomeObject") }
+        val sourceDeclaration1: KoClassAndInterfaceAndObjectDeclaration = mockk()
+        val sourceDeclaration2: KoClassAndInterfaceAndObjectDeclaration = mockk()
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrInterfaceOrObjectDeclaration() } returns sourceDeclaration1
+                every { hasClassOrInterfaceOrObjectDeclaration(predicate) } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrInterfaceOrObjectDeclaration() } returns sourceDeclaration2
+                every { hasClassOrInterfaceOrObjectDeclaration(predicate) } returns false
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclaration(predicate) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.classAndInterfaceAndObjectDeclarations(predicate)
 
         // then
         sut shouldBeEqualTo listOf(sourceDeclaration1)
@@ -1765,6 +1997,1582 @@ class KoDeclarationCastProviderListExtTest {
 
         // when
         val sut = declarations.withoutInterfaceDeclarationOf(kClasses)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration3)
+    }
+
+    @Test
+    fun `withClassOrObjectDeclaration() returns declaration with class or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { isClassOrObject } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { isClassOrObject } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withClassOrObjectDeclaration()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withClassOrObjectDeclarationOf(empty list) returns declaration with class or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclaration() } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withClassOrObjectDeclarationOf(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withClassOrObjectDeclarationOf(empty set) returns declaration with class or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclaration() } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withClassOrObjectDeclarationOf(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withClassOrObjectDeclaration{} returns declaration which satisfy predicate`() {
+        // given
+        val name1 = "name1"
+        val name2 = "name2"
+        val sourceObject1: KoClassAndObjectDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val sourceObject2: KoClassAndObjectDeclaration =
+            mockk {
+                every { name } returns name2
+            }
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrObjectDeclaration() } returns sourceObject1
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrObjectDeclaration() } returns sourceObject2
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrObjectDeclaration() } returns null
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withClassOrObjectDeclaration { it.name == name1 }
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutClassOrObjectDeclaration() returns declaration without class or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { isClassOrObject } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { isClassOrObject } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutClassOrObjectDeclaration()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutClassOrObjectDeclarationOf(empty list) returns declaration without class or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclaration() } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutClassOrObjectDeclarationOf(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutClassOrObjectDeclarationOf(empty set) returns declaration without class or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclaration() } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutClassOrObjectDeclarationOf(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutClassOrObjectDeclaration{} returns declarations which not satisfy predicate`() {
+        // given
+        val name1 = "name1"
+        val name2 = "name2"
+        val sourceObject1: KoClassAndObjectDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val sourceObject2: KoClassAndObjectDeclaration =
+            mockk {
+                every { name } returns name2
+            }
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrObjectDeclaration() } returns sourceObject1
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrObjectDeclaration() } returns sourceObject2
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrObjectDeclaration() } returns null
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutClassOrObjectDeclaration { it.name == name1 }
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2, declaration3)
+    }
+
+    @Test
+    fun `withClassOrObjectDeclarationOf(KClass) returns declaration with given class or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withClassOrObjectDeclarationOf(SampleType1::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withClassOrObjectDeclarationOf(KClass) returns declarations with one of given classes or objects`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns true
+                every { hasClassOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrObjectDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withClassOrObjectDeclarationOf(SampleType1::class, SampleType2::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withClassOrObjectDeclarationOf(list of KClass) returns declarations with one of given classes or objects`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns true
+                every { hasClassOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrObjectDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+        val kClasses = listOf(SampleType1::class, SampleType2::class)
+
+        // when
+        val sut = declarations.withClassOrObjectDeclarationOf(kClasses)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withClassOrObjectDeclarationOf(set of KClass) returns declarations with one of given classes or objects`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns true
+                every { hasClassOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrObjectDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+        val kClasses = setOf(SampleType1::class, SampleType2::class)
+
+        // when
+        val sut = declarations.withClassOrObjectDeclarationOf(kClasses)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withoutClassOrObjectDeclarationOf(KClass) returns declaration without given class or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutClassOrObjectDeclarationOf(SampleType1::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutClassOrObjectDeclarationOf(KClass) returns declaration without any of given classes or objects`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns true
+                every { hasClassOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrObjectDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutClassOrObjectDeclarationOf(SampleType1::class, SampleType2::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration3)
+    }
+
+    @Test
+    fun `withoutClassOrObjectDeclarationOf(list of KClass) returns declaration without any of given classes or objects`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns true
+                every { hasClassOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrObjectDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+        val kClasses = listOf(SampleType1::class, SampleType2::class)
+
+        // when
+        val sut = declarations.withoutClassOrObjectDeclarationOf(kClasses)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration3)
+    }
+
+    @Test
+    fun `withoutClassOrObjectDeclarationOf(set of KClass) returns declaration without any of given classes or objects`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns true
+                every { hasClassOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrObjectDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+        val kClasses = setOf(SampleType1::class, SampleType2::class)
+
+        // when
+        val sut = declarations.withoutClassOrObjectDeclarationOf(kClasses)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration3)
+    }
+
+    @Test
+    fun `withClassOrInterfaceDeclaration() returns declaration with class or interface`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { isClassOrInterface } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { isClassOrInterface } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withClassOrInterfaceDeclaration()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withClassOrInterfaceDeclarationOf(empty list) returns declaration with class or interface`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclaration() } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withClassOrInterfaceDeclarationOf(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withClassOrInterfaceDeclarationOf(empty set) returns declaration with class or interface`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclaration() } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withClassOrInterfaceDeclarationOf(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withClassOrInterfaceDeclaration{} returns declaration which satisfy predicate`() {
+        // given
+        val name1 = "name1"
+        val name2 = "name2"
+        val sourceInterface1: KoClassAndInterfaceDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val sourceInterface2: KoClassAndInterfaceDeclaration =
+            mockk {
+                every { name } returns name2
+            }
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrInterfaceDeclaration() } returns sourceInterface1
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrInterfaceDeclaration() } returns sourceInterface2
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrInterfaceDeclaration() } returns null
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withClassOrInterfaceDeclaration { it.name == name1 }
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutClassOrInterfaceDeclaration() returns declaration without class or interface`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { isClassOrInterface } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { isClassOrInterface } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutClassOrInterfaceDeclaration()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutClassOrInterfaceDeclarationOf(empty list) returns declaration without class or interface`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclaration() } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutClassOrInterfaceDeclarationOf(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutClassOrInterfaceDeclarationOf(empty set) returns declaration without class or interface`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclaration() } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutClassOrInterfaceDeclarationOf(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutClassOrInterfaceDeclaration{} returns declarations which not satisfy predicate`() {
+        // given
+        val name1 = "name1"
+        val name2 = "name2"
+        val sourceInterface1: KoClassAndInterfaceDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val sourceInterface2: KoClassAndInterfaceDeclaration =
+            mockk {
+                every { name } returns name2
+            }
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrInterfaceDeclaration() } returns sourceInterface1
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrInterfaceDeclaration() } returns sourceInterface2
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrInterfaceDeclaration() } returns null
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutClassOrInterfaceDeclaration { it.name == name1 }
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2, declaration3)
+    }
+
+    @Test
+    fun `withClassOrInterfaceDeclarationOf(KClass) returns declaration with given class or interface`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withClassOrInterfaceDeclarationOf(SampleType1::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withClassOrInterfaceDeclarationOf(KClass) returns declarations with one of given classes or interfaces`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns true
+                every { hasClassOrInterfaceDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withClassOrInterfaceDeclarationOf(SampleType1::class, SampleType2::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withClassOrInterfaceDeclarationOf(list of KClass) returns declarations with one of given classes or interfaces`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns true
+                every { hasClassOrInterfaceDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+        val kClasses = listOf(SampleType1::class, SampleType2::class)
+
+        // when
+        val sut = declarations.withClassOrInterfaceDeclarationOf(kClasses)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withClassOrInterfaceDeclarationOf(set of KClass) returns declarations with one of given classes or interfaces`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns true
+                every { hasClassOrInterfaceDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+        val kClasses = setOf(SampleType1::class, SampleType2::class)
+
+        // when
+        val sut = declarations.withClassOrInterfaceDeclarationOf(kClasses)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withoutClassOrInterfaceDeclarationOf(KClass) returns declaration without given class or interface`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutClassOrInterfaceDeclarationOf(SampleType1::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutClassOrInterfaceDeclarationOf(KClass) returns declaration without any of given classes or interfaces`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns true
+                every { hasClassOrInterfaceDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutClassOrInterfaceDeclarationOf(SampleType1::class, SampleType2::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration3)
+    }
+
+    @Test
+    fun `withoutClassOrInterfaceDeclarationOf(list of KClass) returns declaration without any of given classes or interfaces`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns true
+                every { hasClassOrInterfaceDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+        val kClasses = listOf(SampleType1::class, SampleType2::class)
+
+        // when
+        val sut = declarations.withoutClassOrInterfaceDeclarationOf(kClasses)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration3)
+    }
+
+    @Test
+    fun `withoutClassOrInterfaceDeclarationOf(set of KClass) returns declaration without any of given classes or interfaces`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns true
+                every { hasClassOrInterfaceDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+        val kClasses = setOf(SampleType1::class, SampleType2::class)
+
+        // when
+        val sut = declarations.withoutClassOrInterfaceDeclarationOf(kClasses)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration3)
+    }
+
+    @Test
+    fun `withInterfaceOrObjectDeclaration() returns declaration with interface or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { isInterfaceOrObject } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { isInterfaceOrObject } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withInterfaceOrObjectDeclaration()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withInterfaceOrObjectDeclarationOf(empty list) returns declaration with interface or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclaration() } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withInterfaceOrObjectDeclarationOf(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withInterfaceOrObjectDeclarationOf(empty set) returns declaration with interface or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclaration() } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withInterfaceOrObjectDeclarationOf(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withInterfaceOrObjectDeclaration{} returns declaration which satisfy predicate`() {
+        // given
+        val name1 = "name1"
+        val name2 = "name2"
+        val sourceObject1: KoInterfaceAndObjectDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val sourceObject2: KoInterfaceAndObjectDeclaration =
+            mockk {
+                every { name } returns name2
+            }
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { asInterfaceOrObjectDeclaration() } returns sourceObject1
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { asInterfaceOrObjectDeclaration() } returns sourceObject2
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { asInterfaceOrObjectDeclaration() } returns null
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withInterfaceOrObjectDeclaration { it.name == name1 }
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutInterfaceOrObjectDeclaration() returns declaration without interface or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { isInterfaceOrObject } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { isInterfaceOrObject } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutInterfaceOrObjectDeclaration()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutInterfaceOrObjectDeclarationOf(empty list) returns declaration without interface or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclaration() } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutInterfaceOrObjectDeclarationOf(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutInterfaceOrObjectDeclarationOf(empty set) returns declaration without interface or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclaration() } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutInterfaceOrObjectDeclarationOf(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutInterfaceOrObjectDeclaration{} returns declarations which not satisfy predicate`() {
+        // given
+        val name1 = "name1"
+        val name2 = "name2"
+        val sourceObject1: KoInterfaceAndObjectDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val sourceObject2: KoInterfaceAndObjectDeclaration =
+            mockk {
+                every { name } returns name2
+            }
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { asInterfaceOrObjectDeclaration() } returns sourceObject1
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { asInterfaceOrObjectDeclaration() } returns sourceObject2
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { asInterfaceOrObjectDeclaration() } returns null
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutInterfaceOrObjectDeclaration { it.name == name1 }
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2, declaration3)
+    }
+
+    @Test
+    fun `withInterfaceOrObjectDeclarationOf(KClass) returns declaration with given interface or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withInterfaceOrObjectDeclarationOf(SampleType1::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withInterfaceOrObjectDeclarationOf(KClass) returns declarations with one of given interfaces or objects`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns true
+                every { hasInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasInterfaceOrObjectDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withInterfaceOrObjectDeclarationOf(SampleType1::class, SampleType2::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withInterfaceOrObjectDeclarationOf(list of KClass) returns declarations with one of given interfaces or objects`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns true
+                every { hasInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasInterfaceOrObjectDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+        val kClasses = listOf(SampleType1::class, SampleType2::class)
+
+        // when
+        val sut = declarations.withInterfaceOrObjectDeclarationOf(kClasses)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withInterfaceOrObjectDeclarationOf(set of KClass) returns declarations with one of given interfaces or objects`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns true
+                every { hasInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasInterfaceOrObjectDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+        val kClasses = setOf(SampleType1::class, SampleType2::class)
+
+        // when
+        val sut = declarations.withInterfaceOrObjectDeclarationOf(kClasses)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withoutInterfaceOrObjectDeclarationOf(KClass) returns declaration without given interface or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutInterfaceOrObjectDeclarationOf(SampleType1::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutInterfaceOrObjectDeclarationOf(KClass) returns declaration without any of given interfaces or objects`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns true
+                every { hasInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasInterfaceOrObjectDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutInterfaceOrObjectDeclarationOf(SampleType1::class, SampleType2::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration3)
+    }
+
+    @Test
+    fun `withoutInterfaceOrObjectDeclarationOf(list of KClass) returns declaration without any of given interfaces or objects`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns true
+                every { hasInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasInterfaceOrObjectDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+        val kClasses = listOf(SampleType1::class, SampleType2::class)
+
+        // when
+        val sut = declarations.withoutInterfaceOrObjectDeclarationOf(kClasses)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration3)
+    }
+
+    @Test
+    fun `withoutInterfaceOrObjectDeclarationOf(set of KClass) returns declaration without any of given interfaces or objects`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns true
+                every { hasInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasInterfaceOrObjectDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+        val kClasses = setOf(SampleType1::class, SampleType2::class)
+
+        // when
+        val sut = declarations.withoutInterfaceOrObjectDeclarationOf(kClasses)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration3)
+    }
+
+    @Test
+    fun `withClassOrInterfaceOrObjectDeclaration() returns declaration with class, interface or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { isClassOrInterfaceOrObject } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { isClassOrInterfaceOrObject } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withClassOrInterfaceOrObjectDeclaration()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withClassOrInterfaceOrObjectDeclarationOf(empty list) returns declaration with class, interface or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclaration() } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withClassOrInterfaceOrObjectDeclarationOf(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withClassOrInterfaceOrObjectDeclarationOf(empty set) returns declaration with class, interface or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclaration() } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withClassOrInterfaceOrObjectDeclarationOf(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withClassOrInterfaceOrObjectDeclaration{} returns declaration which satisfy predicate`() {
+        // given
+        val name1 = "name1"
+        val name2 = "name2"
+        val sourceObject1: KoClassAndInterfaceAndObjectDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val sourceObject2: KoClassAndInterfaceAndObjectDeclaration =
+            mockk {
+                every { name } returns name2
+            }
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrInterfaceOrObjectDeclaration() } returns sourceObject1
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrInterfaceOrObjectDeclaration() } returns sourceObject2
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrInterfaceOrObjectDeclaration() } returns null
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withClassOrInterfaceOrObjectDeclaration { it.name == name1 }
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutClassOrInterfaceOrObjectDeclaration() returns declaration without class, interface or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { isClassOrInterfaceOrObject } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { isClassOrInterfaceOrObject } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutClassOrInterfaceOrObjectDeclaration()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutClassOrInterfaceOrObjectDeclarationOf(empty list) returns declaration without class, interface or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclaration() } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutClassOrInterfaceOrObjectDeclarationOf(emptyList())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutClassOrInterfaceOrObjectDeclarationOf(empty set) returns declaration without class, interface or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclaration() } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclaration() } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutClassOrInterfaceOrObjectDeclarationOf(emptySet())
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutClassOrInterfaceOrObjectDeclaration{} returns declarations which not satisfy predicate`() {
+        // given
+        val name1 = "name1"
+        val name2 = "name2"
+        val sourceObject1: KoClassAndInterfaceAndObjectDeclaration =
+            mockk {
+                every { name } returns name1
+            }
+        val sourceObject2: KoClassAndInterfaceAndObjectDeclaration =
+            mockk {
+                every { name } returns name2
+            }
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrInterfaceOrObjectDeclaration() } returns sourceObject1
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrInterfaceOrObjectDeclaration() } returns sourceObject2
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { asClassOrInterfaceOrObjectDeclaration() } returns null
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutClassOrInterfaceOrObjectDeclaration { it.name == name1 }
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2, declaration3)
+    }
+
+    @Test
+    fun `withClassOrInterfaceOrObjectDeclarationOf(KClass) returns declaration with given class, interface or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withClassOrInterfaceOrObjectDeclarationOf(SampleType1::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withClassOrInterfaceOrObjectDeclarationOf(KClass) returns declarations with one of given classes, interfaces or objects`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns true
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withClassOrInterfaceOrObjectDeclarationOf(SampleType1::class, SampleType2::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withClassOrInterfaceOrObjectDeclarationOf(list of KClass) returns declarations with one of given declaration`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns true
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+        val kClasses = listOf(SampleType1::class, SampleType2::class)
+
+        // when
+        val sut = declarations.withClassOrInterfaceOrObjectDeclarationOf(kClasses)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withClassOrInterfaceOrObjectDeclarationOf(set of KClass) returns declarations with one of given classes, interfaces or objects`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns true
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+        val kClasses = setOf(SampleType1::class, SampleType2::class)
+
+        // when
+        val sut = declarations.withClassOrInterfaceOrObjectDeclarationOf(kClasses)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withoutClassOrInterfaceOrObjectDeclarationOf(KClass) returns declaration without given class, interface or object`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns true
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutClassOrInterfaceOrObjectDeclarationOf(SampleType1::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutClassOrInterfaceOrObjectDeclarationOf(KClass) returns declaration without any of given classes, interfaces or objects`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns true
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutClassOrInterfaceOrObjectDeclarationOf(SampleType1::class, SampleType2::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration3)
+    }
+
+    @Test
+    fun `withoutClassOrInterfaceOrObjectDeclarationOf(list of KClass) returns declaration without any of given declaration`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns true
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+        val kClasses = listOf(SampleType1::class, SampleType2::class)
+
+        // when
+        val sut = declarations.withoutClassOrInterfaceOrObjectDeclarationOf(kClasses)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration3)
+    }
+
+    @Test
+    fun `withoutClassOrInterfaceOrObjectDeclarationOf(set of KClass) returns declaration without any of given declaration`() {
+        // given
+        val declaration1: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns true
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declaration2: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType2::class) } returns true
+            }
+        val declaration3: KoDeclarationCastProvider =
+            mockk {
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType1::class) } returns false
+                every { hasClassOrInterfaceOrObjectDeclarationOf(SampleType2::class) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+        val kClasses = setOf(SampleType1::class, SampleType2::class)
+
+        // when
+        val sut = declarations.withoutClassOrInterfaceOrObjectDeclarationOf(kClasses)
 
         // then
         sut shouldBeEqualTo listOf(declaration3)

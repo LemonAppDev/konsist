@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.type.kotype
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -13,7 +14,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
             getSnippetFile("nullable-class-type")
                 .properties()
                 .first()
-                .type
+                .type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -30,7 +31,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
             getSnippetFile("not-nullable-class-type")
                 .properties()
                 .first()
-                .type
+                .type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -47,7 +48,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
             getSnippetFile("nullable-interface-type")
                 .properties()
                 .first()
-                .type
+                .type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -64,7 +65,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
             getSnippetFile("not-nullable-interface-type")
                 .properties()
                 .first()
-                .type
+                .type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -81,7 +82,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
             getSnippetFile("nullable-object-type")
                 .properties()
                 .first()
-                .type
+                .type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -98,7 +99,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
             getSnippetFile("not-nullable-object-type")
                 .properties()
                 .first()
-                .type
+                .type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -115,7 +116,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
             getSnippetFile("nullable-typealias-type")
                 .properties()
                 .first()
-                .type
+                .type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -132,7 +133,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
             getSnippetFile("not-nullable-typealias-type")
                 .properties()
                 .first()
-                .type
+                .type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -152,7 +153,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
                 .primaryConstructor
                 ?.parameters
                 ?.first()
-                ?.type
+                ?.type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -172,7 +173,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
                 .primaryConstructor
                 ?.parameters
                 ?.first()
-                ?.type
+                ?.type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -189,7 +190,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
             getSnippetFile("not-nullable-kotlin-type")
                 .properties()
                 .first()
-                .type
+                .type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -206,7 +207,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
             getSnippetFile("nullable-kotlin-type")
                 .properties()
                 .first()
-                .type
+                .type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -223,7 +224,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
             getSnippetFile("not-nullable-generic-type")
                 .properties()
                 .first()
-                .type
+                .type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -240,7 +241,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
             getSnippetFile("not-nullable-generic-type-with-nullable-type-argument")
                 .properties()
                 .first()
-                .type
+                .type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -257,7 +258,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
             getSnippetFile("nullable-generic-type")
                 .properties()
                 .first()
-                .type
+                .type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -274,7 +275,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
             getSnippetFile("nullable-generic-type-with-nullable-type-argument")
                 .properties()
                 .first()
-                .type
+                .type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -291,7 +292,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
             getSnippetFile("not-nullable-import-alias-type")
                 .properties()
                 .first()
-                .type
+                .type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -308,7 +309,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
             getSnippetFile("nullable-import-alias-type")
                 .properties()
                 .first()
-                .type
+                .type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -325,7 +326,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
             getSnippetFile("not-nullable-function-type")
                 .properties()
                 .first()
-                .type
+                .type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -342,7 +343,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
             getSnippetFile("nullable-function-type")
                 .properties()
                 .first()
-                .type
+                .type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -359,7 +360,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
             getSnippetFile("not-nullable-external-type")
                 .properties()
                 .first()
-                .type
+                .type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {
@@ -376,7 +377,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
             getSnippetFile("nullable-external-type")
                 .properties()
                 .first()
-                .type
+                .type as? KoSourceAndAliasTypeProvider
 
         // then
         assertSoftly(sut) {

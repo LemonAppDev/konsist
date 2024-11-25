@@ -37,7 +37,7 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
      *     .assertTrue { it.isInterface }
      * ```
      */
-    val sourceDeclaration: KoSourceDeclaration?
+    val sourceDeclaration: KoDeclarationCastProvider?
 
     /**
      * Determines whatever type has a specified source declaration.
@@ -45,7 +45,7 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
      * @param predicate The predicate function used to determine if a source declaration satisfies a condition.
      * @return `true` if the type has the specified source declaration, `false` otherwise.
      */
-    fun hasSourceDeclaration(predicate: (KoSourceDeclaration) -> Boolean): Boolean
+    fun hasSourceDeclaration(predicate: (KoDeclarationCastProvider) -> Boolean): Boolean
 
     /**
      * Whether type has a source declaration of the specified Kotlin class.

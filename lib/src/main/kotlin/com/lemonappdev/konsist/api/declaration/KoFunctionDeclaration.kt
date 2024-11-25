@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoInitializerProvider
 import com.lemonappdev.konsist.api.provider.KoIsExtensionProvider
+import com.lemonappdev.konsist.api.provider.KoIsGenericProvider
 import com.lemonappdev.konsist.api.provider.KoIsInitializedProvider
 import com.lemonappdev.konsist.api.provider.KoIsTopLevelProvider
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
@@ -90,4 +91,5 @@ interface KoFunctionDeclaration :
     KoActualModifierProvider,
     KoExpectModifierProvider,
     KoTypeParameterProvider,
+    KoIsGenericProvider,
     KoIsExtensionProvider

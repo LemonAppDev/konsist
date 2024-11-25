@@ -3,8 +3,8 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
-import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
@@ -62,16 +62,19 @@ internal class KoImportDeclarationCore private constructor(
     @RemoveInVersion("0.18.0")
     override val isWildcard: Boolean by lazy { super<KoIsWildcardProviderCore>.isWildcard }
 
-    override val sourceDeclaration: KoSourceDeclaration by lazy {
+    override val sourceDeclaration: KoDeclarationCastProvider? by lazy {
         val shortName = name.substringAfterLast(".")
 
-        DataCore
-            .declarations
-            .filterIsInstance<KoFullyQualifiedNameProvider>()
-            .firstOrNull { it.fullyQualifiedName == name }
-            as? KoSourceDeclaration
-            ?: getKotlinType(shortName)
-            ?: KoExternalDeclarationCore.getInstance(shortName, ktImportDirective)
+        (
+            DataCore
+                .declarations
+                .filterIsInstance<KoFullyQualifiedNameProvider>()
+                .firstOrNull { it.fullyQualifiedName == name }
+                as? KoDeclarationCastProvider
+                ?: getKotlinType(shortName)
+                ?: KoExternalDeclarationCore.getInstance(shortName, ktImportDirective)
+        )
+            as? KoDeclarationCastProvider
     }
 
     private fun getKotlinType(name: String): KoKotlinTypeDeclaration? =

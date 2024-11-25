@@ -1,0 +1,1 @@
+val sampleProperty1: (() -> Unit)? = null

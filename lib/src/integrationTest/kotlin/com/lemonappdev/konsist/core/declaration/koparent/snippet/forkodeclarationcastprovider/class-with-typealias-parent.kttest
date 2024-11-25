@@ -1,5 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleParentClass
-
-class SampleClass() : SampleTypeAlias()
-
-typealias SampleTypeAlias = SampleParentClass

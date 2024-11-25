@@ -5,7 +5,6 @@ import com.lemonappdev.konsist.api.provider.KoArgumentProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
-import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.api.provider.KoInterfaceDelegateProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
@@ -34,7 +33,6 @@ interface KoParentDeclaration :
     KoContainingDeclarationProvider,
     KoPathProvider,
     KoLocationProvider,
-    KoDeclarationCastProvider,
     KoAnnotationProvider,
     KoModuleProvider,
     KoSourceSetProvider,

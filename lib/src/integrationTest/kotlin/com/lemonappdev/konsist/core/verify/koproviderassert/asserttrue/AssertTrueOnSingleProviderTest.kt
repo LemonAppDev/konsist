@@ -114,7 +114,7 @@ class AssertTrueOnSingleProviderTest {
         try {
             sut.assertTrue { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("(Class 'SampleClass')")
+            e.message?.shouldContain("Class SampleClass")
                 ?: throw e
         }
     }

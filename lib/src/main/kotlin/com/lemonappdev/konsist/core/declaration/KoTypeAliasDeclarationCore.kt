@@ -12,6 +12,7 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsGenericProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -56,7 +57,8 @@ internal class KoTypeAliasDeclarationCore private constructor(
     KoNonNullableTypeProviderCore,
     KoVisibilityModifierProviderCore,
     KoActualModifierProviderCore,
-    KoTypeParameterProviderCore {
+    KoTypeParameterProviderCore,
+    KoIsGenericProviderCore {
     override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktTypeAlias.annotationEntries }
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktTypeAlias }

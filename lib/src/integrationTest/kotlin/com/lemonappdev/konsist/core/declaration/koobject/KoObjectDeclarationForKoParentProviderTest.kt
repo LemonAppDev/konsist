@@ -260,7 +260,7 @@ class KoObjectDeclarationForKoParentProviderTest {
         // then
         assertSoftly(sut.parents().first()) {
             name shouldBeEqualTo "AliasParent"
-            isImportAlias shouldBeEqualTo true
+            sourceDeclaration?.isImportAlias shouldBeEqualTo true
         }
     }
 

@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
-import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
+import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
@@ -13,7 +13,6 @@ import com.lemonappdev.konsist.core.provider.KoArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
-import com.lemonappdev.konsist.core.provider.KoDeclarationCastProviderCore
 import com.lemonappdev.konsist.core.provider.KoInterfaceDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -53,7 +52,6 @@ internal class KoParentDeclarationCore(
     KoContainingDeclarationProviderCore,
     KoPathProviderCore,
     KoLocationProviderCore,
-    KoDeclarationCastProviderCore,
     KoAnnotationProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore,
@@ -89,9 +87,7 @@ internal class KoParentDeclarationCore(
             ?.filterIsInstance<KtAnnotationEntry>()
     }
 
-    override val koDeclarationCastProviderDeclaration: KoSourceDeclaration by lazy { sourceDeclaration }
-
-    override val sourceDeclaration: KoSourceDeclaration by lazy {
+    override val sourceDeclaration: KoDeclarationCastProvider? by lazy {
         val name =
             ktSuperTypeListEntry
                 .text
@@ -113,18 +109,21 @@ internal class KoParentDeclarationCore(
                     }
                 }
 
-        val fqn =
+        val fullyQualifiedName =
             import
                 ?.name
                 ?: (containingFile.packagee?.name + "." + name)
 
         val isAlias = import?.alias != null
 
-        import?.alias
-            ?: getClass(outerName, fqn, isAlias, containingFile)
-            ?: getInterface(outerName, fqn, isAlias, containingFile)
-            ?: getTypeAlias(outerName, fqn, containingFile)
-            ?: KoExternalDeclarationCore.getInstance(outerName, ktSuperTypeListEntry)
+        (
+            import?.alias
+                ?: getClass(outerName, fullyQualifiedName, isAlias, containingFile)
+                ?: getInterface(outerName, fullyQualifiedName, isAlias, containingFile)
+                ?: getTypeAlias(outerName, fullyQualifiedName, containingFile)
+                ?: KoExternalDeclarationCore.getInstance(outerName, ktSuperTypeListEntry)
+        )
+            as? KoDeclarationCastProvider
     }
 
     override val name: String by lazy {
