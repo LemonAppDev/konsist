@@ -10,9 +10,9 @@ import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
  * that includes both the outer types and their nested generic types.
  *
  * For example:
- * - For a type argument like `String`, it returns `listOf(String)`.
- * - For a type argument like `List<String>`, it returns `listOf(List, String)`.
- * - For a type argument like `Map<List<String>, Int>`, it returns `listOf(Map, List, String, Int)`.
+ * - For a type argument like `String`, it returns `listOf()`.
+ * - For a type argument like `List<String>`, it returns `listOf(String)`.
+ * - For a type argument like `Map<List<String>, Int>`, it returns `listOf(List, String, Int)`.
  *
  * @return A flattened list of `KoBaseTypeDeclaration` objects, representing the source types of all type arguments and their nested types.
  */
