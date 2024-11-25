@@ -114,7 +114,6 @@ class SpringSnippets {
             }
     }
 
-    @Test
     fun `files with domain package do not have Spring references`() {
         Konsist.scopeFromProduction()
             .files
@@ -128,17 +127,15 @@ class SpringSnippets {
             }
     }
 
-    @Test
     fun `Transactional annotation should only be used on default or public methods that are not part of an interface`() {
         Konsist.scopeFromProject()
             .functions()
             .withAnnotationOf(Transactional::class)
             .assertTrue {
-                it.hasPublicOrDefaultModifier && !it.it.hasPublicOrDefaultModifier && it.containingDeclaration !is KoInterfaceDeclaration
+                it.hasPublicOrDefaultModifier && it.containingDeclaration !is KoInterfaceDeclaration
             }
     }
 
-    @Test
     fun `every API method in RestController with 'Admin' suffix should have PreAuthorize annotation with ROLE_ADMIN`() {
         Konsist.scopeFromProject()
             .classes()
@@ -150,7 +147,6 @@ class SpringSnippets {
             }
     }
 
-    @Test
     fun `every non-public Controller should have @PreAuthorize on class or on each endpoint method`() {
         Konsist.scopeFromProject()
             .classes()
