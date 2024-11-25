@@ -13,7 +13,6 @@ import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
 
 class GenericTypesSnippets {
-    @Test
     fun `all generic return types contain X in their name`() {
         Konsist
             .scopeFromProduction()
@@ -23,18 +22,19 @@ class GenericTypesSnippets {
             .assertTrue { it.hasNameContaining("X") }
     }
 
-    @Test
     fun `property generic type does not contains star projection`() {
         Konsist
             .scopeFromProduction()
             .properties()
             .types
-            .typeArguments
-            .flatten()
-            .assertFalse { it.isStarProjection }
+            .assertFalse { type ->
+                type
+                    .typeArguments
+                    ?.flatten()
+                    ?.any { it.isStarProjection }
+            }
     }
 
-    @Test
     fun `all generic return types contain Kotlin collection type argument`() {
         Konsist
             .scopeFromProduction()
@@ -42,10 +42,9 @@ class GenericTypesSnippets {
             .returnTypes
             .withGeneric()
             .typeArguments
-            .assertTrue { it.isKotlinCollectionType }
+            .assertTrue { it.sourceDeclaration?.isKotlinCollectionType }
     }
 
-    @Test
     fun `function parameter has generic type argument with name ending with 'Repository'`() {
         Konsist
             .scopeFromProduction()

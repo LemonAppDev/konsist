@@ -4,6 +4,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.properties
+import com.lemonappdev.konsist.api.ext.list.sourceDeclarations
 import com.lemonappdev.konsist.api.ext.list.types
 import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
@@ -73,6 +74,7 @@ class AndroidSnippets {
             .withParentNamed("Serializable")
             .properties()
             .types
+            .sourceDeclarations()
             .withoutKotlinBasicTypeDeclaration()
             .withoutClassDeclaration { it.hasEnumModifier }
             .assertTrue(additionalMessage = message) {
