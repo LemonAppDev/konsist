@@ -112,22 +112,24 @@ internal class KoParentDeclarationCore(
         val fullyQualifiedName =
             import
                 ?.name
-                ?: (if (containingFile.packagee != null) {
-                    containingFile.packagee?.name + "."
-                } else {
-                    ""
-                } + name)
+                ?: (
+                    if (containingFile.packagee != null) {
+                        containingFile.packagee?.name + "."
+                    } else {
+                        ""
+                    } + name
+                )
 
         val isAlias = import?.alias != null
 
         (
-                import?.alias
-                    ?: getClass(outerName, fullyQualifiedName, isAlias, containingFile)
-                    ?: getInterface(outerName, fullyQualifiedName, isAlias, containingFile)
-                    ?: getTypeAlias(outerName, fullyQualifiedName, containingFile)
-                    ?: KoExternalDeclarationCore.getInstance(outerName, ktSuperTypeListEntry)
-                )
-                as? KoDeclarationCastProvider
+            import?.alias
+                ?: getClass(outerName, fullyQualifiedName, isAlias, containingFile)
+                ?: getInterface(outerName, fullyQualifiedName, isAlias, containingFile)
+                ?: getTypeAlias(outerName, fullyQualifiedName, containingFile)
+                ?: KoExternalDeclarationCore.getInstance(outerName, ktSuperTypeListEntry)
+        )
+            as? KoDeclarationCastProvider
     }
 
     override val name: String by lazy {
