@@ -1,0 +1,7 @@
+package com.samplepackage
+
+object SampleName : SampleInterface.SampleName
+
+interface SampleInterface {
+    interface SampleName
+}
