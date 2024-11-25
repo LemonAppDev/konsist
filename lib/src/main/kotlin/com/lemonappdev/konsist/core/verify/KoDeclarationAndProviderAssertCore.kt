@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeCreator
 import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeNode
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
@@ -88,7 +89,15 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
         val suppressedDeclarations =
             declarationWithoutNull - checkIfAnnotatedWithSuppress(declarationWithoutNull, localSuppressName).toSet()
 
-        val notSuppressedDeclarations = this - suppressedDeclarations.toSet()
+        val notSuppressedDeclarations = (this - suppressedDeclarations.toSet())
+            .map {
+                val declarationType = it?.getDeclarationType()
+                val name = (it as? KoNameProvider)?.name ?: ""
+                val location = (it as? KoLocationProvider)?.location ?: ""
+                val hyperlinkLocation = HyperlinkUtil.toHyperlink(location)
+
+                "$declarationType $name $hyperlinkLocation"
+            }
 
         if (!onSingleElement) {
             val items = if (strict) notSuppressedDeclarations.filterNotNull() else notSuppressedDeclarations
@@ -114,12 +123,12 @@ fun checkIfLocalListHasOnlyNullElements(
     if (hasOnlyNUllElements && (localList.size > 1)) {
         throw KoPreconditionFailedException(
             "Declaration list contains only null elements. Please make sure that list of declarations contain items " +
-                "before calling the '$testMethodName' method.",
+                    "before calling the '$testMethodName' method.",
         )
     } else if (hasOnlyNUllElements && (localList.size == 1)) {
         throw KoPreconditionFailedException(
             "Method '$testMethodName' was called on a null value. Please ensure that the declaration is not null before " +
-                "calling this method.",
+                    "calling this method.",
         )
     }
 }
@@ -131,7 +140,7 @@ fun checkIfLocalListIsEmpty(
     if (localList.isEmpty()) {
         throw KoPreconditionFailedException(
             "Declaration list is empty. Please make sure that list of declarations contain items " +
-                "before calling the '$testMethodName' method.",
+                    "before calling the '$testMethodName' method.",
         )
     }
 }
@@ -146,12 +155,13 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(
     localList
         .filterNot {
             it is KoAnnotationDeclaration &&
-                (
-                    it.name == "Suppress" &&
-                        it.hasTextContaining("\"konsist.$suppressName\"") ||
-                        it.hasTextContaining("\"$suppressName\"")
-                )
-        }.forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it as KoBaseDeclaration, suppressName) }
+                    (
+                            it.name == "Suppress" &&
+                                    it.hasTextContaining("\"konsist.$suppressName\"") ||
+                                    it.hasTextContaining("\"$suppressName\"")
+                            )
+        }
+        .forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it as KoBaseDeclaration, suppressName) }
 
     val withoutSuppress = mutableListOf<E>()
 
@@ -171,7 +181,7 @@ private fun checkIfDeclarationIsAnnotatedWithSuppress(
 
         is KoAnnotationProvider -> {
             checkIfSuppressed(declaration, testMethodName) ||
-                checkIfParentIsAnnotatedWithSuppress(declaration, testMethodName)
+                    checkIfParentIsAnnotatedWithSuppress(declaration, testMethodName)
         }
 
         else -> {
@@ -237,7 +247,7 @@ private fun getCheckFailedMessage(
 
     val getRootMessage =
         "Assert '$testName' was violated (${failedItems.size} $times).$customMessage" +
-            "Invalid $types:"
+                "Invalid $types:"
 
     val failedDeclarationAsciiTreeNodes = failedDeclarationsMessage.map { AsciiTreeNode(it, emptyList()) }
 
@@ -312,18 +322,32 @@ private fun getEmptyResult(
                     }
                 val otherValues = items.filterNotNull().joinToString(",\n")
 
+
                 var text = " It contains "
                 if (nullValues.isNotEmpty()) text += nullValues
                 if (nullValues.isNotEmpty() && otherValues.isNotEmpty()) text += " and "
-                if (otherValues.isNotEmpty()) text += "values:\n$otherValues"
+                if (otherValues.isNotEmpty()) text += "values:"
 
-                "$text."
+                text
             } else {
                 ""
             }
+
         val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
 
-        val message = "Assert '$testMethodName' failed.${customMessage}Declaration list is$negation empty.$values"
+        val getRootMessage =
+            "Assert '$testMethodName' failed.${customMessage}Declaration list is$negation empty.$values"
+
+        val failedDeclarationAsciiTreeNodes = items
+            .filterNotNull()
+            .map { AsciiTreeNode(it.toString(), emptyList()) }
+
+        val message = AsciiTreeCreator().invoke(
+            AsciiTreeNode(
+                getRootMessage,
+                failedDeclarationAsciiTreeNodes,
+            ),
+        )
         throw KoAssertionFailedException(message)
     }
 }
@@ -338,10 +362,10 @@ private fun getNullResult(
 
     if (isNull != itemIsNull) {
         val negation = if (isNull) " not" else ""
-        val value = if (isNull) ": " + item.toString() else ""
+        val value = if (isNull) ": $item" else ""
         val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
 
-        val message = "Assert `$testMethodName` failed.${customMessage}Declaration has$negation null value$value."
+        val message = "Assert `$testMethodName` failed.${customMessage}Declaration with$negation null value$value."
         throw KoAssertionFailedException(message)
     }
 }
