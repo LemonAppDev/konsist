@@ -2,6 +2,7 @@ package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.ext.list.functions
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withModifier
 import com.lemonappdev.konsist.api.ext.list.objects
@@ -133,7 +134,7 @@ class SpringSnippets {
             .functions()
             .withAnnotationOf(Transactional::class)
             .assertTrue {
-                it.hasPublicOrDefaultModifier && !it.isInterface
+                it.hasPublicOrDefaultModifier && !it.it.hasPublicOrDefaultModifier && it.containingDeclaration !is KoInterfaceDeclaration
             }
     }
 
