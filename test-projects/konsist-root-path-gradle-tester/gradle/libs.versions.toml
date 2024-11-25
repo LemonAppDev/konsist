@@ -1,13 +1,13 @@
 [versions]
-kotlinVersion = "2.0.20"
+kotlinVersion = "2.0.21"
 
 [libraries]
-kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlinVersion" }
-junitJupiterEngine = "org.junit.jupiter:junit-jupiter-engine:5.11.0"
+kotlinStdlibJdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlinVersion" }
+junitJupiterEngine = "org.junit.jupiter:junit-jupiter-engine:5.11.3"
 kluent = "org.amshove.kluent:kluent:1.73"
 # Newest version will be retrieved from mavenLocal (exclusiveContent)
 konsist = "com.lemonappdev:konsist:+"
 
 [plugins]
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
 testLogger = "com.adarshr.test-logger:4.0.0"

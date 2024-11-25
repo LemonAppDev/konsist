@@ -25,7 +25,7 @@ internal interface KoModifierProviderCore :
                 ?.map { it.elementType }
                 ?.map {
                     KoModifier
-                        .entries
+                        .values()
                         .firstOrNull { modifier -> modifier.type == it.toString() }
                         ?: throw KoInternalException("Modifier not found: $it")
                 }.orEmpty()

@@ -32,9 +32,10 @@ var libPropertyTest: LibClassTest = LibClassTest("")
         if (true) field = value
     }
 
-val libPropertyWithFunctionTypeTest: () -> Unit = {}
-
 val libPropertyWithImportAliasTypeTest: ImportAlias = LibObject
+
+val <T> T.libPropertyWithTypeParameterTest: T
+    get() = this
 
 object LibObjectTest
 

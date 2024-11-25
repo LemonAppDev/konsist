@@ -35,10 +35,10 @@ class KoTypeDeclarationForKoIsNullableProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("kotlin-basic-type-is-nullable", true),
-                arguments("kotlin-basic-type-is-not-nullable", false),
-                arguments("kotlin-collection-type-is-nullable", true),
-                arguments("kotlin-collection-type-is-not-nullable", false),
+                arguments("kotlin-type-is-nullable", true),
+                arguments("kotlin-type-is-not-nullable", false),
+                arguments("generic-type-is-nullable", true),
+                arguments("generic-type-is-not-nullable", false),
                 arguments("class-type-is-nullable", true),
                 arguments("class-type-is-not-nullable", false),
                 arguments("interface-type-is-nullable", true),
@@ -51,6 +51,8 @@ class KoTypeDeclarationForKoIsNullableProviderTest {
                 arguments("import-alias-type-is-not-nullable", false),
                 arguments("typealias-type-is-nullable", true),
                 arguments("typealias-type-is-not-nullable", false),
+                arguments("type-parameter-is-nullable", true),
+                arguments("type-parameter-is-not-nullable", false),
                 arguments("external-type-is-nullable", true),
                 arguments("external-type-is-not-nullable", false),
             )

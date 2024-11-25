@@ -1,23 +1,13 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoIsGenericTypeProvider
 
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("KoIsGenericProviderCore"))
 internal interface KoIsGenericTypeProviderCore :
     KoIsGenericTypeProvider,
-    KoSourceAndAliasTypeProviderCore,
-    KoBaseProviderCore {
+    KoBaseProviderCore,
+    KoIsGenericProviderCore {
+    @Deprecated("Will be removed in version 0.19.0", replaceWith = ReplaceWith("isGeneric"))
     override val isGenericType: Boolean
-        get() {
-            val regex = "\\w+<[^<>]+>".toRegex()
-
-            val type =
-                if ((this as? KoTypeDeclaration)?.isTypeAlias == true) {
-                    bareSourceType
-                } else {
-                    sourceType
-                }
-
-            return regex.matches(type)
-        }
+        get() = isGeneric
 }

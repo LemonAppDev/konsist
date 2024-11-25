@@ -31,9 +31,10 @@ var rootProperty: RootClass = RootClass("")
         if (true) field = value
     }
 
-val rootPropertyWithFunctionType: () -> Unit = {}
-
 val rootPropertyWithImportAliasType: ImportAlias = ImportAlias
+
+val <T> T.rootPropertyWithTypeParameter: T
+    get() = this
 
 object RootObject
 

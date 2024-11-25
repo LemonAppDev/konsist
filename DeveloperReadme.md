@@ -25,8 +25,11 @@
 3. (If needed) Remove deprecated API
 4. Run `./gradlew publish -Pkonsist.releaseTarget=release` on the `main` branch to release a new version 
 5. (If needed) Change `Fix versions` for unfinished tickets assigned to this release version
-6. Notify the community about the release 
-7. Notify devs who have reported the issue or asked for the new feature (community links in original ticket)
+6. (If needed) Change Kotlin dependency and coroutine dependnecy version in 
+   https://docs.konsist.lemonappdev.com/getting-started/getting-started#add-konsist-dependency (retrieve coroutines 
+   version from `./gradlew dependencies`)
+7. Notify the community about the release 
+8. Notify devs who have reported the issue or asked for the new feature (community links in original ticket)
 
 ## Hotfix Release
 

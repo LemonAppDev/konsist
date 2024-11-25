@@ -1,3 +1,4 @@
+
 import ext.getKonsistVersion
 import org.jetbrains.dokka.gradle.DokkaTask
 
@@ -12,7 +13,7 @@ tasks.withType<DokkaTask>().configureEach {
     failOnWarning.set(true)
 
     dokkaSourceSets.configureEach {
-        // Generate docs for 'api'
+        // Generate docs for 'com.lemonappdev.konsist.api' package
         perPackageOption {
             matchingRegex.set("com.lemonappdev.konsist.api.*")
             suppress.set(false)

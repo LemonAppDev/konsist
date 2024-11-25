@@ -32,9 +32,10 @@ var libProperty: LibClass = LibClass("")
         if (true) field = value
     }
 
-val libPropertyWithFunctionType: () -> Unit = {}
-
 val libPropertyWithImportAliasType: ImportAlias = LibObject
+
+val <T> T.libPropertyWithTypeParameter: T
+    get() = this
 
 object LibObject
 

@@ -6,7 +6,6 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-@Deprecated("Will be removed in version 0.18.0", ReplaceWith("KoIsNullableProviderListExtTest"))
 class KoNullableProviderListExtTest {
     @Test
     fun `withNullableType() returns type with Nullable basic type`() {

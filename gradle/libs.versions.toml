@@ -1,17 +1,17 @@
 [versions]
-kotlinVersion = "2.0.20"
-jUnitVersion = "5.11.0"
-ktlintCliVersion = "1.3.1"
-coroutinesVersion = "1.8.1"
+kotlinVersion = "2.0.21"
+jUnitVersion = "5.11.3"
+ktlintCliVersion = "1.4.1"
+coroutinesVersion = "1.9.0"
 
 [libraries]
-kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlinVersion" }
+kotlinStdlibJdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlinVersion" }
 junitJupiterEngine =  { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "jUnitVersion" }
 junitJupiterParams =  { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "jUnitVersion" }
 kotest =  "io.kotest:kotest-runner-junit5:5.9.1"
 kluent = "org.amshove.kluent:kluent:1.73"
-mockk = "io.mockk:mockk:1.13.12"
-kotlin-compiler-embeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlinVersion" }
+mockk = "io.mockk:mockk:1.13.13"
+kotlinCompilerEmbeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlinVersion" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
 
 # This dependency is included as it's internally utilized by Spotless.
@@ -21,7 +21,7 @@ ktlint-cli = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktlint
 [bundles]
 
 [plugins]
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
 dokka = "org.jetbrains.dokka:1.9.20"
 spotless = "com.diffplug.spotless:6.25.0"
 testLogger = "com.adarshr.test-logger:4.0.0"

@@ -1,10 +1,13 @@
 package com.lemonappdev.konsist.core
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.ext.list.declarations
+import com.lemonappdev.konsist.api.ext.list.properties
 import com.lemonappdev.konsist.api.ext.list.returnTypes
 import com.lemonappdev.konsist.api.ext.list.types
+import com.lemonappdev.konsist.api.ext.list.withVal
+import com.lemonappdev.konsist.api.ext.list.withoutConstructorDefined
 import com.lemonappdev.konsist.api.ext.list.withoutName
+import com.lemonappdev.konsist.api.ext.list.withoutPackage
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
@@ -41,7 +44,7 @@ class DeclarationKonsistTest {
         declarationPackageScope
             .properties()
             .types
-            .declarations
+            .assertFalse { it.sourceType.endsWith("Impl") }
     }
 
     @Test
@@ -51,6 +54,7 @@ class DeclarationKonsistTest {
             .assertTrue {
                 val includeNestedParameter =
                     it.parameters.indexOfFirst { parameter -> parameter.name == "includeNested" }
+
                 val includeLocalParameter =
                     it.parameters.indexOfFirst { parameter -> parameter.name == "includeLocal" }
 
@@ -68,13 +72,23 @@ class DeclarationKonsistTest {
     }
 
     @Test
-    fun `every core declaration implements KoBaseProviderCore and its api equivalent(`() {
+    fun `every core declaration implements KoBaseProviderCore and its api equivalent`() {
         declarationPackageScope
             .classesAndInterfaces()
+            .withoutPackage("..private")
             .assertTrue {
                 val name = it.name.removeSuffix("Core")
-
                 it.hasParentsWithAllNames("KoBaseProviderCore", name, indirectParents = true)
             }
+    }
+
+    @Test
+    fun `every property inside class body is implemented using lazy delegate`() {
+        declarationPackageScope
+            .classes()
+            .properties(includeNested = false)
+            .withoutConstructorDefined()
+            .withVal()
+            .assertTrue { it.hasDelegate("lazy") }
     }
 }

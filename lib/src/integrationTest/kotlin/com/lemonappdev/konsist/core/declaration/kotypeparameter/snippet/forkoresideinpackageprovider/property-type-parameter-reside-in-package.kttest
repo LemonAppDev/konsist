@@ -1,0 +1,4 @@
+package com.samplepackage
+
+val <TestType> TestType.sampleProperty: TestType
+    get()= this

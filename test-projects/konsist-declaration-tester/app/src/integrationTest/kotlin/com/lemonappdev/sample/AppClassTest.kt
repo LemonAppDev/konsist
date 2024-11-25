@@ -32,9 +32,10 @@ var appPropertyTest: AppClassTest = AppClassTest("")
         if (true) field = value
     }
 
-val appPropertyWithFunctionTypeTest: () -> Unit = {}
-
 val appPropertyWithImportAliasTypeTest: ImportAlias = AppTestClass1()
+
+val <T> T.appPropertyWithTypeParameterTest: T
+    get() = this
 
 object AppObjectTest
 

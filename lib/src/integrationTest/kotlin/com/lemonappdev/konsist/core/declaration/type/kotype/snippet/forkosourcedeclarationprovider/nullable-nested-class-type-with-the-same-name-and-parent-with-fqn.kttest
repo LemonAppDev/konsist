@@ -1,0 +1,9 @@
+interface FirstInterface {
+    class NestedClass(val arg: SampleNestedClassWithTheSameName?)
+    data class SampleNestedClassWithTheSameName(val sampleFirstParameter: String)
+}
+
+interface SecondInterface {
+    class NestedClass(val arg: SampleNestedClassWithTheSameName?)
+    data class SampleNestedClassWithTheSameName(val sampleSecondParameter: String)
+}

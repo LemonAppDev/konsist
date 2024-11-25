@@ -7,31 +7,28 @@ import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
-import com.lemonappdev.konsist.core.provider.KoSourceAndAliasTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceTypeProviderCore
 import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
-import org.jetbrains.kotlin.psi.KtUserType
 
 internal class KoKotlinTypeDeclarationCore private constructor(
-    private val ktUserType: KtUserType,
+    override val ktElement: KtElement,
 ) : KoKotlinTypeDeclaration,
     KoBaseTypeDeclarationCore,
     KoBaseProviderCore,
     KoFullyQualifiedNameProviderCore,
-    KoSourceAndAliasTypeProviderCore {
-    override val psiElement: PsiElement by lazy { ktUserType }
-
-    override val ktElement: KtElement by lazy { ktUserType }
+    KoSourceTypeProviderCore {
+    override val psiElement: PsiElement by lazy { ktElement }
 
     override val packagee: KoPackageDeclaration? by lazy {
         KoPackageDeclarationCore(
             fullyQualifiedName,
-            ktUserType,
+            ktElement,
         )
     }
 
-    override val name: String by lazy { ktUserType.text }
+    override val name: String by lazy { ktElement.text }
 
     override val fullyQualifiedName: String by lazy {
         when {
@@ -41,17 +38,17 @@ internal class KoKotlinTypeDeclarationCore private constructor(
         }
     }
 
-    override fun toString(): String = ktUserType.text
+    override fun toString(): String = ktElement.text
 
     internal companion object {
         private val cache: KoDeclarationCache<KoKotlinTypeDeclaration> = KoDeclarationCache()
 
         internal fun getInstance(
-            ktUserType: KtUserType,
+            ktElement: KtElement,
             containingDeclaration: KoBaseDeclaration,
         ): KoKotlinTypeDeclaration =
-            cache.getOrCreateInstance(ktUserType, containingDeclaration) {
-                KoKotlinTypeDeclarationCore(ktUserType)
+            cache.getOrCreateInstance(ktElement, containingDeclaration) {
+                KoKotlinTypeDeclarationCore(ktElement)
             }
     }
 }

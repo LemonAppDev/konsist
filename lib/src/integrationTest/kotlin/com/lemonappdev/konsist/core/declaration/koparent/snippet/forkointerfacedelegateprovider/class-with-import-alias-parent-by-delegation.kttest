@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.SampleParentInterface as SampleImportAlias
+
+class SampleClass(sampleProperty: SampleImportAlias) : SampleImportAlias by sampleProperty

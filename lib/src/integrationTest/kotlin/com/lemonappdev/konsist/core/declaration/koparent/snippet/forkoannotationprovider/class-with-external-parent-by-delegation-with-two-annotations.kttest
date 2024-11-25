@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.externalsample.SampleExternalInterface
+import com.lemonappdev.konsist.testdata.SampleAnnotation1
+import com.lemonappdev.konsist.testdata.SampleAnnotation2
+
+class SampleClass(sampleProperty: SampleExternalInterface) : @SampleAnnotation1 @SampleAnnotation2 SampleExternalInterface by sampleProperty

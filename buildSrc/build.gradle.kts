@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    implementation(plugin(libs.plugins.kotlin.jvm))
+    implementation(plugin(libs.plugins.kotlinJvm))
     implementation(plugin(libs.plugins.spotless))
     implementation(plugin(libs.plugins.testLogger))
     implementation(plugin(libs.plugins.detekt))

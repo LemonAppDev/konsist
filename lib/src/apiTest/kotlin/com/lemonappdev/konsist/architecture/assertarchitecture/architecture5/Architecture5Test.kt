@@ -9,30 +9,38 @@ import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
 
 class Architecture5Test {
-    private val presentation =
-        Layer(
-            "Presentation",
-            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.presentation..",
-        )
-    private val application =
-        Layer(
-            "Application",
-            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.application..",
-        )
-    private val domain =
-        Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.domain..")
-    private val infrastructure =
-        Layer(
-            "Infrastructure",
-            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.infrastructure..",
-        )
     private val scope =
         Konsist.scopeFromDirectory(
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture5/project",
         )
 
+    private val presentation =
+        Layer(
+            "Presentation",
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.presentation..",
+        )
+
+    private val application =
+        Layer(
+            "Application",
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.application..",
+        )
+
+    private val domain =
+        Layer(
+            "Domain",
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.domain..",
+        )
+
+    private val infrastructure =
+        Layer(
+            "Infrastructure",
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.infrastructure..",
+        )
+
+    // region passes when
     @Test
-    fun `passes when good dependency is set (scope)`() {
+    fun `passes when  (lambda scope)`() {
         // then
         scope
             .assertArchitecture {
@@ -44,7 +52,7 @@ class Architecture5Test {
     }
 
     @Test
-    fun `passes when good dependency is set (files)`() {
+    fun `passes when  (lambda files)`() {
         // then
         scope
             .files
@@ -57,9 +65,9 @@ class Architecture5Test {
     }
 
     @Test
-    fun `passes when good dependency is set and architecture is passed as parameter (scope)`() {
+    fun `passes when  (parameter scope)`() {
         // given
-        val architecture =
+        val layerDependencies =
             architecture {
                 presentation.dependsOn(application)
                 application.dependsOn(domain, infrastructure)
@@ -69,13 +77,13 @@ class Architecture5Test {
 
         // then
         scope
-            .assertArchitecture(architecture)
+            .assertArchitecture(layerDependencies)
     }
 
     @Test
-    fun `passes when good dependency is set and architecture is passed as parameter (files)`() {
+    fun `passes when  (parameter files)`() {
         // given
-        val architecture =
+        val layerDependencies =
             architecture {
                 presentation.dependsOn(application)
                 application.dependsOn(domain, infrastructure)
@@ -86,45 +94,61 @@ class Architecture5Test {
         // then
         scope
             .files
-            .assertArchitecture(architecture)
+            .assertArchitecture(layerDependencies)
     }
 
+    // endregion
+
+    // region passes when  using doesNotDependsOn
     @Test
-    fun `passes when good dependency is set using doesNotDependsOn (scope)`() {
+    fun `passes when  using doesNotDependsOn (lambda scope)`() {
         // then
-        scope.assertArchitecture { presentation.doesNotDependOn(domain, infrastructure) }
+        scope.assertArchitecture {
+            presentation.doesNotDependOn(domain, infrastructure)
+        }
     }
 
     @Test
-    fun `passes when good dependency is set using doesNotDependsOn (files)`() {
-        // then
-        scope
-            .files
-            .assertArchitecture { presentation.doesNotDependOn(domain, infrastructure) }
-    }
-
-    @Test
-    fun `passes when good dependency is set using doesNotDependsOn and architecture is passed as parameter (scope)`() {
-        // given
-        val architecture = architecture { presentation.doesNotDependOn(domain, infrastructure) }
-
-        // then
-        scope.assertArchitecture(architecture)
-    }
-
-    @Test
-    fun `passes when good dependency is set using doesNotDependsOn and architecture is passed as parameter (files)`() {
-        // given
-        val architecture = architecture { presentation.doesNotDependOn(domain, infrastructure) }
-
+    fun `passes when  using doesNotDependsOn (lambda files)`() {
         // then
         scope
             .files
-            .assertArchitecture(architecture)
+            .assertArchitecture {
+                presentation.doesNotDependOn(domain, infrastructure)
+            }
     }
 
     @Test
-    fun `fails when bad dependency is set (scope)`() {
+    fun `passes when  using doesNotDependsOn (parameter scope)`() {
+        // given
+        val layerDependencies =
+            architecture {
+                presentation.doesNotDependOn(domain, infrastructure)
+            }
+
+        // then
+        scope.assertArchitecture(layerDependencies)
+    }
+
+    @Test
+    fun `passes when  using doesNotDependsOn (parameter files)`() {
+        // given
+        val layerDependencies =
+            architecture {
+                presentation.doesNotDependOn(domain, infrastructure)
+            }
+
+        // then
+        scope
+            .files
+            .assertArchitecture(layerDependencies)
+    }
+
+    // endregion
+
+    // region fails when bad dependency is set
+    @Test
+    fun `fails when (lambda scope)`() {
         // given
         val sut = {
             scope
@@ -141,7 +165,7 @@ class Architecture5Test {
     }
 
     @Test
-    fun `fails when bad dependency is set (files)`() {
+    fun `fails when (lambda files)`() {
         // given
         val sut = {
             scope
@@ -159,7 +183,7 @@ class Architecture5Test {
     }
 
     @Test
-    fun `fails when bad dependency is set and architecture is passed as parameter (scope)`() {
+    fun `fails when (parameter scope)`() {
         // given
         val architecture =
             architecture {
@@ -178,7 +202,7 @@ class Architecture5Test {
     }
 
     @Test
-    fun `fails when bad dependency is set and architecture is passed as parameter (files)`() {
+    fun `fails when (parameter files)`() {
         // given
         val architecture =
             architecture {
@@ -198,22 +222,16 @@ class Architecture5Test {
         sut shouldThrow KoAssertionFailedException::class
     }
 
-    @Test
-    fun `fails when bad dependency using doesNotDependsOn is set (scope)`() {
-        // given
-        val sut = { scope.assertArchitecture { application.doesNotDependOn(infrastructure) } }
+    // endregion
 
-        // then
-        sut shouldThrow KoAssertionFailedException::class
-    }
-
+    // region fails when bad dependency using doesNotDependsOn is set
     @Test
-    fun `fails when bad dependency using doesNotDependsOn is set (files)`() {
+    fun `fails when bad dependency using doesNotDependsOn is set (lambda scope)`() {
         // given
         val sut = {
-            scope
-                .files
-                .assertArchitecture { application.doesNotDependOn(infrastructure) }
+            scope.assertArchitecture {
+                application.doesNotDependOn(infrastructure)
+            }
         }
 
         // then
@@ -221,28 +239,51 @@ class Architecture5Test {
     }
 
     @Test
-    fun `fails when bad dependency using doesNotDependsOn is set and architecture is passed as parameter (scope)`() {
+    fun `fails when bad dependency using doesNotDependsOn is set (lambda files)`() {
         // given
-        val architecture = architecture { application.doesNotDependOn(infrastructure) }
-
-        val sut = { scope.assertArchitecture(architecture) }
+        val sut = {
+            scope
+                .files
+                .assertArchitecture {
+                    application.doesNotDependOn(infrastructure)
+                }
+        }
 
         // then
         sut shouldThrow KoAssertionFailedException::class
     }
 
     @Test
-    fun `fails when bad dependency using doesNotDependsOn is set and architecture is passed as parameter (files)`() {
+    fun `fails when bad dependency using doesNotDependsOn is set (parameter scope)`() {
         // given
-        val architecture = architecture { application.doesNotDependOn(infrastructure) }
+        val layerDependencies =
+            architecture {
+                application.doesNotDependOn(infrastructure)
+            }
+
+        val sut = { scope.assertArchitecture(layerDependencies) }
+
+        // then
+        sut shouldThrow KoAssertionFailedException::class
+    }
+
+    @Test
+    fun `fails when bad dependency using doesNotDependsOn is set (parameter files)`() {
+        // given
+        val layerDependencies =
+            architecture {
+                application.doesNotDependOn(infrastructure)
+            }
 
         val sut = {
             scope
                 .files
-                .assertArchitecture(architecture)
+                .assertArchitecture(layerDependencies)
         }
 
         // then
         sut shouldThrow KoAssertionFailedException::class
     }
+
+    // endregion
 }

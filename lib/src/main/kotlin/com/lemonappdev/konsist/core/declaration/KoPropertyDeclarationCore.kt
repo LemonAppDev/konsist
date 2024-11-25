@@ -4,26 +4,32 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
+import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoConstructorDefinedProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
+import com.lemonappdev.konsist.core.provider.KoDeclarationCastProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
-import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoGetterProviderCore
 import com.lemonappdev.konsist.core.provider.KoInitializerProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsConstructorDefinedProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsExtensionProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsGenericProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsInitializedProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsReadOnlyProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsTopLevelProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsValProviderCore
+import com.lemonappdev.konsist.core.provider.KoIsVarProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoNullableTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoPropertyDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoReadOnlyProviderCore
 import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
@@ -32,6 +38,7 @@ import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTacitTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
+import com.lemonappdev.konsist.core.provider.KoTypeParameterProviderCore
 import com.lemonappdev.konsist.core.provider.KoValueProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoAbstractModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoActualModifierProviderCore
@@ -46,9 +53,8 @@ import com.lemonappdev.konsist.core.provider.modifier.KoValModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVarModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
-import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
-import org.jetbrains.kotlin.psi.KtAnnotated
+import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtElement
@@ -74,13 +80,14 @@ internal class KoPropertyDeclarationCore private constructor(
     override val ktCallableDeclaration: KtCallableDeclaration,
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoPropertyDeclaration,
+    KoSourceDeclarationCore,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
     KoConstructorDefinedProviderCore,
     KoIsConstructorDefinedProviderCore,
     KoContainingFileProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
-    KoDelegateProviderCore,
+    KoPropertyDelegateProviderCore,
     KoNullableTypeProviderCore,
     KoInitializerProviderCore,
     KoIsInitializedProviderCore,
@@ -114,8 +121,14 @@ internal class KoPropertyDeclarationCore private constructor(
     KoTacitTypeProviderCore,
     KoSetterProviderCore,
     KoReadOnlyProviderCore,
-    KoIsReadOnlyProviderCore {
-    override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }
+    KoIsReadOnlyProviderCore,
+    KoTypeParameterProviderCore,
+    KoIsExtensionProviderCore,
+    KoIsValProviderCore,
+    KoIsVarProviderCore,
+    KoIsGenericProviderCore,
+    KoDeclarationCastProviderCore {
+    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktCallableDeclaration.annotationEntries }
 
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktCallableDeclaration }
 
@@ -127,29 +140,19 @@ internal class KoPropertyDeclarationCore private constructor(
 
     override val ktDeclaration: KtDeclaration by lazy { ktCallableDeclaration }
 
-    /*
-    Remove in version 0.18.0
-     */
-    override val isInitialized: Boolean
-        get() = super<KoIsInitializedProviderCore>.isInitialized
+    override val ktProperty: KtProperty? by lazy { ktCallableDeclaration as? KtProperty }
 
-    /*
-    Remove in version 0.18.0
-     */
-    override val isConstructorDefined: Boolean
-        get() = super<KoIsConstructorDefinedProviderCore>.isConstructorDefined
+    @RemoveInVersion("0.18.0")
+    override val isInitialized: Boolean by lazy { super<KoIsInitializedProviderCore>.isInitialized }
 
-    /*
-    Remove in version 0.18.0
-     */
-    override val isReadOnly: Boolean
-        get() = super<KoIsReadOnlyProviderCore>.isReadOnly
+    @RemoveInVersion("0.18.0")
+    override val isConstructorDefined: Boolean by lazy { super<KoIsConstructorDefinedProviderCore>.isConstructorDefined }
 
-    /*
-    Remove in version 0.18.0
-     */
-    override val isTopLevel: Boolean
-        get() = super<KoIsTopLevelProviderCore>.isTopLevel
+    @RemoveInVersion("0.18.0")
+    override val isReadOnly: Boolean by lazy { super<KoIsReadOnlyProviderCore>.isReadOnly }
+
+    @RemoveInVersion("0.18.0")
+    override val isTopLevel: Boolean by lazy { super<KoIsTopLevelProviderCore>.isTopLevel }
 
     override val ktExpression: KtExpression? by lazy {
         ktCallableDeclaration
@@ -159,20 +162,7 @@ internal class KoPropertyDeclarationCore private constructor(
             .firstOrNull()
     }
 
-    override val delegateName: String? by lazy {
-        if (ktCallableDeclaration is KtProperty) {
-            ktCallableDeclaration
-                .delegateExpression
-                ?.text
-                ?.replace(EndOfLine.UNIX.value, " ")
-                ?.substringAfter("by ")
-                ?.substringBefore("{")
-                ?.removeSuffix(" ")
-        } else {
-            null
-        }
-    }
-
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVal"))
     override val hasValModifier: Boolean by lazy {
         when (ktCallableDeclaration) {
             is KtProperty -> !ktCallableDeclaration.isVar
@@ -181,7 +171,24 @@ internal class KoPropertyDeclarationCore private constructor(
         }
     }
 
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVar"))
     override val hasVarModifier: Boolean by lazy {
+        when (ktCallableDeclaration) {
+            is KtProperty -> ktCallableDeclaration.isVar
+            is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "var"
+            else -> false
+        }
+    }
+
+    override val isVal: Boolean by lazy {
+        when (ktCallableDeclaration) {
+            is KtProperty -> !ktCallableDeclaration.isVar
+            is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "val"
+            else -> false
+        }
+    }
+
+    override val isVar: Boolean by lazy {
         when (ktCallableDeclaration) {
             is KtProperty -> ktCallableDeclaration.isVar
             is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "var"

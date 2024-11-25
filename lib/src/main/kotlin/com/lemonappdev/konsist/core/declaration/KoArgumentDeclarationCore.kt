@@ -42,11 +42,12 @@ internal class KoArgumentDeclarationCore private constructor(
 
     override val ktExpression: KtExpression? by lazy { ktValueArgument.getArgumentExpression() }
 
-    override val name: String
-        get() =
-            ktValueArgument
-                .getArgumentName()
-                ?.text ?: ""
+    override val name: String by lazy {
+        ktValueArgument
+            .getArgumentName()
+            ?.text
+            ?: ""
+    }
 
     override fun toString(): String = locationWithText
 

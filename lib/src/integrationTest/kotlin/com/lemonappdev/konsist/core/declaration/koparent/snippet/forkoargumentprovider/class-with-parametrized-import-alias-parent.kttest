@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.SampleClassWithParameter as SampleImportAlias
+
+class SampleClass() : SampleImportAlias("param")

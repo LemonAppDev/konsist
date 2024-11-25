@@ -2,14 +2,14 @@
 
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentClassProvider
 import kotlin.reflect.KClass
 
 /**
  * List containing direct parent classes.
  */
-val <T : KoParentClassProvider> List<T>.parentClasses: List<KoClassDeclaration>
+val <T : KoParentClassProvider> List<T>.parentClasses: List<KoParentDeclaration>
     get() = mapNotNull { it.parentClass }
 
 /**
@@ -18,7 +18,7 @@ val <T : KoParentClassProvider> List<T>.parentClasses: List<KoClassDeclaration>
  * @param indirectParents Whether to include indirect parent classes.
  * @return A list containing parent class declarations.
  */
-fun <T : KoParentClassProvider> List<T>.parentClasses(indirectParents: Boolean = false): List<KoClassDeclaration> =
+fun <T : KoParentClassProvider> List<T>.parentClasses(indirectParents: Boolean = false): List<KoParentDeclaration> =
     flatMap { it.parentClasses(indirectParents) }
 
 /**
@@ -62,7 +62,7 @@ fun <T : KoParentClassProvider> List<T>.withoutParentClasses(indirectParents: Bo
  */
 fun <T : KoParentClassProvider> List<T>.withParentClass(
     indirectParents: Boolean = false,
-    predicate: (KoClassDeclaration) -> Boolean,
+    predicate: (KoParentDeclaration) -> Boolean,
 ): List<T> = filter { it.hasParentClass(indirectParents, predicate) }
 
 /**
@@ -74,7 +74,7 @@ fun <T : KoParentClassProvider> List<T>.withParentClass(
  */
 fun <T : KoParentClassProvider> List<T>.withoutParentClass(
     indirectParents: Boolean = false,
-    predicate: (KoClassDeclaration) -> Boolean,
+    predicate: (KoParentDeclaration) -> Boolean,
 ): List<T> = filterNot { it.hasParentClass(indirectParents, predicate) }
 
 /**
@@ -86,7 +86,7 @@ fun <T : KoParentClassProvider> List<T>.withoutParentClass(
  */
 fun <T : KoParentClassProvider> List<T>.withAllParentClasses(
     indirectParents: Boolean = false,
-    predicate: (KoClassDeclaration) -> Boolean,
+    predicate: (KoParentDeclaration) -> Boolean,
 ): List<T> = filter { it.hasAllParentClasses(indirectParents, predicate) }
 
 /**
@@ -98,7 +98,7 @@ fun <T : KoParentClassProvider> List<T>.withAllParentClasses(
  */
 fun <T : KoParentClassProvider> List<T>.withoutAllParentClasses(
     indirectParents: Boolean = false,
-    predicate: (KoClassDeclaration) -> Boolean,
+    predicate: (KoParentDeclaration) -> Boolean,
 ): List<T> = filterNot { it.hasAllParentClasses(indirectParents, predicate) }
 
 /**
@@ -110,7 +110,7 @@ fun <T : KoParentClassProvider> List<T>.withoutAllParentClasses(
  */
 fun <T : KoParentClassProvider> List<T>.withParentClasses(
     indirectParents: Boolean = false,
-    predicate: (List<KoClassDeclaration>) -> Boolean,
+    predicate: (List<KoParentDeclaration>) -> Boolean,
 ): List<T> = filter { predicate(it.parentClasses(indirectParents)) }
 
 /**
@@ -122,7 +122,7 @@ fun <T : KoParentClassProvider> List<T>.withParentClasses(
  */
 fun <T : KoParentClassProvider> List<T>.withoutParentClasses(
     indirectParents: Boolean = false,
-    predicate: (List<KoClassDeclaration>) -> Boolean,
+    predicate: (List<KoParentDeclaration>) -> Boolean,
 ): List<T> = filterNot { predicate(it.parentClasses(indirectParents)) }
 
 /**

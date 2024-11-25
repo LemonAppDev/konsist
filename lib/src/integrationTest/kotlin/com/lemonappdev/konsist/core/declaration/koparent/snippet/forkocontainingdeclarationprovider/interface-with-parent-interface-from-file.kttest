@@ -1,0 +1,3 @@
+interface SampleInterface : SampleSuperInterface
+
+interface SampleSuperInterface

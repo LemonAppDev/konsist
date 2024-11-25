@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.architecture.optionalparameters
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator
+import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architecture
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
@@ -12,13 +12,19 @@ import org.junit.jupiter.api.Test
 
 class OptionalParametersTest {
     private val rootPath = PathProvider.rootProjectPath
+
     private val domain =
-        Layer("Domain", "com.lemonappdev.konsist.architecture.optionalparameters.project.domain..")
+        Layer(
+            "Domain",
+            "com.lemonappdev.konsist.architecture.optionalparameters.project.domain..",
+        )
+
     private val presentation =
         Layer(
             "Presentation",
             "com.lemonappdev.konsist.architecture.optionalparameters.project.presentation..",
         )
+
     private val scope =
         Konsist.scopeFromDirectory(
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters/project",
@@ -27,7 +33,7 @@ class OptionalParametersTest {
     @Test
     fun `error message when additionalMessage and testName parameters are not provided (scope)`() {
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
                 scope.assertArchitecture {
                     presentation.dependsOnNothing()
@@ -36,25 +42,26 @@ class OptionalParametersTest {
             }
 
         // then
-        sut
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
+        result
             .message
             .shouldBeEqualTo(
-                "'error message when additionalMessage and testName parameters are not provided (scope)' " +
-                    "test has failed.\n" +
-                    "Presentation depends on nothing assertion failure:\n" +
-                    "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters" +
-                    "/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
-                    "depends on Domain layer, imports:\n" +
-                    "\tcom.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
-                    "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt:3:1)",
+                "'error message when additionalMessage and testName parameters are not provided (scope)' test has failed. \n" +
+                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                    "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
     @Test
     fun `error message when additionalMessage is provided and testName is not provided (scope)`() {
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
                 scope.assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE") {
                     presentation.dependsOnNothing()
@@ -63,26 +70,27 @@ class OptionalParametersTest {
             }
 
         // then
-        sut
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
+        result
             .message
             .shouldBeEqualTo(
-                "'error message when additionalMessage is provided and testName is not provided (scope)' " +
-                    "test has failed.\n" +
+                "'error message when additionalMessage is provided and testName is not provided (scope)' test has failed. \n" +
                     "SOME ADDITIONAL MESSAGE\n" +
-                    "Presentation depends on nothing assertion failure:\n" +
-                    "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters" +
-                    "/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
-                    "depends on Domain layer, imports:\n" +
-                    "\tcom.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
-                    "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt:3:1)",
+                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                    "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
     @Test
     fun `error message when testName is provided and additionalMessage is not provided (scope)`() {
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
                 scope.assertArchitecture(testName = "SOME CUSTOM TEST NAME") {
                     presentation.dependsOnNothing()
@@ -91,24 +99,26 @@ class OptionalParametersTest {
             }
 
         // then
-        sut
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
+        result
             .message
             .shouldBeEqualTo(
-                "'SOME CUSTOM TEST NAME' test has failed.\n" +
-                    "Presentation depends on nothing assertion failure:\n" +
-                    "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters" +
-                    "/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
-                    "depends on Domain layer, imports:\n" +
-                    "\tcom.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
-                    "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt:3:1)",
+                "'SOME CUSTOM TEST NAME' test has failed. \n" +
+                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                    "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
     @Test
     fun `error message when testName and additionalMessage are provided (scope)`() {
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
                 scope.assertArchitecture(
                     additionalMessage = "SOME ADDITIONAL MESSAGE",
@@ -120,25 +130,27 @@ class OptionalParametersTest {
             }
 
         // then
-        sut
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
+        result
             .message
             .shouldBeEqualTo(
-                "'SOME CUSTOM TEST NAME' test has failed.\n" +
+                "'SOME CUSTOM TEST NAME' test has failed. \n" +
                     "SOME ADDITIONAL MESSAGE\n" +
-                    "Presentation depends on nothing assertion failure:\n" +
-                    "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters" +
-                    "/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
-                    "depends on Domain layer, imports:\n" +
-                    "\tcom.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
-                    "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt:3:1)",
+                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                    "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
     @Test
     fun `error message when additionalMessage and testName parameters are not provided (files)`() {
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .files
@@ -149,25 +161,26 @@ class OptionalParametersTest {
             }
 
         // then
-        sut
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
+        result
             .message
             .shouldBeEqualTo(
-                "'error message when additionalMessage and testName parameters are not provided (files)' " +
-                    "test has failed.\n" +
-                    "Presentation depends on nothing assertion failure:\n" +
-                    "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters" +
-                    "/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
-                    "depends on Domain layer, imports:\n" +
-                    "\tcom.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
-                    "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt:3:1)",
+                "'error message when additionalMessage and testName parameters are not provided (files)' test has failed. \n" +
+                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                    "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
     @Test
     fun `error message when additionalMessage is provided and testName is not provided (files)`() {
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .files
@@ -178,26 +191,27 @@ class OptionalParametersTest {
             }
 
         // then
-        sut
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
+        result
             .message
             .shouldBeEqualTo(
-                "'error message when additionalMessage is provided and testName is not provided (files)' " +
-                    "test has failed.\n" +
+                "'error message when additionalMessage is provided and testName is not provided (files)' test has failed. \n" +
                     "SOME ADDITIONAL MESSAGE\n" +
-                    "Presentation depends on nothing assertion failure:\n" +
-                    "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters" +
-                    "/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
-                    "depends on Domain layer, imports:\n" +
-                    "\tcom.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
-                    "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt:3:1)",
+                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                    "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
     @Test
     fun `error message when testName is provided and additionalMessage is not provided (files)`() {
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .files
@@ -208,24 +222,26 @@ class OptionalParametersTest {
             }
 
         // then
-        sut
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
+        result
             .message
             .shouldBeEqualTo(
-                "'SOME CUSTOM TEST NAME' test has failed.\n" +
-                    "Presentation depends on nothing assertion failure:\n" +
-                    "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters" +
-                    "/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
-                    "depends on Domain layer, imports:\n" +
-                    "\tcom.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
-                    "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt:3:1)",
+                "'SOME CUSTOM TEST NAME' test has failed. \n" +
+                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                    "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
     @Test
     fun `error message when testName and additionalMessage are provided (files)`() {
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .files
@@ -239,282 +255,306 @@ class OptionalParametersTest {
             }
 
         // then
-        sut
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
+        result
             .message
             .shouldBeEqualTo(
-                "'SOME CUSTOM TEST NAME' test has failed.\n" +
+                "'SOME CUSTOM TEST NAME' test has failed. \n" +
                     "SOME ADDITIONAL MESSAGE\n" +
-                    "Presentation depends on nothing assertion failure:\n" +
-                    "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters" +
-                    "/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
-                    "depends on Domain layer, imports:\n" +
-                    "\tcom.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
-                    "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt:3:1)",
+                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                    "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
     @Test
     fun `error message when additionalMessage and testName parameters are not provided and architecture is passed as parameter (scope)`() {
         // given
-        val architecture =
-            KoArchitectureCreator.architecture {
+        val layerDependencies =
+            architecture {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
             }
 
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
-                scope.assertArchitecture(architecture)
+                scope.assertArchitecture(layerDependencies)
             }
 
         // then
-        sut
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
+        result
             .message
             .shouldBeEqualTo(
-                "'error message when additionalMessage and testName parameters are not provided and architecture" +
-                    " is passed as parameter (scope)' test has failed.\n" +
-                    "Presentation depends on nothing assertion failure:\n" +
-                    "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters" +
-                    "/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
-                    "depends on Domain layer, imports:\n" +
-                    "\tcom.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
-                    "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt:3:1)",
+                "'error message when additionalMessage and testName parameters are not provided and architecture is passed " +
+                    "as parameter (scope)' test has failed. \n" +
+                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                    "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
     @Test
     fun `error message when additionalMessage is provided, testName is not provided and architecture is passed as parameter (scope)`() {
         // given
-        val architecture =
-            KoArchitectureCreator.architecture {
+        val layerDependencies =
+            architecture {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
             }
 
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
-                scope.assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE", dependencies = architecture)
+                scope.assertArchitecture(
+                    additionalMessage = "SOME ADDITIONAL MESSAGE",
+                    layerDependenciesFunc = layerDependencies,
+                )
             }
 
         // then
-        sut
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
+        result
             .message
             .shouldBeEqualTo(
-                "'error message when additionalMessage is provided, testName is not provided and architecture " +
-                    "is passed as parameter (scope)' test has failed.\n" +
+                "'error message when additionalMessage is provided, testName is not provided and architecture is passed as " +
+                    "parameter (scope)' test has failed. \n" +
                     "SOME ADDITIONAL MESSAGE\n" +
-                    "Presentation depends on nothing assertion failure:\n" +
-                    "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters" +
-                    "/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
-                    "depends on Domain layer, imports:\n" +
-                    "\tcom.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
-                    "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt:3:1)",
+                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                    "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
     @Test
     fun `error message when testName is provided, additionalMessage is not provided and architecture is passed as parameter (scope)`() {
         // given
-        val architecture =
-            KoArchitectureCreator.architecture {
+        val layerDependencies =
+            architecture {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
             }
 
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
-                scope.assertArchitecture(testName = "SOME CUSTOM TEST NAME", dependencies = architecture)
+                scope.assertArchitecture(testName = "SOME CUSTOM TEST NAME", layerDependenciesFunc = layerDependencies)
             }
 
         // then
-        sut
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
+        result
             .message
             .shouldBeEqualTo(
-                "'SOME CUSTOM TEST NAME' test has failed.\n" +
-                    "Presentation depends on nothing assertion failure:\n" +
-                    "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters" +
-                    "/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
-                    "depends on Domain layer, imports:\n" +
-                    "\tcom.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
-                    "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt:3:1)",
+                "'SOME CUSTOM TEST NAME' test has failed. \n" +
+                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                    "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
     @Test
     fun `error message when testName and additionalMessage are provided and architecture is passed as parameter (scope)`() {
         // given
-        val architecture =
-            KoArchitectureCreator.architecture {
+        val layerDependencies =
+            architecture {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
             }
 
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
                 scope.assertArchitecture(
                     additionalMessage = "SOME ADDITIONAL MESSAGE",
                     testName = "SOME CUSTOM TEST NAME",
-                    dependencies = architecture,
+                    layerDependenciesFunc = layerDependencies,
                 )
             }
 
         // then
-        sut
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
+        result
             .message
             .shouldBeEqualTo(
-                "'SOME CUSTOM TEST NAME' test has failed.\n" +
+                "'SOME CUSTOM TEST NAME' test has failed. \n" +
                     "SOME ADDITIONAL MESSAGE\n" +
-                    "Presentation depends on nothing assertion failure:\n" +
-                    "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters" +
-                    "/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
-                    "depends on Domain layer, imports:\n" +
-                    "\tcom.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
-                    "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt:3:1)",
+                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                    "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
     @Test
     fun `error message when additionalMessage and testName parameters are not provided and architecture is passed as parameter (files)`() {
         // given
-        val architecture =
-            KoArchitectureCreator.architecture {
+        val layerDependencies =
+            architecture {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
             }
 
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .files
-                    .assertArchitecture(architecture)
+                    .assertArchitecture(layerDependencies)
             }
 
         // then
-        sut
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
+        result
             .message
             .shouldBeEqualTo(
-                "'error message when additionalMessage and testName parameters are not provided and architecture" +
-                    " is passed as parameter (files)' test has failed.\n" +
-                    "Presentation depends on nothing assertion failure:\n" +
-                    "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters" +
-                    "/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
-                    "depends on Domain layer, imports:\n" +
-                    "\tcom.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
-                    "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt:3:1)",
+                "'error message when additionalMessage and testName parameters are not provided and architecture is passed " +
+                    "as parameter (files)' test has failed. \n" +
+                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                    "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
     @Test
     fun `error message when additionalMessage is provided, testName is not provided and architecture is passed as parameter (files)`() {
         // given
-        val architecture =
-            KoArchitectureCreator.architecture {
+        val layerDependencies =
+            architecture {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
             }
 
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .files
-                    .assertArchitecture(additionalMessage = "SOME ADDITIONAL MESSAGE", dependencies = architecture)
+                    .assertArchitecture(
+                        additionalMessage = "SOME ADDITIONAL MESSAGE",
+                        layerDependenciesFunc = layerDependencies,
+                    )
             }
 
         // then
-        sut
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters/" +
+                "project/presentation/sample/PresentationThirdClass.kt"
+
+        result
             .message
             .shouldBeEqualTo(
-                "'error message when additionalMessage is provided, testName is not provided and architecture" +
-                    " is passed as parameter (files)' test has failed.\n" +
+                "'error message when additionalMessage is provided, testName is not provided and architecture is passed " +
+                    "as parameter (files)' test has failed. \n" +
                     "SOME ADDITIONAL MESSAGE\n" +
-                    "Presentation depends on nothing assertion failure:\n" +
-                    "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters" +
-                    "/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
-                    "depends on Domain layer, imports:\n" +
-                    "\tcom.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
-                    "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt:3:1)",
+                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                    "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
     @Test
     fun `error message when testName is provided, additionalMessage is not provided and architecture is passed as parameter (files)`() {
         // given
-        val architecture =
-            KoArchitectureCreator.architecture {
+        val layerDependencies =
+            architecture {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
             }
 
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .files
-                    .assertArchitecture(testName = "SOME CUSTOM TEST NAME", dependencies = architecture)
+                    .assertArchitecture(testName = "SOME CUSTOM TEST NAME", layerDependenciesFunc = layerDependencies)
             }
 
         // then
-        sut
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
+        result
             .message
             .shouldBeEqualTo(
-                "'SOME CUSTOM TEST NAME' test has failed.\n" +
-                    "Presentation depends on nothing assertion failure:\n" +
-                    "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters" +
-                    "/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
-                    "depends on Domain layer, imports:\n" +
-                    "\tcom.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
-                    "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt:3:1)",
+                "'SOME CUSTOM TEST NAME' test has failed. \n" +
+                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                    "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 
     @Test
     fun `error message when testName and additionalMessage are provided and architecture is passed as parameter (files)`() {
         // given
-        val architecture =
-            KoArchitectureCreator.architecture {
+        val layerDependencies =
+            architecture {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
             }
 
         // when
-        val sut =
+        val result =
             shouldThrow<KoAssertionFailedException> {
                 scope
                     .files
                     .assertArchitecture(
                         additionalMessage = "SOME ADDITIONAL MESSAGE",
                         testName = "SOME CUSTOM TEST NAME",
-                        dependencies = architecture,
+                        layerDependenciesFunc = layerDependencies,
                     )
             }
 
         // then
-        sut
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+
+        result
             .message
             .shouldBeEqualTo(
-                "'SOME CUSTOM TEST NAME' test has failed.\n" +
+                "'SOME CUSTOM TEST NAME' test has failed. \n" +
                     "SOME ADDITIONAL MESSAGE\n" +
-                    "Presentation depends on nothing assertion failure:\n" +
-                    "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters" +
-                    "/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
-                    "depends on Domain layer, imports:\n" +
-                    "\tcom.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
-                    "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                    "optionalparameters/project/presentation/sample/PresentationThirdClass.kt:3:1)",
+                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
+                    "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
             )
     }
 }

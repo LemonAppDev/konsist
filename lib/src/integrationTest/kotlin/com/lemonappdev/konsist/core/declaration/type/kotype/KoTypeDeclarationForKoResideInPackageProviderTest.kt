@@ -83,10 +83,10 @@ class KoTypeDeclarationForKoResideInPackageProviderTest {
         @JvmStatic
         fun provideValuesForTypeInsidePackage() =
             listOf(
-                arguments("nullable-kotlin-basic-type-is-in-package"),
-                arguments("not-nullable-kotlin-basic-type-is-in-package"),
-                arguments("nullable-kotlin-collection-type-is-in-package"),
-                arguments("not-nullable-kotlin-collection-type-is-in-package"),
+                arguments("nullable-kotlin-type-is-in-package"),
+                arguments("not-nullable-kotlin-type-is-in-package"),
+                arguments("nullable-generic-type-is-in-package"),
+                arguments("not-nullable-generic-type-is-in-package"),
                 arguments("nullable-class-type-is-in-package"),
                 arguments("not-nullable-class-type-is-in-package"),
                 arguments("nullable-interface-type-is-in-package"),
@@ -99,6 +99,8 @@ class KoTypeDeclarationForKoResideInPackageProviderTest {
                 arguments("not-nullable-import-alias-type-is-in-package"),
                 arguments("nullable-typealias-type-is-in-package"),
                 arguments("not-nullable-typealias-type-is-in-package"),
+                arguments("nullable-type-parameter-is-in-package"),
+                arguments("not-nullable-type-parameter-is-in-package"),
                 arguments("nullable-external-type-is-in-package"),
                 arguments("not-nullable-external-type-is-in-package"),
             )
@@ -107,10 +109,10 @@ class KoTypeDeclarationForKoResideInPackageProviderTest {
         @JvmStatic
         fun provideValuesForTypeOutsidePackage() =
             listOf(
-                arguments("nullable-kotlin-basic-type-is-not-in-package"),
-                arguments("not-nullable-kotlin-basic-type-is-not-in-package"),
-                arguments("nullable-kotlin-collection-type-is-not-in-package"),
-                arguments("not-nullable-kotlin-collection-type-is-not-in-package"),
+                arguments("nullable-kotlin-type-is-not-in-package"),
+                arguments("not-nullable-kotlin-type-is-not-in-package"),
+                arguments("nullable-generic-type-is-not-in-package"),
+                arguments("not-nullable-generic-type-is-not-in-package"),
                 arguments("nullable-class-type-is-not-in-package"),
                 arguments("not-nullable-class-type-is-not-in-package"),
                 arguments("nullable-interface-type-is-not-in-package"),
@@ -123,6 +125,8 @@ class KoTypeDeclarationForKoResideInPackageProviderTest {
                 arguments("not-nullable-import-alias-type-is-not-in-package"),
                 arguments("nullable-typealias-type-is-not-in-package"),
                 arguments("not-nullable-typealias-type-is-not-in-package"),
+                arguments("nullable-type-parameter-is-not-in-package"),
+                arguments("not-nullable-type-parameter-is-not-in-package"),
                 arguments("nullable-external-type-is-not-in-package"),
                 arguments("not-nullable-external-type-is-not-in-package"),
             )

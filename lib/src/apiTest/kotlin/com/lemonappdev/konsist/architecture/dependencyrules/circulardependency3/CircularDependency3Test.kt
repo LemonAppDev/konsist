@@ -11,13 +11,13 @@ class CircularDependency3Test {
     @Test
     fun `circular dependency 3`() {
         // given
-        val layer1 = Layer("layer1", "layer1..")
-        val layer2 = Layer("layer2", "layer2..")
-        val layer3 = Layer("layer3", "layer3..")
-        val layer4 = Layer("layer4", "layer4..")
+        val layer1 = Layer("name1", "layer1..")
+        val layer2 = Layer("name2", "layer2..")
+        val layer3 = Layer("name3", "layer3..")
+        val layer4 = Layer("name4", "layer4..")
 
         // when
-        val sut = {
+        val func = {
             architecture {
                 layer1.dependsOn(layer2)
                 layer2.dependsOn(layer3)
@@ -26,13 +26,7 @@ class CircularDependency3Test {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage
-            """
-            Illegal circular dependencies:
-            Layer layer3 -->
-            Layer layer1 -->
-            Layer layer2 -->
-            Layer layer3.
-            """.trimIndent()
+        func shouldThrow KoPreconditionFailedException::class withMessage
+            "Circular dependency detected: 'name1' -> 'name2' -> 'name3' -> 'name1'."
     }
 }

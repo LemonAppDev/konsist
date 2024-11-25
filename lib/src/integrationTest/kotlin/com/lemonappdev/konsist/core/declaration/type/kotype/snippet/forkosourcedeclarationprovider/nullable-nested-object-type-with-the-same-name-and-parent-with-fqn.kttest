@@ -1,0 +1,9 @@
+interface FirstInterface {
+    class NestedClass(val arg: SampleNestedObjectWithTheSameName?)
+    object SampleNestedObjectWithTheSameName
+}
+
+interface SecondInterface {
+    class NestedClass(val arg: SampleNestedObjectWithTheSameName?)
+    object SampleNestedObjectWithTheSameName
+}

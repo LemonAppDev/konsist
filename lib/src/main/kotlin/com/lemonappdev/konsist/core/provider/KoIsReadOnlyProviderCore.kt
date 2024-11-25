@@ -1,11 +1,10 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.provider.KoIsReadOnlyProvider
-import com.lemonappdev.konsist.core.provider.modifier.KoValModifierProviderCore
 
 internal interface KoIsReadOnlyProviderCore :
     KoIsReadOnlyProvider,
-    KoValModifierProviderCore {
+    KoIsValProviderCore {
     override val isReadOnly: Boolean
-        get() = hasValModifier
+        get() = isVal
 }

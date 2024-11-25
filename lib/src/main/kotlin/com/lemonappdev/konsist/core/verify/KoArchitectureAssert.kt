@@ -2,17 +2,19 @@ package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
-import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.ext.list.withPackage
-import com.lemonappdev.konsist.core.architecture.DependencyRulesCore
 import com.lemonappdev.konsist.core.architecture.KoArchitectureFiles
 import com.lemonappdev.konsist.core.architecture.KoArchitectureScope
-import com.lemonappdev.konsist.core.architecture.Status
+import com.lemonappdev.konsist.core.architecture.LayerDependenciesCore
+import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeCreator
+import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeNode
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
-import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.util.LocationUtil
+import com.lemonappdev.konsist.core.verify.failure.DependsOnLayerDependencyFailure
+import com.lemonappdev.konsist.core.verify.failure.DependsOnNothingDependencyFailure
+import com.lemonappdev.konsist.core.verify.failure.DoesNotDependsOnLayerDependencyFailure
 
 @Suppress("detekt.ThrowsCount")
 internal fun KoArchitectureFiles.assert(
@@ -20,25 +22,14 @@ internal fun KoArchitectureFiles.assert(
     testName: String?,
 ): Unit {
     try {
-        val dependencyRules = this.dependencyRules as DependencyRulesCore
+        val layerDependenciesCore = layerDependencies as LayerDependenciesCore
 
-        validateLayersOnDependencyRules(dependencyRules = dependencyRules)
-        validateAllLayersAreValid(files = this.files, dependencyRules = dependencyRules)
-
-        val failedFiles = validateLayersContainingFailedFiles(this.files, dependencyRules)
-
-        if (failedFiles.isNotEmpty()) {
-            throw KoAssertionFailedException(
-                getCheckFailedMessages(
-                    failedFiles.distinct(),
-                    dependencyRules.positiveDependencies,
-                    dependencyRules.negativeDependencies,
-                    dependencyRules.statuses,
-                    additionalMessage,
-                    testName,
-                ),
-            )
-        }
+        assertCommon(
+            files,
+            layerDependenciesCore,
+            additionalMessage,
+            testName,
+        )
     } catch (e: KoException) {
         throw e
     } catch (
@@ -54,26 +45,14 @@ internal fun KoArchitectureScope.assert(
     testName: String?,
 ): Unit {
     try {
-        val files = this.koScope.files
-        val dependencyRules = this.dependencyRules as DependencyRulesCore
+        val layerDependenciesCore = layerDependencies as LayerDependenciesCore
 
-        validateLayersOnDependencyRules(dependencyRules = dependencyRules)
-        validateAllLayersAreValid(files = files, dependencyRules = dependencyRules)
-
-        val failedFiles = validateLayersContainingFailedFiles(files = files, dependencyRules = dependencyRules)
-
-        if (failedFiles.isNotEmpty()) {
-            throw KoAssertionFailedException(
-                getCheckFailedMessages(
-                    failedFiles.distinct(),
-                    dependencyRules.positiveDependencies,
-                    dependencyRules.negativeDependencies,
-                    dependencyRules.statuses,
-                    additionalMessage,
-                    testName,
-                ),
-            )
-        }
+        assertCommon(
+            koScope.files,
+            layerDependenciesCore,
+            additionalMessage,
+            testName,
+        )
     } catch (e: KoException) {
         throw e
     } catch (
@@ -83,167 +62,252 @@ internal fun KoArchitectureScope.assert(
     }
 }
 
-/**
- * Validate that all the layers are not empty
- *
- * @param files within the scope
- * @param dependencyRules dependencies of the architecture.
- *
- * @throws KoPreconditionFailedException Layers do not contain files
- */
-private fun validateAllLayersAreValid(
+@Suppress("detekt.ThrowsCount")
+private fun assertCommon(
     files: List<KoFileDeclaration>,
-    dependencyRules: DependencyRulesCore,
-): Unit {
-    val isAllLayersValid =
-        dependencyRules.allLayers
-            .all {
-                files
-                    .withPackage(it.definedBy)
-                    .isNotEmpty()
-            }
-
-    if (!isAllLayersValid) {
-        val layer =
-            dependencyRules
-                .allLayers
-                .first {
-                    files
-                        .withPackage(it.definedBy)
-                        .isEmpty()
-                }
-        throw KoPreconditionFailedException("Layer ${layer.name} doesn't contain any files.")
-    }
-}
-
-/**
- * Validate dependencies among the Layers
- *
- * @param dependencyRules dependencies of the architecture.
- *
- * @throws KoPreconditionFailedException Architecture doesn't contain layers or dependencies
- */
-private fun validateLayersOnDependencyRules(dependencyRules: DependencyRulesCore): Unit {
-    if (dependencyRules.allLayers.isEmpty()) {
-        throw KoPreconditionFailedException("Architecture doesn't contain layers or dependencies.")
-    }
-}
-
-/**
- * Validate layers do not contain [FailedFiles]
- *
- * @param files within the scope
- * @param dependencyRules dependencies of the architecture.
- *
- * @return List<FailedFiles>
- */
-private fun validateLayersContainingFailedFiles(
-    files: List<KoFileDeclaration>,
-    dependencyRules: DependencyRulesCore,
-): List<FailedFiles> {
-    val failedFiles = mutableListOf<FailedFiles>()
-
-    dependencyRules
-        .positiveDependencies
-        .forEach { (layer, layers) ->
-            val otherLayers = (dependencyRules.allLayers - layers)
-
-            files
-                .withPackage(layer.definedBy)
-                .onEach {
-                    otherLayers.forEach { otherLayer ->
-                        val imports =
-                            it.imports.filter { import ->
-                                LocationUtil.resideInLocation(otherLayer.definedBy, import.name)
-                            }
-
-                        if (imports.isNotEmpty()) {
-                            failedFiles += FailedFiles(it.path, layer, otherLayer.name, imports)
-                        }
-                    }
-                }
-        }
-
-    dependencyRules
-        .negativeDependencies
-        .forEach { (layer, layers) ->
-            files
-                .withPackage(layer.definedBy)
-                .onEach {
-                    layers.forEach { otherLayer ->
-                        val imports =
-                            it.imports.filter { import ->
-                                LocationUtil.resideInLocation(otherLayer.definedBy, import.name)
-                            }
-
-                        if (imports.isNotEmpty()) {
-                            failedFiles += FailedFiles(it.path, layer, otherLayer.name, imports)
-                        }
-                    }
-                }
-        }
-    return failedFiles
-}
-
-private data class FailedFiles(
-    val path: String,
-    val resideInLayer: Layer,
-    val failedLayer: String,
-    val imports: List<KoImportDeclaration>,
-)
-
-@Suppress("detekt.LongParameterList")
-private fun getCheckFailedMessages(
-    failedFiles: List<FailedFiles>,
-    positiveDependencies: Map<Layer, Set<Layer>>,
-    negativeDependencies: Map<Layer, Set<Layer>>,
-    statuses: Map<Layer, Status>,
+    layerDependenciesCore: LayerDependenciesCore,
     additionalMessage: String?,
     testName: String?,
+) {
+    layerDependenciesCore.checkEmptyLayersDependencies()
+    layerDependenciesCore.checkLayersWithoutFiles(files)
+
+    val failedDependsOnLayers = getFailedDependsOnLayers(files, layerDependenciesCore)
+    val failedDoesNotDependsOnLayers = getFailedDoesNotDependsOnLayers(files, layerDependenciesCore)
+    val failedDependsOnNothing = getFailedDependsOnNothing(files, layerDependenciesCore)
+
+    if (failedDependsOnLayers.isNotEmpty() || failedDoesNotDependsOnLayers.isNotEmpty() || failedDependsOnNothing.isNotEmpty()) {
+        val exceptionMessage =
+            getExceptionMessage(
+                additionalMessage,
+                testName,
+                failedDependsOnLayers,
+                failedDoesNotDependsOnLayers,
+                failedDependsOnNothing,
+            )
+
+        throw KoAssertionFailedException(exceptionMessage)
+    }
+}
+
+private fun getExceptionMessage(
+    additionalMessage: String?,
+    testName: String?,
+    failedDependsOnLayers: List<DependsOnLayerDependencyFailure>,
+    doesNotDependsOnLayerDependencyFailures: List<DoesNotDependsOnLayerDependencyFailure>,
+    failedDependsOnNothing: List<DependsOnNothingDependencyFailure>,
 ): String {
-    val failedDeclarationsMessage =
-        failedFiles
-            .map { it.resideInLayer }
-            .joinToString("\n") { layer ->
-                val details =
-                    failedFiles
-                        .filter { it.resideInLayer == layer }
-                        .joinToString(separator = "\n") {
-                            "A file ${it.path} in a ${it.resideInLayer.name} layer depends on ${it.failedLayer} layer, imports:\n${
-                                it.imports.joinToString(
-                                    separator = "\n",
-                                ) { import -> "\t${import.name} (${import.location})" }
-                            }"
-                        }
+    val failedDependsOnMessage = getFailedDependsOnMessage(failedDependsOnLayers)
+    val failedDoesNotDependsOnLayersMessage = getFailedDoesNotDependsOnLayersMessage(doesNotDependsOnLayerDependencyFailures)
+    val failedDependsOnNothingMessage = getFailedDependsOnNothingMessage(failedDependsOnNothing)
 
-                val positiveLayerDependencies = (positiveDependencies.getOrDefault(layer, emptySet()) - layer).map { it.name }
+    check(
+        failedDependsOnMessage != null ||
+            failedDoesNotDependsOnLayersMessage != null ||
+            failedDependsOnNothingMessage != null,
+    ) {
+        "All failure messages cannot be null"
+    }
 
-                val negativeLayerDependencies = (negativeDependencies.getOrDefault(layer, emptySet()) - layer).map { it.name }
+    val messages =
+        listOfNotNull(
+            failedDependsOnMessage,
+            failedDoesNotDependsOnLayersMessage,
+            failedDependsOnNothingMessage,
+        )
 
-                val message =
-                    when (statuses.getOrDefault(layer, Status.NONE)) {
-                        Status.DEPEND_ON_LAYER -> {
-                            "depends on ${positiveLayerDependencies.joinToString(", ")} assertion failure:"
-                        }
+    val errorMessage = messages.joinToString("\n")
+    val customMessage = if (additionalMessage != null) "\n$additionalMessage" else ""
+    val localTestName = testName ?: getTestMethodNameFromNinthIndex()
 
-                        Status.NOT_DEPEND_ON_LAYER -> {
-                            "does not depend on ${negativeLayerDependencies.joinToString(", ")} assertion failure:"
-                        }
+    return "'$localTestName' test has failed. ${customMessage}\n$errorMessage"
+}
 
-                        Status.DEPENDENT_ON_NOTHING -> {
-                            "depends on nothing assertion failure:"
-                        }
+private fun getFailedDependsOnNothingMessage(failures: List<DependsOnNothingDependencyFailure>): String? =
+    getFailureMessage(failures) {
+        "'${it.layer.name}' layer should not depend on anything but has dependencies in files:"
+    }
 
-                        else -> {
-                            ""
+private fun getFailedDoesNotDependsOnLayersMessage(failures: List<DoesNotDependsOnLayerDependencyFailure>): String? =
+    getFailureMessage(failures) {
+        "'${it.layer1.name}' layer does not depends on '${it.doesNotDependOnLayer.name}' layer failed. " +
+            "Files that depend on '${it.doesNotDependOnLayer.name}' layer:"
+    }
+
+private fun <T> getFailureMessage(
+    failures: List<T>,
+    getRootMessage: (T) -> String,
+): String? {
+    if (failures.isEmpty()) {
+        return null
+    }
+
+    return failures.joinToString("\n\n") { failure ->
+        val files =
+            when (failure) {
+                is DependsOnNothingDependencyFailure -> failure.failedFiles
+                is DoesNotDependsOnLayerDependencyFailure -> failure.failedFiles
+                else -> emptyList()
+            }
+
+        val asciiTreeNodes =
+            files.map { file ->
+                val children =
+                    file
+                        .imports
+                        .map { AsciiTreeNode(it, emptyList()) }
+
+                AsciiTreeNode(file, children)
+            }
+
+        AsciiTreeCreator().invoke(
+            AsciiTreeNode(
+                getRootMessage(failure),
+                asciiTreeNodes,
+            ),
+        )
+    }
+}
+
+private fun getFailedDependsOnMessage(dependsOnLayerDependencyFailures: List<DependsOnLayerDependencyFailure>): String? {
+    if (dependsOnLayerDependencyFailures.isEmpty()) {
+        return null
+    }
+
+    return dependsOnLayerDependencyFailures.joinToString("\n") {
+        "Layer '${it.layer1.name}' does not depends on '${it.dependsOnLayer.name}' layer."
+    }
+}
+
+private fun getFailedDependsOnLayers(
+    files: List<KoFileDeclaration>,
+    layerDependencies: LayerDependenciesCore,
+): List<DependsOnLayerDependencyFailure> {
+    val failedLayerDependencies = mutableListOf<DependsOnLayerDependencyFailure>()
+
+    layerDependencies
+        .dependsOnDependencies
+        .forEach { (layer, otherLayers) ->
+            otherLayers.forEach { otherLayer ->
+                if (!layer.isDependentOn(otherLayer, files)) {
+                    failedLayerDependencies += DependsOnLayerDependencyFailure(layer, otherLayer)
+                }
+            }
+        }
+
+    return failedLayerDependencies
+}
+
+private fun getFailedDoesNotDependsOnLayers(
+    files: List<KoFileDeclaration>,
+    layerDependencies: LayerDependenciesCore,
+): List<DoesNotDependsOnLayerDependencyFailure> {
+    val failedLayerDependencies = mutableListOf<DoesNotDependsOnLayerDependencyFailure>()
+
+    layerDependencies
+        .doesNotDependsOnDependencies
+        .forEach { (layer, otherLayers) ->
+            otherLayers.forEach { otherLayer ->
+                val dependOnFiles = layer.getDependentOnFiles(otherLayer, files)
+
+                if (dependOnFiles.isNotEmpty()) {
+                    failedLayerDependencies +=
+                        DoesNotDependsOnLayerDependencyFailure(
+                            layer,
+                            dependOnFiles,
+                            otherLayer,
+                        )
+                }
+            }
+        }
+
+    return failedLayerDependencies
+}
+
+private fun getFailedDependsOnNothing(
+    files: List<KoFileDeclaration>,
+    layerDependencies: LayerDependenciesCore,
+): List<DependsOnNothingDependencyFailure> {
+    val failedLayerDependencies = mutableListOf<DependsOnNothingDependencyFailure>()
+
+    layerDependencies
+        .dependsOnNothingDependencies
+        .forEach { layer ->
+            val dependentFiles = layer.getDependentOnAnyLayerFiles(files, layerDependencies)
+
+            if (dependentFiles.isNotEmpty()) {
+                failedLayerDependencies +=
+                    DependsOnNothingDependencyFailure(
+                        layer,
+                        dependentFiles,
+                    )
+            }
+        }
+
+    return failedLayerDependencies
+}
+
+private fun Layer.isDependentOn(
+    otherLayer: Layer,
+    files: List<KoFileDeclaration>,
+): Boolean {
+    val layerFiles = files.withPackage(rootPackage)
+
+    val isDependentOn =
+        layerFiles
+            .flatMap { it.imports }
+            .any { import -> LocationUtil.resideInLocation(otherLayer.rootPackage, import.name) }
+
+    return isDependentOn
+}
+
+private fun Layer.getDependentOnFiles(
+    otherLayer: Layer,
+    files: List<KoFileDeclaration>,
+): List<KoFileDeclaration> {
+    val layerFiles = files.withPackage(rootPackage)
+
+    val dependOnFiles =
+        layerFiles
+            .mapNotNull { koFile ->
+                val imports = koFile.imports
+
+                val hasImportToOtherLayer = imports.any { import -> LocationUtil.resideInLocation(otherLayer.rootPackage, import.name) }
+
+                if (hasImportToOtherLayer) {
+                    koFile
+                } else {
+                    null
+                }
+            }
+
+    return dependOnFiles
+}
+
+private fun Layer.getDependentOnAnyLayerFiles(
+    files: List<KoFileDeclaration>,
+    layerDependencies: LayerDependenciesCore,
+): List<KoFileDeclaration> {
+    val layerFiles = files.withPackage(rootPackage)
+
+    return layerFiles
+        .mapNotNull { koFile ->
+            val imports =
+                koFile
+                    .imports
+                    // Import is not part of layer
+                    .filterNot { LocationUtil.resideInLocation(rootPackage, it.name) }
+                    // Import is part of other layer
+                    .filter {
+                        layerDependencies.layers.any { layer ->
+                            LocationUtil.resideInLocation(layer.rootPackage, it.name)
                         }
                     }
 
-                "${layer.name} $message\n$details"
+            if (imports.isNotEmpty()) {
+                koFile
+            } else {
+                null
             }
-    val customMessage = if (additionalMessage != null) "\n$additionalMessage" else ""
-
-    val name = testName ?: getTestMethodNameFromEightIndex()
-
-    return "'$name' test has failed.${customMessage}\n$failedDeclarationsMessage"
+        }
 }

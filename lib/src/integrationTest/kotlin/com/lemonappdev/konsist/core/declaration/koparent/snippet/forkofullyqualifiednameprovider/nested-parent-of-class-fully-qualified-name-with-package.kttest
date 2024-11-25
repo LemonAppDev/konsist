@@ -1,7 +1,0 @@
-package com.samplepackage
-
-interface SampleInterface {
-    class SampleBaseClass : SampleParentClass()
-
-    open class SampleParentClass
-}

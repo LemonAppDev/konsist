@@ -1,13 +1,21 @@
 package com.lemonappdev.konsist.core.model
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
+import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
 
 object DataCore {
+    val declarations: List<KoBaseDeclaration> by lazy {
+        Konsist
+            .scopeFromProject()
+            .declarationsOf()
+    }
+
     val classes: List<KoClassDeclaration> by lazy {
         Konsist
             .scopeFromProject()
@@ -35,11 +43,16 @@ object DataCore {
 
 fun getClass(
     name: String,
-    fqn: String?,
+    fullyQualifiedName: String?,
     isAlias: Boolean = false,
     containingFile: KoFileDeclaration,
 ): KoClassDeclaration? {
-    val declarationQualifiedName = if (fqn?.endsWith(name) == true || isAlias) fqn else "$fqn.$name"
+    val declarationQualifiedName =
+        if (fullyQualifiedName?.endsWith(name) == true || isAlias) {
+            fullyQualifiedName
+        } else {
+            "$fullyQualifiedName.$name"
+        }
 
     return DataCore
         .classes
@@ -54,11 +67,16 @@ fun getClass(
 
 fun getInterface(
     name: String,
-    fqn: String?,
+    fullyQualifiedName: String?,
     isAlias: Boolean,
     containingFile: KoFileDeclaration,
 ): KoInterfaceDeclaration? {
-    val declarationQualifiedName = if (fqn?.endsWith(name) == true || isAlias) fqn else "$fqn.$name"
+    val declarationQualifiedName =
+        if (fullyQualifiedName?.endsWith(name) == true || isAlias) {
+            fullyQualifiedName
+        } else {
+            "$fullyQualifiedName.$name"
+        }
 
     return DataCore
         .interfaces
@@ -73,11 +91,16 @@ fun getInterface(
 
 fun getObject(
     name: String,
-    fqn: String?,
+    fullyQualifiedName: String?,
     isAlias: Boolean,
     containingFile: KoFileDeclaration,
 ): KoObjectDeclaration? {
-    val declarationQualifiedName = if (fqn?.endsWith(name) == true || isAlias) fqn else "$fqn.$name"
+    val declarationQualifiedName =
+        if (fullyQualifiedName?.endsWith(name) == true || isAlias) {
+            fullyQualifiedName
+        } else {
+            "$fullyQualifiedName.$name"
+        }
 
     return DataCore
         .objects
@@ -92,12 +115,12 @@ fun getObject(
 
 fun getTypeAlias(
     name: String,
-    fqn: String?,
+    fullyQualifiedName: String?,
     containingFile: KoFileDeclaration,
 ): KoTypeAliasDeclaration? =
     DataCore
         .typeAliases
-        .firstOrNull { decl -> (decl.packagee?.name + "." + decl.name) == fqn }
+        .firstOrNull { decl -> (decl.packagee?.name + "." + decl.name) == fullyQualifiedName }
         ?: containingFile
             .typeAliases
             .firstOrNull { decl -> decl.name == name }

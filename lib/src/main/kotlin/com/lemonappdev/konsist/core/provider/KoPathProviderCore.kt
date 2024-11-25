@@ -15,8 +15,9 @@ internal interface KoPathProviderCore :
         get() =
             psiElement
                 .containingFile
-                .name
-                .toOsSeparator()
+                ?.name
+                ?.toOsSeparator()
+                ?: ""
 
     override val projectPath: String
         get() {

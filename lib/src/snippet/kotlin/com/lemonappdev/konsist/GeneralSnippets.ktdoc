@@ -7,6 +7,9 @@ import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.ext.list.constructors
 import com.lemonappdev.konsist.api.ext.list.indexOfFirstInstance
 import com.lemonappdev.konsist.api.ext.list.indexOfLastInstance
+import com.lemonappdev.konsist.api.ext.list.interfaceDeclarations
+import com.lemonappdev.konsist.api.ext.list.isSortedByName
+import com.lemonappdev.konsist.api.ext.list.modifierprovider.withAllModifiers
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withModifier
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withValueModifier
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifier
@@ -14,11 +17,14 @@ import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.ext.list.parentInterfaces
 import com.lemonappdev.konsist.api.ext.list.primaryConstructors
 import com.lemonappdev.konsist.api.ext.list.properties
+import com.lemonappdev.konsist.api.ext.list.returnTypes
+import com.lemonappdev.konsist.api.ext.list.sourceDeclarations
 import com.lemonappdev.konsist.api.ext.list.types
 import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
+import org.junit.jupiter.api.Test
 import java.util.Locale
 import javax.inject.Inject
 
@@ -37,9 +43,7 @@ class GeneralSnippets {
             .classes()
             .withModifier(KoModifier.DATA)
             .properties()
-            .assertTrue {
-                it.isConstructorDefined
-            }
+            .assertTrue { it.isConstructorDefined }
     }
 
     fun `every class has test`() {
@@ -95,11 +99,15 @@ class GeneralSnippets {
             .scopeFromProject()
             .classes()
             .constructors
-            .assertTrue {
-                val names = it.parameters.map { parameter -> parameter.name }
-                val sortedNames = names.sorted()
-                names == sortedNames
-            }
+            .assertTrue { it.parameters.isSortedByName() }
+    }
+
+    fun `enums has alphabetically ordered consts`() {
+        Konsist
+            .scopeFromProduction()
+            .classes()
+            .withAllModifiers(KoModifier.ENUM)
+            .assertTrue { it.enumConstants.isSortedByName() }
     }
 
     fun `companion object is last declaration in the class`() {
@@ -188,9 +196,7 @@ class GeneralSnippets {
             .functions()
             .parameters
             .types
-            .assertTrue {
-                it.isInterface
-            }
+            .assertTrue { it.sourceDeclaration?.isInterface }
     }
 
     fun `all parent interfaces are public`() {
@@ -198,6 +204,16 @@ class GeneralSnippets {
             .scopeFromProject()
             .classes()
             .parentInterfaces()
+            .sourceDeclarations()
+            .interfaceDeclarations()
             .assertTrue { it.hasPublicModifier }
+    }
+
+    fun `return type of all functions are immutable`() {
+        Konsist
+            .scopeFromProject()
+            .functions()
+            .returnTypes
+            .assertFalse { it.isMutableType }
     }
 }

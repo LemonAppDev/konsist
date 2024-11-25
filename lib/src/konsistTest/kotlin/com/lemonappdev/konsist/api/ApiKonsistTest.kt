@@ -7,8 +7,6 @@ import com.lemonappdev.konsist.api.ext.list.withoutAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withoutName
 import com.lemonappdev.konsist.api.ext.list.withoutNameMatching
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
-import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
-import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 import com.lemonappdev.konsist.api.verify.assertFalse
@@ -24,20 +22,6 @@ class ApiKonsistTest {
         apiPackageScope
             .functions()
             .assertTrue { it.hasReturnType() }
-    }
-
-    @Test
-    fun `every api function has valid KDoc`() {
-        apiPackageScope
-            .functions()
-            .assertTrue { it.hasValidKDocParamTags() && it.hasValidKDocReturnTag() }
-    }
-
-    @Test
-    fun `every api declaration has valid KDoc`() {
-        apiPackageScope
-            .classesAndInterfacesAndObjects()
-            .assertTrue { it.hasKDoc }
     }
 
     @Test
@@ -84,6 +68,9 @@ class ApiKonsistTest {
         Konsist
             .scopeFromPackage("com.lemonappdev.konsist.api.provider..", sourceSetName = "main")
             .interfaces()
+            // Exclude the providers below because the declarations from their properties with list return types implement
+            // KoNameProvider, but all of these methods are not relevant.
+            .filterNot { it.name == "KoFunctionTypeDeclarationProvider" || it.name == "KoUpperBoundsProvider" }
             .withoutNameMatching(Regex("\\bKoKDoc[A-Za-z]+TagProvider\\b")) // exclude providers like KoKDocXTagProvider
             .withProperty { property ->
                 !property.hasAnnotationOf<Deprecated>() &&

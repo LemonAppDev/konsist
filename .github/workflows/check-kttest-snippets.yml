@@ -4,6 +4,12 @@ on:
   pull_request:
     types: [ opened, synchronize ]
 
+# Allow the workflow to read the contents of the repository and pull request to be
+#  able to retrieve list of changed files.
+permissions:
+  contents: read
+  pull-requests: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -12,6 +18,12 @@ jobs:
   get-github-context:
     name: Get Branches And Changed Files
     runs-on: ubuntu-latest
+
+    # Allow the workflow to read the contents of the repository and pull request to be
+    # able to retrieve list of changed files when PR is opened from forked repository.
+    permissions:
+      contents: read
+      pull-requests: read
 
     steps:
       - name: Get branch name
@@ -26,7 +38,7 @@ jobs:
 
       - name: Get Changed Files
         id: changed-files
-        uses: tj-actions/changed-files@v45.0.1
+        uses: tj-actions/changed-files@v45.0.4
 
       - name: Echo List Changed Files
         run: |
@@ -62,7 +74,12 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
+      - name: Run Python Script for All Files
+        if: needs.get-github-context.outputs.base_ref_branch == 'main' || startsWith(needs.get-github-context.outputs.current_branch, 'release/')
+        run: python3 scripts/check_kttest_snippets.py -all
+
       - name: Filter Changed .kttest Files
+        if: contains(needs.get-github-context.outputs.all_changed_files, '.kttest')
         run: |
           kttest_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttest$')
           if [ -n "$kttest_files" ]; then
@@ -72,11 +89,7 @@ jobs:
           fi
 
       - name: Run Python Script With Changed .kttest Files
-        run: |
-          if [ -n "$TEMP_FILE" ]; then
-            python3 scripts/check_kttest_snippets.py "$TEMP_FILE"
-          else
-            echo "No changed .kttest files to process."
-          fi
+        if: contains(needs.get-github-context.outputs.all_changed_files, '.kttest')
+        run: python3 scripts/check_kttest_snippets.py "$TEMP_FILE"
         env:
           TEMP_FILE: ${{ env.TEMP_FILE }}

@@ -44,9 +44,10 @@ var appProperty: AppClass = AppClass("")
         if (true) field = value
     }
 
-val appPropertyWithFunctionType: () -> Unit = {}
-
 val appPropertyWithImportAliasType: ImportAlias = SampleObject
+
+val <T> T.appPropertyWithTypeParameter: T
+    get() = this
 
 object AppObject
 

@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.SampleClass
+
+val sampleProperty1: List<SampleTypeAlias> = emptyList()
+
+typealias SampleTypeAlias = Set<SampleClass>

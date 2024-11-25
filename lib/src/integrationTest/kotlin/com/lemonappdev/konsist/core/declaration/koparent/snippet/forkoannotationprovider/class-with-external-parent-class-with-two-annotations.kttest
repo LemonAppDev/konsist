@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.externalsample.SampleExternalClass
+import com.lemonappdev.konsist.testdata.SampleAnnotation1
+import com.lemonappdev.konsist.testdata.SampleAnnotation2
+
+class SampleClass() : @SampleAnnotation1 @SampleAnnotation2 SampleExternalClass()

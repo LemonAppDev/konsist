@@ -8,19 +8,19 @@ internal interface KoFullyQualifiedNameProviderCore :
     KoBaseProviderCore,
     KoContainingFileProviderCore,
     KoNameProviderCore {
-    val textUsedToFqn: String
+    val stringUsedAsFullyQualifiedName: String
         get() = name
 
     override val fullyQualifiedName: String?
         get() {
-            var fqn =
+            var fullyQualifiedName =
                 containingFile
                     .imports
                     .map { it.name }
                     .firstOrNull { it.isFullyQualifiedName() }
 
-            if (fqn == null) {
-                fqn =
+            if (fullyQualifiedName == null) {
+                fullyQualifiedName =
                     containingFile
                         .declarations()
                         .filterNot {
@@ -33,8 +33,8 @@ internal interface KoFullyQualifiedNameProviderCore :
                         .firstOrNull { it.isFullyQualifiedName() }
             }
 
-            return fqn ?: textUsedToFqn
+            return fullyQualifiedName ?: stringUsedAsFullyQualifiedName
         }
 
-    fun String.isFullyQualifiedName(): Boolean = split(".").last() == textUsedToFqn
+    fun String.isFullyQualifiedName(): Boolean = split(".").last() == stringUsedAsFullyQualifiedName
 }

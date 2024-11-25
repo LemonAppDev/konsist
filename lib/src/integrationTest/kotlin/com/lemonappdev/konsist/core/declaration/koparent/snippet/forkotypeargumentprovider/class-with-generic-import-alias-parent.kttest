@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.SampleCollection1 as SampleImportAlias
+
+class SampleClass() : SampleImportAlias<Int>()

@@ -32,9 +32,10 @@ var rootSrcProperty: RootSrcClass = RootSrcClass("")
         if (true) field = value
     }
 
-val rootSrcPropertyWithFunctionType: () -> Unit = {}
-
 val rootSrcPropertyWithImportAliasType: ImportAlias = RootSrcObject
+
+val <T> T.rootSrcPropertyWithTypeParameter: T
+    get() = this
 
 object RootSrcObject
 

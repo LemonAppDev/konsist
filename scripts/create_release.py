@@ -15,6 +15,8 @@ read_me_file = os.path.join(project_root, "README.md")
 files_with_version_to_change = [gradle_properties_file, read_me_file]
 
 api_directory = 'lib/src/main/kotlin/com/lemonappdev/konsist/api'
+project_directory = 'lib/src/main/kotlin/com/lemonappdev/konsist'
+
 m2_repo_path = os.path.expanduser('~/.m2/repository/')
 
 konsist_documentation_repository_address = "LemonAppDev/konsist-documentation"
@@ -44,6 +46,9 @@ def print_blue_message(text):
 def print_magenta_message(text):
     print(f"\033[35m{text}\033[0m")
 
+def print_cyan_message(text):
+    print(f"\033[36m{text}\033[0m")
+
 def print_method_name(text):
     print(f"\033[3;33m\nMethod: {text}()\033[0m")
 
@@ -51,22 +56,23 @@ def choose_release_option():
     """
     Prompts the user to choose between "Main Release - Upgrade Minor" and "Hotfix Release - Upgrade Patch".
 
-    Returns: The chosen option (1 or 2).
+    Returns: The chosen option (1, 2 or 3).
     """
 
     print_method_name("choose_release_option")
 
     print_success_message(f"Which release option do you choose? Write:")
-    print_magenta_message(f"1 - if you want to create \"Main Release - Upgrade Minor\"")
-    print_blue_message(f"2 - if you want to create \"Hotfix Release - Upgrade Patch\"")
+    print_magenta_message(f"1 - Create Release (Update Minor)")
+    print_blue_message(f"2 - Create Release (Update Patch)")
+    print_cyan_message(f"3 - Create Hotfix Release (Update Patch)")
 
     while True:
-        choice = input(f"\033[31;1mEnter your choice (1 or 2): \033[0m")
-        if choice in ["1", "2"]:
+        choice = input(f"\033[31;1mEnter your choice (1, 2 or 3): \033[0m")
+        if choice in ["1", "2", "3"]:
             print_success_message(f"You chose option: {int(choice)}")
             return int(choice)
         else:
-            print_error_message(f"Invalid choice. Please enter 1 or 2.")
+            print_error_message(f"Invalid choice. Please enter 1, 2 or 3.")
 
 
 def get_old_konsist_version():
@@ -100,7 +106,7 @@ def get_new_konsist_version(release_option_num, old_version):
     Calculates the new version based on the release option and old version.
 
     Args:
-        release_option_num: The chosen release option number (1 or 2).
+        release_option_num: The chosen release option number (1, 2 or 3).
         old_version: The current version string (obtained from get_old_konsist_version).
 
     Returns: The new version string or None if invalid option.
@@ -116,7 +122,7 @@ def get_new_konsist_version(release_option_num, old_version):
 
     if release_option_num == 1:
         new_version = f"{major_version}.{int(minor_version) + 1}.0"
-    elif release_option_num == 2:
+    elif release_option_num in [2, 3]:
         new_version = f"{major_version}.{minor_version}.{int(patch_version) + 1}"
     else:
         print_error_message(f"Error: Invalid release option number: {release_option_num}")
@@ -258,11 +264,13 @@ def replace_konsist_version(old_version, new_version, files):
             f.write(file_text)
             print_success_message(f"Updated version in: {file_path}")
 
+    # Add changes to the staging area
+    subprocess.run(["git", "add", "."], check=True)  # Stage all changes
+
     # Check if there are any changes to commit
     result = subprocess.run(["git", "status", "--porcelain"], check=True, capture_output=True)
     if result.stdout.decode().strip():
         commit_message = f"Replace Konsist version {old_version} with {new_version}"
-        subprocess.run(["git", "add", "."], check=True)  # Stage all changes
         subprocess.run(["git", "commit", "-m", commit_message], check=True)  # Commit changes
         print_success_message(f"Changes committed.")
     else:
@@ -280,9 +288,11 @@ def check_if_exist_files_with_deprecated_annotation(directory, version):
     print_method_name("check_if_exist_files_with_deprecated_annotation")
 
     files_with_deprecated_annotation = []
-    pattern = fr'@Deprecated\(".*{version}'
+    pattern = fr'@Deprecated\(\s*".*{version}'
 
-    for root, dirs, files in os.walk(directory):
+    absolute_directory = os.path.join(project_root, directory)
+
+    for root, dirs, files in os.walk(absolute_directory):
         for file in files:
             if file.endswith('.kt'):
                 file_path = os.path.join(root, file)
@@ -301,6 +311,42 @@ def check_if_exist_files_with_deprecated_annotation(directory, version):
         sys.exit()
     else:
         print_success_message(f"No files contains @Deprecated annotation with {version} version.")
+
+def check_if_exist_files_with_remove_in_version_annotation(directory, version):
+    """
+    Finds Kotlin files containing the @RemoveInVersion annotation with the specified pattern.
+
+    Args: directory: The directory to search.
+
+    Returns: A list of file paths that match the criteria.
+    """
+
+    print_method_name("check_if_exist_files_with_remove_in_version_annotation")
+
+    files_with_remove_in_version_annotation = []
+    pattern = re.compile(rf'@RemoveInVersion\(\s*"{version}"\s*\)', re.MULTILINE)
+
+    absolute_directory = os.path.join(project_root, directory)
+
+    for root, dirs, files in os.walk(absolute_directory):
+        for file in files:
+            if file.endswith('.kt'):
+                file_path = os.path.join(root, file)
+                with open(file_path, 'r') as f:
+                    text = f.read()
+                    if pattern.search(text):
+                        files_with_remove_in_version_annotation.append(file_path)
+
+    # Check if list of files with remove_in_version annotation is not empty
+    if files_with_remove_in_version_annotation:
+        print_error_message(f"Files contains @RemoveInVersion annotation with {version} version:")
+        for file in files_with_remove_in_version_annotation:
+            file_path = os.path.join(project_root, file)
+            display_clickable_file_paths(file_path)
+        print_error_message(f"Remove declarations marked as @RemoveInVersion in the above files.")
+        sys.exit()
+    else:
+        print_success_message(f"No files contains @RemoveInVersion annotation with {version} version.")
 
 def display_clickable_file_paths(file_path):
     # Construct the hyperlink URL
@@ -888,7 +934,7 @@ def create_release():
 
     chosen_option = choose_release_option()
 
-    if chosen_option == 1:
+    if chosen_option in [1,2]:
         change_branch_to_develop_and_and_merge_main()
         base_branch = "develop"
     else:
@@ -904,7 +950,9 @@ def create_release():
 
     replace_konsist_version(old_konsist_version, new_konsist_version, files_with_version_to_change)
 
-    check_if_exist_files_with_deprecated_annotation(api_directory, new_konsist_version)
+    check_if_exist_files_with_deprecated_annotation(project_directory, new_konsist_version)
+
+    check_if_exist_files_with_remove_in_version_annotation(project_directory, new_konsist_version)
 
     test_3rd_party_projects_using_local_artifacts(old_konsist_version, new_konsist_version)
 

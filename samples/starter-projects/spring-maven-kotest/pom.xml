@@ -16,7 +16,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.3</version>
+		<version>3.4.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.sample</groupId>
@@ -26,7 +26,7 @@
     <description>spring-maven-kotest</description>
 	<properties>
 		<java.version>19</java.version>
-		<kotlin.version>2.0.20</kotlin.version>
+		<kotlin.version>2.0.21</kotlin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -50,7 +50,7 @@
 		<dependency>
 			<groupId>com.lemonappdev</groupId>
 			<artifactId>konsist</artifactId>
-			<version>0.16.0</version>
+			<version>0.16.1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

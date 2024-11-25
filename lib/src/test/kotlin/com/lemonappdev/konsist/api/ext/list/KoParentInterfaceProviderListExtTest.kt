@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentInterfaceProvider
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleInterface
@@ -14,9 +14,9 @@ class KoParentInterfaceProviderListExtTest {
     @Test
     fun `parentInterfaces() returns parent interfaces from all declarations`() {
         // given
-        val parent1: KoInterfaceDeclaration = mockk()
-        val parent2: KoInterfaceDeclaration = mockk()
-        val parent3: KoInterfaceDeclaration = mockk()
+        val parent1: KoParentDeclaration = mockk()
+        val parent2: KoParentDeclaration = mockk()
+        val parent3: KoParentDeclaration = mockk()
         val declaration1: KoParentInterfaceProvider =
             mockk {
                 every { parentInterfaces() } returns listOf(parent1, parent2)
@@ -598,7 +598,7 @@ class KoParentInterfaceProviderListExtTest {
     fun `withParentInterface{} returns declaration with parent interface which satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (KoInterfaceDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val predicate: (KoParentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoParentInterfaceProvider =
             mockk {
                 every { hasParentInterface(predicate = predicate) } returns true
@@ -620,7 +620,7 @@ class KoParentInterfaceProviderListExtTest {
     fun `withoutParentInterface{} returns declaration without parent interface which satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (KoInterfaceDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val predicate: (KoParentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoParentInterfaceProvider =
             mockk {
                 every { hasParentInterface(predicate = predicate) } returns true
@@ -642,7 +642,7 @@ class KoParentInterfaceProviderListExtTest {
     fun `withAllParentInterfaces{} returns declaration with all parent interfaces satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (KoInterfaceDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val predicate: (KoParentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoParentInterfaceProvider =
             mockk {
                 every { hasAllParentInterfaces(predicate = predicate) } returns true
@@ -664,7 +664,7 @@ class KoParentInterfaceProviderListExtTest {
     fun `withoutAllParentInterfaces{} returns declaration with all parent interfaces which not satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (KoInterfaceDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val predicate: (KoParentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
         val declaration1: KoParentInterfaceProvider =
             mockk {
                 every { hasAllParentInterfaces(predicate = predicate) } returns true
@@ -686,13 +686,13 @@ class KoParentInterfaceProviderListExtTest {
     fun `withParentInterfaces{} returns declaration with parent interfaces which satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (List<KoInterfaceDeclaration>) -> Boolean =
+        val predicate: (List<KoParentDeclaration>) -> Boolean =
             { it.all { parent -> parent.hasNameEndingWith(suffix) } }
-        val parent1: KoInterfaceDeclaration =
+        val parent1: KoParentDeclaration =
             mockk {
                 every { hasNameEndingWith(suffix) } returns true
             }
-        val parent2: KoInterfaceDeclaration =
+        val parent2: KoParentDeclaration =
             mockk {
                 every { hasNameEndingWith(suffix) } returns false
             }
@@ -721,13 +721,13 @@ class KoParentInterfaceProviderListExtTest {
     fun `withoutParentInterfaces{} returns declaration without parent interfaces which satisfy predicate`() {
         // given
         val suffix = "Name"
-        val predicate: (List<KoInterfaceDeclaration>) -> Boolean =
+        val predicate: (List<KoParentDeclaration>) -> Boolean =
             { it.all { parent -> parent.hasNameEndingWith(suffix) } }
-        val parent1: KoInterfaceDeclaration =
+        val parent1: KoParentDeclaration =
             mockk {
                 every { hasNameEndingWith(suffix) } returns true
             }
-        val parent2: KoInterfaceDeclaration =
+        val parent2: KoParentDeclaration =
             mockk {
                 every { hasNameEndingWith(suffix) } returns false
             }

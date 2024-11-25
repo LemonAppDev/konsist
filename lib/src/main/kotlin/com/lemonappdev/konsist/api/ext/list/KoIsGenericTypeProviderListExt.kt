@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoIsGenericTypeProvider
  *
  * @return A list containing declarations with the generic types.
  */
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withGeneric"))
 fun <T : KoIsGenericTypeProvider> List<T>.withGenericType(): List<T> = filter { it.isGenericType }
 
 /**
@@ -14,4 +15,5 @@ fun <T : KoIsGenericTypeProvider> List<T>.withGenericType(): List<T> = filter { 
  *
  * @return A list containing declarations without the generic types.
  */
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withoutGeneric"))
 fun <T : KoIsGenericTypeProvider> List<T>.withoutGenericType(): List<T> = filterNot { it.isGenericType }

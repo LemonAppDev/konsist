@@ -1,0 +1,2 @@
+val List<Int>.sampleProperty
+    get() = listOf(1)

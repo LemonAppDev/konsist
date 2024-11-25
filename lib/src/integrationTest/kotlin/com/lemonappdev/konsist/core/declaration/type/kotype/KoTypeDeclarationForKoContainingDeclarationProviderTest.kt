@@ -33,10 +33,8 @@ class KoTypeDeclarationForKoContainingDeclarationProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("nullable-kotlin-basic-type-containing-declaration"),
-                arguments("not-nullable-kotlin-basic-type-containing-declaration"),
-                arguments("nullable-kotlin-collection-type-containing-declaration"),
-                arguments("not-nullable-kotlin-collection-type-containing-declaration"),
+                arguments("nullable-kotlin-type-containing-declaration"),
+                arguments("not-nullable-kotlin-type-containing-declaration"),
                 arguments("nullable-class-type-containing-declaration"),
                 arguments("not-nullable-class-type-containing-declaration"),
                 arguments("nullable-interface-type-containing-declaration"),
@@ -49,6 +47,10 @@ class KoTypeDeclarationForKoContainingDeclarationProviderTest {
                 arguments("not-nullable-import-alias-type-containing-declaration"),
                 arguments("nullable-typealias-type-containing-declaration"),
                 arguments("not-nullable-typealias-type-containing-declaration"),
+                arguments("nullable-generic-type-containing-declaration"),
+                arguments("not-nullable-generic-type-containing-declaration"),
+                arguments("nullable-type-parameter-containing-declaration"),
+                arguments("not-nullable-type-parameter-containing-declaration"),
                 arguments("nullable-external-type-containing-declaration"),
                 arguments("not-nullable-external-type-containing-declaration"),
             )

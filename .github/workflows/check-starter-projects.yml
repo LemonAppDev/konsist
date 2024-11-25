@@ -13,6 +13,12 @@ jobs:
     name: Get GitHub Context
     runs-on: ubuntu-latest
 
+    # Allow the workflow to read the contents of the repository and pull request to be
+    # able to retrieve list of changed files when PR is opened from forked repository.
+    permissions:
+      contents: read
+      pull-requests: read
+
     steps:
       - name: Get branch name
         id: branch-name
@@ -26,7 +32,7 @@ jobs:
 
       - name: Get Changed Files
         id: changed-files
-        uses: tj-actions/changed-files@v45.0.1
+        uses: tj-actions/changed-files@v45.0.4
 
       - name: List Changed Files
         run: |
@@ -52,6 +58,12 @@ jobs:
     name: Android Gradle Groovy Junit 4
     needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
 
     steps:
       - name: Checkout

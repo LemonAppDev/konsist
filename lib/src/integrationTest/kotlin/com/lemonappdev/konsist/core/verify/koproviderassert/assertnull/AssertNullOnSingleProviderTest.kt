@@ -2,8 +2,9 @@ package com.lemonappdev.konsist.core.verify.koproviderassert.assertnull
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
-import com.lemonappdev.konsist.api.provider.KoTypeProvider
+import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
 import com.lemonappdev.konsist.api.verify.assertNotNull
 import com.lemonappdev.konsist.api.verify.assertNull
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
@@ -79,7 +80,7 @@ class AssertNullOnSingleProviderTest {
             getSnippetFile("provider-assert-not-null-error-with-custom-message")
                 .declarations()
                 .filterNot { it is KoFileDeclaration }
-                .filterIsInstance<KoTypeProvider>()
+                .filterIsInstance<KoDeclarationCastProvider>()
                 .firstOrNull()
 
         // then
@@ -100,7 +101,7 @@ class AssertNullOnSingleProviderTest {
         val sut =
             getSnippetFile("assert-null-passes-when-item-has-null-value")
                 .declarations()
-                .filterIsInstance<KoTypeProvider>()
+                .filterIsInstance<KoSourceAndAliasTypeProvider>()
                 .firstOrNull()
 
         // then
@@ -129,7 +130,7 @@ class AssertNullOnSingleProviderTest {
         val sut =
             getSnippetFile("assert-not-null-fails-when-item-has-null-value")
                 .declarations()
-                .filterIsInstance<KoTypeProvider>()
+                .filterIsInstance<KoSourceAndAliasTypeProvider>()
                 .firstOrNull()
 
         // when

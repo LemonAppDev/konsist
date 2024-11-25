@@ -1,0 +1,2 @@
+val <T: List<*>> List<T>.sampleProperty: T
+    get() = first()

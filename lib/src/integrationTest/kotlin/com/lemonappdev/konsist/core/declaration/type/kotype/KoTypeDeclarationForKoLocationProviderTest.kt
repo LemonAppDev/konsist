@@ -35,10 +35,10 @@ class KoTypeDeclarationForKoLocationProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("nullable-kotlin-basic-type-location", "1:41"),
-                arguments("not-nullable-kotlin-basic-type-location", "1:41"),
-                arguments("nullable-kotlin-collection-type-location", "1:41"),
-                arguments("not-nullable-kotlin-collection-type-location", "1:41"),
+                arguments("nullable-kotlin-type-location", "1:41"),
+                arguments("not-nullable-kotlin-type-location", "1:41"),
+                arguments("nullable-generic-type-location", "1:41"),
+                arguments("not-nullable-generic-type-location", "1:41"),
                 arguments("nullable-class-type-location", "3:41"),
                 arguments("not-nullable-class-type-location", "3:41"),
                 arguments("nullable-interface-type-location", "3:41"),
@@ -51,6 +51,8 @@ class KoTypeDeclarationForKoLocationProviderTest {
                 arguments("not-nullable-import-alias-type-location", "3:41"),
                 arguments("nullable-typealias-type-location", "3:41"),
                 arguments("not-nullable-typealias-type-location", "3:41"),
+                arguments("nullable-type-parameter-location", "1:46"),
+                arguments("not-nullable-type-parameter-location", "1:46"),
                 arguments("nullable-external-type-location", "3:41"),
                 arguments("not-nullable-external-type-location", "3:41"),
             )

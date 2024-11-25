@@ -34,10 +34,10 @@ class KoTypeDeclarationForKoNameProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("nullable-kotlin-basic-type-name", "String"),
-                arguments("not-nullable-kotlin-basic-type-name", "String"),
-                arguments("nullable-kotlin-collection-type-name", "List<String>"),
-                arguments("not-nullable-kotlin-collection-type-name", "List<String>"),
+                arguments("nullable-kotlin-type-name", "String"),
+                arguments("not-nullable-kotlin-type-name", "String"),
+                arguments("nullable-generic-type-name", "List<Set<String>>"),
+                arguments("not-nullable-generic-type-name", "List<Set<String>>"),
                 arguments("nullable-class-type-name", "SampleType"),
                 arguments("not-nullable-class-type-name", "SampleType"),
                 arguments("nullable-interface-type-name", "SampleInterface"),
@@ -50,6 +50,8 @@ class KoTypeDeclarationForKoNameProviderTest {
                 arguments("not-nullable-import-alias-type-name", "ImportAlias"),
                 arguments("nullable-typealias-type-name", "SampleTypeAlias"),
                 arguments("not-nullable-typealias-type-name", "SampleTypeAlias"),
+                arguments("nullable-type-parameter-name", "TestType"),
+                arguments("not-nullable-type-parameter-name", "TestType"),
                 arguments("nullable-external-type-name", "SampleExternalClass"),
                 arguments("not-nullable-external-type-name", "SampleExternalClass"),
             )

@@ -1,0 +1,2 @@
+val <T> List<T>.sampleProperty: T where T : List<*>, T : CharSequence
+    get() = first()

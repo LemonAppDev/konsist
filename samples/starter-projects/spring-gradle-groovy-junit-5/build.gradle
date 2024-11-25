@@ -1,8 +1,8 @@
 plugins {
-	id 'org.springframework.boot' version '3.3.3'
+	id 'org.springframework.boot' version '3.4.0'
 	id 'io.spring.dependency-management' version '1.1.6'
-	id 'org.jetbrains.kotlin.jvm' version '2.0.20'
-	id 'org.jetbrains.kotlin.plugin.spring' version '2.0.20'
+	id 'org.jetbrains.kotlin.jvm' version '2.0.21'
+	id 'org.jetbrains.kotlin.plugin.spring' version '2.0.21'
 	id 'jvm-test-suite'
 }
 
@@ -49,10 +49,10 @@ testing {
 				implementation project()
 
 				// Add Konsist dependency
-				implementation "com.lemonappdev:konsist:0.16.0"
+				implementation "com.lemonappdev:konsist:0.16.1"
 
 				// Add junit-jupiter-params dependency (required for dynamic Tests)
-				implementation "org.junit.jupiter:junit-jupiter-params:5.11.0"
+				implementation "org.junit.jupiter:junit-jupiter-params:5.11.3"
 			}
 
 			targets {
