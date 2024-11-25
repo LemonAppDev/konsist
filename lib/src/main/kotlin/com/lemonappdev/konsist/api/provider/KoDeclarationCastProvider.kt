@@ -2,9 +2,12 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
@@ -18,7 +21,10 @@ import kotlin.reflect.KClass
  * An interface representing a Kotlin declaration that provides the information associated with this declaration.
  */
 @Suppress("detekt.TooManyFunctions")
-interface KoDeclarationCastProvider : KoBaseProvider {
+interface KoDeclarationCastProvider :
+    KoBaseProvider,
+    KoSourceDeclaration,
+    KoIsStarProjectionProvider {
     /**
      * Determines whatever declaration is a class.
      */
@@ -100,6 +106,16 @@ interface KoDeclarationCastProvider : KoBaseProvider {
      */
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isExternal"))
     val isExternalType: Boolean
+
+    /**
+     * Determines whatever declaration is a function.
+     */
+    val isFunction: Boolean
+
+    /**
+     * Determines whatever declaration is a property.
+     */
+    val isProperty: Boolean
 
     /**
      * Represents the class declaration associated with this declaration.
@@ -208,6 +224,20 @@ interface KoDeclarationCastProvider : KoBaseProvider {
      */
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("asExternal"))
     fun asExternalTypeDeclaration(): KoExternalDeclaration?
+
+    /**
+     * Represents the function declaration associated with this declaration.
+     *
+     * @return the function declaration associated with this declaration.
+     */
+    fun asFunctionDeclaration(): KoFunctionDeclaration?
+
+    /**
+     * Represents the property declaration associated with this declaration.
+     *
+     * @return the property declaration associated with this declaration.
+     */
+    fun asPropertyDeclaration(): KoPropertyDeclaration?
 
     /**
      * Whether declaration has a specified class declaration.
@@ -452,4 +482,38 @@ interface KoDeclarationCastProvider : KoBaseProvider {
      */
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("hasExternalDeclarationOf"))
     fun hasExternalTypeDeclarationOf(kClass: KClass<*>): Boolean
+
+    /**
+     * Whether declaration has a specified function declaration.
+     *
+     * @param predicate The predicate function used to determine if a function declaration satisfies a condition.
+     * @return `true` if the declaration has the specified function declaration (or any function declaration if [predicate] is `null`),
+     * `false` otherwise.
+     */
+    fun hasFunctionDeclaration(predicate: ((KoFunctionDeclaration) -> Boolean)? = null): Boolean
+
+    /**
+     * Whether declaration has a function declaration of the specified Kotlin function.
+     *
+     * @param kClass The Kotlin class representing the function declaration to check for.
+     * @return `true` if the declaration has a function declaration matching the specified KClass, `false` otherwise.
+     */
+    fun hasFunctionDeclarationOf(kClass: KClass<*>): Boolean
+
+    /**
+     * Whether declaration has a specified property declaration.
+     *
+     * @param predicate The predicate function used to determine if a property declaration satisfies a condition.
+     * @return `true` if the declaration has the specified property declaration (or any property declaration if [predicate] is `null`),
+     * `false` otherwise.
+     */
+    fun hasPropertyDeclaration(predicate: ((KoPropertyDeclaration) -> Boolean)? = null): Boolean
+
+    /**
+     * Whether declaration has a property declaration of the specified Kotlin property.
+     *
+     * @param kClass The Kotlin class representing the property declaration to check for.
+     * @return `true` if the declaration has a property declaration matching the specified KClass, `false` otherwise.
+     */
+    fun hasPropertyDeclarationOf(kClass: KClass<*>): Boolean
 }

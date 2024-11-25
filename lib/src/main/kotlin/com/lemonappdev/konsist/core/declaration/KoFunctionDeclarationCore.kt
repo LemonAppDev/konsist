@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoBodyProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
+import com.lemonappdev.konsist.core.provider.KoDeclarationCastProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoInitializerProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsExtensionProviderCore
@@ -62,7 +63,7 @@ internal class KoFunctionDeclarationCore private constructor(
     override val ktFunction: KtFunction,
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoFunctionDeclaration,
-    KoBaseSourceDeclarationCore,
+    KoSourceDeclarationCore,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
     KoBodyProviderCore,
@@ -105,7 +106,8 @@ internal class KoFunctionDeclarationCore private constructor(
     KoExpectModifierProviderCore,
     KoTypeParameterProviderCore,
     KoIsExtensionProviderCore,
-    KoIsGenericProviderCore {
+    KoIsGenericProviderCore,
+    KoDeclarationCastProviderCore {
     override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktFunction }
 
     override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktCallableDeclaration.annotationEntries }

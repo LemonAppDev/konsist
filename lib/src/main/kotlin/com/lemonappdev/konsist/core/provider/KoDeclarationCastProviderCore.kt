@@ -2,9 +2,11 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
@@ -13,19 +15,23 @@ import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceDecla
 import com.lemonappdev.konsist.api.declaration.combined.KoClassAndObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.combined.KoInterfaceAndObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
+import com.lemonappdev.konsist.core.declaration.KoSourceDeclarationCore
 import com.lemonappdev.konsist.core.util.TypeUtil
 import kotlin.reflect.KClass
 
 @Suppress("detekt.TooManyFunctions")
 internal interface KoDeclarationCastProviderCore :
     KoDeclarationCastProvider,
+    KoSourceDeclarationCore,
     KoBaseProviderCore,
     KoContainingFileProviderCore,
     KoNameProviderCore,
-    KoContainingDeclarationProviderCore {
+    KoContainingDeclarationProviderCore,
+    KoIsStarProjectionProviderCore {
     val koDeclarationCastProviderDeclaration: KoSourceDeclaration?
-        get() = null
+        get() = this
 
     override val isKotlinBasicType: Boolean
         get() = TypeUtil.isKotlinBasicType(name)
@@ -71,9 +77,18 @@ internal interface KoDeclarationCastProviderCore :
     override val isExternal: Boolean
         get() = koDeclarationCastProviderDeclaration is KoExternalDeclaration
 
+    override val isFunction: Boolean
+        get() = koDeclarationCastProviderDeclaration is KoFunctionDeclaration
+
+    override val isProperty: Boolean
+        get() = koDeclarationCastProviderDeclaration is KoPropertyDeclaration
+
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isExternal"))
     override val isExternalType: Boolean
         get() = isExternal
+
+    override val isStarProjection: Boolean
+        get() = koDeclarationCastProviderDeclaration is KoStarProjectionDeclaration
 
     override fun asClassDeclaration(): KoClassDeclaration? = koDeclarationCastProviderDeclaration as? KoClassDeclaration
 
@@ -97,10 +112,22 @@ internal interface KoDeclarationCastProviderCore :
     override fun asKotlinTypeDeclaration(): KoKotlinTypeDeclaration? = koDeclarationCastProviderDeclaration as? KoKotlinTypeDeclaration
 
     override fun asKotlinBasicTypeDeclaration(): KoKotlinTypeDeclaration? =
-        if (koDeclarationCastProviderDeclaration?.isKotlinBasicType == true) asKotlinTypeDeclaration() else null
+        if ((koDeclarationCastProviderDeclaration as? KoDeclarationCastProvider)?.isKotlinBasicType ==
+            true
+        ) {
+            asKotlinTypeDeclaration()
+        } else {
+            null
+        }
 
     override fun asKotlinCollectionTypeDeclaration(): KoKotlinTypeDeclaration? =
-        if (koDeclarationCastProviderDeclaration?.isKotlinCollectionType == true) asKotlinTypeDeclaration() else null
+        if ((koDeclarationCastProviderDeclaration as? KoDeclarationCastProvider)?.isKotlinCollectionType ==
+            true
+        ) {
+            asKotlinTypeDeclaration()
+        } else {
+            null
+        }
 
     override fun asTypeParameterDeclaration(): KoTypeParameterDeclaration? =
         koDeclarationCastProviderDeclaration as? KoTypeParameterDeclaration
@@ -109,6 +136,10 @@ internal interface KoDeclarationCastProviderCore :
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("asExternalDeclaration"))
     override fun asExternalTypeDeclaration(): KoExternalDeclaration? = asExternalDeclaration()
+
+    override fun asFunctionDeclaration(): KoFunctionDeclaration? = koDeclarationCastProviderDeclaration as? KoFunctionDeclaration
+
+    override fun asPropertyDeclaration(): KoPropertyDeclaration? = koDeclarationCastProviderDeclaration as? KoPropertyDeclaration
 
     override fun hasClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -216,4 +247,20 @@ internal interface KoDeclarationCastProviderCore :
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("hasExternalDeclarationOf"))
     override fun hasExternalTypeDeclarationOf(kClass: KClass<*>): Boolean = hasExternalDeclarationOf(kClass)
+
+    override fun hasFunctionDeclaration(predicate: ((KoFunctionDeclaration) -> Boolean)?): Boolean =
+        when (predicate) {
+            null -> isFunction
+            else -> asFunctionDeclaration()?.let { predicate(it) } ?: false
+        }
+
+    override fun hasFunctionDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asFunctionDeclaration()?.fullyQualifiedName
+
+    override fun hasPropertyDeclaration(predicate: ((KoPropertyDeclaration) -> Boolean)?): Boolean =
+        when (predicate) {
+            null -> isProperty
+            else -> asPropertyDeclaration()?.let { predicate(it) } ?: false
+        }
+
+    override fun hasPropertyDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asPropertyDeclaration()?.fullyQualifiedName
 }

@@ -11,7 +11,7 @@ package com.lemonappdev.konsist.api.provider
  * - A star projection is often seen in generic collections like `List<*>`, where the
  *   exact type is not known or not important.
  */
-interface KoStarProjectionProvider : KoBaseProvider {
+interface KoIsStarProjectionProvider : KoBaseProvider {
     /**
      * Determines whether the source declaration is a star projection.
      * A star projection is a placeholder that represents any type in a generic context, allowing for flexible type constraints.

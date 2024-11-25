@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
+import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
 import kotlin.reflect.KClass
 
@@ -12,8 +12,8 @@ import kotlin.reflect.KClass
  * @return A list of source declarations that match the provided predicate, or all source declarations if no predicate is provided.
  */
 fun <T : KoSourceDeclarationProvider> List<T>.sourceDeclarations(
-    predicate: ((KoSourceDeclaration) -> Boolean)? = null,
-): List<KoSourceDeclaration> =
+    predicate: ((KoDeclarationCastProvider) -> Boolean)? = null,
+): List<KoDeclarationCastProvider> =
     filter {
         when (predicate) {
             null -> true
@@ -27,7 +27,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.sourceDeclarations(
  * @param predicate The predicate function to determine if a source declaration satisfies a condition.
  * @return A list containing source declarations with the specified source declaration.
  */
-fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclaration(predicate: (KoSourceDeclaration) -> Boolean): List<T> =
+fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclaration(predicate: (KoDeclarationCastProvider) -> Boolean): List<T> =
     filter { it.sourceDeclaration?.let { declaration -> predicate(declaration) } == true }
 
 /**
@@ -36,7 +36,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclaration(predicate: (
  * @param predicate The predicate function to determine if a source declaration satisfies a condition.
  * @return A list containing source declarations without the specified source declaration.
  */
-fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclaration(predicate: (KoSourceDeclaration) -> Boolean): List<T> =
+fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclaration(predicate: (KoDeclarationCastProvider) -> Boolean): List<T> =
     filterNot { it.sourceDeclaration?.let { declaration -> predicate(declaration) } == true }
 
 /**
