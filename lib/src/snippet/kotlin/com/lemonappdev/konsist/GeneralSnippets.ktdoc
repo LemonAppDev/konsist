@@ -18,6 +18,7 @@ import com.lemonappdev.konsist.api.ext.list.parentInterfaces
 import com.lemonappdev.konsist.api.ext.list.primaryConstructors
 import com.lemonappdev.konsist.api.ext.list.properties
 import com.lemonappdev.konsist.api.ext.list.returnTypes
+import com.lemonappdev.konsist.api.ext.list.sourceDeclarations
 import com.lemonappdev.konsist.api.ext.list.types
 import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
@@ -42,9 +43,7 @@ class GeneralSnippets {
             .classes()
             .withModifier(KoModifier.DATA)
             .properties()
-            .assertTrue {
-                it.isConstructorDefined
-            }
+            .assertTrue { it.isConstructorDefined }
     }
 
     fun `every class has test`() {
@@ -100,20 +99,15 @@ class GeneralSnippets {
             .scopeFromProject()
             .classes()
             .constructors
-            .assertTrue {
-                it.parameters.isSortedByName()
-            }
+            .assertTrue { it.parameters.isSortedByName() }
     }
 
-    @Test
     fun `enums has alphabetically ordered consts`() {
         Konsist
             .scopeFromProduction()
             .classes()
             .withAllModifiers(KoModifier.ENUM)
-            .assertTrue {
-                it.enumConstants.isSortedByName()
-            }
+            .assertTrue { it.enumConstants.isSortedByName() }
     }
 
     fun `companion object is last declaration in the class`() {
@@ -202,9 +196,7 @@ class GeneralSnippets {
             .functions()
             .parameters
             .types
-            .assertTrue {
-                it.isInterface
-            }
+            .assertTrue { it.sourceDeclaration?.isInterface }
     }
 
     fun `all parent interfaces are public`() {
@@ -212,6 +204,7 @@ class GeneralSnippets {
             .scopeFromProject()
             .classes()
             .parentInterfaces()
+            .sourceDeclarations()
             .interfaceDeclarations()
             .assertTrue { it.hasPublicModifier }
     }
