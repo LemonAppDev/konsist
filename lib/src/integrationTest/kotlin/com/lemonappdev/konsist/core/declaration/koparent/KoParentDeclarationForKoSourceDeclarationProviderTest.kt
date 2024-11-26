@@ -302,6 +302,20 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     null,
                     null,
                 ),
+                arguments(
+                    "class-with-parent-interface-with-the-same-name",
+                    KoInterfaceDeclaration::class,
+                    KoClassDeclaration::class,
+                    null,
+                    "com.samplepackage.SampleInterface.SampleName",
+                ),
+                arguments(
+                    "class-with-parent-class-with-the-same-name",
+                    KoClassDeclaration::class,
+                    KoInterfaceDeclaration::class,
+                    null,
+                    "com.samplepackage.SampleInterface.SampleName",
+                ),
             )
 
         @Suppress("unused", "detekt.LongMethod")
@@ -363,6 +377,13 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     KoTypeAliasDeclaration::class,
                     null,
                     null,
+                ),
+                arguments(
+                    "interface-with-parent-interface-with-the-same-name",
+                    KoInterfaceDeclaration::class,
+                    KoClassDeclaration::class,
+                    null,
+                    "com.samplepackage.SampleInterface.SampleName",
                 ),
             )
 
@@ -509,6 +530,20 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     KoTypeAliasDeclaration::class,
                     null,
                     null,
+                ),
+                arguments(
+                    "object-with-parent-interface-with-the-same-name",
+                    KoInterfaceDeclaration::class,
+                    KoClassDeclaration::class,
+                    null,
+                    "com.samplepackage.SampleInterface.SampleName",
+                ),
+                arguments(
+                    "object-with-parent-class-with-the-same-name",
+                    KoClassDeclaration::class,
+                    KoInterfaceDeclaration::class,
+                    null,
+                    "com.samplepackage.SampleInterface.SampleName",
                 ),
             )
     }

@@ -1,0 +1,7 @@
+package com.samplepackage
+
+data class SampleName(val data: String) : SampleInterface.SampleName
+
+interface SampleInterface {
+    interface SampleName
+}
