@@ -99,13 +99,13 @@ class AssertEmptyOnDeclarationListTest {
         } catch (e: Exception) {
             val filepath =
                 "file://$rootPath/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kodeclarationassert/" +
-                        "assertempty/snippet/declaration-assert-empty-error-on-list-containing-non-null-values.kt"
+                    "assertempty/snippet/declaration-assert-empty-error-on-list-containing-non-null-values.kt"
 
             e.message?.shouldContain(
                 "Assert 'declaration-assert-empty-error-on-list-containing-non-null-values' failed. " +
                     "Declaration list is not empty. It contains values:\n" +
-                        "├── Class SampleClass1 $filepath:1:1\n" +
-                        "└── Class SampleClass2 $filepath:3:1"
+                    "├── Class SampleClass1 $filepath:1:1\n" +
+                    "└── Class SampleClass2 $filepath:3:1",
             )
                 ?: throw e
         }
@@ -125,12 +125,12 @@ class AssertEmptyOnDeclarationListTest {
         } catch (e: Exception) {
             val filepath =
                 "file://$rootPath/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kodeclarationassert/" +
-                        "assertempty/snippet/declaration-assert-empty-error-on-list-containing-null-and-non-null-values.kt:1:24"
+                    "assertempty/snippet/declaration-assert-empty-error-on-list-containing-null-and-non-null-values.kt:1:24"
 
             e.message?.shouldContain(
                 "Assert 'declaration-assert-empty-error-on-list-containing-null-and-non-null-values' failed. " +
                     "Declaration list is not empty. It contains 1 null value and values:\n" +
-                        "└── Type Int $filepath",
+                    "└── Type Int $filepath",
             )
                 ?: throw e
         }
@@ -150,12 +150,12 @@ class AssertEmptyOnDeclarationListTest {
         } catch (e: Exception) {
             val filepath =
                 "file://$rootPath/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kodeclarationassert/" +
-                        "assertempty/snippet/declaration-assert-empty-error-with-custom-message.kt:1:1"
+                    "assertempty/snippet/declaration-assert-empty-error-with-custom-message.kt:1:1"
 
             e.message?.shouldContain(
                 "Assert 'declaration-assert-empty-error-with-custom-message' failed.\n$message\n" +
                     "Declaration list is not empty. It contains values:\n" +
-                        "└── Class SampleClass $filepath",
+                    "└── Class SampleClass $filepath",
             )
                 ?: throw e
         }
@@ -175,12 +175,12 @@ class AssertEmptyOnDeclarationListTest {
         } catch (e: Exception) {
             val filepath =
                 "file://$rootPath/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kodeclarationassert/" +
-                        "assertempty/snippet/declaration-assert-empty-error-with-custom-message-and-strict-set-to-true.kt:1:1"
+                    "assertempty/snippet/declaration-assert-empty-error-with-custom-message-and-strict-set-to-true.kt:1:1"
 
             e.message?.shouldContain(
                 "Assert 'declaration-assert-empty-error-with-custom-message-and-strict-set-to-true' failed.\n$message\n" +
                     "Declaration list is not empty. It contains values:\n" +
-                        "└── Class SampleClass $filepath",
+                    "└── Class SampleClass $filepath",
             )
                 ?: throw e
         }

@@ -114,12 +114,12 @@ fun checkIfLocalListHasOnlyNullElements(
     if (hasOnlyNUllElements && (localList.size > 1)) {
         throw KoPreconditionFailedException(
             "Declaration list contains only null elements. Please make sure that list of declarations contain items " +
-                    "before calling the '$testMethodName' method.",
+                "before calling the '$testMethodName' method.",
         )
     } else if (hasOnlyNUllElements && (localList.size == 1)) {
         throw KoPreconditionFailedException(
             "Method '$testMethodName' was called on a null value. Please ensure that the declaration is not null before " +
-                    "calling this method.",
+                "calling this method.",
         )
     }
 }
@@ -131,7 +131,7 @@ fun checkIfLocalListIsEmpty(
     if (localList.isEmpty()) {
         throw KoPreconditionFailedException(
             "Declaration list is empty. Please make sure that list of declarations contain items " +
-                    "before calling the '$testMethodName' method.",
+                "before calling the '$testMethodName' method.",
         )
     }
 }
@@ -146,13 +146,12 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(
     localList
         .filterNot {
             it is KoAnnotationDeclaration &&
-                    (
-                            it.name == "Suppress" &&
-                                    it.hasTextContaining("\"konsist.$suppressName\"") ||
-                                    it.hasTextContaining("\"$suppressName\"")
-                            )
-        }
-        .forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it as KoBaseDeclaration, suppressName) }
+                (
+                    it.name == "Suppress" &&
+                        it.hasTextContaining("\"konsist.$suppressName\"") ||
+                        it.hasTextContaining("\"$suppressName\"")
+                )
+        }.forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it as KoBaseDeclaration, suppressName) }
 
     val withoutSuppress = mutableListOf<E>()
 
@@ -172,7 +171,7 @@ private fun checkIfDeclarationIsAnnotatedWithSuppress(
 
         is KoAnnotationProvider -> {
             checkIfSuppressed(declaration, testMethodName) ||
-                    checkIfParentIsAnnotatedWithSuppress(declaration, testMethodName)
+                checkIfParentIsAnnotatedWithSuppress(declaration, testMethodName)
         }
 
         else -> {
@@ -238,7 +237,7 @@ private fun getCheckFailedMessage(
 
     val getRootMessage =
         "Assert '$testName' was violated (${failedItems.size} $times).$customMessage" +
-                "Invalid $types:"
+            "Invalid $types:"
 
     val failedDeclarationAsciiTreeNodes = failedDeclarationsMessage.map { AsciiTreeNode(it, emptyList()) }
 
@@ -290,6 +289,7 @@ private fun getFailedNameWithDeclarationType(
     declarationType: String?,
 ) = if (name != null) "$declarationType $name" else "$declarationType"
 
+@Suppress("detekt.CyclomaticComplexMethod")
 private fun getEmptyResult(
     items: List<*>,
     additionalMessage: String?,
@@ -328,18 +328,22 @@ private fun getEmptyResult(
         val getRootMessage =
             "Assert '$testMethodName' failed.${customMessage}Declaration list is$negation empty.$values"
 
-        val failedDeclarationAsciiTreeNodes = items
-            .filterNotNull()
-            .mapNotNull { it: Any ->
-                it.createErrorOutput()?.let { string -> AsciiTreeNode(string, emptyList()) }
-            }
+        val failedDeclarationAsciiTreeNodes =
+            items
+                .filterNotNull()
+                .mapNotNull {
+                    it
+                        .createErrorOutput()
+                        ?.let { string -> AsciiTreeNode(string, emptyList()) }
+                }
 
-        val message = AsciiTreeCreator().invoke(
-            AsciiTreeNode(
-                getRootMessage,
-                failedDeclarationAsciiTreeNodes,
-            ),
-        )
+        val message =
+            AsciiTreeCreator().invoke(
+                AsciiTreeNode(
+                    getRootMessage,
+                    failedDeclarationAsciiTreeNodes,
+                ),
+            )
         throw KoAssertionFailedException(message)
     }
 }
@@ -356,7 +360,6 @@ private fun <E : Any> E?.createErrorOutput(): String? {
 
     return null
 }
-
 
 private fun getNullResult(
     item: Any?,
@@ -377,14 +380,15 @@ private fun getNullResult(
         val failedDeclarationAsciiTreeNode: AsciiTreeNode? =
             item.createErrorOutput()?.let { string -> AsciiTreeNode(string, emptyList()) }
 
-        val message = failedDeclarationAsciiTreeNode?.let {
-            AsciiTreeCreator().invoke(
-                AsciiTreeNode(
-                    getRootMessage,
-                    listOf(failedDeclarationAsciiTreeNode),
-                ),
-            )
-        } ?: getRootMessage
+        val message =
+            failedDeclarationAsciiTreeNode?.let {
+                AsciiTreeCreator().invoke(
+                    AsciiTreeNode(
+                        getRootMessage,
+                        listOf(failedDeclarationAsciiTreeNode),
+                    ),
+                )
+            } ?: getRootMessage
 
         throw KoAssertionFailedException(message)
     }
