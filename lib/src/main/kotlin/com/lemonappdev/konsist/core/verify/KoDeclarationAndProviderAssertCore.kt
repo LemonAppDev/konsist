@@ -90,17 +90,15 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
             declarationWithoutNull - checkIfAnnotatedWithSuppress(declarationWithoutNull, localSuppressName).toSet()
 
         val notSuppressedDeclarations = (this - suppressedDeclarations.toSet())
-            .map {
-                val declarationType = it?.getDeclarationType()
-                val name = (it as? KoNameProvider)?.name ?: ""
-                val location = (it as? KoLocationProvider)?.location ?: ""
-                val hyperlinkLocation = HyperlinkUtil.toHyperlink(location)
-
-                "$declarationType $name $hyperlinkLocation"
-            }
 
         if (!onSingleElement) {
-            val items = if (strict) notSuppressedDeclarations.filterNotNull() else notSuppressedDeclarations
+            val items = if (strict) {
+                notSuppressedDeclarations
+                    .filterNotNull()
+                    .createErrorOutputs()
+            } else {
+                notSuppressedDeclarations.createErrorOutputs()
+            }
 
             getEmptyResult(items, additionalMessage, isEmptyOrNull, testMethodName)
         } else {
@@ -113,6 +111,15 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
     ) {
         throw KoInternalException(e.message.orEmpty(), e)
     }
+}
+
+private fun <E : KoBaseProvider> List<E?>.createErrorOutputs() = map {
+    val declarationType = it?.getDeclarationType()
+    val name = (it as? KoNameProvider)?.name ?: ""
+    val location = (it as? KoLocationProvider)?.location ?: ""
+    val hyperlinkLocation = HyperlinkUtil.toHyperlink(location)
+
+    "$declarationType $name $hyperlinkLocation"
 }
 
 fun checkIfLocalListHasOnlyNullElements(
@@ -365,7 +372,7 @@ private fun getNullResult(
         val value = if (isNull) ": $item" else ""
         val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
 
-        val message = "Assert `$testMethodName` failed.${customMessage}Declaration with$negation null value$value."
+        val message = "Assert `$testMethodName` failed.${customMessage}Declaration has$negation null value$value."
         throw KoAssertionFailedException(message)
     }
 }

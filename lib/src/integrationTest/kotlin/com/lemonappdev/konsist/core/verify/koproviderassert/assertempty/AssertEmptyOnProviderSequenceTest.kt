@@ -8,11 +8,14 @@ import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
 import com.lemonappdev.konsist.api.verify.assertEmpty
 import com.lemonappdev.konsist.api.verify.assertNotEmpty
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
+import com.lemonappdev.konsist.core.filesystem.PathProvider
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
 
 class AssertEmptyOnProviderSequenceTest {
+    private val rootPath = PathProvider.rootProjectPath
+
     @Test
     fun `provider-assert-test-method-name-derived-from-junit-method-name`() {
         // given
@@ -106,9 +109,15 @@ class AssertEmptyOnProviderSequenceTest {
         try {
             sut.assertEmpty()
         } catch (e: Exception) {
+            val filepath =
+                "file://$rootPath/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/koproviderassert/" +
+                        "assertempty/snippet/provider-assert-empty-error-on-list-containing-non-null-values.kt:1:1"
+
             e.message?.shouldContain(
                 "Assert 'provider-assert-empty-error-on-list-containing-non-null-values' failed. " +
-                    "Declaration list is not empty. It contains values:\nSampleClass1,\nSampleClass2.",
+                    "Declaration list is not empty. It contains values:" +
+                        "└── Class SampleClass1 $filepath" +
+                        "└── Class SampleClass2 $filepath",
             )
                 ?: throw e
         }
@@ -128,9 +137,14 @@ class AssertEmptyOnProviderSequenceTest {
         try {
             sut.assertEmpty()
         } catch (e: Exception) {
+            val filepath =
+                "file://$rootPath/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/koproviderassert/" +
+                        "assertempty/snippet/rovider-assert-empty-error-on-list-containing-null-and-non-null-values.kt:1:1"
+
             e.message?.shouldContain(
                 "Assert 'provider-assert-empty-error-on-list-containing-null-and-non-null-values' failed. " +
-                    "Declaration list is not empty. It contains 1 null value and values:\nsampleFunction.",
+                    "Declaration list is not empty. It contains 1 null value and values:\n" +
+                        "└── Function sampleFunction $filepath",
             )
                 ?: throw e
         }
@@ -151,9 +165,14 @@ class AssertEmptyOnProviderSequenceTest {
         try {
             sut.assertEmpty(additionalMessage = message)
         } catch (e: Exception) {
+            val filepath =
+                "file://$rootPath/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/koproviderassert/" +
+                        "assertempty/snippet/provider-assert-empty-error-with-custom-message.kt:1:1"
+
             e.message?.shouldContain(
                 "Assert 'provider-assert-empty-error-with-custom-message' failed.\n$message\n" +
-                    "Declaration list is not empty. It contains values:\nSampleClass.",
+                    "Declaration list is not empty. It contains values:\n" +
+                        "└── Class SampleClass $filepath",
             )
                 ?: throw e
         }
@@ -174,9 +193,14 @@ class AssertEmptyOnProviderSequenceTest {
         try {
             sut.assertEmpty(strict = true, additionalMessage = message)
         } catch (e: Exception) {
+            val filepath =
+                "file://$rootPath/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/koproviderassert/" +
+                        "assertempty/snippet/provider-assert-empty-error-with-custom-message-and-strict-set-to-true.kt:1:1"
+
             e.message?.shouldContain(
                 "Assert 'provider-assert-empty-error-with-custom-message-and-strict-set-to-true' failed.\n$message\n" +
-                    "Declaration list is not empty. It contains values:\nSampleClass.",
+                    "Declaration list is not empty. It contains values:\n" +
+                        "└── Class SampleClass $filepath",
             )
                 ?: throw e
         }
