@@ -26,7 +26,7 @@
     <description>spring-maven-kotest</description>
 	<properties>
 		<java.version>19</java.version>
-		<kotlin.version>2.1.0</kotlin.version>
+		<kotlin.version>2.0.21</kotlin.version>
 	</properties>
 	<dependencies>
 		<dependency>
