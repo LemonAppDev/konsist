@@ -1,5 +1,5 @@
 [versions]
-kotlinVersion = "2.1.0"
+kotlinVersion = "2.0.21"
 
 [libraries]
 kotlinStdlibJdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlinVersion" }
