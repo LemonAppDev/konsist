@@ -22,8 +22,10 @@
       "automerge": true
     },
     {
-      "matchPackagePatterns": ["^org\\.jetbrains\\.kotlin:"],
-      "allowedVersions": "<2.1.0"
+      "matchPackagePatterns": [
+        "^org\\.jetbrains\\.kotlin"
+      ],
+      "enabled": false
     }
   ]
 }
