@@ -56,7 +56,7 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.3.1-pre.839")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.3.1-pre.838")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.3.1-pre.839")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.13.5-pre.839")
             }
         }
