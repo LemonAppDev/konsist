@@ -23,8 +23,7 @@
     },
     {
       "matchPackagePatterns": ["^org\\.jetbrains\\.kotlin:"],
-      "matchUpdateTypes": ["patch"],
-      "automerge": true
+      "allowedVersions": "<2.1.0"
     }
   ]
 }
