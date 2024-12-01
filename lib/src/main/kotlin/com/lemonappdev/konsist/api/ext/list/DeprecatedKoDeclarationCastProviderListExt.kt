@@ -1,3 +1,5 @@
+@file:Suppress("detekt.TooManyFunctions")
+
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
@@ -15,7 +17,6 @@ import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import kotlin.reflect.KClass
 
-
 /**
  * List containing class declarations associated with declarations.
  *
@@ -25,9 +26,7 @@ import kotlin.reflect.KClass
  * is provided.
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().classDeclarations()"))
-fun <T : KoTypeDeclaration> List<T>.classDeclarations(
-    predicate: ((KoClassDeclaration) -> Boolean)? = null,
-): List<KoClassDeclaration> =
+fun <T : KoTypeDeclaration> List<T>.classDeclarations(predicate: ((KoClassDeclaration) -> Boolean)? = null): List<KoClassDeclaration> =
     filter { it.hasClassDeclaration(predicate) }
         .mapNotNull { it.asClassDeclaration() }
 
@@ -40,9 +39,7 @@ fun <T : KoTypeDeclaration> List<T>.classDeclarations(
  * is provided.
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().objectDeclarations()"))
-fun <T : KoTypeDeclaration> List<T>.objectDeclarations(
-    predicate: ((KoObjectDeclaration) -> Boolean)? = null,
-): List<KoObjectDeclaration> =
+fun <T : KoTypeDeclaration> List<T>.objectDeclarations(predicate: ((KoObjectDeclaration) -> Boolean)? = null): List<KoObjectDeclaration> =
     filter { it.hasObjectDeclaration(predicate) }
         .mapNotNull { it.asObjectDeclaration() }
 
@@ -117,7 +114,7 @@ fun <T : KoTypeDeclaration> List<T>.interfaceAndObjectDeclarations(
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().classAndInterfaceAndObjectDeclarations()")
+    ReplaceWith("sourceDeclarations().classAndInterfaceAndObjectDeclarations()"),
 )
 fun <T : KoTypeDeclaration> List<T>.classAndInterfaceAndObjectDeclarations(
     predicate: ((KoClassAndInterfaceAndObjectDeclaration) -> Boolean)? = null,
@@ -497,9 +494,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutInterfaceDeclarationOf(kClasses: Coll
  * @return A list containing declarations with the specified class or object declaration.
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withClassOrObjectDeclaration()"))
-fun <T : KoTypeDeclaration> List<T>.withClassOrObjectDeclaration(
-    predicate: ((KoClassAndObjectDeclaration) -> Boolean)? = null,
-): List<T> =
+fun <T : KoTypeDeclaration> List<T>.withClassOrObjectDeclaration(predicate: ((KoClassAndObjectDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
             null -> it.isClassOrObject
@@ -562,7 +557,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassOrObjectDeclarationOf(kClasses: Col
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withoutClassOrObjectDeclarationOf()")
+    ReplaceWith("sourceDeclarations().withoutClassOrObjectDeclarationOf()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withoutClassOrObjectDeclarationOf(
     kClass: KClass<*>,
@@ -577,7 +572,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassOrObjectDeclarationOf(
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withoutClassOrObjectDeclarationOf()")
+    ReplaceWith("sourceDeclarations().withoutClassOrObjectDeclarationOf()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withoutClassOrObjectDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
@@ -612,7 +607,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassOrInterfaceDeclaration(
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withoutClassOrInterfaceDeclaration()")
+    ReplaceWith("sourceDeclarations().withoutClassOrInterfaceDeclaration()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withoutClassOrInterfaceDeclaration(
     predicate: ((KoClassAndInterfaceDeclaration) -> Boolean)? = null,
@@ -634,7 +629,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassOrInterfaceDeclaration(
 
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withClassOrInterfaceDeclarationOf()")
+    ReplaceWith("sourceDeclarations().withClassOrInterfaceDeclarationOf()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withClassOrInterfaceDeclarationOf(
     kClass: KClass<*>,
@@ -649,7 +644,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassOrInterfaceDeclarationOf(
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withClassOrInterfaceDeclarationOf()")
+    ReplaceWith("sourceDeclarations().withClassOrInterfaceDeclarationOf()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withClassOrInterfaceDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
@@ -668,7 +663,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassOrInterfaceDeclarationOf(kClasses: 
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withoutClassOrInterfaceDeclarationOf()")
+    ReplaceWith("sourceDeclarations().withoutClassOrInterfaceDeclarationOf()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withoutClassOrInterfaceDeclarationOf(
     kClass: KClass<*>,
@@ -683,7 +678,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassOrInterfaceDeclarationOf(
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withoutClassOrInterfaceDeclarationOf()")
+    ReplaceWith("sourceDeclarations().withoutClassOrInterfaceDeclarationOf()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withoutClassOrInterfaceDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
@@ -718,7 +713,7 @@ fun <T : KoTypeDeclaration> List<T>.withInterfaceOrObjectDeclaration(
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withoutInterfaceOrObjectDeclaration()")
+    ReplaceWith("sourceDeclarations().withoutInterfaceOrObjectDeclaration()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withoutInterfaceOrObjectDeclaration(
     predicate: ((KoInterfaceAndObjectDeclaration) -> Boolean)? = null,
@@ -740,7 +735,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutInterfaceOrObjectDeclaration(
 
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withInterfaceOrObjectDeclarationOf()")
+    ReplaceWith("sourceDeclarations().withInterfaceOrObjectDeclarationOf()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withInterfaceOrObjectDeclarationOf(
     kClass: KClass<*>,
@@ -755,7 +750,7 @@ fun <T : KoTypeDeclaration> List<T>.withInterfaceOrObjectDeclarationOf(
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withInterfaceOrObjectDeclarationOf()")
+    ReplaceWith("sourceDeclarations().withInterfaceOrObjectDeclarationOf()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withInterfaceOrObjectDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
@@ -774,7 +769,7 @@ fun <T : KoTypeDeclaration> List<T>.withInterfaceOrObjectDeclarationOf(kClasses:
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withoutInterfaceOrObjectDeclarationOf()")
+    ReplaceWith("sourceDeclarations().withoutInterfaceOrObjectDeclarationOf()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withoutInterfaceOrObjectDeclarationOf(
     kClass: KClass<*>,
@@ -789,7 +784,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutInterfaceOrObjectDeclarationOf(
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withoutInterfaceOrObjectDeclarationOf()")
+    ReplaceWith("sourceDeclarations().withoutInterfaceOrObjectDeclarationOf()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withoutInterfaceOrObjectDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
@@ -807,7 +802,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutInterfaceOrObjectDeclarationOf(kClass
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withClassOrInterfaceOrObjectDeclaration()")
+    ReplaceWith("sourceDeclarations().withClassOrInterfaceOrObjectDeclaration()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withClassOrInterfaceOrObjectDeclaration(
     predicate: ((KoClassAndInterfaceAndObjectDeclaration) -> Boolean)? = null,
@@ -827,7 +822,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassOrInterfaceOrObjectDeclaration(
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withoutClassOrInterfaceOrObjectDeclaration()")
+    ReplaceWith("sourceDeclarations().withoutClassOrInterfaceOrObjectDeclaration()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withoutClassOrInterfaceOrObjectDeclaration(
     predicate: ((KoClassAndInterfaceAndObjectDeclaration) -> Boolean)? = null,
@@ -849,7 +844,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassOrInterfaceOrObjectDeclaration(
 
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withClassOrInterfaceOrObjectDeclarationOf()")
+    ReplaceWith("sourceDeclarations().withClassOrInterfaceOrObjectDeclarationOf()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withClassOrInterfaceOrObjectDeclarationOf(
     kClass: KClass<*>,
@@ -864,7 +859,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassOrInterfaceOrObjectDeclarationOf(
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withClassOrInterfaceOrObjectDeclarationOf()")
+    ReplaceWith("sourceDeclarations().withClassOrInterfaceOrObjectDeclarationOf()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withClassOrInterfaceOrObjectDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
@@ -883,7 +878,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassOrInterfaceOrObjectDeclarationOf(kC
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withoutClassOrInterfaceOrObjectDeclarationOf()")
+    ReplaceWith("sourceDeclarations().withoutClassOrInterfaceOrObjectDeclarationOf()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withoutClassOrInterfaceOrObjectDeclarationOf(
     kClass: KClass<*>,
@@ -898,7 +893,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassOrInterfaceOrObjectDeclarationOf
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withoutClassOrInterfaceOrObjectDeclarationOf()")
+    ReplaceWith("sourceDeclarations().withoutClassOrInterfaceOrObjectDeclarationOf()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withoutClassOrInterfaceOrObjectDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
@@ -947,9 +942,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutTypeAliasDeclaration(predicate: ((KoT
  * @return A list containing declarations with the specified import alias declaration.
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withImportAliasDeclaration()"))
-fun <T : KoTypeDeclaration> List<T>.withImportAliasDeclaration(
-    predicate: ((KoImportAliasDeclaration) -> Boolean)? = null,
-): List<T> =
+fun <T : KoTypeDeclaration> List<T>.withImportAliasDeclaration(predicate: ((KoImportAliasDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
             null -> it.isImportAlias
@@ -967,9 +960,7 @@ fun <T : KoTypeDeclaration> List<T>.withImportAliasDeclaration(
  * @return A list containing declarations without the specified import alias declaration.
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutImportAliasDeclaration()"))
-fun <T : KoTypeDeclaration> List<T>.withoutImportAliasDeclaration(
-    predicate: ((KoImportAliasDeclaration) -> Boolean)? = null,
-): List<T> =
+fun <T : KoTypeDeclaration> List<T>.withoutImportAliasDeclaration(predicate: ((KoImportAliasDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
         when (predicate) {
             null -> it.isImportAlias
@@ -1003,9 +994,7 @@ fun <T : KoTypeDeclaration> List<T>.withKotlinTypeDeclaration(predicate: ((KoKot
  * @return A list containing declarations without the specified kotlin type declaration.
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutKotlinTypeDeclaration()"))
-fun <T : KoTypeDeclaration> List<T>.withoutKotlinTypeDeclaration(
-    predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null,
-): List<T> =
+fun <T : KoTypeDeclaration> List<T>.withoutKotlinTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
         when (predicate) {
             null -> it.isKotlinType
@@ -1077,9 +1066,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutKotlinTypeDeclarationOf(kClasses: Col
  * @return A list containing declarations with the specified kotlin basic type declaration.
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withKotlinBasicTypeDeclaration()"))
-fun <T : KoTypeDeclaration> List<T>.withKotlinBasicTypeDeclaration(
-    predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null,
-): List<T> =
+fun <T : KoTypeDeclaration> List<T>.withKotlinBasicTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
             null -> it.isKotlinBasicType
@@ -1098,11 +1085,9 @@ fun <T : KoTypeDeclaration> List<T>.withKotlinBasicTypeDeclaration(
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withoutKotlinBasicTypeDeclaration()")
+    ReplaceWith("sourceDeclarations().withoutKotlinBasicTypeDeclaration()"),
 )
-fun <T : KoTypeDeclaration> List<T>.withoutKotlinBasicTypeDeclaration(
-    predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null,
-): List<T> =
+fun <T : KoTypeDeclaration> List<T>.withoutKotlinBasicTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
         when (predicate) {
             null -> it.isKotlinBasicType
@@ -1150,7 +1135,7 @@ fun <T : KoTypeDeclaration> List<T>.withKotlinBasicTypeDeclarationOf(kClasses: C
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withoutKotlinBasicTypeDeclarationOf()")
+    ReplaceWith("sourceDeclarations().withoutKotlinBasicTypeDeclarationOf()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withoutKotlinBasicTypeDeclarationOf(
     kClass: KClass<*>,
@@ -1165,7 +1150,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutKotlinBasicTypeDeclarationOf(
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withoutKotlinBasicTypeDeclarationOf()")
+    ReplaceWith("sourceDeclarations().withoutKotlinBasicTypeDeclarationOf()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withoutKotlinBasicTypeDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
@@ -1183,7 +1168,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutKotlinBasicTypeDeclarationOf(kClasses
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withKotlinCollectionTypeDeclaration()")
+    ReplaceWith("sourceDeclarations().withKotlinCollectionTypeDeclaration()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withKotlinCollectionTypeDeclaration(
     predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null,
@@ -1206,7 +1191,7 @@ fun <T : KoTypeDeclaration> List<T>.withKotlinCollectionTypeDeclaration(
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withoutKotlinCollectionTypeDeclaration()")
+    ReplaceWith("sourceDeclarations().withoutKotlinCollectionTypeDeclaration()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withoutKotlinCollectionTypeDeclaration(
     predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null,
@@ -1230,7 +1215,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutKotlinCollectionTypeDeclaration(
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withKotlinCollectionTypeDeclarationOf()")
+    ReplaceWith("sourceDeclarations().withKotlinCollectionTypeDeclarationOf()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withKotlinCollectionTypeDeclarationOf(
     kClass: KClass<*>,
@@ -1245,7 +1230,7 @@ fun <T : KoTypeDeclaration> List<T>.withKotlinCollectionTypeDeclarationOf(
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withKotlinCollectionTypeDeclarationOf()")
+    ReplaceWith("sourceDeclarations().withKotlinCollectionTypeDeclarationOf()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withKotlinCollectionTypeDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
@@ -1264,7 +1249,7 @@ fun <T : KoTypeDeclaration> List<T>.withKotlinCollectionTypeDeclarationOf(kClass
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withoutKotlinCollectionTypeDeclarationOf()")
+    ReplaceWith("sourceDeclarations().withoutKotlinCollectionTypeDeclarationOf()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withoutKotlinCollectionTypeDeclarationOf(
     kClass: KClass<*>,
@@ -1279,7 +1264,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutKotlinCollectionTypeDeclarationOf(
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
-    ReplaceWith("sourceDeclarations().withoutKotlinCollectionTypeDeclarationOf()")
+    ReplaceWith("sourceDeclarations().withoutKotlinCollectionTypeDeclarationOf()"),
 )
 fun <T : KoTypeDeclaration> List<T>.withoutKotlinCollectionTypeDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
@@ -1296,9 +1281,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutKotlinCollectionTypeDeclarationOf(kCl
  * @return A list containing declarations with the specified type parameter declaration.
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withTypeParameterDeclaration()"))
-fun <T : KoTypeDeclaration> List<T>.withTypeParameterDeclaration(
-    predicate: ((KoTypeParameterDeclaration) -> Boolean)? = null,
-): List<T> =
+fun <T : KoTypeDeclaration> List<T>.withTypeParameterDeclaration(predicate: ((KoTypeParameterDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
             null -> it.isTypeParameter
