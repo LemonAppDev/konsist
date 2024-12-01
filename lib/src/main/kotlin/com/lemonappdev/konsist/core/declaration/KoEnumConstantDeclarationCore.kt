@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoEnumConstantDeclaration
+import com.lemonappdev.konsist.api.declaration.KoVariableDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoArgumentProviderCore
@@ -89,6 +90,43 @@ internal class KoEnumConstantDeclarationCore private constructor(
     }
 
     override fun toString(): String = name
+
+    @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("properties()"))
+    override val variables: List<KoVariableDeclaration> by lazy { super<KoVariableProviderCore>.variables }
+
+    @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("numProperties()"))
+    override val numVariables: Int by lazy { super<KoVariableProviderCore>.numVariables }
+
+    @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("countProperties()"))
+    override fun countVariables(predicate: (KoVariableDeclaration) -> Boolean): Int =
+        super<KoVariableProviderCore>.countVariables(predicate)
+
+    @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("hasProperties()"))
+    override fun hasVariables(): Boolean = super<KoVariableProviderCore>.hasVariables()
+
+    @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("hasPropertyWithName()"))
+    override fun hasVariableWithName(name: String, vararg names: String): Boolean =
+        super<KoVariableProviderCore>.hasVariableWithName(name, *names)
+
+    @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("hasPropertyWithName()"))
+    override fun hasVariableWithName(names: Collection<String>): Boolean =
+        super<KoVariableProviderCore>.hasVariableWithName(names)
+
+    @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("hasPropertiesWithAllNames()"))
+    override fun hasVariablesWithAllNames(name: String, vararg names: String): Boolean =
+        super<KoVariableProviderCore>.hasVariablesWithAllNames(name, *names)
+
+    @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("hasPropertiesWithAllNames()"))
+    override fun hasVariablesWithAllNames(names: Collection<String>): Boolean =
+        super<KoVariableProviderCore>.hasVariablesWithAllNames(names)
+
+    @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("hasProperty()"))
+    override fun hasVariable(predicate: (KoVariableDeclaration) -> Boolean): Boolean =
+        super<KoVariableProviderCore>.hasVariable(predicate)
+
+    @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("hasAllProperties()"))
+    override fun hasAllVariables(predicate: (KoVariableDeclaration) -> Boolean): Boolean =
+        super<KoVariableProviderCore>.hasAllVariables(predicate)
 
     internal companion object {
         private val cache: KoDeclarationCache<KoEnumConstantDeclaration> = KoDeclarationCache()

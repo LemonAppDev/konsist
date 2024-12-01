@@ -20,6 +20,7 @@ import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoVariableProvider
+import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 
 /**
  * Represents a Kotlin enum constant declaration.
@@ -36,6 +37,7 @@ interface KoEnumConstantDeclaration :
     KoLocalClassProvider,
     KoLocalDeclarationProvider,
     KoLocalFunctionProvider,
+    @RemoveInVersion("0.20.0")
     KoVariableProvider,
     KoLocationProvider,
     KoNameProvider,
@@ -45,4 +47,40 @@ interface KoEnumConstantDeclaration :
     KoModuleProvider,
     KoSourceSetProvider,
     KoResideInPackageProvider,
-    KoTextProvider
+    KoTextProvider {
+    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("properties()"))
+    override val variables: List<KoVariableDeclaration>
+
+    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("numProperties()"))
+    override val numVariables: Int
+
+    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("countProperties()"))
+    override fun countVariables(predicate: (KoVariableDeclaration) -> Boolean): Int
+
+    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasProperties()"))
+    override fun hasVariables(): Boolean
+
+    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasPropertyWithName()"))
+    override fun hasVariableWithName(
+        name: String,
+        vararg names: String,
+    ): Boolean
+
+    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasPropertyWithName()"))
+    override fun hasVariableWithName(names: Collection<String>): Boolean
+
+    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasPropertiesWithAllNames()"))
+    override fun hasVariablesWithAllNames(
+        name: String,
+        vararg names: String,
+    ): Boolean
+
+    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasPropertiesWithAllNames()"))
+    override fun hasVariablesWithAllNames(names: Collection<String>): Boolean
+
+    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasProperty()"))
+    override fun hasVariable(predicate: (KoVariableDeclaration) -> Boolean): Boolean
+
+    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasAllProperties()"))
+    override fun hasAllVariables(predicate: (KoVariableDeclaration) -> Boolean): Boolean
+}
