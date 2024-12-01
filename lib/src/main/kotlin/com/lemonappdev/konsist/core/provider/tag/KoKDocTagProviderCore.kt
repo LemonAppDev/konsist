@@ -17,29 +17,33 @@ internal interface KoKDocTagProviderCore :
     val kDocTags: List<KDocTag>
 
     override val tags: List<KoKDocTagDeclaration>
-        get() = kDocTags.map { tag ->
-            val name = KoKDocTag
-                .values()
-                .firstOrNull { value -> value.type.removePrefix("@") == tag.name }
+        get() =
+            kDocTags
+                .map { tag ->
+                    val name =
+                        KoKDocTag
+                            .values()
+                            .firstOrNull { value -> value.type.removePrefix("@") == tag.name }
 
-            if (name == null) {
-                return@map null
-            }
+                    if (name == null) {
+                        return@map null
+                    }
 
-            val value = tag
-                .children
-                .filterIsInstance<KDocLink>()
-                .firstOrNull()
-                ?.text
+                    val value =
+                        tag
+                            .children
+                            .filterIsInstance<KDocLink>()
+                            .firstOrNull()
+                            ?.text
 
-            val description = tag.getContent()
+                    val description = tag.getContent()
 
-            if (value != null) {
-                KoValuedKDocTagDeclarationCore(name, value, description)
-            } else {
-                KoKDocTagDeclarationCore(name, description)
-            }
-        }.filterNotNull()
+                    if (value != null) {
+                        KoValuedKDocTagDeclarationCore(name, value, description)
+                    } else {
+                        KoKDocTagDeclarationCore(name, description)
+                    }
+                }.filterNotNull()
 
     override val numTags: Int
         get() = tags.size
