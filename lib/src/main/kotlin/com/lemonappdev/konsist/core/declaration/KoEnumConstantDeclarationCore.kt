@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoEnumConstantDeclaration
 import com.lemonappdev.konsist.api.declaration.KoVariableDeclaration
+import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoArgumentProviderCore
@@ -20,11 +21,13 @@ import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoVariableProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import com.lemonappdev.konsist.core.provider.util.KoLocalDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
@@ -47,7 +50,9 @@ internal class KoEnumConstantDeclarationCore private constructor(
     KoLocalClassProviderCore,
     KoLocalDeclarationProviderCore,
     KoLocalFunctionProviderCore,
+    @RemoveInVersion("0.20.0")
     KoVariableProviderCore,
+    KoPropertyProviderCore,
     KoLocationProviderCore,
     KoNameProviderCore,
     KoContainingDeclarationProviderCore,
@@ -74,6 +79,11 @@ internal class KoEnumConstantDeclarationCore private constructor(
 
         KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
     }
+
+    override fun declarations(
+        includeNested: Boolean,
+        includeLocal: Boolean
+    ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil.getKoDeclarations(ktEnumEntry, includeNested, includeLocal, this)
 
     override val arguments: List<KoArgumentDeclaration> by lazy {
         ktEnumEntry
