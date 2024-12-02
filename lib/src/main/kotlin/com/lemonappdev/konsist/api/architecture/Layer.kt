@@ -49,7 +49,7 @@ data class Layer(
         if (rootPackage == "..") {
             throw IllegalArgumentException(
                 "Invalid rootPackage definition for layer '$name'. " +
-                        "Package name cannot be empty. Current definition: $rootPackage",
+                    "Package name cannot be empty. Current definition: $rootPackage",
             )
         }
 
@@ -67,22 +67,23 @@ data class Layer(
         if (packageWithoutEndingDots.isEmpty()) {
             throw IllegalArgumentException(
                 "Invalid package definition for layer '$name'. " +
-                        "Package name cannot be empty. Current definition: $rootPackage",
+                    "Package name cannot be empty. Current definition: $rootPackage",
             )
         }
 
         // Special handling for packages starting with '..'
-        val effectivePackage = if (packageWithoutEndingDots.startsWith("..")) {
-            packageWithoutEndingDots.substring(2)
-        } else {
-            packageWithoutEndingDots
-        }
+        val effectivePackage =
+            if (packageWithoutEndingDots.startsWith("..")) {
+                packageWithoutEndingDots.substring(2)
+            } else {
+                packageWithoutEndingDots
+            }
 
         // Check for starting dot (but not ..)
         if (effectivePackage.startsWith(".") && !packageWithoutEndingDots.startsWith("..")) {
             throw IllegalArgumentException(
                 "Invalid package definition for layer '$name'. " +
-                        "Package cannot start with a dot. Current definition: $rootPackage",
+                    "Package cannot start with a dot. Current definition: $rootPackage",
             )
         }
 
@@ -90,23 +91,24 @@ data class Layer(
         if (effectivePackage.contains("..")) {
             throw IllegalArgumentException(
                 "Invalid package definition for layer '$name'. " +
-                        "Package can only end with '..'. Current definition: $rootPackage",
+                    "Package can only end with '..'. Current definition: $rootPackage",
             )
         }
 
         // Split and validate segments
-        val segments = effectivePackage
-            .split(".")
-            .filter { it.isNotEmpty() }
+        val segments =
+            effectivePackage
+                .split(".")
+                .filter { it.isNotEmpty() }
 
         // Validate each segment
         segments.forEachIndexed { index, segment ->
             if (!segment.matches(REGEX_VALID_PACKAGE_SEGMENT)) {
                 throw IllegalArgumentException(
                     "Invalid package definition for layer '$name'. " +
-                            "Invalid package segment '$segment' at position ${index + 1}. " +
-                            "Package segments must start with a lowercase letter and contain only " +
-                            "lowercase letters, numbers, or underscores. Current definition: $rootPackage",
+                        "Invalid package segment '$segment' at position ${index + 1}. " +
+                        "Package segments must start with a lowercase letter and contain only " +
+                        "lowercase letters, numbers, or underscores. Current definition: $rootPackage",
                 )
             }
         }
@@ -115,14 +117,14 @@ data class Layer(
     private fun endsWithExactlyTwoDots(): Boolean {
         val lastIndex = rootPackage.length - 1
         return lastIndex >= 1 &&
-                rootPackage[lastIndex] == '.' &&
-                rootPackage[lastIndex - 1] == '.' &&
-                (lastIndex < 2 || rootPackage[lastIndex - 2] != '.')
+            rootPackage[lastIndex] == '.' &&
+            rootPackage[lastIndex - 1] == '.' &&
+            (lastIndex < 2 || rootPackage[lastIndex - 2] != '.')
     }
 
     private fun buildPackageErrorMessage(): String =
         "Invalid package definition for layer '$name'. To include subpackages, " +
-                "the definition must end with '..'. Current definition: $rootPackage"
+            "the definition must end with '..'. Current definition: $rootPackage"
 
     private companion object {
         private val REGEX_VALID_PACKAGE_SEGMENT = Regex("^[a-z][a-z0-9_]*$")
