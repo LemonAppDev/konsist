@@ -105,14 +105,13 @@ internal class KoParentDeclarationCore(
                     if (import.alias != null) {
                         import.alias?.name == innerName
                     } else {
-                        import.name.substringAfterLast(".") == innerName
+                        import.name.substringAfterLast(".") == outerName
                     }
                 }
 
         val fullyQualifiedName =
-            import
-                ?.name
-                ?: (containingFile.packagee?.name + "." + name)
+            import?.name
+                ?: "${containingFile.packagee?.name?.let { "$it." } ?: ""}$name"
 
         val isAlias = import?.alias != null
 

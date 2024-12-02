@@ -50,7 +50,6 @@ class OptionalParametersTest {
             .message
             .shouldBeEqualTo(
                 "'error message when additionalMessage and testName parameters are not provided (scope)' test has failed. \n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
@@ -79,7 +78,6 @@ class OptionalParametersTest {
             .shouldBeEqualTo(
                 "'error message when additionalMessage is provided and testName is not provided (scope)' test has failed. \n" +
                     "SOME ADDITIONAL MESSAGE\n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
@@ -107,7 +105,6 @@ class OptionalParametersTest {
             .message
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
@@ -139,7 +136,6 @@ class OptionalParametersTest {
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
                     "SOME ADDITIONAL MESSAGE\n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
@@ -169,7 +165,6 @@ class OptionalParametersTest {
             .message
             .shouldBeEqualTo(
                 "'error message when additionalMessage and testName parameters are not provided (files)' test has failed. \n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
@@ -200,7 +195,6 @@ class OptionalParametersTest {
             .shouldBeEqualTo(
                 "'error message when additionalMessage is provided and testName is not provided (files)' test has failed. \n" +
                     "SOME ADDITIONAL MESSAGE\n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
@@ -230,7 +224,6 @@ class OptionalParametersTest {
             .message
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
@@ -264,7 +257,6 @@ class OptionalParametersTest {
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
                     "SOME ADDITIONAL MESSAGE\n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
@@ -297,7 +289,6 @@ class OptionalParametersTest {
             .shouldBeEqualTo(
                 "'error message when additionalMessage and testName parameters are not provided and architecture is passed " +
                     "as parameter (scope)' test has failed. \n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
@@ -334,7 +325,6 @@ class OptionalParametersTest {
                 "'error message when additionalMessage is provided, testName is not provided and architecture is passed as " +
                     "parameter (scope)' test has failed. \n" +
                     "SOME ADDITIONAL MESSAGE\n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
@@ -366,7 +356,6 @@ class OptionalParametersTest {
             .message
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
@@ -403,7 +392,6 @@ class OptionalParametersTest {
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
                     "SOME ADDITIONAL MESSAGE\n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
@@ -438,7 +426,6 @@ class OptionalParametersTest {
             .shouldBeEqualTo(
                 "'error message when additionalMessage and testName parameters are not provided and architecture is passed " +
                     "as parameter (files)' test has failed. \n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
@@ -477,7 +464,6 @@ class OptionalParametersTest {
                 "'error message when additionalMessage is provided, testName is not provided and architecture is passed " +
                     "as parameter (files)' test has failed. \n" +
                     "SOME ADDITIONAL MESSAGE\n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
@@ -511,7 +497,6 @@ class OptionalParametersTest {
             .message
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
@@ -550,7 +535,6 @@ class OptionalParametersTest {
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
                     "SOME ADDITIONAL MESSAGE\n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +

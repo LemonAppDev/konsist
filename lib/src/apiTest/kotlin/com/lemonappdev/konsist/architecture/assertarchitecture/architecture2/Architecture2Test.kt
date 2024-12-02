@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import io.kotest.assertions.throwables.shouldThrow
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldNotThrow
 import org.junit.jupiter.api.Test
 
 class Architecture2Test {
@@ -84,50 +85,36 @@ class Architecture2Test {
 
     // fails when dependency is set that domain layer depend on presentation domain layer
     @Test
-    fun `fails when dependency is set that domain layer depend on presentation domain layer (lambda scope)`() {
+    fun `passes when dependency is set that domain layer depend on presentation domain layer (lambda scope)`() {
         // when
-        val result =
-            shouldThrow<KoAssertionFailedException> {
-                scope
-                    .assertArchitecture {
-                        domain.dependsOn(presentation)
-                    }
-            }
+        val func = {
+            scope
+                .assertArchitecture {
+                    domain.dependsOn(presentation)
+                }
+        }
 
         // then
-        result
-            .message
-            .shouldBeEqualTo(
-                "'fails when dependency is set that domain layer depend on presentation domain layer (lambda scope)' " +
-                    "test has failed. \n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.",
-            )
+        func shouldNotThrow KoAssertionFailedException::class
     }
 
     @Test
-    fun `fails when dependency is set that domain layer depend on presentation domain layer (lambda files)`() {
+    fun `passes when dependency is set that domain layer depend on presentation domain layer (lambda files)`() {
         // when
-        val result =
-            shouldThrow<KoAssertionFailedException> {
-                scope
-                    .files
-                    .assertArchitecture {
-                        domain.dependsOn(presentation)
-                    }
-            }
+        val func = {
+            scope
+                .files
+                .assertArchitecture {
+                    domain.dependsOn(presentation)
+                }
+        }
 
         // then
-        result
-            .message
-            .shouldBeEqualTo(
-                "'fails when dependency is set that domain layer depend on presentation domain layer (lambda files)' " +
-                    "test has failed. \n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.",
-            )
+        func shouldNotThrow KoAssertionFailedException::class
     }
 
     @Test
-    fun `fails when dependency is set to domain layer depends on presentation layer (parameter scope)`() {
+    fun `passes when dependency is set to domain layer depends on presentation layer (parameter scope)`() {
         // given
         val layerDependencies =
             architecture {
@@ -135,23 +122,16 @@ class Architecture2Test {
             }
 
         // when
-        val result =
-            shouldThrow<KoAssertionFailedException> {
-                scope.assertArchitecture(layerDependencies)
-            }
+        val func = {
+            scope.assertArchitecture(layerDependencies)
+        }
 
         // then
-        result
-            .message
-            .shouldBeEqualTo(
-                "'fails when dependency is set to domain layer depends on presentation layer (parameter scope)' " +
-                    "test has failed. \n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.",
-            )
+        func shouldNotThrow KoAssertionFailedException::class
     }
 
     @Test
-    fun `fails when dependency is set to domain layer depends on presentation layer (parameter files)`() {
+    fun `passes when dependency is set to domain layer depends on presentation layer (parameter files)`() {
         // given
         val layerDependencies =
             architecture {
@@ -159,20 +139,14 @@ class Architecture2Test {
             }
 
         // when
-        val result =
-            shouldThrow<KoAssertionFailedException> {
-                scope
-                    .files
-                    .assertArchitecture(layerDependencies)
-            }
+        val func = {
+            scope
+                .files
+                .assertArchitecture(layerDependencies)
+        }
 
         // then
-        result
-            .message
-            .shouldBeEqualTo(
-                "'fails when dependency is set to domain layer depends on presentation layer (parameter files)' test has failed. \n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.",
-            )
+        func shouldNotThrow KoAssertionFailedException::class
     }
 
     // endregion
@@ -247,7 +221,6 @@ class Architecture2Test {
             .message
             .shouldBeEqualTo(
                 "'fails when dependency is set that domain layer is depend on presentation layer (parameter scope)' test has failed. \n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2." +
@@ -278,7 +251,6 @@ class Architecture2Test {
             .shouldBeEqualTo(
                 "'fails when dependency is set that domain layer is depend on presentation layer (parameter files)' " +
                     "test has failed. \n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2." +
@@ -312,7 +284,6 @@ class Architecture2Test {
             .shouldBeEqualTo(
                 "'fails when dependency is set that domain layer is depend on presentation layer (lambda scope)' " +
                     "test has failed. \n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2." +
@@ -348,7 +319,6 @@ class Architecture2Test {
             .shouldBeEqualTo(
                 "'fails when dependency is set that domain layer is depend on presentation layer (lambda files)' " +
                     "test has failed. \n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project." +

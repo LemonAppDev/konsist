@@ -14,30 +14,22 @@ internal class LayerDependenciesCore(
     internal val layerDependencies = mutableSetOf<LayerDependency>()
     internal var layers = mutableSetOf<Layer>()
 
-    internal val dependsOnDependencies: Map<Layer, Set<Layer>>
+    // ToDO: Create type
+    internal val dependsOnDependencies: Set<LayerDependency>
         get() =
             layerDependencies
                 .filter { it.dependencyType == LayerDependencyType.DEPENDS_ON_LAYER }
-                .groupBy { it.layer1 }
-                .mapValues { (_, dependencies) ->
-                    dependencies.mapNotNull { it.layer2 }.toSet()
-                }
+                .toSet()
 
-    internal val doesNotDependsOnDependencies: Map<Layer, Set<Layer>>
+    internal val doesNotDependsOnDependencies: List<LayerDependency>
         get() =
             layerDependencies
                 .filter { it.dependencyType == LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER }
-                .groupBy { it.layer1 }
-                .mapValues { (_, dependencies) ->
-                    dependencies.mapNotNull { it.layer2 }.toSet()
-                }
 
-    internal val dependsOnNothingDependencies: Set<Layer>
+    internal val dependsOnNothingDependencies: List<LayerDependency>
         get() =
             layerDependencies
                 .filter { it.dependencyType == LayerDependencyType.DEPEND_ON_NOTHING }
-                .map { it.layer1 }
-                .toSet()
 
     fun checkEmptyLayersDependencies() {
         if (layers.isEmpty()) {
@@ -64,12 +56,17 @@ internal class LayerDependenciesCore(
     override fun Layer.dependsOn(
         layer: Layer,
         vararg layers: Layer,
+        strict: Boolean,
     ) {
-        dependsOn(setOf(layer) + layers.toSet())
+        dependsOn(setOf(layer) + layers.toSet(), strict)
     }
 
-    override fun Layer.dependsOn(layers: Set<Layer>) {
+    override fun Layer.dependsOn(
+        layers: Set<Layer>,
+        strict: Boolean,
+    ) {
         require(layers.isNotEmpty()) { "Layers set is empty." }
+
         requireLayerCannotBeDependentOnItself(this, layers) { "Layer '$name' cannot be dependent on itself." }
 
         val dependOnNothingDependency = getLayerWithDependOnNothingDependency(this)
@@ -87,18 +84,24 @@ internal class LayerDependenciesCore(
         }
 
         layers.forEach {
-            addLayerDependency(this, LayerDependencyType.DEPENDS_ON_LAYER, it)
+            addLayerDependency(this, LayerDependencyType.DEPENDS_ON_LAYER, it, strict)
         }
 
         layerValidatorManager.validateLayerDependencies(layerDependencies)
     }
 
-    override fun Collection<Layer>.dependsOn(layer: Layer) {
-        forEach { it.dependsOn(layer) }
+    override fun Collection<Layer>.dependsOn(
+        vararg layers: Layer,
+        strict: Boolean,
+    ) {
+        forEach { it.dependsOn(layers.toSet(), strict) }
     }
 
-    override fun Collection<Layer>.dependsOn(layers: Set<Layer>) {
-        forEach { it.dependsOn(layers) }
+    override fun Collection<Layer>.dependsOn(
+        layers: Set<Layer>,
+        strict: Boolean,
+    ) {
+        forEach { it.dependsOn(layers, strict) }
     }
 
     private fun getLayersMessage(layers: Set<Layer>) =
@@ -133,7 +136,7 @@ internal class LayerDependenciesCore(
         }
 
         layers.forEach {
-            addLayerDependency(this, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, it)
+            addLayerDependency(this, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, it, false)
         }
 
         layerValidatorManager.validateLayerDependencies(layerDependencies)
@@ -161,7 +164,7 @@ internal class LayerDependenciesCore(
             )
         }
 
-        addLayerDependency(this, LayerDependencyType.DEPEND_ON_NOTHING, null)
+        addLayerDependency(this, LayerDependencyType.DEPEND_ON_NOTHING, null, false)
         layers.add(this)
 
         layerValidatorManager.validateLayerDependencies(layerDependencies)
@@ -173,7 +176,7 @@ internal class LayerDependenciesCore(
 
     override fun Layer.include() {
         layers.add(this)
-        layerDependencies.add(LayerDependency(this, LayerDependencyType.NONE, null))
+        layerDependencies.add(LayerDependency(this, LayerDependencyType.NONE))
     }
 
     override fun Collection<Layer>.include() {
@@ -201,10 +204,27 @@ internal class LayerDependenciesCore(
         layer1: Layer,
         layerDependencyType: LayerDependencyType,
         layer2: Layer?,
+        strict: Boolean,
     ) {
-        val result = layerDependencies.add(LayerDependency(layer1, layerDependencyType, layer2))
+        val forbiddenStrictOverride =
+            layerDependencies.firstOrNull {
+                it.layer1 == layer1 &&
+                    it.dependencyType == layerDependencyType &&
+                    it.layer2 == layer2
+                it.strict != strict
+            }
 
-        if (result.not()) {
+        if (forbiddenStrictOverride != null) {
+            throw KoInvalidAssertArchitectureConfigurationException(
+                "Layer dependency configuration for layer '${layer1.name}' is already defined with " +
+                    "a strict=${forbiddenStrictOverride.strict} value. It cannot be overridden with strict=$strict.",
+            )
+        }
+
+        val layerDependency = LayerDependency(layer1, layerDependencyType, layer2, strict)
+        val added = layerDependencies.add(layerDependency)
+
+        if (added.not()) {
             val layerName =
                 if (layer2?.name != null) {
                     "'${layer2.name}'"
