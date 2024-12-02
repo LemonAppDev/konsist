@@ -45,7 +45,7 @@ testing {
                 implementation(project())
 
                 // Add Konsist dependency
-                implementation("com.lemonappdev:konsist:0.17.0")
+                implementation("com.lemonappdev:konsist:0.17.1")
 
                 // Add Kotest dependency
                 implementation("io.kotest:kotest-runner-junit5-jvm:5.9.1")
