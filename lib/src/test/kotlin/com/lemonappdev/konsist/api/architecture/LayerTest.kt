@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.architecture
 
+import org.amshove.kluent.shouldNotThrow
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
@@ -97,6 +98,17 @@ class LayerTest {
         // then
         func shouldThrow IllegalArgumentException::class withMessage
             "Invalid package definition for layer 'name'. Package can only end with '..'. Current definition: com..example.."
+    }
+
+    @Test
+    fun `create Layer with package starting with two dots should not throw exception`() {
+        // when
+        val func = {
+            Layer("Domain", "..domain..")
+        }
+
+        // then
+        func shouldNotThrow IllegalArgumentException::class
     }
 
     @Test
