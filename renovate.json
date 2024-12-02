@@ -22,9 +22,10 @@
       "automerge": true
     },
     {
-      "matchPackagePatterns": ["^org\\.jetbrains\\.kotlin:"],
-      "matchUpdateTypes": ["patch"],
-      "automerge": true
+      "matchPackagePatterns": [
+        "^org\\.jetbrains\\.kotlin"
+      ],
+      "enabled": false
     }
   ]
 }

@@ -7,31 +7,132 @@ package com.lemonappdev.konsist.api.architecture
  */
 interface LayerDependencies {
     /**
-     * Adds dependencies between the current layer and the specified layers.
+     * Establishes dependency relationships between layers in the architecture.
      *
-     * @receiver The [Layer] that depends on other layers.
-     * @param layer The layer that the current layer depends on.
-     * @param layers The layers that the current layer depends on.
+     * Example:
+     * ```kotlin
+     * // Required dependency - Feature layer must depend on Domain layer
+     * featureLayer.dependsOn(domainLayer, strict = true)
+     *
+     * // Optional dependency - Feature layer may depend on both Domain and Data layers
+     * featureLayer.dependsOn(domainLayer, dataLayer, strict = false)
+     * ```
+     *
+     * @receiver The source [Layer] that will have dependencies defined.
+     * @param layer The primary target layer that the source layer will depend on.
+     * @param layers Additional target layers that the source layer will depend on.
+     * @param strict Controls the dependency enforcement:
+     *              - true: MUST have dependencies - The source layer is required to have actual dependencies
+     *                     on the target layer(s) in the codebase. If dependencies are missing, it will be reported as a violation.
+     *              - false: MAY have dependencies (default) - The source layer is allowed to have dependencies
+     *                     on the target layer(s), but it's not mandatory. No violations will be reported if dependencies are missing.
      */
     fun Layer.dependsOn(
         layer: Layer,
         vararg layers: Layer,
+        strict: Boolean = false,
     ): Unit
 
     /**
-     * Adds dependencies between the current layer and the specified list of layers.
+     * Establishes dependency relationships from a source layer to multiple target layers.
      *
-     * @receiver The [Layer] that depends on other layers.
-     * @param layers The list of layers that the current layer depends on.
+     * This function allows defining dependencies from a single source layer to multiple target layers
+     * simultaneously using a Set of layers.
+     *
+     * Example:
+     * ```kotlin
+     * // Makes Feature layer depend on both Domain and Data layers
+     * featureLayer.dependsOn(setOf(domainLayer, dataLayer))
+     *
+     * // Makes Feature layer require dependencies on both Domain and Data layers
+     * featureLayer.dependsOn(setOf(domainLayer, dataLayer), strict = true)
+     * ```
+     *
+     * @receiver The source [Layer] that will have dependencies defined.
+     * @param layers Set of target layers that the source layer will depend on.
+     * @param strict Controls the dependency enforcement:
+     *              - true: MUST have dependencies - The source layer is required to have actual dependencies
+     *                     on all target layers in the codebase. If any dependencies are missing, it will be reported as a violation.
+     *              - false: MAY have dependencies (default) - The source layer is allowed to have dependencies
+     *                     on the target layers, but it's not mandatory. No violations will be reported if dependencies are missing.
      */
-    fun Layer.dependsOn(layers: Set<Layer>): Unit
+    fun Layer.dependsOn(
+        layers: Set<Layer>,
+        strict: Boolean = false,
+    ): Unit
 
     /**
-     * Specifies that the current layer does not depend on any given layer.
+     * Establishes dependency relationships from multiple source layers to target layer(s).
      *
-     * @param layer The layer that the current layer does not depend on.
-     * @param layers The layers that the current layer does not depend on.
-     * @receiver The [Layer] that does not depend on other layers.
+     * This extension function allows defining dependencies for multiple layers at once, where each layer
+     * in the collection will depend on all specified target layer(s).
+     *
+     * Example:
+     * ```kotlin
+     * // Makes both Feature and UI layers depend on Domain layer
+     * setOf(featureLayer, uiLayer).dependsOn(domainLayer)
+     *
+     * // Makes Feature and UI layers depend on both Domain and Data layers, with required dependencies
+     * setOf(featureLayer, uiLayer).dependsOn(domainLayer, dataLayer, strict = true)
+     * ```
+     *
+     * @receiver The collection of source [Layer]s that will have dependencies defined.
+     * @param layers Target layer(s) that each source layer will depend on.
+     * @param strict Controls the dependency enforcement:
+     *              - true: MUST have dependencies - Each source layer is required to have actual dependencies
+     *                     on the target layer(s) in the codebase. If dependencies are missing, it will be reported as a violation.
+     *              - false: MAY have dependencies (default) - The source layers are allowed to have dependencies
+     *                     on the target layer(s), but it's not mandatory. No violations will be reported if dependencies are missing.
+     */
+    fun Collection<Layer>.dependsOn(
+        vararg layers: Layer,
+        strict: Boolean = false,
+    ): Unit
+
+    /**
+     * Establishes dependency relationships from multiple source layers to multiple target layers.
+     *
+     * This function creates dependency rules where each layer in the source collection will depend on
+     * all layers in the target set. This allows for defining multiple dependencies in bulk.
+     *
+     * Example:
+     * ```kotlin
+     * // Makes both Feature and UI layers depend on both Domain and Data layers
+     * val sourceLayers = setOf(featureLayer, uiLayer)
+     * val targetLayers = setOf(domainLayer, dataLayer)
+     * sourceLayers.dependsOn(targetLayers)
+     *
+     * // With strict enforcement (required dependencies)
+     * sourceLayers.dependsOn(targetLayers, strict = true)
+     * ```
+     * @receiver The collection of source [Layer]s that will have dependencies defined.
+     * @param layers Set of target layers that each source layer will depend on.
+     * @param strict Controls the dependency enforcement:
+     *              - true: MUST have dependencies - Each source layer is required to have actual dependencies
+     *                     on all target layers in the codebase. If dependencies are missing, it will be reported as a violation.
+     *              - false: MAY have dependencies (default) - The source layers are allowed to have dependencies
+     *                     on the target layers, but it's not mandatory. No violations will be reported if dependencies are missing.
+     */
+    fun Collection<Layer>.dependsOn(
+        layers: Set<Layer>,
+        strict: Boolean = false,
+    ): Unit
+
+    /**
+     * Specifies forbidden dependencies between layers in the architecture.
+     *
+     * Example:
+     * ```kotlin
+     * // Domain layer must never depend on UI layer
+     * domainLayer.doesNotDependOn(uiLayer, strict = true)
+     *
+     * // Domain layer should not depend on UI and Feature layers
+     * domainLayer.doesNotDependOn(uiLayer, featureLayer, strict = false)
+     * ```
+     *
+     * @receiver The source [Layer] for which dependencies will be forbidden.
+     * @param layer The primary target layer that should not be depended on.
+     * @param layers Additional target layers that should not be depended on.
      */
     fun Layer.doesNotDependOn(
         layer: Layer,
@@ -39,114 +140,106 @@ interface LayerDependencies {
     ): Unit
 
     /**
-     * Adds dependencies between each layer in the collection and the specified layer.
+     * Specifies forbidden dependencies from a source layer to multiple target layers.
      *
-     * Example usage:
+     * Example:
+     * ```kotlin
+     * // Domain layer must never depend on UI or Feature layers
+     * domainLayer.doesNotDependOn(setOf(uiLayer, featureLayer))
      * ```
-     * val layers = setOf(domainLayer, dataLayer)
-     * layers.dependsOn(presentationLayer)
-     * ```
      *
-     * @receiver The collection of [Layer]s that depends on other layer.
-     * @param layer The layer that the collection of layers depends on.
-     */
-    fun Collection<Layer>.dependsOn(layer: Layer): Unit
-
-    /**
-     * Specifies that the current layer does not depend on the given list of layers.
-     *
-     * @param layers The list of layers that the current layer does not depend on.
-     * @receiver The [Layer] that does not depend on other layers.
+     * @receiver The source [Layer] for which dependencies will be forbidden.
+     * @param layers Set of target layers that should not be depended on.
      */
     fun Layer.doesNotDependOn(layers: Set<Layer>): Unit
 
     /**
-     * Adds dependencies between each layer in the collection and the specified layers.
+     * Specifies forbidden dependencies from multiple source layers to a target layer.
      *
-     * Example usage:
-     * ```
-     * val sourceLayers = setOf(domainLayer, dataLayer)
-     * val targetLayers = setOf(presentationLayer, infrastructureLayer)
-     * sourceLayers.dependsOn(targetLayers)
+     * Example:
+     * ```kotlin
+     * // Domain and Data layers must never depend on UI layer
+     * setOf(domainLayer, dataLayer).doesNotDependOn(uiLayer)
      * ```
      *
-     * @receiver The collection of [Layer]s that depends on other layers.
-     * @param layers The set of layers that the collection of layers depends on.
+     * @receiver Collection of source [Layer]s for which dependencies will be forbidden.
+     * @param layer The target layer that should not be depended on.
+     * @param strict Controls the dependency enforcement:
+     *              - true: MUST NOT have dependencies - Any dependencies between layers will be reported as violations.
+     *              - false: SHOULD NOT have dependencies (default) - Dependencies are discouraged but allowed.
      */
-    fun Collection<Layer>.dependsOn(layers: Set<Layer>): Unit
+    fun Collection<Layer>.doesNotDependOn(layer: Layer): Unit
 
     /**
-     * Specifies that the current layer does not depend on any other layer.
+     * Specifies forbidden dependencies from multiple source layers to multiple target layers.
      *
-     * @receiver The [Layer] that does not depend on any other layer.
+     * Example:
+     * ```kotlin
+     * // Domain and Data layers must never depend on UI and Feature layers
+     * val sourceLayers = setOf(domainLayer, dataLayer)
+     * val targetLayers = setOf(uiLayer, featureLayer)
+     * sourceLayers.doesNotDependOn(targetLayers)
+     * ```
+     * @receiver Collection of source [Layer]s for which dependencies will be forbidden.
+     * @param layers Set of target layers that should not be depended on.
+     */
+    fun Collection<Layer>.doesNotDependOn(layers: Set<Layer>): Unit
+
+    /**
+     * Specifies that the current layer must not have any dependencies.
      *
+     * Example:
+     * ```kotlin
+     * // Domain layer must be completely independent
+     * domainLayer.dependsOnNothing()
+     * ```
+     *
+     * @receiver The [Layer] that should not have any dependencies.
      * @see include
      */
     fun Layer.dependsOnNothing(): Unit
 
     /**
-     * Specifies that none of the layers in the collection depend on any other layer.
+     * Specifies that none of the layers in the collection should have any dependencies.
      *
-     * Example usage:
-     * ```
-     * val layers = setOf(domainLayer, dataLayer)
-     * layers.dependsOnNothing()
+     * Example:
+     * ```kotlin
+     * // Domain and Core layers must be completely independent
+     * setOf(domainLayer, coreLayer).dependsOnNothing()
      * ```
      *
-     * @receiver The collection of [Layer]s that should not depend on any other layer.
+     * @receiver The collection of [Layer]s that should not have any dependencies.
      * @see include
      */
     fun Collection<Layer>.dependsOnNothing(): Unit
 
     /**
-     * Specifies that none of the layers in the collection depend on the specified layer.
+     * Includes a Layer in the architecture without specifying any dependencies.
+     * Can be used in combination with dependsOnNothing() to specify that a layer
+     * should be isolated from other layers.
      *
-     * Example usage:
-     * ```
-     * val layers = setOf(domainLayer, dataLayer)
-     * layers.doesNotDependOn(presentationLayer)
-     * ```
-     *
-     * @receiver The collection of [Layer]s that do not depend on the specified layer.
-     * @param layer The layer that none of the collection layers should depend on.
-     */
-    fun Collection<Layer>.doesNotDependOn(layer: Layer): Unit
-
-    /**
-     * Specifies that none of the layers in the collection depend on any of the specified layers.
-     *
-     * Example usage:
-     * ```
-     * val sourceLayers = setOf(domainLayer, dataLayer)
-     * val targetLayers = setOf(presentationLayer, infrastructureLayer)
-     * sourceLayers.doesNotDependOn(targetLayers)
+     * Example:
+     * ```kotlin
+     * // Include domain layer in architecture checks
+     * domainLayer.include()
      * ```
      *
-     * @receiver The collection of [Layer]s that do not depend on the specified layers.
-     * @param layers The set of layers that none of the collection layers should depend on.
-     */
-    fun Collection<Layer>.doesNotDependOn(layers: Set<Layer>): Unit
-
-    /**
-     * This function is used to include a Layer in the architecture without specifying any dependencies.
-     * It can be used in combination with dependsOnNothing() to specify that a layer does not depend on any other layer.
-     *
-     * @receiver LayerDependenciesCore The core dependencies container
-     * @return The LayerDependenciesCore instance for chaining
+     * @receiver The [Layer] to be included in architecture checks.
      */
     fun Layer.include(): Unit
 
     /**
-     * Includes all layers from the collection in the architecture without specifying any dependencies.
-     * This can be used in combination with dependsOnNothing() to specify that multiple layers do not depend on any other layer.
+     * Includes multiple layers in the architecture without specifying any dependencies.
+     * Can be used in combination with dependsOnNothing() to specify that layers
+     * should be isolated from other layers.
      *
-     * Example usage:
-     * ```
-     * val layers = setOf(domainLayer, dataLayer)
-     * layers.include()
+     * Example:
+     * ```kotlin
+     * // Include domain and core layers in architecture checks
+     * setOf(domainLayer, coreLayer).include()
      * ```
      *
-     * @receiver The collection of [Layer]s to be included in the architecture.
+     * @receiver The collection of [Layer]s to be included in architecture checks.
      */
     fun Collection<Layer>.include(): Unit
 }

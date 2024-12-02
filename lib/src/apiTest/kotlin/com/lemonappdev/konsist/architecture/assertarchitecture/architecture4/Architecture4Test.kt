@@ -159,8 +159,6 @@ class Architecture4Test {
             .message
             .shouldBeEqualTo(
                 "'fails when (lambda scope)' test has failed. \n" +
-                    "Layer 'Presentation' does not depends on 'Data' layer.\n" +
-                    "Layer 'Domain' does not depends on 'Data' layer.\n" +
                     "'Data' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture4." +
@@ -191,8 +189,6 @@ class Architecture4Test {
             .message
             .shouldBeEqualTo(
                 "'fails when (lambda files)' test has failed. \n" +
-                    "Layer 'Presentation' does not depends on 'Data' layer.\n" +
-                    "Layer 'Domain' does not depends on 'Data' layer.\n" +
                     "'Data' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture4." +
@@ -225,8 +221,6 @@ class Architecture4Test {
             .message
             .shouldBeEqualTo(
                 "'fails when (parameter scope)' test has failed. \n" +
-                    "Layer 'Presentation' does not depends on 'Data' layer.\n" +
-                    "Layer 'Domain' does not depends on 'Data' layer.\n" +
                     "'Data' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture4." +
@@ -261,8 +255,6 @@ class Architecture4Test {
             .message
             .shouldBeEqualTo(
                 "'fails when (parameter files)' test has failed. \n" +
-                    "Layer 'Presentation' does not depends on 'Data' layer.\n" +
-                    "Layer 'Domain' does not depends on 'Data' layer.\n" +
                     "'Data' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture4." +
