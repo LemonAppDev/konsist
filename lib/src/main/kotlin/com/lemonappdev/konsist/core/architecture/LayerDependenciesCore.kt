@@ -14,30 +14,22 @@ internal class LayerDependenciesCore(
     internal val layerDependencies = mutableSetOf<LayerDependency>()
     internal var layers = mutableSetOf<Layer>()
 
-    internal val dependsOnDependencies: Map<Layer, Set<Layer>>
+    // ToDO: Create type
+    internal val dependsOnDependencies: Set<LayerDependency>
         get() =
             layerDependencies
                 .filter { it.dependencyType == LayerDependencyType.DEPENDS_ON_LAYER }
-                .groupBy { it.layer1 }
-                .mapValues { (_, dependencies) ->
-                    dependencies.mapNotNull { it.layer2 }.toSet()
-                }
+                .toSet()
 
-    internal val doesNotDependsOnDependencies: Map<Layer, Set<Layer>>
+    internal val doesNotDependsOnDependencies: List<LayerDependency>
         get() =
             layerDependencies
                 .filter { it.dependencyType == LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER }
-                .groupBy { it.layer1 }
-                .mapValues { (_, dependencies) ->
-                    dependencies.mapNotNull { it.layer2 }.toSet()
-                }
 
-    internal val dependsOnNothingDependencies: Set<Layer>
+    internal val dependsOnNothingDependencies: List<LayerDependency>
         get() =
             layerDependencies
                 .filter { it.dependencyType == LayerDependencyType.DEPEND_ON_NOTHING }
-                .map { it.layer1 }
-                .toSet()
 
     fun checkEmptyLayersDependencies() {
         if (layers.isEmpty()) {
@@ -71,7 +63,7 @@ internal class LayerDependenciesCore(
 
     override fun Layer.dependsOn(
         layers: Set<Layer>,
-        strict: Boolean
+        strict: Boolean,
     ) {
         require(layers.isNotEmpty()) { "Layers set is empty." }
 
@@ -82,7 +74,7 @@ internal class LayerDependenciesCore(
         if (dependOnNothingDependency != null) {
             throw KoInvalidAssertArchitectureConfigurationException(
                 "Layer '$name' is already configured with no dependencies. " +
-                        "It cannot subsequently depend on ${getLayersMessage(layers)}.",
+                    "It cannot subsequently depend on ${getLayersMessage(layers)}.",
             )
         }
 
@@ -144,7 +136,6 @@ internal class LayerDependenciesCore(
         }
 
         layers.forEach {
-            // TODO: Set strict
             addLayerDependency(this, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, it, false)
         }
 
@@ -169,11 +160,10 @@ internal class LayerDependenciesCore(
         if (dependOnLayers.isNotEmpty()) {
             throw KoInvalidAssertArchitectureConfigurationException(
                 "Layer '$name' is already configured to depend on ${getLayersMessage(dependOnLayers)}. " +
-                        "It cannot subsequently have no dependencies.",
+                    "It cannot subsequently have no dependencies.",
             )
         }
 
-        // TODO: Set strict
         addLayerDependency(this, LayerDependencyType.DEPEND_ON_NOTHING, null, false)
         layers.add(this)
 
@@ -216,10 +206,25 @@ internal class LayerDependenciesCore(
         layer2: Layer?,
         strict: Boolean,
     ) {
-        val layerDependency = LayerDependency(layer1, layerDependencyType, layer2, strict)
-        val result = layerDependencies.add(layerDependency)
+        val forbiddenStrictOverride =
+            layerDependencies.firstOrNull {
+                it.layer1 == layer1 &&
+                    it.dependencyType == layerDependencyType &&
+                    it.layer2 == layer2
+                it.strict != strict
+            }
 
-        if (result.not()) {
+        if (forbiddenStrictOverride != null) {
+            throw KoInvalidAssertArchitectureConfigurationException(
+                "Layer dependency configuration for layer '${layer1.name}' is already defined with " +
+                    "a strict=${forbiddenStrictOverride.strict} value. It cannot be overridden with strict=$strict.",
+            )
+        }
+
+        val layerDependency = LayerDependency(layer1, layerDependencyType, layer2, strict)
+        val added = layerDependencies.add(layerDependency)
+
+        if (added.not()) {
             val layerName =
                 if (layer2?.name != null) {
                     "'${layer2.name}'"

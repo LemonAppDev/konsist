@@ -122,6 +122,7 @@ complexity:
   LargeClass:
     active: true
     threshold: 800
+    excludes: [ '**/test/**', '**/**Test/**' ]
   LongMethod:
     active: true
     threshold: 60
@@ -162,7 +163,7 @@ complexity:
     ignoreStringsRegex: '$^'
   TooManyFunctions:
     active: true
-    excludes: [ '**/test/**', '**/**Test/**', '**/konsist/api/ext/sequence/**' ]
+    excludes: [ '**/test/**', '**/**Test/**' ]
     thresholdInFiles: 25
     thresholdInClasses: 25
     thresholdInInterfaces: 25

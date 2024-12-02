@@ -4,6 +4,9 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architecture
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
+import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
+import io.kotest.assertions.throwables.shouldThrow
+import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class Architecture8Test {
@@ -73,48 +76,92 @@ class Architecture8Test {
 
     // region fails when domain depends on presentation (strict = true)
     @Test
-    fun `passes when domain depends on presentation and strict is true (lambda scope)`() {
-        // then
-        scope
-            .assertArchitecture {
-                domain.dependsOn(presentation, strict = true)
+    fun `fails when domain depends on presentation and strict is true (lambda scope)`() {
+        // when
+        val result =
+            shouldThrow<KoAssertionFailedException> {
+                scope
+                    .assertArchitecture {
+                        domain.dependsOn(presentation, strict = true)
+                    }
             }
+
+        // then
+        result
+            .message
+            .shouldBeEqualTo(
+                "'fails when domain depends on presentation and strict is true (lambda scope)' test has failed. \n" +
+                    "Layer 'Domain' does not depends on 'Presentation' layer.",
+            )
     }
 
     @Test
-    fun `passes when domain depends on presentation and strict is true (lambda files)`() {
-        // then
-        scope
-            .files
-            .assertArchitecture {
-                domain.dependsOn(presentation, strict = true)
+    fun `fails when domain depends on presentation and strict is true (lambda files)`() {
+        // when
+        val result =
+            shouldThrow<KoAssertionFailedException> {
+                scope
+                    .files
+                    .assertArchitecture {
+                        domain.dependsOn(presentation, strict = true)
+                    }
             }
+
+        // then
+        result
+            .message
+            .shouldBeEqualTo(
+                "'fails when domain depends on presentation and strict is true (lambda files)' test has failed. \n" +
+                    "Layer 'Domain' does not depends on 'Presentation' layer.",
+            )
     }
 
     @Test
-    fun `passes when domain depends on presentation and strict is true (parameter scope)`() {
+    fun `fails when domain depends on presentation and strict is true (parameter scope)`() {
         // given
         val layerDependencies =
             architecture {
                 domain.dependsOn(presentation, strict = true)
             }
 
+        // when
+        val result =
+            shouldThrow<KoAssertionFailedException> {
+                scope.assertArchitecture(layerDependencies)
+            }
+
         // then
-        scope.assertArchitecture(layerDependencies)
+        result
+            .message
+            .shouldBeEqualTo(
+                "'fails when domain depends on presentation and strict is true (parameter scope)' test has failed. \n" +
+                    "Layer 'Domain' does not depends on 'Presentation' layer.",
+            )
     }
 
     @Test
-    fun `passes when domain depends on presentation and strict is true (parameter files)`() {
+    fun `fails when domain depends on presentation and strict is true (parameter files)`() {
         // given
         val layerDependencies =
             architecture {
                 domain.dependsOn(presentation, strict = true)
             }
 
+        // when
+        val result =
+            shouldThrow<KoAssertionFailedException> {
+                scope
+                    .files
+                    .assertArchitecture(layerDependencies)
+            }
+
         // then
-        scope
-            .files
-            .assertArchitecture(layerDependencies)
+        result
+            .message
+            .shouldBeEqualTo(
+                "'fails when domain depends on presentation and strict is true (parameter files)' test has failed. \n" +
+                    "Layer 'Domain' does not depends on 'Presentation' layer.",
+            )
     }
     // endregion
 }
