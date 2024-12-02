@@ -12,10 +12,15 @@ interface LayerDependencies {
      * @receiver The [Layer] that depends on other layers.
      * @param layer The layer that the current layer depends on.
      * @param layers The layers that the current layer depends on.
+     * @param strict A flag indicating whether strict checking should be enabled.
+     *               If set to `true`, layer(s) must be present in the architecture.
+     *               If set to `false`, layer(s) can be absent from the architecture.
+     *               By default, false.
      */
     fun Layer.dependsOn(
         layer: Layer,
         vararg layers: Layer,
+        strict: Boolean = false,
     ): Unit
 
     /**
@@ -23,8 +28,58 @@ interface LayerDependencies {
      *
      * @receiver The [Layer] that depends on other layers.
      * @param layers The list of layers that the current layer depends on.
+     * @param strict A flag indicating whether strict checking should be enabled.
+     *               If set to `true`, layer(s) must be present in the architecture.
+     *               If set to `false`, layer(s) can be absent from the architecture.
+     *               By default, false.
      */
-    fun Layer.dependsOn(layers: Set<Layer>): Unit
+    fun Layer.dependsOn(
+        layers: Set<Layer>,
+        strict: Boolean = false,
+    ): Unit
+
+    /**
+     * Adds dependencies between each layer in the collection and the specified layer.
+     *
+     * Example usage:
+     * ```
+     * val layers = setOf(domainLayer, dataLayer)
+     * layers.dependsOn(presentationLayer)
+     * ```
+     *
+     * @receiver The collection of [Layer]s that depends on other layer.
+     * @param layers The layer that the collection of layers depends on.
+     * @param strict A flag indicating whether strict checking should be enabled.
+     *               If set to `true`, layer(s) must be present in the architecture (layer must contain at least one file).
+     *               If set to `false`, layer(s) can be absent from the architecture (layer may be empty)
+     *               By default, false.
+     */
+    fun Collection<Layer>.dependsOn(
+        vararg layers: Layer,
+        strict: Boolean = false,
+    ): Unit
+
+    /**
+     * Adds dependencies between each layer in the collection and the specified layers.
+     *
+     * Example usage:
+     * ```
+     * val sourceLayers = setOf(domainLayer, dataLayer)
+     * val targetLayers = setOf(presentationLayer, infrastructureLayer)
+     * sourceLayers.dependsOn(targetLayers)
+     * ```
+     *
+     * @receiver The collection of [Layer]s that depends on other layers.
+     * @param layers The set of layers that the collection of layers depends on.
+     * @param strict A flag indicating whether strict checking should be enabled.
+     *               If set to `true`, layer(s) must be present in the architecture (layer must contain at least one file).
+     *               If set to `false`, layer(s) can be absent from the architecture (layer may be empty).
+     *               By default, false.
+     */
+    fun Collection<Layer>.dependsOn(
+        layers: Set<Layer>,
+        strict: Boolean = false,
+    ): Unit
 
     /**
      * Specifies that the current layer does not depend on any given layer.
@@ -39,64 +94,12 @@ interface LayerDependencies {
     ): Unit
 
     /**
-     * Adds dependencies between each layer in the collection and the specified layer.
-     *
-     * Example usage:
-     * ```
-     * val layers = setOf(domainLayer, dataLayer)
-     * layers.dependsOn(presentationLayer)
-     * ```
-     *
-     * @receiver The collection of [Layer]s that depends on other layer.
-     * @param layer The layer that the collection of layers depends on.
-     */
-    fun Collection<Layer>.dependsOn(layer: Layer): Unit
-
-    /**
      * Specifies that the current layer does not depend on the given list of layers.
      *
-     * @param layers The list of layers that the current layer does not depend on.
      * @receiver The [Layer] that does not depend on other layers.
+     * @param layers The collection of layers that the current layer does not depend on.
      */
     fun Layer.doesNotDependOn(layers: Set<Layer>): Unit
-
-    /**
-     * Adds dependencies between each layer in the collection and the specified layers.
-     *
-     * Example usage:
-     * ```
-     * val sourceLayers = setOf(domainLayer, dataLayer)
-     * val targetLayers = setOf(presentationLayer, infrastructureLayer)
-     * sourceLayers.dependsOn(targetLayers)
-     * ```
-     *
-     * @receiver The collection of [Layer]s that depends on other layers.
-     * @param layers The set of layers that the collection of layers depends on.
-     */
-    fun Collection<Layer>.dependsOn(layers: Set<Layer>): Unit
-
-    /**
-     * Specifies that the current layer does not depend on any other layer.
-     *
-     * @receiver The [Layer] that does not depend on any other layer.
-     *
-     * @see include
-     */
-    fun Layer.dependsOnNothing(): Unit
-
-    /**
-     * Specifies that none of the layers in the collection depend on any other layer.
-     *
-     * Example usage:
-     * ```
-     * val layers = setOf(domainLayer, dataLayer)
-     * layers.dependsOnNothing()
-     * ```
-     *
-     * @receiver The collection of [Layer]s that should not depend on any other layer.
-     * @see include
-     */
-    fun Collection<Layer>.dependsOnNothing(): Unit
 
     /**
      * Specifies that none of the layers in the collection depend on the specified layer.
@@ -126,6 +129,30 @@ interface LayerDependencies {
      * @param layers The set of layers that none of the collection layers should depend on.
      */
     fun Collection<Layer>.doesNotDependOn(layers: Set<Layer>): Unit
+
+    /**
+     * Specifies that the current layer does not depend on any other layer.
+     *
+     * @receiver The [Layer] that does not depend on any other layer.
+     *
+     * @see include
+     */
+    fun Layer.dependsOnNothing(): Unit
+
+    /**
+     * Specifies that none of the layers in the collection depend on any other layer.
+     *
+     * Example usage:
+     *
+     * ```
+     * val layers = setOf(domainLayer, dataLayer)
+     * layers.dependsOnNothing()
+     * ```
+     *
+     * @receiver The collection of [Layer]s that should not depend on any other layer.
+     * @see include
+     */
+    fun Collection<Layer>.dependsOnNothing(): Unit
 
     /**
      * This function is used to include a Layer in the architecture without specifying any dependencies.

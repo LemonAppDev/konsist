@@ -64,12 +64,17 @@ internal class LayerDependenciesCore(
     override fun Layer.dependsOn(
         layer: Layer,
         vararg layers: Layer,
+        strict: Boolean,
     ) {
-        dependsOn(setOf(layer) + layers.toSet())
+        dependsOn(setOf(layer) + layers.toSet(), strict)
     }
 
-    override fun Layer.dependsOn(layers: Set<Layer>) {
+    override fun Layer.dependsOn(
+        layers: Set<Layer>,
+        strict: Boolean
+    ) {
         require(layers.isNotEmpty()) { "Layers set is empty." }
+
         requireLayerCannotBeDependentOnItself(this, layers) { "Layer '$name' cannot be dependent on itself." }
 
         val dependOnNothingDependency = getLayerWithDependOnNothingDependency(this)
@@ -77,7 +82,7 @@ internal class LayerDependenciesCore(
         if (dependOnNothingDependency != null) {
             throw KoInvalidAssertArchitectureConfigurationException(
                 "Layer '$name' is already configured with no dependencies. " +
-                    "It cannot subsequently depend on ${getLayersMessage(layers)}.",
+                        "It cannot subsequently depend on ${getLayersMessage(layers)}.",
             )
         }
 
@@ -87,18 +92,24 @@ internal class LayerDependenciesCore(
         }
 
         layers.forEach {
-            addLayerDependency(this, LayerDependencyType.DEPENDS_ON_LAYER, it)
+            addLayerDependency(this, LayerDependencyType.DEPENDS_ON_LAYER, it, strict)
         }
 
         layerValidatorManager.validateLayerDependencies(layerDependencies)
     }
 
-    override fun Collection<Layer>.dependsOn(layer: Layer) {
-        forEach { it.dependsOn(layer) }
+    override fun Collection<Layer>.dependsOn(
+        vararg layers: Layer,
+        strict: Boolean,
+    ) {
+        forEach { it.dependsOn(layers.toSet(), strict) }
     }
 
-    override fun Collection<Layer>.dependsOn(layers: Set<Layer>) {
-        forEach { it.dependsOn(layers) }
+    override fun Collection<Layer>.dependsOn(
+        layers: Set<Layer>,
+        strict: Boolean,
+    ) {
+        forEach { it.dependsOn(layers, strict) }
     }
 
     private fun getLayersMessage(layers: Set<Layer>) =
@@ -133,7 +144,8 @@ internal class LayerDependenciesCore(
         }
 
         layers.forEach {
-            addLayerDependency(this, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, it)
+            // TODO: Set strict
+            addLayerDependency(this, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, it, false)
         }
 
         layerValidatorManager.validateLayerDependencies(layerDependencies)
@@ -157,11 +169,12 @@ internal class LayerDependenciesCore(
         if (dependOnLayers.isNotEmpty()) {
             throw KoInvalidAssertArchitectureConfigurationException(
                 "Layer '$name' is already configured to depend on ${getLayersMessage(dependOnLayers)}. " +
-                    "It cannot subsequently have no dependencies.",
+                        "It cannot subsequently have no dependencies.",
             )
         }
 
-        addLayerDependency(this, LayerDependencyType.DEPEND_ON_NOTHING, null)
+        // TODO: Set strict
+        addLayerDependency(this, LayerDependencyType.DEPEND_ON_NOTHING, null, false)
         layers.add(this)
 
         layerValidatorManager.validateLayerDependencies(layerDependencies)
@@ -173,7 +186,7 @@ internal class LayerDependenciesCore(
 
     override fun Layer.include() {
         layers.add(this)
-        layerDependencies.add(LayerDependency(this, LayerDependencyType.NONE, null))
+        layerDependencies.add(LayerDependency(this, LayerDependencyType.NONE))
     }
 
     override fun Collection<Layer>.include() {
@@ -201,8 +214,10 @@ internal class LayerDependenciesCore(
         layer1: Layer,
         layerDependencyType: LayerDependencyType,
         layer2: Layer?,
+        strict: Boolean,
     ) {
-        val result = layerDependencies.add(LayerDependency(layer1, layerDependencyType, layer2))
+        val layerDependency = LayerDependency(layer1, layerDependencyType, layer2, strict)
+        val result = layerDependencies.add(layerDependency)
 
         if (result.not()) {
             val layerName =
