@@ -87,14 +87,6 @@ data class Layer(
             )
         }
 
-        // Check for consecutive dots in middle (excluding the start and end ..)
-        if (effectivePackage.contains("..")) {
-            throw IllegalArgumentException(
-                "Invalid package definition for layer '$name'. " +
-                    "Package can only end with '..'. Current definition: $rootPackage",
-            )
-        }
-
         // Split and validate segments
         val segments =
             effectivePackage
