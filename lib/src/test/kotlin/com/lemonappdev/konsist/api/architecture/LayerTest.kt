@@ -63,7 +63,7 @@ class LayerTest {
         // then
         func shouldThrow IllegalArgumentException::class withMessage
             "Invalid package definition for layer 'name'. Invalid package segment 'Com' at position 1. Package segments must start with " +
-            "a lowercase letter and contain only lowercase letters, numbers, or underscores. Current definition: Com.example.."
+            "a lowercase letter and contain only letters, numbers, or underscores. Current definition: Com.example.."
     }
 
     @Test
@@ -74,7 +74,7 @@ class LayerTest {
         // then
         func shouldThrow IllegalArgumentException::class withMessage
             "Invalid package definition for layer 'name'. Invalid package segment '1example' at position 2. Package segments " +
-            "must start with a lowercase letter and contain only lowercase letters, numbers, or underscores. " +
+            "must start with a lowercase letter and contain only letters, numbers, or underscores. " +
             "Current definition: com.1example.."
     }
 
@@ -86,7 +86,7 @@ class LayerTest {
         // then
         func shouldThrow IllegalArgumentException::class withMessage
             "Invalid package definition for layer 'name'. Invalid package segment 'example\$#' at position 2. Package segments " +
-            "must start with a lowercase letter and contain only lowercase letters, numbers, or underscores. Current definition: " +
+            "must start with a lowercase letter and contain only letters, numbers, or underscores. Current definition: " +
             "com.example\$#.."
     }
 
