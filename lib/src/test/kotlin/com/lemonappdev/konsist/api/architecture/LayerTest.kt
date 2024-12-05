@@ -56,7 +56,7 @@ class LayerTest {
     }
 
     @Test
-    fun `create Layer with uppercase package segment should throw exception`() {
+    fun `create Layer with Pascal case package segment should throw exception`() {
         // when
         val func = { Layer(name = "name", rootPackage = "Com.example..") }
 
@@ -111,6 +111,7 @@ class LayerTest {
                 "com.example.test..",
                 "com.example1.test2..",
                 "com.example_test..",
+                "com.exampleTest..",
             )
 
         // then

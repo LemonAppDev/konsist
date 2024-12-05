@@ -100,7 +100,7 @@ data class Layer(
                     "Invalid package definition for layer '$name'. " +
                         "Invalid package segment '$segment' at position ${index + 1}. " +
                         "Package segments must start with a lowercase letter and contain only " +
-                        "lowercase letters, numbers, or underscores. Current definition: $rootPackage",
+                        "letters, numbers, or underscores. Current definition: $rootPackage",
                 )
             }
         }
@@ -119,6 +119,6 @@ data class Layer(
             "the definition must end with '..'. Current definition: $rootPackage"
 
     private companion object {
-        private val REGEX_VALID_PACKAGE_SEGMENT = Regex("^[a-z][a-z0-9_]*$")
+        private val REGEX_VALID_PACKAGE_SEGMENT = Regex("^[a-z][a-zA-Z0-9_]*$")
     }
 }
