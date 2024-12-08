@@ -19,10 +19,16 @@ class KoTypeAliasDeclarationForKoNameProviderTest {
             name shouldBeEqualTo "SampleTypeAlias"
             hasNameStartingWith("Sample") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
+            hasNameStartingWith("sample", ignoreCase = false) shouldBeEqualTo false
+            hasNameStartingWith("sample", ignoreCase = true) shouldBeEqualTo true
             hasNameEndingWith("lias") shouldBeEqualTo true
             hasNameEndingWith("other") shouldBeEqualTo false
+            hasNameEndingWith("LIAS", ignoreCase = false) shouldBeEqualTo false
+            hasNameEndingWith("LIAS", ignoreCase = true) shouldBeEqualTo true
             hasNameContaining("Type") shouldBeEqualTo true
-            hasNameContaining("type") shouldBeEqualTo false
+            hasNameContaining("other") shouldBeEqualTo false
+            hasNameContaining("type", ignoreCase = false) shouldBeEqualTo false
+            hasNameContaining("type", ignoreCase = true) shouldBeEqualTo true
             hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
