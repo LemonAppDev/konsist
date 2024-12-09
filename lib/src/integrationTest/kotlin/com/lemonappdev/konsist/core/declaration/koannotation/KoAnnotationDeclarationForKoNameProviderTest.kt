@@ -21,10 +21,16 @@ class KoAnnotationDeclarationForKoNameProviderTest {
             name shouldBeEqualTo "SampleAnnotation"
             hasNameStartingWith("Sample") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
+            hasNameStartingWith("sample", ignoreCase = false) shouldBeEqualTo false
+            hasNameStartingWith("sample", ignoreCase = true) shouldBeEqualTo true
             hasNameEndingWith("tion") shouldBeEqualTo true
             hasNameEndingWith("other") shouldBeEqualTo false
+            hasNameEndingWith("TION", ignoreCase = false) shouldBeEqualTo false
+            hasNameEndingWith("TION", ignoreCase = true) shouldBeEqualTo true
             hasNameContaining("Anno") shouldBeEqualTo true
             hasNameContaining("anno") shouldBeEqualTo false
+            hasNameContaining("anno", ignoreCase = false) shouldBeEqualTo false
+            hasNameContaining("anno", ignoreCase = true) shouldBeEqualTo true
             hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
