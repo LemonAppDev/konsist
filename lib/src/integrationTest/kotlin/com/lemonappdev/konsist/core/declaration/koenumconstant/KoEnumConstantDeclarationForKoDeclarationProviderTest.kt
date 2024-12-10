@@ -74,35 +74,34 @@ class KoEnumConstantDeclarationForKoDeclarationProviderTest {
 
             countDeclarations(
                 includeLocal = true,
-                includeNested = false
+                includeNested = false,
             ) { (it as KoNameProvider).hasNameStartingWith("sampleLocal") }
                 .shouldBeEqualTo(2)
 
             hasDeclarations(includeLocal = true, includeNested = false) shouldBeEqualTo true
             hasDeclaration(
                 includeLocal = true,
-                includeNested = false
+                includeNested = false,
             ) { (it as KoNameProvider).name == "sampleLocalProperty" }
                 .shouldBeEqualTo(true)
 
             hasDeclaration(
                 includeLocal = true,
-                includeNested = false
+                includeNested = false,
             ) { (it as KoNameProvider).name == "otherLocalProperty" }
                 .shouldBeEqualTo(false)
 
             hasAllDeclarations(
                 includeLocal = true,
-                includeNested = false
+                includeNested = false,
             ) { (it as KoNameProvider).hasNameContaining("ample") }
                 .shouldBeEqualTo(true)
 
             hasAllDeclarations(includeLocal = true, includeNested = false) {
                 (it as KoNameProvider).hasNameStartingWith(
-                    "sample"
+                    "sample",
                 )
-            }
-                .shouldBeEqualTo(false)
+            }.shouldBeEqualTo(false)
 
             declarations(includeLocal = true, includeNested = false)
                 .filterIsInstance<KoNameProvider>()
@@ -135,35 +134,34 @@ class KoEnumConstantDeclarationForKoDeclarationProviderTest {
 
             countDeclarations(
                 includeLocal = false,
-                includeNested = true
+                includeNested = true,
             ) { (it as KoNameProvider).hasNameStartingWith("sampleNested") }
                 .shouldBeEqualTo(2)
 
             hasDeclarations(includeLocal = false, includeNested = true) shouldBeEqualTo true
             hasDeclaration(
                 includeLocal = false,
-                includeNested = true
+                includeNested = true,
             ) { (it as KoNameProvider).name == "sampleNestedProperty" }
                 .shouldBeEqualTo(true)
 
             hasDeclaration(
                 includeLocal = false,
-                includeNested = true
+                includeNested = true,
             ) { (it as KoNameProvider).name == "otherNestedProperty" }
                 .shouldBeEqualTo(false)
 
             hasAllDeclarations(
                 includeLocal = false,
-                includeNested = true
+                includeNested = true,
             ) { (it as KoNameProvider).hasNameContaining("ample") }
                 .shouldBeEqualTo(true)
 
             hasAllDeclarations(includeLocal = false, includeNested = true) {
                 (it as KoNameProvider).hasNameStartingWith(
-                    "sample"
+                    "sample",
                 )
-            }
-                .shouldBeEqualTo(false)
+            }.shouldBeEqualTo(false)
 
             declarations(includeLocal = false, includeNested = true)
                 .filterIsInstance<KoNameProvider>()
@@ -196,35 +194,34 @@ class KoEnumConstantDeclarationForKoDeclarationProviderTest {
 
             countDeclarations(
                 includeLocal = true,
-                includeNested = true
+                includeNested = true,
             ) { (it as KoNameProvider).hasNameStartingWith("sample") }
                 .shouldBeEqualTo(6)
 
             hasDeclarations(includeLocal = true, includeNested = true) shouldBeEqualTo true
             hasDeclaration(
                 includeLocal = true,
-                includeNested = true
+                includeNested = true,
             ) { (it as KoNameProvider).name == "sampleLocalProperty" }
                 .shouldBeEqualTo(true)
 
             hasDeclaration(
                 includeLocal = true,
-                includeNested = true
+                includeNested = true,
             ) { (it as KoNameProvider).name == "otherLocalProperty" }
                 .shouldBeEqualTo(false)
 
             hasAllDeclarations(
                 includeLocal = true,
-                includeNested = true
+                includeNested = true,
             ) { (it as KoNameProvider).hasNameContaining("ample") }
                 .shouldBeEqualTo(true)
 
             hasAllDeclarations(includeLocal = true, includeNested = true) {
                 (it as KoNameProvider).hasNameStartingWith(
-                    "sample"
+                    "sample",
                 )
-            }
-                .shouldBeEqualTo(false)
+            }.shouldBeEqualTo(false)
 
             declarations(includeLocal = true, includeNested = true)
                 .filterIsInstance<KoNameProvider>()
@@ -244,7 +241,6 @@ class KoEnumConstantDeclarationForKoDeclarationProviderTest {
                 )
         }
     }
-
 
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koenumconstant/snippet/forkodeclarationprovider/", fileName)

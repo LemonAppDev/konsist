@@ -29,6 +29,7 @@ import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 /**
  * Represents a Kotlin enum constant declaration.
  */
+@Suppress("detekt.TooManyFunctions")
 interface KoEnumConstantDeclaration :
     KoBaseDeclaration,
     KoBaseProvider,
