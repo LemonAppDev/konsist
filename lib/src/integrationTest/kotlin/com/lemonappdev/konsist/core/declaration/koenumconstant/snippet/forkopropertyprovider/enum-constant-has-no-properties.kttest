@@ -1,0 +1,7 @@
+enum class SampleClass {
+    SAMPLE_CONSTANT_1 {
+        override fun sampleLocalFunction1() = 1
+    };
+
+    abstract fun sampleLocalFunction1(): Int
+}

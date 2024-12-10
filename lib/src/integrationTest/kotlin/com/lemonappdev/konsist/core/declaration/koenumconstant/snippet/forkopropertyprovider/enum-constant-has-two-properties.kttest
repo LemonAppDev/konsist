@@ -1,0 +1,11 @@
+enum class SampleEnumClass {
+    SAMPLE_ENUM_CONSTANT {
+        override val sampleProperty1: String get() = "sample value"
+
+        override val sampleProperty2 = 0
+    };
+
+    abstract val sampleProperty1: String
+
+    internal abstract val sampleProperty2: Int
+}

@@ -7,7 +7,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoObjectDeclarationForKoFileDeclarationProviderTest {
+class KoObjectDeclarationForKoDeclarationProviderTest {
     @Test
     fun `object-has-no-declarations`() {
         // given
