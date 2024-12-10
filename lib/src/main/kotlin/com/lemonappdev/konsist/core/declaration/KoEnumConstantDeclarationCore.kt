@@ -122,24 +122,19 @@ internal class KoEnumConstantDeclarationCore private constructor(
         KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
     }
     @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("numDeclarations()"))
-    override val numLocalDeclarations: Int
-        get() = super<KoLocalDeclarationProviderCore>.numLocalDeclarations
+    override val numLocalDeclarations: Int by lazy { super<KoLocalDeclarationProviderCore>.numLocalDeclarations }
 
     @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("classes()"))
-    override val localClasses: List<KoClassDeclaration>
-        get() = super<KoLocalClassProviderCore>.localClasses
+    override val localClasses: List<KoClassDeclaration> by lazy { super<KoLocalClassProviderCore>.localClasses }
 
     @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("numClasses()"))
-    override val numLocalClasses: Int
-        get() = super<KoLocalClassProviderCore>.numLocalClasses
+    override val numLocalClasses: Int by lazy { super<KoLocalClassProviderCore>.numLocalClasses }
 
     @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("functions()"))
-    override val localFunctions: List<KoFunctionDeclaration>
-        get() = super<KoLocalFunctionProviderCore>.localFunctions
+    override val localFunctions: List<KoFunctionDeclaration> by lazy { super<KoLocalFunctionProviderCore>.localFunctions }
 
     @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("numFunctions()"))
-    override val numLocalFunctions: Int
-        get() = super<KoLocalFunctionProviderCore>.numLocalFunctions
+    override val numLocalFunctions: Int by lazy { super<KoLocalFunctionProviderCore>.numLocalFunctions }
 
     @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("countProperties()"))
     override fun countVariables(predicate: (KoVariableDeclaration) -> Boolean): Int =
