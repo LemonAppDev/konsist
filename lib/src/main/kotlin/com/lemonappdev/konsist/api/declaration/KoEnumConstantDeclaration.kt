@@ -77,6 +77,12 @@ interface KoEnumConstantDeclaration :
     @Deprecated("Will be removed in version 0.20.0", ReplaceWith("numDeclarations()"))
     override val numLocalDeclarations: Int
 
+    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("functions()"))
+    override val localFunctions: List<KoFunctionDeclaration>
+
+    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("numFunctions()"))
+    override val numLocalFunctions: Int
+
     @Deprecated("Will be removed in version 0.20.0", ReplaceWith("countProperties()"))
     override fun countVariables(predicate: (KoVariableDeclaration) -> Boolean): Int
 
@@ -148,12 +154,6 @@ interface KoEnumConstantDeclaration :
 
     @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasAllDeclarations()"))
     override fun hasAllLocalDeclarations(predicate: (KoBaseDeclaration) -> Boolean): Boolean
-
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("functions()"))
-    override val localFunctions: List<KoFunctionDeclaration>
-
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("numFunctions()"))
-    override val numLocalFunctions: Int
 
     @Deprecated("Will be removed in version 0.20.0", ReplaceWith("countFunctions()"))
     override fun countLocalFunctions(predicate: (KoFunctionDeclaration) -> Boolean): Int
