@@ -33,5 +33,5 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
 
     // Add Konsist dependency
-    testImplementation("com.lemonappdev:konsist:0.17.0")
+    testImplementation("com.lemonappdev:konsist:0.17.3")
 }

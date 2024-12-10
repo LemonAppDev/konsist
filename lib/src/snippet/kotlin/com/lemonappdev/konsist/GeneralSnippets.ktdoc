@@ -24,7 +24,6 @@ import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
-import org.junit.jupiter.api.Test
 import java.util.Locale
 import javax.inject.Inject
 
