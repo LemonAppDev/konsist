@@ -23,7 +23,8 @@ class ApiKonsistTest {
         Konsist
             .scopeFromExternalDirectory("/Users/natalia/AndroidStudioProjects/ArtemisAgent")
             .classes()
-            .withName("")
+            .withName("SimpleEventPacket")
+            .assertTrue { it.hasParentClass() }
     }
 
     @Test
