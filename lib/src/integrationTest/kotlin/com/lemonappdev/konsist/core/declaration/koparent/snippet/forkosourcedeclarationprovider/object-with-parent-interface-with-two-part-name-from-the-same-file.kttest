@@ -1,0 +1,7 @@
+package com.samplepackage
+
+object SampleName : SampleInterface.SampleNestedInterface
+
+interface SampleInterface {
+    interface SampleNestedInterface
+}
