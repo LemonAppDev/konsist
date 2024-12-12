@@ -74,6 +74,7 @@ interface SampleParentInterface2
 
 interface SampleParentInterfaceWithNestedDeclarations {
     interface SampleNestedInterface
+
     open class SampleNestedClass
 }
 
