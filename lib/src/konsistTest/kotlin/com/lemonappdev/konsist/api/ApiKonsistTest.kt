@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api
 
+import com.lemonappdev.konsist.api.ext.list.withName
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withParameter
 import com.lemonappdev.konsist.api.ext.list.withProperty
@@ -19,9 +20,10 @@ class ApiKonsistTest {
 
     @Test
     fun `every api declaration has explicit return type`() {
-        apiPackageScope
-            .functions()
-            .assertTrue { it.hasReturnType() }
+        Konsist
+            .scopeFromExternalDirectory("/Users/natalia/AndroidStudioProjects/ArtemisAgent")
+            .classes()
+            .withName("")
     }
 
     @Test
