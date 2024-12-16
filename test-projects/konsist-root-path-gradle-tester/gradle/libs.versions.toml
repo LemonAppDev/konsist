@@ -3,7 +3,7 @@ kotlinVersion = "2.0.21"
 
 [libraries]
 kotlinStdlibJdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlinVersion" }
-junitJupiterEngine = "org.junit.jupiter:junit-jupiter-engine:5.11.3"
+junitJupiterEngine = "org.junit.jupiter:junit-jupiter-engine:5.11.4"
 kluent = "org.amshove.kluent:kluent:1.73"
 # Newest version will be retrieved from mavenLocal (exclusiveContent)
 konsist = "com.lemonappdev:konsist:+"
