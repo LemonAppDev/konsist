@@ -22,10 +22,16 @@ class KoParameterDeclarationForKoNameProviderTest {
             it?.name shouldBeEqualTo "sampleParameter"
             it?.hasNameStartingWith("sample") shouldBeEqualTo true
             it?.hasNameStartingWith("Other") shouldBeEqualTo false
+            it?.hasNameStartingWith("SAMPLE", ignoreCase = false) shouldBeEqualTo false
+            it?.hasNameStartingWith("SAMPLE", ignoreCase = true) shouldBeEqualTo true
             it?.hasNameEndingWith("meter") shouldBeEqualTo true
             it?.hasNameEndingWith("other") shouldBeEqualTo false
+            it?.hasNameEndingWith("METER", ignoreCase = false) shouldBeEqualTo false
+            it?.hasNameEndingWith("METER", ignoreCase = true) shouldBeEqualTo true
             it?.hasNameContaining("lePar") shouldBeEqualTo true
-            it?.hasNameContaining("lepar") shouldBeEqualTo false
+            it?.hasNameContaining("other") shouldBeEqualTo false
+            it?.hasNameContaining("lepar", ignoreCase = false) shouldBeEqualTo false
+            it?.hasNameContaining("lepar", ignoreCase = true) shouldBeEqualTo true
             it?.hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             it?.hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
@@ -46,10 +52,16 @@ class KoParameterDeclarationForKoNameProviderTest {
             name shouldBeEqualTo "sampleParameter"
             hasNameStartingWith("sample") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
+            hasNameStartingWith("SAMPLE", ignoreCase = false) shouldBeEqualTo false
+            hasNameStartingWith("SAMPLE", ignoreCase = true) shouldBeEqualTo true
             hasNameEndingWith("meter") shouldBeEqualTo true
             hasNameEndingWith("other") shouldBeEqualTo false
+            hasNameEndingWith("METER", ignoreCase = false) shouldBeEqualTo false
+            hasNameEndingWith("METER", ignoreCase = true) shouldBeEqualTo true
             hasNameContaining("lePar") shouldBeEqualTo true
-            hasNameContaining("lepar") shouldBeEqualTo false
+            hasNameContaining("other") shouldBeEqualTo false
+            hasNameContaining("lepar", ignoreCase = false) shouldBeEqualTo false
+            hasNameContaining("lepar", ignoreCase = true) shouldBeEqualTo true
             hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
