@@ -1,0 +1,5 @@
+package com.samplepackage
+
+import com.lemonappdev.konsist.testdata.SampleParentInterfaceWithNestedDeclarations
+
+data class SampleName(val data: String) : SampleParentInterfaceWithNestedDeclarations.SampleNestedClass()
