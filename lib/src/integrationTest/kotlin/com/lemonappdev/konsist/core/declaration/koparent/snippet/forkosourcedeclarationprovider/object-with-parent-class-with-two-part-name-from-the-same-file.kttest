@@ -1,0 +1,7 @@
+package com.samplepackage
+
+object SampleName : SampleInterface.SampleNestedClass()
+
+interface SampleInterface {
+    open class SampleNestedClass
+}

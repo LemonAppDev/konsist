@@ -316,6 +316,34 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     null,
                     "com.samplepackage.SampleInterface.SampleName",
                 ),
+                arguments(
+                    "class-with-parent-interface-with-two-part-name-from-the-same-file",
+                    KoInterfaceDeclaration::class,
+                    KoClassDeclaration::class,
+                    null,
+                    "com.samplepackage.SampleInterface.SampleNestedInterface",
+                ),
+                arguments(
+                    "class-with-parent-class-with-two-part-name-from-the-same-file",
+                    KoClassDeclaration::class,
+                    KoInterfaceDeclaration::class,
+                    null,
+                    "com.samplepackage.SampleInterface.SampleNestedClass",
+                ),
+                arguments(
+                    "class-with-parent-interface-with-two-part-name-from-import",
+                    KoInterfaceDeclaration::class,
+                    KoClassDeclaration::class,
+                    null,
+                    "com.lemonappdev.konsist.testdata.SampleParentInterfaceWithNestedDeclarations.SampleNestedInterface",
+                ),
+                arguments(
+                    "class-with-parent-class-with-two-part-name-from-import",
+                    KoClassDeclaration::class,
+                    KoInterfaceDeclaration::class,
+                    null,
+                    "com.lemonappdev.konsist.testdata.SampleParentInterfaceWithNestedDeclarations.SampleNestedClass",
+                ),
             )
 
         @Suppress("unused", "detekt.LongMethod")
@@ -384,6 +412,20 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     KoClassDeclaration::class,
                     null,
                     "com.samplepackage.SampleInterface.SampleName",
+                ),
+                arguments(
+                    "interface-with-parent-interface-with-two-part-name-from-the-same-file",
+                    KoInterfaceDeclaration::class,
+                    KoClassDeclaration::class,
+                    null,
+                    "com.samplepackage.SampleInterface.SampleNestedInterface",
+                ),
+                arguments(
+                    "interface-with-parent-interface-with-two-part-name-from-import",
+                    KoInterfaceDeclaration::class,
+                    KoClassDeclaration::class,
+                    null,
+                    "com.lemonappdev.konsist.testdata.SampleParentInterfaceWithNestedDeclarations.SampleNestedInterface",
                 ),
             )
 
@@ -544,6 +586,34 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     KoInterfaceDeclaration::class,
                     null,
                     "com.samplepackage.SampleInterface.SampleName",
+                ),
+                arguments(
+                    "object-with-parent-interface-with-two-part-name-from-the-same-file",
+                    KoInterfaceDeclaration::class,
+                    KoClassDeclaration::class,
+                    null,
+                    "com.samplepackage.SampleInterface.SampleNestedInterface",
+                ),
+                arguments(
+                    "object-with-parent-class-with-two-part-name-from-the-same-file",
+                    KoClassDeclaration::class,
+                    KoInterfaceDeclaration::class,
+                    null,
+                    "com.samplepackage.SampleInterface.SampleNestedClass",
+                ),
+                arguments(
+                    "object-with-parent-interface-with-two-part-name-from-import",
+                    KoInterfaceDeclaration::class,
+                    KoClassDeclaration::class,
+                    null,
+                    "com.lemonappdev.konsist.testdata.SampleParentInterfaceWithNestedDeclarations.SampleNestedInterface",
+                ),
+                arguments(
+                    "object-with-parent-class-with-two-part-name-from-import",
+                    KoClassDeclaration::class,
+                    KoInterfaceDeclaration::class,
+                    null,
+                    "com.lemonappdev.konsist.testdata.SampleParentInterfaceWithNestedDeclarations.SampleNestedClass",
                 ),
             )
     }
