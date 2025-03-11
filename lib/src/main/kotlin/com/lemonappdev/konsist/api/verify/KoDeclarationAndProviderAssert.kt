@@ -20,6 +20,14 @@ import com.lemonappdev.konsist.core.verify.assert
  */
 fun <E : KoBaseProvider> E?.assertTrue(
     strict: Boolean = false,
+    testName: String? = null,
+    function: (E, StringBuilder) -> Boolean?,
+): Unit {
+    listOf(this).assert(strict, testName, function, positiveCheck = true)
+}
+
+fun <E : KoBaseProvider> E?.assertTrue(
+    strict: Boolean = false,
     additionalMessage: String? = null,
     testName: String? = null,
     function: (E) -> Boolean?,
@@ -42,6 +50,14 @@ fun <E : KoBaseProvider> E?.assertTrue(
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
+fun <E : KoBaseProvider> E?.assertFalse(
+    strict: Boolean = false,
+    testName: String? = null,
+    function: (E, StringBuilder) -> Boolean?,
+): Unit {
+    listOf(this).assert(strict, testName, function, positiveCheck = false)
+}
+
 fun <E : KoBaseProvider> E?.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
@@ -69,6 +85,14 @@ fun <E : KoBaseProvider> E?.assertFalse(
  */
 fun <E : KoBaseProvider> List<E?>.assertTrue(
     strict: Boolean = false,
+    testName: String? = null,
+    function: (E, StringBuilder) -> Boolean?,
+): Unit {
+    assert(strict, testName, function, positiveCheck = true)
+}
+
+fun <E : KoBaseProvider> List<E?>.assertTrue(
+    strict: Boolean = false,
     additionalMessage: String? = null,
     testName: String? = null,
     function: (E) -> Boolean?,
@@ -91,6 +115,14 @@ fun <E : KoBaseProvider> List<E?>.assertTrue(
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
+fun <E : KoBaseProvider> List<E?>.assertFalse(
+    strict: Boolean = false,
+    testName: String? = null,
+    function: (E, StringBuilder) -> Boolean?,
+): Unit {
+    assert(strict, testName, function, positiveCheck = false)
+}
+
 fun <E : KoBaseProvider> List<E?>.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
@@ -117,6 +149,14 @@ fun <E : KoBaseProvider> List<E?>.assertFalse(
  */
 fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
     strict: Boolean = false,
+    testName: String? = null,
+    function: (E, StringBuilder) -> Boolean?,
+): Unit {
+    this.toList().assert(strict, testName, function, true)
+}
+
+fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
+    strict: Boolean = false,
     additionalMessage: String? = null,
     testName: String? = null,
     function: (E) -> Boolean?,
@@ -139,6 +179,14 @@ fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
+fun <E : KoBaseProvider> Sequence<E?>.assertFalse(
+    strict: Boolean = false,
+    testName: String? = null,
+    function: (E, StringBuilder) -> Boolean?,
+): Unit {
+    this.toList().assert(strict, testName, function, false)
+}
+
 fun <E : KoBaseProvider> Sequence<E?>.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
