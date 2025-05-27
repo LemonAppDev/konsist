@@ -23,6 +23,6 @@ ktlint-cli = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktlint
 [plugins]
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
 dokka = "org.jetbrains.dokka:2.0.0"
-spotless = "com.diffplug.spotless:7.0.3"
+spotless = "com.diffplug.spotless:7.0.4"
 testLogger = "com.adarshr.test-logger:4.0.0"
 detekt = "io.gitlab.arturbosch.detekt:1.23.8"
