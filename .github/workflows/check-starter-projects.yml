@@ -78,7 +78,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13.3'
+          python-version: '3.13.4'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-junit-4/settings.gradle
@@ -116,7 +116,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13.3'
+          python-version: '3.13.4'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-junit-5/settings.gradle
@@ -154,7 +154,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13.3'
+          python-version: '3.13.4'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-kotest/settings.gradle
@@ -192,7 +192,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13.3'
+          python-version: '3.13.4'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-junit-4/settings.gradle.kts
@@ -229,7 +229,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13.3'
+          python-version: '3.13.4'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-junit-5/settings.gradle.kts
@@ -266,7 +266,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13.3'
+          python-version: '3.13.4'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-kotest/settings.gradle.kts
@@ -303,7 +303,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13.3'
+          python-version: '3.13.4'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-gradle-kotlin-junit-5/build.gradle.kts
@@ -340,7 +340,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13.3'
+          python-version: '3.13.4'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-gradle-kotlin-kotest/build.gradle.kts
@@ -377,7 +377,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13.3'
+          python-version: '3.13.4'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-gradle-groovy-junit-5/build.gradle
@@ -415,7 +415,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13.3'
+          python-version: '3.13.4'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-gradle-groovy-kotest/build.gradle
@@ -452,7 +452,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13.3'
+          python-version: '3.13.4'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-maven-junit5/pom.xml
@@ -489,7 +489,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13.3'
+          python-version: '3.13.4'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-maven-kotest/pom.xml
