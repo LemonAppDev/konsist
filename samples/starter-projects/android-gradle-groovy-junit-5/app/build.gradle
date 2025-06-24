@@ -44,7 +44,7 @@ dependencies {
 
     // Add JUnit dependency
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.13.2"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.13.1"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.13.2"
 
     // Add junit-jupiter-params dependency (required for dynamic Tests)
     implementation("org.junit.jupiter:junit-jupiter-params:5.13.1")
