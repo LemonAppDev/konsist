@@ -1,6 +1,6 @@
 [versions]
 kotlinVersion = "2.0.21"
-jUnitVersion = "5.13.3"
+jUnitVersion = "5.13.4"
 ktlintCliVersion = "1.7.0"
 coroutinesVersion = "1.9.0"
 
