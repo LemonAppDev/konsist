@@ -229,7 +229,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13.5'
+          python-version: '3.13.6'
 
       - name: Assemble
         run: ./gradlew lib:assemble
