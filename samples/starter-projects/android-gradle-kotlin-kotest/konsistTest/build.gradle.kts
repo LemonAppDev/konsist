@@ -31,7 +31,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.7.1")
 
     // Add Kotest dependency
-    testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
+    testImplementation("io.kotest:kotest-runner-junit5:6.0.0")
 
     // Add Konsist dependency
     testImplementation("com.lemonappdev:konsist:0.17.3")
