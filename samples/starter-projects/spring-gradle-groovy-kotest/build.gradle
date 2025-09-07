@@ -52,7 +52,7 @@ testing {
 				implementation "com.lemonappdev:konsist:0.17.3"
 
 				// Add Kotest dependency
-				implementation "io.kotest:kotest-runner-junit5:6.0.2"
+				implementation "io.kotest:kotest-runner-junit5:6.0.3"
 			}
 
 			targets {
