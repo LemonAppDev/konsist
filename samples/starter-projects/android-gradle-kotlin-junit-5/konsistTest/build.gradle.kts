@@ -1,7 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("de.mannodermaus.android-junit5") version "1.11.3.0"
+    id("de.mannodermaus.android-junit5") version "1.13.4.0"
 }
 
 android {
@@ -28,11 +28,11 @@ android {
 
 dependencies {
     // Add Appcompat dependency (to be able to access Android specific classes in Konsit tests)
-    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("androidx.appcompat:appcompat:1.7.1")
 
     // Add JUnit dependency
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.12.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.12.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.13.4")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.13.4")
 
     // Add Konsist dependency
     testImplementation("com.lemonappdev:konsist:0.17.3")

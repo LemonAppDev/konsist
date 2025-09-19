@@ -44,15 +44,15 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-server-netty:3.1.1")
-                implementation("io.ktor:ktor-server-html-builder-jvm:3.1.1")
+                implementation("io.ktor:ktor-server-netty:3.3.0")
+                implementation("io.ktor:ktor-server-html-builder-jvm:3.3.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.11.0")
             }
         }
         val jvmTest by getting {
             dependencies {
                 implementation("com.lemonappdev:konsist:0.17.3")
-                implementation("io.kotest:kotest-runner-junit5:5.9.1")
+                implementation("io.kotest:kotest-runner-junit5:6.0.3")
             }
         }
 

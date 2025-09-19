@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Get branch name
         id: branch-name
-        uses: tj-actions/branch-names@v8
+        uses: tj-actions/branch-names@v9
 
       - name: List Branches
         run: |
@@ -32,7 +32,7 @@ jobs:
 
       - name: Get Changed Files
         id: changed-files
-        uses: tj-actions/changed-files@v45.0.7
+        uses: tj-actions/changed-files@v47.0.0
 
       - name: List Changed Files
         run: |
@@ -67,18 +67,18 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: 'corretto'
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.11.3'
+          python-version: '3.13.7'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-junit-4/settings.gradle
@@ -105,18 +105,18 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: 'corretto'
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.11.3'
+          python-version: '3.13.7'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-junit-5/settings.gradle
@@ -143,18 +143,18 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: 'corretto'
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.11.3'
+          python-version: '3.13.7'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-kotest/settings.gradle
@@ -181,18 +181,18 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: 'corretto'
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.11.3'
+          python-version: '3.13.7'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-junit-4/settings.gradle.kts
@@ -218,18 +218,18 @@ jobs:
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: 'corretto'
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.11.3'
+          python-version: '3.13.7'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-junit-5/settings.gradle.kts
@@ -255,18 +255,18 @@ jobs:
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: 'corretto'
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.11.3'
+          python-version: '3.13.7'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-kotest/settings.gradle.kts
@@ -292,18 +292,18 @@ jobs:
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: 'corretto'
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.11.3'
+          python-version: '3.13.7'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-gradle-kotlin-junit-5/build.gradle.kts
@@ -329,18 +329,18 @@ jobs:
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: 'corretto'
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.11.3'
+          python-version: '3.13.7'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-gradle-kotlin-kotest/build.gradle.kts
@@ -366,18 +366,18 @@ jobs:
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: 'corretto'
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.11.3'
+          python-version: '3.13.7'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-gradle-groovy-junit-5/build.gradle
@@ -404,18 +404,18 @@ jobs:
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: 'corretto'
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.11.3'
+          python-version: '3.13.7'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-gradle-groovy-kotest/build.gradle
@@ -441,18 +441,18 @@ jobs:
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: 'corretto'
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.11.3'
+          python-version: '3.13.7'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-maven-junit5/pom.xml
@@ -478,18 +478,18 @@ jobs:
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: 'corretto'
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.11.3'
+          python-version: '3.13.7'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-maven-kotest/pom.xml
