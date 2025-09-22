@@ -59,6 +59,6 @@ def check_artifact_bytecode(desired_java_version, desired_bytecode_version):
         shutil.rmtree(build_dir)
 
 
-# Java 8 == bytecode version 52.0 (defined in the local.javalibrary.gradle.kts)
+# Java 11 == bytecode version 55.0 (defined in the local.javalibrary.gradle.kts)
 # https://javaalmanac.io/bytecode/versions/
-check_artifact_bytecode("8", "52")
+check_artifact_bytecode("11", "55")

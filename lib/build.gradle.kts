@@ -12,6 +12,8 @@ dependencies {
     testImplementation(libs.junitJupiterParams)
     testImplementation(libs.mockk)
     testImplementation(libs.kluent)
+
+    testRuntimeOnly(libs.junitPlatformLauncher)
 }
 
 @Suppress("UnstableApiUsage")

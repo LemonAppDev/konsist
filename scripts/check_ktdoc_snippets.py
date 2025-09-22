@@ -70,8 +70,8 @@ def compile_dummy_classes_jar(package_path, dummy_classes_jar_path):
     global error_occurred
     error_occurred = False
 
-    # Include Kotlin standard library
-    command = ["kotlinc", "-include-runtime", "-d", dummy_classes_jar_path]
+    # Include Kotlin standard library and set JVM target 11
+    command = ["kotlinc", "-jvm-target", "11", "-include-runtime", "-d", dummy_classes_jar_path]
 
     # Get all Kotlin source files recursively
     kotlin_files = glob.glob(os.path.join(package_path, "**/*.kt"), recursive=True)
@@ -93,15 +93,17 @@ def compile_dummy_classes_jar(package_path, dummy_classes_jar_path):
 
 def compile_kotlin_file(file_path):
     error_occurred_local = False
-
     temp_dir = tempfile.mkdtemp()
 
     sample_konsist_library_path = user_home + f"/.m2/repository/com/lemonappdev/konsist/{konsist_version}/konsist-{konsist_version}.jar"
 
+    cp_sep = ";" if os.name == "nt" else ":"
+    classpath = f"{sample_konsist_library_path}{cp_sep}{dummy_classes_jar_path}"
+
     snippet_command = [
         "kotlinc",
-        "-cp",
-        f"{sample_konsist_library_path}:{dummy_classes_jar_path}",
+        "-jvm-target", "11",
+        "-cp", classpath,
         "-nowarn",
         "-d", temp_dir,
         file_path
