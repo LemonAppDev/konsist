@@ -13,7 +13,6 @@ spotless {
         val ktlintCliVersion = project.getTomlVersion("ktlintCliVersion")
         ktlint(ktlintCliVersion)
 
-        indentWithSpaces()
         endWithNewline()
     }
 
