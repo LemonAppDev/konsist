@@ -3,10 +3,8 @@ plugins {
 }
 
 java {
-    // Make Konsist artifact compatible with Java 11
     toolchain {
-        // Java 11 == bytecode version 55.0
-        languageVersion.set(JavaLanguageVersion.of(11))
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
 
     // Generated sources.jar for the library jar
