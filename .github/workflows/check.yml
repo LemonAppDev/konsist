@@ -192,7 +192,9 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v5
         with:
-          java-version: 21
+          java-version: |
+            11
+            21
           distribution: 'corretto'
 
       - name: Publish Konsist Artifact To Local Maven Repository
