@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+
 plugins {
     id("local.base")
     id("local.publish")
@@ -12,6 +14,7 @@ dependencies {
     testImplementation(libs.junitJupiterParams)
     testImplementation(libs.mockk)
     testImplementation(libs.kluent)
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 @Suppress("UnstableApiUsage")
@@ -54,5 +57,14 @@ testing {
                 implementation(libs.kotest)
             }
         }
+    }
+}
+
+kotlin {
+    jvmToolchain(21)
+
+    compilerOptions {
+        apiVersion.set(org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_1_8)
+        languageVersion.set(KotlinVersion.KOTLIN_1_8)
     }
 }
