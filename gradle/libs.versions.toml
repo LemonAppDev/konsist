@@ -3,6 +3,7 @@ kotlinVersion = "2.0.21"
 jUnitVersion = "5.13.4"
 ktlintCliVersion = "1.7.1"
 coroutinesVersion = "1.9.0"
+junitPlatformLauncher = "1.13.4"
 
 [libraries]
 kotlinStdlibJdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlinVersion" }
@@ -13,6 +14,7 @@ kluent = "org.amshove.kluent:kluent:1.73"
 mockk = "io.mockk:mockk:1.14.5"
 kotlinCompilerEmbeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlinVersion" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
+junitPlatformLauncher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junitPlatformLauncher" }
 
 # This dependency is included as it's internally utilized by Spotless.
 # It allows Renovate to upgrade ktlint version.
