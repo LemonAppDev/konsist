@@ -1,9 +1,9 @@
 plugins {
-    id("org.springframework.boot") version "3.5.6"
-    id("io.spring.dependency-management") version "1.1.7"
-    kotlin("jvm") version "2.0.21"
-    kotlin("plugin.spring") version "2.0.21"
-    `jvm-test-suite`
+    alias(libs.plugins.springBoot)
+    alias(libs.plugins.dependencyManagement)
+    alias(libs.plugins.kotlinJvm)
+    alias(libs.plugins.kotlinSpring)
+    alias(libs.plugins.jvmTestSuite)
 }
 
 group = "com.sample"
@@ -17,11 +17,11 @@ repositories {
 
 dependencies {
     // The 'api' is used, so classes are available in the konsistTest source set
-    api("org.springframework.boot:spring-boot-starter")
+    api(libs.spring.boot.starter)
 
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation(libs.kotlin.reflect)
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation(libs.spring.boot.starter.test)
 }
 
 kotlin {
@@ -45,10 +45,10 @@ testing {
                 implementation(project())
 
                 // Add Konsist dependency
-                implementation("com.lemonappdev:konsist:0.17.3")
+                implementation(libs.konsist)
 
                 // Add junit-jupiter-params dependency (required for dynamic Tests)
-                implementation("org.junit.jupiter:junit-jupiter-params:5.13.4")
+                implementation(libs.junit.jupiter.params)
             }
         }
     }

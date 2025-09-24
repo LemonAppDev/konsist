@@ -25,8 +25,8 @@
 	<name>spring-maven-junit5</name>
 	<description>spring-maven-junit5</description>
 	<properties>
-		<java.version>19</java.version>
-		<kotlin.version>2.0.21</kotlin.version>
+		<java.version>21</java.version>
+		<kotlin.version>2.1.20</kotlin.version>
 	</properties>
 	<dependencies>
 		<dependency>

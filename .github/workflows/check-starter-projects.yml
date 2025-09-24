@@ -318,7 +318,7 @@ jobs:
         run: cd samples/starter-projects/spring-gradle-kotlin-junit-5/ && ./gradlew konsistTest
 
   spring-gradle-kotlin-kotest:
-    name: Spring Gradle Groovy Kotest
+    name: Spring Gradle Kotlin Kotest
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |

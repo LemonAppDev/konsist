@@ -1,13 +1,13 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("de.mannodermaus.android-junit5") version "1.13.4.0"
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.android.junit5)
 }
 
 android {
     namespace = "com.sample"
 
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 26
@@ -27,13 +27,13 @@ android {
 }
 
 dependencies {
-    // Add Appcompat dependency (to be able to access Android specific classes in Konsit tests)
-    implementation("androidx.appcompat:appcompat:1.7.1")
+    // Add Appcompat dependency (to be able to access Android specific classes in Konsist tests)
+    implementation(libs.androidx.appcompat)
 
     // Add JUnit dependency
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.13.4")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.13.4")
+    testImplementation(libs.junit.jupiter.api)
+    testRuntimeOnly(libs.junit.jupiter.engine)
 
     // Add Konsist dependency
-    testImplementation("com.lemonappdev:konsist:0.17.3")
+    testImplementation(libs.konsist)
 }
