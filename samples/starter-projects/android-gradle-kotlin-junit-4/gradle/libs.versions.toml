@@ -5,7 +5,7 @@ coreKtx = "1.17.0"
 junit = "4.13.2"
 lifecycleRuntimeKtx = "2.9.4"
 activityCompose = "1.11.0"
-composeBom = "2024.12.01"
+composeBom = "2025.09.01"
 konsist = "0.17.3"
 appcompat = "1.7.1"
 
