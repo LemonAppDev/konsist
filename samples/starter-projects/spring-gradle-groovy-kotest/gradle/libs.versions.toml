@@ -1,0 +1,20 @@
+[versions]
+spring-boot = "3.5.6"
+spring-dep-management = "1.1.7"
+kotlin = "2.1.20"
+kotest = "6.0.3"
+konsist = "0.17.3"
+
+[libraries]
+spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter", version.ref = "spring-boot" }
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "spring-boot" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+kotest = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+konsist = { module = "com.lemonappdev:konsist", version.ref = "konsist" }
+
+[plugins]
+springBoot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+dependencyManagement = { id = "io.spring.dependency-management", version.ref = "spring-dep-management" }
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlinSpring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+jvmTestSuite = { id = "jvm-test-suite" }
