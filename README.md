@@ -21,6 +21,7 @@ tests ([JUnit](https://junit.org/) / [Kotest](https://kotest.io/)).
 
 ## Dependencies
 
+
 Gradle Kotlin:
 ```kotlin
 testImplementation("com.lemonappdev:konsist:0.17.2")
