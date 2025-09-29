@@ -34,6 +34,7 @@ package com.lemonappdev.konsist.api.architecture
  * @property rootPackage Package pattern defining layer scope (must follow pattern rules)
  * @throws IllegalArgumentException If name is blank or rootPackage violates pattern rules
  */
+
 @Suppress("detekt.ThrowsCount")
 data class Layer(
     internal val name: String,
