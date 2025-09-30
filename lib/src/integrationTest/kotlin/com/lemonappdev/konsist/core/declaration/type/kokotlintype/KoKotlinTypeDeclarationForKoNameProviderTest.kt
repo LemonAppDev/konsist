@@ -33,6 +33,22 @@ class KoKotlinTypeDeclarationForKoNameProviderTest {
         sut?.name shouldBeEqualTo "String"
     }
 
+    @Test
+    fun `kotlin-type-name-with-brackets`() {
+        // given
+        val sut =
+            getSnippetFile("kotlin-type-name-with-brackets")
+                .classes()
+                .first()
+                .parents()
+                .firstOrNull()
+                ?.sourceDeclaration
+                ?.asKotlinTypeDeclaration()
+
+        // then
+        sut?.name shouldBeEqualTo "Throwable"
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/type/kokotlintype/snippet/forkonameprovider/", fileName)
 }
