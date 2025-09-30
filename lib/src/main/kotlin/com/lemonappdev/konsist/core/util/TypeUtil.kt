@@ -103,12 +103,12 @@ object TypeUtil {
                 .firstOrNull { it.alias?.name == nestedType?.text }
 
         return (
-                if (importDirective != null) {
-                    importDirective.alias
-                } else {
-                    transformPsiElementToKoTypeDeclaration(type, parentDeclaration, containingFile)
-                }
-                ) as KoDeclarationCastProvider?
+            if (importDirective != null) {
+                importDirective.alias
+            } else {
+                transformPsiElementToKoTypeDeclaration(type, parentDeclaration, containingFile)
+            }
+        ) as KoDeclarationCastProvider?
     }
 
     internal fun hasTypeOf(
@@ -168,11 +168,12 @@ object TypeUtil {
                 ?.firstOrNull { it.name == typeText }
 
         return when {
-            typeParameter != null -> KoTypeParameterDeclarationCore.getInstance(
-                typeParameter,
-                emptyList(),
-                containingFile
-            )
+            typeParameter != null ->
+                KoTypeParameterDeclarationCore.getInstance(
+                    typeParameter,
+                    emptyList(),
+                    containingFile,
+                )
 
             nestedType is KtTypeProjection -> KoStarProjectionDeclarationCore
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
@@ -229,10 +230,10 @@ object TypeUtil {
             declarations.singleOrNull()
                 ?: declarations.firstOrNull { declaration ->
                     declaration.fullyQualifiedName?.contains(parentDeclarationFullyQualifiedName) == true ||
-                            (
-                                    (declaration as? KoContainingDeclarationProvider)
-                                        ?.containingDeclaration as? KoDeclarationProvider
-                                    )?.hasDeclaration { it == parentDeclaration } == true
+                        (
+                            (declaration as? KoContainingDeclarationProvider)
+                                ?.containingDeclaration as? KoDeclarationProvider
+                        )?.hasDeclaration { it == parentDeclaration } == true
                 }
 
         return declaration?.fullyQualifiedName
@@ -246,11 +247,13 @@ object TypeUtil {
 
     internal fun isKotlinBasicType(typeName: String): Boolean {
         val bareTypeName = getBareType(typeName)
+
         return kotlinBasicTypeNames.any { it == bareTypeName }
     }
 
     internal fun isKotlinCollectionTypes(typeName: String): Boolean {
         val bareTypeName = getBareType(typeName)
+
         return kotlinCollectionTypeNames.any { it == bareTypeName }
     }
 
