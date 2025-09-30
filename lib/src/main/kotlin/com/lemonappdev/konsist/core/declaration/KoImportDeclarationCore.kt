@@ -78,7 +78,7 @@ internal class KoImportDeclarationCore private constructor(
     }
 
     private fun getKotlinType(name: String): KoKotlinTypeDeclaration? =
-        if (TypeUtil.isKotlinBasicType(name) || TypeUtil.isKotlinCollectionTypes(name)) {
+        if (TypeUtil.isKotlinType(name)) {
             val ktNameReferenceExpression =
                 ktImportDirective
                     .children
