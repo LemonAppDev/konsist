@@ -103,12 +103,12 @@ object TypeUtil {
                 .firstOrNull { it.alias?.name == nestedType?.text }
 
         return (
-            if (importDirective != null) {
-                importDirective.alias
-            } else {
-                transformPsiElementToKoTypeDeclaration(type, parentDeclaration, containingFile)
-            }
-        ) as KoDeclarationCastProvider?
+                if (importDirective != null) {
+                    importDirective.alias
+                } else {
+                    transformPsiElementToKoTypeDeclaration(type, parentDeclaration, containingFile)
+                }
+                ) as KoDeclarationCastProvider?
     }
 
     internal fun hasTypeOf(
@@ -168,7 +168,12 @@ object TypeUtil {
                 ?.firstOrNull { it.name == typeText }
 
         return when {
-            typeParameter != null -> KoTypeParameterDeclarationCore.getInstance(typeParameter, emptyList(), containingFile)
+            typeParameter != null -> KoTypeParameterDeclarationCore.getInstance(
+                typeParameter,
+                emptyList(),
+                containingFile
+            )
+
             nestedType is KtTypeProjection -> KoStarProjectionDeclarationCore
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
             nestedType is KtUserType && typeText != null -> {
@@ -224,10 +229,10 @@ object TypeUtil {
             declarations.singleOrNull()
                 ?: declarations.firstOrNull { declaration ->
                     declaration.fullyQualifiedName?.contains(parentDeclarationFullyQualifiedName) == true ||
-                        (
-                            (declaration as? KoContainingDeclarationProvider)
-                                ?.containingDeclaration as? KoDeclarationProvider
-                        )?.hasDeclaration { it == parentDeclaration } == true
+                            (
+                                    (declaration as? KoContainingDeclarationProvider)
+                                        ?.containingDeclaration as? KoDeclarationProvider
+                                    )?.hasDeclaration { it == parentDeclaration } == true
                 }
 
         return declaration?.fullyQualifiedName
@@ -346,6 +351,12 @@ object TypeUtil {
         ).mapNotNull { it.simpleName }
             .toSet()
 
+    /*
+        List of Kotlin standard library class declarations
+        (extracted from Kotlin stdlib version 2.2).
+
+        https://kotlinlang.org/api/core/kotlin-stdlib/
+     */
     val kotlinTypes =
         listOf(
             "kotlin.collections.AbstractCollection",
