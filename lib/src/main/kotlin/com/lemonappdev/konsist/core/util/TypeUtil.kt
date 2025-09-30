@@ -21,6 +21,7 @@ import com.lemonappdev.konsist.core.model.getObject
 import com.lemonappdev.konsist.core.model.getTypeAlias
 import com.lemonappdev.konsist.core.provider.KoTypeParameterProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
+import org.jetbrains.kotlin.org.jline.utils.Log
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunctionType
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
@@ -38,6 +39,7 @@ object TypeUtil {
             Class.forName(fqn)
             true
         } catch (e: ClassNotFoundException) {
+            Log.info(e)
             false
         }
 
