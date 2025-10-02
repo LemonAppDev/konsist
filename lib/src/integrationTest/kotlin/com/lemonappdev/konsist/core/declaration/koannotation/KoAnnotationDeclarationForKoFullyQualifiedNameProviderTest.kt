@@ -67,6 +67,48 @@ class KoAnnotationDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     @Test
+    fun `annotation-fully-qualified-name-with-default-import`() {
+        // given
+        val sut =
+            getSnippetFile("annotation-fully-qualified-name-with-default-import")
+                .functions()
+                .first()
+                .annotations
+                .first()
+
+        // then
+        sut.fullyQualifiedName shouldBeEqualTo "kotlin.Deprecated"
+    }
+
+    @Test
+    fun `annotation-fully-qualified-name-with-single-wildcard-import`() {
+        // given
+        val sut =
+            getSnippetFile("annotation-fully-qualified-name-with-single-wildcard-import")
+                .functions()
+                .first()
+                .annotations
+                .first()
+
+        // then
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleAnnotation"
+    }
+
+    @Test
+    fun `annotation-fully-qualified-name-with-multiple-wildcard-import`() {
+        // given
+        val sut =
+            getSnippetFile("annotation-fully-qualified-name-with-multiple-wildcard-import")
+                .functions()
+                .first()
+                .annotations
+                .first()
+
+        // then
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleAnnotation"
+    }
+
+    @Test
     fun `annotation-in-file-fully-qualified-name`() {
         // given
         val sut =

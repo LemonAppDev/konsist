@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
 import com.lemonappdev.konsist.core.model.getTypeAlias
@@ -24,6 +25,7 @@ import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
+import com.lemonappdev.konsist.core.util.TypeUtil.isKotlinType
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtConstructorCalleeExpression
@@ -120,6 +122,11 @@ internal class KoParentDeclarationCore(
                 ?: getClass(innerName, fullyQualifiedName, isAlias, containingFile)
                 ?: getInterface(innerName, fullyQualifiedName, isAlias, containingFile)
                 ?: getTypeAlias(innerName, fullyQualifiedName, containingFile)
+                ?: if (isKotlinType(name)) {
+                    KoKotlinTypeDeclarationCore.getInstance(ktElement, containingDeclaration)
+                } else {
+                    null
+                }
                 ?: KoExternalDeclarationCore.getInstance(innerName, ktSuperTypeListEntry)
         )
             as? KoDeclarationCastProvider

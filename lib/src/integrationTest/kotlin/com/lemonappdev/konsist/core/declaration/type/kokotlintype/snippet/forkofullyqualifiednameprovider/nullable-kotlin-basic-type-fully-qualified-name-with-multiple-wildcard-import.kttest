@@ -1,0 +1,4 @@
+import com.lemonappdev.konsist.testdata.*
+import kotlin.*
+
+class SampleClass1(val sampleProperty1: String?)

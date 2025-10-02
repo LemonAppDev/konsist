@@ -93,7 +93,7 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             upperBounds.size shouldBeEqualTo 2
             numUpperBounds shouldBeEqualTo 2
             countUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo 2
-            countUpperBounds { upperBound -> upperBound.isKotlinType } shouldBeEqualTo 1
+            countUpperBounds { upperBound -> upperBound.isKotlinCollectionType } shouldBeEqualTo 1
             hasUpperBounds() shouldBeEqualTo true
             hasUpperBoundWithName(emptyList()) shouldBeEqualTo true
             hasUpperBoundWithName(emptySet()) shouldBeEqualTo true
@@ -211,7 +211,7 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             upperBounds.size shouldBeEqualTo 2
             numUpperBounds shouldBeEqualTo 2
             countUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo 2
-            countUpperBounds { upperBound -> upperBound.isKotlinType } shouldBeEqualTo 1
+            countUpperBounds { upperBound -> upperBound.isKotlinCollectionType } shouldBeEqualTo 1
             hasUpperBounds() shouldBeEqualTo true
             hasUpperBoundWithName(emptyList()) shouldBeEqualTo true
             hasUpperBoundWithName(emptySet()) shouldBeEqualTo true
@@ -329,7 +329,7 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             upperBounds.size shouldBeEqualTo 2
             numUpperBounds shouldBeEqualTo 2
             countUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo 2
-            countUpperBounds { upperBound -> upperBound.isKotlinType } shouldBeEqualTo 1
+            countUpperBounds { upperBound -> upperBound.isKotlinCollectionType } shouldBeEqualTo 1
             hasUpperBounds() shouldBeEqualTo true
             hasUpperBoundWithName(emptyList()) shouldBeEqualTo true
             hasUpperBoundWithName(emptySet()) shouldBeEqualTo true
@@ -447,7 +447,7 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             upperBounds.size shouldBeEqualTo 2
             numUpperBounds shouldBeEqualTo 2
             countUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo 2
-            countUpperBounds { upperBound -> upperBound.isKotlinType } shouldBeEqualTo 1
+            countUpperBounds { upperBound -> upperBound.isKotlinCollectionType } shouldBeEqualTo 1
             hasUpperBounds() shouldBeEqualTo true
             hasUpperBoundWithName(emptyList()) shouldBeEqualTo true
             hasUpperBoundWithName(emptySet()) shouldBeEqualTo true

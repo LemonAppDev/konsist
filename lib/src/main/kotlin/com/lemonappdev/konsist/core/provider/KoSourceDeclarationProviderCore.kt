@@ -40,49 +40,55 @@ internal interface KoSourceDeclarationProviderCore :
                     containingFile,
                 )
 
-            return if (type is KoGenericTypeDeclarationCore) {
-                val nestedKtNameReferenceExpression =
-                    if (ktNameReferenceExpression != null) {
-                        ktNameReferenceExpression
-                    } else {
-                        val typeElement = ktTypeReference?.typeElement
+            return when (type) {
+                is KoGenericTypeDeclarationCore -> {
+                    val nestedKtNameReferenceExpression =
+                        if (ktNameReferenceExpression != null) {
+                            ktNameReferenceExpression
+                        } else {
+                            val typeElement = ktTypeReference?.typeElement
 
-                        val notNullableTypeElement =
-                            if (typeElement is KtNullableType) {
-                                typeElement
-                                    .children
-                                    .firstOrNull()
-                            } else {
-                                typeElement
-                            }
+                            val notNullableTypeElement =
+                                if (typeElement is KtNullableType) {
+                                    typeElement
+                                        .children
+                                        .firstOrNull()
+                                } else {
+                                    typeElement
+                                }
 
-                        notNullableTypeElement
-                            ?.children
-                            ?.filterIsInstance<KtNameReferenceExpression>()
-                            ?.firstOrNull()
-                    }
-
-                val nestedType =
-                    nestedKtNameReferenceExpression
-                        ?.isExtensionDeclaration()
-                        ?.let {
-                            TypeUtil.getBasicType(
-                                listOf(nestedKtNameReferenceExpression),
-                                it,
-                                this.castToKoBaseDeclaration(),
-                                containingFile,
-                            )
+                            notNullableTypeElement
+                                ?.children
+                                ?.filterIsInstance<KtNameReferenceExpression>()
+                                ?.firstOrNull()
                         }
 
-                when (nestedType) {
-                    is KoGenericTypeDeclarationCore -> (nestedType as? KoSourceDeclarationProvider)?.sourceDeclaration
-                    is KoFunctionTypeDeclarationCore -> null
-                    else -> nestedType
+                    val nestedType =
+                        nestedKtNameReferenceExpression
+                            ?.isExtensionDeclaration()
+                            ?.let {
+                                TypeUtil.getBasicType(
+                                    listOf(nestedKtNameReferenceExpression),
+                                    it,
+                                    this.castToKoBaseDeclaration(),
+                                    containingFile,
+                                )
+                            }
+
+                    when (nestedType) {
+                        is KoGenericTypeDeclarationCore -> (nestedType as? KoSourceDeclarationProvider)?.sourceDeclaration
+                        is KoFunctionTypeDeclarationCore -> null
+                        else -> nestedType
+                    }
                 }
-            } else if (type is KoFunctionTypeDeclarationCore) {
-                null
-            } else {
-                type
+
+                is KoFunctionTypeDeclarationCore -> {
+                    null
+                }
+
+                else -> {
+                    type
+                }
             }
         }
 

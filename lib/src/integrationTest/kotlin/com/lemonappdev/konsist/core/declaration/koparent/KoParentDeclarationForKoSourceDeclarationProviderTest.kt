@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
+import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.ext.list.parents
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.externalsample.SampleExternalClass
@@ -66,7 +67,7 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
 
     @ParameterizedTest
     @MethodSource("provideInterfacesForSourceDeclaration")
-    fun `interface-parent-has-source-declaration`(
+    fun `interface-parent-has-source-de claration`(
         fileName: String,
         instanceOf: KClass<*>,
         notInstanceOf: KClass<*>,
@@ -344,6 +345,13 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     null,
                     "com.lemonappdev.konsist.testdata.SampleParentInterfaceWithNestedDeclarations.SampleNestedClass",
                 ),
+                arguments(
+                    "class-with-kotlin-parent-class",
+                    KoKotlinTypeDeclaration::class,
+                    KoInterfaceDeclaration::class,
+                    Throwable::class,
+                    "kotlin.Throwable",
+                ),
             )
 
         @Suppress("unused", "detekt.LongMethod")
@@ -614,6 +622,13 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     KoInterfaceDeclaration::class,
                     null,
                     "com.lemonappdev.konsist.testdata.SampleParentInterfaceWithNestedDeclarations.SampleNestedClass",
+                ),
+                arguments(
+                    "object-with-kotlin-parent-class",
+                    KoKotlinTypeDeclaration::class,
+                    KoInterfaceDeclaration::class,
+                    Throwable::class,
+                    "kotlin.Throwable",
                 ),
             )
     }
