@@ -1,4 +1,4 @@
 plugins {
-    id("local.detekt")
-    id("local.kotlin")
+    id("com.lemonappdev.konsist.convention.detekt")
+    id("com.lemonappdev.konsist.convention.kotlin")
 }
