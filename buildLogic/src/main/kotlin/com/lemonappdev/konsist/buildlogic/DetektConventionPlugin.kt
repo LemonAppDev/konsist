@@ -26,9 +26,15 @@ class DetektConventionPlugin : Plugin<Project> {
                 ignoreFailures = false
                 setSource(file(rootDir))
 
+                // Custom detekt config
                 config.setFrom("$rootDir/detekt.yml")
+
+                // Use default configuration on top of custom config
+                // (new detect rules will work out of the box after upgrading detekt version)
                 buildUponDefaultConfig = true
 
+                // Runs detekt for all files in the Gradle project and all subprojects without
+                // a need to configure detekt plugin in every subproject.
                 include("**/*.kt", "**/*.kts")
                 exclude(
                     "**/resources/**",

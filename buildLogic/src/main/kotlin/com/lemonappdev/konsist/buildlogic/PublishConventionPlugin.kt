@@ -16,6 +16,7 @@ import org.gradle.plugins.signing.SigningExtension
 import java.util.Base64
 
 class PublishConventionPlugin : Plugin<Project> {
+    @Suppress("detekt.LongMethod")
     override fun apply(target: Project) {
         with(target) {
             apply(plugin = "maven-publish")
@@ -72,6 +73,7 @@ class PublishConventionPlugin : Plugin<Project> {
                                 }
                             }
 
+                            // Docs: https://maven.apache.org/pom.html#scm
                             scm {
                                 url.set("https://github.com/LemonAppDev/konsist")
                                 connection.set("scm:git:git@github.com:LemonAppDev/konsist.git")
@@ -89,6 +91,7 @@ class PublishConventionPlugin : Plugin<Project> {
                                 url = mavenLocal().url
                             }
 
+                            // Repository URL for snapshot deployment and download access.
                             ReleaseTarget.SNAPSHOT -> {
                                 name = "snapshot"
                                 url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
@@ -96,6 +99,7 @@ class PublishConventionPlugin : Plugin<Project> {
                             }
 
                             ReleaseTarget.RELEASE -> {
+                                // Repository URL for release deployment, no download access.
                                 name = "release"
                                 url = uri("https://s01.oss.sonatype.org/content/repositories/releases/")
                                 project.setCredentialsFromGradleProperties().invoke(this)

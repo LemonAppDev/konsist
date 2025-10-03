@@ -12,6 +12,7 @@ class KotlinConventionPlugin : Plugin<Project> {
             apply(plugin = "org.jetbrains.kotlin.jvm")
 
             kotlin {
+                @Suppress("detekt.MagicNumber")
                 jvmToolchain(21)
 
                 compilerOptions {

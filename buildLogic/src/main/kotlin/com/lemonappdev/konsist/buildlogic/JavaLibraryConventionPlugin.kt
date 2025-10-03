@@ -14,11 +14,16 @@ class JavaLibraryConventionPlugin : Plugin<Project> {
             apply(plugin = "java-library")
 
             configure<JavaPluginExtension> {
+                // Make Konsist artifact compatible with Java 11 (bytecode version 55.0)
                 toolchain {
+                    @Suppress("detekt.MagicNumber")
                     languageVersion.set(JavaLanguageVersion.of(11))
                 }
 
+                // Generated sources.jar for the library jar
                 withSourcesJar()
+
+                /// Generated javadoc.jar for the library jar
                 withJavadocJar()
             }
         }
