@@ -4,7 +4,8 @@ import os
 def get_konsist_snapshot_version():
     current_script_path = os.path.abspath(__file__)
     current_script_directory = os.path.dirname(current_script_path)
-    project_root_directory = os.path.dirname(current_script_directory)
+    misc_directory = os.path.dirname(current_script_directory)
+    project_root_directory = os.path.dirname(misc_directory)
 
     gradle_properties_path = project_root_directory + "/gradle.properties"
 
