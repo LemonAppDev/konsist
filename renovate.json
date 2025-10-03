@@ -26,6 +26,14 @@
         "^org\\.jetbrains\\.kotlin"
       ],
       "enabled": false
+    },
+    {
+      "matchPackageNames": [
+        "org.junit.jupiter:junit-jupiter-engine",
+        "org.junit.jupiter:junit-jupiter-params"
+      ],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
     }
   ]
 }
