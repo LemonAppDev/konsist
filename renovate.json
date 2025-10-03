@@ -1,12 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base"
-  ],
+  "extends": ["config:base"],
   "baseBranches": ["develop"],
-  "lockFileMaintenance": {
-    "enabled": true
-  },
+  "lockFileMaintenance": { "enabled": true },
   "automerge": true,
   "automergeType": "pr",
   "automergeStrategy": "squash",
@@ -14,24 +10,16 @@
   "labels": ["maintenance"],
   "packageRules": [
     {
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
+      "matchUpdateTypes": ["minor", "patch"],
       "matchCurrentVersion": "!/^0/",
       "automerge": true
     },
     {
-      "matchPackagePatterns": [
-        "^org\\.jetbrains\\.kotlin"
-      ],
+      "matchPackagePatterns": ["org.jetbrains.kotlin"],
       "enabled": false
     },
     {
-      "matchPackageNames": [
-        "org.junit.jupiter:junit-jupiter-engine",
-        "org.junit.jupiter:junit-jupiter-params"
-      ],
+      "matchPackagePatterns": ["org.junit.jupiter*"],
       "matchUpdateTypes": ["major"],
       "enabled": false
     }
