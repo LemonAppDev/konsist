@@ -6,7 +6,8 @@ import tempfile
 
 # Variables ============================================================================================================
 script_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.dirname(script_dir)
+misc_dir = os.path.dirname(script_dir)
+project_root = os.path.dirname(misc_dir)
 user_home = os.path.expanduser("~")
 kt_temp_files_dir = tempfile.mkdtemp()
 

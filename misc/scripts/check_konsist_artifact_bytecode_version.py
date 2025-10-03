@@ -5,7 +5,8 @@ import shutil
 from get_artifact_path import get_artifact_path
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.dirname(script_dir)
+misc_dir = os.path.dirname(script_dir)
+project_root = os.path.dirname(misc_dir)
 build_dir = os.path.join(project_root, "build", "check-bytecode-version")
 
 # Ensure the directory exists

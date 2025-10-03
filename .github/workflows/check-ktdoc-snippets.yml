@@ -50,4 +50,4 @@ jobs:
           distribution: 'corretto'
 
       - name: Run Python Script for All Files
-        run: python3 scripts/check_ktdoc_snippets.py -all
+        run: python3 misc/scripts/check_ktdoc_snippets.py -all
