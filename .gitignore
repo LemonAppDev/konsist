@@ -13,8 +13,11 @@ build/
 # IntelliJ IDEA Files
 .idea
 
-# VS Code #
+# VS Code
 .vscode
+
+# Claude
+.claude
 
 # Python cache
 __pycache__
