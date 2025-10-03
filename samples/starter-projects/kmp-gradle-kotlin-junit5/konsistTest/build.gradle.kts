@@ -1,5 +1,5 @@
 plugins {
-    id("org.jetbrains.kotlin.jvm")
+    alias(libs.plugins.kotlinJvm)
 }
 
 kotlin {
@@ -12,6 +12,6 @@ tasks.withType<Test> {
 }
 
 dependencies {
-    testImplementation("com.lemonappdev:konsist:0.17.3")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.14.0")
+    testImplementation(libs.konsist)
+    testImplementation(libs.junit.jupiter.engine)
 }

@@ -1,0 +1,33 @@
+[versions]
+kotlin = "2.0.21"
+ktor = "3.3.0"
+kotlinx-html = "0.11.0"
+konsist = "0.17.3"
+kotest = "6.0.3"
+kotlin-wrappers = "18.3.1-pre.839"
+kotlin-emotion = "11.13.5-pre.839"
+material = "1.13.0"
+appcompat = "1.7.1"
+constraintlayout = "2.2.1"
+junit4 = "4.13.2"
+android-gradle = "8.2.2"
+
+[libraries]
+ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
+ktor-server-html-builder-jvm = { module = "io.ktor:ktor-server-html-builder-jvm", version.ref = "ktor" }
+kotlinx-html-jvm = { module = "org.jetbrains.kotlinx:kotlinx-html-jvm", version.ref = "kotlinx-html" }
+konsist = { module = "com.lemonappdev:konsist", version.ref = "konsist" }
+kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+kotlin-react = { module = "org.jetbrains.kotlin-wrappers:kotlin-react", version.ref = "kotlin-wrappers" }
+kotlin-react-dom = { module = "org.jetbrains.kotlin-wrappers:kotlin-react-dom", version.ref = "kotlin-wrappers" }
+kotlin-emotion = { module = "org.jetbrains.kotlin-wrappers:kotlin-emotion", version.ref = "kotlin-emotion" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+junit4 = { module = "junit:junit", version.ref = "junit4" }
+
+[plugins]
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+androidApplication = { id = "com.android.application", version.ref = "android-gradle" }
+androidLibrary = { id = "com.android.library", version.ref = "android-gradle" }
