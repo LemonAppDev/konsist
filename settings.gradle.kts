@@ -5,7 +5,7 @@ include(
 )
 
 pluginManagement {
-    includeBuild("buildLogic")
+    includeBuild("build-logic")
 
     repositories {
         mavenCentral()
