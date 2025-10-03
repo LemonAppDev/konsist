@@ -13,5 +13,5 @@ tasks.withType<Test> {
 
 dependencies {
     testImplementation("com.lemonappdev:konsist:0.17.3")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:6.0.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.14.0")
 }
