@@ -20,8 +20,6 @@ junitPlatformLauncher = { module = "org.junit.platform:junit-platform-launcher",
 # It allows Renovate to upgrade ktlint version.
 ktlint-cli = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktlintCliVersion" }
 
-[bundles]
-
 [plugins]
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
 dokka = "org.jetbrains.dokka:2.0.0"

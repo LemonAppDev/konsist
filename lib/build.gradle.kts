@@ -1,6 +1,6 @@
 plugins {
-    id("local.base")
-    id("local.publish")
+    id("com.lemonappdev.konsist.convention.base")
+    id("com.lemonappdev.konsist.convention.publish")
 }
 
 dependencies {

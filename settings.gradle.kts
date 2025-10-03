@@ -5,6 +5,8 @@ include(
 )
 
 pluginManagement {
+    includeBuild("buildLogic")
+
     repositories {
         mavenCentral()
         gradlePluginPortal()

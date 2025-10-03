@@ -1,6 +1,6 @@
-package ext
+package com.lemonappdev.konsist.buildlogic.ext
 
-import config.ReleaseTarget
+import com.lemonappdev.konsist.buildlogic.config.ReleaseTarget
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.getByType
@@ -12,12 +12,6 @@ import java.util.Properties
 fun Project.getLocalPropertyOrGradleProperty(propertyName: String) =
     gradleLocalProperty(propertyName) ?: getProjectProperty(propertyName)
 
-/**
- * Returns versions from gradle.properties or local.properties for given release target e.g.
- * "x.y.x"
- * or
- * "x.y.x-SNAPSHOT"
- */
 fun Project.getFullKonsistVersion(releaseTarget: ReleaseTarget): String {
     val version = getLocalPropertyOrGradleProperty("konsist.version") ?: error("konsist.version is not provided.")
 
@@ -28,10 +22,6 @@ fun Project.getFullKonsistVersion(releaseTarget: ReleaseTarget): String {
     }
 }
 
-/**
- * Returns versions from gradle.properties or local.properties e.g.
- * "x.y.x"
- */
 fun Project.getKonsistVersion() =
     getLocalPropertyOrGradleProperty("konsist.version") ?: error("konsist.version is not provided.")
 

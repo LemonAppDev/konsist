@@ -1,7 +1,7 @@
-package config
+package com.lemonappdev.konsist.buildlogic.config
 
 enum class ReleaseTarget(val value: String) {
     LOCAL("local"),
-    SNAPSHOT("snapshot"),
     RELEASE("release"),
+    SNAPSHOT("snapshot"),
 }
