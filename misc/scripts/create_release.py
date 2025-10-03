@@ -431,7 +431,7 @@ def run_add_maven_local_repository(file_path):
 
     try:
         # Command to run the Python script
-        subprocess.run(['python3', 'scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py', file_path], check=True)
+        subprocess.run(['python3', 'misc/scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py', file_path], check=True)
         print_success_message(f"Script executed successfully.")
     except subprocess.CalledProcessError as e:
         print_error_message(f"Script execution failed with error: {e}")
@@ -919,7 +919,7 @@ def update_version_in_konsist_documentation(repository, old_version, new_version
 def update_snippets_in_konsist_documentation():
     print_method_name("update_snippets_in_konsist_documentation")
 
-    script_path = "scripts/deploy_snippets_to_konsist_documentation_repo.py"
+    script_path = "misc/scripts/deploy_snippets_to_konsist_documentation_repo.py"
 
     try:
         # Call the other Python script using subprocess

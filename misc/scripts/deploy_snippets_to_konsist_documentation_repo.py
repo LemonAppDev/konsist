@@ -390,7 +390,8 @@ def create_and_merge_pr():
 
 def get_project_root():
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    project_root = os.path.dirname(script_dir)
+    misc_dir = os.path.dirname(script_dir)
+    project_root = os.path.dirname(misc_dir)
     return project_root
 
 
