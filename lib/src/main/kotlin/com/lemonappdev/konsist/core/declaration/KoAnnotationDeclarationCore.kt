@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
-import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoArgumentProviderCore
@@ -65,6 +64,14 @@ internal class KoAnnotationDeclarationCore private constructor(
         } else {
             super.sourceDeclaration
         }
+    }
+
+    override val fullyQualifiedName: String? by lazy {
+        val import = containingFile
+            .imports
+            .firstOrNull { it.alias?.name == name }
+
+        import?.name ?: super<KoFullyQualifiedNameProviderCore>.fullyQualifiedName
     }
 
     override fun toString(): String = name
