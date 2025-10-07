@@ -1,0 +1,4 @@
+import kotlin.Deprecated
+
+@Deprecated("")
+class SampleClass
