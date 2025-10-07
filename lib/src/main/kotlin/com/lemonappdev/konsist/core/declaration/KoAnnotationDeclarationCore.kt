@@ -67,9 +67,10 @@ internal class KoAnnotationDeclarationCore private constructor(
     }
 
     override val fullyQualifiedName: String? by lazy {
-        val import = containingFile
-            .imports
-            .firstOrNull { it.alias?.name == name }
+        val import =
+            containingFile
+                .imports
+                .firstOrNull { it.alias?.name == name }
 
         import?.name ?: super<KoFullyQualifiedNameProviderCore>.fullyQualifiedName
     }
