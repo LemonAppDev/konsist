@@ -89,11 +89,11 @@ object TypeUtil {
                         ?.firstOrNull()
                 }
             } else if (notNullTypes.filterIsInstance<KtAnnotationEntry>().isNotEmpty()) {
-                    notNullTypes
-                        .filterIsInstance<KtAnnotationEntry>()
-                        .firstOrNull()
-                        ?.children
-                        ?.firstOrNull()
+                notNullTypes
+                    .filterIsInstance<KtAnnotationEntry>()
+                    .firstOrNull()
+                    ?.children
+                    ?.firstOrNull()
             } else {
                 null
             }

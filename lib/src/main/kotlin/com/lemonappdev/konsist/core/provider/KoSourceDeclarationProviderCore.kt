@@ -97,9 +97,9 @@ internal interface KoSourceDeclarationProviderCore :
 
     private fun isExtensionDeclaration(): Boolean =
         ktTypeReference?.isExtensionDeclaration() == true ||
-                ktNameReferenceExpression?.isExtensionDeclaration() == true ||
-                ktTypeProjection?.isExtensionDeclaration() == true ||
-                ktAnnotationEntry?.isExtensionDeclaration() == true
+            ktNameReferenceExpression?.isExtensionDeclaration() == true ||
+            ktTypeProjection?.isExtensionDeclaration() == true ||
+            ktAnnotationEntry?.isExtensionDeclaration() == true
 
     private fun getDeclarationWithfullyQualifiedName(declaration: KoBaseDeclaration): KoBaseDeclaration? =
         when {
@@ -121,8 +121,8 @@ internal interface KoSourceDeclarationProviderCore :
 
     override fun hasSourceDeclarationOf(kClass: KClass<*>): Boolean =
         sourceDeclaration?.hasClassDeclarationOf(kClass) == true ||
-                sourceDeclaration?.hasObjectDeclarationOf(kClass) == true ||
-                sourceDeclaration?.hasInterfaceDeclarationOf(kClass) == true ||
-                sourceDeclaration?.hasKotlinTypeDeclarationOf(kClass) == true ||
-                sourceDeclaration?.hasExternalDeclarationOf(kClass) == true
+            sourceDeclaration?.hasObjectDeclarationOf(kClass) == true ||
+            sourceDeclaration?.hasInterfaceDeclarationOf(kClass) == true ||
+            sourceDeclaration?.hasKotlinTypeDeclarationOf(kClass) == true ||
+            sourceDeclaration?.hasExternalDeclarationOf(kClass) == true
 }
