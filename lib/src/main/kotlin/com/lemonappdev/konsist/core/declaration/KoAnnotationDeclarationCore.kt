@@ -58,6 +58,8 @@ internal class KoAnnotationDeclarationCore private constructor(
     }
 
     override val sourceDeclaration: KoDeclarationCastProvider? by lazy {
+        // When sourceDeclaration is an import alias, its sourceDeclaration refers to the import.
+        // The goal is to unwrap it and access the underlying base declaration directly.
         if (super.sourceDeclaration is KoImportAliasDeclaration) {
             super.sourceDeclaration?.asImportAliasDeclaration()?.sourceDeclaration
         } else {
