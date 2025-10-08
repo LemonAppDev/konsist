@@ -69,6 +69,7 @@ class ApiKonsistTest {
         apiPackageScope
             .functions()
             .withNameContaining("name", ignoreCase = true)
+            .withoutAnnotationOf(Deprecated::class)
             .assertTrue { it.hasParameterWithName("ignoreCase") }
     }
 

@@ -37,40 +37,54 @@ interface KoTypeAliasProvider : KoBaseProvider {
      *
      * @param name the name of the type alias to check.
      * @param names the names of the type aliases to check.
+     * @param ignoreCase Specifies whether the comparison should ignore a case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasTypeAliasWithName(
         name: String,
         vararg names: String,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
      * Determines whether the declaration has at least one type alias whose name matches any of the specified names.
      *
      * @param names the names of the type aliases to check.
+     * @param ignoreCase Specifies whether the comparison should ignore a case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasTypeAliasWithName(names: Collection<String>): Boolean
+    fun hasTypeAliasWithName(names: Collection<String>, ignoreCase: Boolean = false): Boolean
 
     /**
      * Determines whether the declaration has type aliases with all the specified names.
      *
      * @param name The name of the type alias to check.
      * @param names The names of the type aliases to check.
+     * @param ignoreCase Specifies whether the comparison should ignore a case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasTypeAliasesWithAllNames(
         name: String,
         vararg names: String,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
      * Determines whether the declaration has type aliases with all the specified names.
      *
      * @param names The names of the type aliases to check.
+     * @param ignoreCase Specifies whether the comparison should ignore a case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasTypeAliasesWithAllNames(names: Collection<String>): Boolean
+    fun hasTypeAliasesWithAllNames(names: Collection<String>, ignoreCase: Boolean = false): Boolean
 
     /**
      * Determines whether the declaration has at least one type alias that satisfies the provided predicate.

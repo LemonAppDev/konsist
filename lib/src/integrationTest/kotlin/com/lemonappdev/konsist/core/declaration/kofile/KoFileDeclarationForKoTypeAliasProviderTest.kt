@@ -117,6 +117,68 @@ class KoFileDeclarationForKoTypeAliasProviderTest {
         }
     }
 
+    @Test
+    fun `file-has-no-typealias-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("file-has-no-typealias-ignore-case")
+                .files
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasTypeAliasWithName("sampletypealias") shouldBeEqualTo false
+            hasTypeAliasWithName("sampletypealias", ignoreCase = true) shouldBeEqualTo false
+            hasTypeAliasWithName(listOf("sampletypealias")) shouldBeEqualTo false
+            hasTypeAliasWithName(listOf("sampletypealias"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeAliasWithName(setOf("sampletypealias")) shouldBeEqualTo false
+            hasTypeAliasWithName(setOf("sampletypealias"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames("sampletypealias1", "sampletypealias2") shouldBeEqualTo false
+            hasTypeAliasesWithAllNames("sampletypealias1", "sampletypealias2", ignoreCase = true) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(listOf("sampletypealias1", "sampletypealias2")) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(listOf("sampletypealias1", "sampletypealias2"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(setOf("sampletypealias1", "sampletypealias2")) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(setOf("sampletypealias1", "sampletypealias2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `file-has-typealiases-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("file-has-typealiases-ignore-case")
+                .files
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasTypeAliasWithName("sampletypealias1") shouldBeEqualTo false
+            hasTypeAliasWithName("sampletypealias1", ignoreCase = true) shouldBeEqualTo true
+            hasTypeAliasWithName("othertypealias") shouldBeEqualTo false
+            hasTypeAliasWithName("othertypealias", ignoreCase = true) shouldBeEqualTo false
+            hasTypeAliasWithName("sampletypealias1", "otherName") shouldBeEqualTo false
+            hasTypeAliasWithName("sampletypealias1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasTypeAliasWithName(listOf("sampletypealias1")) shouldBeEqualTo false
+            hasTypeAliasWithName(listOf("sampletypealias1"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeAliasWithName(listOf("othertypealias")) shouldBeEqualTo false
+            hasTypeAliasWithName(listOf("othertypealias"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeAliasWithName(listOf("sampletypealias1", "otherName")) shouldBeEqualTo false
+            hasTypeAliasWithName(listOf("sampletypealias1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeAliasesWithAllNames("sampletypealias1") shouldBeEqualTo false
+            hasTypeAliasesWithAllNames("sampletypealias1", ignoreCase = true) shouldBeEqualTo true
+            hasTypeAliasesWithAllNames("sampletypealias1", "sampletypealias2") shouldBeEqualTo false
+            hasTypeAliasesWithAllNames("sampletypealias1", "sampletypealias2", ignoreCase = true) shouldBeEqualTo true
+            hasTypeAliasesWithAllNames("sampletypealias1", "othertypealias") shouldBeEqualTo false
+            hasTypeAliasesWithAllNames("sampletypealias1", "othertypealias", ignoreCase = true) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(listOf("sampletypealias1")) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(listOf("sampletypealias1"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeAliasesWithAllNames(listOf("sampletypealias1", "sampletypealias2")) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(listOf("sampletypealias1", "sampletypealias2"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeAliasesWithAllNames(listOf("sampletypealias1", "othertypealias")) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(listOf("sampletypealias1", "othertypealias"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope(
             "core/declaration/kofile/snippet/forkotypealiasprovider/",
