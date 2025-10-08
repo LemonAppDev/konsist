@@ -1,8 +1,6 @@
 plugins {
-    kotlin("multiplatform") version "2.0.21"
+    alias(libs.plugins.kotlinMultiplatform)
     id("io.kotest.multiplatform") version "6.0.0-LOCAL"
-    application
-    id("com.android.application")
 }
 
 group = "org.example"
@@ -44,23 +42,23 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-server-netty:3.0.1")
-                implementation("io.ktor:ktor-server-html-builder-jvm:3.0.1")
-                implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.11.0")
+                implementation(libs.ktor.server.netty)
+                implementation(libs.ktor.server.html.builder.jvm)
+                implementation(libs.kotlinx.html.jvm)
             }
         }
         val jvmTest by getting {
             dependencies {
-                implementation("com.lemonappdev:konsist:0.16.1")
-                implementation("io.kotest:kotest-runner-junit5:5.9.1")
+                implementation(libs.konsist)
+                implementation(libs.kotest.runner.junit5)
             }
         }
 
         val jsMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.3.1-pre.836")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.3.1-pre.836")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.13.5-pre.836")
+                implementation(libs.kotlin.react)
+                implementation(libs.kotlin.react.dom)
+                implementation(libs.kotlin.emotion)
             }
         }
         val jsTest by getting

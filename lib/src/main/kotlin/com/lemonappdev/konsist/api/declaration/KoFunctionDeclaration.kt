@@ -49,7 +49,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvide
  */
 interface KoFunctionDeclaration :
     KoBaseDeclaration,
-    KoBaseSourceDeclaration,
+    KoSourceDeclaration,
     KoBaseProvider,
     KoAnnotationProvider,
     KoBodyProvider,

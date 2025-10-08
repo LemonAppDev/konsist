@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>com.lemonappdev.konsist.api.declaration</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../index.html">
+                            Konsist 0.17.0
+                    </a>
+            </div>
+            <div class="library-version">
+            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":lib:dokkaHtml/main">jvm</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="Konsist 0.17.0::com.lemonappdev.konsist.api.declaration////PointingToDeclaration//1440829338">
+  <div class="breadcrumbs"><a href="../../index.html">Konsist 0.17.0</a><span class="delimiter">/</span><span class="current">com.lemonappdev.konsist.api.declaration</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="-1267080300%2FClasslikes%2F1440829338" anchor-label="KoAnnotationDeclaration" id="-1267080300%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-annotation-declaration/index.html"><span>Ko</span><wbr></wbr><span>Annotation</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1267080300%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-annotation-declaration/index.html">KoAnnotationDeclaration</a> : <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-argument-provider/index.html">KoArgumentProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-file-provider/index.html">KoContainingFileProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-fully-qualified-name-provider/index.html">KoFullyQualifiedNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-location-provider/index.html">KoLocationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-name-provider/index.html">KoNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-path-provider/index.html">KoPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-module-provider/index.html">KoModuleProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-set-provider/index.html">KoSourceSetProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-represents-type-provider/index.html">KoRepresentsTypeProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-text-provider/index.html">KoTextProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin annotation.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1963375710%2FClasslikes%2F1440829338" anchor-label="KoArgumentDeclaration" id="-1963375710%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-argument-declaration/index.html"><span>Ko</span><wbr></wbr><span>Argument</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1963375710%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-argument-declaration/index.html">KoArgumentDeclaration</a> : <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-value-provider/index.html">KoValueProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-file-provider/index.html">KoContainingFileProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-location-provider/index.html">KoLocationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-name-provider/index.html">KoNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-package-provider/index.html">KoPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-declaration-provider/index.html">KoContainingDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-path-provider/index.html">KoPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-module-provider/index.html">KoModuleProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-set-provider/index.html">KoSourceSetProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-reside-in-package-provider/index.html">KoResideInPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-text-provider/index.html">KoTextProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin argument declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="686246070%2FClasslikes%2F1440829338" anchor-label="KoBaseDeclaration" id="686246070%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-base-declaration/index.html"><span>Ko</span><wbr></wbr><span>Base</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="686246070%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-base-declaration/index.html">KoBaseDeclaration</a> : <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin base declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-762401115%2FClasslikes%2F1440829338" anchor-label="KoChildDeclaration" id="-762401115%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-child-declaration/index.html"><span>Ko</span><wbr></wbr><span>Child</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-762401115%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-child-declaration/index.html">KoChildDeclaration</a> : <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-fully-qualified-name-provider/index.html">KoFullyQualifiedNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-name-provider/index.html">KoNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-package-provider/index.html">KoPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-reside-in-package-provider/index.html">KoResideInPackageProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin child declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1223269119%2FClasslikes%2F1440829338" anchor-label="KoClassDeclaration" id="-1223269119%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-class-declaration/index.html"><span>Ko</span><wbr></wbr><span>Class</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1223269119%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-class-declaration/index.html">KoClassDeclaration</a> : <a href="../com.lemonappdev.konsist.api.declaration.combined/-ko-class-and-interface-declaration/index.html">KoClassAndInterfaceDeclaration</a>, <a href="../com.lemonappdev.konsist.api.declaration.combined/-ko-class-and-object-declaration/index.html">KoClassAndObjectDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-abstract-modifier-provider/index.html">KoAbstractModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-annotation-modifier-provider/index.html">KoAnnotationModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-constructor-provider/index.html">KoConstructorProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-enum-constant-provider/index.html">KoEnumConstantProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-enum-modifier-provider/index.html">KoEnumModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-final-modifier-provider/index.html">KoFinalModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-inner-modifier-provider/index.html">KoInnerModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-open-modifier-provider/index.html">KoOpenModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-primary-constructor-provider/index.html">KoPrimaryConstructorProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-secondary-constructors-provider/index.html">KoSecondaryConstructorsProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-test-class-provider/index.html">KoTestClassProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-value-modifier-provider/index.html">KoValueModifierProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin class declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="216833283%2FClasslikes%2F1440829338" anchor-label="KoConstructorDeclaration" id="216833283%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-constructor-declaration/index.html"><span>Ko</span><wbr></wbr><span>Constructor</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="216833283%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-constructor-declaration/index.html">KoConstructorDeclaration</a> : <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-annotation-provider/index.html">KoAnnotationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-file-provider/index.html">KoContainingFileProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-location-provider/index.html">KoLocationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-modifier-provider/index.html">KoModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-package-provider/index.html">KoPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-parameters-provider/index.html">KoParametersProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-declaration-provider/index.html">KoContainingDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-path-provider/index.html">KoPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-module-provider/index.html">KoModuleProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-set-provider/index.html">KoSourceSetProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-reside-in-package-provider/index.html">KoResideInPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-text-provider/index.html">KoTextProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-visibility-modifier-provider/index.html">KoVisibilityModifierProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin constructor declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1887696298%2FClasslikes%2F1440829338" anchor-label="KoEnumConstantDeclaration" id="1887696298%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-enum-constant-declaration/index.html"><span>Ko</span><wbr></wbr><span>Enum</span><wbr></wbr><span>Constant</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1887696298%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-enum-constant-declaration/index.html">KoEnumConstantDeclaration</a> : <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-annotation-provider/index.html">KoAnnotationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-argument-provider/index.html">KoArgumentProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-file-provider/index.html">KoContainingFileProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-enum-name-provider/index.html">KoEnumNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-fully-qualified-name-provider/index.html">KoFullyQualifiedNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-k-doc-provider/index.html">KoKDocProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-local-class-provider/index.html">KoLocalClassProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-local-declaration-provider/index.html">KoLocalDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-local-function-provider/index.html">KoLocalFunctionProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-variable-provider/index.html">KoVariableProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-location-provider/index.html">KoLocationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-name-provider/index.html">KoNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-package-provider/index.html">KoPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-declaration-provider/index.html">KoContainingDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-path-provider/index.html">KoPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-module-provider/index.html">KoModuleProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-set-provider/index.html">KoSourceSetProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-reside-in-package-provider/index.html">KoResideInPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-text-provider/index.html">KoTextProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin enum constant declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1031644752%2FClasslikes%2F1440829338" anchor-label="KoExternalDeclaration" id="-1031644752%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-external-declaration/index.html"><span>Ko</span><wbr></wbr><span>External</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1031644752%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-external-declaration/index.html">KoExternalDeclaration</a> : <a href="../com.lemonappdev.konsist.api.provider/-ko-child-provider/index.html">KoChildProvider</a>, <a href="../com.lemonappdev.konsist.api.declaration.type/-ko-base-type-declaration/index.html">KoBaseTypeDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-fully-qualified-name-provider/index.html">KoFullyQualifiedNameProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin external declaration - declaration which is not defined in the project (e.g. defined in the library). it may be a class, interface or object.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="606371297%2FClasslikes%2F1440829338" anchor-label="KoFileDeclaration" id="606371297%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-file-declaration/index.html"><span>Ko</span><wbr></wbr><span>File</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="606371297%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-file-declaration/index.html">KoFileDeclaration</a> : <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-annotation-provider/index.html">KoAnnotationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-class-provider/index.html">KoClassProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-class-and-interface-and-object-provider/index.html">KoClassAndInterfaceAndObjectProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-class-and-interface-provider/index.html">KoClassAndInterfaceProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-class-and-object-provider/index.html">KoClassAndObjectProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-interface-and-object-provider/index.html">KoInterfaceAndObjectProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-declaration-provider/index.html">KoDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-file-extension-provider/index.html">KoFileExtensionProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-function-provider/index.html">KoFunctionProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-has-package-provider/index.html">KoHasPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-import-provider/index.html">KoImportProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-import-alias-provider/index.html">KoImportAliasProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-interface-provider/index.html">KoInterfaceProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-module-provider/index.html">KoModuleProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-name-provider/index.html">KoNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-object-provider/index.html">KoObjectProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-package-provider/index.html">KoPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-path-provider/index.html">KoPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-property-provider/index.html">KoPropertyProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-set-provider/index.html">KoSourceSetProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-text-provider/index.html">KoTextProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-type-alias-provider/index.html">KoTypeAliasProvider</a></div><div class="brief "><p class="paragraph">Represents a file declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-887740611%2FClasslikes%2F1440829338" anchor-label="KoFunctionDeclaration" id="-887740611%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-function-declaration/index.html"><span>Ko</span><wbr></wbr><span>Function</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-887740611%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-function-declaration/index.html">KoFunctionDeclaration</a> : <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="-ko-source-declaration/index.html">KoSourceDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-annotation-provider/index.html">KoAnnotationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-body-provider/index.html">KoBodyProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-file-provider/index.html">KoContainingFileProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-return-provider/index.html">KoReturnProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-fully-qualified-name-provider/index.html">KoFullyQualifiedNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-initializer-provider/index.html">KoInitializerProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-initialized-provider/index.html">KoIsInitializedProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-k-doc-provider/index.html">KoKDocProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-local-class-provider/index.html">KoLocalClassProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-local-declaration-provider/index.html">KoLocalDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-local-function-provider/index.html">KoLocalFunctionProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-variable-provider/index.html">KoVariableProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-location-provider/index.html">KoLocationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-modifier-provider/index.html">KoModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-name-provider/index.html">KoNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-package-provider/index.html">KoPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-parameters-provider/index.html">KoParametersProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-declaration-provider/index.html">KoContainingDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-path-provider/index.html">KoPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-module-provider/index.html">KoModuleProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-set-provider/index.html">KoSourceSetProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-receiver-type-provider/index.html">KoReceiverTypeProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-reside-in-package-provider/index.html">KoResideInPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-text-provider/index.html">KoTextProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-top-level-provider/index.html">KoTopLevelProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-top-level-provider/index.html">KoIsTopLevelProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-visibility-modifier-provider/index.html">KoVisibilityModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-operator-modifier-provider/index.html">KoOperatorModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-inline-modifier-provider/index.html">KoInlineModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-tailrec-modifier-provider/index.html">KoTailrecModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-infix-modifier-provider/index.html">KoInfixModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-external-modifier-provider/index.html">KoExternalModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-suspend-modifier-provider/index.html">KoSuspendModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-open-modifier-provider/index.html">KoOpenModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-override-modifier-provider/index.html">KoOverrideModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-final-modifier-provider/index.html">KoFinalModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-abstract-modifier-provider/index.html">KoAbstractModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-actual-modifier-provider/index.html">KoActualModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-expect-modifier-provider/index.html">KoExpectModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-type-parameter-provider/index.html">KoTypeParameterProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-generic-provider/index.html">KoIsGenericProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-extension-provider/index.html">KoIsExtensionProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin function declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1834010000%2FClasslikes%2F1440829338" anchor-label="KoGetterDeclaration" id="-1834010000%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-getter-declaration/index.html"><span>Ko</span><wbr></wbr><span>Getter</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1834010000%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-getter-declaration/index.html">KoGetterDeclaration</a> : <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-body-provider/index.html">KoBodyProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-declaration-provider/index.html">KoContainingDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-file-provider/index.html">KoContainingFileProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-initializer-provider/index.html">KoInitializerProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-initialized-provider/index.html">KoIsInitializedProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-local-class-provider/index.html">KoLocalClassProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-local-declaration-provider/index.html">KoLocalDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-local-function-provider/index.html">KoLocalFunctionProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-variable-provider/index.html">KoVariableProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-location-provider/index.html">KoLocationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-path-provider/index.html">KoPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-module-provider/index.html">KoModuleProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-set-provider/index.html">KoSourceSetProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-text-provider/index.html">KoTextProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-modifier-provider/index.html">KoModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-visibility-modifier-provider/index.html">KoVisibilityModifierProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin getter declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1716466228%2FClasslikes%2F1440829338" anchor-label="KoImportAliasDeclaration" id="1716466228%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-import-alias-declaration/index.html"><span>Ko</span><wbr></wbr><span>Import</span><wbr></wbr><span>Alias</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1716466228%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-import-alias-declaration/index.html">KoImportAliasDeclaration</a> : <a href="../com.lemonappdev.konsist.api.declaration.type/-ko-base-type-declaration/index.html">KoBaseTypeDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-file-provider/index.html">KoContainingFileProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-declaration-provider/index.html">KoContainingDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-location-provider/index.html">KoLocationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-path-provider/index.html">KoPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-module-provider/index.html">KoModuleProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-set-provider/index.html">KoSourceSetProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-declaration-provider/index.html">KoSourceDeclarationProvider</a></div><div class="brief "><p class="paragraph">Represents an import alias declaration in Kotlin.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-713031670%2FClasslikes%2F1440829338" anchor-label="KoImportDeclaration" id="-713031670%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-import-declaration/index.html"><span>Ko</span><wbr></wbr><span>Import</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-713031670%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-import-declaration/index.html">KoImportDeclaration</a> : <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-alias-provider/index.html">KoAliasProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-file-provider/index.html">KoContainingFileProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-location-provider/index.html">KoLocationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-matches-provider/index.html">KoMatchesProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-name-provider/index.html">KoNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-path-provider/index.html">KoPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-module-provider/index.html">KoModuleProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-set-provider/index.html">KoSourceSetProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-text-provider/index.html">KoTextProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-wildcard-provider/index.html">KoWildcardProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-wildcard-provider/index.html">KoIsWildcardProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-represents-type-provider/index.html">KoRepresentsTypeProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-declaration-provider/index.html">KoSourceDeclarationProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin import declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="545881446%2FClasslikes%2F1440829338" anchor-label="KoInitBlockDeclaration" id="545881446%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-init-block-declaration/index.html"><span>Ko</span><wbr></wbr><span>Init</span><wbr></wbr><span>Block</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="545881446%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-init-block-declaration/index.html">KoInitBlockDeclaration</a> : <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-local-class-provider/index.html">KoLocalClassProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-local-declaration-provider/index.html">KoLocalDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-local-function-provider/index.html">KoLocalFunctionProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-variable-provider/index.html">KoVariableProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-file-provider/index.html">KoContainingFileProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-location-provider/index.html">KoLocationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-declaration-provider/index.html">KoContainingDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-path-provider/index.html">KoPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-module-provider/index.html">KoModuleProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-set-provider/index.html">KoSourceSetProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-text-provider/index.html">KoTextProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin init block declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1791169346%2FClasslikes%2F1440829338" anchor-label="KoInterfaceDeclaration" id="1791169346%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-interface-declaration/index.html"><span>Ko</span><wbr></wbr><span>Interface</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1791169346%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-interface-declaration/index.html">KoInterfaceDeclaration</a> : <a href="../com.lemonappdev.konsist.api.declaration.combined/-ko-class-and-interface-declaration/index.html">KoClassAndInterfaceDeclaration</a>, <a href="../com.lemonappdev.konsist.api.declaration.combined/-ko-interface-and-object-declaration/index.html">KoInterfaceAndObjectDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-fun-modifier-provider/index.html">KoFunModifierProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin import declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-952195918%2FClasslikes%2F1440829338" anchor-label="KoKDocDeclaration" id="-952195918%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-k-doc-declaration/index.html"><span>Ko</span><wbr></wbr><span>KDoc</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-952195918%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-k-doc-declaration/index.html">KoKDocDeclaration</a> : <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-k-doc-description-provider/index.html">KoKDocDescriptionProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.tag/-ko-k-doc-tag-provider/index.html">KoKDocTagProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-text-provider/index.html">KoTextProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-location-provider/index.html">KoLocationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-path-provider/index.html">KoPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-module-provider/index.html">KoModuleProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-set-provider/index.html">KoSourceSetProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.tag/-ko-k-doc-author-tag-provider/index.html">KoKDocAuthorTagProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.tag/-ko-k-doc-receiver-tag-provider/index.html">KoKDocReceiverTagProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.tag/-ko-k-doc-return-tag-provider/index.html">KoKDocReturnTagProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.tag/-ko-k-doc-param-tag-provider/index.html">KoKDocParamTagProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.tag/-ko-k-doc-see-tag-provider/index.html">KoKDocSeeTagProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.tag/-ko-k-doc-sample-tag-provider/index.html">KoKDocSampleTagProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.tag/-ko-k-doc-property-tag-provider/index.html">KoKDocPropertyTagProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.tag/-ko-k-doc-property-getter-tag-provider/index.html">KoKDocPropertyGetterTagProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.tag/-ko-k-doc-version-tag-provider/index.html">KoKDocVersionTagProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.tag/-ko-k-doc-throws-tag-provider/index.html">KoKDocThrowsTagProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.tag/-ko-k-doc-suppress-tag-provider/index.html">KoKDocSuppressTagProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.tag/-ko-k-doc-exception-tag-provider/index.html">KoKDocExceptionTagProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.tag/-ko-k-doc-property-setter-tag-provider/index.html">KoKDocPropertySetterTagProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.tag/-ko-k-doc-constructor-tag-provider/index.html">KoKDocConstructorTagProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.tag/-ko-k-doc-since-tag-provider/index.html">KoKDocSinceTagProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin KDoc declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1751205910%2FClasslikes%2F1440829338" anchor-label="KoKDocTagDeclaration" id="1751205910%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-k-doc-tag-declaration/index.html"><span>Ko</span><wbr></wbr><span>KDoc</span><wbr></wbr><span>Tag</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1751205910%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-k-doc-tag-declaration/index.html">KoKDocTagDeclaration</a> : <a href="../com.lemonappdev.konsist.api.provider/-ko-k-doc-tag-name-and-description-provider/index.html">KoKDocTagNameAndDescriptionProvider</a>, <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin documentation tag declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1583934116%2FClasslikes%2F1440829338" anchor-label="KoObjectDeclaration" id="1583934116%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-object-declaration/index.html"><span>Ko</span><wbr></wbr><span>Object</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1583934116%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-object-declaration/index.html">KoObjectDeclaration</a> : <a href="../com.lemonappdev.konsist.api.declaration.combined/-ko-class-and-object-declaration/index.html">KoClassAndObjectDeclaration</a>, <a href="../com.lemonappdev.konsist.api.declaration.combined/-ko-interface-and-object-declaration/index.html">KoInterfaceAndObjectDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-companion-modifier-provider/index.html">KoCompanionModifierProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin object declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="809077839%2FClasslikes%2F1440829338" anchor-label="KoPackageDeclaration" id="809077839%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-package-declaration/index.html"><span>Ko</span><wbr></wbr><span>Package</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="809077839%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-package-declaration/index.html">KoPackageDeclaration</a> : <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-file-provider/index.html">KoContainingFileProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-location-provider/index.html">KoLocationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-name-provider/index.html">KoNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-package-matching-path-provider/index.html">KoPackageMatchingPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-path-provider/index.html">KoPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-module-provider/index.html">KoModuleProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-set-provider/index.html">KoSourceSetProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-text-provider/index.html">KoTextProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin package declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1846403506%2FClasslikes%2F1440829338" anchor-label="KoParameterDeclaration" id="1846403506%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-parameter-declaration/index.html"><span>Ko</span><wbr></wbr><span>Parameter</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1846403506%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-parameter-declaration/index.html">KoParameterDeclaration</a> : <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-annotation-provider/index.html">KoAnnotationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-file-provider/index.html">KoContainingFileProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-default-value-provider/index.html">KoDefaultValueProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-location-provider/index.html">KoLocationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-modifier-provider/index.html">KoModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-name-provider/index.html">KoNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-package-provider/index.html">KoPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-declaration-provider/index.html">KoContainingDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-path-provider/index.html">KoPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-module-provider/index.html">KoModuleProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-set-provider/index.html">KoSourceSetProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-represents-type-provider/index.html">KoRepresentsTypeProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-reside-in-package-provider/index.html">KoResideInPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-text-provider/index.html">KoTextProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-non-nullable-type-provider/index.html">KoNonNullableTypeProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-var-modifier-provider/index.html">KoVarModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-val-modifier-provider/index.html">KoValModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-var-arg-modifier-provider/index.html">KoVarArgModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-no-inline-modifier-provider/index.html">KoNoInlineModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-cross-inline-modifier-provider/index.html">KoCrossInlineModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-val-provider/index.html">KoIsValProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-var-provider/index.html">KoIsVarProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin parameter declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1062586737%2FClasslikes%2F1440829338" anchor-label="KoParentDeclaration" id="-1062586737%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-parent-declaration/index.html"><span>Ko</span><wbr></wbr><span>Parent</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1062586737%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-parent-declaration/index.html">KoParentDeclaration</a> : <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-name-provider/index.html">KoNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-package-provider/index.html">KoPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-reside-in-package-provider/index.html">KoResideInPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-declaration-provider/index.html">KoSourceDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-type-argument-provider/index.html">KoTypeArgumentProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-text-provider/index.html">KoTextProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-file-provider/index.html">KoContainingFileProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-declaration-provider/index.html">KoContainingDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-path-provider/index.html">KoPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-location-provider/index.html">KoLocationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-annotation-provider/index.html">KoAnnotationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-module-provider/index.html">KoModuleProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-set-provider/index.html">KoSourceSetProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-argument-provider/index.html">KoArgumentProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-interface-delegate-provider/index.html">KoInterfaceDelegateProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin parent declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1094089091%2FClasslikes%2F1440829338" anchor-label="KoPrimaryConstructorDeclaration" id="-1094089091%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-primary-constructor-declaration/index.html"><span>Ko</span><wbr></wbr><span>Primary</span><wbr></wbr><span>Constructor</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1094089091%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-primary-constructor-declaration/index.html">KoPrimaryConstructorDeclaration</a> : <a href="-ko-constructor-declaration/index.html">KoConstructorDeclaration</a></div><div class="brief "><p class="paragraph">Represents a Kotlin primary constructor declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1724901702%2FClasslikes%2F1440829338" anchor-label="KoPropertyDeclaration" id="-1724901702%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-property-declaration/index.html"><span>Ko</span><wbr></wbr><span>Property</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1724901702%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-property-declaration/index.html">KoPropertyDeclaration</a> : <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="-ko-source-declaration/index.html">KoSourceDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-annotation-provider/index.html">KoAnnotationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-constructor-defined-provider/index.html">KoConstructorDefinedProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-constructor-defined-provider/index.html">KoIsConstructorDefinedProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-file-provider/index.html">KoContainingFileProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-property-delegate-provider/index.html">KoPropertyDelegateProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-nullable-type-provider/index.html">KoNullableTypeProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-fully-qualified-name-provider/index.html">KoFullyQualifiedNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-initializer-provider/index.html">KoInitializerProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-initialized-provider/index.html">KoIsInitializedProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-k-doc-provider/index.html">KoKDocProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-location-provider/index.html">KoLocationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-modifier-provider/index.html">KoModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-name-provider/index.html">KoNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-package-provider/index.html">KoPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-declaration-provider/index.html">KoContainingDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-path-provider/index.html">KoPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-module-provider/index.html">KoModuleProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-set-provider/index.html">KoSourceSetProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-receiver-type-provider/index.html">KoReceiverTypeProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-reside-in-package-provider/index.html">KoResideInPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-text-provider/index.html">KoTextProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-top-level-provider/index.html">KoTopLevelProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-top-level-provider/index.html">KoIsTopLevelProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-value-provider/index.html">KoValueProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-visibility-modifier-provider/index.html">KoVisibilityModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-val-modifier-provider/index.html">KoValModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-var-modifier-provider/index.html">KoVarModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-lateinit-modifier-provider/index.html">KoLateinitModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-override-modifier-provider/index.html">KoOverrideModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-abstract-modifier-provider/index.html">KoAbstractModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-open-modifier-provider/index.html">KoOpenModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-final-modifier-provider/index.html">KoFinalModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-actual-modifier-provider/index.html">KoActualModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-expect-modifier-provider/index.html">KoExpectModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-const-modifier-provider/index.html">KoConstModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-getter-provider/index.html">KoGetterProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-setter-provider/index.html">KoSetterProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-read-only-provider/index.html">KoReadOnlyProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-read-only-provider/index.html">KoIsReadOnlyProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-tacit-type-provider/index.html">KoTacitTypeProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-type-parameter-provider/index.html">KoTypeParameterProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-generic-provider/index.html">KoIsGenericProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-extension-provider/index.html">KoIsExtensionProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-val-provider/index.html">KoIsValProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-var-provider/index.html">KoIsVarProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin property declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="873340235%2FClasslikes%2F1440829338" anchor-label="KoSecondaryConstructorDeclaration" id="873340235%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-secondary-constructor-declaration/index.html"><span>Ko</span><wbr></wbr><span>Secondary</span><wbr></wbr><span>Constructor</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="873340235%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-secondary-constructor-declaration/index.html">KoSecondaryConstructorDeclaration</a> : <a href="-ko-constructor-declaration/index.html">KoConstructorDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-k-doc-provider/index.html">KoKDocProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin secondary constructor declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-345131036%2FClasslikes%2F1440829338" anchor-label="KoSetterDeclaration" id="-345131036%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-setter-declaration/index.html"><span>Ko</span><wbr></wbr><span>Setter</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-345131036%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-setter-declaration/index.html">KoSetterDeclaration</a> : <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-body-provider/index.html">KoBodyProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-declaration-provider/index.html">KoContainingDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-file-provider/index.html">KoContainingFileProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-initializer-provider/index.html">KoInitializerProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-initialized-provider/index.html">KoIsInitializedProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-local-class-provider/index.html">KoLocalClassProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-local-declaration-provider/index.html">KoLocalDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-local-function-provider/index.html">KoLocalFunctionProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-variable-provider/index.html">KoVariableProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-location-provider/index.html">KoLocationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-path-provider/index.html">KoPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-module-provider/index.html">KoModuleProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-set-provider/index.html">KoSourceSetProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-text-provider/index.html">KoTextProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-modifier-provider/index.html">KoModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-visibility-modifier-provider/index.html">KoVisibilityModifierProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin setter declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1822454144%2FClasslikes%2F1440829338" anchor-label="KoSourceDeclaration" id="1822454144%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-source-declaration/index.html"><span>Ko</span><wbr></wbr><span>Source</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1822454144%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-source-declaration/index.html">KoSourceDeclaration</a> : <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-name-provider/index.html">KoNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-text-provider/index.html">KoTextProvider</a></div><div class="brief "><p class="paragraph">Represents a source declaration in the Kotlin codebase.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1821788481%2FClasslikes%2F1440829338" anchor-label="KoTypeAliasDeclaration" id="-1821788481%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-type-alias-declaration/index.html"><span>Ko</span><wbr></wbr><span>Type</span><wbr></wbr><span>Alias</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1821788481%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-type-alias-declaration/index.html">KoTypeAliasDeclaration</a> : <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="../com.lemonappdev.konsist.api.declaration.type/-ko-base-type-declaration/index.html">KoBaseTypeDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-annotation-provider/index.html">KoAnnotationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-file-provider/index.html">KoContainingFileProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-fully-qualified-name-provider/index.html">KoFullyQualifiedNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-k-doc-provider/index.html">KoKDocProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-location-provider/index.html">KoLocationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-modifier-provider/index.html">KoModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-name-provider/index.html">KoNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-package-provider/index.html">KoPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-declaration-provider/index.html">KoContainingDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-path-provider/index.html">KoPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-module-provider/index.html">KoModuleProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-set-provider/index.html">KoSourceSetProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-reside-in-package-provider/index.html">KoResideInPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-text-provider/index.html">KoTextProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-visibility-modifier-provider/index.html">KoVisibilityModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-actual-modifier-provider/index.html">KoActualModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-non-nullable-type-provider/index.html">KoNonNullableTypeProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-type-parameter-provider/index.html">KoTypeParameterProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-generic-provider/index.html">KoIsGenericProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin type alias declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1021370620%2FClasslikes%2F1440829338" anchor-label="KoTypeArgumentDeclaration" id="1021370620%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-type-argument-declaration/index.html"><span>Ko</span><wbr></wbr><span>Type</span><wbr></wbr><span>Argument</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1021370620%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-type-argument-declaration/index.html">KoTypeArgumentDeclaration</a> : <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-name-provider/index.html">KoNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-text-provider/index.html">KoTextProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-declaration-provider/index.html">KoSourceDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-type-argument-provider/index.html">KoTypeArgumentProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-modifier-provider/index.html">KoModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-out-modifier-provider/index.html">KoOutModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-in-modifier-provider/index.html">KoInModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-location-provider/index.html">KoLocationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-path-provider/index.html">KoPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-generic-type-provider/index.html">KoIsGenericTypeProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-generic-provider/index.html">KoIsGenericProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-function-type-provider/index.html">KoIsFunctionTypeProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-function-type-declaration-provider/index.html">KoFunctionTypeDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-star-projection-provider/index.html">KoIsStarProjectionProvider</a></div><div class="brief "><p class="paragraph">Represents a type argument declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-115740776%2FClasslikes%2F1440829338" anchor-label="KoTypeParameterDeclaration" id="-115740776%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-type-parameter-declaration/index.html"><span>Ko</span><wbr></wbr><span>Type</span><wbr></wbr><span>Parameter</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-115740776%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-type-parameter-declaration/index.html">KoTypeParameterDeclaration</a> : <a href="../com.lemonappdev.konsist.api.declaration.type/-ko-base-type-declaration/index.html">KoBaseTypeDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-file-provider/index.html">KoContainingFileProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-declaration-provider/index.html">KoContainingDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-location-provider/index.html">KoLocationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-path-provider/index.html">KoPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-module-provider/index.html">KoModuleProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-set-provider/index.html">KoSourceSetProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-modifier-provider/index.html">KoModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-out-modifier-provider/index.html">KoOutModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-in-modifier-provider/index.html">KoInModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-upper-bounds-provider/index.html">KoUpperBoundsProvider</a></div><div class="brief "><p class="paragraph">Represents a type parameter declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1890158467%2FClasslikes%2F1440829338" anchor-label="KoValuedKDocTagDeclaration" id="1890158467%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-valued-k-doc-tag-declaration/index.html"><span>Ko</span><wbr></wbr><span>Valued</span><wbr></wbr><span>KDoc</span><wbr></wbr><span>Tag</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1890158467%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-valued-k-doc-tag-declaration/index.html">KoValuedKDocTagDeclaration</a> : <a href="-ko-k-doc-tag-declaration/index.html">KoKDocTagDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-k-doc-tag-value-provider/index.html">KoKDocTagValueProvider</a>, <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a></div><div class="brief "><p class="paragraph">Represents a documentation tag</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1359477791%2FClasslikes%2F1440829338" anchor-label="KoVariableDeclaration" id="-1359477791%2FClasslikes%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-ko-variable-declaration/index.html"><span>Ko</span><wbr></wbr><span>Variable</span><wbr></wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1359477791%2FClasslikes%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-ko-variable-declaration/index.html">KoVariableDeclaration</a> : <a href="-ko-base-declaration/index.html">KoBaseDeclaration</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-base-provider/index.html">KoBaseProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-annotation-provider/index.html">KoAnnotationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-declaration-provider/index.html">KoContainingDeclarationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-containing-file-provider/index.html">KoContainingFileProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-property-delegate-provider/index.html">KoPropertyDelegateProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-k-doc-provider/index.html">KoKDocProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-location-provider/index.html">KoLocationProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-module-provider/index.html">KoModuleProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-name-provider/index.html">KoNameProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-package-provider/index.html">KoPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-path-provider/index.html">KoPathProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-nullable-type-provider/index.html">KoNullableTypeProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-reside-in-package-provider/index.html">KoResideInPackageProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-source-set-provider/index.html">KoSourceSetProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-text-provider/index.html">KoTextProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-val-modifier-provider/index.html">KoValModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-value-provider/index.html">KoValueProvider</a>, <a href="../com.lemonappdev.konsist.api.provider.modifier/-ko-var-modifier-provider/index.html">KoVarModifierProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-tacit-type-provider/index.html">KoTacitTypeProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-val-provider/index.html">KoIsValProvider</a>, <a href="../com.lemonappdev.konsist.api.provider/-ko-is-var-provider/index.html">KoIsVarProvider</a></div><div class="brief "><p class="paragraph">Represents a Kotlin property declaration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

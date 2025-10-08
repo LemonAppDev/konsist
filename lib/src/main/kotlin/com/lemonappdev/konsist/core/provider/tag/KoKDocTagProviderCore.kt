@@ -2,45 +2,48 @@ package com.lemonappdev.konsist.core.provider.tag
 
 import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
-import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
 import com.lemonappdev.konsist.api.provider.tag.KoKDocTagProvider
 import com.lemonappdev.konsist.core.declaration.KoKDocTagDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoValuedKDocTagDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
-import com.lemonappdev.konsist.core.util.EndOfLine
-import java.util.Locale
+import org.jetbrains.kotlin.kdoc.psi.impl.KDocLink
+import org.jetbrains.kotlin.kdoc.psi.impl.KDocTag
 
 internal interface KoKDocTagProviderCore :
     KoKDocTagProvider,
     KoTextProviderCore,
     KoBaseProviderCore {
+    val kDocTags: List<KDocTag>
+
     override val tags: List<KoKDocTagDeclaration>
-        get() {
-            val regex = "@(\\w+)".toRegex()
+        get() =
+            kDocTags
+                .map { tag ->
+                    val name =
+                        KoKDocTag
+                            .values()
+                            .firstOrNull { value -> value.type.removePrefix("@") == tag.name }
 
-            val tagsAsStringList =
-                text
-                    .substringAfter("@", "")
-                    .split("${EndOfLine.UNIX.value}@")
-                    .map { ("@${it.replaceFirstChar { char -> char.lowercase(Locale.getDefault()) }}").trimEnd() }
+                    if (name == null) {
+                        return@map null
+                    }
 
-            val tagsWithName =
-                tagsAsStringList
-                    .filterNot { it == "@" }
-                    .flatMap { regex.findAll(it) }
-                    .mapNotNull { KoKDocTag.values().firstOrNull { tag -> tag.type == it.value } }
-                    .zip(tagsAsStringList)
+                    val value =
+                        tag
+                            .children
+                            .filterIsInstance<KDocLink>()
+                            .firstOrNull()
+                            ?.text
 
-            val tagsGroupingByValued = tagsWithName.groupBy { it.first.isValued }
+                    val description = tag.getContent()
 
-            return tagsGroupingByValued.flatMap {
-                when (it.key) {
-                    true -> it.value.map { value -> parseToValuedTag(value.first, value.second) }
-                    false -> it.value.map { value -> parseToTag(value.first, value.second) }
-                }
-            }
-        }
+                    if (value != null) {
+                        KoValuedKDocTagDeclarationCore(name, value, description)
+                    } else {
+                        KoKDocTagDeclarationCore(name, description)
+                    }
+                }.filterNotNull()
 
     override val numTags: Int
         get() = tags.size
@@ -68,30 +71,4 @@ internal interface KoKDocTagProviderCore :
             tags.isEmpty() -> hasTags()
             else -> this.tags.map { it.name }.containsAll(tags)
         }
-
-    private fun parseToValuedTag(
-        koKDocTag: KoKDocTag,
-        sentence: String,
-    ): KoValuedKDocTagDeclaration {
-        val parsed = sentence.split(" ")
-        val description =
-            parsed
-                .subList(2, parsed.size)
-                .joinToString(" ")
-
-        return KoValuedKDocTagDeclarationCore(koKDocTag, parsed[1], description)
-    }
-
-    private fun parseToTag(
-        koKDocTag: KoKDocTag,
-        sentence: String,
-    ): KoKDocTagDeclaration {
-        val parsed = sentence.split(" ")
-        val description =
-            parsed
-                .subList(1, parsed.size)
-                .joinToString(" ")
-
-        return KoKDocTagDeclarationCore(koKDocTag, description)
-    }
 }

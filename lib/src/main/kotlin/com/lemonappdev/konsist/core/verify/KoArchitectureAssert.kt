@@ -182,69 +182,65 @@ private fun getFailedDependsOnMessage(dependsOnLayerDependencyFailures: List<Dep
 private fun getFailedDependsOnLayers(
     files: List<KoFileDeclaration>,
     layerDependencies: LayerDependenciesCore,
-): List<DependsOnLayerDependencyFailure> {
-    val failedLayerDependencies = mutableListOf<DependsOnLayerDependencyFailure>()
-
-    layerDependencies
-        .dependsOnDependencies
-        .forEach { (layer, otherLayers) ->
-            otherLayers.forEach { otherLayer ->
-                if (!layer.isDependentOn(otherLayer, files)) {
-                    failedLayerDependencies += DependsOnLayerDependencyFailure(layer, otherLayer)
+): List<DependsOnLayerDependencyFailure> =
+    layerDependencies.dependsOnDependencies
+        .groupBy { it.layer1 }
+        .flatMap { (layer1, dependencies) ->
+            dependencies
+                .mapNotNull { dep ->
+                    dep.layer2?.let { layer2 ->
+                        Triple(layer1, layer2, dep.strict)
+                    }
+                }.filter { (layer1, layer2, strict) ->
+                    strict == true && !layer1.isDependentOn(layer2, files)
+                }.map { (layer1, layer2, _) ->
+                    DependsOnLayerDependencyFailure(layer1, layer2)
                 }
-            }
         }
-
-    return failedLayerDependencies
-}
 
 private fun getFailedDoesNotDependsOnLayers(
     files: List<KoFileDeclaration>,
     layerDependencies: LayerDependenciesCore,
 ): List<DoesNotDependsOnLayerDependencyFailure> {
-    val failedLayerDependencies = mutableListOf<DoesNotDependsOnLayerDependencyFailure>()
+    val forbiddenDependencies =
+        layerDependencies.doesNotDependsOnDependencies
+            .groupBy { it.layer1 }
+            .mapValues { (_, dependencies) -> dependencies.mapNotNull { it.layer2 }.toSet() }
 
-    layerDependencies
-        .doesNotDependsOnDependencies
-        .forEach { (layer, otherLayers) ->
-            otherLayers.forEach { otherLayer ->
-                val dependOnFiles = layer.getDependentOnFiles(otherLayer, files)
+    return forbiddenDependencies.flatMap { (sourceLayer, targetLayers) ->
+        targetLayers.mapNotNull { targetLayer ->
+            val dependentFiles = sourceLayer.getDependentOnFiles(targetLayer, files)
 
-                if (dependOnFiles.isNotEmpty()) {
-                    failedLayerDependencies +=
-                        DoesNotDependsOnLayerDependencyFailure(
-                            layer,
-                            dependOnFiles,
-                            otherLayer,
-                        )
-                }
+            dependentFiles.takeIf { it.isNotEmpty() }?.let {
+                DoesNotDependsOnLayerDependencyFailure(
+                    sourceLayer,
+                    dependentFiles,
+                    targetLayer,
+                )
             }
         }
-
-    return failedLayerDependencies
+    }
 }
 
 private fun getFailedDependsOnNothing(
     files: List<KoFileDeclaration>,
     layerDependencies: LayerDependenciesCore,
 ): List<DependsOnNothingDependencyFailure> {
-    val failedLayerDependencies = mutableListOf<DependsOnNothingDependencyFailure>()
+    val isolatedLayers =
+        layerDependencies.dependsOnNothingDependencies
+            .map { it.layer1 }
+            .toSet()
 
-    layerDependencies
-        .dependsOnNothingDependencies
-        .forEach { layer ->
-            val dependentFiles = layer.getDependentOnAnyLayerFiles(files, layerDependencies)
+    return isolatedLayers.mapNotNull { layer ->
+        val dependentFiles = layer.getDependentOnAnyLayerFiles(files, layerDependencies)
 
-            if (dependentFiles.isNotEmpty()) {
-                failedLayerDependencies +=
-                    DependsOnNothingDependencyFailure(
-                        layer,
-                        dependentFiles,
-                    )
-            }
+        dependentFiles.takeIf { it.isNotEmpty() }?.let {
+            DependsOnNothingDependencyFailure(
+                layer,
+                dependentFiles,
+            )
         }
-
-    return failedLayerDependencies
+    }
 }
 
 private fun Layer.isDependentOn(

@@ -1,0 +1,3 @@
+object SampleObject : Throwable() {
+    private fun readResolve(): Any = SampleObject
+}

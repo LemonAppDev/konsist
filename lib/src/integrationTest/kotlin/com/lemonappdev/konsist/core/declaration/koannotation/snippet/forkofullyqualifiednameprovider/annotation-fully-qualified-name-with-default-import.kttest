@@ -1,0 +1,3 @@
+@Deprecated("Sample annotation")
+fun sampleFunction() {
+}

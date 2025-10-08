@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>LayerDependencies</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../index.html">
+                            Konsist 0.17.0
+                    </a>
+            </div>
+            <div class="library-version">
+            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":lib:dokkaHtml/main">jvm</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="Konsist 0.17.0::com.lemonappdev.konsist.api.architecture/LayerDependencies///PointingToDeclaration//1440829338">
+  <div class="breadcrumbs"><a href="../../../index.html">Konsist 0.17.0</a><span class="delimiter">/</span><a href="../index.html">com.lemonappdev.konsist.api.architecture</a><span class="delimiter">/</span><span class="current">LayerDependencies</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Layer</span><wbr></wbr><span><span>Dependencies</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">LayerDependencies</a></div><p class="paragraph">Represents the dependency configuration for a layer within an architecture.</p><p class="paragraph">This interface provides methods to define dependencies between layers in an architecture.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="945183712%2FFunctions%2F1440829338" anchor-label="dependsOn" id="945183712%2FFunctions%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="depends-on.html"><span>depends</span><wbr></wbr><span><span>On</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="945183712%2FFunctions%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="../-layer/index.html">Layer</a><span class="token punctuation">.</span><a href="depends-on.html"><span class="token function">dependsOn</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">layers<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="../-layer/index.html">Layer</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Adds dependencies between the current layer and the specified list of layers.</p></div><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a><span class="token operator">&lt;</span><a href="../-layer/index.html">Layer</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="depends-on.html"><span class="token function">dependsOn</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">layer<span class="token operator">: </span><a href="../-layer/index.html">Layer</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Adds dependencies between each layer in the collection and the specified layer.</p></div><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a><span class="token operator">&lt;</span><a href="../-layer/index.html">Layer</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="depends-on.html"><span class="token function">dependsOn</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">layers<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="../-layer/index.html">Layer</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Adds dependencies between each layer in the collection and the specified layers.</p></div><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="../-layer/index.html">Layer</a><span class="token punctuation">.</span><a href="depends-on.html"><span class="token function">dependsOn</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">layer<span class="token operator">: </span><a href="../-layer/index.html">Layer</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">vararg </span>layers<span class="token operator">: </span><a href="../-layer/index.html">Layer</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Adds dependencies between the current layer and the specified layers.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-537667324%2FFunctions%2F1440829338" anchor-label="dependsOnNothing" id="-537667324%2FFunctions%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="depends-on-nothing.html"><span>depends</span><wbr></wbr><span>On</span><wbr></wbr><span><span>Nothing</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-537667324%2FFunctions%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="../-layer/index.html">Layer</a><span class="token punctuation">.</span><a href="depends-on-nothing.html"><span class="token function">dependsOnNothing</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Specifies that the current layer does not depend on any other layer.</p></div><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a><span class="token operator">&lt;</span><a href="../-layer/index.html">Layer</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="depends-on-nothing.html"><span class="token function">dependsOnNothing</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Specifies that none of the layers in the collection depend on any other layer.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1113239840%2FFunctions%2F1440829338" anchor-label="doesNotDependOn" id="-1113239840%2FFunctions%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="does-not-depend-on.html"><span>does</span><wbr></wbr><span>Not</span><wbr></wbr><span>Depend</span><wbr></wbr><span><span>On</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1113239840%2FFunctions%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="../-layer/index.html">Layer</a><span class="token punctuation">.</span><a href="does-not-depend-on.html"><span class="token function">doesNotDependOn</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">layers<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="../-layer/index.html">Layer</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Specifies that the current layer does not depend on the given list of layers.</p></div><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a><span class="token operator">&lt;</span><a href="../-layer/index.html">Layer</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="does-not-depend-on.html"><span class="token function">doesNotDependOn</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">layer<span class="token operator">: </span><a href="../-layer/index.html">Layer</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Specifies that none of the layers in the collection depend on the specified layer.</p></div><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a><span class="token operator">&lt;</span><a href="../-layer/index.html">Layer</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="does-not-depend-on.html"><span class="token function">doesNotDependOn</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">layers<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="../-layer/index.html">Layer</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Specifies that none of the layers in the collection depend on any of the specified layers.</p></div><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="../-layer/index.html">Layer</a><span class="token punctuation">.</span><a href="does-not-depend-on.html"><span class="token function">doesNotDependOn</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">layer<span class="token operator">: </span><a href="../-layer/index.html">Layer</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">vararg </span>layers<span class="token operator">: </span><a href="../-layer/index.html">Layer</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Specifies that the current layer does not depend on any given layer.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1821310602%2FFunctions%2F1440829338" anchor-label="include" id="-1821310602%2FFunctions%2F1440829338" data-filterable-set=":lib:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":lib:dokkaHtml/main" data-filterable-set=":lib:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="include.html"><span><span>include</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1821310602%2FFunctions%2F1440829338"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="../-layer/index.html">Layer</a><span class="token punctuation">.</span><a href="include.html"><span class="token function">include</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">This function is used to include a Layer in the architecture without specifying any dependencies. It can be used in combination with dependsOnNothing() to specify that a layer does not depend on any other layer.</p></div><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a><span class="token operator">&lt;</span><a href="../-layer/index.html">Layer</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="include.html"><span class="token function">include</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Includes all layers from the collection in the architecture without specifying any dependencies. This can be used in combination with dependsOnNothing() to specify that multiple layers do not depend on any other layer.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

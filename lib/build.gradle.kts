@@ -1,6 +1,6 @@
 plugins {
-    id("local.base")
-    id("local.publish")
+    id("com.lemonappdev.konsist.convention.base")
+    id("com.lemonappdev.konsist.convention.publish")
 }
 
 dependencies {
@@ -12,6 +12,8 @@ dependencies {
     testImplementation(libs.junitJupiterParams)
     testImplementation(libs.mockk)
     testImplementation(libs.kluent)
+
+    testRuntimeOnly(libs.junitPlatformLauncher)
 }
 
 @Suppress("UnstableApiUsage")

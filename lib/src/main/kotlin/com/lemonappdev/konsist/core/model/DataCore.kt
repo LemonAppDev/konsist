@@ -60,9 +60,6 @@ fun getClass(
         ?: containingFile
             .classes()
             .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
-        ?: containingFile
-            .classes()
-            .firstOrNull { decl -> decl.name == name }
 }
 
 fun getInterface(
@@ -84,9 +81,6 @@ fun getInterface(
         ?: containingFile
             .interfaces()
             .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
-        ?: containingFile
-            .interfaces()
-            .firstOrNull { decl -> decl.name == name }
 }
 
 fun getObject(
@@ -108,9 +102,6 @@ fun getObject(
         ?: containingFile
             .objects()
             .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
-        ?: containingFile
-            .objects()
-            .firstOrNull { decl -> decl.name == name }
 }
 
 fun getTypeAlias(

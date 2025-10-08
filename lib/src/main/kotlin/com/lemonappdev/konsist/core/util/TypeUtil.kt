@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
@@ -20,6 +21,9 @@ import com.lemonappdev.konsist.core.model.getObject
 import com.lemonappdev.konsist.core.model.getTypeAlias
 import com.lemonappdev.konsist.core.provider.KoTypeParameterProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
+import org.jetbrains.kotlin.org.jline.utils.Log
+import org.jetbrains.kotlin.psi.KtAnnotationEntry
+import org.jetbrains.kotlin.psi.KtConstructorCalleeExpression
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunctionType
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
@@ -32,12 +36,21 @@ import org.jetbrains.kotlin.psi.KtUserType
 import kotlin.reflect.KClass
 
 object TypeUtil {
+    internal fun isTypeAvailable(fqn: String): Boolean =
+        try {
+            Class.forName(fqn)
+            true
+        } catch (e: ClassNotFoundException) {
+            Log.info(e)
+            false
+        }
+
     internal fun getBasicType(
         types: List<KtElement?>,
         isExtension: Boolean,
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
-    ): KoSourceDeclaration? {
+    ): KoDeclarationCastProvider? {
         val notNullTypes = types.filterNotNull()
 
         val type =
@@ -65,7 +78,7 @@ object TypeUtil {
                         .firstOrNull()
 
                 if (typeProjection?.projectionKind == KtProjectionKind.STAR) {
-                    return KoStarProjectionDeclarationCore.getInstance(typeProjection, parentDeclaration) as? KoSourceDeclaration
+                    return KoStarProjectionDeclarationCore as? KoDeclarationCastProvider
                 } else {
                     typeProjection
                         ?.children
@@ -75,6 +88,12 @@ object TypeUtil {
                         ?.children
                         ?.firstOrNull()
                 }
+            } else if (notNullTypes.filterIsInstance<KtAnnotationEntry>().isNotEmpty()) {
+                notNullTypes
+                    .filterIsInstance<KtAnnotationEntry>()
+                    .firstOrNull()
+                    ?.children
+                    ?.firstOrNull()
             } else {
                 null
             }
@@ -93,11 +112,13 @@ object TypeUtil {
                 .imports
                 .firstOrNull { it.alias?.name == nestedType?.text }
 
-        return if (importDirective != null) {
-            importDirective.alias
-        } else {
-            transformPsiElementToKoTypeDeclaration(type, parentDeclaration, containingFile)
-        }
+        return (
+            if (importDirective != null) {
+                importDirective.alias
+            } else {
+                transformPsiElementToKoTypeDeclaration(type, parentDeclaration, containingFile)
+            }
+        ) as KoDeclarationCastProvider?
     }
 
     internal fun hasTypeOf(
@@ -115,7 +136,7 @@ object TypeUtil {
         type: PsiElement?,
         parentDeclaration: KoBaseDeclaration,
         containingFile: KoFileDeclaration,
-    ): KoSourceDeclaration? {
+    ): KoDeclarationCastProvider? {
         val nestedType =
             if (type is KtNullableType) {
                 type
@@ -157,13 +178,19 @@ object TypeUtil {
                 ?.firstOrNull { it.name == typeText }
 
         return when {
-            typeParameter != null -> KoTypeParameterDeclarationCore.getInstance(typeParameter, emptyList(), containingFile)
-            nestedType is KtTypeProjection -> KoStarProjectionDeclarationCore.getInstance(nestedType, parentDeclaration)
+            typeParameter != null ->
+                KoTypeParameterDeclarationCore.getInstance(
+                    typeParameter,
+                    emptyList(),
+                    containingFile,
+                )
+
+            nestedType is KtTypeProjection -> KoStarProjectionDeclarationCore
             nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
             nestedType is KtUserType && typeText != null -> {
                 if (nestedType.children.filterIsInstance<KtTypeArgumentList>().isNotEmpty()) {
                     KoGenericTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
-                } else if (isKotlinBasicType(typeText) || isKotlinCollectionTypes(typeText)) {
+                } else if (isKotlinType(typeText)) {
                     KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
                 } else {
                     getClass(typeText, fullyQualifiedName, false, containingFile)
@@ -175,7 +202,7 @@ object TypeUtil {
             }
 
             nestedType is KtNameReferenceExpression && typeText != null -> {
-                if (isKotlinBasicType(typeText) || isKotlinCollectionTypes(typeText)) {
+                if (isKotlinType(typeText)) {
                     KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
                 } else {
                     getClass(typeText, fullyQualifiedName, false, containingFile)
@@ -194,8 +221,20 @@ object TypeUtil {
                     ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
             }
 
+            nestedType is KtConstructorCalleeExpression && typeText != null -> {
+                if (isKotlinType(typeText)) {
+                    KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
+                } else {
+                    getClass(typeText, fullyQualifiedName, false, containingFile)
+                        ?: getInterface(typeText, fullyQualifiedName, false, containingFile)
+                        ?: getObject(typeText, fullyQualifiedName, false, containingFile)
+                        ?: getTypeAlias(typeText, fullyQualifiedName, containingFile)
+                        ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
+                }
+            }
+
             else -> null
-        } as? KoSourceDeclaration
+        } as KoDeclarationCastProvider?
     }
 
     private fun List<KoBaseDeclaration>.getDeclarationFullyQualifiedName(
@@ -222,15 +261,21 @@ object TypeUtil {
         return declaration?.fullyQualifiedName
     }
 
-    internal fun isKotlinType(typeName: String): Boolean = isKotlinBasicType(typeName) || isKotlinCollectionTypes(typeName)
+    internal fun isKotlinType(typeName: String): Boolean {
+        val bareTypeName = getBareType(typeName)
+
+        return kotlinTypes.any { it.endsWith(".$bareTypeName") }
+    }
 
     internal fun isKotlinBasicType(typeName: String): Boolean {
         val bareTypeName = getBareType(typeName)
+
         return kotlinBasicTypeNames.any { it == bareTypeName }
     }
 
     internal fun isKotlinCollectionTypes(typeName: String): Boolean {
         val bareTypeName = getBareType(typeName)
+
         return kotlinCollectionTypeNames.any { it == bareTypeName }
     }
 
@@ -330,4 +375,261 @@ object TypeUtil {
             Set::class,
         ).mapNotNull { it.simpleName }
             .toSet()
+
+    /*
+        List of Kotlin standard library class declarations
+        (extracted from Kotlin stdlib version 2.2).
+
+        https://kotlinlang.org/api/core/kotlin-stdlib/
+     */
+    val kotlinTypes =
+        listOf(
+            "kotlin.collections.AbstractCollection",
+            "kotlin.collections.AbstractIterator",
+            "kotlin.collections.AbstractList",
+            "kotlin.collections.AbstractMap",
+            "kotlin.collections.AbstractMutableCollection",
+            "kotlin.collections.AbstractMutableList",
+            "kotlin.collections.AbstractMutableMap",
+            "kotlin.collections.AbstractMutableSet",
+            "kotlin.collections.AbstractSet",
+            "kotlin.io.AccessDeniedException",
+            "kotlin.Annotation",
+            "kotlin.annotation.AnnotationRetention",
+            "kotlin.annotation.AnnotationTarget",
+            "kotlin.Any",
+            "kotlin.text.Appendable",
+            "kotlin.ArithmeticException",
+            "kotlin.Array",
+            "kotlin.collections.ArrayDeque",
+            "kotlin.ArrayIndexOutOfBoundsException",
+            "kotlin.collections.ArrayList",
+            "kotlin.AssertionError",
+            "kotlin.AutoCloseable",
+            "kotlin.Boolean",
+            "kotlin.BooleanArray",
+            "kotlin.collections.BooleanIterator",
+            "kotlin.BuilderInference",
+            "kotlin.Byte",
+            "kotlin.ByteArray",
+            "kotlin.collections.ByteIterator",
+            "kotlin.Char",
+            "kotlin.text.CharacterCodingException",
+            "kotlin.CharArray",
+            "kotlin.text.CharCategory",
+            "kotlin.text.CharDirectionality",
+            "kotlin.collections.CharIterator",
+            "kotlin.ranges.CharProgression",
+            "kotlin.ranges.CharRange",
+            "kotlin.CharSequence",
+            "kotlin.text.Charsets",
+            "kotlin.ClassCastException",
+            "kotlin.ranges.ClosedFloatingPointRange",
+            "kotlin.ranges.ClosedRange",
+            "kotlin.collections.Collection",
+            "kotlin.Comparable",
+            "kotlin.Comparator",
+            "kotlin.ConcurrentModificationException",
+            "kotlin.ConsistentCopyVisibility",
+            "kotlin.js.Console",
+            "kotlin.ContextFunctionTypeParams",
+            "kotlin.js.Date",
+            "kotlin.DeepRecursiveFunction",
+            "kotlin.DeepRecursiveScope",
+            "kotlin.Deprecated",
+            "kotlin.DeprecatedSinceKotlin",
+            "kotlin.DeprecationLevel",
+            "kotlin.Double",
+            "kotlin.DoubleArray",
+            "kotlin.collections.DoubleIterator",
+            "kotlin.DslMarker",
+            "kotlin.js.Dynamic",
+            "kotlin.EagerInitialization",
+            "kotlin.js.EagerInitialization",
+            "kotlin.Enum",
+            "kotlin.Error",
+            "kotlin.Exception",
+            "kotlin.ExperimentalContextParameters",
+            "kotlin.js.ExperimentalJsCollectionsApi",
+            "kotlin.js.ExperimentalJsExport",
+            "kotlin.js.ExperimentalJsFileName",
+            "kotlin.js.ExperimentalJsReflectionCreateInstance",
+            "kotlin.js.ExperimentalJsStatic",
+            "kotlin.ExperimentalMultiplatform",
+            "kotlin.ExperimentalStdlibApi",
+            "kotlin.ExperimentalSubclassOptIn",
+            "kotlin.ExperimentalUnsignedTypes",
+            "kotlin.js.ExperimentalWasmJsInterop",
+            "kotlin.js.ExperimentalWasmJsInterop",
+            "kotlin.ExposedCopyVisibility",
+            "kotlin.ExtensionFunctionType",
+            "kotlin.io.FileAlreadyExistsException",
+            "kotlin.io.FileSystemException",
+            "kotlin.io.FileTreeWalk",
+            "kotlin.io.FileWalkDirection",
+            "kotlin.Float",
+            "kotlin.FloatArray",
+            "kotlin.collections.FloatIterator",
+            "kotlin.Function",
+            "kotlin.collections.Grouping",
+            "kotlin.collections.HashMap",
+            "kotlin.collections.HashSet",
+            "kotlin.text.HexFormat",
+            "kotlin.IgnorableReturnValue",
+            "kotlin.IllegalArgumentException",
+            "kotlin.IllegalStateException",
+            "kotlin.jvm.ImplicitlyActualizedByJvmDeclaration",
+            "kotlin.collections.IndexedValue",
+            "kotlin.IndexOutOfBoundsException",
+            "kotlin.Int",
+            "kotlin.IntArray",
+            "kotlin.collections.IntIterator",
+            "kotlin.ranges.IntProgression",
+            "kotlin.ranges.IntRange",
+            "kotlin.collections.Iterable",
+            "kotlin.collections.Iterator",
+            "kotlin.js.JsAny",
+            "kotlin.js.JsAny",
+            "kotlin.js.JsArray",
+            "kotlin.js.JsArray",
+            "kotlin.js.JsBigInt",
+            "kotlin.js.JsBigInt",
+            "kotlin.js.JsBoolean",
+            "kotlin.js.JsBoolean",
+            "kotlin.js.JsClass",
+            "kotlin.js.JsException",
+            "kotlin.js.JsException",
+            "kotlin.js.JsExport",
+            "kotlin.js.JsExternalArgument",
+            "kotlin.js.JsExternalInheritorsOnly",
+            "kotlin.js.JsFileName",
+            "kotlin.JsFun",
+            "kotlin.JsFun",
+            "kotlin.js.JsModule",
+            "kotlin.js.JsName",
+            "kotlin.js.JsNonModule",
+            "kotlin.js.JsNumber",
+            "kotlin.js.JsNumber",
+            "kotlin.js.Json",
+            "kotlin.js.JSON",
+            "kotlin.js.JsPromiseError",
+            "kotlin.js.JsQualifier",
+            "kotlin.js.JsReference",
+            "kotlin.js.JsReference",
+            "kotlin.js.JsStatic",
+            "kotlin.js.JsString",
+            "kotlin.js.JsString",
+            "kotlin.jvm.JvmDefaultWithCompatibility",
+            "kotlin.jvm.JvmDefaultWithoutCompatibility",
+            "kotlin.jvm.JvmExposeBoxed",
+            "kotlin.jvm.JvmField",
+            "kotlin.jvm.JvmInline",
+            "kotlin.jvm.JvmMultifileClass",
+            "kotlin.jvm.JvmName",
+            "kotlin.jvm.JvmOverloads",
+            "kotlin.jvm.JvmRecord",
+            "kotlin.jvm.JvmRepeatable",
+            "kotlin.jvm.JvmSerializableLambda",
+            "kotlin.jvm.JvmStatic",
+            "kotlin.jvm.JvmSuppressWildcards",
+            "kotlin.jvm.JvmSynthetic",
+            "kotlin.jvm.JvmWildcard",
+            "kotlin.KotlinVersion",
+            "kotlin.Lazy",
+            "kotlin.LazyThreadSafetyMode",
+            "kotlin.collections.LinkedHashMap",
+            "kotlin.collections.LinkedHashSet",
+            "kotlin.collections.List",
+            "kotlin.collections.ListIterator",
+            "kotlin.Long",
+            "kotlin.LongArray",
+            "kotlin.collections.LongIterator",
+            "kotlin.ranges.LongProgression",
+            "kotlin.ranges.LongRange",
+            "kotlin.collections.Map",
+            "kotlin.text.MatchGroup",
+            "kotlin.text.MatchGroupCollection",
+            "kotlin.text.MatchNamedGroupCollection",
+            "kotlin.text.MatchResult",
+            "kotlin.Metadata",
+            "kotlin.annotation.MustBeDocumented",
+            "kotlin.MustUseReturnValue",
+            "kotlin.collections.MutableCollection",
+            "kotlin.collections.MutableIterable",
+            "kotlin.collections.MutableIterator",
+            "kotlin.collections.MutableList",
+            "kotlin.collections.MutableListIterator",
+            "kotlin.collections.MutableMap",
+            "kotlin.collections.MutableSet",
+            "kotlin.js.nativeGetter",
+            "kotlin.js.nativeInvoke",
+            "kotlin.js.nativeSetter",
+            "kotlin.NoSuchElementException",
+            "kotlin.io.NoSuchFileException",
+            "kotlin.Nothing",
+            "kotlin.NotImplementedError",
+            "kotlin.NoWhenBranchMatchedException",
+            "kotlin.NullPointerException",
+            "kotlin.Number",
+            "kotlin.NumberFormatException",
+            "kotlin.io.OnErrorAction",
+            "kotlin.ranges.OpenEndRange",
+            "kotlin.OptIn",
+            "kotlin.OptionalExpectation",
+            "kotlin.OutOfMemoryError",
+            "kotlin.OverloadResolutionByLambdaReturnType",
+            "kotlin.Pair",
+            "kotlin.ParameterName",
+            "kotlin.js.Promise",
+            "kotlin.PublishedApi",
+            "kotlin.jvm.PurelyImplements",
+            "kotlin.collections.RandomAccess",
+            "kotlin.text.Regex",
+            "kotlin.text.RegexOption",
+            "kotlin.js.RegExp",
+            "kotlin.js.RegExpMatch",
+            "kotlin.annotation.Repeatable",
+            "kotlin.ReplaceWith",
+            "kotlin.RequiresOptIn",
+            "kotlin.Result",
+            "kotlin.annotation.Retention",
+            "kotlin.RuntimeException",
+            "kotlin.sequences.Sequence",
+            "kotlin.sequences.SequenceScope",
+            "kotlin.collections.Set",
+            "kotlin.Short",
+            "kotlin.ShortArray",
+            "kotlin.collections.ShortIterator",
+            "kotlin.SinceKotlin",
+            "kotlin.jvm.Strictfp",
+            "kotlin.String",
+            "kotlin.text.StringBuilder",
+            "kotlin.SubclassOptInRequired",
+            "kotlin.Suppress",
+            "kotlin.jvm.Synchronized",
+            "kotlin.annotation.Target",
+            "kotlin.Throwable",
+            "kotlin.Throws",
+            "kotlin.jvm.Throws",
+            "kotlin.jvm.Transient",
+            "kotlin.Triple",
+            "kotlin.text.Typography",
+            "kotlin.UByte",
+            "kotlin.UByteArray",
+            "kotlin.UInt",
+            "kotlin.UIntArray",
+            "kotlin.ranges.UIntProgression",
+            "kotlin.ranges.UIntRange",
+            "kotlin.ULong",
+            "kotlin.ULongArray",
+            "kotlin.ranges.ULongProgression",
+            "kotlin.ranges.ULongRange",
+            "kotlin.UninitializedPropertyAccessException",
+            "kotlin.Unit",
+            "kotlin.UnsafeVariance",
+            "kotlin.UnsupportedOperationException",
+            "kotlin.UShort",
+            "kotlin.UShortArray",
+            "kotlin.jvm.Volatile",
+        )
 }

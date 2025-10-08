@@ -1,6 +1,6 @@
 <p align="left">
     <a href="https://docs.konsist.lemonappdev.com/" target="_blank">
-        <img src="misc/konsist-logo/logo.png" alt="Konsit Logo" width="400">
+        <img src="misc/assets/konsist-logo/logo.png" alt="Konsit Logo" width="400">
     </a>
 </p>
 
@@ -15,7 +15,7 @@ tests ([JUnit](https://junit.org/) / [Kotest](https://kotest.io/)).
 
 <p align="left">
   <a href="https://kotlinfoundation.org/news/grants-program-winners-24/" target="_blank">
-    <img src="misc/library-grant-program-winner.png" alt="Library Grant Program Winner 2024" title="Library Grant Program Winner 2024" width="210">
+    <img src="misc/assets/library-grant-program-winner.png" alt="Library Grant Program Winner 2024" title="Library Grant Program Winner 2024" width="210">
   </a>
 </p>
 
@@ -23,12 +23,12 @@ tests ([JUnit](https://junit.org/) / [Kotest](https://kotest.io/)).
 
 Gradle Kotlin:
 ```kotlin
-testImplementation("com.lemonappdev:konsist:0.16.1")
+testImplementation("com.lemonappdev:konsist:0.17.2")
 ```
 
 Gradle Groovy:
 ```groovy
-testImplementation "com.lemonappdev:konsist:0.16.1"
+testImplementation "com.lemonappdev:konsist:0.17.2"
 ```
 
 Maven:
@@ -36,7 +36,7 @@ Maven:
 <dependency>
 <groupId>com.lemonappdev</groupId>
 <artifactId>konsist</artifactId>
-<version>0.16.1</version>
+<version>0.17.2</version>
 <scope>test</scope>
 </dependency>
 ```
@@ -49,7 +49,7 @@ To begin using Konsist in your project, consider these steps:
    features and usage guidelines.
 2. Check [Starter Projects](https://github.com/LemonAppDev/konsist/tree/main/samples/starter-projects) to see Konsist in
    action.
-3. Review [Konsist API Reference](https://reference.konsist.lemonappdev.com) to learn about the available API methods.
+3. Review [Konsist API Reference](https://lemonappdev.github.io/konsist/) to learn about the available API methods.
 
 ## Examples
 

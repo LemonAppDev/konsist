@@ -8,5 +8,5 @@ internal interface KoIsExtensionProviderCore :
     KoBaseProviderCore,
     KoIsExtensionProvider,
     KoSourceDeclarationCore {
-    override val isExtension: Boolean get() = psiElement.isExtensionDeclaration()
+    override val isExtension: Boolean get() = psiElement?.isExtensionDeclaration() == true
 }

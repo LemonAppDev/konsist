@@ -57,14 +57,33 @@ class LayerDependenciesCoreTest {
 
         // then
         dependsOn shouldBeEqualTo
-            mapOf(
-                layer1 to setOf(layer2),
+            setOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                    layer2 = layer2,
+                    strict = false,
+                ),
             )
+
         doesNotDependOn shouldBeEqualTo
-            mapOf(
-                layer2 to setOf(layer3),
+            listOf(
+                LayerDependency(
+                    layer1 = layer2,
+                    dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                    layer2 = layer3,
+                    strict = false,
+                ),
             )
-        dependsOnNothing shouldBeEqualTo setOf(layer3)
+
+        dependsOnNothing shouldBeEqualTo
+            listOf(
+                LayerDependency(
+                    layer1 = layer3,
+                    dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
+                    strict = false,
+                ),
+            )
     }
     // endregion
 
@@ -95,8 +114,13 @@ class LayerDependenciesCoreTest {
 
         // then
         result shouldBeEqualTo
-            mapOf(
-                layer1 to setOf(layer2),
+            setOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                    layer2 = layer2,
+                    strict = false,
+                ),
             )
     }
 
@@ -119,9 +143,19 @@ class LayerDependenciesCoreTest {
 
         // then
         result shouldBeEqualTo
-            mapOf(
-                layer1 to setOf(layer2),
-                layer2 to setOf(layer3),
+            setOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                    layer2 = layer2,
+                    strict = false,
+                ),
+                LayerDependency(
+                    layer1 = layer2,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                    layer2 = layer3,
+                    strict = false,
+                ),
             )
     }
 
@@ -143,8 +177,19 @@ class LayerDependenciesCoreTest {
 
         // then
         result shouldBeEqualTo
-            mapOf(
-                layer1 to setOf(layer2, layer3),
+            setOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                    layer2 = layer2,
+                    strict = false,
+                ),
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                    layer2 = layer3,
+                    strict = false,
+                ),
             )
     }
     // endregion
@@ -176,8 +221,13 @@ class LayerDependenciesCoreTest {
 
         // then
         result shouldBeEqualTo
-            mapOf(
-                layer1 to setOf(layer2),
+            listOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                    layer2 = layer2,
+                    strict = false,
+                ),
             )
     }
 
@@ -200,9 +250,19 @@ class LayerDependenciesCoreTest {
 
         // then
         result shouldBeEqualTo
-            mapOf(
-                layer1 to setOf(layer2),
-                layer2 to setOf(layer3),
+            listOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                    layer2 = layer2,
+                    strict = false,
+                ),
+                LayerDependency(
+                    layer1 = layer2,
+                    dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                    layer2 = layer3,
+                    strict = false,
+                ),
             )
     }
 
@@ -224,8 +284,19 @@ class LayerDependenciesCoreTest {
 
         // then
         result shouldBeEqualTo
-            mapOf(
-                layer1 to setOf(layer2, layer3),
+            listOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                    layer2 = layer2,
+                    strict = false,
+                ),
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                    layer2 = layer3,
+                    strict = false,
+                ),
             )
     }
     // endregion
@@ -255,7 +326,14 @@ class LayerDependenciesCoreTest {
         val result = sut.dependsOnNothingDependencies
 
         // then
-        result shouldBeEqualTo setOf(layer1)
+        result shouldBeEqualTo
+            listOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
+                    strict = false,
+                ),
+            )
     }
 
     @Test
@@ -275,9 +353,20 @@ class LayerDependenciesCoreTest {
         val result = sut.dependsOnNothingDependencies
 
         // then
-        result shouldBeEqualTo setOf(layer1, layer2)
+        result shouldBeEqualTo
+            listOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
+                    strict = false,
+                ),
+                LayerDependency(
+                    layer1 = layer2,
+                    dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
+                    strict = false,
+                ),
+            )
     }
-
     // endregion
 
     // region dependsOn
@@ -387,8 +476,18 @@ class LayerDependenciesCoreTest {
         // then
         sut.layerDependencies shouldContainAll
             setOf(
-                LayerDependency(layer1, LayerDependencyType.DEPENDS_ON_LAYER, layer2),
-                LayerDependency(layer1, LayerDependencyType.DEPENDS_ON_LAYER, layer3),
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                    layer2 = layer2,
+                    strict = false,
+                ),
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                    layer2 = layer3,
+                    strict = false,
+                ),
             )
     }
 
@@ -459,6 +558,28 @@ class LayerDependenciesCoreTest {
             "Layer 'name1' is already configured with no dependencies. It cannot subsequently depend on layer 'name2'."
     }
 
+    @Test
+    fun `dependsOn throws exception for forbidden strict override`() {
+        // given
+        val layer1 = Layer("name1", "package1..")
+        val layer2 = Layer("name2", "package2..")
+
+        justRun { layerValidatorManager.validateLayerDependencies(any()) }
+
+        // when
+        val func = {
+            with(sut) {
+                layer1.dependsOn(layer2, strict = false)
+                layer1.dependsOn(layer2, strict = true)
+            }
+        }
+
+        // then
+        func shouldThrow KoInvalidAssertArchitectureConfigurationException::class withMessage
+            "Layer dependency configuration for layer 'name1' is already defined with a strict=false value. " +
+            "It cannot be overridden with strict=true."
+    }
+
     // endregion
 
     //region doesNotDependOn
@@ -516,8 +637,18 @@ class LayerDependenciesCoreTest {
         // then
         sut.layerDependencies shouldContainAll
             setOf(
-                LayerDependency(layer1, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, layer2),
-                LayerDependency(layer1, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, layer3),
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                    layer2 = layer2,
+                    strict = false,
+                ),
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                    layer2 = layer3,
+                    strict = false,
+                ),
             )
     }
 
@@ -695,7 +826,12 @@ class LayerDependenciesCoreTest {
         // then
         sut.layerDependencies shouldContainAll
             setOf(
-                LayerDependency(layer, LayerDependencyType.DEPEND_ON_NOTHING, null),
+                LayerDependency(
+                    layer1 = layer,
+                    dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
+                    layer2 = null,
+                    strict = false,
+                ),
             )
     }
 
@@ -819,7 +955,7 @@ class LayerDependenciesCoreTest {
     }
     // endregion
 
-    // region Collection<Layer> dependencies
+    // region Collection<Layer> extension dependencies
     @Test
     fun `collection dependsOn single layer creates dependencies for all layers in collection`() {
         // given
@@ -835,8 +971,20 @@ class LayerDependenciesCoreTest {
         }
 
         // then
-        sut.layerDependencies shouldContain LayerDependency(sourceLayer1, LayerDependencyType.DEPENDS_ON_LAYER, targetLayer)
-        sut.layerDependencies shouldContain LayerDependency(sourceLayer2, LayerDependencyType.DEPENDS_ON_LAYER, targetLayer)
+        sut.layerDependencies shouldContain
+            LayerDependency(
+                layer1 = sourceLayer1,
+                dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                layer2 = targetLayer,
+                strict = false,
+            )
+        sut.layerDependencies shouldContain
+            LayerDependency(
+                layer1 = sourceLayer2,
+                dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                layer2 = targetLayer,
+                strict = false,
+            )
     }
 
     @Test
@@ -856,10 +1004,34 @@ class LayerDependenciesCoreTest {
         }
 
         // then
-        sut.layerDependencies shouldContain LayerDependency(sourceLayer1, LayerDependencyType.DEPENDS_ON_LAYER, targetLayer1)
-        sut.layerDependencies shouldContain LayerDependency(sourceLayer1, LayerDependencyType.DEPENDS_ON_LAYER, targetLayer2)
-        sut.layerDependencies shouldContain LayerDependency(sourceLayer2, LayerDependencyType.DEPENDS_ON_LAYER, targetLayer1)
-        sut.layerDependencies shouldContain LayerDependency(sourceLayer2, LayerDependencyType.DEPENDS_ON_LAYER, targetLayer2)
+        sut.layerDependencies shouldContain
+            LayerDependency(
+                layer1 = sourceLayer1,
+                dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                layer2 = targetLayer1,
+                strict = false,
+            )
+        sut.layerDependencies shouldContain
+            LayerDependency(
+                layer1 = sourceLayer1,
+                dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                layer2 = targetLayer2,
+                strict = false,
+            )
+        sut.layerDependencies shouldContain
+            LayerDependency(
+                layer1 = sourceLayer2,
+                dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                layer2 = targetLayer1,
+                strict = false,
+            )
+        sut.layerDependencies shouldContain
+            LayerDependency(
+                layer1 = sourceLayer2,
+                dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                layer2 = targetLayer2,
+                strict = false,
+            )
     }
 
     @Test
@@ -876,8 +1048,20 @@ class LayerDependenciesCoreTest {
         }
 
         // then
-        sut.layerDependencies shouldContain LayerDependency(sourceLayer1, LayerDependencyType.DEPEND_ON_NOTHING, null)
-        sut.layerDependencies shouldContain LayerDependency(sourceLayer2, LayerDependencyType.DEPEND_ON_NOTHING, null)
+        sut.layerDependencies shouldContain
+            LayerDependency(
+                layer1 = sourceLayer1,
+                dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
+                layer2 = null,
+                strict = false,
+            )
+        sut.layerDependencies shouldContain
+            LayerDependency(
+                layer1 = sourceLayer2,
+                dependencyType = LayerDependencyType.DEPEND_ON_NOTHING,
+                layer2 = null,
+                strict = false,
+            )
     }
 
     @Test
@@ -915,8 +1099,20 @@ class LayerDependenciesCoreTest {
         }
 
         // then
-        sut.layerDependencies shouldContain LayerDependency(sourceLayer1, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, targetLayer)
-        sut.layerDependencies shouldContain LayerDependency(sourceLayer2, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, targetLayer)
+        sut.layerDependencies shouldContain
+            LayerDependency(
+                layer1 = sourceLayer1,
+                dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                layer2 = targetLayer,
+                strict = false,
+            )
+        sut.layerDependencies shouldContain
+            LayerDependency(
+                layer1 = sourceLayer2,
+                dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                layer2 = targetLayer,
+                strict = false,
+            )
     }
 
     @Test
@@ -936,10 +1132,34 @@ class LayerDependenciesCoreTest {
         }
 
         // then
-        sut.layerDependencies shouldContain LayerDependency(sourceLayer1, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, targetLayer1)
-        sut.layerDependencies shouldContain LayerDependency(sourceLayer1, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, targetLayer2)
-        sut.layerDependencies shouldContain LayerDependency(sourceLayer2, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, targetLayer1)
-        sut.layerDependencies shouldContain LayerDependency(sourceLayer2, LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER, targetLayer2)
+        sut.layerDependencies shouldContain
+            LayerDependency(
+                layer1 = sourceLayer1,
+                dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                layer2 = targetLayer1,
+                strict = false,
+            )
+        sut.layerDependencies shouldContain
+            LayerDependency(
+                layer1 = sourceLayer1,
+                dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                layer2 = targetLayer2,
+                strict = false,
+            )
+        sut.layerDependencies shouldContain
+            LayerDependency(
+                layer1 = sourceLayer2,
+                dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                layer2 = targetLayer1,
+                strict = false,
+            )
+        sut.layerDependencies shouldContain
+            LayerDependency(
+                layer1 = sourceLayer2,
+                dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                layer2 = targetLayer2,
+                strict = false,
+            )
     }
     // endregion
 }

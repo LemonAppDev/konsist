@@ -2,6 +2,7 @@ package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.ext.list.functions
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withModifier
 import com.lemonappdev.konsist.api.ext.list.objects
@@ -113,7 +114,6 @@ class SpringSnippets {
             }
     }
 
-    @Test
     fun `files with domain package do not have Spring references`() {
         Konsist.scopeFromProduction()
             .files
@@ -127,17 +127,15 @@ class SpringSnippets {
             }
     }
 
-    @Test
     fun `Transactional annotation should only be used on default or public methods that are not part of an interface`() {
         Konsist.scopeFromProject()
             .functions()
             .withAnnotationOf(Transactional::class)
             .assertTrue {
-                it.hasPublicOrDefaultModifier && !it.isInterface
+                it.hasPublicOrDefaultModifier && it.containingDeclaration !is KoInterfaceDeclaration
             }
     }
 
-    @Test
     fun `every API method in RestController with 'Admin' suffix should have PreAuthorize annotation with ROLE_ADMIN`() {
         Konsist.scopeFromProject()
             .classes()
@@ -149,7 +147,6 @@ class SpringSnippets {
             }
     }
 
-    @Test
     fun `every non-public Controller should have @PreAuthorize on class or on each endpoint method`() {
         Konsist.scopeFromProject()
             .classes()

@@ -1,7 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "2.0.21"
-    application
-    id("com.android.application")
+    alias(libs.plugins.kotlinMultiplatform)
 }
 
 group = "org.example"
@@ -14,8 +12,9 @@ repositories {
 }
 
 kotlin {
+    jvmToolchain(11)
+
     jvm {
-        jvmToolchain(11)
         withJava()
         testRuns.named("test") {
             executionTask.configure {
@@ -42,38 +41,29 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-server-netty:3.0.1")
-                implementation("io.ktor:ktor-server-html-builder-jvm:3.0.1")
-                implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.11.0")
+                implementation(libs.ktor.server.netty)
+                implementation(libs.ktor.server.html.builder.jvm)
+                implementation(libs.kotlinx.html.jvm)
             }
         }
         val jvmTest by getting {
             dependencies {
-                implementation("com.lemonappdev:konsist:0.16.1")
+                implementation(libs.konsist)
             }
         }
 
         val jsMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.3.1-pre.836")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.3.1-pre.836")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.13.5-pre.836")
+                implementation(libs.kotlin.react)
+                implementation(libs.kotlin.react.dom)
+                implementation(libs.kotlin.emotion)
             }
         }
         val jsTest by getting
     }
 }
 
-application {
-    mainClass.set("org.example.application.ServerKt")
-}
-
 tasks.named<Copy>("jvmProcessResources") {
     val jsBrowserDistribution = tasks.named("jsBrowserDistribution")
     from(jsBrowserDistribution)
-}
-
-tasks.named<JavaExec>("run") {
-    dependsOn(tasks.named<Jar>("jvmJar"))
-    classpath(tasks.named<Jar>("jvmJar"))
 }

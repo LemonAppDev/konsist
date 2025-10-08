@@ -194,5 +194,17 @@ class KoParametersProviderExtTest {
         sut.hasValidKDocParamTags() shouldBeEqualTo true
     }
 
+    @Test
+    fun `declaration-with-non-tag-with-@-in-description-has-valid-kdoc`() {
+        // given
+        val sut =
+            getSnippetFile("declaration-with-non-tag-with-@-in-description-has-valid-kdoc")
+                .declarationsOf<KoParametersProvider>()
+                .first()
+
+        // then
+        sut.hasValidKDocParamTags() shouldBeEqualTo true
+    }
+
     private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("api/ext/provider/koparameters/snippet/", fileName)
 }

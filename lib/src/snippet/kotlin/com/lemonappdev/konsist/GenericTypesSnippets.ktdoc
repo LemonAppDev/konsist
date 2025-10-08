@@ -1,61 +1,58 @@
 package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.ext.list.genericTypeDeclarations
+import com.lemonappdev.konsist.api.ext.list.declaration.flatten
 import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.ext.list.returnTypes
 import com.lemonappdev.konsist.api.ext.list.typeArguments
-import com.lemonappdev.konsist.api.ext.list.genericTypes
 import com.lemonappdev.konsist.api.ext.list.sourceDeclarations
 import com.lemonappdev.konsist.api.ext.list.types
+import com.lemonappdev.konsist.api.ext.list.withGeneric
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
 
 class GenericTypesSnippets {
-    @Test
     fun `all generic return types contain X in their name`() {
         Konsist
             .scopeFromProduction()
             .functions()
             .returnTypes
-            .genericTypeDeclarations()
+            .withGeneric()
             .assertTrue { it.hasNameContaining("X") }
     }
 
-    @Test
     fun `property generic type does not contains star projection`() {
         Konsist
             .scopeFromProduction()
             .properties()
             .types
-            .genericTypeDeclarations { it.hasGenericType { type -> type.isKotlinType } }
-            .typeArguments
-            .sourceDeclarations()
-            .assertFalse { it.isStarProjection }
+            .assertFalse { type ->
+                type
+                    .typeArguments
+                    ?.flatten()
+                    ?.any { it.isStarProjection }
+            }
     }
 
-    @Test
     fun `all generic return types contain Kotlin collection type argument`() {
         Konsist
             .scopeFromProduction()
             .functions()
             .returnTypes
-            .genericTypeDeclarations()
+            .withGeneric()
             .typeArguments
-            .sourceDeclarations()
-            .assertTrue { it.isKotlinCollectionType }
+            .assertTrue { it.sourceDeclaration?.isKotlinCollectionType }
     }
 
-    @Test
     fun `function parameter has generic type argument with name ending with 'Repository'`() {
         Konsist
             .scopeFromProduction()
             .functions()
             .parameters
             .types
-            .genericTypeDeclarations()
-            .genericTypes
+            .withGeneric()
+            .sourceDeclarations()
             .assertFalse { it.hasNameEndingWith("Repository") }
     }
 }

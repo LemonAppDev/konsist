@@ -2,14 +2,15 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
-import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
 import com.lemonappdev.konsist.core.declaration.private.KoFunctionTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.private.KoGenericTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.util.TypeUtil
+import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtNullableType
 import org.jetbrains.kotlin.psi.KtTypeProjection
@@ -29,67 +30,76 @@ internal interface KoSourceDeclarationProviderCore :
         get() = null
     val ktTypeProjection: KtTypeProjection?
         get() = null
+    val ktAnnotationEntry: KtAnnotationEntry?
+        get() = null
 
-    override val sourceDeclaration: KoSourceDeclaration?
+    override val sourceDeclaration: KoDeclarationCastProvider?
         get() {
             val type =
                 TypeUtil.getBasicType(
-                    listOf(ktTypeReference, ktNameReferenceExpression, ktTypeProjection),
+                    listOf(ktTypeReference, ktNameReferenceExpression, ktTypeProjection, ktAnnotationEntry),
                     isExtensionDeclaration(),
                     getDeclarationWithfullyQualifiedName(containingDeclaration) ?: containingDeclaration,
                     containingFile,
                 )
 
-            return if (type is KoGenericTypeDeclarationCore) {
-                val nestedKtNameReferenceExpression =
-                    if (ktNameReferenceExpression != null) {
-                        ktNameReferenceExpression
-                    } else {
-                        val typeElement = ktTypeReference?.typeElement
+            return when (type) {
+                is KoGenericTypeDeclarationCore -> {
+                    val nestedKtNameReferenceExpression =
+                        if (ktNameReferenceExpression != null) {
+                            ktNameReferenceExpression
+                        } else {
+                            val typeElement = ktTypeReference?.typeElement
 
-                        val notNullableTypeElement =
-                            if (typeElement is KtNullableType) {
-                                typeElement
-                                    .children
-                                    .firstOrNull()
-                            } else {
-                                typeElement
-                            }
+                            val notNullableTypeElement =
+                                if (typeElement is KtNullableType) {
+                                    typeElement
+                                        .children
+                                        .firstOrNull()
+                                } else {
+                                    typeElement
+                                }
 
-                        notNullableTypeElement
-                            ?.children
-                            ?.filterIsInstance<KtNameReferenceExpression>()
-                            ?.firstOrNull()
-                    }
-
-                val nestedType =
-                    nestedKtNameReferenceExpression
-                        ?.isExtensionDeclaration()
-                        ?.let {
-                            TypeUtil.getBasicType(
-                                listOf(nestedKtNameReferenceExpression),
-                                it,
-                                this.castToKoBaseDeclaration(),
-                                containingFile,
-                            )
+                            notNullableTypeElement
+                                ?.children
+                                ?.filterIsInstance<KtNameReferenceExpression>()
+                                ?.firstOrNull()
                         }
 
-                when (nestedType) {
-                    is KoGenericTypeDeclarationCore -> nestedType.sourceDeclaration
-                    is KoFunctionTypeDeclarationCore -> null
-                    else -> nestedType
+                    val nestedType =
+                        nestedKtNameReferenceExpression
+                            ?.isExtensionDeclaration()
+                            ?.let {
+                                TypeUtil.getBasicType(
+                                    listOf(nestedKtNameReferenceExpression),
+                                    it,
+                                    this.castToKoBaseDeclaration(),
+                                    containingFile,
+                                )
+                            }
+
+                    when (nestedType) {
+                        is KoGenericTypeDeclarationCore -> (nestedType as? KoSourceDeclarationProvider)?.sourceDeclaration
+                        is KoFunctionTypeDeclarationCore -> null
+                        else -> nestedType
+                    }
                 }
-            } else if (type is KoFunctionTypeDeclarationCore) {
-                null
-            } else {
-                type
-            } ?: this as? KoSourceDeclaration
+
+                is KoFunctionTypeDeclarationCore -> {
+                    null
+                }
+
+                else -> {
+                    type
+                }
+            }
         }
 
     private fun isExtensionDeclaration(): Boolean =
         ktTypeReference?.isExtensionDeclaration() == true ||
             ktNameReferenceExpression?.isExtensionDeclaration() == true ||
-            ktTypeProjection?.isExtensionDeclaration() == true
+            ktTypeProjection?.isExtensionDeclaration() == true ||
+            ktAnnotationEntry?.isExtensionDeclaration() == true
 
     private fun getDeclarationWithfullyQualifiedName(declaration: KoBaseDeclaration): KoBaseDeclaration? =
         when {
@@ -106,7 +116,7 @@ internal interface KoSourceDeclarationProviderCore :
             }
         }
 
-    override fun hasSourceDeclaration(predicate: (KoSourceDeclaration) -> Boolean): Boolean =
+    override fun hasSourceDeclaration(predicate: (KoDeclarationCastProvider) -> Boolean): Boolean =
         sourceDeclaration?.let { predicate(it) } == true
 
     override fun hasSourceDeclarationOf(kClass: KClass<*>): Boolean =

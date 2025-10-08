@@ -1,0 +1,4 @@
+@SampleAnnotationFromFile
+class SampleClass
+
+annotation class SampleAnnotationFromFile

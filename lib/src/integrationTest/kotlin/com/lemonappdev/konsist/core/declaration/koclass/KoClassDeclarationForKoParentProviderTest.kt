@@ -288,5 +288,21 @@ class KoClassDeclarationForKoParentProviderTest {
         }
     }
 
+    @Test
+    fun `class-has-kotlin-parent`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-kotlin-parent")
+                .classes()
+                .first()
+
+        // then
+        assertSoftly(sut.parents().first()) {
+            name shouldBeEqualTo "Throwable"
+            sourceDeclaration?.asKotlinTypeDeclaration()?.fullyQualifiedName shouldBeEqualTo "kotlin.Throwable"
+            sourceDeclaration?.isKotlinType shouldBeEqualTo true
+        }
+    }
+
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koclass/snippet/forkoparentprovider/", fileName)
 }

@@ -18,10 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: 'corretto'
@@ -41,10 +41,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: 'corretto'
@@ -64,10 +64,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: 'corretto'
@@ -87,10 +87,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: 'corretto'
@@ -112,10 +112,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: 'corretto'
@@ -128,10 +128,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: 'corretto'
@@ -153,47 +153,13 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: 8
-          distribution: 'corretto'
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: 21
-          distribution: 'corretto'
-
-      - name: Publish Konsist Artifact To Local Maven Repository
-        run: >
-          ./gradlew publishToMavenLocal
-          -P konsist.releaseTarget=local
-
-      - name: Run Integration Test
-        run: cd test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
-
-      - name: Upload Report
-        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
-        uses: actions/upload-artifact@v4
-        with:
-          name: declaration-tester-project-macos-test-report
-          path: test-projects/konsist-declaration-tester/app/build/reports/integrationTest
-
-  declaration-tester-project-windows:
-    name: Declaration Tester Project Windows
-    runs-on: windows-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: |
-            8
+            11
             21
           distribution: 'corretto'
 
@@ -203,14 +169,44 @@ jobs:
           -P konsist.releaseTarget=local
 
       - name: Run Integration Test
-        run: cd test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
+        run: cd misc/test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
+
+      - name: Upload Report
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+        uses: actions/upload-artifact@v4
+        with:
+          name: declaration-tester-project-macos-test-report
+          path: misc/test-projects/konsist-declaration-tester/app/build/reports/integrationTest
+
+  declaration-tester-project-windows:
+    name: Declaration Tester Project Windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          java-version: |
+            11
+            21
+          distribution: 'corretto'
+
+      - name: Publish Konsist Artifact To Local Maven Repository
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+
+      - name: Run Integration Test
+        run: cd misc/test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
 
       - name: Upload Report
         if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
         uses: actions/upload-artifact@v4
         with:
           name: declaration-tester-project-windows-test-report
-          path: test-projects/konsist-declaration-tester/app/build/reports/integrationTest
+          path: misc/test-projects/konsist-declaration-tester/app/build/reports/integrationTest
 
 # ======================================= Library Artifact =========================================================
   konsist-artifact-check:
@@ -218,18 +214,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: 'corretto'
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.11.3'
+          python-version: '3.14.0'
 
       - name: Assemble
         run: ./gradlew lib:assemble
@@ -256,10 +252,10 @@ jobs:
           path: /home/runner/.m2/repository/com/lemonappdev/konsist/*
 
       - name: Check dependencies exposed by the Konsist artifact
-        run: python3 scripts/check_dependencies_exposed_by_konsist_artifact.py
+        run: python3 misc/scripts/check_dependencies_exposed_by_konsist_artifact.py
 
       - name: Check Bytecode version
-        run: python3 scripts/check_konsist_artifact_bytecode_version.py
+        run: python3 misc/scripts/check_konsist_artifact_bytecode_version.py
 
 # ======================================= Other =========================================================
 
@@ -268,10 +264,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: 'corretto'

@@ -1,0 +1,25 @@
+enum class SampleClass {
+    SAMPLE_CONSTANT_1 {
+        val sampleProperty = 0
+
+        override fun sampleFunction(): Int {
+            val sampleLocalProperty = 0
+
+            fun sampleLocalFunction() = 1
+
+            class SampleLocalClass
+
+            return 1
+        }
+
+        inner class SampleInnerClass {
+            val sampleNestedProperty = 0
+
+            fun sampleNestedFunction() = 1
+
+            inner class SampleNestedClass
+        }
+    };
+
+    abstract fun sampleFunction(): Int
+}

@@ -289,6 +289,7 @@ private fun getFailedNameWithDeclarationType(
     declarationType: String?,
 ) = if (name != null) "$declarationType $name" else "$declarationType"
 
+@Suppress("detekt.CyclomaticComplexMethod")
 private fun getEmptyResult(
     items: List<*>,
     additionalMessage: String?,
@@ -303,29 +304,61 @@ private fun getEmptyResult(
             if (isEmpty) {
                 val nullCount = items.count { it == null }
                 val nullValues =
-                    if (nullCount == 1) {
-                        "$nullCount null value"
-                    } else if (nullCount > 1) {
-                        "$nullCount null values"
-                    } else {
-                        ""
+                    when {
+                        nullCount == 1 -> "$nullCount null value"
+                        nullCount > 1 -> "$nullCount null values"
+                        else -> ""
                     }
+
                 val otherValues = items.filterNotNull().joinToString(",\n")
 
                 var text = " It contains "
                 if (nullValues.isNotEmpty()) text += nullValues
                 if (nullValues.isNotEmpty() && otherValues.isNotEmpty()) text += " and "
-                if (otherValues.isNotEmpty()) text += "values:\n$otherValues"
+                if (otherValues.isNotEmpty()) text += "values:"
+                if (nullValues.isNotEmpty() && otherValues.isEmpty()) text += "."
 
-                "$text."
+                text
             } else {
                 ""
             }
+
         val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
 
-        val message = "Assert '$testMethodName' failed.${customMessage}Declaration list is$negation empty.$values"
+        val getRootMessage =
+            "Assert '$testMethodName' failed.${customMessage}Declaration list is$negation empty.$values"
+
+        val failedDeclarationAsciiTreeNodes =
+            items
+                .filterNotNull()
+                .mapNotNull {
+                    it
+                        .createErrorOutput()
+                        ?.let { string -> AsciiTreeNode(string, emptyList()) }
+                }
+
+        val message =
+            AsciiTreeCreator().invoke(
+                AsciiTreeNode(
+                    getRootMessage,
+                    failedDeclarationAsciiTreeNodes,
+                ),
+            )
         throw KoAssertionFailedException(message)
     }
+}
+
+private fun <E : Any> E?.createErrorOutput(): String? {
+    if (this != null) {
+        val declarationType = getDeclarationType()
+        val name = (this as? KoNameProvider)?.name
+        val location = (this as? KoLocationProvider)?.location
+        val hyperlinkLocation = location?.let { path -> HyperlinkUtil.toHyperlink(path) }
+
+        return "$declarationType $name $hyperlinkLocation"
+    }
+
+    return null
 }
 
 private fun getNullResult(
@@ -338,10 +371,25 @@ private fun getNullResult(
 
     if (isNull != itemIsNull) {
         val negation = if (isNull) " not" else ""
-        val value = if (isNull) ": " + item.toString() else ""
+        val value = if (isNull) ": $item" else ""
         val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
 
-        val message = "Assert `$testMethodName` failed.${customMessage}Declaration has$negation null value$value."
+        val getRootMessage =
+            "Assert `$testMethodName` failed.${customMessage}Declaration has$negation null value$value."
+
+        val failedDeclarationAsciiTreeNode: AsciiTreeNode? =
+            item.createErrorOutput()?.let { string -> AsciiTreeNode(string, emptyList()) }
+
+        val message =
+            failedDeclarationAsciiTreeNode?.let {
+                AsciiTreeCreator().invoke(
+                    AsciiTreeNode(
+                        getRootMessage,
+                        listOf(failedDeclarationAsciiTreeNode),
+                    ),
+                )
+            } ?: getRootMessage
+
         throw KoAssertionFailedException(message)
     }
 }

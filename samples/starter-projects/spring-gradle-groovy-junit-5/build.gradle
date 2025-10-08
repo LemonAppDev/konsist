@@ -1,72 +1,71 @@
 plugins {
-	id 'org.springframework.boot' version '3.4.0'
-	id 'io.spring.dependency-management' version '1.1.6'
-	id 'org.jetbrains.kotlin.jvm' version '2.0.21'
-	id 'org.jetbrains.kotlin.plugin.spring' version '2.0.21'
-	id 'jvm-test-suite'
+    alias(libs.plugins.springBoot)
+    alias(libs.plugins.dependencyManagement)
+    alias(libs.plugins.kotlinJvm)
+    alias(libs.plugins.kotlinSpring)
+    alias(libs.plugins.jvmTestSuite)
 }
 
 group = 'com.sample'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '19'
 
 repositories {
-	mavenCentral()
-	mavenLocal()
+    mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
-	// The 'api' is used, so classes are available in the konsistTest source set
-	api 'org.springframework.boot:spring-boot-starter'
+    // The 'api' is used, so classes are available in the konsistTest source set
+    api(libs.spring.boot.starter)
 
-	implementation 'org.jetbrains.kotlin:kotlin-reflect'
+    implementation(libs.kotlin.reflect)
 
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation(libs.spring.boot.starter.test)
 }
 
 kotlin {
-	jvmToolchain(21)
+    jvmToolchain(21)
 }
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
 
 testing {
-	suites {
-		test {
-			useJUnitJupiter()
-		}
+    suites {
+        test {
+            useJUnitJupiter()
+        }
 
-		konsistTest(JvmTestSuite) {
-			dependencies {
-				// Add 'main' source set dependency
-				implementation project()
+        konsistTest(JvmTestSuite) {
+            dependencies {
+                // Add 'main' source set dependency
+                implementation project()
 
-				// Add Konsist dependency
-				implementation "com.lemonappdev:konsist:0.16.1"
+                // Add Konsist dependency
+                implementation(libs.konsist)
 
-				// Add junit-jupiter-params dependency (required for dynamic Tests)
-				implementation "org.junit.jupiter:junit-jupiter-params:5.11.3"
-			}
+                // Add junit-jupiter-params dependency (required for dynamic Tests)
+                implementation(libs.junit.jupiter.params)
+            }
 
-			targets {
-				all {
-					testTask.configure {
-						shouldRunAfter(test)
-					}
-				}
-			}
-		}
-	}
+            targets {
+                all {
+                    testTask.configure {
+                        shouldRunAfter(test)
+                    }
+                }
+            }
+        }
+    }
 }
 
 // Optional block to run Konsist tests together with the Gradle 'check' task
 tasks.named('check') {
-	dependsOn(testing.suites.konsistTest)
+    dependsOn(testing.suites.konsistTest)
 }

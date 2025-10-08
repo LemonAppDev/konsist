@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
-import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
 import com.lemonappdev.konsist.testdata.SampleType1
 import com.lemonappdev.konsist.testdata.SampleType2
@@ -15,9 +13,8 @@ class KoSourceDeclarationProviderListExtTest {
     @Test
     fun `sourceDeclarations returns source declarations from all declarations`() {
         // given
-        val sourceDeclaration1: KoClassDeclaration = mockk()
-        val sourceDeclaration2: KoKotlinTypeDeclaration = mockk()
-        val sourceDeclaration3: KoExternalDeclaration = mockk()
+        val sourceDeclaration1: KoDeclarationCastProvider = mockk()
+        val sourceDeclaration2: KoDeclarationCastProvider = mockk()
         val declaration1: KoSourceDeclarationProvider =
             mockk {
                 every { sourceDeclaration } returns sourceDeclaration1
@@ -28,7 +25,7 @@ class KoSourceDeclarationProviderListExtTest {
             }
         val declaration3: KoSourceDeclarationProvider =
             mockk {
-                every { sourceDeclaration } returns sourceDeclaration3
+                every { sourceDeclaration } returns null
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -36,7 +33,7 @@ class KoSourceDeclarationProviderListExtTest {
         val sut = declarations.sourceDeclarations()
 
         // then
-        sut shouldBeEqualTo listOf(sourceDeclaration1, sourceDeclaration2, sourceDeclaration3)
+        sut shouldBeEqualTo listOf(sourceDeclaration1, sourceDeclaration2)
     }
 
     @Test
@@ -44,11 +41,11 @@ class KoSourceDeclarationProviderListExtTest {
         // given
         val name1 = "name1"
         val name2 = "name2"
-        val sourceDeclaration1: KoClassDeclaration =
+        val sourceDeclaration1: KoDeclarationCastProvider =
             mockk {
                 every { name } returns name1
             }
-        val sourceDeclaration2: KoKotlinTypeDeclaration =
+        val sourceDeclaration2: KoDeclarationCastProvider =
             mockk {
                 every { name } returns name2
             }
@@ -74,11 +71,11 @@ class KoSourceDeclarationProviderListExtTest {
         // given
         val name1 = "name1"
         val name2 = "name2"
-        val sourceDeclaration1: KoClassDeclaration =
+        val sourceDeclaration1: KoDeclarationCastProvider =
             mockk {
                 every { name } returns name1
             }
-        val sourceDeclaration2: KoKotlinTypeDeclaration =
+        val sourceDeclaration2: KoDeclarationCastProvider =
             mockk {
                 every { name } returns name2
             }

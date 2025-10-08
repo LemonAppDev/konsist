@@ -26,6 +26,8 @@ import com.lemonappdev.konsist.core.provider.tag.KoKDocVersionTagProviderCore
 import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
+import org.jetbrains.kotlin.kdoc.psi.impl.KDocSection
+import org.jetbrains.kotlin.kdoc.psi.impl.KDocTag
 
 internal class KoKDocDeclarationCore(
     private val kDocElement: KDocElement,
@@ -53,6 +55,14 @@ internal class KoKDocDeclarationCore(
     KoKDocConstructorTagProviderCore,
     KoKDocSinceTagProviderCore {
     override val psiElement: PsiElement by lazy { kDocElement }
+
+    override val kDocTags: List<KDocTag> by lazy {
+        kDocElement
+            .children
+            .filterIsInstance<KDocSection>()
+            .flatMap { it.children.toList() }
+            .filterIsInstance<KDocTag>()
+    }
 
     override val text: String by lazy {
         val splitKDoc =

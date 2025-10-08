@@ -3,10 +3,12 @@ package com.lemonappdev.konsist.core.declaration.type
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
@@ -40,7 +42,6 @@ import com.lemonappdev.konsist.core.provider.KoSourceAndAliasTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceTypeProviderCore
-import com.lemonappdev.konsist.core.provider.KoStarProjectionProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
@@ -73,7 +74,6 @@ internal class KoTypeDeclarationCore private constructor(
     KoContainingDeclarationProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore,
-    KoStarProjectionProviderCore,
     KoSourceAndAliasTypeProviderCore,
     KoSourceTypeProviderCore,
     KoGenericTypeProviderCore,
@@ -201,6 +201,12 @@ internal class KoTypeDeclarationCore private constructor(
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isExternal"))
     override val isExternal: Boolean by lazy { super<KoDeclarationCastProviderCore>.isExternal }
 
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isFunction"))
+    override val isFunction: Boolean by lazy { super<KoDeclarationCastProviderCore>.isFunction }
+
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isProperty"))
+    override val isProperty: Boolean by lazy { super<KoDeclarationCastProviderCore>.isProperty }
+
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asClassDeclaration()"))
     override fun asClassDeclaration(): KoClassDeclaration? = super<KoDeclarationCastProviderCore>.asClassDeclaration()
 
@@ -255,6 +261,12 @@ internal class KoTypeDeclarationCore private constructor(
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asExternalDeclaration()"))
     override fun asExternalDeclaration(): KoExternalDeclaration? = super<KoDeclarationCastProviderCore>.asExternalDeclaration()
+
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asFunctionDeclaration()"))
+    override fun asFunctionDeclaration(): KoFunctionDeclaration? = super<KoDeclarationCastProviderCore>.asFunctionDeclaration()
+
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asPropertyDeclaration()"))
+    override fun asPropertyDeclaration(): KoPropertyDeclaration? = super<KoDeclarationCastProviderCore>.asPropertyDeclaration()
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasClassDeclaration()"))
     override fun hasClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =
@@ -377,6 +389,22 @@ internal class KoTypeDeclarationCore private constructor(
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasExternalDeclarationOf()"))
     override fun hasExternalDeclarationOf(kClass: KClass<*>): Boolean =
         super<KoDeclarationCastProviderCore>.hasExternalDeclarationOf(kClass)
+
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasFunctionDeclaration()"))
+    override fun hasFunctionDeclaration(predicate: ((KoFunctionDeclaration) -> Boolean)?): Boolean =
+        super<KoDeclarationCastProviderCore>.hasFunctionDeclaration(predicate)
+
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasFunctionDeclarationOf()"))
+    override fun hasFunctionDeclarationOf(kClass: KClass<*>): Boolean =
+        super<KoDeclarationCastProviderCore>.hasFunctionDeclarationOf(kClass)
+
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasPropertyDeclaration()"))
+    override fun hasPropertyDeclaration(predicate: ((KoPropertyDeclaration) -> Boolean)?): Boolean =
+        super<KoDeclarationCastProviderCore>.hasPropertyDeclaration(predicate)
+
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasPropertyDeclarationOf()"))
+    override fun hasPropertyDeclarationOf(kClass: KClass<*>): Boolean =
+        super<KoDeclarationCastProviderCore>.hasPropertyDeclarationOf(kClass)
 
     override fun toString(): String = text
 

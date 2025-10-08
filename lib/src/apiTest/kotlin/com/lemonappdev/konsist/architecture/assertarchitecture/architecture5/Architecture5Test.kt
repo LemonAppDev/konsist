@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architectu
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
+import org.amshove.kluent.shouldNotThrow
 import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
 
@@ -161,7 +162,7 @@ class Architecture5Test {
         }
 
         // then
-        sut shouldThrow KoAssertionFailedException::class
+        sut shouldNotThrow KoAssertionFailedException::class
     }
 
     @Test
@@ -179,7 +180,7 @@ class Architecture5Test {
         }
 
         // then
-        sut shouldThrow KoAssertionFailedException::class
+        sut shouldNotThrow KoAssertionFailedException::class
     }
 
     @Test
@@ -198,7 +199,7 @@ class Architecture5Test {
         }
 
         // then
-        sut shouldThrow KoAssertionFailedException::class
+        sut shouldNotThrow KoAssertionFailedException::class
     }
 
     @Test
@@ -219,7 +220,7 @@ class Architecture5Test {
         }
 
         // then
-        sut shouldThrow KoAssertionFailedException::class
+        sut shouldNotThrow KoAssertionFailedException::class
     }
 
     // endregion
