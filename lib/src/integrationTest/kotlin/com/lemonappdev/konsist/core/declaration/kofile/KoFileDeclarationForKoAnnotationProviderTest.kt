@@ -30,8 +30,14 @@ class KoFileDeclarationForKoAnnotationProviderTest {
             hasAnnotationsWithAllNames(emptyList()) shouldBeEqualTo false
             hasAnnotationsWithAllNames(emptySet()) shouldBeEqualTo false
             hasAnnotationWithName("SampleAnnotation") shouldBeEqualTo false
+            hasAnnotationWithName("sampleannotation", ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName("sampleannotation", ignoreCase = true) shouldBeEqualTo false
             hasAnnotationWithName(listOf("SampleAnnotation")) shouldBeEqualTo false
+            hasAnnotationWithName(listOf("sampleannotation"), ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName(listOf("sampleannotation"), ignoreCase = true) shouldBeEqualTo false
             hasAnnotationWithName(setOf("SampleAnnotation")) shouldBeEqualTo false
+            hasAnnotationWithName(setOf("sampleannotation"), ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName(setOf("sampleannotation"), ignoreCase = true) shouldBeEqualTo false
             hasAnnotationsWithAllNames("SampleAnnotation1", "SampleAnnotation2") shouldBeEqualTo false
             hasAnnotationsWithAllNames(listOf("SampleAnnotation1", "SampleAnnotation2")) shouldBeEqualTo false
             hasAnnotationsWithAllNames(setOf("SampleAnnotation1", "SampleAnnotation2")) shouldBeEqualTo false

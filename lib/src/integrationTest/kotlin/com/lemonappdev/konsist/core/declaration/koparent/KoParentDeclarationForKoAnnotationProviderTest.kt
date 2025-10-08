@@ -28,20 +28,26 @@ class KoParentDeclarationForKoAnnotationProviderTest {
         assertSoftly(sut) {
             annotations shouldBeEqualTo emptyList()
             numAnnotations shouldBeEqualTo 0
-            countAnnotations { type -> type.name == "NonExistingAnnotation" } shouldBeEqualTo 0
+            countAnnotations { it.name == "NonExistingAnnotation" } shouldBeEqualTo 0
             hasAnnotations() shouldBeEqualTo false
             hasAnnotationWithName(emptyList()) shouldBeEqualTo false
             hasAnnotationWithName(emptySet()) shouldBeEqualTo false
             hasAnnotationsWithAllNames(emptyList()) shouldBeEqualTo false
             hasAnnotationsWithAllNames(emptySet()) shouldBeEqualTo false
             hasAnnotationWithName("SampleAnnotation") shouldBeEqualTo false
+            hasAnnotationWithName("sampleannotation", ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName("sampleannotation", ignoreCase = true) shouldBeEqualTo false
             hasAnnotationWithName(listOf("SampleAnnotation")) shouldBeEqualTo false
+            hasAnnotationWithName(listOf("sampleannotation"), ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName(listOf("sampleannotation"), ignoreCase = true) shouldBeEqualTo false
             hasAnnotationWithName(setOf("SampleAnnotation")) shouldBeEqualTo false
+            hasAnnotationWithName(setOf("sampleannotation"), ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName(setOf("sampleannotation"), ignoreCase = true) shouldBeEqualTo false
             hasAnnotationsWithAllNames("SampleAnnotation1", "SampleAnnotation2") shouldBeEqualTo false
             hasAnnotationsWithAllNames(listOf("SampleAnnotation1", "SampleAnnotation2")) shouldBeEqualTo false
             hasAnnotationsWithAllNames(setOf("SampleAnnotation1", "SampleAnnotation2")) shouldBeEqualTo false
-            hasAnnotation { type -> type.hasArguments() } shouldBeEqualTo false
-            hasAllAnnotations { type -> type.hasArguments() } shouldBeEqualTo true
+            hasAnnotation { it.hasArguments() } shouldBeEqualTo false
+            hasAllAnnotations { it.hasArguments() } shouldBeEqualTo true
             hasAnnotationOf(emptyList()) shouldBeEqualTo false
             hasAnnotationOf(emptySet()) shouldBeEqualTo false
             hasAllAnnotationsOf(emptyList()) shouldBeEqualTo false
@@ -186,22 +192,28 @@ class KoParentDeclarationForKoAnnotationProviderTest {
 
         // then
         assertSoftly(sut) {
-            annotations shouldBeEqualTo emptyList()
+        annotations shouldBeEqualTo emptyList()
             numAnnotations shouldBeEqualTo 0
-            countAnnotations { type -> type.name == "NonExistingAnnotation" } shouldBeEqualTo 0
+            countAnnotations { it.name == "NonExistingAnnotation" } shouldBeEqualTo 0
             hasAnnotations() shouldBeEqualTo false
             hasAnnotationWithName(emptyList()) shouldBeEqualTo false
             hasAnnotationWithName(emptySet()) shouldBeEqualTo false
             hasAnnotationsWithAllNames(emptyList()) shouldBeEqualTo false
             hasAnnotationsWithAllNames(emptySet()) shouldBeEqualTo false
             hasAnnotationWithName("SampleAnnotation") shouldBeEqualTo false
+            hasAnnotationWithName("sampleannotation", ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName("sampleannotation", ignoreCase = true) shouldBeEqualTo false
             hasAnnotationWithName(listOf("SampleAnnotation")) shouldBeEqualTo false
+            hasAnnotationWithName(listOf("sampleannotation"), ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName(listOf("sampleannotation"), ignoreCase = true) shouldBeEqualTo false
             hasAnnotationWithName(setOf("SampleAnnotation")) shouldBeEqualTo false
+            hasAnnotationWithName(setOf("sampleannotation"), ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName(setOf("sampleannotation"), ignoreCase = true) shouldBeEqualTo false
             hasAnnotationsWithAllNames("SampleAnnotation1", "SampleAnnotation2") shouldBeEqualTo false
             hasAnnotationsWithAllNames(listOf("SampleAnnotation1", "SampleAnnotation2")) shouldBeEqualTo false
             hasAnnotationsWithAllNames(setOf("SampleAnnotation1", "SampleAnnotation2")) shouldBeEqualTo false
-            hasAnnotation { type -> type.hasArguments() } shouldBeEqualTo false
-            hasAllAnnotations { type -> type.hasArguments() } shouldBeEqualTo true
+            hasAnnotation { it.hasArguments() } shouldBeEqualTo false
+            hasAllAnnotations { it.hasArguments() } shouldBeEqualTo true
             hasAnnotationOf(emptyList()) shouldBeEqualTo false
             hasAnnotationOf(emptySet()) shouldBeEqualTo false
             hasAllAnnotationsOf(emptyList()) shouldBeEqualTo false
@@ -346,22 +358,28 @@ class KoParentDeclarationForKoAnnotationProviderTest {
 
         // then
         assertSoftly(sut) {
-            annotations shouldBeEqualTo emptyList()
+        annotations shouldBeEqualTo emptyList()
             numAnnotations shouldBeEqualTo 0
-            countAnnotations { type -> type.name == "NonExistingAnnotation" } shouldBeEqualTo 0
+            countAnnotations { it.name == "NonExistingAnnotation" } shouldBeEqualTo 0
             hasAnnotations() shouldBeEqualTo false
             hasAnnotationWithName(emptyList()) shouldBeEqualTo false
             hasAnnotationWithName(emptySet()) shouldBeEqualTo false
             hasAnnotationsWithAllNames(emptyList()) shouldBeEqualTo false
             hasAnnotationsWithAllNames(emptySet()) shouldBeEqualTo false
             hasAnnotationWithName("SampleAnnotation") shouldBeEqualTo false
+            hasAnnotationWithName("sampleannotation", ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName("sampleannotation", ignoreCase = true) shouldBeEqualTo false
             hasAnnotationWithName(listOf("SampleAnnotation")) shouldBeEqualTo false
+            hasAnnotationWithName(listOf("sampleannotation"), ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName(listOf("sampleannotation"), ignoreCase = true) shouldBeEqualTo false
             hasAnnotationWithName(setOf("SampleAnnotation")) shouldBeEqualTo false
+            hasAnnotationWithName(setOf("sampleannotation"), ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName(setOf("sampleannotation"), ignoreCase = true) shouldBeEqualTo false
             hasAnnotationsWithAllNames("SampleAnnotation1", "SampleAnnotation2") shouldBeEqualTo false
             hasAnnotationsWithAllNames(listOf("SampleAnnotation1", "SampleAnnotation2")) shouldBeEqualTo false
             hasAnnotationsWithAllNames(setOf("SampleAnnotation1", "SampleAnnotation2")) shouldBeEqualTo false
-            hasAnnotation { type -> type.hasArguments() } shouldBeEqualTo false
-            hasAllAnnotations { type -> type.hasArguments() } shouldBeEqualTo true
+            hasAnnotation { it.hasArguments() } shouldBeEqualTo false
+            hasAllAnnotations { it.hasArguments() } shouldBeEqualTo true
             hasAnnotationOf(emptyList()) shouldBeEqualTo false
             hasAnnotationOf(emptySet()) shouldBeEqualTo false
             hasAllAnnotationsOf(emptyList()) shouldBeEqualTo false
