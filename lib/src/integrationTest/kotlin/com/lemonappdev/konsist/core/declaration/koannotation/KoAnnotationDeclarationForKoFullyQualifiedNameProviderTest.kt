@@ -109,6 +109,20 @@ class KoAnnotationDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     @Test
+    fun `annotation-fully-qualified-name-with-import-alias`() {
+        // given
+        val sut =
+            getSnippetFile("annotation-fully-qualified-name-with-import-alias")
+                .functions()
+                .first()
+                .annotations
+                .first()
+
+        // then
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleAnnotation"
+    }
+
+    @Test
     fun `annotation-in-file-fully-qualified-name`() {
         // given
         val sut =

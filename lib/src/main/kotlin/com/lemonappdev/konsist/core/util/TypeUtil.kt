@@ -22,6 +22,8 @@ import com.lemonappdev.konsist.core.model.getTypeAlias
 import com.lemonappdev.konsist.core.provider.KoTypeParameterProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.org.jline.utils.Log
+import org.jetbrains.kotlin.psi.KtAnnotationEntry
+import org.jetbrains.kotlin.psi.KtConstructorCalleeExpression
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunctionType
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
@@ -86,6 +88,12 @@ object TypeUtil {
                         ?.children
                         ?.firstOrNull()
                 }
+            } else if (notNullTypes.filterIsInstance<KtAnnotationEntry>().isNotEmpty()) {
+                notNullTypes
+                    .filterIsInstance<KtAnnotationEntry>()
+                    .firstOrNull()
+                    ?.children
+                    ?.firstOrNull()
             } else {
                 null
             }
@@ -211,6 +219,18 @@ object TypeUtil {
                     ?: getObject(typeText, fullyQualifiedName, false, containingFile)
                     ?: getTypeAlias(typeText, fullyQualifiedName, containingFile)
                     ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
+            }
+
+            nestedType is KtConstructorCalleeExpression && typeText != null -> {
+                if (isKotlinType(typeText)) {
+                    KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
+                } else {
+                    getClass(typeText, fullyQualifiedName, false, containingFile)
+                        ?: getInterface(typeText, fullyQualifiedName, false, containingFile)
+                        ?: getObject(typeText, fullyQualifiedName, false, containingFile)
+                        ?: getTypeAlias(typeText, fullyQualifiedName, containingFile)
+                        ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
+                }
             }
 
             else -> null

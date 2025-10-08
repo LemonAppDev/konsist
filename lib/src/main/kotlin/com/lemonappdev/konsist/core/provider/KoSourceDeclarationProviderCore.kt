@@ -10,6 +10,7 @@ import com.lemonappdev.konsist.core.declaration.private.KoFunctionTypeDeclaratio
 import com.lemonappdev.konsist.core.declaration.private.KoGenericTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.util.TypeUtil
+import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtNullableType
 import org.jetbrains.kotlin.psi.KtTypeProjection
@@ -29,12 +30,14 @@ internal interface KoSourceDeclarationProviderCore :
         get() = null
     val ktTypeProjection: KtTypeProjection?
         get() = null
+    val ktAnnotationEntry: KtAnnotationEntry?
+        get() = null
 
     override val sourceDeclaration: KoDeclarationCastProvider?
         get() {
             val type =
                 TypeUtil.getBasicType(
-                    listOf(ktTypeReference, ktNameReferenceExpression, ktTypeProjection),
+                    listOf(ktTypeReference, ktNameReferenceExpression, ktTypeProjection, ktAnnotationEntry),
                     isExtensionDeclaration(),
                     getDeclarationWithfullyQualifiedName(containingDeclaration) ?: containingDeclaration,
                     containingFile,
@@ -95,7 +98,8 @@ internal interface KoSourceDeclarationProviderCore :
     private fun isExtensionDeclaration(): Boolean =
         ktTypeReference?.isExtensionDeclaration() == true ||
             ktNameReferenceExpression?.isExtensionDeclaration() == true ||
-            ktTypeProjection?.isExtensionDeclaration() == true
+            ktTypeProjection?.isExtensionDeclaration() == true ||
+            ktAnnotationEntry?.isExtensionDeclaration() == true
 
     private fun getDeclarationWithfullyQualifiedName(declaration: KoBaseDeclaration): KoBaseDeclaration? =
         when {
