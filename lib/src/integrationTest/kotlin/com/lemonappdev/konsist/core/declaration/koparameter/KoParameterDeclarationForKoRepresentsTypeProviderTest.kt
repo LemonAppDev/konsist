@@ -21,8 +21,13 @@ class KoParameterDeclarationForKoRepresentsTypeProviderTest {
         // then
         assertSoftly(sut) {
             it?.representsType("() -> Unit") shouldBeEqualTo true
+            it?.representsType("() -> unit", false) shouldBeEqualTo false
+            it?.representsType("() -> unit", true) shouldBeEqualTo true
             it?.representsType("OtherType") shouldBeEqualTo false
-            it?.representsType(null) shouldBeEqualTo false
+            it?.representsType("othertype", false) shouldBeEqualTo false
+            it?.representsType("othertype", true) shouldBeEqualTo false
+            it?.representsType(null, false) shouldBeEqualTo false
+            it?.representsType(null, true) shouldBeEqualTo false
         }
     }
 
@@ -38,8 +43,13 @@ class KoParameterDeclarationForKoRepresentsTypeProviderTest {
         // then
         assertSoftly(sut) {
             representsType("() -> Unit") shouldBeEqualTo true
+            representsType("() -> unit", false) shouldBeEqualTo false
+            representsType("() -> unit", true) shouldBeEqualTo true
             representsType("OtherType") shouldBeEqualTo false
-            representsType(null) shouldBeEqualTo false
+            representsType("othertype", false) shouldBeEqualTo false
+            representsType("othertype", true) shouldBeEqualTo false
+            representsType(null, false) shouldBeEqualTo false
+            representsType(null, true) shouldBeEqualTo false
         }
     }
 

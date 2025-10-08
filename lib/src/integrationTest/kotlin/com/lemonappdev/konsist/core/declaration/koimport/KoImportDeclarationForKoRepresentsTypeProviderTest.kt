@@ -11,6 +11,7 @@ class KoImportDeclarationForKoRepresentsTypeProviderTest {
     @MethodSource("provideValuesForComplexType")
     fun `import-represents-complex-type`(
         type: String?,
+        ignoreCase: Boolean,
         value: Boolean,
     ) {
         // given
@@ -20,13 +21,14 @@ class KoImportDeclarationForKoRepresentsTypeProviderTest {
                 .first()
 
         // then
-        sut.representsType(type) shouldBeEqualTo value
+        sut.representsType(type, ignoreCase) shouldBeEqualTo value
     }
 
     @ParameterizedTest
     @MethodSource("provideValuesForKotlinBasicType")
     fun `import-represents-kotlin-type`(
         type: String?,
+        ignoreCase: Boolean,
         value: Boolean,
     ) {
         // given
@@ -36,7 +38,7 @@ class KoImportDeclarationForKoRepresentsTypeProviderTest {
                 .first()
 
         // then
-        sut.representsType(type) shouldBeEqualTo value
+        sut.representsType(type, ignoreCase) shouldBeEqualTo value
     }
 
     @Suppress("SameParameterValue")
@@ -48,22 +50,40 @@ class KoImportDeclarationForKoRepresentsTypeProviderTest {
         @JvmStatic
         fun provideValuesForComplexType() =
             listOf(
-                arguments("SampleClass", true),
-                arguments("OtherClass", false),
-                arguments("com.lemonappdev.konsist.testdata.SampleClass", true),
-                arguments("com.lemonappdev.konsist.testdata.OtherClass", false),
-                arguments(null, false),
+                arguments("SampleClass", false, true),
+                arguments("sampleclass", false, false),
+                arguments("sampleclass", true, true),
+                arguments("OtherClass", false, false),
+                arguments("otherclass", false, false),
+                arguments("otherclass", true, false),
+                arguments("com.lemonappdev.konsist.testdata.SampleClass", false, true),
+                arguments("com.lemonappdev.konsist.testdata.sampleclass", false, false),
+                arguments("com.lemonappdev.konsist.testdata.sampleclass", true, true),
+                arguments("com.lemonappdev.konsist.testdata.OtherClass", false, false),
+                arguments("com.lemonappdev.konsist.testdata.otherclass", false, false),
+                arguments("com.lemonappdev.konsist.testdata.otherclass", true, false),
+                arguments(null, false, false),
+                arguments(null, true, false),
             )
 
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForKotlinBasicType() =
             listOf(
-                arguments("String", true),
-                arguments("List", false),
-                arguments("kotlin.String", true),
-                arguments("kotlin.collection.List", false),
-                arguments(null, false),
+                arguments("String", false, true),
+                arguments("string", false, false),
+                arguments("string", true, true),
+                arguments("List", false, false),
+                arguments("list", false, false),
+                arguments("list", true, false),
+                arguments("kotlin.String", false, true),
+                arguments("kotlin.string", false, false),
+                arguments("kotlin.string", true, true),
+                arguments("kotlin.collection.List", false, false),
+                arguments("kotlin.collection.list", false, false),
+                arguments("kotlin.collection.list", true, false),
+                arguments(null, false, false),
+                arguments(null, true, false),
             )
     }
 }

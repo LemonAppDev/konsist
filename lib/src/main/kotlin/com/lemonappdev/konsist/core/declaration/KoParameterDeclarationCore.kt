@@ -80,7 +80,7 @@ internal class KoParameterDeclarationCore private constructor(
             ?: throw KoInternalException("Class type cannot be null")
     }
 
-    override fun representsType(name: String?): Boolean = type.name == name
+    override fun representsType(name: String?, ignoreCase: Boolean,): Boolean = type.name.equals(name, ignoreCase)
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVal"))
     override val hasValModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "val" }

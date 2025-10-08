@@ -11,6 +11,7 @@ class KoObjectDeclarationForKoRepresentsTypeProviderTest {
     @MethodSource("provideValues")
     fun `object-represents-type`(
         type: String?,
+        ignoreCase: Boolean,
         value: Boolean,
     ) {
         // given
@@ -20,7 +21,7 @@ class KoObjectDeclarationForKoRepresentsTypeProviderTest {
                 .first()
 
         // then
-        sut.representsType(type) shouldBeEqualTo value
+        sut.representsType(type, ignoreCase) shouldBeEqualTo value
     }
 
     @Suppress("SameParameterValue")
@@ -32,11 +33,20 @@ class KoObjectDeclarationForKoRepresentsTypeProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("SampleObject", true),
-                arguments("OtherObject", false),
-                arguments("com.lemonappdev.konsist.testdata.SampleObject", true),
-                arguments("com.lemonappdev.konsist.testdata.OtherObject", false),
-                arguments(null, false),
+                arguments("SampleObject", false, true),
+                arguments("sampleobject", false, false),
+                arguments("sampleobject", true, true),
+                arguments("OtherObject", false, false),
+                arguments("otherobject", false, false),
+                arguments("otherobject", true, false),
+                arguments("com.lemonappdev.konsist.testdata.SampleObject", false, true),
+                arguments("com.lemonappdev.konsist.testdata.sampleobject", false, false),
+                arguments("com.lemonappdev.konsist.testdata.sampleobject", true, true),
+                arguments("com.lemonappdev.konsist.testdata.OtherObject", false, false),
+                arguments("com.lemonappdev.konsist.testdata.otherobject", false, false),
+                arguments("com.lemonappdev.konsist.testdata.otherobject", true, false),
+                arguments(null, false, false),
+                arguments(null, true, false),
             )
     }
 }
