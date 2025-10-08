@@ -27,8 +27,11 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBoundsWithAllNames(emptyList()) shouldBeEqualTo false
             hasUpperBoundsWithAllNames(emptySet()) shouldBeEqualTo false
             hasUpperBoundWithName("sampleUpperBound") shouldBeEqualTo false
+            hasUpperBoundWithName("sampleupperbound", ignoreCase = true) shouldBeEqualTo false
             hasUpperBoundWithName(listOf("sampleUpperBound")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("sampleupperbound"), ignoreCase = true) shouldBeEqualTo false
             hasUpperBoundWithName(setOf("sampleUpperBound")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("sampleupperbound"), ignoreCase = true) shouldBeEqualTo false
             hasUpperBoundsWithAllNames("sampleUpperBound1", "sampleUpperBound2") shouldBeEqualTo false
             hasUpperBoundsWithAllNames(listOf("sampleUpperBound1", "sampleUpperBound2")) shouldBeEqualTo false
             hasUpperBoundsWithAllNames(setOf("sampleUpperBound1", "sampleUpperBound2")) shouldBeEqualTo false
@@ -60,18 +63,36 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBoundWithName("List<*>") shouldBeEqualTo true
             hasUpperBoundWithName("Int") shouldBeEqualTo false
             hasUpperBoundWithName("List<*>", "Int") shouldBeEqualTo true
+            hasUpperBoundWithName("list<*>") shouldBeEqualTo false
+            hasUpperBoundWithName("list<*>", ignoreCase = true) shouldBeEqualTo true
+            hasUpperBoundWithName("list<*>", "int") shouldBeEqualTo false
+            hasUpperBoundWithName("list<*>", "int", ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundWithName(listOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundWithName(listOf("Int")) shouldBeEqualTo false
             hasUpperBoundWithName(listOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundWithName(listOf("list<*>")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("list<*>"), ignoreCase = true) shouldBeEqualTo true
+            hasUpperBoundWithName(listOf("list<*>", "int")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("list<*>", "int"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundWithName(setOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundWithName(setOf("Int")) shouldBeEqualTo false
             hasUpperBoundWithName(setOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundWithName(setOf("list<*>")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("list<*>"), ignoreCase = true) shouldBeEqualTo true
+            hasUpperBoundWithName(setOf("list<*>", "int")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("list<*>", "int"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames("List<*>") shouldBeEqualTo true
+            hasUpperBoundsWithAllNames("list<*>") shouldBeEqualTo false
+            hasUpperBoundsWithAllNames("list<*>", ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames("List<*>", "Int") shouldBeEqualTo false
             hasUpperBoundsWithAllNames(listOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(listOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("list<*>")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("list<*>"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("list<*>")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("list<*>"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
             hasUpperBound { it.hasNameStartingWith("Int") } shouldBeEqualTo false
             hasAllUpperBounds { it.hasNameStartingWith("List") } shouldBeEqualTo true
@@ -102,21 +123,33 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBoundWithName("List<*>") shouldBeEqualTo true
             hasUpperBoundWithName("Int") shouldBeEqualTo false
             hasUpperBoundWithName("List<*>", "Int") shouldBeEqualTo true
+            hasUpperBoundWithName("list<*>", "int") shouldBeEqualTo false
+            hasUpperBoundWithName("list<*>", "int", ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundWithName(listOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundWithName(listOf("Int")) shouldBeEqualTo false
             hasUpperBoundWithName(listOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundWithName(listOf("list<*>", "int")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("list<*>", "int"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundWithName(setOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundWithName(setOf("Int")) shouldBeEqualTo false
             hasUpperBoundWithName(setOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundWithName(setOf("list<*>", "int")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("list<*>", "int"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames("List<*>") shouldBeEqualTo true
             hasUpperBoundsWithAllNames("List<*>", "CharSequence") shouldBeEqualTo true
             hasUpperBoundsWithAllNames("List<*>", "Int") shouldBeEqualTo false
+            hasUpperBoundsWithAllNames("list<*>", "charsequence") shouldBeEqualTo false
+            hasUpperBoundsWithAllNames("list<*>", "charsequence", ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(listOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(listOf("List<*>", "CharSequence")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(listOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("list<*>", "charsequence")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("list<*>", "charsequence"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>", "CharSequence")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("list<*>", "charsequence")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("list<*>", "charsequence"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
             hasUpperBound { upperBound -> upperBound.isKotlinType } shouldBeEqualTo true
             hasAllUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo true
@@ -145,8 +178,11 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBoundsWithAllNames(emptyList()) shouldBeEqualTo false
             hasUpperBoundsWithAllNames(emptySet()) shouldBeEqualTo false
             hasUpperBoundWithName("sampleUpperBound") shouldBeEqualTo false
+            hasUpperBoundWithName("sampleupperbound", ignoreCase = true) shouldBeEqualTo false
             hasUpperBoundWithName(listOf("sampleUpperBound")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("sampleupperbound"), ignoreCase = true) shouldBeEqualTo false
             hasUpperBoundWithName(setOf("sampleUpperBound")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("sampleupperbound"), ignoreCase = true) shouldBeEqualTo false
             hasUpperBoundsWithAllNames("sampleUpperBound1", "sampleUpperBound2") shouldBeEqualTo false
             hasUpperBoundsWithAllNames(listOf("sampleUpperBound1", "sampleUpperBound2")) shouldBeEqualTo false
             hasUpperBoundsWithAllNames(setOf("sampleUpperBound1", "sampleUpperBound2")) shouldBeEqualTo false
@@ -178,18 +214,36 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBoundWithName("List<*>") shouldBeEqualTo true
             hasUpperBoundWithName("Int") shouldBeEqualTo false
             hasUpperBoundWithName("List<*>", "Int") shouldBeEqualTo true
+            hasUpperBoundWithName("list<*>") shouldBeEqualTo false
+            hasUpperBoundWithName("list<*>", ignoreCase = true) shouldBeEqualTo true
+            hasUpperBoundWithName("list<*>", "int") shouldBeEqualTo false
+            hasUpperBoundWithName("list<*>", "int", ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundWithName(listOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundWithName(listOf("Int")) shouldBeEqualTo false
             hasUpperBoundWithName(listOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundWithName(listOf("list<*>")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("list<*>"), ignoreCase = true) shouldBeEqualTo true
+            hasUpperBoundWithName(listOf("list<*>", "int")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("list<*>", "int"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundWithName(setOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundWithName(setOf("Int")) shouldBeEqualTo false
             hasUpperBoundWithName(setOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundWithName(setOf("list<*>")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("list<*>"), ignoreCase = true) shouldBeEqualTo true
+            hasUpperBoundWithName(setOf("list<*>", "int")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("list<*>", "int"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames("List<*>") shouldBeEqualTo true
+            hasUpperBoundsWithAllNames("list<*>") shouldBeEqualTo false
+            hasUpperBoundsWithAllNames("list<*>", ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames("List<*>", "Int") shouldBeEqualTo false
             hasUpperBoundsWithAllNames(listOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(listOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("list<*>")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("list<*>"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("list<*>")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("list<*>"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
             hasUpperBound { it.hasNameStartingWith("Int") } shouldBeEqualTo false
             hasAllUpperBounds { it.hasNameStartingWith("List") } shouldBeEqualTo true
@@ -220,21 +274,33 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBoundWithName("List<*>") shouldBeEqualTo true
             hasUpperBoundWithName("Int") shouldBeEqualTo false
             hasUpperBoundWithName("List<*>", "Int") shouldBeEqualTo true
+            hasUpperBoundWithName("list<*>", "int") shouldBeEqualTo false
+            hasUpperBoundWithName("list<*>", "int", ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundWithName(listOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundWithName(listOf("Int")) shouldBeEqualTo false
             hasUpperBoundWithName(listOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundWithName(listOf("list<*>", "int")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("list<*>", "int"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundWithName(setOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundWithName(setOf("Int")) shouldBeEqualTo false
             hasUpperBoundWithName(setOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundWithName(setOf("list<*>", "int")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("list<*>", "int"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames("List<*>") shouldBeEqualTo true
             hasUpperBoundsWithAllNames("List<*>", "CharSequence") shouldBeEqualTo true
             hasUpperBoundsWithAllNames("List<*>", "Int") shouldBeEqualTo false
+            hasUpperBoundsWithAllNames("list<*>", "charsequence") shouldBeEqualTo false
+            hasUpperBoundsWithAllNames("list<*>", "charsequence", ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(listOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(listOf("List<*>", "CharSequence")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(listOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("list<*>", "charsequence")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("list<*>", "charsequence"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>", "CharSequence")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("list<*>", "charsequence")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("list<*>", "charsequence"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
             hasUpperBound { upperBound -> upperBound.isKotlinType } shouldBeEqualTo true
             hasAllUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo true
@@ -263,8 +329,11 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBoundsWithAllNames(emptyList()) shouldBeEqualTo false
             hasUpperBoundsWithAllNames(emptySet()) shouldBeEqualTo false
             hasUpperBoundWithName("sampleUpperBound") shouldBeEqualTo false
+            hasUpperBoundWithName("sampleupperbound", ignoreCase = true) shouldBeEqualTo false
             hasUpperBoundWithName(listOf("sampleUpperBound")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("sampleupperbound"), ignoreCase = true) shouldBeEqualTo false
             hasUpperBoundWithName(setOf("sampleUpperBound")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("sampleupperbound"), ignoreCase = true) shouldBeEqualTo false
             hasUpperBoundsWithAllNames("sampleUpperBound1", "sampleUpperBound2") shouldBeEqualTo false
             hasUpperBoundsWithAllNames(listOf("sampleUpperBound1", "sampleUpperBound2")) shouldBeEqualTo false
             hasUpperBoundsWithAllNames(setOf("sampleUpperBound1", "sampleUpperBound2")) shouldBeEqualTo false
@@ -296,18 +365,36 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBoundWithName("List<*>") shouldBeEqualTo true
             hasUpperBoundWithName("Int") shouldBeEqualTo false
             hasUpperBoundWithName("List<*>", "Int") shouldBeEqualTo true
+            hasUpperBoundWithName("list<*>") shouldBeEqualTo false
+            hasUpperBoundWithName("list<*>", ignoreCase = true) shouldBeEqualTo true
+            hasUpperBoundWithName("list<*>", "int") shouldBeEqualTo false
+            hasUpperBoundWithName("list<*>", "int", ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundWithName(listOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundWithName(listOf("Int")) shouldBeEqualTo false
             hasUpperBoundWithName(listOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundWithName(listOf("list<*>")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("list<*>"), ignoreCase = true) shouldBeEqualTo true
+            hasUpperBoundWithName(listOf("list<*>", "int")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("list<*>", "int"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundWithName(setOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundWithName(setOf("Int")) shouldBeEqualTo false
             hasUpperBoundWithName(setOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundWithName(setOf("list<*>")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("list<*>"), ignoreCase = true) shouldBeEqualTo true
+            hasUpperBoundWithName(setOf("list<*>", "int")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("list<*>", "int"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames("List<*>") shouldBeEqualTo true
+            hasUpperBoundsWithAllNames("list<*>") shouldBeEqualTo false
+            hasUpperBoundsWithAllNames("list<*>", ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames("List<*>", "Int") shouldBeEqualTo false
             hasUpperBoundsWithAllNames(listOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(listOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("list<*>")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("list<*>"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("list<*>")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("list<*>"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
             hasUpperBound { it.hasNameStartingWith("Int") } shouldBeEqualTo false
             hasAllUpperBounds { it.hasNameStartingWith("List") } shouldBeEqualTo true
@@ -338,21 +425,33 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBoundWithName("List<*>") shouldBeEqualTo true
             hasUpperBoundWithName("Int") shouldBeEqualTo false
             hasUpperBoundWithName("List<*>", "Int") shouldBeEqualTo true
+            hasUpperBoundWithName("list<*>", "int") shouldBeEqualTo false
+            hasUpperBoundWithName("list<*>", "int", ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundWithName(listOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundWithName(listOf("Int")) shouldBeEqualTo false
             hasUpperBoundWithName(listOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundWithName(listOf("list<*>", "int")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("list<*>", "int"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundWithName(setOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundWithName(setOf("Int")) shouldBeEqualTo false
             hasUpperBoundWithName(setOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundWithName(setOf("list<*>", "int")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("list<*>", "int"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames("List<*>") shouldBeEqualTo true
             hasUpperBoundsWithAllNames("List<*>", "CharSequence") shouldBeEqualTo true
             hasUpperBoundsWithAllNames("List<*>", "Int") shouldBeEqualTo false
+            hasUpperBoundsWithAllNames("list<*>", "charsequence") shouldBeEqualTo false
+            hasUpperBoundsWithAllNames("list<*>", "charsequence", ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(listOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(listOf("List<*>", "CharSequence")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(listOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("list<*>", "charsequence")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("list<*>", "charsequence"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>", "CharSequence")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("list<*>", "charsequence")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("list<*>", "charsequence"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
             hasUpperBound { upperBound -> upperBound.isKotlinType } shouldBeEqualTo true
             hasAllUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo true
@@ -381,8 +480,11 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBoundsWithAllNames(emptyList()) shouldBeEqualTo false
             hasUpperBoundsWithAllNames(emptySet()) shouldBeEqualTo false
             hasUpperBoundWithName("sampleUpperBound") shouldBeEqualTo false
+            hasUpperBoundWithName("sampleupperbound", ignoreCase = true) shouldBeEqualTo false
             hasUpperBoundWithName(listOf("sampleUpperBound")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("sampleupperbound"), ignoreCase = true) shouldBeEqualTo false
             hasUpperBoundWithName(setOf("sampleUpperBound")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("sampleupperbound"), ignoreCase = true) shouldBeEqualTo false
             hasUpperBoundsWithAllNames("sampleUpperBound1", "sampleUpperBound2") shouldBeEqualTo false
             hasUpperBoundsWithAllNames(listOf("sampleUpperBound1", "sampleUpperBound2")) shouldBeEqualTo false
             hasUpperBoundsWithAllNames(setOf("sampleUpperBound1", "sampleUpperBound2")) shouldBeEqualTo false
@@ -414,18 +516,36 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBoundWithName("List<*>") shouldBeEqualTo true
             hasUpperBoundWithName("Int") shouldBeEqualTo false
             hasUpperBoundWithName("List<*>", "Int") shouldBeEqualTo true
+            hasUpperBoundWithName("list<*>") shouldBeEqualTo false
+            hasUpperBoundWithName("list<*>", ignoreCase = true) shouldBeEqualTo true
+            hasUpperBoundWithName("list<*>", "int") shouldBeEqualTo false
+            hasUpperBoundWithName("list<*>", "int", ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundWithName(listOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundWithName(listOf("Int")) shouldBeEqualTo false
             hasUpperBoundWithName(listOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundWithName(listOf("list<*>")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("list<*>"), ignoreCase = true) shouldBeEqualTo true
+            hasUpperBoundWithName(listOf("list<*>", "int")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("list<*>", "int"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundWithName(setOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundWithName(setOf("Int")) shouldBeEqualTo false
             hasUpperBoundWithName(setOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundWithName(setOf("list<*>")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("list<*>"), ignoreCase = true) shouldBeEqualTo true
+            hasUpperBoundWithName(setOf("list<*>", "int")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("list<*>", "int"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames("List<*>") shouldBeEqualTo true
+            hasUpperBoundsWithAllNames("list<*>") shouldBeEqualTo false
+            hasUpperBoundsWithAllNames("list<*>", ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames("List<*>", "Int") shouldBeEqualTo false
             hasUpperBoundsWithAllNames(listOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(listOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("list<*>")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("list<*>"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("list<*>")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("list<*>"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
             hasUpperBound { it.hasNameStartingWith("Int") } shouldBeEqualTo false
             hasAllUpperBounds { it.hasNameStartingWith("List") } shouldBeEqualTo true
@@ -456,21 +576,33 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBoundWithName("List<*>") shouldBeEqualTo true
             hasUpperBoundWithName("Int") shouldBeEqualTo false
             hasUpperBoundWithName("List<*>", "Int") shouldBeEqualTo true
+            hasUpperBoundWithName("list<*>", "int") shouldBeEqualTo false
+            hasUpperBoundWithName("list<*>", "int", ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundWithName(listOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundWithName(listOf("Int")) shouldBeEqualTo false
             hasUpperBoundWithName(listOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundWithName(listOf("list<*>", "int")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("list<*>", "int"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundWithName(setOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundWithName(setOf("Int")) shouldBeEqualTo false
             hasUpperBoundWithName(setOf("List<*>", "Int")) shouldBeEqualTo true
+            hasUpperBoundWithName(setOf("list<*>", "int")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("list<*>", "int"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames("List<*>") shouldBeEqualTo true
             hasUpperBoundsWithAllNames("List<*>", "CharSequence") shouldBeEqualTo true
             hasUpperBoundsWithAllNames("List<*>", "Int") shouldBeEqualTo false
+            hasUpperBoundsWithAllNames("list<*>", "charsequence") shouldBeEqualTo false
+            hasUpperBoundsWithAllNames("list<*>", "charsequence", ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(listOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(listOf("List<*>", "CharSequence")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(listOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("list<*>", "charsequence")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("list<*>", "charsequence"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>", "CharSequence")) shouldBeEqualTo true
             hasUpperBoundsWithAllNames(setOf("List<*>", "Int")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("list<*>", "charsequence")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("list<*>", "charsequence"), ignoreCase = true) shouldBeEqualTo true
             hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
             hasUpperBound { upperBound -> upperBound.isKotlinType } shouldBeEqualTo true
             hasAllUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo true
@@ -499,8 +631,11 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBoundsWithAllNames(emptyList()) shouldBeEqualTo false
             hasUpperBoundsWithAllNames(emptySet()) shouldBeEqualTo false
             hasUpperBoundWithName("sampleUpperBound") shouldBeEqualTo false
+            hasUpperBoundWithName("sampleupperbound", ignoreCase = true) shouldBeEqualTo false
             hasUpperBoundWithName(listOf("sampleUpperBound")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("sampleupperbound"), ignoreCase = true) shouldBeEqualTo false
             hasUpperBoundWithName(setOf("sampleUpperBound")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("sampleupperbound"), ignoreCase = true) shouldBeEqualTo false
             hasUpperBoundsWithAllNames("sampleUpperBound1", "sampleUpperBound2") shouldBeEqualTo false
             hasUpperBoundsWithAllNames(listOf("sampleUpperBound1", "sampleUpperBound2")) shouldBeEqualTo false
             hasUpperBoundsWithAllNames(setOf("sampleUpperBound1", "sampleUpperBound2")) shouldBeEqualTo false

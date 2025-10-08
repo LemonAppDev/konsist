@@ -36,40 +36,55 @@ interface KoUpperBoundsProvider : KoBaseProvider {
      *
      * @param name the name of the upper bound to check.
      * @param names the names of the upper bounds to check.
+     * @param ignoreCase Specifies whether the comparison should ignore a case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
+     *
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasUpperBoundWithName(
         name: String,
         vararg names: String,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
      * Determines whether the declaration has at least one upper bound whose name matches any of the specified names.
      *
      * @param names the names of the upper bounds to check.
+     * @param ignoreCase Specifies whether the comparison should ignore a case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasUpperBoundWithName(names: Collection<String>): Boolean
+    fun hasUpperBoundWithName(names: Collection<String>, ignoreCase: Boolean = false): Boolean
 
     /**
      * Determines whether the declaration has upper bounds with all the specified names.
      *
      * @param name The name of the upper bound to check.
      * @param names The names of the upper bounds to check.
+     * @param ignoreCase Specifies whether the comparison should ignore a case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasUpperBoundsWithAllNames(
         name: String,
         vararg names: String,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
      * Determines whether the declaration has upper bounds with all the specified names.
      *
      * @param names The names of the upper bounds to check.
+     * @param ignoreCase Specifies whether the comparison should ignore a case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasUpperBoundsWithAllNames(names: Collection<String>): Boolean
+    fun hasUpperBoundsWithAllNames(names: Collection<String>, ignoreCase: Boolean = false): Boolean
 
     /**
      * Determines whether the declaration has at least one upper bound that satisfies the provided predicate.

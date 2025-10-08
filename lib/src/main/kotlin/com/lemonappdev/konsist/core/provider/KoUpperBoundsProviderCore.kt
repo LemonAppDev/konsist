@@ -26,28 +26,30 @@ internal interface KoUpperBoundsProviderCore :
     override fun hasUpperBoundWithName(
         name: String,
         vararg names: String,
-    ): Boolean = hasUpperBoundWithName(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasUpperBoundWithName(listOf(name, *names), ignoreCase)
 
-    override fun hasUpperBoundWithName(names: Collection<String>): Boolean =
+    override fun hasUpperBoundWithName(names: Collection<String>, ignoreCase: Boolean): Boolean =
         when {
             names.isEmpty() -> hasUpperBounds()
             else ->
                 names.any {
-                    upperBounds.any { parameter -> it == parameter.name }
+                    upperBounds.any { parameter -> it.equals(parameter.name, ignoreCase = ignoreCase) }
                 }
         }
 
     override fun hasUpperBoundsWithAllNames(
         name: String,
         vararg names: String,
-    ): Boolean = hasUpperBoundsWithAllNames(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasUpperBoundsWithAllNames(listOf(name, *names), ignoreCase)
 
-    override fun hasUpperBoundsWithAllNames(names: Collection<String>): Boolean =
+    override fun hasUpperBoundsWithAllNames(names: Collection<String>, ignoreCase: Boolean): Boolean =
         when {
             names.isEmpty() -> hasUpperBounds()
             else ->
                 names.all {
-                    upperBounds.any { parameter -> it == parameter.name }
+                    upperBounds.any { parameter -> it.equals(parameter.name, ignoreCase = ignoreCase) }
                 }
         }
 
