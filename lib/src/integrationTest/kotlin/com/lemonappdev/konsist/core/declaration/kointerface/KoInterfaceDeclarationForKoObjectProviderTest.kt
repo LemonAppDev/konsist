@@ -122,5 +122,67 @@ class KoInterfaceDeclarationForKoObjectProviderTest {
         }
     }
 
+    @Test
+    fun `interface-has-no-objects-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("interface-has-no-objects-ignore-case")
+                .interfaces()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasObjectWithName("sampleobject") shouldBeEqualTo false
+            hasObjectWithName("sampleobject", ignoreCase = true) shouldBeEqualTo false
+            hasObjectWithName(listOf("sampleobject")) shouldBeEqualTo false
+            hasObjectWithName(listOf("sampleobject"), ignoreCase = true) shouldBeEqualTo false
+            hasObjectWithName(setOf("sampleobject")) shouldBeEqualTo false
+            hasObjectWithName(setOf("sampleobject"), ignoreCase = true) shouldBeEqualTo false
+            hasObjectsWithAllNames("sampleobject1", "sampleobject2") shouldBeEqualTo false
+            hasObjectsWithAllNames("sampleobject1", "sampleobject2", ignoreCase = true) shouldBeEqualTo false
+            hasObjectsWithAllNames(listOf("sampleobject1", "sampleobject2")) shouldBeEqualTo false
+            hasObjectsWithAllNames(listOf("sampleobject1", "sampleobject2"), ignoreCase = true) shouldBeEqualTo false
+            hasObjectsWithAllNames(setOf("sampleobject1", "sampleobject2")) shouldBeEqualTo false
+            hasObjectsWithAllNames(setOf("sampleobject1", "sampleobject2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `interface-has-objects-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("interface-has-objects-ignore-case")
+                .interfaces()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasObjectWithName("sampleobject1") shouldBeEqualTo false
+            hasObjectWithName("sampleobject1", ignoreCase = true) shouldBeEqualTo true
+            hasObjectWithName("otherobject") shouldBeEqualTo false
+            hasObjectWithName("otherobject", ignoreCase = true) shouldBeEqualTo false
+            hasObjectWithName("sampleobject1", "otherName") shouldBeEqualTo false
+            hasObjectWithName("sampleobject1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasObjectWithName(listOf("sampleobject1")) shouldBeEqualTo false
+            hasObjectWithName(listOf("sampleobject1"), ignoreCase = true) shouldBeEqualTo true
+            hasObjectWithName(listOf("otherobject")) shouldBeEqualTo false
+            hasObjectWithName(listOf("otherobject"), ignoreCase = true) shouldBeEqualTo false
+            hasObjectWithName(listOf("sampleobject1", "otherName")) shouldBeEqualTo false
+            hasObjectWithName(listOf("sampleobject1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasObjectsWithAllNames("sampleobject1") shouldBeEqualTo false
+            hasObjectsWithAllNames("sampleobject1", ignoreCase = true) shouldBeEqualTo true
+            hasObjectsWithAllNames("sampleobject1", "sampleobject2") shouldBeEqualTo false
+            hasObjectsWithAllNames("sampleobject1", "sampleobject2", ignoreCase = true) shouldBeEqualTo true
+            hasObjectsWithAllNames("sampleobject1", "otherobject") shouldBeEqualTo false
+            hasObjectsWithAllNames("sampleobject1", "otherobject", ignoreCase = true) shouldBeEqualTo false
+            hasObjectsWithAllNames(listOf("sampleobject1")) shouldBeEqualTo false
+            hasObjectsWithAllNames(listOf("sampleobject1"), ignoreCase = true) shouldBeEqualTo true
+            hasObjectsWithAllNames(listOf("sampleobject1", "sampleobject2")) shouldBeEqualTo false
+            hasObjectsWithAllNames(listOf("sampleobject1", "sampleobject2"), ignoreCase = true) shouldBeEqualTo true
+            hasObjectsWithAllNames(listOf("sampleobject1", "otherobject")) shouldBeEqualTo false
+            hasObjectsWithAllNames(listOf("sampleobject1", "otherobject"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kointerface/snippet/forkoobjectprovider/", fileName)
 }

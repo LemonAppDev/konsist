@@ -1,0 +1,6 @@
+interface SampleInterface {
+    object SampleObject1
+
+    object SampleObject2
+
+}
