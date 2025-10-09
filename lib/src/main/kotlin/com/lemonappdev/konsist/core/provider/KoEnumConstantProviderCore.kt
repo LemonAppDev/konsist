@@ -28,8 +28,7 @@ internal interface KoEnumConstantProviderCore :
     override val numEnumConstants: Int
         get() = enumConstants.size
 
-    override fun countEnumConstants(predicate: (KoEnumConstantDeclaration) -> Boolean): Int =
-        enumConstants.count { predicate(it) }
+    override fun countEnumConstants(predicate: (KoEnumConstantDeclaration) -> Boolean): Int = enumConstants.count { predicate(it) }
 
     override fun hasEnumConstants(): Boolean = enumConstants.isNotEmpty()
 
@@ -39,7 +38,10 @@ internal interface KoEnumConstantProviderCore :
         ignoreCase: Boolean,
     ): Boolean = hasEnumConstantWithName(listOf(name, *names), ignoreCase)
 
-    override fun hasEnumConstantWithName(names: Collection<String>, ignoreCase: Boolean): Boolean =
+    override fun hasEnumConstantWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasEnumConstants()
             else ->
@@ -54,7 +56,10 @@ internal interface KoEnumConstantProviderCore :
         ignoreCase: Boolean,
     ): Boolean = hasEnumConstantsWithAllNames(listOf(name, *names), ignoreCase)
 
-    override fun hasEnumConstantsWithAllNames(names: Collection<String>, ignoreCase: Boolean): Boolean =
+    override fun hasEnumConstantsWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasEnumConstants()
             else ->
@@ -63,9 +68,7 @@ internal interface KoEnumConstantProviderCore :
                 }
         }
 
-    override fun hasEnumConstant(predicate: (KoEnumConstantDeclaration) -> Boolean): Boolean =
-        enumConstants.any(predicate)
+    override fun hasEnumConstant(predicate: (KoEnumConstantDeclaration) -> Boolean): Boolean = enumConstants.any(predicate)
 
-    override fun hasAllEnumConstants(predicate: (KoEnumConstantDeclaration) -> Boolean): Boolean =
-        enumConstants.all(predicate)
+    override fun hasAllEnumConstants(predicate: (KoEnumConstantDeclaration) -> Boolean): Boolean = enumConstants.all(predicate)
 }

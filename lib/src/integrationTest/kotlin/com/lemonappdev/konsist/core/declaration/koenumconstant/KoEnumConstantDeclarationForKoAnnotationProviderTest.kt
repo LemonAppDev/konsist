@@ -90,34 +90,34 @@ class KoEnumConstantDeclarationForKoAnnotationProviderTest {
             hasAnnotationWithName("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
             hasAnnotationWithName(
                 "com.lemonappdev.konsist.testdata.sampleannotation",
-                ignoreCase = false
+                ignoreCase = false,
             ).shouldBeEqualTo(false)
             hasAnnotationWithName(
                 "com.lemonappdev.konsist.testdata.sampleannotation",
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(true)
             hasAnnotationWithName("com.lemonappdev.konsist.testdata.OtherAnnotation") shouldBeEqualTo false
             hasAnnotationWithName(
                 "com.lemonappdev.konsist.testdata.otherannotation",
-                ignoreCase = false
+                ignoreCase = false,
             ).shouldBeEqualTo(false)
             hasAnnotationWithName(
                 "com.lemonappdev.konsist.testdata.otherannotation",
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(false)
             hasAnnotationWithName(
                 "com.lemonappdev.konsist.testdata.SampleAnnotation",
-                "com.lemonappdev.konsist.testdata.OtherAnnotation"
+                "com.lemonappdev.konsist.testdata.OtherAnnotation",
             ).shouldBeEqualTo(true)
             hasAnnotationWithName(
                 "com.lemonappdev.konsist.testdata.sampleannotation",
                 "com.lemonappdev.konsist.testdata.otherannotation",
-                ignoreCase = false
+                ignoreCase = false,
             ).shouldBeEqualTo(false)
             hasAnnotationWithName(
                 "com.lemonappdev.konsist.testdata.sampleannotation",
                 "com.lemonappdev.konsist.testdata.otherannotation",
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(true)
             hasAnnotationWithName(listOf("SampleAnnotation")) shouldBeEqualTo true
             hasAnnotationWithName(listOf("sampleannotation"), ignoreCase = false) shouldBeEqualTo false
@@ -128,54 +128,54 @@ class KoEnumConstantDeclarationForKoAnnotationProviderTest {
             hasAnnotationWithName(listOf("SampleAnnotation", "OtherAnnotation")) shouldBeEqualTo true
             hasAnnotationWithName(
                 listOf("sampleannotation", "otherannotation"),
-                ignoreCase = false
+                ignoreCase = false,
             ).shouldBeEqualTo(false)
             hasAnnotationWithName(listOf("sampleannotation", "otherannotation"), ignoreCase = true) shouldBeEqualTo true
             hasAnnotationWithName(listOf("com.lemonappdev.konsist.testdata.SampleAnnotation")) shouldBeEqualTo true
             hasAnnotationWithName(
                 listOf(
-                    "com.lemonappdev.konsist.testdata.sampleannotation"
+                    "com.lemonappdev.konsist.testdata.sampleannotation",
                 ),
-                ignoreCase = false
+                ignoreCase = false,
             ).shouldBeEqualTo(false)
             hasAnnotationWithName(
                 listOf(
-                    "com.lemonappdev.konsist.testdata.sampleannotation"
+                    "com.lemonappdev.konsist.testdata.sampleannotation",
                 ),
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(true)
             hasAnnotationWithName(listOf("com.lemonappdev.konsist.testdata.OtherAnnotation")) shouldBeEqualTo false
             hasAnnotationWithName(
                 listOf(
-                    "com.lemonappdev.konsist.testdata.otherannotation"
+                    "com.lemonappdev.konsist.testdata.otherannotation",
                 ),
-                ignoreCase = false
+                ignoreCase = false,
             ).shouldBeEqualTo(false)
             hasAnnotationWithName(
                 listOf(
-                    "com.lemonappdev.konsist.testdata.otherannotation"
+                    "com.lemonappdev.konsist.testdata.otherannotation",
                 ),
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(false)
             hasAnnotationWithName(
                 listOf(
                     "com.lemonappdev.konsist.testdata.SampleAnnotation",
-                    "com.lemonappdev.konsist.testdata.OtherAnnotation"
-                )
+                    "com.lemonappdev.konsist.testdata.OtherAnnotation",
+                ),
             ).shouldBeEqualTo(true)
             hasAnnotationWithName(
                 listOf(
                     "com.lemonappdev.konsist.testdata.sampleannotation",
-                    "com.lemonappdev.konsist.testdata.otherannotation"
+                    "com.lemonappdev.konsist.testdata.otherannotation",
                 ),
-                ignoreCase = false
+                ignoreCase = false,
             ).shouldBeEqualTo(false)
             hasAnnotationWithName(
                 listOf(
                     "com.lemonappdev.konsist.testdata.sampleannotation",
-                    "com.lemonappdev.konsist.testdata.otherannotation"
+                    "com.lemonappdev.konsist.testdata.otherannotation",
                 ),
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(true)
             hasAnnotationsWithAllNames("SampleAnnotation") shouldBeEqualTo true
             hasAnnotationsWithAllNames("sampleannotation", ignoreCase = false) shouldBeEqualTo false
@@ -185,11 +185,11 @@ class KoEnumConstantDeclarationForKoAnnotationProviderTest {
             hasAnnotationsWithAllNames("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
             hasAnnotationsWithAllNames(
                 "com.lemonappdev.konsist.testdata.sampleannotation",
-                ignoreCase = false
+                ignoreCase = false,
             ).shouldBeEqualTo(false)
             hasAnnotationsWithAllNames(
                 "com.lemonappdev.konsist.testdata.sampleannotation",
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(true)
             hasAnnotationsWithAllNames(
                 "com.lemonappdev.konsist.testdata.SampleAnnotation",
@@ -198,7 +198,7 @@ class KoEnumConstantDeclarationForKoAnnotationProviderTest {
             hasAnnotationsWithAllNames(
                 "com.lemonappdev.konsist.testdata.sampleannotation",
                 "com.lemonappdev.konsist.testdata.nonexistingannotation",
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(false)
 
             hasAnnotationsWithAllNames(listOf("SampleAnnotation")) shouldBeEqualTo true
@@ -207,29 +207,29 @@ class KoEnumConstantDeclarationForKoAnnotationProviderTest {
             hasAnnotationsWithAllNames(listOf("SampleAnnotation", "OtherAnnotation")) shouldBeEqualTo false
             hasAnnotationsWithAllNames(
                 listOf("sampleannotation", "otherannotation"),
-                ignoreCase = false
+                ignoreCase = false,
             ).shouldBeEqualTo(false)
             hasAnnotationsWithAllNames(listOf("com.lemonappdev.konsist.testdata.SampleAnnotation")) shouldBeEqualTo true
             hasAnnotationsWithAllNames(
                 listOf("com.lemonappdev.konsist.testdata.sampleannotation"),
-                ignoreCase = false
+                ignoreCase = false,
             ).shouldBeEqualTo(false)
             hasAnnotationsWithAllNames(
                 listOf("com.lemonappdev.konsist.testdata.sampleannotation"),
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(true)
             hasAnnotationsWithAllNames(
                 listOf(
                     "com.lemonappdev.konsist.testdata.SampleAnnotation",
                     "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
-                )
+                ),
             ).shouldBeEqualTo(false)
             hasAnnotationsWithAllNames(
                 listOf(
                     "com.lemonappdev.konsist.testdata.sampleannotation",
                     "com.lemonappdev.konsist.testdata.nonexistingannotation",
                 ),
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(false)
             hasAnnotation { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
             hasAnnotation { it.hasNameStartingWith("Other") } shouldBeEqualTo false

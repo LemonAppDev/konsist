@@ -15,7 +15,7 @@ class KoPackageDeclarationForKoNameProviderTest {
                 .firstOrNull()
 
         // then
-            sut?.name shouldBeEqualTo null
+        sut?.name shouldBeEqualTo null
     }
 
     @Test

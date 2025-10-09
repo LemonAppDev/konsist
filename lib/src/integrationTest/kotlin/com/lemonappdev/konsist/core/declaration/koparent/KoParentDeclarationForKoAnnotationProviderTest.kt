@@ -192,7 +192,7 @@ class KoParentDeclarationForKoAnnotationProviderTest {
 
         // then
         assertSoftly(sut) {
-        annotations shouldBeEqualTo emptyList()
+            annotations shouldBeEqualTo emptyList()
             numAnnotations shouldBeEqualTo 0
             countAnnotations { it.name == "NonExistingAnnotation" } shouldBeEqualTo 0
             hasAnnotations() shouldBeEqualTo false
@@ -358,7 +358,7 @@ class KoParentDeclarationForKoAnnotationProviderTest {
 
         // then
         assertSoftly(sut) {
-        annotations shouldBeEqualTo emptyList()
+            annotations shouldBeEqualTo emptyList()
             numAnnotations shouldBeEqualTo 0
             countAnnotations { it.name == "NonExistingAnnotation" } shouldBeEqualTo 0
             hasAnnotations() shouldBeEqualTo false

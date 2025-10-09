@@ -20,7 +20,10 @@ internal interface KoArgumentProviderCore :
         ignoreCase: Boolean,
     ): Boolean = hasArgumentWithName(listOf(name, *names), ignoreCase)
 
-    override fun hasArgumentWithName(names: Collection<String>, ignoreCase: Boolean,): Boolean =
+    override fun hasArgumentWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasArguments()
             else ->
@@ -35,7 +38,10 @@ internal interface KoArgumentProviderCore :
         ignoreCase: Boolean,
     ): Boolean = hasArgumentsWithAllNames(listOf(name, *names), ignoreCase)
 
-    override fun hasArgumentsWithAllNames(names: Collection<String>, ignoreCase: Boolean,): Boolean =
+    override fun hasArgumentsWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasArguments()
             else ->

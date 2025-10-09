@@ -96,7 +96,10 @@ internal class KoImportDeclarationCore private constructor(
 
     // KoImportDeclarationCore does not implement KoRepresentsTypeProviderCore because it internally implements
     // KoFullyQualifiedNameProviderCore, which import declaration does not possess. Therefore, this function is manually overridden.
-    override fun representsType(name: String?, ignoreCase: Boolean): Boolean = name?.let { this.name.endsWith(it, ignoreCase) } ?: false
+    override fun representsType(
+        name: String?,
+        ignoreCase: Boolean,
+    ): Boolean = name?.let { this.name.endsWith(it, ignoreCase) } ?: false
 
     override fun toString(): String = name
 

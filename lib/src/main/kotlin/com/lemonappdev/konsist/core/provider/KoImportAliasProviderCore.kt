@@ -27,7 +27,10 @@ internal interface KoImportAliasProviderCore :
         ignoreCase: Boolean,
     ): Boolean = hasImportAliasWithName(listOf(name, *names), ignoreCase)
 
-    override fun hasImportAliasWithName(names: Collection<String>, ignoreCase: Boolean,): Boolean =
+    override fun hasImportAliasWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasImportAliases()
             else ->
@@ -42,7 +45,10 @@ internal interface KoImportAliasProviderCore :
         ignoreCase: Boolean,
     ): Boolean = hasImportAliasesWithAllNames(listOf(name, *names), ignoreCase)
 
-    override fun hasImportAliasesWithAllNames(names: Collection<String>, ignoreCase: Boolean,): Boolean =
+    override fun hasImportAliasesWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasImportAliases()
             else ->

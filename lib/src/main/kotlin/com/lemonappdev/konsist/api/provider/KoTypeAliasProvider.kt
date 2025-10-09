@@ -57,7 +57,10 @@ interface KoTypeAliasProvider : KoBaseProvider {
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasTypeAliasWithName(names: Collection<String>, ignoreCase: Boolean = false): Boolean
+    fun hasTypeAliasWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has type aliases with all the specified names.
@@ -84,7 +87,10 @@ interface KoTypeAliasProvider : KoBaseProvider {
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasTypeAliasesWithAllNames(names: Collection<String>, ignoreCase: Boolean = false): Boolean
+    fun hasTypeAliasesWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one type alias that satisfies the provided predicate.

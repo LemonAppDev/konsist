@@ -57,7 +57,10 @@ interface KoEnumConstantProvider : KoBaseProvider {
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasEnumConstantWithName(names: Collection<String>, ignoreCase: Boolean = false): Boolean
+    fun hasEnumConstantWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has enum constants with all the specified names.
@@ -84,7 +87,10 @@ interface KoEnumConstantProvider : KoBaseProvider {
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasEnumConstantsWithAllNames(names: Collection<String>, ignoreCase: Boolean = false): Boolean
+    fun hasEnumConstantsWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one enum constant that satisfies the provided predicate.

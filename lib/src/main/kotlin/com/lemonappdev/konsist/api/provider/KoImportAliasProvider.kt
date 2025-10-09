@@ -57,7 +57,10 @@ interface KoImportAliasProvider : KoBaseProvider {
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasImportAliasWithName(names: Collection<String>, ignoreCase: Boolean = false,): Boolean
+    fun hasImportAliasWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has import aliases with all the specified names.
@@ -84,7 +87,10 @@ interface KoImportAliasProvider : KoBaseProvider {
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasImportAliasesWithAllNames(names: Collection<String>, ignoreCase: Boolean = false,): Boolean
+    fun hasImportAliasesWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one import alias that satisfies the provided predicate.

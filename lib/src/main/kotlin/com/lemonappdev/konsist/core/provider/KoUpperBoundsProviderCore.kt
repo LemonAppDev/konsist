@@ -29,7 +29,10 @@ internal interface KoUpperBoundsProviderCore :
         ignoreCase: Boolean,
     ): Boolean = hasUpperBoundWithName(listOf(name, *names), ignoreCase)
 
-    override fun hasUpperBoundWithName(names: Collection<String>, ignoreCase: Boolean): Boolean =
+    override fun hasUpperBoundWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasUpperBounds()
             else ->
@@ -44,7 +47,10 @@ internal interface KoUpperBoundsProviderCore :
         ignoreCase: Boolean,
     ): Boolean = hasUpperBoundsWithAllNames(listOf(name, *names), ignoreCase)
 
-    override fun hasUpperBoundsWithAllNames(names: Collection<String>, ignoreCase: Boolean): Boolean =
+    override fun hasUpperBoundsWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasUpperBounds()
             else ->

@@ -40,7 +40,10 @@ internal interface KoParametersProviderCore :
         ignoreCase: Boolean,
     ): Boolean = hasParameterWithName(listOf(name, *names), ignoreCase)
 
-    override fun hasParameterWithName(names: Collection<String>, ignoreCase: Boolean,): Boolean =
+    override fun hasParameterWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasParameters()
             else ->
@@ -55,7 +58,10 @@ internal interface KoParametersProviderCore :
         ignoreCase: Boolean,
     ): Boolean = hasParametersWithAllNames(listOf(name, *names), ignoreCase)
 
-    override fun hasParametersWithAllNames(names: Collection<String>, ignoreCase: Boolean,): Boolean =
+    override fun hasParametersWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasParameters()
             else ->

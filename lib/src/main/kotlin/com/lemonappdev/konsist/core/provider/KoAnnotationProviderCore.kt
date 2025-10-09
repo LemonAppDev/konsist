@@ -41,7 +41,10 @@ internal interface KoAnnotationProviderCore :
         ignoreCase: Boolean,
     ): Boolean = hasAnnotationWithName(listOf(name, *names), ignoreCase)
 
-    override fun hasAnnotationWithName(names: Collection<String>, ignoreCase: Boolean): Boolean =
+    override fun hasAnnotationWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasAnnotations()
             else ->
@@ -56,7 +59,10 @@ internal interface KoAnnotationProviderCore :
         ignoreCase: Boolean,
     ): Boolean = hasAnnotationsWithAllNames(listOf(name, *names), ignoreCase)
 
-    override fun hasAnnotationsWithAllNames(names: Collection<String>, ignoreCase: Boolean): Boolean =
+    override fun hasAnnotationsWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasAnnotations()
             else ->

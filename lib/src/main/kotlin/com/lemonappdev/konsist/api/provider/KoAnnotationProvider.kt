@@ -57,7 +57,10 @@ interface KoAnnotationProvider : KoBaseProvider {
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasAnnotationWithName(names: Collection<String>, ignoreCase: Boolean = false,): Boolean
+    fun hasAnnotationWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has annotations with all the specified names.
@@ -84,7 +87,10 @@ interface KoAnnotationProvider : KoBaseProvider {
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasAnnotationsWithAllNames(names: Collection<String>, ignoreCase: Boolean = false,): Boolean
+    fun hasAnnotationsWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one annotation that satisfies the provided predicate.

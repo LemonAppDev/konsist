@@ -33,7 +33,10 @@ internal interface KoTypeAliasProviderCore :
         ignoreCase: Boolean,
     ): Boolean = hasTypeAliasWithName(listOf(name, *names), ignoreCase)
 
-    override fun hasTypeAliasWithName(names: Collection<String>, ignoreCase: Boolean,): Boolean =
+    override fun hasTypeAliasWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasTypeAliases()
             else ->
@@ -48,7 +51,10 @@ internal interface KoTypeAliasProviderCore :
         ignoreCase: Boolean,
     ): Boolean = hasTypeAliasesWithAllNames(listOf(name, *names), ignoreCase)
 
-    override fun hasTypeAliasesWithAllNames(names: Collection<String>, ignoreCase: Boolean,): Boolean =
+    override fun hasTypeAliasesWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasTypeAliases()
             else ->

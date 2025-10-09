@@ -96,37 +96,44 @@ class KoTypeDeclarationForKoAnnotationProviderTest {
             it?.hasAnnotationWithName("sampleannotation", "otherannotation", ignoreCase = false) shouldBeEqualTo false
             it?.hasAnnotationWithName("sampleannotation", "otherannotation", ignoreCase = true) shouldBeEqualTo true
             it?.hasAnnotationWithName("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
-            it?.hasAnnotationWithName(
-                "com.lemonappdev.konsist.testdata.sampleannotation",
-                ignoreCase = false
-            ).shouldBeEqualTo(false)
-            it?.hasAnnotationWithName(
-                "com.lemonappdev.konsist.testdata.sampleannotation",
-                ignoreCase = true
-            ).shouldBeEqualTo(true)
+            it
+                ?.hasAnnotationWithName(
+                    "com.lemonappdev.konsist.testdata.sampleannotation",
+                    ignoreCase = false,
+                ).shouldBeEqualTo(false)
+            it
+                ?.hasAnnotationWithName(
+                    "com.lemonappdev.konsist.testdata.sampleannotation",
+                    ignoreCase = true,
+                ).shouldBeEqualTo(true)
             it?.hasAnnotationWithName("com.lemonappdev.konsist.testdata.OtherAnnotation") shouldBeEqualTo false
-            it?.hasAnnotationWithName(
-                "com.lemonappdev.konsist.testdata.otherannotation",
-                ignoreCase = false
-            ).shouldBeEqualTo(false)
-            it?.hasAnnotationWithName(
-                "com.lemonappdev.konsist.testdata.otherannotation",
-                ignoreCase = true
-            ).shouldBeEqualTo(false)
-            it?.hasAnnotationWithName(
-                "com.lemonappdev.konsist.testdata.SampleAnnotation",
-                "com.lemonappdev.konsist.testdata.OtherAnnotation"
-            ).shouldBeEqualTo(true)
-            it?.hasAnnotationWithName(
-                "com.lemonappdev.konsist.testdata.sampleannotation",
-                "com.lemonappdev.konsist.testdata.otherannotation",
-                ignoreCase = false
-            ).shouldBeEqualTo(false)
-            it?.hasAnnotationWithName(
-                "com.lemonappdev.konsist.testdata.sampleannotation",
-                "com.lemonappdev.konsist.testdata.otherannotation",
-                ignoreCase = true
-            ).shouldBeEqualTo(true)
+            it
+                ?.hasAnnotationWithName(
+                    "com.lemonappdev.konsist.testdata.otherannotation",
+                    ignoreCase = false,
+                ).shouldBeEqualTo(false)
+            it
+                ?.hasAnnotationWithName(
+                    "com.lemonappdev.konsist.testdata.otherannotation",
+                    ignoreCase = true,
+                ).shouldBeEqualTo(false)
+            it
+                ?.hasAnnotationWithName(
+                    "com.lemonappdev.konsist.testdata.SampleAnnotation",
+                    "com.lemonappdev.konsist.testdata.OtherAnnotation",
+                ).shouldBeEqualTo(true)
+            it
+                ?.hasAnnotationWithName(
+                    "com.lemonappdev.konsist.testdata.sampleannotation",
+                    "com.lemonappdev.konsist.testdata.otherannotation",
+                    ignoreCase = false,
+                ).shouldBeEqualTo(false)
+            it
+                ?.hasAnnotationWithName(
+                    "com.lemonappdev.konsist.testdata.sampleannotation",
+                    "com.lemonappdev.konsist.testdata.otherannotation",
+                    ignoreCase = true,
+                ).shouldBeEqualTo(true)
             it?.hasAnnotationWithName(listOf("SampleAnnotation")) shouldBeEqualTo true
             it?.hasAnnotationWithName(listOf("sampleannotation"), ignoreCase = false) shouldBeEqualTo false
             it?.hasAnnotationWithName(listOf("sampleannotation"), ignoreCase = true) shouldBeEqualTo true
@@ -134,111 +141,128 @@ class KoTypeDeclarationForKoAnnotationProviderTest {
             it?.hasAnnotationWithName(listOf("otherannotation"), ignoreCase = false) shouldBeEqualTo false
             it?.hasAnnotationWithName(listOf("otherannotation"), ignoreCase = true) shouldBeEqualTo false
             it?.hasAnnotationWithName(listOf("SampleAnnotation", "OtherAnnotation")) shouldBeEqualTo true
-            it?.hasAnnotationWithName(
-                listOf("sampleannotation", "otherannotation"),
-                ignoreCase = false
-            ).shouldBeEqualTo(false)
+            it
+                ?.hasAnnotationWithName(
+                    listOf("sampleannotation", "otherannotation"),
+                    ignoreCase = false,
+                ).shouldBeEqualTo(false)
             it?.hasAnnotationWithName(listOf("sampleannotation", "otherannotation"), ignoreCase = true) shouldBeEqualTo true
             it?.hasAnnotationWithName(listOf("com.lemonappdev.konsist.testdata.SampleAnnotation")) shouldBeEqualTo true
-            it?.hasAnnotationWithName(
-                listOf(
-                    "com.lemonappdev.konsist.testdata.sampleannotation"
-                ),
-                ignoreCase = false
-            ).shouldBeEqualTo(false)
-            it?.hasAnnotationWithName(
-                listOf(
-                    "com.lemonappdev.konsist.testdata.sampleannotation"
-                ),
-                ignoreCase = true
-            ).shouldBeEqualTo(true)
+            it
+                ?.hasAnnotationWithName(
+                    listOf(
+                        "com.lemonappdev.konsist.testdata.sampleannotation",
+                    ),
+                    ignoreCase = false,
+                ).shouldBeEqualTo(false)
+            it
+                ?.hasAnnotationWithName(
+                    listOf(
+                        "com.lemonappdev.konsist.testdata.sampleannotation",
+                    ),
+                    ignoreCase = true,
+                ).shouldBeEqualTo(true)
             it?.hasAnnotationWithName(listOf("com.lemonappdev.konsist.testdata.OtherAnnotation")) shouldBeEqualTo false
-            it?.hasAnnotationWithName(
-                listOf(
-                    "com.lemonappdev.konsist.testdata.otherannotation"
-                ),
-                ignoreCase = false
-            ).shouldBeEqualTo(false)
-            it?.hasAnnotationWithName(
-                listOf(
-                    "com.lemonappdev.konsist.testdata.otherannotation"
-                ),
-                ignoreCase = true
-            ).shouldBeEqualTo(false)
-            it?.hasAnnotationWithName(
-                listOf(
-                    "com.lemonappdev.konsist.testdata.SampleAnnotation",
-                    "com.lemonappdev.konsist.testdata.OtherAnnotation"
-                )
-            ).shouldBeEqualTo(true)
-            it?.hasAnnotationWithName(
-                listOf(
-                    "com.lemonappdev.konsist.testdata.sampleannotation",
-                    "com.lemonappdev.konsist.testdata.otherannotation"
-                ),
-                ignoreCase = false
-            ).shouldBeEqualTo(false)
-            it?.hasAnnotationWithName(
-                listOf(
-                    "com.lemonappdev.konsist.testdata.sampleannotation",
-                    "com.lemonappdev.konsist.testdata.otherannotation"
-                ),
-                ignoreCase = true
-            ).shouldBeEqualTo(true)
+            it
+                ?.hasAnnotationWithName(
+                    listOf(
+                        "com.lemonappdev.konsist.testdata.otherannotation",
+                    ),
+                    ignoreCase = false,
+                ).shouldBeEqualTo(false)
+            it
+                ?.hasAnnotationWithName(
+                    listOf(
+                        "com.lemonappdev.konsist.testdata.otherannotation",
+                    ),
+                    ignoreCase = true,
+                ).shouldBeEqualTo(false)
+            it
+                ?.hasAnnotationWithName(
+                    listOf(
+                        "com.lemonappdev.konsist.testdata.SampleAnnotation",
+                        "com.lemonappdev.konsist.testdata.OtherAnnotation",
+                    ),
+                ).shouldBeEqualTo(true)
+            it
+                ?.hasAnnotationWithName(
+                    listOf(
+                        "com.lemonappdev.konsist.testdata.sampleannotation",
+                        "com.lemonappdev.konsist.testdata.otherannotation",
+                    ),
+                    ignoreCase = false,
+                ).shouldBeEqualTo(false)
+            it
+                ?.hasAnnotationWithName(
+                    listOf(
+                        "com.lemonappdev.konsist.testdata.sampleannotation",
+                        "com.lemonappdev.konsist.testdata.otherannotation",
+                    ),
+                    ignoreCase = true,
+                ).shouldBeEqualTo(true)
             it?.hasAnnotationsWithAllNames("SampleAnnotation") shouldBeEqualTo true
             it?.hasAnnotationsWithAllNames("sampleannotation", ignoreCase = false) shouldBeEqualTo false
             it?.hasAnnotationsWithAllNames("sampleannotation", ignoreCase = true) shouldBeEqualTo true
             it?.hasAnnotationsWithAllNames("SampleAnnotation", "OtherAnnotation") shouldBeEqualTo false
             it?.hasAnnotationsWithAllNames("sampleannotation", "otherannotation", ignoreCase = false) shouldBeEqualTo false
             it?.hasAnnotationsWithAllNames("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
-            it?.hasAnnotationsWithAllNames(
-                "com.lemonappdev.konsist.testdata.sampleannotation",
-                ignoreCase = false
-            ).shouldBeEqualTo(false)
-            it?.hasAnnotationsWithAllNames(
-                "com.lemonappdev.konsist.testdata.sampleannotation",
-                ignoreCase = true
-            ).shouldBeEqualTo(true)
-            it?.hasAnnotationsWithAllNames(
-                "com.lemonappdev.konsist.testdata.SampleAnnotation",
-                "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
-            ).shouldBeEqualTo(false)
-            it?.hasAnnotationsWithAllNames(
-                "com.lemonappdev.konsist.testdata.sampleannotation",
-                "com.lemonappdev.konsist.testdata.nonexistingannotation",
-                ignoreCase = true
-            ).shouldBeEqualTo(false)
+            it
+                ?.hasAnnotationsWithAllNames(
+                    "com.lemonappdev.konsist.testdata.sampleannotation",
+                    ignoreCase = false,
+                ).shouldBeEqualTo(false)
+            it
+                ?.hasAnnotationsWithAllNames(
+                    "com.lemonappdev.konsist.testdata.sampleannotation",
+                    ignoreCase = true,
+                ).shouldBeEqualTo(true)
+            it
+                ?.hasAnnotationsWithAllNames(
+                    "com.lemonappdev.konsist.testdata.SampleAnnotation",
+                    "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
+                ).shouldBeEqualTo(false)
+            it
+                ?.hasAnnotationsWithAllNames(
+                    "com.lemonappdev.konsist.testdata.sampleannotation",
+                    "com.lemonappdev.konsist.testdata.nonexistingannotation",
+                    ignoreCase = true,
+                ).shouldBeEqualTo(false)
 
             it?.hasAnnotationsWithAllNames(listOf("SampleAnnotation")) shouldBeEqualTo true
             it?.hasAnnotationsWithAllNames(listOf("sampleannotation"), ignoreCase = false) shouldBeEqualTo false
             it?.hasAnnotationsWithAllNames(listOf("sampleannotation"), ignoreCase = true) shouldBeEqualTo true
             it?.hasAnnotationsWithAllNames(listOf("SampleAnnotation", "OtherAnnotation")) shouldBeEqualTo false
-            it?.hasAnnotationsWithAllNames(
-                listOf("sampleannotation", "otherannotation"),
-                ignoreCase = false
-            ).shouldBeEqualTo(false)
+            it
+                ?.hasAnnotationsWithAllNames(
+                    listOf("sampleannotation", "otherannotation"),
+                    ignoreCase = false,
+                ).shouldBeEqualTo(false)
             it?.hasAnnotationsWithAllNames(listOf("com.lemonappdev.konsist.testdata.SampleAnnotation")) shouldBeEqualTo true
-            it?.hasAnnotationsWithAllNames(
-                listOf("com.lemonappdev.konsist.testdata.sampleannotation"),
-                ignoreCase = false
-            ).shouldBeEqualTo(false)
-            it?.hasAnnotationsWithAllNames(
-                listOf("com.lemonappdev.konsist.testdata.sampleannotation"),
-                ignoreCase = true
-            ).shouldBeEqualTo(true)
-            it?.hasAnnotationsWithAllNames(
-                listOf(
-                    "com.lemonappdev.konsist.testdata.SampleAnnotation",
-                    "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
-                )
-            ).shouldBeEqualTo(false)
-            it?.hasAnnotationsWithAllNames(
-                listOf(
-                    "com.lemonappdev.konsist.testdata.sampleannotation",
-                    "com.lemonappdev.konsist.testdata.nonexistingannotation",
-                ),
-                ignoreCase = true
-            ).shouldBeEqualTo(false)
+            it
+                ?.hasAnnotationsWithAllNames(
+                    listOf("com.lemonappdev.konsist.testdata.sampleannotation"),
+                    ignoreCase = false,
+                ).shouldBeEqualTo(false)
+            it
+                ?.hasAnnotationsWithAllNames(
+                    listOf("com.lemonappdev.konsist.testdata.sampleannotation"),
+                    ignoreCase = true,
+                ).shouldBeEqualTo(true)
+            it
+                ?.hasAnnotationsWithAllNames(
+                    listOf(
+                        "com.lemonappdev.konsist.testdata.SampleAnnotation",
+                        "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
+                    ),
+                ).shouldBeEqualTo(false)
+            it
+                ?.hasAnnotationsWithAllNames(
+                    listOf(
+                        "com.lemonappdev.konsist.testdata.sampleannotation",
+                        "com.lemonappdev.konsist.testdata.nonexistingannotation",
+                    ),
+                    ignoreCase = true,
+                ).shouldBeEqualTo(false)
             it?.hasAnnotation { annotation -> annotation.hasNameStartingWith("Sample") } shouldBeEqualTo true
             it?.hasAnnotation { annotation -> annotation.hasNameStartingWith("Other") } shouldBeEqualTo false
             it?.hasAllAnnotations { annotation -> annotation.hasNameStartingWith("Sample") } shouldBeEqualTo true

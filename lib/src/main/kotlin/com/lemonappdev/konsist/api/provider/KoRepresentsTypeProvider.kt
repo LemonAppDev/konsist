@@ -13,5 +13,8 @@ interface KoRepresentsTypeProvider : KoBaseProvider {
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if this type represents the specified type, `false` otherwise.
      */
-    fun representsType(name: String?, ignoreCase: Boolean = false,): Boolean
+    fun representsType(
+        name: String?,
+        ignoreCase: Boolean = false,
+    ): Boolean
 }
