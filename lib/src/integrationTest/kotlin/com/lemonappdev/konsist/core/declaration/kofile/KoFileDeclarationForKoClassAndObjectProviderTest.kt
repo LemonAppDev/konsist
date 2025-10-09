@@ -176,6 +176,68 @@ class KoFileDeclarationForKoClassAndObjectProviderTest {
         }
     }
 
+    @Test
+    fun `file-has-no-classes-and-objects-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("file-has-no-classes-and-objects-ignore-case")
+                .files
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasClassOrObjectWithName("sampleclass") shouldBeEqualTo false
+            hasClassOrObjectWithName("sampleclass", ignoreCase = true) shouldBeEqualTo false
+            hasClassOrObjectWithName(listOf("sampleclass")) shouldBeEqualTo false
+            hasClassOrObjectWithName(listOf("sampleclass"), ignoreCase = true) shouldBeEqualTo false
+            hasClassOrObjectWithName(setOf("sampleclass")) shouldBeEqualTo false
+            hasClassOrObjectWithName(setOf("sampleclass"), ignoreCase = true) shouldBeEqualTo false
+            hasClassesAndObjectsWithAllNames("sampleclass1", "sampleobject") shouldBeEqualTo false
+            hasClassesAndObjectsWithAllNames("sampleclass1", "sampleobject", ignoreCase = true) shouldBeEqualTo false
+            hasClassesAndObjectsWithAllNames(listOf("sampleclass", "sampleobject")) shouldBeEqualTo false
+            hasClassesAndObjectsWithAllNames(listOf("sampleclass", "sampleobject"), ignoreCase = true) shouldBeEqualTo false
+            hasClassesAndObjectsWithAllNames(setOf("sampleclass", "sampleobject")) shouldBeEqualTo false
+            hasClassesAndObjectsWithAllNames(setOf("sampleclass", "sampleobject"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `file-has-class-and-object-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("file-has-class-and-object-ignore-case")
+                .files
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasClassOrObjectWithName("sampleclass") shouldBeEqualTo false
+            hasClassOrObjectWithName("sampleclass", ignoreCase = true) shouldBeEqualTo true
+            hasClassOrObjectWithName("otherclass") shouldBeEqualTo false
+            hasClassOrObjectWithName("otherclass", ignoreCase = true) shouldBeEqualTo false
+            hasClassOrObjectWithName("sampleclass", "otherName") shouldBeEqualTo false
+            hasClassOrObjectWithName("sampleclass", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasClassOrObjectWithName(listOf("sampleclass")) shouldBeEqualTo false
+            hasClassOrObjectWithName(listOf("sampleclass"), ignoreCase = true) shouldBeEqualTo true
+            hasClassOrObjectWithName(listOf("otherclass")) shouldBeEqualTo false
+            hasClassOrObjectWithName(listOf("otherclass"), ignoreCase = true) shouldBeEqualTo false
+            hasClassOrObjectWithName(listOf("sampleclass", "otherName")) shouldBeEqualTo false
+            hasClassOrObjectWithName(listOf("sampleclass", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasClassesAndObjectsWithAllNames("sampleclass") shouldBeEqualTo false
+            hasClassesAndObjectsWithAllNames("sampleclass", ignoreCase = true) shouldBeEqualTo true
+            hasClassesAndObjectsWithAllNames("sampleclass", "sampleobject") shouldBeEqualTo false
+            hasClassesAndObjectsWithAllNames("sampleclass", "sampleobject", ignoreCase = true) shouldBeEqualTo true
+            hasClassesAndObjectsWithAllNames("sampleclass", "otherclass") shouldBeEqualTo false
+            hasClassesAndObjectsWithAllNames("sampleclass", "otherclass", ignoreCase = true) shouldBeEqualTo false
+            hasClassesAndObjectsWithAllNames(listOf("sampleclass")) shouldBeEqualTo false
+            hasClassesAndObjectsWithAllNames(listOf("sampleclass"), ignoreCase = true) shouldBeEqualTo true
+            hasClassesAndObjectsWithAllNames(listOf("sampleclass", "sampleobject")) shouldBeEqualTo false
+            hasClassesAndObjectsWithAllNames(listOf("sampleclass", "sampleobject"), ignoreCase = true) shouldBeEqualTo true
+            hasClassesAndObjectsWithAllNames(listOf("sampleclass", "otherclass")) shouldBeEqualTo false
+            hasClassesAndObjectsWithAllNames(listOf("sampleclass", "otherclass"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/kofile/snippet/forkoclassandobjectprovider/", fileName)
 }
