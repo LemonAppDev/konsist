@@ -28,39 +28,44 @@ internal interface KoEnumConstantProviderCore :
     override val numEnumConstants: Int
         get() = enumConstants.size
 
-    override fun countEnumConstants(predicate: (KoEnumConstantDeclaration) -> Boolean): Int = enumConstants.count { predicate(it) }
+    override fun countEnumConstants(predicate: (KoEnumConstantDeclaration) -> Boolean): Int =
+        enumConstants.count { predicate(it) }
 
     override fun hasEnumConstants(): Boolean = enumConstants.isNotEmpty()
 
     override fun hasEnumConstantWithName(
         name: String,
         vararg names: String,
-    ): Boolean = hasEnumConstantWithName(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasEnumConstantWithName(listOf(name, *names), ignoreCase)
 
-    override fun hasEnumConstantWithName(names: Collection<String>): Boolean =
+    override fun hasEnumConstantWithName(names: Collection<String>, ignoreCase: Boolean): Boolean =
         when {
             names.isEmpty() -> hasEnumConstants()
             else ->
                 names.any {
-                    enumConstants.any { enumConstant -> it == enumConstant.name }
+                    enumConstants.any { enumConstant -> enumConstant.hasName(it, ignoreCase) }
                 }
         }
 
     override fun hasEnumConstantsWithAllNames(
         name: String,
         vararg names: String,
-    ): Boolean = hasEnumConstantsWithAllNames(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasEnumConstantsWithAllNames(listOf(name, *names), ignoreCase)
 
-    override fun hasEnumConstantsWithAllNames(names: Collection<String>): Boolean =
+    override fun hasEnumConstantsWithAllNames(names: Collection<String>, ignoreCase: Boolean): Boolean =
         when {
             names.isEmpty() -> hasEnumConstants()
             else ->
                 names.all {
-                    enumConstants.any { enumConstant -> it == enumConstant.name }
+                    enumConstants.any { enumConstant -> enumConstant.hasName(it, ignoreCase) }
                 }
         }
 
-    override fun hasEnumConstant(predicate: (KoEnumConstantDeclaration) -> Boolean): Boolean = enumConstants.any(predicate)
+    override fun hasEnumConstant(predicate: (KoEnumConstantDeclaration) -> Boolean): Boolean =
+        enumConstants.any(predicate)
 
-    override fun hasAllEnumConstants(predicate: (KoEnumConstantDeclaration) -> Boolean): Boolean = enumConstants.all(predicate)
+    override fun hasAllEnumConstants(predicate: (KoEnumConstantDeclaration) -> Boolean): Boolean =
+        enumConstants.all(predicate)
 }

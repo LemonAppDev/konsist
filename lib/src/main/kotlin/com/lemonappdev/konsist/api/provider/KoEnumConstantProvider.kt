@@ -37,40 +37,54 @@ interface KoEnumConstantProvider : KoBaseProvider {
      *
      * @param name the name of the enum constant to check.
      * @param names the names of the enum constants to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasEnumConstantWithName(
         name: String,
         vararg names: String,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
      * Determines whether the declaration has at least one enum constant whose name matches any of the specified names.
      *
      * @param names the names of the enum constants to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasEnumConstantWithName(names: Collection<String>): Boolean
+    fun hasEnumConstantWithName(names: Collection<String>, ignoreCase: Boolean = false): Boolean
 
     /**
      * Determines whether the declaration has enum constants with all the specified names.
      *
      * @param name The name of the enum constant to check.
      * @param names The names of the enum constants to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasEnumConstantsWithAllNames(
         name: String,
         vararg names: String,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
      * Determines whether the declaration has enum constants with all the specified names.
      *
      * @param names The names of the enum constants to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasEnumConstantsWithAllNames(names: Collection<String>): Boolean
+    fun hasEnumConstantsWithAllNames(names: Collection<String>, ignoreCase: Boolean = false): Boolean
 
     /**
      * Determines whether the declaration has at least one enum constant that satisfies the provided predicate.
