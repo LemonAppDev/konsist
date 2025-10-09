@@ -121,6 +121,68 @@ class KoInterfaceDeclarationForKoInterfaceProviderTest {
         }
     }
 
+    @Test
+    fun `interface-has-no-interfaces-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("interface-has-no-interfaces-ignore-case")
+                .interfaces()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasInterfaceWithName("sampleinterface") shouldBeEqualTo false
+            hasInterfaceWithName("sampleinterface", ignoreCase = true) shouldBeEqualTo false
+            hasInterfaceWithName(listOf("sampleinterface")) shouldBeEqualTo false
+            hasInterfaceWithName(listOf("sampleinterface"), ignoreCase = true) shouldBeEqualTo false
+            hasInterfaceWithName(setOf("sampleinterface")) shouldBeEqualTo false
+            hasInterfaceWithName(setOf("sampleinterface"), ignoreCase = true) shouldBeEqualTo false
+            hasInterfacesWithAllNames("sampleinterface1", "sampleinterface2") shouldBeEqualTo false
+            hasInterfacesWithAllNames("sampleinterface1", "sampleinterface2", ignoreCase = true) shouldBeEqualTo false
+            hasInterfacesWithAllNames(listOf("sampleinterface1", "sampleinterface2")) shouldBeEqualTo false
+            hasInterfacesWithAllNames(listOf("sampleinterface1", "sampleinterface2"), ignoreCase = true) shouldBeEqualTo false
+            hasInterfacesWithAllNames(setOf("sampleinterface1", "sampleinterface2")) shouldBeEqualTo false
+            hasInterfacesWithAllNames(setOf("sampleinterface1", "sampleinterface2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `interface-has-interfaces-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("interface-has-interfaces-ignore-case")
+                .interfaces()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasInterfaceWithName("sampleinterface1") shouldBeEqualTo false
+            hasInterfaceWithName("sampleinterface1", ignoreCase = true) shouldBeEqualTo true
+            hasInterfaceWithName("otherinterface") shouldBeEqualTo false
+            hasInterfaceWithName("otherinterface", ignoreCase = true) shouldBeEqualTo false
+            hasInterfaceWithName("sampleinterface1", "otherName") shouldBeEqualTo false
+            hasInterfaceWithName("sampleinterface1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasInterfaceWithName(listOf("sampleinterface1")) shouldBeEqualTo false
+            hasInterfaceWithName(listOf("sampleinterface1"), ignoreCase = true) shouldBeEqualTo true
+            hasInterfaceWithName(listOf("otherinterface")) shouldBeEqualTo false
+            hasInterfaceWithName(listOf("otherinterface"), ignoreCase = true) shouldBeEqualTo false
+            hasInterfaceWithName(listOf("sampleinterface1", "otherName")) shouldBeEqualTo false
+            hasInterfaceWithName(listOf("sampleinterface1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasInterfacesWithAllNames("sampleinterface1") shouldBeEqualTo false
+            hasInterfacesWithAllNames("sampleinterface1", ignoreCase = true) shouldBeEqualTo true
+            hasInterfacesWithAllNames("sampleinterface1", "sampleinterface2") shouldBeEqualTo false
+            hasInterfacesWithAllNames("sampleinterface1", "sampleinterface2", ignoreCase = true) shouldBeEqualTo true
+            hasInterfacesWithAllNames("sampleinterface1", "otherinterface") shouldBeEqualTo false
+            hasInterfacesWithAllNames("sampleinterface1", "otherinterface", ignoreCase = true) shouldBeEqualTo false
+            hasInterfacesWithAllNames(listOf("sampleinterface1")) shouldBeEqualTo false
+            hasInterfacesWithAllNames(listOf("sampleinterface1"), ignoreCase = true) shouldBeEqualTo true
+            hasInterfacesWithAllNames(listOf("sampleinterface1", "sampleinterface2")) shouldBeEqualTo false
+            hasInterfacesWithAllNames(listOf("sampleinterface1", "sampleinterface2"), ignoreCase = true) shouldBeEqualTo true
+            hasInterfacesWithAllNames(listOf("sampleinterface1", "otherinterface")) shouldBeEqualTo false
+            hasInterfacesWithAllNames(listOf("sampleinterface1", "otherinterface"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/kointerface/snippet/forkointerfaceprovider/", fileName)
 }

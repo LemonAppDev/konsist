@@ -27,17 +27,19 @@ internal interface KoInterfaceProviderCore :
         name: String,
         vararg names: String,
         includeNested: Boolean,
-    ): Boolean = hasInterfaceWithName(listOf(name, *names), includeNested)
+        ignoreCase: Boolean,
+    ): Boolean = hasInterfaceWithName(listOf(name, *names), includeNested, ignoreCase)
 
     override fun hasInterfaceWithName(
         names: Collection<String>,
         includeNested: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
             names.isEmpty() -> hasInterfaces(includeNested)
             else ->
                 names.any {
-                    interfaces(includeNested).any { koInterface -> it == koInterface.name }
+                    interfaces(includeNested).any { koInterface -> koInterface.hasName(it, ignoreCase) }
                 }
         }
 
@@ -45,17 +47,19 @@ internal interface KoInterfaceProviderCore :
         name: String,
         vararg names: String,
         includeNested: Boolean,
-    ): Boolean = hasInterfacesWithAllNames(listOf(name, *names), includeNested)
+        ignoreCase: Boolean,
+    ): Boolean = hasInterfacesWithAllNames(listOf(name, *names), includeNested, ignoreCase)
 
     override fun hasInterfacesWithAllNames(
         names: Collection<String>,
         includeNested: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
             names.isEmpty() -> hasInterfaces(includeNested)
             else ->
                 names.all {
-                    interfaces(includeNested).any { koInterface -> it == koInterface.name }
+                    interfaces(includeNested).any { koInterface -> koInterface.hasName(it, ignoreCase) }
                 }
         }
 
