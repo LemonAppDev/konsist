@@ -118,6 +118,80 @@ class KoFunctionDeclarationForKoParametersProviderTest {
         }
     }
 
+    @Test
+    fun `function-contains-no-parameters-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("function-contains-no-parameters-ignore-case")
+                .functions()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasParameterWithName("sampleparameter") shouldBeEqualTo false
+            hasParameterWithName("sampleparameter", ignoreCase = true) shouldBeEqualTo false
+            hasParameterWithName(listOf("sampleparameter")) shouldBeEqualTo false
+            hasParameterWithName(listOf("sampleparameter"), ignoreCase = true) shouldBeEqualTo false
+            hasParameterWithName(setOf("sampleparameter")) shouldBeEqualTo false
+            hasParameterWithName(setOf("sampleparameter"), ignoreCase = true) shouldBeEqualTo false
+            hasParametersWithAllNames("sampleparameter1", "sampleparameter2") shouldBeEqualTo false
+            hasParametersWithAllNames("sampleparameter1", "sampleparameter2", ignoreCase = true) shouldBeEqualTo false
+            hasParametersWithAllNames(listOf("sampleparameter1", "sampleparameter2")) shouldBeEqualTo false
+            hasParametersWithAllNames(listOf("sampleparameter1", "sampleparameter2"), ignoreCase = true) shouldBeEqualTo false
+            hasParametersWithAllNames(setOf("sampleparameter1", "sampleparameter2")) shouldBeEqualTo false
+            hasParametersWithAllNames(setOf("sampleparameter1", "sampleparameter2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `function-contains-parameters-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("function-contains-parameters-ignore-case")
+                .functions()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasParameterWithName("sampleparameter1") shouldBeEqualTo false
+            hasParameterWithName("sampleparameter1", ignoreCase = true) shouldBeEqualTo true
+            hasParameterWithName("otherparameter") shouldBeEqualTo false
+            hasParameterWithName("otherparameter", ignoreCase = true) shouldBeEqualTo false
+            hasParameterWithName("sampleparameter1", "otherName") shouldBeEqualTo false
+            hasParameterWithName("sampleparameter1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasParameterWithName(listOf("sampleparameter1")) shouldBeEqualTo false
+            hasParameterWithName(listOf("sampleparameter1"), ignoreCase = true) shouldBeEqualTo true
+            hasParameterWithName(listOf("otherparameter")) shouldBeEqualTo false
+            hasParameterWithName(listOf("otherparameter"), ignoreCase = true) shouldBeEqualTo false
+            hasParameterWithName(listOf("sampleparameter1", "otherName")) shouldBeEqualTo false
+            hasParameterWithName(listOf("sampleparameter1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasParameterWithName(setOf("sampleparameter1")) shouldBeEqualTo false
+            hasParameterWithName(setOf("sampleparameter1"), ignoreCase = true) shouldBeEqualTo true
+            hasParameterWithName(setOf("otherparameter")) shouldBeEqualTo false
+            hasParameterWithName(setOf("otherparameter"), ignoreCase = true) shouldBeEqualTo false
+            hasParameterWithName(setOf("sampleparameter1", "otherName")) shouldBeEqualTo false
+            hasParameterWithName(setOf("sampleparameter1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasParametersWithAllNames("sampleparameter1") shouldBeEqualTo false
+            hasParametersWithAllNames("sampleparameter1", ignoreCase = true) shouldBeEqualTo true
+            hasParametersWithAllNames("sampleparameter1", "sampleparameter2") shouldBeEqualTo false
+            hasParametersWithAllNames("sampleparameter1", "sampleparameter2", ignoreCase = true) shouldBeEqualTo true
+            hasParametersWithAllNames("sampleparameter1", "otherparameter") shouldBeEqualTo false
+            hasParametersWithAllNames("sampleparameter1", "otherparameter", ignoreCase = true) shouldBeEqualTo false
+            hasParametersWithAllNames(listOf("sampleparameter1")) shouldBeEqualTo false
+            hasParametersWithAllNames(listOf("sampleparameter1"), ignoreCase = true) shouldBeEqualTo true
+            hasParametersWithAllNames(listOf("sampleparameter1", "sampleparameter2")) shouldBeEqualTo false
+            hasParametersWithAllNames(listOf("sampleparameter1", "sampleparameter2"), ignoreCase = true) shouldBeEqualTo true
+            hasParametersWithAllNames(listOf("sampleparameter1", "otherparameter")) shouldBeEqualTo false
+            hasParametersWithAllNames(listOf("sampleparameter1", "otherparameter"), ignoreCase = true) shouldBeEqualTo false
+            hasParametersWithAllNames(setOf("sampleparameter1")) shouldBeEqualTo false
+            hasParametersWithAllNames(setOf("sampleparameter1"), ignoreCase = true) shouldBeEqualTo true
+            hasParametersWithAllNames(setOf("sampleparameter1", "sampleparameter2")) shouldBeEqualTo false
+            hasParametersWithAllNames(setOf("sampleparameter1", "sampleparameter2"), ignoreCase = true) shouldBeEqualTo true
+            hasParametersWithAllNames(setOf("sampleparameter1", "otherparameter")) shouldBeEqualTo false
+            hasParametersWithAllNames(setOf("sampleparameter1", "otherparameter"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kofunction/snippet/forkoparametersprovider/", fileName)
 }
