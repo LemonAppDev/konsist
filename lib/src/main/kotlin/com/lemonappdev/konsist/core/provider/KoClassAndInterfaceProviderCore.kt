@@ -34,18 +34,20 @@ internal interface KoClassAndInterfaceProviderCore :
         vararg names: String,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Boolean = hasClassOrInterfaceWithName(listOf(name, *names), includeNested, includeLocal)
+        ignoreCase: Boolean,
+    ): Boolean = hasClassOrInterfaceWithName(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
     override fun hasClassOrInterfaceWithName(
         names: Collection<String>,
         includeNested: Boolean,
         includeLocal: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
             names.isEmpty() -> hasClassesOrInterfaces(includeNested, includeLocal)
             else ->
                 names.any {
-                    classesAndInterfaces(includeNested, includeLocal).any { koClass -> it == koClass.name }
+                    classesAndInterfaces(includeNested, includeLocal).any { koClass -> koClass.hasName(it, ignoreCase) }
                 }
         }
 
@@ -54,18 +56,20 @@ internal interface KoClassAndInterfaceProviderCore :
         vararg names: String,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Boolean = hasClassesAndInterfacesWithAllNames(listOf(name, *names), includeNested, includeLocal)
+        ignoreCase: Boolean,
+    ): Boolean = hasClassesAndInterfacesWithAllNames(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
     override fun hasClassesAndInterfacesWithAllNames(
         names: Collection<String>,
         includeNested: Boolean,
         includeLocal: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
             names.isEmpty() -> hasClassesOrInterfaces(includeNested, includeLocal)
             else ->
                 names.all {
-                    classesAndInterfaces(includeNested, includeLocal).any { koClass -> it == koClass.name }
+                    classesAndInterfaces(includeNested, includeLocal).any { koClass -> koClass.hasName(it, ignoreCase) }
                 }
         }
 
