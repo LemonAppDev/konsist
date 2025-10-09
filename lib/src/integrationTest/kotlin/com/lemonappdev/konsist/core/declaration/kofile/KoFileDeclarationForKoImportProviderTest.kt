@@ -183,6 +183,154 @@ class KoFileDeclarationForKoImportProviderTest {
         }
     }
 
+    @Test
+    fun `file-has-no-import-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("file-has-no-import-ignore-case")
+                .files
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasImportWithName("com.lemonappdev.konsist.testdata.otherimport") shouldBeEqualTo false
+            hasImportWithName("com.lemonappdev.konsist.testdata.otherimport", ignoreCase = true) shouldBeEqualTo false
+            hasImportWithName(listOf("com.lemonappdev.konsist.testdata.otherimport")) shouldBeEqualTo false
+            hasImportWithName(
+                listOf("com.lemonappdev.konsist.testdata.otherimport"),
+                ignoreCase = true
+            ).shouldBeEqualTo(false)
+            hasImportWithName(setOf("com.lemonappdev.konsist.testdata.otherimport")) shouldBeEqualTo false
+            hasImportWithName(
+                setOf("com.lemonappdev.konsist.testdata.otherimport"),
+                ignoreCase = true
+            ).shouldBeEqualTo(false)
+            hasImportsWithAllNames(
+                "com.lemonappdev.konsist.testdata.sampleclass",
+                "com.lemonappdev.konsist.testdata.sampletype",
+            ).shouldBeEqualTo(false)
+            hasImportsWithAllNames(
+                "com.lemonappdev.konsist.testdata.sampleclass",
+                "com.lemonappdev.konsist.testdata.sampletype",
+                ignoreCase = true
+            ).shouldBeEqualTo(false)
+            hasImportsWithAllNames(
+                listOf(
+                    "com.lemonappdev.konsist.testdata.sampleclass",
+                    "com.lemonappdev.konsist.testdata.sampletype",
+                )
+            ).shouldBeEqualTo(false)
+            hasImportsWithAllNames(
+                listOf(
+                    "com.lemonappdev.konsist.testdata.sampleclass",
+                    "com.lemonappdev.konsist.testdata.sampletype",
+                ), ignoreCase = true
+            ).shouldBeEqualTo(false)
+            hasImportsWithAllNames(
+                setOf(
+                    "com.lemonappdev.konsist.testdata.sampleclass",
+                    "com.lemonappdev.konsist.testdata.sampletype",
+                )
+            ).shouldBeEqualTo(false)
+            hasImportsWithAllNames(
+                setOf(
+                    "com.lemonappdev.konsist.testdata.sampletype",
+                    "com.lemonappdev.konsist.testdata.sampleclass",
+                ), ignoreCase = true
+            ).shouldBeEqualTo(false)
+        }
+    }
+
+    @Test
+    fun `file-has-imports-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("file-has-imports-ignore-case")
+                .files
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasImportWithName("com.lemonappdev.konsist.testdata.sampletype") shouldBeEqualTo false
+            hasImportWithName("com.lemonappdev.konsist.testdata.sampletype", ignoreCase = true) shouldBeEqualTo true
+            hasImportWithName("com.lemonappdev.konsist.testdata.otherimport") shouldBeEqualTo false
+            hasImportWithName("com.lemonappdev.konsist.testdata.otherimport", ignoreCase = true) shouldBeEqualTo false
+            hasImportWithName("com.lemonappdev.konsist.testdata.sampletype", "otherName") shouldBeEqualTo false
+            hasImportWithName(
+                "com.lemonappdev.konsist.testdata.sampletype",
+                "otherName",
+                ignoreCase = true
+            ).shouldBeEqualTo(true)
+            hasImportWithName(listOf("com.lemonappdev.konsist.testdata.sampletype")) shouldBeEqualTo false
+            hasImportWithName(
+                listOf("com.lemonappdev.konsist.testdata.sampletype"),
+                ignoreCase = true
+            ).shouldBeEqualTo(true)
+            hasImportWithName(listOf("com.lemonappdev.konsist.testdata.otherimport")) shouldBeEqualTo false
+            hasImportWithName(
+                listOf("com.lemonappdev.konsist.testdata.otherimport"),
+                ignoreCase = true
+            ).shouldBeEqualTo(false)
+            hasImportWithName(listOf("com.lemonappdev.konsist.testdata.sampletype", "otherName")) shouldBeEqualTo false
+            hasImportWithName(
+                listOf("com.lemonappdev.konsist.testdata.sampletype", "otherName"),
+                ignoreCase = true
+            ).shouldBeEqualTo(true)
+            hasImportsWithAllNames("com.lemonappdev.konsist.testdata.sampletype") shouldBeEqualTo false
+            hasImportsWithAllNames(
+                "com.lemonappdev.konsist.testdata.sampletype",
+                ignoreCase = true
+            ).shouldBeEqualTo(true)
+            hasImportsWithAllNames(
+                "com.lemonappdev.konsist.testdata.sampleannotation",
+                "com.lemonappdev.konsist.testdata.sampletype",
+            ).shouldBeEqualTo(false)
+            hasImportsWithAllNames(
+                "com.lemonappdev.konsist.testdata.sampleannotation",
+                "com.lemonappdev.konsist.testdata.sampletype",
+                ignoreCase = true
+            ).shouldBeEqualTo(true)
+            hasImportsWithAllNames(
+                "com.lemonappdev.konsist.testdata.sampletype",
+                "com.lemonappdev.konsist.testdata.otherimport"
+            ).shouldBeEqualTo(false)
+            hasImportsWithAllNames(
+                "com.lemonappdev.konsist.testdata.sampletype",
+                "com.lemonappdev.konsist.testdata.otherimport",
+                ignoreCase = true
+            ).shouldBeEqualTo(false)
+            hasImportsWithAllNames(listOf("com.lemonappdev.konsist.testdata.sampletype")) shouldBeEqualTo false
+            hasImportsWithAllNames(
+                listOf("com.lemonappdev.konsist.testdata.sampletype"),
+                ignoreCase = true
+            ).shouldBeEqualTo(true)
+            hasImportsWithAllNames(
+                listOf(
+                    "com.lemonappdev.konsist.testdata.sampletype",
+                    "com.lemonappdev.konsist.testdata.sampleclass",
+                )
+            ).shouldBeEqualTo(false)
+            hasImportsWithAllNames(
+                listOf(
+                    "com.lemonappdev.konsist.testdata.sampleannotation",
+                    "com.lemonappdev.konsist.testdata.sampletype",
+                ), ignoreCase = true
+            ).shouldBeEqualTo(true)
+            hasImportsWithAllNames(
+                listOf(
+                    "com.lemonappdev.konsist.testdata.sampleannotation",
+                    "com.lemonappdev.konsist.testdata.otherimport"
+                )
+            ).shouldBeEqualTo(false)
+            hasImportsWithAllNames(
+                listOf(
+                    "com.lemonappdev.konsist.testdata.sampletype",
+                    "com.lemonappdev.konsist.testdata.otherimport"
+                ), ignoreCase = true
+            ).shouldBeEqualTo(false)
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope(
             "core/declaration/kofile/snippet/forkoimportprovider/",
