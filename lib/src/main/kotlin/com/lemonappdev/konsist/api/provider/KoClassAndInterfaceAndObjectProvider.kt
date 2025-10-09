@@ -63,6 +63,9 @@ interface KoClassAndInterfaceAndObjectProvider : KoBaseProvider {
      * @param names the names of the classes, interfaces and objects to check.
      * @param includeNested Specifies whether to include nested classes, interfaces and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasClassOrInterfaceOrObjectWithName(
@@ -70,6 +73,7 @@ interface KoClassAndInterfaceAndObjectProvider : KoBaseProvider {
         vararg names: String,
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -78,12 +82,16 @@ interface KoClassAndInterfaceAndObjectProvider : KoBaseProvider {
      * @param names the names of the classes, interfaces and objects to check.
      * @param includeNested Specifies whether to include nested classes, interfaces and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasClassOrInterfaceOrObjectWithName(
         names: Collection<String>,
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -93,6 +101,9 @@ interface KoClassAndInterfaceAndObjectProvider : KoBaseProvider {
      * @param names The names of the classes, interfaces and objects to check.
      * @param includeNested Specifies whether to include nested classes, interfaces and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasClassesAndInterfacesAndObjectsWithAllNames(
@@ -100,6 +111,7 @@ interface KoClassAndInterfaceAndObjectProvider : KoBaseProvider {
         vararg names: String,
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -108,12 +120,16 @@ interface KoClassAndInterfaceAndObjectProvider : KoBaseProvider {
      * @param names The names of the classes, interfaces and objects to check.
      * @param includeNested Specifies whether to include nested classes, interfaces and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasClassesAndInterfacesAndObjectsWithAllNames(
         names: Collection<String>,
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**

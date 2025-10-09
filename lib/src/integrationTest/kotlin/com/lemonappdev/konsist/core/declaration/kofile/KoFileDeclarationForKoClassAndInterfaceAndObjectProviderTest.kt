@@ -210,6 +210,105 @@ class KoFileDeclarationForKoClassAndInterfaceAndObjectProviderTest {
         }
     }
 
+    @Test
+    fun `file-has-no-classes-and-interfaces-and-objects-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("file-has-no-classes-and-interfaces-and-objects-ignore-case")
+                .files
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasClassOrInterfaceOrObjectWithName("sampleclass") shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName("sampleclass", ignoreCase = true) shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName(listOf("sampleclass")) shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName(listOf("sampleclass"), ignoreCase = true) shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName(setOf("sampleclass")) shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName(setOf("sampleclass"), ignoreCase = true) shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames("sampleclass1", "sampleinterface") shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames(
+                "sampleclass1",
+                "sampleinterface",
+                ignoreCase = true
+            ) shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames(
+                listOf(
+                    "sampleclass",
+                    "sampleinterface"
+                )
+            ) shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames(
+                listOf("sampleclass", "sampleinterface"),
+                ignoreCase = true
+            ) shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames(setOf("sampleclass", "sampleinterface")) shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames(
+                setOf("sampleclass", "sampleinterface"),
+                ignoreCase = true
+            ) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `file-has-class-and-interface-and-object-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("file-has-class-and-interface-and-object-ignore-case")
+                .files
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasClassOrInterfaceOrObjectWithName("sampleclass") shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName("sampleclass", ignoreCase = true) shouldBeEqualTo true
+            hasClassOrInterfaceOrObjectWithName("otherclass") shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName("otherclass", ignoreCase = true) shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName("sampleclass", "otherName") shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName("sampleclass", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasClassOrInterfaceOrObjectWithName(listOf("sampleclass")) shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName(listOf("sampleclass"), ignoreCase = true) shouldBeEqualTo true
+            hasClassOrInterfaceOrObjectWithName(listOf("otherclass")) shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName(listOf("otherclass"), ignoreCase = true) shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName(listOf("sampleclass", "otherName")) shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName(
+                listOf("sampleclass", "otherName"),
+                ignoreCase = true
+            ) shouldBeEqualTo true
+            hasClassesAndInterfacesAndObjectsWithAllNames("sampleclass") shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames("sampleclass", ignoreCase = true) shouldBeEqualTo true
+            hasClassesAndInterfacesAndObjectsWithAllNames("sampleclass", "sampleinterface") shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames(
+                "sampleclass",
+                "sampleinterface",
+                ignoreCase = true
+            ) shouldBeEqualTo true
+            hasClassesAndInterfacesAndObjectsWithAllNames("sampleclass", "otherclass") shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames(
+                "sampleclass",
+                "otherclass",
+                ignoreCase = true
+            ) shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames(listOf("sampleclass")) shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames(listOf("sampleclass"), ignoreCase = true) shouldBeEqualTo true
+            hasClassesAndInterfacesAndObjectsWithAllNames(
+                listOf(
+                    "sampleclass",
+                    "sampleinterface"
+                )
+            ) shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames(
+                listOf("sampleclass", "sampleinterface"),
+                ignoreCase = true
+            ) shouldBeEqualTo true
+            hasClassesAndInterfacesAndObjectsWithAllNames(listOf("sampleclass", "otherclass")) shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames(
+                listOf("sampleclass", "otherclass"),
+                ignoreCase = true
+            ) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/kofile/snippet/forkoclassandinterfaceandobjectprovider/", fileName)
 }
