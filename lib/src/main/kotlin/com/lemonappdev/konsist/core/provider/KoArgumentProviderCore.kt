@@ -17,28 +17,30 @@ internal interface KoArgumentProviderCore :
     override fun hasArgumentWithName(
         name: String,
         vararg names: String,
-    ): Boolean = hasArgumentWithName(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasArgumentWithName(listOf(name, *names), ignoreCase)
 
-    override fun hasArgumentWithName(names: Collection<String>): Boolean =
+    override fun hasArgumentWithName(names: Collection<String>, ignoreCase: Boolean,): Boolean =
         when {
             names.isEmpty() -> hasArguments()
             else ->
                 names.any {
-                    arguments.any { argument -> it == argument.name }
+                    arguments.any { argument -> argument.name.equals(it, ignoreCase) }
                 }
         }
 
     override fun hasArgumentsWithAllNames(
         name: String,
         vararg names: String,
-    ): Boolean = hasArgumentsWithAllNames(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasArgumentsWithAllNames(listOf(name, *names), ignoreCase)
 
-    override fun hasArgumentsWithAllNames(names: Collection<String>): Boolean =
+    override fun hasArgumentsWithAllNames(names: Collection<String>, ignoreCase: Boolean,): Boolean =
         when {
             names.isEmpty() -> hasArguments()
             else ->
                 names.all {
-                    arguments.any { argument -> it == argument.name }
+                    arguments.any { argument -> argument.name.equals(it, ignoreCase) }
                 }
         }
 
