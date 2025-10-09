@@ -37,40 +37,54 @@ interface KoImportAliasProvider : KoBaseProvider {
      *
      * @param name the name of the import alias to check.
      * @param names the names of the import aliases to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasImportAliasWithName(
         name: String,
         vararg names: String,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
      * Determines whether the declaration has at least one import alias whose name matches any of the specified names.
      *
      * @param names the names of the import aliases to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasImportAliasWithName(names: Collection<String>): Boolean
+    fun hasImportAliasWithName(names: Collection<String>, ignoreCase: Boolean = false,): Boolean
 
     /**
      * Determines whether the declaration has import aliases with all the specified names.
      *
      * @param name The name of the import alias to check.
      * @param names The names of the import aliases to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasImportAliasesWithAllNames(
         name: String,
         vararg names: String,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
      * Determines whether the declaration has import aliases with all the specified names.
      *
      * @param names The names of the import aliases to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasImportAliasesWithAllNames(names: Collection<String>): Boolean
+    fun hasImportAliasesWithAllNames(names: Collection<String>, ignoreCase: Boolean = false,): Boolean
 
     /**
      * Determines whether the declaration has at least one import alias that satisfies the provided predicate.

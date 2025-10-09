@@ -183,6 +183,68 @@ class KoFileDeclarationForKoImportAliasProviderTest {
         }
     }
 
+    @Test
+    fun `file-has-no-import-alias-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("file-has-no-import-alias-ignore-case")
+                .files
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasImportAliasWithName("sampleimportalias") shouldBeEqualTo false
+            hasImportAliasWithName("sampleimportalias", ignoreCase = true) shouldBeEqualTo false
+            hasImportAliasWithName(listOf("sampleimportalias")) shouldBeEqualTo false
+            hasImportAliasWithName(listOf("sampleimportalias"), ignoreCase = true) shouldBeEqualTo false
+            hasImportAliasWithName(setOf("sampleimportalias")) shouldBeEqualTo false
+            hasImportAliasWithName(setOf("sampleimportalias"), ignoreCase = true) shouldBeEqualTo false
+            hasImportAliasesWithAllNames("sampleimportalias1", "sampleimportalias2") shouldBeEqualTo false
+            hasImportAliasesWithAllNames("sampleimportalias1", "sampleimportalias2", ignoreCase = true) shouldBeEqualTo false
+            hasImportAliasesWithAllNames(listOf("sampleimportalias1", "sampleimportalias2")) shouldBeEqualTo false
+            hasImportAliasesWithAllNames(listOf("sampleimportalias1", "sampleimportalias2"), ignoreCase = true) shouldBeEqualTo false
+            hasImportAliasesWithAllNames(setOf("sampleimportalias1", "sampleimportalias2")) shouldBeEqualTo false
+            hasImportAliasesWithAllNames(setOf("sampleimportalias1", "sampleimportalias2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `file-has-import-aliases-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("file-has-import-aliases-ignore-case")
+                .files
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasImportAliasWithName("sampleimportalias1") shouldBeEqualTo false
+            hasImportAliasWithName("sampleimportalias1", ignoreCase = true) shouldBeEqualTo true
+            hasImportAliasWithName("otherimportalias") shouldBeEqualTo false
+            hasImportAliasWithName("otherimportalias", ignoreCase = true) shouldBeEqualTo false
+            hasImportAliasWithName("sampleimportalias1", "otherName") shouldBeEqualTo false
+            hasImportAliasWithName("sampleimportalias1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasImportAliasWithName(listOf("sampleimportalias1")) shouldBeEqualTo false
+            hasImportAliasWithName(listOf("sampleimportalias1"), ignoreCase = true) shouldBeEqualTo true
+            hasImportAliasWithName(listOf("otherimportalias")) shouldBeEqualTo false
+            hasImportAliasWithName(listOf("otherimportalias"), ignoreCase = true) shouldBeEqualTo false
+            hasImportAliasWithName(listOf("sampleimportalias1", "otherName")) shouldBeEqualTo false
+            hasImportAliasWithName(listOf("sampleimportalias1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasImportAliasesWithAllNames("sampleimportalias1") shouldBeEqualTo false
+            hasImportAliasesWithAllNames("sampleimportalias1", ignoreCase = true) shouldBeEqualTo true
+            hasImportAliasesWithAllNames("sampleimportalias1", "sampleimportalias2") shouldBeEqualTo false
+            hasImportAliasesWithAllNames("sampleimportalias1", "sampleimportalias2", ignoreCase = true) shouldBeEqualTo true
+            hasImportAliasesWithAllNames("sampleimportalias1", "otherimportalias") shouldBeEqualTo false
+            hasImportAliasesWithAllNames("sampleimportalias1", "otherimportalias", ignoreCase = true) shouldBeEqualTo false
+            hasImportAliasesWithAllNames(listOf("sampleimportalias1")) shouldBeEqualTo false
+            hasImportAliasesWithAllNames(listOf("sampleimportalias1"), ignoreCase = true) shouldBeEqualTo true
+            hasImportAliasesWithAllNames(listOf("sampleimportalias1", "sampleimportalias2")) shouldBeEqualTo false
+            hasImportAliasesWithAllNames(listOf("sampleimportalias1", "sampleimportalias2"), ignoreCase = true) shouldBeEqualTo true
+            hasImportAliasesWithAllNames(listOf("sampleimportalias1", "otherimportalias")) shouldBeEqualTo false
+            hasImportAliasesWithAllNames(listOf("sampleimportalias1", "otherimportalias"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope(
             "core/declaration/kofile/snippet/forkoimportaliasprovider/",
