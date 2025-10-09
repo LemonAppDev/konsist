@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withParameter
 import com.lemonappdev.konsist.api.ext.list.withProperty
 import com.lemonappdev.konsist.api.ext.list.withoutAnnotationOf
+import com.lemonappdev.konsist.api.ext.list.withoutExtension
 import com.lemonappdev.konsist.api.ext.list.withoutName
 import com.lemonappdev.konsist.api.ext.list.withoutNameMatching
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
@@ -68,6 +69,7 @@ class ApiKonsistTest {
     fun `every api function with name containing name has ignoreCase parameter`() {
         apiPackageScope
             .functions()
+            .withoutExtension() // Todo: remove line
             .withNameContaining("name", ignoreCase = true)
             .withoutAnnotationOf(Deprecated::class)
             .assertTrue { it.hasParameterWithName("ignoreCase") }

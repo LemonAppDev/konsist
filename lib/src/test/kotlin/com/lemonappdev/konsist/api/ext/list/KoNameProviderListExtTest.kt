@@ -100,20 +100,19 @@ class KoNameProviderListExtTest {
     @Test
     fun `withName() returns declaration with given name`() {
         // given
-        val name1 = "sampleName1"
-        val name2 = "sampleName2"
+        val name = "sampleName1"
         val declaration1: KoNameProvider =
             mockk {
-                every { name } returns name1
+                every { hasName(name) } returns true
             }
         val declaration2: KoNameProvider =
             mockk {
-                every { name } returns name2
+                every { hasName(name) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withName(name1)
+        val sut = declarations.withName(name)
 
         // then
         sut shouldBeEqualTo listOf(declaration1)
@@ -124,18 +123,20 @@ class KoNameProviderListExtTest {
         // given
         val name1 = "sampleName1"
         val name2 = "sampleName2"
-        val name3 = "sampleName3"
         val declaration1: KoNameProvider =
             mockk {
-                every { name } returns name1
+                every { hasName(name1) } returns true
+                every { hasName(name2) } returns false
             }
         val declaration2: KoNameProvider =
             mockk {
-                every { name } returns name2
+                every { hasName(name1) } returns false
+                every { hasName(name2) } returns true
             }
         val declaration3: KoNameProvider =
             mockk {
-                every { name } returns name3
+                every { hasName(name1) } returns false
+                every { hasName(name2) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -151,18 +152,20 @@ class KoNameProviderListExtTest {
         // given
         val name1 = "sampleName1"
         val name2 = "sampleName2"
-        val name3 = "sampleName3"
         val declaration1: KoNameProvider =
             mockk {
-                every { name } returns name1
+                every { hasName(name1) } returns true
+                every { hasName(name2) } returns false
             }
         val declaration2: KoNameProvider =
             mockk {
-                every { name } returns name2
+                every { hasName(name1) } returns false
+                every { hasName(name2) } returns true
             }
         val declaration3: KoNameProvider =
             mockk {
-                every { name } returns name3
+                every { hasName(name1) } returns false
+                every { hasName(name2) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val names = listOf(name1, name2)
@@ -177,25 +180,23 @@ class KoNameProviderListExtTest {
     @Test
     fun `withName() with ignore case returns declaration with given name`() {
         // given
-        val name1 = "correctName"
-        val name2 = "CORRECTName"
-        val name3 = "otherName"
+        val name = "correctName"
         val declaration1: KoNameProvider =
             mockk {
-                every { name } returns name1
+                every { hasName(name, ignoreCase = true) } returns true
             }
         val declaration2: KoNameProvider =
             mockk {
-                every { name } returns name2
+                every { hasName(name, ignoreCase = true) } returns true
             }
         val declaration3: KoNameProvider =
             mockk {
-                every { name } returns name3
+                every { hasName(name, ignoreCase = true) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withName(name1, ignoreCase = true)
+        val sut = declarations.withName(name, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration1, declaration2)
@@ -204,20 +205,19 @@ class KoNameProviderListExtTest {
     @Test
     fun `withoutName() returns declaration without given name`() {
         // given
-        val name1 = "sampleName1"
-        val name2 = "sampleName2"
+        val name = "sampleName1"
         val declaration1: KoNameProvider =
             mockk {
-                every { name } returns name1
+                every { hasName(name) } returns true
             }
         val declaration2: KoNameProvider =
             mockk {
-                every { name } returns name2
+                every { hasName(name) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutName(name1)
+        val sut = declarations.withoutName(name)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -228,18 +228,20 @@ class KoNameProviderListExtTest {
         // given
         val name1 = "sampleName1"
         val name2 = "sampleName2"
-        val name3 = "sampleName3"
         val declaration1: KoNameProvider =
             mockk {
-                every { name } returns name1
+                every { hasName(name1) } returns true
+                every { hasName(name2) } returns false
             }
         val declaration2: KoNameProvider =
             mockk {
-                every { name } returns name2
+                every { hasName(name1) } returns false
+                every { hasName(name2) } returns true
             }
         val declaration3: KoNameProvider =
             mockk {
-                every { name } returns name3
+                every { hasName(name1) } returns false
+                every { hasName(name2) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -255,18 +257,20 @@ class KoNameProviderListExtTest {
         // given
         val name1 = "sampleName1"
         val name2 = "sampleName2"
-        val name3 = "sampleName3"
         val declaration1: KoNameProvider =
             mockk {
-                every { name } returns name1
+                every { hasName(name1) } returns true
+                every { hasName(name2) } returns false
             }
         val declaration2: KoNameProvider =
             mockk {
-                every { name } returns name2
+                every { hasName(name1) } returns false
+                every { hasName(name2) } returns true
             }
         val declaration3: KoNameProvider =
             mockk {
-                every { name } returns name3
+                every { hasName(name1) } returns false
+                every { hasName(name2) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val names = listOf(name1, name2)
@@ -281,25 +285,23 @@ class KoNameProviderListExtTest {
     @Test
     fun `withoutName() with ignore case returns declaration without any of given names`() {
         // given
-        val name1 = "correctName"
-        val name2 = "CORRECTName"
-        val name3 = "otherName"
+        val name = "correctName"
         val declaration1: KoNameProvider =
             mockk {
-                every { name } returns name1
+                every { hasName(name, ignoreCase = true) } returns true
             }
         val declaration2: KoNameProvider =
             mockk {
-                every { name } returns name2
+                every { hasName(name, ignoreCase = true) } returns true
             }
         val declaration3: KoNameProvider =
             mockk {
-                every { name } returns name3
+                every { hasName(name, ignoreCase = true) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withoutName(name1, ignoreCase = true)
+        val sut = declarations.withoutName(name, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration3)

@@ -20,28 +20,36 @@ internal interface KoVariableProviderCore :
     override fun hasVariableWithName(
         name: String,
         vararg names: String,
-    ): Boolean = hasVariableWithName(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasVariableWithName(listOf(name, *names), ignoreCase)
 
-    override fun hasVariableWithName(names: Collection<String>): Boolean =
+    override fun hasVariableWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasVariables()
             else ->
                 names.any {
-                    variables.any { variable -> it == variable.name }
+                    variables.any { variable -> variable.hasName(it, ignoreCase) }
                 }
         }
 
     override fun hasVariablesWithAllNames(
         name: String,
         vararg names: String,
-    ): Boolean = hasVariablesWithAllNames(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasVariablesWithAllNames(listOf(name, *names), ignoreCase)
 
-    override fun hasVariablesWithAllNames(names: Collection<String>): Boolean =
+    override fun hasVariablesWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasVariables()
             else ->
                 names.all {
-                    variables.any { variable -> it == variable.name }
+                    variables.any { variable -> variable.hasName(it, ignoreCase) }
                 }
         }
 
