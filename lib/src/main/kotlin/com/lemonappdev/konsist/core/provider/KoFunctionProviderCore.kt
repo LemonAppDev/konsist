@@ -39,18 +39,20 @@ internal interface KoFunctionProviderCore :
         vararg names: String,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Boolean = hasFunctionWithName(listOf(name, *names), includeNested, includeLocal)
+        ignoreCase: Boolean,
+    ): Boolean = hasFunctionWithName(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
     override fun hasFunctionWithName(
         names: Collection<String>,
         includeNested: Boolean,
         includeLocal: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
             names.isEmpty() -> hasFunctions(includeNested, includeLocal)
             else ->
                 names.any {
-                    functions(includeNested, includeLocal).any { function -> it == function.name }
+                    functions(includeNested, includeLocal).any { function -> function.hasName(it, ignoreCase) }
                 }
         }
 
@@ -59,18 +61,20 @@ internal interface KoFunctionProviderCore :
         vararg names: String,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Boolean = hasFunctionsWithAllNames(listOf(name, *names), includeNested, includeLocal)
+        ignoreCase: Boolean,
+    ): Boolean = hasFunctionsWithAllNames(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
     override fun hasFunctionsWithAllNames(
         names: Collection<String>,
         includeNested: Boolean,
         includeLocal: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
             names.isEmpty() -> hasFunctions(includeNested, includeLocal)
             else ->
                 names.all {
-                    functions(includeNested, includeLocal).any { function -> it == function.name }
+                    functions(includeNested, includeLocal).any { function -> function.hasName(it, ignoreCase) }
                 }
         }
 
