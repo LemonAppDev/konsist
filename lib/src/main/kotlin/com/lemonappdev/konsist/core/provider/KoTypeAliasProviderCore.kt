@@ -38,7 +38,7 @@ internal interface KoTypeAliasProviderCore :
             names.isEmpty() -> hasTypeAliases()
             else ->
                 names.any {
-                    typeAliases.any { typeAlias -> it.equals(typeAlias.name, ignoreCase) }
+                    typeAliases.any { typeAlias -> typeAlias.hasName(it, ignoreCase) }
                 }
         }
 
@@ -53,7 +53,7 @@ internal interface KoTypeAliasProviderCore :
             names.isEmpty() -> hasTypeAliases()
             else ->
                 names.all {
-                    typeAliases.any { typeAlias -> it.equals(typeAlias.name, ignoreCase) }
+                    typeAliases.any { typeAlias -> typeAlias.hasName(it, ignoreCase) }
                 }
         }
 

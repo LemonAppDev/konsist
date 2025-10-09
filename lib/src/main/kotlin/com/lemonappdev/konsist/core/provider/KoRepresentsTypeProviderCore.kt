@@ -8,5 +8,5 @@ internal interface KoRepresentsTypeProviderCore :
     KoFullyQualifiedNameProviderCore,
     KoBaseProviderCore {
     override fun representsType(name: String?, ignoreCase: Boolean): Boolean =
-        name.equals(this.name, ignoreCase) || name.equals(fullyQualifiedName, ignoreCase)
+        name?.let { this.hasName(it, ignoreCase) } == true || name.equals(fullyQualifiedName, ignoreCase)
 }

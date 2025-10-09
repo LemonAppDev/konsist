@@ -36,7 +36,7 @@ fun <T : KoNameProvider> List<T>.withName(
     filter {
         when {
             names.isEmpty() -> it.name != ""
-            else -> names.any { name -> it.name.equals(name, ignoreCase) }
+            else -> names.any { name -> it.hasName(name, ignoreCase) }
         }
     }
 
@@ -72,7 +72,7 @@ fun <T : KoNameProvider> List<T>.withoutName(
     filter {
         when {
             names.isEmpty() -> it.name == ""
-            else -> names.none { name -> it.name.equals(name, ignoreCase) }
+            else -> names.none { name -> it.hasName(name, ignoreCase) }
         }
     }
 

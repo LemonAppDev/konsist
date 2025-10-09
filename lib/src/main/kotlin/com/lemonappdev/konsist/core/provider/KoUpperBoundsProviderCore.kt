@@ -34,7 +34,7 @@ internal interface KoUpperBoundsProviderCore :
             names.isEmpty() -> hasUpperBounds()
             else ->
                 names.any {
-                    upperBounds.any { parameter -> it.equals(parameter.name, ignoreCase = ignoreCase) }
+                    upperBounds.any { parameter -> parameter.hasName(it, ignoreCase = ignoreCase) }
                 }
         }
 
@@ -49,7 +49,7 @@ internal interface KoUpperBoundsProviderCore :
             names.isEmpty() -> hasUpperBounds()
             else ->
                 names.all {
-                    upperBounds.any { parameter -> it.equals(parameter.name, ignoreCase = ignoreCase) }
+                    upperBounds.any { parameter -> parameter.hasName(it, ignoreCase = ignoreCase) }
                 }
         }
 

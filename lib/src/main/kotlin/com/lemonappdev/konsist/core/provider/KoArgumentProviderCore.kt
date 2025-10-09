@@ -25,7 +25,7 @@ internal interface KoArgumentProviderCore :
             names.isEmpty() -> hasArguments()
             else ->
                 names.any {
-                    arguments.any { argument -> argument.name.equals(it, ignoreCase) }
+                    arguments.any { argument -> argument.hasName(it, ignoreCase) }
                 }
         }
 
@@ -40,7 +40,7 @@ internal interface KoArgumentProviderCore :
             names.isEmpty() -> hasArguments()
             else ->
                 names.all {
-                    arguments.any { argument -> argument.name.equals(it, ignoreCase) }
+                    arguments.any { argument -> argument.hasName(it, ignoreCase) }
                 }
         }
 

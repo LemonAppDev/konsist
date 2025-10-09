@@ -45,7 +45,7 @@ internal interface KoParametersProviderCore :
             names.isEmpty() -> hasParameters()
             else ->
                 names.any {
-                    parameters.any { parameter -> it.equals(parameter.name, ignoreCase) }
+                    parameters.any { parameter -> parameter.hasName(it, ignoreCase) }
                 }
         }
 
@@ -60,7 +60,7 @@ internal interface KoParametersProviderCore :
             names.isEmpty() -> hasParameters()
             else ->
                 names.all {
-                    parameters.any { parameter -> it.equals(parameter.name, ignoreCase) }
+                    parameters.any { parameter -> parameter.hasName(it, ignoreCase) }
                 }
         }
 
