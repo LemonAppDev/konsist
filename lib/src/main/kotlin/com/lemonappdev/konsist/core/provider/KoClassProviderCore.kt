@@ -39,18 +39,20 @@ internal interface KoClassProviderCore :
         vararg names: String,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Boolean = hasClassWithName(listOf(name, *names), includeNested, includeLocal)
+        ignoreCase: Boolean,
+    ): Boolean = hasClassWithName(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
     override fun hasClassWithName(
         names: Collection<String>,
         includeNested: Boolean,
         includeLocal: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
             names.isEmpty() -> hasClasses(includeNested, includeLocal)
             else ->
                 names.any {
-                    classes(includeNested, includeLocal).any { koClass -> it == koClass.name }
+                    classes(includeNested, includeLocal).any { koClass -> koClass.hasName(it, ignoreCase) }
                 }
         }
 
@@ -59,18 +61,20 @@ internal interface KoClassProviderCore :
         vararg names: String,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Boolean = hasClassesWithAllNames(listOf(name, *names), includeNested, includeLocal)
+        ignoreCase: Boolean,
+    ): Boolean = hasClassesWithAllNames(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
     override fun hasClassesWithAllNames(
         names: Collection<String>,
         includeNested: Boolean,
         includeLocal: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
             names.isEmpty() -> hasClasses(includeNested, includeLocal)
             else ->
                 names.all {
-                    classes(includeNested, includeLocal).any { koClass -> it == koClass.name }
+                    classes(includeNested, includeLocal).any { koClass -> koClass.hasName(it, ignoreCase) }
                 }
         }
 

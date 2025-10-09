@@ -81,6 +81,70 @@ class KoEnumConstantDeclarationForKoClassProviderTest {
         }
     }
 
+    @Test
+    fun `enum-constant-contains-no-classes-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("enum-constant-contains-no-classes-ignore-case")
+                .classes()
+                .enumConstants
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasClassWithName("sampleinnerclass") shouldBeEqualTo false
+            hasClassWithName("sampleinnerclass", ignoreCase = true) shouldBeEqualTo false
+            hasClassWithName(listOf("sampleinnerclass")) shouldBeEqualTo false
+            hasClassWithName(listOf("sampleinnerclass"), ignoreCase = true) shouldBeEqualTo false
+            hasClassWithName(setOf("sampleinnerclass")) shouldBeEqualTo false
+            hasClassWithName(setOf("sampleinnerclass"), ignoreCase = true) shouldBeEqualTo false
+            hasClassesWithAllNames("sampleinnerclass1", "sampleinnerclass2") shouldBeEqualTo false
+            hasClassesWithAllNames("sampleinnerclass1", "sampleinnerclass2", ignoreCase = true) shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("sampleinnerclass1", "sampleinnerclass2")) shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("sampleinnerclass1", "sampleinnerclass2"), ignoreCase = true) shouldBeEqualTo false
+            hasClassesWithAllNames(setOf("sampleinnerclass1", "sampleinnerclass2")) shouldBeEqualTo false
+            hasClassesWithAllNames(setOf("sampleinnerclass1", "sampleinnerclass2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `enum-constant-contains-class-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("enum-constant-contains-class-ignore-case")
+                .classes()
+                .enumConstants
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasClassWithName("sampleinnerclass1") shouldBeEqualTo false
+            hasClassWithName("sampleinnerclass1", ignoreCase = true) shouldBeEqualTo true
+            hasClassWithName("otherclass") shouldBeEqualTo false
+            hasClassWithName("otherclass", ignoreCase = true) shouldBeEqualTo false
+            hasClassWithName("sampleinnerclass1", "otherName") shouldBeEqualTo false
+            hasClassWithName("sampleinnerclass1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasClassWithName(listOf("sampleinnerclass1")) shouldBeEqualTo false
+            hasClassWithName(listOf("sampleinnerclass1"), ignoreCase = true) shouldBeEqualTo true
+            hasClassWithName(listOf("otherclass")) shouldBeEqualTo false
+            hasClassWithName(listOf("otherclass"), ignoreCase = true) shouldBeEqualTo false
+            hasClassWithName(listOf("sampleinnerclass1", "otherName")) shouldBeEqualTo false
+            hasClassWithName(listOf("sampleinnerclass1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasClassesWithAllNames("sampleinnerclass1") shouldBeEqualTo false
+            hasClassesWithAllNames("sampleinnerclass1", ignoreCase = true) shouldBeEqualTo true
+            hasClassesWithAllNames("sampleinnerclass1", "sampleinnerclass2") shouldBeEqualTo false
+            hasClassesWithAllNames("sampleinnerclass1", "sampleinnerclass2", ignoreCase = true) shouldBeEqualTo true
+            hasClassesWithAllNames("sampleinnerclass1", "otherclass") shouldBeEqualTo false
+            hasClassesWithAllNames("sampleinnerclass1", "otherclass", ignoreCase = true) shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("sampleinnerclass1")) shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("sampleinnerclass1"), ignoreCase = true) shouldBeEqualTo true
+            hasClassesWithAllNames(listOf("sampleinnerclass1", "sampleinnerclass2")) shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("sampleinnerclass1", "sampleinnerclass2"), ignoreCase = true) shouldBeEqualTo true
+            hasClassesWithAllNames(listOf("sampleinnerclass1", "otherclass")) shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("sampleinnerclass1", "otherclass"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koenumconstant/snippet/forkoclassprovider/", fileName)
 }
