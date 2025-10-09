@@ -230,22 +230,22 @@ class KoInterfaceDeclarationForKoClassAndInterfaceAndObjectProviderTest {
             hasClassesAndInterfacesAndObjectsWithAllNames(
                 "sampleclass1",
                 "sampleinterface",
-                ignoreCase = true
+                ignoreCase = true,
             ) shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(
                 listOf(
                     "sampleclass",
-                    "sampleinterface"
-                )
+                    "sampleinterface",
+                ),
             ) shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(
                 listOf("sampleclass", "sampleinterface"),
-                ignoreCase = true
+                ignoreCase = true,
             ) shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(setOf("sampleclass", "sampleinterface")) shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(
                 setOf("sampleclass", "sampleinterface"),
-                ignoreCase = true
+                ignoreCase = true,
             ) shouldBeEqualTo false
         }
     }
@@ -273,7 +273,7 @@ class KoInterfaceDeclarationForKoClassAndInterfaceAndObjectProviderTest {
             hasClassOrInterfaceOrObjectWithName(listOf("sampleclass", "otherName")) shouldBeEqualTo false
             hasClassOrInterfaceOrObjectWithName(
                 listOf("sampleclass", "otherName"),
-                ignoreCase = true
+                ignoreCase = true,
             ) shouldBeEqualTo true
             hasClassesAndInterfacesAndObjectsWithAllNames("sampleclass") shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames("sampleclass", ignoreCase = true) shouldBeEqualTo true
@@ -281,30 +281,30 @@ class KoInterfaceDeclarationForKoClassAndInterfaceAndObjectProviderTest {
             hasClassesAndInterfacesAndObjectsWithAllNames(
                 "sampleclass",
                 "sampleinterface",
-                ignoreCase = true
+                ignoreCase = true,
             ) shouldBeEqualTo true
             hasClassesAndInterfacesAndObjectsWithAllNames("sampleclass", "otherclass") shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(
                 "sampleclass",
                 "otherclass",
-                ignoreCase = true
+                ignoreCase = true,
             ) shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(listOf("sampleclass")) shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(listOf("sampleclass"), ignoreCase = true) shouldBeEqualTo true
             hasClassesAndInterfacesAndObjectsWithAllNames(
                 listOf(
                     "sampleclass",
-                    "sampleinterface"
-                )
+                    "sampleinterface",
+                ),
             ) shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(
                 listOf("sampleclass", "sampleinterface"),
-                ignoreCase = true
+                ignoreCase = true,
             ) shouldBeEqualTo true
             hasClassesAndInterfacesAndObjectsWithAllNames(listOf("sampleclass", "otherclass")) shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(
                 listOf("sampleclass", "otherclass"),
-                ignoreCase = true
+                ignoreCase = true,
             ) shouldBeEqualTo false
         }
     }
