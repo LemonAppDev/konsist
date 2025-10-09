@@ -19,6 +19,10 @@ class KoAnnotationDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             name shouldBeEqualTo "SampleAnnotation"
+            hasName("SampleAnnotation") shouldBeEqualTo true
+            hasName("OtherAnnotation") shouldBeEqualTo false
+            hasName("sampleannotation", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleannotation", ignoreCase = true) shouldBeEqualTo true
             hasNameStartingWith("Sample") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
             hasNameStartingWith("sample", ignoreCase = false) shouldBeEqualTo false

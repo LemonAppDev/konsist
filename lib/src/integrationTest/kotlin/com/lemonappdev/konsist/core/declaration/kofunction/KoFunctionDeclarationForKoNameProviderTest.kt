@@ -17,6 +17,10 @@ class KoFunctionDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             name shouldBeEqualTo "sampleFunction"
+            hasName("sampleFunction") shouldBeEqualTo true
+            hasName("otherFunction") shouldBeEqualTo false
+            hasName("samplefunction", ignoreCase = false) shouldBeEqualTo false
+            hasName("samplefunction", ignoreCase = true) shouldBeEqualTo true
             hasNameStartingWith("sample") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
             hasNameStartingWith("SAMPLE", ignoreCase = false) shouldBeEqualTo false

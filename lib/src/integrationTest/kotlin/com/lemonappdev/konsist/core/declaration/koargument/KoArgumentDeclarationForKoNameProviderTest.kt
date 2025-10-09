@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.ext.list.annotations
 import com.lemonappdev.konsist.api.ext.list.arguments
 import com.lemonappdev.konsist.api.ext.list.enumConstants
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -19,7 +20,11 @@ class KoArgumentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo ""
+        assertSoftly(sut) {
+            name shouldBeEqualTo ""
+            hasName("name") shouldBeEqualTo false
+            hasName("name", ignoreCase = true) shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -33,7 +38,13 @@ class KoArgumentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "sampleArgument"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "sampleArgument"
+            hasName("sampleArgument") shouldBeEqualTo true
+            hasName("otherArgument") shouldBeEqualTo false
+            hasName("sampleargument", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleargument", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -47,7 +58,11 @@ class KoArgumentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo ""
+        assertSoftly(sut) {
+            name shouldBeEqualTo ""
+            hasName("name") shouldBeEqualTo false
+            hasName("name", ignoreCase = true) shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -61,7 +76,13 @@ class KoArgumentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "sampleParameter"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "sampleParameter"
+            hasName("sampleParameter") shouldBeEqualTo true
+            hasName("otherParameter") shouldBeEqualTo false
+            hasName("sampleparameter", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleparameter", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koargument/snippet/forkonameprovider/", fileName)

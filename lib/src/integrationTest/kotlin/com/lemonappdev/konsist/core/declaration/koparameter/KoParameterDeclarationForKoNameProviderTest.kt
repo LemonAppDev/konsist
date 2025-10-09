@@ -20,6 +20,10 @@ class KoParameterDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             it?.name shouldBeEqualTo "sampleParameter"
+            it?.hasName("sampleParameter") shouldBeEqualTo true
+            it?.hasName("otherParameter") shouldBeEqualTo false
+            it?.hasName("SAMPLEPARAMETER", ignoreCase = false) shouldBeEqualTo false
+            it?.hasName("SAMPLEPARAMETER", ignoreCase = true) shouldBeEqualTo true
             it?.hasNameStartingWith("sample") shouldBeEqualTo true
             it?.hasNameStartingWith("Other") shouldBeEqualTo false
             it?.hasNameStartingWith("SAMPLE", ignoreCase = false) shouldBeEqualTo false
@@ -50,6 +54,10 @@ class KoParameterDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             name shouldBeEqualTo "sampleParameter"
+            hasName("sampleParameter") shouldBeEqualTo true
+            hasName("otherParameter") shouldBeEqualTo false
+            hasName("SAMPLEPARAMETER", ignoreCase = false) shouldBeEqualTo false
+            hasName("SAMPLEPARAMETER", ignoreCase = true) shouldBeEqualTo true
             hasNameStartingWith("sample") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
             hasNameStartingWith("SAMPLE", ignoreCase = false) shouldBeEqualTo false

@@ -22,7 +22,13 @@ class KoChildDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "ParentClass"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "ParentClass"
+            hasName("ParentClass") shouldBeEqualTo true
+            hasName("OtherClass") shouldBeEqualTo false
+            hasName("parentclass", ignoreCase = false) shouldBeEqualTo false
+            hasName("parentclass", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -36,7 +42,13 @@ class KoChildDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleObject"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "SampleObject"
+            hasName("SampleObject") shouldBeEqualTo true
+            hasName("OtherObject") shouldBeEqualTo false
+            hasName("sampleobject", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleobject", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -50,6 +62,12 @@ class KoChildDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "ParentInterface"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "ParentInterface"
+            hasName("ParentInterface") shouldBeEqualTo true
+            hasName("OtherInterface") shouldBeEqualTo false
+            hasName("parentinterface", ignoreCase = false) shouldBeEqualTo false
+            hasName("parentinterface", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 }

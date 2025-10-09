@@ -17,6 +17,10 @@ class KoPropertyDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             name shouldBeEqualTo "sampleProperty"
+            hasName("sampleProperty") shouldBeEqualTo true
+            hasName("otherProperty") shouldBeEqualTo false
+            hasName("SAMPLEPROPERTY", ignoreCase = false) shouldBeEqualTo false
+            hasName("SAMPLEPROPERTY", ignoreCase = true) shouldBeEqualTo true
             hasNameStartingWith("sample") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
             hasNameStartingWith("SAMPLE", ignoreCase = false) shouldBeEqualTo false

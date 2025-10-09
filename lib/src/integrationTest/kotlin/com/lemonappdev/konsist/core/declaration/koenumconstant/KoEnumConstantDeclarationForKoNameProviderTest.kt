@@ -19,6 +19,10 @@ class KoEnumConstantDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             name shouldBeEqualTo "SAMPLE_CONSTANT_1"
+            hasName("SAMPLE_CONSTANT_1") shouldBeEqualTo true
+            hasName("OTHER") shouldBeEqualTo false
+            hasName("sample_constant_1", ignoreCase = false) shouldBeEqualTo false
+            hasName("sample_constant_1", ignoreCase = true) shouldBeEqualTo true
             hasNameStartingWith("SAMPLE") shouldBeEqualTo true
             hasNameStartingWith("OTHER") shouldBeEqualTo false
             hasNameStartingWith("sample", ignoreCase = false) shouldBeEqualTo false

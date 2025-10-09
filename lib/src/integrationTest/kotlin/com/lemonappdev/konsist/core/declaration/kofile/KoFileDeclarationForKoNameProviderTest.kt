@@ -15,7 +15,13 @@ class KoFileDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "file-name"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "file-name"
+            hasName("file-name") shouldBeEqualTo true
+            hasName("wrong-name") shouldBeEqualTo false
+            hasName("FILE-name", ignoreCase = false) shouldBeEqualTo false
+            hasName("FILE-name", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test

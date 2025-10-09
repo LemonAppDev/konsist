@@ -17,6 +17,10 @@ class KoClassDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             name shouldBeEqualTo "SampleClass"
+            hasName("SampleClass") shouldBeEqualTo true
+            hasName("OtherClass") shouldBeEqualTo false
+            hasName("sampleclass", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleclass", ignoreCase = true) shouldBeEqualTo true
             hasNameStartingWith("Sample") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
             hasNameStartingWith("sample", ignoreCase = false) shouldBeEqualTo false

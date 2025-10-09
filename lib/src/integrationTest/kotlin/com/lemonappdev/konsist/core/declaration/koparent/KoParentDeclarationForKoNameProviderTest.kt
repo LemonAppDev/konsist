@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.koparent
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.parents
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
@@ -22,7 +23,13 @@ class KoParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo name
+        assertSoftly(sut) {
+            name shouldBeEqualTo name
+            hasName(name) shouldBeEqualTo true
+            hasName("OtherClass") shouldBeEqualTo false
+            hasName(name.uppercase(), ignoreCase = false) shouldBeEqualTo false
+            hasName(name.uppercase(), ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @ParameterizedTest
@@ -39,7 +46,13 @@ class KoParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo name
+        assertSoftly(sut) {
+            name shouldBeEqualTo name
+            hasName(name) shouldBeEqualTo true
+            hasName("OtherClass") shouldBeEqualTo false
+            hasName(name.uppercase(), ignoreCase = false) shouldBeEqualTo false
+            hasName(name.uppercase(), ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @ParameterizedTest
@@ -56,7 +69,13 @@ class KoParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo name
+        assertSoftly(sut) {
+            name shouldBeEqualTo name
+            hasName(name) shouldBeEqualTo true
+            hasName("OtherClass") shouldBeEqualTo false
+            hasName(name.uppercase(), ignoreCase = false) shouldBeEqualTo false
+            hasName(name.uppercase(), ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     private fun getSnippetFile(fileName: String) =

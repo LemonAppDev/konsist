@@ -26,6 +26,10 @@ class KoVariableDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             name shouldBeEqualTo "sampleVariable"
+            hasName("sampleVariable") shouldBeEqualTo true
+            hasName("otherVariable") shouldBeEqualTo false
+            hasName("SAMPLEVARIABLE", ignoreCase = false) shouldBeEqualTo false
+            hasName("SAMPLEVARIABLE", ignoreCase = true) shouldBeEqualTo true
             hasNameStartingWith("sample") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
             hasNameStartingWith("SAMPLE", ignoreCase = false) shouldBeEqualTo false

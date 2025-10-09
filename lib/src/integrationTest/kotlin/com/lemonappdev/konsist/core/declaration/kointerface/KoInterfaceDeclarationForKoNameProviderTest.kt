@@ -17,6 +17,10 @@ class KoInterfaceDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             name shouldBeEqualTo "SampleInterface"
+            hasName("SampleInterface") shouldBeEqualTo true
+            hasName("OtherInterface") shouldBeEqualTo false
+            hasName("sampleinterface", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleinterface", ignoreCase = true) shouldBeEqualTo true
             hasNameStartingWith("Sample") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
             hasNameStartingWith("sample", ignoreCase = false) shouldBeEqualTo false

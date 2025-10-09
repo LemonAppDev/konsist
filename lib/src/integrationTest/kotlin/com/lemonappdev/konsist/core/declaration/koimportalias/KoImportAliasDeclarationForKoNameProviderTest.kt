@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koimportalias
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
@@ -25,7 +26,12 @@ class KoImportAliasDeclarationForKoNameProviderTest {
                 ?.asImportAliasDeclaration()
 
         // then
-        sut?.name shouldBeEqualTo value
+        assertSoftly(sut) {
+            it?.name shouldBeEqualTo value
+            it?.hasName(value) shouldBeEqualTo true
+            it?.hasName(value.lowercase(), ignoreCase = false) shouldBeEqualTo false
+            it?.hasName(value.lowercase(), ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     private fun getSnippetFile(fileName: String) =

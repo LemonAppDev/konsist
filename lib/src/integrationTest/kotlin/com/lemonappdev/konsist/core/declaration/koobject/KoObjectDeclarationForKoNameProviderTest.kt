@@ -17,6 +17,10 @@ class KoObjectDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             name shouldBeEqualTo "SampleObject"
+            hasName("SampleObject") shouldBeEqualTo true
+            hasName("OtherObject") shouldBeEqualTo false
+            hasName("sampleobject", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleobject", ignoreCase = true) shouldBeEqualTo true
             hasNameStartingWith("Sample") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
             hasNameStartingWith("sample", ignoreCase = false) shouldBeEqualTo false
@@ -45,6 +49,10 @@ class KoObjectDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             name shouldBeEqualTo "SampleObject"
+            hasName("SampleObject") shouldBeEqualTo true
+            hasName("OtherObject") shouldBeEqualTo false
+            hasName("sampleobject", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleobject", ignoreCase = true) shouldBeEqualTo true
             hasNameStartingWith("Sample") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
             hasNameStartingWith("sample", ignoreCase = false) shouldBeEqualTo false

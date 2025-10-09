@@ -10,6 +10,20 @@ interface KoNameProvider : KoBaseProvider {
     val name: String
 
     /**
+     * Checks whether the declaration's name is equal to the specified text.
+     *
+     * @param text The text to compare with. Must be a non-null string representing the expected name.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
+     * @return `true` if the declaration's name equals the specified text, `false` otherwise.
+     */
+    fun hasName(
+        text: String,
+        ignoreCase: Boolean = false,
+    ): Boolean
+
+    /**
      * Name of the declaration with prefix.
      *
      * @param prefix The prefix to check against. It is a non-null string representing the desired prefix.

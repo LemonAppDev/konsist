@@ -17,6 +17,10 @@ class KoTypeAliasDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             name shouldBeEqualTo "SampleTypeAlias"
+            hasName("SampleTypeAlias") shouldBeEqualTo true
+            hasName("OtherTypeAlias") shouldBeEqualTo false
+            hasName("sampletypealias", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampletypealias", ignoreCase = true) shouldBeEqualTo true
             hasNameStartingWith("Sample") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
             hasNameStartingWith("sample", ignoreCase = false) shouldBeEqualTo false

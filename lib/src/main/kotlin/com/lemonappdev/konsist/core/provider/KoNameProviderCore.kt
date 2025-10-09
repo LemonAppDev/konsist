@@ -11,6 +11,8 @@ internal interface KoNameProviderCore :
     override val name: String
         get() = ktElement?.name ?: ""
 
+    override fun hasName(text: String, ignoreCase: Boolean): Boolean = name.equals(text, ignoreCase)
+
     override fun hasNameStartingWith(
         prefix: String,
         ignoreCase: Boolean,
