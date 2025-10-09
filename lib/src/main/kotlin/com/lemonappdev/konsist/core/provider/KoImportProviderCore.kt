@@ -40,7 +40,10 @@ internal interface KoImportProviderCore :
         ignoreCase: Boolean,
     ): Boolean = hasImportWithName(listOf(name, *names), ignoreCase)
 
-    override fun hasImportWithName(names: Collection<String>, ignoreCase: Boolean,): Boolean =
+    override fun hasImportWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasImports()
             else ->
@@ -55,7 +58,10 @@ internal interface KoImportProviderCore :
         ignoreCase: Boolean,
     ): Boolean = hasImportsWithAllNames(listOf(name, *names), ignoreCase)
 
-    override fun hasImportsWithAllNames(names: Collection<String>, ignoreCase: Boolean,): Boolean =
+    override fun hasImportsWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasImports()
             else ->

@@ -198,12 +198,12 @@ class KoFileDeclarationForKoImportProviderTest {
             hasImportWithName(listOf("com.lemonappdev.konsist.testdata.otherimport")) shouldBeEqualTo false
             hasImportWithName(
                 listOf("com.lemonappdev.konsist.testdata.otherimport"),
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(false)
             hasImportWithName(setOf("com.lemonappdev.konsist.testdata.otherimport")) shouldBeEqualTo false
             hasImportWithName(
                 setOf("com.lemonappdev.konsist.testdata.otherimport"),
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(false)
             hasImportsWithAllNames(
                 "com.lemonappdev.konsist.testdata.sampleclass",
@@ -212,31 +212,33 @@ class KoFileDeclarationForKoImportProviderTest {
             hasImportsWithAllNames(
                 "com.lemonappdev.konsist.testdata.sampleclass",
                 "com.lemonappdev.konsist.testdata.sampletype",
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(false)
             hasImportsWithAllNames(
                 listOf(
                     "com.lemonappdev.konsist.testdata.sampleclass",
                     "com.lemonappdev.konsist.testdata.sampletype",
-                )
+                ),
             ).shouldBeEqualTo(false)
             hasImportsWithAllNames(
                 listOf(
                     "com.lemonappdev.konsist.testdata.sampleclass",
                     "com.lemonappdev.konsist.testdata.sampletype",
-                ), ignoreCase = true
+                ),
+                ignoreCase = true,
             ).shouldBeEqualTo(false)
             hasImportsWithAllNames(
                 setOf(
                     "com.lemonappdev.konsist.testdata.sampleclass",
                     "com.lemonappdev.konsist.testdata.sampletype",
-                )
+                ),
             ).shouldBeEqualTo(false)
             hasImportsWithAllNames(
                 setOf(
                     "com.lemonappdev.konsist.testdata.sampletype",
                     "com.lemonappdev.konsist.testdata.sampleclass",
-                ), ignoreCase = true
+                ),
+                ignoreCase = true,
             ).shouldBeEqualTo(false)
         }
     }
@@ -259,27 +261,27 @@ class KoFileDeclarationForKoImportProviderTest {
             hasImportWithName(
                 "com.lemonappdev.konsist.testdata.sampletype",
                 "otherName",
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(true)
             hasImportWithName(listOf("com.lemonappdev.konsist.testdata.sampletype")) shouldBeEqualTo false
             hasImportWithName(
                 listOf("com.lemonappdev.konsist.testdata.sampletype"),
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(true)
             hasImportWithName(listOf("com.lemonappdev.konsist.testdata.otherimport")) shouldBeEqualTo false
             hasImportWithName(
                 listOf("com.lemonappdev.konsist.testdata.otherimport"),
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(false)
             hasImportWithName(listOf("com.lemonappdev.konsist.testdata.sampletype", "otherName")) shouldBeEqualTo false
             hasImportWithName(
                 listOf("com.lemonappdev.konsist.testdata.sampletype", "otherName"),
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(true)
             hasImportsWithAllNames("com.lemonappdev.konsist.testdata.sampletype") shouldBeEqualTo false
             hasImportsWithAllNames(
                 "com.lemonappdev.konsist.testdata.sampletype",
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(true)
             hasImportsWithAllNames(
                 "com.lemonappdev.konsist.testdata.sampleannotation",
@@ -288,45 +290,47 @@ class KoFileDeclarationForKoImportProviderTest {
             hasImportsWithAllNames(
                 "com.lemonappdev.konsist.testdata.sampleannotation",
                 "com.lemonappdev.konsist.testdata.sampletype",
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(true)
             hasImportsWithAllNames(
                 "com.lemonappdev.konsist.testdata.sampletype",
-                "com.lemonappdev.konsist.testdata.otherimport"
+                "com.lemonappdev.konsist.testdata.otherimport",
             ).shouldBeEqualTo(false)
             hasImportsWithAllNames(
                 "com.lemonappdev.konsist.testdata.sampletype",
                 "com.lemonappdev.konsist.testdata.otherimport",
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(false)
             hasImportsWithAllNames(listOf("com.lemonappdev.konsist.testdata.sampletype")) shouldBeEqualTo false
             hasImportsWithAllNames(
                 listOf("com.lemonappdev.konsist.testdata.sampletype"),
-                ignoreCase = true
+                ignoreCase = true,
             ).shouldBeEqualTo(true)
             hasImportsWithAllNames(
                 listOf(
                     "com.lemonappdev.konsist.testdata.sampletype",
                     "com.lemonappdev.konsist.testdata.sampleclass",
-                )
+                ),
             ).shouldBeEqualTo(false)
             hasImportsWithAllNames(
                 listOf(
                     "com.lemonappdev.konsist.testdata.sampleannotation",
                     "com.lemonappdev.konsist.testdata.sampletype",
-                ), ignoreCase = true
+                ),
+                ignoreCase = true,
             ).shouldBeEqualTo(true)
             hasImportsWithAllNames(
                 listOf(
                     "com.lemonappdev.konsist.testdata.sampleannotation",
-                    "com.lemonappdev.konsist.testdata.otherimport"
-                )
+                    "com.lemonappdev.konsist.testdata.otherimport",
+                ),
             ).shouldBeEqualTo(false)
             hasImportsWithAllNames(
                 listOf(
                     "com.lemonappdev.konsist.testdata.sampletype",
-                    "com.lemonappdev.konsist.testdata.otherimport"
-                ), ignoreCase = true
+                    "com.lemonappdev.konsist.testdata.otherimport",
+                ),
+                ignoreCase = true,
             ).shouldBeEqualTo(false)
         }
     }
