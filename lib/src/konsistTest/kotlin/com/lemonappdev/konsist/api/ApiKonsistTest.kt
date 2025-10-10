@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.api.ext.list.withoutAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withoutExtension
 import com.lemonappdev.konsist.api.ext.list.withoutName
 import com.lemonappdev.konsist.api.ext.list.withoutNameMatching
+import com.lemonappdev.konsist.api.ext.list.withoutParameterNamed
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
@@ -71,6 +72,7 @@ class ApiKonsistTest {
             .functions()
             .withoutExtension() // Todo: remove line
             .withNameContaining("name", ignoreCase = true)
+            .withoutParameterNamed("regex")
             .withoutAnnotationOf(Deprecated::class)
             .assertTrue { it.hasParameterWithName("ignoreCase") }
     }

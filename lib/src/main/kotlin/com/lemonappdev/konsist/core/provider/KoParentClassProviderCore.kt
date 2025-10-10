@@ -40,30 +40,34 @@ internal interface KoParentClassProviderCore :
         name: String,
         vararg names: String,
         indirectParents: Boolean,
-    ): Boolean = hasParentClassWithName(listOf(name, *names), indirectParents)
+        ignoreCase: Boolean,
+    ): Boolean = hasParentClassWithName(listOf(name, *names), indirectParents, ignoreCase)
 
     override fun hasParentClassWithName(
         names: Collection<String>,
         indirectParents: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
             names.isEmpty() -> hasParentClasses(indirectParents)
-            else -> names.any { parentClasses(indirectParents).any { parentClass -> it == parentClass.name } }
+            else -> names.any { parentClasses(indirectParents).any { parentClass -> parentClass.hasName(it, ignoreCase) } }
         }
 
     override fun hasParentClassesWithAllNames(
         name: String,
         vararg names: String,
         indirectParents: Boolean,
-    ): Boolean = hasParentClassesWithAllNames(listOf(name, *names), indirectParents)
+        ignoreCase: Boolean,
+    ): Boolean = hasParentClassesWithAllNames(listOf(name, *names), indirectParents, ignoreCase)
 
     override fun hasParentClassesWithAllNames(
         names: Collection<String>,
         indirectParents: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
             names.isEmpty() -> hasParentClasses(indirectParents)
-            else -> names.all { parentClasses(indirectParents).any { parentClass -> it == parentClass.name } }
+            else -> names.all { parentClasses(indirectParents).any { parentClass -> parentClass.hasName(it, ignoreCase) } }
         }
 
     override fun hasParentClassOf(
