@@ -5,7 +5,6 @@ import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withParameter
 import com.lemonappdev.konsist.api.ext.list.withProperty
 import com.lemonappdev.konsist.api.ext.list.withoutAnnotationOf
-import com.lemonappdev.konsist.api.ext.list.withoutExtension
 import com.lemonappdev.konsist.api.ext.list.withoutName
 import com.lemonappdev.konsist.api.ext.list.withoutNameMatching
 import com.lemonappdev.konsist.api.ext.list.withoutParameterNamed
