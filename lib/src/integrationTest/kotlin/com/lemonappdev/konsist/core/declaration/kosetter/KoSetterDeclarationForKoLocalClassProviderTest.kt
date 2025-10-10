@@ -81,5 +81,69 @@ class KoSetterDeclarationForKoLocalClassProviderTest {
         }
     }
 
+    @Test
+    fun `setter-contains-no-local-classes-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("setter-contains-no-local-classes-ignore-case")
+                .properties()
+                .first()
+                .setter
+
+        // then
+        assertSoftly(sut) {
+            it?.hasLocalClassWithName("sampleclass") shouldBeEqualTo false
+            it?.hasLocalClassWithName("sampleclass", ignoreCase = true) shouldBeEqualTo false
+            it?.hasLocalClassWithName(listOf("sampleclass")) shouldBeEqualTo false
+            it?.hasLocalClassWithName(listOf("sampleclass"), ignoreCase = true) shouldBeEqualTo false
+            it?.hasLocalClassWithName(setOf("sampleclass")) shouldBeEqualTo false
+            it?.hasLocalClassWithName(setOf("sampleclass"), ignoreCase = true) shouldBeEqualTo false
+            it?.hasLocalClassesWithAllNames("sampleclass1", "sampleclass2") shouldBeEqualTo false
+            it?.hasLocalClassesWithAllNames("sampleclass1", "sampleclass2", ignoreCase = true) shouldBeEqualTo false
+            it?.hasLocalClassesWithAllNames(listOf("sampleclass1", "sampleclass2")) shouldBeEqualTo false
+            it?.hasLocalClassesWithAllNames(listOf("sampleclass1", "sampleclass2"), ignoreCase = true) shouldBeEqualTo false
+            it?.hasLocalClassesWithAllNames(setOf("sampleclass1", "sampleclass2")) shouldBeEqualTo false
+            it?.hasLocalClassesWithAllNames(setOf("sampleclass1", "sampleclass2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `setter-contains-local-class-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("setter-contains-local-class-ignore-case")
+                .properties()
+                .first()
+                .setter
+
+        // then
+        assertSoftly(sut) {
+            it?.hasLocalClassWithName("sampleclass1") shouldBeEqualTo false
+            it?.hasLocalClassWithName("sampleclass1", ignoreCase = true) shouldBeEqualTo true
+            it?.hasLocalClassWithName("otherclass") shouldBeEqualTo false
+            it?.hasLocalClassWithName("otherclass", ignoreCase = true) shouldBeEqualTo false
+            it?.hasLocalClassWithName("sampleclass1", "otherName") shouldBeEqualTo false
+            it?.hasLocalClassWithName("sampleclass1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            it?.hasLocalClassWithName(listOf("sampleclass1")) shouldBeEqualTo false
+            it?.hasLocalClassWithName(listOf("sampleclass1"), ignoreCase = true) shouldBeEqualTo true
+            it?.hasLocalClassWithName(listOf("otherclass")) shouldBeEqualTo false
+            it?.hasLocalClassWithName(listOf("otherclass"), ignoreCase = true) shouldBeEqualTo false
+            it?.hasLocalClassWithName(listOf("sampleclass1", "otherName")) shouldBeEqualTo false
+            it?.hasLocalClassWithName(listOf("sampleclass1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            it?.hasLocalClassesWithAllNames("sampleclass1") shouldBeEqualTo false
+            it?.hasLocalClassesWithAllNames("sampleclass1", ignoreCase = true) shouldBeEqualTo true
+            it?.hasLocalClassesWithAllNames("sampleclass1", "sampleclass2") shouldBeEqualTo false
+            it?.hasLocalClassesWithAllNames("sampleclass1", "sampleclass2", ignoreCase = true) shouldBeEqualTo true
+            it?.hasLocalClassesWithAllNames("sampleclass1", "otherclass") shouldBeEqualTo false
+            it?.hasLocalClassesWithAllNames("sampleclass1", "otherclass", ignoreCase = true) shouldBeEqualTo false
+            it?.hasLocalClassesWithAllNames(listOf("sampleclass1")) shouldBeEqualTo false
+            it?.hasLocalClassesWithAllNames(listOf("sampleclass1"), ignoreCase = true) shouldBeEqualTo true
+            it?.hasLocalClassesWithAllNames(listOf("sampleclass1", "sampleclass2")) shouldBeEqualTo false
+            it?.hasLocalClassesWithAllNames(listOf("sampleclass1", "sampleclass2"), ignoreCase = true) shouldBeEqualTo true
+            it?.hasLocalClassesWithAllNames(listOf("sampleclass1", "otherclass")) shouldBeEqualTo false
+            it?.hasLocalClassesWithAllNames(listOf("sampleclass1", "otherclass"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kosetter/snippet/forkolocalclassprovider/", fileName)
 }

@@ -186,20 +186,22 @@ internal class KoEnumConstantDeclarationCore private constructor(
     override fun hasLocalClassWithName(
         name: String,
         vararg names: String,
-    ): Boolean = super<KoLocalClassProviderCore>.hasLocalClassWithName(name, *names)
+        ignoreCase: Boolean,
+    ): Boolean = super<KoLocalClassProviderCore>.hasLocalClassWithName(name, *names, ignoreCase = ignoreCase)
 
     @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("hasClassWithName()"))
-    override fun hasLocalClassWithName(names: Collection<String>): Boolean = super<KoLocalClassProviderCore>.hasLocalClassWithName(names)
+    override fun hasLocalClassWithName(names: Collection<String>, ignoreCase: Boolean,): Boolean = super<KoLocalClassProviderCore>.hasLocalClassWithName(names, ignoreCase)
 
     @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("hasClassesWithAllNames()"))
     override fun hasLocalClassesWithAllNames(
         name: String,
         vararg names: String,
-    ): Boolean = super<KoLocalClassProviderCore>.hasLocalClassesWithAllNames(name, *names)
+        ignoreCase: Boolean,
+    ): Boolean = super<KoLocalClassProviderCore>.hasLocalClassesWithAllNames(name, *names, ignoreCase = ignoreCase)
 
     @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("hasClassesWithAllNames()"))
-    override fun hasLocalClassesWithAllNames(names: Collection<String>): Boolean =
-        super<KoLocalClassProviderCore>.hasLocalClassesWithAllNames(names)
+    override fun hasLocalClassesWithAllNames(names: Collection<String>, ignoreCase: Boolean,): Boolean =
+        super<KoLocalClassProviderCore>.hasLocalClassesWithAllNames(names, ignoreCase)
 
     @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("hasClass()"))
     override fun hasLocalClass(predicate: (KoClassDeclaration) -> Boolean): Boolean =

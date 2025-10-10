@@ -81,6 +81,70 @@ class KoEnumConstantDeclarationForKoLocalClassProviderTest {
         }
     }
 
+    @Test
+    fun `enum-constant-contains-no-local-classes-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("enum-constant-contains-no-local-classes-ignore-case")
+                .classes()
+                .enumConstants
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasLocalClassWithName("samplelocalclass") shouldBeEqualTo false
+            hasLocalClassWithName("samplelocalclass", ignoreCase = true) shouldBeEqualTo false
+            hasLocalClassWithName(listOf("samplelocalclass")) shouldBeEqualTo false
+            hasLocalClassWithName(listOf("samplelocalclass"), ignoreCase = true) shouldBeEqualTo false
+            hasLocalClassWithName(setOf("samplelocalclass")) shouldBeEqualTo false
+            hasLocalClassWithName(setOf("samplelocalclass"), ignoreCase = true) shouldBeEqualTo false
+            hasLocalClassesWithAllNames("samplelocalclass1", "samplelocalclass2") shouldBeEqualTo false
+            hasLocalClassesWithAllNames("samplelocalclass1", "samplelocalclass2", ignoreCase = true) shouldBeEqualTo false
+            hasLocalClassesWithAllNames(listOf("samplelocalclass1", "samplelocalclass2")) shouldBeEqualTo false
+            hasLocalClassesWithAllNames(listOf("samplelocalclass1", "samplelocalclass2"), ignoreCase = true) shouldBeEqualTo false
+            hasLocalClassesWithAllNames(setOf("samplelocalclass1", "samplelocalclass2")) shouldBeEqualTo false
+            hasLocalClassesWithAllNames(setOf("samplelocalclass1", "samplelocalclass2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `enum-constant-contains-local-class-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("enum-constant-contains-local-class-ignore-case")
+                .classes()
+                .enumConstants
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasLocalClassWithName("samplelocalclass1") shouldBeEqualTo false
+            hasLocalClassWithName("samplelocalclass1", ignoreCase = true) shouldBeEqualTo true
+            hasLocalClassWithName("otherlocalclass") shouldBeEqualTo false
+            hasLocalClassWithName("otherlocalclass", ignoreCase = true) shouldBeEqualTo false
+            hasLocalClassWithName("samplelocalclass1", "otherName") shouldBeEqualTo false
+            hasLocalClassWithName("samplelocalclass1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasLocalClassWithName(listOf("samplelocalclass1")) shouldBeEqualTo false
+            hasLocalClassWithName(listOf("samplelocalclass1"), ignoreCase = true) shouldBeEqualTo true
+            hasLocalClassWithName(listOf("otherlocalclass")) shouldBeEqualTo false
+            hasLocalClassWithName(listOf("otherlocalclass"), ignoreCase = true) shouldBeEqualTo false
+            hasLocalClassWithName(listOf("samplelocalclass1", "otherName")) shouldBeEqualTo false
+            hasLocalClassWithName(listOf("samplelocalclass1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasLocalClassesWithAllNames("samplelocalclass1") shouldBeEqualTo false
+            hasLocalClassesWithAllNames("samplelocalclass1", ignoreCase = true) shouldBeEqualTo true
+            hasLocalClassesWithAllNames("samplelocalclass1", "samplelocalclass2") shouldBeEqualTo false
+            hasLocalClassesWithAllNames("samplelocalclass1", "samplelocalclass2", ignoreCase = true) shouldBeEqualTo true
+            hasLocalClassesWithAllNames("samplelocalclass1", "otherlocalclass") shouldBeEqualTo false
+            hasLocalClassesWithAllNames("samplelocalclass1", "otherlocalclass", ignoreCase = true) shouldBeEqualTo false
+            hasLocalClassesWithAllNames(listOf("samplelocalclass1")) shouldBeEqualTo false
+            hasLocalClassesWithAllNames(listOf("samplelocalclass1"), ignoreCase = true) shouldBeEqualTo true
+            hasLocalClassesWithAllNames(listOf("samplelocalclass1", "samplelocalclass2")) shouldBeEqualTo false
+            hasLocalClassesWithAllNames(listOf("samplelocalclass1", "samplelocalclass2"), ignoreCase = true) shouldBeEqualTo true
+            hasLocalClassesWithAllNames(listOf("samplelocalclass1", "otherlocalclass")) shouldBeEqualTo false
+            hasLocalClassesWithAllNames(listOf("samplelocalclass1", "otherlocalclass"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koenumconstant/snippet/forkolocalclassprovider/", fileName)
 }

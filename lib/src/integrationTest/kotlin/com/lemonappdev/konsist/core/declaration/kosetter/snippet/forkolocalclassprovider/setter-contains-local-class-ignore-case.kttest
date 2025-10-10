@@ -1,0 +1,8 @@
+var sampleProperty: String = "text"
+    set(value) {
+        class SampleClass1
+
+        class SampleClass2
+
+        if (true) field = value
+    }
