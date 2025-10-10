@@ -28,24 +28,34 @@ fun <T : KoParametersProvider> List<T>.withoutParameters(): List<T> = filterNot 
  *
  * @param name The name of the parameter to include.
  * @param names The names of additional parameters to include.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified parameter(s).
  */
 fun <T : KoParametersProvider> List<T>.withParameterNamed(
     name: String,
     vararg names: String,
-): List<T> = withParameterNamed(listOf(name, *names))
+    ignoreCase: Boolean = false,
+): List<T> = withParameterNamed(listOf(name, *names), ignoreCase)
 
 /**
  * List containing declarations that have at least one parameter with the specified name(s).
  *
  * @param names The names of additional parameters to include.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified parameter(s).
  */
-fun <T : KoParametersProvider> List<T>.withParameterNamed(names: Collection<String>): List<T> =
+fun <T : KoParametersProvider> List<T>.withParameterNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasParameters()
-            else -> it.hasParameterWithName(names)
+            else -> it.hasParameterWithName(names, ignoreCase = ignoreCase)
         }
     }
 
@@ -54,24 +64,34 @@ fun <T : KoParametersProvider> List<T>.withParameterNamed(names: Collection<Stri
  *
  * @param name The name of the parameter to exclude.
  * @param names The names of additional parameters to exclude.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified parameters.
  */
 fun <T : KoParametersProvider> List<T>.withoutParameterNamed(
     name: String,
     vararg names: String,
-): List<T> = withoutParameterNamed(listOf(name, *names))
+    ignoreCase: Boolean = false,
+): List<T> = withoutParameterNamed(listOf(name, *names), ignoreCase)
 
 /**
  * List containing declarations without any of specified parameters.
  *
  * @param names The names of additional parameters to exclude.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified parameters.
  */
-fun <T : KoParametersProvider> List<T>.withoutParameterNamed(names: Collection<String>): List<T> =
+fun <T : KoParametersProvider> List<T>.withoutParameterNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasParameters()
-            else -> it.hasParameterWithName(names)
+            else -> it.hasParameterWithName(names, ignoreCase = ignoreCase)
         }
     }
 
@@ -80,24 +100,34 @@ fun <T : KoParametersProvider> List<T>.withoutParameterNamed(names: Collection<S
  *
  * @param name The name of the parameter to include.
  * @param names The name(s) of the parameter(s) to include.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified parameter(s).
  */
 fun <T : KoParametersProvider> List<T>.withAllParametersNamed(
     name: String,
     vararg names: String,
-): List<T> = withAllParametersNamed(listOf(name, *names))
+    ignoreCase: Boolean = false,
+): List<T> = withAllParametersNamed(listOf(name, *names), ignoreCase)
 
 /**
  * List containing declarations that have all specified parameters.
  *
  * @param names The name(s) of the parameter(s) to include.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified parameter(s).
  */
-fun <T : KoParametersProvider> List<T>.withAllParametersNamed(names: Collection<String>): List<T> =
+fun <T : KoParametersProvider> List<T>.withAllParametersNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false
+): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasParameters()
-            else -> it.hasParametersWithAllNames(names)
+            else -> it.hasParametersWithAllNames(names, ignoreCase = ignoreCase)
         }
     }
 
@@ -106,24 +136,34 @@ fun <T : KoParametersProvider> List<T>.withAllParametersNamed(names: Collection<
  *
  * @param name The name of the parameter to exclude.
  * @param names The name(s) of the parameter(s) to exclude.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified parameter(s).
  */
 fun <T : KoParametersProvider> List<T>.withoutAllParametersNamed(
     name: String,
     vararg names: String,
-): List<T> = withoutAllParametersNamed(listOf(name, *names))
+    ignoreCase: Boolean = false,
+): List<T> = withoutAllParametersNamed(listOf(name, *names), ignoreCase)
 
 /**
  * List containing declarations without all specified parameters.
  *
  * @param names The name(s) of the parameter(s) to exclude.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified parameter(s).
  */
-fun <T : KoParametersProvider> List<T>.withoutAllParametersNamed(names: Collection<String>): List<T> =
+fun <T : KoParametersProvider> List<T>.withoutAllParametersNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false
+): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasParameters()
-            else -> it.hasParametersWithAllNames(names)
+            else -> it.hasParametersWithAllNames(names, ignoreCase = ignoreCase)
         }
     }
 
