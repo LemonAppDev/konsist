@@ -48,7 +48,10 @@ fun <T : KoTypeAliasProvider> List<T>.withTypeAliasNamed(
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified type alias(s).
  */
-fun <T : KoTypeAliasProvider> List<T>.withTypeAliasNamed(names: Collection<String>, ignoreCase: Boolean = false,): List<T> =
+fun <T : KoTypeAliasProvider> List<T>.withTypeAliasNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasTypeAliases()
@@ -81,7 +84,10 @@ fun <T : KoTypeAliasProvider> List<T>.withoutTypeAliasNamed(
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified type aliases.
  */
-fun <T : KoTypeAliasProvider> List<T>.withoutTypeAliasNamed(names: Collection<String>, ignoreCase: Boolean = false,): List<T> =
+fun <T : KoTypeAliasProvider> List<T>.withoutTypeAliasNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasTypeAliases()
@@ -114,7 +120,10 @@ fun <T : KoTypeAliasProvider> List<T>.withAllTypeAliasesNamed(
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified type alias(s).
  */
-fun <T : KoTypeAliasProvider> List<T>.withAllTypeAliasesNamed(names: Collection<String>, ignoreCase: Boolean = false,): List<T> =
+fun <T : KoTypeAliasProvider> List<T>.withAllTypeAliasesNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasTypeAliases()
@@ -147,7 +156,10 @@ fun <T : KoTypeAliasProvider> List<T>.withoutAllTypeAliasesNamed(
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified type alias(s).
  */
-fun <T : KoTypeAliasProvider> List<T>.withoutAllTypeAliasesNamed(names: Collection<String>, ignoreCase: Boolean = false,): List<T> =
+fun <T : KoTypeAliasProvider> List<T>.withoutAllTypeAliasesNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasTypeAliases()

@@ -48,7 +48,10 @@ fun <T : KoUpperBoundsProvider> List<T>.withUpperBoundNamed(
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified upper bound(s).
  */
-fun <T : KoUpperBoundsProvider> List<T>.withUpperBoundNamed(names: Collection<String>, ignoreCase: Boolean = false): List<T> =
+fun <T : KoUpperBoundsProvider> List<T>.withUpperBoundNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasUpperBounds()
@@ -81,7 +84,10 @@ fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBoundNamed(
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified upper bounds.
  */
-fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBoundNamed(names: Collection<String>, ignoreCase: Boolean = false): List<T> =
+fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBoundNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasUpperBounds()
@@ -114,7 +120,10 @@ fun <T : KoUpperBoundsProvider> List<T>.withAllUpperBoundsNamed(
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified upper bound(s).
  */
-fun <T : KoUpperBoundsProvider> List<T>.withAllUpperBoundsNamed(names: Collection<String>, ignoreCase: Boolean = false): List<T> =
+fun <T : KoUpperBoundsProvider> List<T>.withAllUpperBoundsNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasUpperBounds()
@@ -147,7 +156,10 @@ fun <T : KoUpperBoundsProvider> List<T>.withoutAllUpperBoundsNamed(
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified upper bound(s).
  */
-fun <T : KoUpperBoundsProvider> List<T>.withoutAllUpperBoundsNamed(names: Collection<String>, ignoreCase: Boolean = false): List<T> =
+fun <T : KoUpperBoundsProvider> List<T>.withoutAllUpperBoundsNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasUpperBounds()

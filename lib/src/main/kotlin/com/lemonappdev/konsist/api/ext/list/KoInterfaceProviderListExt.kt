@@ -36,8 +36,8 @@ fun <T : KoInterfaceProvider> List<T>.withoutInterfaces(includeNested: Boolean =
  * @param names The names of additional interfaces to include.
  * @param includeNested Whether to include nested interfaces.
  * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
-     *        If `false`, the comparison will consider case sensitivity.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified interface(s).
  */
 fun <T : KoInterfaceProvider> List<T>.withInterfaceNamed(
@@ -53,8 +53,8 @@ fun <T : KoInterfaceProvider> List<T>.withInterfaceNamed(
  * @param names The names of additional interfaces to include.
  * @param includeNested Whether to include nested interfaces.
  * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
-     *        If `false`, the comparison will consider case sensitivity.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified interface(s).
  */
 fun <T : KoInterfaceProvider> List<T>.withInterfaceNamed(
@@ -76,8 +76,8 @@ fun <T : KoInterfaceProvider> List<T>.withInterfaceNamed(
  * @param names The names of additional interfaces to exclude.
  * @param includeNested Whether to include nested interfaces.
  * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
-     *        If `false`, the comparison will consider case sensitivity.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified interfaces.
  */
 fun <T : KoInterfaceProvider> List<T>.withoutInterfaceNamed(
@@ -93,8 +93,8 @@ fun <T : KoInterfaceProvider> List<T>.withoutInterfaceNamed(
  * @param names The names of additional interfaces to exclude.
  * @param includeNested Whether to include nested interfaces.
  * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
-     *        If `false`, the comparison will consider case sensitivity.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified interfaces.
  */
 fun <T : KoInterfaceProvider> List<T>.withoutInterfaceNamed(
@@ -116,8 +116,8 @@ fun <T : KoInterfaceProvider> List<T>.withoutInterfaceNamed(
  * @param names The name(s) of the interface(s) to include.
  * @param includeNested Whether to include nested interfaces.
  * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
-     *        If `false`, the comparison will consider case sensitivity.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified interface(s).
  */
 fun <T : KoInterfaceProvider> List<T>.withAllInterfacesNamed(
@@ -133,8 +133,8 @@ fun <T : KoInterfaceProvider> List<T>.withAllInterfacesNamed(
  * @param names The name(s) of the interface(s) to include.
  * @param includeNested Whether to include nested interfaces.
  * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
-     *        If `false`, the comparison will consider case sensitivity.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified interface(s).
  */
 fun <T : KoInterfaceProvider> List<T>.withAllInterfacesNamed(
@@ -156,8 +156,8 @@ fun <T : KoInterfaceProvider> List<T>.withAllInterfacesNamed(
  * @param names The name(s) of the interface(s) to exclude.
  * @param includeNested Whether to include nested interfaces.
  * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
-     *        If `false`, the comparison will consider case sensitivity.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified interface(s).
  */
 fun <T : KoInterfaceProvider> List<T>.withoutAllInterfacesNamed(
@@ -173,8 +173,8 @@ fun <T : KoInterfaceProvider> List<T>.withoutAllInterfacesNamed(
  * @param names The name(s) of the interface(s) to exclude.
  * @param includeNested Whether to include nested interfaces.
  * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
-     *        If `false`, the comparison will consider case sensitivity.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified interface(s).
  */
 fun <T : KoInterfaceProvider> List<T>.withoutAllInterfacesNamed(
