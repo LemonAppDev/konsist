@@ -35,29 +35,37 @@ fun <T : KoInterfaceProvider> List<T>.withoutInterfaces(includeNested: Boolean =
  * @param name The name of the interface to include.
  * @param names The names of additional interfaces to include.
  * @param includeNested Whether to include nested interfaces.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified interface(s).
  */
 fun <T : KoInterfaceProvider> List<T>.withInterfaceNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = withInterfaceNamed(listOf(name, *names), includeNested)
+    ignoreCase: Boolean = false,
+): List<T> = withInterfaceNamed(listOf(name, *names), includeNested, ignoreCase)
 
 /**
  * List containing declarations that have at least one interface with the specified name(s).
  *
  * @param names The names of additional interfaces to include.
  * @param includeNested Whether to include nested interfaces.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified interface(s).
  */
 fun <T : KoInterfaceProvider> List<T>.withInterfaceNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasInterfaces(includeNested)
-            else -> it.hasInterfaceWithName(names, includeNested = includeNested)
+            else -> it.hasInterfaceWithName(names, includeNested = includeNested, ignoreCase = ignoreCase)
         }
     }
 
@@ -67,29 +75,37 @@ fun <T : KoInterfaceProvider> List<T>.withInterfaceNamed(
  * @param name The name of the interface to exclude.
  * @param names The names of additional interfaces to exclude.
  * @param includeNested Whether to include nested interfaces.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified interfaces.
  */
 fun <T : KoInterfaceProvider> List<T>.withoutInterfaceNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = withoutInterfaceNamed(listOf(name, *names), includeNested)
+    ignoreCase: Boolean = false,
+): List<T> = withoutInterfaceNamed(listOf(name, *names), includeNested, ignoreCase)
 
 /**
  * List containing declarations without any of specified interfaces.
  *
  * @param names The names of additional interfaces to exclude.
  * @param includeNested Whether to include nested interfaces.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified interfaces.
  */
 fun <T : KoInterfaceProvider> List<T>.withoutInterfaceNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasInterfaces(includeNested)
-            else -> it.hasInterfaceWithName(names, includeNested = includeNested)
+            else -> it.hasInterfaceWithName(names, includeNested = includeNested, ignoreCase = ignoreCase)
         }
     }
 
@@ -99,29 +115,37 @@ fun <T : KoInterfaceProvider> List<T>.withoutInterfaceNamed(
  * @param name The name of the interface to include.
  * @param names The name(s) of the interface(s) to include.
  * @param includeNested Whether to include nested interfaces.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified interface(s).
  */
 fun <T : KoInterfaceProvider> List<T>.withAllInterfacesNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = withAllInterfacesNamed(listOf(name, *names), includeNested)
+    ignoreCase: Boolean = false,
+): List<T> = withAllInterfacesNamed(listOf(name, *names), includeNested, ignoreCase)
 
 /**
  * List containing declarations that have all specified interfaces.
  *
  * @param names The name(s) of the interface(s) to include.
  * @param includeNested Whether to include nested interfaces.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified interface(s).
  */
 fun <T : KoInterfaceProvider> List<T>.withAllInterfacesNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasInterfaces(includeNested)
-            else -> it.hasInterfacesWithAllNames(names, includeNested = includeNested)
+            else -> it.hasInterfacesWithAllNames(names, includeNested = includeNested, ignoreCase = ignoreCase)
         }
     }
 
@@ -131,30 +155,38 @@ fun <T : KoInterfaceProvider> List<T>.withAllInterfacesNamed(
  * @param name The name of the interface to exclude.
  * @param names The name(s) of the interface(s) to exclude.
  * @param includeNested Whether to include nested interfaces.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified interface(s).
  */
 fun <T : KoInterfaceProvider> List<T>.withoutAllInterfacesNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = withoutAllInterfacesNamed(listOf(name, *names), includeNested)
+    ignoreCase: Boolean = false,
+): List<T> = withoutAllInterfacesNamed(listOf(name, *names), includeNested, ignoreCase)
 
 /**
  * List containing declarations without all specified interfaces.
  *
  * @param names The name(s) of the interface(s) to exclude.
  * @param includeNested Whether to include nested interfaces.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified interface(s).
  */
 fun <T : KoInterfaceProvider> List<T>.withoutAllInterfacesNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasInterfaces(includeNested)
             else ->
-                it.hasInterfacesWithAllNames(names, includeNested = includeNested)
+                it.hasInterfacesWithAllNames(names, includeNested = includeNested, ignoreCase = ignoreCase)
         }
     }
 
