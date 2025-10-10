@@ -90,40 +90,60 @@ interface KoTypeArgumentProvider : KoBaseProvider {
      *
      * @param name The first name to check.
      * @param names Additional names to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if any type argument matches one of the names, otherwise `false`.
      */
     fun hasTypeArgumentWithName(
         name: String,
         vararg names: String,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
      * Checks if any type argument has one of the specified names.
      *
      * @param names A collection of names to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if any type argument matches one of the names, otherwise `false`.
      */
-    fun hasTypeArgumentWithName(names: Collection<String>): Boolean
+    fun hasTypeArgumentWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Checks if all type arguments have one of the specified names.
      *
      * @param name The first name to check.
      * @param names Additional names to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if all type arguments match one of the names, otherwise `false`.
      */
     fun hasTypeArgumentsWithAllNames(
         name: String,
         vararg names: String,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
      * Checks if all type arguments have one of the specified names.
      *
      * @param names A collection of names to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if all type arguments match one of the names, otherwise `false`.
      */
-    fun hasTypeArgumentsWithAllNames(names: Collection<String>): Boolean
+    fun hasTypeArgumentsWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Checks if any type argument is of the specified class.

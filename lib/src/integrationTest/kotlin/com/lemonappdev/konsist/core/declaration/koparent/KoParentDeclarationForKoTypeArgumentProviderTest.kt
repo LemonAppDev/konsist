@@ -43,6 +43,33 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
     }
 
     @ParameterizedTest
+    @MethodSource("provideClassesForNoTypeArgument")
+    fun `class-parent-has-no-type-argument-ignore-case`(fileName: String) {
+        // given
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .parents()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasTypeArgumentWithName("string") shouldBeEqualTo false
+            hasTypeArgumentWithName("string", ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentWithName(listOf("string")) shouldBeEqualTo false
+            hasTypeArgumentWithName(listOf("string"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentWithName(setOf("string")) shouldBeEqualTo false
+            hasTypeArgumentWithName(setOf("string"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames("string", "int") shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames("string", "int", ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(listOf("string", "int")) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(listOf("string", "int"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(setOf("string", "int")) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(setOf("string", "int"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @ParameterizedTest
     @MethodSource("provideClassesForTypeArgument")
     fun `class-parent-has-type-argument`(fileName: String) {
         // given
@@ -89,6 +116,41 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
     }
 
     @ParameterizedTest
+    @MethodSource("provideClassesForTypeArgument")
+    fun `class-parent-has-type-argument-ignore-case`(fileName: String) {
+        // given
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .parents()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasTypeArgumentWithName("int") shouldBeEqualTo false
+            hasTypeArgumentWithName("int", ignoreCase = true) shouldBeEqualTo true
+            hasTypeArgumentWithName("string") shouldBeEqualTo false
+            hasTypeArgumentWithName("string", ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentWithName("int", "string") shouldBeEqualTo false
+            hasTypeArgumentWithName("int", "string", ignoreCase = true) shouldBeEqualTo true
+            hasTypeArgumentWithName(listOf("int")) shouldBeEqualTo false
+            hasTypeArgumentWithName(listOf("int"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeArgumentWithName(listOf("string")) shouldBeEqualTo false
+            hasTypeArgumentWithName(listOf("string"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentWithName(listOf("int", "string")) shouldBeEqualTo false
+            hasTypeArgumentWithName(listOf("int", "string"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeArgumentsWithAllNames("int") shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames("int", ignoreCase = true) shouldBeEqualTo true
+            hasTypeArgumentsWithAllNames("int", "string") shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames("int", "string", ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(listOf("int")) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(listOf("int"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeArgumentsWithAllNames(listOf("int", "string")) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(listOf("int", "string"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @ParameterizedTest
     @MethodSource("provideInterfacesForNoTypeArgument")
     fun `interface-parent-has-no-type-argument`(fileName: String) {
         // given
@@ -114,6 +176,33 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
             hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideInterfacesForNoTypeArgument")
+    fun `interface-parent-has-no-type-argument-ignore-case`(fileName: String) {
+        // given
+        val sut =
+            getSnippetFile(fileName)
+                .interfaces()
+                .parents()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasTypeArgumentWithName("string") shouldBeEqualTo false
+            hasTypeArgumentWithName("string", ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentWithName(listOf("string")) shouldBeEqualTo false
+            hasTypeArgumentWithName(listOf("string"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentWithName(setOf("string")) shouldBeEqualTo false
+            hasTypeArgumentWithName(setOf("string"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames("string", "int") shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames("string", "int", ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(listOf("string", "int")) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(listOf("string", "int"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(setOf("string", "int")) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(setOf("string", "int"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 
@@ -165,6 +254,41 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
     }
 
     @ParameterizedTest
+    @MethodSource("provideInterfacesForTypeArgument")
+    fun `interface-parent-has-type-argument-ignore-case`(fileName: String) {
+        // given
+        val sut =
+            getSnippetFile(fileName)
+                .interfaces()
+                .parents()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasTypeArgumentWithName("int") shouldBeEqualTo false
+            hasTypeArgumentWithName("int", ignoreCase = true) shouldBeEqualTo true
+            hasTypeArgumentWithName("string") shouldBeEqualTo false
+            hasTypeArgumentWithName("string", ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentWithName("int", "string") shouldBeEqualTo false
+            hasTypeArgumentWithName("int", "string", ignoreCase = true) shouldBeEqualTo true
+            hasTypeArgumentWithName(listOf("int")) shouldBeEqualTo false
+            hasTypeArgumentWithName(listOf("int"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeArgumentWithName(listOf("string")) shouldBeEqualTo false
+            hasTypeArgumentWithName(listOf("string"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentWithName(listOf("int", "string")) shouldBeEqualTo false
+            hasTypeArgumentWithName(listOf("int", "string"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeArgumentsWithAllNames("int") shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames("int", ignoreCase = true) shouldBeEqualTo true
+            hasTypeArgumentsWithAllNames("int", "string") shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames("int", "string", ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(listOf("int")) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(listOf("int"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeArgumentsWithAllNames(listOf("int", "string")) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(listOf("int", "string"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @ParameterizedTest
     @MethodSource("provideObjectsForNoTypeArgument")
     fun `object-parent-has-no-type-argument`(fileName: String) {
         // given
@@ -190,6 +314,33 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
             hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideObjectsForNoTypeArgument")
+    fun `object-parent-has-no-type-argument-ignore-case`(fileName: String) {
+        // given
+        val sut =
+            getSnippetFile(fileName)
+                .objects()
+                .parents()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasTypeArgumentWithName("string") shouldBeEqualTo false
+            hasTypeArgumentWithName("string", ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentWithName(listOf("string")) shouldBeEqualTo false
+            hasTypeArgumentWithName(listOf("string"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentWithName(setOf("string")) shouldBeEqualTo false
+            hasTypeArgumentWithName(setOf("string"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames("string", "int") shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames("string", "int", ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(listOf("string", "int")) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(listOf("string", "int"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(setOf("string", "int")) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(setOf("string", "int"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 
@@ -237,6 +388,41 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
             hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideObjectsForTypeArgument")
+    fun `object-parent-has-type-argument-ignore-case`(fileName: String) {
+        // given
+        val sut =
+            getSnippetFile(fileName)
+                .objects()
+                .parents()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasTypeArgumentWithName("int") shouldBeEqualTo false
+            hasTypeArgumentWithName("int", ignoreCase = true) shouldBeEqualTo true
+            hasTypeArgumentWithName("string") shouldBeEqualTo false
+            hasTypeArgumentWithName("string", ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentWithName("int", "string") shouldBeEqualTo false
+            hasTypeArgumentWithName("int", "string", ignoreCase = true) shouldBeEqualTo true
+            hasTypeArgumentWithName(listOf("int")) shouldBeEqualTo false
+            hasTypeArgumentWithName(listOf("int"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeArgumentWithName(listOf("string")) shouldBeEqualTo false
+            hasTypeArgumentWithName(listOf("string"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentWithName(listOf("int", "string")) shouldBeEqualTo false
+            hasTypeArgumentWithName(listOf("int", "string"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeArgumentsWithAllNames("int") shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames("int", ignoreCase = true) shouldBeEqualTo true
+            hasTypeArgumentsWithAllNames("int", "string") shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames("int", "string", ignoreCase = true) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(listOf("int")) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(listOf("int"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeArgumentsWithAllNames(listOf("int", "string")) shouldBeEqualTo false
+            hasTypeArgumentsWithAllNames(listOf("int", "string"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 

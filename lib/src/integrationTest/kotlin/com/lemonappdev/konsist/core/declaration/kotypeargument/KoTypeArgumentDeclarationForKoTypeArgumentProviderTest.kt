@@ -350,6 +350,74 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
         }
     }
 
+    @Test
+    fun `not-generic-type-argument-type-arguments-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("not-generic-type-argument-type-arguments-ignore-case")
+                .properties()
+                .first()
+                .type
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        assertSoftly(sut) {
+            it?.hasTypeArgumentWithName("string") shouldBeEqualTo false
+            it?.hasTypeArgumentWithName("string", ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("string")) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("string"), ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(setOf("string")) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(setOf("string"), ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("string", "int") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("string", "int", ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("string", "int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("string", "int"), ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(setOf("string", "int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(setOf("string", "int"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `generic-complex-type-argument-type-arguments-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("generic-complex-type-argument-type-arguments-ignore-case")
+                .properties()
+                .first()
+                .type
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        assertSoftly(sut) {
+            it?.hasTypeArgumentWithName("int") shouldBeEqualTo false
+            it?.hasTypeArgumentWithName("int", ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName("int") shouldBeEqualTo false
+            it?.hasTypeArgumentWithName("int", ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName("int", "char") shouldBeEqualTo false
+            it?.hasTypeArgumentWithName("int", "char", ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName(listOf("int")) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("int"), ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName(listOf("char")) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("char"), ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("int", "char")) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("int", "char"), ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("int") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("int", ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("int", "list<string>") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("int", "list<string>", ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("int", "char") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("int", "char", ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("int"), ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames(listOf("int", "list<string>")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("int", "list<string>"), ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames(listOf("int", "char")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("int", "char"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kotypeargument/snippet/forkotypeargumentprovider/", fileName)
 }

@@ -70,7 +70,6 @@ class ApiKonsistTest {
     fun `every api function with name containing name has ignoreCase parameter`() {
         apiPackageScope
             .functions()
-            .withoutExtension() // Todo: remove line
             .withNameContaining("name", ignoreCase = true)
             .withoutParameterNamed("regex")
             .withoutAnnotationOf(Deprecated::class)
