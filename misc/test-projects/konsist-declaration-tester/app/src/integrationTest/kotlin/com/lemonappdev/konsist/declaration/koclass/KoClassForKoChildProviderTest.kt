@@ -121,4 +121,64 @@ class KoClassForKoChildProviderTest {
             hasAllChildren(indirectChildren = true) { it.hasNameStartingWith("Other") } shouldBeEqualTo false
         }
     }
+
+    @Test
+    fun `class without children ignore case`() {
+        // given
+        val sut = Konsist
+            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .classes()
+            .withName("AppClass")
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasChildWithName("parentclass") shouldBeEqualTo false
+            hasChildWithName("parentclass", ignoreCase = true) shouldBeEqualTo false
+            hasChildWithName(listOf("parentclass")) shouldBeEqualTo false
+            hasChildWithName(listOf("parentclass"), ignoreCase = true) shouldBeEqualTo false
+            hasChildWithName(setOf("parentclass")) shouldBeEqualTo false
+            hasChildWithName(setOf("parentclass"), ignoreCase = true) shouldBeEqualTo false
+            hasChildrenWithAllNames("parentclass", "parentinterface") shouldBeEqualTo false
+            hasChildrenWithAllNames("parentclass", "parentinterface", ignoreCase = true) shouldBeEqualTo false
+            hasChildrenWithAllNames(listOf("parentclass", "parentinterface")) shouldBeEqualTo false
+            hasChildrenWithAllNames(listOf("parentclass", "parentinterface"), ignoreCase = true) shouldBeEqualTo false
+            hasChildrenWithAllNames(setOf("parentclass", "parentinterface")) shouldBeEqualTo false
+            hasChildrenWithAllNames(setOf("parentclass", "parentinterface"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `class with child ignore case`() {
+        // given
+        val sut = Konsist
+            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .classes()
+            .withName("ParentSuperClass")
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasChildWithName("parentclass") shouldBeEqualTo false
+            hasChildWithName("parentclass", ignoreCase = true) shouldBeEqualTo true
+            hasChildWithName("otherclass") shouldBeEqualTo false
+            hasChildWithName("otherclass", ignoreCase = true) shouldBeEqualTo false
+            hasChildWithName("parentclass", "otherName") shouldBeEqualTo false
+            hasChildWithName("parentclass", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasChildWithName(listOf("parentclass")) shouldBeEqualTo false
+            hasChildWithName(listOf("parentclass"), ignoreCase = true) shouldBeEqualTo true
+            hasChildWithName(listOf("otherclass")) shouldBeEqualTo false
+            hasChildWithName(listOf("otherclass"), ignoreCase = true) shouldBeEqualTo false
+            hasChildWithName(listOf("parentclass", "otherName")) shouldBeEqualTo false
+            hasChildWithName(listOf("parentclass", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasChildrenWithAllNames("parentclass") shouldBeEqualTo false
+            hasChildrenWithAllNames("parentclass", ignoreCase = true) shouldBeEqualTo true
+            hasChildrenWithAllNames("parentclass", "parentinterface") shouldBeEqualTo false
+            hasChildrenWithAllNames("parentclass", "parentinterface", ignoreCase = true) shouldBeEqualTo false
+            hasChildrenWithAllNames(listOf("parentclass")) shouldBeEqualTo false
+            hasChildrenWithAllNames(listOf("parentclass"), ignoreCase = true) shouldBeEqualTo true
+            hasChildrenWithAllNames(listOf("parentclass", "parentinterface")) shouldBeEqualTo false
+            hasChildrenWithAllNames(listOf("parentclass", "parentinterface"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
 }

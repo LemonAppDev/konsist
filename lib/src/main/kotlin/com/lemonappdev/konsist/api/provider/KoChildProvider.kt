@@ -50,12 +50,16 @@ interface KoChildProvider : KoBaseProvider {
      * @param name the name of the child to check.
      * @param names the names of the children to check.
      * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasChildWithName(
         name: String,
         vararg names: String,
         indirectChildren: Boolean = false,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -64,11 +68,15 @@ interface KoChildProvider : KoBaseProvider {
      *
      * @param names the names of the children to check.
      * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasChildWithName(
         names: Collection<String>,
         indirectChildren: Boolean = false,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -78,12 +86,16 @@ interface KoChildProvider : KoBaseProvider {
      * @param name The name of the child to check.
      * @param names The names of the children to check.
      * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasChildrenWithAllNames(
         name: String,
         vararg names: String,
         indirectChildren: Boolean = false,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -92,11 +104,15 @@ interface KoChildProvider : KoBaseProvider {
      *
      * @param names The names of the children to check.
      * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasChildrenWithAllNames(
         names: Collection<String>,
         indirectChildren: Boolean = false,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
