@@ -339,6 +339,68 @@ class KoInterfaceDeclarationForKoExternalParentProviderTest {
         }
     }
 
+    @Test
+    fun `interface-has-no-external-parent-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("interface-has-no-external-parent-ignore-case")
+                .interfaces()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasExternalParentWithName("sampleexternalinterface") shouldBeEqualTo false
+            hasExternalParentWithName("sampleexternalinterface", ignoreCase = true) shouldBeEqualTo false
+            hasExternalParentWithName(listOf("sampleexternalinterface")) shouldBeEqualTo false
+            hasExternalParentWithName(listOf("sampleexternalinterface"), ignoreCase = true) shouldBeEqualTo false
+            hasExternalParentWithName(setOf("sampleexternalinterface")) shouldBeEqualTo false
+            hasExternalParentWithName(setOf("sampleexternalinterface"), ignoreCase = true) shouldBeEqualTo false
+            hasExternalParentsWithAllNames("sampleexternalinterface", "sampleexternalinterface2") shouldBeEqualTo false
+            hasExternalParentsWithAllNames("sampleexternalinterface", "sampleexternalinterface2", ignoreCase = true) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(listOf("sampleexternalinterface", "sampleexternalinterface2")) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(listOf("sampleexternalinterface", "sampleexternalinterface2"), ignoreCase = true) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(setOf("sampleexternalinterface", "sampleexternalinterface2")) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(setOf("sampleexternalinterface", "sampleexternalinterface2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `interface-has-external-parents-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("interface-has-external-parents-ignore-case")
+                .interfaces()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasExternalParentWithName("sampleexternalinterface") shouldBeEqualTo false
+            hasExternalParentWithName("sampleexternalinterface", ignoreCase = true) shouldBeEqualTo true
+            hasExternalParentWithName("otherexternalinterface") shouldBeEqualTo false
+            hasExternalParentWithName("otherexternalinterface", ignoreCase = true) shouldBeEqualTo false
+            hasExternalParentWithName("sampleexternalinterface", "otherName") shouldBeEqualTo false
+            hasExternalParentWithName("sampleexternalinterface", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasExternalParentWithName(listOf("sampleexternalinterface")) shouldBeEqualTo false
+            hasExternalParentWithName(listOf("sampleexternalinterface"), ignoreCase = true) shouldBeEqualTo true
+            hasExternalParentWithName(listOf("otherexternalinterface")) shouldBeEqualTo false
+            hasExternalParentWithName(listOf("otherexternalinterface"), ignoreCase = true) shouldBeEqualTo false
+            hasExternalParentWithName(listOf("sampleexternalinterface", "otherName")) shouldBeEqualTo false
+            hasExternalParentWithName(listOf("sampleexternalinterface", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasExternalParentsWithAllNames("sampleexternalinterface") shouldBeEqualTo false
+            hasExternalParentsWithAllNames("sampleexternalinterface", ignoreCase = true) shouldBeEqualTo true
+            hasExternalParentsWithAllNames("sampleexternalinterface", "sampleexternalgenericinterface<int>") shouldBeEqualTo false
+            hasExternalParentsWithAllNames("sampleexternalinterface", "sampleexternalgenericinterface<int>", ignoreCase = true) shouldBeEqualTo true
+            hasExternalParentsWithAllNames("sampleexternalinterface", "otherexternalinterface") shouldBeEqualTo false
+            hasExternalParentsWithAllNames("sampleexternalinterface", "otherexternalinterface", ignoreCase = true) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(listOf("sampleexternalinterface")) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(listOf("sampleexternalinterface"), ignoreCase = true) shouldBeEqualTo true
+            hasExternalParentsWithAllNames(listOf("sampleexternalinterface", "sampleexternalgenericinterface<int>")) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(listOf("sampleexternalinterface", "sampleexternalgenericinterface<int>"), ignoreCase = true) shouldBeEqualTo true
+            hasExternalParentsWithAllNames(listOf("sampleexternalinterface", "otherexternalinterface")) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(listOf("sampleexternalinterface", "otherexternalinterface"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/kointerface/snippet/forkoexternalparentprovider/", fileName)
 }
