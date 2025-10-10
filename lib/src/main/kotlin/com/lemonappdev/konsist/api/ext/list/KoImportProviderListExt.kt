@@ -29,24 +29,31 @@ fun <T : KoImportProvider> List<T>.withoutImports(): List<T> = filterNot { it.ha
  *
  * @param name The name of the import to include.
  * @param names The names of additional imports to include.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified import(s).
  */
 fun <T : KoImportProvider> List<T>.withImportNamed(
     name: String,
     vararg names: String,
-): List<T> = withImportNamed(listOf(name, *names))
+    ignoreCase: Boolean = false,
+): List<T> = withImportNamed(listOf(name, *names), ignoreCase)
 
 /**
  * List containing declarations that have at least one import with the specified name(s).
  *
  * @param names The names of additional imports to include.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified import(s).
  */
-fun <T : KoImportProvider> List<T>.withImportNamed(names: Collection<String>): List<T> =
+fun <T : KoImportProvider> List<T>.withImportNamed(names: Collection<String>, ignoreCase: Boolean = false): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasImports()
-            else -> it.hasImportWithName(names)
+            else -> it.hasImportWithName(names, ignoreCase = ignoreCase)
         }
     }
 
@@ -55,24 +62,34 @@ fun <T : KoImportProvider> List<T>.withImportNamed(names: Collection<String>): L
  *
  * @param name The name of the import to exclude.
  * @param names The names of additional imports to exclude.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified imports.
  */
 fun <T : KoImportProvider> List<T>.withoutImportNamed(
     name: String,
     vararg names: String,
-): List<T> = withoutImportNamed(listOf(name, *names))
+    ignoreCase: Boolean = false,
+): List<T> = withoutImportNamed(listOf(name, *names), ignoreCase)
 
 /**
  * List containing declarations without any of specified imports.
  *
  * @param names The names of additional imports to exclude.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified imports.
  */
-fun <T : KoImportProvider> List<T>.withoutImportNamed(names: Collection<String>): List<T> =
+fun <T : KoImportProvider> List<T>.withoutImportNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasImports()
-            else -> it.hasImportWithName(names)
+            else -> it.hasImportWithName(names, ignoreCase = ignoreCase)
         }
     }
 
@@ -81,24 +98,34 @@ fun <T : KoImportProvider> List<T>.withoutImportNamed(names: Collection<String>)
  *
  * @param name The name of the import to include.
  * @param names The name(s) of the import(s) to include.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified import(s).
  */
 fun <T : KoImportProvider> List<T>.withAllImportsNamed(
     name: String,
     vararg names: String,
-): List<T> = withAllImportsNamed(listOf(name, *names))
+    ignoreCase: Boolean = false,
+): List<T> = withAllImportsNamed(listOf(name, *names), ignoreCase)
 
 /**
  * List containing declarations that have all specified imports.
  *
  * @param names The name(s) of the import(s) to include.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified import(s).
  */
-fun <T : KoImportProvider> List<T>.withAllImportsNamed(names: Collection<String>): List<T> =
+fun <T : KoImportProvider> List<T>.withAllImportsNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasImports()
-            else -> it.hasImportsWithAllNames(names)
+            else -> it.hasImportsWithAllNames(names, ignoreCase = ignoreCase)
         }
     }
 
@@ -107,24 +134,34 @@ fun <T : KoImportProvider> List<T>.withAllImportsNamed(names: Collection<String>
  *
  * @param name The name of the import to exclude.
  * @param names The name(s) of the import(s) to exclude.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified import(s).
  */
 fun <T : KoImportProvider> List<T>.withoutAllImportsNamed(
     name: String,
     vararg names: String,
-): List<T> = withoutAllImportsNamed(listOf(name, *names))
+    ignoreCase: Boolean = false,
+): List<T> = withoutAllImportsNamed(listOf(name, *names), ignoreCase)
 
 /**
  * List containing declarations without all specified imports.
  *
  * @param names The name(s) of the import(s) to exclude.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified import(s).
  */
-fun <T : KoImportProvider> List<T>.withoutAllImportsNamed(names: Collection<String>): List<T> =
+fun <T : KoImportProvider> List<T>.withoutAllImportsNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasImports()
-            else -> it.hasImportsWithAllNames(names)
+            else -> it.hasImportsWithAllNames(names, ignoreCase = ignoreCase)
         }
     }
 
@@ -134,7 +171,8 @@ fun <T : KoImportProvider> List<T>.withoutAllImportsNamed(names: Collection<Stri
  * @param predicate A function that defines the condition to be met by an import declaration.
  * @return A list containing declarations with at least one import satisfying the predicate.
  */
-fun <T : KoImportProvider> List<T>.withImport(predicate: (KoImportDeclaration) -> Boolean): List<T> = filter { it.hasImport(predicate) }
+fun <T : KoImportProvider> List<T>.withImport(predicate: (KoImportDeclaration) -> Boolean): List<T> =
+    filter { it.hasImport(predicate) }
 
 /**
  * List containing declarations that not have import satisfying the provided predicate.
