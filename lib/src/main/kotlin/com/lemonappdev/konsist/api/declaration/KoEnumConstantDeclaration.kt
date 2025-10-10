@@ -136,7 +136,10 @@ interface KoEnumConstantDeclaration :
     ): Boolean
 
     @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasClassWithName()"))
-    override fun hasLocalClassWithName(names: Collection<String>, ignoreCase: Boolean): Boolean
+    override fun hasLocalClassWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean
 
     @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasClassesWithAllNames()"))
     override fun hasLocalClassesWithAllNames(
@@ -146,7 +149,10 @@ interface KoEnumConstantDeclaration :
     ): Boolean
 
     @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasClassesWithAllNames()"))
-    override fun hasLocalClassesWithAllNames(names: Collection<String>, ignoreCase: Boolean): Boolean
+    override fun hasLocalClassesWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean
 
     @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasClass()"))
     override fun hasLocalClass(predicate: (KoClassDeclaration) -> Boolean): Boolean
@@ -180,7 +186,10 @@ interface KoEnumConstantDeclaration :
     ): Boolean
 
     @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasFunctionWithName()"))
-    override fun hasLocalFunctionWithName(names: Collection<String>, ignoreCase: Boolean,): Boolean
+    override fun hasLocalFunctionWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean
 
     @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasFunctionsWithAllNames()"))
     override fun hasLocalFunctionsWithAllNames(
@@ -190,7 +199,10 @@ interface KoEnumConstantDeclaration :
     ): Boolean
 
     @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasFunctionsWithAllNames()"))
-    override fun hasLocalFunctionsWithAllNames(names: Collection<String>, ignoreCase: Boolean,): Boolean
+    override fun hasLocalFunctionsWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean
 
     @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasFunction()"))
     override fun hasLocalFunction(predicate: (KoFunctionDeclaration) -> Boolean): Boolean

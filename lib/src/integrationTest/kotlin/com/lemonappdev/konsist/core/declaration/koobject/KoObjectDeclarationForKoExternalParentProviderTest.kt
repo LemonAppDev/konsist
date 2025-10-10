@@ -359,7 +359,8 @@ class KoObjectDeclarationForKoExternalParentProviderTest {
             hasExternalParentsWithAllNames("sampleexternalclass", "sampleexternalinterface") shouldBeEqualTo false
             hasExternalParentsWithAllNames("sampleexternalclass", "sampleexternalinterface", ignoreCase = true) shouldBeEqualTo false
             hasExternalParentsWithAllNames(listOf("sampleexternalclass", "sampleexternalinterface")) shouldBeEqualTo false
-            hasExternalParentsWithAllNames(listOf("sampleexternalclass", "sampleexternalinterface"), ignoreCase = true) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(listOf("sampleexternalclass", "sampleexternalinterface"), ignoreCase = true) shouldBeEqualTo
+                false
             hasExternalParentsWithAllNames(setOf("sampleexternalclass", "sampleexternalinterface")) shouldBeEqualTo false
             hasExternalParentsWithAllNames(setOf("sampleexternalclass", "sampleexternalinterface"), ignoreCase = true) shouldBeEqualTo false
         }

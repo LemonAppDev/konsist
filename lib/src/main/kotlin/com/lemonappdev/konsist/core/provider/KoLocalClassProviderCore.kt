@@ -23,7 +23,10 @@ internal interface KoLocalClassProviderCore :
         ignoreCase: Boolean,
     ): Boolean = hasLocalClassWithName(listOf(name, *names), ignoreCase)
 
-    override fun hasLocalClassWithName(names: Collection<String>, ignoreCase: Boolean): Boolean =
+    override fun hasLocalClassWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasLocalClasses()
             else ->
@@ -38,7 +41,10 @@ internal interface KoLocalClassProviderCore :
         ignoreCase: Boolean,
     ): Boolean = hasLocalClassesWithAllNames(listOf(name, *names), ignoreCase)
 
-    override fun hasLocalClassesWithAllNames(names: Collection<String>, ignoreCase: Boolean): Boolean =
+    override fun hasLocalClassesWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasLocalClasses()
             else ->

@@ -56,7 +56,10 @@ interface KoLocalClassProvider : KoBaseProvider {
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasLocalClassWithName(names: Collection<String>, ignoreCase: Boolean = false,): Boolean
+    fun hasLocalClassWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has local classes with all the specified names.
@@ -83,7 +86,10 @@ interface KoLocalClassProvider : KoBaseProvider {
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasLocalClassesWithAllNames(names: Collection<String>, ignoreCase: Boolean = false,): Boolean
+    fun hasLocalClassesWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one local class that satisfies the provided predicate.

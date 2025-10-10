@@ -345,9 +345,11 @@ class KoInterfaceDeclarationForKoParentInterfaceProviderTest {
             hasParentInterfacesWithAllNames("sampleparentinterface1", "sampleparentinterface2") shouldBeEqualTo false
             hasParentInterfacesWithAllNames("sampleparentinterface1", "sampleparentinterface2", ignoreCase = true) shouldBeEqualTo false
             hasParentInterfacesWithAllNames(listOf("sampleparentinterface1", "sampleparentinterface2")) shouldBeEqualTo false
-            hasParentInterfacesWithAllNames(listOf("sampleparentinterface1", "sampleparentinterface2"), ignoreCase = true) shouldBeEqualTo false
+            hasParentInterfacesWithAllNames(listOf("sampleparentinterface1", "sampleparentinterface2"), ignoreCase = true) shouldBeEqualTo
+                false
             hasParentInterfacesWithAllNames(setOf("sampleparentinterface1", "sampleparentinterface2")) shouldBeEqualTo false
-            hasParentInterfacesWithAllNames(setOf("sampleparentinterface1", "sampleparentinterface2"), ignoreCase = true) shouldBeEqualTo false
+            hasParentInterfacesWithAllNames(setOf("sampleparentinterface1", "sampleparentinterface2"), ignoreCase = true) shouldBeEqualTo
+                false
         }
     }
 
@@ -382,9 +384,11 @@ class KoInterfaceDeclarationForKoParentInterfaceProviderTest {
             hasParentInterfacesWithAllNames(listOf("sampleparentinterface1")) shouldBeEqualTo false
             hasParentInterfacesWithAllNames(listOf("sampleparentinterface1"), ignoreCase = true) shouldBeEqualTo true
             hasParentInterfacesWithAllNames(listOf("sampleparentinterface1", "sampleparentinterface2")) shouldBeEqualTo false
-            hasParentInterfacesWithAllNames(listOf("sampleparentinterface1", "sampleparentinterface2"), ignoreCase = true) shouldBeEqualTo true
+            hasParentInterfacesWithAllNames(listOf("sampleparentinterface1", "sampleparentinterface2"), ignoreCase = true) shouldBeEqualTo
+                true
             hasParentInterfacesWithAllNames(listOf("sampleparentinterface1", "otherparentinterface")) shouldBeEqualTo false
-            hasParentInterfacesWithAllNames(listOf("sampleparentinterface1", "otherparentinterface"), ignoreCase = true) shouldBeEqualTo false
+            hasParentInterfacesWithAllNames(listOf("sampleparentinterface1", "otherparentinterface"), ignoreCase = true) shouldBeEqualTo
+                false
         }
     }
 

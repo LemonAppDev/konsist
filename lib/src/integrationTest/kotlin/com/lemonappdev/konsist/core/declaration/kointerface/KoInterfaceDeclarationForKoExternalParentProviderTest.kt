@@ -358,9 +358,11 @@ class KoInterfaceDeclarationForKoExternalParentProviderTest {
             hasExternalParentsWithAllNames("sampleexternalinterface", "sampleexternalinterface2") shouldBeEqualTo false
             hasExternalParentsWithAllNames("sampleexternalinterface", "sampleexternalinterface2", ignoreCase = true) shouldBeEqualTo false
             hasExternalParentsWithAllNames(listOf("sampleexternalinterface", "sampleexternalinterface2")) shouldBeEqualTo false
-            hasExternalParentsWithAllNames(listOf("sampleexternalinterface", "sampleexternalinterface2"), ignoreCase = true) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(listOf("sampleexternalinterface", "sampleexternalinterface2"), ignoreCase = true) shouldBeEqualTo
+                false
             hasExternalParentsWithAllNames(setOf("sampleexternalinterface", "sampleexternalinterface2")) shouldBeEqualTo false
-            hasExternalParentsWithAllNames(setOf("sampleexternalinterface", "sampleexternalinterface2"), ignoreCase = true) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(setOf("sampleexternalinterface", "sampleexternalinterface2"), ignoreCase = true) shouldBeEqualTo
+                false
         }
     }
 
@@ -389,15 +391,25 @@ class KoInterfaceDeclarationForKoExternalParentProviderTest {
             hasExternalParentsWithAllNames("sampleexternalinterface") shouldBeEqualTo false
             hasExternalParentsWithAllNames("sampleexternalinterface", ignoreCase = true) shouldBeEqualTo true
             hasExternalParentsWithAllNames("sampleexternalinterface", "sampleexternalgenericinterface<int>") shouldBeEqualTo false
-            hasExternalParentsWithAllNames("sampleexternalinterface", "sampleexternalgenericinterface<int>", ignoreCase = true) shouldBeEqualTo true
+            hasExternalParentsWithAllNames(
+                "sampleexternalinterface",
+                "sampleexternalgenericinterface<int>",
+                ignoreCase = true,
+            ) shouldBeEqualTo
+                true
             hasExternalParentsWithAllNames("sampleexternalinterface", "otherexternalinterface") shouldBeEqualTo false
             hasExternalParentsWithAllNames("sampleexternalinterface", "otherexternalinterface", ignoreCase = true) shouldBeEqualTo false
             hasExternalParentsWithAllNames(listOf("sampleexternalinterface")) shouldBeEqualTo false
             hasExternalParentsWithAllNames(listOf("sampleexternalinterface"), ignoreCase = true) shouldBeEqualTo true
             hasExternalParentsWithAllNames(listOf("sampleexternalinterface", "sampleexternalgenericinterface<int>")) shouldBeEqualTo false
-            hasExternalParentsWithAllNames(listOf("sampleexternalinterface", "sampleexternalgenericinterface<int>"), ignoreCase = true) shouldBeEqualTo true
+            hasExternalParentsWithAllNames(
+                listOf("sampleexternalinterface", "sampleexternalgenericinterface<int>"),
+                ignoreCase = true,
+            ) shouldBeEqualTo
+                true
             hasExternalParentsWithAllNames(listOf("sampleexternalinterface", "otherexternalinterface")) shouldBeEqualTo false
-            hasExternalParentsWithAllNames(listOf("sampleexternalinterface", "otherexternalinterface"), ignoreCase = true) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(listOf("sampleexternalinterface", "otherexternalinterface"), ignoreCase = true) shouldBeEqualTo
+                false
         }
     }
 

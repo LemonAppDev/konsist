@@ -74,7 +74,10 @@ class KoGetterDeclarationForKoLocalFunctionProviderTest {
             it?.hasLocalFunctionsWithAllNames(setOf("sampleLocalFunction1", "otherLocalFunction")) shouldBeEqualTo false
             it?.hasLocalFunction { localFunction -> localFunction.name == "sampleLocalFunction1" } shouldBeEqualTo true
             it?.hasLocalFunction { localFunction -> localFunction.name == "otherLocalFunction" } shouldBeEqualTo false
-            it?.hasAllLocalFunctions { localFunction -> localFunction.name.endsWith("2") || localFunction.name == "sampleLocalFunction1" } shouldBeEqualTo true
+            it?.hasAllLocalFunctions { localFunction ->
+                localFunction.name.endsWith("2") || localFunction.name == "sampleLocalFunction1"
+            } shouldBeEqualTo
+                true
             it?.hasAllLocalFunctions { localFunction -> localFunction.name.endsWith("2") } shouldBeEqualTo false
             it
                 ?.localFunctions
@@ -103,9 +106,11 @@ class KoGetterDeclarationForKoLocalFunctionProviderTest {
             it?.hasLocalFunctionsWithAllNames("samplelocalfunction1", "samplelocalfunction2") shouldBeEqualTo false
             it?.hasLocalFunctionsWithAllNames("samplelocalfunction1", "samplelocalfunction2", ignoreCase = true) shouldBeEqualTo false
             it?.hasLocalFunctionsWithAllNames(listOf("samplelocalfunction1", "samplelocalfunction2")) shouldBeEqualTo false
-            it?.hasLocalFunctionsWithAllNames(listOf("samplelocalfunction1", "samplelocalfunction2"), ignoreCase = true) shouldBeEqualTo false
+            it?.hasLocalFunctionsWithAllNames(listOf("samplelocalfunction1", "samplelocalfunction2"), ignoreCase = true) shouldBeEqualTo
+                false
             it?.hasLocalFunctionsWithAllNames(setOf("samplelocalfunction1", "samplelocalfunction2")) shouldBeEqualTo false
-            it?.hasLocalFunctionsWithAllNames(setOf("samplelocalfunction1", "samplelocalfunction2"), ignoreCase = true) shouldBeEqualTo false
+            it?.hasLocalFunctionsWithAllNames(setOf("samplelocalfunction1", "samplelocalfunction2"), ignoreCase = true) shouldBeEqualTo
+                false
         }
     }
 
@@ -141,7 +146,8 @@ class KoGetterDeclarationForKoLocalFunctionProviderTest {
             it?.hasLocalFunctionsWithAllNames(listOf("samplelocalfunction1")) shouldBeEqualTo false
             it?.hasLocalFunctionsWithAllNames(listOf("samplelocalfunction1"), ignoreCase = true) shouldBeEqualTo true
             it?.hasLocalFunctionsWithAllNames(listOf("samplelocalfunction1", "samplelocalfunction2")) shouldBeEqualTo false
-            it?.hasLocalFunctionsWithAllNames(listOf("samplelocalfunction1", "samplelocalfunction2"), ignoreCase = true) shouldBeEqualTo true
+            it?.hasLocalFunctionsWithAllNames(listOf("samplelocalfunction1", "samplelocalfunction2"), ignoreCase = true) shouldBeEqualTo
+                true
             it?.hasLocalFunctionsWithAllNames(listOf("samplelocalfunction1", "otherlocalfunction")) shouldBeEqualTo false
             it?.hasLocalFunctionsWithAllNames(listOf("samplelocalfunction1", "otherlocalfunction"), ignoreCase = true) shouldBeEqualTo false
         }
