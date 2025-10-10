@@ -122,7 +122,7 @@ fun <T : KoParametersProvider> List<T>.withAllParametersNamed(
  */
 fun <T : KoParametersProvider> List<T>.withAllParametersNamed(
     names: Collection<String>,
-    ignoreCase: Boolean = false
+    ignoreCase: Boolean = false,
 ): List<T> =
     filter {
         when {
@@ -158,7 +158,7 @@ fun <T : KoParametersProvider> List<T>.withoutAllParametersNamed(
  */
 fun <T : KoParametersProvider> List<T>.withoutAllParametersNamed(
     names: Collection<String>,
-    ignoreCase: Boolean = false
+    ignoreCase: Boolean = false,
 ): List<T> =
     filterNot {
         when {

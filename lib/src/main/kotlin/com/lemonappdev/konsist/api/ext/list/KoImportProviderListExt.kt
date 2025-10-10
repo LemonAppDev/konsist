@@ -49,7 +49,10 @@ fun <T : KoImportProvider> List<T>.withImportNamed(
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified import(s).
  */
-fun <T : KoImportProvider> List<T>.withImportNamed(names: Collection<String>, ignoreCase: Boolean = false): List<T> =
+fun <T : KoImportProvider> List<T>.withImportNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasImports()
@@ -171,8 +174,7 @@ fun <T : KoImportProvider> List<T>.withoutAllImportsNamed(
  * @param predicate A function that defines the condition to be met by an import declaration.
  * @return A list containing declarations with at least one import satisfying the predicate.
  */
-fun <T : KoImportProvider> List<T>.withImport(predicate: (KoImportDeclaration) -> Boolean): List<T> =
-    filter { it.hasImport(predicate) }
+fun <T : KoImportProvider> List<T>.withImport(predicate: (KoImportDeclaration) -> Boolean): List<T> = filter { it.hasImport(predicate) }
 
 /**
  * List containing declarations that not have import satisfying the provided predicate.

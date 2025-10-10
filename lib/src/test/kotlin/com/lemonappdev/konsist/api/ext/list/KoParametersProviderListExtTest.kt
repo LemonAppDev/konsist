@@ -687,7 +687,6 @@ class KoParametersProviderListExtTest {
         sut shouldBeEqualTo listOf(declaration2)
     }
 
-
     @Test
     fun `withParameter{} returns declaration with parameter which satisfy predicate`() {
         // given
