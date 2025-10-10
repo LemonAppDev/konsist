@@ -245,6 +245,50 @@ class KoUpperBoundsProviderListExtTest {
     }
 
     @Test
+    fun `withUpperBoundNamed(name) with ignore case returns declaration with given upper bound`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoUpperBoundsProvider =
+            mockk {
+                every { hasUpperBoundWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoUpperBoundsProvider =
+            mockk {
+                every { hasUpperBoundWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withUpperBoundNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withUpperBoundNamed(list of String) with ignore case returns declaration with any of given upper bounds`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoUpperBoundsProvider =
+            mockk {
+                every { hasUpperBoundWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoUpperBoundsProvider =
+            mockk {
+                every { hasUpperBoundWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withUpperBoundNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutUpperBoundNamed(name) returns declaration without given upper bound`() {
         // given
         val name = "SampleName"
@@ -328,6 +372,50 @@ class KoUpperBoundsProviderListExtTest {
 
         // when
         val sut = declarations.withoutUpperBoundNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutUpperBoundNamed(name) with ignore case returns declaration without given upper bound`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoUpperBoundsProvider =
+            mockk {
+                every { hasUpperBoundWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoUpperBoundsProvider =
+            mockk {
+                every { hasUpperBoundWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutUpperBoundNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutUpperBoundNamed(list of String) with ignore case returns declaration without any of given upper bounds`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoUpperBoundsProvider =
+            mockk {
+                every { hasUpperBoundWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoUpperBoundsProvider =
+            mockk {
+                every { hasUpperBoundWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutUpperBoundNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -423,6 +511,50 @@ class KoUpperBoundsProviderListExtTest {
     }
 
     @Test
+    fun `withAllUpperBoundsNamed(name) with ignore case returns declaration with given upper bound`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoUpperBoundsProvider =
+            mockk {
+                every { hasUpperBoundsWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoUpperBoundsProvider =
+            mockk {
+                every { hasUpperBoundsWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllUpperBoundsNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllUpperBoundsNamed(list of String) with ignore case returns declaration with all given upper bounds`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoUpperBoundsProvider =
+            mockk {
+                every { hasUpperBoundsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoUpperBoundsProvider =
+            mockk {
+                every { hasUpperBoundsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllUpperBoundsNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllUpperBoundsNamed(name) returns declaration without given upper bound`() {
         // given
         val name = "SampleName"
@@ -506,6 +638,50 @@ class KoUpperBoundsProviderListExtTest {
 
         // when
         val sut = declarations.withoutAllUpperBoundsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllUpperBoundsNamed(name) with ignore case returns declaration without given upper bound`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoUpperBoundsProvider =
+            mockk {
+                every { hasUpperBoundsWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoUpperBoundsProvider =
+            mockk {
+                every { hasUpperBoundsWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllUpperBoundsNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllUpperBoundsNamed(list of String) with ignore case returns declaration without all of given upper bounds`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoUpperBoundsProvider =
+            mockk {
+                every { hasUpperBoundsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoUpperBoundsProvider =
+            mockk {
+                every { hasUpperBoundsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllUpperBoundsNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
