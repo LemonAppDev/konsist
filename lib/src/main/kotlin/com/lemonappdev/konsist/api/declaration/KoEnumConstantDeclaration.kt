@@ -174,19 +174,21 @@ interface KoEnumConstantDeclaration :
     override fun hasLocalFunctionWithName(
         name: String,
         vararg names: String,
+        ignoreCase: Boolean,
     ): Boolean
 
     @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasFunctionWithName()"))
-    override fun hasLocalFunctionWithName(names: Collection<String>): Boolean
+    override fun hasLocalFunctionWithName(names: Collection<String>, ignoreCase: Boolean,): Boolean
 
     @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasFunctionsWithAllNames()"))
     override fun hasLocalFunctionsWithAllNames(
         name: String,
         vararg names: String,
+        ignoreCase: Boolean,
     ): Boolean
 
     @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasFunctionsWithAllNames()"))
-    override fun hasLocalFunctionsWithAllNames(names: Collection<String>): Boolean
+    override fun hasLocalFunctionsWithAllNames(names: Collection<String>, ignoreCase: Boolean,): Boolean
 
     @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasFunction()"))
     override fun hasLocalFunction(predicate: (KoFunctionDeclaration) -> Boolean): Boolean

@@ -1,0 +1,7 @@
+class SampleClass {
+    init {
+        fun sampleLocalFunction1() { }
+
+        fun sampleLocalFunction2() { }
+    }
+}

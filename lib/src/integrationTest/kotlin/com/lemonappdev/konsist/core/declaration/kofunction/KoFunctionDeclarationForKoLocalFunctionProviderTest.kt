@@ -80,6 +80,68 @@ class KoFunctionDeclarationForKoLocalFunctionProviderTest {
         }
     }
 
+    @Test
+    fun `function-contains-no-local-function-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("function-contains-no-local-function-ignore-case")
+                .functions()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasLocalFunctionWithName("samplelocalfunction") shouldBeEqualTo false
+            hasLocalFunctionWithName("samplelocalfunction", ignoreCase = true) shouldBeEqualTo false
+            hasLocalFunctionWithName(listOf("samplelocalfunction")) shouldBeEqualTo false
+            hasLocalFunctionWithName(listOf("samplelocalfunction"), ignoreCase = true) shouldBeEqualTo false
+            hasLocalFunctionWithName(setOf("samplelocalfunction")) shouldBeEqualTo false
+            hasLocalFunctionWithName(setOf("samplelocalfunction"), ignoreCase = true) shouldBeEqualTo false
+            hasLocalFunctionsWithAllNames("samplelocalfunction1", "samplelocalfunction2") shouldBeEqualTo false
+            hasLocalFunctionsWithAllNames("samplelocalfunction1", "samplelocalfunction2", ignoreCase = true) shouldBeEqualTo false
+            hasLocalFunctionsWithAllNames(listOf("samplelocalfunction1", "samplelocalfunction2")) shouldBeEqualTo false
+            hasLocalFunctionsWithAllNames(listOf("samplelocalfunction1", "samplelocalfunction2"), ignoreCase = true) shouldBeEqualTo false
+            hasLocalFunctionsWithAllNames(setOf("samplelocalfunction1", "samplelocalfunction2")) shouldBeEqualTo false
+            hasLocalFunctionsWithAllNames(setOf("samplelocalfunction1", "samplelocalfunction2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `function-contains-local-function-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("function-contains-local-function-ignore-case")
+                .functions()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasLocalFunctionWithName("samplelocalfunction1") shouldBeEqualTo false
+            hasLocalFunctionWithName("samplelocalfunction1", ignoreCase = true) shouldBeEqualTo true
+            hasLocalFunctionWithName("otherlocalfunction") shouldBeEqualTo false
+            hasLocalFunctionWithName("otherlocalfunction", ignoreCase = true) shouldBeEqualTo false
+            hasLocalFunctionWithName("samplelocalfunction1", "otherName") shouldBeEqualTo false
+            hasLocalFunctionWithName("samplelocalfunction1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasLocalFunctionWithName(listOf("samplelocalfunction1")) shouldBeEqualTo false
+            hasLocalFunctionWithName(listOf("samplelocalfunction1"), ignoreCase = true) shouldBeEqualTo true
+            hasLocalFunctionWithName(listOf("otherlocalfunction")) shouldBeEqualTo false
+            hasLocalFunctionWithName(listOf("otherlocalfunction"), ignoreCase = true) shouldBeEqualTo false
+            hasLocalFunctionWithName(listOf("samplelocalfunction1", "otherName")) shouldBeEqualTo false
+            hasLocalFunctionWithName(listOf("samplelocalfunction1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasLocalFunctionsWithAllNames("samplelocalfunction1") shouldBeEqualTo false
+            hasLocalFunctionsWithAllNames("samplelocalfunction1", ignoreCase = true) shouldBeEqualTo true
+            hasLocalFunctionsWithAllNames("samplelocalfunction1", "samplelocalfunction2") shouldBeEqualTo false
+            hasLocalFunctionsWithAllNames("samplelocalfunction1", "samplelocalfunction2", ignoreCase = true) shouldBeEqualTo true
+            hasLocalFunctionsWithAllNames("samplelocalfunction1", "otherlocalfunction") shouldBeEqualTo false
+            hasLocalFunctionsWithAllNames("samplelocalfunction1", "otherlocalfunction", ignoreCase = true) shouldBeEqualTo false
+            hasLocalFunctionsWithAllNames(listOf("samplelocalfunction1")) shouldBeEqualTo false
+            hasLocalFunctionsWithAllNames(listOf("samplelocalfunction1"), ignoreCase = true) shouldBeEqualTo true
+            hasLocalFunctionsWithAllNames(listOf("samplelocalfunction1", "samplelocalfunction2")) shouldBeEqualTo false
+            hasLocalFunctionsWithAllNames(listOf("samplelocalfunction1", "samplelocalfunction2"), ignoreCase = true) shouldBeEqualTo true
+            hasLocalFunctionsWithAllNames(listOf("samplelocalfunction1", "otherlocalfunction")) shouldBeEqualTo false
+            hasLocalFunctionsWithAllNames(listOf("samplelocalfunction1", "otherlocalfunction"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/kofunction/snippet/forkolocalfunctionprovider/", fileName)
 }
