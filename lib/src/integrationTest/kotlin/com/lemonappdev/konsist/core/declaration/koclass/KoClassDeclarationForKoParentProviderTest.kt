@@ -304,5 +304,67 @@ class KoClassDeclarationForKoParentProviderTest {
         }
     }
 
+    @Test
+    fun `class-has-no-parents-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-no-parents-ignore-case")
+                .classes()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasParentWithName("sampleparentclass") shouldBeEqualTo false
+            hasParentWithName("sampleparentclass", ignoreCase = true) shouldBeEqualTo false
+            hasParentWithName(listOf("sampleparentclass")) shouldBeEqualTo false
+            hasParentWithName(listOf("sampleparentclass"), ignoreCase = true) shouldBeEqualTo false
+            hasParentWithName(setOf("sampleparentclass")) shouldBeEqualTo false
+            hasParentWithName(setOf("sampleparentclass"), ignoreCase = true) shouldBeEqualTo false
+            hasParentsWithAllNames("sampleparentclass", "sampleparentinterface1") shouldBeEqualTo false
+            hasParentsWithAllNames("sampleparentclass", "sampleparentinterface1", ignoreCase = true) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("sampleparentclass", "sampleparentinterface1")) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("sampleparentclass", "sampleparentinterface1"), ignoreCase = true) shouldBeEqualTo false
+            hasParentsWithAllNames(setOf("sampleparentclass", "sampleparentinterface1")) shouldBeEqualTo false
+            hasParentsWithAllNames(setOf("sampleparentclass", "sampleparentinterface1"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `class-has-direct-parents-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-direct-parents-ignore-case")
+                .classes()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasParentWithName("sampleparentclass") shouldBeEqualTo false
+            hasParentWithName("sampleparentclass", ignoreCase = true) shouldBeEqualTo true
+            hasParentWithName("otherparentclass") shouldBeEqualTo false
+            hasParentWithName("otherparentclass", ignoreCase = true) shouldBeEqualTo false
+            hasParentWithName("sampleparentclass", "otherName") shouldBeEqualTo false
+            hasParentWithName("sampleparentclass", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasParentWithName(listOf("sampleparentclass")) shouldBeEqualTo false
+            hasParentWithName(listOf("sampleparentclass"), ignoreCase = true) shouldBeEqualTo true
+            hasParentWithName(listOf("otherparentclass")) shouldBeEqualTo false
+            hasParentWithName(listOf("otherparentclass"), ignoreCase = true) shouldBeEqualTo false
+            hasParentWithName(listOf("sampleparentclass", "otherName")) shouldBeEqualTo false
+            hasParentWithName(listOf("sampleparentclass", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasParentsWithAllNames("sampleparentclass") shouldBeEqualTo false
+            hasParentsWithAllNames("sampleparentclass", ignoreCase = true) shouldBeEqualTo true
+            hasParentsWithAllNames("sampleparentclass", "sampleparentinterface1") shouldBeEqualTo false
+            hasParentsWithAllNames("sampleparentclass", "sampleparentinterface1", ignoreCase = true) shouldBeEqualTo true
+            hasParentsWithAllNames("sampleparentclass", "otherparentclass") shouldBeEqualTo false
+            hasParentsWithAllNames("sampleparentclass", "otherparentclass", ignoreCase = true) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("sampleparentclass")) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("sampleparentclass"), ignoreCase = true) shouldBeEqualTo true
+            hasParentsWithAllNames(listOf("sampleparentclass", "sampleparentinterface1")) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("sampleparentclass", "sampleparentinterface1"), ignoreCase = true) shouldBeEqualTo true
+            hasParentsWithAllNames(listOf("sampleparentclass", "otherparentclass")) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("sampleparentclass", "otherparentclass"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koclass/snippet/forkoparentprovider/", fileName)
 }

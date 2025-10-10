@@ -63,17 +63,19 @@ internal interface KoParentProviderCore :
         name: String,
         vararg names: String,
         indirectParents: Boolean,
-    ): Boolean = hasParentWithName(listOf(name, *names), indirectParents)
+        ignoreCase: Boolean,
+    ): Boolean = hasParentWithName(listOf(name, *names), indirectParents, ignoreCase)
 
     override fun hasParentWithName(
         names: Collection<String>,
         indirectParents: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
             names.isEmpty() -> hasParents(indirectParents)
             else ->
                 names.any {
-                    parents(indirectParents).any { parent -> it == parent.name }
+                    parents(indirectParents).any { parent -> parent.hasName(it, ignoreCase) }
                 }
         }
 
@@ -81,17 +83,19 @@ internal interface KoParentProviderCore :
         name: String,
         vararg names: String,
         indirectParents: Boolean,
-    ): Boolean = hasParentsWithAllNames(listOf(name, *names), indirectParents)
+        ignoreCase: Boolean,
+    ): Boolean = hasParentsWithAllNames(listOf(name, *names), indirectParents, ignoreCase)
 
     override fun hasParentsWithAllNames(
         names: Collection<String>,
         indirectParents: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
             names.isEmpty() -> hasParents(indirectParents)
             else ->
                 names.all {
-                    parents(indirectParents).any { parent -> it == parent.name }
+                    parents(indirectParents).any { parent -> parent.hasName(it, ignoreCase) }
                 }
         }
 
