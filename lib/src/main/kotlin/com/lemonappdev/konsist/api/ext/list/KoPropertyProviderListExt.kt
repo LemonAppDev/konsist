@@ -35,29 +35,37 @@ fun <T : KoPropertyProvider> List<T>.withoutProperties(includeNested: Boolean = 
  * @param name The name of the property to include.
  * @param names The names of additional properties to include.
  * @param includeNested Whether to include nested properties.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified properties.
  */
 fun <T : KoPropertyProvider> List<T>.withPropertyNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = withPropertyNamed(listOf(name, *names), includeNested)
+    ignoreCase: Boolean = false,
+): List<T> = withPropertyNamed(listOf(name, *names), includeNested, ignoreCase)
 
 /**
  * List containing declarations that have at least one property with the specified name(s).
  *
  * @param names The names of additional properties to include.
  * @param includeNested Whether to include nested properties.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified properties.
  */
 fun <T : KoPropertyProvider> List<T>.withPropertyNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasProperties(includeNested)
-            else -> it.hasPropertyWithName(names, includeNested = includeNested)
+            else -> it.hasPropertyWithName(names, includeNested = includeNested, ignoreCase = ignoreCase)
         }
     }
 
@@ -67,29 +75,37 @@ fun <T : KoPropertyProvider> List<T>.withPropertyNamed(
  * @param name The name of the property to exclude.
  * @param names The names of additional properties to exclude.
  * @param includeNested Whether to include nested properties.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified properties.
  */
 fun <T : KoPropertyProvider> List<T>.withoutPropertyNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = withoutPropertyNamed(listOf(name, *names), includeNested)
+    ignoreCase: Boolean = false,
+): List<T> = withoutPropertyNamed(listOf(name, *names), includeNested, ignoreCase)
 
 /**
  * List containing declarations without any of specified properties.
  *
  * @param names The names of additional properties to exclude.
  * @param includeNested Whether to include nested properties.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified properties.
  */
 fun <T : KoPropertyProvider> List<T>.withoutPropertyNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasProperties(includeNested)
-            else -> it.hasPropertyWithName(names, includeNested = includeNested)
+            else -> it.hasPropertyWithName(names, includeNested = includeNested, ignoreCase = ignoreCase)
         }
     }
 
@@ -99,29 +115,37 @@ fun <T : KoPropertyProvider> List<T>.withoutPropertyNamed(
  * @param name The name of the property to include.
  * @param names The name(s) of the properties to include.
  * @param includeNested Whether to include nested properties.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified properties.
  */
 fun <T : KoPropertyProvider> List<T>.withAllPropertiesNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = withAllPropertiesNamed(listOf(name, *names), includeNested)
+    ignoreCase: Boolean = false,
+): List<T> = withAllPropertiesNamed(listOf(name, *names), includeNested, ignoreCase)
 
 /**
  * List containing declarations that have all specified properties.
  *
  * @param names The name(s) of the properties to include.
  * @param includeNested Whether to include nested properties.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified properties.
  */
 fun <T : KoPropertyProvider> List<T>.withAllPropertiesNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasProperties(includeNested)
-            else -> it.hasPropertiesWithAllNames(names, includeNested = includeNested)
+            else -> it.hasPropertiesWithAllNames(names, includeNested = includeNested, ignoreCase = ignoreCase)
         }
     }
 
@@ -131,29 +155,37 @@ fun <T : KoPropertyProvider> List<T>.withAllPropertiesNamed(
  * @param name The name of the property to exclude.
  * @param names The name(s) of the properties to exclude.
  * @param includeNested Whether to include nested properties.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified properties.
  */
 fun <T : KoPropertyProvider> List<T>.withoutAllPropertiesNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = withoutAllPropertiesNamed(listOf(name, *names), includeNested)
+    ignoreCase: Boolean = false,
+): List<T> = withoutAllPropertiesNamed(listOf(name, *names), includeNested, ignoreCase)
 
 /**
  * List containing declarations without all specified properties.
  *
  * @param names The name(s) of the properties to exclude.
  * @param includeNested Whether to include nested properties.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified properties.
  */
 fun <T : KoPropertyProvider> List<T>.withoutAllPropertiesNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasProperties(includeNested)
-            else -> it.hasPropertiesWithAllNames(names, includeNested = includeNested)
+            else -> it.hasPropertiesWithAllNames(names, includeNested = includeNested, ignoreCase = ignoreCase)
         }
     }
 
