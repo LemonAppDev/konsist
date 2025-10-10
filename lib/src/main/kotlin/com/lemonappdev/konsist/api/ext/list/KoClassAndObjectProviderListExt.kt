@@ -46,6 +46,9 @@ fun <T : KoClassAndObjectProvider> List<T>.withoutClassesAndObjects(
  * @param names The names of additional classes and objects to include.
  * @param includeNested Whether to include nested classes and objects.
  * @param includeLocal Whether to include local classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified class(es) or object(s).
  */
 fun <T : KoClassAndObjectProvider> List<T>.withClassOrObjectNamed(
@@ -53,7 +56,8 @@ fun <T : KoClassAndObjectProvider> List<T>.withClassOrObjectNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> = withClassOrObjectNamed(listOf(name, *names), includeNested, includeLocal)
+    ignoreCase: Boolean = false,
+): List<T> = withClassOrObjectNamed(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
 /**
  * List containing declarations that have at least one class or object with the specified name(s).
@@ -61,17 +65,21 @@ fun <T : KoClassAndObjectProvider> List<T>.withClassOrObjectNamed(
  * @param names The names of additional classes and objects to include.
  * @param includeNested Whether to include nested classes and objects.
  * @param includeLocal Whether to include local classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified class(es) or object(s).
  */
 fun <T : KoClassAndObjectProvider> List<T>.withClassOrObjectNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasClassesOrObjects(includeNested, includeLocal)
-            else -> it.hasClassOrObjectWithName(names, includeNested = includeNested, includeLocal = includeLocal)
+            else -> it.hasClassOrObjectWithName(names, includeNested = includeNested, includeLocal = includeLocal, ignoreCase = ignoreCase)
         }
     }
 
@@ -82,6 +90,9 @@ fun <T : KoClassAndObjectProvider> List<T>.withClassOrObjectNamed(
  * @param names The names of additional classes and objects to exclude.
  * @param includeNested Whether to include nested classes and objects.
  * @param includeLocal Whether to include local classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified classes and objects.
  */
 fun <T : KoClassAndObjectProvider> List<T>.withoutClassOrObjectNamed(
@@ -89,7 +100,8 @@ fun <T : KoClassAndObjectProvider> List<T>.withoutClassOrObjectNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> = withoutClassOrObjectNamed(listOf(name, *names), includeNested, includeLocal)
+    ignoreCase: Boolean = false,
+): List<T> = withoutClassOrObjectNamed(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
 /**
  * List containing declarations without any of specified classes and objects.
@@ -97,17 +109,21 @@ fun <T : KoClassAndObjectProvider> List<T>.withoutClassOrObjectNamed(
  * @param names The names of additional classes and objects to exclude.
  * @param includeNested Whether to include nested classes and objects.
  * @param includeLocal Whether to include local classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified classes and objects.
  */
 fun <T : KoClassAndObjectProvider> List<T>.withoutClassOrObjectNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasClassesOrObjects(includeNested, includeLocal)
-            else -> it.hasClassOrObjectWithName(names, includeNested = includeNested, includeLocal = includeLocal)
+            else -> it.hasClassOrObjectWithName(names, includeNested = includeNested, includeLocal = includeLocal, ignoreCase = ignoreCase)
         }
     }
 
@@ -118,6 +134,9 @@ fun <T : KoClassAndObjectProvider> List<T>.withoutClassOrObjectNamed(
  * @param names The name(s) of the class(es) and object(s) to include.
  * @param includeNested Whether to include nested classes and objects.
  * @param includeLocal Whether to include local classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified class(es) and object(s).
  */
 fun <T : KoClassAndObjectProvider> List<T>.withAllClassesAndObjectsNamed(
@@ -125,7 +144,8 @@ fun <T : KoClassAndObjectProvider> List<T>.withAllClassesAndObjectsNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> = withAllClassesAndObjectsNamed(listOf(name, *names), includeNested, includeLocal)
+    ignoreCase: Boolean = false,
+): List<T> = withAllClassesAndObjectsNamed(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
 /**
  * List containing declarations that have all specified classes and objects.
@@ -133,17 +153,26 @@ fun <T : KoClassAndObjectProvider> List<T>.withAllClassesAndObjectsNamed(
  * @param names The name(s) of the class(es) and object(s) to include.
  * @param includeNested Whether to include nested classes and objects.
  * @param includeLocal Whether to include local classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified class(es) and object(s).
  */
 fun <T : KoClassAndObjectProvider> List<T>.withAllClassesAndObjectsNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasClassesOrObjects(includeNested, includeLocal)
-            else -> it.hasClassesAndObjectsWithAllNames(names, includeNested = includeNested, includeLocal = includeLocal)
+            else -> it.hasClassesAndObjectsWithAllNames(
+                names,
+                includeNested = includeNested,
+                includeLocal = includeLocal,
+                ignoreCase = ignoreCase,
+            )
         }
     }
 
@@ -154,6 +183,9 @@ fun <T : KoClassAndObjectProvider> List<T>.withAllClassesAndObjectsNamed(
  * @param names The name(s) of the class(es) and object(s) to exclude.
  * @param includeNested Whether to include nested classes and objects.
  * @param includeLocal Whether to include local classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified class(es) and object(s).
  */
 fun <T : KoClassAndObjectProvider> List<T>.withoutAllClassesAndObjectsNamed(
@@ -161,7 +193,8 @@ fun <T : KoClassAndObjectProvider> List<T>.withoutAllClassesAndObjectsNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> = withoutAllClassesAndObjectsNamed(listOf(name, *names), includeNested, includeLocal)
+    ignoreCase: Boolean = false,
+): List<T> = withoutAllClassesAndObjectsNamed(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
 /**
  * List containing declarations without all specified classes and objects.
@@ -169,17 +202,26 @@ fun <T : KoClassAndObjectProvider> List<T>.withoutAllClassesAndObjectsNamed(
  * @param names The name(s) of the class(es) and object(s) to exclude.
  * @param includeNested Whether to include nested classes and objects.
  * @param includeLocal Whether to include local classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified class(es) and object(s).
  */
 fun <T : KoClassAndObjectProvider> List<T>.withoutAllClassesAndObjectsNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasClassesOrObjects(includeNested, includeLocal)
-            else -> it.hasClassesAndObjectsWithAllNames(names, includeNested = includeNested, includeLocal = includeLocal)
+            else -> it.hasClassesAndObjectsWithAllNames(
+                names,
+                includeNested = includeNested,
+                includeLocal = includeLocal,
+                ignoreCase = ignoreCase,
+            )
         }
     }
 
