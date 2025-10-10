@@ -118,6 +118,68 @@ class KoFunctionDeclarationForKoTypeParameterProviderTest {
         }
     }
 
+    @Test
+    fun `function-contains-no-type-parameters-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("function-contains-no-type-parameters-ignore-case")
+                .functions()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasTypeParameterWithName("t") shouldBeEqualTo false
+            hasTypeParameterWithName("t", ignoreCase = true) shouldBeEqualTo false
+            hasTypeParameterWithName(listOf("t")) shouldBeEqualTo false
+            hasTypeParameterWithName(listOf("t"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeParameterWithName(setOf("t")) shouldBeEqualTo false
+            hasTypeParameterWithName(setOf("t"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeParametersWithAllNames("t", "v") shouldBeEqualTo false
+            hasTypeParametersWithAllNames("t", "v", ignoreCase = true) shouldBeEqualTo false
+            hasTypeParametersWithAllNames(listOf("t", "v")) shouldBeEqualTo false
+            hasTypeParametersWithAllNames(listOf("t", "v"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeParametersWithAllNames(setOf("t", "v")) shouldBeEqualTo false
+            hasTypeParametersWithAllNames(setOf("t", "v"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `function-contains-type-parameters-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("function-contains-type-parameters-ignore-case")
+                .functions()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasTypeParameterWithName("t") shouldBeEqualTo false
+            hasTypeParameterWithName("t", ignoreCase = true) shouldBeEqualTo true
+            hasTypeParameterWithName("x") shouldBeEqualTo false
+            hasTypeParameterWithName("x", ignoreCase = true) shouldBeEqualTo false
+            hasTypeParameterWithName("t", "x") shouldBeEqualTo false
+            hasTypeParameterWithName("t", "x", ignoreCase = true) shouldBeEqualTo true
+            hasTypeParameterWithName(listOf("t")) shouldBeEqualTo false
+            hasTypeParameterWithName(listOf("t"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeParameterWithName(listOf("x")) shouldBeEqualTo false
+            hasTypeParameterWithName(listOf("x"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeParameterWithName(listOf("t", "x")) shouldBeEqualTo false
+            hasTypeParameterWithName(listOf("t", "x"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeParametersWithAllNames("t") shouldBeEqualTo false
+            hasTypeParametersWithAllNames("t", ignoreCase = true) shouldBeEqualTo true
+            hasTypeParametersWithAllNames("t", "v") shouldBeEqualTo false
+            hasTypeParametersWithAllNames("t", "v", ignoreCase = true) shouldBeEqualTo true
+            hasTypeParametersWithAllNames("t", "x") shouldBeEqualTo false
+            hasTypeParametersWithAllNames("t", "x", ignoreCase = true) shouldBeEqualTo false
+            hasTypeParametersWithAllNames(listOf("t")) shouldBeEqualTo false
+            hasTypeParametersWithAllNames(listOf("t"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeParametersWithAllNames(listOf("t", "v")) shouldBeEqualTo false
+            hasTypeParametersWithAllNames(listOf("t", "v"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeParametersWithAllNames(listOf("t", "x")) shouldBeEqualTo false
+            hasTypeParametersWithAllNames(listOf("t", "x"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kofunction/snippet/forkotypeparameterprovider/", fileName)
 }

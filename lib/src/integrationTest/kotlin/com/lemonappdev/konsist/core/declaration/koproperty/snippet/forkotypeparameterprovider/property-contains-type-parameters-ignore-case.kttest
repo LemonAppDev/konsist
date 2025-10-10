@@ -1,0 +1,2 @@
+val <T, V> Map<T, V>.sampleProperty: Int
+    get() = 0
