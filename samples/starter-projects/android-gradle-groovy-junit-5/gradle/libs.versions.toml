@@ -29,4 +29,4 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-android-junit5 = { id = "de.mannodermaus.android-junit5", version = "1.13.4.0" }
+android-junit5 = { id = "de.mannodermaus.android-junit5", version = "1.14.0.0" }
