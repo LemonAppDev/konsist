@@ -72,7 +72,7 @@ class ApiKonsistTest {
             .functions()
             .withNameContaining("name", ignoreCase = true)
             .withoutParameter { it.hasNameContaining("regex") }
-            .withoutAllParameters { it.hasName("predicate") } // Todo: it's okay?
+            .withoutAllParameters { it.hasName("predicate") }
             .withoutAnnotationOf(Deprecated::class)
             .assertTrue { it.hasParameterWithName("ignoreCase") }
     }
