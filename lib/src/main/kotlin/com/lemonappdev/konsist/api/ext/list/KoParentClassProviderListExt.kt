@@ -131,29 +131,37 @@ fun <T : KoParentClassProvider> List<T>.withoutParentClasses(
  * @param name The name of the parent class to include.
  * @param names The names of additional parent classes to include.
  * @param indirectParents Whether to include indirect parent classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with the specified parent class(es).
  */
 fun <T : KoParentClassProvider> List<T>.withParentClassNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> = withParentClassNamed(listOf(name, *names), indirectParents)
+    ignoreCase: Boolean = false,
+): List<T> = withParentClassNamed(listOf(name, *names), indirectParents, ignoreCase)
 
 /**
  * List containing declarations that have parent class with the specified name(s).
  *
  * @param names The names of additional parent classes to include.
  * @param indirectParents Whether to include indirect parent classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with the specified parent class(es).
  */
 fun <T : KoParentClassProvider> List<T>.withParentClassNamed(
     names: Collection<String>,
     indirectParents: Boolean = false,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasParentClasses(indirectParents)
-            else -> it.hasParentClassWithName(names, indirectParents = indirectParents)
+            else -> it.hasParentClassWithName(names, indirectParents = indirectParents, ignoreCase = ignoreCase)
         }
     }
 
@@ -163,29 +171,37 @@ fun <T : KoParentClassProvider> List<T>.withParentClassNamed(
  * @param name The name of the parent class to exclude.
  * @param names The names of additional parent classes to exclude.
  * @param indirectParents Whether to include indirect parent classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified parent classes.
  */
 fun <T : KoParentClassProvider> List<T>.withoutParentClassNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> = withoutParentClassNamed(listOf(name, *names), indirectParents)
+    ignoreCase: Boolean = false,
+): List<T> = withoutParentClassNamed(listOf(name, *names), indirectParents, ignoreCase)
 
 /**
  * List containing declarations without any of specified parent classes.
  *
  * @param names The names of additional parent classes to exclude.
  * @param indirectParents Whether to include indirect parent classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified parent classes.
  */
 fun <T : KoParentClassProvider> List<T>.withoutParentClassNamed(
     names: Collection<String>,
     indirectParents: Boolean = false,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasParentClasses(indirectParents)
-            else -> it.hasParentClassWithName(names, indirectParents = indirectParents)
+            else -> it.hasParentClassWithName(names, indirectParents = indirectParents, ignoreCase = ignoreCase)
         }
     }
 
@@ -195,29 +211,37 @@ fun <T : KoParentClassProvider> List<T>.withoutParentClassNamed(
  * @param name The name of the parent class to include.
  * @param names The name(s) of the parent class(es) to include.
  * @param indirectParents Whether to include indirect parent classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified parent class(es).
  */
 fun <T : KoParentClassProvider> List<T>.withAllParentClassesNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> = withAllParentClassesNamed(listOf(name, *names), indirectParents)
+    ignoreCase: Boolean = false,
+): List<T> = withAllParentClassesNamed(listOf(name, *names), indirectParents, ignoreCase)
 
 /**
  * List containing declarations that have all specified parent classes.
  *
  * @param names The name(s) of the parent class(es) to include.
  * @param indirectParents Whether to include indirect parent classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified parent class(es).
  */
 fun <T : KoParentClassProvider> List<T>.withAllParentClassesNamed(
     names: Collection<String>,
     indirectParents: Boolean = false,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasParentClasses(indirectParents)
-            else -> it.hasParentClassesWithAllNames(names, indirectParents = indirectParents)
+            else -> it.hasParentClassesWithAllNames(names, indirectParents = indirectParents, ignoreCase = ignoreCase)
         }
     }
 
@@ -227,29 +251,37 @@ fun <T : KoParentClassProvider> List<T>.withAllParentClassesNamed(
  * @param name The name of the parent class to exclude.
  * @param names The name(s) of the parent class(es) to exclude.
  * @param indirectParents Whether to include indirect parent classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified parent class(es).
  */
 fun <T : KoParentClassProvider> List<T>.withoutAllParentClassesNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> = withoutAllParentClassesNamed(listOf(name, *names), indirectParents)
+    ignoreCase: Boolean = false,
+): List<T> = withoutAllParentClassesNamed(listOf(name, *names), indirectParents, ignoreCase)
 
 /**
  * List containing declarations without all specified parent classes.
  *
  * @param names The name(s) of the parent class(es) to exclude.
  * @param indirectParents Whether to include indirect parent classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified parent class(es).
  */
 fun <T : KoParentClassProvider> List<T>.withoutAllParentClassesNamed(
     names: Collection<String>,
     indirectParents: Boolean = false,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasParentClasses(indirectParents)
-            else -> it.hasParentClassesWithAllNames(names, indirectParents = indirectParents)
+            else -> it.hasParentClassesWithAllNames(names, indirectParents = indirectParents, ignoreCase = ignoreCase)
         }
     }
 
