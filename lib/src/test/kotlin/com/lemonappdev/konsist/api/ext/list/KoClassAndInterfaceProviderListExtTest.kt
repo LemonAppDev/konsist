@@ -28,9 +28,9 @@ class KoClassAndInterfaceProviderListExtTest {
         val declaration2: KoClassAndInterfaceProvider =
             mockk {
                 every { classesAndInterfaces(includeNested = true, includeLocal = false) } returns
-                    listOf(
-                        interfaceDeclaration2,
-                    )
+                        listOf(
+                            interfaceDeclaration2,
+                        )
             }
         val declaration3: KoClassAndInterfaceProvider =
             mockk {
@@ -335,6 +335,50 @@ class KoClassAndInterfaceProviderListExtTest {
     }
 
     @Test
+    fun `withClassOrInterfaceNamed(name) with ignore case returns declaration with given class or interface`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoClassAndInterfaceProvider =
+            mockk {
+                every { hasClassOrInterfaceWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoClassAndInterfaceProvider =
+            mockk {
+                every { hasClassOrInterfaceWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withClassOrInterfaceNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withClassOrInterfaceNamed(list of String) with ignore case returns declaration with any of given class or interface`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoClassAndInterfaceProvider =
+            mockk {
+                every { hasClassOrInterfaceWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoClassAndInterfaceProvider =
+            mockk {
+                every { hasClassOrInterfaceWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withClassOrInterfaceNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutClassOrInterfaceNamed(name) returns declaration without given class or interface`() {
         // given
         val name = "SampleName"
@@ -418,6 +462,50 @@ class KoClassAndInterfaceProviderListExtTest {
 
         // when
         val sut = declarations.withoutClassOrInterfaceNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutClassOrInterfaceNamed(name) with ignore case returns declaration without given class or interface`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoClassAndInterfaceProvider =
+            mockk {
+                every { hasClassOrInterfaceWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoClassAndInterfaceProvider =
+            mockk {
+                every { hasClassOrInterfaceWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutClassOrInterfaceNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutClassOrInterfaceNamed(list of String) with ignore case returns declaration without any of given class or interface`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoClassAndInterfaceProvider =
+            mockk {
+                every { hasClassOrInterfaceWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoClassAndInterfaceProvider =
+            mockk {
+                every { hasClassOrInterfaceWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutClassOrInterfaceNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -513,6 +601,50 @@ class KoClassAndInterfaceProviderListExtTest {
     }
 
     @Test
+    fun `withAllClassesAndInterfacesNamed(name) with ignore case returns declaration with given classes and interfaces`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoClassAndInterfaceProvider =
+            mockk {
+                every { hasClassesAndInterfacesWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoClassAndInterfaceProvider =
+            mockk {
+                every { hasClassesAndInterfacesWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllClassesAndInterfacesNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllClassesAndInterfacesNamed(list of String) with ignore case returns declaration with all given classes and interfaces`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoClassAndInterfaceProvider =
+            mockk {
+                every { hasClassesAndInterfacesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoClassAndInterfaceProvider =
+            mockk {
+                every { hasClassesAndInterfacesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllClassesAndInterfacesNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllClassesAndInterfacesNamed(name) returns declaration without given classes and interfaces`() {
         // given
         val name = "SampleName"
@@ -596,6 +728,50 @@ class KoClassAndInterfaceProviderListExtTest {
 
         // when
         val sut = declarations.withoutAllClassesAndInterfacesNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllClassesAndInterfacesNamed(name) with ignore case returns declaration without given classes and interfaces`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoClassAndInterfaceProvider =
+            mockk {
+                every { hasClassesAndInterfacesWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoClassAndInterfaceProvider =
+            mockk {
+                every { hasClassesAndInterfacesWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllClassesAndInterfacesNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllClassesAndInterfacesNamed(list of String) with ignore case returns declaration without all of given classes and interfaces`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoClassAndInterfaceProvider =
+            mockk {
+                every { hasClassesAndInterfacesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoClassAndInterfaceProvider =
+            mockk {
+                every { hasClassesAndInterfacesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllClassesAndInterfacesNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

@@ -46,6 +46,9 @@ fun <T : KoClassAndInterfaceProvider> List<T>.withoutClassesAndInterfaces(
  * @param names The names of additional classes and interfaces to include.
  * @param includeNested Whether to include nested classes and interfaces.
  * @param includeLocal Whether to include local classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified class(es) or interface(s).
  */
 fun <T : KoClassAndInterfaceProvider> List<T>.withClassOrInterfaceNamed(
@@ -53,7 +56,8 @@ fun <T : KoClassAndInterfaceProvider> List<T>.withClassOrInterfaceNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> = withClassOrInterfaceNamed(listOf(name, *names), includeNested, includeLocal)
+    ignoreCase: Boolean = false,
+): List<T> = withClassOrInterfaceNamed(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
 /**
  * List containing declarations that have at least one class or interface with the specified name(s).
@@ -61,17 +65,26 @@ fun <T : KoClassAndInterfaceProvider> List<T>.withClassOrInterfaceNamed(
  * @param names The names of additional classes and interfaces to include.
  * @param includeNested Whether to include nested classes and interfaces.
  * @param includeLocal Whether to include local classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified class(es) or interface(s).
  */
 fun <T : KoClassAndInterfaceProvider> List<T>.withClassOrInterfaceNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasClassesOrInterfaces(includeNested, includeLocal)
-            else -> it.hasClassOrInterfaceWithName(names, includeNested = includeNested, includeLocal = includeLocal)
+            else -> it.hasClassOrInterfaceWithName(
+                names,
+                includeNested = includeNested,
+                includeLocal = includeLocal,
+                ignoreCase = ignoreCase
+            )
         }
     }
 
@@ -82,6 +95,9 @@ fun <T : KoClassAndInterfaceProvider> List<T>.withClassOrInterfaceNamed(
  * @param names The names of additional classes and interfaces to exclude.
  * @param includeNested Whether to include nested classes and interfaces.
  * @param includeLocal Whether to include local classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified classes and interfaces.
  */
 fun <T : KoClassAndInterfaceProvider> List<T>.withoutClassOrInterfaceNamed(
@@ -89,7 +105,8 @@ fun <T : KoClassAndInterfaceProvider> List<T>.withoutClassOrInterfaceNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> = withoutClassOrInterfaceNamed(listOf(name, *names), includeNested, includeLocal)
+    ignoreCase: Boolean = false,
+): List<T> = withoutClassOrInterfaceNamed(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
 /**
  * List containing declarations without any of specified classes and interfaces.
@@ -97,17 +114,26 @@ fun <T : KoClassAndInterfaceProvider> List<T>.withoutClassOrInterfaceNamed(
  * @param names The names of additional classes and interfaces to exclude.
  * @param includeNested Whether to include nested classes and interfaces.
  * @param includeLocal Whether to include local classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified classes and interfaces.
  */
 fun <T : KoClassAndInterfaceProvider> List<T>.withoutClassOrInterfaceNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasClassesOrInterfaces(includeNested, includeLocal)
-            else -> it.hasClassOrInterfaceWithName(names, includeNested = includeNested, includeLocal = includeLocal)
+            else -> it.hasClassOrInterfaceWithName(
+                names,
+                includeNested = includeNested,
+                includeLocal = includeLocal,
+                ignoreCase = ignoreCase
+            )
         }
     }
 
@@ -118,6 +144,9 @@ fun <T : KoClassAndInterfaceProvider> List<T>.withoutClassOrInterfaceNamed(
  * @param names The name(s) of the class(es) and interface(s) to include.
  * @param includeNested Whether to include nested classes and interfaces.
  * @param includeLocal Whether to include local classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified class(es) and interface(s).
  */
 fun <T : KoClassAndInterfaceProvider> List<T>.withAllClassesAndInterfacesNamed(
@@ -125,7 +154,8 @@ fun <T : KoClassAndInterfaceProvider> List<T>.withAllClassesAndInterfacesNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> = withAllClassesAndInterfacesNamed(listOf(name, *names), includeNested, includeLocal)
+    ignoreCase: Boolean = false,
+): List<T> = withAllClassesAndInterfacesNamed(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
 /**
  * List containing declarations that have all specified classes and interfaces.
@@ -133,17 +163,26 @@ fun <T : KoClassAndInterfaceProvider> List<T>.withAllClassesAndInterfacesNamed(
  * @param names The name(s) of the class(es) and interface(s) to include.
  * @param includeNested Whether to include nested classes and interfaces.
  * @param includeLocal Whether to include local classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified class(es) and interface(s).
  */
 fun <T : KoClassAndInterfaceProvider> List<T>.withAllClassesAndInterfacesNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasClassesOrInterfaces(includeNested, includeLocal)
-            else -> it.hasClassesAndInterfacesWithAllNames(names, includeNested = includeNested, includeLocal = includeLocal)
+            else -> it.hasClassesAndInterfacesWithAllNames(
+                names,
+                includeNested = includeNested,
+                includeLocal = includeLocal,
+                ignoreCase = ignoreCase
+            )
         }
     }
 
@@ -154,6 +193,9 @@ fun <T : KoClassAndInterfaceProvider> List<T>.withAllClassesAndInterfacesNamed(
  * @param names The name(s) of the class(es) and interface(s) to exclude.
  * @param includeNested Whether to include nested classes and interfaces.
  * @param includeLocal Whether to include local classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified class(es) and interface(s).
  */
 fun <T : KoClassAndInterfaceProvider> List<T>.withoutAllClassesAndInterfacesNamed(
@@ -161,7 +203,8 @@ fun <T : KoClassAndInterfaceProvider> List<T>.withoutAllClassesAndInterfacesName
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> = withoutAllClassesAndInterfacesNamed(listOf(name, *names), includeNested, includeLocal)
+    ignoreCase: Boolean = false,
+): List<T> = withoutAllClassesAndInterfacesNamed(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
 /**
  * List containing declarations without all specified classes and interfaces.
@@ -169,17 +212,26 @@ fun <T : KoClassAndInterfaceProvider> List<T>.withoutAllClassesAndInterfacesName
  * @param names The name(s) of the class(es) and interface(s) to exclude.
  * @param includeNested Whether to include nested classes and interfaces.
  * @param includeLocal Whether to include local classes.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified class(es) and interface(s).
  */
 fun <T : KoClassAndInterfaceProvider> List<T>.withoutAllClassesAndInterfacesNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasClassesOrInterfaces(includeNested, includeLocal)
-            else -> it.hasClassesAndInterfacesWithAllNames(names, includeNested = includeNested, includeLocal = includeLocal)
+            else -> it.hasClassesAndInterfacesWithAllNames(
+                names,
+                includeNested = includeNested,
+                includeLocal = includeLocal,
+                ignoreCase = ignoreCase
+            )
         }
     }
 
