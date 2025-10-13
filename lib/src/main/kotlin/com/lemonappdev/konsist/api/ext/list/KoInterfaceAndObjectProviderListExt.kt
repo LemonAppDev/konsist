@@ -36,29 +36,37 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.withoutInterfacesAndObjects(inclu
  * @param name The name of the interface or object to include.
  * @param names The names of additional interfaces and objects to include.
  * @param includeNested Whether to include nested interfaces and objects.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified interface(s) or object(s).
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withInterfaceOrObjectNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = withInterfaceOrObjectNamed(listOf(name, *names), includeNested)
+    ignoreCase: Boolean = false,
+): List<T> = withInterfaceOrObjectNamed(listOf(name, *names), includeNested, ignoreCase)
 
 /**
  * List containing declarations that have at least one interface or object with the specified name(s).
  *
  * @param names The names of additional interfaces and objects to include.
  * @param includeNested Whether to include nested interfaces and objects.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified interface(s) or object(s).
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withInterfaceOrObjectNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasInterfacesOrObjects(includeNested)
-            else -> it.hasInterfaceOrObjectWithName(names, includeNested = includeNested)
+            else -> it.hasInterfaceOrObjectWithName(names, includeNested = includeNested, ignoreCase = ignoreCase)
         }
     }
 
@@ -68,29 +76,37 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.withInterfaceOrObjectNamed(
  * @param name The name of the interface or object to exclude.
  * @param names The names of additional interfaces and objects to exclude.
  * @param includeNested Whether to include nested interfaces and objects.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified interfaces and objects.
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withoutInterfaceOrObjectNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = withoutInterfaceOrObjectNamed(listOf(name, *names), includeNested)
+    ignoreCase: Boolean = false,
+): List<T> = withoutInterfaceOrObjectNamed(listOf(name, *names), includeNested, ignoreCase)
 
 /**
  * List containing declarations without any of specified interfaces and objects.
  *
  * @param names The names of additional interfaces and objects to exclude.
  * @param includeNested Whether to include nested interfaces and objects.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified interfaces and objects.
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withoutInterfaceOrObjectNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasInterfacesOrObjects(includeNested)
-            else -> it.hasInterfaceOrObjectWithName(names, includeNested = includeNested)
+            else -> it.hasInterfaceOrObjectWithName(names, includeNested = includeNested, ignoreCase = ignoreCase)
         }
     }
 
@@ -100,29 +116,41 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.withoutInterfaceOrObjectNamed(
  * @param name The name of the interface or object to include.
  * @param names The name(s) of the interface(s) and object(s) to include.
  * @param includeNested Whether to include nested interfaces and objects.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified interface(s) and object(s).
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withAllInterfacesAndObjectsNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = withAllInterfacesAndObjectsNamed(listOf(name, *names), includeNested)
+    ignoreCase: Boolean = false,
+): List<T> = withAllInterfacesAndObjectsNamed(listOf(name, *names), includeNested, ignoreCase)
 
 /**
  * List containing declarations that have all specified interfaces and objects.
  *
  * @param names The name(s) of the interface(s) and object(s) to include.
  * @param includeNested Whether to include nested interfaces and objects.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified interface(s) and object(s).
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withAllInterfacesAndObjectsNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasInterfacesOrObjects(includeNested)
-            else -> it.hasInterfacesAndObjectsWithAllNames(names, includeNested = includeNested)
+            else -> it.hasInterfacesAndObjectsWithAllNames(
+                names,
+                includeNested = includeNested,
+                ignoreCase = ignoreCase
+            )
         }
     }
 
@@ -132,29 +160,41 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.withAllInterfacesAndObjectsNamed(
  * @param name The name of the interface or object to exclude.
  * @param names The name(s) of the interface(s) and object(s) to exclude.
  * @param includeNested Whether to include nested interfaces and objects.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified interface(s) and object(s).
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withoutAllInterfacesAndObjectsNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-): List<T> = withoutAllInterfacesAndObjectsNamed(listOf(name, *names), includeNested)
+    ignoreCase: Boolean = false,
+): List<T> = withoutAllInterfacesAndObjectsNamed(listOf(name, *names), includeNested, ignoreCase)
 
 /**
  * List containing declarations without all specified interfaces and objects.
  *
  * @param names The name(s) of the interface(s) and object(s) to exclude.
  * @param includeNested Whether to include nested interfaces and objects.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified interface(s) and object(s).
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withoutAllInterfacesAndObjectsNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasInterfacesOrObjects(includeNested)
-            else -> it.hasInterfacesAndObjectsWithAllNames(names, includeNested = includeNested)
+            else -> it.hasInterfacesAndObjectsWithAllNames(
+                names,
+                includeNested = includeNested,
+                ignoreCase = ignoreCase
+            )
         }
     }
 
