@@ -327,7 +327,6 @@ class KoAnnotationProviderListExtTest {
         sut shouldBeEqualTo listOf(declaration1)
     }
 
-
     @Test
     fun `withAnnotationNamed(name) with ignore case returns declaration with given annotation`() {
         // given

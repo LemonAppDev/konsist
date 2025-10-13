@@ -563,7 +563,6 @@ class KoTypeArgumentProviderListExtTest {
         sut shouldBeEqualTo listOf(declaration1)
     }
 
-
     @Test
     fun `withAllTypeArgumentsNamed(list of String) with ignore case returns declaration with all given type arguments`() {
         // given

@@ -189,11 +189,12 @@ class KoFullyQualifiedNameProviderListExtTest {
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withFullyQualifiedName(
-            fullyQualifiedName1.uppercase(),
-            fullyQualifiedName2.uppercase(),
-            ignoreCase = true
-        )
+        val sut =
+            declarations.withFullyQualifiedName(
+                fullyQualifiedName1.uppercase(),
+                fullyQualifiedName2.uppercase(),
+                ignoreCase = true,
+            )
 
         // then
         sut shouldBeEqualTo listOf(declaration1, declaration2)
@@ -353,11 +354,12 @@ class KoFullyQualifiedNameProviderListExtTest {
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withoutFullyQualifiedName(
-            fullyQualifiedName1.uppercase(),
-            fullyQualifiedName2.uppercase(),
-            ignoreCase = true
-        )
+        val sut =
+            declarations.withoutFullyQualifiedName(
+                fullyQualifiedName1.uppercase(),
+                fullyQualifiedName2.uppercase(),
+                ignoreCase = true,
+            )
 
         // then
         sut shouldBeEqualTo listOf(declaration3)

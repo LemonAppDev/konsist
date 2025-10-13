@@ -478,7 +478,6 @@ class KoVariableProviderListExtTest {
         sut shouldBeEqualTo listOf(declaration2)
     }
 
-
     @Test
     fun `withoutVariableNamed(list of String) with ignore case returns declaration without any of given variables`() {
         // given

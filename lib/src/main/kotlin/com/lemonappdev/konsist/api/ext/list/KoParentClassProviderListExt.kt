@@ -132,8 +132,8 @@ fun <T : KoParentClassProvider> List<T>.withoutParentClasses(
  * @param names The names of additional parent classes to include.
  * @param indirectParents Whether to include indirect parent classes.
  * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
-     *        If `false`, the comparison will consider case sensitivity.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with the specified parent class(es).
  */
 fun <T : KoParentClassProvider> List<T>.withParentClassNamed(
@@ -149,8 +149,8 @@ fun <T : KoParentClassProvider> List<T>.withParentClassNamed(
  * @param names The names of additional parent classes to include.
  * @param indirectParents Whether to include indirect parent classes.
  * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
-     *        If `false`, the comparison will consider case sensitivity.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with the specified parent class(es).
  */
 fun <T : KoParentClassProvider> List<T>.withParentClassNamed(
@@ -172,8 +172,8 @@ fun <T : KoParentClassProvider> List<T>.withParentClassNamed(
  * @param names The names of additional parent classes to exclude.
  * @param indirectParents Whether to include indirect parent classes.
  * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
-     *        If `false`, the comparison will consider case sensitivity.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified parent classes.
  */
 fun <T : KoParentClassProvider> List<T>.withoutParentClassNamed(
@@ -189,8 +189,8 @@ fun <T : KoParentClassProvider> List<T>.withoutParentClassNamed(
  * @param names The names of additional parent classes to exclude.
  * @param indirectParents Whether to include indirect parent classes.
  * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
-     *        If `false`, the comparison will consider case sensitivity.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified parent classes.
  */
 fun <T : KoParentClassProvider> List<T>.withoutParentClassNamed(
@@ -212,8 +212,8 @@ fun <T : KoParentClassProvider> List<T>.withoutParentClassNamed(
  * @param names The name(s) of the parent class(es) to include.
  * @param indirectParents Whether to include indirect parent classes.
  * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
-     *        If `false`, the comparison will consider case sensitivity.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified parent class(es).
  */
 fun <T : KoParentClassProvider> List<T>.withAllParentClassesNamed(
@@ -229,8 +229,8 @@ fun <T : KoParentClassProvider> List<T>.withAllParentClassesNamed(
  * @param names The name(s) of the parent class(es) to include.
  * @param indirectParents Whether to include indirect parent classes.
  * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
-     *        If `false`, the comparison will consider case sensitivity.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified parent class(es).
  */
 fun <T : KoParentClassProvider> List<T>.withAllParentClassesNamed(
@@ -252,8 +252,8 @@ fun <T : KoParentClassProvider> List<T>.withAllParentClassesNamed(
  * @param names The name(s) of the parent class(es) to exclude.
  * @param indirectParents Whether to include indirect parent classes.
  * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
-     *        If `false`, the comparison will consider case sensitivity.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified parent class(es).
  */
 fun <T : KoParentClassProvider> List<T>.withoutAllParentClassesNamed(
@@ -269,8 +269,8 @@ fun <T : KoParentClassProvider> List<T>.withoutAllParentClassesNamed(
  * @param names The name(s) of the parent class(es) to exclude.
  * @param indirectParents Whether to include indirect parent classes.
  * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
-     *        If `false`, the comparison will consider case sensitivity.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified parent class(es).
  */
 fun <T : KoParentClassProvider> List<T>.withoutAllParentClassesNamed(

@@ -79,12 +79,13 @@ fun <T : KoClassProvider> List<T>.withClassNamed(
     filter {
         when {
             names.isEmpty() -> it.hasClasses(includeNested, includeLocal)
-            else -> it.hasClassWithName(
-                names,
-                includeNested = includeNested,
-                includeLocal = includeLocal,
-                ignoreCase = ignoreCase
-            )
+            else ->
+                it.hasClassWithName(
+                    names,
+                    includeNested = includeNested,
+                    includeLocal = includeLocal,
+                    ignoreCase = ignoreCase,
+                )
         }
     }
 
@@ -128,12 +129,13 @@ fun <T : KoClassProvider> List<T>.withoutClassNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasClasses(includeNested, includeLocal)
-            else -> it.hasClassWithName(
-                names,
-                includeNested = includeNested,
-                includeLocal = includeLocal,
-                ignoreCase = ignoreCase
-            )
+            else ->
+                it.hasClassWithName(
+                    names,
+                    includeNested = includeNested,
+                    includeLocal = includeLocal,
+                    ignoreCase = ignoreCase,
+                )
         }
     }
 
@@ -177,12 +179,13 @@ fun <T : KoClassProvider> List<T>.withAllClassesNamed(
     filter {
         when {
             names.isEmpty() -> it.hasClasses(includeNested, includeLocal)
-            else -> it.hasClassesWithAllNames(
-                names,
-                includeNested = includeNested,
-                includeLocal = includeLocal,
-                ignoreCase = ignoreCase
-            )
+            else ->
+                it.hasClassesWithAllNames(
+                    names,
+                    includeNested = includeNested,
+                    includeLocal = includeLocal,
+                    ignoreCase = ignoreCase,
+                )
         }
     }
 
@@ -226,12 +229,13 @@ fun <T : KoClassProvider> List<T>.withoutAllClassesNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasClasses(includeNested, includeLocal)
-            else -> it.hasClassesWithAllNames(
-                names,
-                includeNested = includeNested,
-                includeLocal = includeLocal,
-                ignoreCase = ignoreCase
-            )
+            else ->
+                it.hasClassesWithAllNames(
+                    names,
+                    includeNested = includeNested,
+                    includeLocal = includeLocal,
+                    ignoreCase = ignoreCase,
+                )
         }
     }
 

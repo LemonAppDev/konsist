@@ -21,8 +21,7 @@ fun <T : KoChildProvider> List<T>.children(indirectChildren: Boolean = false): L
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations with class or interface child.
  */
-fun <T : KoChildProvider> List<T>.withChildren(indirectChildren: Boolean = false): List<T> =
-    filter { it.hasChildren(indirectChildren) }
+fun <T : KoChildProvider> List<T>.withChildren(indirectChildren: Boolean = false): List<T> = filter { it.hasChildren(indirectChildren) }
 
 /**
  * List containing declarations with no child - class does not extend any class and does not implement any interface.

@@ -146,11 +146,12 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.withAllInterfacesAndObjectsNamed(
     filter {
         when {
             names.isEmpty() -> it.hasInterfacesOrObjects(includeNested)
-            else -> it.hasInterfacesAndObjectsWithAllNames(
-                names,
-                includeNested = includeNested,
-                ignoreCase = ignoreCase
-            )
+            else ->
+                it.hasInterfacesAndObjectsWithAllNames(
+                    names,
+                    includeNested = includeNested,
+                    ignoreCase = ignoreCase,
+                )
         }
     }
 
@@ -190,11 +191,12 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.withoutAllInterfacesAndObjectsNam
     filterNot {
         when {
             names.isEmpty() -> it.hasInterfacesOrObjects(includeNested)
-            else -> it.hasInterfacesAndObjectsWithAllNames(
-                names,
-                includeNested = includeNested,
-                ignoreCase = ignoreCase
-            )
+            else ->
+                it.hasInterfacesAndObjectsWithAllNames(
+                    names,
+                    includeNested = includeNested,
+                    ignoreCase = ignoreCase,
+                )
         }
     }
 

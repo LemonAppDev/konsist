@@ -79,12 +79,13 @@ fun <T : KoClassAndInterfaceProvider> List<T>.withClassOrInterfaceNamed(
     filter {
         when {
             names.isEmpty() -> it.hasClassesOrInterfaces(includeNested, includeLocal)
-            else -> it.hasClassOrInterfaceWithName(
-                names,
-                includeNested = includeNested,
-                includeLocal = includeLocal,
-                ignoreCase = ignoreCase
-            )
+            else ->
+                it.hasClassOrInterfaceWithName(
+                    names,
+                    includeNested = includeNested,
+                    includeLocal = includeLocal,
+                    ignoreCase = ignoreCase,
+                )
         }
     }
 
@@ -128,12 +129,13 @@ fun <T : KoClassAndInterfaceProvider> List<T>.withoutClassOrInterfaceNamed(
     filterNot {
         when {
             names.isEmpty() -> it.hasClassesOrInterfaces(includeNested, includeLocal)
-            else -> it.hasClassOrInterfaceWithName(
-                names,
-                includeNested = includeNested,
-                includeLocal = includeLocal,
-                ignoreCase = ignoreCase
-            )
+            else ->
+                it.hasClassOrInterfaceWithName(
+                    names,
+                    includeNested = includeNested,
+                    includeLocal = includeLocal,
+                    ignoreCase = ignoreCase,
+                )
         }
     }
 
@@ -177,12 +179,13 @@ fun <T : KoClassAndInterfaceProvider> List<T>.withAllClassesAndInterfacesNamed(
     filter {
         when {
             names.isEmpty() -> it.hasClassesOrInterfaces(includeNested, includeLocal)
-            else -> it.hasClassesAndInterfacesWithAllNames(
-                names,
-                includeNested = includeNested,
-                includeLocal = includeLocal,
-                ignoreCase = ignoreCase
-            )
+            else ->
+                it.hasClassesAndInterfacesWithAllNames(
+                    names,
+                    includeNested = includeNested,
+                    includeLocal = includeLocal,
+                    ignoreCase = ignoreCase,
+                )
         }
     }
 
@@ -226,12 +229,13 @@ fun <T : KoClassAndInterfaceProvider> List<T>.withoutAllClassesAndInterfacesName
     filterNot {
         when {
             names.isEmpty() -> it.hasClassesOrInterfaces(includeNested, includeLocal)
-            else -> it.hasClassesAndInterfacesWithAllNames(
-                names,
-                includeNested = includeNested,
-                includeLocal = includeLocal,
-                ignoreCase = ignoreCase
-            )
+            else ->
+                it.hasClassesAndInterfacesWithAllNames(
+                    names,
+                    includeNested = includeNested,
+                    includeLocal = includeLocal,
+                    ignoreCase = ignoreCase,
+                )
         }
     }
 
