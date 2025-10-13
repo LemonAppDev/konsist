@@ -46,6 +46,9 @@ fun <T : KoFunctionProvider> List<T>.withoutFunctions(
  * @param names The names of additional functions to include.
  * @param includeNested Whether to include nested functions.
  * @param includeLocal Whether to include local functions.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified function(s).
  */
 fun <T : KoFunctionProvider> List<T>.withFunctionNamed(
@@ -53,7 +56,8 @@ fun <T : KoFunctionProvider> List<T>.withFunctionNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> = withFunctionNamed(listOf(name, *names), includeNested, includeLocal)
+    ignoreCase: Boolean = false,
+): List<T> = withFunctionNamed(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
 /**
  * List containing declarations that have at least one function with the specified name(s).
@@ -61,17 +65,26 @@ fun <T : KoFunctionProvider> List<T>.withFunctionNamed(
  * @param names The names of additional functions to include.
  * @param includeNested Whether to include nested functions.
  * @param includeLocal Whether to include local functions.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified function(s).
  */
 fun <T : KoFunctionProvider> List<T>.withFunctionNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasFunctions(includeNested, includeLocal)
-            else -> it.hasFunctionWithName(names, includeNested = includeNested, includeLocal = includeLocal)
+            else -> it.hasFunctionWithName(
+                names,
+                includeNested = includeNested,
+                includeLocal = includeLocal,
+                ignoreCase = ignoreCase
+            )
         }
     }
 
@@ -82,6 +95,9 @@ fun <T : KoFunctionProvider> List<T>.withFunctionNamed(
  * @param names The names of additional functions to exclude.
  * @param includeNested Whether to include nested functions.
  * @param includeLocal Whether to include local functions.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified functions.
  */
 fun <T : KoFunctionProvider> List<T>.withoutFunctionNamed(
@@ -89,7 +105,8 @@ fun <T : KoFunctionProvider> List<T>.withoutFunctionNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> = withoutFunctionNamed(listOf(name, *names), includeNested, includeLocal)
+    ignoreCase: Boolean = false,
+): List<T> = withoutFunctionNamed(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
 /**
  * List containing declarations without any of specified functions.
@@ -97,17 +114,26 @@ fun <T : KoFunctionProvider> List<T>.withoutFunctionNamed(
  * @param names The names of additional functions to exclude.
  * @param includeNested Whether to include nested functions.
  * @param includeLocal Whether to include local functions.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified functions.
  */
 fun <T : KoFunctionProvider> List<T>.withoutFunctionNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasFunctions(includeNested, includeLocal)
-            else -> it.hasFunctionWithName(names, includeNested = includeNested, includeLocal = includeLocal)
+            else -> it.hasFunctionWithName(
+                names,
+                includeNested = includeNested,
+                includeLocal = includeLocal,
+                ignoreCase = ignoreCase
+            )
         }
     }
 
@@ -118,6 +144,9 @@ fun <T : KoFunctionProvider> List<T>.withoutFunctionNamed(
  * @param names The name(s) of the function(s) to include.
  * @param includeNested Whether to include nested functions.
  * @param includeLocal Whether to include local functions.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified function(s).
  */
 fun <T : KoFunctionProvider> List<T>.withAllFunctionsNamed(
@@ -125,7 +154,8 @@ fun <T : KoFunctionProvider> List<T>.withAllFunctionsNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> = withAllFunctionsNamed(listOf(name, *names), includeNested, includeLocal)
+    ignoreCase: Boolean = false,
+): List<T> = withAllFunctionsNamed(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
 /**
  * List containing declarations that have all specified functions.
@@ -133,17 +163,26 @@ fun <T : KoFunctionProvider> List<T>.withAllFunctionsNamed(
  * @param names The name(s) of the function(s) to include.
  * @param includeNested Whether to include nested functions.
  * @param includeLocal Whether to include local functions.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified function(s).
  */
 fun <T : KoFunctionProvider> List<T>.withAllFunctionsNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasFunctions(includeNested, includeLocal)
-            else -> it.hasFunctionsWithAllNames(names, includeNested = includeNested, includeLocal = includeLocal)
+            else -> it.hasFunctionsWithAllNames(
+                names,
+                includeNested = includeNested,
+                includeLocal = includeLocal,
+                ignoreCase = ignoreCase
+            )
         }
     }
 
@@ -154,6 +193,9 @@ fun <T : KoFunctionProvider> List<T>.withAllFunctionsNamed(
  * @param names The name(s) of the function(s) to exclude.
  * @param includeNested Whether to include nested functions.
  * @param includeLocal Whether to include local functions.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified function(s).
  */
 fun <T : KoFunctionProvider> List<T>.withoutAllFunctionsNamed(
@@ -161,7 +203,8 @@ fun <T : KoFunctionProvider> List<T>.withoutAllFunctionsNamed(
     vararg names: String,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-): List<T> = withoutAllFunctionsNamed(listOf(name, *names), includeNested, includeLocal)
+    ignoreCase: Boolean = false,
+): List<T> = withoutAllFunctionsNamed(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
 /**
  * List containing declarations without all specified functions.
@@ -169,17 +212,26 @@ fun <T : KoFunctionProvider> List<T>.withoutAllFunctionsNamed(
  * @param names The name(s) of the function(s) to exclude.
  * @param includeNested Whether to include nested functions.
  * @param includeLocal Whether to include local functions.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified function(s).
  */
 fun <T : KoFunctionProvider> List<T>.withoutAllFunctionsNamed(
     names: Collection<String>,
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasFunctions(includeNested, includeLocal)
-            else -> it.hasFunctionsWithAllNames(names, includeNested = includeNested, includeLocal = includeLocal)
+            else -> it.hasFunctionsWithAllNames(
+                names,
+                includeNested = includeNested,
+                includeLocal = includeLocal,
+                ignoreCase = ignoreCase
+            )
         }
     }
 
