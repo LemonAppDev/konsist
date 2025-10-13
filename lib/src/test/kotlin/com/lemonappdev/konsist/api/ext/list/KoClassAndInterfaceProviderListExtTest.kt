@@ -28,9 +28,9 @@ class KoClassAndInterfaceProviderListExtTest {
         val declaration2: KoClassAndInterfaceProvider =
             mockk {
                 every { classesAndInterfaces(includeNested = true, includeLocal = false) } returns
-                        listOf(
-                            interfaceDeclaration2,
-                        )
+                    listOf(
+                        interfaceDeclaration2,
+                    )
             }
         val declaration3: KoClassAndInterfaceProvider =
             mockk {
@@ -755,7 +755,7 @@ class KoClassAndInterfaceProviderListExtTest {
     }
 
     @Test
-    fun `withoutAllClassesAndInterfacesNamed(list of String) with ignore case returns declaration without all of given classes and interfaces`() {
+    fun `withoutAllClassesAndInterfacesNamed(list of String) with ignore case returns declaration without all of given declarations`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"

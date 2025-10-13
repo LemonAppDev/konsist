@@ -747,7 +747,7 @@ class KoInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
-    fun `withoutAllInterfacesAndObjectsNamed(list of String) with ignore case returns declaration without all of given interfaces and objects`() {
+    fun `withoutAllInterfacesAndObjectsNamed(list of String) with ignore case returns declaration without all of given declarations`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
