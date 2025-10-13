@@ -39,29 +39,37 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaces(indirectPare
  * @param name The name of the parent interface to include.
  * @param names The names of additional parent interfaces to include.
  * @param indirectParents Whether to include indirect parent interfaces.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified parent interface(s).
  */
 fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaceNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> = withParentInterfaceNamed(listOf(name, *names), indirectParents)
+    ignoreCase: Boolean = false,
+): List<T> = withParentInterfaceNamed(listOf(name, *names), indirectParents, ignoreCase)
 
 /**
  * List containing declarations that have at least one parent interface with the specified name(s).
  *
  * @param names The names of additional parent interfaces to include.
  * @param indirectParents Whether to include indirect parent interfaces.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified parent interface(s).
  */
 fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaceNamed(
     names: Collection<String>,
     indirectParents: Boolean = false,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasParentInterfaces(indirectParents = indirectParents)
-            else -> it.hasParentInterfaceWithName(names, indirectParents = indirectParents)
+            else -> it.hasParentInterfaceWithName(names, indirectParents = indirectParents, ignoreCase = ignoreCase)
         }
     }
 
@@ -71,29 +79,37 @@ fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaceNamed(
  * @param name The name of the parent interface to exclude.
  * @param names The names of additional parent interfaces to exclude.
  * @param indirectParents Whether to include indirect parent interfaces.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified parent interfaces.
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaceNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> = withoutParentInterfaceNamed(listOf(name, *names), indirectParents)
+    ignoreCase: Boolean = false,
+): List<T> = withoutParentInterfaceNamed(listOf(name, *names), indirectParents, ignoreCase)
 
 /**
  * List containing declarations without any of specified parent interfaces.
  *
  * @param names The names of additional parent interfaces to exclude.
  * @param indirectParents Whether to include indirect parent interfaces.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified parent interfaces.
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaceNamed(
     names: Collection<String>,
     indirectParents: Boolean = false,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasParentInterfaces(indirectParents = indirectParents)
-            else -> it.hasParentInterfaceWithName(names, indirectParents = indirectParents)
+            else -> it.hasParentInterfaceWithName(names, indirectParents = indirectParents, ignoreCase = ignoreCase)
         }
     }
 
@@ -103,29 +119,41 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaceNamed(
  * @param name The name of the parent interface to include.
  * @param names The name(s) of the parent interface(s) to include.
  * @param indirectParents Whether to include indirect parent interfaces.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified parent interface(s).
  */
 fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> = withAllParentInterfacesNamed(listOf(name, *names), indirectParents)
+    ignoreCase: Boolean = false,
+): List<T> = withAllParentInterfacesNamed(listOf(name, *names), indirectParents, ignoreCase)
 
 /**
  * List containing declarations that have all specified parent interfaces.
  *
  * @param names The name(s) of the parent interface(s) to include.
  * @param indirectParents Whether to include indirect parent interfaces.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified parent interface(s).
  */
 fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesNamed(
     names: Collection<String>,
     indirectParents: Boolean = false,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasParentInterfaces(indirectParents = indirectParents)
-            else -> it.hasParentInterfacesWithAllNames(names, indirectParents = indirectParents)
+            else -> it.hasParentInterfacesWithAllNames(
+                names,
+                indirectParents = indirectParents,
+                ignoreCase = ignoreCase
+            )
         }
     }
 
@@ -135,29 +163,41 @@ fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesNamed(
  * @param name The name of the parent interface to exclude.
  * @param names The name(s) of the parent interface(s) to exclude.
  * @param indirectParents Whether to include indirect parent interfaces.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified parent interface(s).
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> = withoutAllParentInterfacesNamed(listOf(name, *names), indirectParents)
+    ignoreCase: Boolean = false,
+): List<T> = withoutAllParentInterfacesNamed(listOf(name, *names), indirectParents, ignoreCase)
 
 /**
  * List containing declarations without all specified parent interfaces.
  *
  * @param names The name(s) of the parent interface(s) to exclude.
  * @param indirectParents Whether to include indirect parent interfaces.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified parent interface(s).
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesNamed(
     names: Collection<String>,
     indirectParents: Boolean = false,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasParentInterfaces(indirectParents = indirectParents)
-            else -> it.hasParentInterfacesWithAllNames(names, indirectParents = indirectParents)
+            else -> it.hasParentInterfacesWithAllNames(
+                names,
+                indirectParents = indirectParents,
+                ignoreCase = ignoreCase
+            )
         }
     }
 
