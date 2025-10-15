@@ -7,7 +7,7 @@ lifecycleRuntimeKtx = "2.9.4"
 activityCompose = "1.11.0"
 composeBom = "2025.10.00"
 konsist = "0.17.3"
-kotest = "6.0.3"
+kotest = "6.0.4"
 appcompat = "1.7.1"
 
 [libraries]
