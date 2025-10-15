@@ -98,12 +98,12 @@ internal class KoTypeDeclarationCore private constructor(
 
     override val psiElement: PsiElement by lazy {
         ktTypeReference ?: ktNameReferenceExpression ?: ktTypeProjection
-            ?: error("KtTypeReference, KtNameReferenceExpression and KtTypeProjection are null")
+        ?: error("KtTypeReference, KtNameReferenceExpression and KtTypeProjection are null")
     }
 
     override val ktElement: KtElement by lazy {
         ktTypeReference ?: ktNameReferenceExpression ?: ktTypeProjection
-            ?: error("KtTypeReference, KtNameReferenceExpression and KtTypeProjection are null")
+        ?: error("KtTypeReference, KtNameReferenceExpression and KtTypeProjection are null")
     }
 
     override val ktUserType: KtUserType? by lazy {
@@ -116,10 +116,16 @@ internal class KoTypeDeclarationCore private constructor(
     }
 
     override val ktFunctionType: KtFunctionType? by lazy {
-        ktTypeReference
-            ?.children
-            // The last item is chosen because when a type is preceded by an annotation or modifier,
-            // the type being searched for is the last item in the list.
+        val children = ktTypeReference?.children
+
+        val effectiveChildren = when (val nullableType = children?.filterIsInstance<KtNullableType>()?.firstOrNull()) {
+            null -> children
+            else -> nullableType.children
+        }
+
+        // The last item is chosen because when a type is preceded by an annotation or modifier,
+        // the type being searched for is the last item in the list.
+        effectiveChildren
             ?.filterIsInstance<KtFunctionType>()
             ?.lastOrNull()
     }
@@ -211,10 +217,12 @@ internal class KoTypeDeclarationCore private constructor(
     override fun asClassDeclaration(): KoClassDeclaration? = super<KoDeclarationCastProviderCore>.asClassDeclaration()
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asObjectDeclaration()"))
-    override fun asObjectDeclaration(): KoObjectDeclaration? = super<KoDeclarationCastProviderCore>.asObjectDeclaration()
+    override fun asObjectDeclaration(): KoObjectDeclaration? =
+        super<KoDeclarationCastProviderCore>.asObjectDeclaration()
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asInterfaceDeclaration()"))
-    override fun asInterfaceDeclaration(): KoInterfaceDeclaration? = super<KoDeclarationCastProviderCore>.asInterfaceDeclaration()
+    override fun asInterfaceDeclaration(): KoInterfaceDeclaration? =
+        super<KoDeclarationCastProviderCore>.asInterfaceDeclaration()
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asClassOrObjectDeclaration()"))
     override fun asClassOrObjectDeclaration(): KoClassAndObjectDeclaration? =
@@ -236,13 +244,16 @@ internal class KoTypeDeclarationCore private constructor(
         super<KoDeclarationCastProviderCore>.asClassOrInterfaceOrObjectDeclaration()
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asTypeAliasDeclaration()"))
-    override fun asTypeAliasDeclaration(): KoTypeAliasDeclaration? = super<KoDeclarationCastProviderCore>.asTypeAliasDeclaration()
+    override fun asTypeAliasDeclaration(): KoTypeAliasDeclaration? =
+        super<KoDeclarationCastProviderCore>.asTypeAliasDeclaration()
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asImportAliasDeclaration()"))
-    override fun asImportAliasDeclaration(): KoImportAliasDeclaration? = super<KoDeclarationCastProviderCore>.asImportAliasDeclaration()
+    override fun asImportAliasDeclaration(): KoImportAliasDeclaration? =
+        super<KoDeclarationCastProviderCore>.asImportAliasDeclaration()
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asKotlinTypeDeclaration()"))
-    override fun asKotlinTypeDeclaration(): KoKotlinTypeDeclaration? = super<KoDeclarationCastProviderCore>.asKotlinTypeDeclaration()
+    override fun asKotlinTypeDeclaration(): KoKotlinTypeDeclaration? =
+        super<KoDeclarationCastProviderCore>.asKotlinTypeDeclaration()
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asKotlinBasicTypeDeclaration()"))
     override fun asKotlinBasicTypeDeclaration(): KoKotlinTypeDeclaration? =
@@ -260,27 +271,32 @@ internal class KoTypeDeclarationCore private constructor(
         super<KoDeclarationCastProviderCore>.asTypeParameterDeclaration()
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asExternalDeclaration()"))
-    override fun asExternalDeclaration(): KoExternalDeclaration? = super<KoDeclarationCastProviderCore>.asExternalDeclaration()
+    override fun asExternalDeclaration(): KoExternalDeclaration? =
+        super<KoDeclarationCastProviderCore>.asExternalDeclaration()
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asFunctionDeclaration()"))
-    override fun asFunctionDeclaration(): KoFunctionDeclaration? = super<KoDeclarationCastProviderCore>.asFunctionDeclaration()
+    override fun asFunctionDeclaration(): KoFunctionDeclaration? =
+        super<KoDeclarationCastProviderCore>.asFunctionDeclaration()
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asPropertyDeclaration()"))
-    override fun asPropertyDeclaration(): KoPropertyDeclaration? = super<KoDeclarationCastProviderCore>.asPropertyDeclaration()
+    override fun asPropertyDeclaration(): KoPropertyDeclaration? =
+        super<KoDeclarationCastProviderCore>.asPropertyDeclaration()
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasClassDeclaration()"))
     override fun hasClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =
         super<KoDeclarationCastProviderCore>.hasClassDeclaration(predicate)
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasClassDeclarationOf()"))
-    override fun hasClassDeclarationOf(kClass: KClass<*>): Boolean = super<KoDeclarationCastProviderCore>.hasClassDeclarationOf(kClass)
+    override fun hasClassDeclarationOf(kClass: KClass<*>): Boolean =
+        super<KoDeclarationCastProviderCore>.hasClassDeclarationOf(kClass)
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasObjectDeclaration()"))
     override fun hasObjectDeclaration(predicate: ((KoObjectDeclaration) -> Boolean)?): Boolean =
         super<KoDeclarationCastProviderCore>.hasObjectDeclaration(predicate)
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasObjectDeclarationOf()"))
-    override fun hasObjectDeclarationOf(kClass: KClass<*>): Boolean = super<KoDeclarationCastProviderCore>.hasObjectDeclarationOf(kClass)
+    override fun hasObjectDeclarationOf(kClass: KClass<*>): Boolean =
+        super<KoDeclarationCastProviderCore>.hasObjectDeclarationOf(kClass)
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasInterfaceDeclaration()"))
     override fun hasInterfaceDeclaration(predicate: ((KoInterfaceDeclaration) -> Boolean)?): Boolean =
