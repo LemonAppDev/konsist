@@ -61,15 +61,17 @@ data class KoTypeArgumentDeclarationCore(
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktTypeProjection }
 
     override val ktFunctionType: KtFunctionType? by lazy {
-        val children = ktTypeProjection
-            .children
-            .firstOrNull()
-            ?.children
+        val children =
+            ktTypeProjection
+                .children
+                .firstOrNull()
+                ?.children
 
-        val effectiveChildren = when (val nullableType = children?.filterIsInstance<KtNullableType>()?.firstOrNull()) {
-            null -> children
-            else -> nullableType.children
-        }
+        val effectiveChildren =
+            when (val nullableType = children?.filterIsInstance<KtNullableType>()?.firstOrNull()) {
+                null -> children
+                else -> nullableType.children
+            }
 
         effectiveChildren
             ?.filterIsInstance<KtFunctionType>()
