@@ -35,28 +35,36 @@ internal interface KoEnumConstantProviderCore :
     override fun hasEnumConstantWithName(
         name: String,
         vararg names: String,
-    ): Boolean = hasEnumConstantWithName(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasEnumConstantWithName(listOf(name, *names), ignoreCase)
 
-    override fun hasEnumConstantWithName(names: Collection<String>): Boolean =
+    override fun hasEnumConstantWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasEnumConstants()
             else ->
                 names.any {
-                    enumConstants.any { enumConstant -> it == enumConstant.name }
+                    enumConstants.any { enumConstant -> enumConstant.hasName(it, ignoreCase) }
                 }
         }
 
     override fun hasEnumConstantsWithAllNames(
         name: String,
         vararg names: String,
-    ): Boolean = hasEnumConstantsWithAllNames(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasEnumConstantsWithAllNames(listOf(name, *names), ignoreCase)
 
-    override fun hasEnumConstantsWithAllNames(names: Collection<String>): Boolean =
+    override fun hasEnumConstantsWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasEnumConstants()
             else ->
                 names.all {
-                    enumConstants.any { enumConstant -> it == enumConstant.name }
+                    enumConstants.any { enumConstant -> enumConstant.hasName(it, ignoreCase) }
                 }
         }
 

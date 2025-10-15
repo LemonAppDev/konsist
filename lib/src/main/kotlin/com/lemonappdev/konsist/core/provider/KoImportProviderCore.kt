@@ -37,28 +37,36 @@ internal interface KoImportProviderCore :
     override fun hasImportWithName(
         name: String,
         vararg names: String,
-    ): Boolean = hasImportWithName(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasImportWithName(listOf(name, *names), ignoreCase)
 
-    override fun hasImportWithName(names: Collection<String>): Boolean =
+    override fun hasImportWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasImports()
             else ->
                 names.any {
-                    imports.any { import -> it == import.name }
+                    imports.any { import -> import.hasName(it, ignoreCase) }
                 }
         }
 
     override fun hasImportsWithAllNames(
         name: String,
         vararg names: String,
-    ): Boolean = hasImportsWithAllNames(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasImportsWithAllNames(listOf(name, *names), ignoreCase)
 
-    override fun hasImportsWithAllNames(names: Collection<String>): Boolean =
+    override fun hasImportsWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasImports()
             else ->
                 names.all {
-                    imports.any { import -> it == import.name }
+                    imports.any { import -> import.hasName(it, ignoreCase) }
                 }
         }
 

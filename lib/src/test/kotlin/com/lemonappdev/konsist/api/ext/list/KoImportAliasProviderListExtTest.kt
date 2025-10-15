@@ -325,6 +325,50 @@ class KoImportAliasProviderListExtTest {
     }
 
     @Test
+    fun `withImportAliasNamed(name) with ignore case returns declaration with given import`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withImportAliasNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withImportAliasNamed(list of String) with ignore case returns declaration with any of given imports`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withImportAliasNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutImportAliasNamed(name) returns declaration without given import`() {
         // given
         val name = "SampleName"
@@ -408,6 +452,50 @@ class KoImportAliasProviderListExtTest {
 
         // when
         val sut = declarations.withoutImportAliasNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutImportAliasNamed(name) with ignore case returns declaration without given import`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutImportAliasNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutImportAliasNamed(list of String) with ignore case returns declaration without any of given imports`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutImportAliasNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -503,6 +591,50 @@ class KoImportAliasProviderListExtTest {
     }
 
     @Test
+    fun `withAllImportAliasesNamed(name) with ignore case returns declaration with given import`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasesWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasesWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllImportAliasesNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllImportAliasesNamed(list of String) with ignore case returns declaration with all given imports`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllImportAliasesNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllImportAliasesNamed(name) returns declaration without given import`() {
         // given
         val name = "SampleName"
@@ -586,6 +718,50 @@ class KoImportAliasProviderListExtTest {
 
         // when
         val sut = declarations.withoutAllImportAliasesNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllImportAliasesNamed(name) with ignore case returns declaration without given import`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasesWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasesWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllImportAliasesNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllImportAliasesNamed(list of String) with ignore case returns declaration without all of given imports`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoImportAliasProvider =
+            mockk {
+                every { hasImportAliasesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllImportAliasesNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

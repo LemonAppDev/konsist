@@ -117,6 +117,68 @@ class KoClassDeclarationForKoEnumConstantProviderTest {
         }
     }
 
+    @Test
+    fun `class-has-no-constant-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-no-constant-ignore-case")
+                .classes()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasEnumConstantWithName("sample_constant") shouldBeEqualTo false
+            hasEnumConstantWithName("sample_constant", ignoreCase = true) shouldBeEqualTo false
+            hasEnumConstantWithName(listOf("sample_constant")) shouldBeEqualTo false
+            hasEnumConstantWithName(listOf("sample_constant"), ignoreCase = true) shouldBeEqualTo false
+            hasEnumConstantWithName(setOf("sample_constant")) shouldBeEqualTo false
+            hasEnumConstantWithName(setOf("sample_constant"), ignoreCase = true) shouldBeEqualTo false
+            hasEnumConstantsWithAllNames("sample_constant_1", "sample_constant_2") shouldBeEqualTo false
+            hasEnumConstantsWithAllNames("sample_constant_1", "sample_constant_2", ignoreCase = true) shouldBeEqualTo false
+            hasEnumConstantsWithAllNames(listOf("sample_constant_1", "sample_constant_2")) shouldBeEqualTo false
+            hasEnumConstantsWithAllNames(listOf("sample_constant_1", "sample_constant_2"), ignoreCase = true) shouldBeEqualTo false
+            hasEnumConstantsWithAllNames(setOf("sample_constant_1", "sample_constant_2")) shouldBeEqualTo false
+            hasEnumConstantsWithAllNames(setOf("sample_constant_1", "sample_constant_2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `class-has-constants-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-constants-ignore-case")
+                .classes()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasEnumConstantWithName("sample_constant_1") shouldBeEqualTo false
+            hasEnumConstantWithName("sample_constant_1", ignoreCase = true) shouldBeEqualTo true
+            hasEnumConstantWithName("other_constant") shouldBeEqualTo false
+            hasEnumConstantWithName("other_constant", ignoreCase = true) shouldBeEqualTo false
+            hasEnumConstantWithName("sample_constant_1", "otherName") shouldBeEqualTo false
+            hasEnumConstantWithName("sample_constant_1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasEnumConstantWithName(listOf("sample_constant_1")) shouldBeEqualTo false
+            hasEnumConstantWithName(listOf("sample_constant_1"), ignoreCase = true) shouldBeEqualTo true
+            hasEnumConstantWithName(listOf("other_constant")) shouldBeEqualTo false
+            hasEnumConstantWithName(listOf("other_constant"), ignoreCase = true) shouldBeEqualTo false
+            hasEnumConstantWithName(listOf("sample_constant_1", "otherName")) shouldBeEqualTo false
+            hasEnumConstantWithName(listOf("sample_constant_1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasEnumConstantsWithAllNames("sample_constant_1") shouldBeEqualTo false
+            hasEnumConstantsWithAllNames("sample_constant_1", ignoreCase = true) shouldBeEqualTo true
+            hasEnumConstantsWithAllNames("sample_constant_1", "sample_constant_2") shouldBeEqualTo false
+            hasEnumConstantsWithAllNames("sample_constant_1", "sample_constant_2", ignoreCase = true) shouldBeEqualTo true
+            hasEnumConstantsWithAllNames("sample_constant_1", "other_constant") shouldBeEqualTo false
+            hasEnumConstantsWithAllNames("sample_constant_1", "other_constant", ignoreCase = true) shouldBeEqualTo false
+            hasEnumConstantsWithAllNames(listOf("sample_constant_1")) shouldBeEqualTo false
+            hasEnumConstantsWithAllNames(listOf("sample_constant_1"), ignoreCase = true) shouldBeEqualTo true
+            hasEnumConstantsWithAllNames(listOf("sample_constant_1", "sample_constant_2")) shouldBeEqualTo false
+            hasEnumConstantsWithAllNames(listOf("sample_constant_1", "sample_constant_2"), ignoreCase = true) shouldBeEqualTo true
+            hasEnumConstantsWithAllNames(listOf("sample_constant_1", "other_constant")) shouldBeEqualTo false
+            hasEnumConstantsWithAllNames(listOf("sample_constant_1", "other_constant"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koclass/snippet/forkoenumconstantprovider/", fileName)
 }

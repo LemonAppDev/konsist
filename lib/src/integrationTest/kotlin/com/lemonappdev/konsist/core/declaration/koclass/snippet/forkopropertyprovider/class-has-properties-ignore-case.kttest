@@ -1,0 +1,5 @@
+open class SampleTopLevelClass {
+    val sampleProperty1 = ""
+
+    var sampleProperty2 = 0
+}

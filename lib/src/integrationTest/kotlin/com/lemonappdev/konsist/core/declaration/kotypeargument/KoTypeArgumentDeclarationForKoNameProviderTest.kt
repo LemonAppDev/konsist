@@ -20,6 +20,10 @@ class KoTypeArgumentDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             it?.name shouldBeEqualTo "String"
+            it?.hasName("String") shouldBeEqualTo true
+            it?.hasName("Int") shouldBeEqualTo false
+            it?.hasName("string", ignoreCase = false) shouldBeEqualTo false
+            it?.hasName("string", ignoreCase = true) shouldBeEqualTo true
             it?.hasNameStartingWith("Str") shouldBeEqualTo true
             it?.hasNameStartingWith("other") shouldBeEqualTo false
             it?.hasNameEndingWith("ing") shouldBeEqualTo true
@@ -45,6 +49,10 @@ class KoTypeArgumentDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             it?.name shouldBeEqualTo "Set<String>"
+            it?.hasName("Set<String>") shouldBeEqualTo true
+            it?.hasName("Set<Int>") shouldBeEqualTo false
+            it?.hasName("set<string>", ignoreCase = false) shouldBeEqualTo false
+            it?.hasName("set<string>", ignoreCase = true) shouldBeEqualTo true
             it?.hasNameStartingWith("Set<") shouldBeEqualTo true
             it?.hasNameStartingWith("other") shouldBeEqualTo false
             it?.hasNameEndingWith("ing>") shouldBeEqualTo true
@@ -70,6 +78,10 @@ class KoTypeArgumentDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             it?.name shouldBeEqualTo "Map<List<String>, Int>"
+            it?.hasName("Map<List<String>, Int>") shouldBeEqualTo true
+            it?.hasName("Map<List<Int>, Int>") shouldBeEqualTo false
+            it?.hasName("map<list<string>, int>", ignoreCase = false) shouldBeEqualTo false
+            it?.hasName("map<list<string>, int>", ignoreCase = true) shouldBeEqualTo true
             it?.hasNameStartingWith("Map<") shouldBeEqualTo true
             it?.hasNameStartingWith("other") shouldBeEqualTo false
             it?.hasNameEndingWith("Int>") shouldBeEqualTo true
@@ -95,6 +107,8 @@ class KoTypeArgumentDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             it?.name shouldBeEqualTo "*"
+            it?.hasName("*") shouldBeEqualTo true
+            it?.hasName("Int") shouldBeEqualTo false
             it?.hasNameStartingWith("*") shouldBeEqualTo true
             it?.hasNameStartingWith("other") shouldBeEqualTo false
             it?.hasNameEndingWith("*") shouldBeEqualTo true
@@ -120,6 +134,10 @@ class KoTypeArgumentDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             it?.name shouldBeEqualTo "String"
+            it?.hasName("String") shouldBeEqualTo true
+            it?.hasName("Int") shouldBeEqualTo false
+            it?.hasName("string", ignoreCase = false) shouldBeEqualTo false
+            it?.hasName("string", ignoreCase = true) shouldBeEqualTo true
             it?.hasNameStartingWith("Str") shouldBeEqualTo true
             it?.hasNameStartingWith("other") shouldBeEqualTo false
             it?.hasNameEndingWith("ing") shouldBeEqualTo true
@@ -145,6 +163,10 @@ class KoTypeArgumentDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             it?.name shouldBeEqualTo "String"
+            it?.hasName("String") shouldBeEqualTo true
+            it?.hasName("Int") shouldBeEqualTo false
+            it?.hasName("string", ignoreCase = false) shouldBeEqualTo false
+            it?.hasName("string", ignoreCase = true) shouldBeEqualTo true
             it?.hasNameStartingWith("Str") shouldBeEqualTo true
             it?.hasNameStartingWith("other") shouldBeEqualTo false
             it?.hasNameEndingWith("ing") shouldBeEqualTo true

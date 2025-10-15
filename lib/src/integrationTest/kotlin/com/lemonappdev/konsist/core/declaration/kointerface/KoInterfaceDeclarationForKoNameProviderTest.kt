@@ -17,12 +17,22 @@ class KoInterfaceDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             name shouldBeEqualTo "SampleInterface"
+            hasName("SampleInterface") shouldBeEqualTo true
+            hasName("OtherInterface") shouldBeEqualTo false
+            hasName("sampleinterface", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleinterface", ignoreCase = true) shouldBeEqualTo true
             hasNameStartingWith("Sample") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
+            hasNameStartingWith("sample", ignoreCase = false) shouldBeEqualTo false
+            hasNameStartingWith("sample", ignoreCase = true) shouldBeEqualTo true
             hasNameEndingWith("face") shouldBeEqualTo true
             hasNameEndingWith("other") shouldBeEqualTo false
+            hasNameEndingWith("FACE", ignoreCase = false) shouldBeEqualTo false
+            hasNameEndingWith("FACE", ignoreCase = true) shouldBeEqualTo true
             hasNameContaining("leInt") shouldBeEqualTo true
-            hasNameContaining("leint") shouldBeEqualTo false
+            hasNameContaining("other") shouldBeEqualTo false
+            hasNameContaining("leint", ignoreCase = false) shouldBeEqualTo false
+            hasNameContaining("leint", ignoreCase = true) shouldBeEqualTo true
             hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }

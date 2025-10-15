@@ -83,6 +83,70 @@ class KoEnumConstantDeclarationForKoVariableProviderTest {
         }
     }
 
+    @Test
+    fun `enum-constant-contains-no-variable-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("enum-constant-contains-no-variable-ignore-case")
+                .classes()
+                .enumConstants
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasVariableWithName("samplevariable") shouldBeEqualTo false
+            hasVariableWithName("samplevariable", ignoreCase = true) shouldBeEqualTo false
+            hasVariableWithName(listOf("samplevariable")) shouldBeEqualTo false
+            hasVariableWithName(listOf("samplevariable"), ignoreCase = true) shouldBeEqualTo false
+            hasVariableWithName(setOf("samplevariable")) shouldBeEqualTo false
+            hasVariableWithName(setOf("samplevariable"), ignoreCase = true) shouldBeEqualTo false
+            hasVariablesWithAllNames("samplevariable1", "samplevariable2") shouldBeEqualTo false
+            hasVariablesWithAllNames("samplevariable1", "samplevariable2", ignoreCase = true) shouldBeEqualTo false
+            hasVariablesWithAllNames(listOf("samplevariable1", "samplevariable2")) shouldBeEqualTo false
+            hasVariablesWithAllNames(listOf("samplevariable1", "samplevariable2"), ignoreCase = true) shouldBeEqualTo false
+            hasVariablesWithAllNames(setOf("samplevariable1", "samplevariable2")) shouldBeEqualTo false
+            hasVariablesWithAllNames(setOf("samplevariable1", "samplevariable2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `enum-constant-contains-variable-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("enum-constant-contains-variable-ignore-case")
+                .classes()
+                .enumConstants
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasVariableWithName("samplevariable1") shouldBeEqualTo false
+            hasVariableWithName("samplevariable1", ignoreCase = true) shouldBeEqualTo true
+            hasVariableWithName("othervariable") shouldBeEqualTo false
+            hasVariableWithName("othervariable", ignoreCase = true) shouldBeEqualTo false
+            hasVariableWithName("samplevariable1", "otherName") shouldBeEqualTo false
+            hasVariableWithName("samplevariable1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasVariableWithName(listOf("samplevariable1")) shouldBeEqualTo false
+            hasVariableWithName(listOf("samplevariable1"), ignoreCase = true) shouldBeEqualTo true
+            hasVariableWithName(listOf("othervariable")) shouldBeEqualTo false
+            hasVariableWithName(listOf("othervariable"), ignoreCase = true) shouldBeEqualTo false
+            hasVariableWithName(listOf("samplevariable1", "otherName")) shouldBeEqualTo false
+            hasVariableWithName(listOf("samplevariable1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasVariablesWithAllNames("samplevariable1") shouldBeEqualTo false
+            hasVariablesWithAllNames("samplevariable1", ignoreCase = true) shouldBeEqualTo true
+            hasVariablesWithAllNames("samplevariable1", "samplevariable2") shouldBeEqualTo false
+            hasVariablesWithAllNames("samplevariable1", "samplevariable2", ignoreCase = true) shouldBeEqualTo true
+            hasVariablesWithAllNames("samplevariable1", "othervariable") shouldBeEqualTo false
+            hasVariablesWithAllNames("samplevariable1", "othervariable", ignoreCase = true) shouldBeEqualTo false
+            hasVariablesWithAllNames(listOf("samplevariable1")) shouldBeEqualTo false
+            hasVariablesWithAllNames(listOf("samplevariable1"), ignoreCase = true) shouldBeEqualTo true
+            hasVariablesWithAllNames(listOf("samplevariable1", "samplevariable2")) shouldBeEqualTo false
+            hasVariablesWithAllNames(listOf("samplevariable1", "samplevariable2"), ignoreCase = true) shouldBeEqualTo true
+            hasVariablesWithAllNames(listOf("samplevariable1", "othervariable")) shouldBeEqualTo false
+            hasVariablesWithAllNames(listOf("samplevariable1", "othervariable"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/koenumconstant/snippet/forkovariableprovider/", fileName)
 }

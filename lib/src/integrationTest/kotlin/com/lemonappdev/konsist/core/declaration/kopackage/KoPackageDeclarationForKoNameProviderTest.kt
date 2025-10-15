@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kopackage
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -26,7 +27,11 @@ class KoPackageDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "com.samplepackage"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "com.samplepackage"
+            hasName("com.samplepackage".uppercase()) shouldBeEqualTo false
+            hasName("com.samplepackage".uppercase(), ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     private fun getSnippetFile(fileName: String) =

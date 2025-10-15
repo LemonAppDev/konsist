@@ -158,5 +158,67 @@ class KoObjectDeclarationForKoFunctionProviderTest {
         }
     }
 
+    @Test
+    fun `object-has-no-functions-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("object-has-no-functions-ignore-case")
+                .objects()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasFunctionWithName("samplefunction") shouldBeEqualTo false
+            hasFunctionWithName("samplefunction", ignoreCase = true) shouldBeEqualTo false
+            hasFunctionWithName(listOf("samplefunction")) shouldBeEqualTo false
+            hasFunctionWithName(listOf("samplefunction"), ignoreCase = true) shouldBeEqualTo false
+            hasFunctionWithName(setOf("samplefunction")) shouldBeEqualTo false
+            hasFunctionWithName(setOf("samplefunction"), ignoreCase = true) shouldBeEqualTo false
+            hasFunctionsWithAllNames("samplefunction1", "samplefunction2") shouldBeEqualTo false
+            hasFunctionsWithAllNames("samplefunction1", "samplefunction2", ignoreCase = true) shouldBeEqualTo false
+            hasFunctionsWithAllNames(listOf("samplefunction1", "samplefunction2")) shouldBeEqualTo false
+            hasFunctionsWithAllNames(listOf("samplefunction1", "samplefunction2"), ignoreCase = true) shouldBeEqualTo false
+            hasFunctionsWithAllNames(setOf("samplefunction1", "samplefunction2")) shouldBeEqualTo false
+            hasFunctionsWithAllNames(setOf("samplefunction1", "samplefunction2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `object-has-functions-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("object-has-functions-ignore-case")
+                .objects()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasFunctionWithName("samplefunction1") shouldBeEqualTo false
+            hasFunctionWithName("samplefunction1", ignoreCase = true) shouldBeEqualTo true
+            hasFunctionWithName("otherfunction") shouldBeEqualTo false
+            hasFunctionWithName("otherfunction", ignoreCase = true) shouldBeEqualTo false
+            hasFunctionWithName("samplefunction1", "otherName") shouldBeEqualTo false
+            hasFunctionWithName("samplefunction1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasFunctionWithName(listOf("samplefunction1")) shouldBeEqualTo false
+            hasFunctionWithName(listOf("samplefunction1"), ignoreCase = true) shouldBeEqualTo true
+            hasFunctionWithName(listOf("otherfunction")) shouldBeEqualTo false
+            hasFunctionWithName(listOf("otherfunction"), ignoreCase = true) shouldBeEqualTo false
+            hasFunctionWithName(listOf("samplefunction1", "otherName")) shouldBeEqualTo false
+            hasFunctionWithName(listOf("samplefunction1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasFunctionsWithAllNames("samplefunction1") shouldBeEqualTo false
+            hasFunctionsWithAllNames("samplefunction1", ignoreCase = true) shouldBeEqualTo true
+            hasFunctionsWithAllNames("samplefunction1", "samplefunction2") shouldBeEqualTo false
+            hasFunctionsWithAllNames("samplefunction1", "samplefunction2", ignoreCase = true) shouldBeEqualTo true
+            hasFunctionsWithAllNames("samplefunction1", "otherfunction") shouldBeEqualTo false
+            hasFunctionsWithAllNames("samplefunction1", "otherfunction", ignoreCase = true) shouldBeEqualTo false
+            hasFunctionsWithAllNames(listOf("samplefunction1")) shouldBeEqualTo false
+            hasFunctionsWithAllNames(listOf("samplefunction1"), ignoreCase = true) shouldBeEqualTo true
+            hasFunctionsWithAllNames(listOf("samplefunction1", "samplefunction2")) shouldBeEqualTo false
+            hasFunctionsWithAllNames(listOf("samplefunction1", "samplefunction2"), ignoreCase = true) shouldBeEqualTo true
+            hasFunctionsWithAllNames(listOf("samplefunction1", "otherfunction")) shouldBeEqualTo false
+            hasFunctionsWithAllNames(listOf("samplefunction1", "otherfunction"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/forkofunctionprovider/", fileName)
 }

@@ -158,5 +158,67 @@ class KoObjectDeclarationForKoClassProviderTest {
         }
     }
 
+    @Test
+    fun `object-has-no-classes-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("object-has-no-classes-ignore-case")
+                .objects()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasClassWithName("sampleclass") shouldBeEqualTo false
+            hasClassWithName("sampleclass", ignoreCase = true) shouldBeEqualTo false
+            hasClassWithName(listOf("sampleclass")) shouldBeEqualTo false
+            hasClassWithName(listOf("sampleclass"), ignoreCase = true) shouldBeEqualTo false
+            hasClassWithName(setOf("sampleclass")) shouldBeEqualTo false
+            hasClassWithName(setOf("sampleclass"), ignoreCase = true) shouldBeEqualTo false
+            hasClassesWithAllNames("sampleclass1", "sampleclass2") shouldBeEqualTo false
+            hasClassesWithAllNames("sampleclass1", "sampleclass2", ignoreCase = true) shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("sampleclass1", "sampleclass2")) shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("sampleclass1", "sampleclass2"), ignoreCase = true) shouldBeEqualTo false
+            hasClassesWithAllNames(setOf("sampleclass1", "sampleclass2")) shouldBeEqualTo false
+            hasClassesWithAllNames(setOf("sampleclass1", "sampleclass2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `object-has-classes-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("object-has-classes-ignore-case")
+                .objects()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasClassWithName("sampleclass1") shouldBeEqualTo false
+            hasClassWithName("sampleclass1", ignoreCase = true) shouldBeEqualTo true
+            hasClassWithName("otherclass") shouldBeEqualTo false
+            hasClassWithName("otherclass", ignoreCase = true) shouldBeEqualTo false
+            hasClassWithName("sampleclass1", "otherName") shouldBeEqualTo false
+            hasClassWithName("sampleclass1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasClassWithName(listOf("sampleclass1")) shouldBeEqualTo false
+            hasClassWithName(listOf("sampleclass1"), ignoreCase = true) shouldBeEqualTo true
+            hasClassWithName(listOf("otherclass")) shouldBeEqualTo false
+            hasClassWithName(listOf("otherclass"), ignoreCase = true) shouldBeEqualTo false
+            hasClassWithName(listOf("sampleclass1", "otherName")) shouldBeEqualTo false
+            hasClassWithName(listOf("sampleclass1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasClassesWithAllNames("sampleclass1") shouldBeEqualTo false
+            hasClassesWithAllNames("sampleclass1", ignoreCase = true) shouldBeEqualTo true
+            hasClassesWithAllNames("sampleclass1", "sampleclass2") shouldBeEqualTo false
+            hasClassesWithAllNames("sampleclass1", "sampleclass2", ignoreCase = true) shouldBeEqualTo true
+            hasClassesWithAllNames("sampleclass1", "otherclass") shouldBeEqualTo false
+            hasClassesWithAllNames("sampleclass1", "otherclass", ignoreCase = true) shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("sampleclass1")) shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("sampleclass1"), ignoreCase = true) shouldBeEqualTo true
+            hasClassesWithAllNames(listOf("sampleclass1", "sampleclass2")) shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("sampleclass1", "sampleclass2"), ignoreCase = true) shouldBeEqualTo true
+            hasClassesWithAllNames(listOf("sampleclass1", "otherclass")) shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("sampleclass1", "otherclass"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/forkoclassprovider/", fileName)
 }

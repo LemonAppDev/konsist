@@ -17,12 +17,22 @@ class KoPropertyDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             name shouldBeEqualTo "sampleProperty"
+            hasName("sampleProperty") shouldBeEqualTo true
+            hasName("otherProperty") shouldBeEqualTo false
+            hasName("SAMPLEPROPERTY", ignoreCase = false) shouldBeEqualTo false
+            hasName("SAMPLEPROPERTY", ignoreCase = true) shouldBeEqualTo true
             hasNameStartingWith("sample") shouldBeEqualTo true
-            hasNameStartingWith("other") shouldBeEqualTo false
+            hasNameStartingWith("Other") shouldBeEqualTo false
+            hasNameStartingWith("SAMPLE", ignoreCase = false) shouldBeEqualTo false
+            hasNameStartingWith("SAMPLE", ignoreCase = true) shouldBeEqualTo true
             hasNameEndingWith("erty") shouldBeEqualTo true
             hasNameEndingWith("other") shouldBeEqualTo false
+            hasNameEndingWith("ERTY", ignoreCase = false) shouldBeEqualTo false
+            hasNameEndingWith("ERTY", ignoreCase = true) shouldBeEqualTo true
             hasNameContaining("lePro") shouldBeEqualTo true
-            hasNameContaining("lepro") shouldBeEqualTo false
+            hasNameContaining("other") shouldBeEqualTo false
+            hasNameContaining("lepro", ignoreCase = false) shouldBeEqualTo false
+            hasNameContaining("lepro", ignoreCase = true) shouldBeEqualTo true
             hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }

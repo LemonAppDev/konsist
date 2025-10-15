@@ -277,6 +277,50 @@ class KoTypeArgumentProviderListExtTest {
     }
 
     @Test
+    fun `withTypeArgumentNamed(name) with ignore case returns declaration with given type argument`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArgumentWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArgumentWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withTypeArgumentNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withTypeArgumentNamed(list of String) with ignore case returns declaration with any of given type arguments`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArgumentWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArgumentWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withTypeArgumentNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutTypeArgumentNamed(name) returns declaration without given type argument`() {
         // given
         val name = "SampleName"
@@ -360,6 +404,50 @@ class KoTypeArgumentProviderListExtTest {
 
         // when
         val sut = declarations.withoutTypeArgumentNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutTypeArgumentNamed(name) with ignore case returns declaration without given type argument`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArgumentWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArgumentWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutTypeArgumentNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutTypeArgumentNamed(list of String) with ignore case returns declaration without any of given type arguments`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArgumentWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArgumentWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutTypeArgumentNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -455,6 +543,50 @@ class KoTypeArgumentProviderListExtTest {
     }
 
     @Test
+    fun `withAllTypeArgumentsNamed(name) with ignore case returns declaration with given type argument`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArgumentsWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArgumentsWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllTypeArgumentsNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllTypeArgumentsNamed(list of String) with ignore case returns declaration with all given type arguments`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArgumentsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArgumentsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllTypeArgumentsNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllTypeArgumentsNamed(name) returns declaration without given type argument`() {
         // given
         val name = "SampleName"
@@ -538,6 +670,50 @@ class KoTypeArgumentProviderListExtTest {
 
         // when
         val sut = declarations.withoutAllTypeArgumentsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllTypeArgumentsNamed(name) with ignore case returns declaration without given type argument`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArgumentsWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArgumentsWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllTypeArgumentsNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllTypeArgumentsNamed(list of String) with ignore case returns declaration without all of given type arguments`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArgumentsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArgumentsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllTypeArgumentsNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

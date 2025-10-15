@@ -55,23 +55,31 @@ internal interface KoTypeArgumentProviderCore :
     override fun hasTypeArgumentWithName(
         name: String,
         vararg names: String,
-    ): Boolean = hasTypeArgumentWithName(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasTypeArgumentWithName(listOf(name, *names), ignoreCase)
 
-    override fun hasTypeArgumentWithName(names: Collection<String>): Boolean =
+    override fun hasTypeArgumentWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> true
-            else -> names.any { typeArguments?.any { argument -> it == argument.name } == true }
+            else -> names.any { typeArguments?.any { argument -> argument.hasName(it, ignoreCase) } == true }
         }
 
     override fun hasTypeArgumentsWithAllNames(
         name: String,
         vararg names: String,
-    ): Boolean = hasTypeArgumentsWithAllNames(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasTypeArgumentsWithAllNames(listOf(name, *names), ignoreCase)
 
-    override fun hasTypeArgumentsWithAllNames(names: Collection<String>): Boolean =
+    override fun hasTypeArgumentsWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> true
-            else -> names.all { typeArguments?.any { argument -> it == argument.name } == true }
+            else -> names.all { typeArguments?.any { argument -> argument.hasName(it, ignoreCase) } == true }
         }
 
     override fun hasTypeArgumentOf(

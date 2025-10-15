@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.koannotation
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.ext.list.annotations
+import com.lemonappdev.konsist.api.ext.list.enumConstants
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -171,6 +172,108 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
                 )
             numArguments shouldBeEqualTo 1
             hasArguments() shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `annotation-without-arguments-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("annotation-without-arguments-ignore-case")
+                .functions()
+                .annotations
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasArgumentWithName("sampleparameter") shouldBeEqualTo false
+            hasArgumentWithName("sampleparameter", ignoreCase = true) shouldBeEqualTo false
+            hasArgumentWithName(listOf("sampleparameter")) shouldBeEqualTo false
+            hasArgumentWithName(listOf("sampleparameter"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentWithName(setOf("sampleparameter")) shouldBeEqualTo false
+            hasArgumentWithName(setOf("sampleparameter"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames("sampleparameter1", "sampleparameter2") shouldBeEqualTo false
+            hasArgumentsWithAllNames("sampleparameter1", "sampleparameter2", ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("sampleparameter1", "sampleparameter2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("sampleparameter1", "sampleparameter2"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("sampleparameter1", "sampleparameter2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("sampleparameter1", "sampleparameter2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `annotation-with-constructor-invocation-without-arguments-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("annotation-with-constructor-invocation-without-arguments-ignore-case")
+                .functions()
+                .annotations
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasArgumentWithName("sampleparameter") shouldBeEqualTo false
+            hasArgumentWithName("sampleparameter", ignoreCase = true) shouldBeEqualTo false
+            hasArgumentWithName(listOf("sampleparameter")) shouldBeEqualTo false
+            hasArgumentWithName(listOf("sampleparameter"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentWithName(setOf("sampleparameter")) shouldBeEqualTo false
+            hasArgumentWithName(setOf("sampleparameter"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames("sampleparameter1", "sampleparameter2") shouldBeEqualTo false
+            hasArgumentsWithAllNames("sampleparameter1", "sampleparameter2", ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("sampleparameter1", "sampleparameter2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("sampleparameter1", "sampleparameter2"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("sampleparameter1", "sampleparameter2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("sampleparameter1", "sampleparameter2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `annotation-with-arguments-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("annotation-with-arguments-ignore-case")
+                .functions()
+                .annotations
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasArgumentWithName("sampleparameter1") shouldBeEqualTo false
+            hasArgumentWithName("sampleparameter1", ignoreCase = true) shouldBeEqualTo true
+            hasArgumentWithName("otherparameter") shouldBeEqualTo false
+            hasArgumentWithName("otherparameter", ignoreCase = true) shouldBeEqualTo false
+            hasArgumentWithName("sampleparameter1", "otherName") shouldBeEqualTo false
+            hasArgumentWithName("sampleparameter1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasArgumentWithName(listOf("sampleparameter1")) shouldBeEqualTo false
+            hasArgumentWithName(listOf("sampleparameter1"), ignoreCase = true) shouldBeEqualTo true
+            hasArgumentWithName(listOf("otherparameter")) shouldBeEqualTo false
+            hasArgumentWithName(listOf("otherparameter"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentWithName(listOf("sampleparameter1", "otherName")) shouldBeEqualTo false
+            hasArgumentWithName(listOf("sampleparameter1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasArgumentWithName(setOf("sampleparameter1")) shouldBeEqualTo false
+            hasArgumentWithName(setOf("sampleparameter1"), ignoreCase = true) shouldBeEqualTo true
+            hasArgumentWithName(setOf("otherparameter")) shouldBeEqualTo false
+            hasArgumentWithName(setOf("otherparameter"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentWithName(setOf("sampleparameter1", "otherName")) shouldBeEqualTo false
+            hasArgumentWithName(setOf("sampleparameter1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasArgumentsWithAllNames("sampleparameter1") shouldBeEqualTo false
+            hasArgumentsWithAllNames("sampleparameter1", ignoreCase = true) shouldBeEqualTo true
+            hasArgumentsWithAllNames("sampleparameter1", "sampleparameter2") shouldBeEqualTo false
+            hasArgumentsWithAllNames("sampleparameter1", "sampleparameter2", ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames("sampleparameter1", "otherparameter") shouldBeEqualTo false
+            hasArgumentsWithAllNames("sampleparameter1", "otherparameter", ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("sampleparameter1")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("sampleparameter1"), ignoreCase = true) shouldBeEqualTo true
+            hasArgumentsWithAllNames(listOf("sampleparameter1", "sampleparameter2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("sampleparameter1", "sampleparameter2"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("sampleparameter1", "otherparameter")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("sampleparameter1", "otherparameter"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("sampleparameter1")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("sampleparameter1"), ignoreCase = true) shouldBeEqualTo true
+            hasArgumentsWithAllNames(setOf("sampleparameter1", "sampleparameter2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("sampleparameter1", "sampleparameter2"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("sampleparameter1", "otherparameter")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("sampleparameter1", "otherparameter"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 

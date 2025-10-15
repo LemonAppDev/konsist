@@ -1,0 +1,5 @@
+object SampleObject {
+    interface SampleInterface1
+
+    interface SampleInterface2
+}

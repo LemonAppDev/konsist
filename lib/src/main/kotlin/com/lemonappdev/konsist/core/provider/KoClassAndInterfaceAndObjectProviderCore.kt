@@ -36,18 +36,22 @@ internal interface KoClassAndInterfaceAndObjectProviderCore :
         vararg names: String,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Boolean = hasClassOrInterfaceOrObjectWithName(listOf(name, *names), includeNested, includeLocal)
+        ignoreCase: Boolean,
+    ): Boolean = hasClassOrInterfaceOrObjectWithName(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
     override fun hasClassOrInterfaceOrObjectWithName(
         names: Collection<String>,
         includeNested: Boolean,
         includeLocal: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
             names.isEmpty() -> hasClassesOrInterfacesOrObjects(includeNested, includeLocal)
             else ->
                 names.any {
-                    classesAndInterfacesAndObjects(includeNested, includeLocal).any { koClass -> it == koClass.name }
+                    classesAndInterfacesAndObjects(includeNested, includeLocal).any { koClass ->
+                        koClass.hasName(it, ignoreCase)
+                    }
                 }
         }
 
@@ -56,18 +60,22 @@ internal interface KoClassAndInterfaceAndObjectProviderCore :
         vararg names: String,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Boolean = hasClassesAndInterfacesAndObjectsWithAllNames(listOf(name, *names), includeNested, includeLocal)
+        ignoreCase: Boolean,
+    ): Boolean = hasClassesAndInterfacesAndObjectsWithAllNames(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
     override fun hasClassesAndInterfacesAndObjectsWithAllNames(
         names: Collection<String>,
         includeNested: Boolean,
         includeLocal: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
             names.isEmpty() -> hasClassesOrInterfacesOrObjects(includeNested, includeLocal)
             else ->
                 names.all {
-                    classesAndInterfacesAndObjects(includeNested, includeLocal).any { koClass -> it == koClass.name }
+                    classesAndInterfacesAndObjects(includeNested, includeLocal).any { koClass ->
+                        koClass.hasName(it, ignoreCase)
+                    }
                 }
         }
 

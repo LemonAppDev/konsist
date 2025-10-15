@@ -1,0 +1,8 @@
+val sampleProperty: String
+    get() {
+        val sampleVariable1 = ""
+
+        var sampleVariable2 = 0
+
+        return ""
+    }

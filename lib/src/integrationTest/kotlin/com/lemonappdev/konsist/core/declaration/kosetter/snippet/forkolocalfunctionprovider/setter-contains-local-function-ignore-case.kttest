@@ -1,0 +1,10 @@
+var sampleProperty: String = "text"
+    set(value) {
+        fun sampleLocalFunction1() {
+        }
+
+        fun sampleLocalFunction2() {
+        }
+
+        if (true) field = value
+    }

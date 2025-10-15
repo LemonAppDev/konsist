@@ -36,40 +36,60 @@ interface KoImportProvider : KoBaseProvider {
      *
      * @param name the name of the import to check.
      * @param names the names of the imports to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasImportWithName(
         name: String,
         vararg names: String,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
      * Determines whether the declaration has at least one import whose name matches any of the specified names.
      *
      * @param names the names of the imports to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasImportWithName(names: Collection<String>): Boolean
+    fun hasImportWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has imports with all the specified names.
      *
      * @param name The name of the import to check.
      * @param names The names of the imports to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasImportsWithAllNames(
         name: String,
         vararg names: String,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
      * Determines whether the declaration has imports with all the specified names.
      *
      * @param names The names of the imports to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasImportsWithAllNames(names: Collection<String>): Boolean
+    fun hasImportsWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whatever the declaration has any import with the specified predicate.

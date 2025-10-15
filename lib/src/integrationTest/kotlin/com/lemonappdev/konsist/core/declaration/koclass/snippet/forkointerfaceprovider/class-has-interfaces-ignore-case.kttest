@@ -1,0 +1,5 @@
+class SampleTopLevelClass {
+    private interface SampleInterface1
+
+    private interface SampleInterface2
+}

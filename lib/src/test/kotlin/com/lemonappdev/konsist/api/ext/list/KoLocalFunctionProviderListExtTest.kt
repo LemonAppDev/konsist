@@ -325,6 +325,50 @@ class KoLocalFunctionProviderListExtTest {
     }
 
     @Test
+    fun `withLocalFunctionNamed(name) with ignore case returns declaration with given function`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withLocalFunctionNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withLocalFunctionNamed(list of String) with ignore case returns declaration with any of given functions`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withLocalFunctionNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutLocalFunctionNamed(name) returns declaration without given function`() {
         // given
         val name = "SampleName"
@@ -408,6 +452,50 @@ class KoLocalFunctionProviderListExtTest {
 
         // when
         val sut = declarations.withoutLocalFunctionNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutLocalFunctionNamed(name) with ignore case returns declaration without given function`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutLocalFunctionNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutLocalFunctionNamed(list of String) with ignore case returns declaration without any of given functions`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutLocalFunctionNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -503,6 +591,50 @@ class KoLocalFunctionProviderListExtTest {
     }
 
     @Test
+    fun `withAllLocalFunctionsNamed(name) with ignore case returns declaration with given function`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionsWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionsWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllLocalFunctionsNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllLocalFunctionsNamed(list of String) with ignore case returns declaration with all given functions`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllLocalFunctionsNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllLocalFunctionsNamed(name) returns declaration without given function`() {
         // given
         val name = "SampleName"
@@ -586,6 +718,50 @@ class KoLocalFunctionProviderListExtTest {
 
         // when
         val sut = declarations.withoutAllLocalFunctionsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllLocalFunctionsNamed(name) with ignore case returns declaration without given function`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionsWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionsWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllLocalFunctionsNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllLocalFunctionsNamed(list of String) with ignore case returns declaration without all of given functions`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoLocalFunctionProvider =
+            mockk {
+                every { hasLocalFunctionsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllLocalFunctionsNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

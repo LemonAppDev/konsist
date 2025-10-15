@@ -24,28 +24,36 @@ internal interface KoImportAliasProviderCore :
     override fun hasImportAliasWithName(
         name: String,
         vararg names: String,
-    ): Boolean = hasImportAliasWithName(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasImportAliasWithName(listOf(name, *names), ignoreCase)
 
-    override fun hasImportAliasWithName(names: Collection<String>): Boolean =
+    override fun hasImportAliasWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasImportAliases()
             else ->
                 names.any {
-                    importAliases.any { importAlias -> it == importAlias.name }
+                    importAliases.any { importAlias -> importAlias.hasName(it, ignoreCase) }
                 }
         }
 
     override fun hasImportAliasesWithAllNames(
         name: String,
         vararg names: String,
-    ): Boolean = hasImportAliasesWithAllNames(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasImportAliasesWithAllNames(listOf(name, *names), ignoreCase)
 
-    override fun hasImportAliasesWithAllNames(names: Collection<String>): Boolean =
+    override fun hasImportAliasesWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasImportAliases()
             else ->
                 names.all {
-                    importAliases.any { importAlias -> it == importAlias.name }
+                    importAliases.any { importAlias -> importAlias.hasName(it, ignoreCase) }
                 }
         }
 

@@ -245,6 +245,50 @@ class KoTypeParameterProviderListExtTest {
     }
 
     @Test
+    fun `withTypeParameterNamed(name) with ignore case returns declaration with given type parameter`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoTypeParameterProvider =
+            mockk {
+                every { hasTypeParameterWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoTypeParameterProvider =
+            mockk {
+                every { hasTypeParameterWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withTypeParameterNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withTypeParameterNamed(list of String) with ignore case returns declaration with any of given type parameters`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoTypeParameterProvider =
+            mockk {
+                every { hasTypeParameterWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoTypeParameterProvider =
+            mockk {
+                every { hasTypeParameterWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withTypeParameterNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutTypeParameterNamed(name) returns declaration without given type parameter`() {
         // given
         val name = "SampleName"
@@ -328,6 +372,50 @@ class KoTypeParameterProviderListExtTest {
 
         // when
         val sut = declarations.withoutTypeParameterNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutTypeParameterNamed(name) with ignore case returns declaration without given type parameter`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoTypeParameterProvider =
+            mockk {
+                every { hasTypeParameterWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoTypeParameterProvider =
+            mockk {
+                every { hasTypeParameterWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutTypeParameterNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutTypeParameterNamed(list of String) with ignore case returns declaration without any of given type parameters`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoTypeParameterProvider =
+            mockk {
+                every { hasTypeParameterWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoTypeParameterProvider =
+            mockk {
+                every { hasTypeParameterWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutTypeParameterNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -423,6 +511,50 @@ class KoTypeParameterProviderListExtTest {
     }
 
     @Test
+    fun `withAllTypeParametersNamed(name) with ignore case returns declaration with given type parameter`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoTypeParameterProvider =
+            mockk {
+                every { hasTypeParametersWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoTypeParameterProvider =
+            mockk {
+                every { hasTypeParametersWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllTypeParametersNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllTypeParametersNamed(list of String) with ignore case returns declaration with all given type parameters`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoTypeParameterProvider =
+            mockk {
+                every { hasTypeParametersWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoTypeParameterProvider =
+            mockk {
+                every { hasTypeParametersWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllTypeParametersNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllTypeParametersNamed(name) returns declaration without given type parameter`() {
         // given
         val name = "SampleName"
@@ -506,6 +638,50 @@ class KoTypeParameterProviderListExtTest {
 
         // when
         val sut = declarations.withoutAllTypeParametersNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllTypeParametersNamed(name) with ignore case returns declaration without given type parameter`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoTypeParameterProvider =
+            mockk {
+                every { hasTypeParametersWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoTypeParameterProvider =
+            mockk {
+                every { hasTypeParametersWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllTypeParametersNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllTypeParametersNamed(list of String) with ignore case returns declaration without all of given type parameters`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoTypeParameterProvider =
+            mockk {
+                every { hasTypeParametersWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoTypeParameterProvider =
+            mockk {
+                every { hasTypeParametersWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllTypeParametersNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

@@ -266,5 +266,67 @@ class KoInterfaceDeclarationForKoParentProviderTest {
         }
     }
 
+    @Test
+    fun `interface-has-no-parents-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("interface-has-no-parents-ignore-case")
+                .interfaces()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasParentWithName("sampleparentinterface1") shouldBeEqualTo false
+            hasParentWithName("sampleparentinterface1", ignoreCase = true) shouldBeEqualTo false
+            hasParentWithName(listOf("sampleparentinterface1")) shouldBeEqualTo false
+            hasParentWithName(listOf("sampleparentinterface1"), ignoreCase = true) shouldBeEqualTo false
+            hasParentWithName(setOf("sampleparentinterface1")) shouldBeEqualTo false
+            hasParentWithName(setOf("sampleparentinterface1"), ignoreCase = true) shouldBeEqualTo false
+            hasParentsWithAllNames("sampleparentinterface1", "sampleparentinterface2") shouldBeEqualTo false
+            hasParentsWithAllNames("sampleparentinterface1", "sampleparentinterface2", ignoreCase = true) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("sampleparentinterface1", "sampleparentinterface2")) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("sampleparentinterface1", "sampleparentinterface2"), ignoreCase = true) shouldBeEqualTo false
+            hasParentsWithAllNames(setOf("sampleparentinterface1", "sampleparentinterface2")) shouldBeEqualTo false
+            hasParentsWithAllNames(setOf("sampleparentinterface1", "sampleparentinterface2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `interface-has-direct-parents-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("interface-has-direct-parents-ignore-case")
+                .interfaces()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasParentWithName("sampleparentinterface1") shouldBeEqualTo false
+            hasParentWithName("sampleparentinterface1", ignoreCase = true) shouldBeEqualTo true
+            hasParentWithName("otherparentclass") shouldBeEqualTo false
+            hasParentWithName("otherparentclass", ignoreCase = true) shouldBeEqualTo false
+            hasParentWithName("sampleparentinterface1", "otherName") shouldBeEqualTo false
+            hasParentWithName("sampleparentinterface1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasParentWithName(listOf("sampleparentinterface1")) shouldBeEqualTo false
+            hasParentWithName(listOf("sampleparentinterface1"), ignoreCase = true) shouldBeEqualTo true
+            hasParentWithName(listOf("otherparentclass")) shouldBeEqualTo false
+            hasParentWithName(listOf("otherparentclass"), ignoreCase = true) shouldBeEqualTo false
+            hasParentWithName(listOf("sampleparentinterface1", "otherName")) shouldBeEqualTo false
+            hasParentWithName(listOf("sampleparentinterface1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasParentsWithAllNames("sampleparentinterface1") shouldBeEqualTo false
+            hasParentsWithAllNames("sampleparentinterface1", ignoreCase = true) shouldBeEqualTo true
+            hasParentsWithAllNames("sampleparentinterface1", "sampleparentinterface2") shouldBeEqualTo false
+            hasParentsWithAllNames("sampleparentinterface1", "sampleparentinterface2", ignoreCase = true) shouldBeEqualTo true
+            hasParentsWithAllNames("sampleparentinterface1", "otherparentclass") shouldBeEqualTo false
+            hasParentsWithAllNames("sampleparentinterface1", "otherparentclass", ignoreCase = true) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("sampleparentinterface1")) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("sampleparentinterface1"), ignoreCase = true) shouldBeEqualTo true
+            hasParentsWithAllNames(listOf("sampleparentinterface1", "sampleparentinterface2")) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("sampleparentinterface1", "sampleparentinterface2"), ignoreCase = true) shouldBeEqualTo true
+            hasParentsWithAllNames(listOf("sampleparentinterface1", "otherparentclass")) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("sampleparentinterface1", "otherparentclass"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kointerface/snippet/forkoparentprovider/", fileName)
 }

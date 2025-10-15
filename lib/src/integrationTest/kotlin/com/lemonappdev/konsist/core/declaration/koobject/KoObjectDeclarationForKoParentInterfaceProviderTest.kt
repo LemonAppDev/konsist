@@ -312,6 +312,72 @@ class KoObjectDeclarationForKoParentInterfaceProviderTest {
         }
     }
 
+    @Test
+    fun `object-has-no-parent-interface-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("object-has-no-parent-interface-ignore-case")
+                .objects()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasParentInterfaceWithName("sampleparentinterface1") shouldBeEqualTo false
+            hasParentInterfaceWithName("sampleparentinterface1", ignoreCase = true) shouldBeEqualTo false
+            hasParentInterfaceWithName(listOf("sampleparentinterface1")) shouldBeEqualTo false
+            hasParentInterfaceWithName(listOf("sampleparentinterface1"), ignoreCase = true) shouldBeEqualTo false
+            hasParentInterfaceWithName(setOf("sampleparentinterface1")) shouldBeEqualTo false
+            hasParentInterfaceWithName(setOf("sampleparentinterface1"), ignoreCase = true) shouldBeEqualTo false
+            hasParentInterfacesWithAllNames("sampleparentinterface1", "sampleparentinterface2") shouldBeEqualTo false
+            hasParentInterfacesWithAllNames("sampleparentinterface1", "sampleparentinterface2", ignoreCase = true) shouldBeEqualTo false
+            hasParentInterfacesWithAllNames(listOf("sampleparentinterface1", "sampleparentinterface2")) shouldBeEqualTo false
+            hasParentInterfacesWithAllNames(listOf("sampleparentinterface1", "sampleparentinterface2"), ignoreCase = true) shouldBeEqualTo
+                false
+            hasParentInterfacesWithAllNames(setOf("sampleparentinterface1", "sampleparentinterface2")) shouldBeEqualTo false
+            hasParentInterfacesWithAllNames(setOf("sampleparentinterface1", "sampleparentinterface2"), ignoreCase = true) shouldBeEqualTo
+                false
+        }
+    }
+
+    @Test
+    fun `object-has-parent-interfaces-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("object-has-parent-interfaces-ignore-case")
+                .objects()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasParentInterfaceWithName("sampleparentinterface1") shouldBeEqualTo false
+            hasParentInterfaceWithName("sampleparentinterface1", ignoreCase = true) shouldBeEqualTo true
+            hasParentInterfaceWithName("otherparentinterface") shouldBeEqualTo false
+            hasParentInterfaceWithName("otherparentinterface", ignoreCase = true) shouldBeEqualTo false
+            hasParentInterfaceWithName("sampleparentinterface1", "otherName") shouldBeEqualTo false
+            hasParentInterfaceWithName("sampleparentinterface1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasParentInterfaceWithName(listOf("sampleparentinterface1")) shouldBeEqualTo false
+            hasParentInterfaceWithName(listOf("sampleparentinterface1"), ignoreCase = true) shouldBeEqualTo true
+            hasParentInterfaceWithName(listOf("otherparentinterface")) shouldBeEqualTo false
+            hasParentInterfaceWithName(listOf("otherparentinterface"), ignoreCase = true) shouldBeEqualTo false
+            hasParentInterfaceWithName(listOf("sampleparentinterface1", "otherName")) shouldBeEqualTo false
+            hasParentInterfaceWithName(listOf("sampleparentinterface1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasParentInterfacesWithAllNames("sampleparentinterface1") shouldBeEqualTo false
+            hasParentInterfacesWithAllNames("sampleparentinterface1", ignoreCase = true) shouldBeEqualTo true
+            hasParentInterfacesWithAllNames("sampleparentinterface1", "sampleparentinterface2") shouldBeEqualTo false
+            hasParentInterfacesWithAllNames("sampleparentinterface1", "sampleparentinterface2", ignoreCase = true) shouldBeEqualTo true
+            hasParentInterfacesWithAllNames("sampleparentinterface1", "otherparentinterface") shouldBeEqualTo false
+            hasParentInterfacesWithAllNames("sampleparentinterface1", "otherparentinterface", ignoreCase = true) shouldBeEqualTo false
+            hasParentInterfacesWithAllNames(listOf("sampleparentinterface1")) shouldBeEqualTo false
+            hasParentInterfacesWithAllNames(listOf("sampleparentinterface1"), ignoreCase = true) shouldBeEqualTo true
+            hasParentInterfacesWithAllNames(listOf("sampleparentinterface1", "sampleparentinterface2")) shouldBeEqualTo false
+            hasParentInterfacesWithAllNames(listOf("sampleparentinterface1", "sampleparentinterface2"), ignoreCase = true) shouldBeEqualTo
+                true
+            hasParentInterfacesWithAllNames(listOf("sampleparentinterface1", "otherparentinterface")) shouldBeEqualTo false
+            hasParentInterfacesWithAllNames(listOf("sampleparentinterface1", "otherparentinterface"), ignoreCase = true) shouldBeEqualTo
+                false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koobject/snippet/forkoparentinterfaceprovider/", fileName)
 }

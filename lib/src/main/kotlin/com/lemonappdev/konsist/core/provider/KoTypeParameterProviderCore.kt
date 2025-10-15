@@ -67,28 +67,36 @@ internal interface KoTypeParameterProviderCore :
     override fun hasTypeParameterWithName(
         name: String,
         vararg names: String,
-    ): Boolean = hasTypeParameterWithName(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasTypeParameterWithName(listOf(name, *names), ignoreCase)
 
-    override fun hasTypeParameterWithName(names: Collection<String>): Boolean =
+    override fun hasTypeParameterWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasTypeParameters()
             else ->
                 names.any {
-                    typeParameters.any { parameter -> it == parameter.name }
+                    typeParameters.any { parameter -> parameter.hasName(it, ignoreCase) }
                 }
         }
 
     override fun hasTypeParametersWithAllNames(
         name: String,
         vararg names: String,
-    ): Boolean = hasTypeParametersWithAllNames(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasTypeParametersWithAllNames(listOf(name, *names), ignoreCase)
 
-    override fun hasTypeParametersWithAllNames(names: Collection<String>): Boolean =
+    override fun hasTypeParametersWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasTypeParameters()
             else ->
                 names.all {
-                    typeParameters.any { parameter -> it == parameter.name }
+                    typeParameters.any { parameter -> parameter.hasName(it, ignoreCase) }
                 }
         }
 

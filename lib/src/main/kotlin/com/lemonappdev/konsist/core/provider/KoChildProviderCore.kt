@@ -35,17 +35,19 @@ internal interface KoChildProviderCore :
         name: String,
         vararg names: String,
         indirectChildren: Boolean,
-    ): Boolean = hasChildWithName(listOf(name, *names), indirectChildren)
+        ignoreCase: Boolean,
+    ): Boolean = hasChildWithName(listOf(name, *names), indirectChildren, ignoreCase)
 
     override fun hasChildWithName(
         names: Collection<String>,
         indirectChildren: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
             names.isEmpty() -> hasChildren(indirectChildren)
             else ->
                 names.any {
-                    children(indirectChildren).any { child -> it == child.name }
+                    children(indirectChildren).any { child -> child.hasName(it, ignoreCase) }
                 }
         }
 
@@ -53,17 +55,19 @@ internal interface KoChildProviderCore :
         name: String,
         vararg names: String,
         indirectChildren: Boolean,
-    ): Boolean = hasChildrenWithAllNames(listOf(name, *names), indirectChildren)
+        ignoreCase: Boolean,
+    ): Boolean = hasChildrenWithAllNames(listOf(name, *names), indirectChildren, ignoreCase)
 
     override fun hasChildrenWithAllNames(
         names: Collection<String>,
         indirectChildren: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
             names.isEmpty() -> hasChildren(indirectChildren)
             else ->
                 names.all {
-                    children(indirectChildren).any { child -> it == child.name }
+                    children(indirectChildren).any { child -> child.hasName(it, ignoreCase) }
                 }
         }
 

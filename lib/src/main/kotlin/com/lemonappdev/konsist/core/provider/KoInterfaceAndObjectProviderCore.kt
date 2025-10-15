@@ -24,17 +24,19 @@ internal interface KoInterfaceAndObjectProviderCore :
         name: String,
         vararg names: String,
         includeNested: Boolean,
-    ): Boolean = hasInterfaceOrObjectWithName(listOf(name, *names), includeNested)
+        ignoreCase: Boolean,
+    ): Boolean = hasInterfaceOrObjectWithName(listOf(name, *names), includeNested, ignoreCase)
 
     override fun hasInterfaceOrObjectWithName(
         names: Collection<String>,
         includeNested: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
             names.isEmpty() -> hasInterfacesOrObjects(includeNested)
             else ->
                 names.any {
-                    interfacesAndObjects(includeNested).any { koClass -> it == koClass.name }
+                    interfacesAndObjects(includeNested).any { koClass -> koClass.hasName(it, ignoreCase) }
                 }
         }
 
@@ -42,17 +44,19 @@ internal interface KoInterfaceAndObjectProviderCore :
         name: String,
         vararg names: String,
         includeNested: Boolean,
-    ): Boolean = hasInterfacesAndObjectsWithAllNames(listOf(name, *names), includeNested)
+        ignoreCase: Boolean,
+    ): Boolean = hasInterfacesAndObjectsWithAllNames(listOf(name, *names), includeNested, ignoreCase)
 
     override fun hasInterfacesAndObjectsWithAllNames(
         names: Collection<String>,
         includeNested: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
             names.isEmpty() -> hasInterfacesOrObjects(includeNested)
             else ->
                 names.all {
-                    interfacesAndObjects(includeNested).any { koClass -> it == koClass.name }
+                    interfacesAndObjects(includeNested).any { koClass -> koClass.hasName(it, ignoreCase) }
                 }
         }
 

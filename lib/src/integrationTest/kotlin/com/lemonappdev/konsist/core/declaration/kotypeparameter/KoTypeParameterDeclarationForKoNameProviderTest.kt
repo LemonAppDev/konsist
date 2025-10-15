@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.ext.list.primaryConstructors
 import com.lemonappdev.konsist.api.ext.list.properties
 import com.lemonappdev.konsist.api.ext.list.returnTypes
+import com.lemonappdev.konsist.core.declaration.type.KoStarProjectionDeclarationCore.hasName
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -20,7 +22,13 @@ class KoTypeParameterDeclarationForKoNameProviderTest {
                 ?.asTypeParameterDeclaration()
 
         // then
-        sut?.name shouldBeEqualTo "TestType"
+        assertSoftly(sut) {
+            it?.name shouldBeEqualTo "TestType"
+            it?.hasName("TestType") shouldBeEqualTo true
+            it?.hasName("OtherType") shouldBeEqualTo false
+            it?.hasName("testtype", ignoreCase = false) shouldBeEqualTo false
+            it?.hasName("testtype", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -36,7 +44,13 @@ class KoTypeParameterDeclarationForKoNameProviderTest {
                 .asTypeParameterDeclaration()
 
         // then
-        sut?.name shouldBeEqualTo "TestType"
+        assertSoftly(sut) {
+            it?.name shouldBeEqualTo "TestType"
+            it?.hasName("TestType") shouldBeEqualTo true
+            it?.hasName("OtherType") shouldBeEqualTo false
+            it?.hasName("testtype", ignoreCase = false) shouldBeEqualTo false
+            it?.hasName("testtype", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -51,7 +65,13 @@ class KoTypeParameterDeclarationForKoNameProviderTest {
                 ?.asTypeParameterDeclaration()
 
         // then
-        sut?.name shouldBeEqualTo "TestType"
+        assertSoftly(sut) {
+            it?.name shouldBeEqualTo "TestType"
+            it?.hasName("TestType") shouldBeEqualTo true
+            it?.hasName("OtherType") shouldBeEqualTo false
+            it?.hasName("testtype", ignoreCase = false) shouldBeEqualTo false
+            it?.hasName("testtype", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -65,7 +85,13 @@ class KoTypeParameterDeclarationForKoNameProviderTest {
                 ?.asTypeParameterDeclaration()
 
         // then
-        sut?.name shouldBeEqualTo "TestType"
+        assertSoftly(sut) {
+            it?.name shouldBeEqualTo "TestType"
+            it?.hasName("TestType") shouldBeEqualTo true
+            it?.hasName("OtherType") shouldBeEqualTo false
+            it?.hasName("testtype", ignoreCase = false) shouldBeEqualTo false
+            it?.hasName("testtype", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -82,7 +108,13 @@ class KoTypeParameterDeclarationForKoNameProviderTest {
                 ?.asTypeParameterDeclaration()
 
         // then
-        sut?.name shouldBeEqualTo "TestType"
+        assertSoftly(sut) {
+            it?.name shouldBeEqualTo "TestType"
+            it?.hasName("TestType") shouldBeEqualTo true
+            it?.hasName("OtherType") shouldBeEqualTo false
+            it?.hasName("testtype", ignoreCase = false) shouldBeEqualTo false
+            it?.hasName("testtype", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     private fun getSnippetFile(fileName: String) =

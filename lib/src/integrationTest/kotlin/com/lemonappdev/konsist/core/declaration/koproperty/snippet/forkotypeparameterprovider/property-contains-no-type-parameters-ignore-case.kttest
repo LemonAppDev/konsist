@@ -1,0 +1,2 @@
+val List<String>.sampleProperty: String
+    get() = ""

@@ -328,6 +328,50 @@ class KoChildProviderListExtTest {
     }
 
     @Test
+    fun `withChildNamed(name) with ignore case returns declaration with given child`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoChildProvider =
+            mockk {
+                every { hasChildWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoChildProvider =
+            mockk {
+                every { hasChildWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withChildNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withChildNamed(list of String) with ignore case returns declaration with any of given children`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoChildProvider =
+            mockk {
+                every { hasChildWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoChildProvider =
+            mockk {
+                every { hasChildWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withChildNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutChildNamed(name) returns declaration without given child`() {
         // given
         val name = "SampleName"
@@ -411,6 +455,50 @@ class KoChildProviderListExtTest {
 
         // when
         val sut = declarations.withoutChildNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutChildNamed(name) with ignore case returns declaration without given child`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoChildProvider =
+            mockk {
+                every { hasChildWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoChildProvider =
+            mockk {
+                every { hasChildWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutChildNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutChildNamed(list of String) with ignore case returns declaration without any of given children`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoChildProvider =
+            mockk {
+                every { hasChildWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoChildProvider =
+            mockk {
+                every { hasChildWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutChildNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -506,6 +594,50 @@ class KoChildProviderListExtTest {
     }
 
     @Test
+    fun `withAllChildrenNamed(name) with ignore case returns declaration with given child`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoChildProvider =
+            mockk {
+                every { hasChildrenWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoChildProvider =
+            mockk {
+                every { hasChildrenWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllChildrenNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllChildrenNamed(list of String) with ignore case returns declaration with all given children`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoChildProvider =
+            mockk {
+                every { hasChildrenWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoChildProvider =
+            mockk {
+                every { hasChildrenWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllChildrenNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllChildrenNamed(name) returns declaration without given child`() {
         // given
         val name = "SampleName"
@@ -589,6 +721,50 @@ class KoChildProviderListExtTest {
 
         // when
         val sut = declarations.withoutAllChildrenNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllChildrenNamed(name) with ignore case returns declaration without given child`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoChildProvider =
+            mockk {
+                every { hasChildrenWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoChildProvider =
+            mockk {
+                every { hasChildrenWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllChildrenNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllChildrenNamed(list of String) with ignore case returns declaration without all of given children`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoChildProvider =
+            mockk {
+                every { hasChildrenWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoChildProvider =
+            mockk {
+                every { hasChildrenWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllChildrenNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

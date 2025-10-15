@@ -38,28 +38,36 @@ internal interface KoAnnotationProviderCore :
     override fun hasAnnotationWithName(
         name: String,
         vararg names: String,
-    ): Boolean = hasAnnotationWithName(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasAnnotationWithName(listOf(name, *names), ignoreCase)
 
-    override fun hasAnnotationWithName(names: Collection<String>): Boolean =
+    override fun hasAnnotationWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasAnnotations()
             else ->
                 names.any {
-                    annotations.any { annotation -> annotation.representsType(it) }
+                    annotations.any { annotation -> annotation.representsType(it, ignoreCase) }
                 }
         }
 
     override fun hasAnnotationsWithAllNames(
         name: String,
         vararg names: String,
-    ): Boolean = hasAnnotationsWithAllNames(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasAnnotationsWithAllNames(listOf(name, *names), ignoreCase)
 
-    override fun hasAnnotationsWithAllNames(names: Collection<String>): Boolean =
+    override fun hasAnnotationsWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasAnnotations()
             else ->
                 names.all {
-                    annotations.any { annotation -> annotation.representsType(it) }
+                    annotations.any { annotation -> annotation.representsType(it, ignoreCase) }
                 }
         }
 

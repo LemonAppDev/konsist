@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration.type.kostarprojection
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.api.ext.list.returnTypes
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -20,7 +21,11 @@ class KoStarProjectionDeclarationForKoNameProviderTest {
                 ?.sourceDeclaration as? KoStarProjectionDeclaration
 
         // then
-        sut?.name shouldBeEqualTo "*"
+        assertSoftly(sut) {
+            it?.name shouldBeEqualTo "*"
+            it?.hasName("String") shouldBeEqualTo false
+            it?.hasName("String", ignoreCase = true) shouldBeEqualTo false
+        }
     }
 
     private fun getSnippetFile(fileName: String) =

@@ -78,6 +78,68 @@ class KoFunctionDeclarationForKoLocalClassProviderTest {
         }
     }
 
+    @Test
+    fun `function-contains-no-local-classes-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("function-contains-no-local-classes-ignore-case")
+                .functions()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasLocalClassWithName("sampleclass") shouldBeEqualTo false
+            hasLocalClassWithName("sampleclass", ignoreCase = true) shouldBeEqualTo false
+            hasLocalClassWithName(listOf("sampleclass")) shouldBeEqualTo false
+            hasLocalClassWithName(listOf("sampleclass"), ignoreCase = true) shouldBeEqualTo false
+            hasLocalClassWithName(setOf("sampleclass")) shouldBeEqualTo false
+            hasLocalClassWithName(setOf("sampleclass"), ignoreCase = true) shouldBeEqualTo false
+            hasLocalClassesWithAllNames("sampleclass1", "sampleclass2") shouldBeEqualTo false
+            hasLocalClassesWithAllNames("sampleclass1", "sampleclass2", ignoreCase = true) shouldBeEqualTo false
+            hasLocalClassesWithAllNames(listOf("sampleclass1", "sampleclass2")) shouldBeEqualTo false
+            hasLocalClassesWithAllNames(listOf("sampleclass1", "sampleclass2"), ignoreCase = true) shouldBeEqualTo false
+            hasLocalClassesWithAllNames(setOf("sampleclass1", "sampleclass2")) shouldBeEqualTo false
+            hasLocalClassesWithAllNames(setOf("sampleclass1", "sampleclass2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `function-contains-local-class-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("function-contains-local-class-ignore-case")
+                .functions()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasLocalClassWithName("sampleclass1") shouldBeEqualTo false
+            hasLocalClassWithName("sampleclass1", ignoreCase = true) shouldBeEqualTo true
+            hasLocalClassWithName("otherclass") shouldBeEqualTo false
+            hasLocalClassWithName("otherclass", ignoreCase = true) shouldBeEqualTo false
+            hasLocalClassWithName("sampleclass1", "otherName") shouldBeEqualTo false
+            hasLocalClassWithName("sampleclass1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasLocalClassWithName(listOf("sampleclass1")) shouldBeEqualTo false
+            hasLocalClassWithName(listOf("sampleclass1"), ignoreCase = true) shouldBeEqualTo true
+            hasLocalClassWithName(listOf("otherclass")) shouldBeEqualTo false
+            hasLocalClassWithName(listOf("otherclass"), ignoreCase = true) shouldBeEqualTo false
+            hasLocalClassWithName(listOf("sampleclass1", "otherName")) shouldBeEqualTo false
+            hasLocalClassWithName(listOf("sampleclass1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasLocalClassesWithAllNames("sampleclass1") shouldBeEqualTo false
+            hasLocalClassesWithAllNames("sampleclass1", ignoreCase = true) shouldBeEqualTo true
+            hasLocalClassesWithAllNames("sampleclass1", "sampleclass2") shouldBeEqualTo false
+            hasLocalClassesWithAllNames("sampleclass1", "sampleclass2", ignoreCase = true) shouldBeEqualTo true
+            hasLocalClassesWithAllNames("sampleclass1", "otherclass") shouldBeEqualTo false
+            hasLocalClassesWithAllNames("sampleclass1", "otherclass", ignoreCase = true) shouldBeEqualTo false
+            hasLocalClassesWithAllNames(listOf("sampleclass1")) shouldBeEqualTo false
+            hasLocalClassesWithAllNames(listOf("sampleclass1"), ignoreCase = true) shouldBeEqualTo true
+            hasLocalClassesWithAllNames(listOf("sampleclass1", "sampleclass2")) shouldBeEqualTo false
+            hasLocalClassesWithAllNames(listOf("sampleclass1", "sampleclass2"), ignoreCase = true) shouldBeEqualTo true
+            hasLocalClassesWithAllNames(listOf("sampleclass1", "otherclass")) shouldBeEqualTo false
+            hasLocalClassesWithAllNames(listOf("sampleclass1", "otherclass"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/kofunction/snippet/forkolocalclassprovider/", fileName)
 }

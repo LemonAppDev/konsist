@@ -49,12 +49,16 @@ interface KoParentInterfaceProvider : KoBaseProvider {
      * @param name the name of the parent interface to check.
      * @param names the names of the parent interfaces to check.
      * @param indirectParents specifies whether to include parent interfaces defined in other files such as parent of the parent.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasParentInterfaceWithName(
         name: String,
         vararg names: String,
         indirectParents: Boolean = false,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -62,11 +66,15 @@ interface KoParentInterfaceProvider : KoBaseProvider {
      *
      * @param names the names of the parent interfaces to check.
      * @param indirectParents specifies whether to include parent interfaces defined in other files such as parent of the parent.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasParentInterfaceWithName(
         names: Collection<String>,
         indirectParents: Boolean = false,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -75,12 +83,16 @@ interface KoParentInterfaceProvider : KoBaseProvider {
      * @param name The name of the parent interface to check.
      * @param names The names of the parent interfaces to check.
      * @param indirectParents specifies whether to include parent interfaces defined in other files such as parent of the parent.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasParentInterfacesWithAllNames(
         name: String,
         vararg names: String,
         indirectParents: Boolean = false,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -88,11 +100,15 @@ interface KoParentInterfaceProvider : KoBaseProvider {
      *
      * @param names The names of the parent interfaces to check.
      * @param indirectParents specifies whether to include parent interfaces defined in other files such as parent of the parent.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasParentInterfacesWithAllNames(
         names: Collection<String>,
         indirectParents: Boolean = false,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**

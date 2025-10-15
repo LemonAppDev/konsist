@@ -36,40 +36,60 @@ interface KoLocalClassProvider : KoBaseProvider {
      *
      * @param name the name of the local class to check.
      * @param names the names of the local classes to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasLocalClassWithName(
         name: String,
         vararg names: String,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
      * Determines whether the declaration has at least one local class whose name matches any of the specified names.
      *
      * @param names the names of the local classes to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasLocalClassWithName(names: Collection<String>): Boolean
+    fun hasLocalClassWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has local classes with all the specified names.
      *
      * @param name The name of the local class to check.
      * @param names The names of the local classes to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasLocalClassesWithAllNames(
         name: String,
         vararg names: String,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
      * Determines whether the declaration has local classes with all the specified names.
      *
      * @param names The names of the local classes to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasLocalClassesWithAllNames(names: Collection<String>): Boolean
+    fun hasLocalClassesWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one local class that satisfies the provided predicate.

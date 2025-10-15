@@ -121,4 +121,64 @@ class KoInterfaceForKoChildProviderTest {
             hasAllChildren(indirectChildren = true) { it.hasNameStartingWith("Other") } shouldBeEqualTo false
         }
     }
+
+    @Test
+    fun `interface without children ignore case`() {
+        // given
+        val sut = Konsist
+            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .interfaces()
+            .withName("InterfaceWithoutChildren")
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasChildWithName("parentinterface") shouldBeEqualTo false
+            hasChildWithName("parentinterface", ignoreCase = true) shouldBeEqualTo false
+            hasChildWithName(listOf("parentinterface")) shouldBeEqualTo false
+            hasChildWithName(listOf("parentinterface"), ignoreCase = true) shouldBeEqualTo false
+            hasChildWithName(setOf("parentinterface")) shouldBeEqualTo false
+            hasChildWithName(setOf("parentinterface"), ignoreCase = true) shouldBeEqualTo false
+            hasChildrenWithAllNames("parentinterface", "otherinterface") shouldBeEqualTo false
+            hasChildrenWithAllNames("parentinterface", "otherinterface", ignoreCase = true) shouldBeEqualTo false
+            hasChildrenWithAllNames(listOf("parentinterface", "otherinterface")) shouldBeEqualTo false
+            hasChildrenWithAllNames(listOf("parentinterface", "otherinterface"), ignoreCase = true) shouldBeEqualTo false
+            hasChildrenWithAllNames(setOf("parentinterface", "otherinterface")) shouldBeEqualTo false
+            hasChildrenWithAllNames(setOf("parentinterface", "otherinterface"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `interface with direct child ignore case`() {
+        // given
+        val sut = Konsist
+            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .interfaces()
+            .withName("ParentSuperInterface")
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasChildWithName("parentinterface") shouldBeEqualTo false
+            hasChildWithName("parentinterface", ignoreCase = true) shouldBeEqualTo true
+            hasChildWithName("otherinterface") shouldBeEqualTo false
+            hasChildWithName("otherinterface", ignoreCase = true) shouldBeEqualTo false
+            hasChildWithName("parentinterface", "otherName") shouldBeEqualTo false
+            hasChildWithName("parentinterface", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasChildWithName(listOf("parentinterface")) shouldBeEqualTo false
+            hasChildWithName(listOf("parentinterface"), ignoreCase = true) shouldBeEqualTo true
+            hasChildWithName(listOf("otherinterface")) shouldBeEqualTo false
+            hasChildWithName(listOf("otherinterface"), ignoreCase = true) shouldBeEqualTo false
+            hasChildWithName(listOf("parentinterface", "otherName")) shouldBeEqualTo false
+            hasChildWithName(listOf("parentinterface", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasChildrenWithAllNames("parentinterface") shouldBeEqualTo false
+            hasChildrenWithAllNames("parentinterface", ignoreCase = true) shouldBeEqualTo true
+            hasChildrenWithAllNames("parentinterface", "otherinterface") shouldBeEqualTo false
+            hasChildrenWithAllNames("parentinterface", "otherinterface", ignoreCase = true) shouldBeEqualTo false
+            hasChildrenWithAllNames(listOf("parentinterface")) shouldBeEqualTo false
+            hasChildrenWithAllNames(listOf("parentinterface"), ignoreCase = true) shouldBeEqualTo true
+            hasChildrenWithAllNames(listOf("parentinterface", "otherinterface")) shouldBeEqualTo false
+            hasChildrenWithAllNames(listOf("parentinterface", "otherinterface"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
 }

@@ -122,5 +122,66 @@ class KoObjectDeclarationForKoPropertyProviderTest {
         }
     }
 
+    @Test
+    fun `object-has-no-properties-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("object-has-no-properties-ignore-case")
+                .objects()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasPropertyWithName("sampleproperty") shouldBeEqualTo false
+            hasPropertyWithName("sampleproperty", ignoreCase = true) shouldBeEqualTo false
+            hasPropertyWithName(listOf("sampleproperty")) shouldBeEqualTo false
+            hasPropertyWithName(listOf("sampleproperty"), ignoreCase = true) shouldBeEqualTo false
+            hasPropertyWithName(setOf("sampleproperty")) shouldBeEqualTo false
+            hasPropertyWithName(setOf("sampleproperty"), ignoreCase = true) shouldBeEqualTo false
+            hasPropertiesWithAllNames("sampleproperty1", "sampleproperty2") shouldBeEqualTo false
+            hasPropertiesWithAllNames("sampleproperty1", "sampleproperty2", ignoreCase = true) shouldBeEqualTo false
+            hasPropertiesWithAllNames(listOf("sampleproperty1", "sampleproperty2")) shouldBeEqualTo false
+            hasPropertiesWithAllNames(listOf("sampleproperty1", "sampleproperty2"), ignoreCase = true) shouldBeEqualTo false
+            hasPropertiesWithAllNames(setOf("sampleproperty1", "sampleproperty2")) shouldBeEqualTo false
+            hasPropertiesWithAllNames(setOf("sampleproperty1", "sampleproperty2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `object-has-properties-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("object-has-properties-ignore-case")
+                .objects()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasPropertyWithName("sampleproperty1", ignoreCase = true) shouldBeEqualTo true
+            hasPropertyWithName("otherproperty") shouldBeEqualTo false
+            hasPropertyWithName("otherproperty", ignoreCase = true) shouldBeEqualTo false
+            hasPropertyWithName("sampleproperty1", "otherName") shouldBeEqualTo false
+            hasPropertyWithName("sampleproperty1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasPropertyWithName(listOf("sampleproperty1")) shouldBeEqualTo false
+            hasPropertyWithName(listOf("sampleproperty1"), ignoreCase = true) shouldBeEqualTo true
+            hasPropertyWithName(listOf("otherproperty")) shouldBeEqualTo false
+            hasPropertyWithName(listOf("otherproperty"), ignoreCase = true) shouldBeEqualTo false
+            hasPropertyWithName(listOf("sampleproperty1", "otherName")) shouldBeEqualTo false
+            hasPropertyWithName(listOf("sampleproperty1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasPropertiesWithAllNames("sampleproperty1") shouldBeEqualTo false
+            hasPropertiesWithAllNames("sampleproperty1", ignoreCase = true) shouldBeEqualTo true
+            hasPropertiesWithAllNames("sampleproperty1", "sampleproperty2") shouldBeEqualTo false
+            hasPropertiesWithAllNames("sampleproperty1", "sampleproperty2", ignoreCase = true) shouldBeEqualTo true
+            hasPropertiesWithAllNames("sampleproperty1", "otherproperty") shouldBeEqualTo false
+            hasPropertiesWithAllNames("sampleproperty1", "otherproperty", ignoreCase = true) shouldBeEqualTo false
+            hasPropertiesWithAllNames(listOf("sampleproperty1")) shouldBeEqualTo false
+            hasPropertiesWithAllNames(listOf("sampleproperty1"), ignoreCase = true) shouldBeEqualTo true
+            hasPropertiesWithAllNames(listOf("sampleproperty1", "sampleproperty2")) shouldBeEqualTo false
+            hasPropertiesWithAllNames(listOf("sampleproperty1", "sampleproperty2"), ignoreCase = true) shouldBeEqualTo true
+            hasPropertiesWithAllNames(listOf("sampleproperty1", "otherproperty")) shouldBeEqualTo false
+            hasPropertiesWithAllNames(listOf("sampleproperty1", "otherproperty"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/forkopropertyprovider/", fileName)
 }

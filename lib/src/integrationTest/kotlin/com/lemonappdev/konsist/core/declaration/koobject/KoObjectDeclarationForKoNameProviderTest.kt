@@ -17,12 +17,22 @@ class KoObjectDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             name shouldBeEqualTo "SampleObject"
+            hasName("SampleObject") shouldBeEqualTo true
+            hasName("OtherObject") shouldBeEqualTo false
+            hasName("sampleobject", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleobject", ignoreCase = true) shouldBeEqualTo true
             hasNameStartingWith("Sample") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
+            hasNameStartingWith("sample", ignoreCase = false) shouldBeEqualTo false
+            hasNameStartingWith("sample", ignoreCase = true) shouldBeEqualTo true
             hasNameEndingWith("ject") shouldBeEqualTo true
             hasNameEndingWith("other") shouldBeEqualTo false
+            hasNameEndingWith("JECT", ignoreCase = false) shouldBeEqualTo false
+            hasNameEndingWith("JECT", ignoreCase = true) shouldBeEqualTo true
             hasNameContaining("leObj") shouldBeEqualTo true
-            hasNameContaining("leobj") shouldBeEqualTo false
+            hasNameContaining("other") shouldBeEqualTo false
+            hasNameContaining("leobj", ignoreCase = false) shouldBeEqualTo false
+            hasNameContaining("leobj", ignoreCase = true) shouldBeEqualTo true
             hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
@@ -39,12 +49,22 @@ class KoObjectDeclarationForKoNameProviderTest {
         // then
         assertSoftly(sut) {
             name shouldBeEqualTo "SampleObject"
+            hasName("SampleObject") shouldBeEqualTo true
+            hasName("OtherObject") shouldBeEqualTo false
+            hasName("sampleobject", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleobject", ignoreCase = true) shouldBeEqualTo true
             hasNameStartingWith("Sample") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
+            hasNameStartingWith("sample", ignoreCase = false) shouldBeEqualTo false
+            hasNameStartingWith("sample", ignoreCase = true) shouldBeEqualTo true
             hasNameEndingWith("ject") shouldBeEqualTo true
             hasNameEndingWith("other") shouldBeEqualTo false
+            hasNameEndingWith("JECT", ignoreCase = false) shouldBeEqualTo false
+            hasNameEndingWith("JECT", ignoreCase = true) shouldBeEqualTo true
             hasNameContaining("leObj") shouldBeEqualTo true
-            hasNameContaining("leobj") shouldBeEqualTo false
+            hasNameContaining("other") shouldBeEqualTo false
+            hasNameContaining("leobj", ignoreCase = false) shouldBeEqualTo false
+            hasNameContaining("leobj", ignoreCase = true) shouldBeEqualTo true
             hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }

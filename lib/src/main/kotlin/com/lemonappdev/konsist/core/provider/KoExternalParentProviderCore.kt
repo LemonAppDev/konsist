@@ -25,17 +25,19 @@ internal interface KoExternalParentProviderCore :
         name: String,
         vararg names: String,
         indirectParents: Boolean,
-    ): Boolean = hasExternalParentWithName(listOf(name, *names), indirectParents)
+        ignoreCase: Boolean,
+    ): Boolean = hasExternalParentWithName(listOf(name, *names), indirectParents, ignoreCase)
 
     override fun hasExternalParentWithName(
         names: Collection<String>,
         indirectParents: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
             names.isEmpty() -> hasExternalParents(indirectParents)
             else ->
                 names.any {
-                    externalParents(indirectParents).any { parentInterface -> it == parentInterface.name }
+                    externalParents(indirectParents).any { parentInterface -> parentInterface.hasName(it, ignoreCase) }
                 }
         }
 
@@ -43,17 +45,19 @@ internal interface KoExternalParentProviderCore :
         name: String,
         vararg names: String,
         indirectParents: Boolean,
-    ): Boolean = hasExternalParentsWithAllNames(listOf(name, *names), indirectParents)
+        ignoreCase: Boolean,
+    ): Boolean = hasExternalParentsWithAllNames(listOf(name, *names), indirectParents, ignoreCase)
 
     override fun hasExternalParentsWithAllNames(
         names: Collection<String>,
         indirectParents: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
             names.isEmpty() -> hasExternalParents(indirectParents)
             else ->
                 names.all {
-                    externalParents(indirectParents).any { parentInterface -> it == parentInterface.name }
+                    externalParents(indirectParents).any { parentInterface -> parentInterface.hasName(it, ignoreCase) }
                 }
         }
 

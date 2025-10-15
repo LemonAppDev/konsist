@@ -29,9 +29,17 @@ class KoParentDeclarationForKoArgumentProviderTest {
             hasArgumentWithName(emptyList()) shouldBeEqualTo false
             hasArgumentsWithAllNames(emptyList()) shouldBeEqualTo false
             hasArgumentWithName("sampleArgument") shouldBeEqualTo false
+            hasArgumentWithName("sampleargument") shouldBeEqualTo false
+            hasArgumentWithName("sampleargument", ignoreCase = true) shouldBeEqualTo false
             hasArgumentWithName(listOf("sampleArgument")) shouldBeEqualTo false
+            hasArgumentWithName(listOf("sampleargument")) shouldBeEqualTo false
+            hasArgumentWithName(listOf("sampleargument"), ignoreCase = true) shouldBeEqualTo false
             hasArgumentsWithAllNames("sampleArgument1", "sampleArgument2") shouldBeEqualTo false
+            hasArgumentsWithAllNames("sampleargument1", "sampleargument2") shouldBeEqualTo false
+            hasArgumentsWithAllNames("sampleargument1", "sampleargument2", ignoreCase = true) shouldBeEqualTo false
             hasArgumentsWithAllNames(listOf("sampleArgument1", "sampleArgument2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("sampleargument1", "sampleargument2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("sampleargument1", "sampleargument2"), ignoreCase = true) shouldBeEqualTo false
             hasArgument { it.value == "text" } shouldBeEqualTo false
             hasAllArguments { it.value == "text" } shouldBeEqualTo true
         }
@@ -57,13 +65,17 @@ class KoParentDeclarationForKoArgumentProviderTest {
             hasArgumentWithName(emptyList()) shouldBeEqualTo true
             hasArgumentsWithAllNames(emptyList()) shouldBeEqualTo true
             hasArgumentWithName("param") shouldBeEqualTo false
-            hasArgumentWithName("param", "otherParameter") shouldBeEqualTo false
+            hasArgumentWithName("PARAM") shouldBeEqualTo false
+            hasArgumentWithName("PARAM", ignoreCase = true) shouldBeEqualTo false
             hasArgumentWithName(listOf("param")) shouldBeEqualTo false
-            hasArgumentWithName(listOf("param", "otherParameter")) shouldBeEqualTo false
-            hasArgumentsWithAllNames("param") shouldBeEqualTo false
-            hasArgumentsWithAllNames("param", "otherParameter") shouldBeEqualTo false
-            hasArgumentsWithAllNames(listOf("param")) shouldBeEqualTo false
-            hasArgumentsWithAllNames(listOf("param", "otherParameter")) shouldBeEqualTo false
+            hasArgumentWithName(listOf("PARAM")) shouldBeEqualTo false
+            hasArgumentWithName(listOf("PARAM"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames("param1", "param2") shouldBeEqualTo false
+            hasArgumentsWithAllNames("PARAM1", "PARAM2") shouldBeEqualTo false
+            hasArgumentsWithAllNames("PARAM1", "PARAM2", ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("param1", "param2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("PARAM1", "PARAM2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("PARAM1", "PARAM2"), ignoreCase = true) shouldBeEqualTo false
             hasArgument { it.value == "param" } shouldBeEqualTo true
             hasArgument { it.value == "1" } shouldBeEqualTo false
             hasAllArguments { it.value == "param" } shouldBeEqualTo true
@@ -90,9 +102,17 @@ class KoParentDeclarationForKoArgumentProviderTest {
             hasArgumentWithName(emptyList()) shouldBeEqualTo false
             hasArgumentsWithAllNames(emptyList()) shouldBeEqualTo false
             hasArgumentWithName("sampleArgument") shouldBeEqualTo false
+            hasArgumentWithName("sampleargument") shouldBeEqualTo false
+            hasArgumentWithName("sampleargument", ignoreCase = true) shouldBeEqualTo false
             hasArgumentWithName(listOf("sampleArgument")) shouldBeEqualTo false
+            hasArgumentWithName(listOf("sampleargument")) shouldBeEqualTo false
+            hasArgumentWithName(listOf("sampleargument"), ignoreCase = true) shouldBeEqualTo false
             hasArgumentsWithAllNames("sampleArgument1", "sampleArgument2") shouldBeEqualTo false
+            hasArgumentsWithAllNames("sampleargument1", "sampleargument2") shouldBeEqualTo false
+            hasArgumentsWithAllNames("sampleargument1", "sampleargument2", ignoreCase = true) shouldBeEqualTo false
             hasArgumentsWithAllNames(listOf("sampleArgument1", "sampleArgument2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("sampleargument1", "sampleargument2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("sampleargument1", "sampleargument2"), ignoreCase = true) shouldBeEqualTo false
             hasArgument { it.value == "text" } shouldBeEqualTo false
             hasAllArguments { it.value == "text" } shouldBeEqualTo true
         }
@@ -117,9 +137,17 @@ class KoParentDeclarationForKoArgumentProviderTest {
             hasArgumentWithName(emptyList()) shouldBeEqualTo false
             hasArgumentsWithAllNames(emptyList()) shouldBeEqualTo false
             hasArgumentWithName("sampleArgument") shouldBeEqualTo false
+            hasArgumentWithName("sampleargument") shouldBeEqualTo false
+            hasArgumentWithName("sampleargument", ignoreCase = true) shouldBeEqualTo false
             hasArgumentWithName(listOf("sampleArgument")) shouldBeEqualTo false
+            hasArgumentWithName(listOf("sampleargument")) shouldBeEqualTo false
+            hasArgumentWithName(listOf("sampleargument"), ignoreCase = true) shouldBeEqualTo false
             hasArgumentsWithAllNames("sampleArgument1", "sampleArgument2") shouldBeEqualTo false
+            hasArgumentsWithAllNames("sampleargument1", "sampleargument2") shouldBeEqualTo false
+            hasArgumentsWithAllNames("sampleargument1", "sampleargument2", ignoreCase = true) shouldBeEqualTo false
             hasArgumentsWithAllNames(listOf("sampleArgument1", "sampleArgument2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("sampleargument1", "sampleargument2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("sampleargument1", "sampleargument2"), ignoreCase = true) shouldBeEqualTo false
             hasArgument { it.value == "text" } shouldBeEqualTo false
             hasAllArguments { it.value == "text" } shouldBeEqualTo true
         }
@@ -145,13 +173,17 @@ class KoParentDeclarationForKoArgumentProviderTest {
             hasArgumentWithName(emptyList()) shouldBeEqualTo true
             hasArgumentsWithAllNames(emptyList()) shouldBeEqualTo true
             hasArgumentWithName("param") shouldBeEqualTo false
-            hasArgumentWithName("param", "otherParameter") shouldBeEqualTo false
+            hasArgumentWithName("PARAM") shouldBeEqualTo false
+            hasArgumentWithName("PARAM", ignoreCase = true) shouldBeEqualTo false
             hasArgumentWithName(listOf("param")) shouldBeEqualTo false
-            hasArgumentWithName(listOf("param", "otherParameter")) shouldBeEqualTo false
-            hasArgumentsWithAllNames("param") shouldBeEqualTo false
-            hasArgumentsWithAllNames("param", "otherParameter") shouldBeEqualTo false
-            hasArgumentsWithAllNames(listOf("param")) shouldBeEqualTo false
-            hasArgumentsWithAllNames(listOf("param", "otherParameter")) shouldBeEqualTo false
+            hasArgumentWithName(listOf("PARAM")) shouldBeEqualTo false
+            hasArgumentWithName(listOf("PARAM"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames("param1", "param2") shouldBeEqualTo false
+            hasArgumentsWithAllNames("PARAM1", "PARAM2") shouldBeEqualTo false
+            hasArgumentsWithAllNames("PARAM1", "PARAM2", ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("param1", "param2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("PARAM1", "PARAM2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("PARAM1", "PARAM2"), ignoreCase = true) shouldBeEqualTo false
             hasArgument { it.value == "param" } shouldBeEqualTo true
             hasArgument { it.value == "1" } shouldBeEqualTo false
             hasAllArguments { it.value == "param" } shouldBeEqualTo true

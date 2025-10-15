@@ -1,0 +1,1 @@
+typealias SampleTypeAlias = (Int) -> Unit

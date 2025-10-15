@@ -554,6 +554,50 @@ class KoParentClassProviderListExtTest {
     }
 
     @Test
+    fun `withParentClassNamed(name) with ignore case returns declaration with given parent class`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoParentClassProvider =
+            mockk {
+                every { hasParentClassWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoParentClassProvider =
+            mockk {
+                every { hasParentClassWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withParentClassNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withParentClassNamed(list of String) with ignore case returns declaration with any of given parent classs`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoParentClassProvider =
+            mockk {
+                every { hasParentClassWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoParentClassProvider =
+            mockk {
+                every { hasParentClassWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withParentClassNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutParentClassNamed(name) returns declaration without given parent class`() {
         // given
         val name = "SampleName"
@@ -637,6 +681,50 @@ class KoParentClassProviderListExtTest {
 
         // when
         val sut = declarations.withoutParentClassNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutParentClassNamed(name) with ignore case returns declaration without given parent class`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoParentClassProvider =
+            mockk {
+                every { hasParentClassWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoParentClassProvider =
+            mockk {
+                every { hasParentClassWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutParentClassNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutParentClassNamed(list of String) with ignore case returns declaration without any of given parent classs`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoParentClassProvider =
+            mockk {
+                every { hasParentClassWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoParentClassProvider =
+            mockk {
+                every { hasParentClassWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutParentClassNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -732,6 +820,50 @@ class KoParentClassProviderListExtTest {
     }
 
     @Test
+    fun `withAllParentClassesNamed(name) with ignore case returns declaration with given parent class`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoParentClassProvider =
+            mockk {
+                every { hasParentClassesWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoParentClassProvider =
+            mockk {
+                every { hasParentClassesWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllParentClassesNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllParentClassesNamed(list of String) with ignore case returns declaration with all given parent classes`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoParentClassProvider =
+            mockk {
+                every { hasParentClassesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoParentClassProvider =
+            mockk {
+                every { hasParentClassesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllParentClassesNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllParentClassesNamed(name) returns declaration without given parent class`() {
         // given
         val name = "SampleName"
@@ -815,6 +947,50 @@ class KoParentClassProviderListExtTest {
 
         // when
         val sut = declarations.withoutAllParentClassesNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllParentClassesNamed(name) with ignore case returns declaration without given parent class`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoParentClassProvider =
+            mockk {
+                every { hasParentClassesWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoParentClassProvider =
+            mockk {
+                every { hasParentClassesWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllParentClassesNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllParentClassesNamed(list of String) with ignore case returns declaration without all of given parent classes`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoParentClassProvider =
+            mockk {
+                every { hasParentClassesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoParentClassProvider =
+            mockk {
+                every { hasParentClassesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllParentClassesNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

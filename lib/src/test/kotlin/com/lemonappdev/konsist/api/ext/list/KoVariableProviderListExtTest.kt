@@ -325,6 +325,50 @@ class KoVariableProviderListExtTest {
     }
 
     @Test
+    fun `withVariableNamed(name) with ignore case returns declaration with given variable`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariableWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariableWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withVariableNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withVariableNamed(list of String) with ignore case returns declaration with any of given variables`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariableWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariableWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withVariableNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutVariableNamed(name) returns declaration without given variable`() {
         // given
         val name = "SampleName"
@@ -408,6 +452,50 @@ class KoVariableProviderListExtTest {
 
         // when
         val sut = declarations.withoutVariableNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutVariableNamed(name) with ignore case returns declaration without given variable`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariableWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariableWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutVariableNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutVariableNamed(list of String) with ignore case returns declaration without any of given variables`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariableWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariableWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutVariableNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -503,6 +591,50 @@ class KoVariableProviderListExtTest {
     }
 
     @Test
+    fun `withAllVariablesNamed(name) with ignore case returns declaration with given variable`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariablesWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariablesWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllVariablesNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllVariablesNamed(list of String) with ignore case returns declaration with all given variables`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariablesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariablesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllVariablesNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllVariablesNamed(name) returns declaration without given variable`() {
         // given
         val name = "SampleName"
@@ -586,6 +718,50 @@ class KoVariableProviderListExtTest {
 
         // when
         val sut = declarations.withoutAllVariablesNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllVariablesNamed(name) with ignore case returns declaration without given variable`() {
+        // given
+        val name = "SampleName"
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariablesWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariablesWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllVariablesNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllVariablesNamed(list of String) with ignore case returns declaration without all of given variables`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val declaration1: KoVariableProvider =
+            mockk {
+                every { hasVariablesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoVariableProvider =
+            mockk {
+                every { hasVariablesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllVariablesNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

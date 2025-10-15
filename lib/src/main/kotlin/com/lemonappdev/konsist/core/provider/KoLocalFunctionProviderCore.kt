@@ -20,28 +20,36 @@ internal interface KoLocalFunctionProviderCore :
     override fun hasLocalFunctionWithName(
         name: String,
         vararg names: String,
-    ): Boolean = hasLocalFunctionWithName(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasLocalFunctionWithName(listOf(name, *names), ignoreCase)
 
-    override fun hasLocalFunctionWithName(names: Collection<String>): Boolean =
+    override fun hasLocalFunctionWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasLocalFunctions()
             else ->
                 names.any {
-                    localFunctions.any { localFunction -> it == localFunction.name }
+                    localFunctions.any { localFunction -> localFunction.hasName(it, ignoreCase) }
                 }
         }
 
     override fun hasLocalFunctionsWithAllNames(
         name: String,
         vararg names: String,
-    ): Boolean = hasLocalFunctionsWithAllNames(listOf(name, *names))
+        ignoreCase: Boolean,
+    ): Boolean = hasLocalFunctionsWithAllNames(listOf(name, *names), ignoreCase)
 
-    override fun hasLocalFunctionsWithAllNames(names: Collection<String>): Boolean =
+    override fun hasLocalFunctionsWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean,
+    ): Boolean =
         when {
             names.isEmpty() -> hasLocalFunctions()
             else ->
                 names.all {
-                    localFunctions.any { localFunction -> it == localFunction.name }
+                    localFunctions.any { localFunction -> localFunction.hasName(it, ignoreCase) }
                 }
         }
 

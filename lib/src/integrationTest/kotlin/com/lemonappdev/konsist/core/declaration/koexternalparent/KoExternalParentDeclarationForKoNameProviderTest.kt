@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration.koexternalparent
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.externalParents
 import com.lemonappdev.konsist.api.ext.list.parents
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -17,7 +18,13 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalClass"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "SampleExternalClass"
+            hasName("SampleExternalClass") shouldBeEqualTo true
+            hasName("OtherClass") shouldBeEqualTo false
+            hasName("sampleexternalclass", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleexternalclass", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -30,7 +37,13 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalGenericClass<Int>"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "SampleExternalGenericClass<Int>"
+            hasName("SampleExternalGenericClass<Int>") shouldBeEqualTo true
+            hasName("OtherClass") shouldBeEqualTo false
+            hasName("sampleexternalgenericclass<int>", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleexternalgenericclass<int>", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -43,7 +56,13 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalClassWithParameter"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "SampleExternalClassWithParameter"
+            hasName("SampleExternalClassWithParameter") shouldBeEqualTo true
+            hasName("OtherClass") shouldBeEqualTo false
+            hasName("sampleexternalclasswithparameter", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleexternalclasswithparameter", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -56,7 +75,13 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalGenericClassWithParameter<Int>"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "SampleExternalGenericClassWithParameter<Int>"
+            hasName("SampleExternalGenericClassWithParameter<Int>") shouldBeEqualTo true
+            hasName("OtherClass") shouldBeEqualTo false
+            hasName("sampleexternalgenericclasswithparameter<int>", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleexternalgenericclasswithparameter<int>", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -69,7 +94,13 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalInterface"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "SampleExternalInterface"
+            hasName("SampleExternalInterface") shouldBeEqualTo true
+            hasName("OtherInterface") shouldBeEqualTo false
+            hasName("sampleexternalinterface", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleexternalinterface", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -82,7 +113,13 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalGenericInterface<Int>"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "SampleExternalGenericInterface<Int>"
+            hasName("SampleExternalGenericInterface<Int>") shouldBeEqualTo true
+            hasName("OtherInterface") shouldBeEqualTo false
+            hasName("sampleexternalgenericinterface<int>", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleexternalgenericinterface<int>", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -95,7 +132,13 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalInterface"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "SampleExternalInterface"
+            hasName("SampleExternalInterface") shouldBeEqualTo true
+            hasName("OtherInterface") shouldBeEqualTo false
+            hasName("sampleexternalinterface", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleexternalinterface", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -108,7 +151,13 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalClassWithParameter"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "SampleExternalClassWithParameter"
+            hasName("SampleExternalClassWithParameter") shouldBeEqualTo true
+            hasName("OtherClass") shouldBeEqualTo false
+            hasName("sampleexternalclasswithparameter", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleexternalclasswithparameter", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -121,7 +170,13 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalInterface"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "SampleExternalInterface"
+            hasName("SampleExternalInterface") shouldBeEqualTo true
+            hasName("OtherInterface") shouldBeEqualTo false
+            hasName("sampleexternalinterface", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleexternalinterface", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -134,7 +189,13 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalGenericInterface<Int>"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "SampleExternalGenericInterface<Int>"
+            hasName("SampleExternalGenericInterface<Int>") shouldBeEqualTo true
+            hasName("OtherInterface") shouldBeEqualTo false
+            hasName("sampleexternalgenericinterface<int>", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleexternalgenericinterface<int>", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -147,7 +208,13 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalClass"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "SampleExternalClass"
+            hasName("SampleExternalClass") shouldBeEqualTo true
+            hasName("OtherClass") shouldBeEqualTo false
+            hasName("sampleexternalclass", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleexternalclass", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -160,7 +227,13 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalGenericClass<Int>"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "SampleExternalGenericClass<Int>"
+            hasName("SampleExternalGenericClass<Int>") shouldBeEqualTo true
+            hasName("OtherClass") shouldBeEqualTo false
+            hasName("sampleexternalgenericclass<int>", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleexternalgenericclass<int>", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -173,7 +246,13 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalClassWithParameter"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "SampleExternalClassWithParameter"
+            hasName("SampleExternalClassWithParameter") shouldBeEqualTo true
+            hasName("OtherClass") shouldBeEqualTo false
+            hasName("sampleexternalclasswithparameter", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleexternalclasswithparameter", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -186,7 +265,13 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalGenericClassWithParameter<Int>"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "SampleExternalGenericClassWithParameter<Int>"
+            hasName("SampleExternalGenericClassWithParameter<Int>") shouldBeEqualTo true
+            hasName("OtherClass") shouldBeEqualTo false
+            hasName("sampleexternalgenericclasswithparameter<int>", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleexternalgenericclasswithparameter<int>", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -199,7 +284,13 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalInterface"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "SampleExternalInterface"
+            hasName("SampleExternalInterface") shouldBeEqualTo true
+            hasName("OtherInterface") shouldBeEqualTo false
+            hasName("sampleexternalinterface", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleexternalinterface", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -212,7 +303,13 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleExternalGenericInterface<Int>"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "SampleExternalGenericInterface<Int>"
+            hasName("SampleExternalGenericInterface<Int>") shouldBeEqualTo true
+            hasName("OtherInterface") shouldBeEqualTo false
+            hasName("sampleexternalgenericinterface<int>", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleexternalgenericinterface<int>", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -226,9 +323,13 @@ class KoExternalParentDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut
-            .name
-            .shouldBeEqualTo("SampleExternalClassWithParameter")
+        assertSoftly(sut) {
+            name shouldBeEqualTo "SampleExternalClassWithParameter"
+            hasName("SampleExternalClassWithParameter") shouldBeEqualTo true
+            hasName("OtherClass") shouldBeEqualTo false
+            hasName("sampleexternalclasswithparameter", ignoreCase = false) shouldBeEqualTo false
+            hasName("sampleexternalclasswithparameter", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     private fun getSnippetFile(fileName: String) =

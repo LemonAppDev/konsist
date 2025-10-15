@@ -1,0 +1,7 @@
+object SampleTopLevelObject {
+    public class SampleClass
+
+    interface SampleInterface
+
+    object SampleObject
+}

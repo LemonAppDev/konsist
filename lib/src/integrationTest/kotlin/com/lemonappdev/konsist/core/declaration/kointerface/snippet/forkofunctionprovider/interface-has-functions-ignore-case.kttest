@@ -1,0 +1,5 @@
+interface SampleInterface {
+     fun sampleFunction1()
+
+    fun sampleFunction2()
+}
