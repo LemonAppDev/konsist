@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test
 
 class KoClassDeclarationForKoCompanionObjectProviderTest {
     @Test
-    fun `class-has-no-companion-object`() {
+    fun `class-has-no-direct-companion-object`() {
         // given
         val sut =
-            getSnippetFile("class-has-no-companion-object")
+            getSnippetFile("class-has-no-direct-companion-object")
                 .classes()
                 .first()
 
@@ -18,109 +18,113 @@ class KoClassDeclarationForKoCompanionObjectProviderTest {
         assertSoftly(sut) {
             companionObject shouldBeEqualTo null
             hasCompanionObject() shouldBeEqualTo false
-            hasCompanionObject { it.name == "SampleCompanionObject" } shouldBeEqualTo false
-            hasCompanionObjectWithName("SampleCompanionObject") shouldBeEqualTo false
-            hasCompanionObjectWithName(listOf("SampleCompanionObject")) shouldBeEqualTo false
-            hasCompanionObjectWithName(setOf("SampleCompanionObject")) shouldBeEqualTo false
-            hasCompanionObjectsWithAllNames("SampleCompanionObject1", "SampleCompanionObject2") shouldBeEqualTo false
+            hasCompanionObject(includeNested = false) { it.name == "SampleCompanionObject" } shouldBeEqualTo false
+            hasCompanionObjectWithName("SampleCompanionObject", includeNested = false) shouldBeEqualTo false
+            hasCompanionObjectWithName(listOf("SampleCompanionObject"), includeNested = false) shouldBeEqualTo false
+            hasCompanionObjectWithName(setOf("SampleCompanionObject"), includeNested = false) shouldBeEqualTo false
+            hasCompanionObjectsWithAllNames(
+                "SampleCompanionObject1",
+                "SampleCompanionObject2",
+                includeNested = false
+            ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf(
                     "SampleCompanionObject1",
                     "SampleCompanionObject2"
-                )
+                ), includeNested = false
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 setOf(
                     "SampleCompanionObject1",
                     "SampleCompanionObject2"
-                )
+                ), includeNested = false
             ) shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `class-has-companion-object-with-default-name`() {
+    fun `class-has-direct-companion-object-with-default-name`() {
         // given
         val sut =
-            getSnippetFile("class-has-companion-object-with-default-name")
+            getSnippetFile("class-has-direct-companion-object-with-default-name")
                 .classes()
                 .first()
 
         // then
         assertSoftly(sut) {
             hasCompanionObject() shouldBeEqualTo true
-            hasCompanionObject { it.name == "Companion" } shouldBeEqualTo true
-            hasCompanionObject { it.hasNameEndingWith("nion") } shouldBeEqualTo true
-            hasCompanionObjectWithName("Companion", includeNested = true) shouldBeEqualTo true
-            hasCompanionObjectWithName("OtherCompanionObject", includeNested = true) shouldBeEqualTo false
+            hasCompanionObject(includeNested = false) { it.name == "Companion" } shouldBeEqualTo true
+            hasCompanionObject(includeNested = false) { it.hasNameEndingWith("nion") } shouldBeEqualTo true
+            hasCompanionObjectWithName("Companion", includeNested = false) shouldBeEqualTo true
+            hasCompanionObjectWithName("OtherCompanionObject", includeNested = false) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 "Companion",
                 "OtherCompanionObject",
-                includeNested = true
+                includeNested = false
             ) shouldBeEqualTo true
-            hasCompanionObjectWithName(listOf("Companion"), includeNested = true) shouldBeEqualTo true
-            hasCompanionObjectWithName(listOf("OtherCompanionObject"), includeNested = true) shouldBeEqualTo false
+            hasCompanionObjectWithName(listOf("Companion"), includeNested = false) shouldBeEqualTo true
+            hasCompanionObjectWithName(listOf("OtherCompanionObject"), includeNested = false) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 listOf("Companion", "OtherCompanionObject"),
-                includeNested = true
+                includeNested = false
             ) shouldBeEqualTo true
-            hasCompanionObjectsWithAllNames("Companion", includeNested = true) shouldBeEqualTo true
+            hasCompanionObjectsWithAllNames("Companion", includeNested = false) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames(
                 "Companion",
                 "SampleCompanionObject2",
-                includeNested = true
-            ) shouldBeEqualTo true
+                includeNested = false
+            ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf("Companion"),
-                includeNested = true
+                includeNested = false
             ) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames(
                 listOf("Companion", "SampleCompanionObject2"),
-                includeNested = true
-            ) shouldBeEqualTo true
+                includeNested = false
+            ) shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `class-has-companion-object-with-given-name`() {
+    fun `class-has-direct-companion-object-with-given-name`() {
         // given
         val sut =
-            getSnippetFile("class-has-companion-object-with-given-name")
+            getSnippetFile("class-has-direct-companion-object-with-given-name")
                 .classes()
                 .first()
 
         // then
         assertSoftly(sut) {
             hasCompanionObject() shouldBeEqualTo true
-            hasCompanionObject { it.name == "SampleCompanionObject1" } shouldBeEqualTo true
-            hasCompanionObject { it.hasNameEndingWith("CompanionObject1") } shouldBeEqualTo true
-            hasCompanionObjectWithName("SampleCompanionObject1", includeNested = true) shouldBeEqualTo true
-            hasCompanionObjectWithName("OtherCompanionObject", includeNested = true) shouldBeEqualTo false
+            hasCompanionObject(includeNested = false) { it.name == "SampleCompanionObject1" } shouldBeEqualTo true
+            hasCompanionObject(includeNested = false) { it.hasNameEndingWith("CompanionObject1") } shouldBeEqualTo true
+            hasCompanionObjectWithName("SampleCompanionObject1", includeNested = false) shouldBeEqualTo true
+            hasCompanionObjectWithName("OtherCompanionObject", includeNested = false) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 "SampleCompanionObject1",
                 "OtherCompanionObject",
-                includeNested = true
+                includeNested = false
             ) shouldBeEqualTo true
-            hasCompanionObjectWithName(listOf("SampleCompanionObject1"), includeNested = true) shouldBeEqualTo true
-            hasCompanionObjectWithName(listOf("OtherCompanionObject"), includeNested = true) shouldBeEqualTo false
+            hasCompanionObjectWithName(listOf("SampleCompanionObject1"), includeNested = false) shouldBeEqualTo true
+            hasCompanionObjectWithName(listOf("OtherCompanionObject"), includeNested = false) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 listOf("SampleCompanionObject1", "OtherCompanionObject"),
-                includeNested = true
+                includeNested = false
             ) shouldBeEqualTo true
-            hasCompanionObjectsWithAllNames("SampleCompanionObject1", includeNested = true) shouldBeEqualTo true
+            hasCompanionObjectsWithAllNames("SampleCompanionObject1", includeNested = false) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames(
                 "SampleCompanionObject1",
                 "SampleCompanionObject2",
-                includeNested = true
-            ) shouldBeEqualTo true
+                includeNested = false
+            ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf("SampleCompanionObject1"),
-                includeNested = true
+                includeNested = false
             ) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames(
                 listOf("SampleCompanionObject1", "SampleCompanionObject2"),
-                includeNested = true
-            ) shouldBeEqualTo true
+                includeNested = false
+            ) shouldBeEqualTo false
         }
     }
 
@@ -231,104 +235,85 @@ class KoClassDeclarationForKoCompanionObjectProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasCompanionObjectWithName("samplecompanionobject1", includeNested = true) shouldBeEqualTo false
+            hasCompanionObjectWithName("samplecompanionobject1",) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 "samplecompanionobject1",
                 ignoreCase = true,
-                includeNested = true
             ) shouldBeEqualTo true
-            hasCompanionObjectWithName("othercompanionobject", includeNested = true) shouldBeEqualTo false
+            hasCompanionObjectWithName("othercompanionobject",) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 "othercompanionobject",
                 ignoreCase = true,
-                includeNested = true
             ) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 "samplecompanionobject1",
                 "OtherCompanionObject",
-                includeNested = true
             ) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 "samplecompanionobject1",
                 "OtherCompanionObject",
                 ignoreCase = true,
-                includeNested = true
             ) shouldBeEqualTo true
-            hasCompanionObjectWithName(listOf("samplecompanionobject1"), includeNested = true) shouldBeEqualTo false
+            hasCompanionObjectWithName(listOf("samplecompanionobject1"),) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 listOf("samplecompanionobject1"),
                 ignoreCase = true,
-                includeNested = true
             ) shouldBeEqualTo true
-            hasCompanionObjectWithName(listOf("othercompanionobject"), includeNested = true) shouldBeEqualTo false
+            hasCompanionObjectWithName(listOf("othercompanionobject"),) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 listOf("othercompanionobject"),
                 ignoreCase = true,
-                includeNested = true
             ) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 listOf("samplecompanionobject1", "OtherCompanionObject"),
-                includeNested = true
             ) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 listOf("samplecompanionobject1", "OtherCompanionObject"),
                 ignoreCase = true,
-                includeNested = true
             ) shouldBeEqualTo true
-            hasCompanionObjectsWithAllNames("samplecompanionobject1", includeNested = true) shouldBeEqualTo false
+            hasCompanionObjectsWithAllNames("samplecompanionobject1",) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 "samplecompanionobject1",
                 ignoreCase = true,
-                includeNested = true
             ) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames(
                 "samplecompanionobject1",
                 "samplecompanionobject2",
-                includeNested = true
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 "samplecompanionobject1",
                 "samplecompanionobject2",
                 ignoreCase = true,
-                includeNested = true
             ) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames(
                 "samplecompanionobject1",
                 "othercompanionobject",
-                includeNested = true
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 "samplecompanionobject1",
                 "othercompanionobject",
                 ignoreCase = true,
-                includeNested = true
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf("samplecompanionobject1"),
-                includeNested = true
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf("samplecompanionobject1"),
                 ignoreCase = true,
-                includeNested = true
             ) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames(
                 listOf("samplecompanionobject1", "samplecompanionobject2"),
-                includeNested = true
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf("samplecompanionobject1", "samplecompanionobject2"),
                 ignoreCase = true,
-                includeNested = true
             ) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames(
                 listOf("samplecompanionobject1", "othercompanionobject"),
-                includeNested = true
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf("samplecompanionobject1", "othercompanionobject"),
                 ignoreCase = true,
-                includeNested = true
             ) shouldBeEqualTo false
         }
     }

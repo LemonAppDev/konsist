@@ -1,0 +1,15 @@
+object SampleObject {
+    object SampleNestedObject
+
+    class SampleClass {
+        object SampleClassObject
+
+        companion object SampleCompanionObject
+    }
+
+    interface SampleInterface {
+        object SampleInterfaceObject
+
+        companion object SampleNestedCompanionObject
+    }
+}
