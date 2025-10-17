@@ -48,6 +48,14 @@ interface KoParentClassProvider : KoBaseProvider {
     fun hasParentClass(): Boolean
 
     /**
+     * Determines whatever declaration has any parent class.
+     *
+     * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
+     * @return `true` if the declaration has any parent class, `false` otherwise.
+     */
+    fun hasParentClasses(indirectParents: Boolean = false): Boolean
+
+    /**
      * Determines whether the declaration has a specified parent class.
      * If `indirectParents` is set to `true`, it verifies if there's at least one parent class that satisfies the provided predicate.
      *
@@ -59,14 +67,6 @@ interface KoParentClassProvider : KoBaseProvider {
         indirectParents: Boolean = false,
         predicate: (KoParentDeclaration) -> Boolean,
     ): Boolean
-
-    /**
-     * Determines whatever declaration has any parent class.
-     *
-     * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
-     * @return `true` if the declaration has any parent class, `false` otherwise.
-     */
-    fun hasParentClasses(indirectParents: Boolean = false): Boolean
 
     /**
      * Determines whether the declaration has all parent classes that satisfy the provided predicate.

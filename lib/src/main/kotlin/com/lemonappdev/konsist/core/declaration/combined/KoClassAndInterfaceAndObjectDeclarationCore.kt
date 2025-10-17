@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.combined
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
+import com.lemonappdev.konsist.api.provider.KoCompanionObjectProvider
 import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import com.lemonappdev.konsist.core.declaration.KoChildDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
@@ -11,6 +12,7 @@ import com.lemonappdev.konsist.core.provider.KoClassAndInterfaceAndObjectProvide
 import com.lemonappdev.konsist.core.provider.KoClassAndInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassAndObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
+import com.lemonappdev.konsist.core.provider.KoCompanionObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
@@ -80,7 +82,8 @@ internal interface KoClassAndInterfaceAndObjectDeclarationCore :
     KoTextProviderCore,
     KoTopLevelProviderCore,
     KoIsTopLevelProviderCore,
-    KoVisibilityModifierProviderCore {
+    KoVisibilityModifierProviderCore,
+    KoCompanionObjectProviderCore {
     override val ktClassOrObject: KtClassOrObject
 
     override val psiElement: PsiElement

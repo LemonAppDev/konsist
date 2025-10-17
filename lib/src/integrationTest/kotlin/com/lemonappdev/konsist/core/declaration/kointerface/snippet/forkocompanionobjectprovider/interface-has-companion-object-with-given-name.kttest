@@ -1,0 +1,5 @@
+interface SampleInterface {
+    companion object SampleCompanionObject {
+        val sampleProperty = 0
+    }
+}

@@ -10,6 +10,7 @@ import com.lemonappdev.konsist.core.provider.KoClassAndInterfaceAndObjectProvide
 import com.lemonappdev.konsist.core.provider.KoClassAndInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassAndObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
+import com.lemonappdev.konsist.core.provider.KoCompanionObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoFileExtensionProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
@@ -58,7 +59,8 @@ internal class KoFileDeclarationCore(
     KoPropertyProviderCore,
     KoSourceSetProviderCore,
     KoTextProviderCore,
-    KoTypeAliasProviderCore {
+    KoTypeAliasProviderCore,
+    KoCompanionObjectProviderCore  {
     override val ktElement: KtElement by lazy { ktFile }
 
     override val psiElement: PsiElement by lazy { ktFile }

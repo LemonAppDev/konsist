@@ -1,0 +1,5 @@
+class SampleClass {
+    companion object SampleCompanionObject {
+        val sampleProperty = 0
+    }
+}
