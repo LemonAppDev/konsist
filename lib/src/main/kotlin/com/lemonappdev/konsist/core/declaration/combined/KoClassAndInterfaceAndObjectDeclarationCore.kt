@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.declaration.combined
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
-import com.lemonappdev.konsist.api.provider.KoCompanionObjectProvider
 import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import com.lemonappdev.konsist.core.declaration.KoChildDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
