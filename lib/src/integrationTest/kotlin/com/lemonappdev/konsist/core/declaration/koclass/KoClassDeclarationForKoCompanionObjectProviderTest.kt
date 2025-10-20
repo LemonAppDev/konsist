@@ -25,19 +25,21 @@ class KoClassDeclarationForKoCompanionObjectProviderTest {
             hasCompanionObjectsWithAllNames(
                 "SampleCompanionObject1",
                 "SampleCompanionObject2",
-                includeNested = false
+                includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf(
                     "SampleCompanionObject1",
-                    "SampleCompanionObject2"
-                ), includeNested = false
+                    "SampleCompanionObject2",
+                ),
+                includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 setOf(
                     "SampleCompanionObject1",
-                    "SampleCompanionObject2"
-                ), includeNested = false
+                    "SampleCompanionObject2",
+                ),
+                includeNested = false,
             ) shouldBeEqualTo false
         }
     }
@@ -60,27 +62,27 @@ class KoClassDeclarationForKoCompanionObjectProviderTest {
             hasCompanionObjectWithName(
                 "Companion",
                 "OtherCompanionObject",
-                includeNested = false
+                includeNested = false,
             ) shouldBeEqualTo true
             hasCompanionObjectWithName(listOf("Companion"), includeNested = false) shouldBeEqualTo true
             hasCompanionObjectWithName(listOf("OtherCompanionObject"), includeNested = false) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 listOf("Companion", "OtherCompanionObject"),
-                includeNested = false
+                includeNested = false,
             ) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames("Companion", includeNested = false) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames(
                 "Companion",
                 "SampleCompanionObject2",
-                includeNested = false
+                includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf("Companion"),
-                includeNested = false
+                includeNested = false,
             ) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames(
                 listOf("Companion", "SampleCompanionObject2"),
-                includeNested = false
+                includeNested = false,
             ) shouldBeEqualTo false
         }
     }
@@ -103,27 +105,27 @@ class KoClassDeclarationForKoCompanionObjectProviderTest {
             hasCompanionObjectWithName(
                 "SampleCompanionObject1",
                 "OtherCompanionObject",
-                includeNested = false
+                includeNested = false,
             ) shouldBeEqualTo true
             hasCompanionObjectWithName(listOf("SampleCompanionObject1"), includeNested = false) shouldBeEqualTo true
             hasCompanionObjectWithName(listOf("OtherCompanionObject"), includeNested = false) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 listOf("SampleCompanionObject1", "OtherCompanionObject"),
-                includeNested = false
+                includeNested = false,
             ) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames("SampleCompanionObject1", includeNested = false) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames(
                 "SampleCompanionObject1",
                 "SampleCompanionObject2",
-                includeNested = false
+                includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf("SampleCompanionObject1"),
-                includeNested = false
+                includeNested = false,
             ) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames(
                 listOf("SampleCompanionObject1", "SampleCompanionObject2"),
-                includeNested = false
+                includeNested = false,
             ) shouldBeEqualTo false
         }
     }
@@ -200,27 +202,27 @@ class KoClassDeclarationForKoCompanionObjectProviderTest {
             hasCompanionObjectsWithAllNames(
                 "samplecompanionobject1",
                 "samplecompanionobject2",
-                ignoreCase = true
+                ignoreCase = true,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf(
                     "samplecompanionobject1",
-                    "samplecompanionobject2"
-                )
+                    "samplecompanionobject2",
+                ),
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf("samplecompanionobject1", "samplecompanionobject2"),
-                ignoreCase = true
+                ignoreCase = true,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 setOf(
                     "samplecompanionobject1",
-                    "samplecompanionobject2"
-                )
+                    "samplecompanionobject2",
+                ),
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 setOf("samplecompanionobject1", "samplecompanionobject2"),
-                ignoreCase = true
+                ignoreCase = true,
             ) shouldBeEqualTo false
         }
     }
@@ -235,12 +237,12 @@ class KoClassDeclarationForKoCompanionObjectProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasCompanionObjectWithName("samplecompanionobject1",) shouldBeEqualTo false
+            hasCompanionObjectWithName("samplecompanionobject1") shouldBeEqualTo false
             hasCompanionObjectWithName(
                 "samplecompanionobject1",
                 ignoreCase = true,
             ) shouldBeEqualTo true
-            hasCompanionObjectWithName("othercompanionobject",) shouldBeEqualTo false
+            hasCompanionObjectWithName("othercompanionobject") shouldBeEqualTo false
             hasCompanionObjectWithName(
                 "othercompanionobject",
                 ignoreCase = true,
@@ -254,12 +256,12 @@ class KoClassDeclarationForKoCompanionObjectProviderTest {
                 "OtherCompanionObject",
                 ignoreCase = true,
             ) shouldBeEqualTo true
-            hasCompanionObjectWithName(listOf("samplecompanionobject1"),) shouldBeEqualTo false
+            hasCompanionObjectWithName(listOf("samplecompanionobject1")) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 listOf("samplecompanionobject1"),
                 ignoreCase = true,
             ) shouldBeEqualTo true
-            hasCompanionObjectWithName(listOf("othercompanionobject"),) shouldBeEqualTo false
+            hasCompanionObjectWithName(listOf("othercompanionobject")) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 listOf("othercompanionobject"),
                 ignoreCase = true,
@@ -271,7 +273,7 @@ class KoClassDeclarationForKoCompanionObjectProviderTest {
                 listOf("samplecompanionobject1", "OtherCompanionObject"),
                 ignoreCase = true,
             ) shouldBeEqualTo true
-            hasCompanionObjectsWithAllNames("samplecompanionobject1",) shouldBeEqualTo false
+            hasCompanionObjectsWithAllNames("samplecompanionobject1") shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 "samplecompanionobject1",
                 ignoreCase = true,

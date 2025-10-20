@@ -9,7 +9,7 @@ internal interface KoCompanionObjectProviderCore :
     KoObjectProviderCore,
     KoBaseProviderCore {
     override val companionObject: KoCompanionObjectDeclaration?
-        get() =  companionObjects(false).firstOrNull()
+        get() = companionObjects(false).firstOrNull()
 
     override fun companionObjects(includeNested: Boolean): List<KoCompanionObjectDeclaration> =
         KoDeclarationProviderCoreUtil.getKoDeclarations(

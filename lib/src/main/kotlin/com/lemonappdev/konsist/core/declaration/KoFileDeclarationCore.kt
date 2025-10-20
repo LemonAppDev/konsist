@@ -60,7 +60,7 @@ internal class KoFileDeclarationCore(
     KoSourceSetProviderCore,
     KoTextProviderCore,
     KoTypeAliasProviderCore,
-    KoCompanionObjectProviderCore  {
+    KoCompanionObjectProviderCore {
     override val ktElement: KtElement by lazy { ktFile }
 
     override val psiElement: PsiElement by lazy { ktFile }

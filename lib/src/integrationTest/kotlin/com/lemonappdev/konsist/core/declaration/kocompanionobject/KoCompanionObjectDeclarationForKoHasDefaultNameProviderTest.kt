@@ -1,11 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kocompanionobject
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.testdata.NonExistingAnnotation
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-import com.lemonappdev.konsist.testdata.SampleAnnotation1
-import com.lemonappdev.konsist.testdata.SampleAnnotation2
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -37,5 +32,6 @@ class KoCompanionObjectDeclarationForKoHasDefaultNameProviderTest {
         sut?.hasDefaultName shouldBeEqualTo false
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kocompanionobject/snippet/forkohasdefaultnameprovider/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kocompanionobject/snippet/forkohasdefaultnameprovider/", fileName)
 }

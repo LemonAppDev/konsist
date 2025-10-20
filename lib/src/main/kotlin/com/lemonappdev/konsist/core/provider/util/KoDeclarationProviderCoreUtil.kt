@@ -200,7 +200,7 @@ internal object KoDeclarationProviderCoreUtil {
                     containingDeclaration,
                 )
 
-            ktDeclaration is KtObjectDeclaration && ktDeclaration.isCompanion()->
+            ktDeclaration is KtObjectDeclaration && ktDeclaration.isCompanion() ->
                 KoCompanionObjectDeclarationCore.getInstance(
                     ktDeclaration,
                     containingDeclaration,

@@ -11,8 +11,8 @@ import org.jetbrains.kotlin.psi.KtObjectDeclaration
 internal class KoCompanionObjectDeclarationCore(
     ktObjectDeclaration: KtObjectDeclaration,
     override val containingDeclaration: KoBaseDeclaration,
-) : KoCompanionObjectDeclaration,
-    KoObjectDeclarationCore(ktObjectDeclaration, containingDeclaration),
+) : KoObjectDeclarationCore(ktObjectDeclaration, containingDeclaration),
+    KoCompanionObjectDeclaration,
     KoKoHasDefaultNameProviderCore {
     override val name: String by lazy {
         if (super<KoObjectDeclarationCore>.name == "") {

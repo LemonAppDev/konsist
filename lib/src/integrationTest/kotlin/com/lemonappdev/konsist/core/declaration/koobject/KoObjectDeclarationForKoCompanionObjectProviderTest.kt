@@ -25,19 +25,21 @@ class KoObjectDeclarationForKoCompanionObjectProviderTest {
             hasCompanionObjectsWithAllNames(
                 "SampleCompanionObject1",
                 "SampleCompanionObject2",
-                includeNested = false
+                includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf(
                     "SampleCompanionObject1",
-                    "SampleCompanionObject2"
-                ), includeNested = false
+                    "SampleCompanionObject2",
+                ),
+                includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 setOf(
                     "SampleCompanionObject1",
-                    "SampleCompanionObject2"
-                ), includeNested = false
+                    "SampleCompanionObject2",
+                ),
+                includeNested = false,
             ) shouldBeEqualTo false
         }
     }
@@ -108,49 +110,54 @@ class KoObjectDeclarationForKoCompanionObjectProviderTest {
             hasCompanionObjectWithName(
                 "samplecompanionobject",
                 ignoreCase = true,
-                includeNested = false
+                includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectWithName(listOf("samplecompanionobject"), includeNested = false) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 listOf("samplecompanionobject"),
                 ignoreCase = true,
-                includeNested = false
+                includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectWithName(setOf("samplecompanionobject"), includeNested = false) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 setOf("samplecompanionobject"),
                 ignoreCase = true,
-                includeNested = false
+                includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 "samplecompanionobject1",
                 "samplecompanionobject2",
-                includeNested = false
+                includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 "samplecompanionobject1",
                 "samplecompanionobject2",
-                ignoreCase = true, includeNested = false
+                ignoreCase = true,
+                includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf(
                     "samplecompanionobject1",
-                    "samplecompanionobject2"
-                ), includeNested = false
+                    "samplecompanionobject2",
+                ),
+                includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf("samplecompanionobject1", "samplecompanionobject2"),
-                ignoreCase = true, includeNested = false
+                ignoreCase = true,
+                includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 setOf(
                     "samplecompanionobject1",
-                    "samplecompanionobject2"
-                ), includeNested = false
+                    "samplecompanionobject2",
+                ),
+                includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 setOf("samplecompanionobject1", "samplecompanionobject2"),
-                ignoreCase = true, includeNested = false
+                ignoreCase = true,
+                includeNested = false,
             ) shouldBeEqualTo false
         }
     }
@@ -169,101 +176,82 @@ class KoObjectDeclarationForKoCompanionObjectProviderTest {
             hasCompanionObjectWithName(
                 "samplecompanionobject1",
                 ignoreCase = true,
-
-                ) shouldBeEqualTo true
+            ) shouldBeEqualTo true
             hasCompanionObjectWithName("othercompanionobject") shouldBeEqualTo false
             hasCompanionObjectWithName(
                 "othercompanionobject",
                 ignoreCase = true,
-
-                ) shouldBeEqualTo false
+            ) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 "samplecompanionobject1",
                 "OtherCompanionObject",
-
-                ) shouldBeEqualTo false
+            ) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 "samplecompanionobject1",
                 "OtherCompanionObject",
                 ignoreCase = true,
-
-                ) shouldBeEqualTo true
+            ) shouldBeEqualTo true
             hasCompanionObjectWithName(listOf("samplecompanionobject1")) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 listOf("samplecompanionobject1"),
                 ignoreCase = true,
-
-                ) shouldBeEqualTo true
+            ) shouldBeEqualTo true
             hasCompanionObjectWithName(listOf("othercompanionobject")) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 listOf("othercompanionobject"),
                 ignoreCase = true,
-
-                ) shouldBeEqualTo false
+            ) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 listOf("samplecompanionobject1", "OtherCompanionObject"),
-
-                ) shouldBeEqualTo false
+            ) shouldBeEqualTo false
             hasCompanionObjectWithName(
                 listOf("samplecompanionobject1", "OtherCompanionObject"),
                 ignoreCase = true,
-
-                ) shouldBeEqualTo true
+            ) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames("samplecompanionobject1") shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 "samplecompanionobject1",
                 ignoreCase = true,
-
-                ) shouldBeEqualTo true
+            ) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames(
                 "samplecompanionobject1",
                 "samplecompanionobject2",
-
-                ) shouldBeEqualTo false
+            ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 "samplecompanionobject1",
                 "samplecompanionobject2",
                 ignoreCase = true,
-
-                ) shouldBeEqualTo true
+            ) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames(
                 "samplecompanionobject1",
                 "othercompanionobject",
-
-                ) shouldBeEqualTo false
+            ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 "samplecompanionobject1",
                 "othercompanionobject",
                 ignoreCase = true,
-
-                ) shouldBeEqualTo false
+            ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf("samplecompanionobject1"),
-
-                ) shouldBeEqualTo false
+            ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf("samplecompanionobject1"),
                 ignoreCase = true,
-
-                ) shouldBeEqualTo true
+            ) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames(
                 listOf("samplecompanionobject1", "samplecompanionobject2"),
-
-                ) shouldBeEqualTo false
+            ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf("samplecompanionobject1", "samplecompanionobject2"),
                 ignoreCase = true,
-
-                ) shouldBeEqualTo true
+            ) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames(
                 listOf("samplecompanionobject1", "othercompanionobject"),
-
-                ) shouldBeEqualTo false
+            ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf("samplecompanionobject1", "othercompanionobject"),
                 ignoreCase = true,
-
-                ) shouldBeEqualTo false
+            ) shouldBeEqualTo false
         }
     }
 
