@@ -46,14 +46,6 @@ internal open class KoObjectDeclarationCore(
 
     override val ktClassOrObject: KtClassOrObject by lazy { ktObjectDeclaration }
 
-    override val name: String by lazy {
-        if (hasCompanionModifier && super<KoNameProviderCore>.name == "") {
-            "Companion"
-        } else {
-            super<KoNameProviderCore>.name
-        }
-    }
-
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,

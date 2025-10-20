@@ -1,0 +1,3 @@
+class SampleClass {
+    companion object SampleCompanionObject
+}
