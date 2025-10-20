@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoEnumConstantDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoImportDeclarationCore
@@ -199,8 +200,14 @@ internal object KoDeclarationProviderCoreUtil {
                     containingDeclaration,
                 )
 
+            ktDeclaration is KtObjectDeclaration && ktDeclaration.isCompanion()->
+                KoCompanionObjectDeclarationCore.getInstance(
+                    ktDeclaration,
+                    containingDeclaration,
+                )
+
             ktDeclaration is KtObjectDeclaration ->
-                KoObjectDeclarationCore.getInstance(
+                KoCompanionObjectDeclarationCore.getInstance(
                     ktDeclaration,
                     containingDeclaration,
                 )

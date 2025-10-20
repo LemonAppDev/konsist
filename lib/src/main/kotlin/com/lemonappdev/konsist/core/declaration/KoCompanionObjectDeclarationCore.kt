@@ -1,7 +1,9 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoCompanionObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.provider.modifier.KoCompanionModifierProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.combined.KoClassAndObjectDeclarationCore
 import com.lemonappdev.konsist.core.declaration.combined.KoInterfaceAndObjectDeclarationCore
@@ -19,50 +21,11 @@ import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtObjectDeclaration
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
-internal open class KoObjectDeclarationCore(
-    private val ktObjectDeclaration: KtObjectDeclaration,
+internal class KoCompanionObjectDeclarationCore(
+    ktObjectDeclaration: KtObjectDeclaration,
     override val containingDeclaration: KoBaseDeclaration,
-) : KoObjectDeclaration,
-    KoClassAndObjectDeclarationCore,
-    KoInterfaceAndObjectDeclarationCore,
-    KoCompanionModifierProviderCore,
-    KoDataModifierProviderCore,
-    KoInitBlockProviderCore,
-    /*
-    We need to manually add KoNameProviderCore, even though KoObjectDeclarationCore indirectly implements this provider,
-    because it is used to override the `name` property.
-     */
-    KoNameProviderCore,
-    KoParentClassProviderCore {
-    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktObjectDeclaration.annotationEntries }
-
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktObjectDeclaration }
-
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktObjectDeclaration }
-
-    override val psiElement: PsiElement by lazy { ktObjectDeclaration }
-
-    override val ktElement: KtElement by lazy { ktObjectDeclaration }
-
-    override val ktClassOrObject: KtClassOrObject by lazy { ktObjectDeclaration }
-
-    override val name: String by lazy {
-        if (hasCompanionModifier && super<KoNameProviderCore>.name == "") {
-            "Companion"
-        } else {
-            super<KoNameProviderCore>.name
-        }
-    }
-
-    override fun declarations(
-        includeNested: Boolean,
-        includeLocal: Boolean,
-    ): List<KoBaseDeclaration> =
-        KoDeclarationProviderCoreUtil
-            .getKoDeclarations(ktObjectDeclaration, includeNested, includeLocal, this)
-
-    override fun toString(): String = name
-
+) : KoCompanionObjectDeclaration,
+    KoObjectDeclarationCore(ktObjectDeclaration, containingDeclaration) {
     internal companion object {
         private val cache: KoDeclarationCache<KoObjectDeclaration> = KoDeclarationCache()
 
@@ -71,7 +34,7 @@ internal open class KoObjectDeclarationCore(
             containingDeclaration: KoBaseDeclaration,
         ): KoObjectDeclaration =
             cache.getOrCreateInstance(ktObjectDeclaration, containingDeclaration) {
-                KoObjectDeclarationCore(
+                KoCompanionObjectDeclarationCore(
                     ktObjectDeclaration,
                     containingDeclaration,
                 )
