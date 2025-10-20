@@ -1,40 +1,41 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoCompanionObjectDeclaration
 import com.lemonappdev.konsist.api.provider.KoCompanionObjectProvider
-import withCompanionModifier
+import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 
 internal interface KoCompanionObjectProviderCore :
     KoCompanionObjectProvider,
     KoObjectProviderCore,
     KoBaseProviderCore {
-    override val companionObject: KoObjectDeclaration?
-        get() = objects(false)
-            .withCompanionModifier()
-            .firstOrNull()
+    override val companionObject: KoCompanionObjectDeclaration?
+        get() =  companionObjects(false).firstOrNull()
 
-    override fun companionObjects(includeNested: Boolean): List<KoObjectDeclaration> =
-        objects(includeNested).withCompanionModifier()
+    override fun companionObjects(includeNested: Boolean): List<KoCompanionObjectDeclaration> =
+        KoDeclarationProviderCoreUtil.getKoDeclarations(
+            declarations(includeNested = false, includeLocal = false),
+            includeNested,
+        )
 
     override fun numCompanionObjects(includeNested: Boolean): Int = companionObjects(includeNested).size
 
     override fun countCompanionObjects(
         includeNested: Boolean,
-        predicate: (KoObjectDeclaration) -> Boolean,
+        predicate: (KoCompanionObjectDeclaration) -> Boolean,
     ): Int = companionObjects(includeNested).count { predicate(it) }
 
     override fun hasCompanionObject(): Boolean = companionObject != null
 
     override fun hasCompanionObject(
         includeNested: Boolean,
-        predicate: (KoObjectDeclaration) -> Boolean,
+        predicate: (KoCompanionObjectDeclaration) -> Boolean,
     ): Boolean = companionObjects(includeNested).any(predicate)
 
     override fun hasCompanionObjects(includeNested: Boolean): Boolean = companionObjects(includeNested).isNotEmpty()
 
     override fun hasAllCompanionObjects(
         includeNested: Boolean,
-        predicate: (KoObjectDeclaration) -> Boolean,
+        predicate: (KoCompanionObjectDeclaration) -> Boolean,
     ): Boolean = companionObjects(includeNested).all(predicate)
 
     override fun hasCompanionObjectWithName(

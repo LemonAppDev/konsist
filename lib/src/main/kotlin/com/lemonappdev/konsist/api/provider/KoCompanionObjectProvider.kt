@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoCompanionObjectDeclaration
 
 /**
  * An interface representing a Kotlin declaration that provides access to its companion object.
@@ -9,15 +9,15 @@ interface KoCompanionObjectProvider : KoBaseProvider {
     /**
      * The companion object declared within this declaration, or `null` if none exists.
      */
-    val companionObject: KoObjectDeclaration?
+    val companionObject: KoCompanionObjectDeclaration?
 
     /**
      * The companion objects of the declaration.
      *
      * @param includeNested Specifies whether to include nested companion objects in the count (optional, default is `true`).
-     * @return a list of [KoObjectDeclaration] representing the companion objects of the declaration.
+     * @return a list of [KoCompanionObjectDeclaration] representing the companion objects of the declaration.
      */
-    fun companionObjects(includeNested: Boolean = true): List<KoObjectDeclaration>
+    fun companionObjects(includeNested: Boolean = true): List<KoCompanionObjectDeclaration>
 
     /**
      * Returns the number of companion objects.
@@ -36,7 +36,7 @@ interface KoCompanionObjectProvider : KoBaseProvider {
      */
     fun countCompanionObjects(
         includeNested: Boolean = true,
-        predicate: (KoObjectDeclaration) -> Boolean,
+        predicate: (KoCompanionObjectDeclaration) -> Boolean,
     ): Int
 
     /**
@@ -63,7 +63,7 @@ interface KoCompanionObjectProvider : KoBaseProvider {
      */
     fun hasCompanionObject(
         includeNested: Boolean = true,
-        predicate: (KoObjectDeclaration) -> Boolean,
+        predicate: (KoCompanionObjectDeclaration) -> Boolean,
     ): Boolean
 
     /**
@@ -78,7 +78,7 @@ interface KoCompanionObjectProvider : KoBaseProvider {
      */
     fun hasAllCompanionObjects(
         includeNested: Boolean = true,
-        predicate: (KoObjectDeclaration) -> Boolean,
+        predicate: (KoCompanionObjectDeclaration) -> Boolean,
     ): Boolean
 
     /**
