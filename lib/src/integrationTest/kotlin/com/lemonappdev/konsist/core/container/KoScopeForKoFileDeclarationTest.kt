@@ -25,6 +25,7 @@ class KoScopeForKoFileDeclarationTest {
                     "KoScopeForKoClassAndInterfaceDeclarationTest",
                     "KoScopeForKoClassAndObjectDeclarationTest",
                     "KoScopeForKoClassDeclarationTest",
+                    "KoScopeForKoCompanionObjectDeclarationTest",
                     "KoScopeForKoDeclarationTest",
                     "KoScopeForKoFileDeclarationTest",
                     "KoScopeForKoFunctionDeclarationTest",
