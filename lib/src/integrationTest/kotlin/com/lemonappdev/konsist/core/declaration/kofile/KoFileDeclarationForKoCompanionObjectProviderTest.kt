@@ -5,6 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+@Suppress("detekt.LongMethod")
 class KoFileDeclarationForKoCompanionObjectProviderTest {
     @Test
     fun `file-has-no-direct-companion-object`() {
