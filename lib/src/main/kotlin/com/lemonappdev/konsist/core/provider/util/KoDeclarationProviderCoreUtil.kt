@@ -99,10 +99,12 @@ internal object KoDeclarationProviderCoreUtil {
             if (includeNested) {
                 declarations.flatMap {
                     when (it) {
-                        is KoDeclarationProvider -> listOf(it) + it.declarations(
-                            includeNested = true,
-                            includeLocal = false
-                        )
+                        is KoDeclarationProvider ->
+                            listOf(it) +
+                                it.declarations(
+                                    includeNested = true,
+                                    includeLocal = false,
+                                )
 
                         else -> listOf(it)
                     }
@@ -119,10 +121,10 @@ internal object KoDeclarationProviderCoreUtil {
                             is KoFunctionDeclarationCore -> {
                                 val localDeclarations =
                                     listOf(it) + it.localDeclarations +
-                                            localDeclarations(
-                                                it.localFunctions,
-                                                includeNested,
-                                            )
+                                        localDeclarations(
+                                            it.localFunctions,
+                                            includeNested,
+                                        )
 
                                 if (includeNested) {
                                     localDeclarations + nestedDeclarations(it.localDeclarations)
@@ -162,10 +164,10 @@ internal object KoDeclarationProviderCoreUtil {
             }
 
             localDeclarations += koFunction.localDeclarations + nestedDeclarations +
-                    localDeclarations(
-                        koFunction.localFunctions,
-                        includeNested,
-                    )
+                localDeclarations(
+                    koFunction.localFunctions,
+                    includeNested,
+                )
         }
 
         return localDeclarations
@@ -185,10 +187,11 @@ internal object KoDeclarationProviderCoreUtil {
         containingDeclaration: KoBaseDeclaration,
     ): KoBaseDeclaration? =
         when {
-            ktDeclaration is KtEnumEntry -> KoEnumConstantDeclarationCore.getInstance(
-                ktDeclaration,
-                containingDeclaration
-            )
+            ktDeclaration is KtEnumEntry ->
+                KoEnumConstantDeclarationCore.getInstance(
+                    ktDeclaration,
+                    containingDeclaration,
+                )
 
             ktDeclaration is KtSecondaryConstructor ->
                 KoSecondaryConstructorDeclarationCore.getInstance(
@@ -208,17 +211,18 @@ internal object KoDeclarationProviderCoreUtil {
                     containingDeclaration,
                 )
 
-            ktDeclaration is KtObjectDeclaration -> if (ktDeclaration.isCompanion()) {
-                KoCompanionObjectDeclarationCore.getInstance(
-                    ktDeclaration,
-                    containingDeclaration,
-                )
-            } else {
-                KoObjectDeclarationCore.getInstance(
-                    ktDeclaration,
-                    containingDeclaration,
-                )
-            }
+            ktDeclaration is KtObjectDeclaration ->
+                if (ktDeclaration.isCompanion()) {
+                    KoCompanionObjectDeclarationCore.getInstance(
+                        ktDeclaration,
+                        containingDeclaration,
+                    )
+                } else {
+                    KoObjectDeclarationCore.getInstance(
+                        ktDeclaration,
+                        containingDeclaration,
+                    )
+                }
 
             ktDeclaration is KtProperty -> KoPropertyDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
             ktDeclaration is KtFunction -> KoFunctionDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
