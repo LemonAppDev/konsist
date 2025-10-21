@@ -11,12 +11,11 @@ class KoCompanionObjectDeclarationForKoHasDefaultNameProviderTest {
         // given
         val sut =
             getSnippetFile("companion-object-has-default-name")
-                .classes()
+                .companionObjects()
                 .first()
-                .companionObject
 
         // then
-        sut?.hasDefaultName shouldBeEqualTo true
+        sut.hasDefaultName shouldBeEqualTo true
     }
 
     @Test
@@ -24,12 +23,11 @@ class KoCompanionObjectDeclarationForKoHasDefaultNameProviderTest {
         // given
         val sut =
             getSnippetFile("companion-object-has-given-name")
-                .classes()
+                .companionObjects()
                 .first()
-                .companionObject
 
         // then
-        sut?.hasDefaultName shouldBeEqualTo false
+        sut.hasDefaultName shouldBeEqualTo false
     }
 
     private fun getSnippetFile(fileName: String) =
