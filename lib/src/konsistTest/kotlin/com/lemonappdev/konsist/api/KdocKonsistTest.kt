@@ -17,8 +17,7 @@ class KdocKonsistTest {
     fun `every api function has valid KDoc`() {
         apiPackageScope
             .functions()
-            .withoutPrivateModifier()
-            .withName("isSortedBy")
+            .withoutModifier(PRIVATE, OVERRIDE)
             .assertTrue {
                 it.hasValidKDocParamTags() && it.hasValidKDocReturnTag()
             }

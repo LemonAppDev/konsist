@@ -3,36 +3,92 @@ package com.lemonappdev.konsist.api.provider
 import com.lemonappdev.konsist.api.declaration.KoCompanionObjectDeclaration
 
 /**
- * An interface representing a Kotlin declaration that provides access to its companion object.
+ * An interface representing a Kotlin declaration that provides access to its companion objects.
+ *
+ * A *companion object* is a special singleton object declared inside a declaration using
+ * the `companion` keyword. Each declaration can contain **at most one direct companion object**,
+ * but nested declarations may each have their own companion objects.
+ *
+ * The `includeNested` parameter in several functions determines whether companion objects
+ * from nested declarations should be included in the results.
+ *
+ * ### Example
+ * ```
+ * class A {
+ *     class B {
+ *         companion object C { }
+ *     }
+ * }
+ *
+ * For class A:
+ * companionObject               // null
+ * companionObjects(false)       // []
+ * companionObjects(true)        // [C]
+ *
+ * For class B:
+ * companionObject               // C
+ * companionObjects(false)       // [C]
+ * companionObjects(true)        // [C]
+ * ```
  */
 interface KoCompanionObjectProvider : KoBaseProvider {
     /**
-     * The companion object declared within this declaration, or `null` if none exists.
+     * The direct companion object declared within this declaration, or `null` if none exists.
+     *
+     * A *direct* companion object is one declared in the declaration itself:
+     * ```
+     * class A {
+     *     companion object { }
+     * }
+     * ```
+     * Nested companion objects declared in inner declarations are **not** included.
      */
     val companionObject: KoCompanionObjectDeclaration?
 
     /**
-     * The companion objects of the declaration.
+     * Returns a list of companion objects declared within this declaration.
      *
-     * @param includeNested Specifies whether to include nested companion objects in the count (optional, default is `true`).
-     * @return a list of [KoCompanionObjectDeclaration] representing the companion objects of the declaration.
+     * @param includeNested Determines whether to include companion objects declared in nested declarations.
+     *  - If `false`, returns only the *direct* companion object of this declaration (if any).
+     *  - If `true`, also includes companion objects from all nested declarations.
+     *
+     * ### Example
+     * ```
+     * class A {
+     *     class B { companion object AB { } }
+     *     class C { companion object AC { } }
+     * }
+     *
+     * For class A:
+     * companionObjects(false) // []
+     * companionObjects(true)  // [AB, AC]
+     * ```
+     *
+     * @return A list of [KoCompanionObjectDeclaration] representing companion objects found in this declaration.
      */
     fun companionObjects(includeNested: Boolean = true): List<KoCompanionObjectDeclaration>
 
     /**
-     * Returns the number of companion objects.
+     * Returns the number of companion objects declared in this declaration.
      *
-     * @param includeNested Specifies whether to include nested companion objects in the count (optional, default is `true`).
-     * @return The number of companion objects.
+     * Behaves consistently with [companionObjects] — if [includeNested] is `true`,
+     * nested companion objects from inner declarations are also counted.
+     *
+     * @param includeNested Whether to include nested companion objects.
+     * @return The total number of companion objects, including nested ones if [includeNested] is `true`.
      */
     fun numCompanionObjects(includeNested: Boolean = true): Int
 
     /**
-     * Returns the number of companion objects that satisfies the specified predicate present in the declaration.
+     * Returns the number of companion objects that satisfy the specified [predicate].
      *
-     * @param includeNested Specifies whether to include nested companion objects in the count (optional, default is `true`).
-     * @param predicate The predicate function to determine if a companion object satisfies a condition.
-     * @return The number of companion objects in the declaration satisfying predicate.
+     * Behaves consistently with [companionObjects]:
+     * - When [includeNested] is `false`, checks only the direct companion object (if any).
+     * - When [includeNested] is `true`, includes nested companion objects as well.
+     *
+     * @param includeNested Whether to include nested companion objects.
+     * @param predicate A function defining the condition that each companion object must satisfy.
+     * @return The number of companion objects matching the predicate.
      */
     fun countCompanionObjects(
         includeNested: Boolean = true,
@@ -40,26 +96,38 @@ interface KoCompanionObjectProvider : KoBaseProvider {
     ): Int
 
     /**
-     * Determines whether the declaration has a direct companion object.
+     * Determines whether this declaration has a direct companion object.
      *
-     * @return `true` if the declaration has any direct companion object, `false` otherwise.
+     * Returns `true` only if a companion object is declared **directly** within this declaration.
+     * Nested companion objects are not considered.
+     *
+     * @return `true` if this declaration directly contains a companion object, otherwise `false`.
      */
     fun hasCompanionObject(): Boolean
 
     /**
-     * Determines whatever declaration has any companion object.
+     * Determines whether this declaration has any companion objects.
      *
-     * @param includeNested Specifies whether to include nested companion objects in the count (optional, default is `true`).
-     * @return `true` if the declaration has any companion object, `false` otherwise.
+     * Behaves consistently with [companionObjects]:
+     * - When [includeNested] is `false`, checks only for a direct companion object.
+     * - When [includeNested] is `true`, also considers companion objects in nested declarations.
+     *
+     * @param includeNested Whether to include nested companion objects in the check.
+     * @return `true` if this declaration has at least one companion object (direct or nested, depending on
+     * [includeNested]), otherwise `false`.
      */
     fun hasCompanionObjects(includeNested: Boolean = true): Boolean
 
     /**
-     * Determines whether the declaration has a specified companion object.
+     * Determines whether the declaration has a companion object that satisfies the given [predicate].
      *
-     * @param includeNested Specifies whether to include nested companion objects in the count (optional, default is `true`).
+     * Behaves consistently with [companionObjects]:
+     * - When [includeNested] is `false`, tests only the direct companion object.
+     * - When [includeNested] is `true`, includes nested companion objects as well.
+     *
+     * @param includeNested Whether to include nested companion objects.
      * @param predicate A function that defines the condition to be met by a companion object.
-     * @return `true` if there is a matching declaration, `false` otherwise.
+     * @return `true` if a companion object satisfying the condition exists, `false` otherwise.
      */
     fun hasCompanionObject(
         includeNested: Boolean = true,
@@ -67,14 +135,18 @@ interface KoCompanionObjectProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has all companion objects that satisfy the provided predicate.
+     * Determines whether all companion objects of this declaration satisfy the given [predicate].
      *
-     * Note that if the companion objects contain no elements, the function returns `true` because there are no elements in it
-     * that do not match the predicate.
+     * If no companion objects are present (according to [includeNested]), this function returns `true`
+     * because there are no elements that violate the predicate.
      *
-     * @param includeNested Specifies whether to include nested companion objects in the count (optional, default is `true`).
-     * @param predicate A function that defines the condition to be met by companion objects.
-     * @return `true` if all companion objects satisfy the predicate, `false` otherwise.
+     * Behaves consistently with [companionObjects]:
+     * - When [includeNested] is `false`, tests only the direct companion object (if any).
+     * - When [includeNested] is `true`, includes nested companion objects as well.
+     *
+     * @param includeNested Whether to include nested companion objects.
+     * @param predicate The condition each companion object must satisfy.
+     * @return `true` if all companion objects satisfy the [predicate] (or if none exist), otherwise `false`.
      */
     fun hasAllCompanionObjects(
         includeNested: Boolean = true,
@@ -82,15 +154,17 @@ interface KoCompanionObjectProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has a companion object whose name matches any of the specified names.
+     * Determines whether this declaration has a companion object whose name matches any of the specified names.
      *
-     * @param name the name of the companion object to check.
-     * @param names the names of the companion objects to check.
-     * @param includeNested Specifies whether to include nested companion objects in the count (optional, default is `true`).
-     * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
-     *        If `false`, the comparison will consider case sensitivity.
-     * @return `true` if there is a matching declaration, `false` otherwise.
+     * Behaves consistently with [companionObjects]:
+     * - When [includeNested] is `false`, tests only the direct companion object.
+     * - When [includeNested] is `true`, includes nested companion objects as well.
+     *
+     * @param name The name to check.
+     * @param names Additional names to check.
+     * @param includeNested Whether to include nested companion objects.
+     * @param ignoreCase Whether name matching should ignore case.
+     * @return `true` if a matching companion object exists, `false` otherwise.
      */
     fun hasCompanionObjectWithName(
         name: String,
@@ -100,14 +174,16 @@ interface KoCompanionObjectProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has a companion object whose name matches any of the specified names.
+     * Determines whether this declaration has a companion object whose name matches any of the specified [names].
      *
-     * @param names the names of the companion objects to check.
-     * @param includeNested Specifies whether to include nested companion objects in the count (optional, default is `true`).
-     * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
-     *        If `false`, the comparison will consider case sensitivity.
-     * @return `true` if there is a matching declaration, `false` otherwise.
+     * Behaves consistently with [companionObjects]:
+     * - When [includeNested] is `false`, tests only the direct companion object.
+     * - When [includeNested] is `true`, includes nested companion objects as well.
+     *
+     * @param names The names to check.
+     * @param includeNested Whether to include nested companion objects.
+     * @param ignoreCase Whether name matching should ignore case.
+     * @return `true` if a matching companion object exists, `false` otherwise.
      */
     fun hasCompanionObjectWithName(
         names: Collection<String>,
@@ -116,15 +192,17 @@ interface KoCompanionObjectProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has companion objects with all the specified names.
+     * Determines whether this declaration has companion objects with all the specified names.
      *
-     * @param name The name of the companion object to check.
-     * @param names The names of the companion objects to check.
-     * @param includeNested Specifies whether to include nested companion objects in the count (optional, default is `true`).
-     * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
-     *        If `false`, the comparison will consider case sensitivity.
-     * @return `true` if there are declarations with all the specified names, `false` otherwise.
+     * Behaves consistently with [companionObjects]:
+     * - When [includeNested] is `false`, tests only the direct companion object.
+     * - When [includeNested] is `true`, includes nested companion objects as well.
+     *
+     * @param name The first name to check.
+     * @param names Additional names to check.
+     * @param includeNested Whether to include nested companion objects.
+     * @param ignoreCase Whether name matching should ignore case.
+     * @return `true` if all specified names are present among companion objects, `false` otherwise.
      */
     fun hasCompanionObjectsWithAllNames(
         name: String,
@@ -134,14 +212,16 @@ interface KoCompanionObjectProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has companion objects with all the specified names.
+     * Determines whether this declaration has companion objects with all the specified [names].
      *
-     * @param names The names of the companion objects to check.
-     * @param includeNested Specifies whether to include nested companion objects in the count (optional, default is `true`).
-     * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
-     *        If `false`, the comparison will consider case sensitivity.
-     * @return `true` if there are declarations with all the specified names, `false` otherwise.
+     * Behaves consistently with [companionObjects]:
+     * - When [includeNested] is `false`, tests only the direct companion object.
+     * - When [includeNested] is `true`, includes nested companion objects as well.
+     *
+     * @param names The names to check.
+     * @param includeNested Whether to include nested companion objects.
+     * @param ignoreCase Whether name matching should ignore case.
+     * @return `true` if all specified names are present among companion objects, `false` otherwise.
      */
     fun hasCompanionObjectsWithAllNames(
         names: Collection<String>,
