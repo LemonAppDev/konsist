@@ -95,10 +95,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
     }
 
     @Test
-    fun `nullable-kotlin-type-argument`() {
+    fun `kotlin-type-argument-in-nullable-type`() {
         // given
         val sut =
-            getSnippetFile("nullable-kotlin-type-argument")
+            getSnippetFile("kotlin-type-argument-in-nullable-type")
                 .properties()
                 .first()
                 .type
@@ -189,10 +189,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
     }
 
     @Test
-    fun `nullable-class-type-argument`() {
+    fun `class-type-argument-in-nullable-type`() {
         // given
         val sut =
-            getSnippetFile("nullable-class-type-argument")
+            getSnippetFile("class-type-argument-in-nullable-type")
                 .properties()
                 .first()
                 .type
@@ -283,10 +283,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
     }
 
     @Test
-    fun `nullable-interface-type-argument`() {
+    fun `interface-type-argument-in-nullable-type`() {
         // given
         val sut =
-            getSnippetFile("nullable-interface-type-argument")
+            getSnippetFile("interface-type-argument-in-nullable-type")
                 .properties()
                 .first()
                 .type
@@ -377,10 +377,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
     }
 
     @Test
-    fun `nullable-object-type-argument`() {
+    fun `object-type-argument-in-nullable-type`() {
         // given
         val sut =
-            getSnippetFile("nullable-object-type-argument")
+            getSnippetFile("object-type-argument-in-nullable-type")
                 .properties()
                 .first()
                 .type
@@ -469,10 +469,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
     }
 
     @Test
-    fun `nullable-generic-type-argument`() {
+    fun `generic-type-argument-in-nullable-type`() {
         // given
         val sut =
-            getSnippetFile("nullable-generic-type-argument")
+            getSnippetFile("generic-type-argument-in-nullable-type")
                 .properties()
                 .first()
                 .type
@@ -589,10 +589,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
     }
 
     @Test
-    fun `nullable-function-type-argument`() {
+    fun `function-type-argument-in-nullable-type`() {
         // given
         val sut =
-            getSnippetFile("nullable-function-type-argument")
+            getSnippetFile("function-type-argument-in-nullable-type")
                 .properties()
                 .first()
                 .type
@@ -668,10 +668,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
     }
 
     @Test
-    fun `nullable-import-alias-type-argument`() {
+    fun `import-alias-type-argument-in-nullable-type`() {
         // given
         val sut =
-            getSnippetFile("nullable-import-alias-type-argument")
+            getSnippetFile("import-alias-type-argument-in-nullable-type")
                 .properties()
                 .first()
                 .type
@@ -750,10 +750,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
     }
 
     @Test
-    fun `nullable-typealias-type-argument`() {
+    fun `typealias-type-argument-in-nullable-type`() {
         // given
         val sut =
-            getSnippetFile("nullable-typealias-type-argument")
+            getSnippetFile("typealias-type-argument-in-nullable-type")
                 .properties()
                 .first()
                 .type
@@ -838,10 +838,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
     }
 
     @Test
-    fun `nullable-external-type-argument`() {
+    fun `external-type-argument-in-nullable-type`() {
         // given
         val sut =
-            getSnippetFile("nullable-external-type-argument")
+            getSnippetFile("external-type-argument-in-nullable-type")
                 .properties()
                 .first()
                 .type
