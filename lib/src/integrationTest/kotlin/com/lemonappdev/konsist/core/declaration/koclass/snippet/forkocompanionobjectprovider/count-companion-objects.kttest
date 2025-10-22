@@ -1,0 +1,11 @@
+class SampleTopLevelClass {
+    private companion object SampleCompanionObject
+
+    object SampleObject
+
+    interface SampleInterface {
+        object SampleInterfaceObject
+
+        private companion object SampleNestedCompanionObject
+    }
+}
