@@ -33,17 +33,29 @@ class KoTypeDeclarationForKoIsGenericProviderTest {
         fun provideValues() =
             listOf(
                 arguments("kotlin-type", false),
+                arguments("nullable-kotlin-type", false),
                 arguments("generic-type", true),
+                arguments("nullable-generic-type", true),
                 arguments("generic-class-type", true),
+                arguments("nullable-generic-class-type", true),
                 arguments("not-generic-class-type", false),
+                arguments("nullable-not-generic-class-type", false),
                 arguments("interface-type", false),
+                arguments("nullable-interface-type", false),
                 arguments("object-type", false),
+                arguments("nullable-object-type", false),
                 arguments("function-type", false),
+                arguments("nullable-function-type", false),
                 arguments("generic-import-alias-type", true),
+                arguments("nullable-generic-import-alias-type", true),
                 arguments("not-generic-import-alias-type", false),
+                arguments("nullable-not-generic-import-alias-type", false),
                 arguments("generic-typealias-type", true),
+                arguments("nullable-generic-typealias-type", true),
                 arguments("not-generic-typealias-type", false),
+                arguments("nullable-not-generic-typealias-type", false),
                 arguments("external-type", false),
+                arguments("nullable-external-type", false),
             )
     }
 }

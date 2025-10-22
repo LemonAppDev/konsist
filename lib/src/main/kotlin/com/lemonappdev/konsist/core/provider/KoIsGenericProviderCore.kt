@@ -14,7 +14,7 @@ internal interface KoIsGenericProviderCore :
                 return (this as? KoTypeParameterProvider)?.typeParameters?.isNotEmpty() == true
             }
 
-            val regex = "\\w+<[a-zA-Z*<>(), ]+>".toRegex()
+            val regex = "\\w+<[a-zA-Z*<>()?, ]+>".toRegex()
 
             val type =
                 if ((this as? KoSourceDeclarationProvider)?.sourceDeclaration?.isTypeAlias == true) {

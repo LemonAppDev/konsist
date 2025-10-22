@@ -1,0 +1,3 @@
+val sampleProperty1: List<SampleTypeAlias> = emptyList()
+
+typealias SampleTypeAlias = Set<String?>
