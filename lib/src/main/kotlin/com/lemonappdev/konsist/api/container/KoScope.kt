@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.api.container
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.declaration.KoCompanionObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
@@ -73,6 +74,14 @@ interface KoScope {
      * @return a list of [KoObjectDeclaration] representing the objects in the scope.
      */
     fun objects(includeNested: Boolean = true): List<KoObjectDeclaration>
+
+    /**
+     * The companion objects present in the scope.
+     *
+     * @param includeNested specifies whether to include nested companion objects, by default `true`.
+     * @return a list of [KoObjectDeclaration] representing the companion objects in the scope.
+     */
+    fun companionObjects(includeNested: Boolean = true): List<KoCompanionObjectDeclaration>
 
     /**
      * The functions present in the scope.

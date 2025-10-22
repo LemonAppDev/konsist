@@ -1,0 +1,11 @@
+class SampleClass {
+    companion object
+
+    object SampleObject
+
+    interface SampleInterface {
+        object SampleInterfaceObject
+
+        companion object SampleCompanionObject2
+    }
+}

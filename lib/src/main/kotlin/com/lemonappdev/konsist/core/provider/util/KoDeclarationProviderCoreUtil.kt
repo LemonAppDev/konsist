@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoEnumConstantDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoImportDeclarationCore
@@ -98,7 +99,13 @@ internal object KoDeclarationProviderCoreUtil {
             if (includeNested) {
                 declarations.flatMap {
                     when (it) {
-                        is KoDeclarationProvider -> listOf(it) + it.declarations(includeNested = true, includeLocal = false)
+                        is KoDeclarationProvider ->
+                            listOf(it) +
+                                it.declarations(
+                                    includeNested = true,
+                                    includeLocal = false,
+                                )
+
                         else -> listOf(it)
                     }
                 }
@@ -180,7 +187,12 @@ internal object KoDeclarationProviderCoreUtil {
         containingDeclaration: KoBaseDeclaration,
     ): KoBaseDeclaration? =
         when {
-            ktDeclaration is KtEnumEntry -> KoEnumConstantDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
+            ktDeclaration is KtEnumEntry ->
+                KoEnumConstantDeclarationCore.getInstance(
+                    ktDeclaration,
+                    containingDeclaration,
+                )
+
             ktDeclaration is KtSecondaryConstructor ->
                 KoSecondaryConstructorDeclarationCore.getInstance(
                     ktDeclaration,
@@ -200,10 +212,17 @@ internal object KoDeclarationProviderCoreUtil {
                 )
 
             ktDeclaration is KtObjectDeclaration ->
-                KoObjectDeclarationCore.getInstance(
-                    ktDeclaration,
-                    containingDeclaration,
-                )
+                if (ktDeclaration.isCompanion()) {
+                    KoCompanionObjectDeclarationCore.getInstance(
+                        ktDeclaration,
+                        containingDeclaration,
+                    )
+                } else {
+                    KoObjectDeclarationCore.getInstance(
+                        ktDeclaration,
+                        containingDeclaration,
+                    )
+                }
 
             ktDeclaration is KtProperty -> KoPropertyDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
             ktDeclaration is KtFunction -> KoFunctionDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
