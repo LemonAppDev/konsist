@@ -116,10 +116,17 @@ internal class KoTypeDeclarationCore private constructor(
     }
 
     override val ktFunctionType: KtFunctionType? by lazy {
-        ktTypeReference
-            ?.children
-            // The last item is chosen because when a type is preceded by an annotation or modifier,
-            // the type being searched for is the last item in the list.
+        val children = ktTypeReference?.children
+
+        val effectiveChildren =
+            when (val nullableType = children?.filterIsInstance<KtNullableType>()?.firstOrNull()) {
+                null -> children
+                else -> nullableType.children
+            }
+
+        // The last item is chosen because when a type is preceded by an annotation or modifier,
+        // the type being searched for is the last item in the list.
+        effectiveChildren
             ?.filterIsInstance<KtFunctionType>()
             ?.lastOrNull()
     }

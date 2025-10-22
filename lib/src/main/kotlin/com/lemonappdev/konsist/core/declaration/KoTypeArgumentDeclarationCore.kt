@@ -23,6 +23,7 @@ import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunctionType
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
+import org.jetbrains.kotlin.psi.KtNullableType
 import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
@@ -60,10 +61,19 @@ data class KoTypeArgumentDeclarationCore(
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktTypeProjection }
 
     override val ktFunctionType: KtFunctionType? by lazy {
-        ktTypeProjection
-            .children
-            .firstOrNull()
-            ?.children
+        val children =
+            ktTypeProjection
+                .children
+                .firstOrNull()
+                ?.children
+
+        val effectiveChildren =
+            when (val nullableType = children?.filterIsInstance<KtNullableType>()?.firstOrNull()) {
+                null -> children
+                else -> nullableType.children
+            }
+
+        effectiveChildren
             ?.filterIsInstance<KtFunctionType>()
             ?.firstOrNull()
     }
