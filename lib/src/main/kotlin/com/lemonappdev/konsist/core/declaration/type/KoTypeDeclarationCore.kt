@@ -107,15 +107,14 @@ internal class KoTypeDeclarationCore private constructor(
     }
 
     override val ktUserType: KtUserType? by lazy {
-        ktTypeReference
-            ?.children
-            // The last item is chosen because when a type is preceded by an annotation or modifier,
-            // the type being searched for is the last item in the list.
-            ?.filterIsInstance<KtUserType>()
-            ?.lastOrNull()
+        extractEffectiveType<KtUserType>(ktTypeReference)
     }
 
     override val ktFunctionType: KtFunctionType? by lazy {
+        extractEffectiveType<KtFunctionType>(ktTypeReference)
+    }
+
+    private inline fun <reified T : KtElement> extractEffectiveType(ktTypeReference: KtTypeReference?): T? {
         val children = ktTypeReference?.children
 
         val effectiveChildren =
@@ -126,8 +125,8 @@ internal class KoTypeDeclarationCore private constructor(
 
         // The last item is chosen because when a type is preceded by an annotation or modifier,
         // the type being searched for is the last item in the list.
-        effectiveChildren
-            ?.filterIsInstance<KtFunctionType>()
+        return effectiveChildren
+            ?.filterIsInstance<T>()
             ?.lastOrNull()
     }
 
