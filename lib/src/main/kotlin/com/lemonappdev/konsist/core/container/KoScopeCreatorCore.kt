@@ -33,7 +33,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     private val gradleDotGradleDirectoryRegex by lazy {
         Regex("$projectRootPath/.gradle/.*".toMacOsSeparator())
     }
-    private val gitDirectoryRegex by lazy {
+    private val gitDotDirectoryRegex by lazy {
         Regex("$projectRootPath/.git/.*".toMacOsSeparator())
     }
 
@@ -252,7 +252,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     /**
      * Determines whether the provided path corresponds to a repository configuration directory.
      */
-    private fun isRepositoryConfigPath(path: String): Boolean = path.matches(gitDirectoryRegex)
+    private fun isRepositoryConfigPath(path: String): Boolean = path.matches(gitDotDirectoryRegex)
 
     /**
      * Determines if the given path is a build directory "build" for Gradle and "target" for Maven.
