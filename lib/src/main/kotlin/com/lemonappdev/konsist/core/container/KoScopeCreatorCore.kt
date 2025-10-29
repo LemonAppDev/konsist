@@ -234,12 +234,24 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     private fun getAbsolutePath(projectPath: String): String = "$projectRootPath$sep$projectPath"
 
     /**
+     * Determines whether the provided path should be ignored during file scanning.
+     *
+     * The path is ignored if it belongs to:
+     * - a build tool directory (Gradle or Maven)
+     * - a repository configuration directory (e.g.git).
+     *
+     * Ignored paths are excluded from scope creation and code analysis.
+     */
+    private fun isIgnoredPath(path: String) = isBuildToolPath(path) || isRepositoryConfigPath(path)
+
+    /**
      * Determines whether the provided path corresponds to a directory created by a build tool (Gradle, Maven)
      */
     private fun isBuildToolPath(path: String): Boolean = isBuildOrTargetPath(path) || isDotGradlePath(path)
 
-    private fun isIgnoredPath(path: String) = isBuildToolPath(path) || isRepositoryConfigPath(path)
-
+    /**
+     * Determines whether the provided path corresponds to a repository configuration directory.
+     */
     private fun isRepositoryConfigPath(path: String): Boolean = path.matches(gitDirectoryRegex)
 
     /**
