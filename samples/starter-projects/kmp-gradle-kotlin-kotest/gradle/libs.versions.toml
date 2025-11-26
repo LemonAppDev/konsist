@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.0.21"
-ktor = "3.3.1"
+ktor = "3.3.3"
 kotlinx-html = "0.11.0"
 konsist = "0.17.3"
 kotest = "6.0.4"
