@@ -30,7 +30,7 @@ jobs:
         run: ./gradlew :lib:test
 
       - name: Upload Report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
         with:
           name: konsist-junit-test-report
@@ -53,7 +53,7 @@ jobs:
         run: ./gradlew lib:konsistTest
 
       - name: Upload Report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
         with:
           name: konsist-konsist-test-report
@@ -76,7 +76,7 @@ jobs:
         run: ./gradlew lib:integrationTest
 
       - name: Upload Report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
         with:
           name: konsist-integration-test-report
@@ -99,7 +99,7 @@ jobs:
         run: ./gradlew lib:apiTest
 
       - name: Upload Report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
         with:
           name: konsist-api-test-report
@@ -140,7 +140,7 @@ jobs:
         run: ./gradlew detektCheck
 
       - name: Upload Report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
         with:
           name: konsist-detekt-report
@@ -173,7 +173,7 @@ jobs:
 
       - name: Upload Report
         if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: declaration-tester-project-macos-test-report
           path: misc/test-projects/konsist-declaration-tester/app/build/reports/integrationTest
@@ -203,7 +203,7 @@ jobs:
 
       - name: Upload Report
         if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: declaration-tester-project-windows-test-report
           path: misc/test-projects/konsist-declaration-tester/app/build/reports/integrationTest
@@ -241,12 +241,12 @@ jobs:
       - name: List artifacts
         run: ls -R ~/.m2/repository/
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: konsist.jar
           path: lib/build/libs/lib.jar
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: konsist-SNAPSHOT-${{ github.run_number }}.jar
           path: /home/runner/.m2/repository/com/lemonappdev/konsist/*
@@ -275,7 +275,7 @@ jobs:
       - name: Generate Dokka
         run: ./gradlew lib:dokkaHtml
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: dokka-html-doc
           path: ./lib/build/dokka/html/*
