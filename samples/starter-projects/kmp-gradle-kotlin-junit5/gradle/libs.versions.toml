@@ -10,7 +10,7 @@ appcompat = "1.7.1"
 constraintlayout = "2.2.1"
 junit4 = "4.13.2"
 junit-jupiter = "5.14.0"
-android-gradle = "8.13.0"
+android-gradle = "8.13.2"
 
 [libraries]
 ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
