@@ -1,7 +1,7 @@
 [versions]
 kotlinVersion = "2.1.20"
 jUnitVersion = "5.14.0"
-ktlintCliVersion = "1.7.1"
+ktlintCliVersion = "1.8.0"
 coroutinesVersion = "1.9.0"
 junitPlatformLauncher = "1.14.0"
 
