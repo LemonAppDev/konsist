@@ -262,3 +262,24 @@ jobs:
         run: python3 scripts/check_konsist_artifact_bytecode_version.py
 
 # ======================================= Other =========================================================
+
+  check-dokka:
+    name: Check Dokka
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'corretto'
+
+      - name: Generate Dokka
+        run: ./gradlew lib:dokkaHtml
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dokka-html-doc
+          path: ./lib/build/dokka/html/*

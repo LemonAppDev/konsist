@@ -54,6 +54,10 @@
 - [mvnrepository.com](https://mvnrepository.com/artifact/com.lemonappdev/konsist/)
 - [central.sonatype.com](https://central.sonatype.com/artifact/com.lemonappdev/konsist/)
 
+## Generate KDocs
+
+- `./gradlew dokkaHtml` - generate KDocs in `./lib/build/dokka/html/index.html`
+
 ## Naming Conventions
 
 ### Naming Conventions For Providers With Property With `List<KoXDeclaration>` Type
