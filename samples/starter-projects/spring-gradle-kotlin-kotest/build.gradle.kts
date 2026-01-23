@@ -3,6 +3,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.6"
     kotlin("jvm") version "2.0.21"
     kotlin("plugin.spring") version "2.0.21"
+    id("io.kotest") version 6.1.1
     `jvm-test-suite`
 }
 
@@ -48,7 +49,7 @@ testing {
                 implementation("com.lemonappdev:konsist:0.17.2")
 
                 // Add Kotest dependency
-                implementation("io.kotest:kotest-runner-junit5-jvm:5.9.1")
+                implementation("io.kotest:kotest-runner-junit5-jvm:6.1.1")
             }
         }
     }
