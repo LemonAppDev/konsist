@@ -2,7 +2,7 @@
 spring-boot = "3.5.9"
 spring-dep-management = "1.1.7"
 kotlin = "2.1.20"
-junit-jupiter = "5.14.0"
+junit-jupiter = "5.14.4"
 konsist = "0.17.3"
 
 [libraries]
