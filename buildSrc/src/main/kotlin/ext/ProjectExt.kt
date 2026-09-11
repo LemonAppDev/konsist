@@ -24,7 +24,7 @@ fun Project.getFullKonsistVersion(releaseTarget: ReleaseTarget): String {
     return when (releaseTarget) {
         ReleaseTarget.LOCAL -> "$version-SNAPSHOT"
         ReleaseTarget.SNAPSHOT -> "$version-SNAPSHOT"
-        ReleaseTarget.RELEASE -> version
+        ReleaseTarget.RELEASE, ReleaseTarget.GITHUB -> version
     }
 }
 

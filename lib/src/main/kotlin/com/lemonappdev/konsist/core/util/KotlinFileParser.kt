@@ -7,6 +7,8 @@ import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.isKotlinSnippetFile
 import com.lemonappdev.konsist.core.util.FileExtension.KOTLIN
 import com.lemonappdev.konsist.core.util.FileExtension.KOTLIN_TEST_SNIPPET
+import org.jetbrains.kotlin.CoreEnvironmentDeprecation
+import org.jetbrains.kotlin.cli.create
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.jetbrains.kotlin.com.intellij.openapi.util.Disposer
@@ -17,12 +19,19 @@ import org.jetbrains.kotlin.idea.KotlinFileType
 import org.jetbrains.kotlin.psi.KtFile
 import java.io.File
 
+@OptIn(CoreEnvironmentDeprecation::class, CompilerConfiguration.Internals::class)
 object KotlinFileParser {
+    private val parserLock = Any()
+
     private val project by lazy {
+        if (System.getProperty("idea.home.path") == null) {
+            System.setProperty("idea.home.path", System.getProperty("java.io.tmpdir"))
+        }
+
         KotlinCoreEnvironment
             .createForProduction(
                 Disposer.newDisposable(),
-                CompilerConfiguration(),
+                CompilerConfiguration.create(),
                 EnvironmentConfigFiles.JVM_CONFIG_FILES,
             ).project
     }
@@ -32,24 +41,25 @@ object KotlinFileParser {
     }
 
     @Suppress("detekt.TooGenericExceptionCaught")
-    private fun getKtFile(file: File): KtFile {
-        require(file.isKotlinFile || file.isKotlinSnippetFile) { "File must be a Kotlin file: ${file.path}" }
+    private fun getKtFile(file: File): KtFile =
+        synchronized(parserLock) {
+            require(file.isKotlinFile || file.isKotlinSnippetFile) { "File must be a Kotlin file: ${file.path}" }
 
-        try {
-            val fileContent =
-                file
-                    .readText()
-                    .replace(Regex(EndOfLine.WINDOWS.value), EndOfLine.UNIX.value)
+            try {
+                val fileContent =
+                    file
+                        .readText()
+                        .replace(Regex(EndOfLine.WINDOWS.value), EndOfLine.UNIX.value)
 
-            // Tests are using code snippets with txt extension that is messing up with Kotlin file parsing
-            val filePath = file.path.replace(KOTLIN_TEST_SNIPPET, KOTLIN)
-            val lightVirtualFile = LightVirtualFile(filePath, KotlinFileType.INSTANCE, fileContent)
-            val psiFile = psiManager.findFile(lightVirtualFile)
-            return psiFile as KtFile
-        } catch (e: Exception) {
-            throw KoInternalException("Failed to parse Kotlin file: ${file.path}", e)
+                // Tests are using code snippets with txt extension that is messing up with Kotlin file parsing
+                val filePath = file.path.replace(KOTLIN_TEST_SNIPPET, KOTLIN)
+                val lightVirtualFile = LightVirtualFile(filePath, KotlinFileType.INSTANCE, fileContent)
+                val psiFile = psiManager.findFile(lightVirtualFile)
+                psiFile as KtFile
+            } catch (e: Exception) {
+                throw KoInternalException("Failed to parse Kotlin file: ${file.path}", e)
+            }
         }
-    }
 
     fun getKoFile(file: File): KoFileDeclaration {
         val ktFile = getKtFile(file)

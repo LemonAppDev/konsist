@@ -93,6 +93,15 @@ publishing {
 
                     setCredentialsFromGradleProperties()
                 }
+
+                ReleaseTarget.GITHUB -> {
+                    name = "github"
+                    url = uri("https://maven.pkg.github.com/girdhar-singh-rathore/konsist")
+                    credentials {
+                        username = getLocalPropertyOrGradleProperty("githubPackagesUsername")
+                        password = getLocalPropertyOrGradleProperty("githubPackagesToken")
+                    }
+                }
             }
         }
     }
