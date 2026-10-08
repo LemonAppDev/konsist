@@ -25,6 +25,7 @@ import com.lemonappdev.konsist.core.provider.KoLocalFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoOrdinalProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
@@ -67,6 +68,7 @@ internal class KoEnumConstantDeclarationCore private constructor(
     KoPropertyProviderCore,
     KoLocationProviderCore,
     KoNameProviderCore,
+    KoOrdinalProviderCore,
     KoContainingDeclarationProviderCore,
     KoPathProviderCore,
     KoModuleProviderCore,
