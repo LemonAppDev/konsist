@@ -24,10 +24,10 @@ package com.lemonappdev.konsist.api.architecture
  *
  * 2. Package Segments
  *    - Must start with a lowercase letter
- *    - Can contain: lowercase letters, numbers, underscores
+ *    - Can contain: letters, numbers, underscores
  *
  * 3. Wildcard Usage
- *    - ".." is only allowed at start or end of pattern
+ *    - ".." is allowed at start, middle, or end of pattern
  *    - No consecutive dots except for wildcard notation
  *
  * @property name Layer identifier (non-blank)
