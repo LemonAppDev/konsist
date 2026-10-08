@@ -8,7 +8,7 @@ kotlin-wrappers = "18.3.1-pre.839"
 kotlin-emotion = "11.13.5-pre.839"
 material = "1.13.0"
 appcompat = "1.7.1"
-constraintlayout = "2.2.1"
+constraintlayout = "2.2.2"
 junit4 = "4.13.2"
 android-gradle = "8.13.2"
 
