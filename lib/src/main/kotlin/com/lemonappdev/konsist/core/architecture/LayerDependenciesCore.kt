@@ -210,8 +210,8 @@ internal class LayerDependenciesCore(
             layerDependencies.firstOrNull {
                 it.layer1 == layer1 &&
                     it.dependencyType == layerDependencyType &&
-                    it.layer2 == layer2
-                it.strict != strict
+                    it.layer2 == layer2 &&
+                    it.strict != strict
             }
 
         if (forbiddenStrictOverride != null) {
