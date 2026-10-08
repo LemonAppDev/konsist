@@ -1,13 +1,13 @@
 [versions]
-agp = "8.13.2"
-kotlin = "2.1.20"
-coreKtx = "1.17.0"
+agp = "9.4.1"
+kotlin = "2.4.21"
+coreKtx = "1.19.1"
 junit = "4.13.2"
 lifecycleRuntimeKtx = "2.11.0"
 activityCompose = "1.13.0"
-composeBom = "2025.12.01"
+composeBom = "2026.09.00"
 konsist = "0.17.3"
-appcompat = "1.7.1"
+appcompat = "1.8.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -26,6 +26,5 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 

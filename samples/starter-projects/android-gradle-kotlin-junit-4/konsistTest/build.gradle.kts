@@ -3,13 +3,12 @@ import org.gradle.kotlin.dsl.testImplementation
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
 }
 
 android {
     namespace = "com.sample"
 
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         minSdk = 26

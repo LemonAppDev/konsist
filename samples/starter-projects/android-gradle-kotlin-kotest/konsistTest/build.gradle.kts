@@ -1,13 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.android.junit5)
+    alias(libs.plugins.android.junit)
 }
 
 android {
     namespace = "com.sample"
 
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         minSdk = 26

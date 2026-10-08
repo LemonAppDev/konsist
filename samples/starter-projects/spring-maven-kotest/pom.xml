@@ -16,7 +16,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.16</version>
+		<version>4.1.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.sample</groupId>
@@ -26,7 +26,8 @@
     <description>spring-maven-kotest</description>
 	<properties>
 		<java.version>21</java.version>
-		<kotlin.version>2.1.20</kotlin.version>
+		<!-- Kotlin 2.4+ breaks Konsist: Spring Boot dependency management aligns kotlin-compiler-embeddable (used by Konsist) with this version -->
+		<kotlin.version>2.3.21</kotlin.version>
 	</properties>
 	<dependencies>
 		<dependency>
