@@ -3,17 +3,12 @@ package com.lemonappdev.konsist.core.declaration.koenumconstant
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.ValueSource
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class KoEnumConstantDeclarationForKoOrdinalProviderTest {
     @ParameterizedTest
-    @ValueSource(
-        strings = [
-            "enum-constant-ordinal",
-            "enum-constant-with-body-and-arguments-ordinal",
-            "nested-enum-constant-ordinal",
-        ],
-    )
+    @MethodSource("provideValues")
     fun `enum-constant-ordinal`(fileName: String) {
         // given
         val sut =
@@ -33,4 +28,15 @@ class KoEnumConstantDeclarationForKoOrdinalProviderTest {
 
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koenumconstant/snippet/forkoordinalprovider/", fileName)
+
+    companion object {
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValues() =
+            listOf(
+                arguments("enum-constant-ordinal"),
+                arguments("enum-constant-with-body-and-arguments-ordinal"),
+                arguments("nested-enum-constant-ordinal"),
+            )
+    }
 }
