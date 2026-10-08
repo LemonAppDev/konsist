@@ -34,11 +34,15 @@ internal interface KoParentInterfaceProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasParentInterfaces(indirectParents)
-            else ->
+            names.isEmpty() -> {
+                hasParentInterfaces(indirectParents)
+            }
+
+            else -> {
                 names.any {
                     parentInterfaces(indirectParents).any { parentInterface -> parentInterface.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasParentInterfacesWithAllNames(
@@ -54,11 +58,15 @@ internal interface KoParentInterfaceProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasParentInterfaces(indirectParents)
-            else ->
+            names.isEmpty() -> {
+                hasParentInterfaces(indirectParents)
+            }
+
+            else -> {
                 names.all {
                     parentInterfaces(indirectParents).any { parentInterface -> parentInterface.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasParentInterface(

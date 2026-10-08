@@ -178,15 +178,22 @@ object TypeUtil {
                 ?.firstOrNull { it.name == typeText }
 
         return when {
-            typeParameter != null ->
+            typeParameter != null -> {
                 KoTypeParameterDeclarationCore.getInstance(
                     typeParameter,
                     emptyList(),
                     containingFile,
                 )
+            }
 
-            nestedType is KtTypeProjection -> KoStarProjectionDeclarationCore
-            nestedType is KtFunctionType -> KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
+            nestedType is KtTypeProjection -> {
+                KoStarProjectionDeclarationCore
+            }
+
+            nestedType is KtFunctionType -> {
+                KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
+            }
+
             nestedType is KtUserType && typeText != null -> {
                 if (nestedType.children.filterIsInstance<KtTypeArgumentList>().isNotEmpty()) {
                     KoGenericTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
@@ -233,7 +240,9 @@ object TypeUtil {
                 }
             }
 
-            else -> null
+            else -> {
+                null
+            }
         } as KoDeclarationCastProvider?
     }
 

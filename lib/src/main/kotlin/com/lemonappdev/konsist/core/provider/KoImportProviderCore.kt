@@ -45,11 +45,15 @@ internal interface KoImportProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasImports()
-            else ->
+            names.isEmpty() -> {
+                hasImports()
+            }
+
+            else -> {
                 names.any {
                     imports.any { import -> import.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasImportsWithAllNames(
@@ -63,11 +67,15 @@ internal interface KoImportProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasImports()
-            else ->
+            names.isEmpty() -> {
+                hasImports()
+            }
+
+            else -> {
                 names.all {
                     imports.any { import -> import.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasImport(predicate: (KoImportDeclaration) -> Boolean): Boolean = imports.any(predicate)

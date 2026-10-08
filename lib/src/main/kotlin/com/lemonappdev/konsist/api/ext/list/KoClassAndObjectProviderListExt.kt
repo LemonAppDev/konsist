@@ -166,14 +166,18 @@ fun <T : KoClassAndObjectProvider> List<T>.withAllClassesAndObjectsNamed(
 ): List<T> =
     filter {
         when {
-            names.isEmpty() -> it.hasClassesOrObjects(includeNested, includeLocal)
-            else ->
+            names.isEmpty() -> {
+                it.hasClassesOrObjects(includeNested, includeLocal)
+            }
+
+            else -> {
                 it.hasClassesAndObjectsWithAllNames(
                     names,
                     includeNested = includeNested,
                     includeLocal = includeLocal,
                     ignoreCase = ignoreCase,
                 )
+            }
         }
     }
 
@@ -216,14 +220,18 @@ fun <T : KoClassAndObjectProvider> List<T>.withoutAllClassesAndObjectsNamed(
 ): List<T> =
     filterNot {
         when {
-            names.isEmpty() -> it.hasClassesOrObjects(includeNested, includeLocal)
-            else ->
+            names.isEmpty() -> {
+                it.hasClassesOrObjects(includeNested, includeLocal)
+            }
+
+            else -> {
                 it.hasClassesAndObjectsWithAllNames(
                     names,
                     includeNested = includeNested,
                     includeLocal = includeLocal,
                     ignoreCase = ignoreCase,
                 )
+            }
         }
     }
 

@@ -43,11 +43,15 @@ internal interface KoEnumConstantProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasEnumConstants()
-            else ->
+            names.isEmpty() -> {
+                hasEnumConstants()
+            }
+
+            else -> {
                 names.any {
                     enumConstants.any { enumConstant -> enumConstant.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasEnumConstantsWithAllNames(
@@ -61,11 +65,15 @@ internal interface KoEnumConstantProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasEnumConstants()
-            else ->
+            names.isEmpty() -> {
+                hasEnumConstants()
+            }
+
+            else -> {
                 names.all {
                     enumConstants.any { enumConstant -> enumConstant.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasEnumConstant(predicate: (KoEnumConstantDeclaration) -> Boolean): Boolean = enumConstants.any(predicate)

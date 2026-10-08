@@ -101,6 +101,7 @@ internal class CircularDependencyDependenciesRule : LayerDependenciesRule {
                 // Direct circular dependency between two layers (cycle contains same layer at start/end)
                 "Circular dependency detected: '${cycle[0].name}' <-> '${cycle[1].name}'."
             }
+
             else -> {
                 // Indirect circular dependency involving multiple layers
                 val cycleString =

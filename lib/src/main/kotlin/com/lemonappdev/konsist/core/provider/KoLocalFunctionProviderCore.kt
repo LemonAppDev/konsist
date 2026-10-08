@@ -28,11 +28,15 @@ internal interface KoLocalFunctionProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasLocalFunctions()
-            else ->
+            names.isEmpty() -> {
+                hasLocalFunctions()
+            }
+
+            else -> {
                 names.any {
                     localFunctions.any { localFunction -> localFunction.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasLocalFunctionsWithAllNames(
@@ -46,11 +50,15 @@ internal interface KoLocalFunctionProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasLocalFunctions()
-            else ->
+            names.isEmpty() -> {
+                hasLocalFunctions()
+            }
+
+            else -> {
                 names.all {
                     localFunctions.any { localFunction -> localFunction.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasLocalFunction(predicate: (KoFunctionDeclaration) -> Boolean): Boolean = localFunctions.any(predicate)

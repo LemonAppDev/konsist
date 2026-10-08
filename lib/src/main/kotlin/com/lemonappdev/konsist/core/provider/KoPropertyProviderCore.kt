@@ -37,11 +37,15 @@ internal interface KoPropertyProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasProperties(includeNested)
-            else ->
+            names.isEmpty() -> {
+                hasProperties(includeNested)
+            }
+
+            else -> {
                 names.any {
                     properties(includeNested).any { koProperty -> koProperty.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasPropertiesWithAllNames(
@@ -57,11 +61,15 @@ internal interface KoPropertyProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasProperties(includeNested)
-            else ->
+            names.isEmpty() -> {
+                hasProperties(includeNested)
+            }
+
+            else -> {
                 names.all {
                     properties(includeNested).any { koProperty -> koProperty.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasProperty(

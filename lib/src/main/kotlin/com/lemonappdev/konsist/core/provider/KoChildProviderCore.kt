@@ -44,11 +44,15 @@ internal interface KoChildProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasChildren(indirectChildren)
-            else ->
+            names.isEmpty() -> {
+                hasChildren(indirectChildren)
+            }
+
+            else -> {
                 names.any {
                     children(indirectChildren).any { child -> child.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasChildrenWithAllNames(
@@ -64,11 +68,15 @@ internal interface KoChildProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasChildren(indirectChildren)
-            else ->
+            names.isEmpty() -> {
+                hasChildren(indirectChildren)
+            }
+
+            else -> {
                 names.all {
                     children(indirectChildren).any { child -> child.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasChild(

@@ -44,11 +44,15 @@ internal interface KoClassAndObjectProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasClassesOrObjects(includeNested, includeLocal)
-            else ->
+            names.isEmpty() -> {
+                hasClassesOrObjects(includeNested, includeLocal)
+            }
+
+            else -> {
                 names.any {
                     classesAndObjects(includeNested, includeLocal).any { koClass -> koClass.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasClassesAndObjectsWithAllNames(
@@ -66,11 +70,15 @@ internal interface KoClassAndObjectProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasClassesOrObjects(includeNested, includeLocal)
-            else ->
+            names.isEmpty() -> {
+                hasClassesOrObjects(includeNested, includeLocal)
+            }
+
+            else -> {
                 names.all {
                     classesAndObjects(includeNested, includeLocal).any { koClass -> koClass.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasClassOrObject(

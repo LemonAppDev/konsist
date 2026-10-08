@@ -34,11 +34,15 @@ internal interface KoUpperBoundsProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasUpperBounds()
-            else ->
+            names.isEmpty() -> {
+                hasUpperBounds()
+            }
+
+            else -> {
                 names.any {
                     upperBounds.any { parameter -> parameter.hasName(it, ignoreCase = ignoreCase) }
                 }
+            }
         }
 
     override fun hasUpperBoundsWithAllNames(
@@ -52,11 +56,15 @@ internal interface KoUpperBoundsProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasUpperBounds()
-            else ->
+            names.isEmpty() -> {
+                hasUpperBounds()
+            }
+
+            else -> {
                 names.all {
                     upperBounds.any { parameter -> parameter.hasName(it, ignoreCase = ignoreCase) }
                 }
+            }
         }
 
     override fun hasUpperBound(predicate: (KoTypeDeclaration) -> Boolean): Boolean = upperBounds.any(predicate)

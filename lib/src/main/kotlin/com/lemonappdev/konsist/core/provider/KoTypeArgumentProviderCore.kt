@@ -89,8 +89,11 @@ internal interface KoTypeArgumentProviderCore :
 
     override fun hasTypeArgumentOf(names: Collection<KClass<*>>): Boolean =
         when {
-            names.isEmpty() -> true
-            else ->
+            names.isEmpty() -> {
+                true
+            }
+
+            else -> {
                 names.any { name ->
                     typeArguments?.any { typeArgument ->
                         name.qualifiedName ==
@@ -98,6 +101,7 @@ internal interface KoTypeArgumentProviderCore :
                                 ?.fullyQualifiedName
                     } == true
                 }
+            }
         }
 
     override fun hasAllTypeArgumentsOf(
@@ -107,8 +111,11 @@ internal interface KoTypeArgumentProviderCore :
 
     override fun hasAllTypeArgumentsOf(names: Collection<KClass<*>>): Boolean =
         when {
-            names.isEmpty() -> true
-            else ->
+            names.isEmpty() -> {
+                true
+            }
+
+            else -> {
                 names.all { name ->
                     typeArguments?.any { typeArgument ->
                         name.qualifiedName ==
@@ -116,6 +123,7 @@ internal interface KoTypeArgumentProviderCore :
                                 ?.fullyQualifiedName
                     } == true
                 }
+            }
         }
 
     override fun hasTypeArgument(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean = typeArguments?.any(predicate) ?: false

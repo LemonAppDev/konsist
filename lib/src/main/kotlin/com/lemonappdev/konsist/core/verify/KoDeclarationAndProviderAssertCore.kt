@@ -147,8 +147,7 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(
         .filterNot {
             it is KoAnnotationDeclaration &&
                 (
-                    it.name == "Suppress" &&
-                        it.hasTextContaining("\"konsist.$suppressName\"") ||
+                    (it.name == "Suppress" && it.hasTextContaining("\"konsist.$suppressName\"")) ||
                         it.hasTextContaining("\"$suppressName\"")
                 )
         }.forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it as KoBaseDeclaration, suppressName) }
@@ -277,7 +276,9 @@ private fun processFailedItems(failedItems: List<*>): Pair<String, List<String>>
                     "${getFailedNameWithDeclarationType(name, item.getDeclarationType())} $hyperlinkUrl"
                 }
 
-                else -> ""
+                else -> {
+                    ""
+                }
             }
         }
 
