@@ -7,7 +7,7 @@ kotlinBom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlinV
 kotlinStdlibJdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
 kotlinCompilerEmbeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable" }
 junitJupiterEngine = "org.junit.jupiter:junit-jupiter-engine:5.14.4"
-junitPlatformLauncher = "org.junit.platform:junit-platform-launcher:1.14.4"
+junitPlatformLauncher = "org.junit.platform:junit-platform-launcher:6.1.3"
 kluent = "org.amshove.kluent:kluent:1.73"
 # Newest version will be retrieved from mavenLocal
 konsist = "com.lemonappdev:konsist:+"

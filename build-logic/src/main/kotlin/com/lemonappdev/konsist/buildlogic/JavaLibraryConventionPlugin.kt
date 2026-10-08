@@ -21,10 +21,10 @@ class JavaLibraryConventionPlugin : Plugin<Project> {
                 withJavadocJar()
             }
 
-            // Make Konsist artifact compatible with Java 11 (bytecode version 55.0)
+            // Make Konsist artifact compatible with Java 17 (bytecode version 61.0)
             tasks.withType<JavaCompile>().configureEach {
                 @Suppress("detekt.MagicNumber")
-                options.release.set(11)
+                options.release.set(17)
             }
         }
     }

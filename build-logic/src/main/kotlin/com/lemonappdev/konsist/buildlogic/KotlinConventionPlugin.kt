@@ -17,9 +17,9 @@ class KotlinConventionPlugin : Plugin<Project> {
                 jvmToolchain(25)
 
                 compilerOptions {
-                    // Make Konsist artifact compatible with Java 11 (bytecode version 55.0)
-                    jvmTarget.set(JvmTarget.JVM_11)
-                    freeCompilerArgs.add("-Xjdk-release=11")
+                    // Make Konsist artifact compatible with Java 17 (bytecode version 61.0)
+                    jvmTarget.set(JvmTarget.JVM_17)
+                    freeCompilerArgs.add("-Xjdk-release=17")
                     apiVersion.set(KotlinVersion.KOTLIN_2_0)
                     languageVersion.set(KotlinVersion.KOTLIN_2_0)
                 }

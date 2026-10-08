@@ -60,6 +60,6 @@ def check_artifact_bytecode(desired_java_version, desired_bytecode_version):
         shutil.rmtree(build_dir)
 
 
-# Java 11 == bytecode version 55.0 (defined in the local.javalibrary.gradle.kts)
+# Java 17 == bytecode version 61.0 (defined in the KotlinConventionPlugin and JavaLibraryConventionPlugin)
 # https://javaalmanac.io/bytecode/versions/
-check_artifact_bytecode("11", "55")
+check_artifact_bytecode("17", "61")

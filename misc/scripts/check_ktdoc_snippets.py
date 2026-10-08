@@ -70,8 +70,8 @@ def compile_dummy_classes_jar(package_path, dummy_classes_jar_path):
     global error_occurred
     error_occurred = False
 
-    # Include Kotlin standard library and set JVM target 11
-    command = ["kotlinc", "-jvm-target", "11", "-include-runtime", "-d", dummy_classes_jar_path]
+    # Include Kotlin standard library and set JVM target 17
+    command = ["kotlinc", "-jvm-target", "17", "-include-runtime", "-d", dummy_classes_jar_path]
 
     # Get all Kotlin source files recursively
     kotlin_files = glob.glob(os.path.join(package_path, "**/*.kt"), recursive=True)
@@ -102,7 +102,7 @@ def compile_kotlin_file(file_path):
 
     snippet_command = [
         "kotlinc",
-        "-jvm-target", "11",
+        "-jvm-target", "17",
         "-cp", classpath,
         "-nowarn",
         "-d", temp_dir,
