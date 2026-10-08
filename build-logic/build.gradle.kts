@@ -4,10 +4,6 @@ plugins {
 
 group = "com.lemonappdev.konsist.buildlogic"
 
-kotlin {
-    jvmToolchain(21)
-}
-
 dependencies {
     implementation(plugin(libs.plugins.kotlinJvm))
     implementation(plugin(libs.plugins.spotless))
