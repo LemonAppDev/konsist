@@ -12,6 +12,8 @@ class SpotlessConventionPlugin : Plugin<Project> {
         with(target) {
             apply(plugin = "com.diffplug.spotless")
 
+            val ktlintCliVersion = project.getTomlVersion("ktlintCliVersion")
+
             configure<SpotlessExtension> {
                 kotlin {
                     target("**/*.kt")
@@ -25,7 +27,7 @@ class SpotlessConventionPlugin : Plugin<Project> {
 
                 kotlinGradle {
                     target("*.gradle.kts")
-                    ktlint()
+                    ktlint(ktlintCliVersion)
                 }
 
                 // Don't add spotless as dependency for the Gradle's check task to facilitate separated codebase checks
