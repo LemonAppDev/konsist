@@ -8,7 +8,6 @@ import com.lemonappdev.konsist.core.ext.isKotlinSnippetFile
 import com.lemonappdev.konsist.core.util.FileExtension.KOTLIN
 import com.lemonappdev.konsist.core.util.FileExtension.KOTLIN_TEST_SNIPPET
 import org.jetbrains.kotlin.CoreEnvironmentDeprecation
-import org.jetbrains.kotlin.cli.extensionsStorage
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.jetbrains.kotlin.com.intellij.openapi.util.Disposer
@@ -22,16 +21,35 @@ import org.jetbrains.kotlin.psi.KtFile
 import java.io.File
 
 object KotlinFileParser {
-    @OptIn(CoreEnvironmentDeprecation::class, CompilerConfiguration.Internals::class, ExperimentalCompilerApi::class)
+    @OptIn(CoreEnvironmentDeprecation::class, CompilerConfiguration.Internals::class)
     private val project by lazy {
         KotlinCoreEnvironment
             .createForProduction(
                 Disposer.newDisposable(),
-                CompilerConfiguration().apply {
-                    extensionsStorage = CompilerPluginRegistrar.ExtensionStorage()
-                },
+                CompilerConfiguration().apply { setExtensionsStorageIfSupported() },
                 EnvironmentConfigFiles.JVM_CONFIG_FILES,
             ).project
+    }
+
+    /**
+     * Kotlin 2.4+ requires extension storage in the compiler configuration, while Kotlin 2.3 has no API for it.
+     * Setter is resolved via reflection to support both `kotlin-compiler-embeddable` versions at runtime
+     * (e.g. Spring Boot dependency management aligns it with the project Kotlin version).
+     */
+    @OptIn(ExperimentalCompilerApi::class)
+    private fun CompilerConfiguration.setExtensionsStorageIfSupported() {
+        val setExtensionsStorage =
+            runCatching {
+                Class
+                    .forName("org.jetbrains.kotlin.cli.FrontendConfigurationKeysKt")
+                    .getMethod(
+                        "setExtensionsStorage",
+                        CompilerConfiguration::class.java,
+                        CompilerPluginRegistrar.ExtensionStorage::class.java,
+                    )
+            }.getOrNull() ?: return
+
+        setExtensionsStorage.invoke(null, this, CompilerPluginRegistrar.ExtensionStorage())
     }
 
     private val psiManager by lazy {
