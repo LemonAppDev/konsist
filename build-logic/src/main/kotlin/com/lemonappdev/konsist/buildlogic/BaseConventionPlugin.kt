@@ -12,7 +12,6 @@ class BaseConventionPlugin : Plugin<Project> {
             apply<SpotlessConventionPlugin>()
             apply<TestLoggerConventionPlugin>()
             apply<JavaLibraryConventionPlugin>()
-            apply<DokkaConventionPlugin>()
 
             repositories {
                 mavenCentral()

@@ -9,7 +9,6 @@ dependencies {
     implementation(plugin(libs.plugins.spotless))
     implementation(plugin(libs.plugins.testLogger))
     implementation(plugin(libs.plugins.detekt))
-    implementation(plugin(libs.plugins.dokka))
 
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
@@ -49,11 +48,6 @@ gradlePlugin {
         register("testLoggerConvention") {
             id = "com.lemonappdev.konsist.convention.testlogger"
             implementationClass = "com.lemonappdev.konsist.buildlogic.TestLoggerConventionPlugin"
-        }
-
-        register("dokkaConvention") {
-            id = "com.lemonappdev.konsist.convention.dokka"
-            implementationClass = "com.lemonappdev.konsist.buildlogic.DokkaConventionPlugin"
         }
 
         register("javaLibraryConvention") {
