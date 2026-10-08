@@ -33,6 +33,9 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     private val gradleDotGradleDirectoryRegex by lazy {
         Regex("$projectRootPath/.gradle/.*".toMacOsSeparator())
     }
+    private val gitDotDirectoryRegex by lazy {
+        Regex("$projectRootPath/.git/.*".toMacOsSeparator())
+    }
 
     override fun scopeFromProject(
         moduleName: String?,
@@ -89,7 +92,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         coroutineScope {
             val localProjectKotlinFiles =
                 KoFileDeclarationProvider
-                    .getKoFileDeclarations { !isBuildToolPath(it.path.toMacOsSeparator()) }
+                    .getKoFileDeclarations { !isIgnoredPath(it.path.toMacOsSeparator()) }
                     .let {
                         if (ignoreBuildConfig) {
                             it.filterNot { file -> file.isBuildConfigFile() }
@@ -231,9 +234,25 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     private fun getAbsolutePath(projectPath: String): String = "$projectRootPath$sep$projectPath"
 
     /**
+     * Determines whether the provided path should be ignored during file scanning.
+     *
+     * The path is ignored if it belongs to:
+     * - a build tool directory (Gradle or Maven)
+     * - a repository configuration directory (e.g.git).
+     *
+     * Ignored paths are excluded from scope creation and code analysis.
+     */
+    private fun isIgnoredPath(path: String) = isBuildToolPath(path) || isRepositoryConfigPath(path)
+
+    /**
      * Determines whether the provided path corresponds to a directory created by a build tool (Gradle, Maven)
      */
     private fun isBuildToolPath(path: String): Boolean = isBuildOrTargetPath(path) || isDotGradlePath(path)
+
+    /**
+     * Determines whether the provided path corresponds to a repository configuration directory.
+     */
+    private fun isRepositoryConfigPath(path: String): Boolean = path.matches(gitDotDirectoryRegex)
 
     /**
      * Determines if the given path is a build directory "build" for Gradle and "target" for Maven.
@@ -281,7 +300,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     private fun getKoFiles(files: List<File>) =
         runBlocking {
             KoFileDeclarationProvider
-                .getKoFileDeclarations { !isBuildToolPath(it.path.toMacOsSeparator()) }
+                .getKoFileDeclarations { !isIgnoredPath(it.path.toMacOsSeparator()) }
                 .filter {
                     files.any { file ->
                         file.path == it.path
