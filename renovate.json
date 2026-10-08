@@ -22,6 +22,12 @@
       "matchPackagePatterns": ["org.junit.jupiter*"],
       "matchUpdateTypes": ["major"],
       "enabled": false
+    },
+    {
+      "description": "Legacy Kotlin (prior to 2.4) regression test - Kotlin version is locked, see project README.md",
+      "matchFileNames": ["misc/test-projects/konsist-compiler-configuration-extension-storage-tester/**"],
+      "matchPackagePatterns": ["org.jetbrains.kotlin"],
+      "enabled": false
     }
   ]
 }
