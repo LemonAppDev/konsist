@@ -1,0 +1,25 @@
+annotation class SampleAnnotation
+
+enum class SampleClass(val sampleArgument: Int) {
+    @SampleAnnotation
+    SAMPLE_CONSTANT_1(sampleArgument = 0) {
+        override fun sampleFunction() = Unit
+    },
+
+    // Comment
+    SAMPLE_CONSTANT_2(sampleArgument = 1) {
+        override fun sampleFunction() = Unit
+    },
+
+    /**
+     * KDoc
+     */
+    SAMPLE_CONSTANT_3(sampleArgument = 2) {
+        override fun sampleFunction() = Unit
+    },
+    ;
+
+    val sampleProperty: Int = 0
+
+    abstract fun sampleFunction()
+}
