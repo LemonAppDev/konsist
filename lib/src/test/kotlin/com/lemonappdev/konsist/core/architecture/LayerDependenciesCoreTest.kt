@@ -1085,7 +1085,7 @@ class LayerDependenciesCoreTest {
     }
 
     @Test
-    fun `included is checked by dependsOnNothing`() {
+    fun `dependsOn does not throw when other layer depends on same layer with different strict value`() {
         val sut = LayerDependenciesCore()
         val layer1 = Layer("Domain", "com.example.domain..")
         val layer2 = Layer("Data", "com.example.data..")
