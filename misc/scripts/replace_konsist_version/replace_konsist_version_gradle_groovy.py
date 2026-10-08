@@ -14,7 +14,11 @@ def replace_version(file_path):
         content = file.read()
 
     konsist_snapshot_version = get_konsist_snapshot_version()
-    if file_path.endswith(".gradle") or file_path.endswith(".kts"):
+    if file_path.endswith(".toml"):
+        # pattern for gradle version catalog files
+        pattern = r"(?m)^(konsist\s*=\s*\")([\d\.]*(-SNAPSHOT)?)(\")"
+        replacement = r"\g<1>" + konsist_snapshot_version + r"\g<4>"
+    elif file_path.endswith(".gradle") or file_path.endswith(".kts"):
         # pattern for gradle files
         pattern = r"(com\.lemonappdev:konsist:)([\d\.]*(-SNAPSHOT)?)"
         replacement = r"\g<1>" + konsist_snapshot_version

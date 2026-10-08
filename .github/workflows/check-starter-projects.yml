@@ -84,7 +84,7 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-junit-4/settings.gradle
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-groovy-junit-4/konsistTest/build.gradle
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-groovy-junit-4/gradle/libs.versions.toml
 
       - name: Publish Konsist Artifact To Local Maven Repository
         run: ./gradlew publishToMavenLocal
@@ -122,7 +122,7 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-junit-5/settings.gradle
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-groovy-junit-5/konsistTest/build.gradle
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-groovy-junit-5/gradle/libs.versions.toml
 
       - name: Publish Konsist Artifact To Local Maven Repository
         run: ./gradlew publishToMavenLocal
@@ -160,7 +160,7 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-kotest/settings.gradle
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-groovy-kotest/konsistTest/build.gradle
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-groovy-kotest/gradle/libs.versions.toml
 
       - name: Publish Konsist Artifact To Local Maven Repository
         run: ./gradlew publishToMavenLocal
@@ -198,7 +198,7 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-junit-4/settings.gradle.kts
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-kotlin-junit-4/konsistTest/build.gradle.kts
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-kotlin-junit-4/gradle/libs.versions.toml
 
       - name: Publish Konsist Artifact To Local Maven Repository
         run: ./gradlew publishToMavenLocal
@@ -235,7 +235,7 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-junit-5/settings.gradle.kts
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-kotlin-junit-5/konsistTest/build.gradle.kts
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-kotlin-junit-5/gradle/libs.versions.toml
 
       - name: Publish Konsist Artifact To Local Maven Repository
         run: ./gradlew publishToMavenLocal
@@ -272,7 +272,7 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-kotest/settings.gradle.kts
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-kotlin-kotest/konsistTest/build.gradle.kts
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-kotlin-kotest/gradle/libs.versions.toml
 
       - name: Publish Konsist Artifact To Local Maven Repository
         run: ./gradlew publishToMavenLocal
@@ -309,7 +309,7 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-gradle-kotlin-junit-5/build.gradle.kts
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-kotlin-junit-5/build.gradle.kts
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-kotlin-junit-5/gradle/libs.versions.toml
 
       - name: Publish Konsist Artifact To Local Maven Repository
         run: ./gradlew publishToMavenLocal
@@ -346,7 +346,7 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-gradle-kotlin-kotest/build.gradle.kts
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-kotlin-kotest/build.gradle.kts
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-kotlin-kotest/gradle/libs.versions.toml
 
       - name: Publish Konsist Artifact To Local Maven Repository
         run: ./gradlew publishToMavenLocal
@@ -383,7 +383,7 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-gradle-groovy-junit-5/build.gradle
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-groovy-junit-5/build.gradle
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-groovy-junit-5/gradle/libs.versions.toml
 
       - name: Publish Konsist Artifact To Local Maven Repository
         run: ./gradlew publishToMavenLocal
@@ -421,7 +421,7 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/spring-gradle-groovy-kotest/build.gradle
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-groovy-kotest/build.gradle
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-groovy-kotest/gradle/libs.versions.toml
 
       - name: Publish Konsist Artifact To Local Maven Repository
         run: ./gradlew publishToMavenLocal
@@ -533,7 +533,7 @@ jobs:
 #        run: python3 misc/scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/kmp-gradle-kotlin-junit5/build.gradle.kts
 #
 #      - name: Replace Konsist Version
-#        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/kmp-gradle-kotlin-junit5/build.gradle.kts
+#        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/kmp-gradle-kotlin-junit5/gradle/libs.versions.toml
 #
 #      - name: Publish Konsist Artifact To Local Maven Repository
 #        run: ./gradlew publishToMavenLocal
@@ -572,7 +572,7 @@ jobs:
 #        run: python3 misc/scripts/replace_konsist_version/add_maven_local_repository_to_config_file.py samples/starter-projects/kmp-gradle-kotlin-kotest/build.gradle.kts
 #
 #      - name: Replace Konsist Version
-#        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/kmp-gradle-kotlin-kotest/build.gradle.kts
+#        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/kmp-gradle-kotlin-kotest/gradle/libs.versions.toml
 #
 #      - name: Publish Konsist Artifact To Local Maven Repository
 #        run: ./gradlew publishToMavenLocal

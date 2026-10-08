@@ -26,8 +26,7 @@
 	<description>spring-maven-junit5</description>
 	<properties>
 		<java.version>21</java.version>
-		<!-- Kotlin 2.4+ breaks Konsist: Spring Boot dependency management aligns kotlin-compiler-embeddable (used by Konsist) with this version -->
-		<kotlin.version>2.3.21</kotlin.version>
+		<kotlin.version>2.4.21</kotlin.version>
 	</properties>
 	<dependencies>
 		<dependency>
