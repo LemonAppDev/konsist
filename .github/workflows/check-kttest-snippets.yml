@@ -71,7 +71,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v5
         with:
-          java-version: 21
+          java-version: 25
           distribution: 'corretto'
 
       - name: Run Python Script for All Files
