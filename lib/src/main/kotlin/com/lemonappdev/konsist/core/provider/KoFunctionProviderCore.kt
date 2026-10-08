@@ -49,11 +49,15 @@ internal interface KoFunctionProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasFunctions(includeNested, includeLocal)
-            else ->
+            names.isEmpty() -> {
+                hasFunctions(includeNested, includeLocal)
+            }
+
+            else -> {
                 names.any {
                     functions(includeNested, includeLocal).any { function -> function.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasFunctionsWithAllNames(
@@ -71,11 +75,15 @@ internal interface KoFunctionProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasFunctions(includeNested, includeLocal)
-            else ->
+            names.isEmpty() -> {
+                hasFunctions(includeNested, includeLocal)
+            }
+
+            else -> {
                 names.all {
                     functions(includeNested, includeLocal).any { function -> function.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasFunction(

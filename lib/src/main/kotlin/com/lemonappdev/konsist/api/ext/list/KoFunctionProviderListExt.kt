@@ -78,14 +78,18 @@ fun <T : KoFunctionProvider> List<T>.withFunctionNamed(
 ): List<T> =
     filter {
         when {
-            names.isEmpty() -> it.hasFunctions(includeNested, includeLocal)
-            else ->
+            names.isEmpty() -> {
+                it.hasFunctions(includeNested, includeLocal)
+            }
+
+            else -> {
                 it.hasFunctionWithName(
                     names,
                     includeNested = includeNested,
                     includeLocal = includeLocal,
                     ignoreCase = ignoreCase,
                 )
+            }
         }
     }
 
@@ -128,14 +132,18 @@ fun <T : KoFunctionProvider> List<T>.withoutFunctionNamed(
 ): List<T> =
     filterNot {
         when {
-            names.isEmpty() -> it.hasFunctions(includeNested, includeLocal)
-            else ->
+            names.isEmpty() -> {
+                it.hasFunctions(includeNested, includeLocal)
+            }
+
+            else -> {
                 it.hasFunctionWithName(
                     names,
                     includeNested = includeNested,
                     includeLocal = includeLocal,
                     ignoreCase = ignoreCase,
                 )
+            }
         }
     }
 
@@ -178,14 +186,18 @@ fun <T : KoFunctionProvider> List<T>.withAllFunctionsNamed(
 ): List<T> =
     filter {
         when {
-            names.isEmpty() -> it.hasFunctions(includeNested, includeLocal)
-            else ->
+            names.isEmpty() -> {
+                it.hasFunctions(includeNested, includeLocal)
+            }
+
+            else -> {
                 it.hasFunctionsWithAllNames(
                     names,
                     includeNested = includeNested,
                     includeLocal = includeLocal,
                     ignoreCase = ignoreCase,
                 )
+            }
         }
     }
 
@@ -228,14 +240,18 @@ fun <T : KoFunctionProvider> List<T>.withoutAllFunctionsNamed(
 ): List<T> =
     filterNot {
         when {
-            names.isEmpty() -> it.hasFunctions(includeNested, includeLocal)
-            else ->
+            names.isEmpty() -> {
+                it.hasFunctions(includeNested, includeLocal)
+            }
+
+            else -> {
                 it.hasFunctionsWithAllNames(
                     names,
                     includeNested = includeNested,
                     includeLocal = includeLocal,
                     ignoreCase = ignoreCase,
                 )
+            }
         }
     }
 

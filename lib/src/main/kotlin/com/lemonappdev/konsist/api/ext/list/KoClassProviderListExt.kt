@@ -78,14 +78,18 @@ fun <T : KoClassProvider> List<T>.withClassNamed(
 ): List<T> =
     filter {
         when {
-            names.isEmpty() -> it.hasClasses(includeNested, includeLocal)
-            else ->
+            names.isEmpty() -> {
+                it.hasClasses(includeNested, includeLocal)
+            }
+
+            else -> {
                 it.hasClassWithName(
                     names,
                     includeNested = includeNested,
                     includeLocal = includeLocal,
                     ignoreCase = ignoreCase,
                 )
+            }
         }
     }
 
@@ -128,14 +132,18 @@ fun <T : KoClassProvider> List<T>.withoutClassNamed(
 ): List<T> =
     filterNot {
         when {
-            names.isEmpty() -> it.hasClasses(includeNested, includeLocal)
-            else ->
+            names.isEmpty() -> {
+                it.hasClasses(includeNested, includeLocal)
+            }
+
+            else -> {
                 it.hasClassWithName(
                     names,
                     includeNested = includeNested,
                     includeLocal = includeLocal,
                     ignoreCase = ignoreCase,
                 )
+            }
         }
     }
 
@@ -178,14 +186,18 @@ fun <T : KoClassProvider> List<T>.withAllClassesNamed(
 ): List<T> =
     filter {
         when {
-            names.isEmpty() -> it.hasClasses(includeNested, includeLocal)
-            else ->
+            names.isEmpty() -> {
+                it.hasClasses(includeNested, includeLocal)
+            }
+
+            else -> {
                 it.hasClassesWithAllNames(
                     names,
                     includeNested = includeNested,
                     includeLocal = includeLocal,
                     ignoreCase = ignoreCase,
                 )
+            }
         }
     }
 
@@ -228,14 +240,18 @@ fun <T : KoClassProvider> List<T>.withoutAllClassesNamed(
 ): List<T> =
     filterNot {
         when {
-            names.isEmpty() -> it.hasClasses(includeNested, includeLocal)
-            else ->
+            names.isEmpty() -> {
+                it.hasClasses(includeNested, includeLocal)
+            }
+
+            else -> {
                 it.hasClassesWithAllNames(
                     names,
                     includeNested = includeNested,
                     includeLocal = includeLocal,
                     ignoreCase = ignoreCase,
                 )
+            }
         }
     }
 

@@ -72,11 +72,15 @@ internal interface KoParentProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasParents(indirectParents)
-            else ->
+            names.isEmpty() -> {
+                hasParents(indirectParents)
+            }
+
+            else -> {
                 names.any {
                     parents(indirectParents).any { parent -> parent.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasParentsWithAllNames(
@@ -92,11 +96,15 @@ internal interface KoParentProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasParents(indirectParents)
-            else ->
+            names.isEmpty() -> {
+                hasParents(indirectParents)
+            }
+
+            else -> {
                 names.all {
                     parents(indirectParents).any { parent -> parent.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasParent(

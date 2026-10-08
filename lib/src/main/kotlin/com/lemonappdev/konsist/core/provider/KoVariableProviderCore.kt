@@ -28,11 +28,15 @@ internal interface KoVariableProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasVariables()
-            else ->
+            names.isEmpty() -> {
+                hasVariables()
+            }
+
+            else -> {
                 names.any {
                     variables.any { variable -> variable.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasVariablesWithAllNames(
@@ -46,11 +50,15 @@ internal interface KoVariableProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasVariables()
-            else ->
+            names.isEmpty() -> {
+                hasVariables()
+            }
+
+            else -> {
                 names.all {
                     variables.any { variable -> variable.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasVariable(predicate: (KoVariableDeclaration) -> Boolean): Boolean = variables.any(predicate)

@@ -45,11 +45,15 @@ internal interface KoParametersProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasParameters()
-            else ->
+            names.isEmpty() -> {
+                hasParameters()
+            }
+
+            else -> {
                 names.any {
                     parameters.any { parameter -> parameter.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasParametersWithAllNames(
@@ -63,11 +67,15 @@ internal interface KoParametersProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasParameters()
-            else ->
+            names.isEmpty() -> {
+                hasParameters()
+            }
+
+            else -> {
                 names.all {
                     parameters.any { parameter -> parameter.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasParameter(predicate: (KoParameterDeclaration) -> Boolean): Boolean = parameters.any(predicate)

@@ -86,7 +86,9 @@ internal object KoDeclarationProviderCoreUtil {
                 getKoDeclarations(declarations, includeNested, includeLocal)
             }
 
-            else -> emptyList()
+            else -> {
+                emptyList()
+            }
         }
     }
 
@@ -99,14 +101,17 @@ internal object KoDeclarationProviderCoreUtil {
             if (includeNested) {
                 declarations.flatMap {
                     when (it) {
-                        is KoDeclarationProvider ->
+                        is KoDeclarationProvider -> {
                             listOf(it) +
                                 it.declarations(
                                     includeNested = true,
                                     includeLocal = false,
                                 )
+                        }
 
-                        else -> listOf(it)
+                        else -> {
+                            listOf(it)
+                        }
                     }
                 }
             } else {
@@ -133,7 +138,9 @@ internal object KoDeclarationProviderCoreUtil {
                                 }
                             }
 
-                            else -> listOf(it)
+                            else -> {
+                                listOf(it)
+                            }
                         }
                     }.filterIsInstance<T>()
         }
@@ -187,31 +194,35 @@ internal object KoDeclarationProviderCoreUtil {
         containingDeclaration: KoBaseDeclaration,
     ): KoBaseDeclaration? =
         when {
-            ktDeclaration is KtEnumEntry ->
+            ktDeclaration is KtEnumEntry -> {
                 KoEnumConstantDeclarationCore.getInstance(
                     ktDeclaration,
                     containingDeclaration,
                 )
+            }
 
-            ktDeclaration is KtSecondaryConstructor ->
+            ktDeclaration is KtSecondaryConstructor -> {
                 KoSecondaryConstructorDeclarationCore.getInstance(
                     ktDeclaration,
                     containingDeclaration,
                 )
+            }
 
-            ktDeclaration is KtClass && !ktDeclaration.isInterface() ->
+            ktDeclaration is KtClass && !ktDeclaration.isInterface() -> {
                 KoClassDeclarationCore.getInstance(
                     ktDeclaration,
                     containingDeclaration,
                 )
+            }
 
-            ktDeclaration is KtClass && ktDeclaration.isInterface() ->
+            ktDeclaration is KtClass && ktDeclaration.isInterface() -> {
                 KoInterfaceDeclarationCore.getInstance(
                     ktDeclaration,
                     containingDeclaration,
                 )
+            }
 
-            ktDeclaration is KtObjectDeclaration ->
+            ktDeclaration is KtObjectDeclaration -> {
                 if (ktDeclaration.isCompanion()) {
                     KoCompanionObjectDeclarationCore.getInstance(
                         ktDeclaration,
@@ -223,17 +234,30 @@ internal object KoDeclarationProviderCoreUtil {
                         containingDeclaration,
                     )
                 }
+            }
 
-            ktDeclaration is KtProperty -> KoPropertyDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
-            ktDeclaration is KtFunction -> KoFunctionDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
-            ktDeclaration is KtTypeAlias -> KoTypeAliasDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
-            ktDeclaration is KtAnonymousInitializer ->
+            ktDeclaration is KtProperty -> {
+                KoPropertyDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
+            }
+
+            ktDeclaration is KtFunction -> {
+                KoFunctionDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
+            }
+
+            ktDeclaration is KtTypeAlias -> {
+                KoTypeAliasDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
+            }
+
+            ktDeclaration is KtAnonymousInitializer -> {
                 KoInitBlockDeclarationCore.getInstance(
                     ktDeclaration,
                     containingDeclaration,
                 )
+            }
 
-            else -> null
+            else -> {
+                null
+            }
         }
 
     private fun getInstanceOfOtherDeclaration(

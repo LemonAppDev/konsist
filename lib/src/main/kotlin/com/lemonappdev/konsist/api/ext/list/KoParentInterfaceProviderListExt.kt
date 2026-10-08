@@ -148,13 +148,17 @@ fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesNamed(
 ): List<T> =
     filter {
         when {
-            names.isEmpty() -> it.hasParentInterfaces(indirectParents = indirectParents)
-            else ->
+            names.isEmpty() -> {
+                it.hasParentInterfaces(indirectParents = indirectParents)
+            }
+
+            else -> {
                 it.hasParentInterfacesWithAllNames(
                     names,
                     indirectParents = indirectParents,
                     ignoreCase = ignoreCase,
                 )
+            }
         }
     }
 
@@ -193,13 +197,17 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesNamed(
 ): List<T> =
     filterNot {
         when {
-            names.isEmpty() -> it.hasParentInterfaces(indirectParents = indirectParents)
-            else ->
+            names.isEmpty() -> {
+                it.hasParentInterfaces(indirectParents = indirectParents)
+            }
+
+            else -> {
                 it.hasParentInterfacesWithAllNames(
                     names,
                     indirectParents = indirectParents,
                     ignoreCase = ignoreCase,
                 )
+            }
         }
     }
 

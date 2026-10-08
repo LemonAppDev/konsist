@@ -78,14 +78,18 @@ fun <T : KoClassAndInterfaceProvider> List<T>.withClassOrInterfaceNamed(
 ): List<T> =
     filter {
         when {
-            names.isEmpty() -> it.hasClassesOrInterfaces(includeNested, includeLocal)
-            else ->
+            names.isEmpty() -> {
+                it.hasClassesOrInterfaces(includeNested, includeLocal)
+            }
+
+            else -> {
                 it.hasClassOrInterfaceWithName(
                     names,
                     includeNested = includeNested,
                     includeLocal = includeLocal,
                     ignoreCase = ignoreCase,
                 )
+            }
         }
     }
 
@@ -128,14 +132,18 @@ fun <T : KoClassAndInterfaceProvider> List<T>.withoutClassOrInterfaceNamed(
 ): List<T> =
     filterNot {
         when {
-            names.isEmpty() -> it.hasClassesOrInterfaces(includeNested, includeLocal)
-            else ->
+            names.isEmpty() -> {
+                it.hasClassesOrInterfaces(includeNested, includeLocal)
+            }
+
+            else -> {
                 it.hasClassOrInterfaceWithName(
                     names,
                     includeNested = includeNested,
                     includeLocal = includeLocal,
                     ignoreCase = ignoreCase,
                 )
+            }
         }
     }
 
@@ -178,14 +186,18 @@ fun <T : KoClassAndInterfaceProvider> List<T>.withAllClassesAndInterfacesNamed(
 ): List<T> =
     filter {
         when {
-            names.isEmpty() -> it.hasClassesOrInterfaces(includeNested, includeLocal)
-            else ->
+            names.isEmpty() -> {
+                it.hasClassesOrInterfaces(includeNested, includeLocal)
+            }
+
+            else -> {
                 it.hasClassesAndInterfacesWithAllNames(
                     names,
                     includeNested = includeNested,
                     includeLocal = includeLocal,
                     ignoreCase = ignoreCase,
                 )
+            }
         }
     }
 
@@ -228,14 +240,18 @@ fun <T : KoClassAndInterfaceProvider> List<T>.withoutAllClassesAndInterfacesName
 ): List<T> =
     filterNot {
         when {
-            names.isEmpty() -> it.hasClassesOrInterfaces(includeNested, includeLocal)
-            else ->
+            names.isEmpty() -> {
+                it.hasClassesOrInterfaces(includeNested, includeLocal)
+            }
+
+            else -> {
                 it.hasClassesAndInterfacesWithAllNames(
                     names,
                     includeNested = includeNested,
                     includeLocal = includeLocal,
                     ignoreCase = ignoreCase,
                 )
+            }
         }
     }
 

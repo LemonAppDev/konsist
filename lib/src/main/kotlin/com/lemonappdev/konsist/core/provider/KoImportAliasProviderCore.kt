@@ -32,11 +32,15 @@ internal interface KoImportAliasProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasImportAliases()
-            else ->
+            names.isEmpty() -> {
+                hasImportAliases()
+            }
+
+            else -> {
                 names.any {
                     importAliases.any { importAlias -> importAlias.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasImportAliasesWithAllNames(
@@ -50,11 +54,15 @@ internal interface KoImportAliasProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasImportAliases()
-            else ->
+            names.isEmpty() -> {
+                hasImportAliases()
+            }
+
+            else -> {
                 names.all {
                     importAliases.any { importAlias -> importAlias.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasImportAlias(predicate: (KoImportAliasDeclaration) -> Boolean): Boolean = importAliases.any(predicate)

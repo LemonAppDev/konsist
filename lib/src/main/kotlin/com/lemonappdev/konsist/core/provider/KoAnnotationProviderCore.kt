@@ -46,11 +46,15 @@ internal interface KoAnnotationProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasAnnotations()
-            else ->
+            names.isEmpty() -> {
+                hasAnnotations()
+            }
+
+            else -> {
                 names.any {
                     annotations.any { annotation -> annotation.representsType(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasAnnotationsWithAllNames(
@@ -64,11 +68,15 @@ internal interface KoAnnotationProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasAnnotations()
-            else ->
+            names.isEmpty() -> {
+                hasAnnotations()
+            }
+
+            else -> {
                 names.all {
                     annotations.any { annotation -> annotation.representsType(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasAnnotation(predicate: (KoAnnotationDeclaration) -> Boolean): Boolean = annotations.any(predicate)

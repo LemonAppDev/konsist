@@ -25,11 +25,15 @@ internal interface KoArgumentProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasArguments()
-            else ->
+            names.isEmpty() -> {
+                hasArguments()
+            }
+
+            else -> {
                 names.any {
                     arguments.any { argument -> argument.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasArgumentsWithAllNames(
@@ -43,11 +47,15 @@ internal interface KoArgumentProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasArguments()
-            else ->
+            names.isEmpty() -> {
+                hasArguments()
+            }
+
+            else -> {
                 names.all {
                     arguments.any { argument -> argument.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasArgument(predicate: (KoArgumentDeclaration) -> Boolean): Boolean = arguments.any(predicate)

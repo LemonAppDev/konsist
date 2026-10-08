@@ -184,9 +184,13 @@ fun <T : KoInterfaceProvider> List<T>.withoutAllInterfacesNamed(
 ): List<T> =
     filterNot {
         when {
-            names.isEmpty() -> it.hasInterfaces(includeNested)
-            else ->
+            names.isEmpty() -> {
+                it.hasInterfaces(includeNested)
+            }
+
+            else -> {
                 it.hasInterfacesWithAllNames(names, includeNested = includeNested, ignoreCase = ignoreCase)
+            }
         }
     }
 

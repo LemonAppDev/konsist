@@ -33,11 +33,15 @@ internal interface KoInterfaceAndObjectProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasInterfacesOrObjects(includeNested)
-            else ->
+            names.isEmpty() -> {
+                hasInterfacesOrObjects(includeNested)
+            }
+
+            else -> {
                 names.any {
                     interfacesAndObjects(includeNested).any { koClass -> koClass.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasInterfacesAndObjectsWithAllNames(
@@ -53,11 +57,15 @@ internal interface KoInterfaceAndObjectProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasInterfacesOrObjects(includeNested)
-            else ->
+            names.isEmpty() -> {
+                hasInterfacesOrObjects(includeNested)
+            }
+
+            else -> {
                 names.all {
                     interfacesAndObjects(includeNested).any { koClass -> koClass.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasInterfaceOrObject(

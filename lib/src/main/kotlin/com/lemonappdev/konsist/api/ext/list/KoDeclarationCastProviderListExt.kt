@@ -432,9 +432,13 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutObjectDeclarationOf(kClasses:
 fun <T : KoDeclarationCastProvider> List<T>.withInterfaceDeclaration(predicate: ((KoInterfaceDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
-            null -> it.isInterface
-            else ->
+            null -> {
+                it.isInterface
+            }
+
+            else -> {
                 it.asInterfaceDeclaration()?.let { interfaceDeclaration -> predicate(interfaceDeclaration) } == true
+            }
         }
     }
 
@@ -447,9 +451,13 @@ fun <T : KoDeclarationCastProvider> List<T>.withInterfaceDeclaration(predicate: 
 fun <T : KoDeclarationCastProvider> List<T>.withoutInterfaceDeclaration(predicate: ((KoInterfaceDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.isInterface
-            else ->
+            null -> {
+                it.isInterface
+            }
+
+            else -> {
                 it.asInterfaceDeclaration()?.let { interfaceDeclaration -> predicate(interfaceDeclaration) } == true
+            }
         }
     }
 
@@ -854,9 +862,13 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutClassOrInterfaceOrObjectDecla
 fun <T : KoDeclarationCastProvider> List<T>.withTypeAliasDeclaration(predicate: ((KoTypeAliasDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
-            null -> it.isTypeAlias
-            else ->
+            null -> {
+                it.isTypeAlias
+            }
+
+            else -> {
                 it.asTypeAliasDeclaration()?.let { typeAliasDeclaration -> predicate(typeAliasDeclaration) } == true
+            }
         }
     }
 
@@ -869,9 +881,13 @@ fun <T : KoDeclarationCastProvider> List<T>.withTypeAliasDeclaration(predicate: 
 fun <T : KoDeclarationCastProvider> List<T>.withoutTypeAliasDeclaration(predicate: ((KoTypeAliasDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.isTypeAlias
-            else ->
+            null -> {
+                it.isTypeAlias
+            }
+
+            else -> {
                 it.asTypeAliasDeclaration()?.let { typeAliasDeclaration -> predicate(typeAliasDeclaration) } == true
+            }
         }
     }
 
@@ -886,11 +902,15 @@ fun <T : KoDeclarationCastProvider> List<T>.withImportAliasDeclaration(
 ): List<T> =
     filter {
         when (predicate) {
-            null -> it.isImportAlias
-            else ->
+            null -> {
+                it.isImportAlias
+            }
+
+            else -> {
                 it
                     .asImportAliasDeclaration()
                     ?.let { importAliasDeclaration -> predicate(importAliasDeclaration) } == true
+            }
         }
     }
 
@@ -905,11 +925,15 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutImportAliasDeclaration(
 ): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.isImportAlias
-            else ->
+            null -> {
+                it.isImportAlias
+            }
+
+            else -> {
                 it
                     .asImportAliasDeclaration()
                     ?.let { importAliasDeclaration -> predicate(importAliasDeclaration) } == true
+            }
         }
     }
 
@@ -922,9 +946,13 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutImportAliasDeclaration(
 fun <T : KoDeclarationCastProvider> List<T>.withKotlinTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
-            null -> it.isKotlinType
-            else ->
+            null -> {
+                it.isKotlinType
+            }
+
+            else -> {
                 it.asKotlinTypeDeclaration()?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) } == true
+            }
         }
     }
 
@@ -939,9 +967,13 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutKotlinTypeDeclaration(
 ): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.isKotlinType
-            else ->
+            null -> {
+                it.isKotlinType
+            }
+
+            else -> {
                 it.asKotlinTypeDeclaration()?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) } == true
+            }
         }
     }
 
@@ -1008,11 +1040,15 @@ fun <T : KoDeclarationCastProvider> List<T>.withKotlinBasicTypeDeclaration(
 ): List<T> =
     filter {
         when (predicate) {
-            null -> it.isKotlinBasicType
-            else ->
+            null -> {
+                it.isKotlinBasicType
+            }
+
+            else -> {
                 it
                     .asKotlinBasicTypeDeclaration()
                     ?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) } == true
+            }
         }
     }
 
@@ -1027,11 +1063,15 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutKotlinBasicTypeDeclaration(
 ): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.isKotlinBasicType
-            else ->
+            null -> {
+                it.isKotlinBasicType
+            }
+
+            else -> {
                 it
                     .asKotlinBasicTypeDeclaration()
                     ?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) } == true
+            }
         }
     }
 
@@ -1098,11 +1138,15 @@ fun <T : KoDeclarationCastProvider> List<T>.withKotlinCollectionTypeDeclaration(
 ): List<T> =
     filter {
         when (predicate) {
-            null -> it.isKotlinCollectionType
-            else ->
+            null -> {
+                it.isKotlinCollectionType
+            }
+
+            else -> {
                 it
                     .asKotlinCollectionTypeDeclaration()
                     ?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) } == true
+            }
         }
     }
 
@@ -1117,11 +1161,15 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutKotlinCollectionTypeDeclarati
 ): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.isKotlinCollectionType
-            else ->
+            null -> {
+                it.isKotlinCollectionType
+            }
+
+            else -> {
                 it
                     .asKotlinCollectionTypeDeclaration()
                     ?.let { kotlinTypeDeclaration -> predicate(kotlinTypeDeclaration) } == true
+            }
         }
     }
 
@@ -1188,11 +1236,15 @@ fun <T : KoDeclarationCastProvider> List<T>.withTypeParameterDeclaration(
 ): List<T> =
     filter {
         when (predicate) {
-            null -> it.isTypeParameter
-            else ->
+            null -> {
+                it.isTypeParameter
+            }
+
+            else -> {
                 it
                     .asTypeParameterDeclaration()
                     ?.let { typeParameter -> predicate(typeParameter) } == true
+            }
         }
     }
 
@@ -1207,11 +1259,15 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutTypeParameterDeclaration(
 ): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.isTypeParameter
-            else ->
+            null -> {
+                it.isTypeParameter
+            }
+
+            else -> {
                 it
                     .asTypeParameterDeclaration()
                     ?.let { typeParameter -> predicate(typeParameter) } == true
+            }
         }
     }
 
@@ -1224,11 +1280,15 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutTypeParameterDeclaration(
 fun <T : KoDeclarationCastProvider> List<T>.withExternalDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
-            null -> it.isExternal
-            else ->
+            null -> {
+                it.isExternal
+            }
+
+            else -> {
                 it
                     .asExternalDeclaration()
                     ?.let { externalDeclaration -> predicate(externalDeclaration) } == true
+            }
         }
     }
 
@@ -1241,11 +1301,15 @@ fun <T : KoDeclarationCastProvider> List<T>.withExternalDeclaration(predicate: (
 fun <T : KoDeclarationCastProvider> List<T>.withoutExternalDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.isExternal
-            else ->
+            null -> {
+                it.isExternal
+            }
+
+            else -> {
                 it
                     .asExternalDeclaration()
                     ?.let { externalDeclaration -> predicate(externalDeclaration) } == true
+            }
         }
     }
 
@@ -1311,11 +1375,15 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutExternalDeclarationOf(kClasse
 fun <T : KoDeclarationCastProvider> List<T>.withExternalTypeDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
-            null -> it.isExternalType
-            else ->
+            null -> {
+                it.isExternalType
+            }
+
+            else -> {
                 it
                     .asExternalTypeDeclaration()
                     ?.let { externalDeclaration -> predicate(externalDeclaration) } == true
+            }
         }
     }
 
@@ -1331,11 +1399,15 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutExternalTypeDeclaration(
 ): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.isExternalType
-            else ->
+            null -> {
+                it.isExternalType
+            }
+
+            else -> {
                 it
                     .asExternalTypeDeclaration()
                     ?.let { externalDeclaration -> predicate(externalDeclaration) } == true
+            }
         }
     }
 

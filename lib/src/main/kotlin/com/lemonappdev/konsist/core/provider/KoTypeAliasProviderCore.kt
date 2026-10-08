@@ -38,11 +38,15 @@ internal interface KoTypeAliasProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasTypeAliases()
-            else ->
+            names.isEmpty() -> {
+                hasTypeAliases()
+            }
+
+            else -> {
                 names.any {
                     typeAliases.any { typeAlias -> typeAlias.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasTypeAliasesWithAllNames(
@@ -56,11 +60,15 @@ internal interface KoTypeAliasProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasTypeAliases()
-            else ->
+            names.isEmpty() -> {
+                hasTypeAliases()
+            }
+
+            else -> {
                 names.all {
                     typeAliases.any { typeAlias -> typeAlias.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasTypeAlias(predicate: (KoTypeAliasDeclaration) -> Boolean): Boolean = typeAliases.any(predicate)

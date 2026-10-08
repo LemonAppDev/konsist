@@ -28,11 +28,15 @@ internal interface KoLocalClassProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasLocalClasses()
-            else ->
+            names.isEmpty() -> {
+                hasLocalClasses()
+            }
+
+            else -> {
                 names.any {
                     localClasses.any { localClass -> localClass.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasLocalClassesWithAllNames(
@@ -46,11 +50,15 @@ internal interface KoLocalClassProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasLocalClasses()
-            else ->
+            names.isEmpty() -> {
+                hasLocalClasses()
+            }
+
+            else -> {
                 names.all {
                     localClasses.any { localClass -> localClass.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasLocalClass(predicate: (KoClassDeclaration) -> Boolean): Boolean = localClasses.any(predicate)
