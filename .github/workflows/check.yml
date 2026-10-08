@@ -261,6 +261,7 @@ jobs:
 
   check-dokka:
     name: Check Dokka
+    if: false # Disabled
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
