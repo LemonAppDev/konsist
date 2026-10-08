@@ -5,10 +5,7 @@ to Kotlin 2.4.
 
 ## Issue
 
-Konsist uses `kotlin-compiler-embeddable` to parse Kotlin files. Konsist is built with Kotlin 2.4, but the
-`kotlin-compiler-embeddable` version used at runtime is decided by the consumer project. For example, Spring Boot
-dependency management (`spring-boot-starter-parent` in Maven) imports `kotlin-bom` aligned with the `kotlin.version`
-property, so a project using Kotlin 2.3 runs Konsist with `kotlin-compiler-embeddable` 2.3.
+Konsist uses `kotlin-compiler-embeddable` to parse Kotlin files. 
 
 Kotlin 2.4 requires the extension storage to be set in `CompilerConfiguration` before creating
 `KotlinCoreEnvironment`. Kotlin 2.3 does not provide this API, so calling it directly fails at runtime:
@@ -24,7 +21,7 @@ resolves the setter via reflection and sets the extension storage only when the 
 
 ## Test
 
-This project uses Kotlin 2.3 and enforces `kotlin-bom` 2.3 (mimicking Spring Boot dependency management), so Konsist
+This project uses Kotlin 2.3 and enforces `kotlin-bom` 2.3, so Konsist
 runs with `kotlin-compiler-embeddable` 2.3. Tests verify that:
 - Kotlin compiler used at runtime is prior to Kotlin 2.4
 - Konsist parses Kotlin files
