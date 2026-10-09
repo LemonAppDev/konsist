@@ -166,26 +166,35 @@ def add_empty_line_to_md_file(md_content):
         return md_content
 
 
-def files_from_destination_directory(directory_path):
+def remove_files_recursively_except_readme(directory_path):
     try:
-        # List all files and directories in the current directory
         for root, dirs, files in os.walk(directory_path):
             for file_name in files:
                 if file_name.lower() != "readme.md":  # Skip "README.md"
-                    return file_name, root
-    except Exception as e:
-        print(f"An error occurred: {e}")
-
-
-def remove_files_recursively_except_readme(directory_path):
-    try:
-        file_name, root = files_from_destination_directory(directory_path)
-        file_path = os.path.join(root, file_name)
-        os.remove(file_path)
+                    os.remove(os.path.join(root, file_name))
 
         print(f"All files within {directory_path} and its subdirectories, except 'README.md', have been removed.")
     except Exception as e:
         print(f"An error occurred: {e}")
+
+
+def remove_missing_snippet_entries_from_summary(summary_dir, docs_root):
+    # Remove SUMMARY.md entries pointing to snippet files that no longer exist
+    with open(summary_dir, "r") as file:
+        lines = file.readlines()
+
+    snippet_link_regex = re.compile(r"\]\((" + re.escape(destination_snippets_path) + r"/[^)]+)\)")
+    kept_lines = []
+
+    for line in lines:
+        match = snippet_link_regex.search(line)
+        if match and not os.path.exists(os.path.join(docs_root, match.group(1))):
+            print(f"Removed missing snippet entry from summary: {match.group(1)}")
+            continue
+        kept_lines.append(line)
+
+    with open(summary_dir, "w") as file:
+        file.writelines(kept_lines)
 
 
 # Copy content from source .kt and .md files to a destination file
@@ -460,6 +469,8 @@ def main(branch):
         remove_files_recursively_except_readme(destination_snippets_directory)
 
         copy_content(source_snippets_directory, destination_snippets_directory, summary_path)
+
+        remove_missing_snippet_entries_from_summary(summary_path, temp_dir)
 
         os.chdir(temp_dir)
 

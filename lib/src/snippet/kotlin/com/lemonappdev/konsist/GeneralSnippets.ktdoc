@@ -101,7 +101,7 @@ class GeneralSnippets {
             .assertTrue { it.parameters.isSortedByName() }
     }
 
-    fun `enums has alphabetically ordered consts`() {
+    fun `enums have alphabetically ordered constants`() {
         Konsist
             .scopeFromProduction()
             .classes()
@@ -165,7 +165,7 @@ class GeneralSnippets {
         Konsist
             .scopeFromProject()
             .files
-            .assertFalse { it.hasImport { import -> import.name == "java.util.logging.." } }
+            .assertFalse { it.hasImport { import -> import.hasNameStartingWith("java.util.logging") } }
     }
 
     fun `package name must match file path`() {
@@ -208,7 +208,7 @@ class GeneralSnippets {
             .assertTrue { it.hasPublicModifier }
     }
 
-    fun `return type of all functions are immutable`() {
+    fun `return types of all functions are immutable`() {
         Konsist
             .scopeFromProject()
             .functions()
