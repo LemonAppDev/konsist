@@ -163,7 +163,7 @@ class LocationUtilTest {
     @Test
     fun `has given fragment with the package name 'data' prefix 'data' is the same as selector`() {
         // given
-        val currentPackage = "com.lemonappdev.konsist.datasomething.SampleType"
+        val currentPackage = "com.lemonappdev.konsist.datasomething.FixtureType"
 
         // then
         LocationUtil.resideInLocation("com.lemonappdev.konsist..data..", currentPackage) shouldBeEqualTo false
@@ -172,7 +172,7 @@ class LocationUtilTest {
     @Test
     fun `has given fragment with the package name 'data' suffux is the same as selector`() {
         // given
-        val currentPackage = "com.lemonappdev.konsist.somethingdata.SampleType"
+        val currentPackage = "com.lemonappdev.konsist.somethingdata.FixtureType"
 
         // then
         LocationUtil.resideInLocation("com.lemonappdev.konsist..data..", currentPackage) shouldBeEqualTo false
@@ -181,7 +181,7 @@ class LocationUtilTest {
     @Test
     fun `has given fragment with the package name 'data' content is the same as selector`() {
         // given
-        val currentPackage = "com.lemonappdev.konsist.somethingdatasomething.SampleType"
+        val currentPackage = "com.lemonappdev.konsist.somethingdatasomething.FixtureType"
 
         // then
         LocationUtil.resideInLocation("com.lemonappdev.konsist..data..", currentPackage) shouldBeEqualTo false

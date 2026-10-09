@@ -130,8 +130,8 @@ class KoDefaultValueProviderListExtTest {
     @Test
     fun `withDefaultValue(name) returns declarations with one of given default values`() {
         // given
-        val value1 = "SampleDefaultValue1"
-        val value2 = "SampleDefaultValue2"
+        val value1 = "FixtureDefaultValue1"
+        val value2 = "FixtureDefaultValue2"
         val declaration1: KoDefaultValueProvider =
             mockk {
                 every { hasDefaultValue(value1) } returns true
@@ -219,8 +219,8 @@ class KoDefaultValueProviderListExtTest {
     @Test
     fun `withoutDefaultValue(name) returns declaration without any of given default values`() {
         // given
-        val value1 = "SampleDefaultValue1"
-        val value2 = "SampleDefaultValue2"
+        val value1 = "FixtureDefaultValue1"
+        val value2 = "FixtureDefaultValue2"
         val declaration1: KoDefaultValueProvider =
             mockk {
                 every { hasDefaultValue(value1) } returns true

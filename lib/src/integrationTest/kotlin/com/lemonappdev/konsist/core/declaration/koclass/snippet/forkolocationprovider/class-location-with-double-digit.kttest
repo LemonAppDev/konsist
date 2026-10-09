@@ -1,13 +1,13 @@
-interface SampleInterface1 {
-    interface SampleInterface2 {
-        interface SampleInterface3 {
-            interface SampleInterface4 {
-                interface SampleInterface5 {
-                    interface SampleInterface6 {
-                        interface SampleInterface7 {
-                            interface SampleInterface8 {
-                                interface SampleInterface9 {
-                                    class SampleClass() {
+interface FixtureInterface1 {
+    interface FixtureInterface2 {
+        interface FixtureInterface3 {
+            interface FixtureInterface4 {
+                interface FixtureInterface5 {
+                    interface FixtureInterface6 {
+                        interface FixtureInterface7 {
+                            interface FixtureInterface8 {
+                                interface FixtureInterface9 {
+                                    class FixtureClass() {
                                     }
                                 }
                             }

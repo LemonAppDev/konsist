@@ -1,7 +1,7 @@
 /**
- * Sample Description
+ * Fixture Description
  *
  * @unknown tag
  */
-class SampleClass {
+class FixtureClass {
 }

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 
 @Suppress("detekt.LargeClass")
 class KoHasPackageProviderListExtTest {
-    private interface SampleTestDeclaration :
+    private interface FixtureTestDeclaration :
         KoPackageProvider,
         KoHasPackageProvider
 
@@ -56,11 +56,11 @@ class KoHasPackageProviderListExtTest {
     @Test
     fun `withPackage() returns declaration with any package`() {
         // given
-        val declaration1: SampleTestDeclaration =
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns mockk()
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns null
             }
@@ -76,11 +76,11 @@ class KoHasPackageProviderListExtTest {
     @Test
     fun `withPackage(empty list) returns declaration with any package`() {
         // given
-        val declaration1: SampleTestDeclaration =
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns mockk()
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns null
             }
@@ -96,11 +96,11 @@ class KoHasPackageProviderListExtTest {
     @Test
     fun `withPackage(empty set) returns declaration with any package`() {
         // given
-        val declaration1: SampleTestDeclaration =
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns mockk()
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns null
             }
@@ -116,19 +116,19 @@ class KoHasPackageProviderListExtTest {
     @Test
     fun `withPackage(String) returns declarations with one of given package names`() {
         // given
-        val package1 = "SamplePackage1"
-        val package2 = "SamplePackage2"
-        val declaration1: SampleTestDeclaration =
+        val package1 = "FixturePackage1"
+        val package2 = "FixturePackage2"
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { hasPackage(package1) } returns true
                 every { hasPackage(package2) } returns false
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { hasPackage(package1) } returns false
                 every { hasPackage(package2) } returns true
             }
-        val declaration3: SampleTestDeclaration =
+        val declaration3: FixtureTestDeclaration =
             mockk {
                 every { hasPackage(package1) } returns false
                 every { hasPackage(package2) } returns false
@@ -145,19 +145,19 @@ class KoHasPackageProviderListExtTest {
     @Test
     fun `withPackage(list of String) returns declarations with one of given package names`() {
         // given
-        val package1 = "SamplePackage1"
-        val package2 = "SamplePackage2"
-        val declaration1: SampleTestDeclaration =
+        val package1 = "FixturePackage1"
+        val package2 = "FixturePackage2"
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { hasPackage(package1) } returns true
                 every { hasPackage(package2) } returns false
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { hasPackage(package1) } returns false
                 every { hasPackage(package2) } returns true
             }
-        val declaration3: SampleTestDeclaration =
+        val declaration3: FixtureTestDeclaration =
             mockk {
                 every { hasPackage(package1) } returns false
                 every { hasPackage(package2) } returns false
@@ -175,19 +175,19 @@ class KoHasPackageProviderListExtTest {
     @Test
     fun `withPackage(set of String) returns declarations with one of given package names`() {
         // given
-        val package1 = "SamplePackage1"
-        val package2 = "SamplePackage2"
-        val declaration1: SampleTestDeclaration =
+        val package1 = "FixturePackage1"
+        val package2 = "FixturePackage2"
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { hasPackage(package1) } returns true
                 every { hasPackage(package2) } returns false
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { hasPackage(package1) } returns false
                 every { hasPackage(package2) } returns true
             }
-        val declaration3: SampleTestDeclaration =
+        val declaration3: FixtureTestDeclaration =
             mockk {
                 every { hasPackage(package1) } returns false
                 every { hasPackage(package2) } returns false
@@ -205,11 +205,11 @@ class KoHasPackageProviderListExtTest {
     @Test
     fun `withoutPackage() returns declaration without given package name`() {
         // given
-        val declaration1: SampleTestDeclaration =
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns mockk()
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns null
             }
@@ -225,11 +225,11 @@ class KoHasPackageProviderListExtTest {
     @Test
     fun `withoutPackage(empty list) returns declaration without given package name`() {
         // given
-        val declaration1: SampleTestDeclaration =
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns mockk()
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns null
             }
@@ -245,11 +245,11 @@ class KoHasPackageProviderListExtTest {
     @Test
     fun `withoutPackage(empty set) returns declaration without given package name`() {
         // given
-        val declaration1: SampleTestDeclaration =
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns mockk()
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns null
             }
@@ -265,19 +265,19 @@ class KoHasPackageProviderListExtTest {
     @Test
     fun `withoutPackage(String) returns declaration without any of given package names`() {
         // given
-        val package1 = "SamplePackage1"
-        val package2 = "SamplePackage2"
-        val declaration1: SampleTestDeclaration =
+        val package1 = "FixturePackage1"
+        val package2 = "FixturePackage2"
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { hasPackage(package1) } returns true
                 every { hasPackage(package2) } returns false
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { hasPackage(package1) } returns false
                 every { hasPackage(package2) } returns true
             }
-        val declaration3: SampleTestDeclaration =
+        val declaration3: FixtureTestDeclaration =
             mockk {
                 every { hasPackage(package1) } returns false
                 every { hasPackage(package2) } returns false
@@ -294,19 +294,19 @@ class KoHasPackageProviderListExtTest {
     @Test
     fun `withoutPackage(list of String) returns declaration without any of given package names`() {
         // given
-        val package1 = "SamplePackage1"
-        val package2 = "SamplePackage2"
-        val declaration1: SampleTestDeclaration =
+        val package1 = "FixturePackage1"
+        val package2 = "FixturePackage2"
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { hasPackage(package1) } returns true
                 every { hasPackage(package2) } returns false
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { hasPackage(package1) } returns false
                 every { hasPackage(package2) } returns true
             }
-        val declaration3: SampleTestDeclaration =
+        val declaration3: FixtureTestDeclaration =
             mockk {
                 every { hasPackage(package1) } returns false
                 every { hasPackage(package2) } returns false
@@ -324,19 +324,19 @@ class KoHasPackageProviderListExtTest {
     @Test
     fun `withoutPackage(set of String) returns declaration without any of given package names`() {
         // given
-        val package1 = "SamplePackage1"
-        val package2 = "SamplePackage2"
-        val declaration1: SampleTestDeclaration =
+        val package1 = "FixturePackage1"
+        val package2 = "FixturePackage2"
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { hasPackage(package1) } returns true
                 every { hasPackage(package2) } returns false
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { hasPackage(package1) } returns false
                 every { hasPackage(package2) } returns true
             }
-        val declaration3: SampleTestDeclaration =
+        val declaration3: FixtureTestDeclaration =
             mockk {
                 every { hasPackage(package1) } returns false
                 every { hasPackage(package2) } returns false

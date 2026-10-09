@@ -14,7 +14,7 @@ class KoInterfaceForKoChildProviderTest {
     fun `interface without children`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .interfaces()
             .withName("InterfaceWithoutChildren")
             .first()
@@ -44,7 +44,7 @@ class KoInterfaceForKoChildProviderTest {
     fun `interface with direct child`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .interfaces()
             .withName("ParentSuperInterface")
             .first()
@@ -83,7 +83,7 @@ class KoInterfaceForKoChildProviderTest {
     fun `interface with indirect children`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .interfaces()
             .withName("ParentSuperInterface")
             .first()
@@ -126,7 +126,7 @@ class KoInterfaceForKoChildProviderTest {
     fun `interface without children ignore case`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .interfaces()
             .withName("InterfaceWithoutChildren")
             .first()
@@ -152,7 +152,7 @@ class KoInterfaceForKoChildProviderTest {
     fun `interface with direct child ignore case`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .interfaces()
             .withName("ParentSuperInterface")
             .first()

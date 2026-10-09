@@ -23,14 +23,14 @@ class KoFileDeclarationForKoClassProviderTest {
             hasClassWithName(emptySet()) shouldBeEqualTo false
             hasClassesWithAllNames(emptyList()) shouldBeEqualTo false
             hasClassesWithAllNames(emptySet()) shouldBeEqualTo false
-            hasClassWithName("SampleClass") shouldBeEqualTo false
-            hasClassWithName(listOf("SampleClass")) shouldBeEqualTo false
-            hasClassWithName(setOf("SampleClass")) shouldBeEqualTo false
-            hasClassesWithAllNames("SampleClass1", "SampleClass2") shouldBeEqualTo false
-            hasClassesWithAllNames(listOf("SampleClass1", "SampleClass2")) shouldBeEqualTo false
-            hasClassesWithAllNames(setOf("SampleClass1", "SampleClass2")) shouldBeEqualTo false
-            hasClass { it.name == "SampleClass" } shouldBeEqualTo false
-            hasAllClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasClassWithName("FixtureClass") shouldBeEqualTo false
+            hasClassWithName(listOf("FixtureClass")) shouldBeEqualTo false
+            hasClassWithName(setOf("FixtureClass")) shouldBeEqualTo false
+            hasClassesWithAllNames("FixtureClass1", "FixtureClass2") shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("FixtureClass1", "FixtureClass2")) shouldBeEqualTo false
+            hasClassesWithAllNames(setOf("FixtureClass1", "FixtureClass2")) shouldBeEqualTo false
+            hasClass { it.name == "FixtureClass" } shouldBeEqualTo false
+            hasAllClasses { it.hasNameStartingWith("Fixture") } shouldBeEqualTo true
         }
     }
 
@@ -49,24 +49,24 @@ class KoFileDeclarationForKoClassProviderTest {
             hasClassWithName(emptySet()) shouldBeEqualTo true
             hasClassesWithAllNames(emptyList()) shouldBeEqualTo true
             hasClassesWithAllNames(emptySet()) shouldBeEqualTo true
-            hasClassWithName("SampleClass1") shouldBeEqualTo true
-            hasClassWithName("SampleClass1", "OtherClass") shouldBeEqualTo true
-            hasClassWithName(listOf("SampleClass1")) shouldBeEqualTo true
-            hasClassWithName(listOf("SampleClass1", "OtherClass")) shouldBeEqualTo true
-            hasClassWithName(setOf("SampleClass1")) shouldBeEqualTo true
-            hasClassWithName(setOf("SampleClass1", "OtherClass")) shouldBeEqualTo true
-            hasClassesWithAllNames("SampleClass1") shouldBeEqualTo true
-            hasClassesWithAllNames("SampleClass1", "SampleClass2") shouldBeEqualTo true
-            hasClassesWithAllNames("SampleClass1", "OtherClass") shouldBeEqualTo false
-            hasClassesWithAllNames(listOf("SampleClass1")) shouldBeEqualTo true
-            hasClassesWithAllNames(listOf("SampleClass1", "SampleClass2")) shouldBeEqualTo true
-            hasClassesWithAllNames(listOf("SampleClass1", "OtherClass")) shouldBeEqualTo false
-            hasClassesWithAllNames(setOf("SampleClass1")) shouldBeEqualTo true
-            hasClassesWithAllNames(setOf("SampleClass1", "SampleClass2")) shouldBeEqualTo true
-            hasClassesWithAllNames(setOf("SampleClass1", "OtherClass")) shouldBeEqualTo false
-            hasClass { it.name == "SampleClass1" } shouldBeEqualTo true
+            hasClassWithName("FixtureClass1") shouldBeEqualTo true
+            hasClassWithName("FixtureClass1", "OtherClass") shouldBeEqualTo true
+            hasClassWithName(listOf("FixtureClass1")) shouldBeEqualTo true
+            hasClassWithName(listOf("FixtureClass1", "OtherClass")) shouldBeEqualTo true
+            hasClassWithName(setOf("FixtureClass1")) shouldBeEqualTo true
+            hasClassWithName(setOf("FixtureClass1", "OtherClass")) shouldBeEqualTo true
+            hasClassesWithAllNames("FixtureClass1") shouldBeEqualTo true
+            hasClassesWithAllNames("FixtureClass1", "FixtureClass2") shouldBeEqualTo true
+            hasClassesWithAllNames("FixtureClass1", "OtherClass") shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("FixtureClass1")) shouldBeEqualTo true
+            hasClassesWithAllNames(listOf("FixtureClass1", "FixtureClass2")) shouldBeEqualTo true
+            hasClassesWithAllNames(listOf("FixtureClass1", "OtherClass")) shouldBeEqualTo false
+            hasClassesWithAllNames(setOf("FixtureClass1")) shouldBeEqualTo true
+            hasClassesWithAllNames(setOf("FixtureClass1", "FixtureClass2")) shouldBeEqualTo true
+            hasClassesWithAllNames(setOf("FixtureClass1", "OtherClass")) shouldBeEqualTo false
+            hasClass { it.name == "FixtureClass1" } shouldBeEqualTo true
             hasClass { it.hasNameEndingWith("Class1") } shouldBeEqualTo true
-            hasAllClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAllClasses { it.hasNameStartingWith("Fixture") } shouldBeEqualTo true
             hasAllClasses { it.hasNameEndingWith("Class1") } shouldBeEqualTo false
         }
     }
@@ -80,7 +80,7 @@ class KoFileDeclarationForKoClassProviderTest {
                 .first()
 
         // then
-        val expected = listOf("SampleLocalClass", "SampleClassNestedInsideObject")
+        val expected = listOf("FixtureLocalClass", "FixtureClassNestedInsideObject")
 
         sut
             .classes(includeNested = true, includeLocal = true)
@@ -97,7 +97,7 @@ class KoFileDeclarationForKoClassProviderTest {
                 .first()
 
         // then
-        val expected = listOf("SampleClassNestedInsideObject")
+        val expected = listOf("FixtureClassNestedInsideObject")
 
         sut
             .classes(includeNested = true, includeLocal = false)
@@ -114,7 +114,7 @@ class KoFileDeclarationForKoClassProviderTest {
                 .first()
 
         // then
-        val expected = listOf("SampleLocalClass")
+        val expected = listOf("FixtureLocalClass")
 
         sut
             .classes(includeNested = false, includeLocal = true)
@@ -155,7 +155,7 @@ class KoFileDeclarationForKoClassProviderTest {
             numClasses(includeNested = false, includeLocal = false) shouldBeEqualTo 1
             countClasses(includeNested = false, includeLocal = false) { it.hasPrivateModifier } shouldBeEqualTo 1
             countClasses { it.hasPrivateModifier } shouldBeEqualTo 2
-            countClasses { it.name == "SampleClass" && it.hasInternalModifier } shouldBeEqualTo 0
+            countClasses { it.name == "FixtureClass" && it.hasInternalModifier } shouldBeEqualTo 0
         }
     }
 
@@ -169,18 +169,18 @@ class KoFileDeclarationForKoClassProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasClassWithName("sampleclass") shouldBeEqualTo false
-            hasClassWithName("sampleclass", ignoreCase = true) shouldBeEqualTo false
-            hasClassWithName(listOf("sampleclass")) shouldBeEqualTo false
-            hasClassWithName(listOf("sampleclass"), ignoreCase = true) shouldBeEqualTo false
-            hasClassWithName(setOf("sampleclass")) shouldBeEqualTo false
-            hasClassWithName(setOf("sampleclass"), ignoreCase = true) shouldBeEqualTo false
-            hasClassesWithAllNames("sampleclass1", "sampleclass2") shouldBeEqualTo false
-            hasClassesWithAllNames("sampleclass1", "sampleclass2", ignoreCase = true) shouldBeEqualTo false
-            hasClassesWithAllNames(listOf("sampleclass1", "sampleclass2")) shouldBeEqualTo false
-            hasClassesWithAllNames(listOf("sampleclass1", "sampleclass2"), ignoreCase = true) shouldBeEqualTo false
-            hasClassesWithAllNames(setOf("sampleclass1", "sampleclass2")) shouldBeEqualTo false
-            hasClassesWithAllNames(setOf("sampleclass1", "sampleclass2"), ignoreCase = true) shouldBeEqualTo false
+            hasClassWithName("fixtureclass") shouldBeEqualTo false
+            hasClassWithName("fixtureclass", ignoreCase = true) shouldBeEqualTo false
+            hasClassWithName(listOf("fixtureclass")) shouldBeEqualTo false
+            hasClassWithName(listOf("fixtureclass"), ignoreCase = true) shouldBeEqualTo false
+            hasClassWithName(setOf("fixtureclass")) shouldBeEqualTo false
+            hasClassWithName(setOf("fixtureclass"), ignoreCase = true) shouldBeEqualTo false
+            hasClassesWithAllNames("fixtureclass1", "fixtureclass2") shouldBeEqualTo false
+            hasClassesWithAllNames("fixtureclass1", "fixtureclass2", ignoreCase = true) shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("fixtureclass1", "fixtureclass2")) shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("fixtureclass1", "fixtureclass2"), ignoreCase = true) shouldBeEqualTo false
+            hasClassesWithAllNames(setOf("fixtureclass1", "fixtureclass2")) shouldBeEqualTo false
+            hasClassesWithAllNames(setOf("fixtureclass1", "fixtureclass2"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 
@@ -194,30 +194,30 @@ class KoFileDeclarationForKoClassProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasClassWithName("sampleclass1") shouldBeEqualTo false
-            hasClassWithName("sampleclass1", ignoreCase = true) shouldBeEqualTo true
+            hasClassWithName("fixtureclass1") shouldBeEqualTo false
+            hasClassWithName("fixtureclass1", ignoreCase = true) shouldBeEqualTo true
             hasClassWithName("otherclass") shouldBeEqualTo false
             hasClassWithName("otherclass", ignoreCase = true) shouldBeEqualTo false
-            hasClassWithName("sampleclass1", "otherName") shouldBeEqualTo false
-            hasClassWithName("sampleclass1", "otherName", ignoreCase = true) shouldBeEqualTo true
-            hasClassWithName(listOf("sampleclass1")) shouldBeEqualTo false
-            hasClassWithName(listOf("sampleclass1"), ignoreCase = true) shouldBeEqualTo true
+            hasClassWithName("fixtureclass1", "otherName") shouldBeEqualTo false
+            hasClassWithName("fixtureclass1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasClassWithName(listOf("fixtureclass1")) shouldBeEqualTo false
+            hasClassWithName(listOf("fixtureclass1"), ignoreCase = true) shouldBeEqualTo true
             hasClassWithName(listOf("otherclass")) shouldBeEqualTo false
             hasClassWithName(listOf("otherclass"), ignoreCase = true) shouldBeEqualTo false
-            hasClassWithName(listOf("sampleclass1", "otherName")) shouldBeEqualTo false
-            hasClassWithName(listOf("sampleclass1", "otherName"), ignoreCase = true) shouldBeEqualTo true
-            hasClassesWithAllNames("sampleclass1") shouldBeEqualTo false
-            hasClassesWithAllNames("sampleclass1", ignoreCase = true) shouldBeEqualTo true
-            hasClassesWithAllNames("sampleclass1", "sampleclass2") shouldBeEqualTo false
-            hasClassesWithAllNames("sampleclass1", "sampleclass2", ignoreCase = true) shouldBeEqualTo true
-            hasClassesWithAllNames("sampleclass1", "otherclass") shouldBeEqualTo false
-            hasClassesWithAllNames("sampleclass1", "otherclass", ignoreCase = true) shouldBeEqualTo false
-            hasClassesWithAllNames(listOf("sampleclass1")) shouldBeEqualTo false
-            hasClassesWithAllNames(listOf("sampleclass1"), ignoreCase = true) shouldBeEqualTo true
-            hasClassesWithAllNames(listOf("sampleclass1", "sampleclass2")) shouldBeEqualTo false
-            hasClassesWithAllNames(listOf("sampleclass1", "sampleclass2"), ignoreCase = true) shouldBeEqualTo true
-            hasClassesWithAllNames(listOf("sampleclass1", "otherclass")) shouldBeEqualTo false
-            hasClassesWithAllNames(listOf("sampleclass1", "otherclass"), ignoreCase = true) shouldBeEqualTo false
+            hasClassWithName(listOf("fixtureclass1", "otherName")) shouldBeEqualTo false
+            hasClassWithName(listOf("fixtureclass1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasClassesWithAllNames("fixtureclass1") shouldBeEqualTo false
+            hasClassesWithAllNames("fixtureclass1", ignoreCase = true) shouldBeEqualTo true
+            hasClassesWithAllNames("fixtureclass1", "fixtureclass2") shouldBeEqualTo false
+            hasClassesWithAllNames("fixtureclass1", "fixtureclass2", ignoreCase = true) shouldBeEqualTo true
+            hasClassesWithAllNames("fixtureclass1", "otherclass") shouldBeEqualTo false
+            hasClassesWithAllNames("fixtureclass1", "otherclass", ignoreCase = true) shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("fixtureclass1")) shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("fixtureclass1"), ignoreCase = true) shouldBeEqualTo true
+            hasClassesWithAllNames(listOf("fixtureclass1", "fixtureclass2")) shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("fixtureclass1", "fixtureclass2"), ignoreCase = true) shouldBeEqualTo true
+            hasClassesWithAllNames(listOf("fixtureclass1", "otherclass")) shouldBeEqualTo false
+            hasClassesWithAllNames(listOf("fixtureclass1", "otherclass"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 

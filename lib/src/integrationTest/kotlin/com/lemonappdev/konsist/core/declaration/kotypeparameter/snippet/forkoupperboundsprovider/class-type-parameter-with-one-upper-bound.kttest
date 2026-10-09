@@ -1,1 +1,1 @@
-class SampleClass<T : List<*>>
+class FixtureClass<T : List<*>>

@@ -10,12 +10,12 @@ import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
-import com.lemonappdev.konsist.externalsample.SampleExternalClass
-import com.lemonappdev.konsist.testdata.SampleClass
-import com.lemonappdev.konsist.testdata.SampleCollection1
-import com.lemonappdev.konsist.testdata.SampleInterface
-import com.lemonappdev.konsist.testdata.SampleObject
-import com.lemonappdev.konsist.testdata.SampleType
+import com.lemonappdev.konsist.externalfixture.FixtureExternalClass
+import com.lemonappdev.konsist.testdata.FixtureClass
+import com.lemonappdev.konsist.testdata.FixtureCollection1
+import com.lemonappdev.konsist.testdata.FixtureInterface
+import com.lemonappdev.konsist.testdata.FixtureObject
+import com.lemonappdev.konsist.testdata.FixtureType
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -52,53 +52,53 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isTypeParameter shouldBeEqualTo false
             it?.isExternal shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
-            it?.asClassDeclaration()?.name shouldBeEqualTo "SampleType"
+            it?.asClassDeclaration()?.name shouldBeEqualTo "FixtureType"
             it?.hasClassDeclaration() shouldBeEqualTo true
-            it?.hasClassDeclaration { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
+            it?.hasClassDeclaration { declaration -> declaration.name == "FixtureType" } shouldBeEqualTo true
             it?.hasClassDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasClassDeclarationOf(SampleType::class) shouldBeEqualTo true
-            it?.hasClassDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassDeclarationOf(FixtureType::class) shouldBeEqualTo true
+            it?.hasClassDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
             it?.hasObjectDeclaration() shouldBeEqualTo false
-            it?.hasObjectDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasObjectDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
-            it?.hasInterfaceDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasInterfaceDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asClassOrObjectDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             it?.hasClassOrObjectDeclaration() shouldBeEqualTo true
-            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleType" } shouldBeEqualTo true
-            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo false
-            it?.hasClassOrObjectDeclarationOf(SampleType::class) shouldBeEqualTo true
-            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "FixtureType" } shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "FixtureObject" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(FixtureType::class) shouldBeEqualTo true
+            it?.hasClassOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassOrInterfaceDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo true
-            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleType" } shouldBeEqualTo true
-            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceDeclarationOf(SampleType::class) shouldBeEqualTo true
-            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "FixtureType" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(FixtureType::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
             it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
             it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-            it?.hasInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassOrInterfaceOrObjectDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleType" } shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleType::class) shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureType" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureType::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
             it?.hasImportAliasDeclaration() shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asExternalDeclaration() shouldBeEqualTo null
             it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
@@ -135,53 +135,53 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isTypeParameter shouldBeEqualTo false
             it?.isExternal shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
-            it?.asClassDeclaration()?.name shouldBeEqualTo "SampleType"
+            it?.asClassDeclaration()?.name shouldBeEqualTo "FixtureType"
             it?.hasClassDeclaration() shouldBeEqualTo true
-            it?.hasClassDeclaration { declaration -> declaration.name == "SampleType" } shouldBeEqualTo true
+            it?.hasClassDeclaration { declaration -> declaration.name == "FixtureType" } shouldBeEqualTo true
             it?.hasClassDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasClassDeclarationOf(SampleType::class) shouldBeEqualTo true
-            it?.hasClassDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassDeclarationOf(FixtureType::class) shouldBeEqualTo true
+            it?.hasClassDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
             it?.hasObjectDeclaration() shouldBeEqualTo false
-            it?.hasObjectDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasObjectDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
-            it?.hasInterfaceDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasInterfaceDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asClassOrObjectDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             it?.hasClassOrObjectDeclaration() shouldBeEqualTo true
-            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleType" } shouldBeEqualTo true
-            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo false
-            it?.hasClassOrObjectDeclarationOf(SampleType::class) shouldBeEqualTo true
-            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "FixtureType" } shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "FixtureObject" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(FixtureType::class) shouldBeEqualTo true
+            it?.hasClassOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassOrInterfaceDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo true
-            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleType" } shouldBeEqualTo true
-            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceDeclarationOf(SampleType::class) shouldBeEqualTo true
-            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "FixtureType" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(FixtureType::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
             it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
             it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-            it?.hasInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassOrInterfaceOrObjectDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleType" } shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleType::class) shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureType" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureType::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
             it?.hasImportAliasDeclaration() shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asExternalDeclaration() shouldBeEqualTo null
             it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
@@ -218,53 +218,53 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isTypeParameter shouldBeEqualTo false
             it?.isExternal shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
-            it?.asObjectDeclaration()?.name shouldBeEqualTo "SampleObject"
+            it?.asObjectDeclaration()?.name shouldBeEqualTo "FixtureObject"
             it?.hasObjectDeclaration() shouldBeEqualTo true
-            it?.hasObjectDeclaration { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
+            it?.hasObjectDeclaration { declaration -> declaration.name == "FixtureObject" } shouldBeEqualTo true
             it?.hasObjectDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasObjectDeclarationOf(SampleObject::class) shouldBeEqualTo true
-            it?.hasObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasObjectDeclarationOf(FixtureObject::class) shouldBeEqualTo true
+            it?.hasObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
-            it?.hasClassDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.hasClassDeclarationOf(FixtureObject::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
-            it?.hasInterfaceDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.hasInterfaceDeclarationOf(FixtureObject::class) shouldBeEqualTo false
             it?.asClassOrObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
             it?.hasClassOrObjectDeclaration() shouldBeEqualTo true
-            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo true
-            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleClass" } shouldBeEqualTo false
-            it?.hasClassOrObjectDeclarationOf(SampleObject::class) shouldBeEqualTo true
-            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "FixtureObject" } shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "FixtureClass" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(FixtureObject::class) shouldBeEqualTo true
+            it?.hasClassOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassOrInterfaceDeclaration() shouldBeEqualTo null
             it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo false
-            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "FixtureObject" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(FixtureObject::class) shouldBeEqualTo false
             it?.asInterfaceOrObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
             it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo true
-            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo true
-            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
-            it?.hasInterfaceOrObjectDeclarationOf(SampleObject::class) shouldBeEqualTo true
-            it?.hasInterfaceOrObjectDeclarationOf(SampleInterface::class) shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureObject" } shouldBeEqualTo true
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(FixtureObject::class) shouldBeEqualTo true
+            it?.hasInterfaceOrObjectDeclarationOf(FixtureInterface::class) shouldBeEqualTo false
             it?.asClassOrInterfaceOrObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
             it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleClass" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleObject::class) shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureObject" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureClass" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureObject::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
             it?.hasImportAliasDeclaration() shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinTypeDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.hasKotlinTypeDeclarationOf(FixtureObject::class) shouldBeEqualTo false
             it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asExternalDeclaration() shouldBeEqualTo null
             it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
@@ -301,53 +301,53 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isTypeParameter shouldBeEqualTo false
             it?.isExternal shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
-            it?.asObjectDeclaration()?.name shouldBeEqualTo "SampleObject"
+            it?.asObjectDeclaration()?.name shouldBeEqualTo "FixtureObject"
             it?.hasObjectDeclaration() shouldBeEqualTo true
-            it?.hasObjectDeclaration { declaration -> declaration.name == "SampleObject" } shouldBeEqualTo true
+            it?.hasObjectDeclaration { declaration -> declaration.name == "FixtureObject" } shouldBeEqualTo true
             it?.hasObjectDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasObjectDeclarationOf(SampleObject::class) shouldBeEqualTo true
-            it?.hasObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasObjectDeclarationOf(FixtureObject::class) shouldBeEqualTo true
+            it?.hasObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
-            it?.hasClassDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.hasClassDeclarationOf(FixtureObject::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
-            it?.hasInterfaceDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.hasInterfaceDeclarationOf(FixtureObject::class) shouldBeEqualTo false
             it?.asClassOrObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
             it?.hasClassOrObjectDeclaration() shouldBeEqualTo true
-            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo true
-            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleClass" } shouldBeEqualTo false
-            it?.hasClassOrObjectDeclarationOf(SampleObject::class) shouldBeEqualTo true
-            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "FixtureObject" } shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "FixtureClass" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(FixtureObject::class) shouldBeEqualTo true
+            it?.hasClassOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassOrInterfaceDeclaration() shouldBeEqualTo null
             it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo false
-            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "FixtureObject" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(FixtureObject::class) shouldBeEqualTo false
             it?.asInterfaceOrObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
             it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo true
-            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo true
-            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
-            it?.hasInterfaceOrObjectDeclarationOf(SampleObject::class) shouldBeEqualTo true
-            it?.hasInterfaceOrObjectDeclarationOf(SampleInterface::class) shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureObject" } shouldBeEqualTo true
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(FixtureObject::class) shouldBeEqualTo true
+            it?.hasInterfaceOrObjectDeclarationOf(FixtureInterface::class) shouldBeEqualTo false
             it?.asClassOrInterfaceOrObjectDeclaration() shouldBeInstanceOf KoObjectDeclaration::class
             it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleClass" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleObject::class) shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureObject" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureClass" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureObject::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
             it?.hasImportAliasDeclaration() shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinTypeDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.hasKotlinTypeDeclarationOf(FixtureObject::class) shouldBeEqualTo false
             it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asExternalDeclaration() shouldBeEqualTo null
             it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
@@ -384,53 +384,53 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isTypeParameter shouldBeEqualTo false
             it?.isExternal shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
-            it?.asInterfaceDeclaration()?.name shouldBeEqualTo "SampleInterface"
+            it?.asInterfaceDeclaration()?.name shouldBeEqualTo "FixtureInterface"
             it?.hasInterfaceDeclaration() shouldBeEqualTo true
-            it?.hasInterfaceDeclaration { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
+            it?.hasInterfaceDeclaration { declaration -> declaration.name == "FixtureInterface" } shouldBeEqualTo true
             it?.hasInterfaceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasInterfaceDeclarationOf(SampleInterface::class) shouldBeEqualTo true
-            it?.hasInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasInterfaceDeclarationOf(FixtureInterface::class) shouldBeEqualTo true
+            it?.hasInterfaceDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassOrObjectDeclaration() shouldBeEqualTo null
             it?.hasClassOrObjectDeclaration() shouldBeEqualTo false
-            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
-            it?.hasClassOrObjectDeclarationOf(SampleInterface::class) shouldBeEqualTo false
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(FixtureInterface::class) shouldBeEqualTo false
             it?.asClassOrInterfaceDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
             it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo true
-            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo true
-            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleClass" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceDeclarationOf(SampleInterface::class) shouldBeEqualTo true
-            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "FixtureClass" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(FixtureInterface::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asInterfaceOrObjectDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
             it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo true
-            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo true
-            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo false
-            it?.hasInterfaceOrObjectDeclarationOf(SampleInterface::class) shouldBeEqualTo true
-            it?.hasInterfaceOrObjectDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo true
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureObject" } shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(FixtureInterface::class) shouldBeEqualTo true
+            it?.hasInterfaceOrObjectDeclarationOf(FixtureObject::class) shouldBeEqualTo false
             it?.asClassOrInterfaceOrObjectDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
             it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleClass" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleInterface::class) shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureClass" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureInterface::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
-            it?.hasClassDeclarationOf(SampleInterface::class) shouldBeEqualTo false
+            it?.hasClassDeclarationOf(FixtureInterface::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
             it?.hasObjectDeclaration() shouldBeEqualTo false
-            it?.hasObjectDeclarationOf(SampleInterface::class) shouldBeEqualTo false
+            it?.hasObjectDeclarationOf(FixtureInterface::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
             it?.hasImportAliasDeclaration() shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinTypeDeclarationOf(SampleInterface::class) shouldBeEqualTo false
+            it?.hasKotlinTypeDeclarationOf(FixtureInterface::class) shouldBeEqualTo false
             it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asExternalDeclaration() shouldBeEqualTo null
             it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
@@ -467,53 +467,53 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isTypeParameter shouldBeEqualTo false
             it?.isExternal shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
-            it?.asInterfaceDeclaration()?.name shouldBeEqualTo "SampleInterface"
+            it?.asInterfaceDeclaration()?.name shouldBeEqualTo "FixtureInterface"
             it?.hasInterfaceDeclaration() shouldBeEqualTo true
-            it?.hasInterfaceDeclaration { declaration -> declaration.name == "SampleInterface" } shouldBeEqualTo true
+            it?.hasInterfaceDeclaration { declaration -> declaration.name == "FixtureInterface" } shouldBeEqualTo true
             it?.hasInterfaceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasInterfaceDeclarationOf(SampleInterface::class) shouldBeEqualTo true
-            it?.hasInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasInterfaceDeclarationOf(FixtureInterface::class) shouldBeEqualTo true
+            it?.hasInterfaceDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassOrObjectDeclaration() shouldBeEqualTo null
             it?.hasClassOrObjectDeclaration() shouldBeEqualTo false
-            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
-            it?.hasClassOrObjectDeclarationOf(SampleInterface::class) shouldBeEqualTo false
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(FixtureInterface::class) shouldBeEqualTo false
             it?.asClassOrInterfaceDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
             it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo true
-            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo true
-            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleClass" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceDeclarationOf(SampleInterface::class) shouldBeEqualTo true
-            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "FixtureClass" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(FixtureInterface::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asInterfaceOrObjectDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
             it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo true
-            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo true
-            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo false
-            it?.hasInterfaceOrObjectDeclarationOf(SampleInterface::class) shouldBeEqualTo true
-            it?.hasInterfaceOrObjectDeclarationOf(SampleObject::class) shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo true
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureObject" } shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(FixtureInterface::class) shouldBeEqualTo true
+            it?.hasInterfaceOrObjectDeclarationOf(FixtureObject::class) shouldBeEqualTo false
             it?.asClassOrInterfaceOrObjectDeclaration() shouldBeInstanceOf KoInterfaceDeclaration::class
             it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleClass" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleInterface::class) shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureClass" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureInterface::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
-            it?.hasClassDeclarationOf(SampleInterface::class) shouldBeEqualTo false
+            it?.hasClassDeclarationOf(FixtureInterface::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
             it?.hasObjectDeclaration() shouldBeEqualTo false
-            it?.hasObjectDeclarationOf(SampleInterface::class) shouldBeEqualTo false
+            it?.hasObjectDeclarationOf(FixtureInterface::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
             it?.hasImportAliasDeclaration() shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinTypeDeclarationOf(SampleInterface::class) shouldBeEqualTo false
+            it?.hasKotlinTypeDeclarationOf(FixtureInterface::class) shouldBeEqualTo false
             it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asExternalDeclaration() shouldBeEqualTo null
             it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
@@ -566,10 +566,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
             it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asExternalDeclaration() shouldBeEqualTo null
             it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
@@ -606,9 +606,9 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isTypeParameter shouldBeEqualTo false
             it?.isExternal shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeInstanceOf KoTypeAliasDeclaration::class
-            it?.asTypeAliasDeclaration()?.name shouldBeEqualTo "SampleTypeAlias"
+            it?.asTypeAliasDeclaration()?.name shouldBeEqualTo "FixtureTypeAlias"
             it?.hasTypeAliasDeclaration() shouldBeEqualTo true
-            it?.hasTypeAliasDeclaration { declaration -> declaration.name == "SampleTypeAlias" } shouldBeEqualTo true
+            it?.hasTypeAliasDeclaration { declaration -> declaration.name == "FixtureTypeAlias" } shouldBeEqualTo true
             it?.hasTypeAliasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
@@ -622,10 +622,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
             it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asExternalDeclaration() shouldBeEqualTo null
             it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
@@ -678,10 +678,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
             it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asExternalDeclaration() shouldBeEqualTo null
             it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
@@ -734,10 +734,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
             it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asExternalDeclaration() shouldBeEqualTo null
             it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
@@ -790,10 +790,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
             it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asExternalDeclaration() shouldBeEqualTo null
             it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
@@ -830,9 +830,9 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isTypeParameter shouldBeEqualTo false
             it?.isExternal shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeInstanceOf KoTypeAliasDeclaration::class
-            it?.asTypeAliasDeclaration()?.name shouldBeEqualTo "SampleTypeAlias"
+            it?.asTypeAliasDeclaration()?.name shouldBeEqualTo "FixtureTypeAlias"
             it?.hasTypeAliasDeclaration() shouldBeEqualTo true
-            it?.hasTypeAliasDeclaration { declaration -> declaration.name == "SampleTypeAlias" } shouldBeEqualTo true
+            it?.hasTypeAliasDeclaration { declaration -> declaration.name == "FixtureTypeAlias" } shouldBeEqualTo true
             it?.hasTypeAliasDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
@@ -846,10 +846,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
             it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asExternalDeclaration() shouldBeEqualTo null
             it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
@@ -901,7 +901,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.hasKotlinBasicTypeDeclarationOf(Int::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.hasClassDeclarationOf(String::class) shouldBeEqualTo false
@@ -914,19 +914,19 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.asClassOrObjectDeclaration() shouldBeEqualTo null
             it?.hasClassOrObjectDeclaration() shouldBeEqualTo false
             it?.hasClassOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassOrInterfaceDeclaration() shouldBeEqualTo null
             it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo false
             it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
             it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
             it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-            it?.hasInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo null
             it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo false
             it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
@@ -983,7 +983,7 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.hasKotlinBasicTypeDeclarationOf(Int::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
             it?.hasClassDeclarationOf(String::class) shouldBeEqualTo false
@@ -996,19 +996,19 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.asClassOrObjectDeclaration() shouldBeEqualTo null
             it?.hasClassOrObjectDeclaration() shouldBeEqualTo false
             it?.hasClassOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassOrInterfaceDeclaration() shouldBeEqualTo null
             it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo false
             it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
             it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
             it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-            it?.hasInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo null
             it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo false
             it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
@@ -1063,10 +1063,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
             it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asExternalDeclaration() shouldBeEqualTo null
             it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
@@ -1116,10 +1116,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
             it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asExternalDeclaration() shouldBeEqualTo null
             it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
@@ -1156,53 +1156,53 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isTypeParameter shouldBeEqualTo false
             it?.isExternal shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
-            it?.asClassDeclaration()?.name shouldBeEqualTo "SampleCollection1"
+            it?.asClassDeclaration()?.name shouldBeEqualTo "FixtureCollection1"
             it?.hasClassDeclaration() shouldBeEqualTo true
-            it?.hasClassDeclaration { declaration -> declaration.name == "SampleCollection1" } shouldBeEqualTo true
+            it?.hasClassDeclaration { declaration -> declaration.name == "FixtureCollection1" } shouldBeEqualTo true
             it?.hasClassDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasClassDeclarationOf(SampleCollection1::class) shouldBeEqualTo true
-            it?.hasClassDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassDeclarationOf(FixtureCollection1::class) shouldBeEqualTo true
+            it?.hasClassDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
             it?.hasObjectDeclaration() shouldBeEqualTo false
-            it?.hasObjectDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.hasObjectDeclarationOf(FixtureCollection1::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
-            it?.hasInterfaceDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.hasInterfaceDeclarationOf(FixtureCollection1::class) shouldBeEqualTo false
             it?.asClassOrObjectDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             it?.hasClassOrObjectDeclaration() shouldBeEqualTo true
-            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleCollection1" } shouldBeEqualTo true
-            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo false
-            it?.hasClassOrObjectDeclarationOf(SampleCollection1::class) shouldBeEqualTo true
-            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "FixtureCollection1" } shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "FixtureObject" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(FixtureCollection1::class) shouldBeEqualTo true
+            it?.hasClassOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassOrInterfaceDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo true
-            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleCollection1" } shouldBeEqualTo true
-            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceDeclarationOf(SampleCollection1::class) shouldBeEqualTo true
-            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "FixtureCollection1" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(FixtureCollection1::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
             it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
             it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-            it?.hasInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassOrInterfaceOrObjectDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleCollection1" } shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleCollection1::class) shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureCollection1" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureCollection1::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
             it?.hasImportAliasDeclaration() shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinTypeDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.hasKotlinTypeDeclarationOf(FixtureCollection1::class) shouldBeEqualTo false
             it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinBasicTypeDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureCollection1::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureCollection1::class) shouldBeEqualTo false
             it?.asExternalDeclaration() shouldBeEqualTo null
             it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
@@ -1239,53 +1239,53 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isTypeParameter shouldBeEqualTo false
             it?.isExternal shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
-            it?.asClassDeclaration()?.name shouldBeEqualTo "SampleCollection1"
+            it?.asClassDeclaration()?.name shouldBeEqualTo "FixtureCollection1"
             it?.hasClassDeclaration() shouldBeEqualTo true
-            it?.hasClassDeclaration { declaration -> declaration.name == "SampleCollection1" } shouldBeEqualTo true
+            it?.hasClassDeclaration { declaration -> declaration.name == "FixtureCollection1" } shouldBeEqualTo true
             it?.hasClassDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasClassDeclarationOf(SampleCollection1::class) shouldBeEqualTo true
-            it?.hasClassDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassDeclarationOf(FixtureCollection1::class) shouldBeEqualTo true
+            it?.hasClassDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
             it?.hasObjectDeclaration() shouldBeEqualTo false
-            it?.hasObjectDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.hasObjectDeclarationOf(FixtureCollection1::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
-            it?.hasInterfaceDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.hasInterfaceDeclarationOf(FixtureCollection1::class) shouldBeEqualTo false
             it?.asClassOrObjectDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             it?.hasClassOrObjectDeclaration() shouldBeEqualTo true
-            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleCollection1" } shouldBeEqualTo true
-            it?.hasClassOrObjectDeclaration { decl -> decl.name == "SampleObject" } shouldBeEqualTo false
-            it?.hasClassOrObjectDeclarationOf(SampleCollection1::class) shouldBeEqualTo true
-            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "FixtureCollection1" } shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "FixtureObject" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(FixtureCollection1::class) shouldBeEqualTo true
+            it?.hasClassOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassOrInterfaceDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo true
-            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleCollection1" } shouldBeEqualTo true
-            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceDeclarationOf(SampleCollection1::class) shouldBeEqualTo true
-            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "FixtureCollection1" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(FixtureCollection1::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
             it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
             it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-            it?.hasInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassOrInterfaceOrObjectDeclaration() shouldBeInstanceOf KoClassDeclaration::class
             it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleCollection1" } shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "SampleInterface" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleCollection1::class) shouldBeEqualTo true
-            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureCollection1" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureCollection1::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
             it?.hasImportAliasDeclaration() shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinTypeDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.hasKotlinTypeDeclarationOf(FixtureCollection1::class) shouldBeEqualTo false
             it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinBasicTypeDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureCollection1::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleCollection1::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureCollection1::class) shouldBeEqualTo false
             it?.asExternalDeclaration() shouldBeEqualTo null
             it?.hasExternalDeclaration() shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
@@ -1322,50 +1322,50 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isTypeParameter shouldBeEqualTo false
             it?.isExternal shouldBeEqualTo true
             it?.asExternalDeclaration() shouldBeInstanceOf KoExternalDeclaration::class
-            it?.asExternalDeclaration()?.name shouldBeEqualTo "SampleExternalClass"
+            it?.asExternalDeclaration()?.name shouldBeEqualTo "FixtureExternalClass"
             it?.hasExternalDeclaration() shouldBeEqualTo true
-            it?.hasExternalDeclaration { declaration -> declaration.name == "SampleExternalClass" } shouldBeEqualTo true
+            it?.hasExternalDeclaration { declaration -> declaration.name == "FixtureExternalClass" } shouldBeEqualTo true
             it?.hasExternalDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasExternalDeclarationOf(SampleExternalClass::class) shouldBeEqualTo true
-            it?.hasExternalDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasExternalDeclarationOf(FixtureExternalClass::class) shouldBeEqualTo true
+            it?.hasExternalDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
-            it?.hasClassDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
+            it?.hasClassDeclarationOf(FixtureExternalClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
             it?.hasObjectDeclaration() shouldBeEqualTo false
-            it?.hasObjectDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
+            it?.hasObjectDeclarationOf(FixtureExternalClass::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
-            it?.hasInterfaceDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
+            it?.hasInterfaceDeclarationOf(FixtureExternalClass::class) shouldBeEqualTo false
             it?.asClassOrObjectDeclaration() shouldBeEqualTo null
             it?.hasClassOrObjectDeclaration() shouldBeEqualTo false
             it?.hasClassOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassOrInterfaceDeclaration() shouldBeEqualTo null
             it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo false
             it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
             it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
             it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-            it?.hasInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo null
             it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo false
             it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
             it?.hasImportAliasDeclaration() shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinTypeDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
+            it?.hasKotlinTypeDeclarationOf(FixtureExternalClass::class) shouldBeEqualTo false
             it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
         }
@@ -1400,50 +1400,50 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.isTypeParameter shouldBeEqualTo false
             it?.isExternal shouldBeEqualTo true
             it?.asExternalDeclaration() shouldBeInstanceOf KoExternalDeclaration::class
-            it?.asExternalDeclaration()?.name shouldBeEqualTo "SampleExternalClass"
+            it?.asExternalDeclaration()?.name shouldBeEqualTo "FixtureExternalClass"
             it?.hasExternalDeclaration() shouldBeEqualTo true
-            it?.hasExternalDeclaration { declaration -> declaration.name == "SampleExternalClass" } shouldBeEqualTo true
+            it?.hasExternalDeclaration { declaration -> declaration.name == "FixtureExternalClass" } shouldBeEqualTo true
             it?.hasExternalDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
-            it?.hasExternalDeclarationOf(SampleExternalClass::class) shouldBeEqualTo true
-            it?.hasExternalDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasExternalDeclarationOf(FixtureExternalClass::class) shouldBeEqualTo true
+            it?.hasExternalDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassDeclaration() shouldBeEqualTo null
             it?.hasClassDeclaration() shouldBeEqualTo false
-            it?.hasClassDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
+            it?.hasClassDeclarationOf(FixtureExternalClass::class) shouldBeEqualTo false
             it?.asObjectDeclaration() shouldBeEqualTo null
             it?.hasObjectDeclaration() shouldBeEqualTo false
-            it?.hasObjectDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
+            it?.hasObjectDeclarationOf(FixtureExternalClass::class) shouldBeEqualTo false
             it?.asInterfaceDeclaration() shouldBeEqualTo null
             it?.hasInterfaceDeclaration() shouldBeEqualTo false
-            it?.hasInterfaceDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
+            it?.hasInterfaceDeclarationOf(FixtureExternalClass::class) shouldBeEqualTo false
             it?.asClassOrObjectDeclaration() shouldBeEqualTo null
             it?.hasClassOrObjectDeclaration() shouldBeEqualTo false
             it?.hasClassOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-            it?.hasClassOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassOrInterfaceDeclaration() shouldBeEqualTo null
             it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo false
             it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
             it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
             it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-            it?.hasInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo null
             it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo false
             it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
-            it?.hasClassOrInterfaceOrObjectDeclarationOf(SampleClass::class) shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
             it?.asTypeAliasDeclaration() shouldBeEqualTo null
             it?.hasTypeAliasDeclaration() shouldBeEqualTo false
             it?.asImportAliasDeclaration() shouldBeEqualTo null
             it?.hasImportAliasDeclaration() shouldBeEqualTo false
             it?.asKotlinTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinTypeDeclarationOf(SampleExternalClass::class) shouldBeEqualTo false
+            it?.hasKotlinTypeDeclarationOf(FixtureExternalClass::class) shouldBeEqualTo false
             it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
         }
@@ -1495,10 +1495,10 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
             it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
             it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinBasicTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
             it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
-            it?.hasKotlinCollectionTypeDeclarationOf(SampleType::class) shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureType::class) shouldBeEqualTo false
             it?.asTypeParameterDeclaration() shouldBeEqualTo null
             it?.hasTypeParameterDeclaration() shouldBeEqualTo false
         }

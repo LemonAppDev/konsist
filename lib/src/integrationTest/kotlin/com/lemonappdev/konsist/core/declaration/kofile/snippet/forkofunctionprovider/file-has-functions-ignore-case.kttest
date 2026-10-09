@@ -1,5 +1,5 @@
-fun sampleFunction1() {
+fun fixtureFunction1() {
 }
 
-fun sampleFunction2() {
+fun fixtureFunction2() {
 }

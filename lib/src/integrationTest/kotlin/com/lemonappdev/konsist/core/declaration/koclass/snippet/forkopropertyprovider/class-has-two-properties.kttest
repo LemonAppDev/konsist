@@ -1,5 +1,5 @@
-open class SampleTopLevelClass {
-    val sampleProperty1 = ""
+open class FixtureTopLevelClass {
+    val fixtureProperty1 = ""
 
-    var sampleProperty2 = 0
+    var fixtureProperty2 = 0
 }

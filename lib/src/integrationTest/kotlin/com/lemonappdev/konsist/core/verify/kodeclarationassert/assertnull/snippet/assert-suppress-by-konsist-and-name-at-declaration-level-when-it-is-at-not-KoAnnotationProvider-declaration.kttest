@@ -1,6 +1,6 @@
-class SampleClassText {
+class FixtureClassText {
     init {
         @Suppress("konsist.assert-suppress-by-konsist-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-        fun sampleFunction() {}
+        fun fixtureFunction() {}
     }
 }

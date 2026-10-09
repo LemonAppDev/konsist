@@ -1,7 +1,7 @@
 @file:Suppress("suppress-text")
 
-class SampleClassWithoutOtherFunction {
+class FixtureClassWithoutOtherFunction {
     init {
-        fun sampleFunction() {}
+        fun fixtureFunction() {}
     }
 }

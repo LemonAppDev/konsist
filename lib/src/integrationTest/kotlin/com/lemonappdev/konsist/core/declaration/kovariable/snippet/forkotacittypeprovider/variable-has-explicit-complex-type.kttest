@@ -1,8 +1,8 @@
-import com.lemonappdev.konsist.testdata.SampleClassWithParameter
+import com.lemonappdev.konsist.testdata.FixtureClassWithParameter
 
-val list = listOf(SampleClassWithParameter("some text"))
+val list = listOf(FixtureClassWithParameter("some text"))
 
-fun sampleFunction() {
+fun fixtureFunction() {
 
-    val sampleVariable: SampleClassWithParameter = list[0]
+    val fixtureVariable: FixtureClassWithParameter = list[0]
 }

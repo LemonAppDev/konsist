@@ -1,1 +1,1 @@
-class SampleClass(val sampleParameter: () -> Unit = { }) {}
+class FixtureClass(val fixtureParameter: () -> Unit = { }) {}

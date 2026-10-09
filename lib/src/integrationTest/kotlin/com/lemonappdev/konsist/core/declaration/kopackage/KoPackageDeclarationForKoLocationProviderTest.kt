@@ -33,7 +33,7 @@ class KoPackageDeclarationForKoLocationProviderTest {
                 .first()
 
         // then
-        val declaration = "Declaration:\npackage com.samplepackage"
+        val declaration = "Declaration:\npackage com.fixturepackage"
         assertSoftly(sut.locationWithText) {
             startsWith("Location: /") shouldBeEqualTo true
             contains(projectPath) shouldBeEqualTo true

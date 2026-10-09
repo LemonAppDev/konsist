@@ -52,7 +52,7 @@ class KoFileDeclarationForKoHasPackageProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasPackage("com.samplepackage") shouldBeEqualTo true
+            hasPackage("com.fixturepackage") shouldBeEqualTo true
             hasPackage("com..") shouldBeEqualTo true
             hasPackage("com") shouldBeEqualTo false
         }

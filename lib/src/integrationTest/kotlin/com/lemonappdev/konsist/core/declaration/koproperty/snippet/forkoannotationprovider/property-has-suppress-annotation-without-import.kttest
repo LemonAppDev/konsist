@@ -1,2 +1,2 @@
 @Suppress
-val sampleProperty = ""
+val fixtureProperty = ""

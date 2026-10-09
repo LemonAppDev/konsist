@@ -16,14 +16,14 @@ class KoScopeFromDirectoryTest {
     fun `scopeFromDirectory`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/sample/".toOsSeparator())
+            .scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/fixture/".toOsSeparator())
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appMainSourceSetDirectory/sample/AppClass.kt",
-                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
+                "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
             ).toOsSeparator(),
         )
     }
@@ -45,13 +45,13 @@ class KoScopeFromDirectoryTest {
         val func =
             {
                 Konsist.scopeFromDirectory(
-                    "app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt".toOsSeparator(),
+                    "app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt".toOsSeparator(),
                 )
             }
 
         // then
         val message =
-            "Path is a file, but should be a directory: $appMainSourceSetDirectory${fileSeparator}sample${fileSeparator}AppClass.kt"
+            "Path is a file, but should be a directory: $appMainSourceSetDirectory${fileSeparator}fixture${fileSeparator}AppClass.kt"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 }

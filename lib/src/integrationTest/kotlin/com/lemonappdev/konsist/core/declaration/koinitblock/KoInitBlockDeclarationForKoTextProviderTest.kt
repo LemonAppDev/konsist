@@ -21,7 +21,7 @@ class KoInitBlockDeclarationForKoTextProviderTest {
             text.shouldBeEqualTo(
                 """
                 init {
-                        val sampleInitProperty = 6
+                        val fixtureInitProperty = 6
                     }
                 """.trimIndent(),
             )
@@ -29,7 +29,7 @@ class KoInitBlockDeclarationForKoTextProviderTest {
             hasTextStartingWith("Other") shouldBeEqualTo false
             hasTextEndingWith("}") shouldBeEqualTo true
             hasTextEndingWith("other") shouldBeEqualTo false
-            hasTextContaining("sampleInitProperty =") shouldBeEqualTo true
+            hasTextContaining("fixtureInitProperty =") shouldBeEqualTo true
             hasTextContaining("anno") shouldBeEqualTo false
             hasTextMatching(Regex("^[^@]*\$")) shouldBeEqualTo true
             hasTextMatching(Regex("[0-9]+")) shouldBeEqualTo false

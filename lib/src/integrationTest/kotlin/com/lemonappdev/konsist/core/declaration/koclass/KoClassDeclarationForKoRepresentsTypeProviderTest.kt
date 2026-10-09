@@ -33,15 +33,15 @@ class KoClassDeclarationForKoRepresentsTypeProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("SampleClass", false, true),
-                arguments("sampleclass", false, false),
-                arguments("sampleclass", true, true),
+                arguments("FixtureClass", false, true),
+                arguments("fixtureclass", false, false),
+                arguments("fixtureclass", true, true),
                 arguments("OtherClass", false, false),
                 arguments("otherclass", false, false),
                 arguments("otherclass", true, false),
-                arguments("com.lemonappdev.konsist.testdata.SampleClass", false, true),
-                arguments("com.lemonappdev.konsist.testdata.sampleclass", false, false),
-                arguments("com.lemonappdev.konsist.testdata.sampleclass", true, true),
+                arguments("com.lemonappdev.konsist.testdata.FixtureClass", false, true),
+                arguments("com.lemonappdev.konsist.testdata.fixtureclass", false, false),
+                arguments("com.lemonappdev.konsist.testdata.fixtureclass", true, true),
                 arguments("com.lemonappdev.konsist.testdata.OtherClass", false, false),
                 arguments("com.lemonappdev.konsist.testdata.otherclass", false, false),
                 arguments("com.lemonappdev.konsist.testdata.otherclass", true, false),

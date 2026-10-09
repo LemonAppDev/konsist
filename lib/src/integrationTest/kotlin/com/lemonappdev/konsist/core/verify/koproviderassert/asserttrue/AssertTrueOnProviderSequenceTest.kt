@@ -44,9 +44,9 @@ class AssertTrueOnProviderSequenceTest {
 
         // then
         try {
-            sut.assertTrue(testName = "sample test") { false }
+            sut.assertTrue(testName = "fixture test") { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'sample test' was violated (2 times)")
+            e.message?.shouldContain("Assert 'fixture test' was violated (2 times)")
                 ?: throw e
         }
     }
@@ -235,7 +235,7 @@ class AssertTrueOnProviderSequenceTest {
                 .asSequence()
 
         // then
-        sut.assertTrue { it.primaryConstructor?.hasParameterWithName("sampleParameter") }
+        sut.assertTrue { it.primaryConstructor?.hasParameterWithName("fixtureParameter") }
     }
 
     @Test
@@ -249,7 +249,7 @@ class AssertTrueOnProviderSequenceTest {
 
         // when
         val func = {
-            sut.assertTrue { it.primaryConstructor?.hasParameterWithName("sampleParameter") }
+            sut.assertTrue { it.primaryConstructor?.hasParameterWithName("fixtureParameter") }
         }
 
         // then
@@ -280,7 +280,7 @@ class AssertTrueOnProviderSequenceTest {
 
         // when
         val func = {
-            sut.assertFalse { it.primaryConstructor?.hasParameterWithName("sampleParameter") }
+            sut.assertFalse { it.primaryConstructor?.hasParameterWithName("fixtureParameter") }
         }
 
         // then

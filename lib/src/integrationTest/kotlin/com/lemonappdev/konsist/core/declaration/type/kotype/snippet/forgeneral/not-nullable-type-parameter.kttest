@@ -1,1 +1,1 @@
-class SampleClass <TestType>(sampleProperty: TestType)
+class FixtureClass <TestType>(fixtureProperty: TestType)

@@ -1,4 +1,4 @@
-import com.lemonappdev.konsist.testdata.SampleClass
+import com.lemonappdev.konsist.testdata.FixtureClass
 
-val SampleClass.sampleProperty: String
+val FixtureClass.fixtureProperty: String
     get() = this.toString()

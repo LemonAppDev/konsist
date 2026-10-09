@@ -1,6 +1,6 @@
-object SampleTopLevelObject {
-    object SampleObject1
+object FixtureTopLevelObject {
+    object FixtureObject1
 
-    object SampleObject2
+    object FixtureObject2
 
 }

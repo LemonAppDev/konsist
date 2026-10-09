@@ -20,20 +20,20 @@ class KoEnumConstantDeclarationForKoFunctionProviderTest {
         assertSoftly(sut) {
             functions() shouldBeEqualTo emptyList()
             numFunctions() shouldBeEqualTo 0
-            countFunctions { it.name == "sampleFunction" } shouldBeEqualTo 0
+            countFunctions { it.name == "fixtureFunction" } shouldBeEqualTo 0
             hasFunctions() shouldBeEqualTo false
             hasFunctionWithName(emptyList()) shouldBeEqualTo false
             hasFunctionWithName(emptySet()) shouldBeEqualTo false
             hasFunctionsWithAllNames(emptyList()) shouldBeEqualTo false
             hasFunctionsWithAllNames(emptySet()) shouldBeEqualTo false
-            hasFunctionWithName("sampleFunction") shouldBeEqualTo false
-            hasFunctionWithName(listOf("sampleFunction")) shouldBeEqualTo false
-            hasFunctionWithName(setOf("sampleFunction")) shouldBeEqualTo false
-            hasFunctionsWithAllNames("sampleFunction1", "sampleFunction2") shouldBeEqualTo false
-            hasFunctionsWithAllNames(listOf("sampleFunction1", "sampleFunction2")) shouldBeEqualTo false
-            hasFunctionsWithAllNames(setOf("sampleFunction1", "sampleFunction2")) shouldBeEqualTo false
-            hasFunction { it.name == "sampleFunction" } shouldBeEqualTo false
-            hasAllFunctions { it.name == "sampleFunction" } shouldBeEqualTo true
+            hasFunctionWithName("fixtureFunction") shouldBeEqualTo false
+            hasFunctionWithName(listOf("fixtureFunction")) shouldBeEqualTo false
+            hasFunctionWithName(setOf("fixtureFunction")) shouldBeEqualTo false
+            hasFunctionsWithAllNames("fixtureFunction1", "fixtureFunction2") shouldBeEqualTo false
+            hasFunctionsWithAllNames(listOf("fixtureFunction1", "fixtureFunction2")) shouldBeEqualTo false
+            hasFunctionsWithAllNames(setOf("fixtureFunction1", "fixtureFunction2")) shouldBeEqualTo false
+            hasFunction { it.name == "fixtureFunction" } shouldBeEqualTo false
+            hasAllFunctions { it.name == "fixtureFunction" } shouldBeEqualTo true
         }
     }
 
@@ -49,37 +49,37 @@ class KoEnumConstantDeclarationForKoFunctionProviderTest {
         // then
         assertSoftly(sut) {
             numFunctions() shouldBeEqualTo 2
-            countFunctions { it.name == "sampleFunction1" } shouldBeEqualTo 1
+            countFunctions { it.name == "fixtureFunction1" } shouldBeEqualTo 1
             hasFunctions() shouldBeEqualTo true
             hasFunctionWithName(emptyList()) shouldBeEqualTo true
             hasFunctionWithName(emptySet()) shouldBeEqualTo true
             hasFunctionsWithAllNames(emptyList()) shouldBeEqualTo true
             hasFunctionsWithAllNames(emptySet()) shouldBeEqualTo true
-            hasFunctionWithName("sampleFunction1") shouldBeEqualTo true
+            hasFunctionWithName("fixtureFunction1") shouldBeEqualTo true
             hasFunctionWithName("otherFunction") shouldBeEqualTo false
-            hasFunctionWithName("sampleFunction1", "otherFunction") shouldBeEqualTo true
-            hasFunctionWithName(listOf("sampleFunction1")) shouldBeEqualTo true
+            hasFunctionWithName("fixtureFunction1", "otherFunction") shouldBeEqualTo true
+            hasFunctionWithName(listOf("fixtureFunction1")) shouldBeEqualTo true
             hasFunctionWithName(listOf("otherFunction")) shouldBeEqualTo false
-            hasFunctionWithName(listOf("sampleFunction1", "otherFunction")) shouldBeEqualTo true
-            hasFunctionWithName(setOf("sampleFunction1")) shouldBeEqualTo true
+            hasFunctionWithName(listOf("fixtureFunction1", "otherFunction")) shouldBeEqualTo true
+            hasFunctionWithName(setOf("fixtureFunction1")) shouldBeEqualTo true
             hasFunctionWithName(setOf("otherFunction")) shouldBeEqualTo false
-            hasFunctionWithName(setOf("sampleFunction1", "otherFunction")) shouldBeEqualTo true
-            hasFunctionsWithAllNames("sampleFunction1") shouldBeEqualTo true
-            hasFunctionsWithAllNames("sampleFunction1", "sampleFunction2") shouldBeEqualTo true
-            hasFunctionsWithAllNames("sampleFunction1", "otherFunction") shouldBeEqualTo false
-            hasFunctionsWithAllNames(listOf("sampleFunction1")) shouldBeEqualTo true
-            hasFunctionsWithAllNames(listOf("sampleFunction1", "sampleFunction2")) shouldBeEqualTo true
-            hasFunctionsWithAllNames(listOf("sampleFunction1", "otherFunction")) shouldBeEqualTo false
-            hasFunctionsWithAllNames(setOf("sampleFunction1")) shouldBeEqualTo true
-            hasFunctionsWithAllNames(setOf("sampleFunction1", "sampleFunction2")) shouldBeEqualTo true
-            hasFunctionsWithAllNames(setOf("sampleFunction1", "otherFunction")) shouldBeEqualTo false
-            hasFunction { it.name == "sampleFunction1" } shouldBeEqualTo true
+            hasFunctionWithName(setOf("fixtureFunction1", "otherFunction")) shouldBeEqualTo true
+            hasFunctionsWithAllNames("fixtureFunction1") shouldBeEqualTo true
+            hasFunctionsWithAllNames("fixtureFunction1", "fixtureFunction2") shouldBeEqualTo true
+            hasFunctionsWithAllNames("fixtureFunction1", "otherFunction") shouldBeEqualTo false
+            hasFunctionsWithAllNames(listOf("fixtureFunction1")) shouldBeEqualTo true
+            hasFunctionsWithAllNames(listOf("fixtureFunction1", "fixtureFunction2")) shouldBeEqualTo true
+            hasFunctionsWithAllNames(listOf("fixtureFunction1", "otherFunction")) shouldBeEqualTo false
+            hasFunctionsWithAllNames(setOf("fixtureFunction1")) shouldBeEqualTo true
+            hasFunctionsWithAllNames(setOf("fixtureFunction1", "fixtureFunction2")) shouldBeEqualTo true
+            hasFunctionsWithAllNames(setOf("fixtureFunction1", "otherFunction")) shouldBeEqualTo false
+            hasFunction { it.name == "fixtureFunction1" } shouldBeEqualTo true
             hasFunction { it.name == "otherFunction" } shouldBeEqualTo false
-            hasAllFunctions { it.name.endsWith("2") || it.name == "sampleFunction1" } shouldBeEqualTo true
+            hasAllFunctions { it.name.endsWith("2") || it.name == "fixtureFunction1" } shouldBeEqualTo true
             hasAllFunctions { it.name.endsWith("2") } shouldBeEqualTo false
             functions()
                 .map { it.name }
-                .shouldBeEqualTo(listOf("sampleFunction1", "sampleFunction2"))
+                .shouldBeEqualTo(listOf("fixtureFunction1", "fixtureFunction2"))
         }
     }
 
@@ -94,18 +94,18 @@ class KoEnumConstantDeclarationForKoFunctionProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasFunctionWithName("samplefunction") shouldBeEqualTo false
-            hasFunctionWithName("samplefunction", ignoreCase = true) shouldBeEqualTo false
-            hasFunctionWithName(listOf("samplefunction")) shouldBeEqualTo false
-            hasFunctionWithName(listOf("samplefunction"), ignoreCase = true) shouldBeEqualTo false
-            hasFunctionWithName(setOf("samplefunction")) shouldBeEqualTo false
-            hasFunctionWithName(setOf("samplefunction"), ignoreCase = true) shouldBeEqualTo false
-            hasFunctionsWithAllNames("samplefunction1", "samplefunction2") shouldBeEqualTo false
-            hasFunctionsWithAllNames("samplefunction1", "samplefunction2", ignoreCase = true) shouldBeEqualTo false
-            hasFunctionsWithAllNames(listOf("samplefunction1", "samplefunction2")) shouldBeEqualTo false
-            hasFunctionsWithAllNames(listOf("samplefunction1", "samplefunction2"), ignoreCase = true) shouldBeEqualTo false
-            hasFunctionsWithAllNames(setOf("samplefunction1", "samplefunction2")) shouldBeEqualTo false
-            hasFunctionsWithAllNames(setOf("samplefunction1", "samplefunction2"), ignoreCase = true) shouldBeEqualTo false
+            hasFunctionWithName("fixturefunction") shouldBeEqualTo false
+            hasFunctionWithName("fixturefunction", ignoreCase = true) shouldBeEqualTo false
+            hasFunctionWithName(listOf("fixturefunction")) shouldBeEqualTo false
+            hasFunctionWithName(listOf("fixturefunction"), ignoreCase = true) shouldBeEqualTo false
+            hasFunctionWithName(setOf("fixturefunction")) shouldBeEqualTo false
+            hasFunctionWithName(setOf("fixturefunction"), ignoreCase = true) shouldBeEqualTo false
+            hasFunctionsWithAllNames("fixturefunction1", "fixturefunction2") shouldBeEqualTo false
+            hasFunctionsWithAllNames("fixturefunction1", "fixturefunction2", ignoreCase = true) shouldBeEqualTo false
+            hasFunctionsWithAllNames(listOf("fixturefunction1", "fixturefunction2")) shouldBeEqualTo false
+            hasFunctionsWithAllNames(listOf("fixturefunction1", "fixturefunction2"), ignoreCase = true) shouldBeEqualTo false
+            hasFunctionsWithAllNames(setOf("fixturefunction1", "fixturefunction2")) shouldBeEqualTo false
+            hasFunctionsWithAllNames(setOf("fixturefunction1", "fixturefunction2"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 
@@ -120,30 +120,30 @@ class KoEnumConstantDeclarationForKoFunctionProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasFunctionWithName("samplefunction1") shouldBeEqualTo false
-            hasFunctionWithName("samplefunction1", ignoreCase = true) shouldBeEqualTo true
+            hasFunctionWithName("fixturefunction1") shouldBeEqualTo false
+            hasFunctionWithName("fixturefunction1", ignoreCase = true) shouldBeEqualTo true
             hasFunctionWithName("otherfunction") shouldBeEqualTo false
             hasFunctionWithName("otherfunction", ignoreCase = true) shouldBeEqualTo false
-            hasFunctionWithName("samplefunction1", "otherName") shouldBeEqualTo false
-            hasFunctionWithName("samplefunction1", "otherName", ignoreCase = true) shouldBeEqualTo true
-            hasFunctionWithName(listOf("samplefunction1")) shouldBeEqualTo false
-            hasFunctionWithName(listOf("samplefunction1"), ignoreCase = true) shouldBeEqualTo true
+            hasFunctionWithName("fixturefunction1", "otherName") shouldBeEqualTo false
+            hasFunctionWithName("fixturefunction1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasFunctionWithName(listOf("fixturefunction1")) shouldBeEqualTo false
+            hasFunctionWithName(listOf("fixturefunction1"), ignoreCase = true) shouldBeEqualTo true
             hasFunctionWithName(listOf("otherfunction")) shouldBeEqualTo false
             hasFunctionWithName(listOf("otherfunction"), ignoreCase = true) shouldBeEqualTo false
-            hasFunctionWithName(listOf("samplefunction1", "otherName")) shouldBeEqualTo false
-            hasFunctionWithName(listOf("samplefunction1", "otherName"), ignoreCase = true) shouldBeEqualTo true
-            hasFunctionsWithAllNames("samplefunction1") shouldBeEqualTo false
-            hasFunctionsWithAllNames("samplefunction1", ignoreCase = true) shouldBeEqualTo true
-            hasFunctionsWithAllNames("samplefunction1", "samplefunction2") shouldBeEqualTo false
-            hasFunctionsWithAllNames("samplefunction1", "samplefunction2", ignoreCase = true) shouldBeEqualTo true
-            hasFunctionsWithAllNames("samplefunction1", "otherfunction") shouldBeEqualTo false
-            hasFunctionsWithAllNames("samplefunction1", "otherfunction", ignoreCase = true) shouldBeEqualTo false
-            hasFunctionsWithAllNames(listOf("samplefunction1")) shouldBeEqualTo false
-            hasFunctionsWithAllNames(listOf("samplefunction1"), ignoreCase = true) shouldBeEqualTo true
-            hasFunctionsWithAllNames(listOf("samplefunction1", "samplefunction2")) shouldBeEqualTo false
-            hasFunctionsWithAllNames(listOf("samplefunction1", "samplefunction2"), ignoreCase = true) shouldBeEqualTo true
-            hasFunctionsWithAllNames(listOf("samplefunction1", "otherfunction")) shouldBeEqualTo false
-            hasFunctionsWithAllNames(listOf("samplefunction1", "otherfunction"), ignoreCase = true) shouldBeEqualTo false
+            hasFunctionWithName(listOf("fixturefunction1", "otherName")) shouldBeEqualTo false
+            hasFunctionWithName(listOf("fixturefunction1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasFunctionsWithAllNames("fixturefunction1") shouldBeEqualTo false
+            hasFunctionsWithAllNames("fixturefunction1", ignoreCase = true) shouldBeEqualTo true
+            hasFunctionsWithAllNames("fixturefunction1", "fixturefunction2") shouldBeEqualTo false
+            hasFunctionsWithAllNames("fixturefunction1", "fixturefunction2", ignoreCase = true) shouldBeEqualTo true
+            hasFunctionsWithAllNames("fixturefunction1", "otherfunction") shouldBeEqualTo false
+            hasFunctionsWithAllNames("fixturefunction1", "otherfunction", ignoreCase = true) shouldBeEqualTo false
+            hasFunctionsWithAllNames(listOf("fixturefunction1")) shouldBeEqualTo false
+            hasFunctionsWithAllNames(listOf("fixturefunction1"), ignoreCase = true) shouldBeEqualTo true
+            hasFunctionsWithAllNames(listOf("fixturefunction1", "fixturefunction2")) shouldBeEqualTo false
+            hasFunctionsWithAllNames(listOf("fixturefunction1", "fixturefunction2"), ignoreCase = true) shouldBeEqualTo true
+            hasFunctionsWithAllNames(listOf("fixturefunction1", "otherfunction")) shouldBeEqualTo false
+            hasFunctionsWithAllNames(listOf("fixturefunction1", "otherfunction"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 

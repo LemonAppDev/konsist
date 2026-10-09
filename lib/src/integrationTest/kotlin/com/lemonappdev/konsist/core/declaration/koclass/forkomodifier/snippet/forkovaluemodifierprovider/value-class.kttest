@@ -1,2 +1,2 @@
 @JvmInline
-value class SampleClass(val sampleParameter: Int)
+value class FixtureClass(val fixtureParameter: Int)

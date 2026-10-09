@@ -14,7 +14,7 @@ class KoTypeAliasDeclarationTest {
                 .first()
 
         // then
-        sut.toString() shouldBeEqualTo "SampleTypeAlias"
+        sut.toString() shouldBeEqualTo "FixtureTypeAlias"
     }
 
     private fun getSnippetFile(fileName: String) =

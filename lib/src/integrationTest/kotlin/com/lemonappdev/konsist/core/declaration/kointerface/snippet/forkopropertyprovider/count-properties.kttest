@@ -1,7 +1,7 @@
-interface SampleInterface {
-    abstract val sampleProperty: String
+interface FixtureInterface {
+    abstract val fixtureProperty: String
 
-    class SampleClass {
-        internal val sampleNestedProperty = ""
+    class FixtureClass {
+        internal val fixtureNestedProperty = ""
     }
 }

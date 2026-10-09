@@ -1,9 +1,9 @@
 interface FirstInterface {
-    fun method(arg: SampleNestedObjectWithTheSameName?)
-    object SampleNestedObjectWithTheSameName
+    fun method(arg: FixtureNestedObjectWithTheSameName?)
+    object FixtureNestedObjectWithTheSameName
 }
 
 interface SecondInterface {
-    fun method(arg: SampleNestedObjectWithTheSameName?)
-    object SampleNestedObjectWithTheSameName
+    fun method(arg: FixtureNestedObjectWithTheSameName?)
+    object FixtureNestedObjectWithTheSameName
 }

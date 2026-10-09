@@ -1,11 +1,11 @@
-class SampleTopLevelClass() {
-    constructor(sampleParameter: Int): this()
-    private class SampleNestedClass {
+class FixtureTopLevelClass() {
+    constructor(fixtureParameter: Int): this()
+    private class FixtureNestedClass {
 
-        private val sampleNestedProperty = ""
+        private val fixtureNestedProperty = ""
     }
 
-    private fun sampleFunction() {
-        val sampleLocalProperty = ""
+    private fun fixtureFunction() {
+        val fixtureLocalProperty = ""
     }
 }

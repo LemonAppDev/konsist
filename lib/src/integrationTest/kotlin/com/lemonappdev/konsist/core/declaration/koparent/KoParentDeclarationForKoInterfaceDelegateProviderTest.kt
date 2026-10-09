@@ -21,9 +21,9 @@ class KoParentDeclarationForKoInterfaceDelegateProviderTest {
 
         // then
         assertSoftly(sut) {
-            delegateName shouldBeEqualTo "sampleProperty"
+            delegateName shouldBeEqualTo "fixtureProperty"
             hasDelegate() shouldBeEqualTo true
-            hasDelegate("sampleProperty") shouldBeEqualTo true
+            hasDelegate("fixtureProperty") shouldBeEqualTo true
             hasDelegate("otherProperty") shouldBeEqualTo false
         }
     }
@@ -42,7 +42,7 @@ class KoParentDeclarationForKoInterfaceDelegateProviderTest {
         assertSoftly(sut) {
             delegateName shouldBeEqualTo null
             hasDelegate() shouldBeEqualTo false
-            hasDelegate("sampleProperty") shouldBeEqualTo false
+            hasDelegate("fixtureProperty") shouldBeEqualTo false
         }
     }
 

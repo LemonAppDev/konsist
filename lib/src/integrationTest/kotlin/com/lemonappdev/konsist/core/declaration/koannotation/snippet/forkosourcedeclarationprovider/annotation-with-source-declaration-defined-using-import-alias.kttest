@@ -1,4 +1,4 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation as AnnotationAliased
+import com.lemonappdev.konsist.testdata.FixtureAnnotation as AnnotationAliased
 
 @AnnotationAliased
-class SampleClass
+class FixtureClass

@@ -1,2 +1,2 @@
-val <T> List<T>.sampleProperty: T
+val <T> List<T>.fixtureProperty: T
     get() = first()

@@ -1,6 +1,6 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
+import com.lemonappdev.konsist.testdata.FixtureAnnotationWithParameter
 
-@SampleAnnotationWithParameter("Link: https://some/link")
-private typealias SampleTypeAlias = (Boolean) -> Int
+@FixtureAnnotationWithParameter("Link: https://some/link")
+private typealias FixtureTypeAlias = (Boolean) -> Int
 
-class SampleClass(val sampleProperty: SampleTypeAlias)
+class FixtureClass(val fixtureProperty: FixtureTypeAlias)

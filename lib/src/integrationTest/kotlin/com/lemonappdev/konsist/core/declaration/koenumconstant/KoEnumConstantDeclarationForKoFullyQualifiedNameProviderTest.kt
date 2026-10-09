@@ -16,7 +16,7 @@ class KoEnumConstantDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleClass.SAMPLE_CONSTANT_1"
+        sut.fullyQualifiedName shouldBeEqualTo "com.fixturepackage.FixtureClass.FIXTURE_CONSTANT_1"
     }
 
     @Test
@@ -30,7 +30,7 @@ class KoEnumConstantDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "SampleClass.SAMPLE_CONSTANT_1"
+        sut.fullyQualifiedName shouldBeEqualTo "FixtureClass.FIXTURE_CONSTANT_1"
     }
 
     @Test
@@ -44,7 +44,7 @@ class KoEnumConstantDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleInterface.SampleClass.SAMPLE_CONSTANT_1"
+        sut.fullyQualifiedName shouldBeEqualTo "com.fixturepackage.FixtureInterface.FixtureClass.FIXTURE_CONSTANT_1"
     }
 
     @Test
@@ -58,7 +58,7 @@ class KoEnumConstantDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "SampleInterface.SampleClass.SAMPLE_CONSTANT_1"
+        sut.fullyQualifiedName shouldBeEqualTo "FixtureInterface.FixtureClass.FIXTURE_CONSTANT_1"
     }
 
     private fun getSnippetFile(fileName: String) =

@@ -15,7 +15,7 @@ class KoChildDeclarationForKoNameProviderTest {
     fun `class child name`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .classes()
             .withName("ParentSuperClass")
             .children()
@@ -35,7 +35,7 @@ class KoChildDeclarationForKoNameProviderTest {
     fun `object child name`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .classes()
             .withName("ParentClassForObject")
             .children()
@@ -43,11 +43,11 @@ class KoChildDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleObject"
-            hasName("SampleObject") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureObject"
+            hasName("FixtureObject") shouldBeEqualTo true
             hasName("OtherObject") shouldBeEqualTo false
-            hasName("sampleobject", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleobject", ignoreCase = true) shouldBeEqualTo true
+            hasName("fixtureobject", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureobject", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -55,7 +55,7 @@ class KoChildDeclarationForKoNameProviderTest {
     fun `interface child name`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .interfaces()
             .withName("ParentSuperInterface")
             .children()

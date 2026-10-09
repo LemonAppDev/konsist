@@ -1,5 +1,5 @@
-class SampleClass {
+class FixtureClass {
     init {
-        println("sample text")
+        println("fixture text")
     }
 }

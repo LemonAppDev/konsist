@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
+import com.lemonappdev.konsist.testdata.FixtureAnnotation
 
-fun sampleFunction() {
-    val sampleVariable: @SampleAnnotation String = ""
+fun fixtureFunction() {
+    val fixtureVariable: @FixtureAnnotation String = ""
 }

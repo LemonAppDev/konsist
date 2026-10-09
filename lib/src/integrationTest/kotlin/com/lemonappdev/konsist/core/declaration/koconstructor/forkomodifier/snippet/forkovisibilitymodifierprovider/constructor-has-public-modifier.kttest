@@ -1,2 +1,2 @@
-class SampleClass public constructor () {
+class FixtureClass public constructor () {
 }

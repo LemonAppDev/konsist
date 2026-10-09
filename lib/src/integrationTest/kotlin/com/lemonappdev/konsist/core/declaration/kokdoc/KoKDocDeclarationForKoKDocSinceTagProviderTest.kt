@@ -58,8 +58,8 @@ class KoKDocDeclarationForKoKDocSinceTagProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("class-with-since-tag", "SampleClass"),
-                arguments("function-with-since-tag", "sampleMethod"),
+                arguments("class-with-since-tag", "FixtureClass"),
+                arguments("function-with-since-tag", "fixtureMethod"),
             )
     }
 }

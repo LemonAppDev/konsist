@@ -1,7 +1,7 @@
-package com.samplepackage
+package com.fixturepackage
 
-data class SampleName(val data: String) : SampleInterface.SampleNestedClass()
+data class FixtureName(val data: String) : FixtureInterface.FixtureNestedClass()
 
-interface SampleInterface {
-    open class SampleNestedClass
+interface FixtureInterface {
+    open class FixtureNestedClass
 }

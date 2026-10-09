@@ -1,9 +1,9 @@
-interface SampleInterface {
-    fun sampleFunction() {
-        fun sampleLocalFunction() {}
+interface FixtureInterface {
+    fun fixtureFunction() {
+        fun fixtureLocalFunction() {}
     }
 
-    class SampleClass {
-        fun sampleNestedFunction() {}
+    class FixtureClass {
+        fun fixtureNestedFunction() {}
     }
 }

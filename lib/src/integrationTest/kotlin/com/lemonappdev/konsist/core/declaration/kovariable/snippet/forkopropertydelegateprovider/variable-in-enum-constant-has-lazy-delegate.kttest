@@ -1,5 +1,5 @@
-enum class SampleClass {
-    SAMPLE_CONSTANT_1 {
-        val sampleProperty: String by lazy { "" }
+enum class FixtureClass {
+    FIXTURE_CONSTANT_1 {
+        val fixtureProperty: String by lazy { "" }
     };
 }

@@ -1,8 +1,8 @@
 val otherProperty = ""
 
 @Suppress("suppress-text")
-class SampleClassWithoutOtherProperty {
+class FixtureClassWithoutOtherProperty {
     init {
-        val sampleProperty = 6
+        val fixtureProperty = 6
     }
 }

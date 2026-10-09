@@ -1,2 +1,2 @@
-val <T, V> Map<T, V>.sampleProperty: Int
+val <T, V> Map<T, V>.fixtureProperty: Int
     get() = 0

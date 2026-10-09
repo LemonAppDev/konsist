@@ -1,6 +1,6 @@
-enum class SampleClass {
-    SAMPLE_CONSTANT_1 {
-        inner class SampleLocalClass1
-        inner class SampleLocalClass2
+enum class FixtureClass {
+    FIXTURE_CONSTANT_1 {
+        inner class FixtureLocalClass1
+        inner class FixtureLocalClass2
     };
 }

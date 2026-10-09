@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleParentInterface as AliasParent
+import com.lemonappdev.konsist.testdata.FixtureParentInterface as AliasParent
 
-object SampleObject : AliasParent
+object FixtureObject : AliasParent
 
-interface SampleParentInterface
+interface FixtureParentInterface

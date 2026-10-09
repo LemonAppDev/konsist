@@ -1,1 +1,1 @@
-interface SampleInterface<T: List<*>>
+interface FixtureInterface<T: List<*>>

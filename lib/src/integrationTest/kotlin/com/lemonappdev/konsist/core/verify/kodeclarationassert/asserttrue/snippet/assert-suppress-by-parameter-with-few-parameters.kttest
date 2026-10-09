@@ -1,5 +1,5 @@
-class SampleClassText {
+class FixtureClassText {
     @Suppress("detekt.someRule", "konsist.suppress-text")
-    fun sampleFunctionWithIncorrectSuffix() {
+    fun fixtureFunctionWithIncorrectSuffix() {
     }
 }

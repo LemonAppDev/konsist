@@ -1,5 +1,5 @@
-class SampleTopLevelClass {
-    private interface SampleInterface1
+class FixtureTopLevelClass {
+    private interface FixtureInterface1
 
-    private interface SampleInterface2
+    private interface FixtureInterface2
 }

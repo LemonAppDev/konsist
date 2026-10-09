@@ -26,9 +26,9 @@ class KoScopeForKoClassAndInterfaceDeclarationTest {
         // then
         val expected =
             listOf(
-                "SampleLocalClass",
-                "SampleClassNestedInsideObject",
-                "SampleInterfaceNestedInsideObject",
+                "FixtureLocalClass",
+                "FixtureClassNestedInsideObject",
+                "FixtureInterfaceNestedInsideObject",
             )
 
         sut
@@ -45,8 +45,8 @@ class KoScopeForKoClassAndInterfaceDeclarationTest {
         // then
         val expected =
             listOf(
-                "SampleClassNestedInsideObject",
-                "SampleInterfaceNestedInsideObject",
+                "FixtureClassNestedInsideObject",
+                "FixtureInterfaceNestedInsideObject",
             )
 
         sut
@@ -61,7 +61,7 @@ class KoScopeForKoClassAndInterfaceDeclarationTest {
         val sut = getSnippetFile("scope-contains-nested-and-local-classes-and-interfaces")
 
         // then
-        val expected = listOf("SampleLocalClass")
+        val expected = listOf("FixtureLocalClass")
 
         sut
             .classesAndInterfaces(includeNested = false, includeLocal = true)
@@ -94,30 +94,30 @@ class KoScopeForKoClassAndInterfaceDeclarationTest {
                 arguments(
                     false,
                     false,
-                    listOf("SampleClass"),
+                    listOf("FixtureClass"),
                 ),
                 arguments(
                     true,
                     false,
                     listOf(
-                        "SampleClass",
-                        "SampleNestedClass1",
-                        "SampleNestedClass2",
+                        "FixtureClass",
+                        "FixtureNestedClass1",
+                        "FixtureNestedClass2",
                     ),
                 ),
                 arguments(
                     false,
                     true,
-                    listOf("SampleClass"),
+                    listOf("FixtureClass"),
                 ),
                 arguments(
                     true,
                     true,
                     listOf(
-                        "SampleClass",
-                        "SampleLocalClass",
-                        "SampleNestedClass1",
-                        "SampleNestedClass2",
+                        "FixtureClass",
+                        "FixtureLocalClass",
+                        "FixtureNestedClass1",
+                        "FixtureNestedClass2",
                     ),
                 ),
             )

@@ -15,13 +15,13 @@ class KoImportDeclarationForKoTextProviderTest {
                 .first()
 
         // then
-        sut.text shouldBeEqualTo "import com.lemonappdev.konsist.testdata.SampleClass"
+        sut.text shouldBeEqualTo "import com.lemonappdev.konsist.testdata.FixtureClass"
 
         assertSoftly(sut) {
-            text shouldBeEqualTo "import com.lemonappdev.konsist.testdata.SampleClass"
+            text shouldBeEqualTo "import com.lemonappdev.konsist.testdata.FixtureClass"
             hasTextStartingWith("import com.") shouldBeEqualTo true
             hasTextStartingWith("Other") shouldBeEqualTo false
-            hasTextEndingWith("testdata.SampleClass") shouldBeEqualTo true
+            hasTextEndingWith("testdata.FixtureClass") shouldBeEqualTo true
             hasTextEndingWith("other") shouldBeEqualTo false
             hasTextContaining(".konsist.testdata.") shouldBeEqualTo true
             hasTextContaining("anno") shouldBeEqualTo false

@@ -21,14 +21,14 @@ class KoFileDeclarationForKoInterfaceProviderTest {
             hasInterfaceWithName(emptySet()) shouldBeEqualTo false
             hasInterfacesWithAllNames(emptyList()) shouldBeEqualTo false
             hasInterfacesWithAllNames(emptySet()) shouldBeEqualTo false
-            hasInterfaceWithName("SampleInterface") shouldBeEqualTo false
-            hasInterfaceWithName(listOf("SampleInterface")) shouldBeEqualTo false
-            hasInterfaceWithName(setOf("SampleInterface")) shouldBeEqualTo false
-            hasInterfacesWithAllNames("SampleInterface1", "SampleInterface2") shouldBeEqualTo false
-            hasInterfacesWithAllNames(listOf("SampleInterface1", "SampleInterface2")) shouldBeEqualTo false
-            hasInterfacesWithAllNames(setOf("SampleInterface1", "SampleInterface2")) shouldBeEqualTo false
-            hasInterface { it.name == "SampleInterface" } shouldBeEqualTo false
-            hasAllInterfaces { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasInterfaceWithName("FixtureInterface") shouldBeEqualTo false
+            hasInterfaceWithName(listOf("FixtureInterface")) shouldBeEqualTo false
+            hasInterfaceWithName(setOf("FixtureInterface")) shouldBeEqualTo false
+            hasInterfacesWithAllNames("FixtureInterface1", "FixtureInterface2") shouldBeEqualTo false
+            hasInterfacesWithAllNames(listOf("FixtureInterface1", "FixtureInterface2")) shouldBeEqualTo false
+            hasInterfacesWithAllNames(setOf("FixtureInterface1", "FixtureInterface2")) shouldBeEqualTo false
+            hasInterface { it.name == "FixtureInterface" } shouldBeEqualTo false
+            hasAllInterfaces { it.hasNameStartingWith("Fixture") } shouldBeEqualTo true
         }
     }
 
@@ -47,24 +47,24 @@ class KoFileDeclarationForKoInterfaceProviderTest {
             hasInterfaceWithName(emptySet()) shouldBeEqualTo true
             hasInterfacesWithAllNames(emptyList()) shouldBeEqualTo true
             hasInterfacesWithAllNames(emptySet()) shouldBeEqualTo true
-            hasInterfaceWithName("SampleInterface1") shouldBeEqualTo true
-            hasInterfaceWithName("SampleInterface1", "OtherInterface") shouldBeEqualTo true
-            hasInterfaceWithName(listOf("SampleInterface1")) shouldBeEqualTo true
-            hasInterfaceWithName(listOf("SampleInterface1", "OtherInterface")) shouldBeEqualTo true
-            hasInterfaceWithName(setOf("SampleInterface1")) shouldBeEqualTo true
-            hasInterfaceWithName(setOf("SampleInterface1", "OtherInterface")) shouldBeEqualTo true
-            hasInterfacesWithAllNames("SampleInterface1") shouldBeEqualTo true
-            hasInterfacesWithAllNames("SampleInterface1", "SampleInterface2") shouldBeEqualTo true
-            hasInterfacesWithAllNames("SampleInterface1", "OtherInterface") shouldBeEqualTo false
-            hasInterfacesWithAllNames(listOf("SampleInterface1")) shouldBeEqualTo true
-            hasInterfacesWithAllNames(listOf("SampleInterface1", "SampleInterface2")) shouldBeEqualTo true
-            hasInterfacesWithAllNames(listOf("SampleInterface1", "OtherInterface")) shouldBeEqualTo false
-            hasInterfacesWithAllNames(setOf("SampleInterface1")) shouldBeEqualTo true
-            hasInterfacesWithAllNames(setOf("SampleInterface1", "SampleInterface2")) shouldBeEqualTo true
-            hasInterfacesWithAllNames(setOf("SampleInterface1", "OtherInterface")) shouldBeEqualTo false
-            hasInterface { it.name == "SampleInterface1" } shouldBeEqualTo true
+            hasInterfaceWithName("FixtureInterface1") shouldBeEqualTo true
+            hasInterfaceWithName("FixtureInterface1", "OtherInterface") shouldBeEqualTo true
+            hasInterfaceWithName(listOf("FixtureInterface1")) shouldBeEqualTo true
+            hasInterfaceWithName(listOf("FixtureInterface1", "OtherInterface")) shouldBeEqualTo true
+            hasInterfaceWithName(setOf("FixtureInterface1")) shouldBeEqualTo true
+            hasInterfaceWithName(setOf("FixtureInterface1", "OtherInterface")) shouldBeEqualTo true
+            hasInterfacesWithAllNames("FixtureInterface1") shouldBeEqualTo true
+            hasInterfacesWithAllNames("FixtureInterface1", "FixtureInterface2") shouldBeEqualTo true
+            hasInterfacesWithAllNames("FixtureInterface1", "OtherInterface") shouldBeEqualTo false
+            hasInterfacesWithAllNames(listOf("FixtureInterface1")) shouldBeEqualTo true
+            hasInterfacesWithAllNames(listOf("FixtureInterface1", "FixtureInterface2")) shouldBeEqualTo true
+            hasInterfacesWithAllNames(listOf("FixtureInterface1", "OtherInterface")) shouldBeEqualTo false
+            hasInterfacesWithAllNames(setOf("FixtureInterface1")) shouldBeEqualTo true
+            hasInterfacesWithAllNames(setOf("FixtureInterface1", "FixtureInterface2")) shouldBeEqualTo true
+            hasInterfacesWithAllNames(setOf("FixtureInterface1", "OtherInterface")) shouldBeEqualTo false
+            hasInterface { it.name == "FixtureInterface1" } shouldBeEqualTo true
             hasInterface { it.hasNameEndingWith("Interface1") } shouldBeEqualTo true
-            hasAllInterfaces { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAllInterfaces { it.hasNameStartingWith("Fixture") } shouldBeEqualTo true
             hasAllInterfaces { it.hasNameEndingWith("Class1") } shouldBeEqualTo false
         }
     }
@@ -78,7 +78,7 @@ class KoFileDeclarationForKoInterfaceProviderTest {
                 .first()
 
         // then
-        val expected = listOf("SampleInterface", "SampleNestedInterface")
+        val expected = listOf("FixtureInterface", "FixtureNestedInterface")
 
         sut
             .interfaces(includeNested = true)
@@ -95,7 +95,7 @@ class KoFileDeclarationForKoInterfaceProviderTest {
                 .first()
 
         // then
-        val expected = listOf("SampleInterface")
+        val expected = listOf("FixtureInterface")
 
         sut
             .interfaces(includeNested = false)
@@ -131,18 +131,18 @@ class KoFileDeclarationForKoInterfaceProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasInterfaceWithName("sampleinterface") shouldBeEqualTo false
-            hasInterfaceWithName("sampleinterface", ignoreCase = true) shouldBeEqualTo false
-            hasInterfaceWithName(listOf("sampleinterface")) shouldBeEqualTo false
-            hasInterfaceWithName(listOf("sampleinterface"), ignoreCase = true) shouldBeEqualTo false
-            hasInterfaceWithName(setOf("sampleinterface")) shouldBeEqualTo false
-            hasInterfaceWithName(setOf("sampleinterface"), ignoreCase = true) shouldBeEqualTo false
-            hasInterfacesWithAllNames("sampleinterface1", "sampleinterface2") shouldBeEqualTo false
-            hasInterfacesWithAllNames("sampleinterface1", "sampleinterface2", ignoreCase = true) shouldBeEqualTo false
-            hasInterfacesWithAllNames(listOf("sampleinterface1", "sampleinterface2")) shouldBeEqualTo false
-            hasInterfacesWithAllNames(listOf("sampleinterface1", "sampleinterface2"), ignoreCase = true) shouldBeEqualTo false
-            hasInterfacesWithAllNames(setOf("sampleinterface1", "sampleinterface2")) shouldBeEqualTo false
-            hasInterfacesWithAllNames(setOf("sampleinterface1", "sampleinterface2"), ignoreCase = true) shouldBeEqualTo false
+            hasInterfaceWithName("fixtureinterface") shouldBeEqualTo false
+            hasInterfaceWithName("fixtureinterface", ignoreCase = true) shouldBeEqualTo false
+            hasInterfaceWithName(listOf("fixtureinterface")) shouldBeEqualTo false
+            hasInterfaceWithName(listOf("fixtureinterface"), ignoreCase = true) shouldBeEqualTo false
+            hasInterfaceWithName(setOf("fixtureinterface")) shouldBeEqualTo false
+            hasInterfaceWithName(setOf("fixtureinterface"), ignoreCase = true) shouldBeEqualTo false
+            hasInterfacesWithAllNames("fixtureinterface1", "fixtureinterface2") shouldBeEqualTo false
+            hasInterfacesWithAllNames("fixtureinterface1", "fixtureinterface2", ignoreCase = true) shouldBeEqualTo false
+            hasInterfacesWithAllNames(listOf("fixtureinterface1", "fixtureinterface2")) shouldBeEqualTo false
+            hasInterfacesWithAllNames(listOf("fixtureinterface1", "fixtureinterface2"), ignoreCase = true) shouldBeEqualTo false
+            hasInterfacesWithAllNames(setOf("fixtureinterface1", "fixtureinterface2")) shouldBeEqualTo false
+            hasInterfacesWithAllNames(setOf("fixtureinterface1", "fixtureinterface2"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 
@@ -156,30 +156,30 @@ class KoFileDeclarationForKoInterfaceProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasInterfaceWithName("sampleinterface1") shouldBeEqualTo false
-            hasInterfaceWithName("sampleinterface1", ignoreCase = true) shouldBeEqualTo true
+            hasInterfaceWithName("fixtureinterface1") shouldBeEqualTo false
+            hasInterfaceWithName("fixtureinterface1", ignoreCase = true) shouldBeEqualTo true
             hasInterfaceWithName("otherinterface") shouldBeEqualTo false
             hasInterfaceWithName("otherinterface", ignoreCase = true) shouldBeEqualTo false
-            hasInterfaceWithName("sampleinterface1", "otherName") shouldBeEqualTo false
-            hasInterfaceWithName("sampleinterface1", "otherName", ignoreCase = true) shouldBeEqualTo true
-            hasInterfaceWithName(listOf("sampleinterface1")) shouldBeEqualTo false
-            hasInterfaceWithName(listOf("sampleinterface1"), ignoreCase = true) shouldBeEqualTo true
+            hasInterfaceWithName("fixtureinterface1", "otherName") shouldBeEqualTo false
+            hasInterfaceWithName("fixtureinterface1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasInterfaceWithName(listOf("fixtureinterface1")) shouldBeEqualTo false
+            hasInterfaceWithName(listOf("fixtureinterface1"), ignoreCase = true) shouldBeEqualTo true
             hasInterfaceWithName(listOf("otherinterface")) shouldBeEqualTo false
             hasInterfaceWithName(listOf("otherinterface"), ignoreCase = true) shouldBeEqualTo false
-            hasInterfaceWithName(listOf("sampleinterface1", "otherName")) shouldBeEqualTo false
-            hasInterfaceWithName(listOf("sampleinterface1", "otherName"), ignoreCase = true) shouldBeEqualTo true
-            hasInterfacesWithAllNames("sampleinterface1") shouldBeEqualTo false
-            hasInterfacesWithAllNames("sampleinterface1", ignoreCase = true) shouldBeEqualTo true
-            hasInterfacesWithAllNames("sampleinterface1", "sampleinterface2") shouldBeEqualTo false
-            hasInterfacesWithAllNames("sampleinterface1", "sampleinterface2", ignoreCase = true) shouldBeEqualTo true
-            hasInterfacesWithAllNames("sampleinterface1", "otherinterface") shouldBeEqualTo false
-            hasInterfacesWithAllNames("sampleinterface1", "otherinterface", ignoreCase = true) shouldBeEqualTo false
-            hasInterfacesWithAllNames(listOf("sampleinterface1")) shouldBeEqualTo false
-            hasInterfacesWithAllNames(listOf("sampleinterface1"), ignoreCase = true) shouldBeEqualTo true
-            hasInterfacesWithAllNames(listOf("sampleinterface1", "sampleinterface2")) shouldBeEqualTo false
-            hasInterfacesWithAllNames(listOf("sampleinterface1", "sampleinterface2"), ignoreCase = true) shouldBeEqualTo true
-            hasInterfacesWithAllNames(listOf("sampleinterface1", "otherinterface")) shouldBeEqualTo false
-            hasInterfacesWithAllNames(listOf("sampleinterface1", "otherinterface"), ignoreCase = true) shouldBeEqualTo false
+            hasInterfaceWithName(listOf("fixtureinterface1", "otherName")) shouldBeEqualTo false
+            hasInterfaceWithName(listOf("fixtureinterface1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasInterfacesWithAllNames("fixtureinterface1") shouldBeEqualTo false
+            hasInterfacesWithAllNames("fixtureinterface1", ignoreCase = true) shouldBeEqualTo true
+            hasInterfacesWithAllNames("fixtureinterface1", "fixtureinterface2") shouldBeEqualTo false
+            hasInterfacesWithAllNames("fixtureinterface1", "fixtureinterface2", ignoreCase = true) shouldBeEqualTo true
+            hasInterfacesWithAllNames("fixtureinterface1", "otherinterface") shouldBeEqualTo false
+            hasInterfacesWithAllNames("fixtureinterface1", "otherinterface", ignoreCase = true) shouldBeEqualTo false
+            hasInterfacesWithAllNames(listOf("fixtureinterface1")) shouldBeEqualTo false
+            hasInterfacesWithAllNames(listOf("fixtureinterface1"), ignoreCase = true) shouldBeEqualTo true
+            hasInterfacesWithAllNames(listOf("fixtureinterface1", "fixtureinterface2")) shouldBeEqualTo false
+            hasInterfacesWithAllNames(listOf("fixtureinterface1", "fixtureinterface2"), ignoreCase = true) shouldBeEqualTo true
+            hasInterfacesWithAllNames(listOf("fixtureinterface1", "otherinterface")) shouldBeEqualTo false
+            hasInterfacesWithAllNames(listOf("fixtureinterface1", "otherinterface"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 

@@ -71,18 +71,18 @@ class KoKDocDeclarationForKoKDocParamTagProviderTest {
             listOf(
                 arguments(
                     "class-with-param-tag",
-                    "SampleClass",
-                    "SampleType1",
+                    "FixtureClass",
+                    "FixtureType1",
                     "The first type parameter for this class.",
-                    "SampleType2",
+                    "FixtureType2",
                     "The second type parameter for this class.",
                 ),
                 arguments(
                     "function-with-param-tag",
-                    "sampleMethod",
-                    "sampleArgument1",
+                    "fixtureMethod",
+                    "fixtureArgument1",
                     "The first argument.",
-                    "sampleArgument2",
+                    "fixtureArgument2",
                     "The second argument.",
                 ),
             )

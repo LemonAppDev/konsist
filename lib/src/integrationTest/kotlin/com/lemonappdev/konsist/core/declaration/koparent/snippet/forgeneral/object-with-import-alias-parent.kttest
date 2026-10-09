@@ -1,3 +1,3 @@
-import com.lemonappdev.konsist.testdata.SampleParentClass as SampleImportAlias
+import com.lemonappdev.konsist.testdata.FixtureParentClass as FixtureImportAlias
 
-object SampleObject: SampleImportAlias()
+object FixtureObject: FixtureImportAlias()

@@ -14,15 +14,15 @@ class KoEnumConstantDeclarationForKoOrdinalProviderTest {
         val sut =
             getSnippetFile(fileName)
                 .classes()
-                .first { it.name == "SampleClass" }
+                .first { it.name == "FixtureClass" }
                 .enumConstants
 
         // then
         sut.map { it.name to it.ordinal } shouldBeEqualTo
             listOf(
-                "SAMPLE_CONSTANT_1" to 0,
-                "SAMPLE_CONSTANT_2" to 1,
-                "SAMPLE_CONSTANT_3" to 2,
+                "FIXTURE_CONSTANT_1" to 0,
+                "FIXTURE_CONSTANT_2" to 1,
+                "FIXTURE_CONSTANT_3" to 2,
             )
     }
 

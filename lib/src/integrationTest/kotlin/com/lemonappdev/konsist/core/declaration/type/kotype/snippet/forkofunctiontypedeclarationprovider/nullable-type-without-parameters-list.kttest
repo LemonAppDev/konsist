@@ -1,1 +1,1 @@
-val sampleProperty: String? = null
+val fixtureProperty: String? = null

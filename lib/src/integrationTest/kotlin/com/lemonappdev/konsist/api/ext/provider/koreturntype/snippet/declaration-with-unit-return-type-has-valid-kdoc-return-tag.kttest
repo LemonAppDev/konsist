@@ -1,6 +1,6 @@
 /**
- * Sample description
+ * Fixture description
  */
-fun sampleFunction(): Unit {
+fun fixtureFunction(): Unit {
     ""
 }

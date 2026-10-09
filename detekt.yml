@@ -211,7 +211,7 @@ empty-blocks:
     active: true
   EmptyFunctionBlock:
     active: true
-    excludes: [ '**/dummyclasses/**', '**/fortypetest/**']
+    excludes: [ '**/dummyclasses/**', '**/fixture/**' ]
     ignoreOverridden: false
   EmptyIfBlock:
     active: true
@@ -669,7 +669,7 @@ style:
     allowedNames: '(_|ignored|expected|serialVersionUID)'
   UnusedParameter:
     active: true
-    excludes: ['**/fortypetest/**']
+    excludes: [ '**/fixture/**' ]
   UseAnyOrNoneInsteadOfFind:
     active: true
   UseArrayLiteralsInAnnotations:

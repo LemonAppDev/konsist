@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleType
+import com.lemonappdev.konsist.testdata.FixtureType
 
-open class SampleSuperClass {
-    open lateinit var sampleProperty: SampleType
+open class FixtureSuperClass {
+    open lateinit var fixtureProperty: FixtureType
 }

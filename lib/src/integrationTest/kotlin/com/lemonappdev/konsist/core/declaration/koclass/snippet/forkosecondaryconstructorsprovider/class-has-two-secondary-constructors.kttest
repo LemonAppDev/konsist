@@ -1,7 +1,7 @@
-class SampleClass {
+class FixtureClass {
     public constructor() {
     }
 
-    constructor(sampleParameter: Int): this() {
+    constructor(fixtureParameter: Int): this() {
     }
 }

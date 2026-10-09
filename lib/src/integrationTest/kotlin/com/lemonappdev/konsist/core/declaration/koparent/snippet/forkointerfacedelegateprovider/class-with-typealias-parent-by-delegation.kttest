@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleParentInterface
+import com.lemonappdev.konsist.testdata.FixtureParentInterface
 
-class SampleClass(sampleProperty: SampleTypeAlias) : SampleTypeAlias by sampleProperty
+class FixtureClass(fixtureProperty: FixtureTypeAlias) : FixtureTypeAlias by fixtureProperty
 
-typealias SampleTypeAlias = SampleParentInterface
+typealias FixtureTypeAlias = FixtureParentInterface

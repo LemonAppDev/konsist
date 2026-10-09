@@ -1,7 +1,7 @@
-open class SampleTopLevelClass {
-    internal open val sampleProperty = ""
+open class FixtureTopLevelClass {
+    internal open val fixtureProperty = ""
 
-    class SampleClass {
-        internal val sampleNestedProperty = ""
+    class FixtureClass {
+        internal val fixtureNestedProperty = ""
     }
 }

@@ -1,6 +1,6 @@
-var sampleProperty: String = "text"
+var fixtureProperty: String = "text"
     set(value) {
-        val sampleProperty: kotlin.String by lazy { "" }
+        val fixtureProperty: kotlin.String by lazy { "" }
 
         if (true) field = value
     }

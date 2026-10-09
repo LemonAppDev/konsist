@@ -1,2 +1,2 @@
-fun sampleFunction(sampleParameter: Int) {
+fun fixtureFunction(fixtureParameter: Int) {
 }

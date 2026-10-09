@@ -1,5 +1,5 @@
-fun sampleFunction() {
-    class SampleClass1
+fun fixtureFunction() {
+    class FixtureClass1
 
-    class SampleClass2
+    class FixtureClass2
 }

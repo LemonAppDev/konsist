@@ -1,5 +1,5 @@
-class SampleClass {
+class FixtureClass {
     init {
-        val sampleProperty: String by lazy { "" }
+        val fixtureProperty: String by lazy { "" }
     }
 }

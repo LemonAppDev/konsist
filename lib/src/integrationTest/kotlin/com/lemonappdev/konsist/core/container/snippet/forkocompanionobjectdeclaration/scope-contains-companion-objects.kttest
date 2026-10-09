@@ -1,7 +1,7 @@
-class SampleClass {
-    object SampleNestedObject
+class FixtureClass {
+    object FixtureNestedObject
 
-    companion object SampleNestedCompanionObject
+    companion object FixtureNestedCompanionObject
 }
 
-object SampleObject
+object FixtureObject

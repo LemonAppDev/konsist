@@ -1,7 +1,7 @@
-object SampleObject {
-    fun sampleFunction1() {
+object FixtureObject {
+    fun fixtureFunction1() {
     }
 
-    fun sampleFunction2() {
+    fun fixtureFunction2() {
     }
 }

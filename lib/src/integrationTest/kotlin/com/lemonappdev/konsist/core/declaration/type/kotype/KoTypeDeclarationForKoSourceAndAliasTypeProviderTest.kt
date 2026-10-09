@@ -18,8 +18,8 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "SampleType?"
-            it?.bareSourceType shouldBeEqualTo "SampleType"
+            it?.sourceType shouldBeEqualTo "FixtureType?"
+            it?.bareSourceType shouldBeEqualTo "FixtureType"
             it?.isAlias shouldBeEqualTo false
         }
     }
@@ -35,8 +35,8 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "SampleType"
-            it?.bareSourceType shouldBeEqualTo "SampleType"
+            it?.sourceType shouldBeEqualTo "FixtureType"
+            it?.bareSourceType shouldBeEqualTo "FixtureType"
             it?.isAlias shouldBeEqualTo false
         }
     }
@@ -52,8 +52,8 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "SampleInterface?"
-            it?.bareSourceType shouldBeEqualTo "SampleInterface"
+            it?.sourceType shouldBeEqualTo "FixtureInterface?"
+            it?.bareSourceType shouldBeEqualTo "FixtureInterface"
             it?.isAlias shouldBeEqualTo false
         }
     }
@@ -69,8 +69,8 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "SampleInterface"
-            it?.bareSourceType shouldBeEqualTo "SampleInterface"
+            it?.sourceType shouldBeEqualTo "FixtureInterface"
+            it?.bareSourceType shouldBeEqualTo "FixtureInterface"
             it?.isAlias shouldBeEqualTo false
         }
     }
@@ -86,8 +86,8 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "SampleObject?"
-            it?.bareSourceType shouldBeEqualTo "SampleObject"
+            it?.sourceType shouldBeEqualTo "FixtureObject?"
+            it?.bareSourceType shouldBeEqualTo "FixtureObject"
             it?.isAlias shouldBeEqualTo false
         }
     }
@@ -103,8 +103,8 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "SampleObject"
-            it?.bareSourceType shouldBeEqualTo "SampleObject"
+            it?.sourceType shouldBeEqualTo "FixtureObject"
+            it?.bareSourceType shouldBeEqualTo "FixtureObject"
             it?.isAlias shouldBeEqualTo false
         }
     }
@@ -120,7 +120,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "SampleTypeAlias?"
+            it?.sourceType shouldBeEqualTo "FixtureTypeAlias?"
             it?.bareSourceType shouldBeEqualTo "() -> Unit"
             it?.isAlias shouldBeEqualTo false
         }
@@ -137,7 +137,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "SampleTypeAlias"
+            it?.sourceType shouldBeEqualTo "FixtureTypeAlias"
             it?.bareSourceType shouldBeEqualTo "() -> Unit"
             it?.isAlias shouldBeEqualTo false
         }
@@ -228,7 +228,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "List<SampleType>"
+            it?.sourceType shouldBeEqualTo "List<FixtureType>"
             it?.bareSourceType shouldBeEqualTo "List"
             it?.isAlias shouldBeEqualTo false
         }
@@ -245,7 +245,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "List<SampleType?>"
+            it?.sourceType shouldBeEqualTo "List<FixtureType?>"
             it?.bareSourceType shouldBeEqualTo "List"
             it?.isAlias shouldBeEqualTo false
         }
@@ -262,7 +262,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "List<SampleType>?"
+            it?.sourceType shouldBeEqualTo "List<FixtureType>?"
             it?.bareSourceType shouldBeEqualTo "List"
             it?.isAlias shouldBeEqualTo false
         }
@@ -279,7 +279,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "List<SampleType?>?"
+            it?.sourceType shouldBeEqualTo "List<FixtureType?>?"
             it?.bareSourceType shouldBeEqualTo "List"
             it?.isAlias shouldBeEqualTo false
         }
@@ -296,8 +296,8 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "SampleType"
-            it?.bareSourceType shouldBeEqualTo "SampleType"
+            it?.sourceType shouldBeEqualTo "FixtureType"
+            it?.bareSourceType shouldBeEqualTo "FixtureType"
             it?.isAlias shouldBeEqualTo true
         }
     }
@@ -313,8 +313,8 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "SampleType"
-            it?.bareSourceType shouldBeEqualTo "SampleType"
+            it?.sourceType shouldBeEqualTo "FixtureType"
+            it?.bareSourceType shouldBeEqualTo "FixtureType"
             it?.isAlias shouldBeEqualTo true
         }
     }
@@ -364,8 +364,8 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "SampleExternalClass"
-            it?.bareSourceType shouldBeEqualTo "SampleExternalClass"
+            it?.sourceType shouldBeEqualTo "FixtureExternalClass"
+            it?.bareSourceType shouldBeEqualTo "FixtureExternalClass"
             it?.isAlias shouldBeEqualTo false
         }
     }
@@ -381,8 +381,8 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "SampleExternalClass?"
-            it?.bareSourceType shouldBeEqualTo "SampleExternalClass"
+            it?.sourceType shouldBeEqualTo "FixtureExternalClass?"
+            it?.bareSourceType shouldBeEqualTo "FixtureExternalClass"
             it?.isAlias shouldBeEqualTo false
         }
     }

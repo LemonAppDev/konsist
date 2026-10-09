@@ -1,7 +1,7 @@
-package com.samplepackage
+package com.fixturepackage
 
-enum class SampleClass {
-    SAMPLE_CONSTANT_1 {
-        val sampleVariable = ""
+enum class FixtureClass {
+    FIXTURE_CONSTANT_1 {
+        val fixtureVariable = ""
     };
 }

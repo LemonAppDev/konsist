@@ -29,7 +29,7 @@ class KoTypeArgumentDeclarationForKoNameProviderTest {
             it?.hasNameEndingWith("ing") shouldBeEqualTo true
             it?.hasNameEndingWith("other") shouldBeEqualTo false
             it?.hasNameContaining("rin") shouldBeEqualTo true
-            it?.hasNameContaining("levari") shouldBeEqualTo false
+            it?.hasNameContaining("revari") shouldBeEqualTo false
             it?.hasNameMatching(Regex("[a-zA-Z<>]+")) shouldBeEqualTo true
             it?.hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
@@ -58,7 +58,7 @@ class KoTypeArgumentDeclarationForKoNameProviderTest {
             it?.hasNameEndingWith("ing>") shouldBeEqualTo true
             it?.hasNameEndingWith("other") shouldBeEqualTo false
             it?.hasNameContaining("String>") shouldBeEqualTo true
-            it?.hasNameContaining("levari") shouldBeEqualTo false
+            it?.hasNameContaining("revari") shouldBeEqualTo false
             it?.hasNameMatching(Regex("[a-zA-Z<>]+")) shouldBeEqualTo true
             it?.hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
@@ -87,7 +87,7 @@ class KoTypeArgumentDeclarationForKoNameProviderTest {
             it?.hasNameEndingWith("Int>") shouldBeEqualTo true
             it?.hasNameEndingWith("other") shouldBeEqualTo false
             it?.hasNameContaining("<String>") shouldBeEqualTo true
-            it?.hasNameContaining("levari") shouldBeEqualTo false
+            it?.hasNameContaining("revari") shouldBeEqualTo false
             it?.hasNameMatching(Regex("[a-zA-Z<>, ]+")) shouldBeEqualTo true
             it?.hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
@@ -114,7 +114,7 @@ class KoTypeArgumentDeclarationForKoNameProviderTest {
             it?.hasNameEndingWith("*") shouldBeEqualTo true
             it?.hasNameEndingWith("other") shouldBeEqualTo false
             it?.hasNameContaining("*") shouldBeEqualTo true
-            it?.hasNameContaining("levari") shouldBeEqualTo false
+            it?.hasNameContaining("revari") shouldBeEqualTo false
             it?.hasNameMatching(Regex("[a-zA-Z*]+")) shouldBeEqualTo true
             it?.hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
@@ -143,7 +143,7 @@ class KoTypeArgumentDeclarationForKoNameProviderTest {
             it?.hasNameEndingWith("ing") shouldBeEqualTo true
             it?.hasNameEndingWith("other") shouldBeEqualTo false
             it?.hasNameContaining("rin") shouldBeEqualTo true
-            it?.hasNameContaining("levari") shouldBeEqualTo false
+            it?.hasNameContaining("revari") shouldBeEqualTo false
             it?.hasNameMatching(Regex("[a-zA-Z<>]+")) shouldBeEqualTo true
             it?.hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
@@ -172,7 +172,7 @@ class KoTypeArgumentDeclarationForKoNameProviderTest {
             it?.hasNameEndingWith("ing") shouldBeEqualTo true
             it?.hasNameEndingWith("other") shouldBeEqualTo false
             it?.hasNameContaining("rin") shouldBeEqualTo true
-            it?.hasNameContaining("levari") shouldBeEqualTo false
+            it?.hasNameContaining("revari") shouldBeEqualTo false
             it?.hasNameMatching(Regex("[a-zA-Z<>]+")) shouldBeEqualTo true
             it?.hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }

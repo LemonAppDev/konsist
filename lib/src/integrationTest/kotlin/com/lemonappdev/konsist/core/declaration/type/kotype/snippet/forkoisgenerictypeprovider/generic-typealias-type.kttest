@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleGenericClassWithParameter
+import com.lemonappdev.konsist.testdata.FixtureGenericClassWithParameter
 
-val sampleProperty1: SampleTypeAlias = SampleTypeAlias("")
+val fixtureProperty1: FixtureTypeAlias = FixtureTypeAlias("")
 
-typealias SampleTypeAlias = SampleGenericClassWithParameter<String>
+typealias FixtureTypeAlias = FixtureGenericClassWithParameter<String>

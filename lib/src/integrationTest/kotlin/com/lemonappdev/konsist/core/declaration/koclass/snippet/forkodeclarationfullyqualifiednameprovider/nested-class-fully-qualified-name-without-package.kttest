@@ -1,3 +1,3 @@
-interface SampleInterface {
-    class SampleClass
+interface FixtureInterface {
+    class FixtureClass
 }

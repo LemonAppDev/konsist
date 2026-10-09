@@ -1,5 +1,5 @@
-public class SampleClass
+public class FixtureClass
 
-interface SampleInterface
+interface FixtureInterface
 
-object SampleObject
+object FixtureObject

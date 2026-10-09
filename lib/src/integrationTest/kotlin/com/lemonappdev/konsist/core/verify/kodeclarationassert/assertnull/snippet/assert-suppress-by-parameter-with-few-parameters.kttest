@@ -1,5 +1,5 @@
-class SampleClassText {
+class FixtureClassText {
     @Suppress("konsist.suppress-text")
-    fun sampleFunctionWithIncorrectSuffix() {
+    fun fixtureFunctionWithIncorrectSuffix() {
     }
 }

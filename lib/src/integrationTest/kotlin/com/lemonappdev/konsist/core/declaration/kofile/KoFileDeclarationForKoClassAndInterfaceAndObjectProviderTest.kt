@@ -22,23 +22,23 @@ class KoFileDeclarationForKoClassAndInterfaceAndObjectProviderTest {
             hasClassOrInterfaceOrObjectWithName(emptySet()) shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(emptyList()) shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(emptySet()) shouldBeEqualTo false
-            hasClassOrInterfaceOrObjectWithName("SampleClass") shouldBeEqualTo false
-            hasClassOrInterfaceOrObjectWithName(listOf("SampleClass")) shouldBeEqualTo false
-            hasClassOrInterfaceOrObjectWithName(setOf("SampleClass")) shouldBeEqualTo false
-            hasClassOrInterfaceOrObjectWithName("SampleInterface") shouldBeEqualTo false
-            hasClassOrInterfaceOrObjectWithName(listOf("SampleInterface")) shouldBeEqualTo false
-            hasClassOrInterfaceOrObjectWithName(setOf("SampleInterface")) shouldBeEqualTo false
-            hasClassesAndInterfacesAndObjectsWithAllNames("SampleClass", "SampleInterface") shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName("FixtureClass") shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName(listOf("FixtureClass")) shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName(setOf("FixtureClass")) shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName("FixtureInterface") shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName(listOf("FixtureInterface")) shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName(setOf("FixtureInterface")) shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames("FixtureClass", "FixtureInterface") shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(
                 listOf(
-                    "SampleClass",
-                    "SampleInterface",
+                    "FixtureClass",
+                    "FixtureInterface",
                 ),
             ) shouldBeEqualTo false
-            hasClassesAndInterfacesAndObjectsWithAllNames(setOf("SampleClass", "SampleInterface")) shouldBeEqualTo false
-            hasClassOrInterfaceOrObject { it.name == "SampleClass" } shouldBeEqualTo false
-            hasClassOrInterfaceOrObject { it.name == "SampleInterface" } shouldBeEqualTo false
-            hasAllClassesAndInterfacesAndObjects { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasClassesAndInterfacesAndObjectsWithAllNames(setOf("FixtureClass", "FixtureInterface")) shouldBeEqualTo false
+            hasClassOrInterfaceOrObject { it.name == "FixtureClass" } shouldBeEqualTo false
+            hasClassOrInterfaceOrObject { it.name == "FixtureInterface" } shouldBeEqualTo false
+            hasAllClassesAndInterfacesAndObjects { it.hasNameStartingWith("Fixture") } shouldBeEqualTo true
         }
     }
 
@@ -57,51 +57,51 @@ class KoFileDeclarationForKoClassAndInterfaceAndObjectProviderTest {
             hasClassOrInterfaceOrObjectWithName(emptySet()) shouldBeEqualTo true
             hasClassesAndInterfacesAndObjectsWithAllNames(emptyList()) shouldBeEqualTo true
             hasClassesAndInterfacesAndObjectsWithAllNames(emptySet()) shouldBeEqualTo true
-            hasClassOrInterfaceOrObjectWithName("SampleClass") shouldBeEqualTo true
-            hasClassOrInterfaceOrObjectWithName("SampleInterface") shouldBeEqualTo true
-            hasClassOrInterfaceOrObjectWithName("SampleObject") shouldBeEqualTo true
-            hasClassOrInterfaceOrObjectWithName("SampleClass", "OtherInterface") shouldBeEqualTo true
-            hasClassOrInterfaceOrObjectWithName(listOf("SampleClass")) shouldBeEqualTo true
-            hasClassOrInterfaceOrObjectWithName(listOf("SampleInterface")) shouldBeEqualTo true
-            hasClassOrInterfaceOrObjectWithName(listOf("SampleObject")) shouldBeEqualTo true
-            hasClassOrInterfaceOrObjectWithName(listOf("SampleClass", "OtherInterface")) shouldBeEqualTo true
-            hasClassOrInterfaceOrObjectWithName(setOf("SampleClass")) shouldBeEqualTo true
-            hasClassOrInterfaceOrObjectWithName(setOf("SampleInterface")) shouldBeEqualTo true
-            hasClassOrInterfaceOrObjectWithName(setOf("SampleObject")) shouldBeEqualTo true
-            hasClassOrInterfaceOrObjectWithName(setOf("SampleClass", "OtherInterface")) shouldBeEqualTo true
-            hasClassesAndInterfacesAndObjectsWithAllNames("SampleClass") shouldBeEqualTo true
+            hasClassOrInterfaceOrObjectWithName("FixtureClass") shouldBeEqualTo true
+            hasClassOrInterfaceOrObjectWithName("FixtureInterface") shouldBeEqualTo true
+            hasClassOrInterfaceOrObjectWithName("FixtureObject") shouldBeEqualTo true
+            hasClassOrInterfaceOrObjectWithName("FixtureClass", "OtherInterface") shouldBeEqualTo true
+            hasClassOrInterfaceOrObjectWithName(listOf("FixtureClass")) shouldBeEqualTo true
+            hasClassOrInterfaceOrObjectWithName(listOf("FixtureInterface")) shouldBeEqualTo true
+            hasClassOrInterfaceOrObjectWithName(listOf("FixtureObject")) shouldBeEqualTo true
+            hasClassOrInterfaceOrObjectWithName(listOf("FixtureClass", "OtherInterface")) shouldBeEqualTo true
+            hasClassOrInterfaceOrObjectWithName(setOf("FixtureClass")) shouldBeEqualTo true
+            hasClassOrInterfaceOrObjectWithName(setOf("FixtureInterface")) shouldBeEqualTo true
+            hasClassOrInterfaceOrObjectWithName(setOf("FixtureObject")) shouldBeEqualTo true
+            hasClassOrInterfaceOrObjectWithName(setOf("FixtureClass", "OtherInterface")) shouldBeEqualTo true
+            hasClassesAndInterfacesAndObjectsWithAllNames("FixtureClass") shouldBeEqualTo true
             hasClassesAndInterfacesAndObjectsWithAllNames(
-                "SampleClass",
-                "SampleInterface",
-                "SampleObject",
+                "FixtureClass",
+                "FixtureInterface",
+                "FixtureObject",
             ) shouldBeEqualTo true
-            hasClassesAndInterfacesAndObjectsWithAllNames("SampleClass", "SampleInterface") shouldBeEqualTo true
-            hasClassesAndInterfacesAndObjectsWithAllNames("SampleClass", "OtherInterface") shouldBeEqualTo false
-            hasClassesAndInterfacesAndObjectsWithAllNames(listOf("SampleClass")) shouldBeEqualTo true
-            hasClassesAndInterfacesAndObjectsWithAllNames(listOf("SampleClass", "SampleInterface")) shouldBeEqualTo true
-            hasClassesAndInterfacesAndObjectsWithAllNames(listOf("SampleClass", "OtherInterface")) shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames("FixtureClass", "FixtureInterface") shouldBeEqualTo true
+            hasClassesAndInterfacesAndObjectsWithAllNames("FixtureClass", "OtherInterface") shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames(listOf("FixtureClass")) shouldBeEqualTo true
+            hasClassesAndInterfacesAndObjectsWithAllNames(listOf("FixtureClass", "FixtureInterface")) shouldBeEqualTo true
+            hasClassesAndInterfacesAndObjectsWithAllNames(listOf("FixtureClass", "OtherInterface")) shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(
                 listOf(
-                    "SampleClass",
-                    "SampleInterface",
-                    "SampleObject",
+                    "FixtureClass",
+                    "FixtureInterface",
+                    "FixtureObject",
                 ),
             ) shouldBeEqualTo true
-            hasClassesAndInterfacesAndObjectsWithAllNames(setOf("SampleClass")) shouldBeEqualTo true
-            hasClassesAndInterfacesAndObjectsWithAllNames(setOf("SampleClass", "SampleInterface")) shouldBeEqualTo true
-            hasClassesAndInterfacesAndObjectsWithAllNames(setOf("SampleClass", "OtherInterface")) shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames(setOf("FixtureClass")) shouldBeEqualTo true
+            hasClassesAndInterfacesAndObjectsWithAllNames(setOf("FixtureClass", "FixtureInterface")) shouldBeEqualTo true
+            hasClassesAndInterfacesAndObjectsWithAllNames(setOf("FixtureClass", "OtherInterface")) shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(
                 setOf(
-                    "SampleClass",
-                    "SampleInterface",
-                    "SampleObject",
+                    "FixtureClass",
+                    "FixtureInterface",
+                    "FixtureObject",
                 ),
             ) shouldBeEqualTo true
-            hasClassOrInterfaceOrObject { it.name == "SampleClass" } shouldBeEqualTo true
-            hasClassOrInterfaceOrObject { it.name == "SampleInterface" } shouldBeEqualTo true
+            hasClassOrInterfaceOrObject { it.name == "FixtureClass" } shouldBeEqualTo true
+            hasClassOrInterfaceOrObject { it.name == "FixtureInterface" } shouldBeEqualTo true
             hasClassOrInterfaceOrObject { it.hasNameEndingWith("Class") } shouldBeEqualTo true
             hasClassOrInterfaceOrObject { it.hasNameEndingWith("OtherClass") } shouldBeEqualTo false
-            hasAllClassesAndInterfacesAndObjects { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAllClassesAndInterfacesAndObjects { it.hasNameStartingWith("Fixture") } shouldBeEqualTo true
             hasAllClassesAndInterfacesAndObjects { it.hasNameEndingWith("Class") } shouldBeEqualTo false
         }
     }
@@ -117,11 +117,11 @@ class KoFileDeclarationForKoClassAndInterfaceAndObjectProviderTest {
         // then
         val expected =
             listOf(
-                "SampleLocalClass",
-                "SampleClassNestedInsideObject",
-                "SampleInterfaceNestedInsideObject",
-                "SampleObject",
-                "SampleObjectNestedInsideObject",
+                "FixtureLocalClass",
+                "FixtureClassNestedInsideObject",
+                "FixtureInterfaceNestedInsideObject",
+                "FixtureObject",
+                "FixtureObjectNestedInsideObject",
             )
 
         sut
@@ -141,10 +141,10 @@ class KoFileDeclarationForKoClassAndInterfaceAndObjectProviderTest {
         // then
         val expected =
             listOf(
-                "SampleClassNestedInsideObject",
-                "SampleInterfaceNestedInsideObject",
-                "SampleObject",
-                "SampleObjectNestedInsideObject",
+                "FixtureClassNestedInsideObject",
+                "FixtureInterfaceNestedInsideObject",
+                "FixtureObject",
+                "FixtureObjectNestedInsideObject",
             )
 
         sut
@@ -162,7 +162,7 @@ class KoFileDeclarationForKoClassAndInterfaceAndObjectProviderTest {
                 .first()
 
         // then
-        val expected = listOf("SampleLocalClass", "SampleObject")
+        val expected = listOf("FixtureLocalClass", "FixtureObject")
 
         sut
             .classesAndInterfacesAndObjects(includeNested = false, includeLocal = true)
@@ -179,7 +179,7 @@ class KoFileDeclarationForKoClassAndInterfaceAndObjectProviderTest {
                 .first()
 
         // then
-        val expected = listOf("SampleObject")
+        val expected = listOf("FixtureObject")
 
         sut
             .classesAndInterfacesAndObjects(includeNested = false, includeLocal = false)
@@ -206,7 +206,7 @@ class KoFileDeclarationForKoClassAndInterfaceAndObjectProviderTest {
                 includeLocal = false,
             ) { it.hasPrivateModifier } shouldBeEqualTo 1
             countClassesAndInterfacesAndObjects { it.hasPrivateModifier } shouldBeEqualTo 4
-            countClassesAndInterfacesAndObjects { it.name == "SampleClass" && it.hasInternalModifier } shouldBeEqualTo 0
+            countClassesAndInterfacesAndObjects { it.name == "FixtureClass" && it.hasInternalModifier } shouldBeEqualTo 0
         }
     }
 
@@ -220,31 +220,31 @@ class KoFileDeclarationForKoClassAndInterfaceAndObjectProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasClassOrInterfaceOrObjectWithName("sampleclass") shouldBeEqualTo false
-            hasClassOrInterfaceOrObjectWithName("sampleclass", ignoreCase = true) shouldBeEqualTo false
-            hasClassOrInterfaceOrObjectWithName(listOf("sampleclass")) shouldBeEqualTo false
-            hasClassOrInterfaceOrObjectWithName(listOf("sampleclass"), ignoreCase = true) shouldBeEqualTo false
-            hasClassOrInterfaceOrObjectWithName(setOf("sampleclass")) shouldBeEqualTo false
-            hasClassOrInterfaceOrObjectWithName(setOf("sampleclass"), ignoreCase = true) shouldBeEqualTo false
-            hasClassesAndInterfacesAndObjectsWithAllNames("sampleclass1", "sampleinterface") shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName("fixtureclass") shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName("fixtureclass", ignoreCase = true) shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName(listOf("fixtureclass")) shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName(listOf("fixtureclass"), ignoreCase = true) shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName(setOf("fixtureclass")) shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName(setOf("fixtureclass"), ignoreCase = true) shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames("fixtureclass1", "fixtureinterface") shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(
-                "sampleclass1",
-                "sampleinterface",
+                "fixtureclass1",
+                "fixtureinterface",
                 ignoreCase = true,
             ) shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(
                 listOf(
-                    "sampleclass",
-                    "sampleinterface",
+                    "fixtureclass",
+                    "fixtureinterface",
                 ),
             ) shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(
-                listOf("sampleclass", "sampleinterface"),
+                listOf("fixtureclass", "fixtureinterface"),
                 ignoreCase = true,
             ) shouldBeEqualTo false
-            hasClassesAndInterfacesAndObjectsWithAllNames(setOf("sampleclass", "sampleinterface")) shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames(setOf("fixtureclass", "fixtureinterface")) shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(
-                setOf("sampleclass", "sampleinterface"),
+                setOf("fixtureclass", "fixtureinterface"),
                 ignoreCase = true,
             ) shouldBeEqualTo false
         }
@@ -260,50 +260,50 @@ class KoFileDeclarationForKoClassAndInterfaceAndObjectProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasClassOrInterfaceOrObjectWithName("sampleclass") shouldBeEqualTo false
-            hasClassOrInterfaceOrObjectWithName("sampleclass", ignoreCase = true) shouldBeEqualTo true
+            hasClassOrInterfaceOrObjectWithName("fixtureclass") shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName("fixtureclass", ignoreCase = true) shouldBeEqualTo true
             hasClassOrInterfaceOrObjectWithName("otherclass") shouldBeEqualTo false
             hasClassOrInterfaceOrObjectWithName("otherclass", ignoreCase = true) shouldBeEqualTo false
-            hasClassOrInterfaceOrObjectWithName("sampleclass", "otherName") shouldBeEqualTo false
-            hasClassOrInterfaceOrObjectWithName("sampleclass", "otherName", ignoreCase = true) shouldBeEqualTo true
-            hasClassOrInterfaceOrObjectWithName(listOf("sampleclass")) shouldBeEqualTo false
-            hasClassOrInterfaceOrObjectWithName(listOf("sampleclass"), ignoreCase = true) shouldBeEqualTo true
+            hasClassOrInterfaceOrObjectWithName("fixtureclass", "otherName") shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName("fixtureclass", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasClassOrInterfaceOrObjectWithName(listOf("fixtureclass")) shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName(listOf("fixtureclass"), ignoreCase = true) shouldBeEqualTo true
             hasClassOrInterfaceOrObjectWithName(listOf("otherclass")) shouldBeEqualTo false
             hasClassOrInterfaceOrObjectWithName(listOf("otherclass"), ignoreCase = true) shouldBeEqualTo false
-            hasClassOrInterfaceOrObjectWithName(listOf("sampleclass", "otherName")) shouldBeEqualTo false
+            hasClassOrInterfaceOrObjectWithName(listOf("fixtureclass", "otherName")) shouldBeEqualTo false
             hasClassOrInterfaceOrObjectWithName(
-                listOf("sampleclass", "otherName"),
+                listOf("fixtureclass", "otherName"),
                 ignoreCase = true,
             ) shouldBeEqualTo true
-            hasClassesAndInterfacesAndObjectsWithAllNames("sampleclass") shouldBeEqualTo false
-            hasClassesAndInterfacesAndObjectsWithAllNames("sampleclass", ignoreCase = true) shouldBeEqualTo true
-            hasClassesAndInterfacesAndObjectsWithAllNames("sampleclass", "sampleinterface") shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames("fixtureclass") shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames("fixtureclass", ignoreCase = true) shouldBeEqualTo true
+            hasClassesAndInterfacesAndObjectsWithAllNames("fixtureclass", "fixtureinterface") shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(
-                "sampleclass",
-                "sampleinterface",
+                "fixtureclass",
+                "fixtureinterface",
                 ignoreCase = true,
             ) shouldBeEqualTo true
-            hasClassesAndInterfacesAndObjectsWithAllNames("sampleclass", "otherclass") shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames("fixtureclass", "otherclass") shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(
-                "sampleclass",
+                "fixtureclass",
                 "otherclass",
                 ignoreCase = true,
             ) shouldBeEqualTo false
-            hasClassesAndInterfacesAndObjectsWithAllNames(listOf("sampleclass")) shouldBeEqualTo false
-            hasClassesAndInterfacesAndObjectsWithAllNames(listOf("sampleclass"), ignoreCase = true) shouldBeEqualTo true
+            hasClassesAndInterfacesAndObjectsWithAllNames(listOf("fixtureclass")) shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames(listOf("fixtureclass"), ignoreCase = true) shouldBeEqualTo true
             hasClassesAndInterfacesAndObjectsWithAllNames(
                 listOf(
-                    "sampleclass",
-                    "sampleinterface",
+                    "fixtureclass",
+                    "fixtureinterface",
                 ),
             ) shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(
-                listOf("sampleclass", "sampleinterface"),
+                listOf("fixtureclass", "fixtureinterface"),
                 ignoreCase = true,
             ) shouldBeEqualTo true
-            hasClassesAndInterfacesAndObjectsWithAllNames(listOf("sampleclass", "otherclass")) shouldBeEqualTo false
+            hasClassesAndInterfacesAndObjectsWithAllNames(listOf("fixtureclass", "otherclass")) shouldBeEqualTo false
             hasClassesAndInterfacesAndObjectsWithAllNames(
-                listOf("sampleclass", "otherclass"),
+                listOf("fixtureclass", "otherclass"),
                 ignoreCase = true,
             ) shouldBeEqualTo false
         }

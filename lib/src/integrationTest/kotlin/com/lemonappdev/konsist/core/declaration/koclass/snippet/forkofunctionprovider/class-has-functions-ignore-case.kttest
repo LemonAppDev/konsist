@@ -1,7 +1,7 @@
-class SampleTopLevelClass {
-    private fun sampleFunction1() {
+class FixtureTopLevelClass {
+    private fun fixtureFunction1() {
     }
 
-    fun sampleFunction2() {
+    fun fixtureFunction2() {
     }
 }

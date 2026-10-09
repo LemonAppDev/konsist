@@ -37,10 +37,10 @@ class KoKDocDeclarationForKoKDocPropertyTagProviderTest {
         assertSoftly(sut) {
             it?.numPropertyTags shouldBeEqualTo 2
             it?.propertyTags?.get(0)?.name shouldBeEqualTo PROPERTY
-            it?.propertyTags?.get(0)?.value shouldBeEqualTo "sampleProperty1"
+            it?.propertyTags?.get(0)?.value shouldBeEqualTo "fixtureProperty1"
             it?.propertyTags?.get(0)?.description shouldBeEqualTo "The first property of the class."
             it?.propertyTags?.get(1)?.name shouldBeEqualTo PROPERTY
-            it?.propertyTags?.get(1)?.value shouldBeEqualTo "sampleProperty2"
+            it?.propertyTags?.get(1)?.value shouldBeEqualTo "fixtureProperty2"
             it?.propertyTags?.get(1)?.description shouldBeEqualTo "The second property of the class."
             it?.hasPropertyTags shouldBeEqualTo true
         }

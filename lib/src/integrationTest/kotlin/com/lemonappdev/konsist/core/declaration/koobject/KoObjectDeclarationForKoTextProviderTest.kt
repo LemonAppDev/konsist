@@ -19,8 +19,8 @@ class KoObjectDeclarationForKoTextProviderTest {
             .text
             .shouldBeEqualTo(
                 """
-                object SampleObject {
-                    val sampleProperty = 6
+                object FixtureObject {
+                    val fixtureProperty = 6
                 }
                 """.trimIndent(),
             )
@@ -28,16 +28,16 @@ class KoObjectDeclarationForKoTextProviderTest {
         assertSoftly(sut) {
             text.shouldBeEqualTo(
                 """
-                object SampleObject {
-                    val sampleProperty = 6
+                object FixtureObject {
+                    val fixtureProperty = 6
                 }
                 """.trimIndent(),
             )
-            hasTextStartingWith("object Sample") shouldBeEqualTo true
+            hasTextStartingWith("object Fixture") shouldBeEqualTo true
             hasTextStartingWith("Other") shouldBeEqualTo false
             hasTextEndingWith("\n}") shouldBeEqualTo true
             hasTextEndingWith("other") shouldBeEqualTo false
-            hasTextContaining("val sampleProperty = 6") shouldBeEqualTo true
+            hasTextContaining("val fixtureProperty = 6") shouldBeEqualTo true
             hasTextContaining("anno") shouldBeEqualTo false
             hasTextMatching(Regex("^[^@]*\$")) shouldBeEqualTo true
             hasTextMatching(Regex("[0-9]+")) shouldBeEqualTo false

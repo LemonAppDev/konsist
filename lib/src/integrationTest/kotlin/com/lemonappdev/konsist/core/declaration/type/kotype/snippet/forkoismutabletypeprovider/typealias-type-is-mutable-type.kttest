@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleObject
+import com.lemonappdev.konsist.testdata.FixtureObject
 
-class SampleClass1(val sampleProperty1: MutableSampleTypeAlias?)
+class FixtureClass1(val fixtureProperty1: MutableFixtureTypeAlias?)
 
-typealias MutableSampleTypeAlias = (SampleObject) -> Unit
+typealias MutableFixtureTypeAlias = (FixtureObject) -> Unit

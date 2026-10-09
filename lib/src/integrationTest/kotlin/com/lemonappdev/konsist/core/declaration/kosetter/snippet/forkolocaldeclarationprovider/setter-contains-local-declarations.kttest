@@ -1,10 +1,10 @@
-var sampleProperty: String = "text"
+var fixtureProperty: String = "text"
     set(value) {
-        val sampleLocalProperty: Boolean = true
+        val fixtureLocalProperty: Boolean = true
 
-        fun sampleLocalFunction() { }
+        fun fixtureLocalFunction() { }
 
-        class SampleLocalClass
+        class FixtureLocalClass
 
         if (true) field = value
     }

@@ -1,4 +1,4 @@
 /**
- * Sample description
+ * Fixture description
  */
-fun sampleFunction() = ""
+fun fixtureFunction() = ""

@@ -9,19 +9,19 @@ import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.ext.list.parents
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
-import com.lemonappdev.konsist.externalsample.SampleExternalClass
-import com.lemonappdev.konsist.externalsample.SampleExternalClassWithParameter
-import com.lemonappdev.konsist.externalsample.SampleExternalGenericClass
-import com.lemonappdev.konsist.externalsample.SampleExternalGenericClassWithParameter
-import com.lemonappdev.konsist.externalsample.SampleExternalGenericInterface
-import com.lemonappdev.konsist.externalsample.SampleExternalInterface
-import com.lemonappdev.konsist.testdata.SampleClassWithParameter
-import com.lemonappdev.konsist.testdata.SampleCollection1
-import com.lemonappdev.konsist.testdata.SampleGenericClassWithParameter
-import com.lemonappdev.konsist.testdata.SampleGenericSuperInterface
-import com.lemonappdev.konsist.testdata.SampleInterface
-import com.lemonappdev.konsist.testdata.SampleParentClass
-import com.lemonappdev.konsist.testdata.SampleParentInterface
+import com.lemonappdev.konsist.externalfixture.FixtureExternalClass
+import com.lemonappdev.konsist.externalfixture.FixtureExternalClassWithParameter
+import com.lemonappdev.konsist.externalfixture.FixtureExternalGenericClass
+import com.lemonappdev.konsist.externalfixture.FixtureExternalGenericClassWithParameter
+import com.lemonappdev.konsist.externalfixture.FixtureExternalGenericInterface
+import com.lemonappdev.konsist.externalfixture.FixtureExternalInterface
+import com.lemonappdev.konsist.testdata.FixtureClassWithParameter
+import com.lemonappdev.konsist.testdata.FixtureCollection1
+import com.lemonappdev.konsist.testdata.FixtureGenericClassWithParameter
+import com.lemonappdev.konsist.testdata.FixtureGenericSuperInterface
+import com.lemonappdev.konsist.testdata.FixtureInterface
+import com.lemonappdev.konsist.testdata.FixtureParentClass
+import com.lemonappdev.konsist.testdata.FixtureParentInterface
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -56,7 +56,7 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                 (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fullyQualifiedName
             }.shouldBeEqualTo(true)
             hasSourceDeclaration {
-                (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == "com.samplepackage.other"
+                (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == "com.fixturepackage.other"
             }.shouldBeEqualTo(false)
             kClass
                 ?.let { value -> hasSourceDeclarationOf(value) }
@@ -89,7 +89,7 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                 (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fullyQualifiedName
             }.shouldBeEqualTo(true)
             hasSourceDeclaration {
-                (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == "com.samplepackage.other"
+                (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == "com.fixturepackage.other"
             }.shouldBeEqualTo(false)
             kClass
                 ?.let { value -> hasSourceDeclarationOf(value) }
@@ -122,7 +122,7 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                 (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fullyQualifiedName
             }.shouldBeEqualTo(true)
             hasSourceDeclaration {
-                (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == "com.samplepackage.other"
+                (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == "com.fixturepackage.other"
             }.shouldBeEqualTo(false)
             kClass
                 ?.let { value -> hasSourceDeclarationOf(value) }
@@ -147,154 +147,154 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
                     null,
-                    "SampleSuperClass",
+                    "FixtureSuperClass",
                 ),
                 arguments(
                     "class-with-generic-parent-class-from-file",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
                     null,
-                    "SampleGenericSuperClass",
+                    "FixtureGenericSuperClass",
                 ),
                 arguments(
                     "class-with-parametrized-parent-class-from-file",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
                     null,
-                    "SampleParametrizedSuperClass",
+                    "FixtureParametrizedSuperClass",
                 ),
                 arguments(
                     "class-with-parametrized-and-generic-parent-class-from-file",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
                     null,
-                    "SampleParametrizedSuperClass",
+                    "FixtureParametrizedSuperClass",
                 ),
                 arguments(
                     "class-with-parent-interface-from-file",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
                     null,
-                    "SampleSuperInterface",
+                    "FixtureSuperInterface",
                 ),
                 arguments(
                     "class-with-generic-parent-interface-from-file",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
                     null,
-                    "SampleGenericSuperInterface",
+                    "FixtureGenericSuperInterface",
                 ),
                 arguments(
                     "class-with-parent-by-delegation-from-file",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
                     null,
-                    "SampleSuperInterface",
+                    "FixtureSuperInterface",
                 ),
                 arguments(
                     "class-with-parent-class-from-import",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
-                    SampleParentClass::class,
-                    "com.lemonappdev.konsist.testdata.SampleParentClass",
+                    FixtureParentClass::class,
+                    "com.lemonappdev.konsist.testdata.FixtureParentClass",
                 ),
                 arguments(
                     "class-with-generic-parent-class-from-import",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
-                    SampleCollection1::class,
-                    "com.lemonappdev.konsist.testdata.SampleCollection1",
+                    FixtureCollection1::class,
+                    "com.lemonappdev.konsist.testdata.FixtureCollection1",
                 ),
                 arguments(
                     "class-with-parametrized-parent-class-from-import",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
-                    SampleClassWithParameter::class,
-                    "com.lemonappdev.konsist.testdata.SampleClassWithParameter",
+                    FixtureClassWithParameter::class,
+                    "com.lemonappdev.konsist.testdata.FixtureClassWithParameter",
                 ),
                 arguments(
                     "class-with-parametrized-and-generic-parent-class-from-import",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
-                    SampleGenericClassWithParameter::class,
-                    "com.lemonappdev.konsist.testdata.SampleGenericClassWithParameter",
+                    FixtureGenericClassWithParameter::class,
+                    "com.lemonappdev.konsist.testdata.FixtureGenericClassWithParameter",
                 ),
                 arguments(
                     "class-with-parent-interface-from-import",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
-                    SampleInterface::class,
-                    "com.lemonappdev.konsist.testdata.SampleInterface",
+                    FixtureInterface::class,
+                    "com.lemonappdev.konsist.testdata.FixtureInterface",
                 ),
                 arguments(
                     "class-with-generic-parent-interface-from-import",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
-                    SampleGenericSuperInterface::class,
-                    "com.lemonappdev.konsist.testdata.SampleGenericSuperInterface",
+                    FixtureGenericSuperInterface::class,
+                    "com.lemonappdev.konsist.testdata.FixtureGenericSuperInterface",
                 ),
                 arguments(
                     "class-with-parent-by-delegation-from-import",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
-                    SampleInterface::class,
-                    "com.lemonappdev.konsist.testdata.SampleInterface",
+                    FixtureInterface::class,
+                    "com.lemonappdev.konsist.testdata.FixtureInterface",
                 ),
                 arguments(
                     "class-with-external-parent-class",
                     KoExternalDeclaration::class,
                     KoInterfaceDeclaration::class,
-                    SampleExternalClass::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalClass",
+                    FixtureExternalClass::class,
+                    "com.lemonappdev.konsist.externalfixture.FixtureExternalClass",
                 ),
                 arguments(
                     "class-with-generic-external-parent-class",
                     KoExternalDeclaration::class,
                     KoInterfaceDeclaration::class,
-                    SampleExternalGenericClass::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalGenericClass",
+                    FixtureExternalGenericClass::class,
+                    "com.lemonappdev.konsist.externalfixture.FixtureExternalGenericClass",
                 ),
                 arguments(
                     "class-with-parametrized-external-parent-class",
                     KoExternalDeclaration::class,
                     KoInterfaceDeclaration::class,
-                    SampleExternalClassWithParameter::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalClassWithParameter",
+                    FixtureExternalClassWithParameter::class,
+                    "com.lemonappdev.konsist.externalfixture.FixtureExternalClassWithParameter",
                 ),
                 arguments(
                     "class-with-parametrized-and-generic-external-parent-class",
                     KoExternalDeclaration::class,
                     KoInterfaceDeclaration::class,
-                    SampleExternalGenericClassWithParameter::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalGenericClassWithParameter",
+                    FixtureExternalGenericClassWithParameter::class,
+                    "com.lemonappdev.konsist.externalfixture.FixtureExternalGenericClassWithParameter",
                 ),
                 arguments(
                     "class-with-external-parent-interface",
                     KoExternalDeclaration::class,
                     KoClassDeclaration::class,
-                    SampleExternalInterface::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalInterface",
+                    FixtureExternalInterface::class,
+                    "com.lemonappdev.konsist.externalfixture.FixtureExternalInterface",
                 ),
                 arguments(
                     "class-with-generic-external-parent-interface",
                     KoExternalDeclaration::class,
                     KoClassDeclaration::class,
-                    SampleExternalGenericInterface::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalGenericInterface",
+                    FixtureExternalGenericInterface::class,
+                    "com.lemonappdev.konsist.externalfixture.FixtureExternalGenericInterface",
                 ),
                 arguments(
                     "class-with-external-parent-by-delegation",
                     KoExternalDeclaration::class,
                     KoInterfaceDeclaration::class,
-                    SampleExternalInterface::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalInterface",
+                    FixtureExternalInterface::class,
+                    "com.lemonappdev.konsist.externalfixture.FixtureExternalInterface",
                 ),
                 arguments(
                     "class-with-typealias-parent",
                     KoTypeAliasDeclaration::class,
                     KoImportAliasDeclaration::class,
                     null,
-                    "SampleTypeAlias",
+                    "FixtureTypeAlias",
                 ),
                 arguments(
                     "class-with-import-alias-parent",
@@ -308,42 +308,42 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
                     null,
-                    "com.samplepackage.SampleInterface.SampleName",
+                    "com.fixturepackage.FixtureInterface.FixtureName",
                 ),
                 arguments(
                     "class-with-parent-class-with-the-same-name",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
                     null,
-                    "com.samplepackage.SampleInterface.SampleName",
+                    "com.fixturepackage.FixtureInterface.FixtureName",
                 ),
                 arguments(
                     "class-with-parent-interface-with-two-part-name-from-the-same-file",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
                     null,
-                    "com.samplepackage.SampleInterface.SampleNestedInterface",
+                    "com.fixturepackage.FixtureInterface.FixtureNestedInterface",
                 ),
                 arguments(
                     "class-with-parent-class-with-two-part-name-from-the-same-file",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
                     null,
-                    "com.samplepackage.SampleInterface.SampleNestedClass",
+                    "com.fixturepackage.FixtureInterface.FixtureNestedClass",
                 ),
                 arguments(
                     "class-with-parent-interface-with-two-part-name-from-import",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
                     null,
-                    "com.lemonappdev.konsist.testdata.SampleParentInterfaceWithNestedDeclarations.SampleNestedInterface",
+                    "com.lemonappdev.konsist.testdata.FixtureParentInterfaceWithNestedDeclarations.FixtureNestedInterface",
                 ),
                 arguments(
                     "class-with-parent-class-with-two-part-name-from-import",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
                     null,
-                    "com.lemonappdev.konsist.testdata.SampleParentInterfaceWithNestedDeclarations.SampleNestedClass",
+                    "com.lemonappdev.konsist.testdata.FixtureParentInterfaceWithNestedDeclarations.FixtureNestedClass",
                 ),
                 arguments(
                     "class-with-kotlin-parent-class",
@@ -363,49 +363,49 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
                     null,
-                    "SampleSuperInterface",
+                    "FixtureSuperInterface",
                 ),
                 arguments(
                     "interface-with-generic-parent-interface-from-file",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
                     null,
-                    "SampleGenericSuperInterface",
+                    "FixtureGenericSuperInterface",
                 ),
                 arguments(
                     "interface-with-parent-interface-from-import",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
-                    SampleParentInterface::class,
-                    "com.lemonappdev.konsist.testdata.SampleParentInterface",
+                    FixtureParentInterface::class,
+                    "com.lemonappdev.konsist.testdata.FixtureParentInterface",
                 ),
                 arguments(
                     "interface-with-generic-parent-interface-from-import",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
-                    SampleGenericSuperInterface::class,
-                    "com.lemonappdev.konsist.testdata.SampleGenericSuperInterface",
+                    FixtureGenericSuperInterface::class,
+                    "com.lemonappdev.konsist.testdata.FixtureGenericSuperInterface",
                 ),
                 arguments(
                     "interface-with-external-parent-interface",
                     KoExternalDeclaration::class,
                     KoClassDeclaration::class,
-                    SampleExternalInterface::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalInterface",
+                    FixtureExternalInterface::class,
+                    "com.lemonappdev.konsist.externalfixture.FixtureExternalInterface",
                 ),
                 arguments(
                     "interface-with-generic-external-parent-interface",
                     KoExternalDeclaration::class,
                     KoClassDeclaration::class,
-                    SampleExternalGenericInterface::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalGenericInterface",
+                    FixtureExternalGenericInterface::class,
+                    "com.lemonappdev.konsist.externalfixture.FixtureExternalGenericInterface",
                 ),
                 arguments(
                     "interface-with-typealias-parent",
                     KoTypeAliasDeclaration::class,
                     KoImportAliasDeclaration::class,
                     null,
-                    "SampleTypeAlias",
+                    "FixtureTypeAlias",
                 ),
                 arguments(
                     "interface-with-import-alias-parent",
@@ -419,21 +419,21 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
                     null,
-                    "com.samplepackage.SampleInterface.SampleName",
+                    "com.fixturepackage.FixtureInterface.FixtureName",
                 ),
                 arguments(
                     "interface-with-parent-interface-with-two-part-name-from-the-same-file",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
                     null,
-                    "com.samplepackage.SampleInterface.SampleNestedInterface",
+                    "com.fixturepackage.FixtureInterface.FixtureNestedInterface",
                 ),
                 arguments(
                     "interface-with-parent-interface-with-two-part-name-from-import",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
                     null,
-                    "com.lemonappdev.konsist.testdata.SampleParentInterfaceWithNestedDeclarations.SampleNestedInterface",
+                    "com.lemonappdev.konsist.testdata.FixtureParentInterfaceWithNestedDeclarations.FixtureNestedInterface",
                 ),
             )
 
@@ -446,133 +446,133 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
                     null,
-                    "SampleSuperClass",
+                    "FixtureSuperClass",
                 ),
                 arguments(
                     "object-with-generic-parent-class-from-file",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
                     null,
-                    "SampleGenericSuperClass",
+                    "FixtureGenericSuperClass",
                 ),
                 arguments(
                     "object-with-parametrized-parent-class-from-file",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
                     null,
-                    "SampleParametrizedSuperClass",
+                    "FixtureParametrizedSuperClass",
                 ),
                 arguments(
                     "object-with-parametrized-and-generic-parent-class-from-file",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
                     null,
-                    "SampleParametrizedSuperClass",
+                    "FixtureParametrizedSuperClass",
                 ),
                 arguments(
                     "object-with-parent-interface-from-file",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
                     null,
-                    "SampleSuperInterface",
+                    "FixtureSuperInterface",
                 ),
                 arguments(
                     "object-with-generic-parent-interface-from-file",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
                     null,
-                    "SampleGenericSuperInterface",
+                    "FixtureGenericSuperInterface",
                 ),
                 arguments(
                     "object-with-parent-class-from-import",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
-                    SampleParentClass::class,
-                    "com.lemonappdev.konsist.testdata.SampleParentClass",
+                    FixtureParentClass::class,
+                    "com.lemonappdev.konsist.testdata.FixtureParentClass",
                 ),
                 arguments(
                     "object-with-generic-parent-class-from-import",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
-                    SampleCollection1::class,
-                    "com.lemonappdev.konsist.testdata.SampleCollection1",
+                    FixtureCollection1::class,
+                    "com.lemonappdev.konsist.testdata.FixtureCollection1",
                 ),
                 arguments(
                     "object-with-parametrized-parent-class-from-import",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
-                    SampleClassWithParameter::class,
-                    "com.lemonappdev.konsist.testdata.SampleClassWithParameter",
+                    FixtureClassWithParameter::class,
+                    "com.lemonappdev.konsist.testdata.FixtureClassWithParameter",
                 ),
                 arguments(
                     "object-with-parametrized-and-generic-parent-class-from-import",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
-                    SampleGenericClassWithParameter::class,
-                    "com.lemonappdev.konsist.testdata.SampleGenericClassWithParameter",
+                    FixtureGenericClassWithParameter::class,
+                    "com.lemonappdev.konsist.testdata.FixtureGenericClassWithParameter",
                 ),
                 arguments(
                     "object-with-parent-interface-from-import",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
-                    SampleInterface::class,
-                    "com.lemonappdev.konsist.testdata.SampleInterface",
+                    FixtureInterface::class,
+                    "com.lemonappdev.konsist.testdata.FixtureInterface",
                 ),
                 arguments(
                     "object-with-generic-parent-interface-from-import",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
-                    SampleGenericSuperInterface::class,
-                    "com.lemonappdev.konsist.testdata.SampleGenericSuperInterface",
+                    FixtureGenericSuperInterface::class,
+                    "com.lemonappdev.konsist.testdata.FixtureGenericSuperInterface",
                 ),
                 arguments(
                     "object-with-external-parent-class",
                     KoExternalDeclaration::class,
                     KoInterfaceDeclaration::class,
-                    SampleExternalClass::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalClass",
+                    FixtureExternalClass::class,
+                    "com.lemonappdev.konsist.externalfixture.FixtureExternalClass",
                 ),
                 arguments(
                     "object-with-generic-external-parent-class",
                     KoExternalDeclaration::class,
                     KoInterfaceDeclaration::class,
-                    SampleExternalGenericClass::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalGenericClass",
+                    FixtureExternalGenericClass::class,
+                    "com.lemonappdev.konsist.externalfixture.FixtureExternalGenericClass",
                 ),
                 arguments(
                     "object-with-parametrized-external-parent-class",
                     KoExternalDeclaration::class,
                     KoInterfaceDeclaration::class,
-                    SampleExternalClassWithParameter::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalClassWithParameter",
+                    FixtureExternalClassWithParameter::class,
+                    "com.lemonappdev.konsist.externalfixture.FixtureExternalClassWithParameter",
                 ),
                 arguments(
                     "object-with-parametrized-and-generic-external-parent-class",
                     KoExternalDeclaration::class,
                     KoInterfaceDeclaration::class,
-                    SampleExternalGenericClassWithParameter::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalGenericClassWithParameter",
+                    FixtureExternalGenericClassWithParameter::class,
+                    "com.lemonappdev.konsist.externalfixture.FixtureExternalGenericClassWithParameter",
                 ),
                 arguments(
                     "object-with-external-parent-interface",
                     KoExternalDeclaration::class,
                     KoClassDeclaration::class,
-                    SampleExternalInterface::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalInterface",
+                    FixtureExternalInterface::class,
+                    "com.lemonappdev.konsist.externalfixture.FixtureExternalInterface",
                 ),
                 arguments(
                     "object-with-generic-external-parent-interface",
                     KoExternalDeclaration::class,
                     KoClassDeclaration::class,
-                    SampleExternalGenericInterface::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalGenericInterface",
+                    FixtureExternalGenericInterface::class,
+                    "com.lemonappdev.konsist.externalfixture.FixtureExternalGenericInterface",
                 ),
                 arguments(
                     "object-with-typealias-parent",
                     KoTypeAliasDeclaration::class,
                     KoImportAliasDeclaration::class,
                     null,
-                    "SampleTypeAlias",
+                    "FixtureTypeAlias",
                 ),
                 arguments(
                     "object-with-import-alias-parent",
@@ -586,42 +586,42 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
                     null,
-                    "com.samplepackage.SampleInterface.SampleName",
+                    "com.fixturepackage.FixtureInterface.FixtureName",
                 ),
                 arguments(
                     "object-with-parent-class-with-the-same-name",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
                     null,
-                    "com.samplepackage.SampleInterface.SampleName",
+                    "com.fixturepackage.FixtureInterface.FixtureName",
                 ),
                 arguments(
                     "object-with-parent-interface-with-two-part-name-from-the-same-file",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
                     null,
-                    "com.samplepackage.SampleInterface.SampleNestedInterface",
+                    "com.fixturepackage.FixtureInterface.FixtureNestedInterface",
                 ),
                 arguments(
                     "object-with-parent-class-with-two-part-name-from-the-same-file",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
                     null,
-                    "com.samplepackage.SampleInterface.SampleNestedClass",
+                    "com.fixturepackage.FixtureInterface.FixtureNestedClass",
                 ),
                 arguments(
                     "object-with-parent-interface-with-two-part-name-from-import",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
                     null,
-                    "com.lemonappdev.konsist.testdata.SampleParentInterfaceWithNestedDeclarations.SampleNestedInterface",
+                    "com.lemonappdev.konsist.testdata.FixtureParentInterfaceWithNestedDeclarations.FixtureNestedInterface",
                 ),
                 arguments(
                     "object-with-parent-class-with-two-part-name-from-import",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
                     null,
-                    "com.lemonappdev.konsist.testdata.SampleParentInterfaceWithNestedDeclarations.SampleNestedClass",
+                    "com.lemonappdev.konsist.testdata.FixtureParentInterfaceWithNestedDeclarations.FixtureNestedClass",
                 ),
                 arguments(
                     "object-with-kotlin-parent-class",

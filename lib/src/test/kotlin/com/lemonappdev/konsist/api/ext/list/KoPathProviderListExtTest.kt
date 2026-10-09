@@ -66,7 +66,7 @@ class KoPathProviderListExtTest {
     @Test
     fun `withPath() returns declaration with given path`() {
         // given
-        val path = "com/sample/samplepath.."
+        val path = "com/fixture/fixturepath.."
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(path) } returns true
@@ -87,7 +87,7 @@ class KoPathProviderListExtTest {
     @Test
     fun `withoutPath() returns declaration without given path`() {
         // given
-        val path = "com/sample/samplepath.."
+        val path = "com/fixture/fixturepath.."
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(path) } returns true
@@ -108,8 +108,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withPath() with absolute path 'true' returns declarations with one of given paths`() {
         // given
-        val path1 = "com/sample/samplepath1.."
-        val path2 = "..samplepath2"
+        val path1 = "com/fixture/fixturepath1.."
+        val path2 = "..fixturepath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(path1, true) } returns true
@@ -137,8 +137,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withPath(List) with absolute path 'true' returns declarations with one of given paths`() {
         // given
-        val path1 = "com/sample/samplepath1.."
-        val path2 = "..samplepath2"
+        val path1 = "com/fixture/fixturepath1.."
+        val path2 = "..fixturepath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(path1, true) } returns true
@@ -167,8 +167,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withPath(Set) with absolute path 'true' returns declarations with one of given paths`() {
         // given
-        val path1 = "com/sample/samplepath1.."
-        val path2 = "..samplepath2"
+        val path1 = "com/fixture/fixturepath1.."
+        val path2 = "..fixturepath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(path1, true) } returns true
@@ -197,8 +197,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withoutPath() with absolute path 'true' returns declaration without any of given path`() {
         // given
-        val path1 = "com/sample/samplepath1.."
-        val path2 = "..samplepath2"
+        val path1 = "com/fixture/fixturepath1.."
+        val path2 = "..fixturepath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(path1, true) } returns true
@@ -226,8 +226,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withoutPath(List) with absolute path 'true' returns declaration without any of given path`() {
         // given
-        val path1 = "com/sample/samplepath1.."
-        val path2 = "..samplepath2"
+        val path1 = "com/fixture/fixturepath1.."
+        val path2 = "..fixturepath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(path1, true) } returns true
@@ -256,8 +256,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withoutPath(Set) with absolute path 'true' returns declaration without any of given path`() {
         // given
-        val path1 = "com/sample/samplepath1.."
-        val path2 = "..samplepath2"
+        val path1 = "com/fixture/fixturepath1.."
+        val path2 = "..fixturepath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(path1, true) } returns true
@@ -286,8 +286,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withPath(String) with absolute path 'false' returns declarations with one of given project paths`() {
         // given
-        val projectPath1 = "com/sample/sampleProjectPath1.."
-        val projectPath2 = "..sampleProjectPath2"
+        val projectPath1 = "com/fixture/fixtureProjectPath1.."
+        val projectPath2 = "..fixtureProjectPath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(projectPath1, false) } returns true
@@ -315,8 +315,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withPath(list of String) with absolute path 'false' returns declarations with one of given project paths`() {
         // given
-        val projectPath1 = "com/sample/sampleProjectPath1.."
-        val projectPath2 = "..sampleProjectPath2"
+        val projectPath1 = "com/fixture/fixtureProjectPath1.."
+        val projectPath2 = "..fixtureProjectPath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(projectPath1, false) } returns true
@@ -345,8 +345,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withPath(set of String) with absolute path 'false' returns declarations with one of given project paths`() {
         // given
-        val projectPath1 = "com/sample/sampleProjectPath1.."
-        val projectPath2 = "..sampleProjectPath2"
+        val projectPath1 = "com/fixture/fixtureProjectPath1.."
+        val projectPath2 = "..fixtureProjectPath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(projectPath1, false) } returns true
@@ -375,8 +375,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withoutPath(String) with absolute path 'false' returns declaration without any of given project paths`() {
         // given
-        val projectPath1 = "com/sample/sampleProjectPath1.."
-        val projectPath2 = "..sampleProjectPath2"
+        val projectPath1 = "com/fixture/fixtureProjectPath1.."
+        val projectPath2 = "..fixtureProjectPath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(projectPath1, false) } returns true
@@ -404,8 +404,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withoutPath(list of String) with absolute path 'false' returns declaration without any of given project paths`() {
         // given
-        val projectPath1 = "com/sample/sampleProjectPath1.."
-        val projectPath2 = "..sampleProjectPath2"
+        val projectPath1 = "com/fixture/fixtureProjectPath1.."
+        val projectPath2 = "..fixtureProjectPath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(projectPath1, false) } returns true
@@ -434,8 +434,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withoutPath(set of String) with absolute path 'false' returns declaration without any of given project paths`() {
         // given
-        val projectPath1 = "com/sample/sampleProjectPath1.."
-        val projectPath2 = "..sampleProjectPath2"
+        val projectPath1 = "com/fixture/fixtureProjectPath1.."
+        val projectPath2 = "..fixtureProjectPath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(projectPath1, false) } returns true
@@ -464,7 +464,7 @@ class KoPathProviderListExtTest {
     @Test
     fun `withAbsolutePath(String) returns declaration with given path`() {
         // given
-        val path = "com/sample/samplepath.."
+        val path = "com/fixture/fixturepath.."
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(path, true) } returns true
@@ -485,7 +485,7 @@ class KoPathProviderListExtTest {
     @Test
     fun `withoutAbsolutePath(String) returns declaration without given path`() {
         // given
-        val path = "com/sample/samplepath.."
+        val path = "com/fixture/fixturepath.."
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(path, true) } returns true
@@ -506,8 +506,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withAbsolutePath(String) returns declarations with one of given paths`() {
         // given
-        val path1 = "com/sample/samplepath1.."
-        val path2 = "..samplepath2"
+        val path1 = "com/fixture/fixturepath1.."
+        val path2 = "..fixturepath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(path1, true) } returns true
@@ -535,8 +535,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withAbsolutePath(list of String) returns declarations with one of given paths`() {
         // given
-        val path1 = "com/sample/samplepath1.."
-        val path2 = "..samplepath2"
+        val path1 = "com/fixture/fixturepath1.."
+        val path2 = "..fixturepath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(path1, true) } returns true
@@ -565,8 +565,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withAbsolutePath(set of String) returns declarations with one of given paths`() {
         // given
-        val path1 = "com/sample/samplepath1.."
-        val path2 = "..samplepath2"
+        val path1 = "com/fixture/fixturepath1.."
+        val path2 = "..fixturepath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(path1, true) } returns true
@@ -595,8 +595,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withoutAbsolutePath(String) returns declaration without any of given path`() {
         // given
-        val path1 = "com/sample/samplepath1.."
-        val path2 = "..samplepath2"
+        val path1 = "com/fixture/fixturepath1.."
+        val path2 = "..fixturepath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(path1, true) } returns true
@@ -624,8 +624,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withoutAbsolutePath(list of String) returns declaration without any of given path`() {
         // given
-        val path1 = "com/sample/samplepath1.."
-        val path2 = "..samplepath2"
+        val path1 = "com/fixture/fixturepath1.."
+        val path2 = "..fixturepath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(path1, true) } returns true
@@ -654,8 +654,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withoutAbsolutePath(set of String) returns declaration without any of given path`() {
         // given
-        val path1 = "com/sample/samplepath1.."
-        val path2 = "..samplepath2"
+        val path1 = "com/fixture/fixturepath1.."
+        val path2 = "..fixturepath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(path1, true) } returns true
@@ -684,7 +684,7 @@ class KoPathProviderListExtTest {
     @Test
     fun `withProjectPath(String) returns declaration with given project path`() {
         // given
-        val projectPath = "com/sample/sampleProjectPath.."
+        val projectPath = "com/fixture/fixtureProjectPath.."
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(projectPath, false) } returns true
@@ -705,7 +705,7 @@ class KoPathProviderListExtTest {
     @Test
     fun `withoutProjectPath(String) returns declaration without given project path`() {
         // given
-        val projectPath = "com/sample/sampleProjectPath.."
+        val projectPath = "com/fixture/fixtureProjectPath.."
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(projectPath, false) } returns true
@@ -726,8 +726,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withProjectPath(String) returns declarations with one of given project paths`() {
         // given
-        val projectPath1 = "com/sample/sampleProjectPath1.."
-        val projectPath2 = "..sampleProjectPath2"
+        val projectPath1 = "com/fixture/fixtureProjectPath1.."
+        val projectPath2 = "..fixtureProjectPath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(projectPath1, false) } returns true
@@ -755,8 +755,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withProjectPath(list of String) returns declarations with one of given project paths`() {
         // given
-        val projectPath1 = "com/sample/sampleProjectPath1.."
-        val projectPath2 = "..sampleProjectPath2"
+        val projectPath1 = "com/fixture/fixtureProjectPath1.."
+        val projectPath2 = "..fixtureProjectPath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(projectPath1, false) } returns true
@@ -785,8 +785,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withProjectPath(set of String) returns declarations with one of given project paths`() {
         // given
-        val projectPath1 = "com/sample/sampleProjectPath1.."
-        val projectPath2 = "..sampleProjectPath2"
+        val projectPath1 = "com/fixture/fixtureProjectPath1.."
+        val projectPath2 = "..fixtureProjectPath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(projectPath1, false) } returns true
@@ -815,8 +815,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withoutProjectPath(String) returns declaration without any of given project paths`() {
         // given
-        val projectPath1 = "com/sample/sampleProjectPath1.."
-        val projectPath2 = "..sampleProjectPath2"
+        val projectPath1 = "com/fixture/fixtureProjectPath1.."
+        val projectPath2 = "..fixtureProjectPath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(projectPath1, false) } returns true
@@ -844,8 +844,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withoutProjectPath(list of String) returns declaration without any of given project paths`() {
         // given
-        val projectPath1 = "com/sample/sampleProjectPath1.."
-        val projectPath2 = "..sampleProjectPath2"
+        val projectPath1 = "com/fixture/fixtureProjectPath1.."
+        val projectPath2 = "..fixtureProjectPath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(projectPath1, false) } returns true
@@ -874,8 +874,8 @@ class KoPathProviderListExtTest {
     @Test
     fun `withoutProjectPath(set of String) returns declaration without any of given project paths`() {
         // given
-        val projectPath1 = "com/sample/sampleProjectPath1.."
-        val projectPath2 = "..sampleProjectPath2"
+        val projectPath1 = "com/fixture/fixtureProjectPath1.."
+        val projectPath2 = "..fixtureProjectPath2"
         val declaration1: KoPathProvider =
             mockk {
                 every { resideInPath(projectPath1, false) } returns true

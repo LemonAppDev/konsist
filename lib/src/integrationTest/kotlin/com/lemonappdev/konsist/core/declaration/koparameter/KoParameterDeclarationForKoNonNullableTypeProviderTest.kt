@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koparameter
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.testdata.SampleType
+import com.lemonappdev.konsist.testdata.FixtureType
 import net.bytebuddy.matcher.ElementMatchers.hasType
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -21,10 +21,10 @@ class KoParameterDeclarationForKoNonNullableTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.type?.name shouldBeEqualTo "SampleType"
-            it?.hasType { type -> type.name == "SampleType" } shouldBeEqualTo true
+            it?.type?.name shouldBeEqualTo "FixtureType"
+            it?.hasType { type -> type.name == "FixtureType" } shouldBeEqualTo true
             it?.hasType { type -> type.name == "Int" } shouldBeEqualTo false
-            it?.hasTypeOf(SampleType::class) shouldBeEqualTo true
+            it?.hasTypeOf(FixtureType::class) shouldBeEqualTo true
             it?.hasTypeOf(Int::class) shouldBeEqualTo false
         }
     }
@@ -41,10 +41,10 @@ class KoParameterDeclarationForKoNonNullableTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            type.name shouldBeEqualTo "SampleType"
-            hasType { type -> type.name == "SampleType" } shouldBeEqualTo true
+            type.name shouldBeEqualTo "FixtureType"
+            hasType { type -> type.name == "FixtureType" } shouldBeEqualTo true
             hasType { type -> type.name == "Int" } shouldBeEqualTo false
-            hasTypeOf(SampleType::class) shouldBeEqualTo true
+            hasTypeOf(FixtureType::class) shouldBeEqualTo true
             hasTypeOf(Int::class) shouldBeEqualTo false
         }
     }
@@ -62,10 +62,10 @@ class KoParameterDeclarationForKoNonNullableTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.type?.name shouldBeEqualTo "SampleType"
-            it?.hasType { type -> type.name == "SampleType" } shouldBeEqualTo true
+            it?.type?.name shouldBeEqualTo "FixtureType"
+            it?.hasType { type -> type.name == "FixtureType" } shouldBeEqualTo true
             it?.hasType { type -> type.name == "Int" } shouldBeEqualTo false
-            it?.hasTypeOf(SampleType::class) shouldBeEqualTo true
+            it?.hasTypeOf(FixtureType::class) shouldBeEqualTo true
             it?.hasTypeOf(Int::class) shouldBeEqualTo false
         }
     }
@@ -82,10 +82,10 @@ class KoParameterDeclarationForKoNonNullableTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            type.name shouldBeEqualTo "SampleType"
-            hasType { type -> type.name == "SampleType" } shouldBeEqualTo true
+            type.name shouldBeEqualTo "FixtureType"
+            hasType { type -> type.name == "FixtureType" } shouldBeEqualTo true
             hasType { type -> type.name == "Int" } shouldBeEqualTo false
-            hasTypeOf(SampleType::class) shouldBeEqualTo true
+            hasTypeOf(FixtureType::class) shouldBeEqualTo true
             hasTypeOf(Int::class) shouldBeEqualTo false
         }
     }
@@ -106,7 +106,7 @@ class KoParameterDeclarationForKoNonNullableTypeProviderTest {
             it?.type?.name shouldBeEqualTo "ImportAlias"
             it?.hasType { type -> type.name == "ImportAlias" } shouldBeEqualTo true
             it?.hasType { type -> type.name == "Int" } shouldBeEqualTo false
-            it?.hasTypeOf(SampleType::class) shouldBeEqualTo false
+            it?.hasTypeOf(FixtureType::class) shouldBeEqualTo false
             it?.hasTypeOf(Int::class) shouldBeEqualTo false
         }
     }
@@ -126,7 +126,7 @@ class KoParameterDeclarationForKoNonNullableTypeProviderTest {
             type.name shouldBeEqualTo "ImportAlias"
             hasType { type -> type.name == "ImportAlias" } shouldBeEqualTo true
             hasType { type -> type.name == "Int" } shouldBeEqualTo false
-            hasTypeOf(SampleType::class) shouldBeEqualTo false
+            hasTypeOf(FixtureType::class) shouldBeEqualTo false
             hasTypeOf(Int::class) shouldBeEqualTo false
         }
     }
@@ -147,7 +147,7 @@ class KoParameterDeclarationForKoNonNullableTypeProviderTest {
             it?.type?.name shouldBeEqualTo "ImportAlias"
             it?.hasType { type -> type.name == "ImportAlias" } shouldBeEqualTo true
             it?.hasType { type -> type.name == "Int" } shouldBeEqualTo false
-            it?.hasTypeOf(SampleType::class) shouldBeEqualTo false
+            it?.hasTypeOf(FixtureType::class) shouldBeEqualTo false
             it?.hasTypeOf(Int::class) shouldBeEqualTo false
         }
     }
@@ -167,7 +167,7 @@ class KoParameterDeclarationForKoNonNullableTypeProviderTest {
             type.name shouldBeEqualTo "ImportAlias"
             hasType { type -> type.name == "ImportAlias" } shouldBeEqualTo true
             hasType { type -> type.name == "Int" } shouldBeEqualTo false
-            hasTypeOf(SampleType::class) shouldBeEqualTo false
+            hasTypeOf(FixtureType::class) shouldBeEqualTo false
             hasTypeOf(Int::class) shouldBeEqualTo false
         }
     }

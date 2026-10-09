@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleType
+import com.lemonappdev.konsist.testdata.FixtureType
 
-fun String.sampleFunction(): SampleType {
-    return SampleType()
+fun String.fixtureFunction(): FixtureType {
+    return FixtureType()
 }

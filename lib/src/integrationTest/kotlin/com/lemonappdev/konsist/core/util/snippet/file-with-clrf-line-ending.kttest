@@ -1,4 +1,4 @@
-package com.sample.mapper
+package com.fixture.mapper
 
-class SampleClass {
+class FixtureClass {
 }

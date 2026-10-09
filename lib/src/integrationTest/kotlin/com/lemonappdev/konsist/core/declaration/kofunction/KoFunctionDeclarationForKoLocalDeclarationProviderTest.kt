@@ -19,10 +19,10 @@ class KoFunctionDeclarationForKoLocalDeclarationProviderTest {
         assertSoftly(sut) {
             localDeclarations shouldBeEqualTo emptyList()
             numLocalDeclarations shouldBeEqualTo 0
-            countLocalDeclarations { (it as KoNameProvider).name == "sampleLocalProperty" } shouldBeEqualTo 0
+            countLocalDeclarations { (it as KoNameProvider).name == "fixtureLocalProperty" } shouldBeEqualTo 0
             hasLocalDeclarations() shouldBeEqualTo false
-            hasLocalDeclaration { (it as KoNameProvider).name == "SampleLocalDeclaration" } shouldBeEqualTo false
-            hasAllLocalDeclarations { (it as KoNameProvider).name == "SampleLocalDeclaration" } shouldBeEqualTo true
+            hasLocalDeclaration { (it as KoNameProvider).name == "FixtureLocalDeclaration" } shouldBeEqualTo false
+            hasAllLocalDeclarations { (it as KoNameProvider).name == "FixtureLocalDeclaration" } shouldBeEqualTo true
         }
     }
 
@@ -37,20 +37,20 @@ class KoFunctionDeclarationForKoLocalDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             numLocalDeclarations shouldBeEqualTo 3
-            countLocalDeclarations { (it as KoNameProvider).hasNameStartingWith("sampleLocal") } shouldBeEqualTo 2
+            countLocalDeclarations { (it as KoNameProvider).hasNameStartingWith("fixtureLocal") } shouldBeEqualTo 2
             hasLocalDeclarations() shouldBeEqualTo true
-            hasLocalDeclaration { (it as KoNameProvider).name == "sampleLocalProperty" } shouldBeEqualTo true
+            hasLocalDeclaration { (it as KoNameProvider).name == "fixtureLocalProperty" } shouldBeEqualTo true
             hasLocalDeclaration { (it as KoNameProvider).name == "otherLocalProperty" } shouldBeEqualTo false
             hasAllLocalDeclarations { (it as KoNameProvider).hasNameContaining("Local") } shouldBeEqualTo true
-            hasAllLocalDeclarations { (it as KoNameProvider).hasNameStartingWith("sample") } shouldBeEqualTo false
+            hasAllLocalDeclarations { (it as KoNameProvider).hasNameStartingWith("fixture") } shouldBeEqualTo false
             localDeclarations
                 .filterIsInstance<KoNameProvider>()
                 .map { it.name }
                 .shouldBeEqualTo(
                     listOf(
-                        "sampleLocalProperty",
-                        "sampleLocalFunction",
-                        "SampleLocalClass",
+                        "fixtureLocalProperty",
+                        "fixtureLocalFunction",
+                        "FixtureLocalClass",
                     ),
                 )
         }

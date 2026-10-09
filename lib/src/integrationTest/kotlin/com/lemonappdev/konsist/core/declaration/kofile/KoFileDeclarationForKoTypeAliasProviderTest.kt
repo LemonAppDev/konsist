@@ -24,12 +24,12 @@ class KoFileDeclarationForKoTypeAliasProviderTest {
             hasTypeAliasWithName(emptySet()) shouldBeEqualTo false
             hasTypeAliasesWithAllNames(emptyList()) shouldBeEqualTo false
             hasTypeAliasesWithAllNames(emptySet()) shouldBeEqualTo false
-            hasTypeAliasWithName("SampleTypeAlias") shouldBeEqualTo false
-            hasTypeAliasWithName(listOf("SampleTypeAlias")) shouldBeEqualTo false
-            hasTypeAliasWithName(setOf("SampleTypeAlias")) shouldBeEqualTo false
-            hasTypeAliasesWithAllNames("SampleTypeAlias1", "SampleTypeAlias2") shouldBeEqualTo false
-            hasTypeAliasesWithAllNames(listOf("SampleTypeAlias1", "SampleTypeAlias2")) shouldBeEqualTo false
-            hasTypeAliasesWithAllNames(setOf("SampleTypeAlias1", "SampleTypeAlias2")) shouldBeEqualTo false
+            hasTypeAliasWithName("FixtureTypeAlias") shouldBeEqualTo false
+            hasTypeAliasWithName(listOf("FixtureTypeAlias")) shouldBeEqualTo false
+            hasTypeAliasWithName(setOf("FixtureTypeAlias")) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames("FixtureTypeAlias1", "FixtureTypeAlias2") shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(listOf("FixtureTypeAlias1", "FixtureTypeAlias2")) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(setOf("FixtureTypeAlias1", "FixtureTypeAlias2")) shouldBeEqualTo false
             hasTypeAlias { it.hasPublicModifier } shouldBeEqualTo false
             hasAllTypeAliases { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
         }
@@ -53,21 +53,21 @@ class KoFileDeclarationForKoTypeAliasProviderTest {
             hasTypeAliasWithName(emptySet()) shouldBeEqualTo true
             hasTypeAliasesWithAllNames(emptyList()) shouldBeEqualTo true
             hasTypeAliasesWithAllNames(emptySet()) shouldBeEqualTo true
-            hasTypeAliasWithName("SampleTypeAlias") shouldBeEqualTo true
+            hasTypeAliasWithName("FixtureTypeAlias") shouldBeEqualTo true
             hasTypeAliasWithName("otherTypeAlias") shouldBeEqualTo false
-            hasTypeAliasWithName("SampleTypeAlias", "otherTypeAlias") shouldBeEqualTo true
-            hasTypeAliasWithName(listOf("SampleTypeAlias")) shouldBeEqualTo true
+            hasTypeAliasWithName("FixtureTypeAlias", "otherTypeAlias") shouldBeEqualTo true
+            hasTypeAliasWithName(listOf("FixtureTypeAlias")) shouldBeEqualTo true
             hasTypeAliasWithName(listOf("otherTypeAlias")) shouldBeEqualTo false
-            hasTypeAliasWithName(listOf("SampleTypeAlias", "otherTypeAlias")) shouldBeEqualTo true
-            hasTypeAliasWithName(setOf("SampleTypeAlias")) shouldBeEqualTo true
+            hasTypeAliasWithName(listOf("FixtureTypeAlias", "otherTypeAlias")) shouldBeEqualTo true
+            hasTypeAliasWithName(setOf("FixtureTypeAlias")) shouldBeEqualTo true
             hasTypeAliasWithName(setOf("otherTypeAlias")) shouldBeEqualTo false
-            hasTypeAliasWithName(setOf("SampleTypeAlias", "otherTypeAlias")) shouldBeEqualTo true
-            hasTypeAliasesWithAllNames("SampleTypeAlias") shouldBeEqualTo true
-            hasTypeAliasesWithAllNames("SampleTypeAlias", "otherTypeAlias") shouldBeEqualTo false
-            hasTypeAliasesWithAllNames(listOf("SampleTypeAlias")) shouldBeEqualTo true
-            hasTypeAliasesWithAllNames(listOf("SampleTypeAlias", "otherTypeAlias")) shouldBeEqualTo false
-            hasTypeAliasesWithAllNames(setOf("SampleTypeAlias")) shouldBeEqualTo true
-            hasTypeAliasesWithAllNames(setOf("SampleTypeAlias", "otherTypeAlias")) shouldBeEqualTo false
+            hasTypeAliasWithName(setOf("FixtureTypeAlias", "otherTypeAlias")) shouldBeEqualTo true
+            hasTypeAliasesWithAllNames("FixtureTypeAlias") shouldBeEqualTo true
+            hasTypeAliasesWithAllNames("FixtureTypeAlias", "otherTypeAlias") shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(listOf("FixtureTypeAlias")) shouldBeEqualTo true
+            hasTypeAliasesWithAllNames(listOf("FixtureTypeAlias", "otherTypeAlias")) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(setOf("FixtureTypeAlias")) shouldBeEqualTo true
+            hasTypeAliasesWithAllNames(setOf("FixtureTypeAlias", "otherTypeAlias")) shouldBeEqualTo false
             hasTypeAlias { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
             hasTypeAlias { it.hasPublicModifier } shouldBeEqualTo false
             hasAllTypeAliases { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
@@ -85,31 +85,31 @@ class KoFileDeclarationForKoTypeAliasProviderTest {
         // then
         assertSoftly(sut) {
             numTypeAliases shouldBeEqualTo 2
-            countTypeAliases { it.hasNameStartingWith("Sample") } shouldBeEqualTo 2
-            countTypeAliases { it.name == "SampleTypeAlias1" } shouldBeEqualTo 1
+            countTypeAliases { it.hasNameStartingWith("Fixture") } shouldBeEqualTo 2
+            countTypeAliases { it.name == "FixtureTypeAlias1" } shouldBeEqualTo 1
             hasTypeAliases() shouldBeEqualTo true
             hasTypeAliasWithName(emptyList()) shouldBeEqualTo true
             hasTypeAliasWithName(emptySet()) shouldBeEqualTo true
             hasTypeAliasesWithAllNames(emptyList()) shouldBeEqualTo true
             hasTypeAliasesWithAllNames(emptySet()) shouldBeEqualTo true
-            hasTypeAliasWithName("SampleTypeAlias1") shouldBeEqualTo true
+            hasTypeAliasWithName("FixtureTypeAlias1") shouldBeEqualTo true
             hasTypeAliasWithName("otherTypeAlias") shouldBeEqualTo false
-            hasTypeAliasWithName("SampleTypeAlias1", "otherName") shouldBeEqualTo true
-            hasTypeAliasWithName(listOf("SampleTypeAlias1")) shouldBeEqualTo true
+            hasTypeAliasWithName("FixtureTypeAlias1", "otherName") shouldBeEqualTo true
+            hasTypeAliasWithName(listOf("FixtureTypeAlias1")) shouldBeEqualTo true
             hasTypeAliasWithName(listOf("otherTypeAlias")) shouldBeEqualTo false
-            hasTypeAliasWithName(listOf("SampleTypeAlias1", "otherName")) shouldBeEqualTo true
-            hasTypeAliasWithName(setOf("SampleTypeAlias1")) shouldBeEqualTo true
+            hasTypeAliasWithName(listOf("FixtureTypeAlias1", "otherName")) shouldBeEqualTo true
+            hasTypeAliasWithName(setOf("FixtureTypeAlias1")) shouldBeEqualTo true
             hasTypeAliasWithName(setOf("otherTypeAlias")) shouldBeEqualTo false
-            hasTypeAliasWithName(setOf("SampleTypeAlias1", "otherName")) shouldBeEqualTo true
-            hasTypeAliasesWithAllNames("SampleTypeAlias1") shouldBeEqualTo true
-            hasTypeAliasesWithAllNames("SampleTypeAlias1", "SampleTypeAlias2") shouldBeEqualTo true
-            hasTypeAliasesWithAllNames("SampleTypeAlias1", "otherTypeAlias") shouldBeEqualTo false
-            hasTypeAliasesWithAllNames(listOf("SampleTypeAlias1")) shouldBeEqualTo true
-            hasTypeAliasesWithAllNames(listOf("SampleTypeAlias1", "SampleTypeAlias2")) shouldBeEqualTo true
-            hasTypeAliasesWithAllNames(listOf("SampleTypeAlias1", "otherTypeAlias")) shouldBeEqualTo false
-            hasTypeAliasesWithAllNames(setOf("SampleTypeAlias1")) shouldBeEqualTo true
-            hasTypeAliasesWithAllNames(setOf("SampleTypeAlias1", "SampleTypeAlias2")) shouldBeEqualTo true
-            hasTypeAliasesWithAllNames(setOf("SampleTypeAlias1", "otherTypeAlias")) shouldBeEqualTo false
+            hasTypeAliasWithName(setOf("FixtureTypeAlias1", "otherName")) shouldBeEqualTo true
+            hasTypeAliasesWithAllNames("FixtureTypeAlias1") shouldBeEqualTo true
+            hasTypeAliasesWithAllNames("FixtureTypeAlias1", "FixtureTypeAlias2") shouldBeEqualTo true
+            hasTypeAliasesWithAllNames("FixtureTypeAlias1", "otherTypeAlias") shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(listOf("FixtureTypeAlias1")) shouldBeEqualTo true
+            hasTypeAliasesWithAllNames(listOf("FixtureTypeAlias1", "FixtureTypeAlias2")) shouldBeEqualTo true
+            hasTypeAliasesWithAllNames(listOf("FixtureTypeAlias1", "otherTypeAlias")) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(setOf("FixtureTypeAlias1")) shouldBeEqualTo true
+            hasTypeAliasesWithAllNames(setOf("FixtureTypeAlias1", "FixtureTypeAlias2")) shouldBeEqualTo true
+            hasTypeAliasesWithAllNames(setOf("FixtureTypeAlias1", "otherTypeAlias")) shouldBeEqualTo false
             hasTypeAlias { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
             hasTypeAlias { it.hasPublicModifier } shouldBeEqualTo true
             hasAllTypeAliases { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
@@ -127,18 +127,18 @@ class KoFileDeclarationForKoTypeAliasProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasTypeAliasWithName("sampletypealias") shouldBeEqualTo false
-            hasTypeAliasWithName("sampletypealias", ignoreCase = true) shouldBeEqualTo false
-            hasTypeAliasWithName(listOf("sampletypealias")) shouldBeEqualTo false
-            hasTypeAliasWithName(listOf("sampletypealias"), ignoreCase = true) shouldBeEqualTo false
-            hasTypeAliasWithName(setOf("sampletypealias")) shouldBeEqualTo false
-            hasTypeAliasWithName(setOf("sampletypealias"), ignoreCase = true) shouldBeEqualTo false
-            hasTypeAliasesWithAllNames("sampletypealias1", "sampletypealias2") shouldBeEqualTo false
-            hasTypeAliasesWithAllNames("sampletypealias1", "sampletypealias2", ignoreCase = true) shouldBeEqualTo false
-            hasTypeAliasesWithAllNames(listOf("sampletypealias1", "sampletypealias2")) shouldBeEqualTo false
-            hasTypeAliasesWithAllNames(listOf("sampletypealias1", "sampletypealias2"), ignoreCase = true) shouldBeEqualTo false
-            hasTypeAliasesWithAllNames(setOf("sampletypealias1", "sampletypealias2")) shouldBeEqualTo false
-            hasTypeAliasesWithAllNames(setOf("sampletypealias1", "sampletypealias2"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeAliasWithName("fixturetypealias") shouldBeEqualTo false
+            hasTypeAliasWithName("fixturetypealias", ignoreCase = true) shouldBeEqualTo false
+            hasTypeAliasWithName(listOf("fixturetypealias")) shouldBeEqualTo false
+            hasTypeAliasWithName(listOf("fixturetypealias"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeAliasWithName(setOf("fixturetypealias")) shouldBeEqualTo false
+            hasTypeAliasWithName(setOf("fixturetypealias"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames("fixturetypealias1", "fixturetypealias2") shouldBeEqualTo false
+            hasTypeAliasesWithAllNames("fixturetypealias1", "fixturetypealias2", ignoreCase = true) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(listOf("fixturetypealias1", "fixturetypealias2")) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(listOf("fixturetypealias1", "fixturetypealias2"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(setOf("fixturetypealias1", "fixturetypealias2")) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(setOf("fixturetypealias1", "fixturetypealias2"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 
@@ -152,30 +152,30 @@ class KoFileDeclarationForKoTypeAliasProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasTypeAliasWithName("sampletypealias1") shouldBeEqualTo false
-            hasTypeAliasWithName("sampletypealias1", ignoreCase = true) shouldBeEqualTo true
+            hasTypeAliasWithName("fixturetypealias1") shouldBeEqualTo false
+            hasTypeAliasWithName("fixturetypealias1", ignoreCase = true) shouldBeEqualTo true
             hasTypeAliasWithName("othertypealias") shouldBeEqualTo false
             hasTypeAliasWithName("othertypealias", ignoreCase = true) shouldBeEqualTo false
-            hasTypeAliasWithName("sampletypealias1", "otherName") shouldBeEqualTo false
-            hasTypeAliasWithName("sampletypealias1", "otherName", ignoreCase = true) shouldBeEqualTo true
-            hasTypeAliasWithName(listOf("sampletypealias1")) shouldBeEqualTo false
-            hasTypeAliasWithName(listOf("sampletypealias1"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeAliasWithName("fixturetypealias1", "otherName") shouldBeEqualTo false
+            hasTypeAliasWithName("fixturetypealias1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasTypeAliasWithName(listOf("fixturetypealias1")) shouldBeEqualTo false
+            hasTypeAliasWithName(listOf("fixturetypealias1"), ignoreCase = true) shouldBeEqualTo true
             hasTypeAliasWithName(listOf("othertypealias")) shouldBeEqualTo false
             hasTypeAliasWithName(listOf("othertypealias"), ignoreCase = true) shouldBeEqualTo false
-            hasTypeAliasWithName(listOf("sampletypealias1", "otherName")) shouldBeEqualTo false
-            hasTypeAliasWithName(listOf("sampletypealias1", "otherName"), ignoreCase = true) shouldBeEqualTo true
-            hasTypeAliasesWithAllNames("sampletypealias1") shouldBeEqualTo false
-            hasTypeAliasesWithAllNames("sampletypealias1", ignoreCase = true) shouldBeEqualTo true
-            hasTypeAliasesWithAllNames("sampletypealias1", "sampletypealias2") shouldBeEqualTo false
-            hasTypeAliasesWithAllNames("sampletypealias1", "sampletypealias2", ignoreCase = true) shouldBeEqualTo true
-            hasTypeAliasesWithAllNames("sampletypealias1", "othertypealias") shouldBeEqualTo false
-            hasTypeAliasesWithAllNames("sampletypealias1", "othertypealias", ignoreCase = true) shouldBeEqualTo false
-            hasTypeAliasesWithAllNames(listOf("sampletypealias1")) shouldBeEqualTo false
-            hasTypeAliasesWithAllNames(listOf("sampletypealias1"), ignoreCase = true) shouldBeEqualTo true
-            hasTypeAliasesWithAllNames(listOf("sampletypealias1", "sampletypealias2")) shouldBeEqualTo false
-            hasTypeAliasesWithAllNames(listOf("sampletypealias1", "sampletypealias2"), ignoreCase = true) shouldBeEqualTo true
-            hasTypeAliasesWithAllNames(listOf("sampletypealias1", "othertypealias")) shouldBeEqualTo false
-            hasTypeAliasesWithAllNames(listOf("sampletypealias1", "othertypealias"), ignoreCase = true) shouldBeEqualTo false
+            hasTypeAliasWithName(listOf("fixturetypealias1", "otherName")) shouldBeEqualTo false
+            hasTypeAliasWithName(listOf("fixturetypealias1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeAliasesWithAllNames("fixturetypealias1") shouldBeEqualTo false
+            hasTypeAliasesWithAllNames("fixturetypealias1", ignoreCase = true) shouldBeEqualTo true
+            hasTypeAliasesWithAllNames("fixturetypealias1", "fixturetypealias2") shouldBeEqualTo false
+            hasTypeAliasesWithAllNames("fixturetypealias1", "fixturetypealias2", ignoreCase = true) shouldBeEqualTo true
+            hasTypeAliasesWithAllNames("fixturetypealias1", "othertypealias") shouldBeEqualTo false
+            hasTypeAliasesWithAllNames("fixturetypealias1", "othertypealias", ignoreCase = true) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(listOf("fixturetypealias1")) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(listOf("fixturetypealias1"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeAliasesWithAllNames(listOf("fixturetypealias1", "fixturetypealias2")) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(listOf("fixturetypealias1", "fixturetypealias2"), ignoreCase = true) shouldBeEqualTo true
+            hasTypeAliasesWithAllNames(listOf("fixturetypealias1", "othertypealias")) shouldBeEqualTo false
+            hasTypeAliasesWithAllNames(listOf("fixturetypealias1", "othertypealias"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 

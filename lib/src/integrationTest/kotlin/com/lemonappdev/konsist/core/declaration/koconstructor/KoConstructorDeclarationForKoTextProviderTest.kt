@@ -18,12 +18,12 @@ class KoConstructorDeclarationForKoTextProviderTest {
 
         // then
         assertSoftly(sut) {
-            text shouldBeEqualTo "(val sampleParameter: Int)"
+            text shouldBeEqualTo "(val fixtureParameter: Int)"
             hasTextStartingWith("(val ") shouldBeEqualTo true
             hasTextStartingWith("Other") shouldBeEqualTo false
             hasTextEndingWith(": Int)") shouldBeEqualTo true
             hasTextEndingWith("other") shouldBeEqualTo false
-            hasTextContaining("sampleParameter: ") shouldBeEqualTo true
+            hasTextContaining("fixtureParameter: ") shouldBeEqualTo true
             hasTextContaining("anno") shouldBeEqualTo false
             hasTextMatching(Regex("^[^@]*\$")) shouldBeEqualTo true
             hasTextMatching(Regex("[0-9]+")) shouldBeEqualTo false

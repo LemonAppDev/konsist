@@ -20,7 +20,7 @@ class KoArgumentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "SAMPLE_CONSTANT"
+        (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "FIXTURE_CONSTANT"
     }
 
     @Test
@@ -34,7 +34,7 @@ class KoArgumentDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "SampleAnnotationWithParameter"
+        (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "FixtureAnnotationWithParameter"
     }
 
     private fun getSnippetFile(fileName: String) =

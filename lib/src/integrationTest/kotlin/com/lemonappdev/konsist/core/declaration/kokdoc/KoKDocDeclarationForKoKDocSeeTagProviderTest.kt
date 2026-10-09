@@ -49,7 +49,7 @@ class KoKDocDeclarationForKoKDocSeeTagProviderTest {
             it?.numSeeTags shouldBeEqualTo 2
             it?.seeTags?.get(0)?.name shouldBeEqualTo SEE
             it?.seeTags?.get(0)?.value shouldBeEqualTo "AnotherClass1"
-            it?.seeTags?.get(0)?.description shouldBeEqualTo "sample description"
+            it?.seeTags?.get(0)?.description shouldBeEqualTo "fixture description"
             it?.seeTags?.get(1)?.name shouldBeEqualTo SEE
             it?.seeTags?.get(1)?.value shouldBeEqualTo "AnotherClass2"
             it?.seeTags?.get(1)?.description shouldBeEqualTo ""
@@ -64,8 +64,8 @@ class KoKDocDeclarationForKoKDocSeeTagProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("class-with-see-tag", "SampleClass"),
-                arguments("function-with-see-tag", "sampleMethod"),
+                arguments("class-with-see-tag", "FixtureClass"),
+                arguments("function-with-see-tag", "fixtureMethod"),
             )
     }
 }

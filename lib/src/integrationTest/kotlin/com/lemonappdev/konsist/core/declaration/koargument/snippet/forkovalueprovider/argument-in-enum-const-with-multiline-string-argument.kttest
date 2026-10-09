@@ -1,4 +1,4 @@
-enum class SampleClass(sampleArgument: String) {
-    SAMPLE_CONSTANT_1(sampleArgument = """first line
+enum class FixtureClass(fixtureArgument: String) {
+    FIXTURE_CONSTANT_1(fixtureArgument = """first line
     second line""")
 }

@@ -8,10 +8,10 @@ import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
-import com.lemonappdev.konsist.externalsample.SampleExternalClass
-import com.lemonappdev.konsist.testdata.SampleClass
-import com.lemonappdev.konsist.testdata.SampleInterface
-import com.lemonappdev.konsist.testdata.SampleObject
+import com.lemonappdev.konsist.externalfixture.FixtureExternalClass
+import com.lemonappdev.konsist.testdata.FixtureClass
+import com.lemonappdev.konsist.testdata.FixtureInterface
+import com.lemonappdev.konsist.testdata.FixtureObject
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -41,7 +41,7 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentOf(listOf(String::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class, Int::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
         }
@@ -78,15 +78,15 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames(listOf("String", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentOf(String::class, Int::class) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(SampleClass::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureClass::class, Int::class) shouldBeEqualTo false
             it?.hasTypeArgumentOf(listOf(String::class, Int::class)) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(String::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleClass::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureClass::class, Int::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
@@ -125,15 +125,15 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames(listOf("String", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentOf(String::class, Int::class) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(SampleClass::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureClass::class, Int::class) shouldBeEqualTo false
             it?.hasTypeArgumentOf(listOf(String::class, Int::class)) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(String::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleClass::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureClass::class, Int::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
@@ -157,30 +157,30 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
                 ?.firstOrNull()
                 ?.sourceDeclaration shouldBeInstanceOf KoClassDeclaration::class
 
-            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleClass"
+            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "FixtureClass"
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo 0
-            it?.hasTypeArgumentWithName("SampleClass", "Int") shouldBeEqualTo true
+            it?.hasTypeArgumentWithName("FixtureClass", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
-            it?.hasTypeArgumentWithName(listOf("SampleClass", "Int")) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName(listOf("FixtureClass", "Int")) shouldBeEqualTo true
             it?.hasTypeArgumentWithName(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames("SampleClass") shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames("SampleClass", "Int") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("FixtureClass") shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("FixtureClass", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames("OtherClass", "Int") shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames(listOf("SampleClass")) shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames(listOf("SampleClass", "Int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("FixtureClass")) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames(listOf("FixtureClass", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(SampleClass::class, Int::class) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleClass::class) shouldBeEqualTo true
-            it?.hasAllTypeArgumentsOf(SampleClass::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class)) shouldBeEqualTo true
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureClass::class, Int::class) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureClass::class) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(FixtureClass::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class)) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo true
@@ -204,30 +204,30 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
                 ?.firstOrNull()
                 ?.sourceDeclaration shouldBeInstanceOf KoClassDeclaration::class
 
-            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleClass"
+            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "FixtureClass"
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo 0
-            it?.hasTypeArgumentWithName("SampleClass", "Int") shouldBeEqualTo true
+            it?.hasTypeArgumentWithName("FixtureClass", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
-            it?.hasTypeArgumentWithName(listOf("SampleClass", "Int")) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName(listOf("FixtureClass", "Int")) shouldBeEqualTo true
             it?.hasTypeArgumentWithName(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames("SampleClass") shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames("SampleClass", "Int") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("FixtureClass") shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("FixtureClass", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames("OtherClass", "Int") shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames(listOf("SampleClass")) shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames(listOf("SampleClass", "Int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("FixtureClass")) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames(listOf("FixtureClass", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(SampleClass::class, Int::class) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleClass::class) shouldBeEqualTo true
-            it?.hasAllTypeArgumentsOf(SampleClass::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class)) shouldBeEqualTo true
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureClass::class, Int::class) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureClass::class) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(FixtureClass::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class)) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo true
@@ -251,30 +251,30 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
                 ?.firstOrNull()
                 ?.sourceDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
 
-            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleInterface"
+            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "FixtureInterface"
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isInterface == true } shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
-            it?.hasTypeArgumentWithName("SampleInterface", "Int") shouldBeEqualTo true
+            it?.hasTypeArgumentWithName("FixtureInterface", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
-            it?.hasTypeArgumentWithName(listOf("SampleInterface", "Int")) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName(listOf("FixtureInterface", "Int")) shouldBeEqualTo true
             it?.hasTypeArgumentWithName(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames("SampleInterface") shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames("SampleInterface", "Int") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("FixtureInterface") shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("FixtureInterface", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames("OtherClass", "Int") shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames(listOf("SampleInterface")) shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames(listOf("SampleInterface", "Int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("FixtureInterface")) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames(listOf("FixtureInterface", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(SampleInterface::class, Int::class) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(SampleClass::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleInterface::class) shouldBeEqualTo true
-            it?.hasAllTypeArgumentsOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleClass::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class)) shouldBeEqualTo true
-            it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureInterface::class, Int::class) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(FixtureClass::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureInterface::class) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureClass::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureInterface::class)) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isInterface == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isInterface == true } shouldBeEqualTo true
@@ -298,30 +298,30 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
                 ?.firstOrNull()
                 ?.sourceDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
 
-            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleInterface"
+            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "FixtureInterface"
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isInterface == true } shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
-            it?.hasTypeArgumentWithName("SampleInterface", "Int") shouldBeEqualTo true
+            it?.hasTypeArgumentWithName("FixtureInterface", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
-            it?.hasTypeArgumentWithName(listOf("SampleInterface", "Int")) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName(listOf("FixtureInterface", "Int")) shouldBeEqualTo true
             it?.hasTypeArgumentWithName(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames("SampleInterface") shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames("SampleInterface", "Int") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("FixtureInterface") shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("FixtureInterface", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames("OtherClass", "Int") shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames(listOf("SampleInterface")) shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames(listOf("SampleInterface", "Int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("FixtureInterface")) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames(listOf("FixtureInterface", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(SampleInterface::class, Int::class) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(SampleClass::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleInterface::class) shouldBeEqualTo true
-            it?.hasAllTypeArgumentsOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleClass::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class)) shouldBeEqualTo true
-            it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureInterface::class, Int::class) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(FixtureClass::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureInterface::class) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureClass::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureInterface::class)) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isInterface == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isInterface == true } shouldBeEqualTo true
@@ -345,30 +345,30 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
                 ?.firstOrNull()
                 ?.sourceDeclaration shouldBeInstanceOf KoObjectDeclaration::class
 
-            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleObject"
+            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "FixtureObject"
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isObject == true } shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
-            it?.hasTypeArgumentWithName("SampleObject", "Int") shouldBeEqualTo true
+            it?.hasTypeArgumentWithName("FixtureObject", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
-            it?.hasTypeArgumentWithName(listOf("SampleObject", "Int")) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName(listOf("FixtureObject", "Int")) shouldBeEqualTo true
             it?.hasTypeArgumentWithName(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames("SampleObject") shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames("SampleObject", "Int") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("FixtureObject") shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("FixtureObject", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames("OtherClass", "Int") shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames(listOf("SampleObject")) shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames(listOf("SampleObject", "Int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("FixtureObject")) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames(listOf("FixtureObject", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(SampleObject::class, Int::class) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(SampleClass::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleObject::class, Int::class)) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleObject::class) shouldBeEqualTo true
-            it?.hasAllTypeArgumentsOf(SampleObject::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleClass::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleObject::class)) shouldBeEqualTo true
-            it?.hasAllTypeArgumentsOf(listOf(SampleObject::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureObject::class, Int::class) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(FixtureClass::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureObject::class, Int::class)) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureObject::class) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(FixtureObject::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureClass::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureObject::class)) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(listOf(FixtureObject::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isObject == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isObject == true } shouldBeEqualTo true
@@ -392,30 +392,30 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
                 ?.firstOrNull()
                 ?.sourceDeclaration shouldBeInstanceOf KoObjectDeclaration::class
 
-            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleObject"
+            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "FixtureObject"
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isObject == true } shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
-            it?.hasTypeArgumentWithName("SampleObject", "Int") shouldBeEqualTo true
+            it?.hasTypeArgumentWithName("FixtureObject", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
-            it?.hasTypeArgumentWithName(listOf("SampleObject", "Int")) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName(listOf("FixtureObject", "Int")) shouldBeEqualTo true
             it?.hasTypeArgumentWithName(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames("SampleObject") shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames("SampleObject", "Int") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("FixtureObject") shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("FixtureObject", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames("OtherClass", "Int") shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames(listOf("SampleObject")) shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames(listOf("SampleObject", "Int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("FixtureObject")) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames(listOf("FixtureObject", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(SampleObject::class, Int::class) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(SampleClass::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleObject::class, Int::class)) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleObject::class) shouldBeEqualTo true
-            it?.hasAllTypeArgumentsOf(SampleObject::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleClass::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleObject::class)) shouldBeEqualTo true
-            it?.hasAllTypeArgumentsOf(listOf(SampleObject::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureObject::class, Int::class) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(FixtureClass::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureObject::class, Int::class)) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureObject::class) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(FixtureObject::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureClass::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureObject::class)) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(listOf(FixtureObject::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isObject == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isObject == true } shouldBeEqualTo true
@@ -579,10 +579,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames(listOf("() -> Unit")) shouldBeEqualTo true
             it?.hasTypeArgumentsWithAllNames(listOf("() -> Unit", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
         }
@@ -617,10 +617,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames(listOf("() -> Unit")) shouldBeEqualTo true
             it?.hasTypeArgumentsWithAllNames(listOf("() -> Unit", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
         }
@@ -656,10 +656,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames(listOf("ImportAlias")) shouldBeEqualTo true
             it?.hasTypeArgumentsWithAllNames(listOf("ImportAlias", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isImportAlias == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isImportAlias == true } shouldBeEqualTo true
@@ -697,10 +697,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames(listOf("ImportAlias")) shouldBeEqualTo true
             it?.hasTypeArgumentsWithAllNames(listOf("ImportAlias", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isImportAlias == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isImportAlias == true } shouldBeEqualTo true
@@ -724,24 +724,24 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
                 ?.firstOrNull()
                 ?.sourceDeclaration shouldBeInstanceOf KoTypeAliasDeclaration::class
 
-            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleTypeAlias"
+            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "FixtureTypeAlias"
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isTypeAlias == true } shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo 0
-            it?.hasTypeArgumentWithName("SampleTypeAlias", "Int") shouldBeEqualTo true
+            it?.hasTypeArgumentWithName("FixtureTypeAlias", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
-            it?.hasTypeArgumentWithName(listOf("SampleTypeAlias", "Int")) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName(listOf("FixtureTypeAlias", "Int")) shouldBeEqualTo true
             it?.hasTypeArgumentWithName(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames("SampleTypeAlias") shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames("SampleTypeAlias", "Int") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("FixtureTypeAlias") shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("FixtureTypeAlias", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames("OtherClass", "Int") shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames(listOf("SampleTypeAlias")) shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames(listOf("SampleTypeAlias", "Int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("FixtureTypeAlias")) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames(listOf("FixtureTypeAlias", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isTypeAlias == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isTypeAlias == true } shouldBeEqualTo true
@@ -765,24 +765,24 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
                 ?.firstOrNull()
                 ?.sourceDeclaration shouldBeInstanceOf KoTypeAliasDeclaration::class
 
-            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleTypeAlias"
+            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "FixtureTypeAlias"
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isTypeAlias == true } shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo 0
-            it?.hasTypeArgumentWithName("SampleTypeAlias", "Int") shouldBeEqualTo true
+            it?.hasTypeArgumentWithName("FixtureTypeAlias", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
-            it?.hasTypeArgumentWithName(listOf("SampleTypeAlias", "Int")) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName(listOf("FixtureTypeAlias", "Int")) shouldBeEqualTo true
             it?.hasTypeArgumentWithName(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames("SampleTypeAlias") shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames("SampleTypeAlias", "Int") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("FixtureTypeAlias") shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("FixtureTypeAlias", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames("OtherClass", "Int") shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames(listOf("SampleTypeAlias")) shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames(listOf("SampleTypeAlias", "Int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("FixtureTypeAlias")) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames(listOf("FixtureTypeAlias", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isTypeAlias == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isTypeAlias == true } shouldBeEqualTo true
@@ -806,30 +806,30 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
                 ?.firstOrNull()
                 ?.sourceDeclaration shouldBeInstanceOf KoExternalDeclaration::class
 
-            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleExternalClass"
+            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "FixtureExternalClass"
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isInterface == true } shouldBeEqualTo 0
-            it?.hasTypeArgumentWithName("SampleExternalClass", "Int") shouldBeEqualTo true
+            it?.hasTypeArgumentWithName("FixtureExternalClass", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
-            it?.hasTypeArgumentWithName(listOf("SampleExternalClass", "Int")) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName(listOf("FixtureExternalClass", "Int")) shouldBeEqualTo true
             it?.hasTypeArgumentWithName(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames("SampleExternalClass") shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames("SampleExternalClass", "Int") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("FixtureExternalClass") shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("FixtureExternalClass", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames("OtherClass", "Int") shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames(listOf("SampleExternalClass")) shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames(listOf("SampleExternalClass", "Int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("FixtureExternalClass")) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames(listOf("FixtureExternalClass", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(SampleExternalClass::class, Int::class) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleExternalClass::class, Int::class)) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleExternalClass::class) shouldBeEqualTo true
-            it?.hasAllTypeArgumentsOf(SampleExternalClass::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleExternalClass::class)) shouldBeEqualTo true
-            it?.hasAllTypeArgumentsOf(listOf(SampleExternalClass::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureExternalClass::class, Int::class) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureExternalClass::class, Int::class)) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureExternalClass::class) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(FixtureExternalClass::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureExternalClass::class)) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(listOf(FixtureExternalClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isInterface == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo true
@@ -853,30 +853,30 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
                 ?.firstOrNull()
                 ?.sourceDeclaration shouldBeInstanceOf KoExternalDeclaration::class
 
-            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "SampleExternalClass"
+            it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "FixtureExternalClass"
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isInterface == true } shouldBeEqualTo 0
-            it?.hasTypeArgumentWithName("SampleExternalClass", "Int") shouldBeEqualTo true
+            it?.hasTypeArgumentWithName("FixtureExternalClass", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
-            it?.hasTypeArgumentWithName(listOf("SampleExternalClass", "Int")) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName(listOf("FixtureExternalClass", "Int")) shouldBeEqualTo true
             it?.hasTypeArgumentWithName(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames("SampleExternalClass") shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames("SampleExternalClass", "Int") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("FixtureExternalClass") shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("FixtureExternalClass", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames("OtherClass", "Int") shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames(listOf("SampleExternalClass")) shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames(listOf("SampleExternalClass", "Int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("FixtureExternalClass")) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames(listOf("FixtureExternalClass", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(SampleExternalClass::class, Int::class) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleExternalClass::class, Int::class)) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleExternalClass::class) shouldBeEqualTo true
-            it?.hasAllTypeArgumentsOf(SampleExternalClass::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleInterface::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleExternalClass::class)) shouldBeEqualTo true
-            it?.hasAllTypeArgumentsOf(listOf(SampleExternalClass::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureExternalClass::class, Int::class) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureExternalClass::class, Int::class)) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureExternalClass::class) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(FixtureExternalClass::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureInterface::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureExternalClass::class)) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(listOf(FixtureExternalClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureInterface::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isInterface == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo true
@@ -898,7 +898,7 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it
                 ?.typeArguments
                 ?.map { typeArgument -> typeArgument.name }
-                .shouldBeEqualTo(listOf("SampleClass", "List<String>"))
+                .shouldBeEqualTo(listOf("FixtureClass", "List<String>"))
             it?.numTypeArguments shouldBeEqualTo 2
         }
     }
@@ -914,18 +914,18 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasTypeArgumentWithName("sampleclass") shouldBeEqualTo false
-            it?.hasTypeArgumentWithName("sampleclass", ignoreCase = true) shouldBeEqualTo false
-            it?.hasTypeArgumentWithName(listOf("sampleclass")) shouldBeEqualTo false
-            it?.hasTypeArgumentWithName(listOf("sampleclass"), ignoreCase = true) shouldBeEqualTo false
-            it?.hasTypeArgumentWithName(setOf("sampleclass")) shouldBeEqualTo false
-            it?.hasTypeArgumentWithName(setOf("sampleclass"), ignoreCase = true) shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames("sampleclass", "list<string>") shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames("sampleclass", "list<string>", ignoreCase = true) shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames(listOf("sampleclass", "list<string>")) shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames(listOf("sampleclass", "list<string>"), ignoreCase = true) shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames(setOf("sampleclass", "list<string>")) shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames(setOf("sampleclass", "list<string>"), ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName("fixtureclass") shouldBeEqualTo false
+            it?.hasTypeArgumentWithName("fixtureclass", ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("fixtureclass")) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("fixtureclass"), ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(setOf("fixtureclass")) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(setOf("fixtureclass"), ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("fixtureclass", "list<string>") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("fixtureclass", "list<string>", ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("fixtureclass", "list<string>")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("fixtureclass", "list<string>"), ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(setOf("fixtureclass", "list<string>")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(setOf("fixtureclass", "list<string>"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 
@@ -940,30 +940,30 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasTypeArgumentWithName("sampleclass") shouldBeEqualTo false
-            it?.hasTypeArgumentWithName("sampleclass", ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName("fixtureclass") shouldBeEqualTo false
+            it?.hasTypeArgumentWithName("fixtureclass", ignoreCase = true) shouldBeEqualTo true
             it?.hasTypeArgumentWithName("int") shouldBeEqualTo false
             it?.hasTypeArgumentWithName("int", ignoreCase = true) shouldBeEqualTo false
-            it?.hasTypeArgumentWithName("sampleclass", "int") shouldBeEqualTo false
-            it?.hasTypeArgumentWithName("sampleclass", "int", ignoreCase = true) shouldBeEqualTo true
-            it?.hasTypeArgumentWithName(listOf("sampleclass")) shouldBeEqualTo false
-            it?.hasTypeArgumentWithName(listOf("sampleclass"), ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName("fixtureclass", "int") shouldBeEqualTo false
+            it?.hasTypeArgumentWithName("fixtureclass", "int", ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName(listOf("fixtureclass")) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("fixtureclass"), ignoreCase = true) shouldBeEqualTo true
             it?.hasTypeArgumentWithName(listOf("int")) shouldBeEqualTo false
             it?.hasTypeArgumentWithName(listOf("int"), ignoreCase = true) shouldBeEqualTo false
-            it?.hasTypeArgumentWithName(listOf("sampleclass", "int")) shouldBeEqualTo false
-            it?.hasTypeArgumentWithName(listOf("sampleclass", "int"), ignoreCase = true) shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames("sampleclass") shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames("sampleclass", ignoreCase = true) shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames("sampleclass", "list<string>") shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames("sampleclass", "list<string>", ignoreCase = true) shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames("sampleclass", "int") shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames("sampleclass", "int", ignoreCase = true) shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames(listOf("sampleclass")) shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames(listOf("sampleclass"), ignoreCase = true) shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames(listOf("sampleclass", "list<string>")) shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames(listOf("sampleclass", "list<string>"), ignoreCase = true) shouldBeEqualTo true
-            it?.hasTypeArgumentsWithAllNames(listOf("sampleclass", "int")) shouldBeEqualTo false
-            it?.hasTypeArgumentsWithAllNames(listOf("sampleclass", "int"), ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("fixtureclass", "int")) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("fixtureclass", "int"), ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("fixtureclass") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("fixtureclass", ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("fixtureclass", "list<string>") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("fixtureclass", "list<string>", ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("fixtureclass", "int") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("fixtureclass", "int", ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("fixtureclass")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("fixtureclass"), ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames(listOf("fixtureclass", "list<string>")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("fixtureclass", "list<string>"), ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames(listOf("fixtureclass", "int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("fixtureclass", "int"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 

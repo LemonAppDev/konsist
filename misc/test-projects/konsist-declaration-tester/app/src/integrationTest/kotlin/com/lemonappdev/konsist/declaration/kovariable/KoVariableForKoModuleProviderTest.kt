@@ -73,9 +73,9 @@ class KoVariableForKoModuleProviderTest {
     }
 
     companion object {
-        private val appPath = "$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator()
-        private val dataPath = "$dataMainSourceSetProjectDirectory/sample/LibClass.kt".toOsSeparator()
-        private val rootPath = "$rootMainSourceSetProjectDirectory/sample/RootClass.kt".toOsSeparator()
+        private val appPath = "$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator()
+        private val dataPath = "$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator()
+        private val rootPath = "$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator()
 
         @Suppress("unused")
         @JvmStatic

@@ -1,6 +1,6 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotationWithAngleBrackets
+import com.lemonappdev.konsist.testdata.FixtureAnnotationWithAngleBrackets
 
-open class SampleClass {
-    @SampleAnnotationWithAngleBrackets<Int, String>
-    protected open val sampleProperty: Boolean = true
+open class FixtureClass {
+    @FixtureAnnotationWithAngleBrackets<Int, String>
+    protected open val fixtureProperty: Boolean = true
 }

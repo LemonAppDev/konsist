@@ -1,7 +1,7 @@
-import com.lemonappdev.konsist.testdata.SampleParentClass2
+import com.lemonappdev.konsist.testdata.FixtureParentClass2
 
-object SampleObject : SampleParentClass()
+object FixtureObject : FixtureParentClass()
 
-open class SampleParentClass: SampleParentClass1()
+open class FixtureParentClass: FixtureParentClass1()
 
-open class SampleParentClass1: SampleParentClass2()
+open class FixtureParentClass1: FixtureParentClass2()

@@ -1,4 +1,4 @@
-enum class SampleClass {
-    SAMPLE_CONSTANT_1,
-    SAMPLE_CONSTANT_2
+enum class FixtureClass {
+    FIXTURE_CONSTANT_1,
+    FIXTURE_CONSTANT_2
 }

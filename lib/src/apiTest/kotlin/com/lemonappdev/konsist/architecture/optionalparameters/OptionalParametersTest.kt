@@ -44,7 +44,7 @@ class OptionalParametersTest {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+                "optionalparameters/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -71,7 +71,7 @@ class OptionalParametersTest {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+                "optionalparameters/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -99,7 +99,7 @@ class OptionalParametersTest {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+                "optionalparameters/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -129,7 +129,7 @@ class OptionalParametersTest {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+                "optionalparameters/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -159,7 +159,7 @@ class OptionalParametersTest {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+                "optionalparameters/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -188,7 +188,7 @@ class OptionalParametersTest {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+                "optionalparameters/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -218,7 +218,7 @@ class OptionalParametersTest {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+                "optionalparameters/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -250,7 +250,7 @@ class OptionalParametersTest {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+                "optionalparameters/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -282,7 +282,7 @@ class OptionalParametersTest {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+                "optionalparameters/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -317,7 +317,7 @@ class OptionalParametersTest {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+                "optionalparameters/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -350,7 +350,7 @@ class OptionalParametersTest {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+                "optionalparameters/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -385,7 +385,7 @@ class OptionalParametersTest {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+                "optionalparameters/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -419,7 +419,7 @@ class OptionalParametersTest {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+                "optionalparameters/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -456,7 +456,7 @@ class OptionalParametersTest {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/optionalparameters/" +
-                "project/presentation/sample/PresentationThirdClass.kt"
+                "project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -491,7 +491,7 @@ class OptionalParametersTest {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+                "optionalparameters/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -528,7 +528,7 @@ class OptionalParametersTest {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "optionalparameters/project/presentation/sample/PresentationThirdClass.kt"
+                "optionalparameters/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message

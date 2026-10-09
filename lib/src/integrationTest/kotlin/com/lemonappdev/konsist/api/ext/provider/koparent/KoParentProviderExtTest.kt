@@ -2,13 +2,13 @@ package com.lemonappdev.konsist.api.ext.provider.koparent
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.provider.hasParentOf
-import com.lemonappdev.konsist.externalsample.SampleExternalClass
-import com.lemonappdev.konsist.externalsample.SampleExternalGenericInterface
-import com.lemonappdev.konsist.externalsample.SampleExternalInterface
-import com.lemonappdev.konsist.testdata.SampleClass
-import com.lemonappdev.konsist.testdata.SampleInterface
-import com.lemonappdev.konsist.testdata.SampleParentClass
-import com.lemonappdev.konsist.testdata.SampleParentInterface
+import com.lemonappdev.konsist.externalfixture.FixtureExternalClass
+import com.lemonappdev.konsist.externalfixture.FixtureExternalGenericInterface
+import com.lemonappdev.konsist.externalfixture.FixtureExternalInterface
+import com.lemonappdev.konsist.testdata.FixtureClass
+import com.lemonappdev.konsist.testdata.FixtureInterface
+import com.lemonappdev.konsist.testdata.FixtureParentClass
+import com.lemonappdev.konsist.testdata.FixtureParentInterface
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -24,11 +24,11 @@ class KoParentProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            hasParentOf<SampleParentClass>() shouldBeEqualTo true
-            hasParentOf<SampleExternalInterface>() shouldBeEqualTo true
-            hasParentOf<SampleClass>() shouldBeEqualTo false
-            hasParentOf<SampleInterface>() shouldBeEqualTo false
-            hasParentOf<SampleExternalClass>() shouldBeEqualTo false
+            hasParentOf<FixtureParentClass>() shouldBeEqualTo true
+            hasParentOf<FixtureExternalInterface>() shouldBeEqualTo true
+            hasParentOf<FixtureClass>() shouldBeEqualTo false
+            hasParentOf<FixtureInterface>() shouldBeEqualTo false
+            hasParentOf<FixtureExternalClass>() shouldBeEqualTo false
         }
     }
 
@@ -42,11 +42,11 @@ class KoParentProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            hasParentOf<SampleParentClass>() shouldBeEqualTo true
-            hasParentOf<SampleExternalInterface>() shouldBeEqualTo true
-            hasParentOf<SampleClass>() shouldBeEqualTo false
-            hasParentOf<SampleInterface>() shouldBeEqualTo false
-            hasParentOf<SampleExternalClass>() shouldBeEqualTo false
+            hasParentOf<FixtureParentClass>() shouldBeEqualTo true
+            hasParentOf<FixtureExternalInterface>() shouldBeEqualTo true
+            hasParentOf<FixtureClass>() shouldBeEqualTo false
+            hasParentOf<FixtureInterface>() shouldBeEqualTo false
+            hasParentOf<FixtureExternalClass>() shouldBeEqualTo false
         }
     }
 
@@ -60,10 +60,10 @@ class KoParentProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            hasParentOf<SampleParentInterface>() shouldBeEqualTo true
-            hasParentOf<SampleExternalInterface>() shouldBeEqualTo true
-            hasParentOf<SampleInterface>() shouldBeEqualTo false
-            hasParentOf<SampleExternalGenericInterface<Int>>() shouldBeEqualTo false
+            hasParentOf<FixtureParentInterface>() shouldBeEqualTo true
+            hasParentOf<FixtureExternalInterface>() shouldBeEqualTo true
+            hasParentOf<FixtureInterface>() shouldBeEqualTo false
+            hasParentOf<FixtureExternalGenericInterface<Int>>() shouldBeEqualTo false
         }
     }
 

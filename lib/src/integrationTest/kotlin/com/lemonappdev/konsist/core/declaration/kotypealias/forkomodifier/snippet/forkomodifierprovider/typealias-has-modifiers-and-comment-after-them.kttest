@@ -1,4 +1,4 @@
 private // Some comment
-typealias SampleTypeAlias = (Boolean) -> Int
+typealias FixtureTypeAlias = (Boolean) -> Int
 
-class SampleClass(val sampleProperty: SampleTypeAlias)
+class FixtureClass(val fixtureProperty: FixtureTypeAlias)

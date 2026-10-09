@@ -1,3 +1,3 @@
-enum class SampleClass(sampleParameter: Int) {
-    SAMPLE_CONSTANT(0)
+enum class FixtureClass(fixtureParameter: Int) {
+    FIXTURE_CONSTANT(0)
 }

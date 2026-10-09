@@ -1,4 +1,4 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation1
-import com.lemonappdev.konsist.testdata.SampleAnnotation2
+import com.lemonappdev.konsist.testdata.FixtureAnnotation1
+import com.lemonappdev.konsist.testdata.FixtureAnnotation2
 
-fun sampleFunction(@SampleAnnotation1 @SampleAnnotation2 sampleParameter: Int) {}
+fun fixtureFunction(@FixtureAnnotation1 @FixtureAnnotation2 fixtureParameter: Int) {}

@@ -1,8 +1,8 @@
 /**
- * Sample description
+ * Fixture description
  *
- * @property sampleParameter
+ * @property fixtureParameter
  */
-class SampleClass(sampleParameter: Int) {
-    fun sampleFunction() {}
+class FixtureClass(fixtureParameter: Int) {
+    fun fixtureFunction() {}
 }

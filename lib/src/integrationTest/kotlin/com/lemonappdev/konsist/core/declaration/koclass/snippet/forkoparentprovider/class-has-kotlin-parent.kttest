@@ -1,1 +1,1 @@
-class SampleClass : Throwable()
+class FixtureClass : Throwable()

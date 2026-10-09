@@ -1,2 +1,2 @@
-internal val sampleProperty: String
+internal val fixtureProperty: String
     internal get() = ""

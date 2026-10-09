@@ -1,2 +1,2 @@
-annotation class SampleClass {
+annotation class FixtureClass {
 }

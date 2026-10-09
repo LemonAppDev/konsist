@@ -18,13 +18,13 @@ class KoFileDeclarationForKoTextProviderTest {
         assertSoftly(sut) {
             text.shouldBeEqualTo(
                 """
-                fun sampleFunction() {
-                    "SampleText"
+                fun fixtureFunction() {
+                    "FixtureText"
                 }
                 
                 """.trimIndent(),
             )
-            hasTextStartingWith("fun sampleF") shouldBeEqualTo true
+            hasTextStartingWith("fun fixtureF") shouldBeEqualTo true
             hasTextStartingWith("Other") shouldBeEqualTo false
             hasTextEndingWith("}\n") shouldBeEqualTo true
             hasTextEndingWith("other") shouldBeEqualTo false

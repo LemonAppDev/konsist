@@ -1,5 +1,5 @@
-interface SampleTopLevelInterface {
-    interface SampleInterface1
+interface FixtureTopLevelInterface {
+    interface FixtureInterface1
 
-    interface SampleInterface2
+    interface FixtureInterface2
 }

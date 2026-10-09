@@ -1,8 +1,8 @@
-fun sampleFunction() {
-    fun sampleLocalFunction() {}
+fun fixtureFunction() {
+    fun fixtureLocalFunction() {}
 }
 
-class SampleClass {
-    fun sampleNestedFunction() {}
+class FixtureClass {
+    fun fixtureNestedFunction() {}
 }
 

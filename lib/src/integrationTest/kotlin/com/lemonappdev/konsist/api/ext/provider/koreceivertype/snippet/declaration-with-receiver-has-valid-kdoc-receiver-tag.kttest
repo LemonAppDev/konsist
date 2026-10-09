@@ -1,7 +1,7 @@
 /**
- * Sample description
+ * Fixture description
  *
- * @receiver sample description
+ * @receiver fixture description
  */
-fun Int.sampleFunction() {
+fun Int.fixtureFunction() {
 }

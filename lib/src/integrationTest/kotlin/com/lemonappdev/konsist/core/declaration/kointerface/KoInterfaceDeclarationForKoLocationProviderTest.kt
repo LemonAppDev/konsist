@@ -45,7 +45,7 @@ class KoInterfaceDeclarationForKoLocationProviderTest {
                 .first()
 
         // then
-        val declaration = "Declaration:\ninterface SampleInterface {\n}"
+        val declaration = "Declaration:\ninterface FixtureInterface {\n}"
         assertSoftly(sut.locationWithText) {
             startsWith("Location: /") shouldBeEqualTo true
             contains(projectPath) shouldBeEqualTo true

@@ -1,1 +1,1 @@
-var sampleProperty: Boolean = true
+var fixtureProperty: Boolean = true

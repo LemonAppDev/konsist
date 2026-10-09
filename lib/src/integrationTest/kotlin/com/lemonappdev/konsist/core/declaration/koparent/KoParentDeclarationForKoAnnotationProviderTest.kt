@@ -2,10 +2,10 @@ package com.lemonappdev.konsist.core.declaration.koparent
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.parents
+import com.lemonappdev.konsist.testdata.FixtureAnnotation
+import com.lemonappdev.konsist.testdata.FixtureAnnotation1
+import com.lemonappdev.konsist.testdata.FixtureAnnotation2
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-import com.lemonappdev.konsist.testdata.SampleAnnotation1
-import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
@@ -34,30 +34,30 @@ class KoParentDeclarationForKoAnnotationProviderTest {
             hasAnnotationWithName(emptySet()) shouldBeEqualTo false
             hasAnnotationsWithAllNames(emptyList()) shouldBeEqualTo false
             hasAnnotationsWithAllNames(emptySet()) shouldBeEqualTo false
-            hasAnnotationWithName("SampleAnnotation") shouldBeEqualTo false
-            hasAnnotationWithName("sampleannotation", ignoreCase = false) shouldBeEqualTo false
-            hasAnnotationWithName("sampleannotation", ignoreCase = true) shouldBeEqualTo false
-            hasAnnotationWithName(listOf("SampleAnnotation")) shouldBeEqualTo false
-            hasAnnotationWithName(listOf("sampleannotation"), ignoreCase = false) shouldBeEqualTo false
-            hasAnnotationWithName(listOf("sampleannotation"), ignoreCase = true) shouldBeEqualTo false
-            hasAnnotationWithName(setOf("SampleAnnotation")) shouldBeEqualTo false
-            hasAnnotationWithName(setOf("sampleannotation"), ignoreCase = false) shouldBeEqualTo false
-            hasAnnotationWithName(setOf("sampleannotation"), ignoreCase = true) shouldBeEqualTo false
-            hasAnnotationsWithAllNames("SampleAnnotation1", "SampleAnnotation2") shouldBeEqualTo false
-            hasAnnotationsWithAllNames(listOf("SampleAnnotation1", "SampleAnnotation2")) shouldBeEqualTo false
-            hasAnnotationsWithAllNames(setOf("SampleAnnotation1", "SampleAnnotation2")) shouldBeEqualTo false
+            hasAnnotationWithName("FixtureAnnotation") shouldBeEqualTo false
+            hasAnnotationWithName("fixtureannotation", ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName("fixtureannotation", ignoreCase = true) shouldBeEqualTo false
+            hasAnnotationWithName(listOf("FixtureAnnotation")) shouldBeEqualTo false
+            hasAnnotationWithName(listOf("fixtureannotation"), ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName(listOf("fixtureannotation"), ignoreCase = true) shouldBeEqualTo false
+            hasAnnotationWithName(setOf("FixtureAnnotation")) shouldBeEqualTo false
+            hasAnnotationWithName(setOf("fixtureannotation"), ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName(setOf("fixtureannotation"), ignoreCase = true) shouldBeEqualTo false
+            hasAnnotationsWithAllNames("FixtureAnnotation1", "FixtureAnnotation2") shouldBeEqualTo false
+            hasAnnotationsWithAllNames(listOf("FixtureAnnotation1", "FixtureAnnotation2")) shouldBeEqualTo false
+            hasAnnotationsWithAllNames(setOf("FixtureAnnotation1", "FixtureAnnotation2")) shouldBeEqualTo false
             hasAnnotation { it.hasArguments() } shouldBeEqualTo false
             hasAllAnnotations { it.hasArguments() } shouldBeEqualTo true
             hasAnnotationOf(emptyList()) shouldBeEqualTo false
             hasAnnotationOf(emptySet()) shouldBeEqualTo false
             hasAllAnnotationsOf(emptyList()) shouldBeEqualTo false
             hasAllAnnotationsOf(emptySet()) shouldBeEqualTo false
-            hasAnnotationOf(SampleAnnotation::class) shouldBeEqualTo false
-            hasAnnotationOf(listOf(SampleAnnotation::class)) shouldBeEqualTo false
-            hasAnnotationOf(setOf(SampleAnnotation::class)) shouldBeEqualTo false
-            hasAllAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo false
-            hasAllAnnotationsOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) shouldBeEqualTo false
-            hasAllAnnotationsOf(setOf(SampleAnnotation1::class, SampleAnnotation2::class)) shouldBeEqualTo false
+            hasAnnotationOf(FixtureAnnotation::class) shouldBeEqualTo false
+            hasAnnotationOf(listOf(FixtureAnnotation::class)) shouldBeEqualTo false
+            hasAnnotationOf(setOf(FixtureAnnotation::class)) shouldBeEqualTo false
+            hasAllAnnotationsOf(FixtureAnnotation1::class, FixtureAnnotation2::class) shouldBeEqualTo false
+            hasAllAnnotationsOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) shouldBeEqualTo false
+            hasAllAnnotationsOf(setOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) shouldBeEqualTo false
         }
     }
 
@@ -74,81 +74,81 @@ class KoParentDeclarationForKoAnnotationProviderTest {
         // then
         assertSoftly(sut) {
             numAnnotations shouldBeEqualTo 2
-            countAnnotations { type -> type.hasNameStartingWith("Sample") } shouldBeEqualTo 2
-            countAnnotations { type -> type.name == "SampleAnnotation1" } shouldBeEqualTo 1
+            countAnnotations { type -> type.hasNameStartingWith("Fixture") } shouldBeEqualTo 2
+            countAnnotations { type -> type.name == "FixtureAnnotation1" } shouldBeEqualTo 1
             hasAnnotations() shouldBeEqualTo true
             hasAnnotationOf(emptyList()) shouldBeEqualTo true
             hasAnnotationOf(emptySet()) shouldBeEqualTo true
             hasAllAnnotationsOf(emptyList()) shouldBeEqualTo true
             hasAllAnnotationsOf(emptySet()) shouldBeEqualTo true
-            hasAnnotationWithName("SampleAnnotation1") shouldBeEqualTo true
+            hasAnnotationWithName("FixtureAnnotation1") shouldBeEqualTo true
             hasAnnotationWithName("OtherAnnotation") shouldBeEqualTo false
-            hasAnnotationWithName("SampleAnnotation1", "OtherAnnotation") shouldBeEqualTo true
-            hasAnnotationWithName("com.lemonappdev.konsist.testdata.SampleAnnotation1") shouldBeEqualTo true
+            hasAnnotationWithName("FixtureAnnotation1", "OtherAnnotation") shouldBeEqualTo true
+            hasAnnotationWithName("com.lemonappdev.konsist.testdata.FixtureAnnotation1") shouldBeEqualTo true
             hasAnnotationWithName("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
             it
                 .hasAnnotationWithName(
-                    "com.lemonappdev.konsist.testdata.SampleAnnotation1",
+                    "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
                     "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
                 ).shouldBeEqualTo(true)
-            hasAnnotationWithName(listOf("SampleAnnotation1")) shouldBeEqualTo true
+            hasAnnotationWithName(listOf("FixtureAnnotation1")) shouldBeEqualTo true
             hasAnnotationWithName(listOf("OtherAnnotation")) shouldBeEqualTo false
-            hasAnnotationWithName(listOf("SampleAnnotation1", "OtherAnnotation")) shouldBeEqualTo true
-            hasAnnotationWithName(listOf("com.lemonappdev.konsist.testdata.SampleAnnotation1")) shouldBeEqualTo true
+            hasAnnotationWithName(listOf("FixtureAnnotation1", "OtherAnnotation")) shouldBeEqualTo true
+            hasAnnotationWithName(listOf("com.lemonappdev.konsist.testdata.FixtureAnnotation1")) shouldBeEqualTo true
             hasAnnotationWithName(listOf("com.lemonappdev.konsist.testdata.NonExistingAnnotation")) shouldBeEqualTo false
             it
                 .hasAnnotationWithName(
                     listOf(
-                        "com.lemonappdev.konsist.testdata.SampleAnnotation1",
+                        "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
                         "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
                     ),
                 ).shouldBeEqualTo(true)
-            hasAnnotationWithName(setOf("SampleAnnotation1")) shouldBeEqualTo true
+            hasAnnotationWithName(setOf("FixtureAnnotation1")) shouldBeEqualTo true
             hasAnnotationWithName(setOf("OtherAnnotation")) shouldBeEqualTo false
-            hasAnnotationWithName(setOf("SampleAnnotation1", "OtherAnnotation")) shouldBeEqualTo true
-            hasAnnotationWithName(setOf("com.lemonappdev.konsist.testdata.SampleAnnotation1")) shouldBeEqualTo true
+            hasAnnotationWithName(setOf("FixtureAnnotation1", "OtherAnnotation")) shouldBeEqualTo true
+            hasAnnotationWithName(setOf("com.lemonappdev.konsist.testdata.FixtureAnnotation1")) shouldBeEqualTo true
             hasAnnotationWithName(setOf("com.lemonappdev.konsist.testdata.NonExistingAnnotation")) shouldBeEqualTo false
             it
                 .hasAnnotationWithName(
                     setOf(
-                        "com.lemonappdev.konsist.testdata.SampleAnnotation1",
+                        "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
                         "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
                     ),
                 ).shouldBeEqualTo(true)
-            hasAnnotationsWithAllNames("SampleAnnotation1") shouldBeEqualTo true
-            hasAnnotationsWithAllNames("SampleAnnotation1", "SampleAnnotation2") shouldBeEqualTo true
-            hasAnnotationsWithAllNames("SampleAnnotation1", "OtherAnnotation") shouldBeEqualTo false
-            hasAnnotationsWithAllNames("com.lemonappdev.konsist.testdata.SampleAnnotation1") shouldBeEqualTo true
+            hasAnnotationsWithAllNames("FixtureAnnotation1") shouldBeEqualTo true
+            hasAnnotationsWithAllNames("FixtureAnnotation1", "FixtureAnnotation2") shouldBeEqualTo true
+            hasAnnotationsWithAllNames("FixtureAnnotation1", "OtherAnnotation") shouldBeEqualTo false
+            hasAnnotationsWithAllNames("com.lemonappdev.konsist.testdata.FixtureAnnotation1") shouldBeEqualTo true
             it
                 .hasAnnotationsWithAllNames(
-                    "com.lemonappdev.konsist.testdata.SampleAnnotation1",
+                    "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
                     "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
                 ).shouldBeEqualTo(false)
             it
                 .hasAnnotationsWithAllNames(
-                    "com.lemonappdev.konsist.testdata.SampleAnnotation1",
-                    "com.lemonappdev.konsist.testdata.SampleAnnotation2",
+                    "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
+                    "com.lemonappdev.konsist.testdata.FixtureAnnotation2",
                 ).shouldBeEqualTo(true)
 
-            hasAnnotationsWithAllNames(listOf("SampleAnnotation1")) shouldBeEqualTo true
-            hasAnnotationsWithAllNames(listOf("SampleAnnotation1", "SampleAnnotation2")) shouldBeEqualTo true
-            hasAnnotationsWithAllNames(listOf("SampleAnnotation1", "OtherAnnotation")) shouldBeEqualTo false
-            hasAnnotationsWithAllNames(listOf("com.lemonappdev.konsist.testdata.SampleAnnotation1")) shouldBeEqualTo true
+            hasAnnotationsWithAllNames(listOf("FixtureAnnotation1")) shouldBeEqualTo true
+            hasAnnotationsWithAllNames(listOf("FixtureAnnotation1", "FixtureAnnotation2")) shouldBeEqualTo true
+            hasAnnotationsWithAllNames(listOf("FixtureAnnotation1", "OtherAnnotation")) shouldBeEqualTo false
+            hasAnnotationsWithAllNames(listOf("com.lemonappdev.konsist.testdata.FixtureAnnotation1")) shouldBeEqualTo true
             it
                 .hasAnnotationsWithAllNames(
                     listOf(
-                        "com.lemonappdev.konsist.testdata.SampleAnnotation1",
+                        "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
                         "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
                     ),
                 ).shouldBeEqualTo(false)
             it
                 .hasAnnotationsWithAllNames(
                     listOf(
-                        "com.lemonappdev.konsist.testdata.SampleAnnotation1",
-                        "com.lemonappdev.konsist.testdata.SampleAnnotation2",
+                        "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
+                        "com.lemonappdev.konsist.testdata.FixtureAnnotation2",
                     ),
                 ).shouldBeEqualTo(true)
-            hasAnnotation { type -> type.name == "SampleAnnotation1" } shouldBeEqualTo true
+            hasAnnotation { type -> type.name == "FixtureAnnotation1" } shouldBeEqualTo true
             hasAnnotation { type -> type.name == "OtherAnnotation1" } shouldBeEqualTo false
             hasAllAnnotations { type -> !type.hasArguments() } shouldBeEqualTo true
             hasAllAnnotations { type -> type.hasNameEndingWith("tion1") } shouldBeEqualTo false
@@ -156,27 +156,27 @@ class KoParentDeclarationForKoAnnotationProviderTest {
             hasAnnotationOf(emptySet()) shouldBeEqualTo true
             hasAllAnnotationsOf(emptyList()) shouldBeEqualTo true
             hasAllAnnotationsOf(emptySet()) shouldBeEqualTo true
-            hasAnnotationOf(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAnnotationOf(FixtureAnnotation1::class) shouldBeEqualTo true
             hasAnnotationOf(NonExistingAnnotation::class) shouldBeEqualTo false
-            hasAnnotationOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo true
-            hasAnnotationOf(listOf(SampleAnnotation1::class)) shouldBeEqualTo true
+            hasAnnotationOf(FixtureAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo true
+            hasAnnotationOf(listOf(FixtureAnnotation1::class)) shouldBeEqualTo true
             hasAnnotationOf(listOf(NonExistingAnnotation::class)) shouldBeEqualTo false
-            hasAnnotationOf(listOf(SampleAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo true
-            hasAnnotationOf(setOf(SampleAnnotation1::class)) shouldBeEqualTo true
+            hasAnnotationOf(listOf(FixtureAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo true
+            hasAnnotationOf(setOf(FixtureAnnotation1::class)) shouldBeEqualTo true
             hasAnnotationOf(setOf(NonExistingAnnotation::class)) shouldBeEqualTo false
-            hasAnnotationOf(setOf(SampleAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo true
-            hasAllAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAnnotationOf(setOf(FixtureAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo true
+            hasAllAnnotationsOf(FixtureAnnotation1::class) shouldBeEqualTo true
             hasAllAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
-            hasAllAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo true
-            hasAllAnnotationsOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
-            hasAllAnnotationsOf(listOf(SampleAnnotation1::class)) shouldBeEqualTo true
+            hasAllAnnotationsOf(FixtureAnnotation1::class, FixtureAnnotation2::class) shouldBeEqualTo true
+            hasAllAnnotationsOf(FixtureAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAllAnnotationsOf(listOf(FixtureAnnotation1::class)) shouldBeEqualTo true
             hasAllAnnotationsOf(listOf(NonExistingAnnotation::class)) shouldBeEqualTo false
-            hasAllAnnotationsOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) shouldBeEqualTo true
-            hasAllAnnotationsOf(listOf(SampleAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo false
-            hasAllAnnotationsOf(setOf(SampleAnnotation1::class)) shouldBeEqualTo true
+            hasAllAnnotationsOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) shouldBeEqualTo true
+            hasAllAnnotationsOf(listOf(FixtureAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo false
+            hasAllAnnotationsOf(setOf(FixtureAnnotation1::class)) shouldBeEqualTo true
             hasAllAnnotationsOf(setOf(NonExistingAnnotation::class)) shouldBeEqualTo false
-            hasAllAnnotationsOf(setOf(SampleAnnotation1::class, SampleAnnotation2::class)) shouldBeEqualTo true
-            hasAllAnnotationsOf(setOf(SampleAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo false
+            hasAllAnnotationsOf(setOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) shouldBeEqualTo true
+            hasAllAnnotationsOf(setOf(FixtureAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo false
         }
     }
 
@@ -200,30 +200,30 @@ class KoParentDeclarationForKoAnnotationProviderTest {
             hasAnnotationWithName(emptySet()) shouldBeEqualTo false
             hasAnnotationsWithAllNames(emptyList()) shouldBeEqualTo false
             hasAnnotationsWithAllNames(emptySet()) shouldBeEqualTo false
-            hasAnnotationWithName("SampleAnnotation") shouldBeEqualTo false
-            hasAnnotationWithName("sampleannotation", ignoreCase = false) shouldBeEqualTo false
-            hasAnnotationWithName("sampleannotation", ignoreCase = true) shouldBeEqualTo false
-            hasAnnotationWithName(listOf("SampleAnnotation")) shouldBeEqualTo false
-            hasAnnotationWithName(listOf("sampleannotation"), ignoreCase = false) shouldBeEqualTo false
-            hasAnnotationWithName(listOf("sampleannotation"), ignoreCase = true) shouldBeEqualTo false
-            hasAnnotationWithName(setOf("SampleAnnotation")) shouldBeEqualTo false
-            hasAnnotationWithName(setOf("sampleannotation"), ignoreCase = false) shouldBeEqualTo false
-            hasAnnotationWithName(setOf("sampleannotation"), ignoreCase = true) shouldBeEqualTo false
-            hasAnnotationsWithAllNames("SampleAnnotation1", "SampleAnnotation2") shouldBeEqualTo false
-            hasAnnotationsWithAllNames(listOf("SampleAnnotation1", "SampleAnnotation2")) shouldBeEqualTo false
-            hasAnnotationsWithAllNames(setOf("SampleAnnotation1", "SampleAnnotation2")) shouldBeEqualTo false
+            hasAnnotationWithName("FixtureAnnotation") shouldBeEqualTo false
+            hasAnnotationWithName("fixtureannotation", ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName("fixtureannotation", ignoreCase = true) shouldBeEqualTo false
+            hasAnnotationWithName(listOf("FixtureAnnotation")) shouldBeEqualTo false
+            hasAnnotationWithName(listOf("fixtureannotation"), ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName(listOf("fixtureannotation"), ignoreCase = true) shouldBeEqualTo false
+            hasAnnotationWithName(setOf("FixtureAnnotation")) shouldBeEqualTo false
+            hasAnnotationWithName(setOf("fixtureannotation"), ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName(setOf("fixtureannotation"), ignoreCase = true) shouldBeEqualTo false
+            hasAnnotationsWithAllNames("FixtureAnnotation1", "FixtureAnnotation2") shouldBeEqualTo false
+            hasAnnotationsWithAllNames(listOf("FixtureAnnotation1", "FixtureAnnotation2")) shouldBeEqualTo false
+            hasAnnotationsWithAllNames(setOf("FixtureAnnotation1", "FixtureAnnotation2")) shouldBeEqualTo false
             hasAnnotation { it.hasArguments() } shouldBeEqualTo false
             hasAllAnnotations { it.hasArguments() } shouldBeEqualTo true
             hasAnnotationOf(emptyList()) shouldBeEqualTo false
             hasAnnotationOf(emptySet()) shouldBeEqualTo false
             hasAllAnnotationsOf(emptyList()) shouldBeEqualTo false
             hasAllAnnotationsOf(emptySet()) shouldBeEqualTo false
-            hasAnnotationOf(SampleAnnotation::class) shouldBeEqualTo false
-            hasAnnotationOf(listOf(SampleAnnotation::class)) shouldBeEqualTo false
-            hasAnnotationOf(setOf(SampleAnnotation::class)) shouldBeEqualTo false
-            hasAllAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo false
-            hasAllAnnotationsOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) shouldBeEqualTo false
-            hasAllAnnotationsOf(setOf(SampleAnnotation1::class, SampleAnnotation2::class)) shouldBeEqualTo false
+            hasAnnotationOf(FixtureAnnotation::class) shouldBeEqualTo false
+            hasAnnotationOf(listOf(FixtureAnnotation::class)) shouldBeEqualTo false
+            hasAnnotationOf(setOf(FixtureAnnotation::class)) shouldBeEqualTo false
+            hasAllAnnotationsOf(FixtureAnnotation1::class, FixtureAnnotation2::class) shouldBeEqualTo false
+            hasAllAnnotationsOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) shouldBeEqualTo false
+            hasAllAnnotationsOf(setOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) shouldBeEqualTo false
         }
     }
 
@@ -240,81 +240,81 @@ class KoParentDeclarationForKoAnnotationProviderTest {
         // then
         assertSoftly(sut) {
             numAnnotations shouldBeEqualTo 2
-            countAnnotations { type -> type.hasNameStartingWith("Sample") } shouldBeEqualTo 2
-            countAnnotations { type -> type.name == "SampleAnnotation1" } shouldBeEqualTo 1
+            countAnnotations { type -> type.hasNameStartingWith("Fixture") } shouldBeEqualTo 2
+            countAnnotations { type -> type.name == "FixtureAnnotation1" } shouldBeEqualTo 1
             hasAnnotations() shouldBeEqualTo true
             hasAnnotationOf(emptyList()) shouldBeEqualTo true
             hasAnnotationOf(emptySet()) shouldBeEqualTo true
             hasAllAnnotationsOf(emptyList()) shouldBeEqualTo true
             hasAllAnnotationsOf(emptySet()) shouldBeEqualTo true
-            hasAnnotationWithName("SampleAnnotation1") shouldBeEqualTo true
+            hasAnnotationWithName("FixtureAnnotation1") shouldBeEqualTo true
             hasAnnotationWithName("OtherAnnotation") shouldBeEqualTo false
-            hasAnnotationWithName("SampleAnnotation1", "OtherAnnotation") shouldBeEqualTo true
-            hasAnnotationWithName("com.lemonappdev.konsist.testdata.SampleAnnotation1") shouldBeEqualTo true
+            hasAnnotationWithName("FixtureAnnotation1", "OtherAnnotation") shouldBeEqualTo true
+            hasAnnotationWithName("com.lemonappdev.konsist.testdata.FixtureAnnotation1") shouldBeEqualTo true
             hasAnnotationWithName("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
             it
                 .hasAnnotationWithName(
-                    "com.lemonappdev.konsist.testdata.SampleAnnotation1",
+                    "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
                     "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
                 ).shouldBeEqualTo(true)
-            hasAnnotationWithName(listOf("SampleAnnotation1")) shouldBeEqualTo true
+            hasAnnotationWithName(listOf("FixtureAnnotation1")) shouldBeEqualTo true
             hasAnnotationWithName(listOf("OtherAnnotation")) shouldBeEqualTo false
-            hasAnnotationWithName(listOf("SampleAnnotation1", "OtherAnnotation")) shouldBeEqualTo true
-            hasAnnotationWithName(listOf("com.lemonappdev.konsist.testdata.SampleAnnotation1")) shouldBeEqualTo true
+            hasAnnotationWithName(listOf("FixtureAnnotation1", "OtherAnnotation")) shouldBeEqualTo true
+            hasAnnotationWithName(listOf("com.lemonappdev.konsist.testdata.FixtureAnnotation1")) shouldBeEqualTo true
             hasAnnotationWithName(listOf("com.lemonappdev.konsist.testdata.NonExistingAnnotation")) shouldBeEqualTo false
             it
                 .hasAnnotationWithName(
                     listOf(
-                        "com.lemonappdev.konsist.testdata.SampleAnnotation1",
+                        "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
                         "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
                     ),
                 ).shouldBeEqualTo(true)
-            hasAnnotationWithName(setOf("SampleAnnotation1")) shouldBeEqualTo true
+            hasAnnotationWithName(setOf("FixtureAnnotation1")) shouldBeEqualTo true
             hasAnnotationWithName(setOf("OtherAnnotation")) shouldBeEqualTo false
-            hasAnnotationWithName(setOf("SampleAnnotation1", "OtherAnnotation")) shouldBeEqualTo true
-            hasAnnotationWithName(setOf("com.lemonappdev.konsist.testdata.SampleAnnotation1")) shouldBeEqualTo true
+            hasAnnotationWithName(setOf("FixtureAnnotation1", "OtherAnnotation")) shouldBeEqualTo true
+            hasAnnotationWithName(setOf("com.lemonappdev.konsist.testdata.FixtureAnnotation1")) shouldBeEqualTo true
             hasAnnotationWithName(setOf("com.lemonappdev.konsist.testdata.NonExistingAnnotation")) shouldBeEqualTo false
             it
                 .hasAnnotationWithName(
                     setOf(
-                        "com.lemonappdev.konsist.testdata.SampleAnnotation1",
+                        "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
                         "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
                     ),
                 ).shouldBeEqualTo(true)
-            hasAnnotationsWithAllNames("SampleAnnotation1") shouldBeEqualTo true
-            hasAnnotationsWithAllNames("SampleAnnotation1", "SampleAnnotation2") shouldBeEqualTo true
-            hasAnnotationsWithAllNames("SampleAnnotation1", "OtherAnnotation") shouldBeEqualTo false
-            hasAnnotationsWithAllNames("com.lemonappdev.konsist.testdata.SampleAnnotation1") shouldBeEqualTo true
+            hasAnnotationsWithAllNames("FixtureAnnotation1") shouldBeEqualTo true
+            hasAnnotationsWithAllNames("FixtureAnnotation1", "FixtureAnnotation2") shouldBeEqualTo true
+            hasAnnotationsWithAllNames("FixtureAnnotation1", "OtherAnnotation") shouldBeEqualTo false
+            hasAnnotationsWithAllNames("com.lemonappdev.konsist.testdata.FixtureAnnotation1") shouldBeEqualTo true
             it
                 .hasAnnotationsWithAllNames(
-                    "com.lemonappdev.konsist.testdata.SampleAnnotation1",
+                    "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
                     "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
                 ).shouldBeEqualTo(false)
             it
                 .hasAnnotationsWithAllNames(
-                    "com.lemonappdev.konsist.testdata.SampleAnnotation1",
-                    "com.lemonappdev.konsist.testdata.SampleAnnotation2",
+                    "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
+                    "com.lemonappdev.konsist.testdata.FixtureAnnotation2",
                 ).shouldBeEqualTo(true)
 
-            hasAnnotationsWithAllNames(listOf("SampleAnnotation1")) shouldBeEqualTo true
-            hasAnnotationsWithAllNames(listOf("SampleAnnotation1", "SampleAnnotation2")) shouldBeEqualTo true
-            hasAnnotationsWithAllNames(listOf("SampleAnnotation1", "OtherAnnotation")) shouldBeEqualTo false
-            hasAnnotationsWithAllNames(listOf("com.lemonappdev.konsist.testdata.SampleAnnotation1")) shouldBeEqualTo true
+            hasAnnotationsWithAllNames(listOf("FixtureAnnotation1")) shouldBeEqualTo true
+            hasAnnotationsWithAllNames(listOf("FixtureAnnotation1", "FixtureAnnotation2")) shouldBeEqualTo true
+            hasAnnotationsWithAllNames(listOf("FixtureAnnotation1", "OtherAnnotation")) shouldBeEqualTo false
+            hasAnnotationsWithAllNames(listOf("com.lemonappdev.konsist.testdata.FixtureAnnotation1")) shouldBeEqualTo true
             it
                 .hasAnnotationsWithAllNames(
                     listOf(
-                        "com.lemonappdev.konsist.testdata.SampleAnnotation1",
+                        "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
                         "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
                     ),
                 ).shouldBeEqualTo(false)
             it
                 .hasAnnotationsWithAllNames(
                     listOf(
-                        "com.lemonappdev.konsist.testdata.SampleAnnotation1",
-                        "com.lemonappdev.konsist.testdata.SampleAnnotation2",
+                        "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
+                        "com.lemonappdev.konsist.testdata.FixtureAnnotation2",
                     ),
                 ).shouldBeEqualTo(true)
-            hasAnnotation { type -> type.name == "SampleAnnotation1" } shouldBeEqualTo true
+            hasAnnotation { type -> type.name == "FixtureAnnotation1" } shouldBeEqualTo true
             hasAnnotation { type -> type.name == "OtherAnnotation1" } shouldBeEqualTo false
             hasAllAnnotations { type -> !type.hasArguments() } shouldBeEqualTo true
             hasAllAnnotations { type -> type.hasNameEndingWith("tion1") } shouldBeEqualTo false
@@ -322,27 +322,27 @@ class KoParentDeclarationForKoAnnotationProviderTest {
             hasAnnotationOf(emptySet()) shouldBeEqualTo true
             hasAllAnnotationsOf(emptyList()) shouldBeEqualTo true
             hasAllAnnotationsOf(emptySet()) shouldBeEqualTo true
-            hasAnnotationOf(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAnnotationOf(FixtureAnnotation1::class) shouldBeEqualTo true
             hasAnnotationOf(NonExistingAnnotation::class) shouldBeEqualTo false
-            hasAnnotationOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo true
-            hasAnnotationOf(listOf(SampleAnnotation1::class)) shouldBeEqualTo true
+            hasAnnotationOf(FixtureAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo true
+            hasAnnotationOf(listOf(FixtureAnnotation1::class)) shouldBeEqualTo true
             hasAnnotationOf(listOf(NonExistingAnnotation::class)) shouldBeEqualTo false
-            hasAnnotationOf(listOf(SampleAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo true
-            hasAnnotationOf(setOf(SampleAnnotation1::class)) shouldBeEqualTo true
+            hasAnnotationOf(listOf(FixtureAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo true
+            hasAnnotationOf(setOf(FixtureAnnotation1::class)) shouldBeEqualTo true
             hasAnnotationOf(setOf(NonExistingAnnotation::class)) shouldBeEqualTo false
-            hasAnnotationOf(setOf(SampleAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo true
-            hasAllAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAnnotationOf(setOf(FixtureAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo true
+            hasAllAnnotationsOf(FixtureAnnotation1::class) shouldBeEqualTo true
             hasAllAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
-            hasAllAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo true
-            hasAllAnnotationsOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
-            hasAllAnnotationsOf(listOf(SampleAnnotation1::class)) shouldBeEqualTo true
+            hasAllAnnotationsOf(FixtureAnnotation1::class, FixtureAnnotation2::class) shouldBeEqualTo true
+            hasAllAnnotationsOf(FixtureAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAllAnnotationsOf(listOf(FixtureAnnotation1::class)) shouldBeEqualTo true
             hasAllAnnotationsOf(listOf(NonExistingAnnotation::class)) shouldBeEqualTo false
-            hasAllAnnotationsOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) shouldBeEqualTo true
-            hasAllAnnotationsOf(listOf(SampleAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo false
-            hasAllAnnotationsOf(setOf(SampleAnnotation1::class)) shouldBeEqualTo true
+            hasAllAnnotationsOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) shouldBeEqualTo true
+            hasAllAnnotationsOf(listOf(FixtureAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo false
+            hasAllAnnotationsOf(setOf(FixtureAnnotation1::class)) shouldBeEqualTo true
             hasAllAnnotationsOf(setOf(NonExistingAnnotation::class)) shouldBeEqualTo false
-            hasAllAnnotationsOf(setOf(SampleAnnotation1::class, SampleAnnotation2::class)) shouldBeEqualTo true
-            hasAllAnnotationsOf(setOf(SampleAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo false
+            hasAllAnnotationsOf(setOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) shouldBeEqualTo true
+            hasAllAnnotationsOf(setOf(FixtureAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo false
         }
     }
 
@@ -366,30 +366,30 @@ class KoParentDeclarationForKoAnnotationProviderTest {
             hasAnnotationWithName(emptySet()) shouldBeEqualTo false
             hasAnnotationsWithAllNames(emptyList()) shouldBeEqualTo false
             hasAnnotationsWithAllNames(emptySet()) shouldBeEqualTo false
-            hasAnnotationWithName("SampleAnnotation") shouldBeEqualTo false
-            hasAnnotationWithName("sampleannotation", ignoreCase = false) shouldBeEqualTo false
-            hasAnnotationWithName("sampleannotation", ignoreCase = true) shouldBeEqualTo false
-            hasAnnotationWithName(listOf("SampleAnnotation")) shouldBeEqualTo false
-            hasAnnotationWithName(listOf("sampleannotation"), ignoreCase = false) shouldBeEqualTo false
-            hasAnnotationWithName(listOf("sampleannotation"), ignoreCase = true) shouldBeEqualTo false
-            hasAnnotationWithName(setOf("SampleAnnotation")) shouldBeEqualTo false
-            hasAnnotationWithName(setOf("sampleannotation"), ignoreCase = false) shouldBeEqualTo false
-            hasAnnotationWithName(setOf("sampleannotation"), ignoreCase = true) shouldBeEqualTo false
-            hasAnnotationsWithAllNames("SampleAnnotation1", "SampleAnnotation2") shouldBeEqualTo false
-            hasAnnotationsWithAllNames(listOf("SampleAnnotation1", "SampleAnnotation2")) shouldBeEqualTo false
-            hasAnnotationsWithAllNames(setOf("SampleAnnotation1", "SampleAnnotation2")) shouldBeEqualTo false
+            hasAnnotationWithName("FixtureAnnotation") shouldBeEqualTo false
+            hasAnnotationWithName("fixtureannotation", ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName("fixtureannotation", ignoreCase = true) shouldBeEqualTo false
+            hasAnnotationWithName(listOf("FixtureAnnotation")) shouldBeEqualTo false
+            hasAnnotationWithName(listOf("fixtureannotation"), ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName(listOf("fixtureannotation"), ignoreCase = true) shouldBeEqualTo false
+            hasAnnotationWithName(setOf("FixtureAnnotation")) shouldBeEqualTo false
+            hasAnnotationWithName(setOf("fixtureannotation"), ignoreCase = false) shouldBeEqualTo false
+            hasAnnotationWithName(setOf("fixtureannotation"), ignoreCase = true) shouldBeEqualTo false
+            hasAnnotationsWithAllNames("FixtureAnnotation1", "FixtureAnnotation2") shouldBeEqualTo false
+            hasAnnotationsWithAllNames(listOf("FixtureAnnotation1", "FixtureAnnotation2")) shouldBeEqualTo false
+            hasAnnotationsWithAllNames(setOf("FixtureAnnotation1", "FixtureAnnotation2")) shouldBeEqualTo false
             hasAnnotation { it.hasArguments() } shouldBeEqualTo false
             hasAllAnnotations { it.hasArguments() } shouldBeEqualTo true
             hasAnnotationOf(emptyList()) shouldBeEqualTo false
             hasAnnotationOf(emptySet()) shouldBeEqualTo false
             hasAllAnnotationsOf(emptyList()) shouldBeEqualTo false
             hasAllAnnotationsOf(emptySet()) shouldBeEqualTo false
-            hasAnnotationOf(SampleAnnotation::class) shouldBeEqualTo false
-            hasAnnotationOf(listOf(SampleAnnotation::class)) shouldBeEqualTo false
-            hasAnnotationOf(setOf(SampleAnnotation::class)) shouldBeEqualTo false
-            hasAllAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo false
-            hasAllAnnotationsOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) shouldBeEqualTo false
-            hasAllAnnotationsOf(setOf(SampleAnnotation1::class, SampleAnnotation2::class)) shouldBeEqualTo false
+            hasAnnotationOf(FixtureAnnotation::class) shouldBeEqualTo false
+            hasAnnotationOf(listOf(FixtureAnnotation::class)) shouldBeEqualTo false
+            hasAnnotationOf(setOf(FixtureAnnotation::class)) shouldBeEqualTo false
+            hasAllAnnotationsOf(FixtureAnnotation1::class, FixtureAnnotation2::class) shouldBeEqualTo false
+            hasAllAnnotationsOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) shouldBeEqualTo false
+            hasAllAnnotationsOf(setOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) shouldBeEqualTo false
         }
     }
 
@@ -406,81 +406,81 @@ class KoParentDeclarationForKoAnnotationProviderTest {
         // then
         assertSoftly(sut) {
             numAnnotations shouldBeEqualTo 2
-            countAnnotations { type -> type.hasNameStartingWith("Sample") } shouldBeEqualTo 2
-            countAnnotations { type -> type.name == "SampleAnnotation1" } shouldBeEqualTo 1
+            countAnnotations { type -> type.hasNameStartingWith("Fixture") } shouldBeEqualTo 2
+            countAnnotations { type -> type.name == "FixtureAnnotation1" } shouldBeEqualTo 1
             hasAnnotations() shouldBeEqualTo true
             hasAnnotationOf(emptyList()) shouldBeEqualTo true
             hasAnnotationOf(emptySet()) shouldBeEqualTo true
             hasAllAnnotationsOf(emptyList()) shouldBeEqualTo true
             hasAllAnnotationsOf(emptySet()) shouldBeEqualTo true
-            hasAnnotationWithName("SampleAnnotation1") shouldBeEqualTo true
+            hasAnnotationWithName("FixtureAnnotation1") shouldBeEqualTo true
             hasAnnotationWithName("OtherAnnotation") shouldBeEqualTo false
-            hasAnnotationWithName("SampleAnnotation1", "OtherAnnotation") shouldBeEqualTo true
-            hasAnnotationWithName("com.lemonappdev.konsist.testdata.SampleAnnotation1") shouldBeEqualTo true
+            hasAnnotationWithName("FixtureAnnotation1", "OtherAnnotation") shouldBeEqualTo true
+            hasAnnotationWithName("com.lemonappdev.konsist.testdata.FixtureAnnotation1") shouldBeEqualTo true
             hasAnnotationWithName("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
             it
                 .hasAnnotationWithName(
-                    "com.lemonappdev.konsist.testdata.SampleAnnotation1",
+                    "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
                     "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
                 ).shouldBeEqualTo(true)
-            hasAnnotationWithName(listOf("SampleAnnotation1")) shouldBeEqualTo true
+            hasAnnotationWithName(listOf("FixtureAnnotation1")) shouldBeEqualTo true
             hasAnnotationWithName(listOf("OtherAnnotation")) shouldBeEqualTo false
-            hasAnnotationWithName(listOf("SampleAnnotation1", "OtherAnnotation")) shouldBeEqualTo true
-            hasAnnotationWithName(listOf("com.lemonappdev.konsist.testdata.SampleAnnotation1")) shouldBeEqualTo true
+            hasAnnotationWithName(listOf("FixtureAnnotation1", "OtherAnnotation")) shouldBeEqualTo true
+            hasAnnotationWithName(listOf("com.lemonappdev.konsist.testdata.FixtureAnnotation1")) shouldBeEqualTo true
             hasAnnotationWithName(listOf("com.lemonappdev.konsist.testdata.NonExistingAnnotation")) shouldBeEqualTo false
             it
                 .hasAnnotationWithName(
                     listOf(
-                        "com.lemonappdev.konsist.testdata.SampleAnnotation1",
+                        "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
                         "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
                     ),
                 ).shouldBeEqualTo(true)
-            hasAnnotationWithName(setOf("SampleAnnotation1")) shouldBeEqualTo true
+            hasAnnotationWithName(setOf("FixtureAnnotation1")) shouldBeEqualTo true
             hasAnnotationWithName(setOf("OtherAnnotation")) shouldBeEqualTo false
-            hasAnnotationWithName(setOf("SampleAnnotation1", "OtherAnnotation")) shouldBeEqualTo true
-            hasAnnotationWithName(setOf("com.lemonappdev.konsist.testdata.SampleAnnotation1")) shouldBeEqualTo true
+            hasAnnotationWithName(setOf("FixtureAnnotation1", "OtherAnnotation")) shouldBeEqualTo true
+            hasAnnotationWithName(setOf("com.lemonappdev.konsist.testdata.FixtureAnnotation1")) shouldBeEqualTo true
             hasAnnotationWithName(setOf("com.lemonappdev.konsist.testdata.NonExistingAnnotation")) shouldBeEqualTo false
             it
                 .hasAnnotationWithName(
                     setOf(
-                        "com.lemonappdev.konsist.testdata.SampleAnnotation1",
+                        "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
                         "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
                     ),
                 ).shouldBeEqualTo(true)
-            hasAnnotationsWithAllNames("SampleAnnotation1") shouldBeEqualTo true
-            hasAnnotationsWithAllNames("SampleAnnotation1", "SampleAnnotation2") shouldBeEqualTo true
-            hasAnnotationsWithAllNames("SampleAnnotation1", "OtherAnnotation") shouldBeEqualTo false
-            hasAnnotationsWithAllNames("com.lemonappdev.konsist.testdata.SampleAnnotation1") shouldBeEqualTo true
+            hasAnnotationsWithAllNames("FixtureAnnotation1") shouldBeEqualTo true
+            hasAnnotationsWithAllNames("FixtureAnnotation1", "FixtureAnnotation2") shouldBeEqualTo true
+            hasAnnotationsWithAllNames("FixtureAnnotation1", "OtherAnnotation") shouldBeEqualTo false
+            hasAnnotationsWithAllNames("com.lemonappdev.konsist.testdata.FixtureAnnotation1") shouldBeEqualTo true
             it
                 .hasAnnotationsWithAllNames(
-                    "com.lemonappdev.konsist.testdata.SampleAnnotation1",
+                    "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
                     "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
                 ).shouldBeEqualTo(false)
             it
                 .hasAnnotationsWithAllNames(
-                    "com.lemonappdev.konsist.testdata.SampleAnnotation1",
-                    "com.lemonappdev.konsist.testdata.SampleAnnotation2",
+                    "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
+                    "com.lemonappdev.konsist.testdata.FixtureAnnotation2",
                 ).shouldBeEqualTo(true)
 
-            hasAnnotationsWithAllNames(listOf("SampleAnnotation1")) shouldBeEqualTo true
-            hasAnnotationsWithAllNames(listOf("SampleAnnotation1", "SampleAnnotation2")) shouldBeEqualTo true
-            hasAnnotationsWithAllNames(listOf("SampleAnnotation1", "OtherAnnotation")) shouldBeEqualTo false
-            hasAnnotationsWithAllNames(listOf("com.lemonappdev.konsist.testdata.SampleAnnotation1")) shouldBeEqualTo true
+            hasAnnotationsWithAllNames(listOf("FixtureAnnotation1")) shouldBeEqualTo true
+            hasAnnotationsWithAllNames(listOf("FixtureAnnotation1", "FixtureAnnotation2")) shouldBeEqualTo true
+            hasAnnotationsWithAllNames(listOf("FixtureAnnotation1", "OtherAnnotation")) shouldBeEqualTo false
+            hasAnnotationsWithAllNames(listOf("com.lemonappdev.konsist.testdata.FixtureAnnotation1")) shouldBeEqualTo true
             it
                 .hasAnnotationsWithAllNames(
                     listOf(
-                        "com.lemonappdev.konsist.testdata.SampleAnnotation1",
+                        "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
                         "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
                     ),
                 ).shouldBeEqualTo(false)
             it
                 .hasAnnotationsWithAllNames(
                     listOf(
-                        "com.lemonappdev.konsist.testdata.SampleAnnotation1",
-                        "com.lemonappdev.konsist.testdata.SampleAnnotation2",
+                        "com.lemonappdev.konsist.testdata.FixtureAnnotation1",
+                        "com.lemonappdev.konsist.testdata.FixtureAnnotation2",
                     ),
                 ).shouldBeEqualTo(true)
-            hasAnnotation { type -> type.name == "SampleAnnotation1" } shouldBeEqualTo true
+            hasAnnotation { type -> type.name == "FixtureAnnotation1" } shouldBeEqualTo true
             hasAnnotation { type -> type.name == "OtherAnnotation1" } shouldBeEqualTo false
             hasAllAnnotations { type -> !type.hasArguments() } shouldBeEqualTo true
             hasAllAnnotations { type -> type.hasNameEndingWith("tion1") } shouldBeEqualTo false
@@ -488,27 +488,27 @@ class KoParentDeclarationForKoAnnotationProviderTest {
             hasAnnotationOf(emptySet()) shouldBeEqualTo true
             hasAllAnnotationsOf(emptyList()) shouldBeEqualTo true
             hasAllAnnotationsOf(emptySet()) shouldBeEqualTo true
-            hasAnnotationOf(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAnnotationOf(FixtureAnnotation1::class) shouldBeEqualTo true
             hasAnnotationOf(NonExistingAnnotation::class) shouldBeEqualTo false
-            hasAnnotationOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo true
-            hasAnnotationOf(listOf(SampleAnnotation1::class)) shouldBeEqualTo true
+            hasAnnotationOf(FixtureAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo true
+            hasAnnotationOf(listOf(FixtureAnnotation1::class)) shouldBeEqualTo true
             hasAnnotationOf(listOf(NonExistingAnnotation::class)) shouldBeEqualTo false
-            hasAnnotationOf(listOf(SampleAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo true
-            hasAnnotationOf(setOf(SampleAnnotation1::class)) shouldBeEqualTo true
+            hasAnnotationOf(listOf(FixtureAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo true
+            hasAnnotationOf(setOf(FixtureAnnotation1::class)) shouldBeEqualTo true
             hasAnnotationOf(setOf(NonExistingAnnotation::class)) shouldBeEqualTo false
-            hasAnnotationOf(setOf(SampleAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo true
-            hasAllAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAnnotationOf(setOf(FixtureAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo true
+            hasAllAnnotationsOf(FixtureAnnotation1::class) shouldBeEqualTo true
             hasAllAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
-            hasAllAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo true
-            hasAllAnnotationsOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
-            hasAllAnnotationsOf(listOf(SampleAnnotation1::class)) shouldBeEqualTo true
+            hasAllAnnotationsOf(FixtureAnnotation1::class, FixtureAnnotation2::class) shouldBeEqualTo true
+            hasAllAnnotationsOf(FixtureAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAllAnnotationsOf(listOf(FixtureAnnotation1::class)) shouldBeEqualTo true
             hasAllAnnotationsOf(listOf(NonExistingAnnotation::class)) shouldBeEqualTo false
-            hasAllAnnotationsOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) shouldBeEqualTo true
-            hasAllAnnotationsOf(listOf(SampleAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo false
-            hasAllAnnotationsOf(setOf(SampleAnnotation1::class)) shouldBeEqualTo true
+            hasAllAnnotationsOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) shouldBeEqualTo true
+            hasAllAnnotationsOf(listOf(FixtureAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo false
+            hasAllAnnotationsOf(setOf(FixtureAnnotation1::class)) shouldBeEqualTo true
             hasAllAnnotationsOf(setOf(NonExistingAnnotation::class)) shouldBeEqualTo false
-            hasAllAnnotationsOf(setOf(SampleAnnotation1::class, SampleAnnotation2::class)) shouldBeEqualTo true
-            hasAllAnnotationsOf(setOf(SampleAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo false
+            hasAllAnnotationsOf(setOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) shouldBeEqualTo true
+            hasAllAnnotationsOf(setOf(FixtureAnnotation1::class, NonExistingAnnotation::class)) shouldBeEqualTo false
         }
     }
 

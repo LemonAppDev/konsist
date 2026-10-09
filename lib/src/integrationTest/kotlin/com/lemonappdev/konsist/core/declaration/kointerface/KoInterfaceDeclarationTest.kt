@@ -14,7 +14,7 @@ class KoInterfaceDeclarationTest {
                 .first()
 
         // then
-        sut.toString() shouldBeEqualTo "SampleInterface"
+        sut.toString() shouldBeEqualTo "FixtureInterface"
     }
 
     private fun getSnippetFile(fileName: String) =

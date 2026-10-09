@@ -16,15 +16,15 @@ class KoTypeAliasDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleTypeAlias"
-            hasName("SampleTypeAlias") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureTypeAlias"
+            hasName("FixtureTypeAlias") shouldBeEqualTo true
             hasName("OtherTypeAlias") shouldBeEqualTo false
-            hasName("sampletypealias", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampletypealias", ignoreCase = true) shouldBeEqualTo true
-            hasNameStartingWith("Sample") shouldBeEqualTo true
+            hasName("fixturetypealias", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixturetypealias", ignoreCase = true) shouldBeEqualTo true
+            hasNameStartingWith("Fixture") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
-            hasNameStartingWith("sample", ignoreCase = false) shouldBeEqualTo false
-            hasNameStartingWith("sample", ignoreCase = true) shouldBeEqualTo true
+            hasNameStartingWith("fixture", ignoreCase = false) shouldBeEqualTo false
+            hasNameStartingWith("fixture", ignoreCase = true) shouldBeEqualTo true
             hasNameEndingWith("lias") shouldBeEqualTo true
             hasNameEndingWith("other") shouldBeEqualTo false
             hasNameEndingWith("LIAS", ignoreCase = false) shouldBeEqualTo false

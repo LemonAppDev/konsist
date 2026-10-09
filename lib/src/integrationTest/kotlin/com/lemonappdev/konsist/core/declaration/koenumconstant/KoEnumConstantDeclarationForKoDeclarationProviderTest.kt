@@ -21,10 +21,10 @@ class KoEnumConstantDeclarationForKoDeclarationProviderTest {
         assertSoftly(sut) {
             declarations() shouldBeEqualTo emptyList()
             numDeclarations() shouldBeEqualTo 0
-            countDeclarations { (it as KoNameProvider).name == "sampleProperty" } shouldBeEqualTo 0
+            countDeclarations { (it as KoNameProvider).name == "fixtureProperty" } shouldBeEqualTo 0
             hasDeclarations() shouldBeEqualTo false
-            hasDeclaration { (it as KoNameProvider).name == "SampleDeclaration" } shouldBeEqualTo false
-            hasAllDeclarations { (it as KoNameProvider).name == "SampleDeclaration" } shouldBeEqualTo true
+            hasDeclaration { (it as KoNameProvider).name == "FixtureDeclaration" } shouldBeEqualTo false
+            hasAllDeclarations { (it as KoNameProvider).name == "FixtureDeclaration" } shouldBeEqualTo true
         }
     }
 
@@ -40,20 +40,20 @@ class KoEnumConstantDeclarationForKoDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             numDeclarations() shouldBeEqualTo 3
-            countDeclarations { (it as KoNameProvider).hasNameStartingWith("sample") } shouldBeEqualTo 2
+            countDeclarations { (it as KoNameProvider).hasNameStartingWith("fixture") } shouldBeEqualTo 2
             hasDeclarations() shouldBeEqualTo true
-            hasDeclaration { (it as KoNameProvider).name == "sampleProperty" } shouldBeEqualTo true
+            hasDeclaration { (it as KoNameProvider).name == "fixtureProperty" } shouldBeEqualTo true
             hasDeclaration { (it as KoNameProvider).name == "otherProperty" } shouldBeEqualTo false
-            hasAllDeclarations { (it as KoNameProvider).hasNameContaining("ample") } shouldBeEqualTo true
-            hasAllDeclarations { (it as KoNameProvider).hasNameStartingWith("sample") } shouldBeEqualTo false
+            hasAllDeclarations { (it as KoNameProvider).hasNameContaining("ixture") } shouldBeEqualTo true
+            hasAllDeclarations { (it as KoNameProvider).hasNameStartingWith("fixture") } shouldBeEqualTo false
             declarations()
                 .filterIsInstance<KoNameProvider>()
                 .map { it.name }
                 .shouldBeEqualTo(
                     listOf(
-                        "sampleProperty",
-                        "sampleFunction",
-                        "SampleInnerClass",
+                        "fixtureProperty",
+                        "fixtureFunction",
+                        "FixtureInnerClass",
                     ),
                 )
         }
@@ -75,14 +75,14 @@ class KoEnumConstantDeclarationForKoDeclarationProviderTest {
             countDeclarations(
                 includeLocal = true,
                 includeNested = false,
-            ) { (it as KoNameProvider).hasNameStartingWith("sampleLocal") }
+            ) { (it as KoNameProvider).hasNameStartingWith("fixtureLocal") }
                 .shouldBeEqualTo(2)
 
             hasDeclarations(includeLocal = true, includeNested = false) shouldBeEqualTo true
             hasDeclaration(
                 includeLocal = true,
                 includeNested = false,
-            ) { (it as KoNameProvider).name == "sampleLocalProperty" }
+            ) { (it as KoNameProvider).name == "fixtureLocalProperty" }
                 .shouldBeEqualTo(true)
 
             hasDeclaration(
@@ -94,12 +94,12 @@ class KoEnumConstantDeclarationForKoDeclarationProviderTest {
             hasAllDeclarations(
                 includeLocal = true,
                 includeNested = false,
-            ) { (it as KoNameProvider).hasNameContaining("ample") }
+            ) { (it as KoNameProvider).hasNameContaining("ixture") }
                 .shouldBeEqualTo(true)
 
             hasAllDeclarations(includeLocal = true, includeNested = false) {
                 (it as KoNameProvider).hasNameStartingWith(
-                    "sample",
+                    "fixture",
                 )
             }.shouldBeEqualTo(false)
 
@@ -108,12 +108,12 @@ class KoEnumConstantDeclarationForKoDeclarationProviderTest {
                 .map { it.name }
                 .shouldBeEqualTo(
                     listOf(
-                        "sampleProperty",
-                        "sampleFunction",
-                        "sampleLocalProperty",
-                        "sampleLocalFunction",
-                        "SampleLocalClass",
-                        "SampleInnerClass",
+                        "fixtureProperty",
+                        "fixtureFunction",
+                        "fixtureLocalProperty",
+                        "fixtureLocalFunction",
+                        "FixtureLocalClass",
+                        "FixtureInnerClass",
                     ),
                 )
         }
@@ -135,14 +135,14 @@ class KoEnumConstantDeclarationForKoDeclarationProviderTest {
             countDeclarations(
                 includeLocal = false,
                 includeNested = true,
-            ) { (it as KoNameProvider).hasNameStartingWith("sampleNested") }
+            ) { (it as KoNameProvider).hasNameStartingWith("fixtureNested") }
                 .shouldBeEqualTo(2)
 
             hasDeclarations(includeLocal = false, includeNested = true) shouldBeEqualTo true
             hasDeclaration(
                 includeLocal = false,
                 includeNested = true,
-            ) { (it as KoNameProvider).name == "sampleNestedProperty" }
+            ) { (it as KoNameProvider).name == "fixtureNestedProperty" }
                 .shouldBeEqualTo(true)
 
             hasDeclaration(
@@ -154,12 +154,12 @@ class KoEnumConstantDeclarationForKoDeclarationProviderTest {
             hasAllDeclarations(
                 includeLocal = false,
                 includeNested = true,
-            ) { (it as KoNameProvider).hasNameContaining("ample") }
+            ) { (it as KoNameProvider).hasNameContaining("ixture") }
                 .shouldBeEqualTo(true)
 
             hasAllDeclarations(includeLocal = false, includeNested = true) {
                 (it as KoNameProvider).hasNameStartingWith(
-                    "sample",
+                    "fixture",
                 )
             }.shouldBeEqualTo(false)
 
@@ -168,12 +168,12 @@ class KoEnumConstantDeclarationForKoDeclarationProviderTest {
                 .map { it.name }
                 .shouldBeEqualTo(
                     listOf(
-                        "sampleProperty",
-                        "sampleFunction",
-                        "SampleInnerClass",
-                        "sampleNestedProperty",
-                        "sampleNestedFunction",
-                        "SampleNestedClass",
+                        "fixtureProperty",
+                        "fixtureFunction",
+                        "FixtureInnerClass",
+                        "fixtureNestedProperty",
+                        "fixtureNestedFunction",
+                        "FixtureNestedClass",
                     ),
                 )
         }
@@ -195,14 +195,14 @@ class KoEnumConstantDeclarationForKoDeclarationProviderTest {
             countDeclarations(
                 includeLocal = true,
                 includeNested = true,
-            ) { (it as KoNameProvider).hasNameStartingWith("sample") }
+            ) { (it as KoNameProvider).hasNameStartingWith("fixture") }
                 .shouldBeEqualTo(6)
 
             hasDeclarations(includeLocal = true, includeNested = true) shouldBeEqualTo true
             hasDeclaration(
                 includeLocal = true,
                 includeNested = true,
-            ) { (it as KoNameProvider).name == "sampleLocalProperty" }
+            ) { (it as KoNameProvider).name == "fixtureLocalProperty" }
                 .shouldBeEqualTo(true)
 
             hasDeclaration(
@@ -214,12 +214,12 @@ class KoEnumConstantDeclarationForKoDeclarationProviderTest {
             hasAllDeclarations(
                 includeLocal = true,
                 includeNested = true,
-            ) { (it as KoNameProvider).hasNameContaining("ample") }
+            ) { (it as KoNameProvider).hasNameContaining("ixture") }
                 .shouldBeEqualTo(true)
 
             hasAllDeclarations(includeLocal = true, includeNested = true) {
                 (it as KoNameProvider).hasNameStartingWith(
-                    "sample",
+                    "fixture",
                 )
             }.shouldBeEqualTo(false)
 
@@ -228,15 +228,15 @@ class KoEnumConstantDeclarationForKoDeclarationProviderTest {
                 .map { it.name }
                 .shouldBeEqualTo(
                     listOf(
-                        "sampleProperty",
-                        "sampleFunction",
-                        "sampleLocalProperty",
-                        "sampleLocalFunction",
-                        "SampleLocalClass",
-                        "SampleInnerClass",
-                        "sampleNestedProperty",
-                        "sampleNestedFunction",
-                        "SampleNestedClass",
+                        "fixtureProperty",
+                        "fixtureFunction",
+                        "fixtureLocalProperty",
+                        "fixtureLocalFunction",
+                        "FixtureLocalClass",
+                        "FixtureInnerClass",
+                        "fixtureNestedProperty",
+                        "fixtureNestedFunction",
+                        "FixtureNestedClass",
                     ),
                 )
         }

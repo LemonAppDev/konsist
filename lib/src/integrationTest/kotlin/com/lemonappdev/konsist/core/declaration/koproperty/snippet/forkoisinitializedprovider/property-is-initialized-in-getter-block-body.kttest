@@ -1,4 +1,4 @@
-val sampleProperty: Int
+val fixtureProperty: Int
     get() {
         return 6
     }

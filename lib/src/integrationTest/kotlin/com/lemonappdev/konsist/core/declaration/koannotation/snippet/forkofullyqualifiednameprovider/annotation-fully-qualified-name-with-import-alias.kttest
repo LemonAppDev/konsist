@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation as AnnotationImportAlias
+import com.lemonappdev.konsist.testdata.FixtureAnnotation as AnnotationImportAlias
 
 @AnnotationImportAlias
-fun sampleFunction() {
+fun fixtureFunction() {
 }

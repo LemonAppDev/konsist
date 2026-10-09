@@ -1,1 +1,1 @@
-var sampleProperty: String = ""
+var fixtureProperty: String = ""

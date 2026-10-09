@@ -1,4 +1,4 @@
-open class SampleClass {
-    protected suspend fun sampleFunction() {
+open class FixtureClass {
+    protected suspend fun fixtureFunction() {
     }
 }

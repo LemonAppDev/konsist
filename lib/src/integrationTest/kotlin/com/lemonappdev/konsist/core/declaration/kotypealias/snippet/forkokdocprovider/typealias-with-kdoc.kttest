@@ -1,7 +1,7 @@
 /**
- * Sample KDoc
+ * Fixture KDoc
  */
-typealias SampleTypeAlias = () -> Int
+typealias FixtureTypeAlias = () -> Int
 
-class SampleClass1(val sampleProperty1: SampleTypeAlias)
+class FixtureClass1(val fixtureProperty1: FixtureTypeAlias)
 

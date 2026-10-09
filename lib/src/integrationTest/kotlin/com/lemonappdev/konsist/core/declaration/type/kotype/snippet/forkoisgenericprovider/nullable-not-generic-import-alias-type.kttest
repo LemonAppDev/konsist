@@ -1,3 +1,3 @@
-import com.lemonappdev.konsist.testdata.SampleClass as SampleAlias
+import com.lemonappdev.konsist.testdata.FixtureClass as FixtureAlias
 
-val sampleProperty1: SampleAlias? = SampleAlias()
+val fixtureProperty1: FixtureAlias? = FixtureAlias()

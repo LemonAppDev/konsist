@@ -1,1 +1,1 @@
-val sampleProperty: List<() -> List<String>> = emptyList()
+val fixtureProperty: List<() -> List<String>> = emptyList()

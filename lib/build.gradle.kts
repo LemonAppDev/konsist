@@ -31,8 +31,8 @@ testing {
                 implementation(libs.kluent)
                 implementation(libs.kotest)
 
-                // Include JAR to be able to test external parents (generated from sample-external-library project)
-                implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("sample-external-library-1.2.jar"))))
+                // Include JAR to be able to test external parents (generated from fixture-external-library project)
+                implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("fixture-external-library-1.2.jar"))))
             }
         }
 

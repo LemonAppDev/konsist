@@ -1,2 +1,2 @@
-/** Sample KDoc */
-interface SampleInterface
+/** Fixture KDoc */
+interface FixtureInterface

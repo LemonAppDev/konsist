@@ -16,23 +16,23 @@ class KoClassDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleClass"
-            hasName("SampleClass") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureClass"
+            hasName("FixtureClass") shouldBeEqualTo true
             hasName("OtherClass") shouldBeEqualTo false
-            hasName("sampleclass", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleclass", ignoreCase = true) shouldBeEqualTo true
-            hasNameStartingWith("Sample") shouldBeEqualTo true
+            hasName("fixtureclass", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureclass", ignoreCase = true) shouldBeEqualTo true
+            hasNameStartingWith("Fixture") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
-            hasNameStartingWith("sample", ignoreCase = false) shouldBeEqualTo false
-            hasNameStartingWith("sample", ignoreCase = true) shouldBeEqualTo true
+            hasNameStartingWith("fixture", ignoreCase = false) shouldBeEqualTo false
+            hasNameStartingWith("fixture", ignoreCase = true) shouldBeEqualTo true
             hasNameEndingWith("ass") shouldBeEqualTo true
             hasNameEndingWith("other") shouldBeEqualTo false
             hasNameEndingWith("ASS", ignoreCase = false) shouldBeEqualTo false
             hasNameEndingWith("ASS", ignoreCase = true) shouldBeEqualTo true
-            hasNameContaining("leCl") shouldBeEqualTo true
+            hasNameContaining("reCl") shouldBeEqualTo true
             hasNameContaining("other") shouldBeEqualTo false
-            hasNameContaining("lecl", ignoreCase = false) shouldBeEqualTo false
-            hasNameContaining("lecl", ignoreCase = true) shouldBeEqualTo true
+            hasNameContaining("recl", ignoreCase = false) shouldBeEqualTo false
+            hasNameContaining("recl", ignoreCase = true) shouldBeEqualTo true
             hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }

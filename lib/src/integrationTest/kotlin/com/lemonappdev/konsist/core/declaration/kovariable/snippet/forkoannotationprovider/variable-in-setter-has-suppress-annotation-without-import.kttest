@@ -1,7 +1,7 @@
-var sampleProperty: String = "text"
+var fixtureProperty: String = "text"
     set(value) {
         @Suppress
-        val sampleVariable = ""
+        val fixtureVariable = ""
 
         if (true) field = value
     }

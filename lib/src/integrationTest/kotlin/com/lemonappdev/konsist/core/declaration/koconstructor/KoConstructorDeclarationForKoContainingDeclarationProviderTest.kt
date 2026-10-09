@@ -17,7 +17,7 @@ class KoConstructorDeclarationForKoContainingDeclarationProviderTest {
                 .first()
 
         // then
-        (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "SampleClass"
+        (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "FixtureClass"
     }
 
     private fun getSnippetFile(fileName: String) =

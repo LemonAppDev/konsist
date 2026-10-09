@@ -238,7 +238,7 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withLocalClassNamed(name) returns declaration with given class`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassWithName(listOf(name)) } returns true
@@ -259,8 +259,8 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withLocalClassNamed(String) returns declaration with any of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassWithName(listOf(name1, name2)) } returns true
@@ -281,8 +281,8 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withLocalClassNamed(list of String) returns declaration with any of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassWithName(listOf(name1, name2)) } returns true
@@ -304,8 +304,8 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withLocalClassNamed(set of String) returns declaration with any of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassWithName(setOf(name1, name2)) } returns true
@@ -327,7 +327,7 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withLocalClassNamed(name) with ignore case returns declaration with given class`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassWithName(listOf(name), ignoreCase = true) } returns true
@@ -348,8 +348,8 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withLocalClassNamed(list of String) with ignore case returns declaration with any of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassWithName(listOf(name1, name2), ignoreCase = true) } returns true
@@ -371,7 +371,7 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withoutLocalClassNamed(name) returns declaration without given class`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassWithName(listOf(name)) } returns true
@@ -392,8 +392,8 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withoutLocalClassNamed(String) returns declaration without any of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassWithName(listOf(name1, name2)) } returns true
@@ -414,8 +414,8 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withoutLocalClassNamed(list of String) returns declaration without any of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassWithName(listOf(name1, name2)) } returns true
@@ -437,8 +437,8 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withoutLocalClassNamed(set of String) returns declaration without any of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassWithName(setOf(name1, name2)) } returns true
@@ -460,7 +460,7 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withoutLocalClassNamed(name) with ignore case returns declaration without given class`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassWithName(listOf(name), ignoreCase = true) } returns true
@@ -481,8 +481,8 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withoutLocalClassNamed(list of String) with ignore case returns declaration without any of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassWithName(listOf(name1, name2), ignoreCase = true) } returns true
@@ -504,7 +504,7 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withAllLocalClassesNamed(name) returns declaration with given class`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassesWithAllNames(listOf(name)) } returns true
@@ -525,8 +525,8 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withAllLocalClassesNamed(String) returns declaration with all given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassesWithAllNames(listOf(name1, name2)) } returns true
@@ -547,8 +547,8 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withAllLocalClassesNamed(list of String) returns declaration with all given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassesWithAllNames(listOf(name1, name2)) } returns true
@@ -570,8 +570,8 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withAllLocalClassesNamed(set of String) returns declaration with all given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassesWithAllNames(setOf(name1, name2)) } returns true
@@ -593,7 +593,7 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withAllLocalClassesNamed(name) with ignore case returns declaration with given class`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassesWithAllNames(listOf(name), ignoreCase = true) } returns true
@@ -614,8 +614,8 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withAllLocalClassesNamed(list of String) with ignore case returns declaration with all given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
@@ -637,7 +637,7 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withoutAllLocalClassesNamed(name) returns declaration without given class`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassesWithAllNames(listOf(name)) } returns true
@@ -658,8 +658,8 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withoutAllLocalClassesNamed(String) returns declaration without all of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassesWithAllNames(listOf(name1, name2)) } returns true
@@ -680,8 +680,8 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withoutAllLocalClassesNamed(list of String) returns declaration without all of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassesWithAllNames(listOf(name1, name2)) } returns true
@@ -703,8 +703,8 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withoutAllLocalClassesNamed(set of String) returns declaration without all of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassesWithAllNames(setOf(name1, name2)) } returns true
@@ -726,7 +726,7 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withoutAllLocalClassesNamed(name) with ignore case returns declaration without given class`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassesWithAllNames(listOf(name), ignoreCase = true) } returns true
@@ -747,8 +747,8 @@ class KoLocalClassProviderListExtTest {
     @Test
     fun `withoutAllLocalClassesNamed(list of String) with ignore case returns declaration without all of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoLocalClassProvider =
             mockk {
                 every { hasLocalClassesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true

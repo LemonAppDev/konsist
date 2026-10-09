@@ -1,5 +1,5 @@
-interface SampleTopLevelInterface {
-    public class SampleClass1
+interface FixtureTopLevelInterface {
+    public class FixtureClass1
 
-    class SampleClass2
+    class FixtureClass2
 }

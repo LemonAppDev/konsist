@@ -1,6 +1,6 @@
-val sampleProperty: String
+val fixtureProperty: String
     get() {
-        fun sampleLocalFunction() {
+        fun fixtureLocalFunction() {
         }
 
         return ""

@@ -1,2 +1,2 @@
-/** Sample KDoc */
-object SampleObject
+/** Fixture KDoc */
+object FixtureObject

@@ -39,11 +39,11 @@ class KoArgumentDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "sampleArgument"
-            hasName("sampleArgument") shouldBeEqualTo true
+            name shouldBeEqualTo "fixtureArgument"
+            hasName("fixtureArgument") shouldBeEqualTo true
             hasName("otherArgument") shouldBeEqualTo false
-            hasName("sampleargument", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleargument", ignoreCase = true) shouldBeEqualTo true
+            hasName("fixtureargument", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureargument", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -77,11 +77,11 @@ class KoArgumentDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "sampleParameter"
-            hasName("sampleParameter") shouldBeEqualTo true
+            name shouldBeEqualTo "fixtureParameter"
+            hasName("fixtureParameter") shouldBeEqualTo true
             hasName("otherParameter") shouldBeEqualTo false
-            hasName("sampleparameter", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleparameter", ignoreCase = true) shouldBeEqualTo true
+            hasName("fixtureparameter", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureparameter", ignoreCase = true) shouldBeEqualTo true
         }
     }
 

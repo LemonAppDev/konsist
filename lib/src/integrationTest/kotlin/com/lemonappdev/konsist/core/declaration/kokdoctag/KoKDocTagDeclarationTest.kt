@@ -18,7 +18,7 @@ class KoKDocTagDeclarationTest {
                 .first()
 
         // then
-        sut.toString() shouldBeEqualTo "@return sample text"
+        sut.toString() shouldBeEqualTo "@return fixture text"
     }
 
     private fun getSnippetFile(fileName: String) =

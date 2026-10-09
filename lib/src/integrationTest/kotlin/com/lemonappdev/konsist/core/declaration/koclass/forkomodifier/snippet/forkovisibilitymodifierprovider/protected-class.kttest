@@ -1,4 +1,4 @@
-class SampleTopLevelClass {
-    protected class SampleClass {
+class FixtureTopLevelClass {
+    protected class FixtureClass {
     }
 }

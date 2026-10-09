@@ -20,7 +20,7 @@ class KoScopeForKoObjectDeclarationTest {
         val sut = getSnippetFile("scope-contains-objects")
 
         // then
-        val expected = listOf("SampleObject", "SampleNestedObject")
+        val expected = listOf("FixtureObject", "FixtureNestedObject")
 
         sut
             .objects(includeNested = true)
@@ -34,7 +34,7 @@ class KoScopeForKoObjectDeclarationTest {
         val sut = getSnippetFile("scope-contains-objects")
 
         // then
-        val expected = listOf("SampleObject")
+        val expected = listOf("FixtureObject")
 
         sut
             .objects(includeNested = false)

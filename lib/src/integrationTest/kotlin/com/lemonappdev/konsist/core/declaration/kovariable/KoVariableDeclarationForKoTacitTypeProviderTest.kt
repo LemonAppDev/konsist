@@ -2,8 +2,8 @@ package com.lemonappdev.konsist.core.declaration.kovariable
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.variables
-import com.lemonappdev.konsist.testdata.SampleClass
-import com.lemonappdev.konsist.testdata.SampleClassWithParameter
+import com.lemonappdev.konsist.testdata.FixtureClass
+import com.lemonappdev.konsist.testdata.FixtureClassWithParameter
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -54,10 +54,10 @@ class KoVariableDeclarationForKoTacitTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasTacitType("SampleClassWithParameter") shouldBeEqualTo true
-            hasTacitType("SampleClass") shouldBeEqualTo false
-            hasTacitTypeOf(SampleClassWithParameter::class) shouldBeEqualTo true
-            hasTacitTypeOf(SampleClass::class) shouldBeEqualTo false
+            hasTacitType("FixtureClassWithParameter") shouldBeEqualTo true
+            hasTacitType("FixtureClass") shouldBeEqualTo false
+            hasTacitTypeOf(FixtureClassWithParameter::class) shouldBeEqualTo true
+            hasTacitTypeOf(FixtureClass::class) shouldBeEqualTo false
         }
     }
 
@@ -72,10 +72,10 @@ class KoVariableDeclarationForKoTacitTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasTacitType("SampleClassWithParameter") shouldBeEqualTo true
-            hasTacitType("SampleClass") shouldBeEqualTo false
-            hasTacitTypeOf(SampleClassWithParameter::class) shouldBeEqualTo true
-            hasTacitTypeOf(SampleClass::class) shouldBeEqualTo false
+            hasTacitType("FixtureClassWithParameter") shouldBeEqualTo true
+            hasTacitType("FixtureClass") shouldBeEqualTo false
+            hasTacitTypeOf(FixtureClassWithParameter::class) shouldBeEqualTo true
+            hasTacitTypeOf(FixtureClass::class) shouldBeEqualTo false
         }
     }
 

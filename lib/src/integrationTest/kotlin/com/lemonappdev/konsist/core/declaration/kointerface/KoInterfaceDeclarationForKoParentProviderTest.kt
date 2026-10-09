@@ -1,11 +1,11 @@
 package com.lemonappdev.konsist.core.declaration.kointerface
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.testdata.SampleInterface
-import com.lemonappdev.konsist.testdata.SampleParentClass
-import com.lemonappdev.konsist.testdata.SampleParentInterface
-import com.lemonappdev.konsist.testdata.SampleParentInterface1
-import com.lemonappdev.konsist.testdata.SampleParentInterface2
+import com.lemonappdev.konsist.testdata.FixtureInterface
+import com.lemonappdev.konsist.testdata.FixtureParentClass
+import com.lemonappdev.konsist.testdata.FixtureParentInterface
+import com.lemonappdev.konsist.testdata.FixtureParentInterface1
+import com.lemonappdev.konsist.testdata.FixtureParentInterface2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -24,26 +24,26 @@ class KoInterfaceDeclarationForKoParentProviderTest {
         assertSoftly(sut) {
             parents() shouldBeEqualTo emptyList()
             numParents() shouldBeEqualTo 0
-            countParents { it.name == "SampleParentClass" } shouldBeEqualTo 0
+            countParents { it.name == "FixtureParentClass" } shouldBeEqualTo 0
             hasParents() shouldBeEqualTo false
             hasParentWithName(emptyList()) shouldBeEqualTo false
             hasParentWithName(emptySet()) shouldBeEqualTo false
             hasParentsWithAllNames(emptyList()) shouldBeEqualTo false
             hasParentsWithAllNames(emptySet()) shouldBeEqualTo false
-            hasParentWithName("SampleParentClass") shouldBeEqualTo false
-            hasParentWithName(listOf("SampleParentClass")) shouldBeEqualTo false
-            hasParentWithName(setOf("SampleParentClass")) shouldBeEqualTo false
-            hasParentsWithAllNames("SampleParentClass", "SampleParentInterface") shouldBeEqualTo false
-            hasParentsWithAllNames(listOf("SampleParentClass", "SampleParentInterface")) shouldBeEqualTo false
-            hasParentsWithAllNames(setOf("SampleParentClass", "SampleParentInterface")) shouldBeEqualTo false
-            hasParent { it.name == "SampleParentClass" } shouldBeEqualTo false
-            hasAllParents { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
-            hasParentOf(SampleParentClass::class) shouldBeEqualTo false
-            hasParentOf(listOf(SampleParentClass::class)) shouldBeEqualTo false
-            hasParentOf(setOf(SampleParentClass::class)) shouldBeEqualTo false
-            hasAllParentsOf(SampleParentClass::class, SampleParentInterface::class) shouldBeEqualTo false
-            hasAllParentsOf(listOf(SampleParentClass::class, SampleParentInterface::class)) shouldBeEqualTo false
-            hasAllParentsOf(setOf(SampleParentClass::class, SampleParentInterface::class)) shouldBeEqualTo false
+            hasParentWithName("FixtureParentClass") shouldBeEqualTo false
+            hasParentWithName(listOf("FixtureParentClass")) shouldBeEqualTo false
+            hasParentWithName(setOf("FixtureParentClass")) shouldBeEqualTo false
+            hasParentsWithAllNames("FixtureParentClass", "FixtureParentInterface") shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("FixtureParentClass", "FixtureParentInterface")) shouldBeEqualTo false
+            hasParentsWithAllNames(setOf("FixtureParentClass", "FixtureParentInterface")) shouldBeEqualTo false
+            hasParent { it.name == "FixtureParentClass" } shouldBeEqualTo false
+            hasAllParents { it.hasNameStartingWith("Fixture") } shouldBeEqualTo true
+            hasParentOf(FixtureParentClass::class) shouldBeEqualTo false
+            hasParentOf(listOf(FixtureParentClass::class)) shouldBeEqualTo false
+            hasParentOf(setOf(FixtureParentClass::class)) shouldBeEqualTo false
+            hasAllParentsOf(FixtureParentClass::class, FixtureParentInterface::class) shouldBeEqualTo false
+            hasAllParentsOf(listOf(FixtureParentClass::class, FixtureParentInterface::class)) shouldBeEqualTo false
+            hasAllParentsOf(setOf(FixtureParentClass::class, FixtureParentInterface::class)) shouldBeEqualTo false
         }
     }
 
@@ -59,60 +59,60 @@ class KoInterfaceDeclarationForKoParentProviderTest {
         assertSoftly(sut) {
             parents().map { it.name } shouldBeEqualTo
                 listOf(
-                    "SampleParentInterface1",
-                    "SampleParentInterface2",
-                    "SampleExternalInterface",
-                    "SampleExternalGenericInterface<Int>",
+                    "FixtureParentInterface1",
+                    "FixtureParentInterface2",
+                    "FixtureExternalInterface",
+                    "FixtureExternalGenericInterface<Int>",
                 )
             numParents() shouldBeEqualTo 4
-            countParents { it.name == "SampleParentInterface1" } shouldBeEqualTo 1
-            countParents { it.hasNameStartingWith("SampleExternal") } shouldBeEqualTo 2
+            countParents { it.name == "FixtureParentInterface1" } shouldBeEqualTo 1
+            countParents { it.hasNameStartingWith("FixtureExternal") } shouldBeEqualTo 2
             hasParents() shouldBeEqualTo true
             hasParentWithName(emptyList()) shouldBeEqualTo true
             hasParentWithName(emptySet()) shouldBeEqualTo true
             hasParentsWithAllNames(emptyList()) shouldBeEqualTo true
             hasParentsWithAllNames(emptySet()) shouldBeEqualTo true
-            hasParentWithName("SampleParentInterface1") shouldBeEqualTo true
+            hasParentWithName("FixtureParentInterface1") shouldBeEqualTo true
             hasParentWithName("OtherInterface") shouldBeEqualTo false
-            hasParentWithName("SampleParentInterface1", "OtherInterface") shouldBeEqualTo true
-            hasParentWithName(listOf("SampleParentInterface1")) shouldBeEqualTo true
+            hasParentWithName("FixtureParentInterface1", "OtherInterface") shouldBeEqualTo true
+            hasParentWithName(listOf("FixtureParentInterface1")) shouldBeEqualTo true
             hasParentWithName(listOf("OtherInterface")) shouldBeEqualTo false
-            hasParentWithName(listOf("SampleParentInterface1", "OtherInterface")) shouldBeEqualTo true
-            hasParentWithName(setOf("SampleParentInterface1")) shouldBeEqualTo true
+            hasParentWithName(listOf("FixtureParentInterface1", "OtherInterface")) shouldBeEqualTo true
+            hasParentWithName(setOf("FixtureParentInterface1")) shouldBeEqualTo true
             hasParentWithName(setOf("OtherInterface")) shouldBeEqualTo false
-            hasParentWithName(setOf("SampleParentInterface1", "OtherInterface")) shouldBeEqualTo true
-            hasParentsWithAllNames("SampleParentInterface1") shouldBeEqualTo true
+            hasParentWithName(setOf("FixtureParentInterface1", "OtherInterface")) shouldBeEqualTo true
+            hasParentsWithAllNames("FixtureParentInterface1") shouldBeEqualTo true
             hasParentsWithAllNames("OtherInterface") shouldBeEqualTo false
-            hasParentsWithAllNames("SampleParentInterface1", "SampleExternalInterface") shouldBeEqualTo true
-            hasParentsWithAllNames("SampleParentInterface1", "OtherInterface") shouldBeEqualTo false
-            hasParentsWithAllNames(listOf("SampleParentInterface1")) shouldBeEqualTo true
+            hasParentsWithAllNames("FixtureParentInterface1", "FixtureExternalInterface") shouldBeEqualTo true
+            hasParentsWithAllNames("FixtureParentInterface1", "OtherInterface") shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("FixtureParentInterface1")) shouldBeEqualTo true
             hasParentsWithAllNames(listOf("OtherInterface")) shouldBeEqualTo false
-            hasParentsWithAllNames(listOf("SampleParentInterface1", "SampleExternalInterface")) shouldBeEqualTo true
-            hasParentsWithAllNames(listOf("SampleParentInterface1", "OtherInterface")) shouldBeEqualTo false
-            hasParentsWithAllNames(setOf("SampleParentInterface1")) shouldBeEqualTo true
+            hasParentsWithAllNames(listOf("FixtureParentInterface1", "FixtureExternalInterface")) shouldBeEqualTo true
+            hasParentsWithAllNames(listOf("FixtureParentInterface1", "OtherInterface")) shouldBeEqualTo false
+            hasParentsWithAllNames(setOf("FixtureParentInterface1")) shouldBeEqualTo true
             hasParentsWithAllNames(setOf("OtherInterface")) shouldBeEqualTo false
-            hasParentsWithAllNames(setOf("SampleParentInterface1", "SampleExternalInterface")) shouldBeEqualTo true
-            hasParentsWithAllNames(setOf("SampleParentInterface1", "OtherInterface")) shouldBeEqualTo false
-            hasParent { it.name == "SampleParentInterface1" } shouldBeEqualTo true
+            hasParentsWithAllNames(setOf("FixtureParentInterface1", "FixtureExternalInterface")) shouldBeEqualTo true
+            hasParentsWithAllNames(setOf("FixtureParentInterface1", "OtherInterface")) shouldBeEqualTo false
+            hasParent { it.name == "FixtureParentInterface1" } shouldBeEqualTo true
             hasParent { it.name == "OtherInterface" } shouldBeEqualTo false
-            hasAllParents { it.name == "SampleParentInterface1" } shouldBeEqualTo false
+            hasAllParents { it.name == "FixtureParentInterface1" } shouldBeEqualTo false
             hasAllParents { it.hasNameContaining("Parent") || it.hasNameContaining("External") } shouldBeEqualTo true
             hasAllParents { it.hasNameStartingWith("Other") } shouldBeEqualTo false
-            hasParentOf(SampleParentInterface1::class) shouldBeEqualTo true
-            hasParentOf(SampleParentInterface1::class, SampleInterface::class) shouldBeEqualTo true
-            hasParentOf(listOf(SampleParentInterface1::class)) shouldBeEqualTo true
-            hasParentOf(listOf(SampleParentInterface1::class, SampleInterface::class)) shouldBeEqualTo true
-            hasParentOf(setOf(SampleParentInterface1::class)) shouldBeEqualTo true
-            hasParentOf(setOf(SampleParentInterface1::class, SampleInterface::class)) shouldBeEqualTo true
-            hasAllParentsOf(SampleParentInterface1::class) shouldBeEqualTo true
-            hasAllParentsOf(SampleParentInterface1::class, SampleInterface::class) shouldBeEqualTo false
-            hasAllParentsOf(SampleParentInterface1::class, SampleParentInterface2::class) shouldBeEqualTo true
-            hasAllParentsOf(listOf(SampleParentInterface1::class)) shouldBeEqualTo true
-            hasAllParentsOf(listOf(SampleParentInterface1::class, SampleInterface::class)) shouldBeEqualTo false
-            hasAllParentsOf(listOf(SampleParentInterface1::class, SampleParentInterface2::class)) shouldBeEqualTo true
-            hasAllParentsOf(setOf(SampleParentInterface1::class)) shouldBeEqualTo true
-            hasAllParentsOf(setOf(SampleParentInterface1::class, SampleInterface::class)) shouldBeEqualTo false
-            hasAllParentsOf(setOf(SampleParentInterface1::class, SampleParentInterface2::class)) shouldBeEqualTo true
+            hasParentOf(FixtureParentInterface1::class) shouldBeEqualTo true
+            hasParentOf(FixtureParentInterface1::class, FixtureInterface::class) shouldBeEqualTo true
+            hasParentOf(listOf(FixtureParentInterface1::class)) shouldBeEqualTo true
+            hasParentOf(listOf(FixtureParentInterface1::class, FixtureInterface::class)) shouldBeEqualTo true
+            hasParentOf(setOf(FixtureParentInterface1::class)) shouldBeEqualTo true
+            hasParentOf(setOf(FixtureParentInterface1::class, FixtureInterface::class)) shouldBeEqualTo true
+            hasAllParentsOf(FixtureParentInterface1::class) shouldBeEqualTo true
+            hasAllParentsOf(FixtureParentInterface1::class, FixtureInterface::class) shouldBeEqualTo false
+            hasAllParentsOf(FixtureParentInterface1::class, FixtureParentInterface2::class) shouldBeEqualTo true
+            hasAllParentsOf(listOf(FixtureParentInterface1::class)) shouldBeEqualTo true
+            hasAllParentsOf(listOf(FixtureParentInterface1::class, FixtureInterface::class)) shouldBeEqualTo false
+            hasAllParentsOf(listOf(FixtureParentInterface1::class, FixtureParentInterface2::class)) shouldBeEqualTo true
+            hasAllParentsOf(setOf(FixtureParentInterface1::class)) shouldBeEqualTo true
+            hasAllParentsOf(setOf(FixtureParentInterface1::class, FixtureInterface::class)) shouldBeEqualTo false
+            hasAllParentsOf(setOf(FixtureParentInterface1::class, FixtureParentInterface2::class)) shouldBeEqualTo true
         }
     }
 
@@ -128,97 +128,97 @@ class KoInterfaceDeclarationForKoParentProviderTest {
         assertSoftly(sut) {
             parents().map { it.name } shouldBeEqualTo
                 listOf(
-                    "SampleParentInterface",
-                    "SampleExternalInterface",
+                    "FixtureParentInterface",
+                    "FixtureExternalInterface",
                 )
             numParents(indirectParents = false) shouldBeEqualTo 2
             parents(indirectParents = true).map { it.name } shouldBeEqualTo
                 listOf(
-                    "SampleParentInterface",
-                    "SampleExternalInterface",
-                    "SampleParentInterface1",
-                    "SampleParentInterface2",
+                    "FixtureParentInterface",
+                    "FixtureExternalInterface",
+                    "FixtureParentInterface1",
+                    "FixtureParentInterface2",
                 )
             numParents(indirectParents = true) shouldBeEqualTo 4
-            countParents(indirectParents = true) { it.name == "SampleParentInterface2" } shouldBeEqualTo 1
-            countParents(indirectParents = true) { it.hasNameStartingWith("SampleParentInterface") } shouldBeEqualTo 3
+            countParents(indirectParents = true) { it.name == "FixtureParentInterface2" } shouldBeEqualTo 1
+            countParents(indirectParents = true) { it.hasNameStartingWith("FixtureParentInterface") } shouldBeEqualTo 3
             hasParents(indirectParents = true) shouldBeEqualTo true
             hasParents(indirectParents = true) shouldBeEqualTo true
             hasParentWithName(emptyList(), indirectParents = true) shouldBeEqualTo true
             hasParentWithName(emptySet(), indirectParents = true) shouldBeEqualTo true
             hasParentsWithAllNames(emptyList(), indirectParents = true) shouldBeEqualTo true
             hasParentsWithAllNames(emptySet(), indirectParents = true) shouldBeEqualTo true
-            hasParentWithName("SampleParentInterface2", indirectParents = true) shouldBeEqualTo true
+            hasParentWithName("FixtureParentInterface2", indirectParents = true) shouldBeEqualTo true
             hasParentWithName("OtherInterface", indirectParents = true) shouldBeEqualTo false
-            hasParentWithName("SampleParentInterface2", "OtherInterface", indirectParents = true) shouldBeEqualTo true
-            hasParentWithName(listOf("SampleParentInterface2"), indirectParents = true) shouldBeEqualTo true
+            hasParentWithName("FixtureParentInterface2", "OtherInterface", indirectParents = true) shouldBeEqualTo true
+            hasParentWithName(listOf("FixtureParentInterface2"), indirectParents = true) shouldBeEqualTo true
             hasParentWithName(listOf("OtherInterface"), indirectParents = true) shouldBeEqualTo false
-            hasParentWithName(listOf("SampleParentInterface2", "OtherInterface"), indirectParents = true) shouldBeEqualTo true
-            hasParentWithName(setOf("SampleParentInterface2"), indirectParents = true) shouldBeEqualTo true
+            hasParentWithName(listOf("FixtureParentInterface2", "OtherInterface"), indirectParents = true) shouldBeEqualTo true
+            hasParentWithName(setOf("FixtureParentInterface2"), indirectParents = true) shouldBeEqualTo true
             hasParentWithName(setOf("OtherInterface"), indirectParents = true) shouldBeEqualTo false
-            hasParentWithName(setOf("SampleParentInterface2", "OtherInterface"), indirectParents = true) shouldBeEqualTo true
-            hasParentsWithAllNames("SampleParentInterface2", indirectParents = true) shouldBeEqualTo true
+            hasParentWithName(setOf("FixtureParentInterface2", "OtherInterface"), indirectParents = true) shouldBeEqualTo true
+            hasParentsWithAllNames("FixtureParentInterface2", indirectParents = true) shouldBeEqualTo true
             hasParentsWithAllNames("OtherInterface", indirectParents = true) shouldBeEqualTo false
             hasParentsWithAllNames(
-                "SampleParentInterface2",
-                "SampleParentInterface1",
+                "FixtureParentInterface2",
+                "FixtureParentInterface1",
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasParentsWithAllNames("SampleParentInterface2", "OtherInterface", indirectParents = true) shouldBeEqualTo false
-            hasParentsWithAllNames(listOf("SampleParentInterface2"), indirectParents = true) shouldBeEqualTo true
+            hasParentsWithAllNames("FixtureParentInterface2", "OtherInterface", indirectParents = true) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("FixtureParentInterface2"), indirectParents = true) shouldBeEqualTo true
             hasParentsWithAllNames(listOf("OtherInterface"), indirectParents = true) shouldBeEqualTo false
             hasParentsWithAllNames(
                 listOf(
-                    "SampleParentInterface2",
-                    "SampleParentInterface1",
+                    "FixtureParentInterface2",
+                    "FixtureParentInterface1",
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasParentsWithAllNames(listOf("SampleParentInterface2", "OtherInterface"), indirectParents = true) shouldBeEqualTo false
-            hasParentsWithAllNames(setOf("SampleParentInterface2"), indirectParents = true) shouldBeEqualTo true
+            hasParentsWithAllNames(listOf("FixtureParentInterface2", "OtherInterface"), indirectParents = true) shouldBeEqualTo false
+            hasParentsWithAllNames(setOf("FixtureParentInterface2"), indirectParents = true) shouldBeEqualTo true
             hasParentsWithAllNames(setOf("OtherInterface"), indirectParents = true) shouldBeEqualTo false
             hasParentsWithAllNames(
                 setOf(
-                    "SampleParentInterface2",
-                    "SampleParentInterface1",
+                    "FixtureParentInterface2",
+                    "FixtureParentInterface1",
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasParentsWithAllNames(setOf("SampleParentInterface2", "OtherInterface"), indirectParents = true) shouldBeEqualTo false
-            hasParent(indirectParents = true) { it.name == "SampleParentInterface2" } shouldBeEqualTo true
+            hasParentsWithAllNames(setOf("FixtureParentInterface2", "OtherInterface"), indirectParents = true) shouldBeEqualTo false
+            hasParent(indirectParents = true) { it.name == "FixtureParentInterface2" } shouldBeEqualTo true
             hasParent(indirectParents = true) { it.name == "OtherClass" } shouldBeEqualTo false
-            hasAllParents(indirectParents = true) { it.name == "SampleParentInterface2" } shouldBeEqualTo false
-            hasAllParents(indirectParents = true) { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAllParents(indirectParents = true) { it.name == "FixtureParentInterface2" } shouldBeEqualTo false
+            hasAllParents(indirectParents = true) { it.hasNameStartingWith("Fixture") } shouldBeEqualTo true
             hasAllParents(indirectParents = true) { it.hasNameStartingWith("Other") } shouldBeEqualTo false
-            hasParentOf(SampleParentInterface2::class, indirectParents = true) shouldBeEqualTo true
-            hasParentOf(SampleParentInterface2::class, SampleInterface::class, indirectParents = true) shouldBeEqualTo true
-            hasParentOf(listOf(SampleParentInterface2::class), indirectParents = true) shouldBeEqualTo true
-            hasParentOf(listOf(SampleParentInterface2::class, SampleInterface::class), indirectParents = true) shouldBeEqualTo true
-            hasParentOf(setOf(SampleParentInterface2::class), indirectParents = true) shouldBeEqualTo true
-            hasParentOf(setOf(SampleParentInterface2::class, SampleInterface::class), indirectParents = true) shouldBeEqualTo true
-            hasAllParentsOf(SampleParentInterface2::class, indirectParents = true) shouldBeEqualTo true
+            hasParentOf(FixtureParentInterface2::class, indirectParents = true) shouldBeEqualTo true
+            hasParentOf(FixtureParentInterface2::class, FixtureInterface::class, indirectParents = true) shouldBeEqualTo true
+            hasParentOf(listOf(FixtureParentInterface2::class), indirectParents = true) shouldBeEqualTo true
+            hasParentOf(listOf(FixtureParentInterface2::class, FixtureInterface::class), indirectParents = true) shouldBeEqualTo true
+            hasParentOf(setOf(FixtureParentInterface2::class), indirectParents = true) shouldBeEqualTo true
+            hasParentOf(setOf(FixtureParentInterface2::class, FixtureInterface::class), indirectParents = true) shouldBeEqualTo true
+            hasAllParentsOf(FixtureParentInterface2::class, indirectParents = true) shouldBeEqualTo true
             hasAllParentsOf(
-                SampleParentInterface2::class,
-                SampleInterface::class,
+                FixtureParentInterface2::class,
+                FixtureInterface::class,
                 indirectParents = true,
             ) shouldBeEqualTo false
             hasAllParentsOf(
-                SampleParentInterface2::class,
-                SampleParentInterface1::class,
+                FixtureParentInterface2::class,
+                FixtureParentInterface1::class,
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasAllParentsOf(listOf(SampleParentInterface2::class), indirectParents = true) shouldBeEqualTo true
+            hasAllParentsOf(listOf(FixtureParentInterface2::class), indirectParents = true) shouldBeEqualTo true
             hasAllParentsOf(
                 listOf(
-                    SampleParentInterface2::class,
-                    SampleInterface::class,
+                    FixtureParentInterface2::class,
+                    FixtureInterface::class,
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo false
             hasAllParentsOf(
                 listOf(
-                    SampleParentInterface2::class,
-                    SampleParentInterface1::class,
+                    FixtureParentInterface2::class,
+                    FixtureParentInterface1::class,
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo true
@@ -237,15 +237,15 @@ class KoInterfaceDeclarationForKoParentProviderTest {
         assertSoftly(sut) {
             parents().map { it.name } shouldBeEqualTo
                 listOf(
-                    "SampleParentInterface1",
-                    "SampleExternalInterface",
+                    "FixtureParentInterface1",
+                    "FixtureExternalInterface",
                 )
             numParents(indirectParents = false) shouldBeEqualTo 2
             parents(indirectParents = true).map { it.name } shouldBeEqualTo
                 listOf(
-                    "SampleParentInterface1",
-                    "SampleExternalInterface",
-                    "SampleParentInterface2",
+                    "FixtureParentInterface1",
+                    "FixtureExternalInterface",
+                    "FixtureParentInterface2",
                 )
             numParents(indirectParents = true) shouldBeEqualTo 3
         }
@@ -276,18 +276,18 @@ class KoInterfaceDeclarationForKoParentProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasParentWithName("sampleparentinterface1") shouldBeEqualTo false
-            hasParentWithName("sampleparentinterface1", ignoreCase = true) shouldBeEqualTo false
-            hasParentWithName(listOf("sampleparentinterface1")) shouldBeEqualTo false
-            hasParentWithName(listOf("sampleparentinterface1"), ignoreCase = true) shouldBeEqualTo false
-            hasParentWithName(setOf("sampleparentinterface1")) shouldBeEqualTo false
-            hasParentWithName(setOf("sampleparentinterface1"), ignoreCase = true) shouldBeEqualTo false
-            hasParentsWithAllNames("sampleparentinterface1", "sampleparentinterface2") shouldBeEqualTo false
-            hasParentsWithAllNames("sampleparentinterface1", "sampleparentinterface2", ignoreCase = true) shouldBeEqualTo false
-            hasParentsWithAllNames(listOf("sampleparentinterface1", "sampleparentinterface2")) shouldBeEqualTo false
-            hasParentsWithAllNames(listOf("sampleparentinterface1", "sampleparentinterface2"), ignoreCase = true) shouldBeEqualTo false
-            hasParentsWithAllNames(setOf("sampleparentinterface1", "sampleparentinterface2")) shouldBeEqualTo false
-            hasParentsWithAllNames(setOf("sampleparentinterface1", "sampleparentinterface2"), ignoreCase = true) shouldBeEqualTo false
+            hasParentWithName("fixtureparentinterface1") shouldBeEqualTo false
+            hasParentWithName("fixtureparentinterface1", ignoreCase = true) shouldBeEqualTo false
+            hasParentWithName(listOf("fixtureparentinterface1")) shouldBeEqualTo false
+            hasParentWithName(listOf("fixtureparentinterface1"), ignoreCase = true) shouldBeEqualTo false
+            hasParentWithName(setOf("fixtureparentinterface1")) shouldBeEqualTo false
+            hasParentWithName(setOf("fixtureparentinterface1"), ignoreCase = true) shouldBeEqualTo false
+            hasParentsWithAllNames("fixtureparentinterface1", "fixtureparentinterface2") shouldBeEqualTo false
+            hasParentsWithAllNames("fixtureparentinterface1", "fixtureparentinterface2", ignoreCase = true) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("fixtureparentinterface1", "fixtureparentinterface2")) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("fixtureparentinterface1", "fixtureparentinterface2"), ignoreCase = true) shouldBeEqualTo false
+            hasParentsWithAllNames(setOf("fixtureparentinterface1", "fixtureparentinterface2")) shouldBeEqualTo false
+            hasParentsWithAllNames(setOf("fixtureparentinterface1", "fixtureparentinterface2"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 
@@ -301,30 +301,30 @@ class KoInterfaceDeclarationForKoParentProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasParentWithName("sampleparentinterface1") shouldBeEqualTo false
-            hasParentWithName("sampleparentinterface1", ignoreCase = true) shouldBeEqualTo true
+            hasParentWithName("fixtureparentinterface1") shouldBeEqualTo false
+            hasParentWithName("fixtureparentinterface1", ignoreCase = true) shouldBeEqualTo true
             hasParentWithName("otherparentclass") shouldBeEqualTo false
             hasParentWithName("otherparentclass", ignoreCase = true) shouldBeEqualTo false
-            hasParentWithName("sampleparentinterface1", "otherName") shouldBeEqualTo false
-            hasParentWithName("sampleparentinterface1", "otherName", ignoreCase = true) shouldBeEqualTo true
-            hasParentWithName(listOf("sampleparentinterface1")) shouldBeEqualTo false
-            hasParentWithName(listOf("sampleparentinterface1"), ignoreCase = true) shouldBeEqualTo true
+            hasParentWithName("fixtureparentinterface1", "otherName") shouldBeEqualTo false
+            hasParentWithName("fixtureparentinterface1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasParentWithName(listOf("fixtureparentinterface1")) shouldBeEqualTo false
+            hasParentWithName(listOf("fixtureparentinterface1"), ignoreCase = true) shouldBeEqualTo true
             hasParentWithName(listOf("otherparentclass")) shouldBeEqualTo false
             hasParentWithName(listOf("otherparentclass"), ignoreCase = true) shouldBeEqualTo false
-            hasParentWithName(listOf("sampleparentinterface1", "otherName")) shouldBeEqualTo false
-            hasParentWithName(listOf("sampleparentinterface1", "otherName"), ignoreCase = true) shouldBeEqualTo true
-            hasParentsWithAllNames("sampleparentinterface1") shouldBeEqualTo false
-            hasParentsWithAllNames("sampleparentinterface1", ignoreCase = true) shouldBeEqualTo true
-            hasParentsWithAllNames("sampleparentinterface1", "sampleparentinterface2") shouldBeEqualTo false
-            hasParentsWithAllNames("sampleparentinterface1", "sampleparentinterface2", ignoreCase = true) shouldBeEqualTo true
-            hasParentsWithAllNames("sampleparentinterface1", "otherparentclass") shouldBeEqualTo false
-            hasParentsWithAllNames("sampleparentinterface1", "otherparentclass", ignoreCase = true) shouldBeEqualTo false
-            hasParentsWithAllNames(listOf("sampleparentinterface1")) shouldBeEqualTo false
-            hasParentsWithAllNames(listOf("sampleparentinterface1"), ignoreCase = true) shouldBeEqualTo true
-            hasParentsWithAllNames(listOf("sampleparentinterface1", "sampleparentinterface2")) shouldBeEqualTo false
-            hasParentsWithAllNames(listOf("sampleparentinterface1", "sampleparentinterface2"), ignoreCase = true) shouldBeEqualTo true
-            hasParentsWithAllNames(listOf("sampleparentinterface1", "otherparentclass")) shouldBeEqualTo false
-            hasParentsWithAllNames(listOf("sampleparentinterface1", "otherparentclass"), ignoreCase = true) shouldBeEqualTo false
+            hasParentWithName(listOf("fixtureparentinterface1", "otherName")) shouldBeEqualTo false
+            hasParentWithName(listOf("fixtureparentinterface1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasParentsWithAllNames("fixtureparentinterface1") shouldBeEqualTo false
+            hasParentsWithAllNames("fixtureparentinterface1", ignoreCase = true) shouldBeEqualTo true
+            hasParentsWithAllNames("fixtureparentinterface1", "fixtureparentinterface2") shouldBeEqualTo false
+            hasParentsWithAllNames("fixtureparentinterface1", "fixtureparentinterface2", ignoreCase = true) shouldBeEqualTo true
+            hasParentsWithAllNames("fixtureparentinterface1", "otherparentclass") shouldBeEqualTo false
+            hasParentsWithAllNames("fixtureparentinterface1", "otherparentclass", ignoreCase = true) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("fixtureparentinterface1")) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("fixtureparentinterface1"), ignoreCase = true) shouldBeEqualTo true
+            hasParentsWithAllNames(listOf("fixtureparentinterface1", "fixtureparentinterface2")) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("fixtureparentinterface1", "fixtureparentinterface2"), ignoreCase = true) shouldBeEqualTo true
+            hasParentsWithAllNames(listOf("fixtureparentinterface1", "otherparentclass")) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("fixtureparentinterface1", "otherparentclass"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 

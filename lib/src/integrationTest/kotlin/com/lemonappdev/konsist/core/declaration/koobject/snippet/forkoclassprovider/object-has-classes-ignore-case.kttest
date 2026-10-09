@@ -1,5 +1,5 @@
-object SampleTopLevelObject {
-    public class SampleClass1
+object FixtureTopLevelObject {
+    public class FixtureClass1
 
-    class SampleClass2
+    class FixtureClass2
 }

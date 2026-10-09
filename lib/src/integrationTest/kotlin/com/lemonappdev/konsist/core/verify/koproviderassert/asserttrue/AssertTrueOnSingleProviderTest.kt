@@ -47,9 +47,9 @@ class AssertTrueOnSingleProviderTest {
 
         // then
         try {
-            sut.assertTrue(testName = "sample test") { false }
+            sut.assertTrue(testName = "fixture test") { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'sample test' was violated (1 time)")
+            e.message?.shouldContain("Assert 'fixture test' was violated (1 time)")
                 ?: throw e
         }
     }
@@ -114,7 +114,7 @@ class AssertTrueOnSingleProviderTest {
         try {
             sut.assertTrue { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Class SampleClass")
+            e.message?.shouldContain("Class FixtureClass")
                 ?: throw e
         }
     }
@@ -261,7 +261,7 @@ class AssertTrueOnSingleProviderTest {
                 .first()
 
         // then
-        sut.assertTrue { it.primaryConstructor?.hasParameterWithName("sampleParameter") ?: true }
+        sut.assertTrue { it.primaryConstructor?.hasParameterWithName("fixtureParameter") ?: true }
     }
 
     @Test
@@ -275,7 +275,7 @@ class AssertTrueOnSingleProviderTest {
 
         // when
         val func = {
-            sut.assertTrue { it.primaryConstructor?.hasParameterWithName("sampleParameter") ?: true }
+            sut.assertTrue { it.primaryConstructor?.hasParameterWithName("fixtureParameter") ?: true }
         }
 
         // then
@@ -306,7 +306,7 @@ class AssertTrueOnSingleProviderTest {
 
         // when
         val func = {
-            sut.assertFalse { it.primaryConstructor?.hasParameterWithName("sampleParameter") ?: false }
+            sut.assertFalse { it.primaryConstructor?.hasParameterWithName("fixtureParameter") ?: false }
         }
 
         // then

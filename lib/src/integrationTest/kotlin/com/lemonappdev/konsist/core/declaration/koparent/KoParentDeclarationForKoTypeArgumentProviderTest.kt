@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.declaration.koparent
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.ext.list.parents
-import com.lemonappdev.konsist.testdata.SampleClass
+import com.lemonappdev.konsist.testdata.FixtureClass
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -36,7 +36,7 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             hasTypeArgumentOf(listOf(String::class, Int::class)) shouldBeEqualTo false
             hasAllTypeArgumentsOf(String::class, Int::class) shouldBeEqualTo false
             hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
-            hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
         }
@@ -99,15 +99,15 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             hasTypeArgumentsWithAllNames(listOf("Int", "String")) shouldBeEqualTo false
             hasTypeArgumentsWithAllNames(listOf("OtherClass", "String")) shouldBeEqualTo false
             hasTypeArgumentOf(Int::class, String::class) shouldBeEqualTo true
-            hasTypeArgumentOf(SampleClass::class, String::class) shouldBeEqualTo false
+            hasTypeArgumentOf(FixtureClass::class, String::class) shouldBeEqualTo false
             hasTypeArgumentOf(listOf(Int::class, String::class)) shouldBeEqualTo true
-            hasTypeArgumentOf(listOf(SampleClass::class, String::class)) shouldBeEqualTo false
+            hasTypeArgumentOf(listOf(FixtureClass::class, String::class)) shouldBeEqualTo false
             hasAllTypeArgumentsOf(Int::class) shouldBeEqualTo true
             hasAllTypeArgumentsOf(Int::class, String::class) shouldBeEqualTo false
-            hasAllTypeArgumentsOf(SampleClass::class, String::class) shouldBeEqualTo false
+            hasAllTypeArgumentsOf(FixtureClass::class, String::class) shouldBeEqualTo false
             hasAllTypeArgumentsOf(listOf(Int::class)) shouldBeEqualTo true
             hasAllTypeArgumentsOf(listOf(Int::class, String::class)) shouldBeEqualTo false
-            hasAllTypeArgumentsOf(listOf(SampleClass::class, String::class)) shouldBeEqualTo false
+            hasAllTypeArgumentsOf(listOf(FixtureClass::class, String::class)) shouldBeEqualTo false
             hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
             hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
@@ -173,7 +173,7 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             hasTypeArgumentOf(listOf(String::class, Int::class)) shouldBeEqualTo false
             hasAllTypeArgumentsOf(String::class, Int::class) shouldBeEqualTo false
             hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
-            hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
         }
@@ -237,15 +237,15 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             hasTypeArgumentsWithAllNames(listOf("Int", "String")) shouldBeEqualTo false
             hasTypeArgumentsWithAllNames(listOf("OtherClass", "String")) shouldBeEqualTo false
             hasTypeArgumentOf(Int::class, String::class) shouldBeEqualTo true
-            hasTypeArgumentOf(SampleClass::class, String::class) shouldBeEqualTo false
+            hasTypeArgumentOf(FixtureClass::class, String::class) shouldBeEqualTo false
             hasTypeArgumentOf(listOf(Int::class, String::class)) shouldBeEqualTo true
-            hasTypeArgumentOf(listOf(SampleClass::class, String::class)) shouldBeEqualTo false
+            hasTypeArgumentOf(listOf(FixtureClass::class, String::class)) shouldBeEqualTo false
             hasAllTypeArgumentsOf(Int::class) shouldBeEqualTo true
             hasAllTypeArgumentsOf(Int::class, String::class) shouldBeEqualTo false
-            hasAllTypeArgumentsOf(SampleClass::class, String::class) shouldBeEqualTo false
+            hasAllTypeArgumentsOf(FixtureClass::class, String::class) shouldBeEqualTo false
             hasAllTypeArgumentsOf(listOf(Int::class)) shouldBeEqualTo true
             hasAllTypeArgumentsOf(listOf(Int::class, String::class)) shouldBeEqualTo false
-            hasAllTypeArgumentsOf(listOf(SampleClass::class, String::class)) shouldBeEqualTo false
+            hasAllTypeArgumentsOf(listOf(FixtureClass::class, String::class)) shouldBeEqualTo false
             hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
             hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
@@ -311,7 +311,7 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             hasTypeArgumentOf(listOf(String::class, Int::class)) shouldBeEqualTo false
             hasAllTypeArgumentsOf(String::class, Int::class) shouldBeEqualTo false
             hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
-            hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
         }
@@ -375,15 +375,15 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             hasTypeArgumentsWithAllNames(listOf("Int", "String")) shouldBeEqualTo false
             hasTypeArgumentsWithAllNames(listOf("OtherClass", "String")) shouldBeEqualTo false
             hasTypeArgumentOf(Int::class, String::class) shouldBeEqualTo true
-            hasTypeArgumentOf(SampleClass::class, String::class) shouldBeEqualTo false
+            hasTypeArgumentOf(FixtureClass::class, String::class) shouldBeEqualTo false
             hasTypeArgumentOf(listOf(Int::class, String::class)) shouldBeEqualTo true
-            hasTypeArgumentOf(listOf(SampleClass::class, String::class)) shouldBeEqualTo false
+            hasTypeArgumentOf(listOf(FixtureClass::class, String::class)) shouldBeEqualTo false
             hasAllTypeArgumentsOf(Int::class) shouldBeEqualTo true
             hasAllTypeArgumentsOf(Int::class, String::class) shouldBeEqualTo false
-            hasAllTypeArgumentsOf(SampleClass::class, String::class) shouldBeEqualTo false
+            hasAllTypeArgumentsOf(FixtureClass::class, String::class) shouldBeEqualTo false
             hasAllTypeArgumentsOf(listOf(Int::class)) shouldBeEqualTo true
             hasAllTypeArgumentsOf(listOf(Int::class, String::class)) shouldBeEqualTo false
-            hasAllTypeArgumentsOf(listOf(SampleClass::class, String::class)) shouldBeEqualTo false
+            hasAllTypeArgumentsOf(listOf(FixtureClass::class, String::class)) shouldBeEqualTo false
             hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
             hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true

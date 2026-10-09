@@ -1,4 +1,4 @@
-val sampleProperty: String
+val fixtureProperty: String
     get() {
         return ""
     }

@@ -36,7 +36,7 @@ class KoVariableDeclarationForKoPackageProviderTest {
                 .first()
 
         // then
-        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
+        sut.packagee?.name shouldBeEqualTo "com.fixturepackage"
     }
 
     companion object {

@@ -42,9 +42,9 @@ class AssertTrueOnProviderListTest {
 
         // then
         try {
-            sut.assertTrue(testName = "sample test") { false }
+            sut.assertTrue(testName = "fixture test") { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'sample test' was violated (2 times)")
+            e.message?.shouldContain("Assert 'fixture test' was violated (2 times)")
                 ?: throw e
         }
     }
@@ -104,7 +104,7 @@ class AssertTrueOnProviderListTest {
         try {
             sut.assertTrue { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Class SampleClass")
+            e.message?.shouldContain("Class FixtureClass")
                 ?: throw e
         }
     }
@@ -240,7 +240,7 @@ class AssertTrueOnProviderListTest {
                 .filterIsInstance<KoPrimaryConstructorProvider>()
 
         // then
-        sut.assertTrue { it.primaryConstructor?.hasParameterWithName("sampleParameter") ?: true }
+        sut.assertTrue { it.primaryConstructor?.hasParameterWithName("fixtureParameter") ?: true }
     }
 
     @Test
@@ -253,7 +253,7 @@ class AssertTrueOnProviderListTest {
 
         // when
         val func = {
-            sut.assertTrue { it.primaryConstructor?.hasParameterWithName("sampleParameter") ?: true }
+            sut.assertTrue { it.primaryConstructor?.hasParameterWithName("fixtureParameter") ?: true }
         }
 
         // then
@@ -282,7 +282,7 @@ class AssertTrueOnProviderListTest {
 
         // when
         val func = {
-            sut.assertFalse { it.primaryConstructor?.hasParameterWithName("sampleParameter") ?: false }
+            sut.assertFalse { it.primaryConstructor?.hasParameterWithName("fixtureParameter") ?: false }
         }
 
         // then

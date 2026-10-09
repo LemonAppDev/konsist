@@ -1,7 +1,7 @@
-fun sampleFunction() {
-    val sampleLocalProperty: Boolean = true
+fun fixtureFunction() {
+    val fixtureLocalProperty: Boolean = true
 
-    fun sampleLocalFunction() { }
+    fun fixtureLocalFunction() { }
 
-    class SampleLocalClass
+    class FixtureLocalClass
 }

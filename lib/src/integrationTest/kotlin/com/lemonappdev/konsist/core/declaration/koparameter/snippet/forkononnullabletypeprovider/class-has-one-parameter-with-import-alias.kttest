@@ -1,3 +1,3 @@
-import com.lemonappdev.konsist.testdata.SampleType as ImportAlias
+import com.lemonappdev.konsist.testdata.FixtureType as ImportAlias
 
-class SampleClass(val sampleParameter: ImportAlias)
+class FixtureClass(val fixtureParameter: ImportAlias)

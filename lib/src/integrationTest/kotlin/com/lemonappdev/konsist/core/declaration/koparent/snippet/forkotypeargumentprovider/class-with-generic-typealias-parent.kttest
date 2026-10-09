@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleCollection1
+import com.lemonappdev.konsist.testdata.FixtureCollection1
 
-class SampleClass() : SampleTypeAlias<Int>()
+class FixtureClass() : FixtureTypeAlias<Int>()
 
-typealias SampleTypeAlias<T> = SampleCollection1<T>
+typealias FixtureTypeAlias<T> = FixtureCollection1<T>

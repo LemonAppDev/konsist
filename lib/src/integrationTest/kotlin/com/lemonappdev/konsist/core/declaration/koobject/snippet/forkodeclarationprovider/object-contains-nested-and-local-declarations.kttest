@@ -1,27 +1,27 @@
-object SampleObject {
-    fun sampleFunction() {
-        val sampleLocalProperty = ""
-        class SampleLocalClass
+object FixtureObject {
+    fun fixtureFunction() {
+        val fixtureLocalProperty = ""
+        class FixtureLocalClass
 
-        fun sampleLocalFunction() {
+        fun fixtureLocalFunction() {
         }
     }
 
-    class SampleClass {
-        class SampleClassNestedInsideClass
-        object SampleObjectNestedInsideClass
-        interface SampleInterfaceNestedInsideClass
+    class FixtureClass {
+        class FixtureClassNestedInsideClass
+        object FixtureObjectNestedInsideClass
+        interface FixtureInterfaceNestedInsideClass
     }
 
-    object SampleObject {
-        class SampleClassNestedInsideObject
-        object SampleObjectNestedInsideObject
-        interface SampleInterfaceNestedInsideObject
+    object FixtureObject {
+        class FixtureClassNestedInsideObject
+        object FixtureObjectNestedInsideObject
+        interface FixtureInterfaceNestedInsideObject
     }
 
-    interface SampleInterface {
-        class SampleClassNestedInsideInterface
-        object SampleObjectNestedInsideInterface
-        interface SampleInterfaceNestedInsideInterface
+    interface FixtureInterface {
+        class FixtureClassNestedInsideInterface
+        object FixtureObjectNestedInsideInterface
+        interface FixtureInterfaceNestedInsideInterface
     }
 }

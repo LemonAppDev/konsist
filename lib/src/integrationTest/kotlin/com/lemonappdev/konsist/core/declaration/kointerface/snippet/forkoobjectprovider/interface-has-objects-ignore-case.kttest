@@ -1,6 +1,6 @@
-interface SampleInterface {
-    object SampleObject1
+interface FixtureInterface {
+    object FixtureObject1
 
-    object SampleObject2
+    object FixtureObject2
 
 }

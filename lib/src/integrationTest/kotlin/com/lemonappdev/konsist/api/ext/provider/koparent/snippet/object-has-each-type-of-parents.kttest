@@ -1,6 +1,6 @@
-import com.lemonappdev.konsist.externalsample.SampleExternalInterface
-import com.lemonappdev.konsist.testdata.SampleParentClass
+import com.lemonappdev.konsist.externalfixture.FixtureExternalInterface
+import com.lemonappdev.konsist.testdata.FixtureParentClass
 
-object SampleObject : SampleParentClass(), SampleParentInterface, SampleExternalInterface
+object FixtureObject : FixtureParentClass(), FixtureParentInterface, FixtureExternalInterface
 
-interface SampleParentInterface
+interface FixtureParentInterface

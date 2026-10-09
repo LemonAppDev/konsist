@@ -48,10 +48,10 @@ class KoKDocDeclarationForKoKDocSampleTagProviderTest {
         assertSoftly(sut) {
             it?.numSampleTags shouldBeEqualTo 2
             it?.sampleTags?.get(0)?.name shouldBeEqualTo SAMPLE
-            it?.sampleTags?.get(0)?.value shouldBeEqualTo "SampleClass.sampleMethod"
-            it?.sampleTags?.get(0)?.description shouldBeEqualTo "sample description"
+            it?.sampleTags?.get(0)?.value shouldBeEqualTo "FixtureClass.fixtureMethod"
+            it?.sampleTags?.get(0)?.description shouldBeEqualTo "fixture description"
             it?.sampleTags?.get(1)?.name shouldBeEqualTo SAMPLE
-            it?.sampleTags?.get(1)?.value shouldBeEqualTo "SampleClass.sampleProperty"
+            it?.sampleTags?.get(1)?.value shouldBeEqualTo "FixtureClass.fixtureProperty"
             it?.sampleTags?.get(1)?.description shouldBeEqualTo ""
             it?.hasSampleTags shouldBeEqualTo true
         }
@@ -65,8 +65,8 @@ class KoKDocDeclarationForKoKDocSampleTagProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("class-with-sample-tag", "SampleClass"),
-                arguments("function-with-sample-tag", "sampleMethod"),
+                arguments("class-with-sample-tag", "FixtureClass"),
+                arguments("function-with-sample-tag", "fixtureMethod"),
             )
     }
 }

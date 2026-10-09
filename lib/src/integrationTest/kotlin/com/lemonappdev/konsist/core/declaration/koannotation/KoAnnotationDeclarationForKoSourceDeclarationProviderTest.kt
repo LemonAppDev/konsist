@@ -11,11 +11,11 @@ import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.ext.list.annotations
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
-import com.lemonappdev.konsist.externalsample.SampleExternalClass
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-import com.lemonappdev.konsist.testdata.SampleClass
-import com.lemonappdev.konsist.testdata.SampleInterface
-import com.lemonappdev.konsist.testdata.SampleObject
+import com.lemonappdev.konsist.externalfixture.FixtureExternalClass
+import com.lemonappdev.konsist.testdata.FixtureAnnotation
+import com.lemonappdev.konsist.testdata.FixtureClass
+import com.lemonappdev.konsist.testdata.FixtureInterface
+import com.lemonappdev.konsist.testdata.FixtureObject
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -50,7 +50,7 @@ class KoAnnotationDeclarationForKoSourceDeclarationProviderTest {
                 (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fullyQualifiedName
             }.shouldBeEqualTo(true)
             hasSourceDeclaration {
-                (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == "com.samplepackage.other"
+                (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == "com.fixturepackage.other"
             }.shouldBeEqualTo(false)
             kClass
                 ?.let { value -> hasSourceDeclarationOf(value) }
@@ -86,28 +86,28 @@ class KoAnnotationDeclarationForKoSourceDeclarationProviderTest {
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
                     null,
-                    "com.samplepackage.SampleAnnotationFromFile",
+                    "com.fixturepackage.FixtureAnnotationFromFile",
                 ),
                 arguments(
                     "annotation-with-source-declaration-defined-in-the-file-without-package",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
                     null,
-                    "SampleAnnotationFromFile",
+                    "FixtureAnnotationFromFile",
                 ),
                 arguments(
                     "annotation-with-imported-source-declaration",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
-                    SampleAnnotation::class,
-                    "com.lemonappdev.konsist.testdata.SampleAnnotation",
+                    FixtureAnnotation::class,
+                    "com.lemonappdev.konsist.testdata.FixtureAnnotation",
                 ),
                 arguments(
                     "annotation-with-source-declaration-defined-using-import-alias",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
-                    SampleAnnotation::class,
-                    "com.lemonappdev.konsist.testdata.SampleAnnotation",
+                    FixtureAnnotation::class,
+                    "com.lemonappdev.konsist.testdata.FixtureAnnotation",
                 ),
             )
     }

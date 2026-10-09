@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.type.kotype
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.testdata.SampleClass
+import com.lemonappdev.konsist.testdata.FixtureClass
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -266,9 +266,9 @@ class KoTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.parameterTypes?.map { parameter -> parameter.name } shouldBeEqualTo listOf("sampleParameter")
+            it?.parameterTypes?.map { parameter -> parameter.name } shouldBeEqualTo listOf("fixtureParameter")
             it?.parameterTypes?.map { parameter -> parameter.type.name } shouldBeEqualTo listOf("String")
-            it?.parameters?.map { parameter -> parameter.name } shouldBeEqualTo listOf("sampleParameter")
+            it?.parameters?.map { parameter -> parameter.name } shouldBeEqualTo listOf("fixtureParameter")
             it?.parameters?.map { parameter -> parameter.type.name } shouldBeEqualTo listOf("String")
         }
     }
@@ -284,9 +284,9 @@ class KoTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.parameterTypes?.map { parameter -> parameter.name } shouldBeEqualTo listOf("sampleParameter")
+            it?.parameterTypes?.map { parameter -> parameter.name } shouldBeEqualTo listOf("fixtureParameter")
             it?.parameterTypes?.map { parameter -> parameter.type.name } shouldBeEqualTo listOf("String")
-            it?.parameters?.map { parameter -> parameter.name } shouldBeEqualTo listOf("sampleParameter")
+            it?.parameters?.map { parameter -> parameter.name } shouldBeEqualTo listOf("fixtureParameter")
             it?.parameters?.map { parameter -> parameter.type.name } shouldBeEqualTo listOf("String")
         }
     }
@@ -358,10 +358,10 @@ class KoTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.returnType?.name shouldBeEqualTo "SampleClass"
+            it?.returnType?.name shouldBeEqualTo "FixtureClass"
             it?.hasReturnType { type -> type.isClass } shouldBeEqualTo true
             it?.hasReturnType { type -> type.isExternal } shouldBeEqualTo false
-            it?.hasReturnTypeOf(SampleClass::class) shouldBeEqualTo true
+            it?.hasReturnTypeOf(FixtureClass::class) shouldBeEqualTo true
             it?.hasReturnTypeOf(String::class) shouldBeEqualTo false
         }
     }

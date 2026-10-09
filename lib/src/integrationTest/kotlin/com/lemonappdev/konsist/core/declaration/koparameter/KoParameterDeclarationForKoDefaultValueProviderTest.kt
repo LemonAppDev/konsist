@@ -57,9 +57,9 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.defaultValue shouldBeEqualTo "SampleType()"
+            it?.defaultValue shouldBeEqualTo "FixtureType()"
             it?.hasDefaultValue() shouldBeEqualTo true
-            it?.hasDefaultValue("SampleType()") shouldBeEqualTo true
+            it?.hasDefaultValue("FixtureType()") shouldBeEqualTo true
             it?.hasDefaultValue("OtherType()") shouldBeEqualTo false
         }
     }
@@ -76,9 +76,9 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
 
         // then
         assertSoftly(sut) {
-            defaultValue shouldBeEqualTo "SampleType()"
+            defaultValue shouldBeEqualTo "FixtureType()"
             hasDefaultValue() shouldBeEqualTo true
-            hasDefaultValue("SampleType()") shouldBeEqualTo true
+            hasDefaultValue("FixtureType()") shouldBeEqualTo true
             hasDefaultValue("OtherType()") shouldBeEqualTo false
         }
     }
@@ -96,10 +96,10 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.defaultValue shouldBeEqualTo "SampleObject"
+            it?.defaultValue shouldBeEqualTo "FixtureObject"
             it?.hasDefaultValue() shouldBeEqualTo true
-            it?.hasDefaultValue("SampleObject") shouldBeEqualTo true
-            it?.hasDefaultValue("SampleObject()") shouldBeEqualTo false
+            it?.hasDefaultValue("FixtureObject") shouldBeEqualTo true
+            it?.hasDefaultValue("FixtureObject()") shouldBeEqualTo false
         }
     }
 
@@ -115,10 +115,10 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
 
         // then
         assertSoftly(sut) {
-            defaultValue shouldBeEqualTo "SampleObject"
+            defaultValue shouldBeEqualTo "FixtureObject"
             hasDefaultValue() shouldBeEqualTo true
-            hasDefaultValue("SampleObject") shouldBeEqualTo true
-            hasDefaultValue("SampleObject()") shouldBeEqualTo false
+            hasDefaultValue("FixtureObject") shouldBeEqualTo true
+            hasDefaultValue("FixtureObject()") shouldBeEqualTo false
         }
     }
 
@@ -138,7 +138,7 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
             it?.defaultValue shouldBeEqualTo "{ }"
             it?.hasDefaultValue() shouldBeEqualTo true
             it?.hasDefaultValue("{ }") shouldBeEqualTo true
-            it?.hasDefaultValue("SampleObject()") shouldBeEqualTo false
+            it?.hasDefaultValue("FixtureObject()") shouldBeEqualTo false
         }
     }
 
@@ -157,7 +157,7 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
             defaultValue shouldBeEqualTo "{ }"
             hasDefaultValue() shouldBeEqualTo true
             hasDefaultValue("{ }") shouldBeEqualTo true
-            hasDefaultValue("SampleObject()") shouldBeEqualTo false
+            hasDefaultValue("FixtureObject()") shouldBeEqualTo false
         }
     }
 
@@ -174,10 +174,10 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.defaultValue shouldBeEqualTo "SampleGenericClassWithParameter(\"\")"
+            it?.defaultValue shouldBeEqualTo "FixtureGenericClassWithParameter(\"\")"
             it?.hasDefaultValue() shouldBeEqualTo true
-            it?.hasDefaultValue("SampleGenericClassWithParameter(\"\")") shouldBeEqualTo true
-            it?.hasDefaultValue("SampleGenericClassWithParameter") shouldBeEqualTo false
+            it?.hasDefaultValue("FixtureGenericClassWithParameter(\"\")") shouldBeEqualTo true
+            it?.hasDefaultValue("FixtureGenericClassWithParameter") shouldBeEqualTo false
         }
     }
 
@@ -193,10 +193,10 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
 
         // then
         assertSoftly(sut) {
-            defaultValue shouldBeEqualTo "SampleGenericClassWithParameter(\"\")"
+            defaultValue shouldBeEqualTo "FixtureGenericClassWithParameter(\"\")"
             hasDefaultValue() shouldBeEqualTo true
-            hasDefaultValue("SampleGenericClassWithParameter(\"\")") shouldBeEqualTo true
-            hasDefaultValue("SampleGenericClassWithParameter") shouldBeEqualTo false
+            hasDefaultValue("FixtureGenericClassWithParameter(\"\")") shouldBeEqualTo true
+            hasDefaultValue("FixtureGenericClassWithParameter") shouldBeEqualTo false
         }
     }
 
@@ -215,7 +215,7 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
         assertSoftly(sut) {
             it?.defaultValue shouldBeEqualTo "null"
             it?.hasDefaultValue() shouldBeEqualTo true
-            it?.hasDefaultValue("SampleType()") shouldBeEqualTo false
+            it?.hasDefaultValue("FixtureType()") shouldBeEqualTo false
         }
     }
 
@@ -233,7 +233,7 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
         assertSoftly(sut) {
             defaultValue shouldBeEqualTo "null"
             hasDefaultValue() shouldBeEqualTo true
-            hasDefaultValue("SampleType()") shouldBeEqualTo false
+            hasDefaultValue("FixtureType()") shouldBeEqualTo false
         }
     }
 
@@ -252,7 +252,7 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
         assertSoftly(sut) {
             it?.defaultValue shouldBeEqualTo null
             it?.hasDefaultValue() shouldBeEqualTo false
-            it?.hasDefaultValue("SampleType()") shouldBeEqualTo false
+            it?.hasDefaultValue("FixtureType()") shouldBeEqualTo false
         }
     }
 
@@ -270,7 +270,7 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
         assertSoftly(sut) {
             defaultValue shouldBeEqualTo null
             hasDefaultValue() shouldBeEqualTo false
-            hasDefaultValue("SampleType()") shouldBeEqualTo false
+            hasDefaultValue("FixtureType()") shouldBeEqualTo false
         }
     }
 

@@ -1,3 +1,3 @@
-open class SampleClass {
-    protected open val sampleProperty: Boolean = true
+open class FixtureClass {
+    protected open val fixtureProperty: Boolean = true
 }

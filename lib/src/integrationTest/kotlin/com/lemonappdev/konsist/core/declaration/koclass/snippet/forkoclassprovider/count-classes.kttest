@@ -1,10 +1,10 @@
-class SampleTopLevelClass {
-    private open class SampleClass {
+class FixtureTopLevelClass {
+    private open class FixtureClass {
 
-        private inner class SampleNestedClass
+        private inner class FixtureNestedClass
     }
 
-    fun sampleFunction() {
-        class SampleLocalClass
+    fun fixtureFunction() {
+        class FixtureLocalClass
     }
 }

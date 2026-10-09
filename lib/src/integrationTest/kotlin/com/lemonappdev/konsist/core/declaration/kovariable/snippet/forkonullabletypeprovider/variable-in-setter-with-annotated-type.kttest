@@ -1,8 +1,8 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
+import com.lemonappdev.konsist.testdata.FixtureAnnotation
 
-var sampleProperty: String = "text"
+var fixtureProperty: String = "text"
     set(value) {
-        val sampleVariable: @SampleAnnotation String = ""
+        val fixtureVariable: @FixtureAnnotation String = ""
 
         if (true) field = value
     }

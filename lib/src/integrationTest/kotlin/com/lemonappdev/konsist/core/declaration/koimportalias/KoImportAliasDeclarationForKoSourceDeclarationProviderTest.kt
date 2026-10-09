@@ -11,10 +11,10 @@ import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.ext.list.importAliases
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
-import com.lemonappdev.konsist.externalsample.SampleExternalClass
-import com.lemonappdev.konsist.testdata.SampleClass
-import com.lemonappdev.konsist.testdata.SampleInterface
-import com.lemonappdev.konsist.testdata.SampleObject
+import com.lemonappdev.konsist.externalfixture.FixtureExternalClass
+import com.lemonappdev.konsist.testdata.FixtureClass
+import com.lemonappdev.konsist.testdata.FixtureInterface
+import com.lemonappdev.konsist.testdata.FixtureObject
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -49,7 +49,7 @@ class KoImportAliasDeclarationForKoSourceDeclarationProviderTest {
                 (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == fullyQualifiedName
             }.shouldBeEqualTo(true)
             hasSourceDeclaration {
-                (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == "com.samplepackage.other"
+                (sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == "com.fixturepackage.other"
             }.shouldBeEqualTo(false)
             kClass
                 ?.let { value -> hasSourceDeclarationOf(value) }
@@ -80,50 +80,50 @@ class KoImportAliasDeclarationForKoSourceDeclarationProviderTest {
                     "class-source-declaration",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,
-                    SampleClass::class,
-                    "com.lemonappdev.konsist.testdata.SampleClass",
+                    FixtureClass::class,
+                    "com.lemonappdev.konsist.testdata.FixtureClass",
                 ),
                 arguments(
                     "interface-source-declaration",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,
-                    SampleInterface::class,
-                    "com.lemonappdev.konsist.testdata.SampleInterface",
+                    FixtureInterface::class,
+                    "com.lemonappdev.konsist.testdata.FixtureInterface",
                 ),
                 arguments(
                     "object-source-declaration",
                     KoObjectDeclaration::class,
                     KoClassDeclaration::class,
-                    SampleObject::class,
-                    "com.lemonappdev.konsist.testdata.SampleObject",
+                    FixtureObject::class,
+                    "com.lemonappdev.konsist.testdata.FixtureObject",
                 ),
                 arguments(
                     "function-source-declaration",
                     KoFunctionDeclaration::class,
                     KoClassDeclaration::class,
                     null,
-                    "com.lemonappdev.konsist.testdata.sampleFunction",
+                    "com.lemonappdev.konsist.testdata.fixtureFunction",
                 ),
                 arguments(
                     "property-source-declaration",
                     KoPropertyDeclaration::class,
                     KoClassDeclaration::class,
                     null,
-                    "com.lemonappdev.konsist.testdata.SAMPLE_PROPERTY",
+                    "com.lemonappdev.konsist.testdata.FIXTURE_PROPERTY",
                 ),
                 arguments(
                     "typealias-source-declaration",
                     KoTypeAliasDeclaration::class,
                     KoClassDeclaration::class,
                     null,
-                    "com.lemonappdev.konsist.testdata.SampleBasicTypeAlias",
+                    "com.lemonappdev.konsist.testdata.FixtureBasicTypeAlias",
                 ),
                 arguments(
                     "external-source-declaration",
                     KoExternalDeclaration::class,
                     KoClassDeclaration::class,
-                    SampleExternalClass::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalClass",
+                    FixtureExternalClass::class,
+                    "com.lemonappdev.konsist.externalfixture.FixtureExternalClass",
                 ),
             )
     }

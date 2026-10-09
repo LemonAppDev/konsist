@@ -1,5 +1,5 @@
-package com.samplepackage
+package com.fixturepackage
 
-import com.lemonappdev.konsist.testdata.SampleObject as ImportAlias
+import com.lemonappdev.konsist.testdata.FixtureObject as ImportAlias
 
-class SampleClass1(val sampleProperty1: ImportAlias)
+class FixtureClass1(val fixtureProperty1: ImportAlias)

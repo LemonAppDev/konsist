@@ -25,8 +25,8 @@ class KoScopeForKoImportDeclarationTest {
             .map { it.name }
             .shouldBeEqualTo(
                 listOf(
-                    "com.lemonappdev.konsist.testdata.SampleAnnotation",
-                    "com.lemonappdev.konsist.testdata.SampleType",
+                    "com.lemonappdev.konsist.testdata.FixtureAnnotation",
+                    "com.lemonappdev.konsist.testdata.FixtureType",
                 ),
             )
     }

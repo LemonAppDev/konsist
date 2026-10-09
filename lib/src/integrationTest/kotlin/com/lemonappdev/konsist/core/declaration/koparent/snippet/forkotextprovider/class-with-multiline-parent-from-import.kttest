@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleClassWithParameter
+import com.lemonappdev.konsist.testdata.FixtureClassWithParameter
 
-class SomeClass(): SampleClassWithParameter(
+class SomeClass(): FixtureClassWithParameter(
     "some parent constructor param here"
 )

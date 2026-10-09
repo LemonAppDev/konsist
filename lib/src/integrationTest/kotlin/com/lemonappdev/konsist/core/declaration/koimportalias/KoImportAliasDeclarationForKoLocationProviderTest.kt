@@ -22,7 +22,7 @@ class KoImportAliasDeclarationForKoLocationProviderTest {
                 ?.asImportAliasDeclaration()
 
         // then
-        sut?.location shouldBeEqualTo "${sut?.path}:1:52"
+        sut?.location shouldBeEqualTo "${sut?.path}:1:53"
     }
 
     private fun getSnippetFile(fileName: String) =

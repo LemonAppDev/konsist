@@ -1,1 +1,1 @@
-val sampleProperty: ((sampleParameter: String) -> Unit)? = { }
+val fixtureProperty: ((fixtureParameter: String) -> Unit)? = { }

@@ -1,9 +1,9 @@
-import com.lemonappdev.konsist.testdata.SampleType
+import com.lemonappdev.konsist.testdata.FixtureType
 
-class SampleClass : SampleSuperClass() {
-    final override var sampleProperty: SampleType = SampleType()
+class FixtureClass : FixtureSuperClass() {
+    final override var fixtureProperty: FixtureType = FixtureType()
 }
 
-open class SampleSuperClass {
-    open var sampleProperty: SampleType = SampleType()
+open class FixtureSuperClass {
+    open var fixtureProperty: FixtureType = FixtureType()
 }

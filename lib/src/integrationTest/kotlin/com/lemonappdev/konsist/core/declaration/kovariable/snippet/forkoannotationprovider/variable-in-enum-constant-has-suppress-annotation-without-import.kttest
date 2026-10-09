@@ -1,6 +1,6 @@
-enum class SampleClass {
-    SAMPLE_CONSTANT_1 {
+enum class FixtureClass {
+    FIXTURE_CONSTANT_1 {
         @Suppress
-        val sampleVariable = ""
+        val fixtureVariable = ""
     };
 }

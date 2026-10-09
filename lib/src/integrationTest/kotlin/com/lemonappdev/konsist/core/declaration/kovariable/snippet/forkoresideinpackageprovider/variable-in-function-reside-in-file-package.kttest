@@ -1,5 +1,5 @@
-package com.samplepackage
+package com.fixturepackage
 
-fun sampleFunction() {
-     val sampleVariable = ""
+fun fixtureFunction() {
+     val fixtureVariable = ""
 }

@@ -158,7 +158,7 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withUpperBoundNamed(name) returns declaration with given upper bound`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundWithName(listOf(name)) } returns true
@@ -179,8 +179,8 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withUpperBoundNamed(String) returns declaration with any of given upper bounds`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundWithName(listOf(name1, name2)) } returns true
@@ -201,8 +201,8 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withUpperBoundNamed(list of String) returns declaration with any of given upper bounds`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundWithName(listOf(name1, name2)) } returns true
@@ -224,8 +224,8 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withUpperBoundNamed(set of String) returns declaration with any of given upper bounds`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundWithName(setOf(name1, name2)) } returns true
@@ -247,7 +247,7 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withUpperBoundNamed(name) with ignore case returns declaration with given upper bound`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundWithName(listOf(name), ignoreCase = true) } returns true
@@ -268,8 +268,8 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withUpperBoundNamed(list of String) with ignore case returns declaration with any of given upper bounds`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundWithName(listOf(name1, name2), ignoreCase = true) } returns true
@@ -291,7 +291,7 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withoutUpperBoundNamed(name) returns declaration without given upper bound`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundWithName(listOf(name)) } returns true
@@ -312,8 +312,8 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withoutUpperBoundNamed(String) returns declaration without any of given upper bounds`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundWithName(listOf(name1, name2)) } returns true
@@ -334,8 +334,8 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withoutUpperBoundNamed(list of String) returns declaration without any of given upper bounds`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundWithName(listOf(name1, name2)) } returns true
@@ -357,8 +357,8 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withoutUpperBoundNamed(set of String) returns declaration without any of given upper bounds`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundWithName(setOf(name1, name2)) } returns true
@@ -380,7 +380,7 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withoutUpperBoundNamed(name) with ignore case returns declaration without given upper bound`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundWithName(listOf(name), ignoreCase = true) } returns true
@@ -401,8 +401,8 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withoutUpperBoundNamed(list of String) with ignore case returns declaration without any of given upper bounds`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundWithName(listOf(name1, name2), ignoreCase = true) } returns true
@@ -424,7 +424,7 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withAllUpperBoundsNamed(name) returns declaration with given upper bound`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundsWithAllNames(listOf(name)) } returns true
@@ -445,8 +445,8 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withAllUpperBoundsNamed(String) returns declaration with all given upper bounds`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundsWithAllNames(listOf(name1, name2)) } returns true
@@ -467,8 +467,8 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withAllUpperBoundsNamed(list of String) returns declaration with all given upper bounds`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundsWithAllNames(listOf(name1, name2)) } returns true
@@ -490,8 +490,8 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withAllUpperBoundsNamed(set of String) returns declaration with all given upper bounds`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundsWithAllNames(setOf(name1, name2)) } returns true
@@ -513,7 +513,7 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withAllUpperBoundsNamed(name) with ignore case returns declaration with given upper bound`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundsWithAllNames(listOf(name), ignoreCase = true) } returns true
@@ -534,8 +534,8 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withAllUpperBoundsNamed(list of String) with ignore case returns declaration with all given upper bounds`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
@@ -557,7 +557,7 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withoutAllUpperBoundsNamed(name) returns declaration without given upper bound`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundsWithAllNames(listOf(name)) } returns true
@@ -578,8 +578,8 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withoutAllUpperBoundsNamed(String) returns declaration without all of given upper bounds`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundsWithAllNames(listOf(name1, name2)) } returns true
@@ -600,8 +600,8 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withoutAllUpperBoundsNamed(list of String) returns declaration without all of given upper bounds`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundsWithAllNames(listOf(name1, name2)) } returns true
@@ -623,8 +623,8 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withoutAllUpperBoundsNamed(set of String) returns declaration without all of given upper bounds`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundsWithAllNames(setOf(name1, name2)) } returns true
@@ -646,7 +646,7 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withoutAllUpperBoundsNamed(name) with ignore case returns declaration without given upper bound`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundsWithAllNames(listOf(name), ignoreCase = true) } returns true
@@ -667,8 +667,8 @@ class KoUpperBoundsProviderListExtTest {
     @Test
     fun `withoutAllUpperBoundsNamed(list of String) with ignore case returns declaration without all of given upper bounds`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoUpperBoundsProvider =
             mockk {
                 every { hasUpperBoundsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true

@@ -11,10 +11,10 @@ import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifiers
 import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
-import com.lemonappdev.konsist.externalsample.SampleExternalClass
-import com.lemonappdev.konsist.testdata.SampleInterface
-import com.lemonappdev.konsist.testdata.SampleObject
-import com.lemonappdev.konsist.testdata.SampleType
+import com.lemonappdev.konsist.externalfixture.FixtureExternalClass
+import com.lemonappdev.konsist.testdata.FixtureInterface
+import com.lemonappdev.konsist.testdata.FixtureObject
+import com.lemonappdev.konsist.testdata.FixtureType
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -251,7 +251,7 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "(SampleObject) -> Unit" } shouldBeEqualTo false
+            it?.hasSourceDeclaration { declaration -> declaration.name == "(FixtureObject) -> Unit" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo false
         }
     }
@@ -270,7 +270,7 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasSourceDeclaration { declaration -> declaration.name == "(SampleObject) -> Unit" } shouldBeEqualTo false
+            it?.hasSourceDeclaration { declaration -> declaration.name == "(FixtureObject) -> Unit" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo false
         }
     }
@@ -344,49 +344,49 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                     "nullable-class-type",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    SampleType::class,
+                    FixtureType::class,
                     String::class,
-                    "com.lemonappdev.konsist.testdata.SampleType",
+                    "com.lemonappdev.konsist.testdata.FixtureType",
                 ),
                 arguments(
                     "not-nullable-class-type",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    SampleType::class,
+                    FixtureType::class,
                     String::class,
-                    "com.lemonappdev.konsist.testdata.SampleType",
+                    "com.lemonappdev.konsist.testdata.FixtureType",
                 ),
                 arguments(
                     "nullable-interface-type",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    SampleInterface::class,
+                    FixtureInterface::class,
                     String::class,
-                    "com.lemonappdev.konsist.testdata.SampleInterface",
+                    "com.lemonappdev.konsist.testdata.FixtureInterface",
                 ),
                 arguments(
                     "not-nullable-interface-type",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    SampleInterface::class,
+                    FixtureInterface::class,
                     String::class,
-                    "com.lemonappdev.konsist.testdata.SampleInterface",
+                    "com.lemonappdev.konsist.testdata.FixtureInterface",
                 ),
                 arguments(
                     "nullable-object-type",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    SampleObject::class,
+                    FixtureObject::class,
                     String::class,
-                    "com.lemonappdev.konsist.testdata.SampleObject",
+                    "com.lemonappdev.konsist.testdata.FixtureObject",
                 ),
                 arguments(
                     "not-nullable-object-type",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    SampleObject::class,
+                    FixtureObject::class,
                     String::class,
-                    "com.lemonappdev.konsist.testdata.SampleObject",
+                    "com.lemonappdev.konsist.testdata.FixtureObject",
                 ),
                 arguments(
                     "nullable-import-alias-type",
@@ -410,7 +410,7 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                     KoKotlinTypeDeclaration::class,
                     null,
                     String::class,
-                    "com.lemonappdev.konsist.testdata.SampleTypeAlias",
+                    "com.lemonappdev.konsist.testdata.FixtureTypeAlias",
                 ),
                 arguments(
                     "not-nullable-typealias-type",
@@ -418,23 +418,23 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                     KoKotlinTypeDeclaration::class,
                     null,
                     String::class,
-                    "SampleTypeAlias",
+                    "FixtureTypeAlias",
                 ),
                 arguments(
                     "nullable-external-type",
                     KoExternalDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    SampleExternalClass::class,
+                    FixtureExternalClass::class,
                     String::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalClass",
+                    "com.lemonappdev.konsist.externalfixture.FixtureExternalClass",
                 ),
                 arguments(
                     "not-nullable-external-type",
                     KoExternalDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    SampleExternalClass::class,
+                    FixtureExternalClass::class,
                     String::class,
-                    "com.lemonappdev.konsist.externalsample.SampleExternalClass",
+                    "com.lemonappdev.konsist.externalfixture.FixtureExternalClass",
                 ),
             )
 
@@ -446,37 +446,37 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                     "nullable-nested-class-type-with-the-same-name-and-parent-without-fqn",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedClassWithTheSameName",
+                    "SecondInterface.FixtureNestedClassWithTheSameName",
                 ),
                 arguments(
                     "not-nullable-nested-class-type-with-the-same-name-and-parent-without-fqn",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedClassWithTheSameName",
+                    "SecondInterface.FixtureNestedClassWithTheSameName",
                 ),
                 arguments(
                     "nullable-nested-interface-type-with-the-same-name-and-parent-without-fqn",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedInterfaceWithTheSameName",
+                    "SecondInterface.FixtureNestedInterfaceWithTheSameName",
                 ),
                 arguments(
                     "not-nullable-nested-interface-type-with-the-same-name-and-parent-without-fqn",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedInterfaceWithTheSameName",
+                    "SecondInterface.FixtureNestedInterfaceWithTheSameName",
                 ),
                 arguments(
                     "nullable-nested-object-type-with-the-same-name-and-parent-without-fqn",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedObjectWithTheSameName",
+                    "SecondInterface.FixtureNestedObjectWithTheSameName",
                 ),
                 arguments(
                     "not-nullable-nested-object-type-with-the-same-name-and-parent-without-fqn",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedObjectWithTheSameName",
+                    "SecondInterface.FixtureNestedObjectWithTheSameName",
                 ),
             )
 
@@ -488,37 +488,37 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                     "nullable-nested-class-type-with-the-same-name-and-parent-with-fqn",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedClassWithTheSameName",
+                    "SecondInterface.FixtureNestedClassWithTheSameName",
                 ),
                 arguments(
                     "not-nullable-nested-class-type-with-the-same-name-and-parent-with-fqn",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedClassWithTheSameName",
+                    "SecondInterface.FixtureNestedClassWithTheSameName",
                 ),
                 arguments(
                     "nullable-nested-interface-type-with-the-same-name-and-parent-with-fqn",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedInterfaceWithTheSameName",
+                    "SecondInterface.FixtureNestedInterfaceWithTheSameName",
                 ),
                 arguments(
                     "not-nullable-nested-interface-type-with-the-same-name-and-parent-with-fqn",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedInterfaceWithTheSameName",
+                    "SecondInterface.FixtureNestedInterfaceWithTheSameName",
                 ),
                 arguments(
                     "nullable-nested-object-type-with-the-same-name-and-parent-with-fqn",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedObjectWithTheSameName",
+                    "SecondInterface.FixtureNestedObjectWithTheSameName",
                 ),
                 arguments(
                     "not-nullable-nested-object-type-with-the-same-name-and-parent-with-fqn",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "SecondInterface.SampleNestedObjectWithTheSameName",
+                    "SecondInterface.FixtureNestedObjectWithTheSameName",
                 ),
             )
 
@@ -530,73 +530,73 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                     "nested-class-type-with-the-same-name-and-parent-without-fqn-using-all-fqn",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedClassWithTheSameName",
+                    "com.fixturepackage.SecondInterface.FixtureNestedClassWithTheSameName",
                 ),
                 arguments(
                     "nested-class-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedClassWithTheSameName",
+                    "com.fixturepackage.SecondInterface.FixtureNestedClassWithTheSameName",
                 ),
                 arguments(
                     "nested-class-type-with-the-same-name-and-parent-without-fqn-using-all-fqn-of-other-declaration",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedClassWithTheSameName",
+                    "com.fixturepackage.FirstInterface.FixtureNestedClassWithTheSameName",
                 ),
                 arguments(
                     "nested-class-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn-of-other-declaration",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedClassWithTheSameName",
+                    "com.fixturepackage.FirstInterface.FixtureNestedClassWithTheSameName",
                 ),
                 arguments(
                     "nested-interface-type-with-the-same-name-and-parent-without-fqn-using-all-fqn",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedInterfaceWithTheSameName",
+                    "com.fixturepackage.SecondInterface.FixtureNestedInterfaceWithTheSameName",
                 ),
                 arguments(
                     "nested-interface-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedInterfaceWithTheSameName",
+                    "com.fixturepackage.SecondInterface.FixtureNestedInterfaceWithTheSameName",
                 ),
                 arguments(
                     "nested-interface-type-with-the-same-name-and-parent-without-fqn-using-all-fqn-of-other-declaration",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedInterfaceWithTheSameName",
+                    "com.fixturepackage.FirstInterface.FixtureNestedInterfaceWithTheSameName",
                 ),
                 arguments(
                     "nested-interface-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn-of-other-declaration",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedInterfaceWithTheSameName",
+                    "com.fixturepackage.FirstInterface.FixtureNestedInterfaceWithTheSameName",
                 ),
                 arguments(
                     "nested-object-type-with-the-same-name-and-parent-without-fqn-using-all-fqn",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedObjectWithTheSameName",
+                    "com.fixturepackage.SecondInterface.FixtureNestedObjectWithTheSameName",
                 ),
                 arguments(
                     "nested-object-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedObjectWithTheSameName",
+                    "com.fixturepackage.SecondInterface.FixtureNestedObjectWithTheSameName",
                 ),
                 arguments(
                     "nested-object-type-with-the-same-name-and-parent-without-fqn-using-all-fqn-of-other-declaration",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedObjectWithTheSameName",
+                    "com.fixturepackage.FirstInterface.FixtureNestedObjectWithTheSameName",
                 ),
                 arguments(
                     "nested-object-type-with-the-same-name-and-parent-without-fqn-using-part-of-fqn-of-other-declaration",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedObjectWithTheSameName",
+                    "com.fixturepackage.FirstInterface.FixtureNestedObjectWithTheSameName",
                 ),
             )
 
@@ -608,73 +608,73 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                     "nested-class-type-with-the-same-name-and-parent-with-fqn-using-all-fqn",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedClassWithTheSameName",
+                    "com.fixturepackage.SecondInterface.FixtureNestedClassWithTheSameName",
                 ),
                 arguments(
                     "nested-class-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedClassWithTheSameName",
+                    "com.fixturepackage.SecondInterface.FixtureNestedClassWithTheSameName",
                 ),
                 arguments(
                     "nested-class-type-with-the-same-name-and-parent-with-fqn-using-all-fqn-of-other-declaration",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedClassWithTheSameName",
+                    "com.fixturepackage.FirstInterface.FixtureNestedClassWithTheSameName",
                 ),
                 arguments(
                     "nested-class-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn-of-other-declaration",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedClassWithTheSameName",
+                    "com.fixturepackage.FirstInterface.FixtureNestedClassWithTheSameName",
                 ),
                 arguments(
                     "nested-interface-type-with-the-same-name-and-parent-with-fqn-using-all-fqn",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedInterfaceWithTheSameName",
+                    "com.fixturepackage.SecondInterface.FixtureNestedInterfaceWithTheSameName",
                 ),
                 arguments(
                     "nested-interface-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedInterfaceWithTheSameName",
+                    "com.fixturepackage.SecondInterface.FixtureNestedInterfaceWithTheSameName",
                 ),
                 arguments(
                     "nested-interface-type-with-the-same-name-and-parent-with-fqn-using-all-fqn-of-other-declaration",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedInterfaceWithTheSameName",
+                    "com.fixturepackage.FirstInterface.FixtureNestedInterfaceWithTheSameName",
                 ),
                 arguments(
                     "nested-interface-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn-of-other-declaration",
                     KoInterfaceDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedInterfaceWithTheSameName",
+                    "com.fixturepackage.FirstInterface.FixtureNestedInterfaceWithTheSameName",
                 ),
                 arguments(
                     "nested-object-type-with-the-same-name-and-parent-with-fqn-using-all-fqn",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedObjectWithTheSameName",
+                    "com.fixturepackage.SecondInterface.FixtureNestedObjectWithTheSameName",
                 ),
                 arguments(
                     "nested-object-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.SecondInterface.SampleNestedObjectWithTheSameName",
+                    "com.fixturepackage.SecondInterface.FixtureNestedObjectWithTheSameName",
                 ),
                 arguments(
                     "nested-object-type-with-the-same-name-and-parent-with-fqn-using-all-fqn-of-other-declaration",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedObjectWithTheSameName",
+                    "com.fixturepackage.FirstInterface.FixtureNestedObjectWithTheSameName",
                 ),
                 arguments(
                     "nested-object-type-with-the-same-name-and-parent-with-fqn-using-part-of-fqn-of-other-declaration",
                     KoObjectDeclaration::class,
                     KoKotlinTypeDeclaration::class,
-                    "com.samplepackage.FirstInterface.SampleNestedObjectWithTheSameName",
+                    "com.fixturepackage.FirstInterface.FixtureNestedObjectWithTheSameName",
                 ),
             )
     }

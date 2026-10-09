@@ -16,12 +16,12 @@ class KoPropertyDeclarationForKoTextProviderTest {
 
         // then
         assertSoftly(sut) {
-            text shouldBeEqualTo "val sampleProperty = \"\""
+            text shouldBeEqualTo "val fixtureProperty = \"\""
             hasTextStartingWith("val ") shouldBeEqualTo true
             hasTextStartingWith("Other") shouldBeEqualTo false
             hasTextEndingWith("Property = \"\"") shouldBeEqualTo true
             hasTextEndingWith("other") shouldBeEqualTo false
-            hasTextContaining("sampleProperty = ") shouldBeEqualTo true
+            hasTextContaining("fixtureProperty = ") shouldBeEqualTo true
             hasTextContaining("anno") shouldBeEqualTo false
             hasTextMatching(Regex("^[^@]*\$")) shouldBeEqualTo true
             hasTextMatching(Regex("[0-9]+")) shouldBeEqualTo false

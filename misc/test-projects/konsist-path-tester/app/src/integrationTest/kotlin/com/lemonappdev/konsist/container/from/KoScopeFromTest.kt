@@ -22,6 +22,8 @@ class KoScopeFromTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
+                "$appIntegrationTestSourceSetDirectory/fixture/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/data/AppDataClassTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/KoScopeTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromDirectoriesTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromDirectoryTest.kt",
@@ -38,10 +40,8 @@ class KoScopeFromTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
-                "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
-                "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
-                "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+                "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
+                "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )
     }
@@ -67,6 +67,8 @@ class KoScopeFromTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
+                "$appIntegrationTestSourceSetDirectory/fixture/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/data/AppDataClassTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/KoScopeTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromDirectoriesTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromDirectoryTest.kt",
@@ -83,8 +85,6 @@ class KoScopeFromTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
-                "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
-                "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
             ).toOsSeparator(),
         )
     }
@@ -99,8 +99,8 @@ class KoScopeFromTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
-                "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+                "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
+                "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )
     }
@@ -116,6 +116,8 @@ class KoScopeFromTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
+                "$appIntegrationTestSourceSetDirectory/fixture/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/data/AppDataClassTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/KoScopeTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromDirectoriesTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromDirectoryTest.kt",
@@ -132,8 +134,6 @@ class KoScopeFromTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
-                "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
-                "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
             ).toOsSeparator(),
         )
     }
@@ -159,6 +159,8 @@ class KoScopeFromTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
+                "$appIntegrationTestSourceSetDirectory/fixture/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/data/AppDataClassTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/KoScopeTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromDirectoriesTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromDirectoryTest.kt",
@@ -175,8 +177,6 @@ class KoScopeFromTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
-                "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
-                "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
             ).toOsSeparator(),
         )
     }
@@ -202,8 +202,8 @@ class KoScopeFromTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
-                "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+                "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
+                "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )
     }
@@ -239,8 +239,8 @@ class KoScopeFromTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
-                "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+                "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
+                "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )
     }

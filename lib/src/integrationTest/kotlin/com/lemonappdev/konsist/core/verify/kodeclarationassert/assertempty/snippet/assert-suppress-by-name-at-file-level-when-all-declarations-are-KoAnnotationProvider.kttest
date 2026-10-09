@@ -1,5 +1,5 @@
 @file:Suppress("assert-suppress-by-name-at-file-level-when-all-declarations-are-KoAnnotationProvider")
 
-class SampleClassWithIncorrectSuffix1 {
-    class SampleClassWithIncorrectSuffix2
+class FixtureClassWithIncorrectSuffix1 {
+    class FixtureClassWithIncorrectSuffix2
 }

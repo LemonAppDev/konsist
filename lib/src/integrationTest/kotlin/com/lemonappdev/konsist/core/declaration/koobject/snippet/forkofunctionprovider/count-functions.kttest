@@ -1,9 +1,9 @@
-object SampleObject {
-    private fun sampleFunction() {
-        fun sampleLocalFunction() {}
+object FixtureObject {
+    private fun fixtureFunction() {
+        fun fixtureLocalFunction() {}
     }
 
-    class SampleClass {
-        private fun sampleNestedFunction() {}
+    class FixtureClass {
+        private fun fixtureNestedFunction() {}
     }
 }

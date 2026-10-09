@@ -1,7 +1,7 @@
-object SampleObject {
-    internal val sampleProperty: String = ""
+object FixtureObject {
+    internal val fixtureProperty: String = ""
 
-    class SampleClass {
-        internal val sampleNestedProperty = ""
+    class FixtureClass {
+        internal val fixtureNestedProperty = ""
     }
 }

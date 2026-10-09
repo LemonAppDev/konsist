@@ -17,11 +17,11 @@ class KoAnnotationDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleAnnotation"
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.FixtureAnnotation"
     }
 
     /*
-    The "SampleAnnotation" contains "Annotation" in name.
+    The "FixtureAnnotation" contains "Annotation" in name.
     Test makes sure that correct fully qualified name is returned.
      */
     @Test
@@ -49,7 +49,7 @@ class KoAnnotationDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleAnnotation"
+        sut.fullyQualifiedName shouldBeEqualTo "com.fixturepackage.FixtureAnnotation"
     }
 
     @Test
@@ -63,7 +63,7 @@ class KoAnnotationDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "SampleAnnotation"
+        sut.fullyQualifiedName shouldBeEqualTo "FixtureAnnotation"
     }
 
     @Test
@@ -91,7 +91,7 @@ class KoAnnotationDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleAnnotation"
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.FixtureAnnotation"
     }
 
     @Test
@@ -105,7 +105,7 @@ class KoAnnotationDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleAnnotation"
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.FixtureAnnotation"
     }
 
     @Test
@@ -119,7 +119,7 @@ class KoAnnotationDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleAnnotation"
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.FixtureAnnotation"
     }
 
     @Test
@@ -132,7 +132,7 @@ class KoAnnotationDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleAnnotation"
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.FixtureAnnotation"
     }
 
     @Test
@@ -145,7 +145,7 @@ class KoAnnotationDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleAnnotation"
+        sut.fullyQualifiedName shouldBeEqualTo "com.fixturepackage.FixtureAnnotation"
     }
 
     @Test
@@ -158,7 +158,7 @@ class KoAnnotationDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "SampleAnnotation"
+        sut.fullyQualifiedName shouldBeEqualTo "FixtureAnnotation"
     }
 
     private fun getSnippetFile(fileName: String) =

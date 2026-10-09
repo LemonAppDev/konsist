@@ -1,8 +1,8 @@
-package com.samplepackage
+package com.fixturepackage
 
-var sampleProperty: String = "text"
+var fixtureProperty: String = "text"
     set(value) {
-        val sampleVariable = ""
+        val fixtureVariable = ""
 
         if (true) field = value
     }

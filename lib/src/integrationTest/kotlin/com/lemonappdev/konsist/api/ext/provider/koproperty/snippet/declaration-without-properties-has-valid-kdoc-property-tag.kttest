@@ -1,6 +1,6 @@
 /**
- * Sample description
+ * Fixture description
  */
-class SampleClass(sampleParameter: Int) {
-    fun sampleFunction() {}
+class FixtureClass(fixtureParameter: Int) {
+    fun fixtureFunction() {}
 }

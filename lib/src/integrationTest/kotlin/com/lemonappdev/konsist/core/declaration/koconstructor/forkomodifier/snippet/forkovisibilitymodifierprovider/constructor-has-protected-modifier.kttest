@@ -1,2 +1,2 @@
-open class SampleClass protected constructor() {
+open class FixtureClass protected constructor() {
 }

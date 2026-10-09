@@ -1,8 +1,8 @@
 val otherProperty = ""
 
 @Suppress("assert-suppress-by-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-class SampleClassWithoutOtherProperty {
+class FixtureClassWithoutOtherProperty {
     init {
-        val sampleProperty = 6
+        val fixtureProperty = 6
     }
 }

@@ -16,7 +16,7 @@ class KoEnumConstantDeclarationForKoEnumNameProviderTest {
                 .first()
 
         // then
-        sut.enumName shouldBeEqualTo "SampleClass"
+        sut.enumName shouldBeEqualTo "FixtureClass"
     }
 
     @Test
@@ -30,7 +30,7 @@ class KoEnumConstantDeclarationForKoEnumNameProviderTest {
                 .first()
 
         // then
-        sut.fullEnumName shouldBeEqualTo "SampleClass.SAMPLE_CONSTANT_1"
+        sut.fullEnumName shouldBeEqualTo "FixtureClass.FIXTURE_CONSTANT_1"
     }
 
     private fun getSnippetFile(fileName: String) =

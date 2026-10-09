@@ -1,7 +1,7 @@
-import com.lemonappdev.konsist.testdata.SampleParentInterface2
+import com.lemonappdev.konsist.testdata.FixtureParentInterface2
 
-interface SampleInterface : SampleParentInterface
+interface FixtureInterface : FixtureParentInterface
 
-interface SampleParentInterface: SampleParentInterface1
+interface FixtureParentInterface: FixtureParentInterface1
 
-interface SampleParentInterface1: SampleParentInterface2
+interface FixtureParentInterface1: FixtureParentInterface2

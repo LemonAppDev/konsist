@@ -1,1 +1,1 @@
-class SampleClass @Suppress constructor(val sampleParameter: Int)
+class FixtureClass @Suppress constructor(val fixtureParameter: Int)

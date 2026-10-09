@@ -1,4 +1,4 @@
 @Suppress("konsist.suppress-text")
-class SampleClassWithoutModifier {
-    fun sampleFunctionWithoutModifier() {}
+class FixtureClassWithoutModifier {
+    fun fixtureFunctionWithoutModifier() {}
 }

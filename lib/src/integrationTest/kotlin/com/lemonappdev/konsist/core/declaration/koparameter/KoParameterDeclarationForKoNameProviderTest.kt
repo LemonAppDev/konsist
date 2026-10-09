@@ -19,23 +19,23 @@ class KoParameterDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.name shouldBeEqualTo "sampleParameter"
-            it?.hasName("sampleParameter") shouldBeEqualTo true
+            it?.name shouldBeEqualTo "fixtureParameter"
+            it?.hasName("fixtureParameter") shouldBeEqualTo true
             it?.hasName("otherParameter") shouldBeEqualTo false
-            it?.hasName("SAMPLEPARAMETER", ignoreCase = false) shouldBeEqualTo false
-            it?.hasName("SAMPLEPARAMETER", ignoreCase = true) shouldBeEqualTo true
-            it?.hasNameStartingWith("sample") shouldBeEqualTo true
+            it?.hasName("FIXTUREPARAMETER", ignoreCase = false) shouldBeEqualTo false
+            it?.hasName("FIXTUREPARAMETER", ignoreCase = true) shouldBeEqualTo true
+            it?.hasNameStartingWith("fixture") shouldBeEqualTo true
             it?.hasNameStartingWith("Other") shouldBeEqualTo false
-            it?.hasNameStartingWith("SAMPLE", ignoreCase = false) shouldBeEqualTo false
-            it?.hasNameStartingWith("SAMPLE", ignoreCase = true) shouldBeEqualTo true
+            it?.hasNameStartingWith("FIXTURE", ignoreCase = false) shouldBeEqualTo false
+            it?.hasNameStartingWith("FIXTURE", ignoreCase = true) shouldBeEqualTo true
             it?.hasNameEndingWith("meter") shouldBeEqualTo true
             it?.hasNameEndingWith("other") shouldBeEqualTo false
             it?.hasNameEndingWith("METER", ignoreCase = false) shouldBeEqualTo false
             it?.hasNameEndingWith("METER", ignoreCase = true) shouldBeEqualTo true
-            it?.hasNameContaining("lePar") shouldBeEqualTo true
+            it?.hasNameContaining("rePar") shouldBeEqualTo true
             it?.hasNameContaining("other") shouldBeEqualTo false
-            it?.hasNameContaining("lepar", ignoreCase = false) shouldBeEqualTo false
-            it?.hasNameContaining("lepar", ignoreCase = true) shouldBeEqualTo true
+            it?.hasNameContaining("repar", ignoreCase = false) shouldBeEqualTo false
+            it?.hasNameContaining("repar", ignoreCase = true) shouldBeEqualTo true
             it?.hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             it?.hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
@@ -53,23 +53,23 @@ class KoParameterDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "sampleParameter"
-            hasName("sampleParameter") shouldBeEqualTo true
+            name shouldBeEqualTo "fixtureParameter"
+            hasName("fixtureParameter") shouldBeEqualTo true
             hasName("otherParameter") shouldBeEqualTo false
-            hasName("SAMPLEPARAMETER", ignoreCase = false) shouldBeEqualTo false
-            hasName("SAMPLEPARAMETER", ignoreCase = true) shouldBeEqualTo true
-            hasNameStartingWith("sample") shouldBeEqualTo true
+            hasName("FIXTUREPARAMETER", ignoreCase = false) shouldBeEqualTo false
+            hasName("FIXTUREPARAMETER", ignoreCase = true) shouldBeEqualTo true
+            hasNameStartingWith("fixture") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
-            hasNameStartingWith("SAMPLE", ignoreCase = false) shouldBeEqualTo false
-            hasNameStartingWith("SAMPLE", ignoreCase = true) shouldBeEqualTo true
+            hasNameStartingWith("FIXTURE", ignoreCase = false) shouldBeEqualTo false
+            hasNameStartingWith("FIXTURE", ignoreCase = true) shouldBeEqualTo true
             hasNameEndingWith("meter") shouldBeEqualTo true
             hasNameEndingWith("other") shouldBeEqualTo false
             hasNameEndingWith("METER", ignoreCase = false) shouldBeEqualTo false
             hasNameEndingWith("METER", ignoreCase = true) shouldBeEqualTo true
-            hasNameContaining("lePar") shouldBeEqualTo true
+            hasNameContaining("rePar") shouldBeEqualTo true
             hasNameContaining("other") shouldBeEqualTo false
-            hasNameContaining("lepar", ignoreCase = false) shouldBeEqualTo false
-            hasNameContaining("lepar", ignoreCase = true) shouldBeEqualTo true
+            hasNameContaining("repar", ignoreCase = false) shouldBeEqualTo false
+            hasNameContaining("repar", ignoreCase = true) shouldBeEqualTo true
             hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }

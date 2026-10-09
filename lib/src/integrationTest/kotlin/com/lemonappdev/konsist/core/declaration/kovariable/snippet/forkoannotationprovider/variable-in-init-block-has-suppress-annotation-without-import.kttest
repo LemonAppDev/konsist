@@ -1,6 +1,6 @@
-class SampleClass {
+class FixtureClass {
     init {
         @Suppress
-        val sampleVariable = ""
+        val fixtureVariable = ""
     }
 }

@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.declaration.kotypeargument
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.ext.list.declaration.flatten
-import com.lemonappdev.konsist.testdata.SampleClass
+import com.lemonappdev.konsist.testdata.FixtureClass
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -32,7 +32,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames("String") shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("String")) shouldBeEqualTo false
             it?.hasTypeArgumentOf(String::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo false
@@ -75,15 +75,15 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames(listOf("String", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentOf(String::class, Int::class) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(SampleClass::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureClass::class, Int::class) shouldBeEqualTo false
             it?.hasTypeArgumentOf(listOf(String::class, Int::class)) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(String::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleClass::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureClass::class, Int::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
@@ -126,15 +126,15 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames(listOf("String", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentOf(String::class, Int::class) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(SampleClass::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureClass::class, Int::class) shouldBeEqualTo false
             it?.hasTypeArgumentOf(listOf(String::class, Int::class)) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(String::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleClass::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureClass::class, Int::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
@@ -191,15 +191,15 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames(listOf("Int", "String")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "String")) shouldBeEqualTo false
             it?.hasTypeArgumentOf(Int::class, String::class) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(SampleClass::class, String::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureClass::class, String::class) shouldBeEqualTo false
             it?.hasTypeArgumentOf(listOf(Int::class, String::class)) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, String::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, String::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(Int::class) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(Int::class, String::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleClass::class, String::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureClass::class, String::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(Int::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(Int::class, String::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, String::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, String::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
@@ -256,15 +256,15 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames(listOf("Int", "String")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "String")) shouldBeEqualTo false
             it?.hasTypeArgumentOf(Int::class, String::class) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(SampleClass::class, String::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureClass::class, String::class) shouldBeEqualTo false
             it?.hasTypeArgumentOf(listOf(Int::class, String::class)) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, String::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, String::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(Int::class) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(Int::class, String::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleClass::class, String::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureClass::class, String::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(Int::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(Int::class, String::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, String::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, String::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
@@ -294,7 +294,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames("*") shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("*")) shouldBeEqualTo false
             it?.hasTypeArgumentOf(String::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
@@ -324,7 +324,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames("String") shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("String")) shouldBeEqualTo false
             it?.hasTypeArgumentOf(String::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo false
@@ -368,15 +368,15 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames(listOf("String", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentOf(String::class, Int::class) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(SampleClass::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureClass::class, Int::class) shouldBeEqualTo false
             it?.hasTypeArgumentOf(listOf(String::class, Int::class)) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(String::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleClass::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureClass::class, Int::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
@@ -406,7 +406,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames("String") shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("String")) shouldBeEqualTo false
             it?.hasTypeArgumentOf(String::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo false
@@ -450,15 +450,15 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames(listOf("String", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentOf(String::class, Int::class) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(SampleClass::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureClass::class, Int::class) shouldBeEqualTo false
             it?.hasTypeArgumentOf(listOf(String::class, Int::class)) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(String::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleClass::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureClass::class, Int::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true

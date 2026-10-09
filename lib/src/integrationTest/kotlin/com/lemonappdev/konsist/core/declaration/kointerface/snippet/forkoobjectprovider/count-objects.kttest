@@ -1,5 +1,5 @@
-interface SampleInterface {
-    private companion object SampleObject {
-        private object SampleNestedObject
+interface FixtureInterface {
+    private companion object FixtureObject {
+        private object FixtureNestedObject
     }
 }

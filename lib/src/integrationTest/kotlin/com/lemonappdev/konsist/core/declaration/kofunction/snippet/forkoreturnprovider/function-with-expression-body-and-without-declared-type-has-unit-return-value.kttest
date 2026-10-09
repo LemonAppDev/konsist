@@ -1,1 +1,1 @@
-fun sampleFunction() = println("some text")
+fun fixtureFunction() = println("some text")

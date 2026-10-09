@@ -2,8 +2,8 @@ package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoReturnProvider
-import com.lemonappdev.konsist.testdata.SampleType1
-import com.lemonappdev.konsist.testdata.SampleType2
+import com.lemonappdev.konsist.testdata.FixtureType1
+import com.lemonappdev.konsist.testdata.FixtureType2
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -269,16 +269,16 @@ class KoReturnProviderListExtTest {
         // given
         val declaration1: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns true
+                every { hasReturnTypeOf(FixtureType1::class) } returns true
             }
         val declaration2: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns false
+                every { hasReturnTypeOf(FixtureType1::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withReturnTypeOf(SampleType1::class)
+        val sut = declarations.withReturnTypeOf(FixtureType1::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration1)
@@ -289,23 +289,23 @@ class KoReturnProviderListExtTest {
         // given
         val declaration1: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns true
-                every { hasReturnTypeOf(SampleType2::class) } returns false
+                every { hasReturnTypeOf(FixtureType1::class) } returns true
+                every { hasReturnTypeOf(FixtureType2::class) } returns false
             }
         val declaration2: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns false
-                every { hasReturnTypeOf(SampleType2::class) } returns true
+                every { hasReturnTypeOf(FixtureType1::class) } returns false
+                every { hasReturnTypeOf(FixtureType2::class) } returns true
             }
         val declaration3: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns false
-                every { hasReturnTypeOf(SampleType2::class) } returns false
+                every { hasReturnTypeOf(FixtureType1::class) } returns false
+                every { hasReturnTypeOf(FixtureType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withReturnTypeOf(SampleType1::class, SampleType2::class)
+        val sut = declarations.withReturnTypeOf(FixtureType1::class, FixtureType2::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration1, declaration2)
@@ -316,21 +316,21 @@ class KoReturnProviderListExtTest {
         // given
         val declaration1: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns true
-                every { hasReturnTypeOf(SampleType2::class) } returns false
+                every { hasReturnTypeOf(FixtureType1::class) } returns true
+                every { hasReturnTypeOf(FixtureType2::class) } returns false
             }
         val declaration2: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns false
-                every { hasReturnTypeOf(SampleType2::class) } returns true
+                every { hasReturnTypeOf(FixtureType1::class) } returns false
+                every { hasReturnTypeOf(FixtureType2::class) } returns true
             }
         val declaration3: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns false
-                every { hasReturnTypeOf(SampleType2::class) } returns false
+                every { hasReturnTypeOf(FixtureType1::class) } returns false
+                every { hasReturnTypeOf(FixtureType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
-        val kClasses = listOf(SampleType1::class, SampleType2::class)
+        val kClasses = listOf(FixtureType1::class, FixtureType2::class)
 
         // when
         val sut = declarations.withReturnTypeOf(kClasses)
@@ -344,21 +344,21 @@ class KoReturnProviderListExtTest {
         // given
         val declaration1: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns true
-                every { hasReturnTypeOf(SampleType2::class) } returns false
+                every { hasReturnTypeOf(FixtureType1::class) } returns true
+                every { hasReturnTypeOf(FixtureType2::class) } returns false
             }
         val declaration2: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns false
-                every { hasReturnTypeOf(SampleType2::class) } returns true
+                every { hasReturnTypeOf(FixtureType1::class) } returns false
+                every { hasReturnTypeOf(FixtureType2::class) } returns true
             }
         val declaration3: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns false
-                every { hasReturnTypeOf(SampleType2::class) } returns false
+                every { hasReturnTypeOf(FixtureType1::class) } returns false
+                every { hasReturnTypeOf(FixtureType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
-        val kClasses = setOf(SampleType1::class, SampleType2::class)
+        val kClasses = setOf(FixtureType1::class, FixtureType2::class)
 
         // when
         val sut = declarations.withReturnTypeOf(kClasses)
@@ -372,16 +372,16 @@ class KoReturnProviderListExtTest {
         // given
         val declaration1: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns true
+                every { hasReturnTypeOf(FixtureType1::class) } returns true
             }
         val declaration2: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns false
+                every { hasReturnTypeOf(FixtureType1::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutReturnTypeOf(SampleType1::class)
+        val sut = declarations.withoutReturnTypeOf(FixtureType1::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -392,23 +392,23 @@ class KoReturnProviderListExtTest {
         // given
         val declaration1: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns true
-                every { hasReturnTypeOf(SampleType2::class) } returns false
+                every { hasReturnTypeOf(FixtureType1::class) } returns true
+                every { hasReturnTypeOf(FixtureType2::class) } returns false
             }
         val declaration2: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns false
-                every { hasReturnTypeOf(SampleType2::class) } returns true
+                every { hasReturnTypeOf(FixtureType1::class) } returns false
+                every { hasReturnTypeOf(FixtureType2::class) } returns true
             }
         val declaration3: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns false
-                every { hasReturnTypeOf(SampleType2::class) } returns false
+                every { hasReturnTypeOf(FixtureType1::class) } returns false
+                every { hasReturnTypeOf(FixtureType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withoutReturnTypeOf(SampleType1::class, SampleType2::class)
+        val sut = declarations.withoutReturnTypeOf(FixtureType1::class, FixtureType2::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration3)
@@ -419,21 +419,21 @@ class KoReturnProviderListExtTest {
         // given
         val declaration1: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns true
-                every { hasReturnTypeOf(SampleType2::class) } returns false
+                every { hasReturnTypeOf(FixtureType1::class) } returns true
+                every { hasReturnTypeOf(FixtureType2::class) } returns false
             }
         val declaration2: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns false
-                every { hasReturnTypeOf(SampleType2::class) } returns true
+                every { hasReturnTypeOf(FixtureType1::class) } returns false
+                every { hasReturnTypeOf(FixtureType2::class) } returns true
             }
         val declaration3: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns false
-                every { hasReturnTypeOf(SampleType2::class) } returns false
+                every { hasReturnTypeOf(FixtureType1::class) } returns false
+                every { hasReturnTypeOf(FixtureType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
-        val kClasses = listOf(SampleType1::class, SampleType2::class)
+        val kClasses = listOf(FixtureType1::class, FixtureType2::class)
 
         // when
         val sut = declarations.withoutReturnTypeOf(kClasses)
@@ -447,21 +447,21 @@ class KoReturnProviderListExtTest {
         // given
         val declaration1: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns true
-                every { hasReturnTypeOf(SampleType2::class) } returns false
+                every { hasReturnTypeOf(FixtureType1::class) } returns true
+                every { hasReturnTypeOf(FixtureType2::class) } returns false
             }
         val declaration2: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns false
-                every { hasReturnTypeOf(SampleType2::class) } returns true
+                every { hasReturnTypeOf(FixtureType1::class) } returns false
+                every { hasReturnTypeOf(FixtureType2::class) } returns true
             }
         val declaration3: KoReturnProvider =
             mockk {
-                every { hasReturnTypeOf(SampleType1::class) } returns false
-                every { hasReturnTypeOf(SampleType2::class) } returns false
+                every { hasReturnTypeOf(FixtureType1::class) } returns false
+                every { hasReturnTypeOf(FixtureType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
-        val kClasses = setOf(SampleType1::class, SampleType2::class)
+        val kClasses = setOf(FixtureType1::class, FixtureType2::class)
 
         // when
         val sut = declarations.withoutReturnTypeOf(kClasses)

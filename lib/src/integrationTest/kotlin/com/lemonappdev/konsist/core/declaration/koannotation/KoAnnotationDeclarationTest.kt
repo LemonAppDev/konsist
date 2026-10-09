@@ -16,7 +16,7 @@ class KoAnnotationDeclarationTest {
                 .first()
 
         // then
-        sut.toString() shouldBeEqualTo "SampleAnnotation"
+        sut.toString() shouldBeEqualTo "FixtureAnnotation"
     }
 
     private fun getSnippetFile(fileName: String) =

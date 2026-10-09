@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
+import com.lemonappdev.konsist.testdata.FixtureAnnotationWithParameter
 
-class SampleClass @SampleAnnotationWithParameter("Link: https://some/link") private constructor () {
+class FixtureClass @FixtureAnnotationWithParameter("Link: https://some/link") private constructor () {
 
 }

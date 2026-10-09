@@ -1,1 +1,1 @@
-expect var sampleProperty: String
+expect var fixtureProperty: String

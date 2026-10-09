@@ -1,24 +1,24 @@
-@file:SampleAnnotation1
-@file:SampleAnnotation2
+@file:FixtureAnnotation1
+@file:FixtureAnnotation2
 
-package com.samplepackage
+package com.fixturepackage
 
-import com.lemonappdev.konsist.testdata.SampleAnnotation1
-import com.lemonappdev.konsist.testdata.SampleAnnotation2
+import com.lemonappdev.konsist.testdata.FixtureAnnotation1
+import com.lemonappdev.konsist.testdata.FixtureAnnotation2
 
-val sampleProperty: Boolean = true
+val fixtureProperty: Boolean = true
 
-fun sampleFunction() {
+fun fixtureFunction() {
 }
 
-class SampleClass {
+class FixtureClass {
 }
 
-interface SampleInterface {
+interface FixtureInterface {
 }
 
-@SampleAnnotation1
-object SampleObject {
+@FixtureAnnotation1
+object FixtureObject {
 }
 
-typealias SampleTypeAlias = () -> Int
+typealias FixtureTypeAlias = () -> Int

@@ -28,9 +28,9 @@ class KoPackageDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "com.samplepackage"
-            hasName("com.samplepackage".uppercase()) shouldBeEqualTo false
-            hasName("com.samplepackage".uppercase(), ignoreCase = true) shouldBeEqualTo true
+            name shouldBeEqualTo "com.fixturepackage"
+            hasName("com.fixturepackage".uppercase()) shouldBeEqualTo false
+            hasName("com.fixturepackage".uppercase(), ignoreCase = true) shouldBeEqualTo true
         }
     }
 

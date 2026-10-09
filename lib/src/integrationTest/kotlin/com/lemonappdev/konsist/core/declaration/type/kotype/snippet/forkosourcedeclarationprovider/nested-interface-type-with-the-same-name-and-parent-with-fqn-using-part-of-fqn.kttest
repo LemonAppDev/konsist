@@ -1,11 +1,11 @@
-package com.samplepackage
+package com.fixturepackage
 
 interface FirstInterface {
-    class NestedClass(val arg: SampleNestedInterfaceWithTheSameName)
-    interface SampleNestedInterfaceWithTheSameName
+    class NestedClass(val arg: FixtureNestedInterfaceWithTheSameName)
+    interface FixtureNestedInterfaceWithTheSameName
 }
 
 interface SecondInterface {
-    class NestedClass(val arg: SecondInterface.SampleNestedInterfaceWithTheSameName)
-    interface SampleNestedInterfaceWithTheSameName
+    class NestedClass(val arg: SecondInterface.FixtureNestedInterfaceWithTheSameName)
+    interface FixtureNestedInterfaceWithTheSameName
 }

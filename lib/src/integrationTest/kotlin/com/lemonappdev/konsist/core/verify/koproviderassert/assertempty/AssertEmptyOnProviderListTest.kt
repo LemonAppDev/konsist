@@ -43,9 +43,9 @@ class AssertEmptyOnProviderListTest {
 
         // then
         try {
-            sut.assertEmpty(testName = "sample test")
+            sut.assertEmpty(testName = "fixture test")
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'sample test' failed.")
+            e.message?.shouldContain("Assert 'fixture test' failed.")
                 ?: throw e
         }
     }
@@ -111,8 +111,8 @@ class AssertEmptyOnProviderListTest {
             e.message?.shouldContain(
                 "Assert 'provider-assert-empty-error-on-list-containing-non-null-values' failed. " +
                     "Declaration list is not empty. It contains values:\n" +
-                    "├── Class SampleClass1 $filepath:1:1\n" +
-                    "└── Class SampleClass2 $filepath:3:1",
+                    "├── Class FixtureClass1 $filepath:1:1\n" +
+                    "└── Class FixtureClass2 $filepath:3:1",
             )
                 ?: throw e
         }
@@ -138,7 +138,7 @@ class AssertEmptyOnProviderListTest {
             e.message?.shouldContain(
                 "Assert 'provider-assert-empty-error-on-list-containing-null-and-non-null-values' failed. " +
                     "Declaration list is not empty. It contains 1 null value and values:\n" +
-                    "└── Function sampleFunction $filepath",
+                    "└── Function fixtureFunction $filepath",
             )
                 ?: throw e
         }
@@ -165,7 +165,7 @@ class AssertEmptyOnProviderListTest {
             e.message?.shouldContain(
                 "Assert 'provider-assert-empty-error-with-custom-message' failed.\n$message\n" +
                     "Declaration list is not empty. It contains values:\n" +
-                    "└── Class SampleClass $filepath",
+                    "└── Class FixtureClass $filepath",
             )
                 ?: throw e
         }
@@ -192,7 +192,7 @@ class AssertEmptyOnProviderListTest {
             e.message?.shouldContain(
                 "Assert 'provider-assert-empty-error-with-custom-message-and-strict-set-to-true' failed.\n$message\n" +
                     "Declaration list is not empty. It contains values:\n" +
-                    "└── Class SampleClass $filepath",
+                    "└── Class FixtureClass $filepath",
             )
                 ?: throw e
         }

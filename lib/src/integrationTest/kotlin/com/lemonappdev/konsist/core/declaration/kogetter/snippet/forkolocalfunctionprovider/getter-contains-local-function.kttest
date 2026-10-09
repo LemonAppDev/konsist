@@ -1,11 +1,11 @@
 import kotlin.String
 
-val sampleProperty: String
+val fixtureProperty: String
     get() {
-        fun sampleLocalFunction1() {
+        fun fixtureLocalFunction1() {
         }
 
-        fun sampleLocalFunction2() {
+        fun fixtureLocalFunction2() {
         }
 
         return ""

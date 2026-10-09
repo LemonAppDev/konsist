@@ -16,7 +16,7 @@ class KoEnumConstantDeclarationTest {
                 .first()
 
         // then
-        sut.toString() shouldBeEqualTo "SAMPLE_CONSTANT_1"
+        sut.toString() shouldBeEqualTo "FIXTURE_CONSTANT_1"
     }
 
     private fun getSnippetFile(fileName: String) =

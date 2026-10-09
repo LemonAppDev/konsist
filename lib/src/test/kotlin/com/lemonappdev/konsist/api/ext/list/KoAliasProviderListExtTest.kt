@@ -9,7 +9,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoAliasProviderListExtTest {
-    private interface SampleTestDeclaration :
+    private interface FixtureTestDeclaration :
         KoAliasProvider,
         KoNameProvider
 
@@ -42,11 +42,11 @@ class KoAliasProviderListExtTest {
     @Test
     fun `withAlias() returns declaration with any alias`() {
         // given
-        val declaration1: SampleTestDeclaration =
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { hasAlias() } returns true
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { hasAlias() } returns false
             }
@@ -66,22 +66,22 @@ class KoAliasProviderListExtTest {
         val aliasName1 = "AliasName1"
         val aliasName2 = "AliasName2"
         val aliasName3 = "AliasName3"
-        val declaration1: SampleTestDeclaration =
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { name } returns declarationName
                 every { alias?.name } returns aliasName1
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { name } returns declarationName
                 every { alias?.name } returns aliasName2
             }
-        val declaration3: SampleTestDeclaration =
+        val declaration3: FixtureTestDeclaration =
             mockk {
                 every { name } returns declarationName
                 every { alias?.name } returns aliasName3
             }
-        val declaration4: SampleTestDeclaration =
+        val declaration4: FixtureTestDeclaration =
             mockk {
                 every { name } returns declarationName
                 every { alias?.name } returns declarationName
@@ -98,11 +98,11 @@ class KoAliasProviderListExtTest {
     @Test
     fun `withoutAlias() returns declaration without any alias`() {
         // given
-        val declaration1: SampleTestDeclaration =
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { hasAlias() } returns true
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { hasAlias() } returns false
             }
@@ -122,22 +122,22 @@ class KoAliasProviderListExtTest {
         val aliasName1 = "AliasName1"
         val aliasName2 = "AliasName2"
         val aliasName3 = "AliasName3"
-        val declaration1: SampleTestDeclaration =
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { name } returns declarationName
                 every { alias?.name } returns aliasName1
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { name } returns declarationName
                 every { alias?.name } returns aliasName2
             }
-        val declaration3: SampleTestDeclaration =
+        val declaration3: FixtureTestDeclaration =
             mockk {
                 every { name } returns declarationName
                 every { alias?.name } returns aliasName3
             }
-        val declaration4: SampleTestDeclaration =
+        val declaration4: FixtureTestDeclaration =
             mockk {
                 every { name } returns declarationName
                 every { alias?.name } returns declarationName

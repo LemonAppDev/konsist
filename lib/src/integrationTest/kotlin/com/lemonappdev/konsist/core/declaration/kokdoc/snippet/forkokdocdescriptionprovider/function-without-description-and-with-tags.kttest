@@ -1,15 +1,15 @@
-class SampleClass() {
+class FixtureClass() {
 
     /**
-     * @param sampleArgument1 The first argument.
-     * @param sampleArgument2 The second argument.
+     * @param fixtureArgument1 The first argument.
+     * @param fixtureArgument2 The second argument.
      * @return The result of the computation.
-     * @throws IllegalArgumentException First sample description
-     * @exception NullPointerException Second sample description
-     * @sample SampleClass.sampleMethod sample description
-     * @sample SampleClass.sampleProperty
-     * @receiver sample receiver description
-     * @see AnotherClass1 sample description
+     * @throws IllegalArgumentException First fixture description
+     * @exception NullPointerException Second fixture description
+     * @sample FixtureClass.fixtureMethod fixture description
+     * @sample FixtureClass.fixtureProperty
+     * @receiver fixture receiver description
+     * @see AnotherClass1 fixture description
      * @see AnotherClass2
      * @author Author1
      * @author Author2
@@ -17,11 +17,11 @@ class SampleClass() {
      * @version 1.2.3
      * @suppress UnusedPrivateMember
      */
-    fun sampleMethod(sampleArgument1: Int, sampleArgument2: String): Int {
+    fun fixtureMethod(fixtureArgument1: Int, fixtureArgument2: String): Int {
         return 6
     }
 
-    var sampleProperty: Int
+    var fixtureProperty: Int
         get() {
             return 5
         }

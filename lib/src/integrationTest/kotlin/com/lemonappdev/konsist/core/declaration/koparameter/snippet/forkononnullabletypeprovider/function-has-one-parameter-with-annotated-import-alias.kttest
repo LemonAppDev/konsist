@@ -1,4 +1,4 @@
-import com.lemonappdev.konsist.testdata.SampleType as ImportAlias
-import com.lemonappdev.konsist.testdata.SampleAnnotation
+import com.lemonappdev.konsist.testdata.FixtureType as ImportAlias
+import com.lemonappdev.konsist.testdata.FixtureAnnotation
 
-fun sampleFunction(sampleParameter: @SampleAnnotation ImportAlias) {}
+fun fixtureFunction(fixtureParameter: @FixtureAnnotation ImportAlias) {}

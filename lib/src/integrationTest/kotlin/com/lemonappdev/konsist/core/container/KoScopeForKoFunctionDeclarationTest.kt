@@ -20,7 +20,7 @@ class KoScopeForKoFunctionDeclarationTest {
         val sut = getSnippetFile("scope-contains-nested-and-local-functions")
 
         // then
-        val expected = listOf("sampleFunction", "sampleLocalFunction", "sampleNestedFunction")
+        val expected = listOf("fixtureFunction", "fixtureLocalFunction", "fixtureNestedFunction")
 
         sut
             .functions(includeNested = true, includeLocal = true)
@@ -34,7 +34,7 @@ class KoScopeForKoFunctionDeclarationTest {
         val sut = getSnippetFile("scope-contains-nested-and-local-functions")
 
         // then
-        val expected = listOf("sampleFunction", "sampleNestedFunction")
+        val expected = listOf("fixtureFunction", "fixtureNestedFunction")
 
         sut
             .functions(includeNested = true, includeLocal = false)
@@ -48,7 +48,7 @@ class KoScopeForKoFunctionDeclarationTest {
         val sut = getSnippetFile("scope-contains-nested-and-local-functions")
 
         // then
-        val expected = listOf("sampleFunction", "sampleLocalFunction")
+        val expected = listOf("fixtureFunction", "fixtureLocalFunction")
 
         sut
             .functions(includeNested = false, includeLocal = true)
@@ -62,7 +62,7 @@ class KoScopeForKoFunctionDeclarationTest {
         val sut = getSnippetFile("scope-contains-nested-and-local-functions")
 
         // then
-        val expected = listOf("sampleFunction")
+        val expected = listOf("fixtureFunction")
 
         sut
             .functions(includeNested = false, includeLocal = false)

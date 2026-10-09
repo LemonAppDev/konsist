@@ -1,2 +1,2 @@
-private val sampleProperty: String
+private val fixtureProperty: String
     private get() = ""

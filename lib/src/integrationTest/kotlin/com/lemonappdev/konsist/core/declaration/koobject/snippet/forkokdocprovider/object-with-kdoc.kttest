@@ -1,4 +1,4 @@
 /**
- * Sample KDoc
+ * Fixture KDoc
  */
-object SampleObject
+object FixtureObject

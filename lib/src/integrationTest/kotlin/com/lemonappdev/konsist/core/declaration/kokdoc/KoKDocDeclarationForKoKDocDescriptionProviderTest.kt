@@ -68,11 +68,11 @@ class KoKDocDeclarationForKoKDocDescriptionProviderTest {
             listOf(
                 arguments(
                     "class-with-description-and-tags",
-                    "This is a sample class that demonstrates the usage of KDoc tags.",
+                    "This is a fixture class that demonstrates the usage of KDoc tags.",
                 ),
                 arguments(
                     "class-with-description-and-without-tags",
-                    "This is a sample class that demonstrates the usage of KDoc tags.",
+                    "This is a fixture class that demonstrates the usage of KDoc tags.",
                 ),
                 arguments("class-without-description-and-with-tags", ""),
                 arguments("class-with-empty-kdoc", ""),
@@ -84,11 +84,11 @@ class KoKDocDeclarationForKoKDocDescriptionProviderTest {
             listOf(
                 arguments(
                     "function-with-description-and-tags",
-                    "This is a sample method that demonstrates the usage of KDoc tags.",
+                    "This is a fixture method that demonstrates the usage of KDoc tags.",
                 ),
                 arguments(
                     "function-with-description-and-without-tags",
-                    "This is a sample method that demonstrates the usage of KDoc tags.",
+                    "This is a fixture method that demonstrates the usage of KDoc tags.",
                 ),
                 arguments("function-without-description-and-with-tags", ""),
                 arguments("function-with-empty-kdoc", ""),
@@ -100,11 +100,11 @@ class KoKDocDeclarationForKoKDocDescriptionProviderTest {
             listOf(
                 arguments(
                     "property-with-description-and-tags",
-                    "This is a sample property that demonstrates the usage of KDoc tags.",
+                    "This is a fixture property that demonstrates the usage of KDoc tags.",
                 ),
                 arguments(
                     "property-with-description-and-without-tags",
-                    "This is a sample property that demonstrates the usage of KDoc tags.",
+                    "This is a fixture property that demonstrates the usage of KDoc tags.",
                 ),
                 arguments("property-without-description-and-with-tags", ""),
                 arguments("property-with-empty-kdoc", ""),

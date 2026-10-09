@@ -1,4 +1,4 @@
-val String.sampleProperty
+val String.fixtureProperty
     get() = this.isNotEmpty()
 
 

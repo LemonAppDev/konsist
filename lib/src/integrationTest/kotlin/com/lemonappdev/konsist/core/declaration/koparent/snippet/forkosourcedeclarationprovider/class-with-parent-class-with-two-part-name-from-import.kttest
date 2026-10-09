@@ -1,5 +1,5 @@
-package com.samplepackage
+package com.fixturepackage
 
-import com.lemonappdev.konsist.testdata.SampleParentInterfaceWithNestedDeclarations
+import com.lemonappdev.konsist.testdata.FixtureParentInterfaceWithNestedDeclarations
 
-data class SampleName(val data: String) : SampleParentInterfaceWithNestedDeclarations.SampleNestedClass()
+data class FixtureName(val data: String) : FixtureParentInterfaceWithNestedDeclarations.FixtureNestedClass()

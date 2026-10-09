@@ -1,2 +1,2 @@
-internal interface SampleInterface {
+internal interface FixtureInterface {
 }
